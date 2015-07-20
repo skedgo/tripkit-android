@@ -16,5 +16,8 @@ buildscript {
 allprojects {
   repositories {
     jcenter()
+
+    // This is required to use TripCore.
+    maven { url "${rootDir}/skedgo-maven/repository" }
   }
 }
