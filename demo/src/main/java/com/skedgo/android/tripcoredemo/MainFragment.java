@@ -8,8 +8,8 @@ import android.view.ViewGroup;
 
 import com.skedgo.android.common.model.Location;
 import com.skedgo.android.common.model.TripGroup;
-import com.skedgo.android.tripkit.RouteOptions;
-import com.skedgo.android.tripkit.RouteService;
+import com.skedgo.android.tripcore.RouteOptions;
+import com.skedgo.android.tripcore.RouteService;
 
 import rx.android.schedulers.AndroidSchedulers;
 import rx.functions.Action0;

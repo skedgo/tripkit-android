@@ -38,12 +38,6 @@
       <scope>compile</scope>
     </dependency>
     <dependency>
-      <groupId>com.skedgo.goservices</groupId>
-      <artifactId>transport-icons</artifactId>
-      <version>0.0.1</version>
-      <scope>compile</scope>
-    </dependency>
-    <dependency>
       <groupId>org.apache.commons</groupId>
       <artifactId>commons-collections4</artifactId>
       <version>4.0</version>
@@ -65,6 +59,12 @@
       <groupId>com.google.code.gson</groupId>
       <artifactId>gson</artifactId>
       <version>2.3</version>
+      <scope>compile</scope>
+    </dependency>
+    <dependency>
+      <groupId>com.skedgo.goservices</groupId>
+      <artifactId>transport-icons</artifactId>
+      <version>0.0.1</version>
       <scope>compile</scope>
     </dependency>
   </dependencies>

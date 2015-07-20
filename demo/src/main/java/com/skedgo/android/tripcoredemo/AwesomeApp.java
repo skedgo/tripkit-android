@@ -3,7 +3,7 @@ package com.skedgo.android.tripcoredemo;
 import android.app.Application;
 import android.content.Context;
 
-import com.skedgo.android.tripkit.RouteComponent;
+import com.skedgo.android.tripcore.RouteComponent;
 
 public class AwesomeApp extends Application {
   private RouteComponent routeComponent; // Lazily initialized.
