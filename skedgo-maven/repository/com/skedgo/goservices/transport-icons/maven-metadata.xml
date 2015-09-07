@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <metadata>
   <groupId>com.skedgo.goservices</groupId>
-  <artifactId>trip-core</artifactId>
+  <artifactId>transport-icons</artifactId>
   <version>0.0.1</version>
   <versioning>
     <versions>
       <version>0.0.1</version>
     </versions>
-    <lastUpdated>20150720055858</lastUpdated>
+    <lastUpdated>20150907073832</lastUpdated>
   </versioning>
 </metadata>
