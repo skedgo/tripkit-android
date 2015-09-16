@@ -44,6 +44,12 @@
       <scope>compile</scope>
     </dependency>
     <dependency>
+      <groupId>com.skedgo.goservices</groupId>
+      <artifactId>transport-icons</artifactId>
+      <version>0.0.1</version>
+      <scope>compile</scope>
+    </dependency>
+    <dependency>
       <groupId>com.skedgo.android</groupId>
       <artifactId>maps-utils</artifactId>
       <version>0.0.1</version>
@@ -59,12 +65,6 @@
       <groupId>com.android.support</groupId>
       <artifactId>support-annotations</artifactId>
       <version>22.2.1</version>
-      <scope>compile</scope>
-    </dependency>
-    <dependency>
-      <groupId>com.skedgo.goservices</groupId>
-      <artifactId>transport-icons</artifactId>
-      <version>0.0.1</version>
       <scope>compile</scope>
     </dependency>
   </dependencies>
