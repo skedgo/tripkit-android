@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest
+  package="com.skedgo.android.samples"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+
+  <application
+    android:allowBackup="true"
+    android:icon="@mipmap/ic_launcher"
+    android:label="TripKit Samples"
+    android:theme="@android:style/Theme.Material.Light.DarkActionBar">
+    <activity
+      android:name="com.skedgo.android.samples.SamplesActivity"
+      android:label="TripKit Samples">
+      <intent-filter>
+        <action android:name="android.intent.action.MAIN" />
+
+        <category android:name="android.intent.category.LAUNCHER" />
+      </intent-filter>
+    </activity>
+    <activity
+      android:name=".CitiesActivity"
+      android:label="Cities" />
+    <activity
+      android:name=".TransportModesActivity"
+      android:label="Transport in Los Angeles" />
+    <activity
+      android:name=".RoutesActivity"
+      android:label="Routes" />
+  </application>
+
+</manifest>
