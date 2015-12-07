@@ -20,7 +20,7 @@ android {
 }
 
 dependencies {
-  compile('com.skedgo.sdk:trip-kit:0.9-SNAPSHOT@aar') {
+  compile('com.skedgo.sdk:trip-kit:1.0-beta1@aar') {
     transitive = true
   }
 }
