@@ -48,6 +48,9 @@ public class RoutesActivity extends ListActivity {
     arrival.setAddress("2001-2027 N Maple St, Burbank, CA 91505, USA");
     final RouteOptions routeOptions = new RouteOptions.Builder(departure, arrival)
         .departAfter(System.currentTimeMillis())
+        .transferTime(3)
+        .maxWalkingTime(10)
+        .walkingSpeed(RouteOptions.WALKING_SPEED_AVERAGE)
         .build();
 
     TripKit.with(getApplicationContext())
