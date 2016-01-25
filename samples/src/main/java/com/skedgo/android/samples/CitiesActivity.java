@@ -1,24 +1,32 @@
 package com.skedgo.android.samples;
 
+import android.app.AlertDialog;
 import android.app.ListActivity;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.skedgo.android.common.model.Location;
-import com.skedgo.android.tripkit.TripKit;
+import com.skedgo.android.common.model.Region;
+import com.skedgo.android.tripkit.Paratransit;
+import com.skedgo.android.tripkit.RegionService;
 
 import java.util.List;
+import java.util.Locale;
 
+import rx.Observable;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.functions.Action1;
+import rx.functions.Func1;
 
 public class CitiesActivity extends ListActivity {
   private ArrayAdapter<Location> citiesAdapter;
+  private RegionService regionService;
 
   @Override protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
@@ -35,8 +43,8 @@ public class CitiesActivity extends ListActivity {
     };
     setListAdapter(citiesAdapter);
 
-    TripKit.with(getApplicationContext())
-        .getRegionService()
+    regionService = App.tripKit().getRegionService();
+    regionService
         .getCitiesAsync()
         .toList()
         .observeOn(AndroidSchedulers.mainThread())
@@ -50,5 +58,34 @@ public class CitiesActivity extends ListActivity {
             Toast.makeText(getApplicationContext(), "Error loading cities", Toast.LENGTH_SHORT).show();
           }
         });
+  }
+
+  @Override protected void onListItemClick(ListView l, View v, int position, long id) {
+    final Location city = citiesAdapter.getItem(position);
+    regionService
+        .getRegionByLocationAsync(city)
+        .flatMap(new Func1<Region, Observable<Paratransit>>() {
+          @Override public Observable<Paratransit> call(Region region) {
+            return regionService.fetchParatransitByRegionAsync(region);
+          }
+        })
+        .observeOn(AndroidSchedulers.mainThread())
+        .subscribe(new Action1<Paratransit>() {
+          @Override public void call(Paratransit paratransit) {
+            showParatransit(paratransit);
+          }
+        });
+  }
+
+  private void showParatransit(Paratransit paratransit) {
+    new AlertDialog.Builder(this)
+        .setMessage(String.format(
+            Locale.US, "URL: %s\nname: %s\nnumber: %s",
+            paratransit.url(),
+            paratransit.name(),
+            paratransit.number()
+        ))
+        .create()
+        .show();
   }
 }

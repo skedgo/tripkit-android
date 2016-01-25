@@ -7,8 +7,6 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
-import com.skedgo.android.tripkit.TripKit;
-
 public class SamplesActivity extends ListActivity {
   @Override protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
@@ -18,8 +16,6 @@ public class SamplesActivity extends ListActivity {
         android.R.layout.simple_list_item_1,
         new String[] {"Cities", "Transport in Los Angeles, CA, USA", "Routes"}
     ));
-
-    TripKit.setLoggingEnabled(BuildConfig.DEBUG);
   }
 
   @Override protected void onListItemClick(ListView l, View v, int position, long id) {

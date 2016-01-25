@@ -13,7 +13,6 @@ import com.skedgo.android.common.model.Location;
 import com.skedgo.android.common.model.Trip;
 import com.skedgo.android.common.model.TripGroup;
 import com.skedgo.android.tripkit.RouteOptions;
-import com.skedgo.android.tripkit.TripKit;
 
 import rx.android.schedulers.AndroidSchedulers;
 import rx.functions.Action0;
@@ -53,7 +52,7 @@ public class RoutesActivity extends ListActivity {
         .walkingSpeed(RouteOptions.WALKING_SPEED_AVERAGE)
         .build();
 
-    TripKit.with(getApplicationContext())
+    App.tripKit()
         .getRouteService()
         .routeAsync(routeOptions)
         .observeOn(AndroidSchedulers.mainThread())
