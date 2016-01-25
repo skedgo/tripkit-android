@@ -11,7 +11,6 @@ import android.widget.Toast;
 
 import com.skedgo.android.common.model.Location;
 import com.skedgo.android.common.model.TransportMode;
-import com.skedgo.android.tripkit.TripKit;
 
 import java.util.List;
 
@@ -36,7 +35,7 @@ public class TransportModesActivity extends ListActivity {
     };
     setListAdapter(transportModesAdapter);
 
-    TripKit.with(getApplicationContext())
+    App.tripKit()
         .getRegionService()
         .getTransportModesByLocationAsync(new Location(34.044, -118.248))
         .observeOn(AndroidSchedulers.mainThread())
