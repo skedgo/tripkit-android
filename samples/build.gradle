@@ -22,7 +22,7 @@ android {
 dependencies {
   compile 'com.facebook.stetho:stetho:1.2.0'
   compile 'com.facebook.stetho:stetho-okhttp:1.2.0'
-  compile('com.skedgo.sdk:trip-kit:1.0-rc2@aar') {
+  compile('com.skedgo.sdk:trip-kit:1.0-rc3@aar') {
     transitive = true
   }
 }

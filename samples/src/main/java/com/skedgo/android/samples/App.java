@@ -1,25 +1,37 @@
 package com.skedgo.android.samples;
 
 import android.app.Application;
+import android.util.Log;
 
 import com.facebook.stetho.Stetho;
 import com.facebook.stetho.okhttp.StethoInterceptor;
+import com.skedgo.android.tripkit.Configs;
 import com.skedgo.android.tripkit.TripKit;
 
-public final class App extends Application {
-  protected static TripKit tripKit;
+import rx.functions.Action1;
 
+public final class App extends Application {
   public static TripKit tripKit() {
-    return tripKit;
+    return TripKit.singleton();
   }
 
   @Override public void onCreate() {
     super.onCreate();
     Stetho.initializeWithDefaults(this);
 
-    tripKit = TripKit.with(this);
-    TripKit.setLoggingEnabled(BuildConfig.DEBUG);
-    tripKit.getOkHttpClient()
+    TripKit.initialize(
+        Configs.builder()
+            .context(this)
+            .regionEligibility("xum")
+            .debuggable(BuildConfig.DEBUG)
+            .errorHandler(new Action1<Throwable>() {
+              @Override public void call(Throwable error) {
+                Log.e(App.class.getSimpleName(), error.getMessage(), error);
+              }
+            })
+            .build());
+    TripKit.singleton()
+        .getOkHttpClient()
         .networkInterceptors().add(new StethoInterceptor());
   }
 }
