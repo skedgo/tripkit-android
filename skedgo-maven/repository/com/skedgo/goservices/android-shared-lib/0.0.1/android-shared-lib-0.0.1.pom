@@ -26,12 +26,6 @@
       <scope>compile</scope>
     </dependency>
     <dependency>
-      <groupId>com.skedgo.goservices</groupId>
-      <artifactId>transport-icons</artifactId>
-      <version>0.0.1</version>
-      <scope>compile</scope>
-    </dependency>
-    <dependency>
       <groupId>com.android.support</groupId>
       <artifactId>support-annotations</artifactId>
       <version>23.1.1</version>
@@ -46,6 +40,12 @@
     <dependency>
       <groupId>com.skedgo.commons</groupId>
       <artifactId>commons-collections</artifactId>
+      <version>0.0.1</version>
+      <scope>compile</scope>
+    </dependency>
+    <dependency>
+      <groupId>com.skedgo.goservices</groupId>
+      <artifactId>transport-icons</artifactId>
       <version>0.0.1</version>
       <scope>compile</scope>
     </dependency>
