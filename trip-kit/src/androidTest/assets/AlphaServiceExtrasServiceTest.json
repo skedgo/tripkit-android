@@ -1,0 +1,309 @@
+{
+  "realTimeStatus": "CAPABLE",
+  "type": "train",
+  "shapes": [
+    {
+      "stops": [
+        {
+          "name": "Central Station Platform 21",
+          "bearing": 19,
+          "departure": 1437130500,
+          "arrival": 1437055199,
+          "lng": 151.20712,
+          "code": "2000341",
+          "shortName": "Platform 21",
+          "lat": -33.88428
+        },
+        {
+          "name": "Museum Station Platform 1",
+          "bearing": 20,
+          "departure": 1437130620,
+          "arrival": 1437130620,
+          "lng": 151.2098,
+          "code": "2000371",
+          "shortName": "Platform 1",
+          "lat": -33.87616
+        },
+        {
+          "name": "St James Station Platform 1",
+          "bearing": 352,
+          "departure": 1437130740,
+          "arrival": 1437130740,
+          "lng": 151.21173,
+          "code": "2000381",
+          "shortName": "Platform 1",
+          "lat": -33.87067
+        },
+        {
+          "name": "Circular Quay Station Platform 1",
+          "bearing": 224,
+          "departure": 1437130980,
+          "arrival": 1437130980,
+          "lng": 151.21028,
+          "code": "2000351",
+          "shortName": "Platform 1",
+          "lat": -33.86137
+        },
+        {
+          "name": "Wynyard Station Platform 5",
+          "bearing": 172,
+          "departure": 1437131100,
+          "arrival": 1437131100,
+          "lng": 151.20592,
+          "code": "2000405",
+          "shortName": "Platform 5",
+          "lat": -33.86587
+        },
+        {
+          "name": "Town Hall Station Platform 1",
+          "bearing": 180,
+          "departure": 1437131280,
+          "arrival": 1437131220,
+          "lng": 151.20699,
+          "code": "2000391",
+          "shortName": "Platform 1",
+          "lat": -33.87365
+        },
+        {
+          "name": "Central Station Platform 19",
+          "bearing": 226,
+          "departure": 1437131520,
+          "arrival": 1437131460,
+          "lng": 151.20697,
+          "code": "2000339",
+          "shortName": "Platform 19",
+          "lat": -33.88419
+        },
+        {
+          "name": "Redfern Station Platform 6",
+          "bearing": 274,
+          "departure": 1437131640,
+          "arrival": 1437131640,
+          "lng": 151.19875,
+          "code": "2015136",
+          "shortName": "Platform 6",
+          "lat": -33.89197
+        },
+        {
+          "name": "Ashfield Station Platform 5",
+          "bearing": 297,
+          "departure": 1437132240,
+          "arrival": 1437132240,
+          "lng": 151.12554,
+          "code": "2131125",
+          "shortName": "Platform 5",
+          "lat": -33.88776
+        },
+        {
+          "name": "Strathfield Station Platform 8",
+          "bearing": 286,
+          "departure": 1437132660,
+          "arrival": 1437132600,
+          "lng": 151.09373,
+          "code": "2135238",
+          "shortName": "Platform 8",
+          "lat": -33.87166
+        },
+        {
+          "name": "Flemington Station Platform 4",
+          "bearing": 273,
+          "departure": 1437132840,
+          "arrival": 1437132840,
+          "lng": 151.07055,
+          "code": "214064",
+          "shortName": "Platform 4",
+          "lat": -33.86505
+        },
+        {
+          "name": "Lidcombe Station Platform 4",
+          "bearing": 320,
+          "departure": 1437133020,
+          "arrival": 1437133020,
+          "lng": 151.0449,
+          "code": "2141314",
+          "shortName": "Platform 4",
+          "lat": -33.86384
+        },
+        {
+          "name": "Auburn Station Platform 4",
+          "bearing": 309,
+          "departure": 1437133200,
+          "arrival": 1437133200,
+          "lng": 151.03276,
+          "code": "2144244",
+          "shortName": "Platform 4",
+          "lat": -33.84937
+        },
+        {
+          "name": "Granville Station Platform 4",
+          "bearing": 259,
+          "departure": 1437133440,
+          "arrival": 1437133440,
+          "lng": 151.01204,
+          "code": "2142324",
+          "shortName": "Platform 4",
+          "lat": -33.83302
+        },
+        {
+          "name": "Merrylands Station Platform 2",
+          "bearing": 204,
+          "departure": 1437133620,
+          "arrival": 1437133620,
+          "lng": 150.99266,
+          "code": "2160262",
+          "shortName": "Platform 2",
+          "lat": -33.83661
+        },
+        {
+          "name": "Guildford Station Platform 2",
+          "bearing": 232,
+          "departure": 1437133800,
+          "arrival": 1437133800,
+          "lng": 150.98452,
+          "code": "2161252",
+          "shortName": "Platform 2",
+          "lat": -33.85437
+        },
+        {
+          "name": "Yennora Station Platform 2",
+          "bearing": 241,
+          "departure": 1437133920,
+          "arrival": 1437133920,
+          "lng": 150.97103,
+          "code": "2161262",
+          "shortName": "Platform 2",
+          "lat": -33.86476
+        },
+        {
+          "name": "Fairfield Station Platform 2",
+          "bearing": 222,
+          "departure": 1437134100,
+          "arrival": 1437134100,
+          "lng": 150.95704,
+          "code": "2165202",
+          "shortName": "Platform 2",
+          "lat": -33.87244
+        },
+        {
+          "name": "Canley Vale Station Platform 2",
+          "bearing": 212,
+          "departure": 1437134280,
+          "arrival": 1437134280,
+          "lng": 150.94361,
+          "code": "2166282",
+          "shortName": "Platform 2",
+          "lat": -33.88734
+        },
+        {
+          "name": "Cabramatta Station Platform 2",
+          "bearing": 191,
+          "departure": 1437134400,
+          "arrival": 1437134400,
+          "lng": 150.93894,
+          "code": "2166272",
+          "shortName": "Platform 2",
+          "lat": -33.8947
+        },
+        {
+          "name": "Warwick Farm Station Platform 2",
+          "bearing": 212,
+          "departure": 1437134580,
+          "arrival": 1437134580,
+          "lng": 150.93519,
+          "code": "2170832",
+          "shortName": "Platform 2",
+          "lat": -33.91312
+        },
+        {
+          "name": "Liverpool Station Platform 4",
+          "bearing": 211,
+          "departure": 1437134820,
+          "arrival": 1437134760,
+          "lng": 150.92731,
+          "code": "2170824",
+          "shortName": "Platform 4",
+          "lat": -33.92535
+        },
+        {
+          "name": "Casula Station Platform 2",
+          "bearing": 220,
+          "departure": 1437135060,
+          "arrival": 1437135060,
+          "lng": 150.91189,
+          "code": "2170812",
+          "shortName": "Platform 2",
+          "lat": -33.95017
+        },
+        {
+          "name": "Glenfield Station Platform 4",
+          "bearing": 228,
+          "departure": 1437135240,
+          "arrival": 1437135240,
+          "lng": 150.89297,
+          "code": "216765",
+          "shortName": "Platform 4",
+          "lat": -33.97247
+        },
+        {
+          "name": "Macquarie Fields Station Platform 2",
+          "bearing": 228,
+          "departure": 1437135420,
+          "arrival": 1437135420,
+          "lng": 150.87899,
+          "code": "2564142",
+          "shortName": "Platform 2",
+          "lat": -33.98479
+        },
+        {
+          "name": "Ingleburn Station Platform 2",
+          "bearing": 216,
+          "departure": 1437135540,
+          "arrival": 1437135540,
+          "lng": 150.86478,
+          "code": "2565652",
+          "shortName": "Platform 2",
+          "lat": -33.99737
+        },
+        {
+          "name": "Minto Station Platform 2",
+          "bearing": 207,
+          "departure": 1437135780,
+          "arrival": 1437135780,
+          "lng": 150.84259,
+          "code": "2566242",
+          "shortName": "Platform 2",
+          "lat": -34.02737
+        },
+        {
+          "name": "Leumeah Station Platform 2",
+          "bearing": 231,
+          "departure": 1437136020,
+          "arrival": 1437136020,
+          "lng": 150.83055,
+          "code": "2560702",
+          "shortName": "Platform 2",
+          "lat": -34.0508
+        },
+        {
+          "name": "Campbelltown Station Platform 1",
+          "arrival": 1437136260,
+          "lng": 150.81435,
+          "code": "2560691",
+          "shortName": "Platform 1",
+          "lat": -34.06354
+        }
+      ],
+      "serviceNumber": "",
+      "travelled": true,
+      "encodedWaypoints": "x_ymEos{y[??oByAo@ScCe@{@]gL}BkM{A{FcAoBo@gCmAlBt@??mBu@??cLiFy@YeCk@kBY_GWKV??LW?IwXkBk@OuAi@o@k@gG{HWSYOqAg@qAOk@?mANc@Pc@V}@z@q@hASj@Ol@S~Ag@bMFlB??GoB@@q@dRAhAHjAPbAXz@N\\d@v@l@p@r@d@j@TzARxBCnNwB??????B~@rSiAPCfAc@hAeAb@U^QpAY~JQl@ArCIA??????\\lCVjDf@n@?|@QrAs@b@_@n@u@x@{An@o@r@i@tBaAz@UpAY|BQtEj@fL|BxDvAlAt@fAbA?@????P@bBlAhA`AhDpE|DrGvClEpBjCrAnAzDxC|E`E~BfCpBbB@@????SPt@jAjCjFdEvL~@nD`CpLxJta@\\bBjDrPDl@CvAF`CE~ICnJEdC[xDWfBc@tBgAbDiClFiAnBu@nByFtVSjAU|BC~ADnEFzA~@xGL|APtD@vBExBOtCYrCWlBa@rBk@pDIn@ObBErCDvAPdCZtDJ|CBnDGvGMnC[nE_@tCiAtGiFpSsIl_@oAtEUrASjBMxBc@nVOvBmAvHyCtNkBvM??????i@UoIn^q@bCo@hB{A`EyB`FwEpJ{B|DiGbJiCpDuDnEoB|CaAnBqAlDo@tBm@dC_AlEg@nCc@rCUtBoAzMS|AWxAw@pD_@rAo@vAkAzBcBzB_@d@cKlJiFzL@?????q@}@cJfN}G~LwBrEcDzIsA|De@rBqGx]OnAOjBIfC@dGZ|Fj@~GLpDBnGEnDDzC??????QEOpBOlAcAvH_@rBq@dJ[hHIfIHrNd@nFtAfLNjCDlCu@~m@OdCe@pDe@bCOhC??????]QeArCm@pAuBjD_AfAcGvF{}@~k@iFnDy@jB??????O[kv@~y@mBlBeAlAsApBoRv]uQb^@@????WW}FhK]f@yA~Bu@zA_BzDcAlD}@hE]rCOpBI|CDhCPdCXnB`@hBRr@f@~@jKrOvVh\\vCvD??????ALpBlCp@l@`BjAlB~@zBl@dAPfAJnCDfAGxCk@z@[dAQxDa@|@G|@Bv@Fx@JjBd@p@Xjx@hf@???????J`MpHxDlC`CxBvB~BtBfCjBjChBtC`BvC|A|CpAdDjAbD|Nv[??????CH`o@dvA@?????yCgF^l@t@hBx@zAlBpCxAfBn@n@rtAfiA??????BHbG`FtM~J|BxAtEnB`ErAr@NjF`@sAU??rAT?NpD\\dh@dGv`A`L?@????JH|X|CjAPhATlA^vBz@jAn@|CpBd@d@fCtC~B~Cb@p@zA|CtBfDlDtEpAtA|B^zAx@??{Ay@Wv@bGlFbThPzAbAjCzAlLtEdlAde@|@b@vA|@dGvFrEjDxBlAtB|@xBn@XI??????FPvAPx@BlDArFSz@@x@Dx@NfDv@fBt@xElCdCbB|BhBbBbBrDbExpA~yA`AjA??aAiAMRnnAbxAA?????BV`i@nn@zVbZpKjL@?????ANrEhFtt@v{@hEtF|DjE|B~B~BvBbEbDzDfC`DdBpAl@tHtCrDhA`gAjZ@?????BJrgBpg@fHrBnCdA~DdCrAdA`B|AhAjAxAhB`JlL??????CHvnA~cB??",
+      "serviceTripID": "2205.TA.2-T2-B-sj2-2.66.H",
+      "serviceColor": {
+        "red": 246,
+        "blue": 31,
+        "green": 137
+      },
+      "operator": "Sydney Trains",
+      "serviceName": "Campbelltown"
+    }
+  ]
+}
