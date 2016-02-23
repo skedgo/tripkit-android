@@ -14,12 +14,6 @@
       <scope>compile</scope>
     </dependency>
     <dependency>
-      <groupId>com.google.code.gson</groupId>
-      <artifactId>gson</artifactId>
-      <version>2.3.1</version>
-      <scope>compile</scope>
-    </dependency>
-    <dependency>
       <groupId>io.reactivex</groupId>
       <artifactId>rxandroid</artifactId>
       <version>0.24.0</version>
@@ -44,6 +38,18 @@
       <scope>compile</scope>
     </dependency>
     <dependency>
+      <groupId>com.skedgo.goservices</groupId>
+      <artifactId>transport-icons</artifactId>
+      <version>0.0.1</version>
+      <scope>compile</scope>
+    </dependency>
+    <dependency>
+      <groupId>com.google.code.gson</groupId>
+      <artifactId>gson</artifactId>
+      <version>2.5</version>
+      <scope>compile</scope>
+    </dependency>
+    <dependency>
       <groupId>com.skedgo.android</groupId>
       <artifactId>maps-utils</artifactId>
       <version>0.0.1</version>
@@ -59,12 +65,6 @@
       <groupId>com.google.android.gms</groupId>
       <artifactId>play-services-maps</artifactId>
       <version>8.4.0</version>
-      <scope>compile</scope>
-    </dependency>
-    <dependency>
-      <groupId>com.skedgo.goservices</groupId>
-      <artifactId>transport-icons</artifactId>
-      <version>0.0.1</version>
       <scope>compile</scope>
     </dependency>
   </dependencies>
