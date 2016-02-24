@@ -34,16 +34,26 @@ public class TransportModesActivity extends ListActivity {
             .inflate(R.layout.view_transport_mode, parent, false);
 
         final TransportMode mode = getItem(position);
+
+        // Show mode title.
         final String title = mode.getTitle();
         ((TextView) view.findViewById(R.id.textView)).setText(title);
 
-        final String iconUrl = TransportModeUtils.getIconUrlForTransportMode(getResources(), mode);
-        final Uri iconUri = iconUrl == null ? Uri.EMPTY : Uri.parse(iconUrl);
+        // Show light remote icon.
+        final String lightIconUrl = TransportModeUtils.getIconUrlForTransportMode(getResources(), mode);
+        final Uri lightIconUri = lightIconUrl == null ? Uri.EMPTY : Uri.parse(lightIconUrl);
         Picasso.with(getContext().getApplicationContext())
-            .load(iconUri)
+            .load(lightIconUri)
             .placeholder(R.drawable.ic_car_ride_share)
             .error(R.drawable.ic_car_ride_share)
-            .into(((ImageView) view.findViewById(R.id.imageView)));
+            .into(((ImageView) view.findViewById(R.id.lightImageView)));
+
+        // Show dark remote icon.
+        final String darkIconUrl = TransportModeUtils.getDarkIconUrlForTransportMode(getResources(), mode);
+        final Uri darkIconUri = darkIconUrl == null ? Uri.EMPTY : Uri.parse(darkIconUrl);
+        Picasso.with(getContext().getApplicationContext())
+            .load(darkIconUri)
+            .into(((ImageView) view.findViewById(R.id.darkImageView)));
 
         return view;
       }
