@@ -9,7 +9,7 @@ import java.util.concurrent.atomic.AtomicLong;
 import rx.functions.Func1;
 
 /**
- * Fills id for {@link TripGroup} and its {@link Trip}.
+ * Fills id for {@link Trip}.
  */
 final class FillIdentifiers implements Func1<List<TripGroup>, List<TripGroup>> {
   private final AtomicLong idGenerator = new AtomicLong();
