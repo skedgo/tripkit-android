@@ -22,7 +22,8 @@ import rx.functions.Func1;
 import rx.schedulers.Schedulers;
 
 final class RouteServiceImpl implements RouteService {
-  private final SelectBestDisplayTrip selectBestDisplayTrip = new SelectBestDisplayTrip();
+  private final Func1<TripGroup, TripGroup> selectBestDisplayTrip = new SelectBestDisplayTrip();
+  private final Func1<List<TripGroup>, List<TripGroup>> fillIdentifiers = new FillIdentifiers();
   private final String appVersion;
   private final Func1<Query, Observable<List<Query>>> queryGenerator;
   private final Resources resources;
@@ -132,6 +133,7 @@ final class RouteServiceImpl implements RouteService {
             return CollectionUtils.isNotEmpty(groups);
           }
         })
+        .map(fillIdentifiers)
         .map(new Func1<List<TripGroup>, List<TripGroup>>() {
           @Override public List<TripGroup> call(List<TripGroup> groups) {
             for (TripGroup group : groups) {
