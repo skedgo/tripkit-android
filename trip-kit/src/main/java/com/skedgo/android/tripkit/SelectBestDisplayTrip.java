@@ -21,16 +21,14 @@ import rx.functions.Func1;
  * having end time which is after the query time will not be selected.
  */
 public final class SelectBestDisplayTrip implements Func1<TripGroup, TripGroup> {
-  @NonNull
-  @Override
-  public TripGroup call(@NonNull TripGroup tripGroup) {
-    final ArrayList<Trip> trips = tripGroup.getTrips();
+  @NonNull @Override public TripGroup call(@NonNull TripGroup group) {
+    final ArrayList<Trip> trips = group.getTrips();
     if (CollectionUtils.isNotEmpty(trips)) {
       Collections.sort(trips, Trip.Comparators.WEIGHTED_SCORE_COMPARATOR);
       final Trip bestDisplayTrip = trips.get(trips.size() - 1);
-      tripGroup.setDisplayTripId(bestDisplayTrip.getId());
+      return group.changeDisplayTrip(bestDisplayTrip);
     }
 
-    return tripGroup;
+    return group;
   }
 }
