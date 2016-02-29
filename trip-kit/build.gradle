@@ -3,7 +3,7 @@ apply plugin: "com.github.dcendents.android-maven"
 apply plugin: 'com.neenbedankt.android-apt'
 
 group = "com.skedgo.sdk"
-version = "1.0-rc5"
+version = "1.0-rc6"
 
 android {
   compileSdkVersion rootProject.ext.CompileSdkVersion
