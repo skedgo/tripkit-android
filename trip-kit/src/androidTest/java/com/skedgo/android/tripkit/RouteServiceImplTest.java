@@ -52,7 +52,7 @@ public class RouteServiceImplTest {
         .first();
     assertThat(routes).isNotNull().isNotEmpty();
     segmentsAreValid(routes);
-    displayTripHasWeightedScore(routes);
+    displayTripHasHighestWeightedScore(routes);
     tripsHaveUniqueIds(routes);
   }
 
@@ -74,7 +74,7 @@ public class RouteServiceImplTest {
     assertThat(ids).doesNotHaveDuplicates();
   }
 
-  private void displayTripHasWeightedScore(List<TripGroup> routes) {
+  private void displayTripHasHighestWeightedScore(List<TripGroup> routes) {
     for (TripGroup route : routes) {
       final List<Trip> trips = route.getTrips();
       if (trips != null) {
@@ -101,14 +101,9 @@ public class RouteServiceImplTest {
         if (type == SegmentType.ARRIVAL
             || type == SegmentType.DEPARTURE
             || type == SegmentType.STATIONARY) {
-          assertThat(segment.getTransportModeId())
-              .describedAs("Segment with type %s should have null mode id", type.name())
-              .isNullOrEmpty();
+          assertThat(segment.getTransportModeId()).isNullOrEmpty();
         } else {
-          assertThat(segment.getTransportModeId())
-              .describedAs("Segment with type %s should not have null mode id", type.name())
-              .isNotNull()
-              .isNotEmpty();
+          assertThat(segment.getTransportModeId()).isNotNull().isNotEmpty();
         }
       }
     }
