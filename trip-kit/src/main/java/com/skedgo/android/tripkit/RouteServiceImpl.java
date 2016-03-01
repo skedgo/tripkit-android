@@ -48,12 +48,6 @@ final class RouteServiceImpl implements RouteService {
   public Observable<TripGroup> routeAsync(@NonNull RouteOptions options) {
     final Query query = options.toQuery();
     return routeAsync(query)
-        .filter(new Func1<List<TripGroup>, Boolean>() {
-          @Override
-          public Boolean call(List<TripGroup> routes) {
-            return CollectionUtils.isNotEmpty(routes);
-          }
-        })
         .flatMap(new Func1<List<TripGroup>, Observable<TripGroup>>() {
           @Override
           public Observable<TripGroup> call(List<TripGroup> routes) {
@@ -68,10 +62,10 @@ final class RouteServiceImpl implements RouteService {
         .flatMap(new Func1<Query, Observable<List<TripGroup>>>() {
           @Override
           public Observable<List<TripGroup>> call(Query subQuery) {
-            final List<String> urLs = subQuery.getRegion().getURLs();
+            final List<String> urls = subQuery.getRegion().getURLs();
             final List<String> modes = subQuery.getTransportModeIds();
             final Map<String, String> options = toOptions(subQuery);
-            return fetchRoutesAsync(urLs, modes, options);
+            return fetchRoutesAsync(urls, modes, options);
           }
         });
   }
@@ -111,24 +105,28 @@ final class RouteServiceImpl implements RouteService {
         });
   }
 
-  /* TODO: Write tests to assert the logic of url fallback. */
+  /**
+   * Regarding url failover, see more: https://www.flowdock.com/app/skedgo/tripgo-v4/threads/ZSuBe4bGCfR8ltaEosihtCklBZy.
+   */
   @NonNull Observable<List<TripGroup>> fetchRoutesAsync(
       @NonNull List<String> urls,
       @NonNull final List<String> modes,
       final Map<String, String> options) {
+    // TODO: Write tests to assert the logic of url failover.
     return Observable.from(urls)
         .concatMap(new Func1<String, Observable<RoutingResponse>>() {
           @Override public Observable<RoutingResponse> call(final String url) {
             return fetchRoutesPerUrlAsync(url, modes, options);
           }
         })
+        .first()
         .map(new Func1<RoutingResponse, List<TripGroup>>() {
           @Override public List<TripGroup> call(RoutingResponse response) {
             response.processRawData(resources, Gsons.createForLowercaseEnum());
             return response.getTripGroupList();
           }
         })
-        .first(new Func1<List<TripGroup>, Boolean>() {
+        .filter(new Func1<List<TripGroup>, Boolean>() {
           @Override public Boolean call(List<TripGroup> groups) {
             return CollectionUtils.isNotEmpty(groups);
           }
@@ -147,6 +145,10 @@ final class RouteServiceImpl implements RouteService {
         .subscribeOn(Schedulers.io());
   }
 
+  /**
+   * If the {@link Observable} returned is empty, {@link RouteServiceImpl#fetchRoutesAsync(List, List, Map)}
+   * will failover on a different url.
+   */
   @NonNull Observable<RoutingResponse> fetchRoutesPerUrlAsync(
       final String url,
       @NonNull final List<String> modes,
@@ -164,7 +166,21 @@ final class RouteServiceImpl implements RouteService {
             }
           }
         })
+        .filter(new Func1<RoutingResponse, Boolean>() {
+          @Override public Boolean call(RoutingResponse response) {
+            return !(response.getErrorMessage() != null && !response.hasError());
+          }
+        })
         /* Let it fail silently. */
-        .onErrorResumeNext(Observable.<RoutingResponse>empty());
+        .onErrorResumeNext(Observable.<RoutingResponse>empty())
+        .flatMap(new Func1<RoutingResponse, Observable<RoutingResponse>>() {
+          @Override public Observable<RoutingResponse> call(RoutingResponse response) {
+            if (response.getErrorMessage() != null) {
+              return Observable.error(new RoutingUserError(response.getErrorMessage()));
+            } else {
+              return Observable.just(response);
+            }
+          }
+        });
   }
 }
