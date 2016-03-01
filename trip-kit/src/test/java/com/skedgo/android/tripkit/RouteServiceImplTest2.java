@@ -27,7 +27,9 @@ import rx.functions.Func1;
 import rx.observers.TestSubscriber;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.Matchers.anyList;
 import static org.mockito.Matchers.anyListOf;
+import static org.mockito.Matchers.anyMap;
 import static org.mockito.Matchers.anyMapOf;
 import static org.mockito.Mockito.anyString;
 import static org.mockito.Mockito.mock;
@@ -140,6 +142,44 @@ public class RouteServiceImplTest2 {
     subscriber.awaitTerminalEvent();
     subscriber.assertTerminalEvent();
     subscriber.assertNoErrors();
+  }
+
+  @Test public void emitNothingIfHavingErrorAndNotUserError() {
+    final RoutingResponse response = mock(RoutingResponse.class);
+    when(response.getErrorMessage()).thenReturn("Some error");
+    when(response.hasError()).thenReturn(false);
+    final RoutingApi api = mock(RoutingApi.class);
+    when(api.fetchRoutes(anyList(), anyMap())).thenReturn(response);
+    when(routingApiFactory.call(anyString())).thenReturn(api);
+
+    final TestSubscriber<RoutingResponse> subscriber = new TestSubscriber<>();
+    routeService.fetchRoutesPerUrlAsync(
+        "Some url",
+        Collections.<String>emptyList(),
+        Collections.<String, String>emptyMap()
+    ).subscribe(subscriber);
+    subscriber.awaitTerminalEvent();
+    subscriber.assertNoErrors();
+    subscriber.assertNoValues();
+  }
+
+  @Test public void throwUserError() {
+    final RoutingResponse response = mock(RoutingResponse.class);
+    when(response.getErrorMessage()).thenReturn("Some user error");
+    when(response.hasError()).thenReturn(true);
+    final RoutingApi api = mock(RoutingApi.class);
+    when(api.fetchRoutes(anyList(), anyMap())).thenReturn(response);
+    when(routingApiFactory.call(anyString())).thenReturn(api);
+
+    final TestSubscriber<RoutingResponse> subscriber = new TestSubscriber<>();
+    routeService.fetchRoutesPerUrlAsync(
+        "Some url",
+        Collections.<String>emptyList(),
+        Collections.<String, String>emptyMap()
+    ).subscribe(subscriber);
+    subscriber.awaitTerminalEvent();
+    subscriber.assertError(RoutingUserError.class);
+    subscriber.assertNoValues();
   }
 
   @NonNull Query createQuery() {
