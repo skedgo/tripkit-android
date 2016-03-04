@@ -140,8 +140,13 @@ final class RouteServiceImpl implements RouteService {
             return groups;
           }
         })
-        /* Let it fail silently. */
-        .onErrorResumeNext(Observable.<List<TripGroup>>empty())
+        .onErrorResumeNext(new Func1<Throwable, Observable<? extends List<TripGroup>>>() {
+          @Override public Observable<? extends List<TripGroup>> call(Throwable error) {
+            return error instanceof RoutingUserError
+                ? Observable.<List<TripGroup>>error(error)
+                : Observable.<List<TripGroup>>empty();
+          }
+        })
         .subscribeOn(Schedulers.io());
   }
 
