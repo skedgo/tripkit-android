@@ -31,6 +31,7 @@ import static org.mockito.Matchers.anyList;
 import static org.mockito.Matchers.anyListOf;
 import static org.mockito.Matchers.anyMap;
 import static org.mockito.Matchers.anyMapOf;
+import static org.mockito.Matchers.eq;
 import static org.mockito.Mockito.anyString;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
@@ -164,6 +165,26 @@ public class RouteServiceImplTest2 {
   }
 
   @Test public void throwUserError() {
+    final String url = "https://skedgo.com/tripgo";
+    final RoutingResponse response = mock(RoutingResponse.class);
+    when(response.getErrorMessage()).thenReturn("Some user error");
+    when(response.hasError()).thenReturn(true);
+    final RoutingApi api = mock(RoutingApi.class);
+    when(api.fetchRoutes(anyList(), anyMap())).thenReturn(response);
+    when(routingApiFactory.call(eq(url))).thenReturn(api);
+
+    final TestSubscriber<RoutingResponse> subscriber = new TestSubscriber<>();
+    routeService.fetchRoutesPerUrlAsync(
+        url,
+        Collections.<String>emptyList(),
+        Collections.<String, String>emptyMap()
+    ).subscribe(subscriber);
+    subscriber.awaitTerminalEvent();
+    subscriber.assertError(RoutingUserError.class);
+    subscriber.assertNoValues();
+  }
+
+  @Test public void throwUserErrorWhenRoutingWithMultipleUrls() {
     final RoutingResponse response = mock(RoutingResponse.class);
     when(response.getErrorMessage()).thenReturn("Some user error");
     when(response.hasError()).thenReturn(true);
@@ -171,9 +192,9 @@ public class RouteServiceImplTest2 {
     when(api.fetchRoutes(anyList(), anyMap())).thenReturn(response);
     when(routingApiFactory.call(anyString())).thenReturn(api);
 
-    final TestSubscriber<RoutingResponse> subscriber = new TestSubscriber<>();
-    routeService.fetchRoutesPerUrlAsync(
-        "Some url",
+    final TestSubscriber<List<TripGroup>> subscriber = new TestSubscriber<>();
+    routeService.fetchRoutesAsync(
+        Arrays.asList("a", "b", "c"),
         Collections.<String>emptyList(),
         Collections.<String, String>emptyMap()
     ).subscribe(subscriber);
