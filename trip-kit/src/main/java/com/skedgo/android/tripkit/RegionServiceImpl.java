@@ -4,7 +4,6 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 
 import com.skedgo.android.common.model.Location;
-import com.skedgo.android.common.model.ModeInfo;
 import com.skedgo.android.common.model.Region;
 import com.skedgo.android.common.model.TransportMode;
 
@@ -157,7 +156,7 @@ final class RegionServiceImpl implements RegionService {
         });
   }
 
-  @Override public Observable<List<ModeInfo>> getTransitModesByRegionAsync(Region region) {
+  @Override public Observable<List<TransportMode>> getTransitModesByRegionAsync(Region region) {
     return Observable.empty();
   }
 
