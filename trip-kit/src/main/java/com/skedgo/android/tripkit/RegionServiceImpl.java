@@ -4,6 +4,7 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 
 import com.skedgo.android.common.model.Location;
+import com.skedgo.android.common.model.ModeInfo;
 import com.skedgo.android.common.model.Region;
 import com.skedgo.android.common.model.TransportMode;
 
@@ -156,8 +157,24 @@ final class RegionServiceImpl implements RegionService {
         });
   }
 
-  @Override public Observable<List<TransportMode>> getTransitModesByRegionAsync(Region region) {
-    return Observable.empty();
+  @Override public Observable<List<ModeInfo>> getTransitModesByRegionAsync(final Region region) {
+    return Observable.from(region.getURLs())
+        .first()
+        .concatMap(new Func1<String, Observable<? extends RegionInfoApi.Response>>() {
+          @Override public Observable<? extends RegionInfoApi.Response> call(String url) {
+            return fetchRegionInfoPerUrl(url, region);
+          }
+        })
+        .concatMap(new Func1<RegionInfoApi.Response, Observable<RegionInfoApi.Response.RegionInfo>>() {
+          @Override public Observable<RegionInfoApi.Response.RegionInfo> call(RegionInfoApi.Response response) {
+            return Observable.from(response.regions()).first();
+          }
+        })
+        .map(new Func1<RegionInfoApi.Response.RegionInfo, List<ModeInfo>>() {
+          @Override public List<ModeInfo> call(RegionInfoApi.Response.RegionInfo regionInfo) {
+            return regionInfo.getTransitModes();
+          }
+        });
   }
 
   Observable<RegionInfoApi.Response> fetchRegionInfoPerUrl(

@@ -3,6 +3,7 @@ package com.skedgo.android.tripkit;
 import android.support.annotation.Nullable;
 
 import com.google.gson.annotations.SerializedName;
+import com.skedgo.android.common.model.ModeInfo;
 
 import java.util.List;
 
@@ -35,11 +36,19 @@ interface RegionInfoApi {
 
     static class RegionInfo {
       @SerializedName("paratransit") private Paratransit paratransit;
-
+      @SerializedName("transitModes") private List<ModeInfo> transitModes;
       public RegionInfo() {}
 
       public RegionInfo(Paratransit paratransit) {
         this.paratransit = paratransit;
+      }
+
+      public RegionInfo(List<ModeInfo> transitModes) {
+        this.transitModes = transitModes;
+      }
+
+      public List<ModeInfo> getTransitModes() {
+        return transitModes;
       }
 
       @Nullable public Paratransit paratransit() {
