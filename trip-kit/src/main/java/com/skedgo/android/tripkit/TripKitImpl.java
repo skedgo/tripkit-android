@@ -57,7 +57,7 @@ final class TripKitImpl extends TripKit {
           getAppVersion(),
           provideQueryGenerator(),
           createRoutingApiFactory(),
-          configs.avoidModesLoader());
+          configs.excludedTransitModesAdapter());
     }
 
     return routeService;

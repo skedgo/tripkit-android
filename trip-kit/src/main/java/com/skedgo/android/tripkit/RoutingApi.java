@@ -12,7 +12,6 @@ import retrofit.http.QueryMap;
 interface RoutingApi {
   @GET("/routing.json") RoutingResponse fetchRoutes(
       @Query("modes") List<String> modes,
-      @Query("avoid") List<String> avoidModes,
-      @QueryMap Map<String, String> options
+      @QueryMap Map<String, Object> options
   );
 }
