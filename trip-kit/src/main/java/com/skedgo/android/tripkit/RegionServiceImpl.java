@@ -4,6 +4,7 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 
 import com.skedgo.android.common.model.Location;
+import com.skedgo.android.common.model.ModeInfo;
 import com.skedgo.android.common.model.Region;
 import com.skedgo.android.common.model.TransportMode;
 
@@ -123,23 +124,23 @@ final class RegionServiceImpl implements RegionService {
 
   @Override public Observable<Paratransit> fetchParatransitByRegionAsync(@NonNull final Region region) {
     return Observable.from(region.getURLs())
-        .concatMap(new Func1<String, Observable<RegionInfoApi.Response>>() {
-          @Override public Observable<RegionInfoApi.Response> call(final String baseUrl) {
+        .concatMap(new Func1<String, Observable<RegionInfoResponse>>() {
+          @Override public Observable<RegionInfoResponse> call(final String baseUrl) {
             return fetchRegionInfoPerUrl(baseUrl, region);
           }
         })
-        .first(new Func1<RegionInfoApi.Response, Boolean>() {
-          @Override public Boolean call(RegionInfoApi.Response response) {
+        .first(new Func1<RegionInfoResponse, Boolean>() {
+          @Override public Boolean call(RegionInfoResponse response) {
             return CollectionUtils.isNotEmpty(response.regions());
           }
         })
-        .flatMap(new Func1<RegionInfoApi.Response, Observable<RegionInfoApi.Response.RegionInfo>>() {
-          @Override public Observable<RegionInfoApi.Response.RegionInfo> call(RegionInfoApi.Response response) {
+        .flatMap(new Func1<RegionInfoResponse, Observable<RegionInfo>>() {
+          @Override public Observable<RegionInfo> call(RegionInfoResponse response) {
             return Observable.from(response.regions()).first();
           }
         })
-        .map(new Func1<RegionInfoApi.Response.RegionInfo, Paratransit>() {
-          @Override public Paratransit call(RegionInfoApi.Response.RegionInfo regionInfo) {
+        .map(new Func1<RegionInfo, Paratransit>() {
+          @Override public Paratransit call(RegionInfo regionInfo) {
             return regionInfo.paratransit();
           }
         })
@@ -156,15 +157,35 @@ final class RegionServiceImpl implements RegionService {
         });
   }
 
-  Observable<RegionInfoApi.Response> fetchRegionInfoPerUrl(
+  @Override public Observable<List<ModeInfo>> getTransitModesByRegionAsync(final Region region) {
+    return Observable.from(region.getURLs())
+        .first()
+        .concatMap(new Func1<String, Observable<? extends RegionInfoResponse>>() {
+          @Override public Observable<? extends RegionInfoResponse> call(String url) {
+            return fetchRegionInfoPerUrl(url, region);
+          }
+        })
+        .concatMap(new Func1<RegionInfoResponse, Observable<RegionInfo>>() {
+          @Override public Observable<RegionInfo> call(RegionInfoResponse response) {
+            return Observable.from(response.regions()).first();
+          }
+        })
+        .map(new Func1<RegionInfo, List<ModeInfo>>() {
+          @Override public List<ModeInfo> call(RegionInfo regionInfo) {
+            return regionInfo.transitModes();
+          }
+        });
+  }
+
+  Observable<RegionInfoResponse> fetchRegionInfoPerUrl(
       final String baseUrl,
       @NonNull final Region region) {
     return Observable
-        .create(new Observable.OnSubscribe<RegionInfoApi.Response>() {
-          @Override public void call(Subscriber<? super RegionInfoApi.Response> subscriber) {
+        .create(new Observable.OnSubscribe<RegionInfoResponse>() {
+          @Override public void call(Subscriber<? super RegionInfoResponse> subscriber) {
             try {
               final RegionInfoApi api = regionInfoApiFactory.call(baseUrl);
-              final RegionInfoApi.Response response = api.fetchRegionInfo(
+              final RegionInfoResponse response = api.fetchRegionInfo(
                   new RegionInfoApi.RequestBody(region.getName())
               );
               subscriber.onNext(response);
@@ -174,6 +195,6 @@ final class RegionServiceImpl implements RegionService {
             }
           }
         })
-        .onErrorResumeNext(Observable.<RegionInfoApi.Response>empty());
+        .onErrorResumeNext(Observable.<RegionInfoResponse>empty());
   }
 }

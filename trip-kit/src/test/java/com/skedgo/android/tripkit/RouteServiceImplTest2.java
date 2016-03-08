@@ -42,6 +42,7 @@ public class RouteServiceImplTest2 {
   @Mock Resources resources;
   @Mock Func1<String, RoutingApi> routingApiFactory;
   @Mock Func1<Query, Observable<List<Query>>> queryGenerator;
+  @Mock Func1<String, List<String>> excludedTransitModesAdapter;
   private RouteServiceImpl routeService;
   private String appVersion = "v1.0";
 
@@ -51,7 +52,8 @@ public class RouteServiceImplTest2 {
         resources,
         appVersion,
         queryGenerator,
-        routingApiFactory
+        routingApiFactory,
+        null
     );
   }
 
@@ -60,7 +62,7 @@ public class RouteServiceImplTest2 {
     query.setTimeTag(TimeTag.createForArriveBy(25251325));
     query.setIsInterRegional(false);
 
-    final Map<String, String> options = routeService.toOptions(query);
+    final Map<String, Object> options = routeService.toOptions(query);
     assertThat(options)
         .containsEntry("version", appVersion)
         .containsEntry("v", "11")
@@ -79,7 +81,7 @@ public class RouteServiceImplTest2 {
     query.setTimeTag(TimeTag.createForLeaveAfter(25251325));
     query.setIsInterRegional(false);
 
-    final Map<String, String> options = routeService.toOptions(query);
+    final Map<String, Object> options = routeService.toOptions(query);
     assertThat(options)
         .containsEntry("arriveBefore", "0")
         .containsEntry("departAfter", "25251325");
@@ -90,7 +92,7 @@ public class RouteServiceImplTest2 {
     query.setTimeTag(TimeTag.createForLeaveAfter(25251325));
     query.setIsInterRegional(true);
 
-    final Map<String, String> options = routeService.toOptions(query);
+    final Map<String, Object> options = routeService.toOptions(query);
     assertThat(options).containsEntry("ir", "1");
   }
 
@@ -99,7 +101,7 @@ public class RouteServiceImplTest2 {
     routeService.fetchRoutesAsync(
         Collections.<String>emptyList(),
         Collections.<String>emptyList(),
-        Collections.<String, String>emptyMap()
+        Collections.<String, Object>emptyMap()
     ).subscribe(subscriber);
 
     subscriber.awaitTerminalEvent();
@@ -109,7 +111,7 @@ public class RouteServiceImplTest2 {
 
   @Test public void shouldFailSilentlyIfAllRequestsFail() {
     final RoutingApi api = mock(RoutingApi.class);
-    when(api.fetchRoutes(anyListOf(String.class), anyMapOf(String.class, String.class)))
+    when(api.fetchRoutes(anyListOf(String.class), anyMapOf(String.class, Object.class)))
         .thenThrow(new RuntimeException());
     when(routingApiFactory.call(anyString()))
         .thenReturn(api);
@@ -118,7 +120,7 @@ public class RouteServiceImplTest2 {
     routeService.fetchRoutesAsync(
         Arrays.asList("https://www.abc.com/", "https://www.def.com/"),
         Arrays.asList("hyperloop", "drone"),
-        Collections.<String, String>emptyMap()
+        Collections.<String, Object>emptyMap()
     ).subscribe(subscriber);
 
     subscriber.awaitTerminalEvent();
@@ -128,7 +130,7 @@ public class RouteServiceImplTest2 {
 
   @Test public void shouldFailSilentlyIfNoTripGroupsFoundOnAllUrls() {
     final RoutingApi api = mock(RoutingApi.class);
-    when(api.fetchRoutes(anyListOf(String.class), anyMapOf(String.class, String.class)))
+    when(api.fetchRoutes(anyListOf(String.class), anyMapOf(String.class, Object.class)))
         .thenReturn(new RoutingResponse());
     when(routingApiFactory.call(anyString()))
         .thenReturn(api);
@@ -137,7 +139,7 @@ public class RouteServiceImplTest2 {
     routeService.fetchRoutesAsync(
         Arrays.asList("https://www.abc.com/", "https://www.def.com/"),
         Arrays.asList("hyperloop", "drone"),
-        Collections.<String, String>emptyMap()
+        Collections.<String, Object>emptyMap()
     ).subscribe(subscriber);
 
     subscriber.awaitTerminalEvent();
@@ -157,7 +159,7 @@ public class RouteServiceImplTest2 {
     routeService.fetchRoutesPerUrlAsync(
         "Some url",
         Collections.<String>emptyList(),
-        Collections.<String, String>emptyMap()
+        Collections.<String, Object>emptyMap()
     ).subscribe(subscriber);
     subscriber.awaitTerminalEvent();
     subscriber.assertNoErrors();
@@ -177,7 +179,7 @@ public class RouteServiceImplTest2 {
     routeService.fetchRoutesPerUrlAsync(
         url,
         Collections.<String>emptyList(),
-        Collections.<String, String>emptyMap()
+        Collections.<String, Object>emptyMap()
     ).subscribe(subscriber);
     subscriber.awaitTerminalEvent();
     subscriber.assertError(RoutingUserError.class);
@@ -196,7 +198,7 @@ public class RouteServiceImplTest2 {
     routeService.fetchRoutesAsync(
         Arrays.asList("a", "b", "c"),
         Collections.<String>emptyList(),
-        Collections.<String, String>emptyMap()
+        Collections.<String, Object>emptyMap()
     ).subscribe(subscriber);
     subscriber.awaitTerminalEvent();
     subscriber.assertError(RoutingUserError.class);

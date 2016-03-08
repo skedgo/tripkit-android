@@ -2,9 +2,11 @@ package com.skedgo.android.tripkit;
 
 import android.content.res.Resources;
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 
 import com.skedgo.android.common.model.Location;
 import com.skedgo.android.common.model.Query;
+import com.skedgo.android.common.model.Region;
 import com.skedgo.android.common.model.RoutingResponse;
 import com.skedgo.android.common.model.TripGroup;
 import com.skedgo.android.common.util.Gsons;
@@ -28,16 +30,19 @@ final class RouteServiceImpl implements RouteService {
   private final Func1<Query, Observable<List<Query>>> queryGenerator;
   private final Resources resources;
   private final Func1<String, RoutingApi> routingApiFactory;
+  private final Func1<String, List<String>> excludedTransitModesAdapter;
 
   RouteServiceImpl(
       @NonNull Resources resources,
       @NonNull String appVersion,
       @NonNull Func1<Query, Observable<List<Query>>> queryGenerator,
-      Func1<String, RoutingApi> routingApiFactory) {
+      @NonNull Func1<String, RoutingApi> routingApiFactory,
+      @Nullable Func1<String, List<String>> excludedTransitModesAdapter) {
     this.appVersion = appVersion;
     this.queryGenerator = queryGenerator;
     this.resources = resources;
     this.routingApiFactory = routingApiFactory;
+    this.excludedTransitModesAdapter = excludedTransitModesAdapter;
   }
 
   private static String toCoordinatesText(Location location) {
@@ -64,13 +69,13 @@ final class RouteServiceImpl implements RouteService {
           public Observable<List<TripGroup>> call(Query subQuery) {
             final List<String> urls = subQuery.getRegion().getURLs();
             final List<String> modes = subQuery.getTransportModeIds();
-            final Map<String, String> options = toOptions(subQuery);
+            final Map<String, Object> options = toOptions(subQuery);
             return fetchRoutesAsync(urls, modes, options);
           }
         });
   }
 
-  @NonNull Map<String, String> toOptions(@NonNull Query query) {
+  @NonNull Map<String, Object> toOptions(@NonNull Query query) {
     final String departureCoordinates = toCoordinatesText(query.getFromLocation());
     final String arrivalCoordinates = toCoordinatesText(query.getToLocation());
     final long arriveBefore = TimeUnit.MILLISECONDS.toSeconds(query.getArriveBy());
@@ -79,7 +84,7 @@ final class RouteServiceImpl implements RouteService {
     final int transferTime = query.getTransferTime();
     final int walkingSpeed = query.getWalkingSpeed();
 
-    final Map<String, String> options = new HashMap<>();
+    final Map<String, Object> options = new HashMap<>();
     options.put("from", departureCoordinates);
     options.put("to", arrivalCoordinates);
     options.put("arriveBefore", Long.toString(arriveBefore));
@@ -92,6 +97,13 @@ final class RouteServiceImpl implements RouteService {
     if (query.isInterRegional()) {
       options.put("ir", "1");
     }
+
+    if (excludedTransitModesAdapter != null) {
+      final Region region = query.getRegion();
+      final List<String> excludedTransitModes = excludedTransitModesAdapter.call(region.getName());
+      options.put("avoid", excludedTransitModes);
+    }
+
     return options;
   }
 
@@ -111,7 +123,7 @@ final class RouteServiceImpl implements RouteService {
   @NonNull Observable<List<TripGroup>> fetchRoutesAsync(
       @NonNull List<String> urls,
       @NonNull final List<String> modes,
-      final Map<String, String> options) {
+      final Map<String, Object> options) {
     // TODO: Write tests to assert the logic of url failover.
     return Observable.from(urls)
         .concatMap(new Func1<String, Observable<RoutingResponse>>() {
@@ -157,7 +169,7 @@ final class RouteServiceImpl implements RouteService {
   @NonNull Observable<RoutingResponse> fetchRoutesPerUrlAsync(
       final String url,
       @NonNull final List<String> modes,
-      final Map<String, String> options) {
+      final Map<String, Object> options) {
     return Observable
         .create(new Observable.OnSubscribe<RoutingResponse>() {
           @Override public void call(Subscriber<? super RoutingResponse> subscriber) {
