@@ -171,8 +171,14 @@ public class RegionServiceImplTest {
         "Access",
         "1.800.883.1295"
     );
+    final RegionInfo regionInfo = ImmutableRegionInfo.builder()
+        .paratransit(paratransit)
+        .build();
+    final RegionInfoResponse response = ImmutableRegionInfoResponse.builder()
+        .regions(singletonList(regionInfo))
+        .build();
     when(regionInfoApi.fetchRegionInfo(any(RegionInfoApi.RequestBody.class)))
-        .thenReturn(new RegionInfoApi.Response(singletonList(new RegionInfoApi.Response.RegionInfo(paratransit))));
+        .thenReturn(response);
     when(regionInfoApiFactory.call(eq("https://lepton-us-ca-losangeles.tripgo.skedgo.com/satapp")))
         .thenReturn(regionInfoApi);
 

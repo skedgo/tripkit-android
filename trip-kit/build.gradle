@@ -50,6 +50,8 @@ dependencies {
   compile "com.google.android.gms:play-services-gcm:${rootProject.ext.PlayServicesVersion}"
 
   apt "org.immutables:value:${rootProject.ext.ImmutablesVersion}"
+  apt "org.immutables:gson:${rootProject.ext.ImmutablesVersion}"
+  provided "org.immutables:gson:${rootProject.ext.ImmutablesVersion}"
   provided "org.immutables:value:${rootProject.ext.ImmutablesVersion}"
   provided "org.immutables:builder:${rootProject.ext.ImmutablesVersion}"
 
