@@ -28,16 +28,19 @@ final class RouteServiceImpl implements RouteService {
   private final Func1<Query, Observable<List<Query>>> queryGenerator;
   private final Resources resources;
   private final Func1<String, RoutingApi> routingApiFactory;
+  private final Func1<String, List<String>> avoidModesLoader;
 
   RouteServiceImpl(
       @NonNull Resources resources,
       @NonNull String appVersion,
       @NonNull Func1<Query, Observable<List<Query>>> queryGenerator,
-      Func1<String, RoutingApi> routingApiFactory) {
+      Func1<String, RoutingApi> routingApiFactory,
+      @NonNull Func1<String, List<String>> avoidModesLoader) {
     this.appVersion = appVersion;
     this.queryGenerator = queryGenerator;
     this.resources = resources;
     this.routingApiFactory = routingApiFactory;
+    this.avoidModesLoader = avoidModesLoader;
   }
 
   private static String toCoordinatesText(Location location) {
@@ -65,7 +68,7 @@ final class RouteServiceImpl implements RouteService {
             final List<String> urls = subQuery.getRegion().getURLs();
             final List<String> modes = subQuery.getTransportModeIds();
             final Map<String, String> options = toOptions(subQuery);
-            return fetchRoutesAsync(urls, modes, options);
+            return fetchRoutesAsync(urls, modes, avoidModesLoader.call(subQuery.getRegion().getName()), options);
           }
         });
   }
@@ -111,12 +114,13 @@ final class RouteServiceImpl implements RouteService {
   @NonNull Observable<List<TripGroup>> fetchRoutesAsync(
       @NonNull List<String> urls,
       @NonNull final List<String> modes,
+      @NonNull final List<String> avoidModeIds,
       final Map<String, String> options) {
     // TODO: Write tests to assert the logic of url failover.
     return Observable.from(urls)
         .concatMap(new Func1<String, Observable<RoutingResponse>>() {
           @Override public Observable<RoutingResponse> call(final String url) {
-            return fetchRoutesPerUrlAsync(url, modes, options);
+            return fetchRoutesPerUrlAsync(url, modes, avoidModeIds, options);
           }
         })
         .first()
@@ -151,19 +155,20 @@ final class RouteServiceImpl implements RouteService {
   }
 
   /**
-   * If the {@link Observable} returned is empty, {@link RouteServiceImpl#fetchRoutesAsync(List, List, Map)}
+   * If the {@link Observable} returned is empty, {@link RouteServiceImpl#fetchRoutesAsync(List, List, List, Map)}
    * will failover on a different url.
    */
   @NonNull Observable<RoutingResponse> fetchRoutesPerUrlAsync(
       final String url,
       @NonNull final List<String> modes,
+      @NonNull final List<String> avoidModes,
       final Map<String, String> options) {
     return Observable
         .create(new Observable.OnSubscribe<RoutingResponse>() {
           @Override public void call(Subscriber<? super RoutingResponse> subscriber) {
             try {
               final RoutingApi api = routingApiFactory.call(url);
-              final RoutingResponse response = api.fetchRoutes(modes, options);
+              final RoutingResponse response = api.fetchRoutes(modes, avoidModes, options);
               subscriber.onNext(response);
               subscriber.onCompleted();
             } catch (Exception e) {
