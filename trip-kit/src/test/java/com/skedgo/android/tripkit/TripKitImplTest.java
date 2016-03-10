@@ -1,5 +1,7 @@
 package com.skedgo.android.tripkit;
 
+import com.skedgo.android.common.util.DiagnosticUtils;
+
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -22,7 +24,7 @@ public class TripKitImplTest {
   @Before public void before() {
     MockitoAnnotations.initMocks(this);
     when(configs.context()).thenReturn(RuntimeEnvironment.application);
-    when(configs.regionEligibility()).thenReturn("");
+    when(configs.regionEligibility()).thenReturn("lol");
   }
 
   @Test public void singletons() {
@@ -49,5 +51,13 @@ public class TripKitImplTest {
     final TripKitImpl kit = new TripKitImpl(configs);
     assertThat(kit.createHttpLoggingInterceptor().getLevel())
         .isEqualTo(HttpLoggingInterceptor.Level.BODY);
+  }
+
+  /* See https://www.flowdock.com/app/skedgo/androiddev/threads/3WbchFGaktP8JunwxJOhtyCw32J. */
+  @Test public void headerVersion() {
+    // FIXME: Can't mock version name. It's always null in this case.
+    final String versionName = DiagnosticUtils.getAppVersionName(RuntimeEnvironment.application);
+    final TripKitImpl kit = new TripKitImpl(configs);
+    assertThat(kit.getAppVersion()).isEqualTo("a-lol" + versionName);
   }
 }

@@ -81,7 +81,7 @@ final class RouteServiceImpl implements RouteService {
   }
 
   @NonNull List<String> getExcludedTransitModesAsNonNull(
-      @Nullable Func1<String, List<String>> excludedTransitModesAdapter,
+      @Nullable ExcludedTransitModesAdapter excludedTransitModesAdapter,
       String regionName) {
     if (excludedTransitModesAdapter != null) {
       final List<String> modes = excludedTransitModesAdapter.call(regionName);
