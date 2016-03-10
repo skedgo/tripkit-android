@@ -5,10 +5,7 @@ import android.support.annotation.Nullable;
 
 import org.immutables.value.Value;
 
-import java.util.List;
-
 import rx.functions.Action1;
-import rx.functions.Func1;
 
 import static org.immutables.value.Value.Style.BuilderVisibility.PACKAGE;
 import static org.immutables.value.Value.Style.ImplementationVisibility.PRIVATE;
@@ -23,7 +20,7 @@ public abstract class Configs {
   public abstract Context context();
   public abstract String regionEligibility();
   @Nullable public abstract Action1<Throwable> errorHandler();
-  @Nullable public abstract Func1<String, List<String>> excludedTransitModesAdapter();
+  @Nullable public abstract ExcludedTransitModesAdapter excludedTransitModesAdapter();
 
   @Value.Default public boolean debuggable() {
     return false;
@@ -34,7 +31,7 @@ public abstract class Configs {
     Builder regionEligibility(String regionEligibility);
     Builder debuggable(boolean debuggable);
     Builder errorHandler(Action1<Throwable> errorHandler);
-    Builder excludedTransitModesAdapter(Func1<String, List<String>> excludedTransitModesAdapter);
+    Builder excludedTransitModesAdapter(ExcludedTransitModesAdapter excludedTransitModesAdapter);
     Configs build();
   }
 }

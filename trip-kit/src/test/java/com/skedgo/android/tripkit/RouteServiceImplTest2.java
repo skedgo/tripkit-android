@@ -40,7 +40,7 @@ public class RouteServiceImplTest2 {
   @Mock Resources resources;
   @Mock Func1<String, RoutingApi> routingApiFactory;
   @Mock Func1<Query, Observable<List<Query>>> queryGenerator;
-  @Mock Func1<String, List<String>> excludedTransitModesAdapter;
+  @Mock ExcludedTransitModesAdapter excludedTransitModesAdapter;
   private RouteServiceImpl routeService;
   private String appVersion = "v1.0";
 

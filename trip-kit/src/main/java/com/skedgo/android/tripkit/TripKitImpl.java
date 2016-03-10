@@ -187,6 +187,10 @@ final class TripKitImpl extends TripKit {
     return new HttpLoggingInterceptor().setLevel(level);
   }
 
+  @NonNull String getAppVersion() {
+    return "a-" + configs.regionEligibility() + DiagnosticUtils.getAppVersionName(context);
+  }
+
   @NonNull private okhttp3.OkHttpClient getOkHttpClient3() {
     return new okhttp3.OkHttpClient.Builder()
         .addInterceptor(
@@ -198,10 +202,6 @@ final class TripKitImpl extends TripKit {
         )
         .addInterceptor(createHttpLoggingInterceptor())
         .build();
-  }
-
-  @NonNull private String getAppVersion() {
-    return "a" + DiagnosticUtils.getAppName(context);
   }
 
   @NonNull private Interceptor addCustomRequestHeaders() {
