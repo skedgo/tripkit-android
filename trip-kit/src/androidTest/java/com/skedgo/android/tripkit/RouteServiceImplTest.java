@@ -36,7 +36,7 @@ public class RouteServiceImplTest {
             .build());
   }
 
-  @Test public void routeAsync() throws Exception {
+  @Test public void routeAsync() {
     final Location departure = new Location(-33.8599089, 151.2071104);
     final Location arrival = new Location(-33.876114, 151.205526);
     final long departAfterMillis = System.currentTimeMillis();
@@ -49,10 +49,11 @@ public class RouteServiceImplTest {
         .routeAsync(options)
         .toList()
         .toBlocking()
-        .first();
+        .firstOrDefault(null);
+
     assertThat(routes).isNotNull().isNotEmpty();
     segmentsAreValid(routes);
-    displayTripHasHighestWeightedScore(routes);
+    displayTripHasLowestWeightedScore(routes);
     tripsHaveUniqueIds(routes);
   }
 
@@ -74,17 +75,17 @@ public class RouteServiceImplTest {
     assertThat(ids).doesNotHaveDuplicates();
   }
 
-  private void displayTripHasHighestWeightedScore(List<TripGroup> routes) {
+  private void displayTripHasLowestWeightedScore(List<TripGroup> routes) {
     for (TripGroup route : routes) {
       final List<Trip> trips = route.getTrips();
       if (trips != null) {
-        final Trip highestWeightedScoreTrip = Collections
-            .max(trips, new Comparator<Trip>() {
+        final Trip lowestWeightedScoreTrip = Collections
+            .min(trips, new Comparator<Trip>() {
               @Override public int compare(Trip lhs, Trip rhs) {
                 return Float.compare(lhs.getWeightedScore(), rhs.getWeightedScore());
               }
             });
-        assertThat(route.getDisplayTrip()).isSameAs(highestWeightedScoreTrip);
+        assertThat(route.getDisplayTrip()).isSameAs(lowestWeightedScoreTrip);
       }
     }
   }

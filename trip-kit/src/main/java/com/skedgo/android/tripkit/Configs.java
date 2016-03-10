@@ -22,9 +22,12 @@ public abstract class Configs {
 
   public abstract Context context();
   public abstract String regionEligibility();
-  public abstract boolean debuggable();
   @Nullable public abstract Action1<Throwable> errorHandler();
   @Nullable public abstract Func1<String, List<String>> excludedTransitModesAdapter();
+
+  @Value.Default public boolean debuggable() {
+    return false;
+  }
 
   public interface Builder {
     Builder context(Context context);
