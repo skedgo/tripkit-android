@@ -31,14 +31,14 @@ final class RouteServiceImpl implements RouteService {
   private final Func1<Query, Observable<List<Query>>> queryGenerator;
   private final Resources resources;
   private final Func1<String, RoutingApi> routingApiFactory;
-  private final Func1<String, List<String>> excludedTransitModesAdapter;
+  private final ExcludedTransitModesAdapter excludedTransitModesAdapter;
 
   RouteServiceImpl(
       @NonNull Resources resources,
       @NonNull String appVersion,
       @NonNull Func1<Query, Observable<List<Query>>> queryGenerator,
       @NonNull Func1<String, RoutingApi> routingApiFactory,
-      @Nullable Func1<String, List<String>> excludedTransitModesAdapter) {
+      @Nullable ExcludedTransitModesAdapter excludedTransitModesAdapter) {
     this.appVersion = appVersion;
     this.queryGenerator = queryGenerator;
     this.resources = resources;
