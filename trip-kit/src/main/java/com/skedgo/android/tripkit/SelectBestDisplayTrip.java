@@ -5,15 +5,15 @@ import android.support.annotation.NonNull;
 import com.skedgo.android.common.model.Trip;
 import com.skedgo.android.common.model.TripGroup;
 
-import org.apache.commons.collections4.CollectionUtils;
-
-import java.util.ArrayList;
 import java.util.Collections;
+import java.util.List;
 
 import rx.functions.Func1;
 
+import static org.apache.commons.collections4.CollectionUtils.isNotEmpty;
+
 /**
- * Selects display trip which has highest weighted score
+ * Selects display trip which has lowest weighted score.
  * <p/>
  * If we leave after a certain query time, this helps pick
  * the best display trip having start time that is not before the query time.
@@ -22,10 +22,10 @@ import rx.functions.Func1;
  */
 public final class SelectBestDisplayTrip implements Func1<TripGroup, TripGroup> {
   @NonNull @Override public TripGroup call(@NonNull TripGroup group) {
-    final ArrayList<Trip> trips = group.getTrips();
-    if (CollectionUtils.isNotEmpty(trips)) {
+    final List<Trip> trips = group.getTrips();
+    if (isNotEmpty(trips)) {
       Collections.sort(trips, Trip.Comparators.WEIGHTED_SCORE_COMPARATOR);
-      final Trip bestDisplayTrip = trips.get(trips.size() - 1);
+      final Trip bestDisplayTrip = trips.get(0);
       return group.changeDisplayTrip(bestDisplayTrip);
     }
 
