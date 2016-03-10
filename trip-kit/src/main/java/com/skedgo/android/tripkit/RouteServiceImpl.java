@@ -13,6 +13,7 @@ import com.skedgo.android.common.util.Gsons;
 
 import org.apache.commons.collections4.CollectionUtils;
 
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -65,14 +66,29 @@ final class RouteServiceImpl implements RouteService {
   public Observable<List<TripGroup>> routeAsync(@NonNull Query query) {
     return flatSubQueries(query)
         .flatMap(new Func1<Query, Observable<List<TripGroup>>>() {
-          @Override
-          public Observable<List<TripGroup>> call(Query subQuery) {
-            final List<String> urls = subQuery.getRegion().getURLs();
+          @Override public Observable<List<TripGroup>> call(Query subQuery) {
+            final Region region = subQuery.getRegion();
+            final List<String> urls = region.getURLs();
             final List<String> modes = subQuery.getTransportModeIds();
+            final List<String> excludedTransitModes = getExcludedTransitModesAsNonNull(
+                excludedTransitModesAdapter,
+                region.getName()
+            );
             final Map<String, Object> options = toOptions(subQuery);
-            return fetchRoutesAsync(urls, modes, options);
+            return fetchRoutesAsync(urls, modes, excludedTransitModes, options);
           }
         });
+  }
+
+  @NonNull List<String> getExcludedTransitModesAsNonNull(
+      @Nullable Func1<String, List<String>> excludedTransitModesAdapter,
+      String regionName) {
+    if (excludedTransitModesAdapter != null) {
+      final List<String> modes = excludedTransitModesAdapter.call(regionName);
+      return modes == null ? Collections.<String>emptyList() : modes;
+    } else {
+      return Collections.emptyList();
+    }
   }
 
   @NonNull Map<String, Object> toOptions(@NonNull Query query) {
@@ -98,12 +114,6 @@ final class RouteServiceImpl implements RouteService {
       options.put("ir", "1");
     }
 
-    if (excludedTransitModesAdapter != null) {
-      final Region region = query.getRegion();
-      final List<String> excludedTransitModes = excludedTransitModesAdapter.call(region.getName());
-      options.put("avoid", excludedTransitModes);
-    }
-
     return options;
   }
 
@@ -123,12 +133,13 @@ final class RouteServiceImpl implements RouteService {
   @NonNull Observable<List<TripGroup>> fetchRoutesAsync(
       @NonNull List<String> urls,
       @NonNull final List<String> modes,
+      @NonNull final List<String> excludedTransitModes,
       final Map<String, Object> options) {
     // TODO: Write tests to assert the logic of url failover.
     return Observable.from(urls)
         .concatMap(new Func1<String, Observable<RoutingResponse>>() {
           @Override public Observable<RoutingResponse> call(final String url) {
-            return fetchRoutesPerUrlAsync(url, modes, options);
+            return fetchRoutesPerUrlAsync(url, modes, excludedTransitModes, options);
           }
         })
         .first()
@@ -163,20 +174,24 @@ final class RouteServiceImpl implements RouteService {
   }
 
   /**
-   * If the {@link Observable} returned is empty, {@link RouteServiceImpl#fetchRoutesAsync(List, List, Map)}
+   * If the {@link Observable} returned is empty, {@link RouteServiceImpl#fetchRoutesAsync(List, List, List, Map)}
    * will failover on a different url.
    */
   @NonNull Observable<RoutingResponse> fetchRoutesPerUrlAsync(
       final String url,
       @NonNull final List<String> modes,
+      @NonNull final List<String> excludedTransitModes,
       final Map<String, Object> options) {
     return Observable
         .create(new Observable.OnSubscribe<RoutingResponse>() {
           @Override public void call(Subscriber<? super RoutingResponse> subscriber) {
             try {
               final RoutingApi api = routingApiFactory.call(url);
-              final RoutingResponse response = api.fetchRoutes(modes, options);
-              subscriber.onNext(response);
+              subscriber.onNext(api.fetchRoutes(
+                  modes,
+                  excludedTransitModes,
+                  options
+              ));
               subscriber.onCompleted();
             } catch (Exception e) {
               subscriber.onError(e);

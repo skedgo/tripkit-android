@@ -27,9 +27,7 @@ import rx.functions.Func1;
 import rx.observers.TestSubscriber;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.mockito.Matchers.anyList;
 import static org.mockito.Matchers.anyListOf;
-import static org.mockito.Matchers.anyMap;
 import static org.mockito.Matchers.anyMapOf;
 import static org.mockito.Matchers.eq;
 import static org.mockito.Mockito.anyString;
@@ -53,7 +51,7 @@ public class RouteServiceImplTest2 {
         appVersion,
         queryGenerator,
         routingApiFactory,
-        null
+        excludedTransitModesAdapter
     );
   }
 
@@ -101,6 +99,7 @@ public class RouteServiceImplTest2 {
     routeService.fetchRoutesAsync(
         Collections.<String>emptyList(),
         Collections.<String>emptyList(),
+        Collections.<String>emptyList(),
         Collections.<String, Object>emptyMap()
     ).subscribe(subscriber);
 
@@ -111,8 +110,11 @@ public class RouteServiceImplTest2 {
 
   @Test public void shouldFailSilentlyIfAllRequestsFail() {
     final RoutingApi api = mock(RoutingApi.class);
-    when(api.fetchRoutes(anyListOf(String.class), anyMapOf(String.class, Object.class)))
-        .thenThrow(new RuntimeException());
+    when(api.fetchRoutes(
+             anyListOf(String.class),
+             anyListOf(String.class),
+             anyMapOf(String.class, Object.class))
+    ).thenThrow(new RuntimeException());
     when(routingApiFactory.call(anyString()))
         .thenReturn(api);
 
@@ -120,6 +122,7 @@ public class RouteServiceImplTest2 {
     routeService.fetchRoutesAsync(
         Arrays.asList("https://www.abc.com/", "https://www.def.com/"),
         Arrays.asList("hyperloop", "drone"),
+        Collections.<String>emptyList(),
         Collections.<String, Object>emptyMap()
     ).subscribe(subscriber);
 
@@ -130,8 +133,11 @@ public class RouteServiceImplTest2 {
 
   @Test public void shouldFailSilentlyIfNoTripGroupsFoundOnAllUrls() {
     final RoutingApi api = mock(RoutingApi.class);
-    when(api.fetchRoutes(anyListOf(String.class), anyMapOf(String.class, Object.class)))
-        .thenReturn(new RoutingResponse());
+    when(api.fetchRoutes(
+             anyListOf(String.class),
+             anyListOf(String.class),
+             anyMapOf(String.class, Object.class))
+    ).thenReturn(new RoutingResponse());
     when(routingApiFactory.call(anyString()))
         .thenReturn(api);
 
@@ -139,6 +145,7 @@ public class RouteServiceImplTest2 {
     routeService.fetchRoutesAsync(
         Arrays.asList("https://www.abc.com/", "https://www.def.com/"),
         Arrays.asList("hyperloop", "drone"),
+        Collections.<String>emptyList(),
         Collections.<String, Object>emptyMap()
     ).subscribe(subscriber);
 
@@ -152,12 +159,17 @@ public class RouteServiceImplTest2 {
     when(response.getErrorMessage()).thenReturn("Some error");
     when(response.hasError()).thenReturn(false);
     final RoutingApi api = mock(RoutingApi.class);
-    when(api.fetchRoutes(anyList(), anyMap())).thenReturn(response);
+    when(api.fetchRoutes(
+             anyListOf(String.class),
+             anyListOf(String.class),
+             anyMapOf(String.class, Object.class))
+    ).thenReturn(response);
     when(routingApiFactory.call(anyString())).thenReturn(api);
 
     final TestSubscriber<RoutingResponse> subscriber = new TestSubscriber<>();
     routeService.fetchRoutesPerUrlAsync(
         "Some url",
+        Collections.<String>emptyList(),
         Collections.<String>emptyList(),
         Collections.<String, Object>emptyMap()
     ).subscribe(subscriber);
@@ -172,12 +184,17 @@ public class RouteServiceImplTest2 {
     when(response.getErrorMessage()).thenReturn("Some user error");
     when(response.hasError()).thenReturn(true);
     final RoutingApi api = mock(RoutingApi.class);
-    when(api.fetchRoutes(anyList(), anyMap())).thenReturn(response);
+    when(api.fetchRoutes(
+             anyListOf(String.class),
+             anyListOf(String.class),
+             anyMapOf(String.class, Object.class))
+    ).thenReturn(response);
     when(routingApiFactory.call(eq(url))).thenReturn(api);
 
     final TestSubscriber<RoutingResponse> subscriber = new TestSubscriber<>();
     routeService.fetchRoutesPerUrlAsync(
         url,
+        Collections.<String>emptyList(),
         Collections.<String>emptyList(),
         Collections.<String, Object>emptyMap()
     ).subscribe(subscriber);
@@ -191,18 +208,43 @@ public class RouteServiceImplTest2 {
     when(response.getErrorMessage()).thenReturn("Some user error");
     when(response.hasError()).thenReturn(true);
     final RoutingApi api = mock(RoutingApi.class);
-    when(api.fetchRoutes(anyList(), anyMap())).thenReturn(response);
+    when(api.fetchRoutes(
+             anyListOf(String.class),
+             anyListOf(String.class),
+             anyMapOf(String.class, Object.class))
+    ).thenReturn(response);
     when(routingApiFactory.call(anyString())).thenReturn(api);
 
     final TestSubscriber<List<TripGroup>> subscriber = new TestSubscriber<>();
     routeService.fetchRoutesAsync(
         Arrays.asList("a", "b", "c"),
         Collections.<String>emptyList(),
+        Collections.<String>emptyList(),
         Collections.<String, Object>emptyMap()
     ).subscribe(subscriber);
     subscriber.awaitTerminalEvent();
     subscriber.assertError(RoutingUserError.class);
     subscriber.assertNoValues();
+  }
+
+  @Test public void getExcludedTransitModesAsNonNull() {
+    final String regionName = "Some region name";
+    assertThat(routeService.getExcludedTransitModesAsNonNull(
+        null,
+        regionName
+    )).isEmpty();
+    assertThat(routeService.getExcludedTransitModesAsNonNull(
+        excludedTransitModesAdapter,
+        regionName
+    )).isEmpty();
+
+    final List<String> excludedTransitModes = Arrays.asList("a", "b", "c");
+    when(excludedTransitModesAdapter.call(eq(regionName)))
+        .thenReturn(excludedTransitModes);
+    assertThat(routeService.getExcludedTransitModesAsNonNull(
+        excludedTransitModesAdapter,
+        regionName
+    )).isSameAs(excludedTransitModes);
   }
 
   @NonNull Query createQuery() {
