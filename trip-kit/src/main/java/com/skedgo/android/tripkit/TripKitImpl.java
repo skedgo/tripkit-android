@@ -1,10 +1,13 @@
 package com.skedgo.android.tripkit;
 
 import android.content.Context;
+import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.util.Log;
 
+import com.skedgo.android.common.model.Booking;
 import com.skedgo.android.common.model.Query;
 import com.skedgo.android.common.model.Region;
 import com.skedgo.android.common.model.TransportMode;
@@ -42,6 +45,7 @@ final class TripKitImpl extends TripKit {
   private RouteService routeService; // Lazily initialized.
   private Reporter reporter; // Lazily initialized.
   private TripUpdater tripUpdater; // Lazily initialized.
+  private InterAppCommunicator interAppCommunicator; // Lazily initialized.
 
   TripKitImpl(@NonNull Configs configs) {
     this.configs = configs;
@@ -86,6 +90,14 @@ final class TripKitImpl extends TripKit {
     }
 
     return reporter;
+  }
+
+  @Override public InterAppCommunicator getInterAppCommunicator() {
+    if (interAppCommunicator == null) {
+      interAppCommunicator = new InterAppCommunicatorImpl();
+    }
+
+    return interAppCommunicator;
   }
 
   @Override
