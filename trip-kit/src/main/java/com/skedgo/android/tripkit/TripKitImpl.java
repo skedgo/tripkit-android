@@ -69,7 +69,7 @@ final class TripKitImpl extends TripKit {
     final ServiceApi serviceApi = new RestAdapter.Builder()
         .setLogLevel(configs.debuggable() ? FULL : NONE)
         .setEndpoint(endpoint)
-        .setConverter(new GsonConverter(Gsons.createForLowercaseEnum()))
+        .setConverter(new GsonConverter(GsonProvider.get()))
         .setClient(new OkClient(getOkHttpClient()))
         .build()
         .create(ServiceApi.class);
@@ -132,7 +132,7 @@ final class TripKitImpl extends TripKit {
           /* This base url is ignored as the api relies on @Url. */
           .baseUrl(HttpUrl.parse("https://tripgo.skedgo.com/satapp/"))
           .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
-          .addConverterFactory(GsonConverterFactory.create(Gsons.createForLowercaseEnum()))
+          .addConverterFactory(GsonConverterFactory.create(GsonProvider.get()))
           .client(getOkHttpClient3())
           .build()
           .create(TripUpdateApi.class);
@@ -218,7 +218,7 @@ final class TripKitImpl extends TripKit {
         return new RestAdapter.Builder()
             .setLogLevel(configs.debuggable() ? FULL : NONE)
             .setEndpoint(endpoint)
-            .setConverter(new GsonConverter(Gsons.createForLowercaseEnum()))
+            .setConverter(new GsonConverter(GsonProvider.get()))
             .setClient(new OkClient(getOkHttpClient()))
             .build()
             .create(ReportingApi.class);
@@ -232,7 +232,7 @@ final class TripKitImpl extends TripKit {
         return new RestAdapter.Builder()
             .setLogLevel(configs.debuggable() ? FULL : NONE)
             .setEndpoint(endpoint)
-            .setConverter(new GsonConverter(Gsons.createForLowercaseEnum()))
+            .setConverter(new GsonConverter(GsonProvider.get()))
             .setClient(new OkClient(getOkHttpClient()))
             .build()
             .create(RoutingApi.class);
@@ -246,7 +246,7 @@ final class TripKitImpl extends TripKit {
         return new RestAdapter.Builder()
             .setLogLevel(configs.debuggable() ? FULL : NONE)
             .setEndpoint(endpoint)
-            .setConverter(new GsonConverter(Gsons.createForLowercaseEnum()))
+            .setConverter(new GsonConverter(GsonProvider.get()))
             .setClient(new OkClient(getOkHttpClient()))
             .build()
             .create(RegionInfoApi.class);

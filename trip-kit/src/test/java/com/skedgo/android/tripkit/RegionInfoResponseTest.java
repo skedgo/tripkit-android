@@ -1,6 +1,5 @@
 package com.skedgo.android.tripkit;
 
-import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 
 import org.junit.Test;
@@ -19,7 +18,7 @@ public class RegionInfoResponseTest {
     final RegionInfoResponse response = ImmutableRegionInfoResponse.builder()
         .regions(new ArrayList<RegionInfo>())
         .build();
-    final JsonObject json = new Gson().toJsonTree(response).getAsJsonObject();
+    final JsonObject json = GsonProvider.get().toJsonTree(response).getAsJsonObject();
     assertThat(json.has("regions")).isTrue();
   }
 }

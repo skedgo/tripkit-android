@@ -1,6 +1,5 @@
 package com.skedgo.android.tripkit;
 
-import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import com.skedgo.android.common.model.ModeInfo;
 
@@ -21,7 +20,7 @@ public class RegionInfoTest {
         .paratransit(new Paratransit())
         .transitModes(Arrays.asList(new ModeInfo(), new ModeInfo()))
         .build();
-    final JsonObject json = new Gson().toJsonTree(regionInfo).getAsJsonObject();
+    final JsonObject json = GsonProvider.get().toJsonTree(regionInfo).getAsJsonObject();
     assertThat(json.has("paratransit")).isTrue();
     assertThat(json.has("transitModes")).isTrue();
   }
