@@ -43,14 +43,14 @@ public class InterAppCommunicatorImplTest {
   }
 
   @Test
-  public void testReturnIntentToLaunchFlytwaysAppOrSite() throws PackageManager.NameNotFoundException {
+  public void testReturnIntentToLaunchFlitWaysAppOrSite() throws PackageManager.NameNotFoundException {
 
     String flitWaysPartnerKey = "key";
     String pick = "pick";
     String destination = "destination";
     String date = "date";
 
-    final Intent intent = new InterAppCommunicatorImpl().getFlytwaysIntent(flitWaysPartnerKey, pick, destination, date);
+    final Intent intent = new InterAppCommunicatorImpl().getFlitWaysIntent(flitWaysPartnerKey, pick, destination, date);
     assertThat(intent).isNotNull();
     assertThat(intent.getAction()).isEqualTo(Intent.ACTION_VIEW);
     assertThat(intent.getData()).isEqualTo(Uri.parse("https://flitways.com/api/link?partner_key=" + flitWaysPartnerKey + "&pick=" + pick + "&destination=" + destination + "&trip_date=" + date));

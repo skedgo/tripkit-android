@@ -32,7 +32,7 @@ public class InterAppCommunicatorImpl implements InterAppCommunicator {
   }
 
   @NonNull
-  public Intent getFlytwaysIntent(@NonNull String flitWaysPartnerKey, @NonNull String pick, @NonNull String destination, @NonNull String date) {
+  public Intent getFlitWaysIntent(@NonNull String flitWaysPartnerKey, @NonNull String pick, @NonNull String destination, @NonNull String date) {
 
     String fkytwaysLink = "https://flitways.com/api/link?partner_key=" + flitWaysPartnerKey + "&pick=" + pick + "&destination=" + destination + "&trip_date=" + date;
 

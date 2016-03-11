@@ -13,7 +13,7 @@ public interface InterAppCommunicator {
   String KEY_FIRST_SCREEN = "firstScreen";
 
   @NonNull Intent getLyftIntent(@Nullable String publisherId, PackageManager packageManager);
-  @NonNull Intent getFlytwaysIntent(@NonNull String flitWaysPartnerKey, @NonNull String pick, @NonNull String destination, @NonNull String date);
+  @NonNull Intent getFlitWaysIntent(@NonNull String flitWaysPartnerKey, @NonNull String pick, @NonNull String destination, @NonNull String date);
   @NonNull Intent getUberIntent(@Nullable PackageManager packageManager);
   @NonNull Intent getSupportBookingIntent(String url);
   @NonNull Intent getURLIntent(String url);
