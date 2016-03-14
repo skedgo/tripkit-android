@@ -1,14 +1,14 @@
 package com.skedgo.android.tripkit;
 
-import android.content.Intent;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
-import android.net.Uri;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.robolectric.RobolectricGradleTestRunner;
 import org.robolectric.annotation.Config;
+
+import rx.functions.Action1;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.mock;
@@ -25,35 +25,36 @@ public class InterAppCommunicatorImplTest {
     when(packageManager.getApplicationInfo("com.ubercab", PackageManager.GET_ACTIVITIES))
         .thenReturn(new ApplicationInfo());
 
-    final Intent intent = new InterAppCommunicatorImpl().getUberIntent(packageManager);
-    assertThat(intent).isNotNull();
-    assertThat(intent.getAction()).isEqualTo(Intent.ACTION_VIEW);
-    assertThat(intent.getData()).isEqualTo(Uri.parse("uber://"));
+    new InterAppCommunicatorImpl().
+        performExternalAction("uber", new Action1<String>() {
+          @Override public void call(String link) {
+            assertThat(link).isNotNull();
+            assertThat(link).isEqualTo("uber://");
+          }
+        }, new Action1<String>() {
+          @Override public void call(String s) {
+            assertThat(false);
+          }
+        }, packageManager);
+
   }
 
   @Test
-  public void testReturnIntentToLaunchSupportedBookingApi() {
-    String link = ("http://BARYOGENESIS.SKEDGO.COM/satapp/booking/1f6bc155-7e8a-4edf-bb0c-7925d1ed5d40/info");
+  public void testReturnIntentToLaunchFlytwaysAppOrSite() throws PackageManager.NameNotFoundException {
 
-    final Intent intent = new InterAppCommunicatorImpl().getSupportBookingIntent(link);
-    assertThat(intent).isNotNull();
-    assertThat(intent.getAction()).isEqualTo(InterAppCommunicator.ACTION_BOOK);
-    assertThat(intent.getStringExtra(InterAppCommunicator.KEY_URL))
-        .isEqualTo(link);
-  }
+    final PackageManager packageManager = mock(PackageManager.class);
+    new InterAppCommunicatorImpl().
+        performExternalAction("flitways", new Action1<String>() {
+          @Override public void call(String s) {
+            assertThat(false);
+          }
+        }, new Action1<String>() {
+          @Override public void call(String link) {
 
-  @Test
-  public void testReturnIntentToLaunchFlitWaysAppOrSite() throws PackageManager.NameNotFoundException {
-
-    String flitWaysPartnerKey = "key";
-    String pick = "pick";
-    String destination = "destination";
-    String date = "date";
-
-    final Intent intent = new InterAppCommunicatorImpl().getFlitWaysIntent(flitWaysPartnerKey, pick, destination, date);
-    assertThat(intent).isNotNull();
-    assertThat(intent.getAction()).isEqualTo(Intent.ACTION_VIEW);
-    assertThat(intent.getData()).isEqualTo(Uri.parse("https://flitways.com/api/link?partner_key=" + flitWaysPartnerKey + "&pick=" + pick + "&destination=" + destination + "&trip_date=" + date));
+            // this link should be handled by the client
+            assertThat(link).isNull();
+          }
+        }, packageManager);
   }
 
   @Test
@@ -63,21 +64,37 @@ public class InterAppCommunicatorImplTest {
     when(packageManager.getApplicationInfo("me.lyft.android", PackageManager.GET_ACTIVITIES))
         .thenReturn(new ApplicationInfo());
 
-    final Intent intent = new InterAppCommunicatorImpl().getLyftIntent("publisher id", packageManager);
-    assertThat(intent).isNotNull();
-    assertThat(intent.getAction()).isEqualTo(Intent.ACTION_VIEW);
-    assertThat(intent.getData()).isEqualTo(Uri.parse("lyft://"));
+    new InterAppCommunicatorImpl().
+        performExternalAction("lyft", new Action1<String>() {
+          @Override public void call(String link) {
+            assertThat(link).isNotNull();
+            assertThat(link).isEqualTo("lyft://");
+          }
+        }, new Action1<String>() {
+          @Override public void call(String s) {
+            assertThat(false);
+          }
+        }, packageManager);
   }
 
   @Test
   public void testReturnIntentToLaunchAnySite() throws PackageManager.NameNotFoundException {
 
-    String link = "www.google.com";
+    final String googleUrl = "http://www.google.com";
 
-    final Intent intent = new InterAppCommunicatorImpl().getURLIntent(link);
-    assertThat(intent).isNotNull();
-    assertThat(intent.getAction()).isEqualTo(Intent.ACTION_VIEW);
-    assertThat(intent.getData()).isEqualTo(Uri.parse(link));
+    final PackageManager packageManager = mock(PackageManager.class);
+    new InterAppCommunicatorImpl().
+        performExternalAction(googleUrl, new Action1<String>() {
+          @Override public void call(String s) {
+            assertThat(false);
+          }
+        }, new Action1<String>() {
+          @Override public void call(String link) {
+
+            // this link should be handled by the client
+            assertThat(link).isEqualTo(googleUrl);
+          }
+        }, packageManager);
   }
 
 }
