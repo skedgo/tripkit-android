@@ -1,13 +1,13 @@
 package com.skedgo.android.tripkit;
 
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.content.res.Resources;
+import android.net.Uri;
 import android.support.annotation.NonNull;
 
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
-
-import rx.functions.Action1;
 
 public class InterAppCommunicatorImpl implements InterAppCommunicator {
   private static final String UBER_PACKAGE = "com.ubercab";
@@ -21,31 +21,34 @@ public class InterAppCommunicatorImpl implements InterAppCommunicator {
   @Override public void performExternalAction(
       @NonNull InterAppCommunicatorParams params) {
 
-    // Check if the external app is installed
+    Intent playStoreIntent = new Intent(Intent.ACTION_VIEW);
+    playStoreIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 
-    boolean isAppInstalled = false;
-    String packageId = null;
-    String urlLink = null;
+    Intent webIntent = new Intent(Intent.ACTION_VIEW);
 
     if (params.action().equals("uber")) {
-      isAppInstalled = deviceHasUber();
-      packageId = "uber://";
-      urlLink = "https://m.uber.com/sign-up";
+      if (deviceHasUber()) {
+        playStoreIntent.setData(Uri.parse("uber://"));
+        params.openApp().call(UBER, playStoreIntent);
+      } else {
+        webIntent.setData(Uri.parse("https://m.uber.com/sign-up"));
+        params.openWeb().call(UBER, webIntent);
+      }
     } else if (params.action().startsWith("lyft")) {
       // Also 'lyft_line', etc.
-      isAppInstalled = deviceHasLyft();
-      packageId = "lyft://";
-      urlLink = "https://play.google.com/store/apps/details?id=" + LYFT_PACKAGE;
+      if (deviceHasLyft()) {
+        playStoreIntent.setData(Uri.parse("lyft://"));
+        params.openApp().call(LYFT, playStoreIntent);
+      } else {
+        webIntent.setData(Uri.parse("https://play.google.com/store/apps/details?id=" + LYFT_PACKAGE));
+        params.openWeb().call(LYFT, webIntent);
+      }
     } else if (params.action().equals("flitways")) {
-      // web action handled will do the job
+      webIntent.setData(Uri.parse("https://flitways.com"));
+      params.openWeb().call(FLITWAYS, webIntent);
     } else if (params.action().startsWith("http")) {
-      urlLink = params.action();
-    }
-
-    if (isAppInstalled) {
-      params.openApp().call(packageId);
-    } else {
-      params.openWeb().call(urlLink);
+      webIntent.setData(Uri.parse(params.action()));
+      params.openWeb().call(WEB, webIntent);
     }
 
   }

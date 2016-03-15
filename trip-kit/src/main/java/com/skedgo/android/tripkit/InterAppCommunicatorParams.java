@@ -1,8 +1,10 @@
 package com.skedgo.android.tripkit;
 
+import android.content.Intent;
+
 import org.immutables.value.Value;
 
-import rx.functions.Action1;
+import rx.functions.Action2;
 
 import static org.immutables.value.Value.Style.BuilderVisibility.PACKAGE;
 import static org.immutables.value.Value.Style.ImplementationVisibility.PRIVATE;
@@ -16,13 +18,13 @@ public abstract class InterAppCommunicatorParams {
   }
 
   public abstract String action();
-  public abstract Action1<String> openApp();
-  public abstract Action1<String> openWeb();
+  public abstract Action2<Integer, Intent> openApp();
+  public abstract Action2<Integer, Intent> openWeb();
 
   public interface Builder {
     Builder action(String action);
-    Builder openApp(Action1<String> openApp);
-    Builder openWeb(Action1<String> openWeb);
+    Builder openApp(Action2<Integer, Intent> openApp);
+    Builder openWeb(Action2<Integer, Intent> openWeb);
 
     InterAppCommunicatorParams build();
   }
