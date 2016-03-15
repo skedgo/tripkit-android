@@ -6,8 +6,15 @@ import android.content.res.Resources;
 import android.net.Uri;
 import android.support.annotation.NonNull;
 
+import com.skedgo.android.common.model.Location;
+
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
+import java.net.URLEncoder;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Locale;
+import java.util.TimeZone;
 
 public class InterAppCommunicatorImpl implements InterAppCommunicator {
   private static final String UBER_PACKAGE = "com.ubercab";
@@ -44,7 +51,8 @@ public class InterAppCommunicatorImpl implements InterAppCommunicator {
         params.openWeb().call(LYFT, webIntent);
       }
     } else if (params.action().equals("flitways")) {
-      webIntent.setData(Uri.parse("https://flitways.com"));
+      String link = resolveFlitWaysURL(params);
+      webIntent.setData(Uri.parse(link));
       params.openWeb().call(FLITWAYS, webIntent);
     } else if (params.action().startsWith("http")) {
       webIntent.setData(Uri.parse(params.action()));
@@ -101,6 +109,58 @@ public class InterAppCommunicatorImpl implements InterAppCommunicator {
     }
 
     // TODO: handle "ingogo"
+  }
+
+  private String resolveFlitWaysURL(InterAppCommunicatorParams params) {
+
+    String urlString;
+
+    // TODO
+    String flitwaysPartnerkey = null;
+
+    if (flitwaysPartnerkey != null) {
+      // https://flitways.com/api/link?partner_key=PARTNER_KEY&pick=PICKUP_ADDRESS&destination=DESTINATION_ADDRESS&trip_date=PICKUP_DATETIME
+      // Partner Key – Required
+      // Pick Up Address – Optional
+      // Destination – Optional
+      // Pickup DateTime – Optional
+
+      urlString = "https://flitways.com/api/link?partner_key=" + flitwaysPartnerkey;
+
+      if (params.tripSegment() != null) {
+        Location pickLocation = params.tripSegment().getFrom();
+        Location dropOffLocation = params.tripSegment().getTo();
+
+        // TODO test: is address always present or reverse geocoding may be needed?
+        if (pickLocation != null) {
+          urlString += "&pick=" + pickLocation.getAddress();
+        }
+
+        if (dropOffLocation != null) {
+          urlString += "&destination=" + dropOffLocation.getAddress();
+        }
+
+        long startTime = params.tripSegment().getStartTimeInSecs();
+
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/YYYY hh:mm a", Locale.US);
+        dateFormat.setTimeZone(TimeZone.getTimeZone(params.tripSegment().getTimeZone()));
+
+        String time = dateFormat.format(new Date(startTime * 1000));
+
+        try {
+          String encoded = URLEncoder.encode(time, "utf-8");
+          urlString += "&trip_date=" + encoded;
+
+        } catch (UnsupportedEncodingException e) {
+          e.printStackTrace();
+        }
+      }
+
+    } else {
+      urlString = "https://flitways.com";
+    }
+
+    return urlString;
   }
 
   private boolean isPackageInstalled(String packageId) {
