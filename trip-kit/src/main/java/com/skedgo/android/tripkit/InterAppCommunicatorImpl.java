@@ -15,9 +15,7 @@ public class InterAppCommunicatorImpl implements InterAppCommunicator {
   }
 
   @Override public void performExternalAction(
-      @NonNull String action,
-      @NonNull Action1<String> openApp,
-      @NonNull Action1<String> openWeb) {
+      @NonNull InterAppCommunicatorParams params) {
 
     // Check if the external app is installed
 
@@ -25,25 +23,25 @@ public class InterAppCommunicatorImpl implements InterAppCommunicator {
     String packageId = null;
     String urlLink = null;
 
-    if (action.equals("uber")) {
+    if (params.action().equals("uber")) {
       isAppInstalled = isPackageInstalled(packageManager, UBER_PACKAGE);
       packageId = "uber://";
       urlLink = "https://m.uber.com/sign-up";
-    } else if (action.startsWith("lyft")) {
+    } else if (params.action().startsWith("lyft")) {
       // Also 'lyft_line', etc.
       isAppInstalled = isPackageInstalled(packageManager, LYFT_PACKAGE);
       packageId = "lyft://";
       urlLink = "https://play.google.com/store/apps/details?id=" + LYFT_PACKAGE;
-    } else if (action.equals("flitways")) {
+    } else if (params.action().equals("flitways")) {
       // web action handled will do the job
-    } else if (action.startsWith("http")) {
-      urlLink = action;
+    } else if (params.action().startsWith("http")) {
+      urlLink = params.action();
     }
 
     if (isAppInstalled) {
-      openApp.call(packageId);
+      params.openApp().call(packageId);
     } else {
-      openWeb.call(urlLink);
+      params.openWeb().call(urlLink);
     }
 
   }
