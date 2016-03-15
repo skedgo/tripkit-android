@@ -1,0 +1,112 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<resources>
+	<!-- Format for a service's real-time indicator for a service which is early, e.g., '1 min early. This means #1 is replaced with something like '1 min'. -->
+	<string name="_pattern_early">%1$s früh</string>
+	<!-- Format for a service's real-time indicator for a service which is early, e.g., '1 min early (1:10 pm service). This means #1 is replaced with something like '1 min' and #2 is replaced with the original time, e.g., '1:10 pm'). -->
+	<string name="_pattern_early__start_parent_pattern_service_end_parent">%1$s früh (%2$s Service)</string>
+	<!-- Format for a service's real-time indicator for a service which is late, e.g., '1 min late. This means #1 is replaced with something like '1 min' -->
+	<string name="_pattern_late">%1$s spät</string>
+	<!-- Format for a service's real-time indicator for a service which is late, e.g., '1 min late (1:10 pm service). This means #1 is replaced with something like '1 min' and #2 is replaced with the original time, e.g., '1:10 pm'). -->
+	<string name="_pattern_late__start_parent_pattern_service_end_parent">%1$s spät (%2$s Service)</string>
+	<!-- Duration without traffic -->
+	<string name="_pattern_w_slasho_traffic">%1$s ohne Verkehr</string>
+	<!-- No comment provided by engineer. -->
+	<string name="_1_stop">1 Stop</string>
+	<!-- Indication of an activity -->
+	<string name="activityindication">Ich nehme den %1$s um %2$s von %3$s.</string>
+	<!-- apple maps directions action -->
+	<string name="apple_maps">Apple Karten</string>
+	<!-- Arrival time sorter title -->
+	<string name="arrival">Ankunft</string>
+	<!-- The place of arrival -->
+	<string name="arrivallocation">Ankunft bei %1$s</string>
+	<!-- The place of arrival with time -->
+	<string name="arrivallocationtime">Ankunft bei %1$s um %2$s</string>
+	<!-- Arrival %time.
+   Time arrival -->
+	<string name="arrivaltime">Ankunft um %1$s</string>
+	<!-- Prefix for selected 'arrive by' time
+   Single line instruction to arrive -->
+	<string name="arrive">Ankunft</string>
+	<!-- No comment provided by engineer. -->
+	<string name="call">Anrufen</string>
+	<!-- Action title for calling provider of %name -->
+	<string name="calltaxiformat">%1$s anrufen</string>
+	<!-- Error title when server could not find a given transit stop. -->
+	<string name="could_not_find_transit_stop_dot">Haltestelle konnte nicht gefunden werden.</string>
+	<!-- Description for how to redeem the coupon code for ingogo. %couponCode is provided. -->
+	<string name="couponcodeingogoformat">Gib Gutscheincode \'%1$s\' bei der Anmeldung ein um dein $5 Guthaben zu bekommen (nur für neue Anmeldungen).</string>
+	<!-- Departure time sorter title -->
+	<string name="departure">Abfahrt</string>
+	<!-- Time of the bus departure -->
+	<string name="departuretime">" um %1$s"</string>
+	<!-- Destination of the bus -->
+	<string name="direction">Richtung: %1$s</string>
+	<!-- Walking time -->
+	<string name="duration">" für %1$s"</string>
+	<!-- Action button title for getting turn-by-turn directions -->
+	<string name="get_directions">Navigieren</string>
+	<!-- No comment provided by engineer. -->
+	<string name="get_ingogo">ingogo herunterladen</string>
+	<!-- No comment provided by engineer. -->
+	<string name="get_lyft">Lyft herunterladen</string>
+	<!-- No comment provided by engineer. -->
+	<string name="get_sidecar">Sidecar herunterladen</string>
+	<!-- No comment provided by engineer. -->
+	<string name="get_uber">Uber herunterladen</string>
+	<!-- goCatch action -->
+	<string name="gocatch_a_taxi">goCatch nehmen</string>
+	<!-- google maps directions action -->
+	<string name="google_maps">Google Maps</string>
+	<!-- No comment provided by engineer. -->
+	<string name="ingogo_a_taxi">ingogo nehmen</string>
+	<!-- Prefix for selected 'leave after' time
+   Single line instruction to leave -->
+	<string name="leave">Abfahrt</string>
+	<!-- No comment provided by engineer. -->
+	<string name="leave_now">Jetzt</string>
+	<!-- The place of departure -->
+	<string name="leavelocation">Abfahrt von %1$s</string>
+	<!-- The place of departure with time -->
+	<string name="leavelocationtime">Abfahrt von %1$s um %2$s</string>
+	<!-- Time departure -->
+	<string name="leavetime">Abfahrt um %1$s</string>
+	<!-- No comment provided by engineer. -->
+	<string name="live_traffic">Live-Verkehr</string>
+	<!-- ArrivalTime -->
+	<string name="messagearrivaltime">Ich komme bei %1$s um %2$s an.</string>
+	<!-- Indicator to show when a service is on time according to real-time data. -->
+	<string name="on_time">Pünktlich</string>
+	<!-- No comment provided by engineer. -->
+	<string name="open_lyft">Lyft öffnen</string>
+	<!-- No comment provided by engineer. -->
+	<string name="open_sidecar">Sidecar öffnen</string>
+	<!-- No comment provided by engineer. -->
+	<string name="open_uber">Uber öffnen</string>
+	<!-- Arrival Location -->
+	<string name="primarylocationend">Nach %1$s</string>
+	<!-- Departure Location -->
+	<string name="primarylocationstart">Von %1$s</string>
+	<!-- Favorite trip 'to' title -->
+	<string name="to">Nach</string>
+	<!-- 'At %location' indicator for parts of a trip that happen at a single location, e.g., waiting at a platform, parking at a car park -->
+	<string name="primarylocationstationary">Bei %1$s</string>
+	<!-- No comment provided by engineer. -->
+	<string name="real_minustime">Echtzeit</string>
+	<!-- Error recovery suggestion for when when server could not find a given transit stop. -->
+	<string name="search_for_this_stop_again_or_try_again_later_dot_dot">Bitte suche erneut nach dieser Haltestelle oder versuche es später nochmal.</string>
+	<!-- Show website action -->
+	<string name="show_website">Webseite öffnen</string>
+	<!-- Number of stops before you get off a vehicle -->
+	<string name="stops">%1$s Stops</string>
+	<!-- From %time1 to %time2 -->
+	<string name="timefromtoshortformat">%1$s bis %2$s</string>
+	<!-- No comment provided by engineer. -->
+	<string name="trip">Trip</string>
+	<!-- Vehicle 'x' updated -->
+	<string name="vehiclecalledupdated">Fahrzeug %1$s, aktualisiert vor %2$s</string>
+	<!-- Vehicle updated -->
+	<string name="vehicleupdated">Aktualisiert vor %1$s</string>
+
+</resources>
+<!-- This is an auto generated file (Tue Mar 15 11:52:36 ART 2016) -->
