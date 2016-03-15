@@ -92,7 +92,7 @@ final class TripKitImpl extends TripKit {
     return reporter;
   }
 
-  @Override public InterAppCommunicator getInterAppCommunicator() {
+  @Override public synchronized InterAppCommunicator getInterAppCommunicator() {
     if (interAppCommunicator == null) {
       interAppCommunicator = new InterAppCommunicatorImpl();
     }
