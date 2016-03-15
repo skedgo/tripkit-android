@@ -8,14 +8,18 @@ import com.skedgo.android.common.model.TripSegment;
 import rx.functions.Action1;
 
 public class InterAppCommunicatorImpl implements InterAppCommunicator {
-
   private static final String UBER_PACKAGE = "com.ubercab";
   private static final String LYFT_PACKAGE = "me.lyft.android";
+  private final PackageManager packageManager;
 
+  public InterAppCommunicatorImpl(@NonNull PackageManager packageManager) {
+    this.packageManager = packageManager;
+  }
 
-  @Override public void performExternalAction(@NonNull String action,
-                                              @NonNull Action1<String> openApp, @NonNull Action1<String> openWeb,
-                                              PackageManager packageManager) {
+  @Override public void performExternalAction(
+      @NonNull String action,
+      @NonNull Action1<String> openApp,
+      @NonNull Action1<String> openWeb) {
 
     // Check if the external app is installed
 

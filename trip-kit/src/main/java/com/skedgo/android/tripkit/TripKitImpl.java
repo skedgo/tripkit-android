@@ -1,13 +1,10 @@
 package com.skedgo.android.tripkit;
 
 import android.content.Context;
-import android.content.Intent;
-import android.content.pm.PackageManager;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.util.Log;
 
-import com.skedgo.android.common.model.Booking;
 import com.skedgo.android.common.model.Query;
 import com.skedgo.android.common.model.Region;
 import com.skedgo.android.common.model.TransportMode;
@@ -94,7 +91,7 @@ final class TripKitImpl extends TripKit {
 
   @Override public synchronized InterAppCommunicator getInterAppCommunicator() {
     if (interAppCommunicator == null) {
-      interAppCommunicator = new InterAppCommunicatorImpl();
+      interAppCommunicator = new InterAppCommunicatorImpl(context.getPackageManager());
     }
 
     return interAppCommunicator;
