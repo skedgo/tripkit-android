@@ -3,8 +3,6 @@ package com.skedgo.android.tripkit;
 import android.content.pm.PackageManager;
 import android.support.annotation.NonNull;
 
-import com.skedgo.android.common.model.TripSegment;
-
 import rx.functions.Action1;
 
 public class InterAppCommunicatorImpl implements InterAppCommunicator {
@@ -27,15 +25,16 @@ public class InterAppCommunicatorImpl implements InterAppCommunicator {
     String packageId = null;
     String urlLink = null;
 
-    if (action.equals(TripSegment.UBER)) {
+    if (action.equals("uber")) {
       isAppInstalled = isPackageInstalled(packageManager, UBER_PACKAGE);
       packageId = "uber://";
       urlLink = "https://m.uber.com/sign-up";
-    } else if (action.startsWith(TripSegment.LYFT)) { // also lyft_line, etc.
+    } else if (action.startsWith("lyft")) {
+      // Also 'lyft_line', etc.
       isAppInstalled = isPackageInstalled(packageManager, LYFT_PACKAGE);
       packageId = "lyft://";
       urlLink = "https://play.google.com/store/apps/details?id=" + LYFT_PACKAGE;
-    } else if (action.equals(TripSegment.FLITWAYS)) {
+    } else if (action.equals("flitways")) {
       // web action handled will do the job
     } else if (action.startsWith("http")) {
       urlLink = action;
