@@ -9,9 +9,19 @@ import org.immutables.value.Value;
 
 import java.util.List;
 
+import static org.immutables.value.Value.Style.BuilderVisibility.PACKAGE;
+
 @Gson.TypeAdapters
 @Value.Immutable
-interface RegionInfo {
-  @Nullable List<ModeInfo> transitModes();
-  @Nullable Paratransit paratransit();
+@Value.Style(
+    visibility = Value.Style.ImplementationVisibility.PACKAGE,
+    builderVisibility = PACKAGE
+)
+public abstract class RegionInfo {
+  @Nullable public abstract List<ModeInfo> transitModes();
+  @Nullable public abstract Paratransit paratransit();
+
+  @Value.Default public boolean supportsConcessionPricing() {
+    return false;
+  }
 }
