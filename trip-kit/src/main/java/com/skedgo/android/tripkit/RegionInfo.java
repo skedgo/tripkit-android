@@ -9,9 +9,15 @@ import org.immutables.value.Value;
 
 import java.util.List;
 
+import static org.immutables.value.Value.Style.BuilderVisibility.PACKAGE;
+
 @Gson.TypeAdapters
 @Value.Immutable
-abstract class RegionInfo {
+@Value.Style(
+    visibility = Value.Style.ImplementationVisibility.PACKAGE,
+    builderVisibility = PACKAGE
+)
+public abstract class RegionInfo {
   @Nullable public abstract List<ModeInfo> transitModes();
   @Nullable public abstract Paratransit paratransit();
 

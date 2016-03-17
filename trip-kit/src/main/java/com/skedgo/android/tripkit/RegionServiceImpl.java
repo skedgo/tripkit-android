@@ -139,8 +139,7 @@ final class RegionServiceImpl implements RegionService {
           @Override public Paratransit call(RegionInfo regionInfo) {
             return regionInfo.paratransit();
           }
-        })
-        .subscribeOn(Schedulers.io());
+        });
   }
 
   @Override
@@ -160,7 +159,8 @@ final class RegionServiceImpl implements RegionService {
           @Override public RegionInfo call(RegionInfoResponse response) {
             return response.regions().get(0);
           }
-        });
+        })
+        .subscribeOn(Schedulers.io());
   }
 
   @Override
