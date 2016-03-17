@@ -17,11 +17,13 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class RegionInfoTest {
   @Test public void jsonProperties() {
     final RegionInfo regionInfo = ImmutableRegionInfo.builder()
+        .supportsConcessionPricing(true)
         .paratransit(new Paratransit())
         .transitModes(Arrays.asList(new ModeInfo(), new ModeInfo()))
         .build();
     final JsonObject json = GsonProvider.get().toJsonTree(regionInfo).getAsJsonObject();
     assertThat(json.has("paratransit")).isTrue();
     assertThat(json.has("transitModes")).isTrue();
+    assertThat(json.has("supportsConcessionPricing")).isTrue();
   }
 }
