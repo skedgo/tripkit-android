@@ -22,7 +22,9 @@ public interface RegionService {
   Observable<List<TransportMode>> getTransportModesByIdsAsync(@NonNull List<String> modeIds);
   Observable<List<TransportMode>> getTransportModesByRegionAsync(@NonNull Region region);
   Observable<List<TransportMode>> getTransportModesByLocationAsync(@NonNull Location location);
-  Observable<Paratransit> fetchParatransitByRegionAsync(@NonNull Region region);
   Observable<Void> refreshAsync();
-  Observable<List<ModeInfo>> getTransitModesByRegionAsync(Region region);
+
+  Observable<RegionInfo> getRegionInfoByRegionAsync(@NonNull Region region);
+  Observable<Paratransit> fetchParatransitByRegionAsync(@NonNull Region region);
+  Observable<List<ModeInfo>> getTransitModesByRegionAsync(@NonNull Region region);
 }

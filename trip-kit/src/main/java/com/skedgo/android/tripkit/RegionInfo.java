@@ -11,7 +11,11 @@ import java.util.List;
 
 @Gson.TypeAdapters
 @Value.Immutable
-interface RegionInfo {
-  @Nullable List<ModeInfo> transitModes();
-  @Nullable Paratransit paratransit();
+abstract class RegionInfo {
+  @Nullable public abstract List<ModeInfo> transitModes();
+  @Nullable public abstract Paratransit paratransit();
+
+  @Value.Default public boolean supportsConcessionPricing() {
+    return false;
+  }
 }

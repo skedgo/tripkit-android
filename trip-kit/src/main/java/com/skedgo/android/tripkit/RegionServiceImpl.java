@@ -8,8 +8,6 @@ import com.skedgo.android.common.model.ModeInfo;
 import com.skedgo.android.common.model.Region;
 import com.skedgo.android.common.model.TransportMode;
 
-import org.apache.commons.collections4.CollectionUtils;
-
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
@@ -20,6 +18,8 @@ import rx.Subscriber;
 import rx.functions.Action0;
 import rx.functions.Func1;
 import rx.schedulers.Schedulers;
+
+import static org.apache.commons.collections4.CollectionUtils.isNotEmpty;
 
 final class RegionServiceImpl implements RegionService {
   private final Cache<List<Region>> regionCache;
@@ -122,31 +122,6 @@ final class RegionServiceImpl implements RegionService {
         });
   }
 
-  @Override public Observable<Paratransit> fetchParatransitByRegionAsync(@NonNull final Region region) {
-    return Observable.from(region.getURLs())
-        .concatMap(new Func1<String, Observable<RegionInfoResponse>>() {
-          @Override public Observable<RegionInfoResponse> call(final String baseUrl) {
-            return fetchRegionInfoPerUrl(baseUrl, region);
-          }
-        })
-        .first(new Func1<RegionInfoResponse, Boolean>() {
-          @Override public Boolean call(RegionInfoResponse response) {
-            return CollectionUtils.isNotEmpty(response.regions());
-          }
-        })
-        .flatMap(new Func1<RegionInfoResponse, Observable<RegionInfo>>() {
-          @Override public Observable<RegionInfo> call(RegionInfoResponse response) {
-            return Observable.from(response.regions()).first();
-          }
-        })
-        .map(new Func1<RegionInfo, Paratransit>() {
-          @Override public Paratransit call(RegionInfo regionInfo) {
-            return regionInfo.paratransit();
-          }
-        })
-        .subscribeOn(Schedulers.io());
-  }
-
   @Override public Observable<Void> refreshAsync() {
     return regionsFetcher.fetchAsync()
         .doOnCompleted(new Action0() {
@@ -157,19 +132,40 @@ final class RegionServiceImpl implements RegionService {
         });
   }
 
-  @Override public Observable<List<ModeInfo>> getTransitModesByRegionAsync(final Region region) {
+  @Override
+  public Observable<Paratransit> fetchParatransitByRegionAsync(@NonNull final Region region) {
+    return getRegionInfoByRegionAsync(region)
+        .map(new Func1<RegionInfo, Paratransit>() {
+          @Override public Paratransit call(RegionInfo regionInfo) {
+            return regionInfo.paratransit();
+          }
+        })
+        .subscribeOn(Schedulers.io());
+  }
+
+  @Override
+  public Observable<RegionInfo> getRegionInfoByRegionAsync(@NonNull final Region region) {
     return Observable.from(region.getURLs())
-        .first()
-        .concatMap(new Func1<String, Observable<? extends RegionInfoResponse>>() {
-          @Override public Observable<? extends RegionInfoResponse> call(String url) {
-            return fetchRegionInfoPerUrl(url, region);
+        .concatMap(new Func1<String, Observable<RegionInfoResponse>>() {
+          @Override public Observable<RegionInfoResponse> call(final String baseUrl) {
+            return fetchRegionInfoPerUrl(baseUrl, region);
           }
         })
-        .concatMap(new Func1<RegionInfoResponse, Observable<RegionInfo>>() {
-          @Override public Observable<RegionInfo> call(RegionInfoResponse response) {
-            return Observable.from(response.regions()).first();
+        .first(new Func1<RegionInfoResponse, Boolean>() {
+          @Override public Boolean call(RegionInfoResponse response) {
+            return isNotEmpty(response.regions());
           }
         })
+        .map(new Func1<RegionInfoResponse, RegionInfo>() {
+          @Override public RegionInfo call(RegionInfoResponse response) {
+            return response.regions().get(0);
+          }
+        });
+  }
+
+  @Override
+  public Observable<List<ModeInfo>> getTransitModesByRegionAsync(@NonNull final Region region) {
+    return getRegionInfoByRegionAsync(region)
         .map(new Func1<RegionInfo, List<ModeInfo>>() {
           @Override public List<ModeInfo> call(RegionInfo regionInfo) {
             return regionInfo.transitModes();
