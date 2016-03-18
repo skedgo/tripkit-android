@@ -43,7 +43,6 @@ final class TripKitImpl extends TripKit {
   private Reporter reporter; // Lazily initialized.
   private TripUpdater tripUpdater; // Lazily initialized.
   private InterAppCommunicator interAppCommunicator; // Lazily initialized.
-  private InterAppConfiguration interAppConfig; // Lazily initialized.
 
   TripKitImpl(@NonNull Configs configs) {
     this.configs = configs;
@@ -96,14 +95,6 @@ final class TripKitImpl extends TripKit {
     }
 
     return interAppCommunicator;
-  }
-
-  @Override public InterAppConfiguration getInterAppConfiguration() {
-    if (interAppConfig == null) {
-      interAppConfig = new InterAppConfigurationImpl();
-    }
-
-    return interAppConfig;
   }
 
   @Override
