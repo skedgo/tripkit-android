@@ -9,4 +9,5 @@ public interface InterAppCommunicator {
   int WEB = FLITWAYS + 1;
 
   Observable<BookingAction> performExternalActionAsync(InterAppCommunicatorParams params);
+  String getTitleForExternalAction(String externalAction);
 }

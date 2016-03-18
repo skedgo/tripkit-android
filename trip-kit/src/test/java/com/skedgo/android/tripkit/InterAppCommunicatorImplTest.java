@@ -47,8 +47,8 @@ public class InterAppCommunicatorImplTest {
   @Before public void before() {
     MockitoAnnotations.initMocks(this);
     interAppCommunicator = new InterAppCommunicatorImpl(
+        RuntimeEnvironment.application.getResources(),
         packageManager,
-        RuntimeEnvironment.application,
         reverseGeocoderFactory
     );
   }

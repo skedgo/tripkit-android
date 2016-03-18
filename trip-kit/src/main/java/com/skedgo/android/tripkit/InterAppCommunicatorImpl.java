@@ -1,6 +1,5 @@
 package com.skedgo.android.tripkit;
 
-import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.content.res.Resources;
@@ -27,12 +26,14 @@ import rx.schedulers.Schedulers;
 public final class InterAppCommunicatorImpl implements InterAppCommunicator {
   private static final String UBER_PACKAGE = "com.ubercab";
   private static final String LYFT_PACKAGE = "me.lyft.android";
+  private final Resources resources;
   private final PackageManager packageManager;
   private final Func1<ReverseGeocodingParams, Observable<String>> reverseGeocoderFactory;
 
   public InterAppCommunicatorImpl(
-      PackageManager packageManager, @NonNull Context context,
+      Resources resources, PackageManager packageManager,
       @NonNull Func1<ReverseGeocodingParams, Observable<String>> reverseGeocoderFactory) {
+    this.resources = resources;
     this.packageManager = packageManager;
     this.reverseGeocoderFactory = reverseGeocoderFactory;
   }
@@ -147,44 +148,38 @@ public final class InterAppCommunicatorImpl implements InterAppCommunicator {
     }
   }
 
-  public String titleForExternalAction(Resources resources, String action) {
-    if (action.equals("gocatch")) {
+  @Override public String getTitleForExternalAction(String externalAction) {
+    if (externalAction.equals("gocatch")) {
       return resources.getString(R.string.gocatch_a_taxi);
-    } else if (action.equals("uber")) {
+    } else if (externalAction.equals("uber")) {
       return isPackageInstalled(UBER_PACKAGE)
           ? resources.getString(R.string.open_uber)
           : resources.getString(R.string.get_uber);
-
-    } else if (action.startsWith("lyft")) { // also lyft_line, etc.
+    } else if (externalAction.startsWith("lyft")) {
+      // Also 'lyft_line', etc.
       return isPackageInstalled(LYFT_PACKAGE)
           ? resources.getString(R.string.open_lyft)
           : resources.getString(R.string.get_lyft);
-
-    } else if (action.equals("flitways")) {
-      return "Book with FlitWays"; // TODO: replace with string resource when available
-
-    } else if (action.startsWith("tel:")) {
-      if (action.contains("name=")) {
-        String name = action.substring(action.indexOf("name=") + "name=".length());
+    } else if (externalAction.equals("flitways")) {
+      return "Book with FlitWays"; // TODO: i18n.
+    } else if (externalAction.startsWith("tel:")) {
+      if (externalAction.contains("name=")) {
+        String name = externalAction.substring(externalAction.indexOf("name=") + "name=".length());
         try {
           name = URLDecoder.decode(name, "UTF-8");
         } catch (UnsupportedEncodingException e) {
-          e.printStackTrace();
         }
         return resources.getString(R.string.calltaxiformat, name);
       } else {
         return resources.getString(R.string.call);
       }
-
-    } else if (action.startsWith("sms:")) {
-      return "Send SMS"; // TODO: replace with string resource when available
-    } else if (action.startsWith("http:") || action.startsWith("https:")) {
+    } else if (externalAction.startsWith("sms:")) {
+      return "Send SMS"; // TODO: i18n.
+    } else if (externalAction.startsWith("http:") || externalAction.startsWith("https:")) {
       return resources.getString(R.string.show_website);
     } else {
-      return null;
+      return "";
     }
-
-    // TODO: handle "ingogo"
   }
 
   private boolean isPackageInstalled(String packageName) {
