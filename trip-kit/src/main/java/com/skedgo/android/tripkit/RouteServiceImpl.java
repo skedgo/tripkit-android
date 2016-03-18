@@ -113,6 +113,9 @@ final class RouteServiceImpl implements RouteService {
     if (query.isInterRegional()) {
       options.put("ir", "1");
     }
+    if (query.getTransportEmissions() != null) {
+      options.put("co2[" + query.getTransportEmissions().getModeIdentifier() + "]", query.getTransportEmissions().getGramsCO2PerKm());
+    }
 
     return options;
   }
