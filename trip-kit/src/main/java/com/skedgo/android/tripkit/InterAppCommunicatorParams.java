@@ -14,23 +14,20 @@ import static org.immutables.value.Value.Style.ImplementationVisibility.PRIVATE;
 @Value.Immutable
 @Value.Style(visibility = PRIVATE, builderVisibility = PACKAGE)
 public abstract class InterAppCommunicatorParams {
-
   public static Builder builder() {
     return new InterAppCommunicatorParamsBuilder();
   }
 
   public abstract String action();
+  public abstract TripSegment tripSegment();
   public abstract Action2<Integer, Intent> openApp();
   public abstract Action2<Integer, Intent> openWeb();
-  public abstract TripSegment tripSegment();
 
   public interface Builder {
     Builder action(String action);
+    Builder tripSegment(TripSegment tripSegment);
     Builder openApp(Action2<Integer, Intent> openApp);
     Builder openWeb(Action2<Integer, Intent> openWeb);
-    Builder tripSegment(TripSegment tripSegment);
-
     InterAppCommunicatorParams build();
   }
-
 }

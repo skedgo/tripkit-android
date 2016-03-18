@@ -1,40 +1,46 @@
 package com.skedgo.android.tripkit;
 
+import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.content.res.Resources;
 import android.net.Uri;
 import android.support.annotation.NonNull;
 
-import com.skedgo.android.common.model.Location;
-
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
-import java.net.URLEncoder;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
 import java.util.TimeZone;
 
+import okhttp3.HttpUrl;
+import rx.Observable;
+import rx.Subscriber;
+import rx.functions.Action1;
+import rx.functions.Func2;
+
 public class InterAppCommunicatorImpl implements InterAppCommunicator {
   private static final String UBER_PACKAGE = "com.ubercab";
   private static final String LYFT_PACKAGE = "me.lyft.android";
-  private final PackageManager packageManager;
+  private final Context context;
+  private final ReverseGeocoderHelper helper;
 
-  public InterAppCommunicatorImpl(@NonNull PackageManager packageManager) {
-    this.packageManager = packageManager;
+  public InterAppCommunicatorImpl(@NonNull Context context) {
+    this.context = context;
+    this.helper = new ReverseGeocoderHelper(context);
   }
 
   @Override public void performExternalAction(
-      @NonNull InterAppCommunicatorParams params) {
+      @NonNull final InterAppCommunicatorParams params) {
 
-    Intent playStoreIntent = new Intent(Intent.ACTION_VIEW);
+    final Intent playStoreIntent = new Intent(Intent.ACTION_VIEW);
     playStoreIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 
-    Intent webIntent = new Intent(Intent.ACTION_VIEW);
+    final Intent webIntent = new Intent(Intent.ACTION_VIEW);
 
     if (params.action().equals("uber")) {
-      if (deviceHasUber()) {
+      if (isPackageInstalled(UBER_PACKAGE)) {
         playStoreIntent.setData(Uri.parse("uber://"));
         params.openApp().call(UBER, playStoreIntent);
       } else {
@@ -43,7 +49,7 @@ public class InterAppCommunicatorImpl implements InterAppCommunicator {
       }
     } else if (params.action().startsWith("lyft")) {
       // Also 'lyft_line', etc.
-      if (deviceHasLyft()) {
+      if (isPackageInstalled(LYFT_PACKAGE)) {
         playStoreIntent.setData(Uri.parse("lyft://"));
         params.openApp().call(LYFT, playStoreIntent);
       } else {
@@ -51,9 +57,13 @@ public class InterAppCommunicatorImpl implements InterAppCommunicator {
         params.openWeb().call(LYFT, webIntent);
       }
     } else if (params.action().equals("flitways")) {
-      String link = resolveFlitWaysURL(params);
-      webIntent.setData(Uri.parse(link));
-      params.openWeb().call(FLITWAYS, webIntent);
+      resolveFlitWaysURL(params).subscribe(new Action1<String>() {
+        @Override public void call(String link) {
+          webIntent.setData(Uri.parse(link));
+          params.openWeb().call(FLITWAYS, webIntent);
+        }
+      });
+
     } else if (params.action().startsWith("http")) {
       webIntent.setData(Uri.parse(params.action()));
       params.openWeb().call(WEB, webIntent);
@@ -61,24 +71,16 @@ public class InterAppCommunicatorImpl implements InterAppCommunicator {
 
   }
 
-  public boolean deviceHasUber() {
-    return isPackageInstalled(UBER_PACKAGE);
-  }
-
-  public boolean deviceHasLyft() {
-    return isPackageInstalled(LYFT_PACKAGE);
-  }
-
   public String titleForExternalAction(Resources resources, String action) {
     if (action.equals("gocatch")) {
       return resources.getString(R.string.gocatch_a_taxi);
     } else if (action.equals("uber")) {
-      return deviceHasUber()
+      return isPackageInstalled(UBER_PACKAGE)
           ? resources.getString(R.string.open_uber)
           : resources.getString(R.string.get_uber);
 
     } else if (action.startsWith("lyft")) { // also lyft_line, etc.
-      return deviceHasLyft()
+      return isPackageInstalled(LYFT_PACKAGE)
           ? resources.getString(R.string.open_lyft)
           : resources.getString(R.string.get_lyft);
 
@@ -111,61 +113,68 @@ public class InterAppCommunicatorImpl implements InterAppCommunicator {
     // TODO: handle "ingogo"
   }
 
-  private String resolveFlitWaysURL(InterAppCommunicatorParams params) {
+  protected Observable<String> resolveFlitWaysURL(final InterAppCommunicatorParams params) {
+    return Observable.create(new Observable.OnSubscribe<String>() {
+      @Override public void call(final Subscriber<? super String> mainSubscriber) {
+        String urlString = null;
 
-    String urlString;
+        String flitwaysPartnerkey = TripKit.singleton().getInterAppConfiguration().getFlitwaysPartnerkey();
+        if (flitwaysPartnerkey != null) {
+          // https://flitways.com/api/link?partner_key=PARTNER_KEY&pick=PICKUP_ADDRESS&destination=DESTINATION_ADDRESS&trip_date=PICKUP_DATETIME
+          // Partner Key – Required
+          // Pick Up Address – Optional
+          // Destination – Optional
+          // Pickup DateTime – Optional
 
-    // TODO
-    String flitwaysPartnerkey = null;
+          final HttpUrl.Builder urlBuilder = new HttpUrl.Builder()
+              .scheme("https")
+              .host("flitways.com")
+              .addPathSegment("api")
+              .addPathSegment("link")
+              .addQueryParameter("partner_key", flitwaysPartnerkey);
+          if (params.tripSegment() != null) {
+            long startTime = params.tripSegment().getStartTimeInSecs();
 
-    if (flitwaysPartnerkey != null) {
-      // https://flitways.com/api/link?partner_key=PARTNER_KEY&pick=PICKUP_ADDRESS&destination=DESTINATION_ADDRESS&trip_date=PICKUP_DATETIME
-      // Partner Key – Required
-      // Pick Up Address – Optional
-      // Destination – Optional
-      // Pickup DateTime – Optional
+            SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy hh:mm a", Locale.US);
+            dateFormat.setTimeZone(TimeZone.getTimeZone(params.tripSegment().getTimeZone()));
 
-      urlString = "https://flitways.com/api/link?partner_key=" + flitwaysPartnerkey;
+            String time = dateFormat.format(new Date(startTime * 1000));
+            urlBuilder.addQueryParameter("trip_date", time);
 
-      if (params.tripSegment() != null) {
-        Location pickLocation = params.tripSegment().getFrom();
-        Location dropOffLocation = params.tripSegment().getTo();
+            Observable.combineLatest(
+                helper.getAddress(params.tripSegment().getFrom()),
+                helper.getAddress(params.tripSegment().getTo()),
+                new Func2<String, String, Void>() {
+                  @Override public Void call(String fromAddress, String toAddress) {
+                    if (fromAddress != null) {
+                      urlBuilder.addQueryParameter("pick", fromAddress);
+                    }
+                    if (toAddress != null) {
+                      urlBuilder.addQueryParameter("destination", toAddress);
+                    }
+                    mainSubscriber.onNext(urlBuilder.build().toString());
 
-        // TODO test: is address always present or reverse geocoding may be needed?
-        if (pickLocation != null) {
-          urlString += "&pick=" + pickLocation.getAddress();
+                    return null;
+                  }
+                }
+            ).subscribe();
+
+          }
+
+        } else {
+          urlString = "https://flitways.com";
+
+          mainSubscriber.onNext(urlString);
         }
 
-        if (dropOffLocation != null) {
-          urlString += "&destination=" + dropOffLocation.getAddress();
-        }
-
-        long startTime = params.tripSegment().getStartTimeInSecs();
-
-        SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/YYYY hh:mm a", Locale.US);
-        dateFormat.setTimeZone(TimeZone.getTimeZone(params.tripSegment().getTimeZone()));
-
-        String time = dateFormat.format(new Date(startTime * 1000));
-
-        try {
-          String encoded = URLEncoder.encode(time, "utf-8");
-          urlString += "&trip_date=" + encoded;
-
-        } catch (UnsupportedEncodingException e) {
-          e.printStackTrace();
-        }
       }
+    });
 
-    } else {
-      urlString = "https://flitways.com";
-    }
-
-    return urlString;
   }
 
   private boolean isPackageInstalled(String packageId) {
     try {
-      packageManager.getPackageInfo(packageId, PackageManager.GET_ACTIVITIES);
+      context.getPackageManager().getPackageInfo(packageId, PackageManager.GET_ACTIVITIES);
       return true;
     } catch (PackageManager.NameNotFoundException e) {
       // ignored.

@@ -39,6 +39,7 @@ public abstract class TripKit {
   public abstract ServiceExtrasService getServiceExtrasService();
   public abstract Reporter getReporter();
   public abstract InterAppCommunicator getInterAppCommunicator();
+  public abstract InterAppConfiguration getInterAppConfiguration();
   abstract TripUpdater getTripUpdater();
   abstract Action1<Throwable> getErrorHandler();
 }
