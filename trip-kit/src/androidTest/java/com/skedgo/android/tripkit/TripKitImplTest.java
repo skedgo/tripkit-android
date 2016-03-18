@@ -40,7 +40,7 @@ public class TripKitImplTest {
     final TestSubscriber<BookingAction> subscriber = new TestSubscriber<>();
     kit.getBookingResolver().performExternalActionAsync(
         ExternalActionParams.builder()
-            .flitwaysPartnerKey("25251325")
+            .flitWaysPartnerKey("25251325")
             .action("flitways")
             .segment(segment)
             .build()

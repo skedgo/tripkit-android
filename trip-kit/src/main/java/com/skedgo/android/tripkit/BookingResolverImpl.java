@@ -73,8 +73,8 @@ public final class BookingResolverImpl implements BookingResolver {
       }
     } else if (externalAction.equals("flitways")) {
       actionBuilder.bookingProvider(FLITWAYS);
-      final String flitwaysPartnerKey = params.flitwaysPartnerKey();
-      if (flitwaysPartnerKey == null) {
+      final String flitWaysPartnerKey = params.flitWaysPartnerKey();
+      if (flitWaysPartnerKey == null) {
         final Intent data = new Intent(Intent.ACTION_VIEW)
             .setData(Uri.parse("https://flitways.com"));
         final BookingAction action = actionBuilder
@@ -100,7 +100,7 @@ public final class BookingResolverImpl implements BookingResolver {
                 return HttpUrl.parse("https://flitways.com/api/link")
                     .newBuilder()
                     .addQueryParameter("trip_date", tripDate)
-                    .addQueryParameter("partner_key", flitwaysPartnerKey);
+                    .addQueryParameter("partner_key", flitWaysPartnerKey);
               }
             })
             .flatMap(new Func1<HttpUrl.Builder, Observable<BookingAction>>() {
@@ -138,7 +138,7 @@ public final class BookingResolverImpl implements BookingResolver {
       }
     } else if (externalAction.startsWith("http")) {
       final BookingAction action = actionBuilder
-          .bookingProvider(WEB)
+          .bookingProvider(OTHERS)
           .hasApp(false)
           .data(new Intent(Intent.ACTION_VIEW, Uri.parse(externalAction)))
           .build();

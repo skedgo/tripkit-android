@@ -14,12 +14,12 @@ public abstract class BookingAction {
     return new BookingActionBuilder();
   }
 
-  public abstract int bookingProvider();
+  @BookingProvider public abstract int bookingProvider();
   public abstract boolean hasApp();
   public abstract Intent data();
 
   public interface Builder {
-    Builder bookingProvider(int bookingProvider);
+    Builder bookingProvider(@BookingProvider int bookingProvider);
     Builder hasApp(boolean hasApp);
     Builder data(Intent data);
     BookingAction build();

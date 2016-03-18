@@ -30,8 +30,8 @@ import rx.observers.TestSubscriber;
 
 import static com.skedgo.android.tripkit.BookingResolver.FLITWAYS;
 import static com.skedgo.android.tripkit.BookingResolver.LYFT;
+import static com.skedgo.android.tripkit.BookingResolver.OTHERS;
 import static com.skedgo.android.tripkit.BookingResolver.UBER;
-import static com.skedgo.android.tripkit.BookingResolver.WEB;
 import static org.mockito.Matchers.any;
 import static org.mockito.Matchers.eq;
 import static org.mockito.Mockito.mock;
@@ -197,7 +197,7 @@ public class BookingResolverImplTest {
         ExternalActionParams.builder()
             .action("flitways")
             .segment(segment)
-            .flitwaysPartnerKey("25251325")
+            .flitWaysPartnerKey("25251325")
             .build()
     ).subscribe(subscriber);
 
@@ -222,7 +222,7 @@ public class BookingResolverImplTest {
     ).subscribe(subscriber);
 
     final BookingAction action = BookingAction.builder()
-        .bookingProvider(WEB)
+        .bookingProvider(OTHERS)
         .hasApp(false)
         .data(new Intent(Intent.ACTION_VIEW, Uri.parse("https://github.com/")))
         .build();

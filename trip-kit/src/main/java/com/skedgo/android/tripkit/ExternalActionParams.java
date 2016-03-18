@@ -18,12 +18,12 @@ public abstract class ExternalActionParams {
 
   public abstract String action();
   public abstract TripSegment segment();
-  @Nullable public abstract String flitwaysPartnerKey();
+  @Nullable public abstract String flitWaysPartnerKey();
 
   public interface Builder {
     Builder action(String action);
     Builder segment(TripSegment segment);
-    Builder flitwaysPartnerKey(String flitwaysPartnerKey);
+    Builder flitWaysPartnerKey(String flitWaysPartnerKey);
     ExternalActionParams build();
   }
 }
