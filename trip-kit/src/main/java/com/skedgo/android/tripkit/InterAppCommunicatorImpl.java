@@ -7,6 +7,9 @@ import android.content.res.Resources;
 import android.net.Uri;
 import android.support.annotation.NonNull;
 
+import com.skedgo.android.common.model.Location;
+import com.skedgo.android.common.model.TripSegment;
+
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
 import java.text.SimpleDateFormat;
@@ -16,59 +19,132 @@ import java.util.TimeZone;
 
 import okhttp3.HttpUrl;
 import rx.Observable;
-import rx.Subscriber;
-import rx.functions.Action1;
+import rx.functions.Func0;
+import rx.functions.Func1;
 import rx.functions.Func2;
+import rx.schedulers.Schedulers;
 
-public class InterAppCommunicatorImpl implements InterAppCommunicator {
+public final class InterAppCommunicatorImpl implements InterAppCommunicator {
   private static final String UBER_PACKAGE = "com.ubercab";
   private static final String LYFT_PACKAGE = "me.lyft.android";
-  private final Context context;
-  private final ReverseGeocoderHelper helper;
+  private final PackageManager packageManager;
+  private final Func1<ReverseGeocodingParams, Observable<String>> reverseGeocoderFactory;
 
-  public InterAppCommunicatorImpl(@NonNull Context context) {
-    this.context = context;
-    this.helper = new ReverseGeocoderHelper(context);
+  public InterAppCommunicatorImpl(
+      PackageManager packageManager, @NonNull Context context,
+      @NonNull Func1<ReverseGeocodingParams, Observable<String>> reverseGeocoderFactory) {
+    this.packageManager = packageManager;
+    this.reverseGeocoderFactory = reverseGeocoderFactory;
   }
 
-  @Override public void performExternalAction(
-      @NonNull final InterAppCommunicatorParams params) {
-
-    final Intent playStoreIntent = new Intent(Intent.ACTION_VIEW);
-    playStoreIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-
-    final Intent webIntent = new Intent(Intent.ACTION_VIEW);
-
-    if (params.action().equals("uber")) {
+  @Override public Observable<BookingAction> performExternalActionAsync(
+      InterAppCommunicatorParams params) {
+    final BookingAction.Builder actionBuilder = BookingAction.builder();
+    final String externalAction = params.action();
+    if (externalAction.equals("uber")) {
+      actionBuilder.bookingProvider(UBER);
       if (isPackageInstalled(UBER_PACKAGE)) {
-        playStoreIntent.setData(Uri.parse("uber://"));
-        params.openApp().call(UBER, playStoreIntent);
+        final BookingAction action = actionBuilder.hasApp(true).data(
+            new Intent(Intent.ACTION_VIEW).setData(Uri.parse("uber://"))
+        ).build();
+        return Observable.just(action);
       } else {
-        webIntent.setData(Uri.parse("https://m.uber.com/sign-up"));
-        params.openWeb().call(UBER, webIntent);
+        final BookingAction action = actionBuilder.hasApp(false).data(
+            new Intent(Intent.ACTION_VIEW).setData(Uri.parse("https://m.uber.com/sign-up"))
+        ).build();
+        return Observable.just(action);
       }
-    } else if (params.action().startsWith("lyft")) {
-      // Also 'lyft_line', etc.
+    } else if (externalAction.startsWith("lyft")) {
+      actionBuilder.bookingProvider(LYFT);
       if (isPackageInstalled(LYFT_PACKAGE)) {
-        playStoreIntent.setData(Uri.parse("lyft://"));
-        params.openApp().call(LYFT, playStoreIntent);
+        final BookingAction action = actionBuilder.hasApp(true).data(
+            new Intent(Intent.ACTION_VIEW).setData(Uri.parse("lyft://"))
+        ).build();
+        return Observable.just(action);
       } else {
-        webIntent.setData(Uri.parse("https://play.google.com/store/apps/details?id=" + LYFT_PACKAGE));
-        params.openWeb().call(LYFT, webIntent);
+        final Intent data = new Intent(Intent.ACTION_VIEW)
+            .setData(Uri.parse("https://play.google.com/store/apps/details?id=" + LYFT_PACKAGE));
+        final BookingAction action = actionBuilder
+            .hasApp(false)
+            .data(data)
+            .build();
+        return Observable.just(action);
       }
-    } else if (params.action().equals("flitways")) {
-      resolveFlitWaysURL(params).subscribe(new Action1<String>() {
-        @Override public void call(String link) {
-          webIntent.setData(Uri.parse(link));
-          params.openWeb().call(FLITWAYS, webIntent);
-        }
-      });
+    } else if (externalAction.equals("flitways")) {
+      actionBuilder.bookingProvider(FLITWAYS);
+      final String flitwaysPartnerKey = params.flitwaysPartnerKey();
+      if (flitwaysPartnerKey == null) {
+        final Intent data = new Intent(Intent.ACTION_VIEW)
+            .setData(Uri.parse("https://flitways.com"));
+        final BookingAction action = actionBuilder
+            .hasApp(false)
+            .data(data)
+            .build();
+        return Observable.just(action);
+      } else {
+        final TripSegment segment = params.tripSegment();
+        final Location departure = segment.getFrom();
+        final Location arrival = segment.getTo();
+        final long startTimeInSecs = segment.getStartTimeInSecs();
+        final String timeZone = segment.getTimeZone();
+        return Observable
+            .fromCallable(new Func0<HttpUrl.Builder>() {
+              @Override public HttpUrl.Builder call() {
+                final SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy hh:mm a", Locale.US);
+                if (timeZone != null) {
+                  dateFormat.setTimeZone(TimeZone.getTimeZone(timeZone));
+                }
 
-    } else if (params.action().startsWith("http")) {
-      webIntent.setData(Uri.parse(params.action()));
-      params.openWeb().call(WEB, webIntent);
+                final String tripDate = dateFormat.format(new Date(startTimeInSecs * 1000));
+                return HttpUrl.parse("https://flitways.com/api/link")
+                    .newBuilder()
+                    .addQueryParameter("trip_date", tripDate)
+                    .addQueryParameter("partner_key", flitwaysPartnerKey);
+              }
+            })
+            .flatMap(new Func1<HttpUrl.Builder, Observable<BookingAction>>() {
+              @Override public Observable<BookingAction> call(final HttpUrl.Builder builder) {
+                return Observable.combineLatest(
+                    reverseGeocoderFactory.call(
+                        ImmutableReverseGeocodingParams.builder()
+                            .lat(departure.getLat())
+                            .lng(departure.getLon())
+                            .maxResults(1)
+                            .build()),
+                    reverseGeocoderFactory.call(
+                        ImmutableReverseGeocodingParams.builder()
+                            .lat(arrival.getLat())
+                            .lng(arrival.getLon())
+                            .maxResults(1)
+                            .build()),
+                    new Func2<String, String, BookingAction>() {
+                      @Override public BookingAction call(String departureAddress, String arrivalAddress) {
+                        final String url = builder
+                            .addQueryParameter("pick", departureAddress)
+                            .addQueryParameter("destination", arrivalAddress)
+                            .build()
+                            .toString();
+                        return actionBuilder
+                            .hasApp(false)
+                            .data(new Intent(Intent.ACTION_VIEW, Uri.parse(url)))
+                            .build();
+                      }
+                    }
+                );
+              }
+            })
+            .subscribeOn(Schedulers.io());
+      }
+    } else if (externalAction.startsWith("http")) {
+      final BookingAction action = actionBuilder
+          .bookingProvider(WEB)
+          .hasApp(false)
+          .data(new Intent(Intent.ACTION_VIEW, Uri.parse(externalAction)))
+          .build();
+      return Observable.just(action);
+    } else {
+      return Observable.error(new UnsupportedOperationException());
     }
-
   }
 
   public String titleForExternalAction(Resources resources, String action) {
@@ -102,10 +178,8 @@ public class InterAppCommunicatorImpl implements InterAppCommunicator {
 
     } else if (action.startsWith("sms:")) {
       return "Send SMS"; // TODO: replace with string resource when available
-
     } else if (action.startsWith("http:") || action.startsWith("https:")) {
       return resources.getString(R.string.show_website);
-
     } else {
       return null;
     }
@@ -113,72 +187,14 @@ public class InterAppCommunicatorImpl implements InterAppCommunicator {
     // TODO: handle "ingogo"
   }
 
-  protected Observable<String> resolveFlitWaysURL(final InterAppCommunicatorParams params) {
-    return Observable.create(new Observable.OnSubscribe<String>() {
-      @Override public void call(final Subscriber<? super String> mainSubscriber) {
-        String urlString = null;
-
-        String flitwaysPartnerkey = TripKit.singleton().getInterAppConfiguration().getFlitwaysPartnerkey();
-        if (flitwaysPartnerkey != null) {
-          // https://flitways.com/api/link?partner_key=PARTNER_KEY&pick=PICKUP_ADDRESS&destination=DESTINATION_ADDRESS&trip_date=PICKUP_DATETIME
-          // Partner Key – Required
-          // Pick Up Address – Optional
-          // Destination – Optional
-          // Pickup DateTime – Optional
-
-          final HttpUrl.Builder urlBuilder = new HttpUrl.Builder()
-              .scheme("https")
-              .host("flitways.com")
-              .addPathSegment("api")
-              .addPathSegment("link")
-              .addQueryParameter("partner_key", flitwaysPartnerkey);
-          if (params.tripSegment() != null) {
-            long startTime = params.tripSegment().getStartTimeInSecs();
-
-            SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy hh:mm a", Locale.US);
-            dateFormat.setTimeZone(TimeZone.getTimeZone(params.tripSegment().getTimeZone()));
-
-            String time = dateFormat.format(new Date(startTime * 1000));
-            urlBuilder.addQueryParameter("trip_date", time);
-
-            Observable.combineLatest(
-                helper.getAddress(params.tripSegment().getFrom()),
-                helper.getAddress(params.tripSegment().getTo()),
-                new Func2<String, String, Void>() {
-                  @Override public Void call(String fromAddress, String toAddress) {
-                    if (fromAddress != null) {
-                      urlBuilder.addQueryParameter("pick", fromAddress);
-                    }
-                    if (toAddress != null) {
-                      urlBuilder.addQueryParameter("destination", toAddress);
-                    }
-                    mainSubscriber.onNext(urlBuilder.build().toString());
-
-                    return null;
-                  }
-                }
-            ).subscribe();
-
-          }
-
-        } else {
-          urlString = "https://flitways.com";
-
-          mainSubscriber.onNext(urlString);
-        }
-
-      }
-    });
-
-  }
-
-  private boolean isPackageInstalled(String packageId) {
+  private boolean isPackageInstalled(String packageName) {
     try {
-      context.getPackageManager().getPackageInfo(packageId, PackageManager.GET_ACTIVITIES);
+      packageManager.getPackageInfo(packageName, PackageManager.GET_ACTIVITIES);
       return true;
     } catch (PackageManager.NameNotFoundException e) {
-      // ignored.
+      // Ignored.
     }
+
     return false;
   }
 }

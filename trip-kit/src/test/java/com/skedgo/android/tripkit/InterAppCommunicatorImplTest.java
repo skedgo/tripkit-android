@@ -1,97 +1,233 @@
 package com.skedgo.android.tripkit;
 
-import android.content.pm.ApplicationInfo;
+import android.content.Intent;
+import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
+import android.net.Uri;
+
+import com.skedgo.android.common.model.Location;
+import com.skedgo.android.common.model.TripSegment;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.mockito.invocation.InvocationOnMock;
+import org.mockito.stubbing.Answer;
 import org.robolectric.RobolectricGradleTestRunner;
+import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
 
-import rx.functions.Action1;
+import java.util.Calendar;
+import java.util.Locale;
+import java.util.TimeZone;
+import java.util.concurrent.TimeUnit;
 
-import static org.assertj.core.api.Assertions.assertThat;
+import rx.Observable;
+import rx.functions.Func1;
+import rx.observers.TestSubscriber;
+
+import static com.skedgo.android.tripkit.InterAppCommunicator.FLITWAYS;
+import static com.skedgo.android.tripkit.InterAppCommunicator.LYFT;
+import static com.skedgo.android.tripkit.InterAppCommunicator.UBER;
+import static com.skedgo.android.tripkit.InterAppCommunicator.WEB;
+import static org.mockito.Matchers.any;
+import static org.mockito.Matchers.eq;
+import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 @RunWith(RobolectricGradleTestRunner.class)
 @Config(constants = BuildConfig.class, sdk = 21)
 public class InterAppCommunicatorImplTest {
   @Mock PackageManager packageManager;
+  @Mock Func1<ReverseGeocodingParams, Observable<String>> reverseGeocoderFactory;
+  private InterAppCommunicatorImpl interAppCommunicator;
 
   @Before public void before() {
     MockitoAnnotations.initMocks(this);
+    interAppCommunicator = new InterAppCommunicatorImpl(
+        packageManager,
+        RuntimeEnvironment.application,
+        reverseGeocoderFactory
+    );
   }
 
-  @Test
-  public void testReturnIntentToLaunchUberAppOrSite() throws PackageManager.NameNotFoundException {
-    when(packageManager.getApplicationInfo("com.ubercab", PackageManager.GET_ACTIVITIES))
-        .thenReturn(new ApplicationInfo());
+  @Test public void hasUberApp() throws PackageManager.NameNotFoundException {
+    when(packageManager.getPackageInfo(
+        eq("com.ubercab"),
+        eq(PackageManager.GET_ACTIVITIES)
+    )).thenReturn(new PackageInfo());
 
-    new InterAppCommunicatorImpl(packageManager).
-        performExternalAction("uber", new Action1<String>() {
-          @Override public void call(String link) {
-            assertThat(link).isNotNull();
-            assertThat(link).isEqualTo("uber://");
-          }
-        }, new Action1<String>() {
-          @Override public void call(String s) {
-            assertThat(false);
+    final TestSubscriber<BookingAction> subscriber = new TestSubscriber<>();
+    interAppCommunicator.performExternalActionAsync(
+        InterAppCommunicatorParams.builder()
+            .action("uber")
+            .tripSegment(mock(TripSegment.class))
+            .build()
+    ).subscribe(subscriber);
+
+    final BookingAction action = BookingAction.builder()
+        .bookingProvider(UBER)
+        .hasApp(true)
+        .data(new Intent(Intent.ACTION_VIEW, Uri.parse("uber://")))
+        .build();
+    subscriber.awaitTerminalEvent();
+    subscriber.assertNoErrors();
+    subscriber.assertValue(action);
+  }
+
+  @Test public void hasNoUberApp() throws PackageManager.NameNotFoundException {
+    when(packageManager.getPackageInfo(
+        eq("com.ubercab"),
+        eq(PackageManager.GET_ACTIVITIES)
+    )).thenThrow(new PackageManager.NameNotFoundException());
+
+    final TestSubscriber<BookingAction> subscriber = new TestSubscriber<>();
+    interAppCommunicator.performExternalActionAsync(
+        InterAppCommunicatorParams.builder()
+            .action("uber")
+            .tripSegment(mock(TripSegment.class))
+            .build()
+    ).subscribe(subscriber);
+
+    final BookingAction action = BookingAction.builder()
+        .bookingProvider(UBER)
+        .hasApp(false)
+        .data(new Intent(Intent.ACTION_VIEW, Uri.parse("https://m.uber.com/sign-up")))
+        .build();
+    subscriber.awaitTerminalEvent();
+    subscriber.assertNoErrors();
+    subscriber.assertValue(action);
+  }
+
+  @Test public void hasLyftApp() throws PackageManager.NameNotFoundException {
+    when(packageManager.getPackageInfo(
+        eq("me.lyft.android"),
+        eq(PackageManager.GET_ACTIVITIES)
+    )).thenReturn(new PackageInfo());
+
+    final TestSubscriber<BookingAction> subscriber = new TestSubscriber<>();
+    interAppCommunicator.performExternalActionAsync(
+        InterAppCommunicatorParams.builder()
+            .action("lyft")
+            .tripSegment(mock(TripSegment.class))
+            .build()
+    ).subscribe(subscriber);
+
+    final BookingAction action = BookingAction.builder()
+        .bookingProvider(LYFT)
+        .hasApp(true)
+        .data(new Intent(Intent.ACTION_VIEW, Uri.parse("lyft://")))
+        .build();
+    subscriber.awaitTerminalEvent();
+    subscriber.assertNoErrors();
+    subscriber.assertValue(action);
+  }
+
+  @Test public void hasNoLyftApp() throws PackageManager.NameNotFoundException {
+    when(packageManager.getPackageInfo(
+        eq("me.lyft.android"),
+        eq(PackageManager.GET_ACTIVITIES)
+    )).thenThrow(new PackageManager.NameNotFoundException());
+
+    final TestSubscriber<BookingAction> subscriber = new TestSubscriber<>();
+    interAppCommunicator.performExternalActionAsync(
+        InterAppCommunicatorParams.builder()
+            .action("lyft")
+            .tripSegment(mock(TripSegment.class))
+            .build()
+    ).subscribe(subscriber);
+
+    final Intent data = new Intent(Intent.ACTION_VIEW)
+        .setData(Uri.parse("https://play.google.com/store/apps/details?id=me.lyft.android"));
+    final BookingAction action = BookingAction.builder()
+        .bookingProvider(LYFT)
+        .hasApp(false)
+        .data(data)
+        .build();
+    subscriber.awaitTerminalEvent();
+    subscriber.assertNoErrors();
+    subscriber.assertValue(action);
+  }
+
+  @Test public void hasNoFlitwaysApp_noPartnerKey() {
+    final TestSubscriber<BookingAction> subscriber = new TestSubscriber<>();
+    interAppCommunicator.performExternalActionAsync(
+        InterAppCommunicatorParams.builder()
+            .action("flitways")
+            .tripSegment(mock(TripSegment.class))
+            .build()
+    ).subscribe(subscriber);
+
+    final BookingAction action = BookingAction.builder()
+        .bookingProvider(FLITWAYS)
+        .hasApp(false)
+        .data(new Intent(Intent.ACTION_VIEW, Uri.parse("https://flitways.com")))
+        .build();
+    subscriber.awaitTerminalEvent();
+    subscriber.assertNoErrors();
+    subscriber.assertValue(action);
+  }
+
+  @Test public void hasNoFlitwaysApp_hasPartnerKey() {
+    when(reverseGeocoderFactory.call(any(ReverseGeocodingParams.class)))
+        .thenAnswer(new Answer<Observable<String>>() {
+          @Override public Observable<String> answer(InvocationOnMock invocation) {
+            final ReverseGeocodingParams params = invocation.getArgumentAt(0, ReverseGeocodingParams.class);
+            if (params.lat() == 1.0) {
+              return Observable.just("A");
+            } else {
+              return Observable.just("B");
+            }
           }
         });
 
+    final Calendar time = Calendar.getInstance(TimeZone.getTimeZone("Australia/Sydney"), Locale.US);
+    time.set(2014, Calendar.FEBRUARY, 14, 11, 10);
+
+    final TripSegment segment = mock(TripSegment.class);
+    when(segment.getFrom()).thenReturn(new Location(1.0, 2.0));
+    when(segment.getTo()).thenReturn(new Location(3.0, 4.0));
+    when(segment.getTimeZone()).thenReturn("Australia/Sydney");
+    when(segment.getStartTimeInSecs()).thenReturn(TimeUnit.MILLISECONDS.toSeconds(time.getTimeInMillis()));
+
+    final TestSubscriber<BookingAction> subscriber = new TestSubscriber<>();
+    interAppCommunicator.performExternalActionAsync(
+        InterAppCommunicatorParams.builder()
+            .action("flitways")
+            .tripSegment(segment)
+            .flitwaysPartnerKey("25251325")
+            .build()
+    ).subscribe(subscriber);
+
+    final String url = "https://flitways.com/api/link?trip_date=14/02/2014%2011:10%20AM&partner_key=25251325&pick=A&destination=B";
+    final BookingAction action = BookingAction.builder()
+        .bookingProvider(FLITWAYS)
+        .hasApp(false)
+        .data(new Intent(Intent.ACTION_VIEW, Uri.parse(url)))
+        .build();
+    subscriber.awaitTerminalEvent();
+    subscriber.assertNoErrors();
+    subscriber.assertValue(action);
   }
 
-  @Test
-  public void testReturnIntentToLaunchFlytwaysAppOrSite() throws PackageManager.NameNotFoundException {
-    new InterAppCommunicatorImpl(packageManager).
-        performExternalAction("flitways", new Action1<String>() {
-          @Override public void call(String s) {
-            assertThat(false);
-          }
-        }, new Action1<String>() {
-          @Override public void call(String link) {
+  @Test public void hasNoApp() {
+    final TestSubscriber<BookingAction> subscriber = new TestSubscriber<>();
+    interAppCommunicator.performExternalActionAsync(
+        InterAppCommunicatorParams.builder()
+            .action("https://github.com/")
+            .tripSegment(mock(TripSegment.class))
+            .build()
+    ).subscribe(subscriber);
 
-            // this link should be handled by the client
-            assertThat(link).isNull();
-          }
-        });
-  }
-
-  @Test
-  public void testReturnIntentToLaunchLyftIntentSite() throws PackageManager.NameNotFoundException {
-    when(packageManager.getApplicationInfo("me.lyft.android", PackageManager.GET_ACTIVITIES))
-        .thenReturn(new ApplicationInfo());
-
-    new InterAppCommunicatorImpl(packageManager).
-        performExternalAction("lyft", new Action1<String>() {
-          @Override public void call(String link) {
-            assertThat(link).isNotNull();
-            assertThat(link).isEqualTo("lyft://");
-          }
-        }, new Action1<String>() {
-          @Override public void call(String s) {
-            assertThat(false);
-          }
-        });
-  }
-
-  @Test
-  public void testReturnIntentToLaunchAnySite() throws PackageManager.NameNotFoundException {
-    final String googleUrl = "http://www.google.com";
-    new InterAppCommunicatorImpl(packageManager).
-        performExternalAction(googleUrl, new Action1<String>() {
-          @Override public void call(String s) {
-            assertThat(false);
-          }
-        }, new Action1<String>() {
-          @Override public void call(String link) {
-
-            // this link should be handled by the client
-            assertThat(link).isEqualTo(googleUrl);
-          }
-        });
+    final BookingAction action = BookingAction.builder()
+        .bookingProvider(WEB)
+        .hasApp(false)
+        .data(new Intent(Intent.ACTION_VIEW, Uri.parse("https://github.com/")))
+        .build();
+    subscriber.awaitTerminalEvent();
+    subscriber.assertNoErrors();
+    subscriber.assertValue(action);
   }
 }

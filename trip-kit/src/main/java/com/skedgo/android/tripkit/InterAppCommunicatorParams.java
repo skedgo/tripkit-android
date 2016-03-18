@@ -1,12 +1,10 @@
 package com.skedgo.android.tripkit;
 
-import android.content.Intent;
+import android.support.annotation.Nullable;
 
 import com.skedgo.android.common.model.TripSegment;
 
 import org.immutables.value.Value;
-
-import rx.functions.Action2;
 
 import static org.immutables.value.Value.Style.BuilderVisibility.PACKAGE;
 import static org.immutables.value.Value.Style.ImplementationVisibility.PRIVATE;
@@ -20,14 +18,12 @@ public abstract class InterAppCommunicatorParams {
 
   public abstract String action();
   public abstract TripSegment tripSegment();
-  public abstract Action2<Integer, Intent> openApp();
-  public abstract Action2<Integer, Intent> openWeb();
+  @Nullable public abstract String flitwaysPartnerKey();
 
   public interface Builder {
     Builder action(String action);
     Builder tripSegment(TripSegment tripSegment);
-    Builder openApp(Action2<Integer, Intent> openApp);
-    Builder openWeb(Action2<Integer, Intent> openWeb);
+    Builder flitwaysPartnerKey(String flitwaysPartnerKey);
     InterAppCommunicatorParams build();
   }
 }
