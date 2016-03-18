@@ -94,7 +94,7 @@ final class TripKitImpl extends TripKit {
       bookingResolver = new BookingResolverImpl(
           context.getResources(),
           context.getPackageManager(),
-          null
+          new SingleReverseGeocoderFactory(context)
       );
     }
 
