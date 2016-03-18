@@ -23,14 +23,14 @@ import rx.functions.Func1;
 import rx.functions.Func2;
 import rx.schedulers.Schedulers;
 
-public final class InterAppCommunicatorImpl implements InterAppCommunicator {
+public final class BookingResolverImpl implements BookingResolver {
   private static final String UBER_PACKAGE = "com.ubercab";
   private static final String LYFT_PACKAGE = "me.lyft.android";
   private final Resources resources;
   private final PackageManager packageManager;
   private final Func1<ReverseGeocodingParams, Observable<String>> reverseGeocoderFactory;
 
-  public InterAppCommunicatorImpl(
+  public BookingResolverImpl(
       Resources resources, PackageManager packageManager,
       @NonNull Func1<ReverseGeocodingParams, Observable<String>> reverseGeocoderFactory) {
     this.resources = resources;
@@ -39,7 +39,7 @@ public final class InterAppCommunicatorImpl implements InterAppCommunicator {
   }
 
   @Override public Observable<BookingAction> performExternalActionAsync(
-      InterAppCommunicatorParams params) {
+      ExternalActionParams params) {
     final BookingAction.Builder actionBuilder = BookingAction.builder();
     final String externalAction = params.action();
     if (externalAction.equals("uber")) {
@@ -83,7 +83,7 @@ public final class InterAppCommunicatorImpl implements InterAppCommunicator {
             .build();
         return Observable.just(action);
       } else {
-        final TripSegment segment = params.tripSegment();
+        final TripSegment segment = params.segment();
         final Location departure = segment.getFrom();
         final Location arrival = segment.getTo();
         final long startTimeInSecs = segment.getStartTimeInSecs();

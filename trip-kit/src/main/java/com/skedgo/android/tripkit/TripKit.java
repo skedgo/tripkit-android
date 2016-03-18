@@ -38,7 +38,7 @@ public abstract class TripKit {
   public abstract OkHttpClient getOkHttpClient();
   public abstract ServiceExtrasService getServiceExtrasService();
   public abstract Reporter getReporter();
-  public abstract InterAppCommunicator getInterAppCommunicator();
+  public abstract BookingResolver getBookingResolver();
   abstract TripUpdater getTripUpdater();
   abstract Action1<Throwable> getErrorHandler();
 }

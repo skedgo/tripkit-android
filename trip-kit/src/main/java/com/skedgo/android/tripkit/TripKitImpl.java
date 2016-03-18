@@ -42,7 +42,7 @@ final class TripKitImpl extends TripKit {
   private RouteService routeService; // Lazily initialized.
   private Reporter reporter; // Lazily initialized.
   private TripUpdater tripUpdater; // Lazily initialized.
-  private InterAppCommunicator interAppCommunicator; // Lazily initialized.
+  private BookingResolver bookingResolver; // Lazily initialized.
 
   TripKitImpl(@NonNull Configs configs) {
     this.configs = configs;
@@ -89,12 +89,16 @@ final class TripKitImpl extends TripKit {
     return reporter;
   }
 
-  @Override public synchronized InterAppCommunicator getInterAppCommunicator() {
-    if (interAppCommunicator == null) {
-      interAppCommunicator = new InterAppCommunicatorImpl(context.getResources(), null, null);
+  @Override public synchronized BookingResolver getBookingResolver() {
+    if (bookingResolver == null) {
+      bookingResolver = new BookingResolverImpl(
+          context.getResources(),
+          context.getPackageManager(),
+          null
+      );
     }
 
-    return interAppCommunicator;
+    return bookingResolver;
   }
 
   @Override

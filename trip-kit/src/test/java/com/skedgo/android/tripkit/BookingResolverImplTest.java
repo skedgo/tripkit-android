@@ -28,10 +28,10 @@ import rx.Observable;
 import rx.functions.Func1;
 import rx.observers.TestSubscriber;
 
-import static com.skedgo.android.tripkit.InterAppCommunicator.FLITWAYS;
-import static com.skedgo.android.tripkit.InterAppCommunicator.LYFT;
-import static com.skedgo.android.tripkit.InterAppCommunicator.UBER;
-import static com.skedgo.android.tripkit.InterAppCommunicator.WEB;
+import static com.skedgo.android.tripkit.BookingResolver.FLITWAYS;
+import static com.skedgo.android.tripkit.BookingResolver.LYFT;
+import static com.skedgo.android.tripkit.BookingResolver.UBER;
+import static com.skedgo.android.tripkit.BookingResolver.WEB;
 import static org.mockito.Matchers.any;
 import static org.mockito.Matchers.eq;
 import static org.mockito.Mockito.mock;
@@ -39,14 +39,14 @@ import static org.mockito.Mockito.when;
 
 @RunWith(RobolectricGradleTestRunner.class)
 @Config(constants = BuildConfig.class, sdk = 21)
-public class InterAppCommunicatorImplTest {
+public class BookingResolverImplTest {
   @Mock PackageManager packageManager;
   @Mock Func1<ReverseGeocodingParams, Observable<String>> reverseGeocoderFactory;
-  private InterAppCommunicatorImpl interAppCommunicator;
+  private BookingResolverImpl bookingResolver;
 
   @Before public void before() {
     MockitoAnnotations.initMocks(this);
-    interAppCommunicator = new InterAppCommunicatorImpl(
+    bookingResolver = new BookingResolverImpl(
         RuntimeEnvironment.application.getResources(),
         packageManager,
         reverseGeocoderFactory
@@ -60,10 +60,10 @@ public class InterAppCommunicatorImplTest {
     )).thenReturn(new PackageInfo());
 
     final TestSubscriber<BookingAction> subscriber = new TestSubscriber<>();
-    interAppCommunicator.performExternalActionAsync(
-        InterAppCommunicatorParams.builder()
+    bookingResolver.performExternalActionAsync(
+        ExternalActionParams.builder()
             .action("uber")
-            .tripSegment(mock(TripSegment.class))
+            .segment(mock(TripSegment.class))
             .build()
     ).subscribe(subscriber);
 
@@ -84,10 +84,10 @@ public class InterAppCommunicatorImplTest {
     )).thenThrow(new PackageManager.NameNotFoundException());
 
     final TestSubscriber<BookingAction> subscriber = new TestSubscriber<>();
-    interAppCommunicator.performExternalActionAsync(
-        InterAppCommunicatorParams.builder()
+    bookingResolver.performExternalActionAsync(
+        ExternalActionParams.builder()
             .action("uber")
-            .tripSegment(mock(TripSegment.class))
+            .segment(mock(TripSegment.class))
             .build()
     ).subscribe(subscriber);
 
@@ -108,10 +108,10 @@ public class InterAppCommunicatorImplTest {
     )).thenReturn(new PackageInfo());
 
     final TestSubscriber<BookingAction> subscriber = new TestSubscriber<>();
-    interAppCommunicator.performExternalActionAsync(
-        InterAppCommunicatorParams.builder()
+    bookingResolver.performExternalActionAsync(
+        ExternalActionParams.builder()
             .action("lyft")
-            .tripSegment(mock(TripSegment.class))
+            .segment(mock(TripSegment.class))
             .build()
     ).subscribe(subscriber);
 
@@ -132,10 +132,10 @@ public class InterAppCommunicatorImplTest {
     )).thenThrow(new PackageManager.NameNotFoundException());
 
     final TestSubscriber<BookingAction> subscriber = new TestSubscriber<>();
-    interAppCommunicator.performExternalActionAsync(
-        InterAppCommunicatorParams.builder()
+    bookingResolver.performExternalActionAsync(
+        ExternalActionParams.builder()
             .action("lyft")
-            .tripSegment(mock(TripSegment.class))
+            .segment(mock(TripSegment.class))
             .build()
     ).subscribe(subscriber);
 
@@ -153,10 +153,10 @@ public class InterAppCommunicatorImplTest {
 
   @Test public void hasNoFlitwaysApp_noPartnerKey() {
     final TestSubscriber<BookingAction> subscriber = new TestSubscriber<>();
-    interAppCommunicator.performExternalActionAsync(
-        InterAppCommunicatorParams.builder()
+    bookingResolver.performExternalActionAsync(
+        ExternalActionParams.builder()
             .action("flitways")
-            .tripSegment(mock(TripSegment.class))
+            .segment(mock(TripSegment.class))
             .build()
     ).subscribe(subscriber);
 
@@ -193,10 +193,10 @@ public class InterAppCommunicatorImplTest {
     when(segment.getStartTimeInSecs()).thenReturn(TimeUnit.MILLISECONDS.toSeconds(time.getTimeInMillis()));
 
     final TestSubscriber<BookingAction> subscriber = new TestSubscriber<>();
-    interAppCommunicator.performExternalActionAsync(
-        InterAppCommunicatorParams.builder()
+    bookingResolver.performExternalActionAsync(
+        ExternalActionParams.builder()
             .action("flitways")
-            .tripSegment(segment)
+            .segment(segment)
             .flitwaysPartnerKey("25251325")
             .build()
     ).subscribe(subscriber);
@@ -214,10 +214,10 @@ public class InterAppCommunicatorImplTest {
 
   @Test public void hasNoApp() {
     final TestSubscriber<BookingAction> subscriber = new TestSubscriber<>();
-    interAppCommunicator.performExternalActionAsync(
-        InterAppCommunicatorParams.builder()
+    bookingResolver.performExternalActionAsync(
+        ExternalActionParams.builder()
             .action("https://github.com/")
-            .tripSegment(mock(TripSegment.class))
+            .segment(mock(TripSegment.class))
             .build()
     ).subscribe(subscriber);
 
