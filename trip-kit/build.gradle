@@ -29,7 +29,7 @@ android {
   }
 }
 
-// Generation relative to tripgo! Add translatins repo to tripkit?
+// Generation relative to tripgo! Add translations repo to tripkit?
 task(generateTripkitStrings, type: org.gradle.api.tasks.JavaExec) {
   classpath(files('IOStoAndroidStringsConverter.jar'))
   main('com.skedgo.tripgo.tools.android.Main')
