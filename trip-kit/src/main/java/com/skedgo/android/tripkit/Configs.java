@@ -6,6 +6,7 @@ import android.support.annotation.Nullable;
 import org.immutables.value.Value;
 
 import rx.functions.Action1;
+import rx.functions.Func0;
 
 import static org.immutables.value.Value.Style.BuilderVisibility.PACKAGE;
 import static org.immutables.value.Value.Style.ImplementationVisibility.PRIVATE;
@@ -21,6 +22,7 @@ public abstract class Configs {
   public abstract String regionEligibility();
   @Nullable public abstract Action1<Throwable> errorHandler();
   @Nullable public abstract ExcludedTransitModesAdapter excludedTransitModesAdapter();
+  @Nullable public abstract Func0<Co2Preferences> co2PreferencesFactory();
 
   @Value.Default public boolean debuggable() {
     return false;
@@ -32,6 +34,7 @@ public abstract class Configs {
     Builder debuggable(boolean debuggable);
     Builder errorHandler(Action1<Throwable> errorHandler);
     Builder excludedTransitModesAdapter(ExcludedTransitModesAdapter excludedTransitModesAdapter);
+    Builder co2PreferencesFactory(Func0<Co2Preferences> co2PreferencesFactory);
     Configs build();
   }
 }

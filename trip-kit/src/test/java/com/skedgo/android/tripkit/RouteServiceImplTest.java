@@ -9,6 +9,7 @@ import com.skedgo.android.common.model.RoutingResponse;
 import com.skedgo.android.common.model.TimeTag;
 import com.skedgo.android.common.model.TripGroup;
 
+import org.assertj.core.util.Maps;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -36,22 +37,24 @@ import static org.mockito.Mockito.when;
 
 @RunWith(RobolectricGradleTestRunner.class)
 @Config(constants = BuildConfig.class, sdk = 21)
-public class RouteServiceImplTest2 {
+public class RouteServiceImplTest {
   @Mock Resources resources;
   @Mock Func1<String, RoutingApi> routingApiFactory;
   @Mock Func1<Query, Observable<List<Query>>> queryGenerator;
   @Mock ExcludedTransitModesAdapter excludedTransitModesAdapter;
+  @Mock Co2Preferences co2Preferences;
   private RouteServiceImpl routeService;
   private String appVersion = "v1.0";
 
-  @Before public void setUp() {
+  @Before public void before() {
     MockitoAnnotations.initMocks(this);
     routeService = new RouteServiceImpl(
         resources,
         appVersion,
         queryGenerator,
         routingApiFactory,
-        excludedTransitModesAdapter
+        excludedTransitModesAdapter,
+        co2Preferences
     );
   }
 
@@ -100,7 +103,8 @@ public class RouteServiceImplTest2 {
         Collections.<String>emptyList(),
         Collections.<String>emptyList(),
         Collections.<String>emptyList(),
-        Collections.<String, Object>emptyMap()
+        Collections.<String, Object>emptyMap(),
+        Collections.<String, Float>emptyMap()
     ).subscribe(subscriber);
 
     subscriber.awaitTerminalEvent();
@@ -111,10 +115,11 @@ public class RouteServiceImplTest2 {
   @Test public void shouldFailSilentlyIfAllRequestsFail() {
     final RoutingApi api = mock(RoutingApi.class);
     when(api.fetchRoutes(
-             anyListOf(String.class),
-             anyListOf(String.class),
-             anyMapOf(String.class, Object.class))
-    ).thenThrow(new RuntimeException());
+        anyListOf(String.class),
+        anyListOf(String.class),
+        anyMapOf(String.class, Object.class),
+        anyMapOf(String.class, Float.class)
+    )).thenThrow(new RuntimeException());
     when(routingApiFactory.call(anyString()))
         .thenReturn(api);
 
@@ -123,7 +128,8 @@ public class RouteServiceImplTest2 {
         Arrays.asList("https://www.abc.com/", "https://www.def.com/"),
         Arrays.asList("hyperloop", "drone"),
         Collections.<String>emptyList(),
-        Collections.<String, Object>emptyMap()
+        Collections.<String, Object>emptyMap(),
+        Collections.<String, Float>emptyMap()
     ).subscribe(subscriber);
 
     subscriber.awaitTerminalEvent();
@@ -134,10 +140,11 @@ public class RouteServiceImplTest2 {
   @Test public void shouldFailSilentlyIfNoTripGroupsFoundOnAllUrls() {
     final RoutingApi api = mock(RoutingApi.class);
     when(api.fetchRoutes(
-             anyListOf(String.class),
-             anyListOf(String.class),
-             anyMapOf(String.class, Object.class))
-    ).thenReturn(new RoutingResponse());
+        anyListOf(String.class),
+        anyListOf(String.class),
+        anyMapOf(String.class, Object.class),
+        anyMapOf(String.class, Float.class)
+    )).thenReturn(new RoutingResponse());
     when(routingApiFactory.call(anyString()))
         .thenReturn(api);
 
@@ -146,7 +153,8 @@ public class RouteServiceImplTest2 {
         Arrays.asList("https://www.abc.com/", "https://www.def.com/"),
         Arrays.asList("hyperloop", "drone"),
         Collections.<String>emptyList(),
-        Collections.<String, Object>emptyMap()
+        Collections.<String, Object>emptyMap(),
+        Collections.<String, Float>emptyMap()
     ).subscribe(subscriber);
 
     subscriber.awaitTerminalEvent();
@@ -160,10 +168,11 @@ public class RouteServiceImplTest2 {
     when(response.hasError()).thenReturn(false);
     final RoutingApi api = mock(RoutingApi.class);
     when(api.fetchRoutes(
-             anyListOf(String.class),
-             anyListOf(String.class),
-             anyMapOf(String.class, Object.class))
-    ).thenReturn(response);
+        anyListOf(String.class),
+        anyListOf(String.class),
+        anyMapOf(String.class, Object.class),
+        anyMapOf(String.class, Float.class)
+    )).thenReturn(response);
     when(routingApiFactory.call(anyString())).thenReturn(api);
 
     final TestSubscriber<RoutingResponse> subscriber = new TestSubscriber<>();
@@ -171,7 +180,8 @@ public class RouteServiceImplTest2 {
         "Some url",
         Collections.<String>emptyList(),
         Collections.<String>emptyList(),
-        Collections.<String, Object>emptyMap()
+        Collections.<String, Object>emptyMap(),
+        Collections.<String, Float>emptyMap()
     ).subscribe(subscriber);
     subscriber.awaitTerminalEvent();
     subscriber.assertNoErrors();
@@ -185,10 +195,11 @@ public class RouteServiceImplTest2 {
     when(response.hasError()).thenReturn(true);
     final RoutingApi api = mock(RoutingApi.class);
     when(api.fetchRoutes(
-             anyListOf(String.class),
-             anyListOf(String.class),
-             anyMapOf(String.class, Object.class))
-    ).thenReturn(response);
+        anyListOf(String.class),
+        anyListOf(String.class),
+        anyMapOf(String.class, Object.class),
+        anyMapOf(String.class, Float.class)
+    )).thenReturn(response);
     when(routingApiFactory.call(eq(url))).thenReturn(api);
 
     final TestSubscriber<RoutingResponse> subscriber = new TestSubscriber<>();
@@ -196,7 +207,8 @@ public class RouteServiceImplTest2 {
         url,
         Collections.<String>emptyList(),
         Collections.<String>emptyList(),
-        Collections.<String, Object>emptyMap()
+        Collections.<String, Object>emptyMap(),
+        Collections.<String, Float>emptyMap()
     ).subscribe(subscriber);
     subscriber.awaitTerminalEvent();
     subscriber.assertError(RoutingUserError.class);
@@ -209,10 +221,11 @@ public class RouteServiceImplTest2 {
     when(response.hasError()).thenReturn(true);
     final RoutingApi api = mock(RoutingApi.class);
     when(api.fetchRoutes(
-             anyListOf(String.class),
-             anyListOf(String.class),
-             anyMapOf(String.class, Object.class))
-    ).thenReturn(response);
+        anyListOf(String.class),
+        anyListOf(String.class),
+        anyMapOf(String.class, Object.class),
+        anyMapOf(String.class, Float.class)
+    )).thenReturn(response);
     when(routingApiFactory.call(anyString())).thenReturn(api);
 
     final TestSubscriber<List<TripGroup>> subscriber = new TestSubscriber<>();
@@ -220,7 +233,8 @@ public class RouteServiceImplTest2 {
         Arrays.asList("a", "b", "c"),
         Collections.<String>emptyList(),
         Collections.<String>emptyList(),
-        Collections.<String, Object>emptyMap()
+        Collections.<String, Object>emptyMap(),
+        Collections.<String, Float>emptyMap()
     ).subscribe(subscriber);
     subscriber.awaitTerminalEvent();
     subscriber.assertError(RoutingUserError.class);
@@ -245,6 +259,17 @@ public class RouteServiceImplTest2 {
         excludedTransitModesAdapter,
         regionName
     )).isSameAs(excludedTransitModes);
+  }
+
+  @Test public void requestCo2Profile() {
+    final Map<String, Float> map = Maps.newHashMap();
+    map.put("a", 2f);
+    map.put("b", 5f);
+    when(co2Preferences.getCo2Profile()).thenReturn(map);
+    assertThat(routeService.getRequestCo2Profile())
+        .hasSize(2)
+        .containsEntry("co2[a]", 2f)
+        .containsEntry("co2[b]", 5f);
   }
 
   @NonNull Query createQuery() {

@@ -3,6 +3,7 @@ package com.skedgo.android.tripkit;
 import android.content.res.Resources;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.v4.util.ArrayMap;
 
 import com.skedgo.android.common.model.Location;
 import com.skedgo.android.common.model.Query;
@@ -32,18 +33,21 @@ final class RouteServiceImpl implements RouteService {
   private final Resources resources;
   private final Func1<String, RoutingApi> routingApiFactory;
   private final ExcludedTransitModesAdapter excludedTransitModesAdapter;
+  private final Co2Preferences co2Preferences;
 
   RouteServiceImpl(
       @NonNull Resources resources,
       @NonNull String appVersion,
       @NonNull Func1<Query, Observable<List<Query>>> queryGenerator,
       @NonNull Func1<String, RoutingApi> routingApiFactory,
-      @Nullable ExcludedTransitModesAdapter excludedTransitModesAdapter) {
+      @Nullable ExcludedTransitModesAdapter excludedTransitModesAdapter,
+      @Nullable Co2Preferences co2Preferences) {
     this.appVersion = appVersion;
     this.queryGenerator = queryGenerator;
     this.resources = resources;
     this.routingApiFactory = routingApiFactory;
     this.excludedTransitModesAdapter = excludedTransitModesAdapter;
+    this.co2Preferences = co2Preferences;
   }
 
   private static String toCoordinatesText(Location location) {
@@ -64,6 +68,7 @@ final class RouteServiceImpl implements RouteService {
 
   @NonNull @Override
   public Observable<List<TripGroup>> routeAsync(@NonNull Query query) {
+    final Map<String, Float> co2Profile = getRequestCo2Profile();
     return flatSubQueries(query)
         .flatMap(new Func1<Query, Observable<List<TripGroup>>>() {
           @Override public Observable<List<TripGroup>> call(Query subQuery) {
@@ -75,7 +80,7 @@ final class RouteServiceImpl implements RouteService {
                 region.getName()
             );
             final Map<String, Object> options = toOptions(subQuery);
-            return fetchRoutesAsync(urls, modes, excludedTransitModes, options);
+            return fetchRoutesAsync(urls, modes, excludedTransitModes, options, co2Profile);
           }
         });
   }
@@ -134,12 +139,13 @@ final class RouteServiceImpl implements RouteService {
       @NonNull List<String> urls,
       @NonNull final List<String> modes,
       @NonNull final List<String> excludedTransitModes,
-      final Map<String, Object> options) {
+      final Map<String, Object> options,
+      final Map<String, Float> co2Profile) {
     // TODO: Write tests to assert the logic of url failover.
     return Observable.from(urls)
         .concatMap(new Func1<String, Observable<RoutingResponse>>() {
           @Override public Observable<RoutingResponse> call(final String url) {
-            return fetchRoutesPerUrlAsync(url, modes, excludedTransitModes, options);
+            return fetchRoutesPerUrlAsync(url, modes, excludedTransitModes, options, co2Profile);
           }
         })
         .first()
@@ -174,14 +180,15 @@ final class RouteServiceImpl implements RouteService {
   }
 
   /**
-   * If the {@link Observable} returned is empty, {@link RouteServiceImpl#fetchRoutesAsync(List, List, List, Map)}
+   * If the {@link Observable} returned is empty, {@link RouteServiceImpl#fetchRoutesAsync(List, List, List, Map, Map)}
    * will failover on a different url.
    */
   @NonNull Observable<RoutingResponse> fetchRoutesPerUrlAsync(
       final String url,
       @NonNull final List<String> modes,
       @NonNull final List<String> excludedTransitModes,
-      final Map<String, Object> options) {
+      final Map<String, Object> options,
+      final Map<String, Float> co2Profile) {
     return Observable
         .create(new Observable.OnSubscribe<RoutingResponse>() {
           @Override public void call(Subscriber<? super RoutingResponse> subscriber) {
@@ -190,7 +197,8 @@ final class RouteServiceImpl implements RouteService {
               subscriber.onNext(api.fetchRoutes(
                   modes,
                   excludedTransitModes,
-                  options
+                  options,
+                  co2Profile
               ));
               subscriber.onCompleted();
             } catch (Exception e) {
@@ -214,5 +222,18 @@ final class RouteServiceImpl implements RouteService {
             }
           }
         });
+  }
+
+  Map<String, Float> getRequestCo2Profile() {
+    if (co2Preferences == null) {
+      return Collections.emptyMap();
+    }
+
+    final Map<String, Float> co2Profile = co2Preferences.getCo2Profile();
+    final ArrayMap<String, Float> requestCo2Profile = new ArrayMap<>(co2Profile.size());
+    for (Map.Entry<String, Float> entry : co2Profile.entrySet()) {
+      requestCo2Profile.put("co2[" + entry.getKey() + "]", entry.getValue());
+    }
+    return requestCo2Profile;
   }
 }
