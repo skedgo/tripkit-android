@@ -13,11 +13,11 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 @RunWith(RobolectricGradleTestRunner.class)
 @Config(constants = BuildConfig.class, sdk = 21)
-public class DefaultTripPreferencesTest {
-  private DefaultTripPreferences preferences;
+public class DefaultCo2PreferencesTest {
+  private DefaultCo2Preferences preferences;
 
   @Before public void before() {
-    preferences = new DefaultTripPreferences(RuntimeEnvironment.application.getSharedPreferences(
+    preferences = new DefaultCo2Preferences(RuntimeEnvironment.application.getSharedPreferences(
         "SomePreferences",
         Context.MODE_PRIVATE
     ));

@@ -7,13 +7,13 @@ import android.support.v4.util.ArrayMap;
 import java.util.Collections;
 import java.util.Map;
 
-public final class DefaultTripPreferences implements TripPreferences {
+public final class DefaultCo2Preferences implements Co2Preferences {
   private final SharedPreferences preferences;
 
   /**
    * @param preferences This {@link SharedPreferences} should only be used to store CO2 profile.
    */
-  public DefaultTripPreferences(@NonNull SharedPreferences preferences) {
+  public DefaultCo2Preferences(@NonNull SharedPreferences preferences) {
     this.preferences = preferences;
   }
 

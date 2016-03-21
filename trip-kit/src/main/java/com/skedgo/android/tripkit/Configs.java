@@ -22,7 +22,7 @@ public abstract class Configs {
   public abstract String regionEligibility();
   @Nullable public abstract Action1<Throwable> errorHandler();
   @Nullable public abstract ExcludedTransitModesAdapter excludedTransitModesAdapter();
-  @Nullable public abstract Func0<TripPreferences> tripPreferencesFactory();
+  @Nullable public abstract Func0<Co2Preferences> co2PreferencesFactory();
 
   @Value.Default public boolean debuggable() {
     return false;
@@ -34,7 +34,7 @@ public abstract class Configs {
     Builder debuggable(boolean debuggable);
     Builder errorHandler(Action1<Throwable> errorHandler);
     Builder excludedTransitModesAdapter(ExcludedTransitModesAdapter excludedTransitModesAdapter);
-    Builder tripPreferencesFactory(Func0<TripPreferences> tripPreferencesFactory);
+    Builder co2PreferencesFactory(Func0<Co2Preferences> co2PreferencesFactory);
     Configs build();
   }
 }

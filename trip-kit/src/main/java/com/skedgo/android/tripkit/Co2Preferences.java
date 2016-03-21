@@ -4,7 +4,7 @@ import android.support.annotation.NonNull;
 
 import java.util.Map;
 
-public interface TripPreferences {
+public interface Co2Preferences {
   /**
    * @return An immutable map having key as mode identifier for
    * which to apply emissions, and its value is emissions for

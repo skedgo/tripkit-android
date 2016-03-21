@@ -54,10 +54,10 @@ final class TripKitImpl extends TripKit {
   @Override
   public synchronized RouteService getRouteService() {
     if (routeService == null) {
-      TripPreferences tripPreferences = null;
-      final Func0<TripPreferences> tripPreferencesFactory = configs.tripPreferencesFactory();
-      if (tripPreferencesFactory != null) {
-        tripPreferences = tripPreferencesFactory.call();
+      Co2Preferences co2Preferences = null;
+      final Func0<Co2Preferences> co2PreferencesFactory = configs.co2PreferencesFactory();
+      if (co2PreferencesFactory != null) {
+        co2Preferences = co2PreferencesFactory.call();
       }
 
       routeService = new RouteServiceImpl(
@@ -66,7 +66,7 @@ final class TripKitImpl extends TripKit {
           provideQueryGenerator(),
           createRoutingApiFactory(),
           configs.excludedTransitModesAdapter(),
-          tripPreferences
+          co2Preferences
       );
     }
 

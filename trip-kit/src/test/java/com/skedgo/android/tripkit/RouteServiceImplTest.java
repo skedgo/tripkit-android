@@ -42,7 +42,7 @@ public class RouteServiceImplTest {
   @Mock Func1<String, RoutingApi> routingApiFactory;
   @Mock Func1<Query, Observable<List<Query>>> queryGenerator;
   @Mock ExcludedTransitModesAdapter excludedTransitModesAdapter;
-  @Mock TripPreferences tripPreferences;
+  @Mock Co2Preferences co2Preferences;
   private RouteServiceImpl routeService;
   private String appVersion = "v1.0";
 
@@ -54,7 +54,7 @@ public class RouteServiceImplTest {
         queryGenerator,
         routingApiFactory,
         excludedTransitModesAdapter,
-        tripPreferences
+        co2Preferences
     );
   }
 
@@ -265,7 +265,7 @@ public class RouteServiceImplTest {
     final Map<String, Float> map = Maps.newHashMap();
     map.put("a", 2f);
     map.put("b", 5f);
-    when(tripPreferences.getCo2Profile()).thenReturn(map);
+    when(co2Preferences.getCo2Profile()).thenReturn(map);
     assertThat(routeService.getRequestCo2Profile())
         .hasSize(2)
         .containsEntry("co2[a]", 2f)

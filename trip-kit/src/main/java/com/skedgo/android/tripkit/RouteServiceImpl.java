@@ -33,7 +33,7 @@ final class RouteServiceImpl implements RouteService {
   private final Resources resources;
   private final Func1<String, RoutingApi> routingApiFactory;
   private final ExcludedTransitModesAdapter excludedTransitModesAdapter;
-  private final TripPreferences tripPreferences;
+  private final Co2Preferences co2Preferences;
 
   RouteServiceImpl(
       @NonNull Resources resources,
@@ -41,13 +41,13 @@ final class RouteServiceImpl implements RouteService {
       @NonNull Func1<Query, Observable<List<Query>>> queryGenerator,
       @NonNull Func1<String, RoutingApi> routingApiFactory,
       @Nullable ExcludedTransitModesAdapter excludedTransitModesAdapter,
-      @Nullable TripPreferences tripPreferences) {
+      @Nullable Co2Preferences co2Preferences) {
     this.appVersion = appVersion;
     this.queryGenerator = queryGenerator;
     this.resources = resources;
     this.routingApiFactory = routingApiFactory;
     this.excludedTransitModesAdapter = excludedTransitModesAdapter;
-    this.tripPreferences = tripPreferences;
+    this.co2Preferences = co2Preferences;
   }
 
   private static String toCoordinatesText(Location location) {
@@ -225,11 +225,11 @@ final class RouteServiceImpl implements RouteService {
   }
 
   Map<String, Float> getRequestCo2Profile() {
-    if (tripPreferences == null) {
+    if (co2Preferences == null) {
       return Collections.emptyMap();
     }
 
-    final Map<String, Float> co2Profile = tripPreferences.getCo2Profile();
+    final Map<String, Float> co2Profile = co2Preferences.getCo2Profile();
     final ArrayMap<String, Float> requestCo2Profile = new ArrayMap<>(co2Profile.size());
     for (Map.Entry<String, Float> entry : co2Profile.entrySet()) {
       requestCo2Profile.put("co2[" + entry.getKey() + "]", entry.getValue());
