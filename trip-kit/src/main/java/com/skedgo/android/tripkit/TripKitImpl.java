@@ -27,6 +27,7 @@ import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
 import rx.Observable;
 import rx.functions.Action1;
+import rx.functions.Func0;
 import rx.functions.Func1;
 
 import static retrofit.RestAdapter.LogLevel.FULL;
@@ -53,12 +54,20 @@ final class TripKitImpl extends TripKit {
   @Override
   public synchronized RouteService getRouteService() {
     if (routeService == null) {
+      TripPreferences tripPreferences = null;
+      final Func0<TripPreferences> tripPreferencesFactory = configs.tripPreferencesFactory();
+      if (tripPreferencesFactory != null) {
+        tripPreferences = tripPreferencesFactory.call();
+      }
+
       routeService = new RouteServiceImpl(
           context.getResources(),
           getAppVersion(),
           provideQueryGenerator(),
           createRoutingApiFactory(),
-          configs.excludedTransitModesAdapter());
+          configs.excludedTransitModesAdapter(),
+          tripPreferences
+      );
     }
 
     return routeService;
