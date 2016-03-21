@@ -83,6 +83,7 @@ public final class BookingResolverImpl implements BookingResolver {
             .build();
         return Observable.just(action);
       } else {
+        // See https://flitways.com/deeplink.
         final TripSegment segment = params.segment();
         final Location departure = segment.getFrom();
         final Location arrival = segment.getTo();
@@ -91,7 +92,7 @@ public final class BookingResolverImpl implements BookingResolver {
         return Observable
             .fromCallable(new Func0<HttpUrl.Builder>() {
               @Override public HttpUrl.Builder call() {
-                final SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy hh:mm a", Locale.US);
+                final SimpleDateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy hh:mm a", Locale.US);
                 if (timeZone != null) {
                   dateFormat.setTimeZone(TimeZone.getTimeZone(timeZone));
                 }
@@ -100,7 +101,7 @@ public final class BookingResolverImpl implements BookingResolver {
                 return HttpUrl.parse("https://flitways.com/api/link")
                     .newBuilder()
                     .addQueryParameter("trip_date", tripDate)
-                    .addQueryParameter("partner_key", flitWaysPartnerKey);
+                    .addQueryParameter("key", flitWaysPartnerKey);
               }
             })
             .flatMap(new Func1<HttpUrl.Builder, Observable<BookingAction>>() {
@@ -121,7 +122,7 @@ public final class BookingResolverImpl implements BookingResolver {
                     new Func2<String, String, BookingAction>() {
                       @Override public BookingAction call(String departureAddress, String arrivalAddress) {
                         final String url = builder
-                            .addQueryParameter("pick", departureAddress)
+                            .addQueryParameter("pickup", departureAddress)
                             .addQueryParameter("destination", arrivalAddress)
                             .build()
                             .toString();
