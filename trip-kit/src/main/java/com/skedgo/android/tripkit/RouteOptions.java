@@ -6,7 +6,6 @@ import android.support.annotation.NonNull;
 import com.skedgo.android.common.model.Location;
 import com.skedgo.android.common.model.Query;
 import com.skedgo.android.common.model.TimeTag;
-import com.skedgo.android.common.model.TransportEmissions;
 
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
@@ -29,8 +28,6 @@ public final class RouteOptions {
   private final int walkingSpeed;
   private final int transferTime;
 
-  private final TransportEmissions transportEmissions;
-
   /**
    * In minutes. Default value is 0 which means ‘no limit'.
    * See more: https://www.flowdock.com/app/skedgo/androiddev/threads/nZJbtLU0jgsgziQpuoqhcaB-U9A.
@@ -46,7 +43,6 @@ public final class RouteOptions {
     walkingSpeed = builder.walkingSpeed;
     transferTime = builder.transferTime;
     maxWalkingTime = builder.maxWalkingTime;
-    transportEmissions = builder.transportEmissions;
   }
 
   @NonNull
@@ -92,10 +88,6 @@ public final class RouteOptions {
     return maxWalkingTime;
   }
 
-  public TransportEmissions getTransportEmissions() {
-    return transportEmissions;
-  }
-
   @NonNull Query toQuery() {
     final Query query = new Query();
     query.setFromLocation(departure);
@@ -110,7 +102,6 @@ public final class RouteOptions {
     query.setCyclingSpeed(cyclingSpeed);
     query.setTransferTime(transferTime);
     query.setMaxWalkingTime(maxWalkingTime);
-    query.setTransportEmissions(transportEmissions);
     return query;
   }
 
@@ -137,7 +128,6 @@ public final class RouteOptions {
     private int cyclingSpeed;
     private int walkingSpeed;
     private int maxWalkingTime;
-    private TransportEmissions transportEmissions;
 
     public Builder(@NonNull Location departure,
                    @NonNull Location arrival) {
@@ -185,15 +175,6 @@ public final class RouteOptions {
      */
     public Builder maxWalkingTime(int minutes) {
       this.maxWalkingTime = minutes;
-      return this;
-    }
-
-    /**
-     * transportEmissions.gramsCO2PerKm Emissions for supplied mode identifier in grams of CO2 per kilometre
-     * transportEmissions.modeIdentifier Mode identifier for which to apply these emissions
-     */
-    public Builder transportEmissions(TransportEmissions transportEmissions) {
-      this.transportEmissions = transportEmissions;
       return this;
     }
   }
