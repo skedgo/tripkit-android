@@ -4,11 +4,7 @@ import android.support.annotation.Nullable;
 
 import rx.Observable;
 
-public interface BookingResolver {
-  int UBER = 0;
-  int LYFT = UBER + 1;
-  int FLITWAYS = LYFT + 1;
-  int OTHERS = FLITWAYS + 1;
+public interface ExternalActionStrategy {
 
   Observable<BookingAction> performExternalActionAsync(ExternalActionParams params);
   @Nullable String getTitleForExternalAction(String externalAction);
