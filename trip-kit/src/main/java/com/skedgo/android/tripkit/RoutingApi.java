@@ -13,7 +13,6 @@ interface RoutingApi {
   @GET("/routing.json") RoutingResponse fetchRoutes(
       @Query("modes") List<String> modes,
       @Query("avoid") List<String> excludedTransitModes,
-      @QueryMap Map<String, Object> options,
-      @QueryMap Map<String, Float> co2Profile
+      @QueryMap Map<String, Object> options
   );
 }

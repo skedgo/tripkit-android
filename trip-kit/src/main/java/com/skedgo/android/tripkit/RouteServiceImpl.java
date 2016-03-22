@@ -33,7 +33,8 @@ final class RouteServiceImpl implements RouteService {
   private final Resources resources;
   private final Func1<String, RoutingApi> routingApiFactory;
   private final ExcludedTransitModesAdapter excludedTransitModesAdapter;
-  private final Co2Preferences co2Preferences;
+  @Nullable private final Co2Preferences co2Preferences;
+  @Nullable private final TripPreferences tripPreferences;
 
   RouteServiceImpl(
       @NonNull Resources resources,
@@ -41,13 +42,15 @@ final class RouteServiceImpl implements RouteService {
       @NonNull Func1<Query, Observable<List<Query>>> queryGenerator,
       @NonNull Func1<String, RoutingApi> routingApiFactory,
       @Nullable ExcludedTransitModesAdapter excludedTransitModesAdapter,
-      @Nullable Co2Preferences co2Preferences) {
+      @Nullable Co2Preferences co2Preferences,
+      @Nullable TripPreferences tripPreferences) {
     this.appVersion = appVersion;
     this.queryGenerator = queryGenerator;
     this.resources = resources;
     this.routingApiFactory = routingApiFactory;
     this.excludedTransitModesAdapter = excludedTransitModesAdapter;
     this.co2Preferences = co2Preferences;
+    this.tripPreferences = tripPreferences;
   }
 
   private static String toCoordinatesText(Location location) {
@@ -68,7 +71,6 @@ final class RouteServiceImpl implements RouteService {
 
   @NonNull @Override
   public Observable<List<TripGroup>> routeAsync(@NonNull Query query) {
-    final Map<String, Float> co2Profile = getRequestCo2Profile();
     return flatSubQueries(query)
         .flatMap(new Func1<Query, Observable<List<TripGroup>>>() {
           @Override public Observable<List<TripGroup>> call(Query subQuery) {
@@ -80,7 +82,7 @@ final class RouteServiceImpl implements RouteService {
                 region.getName()
             );
             final Map<String, Object> options = toOptions(subQuery);
-            return fetchRoutesAsync(urls, modes, excludedTransitModes, options, co2Profile);
+            return fetchRoutesAsync(urls, modes, excludedTransitModes, options);
           }
         });
   }
@@ -94,6 +96,25 @@ final class RouteServiceImpl implements RouteService {
     } else {
       return Collections.emptyList();
     }
+  }
+
+  /* TODO: Consider making this public for Xerox team. */
+  @NonNull Map<String, Object> getParamsByPreferences() {
+    final ArrayMap<String, Object> map = new ArrayMap<>();
+    if (tripPreferences != null) {
+      if (tripPreferences.isConcessionPricingPreferred()) {
+        map.put("conc", true);
+      }
+    }
+
+    if (co2Preferences != null) {
+      final Map<String, Float> co2Profile = co2Preferences.getCo2Profile();
+      for (Map.Entry<String, Float> entry : co2Profile.entrySet()) {
+        map.put("co2[" + entry.getKey() + "]", entry.getValue());
+      }
+    }
+
+    return map;
   }
 
   @NonNull Map<String, Object> toOptions(@NonNull Query query) {
@@ -119,6 +140,7 @@ final class RouteServiceImpl implements RouteService {
       options.put("ir", "1");
     }
 
+    options.putAll(getParamsByPreferences());
     return options;
   }
 
@@ -139,13 +161,12 @@ final class RouteServiceImpl implements RouteService {
       @NonNull List<String> urls,
       @NonNull final List<String> modes,
       @NonNull final List<String> excludedTransitModes,
-      final Map<String, Object> options,
-      final Map<String, Float> co2Profile) {
+      final Map<String, Object> options) {
     // TODO: Write tests to assert the logic of url failover.
     return Observable.from(urls)
         .concatMap(new Func1<String, Observable<RoutingResponse>>() {
           @Override public Observable<RoutingResponse> call(final String url) {
-            return fetchRoutesPerUrlAsync(url, modes, excludedTransitModes, options, co2Profile);
+            return fetchRoutesPerUrlAsync(url, modes, excludedTransitModes, options);
           }
         })
         .first()
@@ -180,15 +201,14 @@ final class RouteServiceImpl implements RouteService {
   }
 
   /**
-   * If the {@link Observable} returned is empty, {@link RouteServiceImpl#fetchRoutesAsync(List, List, List, Map, Map)}
+   * If the {@link Observable} returned is empty, {@link RouteServiceImpl#fetchRoutesAsync(List, List, List, Map)}
    * will failover on a different url.
    */
   @NonNull Observable<RoutingResponse> fetchRoutesPerUrlAsync(
       final String url,
       @NonNull final List<String> modes,
       @NonNull final List<String> excludedTransitModes,
-      final Map<String, Object> options,
-      final Map<String, Float> co2Profile) {
+      final Map<String, Object> options) {
     return Observable
         .create(new Observable.OnSubscribe<RoutingResponse>() {
           @Override public void call(Subscriber<? super RoutingResponse> subscriber) {
@@ -197,8 +217,7 @@ final class RouteServiceImpl implements RouteService {
               subscriber.onNext(api.fetchRoutes(
                   modes,
                   excludedTransitModes,
-                  options,
-                  co2Profile
+                  options
               ));
               subscriber.onCompleted();
             } catch (Exception e) {
@@ -222,18 +241,5 @@ final class RouteServiceImpl implements RouteService {
             }
           }
         });
-  }
-
-  Map<String, Float> getRequestCo2Profile() {
-    if (co2Preferences == null) {
-      return Collections.emptyMap();
-    }
-
-    final Map<String, Float> co2Profile = co2Preferences.getCo2Profile();
-    final ArrayMap<String, Float> requestCo2Profile = new ArrayMap<>(co2Profile.size());
-    for (Map.Entry<String, Float> entry : co2Profile.entrySet()) {
-      requestCo2Profile.put("co2[" + entry.getKey() + "]", entry.getValue());
-    }
-    return requestCo2Profile;
   }
 }

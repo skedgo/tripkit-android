@@ -43,6 +43,7 @@ public class RouteServiceImplTest {
   @Mock Func1<Query, Observable<List<Query>>> queryGenerator;
   @Mock ExcludedTransitModesAdapter excludedTransitModesAdapter;
   @Mock Co2Preferences co2Preferences;
+  @Mock TripPreferences tripPreferences;
   private RouteServiceImpl routeService;
   private String appVersion = "v1.0";
 
@@ -54,7 +55,8 @@ public class RouteServiceImplTest {
         queryGenerator,
         routingApiFactory,
         excludedTransitModesAdapter,
-        co2Preferences
+        co2Preferences,
+        tripPreferences
     );
   }
 
@@ -75,6 +77,16 @@ public class RouteServiceImplTest {
         .containsEntry("tt", "2")
         .containsEntry("ws", "4")
         .doesNotContainKey("ir");
+  }
+
+  @Test public void includeConcessionPricing() {
+    when(tripPreferences.isConcessionPricingPreferred()).thenReturn(true);
+    assertThat(routeService.getParamsByPreferences()).containsEntry("conc", true);
+  }
+
+  @Test public void excludeConcessionPricing() {
+    when(tripPreferences.isConcessionPricingPreferred()).thenReturn(false);
+    assertThat(routeService.getParamsByPreferences()).doesNotContainKey("conc");
   }
 
   @Test public void shouldIncludeOptionDepartAfter() {
@@ -103,8 +115,7 @@ public class RouteServiceImplTest {
         Collections.<String>emptyList(),
         Collections.<String>emptyList(),
         Collections.<String>emptyList(),
-        Collections.<String, Object>emptyMap(),
-        Collections.<String, Float>emptyMap()
+        Collections.<String, Object>emptyMap()
     ).subscribe(subscriber);
 
     subscriber.awaitTerminalEvent();
@@ -117,8 +128,7 @@ public class RouteServiceImplTest {
     when(api.fetchRoutes(
         anyListOf(String.class),
         anyListOf(String.class),
-        anyMapOf(String.class, Object.class),
-        anyMapOf(String.class, Float.class)
+        anyMapOf(String.class, Object.class)
     )).thenThrow(new RuntimeException());
     when(routingApiFactory.call(anyString()))
         .thenReturn(api);
@@ -128,8 +138,7 @@ public class RouteServiceImplTest {
         Arrays.asList("https://www.abc.com/", "https://www.def.com/"),
         Arrays.asList("hyperloop", "drone"),
         Collections.<String>emptyList(),
-        Collections.<String, Object>emptyMap(),
-        Collections.<String, Float>emptyMap()
+        Collections.<String, Object>emptyMap()
     ).subscribe(subscriber);
 
     subscriber.awaitTerminalEvent();
@@ -142,8 +151,7 @@ public class RouteServiceImplTest {
     when(api.fetchRoutes(
         anyListOf(String.class),
         anyListOf(String.class),
-        anyMapOf(String.class, Object.class),
-        anyMapOf(String.class, Float.class)
+        anyMapOf(String.class, Object.class)
     )).thenReturn(new RoutingResponse());
     when(routingApiFactory.call(anyString()))
         .thenReturn(api);
@@ -153,8 +161,7 @@ public class RouteServiceImplTest {
         Arrays.asList("https://www.abc.com/", "https://www.def.com/"),
         Arrays.asList("hyperloop", "drone"),
         Collections.<String>emptyList(),
-        Collections.<String, Object>emptyMap(),
-        Collections.<String, Float>emptyMap()
+        Collections.<String, Object>emptyMap()
     ).subscribe(subscriber);
 
     subscriber.awaitTerminalEvent();
@@ -170,8 +177,7 @@ public class RouteServiceImplTest {
     when(api.fetchRoutes(
         anyListOf(String.class),
         anyListOf(String.class),
-        anyMapOf(String.class, Object.class),
-        anyMapOf(String.class, Float.class)
+        anyMapOf(String.class, Object.class)
     )).thenReturn(response);
     when(routingApiFactory.call(anyString())).thenReturn(api);
 
@@ -180,8 +186,7 @@ public class RouteServiceImplTest {
         "Some url",
         Collections.<String>emptyList(),
         Collections.<String>emptyList(),
-        Collections.<String, Object>emptyMap(),
-        Collections.<String, Float>emptyMap()
+        Collections.<String, Object>emptyMap()
     ).subscribe(subscriber);
     subscriber.awaitTerminalEvent();
     subscriber.assertNoErrors();
@@ -197,8 +202,7 @@ public class RouteServiceImplTest {
     when(api.fetchRoutes(
         anyListOf(String.class),
         anyListOf(String.class),
-        anyMapOf(String.class, Object.class),
-        anyMapOf(String.class, Float.class)
+        anyMapOf(String.class, Object.class)
     )).thenReturn(response);
     when(routingApiFactory.call(eq(url))).thenReturn(api);
 
@@ -207,8 +211,7 @@ public class RouteServiceImplTest {
         url,
         Collections.<String>emptyList(),
         Collections.<String>emptyList(),
-        Collections.<String, Object>emptyMap(),
-        Collections.<String, Float>emptyMap()
+        Collections.<String, Object>emptyMap()
     ).subscribe(subscriber);
     subscriber.awaitTerminalEvent();
     subscriber.assertError(RoutingUserError.class);
@@ -223,8 +226,7 @@ public class RouteServiceImplTest {
     when(api.fetchRoutes(
         anyListOf(String.class),
         anyListOf(String.class),
-        anyMapOf(String.class, Object.class),
-        anyMapOf(String.class, Float.class)
+        anyMapOf(String.class, Object.class)
     )).thenReturn(response);
     when(routingApiFactory.call(anyString())).thenReturn(api);
 
@@ -233,8 +235,7 @@ public class RouteServiceImplTest {
         Arrays.asList("a", "b", "c"),
         Collections.<String>emptyList(),
         Collections.<String>emptyList(),
-        Collections.<String, Object>emptyMap(),
-        Collections.<String, Float>emptyMap()
+        Collections.<String, Object>emptyMap()
     ).subscribe(subscriber);
     subscriber.awaitTerminalEvent();
     subscriber.assertError(RoutingUserError.class);
@@ -261,12 +262,12 @@ public class RouteServiceImplTest {
     )).isSameAs(excludedTransitModes);
   }
 
-  @Test public void requestCo2Profile() {
-    final Map<String, Float> map = Maps.newHashMap();
-    map.put("a", 2f);
-    map.put("b", 5f);
-    when(co2Preferences.getCo2Profile()).thenReturn(map);
-    assertThat(routeService.getRequestCo2Profile())
+  @Test public void includeCo2Profile() {
+    final Map<String, Float> co2Profile = Maps.newHashMap();
+    co2Profile.put("a", 2f);
+    co2Profile.put("b", 5f);
+    when(co2Preferences.getCo2Profile()).thenReturn(co2Profile);
+    assertThat(routeService.getParamsByPreferences())
         .hasSize(2)
         .containsEntry("co2[a]", 2f)
         .containsEntry("co2[b]", 5f);

@@ -23,6 +23,7 @@ public abstract class Configs {
   @Nullable public abstract Action1<Throwable> errorHandler();
   @Nullable public abstract ExcludedTransitModesAdapter excludedTransitModesAdapter();
   @Nullable public abstract Func0<Co2Preferences> co2PreferencesFactory();
+  @Nullable public abstract Func0<TripPreferences> tripPreferencesFactory();
 
   @Value.Default public boolean debuggable() {
     return false;
@@ -35,6 +36,7 @@ public abstract class Configs {
     Builder errorHandler(Action1<Throwable> errorHandler);
     Builder excludedTransitModesAdapter(ExcludedTransitModesAdapter excludedTransitModesAdapter);
     Builder co2PreferencesFactory(Func0<Co2Preferences> co2PreferencesFactory);
+    Builder tripPreferencesFactory(Func0<TripPreferences> tripPreferencesFactory);
     Configs build();
   }
 }

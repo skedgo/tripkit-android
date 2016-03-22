@@ -60,13 +60,20 @@ final class TripKitImpl extends TripKit {
         co2Preferences = co2PreferencesFactory.call();
       }
 
+      TripPreferences tripPreferences = null;
+      final Func0<TripPreferences> tripPreferencesFactory = configs.tripPreferencesFactory();
+      if (tripPreferencesFactory != null) {
+        tripPreferences = tripPreferencesFactory.call();
+      }
+
       routeService = new RouteServiceImpl(
           context.getResources(),
           getAppVersion(),
           provideQueryGenerator(),
           createRoutingApiFactory(),
           configs.excludedTransitModesAdapter(),
-          co2Preferences
+          co2Preferences,
+          tripPreferences
       );
     }
 
