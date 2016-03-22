@@ -43,6 +43,7 @@ public class RouteServiceImplTest {
   @Mock Func1<Query, Observable<List<Query>>> queryGenerator;
   @Mock ExcludedTransitModesAdapter excludedTransitModesAdapter;
   @Mock Co2Preferences co2Preferences;
+  @Mock TripPreferences tripPreferences;
   private RouteServiceImpl routeService;
   private String appVersion = "v1.0";
 
@@ -54,7 +55,8 @@ public class RouteServiceImplTest {
         queryGenerator,
         routingApiFactory,
         excludedTransitModesAdapter,
-        co2Preferences
+        co2Preferences,
+        tripPreferences
     );
   }
 
@@ -75,6 +77,16 @@ public class RouteServiceImplTest {
         .containsEntry("tt", "2")
         .containsEntry("ws", "4")
         .doesNotContainKey("ir");
+  }
+
+  @Test public void includeConcessionPricing() {
+    when(tripPreferences.isConcessionPricingPreferred()).thenReturn(true);
+    assertThat(routeService.getParamsByPreferences()).containsEntry("conc", "true");
+  }
+
+  @Test public void excludeConcessionPricing() {
+    when(tripPreferences.isConcessionPricingPreferred()).thenReturn(false);
+    assertThat(routeService.getParamsByPreferences()).doesNotContainKey("conc");
   }
 
   @Test public void shouldIncludeOptionDepartAfter() {

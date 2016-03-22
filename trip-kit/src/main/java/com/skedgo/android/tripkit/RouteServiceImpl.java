@@ -33,7 +33,8 @@ final class RouteServiceImpl implements RouteService {
   private final Resources resources;
   private final Func1<String, RoutingApi> routingApiFactory;
   private final ExcludedTransitModesAdapter excludedTransitModesAdapter;
-  private final Co2Preferences co2Preferences;
+  @Nullable private final Co2Preferences co2Preferences;
+  @Nullable private final TripPreferences tripPreferences;
 
   RouteServiceImpl(
       @NonNull Resources resources,
@@ -41,13 +42,15 @@ final class RouteServiceImpl implements RouteService {
       @NonNull Func1<Query, Observable<List<Query>>> queryGenerator,
       @NonNull Func1<String, RoutingApi> routingApiFactory,
       @Nullable ExcludedTransitModesAdapter excludedTransitModesAdapter,
-      @Nullable Co2Preferences co2Preferences) {
+      @Nullable Co2Preferences co2Preferences,
+      @Nullable TripPreferences tripPreferences) {
     this.appVersion = appVersion;
     this.queryGenerator = queryGenerator;
     this.resources = resources;
     this.routingApiFactory = routingApiFactory;
     this.excludedTransitModesAdapter = excludedTransitModesAdapter;
     this.co2Preferences = co2Preferences;
+    this.tripPreferences = tripPreferences;
   }
 
   private static String toCoordinatesText(Location location) {
@@ -96,6 +99,18 @@ final class RouteServiceImpl implements RouteService {
     }
   }
 
+  /* TODO: Consider making this public for Xerox team. */
+  @NonNull Map<String, String> getParamsByPreferences() {
+    final ArrayMap<String, String> map = new ArrayMap<>();
+    if (tripPreferences != null) {
+      if (tripPreferences.isConcessionPricingPreferred()) {
+        map.put("conc", "true");
+      }
+    }
+
+    return map;
+  }
+
   @NonNull Map<String, Object> toOptions(@NonNull Query query) {
     final String departureCoordinates = toCoordinatesText(query.getFromLocation());
     final String arrivalCoordinates = toCoordinatesText(query.getToLocation());
@@ -119,6 +134,7 @@ final class RouteServiceImpl implements RouteService {
       options.put("ir", "1");
     }
 
+    options.putAll(getParamsByPreferences());
     return options;
   }
 
