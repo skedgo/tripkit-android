@@ -8,7 +8,8 @@ public interface BookingResolver {
   int UBER = 0;
   int LYFT = UBER + 1;
   int FLITWAYS = LYFT + 1;
-  int OTHERS = FLITWAYS + 1;
+  int SMS = FLITWAYS + 1;
+  int OTHERS = SMS + 1;
 
   Observable<BookingAction> performExternalActionAsync(ExternalActionParams params);
   @Nullable String getTitleForExternalAction(String externalAction);

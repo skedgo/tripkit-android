@@ -31,6 +31,7 @@ import rx.observers.TestSubscriber;
 import static com.skedgo.android.tripkit.BookingResolver.FLITWAYS;
 import static com.skedgo.android.tripkit.BookingResolver.LYFT;
 import static com.skedgo.android.tripkit.BookingResolver.OTHERS;
+import static com.skedgo.android.tripkit.BookingResolver.SMS;
 import static com.skedgo.android.tripkit.BookingResolver.UBER;
 import static org.mockito.Matchers.any;
 import static org.mockito.Matchers.eq;
@@ -225,6 +226,52 @@ public class BookingResolverImplTest {
         .bookingProvider(OTHERS)
         .hasApp(false)
         .data(new Intent(Intent.ACTION_VIEW, Uri.parse("https://github.com/")))
+        .build();
+    subscriber.awaitTerminalEvent();
+    subscriber.assertNoErrors();
+    subscriber.assertValue(action);
+  }
+
+  @Test public void handleSMS() {
+    final TestSubscriber<BookingAction> subscriber = new TestSubscriber<>();
+    bookingResolver.performExternalActionAsync(
+        ExternalActionParams.builder()
+            .action("sms:12345")
+            .segment(mock(TripSegment.class))
+            .build()
+    ).subscribe(subscriber);
+
+    String body = null;
+    Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("sms:12345"));
+    intent.putExtra("sms_body", body).putExtra(Intent.EXTRA_TEXT, body);
+
+    final BookingAction action = BookingAction.builder()
+        .bookingProvider(SMS)
+        .hasApp(false)
+        .data(intent)
+        .build();
+    subscriber.awaitTerminalEvent();
+    subscriber.assertNoErrors();
+    subscriber.assertValue(action);
+  }
+
+  @Test public void handleSMSWithBody() {
+    final TestSubscriber<BookingAction> subscriber = new TestSubscriber<>();
+    bookingResolver.performExternalActionAsync(
+        ExternalActionParams.builder()
+            .action("sms:12345?Body goes here")
+            .segment(mock(TripSegment.class))
+            .build()
+    ).subscribe(subscriber);
+
+    String body = "Body goes here";
+    Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("sms:12345"));
+    intent.putExtra("sms_body", body).putExtra(Intent.EXTRA_TEXT, body);
+
+    final BookingAction action = BookingAction.builder()
+        .bookingProvider(SMS)
+        .hasApp(false)
+        .data(intent)
         .build();
     subscriber.awaitTerminalEvent();
     subscriber.assertNoErrors();

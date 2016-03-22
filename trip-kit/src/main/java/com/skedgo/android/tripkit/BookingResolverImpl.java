@@ -76,6 +76,8 @@ public final class BookingResolverImpl implements BookingResolver {
       return externalActionsMap.get("http");
     } else if (externalAction.startsWith("tel:")) {
       return externalActionsMap.get("tel:");
+    } else if (externalAction.startsWith("sms:")) {
+      return externalActionsMap.get("sms:");
     } else if (externalActionsMap.containsKey(externalAction)) {
       return externalActionsMap.get(externalAction);
     } else {
