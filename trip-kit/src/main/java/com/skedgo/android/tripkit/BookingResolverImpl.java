@@ -33,7 +33,7 @@ public final class BookingResolverImpl implements BookingResolver {
     };
 
     externalActionsMap = new HashMap<>(8);
-    externalActionsMap.put("gocatch", new ActionGoCatchStrategy(resources));
+    externalActionsMap.put("gocatch", new ActionGoCatchStrategy(resources, isPackageInstalled, reverseGeocoderFactory));
     externalActionsMap.put("uber", new ActionUberStrategy(resources, isPackageInstalled));
     externalActionsMap.put("ingogo", new ActionIngogoStrategy(resources));
     externalActionsMap.put("lyft", new ActionLyftStrategy(resources, isPackageInstalled));
