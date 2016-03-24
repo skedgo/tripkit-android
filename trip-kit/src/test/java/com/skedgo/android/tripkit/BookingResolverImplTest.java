@@ -34,6 +34,7 @@ import static com.skedgo.android.tripkit.BookingResolver.LYFT;
 import static com.skedgo.android.tripkit.BookingResolver.OTHERS;
 import static com.skedgo.android.tripkit.BookingResolver.SMS;
 import static com.skedgo.android.tripkit.BookingResolver.UBER;
+import static com.skedgo.android.tripkit.BookingResolver.INGOGO;
 import static org.mockito.Matchers.any;
 import static org.mockito.Matchers.eq;
 import static org.mockito.Mockito.mock;
@@ -338,6 +339,54 @@ public class BookingResolverImplTest {
         .bookingProvider(GOCATCH)
         .hasApp(true)
         .data(new Intent(Intent.ACTION_VIEW, Uri.parse("gocatch://referral?code=tripgo&destination=B&pickup=&lat=1.0&lng=2.0")))
+        .build();
+    subscriber.awaitTerminalEvent();
+    subscriber.assertNoErrors();
+    subscriber.assertValue(action);
+  }
+
+  @Test public void hasIngogoApp() throws PackageManager.NameNotFoundException {
+    when(packageManager.getPackageInfo(
+        eq("com.ingogo.passenger"),
+        eq(PackageManager.GET_ACTIVITIES)
+    )).thenReturn(new PackageInfo());
+
+    final TestSubscriber<BookingAction> subscriber = new TestSubscriber<>();
+    bookingResolver.performExternalActionAsync(
+        ExternalActionParams.builder()
+            .action("ingogo")
+            .segment(mock(TripSegment.class))
+            .build()
+    ).subscribe(subscriber);
+
+    final BookingAction action = BookingAction.builder()
+        .bookingProvider(INGOGO)
+        .hasApp(true)
+        .data(new Intent(Intent.ACTION_VIEW, Uri.parse("ingogo://")))
+        .build();
+    subscriber.awaitTerminalEvent();
+    subscriber.assertNoErrors();
+    subscriber.assertValue(action);
+  }
+
+  @Test public void hasNoIngogoApp() throws PackageManager.NameNotFoundException {
+    when(packageManager.getPackageInfo(
+        eq("com.ingogo.passenger"),
+        eq(PackageManager.GET_ACTIVITIES)
+    )).thenThrow(new PackageManager.NameNotFoundException());
+
+    final TestSubscriber<BookingAction> subscriber = new TestSubscriber<>();
+    bookingResolver.performExternalActionAsync(
+        ExternalActionParams.builder()
+            .action("ingogo")
+            .segment(mock(TripSegment.class))
+            .build()
+    ).subscribe(subscriber);
+
+    final BookingAction action = BookingAction.builder()
+        .bookingProvider(INGOGO)
+        .hasApp(false)
+        .data(new Intent(Intent.ACTION_VIEW, Uri.parse("https://play.google.com/store/apps/details?id=com.ingogo.passenger")))
         .build();
     subscriber.awaitTerminalEvent();
     subscriber.assertNoErrors();

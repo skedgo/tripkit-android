@@ -10,6 +10,7 @@ import java.lang.annotation.RetentionPolicy;
     BookingResolver.LYFT,
     BookingResolver.FLITWAYS,
     BookingResolver.GOCATCH,
+    BookingResolver.INGOGO,
     BookingResolver.SMS,
     BookingResolver.OTHERS
 })

@@ -9,7 +9,8 @@ public interface BookingResolver {
   int LYFT = UBER + 1;
   int FLITWAYS = LYFT + 1;
   int GOCATCH = FLITWAYS + 1;
-  int SMS = GOCATCH + 1;
+  int INGOGO = GOCATCH + 1;
+  int SMS = INGOGO + 1;
   int OTHERS = SMS + 1;
 
   Observable<BookingAction> performExternalActionAsync(ExternalActionParams params);

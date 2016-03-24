@@ -1,20 +1,43 @@
 package com.skedgo.android.tripkit;
 
+import android.content.Intent;
 import android.content.res.Resources;
+import android.net.Uri;
 import android.support.annotation.Nullable;
 
 import rx.Observable;
+import rx.functions.Func1;
 
 public class ActionIngogoStrategy implements ExternalActionStrategy {
 
-  private final Resources resources;
+  private static final String INGOGO_PACKAGE = "com.ingogo.passenger";
 
-  public ActionIngogoStrategy(Resources resources) {
+  private final Resources resources;
+  private final Func1<String, Boolean> isPackageInstalled;
+
+  public ActionIngogoStrategy(Resources resources, Func1<String, Boolean> isPackageInstalled) {
     this.resources = resources;
+    this.isPackageInstalled = isPackageInstalled;
   }
 
+
   @Override public Observable<BookingAction> performExternalActionAsync(ExternalActionParams params) {
-    return Observable.error(new UnsupportedOperationException());
+    final BookingAction.Builder actionBuilder = BookingAction.builder();
+    actionBuilder.bookingProvider(BookingResolver.INGOGO);
+    if (isPackageInstalled.call(INGOGO_PACKAGE)) {
+      final BookingAction action = actionBuilder.hasApp(true).data(
+          new Intent(Intent.ACTION_VIEW).setData(Uri.parse("ingogo://"))
+      ).build();
+      return Observable.just(action);
+    } else {
+      final Intent data = new Intent(Intent.ACTION_VIEW)
+          .setData(Uri.parse("https://play.google.com/store/apps/details?id=" + INGOGO_PACKAGE));
+      final BookingAction action = actionBuilder
+          .hasApp(false)
+          .data(data)
+          .build();
+      return Observable.just(action);
+    }
   }
 
   @Nullable @Override public String getTitleForExternalAction(String externalAction) {
