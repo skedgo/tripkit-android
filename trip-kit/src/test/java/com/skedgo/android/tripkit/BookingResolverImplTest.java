@@ -234,52 +234,6 @@ public class BookingResolverImplTest {
     subscriber.assertValue(action);
   }
 
-  @Test public void handleSMS() {
-    final TestSubscriber<BookingAction> subscriber = new TestSubscriber<>();
-    bookingResolver.performExternalActionAsync(
-        ExternalActionParams.builder()
-            .action("sms:12345")
-            .segment(mock(TripSegment.class))
-            .build()
-    ).subscribe(subscriber);
-
-    String body = null;
-    Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("sms:12345"));
-    intent.putExtra("sms_body", body).putExtra(Intent.EXTRA_TEXT, body);
-
-    final BookingAction action = BookingAction.builder()
-        .bookingProvider(SMS)
-        .hasApp(false)
-        .data(intent)
-        .build();
-    subscriber.awaitTerminalEvent();
-    subscriber.assertNoErrors();
-    subscriber.assertValue(action);
-  }
-
-  @Test public void handleSMSWithBody() {
-    final TestSubscriber<BookingAction> subscriber = new TestSubscriber<>();
-    bookingResolver.performExternalActionAsync(
-        ExternalActionParams.builder()
-            .action("sms:12345?Body goes here")
-            .segment(mock(TripSegment.class))
-            .build()
-    ).subscribe(subscriber);
-
-    String body = "Body goes here";
-    Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("sms:12345"));
-    intent.putExtra("sms_body", body).putExtra(Intent.EXTRA_TEXT, body);
-
-    final BookingAction action = BookingAction.builder()
-        .bookingProvider(SMS)
-        .hasApp(false)
-        .data(intent)
-        .build();
-    subscriber.awaitTerminalEvent();
-    subscriber.assertNoErrors();
-    subscriber.assertValue(action);
-  }
-
   @Test public void hasNoGoCatchApp() throws PackageManager.NameNotFoundException {
     when(packageManager.getPackageInfo(
         eq("com.gocatchapp.goCatch"),
@@ -387,6 +341,94 @@ public class BookingResolverImplTest {
         .bookingProvider(INGOGO)
         .hasApp(false)
         .data(new Intent(Intent.ACTION_VIEW, Uri.parse("https://play.google.com/store/apps/details?id=com.ingogo.passenger")))
+        .build();
+    subscriber.awaitTerminalEvent();
+    subscriber.assertNoErrors();
+    subscriber.assertValue(action);
+  }
+
+  @Test public void handleSMS() {
+    final TestSubscriber<BookingAction> subscriber = new TestSubscriber<>();
+    bookingResolver.performExternalActionAsync(
+        ExternalActionParams.builder()
+            .action("sms:12345")
+            .segment(mock(TripSegment.class))
+            .build()
+    ).subscribe(subscriber);
+
+    String body = null;
+    Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("sms:12345"));
+    intent.putExtra("sms_body", body).putExtra(Intent.EXTRA_TEXT, body);
+
+    final BookingAction action = BookingAction.builder()
+        .bookingProvider(SMS)
+        .hasApp(false)
+        .data(intent)
+        .build();
+    subscriber.awaitTerminalEvent();
+    subscriber.assertNoErrors();
+    subscriber.assertValue(action);
+  }
+
+  @Test public void handleSMSWithBody() {
+    final TestSubscriber<BookingAction> subscriber = new TestSubscriber<>();
+    bookingResolver.performExternalActionAsync(
+        ExternalActionParams.builder()
+            .action("sms:12345?Body goes here")
+            .segment(mock(TripSegment.class))
+            .build()
+    ).subscribe(subscriber);
+
+    String body = "Body goes here";
+    Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("sms:12345"));
+    intent.putExtra("sms_body", body).putExtra(Intent.EXTRA_TEXT, body);
+
+    final BookingAction action = BookingAction.builder()
+        .bookingProvider(SMS)
+        .hasApp(false)
+        .data(intent)
+        .build();
+    subscriber.awaitTerminalEvent();
+    subscriber.assertNoErrors();
+    subscriber.assertValue(action);
+  }
+
+  @Test public void handleTel() {
+    final TestSubscriber<BookingAction> subscriber = new TestSubscriber<>();
+    bookingResolver.performExternalActionAsync(
+        ExternalActionParams.builder()
+            .action("tel:12345")
+            .segment(mock(TripSegment.class))
+            .build()
+    ).subscribe(subscriber);
+
+    Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("tel:12345"));
+
+    final BookingAction action = BookingAction.builder()
+        .bookingProvider(OTHERS)
+        .hasApp(false)
+        .data(intent)
+        .build();
+    subscriber.awaitTerminalEvent();
+    subscriber.assertNoErrors();
+    subscriber.assertValue(action);
+  }
+
+  @Test public void handleTelWithName() {
+    final TestSubscriber<BookingAction> subscriber = new TestSubscriber<>();
+    bookingResolver.performExternalActionAsync(
+        ExternalActionParams.builder()
+            .action("tel:12345?name=user")
+            .segment(mock(TripSegment.class))
+            .build()
+    ).subscribe(subscriber);
+
+    Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("tel:12345"));
+
+    final BookingAction action = BookingAction.builder()
+        .bookingProvider(OTHERS)
+        .hasApp(false)
+        .data(intent)
         .build();
     subscriber.awaitTerminalEvent();
     subscriber.assertNoErrors();

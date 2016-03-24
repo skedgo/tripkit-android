@@ -1,6 +1,8 @@
 package com.skedgo.android.tripkit;
 
+import android.content.Intent;
 import android.content.res.Resources;
+import android.net.Uri;
 import android.support.annotation.Nullable;
 
 import java.io.UnsupportedEncodingException;
@@ -16,7 +18,18 @@ public class ActionTelStrategy implements ExternalActionStrategy {
   }
 
   @Override public Observable<BookingAction> performExternalActionAsync(ExternalActionParams params) {
-    return Observable.error(new UnsupportedOperationException());
+    final BookingAction.Builder actionBuilder = BookingAction.builder();
+
+    String telAction = params.action();
+    if (telAction.contains("?name=")){
+      telAction = telAction.substring(0, telAction.indexOf("?name="));
+    }
+    final BookingAction action = actionBuilder
+        .bookingProvider(BookingResolver.OTHERS)
+        .hasApp(false)
+        .data(new Intent(Intent.ACTION_VIEW, Uri.parse(telAction)))
+        .build();
+    return Observable.just(action);
   }
 
   @Nullable @Override public String getTitleForExternalAction(String externalAction) {
