@@ -20,7 +20,6 @@ public class ActionIngogoStrategy implements ExternalActionStrategy {
     this.isPackageInstalled = isPackageInstalled;
   }
 
-
   @Override public Observable<BookingAction> performExternalActionAsync(ExternalActionParams params) {
     final BookingAction.Builder actionBuilder = BookingAction.builder();
     actionBuilder.bookingProvider(BookingResolver.INGOGO);
@@ -41,7 +40,7 @@ public class ActionIngogoStrategy implements ExternalActionStrategy {
   }
 
   @Nullable @Override public String getTitleForExternalAction(String externalAction) {
-    // TODO
-    return null;
+
+    return resources.getString(R.string.ingogo_a_taxi);
   }
 }
