@@ -9,9 +9,6 @@ import android.support.annotation.Nullable;
 import com.skedgo.android.common.model.Location;
 import com.skedgo.android.common.model.TripSegment;
 
-import java.io.UnsupportedEncodingException;
-import java.net.URLEncoder;
-
 import rx.Observable;
 import rx.functions.Func1;
 
@@ -45,20 +42,18 @@ final class GoCatchBookingResolver implements BookingResolver {
               .build()
       ).map(new Func1<String, BookingAction>() {
         @Override public BookingAction call(String arrivalAddress) {
-          try {
-            arrivalAddress = URLEncoder.encode(arrivalAddress, "UTF-8");
-          } catch (UnsupportedEncodingException ignored) {
-          }
-
-          // TODO: This is not working, it just opens the app. Question sent to GoCatch team.
-          String url = "gocatch://referral?code=" + GOCATCH_CODE
-              + "&destination=" + arrivalAddress
-              + "&pickup=&lat=" + departure.getLat()
-              + "&lng=" + departure.getLon();
+          final Uri uri = Uri.parse("gocatch://referral")
+              .buildUpon()
+              .appendQueryParameter("code", GOCATCH_CODE)
+              .appendQueryParameter("destination", arrivalAddress)
+              .appendQueryParameter("pickup", "")
+              .appendQueryParameter("lat", String.valueOf(departure.getLat()))
+              .appendQueryParameter("lng", String.valueOf(departure.getLon()))
+              .build();
           return BookingAction.builder()
               .bookingProvider(BookingResolver.GOCATCH)
               .hasApp(true)
-              .data(new Intent(Intent.ACTION_VIEW).setData(Uri.parse(url)))
+              .data(new Intent(Intent.ACTION_VIEW).setData(uri))
               .build();
         }
       });
