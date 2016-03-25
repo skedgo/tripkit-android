@@ -402,12 +402,10 @@ public class BookingResolverImplTest {
             .build()
     ).subscribe(subscriber);
 
-    Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("tel:12345"));
-
     final BookingAction action = BookingAction.builder()
         .bookingProvider(OTHERS)
         .hasApp(false)
-        .data(intent)
+        .data(new Intent(Intent.ACTION_VIEW, Uri.parse("tel:12345")))
         .build();
     subscriber.awaitTerminalEvent();
     subscriber.assertNoErrors();
@@ -423,15 +421,24 @@ public class BookingResolverImplTest {
             .build()
     ).subscribe(subscriber);
 
-    Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("tel:12345"));
-
     final BookingAction action = BookingAction.builder()
         .bookingProvider(OTHERS)
         .hasApp(false)
-        .data(intent)
+        .data(new Intent(Intent.ACTION_VIEW, Uri.parse("tel:12345")))
         .build();
     subscriber.awaitTerminalEvent();
     subscriber.assertNoErrors();
     subscriber.assertValue(action);
+  }
+
+  @Test public void strangeExternalAction() {
+    final TestSubscriber<BookingAction> subscriber = new TestSubscriber<>();
+    bookingResolver.performExternalActionAsync(
+        ExternalActionParams.builder()
+            .action("Some strange action")
+            .segment(mock(TripSegment.class))
+            .build()
+    ).subscribe(subscriber);
+    subscriber.assertError(UnsupportedOperationException.class);
   }
 }

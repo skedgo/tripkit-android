@@ -23,8 +23,7 @@ public final class BookingResolverImpl implements BookingResolver {
         try {
           packageManager.getPackageInfo(packageName, PackageManager.GET_ACTIVITIES);
           return true;
-        } catch (PackageManager.NameNotFoundException e) {
-          // Ignored.
+        } catch (PackageManager.NameNotFoundException ignored) {
         }
         return false;
       }
@@ -43,11 +42,11 @@ public final class BookingResolverImpl implements BookingResolver {
 
   @Override public Observable<BookingAction> performExternalActionAsync(ExternalActionParams params) {
     final String externalAction = params.action();
-    BookingResolver resolver = getBookingResolver(externalAction);
+    final BookingResolver resolver = getBookingResolver(externalAction);
     if (resolver != null) {
       return resolver.performExternalActionAsync(params);
     } else {
-      return Observable.error(new UnsupportedOperationException());
+      return Observable.error(new UnsupportedOperationException("Strange action: " + externalAction));
     }
   }
 
