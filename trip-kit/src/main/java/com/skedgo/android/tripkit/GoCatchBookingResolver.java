@@ -13,8 +13,6 @@ import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 
 import rx.Observable;
-import rx.Subscriber;
-import rx.functions.Action1;
 import rx.functions.Func1;
 
 final class GoCatchBookingResolver implements BookingResolver {
@@ -35,47 +33,40 @@ final class GoCatchBookingResolver implements BookingResolver {
   }
 
   @Override public Observable<BookingAction> performExternalActionAsync(ExternalActionParams params) {
-    final BookingAction.Builder actionBuilder = BookingAction.builder()
-        .bookingProvider(BookingResolver.GOCATCH);
     if (isPackageInstalled.call(GOCATCH_PACKAGE)) {
       final TripSegment segment = params.segment();
       final Location departure = segment.getFrom();
       final Location arrival = segment.getTo();
+      return reverseGeocoderFactory.call(
+          ImmutableReverseGeocodingParams.builder()
+              .lat(arrival.getLat())
+              .lng(arrival.getLon())
+              .maxResults(1)
+              .build()
+      ).map(new Func1<String, BookingAction>() {
+        @Override public BookingAction call(String arrivalAddress) {
+          try {
+            arrivalAddress = URLEncoder.encode(arrivalAddress, "UTF-8");
+          } catch (UnsupportedEncodingException ignored) {
+          }
 
-      return Observable.create(new Observable.OnSubscribe<BookingAction>() {
-        @Override public void call(final Subscriber<? super BookingAction> subscriber) {
-          reverseGeocoderFactory.call(
-              ImmutableReverseGeocodingParams.builder()
-                  .lat(arrival.getLat())
-                  .lng(arrival.getLon())
-                  .maxResults(1)
-                  .build())
-              .subscribe(new Action1<String>() {
-                @Override public void call(String arrivalAddress) {
-                  try {
-                    arrivalAddress = URLEncoder.encode(arrivalAddress, "UTF-8");
-                  } catch (UnsupportedEncodingException e) {
-                    e.printStackTrace();
-                  }
-
-                  // TODO: this is not working, it just opens the app. Question sent to GoCatch team
-
-                  String url = "gocatch://referral?code=" + GOCATCH_CODE
-                      + "&destination=" + arrivalAddress + "&pickup=&lat=" + departure.getLat() + "&lng=" + departure.getLon();
-
-                  final BookingAction action = actionBuilder.hasApp(true)
-                      .data(new Intent(Intent.ACTION_VIEW).setData(Uri.parse(url))
-                      ).build();
-                  subscriber.onNext(action);
-                  subscriber.onCompleted();
-                }
-              });
+          // TODO: This is not working, it just opens the app. Question sent to GoCatch team.
+          String url = "gocatch://referral?code=" + GOCATCH_CODE
+              + "&destination=" + arrivalAddress
+              + "&pickup=&lat=" + departure.getLat()
+              + "&lng=" + departure.getLon();
+          return BookingAction.builder()
+              .bookingProvider(BookingResolver.GOCATCH)
+              .hasApp(true)
+              .data(new Intent(Intent.ACTION_VIEW).setData(Uri.parse(url)))
+              .build();
         }
       });
     } else {
       final Intent data = new Intent(Intent.ACTION_VIEW)
           .setData(Uri.parse("https://play.google.com/store/apps/details?id=" + GOCATCH_PACKAGE));
-      final BookingAction action = actionBuilder
+      final BookingAction action = BookingAction.builder()
+          .bookingProvider(BookingResolver.GOCATCH)
           .hasApp(false)
           .data(data)
           .build();
