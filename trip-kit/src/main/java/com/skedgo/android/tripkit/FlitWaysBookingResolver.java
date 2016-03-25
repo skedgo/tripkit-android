@@ -1,7 +1,6 @@
 package com.skedgo.android.tripkit;
 
 import android.content.Intent;
-import android.content.res.Resources;
 import android.net.Uri;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -21,22 +20,16 @@ import rx.functions.Func1;
 import rx.functions.Func2;
 import rx.schedulers.Schedulers;
 
-public class ActionFlitWaysStrategy implements ExternalActionStrategy {
-
-  private final Resources resources;
+final class FlitWaysBookingResolver implements BookingResolver {
   private final Func1<ReverseGeocodingParams, Observable<String>> reverseGeocoderFactory;
 
-  public ActionFlitWaysStrategy(Resources resources,
-                                @NonNull Func1<ReverseGeocodingParams, Observable<String>> reverseGeocoderFactory) {
-    this.resources = resources;
+  public FlitWaysBookingResolver(@NonNull Func1<ReverseGeocodingParams, Observable<String>> reverseGeocoderFactory) {
     this.reverseGeocoderFactory = reverseGeocoderFactory;
   }
 
   @Override public Observable<BookingAction> performExternalActionAsync(ExternalActionParams params) {
-
-    final BookingAction.Builder actionBuilder = BookingAction.builder();
-
-    actionBuilder.bookingProvider(BookingResolver.FLITWAYS);
+    final BookingAction.Builder actionBuilder = BookingAction.builder()
+        .bookingProvider(BookingResolver.FLITWAYS);
     final String flitWaysPartnerKey = params.flitWaysPartnerKey();
     if (flitWaysPartnerKey == null) {
       final Intent data = new Intent(Intent.ACTION_VIEW)

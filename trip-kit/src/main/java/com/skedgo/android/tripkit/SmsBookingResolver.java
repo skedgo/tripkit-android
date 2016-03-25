@@ -1,43 +1,27 @@
 package com.skedgo.android.tripkit;
 
 import android.content.Intent;
-import android.content.res.Resources;
 import android.net.Uri;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 
 import rx.Observable;
 
-public class ActionSmsStrategy implements ExternalActionStrategy {
-
-  private final Resources resources;
-
-  public ActionSmsStrategy(Resources resources) {
-    this.resources = resources;
-  }
+final class SmsBookingResolver implements BookingResolver {
+  public SmsBookingResolver() {}
 
   @Override public Observable<BookingAction> performExternalActionAsync(ExternalActionParams params) {
-
-    final BookingAction.Builder actionBuilder = BookingAction.builder();
-
-    final BookingAction action = actionBuilder
+    final BookingAction action = BookingAction.builder()
         .bookingProvider(BookingResolver.SMS)
         .hasApp(false)
         .data(createSmsIntentByAction(params.action()))
         .build();
     return Observable.just(action);
-
   }
 
   @Nullable @Override public String getTitleForExternalAction(String externalAction) {
     return "Send SMS"; // TODO: i18n.
   }
-
-  /**
-   * Methods from com.skedgo.android.common.util, replied to avoid dependency.
-   * TODO: not used anywhere else, remove from com.skedgo.android.common.util?
-   */
-
 
   /**
    * @param uri e.g. 'sms:12345' where '12345' is phone number.

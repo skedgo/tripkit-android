@@ -17,8 +17,7 @@ import rx.Subscriber;
 import rx.functions.Action1;
 import rx.functions.Func1;
 
-public class ActionGoCatchStrategy implements ExternalActionStrategy {
-
+final class GoCatchBookingResolver implements BookingResolver {
   private static final String GOCATCH_PACKAGE = "com.gocatchapp.goCatch";
   private static final String GOCATCH_CODE = "tripgo";
 
@@ -26,21 +25,19 @@ public class ActionGoCatchStrategy implements ExternalActionStrategy {
   private final Func1<String, Boolean> isPackageInstalled;
   private final Func1<ReverseGeocodingParams, Observable<String>> reverseGeocoderFactory;
 
-  public ActionGoCatchStrategy(Resources resources, Func1<String, Boolean> isPackageInstalled,
-                               @NonNull Func1<ReverseGeocodingParams, Observable<String>> reverseGeocoderFactory) {
+  public GoCatchBookingResolver(
+      @NonNull Resources resources,
+      @NonNull Func1<String, Boolean> isPackageInstalled,
+      @NonNull Func1<ReverseGeocodingParams, Observable<String>> reverseGeocoderFactory) {
     this.resources = resources;
     this.isPackageInstalled = isPackageInstalled;
     this.reverseGeocoderFactory = reverseGeocoderFactory;
   }
 
   @Override public Observable<BookingAction> performExternalActionAsync(ExternalActionParams params) {
-
-    final BookingAction.Builder actionBuilder = BookingAction.builder();
-
-    actionBuilder.bookingProvider(BookingResolver.GOCATCH);
-
+    final BookingAction.Builder actionBuilder = BookingAction.builder()
+        .bookingProvider(BookingResolver.GOCATCH);
     if (isPackageInstalled.call(GOCATCH_PACKAGE)) {
-
       final TripSegment segment = params.segment();
       final Location departure = segment.getFrom();
       final Location arrival = segment.getTo();
@@ -75,7 +72,6 @@ public class ActionGoCatchStrategy implements ExternalActionStrategy {
               });
         }
       });
-
     } else {
       final Intent data = new Intent(Intent.ACTION_VIEW)
           .setData(Uri.parse("https://play.google.com/store/apps/details?id=" + GOCATCH_PACKAGE));
@@ -85,7 +81,6 @@ public class ActionGoCatchStrategy implements ExternalActionStrategy {
           .build();
       return Observable.just(action);
     }
-
   }
 
   @Nullable @Override public String getTitleForExternalAction(String externalAction) {

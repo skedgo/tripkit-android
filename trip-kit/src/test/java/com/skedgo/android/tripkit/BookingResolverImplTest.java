@@ -30,11 +30,11 @@ import rx.observers.TestSubscriber;
 
 import static com.skedgo.android.tripkit.BookingResolver.FLITWAYS;
 import static com.skedgo.android.tripkit.BookingResolver.GOCATCH;
+import static com.skedgo.android.tripkit.BookingResolver.INGOGO;
 import static com.skedgo.android.tripkit.BookingResolver.LYFT;
 import static com.skedgo.android.tripkit.BookingResolver.OTHERS;
 import static com.skedgo.android.tripkit.BookingResolver.SMS;
 import static com.skedgo.android.tripkit.BookingResolver.UBER;
-import static com.skedgo.android.tripkit.BookingResolver.INGOGO;
 import static org.mockito.Matchers.any;
 import static org.mockito.Matchers.eq;
 import static org.mockito.Mockito.mock;

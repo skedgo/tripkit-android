@@ -12,15 +12,13 @@ import rx.Observable;
 import rx.functions.Func1;
 
 public final class BookingResolverImpl implements BookingResolver {
-
-  private Map<String, ExternalActionStrategy> externalActionsMap;
+  private Map<String, BookingResolver> resolverMap;
 
   public BookingResolverImpl(
-      Resources resources, final PackageManager packageManager,
+      @NonNull Resources resources,
+      @NonNull final PackageManager packageManager,
       @NonNull Func1<ReverseGeocodingParams, Observable<String>> reverseGeocoderFactory) {
-
-    // init external actions strategies
-    Func1<String, Boolean> isPackageInstalled = new Func1<String, Boolean>() {
+    final Func1<String, Boolean> isPackageInstalled = new Func1<String, Boolean>() {
       @Override public Boolean call(String packageName) {
         try {
           packageManager.getPackageInfo(packageName, PackageManager.GET_ACTIVITIES);
@@ -32,57 +30,49 @@ public final class BookingResolverImpl implements BookingResolver {
       }
     };
 
-    externalActionsMap = new HashMap<>(8);
-    externalActionsMap.put("gocatch", new ActionGoCatchStrategy(resources, isPackageInstalled, reverseGeocoderFactory));
-    externalActionsMap.put("uber", new ActionUberStrategy(resources, isPackageInstalled));
-    externalActionsMap.put("ingogo", new ActionIngogoStrategy(resources, isPackageInstalled));
-    externalActionsMap.put("lyft", new ActionLyftStrategy(resources, isPackageInstalled));
-    externalActionsMap.put("flitways", new ActionFlitWaysStrategy(resources, reverseGeocoderFactory));
-    externalActionsMap.put("tel:", new ActionTelStrategy(resources));
-    externalActionsMap.put("sms:", new ActionSmsStrategy(resources));
-    externalActionsMap.put("http", new ActionHttpStrategy(resources));
-
+    resolverMap = new HashMap<>(8);
+    resolverMap.put("gocatch", new GoCatchBookingResolver(resources, isPackageInstalled, reverseGeocoderFactory));
+    resolverMap.put("uber", new UberBookingResolver(resources, isPackageInstalled));
+    resolverMap.put("ingogo", new IngogoBookingResolver(resources, isPackageInstalled));
+    resolverMap.put("lyft", new LyftBookingResolver(resources, isPackageInstalled));
+    resolverMap.put("flitways", new FlitWaysBookingResolver(reverseGeocoderFactory));
+    resolverMap.put("tel:", new TelBookingResolver(resources));
+    resolverMap.put("sms:", new SmsBookingResolver());
+    resolverMap.put("http", new WebBookingResolver(resources));
   }
 
-  @Override public Observable<BookingAction> performExternalActionAsync(
-      ExternalActionParams params) {
-
+  @Override public Observable<BookingAction> performExternalActionAsync(ExternalActionParams params) {
     final String externalAction = params.action();
-
-    ExternalActionStrategy externalActionStrategy = getExternalActionStrategy(externalAction);
-
-    if (externalActionStrategy != null) {
-      return externalActionStrategy.performExternalActionAsync(params);
+    BookingResolver resolver = getBookingResolver(externalAction);
+    if (resolver != null) {
+      return resolver.performExternalActionAsync(params);
     } else {
       return Observable.error(new UnsupportedOperationException());
     }
   }
 
   @Nullable @Override public String getTitleForExternalAction(String externalAction) {
-
-    ExternalActionStrategy externalActionStrategy = getExternalActionStrategy(externalAction);
-
-    if (externalActionStrategy != null) {
-      return externalActionStrategy.getTitleForExternalAction(externalAction);
+    BookingResolver resolver = getBookingResolver(externalAction);
+    if (resolver != null) {
+      return resolver.getTitleForExternalAction(externalAction);
     } else {
       return null;
     }
   }
 
-  private ExternalActionStrategy getExternalActionStrategy(String externalAction) {
+  private BookingResolver getBookingResolver(String externalAction) {
     if (externalAction.startsWith("lyft")) {
-      return externalActionsMap.get("lyft");
+      return resolverMap.get("lyft");
     } else if (externalAction.startsWith("http")) {
-      return externalActionsMap.get("http");
+      return resolverMap.get("http");
     } else if (externalAction.startsWith("tel:")) {
-      return externalActionsMap.get("tel:");
+      return resolverMap.get("tel:");
     } else if (externalAction.startsWith("sms:")) {
-      return externalActionsMap.get("sms:");
-    } else if (externalActionsMap.containsKey(externalAction)) {
-      return externalActionsMap.get(externalAction);
+      return resolverMap.get("sms:");
+    } else if (resolverMap.containsKey(externalAction)) {
+      return resolverMap.get(externalAction);
     } else {
       return null;
     }
   }
-
 }

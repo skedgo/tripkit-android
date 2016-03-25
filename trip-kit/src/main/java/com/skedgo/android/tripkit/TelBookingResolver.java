@@ -10,21 +10,19 @@ import java.net.URLDecoder;
 
 import rx.Observable;
 
-public class ActionTelStrategy implements ExternalActionStrategy {
+final class TelBookingResolver implements BookingResolver {
   private final Resources resources;
 
-  public ActionTelStrategy(Resources resources) {
+  public TelBookingResolver(Resources resources) {
     this.resources = resources;
   }
 
   @Override public Observable<BookingAction> performExternalActionAsync(ExternalActionParams params) {
-    final BookingAction.Builder actionBuilder = BookingAction.builder();
-
     String telAction = params.action();
-    if (telAction.contains("?name=")){
+    if (telAction.contains("?name=")) {
       telAction = telAction.substring(0, telAction.indexOf("?name="));
     }
-    final BookingAction action = actionBuilder
+    final BookingAction action = BookingAction.builder()
         .bookingProvider(BookingResolver.OTHERS)
         .hasApp(false)
         .data(new Intent(Intent.ACTION_VIEW, Uri.parse(telAction)))

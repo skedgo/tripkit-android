@@ -3,23 +3,20 @@ package com.skedgo.android.tripkit;
 import android.content.Intent;
 import android.content.res.Resources;
 import android.net.Uri;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 
 import rx.Observable;
 
-public class ActionHttpStrategy implements ExternalActionStrategy {
-
+final class WebBookingResolver implements BookingResolver {
   private final Resources resources;
 
-  public ActionHttpStrategy(Resources resources) {
+  public WebBookingResolver(@NonNull Resources resources) {
     this.resources = resources;
   }
 
   @Override public Observable<BookingAction> performExternalActionAsync(ExternalActionParams params) {
-
-    final BookingAction.Builder actionBuilder = BookingAction.builder();
-
-    final BookingAction action = actionBuilder
+    final BookingAction action = BookingAction.builder()
         .bookingProvider(BookingResolver.OTHERS)
         .hasApp(false)
         .data(new Intent(Intent.ACTION_VIEW, Uri.parse(params.action())))
