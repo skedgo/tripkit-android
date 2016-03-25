@@ -2,6 +2,7 @@ package com.skedgo.android.tripkit;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.skedgo.android.common.model.GsonAdaptersBooking;
 import com.skedgo.android.common.util.LowercaseEnumTypeAdapterFactory;
 
 final class GsonProvider {
@@ -13,6 +14,7 @@ final class GsonProvider {
           .registerTypeAdapterFactory(new LowercaseEnumTypeAdapterFactory())
           .registerTypeAdapterFactory(new GsonAdaptersRegionInfo())
           .registerTypeAdapterFactory(new GsonAdaptersRegionInfoResponse())
+          .registerTypeAdapterFactory(new GsonAdaptersBooking())
           .create();
     }
 
