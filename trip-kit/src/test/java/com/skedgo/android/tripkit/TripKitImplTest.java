@@ -39,6 +39,12 @@ public class TripKitImplTest {
     assertThat(kit.getTripUpdater()).isNotNull().isSameAs(kit.getTripUpdater());
   }
 
+  @Test public void nonSingletons() {
+    when(configs.debuggable()).thenReturn(true);
+    final TripKitImpl kit = new TripKitImpl(configs);
+    assertThat(kit.getBookingResolver()).isNotNull().isNotSameAs(kit.getBookingResolver());
+  }
+
   @Test public void loggingLevelIsNone() {
     when(configs.debuggable()).thenReturn(false);
     final TripKitImpl kit = new TripKitImpl(configs);

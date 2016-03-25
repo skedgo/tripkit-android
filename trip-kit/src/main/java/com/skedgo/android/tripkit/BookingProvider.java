@@ -9,6 +9,9 @@ import java.lang.annotation.RetentionPolicy;
     BookingResolver.UBER,
     BookingResolver.LYFT,
     BookingResolver.FLITWAYS,
+    BookingResolver.GOCATCH,
+    BookingResolver.INGOGO,
+    BookingResolver.SMS,
     BookingResolver.OTHERS
 })
 @Retention(RetentionPolicy.SOURCE)

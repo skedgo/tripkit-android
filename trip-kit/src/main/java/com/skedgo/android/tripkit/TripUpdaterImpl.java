@@ -7,7 +7,6 @@ import android.text.TextUtils;
 import com.skedgo.android.common.model.RoutingResponse;
 import com.skedgo.android.common.model.Trip;
 import com.skedgo.android.common.model.TripGroup;
-import com.skedgo.android.common.util.Gsons;
 
 import org.apache.commons.collections4.CollectionUtils;
 
@@ -40,7 +39,7 @@ final class TripUpdaterImpl implements TripUpdater {
     return api.fetchUpdateAsync(trip.getUpdateURL(), apiVersion)
         .map(new Func1<RoutingResponse, List<TripGroup>>() {
           @Override public List<TripGroup> call(RoutingResponse response) {
-            response.processRawData(resources, Gsons.createForLowercaseEnum());
+            response.processRawData(resources, GsonProvider.get());
             return response.getTripGroupList();
           }
         })
