@@ -43,7 +43,6 @@ final class TripKitImpl extends TripKit {
   private RouteService routeService; // Lazily initialized.
   private Reporter reporter; // Lazily initialized.
   private TripUpdater tripUpdater; // Lazily initialized.
-  private BookingResolver bookingResolver; // Lazily initialized.
 
   TripKitImpl(@NonNull Configs configs) {
     this.configs = configs;
@@ -106,15 +105,11 @@ final class TripKitImpl extends TripKit {
   }
 
   @Override public synchronized BookingResolver getBookingResolver() {
-    if (bookingResolver == null) {
-      bookingResolver = new BookingResolverImpl(
-          context.getResources(),
-          context.getPackageManager(),
-          new SingleReverseGeocoderFactory(context)
-      );
-    }
-
-    return bookingResolver;
+    return new BookingResolverImpl(
+        context.getResources(),
+        context.getPackageManager(),
+        new SingleReverseGeocoderFactory(context)
+    );
   }
 
   @Override
