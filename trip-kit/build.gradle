@@ -21,11 +21,15 @@ android {
     }
   }
 
-  // To avoid conflicts between Mockito and AssertJ.
   packagingOptions {
+    // To avoid conflicts between Mockito and AssertJ.
     exclude "LICENSE"
     exclude "NOTICE"
     exclude "asm-license.txt"
+
+    // To avoid conflicts with ASL.
+    // We don't utilize ServiceLoader, so this is unneeded.
+    exclude 'META-INF/services/com.google.gson.TypeAdapterFactory'
   }
 }
 
@@ -63,16 +67,21 @@ dependencies {
   provided "org.immutables:value:${rootProject.ext.ImmutablesVersion}"
   provided "org.immutables:builder:${rootProject.ext.ImmutablesVersion}"
 
-  compile 'com.squareup.okhttp3:okhttp:3.2.0'
-  compile 'com.squareup.okhttp3:logging-interceptor:3.2.0'
-  compile 'com.squareup.retrofit2:converter-gson:2.0.0'
-  compile('com.squareup.retrofit2:adapter-rxjava:2.0.0') {
+  compile "com.squareup.okhttp3:okhttp:${rootProject.ext.OkHttp3Version}"
+  compile "com.squareup.okhttp3:logging-interceptor:${rootProject.ext.OkHttp3Version}"
+  compile "com.squareup.retrofit2:converter-gson:${rootProject.ext.RetrofitVersion}"
+  compile("com.squareup.retrofit2:adapter-rxjava:${rootProject.ext.RetrofitVersion}") {
     exclude module: 'rxjava'
   }
-  compile('com.squareup.retrofit2:retrofit:2.0.0') {
+  compile("com.squareup.retrofit2:retrofit:${rootProject.ext.RetrofitVersion}") {
     // Exclude Retrofit’s OkHttp peer-dependency module and define our own module import.
     exclude module: 'okhttp'
   }
+
+  // For dependency injection with Dagger 2.
+  compile 'com.google.dagger:dagger:2.0.1'
+  apt 'com.google.dagger:dagger-compiler:2.0.1'
+  provided 'org.glassfish:javax.annotation:10.0-b28'
 }
 
 /**

@@ -18,17 +18,18 @@ import rx.observers.TestSubscriber;
 import static org.assertj.core.api.Assertions.assertThat;
 
 @RunWith(AndroidJUnit4.class)
-public class TripKitImplTest {
+public class TripKitTest {
   private TripKit kit;
 
   @Before public void before() {
-    kit = new TripKitImpl(
-        Configs.builder()
-            .context(InstrumentationRegistry.getInstrumentation().getTargetContext())
-            .regionEligibility("")
-            .debuggable(true)
-            .build()
-    );
+    final Configs configs = Configs.builder()
+        .context(InstrumentationRegistry.getInstrumentation().getTargetContext())
+        .regionEligibility("")
+        .debuggable(false)
+        .build();
+    kit = DaggerTripKit.builder()
+        .mainModule(new MainModule(configs))
+        .build();
   }
 
   @Test public void resolveFlitWaysBooking() {
