@@ -5,6 +5,7 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.util.ArrayMap;
 
+import com.google.gson.Gson;
 import com.skedgo.android.common.model.Location;
 import com.skedgo.android.common.model.Query;
 import com.skedgo.android.common.model.Region;
@@ -34,6 +35,7 @@ final class RouteServiceImpl implements RouteService {
   private final ExcludedTransitModesAdapter excludedTransitModesAdapter;
   @Nullable private final Co2Preferences co2Preferences;
   @Nullable private final TripPreferences tripPreferences;
+  private final Gson gson;
 
   RouteServiceImpl(
       @NonNull Resources resources,
@@ -42,7 +44,8 @@ final class RouteServiceImpl implements RouteService {
       @NonNull Func1<String, RoutingApi> routingApiFactory,
       @Nullable ExcludedTransitModesAdapter excludedTransitModesAdapter,
       @Nullable Co2Preferences co2Preferences,
-      @Nullable TripPreferences tripPreferences) {
+      @Nullable TripPreferences tripPreferences,
+      @NonNull Gson gson) {
     this.appVersion = appVersion;
     this.queryGenerator = queryGenerator;
     this.resources = resources;
@@ -50,6 +53,7 @@ final class RouteServiceImpl implements RouteService {
     this.excludedTransitModesAdapter = excludedTransitModesAdapter;
     this.co2Preferences = co2Preferences;
     this.tripPreferences = tripPreferences;
+    this.gson = gson;
   }
 
   private static String toCoordinatesText(Location location) {
@@ -171,7 +175,7 @@ final class RouteServiceImpl implements RouteService {
         .first()
         .map(new Func1<RoutingResponse, List<TripGroup>>() {
           @Override public List<TripGroup> call(RoutingResponse response) {
-            response.processRawData(resources, GsonProvider.get());
+            response.processRawData(resources, gson);
             return response.getTripGroupList();
           }
         })

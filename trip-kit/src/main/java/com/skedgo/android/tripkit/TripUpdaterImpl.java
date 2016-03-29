@@ -4,6 +4,7 @@ import android.content.res.Resources;
 import android.support.annotation.NonNull;
 import android.text.TextUtils;
 
+import com.google.gson.Gson;
 import com.skedgo.android.common.model.RoutingResponse;
 import com.skedgo.android.common.model.Trip;
 import com.skedgo.android.common.model.TripGroup;
@@ -20,14 +21,17 @@ final class TripUpdaterImpl implements TripUpdater {
   private final Resources resources;
   private final TripUpdateApi api;
   private final String apiVersion;
+  private final Gson gson;
 
   TripUpdaterImpl(
-      Resources resources,
-      TripUpdateApi api,
-      String apiVersion) {
+      @NonNull Resources resources,
+      @NonNull TripUpdateApi api,
+      @NonNull String apiVersion,
+      @NonNull Gson gson) {
     this.resources = resources;
     this.api = api;
     this.apiVersion = apiVersion;
+    this.gson = gson;
   }
 
   @NonNull @Override
@@ -39,7 +43,7 @@ final class TripUpdaterImpl implements TripUpdater {
     return api.fetchUpdateAsync(trip.getUpdateURL(), apiVersion)
         .map(new Func1<RoutingResponse, List<TripGroup>>() {
           @Override public List<TripGroup> call(RoutingResponse response) {
-            response.processRawData(resources, GsonProvider.get());
+            response.processRawData(resources, gson);
             return response.getTripGroupList();
           }
         })

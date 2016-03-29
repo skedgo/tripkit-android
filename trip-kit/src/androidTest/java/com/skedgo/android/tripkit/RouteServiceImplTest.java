@@ -28,12 +28,14 @@ public class RouteServiceImplTest {
   private TripKit kit;
 
   @Before public void before() {
-    kit = new TripKitImpl(
-        Configs.builder()
-            .context(InstrumentationRegistry.getInstrumentation().getTargetContext())
-            .regionEligibility("")
-            .debuggable(false)
-            .build());
+    final Configs configs = Configs.builder()
+        .context(InstrumentationRegistry.getInstrumentation().getTargetContext())
+        .regionEligibility("")
+        .debuggable(false)
+        .build();
+    kit = DaggerTripKit.builder()
+        .tripKitModule(new TripKitModule(configs))
+        .build();
   }
 
   @Test public void routeAsync() {

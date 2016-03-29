@@ -2,6 +2,7 @@ package com.skedgo.android.tripkit;
 
 import android.content.res.Resources;
 
+import com.google.gson.Gson;
 import com.skedgo.android.common.model.RoutingResponse;
 import com.skedgo.android.common.model.Trip;
 import com.skedgo.android.common.model.TripGroup;
@@ -35,7 +36,7 @@ public class TripUpdaterImplTest {
 
   @Before public void before() {
     MockitoAnnotations.initMocks(this);
-    updater = new TripUpdaterImpl(resources, api, apiVersion);
+    updater = new TripUpdaterImpl(resources, api, apiVersion, new Gson());
   }
 
   @Test public void shouldReturnEmpty() {

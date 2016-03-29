@@ -3,6 +3,7 @@ package com.skedgo.android.tripkit;
 import android.content.res.Resources;
 import android.support.annotation.NonNull;
 
+import com.google.gson.Gson;
 import com.skedgo.android.common.model.Location;
 import com.skedgo.android.common.model.Query;
 import com.skedgo.android.common.model.RoutingResponse;
@@ -56,7 +57,8 @@ public class RouteServiceImplTest {
         routingApiFactory,
         excludedTransitModesAdapter,
         co2Preferences,
-        tripPreferences
+        tripPreferences,
+        new Gson()
     );
   }
 
