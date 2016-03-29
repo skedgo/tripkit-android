@@ -1,5 +1,7 @@
 package com.skedgo.android.tripkit;
 
+import android.support.annotation.VisibleForTesting;
+
 import com.squareup.okhttp.OkHttpClient;
 
 import javax.inject.Singleton;
@@ -10,7 +12,7 @@ import rx.functions.Action1;
 import rx.functions.Actions;
 
 @Singleton
-@Component(modules = TripKitModule.class)
+@Component(modules = MainModule.class)
 public abstract class TripKit {
   private static TripKit instance;
 
@@ -32,7 +34,7 @@ public abstract class TripKit {
 
       if (instance == null) {
         instance = DaggerTripKit.builder()
-            .tripKitModule(new TripKitModule(configs))
+            .mainModule(new MainModule(configs))
             .build();
       }
 
@@ -48,8 +50,8 @@ public abstract class TripKit {
   public abstract ServiceExtrasService getServiceExtrasService();
   public abstract Reporter getReporter();
   public abstract BookingResolver getBookingResolver();
-  abstract RegionDatabaseHelper getRegionDatabaseHelper();
-  abstract HttpLoggingInterceptor getHttpLoggingInterceptor();
+  @VisibleForTesting abstract RegionDatabaseHelper getRegionDatabaseHelper();
+  @VisibleForTesting abstract HttpLoggingInterceptor getHttpLoggingInterceptor();
   abstract TripUpdater getTripUpdater();
   abstract Action1<Throwable> getErrorHandler();
 }

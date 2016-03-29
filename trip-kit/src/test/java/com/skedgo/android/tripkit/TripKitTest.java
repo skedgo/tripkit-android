@@ -27,7 +27,7 @@ public class TripKitTest {
     when(configs.context()).thenReturn(RuntimeEnvironment.application);
     when(configs.regionEligibility()).thenReturn("lol");
     kit = DaggerTripKit.builder()
-        .tripKitModule(new TripKitModule(configs))
+        .mainModule(new MainModule(configs))
         .build();
   }
 
@@ -73,7 +73,7 @@ public class TripKitTest {
   @Test public void headerVersion() {
     // FIXME: Can't mock version name. It's always null in this case.
     final String versionName = DiagnosticUtils.getAppVersionName(RuntimeEnvironment.application);
-    final TripKitModule module = new TripKitModule(configs);
+    final MainModule module = new MainModule(configs);
     assertThat(module.getAppVersion()).isEqualTo("a-lol" + versionName);
   }
 }

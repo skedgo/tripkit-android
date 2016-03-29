@@ -34,7 +34,7 @@ public class RouteServiceImplTest {
         .debuggable(false)
         .build();
     kit = DaggerTripKit.builder()
-        .tripKitModule(new TripKitModule(configs))
+        .mainModule(new MainModule(configs))
         .build();
   }
 

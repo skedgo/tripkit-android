@@ -38,11 +38,11 @@ import static retrofit.RestAdapter.LogLevel.FULL;
 import static retrofit.RestAdapter.LogLevel.NONE;
 
 @Module
-public class TripKitModule {
+class MainModule {
   private final Configs configs;
   private final Context context;
 
-  public TripKitModule(@NonNull Configs configs) {
+  public MainModule(@NonNull Configs configs) {
     this.configs = configs;
     context = configs.context().getApplicationContext();
   }

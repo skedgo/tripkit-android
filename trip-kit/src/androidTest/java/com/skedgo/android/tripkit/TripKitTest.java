@@ -18,7 +18,7 @@ import rx.observers.TestSubscriber;
 import static org.assertj.core.api.Assertions.assertThat;
 
 @RunWith(AndroidJUnit4.class)
-public class TripKitImplTest {
+public class TripKitTest {
   private TripKit kit;
 
   @Before public void before() {
@@ -28,7 +28,7 @@ public class TripKitImplTest {
         .debuggable(false)
         .build();
     kit = DaggerTripKit.builder()
-        .tripKitModule(new TripKitModule(configs))
+        .mainModule(new MainModule(configs))
         .build();
   }
 
