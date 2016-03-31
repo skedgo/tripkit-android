@@ -266,11 +266,28 @@ class MainModule {
     return new TripUpdaterImpl(context.getResources(), api, "12", gson);
   }
 
+  @Provides LocationInfoApi getLocationInfoApi(Gson gson, okhttp3.OkHttpClient httpClient) {
+    return new Retrofit.Builder()
+        /* This base url is ignored as the api relies on @Url. */
+        .baseUrl(HttpUrl.parse("https://tripgo.skedgo.com/satapp/"))
+        .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
+        .addConverterFactory(GsonConverterFactory.create(gson))
+        .client(httpClient)
+        .build()
+        .create(LocationInfoApi.class);
+  }
+
+  @Singleton @Provides LocationInfoService getLocationInfoService(LocationInfoApi api) {
+    return new LocationInfoServiceImpl(api);
+  }
+
   @Singleton @Provides Gson getGson() {
     return new GsonBuilder()
         .registerTypeAdapterFactory(new LowercaseEnumTypeAdapterFactory())
         .registerTypeAdapterFactory(new GsonAdaptersRegionInfo())
         .registerTypeAdapterFactory(new GsonAdaptersRegionInfoResponse())
+        .registerTypeAdapterFactory(new GsonAdaptersLocationInfo())
+        .registerTypeAdapterFactory(new GsonAdaptersLocationInfoDetails())
         .registerTypeAdapterFactory(new GsonAdaptersBooking())
         .create();
   }
