@@ -1,8 +1,14 @@
 package com.skedgo.android.tripkit;
 
-import rx.Observable;
+import android.support.annotation.NonNull;
 
-public class LocationInfoServiceImpl implements LocationInfoService {
+import com.skedgo.android.common.model.Region;
+
+import rx.Observable;
+import rx.functions.Func1;
+import rx.schedulers.Schedulers;
+
+final class LocationInfoServiceImpl implements LocationInfoService {
 
   private LocationInfoApi api;
 
@@ -10,7 +16,20 @@ public class LocationInfoServiceImpl implements LocationInfoService {
     this.api = api;
   }
 
-  @Override public Observable<LocationInfo> geLocationInfoResponseAsync(double lat, double lng) {
-    return api.geLocationInfoResponseAsync("https://tripgo.skedgo.com/satapp/locationInfo.json", lat, lng);
+  @Override public Observable<LocationInfo> getLocationInfoResponseAsync(@NonNull final Region region,
+                                                                         final double lat, final double lng) {
+
+    return Observable.from(region.getURLs())
+        .concatMap(new Func1<String, Observable<LocationInfo>>() {
+          @Override public Observable<LocationInfo> call(final String baseUrl) {
+            return api.getLocationInfoResponseAsync(baseUrl + "/locationInfo.json", lat, lng);
+          }
+        })
+        .first(new Func1<LocationInfo, Boolean>() {
+          @Override public Boolean call(LocationInfo response) {
+            return response != null;
+          }
+        })
+        .subscribeOn(Schedulers.io());
   }
 }

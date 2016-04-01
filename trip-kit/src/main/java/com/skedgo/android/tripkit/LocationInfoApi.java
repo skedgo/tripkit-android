@@ -5,9 +5,9 @@ import retrofit2.http.GET;
 import retrofit2.http.Url;
 import rx.Observable;
 
-public interface LocationInfoApi {
+interface LocationInfoApi {
 
-  @GET Observable<LocationInfo> geLocationInfoResponseAsync(
+  @GET Observable<LocationInfo> getLocationInfoResponseAsync(
       @Url String url,
       @Query("lat") double lat,
       @Query("lng") double lng

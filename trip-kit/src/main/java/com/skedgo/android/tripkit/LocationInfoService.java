@@ -1,7 +1,9 @@
 package com.skedgo.android.tripkit;
 
+import com.skedgo.android.common.model.Region;
+
 import rx.Observable;
 
 public interface LocationInfoService {
-  Observable<LocationInfo> geLocationInfoResponseAsync(double lat, double lng);
+  Observable<LocationInfo> getLocationInfoResponseAsync(Region region, double lat, double lng);
 }
