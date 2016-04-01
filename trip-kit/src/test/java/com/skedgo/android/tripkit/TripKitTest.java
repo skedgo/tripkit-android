@@ -1,7 +1,9 @@
 package com.skedgo.android.tripkit;
 
 import com.skedgo.android.common.util.DiagnosticUtils;
+import com.squareup.okhttp.Interceptor;
 
+import org.assertj.core.api.Condition;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -11,7 +13,10 @@ import org.robolectric.RobolectricGradleTestRunner;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
 
+import java.util.List;
+
 import okhttp3.logging.HttpLoggingInterceptor;
+import rx.functions.Func0;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.when;
@@ -20,6 +25,7 @@ import static org.mockito.Mockito.when;
 @Config(constants = BuildConfig.class, sdk = 21)
 public class TripKitTest {
   @Mock Configs configs;
+  @Mock Func0<Func0<String>> baseUrlAdapterFactory;
   private TripKit kit;
 
   @Before public void before() {
@@ -67,6 +73,38 @@ public class TripKitTest {
     when(configs.debuggable()).thenReturn(true);
     assertThat(kit.getHttpLoggingInterceptor().getLevel())
         .isEqualTo(HttpLoggingInterceptor.Level.BODY);
+  }
+
+  @Test public void hasBaseUrlOverridingInterceptors() {
+    when(configs.debuggable()).thenReturn(true);
+    when(configs.baseUrlAdapterFactory()).thenReturn(baseUrlAdapterFactory);
+    assertThat(kit.getOkHttpClient().interceptors())
+        .hasAtLeastOneElementOfType(BaseUrlOverridingInterceptorCompat.class);
+    assertThat(kit.getOkHttpClient3().interceptors())
+        .hasAtLeastOneElementOfType(BaseUrlOverridingInterceptor.class);
+  }
+
+  @Test public void noBaseUrlOverridingInterceptors() {
+    when(configs.debuggable()).thenReturn(false);
+    when(configs.baseUrlAdapterFactory()).thenReturn(baseUrlAdapterFactory);
+    assertThat(kit.getOkHttpClient().interceptors())
+        .doNotHave(new Condition<Interceptor>() {
+          @Override public boolean matches(Interceptor value) {
+            return value instanceof BaseUrlOverridingInterceptorCompat;
+          }
+        });
+    assertThat(kit.getOkHttpClient3().interceptors())
+        .doNotHave(new Condition<okhttp3.Interceptor>() {
+          @Override public boolean matches(okhttp3.Interceptor value) {
+            return value instanceof BaseUrlOverridingInterceptor;
+          }
+        });
+  }
+
+  @Test public void attachHttpLoggingInterceptorAtTheEnd() {
+    when(configs.debuggable()).thenReturn(true);
+    final List<okhttp3.Interceptor> interceptors = kit.getOkHttpClient3().interceptors();
+    assertThat(interceptors.get(interceptors.size() - 1)).isInstanceOf(HttpLoggingInterceptor.class);
   }
 
   /* See https://www.flowdock.com/app/skedgo/androiddev/threads/3WbchFGaktP8JunwxJOhtyCw32J. */

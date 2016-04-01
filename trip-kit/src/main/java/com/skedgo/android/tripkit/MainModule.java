@@ -18,6 +18,7 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 
+import javax.inject.Provider;
 import javax.inject.Singleton;
 
 import dagger.Module;
@@ -156,6 +157,13 @@ class MainModule {
         configs.regionEligibility(),
         Locale.getDefault()
     ));
+    if (configs.debuggable()) {
+      final Func0<Func0<String>> baseUrlAdapterFactory = configs.baseUrlAdapterFactory();
+      if (baseUrlAdapterFactory != null) {
+        httpClient.interceptors().add(new BaseUrlOverridingInterceptorCompat(baseUrlAdapterFactory.call()));
+      }
+    }
+
     return httpClient;
   }
 
@@ -166,18 +174,29 @@ class MainModule {
     return new HttpLoggingInterceptor().setLevel(level);
   }
 
-  @Singleton @Provides okhttp3.OkHttpClient getOkHttpClient3(
-      HttpLoggingInterceptor httpLoggingInterceptor) {
-    return new okhttp3.OkHttpClient.Builder()
-        .addInterceptor(
-            BuiltInInterceptorBuilder.create()
-                .appVersion(getAppVersion())
-                .locale(Locale.getDefault())
-                .regionEligibility(configs.regionEligibility())
-                .build()
-        )
-        .addInterceptor(httpLoggingInterceptor)
+  @Provides BuiltInInterceptor getBuiltInInterceptor() {
+    return BuiltInInterceptorBuilder.create()
+        .appVersion(getAppVersion())
+        .locale(Locale.getDefault())
+        .regionEligibility(configs.regionEligibility())
         .build();
+  }
+
+  @Singleton @Provides okhttp3.OkHttpClient getOkHttpClient3(
+      BuiltInInterceptor builtInInterceptor,
+      Provider<HttpLoggingInterceptor> httpLoggingInterceptorProvider) {
+    final okhttp3.OkHttpClient.Builder builder = new okhttp3.OkHttpClient.Builder()
+        .addInterceptor(builtInInterceptor);
+    if (configs.debuggable()) {
+      final Func0<Func0<String>> baseUrlAdapterFactory = configs.baseUrlAdapterFactory();
+      if (baseUrlAdapterFactory != null) {
+        builder.addInterceptor(new BaseUrlOverridingInterceptor(baseUrlAdapterFactory.call()));
+      }
+
+      builder.addInterceptor(httpLoggingInterceptorProvider.get());
+    }
+
+    return builder.build();
   }
 
   @Provides ServiceExtrasService getServiceExtrasService(

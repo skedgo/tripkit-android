@@ -25,6 +25,13 @@ public abstract class Configs {
   @Nullable public abstract Func0<Co2Preferences> co2PreferencesFactory();
   @Nullable public abstract Func0<TripPreferences> tripPreferencesFactory();
 
+  /**
+   * @return A factory to create a sort of adapter that specifies a base url
+   * to override all the 'satapp' requests made by TripKit's apis.
+   * The factory is in use only when {@link #debuggable()} is true.
+   */
+  @Nullable public abstract Func0<Func0<String>> baseUrlAdapterFactory();
+
   @Value.Default public boolean debuggable() {
     return false;
   }
@@ -37,6 +44,7 @@ public abstract class Configs {
     Builder excludedTransitModesAdapter(ExcludedTransitModesAdapter excludedTransitModesAdapter);
     Builder co2PreferencesFactory(Func0<Co2Preferences> co2PreferencesFactory);
     Builder tripPreferencesFactory(Func0<TripPreferences> tripPreferencesFactory);
+    Builder baseUrlAdapterFactory(Func0<Func0<String>> baseUrlAdapterFactory);
     Configs build();
   }
 }
