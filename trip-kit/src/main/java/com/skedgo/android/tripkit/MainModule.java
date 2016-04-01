@@ -263,7 +263,7 @@ class MainModule {
   }
 
   @Singleton @Provides TripUpdater getTripUpdater(TripUpdateApi api, Gson gson) {
-    return new TripUpdaterImpl(context.getResources(), api, "11", gson);
+    return new TripUpdaterImpl(context.getResources(), api, "12", gson);
   }
 
   @Singleton @Provides Gson getGson() {
