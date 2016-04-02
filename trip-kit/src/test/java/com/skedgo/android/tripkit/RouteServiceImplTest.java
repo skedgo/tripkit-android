@@ -70,7 +70,7 @@ public class RouteServiceImplTest {
     final Map<String, Object> options = routeService.toOptions(query);
     assertThat(options)
         .containsEntry("version", appVersion)
-        .containsEntry("v", "11")
+        .containsEntry("v", "12")
         .containsEntry("unit", query.getUnit())
         .containsEntry("from", "(1.0,2.0)")
         .containsEntry("to", "(3.0,4.0)")

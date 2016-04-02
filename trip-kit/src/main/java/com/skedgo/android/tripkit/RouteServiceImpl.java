@@ -136,7 +136,7 @@ final class RouteServiceImpl implements RouteService {
     options.put("departAfter", Long.toString(departAfter));
     options.put("unit", unit);
     options.put("version", appVersion);
-    options.put("v", "11");
+    options.put("v", "12");
     options.put("tt", Integer.toString(transferTime));
     options.put("ws", Integer.toString(walkingSpeed));
     if (query.isInterRegional()) {

@@ -17,13 +17,17 @@ android {
       minifyEnabled false
     }
   }
+
+  packagingOptions {
+    exclude 'META-INF/services/com.google.gson.TypeAdapterFactory'
+  }
 }
 
 dependencies {
   compile 'com.squareup.picasso:picasso:2.5.2'
   compile 'com.facebook.stetho:stetho:1.2.0'
   compile 'com.facebook.stetho:stetho-okhttp:1.2.0'
-  compile('com.skedgo.sdk:trip-kit:1.1b2@aar') {
+  compile('com.skedgo.sdk:trip-kit:1.1b3@aar') {
     transitive = true
   }
 }
