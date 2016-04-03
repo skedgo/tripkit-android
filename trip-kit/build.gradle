@@ -59,6 +59,7 @@ dependencies {
   androidTestCompile "com.crittercism.dexmaker:dexmaker-dx:1.4"
 
   compile project(":libraries:android-shared-lib")
+  compile project(":libraries:sqlite-utils")
   compile "com.google.android.gms:play-services-gcm:${rootProject.ext.PlayServicesVersion}"
 
   apt "org.immutables:value:${rootProject.ext.ImmutablesVersion}"

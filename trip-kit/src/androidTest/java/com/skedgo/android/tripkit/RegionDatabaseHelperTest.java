@@ -6,7 +6,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.support.test.InstrumentationRegistry;
 import android.support.test.runner.AndroidJUnit4;
 
-import com.skedgo.android.common.content.DatabaseTable;
+import com.skedgo.android.sqlite.util.DatabaseTable;
 
 import org.junit.After;
 import org.junit.Before;
