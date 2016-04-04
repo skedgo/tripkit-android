@@ -56,6 +56,7 @@ public class TripKitTest {
     assertThat(kit.getRegionDatabaseHelper()).isNotNull().isSameAs(kit.getRegionDatabaseHelper());
     assertThat(kit.getReporter()).isNotNull().isSameAs(kit.getReporter());
     assertThat(kit.getTripUpdater()).isNotNull().isSameAs(kit.getTripUpdater());
+    assertThat(kit.getLocationInfoService()).isNotNull().isSameAs(kit.getLocationInfoService());
   }
 
   @Test public void nonSingletons() {
