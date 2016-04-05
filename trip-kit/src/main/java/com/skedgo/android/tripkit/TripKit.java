@@ -50,6 +50,7 @@ public abstract class TripKit {
   public abstract ServiceExtrasService getServiceExtrasService();
   public abstract Reporter getReporter();
   public abstract BookingResolver getBookingResolver();
+  public abstract LocationInfoService getLocationInfoService();
   @VisibleForTesting abstract RegionDatabaseHelper getRegionDatabaseHelper();
   @VisibleForTesting abstract HttpLoggingInterceptor getHttpLoggingInterceptor();
   abstract TripUpdater getTripUpdater();
