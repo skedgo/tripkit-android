@@ -34,6 +34,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 import rx.functions.Action1;
 import rx.functions.Func0;
 import rx.functions.Func1;
+import rx.schedulers.Schedulers;
 
 import static retrofit.RestAdapter.LogLevel.FULL;
 import static retrofit.RestAdapter.LogLevel.NONE;
@@ -270,15 +271,17 @@ class MainModule {
     return new Retrofit.Builder()
         /* This base url is ignored as the api relies on @Url. */
         .baseUrl(HttpUrl.parse("https://tripgo.skedgo.com/satapp/"))
-        .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
+        .addCallAdapterFactory(RxJavaCallAdapterFactory.createWithScheduler(Schedulers.io()))
         .addConverterFactory(GsonConverterFactory.create(gson))
         .client(httpClient)
         .build()
         .create(LocationInfoApi.class);
   }
 
-  @Singleton @Provides LocationInfoService getLocationInfoService(LocationInfoApi api, RegionService regionService) {
-    return new LocationInfoServiceImpl(api, regionService);
+  @Singleton @Provides LocationInfoService getLocationInfoService(
+      LocationInfoApi locationInfoApi,
+      RegionService regionService) {
+    return new LocationInfoServiceImpl(locationInfoApi, regionService);
   }
 
   @Singleton @Provides Gson getGson() {
