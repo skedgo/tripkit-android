@@ -56,12 +56,12 @@ public class TripKitTest {
     assertThat(kit.getRegionDatabaseHelper()).isNotNull().isSameAs(kit.getRegionDatabaseHelper());
     assertThat(kit.getReporter()).isNotNull().isSameAs(kit.getReporter());
     assertThat(kit.getTripUpdater()).isNotNull().isSameAs(kit.getTripUpdater());
-    assertThat(kit.getLocationInfoService()).isNotNull().isSameAs(kit.getLocationInfoService());
   }
 
   @Test public void nonSingletons() {
     when(configs.debuggable()).thenReturn(true);
     assertThat(kit.getBookingResolver()).isNotNull().isNotSameAs(kit.getBookingResolver());
+    assertThat(kit.getLocationInfoService()).isNotNull().isNotSameAs(kit.getLocationInfoService());
   }
 
   @Test public void loggingLevelIsNone() {

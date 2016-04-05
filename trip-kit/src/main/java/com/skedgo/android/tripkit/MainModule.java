@@ -278,7 +278,7 @@ class MainModule {
         .create(LocationInfoApi.class);
   }
 
-  @Singleton @Provides LocationInfoService getLocationInfoService(
+  @Provides LocationInfoService getLocationInfoService(
       LocationInfoApi locationInfoApi,
       RegionService regionService) {
     return new LocationInfoServiceImpl(locationInfoApi, regionService);
