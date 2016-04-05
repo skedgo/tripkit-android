@@ -15,12 +15,11 @@ import org.robolectric.annotation.Config;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
 
 import rx.Observable;
 import rx.observers.TestSubscriber;
 
-import static org.assertj.core.api.Assertions.assertThat;
+import static java.util.Collections.singletonList;
 import static org.mockito.Matchers.any;
 import static org.mockito.Matchers.anyString;
 import static org.mockito.Matchers.eq;
@@ -30,50 +29,73 @@ import static org.mockito.Mockito.when;
 @RunWith(RobolectricGradleTestRunner.class)
 @Config(constants = BuildConfig.class, sdk = 21)
 public class LocationInfoServiceImplTest {
-
   @Mock LocationInfoApi api;
   @Mock RegionService regionService;
-  private LocationInfoServiceImpl locationInfoService;
+  private LocationInfoServiceImpl service;
 
   @Before public void setUp() {
     MockitoAnnotations.initMocks(this);
-    locationInfoService = new LocationInfoServiceImpl(api, regionService);
+    service = new LocationInfoServiceImpl(api, regionService);
   }
 
-  @Test public void shouldFetchLocationInfoFromFirstRegionUrl() {
-
-    final TestSubscriber<LocationInfo> subscriber = new TestSubscriber<>();
-
-    Location location = new Location();
-    double lat = 1.0;
-    double lng = 2.0;
-
-    location.setLat(lat);
-    location.setLon(lng);
-
-    final Region london = mock(Region.class);
-    when(london.getURLs()).thenReturn(new ArrayList<>(Arrays.asList("")));
-
-    Region region = new Region();
-    ArrayList<String> urls = new ArrayList<>(1);
-    urls.add("");
-    region.setURLs(urls);
-
-    final LocationInfo locInfo = mock(LocationInfo.class);
-
+  @Test public void fetchLocationInfoByRegionUrl() {
+    final Region region = mock(Region.class);
+    when(region.getURLs())
+        .thenReturn(new ArrayList<>(singletonList("https://sydney-au-nsw-sydney.tripgo.skedgo.com/satapp")));
     when(regionService.getRegionByLocationAsync(any(Location.class)))
         .thenReturn(Observable.just(region));
 
-    when(api.getLocationInfoResponseAsync(anyString(), eq(lat), eq(lng)))
-        .thenReturn(Observable.just(locInfo));
+    final Location location = new Location(1.0, 2.0);
+    final LocationInfo locationInfo = mock(LocationInfo.class);
+    when(api.getLocationInfoResponseAsync(
+        eq("https://sydney-au-nsw-sydney.tripgo.skedgo.com/satapp/locationInfo.json"),
+        eq(location.getLat()),
+        eq(location.getLon())
+    )).thenReturn(Observable.just(locationInfo));
 
-    locationInfoService.getLocationInfoResponseAsync(location).subscribe(subscriber);
+    final TestSubscriber<LocationInfo> subscriber = new TestSubscriber<>();
+    service.getLocationInfoResponseAsync(location).subscribe(subscriber);
 
     subscriber.awaitTerminalEvent();
     subscriber.assertNoErrors();
-    subscriber.assertTerminalEvent();
-    final List<LocationInfo> infos = subscriber.getOnNextEvents();
-    assertThat(infos).hasSize(1);
-    assertThat(infos.get(0)).isEqualTo(locInfo);
+    subscriber.assertValue(locationInfo);
+  }
+
+  @Test public void fetchLocationInfoByRegionUrls() {
+    final Region region = mock(Region.class);
+    when(region.getURLs()).thenReturn(new ArrayList<>(Arrays.asList(
+        "https://sydney-au-nsw-sydney.tripgo.skedgo.com/satapp",
+        "https://inflationary-au-nsw-sydney.tripgo.skedgo.com/satapp",
+        "https://hadron-fr-b-bordeaux.tripgo.skedgo.com/satapp"
+    )));
+    when(regionService.getRegionByLocationAsync(any(Location.class)))
+        .thenReturn(Observable.just(region));
+
+    final Location location = new Location(1.0, 2.0);
+    final LocationInfo locationInfo = mock(LocationInfo.class);
+    when(api.getLocationInfoResponseAsync(
+        anyString(),
+        eq(location.getLat()),
+        eq(location.getLon())
+    )).thenAnswer(new Answer<Observable<LocationInfo>>() {
+      @Override public Observable<LocationInfo> answer(InvocationOnMock invocation) throws Throwable {
+        final String url = invocation.getArgumentAt(0, String.class);
+        switch (url) {
+          case "https://inflationary-au-nsw-sydney.tripgo.skedgo.com/satapp/locationInfo.json":
+            return Observable.just(locationInfo);
+          case "https://sydney-au-nsw-sydney.tripgo.skedgo.com/satapp/locationInfo.json":
+            return Observable.empty();
+          default:
+            return Observable.error(new RuntimeException());
+        }
+      }
+    });
+
+    final TestSubscriber<LocationInfo> subscriber = new TestSubscriber<>();
+    service.getLocationInfoResponseAsync(location).subscribe(subscriber);
+
+    subscriber.awaitTerminalEvent();
+    subscriber.assertNoErrors();
+    subscriber.assertValue(locationInfo);
   }
 }
