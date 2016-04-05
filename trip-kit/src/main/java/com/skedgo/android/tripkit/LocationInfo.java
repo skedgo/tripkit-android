@@ -10,7 +10,6 @@ import org.immutables.value.Value;
 @Gson.TypeAdapters
 @Value.Immutable
 public interface LocationInfo {
-
-  LocationInfoDetails details();
+  @Nullable LocationInfoDetails details();
   @Nullable ScheduledStop stop();
 }

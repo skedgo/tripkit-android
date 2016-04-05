@@ -20,7 +20,7 @@ final class LocationInfoServiceImpl implements LocationInfoService {
     this.regionService = regionService;
   }
 
-  @Override public Observable<LocationInfo> getLocationInfoResponseAsync(final Location location) {
+  @Override public Observable<LocationInfo> getLocationInfoAsync(final Location location) {
     return regionService.getRegionByLocationAsync(location)
         .flatMap(new Func1<Region, Observable<String>>() {
           @Override public Observable<String> call(Region region) {
@@ -33,7 +33,7 @@ final class LocationInfoServiceImpl implements LocationInfoService {
                 .addPathSegment("locationInfo.json")
                 .build()
                 .toString();
-            return api.getLocationInfoResponseAsync(
+            return api.fetchLocationInfoAsync(
                 url,
                 location.getLat(),
                 location.getLon()

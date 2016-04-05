@@ -47,14 +47,14 @@ public class LocationInfoServiceImplTest {
 
     final Location location = new Location(1.0, 2.0);
     final LocationInfo locationInfo = mock(LocationInfo.class);
-    when(api.getLocationInfoResponseAsync(
+    when(api.fetchLocationInfoAsync(
         eq("https://sydney-au-nsw-sydney.tripgo.skedgo.com/satapp/locationInfo.json"),
         eq(location.getLat()),
         eq(location.getLon())
     )).thenReturn(Observable.just(locationInfo));
 
     final TestSubscriber<LocationInfo> subscriber = new TestSubscriber<>();
-    service.getLocationInfoResponseAsync(location).subscribe(subscriber);
+    service.getLocationInfoAsync(location).subscribe(subscriber);
 
     subscriber.awaitTerminalEvent();
     subscriber.assertNoErrors();
@@ -73,7 +73,7 @@ public class LocationInfoServiceImplTest {
 
     final Location location = new Location(1.0, 2.0);
     final LocationInfo locationInfo = mock(LocationInfo.class);
-    when(api.getLocationInfoResponseAsync(
+    when(api.fetchLocationInfoAsync(
         anyString(),
         eq(location.getLat()),
         eq(location.getLon())
@@ -92,7 +92,7 @@ public class LocationInfoServiceImplTest {
     });
 
     final TestSubscriber<LocationInfo> subscriber = new TestSubscriber<>();
-    service.getLocationInfoResponseAsync(location).subscribe(subscriber);
+    service.getLocationInfoAsync(location).subscribe(subscriber);
 
     subscriber.awaitTerminalEvent();
     subscriber.assertNoErrors();

@@ -5,5 +5,5 @@ import com.skedgo.android.common.model.Location;
 import rx.Observable;
 
 public interface LocationInfoService {
-  Observable<LocationInfo> getLocationInfoResponseAsync(Location location);
+  Observable<LocationInfo> getLocationInfoAsync(Location location);
 }
