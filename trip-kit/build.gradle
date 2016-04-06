@@ -33,14 +33,6 @@ android {
   }
 }
 
-// Generation relative to tripgo! Add translations repo to tripkit?
-task(generateTripkitStrings, type: org.gradle.api.tasks.JavaExec) {
-  classpath(files('IOStoAndroidStringsConverter.jar'))
-  main('com.skedgo.tripgo.tools.android.Main')
-  args(['./src/main/res', '../../libraries/translations', 'void',
-        'en#es#de#fi#pt#zh-Hant#zh-Hans', 'Tripkit.strings'])
-}
-
 dependencies {
   testCompile "junit:junit:4.12"
   testCompile "org.assertj:assertj-core:1.7.0"
