@@ -1,7 +1,7 @@
 package com.skedgo.android.tripkit;
 
-import com.skedgo.android.common.content.DatabaseField;
-import com.skedgo.android.common.content.DatabaseTable;
+import com.skedgo.android.sqlite.util.DatabaseField;
+import com.skedgo.android.sqlite.util.DatabaseTable;
 
 final class Tables {
   public static final DatabaseField FIELD_JSON = new DatabaseField("json", "TEXT");
