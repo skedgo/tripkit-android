@@ -34,9 +34,9 @@ public final class BookingResolverImpl implements BookingResolver {
     resolverMap.put("uber", new UberBookingResolver(resources, isPackageInstalled));
     resolverMap.put("ingogo", new IngogoBookingResolver(resources, isPackageInstalled));
     resolverMap.put("lyft", new LyftBookingResolver(resources, isPackageInstalled));
-    resolverMap.put("flitways", new FlitWaysBookingResolver(reverseGeocoderFactory));
+    resolverMap.put("flitways", new FlitWaysBookingResolver(resources, reverseGeocoderFactory));
     resolverMap.put("tel:", new TelBookingResolver(resources));
-    resolverMap.put("sms:", new SmsBookingResolver());
+    resolverMap.put("sms:", new SmsBookingResolver(resources));
     resolverMap.put("http", new WebBookingResolver(resources));
   }
 
