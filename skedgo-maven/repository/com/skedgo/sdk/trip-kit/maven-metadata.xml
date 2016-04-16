@@ -3,7 +3,7 @@
   <groupId>com.skedgo.sdk</groupId>
   <artifactId>trip-kit</artifactId>
   <versioning>
-    <release>1.1b3</release>
+    <release>1.1b4</release>
     <versions>
       <version>0.9-SNAPSHOT</version>
       <version>1.0-beta1</version>
@@ -18,7 +18,8 @@
       <version>1.1b1</version>
       <version>1.1b2</version>
       <version>1.1b3</version>
+      <version>1.1b4</version>
     </versions>
-    <lastUpdated>20160401170451</lastUpdated>
+    <lastUpdated>20160415155220</lastUpdated>
   </versioning>
 </metadata>

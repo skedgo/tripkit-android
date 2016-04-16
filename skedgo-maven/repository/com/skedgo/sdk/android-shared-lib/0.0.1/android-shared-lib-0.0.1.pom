@@ -44,15 +44,15 @@
       <scope>compile</scope>
     </dependency>
     <dependency>
-      <groupId>io.reactivex</groupId>
-      <artifactId>rxjava</artifactId>
-      <version>1.1.2</version>
-      <scope>compile</scope>
-    </dependency>
-    <dependency>
       <groupId>com.skedgo.goservices</groupId>
       <artifactId>transport-icons</artifactId>
       <version>0.0.1</version>
+      <scope>compile</scope>
+    </dependency>
+    <dependency>
+      <groupId>io.reactivex</groupId>
+      <artifactId>rxjava</artifactId>
+      <version>1.1.2</version>
       <scope>compile</scope>
     </dependency>
     <dependency>
