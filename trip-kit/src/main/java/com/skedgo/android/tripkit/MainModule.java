@@ -292,6 +292,7 @@ class MainModule {
         .registerTypeAdapterFactory(new GsonAdaptersLocationInfo())
         .registerTypeAdapterFactory(new GsonAdaptersLocationInfoDetails())
         .registerTypeAdapterFactory(new GsonAdaptersBooking())
+        .registerTypeAdapterFactory(new GsonAdaptersQuickBooking())
         .create();
   }
 
