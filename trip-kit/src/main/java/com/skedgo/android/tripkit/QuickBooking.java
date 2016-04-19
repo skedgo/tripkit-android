@@ -1,5 +1,7 @@
 package com.skedgo.android.tripkit;
 
+import android.os.Parcel;
+import android.os.Parcelable;
 import android.support.annotation.Nullable;
 
 import com.google.gson.annotations.SerializedName;
@@ -9,7 +11,45 @@ import org.immutables.value.Value;
 
 @Gson.TypeAdapters
 @Value.Immutable
-public abstract class QuickBooking {
+public abstract class QuickBooking implements Parcelable {
+  public static final Creator<QuickBooking> CREATOR = new Creator<QuickBooking>() {
+    @Override public QuickBooking createFromParcel(Parcel in) {
+      return ImmutableQuickBooking.builder()
+          .bookingURL(in.readString())
+          .tripUpdateURL(in.readString())
+          .priceInUSD(in.readFloat())
+          .imageURL(in.readString())
+          .title(in.readString())
+          .subtitle(in.readString())
+          .bookingTitle(in.readString())
+          .priceString(in.readString())
+          .price(in.readFloat())
+          .eta(in.readFloat())
+          .build();
+    }
+
+    @Override public QuickBooking[] newArray(int size) {
+      return new QuickBooking[size];
+    }
+  };
+
+  @Override public void writeToParcel(Parcel dest, int flags) {
+    dest.writeString(bookingURL());
+    dest.writeString(tripUpdateURL());
+    dest.writeFloat(priceInUSD());
+    dest.writeString(imageURL());
+    dest.writeString(title());
+    dest.writeString(subtitle());
+    dest.writeString(bookingTitle());
+    dest.writeString(priceString());
+    dest.writeFloat(price());
+    dest.writeFloat(eta());
+  }
+
+  @Override public int describeContents() {
+    return 0;
+  }
+
   /**
    * @return URL to book this option.
    * If possible, this will book it without further confirmation.
