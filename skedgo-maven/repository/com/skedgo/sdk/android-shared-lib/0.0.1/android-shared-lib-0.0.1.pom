@@ -20,15 +20,15 @@
       <scope>compile</scope>
     </dependency>
     <dependency>
-      <groupId>com.android.support</groupId>
-      <artifactId>support-annotations</artifactId>
-      <version>23.1.1</version>
-      <scope>compile</scope>
-    </dependency>
-    <dependency>
       <groupId>com.google.code.gson</groupId>
       <artifactId>gson</artifactId>
       <version>2.6.1</version>
+      <scope>compile</scope>
+    </dependency>
+    <dependency>
+      <groupId>com.skedgo.goservices</groupId>
+      <artifactId>transport-icons</artifactId>
+      <version>0.0.1</version>
       <scope>compile</scope>
     </dependency>
     <dependency>
@@ -40,12 +40,6 @@
     <dependency>
       <groupId>com.skedgo.commons</groupId>
       <artifactId>commons-collections</artifactId>
-      <version>0.0.1</version>
-      <scope>compile</scope>
-    </dependency>
-    <dependency>
-      <groupId>com.skedgo.goservices</groupId>
-      <artifactId>transport-icons</artifactId>
       <version>0.0.1</version>
       <scope>compile</scope>
     </dependency>
@@ -71,6 +65,12 @@
       <groupId>com.google.android.gms</groupId>
       <artifactId>play-services-maps</artifactId>
       <version>8.4.0</version>
+      <scope>compile</scope>
+    </dependency>
+    <dependency>
+      <groupId>com.android.support</groupId>
+      <artifactId>support-annotations</artifactId>
+      <version>23.3.0</version>
       <scope>compile</scope>
     </dependency>
   </dependencies>

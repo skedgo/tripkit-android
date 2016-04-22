@@ -30,4 +30,7 @@ dependencies {
   compile('com.skedgo.sdk:trip-kit:1.1b4@aar') {
     transitive = true
   }
+  compile('com.skedgo.sdk:booking-kit:1.0b1@aar') {
+    transitive = true
+  }
 }
