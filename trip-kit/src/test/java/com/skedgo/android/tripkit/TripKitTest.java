@@ -62,6 +62,7 @@ public class TripKitTest {
     when(configs.debuggable()).thenReturn(true);
     assertThat(kit.getBookingResolver()).isNotNull().isNotSameAs(kit.getBookingResolver());
     assertThat(kit.getLocationInfoService()).isNotNull().isNotSameAs(kit.getLocationInfoService());
+    assertThat(kit.getQuickBookingApi()).isNotNull().isNotSameAs(kit.getQuickBookingApi());
   }
 
   @Test public void loggingLevelIsNone() {

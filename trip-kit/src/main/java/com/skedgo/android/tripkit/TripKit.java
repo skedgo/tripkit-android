@@ -12,7 +12,10 @@ import rx.functions.Action1;
 import rx.functions.Actions;
 
 @Singleton
-@Component(modules = MainModule.class)
+@Component(modules = {
+    MainModule.class,
+    ApiModule.class
+})
 public abstract class TripKit {
   private static TripKit instance;
 
@@ -51,6 +54,7 @@ public abstract class TripKit {
   public abstract Reporter getReporter();
   public abstract BookingResolver getBookingResolver();
   public abstract LocationInfoService getLocationInfoService();
+  public abstract QuickBookingApi getQuickBookingApi();
   @VisibleForTesting abstract RegionDatabaseHelper getRegionDatabaseHelper();
   @VisibleForTesting abstract HttpLoggingInterceptor getHttpLoggingInterceptor();
   abstract TripUpdater getTripUpdater();
