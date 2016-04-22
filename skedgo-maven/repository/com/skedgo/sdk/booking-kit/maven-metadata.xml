@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <metadata>
   <groupId>com.skedgo.sdk</groupId>
-  <artifactId>android-shared-lib</artifactId>
+  <artifactId>booking-kit</artifactId>
   <versioning>
-    <release>0.0.1</release>
+    <release>1.0b1</release>
     <versions>
-      <version>0.0.1</version>
+      <version>1.0b1</version>
     </versions>
-    <lastUpdated>20160422113214</lastUpdated>
+    <lastUpdated>20160422113217</lastUpdated>
   </versioning>
 </metadata>
