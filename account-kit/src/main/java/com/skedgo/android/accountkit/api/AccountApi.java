@@ -2,6 +2,7 @@ package com.skedgo.android.accountkit.api;
 
 import com.skedgo.android.accountkit.model.LogInBody;
 import com.skedgo.android.accountkit.model.LogInResponse;
+import com.skedgo.android.accountkit.model.LogOutResponse;
 import com.skedgo.android.accountkit.model.SignUpBody;
 import com.skedgo.android.accountkit.model.SignUpResponse;
 
@@ -16,4 +17,5 @@ public interface AccountApi {
   @POST("/account/login") Observable<LogInResponse> logInAsync(
       @Body LogInBody body
   );
+  @POST("/account/logout") Observable<LogOutResponse> logOutAsync();
 }

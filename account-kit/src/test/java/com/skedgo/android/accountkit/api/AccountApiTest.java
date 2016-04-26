@@ -5,13 +5,16 @@ import com.google.gson.GsonBuilder;
 import com.skedgo.android.accountkit.BuildConfig;
 import com.skedgo.android.accountkit.model.GsonAdaptersLogInBody;
 import com.skedgo.android.accountkit.model.GsonAdaptersLogInResponse;
+import com.skedgo.android.accountkit.model.GsonAdaptersLogOutResponse;
 import com.skedgo.android.accountkit.model.GsonAdaptersSignUpBody;
 import com.skedgo.android.accountkit.model.GsonAdaptersSignUpResponse;
 import com.skedgo.android.accountkit.model.ImmutableLogInBody;
 import com.skedgo.android.accountkit.model.ImmutableLogInResponse;
+import com.skedgo.android.accountkit.model.ImmutableLogOutResponse;
 import com.skedgo.android.accountkit.model.ImmutableSignUpBody;
 import com.skedgo.android.accountkit.model.ImmutableSignUpResponse;
 import com.skedgo.android.accountkit.model.LogInResponse;
+import com.skedgo.android.accountkit.model.LogOutResponse;
 import com.skedgo.android.accountkit.model.SignUpResponse;
 
 import org.junit.After;
@@ -43,6 +46,7 @@ public class AccountApiTest {
         .registerTypeAdapterFactory(new GsonAdaptersSignUpResponse())
         .registerTypeAdapterFactory(new GsonAdaptersLogInBody())
         .registerTypeAdapterFactory(new GsonAdaptersLogInResponse())
+        .registerTypeAdapterFactory(new GsonAdaptersLogOutResponse())
         .create();
     server = new MockWebServer();
     api = new Retrofit.Builder()
@@ -117,6 +121,24 @@ public class AccountApiTest {
 
     subscriber.awaitTerminalEvent();
     subscriber.assertError(HttpException.class);
+  }
+
+  @Test public void logOutSuccessfully() {
+    final MockResponse mockResponse = new MockResponse()
+        .setResponseCode(200)
+        .setBody("{\"changed\":true}");
+    server.enqueue(mockResponse);
+
+    final TestSubscriber<LogOutResponse> subscriber = new TestSubscriber<>();
+    api.logOutAsync().subscribe(subscriber);
+
+    subscriber.awaitTerminalEvent();
+    subscriber.assertNoErrors();
+    subscriber.assertValue(
+        ImmutableLogOutResponse.builder()
+            .changed(true)
+            .build()
+    );
   }
 
   @After public void after() throws IOException {
