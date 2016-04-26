@@ -47,4 +47,28 @@ public class BuiltInInterceptorTest {
 
     server.shutdown();
   }
+
+  @Test(expected = IllegalStateException.class)
+  public void appVersionIsMandatory() {
+    BuiltInInterceptorBuilder.create()
+        .regionEligibility("Some name")
+        .locale(Locale.US)
+        .build();
+  }
+
+  @Test(expected = IllegalStateException.class)
+  public void regionEligibilityIsMandatory() {
+    BuiltInInterceptorBuilder.create()
+        .appVersion("Some version")
+        .locale(Locale.US)
+        .build();
+  }
+
+  @Test(expected = IllegalStateException.class)
+  public void localeIsMandatory() {
+    BuiltInInterceptorBuilder.create()
+        .appVersion("Some version")
+        .regionEligibility("Some name")
+        .build();
+  }
 }
