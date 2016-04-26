@@ -13,10 +13,12 @@ import okhttp3.Request;
 import okhttp3.mockwebserver.MockResponse;
 import okhttp3.mockwebserver.MockWebServer;
 import okhttp3.mockwebserver.RecordedRequest;
+import rx.functions.Func0;
 
 import static com.skedgo.android.tripkit.BuiltInInterceptor.HEADER_ACCEPT_LANGUAGE;
 import static com.skedgo.android.tripkit.BuiltInInterceptor.HEADER_APP_VERSION;
 import static com.skedgo.android.tripkit.BuiltInInterceptor.HEADER_REGION_ELIGIBILITY;
+import static com.skedgo.android.tripkit.BuiltInInterceptor.HEADER_USER_TOKEN;
 import static org.assertj.core.api.Assertions.assertThat;
 
 @RunWith(RobolectricGradleTestRunner.class)
@@ -30,7 +32,12 @@ public class BuiltInInterceptorTest {
     final BuiltInInterceptor interceptor = BuiltInInterceptorBuilder.create()
         .appVersion("Some version")
         .locale(Locale.JAPANESE)
-        .regionEligibility("Some name")
+        .regionEligibility("Some id")
+        .userTokenProvider(new Func0<String>() {
+          @Override public String call() {
+            return "Some token";
+          }
+        })
         .build();
     final OkHttpClient httpClient = new OkHttpClient.Builder()
         .addInterceptor(interceptor)
@@ -41,9 +48,10 @@ public class BuiltInInterceptorTest {
     httpClient.newCall(request).execute();
 
     final RecordedRequest recordedRequest = server.takeRequest();
-    assertThat(recordedRequest.getHeader(HEADER_APP_VERSION)).isEqualTo(interceptor.appVersion);
-    assertThat(recordedRequest.getHeader(HEADER_ACCEPT_LANGUAGE)).isEqualTo(interceptor.locale.getLanguage());
-    assertThat(recordedRequest.getHeader(HEADER_REGION_ELIGIBILITY)).isEqualTo(interceptor.regionEligibility);
+    assertThat(recordedRequest.getHeader(HEADER_APP_VERSION)).isEqualTo("Some version");
+    assertThat(recordedRequest.getHeader(HEADER_ACCEPT_LANGUAGE)).isEqualTo(Locale.JAPANESE.getLanguage());
+    assertThat(recordedRequest.getHeader(HEADER_REGION_ELIGIBILITY)).isEqualTo("Some id");
+    assertThat(recordedRequest.getHeader(HEADER_USER_TOKEN)).isEqualTo("Some token");
 
     server.shutdown();
   }
@@ -68,6 +76,14 @@ public class BuiltInInterceptorTest {
   public void localeIsMandatory() {
     BuiltInInterceptorBuilder.create()
         .appVersion("Some version")
+        .regionEligibility("Some name")
+        .build();
+  }
+
+  @Test public void userTokenProviderIsOptional() {
+    BuiltInInterceptorBuilder.create()
+        .appVersion("Some version")
+        .locale(Locale.JAPANESE)
         .regionEligibility("Some name")
         .build();
   }
