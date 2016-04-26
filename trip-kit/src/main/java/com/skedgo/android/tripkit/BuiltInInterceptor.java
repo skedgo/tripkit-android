@@ -11,9 +11,9 @@ import okhttp3.Response;
 
 @Value.Style(newBuilder = "create")
 public final class BuiltInInterceptor implements Interceptor {
-  private static final String HEADER_APP_VERSION = "X-TripGo-Version";
-  private static final String HEADER_REGION_ELIGIBILITY = "X-TripGo-RegionEligibility";
-  private static final String HEADER_ACCEPT_LANGUAGE = "Accept-Language";
+  static final String HEADER_APP_VERSION = "X-TripGo-Version";
+  static final String HEADER_REGION_ELIGIBILITY = "X-TripGo-RegionEligibility";
+  static final String HEADER_ACCEPT_LANGUAGE = "Accept-Language";
 
   public final String appVersion;
   public final String regionEligibility;
