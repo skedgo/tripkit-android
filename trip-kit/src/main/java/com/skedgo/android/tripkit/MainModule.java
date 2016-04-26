@@ -153,11 +153,13 @@ class MainModule {
 
   @Singleton @Provides OkHttpClient getOkHttpClient() {
     final OkHttpClient httpClient = new OkHttpClient();
-    httpClient.interceptors().add(Interceptors.addCustomRequestHeaders(
-        getAppVersion(),
-        configs.regionEligibility(),
-        Locale.getDefault()
-    ));
+    httpClient.interceptors().add(
+        BuiltInInterceptorCompatBuilder.create()
+            .appVersion(getAppVersion())
+            .locale(Locale.getDefault())
+            .regionEligibility(configs.regionEligibility())
+            .userTokenProvider(configs.userTokenProvider())
+            .build());
     if (configs.debuggable()) {
       final Func0<Func0<String>> baseUrlAdapterFactory = configs.baseUrlAdapterFactory();
       if (baseUrlAdapterFactory != null) {
@@ -180,6 +182,7 @@ class MainModule {
         .appVersion(getAppVersion())
         .locale(Locale.getDefault())
         .regionEligibility(configs.regionEligibility())
+        .userTokenProvider(configs.userTokenProvider())
         .build();
   }
 

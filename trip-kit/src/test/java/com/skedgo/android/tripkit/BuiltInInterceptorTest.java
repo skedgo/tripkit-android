@@ -8,6 +8,7 @@ import org.robolectric.annotation.Config;
 import java.io.IOException;
 import java.util.Locale;
 
+import okhttp3.Interceptor;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.mockwebserver.MockResponse;
@@ -29,7 +30,7 @@ public class BuiltInInterceptorTest {
     server.enqueue(new MockResponse());
     server.start();
 
-    final BuiltInInterceptor interceptor = BuiltInInterceptorBuilder.create()
+    final Interceptor interceptor = BuiltInInterceptorBuilder.create()
         .appVersion("Some version")
         .locale(Locale.JAPANESE)
         .regionEligibility("Some id")

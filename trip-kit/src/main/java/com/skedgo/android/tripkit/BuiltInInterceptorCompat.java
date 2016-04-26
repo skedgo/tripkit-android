@@ -2,19 +2,20 @@ package com.skedgo.android.tripkit;
 
 import android.support.annotation.Nullable;
 
+import com.squareup.okhttp.Interceptor;
+import com.squareup.okhttp.Request;
+import com.squareup.okhttp.Response;
+
 import org.immutables.builder.Builder;
 import org.immutables.value.Value;
 
 import java.io.IOException;
 import java.util.Locale;
 
-import okhttp3.Interceptor;
-import okhttp3.Request;
-import okhttp3.Response;
 import rx.functions.Func0;
 
 @Value.Style(newBuilder = "create")
-public final class BuiltInInterceptor implements Interceptor {
+final class BuiltInInterceptorCompat implements Interceptor {
   static final String HEADER_APP_VERSION = "X-TripGo-Version";
   static final String HEADER_REGION_ELIGIBILITY = "X-TripGo-RegionEligibility";
   static final String HEADER_ACCEPT_LANGUAGE = "Accept-Language";
@@ -25,7 +26,7 @@ public final class BuiltInInterceptor implements Interceptor {
   private final Locale locale;
   @Nullable private final Func0<String> userTokenProvider;
 
-  private BuiltInInterceptor(
+  BuiltInInterceptorCompat(
       String appVersion,
       String regionEligibility,
       Locale locale,
@@ -37,12 +38,12 @@ public final class BuiltInInterceptor implements Interceptor {
   }
 
   @Builder.Factory
-  static BuiltInInterceptor builtInInterceptor(
+  static BuiltInInterceptorCompat builtInInterceptorCompat(
       String appVersion,
       String regionEligibility,
       Locale locale,
       @Nullable Func0<String> userTokenProvider) {
-    return new BuiltInInterceptor(
+    return new BuiltInInterceptorCompat(
         appVersion,
         regionEligibility,
         locale,
@@ -50,7 +51,8 @@ public final class BuiltInInterceptor implements Interceptor {
     );
   }
 
-  @Override public Response intercept(Chain chain) throws IOException {
+  @Override
+  public Response intercept(Chain chain) throws IOException {
     final Request.Builder builder = chain.request().newBuilder()
         .addHeader(HEADER_ACCEPT_LANGUAGE, locale.getLanguage())
         .addHeader(HEADER_APP_VERSION, appVersion)
