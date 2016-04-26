@@ -24,6 +24,7 @@ public abstract class Configs {
   @Nullable public abstract ExcludedTransitModesAdapter excludedTransitModesAdapter();
   @Nullable public abstract Func0<Co2Preferences> co2PreferencesFactory();
   @Nullable public abstract Func0<TripPreferences> tripPreferencesFactory();
+  @Nullable public abstract Func0<String> userTokenProvider();
 
   /**
    * @return A factory to create a sort of adapter that specifies a base url
@@ -45,6 +46,7 @@ public abstract class Configs {
     Builder co2PreferencesFactory(Func0<Co2Preferences> co2PreferencesFactory);
     Builder tripPreferencesFactory(Func0<TripPreferences> tripPreferencesFactory);
     Builder baseUrlAdapterFactory(Func0<Func0<String>> baseUrlAdapterFactory);
+    Builder userTokenProvider(Func0<String> userTokenProvider);
     Configs build();
   }
 }
