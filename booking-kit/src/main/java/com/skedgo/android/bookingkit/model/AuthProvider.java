@@ -2,11 +2,14 @@ package com.skedgo.android.bookingkit.model;
 
 import android.support.annotation.Nullable;
 
+import com.google.gson.annotations.JsonAdapter;
+
 import org.immutables.gson.Gson;
 import org.immutables.value.Value;
 
 @Gson.TypeAdapters
 @Value.Immutable
+@JsonAdapter(GsonAdaptersAuthProvider.class)
 public interface AuthProvider {
   @Nullable String modeIdentifier();
   @Nullable String provider();

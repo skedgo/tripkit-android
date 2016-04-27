@@ -7,8 +7,6 @@ import android.support.annotation.Nullable;
 import com.google.gson.annotations.SerializedName;
 
 public class BookingAction implements Parcelable {
-  public static final String KEY_HUD_TEXT = "hudText";
-
   public static final Creator<BookingAction> CREATOR = new Creator<BookingAction>() {
     @Override
     public BookingAction createFromParcel(Parcel in) {
