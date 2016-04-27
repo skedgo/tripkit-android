@@ -24,6 +24,11 @@ public abstract class Configs {
   @Nullable public abstract ExcludedTransitModesAdapter excludedTransitModesAdapter();
   @Nullable public abstract Func0<Co2Preferences> co2PreferencesFactory();
   @Nullable public abstract Func0<TripPreferences> tripPreferencesFactory();
+
+  /**
+   * @return A factory to retrieve user token obtained via TripGo Account API.
+   * @see <a href="http://planck.buzzhives.com/tripgodata/account/resource_AccountSpecificRestService.html">TripGo Account API</a>
+   */
   @Nullable public abstract Func0<String> userTokenProvider();
 
   /**

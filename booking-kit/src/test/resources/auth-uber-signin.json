@@ -1,0 +1,85 @@
+{
+  "type": "authForm",
+  "title": "Authorization",
+  "action": {
+    "title": "Authenticate",
+    "hudText": "Validating user",
+    "finalStep": true,
+    "url": "https://granduni.buzzhives.com/satapp-beta/auth/signin/cdf76585-f2b7-403a-b37c-32f993b80412"
+  },
+  "value": "uber",
+  "form": [
+    {
+      "fields": [
+        {
+          "type": "link",
+          "id": "oauth",
+          "title": "Go to uber",
+          "value": "https://login.uber.com/oauth/v2/authorize?client_id=hBzl1hd9ihxKNnB7baQdp8y8iImTOfOF&response_type=code&scope=request&redirect_uri=https%3A%2F%2Fgranduni.skedgo.com%2Ftripgodata-beta%2Fapi%2Fbooking%2Fuber%3Furl%3Dhttps%3A%2F%2Fgranduni.buzzhives.com%2Fsatapp-beta%2Fauth%2FaccessToken%2Fcdf76585-f2b7-403a-b37c-32f993b80412",
+          "method": "external"
+        },
+        {
+          "type": "string",
+          "id": "access_token",
+          "title": "Access Token",
+          "hidden": true,
+          "keyboardType": "TEXT"
+        },
+        {
+          "type": "string",
+          "id": "refresh_token",
+          "title": "Refresh Token",
+          "hidden": true,
+          "keyboardType": "TEXT"
+        },
+        {
+          "type": "string",
+          "id": "expires_in",
+          "title": "Expiration Time",
+          "hidden": true,
+          "keyboardType": "NUMBER"
+        },
+        {
+          "type": "string",
+          "id": "clientID",
+          "title": "client ID",
+          "hidden": true,
+          "value": "hBzl1hd9ihxKNnB7baQdp8y8iImTOfOF",
+          "keyboardType": "TEXT"
+        },
+        {
+          "type": "string",
+          "id": "authURL",
+          "title": "Auth URL",
+          "hidden": true,
+          "value": "https://login.uber.com/oauth/v2/authorize",
+          "keyboardType": "TEXT"
+        },
+        {
+          "type": "string",
+          "id": "tokenURL",
+          "title": "Token URL",
+          "hidden": true,
+          "value": "https://login.uber.com/oauth/v2/token",
+          "keyboardType": "TEXT"
+        },
+        {
+          "type": "string",
+          "id": "scope",
+          "title": "Scope",
+          "hidden": true,
+          "value": "request",
+          "keyboardType": "TEXT"
+        },
+        {
+          "type": "string",
+          "id": "clientSecret",
+          "title": "client Secret",
+          "hidden": true,
+          "value": "5ÂõÔêïÍ5]-%ç\u0013\bKÎº\u0007o\u0019÷ÚÁª37õ8\u0016\u001dqÖé)¡\u001a6\u0012\u001dS3Ò \r\u0007ã\u001eèñµ/«;sëa\bíVª] ¸¯x>8Ñ¯B\u0001ëZRýì¿È\u001e\u0014¯ÙåVO2¼ã3ì\u001fA\u0011ã¯6ðÀKú.yl1B'*\u000b5ç´\u0004*'¦?Ùí\u0007cÚG¾\u0004?eê\u0005.\u0018¨bÙ\u0005È±,½}'p\u0018ê°nÁãjâ¬.©£Ç&~\u000b£Ó~þ\\ÊtØÃ¥ßpufW³j«¦§7k®Ý5R®{S1ìU \u001dú¼o\u0012ÚÑ?£t\u001dÈ\u0002¿+ù\u0000eP=­ÚÊ¶\nÚÄ\u0019ùx\u0012åKØ",
+          "keyboardType": "TEXT"
+        }
+      ]
+    }
+  ]
+}
