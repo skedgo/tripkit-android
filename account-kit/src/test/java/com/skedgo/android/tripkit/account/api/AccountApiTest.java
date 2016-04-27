@@ -21,11 +21,14 @@ import java.io.IOException;
 
 import okhttp3.mockwebserver.MockResponse;
 import okhttp3.mockwebserver.MockWebServer;
+import okhttp3.mockwebserver.RecordedRequest;
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava.HttpException;
 import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
 import rx.observers.TestSubscriber;
+
+import static org.assertj.core.api.Assertions.assertThat;
 
 @RunWith(RobolectricGradleTestRunner.class)
 @Config(constants = BuildConfig.class, sdk = 21)
@@ -43,7 +46,7 @@ public class AccountApiTest {
         .create(AccountApi.class);
   }
 
-  @Test public void signUpSuccessfully() throws IOException {
+  @Test public void signUpSuccessfully() throws IOException, InterruptedException {
     final MockResponse response = new MockResponse()
         .setBody("{\"changed\":true,\"userToken\":\"id5E2lbNJ37V1HwAUKmpLaPSSmpzHK\"}");
     server.enqueue(response);
@@ -65,9 +68,12 @@ public class AccountApiTest {
             .userToken("id5E2lbNJ37V1HwAUKmpLaPSSmpzHK")
             .build()
     );
+
+    final RecordedRequest request = server.takeRequest();
+    assertThat(request.getPath()).containsOnlyOnce("/account/signup");
   }
 
-  @Test public void logInSuccessfully() throws IOException {
+  @Test public void logInSuccessfully() throws IOException, InterruptedException {
     final MockResponse mockResponse = new MockResponse()
         .setResponseCode(200)
         .setBody("{\"changed\":true,\"userToken\":\"6XzsKaatH0rZNkbDieRligNLy3iYjn\"}");
@@ -89,6 +95,9 @@ public class AccountApiTest {
             .userToken("6XzsKaatH0rZNkbDieRligNLy3iYjn")
             .build()
     );
+
+    final RecordedRequest request = server.takeRequest();
+    assertThat(request.getPath()).containsOnlyOnce("/account/login");
   }
 
   @Test public void failToLogIn() {
@@ -109,7 +118,7 @@ public class AccountApiTest {
     subscriber.assertError(HttpException.class);
   }
 
-  @Test public void logOutSuccessfully() {
+  @Test public void logOutSuccessfully() throws InterruptedException {
     final MockResponse mockResponse = new MockResponse()
         .setResponseCode(200)
         .setBody("{\"changed\":true}");
@@ -125,6 +134,9 @@ public class AccountApiTest {
             .changed(true)
             .build()
     );
+
+    final RecordedRequest request = server.takeRequest();
+    assertThat(request.getPath()).containsOnlyOnce("/account/logout");
   }
 
   @After public void after() throws IOException {
