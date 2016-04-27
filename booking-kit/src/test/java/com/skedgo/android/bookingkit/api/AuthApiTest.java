@@ -9,6 +9,8 @@ import com.skedgo.android.bookingkit.model.FormField;
 import com.skedgo.android.bookingkit.model.FormFieldJsonAdapter;
 import com.skedgo.android.bookingkit.model.GsonAdaptersAuthProvider;
 import com.skedgo.android.bookingkit.model.ImmutableAuthProvider;
+import com.skedgo.android.bookingkit.model.ImmutableLogOutResponse;
+import com.skedgo.android.bookingkit.model.LogOutResponse;
 
 import org.apache.commons.io.IOUtils;
 import org.junit.After;
@@ -121,5 +123,27 @@ public class AuthApiTest {
     assertThat(form.getTitle()).isEqualTo("Authorization");
     assertThat(form.getAction()).isNotNull();
     assertThat(form.getForm()).hasSize(1);
+  }
+
+  @Test public void logOutSuccessfully() {
+    final MockResponse mockResponse = new MockResponse()
+        .setResponseCode(200)
+        .setBody("{\"changed\":true}");
+    server.enqueue(mockResponse);
+
+    final String url = baseUrl.newBuilder()
+        .addPathSegments("auth/uber/logout")
+        .build()
+        .toString();
+    final TestSubscriber<LogOutResponse> subscriber = new TestSubscriber<>();
+    api.logOutAsync(url).subscribe(subscriber);
+
+    subscriber.awaitTerminalEvent();
+    subscriber.assertNoErrors();
+    subscriber.assertValue(
+        ImmutableLogOutResponse.builder()
+            .changed(true)
+            .build()
+    );
   }
 }

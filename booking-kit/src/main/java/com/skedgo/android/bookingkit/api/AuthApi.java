@@ -2,6 +2,7 @@ package com.skedgo.android.bookingkit.api;
 
 import com.skedgo.android.bookingkit.model.AuthProvider;
 import com.skedgo.android.bookingkit.model.BookingForm;
+import com.skedgo.android.bookingkit.model.LogOutResponse;
 
 import java.util.List;
 
@@ -14,14 +15,15 @@ public interface AuthApi {
   /**
    * @param url Should be in form of 'auth/{regionName}'.
    */
-  @GET Observable<List<AuthProvider>> fetchProvidersAsync(
-      @Url HttpUrl url
-  );
+  @GET Observable<List<AuthProvider>> fetchProvidersAsync(@Url HttpUrl url);
 
   /**
    * @param url This might be obtained by {@link AuthProvider#url()}.
    */
-  @GET Observable<BookingForm> signInAsync(
-      @Url String url
-  );
+  @GET Observable<BookingForm> signInAsync(@Url String url);
+
+  /**
+   * @param url This might be obtained by {@link AuthProvider#url()}.
+   */
+  @GET Observable<LogOutResponse> logOutAsync(@Url String url);
 }
