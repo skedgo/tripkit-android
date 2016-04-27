@@ -29,7 +29,6 @@ public class AccountModule {
         .registerTypeAdapterFactory(new GsonAdaptersLogOutResponse())
         .create();
     return new Retrofit.Builder()
-        /* This base url is ignored as the api relies on @Url. */
         .baseUrl(HttpUrl.parse("https://tripgo.skedgo.com/satapp/"))
         .addCallAdapterFactory(RxJavaCallAdapterFactory.createWithScheduler(Schedulers.io()))
         .addConverterFactory(GsonConverterFactory.create(gson))
