@@ -1,10 +1,10 @@
-package com.skedgo.android.accountkit.api;
+package com.skedgo.android.tripkit.account.api;
 
-import com.skedgo.android.accountkit.model.LogInBody;
-import com.skedgo.android.accountkit.model.LogInResponse;
-import com.skedgo.android.accountkit.model.LogOutResponse;
-import com.skedgo.android.accountkit.model.SignUpBody;
-import com.skedgo.android.accountkit.model.SignUpResponse;
+import com.skedgo.android.tripkit.account.model.LogInBody;
+import com.skedgo.android.tripkit.account.model.LogInResponse;
+import com.skedgo.android.tripkit.account.model.LogOutResponse;
+import com.skedgo.android.tripkit.account.model.SignUpBody;
+import com.skedgo.android.tripkit.account.model.SignUpResponse;
 
 import retrofit2.http.Body;
 import retrofit2.http.POST;

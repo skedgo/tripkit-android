@@ -1,21 +1,21 @@
-package com.skedgo.android.accountkit.api;
+package com.skedgo.android.tripkit.account.api;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import com.skedgo.android.accountkit.BuildConfig;
-import com.skedgo.android.accountkit.model.GsonAdaptersLogInBody;
-import com.skedgo.android.accountkit.model.GsonAdaptersLogInResponse;
-import com.skedgo.android.accountkit.model.GsonAdaptersLogOutResponse;
-import com.skedgo.android.accountkit.model.GsonAdaptersSignUpBody;
-import com.skedgo.android.accountkit.model.GsonAdaptersSignUpResponse;
-import com.skedgo.android.accountkit.model.ImmutableLogInBody;
-import com.skedgo.android.accountkit.model.ImmutableLogInResponse;
-import com.skedgo.android.accountkit.model.ImmutableLogOutResponse;
-import com.skedgo.android.accountkit.model.ImmutableSignUpBody;
-import com.skedgo.android.accountkit.model.ImmutableSignUpResponse;
-import com.skedgo.android.accountkit.model.LogInResponse;
-import com.skedgo.android.accountkit.model.LogOutResponse;
-import com.skedgo.android.accountkit.model.SignUpResponse;
+import com.skedgo.android.tripkit.account.BuildConfig;
+import com.skedgo.android.tripkit.account.model.GsonAdaptersLogInBody;
+import com.skedgo.android.tripkit.account.model.GsonAdaptersLogInResponse;
+import com.skedgo.android.tripkit.account.model.GsonAdaptersLogOutResponse;
+import com.skedgo.android.tripkit.account.model.GsonAdaptersSignUpBody;
+import com.skedgo.android.tripkit.account.model.GsonAdaptersSignUpResponse;
+import com.skedgo.android.tripkit.account.model.ImmutableLogInBody;
+import com.skedgo.android.tripkit.account.model.ImmutableLogInResponse;
+import com.skedgo.android.tripkit.account.model.ImmutableLogOutResponse;
+import com.skedgo.android.tripkit.account.model.ImmutableSignUpBody;
+import com.skedgo.android.tripkit.account.model.ImmutableSignUpResponse;
+import com.skedgo.android.tripkit.account.model.LogInResponse;
+import com.skedgo.android.tripkit.account.model.LogOutResponse;
+import com.skedgo.android.tripkit.account.model.SignUpResponse;
 
 import org.junit.After;
 import org.junit.Before;

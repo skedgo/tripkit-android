@@ -1,4 +1,4 @@
-package com.skedgo.android.accountkit.model;
+package com.skedgo.android.tripkit.account.model;
 
 import org.immutables.gson.Gson;
 import org.immutables.value.Value;

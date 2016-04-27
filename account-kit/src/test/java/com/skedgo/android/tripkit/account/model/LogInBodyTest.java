@@ -1,6 +1,6 @@
-package com.skedgo.android.accountkit.model;
+package com.skedgo.android.tripkit.account.model;
 
-import com.skedgo.android.accountkit.BuildConfig;
+import com.skedgo.android.tripkit.account.BuildConfig;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
