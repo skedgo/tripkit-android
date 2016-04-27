@@ -4,9 +4,13 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.skedgo.android.bookingkit.BuildConfig;
 import com.skedgo.android.bookingkit.model.AuthProvider;
+import com.skedgo.android.bookingkit.model.BookingForm;
+import com.skedgo.android.bookingkit.model.FormField;
+import com.skedgo.android.bookingkit.model.FormFieldJsonAdapter;
 import com.skedgo.android.bookingkit.model.GsonAdaptersAuthProvider;
 import com.skedgo.android.bookingkit.model.ImmutableAuthProvider;
 
+import org.apache.commons.io.IOUtils;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -15,6 +19,7 @@ import org.robolectric.RobolectricGradleTestRunner;
 import org.robolectric.annotation.Config;
 
 import java.io.IOException;
+import java.nio.charset.Charset;
 import java.util.Arrays;
 import java.util.List;
 
@@ -26,6 +31,8 @@ import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
 import rx.observers.TestSubscriber;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
 @RunWith(RobolectricGradleTestRunner.class)
 @Config(constants = BuildConfig.class, sdk = 21)
 public class AuthApiTest {
@@ -35,6 +42,7 @@ public class AuthApiTest {
 
   @Before public void before() {
     final Gson gson = new GsonBuilder()
+        .registerTypeAdapter(FormField.class, new FormFieldJsonAdapter())
         .registerTypeAdapterFactory(new GsonAdaptersAuthProvider())
         .create();
     server = new MockWebServer();
@@ -103,5 +111,31 @@ public class AuthApiTest {
             .status("Account not yet connected")
             .build()
     ));
+  }
+
+  @Test public void signInSuccessfully() throws IOException {
+    final MockResponse mockResponse = new MockResponse()
+        .setResponseCode(200)
+        .setBody(IOUtils.toString(
+            getClass().getResourceAsStream("/auth-uber-signin.json"),
+            Charset.defaultCharset()
+        ));
+    server.enqueue(mockResponse);
+
+    final String url = baseUrl.newBuilder()
+        .addPathSegment("auth")
+        .addPathSegment("uber")
+        .addPathSegment("signin")
+        .build()
+        .toString();
+    final TestSubscriber<BookingForm> subscriber = new TestSubscriber<>();
+    api.signInAsync(url).subscribe(subscriber);
+
+    subscriber.awaitTerminalEvent();
+    subscriber.assertNoErrors();
+    final BookingForm form = subscriber.getOnNextEvents().get(0);
+    assertThat(form.getTitle()).isEqualTo("Authorization");
+    assertThat(form.getAction()).isNotNull();
+    assertThat(form.getForm()).hasSize(1);
   }
 }
