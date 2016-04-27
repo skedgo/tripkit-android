@@ -59,29 +59,13 @@ public class AuthApiTest {
     server.shutdown();
   }
 
-  @Test public void fetchProvidersSuccessfully() {
+  @Test public void fetchProvidersSuccessfully() throws IOException {
     final MockResponse mockResponse = new MockResponse();
     mockResponse.setResponseCode(200);
-    mockResponse.setBody(
-        "[\n" +
-            "  {\n" +
-            "    \"modeIdentifier\": \"ps_tnc_LYFT\",\n" +
-            "    \"provider\": \"lyft\",\n" +
-            "    \"action\": \"signin\",\n" +
-            "    \"url\": \"https://granduni.buzzhives.com/satapp-beta/auth/lyft/signin\",\n" +
-            "    \"actionTitle\": \"Connect\",\n" +
-            "    \"status\": \"Account not yet connected\"\n" +
-            "  },\n" +
-            "  {\n" +
-            "    \"modeIdentifier\": \"ps_tnc_UBER\",\n" +
-            "    \"provider\": \"uber\",\n" +
-            "    \"action\": \"signin\",\n" +
-            "    \"url\": \"https://granduni.buzzhives.com/satapp-beta/auth/uber/signin\",\n" +
-            "    \"actionTitle\": \"Connect\",\n" +
-            "    \"status\": \"Account not yet connected\"\n" +
-            "  }\n" +
-            "]"
-    );
+    mockResponse.setBody(IOUtils.toString(
+        getClass().getResourceAsStream("/auth-US_CO_Denver.json"),
+        Charset.defaultCharset()
+    ));
     server.enqueue(mockResponse);
 
     final HttpUrl url = baseUrl.newBuilder()

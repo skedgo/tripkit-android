@@ -1,0 +1,18 @@
+[
+  {
+    "modeIdentifier": "ps_tnc_LYFT",
+    "provider": "lyft",
+    "action": "signin",
+    "url": "https://granduni.buzzhives.com/satapp-beta/auth/lyft/signin",
+    "actionTitle": "Connect",
+    "status": "Account not yet connected"
+  },
+  {
+    "modeIdentifier": "ps_tnc_UBER",
+    "provider": "uber",
+    "action": "signin",
+    "url": "https://granduni.buzzhives.com/satapp-beta/auth/uber/signin",
+    "actionTitle": "Connect",
+    "status": "Account not yet connected"
+  }
+]
