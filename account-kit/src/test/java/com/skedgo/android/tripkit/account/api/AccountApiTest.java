@@ -1,13 +1,6 @@
 package com.skedgo.android.tripkit.account.api;
 
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
 import com.skedgo.android.tripkit.account.BuildConfig;
-import com.skedgo.android.tripkit.account.model.GsonAdaptersLogInBody;
-import com.skedgo.android.tripkit.account.model.GsonAdaptersLogInResponse;
-import com.skedgo.android.tripkit.account.model.GsonAdaptersLogOutResponse;
-import com.skedgo.android.tripkit.account.model.GsonAdaptersSignUpBody;
-import com.skedgo.android.tripkit.account.model.GsonAdaptersSignUpResponse;
 import com.skedgo.android.tripkit.account.model.ImmutableLogInBody;
 import com.skedgo.android.tripkit.account.model.ImmutableLogInResponse;
 import com.skedgo.android.tripkit.account.model.ImmutableLogOutResponse;
@@ -41,18 +34,11 @@ public class AccountApiTest {
   private AccountApi api;
 
   @Before public void before() {
-    final Gson gson = new GsonBuilder()
-        .registerTypeAdapterFactory(new GsonAdaptersSignUpBody())
-        .registerTypeAdapterFactory(new GsonAdaptersSignUpResponse())
-        .registerTypeAdapterFactory(new GsonAdaptersLogInBody())
-        .registerTypeAdapterFactory(new GsonAdaptersLogInResponse())
-        .registerTypeAdapterFactory(new GsonAdaptersLogOutResponse())
-        .create();
     server = new MockWebServer();
     api = new Retrofit.Builder()
         .baseUrl(server.url("/"))
         .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
-        .addConverterFactory(GsonConverterFactory.create(gson))
+        .addConverterFactory(GsonConverterFactory.create())
         .build()
         .create(AccountApi.class);
   }
