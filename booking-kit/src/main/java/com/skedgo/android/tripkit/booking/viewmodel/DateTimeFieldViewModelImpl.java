@@ -4,8 +4,8 @@ import android.os.Parcel;
 import android.os.Parcelable;
 import android.support.annotation.NonNull;
 
-import com.skedgo.android.tripkit.booking.model.DateTimeFormField;
 import com.skedgo.android.common.rx.Var;
+import com.skedgo.android.tripkit.booking.model.DateTimeFormField;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
