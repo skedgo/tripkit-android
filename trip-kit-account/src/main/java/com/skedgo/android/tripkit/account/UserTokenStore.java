@@ -11,6 +11,6 @@ import rx.functions.Func0;
  * This might be supplied to {@link Configs#userTokenProvider()} so that
  * TripKit can send appropriate booking requests.
  */
-public interface UserTokenStore extends Func0<String> {
-  void put(@Nullable String userToken);
+public abstract class UserTokenStore implements Func0<String> {
+  abstract void put(@Nullable String userToken);
 }
