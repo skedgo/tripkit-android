@@ -12,6 +12,7 @@ final AccountComponent component = DaggerAccountComponent.builder()
 final AccountService accountService = component.accountService();
 ```
 ### Sign up
+After signing up successfully, the user token from the response will be persisted on disk. In order to access the token, invoke `UserTokenStore.call()`.
 ```java
 @Test public void signUp() {
   accountService.signUpAsync(
@@ -32,6 +33,7 @@ final AccountService accountService = component.accountService();
 }
 ```
 ### Log in
+After logging in successfully, the user token from the response will be persisted on disk. In order to access the token, invoke `UserTokenStore.call()`.
 ```java
 @Test public void logIn() {
   accountService.logInAsync(
@@ -51,6 +53,7 @@ final AccountService accountService = component.accountService();
 }
 ```
 ### Log out
+After logging out, the persistent user token on disk will be deleted. `UserTokenStore.call()` will return null.
 ```java
 @Test public void logOut() {
   accountService.logOutAsync().subscribe(new Action1<LogOutResponse>() {
