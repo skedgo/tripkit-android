@@ -4,8 +4,8 @@ import android.os.Parcel;
 import android.os.Parcelable;
 
 import com.skedgo.android.tripkit.booking.InputForm;
-import com.skedgo.android.tripkit.booking.model.BookingAction;
-import com.skedgo.android.tripkit.booking.model.LinkFormField;
+import com.skedgo.android.tripkit.booking.BookingAction;
+import com.skedgo.android.tripkit.booking.LinkFormField;
 
 public final class ParamImpl implements BookingViewModel.Param {
   public static final Parcelable.Creator<ParamImpl> CREATOR = new Parcelable.Creator<ParamImpl>() {

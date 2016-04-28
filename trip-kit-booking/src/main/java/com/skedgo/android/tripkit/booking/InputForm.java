@@ -4,8 +4,6 @@ import android.os.Parcel;
 import android.os.Parcelable;
 
 import com.google.gson.annotations.SerializedName;
-import com.skedgo.android.tripkit.booking.model.FormField;
-import com.skedgo.android.tripkit.booking.model.FormGroup;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -1,11 +1,5 @@
 package com.skedgo.android.tripkit.booking;
 
-import com.skedgo.android.tripkit.booking.model.FormField;
-import com.skedgo.android.tripkit.booking.model.FormGroup;
-import com.skedgo.android.tripkit.booking.model.OptionFormField;
-import com.skedgo.android.tripkit.booking.model.StepperFormField;
-import com.skedgo.android.tripkit.booking.model.StringFormField;
-
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.robolectric.RobolectricGradleTestRunner;

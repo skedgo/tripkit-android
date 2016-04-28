@@ -2,9 +2,6 @@ package com.skedgo.android.tripkit.booking;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import com.skedgo.android.tripkit.booking.model.BookingForm;
-import com.skedgo.android.tripkit.booking.model.FormField;
-import com.skedgo.android.tripkit.booking.model.FormFieldJsonAdapter;
 
 import org.apache.commons.io.IOUtils;
 import org.junit.After;

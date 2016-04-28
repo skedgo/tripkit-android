@@ -1,4 +1,4 @@
-package com.skedgo.android.tripkit.booking.model;
+package com.skedgo.android.tripkit.booking;
 
 import com.google.gson.JsonDeserializationContext;
 import com.google.gson.JsonDeserializer;

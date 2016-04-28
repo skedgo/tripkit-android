@@ -1,4 +1,4 @@
-package com.skedgo.android.tripkit.booking.model;
+package com.skedgo.android.tripkit.booking;
 
 import android.os.Parcel;
 

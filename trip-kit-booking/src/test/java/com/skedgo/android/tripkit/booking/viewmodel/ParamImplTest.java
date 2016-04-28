@@ -2,10 +2,10 @@ package com.skedgo.android.tripkit.booking.viewmodel;
 
 import android.os.Parcel;
 
+import com.skedgo.android.tripkit.booking.BookingAction;
 import com.skedgo.android.tripkit.booking.BuildConfig;
 import com.skedgo.android.tripkit.booking.InputForm;
-import com.skedgo.android.tripkit.booking.model.BookingAction;
-import com.skedgo.android.tripkit.booking.model.LinkFormField;
+import com.skedgo.android.tripkit.booking.LinkFormField;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;

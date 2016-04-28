@@ -1,7 +1,5 @@
 package com.skedgo.android.tripkit.booking;
 
-import com.skedgo.android.tripkit.booking.model.BookingForm;
-
 import java.util.List;
 
 import okhttp3.HttpUrl;

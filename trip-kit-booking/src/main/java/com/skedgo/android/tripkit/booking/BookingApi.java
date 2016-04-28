@@ -1,7 +1,5 @@
 package com.skedgo.android.tripkit.booking;
 
-import com.skedgo.android.tripkit.booking.model.BookingForm;
-
 import retrofit2.http.Body;
 import retrofit2.http.GET;
 import retrofit2.http.POST;

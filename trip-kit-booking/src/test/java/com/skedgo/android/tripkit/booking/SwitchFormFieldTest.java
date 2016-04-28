@@ -1,8 +1,6 @@
-package com.skedgo.android.tripkit.booking.model;
+package com.skedgo.android.tripkit.booking;
 
 import android.os.Parcel;
-
-import com.skedgo.android.tripkit.booking.BuildConfig;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -13,19 +11,17 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 @RunWith(RobolectricGradleTestRunner.class)
 @Config(constants = BuildConfig.class, sdk = 21)
-public class StepperFormFieldTest {
+public class SwitchFormFieldTest {
 
   @Test public void Parcelable() {
-    StepperFormField expected = new StepperFormField();
-    expected.setValue(5);
-    expected.setMinValue(0);
-    expected.setMaxValue(10);
+    SwitchFormField expected = new SwitchFormField();
+    expected.setValue(true);
+    expected.setKeyboardType("TEXT");
     Parcel parcel = Parcel.obtain();
     expected.writeToParcel(parcel, 0);
     parcel.setDataPosition(0);
-    StepperFormField actual = StepperFormField.CREATOR.createFromParcel(parcel);
+    SwitchFormField actual = SwitchFormField.CREATOR.createFromParcel(parcel);
     assertThat(actual.getValue()).isEqualTo(expected.getValue());
-    assertThat(actual.getMinValue()).isEqualTo(expected.getMinValue());
-    assertThat(actual.getMaxValue()).isEqualTo(expected.getMaxValue());
+    assertThat(actual.getKeyboardType()).isEqualTo(expected.getKeyboardType());
   }
 }

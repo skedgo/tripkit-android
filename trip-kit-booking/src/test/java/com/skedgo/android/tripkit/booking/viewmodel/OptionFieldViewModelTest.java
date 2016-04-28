@@ -1,7 +1,7 @@
 package com.skedgo.android.tripkit.booking.viewmodel;
 
 import com.skedgo.android.tripkit.booking.BuildConfig;
-import com.skedgo.android.tripkit.booking.model.OptionFormField;
+import com.skedgo.android.tripkit.booking.OptionFormField;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;

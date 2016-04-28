@@ -3,7 +3,7 @@ package com.skedgo.android.tripkit.booking.viewmodel;
 import android.os.Parcel;
 
 import com.skedgo.android.tripkit.booking.BuildConfig;
-import com.skedgo.android.tripkit.booking.model.DateTimeFormField;
+import com.skedgo.android.tripkit.booking.DateTimeFormField;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;

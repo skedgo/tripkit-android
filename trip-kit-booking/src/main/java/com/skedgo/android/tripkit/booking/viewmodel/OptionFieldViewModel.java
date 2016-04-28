@@ -5,7 +5,7 @@ import android.support.annotation.Nullable;
 import android.text.TextUtils;
 
 import com.skedgo.android.common.rx.Var;
-import com.skedgo.android.tripkit.booking.model.OptionFormField;
+import com.skedgo.android.tripkit.booking.OptionFormField;
 
 import org.apache.commons.collections4.CollectionUtils;
 

@@ -1,14 +1,14 @@
 package com.skedgo.android.tripkit.booking.viewmodel;
 
+import com.skedgo.android.tripkit.booking.BookingAction;
 import com.skedgo.android.tripkit.booking.BookingApi;
+import com.skedgo.android.tripkit.booking.BookingForm;
 import com.skedgo.android.tripkit.booking.BuildConfig;
+import com.skedgo.android.tripkit.booking.FormField;
+import com.skedgo.android.tripkit.booking.FormGroup;
 import com.skedgo.android.tripkit.booking.InputForm;
-import com.skedgo.android.tripkit.booking.model.BookingAction;
-import com.skedgo.android.tripkit.booking.model.BookingForm;
-import com.skedgo.android.tripkit.booking.model.FormField;
-import com.skedgo.android.tripkit.booking.model.FormGroup;
-import com.skedgo.android.tripkit.booking.model.OptionFormField;
-import com.skedgo.android.tripkit.booking.model.StringFormField;
+import com.skedgo.android.tripkit.booking.OptionFormField;
+import com.skedgo.android.tripkit.booking.StringFormField;
 
 import org.assertj.core.api.Assertions;
 import org.junit.Before;

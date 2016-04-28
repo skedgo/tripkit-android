@@ -1,8 +1,7 @@
-package com.skedgo.android.tripkit.booking.model;
+package com.skedgo.android.tripkit.booking;
 
 import com.google.gson.Gson;
 import com.google.gson.stream.JsonReader;
-import com.skedgo.android.tripkit.booking.BuildConfig;
 
 import org.junit.Before;
 import org.junit.Test;
