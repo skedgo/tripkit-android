@@ -7,7 +7,6 @@ import com.skedgo.android.tripkit.booking.model.AuthProvider;
 import com.skedgo.android.tripkit.booking.model.BookingForm;
 import com.skedgo.android.tripkit.booking.model.FormField;
 import com.skedgo.android.tripkit.booking.model.FormFieldJsonAdapter;
-import com.skedgo.android.tripkit.booking.model.GsonAdaptersAuthProvider;
 import com.skedgo.android.tripkit.booking.model.ImmutableAuthProvider;
 import com.skedgo.android.tripkit.booking.model.ImmutableLogOutResponse;
 import com.skedgo.android.tripkit.booking.model.LogOutResponse;
@@ -45,7 +44,6 @@ public class AuthApiTest {
   @Before public void before() {
     final Gson gson = new GsonBuilder()
         .registerTypeAdapter(FormField.class, new FormFieldJsonAdapter())
-        .registerTypeAdapterFactory(new GsonAdaptersAuthProvider())
         .create();
     server = new MockWebServer();
     baseUrl = server.url("/");

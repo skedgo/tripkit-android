@@ -1,13 +1,10 @@
 package com.skedgo.android.tripkit.account;
 
+import android.content.Context;
+
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import com.skedgo.android.tripkit.account.api.AccountApi;
-import com.skedgo.android.tripkit.account.model.GsonAdaptersLogInBody;
-import com.skedgo.android.tripkit.account.model.GsonAdaptersLogInResponse;
-import com.skedgo.android.tripkit.account.model.GsonAdaptersLogOutResponse;
-import com.skedgo.android.tripkit.account.model.GsonAdaptersSignUpBody;
-import com.skedgo.android.tripkit.account.model.GsonAdaptersSignUpResponse;
+import com.skedgo.android.tripkit.Configs;
 
 import dagger.Module;
 import dagger.Provides;
@@ -35,5 +32,18 @@ public class AccountModule {
         .client(httpClient)
         .build()
         .create(AccountApi.class);
+  }
+
+  @Provides UserTokenStore userTokenStore(Configs configs) {
+    return new UserTokenStoreImpl(configs.context().getSharedPreferences(
+        "AccountPreferences",
+        Context.MODE_PRIVATE
+    ));
+  }
+
+  @Provides AccountService accountService(
+      AccountApi accountApi,
+      UserTokenStore userTokenStore) {
+    return new AccountServiceImpl(accountApi, userTokenStore);
   }
 }

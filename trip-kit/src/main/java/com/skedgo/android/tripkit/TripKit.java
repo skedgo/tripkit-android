@@ -43,6 +43,7 @@ public abstract class TripKit {
     }
   }
 
+  public abstract Configs configs();
   public abstract RegionService getRegionService();
   public abstract RouteService getRouteService();
   public abstract OkHttpClient getOkHttpClient();

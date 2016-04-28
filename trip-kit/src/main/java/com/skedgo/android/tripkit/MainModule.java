@@ -49,6 +49,10 @@ class MainModule {
     context = configs.context().getApplicationContext();
   }
 
+  @Provides Configs configs() {
+    return configs;
+  }
+
   @Provides RegionsApi getRegionsApi(OkHttpClient httpClient) {
     return new RestAdapter.Builder()
         .setLogLevel(configs.debuggable() ? FULL : NONE)
