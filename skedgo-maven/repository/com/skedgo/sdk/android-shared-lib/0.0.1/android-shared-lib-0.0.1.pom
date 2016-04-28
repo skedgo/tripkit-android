@@ -20,15 +20,15 @@
       <scope>compile</scope>
     </dependency>
     <dependency>
-      <groupId>com.google.code.gson</groupId>
-      <artifactId>gson</artifactId>
-      <version>2.6.1</version>
-      <scope>compile</scope>
-    </dependency>
-    <dependency>
       <groupId>com.skedgo.goservices</groupId>
       <artifactId>transport-icons</artifactId>
       <version>0.0.1</version>
+      <scope>compile</scope>
+    </dependency>
+    <dependency>
+      <groupId>com.google.code.gson</groupId>
+      <artifactId>gson</artifactId>
+      <version>2.6.1</version>
       <scope>compile</scope>
     </dependency>
     <dependency>
