@@ -27,10 +27,13 @@ dependencies {
   compile 'com.squareup.picasso:picasso:2.5.2'
   compile 'com.facebook.stetho:stetho:1.2.0'
   compile 'com.facebook.stetho:stetho-okhttp:1.2.0'
-  compile('com.skedgo.sdk:trip-kit:1.1b4@aar') {
+  compile('com.skedgo.sdk:trip-kit:1.1b5@aar') {
     transitive = true
   }
-  compile('com.skedgo.sdk:booking-kit:1.0b1@aar') {
+  compile('com.skedgo.sdk:trip-kit-booking:1.0b2@aar') {
+    transitive = true
+  }
+  compile('com.skedgo.sdk:trip-kit-account:1.0b2@aar') {
     transitive = true
   }
 }
