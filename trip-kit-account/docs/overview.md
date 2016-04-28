@@ -6,6 +6,12 @@ final AccountComponent component = DaggerAccountComponent.builder()
     .tripKit(TripKit.singleton())
     .build();
 ```
+## UserTokenStore
+`UserTokenStore` is a helper to retrieve and to persist user token obtained via [Account APIs](http://planck.buzzhives.com/tripgodata/account/resource_AccountSpecificRestService.html). You might need to supply `UserTokenStrore` to `Configs.userTokenProvider()` so that TripKit can send appropriate booking requests. As of now, the implementation is that TripKit will attach user token (if present) in the headers of all the requests that come out of it.
+### Instantiate
+```java
+final UserTokenStore userTokenStore = component.userTokenStore();
+```
 ## AccountService
 ### Instantiate
 ```java
