@@ -4,6 +4,7 @@ import android.content.Context;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.skedgo.android.tripkit.Configs;
 import com.skedgo.android.tripkit.account.model.GsonAdaptersLogInBody;
 import com.skedgo.android.tripkit.account.model.GsonAdaptersLogInResponse;
 import com.skedgo.android.tripkit.account.model.GsonAdaptersLogOutResponse;
@@ -38,10 +39,16 @@ public class ApiModule {
         .create(AccountApi.class);
   }
 
-  @Provides UserTokenStore userTokenStore(Context context) {
-    return new UserTokenStoreImpl(context.getSharedPreferences(
+  @Provides UserTokenStore userTokenStore(Configs configs) {
+    return new UserTokenStoreImpl(configs.context().getSharedPreferences(
         "AccountPreferences",
         Context.MODE_PRIVATE
     ));
+  }
+
+  @Provides AccountService accountService(
+      AccountApi accountApi,
+      UserTokenStore userTokenStore) {
+    return new AccountServiceImpl(accountApi, userTokenStore);
   }
 }
