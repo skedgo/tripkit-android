@@ -8,6 +8,9 @@ import com.skedgo.android.tripkit.scope.ExtensionScope;
 
 import dagger.Component;
 
+/**
+ * To initialize this, refer to {@link DaggerBookingComponent#builder()}.
+ */
 @ExtensionScope
 @Component(
     modules = BookingModule.class,
