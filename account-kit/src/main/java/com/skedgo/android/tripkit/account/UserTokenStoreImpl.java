@@ -1,4 +1,4 @@
-package com.skedgo.android.tripkit.account.api;
+package com.skedgo.android.tripkit.account;
 
 import android.content.SharedPreferences;
 import android.support.annotation.NonNull;

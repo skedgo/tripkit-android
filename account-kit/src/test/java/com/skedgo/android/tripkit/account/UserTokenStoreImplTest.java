@@ -1,8 +1,6 @@
-package com.skedgo.android.tripkit.account.api;
+package com.skedgo.android.tripkit.account;
 
 import android.content.Context;
-
-import com.skedgo.android.tripkit.account.BuildConfig;
 
 import org.junit.Before;
 import org.junit.Test;

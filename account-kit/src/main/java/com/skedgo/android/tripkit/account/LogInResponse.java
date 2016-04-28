@@ -1,4 +1,4 @@
-package com.skedgo.android.tripkit.account.model;
+package com.skedgo.android.tripkit.account;
 
 import android.support.annotation.Nullable;
 
@@ -9,8 +9,8 @@ import org.immutables.value.Value;
 
 @Gson.TypeAdapters
 @Value.Immutable
-@JsonAdapter(GsonAdaptersSignUpResponse.class)
-public abstract class SignUpResponse {
+@JsonAdapter(GsonAdaptersLogInResponse.class)
+public abstract class LogInResponse {
   @Nullable public abstract String userToken();
 
   @Value.Default public boolean changed() {

@@ -1,12 +1,6 @@
-package com.skedgo.android.tripkit.account.api;
+package com.skedgo.android.tripkit.account;
 
 import android.support.annotation.NonNull;
-
-import com.skedgo.android.tripkit.account.model.LogInBody;
-import com.skedgo.android.tripkit.account.model.LogInResponse;
-import com.skedgo.android.tripkit.account.model.LogOutResponse;
-import com.skedgo.android.tripkit.account.model.SignUpBody;
-import com.skedgo.android.tripkit.account.model.SignUpResponse;
 
 import retrofit2.http.Body;
 import rx.Observable;

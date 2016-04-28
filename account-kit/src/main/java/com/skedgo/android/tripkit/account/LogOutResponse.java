@@ -1,4 +1,4 @@
-package com.skedgo.android.tripkit.account.model;
+package com.skedgo.android.tripkit.account;
 
 import com.google.gson.annotations.JsonAdapter;
 

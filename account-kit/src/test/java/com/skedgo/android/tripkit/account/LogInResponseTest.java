@@ -1,6 +1,4 @@
-package com.skedgo.android.tripkit.account.model;
-
-import com.skedgo.android.tripkit.account.BuildConfig;
+package com.skedgo.android.tripkit.account;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -11,9 +9,15 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 @RunWith(RobolectricGradleTestRunner.class)
 @Config(constants = BuildConfig.class, sdk = 21)
-public class LogOutResponseTest {
+public class LogInResponseTest {
   @Test public void changedIsFalseByDefault() {
-    final LogOutResponse response = ImmutableLogOutResponse.builder().build();
+    final LogInResponse response = ImmutableLogInResponse.builder()
+        .userToken("Some token")
+        .build();
     assertThat(response.changed()).isFalse();
+  }
+
+  @Test public void userTokenIsMandatory() {
+    ImmutableLogInResponse.builder().build();
   }
 }

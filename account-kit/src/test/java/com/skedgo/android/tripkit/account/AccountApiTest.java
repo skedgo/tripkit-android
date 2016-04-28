@@ -1,14 +1,4 @@
-package com.skedgo.android.tripkit.account.api;
-
-import com.skedgo.android.tripkit.account.BuildConfig;
-import com.skedgo.android.tripkit.account.model.ImmutableLogInBody;
-import com.skedgo.android.tripkit.account.model.ImmutableLogInResponse;
-import com.skedgo.android.tripkit.account.model.ImmutableLogOutResponse;
-import com.skedgo.android.tripkit.account.model.ImmutableSignUpBody;
-import com.skedgo.android.tripkit.account.model.ImmutableSignUpResponse;
-import com.skedgo.android.tripkit.account.model.LogInResponse;
-import com.skedgo.android.tripkit.account.model.LogOutResponse;
-import com.skedgo.android.tripkit.account.model.SignUpResponse;
+package com.skedgo.android.tripkit.account;
 
 import org.junit.After;
 import org.junit.Before;
