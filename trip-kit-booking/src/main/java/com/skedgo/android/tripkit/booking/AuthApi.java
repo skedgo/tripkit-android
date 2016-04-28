@@ -24,7 +24,7 @@ public interface AuthApi {
   @GET Observable<List<AuthProvider>> fetchProvidersAsync(@Url HttpUrl url);
 
   /**
-   * @param url This might be obtained by {@link AuthProvider#url()}.
+   * @param url This might be obtained by {@link AuthProvider#url()} when {@link AuthProvider#action()} is 'signin'.
    *            A sample url can be like: 'https://granduni.buzzhives.com/satapp-beta/auth/flitways/signin'.
    */
   @GET Observable<BookingForm> signInAsync(@Url String url);
@@ -32,7 +32,8 @@ public interface AuthApi {
   /**
    * Removes the data saved for the user to the given provider.
    *
-   * @param url This might be obtained by {@link AuthProvider#url()}.
+   * @param url This might be obtained by {@link AuthProvider#url()} when {@link AuthProvider#action()} is 'logout'.
+   *            A sample url can be like: 'https://granduni.buzzhives.com/satapp-beta/auth/lyft/logout'.
    */
   @GET Observable<LogOutResponse> logOutAsync(@Url String url);
 }
