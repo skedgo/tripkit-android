@@ -3,8 +3,8 @@ package com.skedgo.android.tripkit.booking.viewmodel;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-import com.skedgo.android.tripkit.booking.InputForm;
 import com.skedgo.android.tripkit.booking.BookingAction;
+import com.skedgo.android.tripkit.booking.InputForm;
 import com.skedgo.android.tripkit.booking.LinkFormField;
 
 public final class ParamImpl implements BookingViewModel.Param {

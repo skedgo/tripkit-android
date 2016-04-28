@@ -62,6 +62,10 @@ public class BookingModule {
         .create(AuthApi.class);
   }
 
+  @Provides AuthService authService(AuthApi authApi) {
+    return new AuthServiceImpl(authApi);
+  }
+
   @Provides BookingViewModel bookingViewModel(BookingApi bookingApi) {
     return new BookingViewModelImpl(bookingApi);
   }

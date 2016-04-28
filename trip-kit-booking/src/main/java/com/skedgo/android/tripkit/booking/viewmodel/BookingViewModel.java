@@ -2,8 +2,8 @@ package com.skedgo.android.tripkit.booking.viewmodel;
 
 import android.os.Parcelable;
 
-import com.skedgo.android.tripkit.booking.InputForm;
 import com.skedgo.android.tripkit.booking.BookingForm;
+import com.skedgo.android.tripkit.booking.InputForm;
 import com.skedgo.android.tripkit.booking.LinkFormField;
 
 import rx.Observable;

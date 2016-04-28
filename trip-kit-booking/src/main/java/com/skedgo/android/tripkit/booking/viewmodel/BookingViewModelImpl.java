@@ -4,11 +4,11 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.skedgo.android.common.rx.Var;
 import com.skedgo.android.tripkit.booking.BookingApi;
-import com.skedgo.android.tripkit.booking.InputForm;
 import com.skedgo.android.tripkit.booking.BookingForm;
 import com.skedgo.android.tripkit.booking.FormField;
 import com.skedgo.android.tripkit.booking.FormFieldJsonAdapter;
 import com.skedgo.android.tripkit.booking.FormGroup;
+import com.skedgo.android.tripkit.booking.InputForm;
 import com.skedgo.android.tripkit.booking.LinkFormField;
 
 import org.apache.commons.collections4.CollectionUtils;

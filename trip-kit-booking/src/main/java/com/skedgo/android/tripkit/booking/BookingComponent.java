@@ -16,5 +16,5 @@ import dagger.Component;
 public interface BookingComponent {
   BookingApi bookingApi();
   QuickBookingApi quickBookingApi();
-  AuthApi authApi();
+  AuthService authService();
 }

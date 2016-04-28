@@ -9,6 +9,9 @@ import org.immutables.value.Value;
 @Value.Immutable
 @JsonAdapter(GsonAdaptersLogOutResponse.class)
 public abstract class LogOutResponse {
+  /**
+   * Indicates whether user data was removed or not.
+   */
   @Value.Default public boolean changed() {
     return false;
   }
