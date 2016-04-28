@@ -1,9 +1,14 @@
 # Overview
-## AccountService
+## AccountComponent
+`AccountComponent` is a factory to provide `AccountService` and `UserTokenStore`. The snippet below shows how to initialize a `AccountComponent`.
 ```java
 final AccountComponent component = DaggerAccountComponent.builder()
     .tripKit(TripKit.singleton())
     .build();
+```
+## AccountService
+### Instantiate
+```java
 final AccountService accountService = component.accountService();
 ```
 ### Sign up
