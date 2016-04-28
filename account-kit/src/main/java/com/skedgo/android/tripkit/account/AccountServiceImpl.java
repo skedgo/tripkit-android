@@ -4,6 +4,7 @@ import android.support.annotation.NonNull;
 
 import retrofit2.http.Body;
 import rx.Observable;
+import rx.functions.Action0;
 import rx.functions.Action1;
 
 final class AccountServiceImpl implements AccountService {
@@ -36,6 +37,11 @@ final class AccountServiceImpl implements AccountService {
   }
 
   @Override public Observable<LogOutResponse> logOutAsync() {
-    return api.logOutAsync();
+    return api.logOutAsync()
+        .doOnCompleted(new Action0() {
+          @Override public void call() {
+            tokenStore.put(null);
+          }
+        });
   }
 }

@@ -11,6 +11,7 @@ import org.robolectric.annotation.Config;
 import rx.Observable;
 
 import static org.mockito.Matchers.eq;
+import static org.mockito.Matchers.isNull;
 import static org.mockito.Mockito.any;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
@@ -54,9 +55,11 @@ public class AccountServiceImplTest {
     verify(tokenStore).put(eq("Some token"));
   }
 
-  @Test public void delegateApiForLoggingOut() {
+  @Test public void clearUserTokenAfterLoggingOut() {
     when(api.logOutAsync()).thenReturn(Observable.<LogOutResponse>empty());
+
     service.logOutAsync().subscribe();
     verify(api).logOutAsync();
+    verify(tokenStore).put(isNull(String.class));
   }
 }
