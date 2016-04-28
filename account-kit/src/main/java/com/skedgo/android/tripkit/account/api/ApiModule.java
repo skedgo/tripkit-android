@@ -1,8 +1,9 @@
-package com.skedgo.android.tripkit.account;
+package com.skedgo.android.tripkit.account.api;
+
+import android.content.Context;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import com.skedgo.android.tripkit.account.api.AccountApi;
 import com.skedgo.android.tripkit.account.model.GsonAdaptersLogInBody;
 import com.skedgo.android.tripkit.account.model.GsonAdaptersLogInResponse;
 import com.skedgo.android.tripkit.account.model.GsonAdaptersLogOutResponse;
@@ -19,7 +20,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 import rx.schedulers.Schedulers;
 
 @Module
-public class AccountModule {
+public class ApiModule {
   @Provides AccountApi accountApi(OkHttpClient httpClient) {
     final Gson gson = new GsonBuilder()
         .registerTypeAdapterFactory(new GsonAdaptersSignUpBody())
@@ -35,5 +36,12 @@ public class AccountModule {
         .client(httpClient)
         .build()
         .create(AccountApi.class);
+  }
+
+  @Provides UserTokenStore userTokenStore(Context context) {
+    return new UserTokenStoreImpl(context.getSharedPreferences(
+        "AccountPreferences",
+        Context.MODE_PRIVATE
+    ));
   }
 }
