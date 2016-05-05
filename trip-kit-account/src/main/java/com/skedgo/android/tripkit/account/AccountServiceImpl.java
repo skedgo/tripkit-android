@@ -44,4 +44,8 @@ final class AccountServiceImpl implements AccountService {
           }
         });
   }
+
+  @Override public boolean hasUser() {
+    return tokenStore.call() != null;
+  }
 }

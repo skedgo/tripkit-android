@@ -10,6 +10,7 @@ import org.robolectric.annotation.Config;
 
 import rx.Observable;
 
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Matchers.eq;
 import static org.mockito.Matchers.isNull;
 import static org.mockito.Mockito.any;
@@ -61,5 +62,15 @@ public class AccountServiceImplTest {
     service.logOutAsync().subscribe();
     verify(api).logOutAsync();
     verify(tokenStore).put(isNull(String.class));
+  }
+
+  @Test public void hasNoUser() {
+    when(tokenStore.call()).thenReturn(null);
+    assertThat(service.hasUser()).isFalse();
+  }
+
+  @Test public void hasUser() {
+    when(tokenStore.call()).thenReturn("Some token");
+    assertThat(service.hasUser()).isTrue();
   }
 }
