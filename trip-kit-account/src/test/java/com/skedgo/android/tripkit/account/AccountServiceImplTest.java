@@ -1,11 +1,15 @@
 package com.skedgo.android.tripkit.account;
 
+import android.content.Context;
+import android.content.SharedPreferences;
+
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RobolectricGradleTestRunner;
+import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
 
 import rx.Observable;
@@ -27,7 +31,11 @@ public class AccountServiceImplTest {
 
   @Before public void before() {
     MockitoAnnotations.initMocks(this);
-    service = new AccountServiceImpl(api, tokenStore);
+    final SharedPreferences preferences = RuntimeEnvironment.application.getSharedPreferences(
+        AccountServiceImplTest.class.getSimpleName(),
+        Context.MODE_PRIVATE
+    );
+    service = new AccountServiceImpl(api, tokenStore, preferences);
   }
 
   @Test public void saveUserTokenAfterSigningUp() {

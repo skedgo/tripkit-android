@@ -1,6 +1,7 @@
 package com.skedgo.android.tripkit.account;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -35,15 +36,24 @@ public class AccountModule {
   }
 
   @Provides UserTokenStore userTokenStore(Configs configs) {
-    return new UserTokenStoreImpl(configs.context().getSharedPreferences(
-        "AccountPreferences",
-        Context.MODE_PRIVATE
-    ));
+    return new UserTokenStoreImpl(accountPreferences(configs));
   }
 
   @Provides AccountService accountService(
       AccountApi accountApi,
-      UserTokenStore userTokenStore) {
-    return new AccountServiceImpl(accountApi, userTokenStore);
+      UserTokenStore userTokenStore,
+      Configs configs) {
+    return new AccountServiceImpl(
+        accountApi,
+        userTokenStore,
+        accountPreferences(configs)
+    );
+  }
+
+  private SharedPreferences accountPreferences(Configs configs) {
+    return configs.context().getSharedPreferences(
+        "AccountPreferences",
+        Context.MODE_PRIVATE
+    );
   }
 }
