@@ -1,15 +1,20 @@
 package com.skedgo.android.tripkit.account;
 
+import android.content.Context;
+import android.content.SharedPreferences;
+
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RobolectricGradleTestRunner;
+import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
 
 import rx.Observable;
 
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Matchers.eq;
 import static org.mockito.Matchers.isNull;
 import static org.mockito.Mockito.any;
@@ -26,7 +31,11 @@ public class AccountServiceImplTest {
 
   @Before public void before() {
     MockitoAnnotations.initMocks(this);
-    service = new AccountServiceImpl(api, tokenStore);
+    final SharedPreferences preferences = RuntimeEnvironment.application.getSharedPreferences(
+        AccountServiceImplTest.class.getSimpleName(),
+        Context.MODE_PRIVATE
+    );
+    service = new AccountServiceImpl(api, tokenStore, preferences);
   }
 
   @Test public void saveUserTokenAfterSigningUp() {
@@ -61,5 +70,15 @@ public class AccountServiceImplTest {
     service.logOutAsync().subscribe();
     verify(api).logOutAsync();
     verify(tokenStore).put(isNull(String.class));
+  }
+
+  @Test public void hasNoUser() {
+    when(tokenStore.call()).thenReturn(null);
+    assertThat(service.hasUser()).isFalse();
+  }
+
+  @Test public void hasUser() {
+    when(tokenStore.call()).thenReturn("Some token");
+    assertThat(service.hasUser()).isTrue();
   }
 }
