@@ -33,6 +33,11 @@ public class BookingForm extends FormField {
   @SerializedName("image")
   private String imageUrl;
 
+  @SerializedName("usererror")
+  private boolean hasUserError;
+  @SerializedName("error")
+  private String errorMessage;
+
   public BookingForm(Parcel in) {
     super(in);
     this.action = in.readParcelable(BookingAction.class.getClassLoader());
@@ -41,6 +46,8 @@ public class BookingForm extends FormField {
     this.value = in.readString();
     this.refreshURLForSourceObject = in.readString();
     this.imageUrl = in.readString();
+    this.hasUserError = in.readInt() == 1;
+    this.errorMessage = in.readString();
   }
 
   public BookingForm() {
@@ -56,6 +63,8 @@ public class BookingForm extends FormField {
     dest.writeString(value);
     dest.writeString(refreshURLForSourceObject);
     dest.writeString(imageUrl);
+    dest.writeInt(hasUserError ? 1 : 0);
+    dest.writeString(errorMessage);
   }
 
   public BookingAction getAction() {
@@ -90,5 +99,43 @@ public class BookingForm extends FormField {
   @Override
   public Object getValue() {
     return getTitle();
+  }
+
+  public boolean isOAuthForm() {
+    return getType() != null && getType().equals("authForm");
+  }
+
+  public String getErrorMessage() {
+    return errorMessage;
+  }
+
+  public void setErrorMessage(String errorMessage) {
+    this.errorMessage = errorMessage;
+  }
+
+  public boolean hasUserError() {
+    return hasUserError;
+  }
+
+  public void setHasUserError(boolean hasUserError) {
+    this.hasUserError = hasUserError;
+  }
+
+  /**
+   * getOAuthLink: get first (unique?) oauth link
+   * TODO: is it possible to have multiple authentication links?
+   */
+  @Nullable public String getOAuthLink() {
+    if (isOAuthForm()) {
+      for (FormGroup formGroup : form) {
+        for (FormField formField : formGroup.getFields()) {
+          if (formField.getId().equals("oauth")) {
+            return formField.getValue().toString();
+          }
+        }
+      }
+
+    }
+    return null;
   }
 }
