@@ -1,5 +1,6 @@
 package com.skedgo.android.tripkit.booking;
 
+import android.net.Uri;
 import android.os.Parcel;
 import android.support.annotation.Nullable;
 
@@ -7,6 +8,8 @@ import com.google.gson.annotations.SerializedName;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import okhttp3.HttpUrl;
 
 public class BookingForm extends FormField {
 
@@ -125,14 +128,37 @@ public class BookingForm extends FormField {
    * getOAuthLink: get first (unique?) oauth link
    * TODO: is it possible to have multiple authentication links?
    */
-  @Nullable public String getOAuthLink() {
+  @Nullable public Uri getOAuthLink() {
     if (isOAuthForm()) {
+
+      String authURL = null;
+      String clientID = null;
+      String scope = null;
+
       for (FormGroup formGroup : form) {
         for (FormField formField : formGroup.getFields()) {
-          if (formField.getId().equals("oauth")) {
-            return formField.getValue().toString();
+          if (formField.getId().equals("authURL")) {
+            authURL = formField.getValue().toString();
+          }
+          if (formField.getId().equals("clientID")) {
+            clientID = formField.getValue().toString();
+          }
+          if (formField.getId().equals("scope")) {
+            scope = formField.getValue().toString();
           }
         }
+      }
+
+      if (authURL != null && clientID != null && scope != null) {
+        return Uri.parse(authURL)
+            .buildUpon()
+            .appendQueryParameter("client_id", clientID)
+            .appendQueryParameter("response_type", "code")
+            .appendQueryParameter("scope", scope)
+            // TODO: app config
+            .appendQueryParameter("redirect_uri", "tripgo://oauth-callback")
+            .build();
+
       }
 
     }
