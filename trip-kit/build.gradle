@@ -60,7 +60,6 @@ dependencies {
   androidTestCompile "com.crittercism.dexmaker:dexmaker-dx:1.4"
 
   compile project(":libraries:android-shared-lib")
-  compile project(":libraries:sqlite-utils")
   compile "com.google.android.gms:play-services-gcm:${rootProject.ext.PlayServicesVersion}"
 
   apt "org.immutables:value:${rootProject.ext.ImmutablesVersion}"
@@ -69,6 +68,7 @@ dependencies {
   provided "org.immutables:value:${rootProject.ext.ImmutablesVersion}"
   provided "org.immutables:builder:${rootProject.ext.ImmutablesVersion}"
 
+  compile 'com.github.skedgo:sqlite-utils:v1.0'
   compile "com.squareup.okhttp3:okhttp:${rootProject.ext.OkHttp3Version}"
   compile "com.squareup.okhttp3:logging-interceptor:${rootProject.ext.OkHttp3Version}"
   compile "com.squareup.retrofit2:converter-gson:${rootProject.ext.RetrofitVersion}"
