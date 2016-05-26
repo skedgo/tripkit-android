@@ -291,6 +291,10 @@ class MainModule {
     return new LocationInfoServiceImpl(locationInfoApi, regionService);
   }
 
+  @Provides ExternalOAuthService getExternalOAuthService() {
+    return new ExternalOAuthServiceImpl();
+  }
+
   @Singleton @Provides Gson getGson() {
     return new GsonBuilder()
         .registerTypeAdapterFactory(new LowercaseEnumTypeAdapterFactory())

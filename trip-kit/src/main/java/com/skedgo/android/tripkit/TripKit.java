@@ -52,6 +52,7 @@ public abstract class TripKit {
   public abstract Reporter getReporter();
   public abstract BookingResolver getBookingResolver();
   public abstract LocationInfoService getLocationInfoService();
+  public abstract ExternalOAuthService getExternalOAuthService();
   @VisibleForTesting abstract RegionDatabaseHelper getRegionDatabaseHelper();
   @VisibleForTesting abstract HttpLoggingInterceptor getHttpLoggingInterceptor();
   abstract TripUpdater getTripUpdater();
