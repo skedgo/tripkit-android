@@ -5,12 +5,14 @@ import com.google.gson.annotations.SerializedName;
 import org.immutables.gson.Gson;
 import org.immutables.value.Value;
 
+
+@Deprecated // Remove this class when refactoring to Tripkit account, use TokenRequestBody
 @Gson.TypeAdapters
 @Value.Immutable
 public class AccessToken {
 
-  @SerializedName("accessToken") private String accessToken;
-  @SerializedName("tokenType") private String tokenType;
+  @SerializedName("access_token") private String accessToken;
+  @SerializedName("token_type") private String tokenType;
 
   public String getAccessToken() {
     return accessToken;

@@ -8,8 +8,7 @@ import com.google.gson.annotations.SerializedName;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import okhttp3.HttpUrl;
+import java.util.UUID;
 
 public class BookingForm extends FormField {
 
@@ -124,6 +123,68 @@ public class BookingForm extends FormField {
     this.hasUserError = hasUserError;
   }
 
+  @Nullable public String getClientID() {
+
+    for (FormGroup formGroup : form) {
+      for (FormField formField : formGroup.getFields()) {
+        if (formField.getId().equals("clientID")) {
+          return formField.getValue().toString();
+        }
+      }
+    }
+    return null;
+  }
+
+  @Nullable public String getClientSecret() {
+
+    for (FormGroup formGroup : form) {
+      for (FormField formField : formGroup.getFields()) {
+        if (formField.getId().equals("clientSecret")) {
+          return formField.getValue().toString();
+        }
+      }
+    }
+    return null;
+  }
+
+  @Nullable public String getAuthURL() {
+
+    for (FormGroup formGroup : form) {
+      for (FormField formField : formGroup.getFields()) {
+        if (formField.getId().equals("authURL")) {
+          return formField.getValue().toString();
+        }
+      }
+    }
+    return null;
+  }
+
+  @Nullable public String getTokenURL() {
+
+    for (FormGroup formGroup : form) {
+      for (FormField formField : formGroup.getFields()) {
+        String fieldId = formField.getId();
+        Object value = formField.getValue();
+        if (fieldId.equals("tokenURL") && value != null && value.toString().endsWith("/token")) {
+          return value.toString().substring(0, value.toString().length() - "/token".length());
+        }
+      }
+    }
+    return null;
+  }
+
+  @Nullable public String getScope() {
+
+    for (FormGroup formGroup : form) {
+      for (FormField formField : formGroup.getFields()) {
+        if (formField.getId().equals("scope")) {
+          return formField.getValue().toString();
+        }
+      }
+    }
+    return null;
+  }
+
   /**
    * getOAuthLink: get first (unique?) oauth link
    * TODO: is it possible to have multiple authentication links?
@@ -131,32 +192,20 @@ public class BookingForm extends FormField {
   @Nullable public Uri getOAuthLink() {
     if (isOAuthForm()) {
 
-      String authURL = null;
-      String clientID = null;
-      String scope = null;
-
-      for (FormGroup formGroup : form) {
-        for (FormField formField : formGroup.getFields()) {
-          if (formField.getId().equals("authURL")) {
-            authURL = formField.getValue().toString();
-          }
-          if (formField.getId().equals("clientID")) {
-            clientID = formField.getValue().toString();
-          }
-          if (formField.getId().equals("scope")) {
-            scope = formField.getValue().toString();
-          }
-        }
-      }
+      String authURL = getAuthURL();
+      String clientID = getClientID();
+      String scope = getScope();
 
       if (authURL != null && clientID != null && scope != null) {
+
         return Uri.parse(authURL)
             .buildUpon()
             .appendQueryParameter("client_id", clientID)
             .appendQueryParameter("response_type", "code")
             .appendQueryParameter("scope", scope)
             // TODO: app config
-            .appendQueryParameter("redirect_uri", "tripgo://oauth-callback")
+            .appendQueryParameter("redirect_uri", "go-la://oauth-callback")
+            .appendQueryParameter("state", UUID.randomUUID().toString())
             .build();
 
       }
