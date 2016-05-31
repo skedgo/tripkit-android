@@ -1,12 +1,10 @@
-package com.skedgo.android.tripkit;
+package com.skedgo.android.tripkit.account;
 
 import com.google.gson.annotations.SerializedName;
 
 import org.immutables.gson.Gson;
 import org.immutables.value.Value;
 
-
-@Deprecated // Remove this class when refactoring to Tripkit account, use TokenRequestBody
 @Gson.TypeAdapters
 @Value.Immutable
 public class AccessToken {

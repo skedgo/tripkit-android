@@ -1,4 +1,4 @@
-package com.skedgo.android.tripkit;
+package com.skedgo.android.tripkit.account;
 
 import android.util.Base64;
 
@@ -12,7 +12,7 @@ import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-public class ServiceGenerator {
+public class ExternalOAuthServiceGenerator {
 
   private static OkHttpClient.Builder httpClient = new OkHttpClient.Builder();
 

@@ -1,4 +1,4 @@
-package com.skedgo.android.tripkit;
+package com.skedgo.android.tripkit.account;
 
 import java.io.IOException;
 
@@ -12,8 +12,8 @@ public class ExternalOAuthServiceImpl implements ExternalOAuthService {
   @Override public Observable<AccessToken> getAccessToken(String baseUrl, String clientId, String clientSecret,
                                                           final String code, String grantType) {
 
-    final ExternalOAuthApi externalOAuthApi = ServiceGenerator.createService(ExternalOAuthApi.class,
-                                                                             baseUrl, clientId, clientSecret);
+    final ExternalOAuthApi externalOAuthApi = ExternalOAuthServiceGenerator.createService(ExternalOAuthApi.class,
+                                                                                          baseUrl, clientId, clientSecret);
 
     return Observable.create(new Observable.OnSubscribe<AccessToken>() {
       @Override public void call(Subscriber<? super AccessToken> subscriber) {
