@@ -50,10 +50,6 @@ public class AccountModule {
     );
   }
 
-  @Provides ExternalOAuthService getExternalOAuthService() {
-    return new ExternalOAuthServiceImpl();
-  }
-
   private SharedPreferences accountPreferences(Configs configs) {
     return configs.context().getSharedPreferences(
         "AccountPreferences",

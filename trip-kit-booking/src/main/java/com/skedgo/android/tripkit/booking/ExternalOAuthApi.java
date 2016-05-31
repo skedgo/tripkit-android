@@ -1,4 +1,4 @@
-package com.skedgo.android.tripkit.account;
+package com.skedgo.android.tripkit.booking;
 
 import retrofit2.Call;
 import retrofit2.http.Field;

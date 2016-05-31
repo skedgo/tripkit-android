@@ -1,4 +1,4 @@
-package com.skedgo.android.tripkit.account;
+package com.skedgo.android.tripkit.booking;
 
 import com.google.gson.annotations.SerializedName;
 

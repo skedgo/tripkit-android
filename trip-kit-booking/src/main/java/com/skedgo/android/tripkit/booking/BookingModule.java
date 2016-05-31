@@ -73,4 +73,8 @@ public class BookingModule {
   @Provides AuthenticationViewModel authenticationViewModel() {
     return new AuthenticationViewModelImpl();
   }
+
+  @Provides ExternalOAuthService getExternalOAuthService() {
+    return new ExternalOAuthServiceImpl();
+  }
 }
