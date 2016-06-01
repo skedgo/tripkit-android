@@ -17,6 +17,7 @@ public interface BookingViewModel {
   Observable<Boolean> performAction(BookingForm bookingForm);
   Observable<Boolean> performAction(LinkFormField linkFormField);
   Observable<Boolean> isFetching();
+  Param paramFrom(BookingForm form);
 
   interface Param extends Parcelable {
     String getMethod();

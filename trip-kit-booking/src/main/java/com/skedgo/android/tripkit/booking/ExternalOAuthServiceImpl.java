@@ -9,8 +9,18 @@ import rx.Subscriber;
 
 public class ExternalOAuthServiceImpl implements ExternalOAuthService {
 
-  @Override public Observable<AccessToken> getAccessToken(String baseUrl, String clientId, String clientSecret,
+  private ExternalOAuthStore externalOAuthStore;
+
+  public ExternalOAuthServiceImpl(ExternalOAuthStore externalOAuthStore) {
+    this.externalOAuthStore = externalOAuthStore;
+  }
+
+  @Override public Observable<AccessToken> getAccessToken(final BookingForm form,
                                                           final String code, String grantType) {
+
+    String clientId = form.getClientID();
+    String clientSecret = form.getClientSecret();
+    String baseUrl = form.getTokenURL();
 
     final ExternalOAuthApi externalOAuthApi = ExternalOAuthServiceGenerator.createService(ExternalOAuthApi.class,
                                                                                           baseUrl, clientId, clientSecret);
@@ -25,6 +35,13 @@ public class ExternalOAuthServiceImpl implements ExternalOAuthService {
 
           if (accessToken != null) {
             subscriber.onNext(accessToken);
+
+            // save token
+            externalOAuthStore.updateExternalOauth(ExternalOAuth.builder()
+                                                       .authServiceId(form.getValue().toString())
+                                                       .token(accessToken.getAccessToken())
+                                                       .expiresIn(accessToken.getExpiresIn())
+                                                       .build());
           } else {
             subscriber.onError(new Error(resp.errorBody().string()));
           }

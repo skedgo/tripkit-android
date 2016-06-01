@@ -1,11 +1,17 @@
 package com.skedgo.android.tripkit.booking;
 
+import android.content.Context;
+import android.database.sqlite.SQLiteOpenHelper;
+
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.skedgo.android.tripkit.TripKit;
 import com.skedgo.android.tripkit.booking.viewmodel.AuthenticationViewModel;
 import com.skedgo.android.tripkit.booking.viewmodel.AuthenticationViewModelImpl;
 import com.skedgo.android.tripkit.booking.viewmodel.BookingViewModel;
 import com.skedgo.android.tripkit.booking.viewmodel.BookingViewModelImpl;
+
+import javax.inject.Singleton;
 
 import dagger.Module;
 import dagger.Provides;
@@ -74,7 +80,19 @@ public class BookingModule {
     return new AuthenticationViewModelImpl();
   }
 
-  @Provides ExternalOAuthService getExternalOAuthService() {
-    return new ExternalOAuthServiceImpl();
+  @Provides ExternalOAuthStore getExternalOAuthStore(SQLiteOpenHelper databaseHelper, ExternalOAuthEntityAdapter adapter) {
+    return new ExternalOAuthStoreImpl(TripKit.singleton().configs().context(), databaseHelper, adapter);
+  }
+
+  @Singleton @Provides SQLiteOpenHelper databaseHelper() {
+    return new ExternalOAuthDbHelper(TripKit.singleton().configs().context(), "externalOAuths.db");
+  }
+
+  @Provides ExternalOAuthEntityAdapter provideOlympicEntityAdapter() {
+    return new ExternalOAuthEntityAdapter();
+  }
+
+  @Provides ExternalOAuthService getExternalOAuthService(ExternalOAuthStore store) {
+    return new ExternalOAuthServiceImpl(store);
   }
 }

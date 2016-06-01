@@ -213,4 +213,18 @@ public class BookingForm extends FormField {
     }
     return null;
   }
+
+  public void setAuthData(AccessToken accessToken) {
+    for (FormGroup formGroup : form) {
+      for (FormField formField : formGroup.getFields()) {
+        if (formField.getId().equals("access_token")) {
+          // TODO: refactor FormFields using a design pattern
+          ((StringFormField)formField).setValue(accessToken.getAccessToken());
+        }
+        if (formField.getId().equals("expires_in")) {
+          ((StringFormField)formField).setValue("" + accessToken.getExpiresIn());
+        }
+      }
+    }
+  }
 }

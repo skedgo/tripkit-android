@@ -110,6 +110,10 @@ public class BookingViewModelImpl implements BookingViewModel {
     return isFetching.observe();
   }
 
+  @Override public Param paramFrom(BookingForm form) {
+    return ParamImpl.create(form);
+  }
+
   @Override
   public Observable<Boolean> isDone() {
     return isDone.observe();

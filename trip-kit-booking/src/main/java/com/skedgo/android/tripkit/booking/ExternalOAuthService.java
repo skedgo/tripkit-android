@@ -4,6 +4,6 @@ import rx.Observable;
 
 public interface ExternalOAuthService {
 
-  Observable<AccessToken> getAccessToken(String baseUrl, String clientId, String clientSecret, String code, String grantType);
+  Observable<AccessToken> getAccessToken(BookingForm form, String code, String grantType);
 
 }
