@@ -72,8 +72,8 @@ public class BookingModule {
     return new AuthServiceImpl(authApi);
   }
 
-  @Provides BookingViewModel bookingViewModel(BookingApi bookingApi) {
-    return new BookingViewModelImpl(bookingApi);
+  @Provides BookingViewModel bookingViewModel(BookingService bookingService) {
+    return new BookingViewModelImpl(bookingService);
   }
 
   @Provides AuthenticationViewModel authenticationViewModel() {
@@ -84,7 +84,7 @@ public class BookingModule {
     return new ExternalOAuthStoreImpl(TripKit.singleton().configs().context(), databaseHelper, adapter);
   }
 
-  @Singleton @Provides SQLiteOpenHelper databaseHelper() {
+  @Provides SQLiteOpenHelper databaseHelper() {
     return new ExternalOAuthDbHelper(TripKit.singleton().configs().context(), "externalOAuths.db");
   }
 
@@ -95,4 +95,9 @@ public class BookingModule {
   @Provides ExternalOAuthService getExternalOAuthService(ExternalOAuthStore store) {
     return new ExternalOAuthServiceImpl(store);
   }
+
+  @Provides BookingService getBookingService(BookingApi bookingApi, ExternalOAuthStore externalOAuthStore) {
+    return new BookingServiceImpl(bookingApi, externalOAuthStore);
+  }
+
 }

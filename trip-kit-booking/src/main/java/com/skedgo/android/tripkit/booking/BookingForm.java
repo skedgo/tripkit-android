@@ -100,7 +100,7 @@ public class BookingForm extends FormField {
 
   @Override
   public Object getValue() {
-    return getTitle();
+    return value;
   }
 
   public boolean isOAuthForm() {
@@ -214,15 +214,15 @@ public class BookingForm extends FormField {
     return null;
   }
 
-  public void setAuthData(AccessToken accessToken) {
+  public void setAuthData(ExternalOAuth externalOAuth) {
     for (FormGroup formGroup : form) {
       for (FormField formField : formGroup.getFields()) {
         if (formField.getId().equals("access_token")) {
           // TODO: refactor FormFields using a design pattern
-          ((StringFormField)formField).setValue(accessToken.getAccessToken());
+          ((StringFormField)formField).setValue(externalOAuth.token());
         }
         if (formField.getId().equals("expires_in")) {
-          ((StringFormField)formField).setValue("" + accessToken.getExpiresIn());
+          ((StringFormField)formField).setValue("" + externalOAuth.expiresIn());
         }
       }
     }

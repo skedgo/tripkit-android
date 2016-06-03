@@ -11,13 +11,13 @@ public class AccessToken {
 
   @SerializedName("access_token") private String accessToken;
   @SerializedName("token_type") private String tokenType;
-  @SerializedName("expires_in") private double expiresIn;
+  @SerializedName("expires_in") private int expiresIn;
 
   public String getAccessToken() {
     return accessToken;
   }
 
-  public double getExpiresIn() {
+  public int getExpiresIn() {
     return expiresIn;
   }
 

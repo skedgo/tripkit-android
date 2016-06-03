@@ -11,7 +11,7 @@ public class ExternalOAuthEntityAdapter implements SQLiteEntityAdapter<ExternalO
   @NonNull @Override public ExternalOAuth toEntity(@NonNull Cursor cursor) {
     String authServiceId = cursor.getString(cursor.getColumnIndex(ExternalOAuthTable.AUTH_SERVICE_ID.getName()));
     String token = cursor.getString(cursor.getColumnIndex(ExternalOAuthTable.TOKEN.getName()));
-    double expiresIn = cursor.getDouble(cursor.getColumnIndex(ExternalOAuthTable.EXPIRES_IN.getName()));
+    int expiresIn = cursor.getInt(cursor.getColumnIndex(ExternalOAuthTable.EXPIRES_IN.getName()));
 
     return ExternalOAuth.builder()
         .authServiceId(authServiceId)

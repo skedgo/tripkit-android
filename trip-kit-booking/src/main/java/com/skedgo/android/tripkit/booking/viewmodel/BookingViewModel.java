@@ -17,6 +17,12 @@ public interface BookingViewModel {
   Observable<Boolean> performAction(BookingForm bookingForm);
   Observable<Boolean> performAction(LinkFormField linkFormField);
   Observable<Boolean> isFetching();
+
+  /**
+   * needsAuthentication: checks if external auth needs authentication.
+   * Side efect: toke info is updated if saved.
+   */
+  Observable<Boolean> needsAuthentication(BookingForm form);
   Param paramFrom(BookingForm form);
 
   interface Param extends Parcelable {

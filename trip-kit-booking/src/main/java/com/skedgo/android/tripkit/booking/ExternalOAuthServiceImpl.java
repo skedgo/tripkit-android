@@ -15,8 +15,8 @@ public class ExternalOAuthServiceImpl implements ExternalOAuthService {
     this.externalOAuthStore = externalOAuthStore;
   }
 
-  @Override public Observable<AccessToken> getAccessToken(final BookingForm form,
-                                                          final String code, String grantType) {
+  @Override public Observable<ExternalOAuth> getAccessToken(final BookingForm form,
+                                                            final String code, String grantType) {
 
     String clientId = form.getClientID();
     String clientSecret = form.getClientSecret();
@@ -25,8 +25,8 @@ public class ExternalOAuthServiceImpl implements ExternalOAuthService {
     final ExternalOAuthApi externalOAuthApi = ExternalOAuthServiceGenerator.createService(ExternalOAuthApi.class,
                                                                                           baseUrl, clientId, clientSecret);
 
-    return Observable.create(new Observable.OnSubscribe<AccessToken>() {
-      @Override public void call(Subscriber<? super AccessToken> subscriber) {
+    return Observable.create(new Observable.OnSubscribe<ExternalOAuth>() {
+      @Override public void call(Subscriber<? super ExternalOAuth> subscriber) {
         final Call<AccessToken> call = externalOAuthApi.getAccessToken(code, "authorization_code");
 
         try {
@@ -34,14 +34,19 @@ public class ExternalOAuthServiceImpl implements ExternalOAuthService {
           AccessToken accessToken = resp.body();
 
           if (accessToken != null) {
-            subscriber.onNext(accessToken);
+
+            subscriber.onNext(ExternalOAuth.builder()
+                                  .authServiceId(form.getValue().toString())
+                                  .token(accessToken.getAccessToken())
+                                  .expiresIn(accessToken.getExpiresIn())
+                                  .build());
 
             // save token
             externalOAuthStore.updateExternalOauth(ExternalOAuth.builder()
                                                        .authServiceId(form.getValue().toString())
                                                        .token(accessToken.getAccessToken())
                                                        .expiresIn(accessToken.getExpiresIn())
-                                                       .build());
+                                                       .build()).subscribe();
           } else {
             subscriber.onError(new Error(resp.errorBody().string()));
           }
