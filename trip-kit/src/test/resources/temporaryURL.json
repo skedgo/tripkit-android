@@ -1,0 +1,229 @@
+{
+  "description": "Walk about <100m to Praça Cardeal Câmara.\nRide Bike Rio about 7.0km to Avenida Atlântica.\nWalk about <100m to Acapulco Copacabana Hotel.\n",
+  "groups": [
+    {
+      "trips": [
+        {
+          "arrive": 1464168588,
+          "caloriesCost": 135,
+          "carbonCost": 0,
+          "currencySymbol": "R$",
+          "depart": 1464166823,
+          "hassleCost": 0,
+          "mainSegmentHashCode": -1248461774,
+          "moneyCost": 0,
+          "moneyUSDCost": 0,
+          "plannedURL": "https://inflationary.buzzhives.com/satapp/trip/planned/0a1cba21-f177-4706-bbb8-ebd8057e5f4f",
+          "queryIsLeaveAfter": true,
+          "queryTime": 1464166800,
+          "saveURL": "https://inflationary.buzzhives.com/satapp/trip/save/0a1cba21-f177-4706-bbb8-ebd8057e5f4f",
+          "segments": [
+            {
+              "endTime": 1464166888,
+              "segmentTemplateHashCode": 1659340011,
+              "startTime": 1464166823
+            },
+            {
+              "booking": {
+                "externalActions": [
+                  "http://www.mobilicidade.com.br/bikerio.asp"
+                ],
+                "title": "Book with Bike Rio"
+              },
+              "endTime": 1464167058,
+              "segmentTemplateHashCode": -989449638,
+              "startTime": 1464166888
+            },
+            {
+              "endTime": 1464168369,
+              "segmentTemplateHashCode": -1248461774,
+              "sharedVehicle": {
+                "membershipURL": "http://www.mobilicidade.com.br/bikerio.asp",
+                "provider": "bikerio",
+                "type": "BICYCLE"
+              },
+              "startTime": 1464167064
+            },
+            {
+              "endTime": 1464168489,
+              "segmentTemplateHashCode": -1174891007,
+              "startTime": 1464168369
+            },
+            {
+              "endTime": 1464168588,
+              "segmentTemplateHashCode": -2065417733,
+              "startTime": 1464168537
+            }
+          ],
+          "temporaryURL": "https://inflationary.buzzhives.com/satapp/trip/0a1cba21-f177-4706-bbb8-ebd8057e5f4f",
+          "weightedScore": 17
+        }
+      ]
+    }
+  ],
+  "region": "BR_RJ_RioDeJaneiro",
+  "regions": [
+    "BR_RJ_RioDeJaneiro"
+  ],
+  "segmentTemplates": [
+    {
+      "action": "Walk<DURATION>",
+      "from": {
+        "address": "Arcos da Lapa",
+        "class": "Location",
+        "lat": -22.91287,
+        "lng": -43.17991,
+        "timezone": "America/Sao_Paulo"
+      },
+      "hashCode": 1659340011,
+      "mini": {
+        "description": "Praça Cardeal Câmara",
+        "instruction": "Walk",
+        "mainValue": "<100m"
+      },
+      "modeIdentifier": "wa_wal",
+      "modeInfo": {
+        "alt": "Walk",
+        "identifier": "wa_wal",
+        "localIcon": "walk"
+      },
+      "notes": "<100m",
+      "streets": [
+        {
+          "encodedWaypoints": "nczjC|rpfGCLW`A??p@X"
+        }
+      ],
+      "to": {
+        "address": "Praça Cardeal Câmara",
+        "class": "Location",
+        "lat": -22.91283,
+        "lng": -43.18067,
+        "timezone": "America/Sao_Paulo"
+      },
+      "travelDirection": 258,
+      "type": "unscheduled",
+      "visibility": "in details"
+    },
+    {
+      "action": "Collect Bike Rio",
+      "hashCode": -989449638,
+      "location": {
+        "address": "Praça Cardeal Câmara",
+        "class": "Location",
+        "lat": -22.91283,
+        "lng": -43.18067,
+        "timezone": "America/Sao_Paulo"
+      },
+      "mini": {
+        "instruction": "Collect Bike Rio",
+        "mainValue": "Free"
+      },
+      "modeInfo": {
+        "alt": "Collect",
+        "localIcon": "collect"
+      },
+      "notes": "Subject to availability\nCost: Free\nRequires paid membership (from R$5)",
+      "type": "stationary",
+      "visibility": "in details"
+    },
+    {
+      "action": "Ride Bike Rio<DURATION>",
+      "from": {
+        "address": "Praça Cardeal Câmara",
+        "class": "Location",
+        "lat": -22.91283,
+        "lng": -43.18067,
+        "timezone": "America/Sao_Paulo"
+      },
+      "hashCode": -1248461774,
+      "mini": {
+        "description": "Avenida Atlântica",
+        "instruction": "Ride Bike Rio",
+        "mainValue": "7.0km"
+      },
+      "modeIdentifier": "cy_bic-s_bikerio",
+      "modeInfo": {
+        "alt": "Bicycle",
+        "description": "Bike Rio",
+        "identifier": "cy_bic-s_bikerio",
+        "localIcon": "bicycle-share"
+      },
+      "notes": "7.0km",
+      "streets": [
+        {
+          "encodedWaypoints": "ddzjCfvpfG??PDNA|@SGm@?a@@YJuA\\gCDa@`@IHCHC??dBaBHIPKrA]r@QtCu@f@MrA]ZI^IdAW??~BGdBBbDITBrAOhAM|@K@Af@Et@Bz@JpC^NBF_@L@zBRbBHx@EZCd@AT?NAj@KpAUTG^Kh@O`@KzAOVEP?XAZ?d@@pAPn@H|@PPBd@JND`AP??h@Lb@JbB\\^FnCt@b@Hv@Bl@?~@@BAdA?h@?XCzAMp@Bz@???VPBFn@QJMNIVKh@Gl@AdAG~AKPAzAE`CGh@Az@PbDj@bEv@vAV`AP|EfAdATrCn@DBf@N??rAbDVh@l@fANDH@J?FEFEBK@IAI??t@~@^d@`@\\h@h@n@f@THVLRFVFVBz@`@n@Zh@NlDbAd@HnANA?@{@n@@j@?v@Al@En@Et@Kl@Ml@UVOnBoAh@WZOb@APARDXHFaAtA_A|@c@lA_@z@St@QRGtIeChAY??t@S~FaB`Bs@HRKFs@[MHx@WxBaAlAOp@KbEg@hBk@tBw@pKwFb@RbAe@JMVa@FC|@a@Te@HEd@QtCiAZOhAa@|@i@~@]FEl@WxAq@B?CGAI"
+        }
+      ],
+      "to": {
+        "address": "Avenida Atlântica",
+        "class": "Location",
+        "lat": -22.96476,
+        "lng": -43.17325,
+        "timezone": "America/Sao_Paulo"
+      },
+      "travelDirection": 109,
+      "type": "unscheduled",
+      "visibility": "in summary"
+    },
+    {
+      "action": "Return Bike Rio to bike dock",
+      "hashCode": -1174891007,
+      "location": {
+        "address": "Avenida Atlântica",
+        "class": "Location",
+        "lat": -22.96476,
+        "lng": -43.17325,
+        "timezone": "America/Sao_Paulo"
+      },
+      "mini": {
+        "instruction": "Return Bike Rio to bike dock"
+      },
+      "modeInfo": {
+        "alt": "Parking",
+        "localIcon": "parking"
+      },
+      "notes": "Dock subject to availability",
+      "type": "stationary",
+      "visibility": "on map"
+    },
+    {
+      "action": "Walk<DURATION>",
+      "from": {
+        "address": "Avenida Atlântica",
+        "class": "Location",
+        "lat": -22.96476,
+        "lng": -43.17325,
+        "timezone": "America/Sao_Paulo"
+      },
+      "hashCode": -2065417733,
+      "mini": {
+        "description": "Acapulco Copacabana Hotel",
+        "instruction": "Walk",
+        "mainValue": "<100m"
+      },
+      "modeIdentifier": "wa_wal",
+      "modeInfo": {
+        "alt": "Walk",
+        "identifier": "wa_wal",
+        "localIcon": "walk"
+      },
+      "notes": "<100m",
+      "streets": [
+        {
+          "encodedWaypoints": "vhdkCzgofG??@HBFC?yAp@"
+        }
+      ],
+      "to": {
+        "address": "Acapulco Copacabana Hotel",
+        "class": "Location",
+        "lat": -22.96413,
+        "lng": -43.17326,
+        "timezone": "America/Sao_Paulo"
+      },
+      "travelDirection": 0,
+      "type": "unscheduled",
+      "visibility": "in details"
+    }
+  ],
+  "title": "Bicycle Trip To Acapulco Copacabana Hotel - TripGo"
+}
