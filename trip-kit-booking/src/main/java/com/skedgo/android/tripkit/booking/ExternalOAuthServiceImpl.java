@@ -27,7 +27,7 @@ public class ExternalOAuthServiceImpl implements ExternalOAuthService {
 
     return Observable.create(new Observable.OnSubscribe<ExternalOAuth>() {
       @Override public void call(Subscriber<? super ExternalOAuth> subscriber) {
-        final Call<AccessToken> call = externalOAuthApi.getAccessToken(code, "authorization_code");
+        final Call<AccessToken> call = externalOAuthApi.getAccessToken(code, "authorization_code", "force", "offline");
 
         try {
           Response<AccessToken> resp = call.execute();
