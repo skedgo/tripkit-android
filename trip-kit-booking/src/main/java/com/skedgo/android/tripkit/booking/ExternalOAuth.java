@@ -1,5 +1,7 @@
 package com.skedgo.android.tripkit.booking;
 
+import android.support.annotation.Nullable;
+
 import org.immutables.value.Value;
 
 import java.util.UUID;
@@ -17,6 +19,7 @@ public abstract class ExternalOAuth {
 
   public abstract String authServiceId();
   public abstract String token();
+  @Nullable public abstract String refreshToken();
   public abstract int expiresIn();
 
   @Value.Default public String id() {
@@ -26,6 +29,7 @@ public abstract class ExternalOAuth {
   public interface Builder {
     Builder authServiceId(String authServiceId);
     Builder token(String token);
+    Builder refreshToken(String token);
     Builder expiresIn(int expiresIn);
     ExternalOAuth build();
   }

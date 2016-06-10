@@ -189,7 +189,7 @@ public class BookingForm extends FormField {
    * getOAuthLink: get first (unique?) oauth link
    * TODO: is it possible to have multiple authentication links?
    */
-  @Nullable public Uri getOAuthLink(String redirect_uri) {
+  @Nullable public Uri getOAuthLink() {
     if (isOAuthForm()) {
 
       String authURL = getAuthURL();
@@ -203,7 +203,6 @@ public class BookingForm extends FormField {
             .appendQueryParameter("client_id", clientID)
             .appendQueryParameter("response_type", "code")
             .appendQueryParameter("scope", scope)
-            .appendQueryParameter("redirect_uri", redirect_uri)
             .appendQueryParameter("state", UUID.randomUUID().toString())
             .build();
 

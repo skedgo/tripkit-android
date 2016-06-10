@@ -5,7 +5,6 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.support.annotation.NonNull;
-import android.util.Log;
 
 import java.util.concurrent.Callable;
 
@@ -38,7 +37,6 @@ public class ExternalOAuthStoreImpl implements ExternalOAuthStore {
           @Override public ExternalOAuth call() throws Exception {
             final SQLiteDatabase database = databaseHelper.getWritableDatabase();
             try {
-              Log.e("**", "save ##DB " + externalOAuth.authServiceId());
               database.beginTransaction();
 
               database.insertWithOnConflict(

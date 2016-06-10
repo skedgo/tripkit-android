@@ -41,12 +41,15 @@ public class ExternalOAuthServiceImpl implements ExternalOAuthService {
                                   .expiresIn(accessToken.getExpiresIn())
                                   .build());
 
-            // save token
-            externalOAuthStore.updateExternalOauth(ExternalOAuth.builder()
-                                                       .authServiceId(form.getValue().toString())
-                                                       .token(accessToken.getAccessToken())
-                                                       .expiresIn(accessToken.getExpiresIn())
-                                                       .build()).subscribe();
+            if (accessToken.getRefreshToken() != null) {
+              // save token
+              externalOAuthStore.updateExternalOauth(ExternalOAuth.builder()
+                                                         .authServiceId(form.getValue().toString())
+                                                         .token(accessToken.getAccessToken())
+                                                         .expiresIn(accessToken.getExpiresIn())
+                                                         .build()).subscribe();
+            }
+
           } else {
             subscriber.onError(new Error(resp.errorBody().string()));
           }
