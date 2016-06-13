@@ -36,8 +36,9 @@ import dagger.Lazy;
 import rx.android.view.ViewActions;
 import rx.functions.Action1;
 import rx.functions.Actions;
+import skedgo.common.view.ButterKnifeFragment;
 
-public class BookingFragment extends BaseFragment implements View.OnClickListener {
+public class BookingFragment extends ButterKnifeFragment implements View.OnClickListener {
   public static final String KEY_PARAM = "param";
   public static final String KEY_FORM = "form";
   private static final String TAG_BOOKING_FORM = "bookingForm";

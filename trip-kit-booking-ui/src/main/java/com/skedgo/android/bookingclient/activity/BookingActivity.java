@@ -1,5 +1,6 @@
 package com.skedgo.android.bookingclient.activity;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.app.ActionBar;
@@ -20,7 +21,10 @@ import com.squareup.otto.Subscribe;
 
 import javax.inject.Inject;
 
-public class BookingActivity extends ProgressEnabledActivity implements FragmentManager.OnBackStackChangedListener {
+import skedgo.anim.AnimatedTransitionActivity;
+import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
+
+public class BookingActivity extends AnimatedTransitionActivity implements FragmentManager.OnBackStackChangedListener {
   public static final String ACTION_BOOK = "com.skedgo.android.bookingclient.ACTION_BOOK";
   public static final String ACTION_BOOK2 = "com.skedgo.android.bookingclient.ACTION_BOOK2";
   public static final String ACTION_BOOK_AFTER_OAUTH = "com.skedgo.android.bookingclient.ACTION_BOOK_AFTER_OAUTH";
@@ -34,6 +38,10 @@ public class BookingActivity extends ProgressEnabledActivity implements Fragment
   public static BookingClientComponent component;
 
   @Inject Bus bus;
+
+  @Override protected void attachBaseContext(Context newBase) {
+    super.attachBaseContext(CalligraphyContextWrapper.wrap(newBase));
+  }
 
   @Override public void onStart() {
     super.onStart();

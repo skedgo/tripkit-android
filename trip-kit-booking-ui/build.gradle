@@ -66,6 +66,7 @@ dependencies {
     exclude group: 'io.reactivex', module: 'rxjava'
     exclude module: 'support-annotations'
   }
+  compile 'com.github.skedgo:activity-animations:v1.0'
 }
 
 /**

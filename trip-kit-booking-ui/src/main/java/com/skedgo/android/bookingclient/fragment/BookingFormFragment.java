@@ -46,8 +46,9 @@ import java.util.List;
 import javax.inject.Inject;
 
 import rx.functions.Action1;
+import skedgo.common.view.ButterKnifeFragment;
 
-public class BookingFormFragment extends BaseFragment {
+public class BookingFormFragment extends ButterKnifeFragment {
   public static final String KEY_BOOKING_FORM = "bookingForm";
 
   // TODO: REFACTOR THIS CLASS!!!!
