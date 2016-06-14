@@ -10,6 +10,8 @@ import java.util.concurrent.Callable;
 
 import rx.Observable;
 import rx.Single;
+import rx.functions.Action0;
+import rx.functions.Action1;
 import rx.functions.Func1;
 import rx.schedulers.Schedulers;
 import skedgo.sqlite.Cursors;
@@ -59,20 +61,22 @@ public class ExternalOAuthStoreImpl implements ExternalOAuthStore {
   }
 
   @Override public Single<ExternalOAuth> getExternalOauth(final String authId) {
+    final SQLiteDatabase database = databaseHelper.getReadableDatabase();
     return Observable
         .fromCallable(new Callable<Cursor>() {
           @Override public Cursor call() throws Exception {
-            final SQLiteDatabase database = databaseHelper.getReadableDatabase();
-            Cursor cursor = database.rawQuery("SELECT * FROM " + EXTERNAL_AUTHS + " WHERE auth_service_id = '" + authId + "'", null);
-
-            database.close();
-            return cursor;
+            return database.rawQuery("SELECT * FROM " + EXTERNAL_AUTHS + " WHERE auth_service_id = '" + authId + "'", null);
           }
         })
         .flatMap(Cursors.flattenCursor())
         .map(new Func1<Cursor, ExternalOAuth>() {
           @Override public ExternalOAuth call(Cursor cursor) {
             return entityAdapter.toEntity(cursor);
+          }
+        })
+        .doOnCompleted(new Action0() {
+          @Override public void call() {
+            database.close();
           }
         })
         .toSingle()

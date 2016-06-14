@@ -21,6 +21,7 @@ import rx.Subscriber;
 import rx.functions.Action0;
 import rx.functions.Action1;
 import rx.functions.Actions;
+import rx.functions.Func1;
 
 import static rx.android.schedulers.AndroidSchedulers.mainThread;
 
@@ -161,28 +162,27 @@ public class BookingViewModelImpl implements BookingViewModel {
   }
 
   @Override
-  public Observable<Boolean> needsAuthentication(final BookingForm form){
+  public Observable<Boolean> needsAuthentication(final BookingForm form) {
 
-    return Observable.create(new Observable.OnSubscribe<Boolean>() {
-      @Override public void call(final Subscriber<? super Boolean> subscriber) {
-        bookingService.getExternalOauth(form.getValue().toString()).subscribe(new Action1<ExternalOAuth>() {
-          @Override public void call(ExternalOAuth externalOAuth) {
-
-            if (externalOAuth != null) {
-              form.setAuthData(externalOAuth);
-              subscriber.onNext(false);
-            } else {
-              subscriber.onNext(true);
-            }
-
+    return bookingService.getExternalOauth(form.getValue().toString())
+        .toObservable()
+        .onErrorResumeNext(new Func1<Throwable, Observable<? extends ExternalOAuth>>() {
+          @Override public Observable<? extends ExternalOAuth> call(Throwable throwable) {
+            return Observable.just(null);
           }
-        }, new Action1<Throwable>() {
-          @Override public void call(Throwable throwable) {
-            subscriber.onNext(true);
+        })
+        .doOnNext(new Action1<ExternalOAuth>() {
+          @Override public void call(ExternalOAuth externalOAuth) {
+           if (externalOAuth != null) {
+              form.setAuthData(externalOAuth);
+            }
+          }
+        })
+        .map(new Func1<ExternalOAuth, Boolean>() {
+          @Override public Boolean call(ExternalOAuth externalOAuth) {
+            return externalOAuth == null;
           }
         });
-      }
-    });
 
   }
 
