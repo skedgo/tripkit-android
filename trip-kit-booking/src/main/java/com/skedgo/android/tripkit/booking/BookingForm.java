@@ -124,39 +124,15 @@ public class BookingForm extends FormField {
   }
 
   @Nullable public String getClientID() {
-
-    for (FormGroup formGroup : form) {
-      for (FormField formField : formGroup.getFields()) {
-        if (formField.getId().equals("clientID")) {
-          return formField.getValue().toString();
-        }
-      }
-    }
-    return null;
+    return getValueFromField("clientID");
   }
 
   @Nullable public String getClientSecret() {
-
-    for (FormGroup formGroup : form) {
-      for (FormField formField : formGroup.getFields()) {
-        if (formField.getId().equals("clientSecret")) {
-          return formField.getValue().toString();
-        }
-      }
-    }
-    return null;
+    return getValueFromField("clientSecret");
   }
 
   @Nullable public String getAuthURL() {
-
-    for (FormGroup formGroup : form) {
-      for (FormField formField : formGroup.getFields()) {
-        if (formField.getId().equals("authURL")) {
-          return formField.getValue().toString();
-        }
-      }
-    }
-    return null;
+    return getValueFromField("authURL");
   }
 
   @Nullable public String getTokenURL() {
@@ -167,6 +143,17 @@ public class BookingForm extends FormField {
         Object value = formField.getValue();
         if (fieldId.equals("tokenURL") && value != null && value.toString().endsWith("/token")) {
           return value.toString().substring(0, value.toString().length() - "/token".length());
+        }
+      }
+    }
+    return null;
+  }
+
+  @Nullable private String getValueFromField(String fieldName) {
+    for (FormGroup formGroup : form) {
+      for (FormField formField : formGroup.getFields()) {
+        if (formField.getId().equals(fieldName)) {
+          return formField.getValue().toString();
         }
       }
     }
