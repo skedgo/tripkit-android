@@ -6,6 +6,7 @@ import retrofit2.Call;
 import retrofit2.Response;
 import rx.Observable;
 import rx.Subscriber;
+import rx.functions.Func1;
 
 public class ExternalOAuthServiceImpl implements ExternalOAuthService {
 
@@ -18,50 +19,37 @@ public class ExternalOAuthServiceImpl implements ExternalOAuthService {
   @Override public Observable<ExternalOAuth> getAccessToken(final BookingForm form,
                                                             final String code, String grantType) {
 
-    String clientId = form.getClientID();
-    String clientSecret = form.getClientSecret();
-    String baseUrl = form.getTokenURL();
+    final String clientId = form.getClientID();
+    final String clientSecret = form.getClientSecret();
+    final String baseUrl = form.getTokenURL();
 
     final ExternalOAuthApi externalOAuthApi = ExternalOAuthServiceGenerator.createService(ExternalOAuthApi.class,
                                                                                           baseUrl, clientId, clientSecret);
 
-    return Observable.create(new Observable.OnSubscribe<ExternalOAuth>() {
-      @Override public void call(Subscriber<? super ExternalOAuth> subscriber) {
-        final Call<AccessToken> call = externalOAuthApi.getAccessToken(code, "authorization_code", "force", "offline");
-
-        try {
-          Response<AccessToken> resp = call.execute();
-          AccessToken accessToken = resp.body();
-
-          if (accessToken != null) {
-
-            subscriber.onNext(ImmutableExternalOAuth.builder()
-                                  .authServiceId(form.getValue().toString())
-                                  .token(accessToken.getAccessToken())
-                                  .expiresIn(accessToken.getExpiresIn())
-                                  .build());
-
-            if (accessToken.getRefreshToken() != null) {
-              // save token
-              externalOAuthStore.updateExternalOauth(ImmutableExternalOAuth.builder()
-                                                         .authServiceId(form.getValue().toString())
-                                                         .token(accessToken.getAccessToken())
-                                                         .expiresIn(accessToken.getExpiresIn())
-                                                         .build()).subscribe();
-            }
-
-          } else {
-            subscriber.onError(new Error(resp.errorBody().string()));
+    return externalOAuthApi.getAccessToken(code, "authorization_code", "force", "offline")
+        .filter(new Func1<AccessToken, Boolean>() {
+          @Override public Boolean call(AccessToken accessToken) {
+            return accessToken != null;
           }
+        })
+        .flatMap(new Func1<AccessToken, Observable<ExternalOAuth>>() {
+          @Override public Observable<ExternalOAuth> call(final AccessToken accessToken) {
+            return Observable.create(new Observable.OnSubscribe<ExternalOAuth>() {
+              @Override public void call(Subscriber<? super ExternalOAuth> subscriber) {
+                ExternalOAuth externalOAuth = ImmutableExternalOAuth.builder()
+                    .authServiceId(form.getValue().toString())
+                    .token(accessToken.getAccessToken())
+                    .expiresIn(accessToken.getExpiresIn())
+                    .build();
 
-          subscriber.onCompleted();
-
-        } catch (IOException e) {
-          e.printStackTrace();
-        }
-
-      }
-    });
+                if (accessToken.getRefreshToken() != null) {
+                  // save token
+                  externalOAuthStore.updateExternalOauth(externalOAuth);
+                }
+                subscriber.onNext(externalOAuth);
+              }
+            });
+          }
+        });
   }
-
 }

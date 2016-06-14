@@ -10,7 +10,9 @@ import okhttp3.Request;
 import okhttp3.Response;
 import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Retrofit;
+import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
+import rx.schedulers.Schedulers;
 
 public class ExternalOAuthServiceGenerator {
 
@@ -46,7 +48,8 @@ public class ExternalOAuthServiceGenerator {
     Retrofit.Builder builder =
         new Retrofit.Builder()
             .baseUrl(baseUrl + "/")
-            .addConverterFactory(GsonConverterFactory.create());
+            .addConverterFactory(GsonConverterFactory.create())
+            .addCallAdapterFactory(RxJavaCallAdapterFactory.createWithScheduler(Schedulers.io()));
 
     OkHttpClient client = httpClient.build();
     Retrofit retrofit = builder.client(client).build();
