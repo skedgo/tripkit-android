@@ -35,7 +35,7 @@ public class ExternalOAuthServiceImpl implements ExternalOAuthService {
 
           if (accessToken != null) {
 
-            subscriber.onNext(ExternalOAuth.builder()
+            subscriber.onNext(ImmutableExternalOAuth.builder()
                                   .authServiceId(form.getValue().toString())
                                   .token(accessToken.getAccessToken())
                                   .expiresIn(accessToken.getExpiresIn())
@@ -43,7 +43,7 @@ public class ExternalOAuthServiceImpl implements ExternalOAuthService {
 
             if (accessToken.getRefreshToken() != null) {
               // save token
-              externalOAuthStore.updateExternalOauth(ExternalOAuth.builder()
+              externalOAuthStore.updateExternalOauth(ImmutableExternalOAuth.builder()
                                                          .authServiceId(form.getValue().toString())
                                                          .token(accessToken.getAccessToken())
                                                          .expiresIn(accessToken.getExpiresIn())

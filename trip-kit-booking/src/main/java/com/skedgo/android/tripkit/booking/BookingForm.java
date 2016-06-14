@@ -2,6 +2,7 @@ package com.skedgo.android.tripkit.booking;
 
 import android.net.Uri;
 import android.os.Parcel;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 
 import com.google.gson.annotations.SerializedName;
@@ -141,7 +142,7 @@ public class BookingForm extends FormField {
       for (FormField formField : formGroup.getFields()) {
         String fieldId = formField.getId();
         Object value = formField.getValue();
-        if (fieldId.equals("tokenURL") && value != null && value.toString().endsWith("/token")) {
+        if ("tokenURL".equals(fieldId) && value != null && value.toString().endsWith("/token")) {
           return value.toString().substring(0, value.toString().length() - "/token".length());
         }
       }
@@ -149,10 +150,10 @@ public class BookingForm extends FormField {
     return null;
   }
 
-  @Nullable private String getValueFromField(String fieldName) {
+  @Nullable private String getValueFromField(@NonNull String fieldName) {
     for (FormGroup formGroup : form) {
       for (FormField formField : formGroup.getFields()) {
-        if (formField.getId().equals(fieldName)) {
+        if (fieldName.equals(formField.getId())) {
           return formField.getValue().toString();
         }
       }

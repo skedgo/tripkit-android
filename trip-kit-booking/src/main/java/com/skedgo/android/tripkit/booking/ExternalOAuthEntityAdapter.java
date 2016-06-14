@@ -14,7 +14,7 @@ public class ExternalOAuthEntityAdapter implements SQLiteEntityAdapter<ExternalO
     String refreshToken = cursor.getString(cursor.getColumnIndex(ExternalOAuthTable.REFRESH_TOKEN.getName()));
     int expiresIn = cursor.getInt(cursor.getColumnIndex(ExternalOAuthTable.EXPIRES_IN.getName()));
 
-    return ExternalOAuth.builder()
+    return ImmutableExternalOAuth.builder()
         .authServiceId(authServiceId)
         .token(token)
         .refreshToken(refreshToken)
