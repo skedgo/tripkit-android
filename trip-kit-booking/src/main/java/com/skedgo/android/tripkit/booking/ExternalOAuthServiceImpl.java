@@ -38,11 +38,11 @@ public class ExternalOAuthServiceImpl implements ExternalOAuthService {
               @Override public void call(Subscriber<? super ExternalOAuth> subscriber) {
                 ExternalOAuth externalOAuth = ImmutableExternalOAuth.builder()
                     .authServiceId(form.getValue().toString())
-                    .token(accessToken.getAccessToken())
-                    .expiresIn(accessToken.getExpiresIn())
+                    .token(accessToken.accessToken())
+                    .expiresIn(accessToken.expiresIn())
                     .build();
 
-                if (accessToken.getRefreshToken() != null) {
+                if (accessToken.refreshToken() != null) {
                   // save token
                   externalOAuthStore.updateExternalOauth(externalOAuth);
                 }
