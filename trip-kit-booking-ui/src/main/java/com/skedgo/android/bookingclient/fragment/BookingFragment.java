@@ -20,6 +20,7 @@ import com.skedgo.android.bookingclient.R;
 import com.skedgo.android.bookingclient.activity.BookingActivity;
 import com.skedgo.android.bookingclient.viewmodel.BookingErrorViewModel;
 import com.skedgo.android.bookingclient.viewmodel.CollectBookingFeedbackCommand;
+import com.skedgo.android.bookingclient.viewmodel.Command;
 import com.skedgo.android.bookingclient.viewmodel.ExtendedBookingViewModel;
 import com.skedgo.android.common.util.LogUtils;
 import com.skedgo.android.tripkit.booking.BookingForm;
@@ -90,15 +91,23 @@ public class BookingFragment extends ButterKnifeFragment implements View.OnClick
   @Override
   public boolean onOptionsItemSelected(MenuItem item) {
     if (item.getItemId() == R.id.reportProblemMenuItem) {
-      viewModel.reportProblem(new CollectBookingFeedbackCommand.Param(getActivity()))
-          .takeUntil(lifecycle().onDestroy())
-          .subscribe(new Action1<Config>() {
-            @Override
-            public void call(Config config) {
-              UserVoice.init(config, getActivity());
-              UserVoice.launchContactUs(getActivity());
-            }
-          }, ErrorActions.showUnexpectedError(getActivity()));
+
+      if (getActivity() instanceof BookingActivity) {
+        BookingActivity a = (BookingActivity)getActivity();
+        CollectBookingFeedbackCommand handler = a.reportProblemHandler();
+        if (handler != null) {
+
+          viewModel.reportProblem(handler, new CollectBookingFeedbackCommand.Param(getActivity()))
+              .takeUntil(lifecycle().onDestroy())
+              .subscribe(new Action1<Config>() {
+                @Override
+                public void call(Config config) {
+                  UserVoice.init(config, getActivity());
+                  UserVoice.launchContactUs(getActivity());
+                }
+              }, ErrorActions.showUnexpectedError(getActivity()));
+        }
+      }
       return true;
     } else {
       return super.onOptionsItemSelected(item);

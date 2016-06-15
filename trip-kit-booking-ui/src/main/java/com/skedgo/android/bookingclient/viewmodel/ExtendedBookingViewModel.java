@@ -20,13 +20,10 @@ import rx.functions.Action1;
 public class ExtendedBookingViewModel implements BookingViewModel {
   private final Var<Boolean> isCollectingFeedback = Var.create();
   private final BookingViewModel coreViewModel;
-  private final Provider<CollectBookingFeedbackCommand> collectBookingFeedback;
 
   @Inject
-  public ExtendedBookingViewModel(@NonNull BookingViewModel coreViewModel
-      , @NonNull Provider<CollectBookingFeedbackCommand> collectBookingFeedback) {
+  public ExtendedBookingViewModel(@NonNull BookingViewModel coreViewModel) {
     this.coreViewModel = coreViewModel;
-    this.collectBookingFeedback = collectBookingFeedback;
   }
 
   @Override
@@ -81,8 +78,9 @@ public class ExtendedBookingViewModel implements BookingViewModel {
     return isCollectingFeedback.observe();
   }
 
-  public Observable<Config> reportProblem(CollectBookingFeedbackCommand.Param param) {
-    return collectBookingFeedback.get()
+  public Observable<Config> reportProblem(CollectBookingFeedbackCommand collectBookingFeedback,
+                                          CollectBookingFeedbackCommand.Param param) {
+    return collectBookingFeedback
         .executeAsync(param)
         .observeOn(AndroidSchedulers.mainThread())
         .doOnRequest(new Action1<Long>() {

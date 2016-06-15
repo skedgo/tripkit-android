@@ -1,22 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-<manifest package="com.skedgo.android.bookingclient"
-  xmlns:android="http://schemas.android.com/apk/res/android">
-
-  <application android:theme="@style/V4.DarkActionBar">
-    <activity
-      android:name=".activity.BookingActivity"
-      android:exported="false"
-      android:label="@string/booking"
-      android:screenOrientation="sensorPortrait">
-      <intent-filter>
-        <action android:name="com.skedgo.android.bookingclient.ACTION_BOOK" />
-        <category android:name="android.intent.category.DEFAULT" />
-      </intent-filter>
-      <intent-filter>
-        <action android:name="com.skedgo.android.bookingclient.ACTION_BOOK2" />
-        <category android:name="android.intent.category.DEFAULT" />
-      </intent-filter>
-    </activity>
-
-  </application>
+<manifest package="com.skedgo.android.bookingclient">
+  <application />
 </manifest>
