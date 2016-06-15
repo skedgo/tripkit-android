@@ -98,6 +98,7 @@ public abstract class FormField implements Parcelable, Serializable {
     dest.writeString(type);
   }
 
+  @Nullable
   public abstract Object getValue();
 
   @Nullable
@@ -109,6 +110,7 @@ public abstract class FormField implements Parcelable, Serializable {
     this.title = title;
   }
 
+  @Nullable
   public String getId() {
     return id;
   }

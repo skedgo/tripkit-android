@@ -153,7 +153,7 @@ public class BookingForm extends FormField {
   @Nullable private String getValueFromField(@NonNull String fieldName) {
     for (FormGroup formGroup : form) {
       for (FormField formField : formGroup.getFields()) {
-        if (fieldName.equals(formField.getId())) {
+        if (fieldName.equals(formField.getId()) && formField.getValue() != null) {
           return formField.getValue().toString();
         }
       }
@@ -165,7 +165,7 @@ public class BookingForm extends FormField {
 
     for (FormGroup formGroup : form) {
       for (FormField formField : formGroup.getFields()) {
-        if (formField.getId().equals("scope")) {
+        if (formField.getId() != null && formField.getValue() != null && formField.getId().equals("scope")) {
           return formField.getValue().toString();
         }
       }
@@ -203,12 +203,12 @@ public class BookingForm extends FormField {
   public void setAuthData(ExternalOAuth externalOAuth) {
     for (FormGroup formGroup : form) {
       for (FormField formField : formGroup.getFields()) {
-        if (formField.getId().equals("access_token")) {
+        if (formField.getId() != null && formField.getId().equals("access_token")) {
           // TODO: refactor FormFields using a design pattern
-          ((StringFormField)formField).setValue(externalOAuth.token());
+          ((StringFormField) formField).setValue(externalOAuth.token());
         }
         if (formField.getId().equals("expires_in")) {
-          ((StringFormField)formField).setValue("" + externalOAuth.expiresIn());
+          ((StringFormField) formField).setValue("" + externalOAuth.expiresIn());
         }
       }
     }
