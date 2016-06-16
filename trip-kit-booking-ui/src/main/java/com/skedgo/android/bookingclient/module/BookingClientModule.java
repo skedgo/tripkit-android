@@ -1,11 +1,12 @@
 package com.skedgo.android.bookingclient.module;
 
 import android.content.Context;
+import android.util.Log;
 
 import com.google.gson.Gson;
 import com.jakewharton.picasso.OkHttp3Downloader;
+import com.skedgo.android.bookingclient.BuildConfig;
 import com.skedgo.android.bookingclient.R;
-import com.skedgo.android.bookingclient.util.ErrorHandlers;
 import com.skedgo.android.bookingclient.viewmodel.BookingErrorViewModel;
 import com.skedgo.android.common.util.Gsons;
 import com.skedgo.android.common.util.MainThreadBus;
@@ -18,9 +19,12 @@ import javax.inject.Singleton;
 import dagger.Module;
 import dagger.Provides;
 import okhttp3.OkHttpClient;
+import rx.functions.Action1;
 
 @Module
 public class BookingClientModule {
+
+  private static final String TAG = "bookingclient";
 
   private final Context appContext;
 
@@ -30,18 +34,22 @@ public class BookingClientModule {
 
   @Provides Context provideContext() { return appContext;}
 
-
   @Provides OkHttpClient provideHttpClient() {
     return TripKit.singleton().getOkHttpClient3();
   }
-
 
   @Provides Gson provideGson() {
     return Gsons.createForLowercaseEnum();
   }
 
   @Provides @Singleton Bus provideBus() {
-     return new MainThreadBus(ErrorHandlers.trackError());
+    return new MainThreadBus(new Action1<Throwable>() {
+      @Override public void call(Throwable error) {
+        if (BuildConfig.DEBUG) {
+          Log.e(TAG, null, error);
+        }
+      }
+    });
   }
 
   @Provides BookingErrorViewModel bookingErrorViewModel(Gson gson) {

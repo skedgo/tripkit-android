@@ -13,8 +13,6 @@ import com.skedgo.android.bookingclient.fragment.BookingFragment;
 import com.skedgo.android.bookingclient.module.BookingClientComponent;
 import com.skedgo.android.bookingclient.module.BookingClientModule;
 import com.skedgo.android.bookingclient.module.DaggerBookingClientComponent;
-import com.skedgo.android.bookingclient.viewmodel.CollectBookingFeedbackCommand;
-import com.skedgo.android.bookingclient.viewmodel.Command;
 import com.skedgo.android.tripkit.booking.BookingForm;
 import com.skedgo.android.tripkit.booking.viewmodel.BookingViewModel;
 import com.skedgo.android.tripkit.booking.viewmodel.ParamImpl;
@@ -120,7 +118,9 @@ public class BookingActivity extends AnimatedTransitionActivity implements Fragm
     }
   }
 
-  public CollectBookingFeedbackCommand reportProblemHandler() { return null; }
+  public void reportProblem() {
+
+  }
 
   private void setupActionBar() {
     ActionBar actionBar = getSupportActionBar();

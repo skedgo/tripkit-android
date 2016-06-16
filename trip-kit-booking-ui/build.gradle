@@ -42,11 +42,6 @@ dependencies {
   compile project(':libraries:android-shared-lib')
   compile project(':libraries:common-views')
 
-
-  compile 'com.uservoice:uservoice-android-sdk:1.2.5'
-  compile('com.crashlytics.sdk.android:crashlytics:2.5.5@aar') {
-    transitive = true;
-  }
   compile 'com.nineoldandroids:library:2.4.0'
 
   compile 'uk.co.chrisjenx:calligraphy:2.1.0'
