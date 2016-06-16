@@ -10,6 +10,5 @@ public interface ExternalOAuthApi {
   @POST("token") Observable<AccessToken> getAccessToken(
       @Field("code") String code,
       @Field("grant_type") String grantType,
-      @Field("approval_prompt") String approval_prompt,
-      @Field("access_type") String access_type);
+      @Field("scope") String scope);
 }

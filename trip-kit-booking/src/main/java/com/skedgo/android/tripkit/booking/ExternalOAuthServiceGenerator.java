@@ -30,8 +30,9 @@ public class ExternalOAuthServiceGenerator {
           Request original = chain.request();
 
           Request.Builder requestBuilder = original.newBuilder()
-              .header("Authorization", basic)
-              .header("Accept", "application/json")
+              .header("authorization", basic)
+             // .header("Accept", "application/json")
+              .header("accept-encoding", "gzip")
               .method(original.method(), original.body());
 
           Request request = requestBuilder.build();
