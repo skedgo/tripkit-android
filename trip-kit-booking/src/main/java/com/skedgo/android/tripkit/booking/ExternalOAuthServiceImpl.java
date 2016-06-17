@@ -47,7 +47,7 @@ public class ExternalOAuthServiceImpl implements ExternalOAuthService {
 
                 if (accessToken.getRefreshToken() != null) {
                   // save token
-                  externalOAuthStore.updateExternalOauth(externalOAuth);
+                  externalOAuthStore.updateExternalOauth(externalOAuth).subscribe();
                 }
                 subscriber.onNext(externalOAuth);
               }

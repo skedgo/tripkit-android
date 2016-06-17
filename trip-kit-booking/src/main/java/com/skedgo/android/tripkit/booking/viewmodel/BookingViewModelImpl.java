@@ -17,7 +17,6 @@ import org.apache.commons.collections4.CollectionUtils;
 import java.util.List;
 
 import rx.Observable;
-import rx.Subscriber;
 import rx.functions.Action0;
 import rx.functions.Action1;
 import rx.functions.Actions;
@@ -164,25 +163,29 @@ public class BookingViewModelImpl implements BookingViewModel {
   @Override
   public Observable<Boolean> needsAuthentication(final BookingForm form) {
 
-    return bookingService.getExternalOauth(form.getValue().toString())
-        .toObservable()
-        .onErrorResumeNext(new Func1<Throwable, Observable<? extends ExternalOAuth>>() {
-          @Override public Observable<? extends ExternalOAuth> call(Throwable throwable) {
-            return Observable.just(null);
-          }
-        })
-        .doOnNext(new Action1<ExternalOAuth>() {
-          @Override public void call(ExternalOAuth externalOAuth) {
-           if (externalOAuth != null) {
-              form.setAuthData(externalOAuth);
+    if (form.getValue() != null) {
+      return bookingService.getExternalOauth(form.getValue().toString())
+          .toObservable()
+          .onErrorResumeNext(new Func1<Throwable, Observable<? extends ExternalOAuth>>() {
+            @Override public Observable<? extends ExternalOAuth> call(Throwable throwable) {
+              return Observable.just(null);
             }
-          }
-        })
-        .map(new Func1<ExternalOAuth, Boolean>() {
-          @Override public Boolean call(ExternalOAuth externalOAuth) {
-            return externalOAuth == null;
-          }
-        });
+          })
+          .doOnNext(new Action1<ExternalOAuth>() {
+            @Override public void call(ExternalOAuth externalOAuth) {
+              if (externalOAuth != null) {
+                form.setAuthData(externalOAuth);
+              }
+            }
+          })
+          .map(new Func1<ExternalOAuth, Boolean>() {
+            @Override public Boolean call(ExternalOAuth externalOAuth) {
+              return externalOAuth == null;
+            }
+          });
+    } else {
+      return Observable.just(true);
+    }
 
   }
 

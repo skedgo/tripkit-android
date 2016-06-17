@@ -301,7 +301,7 @@ public class BookingFragment extends ButterKnifeFragment implements View.OnClick
 
         } else {
           startActivity(
-              new Intent(getActivity(), BookingActivity.class)
+              new Intent(getActivity(), getActivity().getClass())
                   .setAction(BookingActivity.ACTION_BOOK_AFTER_OAUTH)
                   .putExtra(BookingActivity.KEY_FORM, (Parcelable) form));
         }

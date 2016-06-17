@@ -11,7 +11,6 @@ import java.util.concurrent.Callable;
 import rx.Observable;
 import rx.Single;
 import rx.functions.Action0;
-import rx.functions.Action1;
 import rx.functions.Func1;
 import rx.schedulers.Schedulers;
 import skedgo.sqlite.Cursors;
