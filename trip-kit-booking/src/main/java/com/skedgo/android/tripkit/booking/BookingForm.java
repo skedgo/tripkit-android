@@ -136,6 +136,18 @@ public class BookingForm extends FormField {
     return getValueFromField("authURL");
   }
 
+  @Nullable public String getToken() {
+    return getValueFromField("access_token");
+  }
+
+  @Nullable public int getExpiresIn() {
+    return Integer.valueOf(getValueFromField("expires_in"));
+  }
+
+  @Nullable public String getRefreshToken() {
+    return getValueFromField("refresh_token");
+  }
+
   @Nullable public String getTokenURL() {
 
     for (FormGroup formGroup : form) {
@@ -169,7 +181,7 @@ public class BookingForm extends FormField {
 
           String scope = formField.getValue().toString();
 
-          if (!scope.contains("offline")){
+          if (!scope.contains("offline")) {
             scope = "offline " + scope;
           }
 
@@ -216,6 +228,9 @@ public class BookingForm extends FormField {
         }
         if (formField.getId().equals("expires_in")) {
           ((StringFormField) formField).setValue("" + externalOAuth.expiresIn());
+        }
+        if (formField.getId().equals("refresh_token") && externalOAuth.refreshToken() != null) {
+          ((StringFormField) formField).setValue("" + externalOAuth.refreshToken());
         }
       }
     }
