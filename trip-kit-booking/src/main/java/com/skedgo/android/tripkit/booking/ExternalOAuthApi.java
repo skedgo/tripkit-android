@@ -7,7 +7,7 @@ import rx.Observable;
 
 public interface ExternalOAuthApi {
   @FormUrlEncoded
-  @POST("token") Observable<AccessToken> getAccessToken(
+  @POST("token") Observable<AccessTokenResponse> getAccessToken(
       @Field("code") String code,
       @Field("grant_type") String grantType,
       @Field("scope") String scope);

@@ -2,6 +2,9 @@ package com.skedgo.android.tripkit.booking;
 
 import android.util.Base64;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+
 import java.io.IOException;
 
 import okhttp3.Interceptor;
@@ -31,7 +34,6 @@ public class ExternalOAuthServiceGenerator {
 
           Request.Builder requestBuilder = original.newBuilder()
               .header("authorization", basic)
-             // .header("Accept", "application/json")
               .header("accept-encoding", "gzip")
               .method(original.method(), original.body());
 
@@ -45,11 +47,14 @@ public class ExternalOAuthServiceGenerator {
       logging.setLevel(HttpLoggingInterceptor.Level.BODY);
       httpClient.interceptors().add(logging);
     }
-
+    final Gson gson = new GsonBuilder()
+        .registerTypeAdapterFactory(new GsonAdaptersAccessTokenResponse())
+        .create();
+    
     Retrofit.Builder builder =
         new Retrofit.Builder()
             .baseUrl(baseUrl + "/")
-            .addConverterFactory(GsonConverterFactory.create())
+            .addConverterFactory(GsonConverterFactory.create(gson))
             .addCallAdapterFactory(RxJavaCallAdapterFactory.createWithScheduler(Schedulers.io()));
 
     OkHttpClient client = httpClient.build();

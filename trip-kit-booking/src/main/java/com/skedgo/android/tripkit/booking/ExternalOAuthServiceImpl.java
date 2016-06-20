@@ -24,13 +24,13 @@ public class ExternalOAuthServiceImpl implements ExternalOAuthService {
                                                                                           baseUrl, clientId, clientSecret);
 
     return externalOAuthApi.getAccessToken(code, "authorization_code", "offline public rides.read rides.request")
-        .filter(new Func1<AccessToken, Boolean>() {
-          @Override public Boolean call(AccessToken accessToken) {
-            return accessToken != null;
+        .filter(new Func1<AccessTokenResponse, Boolean>() {
+          @Override public Boolean call(AccessTokenResponse accessTokenResponse) {
+            return accessTokenResponse != null;
           }
         })
-        .flatMap(new Func1<AccessToken, Observable<ExternalOAuth>>() {
-          @Override public Observable<ExternalOAuth> call(final AccessToken accessToken) {
+        .flatMap(new Func1<AccessTokenResponse, Observable<ExternalOAuth>>() {
+          @Override public Observable<ExternalOAuth> call(final AccessTokenResponse accessTokenResponse) {
             return Observable.create(new Observable.OnSubscribe<ExternalOAuth>() {
               @Override public void call(Subscriber<? super ExternalOAuth> subscriber) {
 
@@ -40,12 +40,12 @@ public class ExternalOAuthServiceImpl implements ExternalOAuthService {
                 }
                 ExternalOAuth externalOAuth = ImmutableExternalOAuth.builder()
                     .authServiceId(serviceIdString)
-                    .token(accessToken.getAccessToken())
-                    .refreshToken(accessToken.getRefreshToken())
-                    .expiresIn(accessToken.getExpiresIn())
+                    .token(accessTokenResponse.accessToken())
+                    .refreshToken(accessTokenResponse.refreshToken())
+                    .expiresIn(accessTokenResponse.expiresIn())
                     .build();
 
-                if (accessToken.getRefreshToken() != null) {
+                if (accessTokenResponse.refreshToken() != null) {
                   // save token
                   externalOAuthStore.updateExternalOauth(externalOAuth).subscribe();
                 }
