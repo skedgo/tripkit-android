@@ -78,7 +78,7 @@ public class BookingModule {
   }
 
   @Provides ExternalOAuthStore getExternalOAuthStore(SQLiteOpenHelper databaseHelper, ExternalOAuthEntityAdapter adapter) {
-    return new ExternalOAuthStoreImpl(TripKit.singleton().configs().context(), databaseHelper, adapter);
+    return new ExternalOAuthStoreImpl(databaseHelper, adapter);
   }
 
   @Provides SQLiteOpenHelper databaseHelper() {

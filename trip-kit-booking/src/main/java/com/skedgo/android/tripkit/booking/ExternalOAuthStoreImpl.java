@@ -1,6 +1,5 @@
 package com.skedgo.android.tripkit.booking;
 
-import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
@@ -20,14 +19,11 @@ import static com.skedgo.android.tripkit.booking.ExternalOAuthTable.EXTERNAL_AUT
 
 public class ExternalOAuthStoreImpl implements ExternalOAuthStore {
 
-  private final Context context;
   private final SQLiteOpenHelper databaseHelper;
   private final SQLiteEntityAdapter<ExternalOAuth> entityAdapter;
 
-  public ExternalOAuthStoreImpl(@NonNull Context context,
-                                @NonNull SQLiteOpenHelper databaseHelper,
+  public ExternalOAuthStoreImpl(@NonNull SQLiteOpenHelper databaseHelper,
                                 @NonNull SQLiteEntityAdapter<ExternalOAuth> entityAdapter) {
-    this.context = context;
     this.databaseHelper = databaseHelper;
     this.entityAdapter = entityAdapter;
   }

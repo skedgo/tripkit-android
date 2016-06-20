@@ -1,15 +1,9 @@
 package com.skedgo.android.bookingclient.viewmodel;
 
-import com.crashlytics.android.Crashlytics;
-import com.crashlytics.android.core.BuildConfig;
-import com.crashlytics.android.core.CrashlyticsCore;
 import com.google.gson.Gson;
 
 import org.junit.Before;
 import org.junit.Test;
-import org.robolectric.RuntimeEnvironment;
-
-import io.fabric.sdk.android.Fabric;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
