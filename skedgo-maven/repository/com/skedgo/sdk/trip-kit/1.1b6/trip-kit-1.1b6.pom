@@ -3,8 +3,8 @@
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <modelVersion>4.0.0</modelVersion>
   <groupId>com.skedgo.sdk</groupId>
-  <artifactId>trip-kit-account</artifactId>
-  <version>1.0b2</version>
+  <artifactId>trip-kit</artifactId>
+  <version>1.1b6</version>
   <packaging>aar</packaging>
   <dependencies>
     <dependency>
@@ -20,9 +20,9 @@
       <scope>compile</scope>
     </dependency>
     <dependency>
-      <groupId>com.skedgo.sdk</groupId>
-      <artifactId>trip-kit</artifactId>
-      <version>1.1b6</version>
+      <groupId>com.google.android.gms</groupId>
+      <artifactId>play-services-gcm</artifactId>
+      <version>8.4.0</version>
       <scope>compile</scope>
     </dependency>
     <dependency>
@@ -32,9 +32,21 @@
       <scope>compile</scope>
     </dependency>
     <dependency>
+      <groupId>com.skedgo.sdk</groupId>
+      <artifactId>android-shared-lib</artifactId>
+      <version>0.0.1</version>
+      <scope>compile</scope>
+    </dependency>
+    <dependency>
       <groupId>com.squareup.okhttp3</groupId>
       <artifactId>okhttp</artifactId>
       <version>3.2.0</version>
+      <scope>compile</scope>
+    </dependency>
+    <dependency>
+      <groupId>com.github.skedgo</groupId>
+      <artifactId>sqlite-utils</artifactId>
+      <version>v1.0</version>
       <scope>compile</scope>
     </dependency>
     <dependency>

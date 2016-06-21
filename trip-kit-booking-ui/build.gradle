@@ -2,6 +2,9 @@ apply plugin: 'com.android.library'
 apply plugin: 'com.github.dcendents.android-maven'
 apply plugin: 'com.neenbedankt.android-apt'
 
+group = "com.skedgo.sdk"
+version = "1.0b1"
+
 android {
   compileSdkVersion rootProject.ext.CompileSdkVersion
   buildToolsVersion rootProject.ext.BuildToolsVersion
