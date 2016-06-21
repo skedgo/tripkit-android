@@ -219,7 +219,7 @@ public class BookingForm extends FormField {
     return null;
   }
 
-  public void setAuthData(ExternalOAuth externalOAuth) {
+  public BookingForm setAuthData(ExternalOAuth externalOAuth) {
     for (FormGroup formGroup : form) {
       for (FormField formField : formGroup.getFields()) {
         if (formField.getId() != null && formField.getId().equals("access_token")) {
@@ -234,5 +234,6 @@ public class BookingForm extends FormField {
         }
       }
     }
+    return this;
   }
 }

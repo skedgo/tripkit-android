@@ -1,5 +1,6 @@
 package com.skedgo.android.bookingclient.module;
 
+import com.skedgo.android.bookingclient.OAuth2CallbackHandler;
 import com.skedgo.android.bookingclient.activity.BookingActivity;
 import com.skedgo.android.bookingclient.fragment.BookingFormFragment;
 import com.skedgo.android.bookingclient.fragment.BookingFragment;
@@ -14,6 +15,8 @@ import dagger.Component;
     modules = {BookingClientModule.class, BookingModule.class}
 )
 public interface BookingClientComponent {
+
+  OAuth2CallbackHandler getOAuth2CallbackHandler();
 
   void inject(BookingActivity activity);
   void inject(BookingFragment fragment);
