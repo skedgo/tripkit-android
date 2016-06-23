@@ -38,6 +38,12 @@
       <scope>compile</scope>
     </dependency>
     <dependency>
+      <groupId>com.skedgo.sdk</groupId>
+      <artifactId>android-shared-lib</artifactId>
+      <version>0.0.1</version>
+      <scope>compile</scope>
+    </dependency>
+    <dependency>
       <groupId>com.github.skedgo</groupId>
       <artifactId>sqlite-utils</artifactId>
       <version>v1.0</version>
@@ -53,12 +59,6 @@
       <groupId>com.squareup.retrofit2</groupId>
       <artifactId>adapter-rxjava</artifactId>
       <version>2.0.2</version>
-      <scope>compile</scope>
-    </dependency>
-    <dependency>
-      <groupId>com.skedgo.sdk</groupId>
-      <artifactId>android-shared-lib</artifactId>
-      <version>0.0.1</version>
       <scope>compile</scope>
     </dependency>
   </dependencies>

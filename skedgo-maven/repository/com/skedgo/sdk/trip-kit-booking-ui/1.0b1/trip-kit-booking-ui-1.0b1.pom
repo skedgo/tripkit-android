@@ -33,14 +33,20 @@
     </dependency>
     <dependency>
       <groupId>com.skedgo.sdk</groupId>
+      <artifactId>common-views</artifactId>
+      <version>0.0.1</version>
+      <scope>compile</scope>
+    </dependency>
+    <dependency>
+      <groupId>com.skedgo.sdk</groupId>
       <artifactId>android-shared-lib</artifactId>
       <version>0.0.1</version>
       <scope>compile</scope>
     </dependency>
     <dependency>
       <groupId>com.skedgo.sdk</groupId>
-      <artifactId>common-views</artifactId>
-      <version>0.0.1</version>
+      <artifactId>trip-kit</artifactId>
+      <version>1.1b6</version>
       <scope>compile</scope>
     </dependency>
     <dependency>
@@ -65,12 +71,6 @@
       <groupId>com.nineoldandroids</groupId>
       <artifactId>library</artifactId>
       <version>2.4.0</version>
-      <scope>compile</scope>
-    </dependency>
-    <dependency>
-      <groupId>com.skedgo.sdk</groupId>
-      <artifactId>trip-kit</artifactId>
-      <version>1.1b6</version>
       <scope>compile</scope>
     </dependency>
     <dependency>
