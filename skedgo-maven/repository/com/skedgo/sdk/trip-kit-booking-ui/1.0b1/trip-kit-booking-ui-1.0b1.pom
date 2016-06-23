@@ -14,12 +14,6 @@
       <scope>compile</scope>
     </dependency>
     <dependency>
-      <groupId>tripgo-android.libraries</groupId>
-      <artifactId>common-views</artifactId>
-      <version>unspecified</version>
-      <scope>compile</scope>
-    </dependency>
-    <dependency>
       <groupId>uk.co.chrisjenx</groupId>
       <artifactId>calligraphy</artifactId>
       <version>2.1.0</version>
@@ -33,7 +27,19 @@
     </dependency>
     <dependency>
       <groupId>com.skedgo.sdk</groupId>
+      <artifactId>trip-kit-booking</artifactId>
+      <version>1.0b3</version>
+      <scope>compile</scope>
+    </dependency>
+    <dependency>
+      <groupId>com.skedgo.sdk</groupId>
       <artifactId>android-shared-lib</artifactId>
+      <version>0.0.1</version>
+      <scope>compile</scope>
+    </dependency>
+    <dependency>
+      <groupId>com.skedgo.sdk</groupId>
+      <artifactId>common-views</artifactId>
       <version>0.0.1</version>
       <scope>compile</scope>
     </dependency>
@@ -41,12 +47,6 @@
       <groupId>com.github.skedgo</groupId>
       <artifactId>activity-animations</artifactId>
       <version>v1.0</version>
-      <scope>compile</scope>
-    </dependency>
-    <dependency>
-      <groupId>com.skedgo.sdk</groupId>
-      <artifactId>trip-kit</artifactId>
-      <version>1.1b6</version>
       <scope>compile</scope>
     </dependency>
     <dependency>
@@ -68,6 +68,12 @@
       <scope>compile</scope>
     </dependency>
     <dependency>
+      <groupId>com.skedgo.sdk</groupId>
+      <artifactId>trip-kit</artifactId>
+      <version>1.1b6</version>
+      <scope>compile</scope>
+    </dependency>
+    <dependency>
       <groupId>com.skedgo.bux</groupId>
       <artifactId>bux</artifactId>
       <version>0.0.1</version>
@@ -78,12 +84,6 @@
           <groupId>io.reactivex</groupId>
         </exclusion>
       </exclusions>
-    </dependency>
-    <dependency>
-      <groupId>com.skedgo.sdk</groupId>
-      <artifactId>trip-kit-booking</artifactId>
-      <version>1.0b3</version>
-      <scope>compile</scope>
     </dependency>
     <dependency>
       <groupId>com.github.skedgo</groupId>

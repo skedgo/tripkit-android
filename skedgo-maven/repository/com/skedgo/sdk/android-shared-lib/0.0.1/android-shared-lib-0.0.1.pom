@@ -26,15 +26,15 @@
       </exclusions>
     </dependency>
     <dependency>
-      <groupId>io.reactivex</groupId>
-      <artifactId>rxandroid</artifactId>
-      <version>0.24.0</version>
-      <scope>compile</scope>
-    </dependency>
-    <dependency>
       <groupId>com.skedgo.goservices</groupId>
       <artifactId>transport-icons</artifactId>
       <version>0.0.1</version>
+      <scope>compile</scope>
+    </dependency>
+    <dependency>
+      <groupId>io.reactivex</groupId>
+      <artifactId>rxandroid</artifactId>
+      <version>0.24.0</version>
       <scope>compile</scope>
     </dependency>
     <dependency>
