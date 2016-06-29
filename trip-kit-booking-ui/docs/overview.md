@@ -43,8 +43,7 @@ If a trip segment has a booking action, you can call then your booking activity.
 
     	Intent intent = new Intent(BookingActivity.ACTION_BOOK)
         		.putExtra(BookingActivity.KEY_URL, booking.getUrl())
-        		.putExtra(BookingActivity.KEY_FIRST_SCREEN, true)
-        		.putExtra(BookingActivity.KEY_BOOKING_BUNDLE, extra);
+        		.putExtra(BookingActivity.KEY_FIRST_SCREEN, true);
 	fragment.startActivity(intent);
  
    } else {
