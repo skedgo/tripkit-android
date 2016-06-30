@@ -23,7 +23,7 @@ public class ExternalOAuthServiceImpl implements ExternalOAuthService {
     final ExternalOAuthApi externalOAuthApi = ExternalOAuthServiceGenerator.createService(ExternalOAuthApi.class,
                                                                                           baseUrl, clientId, clientSecret);
 
-    return externalOAuthApi.getAccessToken(code, "authorization_code", "offline public rides.read rides.request")
+    return externalOAuthApi.getAccessToken(code, "authorization_code", "request")
         .filter(new Func1<AccessTokenResponse, Boolean>() {
           @Override public Boolean call(AccessTokenResponse accessTokenResponse) {
             return accessTokenResponse != null;
