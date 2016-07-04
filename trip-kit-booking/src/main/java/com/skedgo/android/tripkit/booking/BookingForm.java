@@ -178,14 +178,7 @@ public class BookingForm extends FormField {
     for (FormGroup formGroup : form) {
       for (FormField formField : formGroup.getFields()) {
         if (formField.getId() != null && formField.getValue() != null && formField.getId().equals("scope")) {
-
-          String scope = formField.getValue().toString();
-
-          if (!scope.contains("offline")) {
-            scope = "offline " + scope;
-          }
-
-          return scope;
+          return formField.getValue().toString();
         }
       }
     }

@@ -35,7 +35,7 @@ public class BookingActivity extends AnimatedTransitionActivity implements Fragm
   public static final String KEY_TEMP_BOOKING_FORM = "TempBookingForm";
   public static final String KEY_BOOKING_BUNDLE = "bookingBundle";
 
-  public static BookingClientComponent component;
+  public BookingClientComponent component;
 
   @Inject Bus bus;
 
@@ -116,6 +116,10 @@ public class BookingActivity extends AnimatedTransitionActivity implements Fragm
     } else {
       getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_cross);
     }
+  }
+
+  public BookingClientComponent getBookingClientComponent() {
+    return component;
   }
 
   public void reportProblem() {

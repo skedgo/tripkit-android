@@ -80,7 +80,9 @@ public class BookingFormFragment extends ButterKnifeFragment {
     super.onCreate(savedInstanceState);
     setContentLayout(R.layout.fragment_booking_form);
 
-    BookingActivity.component.inject(this);
+    if (getActivity() instanceof BookingActivity) {
+      ((BookingActivity)getActivity()).getBookingClientComponent().inject(this);
+    }
   }
 
   @Override

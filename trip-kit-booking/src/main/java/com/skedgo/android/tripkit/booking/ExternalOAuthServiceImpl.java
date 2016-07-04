@@ -18,12 +18,13 @@ public class ExternalOAuthServiceImpl implements ExternalOAuthService {
     final String clientId = form.getClientID();
     final String clientSecret = form.getClientSecret();
     final String baseUrl = form.getTokenURL();
+    final String scope = form.getScope();
     final Object serviceId = form.getValue();
     
     final ExternalOAuthApi externalOAuthApi = ExternalOAuthServiceGenerator.createService(ExternalOAuthApi.class,
                                                                                           baseUrl, clientId, clientSecret);
 
-    return externalOAuthApi.getAccessToken(code, "authorization_code", "request")
+    return externalOAuthApi.getAccessToken(code, "authorization_code", scope)
         .filter(new Func1<AccessTokenResponse, Boolean>() {
           @Override public Boolean call(AccessTokenResponse accessTokenResponse) {
             return accessTokenResponse != null;

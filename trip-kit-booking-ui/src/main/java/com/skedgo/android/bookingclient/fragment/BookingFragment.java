@@ -74,7 +74,9 @@ public class BookingFragment extends ButterKnifeFragment implements View.OnClick
     super.onCreate(savedInstanceState);
     setHasOptionsMenu(true);
     setContentLayout(R.layout.fragment_booking);
-    BookingActivity.component.inject(this);
+    if (getActivity() instanceof BookingActivity) {
+      ((BookingActivity)getActivity()).getBookingClientComponent().inject(this);
+    }
 
   }
 
