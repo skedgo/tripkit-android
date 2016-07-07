@@ -193,7 +193,7 @@ public class BookingViewModelImpl implements BookingViewModel {
     List<FormGroup> formGroups = bookingForm.getForm();
     if (!CollectionUtils.isEmpty(formGroups)) {
       FormField bookingStatusField = formGroups.get(0).getFields().get(0);
-      if (bookingStatusField.getValue().equals("Cancelled")) {
+      if ("Cancelled".equals(bookingStatusField.getValue())) {
         return true;
       }
     }

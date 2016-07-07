@@ -4,6 +4,7 @@ import android.net.Uri;
 import android.os.Parcel;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.text.TextUtils;
 
 import com.google.gson.annotations.SerializedName;
 
@@ -125,27 +126,27 @@ public class BookingForm extends FormField {
   }
 
   @Nullable public String getClientID() {
-    return getValueFromField("clientID");
+    return getValueFromField(FormField.CLIENT_ID);
   }
 
   @Nullable public String getClientSecret() {
-    return getValueFromField("clientSecret");
+    return getValueFromField(FormField.CLIENT_SECRET);
   }
 
   @Nullable public String getAuthURL() {
-    return getValueFromField("authURL");
+    return getValueFromField(FormField.AUTH_URL);
   }
 
   @Nullable public String getToken() {
-    return getValueFromField("access_token");
+    return getValueFromField(FormField.ACCESS_TOKEN);
   }
 
   @Nullable public int getExpiresIn() {
-    return Integer.valueOf(getValueFromField("expires_in"));
+    return Integer.valueOf(getValueFromField(FormField.EXPIRES_IN));
   }
 
   @Nullable public String getRefreshToken() {
-    return getValueFromField("refresh_token");
+    return getValueFromField(FormField.REFRESH_TOKEN);
   }
 
   @Nullable public String getTokenURL() {
@@ -154,7 +155,7 @@ public class BookingForm extends FormField {
       for (FormField formField : formGroup.getFields()) {
         String fieldId = formField.getId();
         Object value = formField.getValue();
-        if ("tokenURL".equals(fieldId) && value != null && value.toString().endsWith("/token")) {
+        if (FormField.TOKEN_URL.equals(fieldId) && value != null && value.toString().endsWith("/token")) {
           return value.toString().substring(0, value.toString().length() - "/token".length());
         }
       }
@@ -177,7 +178,7 @@ public class BookingForm extends FormField {
 
     for (FormGroup formGroup : form) {
       for (FormField formField : formGroup.getFields()) {
-        if (formField.getId() != null && formField.getValue() != null && formField.getId().equals("scope")) {
+        if (formField.getId() != null && formField.getValue() != null && formField.getId().equals(FormField.SCOPE)) {
           return formField.getValue().toString();
         }
       }
@@ -198,13 +199,18 @@ public class BookingForm extends FormField {
 
       if (authURL != null && clientID != null && scope != null) {
 
-        return Uri.parse(authURL)
+        Uri.Builder builder = Uri.parse(authURL)
             .buildUpon()
             .appendQueryParameter("client_id", clientID)
             .appendQueryParameter("response_type", "code")
-            .appendQueryParameter("scope", scope)
             .appendQueryParameter("state", UUID.randomUUID().toString())
-            .build();
+            .appendQueryParameter("redirect_uri", getValueFromField(FormField.REDIRECT_URI));
+
+        if (!TextUtils.isEmpty(scope)) {
+          builder = builder.appendQueryParameter("scope", scope);
+        }
+
+        return builder.build();
 
       }
 
@@ -215,14 +221,14 @@ public class BookingForm extends FormField {
   public BookingForm setAuthData(ExternalOAuth externalOAuth) {
     for (FormGroup formGroup : form) {
       for (FormField formField : formGroup.getFields()) {
-        if (formField.getId() != null && formField.getId().equals("access_token")) {
+        if (formField.getId() != null && formField.getId().equals(FormField.ACCESS_TOKEN)) {
           // TODO: refactor FormFields using a design pattern
           ((StringFormField) formField).setValue(externalOAuth.token());
         }
-        if (formField.getId().equals("expires_in")) {
+        if (formField.getId().equals(FormField.EXPIRES_IN)) {
           ((StringFormField) formField).setValue("" + externalOAuth.expiresIn());
         }
-        if (formField.getId().equals("refresh_token") && externalOAuth.refreshToken() != null) {
+        if (formField.getId().equals(FormField.REFRESH_TOKEN) && externalOAuth.refreshToken() != null) {
           ((StringFormField) formField).setValue("" + externalOAuth.refreshToken());
         }
       }

@@ -28,7 +28,7 @@ public class OAuth2CallbackHandlerImpl implements OAuth2CallbackHandler {
     this.externalOAuthService = externalOAuthService;
   }
 
-  public Observable<BookingForm> handleURL(Activity activity, Uri uri) {
+  public Observable<BookingForm> handleURL(Activity activity, Uri uri, String callback) {
 
     // get temp booking form
     SharedPreferences prefs = activity.getSharedPreferences(BookingActivity.KEY_TEMP_BOOKING, Activity.MODE_PRIVATE);
@@ -53,7 +53,7 @@ public class OAuth2CallbackHandlerImpl implements OAuth2CallbackHandler {
       if (code != null) {
         // get access token
 
-        return externalOAuthService.getAccessToken(form, code, "authorization_code")
+        return externalOAuthService.getAccessToken(form, code, "authorization_code", callback)
             .flatMap(new Func1<ExternalOAuth, Observable<BookingForm>>() {
               @Override public Observable<BookingForm> call(ExternalOAuth externalOAuth) {
                 return Observable.just(form.setAuthData(externalOAuth));
