@@ -59,7 +59,7 @@ public class ExternalOAuthApiTest {
         .build();
 
     TestSubscriber<AccessTokenResponse> subscriber = new TestSubscriber<>();
-    externalOAuthApi.getAccessToken("", "", "")
+    externalOAuthApi.getAccessToken("", "", "","","","")
         .subscribe(subscriber);
     subscriber.awaitTerminalEvent();
 
