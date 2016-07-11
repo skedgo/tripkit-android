@@ -3,8 +3,9 @@ package com.skedgo.android.tripkit.booking.viewmodel;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.skedgo.android.common.rx.Var;
-import com.skedgo.android.tripkit.booking.BookingApi;
 import com.skedgo.android.tripkit.booking.BookingForm;
+import com.skedgo.android.tripkit.booking.BookingService;
+import com.skedgo.android.tripkit.booking.ExternalOAuth;
 import com.skedgo.android.tripkit.booking.FormField;
 import com.skedgo.android.tripkit.booking.FormFieldJsonAdapter;
 import com.skedgo.android.tripkit.booking.FormGroup;
@@ -16,6 +17,7 @@ import org.apache.commons.collections4.CollectionUtils;
 import java.util.List;
 
 import rx.Observable;
+import rx.Subscriber;
 import rx.functions.Action0;
 import rx.functions.Action1;
 import rx.functions.Actions;
@@ -24,15 +26,15 @@ import static rx.android.schedulers.AndroidSchedulers.mainThread;
 
 public class BookingViewModelImpl implements BookingViewModel {
   private static final int TIME_RETRY = 3;
-  private final BookingApi bookingApi;
+  private final BookingService bookingService;
   private Var<Param> nextBookingForm = Var.create();
   private Var<BookingForm> bookingForm = Var.create();
   private Var<Boolean> isDone = Var.create();
   private Var<Boolean> isFetching = Var.create(false);
   private Param param;
 
-  public BookingViewModelImpl(BookingApi bookingApi) {
-    this.bookingApi = bookingApi;
+  public BookingViewModelImpl(BookingService bookingService) {
+    this.bookingService = bookingService;
   }
 
   public static Gson createGson() {
@@ -64,7 +66,7 @@ public class BookingViewModelImpl implements BookingViewModel {
     }
     if (param.getMethod().equals(LinkFormField.METHOD_POST)) {
       this.param = param;
-      return bookingApi.postFormAsync(param.getUrl(), param.postBody())
+      return bookingService.postFormAsync(param.getUrl(), param.postBody())
           .retry(TIME_RETRY)
           .observeOn(mainThread())
           .doOnNext(new Action1<BookingForm>() {
@@ -86,7 +88,7 @@ public class BookingViewModelImpl implements BookingViewModel {
             }
           });
     } else {
-      return bookingApi.getFormAsync(param.getUrl())
+      return bookingService.getFormAsync(param.getUrl())
           .retry(TIME_RETRY)
           .observeOn(mainThread())
           .doOnNext(bookingForm)
@@ -108,6 +110,10 @@ public class BookingViewModelImpl implements BookingViewModel {
   @Override
   public Observable<Boolean> isFetching() {
     return isFetching.observe();
+  }
+
+  @Override public Param paramFrom(BookingForm form) {
+    return ParamImpl.create(form);
   }
 
   @Override
@@ -152,6 +158,32 @@ public class BookingViewModelImpl implements BookingViewModel {
   public Observable<Boolean> performAction(LinkFormField linkFormField) {
     nextBookingForm.put(ParamImpl.create(linkFormField));
     return Observable.just(false);
+  }
+
+  @Override
+  public Observable<Boolean> needsAuthentication(final BookingForm form){
+
+    return Observable.create(new Observable.OnSubscribe<Boolean>() {
+      @Override public void call(final Subscriber<? super Boolean> subscriber) {
+        bookingService.getExternalOauth(form.getValue().toString()).subscribe(new Action1<ExternalOAuth>() {
+          @Override public void call(ExternalOAuth externalOAuth) {
+
+            if (externalOAuth != null) {
+              form.setAuthData(externalOAuth);
+              subscriber.onNext(false);
+            } else {
+              subscriber.onNext(true);
+            }
+
+          }
+        }, new Action1<Throwable>() {
+          @Override public void call(Throwable throwable) {
+            subscriber.onNext(true);
+          }
+        });
+      }
+    });
+
   }
 
   private boolean canceled(BookingForm bookingForm) {
