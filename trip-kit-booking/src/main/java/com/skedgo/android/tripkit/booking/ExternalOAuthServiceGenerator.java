@@ -2,6 +2,9 @@ package com.skedgo.android.tripkit.booking;
 
 import android.util.Base64;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+
 import java.io.IOException;
 
 import okhttp3.Interceptor;
@@ -10,7 +13,9 @@ import okhttp3.Request;
 import okhttp3.Response;
 import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Retrofit;
+import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
+import rx.schedulers.Schedulers;
 
 public class ExternalOAuthServiceGenerator {
 
@@ -28,8 +33,8 @@ public class ExternalOAuthServiceGenerator {
           Request original = chain.request();
 
           Request.Builder requestBuilder = original.newBuilder()
-              .header("Authorization", basic)
-              .header("Accept", "application/json")
+              .header("authorization", basic)
+              .header("accept-encoding", "gzip")
               .method(original.method(), original.body());
 
           Request request = requestBuilder.build();
@@ -42,11 +47,15 @@ public class ExternalOAuthServiceGenerator {
       logging.setLevel(HttpLoggingInterceptor.Level.BODY);
       httpClient.interceptors().add(logging);
     }
-
+    final Gson gson = new GsonBuilder()
+        .registerTypeAdapterFactory(new GsonAdaptersAccessTokenResponse())
+        .create();
+    
     Retrofit.Builder builder =
         new Retrofit.Builder()
             .baseUrl(baseUrl + "/")
-            .addConverterFactory(GsonConverterFactory.create());
+            .addConverterFactory(GsonConverterFactory.create(gson))
+            .addCallAdapterFactory(RxJavaCallAdapterFactory.createWithScheduler(Schedulers.io()));
 
     OkHttpClient client = httpClient.build();
     Retrofit retrofit = builder.client(client).build();

@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.skedgo.android.bookingclient.view.StepperView xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:tools="http://schemas.android.com/tools"
+  android:layout_width="match_parent"
+  android:layout_height="wrap_content"
+  android:gravity="end|center_vertical"
+  android:orientation="horizontal"
+  android:paddingBottom="14dp"
+  android:paddingLeft="@dimen/spacing_normal"
+  android:paddingRight="@dimen/spacing_normal"
+  android:paddingTop="14dp">
+
+  <LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_centerVertical="true"
+    android:layout_weight="1"
+    android:orientation="vertical">
+
+    <TextView
+      android:id="@+id/titleView"
+      style="@style/TextStyleTitle"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      tools:text="Title" />
+
+    <TextView
+      android:id="@+id/subtitleView"
+      style="@style/TextStyleValue"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:ellipsize="marquee"
+      android:singleLine="true"
+      tools:text="Subtitle" />
+  </LinearLayout>
+
+  <ImageButton
+    android:id="@+id/decrementButton"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_weight="0"
+    android:background="?attr/selectableItemBackground"
+    android:padding="@dimen/spacing_small"
+    android:src="@drawable/ic_minus" />
+
+  <TextView
+    android:id="@+id/valueView"
+    style="@style/TextStyleValue"
+    android:layout_width="24dp"
+    android:layout_height="wrap_content"
+    android:ellipsize="marquee"
+    android:gravity="center_horizontal"
+    android:singleLine="true"
+    tools:text="0" />
+
+  <ImageButton
+    android:id="@+id/incrementButton"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_weight="0"
+    android:background="?attr/selectableItemBackground"
+    android:padding="@dimen/spacing_small"
+    android:src="@drawable/ic_plus" />
+</com.skedgo.android.bookingclient.view.StepperView>

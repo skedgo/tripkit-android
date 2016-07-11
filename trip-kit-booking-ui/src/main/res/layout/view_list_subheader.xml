@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TextView
+  fontPath="@string/font_medium"
+  xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:tools="http://schemas.android.com/tools"
+  android:layout_width="match_parent"
+  android:layout_height="@dimen/v4_booking_form_field_single_line_height"
+  android:gravity="center_vertical"
+  android:paddingLeft="@dimen/spacing_normal"
+  android:paddingRight="@dimen/spacing_normal"
+  android:textColor="@color/v4_description_text"
+  android:textSize="14sp"
+  tools:text="Battleship" />

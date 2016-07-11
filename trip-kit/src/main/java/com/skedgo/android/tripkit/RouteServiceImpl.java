@@ -139,6 +139,7 @@ final class RouteServiceImpl implements RouteService {
     options.put("v", "12");
     options.put("tt", Integer.toString(transferTime));
     options.put("ws", Integer.toString(walkingSpeed));
+    options.put("bsb", 1);
     if (query.isInterRegional()) {
       options.put("ir", "1");
     }
@@ -168,7 +169,13 @@ final class RouteServiceImpl implements RouteService {
     // TODO: Write tests to assert the logic of url failover.
     return Observable.from(urls)
         .concatMap(new Func1<String, Observable<RoutingResponse>>() {
-          @Override public Observable<RoutingResponse> call(final String url) {
+          @Override public Observable<RoutingResponse> call(String url) {
+
+            if (BuildConfig.DEBUG) {
+              // Currently, booking external oauth works only with this server
+              url = "https://baryogenesis.buzzhives.com/satapp-beta";
+            }
+           
             return fetchRoutesPerUrlAsync(url, modes, excludedTransitModes, options);
           }
         })

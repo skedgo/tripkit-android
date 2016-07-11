@@ -1,6 +1,5 @@
 package com.skedgo.android.tripkit.booking;
 
-import android.content.Context;
 import android.database.sqlite.SQLiteOpenHelper;
 
 import com.google.gson.Gson;
@@ -10,8 +9,6 @@ import com.skedgo.android.tripkit.booking.viewmodel.AuthenticationViewModel;
 import com.skedgo.android.tripkit.booking.viewmodel.AuthenticationViewModelImpl;
 import com.skedgo.android.tripkit.booking.viewmodel.BookingViewModel;
 import com.skedgo.android.tripkit.booking.viewmodel.BookingViewModelImpl;
-
-import javax.inject.Singleton;
 
 import dagger.Module;
 import dagger.Provides;
@@ -81,7 +78,7 @@ public class BookingModule {
   }
 
   @Provides ExternalOAuthStore getExternalOAuthStore(SQLiteOpenHelper databaseHelper, ExternalOAuthEntityAdapter adapter) {
-    return new ExternalOAuthStoreImpl(TripKit.singleton().configs().context(), databaseHelper, adapter);
+    return new ExternalOAuthStoreImpl(databaseHelper, adapter);
   }
 
   @Provides SQLiteOpenHelper databaseHelper() {

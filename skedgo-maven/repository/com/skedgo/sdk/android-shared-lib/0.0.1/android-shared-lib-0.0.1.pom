@@ -8,45 +8,9 @@
   <packaging>aar</packaging>
   <dependencies>
     <dependency>
-      <groupId>com.squareup.okhttp</groupId>
-      <artifactId>okhttp</artifactId>
-      <version>2.4.0</version>
-      <scope>compile</scope>
-    </dependency>
-    <dependency>
-      <groupId>io.reactivex</groupId>
-      <artifactId>rxandroid</artifactId>
-      <version>0.24.0</version>
-      <scope>compile</scope>
-    </dependency>
-    <dependency>
-      <groupId>com.skedgo.goservices</groupId>
-      <artifactId>transport-icons</artifactId>
-      <version>0.0.1</version>
-      <scope>compile</scope>
-    </dependency>
-    <dependency>
-      <groupId>com.google.code.gson</groupId>
-      <artifactId>gson</artifactId>
-      <version>2.6.1</version>
-      <scope>compile</scope>
-    </dependency>
-    <dependency>
-      <groupId>com.squareup.retrofit</groupId>
-      <artifactId>retrofit</artifactId>
-      <version>1.9.0</version>
-      <scope>compile</scope>
-    </dependency>
-    <dependency>
-      <groupId>com.skedgo.commons</groupId>
-      <artifactId>commons-collections</artifactId>
-      <version>0.0.1</version>
-      <scope>compile</scope>
-    </dependency>
-    <dependency>
-      <groupId>io.reactivex</groupId>
-      <artifactId>rxjava</artifactId>
-      <version>1.1.2</version>
+      <groupId>com.google.android.gms</groupId>
+      <artifactId>play-services-maps</artifactId>
+      <version>8.4.0</version>
       <scope>compile</scope>
     </dependency>
     <dependency>
@@ -62,9 +26,51 @@
       </exclusions>
     </dependency>
     <dependency>
-      <groupId>com.google.android.gms</groupId>
-      <artifactId>play-services-maps</artifactId>
-      <version>8.4.0</version>
+      <groupId>io.reactivex</groupId>
+      <artifactId>rxandroid</artifactId>
+      <version>0.24.0</version>
+      <scope>compile</scope>
+    </dependency>
+    <dependency>
+      <groupId>io.reactivex</groupId>
+      <artifactId>rxjava</artifactId>
+      <version>1.1.2</version>
+      <scope>compile</scope>
+    </dependency>
+    <dependency>
+      <groupId>com.skedgo.commons</groupId>
+      <artifactId>commons-collections</artifactId>
+      <version>0.0.1</version>
+      <scope>compile</scope>
+    </dependency>
+    <dependency>
+      <groupId>com.squareup.okhttp</groupId>
+      <artifactId>okhttp</artifactId>
+      <version>2.4.0</version>
+      <scope>compile</scope>
+    </dependency>
+    <dependency>
+      <groupId>net.danlew</groupId>
+      <artifactId>android.joda</artifactId>
+      <version>2.9.3.1</version>
+      <scope>compile</scope>
+    </dependency>
+    <dependency>
+      <groupId>com.google.code.gson</groupId>
+      <artifactId>gson</artifactId>
+      <version>2.6.1</version>
+      <scope>compile</scope>
+    </dependency>
+    <dependency>
+      <groupId>com.squareup.retrofit</groupId>
+      <artifactId>retrofit</artifactId>
+      <version>1.9.0</version>
+      <scope>compile</scope>
+    </dependency>
+    <dependency>
+      <groupId>com.skedgo.goservices</groupId>
+      <artifactId>transport-icons</artifactId>
+      <version>0.0.1</version>
       <scope>compile</scope>
     </dependency>
     <dependency>
