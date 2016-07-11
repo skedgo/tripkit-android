@@ -1,0 +1,49 @@
+{
+  "realTimeStatus": "IS_REAL_TIME",
+  "realtimeVehicle": {
+    "id": "idVehicle",
+    "lastUpdate": 10,
+    "location": {
+      "lat": 20,
+      "lng": 30,
+      "bearing": 1
+    }
+  },
+  "realtimeAlternativeVehicle": [
+    {
+      "id": "idVehicle",
+      "lastUpdate": 10,
+      "location": {
+        "lat": 20,
+        "lng": 30,
+        "bearing": 1
+      }
+    }
+  ],
+  "shapes": [
+    {
+      "operator": "Sydney Buses",
+      "serviceName": "Epping",
+      "serviceNumber": "290",
+      "serviceTripID": "76396048_20160619_11954",
+      "stops": [
+        {
+          "arrival": 1467295199,
+          "bearing": 111,
+          "code": "2000186",
+          "departure": 1467311700,
+          "lat": -33.86683,
+          "lng": 151.20232,
+          "name": "King Street Wharf, Erskine St"
+        }
+      ],
+      "travelled": true,
+      "waypoints": [
+        -33.8668,
+        151.2023
+      ],
+      "wheelchairAccessible": true
+    }
+  ],
+  "type": "bus"
+}

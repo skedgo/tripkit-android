@@ -171,10 +171,10 @@ final class RouteServiceImpl implements RouteService {
         .concatMap(new Func1<String, Observable<RoutingResponse>>() {
           @Override public Observable<RoutingResponse> call(String url) {
 
-            if (BuildConfig.DEBUG) {
+          //  if (BuildConfig.DEBUG) {
               // Currently, booking external oauth works only with this server
-              url = "https://baryogenesis.buzzhives.com/satapp-beta";
-            }
+             // url = "https://baryogenesis.buzzhives.com/satapp-beta";
+          //  }
            
             return fetchRoutesPerUrlAsync(url, modes, excludedTransitModes, options);
           }
