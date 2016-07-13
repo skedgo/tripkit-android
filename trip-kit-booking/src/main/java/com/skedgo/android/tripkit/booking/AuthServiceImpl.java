@@ -9,6 +9,8 @@ import java.util.List;
 import okhttp3.HttpUrl;
 import retrofit2.http.Url;
 import rx.Observable;
+import rx.functions.Action0;
+import rx.functions.Action1;
 import rx.functions.Func1;
 
 final class AuthServiceImpl implements AuthService {
@@ -30,7 +32,12 @@ final class AuthServiceImpl implements AuthService {
             );
           }
         })
-        .first();
+        .first()
+        .onErrorReturn(new Func1<Throwable, List<AuthProvider>>() {
+          @Override public List<AuthProvider> call(Throwable throwable) {
+            return null;
+          }
+        });
   }
 
   @Override public Observable<List<AuthProvider>> fetchProvidersAsync(@Url HttpUrl url) {
