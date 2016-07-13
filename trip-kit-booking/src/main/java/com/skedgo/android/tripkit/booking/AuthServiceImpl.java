@@ -32,12 +32,7 @@ final class AuthServiceImpl implements AuthService {
             );
           }
         })
-        .first()
-        .onErrorReturn(new Func1<Throwable, List<AuthProvider>>() {
-          @Override public List<AuthProvider> call(Throwable throwable) {
-            return null;
-          }
-        });
+        .first();
   }
 
   @Override public Observable<List<AuthProvider>> fetchProvidersAsync(@Url HttpUrl url) {
