@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.skedgo.android.bookingclient.view.OptionFieldView xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:tools="http://schemas.android.com/tools"
+  android:layout_width="match_parent"
+  android:layout_height="wrap_content"
+  android:background="?attr/selectableItemBackground"
+  android:paddingBottom="14dp"
+  android:paddingLeft="@dimen/spacing_normal"
+  android:paddingRight="@dimen/spacing_normal"
+  android:paddingTop="14dp">
+
+  <TextView
+    android:id="@+id/titleView"
+    style="@style/TextStyleTitle"
+    android:layout_width="0dp"
+    android:layout_height="wrap_content"
+    android:layout_weight="1"
+    tools:text="Primary text" />
+
+  <TextView
+    android:id="@+id/valueView"
+    style="@style/TextStyleTitle"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_below="@+id/titleView"
+    android:layout_marginRight="@dimen/spacing_small"
+    tools:text="Secondary text" />
+
+  <ImageView
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:src="@drawable/ic_arrow_drop_down" />
+</com.skedgo.android.bookingclient.view.OptionFieldView>

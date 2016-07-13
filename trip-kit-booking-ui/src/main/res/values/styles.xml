@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+  <style name="V4.DarkActionBar" parent="V4.Material">
+    <item name="android:windowBackground">@color/v4_bg</item>
+    <item name="actionBarStyle">@style/ActionBar.Solid.V4</item>
+    <item name="actionBarWidgetTheme">@style/LightPopupMenuAndDropDown</item>
+    <item name="actionBarItemBackground">@drawable/v4_selector_actionbar_item_bg</item>
+    <item name="android:screenOrientation">portrait</item>
+    <item name="colorControlActivated">@color/v4_color</item>
+  </style>
+
+  <style name="TextStyleTitle">
+    <item name="android:textSize">16sp</item>
+    <item name="android:textColor">@color/v4_title_text</item>
+    <item name="fontPath">@string/font_light</item>
+    <item name="android:singleLine">true</item>
+    <item name="android:ellipsize">marquee</item>
+  </style>
+
+  <style name="TextStyleValue">
+    <item name="android:textSize">14sp</item>
+    <item name="android:textColor">@color/v4_description_text</item>
+    <item name="fontPath">@string/font_regular</item>
+  </style>
+
+  <style name="LightPopupMenuAndDropDown" parent="V4">
+    <item name="popupMenuStyle">@style/Widget.AppCompat.Light.PopupMenu</item>
+    <item name="dropDownListViewStyle">@style/Widget.AppCompat.Light.ListView.DropDown</item>
+  </style>
+
+</resources>

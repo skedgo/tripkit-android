@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.skedgo.android.bookingclient.view.SwitchView
+  fontPath="@string/font_regular"
+  xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:tools="http://schemas.android.com/tools"
+  android:layout_width="match_parent"
+  android:layout_height="wrap_content"
+  android:background="@null"
+  android:button="@null"
+  android:drawableRight="?android:attr/listChoiceIndicatorMultiple"
+  android:padding="@dimen/spacing_normal"
+  android:textColor="@color/v4_title_text"
+  android:textSize="16sp"
+  tools:text="Title" />
