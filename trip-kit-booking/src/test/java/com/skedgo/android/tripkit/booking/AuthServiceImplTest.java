@@ -42,7 +42,7 @@ public class AuthServiceImplTest {
     when(api.fetchProvidersAsync(
         url
     )).thenReturn(Observable.just(Collections.<AuthProvider>emptyList()));
-    service.fetchProvidersByRegionAsync(region).subscribe();
+    service.fetchProvidersByRegionAsync(region, null).subscribe();
     verify(api).fetchProvidersAsync(eq(url));
   }
 

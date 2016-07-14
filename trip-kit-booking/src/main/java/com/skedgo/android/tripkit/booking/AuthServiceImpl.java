@@ -1,6 +1,7 @@
 package com.skedgo.android.tripkit.booking;
 
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 
 import com.skedgo.android.common.model.Region;
 
@@ -20,16 +21,20 @@ final class AuthServiceImpl implements AuthService {
     this.api = api;
   }
 
-  @Override public Observable<List<AuthProvider>> fetchProvidersByRegionAsync(@NonNull final Region region) {
+  @Override public Observable<List<AuthProvider>> fetchProvidersByRegionAsync(@NonNull final Region region, @Nullable final String mode) {
     return Observable.from(region.getURLs())
         .concatMapDelayError(new Func1<String, Observable<? extends List<AuthProvider>>>() {
           @Override public Observable<? extends List<AuthProvider>> call(String url) {
-            return fetchProvidersAsync(
-                HttpUrl.parse(url).newBuilder()
-                    .addPathSegment("auth")
-                    .addPathSegment(region.getName())
-                    .build()
-            );
+
+            HttpUrl.Builder builder = HttpUrl.parse(url).newBuilder()
+                .addPathSegment("auth")
+                .addPathSegment(region.getName());
+
+            if (mode != null) {
+              builder.addQueryParameter("mode", mode);
+            }
+
+            return fetchProvidersAsync(builder.build());
           }
         })
         .first();
