@@ -32,7 +32,6 @@ import javax.inject.Inject;
 import dagger.Lazy;
 import rx.android.view.ViewActions;
 import rx.functions.Action1;
-import rx.functions.Actions;
 import skedgo.common.view.ButterKnifeFragment;
 
 public class BookingFragment extends ButterKnifeFragment implements View.OnClickListener {
@@ -128,7 +127,14 @@ public class BookingFragment extends ButterKnifeFragment implements View.OnClick
 
     viewModel.loadForm(param)
         .takeUntil(lifecycle().onDestroy())
-        .subscribe(Actions.empty(), new Action1<Throwable>() {
+        .subscribe(new Action1<BookingForm>() {
+          @Override public void call(BookingForm form) {
+            // Server can return a null form indicating end of the process, in authentication for example
+            if (form == null)            {
+              getActivity().finish();
+            }
+          }
+        }, new Action1<Throwable>() {
           @Override
           public void call(Throwable error) {
             LogUtils.LOGE(TAG_BOOKING_FORM, "Error on booking", error);

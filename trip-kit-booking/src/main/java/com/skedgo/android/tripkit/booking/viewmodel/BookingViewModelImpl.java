@@ -72,7 +72,10 @@ public class BookingViewModelImpl implements BookingViewModel {
           .doOnNext(new Action1<BookingForm>() {
             @Override
             public void call(BookingForm bookingFormItem) {
-              bookingForm.put(bookingFormItem);
+              // Server can return an empty form
+              if (bookingFormItem != null) {
+                bookingForm.put(bookingFormItem);
+              }
             }
           })
           .doOnRequest(new Action1<Long>() {
