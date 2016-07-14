@@ -72,7 +72,10 @@ public class BookingViewModelImpl implements BookingViewModel {
           .doOnNext(new Action1<BookingForm>() {
             @Override
             public void call(BookingForm bookingFormItem) {
-              bookingForm.put(bookingFormItem);
+              // Server can return an empty form
+              if (bookingFormItem != null) {
+                bookingForm.put(bookingFormItem);
+              }
             }
           })
           .doOnRequest(new Action1<Long>() {
@@ -193,7 +196,7 @@ public class BookingViewModelImpl implements BookingViewModel {
     List<FormGroup> formGroups = bookingForm.getForm();
     if (!CollectionUtils.isEmpty(formGroups)) {
       FormField bookingStatusField = formGroups.get(0).getFields().get(0);
-      if (bookingStatusField.getValue().equals("Cancelled")) {
+      if ("Cancelled".equals(bookingStatusField.getValue())) {
         return true;
       }
     }

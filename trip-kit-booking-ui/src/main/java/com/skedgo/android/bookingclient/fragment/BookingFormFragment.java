@@ -1,6 +1,9 @@
 package com.skedgo.android.bookingclient.fragment;
 
 import android.app.Activity;
+import android.content.Intent;
+import android.content.SharedPreferences;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
@@ -12,6 +15,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.google.gson.Gson;
 import com.skedgo.android.bookingclient.R;
 import com.skedgo.android.bookingclient.activity.BookingActivity;
 import com.skedgo.android.bookingclient.view.DateTimeFieldView;
@@ -55,9 +59,11 @@ public class BookingFormFragment extends ButterKnifeFragment {
 
   @Inject Bus bus;
   @Inject Picasso picasso;
+  @Inject Gson gson;
   Button actionButton;
   ViewGroup formItemsView;
   LayoutInflater inflater;
+  private BookingFormFragmentListener listener;
 
   public static BookingFormFragment newInstance(BookingForm form) {
     final Bundle args = new Bundle();
@@ -79,8 +85,10 @@ public class BookingFormFragment extends ButterKnifeFragment {
   public void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setContentLayout(R.layout.fragment_booking_form);
-
-    BookingActivity.component.inject(this);
+    if (getActivity() instanceof BookingActivity) {
+      ((BookingActivity) getActivity()).getBookingClientComponent().inject(this);
+      listener = ((BookingActivity) getActivity());
+    }
   }
 
   @Override
@@ -97,7 +105,8 @@ public class BookingFormFragment extends ButterKnifeFragment {
   }
 
   private void showBookingTitle(BookingForm form) {
-    bus.post(new UpdateTitleEvent(form));
+    listener.updateTitleEvent(form);
+
   }
 
   private void showBookingForm(final BookingForm form) {
@@ -175,7 +184,20 @@ public class BookingFormFragment extends ButterKnifeFragment {
           linkFieldView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-              bus.post(new LinkFormFieldClickedEvent(linkField));
+              if (LinkFormField.METHOD_EXTERNAL.equals(linkField.getMethod())) {
+                // save temp booking
+                SharedPreferences prefs = getActivity().getSharedPreferences(BookingActivity.KEY_TEMP_BOOKING, Activity.MODE_PRIVATE);
+                SharedPreferences.Editor prefsEditor = prefs.edit();
+
+                String json = gson.toJson(form);
+                prefsEditor.putString(BookingActivity.KEY_TEMP_BOOKING_FORM, json);
+                prefsEditor.apply();
+
+                Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(linkField.getValue()));
+                startActivity(intent);
+              } else {
+                bus.post(new LinkFormFieldClickedEvent(linkField));
+              }
             }
           });
           formItemsView.addView(linkFieldView);
@@ -255,12 +277,8 @@ public class BookingFormFragment extends ButterKnifeFragment {
         .commit();
   }
 
-  public static class UpdateTitleEvent {
-    public final BookingForm form;
-
-    public UpdateTitleEvent(BookingForm form) {
-      this.form = form;
-    }
+  public interface BookingFormFragmentListener {
+    void updateTitleEvent(BookingForm form);
   }
 
   public static class PerformActionEvent {

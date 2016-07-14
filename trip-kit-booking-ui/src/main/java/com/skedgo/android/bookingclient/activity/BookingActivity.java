@@ -16,15 +16,12 @@ import com.skedgo.android.bookingclient.module.DaggerBookingClientComponent;
 import com.skedgo.android.tripkit.booking.BookingForm;
 import com.skedgo.android.tripkit.booking.viewmodel.BookingViewModel;
 import com.skedgo.android.tripkit.booking.viewmodel.ParamImpl;
-import com.squareup.otto.Bus;
-import com.squareup.otto.Subscribe;
-
-import javax.inject.Inject;
 
 import skedgo.anim.AnimatedTransitionActivity;
 import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 
-public class BookingActivity extends AnimatedTransitionActivity implements FragmentManager.OnBackStackChangedListener {
+public class BookingActivity extends AnimatedTransitionActivity implements
+    FragmentManager.OnBackStackChangedListener, BookingFormFragment.BookingFormFragmentListener {
   public static final String ACTION_BOOK = "com.skedgo.android.bookingclient.ACTION_BOOK";
   public static final String ACTION_BOOK2 = "com.skedgo.android.bookingclient.ACTION_BOOK2";
   public static final String ACTION_BOOK_AFTER_OAUTH = "com.skedgo.android.bookingclient.ACTION_BOOK_AFTER_OAUTH";
@@ -35,22 +32,10 @@ public class BookingActivity extends AnimatedTransitionActivity implements Fragm
   public static final String KEY_TEMP_BOOKING_FORM = "TempBookingForm";
   public static final String KEY_BOOKING_BUNDLE = "bookingBundle";
 
-  public static BookingClientComponent component;
-
-  @Inject Bus bus;
+  public BookingClientComponent component;
 
   @Override protected void attachBaseContext(Context newBase) {
     super.attachBaseContext(CalligraphyContextWrapper.wrap(newBase));
-  }
-
-  @Override public void onStart() {
-    super.onStart();
-    bus.register(this);
-  }
-
-  @Override protected void onStop() {
-    super.onStop();
-    bus.unregister(this);
   }
 
   @Override
@@ -60,8 +45,6 @@ public class BookingActivity extends AnimatedTransitionActivity implements Fragm
     component = DaggerBookingClientComponent.builder()
         .bookingClientModule(new BookingClientModule(getApplicationContext()))
         .build();
-
-    component.inject(this);
 
     setupActionBar();
 
@@ -91,11 +74,11 @@ public class BookingActivity extends AnimatedTransitionActivity implements Fragm
     }
   }
 
-  @Subscribe
-  public void updateTitleEvent(BookingFormFragment.UpdateTitleEvent event) {
+  @Override
+  public void updateTitleEvent(BookingForm form) {
     ActionBar actionBar = getSupportActionBar();
     if (actionBar != null) {
-      actionBar.setTitle(event.form.getTitle());
+      actionBar.setTitle(form.getTitle());
     }
   }
 
@@ -116,6 +99,10 @@ public class BookingActivity extends AnimatedTransitionActivity implements Fragm
     } else {
       getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_cross);
     }
+  }
+
+  public BookingClientComponent getBookingClientComponent() {
+    return component;
   }
 
   public void reportProblem() {

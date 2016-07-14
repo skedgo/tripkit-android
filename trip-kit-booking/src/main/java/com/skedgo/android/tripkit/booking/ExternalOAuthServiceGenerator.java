@@ -17,11 +17,12 @@ import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
 import rx.schedulers.Schedulers;
 
-public class ExternalOAuthServiceGenerator {
+public abstract class ExternalOAuthServiceGenerator {
 
   private static OkHttpClient.Builder httpClient = new OkHttpClient.Builder();
 
-  public static <S> S createService(Class<S> serviceClass, String baseUrl, String username, String password) {
+  public static <S> S createService(Class<S> serviceClass, String baseUrl, String username, String password,
+                                    final boolean credentialsInHeader) {
     if (username != null && password != null) {
       String credentials = username + ":" + password;
       final String basic =
@@ -32,10 +33,17 @@ public class ExternalOAuthServiceGenerator {
         public Response intercept(Interceptor.Chain chain) throws IOException {
           Request original = chain.request();
 
-          Request.Builder requestBuilder = original.newBuilder()
-              .header("authorization", basic)
-              .header("accept-encoding", "gzip")
-              .method(original.method(), original.body());
+          Request.Builder requestBuilder = original.newBuilder();
+
+          if (credentialsInHeader) {
+            requestBuilder = requestBuilder.header("authorization", basic)
+                .header("accept-encoding", "gzip");
+          } else {
+            requestBuilder = requestBuilder.header("Content-Type", "application/x-www-form-urlencoded")
+                .header("Accept", "application/json");
+          }
+
+          requestBuilder.method(original.method(), original.body());
 
           Request request = requestBuilder.build();
           return chain.proceed(request);
@@ -50,7 +58,7 @@ public class ExternalOAuthServiceGenerator {
     final Gson gson = new GsonBuilder()
         .registerTypeAdapterFactory(new GsonAdaptersAccessTokenResponse())
         .create();
-    
+
     Retrofit.Builder builder =
         new Retrofit.Builder()
             .baseUrl(baseUrl + "/")
@@ -61,4 +69,5 @@ public class ExternalOAuthServiceGenerator {
     Retrofit retrofit = builder.client(client).build();
     return retrofit.create(serviceClass);
   }
+
 }
