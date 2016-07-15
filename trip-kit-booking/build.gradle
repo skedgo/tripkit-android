@@ -18,6 +18,10 @@ android {
   }
 
   buildTypes {
+    debug {
+      testCoverageEnabled = true
+    }
+
     release {
       minifyEnabled false
       proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
@@ -29,6 +33,10 @@ android {
     exclude 'LICENSE'
     exclude 'NOTICE'
     exclude 'asm-license.txt'
+
+    // To avoid conflicts with ASL.
+    // We don't utilize ServiceLoader, so this is unneeded.
+    exclude 'META-INF/services/com.google.gson.TypeAdapterFactory'
   }
 }
 
