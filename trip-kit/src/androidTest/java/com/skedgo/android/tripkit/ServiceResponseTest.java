@@ -12,12 +12,12 @@ import java.io.InputStreamReader;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class TransitServiceTest extends AndroidTestCase {
+public class ServiceResponseTest extends AndroidTestCase {
   public void testSerialize() throws IOException {
     final InputStream stream = getContext().getAssets().open("ServiceResponseTest.json");
-    final TransitService response = new Gson().fromJson(
+    final ServiceResponse response = new Gson().fromJson(
         new JsonReader(new InputStreamReader(stream)),
-        TransitService.class
+        ServiceResponse.class
     );
 
     assertThat(response).isNotNull();
