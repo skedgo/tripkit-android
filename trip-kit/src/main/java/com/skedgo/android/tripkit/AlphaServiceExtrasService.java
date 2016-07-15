@@ -44,7 +44,7 @@ class AlphaServiceExtrasService implements ServiceExtrasService {
         .flatMap(new Func1<ServiceResponse, Observable<Shape>>() {
           @Override
           public Observable<Shape> call(ServiceResponse response) {
-            return Observable.from(response.getShapes());
+            return Observable.from(response.shapes());
           }
         })
         .first()
