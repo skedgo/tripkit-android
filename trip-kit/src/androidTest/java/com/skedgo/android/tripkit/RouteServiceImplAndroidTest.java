@@ -24,7 +24,7 @@ import rx.functions.Func1;
 import static org.assertj.core.api.Assertions.assertThat;
 
 @RunWith(AndroidJUnit4.class)
-public class RouteServiceImplTest {
+public class RouteServiceImplAndroidTest {
   private TripKit kit;
 
   @Before public void before() {
