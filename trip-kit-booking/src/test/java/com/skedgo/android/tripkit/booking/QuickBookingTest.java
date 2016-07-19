@@ -3,7 +3,6 @@ package com.skedgo.android.tripkit.booking;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonObject;
-import com.skedgo.android.common.test.util.Parcels;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
