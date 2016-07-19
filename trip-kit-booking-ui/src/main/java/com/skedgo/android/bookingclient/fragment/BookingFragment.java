@@ -74,7 +74,7 @@ public class BookingFragment extends ButterKnifeFragment implements View.OnClick
     setHasOptionsMenu(true);
     setContentLayout(R.layout.fragment_booking);
     if (getActivity() instanceof BookingActivity) {
-      ((BookingActivity)getActivity()).getBookingClientComponent().inject(this);
+      ((BookingActivity) getActivity()).getBookingClientComponent().inject(this);
     }
 
   }
@@ -130,7 +130,7 @@ public class BookingFragment extends ButterKnifeFragment implements View.OnClick
         .subscribe(new Action1<BookingForm>() {
           @Override public void call(BookingForm form) {
             // Server can return a null form indicating end of the process, in authentication for example
-            if (form == null)            {
+            if (form == null) {
               getActivity().finish();
             }
           }
