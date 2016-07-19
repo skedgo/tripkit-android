@@ -1,5 +1,6 @@
 package com.skedgo.android.tripkit.booking;
 
+import com.skedgo.android.common.model.ModeInfo;
 import com.skedgo.android.common.model.Region;
 
 import org.junit.Before;
@@ -43,6 +44,20 @@ public class AuthServiceImplTest {
         url
     )).thenReturn(Observable.just(Collections.<AuthProvider>emptyList()));
     service.fetchProvidersByRegionAsync(region, null).subscribe();
+    verify(api).fetchProvidersAsync(eq(url));
+  }
+
+  @Test public void fetchingProvidersByModeTest() {
+    final Region region = mock(Region.class);
+    when(region.getURLs()).thenReturn(new ArrayList<>(
+        Collections.singletonList("https://tripgo.skedgo.com/satapp/")
+    ));
+    when(region.getName()).thenReturn("The_Ark");
+    final HttpUrl url = HttpUrl.parse("https://tripgo.skedgo.com/satapp/auth/The_Ark?mode=uber");
+    when(api.fetchProvidersAsync(
+        url
+    )).thenReturn(Observable.just(Collections.<AuthProvider>emptyList()));
+    service.fetchProvidersByRegionAsync(region, "uber").subscribe();
     verify(api).fetchProvidersAsync(eq(url));
   }
 
