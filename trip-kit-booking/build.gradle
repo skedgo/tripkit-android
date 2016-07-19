@@ -6,8 +6,8 @@ group = "com.skedgo.sdk"
 version = "1.0b2"
 
 android {
-  compileSdkVersion rootProject.ext.CompileSdkVersion
-  buildToolsVersion rootProject.ext.BuildToolsVersion
+  compileSdkVersion 23
+  buildToolsVersion "23.0.3"
 
   defaultConfig {
     minSdkVersion 10
@@ -54,13 +54,13 @@ dependencies {
 
   compile project(':trip-kit')
 
-  compile "com.squareup.okhttp3:okhttp:${rootProject.ext.OkHttp3Version}"
-  compile "com.squareup.okhttp3:logging-interceptor:${rootProject.ext.OkHttp3Version}"
-  compile "com.squareup.retrofit2:converter-gson:${rootProject.ext.RetrofitVersion}"
-  compile("com.squareup.retrofit2:adapter-rxjava:${rootProject.ext.RetrofitVersion}") {
+  compile "com.squareup.okhttp3:okhttp:3.2.0"
+  compile "com.squareup.okhttp3:logging-interceptor:3.2.0"
+  compile "com.squareup.retrofit2:converter-gson:2.0.2"
+  compile("com.squareup.retrofit2:adapter-rxjava:2.0.2") {
     exclude module: 'rxjava'
   }
-  compile("com.squareup.retrofit2:retrofit:${rootProject.ext.RetrofitVersion}") {
+  compile("com.squareup.retrofit2:retrofit:2.0.2") {
     // Exclude Retrofit’s OkHttp peer-dependency module and define our own module import.
     exclude module: 'okhttp'
   }
@@ -70,11 +70,11 @@ dependencies {
   apt 'com.google.dagger:dagger-compiler:2.0.1'
   provided 'org.glassfish:javax.annotation:10.0-b28'
 
-  apt "org.immutables:value:${rootProject.ext.ImmutablesVersion}"
-  apt "org.immutables:gson:${rootProject.ext.ImmutablesVersion}"
-  provided "org.immutables:gson:${rootProject.ext.ImmutablesVersion}"
-  provided "org.immutables:value:${rootProject.ext.ImmutablesVersion}"
-  provided "org.immutables:builder:${rootProject.ext.ImmutablesVersion}"
+  apt "org.immutables:value:2.1.18"
+  apt "org.immutables:gson:2.1.18"
+  provided "org.immutables:gson:2.1.18"
+  provided "org.immutables:value:2.1.18"
+  provided "org.immutables:builder:2.1.18"
 }
 
 /**

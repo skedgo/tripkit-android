@@ -6,8 +6,8 @@ group = "com.skedgo.sdk"
 version = "1.1b5"
 
 android {
-  compileSdkVersion rootProject.ext.CompileSdkVersion
-  buildToolsVersion rootProject.ext.BuildToolsVersion
+  compileSdkVersion 23
+  buildToolsVersion "23.0.3"
 
   defaultConfig {
     minSdkVersion 10
@@ -51,8 +51,8 @@ dependencies {
   testCompile project(':libraries:common-test-utils')
 
   // To take advantage of AndroidJUnitRunner.
-  androidTestCompile "com.android.support.test:runner:${rootProject.ext.SupportTestRunnerVersion}"
-  androidTestCompile "com.android.support.test:rules:${rootProject.ext.SupportTestRunnerVersion}"
+  androidTestCompile "com.android.support.test:runner:0.4.1"
+  androidTestCompile "com.android.support.test:rules:0.4.1"
 
   // To use Mockito in Android"s instrumentation tests.
   androidTestCompile "org.assertj:assertj-core:1.7.0"
@@ -62,22 +62,22 @@ dependencies {
   androidTestCompile "com.crittercism.dexmaker:dexmaker-dx:1.4"
 
   compile project(":libraries:android-shared-lib")
-  compile "com.google.android.gms:play-services-gcm:${rootProject.ext.PlayServicesVersion}"
+  compile "com.google.android.gms:play-services-gcm:8.4.0"
 
-  apt "org.immutables:value:${rootProject.ext.ImmutablesVersion}"
-  apt "org.immutables:gson:${rootProject.ext.ImmutablesVersion}"
-  provided "org.immutables:gson:${rootProject.ext.ImmutablesVersion}"
-  provided "org.immutables:value:${rootProject.ext.ImmutablesVersion}"
-  provided "org.immutables:builder:${rootProject.ext.ImmutablesVersion}"
+  apt "org.immutables:value:2.1.18"
+  apt "org.immutables:gson:2.1.18"
+  provided "org.immutables:gson:2.1.18"
+  provided "org.immutables:value:2.1.18"
+  provided "org.immutables:builder:2.1.18"
 
   compile 'com.github.skedgo:sqlite-utils:v1.0'
-  compile "com.squareup.okhttp3:okhttp:${rootProject.ext.OkHttp3Version}"
-  compile "com.squareup.okhttp3:logging-interceptor:${rootProject.ext.OkHttp3Version}"
-  compile "com.squareup.retrofit2:converter-gson:${rootProject.ext.RetrofitVersion}"
-  compile("com.squareup.retrofit2:adapter-rxjava:${rootProject.ext.RetrofitVersion}") {
+  compile "com.squareup.okhttp3:okhttp:3.2.0"
+  compile "com.squareup.okhttp3:logging-interceptor:3.2.0"
+  compile "com.squareup.retrofit2:converter-gson:2.0.2"
+  compile("com.squareup.retrofit2:adapter-rxjava:2.0.2") {
     exclude module: 'rxjava'
   }
-  compile("com.squareup.retrofit2:retrofit:${rootProject.ext.RetrofitVersion}") {
+  compile("com.squareup.retrofit2:retrofit:2.0.2") {
     // Exclude Retrofit’s OkHttp peer-dependency module and define our own module import.
     exclude module: 'okhttp'
   }
