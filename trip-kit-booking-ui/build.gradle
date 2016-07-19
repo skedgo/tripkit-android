@@ -6,8 +6,8 @@ group = "com.skedgo.sdk"
 version = "1.0b1"
 
 android {
-  compileSdkVersion rootProject.ext.CompileSdkVersion
-  buildToolsVersion rootProject.ext.BuildToolsVersion
+  compileSdkVersion 23
+  buildToolsVersion "23.0.3"
 
   defaultConfig {
     minSdkVersion 10
