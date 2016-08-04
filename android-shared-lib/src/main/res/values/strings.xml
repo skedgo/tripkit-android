@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="api_authority">http://tripgo.skedgo.com/satapp</string>
+    <string name="api_skedgoify">/skedgoify.json</string>
+    <string name="api_routing">/routing.json</string>
+    <string name="api_geocode">/geocode.json</string>
+    <string name="api_regions">/regions.json</string>
+    <string name="api_stops">/stops.json</string>
+    <string name="api_departures">/departures.json</string>
+    <string name="api_latest">/latest.json</string>
+    <string name="api_report_problem">/routingFeedback.json</string>
+    <string name="api_service">/service.json</string>
+    <string name="api_persist_trip">/persist_trip.json</string>
+    <string name="api_trip">/trip.json</string>
+    <string name="api_waypoint">/waypoint.json</string>
+
+    <string name="tripgo_api_version_number">@string/tripgo_api_version_dev</string>
+    <string name="tripgo_api_version_stable">10</string>
+    <string name="tripgo_api_version_dev">11</string>
+</resources>
