@@ -1,5 +1,4 @@
 apply plugin: "com.android.library"
-apply plugin: "com.github.dcendents.android-maven"
 apply plugin: 'com.neenbedankt.android-apt'
 
 group = "com.skedgo.sdk"
@@ -70,21 +69,10 @@ dependencies {
   // This is a folk of 'org.apache.commons:commons-collections4'
   // containing only bare essentials for TripGo.
   // Source code is located at /libraries/commons-collections.
-  compile 'com.skedgo.commons:commons-collections:0.0.1'
+  compile project(":commons-collections")
   apt "org.immutables:value:2.1.18"
   apt "org.immutables:gson:2.1.18"
   provided 'org.immutables:gson:2.1.18'
   provided 'org.immutables:value:2.1.18'
   provided 'org.immutables:builder:2.1.18'
-}
-
-/**
- * Run with 'gradlew clean test assemble uploadArchives'
- */
-uploadArchives {
-  repositories {
-    mavenDeployer {
-      repository(url: "file://${TripKitMaven}")
-    }
-  }
 }

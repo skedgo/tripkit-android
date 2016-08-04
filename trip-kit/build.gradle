@@ -1,5 +1,4 @@
 apply plugin: "com.android.library"
-apply plugin: "com.github.dcendents.android-maven"
 apply plugin: 'com.neenbedankt.android-apt'
 
 group = "com.skedgo.sdk"
@@ -84,5 +83,5 @@ dependencies {
   compile 'com.google.dagger:dagger:2.0.1'
   apt 'com.google.dagger:dagger-compiler:2.0.1'
   provided 'org.glassfish:javax.annotation:10.0-b28'
-  compile 'com.skedgo.sdk:android-shared-lib:0.0.1'
+  compile project(":android-shared-lib")
 }

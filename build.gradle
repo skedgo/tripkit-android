@@ -8,19 +8,13 @@ buildscript {
   dependencies {
     classpath 'com.android.tools.build:gradle:2.1.2'
     classpath 'com.neenbedankt.gradle.plugins:android-apt:1.8'
-    classpath 'com.github.dcendents:android-maven-gradle-plugin:1.3'
     // NOTE: Do not place your application dependencies here; they belong
     // in the individual module build.gradle files
   }
-}
-ext {
-  TripKitMaven = "${rootDir}/skedgo-maven/repository"
 }
 allprojects {
   repositories {
     jcenter()
     maven { url "https://jitpack.io" }
-    // This is required to use TripKit.
-    maven { url "${rootDir}/skedgo-maven/repository" }
   }
 }
