@@ -1,0 +1,83 @@
+{
+  "region": "AU_NSW_Sydney",
+  "realTimeStamp": 0,
+  "alerts": [
+    {
+      "text": "Unusually high traffic on the route.",
+      "title": "Traffic delay",
+      "hashCode": -805769856,
+      "severity": "warning"
+    }
+  ],
+  "segmentTemplates": [
+    {
+      "to": {
+        "address": "Illawarra Rd near Warburton St",
+        "class": "Location",
+        "lng": 151.15446,
+        "lat": -33.91235
+      },
+      "visibility": "in summary",
+      "hashCode": -462110734,
+      "from": {
+        "class": "Location",
+        "lng": 151.2839,
+        "lat": -33.8005
+      },
+      "type": "unscheduled",
+      "metres": 25063,
+      "travelDirection": 346,
+      "cost": 7.47,
+      "mode": "motorbike",
+      "durationWithoutTraffic": 2115,
+      "action": "Ride Motorbike<DURATION>",
+      "streets": [
+        {
+          "encodedWaypoints": "bthmEisjz[aGaBUj@a@fAk@|Aa@IsAOeBU{Dc@??QhBOfB{@lJKx@En@Kz@a@xDPrC@p@Bn@Ax@CvAAvAEz@GX]dCGb@ObA_@pBCXKPg@fAEXS|AKh@EXKj@E\\@^LdBFdAFbA@jE?jDAx@A^Gr@SrBa@bFc@dGYdDKpAUpCOrBIx@CZKnA_@nEA^CZA\\D`@@Z@F@DTb@v@fEPz@Nr@RfATjAbBjIRjAPx@lApGXhAHh@Lv@\\|ARDz@Pz@NbAPB?p@J`@D\\HRFTFh@XBB`@N^\\BBXXV`@FLPXZn@AAb@xA^xAlAdFA?XvA@AVlAz@jEHTFXNTPVRRRV`@l@??RHZB`@Dd@FfLn@l@Bh@?TMtEs@lB[hAOh@MfA[h@Kn@Cl@Bv@LXDd@H^Lr@\\r@^pFfElBfB`C~BRPPHj@E\\]Vg@Vi@\\Wf@KhATPRb@t@JLRTv@R~BXVBr@TzA|@h@XpAVhAN`AAvAa@\\OhBm@??lAa@z@Sj@I`AQd@AR@nBVv@FPBR?ZCdCSt@AJ?~BRt@F~@N|@JXPn@v@b@p@l@fAzBxDn@jARV`@`@Tb@BZ?ZEz@G`AE|@MlBAp@AzA?~D?bB?|@?pADlABl@@XHb@PdA^|@Xt@@FPb@\\z@P`@d@n@b@h@jBjBrApAXZ~@`ADFt@r@b@h@f@r@^n@NXN\\Tp@^|@A@b@fAf@rAL\\n@~A`@|@tA~Ah@p@p@vATh@Vx@`@nAb@vAx@rCrBlHRdA@lA?lAoAzEm@vBOf@e@dB_@tAW~@K`@c@bBEVEf@Cr@Ax@Ab@A`B?t@YlD??OjCCv@?~@AdA@n@`@[^Cb@VhBdAhCdBrAz@rCnBvAt@lCfAvCv@??bARvB`@lAPr@L|@Fl@FnAAV?Z?p@@j@Bl@@ZBv@DrBJjF@vCErBI`Fu@n@QrBe@rCq@~Cm@~EkAzDcAn@CrAMnAClA?bAL|Cv@jB`A?AlCrA~q@f_@lAb@|@XjBTtCj@??pBd@v@X~@V~D~AjCxA|CzA`D|AbF~A|@Lz@F|@Dt@GxCW`AK^G`BK`EAtBPlA@r@@nA@fBKr@@l@Rn@ZRZd@l@??`@j@Tr@\\~AHjAFz@??@HBx@@\\B`AP~CPpBNz@JbAVtADZPp@Lf@Bl@@n@En@Ah@M`@Sv@a@r@m@x@y@r@_B~@gFjDeCfByA|Ak@~AMb@Kj@KrBKp@Op@c@xA[fAe@tA{@lC}AhH}A|I}A~J_A~F{@xFMtB@~AHjAVdA??bAbDv@zCt@hC|@~CA@dBhEb@~@vClGX\\XZ\\nArAxCx@pBtAxCnAlB`AvA|@dBTn@Nb@Nl@Lf@Hr@Hj@Dv@Bn@HhBJbAFl@J`@TfAHb@Lr@Jx@Dj@DfAR~FLzDRbBZnAh@~AUBi@eBQs@Iu@MeAGcD[kINANERKVOVM\\AdBFxDDR?v@FlCXA?pALt@L|Cz@~@V~Cv@~Bj@ZHrBh@dDr@vDz@`BZRDnDt@nGtAj@Jb@LxCn@v@RtAVN?UrBEn@?r@BjABdAHl@F`@lA`@RFh@PdA\\j@Rf@LlBFj@?~BDVBn@Nv@Pr@PrAXn@PbAT`ATdATPFjAXH@ZHvD`AhCn@??tCv@??xAzL`@`DFX??XWVQ\\GR?v@@lEJ`ABn@B~DJj@@dDH??vAuArAiA~@s@nBeB\\]lCkCrBoBHP`@|@xArCr@bBV@zDL`ADtI`@bADnBHbETnDVrCTnBJ??_@g@q@w@"
+        }
+      ],
+      "modeIdentifier": "me_mot",
+      "notes": "<TRAFFIC> ⋅ 25km ⋅ Includes toll ($4.00)"
+    }
+  ],
+  "groups": [
+    {
+      "trips": [
+        {
+          "caloriesCost": 52,
+          "progressURL": "http://granduni.buzzhives.com/satapp/postTripProgress?ID=044a20bd-a708-4395-98c8-7be6e39916d3",
+          "hassleCost": 9.7,
+          "carbonCost": 2.2,
+          "segments": [
+            {
+              "realTime": false,
+              "startTime": 1422849991,
+              "vehicle": {
+                "garage": {
+                  "class": "Location",
+                  "lng": 151.2839,
+                  "lat": -33.8005
+                },
+                "type": "MOTORBIKE"
+              },
+              "segmentTemplateHashCode": -462110734,
+              "alertHashCodes": [
+                -805769856
+              ],
+              "endTime": 1422852824
+            }
+          ],
+          "depart": 1422849991,
+          "moneyCost": 7.47,
+          "saveURL": "http://granduni.buzzhives.com/satapp/persistTrip?ID=044a20bd-a708-4395-98c8-7be6e39916d3",
+          "queryScore": 34.4,
+          "arrive": 1422852824,
+          "moneyUSDCost": 6.63,
+          "weightedScore": 34.4,
+          "mainSegmentHashCode": -462110734,
+          "updateURL": "http://granduni.buzzhives.com/satapp/updateTrip?ID=044a20bd-a708-4395-98c8-7be6e39916d3"
+        }
+      ]
+    }
+  ]
+}
