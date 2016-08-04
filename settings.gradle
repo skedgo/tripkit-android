@@ -1,5 +1,4 @@
 include ':samples'
-include ':android-shared-lib'
 include ':trip-kit-account'
 include ':trip-kit-booking'
 include ':trip-kit'
