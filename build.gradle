@@ -13,11 +13,12 @@ buildscript {
     // in the individual module build.gradle files
   }
 }
-
+ext {
+  TripKitMaven = "${rootDir}/skedgo-maven/repository"
+}
 allprojects {
   repositories {
     jcenter()
-
     maven { url "https://jitpack.io" }
     // This is required to use TripKit.
     maven { url "${rootDir}/skedgo-maven/repository" }
