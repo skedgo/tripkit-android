@@ -59,17 +59,7 @@ dependencies {
   testCompile 'org.robolectric:robolectric:3.1'
   compile 'com.android.support:support-annotations:23.3.0'
   compile 'com.google.android.gms:play-services-maps:8.4.0'
-  // A folk of 'com.google.maps.android:android-maps-utils'
-  // containing only bare essentials for TripGo.
-  // Repo: https://github.com/skedgo/android-maps-utils
-  compile('com.skedgo.android:maps-utils:0.0.1') {
-    // We've already included 'play-services-maps'.
-    // References:
-    // * https://github.com/googlemaps/android-maps-utils/issues/138
-    // * https://github.com/googlemaps/android-maps-utils/blob/master/library/build.gradle
-    exclude(group: 'com.google.android.gms', module: 'play-services-maps')
-  }
-
+  compile 'com.github.skedgo:android-maps-utils:v1.0'
   compile 'net.danlew:android.joda:2.9.3.1'
   compile 'io.reactivex:rxjava:1.1.2'
   compile('io.reactivex:rxandroid:0.24.0') { exclude module: 'rxjava' }
