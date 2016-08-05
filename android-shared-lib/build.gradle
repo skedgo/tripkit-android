@@ -65,10 +65,6 @@ dependencies {
   compile 'com.google.code.gson:gson:2.6.1'
   compile 'com.squareup.okhttp:okhttp:2.4.0'
   compile 'com.squareup.retrofit:retrofit:1.9.0'
-  // To simplify implementation of Comparators and collection assertion.
-  // This is a folk of 'org.apache.commons:commons-collections4'
-  // containing only bare essentials for TripGo.
-  // Source code is located at /libraries/commons-collections.
   compile project(":commons-collections")
   apt "org.immutables:value:2.1.18"
   apt "org.immutables:gson:2.1.18"
