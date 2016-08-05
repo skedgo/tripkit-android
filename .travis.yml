@@ -14,7 +14,7 @@ android:
     - android-23
 
     # Additional components
-    #- extra-google-google_play_services
+    - extra-google-google_play_services
     #- extra-google-m2repository
     #- extra-android-m2repository
     #- addon-google_apis-google-19
