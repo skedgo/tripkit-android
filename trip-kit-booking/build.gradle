@@ -23,11 +23,16 @@ android {
     }
   }
 
+  lintOptions {
+    warning 'InvalidPackage'
+  }
+
   // Exclude following files to avoid conflicts between Mockito and AssertJ.
   packagingOptions {
     exclude 'LICENSE'
     exclude 'NOTICE'
     exclude 'asm-license.txt'
+    exclude 'META-INF/services/com.google.gson.TypeAdapterFactory'
   }
 }
 

@@ -20,6 +20,10 @@ android {
     }
   }
 
+  lintOptions{
+    warning 'InvalidPackage'
+  }
+
   packagingOptions {
     // To avoid conflicts between Mockito and AssertJ.
     exclude "LICENSE"
