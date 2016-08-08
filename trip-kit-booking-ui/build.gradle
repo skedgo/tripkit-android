@@ -42,7 +42,7 @@ dependencies {
 
   compile project(':trip-kit')
   compile project(':trip-kit-booking')
-  compile project(':libraries:android-shared-lib')
+  compile project(':android-shared-lib')
   compile project(':libraries:common-views')
 
   compile 'com.nineoldandroids:library:2.4.0'

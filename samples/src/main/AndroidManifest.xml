@@ -7,7 +7,7 @@
     android:allowBackup="true"
     android:icon="@mipmap/ic_launcher"
     android:label="TripKit Samples"
-    android:theme="@android:style/Theme.Material.Light.DarkActionBar">
+    android:theme="@android:style/Theme.Light">
     <activity
       android:name="com.skedgo.android.samples.SamplesActivity"
       android:label="TripKit Samples">
