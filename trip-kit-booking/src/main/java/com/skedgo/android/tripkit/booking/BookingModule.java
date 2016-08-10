@@ -97,4 +97,8 @@ public class BookingModule {
     return new BookingServiceImpl(bookingApi, externalOAuthStore);
   }
 
+  @Provides QuickBookingService getQuickBookingService(QuickBookingApi quickBookingApi) {
+    return new QuickBookingServiceImpl(quickBookingApi);
+  }
+
 }

@@ -1,13 +1,12 @@
 apply plugin: 'com.android.library'
-apply plugin: "com.github.dcendents.android-maven"
 apply plugin: 'com.neenbedankt.android-apt'
 
 group = "com.skedgo.sdk"
 version = "1.0b2"
 
 android {
-  compileSdkVersion rootProject.ext.CompileSdkVersion
-  buildToolsVersion rootProject.ext.BuildToolsVersion
+  compileSdkVersion 23
+  buildToolsVersion "23.0.3"
 
   defaultConfig {
     minSdkVersion 10
@@ -15,6 +14,10 @@ android {
   }
 
   buildTypes {
+    debug {
+      testCoverageEnabled = true
+    }
+
     release {
       minifyEnabled false
       proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
@@ -30,8 +33,8 @@ dependencies {
   testCompile 'com.squareup.okhttp3:mockwebserver:3.2.0'
 
   // To take advantage of AndroidJUnitRunner.
-  androidTestCompile "com.android.support.test:runner:${rootProject.ext.SupportTestRunnerVersion}"
-  androidTestCompile "com.android.support.test:rules:${rootProject.ext.SupportTestRunnerVersion}"
+  androidTestCompile "com.android.support.test:runner:0.4.1"
+  androidTestCompile "com.android.support.test:rules:0.4.1"
 
   // To use Mockito in Android"s instrumentation tests.
   androidTestCompile "org.assertj:assertj-core:1.7.0"
@@ -42,19 +45,19 @@ dependencies {
 
   compile project(":trip-kit")
 
-  apt "org.immutables:value:${rootProject.ext.ImmutablesVersion}"
-  apt "org.immutables:gson:${rootProject.ext.ImmutablesVersion}"
-  provided "org.immutables:gson:${rootProject.ext.ImmutablesVersion}"
-  provided "org.immutables:value:${rootProject.ext.ImmutablesVersion}"
-  provided "org.immutables:builder:${rootProject.ext.ImmutablesVersion}"
+  apt "org.immutables:value:2.1.18"
+  apt "org.immutables:gson:2.1.18"
+  provided "org.immutables:gson:2.1.18"
+  provided "org.immutables:value:2.1.18"
+  provided "org.immutables:builder:2.1.18"
 
-  compile "com.squareup.okhttp3:okhttp:${rootProject.ext.OkHttp3Version}"
-  compile "com.squareup.okhttp3:logging-interceptor:${rootProject.ext.OkHttp3Version}"
-  compile "com.squareup.retrofit2:converter-gson:${rootProject.ext.RetrofitVersion}"
-  compile("com.squareup.retrofit2:adapter-rxjava:${rootProject.ext.RetrofitVersion}") {
+  compile "com.squareup.okhttp3:okhttp:3.2.0"
+  compile "com.squareup.okhttp3:logging-interceptor:3.2.0"
+  compile "com.squareup.retrofit2:converter-gson:2.0.2"
+  compile("com.squareup.retrofit2:adapter-rxjava:2.0.2") {
     exclude module: 'rxjava'
   }
-  compile("com.squareup.retrofit2:retrofit:${rootProject.ext.RetrofitVersion}") {
+  compile("com.squareup.retrofit2:retrofit:2.0.2") {
     // Exclude Retrofit’s OkHttp peer-dependency module and define our own module import.
     exclude module: 'okhttp'
   }
@@ -63,15 +66,4 @@ dependencies {
   compile 'com.google.dagger:dagger:2.0.1'
   apt 'com.google.dagger:dagger-compiler:2.0.1'
   provided 'org.glassfish:javax.annotation:10.0-b28'
-}
-
-/**
- * Run with "gradlew clean test assemble uploadArchives"
- */
-uploadArchives {
-  repositories {
-    mavenDeployer {
-      repository(url: "file://${TripKitMaven}")
-    }
-  }
 }

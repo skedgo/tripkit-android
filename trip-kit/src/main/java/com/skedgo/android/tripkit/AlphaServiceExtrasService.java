@@ -27,11 +27,11 @@ class AlphaServiceExtrasService implements ServiceExtrasService {
 
   @NonNull
   @Override
-  public Observable<TransitService> getServiceExtrasAsync(@NonNull final TripSegment segment) {
+  public Observable<ServiceExtras> getServiceExtrasAsync(@NonNull final TripSegment segment) {
     return regionService.getRegionByLocationAsync(segment.getFrom())
-        .flatMap(new Func1<Region, Observable<TransitService>>() {
+        .flatMap(new Func1<Region, Observable<ServiceResponse>>() {
           @Override
-          public Observable<TransitService> call(Region region) {
+          public Observable<ServiceResponse> call(Region region) {
             serviceApiEndpoint.setUrl(region.getURLs().get(0));
             return serviceApi.getServiceAsync(
                 region.getName(),
@@ -40,6 +40,23 @@ class AlphaServiceExtrasService implements ServiceExtrasService {
                 true
             );
           }
-        });
+        })
+        .flatMap(new Func1<ServiceResponse, Observable<Shape>>() {
+          @Override
+          public Observable<Shape> call(ServiceResponse response) {
+            return Observable.from(response.shapes());
+          }
+        })
+        .first()
+        .map(new Func1<Shape, List<ServiceStop>>() {
+          @Override
+          public List<ServiceStop> call(Shape shape) {
+            return shape.getStops();
+          }
+        })
+        .map(ExtractServiceExtras.create(
+            segment.getStartStopCode(),
+            segment.getEndStopCode()
+        ));
   }
 }

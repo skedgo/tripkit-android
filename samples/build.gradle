@@ -2,7 +2,7 @@ apply plugin: 'com.android.application'
 
 android {
   compileSdkVersion 23
-  buildToolsVersion "23.0.2"
+  buildToolsVersion "23.0.3"
 
   defaultConfig {
     applicationId "com.skedgo.android.samples"
@@ -17,7 +17,11 @@ android {
       minifyEnabled false
     }
   }
-
+  lintOptions {
+    warning 'MissingTranslation'
+    warning 'ExtraTranslation'
+    warning 'InvalidPackage'
+  }
   packagingOptions {
     exclude 'META-INF/services/com.google.gson.TypeAdapterFactory'
   }
@@ -27,13 +31,7 @@ dependencies {
   compile 'com.squareup.picasso:picasso:2.5.2'
   compile 'com.facebook.stetho:stetho:1.2.0'
   compile 'com.facebook.stetho:stetho-okhttp:1.2.0'
-  compile('com.skedgo.sdk:trip-kit:1.1b5@aar') {
-    transitive = true
-  }
-  compile('com.skedgo.sdk:trip-kit-booking:1.0b2@aar') {
-    transitive = true
-  }
-  compile('com.skedgo.sdk:trip-kit-account:1.0b2@aar') {
-    transitive = true
-  }
+  compile project(":trip-kit")
+  compile project(":trip-kit-account")
+  compile project(":trip-kit-booking")
 }

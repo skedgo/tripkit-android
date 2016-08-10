@@ -1,0 +1,971 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<resources>
+	<!--Title for linked third-party account, e.g., 'Uber Account'-->
+	<string name="_pattern_account">%1$s conta</string>
+	<!--Filler for a specific service running at a time, e.g., '396 at 11:56am'-->
+	<string name="_pattern_at__pattern">%1$s at %2$s</string>
+	<!--Filler for a specific frequency-based service indicating its frequency, e.g., 'M10 every 10 minutes'-->
+	<string name="_pattern_every__pattern">%1$s every %2$s</string>
+	<!--Format string for going from one location to another. Used to name favourite trips.-->
+	<string name="_pattern_to__pattern">%1$s para %2$s</string>
+	<!--Error title when access to location hasn't been granted, but location is required.-->
+	<string name="access_to_location_services_required_dot">Acesso a serviços localizados requeridos.</string>
+	<!--Add reminder activity title-->
+	<string name="add_reminder">Adicione lembrete</string>
+	<!--No comment provided by engineer.-->
+	<string name="add_address_dot_dot_dot">Aadicione endereço...</string>
+	<!--No comment provided by engineer.-->
+	<string name="add_another_recurrence">Adicione outro retorno</string>
+	<!--Add to agenda view title
+   Save trip action-->
+	<string name="add_to_agenda">Adicione na agenda</string>
+	<!--Add to calendar activity title-->
+	<string name="add_to_calendar">Adicione no calendario</string>
+	<!--Add favourite activity title-->
+	<string name="add_to_favourites">Adicione em favoritos</string>
+	<!--Action title for adding a vehicle-->
+	<string name="add_vehicle">Adicione veículo</string>
+	<!--Add a new stopover-->
+	<string name="addstopover">Adicione escala...</string>
+	<!--Add to agenda HUD notice-->
+	<string name="added_to_agenda">Adicionado na agenda</string>
+	<!--Added to calendar HUD message-->
+	<string name="added_to_calendar">Adicionado no calendario</string>
+	<!--Alert title that indicates an address is missing when creating a new event.-->
+	<string name="address_required">Endereço requisitado</string>
+	<!--Title for button to access agenda-->
+	<string name="agenda">Agenda</string>
+	<!--Title for agenda screen while it's still in setup mode.-->
+	<string name="agenda_setup">Agenda configurar</string>
+	<!--Error title when agenda isn't yet set up.-->
+	<string name="agenda_is_not_set_up_dot">Agenda is not set up.</string>
+	<!--Agenda tab bar name-->
+	<string name="agendabutton">Agenda</string>
+	<!--Accepting EULA
+   Agree to EULA-->
+	<string name="agree">Agree</string>
+	<!--Airline flight number with %airline and %flightNumber, e.g., 'Qantas flight QF1'-->
+	<string name="airlineflightnumber">%1$s vôo %2$s</string>
+	<!--Flight from a city to an other one-->
+	<string name="airlinefromto">%1$s (%2$s) para %3$s (%4$s)</string>
+	<!--No comment provided by engineer.-->
+	<string name="alert">Alerta</string>
+	<!--Description of alert with %title-->
+	<string name="alerttitleformat">Alerta: %1$s</string>
+	<!--No comment provided by engineer.-->
+	<string name="alerts">Alertas</string>
+	<!--Option to use this trip for all similar cases.-->
+	<string name="all">Todas</string>
+	<!--Option to delete this event and all after in a recurence-->
+	<string name="all_from_here">Todas desde aqui</string>
+	<!--Action button title to see alternative options for the case where you can't make the next connection.-->
+	<string name="alternative_routes">Rotas alternativas</string>
+	<!--No comment provided by engineer.-->
+	<string name="ambiguous_event_address_dot">Endereço ambiguo.</string>
+	<!--Arrival date+time for overnight stay
+   Arrival time sorter title-->
+	<string name="arrival">Chegada</string>
+	<!--Arrive before button-->
+	<string name="arrivebefore">Chegada até</string>
+	<!--Title for section to assign a trip to a vehicle.-->
+	<string name="assign_to_vehicle">Marcar para veículo</string>
+	<!--Filler for a service running at time, e.g., 'At 11:56am'-->
+	<string name="at__pattern">At %1$s</string>
+	<!--No comment provided by engineer.-->
+	<string name="authentication_cannot_be_completed_at_this_time_dot_please_try_again_later_dot">Authentication cannot be completed at this time. Please try again later.</string>
+	<!--Distance 'automatic'-->
+	<string name="auto">Automática</string>
+	<!--Header for settings of reminders automatically added by TripGo through the agenda-->
+	<string name="automatic_reminders">Lembrete automático</string>
+	<!--Response to positive answer to question whether TripGo is useful, prompting for App Store rating.-->
+	<string name="awesome_exclam_how_about_rating_us_question">Maravilha! Que tal nos avaliar?</string>
+	<!--vehicle booking action-->
+	<string name="book_vehicle">Reservar veículo</string>
+	<!--Book a taxi-->
+	<string name="booktaxi">Reservar taxi</string>
+	<!--Response to negative answer to question whether TripGo is useful, prompting for feedback.-->
+	<string name="bummer_dot_dot_dot_how_about_some_feedback_question">Putz...Que tal um feedback?</string>
+	<!--Calendar-->
+	<string name="calendar">Calendário</string>
+	<!--Type for regular events that go in the phone's calendar.-->
+	<string name="calendar_event">Eventos</string>
+	<!--Explanation for what calendar events are compared to habituals and stays. Can be long-ish.-->
+	<string name="calendareventdescription">Eventos regulares que serão salvos no seu calendário eletrönico.</string>
+	<!--No comment provided by engineer.-->
+	<string name="calendars">Calendarios</string>
+	<!--No comment provided by engineer.-->
+	<string name="change_time">Trocar horário</string>
+	<!--clear cache preference-->
+	<string name="clear_cache">Limpar caixa</string>
+	<!--clear search history preference-->
+	<string name="clear_search_history">Limpar histórico de procuras</string>
+	<!--School pricing preference-->
+	<string name="concession_pricing">Concessão de preços</string>
+	<!--Title on the button that asks users to confirm if they want to proceed with booking-->
+	<string name="confirm">Confirm</string>
+	<!--Hassle preference-->
+	<string name="convenience">Conveniência</string>
+	<!--Convenience description-->
+	<string name="convenience_is_affected_by_things_such_as_changing_public_transport_services_coma_the_amount_of_walking_coma_and_finding_a_taxi_dot">Conveniência é afetada por motivos como:  mudança no serviço de transporte público, distãncia da caminhada, achar um taxi.</string>
+	<!--Error title when TripGo couldn't identify the user's current city.-->
+	<string name="could_not_find_your_city_dot">Não foi possível localizar a sua cidade.</string>
+	<!--Title for critical error-->
+	<string name="criticalerror">Erro crítico</string>
+	<!--Description for critical error where error will be shown below.-->
+	<string name="criticalerrorformat">A applicação encontrou um erro critico e não pode ser recuperada:</string>
+	<!--Indicating the next trip is a current trip-->
+	<string name="current_trip">Current Trip</string>
+	<!--No comment provided by engineer.-->
+	<string name="custom_trip_does_not_fit">Viagem de costume não se encaixa</string>
+	<!--No comment provided by engineer.-->
+	<string name="custom_trip_has_been_cancelled">Trajeto de costume foi cancelada</string>
+	<!--Cycling speed preference-->
+	<string name="cycle_speed">Velocidade do ciclo</string>
+	<!--No comment provided by engineer.-->
+	<string name="database_corrupted_and_lost_dot">Database corrompida e perdida.</string>
+	<!--From %date-->
+	<string name="datefromformat">De %1$s</string>
+	<!--From %date1 to %date2-->
+	<string name="datefromtoformat">De %1$s até %2$s</string>
+	<!--Departure date+time for overnight stay
+   Departure time sorter title-->
+	<string name="departure">Partida</string>
+	<!--Dismiss accessibility label
+   Dismiss button label-->
+	<string name="dismiss">Descartar</string>
+	<!--Distances preference-->
+	<string name="distances">Distâncias</string>
+	<!--Title for transport modes that the user doesn't want included-->
+	<string name="do_not_include">Não incluir</string>
+	<!--No comment provided by engineer.-->
+	<string name="do_you_want_to_always_use_this_trip_and_add_it_to_your_favourites_question">Você quer sempre usar esse trajeto e salvar como favorito</string>
+	<!--Walkthrough (skip in here should match translation for 'Skip'.-->
+	<string name="don_apostt_have_a_fixed_place_of_work_or_study_question_skip_this_step_dot">Não possui lugar fixo de estudo ou trabalho? Pular essa etapa.</string>
+	<!--Title for page for modifying a routine/stay at a specific location-->
+	<string name="edititemheretitle">Agendar item</string>
+	<!--Title for date when an event ends repeating-->
+	<string name="end_date">Data de término</string>
+	<!--No comment provided by engineer.-->
+	<string name="end_user_licence_agreement">End User Licence Agreement</string>
+	<!--Carbon preference-->
+	<string name="environment">Meio ambiente</string>
+	<!--No comment provided by engineer.-->
+	<string name="event">Evento</string>
+	<!--No comment provided by engineer.-->
+	<string name="event_does_not_fit">Evento não se encaixa</string>
+	<!--No comment provided by engineer.-->
+	<string name="event_is_missing_an_address_dot">Sem endereço</string>
+	<!--No comment provided by engineer.-->
+	<string name="event_is_outside_tripgo_aposts_range_dot">Fora de alcance de TripGo</string>
+	<!--No comment provided by engineer.-->
+	<string name="event_was_cancelled">Evento foi cancelado</string>
+	<!--Title for the time an event ends (including date information)-->
+	<string name="eventenddatetime">Término</string>
+	<!--Title for when an event repeats-->
+	<string name="eventrepeat">Repetição</string>
+	<!--Title for the time an event starts (including date information)-->
+	<string name="eventstartdatetime">Começo</string>
+	<!--Filler for a frequency-based service indicating its frequency, e.g., 'Every 10 minutes'-->
+	<string name="every__pattern">Every %1$s</string>
+	<!--Text do mark an example-->
+	<string name="example">Examplo</string>
+	<!--Exclude event action-->
+	<string name="exclude">Excluir</string>
+	<!--There goes my excuse for being late...-->
+	<string name="excuseduetolate">TripGo - Aqui vai o meu motivo pelo meu atraso...</string>
+	<!--Speed preference 'fast'-->
+	<string name="fast">Rápido</string>
+	<!--No comment provided by engineer.-->
+	<string name="favourite">Favorito</string>
+	<!--No comment provided by engineer.-->
+	<string name="favourite_trip">Trajeto favorito</string>
+	<!--Add favourite HUD notice-->
+	<string name="favourite_added">Favorito adicionado</string>
+	<!--Remove trip from favourites HUD notice-->
+	<string name="favourite_removed">Favorito removido</string>
+	<!--Title for button to access favourites-->
+	<string name="favourites">Favoritos</string>
+	<!--Favourites tab bar name-->
+	<string name="favouritesbutton">Favouritos</string>
+	<!--Help title-->
+	<string name="feedback__ampersand_support">Feedback e suporte</string>
+	<!--Placeholder text for search bar that is used for filtering-->
+	<string name="filter">Filtro</string>
+	<!--No comment provided by engineer.-->
+	<string name="flight">Vôo</string>
+	<!--Flight number prompt-->
+	<string name="flight_number">Número de vôo</string>
+	<!--Date of the flight-->
+	<string name="flightdate">Data</string>
+	<!--Details of a flight-->
+	<string name="flightdetails">Dados</string>
+	<!--Note concerning the flight-->
+	<string name="flightnote">Anotação</string>
+	<!--Title for flight with %flightNumber-->
+	<string name="flightnumberformat">Vôo %1$s</string>
+	<!--Search for a flight-->
+	<string name="flightsearch">Procura de vôos</string>
+	<!--Reminder to leave preference-->
+	<string name="for_when_to_leave">Para horário de saída</string>
+	<!--Free directions-->
+	<string name="freedirections">TripGo - direções livres</string>
+	<!--Favorite trip 'from' title-->
+	<string name="from">De</string>
+	<!--Format string for going from one location to others. Used to name favourite stops.-->
+	<string name="from__pattern">De %1$s</string>
+	<!--No comment provided by engineer.-->
+	<string name="from__pattern_coma_leaving_now">From %1$s, leaving now</string>
+	<!--Route here... ...from Current location-->
+	<string name="from_current_location">Do local atual</string>
+	<!--Location for trip exported as event going from %location1 to %location2-->
+	<string name="fromtoforeventlocationformat">De %1$s para %2$s</string>
+	<!--Header for list of vehicles garaged at this location-->
+	<string name="garaged_vehicles">Garagem de veículos</string>
+	<!--Title of settings for generic transport stuff-->
+	<string name="general">Geral</string>
+	<!--Header for settings for feedback, recommending and rating TripGo-->
+	<string name="get_involved">Envolva-se</string>
+	<!--Action button title for getting turn-by-turn directions-->
+	<string name="get_directions">Obter trajeto</string>
+	<!--No comment provided by engineer.-->
+	<string name="get_off_here">Saia aqui</string>
+	<!--No comment provided by engineer.-->
+	<string name="get_on_here">Entre aqui</string>
+	<!--Description for button to get on or off at the selected public transport stop rather than where TripGo suggested.-->
+	<string name="get_on_or_off_here">Entre ou saia aqui</string>
+	<!--I use TripGo to get around-->
+	<string name="getaround">Eu uso TriGo para me locomover.</string>
+	<!--Indicating localisation is in progress-->
+	<string name="getting_current_location">Getting current location</string>
+	<!--Message to show when trying to get trip for a favorite-->
+	<string name="getting_trip_dot_dot_dot">Obter trajeto...</string>
+	<!--Routine, i.e., type for regular times when at one of the user's favorites
+   Type for events that are regular visit's to one of the user's favorites-->
+	<string name="habitual_visit">Rotina</string>
+	<!--Explanation for what routines are compared to calendar events and stays. Can be long-ish.-->
+	<string name="habitualeventdescription">Rotina é parte do seu movimento diário, mas são eventos que vocë não quer no seu calendário (ex.: trabalho). Eles são importantes para a agenda para que vocë chegue no lugar certo na hora certa.</string>
+	<!--No comment provided by engineer.-->
+	<string name="has_tripgo_been_useful_to_you_question">O TripGo tem sido útil pra você?</string>
+	<!--Typical name that you'd give your home location-->
+	<string name="home">Moradia</string>
+	<!--Map mode 'streets + satellite'-->
+	<string name="hybrid">Híbrido</string>
+	<!--Include event action-->
+	<string name="include">Incluir</string>
+	<!--Title for setting to include step count on Agenda screen-->
+	<string name="include_step_count">Incluir número de passos</string>
+	<!--Title for a switch indicating if this event should be included in all-day routes
+   Title for setting to include transport mode in trips.-->
+	<string name="include_in_routes">Incluir em rotas</string>
+	<!--Accessibility hint for tapping title in agenda - jumps to 'today'-->
+	<string name="jump_to_today">Pule para hoje</string>
+	<!--Distance 'kilometers'-->
+	<string name="km">Km</string>
+	<!--Leave after button-->
+	<string name="leaveafter">Sair as</string>
+	<!--Button title to switch view to list mode-->
+	<string name="list">Lista</string>
+	<!--Title on the button that indicates to the user that booking is in progressing-->
+	<string name="loading">Carregando</string>
+	<!--Title to show while loading/waiting for results-->
+	<string name="loading_dot_dot_dot">Carregando...</string>
+	<!--Title for showing the details of a location, typically picked from the map after searching or dropping a pin-->
+	<string name="location">Local</string>
+	<!--No comment provided by engineer.-->
+	<string name="location_missing_dot">Sem local.</string>
+	<!--Error title when favourite is missing a location..-->
+	<string name="location_not_set_dot">Local não definido.</string>
+	<!--Where are you going from?-->
+	<string name="locationcomingfrom">Daonde você vai partir?</string>
+	<!--Where do you want to go?-->
+	<string name="locationwanttogo">Aonde você quer chegar?</string>
+	<!--No comment provided by engineer.-->
+	<string name="long_press_on_the_map_to_choose_a_location">Pressione longamente no mapa para escolher local</string>
+	<!--I once was lost but now I have found... TripGo-->
+	<string name="lostonce">Antes eu estava perdido mas agora eu me achei... TripGo.</string>
+	<!--Header for settings of reminders that the user manually added-->
+	<string name="manual_reminders">Lembretes manuais</string>
+	<!--Button title to switch agenda view to map mode
+   Button title to switch to map-->
+	<string name="map">Mapa</string>
+	<!--No comment provided by engineer.-->
+	<string name="marking_a_location_as_a_favourite_will_allow_quick_access_to_routing_results_for_going_there_from_your_current_location_dot">Localizações favoritas proporcionaram soluções de trajeto brevemente de qualquer lugar que voce estiver.</string>
+	<!--No comment provided by engineer.-->
+	<string name="marking_a_transit_stop_as_a_favourite_will_allow_quick_access_to_its_timetable_dot">Marcando uma parada de trânsito como favorita permitirá acesso rápido ao seu calendário.</string>
+	<!--Speed preference 'medium'-->
+	<string name="medium">Médio</string>
+	<!--Distance 'miles'-->
+	<string name="mi">Mi</string>
+	<!--Minimum transfer time preference-->
+	<string name="min_transfer_time">Mínimo tempo de transferência</string>
+	<!--No comment provided by engineer.-->
+	<string name="minimise_results_for_this_mode_on_the_routes_screen_dot_great_for_transport_options_you_only_use_occasionally_dot">Minimizar resultados para este módulo na tela de rotas. Ótimo para opções de transporte que você só usa de vez em quando.</string>
+	<!--Indicator that a transport mode will appear minimised on the routes screen.
+   Title for setting to minimise a transport mode.-->
+	<string name="minimised">Minimizado</string>
+	<!--Minutes format (used for transfer times)-->
+	<string name="minutes">%.minutos</string>
+	<!--Reminder to leave preference-->
+	<string name="minutes_before_trip">Minutes antes do trajeto</string>
+	<!--Number of minutes before departure-->
+	<string name="minutesbefore">%.minutos antes</string>
+	<!--More button accessibility label-->
+	<string name="more">Mais</string>
+	<!--Header for list of how to get more information (e.g., by opening a website)-->
+	<string name="more_information">Mais informação</string>
+	<!--Sample event name ('Movie')-->
+	<string name="movie">Cinema</string>
+	<!--No comment provided by engineer.-->
+	<string name="my_agenda">Minha agenda</string>
+	<!--Title for profile item that loads a list of user's bookings-->
+	<string name="my_bookings">Minhas reservas</string>
+	<!--User preferences title-->
+	<string name="my_priorities">Minhas prioridades</string>
+	<!--No comment provided by engineer.-->
+	<string name="my_transport">Meu transporte</string>
+	<!--Header for list of my vehicles-->
+	<string name="my_vehicles">Meus veículos</string>
+	<!--Name of the vehicle-->
+	<string name="namevehicle">Nome</string>
+	<!--Error recovery suggestion for when TripGo couldn't identify the user's current city.-->
+	<string name="navigate_to_a_supported_city_on_a_map_dot">Navegue até uma cidade apoiada em um mapa.</string>
+	<!--No comment provided by engineer.-->
+	<string name="new_favourite">Novo favorito</string>
+	<!--Title for unnamed new event-->
+	<string name="newevent">Novo evento</string>
+	<!--Action title for adding a habitual item away from some location-->
+	<string name="newitemawayactiontitle">Ficar em localização diferente</string>
+	<!--Action title for adding another habitual visit to a favourite-->
+	<string name="newitemhereactiontitle">Adicione quando eu estiver aqui</string>
+	<!--Title for page for adding a new routine/stay at a specific location-->
+	<string name="newitemheretitle">Item da agenda</string>
+	<!--Title for page for adding a new routing/stay at a specific location-->
+	<string name="newstaytitle">Nova estadia</string>
+	<!--No comment provided by engineer.-->
+	<string name="no__apostfrom_apost_location_selected">Não \'da\' localização escolhida</string>
+	<!--No comment provided by engineer.-->
+	<string name="no__apostto_apost_location_selected">Não \'para\' localização escolhida</string>
+	<!--Error title for when no calendar found.-->
+	<string name="no_calendar_found_dot">Nenhum calendário encontrado.</string>
+	<!--No comment provided by engineer.-->
+	<string name="no_locations_set">Nenhuma localização configurada</string>
+	<!--Text to show if there's no planned trip.-->
+	<string name="no_planned_trip">Nenhum trajeto planejado</string>
+	<!--Indicating no trips have been planned within 24 hrs-->
+	<string name="no_planned_trips">Nenhum trajeto planejado</string>
+	<!--Error title when routing produced no results (but no specific error was returned from routing).-->
+	<string name="no_routes_found_dot">Nenhuma rota encontrada.</string>
+	<!--Negative answer to follow-up question for rating or feedback.-->
+	<string name="no_coma_thanks">Não, obrigado</string>
+	<!--Negative answer to question whether TripGo is useful.-->
+	<string name="not_really">Na verdade não</string>
+	<!--Countdown cell 'now' indicator-->
+	<string name="now">Agora</string>
+	<!--Title for route number %1 of %total, where %total -->
+	<string name="numberrouteformat">Rota %1$s de %2$s</string>
+	<!--No comment provided by engineer.-->
+	<string name="ok">Okey</string>
+	<!--Option to delete only this event in a recurence
+   Option to use this trip just this time.-->
+	<string name="only_this">Somente esse</string>
+	<!--Error recovery suggestion for favourites with missing location.-->
+	<string name="open_tripgo_app_and_add_the_location_of_this_favourite_dot">Abra o aplicativo TripGo  e adicione a localização desse favorito.</string>
+	<!--Error recovery suggestion for when watch doesn't have access to location services.-->
+	<string name="open_tripgo_or_settings_app_on_your_phone_and_grant_tripgo_access_to_location_services_dot">Abra TripGo ou Configurações de aplicativo no seu telefone e conceda TripGo acesso a serviços de localização.</string>
+	<!--Button title to open URL-->
+	<string name="open_url">Abir URL</string>
+	<!--No comment provided by engineer.-->
+	<string name="open_website">Abrir website</string>
+	<!--No comment provided by engineer.-->
+	<string name="opening_dot_dot_dot">Opening...</string>
+	<!--No comment provided by engineer.-->
+	<string name="our_end_user_licence_agreement_has_changed_dot_you_must_agree_to_it_before_continuing_use_of_this_app">Nosso Acordo de Licença do Utilizador Final mudou. Voce precisa concordar com o acordo bantes de continuar usando ess aplicativo.</string>
+	<!--Text displayed when the user has given the app access to private data such as their calendar or contacts, but the user needs to perform the original action again to now see the results.-->
+	<string name="permission_was_granted_dot_please_go_back_and_try_again_dot">Permissão concedida. Porfavor volte e tente novamente.</string>
+	<!--No comment provided by engineer.-->
+	<string name="permissions">Permissões</string>
+	<!--Timetable screen title-->
+	<string name="pick_a_time">PEscolha um horário</string>
+	<!--Instruction to users when there are no upcoming trips-->
+	<string name="plan_a_trip_on_your_phone_or_press_firmly_to_access_your_favourites_dot">Planeje um trajeto em seu telefone ou pressione com firmeza para acessar seus favoritos.</string>
+	<!--Instruction to users when there are no upcoming trips (for non-interactive Glance)-->
+	<string name="plan_a_trip_on_your_phone_dot">Planeje um trajeto no seu telefone.</string>
+	<!--Error recovery suggestion for when routing produced no results (but no specific error was returned from routing).-->
+	<string name="please_adjust_your_query_and_try_again_dot">Porfavor ajuste a sua pergunta e tente novamente.</string>
+	<!--Error recovery suggestion for when no calendar found.-->
+	<string name="please_check_your_calendar_app_and_make_sure_you_have_a_calendar_configured_dot">Por favor, verifique seu aplicativo de calendário e certifique-se de ter um calendário configurado.</string>
+	<!--Recovery suggestion when TripGo cannot access its local files-->
+	<string name="please_delete_the_app_and_re_minusinstall_from_the_app_store_dot_sorry_for_the_inconvenience_exclam">Porfavor deleta o seu aplicativo e re-instale  a partir da App Store. Desculpe pela inconveniência!</string>
+	<!--Recovery suggestion when database got corrupted-->
+	<string name="please_restart_the_app_dot_sorry_for_the_inconvenience_exclam">Pofavor reinicie o seu aplicativo. Desculpe pela inconveniência!</string>
+	<!--Alert message that asks users to provide the missing address for a new event.-->
+	<string name="please_specify_an_address_dot">Pofavor especifique endereço.</string>
+	<!--Recovery suggestion when TripGo cannot update its local files-->
+	<string name="please_try_restarting_the_app_dot_sorry_for_the_inconvenience_exclam">Pofavor tente reiniciar o seu aplicativo. Desculpe pela inconveniência!</string>
+	<!--Title for preferred public transport modes.-->
+	<string name="preferred_transport">Preferred transport</string>
+	<!--No comment provided by engineer.-->
+	<string name="priorities">Prioridades</string>
+	<!--Notification message for a non-public transport trip. Provided is %destination and %time you need to leave.-->
+	<string name="privatetimetoleave">Hora de sair! Seu trajeto para %1$s começa as %2$s</string>
+	<!--Notification message for a non-public transport trip. Provided is %time you need to leave.-->
+	<string name="privatetimetoleavenolocation">Hora de sair! O seu trajeto começa as %1$s</string>
+	<!--Title for view that shows user's profile-->
+	<string name="profile">Perfil</string>
+	<!--Profile tab bar name-->
+	<string name="profilebutton">Perfil</string>
+	<!--Rate us preference-->
+	<string name="rate_tripgo">Avaliar TripGo</string>
+	<!--Action title to add/remove reminder-->
+	<string name="reminder">Lembrete</string>
+	<!--Added reminder notice-->
+	<string name="reminder_added">Lembrete adicionado</string>
+	<!--Removed reminder HUD notice-->
+	<string name="reminder_removed">Lembrete removido</string>
+	<!--Reminders title-->
+	<string name="reminders">Lembretes</string>
+	<!--No comment provided by engineer.-->
+	<string name="remove">Remover</string>
+	<!--Remove favourite activity title-->
+	<string name="remove_favourite">Remover favorito</string>
+	<!--Remove reminder activity title-->
+	<string name="remove_reminder">Remover lembrete</string>
+	<!--No comment provided by engineer.-->
+	<string name="remove_and_exclude_event">Remover e excluir evento</string>
+	<!--Unsave trip action-->
+	<string name="remove_from_agenda">Remover da agenda</string>
+	<!--Remove from agenda HUD notice-->
+	<string name="removed_from_agenda">Remover da agenda</string>
+	<!--No comment provided by engineer.-->
+	<string name="removing_this_trip_will_exclude_the_following_event_from_your_agenda_dot">Remover esse trajeto irá excluir o evento seguinte da sua agenda.</string>
+	<!--No comment provided by engineer.-->
+	<string name="removing_this_trip_will_exclude_the_preceeding_event_from_your_agenda_dot">Remover esse trajeto irá excluir o evento precedente da sua agenda.</string>
+	<!--Title for switch indicating if an event repeats or not-->
+	<string name="repeat_does_end">Repeatição termina</string>
+	<!--Report problem-->
+	<string name="report_problem">Reportar problema</string>
+	<!--Title for action to perform by the user if an event is outside TripGo's range. The action will display a feedback form to request the region of that event.-->
+	<string name="request_dot_dot_dot">Pedido...</string>
+	<!--Reset button for my priorities
+   Title of group of settings related to resetting settings-->
+	<string name="reset">Configurar</string>
+	<!--Action title to reset agenda content.-->
+	<string name="reset_agenda">Configurar agenda</string>
+	<!--Action title to reset tutorial progress.-->
+	<string name="reset_tutorial">Cofigurar tutorial</string>
+	<!--Title for selector of return time for a trip-->
+	<string name="return_time">Horário de retorno</string>
+	<!--Header for section to configure return trip-->
+	<string name="return_trip">trajeto de retorno</string>
+	<!--No comment provided by engineer.-->
+	<string name="review_eula">Review EULA</string>
+	<!--No comment provided by engineer.-->
+	<string name="route">Rotas</string>
+	<!--Title for options for routing to this location, options are: current location, -->
+	<string name="route_here">Rotas aqui</string>
+	<!--Results screen title-->
+	<string name="routes">Rotas</string>
+	<!--Map mode 'satellite'-->
+	<string name="satellite">Satelite</string>
+	<!--Price preference-->
+	<string name="save_money">Salvar dinheiro</string>
+	<!--Time preference-->
+	<string name="save_time">Salvar horário</string>
+	<!--No comment provided by engineer.-->
+	<string name="search_for_a_city">Procura pela cidade</string>
+	<!--Agenda onboarding: placeholder text for search bar for 'home'.-->
+	<string name="search_for_your_home_address">Procura para o endereço residencial</string>
+	<!--Agenda onboarding: placeholder text for search bar for 'work'.-->
+	<string name="search_for_your_work_address">Procura para o endereço de trabalho</string>
+	<!--Search tab bar name-->
+	<string name="searchbutton">Procurar</string>
+	<!--Placeholder text while waiting for server response when searching for a location.-->
+	<string name="searching_for__apost_pattern_apost_dot_dot_dot">Searching for \'%1$s\'...</string>
+	<!--No comment provided by engineer.-->
+	<string name="select_bike_share">Selecionar compartilhar bicicleta</string>
+	<!--No comment provided by engineer.-->
+	<string name="select_car_park">Selecionar estacionamento</string>
+	<!--No comment provided by engineer.-->
+	<string name="select_vehicle">Selecionar veículo</string>
+	<!--Details of a flight prompt to enter date first.-->
+	<string name="select_a_date_to_get_flight_details_dot">Selecionar data para dados de vôos.</string>
+	<!--Walkthrough-->
+	<string name="select_the_place_where_you_stay_at_the_end_of_each_day">Selecione o local que voce se acomoda no final do dia .</string>
+	<!--Action button title for composing an SMS to a real-time service-->
+	<string name="send_real_minustime_sms">Enviar SMS em tempo real</string>
+	<!--Error recovery suggestion when agenda isn't yet set up but needed for Watch app.-->
+	<string name="set_up_your_agenda_in_the_tripgo_app_dot">Set up your Agenda in the TripGo app.</string>
+	<!--Button that goes to the Setting's app-->
+	<string name="settings">Configurações</string>
+	<!--Action button title for sharing when you arrive
+   Share arrival-->
+	<string name="share_arrival">Compartilhar chegada</string>
+	<!--Share trip-->
+	<string name="share_trip">Compartilhar trajeto</string>
+	<!--Preference to highlight wheelchair information-->
+	<string name="show_wheelchair_information">Show Wheelchair Information</string>
+	<!--Button title on trips to show alternatives for it-->
+	<string name="show_alternatives">Mostrar alternativas</string>
+	<!--No comment provided by engineer.-->
+	<string name="show_booking_options">Mostrar opções de reserva</string>
+	<!--No comment provided by engineer.-->
+	<string name="show_details">Mostrar dados</string>
+	<!--Button to show disclaimers, e.g., info of public transport data.-->
+	<string name="show_disclaimer">Mostrar disclaimer</string>
+	<!--No comment provided by engineer.-->
+	<string name="show_info">Mostrar informações</string>
+	<!--Action title to show map for a segment-->
+	<string name="show_map">Mostrar mapa</string>
+	<!--No comment provided by engineer.-->
+	<string name="show_parking_options">Mostrar opções de estacionamento</string>
+	<!--Button Title to get to website with ticket details.-->
+	<string name="show_ticket_info">Mostrar informações do bilhete</string>
+	<!--Action button title for viewing timetable for public transport-->
+	<string name="show_timetable">Mostrar horário</string>
+	<!--Show trip-->
+	<string name="showtrip">Mostrar trajeto</string>
+	<!--Button title to skip a certain step-->
+	<string name="skip">Pular</string>
+	<!--Speed preference 'slow'-->
+	<string name="slow">Devagar</string>
+	<!--No comment provided by engineer.-->
+	<string name="sorry_dot_tripgo_doesn_apostt_work_here_yet_exclam">Desculpe. TripGo não funciona aqui ainda!</string>
+	<!--Spread the word preference-->
+	<string name="spread_the_word">Conte para os outros</string>
+	<!--Title for flight going from %airport1 (%airportCode2) to %airport3 (%airportCode4)-->
+	<string name="srctodstformat">De (%1$s) to para (%2$s)</string>
+	<!--Stay, i.e., type for dates you're staying at a hotel, or when moving house.-->
+	<string name="stay">Estadia</string>
+	<!--Explanation for what stays are compared to calendar events and routines. Can be long-ish.-->
+	<string name="stayeventdescription">Use para hotéis quando viajar, para que a agenda comece e termine na localização correta.</string>
+	<!--Title for identifying a location where you stay overnight-->
+	<string name="staytitle">Acomodação</string>
+	<!--Number of steps-->
+	<string name="stepsnumber">%1$s etapas tomadas</string>
+	<!--Additional information for official stop code of a public transport stop.-->
+	<string name="stop_code_2points__pattern">Stop code: %1$s</string>
+	<!--Title for stopover event-->
+	<string name="stopover">Escala</string>
+	<!--Map mode 'streets'-->
+	<string name="streets">Ruas</string>
+	<!--Contact support error button-->
+	<string name="support">Suporte</string>
+	<!--Walkthrough-->
+	<string name="swipe_dates_to_navigate_between_weeks">Deslize em datas para navegar entre semanas.</string>
+	<!--Walkthrough - should match translation for '\"Routes\"'-->
+	<string name="tap__apostroutes_apost_for_alternative_routes">Aperte \'Rotas\' para rotas alternativas.</string>
+	<!--Walkthrough-->
+	<string name="tap_and_hold_title_to_jump_directly_to_a_specified_date_dot">Aperte e segure título para pular direto para data específica.</string>
+	<!--Walkthrough-->
+	<string name="tap_public_transport_stops_for_access_to_timetable">Aperte paradas de transporte público para acessar horários.</string>
+	<!--Walkthrough-->
+	<string name="tap_title_to_go_to__aposttoday_apost">Aperte título para se locomover \'hoje\'</string>
+	<!--No comment provided by engineer.-->
+	<string name="tap_to_confirm_hours_or_swipe_to_delete">Tperte para confirmar horário ou deslize para deletar</string>
+	<!--No comment provided by engineer.-->
+	<string name="tap_to_set_address">Aperte para programar endereço</string>
+	<!--No comment provided by engineer.-->
+	<string name="tap_to_set_address_or_swipe_to_delete">Aperte para definir endereço ou deslize para excluir</string>
+	<!--No comment provided by engineer.-->
+	<string name="tap_to_set_garage">Aperte para definir garagem</string>
+	<!--Thank you HUD notice-->
+	<string name="thank_you_exclam">Obrigado!</string>
+	<!--Title for screen to pick your working hours-->
+	<string name="time_at_work">Horário de trabalho</string>
+	<!--Time zone (typically for an event)-->
+	<string name="time_zone">Fuso horário</string>
+	<!--Header for times a user is typically at this location, e.g., working hours-->
+	<string name="times">Horários</string>
+	<!--Title of button to access timetable-->
+	<string name="timetable">Horário</string>
+	<!--Title event name-->
+	<string name="titleeventname">Título</string>
+	<!--Title favourite name-->
+	<string name="titlefavouritename">Título</string>
+	<!--Favorite trip 'to' title-->
+	<string name="to">Para</string>
+	<!--Title for button to access transport modes
+   Title of settings for generic transport stuff-->
+	<string name="transport">Transportes</string>
+	<!--Transport genius-->
+	<string name="transportgenius">TripGo - Gênio do transporte</string>
+	<!--How do you want to go today?-->
+	<string name="transportmodewish">TripGo - Como voce gostaria de se locomover hoje?</string>
+	<!--No comment provided by engineer.-->
+	<string name="tripgo_cannot_access_its_local_files_dot">TripGo não pode acionar seus arquivos locais.</string>
+	<!--No comment provided by engineer.-->
+	<string name="tripgo_cannot_update_its_local_files_dot">TripGo não pode atualizar seus arquivos locais.</string>
+	<!--No comment provided by engineer.-->
+	<string name="tripgo_does_not_work_in_this_area_yet_dot_please_navigate_to_on_of_our_supported_regions_and_try_again_dot">TripGo ainda não alcança essa area. Porfavor navega para uma das areas que cobrimos e tente novamente.</string>
+	<!--Trips tab bar name-->
+	<string name="tripsbutton">Trajetos</string>
+	<!--Type of the event (calendar event, stay, routine)-->
+	<string name="typeevent">Tipo</string>
+	<!--Type of the vehicle-->
+	<string name="typevehicle">Tipo</string>
+	<!--Indicating the next trip is an upcoming trip-->
+	<string name="upcoming_trip">Upcoming Trip</string>
+	<!--Which of my vehicles to assign this to-->
+	<string name="vehicle">Veículo</string>
+	<!--No comment provided by engineer.-->
+	<string name="verify_location_dot_dot_dot">Vericação do local...</string>
+	<!--Positive answer to displayed advertising.
+   Show content of notification.-->
+	<string name="view">Vista</string>
+	<!--View alternative times for this trip-->
+	<string name="view_times">Veja horários</string>
+	<!--Label for 'Duration' button to sort trips by their total duration.-->
+	<string name="viewdurationbutton">Duração</string>
+	<!--Label for 'Overall' button to sort trips by their overall total score considering all factors.-->
+	<string name="viewoverallbutton">Preferido</string>
+	<!--Label for 'Price' button to sort trips by their total cost.-->
+	<string name="viewpricebutton">Preço</string>
+	<!--Walking speed preference-->
+	<string name="walk_speed">Velocidade da caminhada</string>
+	<!--No comment provided by engineer.-->
+	<string name="week_starts">Começo da semana</string>
+	<!--Title for showing what3words address including info button-->
+	<string name="what3words_address">What3words Address</string>
+	<!--Header for staying away form home, i.e., when a user is NOT at their home-->
+	<string name="wheniamawayheader">Stays</string>
+	<!--Header for accommodations, i.e., when a user is typically at this location
+   Header for routines and accommodations, i.e., when a user is typically at this location-->
+	<string name="wheniamhereheader">Agenda</string>
+	<!--Question for which events in a recurrence to delete (options are typically this/all/any from here)-->
+	<string name="which_would_you_like_to_delete">Which would you like to delete</string>
+	<!--Typical name that you'd give your work location-->
+	<string name="work">Trabalho</string>
+	<!--Positive answer to follow-up question for rating or feedback.-->
+	<string name="yeah_coma_ok_exclam">Oba, ok!</string>
+	<!--Positive answer to question whether TripGo is useful.-->
+	<string name="yes_exclam">Sim!</string>
+	<!--Alert if service running late/early, meaning that the user might not make the next service.-->
+	<string name="you_might_not_make_this_transfer_dot">Talvez não chegue a tempo de fazer a conexão.</string>
+	<!--No comment provided by engineer.-->
+	<string name="zoom_in">Aumentar</string>
+	<!--Walkthrough-->
+	<string name="zoom_into_map_to_view_public_transport_stops">Aumente o mapa para ver as paradas de transporte público.</string>
+	<!--Description of the pricing-->
+	<string name="pricingdescription">Preço</string>
+	<!--Description of the terminal-->
+	<string name="terminaldescription">Terminal</string>
+	<!--Message that indicates the app is about to sign users out of their user accounts-->
+	<string name="_the_app_will_now_sign_out">" O aplicativo vai agora fechar"</string>
+	<!--Authorization restricted alert message-->
+	<string name="access_to_this_feature_has_been_restricted_for_your_device_dot_please_check_the_settings_app__moret_general__moret_restrictions_or_ask_your_device_provider_dot">O acesso a este recurso tem sido restrito para o seu dispositivo. Por favor, verifique as configurações do aplicativo</string>
+	<!--Accessibility label for action button-->
+	<string name="action">Ação</string>
+	<!--Option for users if they already owned a SkedGo account-->
+	<string name="already_have_an_account_question_sign_in">Ja possui contat? Assine</string>
+	<!--Source where the account was derived, e.g., Facebook-->
+	<string name="authentication">Autenticação</string>
+	<!--Authorisation needed title-->
+	<string name="authorisation_needed">Autorização necessária</string>
+	<!--Type of vehicle : bicycle-->
+	<string name="bicycle">Bicyicleta</string>
+	<!--Credit card CVC-->
+	<string name="cvc">CVC</string>
+	<!--No comment provided by engineer.-->
+	<string name="can_apostt_find_your_current_city">Can\'t find your current city</string>
+	<!--Cancel - for action sheets-->
+	<string name="cancel">Cancelada</string>
+	<!--Label for when a service is cancelled.-->
+	<string name="cancelled">Cancelado</string>
+	<!--No comment provided by engineer.-->
+	<string name="cannot_proceed_without_a_valid_email_address">Não é possível proceder sem um endereço de email válido</string>
+	<!--Type of vehicle : car-->
+	<string name="car">Carro</string>
+	<!--Credit card number-->
+	<string name="card_no_dot">Número do cartão</string>
+	<!--Instruction for changing password-->
+	<string name="change">Mudar</string>
+	<!--Accessibility - user location button - hint-->
+	<string name="change_tracking_options">Alterar as opções de rastreamento</string>
+	<!--Accessibility title for a checkmark/tick button-->
+	<string name="checkmark">Marcar</string>
+	<!--Close action-->
+	<string name="close">Fechar</string>
+	<!--Error title when GPS failed.-->
+	<string name="could_not_determine_your_current_location_dot">Não foi possível determinar a sua localização actual.</string>
+	<!--Could not download supported regions warning-->
+	<string name="couldnotdownloadsupportedregions">Não foi possível baixar regiões apoiadas do servidor TripGo. Por favor tente de novo mais tarde.</string>
+	<!--Message that indicates the app is creating accounts for users-->
+	<string name="creating_account">Criar conta</string>
+	<!--Section title for credit card payment-->
+	<string name="credit_card">Credicard</string>
+	<!--Current city-->
+	<string name="current_city">Current City</string>
+	<!--Current location-->
+	<string name="current_location">Localização atual</string>
+	<!--to %date-->
+	<string name="datetoformat">Para %1$s</string>
+	<!--Delete action-->
+	<string name="delete">Apagar</string>
+	<!--Sort by distance-->
+	<string name="distance">Distância</string>
+	<!--Option for users if they don't yet have a SkedGo account-->
+	<string name="don_apostt_have_an_account_question_sign_up">Não possui conta? Assine</string>
+	<!--Done button
+   Keyboard accessory button title-->
+	<string name="done">Feito</string>
+	<!--Drop new pin-->
+	<string name="dropnewpin">Baixar novo pin</string>
+	<!--Email address where receipt is sent
+   Email used as Facebook username-->
+	<string name="email">Email</string>
+	<!--'Every %day' in context of repetitions (especially recurring events), e.g., 'Every Monday'-->
+	<string name="everydayformat">Toda %1$s</string>
+	<!--Everyday in context of repetitions (especially recurring events)-->
+	<string name="everyday">Todo dia</string>
+	<!--Credit card expiry date-->
+	<string name="expiry_date">Data de validade</string>
+	<!--Free as in beer-->
+	<string name="free">Grátis</string>
+	<!--No comment provided by engineer.-->
+	<string name="full_name">Full name</string>
+	<!--No comment provided by engineer.-->
+	<string name="getting_a_lift">Pegar carona</string>
+	<!--Accessibility annotation for trips which have a reminder set.-->
+	<string name="has_reminder">Possui lembrete</string>
+	<!--Include contacts.-->
+	<string name="include_contacts">Incluir contatos</string>
+	<!--Include events.-->
+	<string name="include_events">Incluir calendario de eventos</string>
+	<!--Instant results proposal-->
+	<string name="instant_results">Resultado instantâneo</string>
+	<!--Title for alert that indicates the user account has become invalid-->
+	<string name="invalid_account">Conta inválida</string>
+	<!--Name placeholder text-->
+	<string name="john_appleseed">John Appleseed</string>
+	<!--Used when user signs in using Facebook-->
+	<string name="linking_facebook">Ligando ao Facebook</string>
+	<!--Location iOS6+ authorisation needed text-->
+	<string name="location_services_are_required_to_use_this_feature_dot_please_go_to_the_settings_app__moret_privacy__moret_location_services_coma_make_sure_they_are_turned_on_and_authorise_this_app_dot">"Os serviços de localização são requeridos para o uso deste recurso. Por favor, acione o aplicativo Configurações "</string>
+	<!--Indicating a payment is in progress-->
+	<string name="making_payment">Making payment</string>
+	<!--More results proposal-->
+	<string name="more_results">More results</string>
+	<!--Type of vehicle : motorbike-->
+	<string name="motorbike">Motocicleta</string>
+	<!--Title for view that shows the summary of a user's account information-->
+	<string name="my_account">My account</string>
+	<!--Name to which receipt is sent
+   Name used in Facebook-->
+	<string name="name">Name</string>
+	<!--Never in context of repetitions (especially recurring events)-->
+	<string name="never">Nunca</string>
+	<!--Title for sign in view when user does not have an account-->
+	<string name="new_account">New account</string>
+	<!--Button title to complete this step and advance to next
+   Keyboard accessory button title to complete this step and advance to next-->
+	<string name="next">Continuar</string>
+	<!--No comment provided by engineer.-->
+	<string name="no_co_2">Sem CO₂</string>
+	<!--Number of repeats-->
+	<string name="numberreccurences">%lu repetições.</string>
+	<!--Button to open Settings app section for this app-->
+	<string name="open_settings">Open Settings</string>
+	<!--Open in Safari action-->
+	<string name="open_in_safari">Open in Safari</string>
+	<!--No comment provided by engineer.-->
+	<string name="password">Password</string>
+	<!--Indicating a payment is successful-->
+	<string name="payment_successful">Payment successful</string>
+	<!--Section title for Paypal payment-->
+	<string name="paypal">Paypal</string>
+	<!--Please select a location prompt-->
+	<string name="please_select_a_location">Please select a location</string>
+	<!--Error recovery suggestion when GPS fails.-->
+	<string name="please_try_again_or_set_your_location_manually_dot">Please try again or set your location manually.</string>
+	<!--Please verify the location prompt-->
+	<string name="please_verify_the_location">Please verify the location</string>
+	<!--Location picker 'no autocompletion results' text. Needs to match text on keyboard.-->
+	<string name="press__apostsearch_apost_for_more_dot_dot_dot">Press \'search\' for more...</string>
+	<!--Indicator for real-time information-->
+	<string name="real_minustime">Real-time</string>
+	<!--Title for section that asks users where payment receipt should be sent-->
+	<string name="receipt">Receipt</string>
+	<!--Repeats daily-->
+	<string name="repeats_daily">Repetições diárias</string>
+	<!--Repeats monthly-->
+	<string name="repeats_monthly">Repetições mensais</string>
+	<!--Repeats weekly-->
+	<string name="repeats_weekly">Repetições semanais</string>
+	<!--Repeats yearly-->
+	<string name="repeats_yearly">Repetições anuais</string>
+	<!--Error when location search for %input was not successful.-->
+	<string name="requesterrorformat">\'%1$s\' não encontrado.</string>
+	<!--Sports utility vehicle abbreviation-->
+	<string name="suv">Sports veículo utilitário</string>
+	<!--Sort by overall score, like a ranking.-->
+	<string name="score">Score</string>
+	<!--Empty search bar placeholder-->
+	<string name="search">Search</string>
+	<!--No comment provided by engineer.-->
+	<string name="search_results">Search Results</string>
+	<!--Label on location with action to select it, e.g., 'Select Hilton, Paris'-->
+	<string name="select__pattern">Select %1$s</string>
+	<!--Label to select location which doesn't have a title-->
+	<string name="select_location">Select location</string>
+	<!--Tap to set location-->
+	<string name="setlocation">SetLocation</string>
+	<!--No comment provided by engineer.-->
+	<string name="sign_in">Sign in</string>
+	<!--Instruction for signing out user account-->
+	<string name="sign_out">Sign out</string>
+	<!--No comment provided by engineer.-->
+	<string name="sign_up">Sign up</string>
+	<!--No comment provided by engineer.-->
+	<string name="sign_up_cannot_be_completed_without_a_valid_password">Sign up cannot be completed without a valid password</string>
+	<!--Message that indicates the app is signing users into their user accounts-->
+	<string name="signing_in">Signing in</string>
+	<!--Message that indicates the app has successfully completed signing out
+   Message that indicates the app is signing users out of their accounts-->
+	<string name="signing_out">Signing out</string>
+	<!--Accessibility - user location button - off-->
+	<string name="tracking__minus_off">Ratreamento - desligado</string>
+	<!--user location button - follow-->
+	<string name="tracking__minus_on">Ratreamento - ligado</string>
+	<!--user location button - follow with heading-->
+	<string name="tracking__minus_on_with_heading">Ratreamento - ligado com título</string>
+	<!--No comment provided by engineer.-->
+	<string name="unknown_error">Erro desconhecido</string>
+	<!--Message that shows app is updating trip after user finalised bookings-->
+	<string name="updating_trip">Atualização do trajeto</string>
+	<!--Message that informs users that some values are missing from the required fields in a booking form.-->
+	<string name="values_missing_from_required_fields_dot">Falta de valores nos campos requeridos.</string>
+	<!--Every weekday in context of repetitions (especially recurring events)-->
+	<string name="weekdays">Dia de semana</string>
+	<!--Every weekend day in context of repetitions (especially recurring events)-->
+	<string name="weekends">Fim de semana</string>
+	<!--Message that informs users that T-->
+	<string name="you_need_to_agree_to_the_booking_terms_and_conditions_dot">Você precisa concordar com os termos de condições de reserva.</string>
+	<!--Message that informs users that T-->
+	<string name="you_need_to_agree_to_the_insurance_terms_and_conditions_dot">Voce precisa concordar com os termos de condições e seguro.</string>
+	<!--Calendar authorisation needed text-->
+	<string name="you_previously_denied_this_app_access_to_your_calendar_dot_please_go_to_the_settings_app__moret_privacy__moret_calendar_and_authorise_this_app_to_use_this_feature_dot">"Voce anteriormente negou o acesso deste app ao seu calendário. Por favor, acione Configurações "</string>
+	<!--Contacts authorisation needed text-->
+	<string name="you_previously_denied_this_app_access_to_your_contacts_dot_please_go_to_the_settings_app__moret_privacy__moret_contacts_and_authorise_this_app_to_use_this_feature_dot">"Você anteriormente negou o acesso desse aplicativo aos seus contatos. Por favor, acione configurações de aplicativos "</string>
+	<!--Indicator that an event is all-day-->
+	<string name="all_minusday">dia inteiro</string>
+	<!--Estimated time of arrival; parameter is time, e.g., 'arrives 15:30'-->
+	<string name="arrives__pattern">arrives %1$s</string>
+	<!--Estimated time of departure; parameter is time, e.g., 'departs 15:30'-->
+	<string name="departs__pattern">departs %1$s</string>
+	<!--Short indicator of end-time-->
+	<string name="ends_at__pattern">termina as %1$s</string>
+	<!--Email placeholder text-->
+	<string name="example_atexample_dotcom">example@example.com</string>
+	<!--Credit card expiry date placeholder, mm/yy-->
+	<string name="mm_slashyy">mm/aa</string>
+	<!--Short indicator of start-time-->
+	<string name="starts_at__pattern">começa as %1$s</string>
+	<!--Name for a {Name}'s place if it's unclear if it's home, work or something else.-->
+	<string name="_start_qbraquetname_end_qbraquet_aposts">De %1$s</string>
+	<!--No comment provided by engineer.-->
+	<string name="_start_qbraquetname_end_qbraquet_aposts_home">Casa de %1$s</string>
+	<!--No comment provided by engineer.-->
+	<string name="_start_qbraquetname_end_qbraquet_aposts_work">Trabalho de %1$s</string>
+	<!--Format for a service's real-time indicator for a service which is early, e.g., '1 min early. This means #1 is replaced with something like '1 min'.-->
+	<string name="_pattern_early">%1$s adiantado</string>
+	<!--Format for a service's real-time indicator for a service which is early, e.g., '1 min early (1:10 pm service). This means #1 is replaced with something like '1 min' and #2 is replaced with the original time, e.g., '1:10 pm').-->
+	<string name="_pattern_early__start_parent_pattern_service_end_parent">%1$s adiantado (%2$s serviço)</string>
+	<!--Format for a service's real-time indicator for a service which is late, e.g., '1 min late. This means #1 is replaced with something like '1 min'-->
+	<string name="_pattern_late">%1$s atrasado</string>
+	<!--Format for a service's real-time indicator for a service which is late, e.g., '1 min late (1:10 pm service). This means #1 is replaced with something like '1 min' and #2 is replaced with the original time, e.g., '1:10 pm').-->
+	<string name="_pattern_late__start_parent_pattern_service_end_parent">%1$s atrasado (%2$s serviço)</string>
+	<!--Duration without traffic-->
+	<string name="_pattern_w_slasho_traffic">%1$s sem trânsito</string>
+	<!--No comment provided by engineer.-->
+	<string name="_1_stop">1 parada</string>
+	<!--Indication of an activity-->
+	<string name="activityindication">Eu vou pegar o %1$s as %2$s de %3$s.</string>
+	<!--apple maps directions action-->
+	<string name="apple_maps">Apple Maps</string>
+	<!--The place of arrival-->
+	<string name="arrivallocation">Chegada em %1$s</string>
+	<!--The place of arrival with time-->
+	<string name="arrivallocationtime">Chegada em %1$s as %2$s</string>
+	<!--Arrival %time.
+   Time arrival-->
+	<string name="arrivaltime">Chegada as %1$s</string>
+	<!--Prefix for selected 'arrive by' time
+   Single line instruction to arrive-->
+	<string name="arrive">Chegada</string>
+	<!--No comment provided by engineer.-->
+	<string name="book_with_flitways">Book with FlitWays</string>
+	<!--No comment provided by engineer.-->
+	<string name="book_with_uber">Book with Uber</string>
+	<!--No comment provided by engineer.-->
+	<string name="call">Chamada</string>
+	<!--Action title for calling provider of %name-->
+	<string name="calltaxiformat">Chamar %1$s</string>
+	<!--Error title when server could not find a given transit stop.-->
+	<string name="could_not_find_transit_stop_dot">Não foi possivel encontar parada de trânsito.</string>
+	<!--Time of the bus departure-->
+	<string name="departuretime">at %1$s</string>
+	<!--Destination of the bus-->
+	<string name="direction">Direção: %1$s</string>
+	<!--Walking time-->
+	<string name="duration">por %1$s</string>
+	<!--No comment provided by engineer.-->
+	<string name="get_lyft">Obter Lyft</string>
+	<!--No comment provided by engineer.-->
+	<string name="get_ola">Obter Ola</string>
+	<!--No comment provided by engineer.-->
+	<string name="get_ingogo">Obter ingogo</string>
+	<!--google maps directions action-->
+	<string name="google_maps">Google Maps</string>
+	<!--Prefix for selected 'leave after' time
+   Single line instruction to leave-->
+	<string name="leave">Sair</string>
+	<!--No comment provided by engineer.-->
+	<string name="leave_now">Sait agora</string>
+	<!--The place of departure-->
+	<string name="leavelocation">Deixar %1$s</string>
+	<!--The place of departure with time-->
+	<string name="leavelocationtime">Deixar %1$s as %2$s</string>
+	<!--Time departure-->
+	<string name="leavetime">Sair as %1$s</string>
+	<!--No comment provided by engineer.-->
+	<string name="live_traffic">Trânsito em tempo real</string>
+	<!--ArrivalTime-->
+	<string name="messagearrivaltime">Eu chegarei em %1$s as %2$s.</string>
+	<!--Indicator to show when a service is on time according to real-time data.-->
+	<string name="on_time">Em ponto</string>
+	<!--No comment provided by engineer.-->
+	<string name="open_lyft">Abrir Lyft</string>
+	<!--No comment provided by engineer.-->
+	<string name="open_ola">Abrir Ola</string>
+	<!--Arrival Location
+   For trip titles, e.g., 'To work'-->
+	<string name="primarylocationend">Para %1$s</string>
+	<!--Departure Location-->
+	<string name="primarylocationstart">De %1$s</string>
+	<!--'At %location' indicator for parts of a trip that happen at a single location, e.g., waiting at a platform, parking at a car park-->
+	<string name="primarylocationstationary">Em %1$s</string>
+	<!--Error recovery suggestion for when when server could not find a given transit stop.-->
+	<string name="search_for_this_stop_again_or_try_again_later_dot_dot">Pesquisar essa parada novamente ou tentar mais tarde.</string>
+	<!--Send SMS action-->
+	<string name="send_sms">Send SMS</string>
+	<!--Show website action-->
+	<string name="show_website">Mostrar website</string>
+	<!--Number of stops before you get off a vehicle-->
+	<string name="stops">%1$s paradas</string>
+	<!--From %time1 to %time2-->
+	<string name="timefromtoshortformat">%1$s até %2$s</string>
+	<!--No comment provided by engineer.-->
+	<string name="to__pattern">To %1$s</string>
+	<!--No comment provided by engineer.-->
+	<string name="trip">Trajeto</string>
+	<!--Vehicle 'x' updated-->
+	<string name="vehiclecalledupdated">Veículo %1$s atualizado %2$s atrás</string>
+	<!--Vehicle updated-->
+	<string name="vehicleupdated">Atualizado %1$s atrás</string>
+	<!--goCatch action-->
+	<string name="gocatch_a_taxi">goCatch um Taxi</string>
+	<!--No comment provided by engineer.-->
+	<string name="ingogo_a_taxi">ingogo um Taxi</string>
+
+</resources>
+<!-- This is an auto generated file (Thu Jun 30 10:11:02 ART 2016) -->
