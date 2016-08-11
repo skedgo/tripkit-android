@@ -27,9 +27,18 @@ public abstract class Configs {
 
   /**
    * @return A factory to retrieve user token obtained via TripGo Account API.
+   * As tripkit is needed to be intialized to inject it via tripkit account, it cannot be part of the builder
    * @see <a href="http://planck.buzzhives.com/tripgodata/account/resource_AccountSpecificRestService.html">TripGo Account API</a>
    */
-  @Nullable public abstract Func0<String> userTokenProvider();
+  private Func0<String> userTokenProvider;
+
+  @Nullable public Func0<String> userTokenProvider() {
+    return userTokenProvider;
+  }
+
+  public void setUserTokenProvider(Func0<String> userTokenProvider) {
+    this.userTokenProvider = userTokenProvider;
+  }
 
   /**
    * @return A factory to create a sort of adapter that specifies a base url
@@ -51,7 +60,6 @@ public abstract class Configs {
     Builder co2PreferencesFactory(Func0<Co2Preferences> co2PreferencesFactory);
     Builder tripPreferencesFactory(Func0<TripPreferences> tripPreferencesFactory);
     Builder baseUrlAdapterFactory(Func0<Func0<String>> baseUrlAdapterFactory);
-    Builder userTokenProvider(Func0<String> userTokenProvider);
     Configs build();
   }
 }
