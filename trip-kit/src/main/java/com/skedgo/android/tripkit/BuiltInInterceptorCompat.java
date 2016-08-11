@@ -57,7 +57,7 @@ final class BuiltInInterceptorCompat implements Interceptor {
         .addHeader(HEADER_ACCEPT_LANGUAGE, locale.getLanguage())
         .addHeader(HEADER_APP_VERSION, appVersion)
         .addHeader(HEADER_REGION_ELIGIBILITY, regionEligibility);
-    if (userTokenProvider != null) {
+    if (userTokenProvider != null && userTokenProvider.call() != null) {
       builder.addHeader(HEADER_USER_TOKEN, userTokenProvider.call());
     }
 
