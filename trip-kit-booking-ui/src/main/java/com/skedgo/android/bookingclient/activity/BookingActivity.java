@@ -1,7 +1,10 @@
 package com.skedgo.android.bookingclient.activity;
 
+import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.app.ActionBar;
 import android.view.MenuItem;
@@ -31,6 +34,7 @@ public class BookingActivity extends AnimatedTransitionActivity implements
   public static final String KEY_TEMP_BOOKING = "TempBooking";
   public static final String KEY_TEMP_BOOKING_FORM = "TempBookingForm";
   public static final String KEY_BOOKING_BUNDLE = "bookingBundle";
+  public static final int RQC_EXTERNAL_AUTH = 1;
 
   public BookingClientComponent component;
 
@@ -98,6 +102,20 @@ public class BookingActivity extends AnimatedTransitionActivity implements
       getSupportActionBar().setHomeAsUpIndicator(0); // 0 means default
     } else {
       getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_cross);
+    }
+  }
+
+  @Override protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+    super.onActivityResult(requestCode, resultCode, data);
+    if (resultCode == Activity.RESULT_OK) {
+      if (requestCode == RQC_EXTERNAL_AUTH) {
+        BookingForm form = data.getParcelableExtra(KEY_FORM);
+        startActivity(
+            new Intent(this, BookingActivity.class)
+                .setAction(BookingActivity.ACTION_BOOK_AFTER_OAUTH)
+                .putExtra(BookingActivity.KEY_FORM, (Parcelable) form));
+        finish();
+      }
     }
   }
 

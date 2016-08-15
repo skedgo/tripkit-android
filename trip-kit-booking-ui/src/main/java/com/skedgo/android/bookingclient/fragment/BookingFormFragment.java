@@ -17,6 +17,7 @@ import android.widget.TextView;
 
 import com.google.gson.Gson;
 import com.skedgo.android.bookingclient.R;
+import com.skedgo.android.bookingclient.activity.AuthWebActivity;
 import com.skedgo.android.bookingclient.activity.BookingActivity;
 import com.skedgo.android.bookingclient.view.DateTimeFieldView;
 import com.skedgo.android.bookingclient.view.OptionFieldView;
@@ -193,8 +194,10 @@ public class BookingFormFragment extends ButterKnifeFragment {
                 prefsEditor.putString(BookingActivity.KEY_TEMP_BOOKING_FORM, json);
                 prefsEditor.apply();
 
-                Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(linkField.getValue()));
-                startActivity(intent);
+                Intent intent = new Intent(getActivity(), AuthWebActivity.class);
+                intent.putExtra(AuthWebActivity.WEB_URL, Uri.parse(linkField.getValue()));
+                startActivityForResult(intent, BookingActivity.RQC_EXTERNAL_AUTH);
+
               } else {
                 bus.post(new LinkFormFieldClickedEvent(linkField));
               }
