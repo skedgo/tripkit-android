@@ -1,9 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest package="com.skedgo.android.bookingclient" xmlns:android="http://schemas.android.com/apk/res/android">
-  <application >
-    <activity
-    android:name="com.skedgo.android.bookingclient.activity.AuthWebActivity"
-    android:screenOrientation="sensorPortrait"
-    android:theme="@style/Theme.AppCompat.NoActionBar"/>
-  </application>
+  <application ></application>
 </manifest>

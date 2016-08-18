@@ -8,6 +8,7 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.stream.JsonReader;
 import com.skedgo.android.bookingclient.activity.BookingActivity;
+import com.skedgo.android.common.model.Booking;
 import com.skedgo.android.tripkit.booking.BookingForm;
 import com.skedgo.android.tripkit.booking.ExternalOAuth;
 import com.skedgo.android.tripkit.booking.ExternalOAuthService;
@@ -28,8 +29,7 @@ public class OAuth2CallbackHandlerImpl implements OAuth2CallbackHandler {
     this.externalOAuthService = externalOAuthService;
   }
 
-  public Observable<BookingForm> handleURL(Activity activity, Uri uri, String callback) {
-
+  private BookingForm getSavedForm(Activity activity) {
     // get temp booking form
     SharedPreferences prefs = activity.getSharedPreferences(BookingActivity.KEY_TEMP_BOOKING, Activity.MODE_PRIVATE);
 
@@ -41,10 +41,17 @@ public class OAuth2CallbackHandlerImpl implements OAuth2CallbackHandler {
     builder.registerTypeAdapter(FormField.class, new FormFieldJsonAdapter());
     Gson gson = builder.create();
 
-    final BookingForm form = gson.fromJson(reader, BookingForm.class);
+    return gson.fromJson(reader, BookingForm.class);
+
+  }
+
+  public Observable<BookingForm> handleOAuthURL(Activity activity, Uri uri, String callback) {
+
+    final BookingForm form = getSavedForm(activity);
 
     if (form != null) {
 
+      SharedPreferences prefs = activity.getSharedPreferences(BookingActivity.KEY_TEMP_BOOKING, Activity.MODE_PRIVATE);
       SharedPreferences.Editor editor = prefs.edit();
       editor.remove(BookingActivity.KEY_TEMP_BOOKING_FORM).apply();
 
@@ -65,5 +72,9 @@ public class OAuth2CallbackHandlerImpl implements OAuth2CallbackHandler {
       }
     }
     return Observable.error(new Error("No saved booking!"));
+  }
+
+  @Override public Observable<BookingForm> handleRetryURL(Activity activity, Uri uri) {
+    return Observable.just(getSavedForm(activity));
   }
 }
