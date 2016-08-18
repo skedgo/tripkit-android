@@ -193,8 +193,13 @@ public class BookingFormFragment extends ButterKnifeFragment {
                 prefsEditor.putString(BookingActivity.KEY_TEMP_BOOKING_FORM, json);
                 prefsEditor.apply();
 
-                Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(linkField.getValue()));
-                startActivity(intent);
+                startActivity(
+                    new Intent(getActivity(), getActivity().getClass())
+                        .setAction(BookingActivity.ACTION_OAUTH)
+                        .putExtra(BookingActivity.KEY_WEB_URL, Uri.parse(linkField.getValue())));
+
+                getActivity().finish();
+
               } else {
                 bus.post(new LinkFormFieldClickedEvent(linkField));
               }
