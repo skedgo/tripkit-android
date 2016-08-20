@@ -13,6 +13,7 @@ import com.skedgo.android.bookingclient.viewmodel.BookingErrorViewModel;
 import com.skedgo.android.common.util.Gsons;
 import com.skedgo.android.common.util.MainThreadBus;
 import com.skedgo.android.tripkit.TripKit;
+import com.skedgo.android.tripkit.booking.BookingService;
 import com.skedgo.android.tripkit.booking.ExternalOAuthService;
 import com.squareup.otto.Bus;
 import com.squareup.picasso.Picasso;
@@ -67,7 +68,7 @@ public class BookingClientModule {
         .build();
   }
 
-  @Provides OAuth2CallbackHandler getOAuth2CallbackHandler(ExternalOAuthService externalOAuthService) {
-    return new OAuth2CallbackHandlerImpl(externalOAuthService);
+  @Provides OAuth2CallbackHandler getOAuth2CallbackHandler(ExternalOAuthService externalOAuthService, BookingService bookingService) {
+    return new OAuth2CallbackHandlerImpl(externalOAuthService, bookingService);
   }
 }

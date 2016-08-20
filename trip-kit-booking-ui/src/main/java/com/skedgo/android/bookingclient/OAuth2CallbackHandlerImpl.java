@@ -8,12 +8,13 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.stream.JsonReader;
 import com.skedgo.android.bookingclient.activity.BookingActivity;
-import com.skedgo.android.common.model.Booking;
 import com.skedgo.android.tripkit.booking.BookingForm;
+import com.skedgo.android.tripkit.booking.BookingService;
 import com.skedgo.android.tripkit.booking.ExternalOAuth;
 import com.skedgo.android.tripkit.booking.ExternalOAuthService;
 import com.skedgo.android.tripkit.booking.FormField;
 import com.skedgo.android.tripkit.booking.FormFieldJsonAdapter;
+import com.skedgo.android.tripkit.booking.InputForm;
 
 import java.io.StringReader;
 
@@ -23,10 +24,11 @@ import rx.functions.Func1;
 public class OAuth2CallbackHandlerImpl implements OAuth2CallbackHandler {
 
   private final ExternalOAuthService externalOAuthService;
+  private final BookingService bookingService;
 
-  public OAuth2CallbackHandlerImpl(ExternalOAuthService externalOAuthService) {
-
+  public OAuth2CallbackHandlerImpl(ExternalOAuthService externalOAuthService, BookingService bookingService) {
     this.externalOAuthService = externalOAuthService;
+    this.bookingService = bookingService;
   }
 
   private BookingForm getSavedForm(Activity activity) {
@@ -64,6 +66,11 @@ public class OAuth2CallbackHandlerImpl implements OAuth2CallbackHandler {
             .flatMap(new Func1<ExternalOAuth, Observable<BookingForm>>() {
               @Override public Observable<BookingForm> call(ExternalOAuth externalOAuth) {
                 return Observable.just(form.setAuthData(externalOAuth));
+              }
+            })
+            .flatMap(new Func1<BookingForm, Observable<BookingForm>>() {
+              @Override public Observable<BookingForm> call(BookingForm bookingForm) {
+                return bookingService.postFormAsync(bookingForm.getAction().getUrl(), InputForm.from(bookingForm.getForm()));
               }
             });
 
