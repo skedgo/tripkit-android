@@ -51,7 +51,7 @@ public class AuthWebFragment extends ButterKnifeFragment {
 
         if (url.startsWith("tripgo://")) {
           onCallback.call(url);
-          getActivity().finish();
+          webView.setVisibility(View.INVISIBLE);
           return false;
         } else {
           view.loadUrl(url);
