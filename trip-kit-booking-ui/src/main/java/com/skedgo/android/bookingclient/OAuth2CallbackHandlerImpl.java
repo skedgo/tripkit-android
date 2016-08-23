@@ -82,6 +82,7 @@ public class OAuth2CallbackHandlerImpl implements OAuth2CallbackHandler {
   }
 
   @Override public Observable<BookingForm> handleRetryURL(Activity activity, Uri uri) {
-    return Observable.just(getSavedForm(activity));
+    BookingForm bookingForm = getSavedForm(activity);
+    return bookingService.postFormAsync(bookingForm.getAction().getUrl(), InputForm.from(bookingForm.getForm()));
   }
 }

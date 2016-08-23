@@ -7,6 +7,9 @@ import android.support.annotation.Nullable;
 import android.text.TextUtils;
 
 import com.google.gson.annotations.SerializedName;
+import com.skedgo.android.common.util.ListUtils;
+
+import org.apache.commons.collections4.CollectionUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -235,4 +238,22 @@ public class BookingForm extends FormField {
     }
     return this;
   }
+
+  public String externalAction(){
+
+    if (form != null && !CollectionUtils.isEmpty(form)) {
+      for (FormGroup group : form) {
+        for (FormField field:group.getFields()){
+          if (field instanceof LinkFormField &&
+              (LinkFormField.METHOD_EXTERNAL.equals(((LinkFormField)field).getMethod()))) {
+            return ((LinkFormField)field).getValue();
+          }
+        }
+      }
+    }
+
+    return null;
+  }
+
+
 }
