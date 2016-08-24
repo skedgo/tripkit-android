@@ -166,15 +166,29 @@ class MainModule {
     );
   }
 
-  @Singleton @Provides OkHttpClient getOkHttpClient() {
+  @Provides BuiltInInterceptorCompat builtInInterceptorCompat(
+      Lazy<UuidProvider> uuidProviderLazy) {
+    // Null to opt-out sending UUID header.
+    final UuidProvider uuidProvider = configs.isUuidOptedOut() ? null : uuidProviderLazy.get();
+    return BuiltInInterceptorCompatBuilder.create()
+        .appVersion(getAppVersion())
+        .locale(Locale.getDefault())
+        .regionEligibility(configs.regionEligibility())
+        .userTokenProvider(configs.userTokenProvider())
+        .uuidProvider(uuidProvider)
+        .build();
+  }
+
+  /**
+   * This was deprecated.
+   * TODO: Migrate to {@link okhttp3.OkHttpClient}.
+   */
+  @Deprecated
+  @Singleton @Provides OkHttpClient httpClient2(
+      BuiltInInterceptorCompat builtInInterceptorCompat) {
     final OkHttpClient httpClient = new OkHttpClient();
-    httpClient.interceptors().add(
-        BuiltInInterceptorCompatBuilder.create()
-            .appVersion(getAppVersion())
-            .locale(Locale.getDefault())
-            .regionEligibility(configs.regionEligibility())
-            .userTokenProvider(configs.userTokenProvider())
-            .build());
+    httpClient.interceptors().add(builtInInterceptorCompat);
+
     if (configs.debuggable()) {
       final Func0<Func0<String>> baseUrlAdapterFactory = configs.baseUrlAdapterFactory();
       if (baseUrlAdapterFactory != null) {
@@ -193,6 +207,7 @@ class MainModule {
   }
 
   @Provides BuiltInInterceptor builtInInterceptor(Lazy<UuidProvider> uuidProviderLazy) {
+    // Null to opt-out sending UUID header.
     final UuidProvider uuidProvider = configs.isUuidOptedOut() ? null : uuidProviderLazy.get();
     return BuiltInInterceptorBuilder.create()
         .appVersion(getAppVersion())
