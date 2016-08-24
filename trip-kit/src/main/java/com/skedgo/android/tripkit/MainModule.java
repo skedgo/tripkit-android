@@ -1,6 +1,7 @@
 package com.skedgo.android.tripkit;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.support.annotation.NonNull;
 import android.util.Log;
 
@@ -18,9 +19,11 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 
+import javax.inject.Named;
 import javax.inject.Provider;
 import javax.inject.Singleton;
 
+import dagger.Lazy;
 import dagger.Module;
 import dagger.Provides;
 import okhttp3.HttpUrl;
@@ -47,6 +50,14 @@ class MainModule {
   public MainModule(@NonNull Configs configs) {
     this.configs = configs;
     context = configs.context().getApplicationContext();
+  }
+
+  /**
+   * @return A {@link SharedPreferences} that contains
+   * internal persistent configs (e.g. UUID) for TripKit.
+   */
+  @Provides @Named("TripKitPrefs") SharedPreferences preferences() {
+    return context.getSharedPreferences("TripKit", Context.MODE_PRIVATE);
   }
 
   @Provides Configs configs() {
@@ -181,12 +192,14 @@ class MainModule {
     return new HttpLoggingInterceptor().setLevel(level);
   }
 
-  @Provides BuiltInInterceptor getBuiltInInterceptor() {
+  @Provides BuiltInInterceptor builtInInterceptor(Lazy<UuidProvider> uuidProviderLazy) {
+    final UuidProvider uuidProvider = configs.isUuidOptedOut() ? null : uuidProviderLazy.get();
     return BuiltInInterceptorBuilder.create()
         .appVersion(getAppVersion())
         .locale(Locale.getDefault())
         .regionEligibility(configs.regionEligibility())
         .userTokenProvider(configs.userTokenProvider())
+        .uuidProvider(uuidProvider)
         .build();
   }
 
