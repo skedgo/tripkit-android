@@ -20,6 +20,8 @@ import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
 
 import java.util.Calendar;
+import java.util.Comparator;
+import java.util.List;
 import java.util.Locale;
 import java.util.TimeZone;
 import java.util.concurrent.TimeUnit;
@@ -35,6 +37,7 @@ import static com.skedgo.android.tripkit.BookingResolver.LYFT;
 import static com.skedgo.android.tripkit.BookingResolver.OTHERS;
 import static com.skedgo.android.tripkit.BookingResolver.SMS;
 import static com.skedgo.android.tripkit.BookingResolver.UBER;
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Matchers.any;
 import static org.mockito.Matchers.eq;
 import static org.mockito.Mockito.mock;
@@ -44,6 +47,18 @@ import static org.mockito.Mockito.when;
 @RunWith(RobolectricGradleTestRunner.class)
 @Config(constants = BuildConfig.class)
 public class BookingResolverImplTest {
+  private static final Comparator<BookingAction> BOOKING_ACTION_COMPARATOR =
+      new Comparator<BookingAction>() {
+        @Override public int compare(BookingAction lhs, BookingAction rhs) {
+          final Intent lhsData = lhs.data();
+          final Intent rhsData = rhs.data();
+          return lhs.hasApp() == rhs.hasApp() &&
+              lhs.bookingProvider() == rhs.bookingProvider() &&
+              lhsData.getAction().equals(rhsData.getAction()) &&
+              lhsData.getData().equals(rhsData.getData())
+              ? 0 : 1;
+        }
+      };
   @Mock PackageManager packageManager;
   @Mock Func1<ReverseGeocodingParams, Observable<String>> reverseGeocoderFactory;
   private BookingResolverImpl bookingResolver;
@@ -78,7 +93,11 @@ public class BookingResolverImplTest {
         .build();
     subscriber.awaitTerminalEvent();
     subscriber.assertNoErrors();
-    subscriber.assertValue(action);
+    final List<BookingAction> events = subscriber.getOnNextEvents();
+    assertThat(events).hasSize(1);
+    assertThat(events.get(0))
+        .usingComparator(BOOKING_ACTION_COMPARATOR)
+        .isEqualTo(action);
   }
 
   @Test public void hasNoUberApp() throws PackageManager.NameNotFoundException {
@@ -102,7 +121,11 @@ public class BookingResolverImplTest {
         .build();
     subscriber.awaitTerminalEvent();
     subscriber.assertNoErrors();
-    subscriber.assertValue(action);
+    final List<BookingAction> events = subscriber.getOnNextEvents();
+    assertThat(events).hasSize(1);
+    assertThat(events.get(0))
+        .usingComparator(BOOKING_ACTION_COMPARATOR)
+        .isEqualTo(action);
   }
 
   @Test public void hasLyftApp() throws PackageManager.NameNotFoundException {
@@ -126,7 +149,11 @@ public class BookingResolverImplTest {
         .build();
     subscriber.awaitTerminalEvent();
     subscriber.assertNoErrors();
-    subscriber.assertValue(action);
+    final List<BookingAction> events = subscriber.getOnNextEvents();
+    assertThat(events).hasSize(1);
+    assertThat(events.get(0))
+        .usingComparator(BOOKING_ACTION_COMPARATOR)
+        .isEqualTo(action);
   }
 
   @Test public void hasNoLyftApp() throws PackageManager.NameNotFoundException {
@@ -152,7 +179,11 @@ public class BookingResolverImplTest {
         .build();
     subscriber.awaitTerminalEvent();
     subscriber.assertNoErrors();
-    subscriber.assertValue(action);
+    final List<BookingAction> events = subscriber.getOnNextEvents();
+    assertThat(events).hasSize(1);
+    assertThat(events.get(0))
+        .usingComparator(BOOKING_ACTION_COMPARATOR)
+        .isEqualTo(action);
   }
 
   @Test public void hasNoFlitwaysApp_noPartnerKey() {
@@ -171,7 +202,11 @@ public class BookingResolverImplTest {
         .build();
     subscriber.awaitTerminalEvent();
     subscriber.assertNoErrors();
-    subscriber.assertValue(action);
+    final List<BookingAction> events = subscriber.getOnNextEvents();
+    assertThat(events).hasSize(1);
+    assertThat(events.get(0))
+        .usingComparator(BOOKING_ACTION_COMPARATOR)
+        .isEqualTo(action);
   }
 
   @Test public void hasNoFlitwaysApp_hasPartnerKey() {
@@ -213,7 +248,11 @@ public class BookingResolverImplTest {
         .build();
     subscriber.awaitTerminalEvent();
     subscriber.assertNoErrors();
-    subscriber.assertValue(action);
+    final List<BookingAction> events = subscriber.getOnNextEvents();
+    assertThat(events).hasSize(1);
+    assertThat(events.get(0))
+        .usingComparator(BOOKING_ACTION_COMPARATOR)
+        .isEqualTo(action);
   }
 
   @Test public void hasNoApp() {
@@ -232,7 +271,11 @@ public class BookingResolverImplTest {
         .build();
     subscriber.awaitTerminalEvent();
     subscriber.assertNoErrors();
-    subscriber.assertValue(action);
+    final List<BookingAction> events = subscriber.getOnNextEvents();
+    assertThat(events).hasSize(1);
+    assertThat(events.get(0))
+        .usingComparator(BOOKING_ACTION_COMPARATOR)
+        .isEqualTo(action);
   }
 
   @Test public void hasNoGoCatchApp() throws PackageManager.NameNotFoundException {
@@ -258,7 +301,11 @@ public class BookingResolverImplTest {
         .build();
     subscriber.awaitTerminalEvent();
     subscriber.assertNoErrors();
-    subscriber.assertValue(action);
+    final List<BookingAction> events = subscriber.getOnNextEvents();
+    assertThat(events).hasSize(1);
+    assertThat(events.get(0))
+        .usingComparator(BOOKING_ACTION_COMPARATOR)
+        .isEqualTo(action);
   }
 
   @Test public void hasGoCatchApp() throws PackageManager.NameNotFoundException {
@@ -297,7 +344,11 @@ public class BookingResolverImplTest {
         .build();
     subscriber.awaitTerminalEvent();
     subscriber.assertNoErrors();
-    subscriber.assertValue(action);
+    final List<BookingAction> events = subscriber.getOnNextEvents();
+    assertThat(events).hasSize(1);
+    assertThat(events.get(0))
+        .usingComparator(BOOKING_ACTION_COMPARATOR)
+        .isEqualTo(action);
   }
 
   @Test public void hasIngogoApp() throws PackageManager.NameNotFoundException {
@@ -321,7 +372,11 @@ public class BookingResolverImplTest {
         .build();
     subscriber.awaitTerminalEvent();
     subscriber.assertNoErrors();
-    subscriber.assertValue(action);
+    final List<BookingAction> events = subscriber.getOnNextEvents();
+    assertThat(events).hasSize(1);
+    assertThat(events.get(0))
+        .usingComparator(BOOKING_ACTION_COMPARATOR)
+        .isEqualTo(action);
   }
 
   @Test public void hasNoIngogoApp() throws PackageManager.NameNotFoundException {
@@ -345,7 +400,11 @@ public class BookingResolverImplTest {
         .build();
     subscriber.awaitTerminalEvent();
     subscriber.assertNoErrors();
-    subscriber.assertValue(action);
+    final List<BookingAction> events = subscriber.getOnNextEvents();
+    assertThat(events).hasSize(1);
+    assertThat(events.get(0))
+        .usingComparator(BOOKING_ACTION_COMPARATOR)
+        .isEqualTo(action);
   }
 
   @Test public void handleSMS() {
@@ -368,7 +427,11 @@ public class BookingResolverImplTest {
         .build();
     subscriber.awaitTerminalEvent();
     subscriber.assertNoErrors();
-    subscriber.assertValue(action);
+    final List<BookingAction> events = subscriber.getOnNextEvents();
+    assertThat(events).hasSize(1);
+    assertThat(events.get(0))
+        .usingComparator(BOOKING_ACTION_COMPARATOR)
+        .isEqualTo(action);
   }
 
   @Test public void handleSMSWithBody() {
@@ -391,7 +454,11 @@ public class BookingResolverImplTest {
         .build();
     subscriber.awaitTerminalEvent();
     subscriber.assertNoErrors();
-    subscriber.assertValue(action);
+    final List<BookingAction> events = subscriber.getOnNextEvents();
+    assertThat(events).hasSize(1);
+    assertThat(events.get(0))
+        .usingComparator(BOOKING_ACTION_COMPARATOR)
+        .isEqualTo(action);
   }
 
   @Test public void handleTel() {
@@ -410,7 +477,11 @@ public class BookingResolverImplTest {
         .build();
     subscriber.awaitTerminalEvent();
     subscriber.assertNoErrors();
-    subscriber.assertValue(action);
+    final List<BookingAction> events = subscriber.getOnNextEvents();
+    assertThat(events).hasSize(1);
+    assertThat(events.get(0))
+        .usingComparator(BOOKING_ACTION_COMPARATOR)
+        .isEqualTo(action);
   }
 
   @Test public void handleTelWithName() {
@@ -429,7 +500,11 @@ public class BookingResolverImplTest {
         .build();
     subscriber.awaitTerminalEvent();
     subscriber.assertNoErrors();
-    subscriber.assertValue(action);
+    final List<BookingAction> events = subscriber.getOnNextEvents();
+    assertThat(events).hasSize(1);
+    assertThat(events.get(0))
+        .usingComparator(BOOKING_ACTION_COMPARATOR)
+        .isEqualTo(action);
   }
 
   @Test public void strangeExternalAction() {
