@@ -19,6 +19,14 @@ android {
       proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
     }
   }
+  lintOptions {
+    warning 'InvalidPackage'
+  }
+  // Exclude following files to avoid conflicts between Mockito and AssertJ.
+  packagingOptions {
+    exclude 'asm-license.txt'
+    exclude 'META-INF/services/com.google.gson.TypeAdapterFactory'
+  }
 }
 
 dependencies {
