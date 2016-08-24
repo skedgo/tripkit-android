@@ -21,6 +21,7 @@ public class ConfigsTest {
         .context(RuntimeEnvironment.application)
         .build();
     assertThat(configs.debuggable()).isFalse();
+    assertThat(configs.isUuidOptedOut()).isFalse();
   }
 
   @Test(expected = NullPointerException.class)
