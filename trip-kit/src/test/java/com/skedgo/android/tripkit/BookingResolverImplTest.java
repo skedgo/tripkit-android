@@ -40,8 +40,9 @@ import static org.mockito.Matchers.eq;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
+@SuppressWarnings("WrongConstant")
 @RunWith(RobolectricGradleTestRunner.class)
-@Config(constants = BuildConfig.class, sdk = 21)
+@Config(constants = BuildConfig.class)
 public class BookingResolverImplTest {
   @Mock PackageManager packageManager;
   @Mock Func1<ReverseGeocodingParams, Observable<String>> reverseGeocoderFactory;
