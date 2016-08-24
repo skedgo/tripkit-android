@@ -139,7 +139,7 @@ public class BookingActivity extends AnimatedTransitionActivity implements
     }
   }
 
-  // TODO: Refactor with ExternalProviderAuthActivity
+  // TODO: Refactor with ExternalProviderAuthFragmentDialog
   private Action1<String> onAuthCallback() {
     return new Action1<String>() {
       @Override public void call(String url) {
