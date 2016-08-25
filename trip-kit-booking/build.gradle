@@ -29,6 +29,8 @@ android {
     exclude 'NOTICE'
     exclude 'asm-license.txt'
   }
+
+  lintOptions { abortOnError false }
 }
 
 dependencies {
