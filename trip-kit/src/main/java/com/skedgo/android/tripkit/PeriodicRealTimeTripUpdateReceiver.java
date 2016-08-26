@@ -68,9 +68,10 @@ public abstract class PeriodicRealTimeTripUpdateReceiver implements RealTimeTrip
                       // the times in arrival and departure segments will be updated accordingly.
                       // Hence we filter them out.
                       // See: https://redmine.buzzhives.com/issues/4397.
-                      return object.getType() != SegmentType.ARRIVAL
-                          && object.getType() != SegmentType.DEPARTURE
-                          && object.getTemplateHashCode() == segmentUpdate.getTemplateHashCode();
+                      return object.getBooking() != null ||
+                          (object.getType() != SegmentType.ARRIVAL
+                              && object.getType() != SegmentType.DEPARTURE
+                              && object.getTemplateHashCode() == segmentUpdate.getTemplateHashCode());
                     }
                   });
                   if (segmentToUpdate != null) {
@@ -79,11 +80,11 @@ public abstract class PeriodicRealTimeTripUpdateReceiver implements RealTimeTrip
                     segmentToUpdate.setRealTime(segmentUpdate.isRealTime());
                     segmentToUpdate.setAlerts(segmentUpdate.getAlerts());
                     segmentToUpdate.setRealTimeVehicle(segmentUpdate.getRealTimeVehicle());
+                    segmentToUpdate.setBooking(segmentUpdate.getBooking());
                   }
                 }
               });
             }
-
             return group();
           }
         })
