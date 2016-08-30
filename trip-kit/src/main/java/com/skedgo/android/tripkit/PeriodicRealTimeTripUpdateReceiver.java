@@ -1,16 +1,10 @@
 package com.skedgo.android.tripkit;
 
-import com.skedgo.android.common.model.SegmentType;
 import com.skedgo.android.common.model.Trip;
 import com.skedgo.android.common.model.TripGroup;
-import com.skedgo.android.common.model.TripSegment;
 
-import org.apache.commons.collections4.Closure;
-import org.apache.commons.collections4.CollectionUtils;
-import org.apache.commons.collections4.Predicate;
 import org.immutables.value.Value;
 
-import java.util.ArrayList;
 import java.util.concurrent.TimeUnit;
 
 import rx.Observable;
@@ -56,34 +50,8 @@ public abstract class PeriodicRealTimeTripUpdateReceiver implements RealTimeTrip
               displayTrip.setCarbonCost(tripUpdate.getCarbonCost());
               displayTrip.setMoneyCost(tripUpdate.getMoneyCost());
               displayTrip.setHassleCost(tripUpdate.getHassleCost());
+              displayTrip.setSegments(tripUpdate.getSegments());
 
-              final ArrayList<TripSegment> segments = displayTrip.getSegments();
-              CollectionUtils.forAllDo(tripUpdate.getSegments(), new Closure<TripSegment>() {
-                @Override public void execute(final TripSegment segmentUpdate) {
-                  TripSegment segmentToUpdate = CollectionUtils.find(segments, new Predicate<TripSegment>() {
-                    @Override public boolean evaluate(TripSegment object) {
-                      // Times in both departure and arrival segments are bound
-                      // tightly to the first segment and the final segment respectively.
-                      // If we update times for first segment and the final segment,
-                      // the times in arrival and departure segments will be updated accordingly.
-                      // Hence we filter them out.
-                      // See: https://redmine.buzzhives.com/issues/4397.
-                      return object.getBooking() != null ||
-                          (object.getType() != SegmentType.ARRIVAL
-                              && object.getType() != SegmentType.DEPARTURE
-                              && object.getTemplateHashCode() == segmentUpdate.getTemplateHashCode());
-                    }
-                  });
-                  if (segmentToUpdate != null) {
-                    segmentToUpdate.setStartTimeInSecs(segmentUpdate.getStartTimeInSecs());
-                    segmentToUpdate.setEndTimeInSecs(segmentUpdate.getEndTimeInSecs());
-                    segmentToUpdate.setRealTime(segmentUpdate.isRealTime());
-                    segmentToUpdate.setAlerts(segmentUpdate.getAlerts());
-                    segmentToUpdate.setRealTimeVehicle(segmentUpdate.getRealTimeVehicle());
-                    segmentToUpdate.setBooking(segmentUpdate.getBooking());
-                  }
-                }
-              });
             }
             return group();
           }
