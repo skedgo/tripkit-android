@@ -24,7 +24,7 @@ public abstract class Booking implements Parcelable {
           .title(in.readString())
           .url(in.readString())
           .quickBookingsUrl(in.readString())
-          .confirmation((BookingConfirmation)in.readParcelable(BookingConfirmation.class.getClassLoader()))
+          .confirmation((BookingConfirmation) in.readParcelable(BookingConfirmation.class.getClassLoader()))
           .build();
     }
 
@@ -38,7 +38,7 @@ public abstract class Booking implements Parcelable {
     dest.writeString(getTitle());
     dest.writeString(getUrl());
     dest.writeString(getQuickBookingsUrl());
-    dest.writeParcelable(confirmation(), flags);
+    dest.writeParcelable(getConfirmation(), flags);
 
   }
 
@@ -50,5 +50,5 @@ public abstract class Booking implements Parcelable {
   @SerializedName("title") @Nullable public abstract String getTitle();
   @SerializedName("url") @Nullable public abstract String getUrl();
   @SerializedName("quickBookingsUrl") @Nullable public abstract String getQuickBookingsUrl();
-  @SerializedName("confirmation")  @Nullable  public abstract  BookingConfirmation confirmation();
+  @SerializedName("confirmation") @Nullable public abstract BookingConfirmation getConfirmation();
 }
