@@ -14,6 +14,9 @@ import org.immutables.value.Value;
 @JsonAdapter(GsonAdaptersBookingConfirmationAction.class)
 public abstract class BookingConfirmationAction implements Parcelable {
 
+  public static final String TYPE_CANCEL = "CANCEL";
+  public static final String TYPE_CALL = "CALL";
+
   public static final Creator<BookingConfirmationAction> CREATOR = new Creator<BookingConfirmationAction>() {
     @Override public BookingConfirmationAction createFromParcel(Parcel in) {
       return ImmutableBookingConfirmationAction.builder()
