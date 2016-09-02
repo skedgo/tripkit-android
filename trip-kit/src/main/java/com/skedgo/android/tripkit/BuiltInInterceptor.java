@@ -15,24 +15,28 @@ import rx.functions.Func0;
 
 @Value.Style(newBuilder = "create")
 public final class BuiltInInterceptor implements Interceptor {
-  static final String HEADER_APP_VERSION = "X-TripGo-Version";
-  static final String HEADER_REGION_ELIGIBILITY = "X-TripGo-RegionEligibility";
-  static final String HEADER_ACCEPT_LANGUAGE = "Accept-Language";
-  static final String HEADER_USER_TOKEN = "userToken";
+  private static final String HEADER_APP_VERSION = "X-TripGo-Version";
+  private static final String HEADER_REGION_ELIGIBILITY = "X-TripGo-RegionEligibility";
+  private static final String HEADER_UUID = "X-TripGo-UUID";
+  private static final String HEADER_ACCEPT_LANGUAGE = "Accept-Language";
+  private static final String HEADER_USER_TOKEN = "userToken";
 
   private final String appVersion;
   private final String regionEligibility;
   private final Locale locale;
+  @Nullable private final Func0<String> uuidProvider;
   @Nullable private final Func0<String> userTokenProvider;
 
   private BuiltInInterceptor(
       String appVersion,
       String regionEligibility,
       Locale locale,
+      @Nullable Func0<String> uuidProvider,
       @Nullable Func0<String> userTokenProvider) {
     this.appVersion = appVersion;
     this.regionEligibility = regionEligibility;
     this.locale = locale;
+    this.uuidProvider = uuidProvider;
     this.userTokenProvider = userTokenProvider;
   }
 
@@ -41,11 +45,13 @@ public final class BuiltInInterceptor implements Interceptor {
       String appVersion,
       String regionEligibility,
       Locale locale,
+      @Nullable Func0<String> uuidProvider,
       @Nullable Func0<String> userTokenProvider) {
     return new BuiltInInterceptor(
         appVersion,
         regionEligibility,
         locale,
+        uuidProvider,
         userTokenProvider
     );
   }
@@ -58,7 +64,12 @@ public final class BuiltInInterceptor implements Interceptor {
     if (userTokenProvider != null && userTokenProvider.call() != null) {
       builder.addHeader(HEADER_USER_TOKEN, userTokenProvider.call());
     }
-
+    if (uuidProvider != null) {
+      final String uuid = uuidProvider.call();
+      if (uuid != null) {
+        builder.addHeader(HEADER_UUID, uuid);
+      }
+    }
     return chain.proceed(builder.build());
   }
 }
