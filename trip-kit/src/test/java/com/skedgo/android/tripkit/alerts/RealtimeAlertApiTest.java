@@ -59,6 +59,7 @@ public class RealtimeAlertApiTest {
                         .severity("warning")
                         .title("Trackwork - Blue Mountains Line")
                         .text("Monday 29 August to Friday 2 September \n\n- Buses replace trains between Mount Victoria and Lithgow.\n- Trains to and from Bathurst run to a changed timetable.")
+                        .url("http://www.sydneytrains.info/service_updates/service_interruptions/")
                         .build()
                 )
                 .build(),
@@ -69,6 +70,7 @@ public class RealtimeAlertApiTest {
                         .severity("warning")
                         .title("Wharf Closed")
                         .text("McMahons Point Wharf Closed. Wharf closed for planned upgrade.")
+                        .url("")
                         .build()
                 )
                 .build()
