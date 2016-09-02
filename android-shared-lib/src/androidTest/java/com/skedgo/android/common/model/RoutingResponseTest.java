@@ -86,4 +86,26 @@ public class RoutingResponseTest extends AndroidTestCase {
     assertThat(alert.title()).isEqualTo("Traffic delay");
     assertThat(RealtimeAlerts.getDisplayText(alert)).isEqualTo("Unusually high traffic on the route.");
   }
+
+  public void testParseMultipleStreets() throws IOException {
+    InputStream routingJsonStream = getContext().getAssets().open("routingStreets.json");
+    String routingJson = FileUtils.readFileStreamAsText(routingJsonStream);
+
+    Gson gson = Gsons.createForLowercaseEnum();
+    RoutingResponse response = gson.fromJson(routingJson, RoutingResponse.class);
+    response.processRawData(getContext().getResources(), gson);
+
+    assertThat(response).isNotNull();
+    assertThat(response.getTripGroupList()).hasSize(1).doesNotContainNull();
+
+    TripGroup group = response.getTripGroupList().get(0);
+    assertThat(group.getTrips()).hasSize(1).doesNotContainNull();
+
+    Trip trip = group.getTrips().get(0);
+    assertThat(trip.getSegments()).hasSize(3).doesNotContainNull();
+
+    TripSegment motorbikeSegment = trip.getSegments().get(1);
+    assertThat(motorbikeSegment.getStreets()).hasSize(4).doesNotContainNull();
+
+  }
 }
