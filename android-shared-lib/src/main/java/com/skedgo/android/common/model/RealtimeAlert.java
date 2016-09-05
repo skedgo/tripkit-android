@@ -29,6 +29,7 @@ public abstract class RealtimeAlert implements Parcelable {
           .remoteHashCode(in.readLong())
           .severity(in.readString())
           .location((Location) in.readParcelable(Location.class.getClassLoader()))
+          .url(in.readString())
           .build();
     }
 
@@ -44,6 +45,7 @@ public abstract class RealtimeAlert implements Parcelable {
   @SerializedName("hashCode") public abstract long remoteHashCode();
   @Nullable public abstract Location location();
   @AlertSeverity @Nullable public abstract String severity();
+  @Nullable public abstract String url();
 
   @Override public int describeContents() {
     return 0;
@@ -57,5 +59,6 @@ public abstract class RealtimeAlert implements Parcelable {
     out.writeLong(remoteHashCode());
     out.writeString(severity());
     out.writeParcelable(location(), 0);
+    out.writeString(url());
   }
 }
