@@ -1,52 +1,66 @@
-package com.skedgo.android.common.model;
-
-import android.test.AndroidTestCase;
+package com.skedgo.android.tripkit;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonPrimitive;
-import com.skedgo.android.common.util.FileUtils;
+import com.skedgo.android.common.BuildConfig;
+import com.skedgo.android.common.model.RealtimeAlert;
+import com.skedgo.android.common.model.RealtimeAlerts;
+import com.skedgo.android.common.model.RoutingResponse;
+import com.skedgo.android.common.model.Trip;
+import com.skedgo.android.common.model.TripGroup;
+import com.skedgo.android.common.model.TripSegment;
 import com.skedgo.android.common.util.Gsons;
 
 import org.assertj.core.api.Condition;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.robolectric.RobolectricGradleTestRunner;
+import org.robolectric.RuntimeEnvironment;
+import org.robolectric.annotation.Config;
 
 import java.io.IOException;
-import java.io.InputStream;
+
+import okhttp3.mockwebserver.MockResponse;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static thuytrinh.mockwebserverrule.MockWebServerRule.createMockResponse;
 
-public class RoutingResponseTest extends AndroidTestCase {
-  public void testProcessDirectionTemplate() {
+@RunWith(RobolectricGradleTestRunner.class)
+@Config(constants = BuildConfig.class)
+public class RoutingResponseTest {
+
+  @Test public void testProcessDirectionTemplate() {
     // Case 1
     JsonPrimitive serviceDirectionNode = new JsonPrimitive("Service direction");
     String notes = "This is a <DIRECTION>";
     String result = RoutingResponse.processDirectionTemplate(serviceDirectionNode, notes);
-    assertEquals("This is a Direction: Service direction", result);
+    assertThat("This is a Direction: Service direction").isEqualTo(result);
 
     // Case 2
     serviceDirectionNode = new JsonPrimitive("");
     notes = "This is a <DIRECTION>";
     result = RoutingResponse.processDirectionTemplate(serviceDirectionNode, notes);
-    assertEquals("This is a ", result);
+    assertThat("This is a ").isEqualTo(result);
 
     // Case 3
     notes = "This is a <DIRECTION>";
     result = RoutingResponse.processDirectionTemplate(null, notes);
-    assertEquals("This is a ", result);
+    assertThat("This is a ").isEqualTo(result);
 
     // Case 4
     result = RoutingResponse.processDirectionTemplate(null, null);
-    assertNull(result);
+    assertThat(result).isNull();
     result = RoutingResponse.processDirectionTemplate(null, "");
-    assertEquals("", result);
+    assertThat("").isEqualTo(result);
   }
 
-  public void testTripHasReferenceToGroup() throws IOException {
-    InputStream routingJsonStream = getContext().getAssets().open("routing0.json");
-    String routingJson = FileUtils.readFileStreamAsText(routingJsonStream);
+  @Test public void testTripHasReferenceToGroup() throws IOException {
+    MockResponse mockResponse = createMockResponse("/routing0.json");
+    String routingJson = mockResponse.getBody().readUtf8();
 
     Gson gson = Gsons.createForLowercaseEnum();
     RoutingResponse response = gson.fromJson(routingJson, RoutingResponse.class);
-    response.processRawData(getContext().getResources(), gson);
+    response.processRawData(RuntimeEnvironment.application.getResources(), gson);
 
     for (final TripGroup group : response.getTripGroupList()) {
       assertThat(group.getTrips())
@@ -58,15 +72,16 @@ public class RoutingResponseTest extends AndroidTestCase {
             }
           });
     }
+
   }
 
-  public void testShouldParseProperly() throws IOException {
-    InputStream routingJsonStream = getContext().getAssets().open("routing0.json");
-    String routingJson = FileUtils.readFileStreamAsText(routingJsonStream);
+  @Test public void testShouldParseProperly() throws IOException {
+    MockResponse mockResponse = createMockResponse("/routing0.json");
+    String routingJson = mockResponse.getBody().readUtf8();
 
     Gson gson = Gsons.createForLowercaseEnum();
     RoutingResponse response = gson.fromJson(routingJson, RoutingResponse.class);
-    response.processRawData(getContext().getResources(), gson);
+    response.processRawData(RuntimeEnvironment.application.getResources(), gson);
 
     assertThat(response).isNotNull();
     assertThat(response.getAlerts()).hasSize(1);
@@ -88,12 +103,12 @@ public class RoutingResponseTest extends AndroidTestCase {
   }
 
   public void testParseMultipleStreets() throws IOException {
-    InputStream routingJsonStream = getContext().getAssets().open("routingStreets.json");
-    String routingJson = FileUtils.readFileStreamAsText(routingJsonStream);
+    MockResponse mockResponse = createMockResponse("/routingStreets.json");
+    String routingJson = mockResponse.getBody().readUtf8();
 
     Gson gson = Gsons.createForLowercaseEnum();
     RoutingResponse response = gson.fromJson(routingJson, RoutingResponse.class);
-    response.processRawData(getContext().getResources(), gson);
+    response.processRawData(RuntimeEnvironment.application.getResources(), gson);
 
     assertThat(response).isNotNull();
     assertThat(response.getTripGroupList()).hasSize(1).doesNotContainNull();
