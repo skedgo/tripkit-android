@@ -326,6 +326,7 @@ class MainModule {
         .registerTypeAdapterFactory(new GsonAdaptersRegionInfoResponse())
         .registerTypeAdapterFactory(new GsonAdaptersLocationInfo())
         .registerTypeAdapterFactory(new GsonAdaptersLocationInfoDetails())
+        .registerTypeAdapterFactory(new GsonAdaptersCarPark())
         .registerTypeAdapterFactory(new GsonAdaptersBooking())
         .create();
   }
