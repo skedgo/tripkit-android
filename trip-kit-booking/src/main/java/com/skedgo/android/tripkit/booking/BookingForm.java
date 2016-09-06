@@ -108,7 +108,15 @@ public class BookingForm extends FormField {
   }
 
   public boolean isOAuthForm() {
-    return getType() != null && getType().equals("authForm");
+    return isFormType("authForm");
+  }
+
+  public boolean isBookingForm() {
+    return isFormType("bookingForm");
+  }
+
+  private boolean isFormType(String type) {
+    return getType() != null && getType().equals(type);
   }
 
   public String getErrorMessage() {
