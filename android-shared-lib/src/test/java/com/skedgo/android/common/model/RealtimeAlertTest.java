@@ -26,6 +26,7 @@ public class RealtimeAlertTest extends AndroidTestCase {
         .severity(RealtimeAlert.SEVERITY_ALERT)
         .location(new Location(1.0, 2.0))
         .remoteHashCode(25251325)
+        .url("Some url")
         .build();
 
     // Note that toJsonTree(alert) would ignore @JsonAdapter annotation. Kinda weird!
@@ -37,6 +38,7 @@ public class RealtimeAlertTest extends AndroidTestCase {
     assertThat(json.has("hashCode")).isTrue();
     assertThat(json.has("severity")).isTrue();
     assertThat(json.has("location")).isTrue();
+    assertThat(json.has("url")).isTrue();
   }
 
   @Test public void parcel() {
@@ -48,6 +50,7 @@ public class RealtimeAlertTest extends AndroidTestCase {
         .severity(RealtimeAlert.SEVERITY_ALERT)
         .location(new Location(1.0, 2.0))
         .remoteHashCode(25251325)
+        .url("Some url")
         .build();
 
     RealtimeAlert actual = RealtimeAlert.CREATOR.createFromParcel(Parcels.parcel(expected));

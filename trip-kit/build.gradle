@@ -43,11 +43,11 @@ task(generateTripkitStrings, type: org.gradle.api.tasks.JavaExec) {
 }
 
 dependencies {
-  testCompile "junit:junit:4.12"
-  testCompile "org.assertj:assertj-core:1.7.0"
-  testCompile "org.mockito:mockito-core:1.10.5"
-  testCompile "org.robolectric:robolectric:3.1"
+  testCompile 'junit:junit:4.12'
+  testCompile 'org.assertj:assertj-core:1.7.0'
+  testCompile 'org.mockito:mockito-core:1.10.19'
   testCompile 'com.github.thuytrinh:MockWebServerRule:v1.0'
+  testCompile 'org.robolectric:robolectric:3.1'
 
   // To take advantage of AndroidJUnitRunner.
   androidTestCompile "com.android.support.test:runner:0.4.1"
