@@ -37,6 +37,8 @@ android {
     // We don't utilize ServiceLoader, so this is unneeded.
     exclude 'META-INF/services/com.google.gson.TypeAdapterFactory'
   }
+
+  lintOptions { abortOnError false }
 }
 
 dependencies {

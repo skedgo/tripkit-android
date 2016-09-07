@@ -8,6 +8,8 @@ import android.text.TextUtils;
 
 import com.google.gson.annotations.SerializedName;
 
+import org.apache.commons.collections4.CollectionUtils;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
@@ -106,7 +108,15 @@ public class BookingForm extends FormField {
   }
 
   public boolean isOAuthForm() {
-    return getType() != null && getType().equals("authForm");
+    return isFormType("authForm");
+  }
+
+  public boolean isBookingForm() {
+    return isFormType("bookingForm");
+  }
+
+  private boolean isFormType(String type) {
+    return getType() != null && getType().equals(type);
   }
 
   public String getErrorMessage() {
@@ -235,4 +245,22 @@ public class BookingForm extends FormField {
     }
     return this;
   }
+
+  public String externalAction(){
+
+    if (form != null && !CollectionUtils.isEmpty(form)) {
+      for (FormGroup group : form) {
+        for (FormField field:group.getFields()){
+          if (field instanceof LinkFormField &&
+              (LinkFormField.METHOD_EXTERNAL.equals(((LinkFormField)field).getMethod()))) {
+            return ((LinkFormField)field).getValue();
+          }
+        }
+      }
+    }
+
+    return null;
+  }
+
+
 }
