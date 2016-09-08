@@ -246,14 +246,14 @@ public class BookingForm extends FormField {
     return this;
   }
 
-  public String externalAction(){
+  public String externalAction() {
 
     if (form != null && !CollectionUtils.isEmpty(form)) {
       for (FormGroup group : form) {
-        for (FormField field:group.getFields()){
+        for (FormField field : group.getFields()) {
           if (field instanceof LinkFormField &&
-              (LinkFormField.METHOD_EXTERNAL.equals(((LinkFormField)field).getMethod()))) {
-            return ((LinkFormField)field).getValue();
+              (LinkFormField.METHOD_EXTERNAL.equals(((LinkFormField) field).getMethod()))) {
+            return ((LinkFormField) field).getValue();
           }
         }
       }
