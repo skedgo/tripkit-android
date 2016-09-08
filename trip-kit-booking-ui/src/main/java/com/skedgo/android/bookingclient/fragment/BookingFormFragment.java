@@ -128,14 +128,6 @@ public class BookingFormFragment extends ButterKnifeFragment {
       actionButton.setVisibility(View.GONE);
     }
 
-    Boolean hasUserError = form.hasUserError();
-    if (hasUserError != null && hasUserError) {
-      final TextView itemTitleView = (TextView) inflater
-          .inflate(R.layout.view_list_subheader, formItemsView, false);
-      ViewUtils.setText(itemTitleView, form.getErrorMessage());
-      formItemsView.addView(itemTitleView);
-    }
-
     final List<FormGroup> formGroups = form.getForm();
     if (CollectionUtils.isEmpty(formGroups)) {
       return;

@@ -13,6 +13,7 @@ public class BookingError implements Parcelable {
       bookingError.setTitle(source.readString());
       bookingError.setErrorCode(source.readInt());
       bookingError.setError(source.readString());
+      bookingError.setHasUserError(source.readInt() == 1);
       return bookingError;
     }
 
@@ -28,6 +29,8 @@ public class BookingError implements Parcelable {
   private int errorCode;
   @SerializedName("error")
   private String error;
+  @SerializedName("usererror")
+  private boolean hasUserError;
 
   public String getTitle() {
     return title;
@@ -53,6 +56,14 @@ public class BookingError implements Parcelable {
     this.error = error;
   }
 
+  public boolean hasUserError() {
+    return hasUserError;
+  }
+
+  public void setHasUserError(boolean hasUserError) {
+    this.hasUserError = hasUserError;
+  }
+
   @Override
   public int describeContents() {
     return 0;
@@ -63,5 +74,6 @@ public class BookingError implements Parcelable {
     dest.writeString(title);
     dest.writeInt(errorCode);
     dest.writeString(error);
+    dest.writeInt(hasUserError ? 1 : 0);
   }
 }

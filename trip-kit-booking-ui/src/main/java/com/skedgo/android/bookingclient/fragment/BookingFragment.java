@@ -224,6 +224,12 @@ public class BookingFragment extends ButterKnifeFragment implements View.OnClick
               showBookingForm(form);
             }
           }
+        }, new Action1<Throwable>() {
+          @Override
+          public void call(Throwable error) {
+            LogUtils.LOGE(TAG_BOOKING_FORM, "Error on booking", error);
+            showError(error);
+          }
         });
   }
 

@@ -39,15 +39,6 @@ public class BookingForm extends FormField {
   @SerializedName("image")
   private String imageUrl;
 
-  /* "usererror" should be nullable, as is not part of the booking for structure. It generates
-  * a crash in the server. TODO: create an adapter to remove all unnecesary data sent (read only
-  * fields as well)
-  */
-  @Nullable @SerializedName("usererror")
-  private Boolean hasUserError;
-  @SerializedName("error")
-  private String errorMessage;
-
   public BookingForm(Parcel in) {
     super(in);
     this.action = in.readParcelable(BookingAction.class.getClassLoader());
@@ -56,8 +47,6 @@ public class BookingForm extends FormField {
     this.value = in.readString();
     this.refreshURLForSourceObject = in.readString();
     this.imageUrl = in.readString();
-    this.hasUserError = in.readInt() == 1 ? true : null;
-    this.errorMessage = in.readString();
   }
 
   public BookingForm() {
@@ -73,8 +62,6 @@ public class BookingForm extends FormField {
     dest.writeString(value);
     dest.writeString(refreshURLForSourceObject);
     dest.writeString(imageUrl);
-    dest.writeInt(hasUserError != null && hasUserError ? 1 : 0);
-    dest.writeString(errorMessage);
   }
 
   public BookingAction getAction() {
@@ -117,22 +104,6 @@ public class BookingForm extends FormField {
 
   private boolean isFormType(String type) {
     return getType() != null && getType().equals(type);
-  }
-
-  public String getErrorMessage() {
-    return errorMessage;
-  }
-
-  public void setErrorMessage(String errorMessage) {
-    this.errorMessage = errorMessage;
-  }
-
-  @Nullable public Boolean hasUserError() {
-    return hasUserError;
-  }
-
-  public void setHasUserError(boolean hasUserError) {
-    this.hasUserError = hasUserError;
   }
 
   @Nullable public String getClientID() {
@@ -246,14 +217,14 @@ public class BookingForm extends FormField {
     return this;
   }
 
-  public String externalAction() {
+  public String externalAction(){
 
     if (form != null && !CollectionUtils.isEmpty(form)) {
       for (FormGroup group : form) {
-        for (FormField field : group.getFields()) {
+        for (FormField field:group.getFields()){
           if (field instanceof LinkFormField &&
-              (LinkFormField.METHOD_EXTERNAL.equals(((LinkFormField) field).getMethod()))) {
-            return ((LinkFormField) field).getValue();
+              (LinkFormField.METHOD_EXTERNAL.equals(((LinkFormField)field).getMethod()))) {
+            return ((LinkFormField)field).getValue();
           }
         }
       }
@@ -261,5 +232,6 @@ public class BookingForm extends FormField {
 
     return null;
   }
+
 
 }
