@@ -39,8 +39,12 @@ public class BookingForm extends FormField {
   @SerializedName("image")
   private String imageUrl;
 
-  @SerializedName("usererror")
-  private boolean hasUserError;
+  /* "usererror" should be nullable, as is not part of the booking for structure. It generates
+  * a crash in the server. TODO: create an adapter to remove all unnecesary data sent (read only
+  * fields as well)
+  */
+  @Nullable @SerializedName("usererror")
+  private Boolean hasUserError;
   @SerializedName("error")
   private String errorMessage;
 
@@ -52,7 +56,7 @@ public class BookingForm extends FormField {
     this.value = in.readString();
     this.refreshURLForSourceObject = in.readString();
     this.imageUrl = in.readString();
-    this.hasUserError = in.readInt() == 1;
+    this.hasUserError = in.readInt() == 1 ? true : null;
     this.errorMessage = in.readString();
   }
 
@@ -69,7 +73,7 @@ public class BookingForm extends FormField {
     dest.writeString(value);
     dest.writeString(refreshURLForSourceObject);
     dest.writeString(imageUrl);
-    dest.writeInt(hasUserError ? 1 : 0);
+    dest.writeInt(hasUserError != null && hasUserError ? 1 : 0);
     dest.writeString(errorMessage);
   }
 
@@ -111,10 +115,6 @@ public class BookingForm extends FormField {
     return isFormType("authForm");
   }
 
-  public boolean isBookingForm() {
-    return isFormType("bookingForm");
-  }
-
   private boolean isFormType(String type) {
     return getType() != null && getType().equals(type);
   }
@@ -127,7 +127,7 @@ public class BookingForm extends FormField {
     this.errorMessage = errorMessage;
   }
 
-  public boolean hasUserError() {
+  @Nullable public Boolean hasUserError() {
     return hasUserError;
   }
 
@@ -261,6 +261,5 @@ public class BookingForm extends FormField {
 
     return null;
   }
-
 
 }

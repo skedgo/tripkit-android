@@ -88,4 +88,20 @@ public class StringFieldView extends RelativeLayout {
         sideTitleView = (TextView) findViewById(R.id.sideTitleView);
         editText = (EditText) findViewById(R.id.editText);
     }
+
+    protected TextView getTitleView() {
+        return titleView;
+    }
+
+    protected TextView getValueView() {
+        return valueView;
+    }
+
+    protected TextView getSideTitleView() {
+        return sideTitleView;
+    }
+
+    protected EditText getEditText() {
+        return editText;
+    }
 }

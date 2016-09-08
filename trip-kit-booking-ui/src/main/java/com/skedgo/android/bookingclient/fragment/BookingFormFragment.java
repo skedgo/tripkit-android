@@ -20,6 +20,7 @@ import com.skedgo.android.bookingclient.R;
 import com.skedgo.android.bookingclient.activity.BookingActivity;
 import com.skedgo.android.bookingclient.view.DateTimeFieldView;
 import com.skedgo.android.bookingclient.view.OptionFieldView;
+import com.skedgo.android.bookingclient.view.PasswordFieldView;
 import com.skedgo.android.bookingclient.view.PickupSubHeaderView;
 import com.skedgo.android.bookingclient.view.StepperView;
 import com.skedgo.android.bookingclient.view.StringFieldView;
@@ -35,6 +36,7 @@ import com.skedgo.android.tripkit.booking.FormField;
 import com.skedgo.android.tripkit.booking.FormGroup;
 import com.skedgo.android.tripkit.booking.LinkFormField;
 import com.skedgo.android.tripkit.booking.OptionFormField;
+import com.skedgo.android.tripkit.booking.PasswordFormField;
 import com.skedgo.android.tripkit.booking.StepperFormField;
 import com.skedgo.android.tripkit.booking.StringFormField;
 import com.skedgo.android.tripkit.booking.SwitchFormField;
@@ -126,7 +128,8 @@ public class BookingFormFragment extends ButterKnifeFragment {
       actionButton.setVisibility(View.GONE);
     }
 
-    if (form.hasUserError()) {
+    Boolean hasUserError = form.hasUserError();
+    if (hasUserError != null && hasUserError) {
       final TextView itemTitleView = (TextView) inflater
           .inflate(R.layout.view_list_subheader, formItemsView, false);
       ViewUtils.setText(itemTitleView, form.getErrorMessage());
@@ -206,6 +209,12 @@ public class BookingFormFragment extends ButterKnifeFragment {
             }
           });
           formItemsView.addView(linkFieldView);
+        } else if (field instanceof PasswordFormField) {
+          final PasswordFormField passField = (PasswordFormField) field;
+          final PasswordFieldView passFieldView =
+              (PasswordFieldView) inflater.inflate(R.layout.view_field_string, formItemsView, false);
+          passFieldView.bindViewModel(passField);
+          formItemsView.addView(passFieldView);
         } else if (field instanceof StringFormField) {
           final StringFormField stringField = (StringFormField) field;
           final StringFieldView stringFieldView =

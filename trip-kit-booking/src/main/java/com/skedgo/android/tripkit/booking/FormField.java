@@ -18,6 +18,7 @@ public abstract class FormField implements Parcelable, Serializable {
   public static final int STEPPER = 4;
   public static final int STRING = 1;
   public static final int SWITCH = 8;
+  public static final int PASSWORD = 9;
 
   public static final String ACCESS_TOKEN = "access_token";
   public static final String EXPIRES_IN = "expires_in";
