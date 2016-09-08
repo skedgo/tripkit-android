@@ -1,24 +1,31 @@
 package com.skedgo.android.tripkit.booking;
 
 import android.os.Parcel;
+import android.support.annotation.Nullable;
 
-public class PasswordFormField extends StringFormField {
+import com.google.gson.annotations.SerializedName;
 
-  public static final Creator<StringFormField> CREATOR = new Creator<StringFormField>() {
+public class PasswordFormField extends FormField {
+
+  public static final Creator<PasswordFormField> CREATOR = new Creator<PasswordFormField>() {
     @Override
-    public StringFormField createFromParcel(Parcel in) {
+    public PasswordFormField createFromParcel(Parcel in) {
       in.readInt();
-      return new StringFormField(in);
+      return new PasswordFormField(in);
     }
 
     @Override
-    public StringFormField[] newArray(int size) {
-      return new StringFormField[size];
+    public PasswordFormField[] newArray(int size) {
+      return new PasswordFormField[size];
     }
   };
 
+  @SerializedName("value")
+  private String value;
+
   public PasswordFormField(Parcel in) {
     super(in);
+    this.value = in.readString();
   }
 
   public PasswordFormField() {
@@ -29,13 +36,17 @@ public class PasswordFormField extends StringFormField {
   public void writeToParcel(Parcel dest, int flags) {
     dest.writeInt(PASSWORD);
     super.writeToParcel(dest, flags);
+    dest.writeString(value);
   }
 
-  public String getKeyboardType() {
-    return null;
+  @Nullable
+  public String getValue() {
+    return value;
   }
 
-  public void setKeyboardType(String keyboardType) {}
+  public void setValue(String value) {
+    this.value = value;
+  }
 
 }
 

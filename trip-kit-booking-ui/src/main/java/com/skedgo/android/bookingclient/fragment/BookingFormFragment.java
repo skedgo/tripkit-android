@@ -204,7 +204,7 @@ public class BookingFormFragment extends ButterKnifeFragment {
         } else if (field instanceof PasswordFormField) {
           final PasswordFormField passField = (PasswordFormField) field;
           final PasswordFieldView passFieldView =
-              (PasswordFieldView) inflater.inflate(R.layout.view_field_string, formItemsView, false);
+              (PasswordFieldView) inflater.inflate(R.layout.view_field_password, formItemsView, false);
           passFieldView.bindViewModel(passField);
           formItemsView.addView(passFieldView);
         } else if (field instanceof StringFormField) {
