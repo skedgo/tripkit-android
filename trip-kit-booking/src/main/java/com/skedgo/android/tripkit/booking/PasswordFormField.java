@@ -1,9 +1,6 @@
 package com.skedgo.android.tripkit.booking;
 
 import android.os.Parcel;
-import android.support.annotation.Nullable;
-
-import com.google.gson.annotations.SerializedName;
 
 public class PasswordFormField extends StringFormField {
 
