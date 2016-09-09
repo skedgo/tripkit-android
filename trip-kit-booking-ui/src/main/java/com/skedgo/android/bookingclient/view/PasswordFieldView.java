@@ -4,19 +4,15 @@ import android.annotation.TargetApi;
 import android.content.Context;
 import android.os.Build;
 import android.support.annotation.NonNull;
-import android.text.InputType;
 import android.util.AttributeSet;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.RelativeLayout;
-import android.widget.TextView;
 
 import com.skedgo.android.bookingclient.R;
 import com.skedgo.android.tripkit.booking.PasswordFormField;
-import com.skedgo.android.tripkit.booking.StringFormField;
 
 public class PasswordFieldView extends RelativeLayout {
-  private TextView titleView;
   private EditText editText;
 
   public PasswordFieldView(Context context) {
@@ -37,15 +33,14 @@ public class PasswordFieldView extends RelativeLayout {
     super(context, attrs, defStyleAttr, defStyleRes);
   }
 
-  public void bindViewModel(@NonNull final PasswordFormField stringField) {
-    setVisibility(stringField.isHidden() ? GONE : VISIBLE);
-    titleView.setText(stringField.getTitle());
-
+  public void bindViewModel(@NonNull final PasswordFormField passwordField) {
+    setVisibility(passwordField.isHidden() ? GONE : VISIBLE);
+    editText.setHint(passwordField.getTitle());
     editText.setOnFocusChangeListener(new View.OnFocusChangeListener() {
       @Override
       public void onFocusChange(View v, boolean hasFocus) {
         if (!hasFocus) { // user finished input
-          stringField.setValue(editText.getText().toString());
+          passwordField.setValue(editText.getText().toString());
         }
       }
     });
@@ -54,15 +49,7 @@ public class PasswordFieldView extends RelativeLayout {
   @Override
   protected void onFinishInflate() {
     super.onFinishInflate();
-    titleView = (TextView) findViewById(R.id.titleView);
     editText = (EditText) findViewById(R.id.editText);
   }
 
-  protected TextView getTitleView() {
-    return titleView;
-  }
-
-  protected EditText getEditText() {
-    return editText;
-  }
 }

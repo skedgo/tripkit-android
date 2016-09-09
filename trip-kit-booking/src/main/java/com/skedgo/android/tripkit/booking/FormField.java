@@ -34,6 +34,8 @@ public abstract class FormField implements Parcelable, Serializable {
     @Override
     public FormField createFromParcel(Parcel in) {
       switch (in.readInt()) {
+        case PASSWORD:
+          return new PasswordFormField(in);
         case STRING:
           return new StringFormField(in);
         case OPTION:
