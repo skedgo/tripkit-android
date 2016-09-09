@@ -97,27 +97,9 @@ class MainModule {
         .create(RegionInfoApi.class);
   }
 
-  @Singleton @Provides Func1<String, RegionInfoApi> regionInfoApiFactory(
-      final Gson gson,
-      final okhttp3.OkHttpClient httpClient) {
-    return new Func1<String, RegionInfoApi>() {
-      @Override public RegionInfoApi call(String baseUrl) {
-        return new Retrofit.Builder()
-            .baseUrl(HttpUrl.parse(baseUrl))
-            .client(httpClient)
-            .addConverterFactory(GsonConverterFactory.create(gson))
-            .addCallAdapterFactory(RxJavaCallAdapterFactory.createWithScheduler(io()))
-            .build()
-            .create(RegionInfoApi.class);
-      }
-    };
-  }
-
   @Singleton @Provides RegionService getRegionService(
       RegionDatabaseHelper databaseHelper,
       RegionsApi regionsApi,
-      Func1<String, RegionInfoApi> regionInfoApiFactory,
-      Provider<RegionInfoApi> regionInfoApiProvider,
       Provider<RegionInfoService> regionInfoServiceProvider) {
     final RegionsFetcher regionsFetcher = new RegionsFetcherImpl(
         regionsApi,
@@ -134,9 +116,7 @@ class MainModule {
     return new RegionServiceImpl(
         regionCache,
         modeCache,
-        regionInfoApiFactory,
         regionsFetcher,
-        regionInfoApiProvider,
         regionInfoServiceProvider
     );
   }

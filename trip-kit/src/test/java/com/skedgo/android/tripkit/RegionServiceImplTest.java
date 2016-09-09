@@ -3,8 +3,6 @@ package com.skedgo.android.tripkit;
 import com.skedgo.android.common.model.Location;
 import com.skedgo.android.common.model.Region;
 import com.skedgo.android.common.model.TransportMode;
-import com.skedgo.android.tripkit.tsp.RegionInfoApi;
-import com.skedgo.android.tripkit.tsp.RegionInfoBody;
 import com.skedgo.android.tripkit.tsp.RegionInfoService;
 
 import org.junit.Before;
@@ -23,14 +21,11 @@ import java.util.Map;
 
 import dagger.internal.Factory;
 import rx.Observable;
-import rx.functions.Func1;
 import rx.observers.TestSubscriber;
 
 import static java.util.Collections.singletonList;
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.mockito.Matchers.any;
 import static org.mockito.Matchers.eq;
-import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -40,9 +35,8 @@ import static org.mockito.Mockito.when;
 public class RegionServiceImplTest {
   @Mock Cache<List<Region>> regionCache;
   @Mock Cache<Map<String, TransportMode>> modeCache;
-  @Mock Func1<String, RegionInfoApi> regionInfoApiFactory;
   @Mock RegionsFetcher regionsFetcher;
-  @Mock Factory<RegionInfoApi> regionInfoApiProvider;
+  @Mock RegionInfoService regionInfoService;
   @Mock Factory<RegionInfoService> regionInfoServiceProvider;
   private RegionServiceImpl regionService;
 
@@ -51,11 +45,10 @@ public class RegionServiceImplTest {
     regionService = new RegionServiceImpl(
         regionCache,
         modeCache,
-        regionInfoApiFactory,
         regionsFetcher,
-        regionInfoApiProvider,
         regionInfoServiceProvider
     );
+    when(regionInfoServiceProvider.get()).thenReturn(regionInfoService);
   }
 
   @Test public void shouldPropagateNullPointerExceptionIfLocationIsNull() {
@@ -173,7 +166,6 @@ public class RegionServiceImplTest {
   }
 
   @Test public void shouldFetchParatransit() {
-    final RegionInfoApi regionInfoApi = mock(RegionInfoApi.class);
     final Paratransit paratransit = new Paratransit(
         "http://accessla.org/",
         "Access",
@@ -182,13 +174,10 @@ public class RegionServiceImplTest {
     final RegionInfo regionInfo = ImmutableRegionInfo.builder()
         .paratransit(paratransit)
         .build();
-    final RegionInfoResponse response = ImmutableRegionInfoResponse.builder()
-        .regions(singletonList(regionInfo))
-        .build();
-    when(regionInfoApi.fetchRegionInfo(any(RegionInfoBody.class)))
-        .thenReturn(response);
-    when(regionInfoApiFactory.call(eq("https://lepton-us-ca-losangeles.tripgo.skedgo.com/satapp")))
-        .thenReturn(regionInfoApi);
+    when(regionInfoService.fetchRegionInfoAsync(
+        eq(singletonList("https://lepton-us-ca-losangeles.tripgo.skedgo.com/satapp")),
+        eq("US_CA_LosAngeles")
+    )).thenReturn(Observable.just(regionInfo));
 
     final Region region = new Region();
     region.setURLs(new ArrayList<>(singletonList("https://lepton-us-ca-losangeles.tripgo.skedgo.com/satapp")));

@@ -7,7 +7,6 @@ import com.skedgo.android.common.model.Location;
 import com.skedgo.android.common.model.ModeInfo;
 import com.skedgo.android.common.model.Region;
 import com.skedgo.android.common.model.TransportMode;
-import com.skedgo.android.tripkit.tsp.RegionInfoApi;
 import com.skedgo.android.tripkit.tsp.RegionInfoService;
 
 import java.util.Collections;
@@ -24,23 +23,17 @@ import rx.functions.Func1;
 final class RegionServiceImpl implements RegionService {
   private final Cache<List<Region>> regionCache;
   private final Cache<Map<String, TransportMode>> modeCache;
-  private final Func1<String, RegionInfoApi> regionInfoApiFactory;
   private final RegionsFetcher regionsFetcher;
-  private final Provider<RegionInfoApi> regionInfoApiProvider;
   private final Provider<RegionInfoService> regionInfoServiceProvider;
 
   RegionServiceImpl(
       Cache<List<Region>> regionCache,
       Cache<Map<String, TransportMode>> modeCache,
-      @NonNull Func1<String, RegionInfoApi> regionInfoApiFactory,
       @NonNull RegionsFetcher regionsFetcher,
-      Provider<RegionInfoApi> regionInfoApiProvider,
       Provider<RegionInfoService> regionInfoServiceProvider) {
     this.regionCache = regionCache;
     this.modeCache = modeCache;
-    this.regionInfoApiFactory = regionInfoApiFactory;
     this.regionsFetcher = regionsFetcher;
-    this.regionInfoApiProvider = regionInfoApiProvider;
     this.regionInfoServiceProvider = regionInfoServiceProvider;
   }
 
