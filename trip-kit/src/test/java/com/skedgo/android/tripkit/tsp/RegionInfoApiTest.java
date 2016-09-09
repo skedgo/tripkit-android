@@ -1,6 +1,6 @@
-package com.skedgo.android.tripkit;
+package com.skedgo.android.tripkit.tsp;
 
-import com.skedgo.android.tripkit.tsp.RegionInfoApi;
+import com.skedgo.android.tripkit.BuildConfig;
 
 import org.junit.Before;
 import org.junit.Rule;
