@@ -7,6 +7,8 @@ import com.skedgo.android.common.model.Location;
 import com.skedgo.android.common.model.ModeInfo;
 import com.skedgo.android.common.model.Region;
 import com.skedgo.android.common.model.TransportMode;
+import com.skedgo.android.tripkit.tsp.RegionInfoApi;
+import com.skedgo.android.tripkit.tsp.RegionInfoService;
 
 import java.util.Collections;
 import java.util.List;
@@ -15,13 +17,9 @@ import java.util.NoSuchElementException;
 
 import javax.inject.Provider;
 
-import okhttp3.HttpUrl;
 import rx.Observable;
 import rx.functions.Action0;
 import rx.functions.Func1;
-import rx.schedulers.Schedulers;
-
-import static org.apache.commons.collections4.CollectionUtils.isNotEmpty;
 
 final class RegionServiceImpl implements RegionService {
   private final Cache<List<Region>> regionCache;
@@ -29,18 +27,21 @@ final class RegionServiceImpl implements RegionService {
   private final Func1<String, RegionInfoApi> regionInfoApiFactory;
   private final RegionsFetcher regionsFetcher;
   private final Provider<RegionInfoApi> regionInfoApiProvider;
+  private final Provider<RegionInfoService> regionInfoServiceProvider;
 
   RegionServiceImpl(
       Cache<List<Region>> regionCache,
       Cache<Map<String, TransportMode>> modeCache,
       @NonNull Func1<String, RegionInfoApi> regionInfoApiFactory,
       @NonNull RegionsFetcher regionsFetcher,
-      Provider<RegionInfoApi> regionInfoApiProvider) {
+      Provider<RegionInfoApi> regionInfoApiProvider,
+      Provider<RegionInfoService> regionInfoServiceProvider) {
     this.regionCache = regionCache;
     this.modeCache = modeCache;
     this.regionInfoApiFactory = regionInfoApiFactory;
     this.regionsFetcher = regionsFetcher;
     this.regionInfoApiProvider = regionInfoApiProvider;
+    this.regionInfoServiceProvider = regionInfoServiceProvider;
   }
 
   @Override
@@ -149,30 +150,8 @@ final class RegionServiceImpl implements RegionService {
 
   @Override
   public Observable<RegionInfo> getRegionInfoByRegionAsync(@NonNull final Region region) {
-    return Observable.from(region.getURLs())
-        .concatMapDelayError(new Func1<String, Observable<RegionInfoResponse>>() {
-          @Override public Observable<RegionInfoResponse> call(final String baseUrl) {
-            final String url = HttpUrl.parse(baseUrl).newBuilder()
-                .addPathSegment("regionInfo.json")
-                .build()
-                .toString();
-            return regionInfoApiProvider.get().fetchRegionInfoAsync(
-                url,
-                ImmutableRegionInfoBody.of(region.getName())
-            );
-          }
-        })
-        .first(new Func1<RegionInfoResponse, Boolean>() {
-          @Override public Boolean call(RegionInfoResponse response) {
-            return isNotEmpty(response.regions());
-          }
-        })
-        .map(new Func1<RegionInfoResponse, RegionInfo>() {
-          @Override public RegionInfo call(RegionInfoResponse response) {
-            return response.regions().get(0);
-          }
-        })
-        .subscribeOn(Schedulers.io());
+    return regionInfoServiceProvider.get()
+        .fetchRegionInfoAsync(region.getURLs(), region.getName());
   }
 
   @Override

@@ -1,4 +1,4 @@
-package com.skedgo.android.tripkit;
+package com.skedgo.android.tripkit.tsp;
 
 import com.google.gson.annotations.JsonAdapter;
 import com.skedgo.android.common.model.Region;

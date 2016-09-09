@@ -1,5 +1,7 @@
 package com.skedgo.android.tripkit;
 
+import com.skedgo.android.tripkit.tsp.RegionInfoApi;
+
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.runner.RunWith;

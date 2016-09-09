@@ -13,6 +13,9 @@ import com.skedgo.android.common.model.TransportMode;
 import com.skedgo.android.common.util.DiagnosticUtils;
 import com.skedgo.android.common.util.Gsons;
 import com.skedgo.android.common.util.LowercaseEnumTypeAdapterFactory;
+import com.skedgo.android.tripkit.tsp.GsonAdaptersRegionInfoBody;
+import com.skedgo.android.tripkit.tsp.RegionInfoApi;
+import com.skedgo.android.tripkit.tsp.RegionInfoService;
 import com.squareup.okhttp.OkHttpClient;
 
 import java.util.List;
@@ -114,7 +117,8 @@ class MainModule {
       RegionDatabaseHelper databaseHelper,
       RegionsApi regionsApi,
       Func1<String, RegionInfoApi> regionInfoApiFactory,
-      Provider<RegionInfoApi> regionInfoApiProvider) {
+      Provider<RegionInfoApi> regionInfoApiProvider,
+      Provider<RegionInfoService> regionInfoServiceProvider) {
     final RegionsFetcher regionsFetcher = new RegionsFetcherImpl(
         regionsApi,
         databaseHelper
@@ -132,7 +136,8 @@ class MainModule {
         modeCache,
         regionInfoApiFactory,
         regionsFetcher,
-        regionInfoApiProvider
+        regionInfoApiProvider,
+        regionInfoServiceProvider
     );
   }
 

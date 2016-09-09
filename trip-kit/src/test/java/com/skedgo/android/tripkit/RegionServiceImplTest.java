@@ -3,6 +3,9 @@ package com.skedgo.android.tripkit;
 import com.skedgo.android.common.model.Location;
 import com.skedgo.android.common.model.Region;
 import com.skedgo.android.common.model.TransportMode;
+import com.skedgo.android.tripkit.tsp.RegionInfoApi;
+import com.skedgo.android.tripkit.tsp.RegionInfoBody;
+import com.skedgo.android.tripkit.tsp.RegionInfoService;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -40,6 +43,7 @@ public class RegionServiceImplTest {
   @Mock Func1<String, RegionInfoApi> regionInfoApiFactory;
   @Mock RegionsFetcher regionsFetcher;
   @Mock Factory<RegionInfoApi> regionInfoApiProvider;
+  @Mock Factory<RegionInfoService> regionInfoServiceProvider;
   private RegionServiceImpl regionService;
 
   @Before public void setUp() {
@@ -49,7 +53,8 @@ public class RegionServiceImplTest {
         modeCache,
         regionInfoApiFactory,
         regionsFetcher,
-        regionInfoApiProvider
+        regionInfoApiProvider,
+        regionInfoServiceProvider
     );
   }
 

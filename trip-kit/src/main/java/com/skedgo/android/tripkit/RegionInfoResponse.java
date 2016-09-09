@@ -9,6 +9,6 @@ import java.util.List;
 
 @Gson.TypeAdapters
 @Value.Immutable
-interface RegionInfoResponse {
+public interface RegionInfoResponse {
   @Nullable List<RegionInfo> regions();
 }
