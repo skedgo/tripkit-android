@@ -41,6 +41,7 @@ import rx.schedulers.Schedulers;
 
 import static retrofit.RestAdapter.LogLevel.FULL;
 import static retrofit.RestAdapter.LogLevel.NONE;
+import static rx.schedulers.Schedulers.io;
 
 @Module
 class MainModule {
@@ -81,16 +82,28 @@ class MainModule {
     );
   }
 
-  @Singleton @Provides Func1<String, RegionInfoApi> getRegionInfoApiFactory(
+  @Provides RegionInfoApi regionInfoApi(
+      Gson gson,
+      okhttp3.OkHttpClient httpClient) {
+    return new Retrofit.Builder()
+        .baseUrl("https://tripgo.skedgo.com/satapp/")
+        .client(httpClient)
+        .addConverterFactory(GsonConverterFactory.create(gson))
+        .addCallAdapterFactory(RxJavaCallAdapterFactory.createWithScheduler(io()))
+        .build()
+        .create(RegionInfoApi.class);
+  }
+
+  @Singleton @Provides Func1<String, RegionInfoApi> regionInfoApiFactory(
       final Gson gson,
-      final OkHttpClient httpClient) {
+      final okhttp3.OkHttpClient httpClient) {
     return new Func1<String, RegionInfoApi>() {
-      @Override public RegionInfoApi call(String endpoint) {
-        return new RestAdapter.Builder()
-            .setLogLevel(configs.debuggable() ? FULL : NONE)
-            .setEndpoint(endpoint)
-            .setConverter(new GsonConverter(gson))
-            .setClient(new OkClient(httpClient))
+      @Override public RegionInfoApi call(String baseUrl) {
+        return new Retrofit.Builder()
+            .baseUrl(HttpUrl.parse(baseUrl))
+            .client(httpClient)
+            .addConverterFactory(GsonConverterFactory.create(gson))
+            .addCallAdapterFactory(RxJavaCallAdapterFactory.createWithScheduler(io()))
             .build()
             .create(RegionInfoApi.class);
       }
@@ -100,7 +113,8 @@ class MainModule {
   @Singleton @Provides RegionService getRegionService(
       RegionDatabaseHelper databaseHelper,
       RegionsApi regionsApi,
-      Func1<String, RegionInfoApi> regionInfoApiFactory) {
+      Func1<String, RegionInfoApi> regionInfoApiFactory,
+      Provider<RegionInfoApi> regionInfoApiProvider) {
     final RegionsFetcher regionsFetcher = new RegionsFetcherImpl(
         regionsApi,
         databaseHelper
@@ -117,7 +131,8 @@ class MainModule {
         regionCache,
         modeCache,
         regionInfoApiFactory,
-        regionsFetcher
+        regionsFetcher,
+        regionInfoApiProvider
     );
   }
 
@@ -322,6 +337,7 @@ class MainModule {
   @Singleton @Provides Gson getGson() {
     return new GsonBuilder()
         .registerTypeAdapterFactory(new LowercaseEnumTypeAdapterFactory())
+        .registerTypeAdapterFactory(new GsonAdaptersRegionInfoBody())
         .registerTypeAdapterFactory(new GsonAdaptersRegionInfo())
         .registerTypeAdapterFactory(new GsonAdaptersRegionInfoResponse())
         .registerTypeAdapterFactory(new GsonAdaptersLocationInfo())

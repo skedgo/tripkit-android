@@ -18,6 +18,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import dagger.internal.Factory;
 import rx.Observable;
 import rx.functions.Func1;
 import rx.observers.TestSubscriber;
@@ -38,6 +39,7 @@ public class RegionServiceImplTest {
   @Mock Cache<Map<String, TransportMode>> modeCache;
   @Mock Func1<String, RegionInfoApi> regionInfoApiFactory;
   @Mock RegionsFetcher regionsFetcher;
+  @Mock Factory<RegionInfoApi> regionInfoApiProvider;
   private RegionServiceImpl regionService;
 
   @Before public void setUp() {
@@ -46,7 +48,8 @@ public class RegionServiceImplTest {
         regionCache,
         modeCache,
         regionInfoApiFactory,
-        regionsFetcher
+        regionsFetcher,
+        regionInfoApiProvider
     );
   }
 
@@ -177,7 +180,7 @@ public class RegionServiceImplTest {
     final RegionInfoResponse response = ImmutableRegionInfoResponse.builder()
         .regions(singletonList(regionInfo))
         .build();
-    when(regionInfoApi.fetchRegionInfo(any(RegionInfoApi.RequestBody.class)))
+    when(regionInfoApi.fetchRegionInfo(any(RegionInfoBody.class)))
         .thenReturn(response);
     when(regionInfoApiFactory.call(eq("https://lepton-us-ca-losangeles.tripgo.skedgo.com/satapp")))
         .thenReturn(regionInfoApi);

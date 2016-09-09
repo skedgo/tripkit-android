@@ -13,8 +13,10 @@ import java.util.List;
 import java.util.Map;
 import java.util.NoSuchElementException;
 
+import javax.inject.Provider;
+
+import okhttp3.HttpUrl;
 import rx.Observable;
-import rx.Subscriber;
 import rx.functions.Action0;
 import rx.functions.Func1;
 import rx.schedulers.Schedulers;
@@ -26,16 +28,19 @@ final class RegionServiceImpl implements RegionService {
   private final Cache<Map<String, TransportMode>> modeCache;
   private final Func1<String, RegionInfoApi> regionInfoApiFactory;
   private final RegionsFetcher regionsFetcher;
+  private final Provider<RegionInfoApi> regionInfoApiProvider;
 
   RegionServiceImpl(
       Cache<List<Region>> regionCache,
       Cache<Map<String, TransportMode>> modeCache,
       @NonNull Func1<String, RegionInfoApi> regionInfoApiFactory,
-      @NonNull RegionsFetcher regionsFetcher) {
+      @NonNull RegionsFetcher regionsFetcher,
+      Provider<RegionInfoApi> regionInfoApiProvider) {
     this.regionCache = regionCache;
     this.modeCache = modeCache;
     this.regionInfoApiFactory = regionInfoApiFactory;
     this.regionsFetcher = regionsFetcher;
+    this.regionInfoApiProvider = regionInfoApiProvider;
   }
 
   @Override
@@ -145,9 +150,16 @@ final class RegionServiceImpl implements RegionService {
   @Override
   public Observable<RegionInfo> getRegionInfoByRegionAsync(@NonNull final Region region) {
     return Observable.from(region.getURLs())
-        .concatMap(new Func1<String, Observable<RegionInfoResponse>>() {
+        .concatMapDelayError(new Func1<String, Observable<RegionInfoResponse>>() {
           @Override public Observable<RegionInfoResponse> call(final String baseUrl) {
-            return fetchRegionInfoPerUrl(baseUrl, region);
+            final String url = HttpUrl.parse(baseUrl).newBuilder()
+                .addPathSegment("regionInfo.json")
+                .build()
+                .toString();
+            return regionInfoApiProvider.get().fetchRegionInfoAsync(
+                url,
+                ImmutableRegionInfoBody.of(region.getName())
+            );
           }
         })
         .first(new Func1<RegionInfoResponse, Boolean>() {
@@ -171,26 +183,5 @@ final class RegionServiceImpl implements RegionService {
             return regionInfo.transitModes();
           }
         });
-  }
-
-  Observable<RegionInfoResponse> fetchRegionInfoPerUrl(
-      final String baseUrl,
-      @NonNull final Region region) {
-    return Observable
-        .create(new Observable.OnSubscribe<RegionInfoResponse>() {
-          @Override public void call(Subscriber<? super RegionInfoResponse> subscriber) {
-            try {
-              final RegionInfoApi api = regionInfoApiFactory.call(baseUrl);
-              final RegionInfoResponse response = api.fetchRegionInfo(
-                  new RegionInfoApi.RequestBody(region.getName())
-              );
-              subscriber.onNext(response);
-              subscriber.onCompleted();
-            } catch (Exception e) {
-              subscriber.onError(e);
-            }
-          }
-        })
-        .onErrorResumeNext(Observable.<RegionInfoResponse>empty());
   }
 }
