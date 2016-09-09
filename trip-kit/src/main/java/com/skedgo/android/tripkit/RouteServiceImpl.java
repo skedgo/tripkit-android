@@ -1,6 +1,6 @@
 package com.skedgo.android.tripkit;
 
-import android.content.res.Resources;
+import android.content.Context;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.util.ArrayMap;
@@ -30,7 +30,7 @@ final class RouteServiceImpl implements RouteService {
   private final Func1<List<TripGroup>, List<TripGroup>> fillIdentifiers = new FillIdentifiers();
   private final String appVersion;
   private final Func1<Query, Observable<List<Query>>> queryGenerator;
-  private final Resources resources;
+  private final Context context;
   private final Func1<String, RoutingApi> routingApiFactory;
   private final ExcludedTransitModesAdapter excludedTransitModesAdapter;
   @Nullable private final Co2Preferences co2Preferences;
@@ -38,7 +38,7 @@ final class RouteServiceImpl implements RouteService {
   private final Gson gson;
 
   RouteServiceImpl(
-      @NonNull Resources resources,
+      @NonNull Context context,
       @NonNull String appVersion,
       @NonNull Func1<Query, Observable<List<Query>>> queryGenerator,
       @NonNull Func1<String, RoutingApi> routingApiFactory,
@@ -48,7 +48,7 @@ final class RouteServiceImpl implements RouteService {
       @NonNull Gson gson) {
     this.appVersion = appVersion;
     this.queryGenerator = queryGenerator;
-    this.resources = resources;
+    this.context = context;
     this.routingApiFactory = routingApiFactory;
     this.excludedTransitModesAdapter = excludedTransitModesAdapter;
     this.co2Preferences = co2Preferences;
@@ -171,13 +171,20 @@ final class RouteServiceImpl implements RouteService {
     return Observable.from(urls)
         .concatMap(new Func1<String, Observable<RoutingResponse>>() {
           @Override public Observable<RoutingResponse> call(String url) {
+
+            // TODO: remove this hack when resolved by the server
+            if (context.getPackageName().contains("debug") &&
+                url.contains("granduni") && !url.endsWith("-beta")) {
+              url += "-beta";
+            }
+
             return fetchRoutesPerUrlAsync(url, modes, excludedTransitModes, options);
           }
         })
         .first()
         .map(new Func1<RoutingResponse, List<TripGroup>>() {
           @Override public List<TripGroup> call(RoutingResponse response) {
-            response.processRawData(resources, gson);
+            response.processRawData(context.getResources(), gson);
             return response.getTripGroupList();
           }
         })

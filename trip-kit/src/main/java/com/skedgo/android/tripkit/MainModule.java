@@ -155,7 +155,7 @@ class MainModule {
 
     final QueryGeneratorImpl queryGenerator = new QueryGeneratorImpl(regionService);
     return new RouteServiceImpl(
-        context.getResources(),
+        context,
         getAppVersion(),
         queryGenerator,
         routingApiFactory,
