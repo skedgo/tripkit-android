@@ -1,8 +1,6 @@
 package com.skedgo.android.tripkit.tsp;
 
 import com.skedgo.android.common.model.Region;
-import com.skedgo.android.tripkit.RegionInfo;
-import com.skedgo.android.tripkit.RegionInfoResponse;
 
 import java.util.List;
 

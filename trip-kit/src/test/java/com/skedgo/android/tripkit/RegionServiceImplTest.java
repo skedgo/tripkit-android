@@ -3,6 +3,9 @@ package com.skedgo.android.tripkit;
 import com.skedgo.android.common.model.Location;
 import com.skedgo.android.common.model.Region;
 import com.skedgo.android.common.model.TransportMode;
+import com.skedgo.android.tripkit.tsp.ImmutableRegionInfo;
+import com.skedgo.android.tripkit.tsp.Paratransit;
+import com.skedgo.android.tripkit.tsp.RegionInfo;
 import com.skedgo.android.tripkit.tsp.RegionInfoService;
 
 import org.junit.Before;

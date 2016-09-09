@@ -1,4 +1,4 @@
-package com.skedgo.android.tripkit;
+package com.skedgo.android.tripkit.tsp;
 
 import android.support.annotation.Nullable;
 

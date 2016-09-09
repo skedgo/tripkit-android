@@ -1,7 +1,6 @@
 package com.skedgo.android.tripkit.tsp;
 
 import com.skedgo.android.common.model.Region;
-import com.skedgo.android.tripkit.RegionInfoResponse;
 
 import retrofit2.http.Body;
 import retrofit2.http.POST;

@@ -13,8 +13,9 @@ import com.skedgo.android.common.model.TransportMode;
 import com.skedgo.android.common.util.DiagnosticUtils;
 import com.skedgo.android.common.util.Gsons;
 import com.skedgo.android.common.util.LowercaseEnumTypeAdapterFactory;
+import com.skedgo.android.tripkit.tsp.GsonAdaptersRegionInfo;
 import com.skedgo.android.tripkit.tsp.GsonAdaptersRegionInfoBody;
-import com.skedgo.android.tripkit.tsp.RegionInfoApi;
+import com.skedgo.android.tripkit.tsp.GsonAdaptersRegionInfoResponse;
 import com.skedgo.android.tripkit.tsp.RegionInfoService;
 import com.squareup.okhttp.OkHttpClient;
 
@@ -44,7 +45,6 @@ import rx.schedulers.Schedulers;
 
 import static retrofit.RestAdapter.LogLevel.FULL;
 import static retrofit.RestAdapter.LogLevel.NONE;
-import static rx.schedulers.Schedulers.io;
 
 @Module
 class MainModule {
@@ -83,18 +83,6 @@ class MainModule {
         context,
         "regions.db"
     );
-  }
-
-  @Provides RegionInfoApi regionInfoApi(
-      Gson gson,
-      okhttp3.OkHttpClient httpClient) {
-    return new Retrofit.Builder()
-        .baseUrl("https://tripgo.skedgo.com/satapp/")
-        .client(httpClient)
-        .addConverterFactory(GsonConverterFactory.create(gson))
-        .addCallAdapterFactory(RxJavaCallAdapterFactory.createWithScheduler(io()))
-        .build()
-        .create(RegionInfoApi.class);
   }
 
   @Singleton @Provides RegionService getRegionService(
