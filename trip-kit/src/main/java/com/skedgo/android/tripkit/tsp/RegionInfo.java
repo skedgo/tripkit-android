@@ -15,6 +15,11 @@ public abstract class RegionInfo {
   @Nullable public abstract List<ModeInfo> transitModes();
   @Nullable public abstract Paratransit paratransit();
 
+  /**
+   * @return If true, indicates that we have wheelchair accessibility
+   * information for public transport for the current region.
+   * Otherwise, no wheelchair accessibility info.
+   */
   @Value.Default
   public boolean transitWheelchairAccessibility() { return false; }
 
