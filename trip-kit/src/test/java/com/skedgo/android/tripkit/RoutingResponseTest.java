@@ -2,7 +2,6 @@ package com.skedgo.android.tripkit;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonPrimitive;
-import com.skedgo.android.common.BuildConfig;
 import com.skedgo.android.common.model.RealtimeAlert;
 import com.skedgo.android.common.model.RealtimeAlerts;
 import com.skedgo.android.common.model.RoutingResponse;
@@ -28,8 +27,7 @@ import static thuytrinh.mockwebserverrule.MockWebServerRule.createMockResponse;
 @RunWith(RobolectricGradleTestRunner.class)
 @Config(constants = BuildConfig.class)
 public class RoutingResponseTest {
-
-  @Test public void testProcessDirectionTemplate() {
+  @Test public void processDirectionTemplate() {
     // Case 1
     JsonPrimitive serviceDirectionNode = new JsonPrimitive("Service direction");
     String notes = "This is a <DIRECTION>";
@@ -54,7 +52,7 @@ public class RoutingResponseTest {
     assertThat("").isEqualTo(result);
   }
 
-  @Test public void testTripHasReferenceToGroup() throws IOException {
+  @Test public void tripHasReferenceToGroup() throws IOException {
     MockResponse mockResponse = createMockResponse("/routing0.json");
     String routingJson = mockResponse.getBody().readUtf8();
 
@@ -72,10 +70,9 @@ public class RoutingResponseTest {
             }
           });
     }
-
   }
 
-  @Test public void testShouldParseProperly() throws IOException {
+  @Test public void shouldParseProperly() throws IOException {
     MockResponse mockResponse = createMockResponse("/routing0.json");
     String routingJson = mockResponse.getBody().readUtf8();
 
@@ -102,7 +99,7 @@ public class RoutingResponseTest {
     assertThat(RealtimeAlerts.getDisplayText(alert)).isEqualTo("Unusually high traffic on the route.");
   }
 
-  public void testParseMultipleStreets() throws IOException {
+  @Test public void parseMultipleStreets() throws IOException {
     MockResponse mockResponse = createMockResponse("/routingStreets.json");
     String routingJson = mockResponse.getBody().readUtf8();
 
@@ -121,6 +118,5 @@ public class RoutingResponseTest {
 
     TripSegment motorbikeSegment = trip.getSegments().get(1);
     assertThat(motorbikeSegment.getStreets()).hasSize(4).doesNotContainNull();
-
   }
 }
