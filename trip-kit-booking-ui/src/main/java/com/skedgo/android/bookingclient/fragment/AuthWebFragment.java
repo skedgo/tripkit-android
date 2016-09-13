@@ -10,6 +10,7 @@ import android.webkit.WebViewClient;
 import rx.functions.Action1;
 import skedgo.common.view.ButterKnifeFragment;
 
+@Deprecated
 public class AuthWebFragment extends ButterKnifeFragment {
 
   private WebView webView;

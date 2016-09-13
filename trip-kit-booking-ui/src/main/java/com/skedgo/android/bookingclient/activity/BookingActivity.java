@@ -1,15 +1,21 @@
 package com.skedgo.android.bookingclient.activity;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Parcelable;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.app.ActionBar;
+
 import android.view.MenuItem;
 import android.widget.Toast;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.stream.JsonReader;
 import com.skedgo.android.bookingclient.OAuth2CallbackHandler;
 import com.skedgo.android.bookingclient.R;
 import com.skedgo.android.bookingclient.fragment.AuthWebFragment;
@@ -19,8 +25,12 @@ import com.skedgo.android.bookingclient.module.BookingClientComponent;
 import com.skedgo.android.bookingclient.module.BookingClientModule;
 import com.skedgo.android.bookingclient.module.DaggerBookingClientComponent;
 import com.skedgo.android.tripkit.booking.BookingForm;
+import com.skedgo.android.tripkit.booking.FormField;
+import com.skedgo.android.tripkit.booking.FormFieldJsonAdapter;
 import com.skedgo.android.tripkit.booking.viewmodel.BookingViewModel;
 import com.skedgo.android.tripkit.booking.viewmodel.ParamImpl;
+
+import java.io.StringReader;
 
 import rx.android.schedulers.AndroidSchedulers;
 import rx.functions.Action1;
@@ -140,7 +150,21 @@ public class BookingActivity extends AnimatedTransitionActivity implements
   }
 
   // TODO: Refactor with ExternalProviderAuthFragmentDialog
+  @Deprecated
   private Action1<String> onAuthCallback() {
+
+    SharedPreferences prefs = getSharedPreferences(BookingActivity.KEY_TEMP_BOOKING, Activity.MODE_PRIVATE);
+
+    String jsonBooking = prefs.getString(BookingActivity.KEY_TEMP_BOOKING_FORM, "");
+    JsonReader reader = new JsonReader(new StringReader(jsonBooking));
+    reader.setLenient(true);
+
+    GsonBuilder builder = new GsonBuilder();
+    builder.registerTypeAdapter(FormField.class, new FormFieldJsonAdapter());
+    Gson gson = builder.create();
+
+    final BookingForm form = gson.fromJson(reader, BookingForm.class);
+
     return new Action1<String>() {
       @Override public void call(String url) {
         final BookingClientComponent bookingClientComponent = DaggerBookingClientComponent.builder()
@@ -152,7 +176,7 @@ public class BookingActivity extends AnimatedTransitionActivity implements
 
           String callback = url.substring(0, url.indexOf("?"));
 
-          oAuth2CallbackHandler.handleOAuthURL(BookingActivity.this, Uri.parse(url), callback)
+          oAuth2CallbackHandler.handleOAuthURL(form, Uri.parse(url), callback)
               .observeOn(AndroidSchedulers.mainThread())
               .subscribeOn(Schedulers.newThread())
               .subscribe(new Action1<BookingForm>() {
@@ -171,7 +195,7 @@ public class BookingActivity extends AnimatedTransitionActivity implements
               });
         } else if (url.startsWith("tripgo://booking_retry")) {
 
-          oAuth2CallbackHandler.handleRetryURL(BookingActivity.this, Uri.parse(url))
+          oAuth2CallbackHandler.handleRetryURL(form, Uri.parse(url))
               .observeOn(AndroidSchedulers.mainThread())
               .subscribeOn(Schedulers.newThread())
               .subscribe(new Action1<BookingForm>() {
