@@ -5,7 +5,7 @@ import android.os.Parcelable;
 
 import com.google.gson.annotations.SerializedName;
 
-public class BookingError implements Parcelable {
+public class BookingError extends Throwable implements Parcelable {
   public static final Creator<BookingError> CREATOR = new Creator<BookingError>() {
     @Override
     public BookingError createFromParcel(Parcel source) {

@@ -18,6 +18,7 @@ import com.skedgo.android.bookingclient.activity.BookingActivity;
 import com.skedgo.android.bookingclient.viewmodel.BookingErrorViewModel;
 import com.skedgo.android.bookingclient.viewmodel.ExtendedBookingViewModel;
 import com.skedgo.android.common.util.LogUtils;
+import com.skedgo.android.tripkit.booking.BookingError;
 import com.skedgo.android.tripkit.booking.BookingForm;
 import com.skedgo.android.tripkit.booking.LinkFormField;
 import com.skedgo.android.tripkit.booking.viewmodel.BookingViewModel;
@@ -262,11 +263,15 @@ public class BookingFragment extends ButterKnifeFragment implements View.OnClick
   }
 
   private void showError(Throwable error) {
-    checkAndInflate();
 
-    bookingErrorViewModel.get().read(error.getMessage());
-    errorTitleView.setText(bookingErrorViewModel.get().getErrorTitle());
-    errorMessageView.setText(bookingErrorViewModel.get().getErrorMessage());
+    if (error.getClass().isInstance(BookingError.class)) {
+      checkAndInflate();
+
+      bookingErrorViewModel.get().setBookingError((BookingError) error);
+      errorTitleView.setText(bookingErrorViewModel.get().getErrorTitle());
+      errorMessageView.setText(bookingErrorViewModel.get().getErrorMessage());
+    }
+
   }
 
   private void checkAndInflate() {
