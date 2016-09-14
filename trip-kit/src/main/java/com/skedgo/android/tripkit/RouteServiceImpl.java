@@ -108,6 +108,9 @@ final class RouteServiceImpl implements RouteService {
       if (tripPreferences.isConcessionPricingPreferred()) {
         map.put("conc", true);
       }
+      if (tripPreferences.isWheelchairPreferred()) {
+        map.put("wheelchair", true);
+      }
     }
 
     if (co2Preferences != null) {
