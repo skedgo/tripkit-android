@@ -91,6 +91,18 @@ public class RouteServiceImplTest {
     assertThat(routeService.getParamsByPreferences()).doesNotContainKey("conc");
   }
 
+  /* See https://redmine.buzzhives.com/issues/7663. */
+  @Test public void includeWheelchairInfo() {
+    when(tripPreferences.isWheelchairPreferred()).thenReturn(true);
+    assertThat(routeService.getParamsByPreferences()).containsEntry("wheelchair", true);
+  }
+
+  /* See https://redmine.buzzhives.com/issues/7663. */
+  @Test public void excludeWheelchairInfo() {
+    when(tripPreferences.isWheelchairPreferred()).thenReturn(false);
+    assertThat(routeService.getParamsByPreferences()).doesNotContainKey("wheelchair");
+  }
+
   @Test public void shouldIncludeOptionDepartAfter() {
     final Query query = createQuery();
     query.setTimeTag(TimeTag.createForLeaveAfter(25251325));

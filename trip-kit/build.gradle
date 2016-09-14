@@ -62,11 +62,11 @@ dependencies {
 
   compile "com.google.android.gms:play-services-gcm:8.4.0"
 
-  apt "org.immutables:value:2.1.18"
-  apt "org.immutables:gson:2.1.18"
-  provided "org.immutables:gson:2.1.18"
-  provided "org.immutables:value:2.1.18"
-  provided "org.immutables:builder:2.1.18"
+  // To generate immutable models. See more at http://immutables.github.io/.
+  apt "org.immutables:value:2.3"
+  provided "org.immutables:value:2.3:annotations"
+  provided "org.immutables:builder:2.3"
+  provided "org.immutables:gson:2.3:annotations"
 
   compile 'com.github.skedgo:sqlite-utils:v1.0'
   compile "com.squareup.okhttp3:okhttp:3.2.0"

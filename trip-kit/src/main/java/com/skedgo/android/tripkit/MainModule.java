@@ -13,6 +13,10 @@ import com.skedgo.android.common.model.TransportMode;
 import com.skedgo.android.common.util.DiagnosticUtils;
 import com.skedgo.android.common.util.Gsons;
 import com.skedgo.android.common.util.LowercaseEnumTypeAdapterFactory;
+import com.skedgo.android.tripkit.tsp.GsonAdaptersRegionInfo;
+import com.skedgo.android.tripkit.tsp.GsonAdaptersRegionInfoBody;
+import com.skedgo.android.tripkit.tsp.GsonAdaptersRegionInfoResponse;
+import com.skedgo.android.tripkit.tsp.RegionInfoService;
 import com.squareup.okhttp.OkHttpClient;
 
 import java.util.List;
@@ -81,26 +85,10 @@ class MainModule {
     );
   }
 
-  @Singleton @Provides Func1<String, RegionInfoApi> getRegionInfoApiFactory(
-      final Gson gson,
-      final OkHttpClient httpClient) {
-    return new Func1<String, RegionInfoApi>() {
-      @Override public RegionInfoApi call(String endpoint) {
-        return new RestAdapter.Builder()
-            .setLogLevel(configs.debuggable() ? FULL : NONE)
-            .setEndpoint(endpoint)
-            .setConverter(new GsonConverter(gson))
-            .setClient(new OkClient(httpClient))
-            .build()
-            .create(RegionInfoApi.class);
-      }
-    };
-  }
-
   @Singleton @Provides RegionService getRegionService(
       RegionDatabaseHelper databaseHelper,
       RegionsApi regionsApi,
-      Func1<String, RegionInfoApi> regionInfoApiFactory) {
+      Provider<RegionInfoService> regionInfoServiceProvider) {
     final RegionsFetcher regionsFetcher = new RegionsFetcherImpl(
         regionsApi,
         databaseHelper
@@ -116,8 +104,8 @@ class MainModule {
     return new RegionServiceImpl(
         regionCache,
         modeCache,
-        regionInfoApiFactory,
-        regionsFetcher
+        regionsFetcher,
+        regionInfoServiceProvider
     );
   }
 
@@ -322,6 +310,7 @@ class MainModule {
   @Singleton @Provides Gson getGson() {
     return new GsonBuilder()
         .registerTypeAdapterFactory(new LowercaseEnumTypeAdapterFactory())
+        .registerTypeAdapterFactory(new GsonAdaptersRegionInfoBody())
         .registerTypeAdapterFactory(new GsonAdaptersRegionInfo())
         .registerTypeAdapterFactory(new GsonAdaptersRegionInfoResponse())
         .registerTypeAdapterFactory(new GsonAdaptersLocationInfo())
