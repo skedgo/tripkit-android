@@ -12,7 +12,7 @@ import org.robolectric.annotation.Config;
 import static org.assertj.core.api.Assertions.assertThat;
 
 @RunWith(RobolectricGradleTestRunner.class)
-@Config(constants = BuildConfig.class, sdk = 21)
+@Config(constants = BuildConfig.class)
 public class DefaultTripPreferencesTest {
   private DefaultTripPreferences preferences;
 
@@ -23,9 +23,15 @@ public class DefaultTripPreferencesTest {
     ));
   }
 
-  @Test public void storeAndQuery() {
+  @Test public void storeAndQueryConcessionPricingPreference() {
     assertThat(preferences.isConcessionPricingPreferred()).isFalse();
     preferences.setConcessionPricingPreferred(true);
     assertThat(preferences.isConcessionPricingPreferred()).isTrue();
+  }
+
+  @Test public void storeAndQueryWheelchairPreference() {
+    assertThat(preferences.isWheelchairPreferred()).isFalse();
+    preferences.setWheelchairPreferred(true);
+    assertThat(preferences.isWheelchairPreferred()).isTrue();
   }
 }

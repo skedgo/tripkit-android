@@ -7,6 +7,8 @@ import com.skedgo.android.common.model.Location;
 import com.skedgo.android.common.model.ModeInfo;
 import com.skedgo.android.common.model.Region;
 import com.skedgo.android.common.model.TransportMode;
+import com.skedgo.android.tripkit.tsp.Paratransit;
+import com.skedgo.android.tripkit.tsp.RegionInfo;
 
 import java.util.List;
 import java.util.Map;
