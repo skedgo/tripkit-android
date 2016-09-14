@@ -2,10 +2,7 @@ package com.skedgo.android.bookingclient.fragment;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.os.Parcelable;
-import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -215,14 +212,7 @@ public class BookingFragment extends ButterKnifeFragment implements View.OnClick
         .subscribe(new Action1<BookingForm>() {
           @Override
           public void call(BookingForm form) {
-            if (form.isOAuthForm()) {
-
-              // Check oauth info
-
-              showAuthentication(form);
-            } else {
-              showBookingForm(form);
-            }
+            showBookingForm(form);
           }
         }, new Action1<Throwable>() {
           @Override
@@ -295,36 +285,6 @@ public class BookingFragment extends ButterKnifeFragment implements View.OnClick
       progressView.setVisibility(View.GONE);
       hudTextView.setVisibility(View.GONE);
     }
-  }
-
-  private void showAuthentication(@NonNull final BookingForm form) {
-
-    viewModel.needsAuthentication(form).subscribe(new Action1<Boolean>() {
-      @Override public void call(Boolean needAuth) {
-        if (needAuth) {
-          // save temp booking
-          SharedPreferences prefs = getActivity().getSharedPreferences(BookingActivity.KEY_TEMP_BOOKING, Activity.MODE_PRIVATE);
-          SharedPreferences.Editor prefsEditor = prefs.edit();
-
-          String json = gson.toJson(form);
-          prefsEditor.putString(BookingActivity.KEY_TEMP_BOOKING_FORM, json);
-          prefsEditor.apply();
-
-          startActivity(
-              new Intent(getActivity(), getActivity().getClass())
-                  .setAction(BookingActivity.ACTION_OAUTH)
-                  .putExtra(BookingActivity.KEY_WEB_URL, form.getOAuthLink()));
-
-        } else {
-          startActivity(
-              new Intent(getActivity(), getActivity().getClass())
-                  .setAction(BookingActivity.ACTION_BOOK_AFTER_OAUTH)
-                  .putExtra(BookingActivity.KEY_FORM, (Parcelable) form));
-        }
-        getActivity().finish();
-      }
-    });
-
   }
 
   private void showBookingForm(BookingForm form) {

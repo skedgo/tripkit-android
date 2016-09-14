@@ -179,25 +179,7 @@ public class BookingFormFragment extends ButterKnifeFragment {
           linkFieldView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-              if (LinkFormField.METHOD_EXTERNAL.equals(linkField.getMethod())) {
-                // save temp booking
-                SharedPreferences prefs = getActivity().getSharedPreferences(BookingActivity.KEY_TEMP_BOOKING, Activity.MODE_PRIVATE);
-                SharedPreferences.Editor prefsEditor = prefs.edit();
-
-                String json = gson.toJson(form);
-                prefsEditor.putString(BookingActivity.KEY_TEMP_BOOKING_FORM, json);
-                prefsEditor.apply();
-
-                startActivity(
-                    new Intent(getActivity(), getActivity().getClass())
-                        .setAction(BookingActivity.ACTION_OAUTH)
-                        .putExtra(BookingActivity.KEY_WEB_URL, Uri.parse(linkField.getValue())));
-
-                getActivity().finish();
-
-              } else {
-                bus.post(new LinkFormFieldClickedEvent(linkField));
-              }
+              bus.post(new LinkFormFieldClickedEvent(linkField));
             }
           });
           formItemsView.addView(linkFieldView);
