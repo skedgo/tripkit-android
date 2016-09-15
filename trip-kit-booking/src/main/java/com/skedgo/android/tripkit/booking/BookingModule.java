@@ -93,8 +93,8 @@ public class BookingModule {
     return new ExternalOAuthServiceImpl(store);
   }
 
-  @Provides BookingService getBookingService(BookingApi bookingApi, ExternalOAuthStore externalOAuthStore) {
-    return new BookingServiceImpl(bookingApi, externalOAuthStore);
+  @Provides BookingService getBookingService(BookingApi bookingApi, ExternalOAuthStore externalOAuthStore, Gson gson) {
+    return new BookingServiceImpl(bookingApi, externalOAuthStore, gson);
   }
 
   @Provides QuickBookingService getQuickBookingService(QuickBookingApi quickBookingApi) {
