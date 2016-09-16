@@ -10,6 +10,7 @@ import com.skedgo.android.common.model.RoutingResponse;
 import com.skedgo.android.common.model.TimeTag;
 import com.skedgo.android.common.model.TripGroup;
 
+import org.assertj.core.data.MapEntry;
 import org.assertj.core.util.Maps;
 import org.junit.Before;
 import org.junit.Test;
@@ -21,6 +22,7 @@ import org.robolectric.annotation.Config;
 
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -37,7 +39,7 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 @RunWith(RobolectricGradleTestRunner.class)
-@Config(constants = BuildConfig.class, sdk = 21)
+@Config(constants = BuildConfig.class)
 public class RouteServiceImplTest {
   @Mock Resources resources;
   @Mock Func1<String, RoutingApi> routingApiFactory;
@@ -45,6 +47,7 @@ public class RouteServiceImplTest {
   @Mock ExcludedTransitModesAdapter excludedTransitModesAdapter;
   @Mock Co2Preferences co2Preferences;
   @Mock TripPreferences tripPreferences;
+  @Mock ExtraQueryMapProvider extraQueryMapProvider;
   private RouteServiceImpl routeService;
   private String appVersion = "v1.0";
 
@@ -58,8 +61,11 @@ public class RouteServiceImplTest {
         excludedTransitModesAdapter,
         co2Preferences,
         tripPreferences,
+        extraQueryMapProvider,
         new Gson()
     );
+    when(extraQueryMapProvider.call())
+        .thenReturn(Collections.<String, Object>emptyMap());
   }
 
   @Test public void shouldIncludeSomeOptions() {
@@ -79,6 +85,25 @@ public class RouteServiceImplTest {
         .containsEntry("tt", "2")
         .containsEntry("ws", "4")
         .doesNotContainKey("ir");
+  }
+
+  /**
+   * Given an {@link ExtraQueryMapProvider} that returns an extra query map,
+   * we expect that the query map returned by {@link RouteServiceImpl#toOptions(Query)}
+   * should contain all the entries from the extra query map.
+   */
+  @Test public void shouldIncludeExtraQueryMap() {
+    final Query query = createQuery();
+    query.setTimeTag(TimeTag.createForArriveBy(25251325));
+    query.setIsInterRegional(false);
+
+    final Map<String, Object> extraQueryMap = new HashMap<>();
+    extraQueryMap.put("bsb", 1);
+    when(extraQueryMapProvider.call())
+        .thenReturn(extraQueryMap);
+
+    final Map<String, Object> options = routeService.toOptions(query);
+    assertThat(options).contains(MapEntry.entry("bsb", 1));
   }
 
   @Test public void includeConcessionPricing() {
