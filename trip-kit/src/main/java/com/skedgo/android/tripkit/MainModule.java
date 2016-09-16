@@ -150,6 +150,7 @@ class MainModule {
         configs.excludedTransitModesAdapter(),
         co2Preferences,
         tripPreferences,
+        configs.extraQueryMapProvider(),
         gson
     );
   }
