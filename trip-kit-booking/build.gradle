@@ -78,9 +78,9 @@ dependencies {
   apt 'com.google.dagger:dagger-compiler:2.0.1'
   provided 'org.glassfish:javax.annotation:10.0-b28'
 
-  apt "org.immutables:value:2.1.18"
-  apt "org.immutables:gson:2.1.18"
-  provided "org.immutables:gson:2.1.18"
-  provided "org.immutables:value:2.1.18"
-  provided "org.immutables:builder:2.1.18"
+  // To generate immutable models. See more at http://immutables.github.io/.
+  apt "org.immutables:value:2.3"
+  provided "org.immutables:value:2.3:annotations"
+  provided "org.immutables:builder:2.3"
+  provided "org.immutables:gson:2.3:annotations"
 }

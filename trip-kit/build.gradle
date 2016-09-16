@@ -2,7 +2,7 @@ apply plugin: "com.android.library"
 apply plugin: 'com.neenbedankt.android-apt'
 
 group = "com.skedgo.sdk"
-version = "1.1b6"
+version = "1.1b5"
 
 android {
   compileSdkVersion 23
@@ -15,10 +15,6 @@ android {
   }
 
   buildTypes {
-    debug {
-      testCoverageEnabled = true
-    }
-
     release {
       minifyEnabled false
     }
@@ -47,11 +43,11 @@ task(generateTripkitStrings, type: org.gradle.api.tasks.JavaExec) {
 }
 
 dependencies {
-  testCompile "junit:junit:4.12"
-  testCompile "org.assertj:assertj-core:1.7.0"
-  testCompile "org.mockito:mockito-core:1.10.5"
-  testCompile "org.robolectric:robolectric:3.1"
+  testCompile 'junit:junit:4.12'
+  testCompile 'org.assertj:assertj-core:1.7.0'
+  testCompile 'org.mockito:mockito-core:1.10.19'
   testCompile 'com.github.thuytrinh:MockWebServerRule:v1.0'
+  testCompile 'org.robolectric:robolectric:3.1'
 
   // To take advantage of AndroidJUnitRunner.
   androidTestCompile "com.android.support.test:runner:0.4.1"
@@ -66,11 +62,11 @@ dependencies {
 
   compile "com.google.android.gms:play-services-gcm:8.4.0"
 
-  apt "org.immutables:value:2.1.18"
-  apt "org.immutables:gson:2.1.18"
-  provided "org.immutables:gson:2.1.18"
-  provided "org.immutables:value:2.1.18"
-  provided "org.immutables:builder:2.1.18"
+  // To generate immutable models. See more at http://immutables.github.io/.
+  apt "org.immutables:value:2.3"
+  provided "org.immutables:value:2.3:annotations"
+  provided "org.immutables:builder:2.3"
+  provided "org.immutables:gson:2.3:annotations"
 
   compile 'com.github.skedgo:sqlite-utils:v1.0'
   compile "com.squareup.okhttp3:okhttp:3.2.0"

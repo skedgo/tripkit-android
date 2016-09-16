@@ -2,6 +2,7 @@ package com.skedgo.android.tripkit;
 
 import android.support.annotation.VisibleForTesting;
 
+import com.skedgo.android.tripkit.tsp.TspModule;
 import com.squareup.okhttp.OkHttpClient;
 
 import javax.inject.Singleton;
@@ -12,7 +13,10 @@ import rx.functions.Action1;
 import rx.functions.Actions;
 
 @Singleton
-@Component(modules = MainModule.class)
+@Component(modules = {
+    TspModule.class,
+    MainModule.class
+})
 public abstract class TripKit {
   private static TripKit instance;
 

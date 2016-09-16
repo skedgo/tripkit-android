@@ -7,35 +7,36 @@ import com.skedgo.android.common.model.Location;
 import com.skedgo.android.common.model.ModeInfo;
 import com.skedgo.android.common.model.Region;
 import com.skedgo.android.common.model.TransportMode;
+import com.skedgo.android.tripkit.tsp.Paratransit;
+import com.skedgo.android.tripkit.tsp.RegionInfo;
+import com.skedgo.android.tripkit.tsp.RegionInfoService;
 
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 import java.util.NoSuchElementException;
 
+import javax.inject.Provider;
+
 import rx.Observable;
-import rx.Subscriber;
 import rx.functions.Action0;
 import rx.functions.Func1;
-import rx.schedulers.Schedulers;
-
-import static org.apache.commons.collections4.CollectionUtils.isNotEmpty;
 
 final class RegionServiceImpl implements RegionService {
   private final Cache<List<Region>> regionCache;
   private final Cache<Map<String, TransportMode>> modeCache;
-  private final Func1<String, RegionInfoApi> regionInfoApiFactory;
   private final RegionsFetcher regionsFetcher;
+  private final Provider<RegionInfoService> regionInfoServiceProvider;
 
   RegionServiceImpl(
       Cache<List<Region>> regionCache,
       Cache<Map<String, TransportMode>> modeCache,
-      @NonNull Func1<String, RegionInfoApi> regionInfoApiFactory,
-      @NonNull RegionsFetcher regionsFetcher) {
+      @NonNull RegionsFetcher regionsFetcher,
+      Provider<RegionInfoService> regionInfoServiceProvider) {
     this.regionCache = regionCache;
     this.modeCache = modeCache;
-    this.regionInfoApiFactory = regionInfoApiFactory;
     this.regionsFetcher = regionsFetcher;
+    this.regionInfoServiceProvider = regionInfoServiceProvider;
   }
 
   @Override
@@ -144,23 +145,8 @@ final class RegionServiceImpl implements RegionService {
 
   @Override
   public Observable<RegionInfo> getRegionInfoByRegionAsync(@NonNull final Region region) {
-    return Observable.from(region.getURLs())
-        .concatMap(new Func1<String, Observable<RegionInfoResponse>>() {
-          @Override public Observable<RegionInfoResponse> call(final String baseUrl) {
-            return fetchRegionInfoPerUrl(baseUrl, region);
-          }
-        })
-        .first(new Func1<RegionInfoResponse, Boolean>() {
-          @Override public Boolean call(RegionInfoResponse response) {
-            return isNotEmpty(response.regions());
-          }
-        })
-        .map(new Func1<RegionInfoResponse, RegionInfo>() {
-          @Override public RegionInfo call(RegionInfoResponse response) {
-            return response.regions().get(0);
-          }
-        })
-        .subscribeOn(Schedulers.io());
+    return regionInfoServiceProvider.get()
+        .fetchRegionInfoAsync(region.getURLs(), region.getName());
   }
 
   @Override
@@ -171,26 +157,5 @@ final class RegionServiceImpl implements RegionService {
             return regionInfo.transitModes();
           }
         });
-  }
-
-  Observable<RegionInfoResponse> fetchRegionInfoPerUrl(
-      final String baseUrl,
-      @NonNull final Region region) {
-    return Observable
-        .create(new Observable.OnSubscribe<RegionInfoResponse>() {
-          @Override public void call(Subscriber<? super RegionInfoResponse> subscriber) {
-            try {
-              final RegionInfoApi api = regionInfoApiFactory.call(baseUrl);
-              final RegionInfoResponse response = api.fetchRegionInfo(
-                  new RegionInfoApi.RequestBody(region.getName())
-              );
-              subscriber.onNext(response);
-              subscriber.onCompleted();
-            } catch (Exception e) {
-              subscriber.onError(e);
-            }
-          }
-        })
-        .onErrorResumeNext(Observable.<RegionInfoResponse>empty());
   }
 }
