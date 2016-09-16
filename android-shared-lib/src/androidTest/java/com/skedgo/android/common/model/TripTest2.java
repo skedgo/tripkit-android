@@ -19,7 +19,7 @@ import rx.functions.Action1;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class TripTest extends AndroidTestCase {
+public class TripTest2 extends AndroidTestCase {
   public void testUpdateTripPeriodically() throws InterruptedException, IOException {
     OkHttpClient httpClient = new OkHttpClient();
     httpClient.interceptors().add(createMockResponseInterceptor("updateTrip0.json"));

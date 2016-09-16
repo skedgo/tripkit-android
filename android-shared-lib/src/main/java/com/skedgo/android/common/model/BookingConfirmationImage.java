@@ -2,6 +2,7 @@ package com.skedgo.android.common.model;
 
 import android.os.Parcel;
 import android.os.Parcelable;
+import android.support.annotation.Nullable;
 
 import com.google.gson.annotations.JsonAdapter;
 
@@ -37,7 +38,7 @@ public abstract class BookingConfirmationImage implements Parcelable {
     return 0;
   }
 
-  public abstract String imageURL();
+  @Nullable public abstract String imageURL();
   public abstract String subtitle();
   public abstract String title();
 }

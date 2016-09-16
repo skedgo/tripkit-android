@@ -19,4 +19,14 @@ public final class DefaultTripPreferences implements TripPreferences {
         .putBoolean("isConcessionPricingPreferred", isConcessionPricingPreferred)
         .apply();
   }
+
+  @Override public boolean isWheelchairPreferred() {
+    return preferences.getBoolean("isWheelchairPreferred", false);
+  }
+
+  @Override public void setWheelchairPreferred(boolean isWheelchairPreferred) {
+    preferences.edit()
+        .putBoolean("isWheelchairPreferred", isWheelchairPreferred)
+        .apply();
+  }
 }

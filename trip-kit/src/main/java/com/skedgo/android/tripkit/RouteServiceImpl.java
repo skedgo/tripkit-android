@@ -35,6 +35,7 @@ final class RouteServiceImpl implements RouteService {
   private final ExcludedTransitModesAdapter excludedTransitModesAdapter;
   @Nullable private final Co2Preferences co2Preferences;
   @Nullable private final TripPreferences tripPreferences;
+  @Nullable private final ExtraQueryMapProvider extraQueryMapProvider;
   private final Gson gson;
 
   RouteServiceImpl(
@@ -45,6 +46,7 @@ final class RouteServiceImpl implements RouteService {
       @Nullable ExcludedTransitModesAdapter excludedTransitModesAdapter,
       @Nullable Co2Preferences co2Preferences,
       @Nullable TripPreferences tripPreferences,
+      @Nullable ExtraQueryMapProvider extraQueryMapProvider,
       @NonNull Gson gson) {
     this.appVersion = appVersion;
     this.queryGenerator = queryGenerator;
@@ -53,6 +55,7 @@ final class RouteServiceImpl implements RouteService {
     this.excludedTransitModesAdapter = excludedTransitModesAdapter;
     this.co2Preferences = co2Preferences;
     this.tripPreferences = tripPreferences;
+    this.extraQueryMapProvider = extraQueryMapProvider;
     this.gson = gson;
   }
 
@@ -108,6 +111,9 @@ final class RouteServiceImpl implements RouteService {
       if (tripPreferences.isConcessionPricingPreferred()) {
         map.put("conc", true);
       }
+      if (tripPreferences.isWheelchairPreferred()) {
+        map.put("wheelchair", true);
+      }
     }
 
     if (co2Preferences != null) {
@@ -139,13 +145,16 @@ final class RouteServiceImpl implements RouteService {
     options.put("v", "12");
     options.put("tt", Integer.toString(transferTime));
     options.put("ws", Integer.toString(walkingSpeed));
-    // TODO: bsb is for sandbox
-    options.put("bsb", 1);
+
     if (query.isInterRegional()) {
       options.put("ir", "1");
     }
 
     options.putAll(getParamsByPreferences());
+    if (extraQueryMapProvider != null) {
+      final Map<String, Object> extraQueryMap = extraQueryMapProvider.call();
+      options.putAll(extraQueryMap);
+    }
     return options;
   }
 
