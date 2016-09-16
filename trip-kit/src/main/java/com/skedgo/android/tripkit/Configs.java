@@ -20,6 +20,7 @@ public abstract class Configs {
   @Nullable public abstract ExcludedTransitModesAdapter excludedTransitModesAdapter();
   @Nullable public abstract Func0<Co2Preferences> co2PreferencesFactory();
   @Nullable public abstract Func0<TripPreferences> tripPreferencesFactory();
+  @Nullable public abstract ExtraQueryMapProvider extraQueryMapProvider();
 
   /**
    * @return A factory to retrieve user token obtained via TripGo Account API.

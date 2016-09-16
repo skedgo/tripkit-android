@@ -12,4 +12,7 @@ import org.immutables.value.Value;
 public interface LocationInfo {
   @Nullable LocationInfoDetails details();
   @Nullable ScheduledStop stop();
+  @Nullable CarPark carPark();
+  double lat();
+  double lng();
 }
