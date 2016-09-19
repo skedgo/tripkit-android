@@ -1,9 +1,13 @@
 package com.skedgo.android.bookingclient.viewmodel;
 
 import com.google.gson.Gson;
+import com.google.gson.stream.JsonReader;
+import com.skedgo.android.tripkit.booking.BookingError;
 
 import org.junit.Before;
 import org.junit.Test;
+
+import java.io.StringReader;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -11,17 +15,21 @@ public class BookingErrorViewModelTest {
 
   private BookingErrorViewModel viewModel;
   private String defaultErrorTitle;
+  private Gson gson;
 
   @Before
   public void setUp() {
 
+    gson = new Gson();
+
     defaultErrorTitle = "An awesome error occurred!";
-    viewModel = new BookingErrorViewModel(new Gson(), defaultErrorTitle);
+    viewModel = new BookingErrorViewModel(defaultErrorTitle);
   }
 
   @Test
   public void shouldReadTitleAndMessageForError() {
-    viewModel.read("{\"errorCode\":451,\"title\":\"No quotes\",\"error\":\"Cannot find any available vehicles\"}");
+    viewModel.setBookingError(asBookingError("{\"errorCode\":451,\"title\":\"No quotes\",\"error\":\"Cannot find any available vehicles\"}"));
+
     assertThat(viewModel.getErrorTitle()).isEqualTo("No quotes");
     assertThat(viewModel.getErrorMessage()).isEqualTo("Cannot find any available vehicles");
   }
@@ -80,7 +88,7 @@ public class BookingErrorViewModelTest {
         "    }\n" +
         "  ]\n" +
         "}";
-    viewModel.read(errorJson);
+    viewModel.setBookingError(asBookingError(errorJson));
     assertThat(viewModel.getErrorTitle()).isEqualTo(defaultErrorTitle);
     assertThat(viewModel.getErrorMessage()).isNull();
   }
@@ -164,5 +172,10 @@ public class BookingErrorViewModelTest {
 
     assertThat(viewModel.getErrorTitle()).isEqualTo(defaultErrorTitle);
     assertThat(viewModel.getErrorMessage()).isNull();
+  }
+
+  private BookingError asBookingError(String bookingErrorJson) {
+    final JsonReader jsonReader = new JsonReader(new StringReader(bookingErrorJson));
+    return gson.fromJson(jsonReader, BookingError.class);
   }
 }
