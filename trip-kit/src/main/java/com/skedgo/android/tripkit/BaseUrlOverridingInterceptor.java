@@ -31,8 +31,7 @@ final class BaseUrlOverridingInterceptor implements Interceptor {
       HttpUrl tempUrl = null;
       if (pathSegments.get(0).equals("satapp")) {
         tempUrl = requestUrl.newBuilder().removePathSegment(0).build();
-      }
-
+      } else
       // TODO: Mariano needs to update the server, this should not be necessary
       if (request.url().toString().contains("account")) {
         tempUrl = requestUrl;
