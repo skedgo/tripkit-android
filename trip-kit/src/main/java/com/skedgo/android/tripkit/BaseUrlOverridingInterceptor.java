@@ -24,19 +24,8 @@ final class BaseUrlOverridingInterceptor implements Interceptor {
     final Request request = chain.request();
     final HttpUrl requestUrl = request.url();
     final List<String> pathSegments = requestUrl.pathSegments();
-
-    if (!TextUtils.isEmpty(newBaseUrl) &&
-        (pathSegments.get(0).equals("satapp") || request.url().toString().contains("account"))) {
-
-      HttpUrl tempUrl = null;
-      if (pathSegments.get(0).equals("satapp")) {
-        tempUrl = requestUrl.newBuilder().removePathSegment(0).build();
-      } else
-      // TODO: Mariano needs to update the server, this should not be necessary
-      if (request.url().toString().contains("account")) {
-        tempUrl = requestUrl;
-      }
-
+    if (!TextUtils.isEmpty(newBaseUrl) && pathSegments.get(0).equals("satapp")) {
+      final HttpUrl tempUrl = requestUrl.newBuilder().removePathSegment(0).build();
       final String query = tempUrl.query();
       final String encodedPath = TextUtils.join("/", tempUrl.encodedPathSegments());
       final HttpUrl newUrl = HttpUrl.parse(newBaseUrl)

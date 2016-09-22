@@ -179,14 +179,7 @@ final class RouteServiceImpl implements RouteService {
     // TODO: Write tests to assert the logic of url failover.
     return Observable.from(urls)
         .concatMap(new Func1<String, Observable<RoutingResponse>>() {
-          @Override public Observable<RoutingResponse> call(String url) {
-
-            // TODO: remove this hack when resolved by the server
-            if (context.getPackageName().contains("debug") &&
-                url.contains("granduni") && !url.endsWith("-beta")) {
-              url += "-beta";
-            }
-
+          @Override public Observable<RoutingResponse> call(final String url) {
             return fetchRoutesPerUrlAsync(url, modes, excludedTransitModes, options);
           }
         })
