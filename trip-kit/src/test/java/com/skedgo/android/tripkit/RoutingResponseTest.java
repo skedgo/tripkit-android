@@ -13,7 +13,6 @@ import com.skedgo.android.common.util.Gsons;
 import org.assertj.core.api.Condition;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.robolectric.RobolectricGradleTestRunner;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
 
@@ -24,7 +23,7 @@ import okhttp3.mockwebserver.MockResponse;
 import static org.assertj.core.api.Assertions.assertThat;
 import static thuytrinh.mockwebserverrule.MockWebServerRule.createMockResponse;
 
-@RunWith(RobolectricGradleTestRunner.class)
+@RunWith(TestRunner.class)
 @Config(constants = BuildConfig.class)
 public class RoutingResponseTest {
   @Test public void processDirectionTemplate() {
