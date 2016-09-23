@@ -605,7 +605,7 @@ public class TripSegment implements Parcelable, IRealTimeElement, ITimeRange {
     return booking;
   }
 
-  void setBooking(Booking booking) {
+  public void setBooking(Booking booking) {
     this.booking = booking;
   }
 

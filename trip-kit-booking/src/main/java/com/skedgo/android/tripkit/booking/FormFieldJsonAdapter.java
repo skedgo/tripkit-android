@@ -53,6 +53,8 @@ public final class FormFieldJsonAdapter implements JsonDeserializer<FormField>, 
     String className = LinkFormField.class.getName();
     switch (type) {
       case "STRING":
+      case "NUMBER":
+      case "PASSWORD":
       case "TEXT":
         className = StringFormField.class.getName();
         break;

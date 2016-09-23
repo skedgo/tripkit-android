@@ -1,7 +1,10 @@
 package com.skedgo.android.tripkit.booking;
 
+import android.database.sqlite.SQLiteOpenHelper;
+
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.skedgo.android.tripkit.TripKit;
 import com.skedgo.android.tripkit.booking.viewmodel.AuthenticationViewModel;
 import com.skedgo.android.tripkit.booking.viewmodel.AuthenticationViewModelImpl;
 import com.skedgo.android.tripkit.booking.viewmodel.BookingViewModel;
@@ -66,11 +69,36 @@ public class BookingModule {
     return new AuthServiceImpl(authApi);
   }
 
-  @Provides BookingViewModel bookingViewModel(BookingApi bookingApi) {
-    return new BookingViewModelImpl(bookingApi);
+  @Provides BookingViewModel bookingViewModel(BookingService bookingService) {
+    return new BookingViewModelImpl(bookingService);
   }
 
   @Provides AuthenticationViewModel authenticationViewModel() {
     return new AuthenticationViewModelImpl();
   }
+
+  @Provides ExternalOAuthStore getExternalOAuthStore(SQLiteOpenHelper databaseHelper, ExternalOAuthEntityAdapter adapter) {
+    return new ExternalOAuthStoreImpl(databaseHelper, adapter);
+  }
+
+  @Provides SQLiteOpenHelper databaseHelper() {
+    return new ExternalOAuthDbHelper(TripKit.singleton().configs().context(), "externalOAuths.db");
+  }
+
+  @Provides ExternalOAuthEntityAdapter provideOlympicEntityAdapter() {
+    return new ExternalOAuthEntityAdapter();
+  }
+
+  @Provides ExternalOAuthService getExternalOAuthService(ExternalOAuthStore store) {
+    return new ExternalOAuthServiceImpl(store);
+  }
+
+  @Provides BookingService getBookingService(BookingApi bookingApi, ExternalOAuthStore externalOAuthStore) {
+    return new BookingServiceImpl(bookingApi, externalOAuthStore);
+  }
+
+  @Provides QuickBookingService getQuickBookingService(QuickBookingApi quickBookingApi) {
+    return new QuickBookingServiceImpl(quickBookingApi);
+  }
+
 }

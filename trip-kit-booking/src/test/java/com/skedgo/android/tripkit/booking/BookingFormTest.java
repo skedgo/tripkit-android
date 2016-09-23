@@ -6,13 +6,16 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.stream.JsonReader;
 
+import org.apache.commons.io.IOUtils;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.robolectric.RobolectricGradleTestRunner;
 import org.robolectric.annotation.Config;
 
+import java.io.IOException;
 import java.io.StringReader;
+import java.nio.charset.Charset;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -348,6 +351,37 @@ public class BookingFormTest {
     assertThat(formGroup2.getFields().get(1).getTitle()).isEqualTo("Child");
     assertThat(formGroup2.getFields().get(2)).isInstanceOf(OptionFormField.class);
     assertThat(formGroup2.getFields().get(2).getTitle()).isEqualTo("Type");
+  }
+
+  @Test public void updateOAuthBookingFormAsync() throws IOException {
+
+    String authBookingFormJson = IOUtils.toString(getClass().
+        getResourceAsStream("/auth-booking-form.json"), Charset.defaultCharset());
+
+    JsonReader reader = new JsonReader(new StringReader(authBookingFormJson));
+    reader.setLenient(true);
+    BookingForm bookingForm = gson.fromJson(reader, BookingForm.class);
+
+    assertThat(bookingForm.getOAuthLink()).isNotNull();
+    assertThat(bookingForm.getOAuthLink().toString())
+        .contains("client_id")
+        .contains("response_type")
+        .contains("scope")
+        .contains("state");
+
+    ExternalOAuth externalOAuth = ImmutableExternalOAuth.builder()
+        .authServiceId("lyft")
+        .token("TOKEN")
+        .expiresIn(1000)
+        .refreshToken("REFRESH TOKEN")
+        .build();
+
+    bookingForm.setAuthData(externalOAuth);
+
+    assertThat(bookingForm.getToken()).isEqualTo("TOKEN");
+    assertThat(bookingForm.getExpiresIn()).isEqualTo(1000);
+    assertThat(bookingForm.getRefreshToken()).isEqualTo("REFRESH TOKEN");
+
   }
 
   @Before public void before() {

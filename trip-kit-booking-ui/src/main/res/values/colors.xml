@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+  <color name="v4_title_text">#212121</color>
+  <color name="v4_divider">#f5f5f5</color>
+  <color name="v4_description_text">#8A8A8A</color>
+  <color name="v4_color">#00CC66</color>
+  <color name="v4_booking_divider">#f5f5f5</color>
+  <color name="v4_bg">#edeef2</color>
+  <color name="v4_actionbar_solid">#334D6E</color>
+  <color name="v4_actionbar_item_pressed">#33000000</color>
+  <color name="v4_status_bar">#213247</color>
+  <color name="v4_progress_scheme_3">#00ca61</color>
+  <color name="v4_disabled_btn_bg">#424c4c4c</color>
+  <color name="positive_pressed">#00a74f</color>
+  <color name="v4_disabled_btn_text">#bcbcbc</color>
+
+</resources>

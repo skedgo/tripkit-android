@@ -4,6 +4,7 @@ import android.os.Parcel;
 import android.os.Parcelable;
 
 import com.skedgo.android.tripkit.booking.BookingAction;
+import com.skedgo.android.tripkit.booking.BookingForm;
 import com.skedgo.android.tripkit.booking.InputForm;
 import com.skedgo.android.tripkit.booking.LinkFormField;
 
@@ -48,6 +49,11 @@ public final class ParamImpl implements BookingViewModel.Param {
   public static ParamImpl create(LinkFormField linkFormField) {
     final InputForm postBody = linkFormField.getMethod().equals(LinkFormField.METHOD_POST) ? new InputForm() : null;
     return new ParamImpl(linkFormField.getValue(), linkFormField.getMethod(), null, postBody);
+  }
+
+  public static ParamImpl create(BookingForm form) {
+    final InputForm postBody = InputForm.from(form.getForm());
+    return new ParamImpl(form.getAction().getUrl(), LinkFormField.METHOD_POST, null, postBody);
   }
 
   @Override

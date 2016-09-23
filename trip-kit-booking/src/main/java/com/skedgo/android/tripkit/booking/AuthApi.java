@@ -16,7 +16,7 @@ public interface AuthApi {
   /**
    * Returns a list of available providers for a region.
    * Unless you would like to work directly with the auth apis, refer to
-   * {@link AuthService#fetchProvidersByRegionAsync(Region)} for an easier usage.
+   * {@link AuthService#fetchProvidersByRegionAsync(Region, String)} for an easier usage.
    *
    * @param url Should be in form of 'auth/{regionName}'.
    *            A sample url can be like: 'https://granduni.buzzhives.com/satapp-beta/auth/US_CO_Denver'.
