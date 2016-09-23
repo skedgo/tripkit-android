@@ -7,13 +7,13 @@ import android.support.annotation.NonNull;
 import android.util.DisplayMetrics;
 
 import com.skedgo.android.common.BuildConfig;
+import com.skedgo.android.common.TestRunner;
 import com.skedgo.android.common.model.ModeInfo;
 import com.skedgo.android.common.model.TransportMode;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.robolectric.RobolectricGradleTestRunner;
 import org.robolectric.annotation.Config;
 
 import static android.util.DisplayMetrics.DENSITY_HIGH;
@@ -31,7 +31,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
-@RunWith(RobolectricGradleTestRunner.class)
+@RunWith(TestRunner.class)
 @Config(constants = BuildConfig.class, sdk = 21)
 public class TransportModeUtilsTest {
   private Resources resources;

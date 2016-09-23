@@ -13,8 +13,8 @@ import android.widget.Toast;
 
 import com.skedgo.android.common.model.Location;
 import com.skedgo.android.common.model.Region;
-import com.skedgo.android.tripkit.Paratransit;
 import com.skedgo.android.tripkit.RegionService;
+import com.skedgo.android.tripkit.tsp.Paratransit;
 
 import java.util.List;
 import java.util.Locale;

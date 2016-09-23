@@ -1,29 +1,46 @@
 package com.skedgo.android.common.util;
 
-import android.test.AndroidTestCase;
+import android.content.res.Resources;
 
+import com.skedgo.android.common.BuildConfig;
+import com.skedgo.android.common.TestRunner;
 import com.skedgo.android.common.model.Location;
 import com.skedgo.android.common.model.SegmentType;
 import com.skedgo.android.common.model.Trip;
 import com.skedgo.android.common.model.TripSegment;
 
+import org.junit.Before;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.robolectric.RuntimeEnvironment;
+import org.robolectric.annotation.Config;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 
 import static com.skedgo.android.common.model.TripSegment.VISIBILITY_IN_DETAILS;
+import static junit.framework.Assert.assertFalse;
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class TripSegmentListResolverTest extends AndroidTestCase {
-  public void testShouldOnlyShowDepartureSegmentInDetails() {
+@RunWith(TestRunner.class)
+@Config(constants = BuildConfig.class)
+public class TripSegmentListResolverTest {
+  private Resources resources;
+
+  @Before public void before() {
+    resources = RuntimeEnvironment.application.getResources();
+  }
+
+  @Test public void shouldOnlyShowDepartureSegmentInDetails() {
     TripSegment firstSegment = new TripSegment();
 
-    TripSegmentListResolver resolver = new TripSegmentListResolver(getContext().getResources());
+    TripSegmentListResolver resolver = new TripSegmentListResolver(resources);
     TripSegment departureSegment = resolver.createDepartureSegment(firstSegment);
 
     assertThat(departureSegment.getVisibility()).isEqualTo(VISIBILITY_IN_DETAILS);
   }
 
-  public void testShouldHaveNoTimeDifferenceForArrivalSegment() {
+  @Test public void shouldHaveNoTimeDifferenceForArrivalSegment() {
     TripSegment lastSegment = new TripSegment();
 
     // (M/D/Y @ h:m:s): 8 / 1 / 2002 @ 0:0:0 UTC
@@ -32,7 +49,7 @@ public class TripSegmentListResolverTest extends AndroidTestCase {
     // (M/D/Y @ h:m:s): 8 / 2 / 2002 @ 0:0:0 UTC
     lastSegment.setEndTimeInSecs(1028246400);
 
-    TripSegmentListResolver testResolver = new TripSegmentListResolver(getContext().getResources());
+    TripSegmentListResolver testResolver = new TripSegmentListResolver(resources);
     TripSegment arrivalSegment = testResolver.createArrivalSegment(lastSegment);
 
     assertThat(arrivalSegment.getType())
@@ -47,7 +64,7 @@ public class TripSegmentListResolverTest extends AndroidTestCase {
    * @see <a href="https://redmine.buzzhives.com/issues/4197">Issue 4197</a>
    * @see <a href="https://redmine.buzzhives.com/issues/4397">Issue 4397</a>
    */
-  public void testDepartureTimesBindsToFirstSegmentTimes() {
+  @Test public void departureTimesBindsToFirstSegmentTimes() {
     TripSegment firstSegment = new TripSegment();
     firstSegment.setAction("Take MRT");
     firstSegment.setStartTimeInSecs(2);
@@ -64,7 +81,7 @@ public class TripSegmentListResolverTest extends AndroidTestCase {
         finalSegment
     )));
 
-    new TripSegmentListResolver(getContext().getResources())
+    new TripSegmentListResolver(resources)
         .setOrigin(new Location())
         .setDestination(new Location())
         .setTripSegmentList(trip.getSegments())
@@ -86,7 +103,7 @@ public class TripSegmentListResolverTest extends AndroidTestCase {
    * @see <a href="https://redmine.buzzhives.com/issues/4197">Issue 4197</a>
    * @see <a href="https://redmine.buzzhives.com/issues/4397">Issue 4397</a>
    */
-  public void testArrivalTimesBindsToFinalSegmentTimes() {
+  @Test public void arrivalTimesBindsToFinalSegmentTimes() {
     TripSegment firstSegment = new TripSegment();
     firstSegment.setAction("Take MRT");
     firstSegment.setStartTimeInSecs(2);
@@ -103,7 +120,7 @@ public class TripSegmentListResolverTest extends AndroidTestCase {
         finalSegment
     )));
 
-    new TripSegmentListResolver(getContext().getResources())
+    new TripSegmentListResolver(resources)
         .setOrigin(new Location())
         .setDestination(new Location())
         .setTripSegmentList(trip.getSegments())
