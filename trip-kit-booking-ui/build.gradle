@@ -54,14 +54,3 @@ dependencies {
   compile 'com.jakewharton.picasso:picasso2-okhttp3-downloader:1.0.2'
   compile 'com.github.skedgo:activity-animations:v1.0'
 }
-
-/**
- * Run with 'gradlew clean test assemble uploadArchives'
- */
-uploadArchives {
-  repositories {
-    mavenDeployer {
-      repository(url: "file://${TripKitMaven}")
-    }
-  }
-}
