@@ -2,12 +2,11 @@ package com.skedgo.android.tripkit;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.robolectric.RobolectricGradleTestRunner;
 import org.robolectric.annotation.Config;
 
 import java.util.Locale;
 
-@RunWith(RobolectricGradleTestRunner.class)
+@RunWith(TestRunner.class)
 @Config(constants = BuildConfig.class, sdk = 21)
 public class BuiltInInterceptorCompatTest {
   @Test(expected = IllegalStateException.class)

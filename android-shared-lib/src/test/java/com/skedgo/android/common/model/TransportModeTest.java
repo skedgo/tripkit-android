@@ -3,10 +3,10 @@ package com.skedgo.android.common.model;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import com.skedgo.android.common.BuildConfig;
+import com.skedgo.android.common.TestRunner;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.robolectric.RobolectricGradleTestRunner;
 import org.robolectric.annotation.Config;
 
 import java.util.ArrayList;
@@ -15,7 +15,7 @@ import java.util.Arrays;
 import static junit.framework.Assert.assertEquals;
 import static org.assertj.core.api.Assertions.assertThat;
 
-@RunWith(RobolectricGradleTestRunner.class)
+@RunWith(TestRunner.class)
 @Config(constants = BuildConfig.class, sdk = 21)
 public class TransportModeTest {
   @Test public void serializedNames() {
