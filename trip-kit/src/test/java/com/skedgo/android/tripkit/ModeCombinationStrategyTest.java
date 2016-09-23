@@ -7,7 +7,6 @@ import com.skedgo.android.common.model.TransportMode;
 import org.assertj.core.util.Sets;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.robolectric.RobolectricGradleTestRunner;
 import org.robolectric.annotation.Config;
 
 import java.util.ArrayList;
@@ -21,7 +20,7 @@ import static java.util.Arrays.asList;
 import static java.util.Collections.singletonList;
 import static org.assertj.core.api.Assertions.assertThat;
 
-@RunWith(RobolectricGradleTestRunner.class)
+@RunWith(TestRunner.class)
 @Config(constants = BuildConfig.class, sdk = 21)
 public class ModeCombinationStrategyTest {
   @Test
@@ -33,7 +32,8 @@ public class ModeCombinationStrategyTest {
     assertThat(modeIdSets).hasSize(3).contains(
         Sets.newLinkedHashSet("a"),
         Sets.newLinkedHashSet("b"),
-        Sets.newLinkedHashSet("a", "b"));
+        Sets.newLinkedHashSet("a", "b")
+    );
   }
 
   @Test

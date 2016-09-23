@@ -2,13 +2,12 @@ package com.skedgo.android.tripkit;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.robolectric.RobolectricGradleTestRunner;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-@RunWith(RobolectricGradleTestRunner.class)
+@RunWith(TestRunner.class)
 @Config(constants = BuildConfig.class, sdk = 21)
 public class ConfigsTest {
   /**

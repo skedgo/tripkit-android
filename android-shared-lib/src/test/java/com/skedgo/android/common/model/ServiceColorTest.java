@@ -1,9 +1,16 @@
 package com.skedgo.android.common.model;
 
+import com.skedgo.android.common.BuildConfig;
+import com.skedgo.android.common.TestRunner;
+
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.robolectric.annotation.Config;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+@RunWith(TestRunner.class)
+@Config(constants = BuildConfig.class)
 public class ServiceColorTest {
   @Test
   public void shouldEqual() {

@@ -1,17 +1,17 @@
 package com.skedgo.android.common.model;
 
 import com.skedgo.android.common.BuildConfig;
+import com.skedgo.android.common.TestRunner;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.robolectric.RobolectricGradleTestRunner;
 import org.robolectric.annotation.Config;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
-@RunWith(RobolectricGradleTestRunner.class)
+@RunWith(TestRunner.class)
 @Config(constants = BuildConfig.class, sdk = 21)
 public class TripsTest {
   private final Trip trip = mock(Trip.class);

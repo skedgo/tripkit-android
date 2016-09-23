@@ -5,7 +5,6 @@ import com.skedgo.android.common.model.Query;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.robolectric.RobolectricGradleTestRunner;
 import org.robolectric.annotation.Config;
 
 import static com.skedgo.android.tripkit.RouteOptions.CYCLING_SPEED_AVERAGE;
@@ -14,7 +13,7 @@ import static com.skedgo.android.tripkit.RouteOptions.WALKING_SPEED_AVERAGE;
 import static com.skedgo.android.tripkit.RouteOptions.WALKING_SPEED_SLOW;
 import static org.assertj.core.api.Assertions.assertThat;
 
-@RunWith(RobolectricGradleTestRunner.class)
+@RunWith(TestRunner.class)
 @Config(constants = BuildConfig.class, sdk = 21)
 public class RouteOptionsTest {
   @Test
