@@ -1,4 +1,6 @@
 language: android
+jdk:
+  - oraclejdk8
 
 # To avoid following similar issues:
 # * https://github.com/travis-ci/travis-ci/issues/5582
