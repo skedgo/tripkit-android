@@ -10,7 +10,6 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.mockito.invocation.InvocationOnMock;
 import org.mockito.stubbing.Answer;
-import org.robolectric.RobolectricGradleTestRunner;
 import org.robolectric.annotation.Config;
 
 import java.util.ArrayList;
@@ -26,7 +25,7 @@ import static org.mockito.Matchers.eq;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
-@RunWith(RobolectricGradleTestRunner.class)
+@RunWith(TestRunner.class)
 @Config(constants = BuildConfig.class, sdk = 21)
 public class LocationInfoServiceImplTest {
   @Mock LocationInfoApi api;
@@ -78,7 +77,8 @@ public class LocationInfoServiceImplTest {
         eq(location.getLat()),
         eq(location.getLon())
     )).thenAnswer(new Answer<Observable<LocationInfo>>() {
-      @Override public Observable<LocationInfo> answer(InvocationOnMock invocation) throws Throwable {
+      @Override
+      public Observable<LocationInfo> answer(InvocationOnMock invocation) throws Throwable {
         final String url = invocation.getArgumentAt(0, String.class);
         switch (url) {
           case "https://inflationary-au-nsw-sydney.tripgo.skedgo.com/satapp/locationInfo.json":
