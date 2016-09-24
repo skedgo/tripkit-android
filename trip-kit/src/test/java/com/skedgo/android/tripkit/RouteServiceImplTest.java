@@ -1,5 +1,6 @@
 package com.skedgo.android.tripkit;
 
+import android.content.Context;
 import android.content.res.Resources;
 import android.support.annotation.NonNull;
 
@@ -40,7 +41,7 @@ import static org.mockito.Mockito.when;
 @RunWith(TestRunner.class)
 @Config(constants = BuildConfig.class)
 public class RouteServiceImplTest {
-  @Mock Resources resources;
+  @Mock Context context;
   @Mock Func1<String, RoutingApi> routingApiFactory;
   @Mock Func1<Query, Observable<List<Query>>> queryGenerator;
   @Mock ExcludedTransitModesAdapter excludedTransitModesAdapter;
@@ -53,7 +54,7 @@ public class RouteServiceImplTest {
   @Before public void before() {
     MockitoAnnotations.initMocks(this);
     routeService = new RouteServiceImpl(
-        resources,
+        context,
         appVersion,
         queryGenerator,
         routingApiFactory,

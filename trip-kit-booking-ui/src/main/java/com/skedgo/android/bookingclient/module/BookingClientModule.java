@@ -56,8 +56,8 @@ public class BookingClientModule {
     });
   }
 
-  @Provides BookingErrorViewModel bookingErrorViewModel(Gson gson) {
-    return new BookingErrorViewModel(gson, appContext.getString(R.string.nicely_informed_error));
+  @Provides BookingErrorViewModel bookingErrorViewModel() {
+    return new BookingErrorViewModel(appContext.getString(R.string.nicely_informed_error));
   }
 
   @Provides @Singleton Picasso picasso(
