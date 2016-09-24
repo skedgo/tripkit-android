@@ -18,10 +18,24 @@ public abstract class FormField implements Parcelable, Serializable {
   public static final int STEPPER = 4;
   public static final int STRING = 1;
   public static final int SWITCH = 8;
+  public static final int PASSWORD = 9;
+
+  public static final String ACCESS_TOKEN = "access_token";
+  public static final String EXPIRES_IN = "expires_in";
+  public static final String REFRESH_TOKEN = "refresh_token";
+  public static final String REDIRECT_URI = "redirectUri";
+  public static final String CLIENT_ID = "clientID";
+  public static final String CLIENT_SECRET = "clientSecret";
+  public static final String AUTH_URL = "authURL";
+  public static final String TOKEN_URL = "tokenURL";
+  public static final String SCOPE = "scope";
+
   public static final Creator<FormField> CREATOR = new Creator<FormField>() {
     @Override
     public FormField createFromParcel(Parcel in) {
       switch (in.readInt()) {
+        case PASSWORD:
+          return new PasswordFormField(in);
         case STRING:
           return new StringFormField(in);
         case OPTION:
@@ -98,6 +112,7 @@ public abstract class FormField implements Parcelable, Serializable {
     dest.writeString(type);
   }
 
+  @Nullable
   public abstract Object getValue();
 
   @Nullable
@@ -109,6 +124,7 @@ public abstract class FormField implements Parcelable, Serializable {
     this.title = title;
   }
 
+  @Nullable
   public String getId() {
     return id;
   }

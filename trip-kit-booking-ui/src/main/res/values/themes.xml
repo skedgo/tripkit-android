@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+  <style name="V4" parent="Theme.AppCompat.Light.DarkActionBar" />
+
+  <style name="V4.Material">
+    <!-- Fundamental setup for Material theme -->
+    <!-- See: http://android-developers.blogspot.com/2014/10/appcompat-v21-material-design-for-pre.html -->
+
+    <!-- colorPrimary is used for the default action bar background -->
+    <item name="colorPrimary">@color/v4_actionbar_solid</item>
+
+    <!-- colorPrimaryDark is used for the status bar -->
+    <item name="colorPrimaryDark">@color/v4_status_bar</item>
+
+    <!-- colorControlActivated is used for the active state of controls such as CheckBox and RadioButton -->
+    <item name="colorControlActivated">@color/v4_color</item>
+  </style>
+
+  <style name="ActionBar.Solid.V4" parent="@style/Widget.AppCompat.Light.ActionBar.Solid.Inverse">
+    <item name="background">@color/v4_actionbar_solid</item>
+    <item name="android:screenOrientation">portrait</item>
+  </style>
+
+</resources>

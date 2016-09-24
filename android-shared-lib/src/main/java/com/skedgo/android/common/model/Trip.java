@@ -426,6 +426,19 @@ public class Trip implements Parcelable, ITimeRange {
     return false;
   }
 
+  public boolean hasQuickBooking() {
+    if (mSegments == null) {
+      return false;
+    }
+
+    for (TripSegment segment : mSegments) {
+      if (segment.getBooking() != null && segment.getBooking().getQuickBookingsUrl() != null) {
+        return true;
+      }
+    }
+    return false;
+  }
+
   /**
    * TODO: Need a test.
    */

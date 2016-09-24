@@ -5,6 +5,7 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 
 import retrofit2.http.Body;
+import retrofit2.http.Url;
 import rx.Observable;
 import rx.functions.Action0;
 import rx.functions.Action1;
@@ -50,6 +51,15 @@ final class AccountServiceImpl implements AccountService {
           @Override public void call() {
             tokenStore.put(null);
             preferences.edit().clear().apply();
+          }
+        });
+  }
+
+  @Override public Observable<LogInResponse> logInSilentAsync(@Url String token) {
+    return api.logInSilentAsync("/account/android/" + token)
+        .doOnNext(new Action1<LogInResponse>() {
+          @Override public void call(LogInResponse response) {
+            tokenStore.put(response.userToken());
           }
         });
   }
