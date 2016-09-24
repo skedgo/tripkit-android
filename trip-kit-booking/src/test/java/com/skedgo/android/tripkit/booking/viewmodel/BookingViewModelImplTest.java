@@ -1,8 +1,8 @@
 package com.skedgo.android.tripkit.booking.viewmodel;
 
 import com.skedgo.android.tripkit.booking.BookingAction;
-import com.skedgo.android.tripkit.booking.BookingApi;
 import com.skedgo.android.tripkit.booking.BookingForm;
+import com.skedgo.android.tripkit.booking.BookingService;
 import com.skedgo.android.tripkit.booking.BuildConfig;
 import com.skedgo.android.tripkit.booking.FormField;
 import com.skedgo.android.tripkit.booking.FormGroup;
@@ -40,7 +40,7 @@ import static org.mockito.Mockito.when;
 public class BookingViewModelImplTest {
   private AuthenticationViewModel authenticationViewModel;
   private BookingViewModel bookingViewModel;
-  private BookingApi api;
+  private BookingService api;
   private InputForm inputForm;
   private BookingViewModel.Param param;
 
@@ -210,7 +210,7 @@ public class BookingViewModelImplTest {
   }
 
   @Before public void before() {
-    api = mock(BookingApi.class);
+    api = mock(BookingService.class);
     bookingViewModel = new BookingViewModelImpl(api);
     authenticationViewModel = new AuthenticationViewModelImpl();
     inputForm = InputForm.from(new ArrayList<FormGroup>());
