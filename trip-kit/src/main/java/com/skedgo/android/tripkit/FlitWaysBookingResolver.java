@@ -1,6 +1,7 @@
 package com.skedgo.android.tripkit;
 
 import android.content.Intent;
+import android.content.res.Resources;
 import android.net.Uri;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -22,8 +23,11 @@ import rx.schedulers.Schedulers;
 
 final class FlitWaysBookingResolver implements BookingResolver {
   private final Func1<ReverseGeocodingParams, Observable<String>> reverseGeocoderFactory;
+  private final Resources resources;
 
-  public FlitWaysBookingResolver(@NonNull Func1<ReverseGeocodingParams, Observable<String>> reverseGeocoderFactory) {
+  public FlitWaysBookingResolver(@NonNull Resources resources,
+                                 @NonNull Func1<ReverseGeocodingParams, Observable<String>> reverseGeocoderFactory) {
+    this.resources = resources;
     this.reverseGeocoderFactory = reverseGeocoderFactory;
   }
 
@@ -97,6 +101,6 @@ final class FlitWaysBookingResolver implements BookingResolver {
   }
 
   @Nullable @Override public String getTitleForExternalAction(String externalAction) {
-    return "Book with FlitWays"; // TODO: i18n.
+    return resources.getString(R.string.book_with_flitways);
   }
 }

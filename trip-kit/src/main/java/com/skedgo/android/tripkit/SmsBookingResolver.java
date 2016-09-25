@@ -1,6 +1,7 @@
 package com.skedgo.android.tripkit;
 
 import android.content.Intent;
+import android.content.res.Resources;
 import android.net.Uri;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -8,7 +9,11 @@ import android.support.annotation.Nullable;
 import rx.Observable;
 
 final class SmsBookingResolver implements BookingResolver {
-  public SmsBookingResolver() {}
+  private final Resources resources;
+
+  public SmsBookingResolver(@NonNull Resources resources) {
+    this.resources = resources;
+  }
 
   /**
    * @param uri e.g. 'sms:12345' where '12345' is phone number.
@@ -44,6 +49,6 @@ final class SmsBookingResolver implements BookingResolver {
   }
 
   @Nullable @Override public String getTitleForExternalAction(String externalAction) {
-    return "Send SMS"; // TODO: i18n.
+    return resources.getString(R.string.send_sms);
   }
 }
