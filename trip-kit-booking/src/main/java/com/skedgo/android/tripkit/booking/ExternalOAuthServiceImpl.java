@@ -3,21 +3,21 @@ package com.skedgo.android.tripkit.booking;
 import android.text.TextUtils;
 
 import rx.Observable;
-import rx.Subscriber;
 import rx.functions.Func1;
 
 public class ExternalOAuthServiceImpl implements ExternalOAuthService {
-
   private ExternalOAuthStore externalOAuthStore;
 
   public ExternalOAuthServiceImpl(ExternalOAuthStore externalOAuthStore) {
     this.externalOAuthStore = externalOAuthStore;
   }
 
-  @Override public Observable<ExternalOAuth> getAccessToken(final BookingForm form,
-                                                            final String code, final String grantType,
-                                                            final String callback) {
-
+  @Override public Observable<ExternalOAuth> getAccessToken(
+      final BookingForm form,
+      final String code,
+      final String grantType,
+      final String callback
+  ) {
     final String clientId = form.getClientID();
     final String clientSecret = form.getClientSecret();
     final String baseUrl = form.getTokenURL();
@@ -29,37 +29,32 @@ public class ExternalOAuthServiceImpl implements ExternalOAuthService {
 
     final ExternalOAuthApi externalOAuthApi =
         ExternalOAuthServiceGenerator.createService(ExternalOAuthApi.class, baseUrl, clientId,
-                                                    clientSecret, credentialsInHeader);
+                                                    clientSecret, credentialsInHeader
+        );
 
     return externalOAuthApi.getAccessToken(clientSecret, clientId, code, "authorization_code", callback, scope)
         .filter(new Func1<AccessTokenResponse, Boolean>() {
-          @Override public Boolean call(AccessTokenResponse accessTokenResponse) {
-            return accessTokenResponse != null;
+          @Override public Boolean call(AccessTokenResponse response) {
+            return response != null && response.refreshToken() != null;
           }
         })
-        .flatMap(new Func1<AccessTokenResponse, Observable<ExternalOAuth>>() {
-          @Override public Observable<ExternalOAuth> call(final AccessTokenResponse accessTokenResponse) {
-            return Observable.create(new Observable.OnSubscribe<ExternalOAuth>() {
-              @Override public void call(Subscriber<? super ExternalOAuth> subscriber) {
-
-                String serviceIdString = "";
-                if (serviceId != null) {
-                  serviceIdString = serviceId.toString();
-                }
-                ExternalOAuth externalOAuth = ImmutableExternalOAuth.builder()
-                    .authServiceId(serviceIdString)
-                    .token(accessTokenResponse.accessToken())
-                    .refreshToken(accessTokenResponse.refreshToken())
-                    .expiresIn(accessTokenResponse.expiresIn())
-                    .build();
-
-                if (accessTokenResponse.refreshToken() != null) {
-                  // save token
-                  externalOAuthStore.updateExternalOauth(externalOAuth).subscribe();
-                }
-                subscriber.onNext(externalOAuth);
-              }
-            });
+        .map(new Func1<AccessTokenResponse, ExternalOAuth>() {
+          @Override public ExternalOAuth call(AccessTokenResponse response) {
+            String serviceIdString = "";
+            if (serviceId != null) {
+              serviceIdString = serviceId.toString();
+            }
+            return ImmutableExternalOAuth.builder()
+                .authServiceId(serviceIdString)
+                .token(response.accessToken())
+                .refreshToken(response.refreshToken())
+                .expiresIn(response.expiresIn())
+                .build();
+          }
+        })
+        .flatMap(new Func1<ExternalOAuth, Observable<ExternalOAuth>>() {
+          @Override public Observable<ExternalOAuth> call(ExternalOAuth externalOAuth) {
+            return externalOAuthStore.updateExternalOauth(externalOAuth);
           }
         });
   }
