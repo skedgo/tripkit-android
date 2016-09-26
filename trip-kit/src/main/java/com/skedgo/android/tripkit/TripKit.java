@@ -1,5 +1,6 @@
 package com.skedgo.android.tripkit;
 
+import android.content.Context;
 import android.support.annotation.VisibleForTesting;
 
 import com.skedgo.android.tripkit.tsp.TspModule;
@@ -14,6 +15,7 @@ import rx.functions.Actions;
 
 @Singleton
 @Component(modules = {
+    NetworkModule.class,
     TspModule.class,
     MainModule.class
 })
@@ -27,6 +29,16 @@ public abstract class TripKit {
       }
 
       return instance;
+    }
+  }
+
+  public static void initialize(Context context, TripKit tripKit) {
+    synchronized (TripKit.class) {
+      if (instance == null) {
+        instance = tripKit;
+      }
+      FetchRegionsService.scheduleAsync(context)
+          .subscribe(Actions.empty(), instance.getErrorHandler());
     }
   }
 
