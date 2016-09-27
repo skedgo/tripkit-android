@@ -47,7 +47,7 @@ import static retrofit.RestAdapter.LogLevel.FULL;
 import static retrofit.RestAdapter.LogLevel.NONE;
 
 @Module
-class MainModule {
+public class MainModule {
   private final Configs configs;
   private final Context context;
 
@@ -207,10 +207,11 @@ class MainModule {
         .build();
   }
 
-  @Singleton @Provides okhttp3.OkHttpClient getOkHttpClient3(
+  @Singleton @Provides okhttp3.OkHttpClient httpClient3(
+      okhttp3.OkHttpClient.Builder httpClientBuilder,
       BuiltInInterceptor builtInInterceptor,
       Provider<HttpLoggingInterceptor> httpLoggingInterceptorProvider) {
-    final okhttp3.OkHttpClient.Builder builder = new okhttp3.OkHttpClient.Builder()
+    final okhttp3.OkHttpClient.Builder builder = httpClientBuilder
         .addInterceptor(builtInInterceptor);
     if (configs.debuggable()) {
       final Func0<Func0<String>> baseUrlAdapterFactory = configs.baseUrlAdapterFactory();

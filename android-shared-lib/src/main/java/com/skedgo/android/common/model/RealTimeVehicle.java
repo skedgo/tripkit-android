@@ -2,6 +2,7 @@ package com.skedgo.android.common.model;
 
 import android.os.Parcel;
 import android.os.Parcelable;
+import android.support.annotation.Nullable;
 
 import com.google.gson.annotations.SerializedName;
 
@@ -11,7 +12,6 @@ public class RealTimeVehicle implements Parcelable {
   public static final Creator<RealTimeVehicle> CREATOR = new Creator<RealTimeVehicle>() {
     public RealTimeVehicle createFromParcel(Parcel in) {
       RealTimeVehicle v = new RealTimeVehicle();
-
       v.mId = in.readLong();
       v.mLocation = in.readParcelable(Location.class.getClassLoader());
       v.mLabel = in.readString();
@@ -22,7 +22,7 @@ public class RealTimeVehicle implements Parcelable {
       v.mArriveAtEndStopTime = in.readLong();
       v.mArriveAtStartStopTime = in.readLong();
       v.mAlerts = in.readArrayList(RealtimeAlert.class.getClassLoader());
-
+      v.icon = in.readString();
       return v;
     }
 
@@ -37,12 +37,11 @@ public class RealTimeVehicle implements Parcelable {
   private transient long mArriveAtEndStopTime = -1;
   private transient long mArriveAtStartStopTime = -1;
   private transient ArrayList<RealtimeAlert> mAlerts;
-  @SerializedName("location")
-  private Location mLocation;
-  @SerializedName("label")
-  private String mLabel;
-  @SerializedName("lastUpdate")
-  private long mLastUpdateTime;
+
+  @SerializedName("location") private Location mLocation;
+  @SerializedName("label") private String mLabel;
+  @SerializedName("lastUpdate") private long mLastUpdateTime;
+  @SerializedName("icon") @Nullable private String icon;
 
   public long getId() {
     return mId;
@@ -153,5 +152,14 @@ public class RealTimeVehicle implements Parcelable {
     dest.writeLong(mArriveAtEndStopTime);
     dest.writeLong(mArriveAtStartStopTime);
     dest.writeList(mAlerts);
+    dest.writeString(icon);
+  }
+
+  @Nullable public String getIcon() {
+    return icon;
+  }
+
+  public void setIcon(@Nullable String icon) {
+    this.icon = icon;
   }
 }
