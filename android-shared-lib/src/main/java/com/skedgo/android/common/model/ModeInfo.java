@@ -10,7 +10,7 @@ import com.google.gson.annotations.SerializedName;
 /**
  * @see <a href="https://github.com/skedgo/tripkit-ios/wiki/Mode%20Identifiers">Mode Identifiers</a>
  */
-public final class ModeInfo implements Parcelable {
+public class ModeInfo implements Parcelable {
   public static final Creator<ModeInfo> CREATOR = new Creator<ModeInfo>() {
     @Override
     public ModeInfo createFromParcel(Parcel source) {
