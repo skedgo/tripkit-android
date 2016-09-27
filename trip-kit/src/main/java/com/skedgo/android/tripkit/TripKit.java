@@ -1,6 +1,7 @@
 package com.skedgo.android.tripkit;
 
 import android.content.Context;
+import android.support.annotation.NonNull;
 import android.support.annotation.VisibleForTesting;
 
 import com.skedgo.android.tripkit.tsp.TspModule;
@@ -15,7 +16,7 @@ import rx.functions.Actions;
 
 @Singleton
 @Component(modules = {
-    NetworkModule.class,
+    HttpClientModule.class,
     TspModule.class,
     MainModule.class
 })
@@ -32,7 +33,19 @@ public abstract class TripKit {
     }
   }
 
-  public static void initialize(Context context, TripKit tripKit) {
+  /**
+   * This gives a chance to provide a custom {@link TripKit}.
+   * One idea is that we can create {@link DaggerTripKit}
+   * w/ some customized modules.
+   * <p>
+   * Note that you should only use this
+   * when you totally understand what you're doing.
+   * Otherwise, just go w/ {@link #initialize(Configs)}.
+   *
+   * @param context A {@link Context} to launch {@link FetchRegionsService}.
+   * @param tripKit Can be created via {@link DaggerTripKit}.
+   */
+  public static void initialize(@NonNull Context context, @NonNull TripKit tripKit) {
     synchronized (TripKit.class) {
       if (instance == null) {
         instance = tripKit;
