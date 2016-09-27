@@ -1,5 +1,7 @@
 package com.skedgo.android.tripkit.booking;
 
+import android.support.annotation.VisibleForTesting;
+
 import com.google.gson.Gson;
 import com.google.gson.stream.JsonReader;
 
@@ -9,14 +11,13 @@ import java.io.StringReader;
 import retrofit2.Response;
 import rx.Observable;
 import rx.Single;
-import rx.functions.Func0;
 import rx.functions.Func1;
 
 public class BookingServiceImpl implements BookingService {
 
   private final BookingApi bookingApi;
   private final ExternalOAuthStore externalOAuthStore;
-  private final  Gson gson;
+  private final Gson gson;
 
   public BookingServiceImpl(BookingApi bookingApi, ExternalOAuthStore externalOAuthStore, Gson gson) {
     this.bookingApi = bookingApi;
@@ -32,10 +33,13 @@ public class BookingServiceImpl implements BookingService {
 
     return bookingApi.postFormAsync(url, inputForm)
         .flatMap(new Func1<Response<BookingForm>, Observable<BookingForm>>() {
-          @Override public Observable<BookingForm> call(final Response<BookingForm> bookingFormResponse) {
+          @Override
+          public Observable<BookingForm> call(final Response<BookingForm> bookingFormResponse) {
+
             if (!bookingFormResponse.isSuccessful()) {
               try {
-                return Observable.error(asBookingError(bookingFormResponse.errorBody().string()));
+                BookingError e = asBookingError(bookingFormResponse.errorBody().string());
+                return Observable.error(e);
               } catch (IOException e) {
                 e.printStackTrace();
               }
@@ -49,9 +53,9 @@ public class BookingServiceImpl implements BookingService {
     return externalOAuthStore.getExternalOauth(authId);
   }
 
-
-  private BookingError asBookingError(String bookingErrorJson) {
+  @VisibleForTesting BookingError asBookingError(String bookingErrorJson) {
     final JsonReader jsonReader = new JsonReader(new StringReader(bookingErrorJson));
+    jsonReader.setLenient(true);
     return gson.fromJson(jsonReader, BookingError.class);
   }
 
