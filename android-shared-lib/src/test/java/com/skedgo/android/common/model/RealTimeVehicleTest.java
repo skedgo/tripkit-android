@@ -23,6 +23,7 @@ public class RealTimeVehicleTest {
   }
 
   @Test public void canBeCreatedFromJson() {
+    // This json was grabbed from an Uber trip.
     final String json = "{\n" +
         "  \"icon\": \"uber-uberX\",\n" +
         "  \"lastUpdate\": 1474903232,\n" +
@@ -32,7 +33,9 @@ public class RealTimeVehicleTest {
         "    \"lng\": 151.21158\n" +
         "  }\n" +
         "}";
+
     final RealTimeVehicle uberVehicle = new Gson().fromJson(json, RealTimeVehicle.class);
+
     assertThat(uberVehicle.getIcon()).isEqualTo("uber-uberX");
     assertThat(uberVehicle.getLastUpdateTime()).isEqualTo(1474903232L);
     final Location location = new Location(-33.85946, 151.21158);
