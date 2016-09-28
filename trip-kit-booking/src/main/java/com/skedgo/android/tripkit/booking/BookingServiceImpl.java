@@ -3,10 +3,8 @@ package com.skedgo.android.tripkit.booking;
 import android.support.annotation.VisibleForTesting;
 
 import com.google.gson.Gson;
-import com.google.gson.stream.JsonReader;
 
 import java.io.IOException;
-import java.io.StringReader;
 
 import retrofit2.Response;
 import rx.Observable;
@@ -54,9 +52,7 @@ public class BookingServiceImpl implements BookingService {
   }
 
   @VisibleForTesting BookingError asBookingError(String bookingErrorJson) {
-    final JsonReader jsonReader = new JsonReader(new StringReader(bookingErrorJson));
-    jsonReader.setLenient(true);
-    return gson.fromJson(jsonReader, BookingError.class);
+    return gson.fromJson(bookingErrorJson, BookingError.class);
   }
 
 }

@@ -1,7 +1,6 @@
 package com.skedgo.android.tripkit.booking;
 
 import com.google.gson.Gson;
-import com.google.gson.stream.JsonReader;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -9,8 +8,6 @@ import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.annotation.Config;
-
-import java.io.StringReader;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.Assert.assertNull;
@@ -29,7 +26,7 @@ public class BookingErrorTest {
     service = new BookingServiceImpl(bookingApi, externalOAuthStore, gson);
   }
 
-  @Test public void Parse() {
+  @Test public void parse() {
     String responseError = "{\"errorCode\":470,\"title\":\"Booking not successful\",\"error\":\"2004 : Validation errors - length must be between 1 and 100\"}";
 
     BookingError bookingError = service.asBookingError(responseError);
@@ -45,12 +42,10 @@ public class BookingErrorTest {
         .isEqualTo("2004 : Validation errors - length must be between 1 and 100");
   }
 
-  @Test public void ParseBookingService() {
+  @Test public void parseBookingService() {
     String responseError = "{\"error\":\"That userToken is unrecognised.\",\"errorCode\":401,\"usererror\":false}";
 
-    JsonReader reader = new JsonReader(new StringReader(responseError));
-    reader.setLenient(true);
-    BookingError bookingError = gson.fromJson(reader, BookingError.class);
+    BookingError bookingError = gson.fromJson(responseError, BookingError.class);
 
     assertThat(bookingError.getTitle())
         .describedAs("Title should be read null")
@@ -66,12 +61,10 @@ public class BookingErrorTest {
         .isFalse();
   }
 
-  @Test public void ThrowableMessage() {
+  @Test public void throwableMessage() {
     String responseError = "{\"error\":\"That userToken is unrecognised.\",\"errorCode\":401,\"usererror\":false}";
 
-    JsonReader reader = new JsonReader(new StringReader(responseError));
-    reader.setLenient(true);
-    Throwable bookingError = gson.fromJson(reader, BookingError.class);
+    Throwable bookingError = gson.fromJson(responseError, BookingError.class);
 
     assertThat(bookingError.getMessage())
         .describedAs("Error should be read properly")
@@ -79,11 +72,9 @@ public class BookingErrorTest {
 
   }
 
-  @Test public void Null() {
+  @Test public void nullBooking() {
     String responseError = "{\"title\":\"Booking not successful\"}";
-    JsonReader reader = new JsonReader(new StringReader(responseError));
-    reader.setLenient(true);
-    BookingError bookingError = gson.fromJson(reader, BookingError.class);
+    BookingError bookingError = gson.fromJson(responseError, BookingError.class);
 
     assertThat(bookingError.getTitle())
         .describedAs("Title should be read properly")
