@@ -26,6 +26,7 @@ public final class TransportMode implements Parcelable {
   public static final String ID_PUBLIC_TRANSPORT = "pt_pub";
   public static final String ID_MOTORBIKE = "me_mot";
   public static final String ID_CAR = "me_car";
+  public static final String ID_WHEEL_CHAIR = "wa_whe";
 
   /**
    * FIXME: It seems we no longer need this id.

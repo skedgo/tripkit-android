@@ -47,6 +47,7 @@ public enum VehicleMode {
   TRAIN("train", R.drawable.ic_train, R.drawable.ic_train_realtime),
   TRAM("tram", R.drawable.ic_tram, R.drawable.ic_tram_realtime),
   WALK("walk", R.drawable.ic_walk, R.drawable.ic_walk),
+  WHEEL_CHAIR("wheelchair", R.drawable.ic_wheelchair, R.drawable.ic_wheelchair),
 
   // FIXME: Is this still being used?
   TOLL("toll", R.drawable.ic_toll, R.drawable.ic_toll),
