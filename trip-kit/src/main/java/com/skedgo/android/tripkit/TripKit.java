@@ -10,13 +10,13 @@ import com.squareup.okhttp.OkHttpClient;
 import javax.inject.Singleton;
 
 import dagger.Component;
-import okhttp3.logging.HttpLoggingInterceptor;
 import rx.functions.Action1;
 import rx.functions.Actions;
 
 @Singleton
 @Component(modules = {
     HttpClientModule.class,
+    HttpClient2Module.class,
     TspModule.class,
     MainModule.class
 })
@@ -82,7 +82,6 @@ public abstract class TripKit {
   public abstract BookingResolver getBookingResolver();
   public abstract LocationInfoService getLocationInfoService();
   @VisibleForTesting abstract RegionDatabaseHelper getRegionDatabaseHelper();
-  @VisibleForTesting abstract HttpLoggingInterceptor getHttpLoggingInterceptor();
   abstract TripUpdater getTripUpdater();
   abstract Action1<Throwable> getErrorHandler();
 }

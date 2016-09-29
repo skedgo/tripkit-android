@@ -12,9 +12,6 @@ import org.mockito.MockitoAnnotations;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
 
-import java.util.List;
-
-import okhttp3.logging.HttpLoggingInterceptor;
 import rx.functions.Func0;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -63,18 +60,6 @@ public class TripKitTest {
     assertThat(kit.getLocationInfoService()).isNotNull().isNotSameAs(kit.getLocationInfoService());
   }
 
-  @Test public void loggingLevelIsNone() {
-    when(configs.debuggable()).thenReturn(false);
-    assertThat(kit.getHttpLoggingInterceptor().getLevel())
-        .isEqualTo(HttpLoggingInterceptor.Level.NONE);
-  }
-
-  @Test public void loggingLevelIsBody() {
-    when(configs.debuggable()).thenReturn(true);
-    assertThat(kit.getHttpLoggingInterceptor().getLevel())
-        .isEqualTo(HttpLoggingInterceptor.Level.BODY);
-  }
-
   @Test public void hasBaseUrlOverridingInterceptors() {
     when(configs.debuggable()).thenReturn(true);
     when(configs.baseUrlAdapterFactory()).thenReturn(baseUrlAdapterFactory);
@@ -99,12 +84,6 @@ public class TripKitTest {
             return value instanceof BaseUrlOverridingInterceptor;
           }
         });
-  }
-
-  @Test public void attachHttpLoggingInterceptorAtTheEnd() {
-    when(configs.debuggable()).thenReturn(true);
-    final List<okhttp3.Interceptor> interceptors = kit.getOkHttpClient3().interceptors();
-    assertThat(interceptors.get(interceptors.size() - 1)).isInstanceOf(HttpLoggingInterceptor.class);
   }
 
   /* See https://www.flowdock.com/app/skedgo/androiddev/threads/3WbchFGaktP8JunwxJOhtyCw32J. */
