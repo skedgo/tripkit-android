@@ -168,26 +168,6 @@ public class MainModule {
         .build();
   }
 
-  /**
-   * This was deprecated.
-   * TODO: Migrate to {@link okhttp3.OkHttpClient}.
-   */
-  @Deprecated
-  @Singleton @Provides OkHttpClient httpClient2(
-      BuiltInInterceptorCompat builtInInterceptorCompat) {
-    final OkHttpClient httpClient = new OkHttpClient();
-    httpClient.interceptors().add(builtInInterceptorCompat);
-
-    if (configs.debuggable()) {
-      final Func0<Func0<String>> baseUrlAdapterFactory = configs.baseUrlAdapterFactory();
-      if (baseUrlAdapterFactory != null) {
-        httpClient.interceptors().add(new BaseUrlOverridingInterceptorCompat(baseUrlAdapterFactory.call()));
-      }
-    }
-
-    return httpClient;
-  }
-
   @Provides HttpLoggingInterceptor getHttpLoggingInterceptor() {
     final HttpLoggingInterceptor.Level level = configs.debuggable()
         ? HttpLoggingInterceptor.Level.BODY
