@@ -26,6 +26,7 @@ public final class TransportMode implements Parcelable {
   public static final String ID_PUBLIC_TRANSPORT = "pt_pub";
   public static final String ID_MOTORBIKE = "me_mot";
   public static final String ID_CAR = "me_car";
+  public static final String ID_WHEEL_CHAIR = "wa_whe";
 
   /**
    * FIXME: It seems we no longer need this id.
@@ -81,9 +82,6 @@ public final class TransportMode implements Parcelable {
       return R.drawable.ic_bicycle;
     } else if (ID_WALK.equals(identifier)) {
       return R.drawable.ic_walk;
-    } else if (ID_SCHOOL_BUS.equals(identifier)) {
-            /* FIXME: This seems to have a remote icon already. */
-      return R.drawable.ic_school_bus;
     } else if (ID_PUBLIC_TRANSPORT.equals(identifier)) {
       return R.drawable.ic_public_transport;
     } else if (ID_TAXI.equals(identifier)) {
@@ -97,7 +95,6 @@ public final class TransportMode implements Parcelable {
     } else if (ID_AIR.equals(identifier)) {
       return R.drawable.ic_aeroplane;
     } else {
-            /* None */
       return 0;
     }
   }
