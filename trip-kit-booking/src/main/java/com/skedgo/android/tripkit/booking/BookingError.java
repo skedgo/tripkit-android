@@ -2,6 +2,7 @@ package com.skedgo.android.tripkit.booking;
 
 import android.os.Parcel;
 import android.os.Parcelable;
+import android.support.annotation.Nullable;
 
 import com.google.gson.annotations.SerializedName;
 
@@ -23,7 +24,7 @@ public class BookingError extends Throwable implements Parcelable {
     }
   };
 
-  @SerializedName("title")
+  @Nullable @SerializedName("title")
   private String title;
   @SerializedName("errorCode")
   private int errorCode;
@@ -32,6 +33,7 @@ public class BookingError extends Throwable implements Parcelable {
   @SerializedName("usererror")
   private boolean hasUserError;
 
+  @Nullable
   public String getTitle() {
     return title;
   }
@@ -62,6 +64,14 @@ public class BookingError extends Throwable implements Parcelable {
 
   public void setHasUserError(boolean hasUserError) {
     this.hasUserError = hasUserError;
+  }
+
+  @Override public String getMessage() {
+    if (error != null) {
+      return error;
+    } else {
+      return super.getMessage();
+    }
   }
 
   @Override
