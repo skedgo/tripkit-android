@@ -31,7 +31,6 @@ import dagger.Lazy;
 import dagger.Module;
 import dagger.Provides;
 import okhttp3.HttpUrl;
-import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit.RestAdapter;
 import retrofit.client.OkClient;
 import retrofit.converter.GsonConverter;
@@ -168,33 +167,6 @@ public class MainModule {
         .build();
   }
 
-  /**
-   * This was deprecated.
-   * TODO: Migrate to {@link okhttp3.OkHttpClient}.
-   */
-  @Deprecated
-  @Singleton @Provides OkHttpClient httpClient2(
-      BuiltInInterceptorCompat builtInInterceptorCompat) {
-    final OkHttpClient httpClient = new OkHttpClient();
-    httpClient.interceptors().add(builtInInterceptorCompat);
-
-    if (configs.debuggable()) {
-      final Func0<Func0<String>> baseUrlAdapterFactory = configs.baseUrlAdapterFactory();
-      if (baseUrlAdapterFactory != null) {
-        httpClient.interceptors().add(new BaseUrlOverridingInterceptorCompat(baseUrlAdapterFactory.call()));
-      }
-    }
-
-    return httpClient;
-  }
-
-  @Provides HttpLoggingInterceptor getHttpLoggingInterceptor() {
-    final HttpLoggingInterceptor.Level level = configs.debuggable()
-        ? HttpLoggingInterceptor.Level.BODY
-        : HttpLoggingInterceptor.Level.NONE;
-    return new HttpLoggingInterceptor().setLevel(level);
-  }
-
   @Provides BuiltInInterceptor builtInInterceptor(Lazy<UuidProvider> uuidProviderLazy) {
     // Null to opt-out sending UUID header.
     final UuidProvider uuidProvider = configs.isUuidOptedOut() ? null : uuidProviderLazy.get();
@@ -209,8 +181,7 @@ public class MainModule {
 
   @Singleton @Provides okhttp3.OkHttpClient httpClient3(
       okhttp3.OkHttpClient.Builder httpClientBuilder,
-      BuiltInInterceptor builtInInterceptor,
-      Provider<HttpLoggingInterceptor> httpLoggingInterceptorProvider) {
+      BuiltInInterceptor builtInInterceptor) {
     final okhttp3.OkHttpClient.Builder builder = httpClientBuilder
         .addInterceptor(builtInInterceptor);
     if (configs.debuggable()) {
@@ -218,10 +189,7 @@ public class MainModule {
       if (baseUrlAdapterFactory != null) {
         builder.addInterceptor(new BaseUrlOverridingInterceptor(baseUrlAdapterFactory.call()));
       }
-
-      builder.addInterceptor(httpLoggingInterceptorProvider.get());
     }
-
     return builder.build();
   }
 
