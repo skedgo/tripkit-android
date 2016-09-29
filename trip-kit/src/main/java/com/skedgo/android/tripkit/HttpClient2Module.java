@@ -14,7 +14,7 @@ import rx.functions.Func0;
 @Deprecated
 @Module
 public class HttpClient2Module {
-  @Deprecated @Singleton @Provides OkHttpClient httpClient2(
+  @Deprecated @Singleton @Provides public OkHttpClient httpClient2(
       Configs configs,
       BuiltInInterceptorCompat builtInInterceptorCompat) {
     final OkHttpClient httpClient = new OkHttpClient();
