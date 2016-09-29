@@ -17,7 +17,7 @@ import rx.functions.Actions;
 @Singleton
 @Component(modules = {
     HttpClientModule.class,
-    HttpClientCompatModule.class,
+    HttpClient2Module.class,
     TspModule.class,
     MainModule.class
 })

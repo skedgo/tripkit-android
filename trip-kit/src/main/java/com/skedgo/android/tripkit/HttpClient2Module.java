@@ -13,7 +13,7 @@ import rx.functions.Func0;
  */
 @Deprecated
 @Module
-public class HttpClientCompatModule {
+public class HttpClient2Module {
   @Deprecated @Singleton @Provides OkHttpClient httpClient2(
       Configs configs,
       BuiltInInterceptorCompat builtInInterceptorCompat) {
