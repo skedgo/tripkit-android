@@ -33,16 +33,18 @@ public enum VehicleMode {
   MONORAIL("monorail", R.drawable.ic_monorail, R.drawable.ic_monorail_realtime),
   MOTORBIKE("motorbike", R.drawable.ic_motorbike, R.drawable.ic_motorbike),
   PARKING("parking", R.drawable.ic_parking, R.drawable.ic_parking),
-  PUBLIC_TRANSPORT("public-transport",
-                   R.drawable.ic_public_transport,
-                   R.drawable.ic_public_transport
+  PUBLIC_TRANSPORT(
+      "public-transport",
+      R.drawable.ic_public_transport,
+      R.drawable.ic_public_transport
   ),
   SHUTTLE_BUS("shuttlebus", R.drawable.ic_shuttlebus, R.drawable.ic_shuttlebus),
   SUBWAY("subway", R.drawable.ic_subway, R.drawable.ic_subway_realtime),
   TAXI("taxi", R.drawable.ic_taxi, R.drawable.ic_taxi),
-  TRAIN_INTERCITY("train-intercity",
-                  R.drawable.ic_train_intercity,
-                  R.drawable.ic_train_intercity
+  TRAIN_INTERCITY(
+      "train-intercity",
+      R.drawable.ic_train_intercity,
+      R.drawable.ic_train_intercity
   ),
   TRAIN("train", R.drawable.ic_train, R.drawable.ic_train_realtime),
   TRAM("tram", R.drawable.ic_tram, R.drawable.ic_tram_realtime),
@@ -50,13 +52,7 @@ public enum VehicleMode {
   WHEEL_CHAIR("wheelchair", R.drawable.ic_wheelchair, R.drawable.ic_wheelchair),
 
   // FIXME: Is this still being used?
-  TOLL("toll", R.drawable.ic_toll, R.drawable.ic_toll),
-
-  /**
-   * School bus already had a remote icon.
-   */
-  @Deprecated
-  SCHOOLBUS("schoolbus", R.drawable.ic_school_bus, R.drawable.ic_school_bus);
+  TOLL("toll", R.drawable.ic_toll, R.drawable.ic_toll);
 
   private String key;
   private int iconRes;
