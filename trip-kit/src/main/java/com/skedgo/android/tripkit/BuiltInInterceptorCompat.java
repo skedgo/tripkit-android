@@ -15,11 +15,11 @@ import java.util.Locale;
 import rx.functions.Func0;
 
 /**
- * This was deprecated. Replacement: {@link BuiltInInterceptor}.
+ * We'll migrate to {@link okhttp3.OkHttpClient} soon.
  */
 @Deprecated
 @Value.Style(newBuilder = "create")
-final class BuiltInInterceptorCompat implements Interceptor {
+public final class BuiltInInterceptorCompat implements Interceptor {
   private static final String HEADER_APP_VERSION = "X-TripGo-Version";
   private static final String HEADER_REGION_ELIGIBILITY = "X-TripGo-RegionEligibility";
   private static final String HEADER_UUID = "X-TripGo-UUID";
