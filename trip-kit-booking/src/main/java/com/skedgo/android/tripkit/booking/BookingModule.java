@@ -89,8 +89,13 @@ public class BookingModule {
     return new ExternalOAuthEntityAdapter();
   }
 
-  @Provides ExternalOAuthService getExternalOAuthService(ExternalOAuthStore store) {
-    return new ExternalOAuthServiceImpl(store);
+  @Provides ExternalOAuthServiceGenerator provideExternalOAuthServiceGenerator() {
+    return new ExternalOAuthServiceGenerator(new OkHttpClient.Builder());
+  }
+
+  @Provides ExternalOAuthService getExternalOAuthService(ExternalOAuthStore store,
+                                                         ExternalOAuthServiceGenerator externalOAuthServiceGenerator) {
+    return new ExternalOAuthServiceImpl(store,externalOAuthServiceGenerator);
   }
 
   @Provides BookingService getBookingService(BookingApi bookingApi, ExternalOAuthStore externalOAuthStore, Gson gson) {
