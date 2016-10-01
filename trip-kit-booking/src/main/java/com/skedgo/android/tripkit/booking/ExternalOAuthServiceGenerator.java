@@ -17,12 +17,16 @@ import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
 import rx.schedulers.Schedulers;
 
-public abstract class ExternalOAuthServiceGenerator {
+public class ExternalOAuthServiceGenerator {
 
-  private static OkHttpClient.Builder httpClient = new OkHttpClient.Builder();
+  private final OkHttpClient.Builder httpClient;
 
-  public static <S> S createService(Class<S> serviceClass, String baseUrl, String username, String password,
-                                    final boolean credentialsInHeader) {
+  public ExternalOAuthServiceGenerator(OkHttpClient.Builder httpClient) {
+    this.httpClient = httpClient;
+  }
+
+  public ExternalOAuthApi createService(String baseUrl, String username, String password,
+                                        final boolean credentialsInHeader) {
     if (username != null && password != null) {
       String credentials = username + ":" + password;
       final String basic =
@@ -67,7 +71,7 @@ public abstract class ExternalOAuthServiceGenerator {
 
     OkHttpClient client = httpClient.build();
     Retrofit retrofit = builder.client(client).build();
-    return retrofit.create(serviceClass);
+    return retrofit.create(ExternalOAuthApi.class);
   }
 
 }

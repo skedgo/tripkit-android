@@ -6,10 +6,13 @@ import rx.Observable;
 import rx.functions.Func1;
 
 public class ExternalOAuthServiceImpl implements ExternalOAuthService {
-  private ExternalOAuthStore externalOAuthStore;
+  private final ExternalOAuthStore externalOAuthStore;
+  private final ExternalOAuthServiceGenerator externalOAuthServiceGenerator;
 
-  public ExternalOAuthServiceImpl(ExternalOAuthStore externalOAuthStore) {
+  public ExternalOAuthServiceImpl(ExternalOAuthStore externalOAuthStore,
+                                  ExternalOAuthServiceGenerator externalOAuthServiceGenerator) {
     this.externalOAuthStore = externalOAuthStore;
+    this.externalOAuthServiceGenerator = externalOAuthServiceGenerator;
   }
 
   @Override public Observable<ExternalOAuth> getAccessToken(
@@ -28,9 +31,8 @@ public class ExternalOAuthServiceImpl implements ExternalOAuthService {
     boolean credentialsInHeader = serviceId == null || !("uber".equals(serviceId.toString()));
 
     final ExternalOAuthApi externalOAuthApi =
-        ExternalOAuthServiceGenerator.createService(ExternalOAuthApi.class, baseUrl, clientId,
-                                                    clientSecret, credentialsInHeader
-        );
+        externalOAuthServiceGenerator.createService(baseUrl, clientId,
+                                                    clientSecret, credentialsInHeader);
 
     return externalOAuthApi.getAccessToken(clientSecret, clientId, code, "authorization_code", callback, scope)
         .filter(new Func1<AccessTokenResponse, Boolean>() {
