@@ -108,26 +108,30 @@ public class MainModule {
     );
   }
 
-  @Provides Func1<String, RoutingApi> getRoutingApiFactory(
+  @Provides Func1<String, RoutingApi> routingApiFactory(
       final Gson gson,
-      final OkHttpClient httpClient) {
+      final okhttp3.OkHttpClient httpClient
+  ) {
     return new Func1<String, RoutingApi>() {
-      @Override public RoutingApi call(String endpoint) {
-        return new RestAdapter.Builder()
-            .setLogLevel(configs.debuggable() ? FULL : NONE)
-            .setEndpoint(endpoint)
-            .setConverter(new GsonConverter(gson))
-            .setClient(new OkClient(httpClient))
+      @Override public RoutingApi call(String baseUrl) {
+        final HttpUrl newBaseUrl = HttpUrl.parse(baseUrl + "/");
+        return new Retrofit.Builder()
+            .addCallAdapterFactory(RxJavaCallAdapterFactory.createWithScheduler(Schedulers.io()))
+            .addConverterFactory(GsonConverterFactory.create(gson))
+            .baseUrl(newBaseUrl)
+            .client(httpClient)
             .build()
             .create(RoutingApi.class);
       }
     };
   }
 
-  @Singleton @Provides RouteService getRouteService(
+  @Singleton @Provides RouteService routeService(
       Func1<String, RoutingApi> routingApiFactory,
       RegionService regionService,
-      Gson gson) {
+      Gson gson,
+      Configs configs
+  ) {
     Co2Preferences co2Preferences = null;
     final Func0<Co2Preferences> co2PreferencesFactory = configs.co2PreferencesFactory();
     if (co2PreferencesFactory != null) {

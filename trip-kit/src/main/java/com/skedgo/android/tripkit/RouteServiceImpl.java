@@ -21,7 +21,6 @@ import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
 import rx.Observable;
-import rx.Subscriber;
 import rx.functions.Func1;
 import rx.schedulers.Schedulers;
 
@@ -169,7 +168,8 @@ final class RouteServiceImpl implements RouteService {
   }
 
   /**
-   * Regarding url failover, see more: https://www.flowdock.com/app/skedgo/tripgo-v4/threads/ZSuBe4bGCfR8ltaEosihtCklBZy.
+   * Regarding url failover, see more:
+   * https://www.flowdock.com/app/skedgo/tripgo-v4/threads/ZSuBe4bGCfR8ltaEosihtCklBZy.
    */
   @NonNull Observable<List<TripGroup>> fetchRoutesAsync(
       @NonNull List<String> urls,
@@ -215,30 +215,18 @@ final class RouteServiceImpl implements RouteService {
   }
 
   /**
-   * If the {@link Observable} returned is empty, {@link RouteServiceImpl#fetchRoutesAsync(List, List, List, Map)}
+   * If the {@link Observable} returned is empty,
+   * {@link RouteServiceImpl#fetchRoutesAsync(List, List, List, Map)}
    * will failover on a different url.
    */
   @NonNull Observable<RoutingResponse> fetchRoutesPerUrlAsync(
       final String url,
       @NonNull final List<String> modes,
       @NonNull final List<String> excludedTransitModes,
-      final Map<String, Object> options) {
-    return Observable
-        .create(new Observable.OnSubscribe<RoutingResponse>() {
-          @Override public void call(Subscriber<? super RoutingResponse> subscriber) {
-            try {
-              final RoutingApi api = routingApiFactory.call(url);
-              subscriber.onNext(api.fetchRoutes(
-                  modes,
-                  excludedTransitModes,
-                  options
-              ));
-              subscriber.onCompleted();
-            } catch (Exception e) {
-              subscriber.onError(e);
-            }
-          }
-        })
+      final Map<String, Object> options
+  ) {
+    return routingApiFactory.call(url)
+        .fetchRoutesAsync(modes, excludedTransitModes, options)
         .filter(new Func1<RoutingResponse, Boolean>() {
           @Override public Boolean call(RoutingResponse response) {
             return !(response.getErrorMessage() != null && !response.hasError());
