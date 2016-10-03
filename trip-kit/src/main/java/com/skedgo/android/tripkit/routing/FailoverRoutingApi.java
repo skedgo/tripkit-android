@@ -3,6 +3,7 @@ package com.skedgo.android.tripkit.routing;
 import android.content.res.Resources;
 
 import com.google.gson.Gson;
+import com.skedgo.android.common.model.Region;
 import com.skedgo.android.common.model.RoutingResponse;
 import com.skedgo.android.common.model.TripGroup;
 import com.skedgo.android.tripkit.RoutingUserError;
@@ -16,6 +17,10 @@ import okhttp3.HttpUrl;
 import rx.Observable;
 import rx.functions.Func1;
 
+/**
+ * A wrapper of {@link RoutingApi} that requests `routing.json`
+ * on multiple servers w/ failover.
+ */
 public class FailoverRoutingApi {
   private final SelectBestDisplayTrip selectBestDisplayTrip = new SelectBestDisplayTrip();
   private final FillIdentifiers fillIdentifiers = new FillIdentifiers();
@@ -33,6 +38,12 @@ public class FailoverRoutingApi {
     this.routingApi = routingApi;
   }
 
+  /**
+   * Fetches routes on multiple base urls serially.
+   * If it fails on one url, it'll failover on next url.
+   *
+   * @param baseUrls Can be obtained by {@link Region#getURLs()}.
+   */
   public Observable<List<TripGroup>> fetchRoutesAsync(
       List<String> baseUrls,
       final List<String> modes,
