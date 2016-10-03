@@ -13,6 +13,7 @@ import com.skedgo.android.common.model.TransportMode;
 import com.skedgo.android.common.util.DiagnosticUtils;
 import com.skedgo.android.common.util.Gsons;
 import com.skedgo.android.common.util.LowercaseEnumTypeAdapterFactory;
+import com.skedgo.android.tripkit.routing.FailoverRoutingApi;
 import com.skedgo.android.tripkit.tsp.GsonAdaptersRegionInfo;
 import com.skedgo.android.tripkit.tsp.GsonAdaptersRegionInfoBody;
 import com.skedgo.android.tripkit.tsp.GsonAdaptersRegionInfoResponse;
@@ -108,28 +109,9 @@ public class MainModule {
     );
   }
 
-  @Provides Func1<String, RoutingApi> routingApiFactory(
-      final Gson gson,
-      final okhttp3.OkHttpClient httpClient
-  ) {
-    return new Func1<String, RoutingApi>() {
-      @Override public RoutingApi call(String baseUrl) {
-        final HttpUrl newBaseUrl = HttpUrl.parse(baseUrl + "/");
-        return new Retrofit.Builder()
-            .addCallAdapterFactory(RxJavaCallAdapterFactory.createWithScheduler(Schedulers.io()))
-            .addConverterFactory(GsonConverterFactory.create(gson))
-            .baseUrl(newBaseUrl)
-            .client(httpClient)
-            .build()
-            .create(RoutingApi.class);
-      }
-    };
-  }
-
   @Singleton @Provides RouteService routeService(
-      Func1<String, RoutingApi> routingApiFactory,
+      FailoverRoutingApi routingApi,
       RegionService regionService,
-      Gson gson,
       Configs configs
   ) {
     Co2Preferences co2Preferences = null;
@@ -146,15 +128,13 @@ public class MainModule {
 
     final QueryGeneratorImpl queryGenerator = new QueryGeneratorImpl(regionService);
     return new RouteServiceImpl(
-        context,
         getAppVersion(),
         queryGenerator,
-        routingApiFactory,
         configs.excludedTransitModesAdapter(),
         co2Preferences,
         tripPreferences,
         configs.extraQueryMapProvider(),
-        gson
+        routingApi
     );
   }
 

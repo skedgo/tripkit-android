@@ -1,9 +1,11 @@
-package com.skedgo.android.tripkit;
+package com.skedgo.android.tripkit.routing;
 
 import android.support.annotation.NonNull;
 
 import com.skedgo.android.common.model.Query;
 import com.skedgo.android.common.model.TripGroup;
+import com.skedgo.android.tripkit.RouteOptions;
+import com.skedgo.android.tripkit.RouteService;
 
 import java.util.List;
 

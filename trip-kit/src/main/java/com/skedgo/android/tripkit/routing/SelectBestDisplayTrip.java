@@ -1,4 +1,4 @@
-package com.skedgo.android.tripkit;
+package com.skedgo.android.tripkit.routing;
 
 import android.support.annotation.NonNull;
 

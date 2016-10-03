@@ -1,7 +1,11 @@
-package com.skedgo.android.tripkit;
+package com.skedgo.android.tripkit.routing;
 
 import com.skedgo.android.common.model.Query;
 import com.skedgo.android.common.model.TripGroup;
+import com.skedgo.android.tripkit.BuildConfig;
+import com.skedgo.android.tripkit.RouteOptions;
+import com.skedgo.android.tripkit.RouteService;
+import com.skedgo.android.tripkit.TestRunner;
 
 import org.junit.Before;
 import org.junit.Rule;

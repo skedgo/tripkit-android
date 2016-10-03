@@ -2,6 +2,8 @@ package com.skedgo.android.tripkit;
 
 import android.support.annotation.NonNull;
 
+import com.skedgo.android.tripkit.routing.RoutingApi;
+
 import java.util.Map;
 
 /**
