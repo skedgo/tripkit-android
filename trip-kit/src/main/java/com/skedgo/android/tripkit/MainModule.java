@@ -13,6 +13,7 @@ import com.skedgo.android.common.model.TransportMode;
 import com.skedgo.android.common.util.DiagnosticUtils;
 import com.skedgo.android.common.util.Gsons;
 import com.skedgo.android.common.util.LowercaseEnumTypeAdapterFactory;
+import com.skedgo.android.tripkit.routing.FailoverRoutingApi;
 import com.skedgo.android.tripkit.tsp.GsonAdaptersRegionInfo;
 import com.skedgo.android.tripkit.tsp.GsonAdaptersRegionInfoBody;
 import com.skedgo.android.tripkit.tsp.GsonAdaptersRegionInfoResponse;
@@ -108,26 +109,11 @@ public class MainModule {
     );
   }
 
-  @Provides Func1<String, RoutingApi> getRoutingApiFactory(
-      final Gson gson,
-      final OkHttpClient httpClient) {
-    return new Func1<String, RoutingApi>() {
-      @Override public RoutingApi call(String endpoint) {
-        return new RestAdapter.Builder()
-            .setLogLevel(configs.debuggable() ? FULL : NONE)
-            .setEndpoint(endpoint)
-            .setConverter(new GsonConverter(gson))
-            .setClient(new OkClient(httpClient))
-            .build()
-            .create(RoutingApi.class);
-      }
-    };
-  }
-
-  @Singleton @Provides RouteService getRouteService(
-      Func1<String, RoutingApi> routingApiFactory,
+  @Singleton @Provides RouteService routeService(
+      FailoverRoutingApi routingApi,
       RegionService regionService,
-      Gson gson) {
+      Configs configs
+  ) {
     Co2Preferences co2Preferences = null;
     final Func0<Co2Preferences> co2PreferencesFactory = configs.co2PreferencesFactory();
     if (co2PreferencesFactory != null) {
@@ -142,15 +128,13 @@ public class MainModule {
 
     final QueryGeneratorImpl queryGenerator = new QueryGeneratorImpl(regionService);
     return new RouteServiceImpl(
-        context,
         getAppVersion(),
         queryGenerator,
-        routingApiFactory,
         configs.excludedTransitModesAdapter(),
         co2Preferences,
         tripPreferences,
         configs.extraQueryMapProvider(),
-        gson
+        routingApi
     );
   }
 

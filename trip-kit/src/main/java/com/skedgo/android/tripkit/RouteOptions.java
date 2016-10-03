@@ -11,7 +11,7 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.util.concurrent.TimeUnit;
 
-public final class RouteOptions {
+public class RouteOptions {
   public static final int CYCLING_SPEED_AVERAGE = 1;
   public static final int CYCLING_SPEED_FAST = 2;
   public static final int CYCLING_SPEED_SLOW = 0;

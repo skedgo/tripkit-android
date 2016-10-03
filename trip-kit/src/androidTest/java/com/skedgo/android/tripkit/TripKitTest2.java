@@ -18,7 +18,7 @@ import rx.observers.TestSubscriber;
 import static org.assertj.core.api.Assertions.assertThat;
 
 @RunWith(AndroidJUnit4.class)
-public class TripKitTest {
+public class TripKitTest2 {
   private TripKit kit;
 
   @Before public void before() {
