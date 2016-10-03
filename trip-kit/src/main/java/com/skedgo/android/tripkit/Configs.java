@@ -3,6 +3,8 @@ package com.skedgo.android.tripkit;
 import android.content.Context;
 import android.support.annotation.Nullable;
 
+import com.skedgo.android.tripkit.routing.ExtraQueryMapProvider;
+
 import org.immutables.value.Value;
 
 import rx.functions.Action1;

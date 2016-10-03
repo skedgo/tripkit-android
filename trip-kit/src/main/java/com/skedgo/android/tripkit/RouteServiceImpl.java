@@ -8,6 +8,7 @@ import com.skedgo.android.common.model.Location;
 import com.skedgo.android.common.model.Query;
 import com.skedgo.android.common.model.Region;
 import com.skedgo.android.common.model.TripGroup;
+import com.skedgo.android.tripkit.routing.ExtraQueryMapProvider;
 import com.skedgo.android.tripkit.routing.FailoverRoutingApi;
 
 import java.util.Collections;
