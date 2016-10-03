@@ -17,7 +17,7 @@ public class RoutingModule {
     return new Retrofit.Builder()
         .addCallAdapterFactory(RxJavaCallAdapterFactory.createWithScheduler(Schedulers.io()))
         .addConverterFactory(GsonConverterFactory.create(gson))
-        .baseUrl("https://tripgo.skedgo.com/satapp")
+        .baseUrl("https://tripgo.skedgo.com/satapp/")
         .client(httpClient)
         .build()
         .create(RoutingApi.class);
