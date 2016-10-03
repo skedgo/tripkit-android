@@ -1,7 +1,9 @@
-package com.skedgo.android.tripkit;
+package com.skedgo.android.tripkit.routing;
 
 import com.skedgo.android.common.model.Trip;
 import com.skedgo.android.common.model.TripGroup;
+import com.skedgo.android.tripkit.BuildConfig;
+import com.skedgo.android.tripkit.TestRunner;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;

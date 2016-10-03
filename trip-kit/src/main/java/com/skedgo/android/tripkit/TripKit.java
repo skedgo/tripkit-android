@@ -4,6 +4,7 @@ import android.content.Context;
 import android.support.annotation.NonNull;
 import android.support.annotation.VisibleForTesting;
 
+import com.skedgo.android.tripkit.routing.RoutingModule;
 import com.skedgo.android.tripkit.tsp.TspModule;
 import com.squareup.okhttp.OkHttpClient;
 
@@ -17,6 +18,7 @@ import rx.functions.Actions;
 @Component(modules = {
     HttpClientModule.class,
     HttpClient2Module.class,
+    RoutingModule.class,
     TspModule.class,
     MainModule.class
 })

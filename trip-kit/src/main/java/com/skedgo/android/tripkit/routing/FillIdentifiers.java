@@ -1,4 +1,4 @@
-package com.skedgo.android.tripkit;
+package com.skedgo.android.tripkit.routing;
 
 import com.skedgo.android.common.model.Trip;
 import com.skedgo.android.common.model.TripGroup;
@@ -11,7 +11,7 @@ import rx.functions.Func1;
 /**
  * Fills id for {@link Trip}.
  */
-final class FillIdentifiers implements Func1<List<TripGroup>, List<TripGroup>> {
+public final class FillIdentifiers implements Func1<List<TripGroup>, List<TripGroup>> {
   private final AtomicLong idGenerator = new AtomicLong();
 
   @Override public List<TripGroup> call(List<TripGroup> groups) {
