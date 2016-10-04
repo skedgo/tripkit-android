@@ -25,12 +25,8 @@ public class BookingActivity extends AnimatedTransitionActivity implements
   public static final String ACTION_BOOK = "com.skedgo.android.bookingclient.ACTION_BOOK";
   public static final String ACTION_BOOK2 = "com.skedgo.android.bookingclient.ACTION_BOOK2";
   public static final String KEY_URL = "url";
-  public static final String KEY_FORM = "param";
   public static final String KEY_FIRST_SCREEN = "firstScreen";
-  public static final String KEY_TEMP_BOOKING = "TempBooking";
-  public static final String KEY_TEMP_BOOKING_FORM = "TempBookingForm";
   public static final String KEY_BOOKING_BUNDLE = "bookingBundle";
-  public static final String KEY_WEB_URL = "web_url";
 
   public BookingClientComponent component;
 

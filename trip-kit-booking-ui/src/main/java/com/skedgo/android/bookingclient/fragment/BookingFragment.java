@@ -43,10 +43,17 @@ public class BookingFragment extends ButterKnifeFragment implements View.OnClick
   ProgressBar progressView;
   TextView hudTextView;
   @Inject Lazy<BookingErrorViewModel> bookingErrorViewModel;
-  @Inject Gson gson;
   TextView backButton;
   TextView errorTitleView;
   TextView errorMessageView;
+
+  private Action1<Throwable> errorAction = new Action1<Throwable>() {
+    @Override
+    public void call(Throwable error) {
+      LogUtils.LOGE(TAG_BOOKING_FORM, "Error on booking", error);
+      showError(error);
+    }
+  };
 
   public static BookingFragment newInstance(BookingViewModel.Param param) {
     final Bundle args = new Bundle();
@@ -132,13 +139,7 @@ public class BookingFragment extends ButterKnifeFragment implements View.OnClick
               getActivity().finish();
             }
           }
-        }, new Action1<Throwable>() {
-          @Override
-          public void call(Throwable error) {
-            LogUtils.LOGE(TAG_BOOKING_FORM, "Error on booking", error);
-            showError(error);
-          }
-        });
+        }, errorAction);
 
     if (param != null) {
       hudTextView.setText(param.getHudText());
@@ -159,7 +160,7 @@ public class BookingFragment extends ButterKnifeFragment implements View.OnClick
 
     viewModel.isFetching()
         .takeUntil(lifecycle().onDestroyView())
-        .subscribe(ViewActions.setVisibility(hudTextView));
+        .subscribe(ViewActions.setVisibility(hudTextView),errorAction);
 
     viewModel.isFetching()
         .takeUntil(lifecycle().onDestroyView())
@@ -181,7 +182,7 @@ public class BookingFragment extends ButterKnifeFragment implements View.OnClick
               }
             }
           }
-        });
+        }, errorAction);
 
     viewModel.isDone()
         .takeUntil(lifecycle().onDestroyView())
@@ -197,7 +198,7 @@ public class BookingFragment extends ButterKnifeFragment implements View.OnClick
             }
             getActivity().finish();
           }
-        });
+        }, errorAction);
 
     viewModel.nextBookingForm()
         .takeUntil(lifecycle().onDestroyView())
@@ -206,7 +207,7 @@ public class BookingFragment extends ButterKnifeFragment implements View.OnClick
           public void call(BookingViewModel.Param param) {
             showNewBookingForm(param);
           }
-        });
+        }, errorAction);
 
     viewModel.bookingForm()
         .takeUntil(lifecycle().onDestroyView())
@@ -215,13 +216,7 @@ public class BookingFragment extends ButterKnifeFragment implements View.OnClick
           public void call(BookingForm form) {
             showBookingForm(form);
           }
-        }, new Action1<Throwable>() {
-          @Override
-          public void call(Throwable error) {
-            LogUtils.LOGE(TAG_BOOKING_FORM, "Error on booking", error);
-            showError(error);
-          }
-        });
+        }, errorAction);
   }
 
   @Subscribe
