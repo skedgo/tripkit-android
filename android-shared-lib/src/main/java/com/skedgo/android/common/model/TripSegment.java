@@ -89,10 +89,10 @@ public class TripSegment implements Parcelable, IRealTimeElement, ITimeRange {
       int wheelchairAccessible = in.readInt();
       switch (wheelchairAccessible) {
         case 0:
-          segment.wheelchairAccessible = false;
+          segment.wheelchairAccessible = Boolean.FALSE;
           break;
         case 1:
-          segment.wheelchairAccessible = true;
+          segment.wheelchairAccessible = Boolean.TRUE;
           break;
         case -1:
           segment.wheelchairAccessible = null;
@@ -164,6 +164,10 @@ public class TripSegment implements Parcelable, IRealTimeElement, ITimeRange {
   private ArrayList<Shape> mShapes;
   @SerializedName("realtimeVehicle")
   private RealTimeVehicle mRealTimeVehicle;
+
+  /**
+   * wheelchairAccessible can be null if the server does not return this value.
+   */
   @SerializedName("wheelchairAccessible")
   private Boolean wheelchairAccessible;
   /**
