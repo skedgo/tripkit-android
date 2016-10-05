@@ -1,6 +1,6 @@
 # Overview
 ## BookingComponent
-`BookingComponent` is a factory to provide `AuthService`, `QuickBookingApi` and `BookingApi`. The snippet below shows how to initialize a `BookingComponent`.
+`BookingComponent` is a factory to provide `AuthService`, `QuickBookingApi` and `BookingService`. The snippet below shows how to initialize a `BookingComponent`.
 ```java
 final BookingComponent component = DaggerBookingComponent.builder()
     .tripKit(TripKit.singleton())
@@ -49,6 +49,28 @@ TripKit.singleton().getRegionService()
   }
 ]
 ```
+
+## BookingService
+### Instantiate
+```java
+final BookingService bookingService = component.bookingService();
+```
+### OAuth
+Setup/Disconnect user external providers accounts are done via `BookingForms`. First, get the external provider booking form, then call `ExternalProviderAuthActivity` if it's an authentication form, or just fetch the `AuthProvider` to refresh (after disconnect action): 
+
+```
+bookingService.getFormAsync(authProvider.url()))
+        .subscribe(bookingForm -> {
+          if (bookingForm.isOAuthForm()) {
+            Intent intent = ExternalProviderAuthActivity.newIntent(getActivity(), bookingForm);
+            startActivityForResult(intent, RQ_EXTERNAL_AUTH);
+          } else {
+            // update data
+            authService.fetchProvidersByRegionAsync(region, mode.getId())
+          }
+        });
+```
+
 ## QuickBookingApi
 ### Instantiate
 ```java
