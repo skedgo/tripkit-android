@@ -67,7 +67,7 @@ public class TripGroupsJsonTest {
 
     // Should nullify `rawSegmentList`.
     // Otherwise, gson will convert it to json and result in
-    // a very large json which is unnecessarily.
+    // a very large json which is unnecessary.
     for (TripGroup tripGroup : tripGroups) {
       final List<Trip> trips = tripGroup.getTrips();
       if (trips != null) {
