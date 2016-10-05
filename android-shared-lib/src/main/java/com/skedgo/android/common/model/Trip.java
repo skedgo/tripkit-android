@@ -15,14 +15,11 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
-import static com.skedgo.android.common.util.LogUtils.makeTag;
-
 /**
  * @see <a href="https://redmine.buzzhives.com/projects/buzzhives/wiki/Main_API_formats#Trips">API format</a>
  */
 public class Trip implements Parcelable, ITimeRange {
   public static final float UNKNOWN_COST = -9999.9999F;
-  private static final String TAG = makeTag("3931_realtime");
 
   // FIXME: Release this raw JSON as soon as we no longer use it.
   @SerializedName("segments") public ArrayList<JsonObject> rawSegmentList;
@@ -34,7 +31,6 @@ public class Trip implements Parcelable, ITimeRange {
   @SerializedName("moneyCost") private float mMoneyCost;
   @SerializedName("carbonCost") private float mCarbonCost;
   @SerializedName("hassleCost") private float mHassleCost;
-  @SerializedName("temporaryId") private String mTemporaryId;
   @SerializedName("weightedScore") private float weightedScore;
   @SerializedName("updateURL") private String updateURL;
   @SerializedName("progressURL") private String progressURL;
@@ -65,7 +61,6 @@ public class Trip implements Parcelable, ITimeRange {
       }
 
       trip.mIsFavourite = in.readInt() == 1;
-      trip.mTemporaryId = in.readString();
       trip.saveURL = in.readString();
       trip.updateURL = in.readString();
       trip.progressURL = in.readString();
@@ -210,14 +205,6 @@ public class Trip implements Parcelable, ITimeRange {
     this.saveURL = saveURL;
   }
 
-  public String getTemporaryId() {
-    return mTemporaryId;
-  }
-
-  public void setTemporaryId(final String temporaryId) {
-    mTemporaryId = temporaryId;
-  }
-
   @Nullable public String getUpdateURL() {
     return updateURL;
   }
@@ -301,7 +288,6 @@ public class Trip implements Parcelable, ITimeRange {
     dest.writeFloat(mHassleCost);
     dest.writeList(mSegments);
     dest.writeInt(mIsFavourite ? 1 : 0);
-    dest.writeString(mTemporaryId);
     dest.writeString(saveURL);
     dest.writeString(updateURL);
     dest.writeString(progressURL);
