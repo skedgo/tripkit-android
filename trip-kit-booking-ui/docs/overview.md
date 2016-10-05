@@ -32,7 +32,7 @@ You need to extend from it and add some intent filters in your manifest.
 ```
 
 ## Open `BookingActivity`
-If a trip segment has a booking action, you can call then your booking activity.
+If a trip segment has a booking action, and you are NOT using `Quick Booking`, you can call then your booking activity.
 ```
     final Booking booking = segment.getBooking();
     if (!TextUtils.isEmpty(booking.getUrl())) {
@@ -45,68 +45,10 @@ If a trip segment has a booking action, you can call then your booking activity.
         		.putExtra(BookingActivity.KEY_URL, booking.getUrl())
         		.putExtra(BookingActivity.KEY_FIRST_SCREEN, true);
 	fragment.startActivity(intent);
- 
+
    } else {
       // handle external actions
     }
 ```
-## Handle OAuth callback
-As the oauth2 authentication is performed by an external application (web browser) you need to register the intent filter un your app.
-
-### Manifest
-```
-    <activity
-      android:name=“.YourLinkResolverActivity"
-      android:enabled="true"
-      android:exported="true">      
-      <intent-filter>
-        <data android:scheme=“your-app-scheme-registered-in-the-exernal-service” />
-        <action android:name="android.intent.action.VIEW" />
-        <category android:name="android.intent.category.DEFAULT" />
-        <category android:name="android.intent.category.BROWSABLE" />
-      </intent-filter>     
-    </activity>
-```
-
-### Callback action
-Finally, in `YourLinkResolverActivity`
-
-```
-	final Intent intent = getIntent();
-    
-	Uri uri = intent.getData();
-	String host = uri.getHost();
-	String urlDecoded = "";
-	try {
-	   urlDecoded = URLDecoder.decode(uri.toString(), "UTF-8");
-	} catch (UnsupportedEncodingException e) {}
-
-	if (intent.getScheme().equals(“your-app-scheme-registered-in-the-exernal-service”) {
-
-	   if (urlDecoded.contains("oauth")) {
-
-        	OAuth2CallbackHandler oAuth2CallbackHandler = BookingActivity.component.getOAuth2CallbackHandler();
-
-        	oAuth2CallbackHandler.handleURL(getActivity(), uri)
-            		.timeout(40, TimeUnit.SECONDS, Schedulers.newThread())
-            		.observeOn(AndroidSchedulers.mainThread())
-            		.subscribeOn(Schedulers.newThread())
-            		.subscribe(new Action1<BookingForm>() {
-              		@Override public void call(BookingForm form) {
-
-				startActivity(new Intent(this, MyBookingActivity.class)
-              					.setAction(BookingActivity.ACTION_BOOK_AFTER_OAUTH)
-              					.putExtra(BookingActivity.KEY_FORM, (Parcelable) form));
-
-              			}
-            		}, new Action1<Throwable>() {
-              			@Override public void call(Throwable throwable) {
-        			        // handle error
-	              }
- 		});
-	}
-
-```
-
-
-
+## OAuth
+Oauth2 logic has bee moved to Tripkit-account: https://github.com/skedgo/tripkit-android/blob/master/trip-kit-booking/docs/overview.md#oauth
