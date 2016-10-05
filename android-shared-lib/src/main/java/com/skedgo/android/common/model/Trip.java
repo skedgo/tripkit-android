@@ -1,58 +1,29 @@
 package com.skedgo.android.common.model;
 
-import android.content.res.Resources;
 import android.os.Parcel;
 import android.os.Parcelable;
-import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.text.TextUtils;
 
-import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import com.google.gson.annotations.SerializedName;
-import com.skedgo.android.common.util.Gsons;
 import com.skedgo.android.common.util.ListUtils;
-import com.squareup.okhttp.OkHttpClient;
-import com.squareup.okhttp.Request;
-import com.squareup.okhttp.Response;
-import com.squareup.okhttp.ResponseBody;
-import com.squareup.okhttp.internal.Util;
 
-import org.apache.commons.collections4.Closure;
-import org.apache.commons.collections4.CollectionUtils;
-import org.apache.commons.collections4.ComparatorUtils;
-import org.apache.commons.collections4.Predicate;
-import org.apache.commons.collections4.comparators.ComparatorChain;
-
-import java.io.IOException;
 import java.math.RoundingMode;
 import java.text.NumberFormat;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Comparator;
 import java.util.List;
 import java.util.Locale;
-import java.util.concurrent.TimeUnit;
-
-import rx.Observable;
-import rx.android.schedulers.AndroidSchedulers;
-import rx.functions.Action1;
-import rx.functions.Func1;
-import rx.schedulers.Schedulers;
-
-import static com.skedgo.android.common.util.LogUtils.LOGE;
-import static com.skedgo.android.common.util.LogUtils.makeTag;
-import static com.skedgo.android.common.util.Preconditions.checkMainThread;
-import static com.skedgo.android.common.util.Preconditions.checkWorkerThread;
 
 /**
  * @see <a href="https://redmine.buzzhives.com/projects/buzzhives/wiki/Main_API_formats#Trips">API format</a>
  */
 public class Trip implements Parcelable, ITimeRange {
   public static final float UNKNOWN_COST = -9999.9999F;
-  private static final String TAG = makeTag("3931_realtime");
 
-  // FIXME: Release this raw JSON as soon as we no longer use it.
+  /**
+   * This will be transformed into a list of {@link TripSegment}.
+   */
   @SerializedName("segments") public ArrayList<JsonObject> rawSegmentList;
   @SerializedName("currencySymbol") private String currencySymbol;
   @SerializedName("saveURL") private String saveURL;
@@ -62,7 +33,6 @@ public class Trip implements Parcelable, ITimeRange {
   @SerializedName("moneyCost") private float mMoneyCost;
   @SerializedName("carbonCost") private float mCarbonCost;
   @SerializedName("hassleCost") private float mHassleCost;
-  @SerializedName("temporaryId") private String mTemporaryId;
   @SerializedName("weightedScore") private float weightedScore;
   @SerializedName("updateURL") private String updateURL;
   @SerializedName("progressURL") private String progressURL;
@@ -93,7 +63,6 @@ public class Trip implements Parcelable, ITimeRange {
       }
 
       trip.mIsFavourite = in.readInt() == 1;
-      trip.mTemporaryId = in.readString();
       trip.saveURL = in.readString();
       trip.updateURL = in.readString();
       trip.progressURL = in.readString();
@@ -238,14 +207,6 @@ public class Trip implements Parcelable, ITimeRange {
     this.saveURL = saveURL;
   }
 
-  public String getTemporaryId() {
-    return mTemporaryId;
-  }
-
-  public void setTemporaryId(final String temporaryId) {
-    mTemporaryId = temporaryId;
-  }
-
   @Nullable public String getUpdateURL() {
     return updateURL;
   }
@@ -329,7 +290,6 @@ public class Trip implements Parcelable, ITimeRange {
     dest.writeFloat(mHassleCost);
     dest.writeList(mSegments);
     dest.writeInt(mIsFavourite ? 1 : 0);
-    dest.writeString(mTemporaryId);
     dest.writeString(saveURL);
     dest.writeString(updateURL);
     dest.writeString(progressURL);
@@ -457,59 +417,6 @@ public class Trip implements Parcelable, ITimeRange {
     return visibleSegments;
   }
 
-  /**
-   * @param timeUnit Mins, secs or millis.
-   */
-  public Observable<Trip> updateTripPeriodically(@NonNull final Resources resources, @NonNull final OkHttpClient httpClient,
-                                                 long period,
-                                                 TimeUnit timeUnit) {
-    return Observable.timer(period, period, timeUnit)
-        .filter(new Func1<Long, Boolean>() {
-          @Override
-          public Boolean call(Long unused) {
-            return !TextUtils.isEmpty(updateURL);
-          }
-        })
-        .map(new Func1<Long, RoutingResponse>() {
-          @Override
-          public RoutingResponse call(Long unused) {
-            try {
-              return fetchUpdate(resources, httpClient);
-            } catch (Exception e) {
-              LOGE(TAG, e.getMessage(), e);
-              return null;
-            }
-          }
-        })
-                /* To avoid unexpected bad data. */
-        .filter(new Func1<RoutingResponse, Boolean>() {
-          @Override
-          public Boolean call(RoutingResponse response) {
-            return response != null
-                && !response.hasError()
-                && !ListUtils.isEmpty(response.getTripGroupList())
-                && !ListUtils.isEmpty(response.getTripGroupList().get(0).getTrips())
-                && response.getTripGroupList().get(0).getTrips().get(0) != null;
-          }
-        })
-                /* Extract update. */
-        .map(new Func1<RoutingResponse, Trip>() {
-          @Override
-          public Trip call(RoutingResponse response) {
-            return response.getTripGroupList().get(0).getTrips().get(0);
-          }
-        })
-        .subscribeOn(Schedulers.newThread())
-        .observeOn(AndroidSchedulers.mainThread())
-        .doOnNext(new Action1<Trip>() {
-          @Override
-          public void call(Trip update) {
-            checkMainThread();
-            updateTrip(update);
-          }
-        });
-  }
-
   public String getDisplayCost(String localizedFreeText) {
     if (mMoneyCost == 0) {
       return localizedFreeText;
@@ -522,152 +429,6 @@ public class Trip implements Parcelable, ITimeRange {
       numberFormat.setMaximumFractionDigits(0);
       String value = numberFormat.format(mMoneyCost);
       return (currencySymbol != null ? currencySymbol : "$") + value;
-    }
-  }
-
-  /**
-   * @see <a href="https://github.com/skedgo/tripgo-ios/blob/develop/TripPlanner/Classes/BHBuzzRoutingParser.m#L429">iOS impl</a>
-   */
-  void updateTrip(@NonNull Trip tripUpdate) {
-    setStartTimeInSecs(tripUpdate.getStartTimeInSecs());
-    setEndTimeInSecs(tripUpdate.getEndTimeInSecs());
-    setSaveURL(tripUpdate.getSaveURL());
-    setUpdateURL(tripUpdate.getUpdateURL());
-    setProgressURL(tripUpdate.getProgressURL());
-    setCarbonCost(tripUpdate.getCarbonCost());
-    setMoneyCost(tripUpdate.getMoneyCost());
-    setHassleCost(tripUpdate.getHassleCost());
-
-    CollectionUtils.forAllDo(tripUpdate.getSegments(), new Closure<TripSegment>() {
-      @Override
-      public void execute(final TripSegment segmentUpdate) {
-        TripSegment segmentToUpdate = CollectionUtils.find(mSegments, new Predicate<TripSegment>() {
-          @Override
-          public boolean evaluate(TripSegment object) {
-            // Times in both departure and arrival segments are bound
-            // tightly to the first segment and the final segment respectively.
-            // If we update times for first segment and the final segment,
-            // the times in arrival and departure segments will be updated accordingly.
-            // Hence we filter them out.
-            // See: https://redmine.buzzhives.com/issues/4397.
-            return object.getType() != SegmentType.ARRIVAL
-                && object.getType() != SegmentType.DEPARTURE
-                && object.getTemplateHashCode() == segmentUpdate.getTemplateHashCode();
-          }
-        });
-        if (segmentToUpdate != null) {
-          segmentToUpdate.setStartTimeInSecs(segmentUpdate.getStartTimeInSecs());
-          segmentToUpdate.setEndTimeInSecs(segmentUpdate.getEndTimeInSecs());
-          segmentToUpdate.setRealTime(segmentUpdate.isRealTime());
-          segmentToUpdate.setAlerts(segmentUpdate.getAlerts());
-          segmentToUpdate.setRealTimeVehicle(segmentUpdate.getRealTimeVehicle());
-
-          // FIXME: Just ditch the old trip when receiving realtime data.
-          // See more https://www.flowdock.com/app/skedgo/tripgo-v4/threads/WhEA69BC4SQNO2f7qcPHUw2kQNq.
-        }
-      }
-    });
-  }
-
-  RoutingResponse fetchUpdate(@NonNull Resources resources, @NonNull OkHttpClient httpClient) throws IOException {
-    checkWorkerThread();
-
-    // FIXME: It's a hack to receive correct 'realTime' from server.
-    String url = updateURL + "&v=10";
-    Request request = new Request.Builder()
-        .url(url)
-        .build();
-
-    Response response = httpClient.newCall(request).execute();
-    if (!response.isSuccessful()) {
-      throw new IOException("Unexpected code " + response);
-    }
-
-    ResponseBody responseBody = null;
-    try {
-      responseBody = response.body();
-
-      Gson gson = Gsons.createForLowercaseEnum();
-      RoutingResponse routingResponse = gson.fromJson(responseBody.charStream(), RoutingResponse.class);
-      if (routingResponse != null) {
-        routingResponse.processRawData(resources, gson);
-      }
-
-      return routingResponse;
-    } catch (IOException e) {
-      throw new IOException("Unexpected error " + response);
-    } finally {
-      Util.closeQuietly(responseBody);
-    }
-  }
-
-  public static class Comparators {
-    public static final Comparator<Trip> START_TIME_COMPARATOR =
-        ComparatorUtils.nullLowComparator(new Comparator<Trip>() {
-          @Override
-          public int compare(Trip lhs, Trip rhs) {
-            return compareLongs(
-                lhs.getStartTimeInSecs(),
-                rhs.getStartTimeInSecs()
-            );
-          }
-        });
-
-    public static final Comparator<Trip> END_TIME_COMPARATOR =
-        ComparatorUtils.nullLowComparator(new Comparator<Trip>() {
-          @Override
-          public int compare(Trip lhs, Trip rhs) {
-            return compareLongs(
-                lhs.getEndTimeInSecs(),
-                rhs.getEndTimeInSecs()
-            );
-          }
-        });
-
-    public static final Comparator<Trip> TIME_COMPARATOR_CHAIN =
-        new ComparatorChain<>(Arrays.asList(
-            START_TIME_COMPARATOR,
-            END_TIME_COMPARATOR
-        ));
-
-    public static final Comparator<Trip> WEIGHTED_SCORE_COMPARATOR =
-        ComparatorUtils.nullLowComparator(new Comparator<Trip>() {
-          @Override
-          public int compare(Trip lhs, Trip rhs) {
-            return Float.compare(lhs.getWeightedScore(), rhs.getWeightedScore());
-          }
-        });
-
-    public static final Comparator<Trip> DURATION_COMPARATOR =
-        ComparatorUtils.nullLowComparator(new Comparator<Trip>() {
-          @Override
-          public int compare(Trip lhs, Trip rhs) {
-            return Float.compare(lhs.getTimeCost(), rhs.getTimeCost());
-          }
-        });
-
-    public static final Comparator<Trip> MONEY_COST_COMPARATOR =
-        ComparatorUtils.nullLowComparator(new Comparator<Trip>() {
-          @Override
-          public int compare(Trip lhs, Trip rhs) {
-            return Float.compare(lhs.getMoneyCost(), rhs.getMoneyCost());
-          }
-        });
-
-    public static final Comparator<Trip> CARBON_COST_COMPARATOR =
-        ComparatorUtils.nullLowComparator(new Comparator<Trip>() {
-          @Override
-          public int compare(Trip lhs, Trip rhs) {
-            return Float.compare(lhs.getCarbonCost(), rhs.getCarbonCost());
-          }
-        });
-
-    /**
-     * FIXME: Possibly a duplicate.
-     * This was copied from Long.compare() which only available for API 19+.
-     */
-    public static int compareLongs(long lhs, long rhs) {
-      return lhs < rhs ? -1 : (lhs == rhs ? 0 : 1);
     }
   }
 }
