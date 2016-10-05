@@ -69,10 +69,6 @@ public final class TripComparators {
 
   private TripComparators() {}
 
-  /**
-   * FIXME: Possibly a duplicate.
-   * This was copied from Long.compare() which only available for API 19+.
-   */
   public static int compareLongs(long lhs, long rhs) {
     return lhs < rhs ? -1 : (lhs == rhs ? 0 : 1);
   }

@@ -17,6 +17,7 @@ import static com.skedgo.android.common.model.TripComparators.DURATION_COMPARATO
 import static com.skedgo.android.common.model.TripComparators.MONEY_COST_COMPARATOR;
 import static com.skedgo.android.common.model.TripComparators.TIME_COMPARATOR_CHAIN;
 import static com.skedgo.android.common.model.TripComparators.WEIGHTED_SCORE_COMPARATOR;
+import static com.skedgo.android.common.model.TripComparators.compareLongs;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
@@ -107,5 +108,11 @@ public class TripComparatorsTest {
 
       assertThat(CARBON_COST_COMPARATOR.compare(lhs, rhs)).isZero();
     }
+  }
+
+  @Test public void shouldCompareLongsCorrectly() {
+    assertThat(compareLongs(1L, 2L)).isEqualTo(-1);
+    assertThat(compareLongs(1L, 1L)).isEqualTo(0);
+    assertThat(compareLongs(3L, 2L)).isEqualTo(1);
   }
 }
