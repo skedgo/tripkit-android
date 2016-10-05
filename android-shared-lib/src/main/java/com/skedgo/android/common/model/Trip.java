@@ -21,7 +21,9 @@ import java.util.Locale;
 public class Trip implements Parcelable, ITimeRange {
   public static final float UNKNOWN_COST = -9999.9999F;
 
-  // FIXME: Release this raw JSON as soon as we no longer use it.
+  /**
+   * This will be transformed into a list of {@link TripSegment}.
+   */
   @SerializedName("segments") public ArrayList<JsonObject> rawSegmentList;
   @SerializedName("currencySymbol") private String currencySymbol;
   @SerializedName("saveURL") private String saveURL;

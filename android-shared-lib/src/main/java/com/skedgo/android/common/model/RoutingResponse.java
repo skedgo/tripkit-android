@@ -135,6 +135,7 @@ public class RoutingResponse {
         trip.setGroup(tripGroup);
 
         ArrayList<JsonObject> rawSegments = trip.rawSegmentList;
+        trip.rawSegmentList = null;
         if (CollectionUtils.isEmpty(rawSegments)) {
           continue;
         }
