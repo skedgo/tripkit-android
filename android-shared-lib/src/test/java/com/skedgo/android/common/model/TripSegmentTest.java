@@ -194,4 +194,19 @@ public class TripSegmentTest {
 
     return planeSegments;
   }
+
+  @Test
+  public void shouldWheelchairAccessibleBeTrue() throws Exception {
+    JsonObject tripSegmentJson = new JsonObject();
+    tripSegmentJson.addProperty("wheelchairAccessible", true);
+    assertThat(new Gson().fromJson(tripSegmentJson, TripSegment.class).getWheelchairAccessible()).isTrue();
+  }
+
+  @Test
+  public void shouldWheelchairAccessibleBeFalse() throws Exception {
+    JsonObject tripSegmentJson = new JsonObject();
+    tripSegmentJson.addProperty("wheelchairAccessible", false);
+    assertThat(new Gson().fromJson(tripSegmentJson, TripSegment.class).getWheelchairAccessible()).isFalse();
+  }
+
 }
