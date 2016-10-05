@@ -1,0 +1,1769 @@
+{
+  "alerts": [
+    {
+      "hashCode": -827566736,
+      "serviceTripID": "80-S.830.126.120.A.8.43235182",
+      "severity": "warning",
+      "text": "Tuesday 4 to Thursday 6 October\nNightly from 9.40pm until 1am\n\nCity Circle\n- Trains run in one direction only, from Central first stop Museum.\n\nT2 Airport Line\n- Trains from the City start from Central.\n\nT2 Inner West & South Line\n- Some trains from the City end at Central.\n\nYou may need to change trains to complete your journey if travelling to or from City Circle stations.",
+      "title": "Nightly trackwork ¿ City Circle, T2 Airport, Inner West & South Line",
+      "url": "http://www.sydneytrains.info/service_updates/service_interruptions/"
+    }
+  ],
+  "groups": [
+    {
+      "frequency": 30,
+      "trips": [
+        {
+          "arrive": 1475661600,
+          "caloriesCost": 13,
+          "carbonCost": 0.2,
+          "currencySymbol": "$",
+          "depart": 1475656194,
+          "hassleCost": 7,
+          "mainSegmentHashCode": 1953606361,
+          "moneyCost": 8.55,
+          "moneyUSDCost": 6.7,
+          "plannedURL": "https://darkages.buzzhives.com/satapp/trip/planned/9eecd5e8-3daa-4a49-8e8b-0c2977b33449",
+          "queryIsLeaveAfter": true,
+          "queryTime": 1475653866,
+          "saveURL": "https://darkages.buzzhives.com/satapp/trip/save/9eecd5e8-3daa-4a49-8e8b-0c2977b33449",
+          "segments": [
+            {
+              "endTime": 1475658000,
+              "realTime": true,
+              "realtimeVehicle": {
+                "id": "ML158-2364",
+                "lastUpdate": 1475653927,
+                "location": {
+                  "bearing": 310,
+                  "lat": -33.8548,
+                  "lng": 151.18843
+                }
+              },
+              "segmentTemplateHashCode": 1953606361,
+              "serviceColor": {
+                "blue": 77,
+                "green": 147,
+                "red": 0
+              },
+              "serviceDirection": "Circular Quay",
+              "serviceName": "Manly",
+              "serviceNumber": "F1",
+              "serviceTripID": "ML158-2364",
+              "startTime": 1475656200,
+              "stops": 1,
+              "ticketWebsiteURL": "https://www.opal.com.au/en/fares-and-benefits/",
+              "wheelchairAccessible": true
+            },
+            {
+              "endTime": 1475658147,
+              "segmentTemplateHashCode": -1834845215,
+              "startTime": 1475658000
+            },
+            {
+              "endTime": 1475658180,
+              "segmentTemplateHashCode": -1268522232,
+              "startTime": 1475658147
+            },
+            {
+              "alertHashCodes": [
+                -827566736
+              ],
+              "endTime": 1475661600,
+              "platform": "Platform 1",
+              "segmentTemplateHashCode": -1058866202,
+              "serviceColor": {
+                "blue": 45,
+                "green": 156,
+                "red": 77
+              },
+              "serviceDirection": "Campbelltown",
+              "serviceName": "T2 Airport, Inner West & South Line",
+              "serviceNumber": "T2",
+              "serviceTripID": "80-S.830.126.120.A.8.43235182",
+              "startTime": 1475658180,
+              "stops": 16,
+              "ticketWebsiteURL": "https://www.opal.com.au/en/fares-and-benefits/",
+              "wheelchairAccessible": true
+            }
+          ],
+          "temporaryURL": "https://darkages.buzzhives.com/satapp/trip/9eecd5e8-3daa-4a49-8e8b-0c2977b33449",
+          "updateURL": "https://darkages.buzzhives.com/satapp/trip/update/9eecd5e8-3daa-4a49-8e8b-0c2977b33449?hash=-1168922520",
+          "weightedScore": 33.5
+        },
+        {
+          "arrive": 1475660700,
+          "caloriesCost": 13,
+          "carbonCost": 0.2,
+          "currencySymbol": "$",
+          "depart": 1475655294,
+          "hassleCost": 7,
+          "mainSegmentHashCode": 13791338,
+          "moneyCost": 8.55,
+          "moneyUSDCost": 6.7,
+          "plannedURL": "https://darkages.buzzhives.com/satapp/trip/planned/add7f6b3-ac84-4c52-8d6d-5dd14a93fd89",
+          "queryIsLeaveAfter": true,
+          "queryTime": 1475653866,
+          "saveURL": "https://darkages.buzzhives.com/satapp/trip/save/add7f6b3-ac84-4c52-8d6d-5dd14a93fd89",
+          "segments": [
+            {
+              "endTime": 1475657700,
+              "realTime": true,
+              "realtimeVehicle": {
+                "id": "ML156-2364",
+                "lastUpdate": 1475653927,
+                "location": {
+                  "bearing": 17,
+                  "lat": -33.8232,
+                  "lng": 151.2774
+                }
+              },
+              "segmentTemplateHashCode": 13791338,
+              "serviceColor": {
+                "blue": 77,
+                "green": 147,
+                "red": 0
+              },
+              "serviceDirection": "Circular Quay",
+              "serviceName": "Manly",
+              "serviceNumber": "F1",
+              "serviceTripID": "ML156-2364",
+              "startTime": 1475655300,
+              "stops": 1,
+              "ticketWebsiteURL": "https://www.opal.com.au/en/fares-and-benefits/",
+              "wheelchairAccessible": true
+            },
+            {
+              "endTime": 1475657847,
+              "segmentTemplateHashCode": -1834845215,
+              "startTime": 1475657700
+            },
+            {
+              "endTime": 1475657280,
+              "segmentTemplateHashCode": -1268522232,
+              "startTime": 1475657847
+            },
+            {
+              "alertHashCodes": [
+                -827566736
+              ],
+              "endTime": 1475660700,
+              "platform": "Platform 1",
+              "segmentTemplateHashCode": -1066313952,
+              "serviceColor": {
+                "blue": 45,
+                "green": 156,
+                "red": 77
+              },
+              "serviceDirection": "Leppington",
+              "serviceName": "Inner West & South Line",
+              "serviceNumber": "T2",
+              "serviceTripID": "75-R.830.126.120.A.8.43235239",
+              "startTime": 1475657280,
+              "stops": 16,
+              "ticketWebsiteURL": "https://www.opal.com.au/en/fares-and-benefits/",
+              "wheelchairAccessible": true
+            }
+          ],
+          "temporaryURL": "https://darkages.buzzhives.com/satapp/trip/add7f6b3-ac84-4c52-8d6d-5dd14a93fd89",
+          "updateURL": "https://darkages.buzzhives.com/satapp/trip/update/add7f6b3-ac84-4c52-8d6d-5dd14a93fd89?hash=690257455",
+          "weightedScore": 31
+        },
+        {
+          "arrive": 1475658900,
+          "caloriesCost": 13,
+          "carbonCost": 0.2,
+          "currencySymbol": "$",
+          "depart": 1475653700,
+          "hassleCost": 7,
+          "mainSegmentHashCode": 13791338,
+          "moneyCost": 8.55,
+          "moneyUSDCost": 6.7,
+          "plannedURL": "https://darkages.buzzhives.com/satapp/trip/planned/879a9d1d-7905-4438-90f5-94451a72ddab",
+          "queryIsLeaveAfter": true,
+          "queryTime": 1475653866,
+          "saveURL": "https://darkages.buzzhives.com/satapp/trip/save/879a9d1d-7905-4438-90f5-94451a72ddab",
+          "segments": [
+            {
+              "endTime": 1475655900,
+              "realTime": true,
+              "realtimeVehicle": {
+                "id": "ML154-2364",
+                "lastUpdate": 1475653927,
+                "location": {
+                  "bearing": 190,
+                  "lat": -33.8146,
+                  "lng": 151.27689
+                }
+              },
+              "segmentTemplateHashCode": 13791338,
+              "serviceColor": {
+                "blue": 77,
+                "green": 147,
+                "red": 0
+              },
+              "serviceDirection": "Circular Quay",
+              "serviceName": "Manly",
+              "serviceNumber": "F1",
+              "serviceTripID": "ML154-2364",
+              "startTime": 1475653706,
+              "stops": 1,
+              "ticketWebsiteURL": "https://www.opal.com.au/en/fares-and-benefits/",
+              "wheelchairAccessible": true
+            },
+            {
+              "endTime": 1475656047,
+              "segmentTemplateHashCode": -1834845215,
+              "startTime": 1475655900
+            },
+            {
+              "endTime": 1475655480,
+              "segmentTemplateHashCode": -1268522232,
+              "startTime": 1475656047
+            },
+            {
+              "alertHashCodes": [
+                -827566736
+              ],
+              "endTime": 1475658900,
+              "platform": "Platform 1",
+              "segmentTemplateHashCode": -1066313952,
+              "serviceColor": {
+                "blue": 45,
+                "green": 156,
+                "red": 77
+              },
+              "serviceDirection": "Leppington",
+              "serviceName": "Inner West & South Line",
+              "serviceNumber": "T2",
+              "serviceTripID": "23-P.1318.115.124.C.8.43455654",
+              "startTime": 1475655480,
+              "stops": 16,
+              "ticketWebsiteURL": "https://www.opal.com.au/en/fares-and-benefits/",
+              "wheelchairAccessible": true
+            }
+          ],
+          "temporaryURL": "https://darkages.buzzhives.com/satapp/trip/879a9d1d-7905-4438-90f5-94451a72ddab",
+          "updateURL": "https://darkages.buzzhives.com/satapp/trip/update/879a9d1d-7905-4438-90f5-94451a72ddab?hash=1063070840",
+          "weightedScore": 54.7
+        },
+        {
+          "arrive": 1475657100,
+          "caloriesCost": 13,
+          "carbonCost": 0.2,
+          "currencySymbol": "$",
+          "depart": 1475651394,
+          "hassleCost": 5,
+          "mainSegmentHashCode": 13791338,
+          "moneyCost": 8.55,
+          "moneyUSDCost": 6.7,
+          "plannedURL": "https://darkages.buzzhives.com/satapp/trip/planned/6fea2931-ecaf-4025-9bf6-0b2b1aef211f",
+          "queryIsLeaveAfter": true,
+          "queryTime": 1475653866,
+          "saveURL": "https://darkages.buzzhives.com/satapp/trip/save/6fea2931-ecaf-4025-9bf6-0b2b1aef211f",
+          "segments": [
+            {
+              "endTime": 1475653200,
+              "segmentTemplateHashCode": 13791338,
+              "serviceColor": {
+                "blue": 77,
+                "green": 147,
+                "red": 0
+              },
+              "serviceDirection": "Circular Quay",
+              "serviceName": "Manly",
+              "serviceNumber": "F1",
+              "serviceTripID": "ML152-2364",
+              "startTime": 1475651400,
+              "stops": 1,
+              "ticketWebsiteURL": "https://www.opal.com.au/en/fares-and-benefits/",
+              "wheelchairAccessible": true
+            },
+            {
+              "endTime": 1475653347,
+              "segmentTemplateHashCode": -1834845215,
+              "startTime": 1475653200
+            },
+            {
+              "endTime": 1475653680,
+              "segmentTemplateHashCode": -1268522232,
+              "startTime": 1475653347
+            },
+            {
+              "alertHashCodes": [
+                -827566736
+              ],
+              "endTime": 1475657100,
+              "platform": "Platform 1",
+              "realtimeVehicle": {
+                "id": "50-P",
+                "lastUpdate": 1475653903,
+                "location": {
+                  "bearing": 172,
+                  "lat": -33.87354,
+                  "lng": 151.20685
+                }
+              },
+              "segmentTemplateHashCode": -1066313952,
+              "serviceColor": {
+                "blue": 45,
+                "green": 156,
+                "red": 77
+              },
+              "serviceDirection": "Leppington",
+              "serviceName": "Inner West & South Line",
+              "serviceNumber": "T2",
+              "serviceTripID": "50-P.1139.102.124.A.8.43242034",
+              "startTime": 1475653680,
+              "stops": 16,
+              "ticketWebsiteURL": "https://www.opal.com.au/en/fares-and-benefits/",
+              "wheelchairAccessible": true
+            }
+          ],
+          "temporaryURL": "https://darkages.buzzhives.com/satapp/trip/6fea2931-ecaf-4025-9bf6-0b2b1aef211f",
+          "updateURL": "https://darkages.buzzhives.com/satapp/trip/update/6fea2931-ecaf-4025-9bf6-0b2b1aef211f?hash=2076867919",
+          "weightedScore": 169.9
+        },
+        {
+          "arrive": 1475661600,
+          "caloriesCost": 13,
+          "carbonCost": 0.2,
+          "currencySymbol": "$",
+          "depart": 1475655294,
+          "hassleCost": 5,
+          "mainSegmentHashCode": 13791338,
+          "moneyCost": 8.55,
+          "moneyUSDCost": 6.7,
+          "plannedURL": "https://darkages.buzzhives.com/satapp/trip/planned/ab89ad4e-d241-4bb5-8305-96322d0947ec",
+          "queryIsLeaveAfter": true,
+          "queryTime": 1475653866,
+          "saveURL": "https://darkages.buzzhives.com/satapp/trip/save/ab89ad4e-d241-4bb5-8305-96322d0947ec",
+          "segments": [
+            {
+              "endTime": 1475657700,
+              "realTime": true,
+              "realtimeVehicle": {
+                "id": "ML156-2364",
+                "lastUpdate": 1475653927,
+                "location": {
+                  "bearing": 17,
+                  "lat": -33.8232,
+                  "lng": 151.2774
+                }
+              },
+              "segmentTemplateHashCode": 13791338,
+              "serviceColor": {
+                "blue": 77,
+                "green": 147,
+                "red": 0
+              },
+              "serviceDirection": "Circular Quay",
+              "serviceName": "Manly",
+              "serviceNumber": "F1",
+              "serviceTripID": "ML156-2364",
+              "startTime": 1475655300,
+              "stops": 1,
+              "ticketWebsiteURL": "https://www.opal.com.au/en/fares-and-benefits/",
+              "wheelchairAccessible": true
+            },
+            {
+              "endTime": 1475657847,
+              "segmentTemplateHashCode": -1834845215,
+              "startTime": 1475657700
+            },
+            {
+              "endTime": 1475658180,
+              "segmentTemplateHashCode": -1268522232,
+              "startTime": 1475657847
+            },
+            {
+              "alertHashCodes": [
+                -827566736
+              ],
+              "endTime": 1475661600,
+              "platform": "Platform 1",
+              "segmentTemplateHashCode": -1058866202,
+              "serviceColor": {
+                "blue": 45,
+                "green": 156,
+                "red": 77
+              },
+              "serviceDirection": "Campbelltown",
+              "serviceName": "T2 Airport, Inner West & South Line",
+              "serviceNumber": "T2",
+              "serviceTripID": "80-S.830.126.120.A.8.43235182",
+              "startTime": 1475658180,
+              "stops": 16,
+              "ticketWebsiteURL": "https://www.opal.com.au/en/fares-and-benefits/",
+              "wheelchairAccessible": true
+            }
+          ],
+          "temporaryURL": "https://darkages.buzzhives.com/satapp/trip/ab89ad4e-d241-4bb5-8305-96322d0947ec",
+          "updateURL": "https://darkages.buzzhives.com/satapp/trip/update/ab89ad4e-d241-4bb5-8305-96322d0947ec?hash=932279005",
+          "weightedScore": 30.6
+        },
+        {
+          "arrive": 1475664300,
+          "caloriesCost": 13,
+          "carbonCost": 0.2,
+          "currencySymbol": "$",
+          "depart": 1475658294,
+          "hassleCost": 5,
+          "mainSegmentHashCode": 1953606361,
+          "moneyCost": 8.55,
+          "moneyUSDCost": 6.7,
+          "plannedURL": "https://darkages.buzzhives.com/satapp/trip/planned/376d98ee-bb22-4418-86ff-ebb5a0c60203",
+          "queryIsLeaveAfter": true,
+          "queryTime": 1475653866,
+          "saveURL": "https://darkages.buzzhives.com/satapp/trip/save/376d98ee-bb22-4418-86ff-ebb5a0c60203",
+          "segments": [
+            {
+              "endTime": 1475660100,
+              "realTime": true,
+              "realtimeVehicle": {
+                "id": "ML160-2364",
+                "lastUpdate": 1475653927,
+                "location": {
+                  "bearing": 190,
+                  "lat": -33.81466,
+                  "lng": 151.27687
+                }
+              },
+              "segmentTemplateHashCode": 1953606361,
+              "serviceColor": {
+                "blue": 77,
+                "green": 147,
+                "red": 0
+              },
+              "serviceDirection": "Circular Quay",
+              "serviceName": "Manly",
+              "serviceNumber": "F1",
+              "serviceTripID": "ML160-2364",
+              "startTime": 1475658300,
+              "stops": 1,
+              "ticketWebsiteURL": "https://www.opal.com.au/en/fares-and-benefits/",
+              "wheelchairAccessible": true
+            },
+            {
+              "endTime": 1475660247,
+              "segmentTemplateHashCode": -1834845215,
+              "startTime": 1475660100
+            },
+            {
+              "endTime": 1475660880,
+              "segmentTemplateHashCode": -1268522232,
+              "startTime": 1475660247
+            },
+            {
+              "alertHashCodes": [
+                -827566736
+              ],
+              "endTime": 1475664300,
+              "platform": "Platform 1",
+              "segmentTemplateHashCode": -1066313952,
+              "serviceColor": {
+                "blue": 45,
+                "green": 156,
+                "red": 77
+              },
+              "serviceDirection": "Leppington",
+              "serviceName": "Inner West & South Line",
+              "serviceNumber": "T2",
+              "serviceTripID": "54-U.1139.102.60.A.8.43242227",
+              "startTime": 1475660880,
+              "stops": 16,
+              "ticketWebsiteURL": "https://www.opal.com.au/en/fares-and-benefits/",
+              "wheelchairAccessible": true
+            }
+          ],
+          "temporaryURL": "https://darkages.buzzhives.com/satapp/trip/376d98ee-bb22-4418-86ff-ebb5a0c60203",
+          "updateURL": "https://darkages.buzzhives.com/satapp/trip/update/376d98ee-bb22-4418-86ff-ebb5a0c60203?hash=1138736109",
+          "weightedScore": 38.4
+        },
+        {
+          "arrive": 1475667000,
+          "caloriesCost": 13,
+          "carbonCost": 0.2,
+          "currencySymbol": "$",
+          "depart": 1475660694,
+          "hassleCost": 5,
+          "mainSegmentHashCode": 1953606361,
+          "moneyCost": 8.55,
+          "moneyUSDCost": 6.7,
+          "plannedURL": "https://darkages.buzzhives.com/satapp/trip/planned/0dcf8177-56cc-4923-9a98-1c8c52cdfbae",
+          "queryIsLeaveAfter": true,
+          "queryTime": 1475653866,
+          "saveURL": "https://darkages.buzzhives.com/satapp/trip/save/0dcf8177-56cc-4923-9a98-1c8c52cdfbae",
+          "segments": [
+            {
+              "endTime": 1475662500,
+              "realTime": true,
+              "realtimeVehicle": {
+                "id": "ML162-2364",
+                "lastUpdate": 1475653927,
+                "location": {
+                  "bearing": 17,
+                  "lat": -33.8232,
+                  "lng": 151.2774
+                }
+              },
+              "segmentTemplateHashCode": 1953606361,
+              "serviceColor": {
+                "blue": 77,
+                "green": 147,
+                "red": 0
+              },
+              "serviceDirection": "Circular Quay",
+              "serviceName": "Manly",
+              "serviceNumber": "F1",
+              "serviceTripID": "ML162-2364",
+              "startTime": 1475660700,
+              "stops": 1,
+              "ticketWebsiteURL": "https://www.opal.com.au/en/fares-and-benefits/",
+              "wheelchairAccessible": true
+            },
+            {
+              "endTime": 1475662647,
+              "segmentTemplateHashCode": -1834845215,
+              "startTime": 1475662500
+            },
+            {
+              "endTime": 1475663580,
+              "segmentTemplateHashCode": -1268522232,
+              "startTime": 1475662647
+            },
+            {
+              "alertHashCodes": [
+                -827566736
+              ],
+              "endTime": 1475667000,
+              "platform": "Platform 1",
+              "segmentTemplateHashCode": -1067125997,
+              "serviceColor": {
+                "blue": 45,
+                "green": 156,
+                "red": 77
+              },
+              "serviceDirection": "Campbelltown",
+              "serviceName": "T2 Airport, Inner West & South Line",
+              "serviceNumber": "T2",
+              "serviceTripID": "72-M.1318.115.60.A.8.43454487",
+              "startTime": 1475663580,
+              "stops": 16,
+              "ticketWebsiteURL": "https://www.opal.com.au/en/fares-and-benefits/",
+              "wheelchairAccessible": true
+            }
+          ],
+          "temporaryURL": "https://darkages.buzzhives.com/satapp/trip/0dcf8177-56cc-4923-9a98-1c8c52cdfbae",
+          "updateURL": "https://darkages.buzzhives.com/satapp/trip/update/0dcf8177-56cc-4923-9a98-1c8c52cdfbae?hash=413908168",
+          "weightedScore": 45.6
+        }
+      ]
+    },
+    {
+      "frequency": 20,
+      "trips": [
+        {
+          "arrive": 1475657100,
+          "caloriesCost": 14,
+          "carbonCost": 0.2,
+          "currencySymbol": "$",
+          "depart": 1475652294,
+          "hassleCost": 6.7,
+          "mainSegmentHashCode": -2107725088,
+          "moneyCost": 11.87,
+          "moneyUSDCost": 9.3,
+          "plannedURL": "https://darkages.buzzhives.com/satapp/trip/planned/4fc2fe85-118f-41d8-96bb-090198d25b0d",
+          "queryIsLeaveAfter": true,
+          "queryTime": 1475653866,
+          "saveURL": "https://darkages.buzzhives.com/satapp/trip/save/4fc2fe85-118f-41d8-96bb-090198d25b0d",
+          "segments": [
+            {
+              "endTime": 1475653440,
+              "segmentTemplateHashCode": -2107725088,
+              "serviceColor": {
+                "blue": 49,
+                "green": 176,
+                "red": 90
+              },
+              "serviceDirection": "Circular Quay",
+              "serviceName": "Manly Fast Ferry",
+              "serviceNumber": "",
+              "serviceTripID": "204.TA.55-MFF-sj2-1.1.R",
+              "startTime": 1475652300,
+              "stops": 1,
+              "ticketWebsiteURL": "http://transportnsw.info",
+              "wheelchairAccessible": true
+            },
+            {
+              "endTime": 1475653603,
+              "segmentTemplateHashCode": 1944867834,
+              "startTime": 1475653440
+            },
+            {
+              "endTime": 1475653680,
+              "segmentTemplateHashCode": -1268522232,
+              "startTime": 1475653603
+            },
+            {
+              "alertHashCodes": [
+                -827566736
+              ],
+              "endTime": 1475657100,
+              "platform": "Platform 1",
+              "realtimeVehicle": {
+                "id": "50-P",
+                "lastUpdate": 1475653903,
+                "location": {
+                  "bearing": 172,
+                  "lat": -33.87354,
+                  "lng": 151.20685
+                }
+              },
+              "segmentTemplateHashCode": -2087382306,
+              "serviceColor": {
+                "blue": 45,
+                "green": 156,
+                "red": 77
+              },
+              "serviceDirection": "Leppington",
+              "serviceName": "Inner West & South Line",
+              "serviceNumber": "T2",
+              "serviceTripID": "50-P.1139.102.124.A.8.43242034",
+              "startTime": 1475653680,
+              "stops": 16,
+              "ticketWebsiteURL": "https://www.opal.com.au/en/fares-and-benefits/",
+              "wheelchairAccessible": true
+            }
+          ],
+          "temporaryURL": "https://darkages.buzzhives.com/satapp/trip/4fc2fe85-118f-41d8-96bb-090198d25b0d",
+          "updateURL": "https://darkages.buzzhives.com/satapp/trip/update/4fc2fe85-118f-41d8-96bb-090198d25b0d?hash=1217081422",
+          "weightedScore": 122.5
+        },
+        {
+          "arrive": 1475662500,
+          "caloriesCost": 14,
+          "carbonCost": 0.2,
+          "currencySymbol": "$",
+          "depart": 1475657094,
+          "hassleCost": 5,
+          "mainSegmentHashCode": -2107725088,
+          "moneyCost": 11.87,
+          "moneyUSDCost": 9.3,
+          "plannedURL": "https://darkages.buzzhives.com/satapp/trip/planned/a14b04fc-b2fd-48fb-aaff-79fdd9a1fabd",
+          "queryIsLeaveAfter": true,
+          "queryTime": 1475653866,
+          "saveURL": "https://darkages.buzzhives.com/satapp/trip/save/a14b04fc-b2fd-48fb-aaff-79fdd9a1fabd",
+          "segments": [
+            {
+              "endTime": 1475658300,
+              "segmentTemplateHashCode": -2107725088,
+              "serviceColor": {
+                "blue": 49,
+                "green": 176,
+                "red": 90
+              },
+              "serviceDirection": "Circular Quay",
+              "serviceName": "Manly Fast Ferry",
+              "serviceNumber": "",
+              "serviceTripID": "222.TA.55-MFF-sj2-1.1.R",
+              "startTime": 1475657100,
+              "stops": 1,
+              "ticketWebsiteURL": "http://transportnsw.info",
+              "wheelchairAccessible": true
+            },
+            {
+              "endTime": 1475658463,
+              "segmentTemplateHashCode": 1944867834,
+              "startTime": 1475658300
+            },
+            {
+              "endTime": 1475659080,
+              "segmentTemplateHashCode": -1268522232,
+              "startTime": 1475658463
+            },
+            {
+              "alertHashCodes": [
+                -827566736
+              ],
+              "endTime": 1475662500,
+              "platform": "Platform 1",
+              "segmentTemplateHashCode": -2087382306,
+              "serviceColor": {
+                "blue": 45,
+                "green": 156,
+                "red": 77
+              },
+              "serviceDirection": "Leppington",
+              "serviceName": "Inner West & South Line",
+              "serviceNumber": "T2",
+              "serviceTripID": "74-T.1318.115.56.A.8.43455264",
+              "startTime": 1475659080,
+              "stops": 16,
+              "ticketWebsiteURL": "https://www.opal.com.au/en/fares-and-benefits/",
+              "wheelchairAccessible": true
+            }
+          ],
+          "temporaryURL": "https://darkages.buzzhives.com/satapp/trip/a14b04fc-b2fd-48fb-aaff-79fdd9a1fabd",
+          "updateURL": "https://darkages.buzzhives.com/satapp/trip/update/a14b04fc-b2fd-48fb-aaff-79fdd9a1fabd?hash=-958980004",
+          "weightedScore": 36.5
+        },
+        {
+          "arrive": 1475658011,
+          "caloriesCost": 14,
+          "carbonCost": 0.2,
+          "currencySymbol": "$",
+          "depart": 1475652894,
+          "hassleCost": 5,
+          "mainSegmentHashCode": -2107725088,
+          "moneyCost": 11.87,
+          "moneyUSDCost": 9.3,
+          "plannedURL": "https://darkages.buzzhives.com/satapp/trip/planned/340d12d1-e920-4403-80f0-8a253e7a38e7",
+          "queryIsLeaveAfter": true,
+          "queryTime": 1475653866,
+          "saveURL": "https://darkages.buzzhives.com/satapp/trip/save/340d12d1-e920-4403-80f0-8a253e7a38e7",
+          "segments": [
+            {
+              "endTime": 1475654040,
+              "segmentTemplateHashCode": -2107725088,
+              "serviceColor": {
+                "blue": 49,
+                "green": 176,
+                "red": 90
+              },
+              "serviceDirection": "Circular Quay",
+              "serviceName": "Manly Fast Ferry",
+              "serviceNumber": "",
+              "serviceTripID": "205.TA.55-MFF-sj2-1.1.R",
+              "startTime": 1475652900,
+              "stops": 1,
+              "ticketWebsiteURL": "http://transportnsw.info",
+              "wheelchairAccessible": true
+            },
+            {
+              "endTime": 1475654203,
+              "segmentTemplateHashCode": 1944867834,
+              "startTime": 1475654040
+            },
+            {
+              "endTime": 1475654693,
+              "segmentTemplateHashCode": -1268522232,
+              "startTime": 1475654203
+            },
+            {
+              "alertHashCodes": [
+                -827566736
+              ],
+              "endTime": 1475658011,
+              "platform": "Platform 1",
+              "realTime": true,
+              "segmentTemplateHashCode": -2088194351,
+              "serviceColor": {
+                "blue": 45,
+                "green": 156,
+                "red": 77
+              },
+              "serviceDirection": "Campbelltown",
+              "serviceName": "T2 Airport, Inner West & South Line",
+              "serviceNumber": "T2",
+              "serviceTripID": "14-T.1139.102.56.M.8.43239850",
+              "startTime": 1475654693,
+              "stops": 16,
+              "ticketWebsiteURL": "https://www.opal.com.au/en/fares-and-benefits/",
+              "wheelchairAccessible": true
+            }
+          ],
+          "temporaryURL": "https://darkages.buzzhives.com/satapp/trip/340d12d1-e920-4403-80f0-8a253e7a38e7",
+          "updateURL": "https://darkages.buzzhives.com/satapp/trip/update/340d12d1-e920-4403-80f0-8a253e7a38e7?hash=1403112370",
+          "weightedScore": 88
+        },
+        {
+          "arrive": 1475663400,
+          "caloriesCost": 14,
+          "carbonCost": 0.2,
+          "currencySymbol": "$",
+          "depart": 1475658294,
+          "hassleCost": 5.1,
+          "mainSegmentHashCode": -2107725088,
+          "moneyCost": 11.87,
+          "moneyUSDCost": 9.3,
+          "plannedURL": "https://darkages.buzzhives.com/satapp/trip/planned/bd063fda-5007-4e9d-b9e3-207ac7f3ba19",
+          "queryIsLeaveAfter": true,
+          "queryTime": 1475653866,
+          "saveURL": "https://darkages.buzzhives.com/satapp/trip/save/bd063fda-5007-4e9d-b9e3-207ac7f3ba19",
+          "segments": [
+            {
+              "endTime": 1475659500,
+              "segmentTemplateHashCode": -2107725088,
+              "serviceColor": {
+                "blue": 49,
+                "green": 176,
+                "red": 90
+              },
+              "serviceDirection": "Circular Quay",
+              "serviceName": "Manly Fast Ferry",
+              "serviceNumber": "",
+              "serviceTripID": "225.TA.55-MFF-sj2-1.1.R",
+              "startTime": 1475658300,
+              "stops": 1,
+              "ticketWebsiteURL": "http://transportnsw.info",
+              "wheelchairAccessible": true
+            },
+            {
+              "endTime": 1475659663,
+              "segmentTemplateHashCode": 1944867834,
+              "startTime": 1475659500
+            },
+            {
+              "endTime": 1475659980,
+              "segmentTemplateHashCode": -1268522232,
+              "startTime": 1475659663
+            },
+            {
+              "alertHashCodes": [
+                -827566736
+              ],
+              "endTime": 1475663400,
+              "platform": "Platform 1",
+              "segmentTemplateHashCode": -2088194351,
+              "serviceColor": {
+                "blue": 45,
+                "green": 156,
+                "red": 77
+              },
+              "serviceDirection": "Campbelltown",
+              "serviceName": "T2 Airport, Inner West & South Line",
+              "serviceNumber": "T2",
+              "serviceTripID": "57-W.830.126.56.A.8.43237704",
+              "startTime": 1475659980,
+              "stops": 16,
+              "ticketWebsiteURL": "https://www.opal.com.au/en/fares-and-benefits/",
+              "wheelchairAccessible": true
+            }
+          ],
+          "temporaryURL": "https://darkages.buzzhives.com/satapp/trip/bd063fda-5007-4e9d-b9e3-207ac7f3ba19",
+          "updateURL": "https://darkages.buzzhives.com/satapp/trip/update/bd063fda-5007-4e9d-b9e3-207ac7f3ba19?hash=1919145882",
+          "weightedScore": 39.4
+        },
+        {
+          "arrive": 1475658900,
+          "caloriesCost": 14,
+          "carbonCost": 0.2,
+          "currencySymbol": "$",
+          "depart": 1475654094,
+          "hassleCost": 6.7,
+          "mainSegmentHashCode": -2107725088,
+          "moneyCost": 11.87,
+          "moneyUSDCost": 9.3,
+          "plannedURL": "https://darkages.buzzhives.com/satapp/trip/planned/a476249f-28b6-41a7-bdf0-1b7965651ab7",
+          "queryIsLeaveAfter": true,
+          "queryTime": 1475653866,
+          "saveURL": "https://darkages.buzzhives.com/satapp/trip/save/a476249f-28b6-41a7-bdf0-1b7965651ab7",
+          "segments": [
+            {
+              "endTime": 1475655240,
+              "segmentTemplateHashCode": -2107725088,
+              "serviceColor": {
+                "blue": 49,
+                "green": 176,
+                "red": 90
+              },
+              "serviceDirection": "Circular Quay",
+              "serviceName": "Manly Fast Ferry",
+              "serviceNumber": "",
+              "serviceTripID": "210.TA.55-MFF-sj2-1.1.R",
+              "startTime": 1475654100,
+              "stops": 1,
+              "ticketWebsiteURL": "http://transportnsw.info",
+              "wheelchairAccessible": true
+            },
+            {
+              "endTime": 1475655403,
+              "segmentTemplateHashCode": 1944867834,
+              "startTime": 1475655240
+            },
+            {
+              "endTime": 1475655480,
+              "segmentTemplateHashCode": -1268522232,
+              "startTime": 1475655403
+            },
+            {
+              "alertHashCodes": [
+                -827566736
+              ],
+              "endTime": 1475658900,
+              "platform": "Platform 1",
+              "segmentTemplateHashCode": -2087382306,
+              "serviceColor": {
+                "blue": 45,
+                "green": 156,
+                "red": 77
+              },
+              "serviceDirection": "Leppington",
+              "serviceName": "Inner West & South Line",
+              "serviceNumber": "T2",
+              "serviceTripID": "23-P.1318.115.124.C.8.43455654",
+              "startTime": 1475655480,
+              "stops": 16,
+              "ticketWebsiteURL": "https://www.opal.com.au/en/fares-and-benefits/",
+              "wheelchairAccessible": true
+            }
+          ],
+          "temporaryURL": "https://darkages.buzzhives.com/satapp/trip/a476249f-28b6-41a7-bdf0-1b7965651ab7",
+          "updateURL": "https://darkages.buzzhives.com/satapp/trip/update/a476249f-28b6-41a7-bdf0-1b7965651ab7?hash=-53190134",
+          "weightedScore": 28.8
+        },
+        {
+          "arrive": 1475660700,
+          "caloriesCost": 14,
+          "carbonCost": 0.2,
+          "currencySymbol": "$",
+          "depart": 1475655294,
+          "hassleCost": 5,
+          "mainSegmentHashCode": -2107725088,
+          "moneyCost": 11.87,
+          "moneyUSDCost": 9.3,
+          "plannedURL": "https://darkages.buzzhives.com/satapp/trip/planned/135d40e2-395a-4c05-888a-ab3f6046f1ec",
+          "queryIsLeaveAfter": true,
+          "queryTime": 1475653866,
+          "saveURL": "https://darkages.buzzhives.com/satapp/trip/save/135d40e2-395a-4c05-888a-ab3f6046f1ec",
+          "segments": [
+            {
+              "endTime": 1475656500,
+              "segmentTemplateHashCode": -2107725088,
+              "serviceColor": {
+                "blue": 49,
+                "green": 176,
+                "red": 90
+              },
+              "serviceDirection": "Circular Quay",
+              "serviceName": "Manly Fast Ferry",
+              "serviceNumber": "",
+              "serviceTripID": "216.TA.55-MFF-sj2-1.1.R",
+              "startTime": 1475655300,
+              "stops": 1,
+              "ticketWebsiteURL": "http://transportnsw.info",
+              "wheelchairAccessible": true
+            },
+            {
+              "endTime": 1475656663,
+              "segmentTemplateHashCode": 1944867834,
+              "startTime": 1475656500
+            },
+            {
+              "endTime": 1475657280,
+              "segmentTemplateHashCode": -1268522232,
+              "startTime": 1475656663
+            },
+            {
+              "alertHashCodes": [
+                -827566736
+              ],
+              "endTime": 1475660700,
+              "platform": "Platform 1",
+              "segmentTemplateHashCode": -2087382306,
+              "serviceColor": {
+                "blue": 45,
+                "green": 156,
+                "red": 77
+              },
+              "serviceDirection": "Leppington",
+              "serviceName": "Inner West & South Line",
+              "serviceNumber": "T2",
+              "serviceTripID": "75-R.830.126.120.A.8.43235239",
+              "startTime": 1475657280,
+              "stops": 16,
+              "ticketWebsiteURL": "https://www.opal.com.au/en/fares-and-benefits/",
+              "wheelchairAccessible": true
+            }
+          ],
+          "temporaryURL": "https://darkages.buzzhives.com/satapp/trip/135d40e2-395a-4c05-888a-ab3f6046f1ec",
+          "updateURL": "https://darkages.buzzhives.com/satapp/trip/update/135d40e2-395a-4c05-888a-ab3f6046f1ec?hash=932200298",
+          "weightedScore": 31.5
+        },
+        {
+          "arrive": 1475659800,
+          "caloriesCost": 14,
+          "carbonCost": 0.2,
+          "currencySymbol": "$",
+          "depart": 1475654694,
+          "hassleCost": 5,
+          "mainSegmentHashCode": -2107725088,
+          "moneyCost": 11.87,
+          "moneyUSDCost": 9.3,
+          "plannedURL": "https://darkages.buzzhives.com/satapp/trip/planned/f4d9c97e-cde2-4c58-b0fd-b3d3252785b8",
+          "queryIsLeaveAfter": true,
+          "queryTime": 1475653866,
+          "saveURL": "https://darkages.buzzhives.com/satapp/trip/save/f4d9c97e-cde2-4c58-b0fd-b3d3252785b8",
+          "segments": [
+            {
+              "endTime": 1475655840,
+              "segmentTemplateHashCode": -2107725088,
+              "serviceColor": {
+                "blue": 49,
+                "green": 176,
+                "red": 90
+              },
+              "serviceDirection": "Circular Quay",
+              "serviceName": "Manly Fast Ferry",
+              "serviceNumber": "",
+              "serviceTripID": "212.TA.55-MFF-sj2-1.1.R",
+              "startTime": 1475654700,
+              "stops": 1,
+              "ticketWebsiteURL": "http://transportnsw.info",
+              "wheelchairAccessible": true
+            },
+            {
+              "endTime": 1475656003,
+              "segmentTemplateHashCode": 1944867834,
+              "startTime": 1475655840
+            },
+            {
+              "endTime": 1475656380,
+              "segmentTemplateHashCode": -1268522232,
+              "startTime": 1475656003
+            },
+            {
+              "alertHashCodes": [
+                -827566736
+              ],
+              "endTime": 1475659800,
+              "platform": "Platform 1",
+              "segmentTemplateHashCode": -2079934556,
+              "serviceColor": {
+                "blue": 45,
+                "green": 156,
+                "red": 77
+              },
+              "serviceDirection": "Campbelltown",
+              "serviceName": "T2 Airport, Inner West & South Line",
+              "serviceNumber": "T2",
+              "serviceTripID": "76-T.1318.115.124.A.8.43456330",
+              "startTime": 1475656380,
+              "stops": 16,
+              "ticketWebsiteURL": "https://www.opal.com.au/en/fares-and-benefits/",
+              "wheelchairAccessible": true
+            }
+          ],
+          "temporaryURL": "https://darkages.buzzhives.com/satapp/trip/f4d9c97e-cde2-4c58-b0fd-b3d3252785b8",
+          "updateURL": "https://darkages.buzzhives.com/satapp/trip/update/f4d9c97e-cde2-4c58-b0fd-b3d3252785b8?hash=-1244623818",
+          "weightedScore": 29.3
+        },
+        {
+          "arrive": 1475661600,
+          "caloriesCost": 14,
+          "carbonCost": 0.2,
+          "currencySymbol": "$",
+          "depart": 1475656494,
+          "hassleCost": 5,
+          "mainSegmentHashCode": -2107725088,
+          "moneyCost": 11.87,
+          "moneyUSDCost": 9.3,
+          "plannedURL": "https://darkages.buzzhives.com/satapp/trip/planned/b94681ba-1729-4de4-8630-d2adafa7f42f",
+          "queryIsLeaveAfter": true,
+          "queryTime": 1475653866,
+          "saveURL": "https://darkages.buzzhives.com/satapp/trip/save/b94681ba-1729-4de4-8630-d2adafa7f42f",
+          "segments": [
+            {
+              "endTime": 1475657640,
+              "segmentTemplateHashCode": -2107725088,
+              "serviceColor": {
+                "blue": 49,
+                "green": 176,
+                "red": 90
+              },
+              "serviceDirection": "Circular Quay",
+              "serviceName": "Manly Fast Ferry",
+              "serviceNumber": "",
+              "serviceTripID": "218.TA.55-MFF-sj2-1.1.R",
+              "startTime": 1475656500,
+              "stops": 1,
+              "ticketWebsiteURL": "http://transportnsw.info",
+              "wheelchairAccessible": true
+            },
+            {
+              "endTime": 1475657803,
+              "segmentTemplateHashCode": 1944867834,
+              "startTime": 1475657640
+            },
+            {
+              "endTime": 1475658180,
+              "segmentTemplateHashCode": -1268522232,
+              "startTime": 1475657803
+            },
+            {
+              "alertHashCodes": [
+                -827566736
+              ],
+              "endTime": 1475661600,
+              "platform": "Platform 1",
+              "segmentTemplateHashCode": -2079934556,
+              "serviceColor": {
+                "blue": 45,
+                "green": 156,
+                "red": 77
+              },
+              "serviceDirection": "Campbelltown",
+              "serviceName": "T2 Airport, Inner West & South Line",
+              "serviceNumber": "T2",
+              "serviceTripID": "80-S.830.126.120.A.8.43235182",
+              "startTime": 1475658180,
+              "stops": 16,
+              "ticketWebsiteURL": "https://www.opal.com.au/en/fares-and-benefits/",
+              "wheelchairAccessible": true
+            }
+          ],
+          "temporaryURL": "https://darkages.buzzhives.com/satapp/trip/b94681ba-1729-4de4-8630-d2adafa7f42f",
+          "updateURL": "https://darkages.buzzhives.com/satapp/trip/update/b94681ba-1729-4de4-8630-d2adafa7f42f?hash=1731497134",
+          "weightedScore": 34.3
+        },
+        {
+          "arrive": 1475665200,
+          "caloriesCost": 14,
+          "carbonCost": 0.2,
+          "currencySymbol": "$",
+          "depart": 1475659794,
+          "hassleCost": 5,
+          "mainSegmentHashCode": -2107725088,
+          "moneyCost": 11.87,
+          "moneyUSDCost": 9.3,
+          "plannedURL": "https://darkages.buzzhives.com/satapp/trip/planned/3ea14296-ff61-4e59-90a2-8d838a4e7ee3",
+          "queryIsLeaveAfter": true,
+          "queryTime": 1475653866,
+          "saveURL": "https://darkages.buzzhives.com/satapp/trip/save/3ea14296-ff61-4e59-90a2-8d838a4e7ee3",
+          "segments": [
+            {
+              "endTime": 1475661000,
+              "segmentTemplateHashCode": -2107725088,
+              "serviceColor": {
+                "blue": 49,
+                "green": 176,
+                "red": 90
+              },
+              "serviceDirection": "Circular Quay",
+              "serviceName": "Manly Fast Ferry",
+              "serviceNumber": "",
+              "serviceTripID": "229.TA.55-MFF-sj2-1.1.R",
+              "startTime": 1475659800,
+              "stops": 1,
+              "ticketWebsiteURL": "http://transportnsw.info",
+              "wheelchairAccessible": true
+            },
+            {
+              "endTime": 1475661163,
+              "segmentTemplateHashCode": 1944867834,
+              "startTime": 1475661000
+            },
+            {
+              "endTime": 1475661780,
+              "segmentTemplateHashCode": -1268522232,
+              "startTime": 1475661163
+            },
+            {
+              "alertHashCodes": [
+                -827566736
+              ],
+              "endTime": 1475665200,
+              "platform": "Platform 1",
+              "segmentTemplateHashCode": -2077874172,
+              "serviceColor": {
+                "blue": 45,
+                "green": 156,
+                "red": 77
+              },
+              "serviceDirection": "Campbelltown",
+              "serviceName": "T2 Airport, Inner West & South Line",
+              "serviceNumber": "T2",
+              "serviceTripID": "55-S.830.126.48.A.8.43945081",
+              "startTime": 1475661780,
+              "stops": 16,
+              "ticketWebsiteURL": "https://www.opal.com.au/en/fares-and-benefits/",
+              "wheelchairAccessible": true
+            }
+          ],
+          "temporaryURL": "https://darkages.buzzhives.com/satapp/trip/3ea14296-ff61-4e59-90a2-8d838a4e7ee3",
+          "updateURL": "https://darkages.buzzhives.com/satapp/trip/update/3ea14296-ff61-4e59-90a2-8d838a4e7ee3?hash=1178412113",
+          "weightedScore": 44
+        }
+      ]
+    }
+  ],
+  "realTimeStamp": 0,
+  "region": "AU_NSW_Sydney",
+  "regions": [
+    "AU_NSW_Sydney",
+    "AU"
+  ],
+  "segmentTemplates": [
+    {
+      "action": "<TIME>: Take <NUMBER>",
+      "endStopCode": "20004",
+      "from": {
+        "address": "Manly Wharf",
+        "class": "Location",
+        "lat": -33.80048,
+        "lng": 151.28388,
+        "timezone": "Australia/Sydney"
+      },
+      "hashCode": 1953606361,
+      "mini": {
+        "description": "<DIRECTION>",
+        "instruction": "Take <NUMBER> ⋅ <PLATFORM>"
+      },
+      "modeIdentifier": "pt_pub",
+      "modeInfo": {
+        "alt": "Ferry",
+        "identifier": "pt_pub_ferry",
+        "localIcon": "ferry"
+      },
+      "notes": "<LINE_NAME>\n<DIRECTION>\n<PLATFORM>\n<DURATION> ⋅ <STOPS> ⋅ Opal (ferry) ($7.18)",
+      "serviceOperator": "Sydney Ferries",
+      "shapes": [
+        {
+          "encodedWaypoints": "`thmEesjz[dwJfcM",
+          "travelled": true
+        }
+      ],
+      "stopCode": "20951",
+      "to": {
+        "address": "Circular Quay Wharf 3",
+        "class": "Location",
+        "lat": -33.86067,
+        "lng": 151.21152,
+        "timezone": "Australia/Sydney"
+      },
+      "travelDirection": 230,
+      "type": "scheduled",
+      "visibility": "in summary"
+    },
+    {
+      "action": "<TIME>: Walk",
+      "from": {
+        "address": "Circular Quay Wharf 3",
+        "class": "Location",
+        "lat": -33.86067,
+        "lng": 151.21152,
+        "timezone": "Australia/Sydney"
+      },
+      "hashCode": -1834845215,
+      "metres": 193,
+      "mini": {
+        "description": "Circular Quay Station Platform 1",
+        "instruction": "Walk",
+        "mainValue": "200m"
+      },
+      "modeIdentifier": "wa_wal",
+      "modeInfo": {
+        "alt": "Walk",
+        "identifier": "wa_wal",
+        "localIcon": "walk"
+      },
+      "notes": "<DURATION> ⋅ 200m",
+      "streets": [
+        {
+          "encodedWaypoints": "fltmE}n|y[fBHLBKfBj@JKrB"
+        }
+      ],
+      "to": {
+        "address": "Circular Quay Station Platform 1",
+        "class": "Location",
+        "lat": -33.86137,
+        "lng": 151.21028,
+        "timezone": "Australia/Sydney"
+      },
+      "travelDirection": 240,
+      "type": "unscheduled",
+      "visibility": "in summary"
+    },
+    {
+      "action": "<TIME>: Wait ",
+      "hashCode": -1268522232,
+      "location": {
+        "address": "Circular Quay Station Platform 1",
+        "class": "Location",
+        "lat": -33.86137,
+        "lng": 151.21028,
+        "timezone": "Australia/Sydney"
+      },
+      "mini": {
+        "instruction": "Wait",
+        "mainValue": "<DURATION>"
+      },
+      "modeInfo": {
+        "alt": "Transfer",
+        "localIcon": "transfer"
+      },
+      "notes": "<DURATION>",
+      "type": "stationary",
+      "visibility": "in details"
+    },
+    {
+      "action": "<TIME>: Take <NUMBER>",
+      "endStopCode": "2166272",
+      "from": {
+        "address": "Circular Quay Station Platform 1",
+        "class": "Location",
+        "lat": -33.86137,
+        "lng": 151.21028,
+        "timezone": "Australia/Sydney"
+      },
+      "hashCode": -1058866202,
+      "mini": {
+        "description": "<DIRECTION>",
+        "instruction": "Take <NUMBER> ⋅ <PLATFORM>"
+      },
+      "modeIdentifier": "pt_pub",
+      "modeInfo": {
+        "alt": "Train",
+        "identifier": "pt_pub_train",
+        "localIcon": "train"
+      },
+      "notes": "<LINE_NAME>\n<DIRECTION>\n<PLATFORM>\n<DURATION> ⋅ <STOPS> ⋅ Opal (train) ($1.37)",
+      "serviceOperator": "Sydney Trains",
+      "shapes": [
+        {
+          "encodedWaypoints": "x_ymEos{y[yq@wO??ia@_K??cy@~G",
+          "travelled": false
+        },
+        {
+          "encodedWaypoints": "pptmEgg|y[d[hZ??po@wE??|`AD??dDbEvH~GnMnPj@~BfDlCpKhI??oAa@zD`HrBlEbW~aAnB`Kn@hFDnTI~JW`DcC~JeEtHiB|FcEhPi@bFGrH`@xFr@hFJhIWxGwCvQ]vD?`B~A~RFpH[dG]dDqAlGiFrS[fB}Jb`@k@pDOxCgA`]cB`MkGv\\??qApDkHd\\yN~\\eVh^gD`HiAbDkCfMy@fGiBvSy@`E_D~GgA`BeLvKkInM??kGpHuO`[gErKcIj`@o@vFInCN|HdAxK^|FE`Hq@fH??sEl\\a@zPJvJTfKpB`NBxAo@tx@a@fEcAdF??e@p@_ClFke@`^g]nUqOhL??ia@`d@mOdHor@frA??oIdKqJn[x@jTx]dm@zJxK??rO|Kda@kDf{@jj@??xc@p`@b[tq@??~n@nvA??cFsJhFbK|FrH|sAxhA??}EeEtObOnChBnChDdPzF`IvA",
+          "travelled": true
+        },
+        {
+          "encodedWaypoints": "z`{mEiggx[WD~l@lHzC`A`n@xG|P|A??x]zEjEvAlElCfD|CtPnUzHvF??z[bYf}BdeA??cDuAnb@nEjeA`jAlc@jd@??dnAlxA",
+          "travelled": false
+        }
+      ],
+      "stopCode": "2000351",
+      "to": {
+        "address": "Cabramatta Station Platform 2",
+        "class": "Location",
+        "lat": -33.8947,
+        "lng": 150.93894,
+        "timezone": "Australia/Sydney"
+      },
+      "travelDirection": 262,
+      "type": "scheduled",
+      "visibility": "in summary"
+    },
+    {
+      "action": "<TIME>: Take <NUMBER>",
+      "endStopCode": "20004",
+      "from": {
+        "address": "Manly Wharf",
+        "class": "Location",
+        "lat": -33.80048,
+        "lng": 151.28388,
+        "timezone": "Australia/Sydney"
+      },
+      "hashCode": 13791338,
+      "mini": {
+        "description": "<DIRECTION>",
+        "instruction": "Take <NUMBER> ⋅ <PLATFORM>"
+      },
+      "modeIdentifier": "pt_pub",
+      "modeInfo": {
+        "alt": "Ferry",
+        "identifier": "pt_pub_ferry",
+        "localIcon": "ferry"
+      },
+      "notes": "<LINE_NAME>\n<DIRECTION>\n<PLATFORM>\n<DURATION> ⋅ <STOPS> ⋅ Opal (ferry) ($7.18)",
+      "serviceOperator": "Sydney Ferries",
+      "shapes": [
+        {
+          "encodedWaypoints": "`thmEesjz[dwJfcM",
+          "travelled": true
+        },
+        {
+          "encodedWaypoints": "fltmE}n|y[ewJgcM",
+          "travelled": false
+        }
+      ],
+      "stopCode": "20951",
+      "to": {
+        "address": "Circular Quay Wharf 3",
+        "class": "Location",
+        "lat": -33.86067,
+        "lng": 151.21152,
+        "timezone": "Australia/Sydney"
+      },
+      "travelDirection": 230,
+      "type": "scheduled",
+      "visibility": "in summary"
+    },
+    {
+      "action": "<TIME>: Take <NUMBER>",
+      "endStopCode": "2166272",
+      "from": {
+        "address": "Circular Quay Station Platform 1",
+        "class": "Location",
+        "lat": -33.86137,
+        "lng": 151.21028,
+        "timezone": "Australia/Sydney"
+      },
+      "hashCode": -1066313952,
+      "mini": {
+        "description": "<DIRECTION>",
+        "instruction": "Take <NUMBER> ⋅ <PLATFORM>"
+      },
+      "modeIdentifier": "pt_pub",
+      "modeInfo": {
+        "alt": "Train",
+        "identifier": "pt_pub_train",
+        "localIcon": "train"
+      },
+      "notes": "<LINE_NAME>\n<DIRECTION>\n<PLATFORM>\n<DURATION> ⋅ <STOPS> ⋅ Opal (train) ($1.37)",
+      "serviceOperator": "Sydney Trains",
+      "shapes": [
+        {
+          "encodedWaypoints": "x_ymEos{y[yq@wO??ia@_K??cy@~G",
+          "travelled": false
+        },
+        {
+          "encodedWaypoints": "pptmEgg|y[d[hZ??po@wE??|`AD??dDbEvH~GnMnPj@~BfDlCpKhI??yA@xDbHrBlEbW|aAnBbKp@fFDpTG~JW`DgC`KaEpHiB|FgEhPg@fFErH\\xFr@dFNhIW|G{CrQYxD?`B~A|RBtHWbGa@dDmAjGkFtSYfB}J``@m@pDOxCeAb]gBbM_Gn[??uBhCkHb\\yN|\\eVh^gDdHiA~CkChMy@dGiBxSy@~D_D`HiA~AcLzKgHvN??_HrGuO`[eEtKcIh`@q@vFGnCNzHbA|K^zFCbH_@bI??sEl\\a@zPJvJTfKpB`NBxAo@tx@a@fEcAdF??e@p@_ClFke@`^g]nUqOhL??ia@`d@mOdHor@frA??oIdKqJn[x@jTx]dm@zJxK??rO|Kda@kDf{@jj@??xc@p`@b[tq@??~n@nvA??cFsJhFbK|FrH|sAxhA??}EeEtObOnChBnChDdPzF`IvA",
+          "travelled": true
+        },
+        {
+          "encodedWaypoints": "z`{mEiggx[WD~l@lHzC`A`n@xG|P|A??x]zEjEvAlElCfD|CtPnUzHvF??SpAhF|A|HlGtGlHjQdJfXnKb[~LhS`IpKxF`JzHrKlFn@@??xTb@nOxFlUnTzPzRnR~TjZl]tJnL??~@l@zOzQtEzKt@lLiHjXsFxSsCfSoH~h@eHrg@aCxR",
+          "travelled": false
+        }
+      ],
+      "stopCode": "2000351",
+      "to": {
+        "address": "Cabramatta Station Platform 2",
+        "class": "Location",
+        "lat": -33.8947,
+        "lng": 150.93894,
+        "timezone": "Australia/Sydney"
+      },
+      "travelDirection": 262,
+      "type": "scheduled",
+      "visibility": "in summary"
+    },
+    {
+      "action": "<TIME>: Take <NUMBER>",
+      "endStopCode": "2166272",
+      "from": {
+        "address": "Circular Quay Station Platform 1",
+        "class": "Location",
+        "lat": -33.86137,
+        "lng": 151.21028,
+        "timezone": "Australia/Sydney"
+      },
+      "hashCode": -1067125997,
+      "mini": {
+        "description": "<DIRECTION>",
+        "instruction": "Take <NUMBER> ⋅ <PLATFORM>"
+      },
+      "modeIdentifier": "pt_pub",
+      "modeInfo": {
+        "alt": "Train",
+        "identifier": "pt_pub_train",
+        "localIcon": "train"
+      },
+      "notes": "<LINE_NAME>\n<DIRECTION>\n<PLATFORM>\n<DURATION> ⋅ <STOPS> ⋅ Opal (train) ($1.37)",
+      "serviceOperator": "Sydney Trains",
+      "shapes": [
+        {
+          "encodedWaypoints": "x_ymEos{y[yq@wO??ia@_K??cy@~G",
+          "travelled": false
+        },
+        {
+          "encodedWaypoints": "pptmEgg|y[d[hZ??po@wE??|`AD??dDbEvH~GnMnPj@~BfDlCpKhI??oAa@zD`HrBlEbW~aAnB`Kn@hFDnTI~JW`DcC~JeEtHiB|FcEhPi@bFGrH`@xFr@hFJhIWxGwCvQ]vD?`B~A~RFpH[dG]dDqAlGiFrS[fB}Jb`@k@pDOxCgA`]cB`MkGv\\??qApDkHd\\yN~\\eVh^gD`HiAbDkCfMy@fGiBvSy@`E_D~GgA`BeLvKkInM??kGpHuO`[gErKcIj`@o@vFInCN|HdAxK^|FE`Hq@fH??sEl\\a@zPJvJTfKpB`NBxAo@tx@a@fEcAdF??e@p@_ClFke@`^g]nUqOhL??ia@`d@mOdHor@frA??oIdKqJn[x@jTx]dm@zJxK??rO|Kda@kDf{@jj@??xc@p`@b[tq@??~n@nvA??cFsJhFbK|FrH|sAxhA??}EeEtObOnChBnChDdPzF`IvA",
+          "travelled": true
+        },
+        {
+          "encodedWaypoints": "z`{mEiggx[WD~l@lHzC`A`n@xG|P|A??x]zEjEvAlElCfD|CtPnUzHvF??z[bYf}BdeA??cDuAnb@nEjeA`jAlc@jd@??dnAlxA",
+          "travelled": false
+        }
+      ],
+      "stopCode": "2000351",
+      "to": {
+        "address": "Cabramatta Station Platform 2",
+        "class": "Location",
+        "lat": -33.8947,
+        "lng": 150.93894,
+        "timezone": "Australia/Sydney"
+      },
+      "travelDirection": 262,
+      "type": "scheduled",
+      "visibility": "in summary"
+    },
+    {
+      "action": "<TIME>: Take ferry",
+      "endStopCode": "2000274",
+      "from": {
+        "address": "Manly Wharf",
+        "class": "Location",
+        "lat": -33.80048,
+        "lng": 151.28388,
+        "timezone": "Australia/Sydney"
+      },
+      "hashCode": -2107725088,
+      "mini": {
+        "description": "<DIRECTION>",
+        "instruction": "Take <NUMBER> ⋅ <PLATFORM>"
+      },
+      "modeIdentifier": "pt_pub",
+      "modeInfo": {
+        "alt": "Ferry",
+        "identifier": "pt_pub_ferry",
+        "localIcon": "ferry"
+      },
+      "notes": "<LINE_NAME>\n<DIRECTION>\n<PLATFORM>\n<DURATION> ⋅ <STOPS> ⋅ Manly Fast Ferry ($8.50)",
+      "serviceOperator": "Manly Fast Ferry",
+      "shapes": [
+        {
+          "encodedWaypoints": "`thmEesjz[??jF`D`Ax@vA|@|@j@tB`AlCbAhb@nLznAlXjVlHlNvFfJbHbtAdlApe@zc@rVnWjOpTT~DLzFEfESlEUbD]vC_@xCaAhGsDjSy@~E}@jHYlCWhEStE]bMIjFOhSCdMF|V?jCDbDNpCZ`C^pAj@xATd@n@|@j@h@z@j@z@ZfATfQ|AdD|@t@ZzAp@",
+          "travelled": true
+        }
+      ],
+      "stopCode": "20951",
+      "to": {
+        "address": "Circular Quay, Wharf 6",
+        "class": "Location",
+        "lat": -33.8605,
+        "lng": 151.21002,
+        "timezone": "Australia/Sydney"
+      },
+      "travelDirection": 230,
+      "type": "scheduled",
+      "visibility": "in summary"
+    },
+    {
+      "action": "<TIME>: Walk",
+      "from": {
+        "address": "Circular Quay, Wharf 6",
+        "class": "Location",
+        "lat": -33.8605,
+        "lng": 151.21002,
+        "timezone": "Australia/Sydney"
+      },
+      "hashCode": 1944867834,
+      "metres": 227,
+      "mini": {
+        "description": "Circular Quay Station Platform 1",
+        "instruction": "Walk",
+        "mainValue": "250m"
+      },
+      "modeIdentifier": "wa_wal",
+      "modeInfo": {
+        "alt": "Walk",
+        "identifier": "wa_wal",
+        "localIcon": "walk"
+      },
+      "notes": "<DURATION> ⋅ 250m",
+      "streets": [
+        {
+          "encodedWaypoints": "dktmEqe|y[lBHFDP_BXB@O@QP{@KrB"
+        }
+      ],
+      "to": {
+        "address": "Circular Quay Station Platform 1",
+        "class": "Location",
+        "lat": -33.86137,
+        "lng": 151.21028,
+        "timezone": "Australia/Sydney"
+      },
+      "travelDirection": 162,
+      "type": "unscheduled",
+      "visibility": "in summary"
+    },
+    {
+      "action": "<TIME>: Take <NUMBER>",
+      "endStopCode": "2166272",
+      "from": {
+        "address": "Circular Quay Station Platform 1",
+        "class": "Location",
+        "lat": -33.86137,
+        "lng": 151.21028,
+        "timezone": "Australia/Sydney"
+      },
+      "hashCode": -2087382306,
+      "mini": {
+        "description": "<DIRECTION>",
+        "instruction": "Take <NUMBER> ⋅ <PLATFORM>"
+      },
+      "modeIdentifier": "pt_pub",
+      "modeInfo": {
+        "alt": "Train",
+        "identifier": "pt_pub_train",
+        "localIcon": "train"
+      },
+      "notes": "<LINE_NAME>\n<DIRECTION>\n<PLATFORM>\n<DURATION> ⋅ <STOPS> ⋅ Opal (train) ($3.37)",
+      "serviceOperator": "Sydney Trains",
+      "shapes": [
+        {
+          "encodedWaypoints": "x_ymEos{y[yq@wO??ia@_K??cy@~G",
+          "travelled": false
+        },
+        {
+          "encodedWaypoints": "pptmEgg|y[d[hZ??po@wE??|`AD??dDbEvH~GnMnPj@~BfDlCpKhI??yA@xDbHrBlEbW|aAnBbKp@fFDpTG~JW`DgC`KaEpHiB|FgEhPg@fFErH\\xFr@dFNhIW|G{CrQYxD?`B~A|RBtHWbGa@dDmAjGkFtSYfB}J``@m@pDOxCeAb]gBbM_Gn[??uBhCkHb\\yN|\\eVh^gDdHiA~CkChMy@dGiBxSy@~D_D`HiA~AcLzKgHvN??_HrGuO`[eEtKcIh`@q@vFGnCNzHbA|K^zFCbH_@bI??sEl\\a@zPJvJTfKpB`NBxAo@tx@a@fEcAdF??e@p@_ClFke@`^g]nUqOhL??ia@`d@mOdHor@frA??oIdKqJn[x@jTx]dm@zJxK??rO|Kda@kDf{@jj@??xc@p`@b[tq@??~n@nvA??cFsJhFbK|FrH|sAxhA??}EeEtObOnChBnChDdPzF`IvA",
+          "travelled": true
+        },
+        {
+          "encodedWaypoints": "z`{mEiggx[WD~l@lHzC`A`n@xG|P|A??x]zEjEvAlElCfD|CtPnUzHvF??SpAhF|A|HlGtGlHjQdJfXnKb[~LhS`IpKxF`JzHrKlFn@@??xTb@nOxFlUnTzPzRnR~TjZl]tJnL??~@l@zOzQtEzKt@lLiHjXsFxSsCfSoH~h@eHrg@aCxR",
+          "travelled": false
+        }
+      ],
+      "stopCode": "2000351",
+      "to": {
+        "address": "Cabramatta Station Platform 2",
+        "class": "Location",
+        "lat": -33.8947,
+        "lng": 150.93894,
+        "timezone": "Australia/Sydney"
+      },
+      "travelDirection": 262,
+      "type": "scheduled",
+      "visibility": "in summary"
+    },
+    {
+      "action": "<TIME>: Take <NUMBER>",
+      "endStopCode": "2166272",
+      "from": {
+        "address": "Circular Quay Station Platform 1",
+        "class": "Location",
+        "lat": -33.86137,
+        "lng": 151.21028,
+        "timezone": "Australia/Sydney"
+      },
+      "hashCode": -2088194351,
+      "mini": {
+        "description": "<DIRECTION>",
+        "instruction": "Take <NUMBER> ⋅ <PLATFORM>"
+      },
+      "modeIdentifier": "pt_pub",
+      "modeInfo": {
+        "alt": "Train",
+        "identifier": "pt_pub_train",
+        "localIcon": "train"
+      },
+      "notes": "<LINE_NAME>\n<DIRECTION>\n<PLATFORM>\n<DURATION> ⋅ <STOPS> ⋅ Opal (train) ($3.37)",
+      "serviceOperator": "Sydney Trains",
+      "shapes": [
+        {
+          "encodedWaypoints": "x_ymEos{y[yq@wO??ia@_K??cy@~G",
+          "travelled": false
+        },
+        {
+          "encodedWaypoints": "pptmEgg|y[d[hZ??po@wE??|`AD??dDbEvH~GnMnPj@~BfDlCpKhI??oAa@zD`HrBlEbW~aAnB`Kn@hFDnTI~JW`DcC~JeEtHiB|FcEhPi@bFGrH`@xFr@hFJhIWxGwCvQ]vD?`B~A~RFpH[dG]dDqAlGiFrS[fB}Jb`@k@pDOxCgA`]cB`MkGv\\??qApDkHd\\yN~\\eVh^gD`HiAbDkCfMy@fGiBvSy@`E_D~GgA`BeLvKkInM??kGpHuO`[gErKcIj`@o@vFInCN|HdAxK^|FE`Hq@fH??sEl\\a@zPJvJTfKpB`NBxAo@tx@a@fEcAdF??e@p@_ClFke@`^g]nUqOhL??ia@`d@mOdHor@frA??oIdKqJn[x@jTx]dm@zJxK??rO|Kda@kDf{@jj@??xc@p`@b[tq@??~n@nvA??cFsJhFbK|FrH|sAxhA??}EeEtObOnChBnChDdPzF`IvA",
+          "travelled": true
+        },
+        {
+          "encodedWaypoints": "z`{mEiggx[WD~l@lHzC`A`n@xG|P|A??x]zEjEvAlElCfD|CtPnUzHvF??z[bYf}BdeA??cDuAnb@nEjeA`jAlc@jd@??dnAlxA",
+          "travelled": false
+        }
+      ],
+      "stopCode": "2000351",
+      "to": {
+        "address": "Cabramatta Station Platform 2",
+        "class": "Location",
+        "lat": -33.8947,
+        "lng": 150.93894,
+        "timezone": "Australia/Sydney"
+      },
+      "travelDirection": 262,
+      "type": "scheduled",
+      "visibility": "in summary"
+    },
+    {
+      "action": "<TIME>: Take <NUMBER>",
+      "endStopCode": "2166272",
+      "from": {
+        "address": "Circular Quay Station Platform 1",
+        "class": "Location",
+        "lat": -33.86137,
+        "lng": 151.21028,
+        "timezone": "Australia/Sydney"
+      },
+      "hashCode": -2079934556,
+      "mini": {
+        "description": "<DIRECTION>",
+        "instruction": "Take <NUMBER> ⋅ <PLATFORM>"
+      },
+      "modeIdentifier": "pt_pub",
+      "modeInfo": {
+        "alt": "Train",
+        "identifier": "pt_pub_train",
+        "localIcon": "train"
+      },
+      "notes": "<LINE_NAME>\n<DIRECTION>\n<PLATFORM>\n<DURATION> ⋅ <STOPS> ⋅ Opal (train) ($3.37)",
+      "serviceOperator": "Sydney Trains",
+      "shapes": [
+        {
+          "encodedWaypoints": "x_ymEos{y[yq@wO??ia@_K??cy@~G",
+          "travelled": false
+        },
+        {
+          "encodedWaypoints": "pptmEgg|y[d[hZ??po@wE??|`AD??dDbEvH~GnMnPj@~BfDlCpKhI??oAa@zD`HrBlEbW~aAnB`Kn@hFDnTI~JW`DcC~JeEtHiB|FcEhPi@bFGrH`@xFr@hFJhIWxGwCvQ]vD?`B~A~RFpH[dG]dDqAlGiFrS[fB}Jb`@k@pDOxCgA`]cB`MkGv\\??qApDkHd\\yN~\\eVh^gD`HiAbDkCfMy@fGiBvSy@`E_D~GgA`BeLvKkInM??kGpHuO`[gErKcIj`@o@vFInCN|HdAxK^|FE`Hq@fH??sEl\\a@zPJvJTfKpB`NBxAo@tx@a@fEcAdF??e@p@_ClFke@`^g]nUqOhL??ia@`d@mOdHor@frA??oIdKqJn[x@jTx]dm@zJxK??rO|Kda@kDf{@jj@??xc@p`@b[tq@??~n@nvA??cFsJhFbK|FrH|sAxhA??}EeEtObOnChBnChDdPzF`IvA",
+          "travelled": true
+        },
+        {
+          "encodedWaypoints": "z`{mEiggx[WD~l@lHzC`A`n@xG|P|A??x]zEjEvAlElCfD|CtPnUzHvF??z[bYf}BdeA??cDuAnb@nEjeA`jAlc@jd@??dnAlxA",
+          "travelled": false
+        }
+      ],
+      "stopCode": "2000351",
+      "to": {
+        "address": "Cabramatta Station Platform 2",
+        "class": "Location",
+        "lat": -33.8947,
+        "lng": 150.93894,
+        "timezone": "Australia/Sydney"
+      },
+      "travelDirection": 262,
+      "type": "scheduled",
+      "visibility": "in summary"
+    },
+    {
+      "action": "<TIME>: Take <NUMBER>",
+      "endStopCode": "2166272",
+      "from": {
+        "address": "Circular Quay Station Platform 1",
+        "class": "Location",
+        "lat": -33.86137,
+        "lng": 151.21028,
+        "timezone": "Australia/Sydney"
+      },
+      "hashCode": -2077874172,
+      "mini": {
+        "description": "<DIRECTION>",
+        "instruction": "Take <NUMBER> ⋅ <PLATFORM>"
+      },
+      "modeIdentifier": "pt_pub",
+      "modeInfo": {
+        "alt": "Train",
+        "identifier": "pt_pub_train",
+        "localIcon": "train"
+      },
+      "notes": "<LINE_NAME>\n<DIRECTION>\n<PLATFORM>\n<DURATION> ⋅ <STOPS> ⋅ Opal (train) ($3.37)",
+      "serviceOperator": "Sydney Trains",
+      "shapes": [
+        {
+          "encodedWaypoints": "x_ymEos{y[yq@wO??ia@_K??cy@~G",
+          "travelled": false
+        },
+        {
+          "encodedWaypoints": "pptmEgg|y[d[hZ??po@wE??|`AD??dDbEvH~GnMnPj@~BfDlCpKhI??oAa@zD`HrBlEbW~aAnB`Kn@hFDnTI~JW`DcC~JeEtHiB|FcEhPi@bFGrH`@xFr@hFJhIWxGwCvQ]vD?`B~A~RFpH[dG]dDqAlGiFrS[fB}Jb`@k@pDOxCgA`]cB`MkGv\\??qApDkHd\\yN~\\eVh^gD`HiAbDkCfMy@fGiBvSy@`E_D~GgA`BeLvKkInM??kGpHuO`[gErKcIj`@o@vFInCN|HdAxK^|FE`Hq@fH??sEl\\a@zPJvJTfKpB`NBxAo@tx@a@fEcAdF??e@p@_ClFke@`^g]nUqOhL??ia@`d@mOdHor@frA??oIdKqJn[x@jTx]dm@zJxK??rO|Kda@kDf{@jj@??xc@p`@b[tq@??~n@nvA??cFsJhFbK|FrH|sAxhA??}EeEtObOnChBnChDdPzF`IvA",
+          "travelled": true
+        },
+        {
+          "encodedWaypoints": "z`{mEiggx[WD~l@lHzC`A`n@xG|P|A??x]zEjEvAlElCfD|CtPnUzHvF??z[bYf}BdeA??cDuAnb@nEjeA`jAlc@jd@??dnAlxA",
+          "travelled": false
+        }
+      ],
+      "stopCode": "2000351",
+      "to": {
+        "address": "Cabramatta Station Platform 2",
+        "class": "Location",
+        "lat": -33.8947,
+        "lng": 150.93894,
+        "timezone": "Australia/Sydney"
+      },
+      "travelDirection": 262,
+      "type": "scheduled",
+      "visibility": "in summary"
+    }
+  ]
+}

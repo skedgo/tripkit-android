@@ -9,11 +9,6 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.robolectric.annotation.Config;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
-
 import static org.assertj.core.api.Assertions.assertThat;
 
 @RunWith(TestRunner.class)
@@ -61,95 +56,5 @@ public class TripTest {
     trip.setCurrencySymbol("VND");
     trip.setMoneyCost(50);
     assertThat(trip.getDisplayCost("Free")).isEqualTo("VND50");
-  }
-
-  @Test public void compareWeightedScores() {
-    Trip lhs = new Trip();
-    lhs.setWeightedScore(4.f);
-
-    Trip rhs = new Trip();
-    lhs.setWeightedScore(5.f);
-
-    assertThat(Trip.Comparators.WEIGHTED_SCORE_COMPARATOR.compare(lhs, rhs)).isGreaterThan(0);
-    assertThat(Trip.Comparators.WEIGHTED_SCORE_COMPARATOR.compare(lhs, lhs)).isZero();
-    assertThat(Trip.Comparators.WEIGHTED_SCORE_COMPARATOR.compare(rhs, lhs)).isLessThan(0);
-  }
-
-  @Test public void timeComparatorChain() {
-    Trip trip0 = new Trip();
-    trip0.setStartTimeInSecs(2);
-    trip0.setEndTimeInSecs(3);
-
-    Trip trip1 = new Trip();
-    trip1.setStartTimeInSecs(3);
-    trip1.setEndTimeInSecs(5);
-
-    Trip trip2 = new Trip();
-    trip2.setStartTimeInSecs(3);
-    trip2.setEndTimeInSecs(4);
-
-    List<Trip> trips = new ArrayList<>(Arrays.asList(trip1, trip2, trip0));
-    Collections.sort(trips, Trip.Comparators.TIME_COMPARATOR_CHAIN);
-
-    assertThat(trips).containsExactly(trip0, trip2, trip1);
-  }
-
-  @Test public void durationComparator() {
-    Trip trip0 = new Trip();
-    trip0.setStartTimeInSecs(2);
-    trip0.setEndTimeInSecs(3);
-
-    Trip trip1 = new Trip();
-    trip1.setStartTimeInSecs(3);
-    trip1.setEndTimeInSecs(5);
-
-    assertThat(Trip.Comparators.DURATION_COMPARATOR.compare(trip0, trip1))
-        .isLessThan(0);
-  }
-
-  @Test public void moneyCostComparator() {
-    {
-      Trip trip0 = new Trip();
-      trip0.setMoneyCost(5f);
-
-      Trip trip1 = new Trip();
-      trip1.setMoneyCost(6f);
-
-      assertThat(Trip.Comparators.MONEY_COST_COMPARATOR.compare(trip0, trip1))
-          .isLessThan(0);
-    }
-    {
-      Trip trip0 = new Trip();
-      trip0.setMoneyCost(5f);
-
-      Trip trip1 = new Trip();
-      trip1.setMoneyCost(5f);
-
-      assertThat(Trip.Comparators.MONEY_COST_COMPARATOR.compare(trip0, trip1))
-          .isZero();
-    }
-  }
-
-  @Test public void carbonCostComparator() {
-    {
-      Trip trip0 = new Trip();
-      trip0.setCarbonCost(5f);
-
-      Trip trip1 = new Trip();
-      trip1.setCarbonCost(6f);
-
-      assertThat(Trip.Comparators.CARBON_COST_COMPARATOR.compare(trip0, trip1))
-          .isLessThan(0);
-    }
-    {
-      Trip trip0 = new Trip();
-      trip0.setCarbonCost(5f);
-
-      Trip trip1 = new Trip();
-      trip1.setCarbonCost(5f);
-
-      assertThat(Trip.Comparators.CARBON_COST_COMPARATOR.compare(trip0, trip1))
-          .isZero();
-    }
   }
 }
