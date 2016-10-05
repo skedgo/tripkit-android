@@ -149,7 +149,7 @@ public class RoutingResponse {
         processTripSegmentRealTimeVehicle(segments);
       }
 
-      Collections.sort(trips, Trip.Comparators.TIME_COMPARATOR_CHAIN);
+      Collections.sort(trips, TripComparators.TIME_COMPARATOR_CHAIN);
     }
 
     if (mTripSegmentListResolver == null) {

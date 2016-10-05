@@ -3,6 +3,7 @@ package com.skedgo.android.tripkit.routing;
 import android.support.annotation.NonNull;
 
 import com.skedgo.android.common.model.Trip;
+import com.skedgo.android.common.model.TripComparators;
 import com.skedgo.android.common.model.TripGroup;
 
 import java.util.Collections;
@@ -24,7 +25,7 @@ public final class SelectBestDisplayTrip implements Func1<TripGroup, TripGroup> 
   @NonNull @Override public TripGroup call(@NonNull TripGroup group) {
     final List<Trip> trips = group.getTrips();
     if (isNotEmpty(trips)) {
-      Collections.sort(trips, Trip.Comparators.WEIGHTED_SCORE_COMPARATOR);
+      Collections.sort(trips, TripComparators.WEIGHTED_SCORE_COMPARATOR);
       final Trip bestDisplayTrip = trips.get(0);
       return group.changeDisplayTrip(bestDisplayTrip);
     }

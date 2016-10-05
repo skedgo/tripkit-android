@@ -185,7 +185,7 @@ public class TripGroup implements Parcelable {
     // To avoid id conflict with the existing trips in trip list.
     final Trip maxIdTrip = Collections.max(trips, new Comparator<Trip>() {
       @Override public int compare(Trip lhs, Trip rhs) {
-        return Trip.Comparators.compareLongs(lhs.getId(), rhs.getId());
+        return TripComparators.compareLongs(lhs.getId(), rhs.getId());
       }
     });
     trip.setId(maxIdTrip.getId() + 1);
@@ -270,37 +270,37 @@ public class TripGroup implements Parcelable {
     @Deprecated
     public static final Comparator<TripGroup> CARBON_COST_COMPARATOR =
         ComparatorUtils.nullLowComparator(ComparatorUtils.transformedComparator(
-            Trip.Comparators.CARBON_COST_COMPARATOR,
+            TripComparators.CARBON_COST_COMPARATOR,
             DISPLAY_TRIP_TRANSFORMER
         ));
 
     public static final Comparator<TripGroup> MONEY_COST_COMPARATOR =
         ComparatorUtils.nullLowComparator(ComparatorUtils.transformedComparator(
-            Trip.Comparators.MONEY_COST_COMPARATOR,
+            TripComparators.MONEY_COST_COMPARATOR,
             DISPLAY_TRIP_TRANSFORMER
         ));
 
     public static final Comparator<TripGroup> WEIGHTED_SCORE_COMPARATOR =
         ComparatorUtils.nullLowComparator(ComparatorUtils.transformedComparator(
-            Trip.Comparators.WEIGHTED_SCORE_COMPARATOR,
+            TripComparators.WEIGHTED_SCORE_COMPARATOR,
             DISPLAY_TRIP_TRANSFORMER
         ));
 
     public static final Comparator<TripGroup> DURATION_COMPARATOR =
         ComparatorUtils.nullLowComparator(ComparatorUtils.transformedComparator(
-            Trip.Comparators.DURATION_COMPARATOR,
+            TripComparators.DURATION_COMPARATOR,
             DISPLAY_TRIP_TRANSFORMER
         ));
 
     public static final Comparator<TripGroup> END_TIME_COMPARATOR =
         ComparatorUtils.nullLowComparator(ComparatorUtils.transformedComparator(
-            Trip.Comparators.END_TIME_COMPARATOR,
+            TripComparators.END_TIME_COMPARATOR,
             DISPLAY_TRIP_TRANSFORMER
         ));
 
     public static final Comparator<TripGroup> START_TIME_COMPARATOR =
         ComparatorUtils.nullLowComparator(ComparatorUtils.transformedComparator(
-            Trip.Comparators.START_TIME_COMPARATOR,
+            TripComparators.START_TIME_COMPARATOR,
             DISPLAY_TRIP_TRANSFORMER
         ));
 
