@@ -1,7 +1,5 @@
 package com.skedgo.android.common.model;
 
-import android.support.annotation.NonNull;
-
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import com.skedgo.android.common.BuildConfig;
@@ -17,7 +15,7 @@ import java.util.Random;
 import static org.assertj.core.api.Assertions.assertThat;
 
 @RunWith(TestRunner.class)
-@Config(constants = BuildConfig.class, sdk = 21)
+@Config(constants = BuildConfig.class)
 public class TripSegmentTest {
   @Test
   public void shouldDefineCorrectSerializedNames() {
@@ -179,7 +177,36 @@ public class TripSegmentTest {
     assertThat(TripSegment.convertStopCountToText(0)).isEmpty();
   }
 
-  @NonNull
+  @Test
+  public void shouldWheelchairAccessibleBeTrue() {
+    JsonObject tripSegmentJson = new JsonObject();
+    tripSegmentJson.addProperty("wheelchairAccessible", true);
+    assertThat(new Gson().fromJson(tripSegmentJson, TripSegment.class).getWheelchairAccessible()).isTrue();
+  }
+
+  @Test
+  public void shouldWheelchairAccessibleBeFalse() {
+    JsonObject tripSegmentJson = new JsonObject();
+    tripSegmentJson.addProperty("wheelchairAccessible", false);
+    assertThat(new Gson().fromJson(tripSegmentJson, TripSegment.class).getWheelchairAccessible()).isFalse();
+  }
+
+  @Test
+  public void shouldParcelTrueWheelchairAccessible() {
+    TripSegment tripSegment = new TripSegment();
+    tripSegment.setWheelchairAccessible(true);
+    TripSegment actual = TripSegment.CREATOR.createFromParcel(Utils.parcel(tripSegment));
+    assertThat(actual.getWheelchairAccessible()).isTrue();
+  }
+
+  @Test
+  public void shouldParcelFalseWheelchairAccessible() {
+    TripSegment tripSegment = new TripSegment();
+    tripSegment.setWheelchairAccessible(false);
+    TripSegment actual = TripSegment.CREATOR.createFromParcel(Utils.parcel(tripSegment));
+    assertThat(actual.getWheelchairAccessible()).isFalse();
+  }
+
   private ArrayList<TripSegment> createSamplePlaneSegments() {
     final ArrayList<TripSegment> planeSegments = new ArrayList<>();
     final Random random = new Random();
@@ -191,37 +218,6 @@ public class TripSegmentTest {
       segment.setTransportModeId("in_air_" + provider);
       planeSegments.add(segment);
     }
-
     return planeSegments;
-  }
-
-  @Test
-  public void shouldWheelchairAccessibleBeTrue() throws Exception {
-    JsonObject tripSegmentJson = new JsonObject();
-    tripSegmentJson.addProperty("wheelchairAccessible", true);
-    assertThat(new Gson().fromJson(tripSegmentJson, TripSegment.class).getWheelchairAccessible()).isTrue();
-  }
-
-  @Test
-  public void shouldWheelchairAccessibleBeFalse() throws Exception {
-    JsonObject tripSegmentJson = new JsonObject();
-    tripSegmentJson.addProperty("wheelchairAccessible", false);
-    assertThat(new Gson().fromJson(tripSegmentJson, TripSegment.class).getWheelchairAccessible()).isFalse();
-  }
-
-  @Test
-  public void shouldParcelTrueWheelchairAccessible() throws Exception {
-    TripSegment tripSegment = new TripSegment();
-    tripSegment.setWheelchairAccessible(true);
-    TripSegment actual = TripSegment.CREATOR.createFromParcel(Utils.parcel(tripSegment));
-    assertThat(actual.getWheelchairAccessible()).isTrue();
-  }
-
-  @Test
-  public void shouldParcelFalseWheelchairAccessible() throws Exception {
-    TripSegment tripSegment = new TripSegment();
-    tripSegment.setWheelchairAccessible(false);
-    TripSegment actual = TripSegment.CREATOR.createFromParcel(Utils.parcel(tripSegment));
-    assertThat(actual.getWheelchairAccessible()).isFalse();
   }
 }
