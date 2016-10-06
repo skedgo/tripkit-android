@@ -151,12 +151,8 @@ public class TripSegment implements Parcelable, IRealTimeElement, ITimeRange {
   private ArrayList<Shape> mShapes;
   @SerializedName("realtimeVehicle")
   private RealTimeVehicle mRealTimeVehicle;
-
-  /**
-   * wheelchairAccessible can be null if the server does not return this value.
-   */
-  @SerializedName("wheelchairAccessible")
   private boolean wheelchairAccessible;
+
   /**
    * This is no longer a part of json returned from server due to Version 6.
    * It's currently being used for json-based persistence on app local.
