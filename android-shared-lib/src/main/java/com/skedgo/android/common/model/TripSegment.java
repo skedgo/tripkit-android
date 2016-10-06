@@ -86,6 +86,7 @@ public class TripSegment implements Parcelable, IRealTimeElement, ITimeRange {
       segment.booking = in.readParcelable(Booking.class.getClassLoader());
       segment.platform = in.readString();
       segment.stopCount = in.readInt();
+      segment.wheelchairAccessible = in.readByte() == 1;
       return segment;
     }
 
@@ -150,6 +151,8 @@ public class TripSegment implements Parcelable, IRealTimeElement, ITimeRange {
   private ArrayList<Shape> mShapes;
   @SerializedName("realtimeVehicle")
   private RealTimeVehicle mRealTimeVehicle;
+  private boolean wheelchairAccessible;
+
   /**
    * This is no longer a part of json returned from server due to Version 6.
    * It's currently being used for json-based persistence on app local.
@@ -468,6 +471,14 @@ public class TripSegment implements Parcelable, IRealTimeElement, ITimeRange {
     return mAlerts;
   }
 
+  public boolean getWheelchairAccessible() {
+    return wheelchairAccessible;
+  }
+
+  void setWheelchairAccessible(boolean wheelchairAccessible) {
+    this.wheelchairAccessible = wheelchairAccessible;
+  }
+
   public void setAlerts(ArrayList<RealtimeAlert> alerts) {
     mAlerts = alerts;
   }
@@ -527,6 +538,7 @@ public class TripSegment implements Parcelable, IRealTimeElement, ITimeRange {
     out.writeParcelable(booking, 0);
     out.writeString(platform);
     out.writeInt(stopCount);
+    out.writeByte((byte) (wheelchairAccessible ? 1 : 0));
   }
 
   public boolean isContinuation() {
