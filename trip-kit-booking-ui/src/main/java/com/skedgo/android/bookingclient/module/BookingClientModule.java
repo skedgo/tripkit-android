@@ -9,7 +9,6 @@ import com.skedgo.android.bookingclient.BuildConfig;
 import com.skedgo.android.bookingclient.OAuth2CallbackHandler;
 import com.skedgo.android.bookingclient.OAuth2CallbackHandlerImpl;
 import com.skedgo.android.bookingclient.R;
-import com.skedgo.android.bookingclient.viewmodel.BookingErrorViewModel;
 import com.skedgo.android.common.util.Gsons;
 import com.skedgo.android.common.util.MainThreadBus;
 import com.skedgo.android.tripkit.TripKit;
@@ -54,10 +53,6 @@ public class BookingClientModule {
         }
       }
     });
-  }
-
-  @Provides BookingErrorViewModel bookingErrorViewModel() {
-    return new BookingErrorViewModel(appContext.getString(R.string.nicely_informed_error));
   }
 
   @Provides @Singleton Picasso picasso(

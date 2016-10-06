@@ -26,6 +26,8 @@ public class BookingAction implements Parcelable {
   private String url;
   @SerializedName("hudText")
   private String hudText;
+  @SerializedName("done")
+  private boolean done = false;
 
   public BookingAction() {
 
@@ -36,6 +38,7 @@ public class BookingAction implements Parcelable {
     enable = Boolean.valueOf(in.readString());
     url = in.readString();
     hudText = in.readString();
+    done = Boolean.valueOf(in.readString());
   }
 
   public String getTitle() {
@@ -67,6 +70,14 @@ public class BookingAction implements Parcelable {
     return hudText;
   }
 
+  public boolean isDone() {
+    return done;
+  }
+
+  public void setDone(boolean done) {
+    this.done = done;
+  }
+
   @Override
   public int describeContents() {
     return 0;
@@ -78,5 +89,6 @@ public class BookingAction implements Parcelable {
     dest.writeString(String.valueOf(enable));
     dest.writeString(url);
     dest.writeString(hudText);
+    dest.writeString(String.valueOf(done));
   }
 }

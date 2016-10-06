@@ -12,10 +12,8 @@ import android.view.ViewStub;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
-import com.google.gson.Gson;
 import com.skedgo.android.bookingclient.R;
 import com.skedgo.android.bookingclient.activity.BookingActivity;
-import com.skedgo.android.bookingclient.viewmodel.BookingErrorViewModel;
 import com.skedgo.android.bookingclient.viewmodel.ExtendedBookingViewModel;
 import com.skedgo.android.common.util.LogUtils;
 import com.skedgo.android.tripkit.booking.BookingError;
@@ -27,7 +25,6 @@ import com.squareup.otto.Subscribe;
 
 import javax.inject.Inject;
 
-import dagger.Lazy;
 import rx.android.view.ViewActions;
 import rx.functions.Action1;
 import skedgo.common.view.ButterKnifeFragment;
@@ -42,8 +39,6 @@ public class BookingFragment extends ButterKnifeFragment implements View.OnClick
   @Inject Bus bus;
   ProgressBar progressView;
   TextView hudTextView;
-  @Inject Lazy<BookingErrorViewModel> bookingErrorViewModel;
-  @Inject Gson gson;
   TextView backButton;
   TextView errorTitleView;
   TextView errorMessageView;
@@ -263,15 +258,16 @@ public class BookingFragment extends ButterKnifeFragment implements View.OnClick
   }
 
   private void showError(Throwable error) {
-
-    if (error.getClass().isInstance(BookingError.class)) {
+    if (error instanceof BookingError) {
+      BookingError bookingError = (BookingError) error;
       checkAndInflate();
-
-      bookingErrorViewModel.get().setBookingError((BookingError) error);
-      errorTitleView.setText(bookingErrorViewModel.get().getErrorTitle());
-      errorMessageView.setText(bookingErrorViewModel.get().getErrorMessage());
+      if (bookingError.getTitle() != null) {
+        errorTitleView.setText(bookingError.getTitle());
+      }
+      if (bookingError.getError() != null) {
+        errorMessageView.setText(bookingError.getError());
+      }
     }
-
   }
 
   private void checkAndInflate() {
