@@ -209,4 +209,19 @@ public class TripSegmentTest {
     assertThat(new Gson().fromJson(tripSegmentJson, TripSegment.class).getWheelchairAccessible()).isFalse();
   }
 
+  @Test
+  public void shouldParcelTrueWheelchairAccessible() throws Exception {
+    TripSegment tripSegment = new TripSegment();
+    tripSegment.setWheelchairAccessible(true);
+    TripSegment actual = TripSegment.CREATOR.createFromParcel(Utils.parcel(tripSegment));
+    assertThat(actual.getWheelchairAccessible()).isTrue();
+  }
+
+  @Test
+  public void shouldParcelFalseWheelchairAccessible() throws Exception {
+    TripSegment tripSegment = new TripSegment();
+    tripSegment.setWheelchairAccessible(false);
+    TripSegment actual = TripSegment.CREATOR.createFromParcel(Utils.parcel(tripSegment));
+    assertThat(actual.getWheelchairAccessible()).isFalse();
+  }
 }

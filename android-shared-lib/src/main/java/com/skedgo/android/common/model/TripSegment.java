@@ -479,6 +479,10 @@ public class TripSegment implements Parcelable, IRealTimeElement, ITimeRange {
     return wheelchairAccessible;
   }
 
+  void setWheelchairAccessible(boolean wheelchairAccessible) {
+    this.wheelchairAccessible = wheelchairAccessible;
+  }
+
   public void setAlerts(ArrayList<RealtimeAlert> alerts) {
     mAlerts = alerts;
   }
