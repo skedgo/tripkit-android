@@ -4,9 +4,4 @@
   <string name="font_regular">@string/robotoRegular</string>
   <string name="font_light">@string/robotoLight</string>
   <string name="font_bold">@string/robotoBold</string>
-  <string name="font_condensed_bold">@string/robotoCondensedBold</string>
-  <string name="font_condensed_regular">@string/robotoCondensedRegular</string>
-
-  <!-- Override typeface of the Wheel library. -->
-  <string name="wheel_date_font">@string/font_light</string>
 </resources>
