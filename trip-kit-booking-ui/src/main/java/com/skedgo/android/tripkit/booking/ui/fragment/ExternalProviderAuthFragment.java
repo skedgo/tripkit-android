@@ -5,20 +5,16 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.View;
-import android.widget.EditText;
 import android.widget.Toast;
 
-
+import com.skedgo.android.common.util.LogUtils;
 import com.skedgo.android.tripkit.booking.ui.R;
 import com.skedgo.android.tripkit.booking.ui.activity.ExternalProviderAuthActivity;
 import com.skedgo.android.tripkit.booking.ui.databinding.ExternalProviderAuthBinding;
 import com.skedgo.android.tripkit.booking.ui.module.BookingClientComponent;
 import com.skedgo.android.tripkit.booking.ui.module.BookingClientModule;
-
-import com.skedgo.android.tripkit.booking.ui.viewmodel.ExternalProviderAuthViewModel;
-import com.skedgo.android.common.util.LogUtils;
-
 import com.skedgo.android.tripkit.booking.ui.module.DaggerBookingClientComponent;
+import com.skedgo.android.tripkit.booking.ui.viewmodel.ExternalProviderAuthViewModel;
 
 import javax.inject.Inject;
 
@@ -54,13 +50,12 @@ public class ExternalProviderAuthFragment extends ButterKnifeFragment {
   @Override public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
     super.onViewCreated(view, savedInstanceState);
 
-    // hack to solve web view keyboard issue
-    EditText edit = (EditText) view.findViewById(R.id.edit);
-    edit.setFocusable(true);
-    edit.requestFocus();
-
     ExternalProviderAuthBinding binding = ExternalProviderAuthBinding.bind(view);
     binding.setViewModel(viewModel);
+
+    // hack to solve web view keyboard issue
+    binding.edit.setFocusable(true);
+    binding.edit.requestFocus();
 
     final BookingClientComponent bookingClientComponent = DaggerBookingClientComponent.builder()
         .bookingClientModule(new BookingClientModule(getActivity()))
