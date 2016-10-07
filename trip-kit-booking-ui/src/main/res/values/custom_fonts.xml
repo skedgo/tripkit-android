@@ -5,5 +5,4 @@
   <string name="font_light">@string/robotoLight</string>
   <string name="font_bold">@string/robotoBold</string>
   <string name="font_condensed_bold">@string/robotoCondensedBold</string>
-  <string name="font_condensed_regular">@string/robotoCondensedRegular</string>
 </resources>
