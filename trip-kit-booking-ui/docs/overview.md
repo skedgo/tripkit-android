@@ -51,4 +51,4 @@ If a trip segment has a booking action, and you are NOT using `Quick Booking`, y
     }
 ```
 ## OAuth
-Oauth2 logic has bee moved to Tripkit-account: https://github.com/skedgo/tripkit-android/blob/master/trip-kit-booking/docs/overview.md#oauth
+Oauth2 logic has been moved to Tripkit-account: https://github.com/skedgo/tripkit-android/blob/master/trip-kit-booking/docs/overview.md#oauth
