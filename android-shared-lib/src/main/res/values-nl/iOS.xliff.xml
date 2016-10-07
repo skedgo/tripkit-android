@@ -131,7 +131,6 @@
    Departure time sorter title-->
 	<string name="departure">Vertrek</string>
 	<!--Dismiss accessibility label-->
-	<string name="dismiss">Sluiten</string>
 	<!--Distances preference-->
 	<string name="distances">Afstanden</string>
 	<!--Title for transport modes that the user doesn't want included-->

@@ -132,7 +132,6 @@
 	<string name="departure">Partida</string>
 	<!--Dismiss accessibility label
    Dismiss button label-->
-	<string name="dismiss">Descartar</string>
 	<!--Distances preference-->
 	<string name="distances">Distâncias</string>
 	<!--Title for transport modes that the user doesn't want included-->
