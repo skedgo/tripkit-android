@@ -131,7 +131,6 @@
 	<string name="departure">離站時間</string>
 	<!--Dismiss accessibility label
    Dismiss button label-->
-	<string name="dismiss">關閉</string>
 	<!--Distances preference-->
 	<string name="distances">距離</string>
 	<!--Title for transport modes that the user doesn't want included-->

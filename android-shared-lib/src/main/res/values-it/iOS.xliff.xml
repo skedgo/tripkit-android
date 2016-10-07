@@ -131,7 +131,6 @@
 	<string name="departure">Partenza</string>
 	<!--Dismiss accessibility label
    Dismiss button label-->
-	<string name="dismiss">Ignora</string>
 	<!--Distances preference-->
 	<string name="distances">Distanze</string>
 	<!--Title for transport modes that the user doesn't want included-->
