@@ -132,7 +132,6 @@
 	<string name="departure">Lähtö</string>
 	<!--Dismiss accessibility label
    Dismiss button label-->
-	<string name="dismiss">Hylkää</string>
 	<!--Distances preference-->
 	<string name="distances">Etäisyydet</string>
 	<!--Title for transport modes that the user doesn't want included-->
