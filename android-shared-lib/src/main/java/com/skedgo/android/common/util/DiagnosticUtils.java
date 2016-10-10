@@ -1,6 +1,5 @@
 package com.skedgo.android.common.util;
 
-import android.content.ComponentName;
 import android.content.Context;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageInfo;
@@ -58,19 +57,5 @@ public class DiagnosticUtils {
     }
 
     return (String) (appInfo != null ? packageManager.getApplicationLabel(appInfo) : "Unknown app");
-  }
-
-  public static void setComponentEnabledSetting(Context context, Class<?> componentClass, int state) {
-    ComponentName componentName = new ComponentName(context, componentClass);
-    PackageManager packageManager = context.getPackageManager();
-    if (packageManager == null) {
-      return;
-    }
-
-    try {
-      packageManager.setComponentEnabledSetting(componentName, state, PackageManager.DONT_KILL_APP);
-    } catch (Exception e) {
-      LOGE(TAG, "Error during setComponentEnabledSetting()", e);
-    }
   }
 }
