@@ -10,7 +10,9 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public class StringUtils {
+public final class StringUtils {
+  private StringUtils() {}
+
   public static String firstNonEmpty(String... values) {
     if (values == null) {
       return null;

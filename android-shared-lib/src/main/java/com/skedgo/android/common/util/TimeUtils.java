@@ -4,20 +4,15 @@
 
 package com.skedgo.android.common.util;
 
-import android.content.Context;
-import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.text.format.Time;
 
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
 import java.util.Random;
 import java.util.TimeZone;
 
-import static android.text.format.DateFormat.is24HourFormat;
 import static java.util.concurrent.TimeUnit.SECONDS;
 
 public class TimeUtils {
@@ -27,23 +22,6 @@ public class TimeUtils {
   //character is letter L, not number '1'
   public static long WHEN_TELEPORTER_EXISTS = 1777888999000l;
   private static Time mTime = new Time();
-  private static Time mTime2 = new Time();
-
-  public static void updateTimeZone() {
-    synchronized (TIME_LOCK) {
-      mTime = new Time();
-      mTime2 = new Time();
-    }
-  }
-
-  public static String getSystemTimeFormat(@NonNull Context context) {
-    // Why choose this over checking Settings.System.TIME_12_24?
-    // See: http://stackoverflow.com/q/19888709/2563009.
-    // See: https://redmine.buzzhives.com/issues/4533.
-    return is24HourFormat(context)
-        ? "%H:%M" // e.g, 01:00 or 13:00
-        : "%-I:%M%p"; // e.g, '03:08am'
-  }
 
   public static Time getLastSecondOfPreviousDayAsTime(long startsSecs, String timeZoneString) {
     long startsMillis = startsSecs * 1000;
@@ -74,38 +52,11 @@ public class TimeUtils {
     return calendar.getTimeInMillis();
   }
 
-  public static long getMillisFrom(int julianDay, long timeOfDayMillis) {
-    synchronized (TIME_LOCK) {
-      mTime.setJulianDay(julianDay);
-
-      mTime2.set(timeOfDayMillis);
-      mTime2.normalize(true);
-
-      mTime.hour = mTime2.hour;
-      mTime.minute = mTime2.minute;
-      mTime.second = mTime2.second;
-
-      mTime.normalize(true);
-      return mTime.toMillis(true);
-    }
-  }
-
   public static int getCurrentJulianDay() {
     synchronized (TIME_LOCK) {
       mTime.setToNow();
       return Time.getJulianDay(mTime.toMillis(true), mTime.gmtoff);
     }
-  }
-
-  public static long getStartMillisForJulianDay(int julianDay) {
-    synchronized (TIME_LOCK) {
-      return mTime.setJulianDay(julianDay);
-    }
-  }
-
-  public static long getEndMillisForJulianDay(int julianDay) {
-    long startMillis = getStartMillisForJulianDay(julianDay);
-    return startMillis + InMillis.DAY - InMillis.SECOND;
   }
 
   public static int getJulianDay(Time t) {
@@ -133,14 +84,6 @@ public class TimeUtils {
       return mTime.format("%l:%M%p");
     }
 
-  }
-
-  public static String getISO8601TimeString(long millis, boolean includingSecond) {
-    TimeZone tz = TimeZone.getDefault();
-    DateFormat df = includingSecond ? new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'") : new SimpleDateFormat("yyyy-MM-dd'T'HH:mm'Z'");
-    df.setTimeZone(tz);
-    String timeStringIso = df.format(millis);
-    return timeStringIso;
   }
 
   /**
@@ -201,122 +144,6 @@ public class TimeUtils {
   public static long getCurrentMillis() {
     synchronized (TIME_LOCK) {
       mTime.setToNow();
-      return mTime.toMillis(true);
-    }
-  }
-
-  public static String getWeekInMonthString(long millis) {
-    synchronized (TIME_LOCK) {
-      mTime.set(millis);
-      switch ((mTime.monthDay - 1) / 7) {
-        case 0:
-          return "first";
-        case 1:
-          return "second";
-        case 2:
-          return "third";
-        case 3:
-          return "fourth";
-        default:
-          return "last";
-      }
-    }
-  }
-
-  public static String getFullDayOfWeekString(long millis) {
-    synchronized (TIME_LOCK) {
-      mTime.set(millis);
-      return mTime.format("%A");
-    }
-  }
-
-  public static String getDayOfWeekString(long millis) {
-    synchronized (TIME_LOCK) {
-      mTime.set(millis);
-      return mTime.format("%a");
-    }
-  }
-
-  public static String getFullMonthString(long millis) {
-    synchronized (TIME_LOCK) {
-      mTime.set(millis);
-      return mTime.format("%B");
-    }
-  }
-
-  public static String getMonthString(long millis) {
-    synchronized (TIME_LOCK) {
-      mTime.set(millis);
-      return mTime.format("%b");
-    }
-  }
-
-  public static String getDayOfMonthString(long millis) {
-    synchronized (TIME_LOCK) {
-      mTime.set(millis);
-      return mTime.format("%e");
-    }
-  }
-
-  public static String getDayOfMonthString(int julianDay) {
-    synchronized (TIME_LOCK) {
-      mTime.setJulianDay(julianDay);
-      return mTime.format("%e");
-    }
-  }
-
-  public static String getDateString(long millis) {
-    synchronized (TIME_LOCK) {
-      mTime.set(millis);
-      return mTime.format("%d/%m/%y");
-    }
-  }
-
-  public static String getDateStringNoYear(long millis) {
-    synchronized (TIME_LOCK) {
-      mTime.set(millis);
-      return mTime.format("%d/%m");
-    }
-  }
-
-  public static String getDateStringNoYear(int julianDay) {
-    synchronized (TIME_LOCK) {
-      mTime.setJulianDay(julianDay);
-      return mTime.format("%d/%m");
-    }
-  }
-
-  public static String getDateString(int julianDay) {
-    synchronized (TIME_LOCK) {
-      mTime.setJulianDay(julianDay);
-      return mTime.format("%d/%m/%y");
-    }
-  }
-
-  public static long getMillisSinceMidnight(long millis) {
-    return millis - getStartMillisForJulianDay(getJulianDay(millis));
-  }
-
-  public static long round(long time) {
-    //Round time to nearest 15 minute block
-    synchronized (TIME_LOCK) {
-      mTime.set(time);
-      mTime.normalize(true);
-
-      if (mTime.minute < 8) {
-        mTime.minute = 0;
-      } else if (mTime.minute < 23) {
-        mTime.minute = 15;
-      } else if (mTime.minute < 38) {
-        mTime.minute = 30;
-      } else if (mTime.minute < 53) {
-        mTime.minute = 45;
-      } else {
-        mTime.minute = 0;
-        mTime.hour++;
-      }
-
-      mTime.normalize(true);
       return mTime.toMillis(true);
     }
   }
@@ -519,21 +346,6 @@ public class TimeUtils {
                   + c + "' at index=" + index);
         }
       }
-    }
-
-    /**
-     * Add this to the calendar provided, in place, in the calendar.
-     */
-    public void addTo(Calendar cal) {
-      cal.add(Calendar.DAY_OF_MONTH, sign * weeks * 7);
-      cal.add(Calendar.DAY_OF_MONTH, sign * days);
-      cal.add(Calendar.HOUR, sign * hours);
-      cal.add(Calendar.MINUTE, sign * minutes);
-      cal.add(Calendar.SECOND, sign * seconds);
-    }
-
-    public long addTo(long dt) {
-      return dt + getMillis();
     }
 
     public long getMillis() {
