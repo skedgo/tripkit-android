@@ -1,10 +1,6 @@
-package com.skedgo.android.common.string;
+package com.skedgo.android.common;
 
 import android.content.res.Resources;
-
-import com.skedgo.android.common.BuildConfig;
-import com.skedgo.android.common.R;
-import com.skedgo.android.common.TestRunner;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -15,7 +11,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 @RunWith(TestRunner.class)
 @Config(constants = BuildConfig.class)
-public class EnglishStringsTest {
+public class StringsTest {
   private final Resources resources = RuntimeEnvironment.application.getResources();
 
   /**
@@ -34,5 +30,26 @@ public class EnglishStringsTest {
     assertThat(resources.getString(R.string.locationwanttogo)).isEqualTo("Where do you want to go?");
     assertThat(resources.getString(R.string.dropnewpin)).isEqualTo("Drop new pin");
     assertThat(resources.getString(R.string.setlocation)).isEqualTo("Tap to set location");
+  }
+
+  @Test
+  @Config(qualifiers = "it")
+  public void correctApproximatelyXAwayInItalian() {
+    assertThat(resources.getString(R.string.approximately_s_away))
+        .isEqualTo("Circa %s di distanza");
+  }
+
+  @Test
+  @Config(qualifiers = "pt")
+  public void correctFormatOfXMinutesInPortuguese() {
+    final String minutes = resources.getString(R.string.minutes);
+    assertThat(String.format(minutes, 2f))
+        .isEqualTo("2 minutos");
+  }
+
+  @Test public void correctFormatOfXMinutesInEnglish() {
+    final String minutes = resources.getString(R.string.minutes);
+    assertThat(String.format(minutes, 2f))
+        .isEqualTo("2 minutes");
   }
 }
