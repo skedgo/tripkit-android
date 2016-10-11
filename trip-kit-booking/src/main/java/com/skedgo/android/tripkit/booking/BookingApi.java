@@ -8,7 +8,7 @@ import retrofit2.http.Url;
 import rx.Observable;
 
 public interface BookingApi {
-  @GET Observable<BookingForm> getFormAsync(@Url String url);
+  @GET Observable<Response<BookingForm>> getFormAsync(@Url String url);
   @POST Observable<Response<BookingForm>> postFormAsync(
       @Url String url,
       @Body InputForm inputForm
