@@ -303,7 +303,7 @@
    Title for setting to minimise a transport mode.-->
 	<string name="minimised">Minimizado</string>
 	<!--Minutes format (used for transfer times)-->
-	<string name="minutes">%.minutos</string>
+	<string name="minutes">%.0f minutos</string>
 	<!--Reminder to leave preference-->
 	<string name="minutes_before_trip">Minutes antes do trajeto</string>
 	<!--Number of minutes before departure-->
