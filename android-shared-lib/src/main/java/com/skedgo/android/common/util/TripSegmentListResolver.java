@@ -71,10 +71,6 @@ public class TripSegmentListResolver {
    */
   public TripSegment createArrivalSegment(TripSegment lastSegment) {
     String destinationName = TripSegmentUtils.getLocationName(destination);
-
-    // TODO: i18n
-    // TODO: 'destination' is just a placeholder, any better word?
-
     String arrivalAction;
 
     if (TextUtils.isEmpty(destinationName)) {
@@ -88,7 +84,7 @@ public class TripSegmentListResolver {
     arrivalSegment.setFrom(destination);
     arrivalSegment.setTo(destination);
     arrivalSegment.setAction(arrivalAction);
-    arrivalSegment.setVisibility(TripSegment.VISIBILITY_IN_SUMMARY);
+    arrivalSegment.setVisibility(TripSegment.VISIBILITY_ON_MAP);
     arrivalSegment.setStartTimeInSecs(lastSegment.getEndTimeInSecs());
     arrivalSegment.setEndTimeInSecs(lastSegment.getEndTimeInSecs());
     lastSegment.whenTimeChanged().subscribe(new Action1<TripSegment>() {
@@ -109,9 +105,6 @@ public class TripSegmentListResolver {
    */
   public TripSegment createDepartureSegment(final TripSegment firstSegment) {
     String originName = TripSegmentUtils.getLocationName(origin);
-
-    // TODO: i18n
-    // TODO: 'origin' is just a placeholder, any better word?
 
     String departureAction;
     if (TextUtils.isEmpty(originName)) {
