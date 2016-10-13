@@ -19,25 +19,30 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 import static com.skedgo.android.common.model.TripSegment.VISIBILITY_IN_DETAILS;
+import static com.skedgo.android.common.model.TripSegment.VISIBILITY_ON_MAP;
 import static junit.framework.Assert.assertFalse;
 import static org.assertj.core.api.Assertions.assertThat;
 
 @RunWith(TestRunner.class)
 @Config(constants = BuildConfig.class)
 public class TripSegmentListResolverTest {
-  private Resources resources;
+  private TripSegmentListResolver resolver;
 
   @Before public void before() {
-    resources = RuntimeEnvironment.application.getResources();
+    final Resources resources = RuntimeEnvironment.application.getResources();
+    resolver = new TripSegmentListResolver(resources);
   }
 
   @Test public void shouldOnlyShowDepartureSegmentInDetails() {
-    TripSegment firstSegment = new TripSegment();
-
-    TripSegmentListResolver resolver = new TripSegmentListResolver(resources);
-    TripSegment departureSegment = resolver.createDepartureSegment(firstSegment);
-
+    TripSegment segment = new TripSegment();
+    TripSegment departureSegment = resolver.createDepartureSegment(segment);
     assertThat(departureSegment.getVisibility()).isEqualTo(VISIBILITY_IN_DETAILS);
+  }
+
+  @Test public void arrivalSegmentShouldBeVisibleInMap() {
+    final TripSegment segment = new TripSegment();
+    final TripSegment arrivalSegment = resolver.createArrivalSegment(segment);
+    assertThat(arrivalSegment.getVisibility()).isEqualTo(VISIBILITY_ON_MAP);
   }
 
   @Test public void shouldHaveNoTimeDifferenceForArrivalSegment() {
@@ -49,8 +54,7 @@ public class TripSegmentListResolverTest {
     // (M/D/Y @ h:m:s): 8 / 2 / 2002 @ 0:0:0 UTC
     lastSegment.setEndTimeInSecs(1028246400);
 
-    TripSegmentListResolver testResolver = new TripSegmentListResolver(resources);
-    TripSegment arrivalSegment = testResolver.createArrivalSegment(lastSegment);
+    TripSegment arrivalSegment = resolver.createArrivalSegment(lastSegment);
 
     assertThat(arrivalSegment.getType())
         .isEqualTo(SegmentType.ARRIVAL);
@@ -81,7 +85,7 @@ public class TripSegmentListResolverTest {
         finalSegment
     )));
 
-    new TripSegmentListResolver(resources)
+    resolver
         .setOrigin(new Location())
         .setDestination(new Location())
         .setTripSegmentList(trip.getSegments())
@@ -120,7 +124,7 @@ public class TripSegmentListResolverTest {
         finalSegment
     )));
 
-    new TripSegmentListResolver(resources)
+    resolver
         .setOrigin(new Location())
         .setDestination(new Location())
         .setTripSegmentList(trip.getSegments())
