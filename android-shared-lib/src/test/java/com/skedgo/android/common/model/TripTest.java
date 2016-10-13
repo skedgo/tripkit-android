@@ -9,10 +9,17 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.robolectric.annotation.Config;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.Mockito.eq;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 
 @RunWith(TestRunner.class)
-@Config(constants = BuildConfig.class, sdk = 21)
+@Config(constants = BuildConfig.class)
 public class TripTest {
   @Test public void json() {
     Trip trip = new Trip();
@@ -56,5 +63,37 @@ public class TripTest {
     trip.setCurrencySymbol("VND");
     trip.setMoneyCost(50);
     assertThat(trip.getDisplayCost("Free")).isEqualTo("VND50");
+  }
+
+  @Test public void arrivalSegmentShouldNotBeInSummaryArea() {
+    // Given a trip having arrival segment that is visible on the map.
+    final TripSegment arrivalSegment = new TripSegment();
+    arrivalSegment.setType(SegmentType.ARRIVAL);
+    arrivalSegment.setVisibility(TripSegment.VISIBILITY_ON_MAP);
+    final Trip trip = new Trip();
+    trip.setSegments(new ArrayList<>(Collections.singletonList(arrivalSegment)));
+
+    // We expect that arrival segment shouldn't be in the summary area.
+    assertThat(trip.getSummarySegments()).isEmpty();
+  }
+
+  @Test public void summaryAreaShouldBeEmptyIfNoSegments() {
+    final Trip trip = new Trip();
+    assertThat(trip.getSummarySegments()).isEmpty();
+  }
+
+  @Test public void summaryAreaShouldOnlyIncludeSegmentsVisibleOnSummary() {
+    final TripSegment a = mock(TripSegment.class);
+    when(a.isVisibleInContext(eq(TripSegment.VISIBILITY_IN_SUMMARY)))
+        .thenReturn(true);
+    final TripSegment b = mock(TripSegment.class);
+    when(b.isVisibleInContext(eq(TripSegment.VISIBILITY_IN_SUMMARY)))
+        .thenReturn(false);
+    final Trip trip = new Trip();
+    trip.setSegments(new ArrayList<>(Arrays.asList(a, b)));
+
+    // We expect that the summary area should only include
+    // segments which are visible on the summary.
+    assertThat(trip.getSummarySegments()).containsExactly(a);
   }
 }
