@@ -22,8 +22,8 @@ import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 
 public class BookingActivity extends AnimatedTransitionActivity implements
     FragmentManager.OnBackStackChangedListener, BookingFormFragment.BookingFormFragmentListener {
-  public static final String ACTION_BOOK = "com.skedgo.android.bookingclient.ACTION_BOOK";
-  public static final String ACTION_BOOK2 = "com.skedgo.android.bookingclient.ACTION_BOOK2";
+  public static final String ACTION_BOOK = "com.skedgo.android.tripkit.booking.ui.ACTION_BOOK";
+  public static final String ACTION_BOOK2 = "com.skedgo.android.tripkit.booking.ui.ACTION_BOOK2";
   public static final String KEY_URL = "url";
   public static final String KEY_FIRST_SCREEN = "firstScreen";
   public static final String KEY_BOOKING_BUNDLE = "bookingBundle";
