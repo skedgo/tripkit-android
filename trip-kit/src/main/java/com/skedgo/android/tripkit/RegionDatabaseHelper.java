@@ -1,7 +1,6 @@
 package com.skedgo.android.tripkit;
 
 import android.content.Context;
-import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
@@ -12,9 +11,8 @@ import java.util.List;
 import java.util.Map;
 
 import rx.Observable;
-import rx.android.content.ContentObservable;
-import rx.functions.Func1;
 import rx.schedulers.Schedulers;
+import skedgo.sqlite.Cursors;
 
 final class RegionDatabaseHelper extends SQLiteOpenHelper {
   RegionDatabaseHelper(Context context, String name) {
@@ -36,12 +34,7 @@ final class RegionDatabaseHelper extends SQLiteOpenHelper {
   public Observable<List<Region>> loadRegionsAsync() {
     return Observable
         .create(new OnSubscribeLoadRegions(this))
-        .flatMap(new Func1<Cursor, Observable<Cursor>>() {
-          @Override
-          public Observable<Cursor> call(Cursor cursor) {
-            return ContentObservable.fromCursor(cursor);
-          }
-        })
+        .flatMap(Cursors.flattenCursor())
         .map(new CursorToRegionConverter())
         .toList()
         .takeFirst(Utils.<Region>isNotEmpty())
@@ -51,12 +44,7 @@ final class RegionDatabaseHelper extends SQLiteOpenHelper {
   public Observable<Map<String, TransportMode>> loadModesAsync() {
     return Observable
         .create(new OnSubscribeLoadTransportModes(this))
-        .flatMap(new Func1<Cursor, Observable<Cursor>>() {
-          @Override
-          public Observable<Cursor> call(Cursor cursor) {
-            return ContentObservable.fromCursor(cursor);
-          }
-        })
+        .flatMap(Cursors.flattenCursor())
         .map(new CursorToTransportModeConverter())
         .toList()
         .takeFirst(Utils.<TransportMode>isNotEmpty())
