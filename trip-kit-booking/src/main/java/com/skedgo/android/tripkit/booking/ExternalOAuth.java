@@ -15,7 +15,7 @@ public abstract class ExternalOAuth {
   public abstract String authServiceId();
   public abstract String token();
   @Nullable public abstract String refreshToken();
-  public abstract long expiresIn();
+  public abstract int expiresIn();
 
   @Value.Default public String id() {
     return UUID.randomUUID().toString();
