@@ -13,7 +13,7 @@ public interface AccessTokenResponse {
 
   @SerializedName("access_token") String accessToken();
   @SerializedName("token_type") String tokenType();
-  @SerializedName("expires_in") long expiresIn();
+  @SerializedName("expires_in") int expiresIn();
   @Nullable @SerializedName("refresh_token") String refreshToken();
 
 }
