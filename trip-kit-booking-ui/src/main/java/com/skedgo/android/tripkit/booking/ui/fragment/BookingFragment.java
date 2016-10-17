@@ -12,21 +12,19 @@ import android.view.ViewStub;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
-import com.skedgo.android.tripkit.booking.ui.R;
-import com.skedgo.android.tripkit.booking.ui.activity.BookingActivity;
-import com.skedgo.android.tripkit.booking.ui.viewmodel.ExtendedBookingViewModel;
 import com.skedgo.android.common.util.LogUtils;
 import com.skedgo.android.tripkit.booking.BookingError;
 import com.skedgo.android.tripkit.booking.BookingForm;
 import com.skedgo.android.tripkit.booking.LinkFormField;
+import com.skedgo.android.tripkit.booking.ui.R;
+import com.skedgo.android.tripkit.booking.ui.activity.BookingActivity;
+import com.skedgo.android.tripkit.booking.ui.viewmodel.ExtendedBookingViewModel;
 import com.skedgo.android.tripkit.booking.viewmodel.BookingViewModel;
 import com.squareup.otto.Bus;
 import com.squareup.otto.Subscribe;
 
 import javax.inject.Inject;
 
-import dagger.Lazy;
-import rx.android.view.ViewActions;
 import rx.functions.Action1;
 import skedgo.common.view.ButterKnifeFragment;
 
@@ -68,6 +66,14 @@ public class BookingFragment extends ButterKnifeFragment implements View.OnClick
     final BookingFragment fragment = new BookingFragment();
     fragment.setArguments(args);
     return fragment;
+  }
+
+  static Action1<? super Boolean> setVisibility(final View view) {
+    return new Action1<Boolean>() {
+      @Override public void call(Boolean v) {
+        view.setVisibility(v ? View.VISIBLE : View.GONE);
+      }
+    };
   }
 
   @Override
@@ -153,11 +159,11 @@ public class BookingFragment extends ButterKnifeFragment implements View.OnClick
 
     viewModel.isFetching()
         .takeUntil(lifecycle().onDestroyView())
-        .subscribe(ViewActions.setVisibility(progressView));
+        .subscribe(setVisibility(progressView));
 
     viewModel.isFetching()
         .takeUntil(lifecycle().onDestroyView())
-        .subscribe(ViewActions.setVisibility(hudTextView),errorAction);
+        .subscribe(setVisibility(hudTextView), errorAction);
 
     viewModel.isFetching()
         .takeUntil(lifecycle().onDestroyView())
