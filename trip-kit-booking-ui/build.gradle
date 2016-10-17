@@ -6,7 +6,7 @@ android {
   buildToolsVersion "24.0.2"
 
   defaultConfig {
-    minSdkVersion 10
+    minSdkVersion 15
     targetSdkVersion 22
     testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
   }
@@ -37,6 +37,7 @@ dependencies {
   compile 'com.nineoldandroids:library:2.4.0'
   compile 'uk.co.chrisjenx:calligraphy:2.1.0'
   compile 'com.github.skedgo:robotos:v1.1'
+  compile 'com.github.skedgo:simple-adapter:v1.0'
 
   apt 'com.google.dagger:dagger-compiler:2.0.1'
   compile 'com.google.dagger:dagger:2.0.1'
