@@ -14,9 +14,10 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.skedgo.android.tripkit.booking.ui.R;
-import com.skedgo.android.tripkit.booking.ui.view.adapter.PrimitiveListAdapter;
+import com.skedgo.adapter.SimpleAdapter;
+import com.skedgo.adapter.ViewHolder;
 import com.skedgo.android.tripkit.booking.OptionFormField;
+import com.skedgo.android.tripkit.booking.ui.R;
 import com.skedgo.android.tripkit.booking.viewmodel.OptionFieldViewModel;
 
 import java.util.List;
@@ -96,7 +97,7 @@ public class OptionFieldView extends LinearLayout {
         valuePickerView.show();
     }
 
-    static class ValuesAdapter extends PrimitiveListAdapter<OptionFormField.OptionValue> {
+    static class ValuesAdapter extends SimpleAdapter<OptionFormField.OptionValue> {
         private final int selectedPosition;
 
         protected ValuesAdapter(List<OptionFormField.OptionValue> values, int selectedPosition) {
