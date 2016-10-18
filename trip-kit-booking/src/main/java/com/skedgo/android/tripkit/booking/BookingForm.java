@@ -102,8 +102,16 @@ public class BookingForm extends FormField {
     return isFormType("authForm");
   }
 
+  public boolean isPayIQAuthForm() {
+    return hasFormValue("payiq");
+  }
+
   private boolean isFormType(String type) {
     return getType() != null && getType().equals(type);
+  }
+
+  private boolean hasFormValue(String value) {
+    return getValue() != null && getValue().equals(value);
   }
 
   @Nullable public String getClientID() {
