@@ -27,6 +27,7 @@ public class BookingActivity extends AnimatedTransitionActivity implements
   public static final String KEY_URL = "url";
   public static final String KEY_FIRST_SCREEN = "firstScreen";
   public static final String KEY_BOOKING_BUNDLE = "bookingBundle";
+  public static final String KEY_BOOKING_FORM = "bookingForm";
 
   public BookingClientComponent component;
 

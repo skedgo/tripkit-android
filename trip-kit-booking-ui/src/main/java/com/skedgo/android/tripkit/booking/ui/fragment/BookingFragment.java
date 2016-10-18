@@ -3,6 +3,8 @@ package com.skedgo.android.tripkit.booking.ui.fragment;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Parcelable;
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -28,11 +30,15 @@ import javax.inject.Inject;
 import rx.functions.Action1;
 import skedgo.common.view.ButterKnifeFragment;
 
+import static com.skedgo.android.tripkit.booking.ui.activity.BookingActivity.KEY_BOOKING_FORM;
+
 public class BookingFragment extends ButterKnifeFragment implements View.OnClickListener {
   public static final String KEY_PARAM = "param";
   public static final String KEY_FORM = "form";
   private static final String TAG_BOOKING_FORM = "bookingForm";
   private static final String EXTRA_DONE = "done";
+
+  @Nullable private BookingForm bookingForm = null;
 
   @Inject ExtendedBookingViewModel viewModel;
   @Inject Bus bus;
@@ -194,6 +200,11 @@ public class BookingFragment extends ButterKnifeFragment implements View.OnClick
           public void call(Boolean success) {
             Intent data = new Intent();
             data.putExtra(EXTRA_DONE, true);
+
+            if (bookingForm != null) {
+              data.putExtra(KEY_BOOKING_FORM, (Parcelable) bookingForm);
+            }
+
             if (success) {
               getActivity().setResult(Activity.RESULT_OK, data);
             } else {
@@ -292,6 +303,9 @@ public class BookingFragment extends ButterKnifeFragment implements View.OnClick
   }
 
   private void showBookingForm(BookingForm form) {
+
+    this.bookingForm = form;
+
     final Fragment oldFragment = getFragmentManager().findFragmentByTag(TAG_BOOKING_FORM);
     if (oldFragment != null) {
       getFragmentManager()
