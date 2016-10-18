@@ -40,7 +40,7 @@ public class ExternalOAuthServiceTest {
     AccessTokenResponse accessTokenResponse = mock(AccessTokenResponse.class);
     when(accessTokenResponse.accessToken()).thenReturn("accessToken");
     when(accessTokenResponse.refreshToken()).thenReturn("refreshToken");
-    when(accessTokenResponse.expiresIn()).thenReturn(0);
+    when(accessTokenResponse.expiresIn()).thenReturn(0L);
 
     ExternalOAuthApi externalOAuthApi = mock(ExternalOAuthApi.class);
     when(externalOAuthApi.getAccessToken("clientSecret", "clientId", "code",
