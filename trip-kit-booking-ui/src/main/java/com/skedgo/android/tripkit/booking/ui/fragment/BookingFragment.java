@@ -255,7 +255,7 @@ public class BookingFragment extends ButterKnifeFragment implements View.OnClick
         intent.putExtras(bundle);
         getActivity().setResult(Activity.RESULT_OK, intent);
       } else {
-        getActivity().setResult(Activity.RESULT_OK);
+        getActivity().setResult(Activity.RESULT_OK, data);
       }
       getActivity().finish();
     } else if (data != null && data.getBooleanExtra(EXTRA_DONE, false)) {
