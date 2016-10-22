@@ -41,7 +41,7 @@ public class BookingServiceImpl implements BookingService {
     return gson.fromJson(bookingErrorJson, BookingError.class);
   }
 
-  private Func1<Response<BookingForm>, Observable<BookingForm>> handleBookingResponse =
+  @VisibleForTesting Func1<Response<BookingForm>, Observable<BookingForm>> handleBookingResponse =
       new Func1<Response<BookingForm>, Observable<BookingForm>>() {
         @Override
         public Observable<BookingForm> call(final Response<BookingForm> bookingFormResponse) {
