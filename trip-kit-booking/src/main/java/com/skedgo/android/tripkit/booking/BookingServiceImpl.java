@@ -51,7 +51,7 @@ public class BookingServiceImpl implements BookingService {
               BookingError e = asBookingError(bookingFormResponse.errorBody().string());
               return Observable.error(e);
             } catch (IOException e) {
-              e.printStackTrace();
+              return Observable.error(e);
             }
           }
           return Observable.just(bookingFormResponse.body());
