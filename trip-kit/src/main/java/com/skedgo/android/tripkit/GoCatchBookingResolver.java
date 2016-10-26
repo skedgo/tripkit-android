@@ -18,45 +18,41 @@ final class GoCatchBookingResolver implements BookingResolver {
 
   private final Resources resources;
   private final Func1<String, Boolean> isPackageInstalled;
-  private final Func1<ReverseGeocodingParams, Observable<String>> reverseGeocoderFactory;
+  private final GeocoderFactory geocoderFactory;
 
-  public GoCatchBookingResolver(
+  GoCatchBookingResolver(
       @NonNull Resources resources,
       @NonNull Func1<String, Boolean> isPackageInstalled,
-      @NonNull Func1<ReverseGeocodingParams, Observable<String>> reverseGeocoderFactory) {
+      @NonNull GeocoderFactory geocoderFactory) {
     this.resources = resources;
     this.isPackageInstalled = isPackageInstalled;
-    this.reverseGeocoderFactory = reverseGeocoderFactory;
+    this.geocoderFactory = geocoderFactory;
   }
 
-  @Override public Observable<BookingAction> performExternalActionAsync(ExternalActionParams params) {
+  @Override
+  public Observable<BookingAction> performExternalActionAsync(ExternalActionParams params) {
     if (isPackageInstalled.call(GOCATCH_PACKAGE)) {
       final TripSegment segment = params.segment();
       final Location departure = segment.getFrom();
       final Location arrival = segment.getTo();
-      return reverseGeocoderFactory.call(
-          ImmutableReverseGeocodingParams.builder()
-              .lat(arrival.getLat())
-              .lng(arrival.getLon())
-              .maxResults(1)
-              .build()
-      ).map(new Func1<String, BookingAction>() {
-        @Override public BookingAction call(String arrivalAddress) {
-          final Uri uri = Uri.parse("gocatch://referral")
-              .buildUpon()
-              .appendQueryParameter("code", GOCATCH_CODE)
-              .appendQueryParameter("destination", arrivalAddress)
-              .appendQueryParameter("pickup", "")
-              .appendQueryParameter("lat", String.valueOf(departure.getLat()))
-              .appendQueryParameter("lng", String.valueOf(departure.getLon()))
-              .build();
-          return BookingAction.builder()
-              .bookingProvider(BookingResolver.GOCATCH)
-              .hasApp(true)
-              .data(new Intent(Intent.ACTION_VIEW).setData(uri))
-              .build();
-        }
-      });
+      return geocoderFactory.firstAddressAsync(arrival.getLat(), arrival.getLon(), 1)
+          .map(new Func1<String, BookingAction>() {
+            @Override public BookingAction call(String arrivalAddress) {
+              final Uri uri = Uri.parse("gocatch://referral")
+                  .buildUpon()
+                  .appendQueryParameter("code", GOCATCH_CODE)
+                  .appendQueryParameter("destination", arrivalAddress)
+                  .appendQueryParameter("pickup", "")
+                  .appendQueryParameter("lat", String.valueOf(departure.getLat()))
+                  .appendQueryParameter("lng", String.valueOf(departure.getLon()))
+                  .build();
+              return BookingAction.builder()
+                  .bookingProvider(BookingResolver.GOCATCH)
+                  .hasApp(true)
+                  .data(new Intent(Intent.ACTION_VIEW).setData(uri))
+                  .build();
+            }
+          });
     } else {
       final Intent data = new Intent(Intent.ACTION_VIEW)
           .setData(Uri.parse("https://play.google.com/store/apps/details?id=" + GOCATCH_PACKAGE));

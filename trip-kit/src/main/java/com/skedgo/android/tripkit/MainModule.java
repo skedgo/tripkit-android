@@ -225,7 +225,7 @@ public class MainModule {
     return new BookingResolverImpl(
         context.getResources(),
         context.getPackageManager(),
-        new SingleReverseGeocoderFactory(context)
+        new GeocoderFactory(context)
     );
   }
 
