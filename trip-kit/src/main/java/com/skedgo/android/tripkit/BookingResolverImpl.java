@@ -17,7 +17,7 @@ public final class BookingResolverImpl implements BookingResolver {
   public BookingResolverImpl(
       @NonNull Resources resources,
       @NonNull final PackageManager packageManager,
-      @NonNull Func1<ReverseGeocodingParams, Observable<String>> reverseGeocoderFactory) {
+      @NonNull GeocoderFactory geocoderFactory) {
     final Func1<String, Boolean> isPackageInstalled = new Func1<String, Boolean>() {
       @Override public Boolean call(String packageName) {
         try {
@@ -30,17 +30,18 @@ public final class BookingResolverImpl implements BookingResolver {
     };
 
     resolverMap = new HashMap<>(8);
-    resolverMap.put("gocatch", new GoCatchBookingResolver(resources, isPackageInstalled, reverseGeocoderFactory));
+    resolverMap.put("gocatch", new GoCatchBookingResolver(resources, isPackageInstalled, geocoderFactory));
     resolverMap.put("uber", new UberBookingResolver(resources, isPackageInstalled));
     resolverMap.put("ingogo", new IngogoBookingResolver(resources, isPackageInstalled));
     resolverMap.put("lyft", new LyftBookingResolver(resources, isPackageInstalled));
-    resolverMap.put("flitways", new FlitWaysBookingResolver(reverseGeocoderFactory));
+    resolverMap.put("flitways", new FlitWaysBookingResolver(geocoderFactory));
     resolverMap.put("tel:", new TelBookingResolver(resources));
     resolverMap.put("sms:", new SmsBookingResolver());
     resolverMap.put("http", new WebBookingResolver(resources));
   }
 
-  @Override public Observable<BookingAction> performExternalActionAsync(ExternalActionParams params) {
+  @Override
+  public Observable<BookingAction> performExternalActionAsync(ExternalActionParams params) {
     final String externalAction = params.action();
     final BookingResolver resolver = getBookingResolver(externalAction);
     if (resolver != null) {
