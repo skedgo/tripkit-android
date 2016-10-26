@@ -8,16 +8,23 @@ import java.util.List;
 
 import rx.Observable;
 import rx.functions.Func1;
+import rx.schedulers.Schedulers;
 
-public final class SingleReverseGeocoderFactory implements Func1<ReverseGeocodingParams, Observable<String>> {
+public class GeocoderFactory {
   private final Context context;
 
-  public SingleReverseGeocoderFactory(Context context) {
+  public GeocoderFactory(Context context) {
     this.context = context;
   }
 
-  @Override public Observable<String> call(ReverseGeocodingParams params) {
-    return Observable.create(new OnSubscribeReverseGeocode(context, params.lat(), params.lng(), params.maxResults()))
+  public Observable<String> firstAddressAsync(
+      double latitude,
+      double longitude,
+      int maxResults) {
+    final OnSubscribeReverseGeocode onSubscribe = new OnSubscribeReverseGeocode(
+        context, latitude, longitude, maxResults
+    );
+    return Observable.create(onSubscribe)
         .filter(new Func1<List<Address>, Boolean>() {
           @Override public Boolean call(List<Address> addresses) {
             return addresses != null && !addresses.isEmpty();
@@ -36,6 +43,7 @@ public final class SingleReverseGeocoderFactory implements Func1<ReverseGeocodin
                 addressLines
             );
           }
-        });
+        })
+        .subscribeOn(Schedulers.io());
   }
 }

@@ -2,7 +2,6 @@ package com.skedgo.android.tripkit;
 
 import android.content.Intent;
 import android.net.Uri;
-import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 
 import com.skedgo.android.common.model.Location;
@@ -21,13 +20,14 @@ import rx.functions.Func2;
 import rx.schedulers.Schedulers;
 
 final class FlitWaysBookingResolver implements BookingResolver {
-  private final Func1<ReverseGeocodingParams, Observable<String>> reverseGeocoderFactory;
+  private final GeocoderFactory geocoderFactory;
 
-  public FlitWaysBookingResolver(@NonNull Func1<ReverseGeocodingParams, Observable<String>> reverseGeocoderFactory) {
-    this.reverseGeocoderFactory = reverseGeocoderFactory;
+  FlitWaysBookingResolver(GeocoderFactory geocoderFactory) {
+    this.geocoderFactory = geocoderFactory;
   }
 
-  @Override public Observable<BookingAction> performExternalActionAsync(ExternalActionParams params) {
+  @Override
+  public Observable<BookingAction> performExternalActionAsync(ExternalActionParams params) {
     final BookingAction.Builder actionBuilder = BookingAction.builder()
         .bookingProvider(BookingResolver.FLITWAYS);
     final String flitWaysPartnerKey = params.flitWaysPartnerKey();
@@ -64,20 +64,11 @@ final class FlitWaysBookingResolver implements BookingResolver {
           .flatMap(new Func1<HttpUrl.Builder, Observable<BookingAction>>() {
             @Override public Observable<BookingAction> call(final HttpUrl.Builder builder) {
               return Observable.combineLatest(
-                  reverseGeocoderFactory.call(
-                      ImmutableReverseGeocodingParams.builder()
-                          .lat(departure.getLat())
-                          .lng(departure.getLon())
-                          .maxResults(1)
-                          .build()),
-                  reverseGeocoderFactory.call(
-                      ImmutableReverseGeocodingParams.builder()
-                          .lat(arrival.getLat())
-                          .lng(arrival.getLon())
-                          .maxResults(1)
-                          .build()),
+                  geocoderFactory.firstAddressAsync(departure.getLat(), departure.getLon(), 1),
+                  geocoderFactory.firstAddressAsync(arrival.getLat(), arrival.getLon(), 1),
                   new Func2<String, String, BookingAction>() {
-                    @Override public BookingAction call(String departureAddress, String arrivalAddress) {
+                    @Override
+                    public BookingAction call(String departureAddress, String arrivalAddress) {
                       final String url = builder
                           .addQueryParameter("pickup", departureAddress)
                           .addQueryParameter("destination", arrivalAddress)
