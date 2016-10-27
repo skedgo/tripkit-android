@@ -23,6 +23,6 @@ public class GeocoderFactoryTest {
     factory.firstAddressAsync(33.956252, -118.217896, 1).subscribe(subscriber);
     subscriber.awaitTerminalEvent();
     subscriber.assertNoErrors();
-    subscriber.assertValue("8677-8681 Evergreen Avenue\nSouth Gate, CA 90280");
+    subscriber.assertValue("8677-8681 Evergreen Avenue South Gate, CA 90280");
   }
 }
