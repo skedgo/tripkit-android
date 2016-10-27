@@ -38,10 +38,7 @@ public class GeocoderFactory {
             for (int i = 0; i < addressLines.length; i++) {
               addressLines[i] = address.getAddressLine(i);
             }
-            return TextUtils.join(
-                System.getProperty("line.separator"),
-                addressLines
-            );
+            return TextUtils.join(" ", addressLines);
           }
         })
         .subscribeOn(Schedulers.io());
