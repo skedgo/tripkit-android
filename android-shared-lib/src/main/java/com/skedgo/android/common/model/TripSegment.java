@@ -291,6 +291,14 @@ public class TripSegment implements Parcelable, IRealTimeElement, ITimeRange {
     }
   }
 
+  public void setMetresSafe(int metresSafe) {
+    this.metresSafe = metresSafe;
+  }
+
+  public void setMetres(int metres) {
+    this.metres = metres;
+  }
+
   @Override
   public long getEndTimeInSecs() {
     return mEndTimeInSecs;
