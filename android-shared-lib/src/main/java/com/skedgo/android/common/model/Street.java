@@ -122,4 +122,8 @@ public class Street implements Parcelable {
     dest.writeString(mWaypointEncoding);
     dest.writeByte((byte) (safe ? 1 : 0));
   }
+
+  public boolean isSafe() {
+    return safe;
+  }
 }
