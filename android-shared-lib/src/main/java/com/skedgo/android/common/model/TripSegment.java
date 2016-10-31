@@ -87,6 +87,8 @@ public class TripSegment implements Parcelable, IRealTimeElement, ITimeRange {
       segment.platform = in.readString();
       segment.stopCount = in.readInt();
       segment.wheelchairAccessible = in.readByte() == 1;
+      segment.metres = in.readInt();
+      segment.metresSafe = in.readInt();
       return segment;
     }
 
@@ -197,6 +199,8 @@ public class TripSegment implements Parcelable, IRealTimeElement, ITimeRange {
   private String platform;
   @SerializedName("stops")
   private int stopCount;
+  private int metres;
+  private int metresSafe;
 
   public TripSegment() {
     stops.observe()
@@ -475,6 +479,14 @@ public class TripSegment implements Parcelable, IRealTimeElement, ITimeRange {
     return wheelchairAccessible;
   }
 
+  public int getWheelchairFriendliness() {
+    return Math.round(metresSafe / (float) metres * 100);
+  }
+
+  public int getCycleFriendliness() {
+    return Math.round(metresSafe / (float) metres * 100);
+  }
+
   void setWheelchairAccessible(boolean wheelchairAccessible) {
     this.wheelchairAccessible = wheelchairAccessible;
   }
@@ -539,6 +551,8 @@ public class TripSegment implements Parcelable, IRealTimeElement, ITimeRange {
     out.writeString(platform);
     out.writeInt(stopCount);
     out.writeByte((byte) (wheelchairAccessible ? 1 : 0));
+    out.writeInt(metres);
+    out.writeInt(metresSafe);
   }
 
   public boolean isContinuation() {

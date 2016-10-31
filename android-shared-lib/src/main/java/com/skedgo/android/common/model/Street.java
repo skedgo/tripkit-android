@@ -30,7 +30,7 @@ public class Street implements Parcelable {
       s.mMeters = in.readFloat();
       s.mWayPoints = in.readArrayList(Double.class.getClassLoader());
       s.mWaypointEncoding = in.readString();
-
+      s.safe = in.readByte() == 1;
       return s;
     }
 
@@ -45,6 +45,7 @@ public class Street implements Parcelable {
   private float mMeters;
   @SerializedName("waypoints")
   private List<Double> mWayPoints;
+  private boolean safe;
   /**
    * Save encoding .. we will lazily decode it..
    * <p/>
@@ -119,5 +120,6 @@ public class Street implements Parcelable {
     dest.writeFloat(mMeters);
     dest.writeList(mWayPoints);
     dest.writeString(mWaypointEncoding);
+    dest.writeByte((byte) (safe ? 1 : 0));
   }
 }
