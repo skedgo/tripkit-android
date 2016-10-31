@@ -126,4 +126,8 @@ public class Street implements Parcelable {
   public boolean isSafe() {
     return safe;
   }
+
+  public void setSafe(boolean safe) {
+    this.safe = safe;
+  }
 }
