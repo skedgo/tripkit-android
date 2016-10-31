@@ -56,7 +56,7 @@ final class AccountServiceImpl implements AccountService {
   }
 
   @Override public Observable<LogInResponse> logInSilentAsync(@Url String token) {
-    return api.logInSilentAsync("/account/android/" + token)
+    return api.logInSilentAsync("/satapp/account/android/" + token)
         .doOnNext(new Action1<LogInResponse>() {
           @Override public void call(LogInResponse response) {
             tokenStore.put(response.userToken());
