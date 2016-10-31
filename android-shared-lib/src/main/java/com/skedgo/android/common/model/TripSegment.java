@@ -495,6 +495,14 @@ public class TripSegment implements Parcelable, IRealTimeElement, ITimeRange {
     return Math.round(metresSafe / (float) metres * 100);
   }
 
+  public int getMetres() {
+    return metres;
+  }
+
+  public int getMetresSafe() {
+    return metresSafe;
+  }
+
   void setWheelchairAccessible(boolean wheelchairAccessible) {
     this.wheelchairAccessible = wheelchairAccessible;
   }
