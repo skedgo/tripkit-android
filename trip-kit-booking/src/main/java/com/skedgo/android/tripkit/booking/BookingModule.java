@@ -4,7 +4,9 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.skedgo.android.common.model.Trip;
 import com.skedgo.android.tripkit.TripKit;
+import com.skedgo.android.tripkit.TripUpdater;
 import com.skedgo.android.tripkit.booking.viewmodel.AuthenticationViewModel;
 import com.skedgo.android.tripkit.booking.viewmodel.AuthenticationViewModelImpl;
 import com.skedgo.android.tripkit.booking.viewmodel.BookingViewModel;
@@ -121,6 +123,10 @@ public class BookingModule {
 
   @Provides MyBookingsService getMyBookingsService(MyBookingsApi myBookingsServiceApi) {
     return new MyBookingsServiceImpl(myBookingsServiceApi);
+  }
+
+  @Provides TripUpdater tripUpdater() {
+    return TripKit.singleton().getTripUpdater();
   }
 
 }
