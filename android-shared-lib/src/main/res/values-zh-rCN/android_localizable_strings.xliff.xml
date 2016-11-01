@@ -168,7 +168,7 @@
 	<string name="title_exclude_event_from_route">Exclude event from routes?</string>
 	<string name="timetable_no_data">No services found for this stop</string>
 	<string name="trip_to_unknown_dest_about_to_start">It looks like you have a trip to make</string>
-	<string name="trip_to">"Trip to "</string>
+	<string name="trip_to">"Trip to %s"</string>
 	<string name="trip_preferences">Trip Preferences</string>
 	<string name="transport_selector_header">Include in the route results</string>
 	<string name="walkthrough_4">Search routes directly right from Google search bar without opening TripGo.</string>
