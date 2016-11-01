@@ -52,4 +52,15 @@ public class StringsTest {
     assertThat(String.format(minutes, 2f))
         .isEqualTo("2 minutes");
   }
+
+  @Config(qualifiers = "it")
+  @Test public void correctFormatOfTripToXInItalian() {
+    final String s = resources.getString(R.string.trip_to, "Sydney");
+    assertThat(s).isEqualTo("Viaggio a Sydney");
+  }
+
+  @Test public void correctFormatOfTripToXInEnglish() {
+    final String s = resources.getString(R.string.trip_to, "Sydney");
+    assertThat(s).isEqualTo("Trip to Sydney");
+  }
 }

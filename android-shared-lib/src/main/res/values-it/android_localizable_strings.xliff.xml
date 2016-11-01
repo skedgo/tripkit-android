@@ -168,7 +168,7 @@
 	<string name="title_exclude_event_from_route">Escludere evento dai percorsi?</string>
 	<string name="timetable_no_data">Nessun servizio trovato per questa fermata</string>
 	<string name="trip_to_unknown_dest_about_to_start">Sembra che tu abbia un viaggio per fare</string>
-	<string name="trip_to">"Viaggio a "</string>
+	<string name="trip_to">"Viaggio a %s"</string>
 	<string name="trip_preferences">Preferenze di viaggio</string>
 	<string name="transport_selector_header">Includere nei risultati di percorso</string>
 	<string name="walkthrough_4">Ricerca percorsi direttamente dalla barra di ricerca di Google senza aprire TripGo.</string>

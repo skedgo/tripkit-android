@@ -168,7 +168,7 @@
 	<string name="title_exclude_event_from_route">Excluir evento de rotas?</string>
 	<string name="timetable_no_data">Não encontrado serviços para essa parada</string>
 	<string name="trip_to_unknown_dest_about_to_start">Parace que voce tem um trajeto a fazer</string>
-	<string name="trip_to">"Trajeto para "</string>
+	<string name="trip_to">"Trajeto para %s"</string>
 	<string name="trip_preferences">Preferências do trajeto</string>
 	<string name="transport_selector_header">Incluir em resultado de rotas</string>
 	<string name="walkthrough_4">Procure rotas diretamente da barra de pesquisa do Google sem abrir TripGo.</string>
