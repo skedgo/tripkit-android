@@ -5,18 +5,13 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Parcelable;
 
-import com.skedgo.android.tripkit.booking.ui.fragment.ExternalProviderAuthFragment;
-import com.skedgo.android.tripkit.booking.ui.module.BookingClientComponent;
-import com.skedgo.android.tripkit.booking.ui.module.BookingClientModule;
 import com.skedgo.android.tripkit.booking.BookingForm;
-import com.skedgo.android.tripkit.booking.ui.module.DaggerBookingClientComponent;
+import com.skedgo.android.tripkit.booking.ui.fragment.ExternalProviderAuthFragment;
 
 import skedgo.anim.AnimatedTransitionActivity;
 
 public class ExternalProviderAuthActivity extends AnimatedTransitionActivity {
   public static final String KEY_BOOKING_FORM = "bookingForm";
-
-  private BookingClientComponent component;
 
   public static Intent newIntent(Context context, BookingForm bookingForm) {
     Intent intent = new Intent(context, ExternalProviderAuthActivity.class);
@@ -35,13 +30,6 @@ public class ExternalProviderAuthActivity extends AnimatedTransitionActivity {
           .commit();
     }
 
-    component = DaggerBookingClientComponent.builder()
-        .bookingClientModule(new BookingClientModule(getApplicationContext()))
-        .build();
-  }
-
-  public BookingClientComponent getBookingClientComponent() {
-    return component;
   }
 
 }
