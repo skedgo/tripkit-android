@@ -8,7 +8,6 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
-import org.robolectric.RobolectricGradleTestRunner;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
 
@@ -22,20 +21,20 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
-@RunWith(RobolectricGradleTestRunner.class)
-@Config(constants = BuildConfig.class, sdk = 21)
-public class AccountServiceImplTest {
+@RunWith(TestRunner.class)
+@Config(constants = BuildConfig.class)
+public class AccountServiceTest {
   @Mock AccountApi api;
   @Mock UserTokenStore tokenStore;
-  private AccountServiceImpl service;
+  private AccountService service;
 
   @Before public void before() {
     MockitoAnnotations.initMocks(this);
     final SharedPreferences preferences = RuntimeEnvironment.application.getSharedPreferences(
-        AccountServiceImplTest.class.getSimpleName(),
+        AccountServiceTest.class.getSimpleName(),
         Context.MODE_PRIVATE
     );
-    service = new AccountServiceImpl(api, tokenStore, preferences);
+    service = new AccountService(api, tokenStore, preferences);
   }
 
   @Test public void saveUserTokenAfterSigningUp() {
@@ -80,5 +79,16 @@ public class AccountServiceImplTest {
   @Test public void hasUser() {
     when(tokenStore.call()).thenReturn("Some token");
     assertThat(service.hasUser()).isTrue();
+  }
+
+  @Test public void shouldInvokeApiWithCorrectTokenEndpoint() {
+    when(api.logInSilentAsync(eq("account/android/25251325")))
+        .thenReturn(Observable.<LogInResponse>empty());
+
+    service.logInSilentAsync("25251325").subscribe();
+
+    // There should be no slash `/` before `account`.
+    // Otherwise, the last path from the base url will be removed.
+    verify(api).logInSilentAsync(eq("account/android/25251325"));
   }
 }
