@@ -168,7 +168,7 @@
 	<string name="title_exclude_event_from_route">Poista tapahtuma reiteiltä?</string>
 	<string name="timetable_no_data">Pysäkiltä ei löytynyt yhteyksiä</string>
 	<string name="trip_to_unknown_dest_about_to_start">Näyttäisi siltä että sinulla on matka alkamassa</string>
-	<string name="trip_to">"Matka kohteeseen "</string>
+	<string name="trip_to">"Matka kohteeseen %s"</string>
 	<string name="trip_preferences">Matkan preferenssit</string>
 	<string name="transport_selector_header">Sisällytä reitin lopputuloksiin</string>
 	<string name="walkthrough_4">Selaa reittejä suoraan Google search -näkymästä ilman että TripGo avautuu.</string>
