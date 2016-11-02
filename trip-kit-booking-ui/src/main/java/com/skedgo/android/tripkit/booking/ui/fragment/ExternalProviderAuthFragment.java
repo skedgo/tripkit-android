@@ -9,9 +9,9 @@ import android.view.View;
 import android.widget.Toast;
 
 import com.skedgo.android.common.util.LogUtils;
+import com.skedgo.android.tripkit.booking.ui.OAuth2CallbackHandler;
 import com.skedgo.android.tripkit.booking.ui.R;
 import com.skedgo.android.tripkit.booking.ui.databinding.ExternalProviderAuthBinding;
-import com.skedgo.android.tripkit.booking.ui.module.BookingClientComponent;
 import com.skedgo.android.tripkit.booking.ui.module.BookingClientModule;
 import com.skedgo.android.tripkit.booking.ui.module.DaggerBookingClientComponent;
 import com.skedgo.android.tripkit.booking.ui.viewmodel.ExternalProviderAuthViewModel;
@@ -25,7 +25,7 @@ import skedgo.common.view.ButterKnifeFragment;
 public class ExternalProviderAuthFragment extends ButterKnifeFragment {
   private static final String TAG_EXTERNAL_AUTH = "externalAuth";
   @Inject ExternalProviderAuthViewModel viewModel;
-  private BookingClientComponent bookingClientComponent;
+  @Inject OAuth2CallbackHandler oAuth2CallbackHandler;
 
   public static ExternalProviderAuthFragment newInstance(Bundle args) {
     ExternalProviderAuthFragment fragment = new ExternalProviderAuthFragment();
@@ -33,18 +33,14 @@ public class ExternalProviderAuthFragment extends ButterKnifeFragment {
     return fragment;
   }
 
-  @Override public void onAttach(Context context) {
-    super.onAttach(context);
-    bookingClientComponent = DaggerBookingClientComponent.builder()
-        .bookingClientModule(new BookingClientModule(getActivity()))
-        .build();
-    bookingClientComponent.inject(this);
-  }
-
   @Override
   public void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setContentLayout(R.layout.external_provider_auth);
+    DaggerBookingClientComponent.builder()
+        .bookingClientModule(new BookingClientModule(getContext().getApplicationContext()))
+        .build()
+        .inject(this);
   }
 
   @Override public void onDestroy() {
@@ -67,9 +63,7 @@ public class ExternalProviderAuthFragment extends ButterKnifeFragment {
     binding.webView.getSettings().setJavaScriptEnabled(true);
     binding.webView.getSettings().setLoadWithOverviewMode(true);
     binding.webView.getSettings().setUseWideViewPort(true);
-    binding.webView.setWebViewClient(viewModel.webViewClient(
-        bookingClientComponent.getOAuth2CallbackHandler()
-    ));
+    binding.webView.setWebViewClient(viewModel.webViewClient(oAuth2CallbackHandler));
 
     viewModel.intentObservable()
         .observeOn(AndroidSchedulers.mainThread())
