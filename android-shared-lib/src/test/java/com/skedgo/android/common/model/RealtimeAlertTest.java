@@ -1,8 +1,10 @@
 package com.skedgo.android.common.model;
 
+import android.os.Parcel;
 import android.test.AndroidTestCase;
 
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.google.gson.JsonObject;
 import com.skedgo.android.common.BuildConfig;
 import com.skedgo.android.common.Parcels;
@@ -12,6 +14,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.robolectric.annotation.Config;
 
+import static com.skedgo.android.common.model.RealtimeAlert.SEVERITY_WARNING;
 import static org.assertj.core.api.Assertions.assertThat;
 
 @RunWith(TestRunner.class)
@@ -55,5 +58,26 @@ public class RealtimeAlertTest extends AndroidTestCase {
 
     RealtimeAlert actual = RealtimeAlert.CREATOR.createFromParcel(Parcels.parcel(expected));
     assertThat(actual).isEqualTo(expected);
+  }
+
+  @Test public void shouldParseRemoteIconFromJson() throws Exception {
+    JsonObject jsonObject = new JsonObject();
+    jsonObject.addProperty("remoteIcon", "wheelchair-bad_ramp");
+    jsonObject.addProperty("hashCode", 100); //required property for RealtimeAlert
+    Gson gson = new GsonBuilder()
+        .registerTypeAdapterFactory(new GsonAdaptersRealtimeAlert()).create();
+    RealtimeAlert realtimeAlert = gson.fromJson(jsonObject, RealtimeAlert.class);
+    assertThat(realtimeAlert.remoteIcon()).isEqualTo("wheelchair-bad_ramp");
+  }
+
+  public void shouldParcelRemoteIcon() throws Exception {
+    RealtimeAlert realtimeAlert = ImmutableRealtimeAlert.builder()
+        .remoteHashCode(10L)
+        .severity(SEVERITY_WARNING)
+        .remoteIcon("hello")
+        .build();
+    Parcel parcel = Parcels.parcel(realtimeAlert);
+    RealtimeAlert actual = RealtimeAlert.CREATOR.createFromParcel(parcel);
+    assertThat(actual.remoteIcon()).isEqualTo("hello");
   }
 }
