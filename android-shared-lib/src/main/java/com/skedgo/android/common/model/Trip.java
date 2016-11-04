@@ -21,30 +21,6 @@ import java.util.Locale;
  */
 public class Trip implements Parcelable, ITimeRange {
   public static final float UNKNOWN_COST = -9999.9999F;
-
-  /**
-   * This will be transformed into a list of {@link TripSegment}.
-   */
-  @SerializedName("segments") public ArrayList<JsonObject> rawSegmentList;
-  @SerializedName("currencySymbol") private String currencySymbol;
-  @SerializedName("saveURL") private String saveURL;
-  @SerializedName("depart") private long mStartTimeInSecs;
-  @SerializedName("arrive") private long mEndTimeInSecs;
-  @SerializedName("caloriesCost") private float caloriesCost;
-  @SerializedName("moneyCost") private float mMoneyCost;
-  @SerializedName("carbonCost") private float mCarbonCost;
-  @SerializedName("hassleCost") private float mHassleCost;
-  @SerializedName("weightedScore") private float weightedScore;
-  @SerializedName("updateURL") private String updateURL;
-  @SerializedName("progressURL") private String progressURL;
-  @SerializedName("plannedURL") private String plannedURL;
-  @SerializedName("temporaryURL") private String temporaryURL;
-
-  private long mId;
-  private transient TripGroup mGroup;
-  private boolean mIsFavourite;
-  private ArrayList<TripSegment> mSegments;
-
   public static final Creator<Trip> CREATOR = new Creator<Trip>() {
     public Trip createFromParcel(Parcel in) {
       Trip trip = new Trip();
@@ -72,6 +48,7 @@ public class Trip implements Parcelable, ITimeRange {
       trip.caloriesCost = in.readFloat();
       trip.plannedURL = in.readString();
       trip.temporaryURL = in.readString();
+      trip.queryIsLeaveAfter = in.readByte() == 1;
       return trip;
     }
 
@@ -79,6 +56,29 @@ public class Trip implements Parcelable, ITimeRange {
       return new Trip[size];
     }
   };
+
+  /**
+   * This will be transformed into a list of {@link TripSegment}.
+   */
+  @SerializedName("segments") public ArrayList<JsonObject> rawSegmentList;
+  @SerializedName("currencySymbol") private String currencySymbol;
+  @SerializedName("saveURL") private String saveURL;
+  @SerializedName("depart") private long mStartTimeInSecs;
+  @SerializedName("arrive") private long mEndTimeInSecs;
+  @SerializedName("caloriesCost") private float caloriesCost;
+  @SerializedName("moneyCost") private float mMoneyCost;
+  @SerializedName("carbonCost") private float mCarbonCost;
+  @SerializedName("hassleCost") private float mHassleCost;
+  @SerializedName("weightedScore") private float weightedScore;
+  @SerializedName("updateURL") private String updateURL;
+  @SerializedName("progressURL") private String progressURL;
+  @SerializedName("plannedURL") private String plannedURL;
+  @SerializedName("temporaryURL") private String temporaryURL;
+  private boolean queryIsLeaveAfter;
+  private long mId;
+  private transient TripGroup mGroup;
+  private boolean mIsFavourite;
+  private ArrayList<TripSegment> mSegments;
 
   public Trip() {
     mStartTimeInSecs = 0;
@@ -228,12 +228,20 @@ public class Trip implements Parcelable, ITimeRange {
     return caloriesCost;
   }
 
+  void setCaloriesCost(float caloriesCost) {
+    this.caloriesCost = caloriesCost;
+  }
+
   @Nullable public String getTemporaryURL() {
     return temporaryURL;
   }
 
-  void setCaloriesCost(float caloriesCost) {
-    this.caloriesCost = caloriesCost;
+  public boolean queryIsLeaveAfter() {
+    return queryIsLeaveAfter;
+  }
+
+  public void setQueryIsLeaveAfter(boolean queryIsLeaveAfter) {
+    this.queryIsLeaveAfter = queryIsLeaveAfter;
   }
 
   @Nullable public String getPlannedURL() {
@@ -299,6 +307,7 @@ public class Trip implements Parcelable, ITimeRange {
     dest.writeFloat(caloriesCost);
     dest.writeString(plannedURL);
     dest.writeString(temporaryURL);
+    dest.writeByte((byte) (queryIsLeaveAfter ? 1 : 0));
   }
 
   public ArrayList<String> getTripModes() {

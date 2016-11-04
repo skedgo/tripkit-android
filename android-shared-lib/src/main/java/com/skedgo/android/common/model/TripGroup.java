@@ -32,7 +32,6 @@ public class TripGroup implements Parcelable {
       }
 
       tripGroup.frequency = in.readInt();
-      tripGroup.query = in.readParcelable(Query.class.getClassLoader());
       return tripGroup;
     }
 
@@ -42,7 +41,6 @@ public class TripGroup implements Parcelable {
   };
   private long id;
   private long displayTripId;
-  private Query query;
 
   @SerializedName("trips") private ArrayList<Trip> trips;
   @SerializedName("frequency") private int frequency;
@@ -102,14 +100,6 @@ public class TripGroup implements Parcelable {
 
   public void setFrequency(int frequency) {
     this.frequency = frequency;
-  }
-
-  public Query getQuery() {
-    return query;
-  }
-
-  public void setQuery(Query query) {
-    this.query = query;
   }
 
   public void addTrip(Trip trip) {
@@ -212,7 +202,6 @@ public class TripGroup implements Parcelable {
     out.writeLong(displayTripId);
     out.writeList(trips);
     out.writeInt(frequency);
-    out.writeParcelable(query, 0);
   }
 
   public Observable<Pair<ServiceStop, Boolean>> onChangeStop() {
