@@ -21,26 +21,6 @@ import static org.mockito.Mockito.when;
 @RunWith(TestRunner.class)
 @Config(constants = BuildConfig.class)
 public class TripGroupTest {
-  @Test public void shouldParcelProperly() {
-    TripGroup expected = new TripGroup();
-    TripGroup actual = TripGroup.CREATOR.createFromParcel(Utils.parcel(expected));
-  }
-
-  @Test public void parcelVisibility() {
-    {
-      TripGroup expected = new TripGroup();
-      expected.setVisibility(FULL);
-      TripGroup actual = TripGroup.CREATOR.createFromParcel(Utils.parcel(expected));
-      assertThat(actual.getVisibility()).isEqualTo(FULL);
-    }
-    {
-      TripGroup expected = new TripGroup();
-      expected.setVisibility(COMPACT);
-      TripGroup actual = TripGroup.CREATOR.createFromParcel(Utils.parcel(expected));
-      assertThat(actual.getVisibility()).isEqualTo(COMPACT);
-    }
-  }
-
   @Test public void addAsDisplayTrip() {
     final Trip a = mock(Trip.class);
     when(a.getId()).thenReturn(1L);

@@ -33,7 +33,6 @@ public class TripGroup implements Parcelable {
 
       tripGroup.frequency = in.readInt();
       tripGroup.query = in.readParcelable(Query.class.getClassLoader());
-      tripGroup.visibility = GroupVisibility.valueOf(in.readString());
       return tripGroup;
     }
 
@@ -214,7 +213,6 @@ public class TripGroup implements Parcelable {
     out.writeList(trips);
     out.writeInt(frequency);
     out.writeParcelable(query, 0);
-    out.writeString(visibility.name());
   }
 
   public Observable<Pair<ServiceStop, Boolean>> onChangeStop() {
