@@ -24,27 +24,13 @@ public class BookingServiceImpl implements BookingService {
   }
 
   @Override public Observable<BookingForm> getFormAsync(String url) {
-    return bookingApi.getFormAsync(url);
+    return bookingApi.getFormAsync(url).flatMap(handleBookingResponse);
   }
 
   @Override public Observable<BookingForm> postFormAsync(String url, InputForm inputForm) {
 
     return bookingApi.postFormAsync(url, inputForm)
-        .flatMap(new Func1<Response<BookingForm>, Observable<BookingForm>>() {
-          @Override
-          public Observable<BookingForm> call(final Response<BookingForm> bookingFormResponse) {
-
-            if (!bookingFormResponse.isSuccessful()) {
-              try {
-                BookingError e = asBookingError(bookingFormResponse.errorBody().string());
-                return Observable.error(e);
-              } catch (IOException e) {
-                e.printStackTrace();
-              }
-            }
-            return Observable.just(bookingFormResponse.body());
-          }
-        });
+        .flatMap(handleBookingResponse);
   }
 
   @Override public Single<ExternalOAuth> getExternalOauth(String authId) {
@@ -55,4 +41,20 @@ public class BookingServiceImpl implements BookingService {
     return gson.fromJson(bookingErrorJson, BookingError.class);
   }
 
+  @VisibleForTesting Func1<Response<BookingForm>, Observable<BookingForm>> handleBookingResponse =
+      new Func1<Response<BookingForm>, Observable<BookingForm>>() {
+        @Override
+        public Observable<BookingForm> call(final Response<BookingForm> bookingFormResponse) {
+
+          if (!bookingFormResponse.isSuccessful()) {
+            try {
+              BookingError e = asBookingError(bookingFormResponse.errorBody().string());
+              return Observable.error(e);
+            } catch (IOException e) {
+              return Observable.error(e);
+            }
+          }
+          return Observable.just(bookingFormResponse.body());
+        }
+      };
 }

@@ -20,8 +20,8 @@ import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-@RunWith(RobolectricGradleTestRunner.class)
-@Config(constants = BuildConfig.class, sdk = 21)
+@RunWith(TestRunner.class)
+@Config(constants = BuildConfig.class)
 public class BookingFormTest {
 
   private Gson gson;
@@ -381,6 +381,32 @@ public class BookingFormTest {
     assertThat(bookingForm.getToken()).isEqualTo("TOKEN");
     assertThat(bookingForm.getExpiresIn()).isEqualTo(1000);
     assertThat(bookingForm.getRefreshToken()).isEqualTo("REFRESH TOKEN");
+
+  }
+
+  @Test public void shouldBeAuthForm() throws IOException {
+
+    String authBookingFormJson = IOUtils.toString(getClass().
+        getResourceAsStream("/auth-booking-form.json"), Charset.defaultCharset());
+
+    JsonReader reader = new JsonReader(new StringReader(authBookingFormJson));
+    reader.setLenient(true);
+    BookingForm bookingForm = gson.fromJson(reader, BookingForm.class);
+
+    assertThat(bookingForm.isOAuthForm()).isTrue();
+
+  }
+
+  @Test public void shouldBePayiQForm() throws IOException {
+
+    String authBookingFormJson = IOUtils.toString(getClass().
+        getResourceAsStream("/auth-payiq-form.json"), Charset.defaultCharset());
+
+    JsonReader reader = new JsonReader(new StringReader(authBookingFormJson));
+    reader.setLenient(true);
+    BookingForm bookingForm = gson.fromJson(reader, BookingForm.class);
+
+    assertThat(bookingForm.isPayIQAuthForm()).isTrue();
 
   }
 

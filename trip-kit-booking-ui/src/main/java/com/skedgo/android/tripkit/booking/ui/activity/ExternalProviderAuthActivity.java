@@ -10,8 +10,9 @@ import com.skedgo.android.tripkit.booking.ui.fragment.ExternalProviderAuthFragme
 
 import skedgo.anim.AnimatedTransitionActivity;
 
+import static com.skedgo.android.tripkit.booking.ui.activity.BookingActivity.KEY_BOOKING_FORM;
+
 public class ExternalProviderAuthActivity extends AnimatedTransitionActivity {
-  public static final String KEY_BOOKING_FORM = "bookingForm";
 
   public static Intent newIntent(Context context, BookingForm bookingForm) {
     Intent intent = new Intent(context, ExternalProviderAuthActivity.class);
