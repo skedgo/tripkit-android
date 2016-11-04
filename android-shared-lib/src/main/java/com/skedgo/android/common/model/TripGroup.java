@@ -34,7 +34,7 @@ public class TripGroup implements Parcelable {
 
       tripGroup.frequency = in.readInt();
       tripGroup.query = in.readParcelable(Query.class.getClassLoader());
-      tripGroup.visibility.put(Visibility.valueOf(in.readString()));
+      tripGroup.visibility.put(GroupVisibility.valueOf(in.readString()));
       return tripGroup;
     }
 
@@ -49,7 +49,7 @@ public class TripGroup implements Parcelable {
   @SerializedName("trips") private ArrayList<Trip> trips;
   @SerializedName("frequency") private int frequency;
 
-  private transient Var<Visibility> visibility = Var.create(Visibility.FULL);
+  private transient Var<GroupVisibility> visibility = Var.create(GroupVisibility.FULL);
   private transient PublishSubject<Pair<ServiceStop, Boolean>> onChangeStop = PublishSubject.create();
 
   public long getId() {
@@ -218,24 +218,11 @@ public class TripGroup implements Parcelable {
     out.writeString(visibility.value().name());
   }
 
-  public Var<Visibility> visibility() {
+  public Var<GroupVisibility> visibility() {
     return visibility;
   }
 
   public Observable<Pair<ServiceStop, Boolean>> onChangeStop() {
     return onChangeStop;
-  }
-
-  public enum Visibility {
-    FULL(1), COMPACT(0), GONE(-1);
-
-    /**
-     * To be sortable.
-     */
-    public final int value;
-
-    Visibility(int value) {
-      this.value = value;
-    }
   }
 }

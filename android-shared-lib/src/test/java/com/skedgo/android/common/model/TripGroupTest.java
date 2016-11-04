@@ -12,15 +12,14 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
-import static com.skedgo.android.common.model.TripGroup.Visibility.COMPACT;
-import static com.skedgo.android.common.model.TripGroup.Visibility.FULL;
-import static com.skedgo.android.common.model.TripGroup.Visibility.GONE;
+import static com.skedgo.android.common.model.GroupVisibility.COMPACT;
+import static com.skedgo.android.common.model.GroupVisibility.FULL;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 @RunWith(TestRunner.class)
-@Config(constants = BuildConfig.class, sdk = 21)
+@Config(constants = BuildConfig.class)
 public class TripGroupTest {
   @Test public void shouldParcelProperly() {
     TripGroup expected = new TripGroup();
@@ -39,12 +38,6 @@ public class TripGroupTest {
       expected.visibility().put(COMPACT);
       TripGroup actual = TripGroup.CREATOR.createFromParcel(Utils.parcel(expected));
       assertThat(actual.visibility().value()).isEqualTo(COMPACT);
-    }
-    {
-      TripGroup expected = new TripGroup();
-      expected.visibility().put(GONE);
-      TripGroup actual = TripGroup.CREATOR.createFromParcel(Utils.parcel(expected));
-      assertThat(actual.visibility().value()).isEqualTo(GONE);
     }
   }
 
@@ -80,24 +73,19 @@ public class TripGroupTest {
     group.addAsDisplayTrip(c);
   }
 
-  @Test public void fullCompactGoneOrder() {
+  @Test public void fullIsGreaterThanCompact() {
     assertThat(FULL.value).isGreaterThan(COMPACT.value);
-    assertThat(COMPACT.value).isGreaterThan(GONE.value);
   }
 
-  @Test public void arrangedByFullCompactGone() {
+  @Test public void arrangedByFullCompact() {
     TripGroup fullGroup = new TripGroup();
     fullGroup.visibility().put(FULL);
 
     TripGroup compactGroup = new TripGroup();
     compactGroup.visibility().put(COMPACT);
 
-    TripGroup goneGroup = new TripGroup();
-    goneGroup.visibility().put(GONE);
-
     List<TripGroup> groups = new ArrayList<>(Arrays.asList(
         compactGroup,
-        goneGroup,
         fullGroup
     ));
 
@@ -105,8 +93,7 @@ public class TripGroupTest {
 
     assertThat(groups).containsExactly(
         fullGroup,
-        compactGroup,
-        goneGroup
+        compactGroup
     );
   }
 
