@@ -28,7 +28,6 @@ public class TripGroup implements Parcelable {
       TripGroup tripGroup = new TripGroup();
 
       tripGroup.id = in.readLong();
-      tripGroup.queryId = in.readLong();
       tripGroup.displayTripId = in.readLong();
       tripGroup.trips = in.readArrayList(Trip.class.getClassLoader());
 
@@ -50,7 +49,6 @@ public class TripGroup implements Parcelable {
   };
   private long id;
   private long displayTripId;
-  private long queryId;
   private Query query;
 
   @SerializedName("trips") private ArrayList<Trip> trips;
@@ -65,14 +63,6 @@ public class TripGroup implements Parcelable {
 
   public void setId(long id) {
     this.id = id;
-  }
-
-  public long getQueryId() {
-    return queryId;
-  }
-
-  public void setQueryId(long queryId) {
-    this.queryId = queryId;
   }
 
   public long getDisplayTripId() {
@@ -226,7 +216,6 @@ public class TripGroup implements Parcelable {
   @Override
   public void writeToParcel(Parcel out, int flags) {
     out.writeLong(id);
-    out.writeLong(queryId);
     out.writeLong(displayTripId);
     out.writeList(trips);
     out.writeInt(frequency);
