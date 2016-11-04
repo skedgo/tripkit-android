@@ -7,7 +7,6 @@ import android.support.annotation.Nullable;
 import android.util.Pair;
 
 import com.google.gson.annotations.SerializedName;
-import com.skedgo.android.common.rx.Var;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -34,7 +33,7 @@ public class TripGroup implements Parcelable {
 
       tripGroup.frequency = in.readInt();
       tripGroup.query = in.readParcelable(Query.class.getClassLoader());
-      tripGroup.visibility.put(GroupVisibility.valueOf(in.readString()));
+      tripGroup.visibility = GroupVisibility.valueOf(in.readString());
       return tripGroup;
     }
 
@@ -48,8 +47,8 @@ public class TripGroup implements Parcelable {
 
   @SerializedName("trips") private ArrayList<Trip> trips;
   @SerializedName("frequency") private int frequency;
+  private transient GroupVisibility visibility = GroupVisibility.FULL;
 
-  private transient Var<GroupVisibility> visibility = Var.create(GroupVisibility.FULL);
   private transient PublishSubject<Pair<ServiceStop, Boolean>> onChangeStop = PublishSubject.create();
 
   public long getId() {
@@ -215,14 +214,18 @@ public class TripGroup implements Parcelable {
     out.writeList(trips);
     out.writeInt(frequency);
     out.writeParcelable(query, 0);
-    out.writeString(visibility.value().name());
-  }
-
-  public Var<GroupVisibility> visibility() {
-    return visibility;
+    out.writeString(visibility.name());
   }
 
   public Observable<Pair<ServiceStop, Boolean>> onChangeStop() {
     return onChangeStop;
+  }
+
+  public GroupVisibility getVisibility() {
+    return visibility;
+  }
+
+  public void setVisibility(@NonNull GroupVisibility visibility) {
+    this.visibility = visibility;
   }
 }

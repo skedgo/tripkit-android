@@ -29,15 +29,15 @@ public class TripGroupTest {
   @Test public void parcelVisibility() {
     {
       TripGroup expected = new TripGroup();
-      expected.visibility().put(FULL);
+      expected.setVisibility(FULL);
       TripGroup actual = TripGroup.CREATOR.createFromParcel(Utils.parcel(expected));
-      assertThat(actual.visibility().value()).isEqualTo(FULL);
+      assertThat(actual.getVisibility()).isEqualTo(FULL);
     }
     {
       TripGroup expected = new TripGroup();
-      expected.visibility().put(COMPACT);
+      expected.setVisibility(COMPACT);
       TripGroup actual = TripGroup.CREATOR.createFromParcel(Utils.parcel(expected));
-      assertThat(actual.visibility().value()).isEqualTo(COMPACT);
+      assertThat(actual.getVisibility()).isEqualTo(COMPACT);
     }
   }
 
@@ -79,10 +79,10 @@ public class TripGroupTest {
 
   @Test public void arrangedByFullCompact() {
     TripGroup fullGroup = new TripGroup();
-    fullGroup.visibility().put(FULL);
+    fullGroup.setVisibility(FULL);
 
     TripGroup compactGroup = new TripGroup();
-    compactGroup.visibility().put(COMPACT);
+    compactGroup.setVisibility(COMPACT);
 
     List<TripGroup> groups = new ArrayList<>(Arrays.asList(
         compactGroup,
@@ -109,7 +109,7 @@ public class TripGroupTest {
     trip1.setStartTimeInSecs(2);
     trip1.setEndTimeInSecs(4);
     group1.addTrip(trip1);
-    group1.visibility().put(COMPACT);
+    group1.setVisibility(COMPACT);
 
     TripGroup group2 = new TripGroup();
     Trip trip2 = new Trip();
@@ -122,7 +122,7 @@ public class TripGroupTest {
     trip3.setStartTimeInSecs(2);
     trip3.setEndTimeInSecs(4);
     group3.addTrip(trip3);
-    group3.visibility().put(FULL);
+    group3.setVisibility(FULL);
 
     List<TripGroup> groups = new ArrayList<>(Arrays.asList(
         group1, group0, group2, group3

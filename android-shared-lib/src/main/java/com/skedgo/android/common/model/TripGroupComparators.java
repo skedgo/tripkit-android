@@ -61,7 +61,7 @@ public final class TripGroupComparators {
         @Override
         public int compare(TripGroup lhs, TripGroup rhs) {
           // By descendant.
-          return rhs.visibility().value().value - lhs.visibility().value().value;
+          return rhs.getVisibility().value - lhs.getVisibility().value;
         }
       });
 
