@@ -168,7 +168,7 @@
 	<string name="title_exclude_event_from_route">Activiteit in deze reis uitsluiten?</string>
 	<string name="timetable_no_data">Er zijn geen diensten gevonden voor dit station</string>
 	<string name="trip_to_unknown_dest_about_to_start">Het ziet ernaar uit dat u ergens naartoe moet</string>
-	<string name="trip_to">"Reis naar "</string>
+	<string name="trip_to">"Reis naar %s"</string>
 	<string name="trip_preferences">Reis voorkeuren</string>
 	<string name="transport_selector_header">Include in the route results</string>
 	<string name="walkthrough_4">Search routes directly right from Google search bar without opening TripGo.</string>

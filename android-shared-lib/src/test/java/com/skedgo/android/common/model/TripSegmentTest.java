@@ -1,5 +1,7 @@
 package com.skedgo.android.common.model;
 
+import android.os.Parcel;
+
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonObject;
@@ -268,5 +270,51 @@ public class TripSegmentTest {
         .registerTypeAdapterFactory(new LowercaseEnumTypeAdapterFactory())
         .registerTypeAdapterFactory(new GsonAdaptersBooking())
         .create();
+  }
+
+  public void shouldParseMetresAndMetresSafe() throws Exception {
+    JsonObject jsonObject = new JsonObject();
+    jsonObject.addProperty("metres", 18);
+    jsonObject.addProperty("metresSafe", 3);
+    TripSegment tripSegment = new Gson().fromJson(jsonObject, TripSegment.class);
+    assertThat(tripSegment.getMetres()).isEqualTo(18);
+    assertThat(tripSegment.getMetresSafe()).isEqualTo(3);
+  }
+
+  @Test
+  public void shouldCalculatePercentageAndRoundUp() throws Exception {
+    TripSegment tripSegment = new TripSegment();
+    tripSegment.setMetresSafe(10);
+    tripSegment.setMetres(20);
+    assertThat(tripSegment.getWheelchairFriendliness()).isEqualTo(50);
+    assertThat(tripSegment.getCycleFriendliness()).isEqualTo(50);
+
+    tripSegment.setMetresSafe(1);
+    tripSegment.setMetres(3);
+    assertThat(tripSegment.getWheelchairFriendliness()).isEqualTo(33);
+    assertThat(tripSegment.getCycleFriendliness()).isEqualTo(33); // 1 / 3 is 33 percent
+
+    tripSegment.setMetresSafe(2);
+    tripSegment.setMetres(3);
+    assertThat(tripSegment.getWheelchairFriendliness()).isEqualTo(67);
+    assertThat(tripSegment.getCycleFriendliness()).isEqualTo(67); // 2 / 3 is rounded up to 67 percent
+  }
+
+  @Test
+  public void shouldParcelMetres() throws Exception {
+    TripSegment tripSegment = new TripSegment();
+    tripSegment.setMetres(10);
+    Parcel parcel = Utils.parcel(tripSegment);
+    TripSegment actual = TripSegment.CREATOR.createFromParcel(parcel);
+    assertThat(actual.getMetres()).isEqualTo(10);
+  }
+
+  @Test
+  public void shouldParcelMetresSafe() throws Exception {
+    TripSegment tripSegment = new TripSegment();
+    tripSegment.setMetresSafe(17);
+    Parcel parcel = Utils.parcel(tripSegment);
+    TripSegment actual = TripSegment.CREATOR.createFromParcel(parcel);
+    assertThat(actual.getMetresSafe()).isEqualTo(17);
   }
 }

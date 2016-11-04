@@ -26,7 +26,6 @@ import java.util.TimeZone;
 import java.util.concurrent.TimeUnit;
 
 import rx.Observable;
-import rx.functions.Func1;
 import rx.observers.TestSubscriber;
 
 import static com.skedgo.android.tripkit.BookingResolver.FLITWAYS;
@@ -37,7 +36,8 @@ import static com.skedgo.android.tripkit.BookingResolver.OTHERS;
 import static com.skedgo.android.tripkit.BookingResolver.SMS;
 import static com.skedgo.android.tripkit.BookingResolver.UBER;
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.mockito.Matchers.any;
+import static org.mockito.Matchers.anyDouble;
+import static org.mockito.Matchers.anyInt;
 import static org.mockito.Matchers.eq;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
@@ -59,7 +59,7 @@ public class BookingResolverImplTest {
         }
       };
   @Mock PackageManager packageManager;
-  @Mock Func1<ReverseGeocodingParams, Observable<String>> reverseGeocoderFactory;
+  @Mock GeocoderFactory geocoderFactory;
   private BookingResolverImpl bookingResolver;
 
   @Before public void before() {
@@ -67,7 +67,7 @@ public class BookingResolverImplTest {
     bookingResolver = new BookingResolverImpl(
         RuntimeEnvironment.application.getResources(),
         packageManager,
-        reverseGeocoderFactory
+        geocoderFactory
     );
   }
 
@@ -209,11 +209,11 @@ public class BookingResolverImplTest {
   }
 
   @Test public void hasNoFlitwaysApp_hasPartnerKey() {
-    when(reverseGeocoderFactory.call(any(ReverseGeocodingParams.class)))
+    when(geocoderFactory.firstAddressAsync(anyDouble(), anyDouble(), anyInt()))
         .thenAnswer(new Answer<Observable<String>>() {
           @Override public Observable<String> answer(InvocationOnMock invocation) {
-            final ReverseGeocodingParams params = invocation.getArgumentAt(0, ReverseGeocodingParams.class);
-            if (params.lat() == 1.0) {
+            final double lat = invocation.getArgumentAt(0, Double.class);
+            if (lat == 1.0) {
               return Observable.just("A");
             } else {
               return Observable.just("B");
@@ -308,11 +308,11 @@ public class BookingResolverImplTest {
   }
 
   @Test public void hasGoCatchApp() throws PackageManager.NameNotFoundException {
-    when(reverseGeocoderFactory.call(any(ReverseGeocodingParams.class)))
+    when(geocoderFactory.firstAddressAsync(anyDouble(), anyDouble(), anyInt()))
         .thenAnswer(new Answer<Observable<String>>() {
           @Override public Observable<String> answer(InvocationOnMock invocation) {
-            final ReverseGeocodingParams params = invocation.getArgumentAt(0, ReverseGeocodingParams.class);
-            if (params.lat() == 1.0) {
+            final double lat = invocation.getArgumentAt(0, Double.class);
+            if (lat == 1.0) {
               return Observable.just("A");
             } else {
               return Observable.just("B");

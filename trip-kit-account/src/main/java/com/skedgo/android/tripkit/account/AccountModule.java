@@ -43,7 +43,7 @@ public class AccountModule {
       AccountApi accountApi,
       UserTokenStore userTokenStore,
       Configs configs) {
-    return new AccountServiceImpl(
+    return new AccountService(
         accountApi,
         userTokenStore,
         accountPreferences(configs)
