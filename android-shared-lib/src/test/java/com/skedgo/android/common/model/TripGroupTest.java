@@ -101,7 +101,7 @@ public class TripGroupTest {
         fullGroup
     ));
 
-    Collections.sort(groups, TripGroup.Comparators.DESC_VISIBILITY_COMPARATOR);
+    Collections.sort(groups, TripGroupComparators.DESC_VISIBILITY_COMPARATOR);
 
     assertThat(groups).containsExactly(
         fullGroup,
@@ -140,7 +140,7 @@ public class TripGroupTest {
     List<TripGroup> groups = new ArrayList<>(Arrays.asList(
         group1, group0, group2, group3
     ));
-    Collections.sort(groups, TripGroup.Comparators.ARRIVAL_COMPARATOR_CHAIN);
+    Collections.sort(groups, TripGroupComparators.ARRIVAL_COMPARATOR_CHAIN);
     assertThat(groups).containsExactly(
         group0, group3, group1, group2
     );
