@@ -12,5 +12,5 @@ public interface AccountApi {
   @POST("account/signup") Observable<SignUpResponse> signUpAsync(@Body SignUpBody body);
   @POST("account/login") Observable<LogInResponse> logInAsync(@Body LogInBody body);
   @POST("account/logout") Observable<LogOutResponse> logOutAsync();
-  @POST() Observable<LogInResponse> logInSilentAsync(@Url String token);
+  @POST Observable<LogInResponse> logInSilentAsync(@Url String tokenEndpoint);
 }
