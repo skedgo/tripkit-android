@@ -22,11 +22,11 @@ import static com.skedgo.android.common.model.Occupancy.STANDING_ROOM_ONLY;
     NOT_ACCEPTING_PASSENGERS})
 @Retention(RetentionPolicy.SOURCE)
 public @interface Occupancy {
-  String EMPTY = "empty";
-  String MANY_SEATS_AVAILABLE = "many_seats_available";
-  String FEW_SEATS_AVAILABLE = "few_seats_available";
-  String STANDING_ROOM_ONLY = "standing_room_only";
-  String CRUSHED_STANDING_ROOM_ONLY = "crushed_standing_room_only";
-  String FULL = "full";
-  String NOT_ACCEPTING_PASSENGERS = "not_accepting_passengers";
+  String EMPTY = "EMPTY";
+  String MANY_SEATS_AVAILABLE = "MANY_SEATS_AVAILABLE";
+  String FEW_SEATS_AVAILABLE = "FEW_SEATS_AVAILABLE";
+  String STANDING_ROOM_ONLY = "STANDING_ROOM_ONLY";
+  String CRUSHED_STANDING_ROOM_ONLY = "CRUSHED_STANDING_ROOM_ONLY";
+  String FULL = "FULL";
+  String NOT_ACCEPTING_PASSENGERS = "NOT_ACCEPTING_PASSENGERS";
 }

@@ -158,7 +158,7 @@ public class RealTimeVehicle implements Parcelable {
     dest.writeString(occupancy);
   }
 
-  @Nullable public String getOccupancy() {
+  @Nullable @Occupancy public String getOccupancy() {
     return occupancy;
   }
 
@@ -168,5 +168,9 @@ public class RealTimeVehicle implements Parcelable {
 
   public void setIcon(@Nullable String icon) {
     this.icon = icon;
+  }
+
+  public void setOccupancy(@Nullable String occupancy) {
+    this.occupancy = occupancy;
   }
 }
