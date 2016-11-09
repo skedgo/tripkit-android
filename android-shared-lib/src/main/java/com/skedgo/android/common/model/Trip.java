@@ -15,6 +15,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Locale;
+import java.util.UUID;
 
 /**
  * @see <a href="https://redmine.buzzhives.com/projects/buzzhives/wiki/Main_API_formats#Trips">API format</a>
@@ -25,6 +26,7 @@ public class Trip implements Parcelable, ITimeRange {
     public Trip createFromParcel(Parcel in) {
       Trip trip = new Trip();
 
+      trip.uuid = in.readString();
       trip.mId = in.readLong();
       trip.mStartTimeInSecs = in.readLong();
       trip.mEndTimeInSecs = in.readLong();
@@ -75,6 +77,7 @@ public class Trip implements Parcelable, ITimeRange {
   @SerializedName("plannedURL") private String plannedURL;
   @SerializedName("temporaryURL") private String temporaryURL;
   private boolean queryIsLeaveAfter;
+  private String uuid = UUID.randomUUID().toString();
   private long mId;
   private transient TripGroup mGroup;
   private boolean mIsFavourite;
@@ -86,6 +89,10 @@ public class Trip implements Parcelable, ITimeRange {
     mMoneyCost = UNKNOWN_COST;
     mCarbonCost = 0;
     mHassleCost = 0;
+  }
+
+  public String uuid() {
+    return uuid;
   }
 
   public long getId() {
@@ -291,6 +298,7 @@ public class Trip implements Parcelable, ITimeRange {
 
   @Override
   public void writeToParcel(final Parcel dest, final int flags) {
+    dest.writeString(uuid);
     dest.writeLong(mId);
     dest.writeLong(mStartTimeInSecs);
     dest.writeLong(mEndTimeInSecs);
