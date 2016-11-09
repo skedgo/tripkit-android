@@ -56,5 +56,8 @@ public class QueryTest {
 
     assertThat(clone.getMaxWalkingTime())
         .isEqualTo(query.getMaxWalkingTime());
+
+    // To prevent https://skedgo.uservoice.com/admin/tickets/7729.
+    assertThat(clone.uuid()).isNotEqualTo(query.uuid());
   }
 }

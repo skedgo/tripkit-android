@@ -12,6 +12,7 @@ import android.text.TextUtils;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 import java.util.concurrent.TimeUnit;
 
 public class Query implements Parcelable {
@@ -22,8 +23,7 @@ public class Query implements Parcelable {
   public static final Creator<Query> CREATOR = new Creator<Query>() {
     public Query createFromParcel(Parcel in) {
       Query query = new Query();
-      query.mId = in.readLong();
-      query.mBestOnly = in.readInt() == 1;
+      query.uuid = in.readString();
       query.mUnit = in.readString();
       query.mFromLocation = in.readParcelable(Location.class.getClassLoader());
       query.mToLocation = in.readParcelable(Location.class.getClassLoader());
@@ -48,9 +48,8 @@ public class Query implements Parcelable {
     }
   };
 
+  private String uuid = UUID.randomUUID().toString();
   private List<String> transportModeIds = new ArrayList<>();
-  private long mId;
-  private boolean mBestOnly;
   private String mUnit;
   private Location mFromLocation;
   private Location mToLocation;
@@ -79,9 +78,6 @@ public class Query implements Parcelable {
 
   public Query clone(boolean cloneTransportMode) {
     Query query = new Query();
-
-    query.mId = mId;
-    query.mBestOnly = mBestOnly;
     query.mFromLocation = mFromLocation;
     query.mToLocation = mToLocation;
     query.timeTag = timeTag;
@@ -105,22 +101,6 @@ public class Query implements Parcelable {
     }
 
     return query;
-  }
-
-  public long getId() {
-    return mId;
-  }
-
-  public void setId(final long mId) {
-    this.mId = mId;
-  }
-
-  public boolean isBestOnly() {
-    return mBestOnly;
-  }
-
-  public void isBestOnly(final boolean bestOnly) {
-    this.mBestOnly = bestOnly;
   }
 
   public String getUnit() {
@@ -303,23 +283,19 @@ public class Query implements Parcelable {
     }
 
     Query query = (Query) o;
-    return mId == query.mId;
+    return TextUtils.equals(uuid, query.uuid);
   }
 
-  @Override
-  public int hashCode() {
-    return (int) (mId ^ (mId >>> 32));
+  @Override public int hashCode() {
+    return uuid.hashCode();
   }
 
-  @Override
-  public int describeContents() {
-    return hashCode();
+  @Override public int describeContents() {
+    return 0;
   }
 
-  @Override
-  public void writeToParcel(final Parcel dest, final int flags) {
-    dest.writeLong(mId);
-    dest.writeInt(mBestOnly ? 1 : 0);
+  @Override public void writeToParcel(final Parcel dest, final int flags) {
+    dest.writeString(uuid);
     dest.writeString(mUnit);
     dest.writeParcelable(mFromLocation, 0);
     dest.writeParcelable(mToLocation, 0);
@@ -351,6 +327,10 @@ public class Query implements Parcelable {
    */
   public void setMaxWalkingTime(int minutes) {
     this.maxWalkingTime = minutes;
+  }
+
+  public String uuid() {
+    return uuid;
   }
 
   private List<String> readTransportModeIds(Parcel in) {
