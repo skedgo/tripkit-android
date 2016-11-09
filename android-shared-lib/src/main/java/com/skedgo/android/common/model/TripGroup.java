@@ -12,6 +12,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
+import java.util.UUID;
 
 import rx.Observable;
 import rx.subjects.PublishSubject;
@@ -22,6 +23,7 @@ public class TripGroup implements Parcelable {
       TripGroup tripGroup = new TripGroup();
 
       tripGroup.id = in.readLong();
+      tripGroup.uuid = in.readString();
       tripGroup.displayTripId = in.readLong();
       tripGroup.trips = in.readArrayList(Trip.class.getClassLoader());
 
@@ -39,6 +41,7 @@ public class TripGroup implements Parcelable {
       return new TripGroup[size];
     }
   };
+  private String uuid = UUID.randomUUID().toString();
   private long id;
   private long displayTripId;
 
@@ -191,14 +194,13 @@ public class TripGroup implements Parcelable {
     onChangeStop.onNext(args);
   }
 
-  @Override
-  public int describeContents() {
+  @Override public int describeContents() {
     return 0;
   }
 
-  @Override
-  public void writeToParcel(Parcel out, int flags) {
+  @Override public void writeToParcel(Parcel out, int flags) {
     out.writeLong(id);
+    out.writeString(uuid);
     out.writeLong(displayTripId);
     out.writeList(trips);
     out.writeInt(frequency);
@@ -214,5 +216,9 @@ public class TripGroup implements Parcelable {
 
   public void setVisibility(@NonNull GroupVisibility visibility) {
     this.visibility = visibility;
+  }
+
+  public String uuid() {
+    return uuid;
   }
 }
