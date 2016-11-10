@@ -63,6 +63,10 @@ public class TripGroup implements Parcelable {
     return displayTripId;
   }
 
+  public void setDisplayTripId(long displayTripId) {
+    this.displayTripId = displayTripId;
+  }
+
   @Nullable
   public Trip getDisplayTrip() {
     if (trips == null || trips.isEmpty()) {
@@ -216,6 +220,10 @@ public class TripGroup implements Parcelable {
 
   public void setVisibility(@NonNull GroupVisibility visibility) {
     this.visibility = visibility;
+  }
+
+  public void uuid(String uuid) {
+    this.uuid = uuid;
   }
 
   public String uuid() {

@@ -91,6 +91,10 @@ public class Trip implements Parcelable, ITimeRange {
     mHassleCost = 0;
   }
 
+  public void uuid(String uuid) {
+    this.uuid = uuid;
+  }
+
   public String uuid() {
     return uuid;
   }
@@ -235,12 +239,16 @@ public class Trip implements Parcelable, ITimeRange {
     return caloriesCost;
   }
 
-  void setCaloriesCost(float caloriesCost) {
+  public void setCaloriesCost(float caloriesCost) {
     this.caloriesCost = caloriesCost;
   }
 
   @Nullable public String getTemporaryURL() {
     return temporaryURL;
+  }
+
+  public void setTemporaryURL(String temporaryURL) {
+    this.temporaryURL = temporaryURL;
   }
 
   public boolean queryIsLeaveAfter() {
@@ -263,7 +271,7 @@ public class Trip implements Parcelable, ITimeRange {
     return currencySymbol;
   }
 
-  void setCurrencySymbol(String currencySymbol) {
+  public void setCurrencySymbol(String currencySymbol) {
     this.currencySymbol = currencySymbol;
   }
 
