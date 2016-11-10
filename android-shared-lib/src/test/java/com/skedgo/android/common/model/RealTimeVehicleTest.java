@@ -20,9 +20,11 @@ public class RealTimeVehicleTest {
   @Test public void canBeParcelable() {
     final RealTimeVehicle v = new RealTimeVehicle();
     v.setIcon("uber-uberX");
+    v.setOccupancy(Occupancy.EMPTY);
 
     final RealTimeVehicle actual = RealTimeVehicle.CREATOR.createFromParcel(Parcels.parcel(v));
     assertThat(actual.getIcon()).isEqualTo(v.getIcon());
+    assertThat(actual.getOccupancy()).isEqualTo(Occupancy.EMPTY);
   }
 
   @Test public void canBeCreatedFromJson() {
@@ -61,20 +63,5 @@ public class RealTimeVehicleTest {
     JsonObject jsonObject = new JsonObject();
     RealTimeVehicle realTimeVehicle = new Gson().fromJson(jsonObject, RealTimeVehicle.class);
     assertThat(realTimeVehicle.getOccupancy()).isEqualTo(null);
-  }
-
-  @Test
-  public void shouldParcelOccupancyProperty() throws Exception {
-    // given a RealTimeVehicle with occupancy
-    RealTimeVehicle realTimeVehicle = new RealTimeVehicle();
-    realTimeVehicle.setOccupancy(Occupancy.EMPTY);
-
-    // when parcel and unParcel
-    Parcel parcel = Parcels.parcel(realTimeVehicle);
-    RealTimeVehicle actual = RealTimeVehicle.CREATOR.createFromParcel(parcel);
-
-    // expect occupancy to be the same
-    assertThat(actual.getOccupancy()).isEqualTo(Occupancy.EMPTY);
-
   }
 }
