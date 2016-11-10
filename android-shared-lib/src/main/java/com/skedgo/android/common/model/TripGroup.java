@@ -21,8 +21,6 @@ public class TripGroup implements Parcelable {
   public static final Creator<TripGroup> CREATOR = new Creator<TripGroup>() {
     public TripGroup createFromParcel(Parcel in) {
       TripGroup tripGroup = new TripGroup();
-
-      tripGroup.id = in.readLong();
       tripGroup.uuid = in.readString();
       tripGroup.displayTripId = in.readLong();
       tripGroup.trips = in.readArrayList(Trip.class.getClassLoader());
@@ -42,7 +40,6 @@ public class TripGroup implements Parcelable {
     }
   };
   private String uuid = UUID.randomUUID().toString();
-  private long id;
   private long displayTripId;
 
   @SerializedName("trips") private ArrayList<Trip> trips;
@@ -50,14 +47,6 @@ public class TripGroup implements Parcelable {
   private transient GroupVisibility visibility = GroupVisibility.FULL;
 
   private transient PublishSubject<Pair<ServiceStop, Boolean>> onChangeStop = PublishSubject.create();
-
-  public long getId() {
-    return id;
-  }
-
-  public void setId(long id) {
-    this.id = id;
-  }
 
   public long getDisplayTripId() {
     return displayTripId;
@@ -203,7 +192,6 @@ public class TripGroup implements Parcelable {
   }
 
   @Override public void writeToParcel(Parcel out, int flags) {
-    out.writeLong(id);
     out.writeString(uuid);
     out.writeLong(displayTripId);
     out.writeList(trips);
