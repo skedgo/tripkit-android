@@ -27,16 +27,16 @@ public class Trip implements Parcelable, ITimeRange {
       Trip trip = new Trip();
 
       trip.uuid = in.readString();
-      trip.id = in.readLong();
+      trip.mId = in.readLong();
       trip.mStartTimeInSecs = in.readLong();
       trip.mEndTimeInSecs = in.readLong();
-      trip.moneyCost = in.readFloat();
-      trip.carbonCost = in.readFloat();
-      trip.hassleCost = in.readFloat();
-      trip.segments = in.readArrayList(TripSegment.class.getClassLoader());
+      trip.mMoneyCost = in.readFloat();
+      trip.mCarbonCost = in.readFloat();
+      trip.mHassleCost = in.readFloat();
+      trip.mSegments = in.readArrayList(TripSegment.class.getClassLoader());
 
-      if (trip.segments != null) {
-        for (TripSegment segment : trip.segments) {
+      if (trip.mSegments != null) {
+        for (TripSegment segment : trip.mSegments) {
           segment.setTrip(trip);
         }
       }
@@ -68,9 +68,9 @@ public class Trip implements Parcelable, ITimeRange {
   @SerializedName("depart") private long mStartTimeInSecs;
   @SerializedName("arrive") private long mEndTimeInSecs;
   @SerializedName("caloriesCost") private float caloriesCost;
-  @SerializedName("moneyCost") private float moneyCost;
-  @SerializedName("carbonCost") private float carbonCost;
-  @SerializedName("hassleCost") private float hassleCost;
+  @SerializedName("moneyCost") private float mMoneyCost;
+  @SerializedName("carbonCost") private float mCarbonCost;
+  @SerializedName("hassleCost") private float mHassleCost;
   @SerializedName("weightedScore") private float weightedScore;
   @SerializedName("updateURL") private String updateURL;
   @SerializedName("progressURL") private String progressURL;
@@ -78,21 +78,17 @@ public class Trip implements Parcelable, ITimeRange {
   @SerializedName("temporaryURL") private String temporaryURL;
   private boolean queryIsLeaveAfter;
   private String uuid = UUID.randomUUID().toString();
-  private long id;
-  private transient TripGroup group;
+  private long mId;
+  private transient TripGroup mGroup;
   private boolean mIsFavourite;
-  private ArrayList<TripSegment> segments;
+  private ArrayList<TripSegment> mSegments;
 
   public Trip() {
     mStartTimeInSecs = 0;
     mEndTimeInSecs = 0;
-    moneyCost = UNKNOWN_COST;
-    carbonCost = 0;
-    hassleCost = 0;
-  }
-
-  public void uuid(String uuid) {
-    this.uuid = uuid;
+    mMoneyCost = UNKNOWN_COST;
+    mCarbonCost = 0;
+    mHassleCost = 0;
   }
 
   public String uuid() {
@@ -100,19 +96,19 @@ public class Trip implements Parcelable, ITimeRange {
   }
 
   public long getId() {
-    return id;
+    return mId;
   }
 
   public void setId(final long id) {
-    this.id = id;
+    this.mId = id;
   }
 
   public TripGroup getGroup() {
-    return group;
+    return mGroup;
   }
 
   public void setGroup(TripGroup group) {
-    this.group = group;
+    this.mGroup = group;
   }
 
   public long getStartTimeInSecs() {
@@ -136,35 +132,35 @@ public class Trip implements Parcelable, ITimeRange {
   }
 
   public float getMoneyCost() {
-    return moneyCost;
+    return mMoneyCost;
   }
 
   public void setMoneyCost(final float moneyCost) {
-    this.moneyCost = moneyCost;
+    this.mMoneyCost = moneyCost;
   }
 
   public float getCarbonCost() {
-    return carbonCost;
+    return mCarbonCost;
   }
 
   public void setCarbonCost(final float carbonCost) {
-    this.carbonCost = carbonCost;
+    this.mCarbonCost = carbonCost;
   }
 
   public float getHassleCost() {
-    return hassleCost;
+    return mHassleCost;
   }
 
   public void setHassleCost(final float hassleCost) {
-    this.hassleCost = hassleCost;
+    this.mHassleCost = hassleCost;
   }
 
   public Location getTo() {
-    if (segments == null || segments.isEmpty()) {
+    if (mSegments == null || mSegments.isEmpty()) {
       return null;
     }
 
-    TripSegment lastSeg = segments.get(segments.size() - 1);
+    TripSegment lastSeg = mSegments.get(mSegments.size() - 1);
     if (lastSeg == null) {
       return null;
     } else if (lastSeg.getTo() != null) {
@@ -175,11 +171,11 @@ public class Trip implements Parcelable, ITimeRange {
   }
 
   public Location getFrom() {
-    if (segments == null || segments.isEmpty()) {
+    if (mSegments == null || mSegments.isEmpty()) {
       return null;
     }
 
-    TripSegment firstSeg = segments.get(0);
+    TripSegment firstSeg = mSegments.get(0);
 
     if (firstSeg == null) {
       return null;
@@ -191,13 +187,13 @@ public class Trip implements Parcelable, ITimeRange {
   }
 
   public ArrayList<TripSegment> getSegments() {
-    return segments;
+    return mSegments;
   }
 
   public void setSegments(final ArrayList<TripSegment> segments) {
-    this.segments = segments;
-    if (this.segments != null) {
-      for (TripSegment seg : this.segments) {
+    this.mSegments = segments;
+    if (mSegments != null) {
+      for (TripSegment seg : mSegments) {
         seg.setTrip(this);
       }
     }
@@ -239,16 +235,12 @@ public class Trip implements Parcelable, ITimeRange {
     return caloriesCost;
   }
 
-  public void setCaloriesCost(float caloriesCost) {
+  void setCaloriesCost(float caloriesCost) {
     this.caloriesCost = caloriesCost;
   }
 
   @Nullable public String getTemporaryURL() {
     return temporaryURL;
-  }
-
-  public void setTemporaryURL(String temporaryURL) {
-    this.temporaryURL = temporaryURL;
   }
 
   public boolean queryIsLeaveAfter() {
@@ -271,7 +263,7 @@ public class Trip implements Parcelable, ITimeRange {
     return currencySymbol;
   }
 
-  public void setCurrencySymbol(String currencySymbol) {
+  void setCurrencySymbol(String currencySymbol) {
     this.currencySymbol = currencySymbol;
   }
 
@@ -284,11 +276,11 @@ public class Trip implements Parcelable, ITimeRange {
   }
 
   public boolean hasTransportMode(VehicleMode... modes) {
-    if (segments == null || segments.isEmpty() || modes == null) {
+    if (mSegments == null || mSegments.isEmpty() || modes == null) {
       return false;
     }
 
-    for (TripSegment seg : segments) {
+    for (TripSegment seg : mSegments) {
       for (VehicleMode mode : modes) {
         if (seg.getMode() == mode) {
           return true;
@@ -307,13 +299,13 @@ public class Trip implements Parcelable, ITimeRange {
   @Override
   public void writeToParcel(final Parcel dest, final int flags) {
     dest.writeString(uuid);
-    dest.writeLong(id);
+    dest.writeLong(mId);
     dest.writeLong(mStartTimeInSecs);
     dest.writeLong(mEndTimeInSecs);
-    dest.writeFloat(moneyCost);
-    dest.writeFloat(carbonCost);
-    dest.writeFloat(hassleCost);
-    dest.writeList(segments);
+    dest.writeFloat(mMoneyCost);
+    dest.writeFloat(mCarbonCost);
+    dest.writeFloat(mHassleCost);
+    dest.writeList(mSegments);
     dest.writeInt(mIsFavourite ? 1 : 0);
     dest.writeString(saveURL);
     dest.writeString(updateURL);
@@ -327,12 +319,12 @@ public class Trip implements Parcelable, ITimeRange {
   }
 
   public ArrayList<String> getTripModes() {
-    if (ListUtils.isEmpty(segments)) {
+    if (ListUtils.isEmpty(mSegments)) {
       return null;
     }
 
     ArrayList<String> modes = new ArrayList<String>();
-    for (TripSegment segment : segments) {
+    for (TripSegment segment : mSegments) {
       String mode = segment.getTransportModeId();
       if (!TextUtils.isEmpty(mode)) {
         modes.add(mode);
@@ -349,11 +341,11 @@ public class Trip implements Parcelable, ITimeRange {
    */
   public boolean isDepartureTimeFixed() {
     boolean isDepartureTimeFixed = false;
-    if (segments != null) {
+    if (mSegments != null) {
       boolean hasPublicTransportSegment = false;
       boolean hasNonFrequencyBasedSegment = false;
 
-      for (TripSegment segment : segments) {
+      for (TripSegment segment : mSegments) {
         // Check if there is any Public Transport segment.
         if (!TextUtils.isEmpty(segment.getServiceTripId())) {
           hasPublicTransportSegment = true;
@@ -371,8 +363,8 @@ public class Trip implements Parcelable, ITimeRange {
   }
 
   public boolean hasAnyPublicTransport() {
-    if (segments != null) {
-      for (TripSegment segment : segments) {
+    if (mSegments != null) {
+      for (TripSegment segment : mSegments) {
         // Check if there is any Public Transport segment.
         if (!TextUtils.isEmpty(segment.getServiceTripId())) {
           return true;
@@ -387,11 +379,11 @@ public class Trip implements Parcelable, ITimeRange {
    * Check if this trip has shuffle, taxi or shared vehicle.
    */
   public boolean hasAnyExpensiveTransport() {
-    if (segments == null) {
+    if (mSegments == null) {
       return false;
     }
 
-    for (TripSegment segment : segments) {
+    for (TripSegment segment : mSegments) {
       if (segment.getTransportModeId() != null) {
         switch (segment.getTransportModeId()) {
           case TransportMode.ID_AIR:
@@ -413,11 +405,11 @@ public class Trip implements Parcelable, ITimeRange {
   }
 
   public boolean hasQuickBooking() {
-    if (segments == null) {
+    if (mSegments == null) {
       return false;
     }
 
-    for (TripSegment segment : segments) {
+    for (TripSegment segment : mSegments) {
       if (segment.getBooking() != null && segment.getBooking().getQuickBookingsUrl() != null) {
         return true;
       }
@@ -426,7 +418,7 @@ public class Trip implements Parcelable, ITimeRange {
   }
 
   public List<TripSegment> getSummarySegments() {
-    final ArrayList<TripSegment> segments = this.segments;
+    final ArrayList<TripSegment> segments = this.mSegments;
     if (segments == null) {
       return Collections.emptyList();
     }
@@ -445,16 +437,16 @@ public class Trip implements Parcelable, ITimeRange {
   }
 
   public String getDisplayCost(String localizedFreeText) {
-    if (moneyCost == 0) {
+    if (mMoneyCost == 0) {
       return localizedFreeText;
-    } else if (moneyCost == Trip.UNKNOWN_COST) {
+    } else if (mMoneyCost == Trip.UNKNOWN_COST) {
       return null;
     } else {
       // Use locale.
       NumberFormat numberFormat = NumberFormat.getNumberInstance(Locale.getDefault());
       numberFormat.setRoundingMode(RoundingMode.CEILING);
       numberFormat.setMaximumFractionDigits(0);
-      String value = numberFormat.format(moneyCost);
+      String value = numberFormat.format(mMoneyCost);
       return (currencySymbol != null ? currencySymbol : "$") + value;
     }
   }
