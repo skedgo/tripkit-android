@@ -44,9 +44,8 @@ public class QueryTest {
         .containsExactly("ps_awesome", "pt_cool");
     assertThat(actual.getFromLocation()).isNotNull();
     assertThat(actual.getToLocation()).isNotNull();
-    assertThat(actual.getMaxWalkingTime())
-        .describedAs("Should parcel max walking time")
-        .isEqualTo(expected.getMaxWalkingTime());
+    assertThat(actual.getMaxWalkingTime()).isEqualTo(expected.getMaxWalkingTime());
+    assertThat(actual.uuid()).isEqualTo(expected.uuid());
   }
 
   @Test public void shouldClone() {
@@ -56,5 +55,8 @@ public class QueryTest {
 
     assertThat(clone.getMaxWalkingTime())
         .isEqualTo(query.getMaxWalkingTime());
+
+    // To prevent https://skedgo.uservoice.com/admin/tickets/7729.
+    assertThat(clone.uuid()).isNotEqualTo(query.uuid());
   }
 }
