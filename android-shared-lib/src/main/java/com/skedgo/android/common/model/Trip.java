@@ -15,40 +15,18 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Locale;
+import java.util.UUID;
 
 /**
  * @see <a href="https://redmine.buzzhives.com/projects/buzzhives/wiki/Main_API_formats#Trips">API format</a>
  */
 public class Trip implements Parcelable, ITimeRange {
   public static final float UNKNOWN_COST = -9999.9999F;
-
-  /**
-   * This will be transformed into a list of {@link TripSegment}.
-   */
-  @SerializedName("segments") public ArrayList<JsonObject> rawSegmentList;
-  @SerializedName("currencySymbol") private String currencySymbol;
-  @SerializedName("saveURL") private String saveURL;
-  @SerializedName("depart") private long mStartTimeInSecs;
-  @SerializedName("arrive") private long mEndTimeInSecs;
-  @SerializedName("caloriesCost") private float caloriesCost;
-  @SerializedName("moneyCost") private float mMoneyCost;
-  @SerializedName("carbonCost") private float mCarbonCost;
-  @SerializedName("hassleCost") private float mHassleCost;
-  @SerializedName("weightedScore") private float weightedScore;
-  @SerializedName("updateURL") private String updateURL;
-  @SerializedName("progressURL") private String progressURL;
-  @SerializedName("plannedURL") private String plannedURL;
-  @SerializedName("temporaryURL") private String temporaryURL;
-
-  private long mId;
-  private transient TripGroup mGroup;
-  private boolean mIsFavourite;
-  private ArrayList<TripSegment> mSegments;
-
   public static final Creator<Trip> CREATOR = new Creator<Trip>() {
     public Trip createFromParcel(Parcel in) {
       Trip trip = new Trip();
 
+      trip.uuid = in.readString();
       trip.mId = in.readLong();
       trip.mStartTimeInSecs = in.readLong();
       trip.mEndTimeInSecs = in.readLong();
@@ -72,6 +50,7 @@ public class Trip implements Parcelable, ITimeRange {
       trip.caloriesCost = in.readFloat();
       trip.plannedURL = in.readString();
       trip.temporaryURL = in.readString();
+      trip.queryIsLeaveAfter = in.readByte() == 1;
       return trip;
     }
 
@@ -80,12 +59,44 @@ public class Trip implements Parcelable, ITimeRange {
     }
   };
 
+  /**
+   * This will be transformed into a list of {@link TripSegment}.
+   */
+  @SerializedName("segments") public ArrayList<JsonObject> rawSegmentList;
+  @SerializedName("currencySymbol") private String currencySymbol;
+  @SerializedName("saveURL") private String saveURL;
+  @SerializedName("depart") private long mStartTimeInSecs;
+  @SerializedName("arrive") private long mEndTimeInSecs;
+  @SerializedName("caloriesCost") private float caloriesCost;
+  @SerializedName("moneyCost") private float mMoneyCost;
+  @SerializedName("carbonCost") private float mCarbonCost;
+  @SerializedName("hassleCost") private float mHassleCost;
+  @SerializedName("weightedScore") private float weightedScore;
+  @SerializedName("updateURL") private String updateURL;
+  @SerializedName("progressURL") private String progressURL;
+  @SerializedName("plannedURL") private String plannedURL;
+  @SerializedName("temporaryURL") private String temporaryURL;
+  private boolean queryIsLeaveAfter;
+  private String uuid = UUID.randomUUID().toString();
+  private long mId;
+  private transient TripGroup mGroup;
+  private boolean mIsFavourite;
+  private ArrayList<TripSegment> mSegments;
+
   public Trip() {
     mStartTimeInSecs = 0;
     mEndTimeInSecs = 0;
     mMoneyCost = UNKNOWN_COST;
     mCarbonCost = 0;
     mHassleCost = 0;
+  }
+
+  public void uuid(String uuid) {
+    this.uuid = uuid;
+  }
+
+  public String uuid() {
+    return uuid;
   }
 
   public long getId() {
@@ -228,12 +239,24 @@ public class Trip implements Parcelable, ITimeRange {
     return caloriesCost;
   }
 
+  public void setCaloriesCost(float caloriesCost) {
+    this.caloriesCost = caloriesCost;
+  }
+
   @Nullable public String getTemporaryURL() {
     return temporaryURL;
   }
 
-  void setCaloriesCost(float caloriesCost) {
-    this.caloriesCost = caloriesCost;
+  public void setTemporaryURL(String temporaryURL) {
+    this.temporaryURL = temporaryURL;
+  }
+
+  public boolean queryIsLeaveAfter() {
+    return queryIsLeaveAfter;
+  }
+
+  public void setQueryIsLeaveAfter(boolean queryIsLeaveAfter) {
+    this.queryIsLeaveAfter = queryIsLeaveAfter;
   }
 
   @Nullable public String getPlannedURL() {
@@ -248,7 +271,7 @@ public class Trip implements Parcelable, ITimeRange {
     return currencySymbol;
   }
 
-  void setCurrencySymbol(String currencySymbol) {
+  public void setCurrencySymbol(String currencySymbol) {
     this.currencySymbol = currencySymbol;
   }
 
@@ -283,6 +306,7 @@ public class Trip implements Parcelable, ITimeRange {
 
   @Override
   public void writeToParcel(final Parcel dest, final int flags) {
+    dest.writeString(uuid);
     dest.writeLong(mId);
     dest.writeLong(mStartTimeInSecs);
     dest.writeLong(mEndTimeInSecs);
@@ -299,6 +323,7 @@ public class Trip implements Parcelable, ITimeRange {
     dest.writeFloat(caloriesCost);
     dest.writeString(plannedURL);
     dest.writeString(temporaryURL);
+    dest.writeByte((byte) (queryIsLeaveAfter ? 1 : 0));
   }
 
   public ArrayList<String> getTripModes() {
