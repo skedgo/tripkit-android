@@ -1,6 +1,9 @@
 package com.skedgo.android.common.model;
 
+import android.os.Parcel;
+
 import com.google.gson.Gson;
+import com.google.gson.JsonObject;
 import com.skedgo.android.common.BuildConfig;
 import com.skedgo.android.common.Parcels;
 import com.skedgo.android.common.TestRunner;
@@ -17,9 +20,11 @@ public class RealTimeVehicleTest {
   @Test public void canBeParcelable() {
     final RealTimeVehicle v = new RealTimeVehicle();
     v.setIcon("uber-uberX");
+    v.setOccupancy(Occupancy.EMPTY);
 
     final RealTimeVehicle actual = RealTimeVehicle.CREATOR.createFromParcel(Parcels.parcel(v));
     assertThat(actual.getIcon()).isEqualTo(v.getIcon());
+    assertThat(actual.getOccupancy()).isEqualTo(Occupancy.EMPTY);
   }
 
   @Test public void canBeCreatedFromJson() {
@@ -41,5 +46,22 @@ public class RealTimeVehicleTest {
     final Location location = new Location(-33.85946, 151.21158);
     location.setBearing(-150);
     assertThat(uberVehicle.getLocation()).isEqualTo(location);
+  }
+
+  @Test
+  public void shouldParseOccupancyInfo() throws Exception {
+
+    JsonObject jsonObject = new JsonObject();
+    jsonObject.addProperty("occupancy", "FULL");
+
+    RealTimeVehicle realTimeVehicle = new Gson().fromJson(jsonObject, RealTimeVehicle.class);
+    assertThat(realTimeVehicle.getOccupancy()).isEqualTo(Occupancy.FULL);
+  }
+
+  @Test
+  public void shouldParseNullOccupancy() throws Exception {
+    JsonObject jsonObject = new JsonObject();
+    RealTimeVehicle realTimeVehicle = new Gson().fromJson(jsonObject, RealTimeVehicle.class);
+    assertThat(realTimeVehicle.getOccupancy()).isEqualTo(null);
   }
 }
