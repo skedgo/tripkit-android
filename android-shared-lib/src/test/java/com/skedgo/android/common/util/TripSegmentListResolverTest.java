@@ -20,7 +20,6 @@ import java.util.Arrays;
 
 import static com.skedgo.android.common.model.TripSegment.VISIBILITY_IN_DETAILS;
 import static com.skedgo.android.common.model.TripSegment.VISIBILITY_ON_MAP;
-import static junit.framework.Assert.assertFalse;
 import static org.assertj.core.api.Assertions.assertThat;
 
 @RunWith(TestRunner.class)
@@ -61,7 +60,6 @@ public class TripSegmentListResolverTest {
     assertThat(arrivalSegment.getStartTimeInSecs())
         .isEqualTo(arrivalSegment.getEndTimeInSecs())
         .isEqualTo(lastSegment.getEndTimeInSecs());
-    assertFalse(arrivalSegment.isBroken());
   }
 
   /**
