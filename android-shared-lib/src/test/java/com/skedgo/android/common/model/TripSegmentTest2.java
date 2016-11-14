@@ -98,64 +98,6 @@ public class TripSegmentTest2 {
     assertFalse(segment.isVisibleInContext(VISIBILITY_HIDDEN));
   }
 
-  /**
-   * Regardless of difference in time (startTime > endTime),
-   * Arrival segment should not be considered broken.
-   */
-  @Test public void arrivalSegmentShouldNotBeBroken_Case1() {
-    TripSegment arrivalSegment = new TripSegment();
-    arrivalSegment.setType(SegmentType.ARRIVAL);
-
-    // (M/D/Y @ h:m:s): 8 / 2 / 2002 @ 0:0:0 UTC
-    arrivalSegment.setStartTimeInSecs(1028246400);
-
-    // (M/D/Y @ h:m:s): 8 / 1 / 2002 @ 0:0:0 UTC
-    arrivalSegment.setEndTimeInSecs(1028160000);
-
-    assertFalse(arrivalSegment.isBroken());
-  }
-
-  /**
-   * Even if calling forceBroken(),
-   * Arrival segment should not be considered broken.
-   */
-  @Test public void arrivalSegmentShouldNotBeBroken_Case2() {
-    TripSegment arrivalSegment = new TripSegment();
-    arrivalSegment.setType(SegmentType.ARRIVAL);
-    arrivalSegment.forceBroken();
-
-    assertFalse(arrivalSegment.isBroken());
-  }
-
-  /**
-   * Regardless of difference in time (startTime > endTime),
-   * Departure segment should not be considered broken.
-   */
-  @Test public void departureSegmentShouldNotBeBroken_Case1() {
-    TripSegment departureSegment = new TripSegment();
-    departureSegment.setType(SegmentType.DEPARTURE);
-
-    // (M/D/Y @ h:m:s): 8 / 2 / 2002 @ 0:0:0 UTC
-    departureSegment.setStartTimeInSecs(1028246400);
-
-    // (M/D/Y @ h:m:s): 8 / 1 / 2002 @ 0:0:0 UTC
-    departureSegment.setEndTimeInSecs(1028160000);
-
-    assertFalse(departureSegment.isBroken());
-  }
-
-  /**
-   * Even if calling forceBroken(),
-   * Departure segment should not be considered broken.
-   */
-  @Test public void departureSegmentShouldNotBeBroken_Case2() {
-    TripSegment departureSegment = new TripSegment();
-    departureSegment.setType(SegmentType.DEPARTURE);
-    departureSegment.forceBroken();
-
-    assertFalse(departureSegment.isBroken());
-  }
-
   @Test public void shouldNotifyStartTimeChangedEvent() {
     TripSegment segment = new TripSegment();
 

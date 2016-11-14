@@ -45,7 +45,6 @@ public class TripSegment implements Parcelable, IRealTimeElement, ITimeRange {
       TripSegment segment = new TripSegment();
 
       segment.mId = in.readLong();
-      segment.mForceBroken = in.readInt() == 1;
       segment.mType = SegmentType.from(in.readString());
 
       long startTimeInSecs = in.readLong();
@@ -103,7 +102,6 @@ public class TripSegment implements Parcelable, IRealTimeElement, ITimeRange {
   private final transient Var<BitmapDrawable> remoteIcon = Var.create();
   private long mId;
   private transient Trip mTrip;
-  private boolean mForceBroken;
   private transient BehaviorSubject<TripSegment> mWhenTimeChanged;
   @SerializedName("booking")
   private Booking booking;
@@ -511,18 +509,6 @@ public class TripSegment implements Parcelable, IRealTimeElement, ITimeRange {
     mAlerts = alerts;
   }
 
-  public boolean isBroken() {
-    boolean isUnbreakableType = (mType == SegmentType.ARRIVAL || mType == SegmentType.DEPARTURE);
-    return !isUnbreakableType && (mForceBroken || mStartTimeInSecs > mEndTimeInSecs);
-  }
-
-  /**
-   * This logic does not work for both Departure segment and Arrival segment.
-   */
-  public void forceBroken() {
-    mForceBroken = true;
-  }
-
   @Override
   public int describeContents() {
     return 0;
@@ -531,7 +517,6 @@ public class TripSegment implements Parcelable, IRealTimeElement, ITimeRange {
   @Override
   public void writeToParcel(Parcel out, int flags) {
     out.writeLong(mId);
-    out.writeInt(mForceBroken ? 1 : 0);
     out.writeString(mType == null ? null : mType.toString());
     out.writeLong(mStartTimeInSecs);
     out.writeLong(mEndTimeInSecs);

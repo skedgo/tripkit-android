@@ -12,42 +12,15 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
-import static com.skedgo.android.common.model.TripGroup.Visibility.COMPACT;
-import static com.skedgo.android.common.model.TripGroup.Visibility.FULL;
-import static com.skedgo.android.common.model.TripGroup.Visibility.GONE;
+import static com.skedgo.android.common.model.GroupVisibility.COMPACT;
+import static com.skedgo.android.common.model.GroupVisibility.FULL;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 @RunWith(TestRunner.class)
-@Config(constants = BuildConfig.class, sdk = 21)
+@Config(constants = BuildConfig.class)
 public class TripGroupTest {
-  @Test public void shouldParcelProperly() {
-    TripGroup expected = new TripGroup();
-    TripGroup actual = TripGroup.CREATOR.createFromParcel(Utils.parcel(expected));
-  }
-
-  @Test public void parcelVisibility() {
-    {
-      TripGroup expected = new TripGroup();
-      expected.visibility().put(FULL);
-      TripGroup actual = TripGroup.CREATOR.createFromParcel(Utils.parcel(expected));
-      assertThat(actual.visibility().value()).isEqualTo(FULL);
-    }
-    {
-      TripGroup expected = new TripGroup();
-      expected.visibility().put(COMPACT);
-      TripGroup actual = TripGroup.CREATOR.createFromParcel(Utils.parcel(expected));
-      assertThat(actual.visibility().value()).isEqualTo(COMPACT);
-    }
-    {
-      TripGroup expected = new TripGroup();
-      expected.visibility().put(GONE);
-      TripGroup actual = TripGroup.CREATOR.createFromParcel(Utils.parcel(expected));
-      assertThat(actual.visibility().value()).isEqualTo(GONE);
-    }
-  }
-
   @Test public void addAsDisplayTrip() {
     final Trip a = mock(Trip.class);
     when(a.getId()).thenReturn(1L);
@@ -80,33 +53,27 @@ public class TripGroupTest {
     group.addAsDisplayTrip(c);
   }
 
-  @Test public void fullCompactGoneOrder() {
+  @Test public void fullIsGreaterThanCompact() {
     assertThat(FULL.value).isGreaterThan(COMPACT.value);
-    assertThat(COMPACT.value).isGreaterThan(GONE.value);
   }
 
-  @Test public void arrangedByFullCompactGone() {
+  @Test public void arrangedByFullCompact() {
     TripGroup fullGroup = new TripGroup();
-    fullGroup.visibility().put(FULL);
+    fullGroup.setVisibility(FULL);
 
     TripGroup compactGroup = new TripGroup();
-    compactGroup.visibility().put(COMPACT);
-
-    TripGroup goneGroup = new TripGroup();
-    goneGroup.visibility().put(GONE);
+    compactGroup.setVisibility(COMPACT);
 
     List<TripGroup> groups = new ArrayList<>(Arrays.asList(
         compactGroup,
-        goneGroup,
         fullGroup
     ));
 
-    Collections.sort(groups, TripGroup.Comparators.DESC_VISIBILITY_COMPARATOR);
+    Collections.sort(groups, TripGroupComparators.DESC_VISIBILITY_COMPARATOR);
 
     assertThat(groups).containsExactly(
         fullGroup,
-        compactGroup,
-        goneGroup
+        compactGroup
     );
   }
 
@@ -122,7 +89,7 @@ public class TripGroupTest {
     trip1.setStartTimeInSecs(2);
     trip1.setEndTimeInSecs(4);
     group1.addTrip(trip1);
-    group1.visibility().put(COMPACT);
+    group1.setVisibility(COMPACT);
 
     TripGroup group2 = new TripGroup();
     Trip trip2 = new Trip();
@@ -135,12 +102,12 @@ public class TripGroupTest {
     trip3.setStartTimeInSecs(2);
     trip3.setEndTimeInSecs(4);
     group3.addTrip(trip3);
-    group3.visibility().put(FULL);
+    group3.setVisibility(FULL);
 
     List<TripGroup> groups = new ArrayList<>(Arrays.asList(
         group1, group0, group2, group3
     ));
-    Collections.sort(groups, TripGroup.Comparators.ARRIVAL_COMPARATOR_CHAIN);
+    Collections.sort(groups, TripGroupComparators.ARRIVAL_COMPARATOR_CHAIN);
     assertThat(groups).containsExactly(
         group0, group3, group1, group2
     );
