@@ -52,7 +52,7 @@ public abstract class BookingConfirmation implements Parcelable {
 
   public abstract List<BookingConfirmationAction> actions();
   @Nullable public abstract BookingConfirmationImage provider();
-  public abstract BookingConfirmationPurchase purchase();
+  @Nullable public abstract BookingConfirmationPurchase purchase();
   public abstract BookingConfirmationStatus status();
   @Nullable public abstract BookingConfirmationImage vehicle();
 
