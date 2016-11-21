@@ -39,6 +39,6 @@ public abstract class BookingConfirmationStatus implements Parcelable {
   }
 
   public abstract String title();
-  public abstract String subtitle();
+  @Nullable public abstract String subtitle();
   @Nullable public abstract String value();
 }

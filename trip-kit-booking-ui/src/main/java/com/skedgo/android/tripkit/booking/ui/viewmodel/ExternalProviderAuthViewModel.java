@@ -11,8 +11,8 @@ import android.support.annotation.VisibleForTesting;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 
-import com.skedgo.android.tripkit.booking.ui.OAuth2CallbackHandler;
 import com.skedgo.android.tripkit.booking.BookingForm;
+import com.skedgo.android.tripkit.booking.ui.OAuth2CallbackHandler;
 
 import javax.inject.Inject;
 
@@ -70,6 +70,7 @@ public class ExternalProviderAuthViewModel extends BaseViewModel {
     return new WebViewClient() {
       @Override
       public boolean shouldOverrideUrlLoading(WebView webView, String url) {
+
         return handleCallback(url, oAuth2CallbackHandler);
       }
 
@@ -126,6 +127,19 @@ public class ExternalProviderAuthViewModel extends BaseViewModel {
       }
       showWebView.set(false);
       return false;
+    } else if (webUrl.startsWith("https://db.skedgo.com/api/booking")) {
+      // handled by db.skedgo, should close
+      handledForm(null).subscribe(new Action1<Intent>() {
+        @Override public void call(Intent intent) {
+          publishSubjectIntent.onNext(intent);
+        }
+      }, new Action1<Throwable>() {
+        @Override public void call(Throwable throwable) {
+          publishSubjectIntent.onError(throwable);
+        }
+      });
+      showWebView.set(false);
+      return false;
     } else {
       showWebView.set(true);
       this.url.set(webUrl);
@@ -144,7 +158,7 @@ public class ExternalProviderAuthViewModel extends BaseViewModel {
           handleArgs(form);
         } else {
           final Intent data = new Intent();
-          // Form can be null, indicating booking end (auth case)
+          // Form can be null, indicating booking end (auth case).
           data.putExtra(KEY_BOOKING_FORM, (Parcelable) form);
           subscriber.onNext(data);
         }
