@@ -75,7 +75,7 @@ public class BookingServiceTest {
 
     Throwable error = subscriber.getOnErrorEvents().get(0);
 
-    assertThat(error instanceof BookingError).isTrue();
+    assertThat(error.getMessage()).isEqualTo("That userToken is unrecognised.");
 
   }
 
@@ -123,7 +123,7 @@ public class BookingServiceTest {
 
     Throwable error = subscriber.getOnErrorEvents().get(0);
 
-    assertThat(error instanceof BookingError).isTrue();
+    assertThat(error.getMessage()).isEqualTo("That userToken is unrecognised.");
 
   }
 
@@ -161,7 +161,7 @@ public class BookingServiceTest {
 
     Throwable error = subscriber.getOnErrorEvents().get(0);
 
-    assertThat(error instanceof BookingError).isTrue();
+    assertThat(error.getMessage()).isEqualTo("That userToken is unrecognised.");
 
   }
 

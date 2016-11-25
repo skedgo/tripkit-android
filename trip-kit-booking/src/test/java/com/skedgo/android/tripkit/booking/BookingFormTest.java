@@ -403,7 +403,6 @@ public class BookingFormTest {
         getResourceAsStream("/auth-payiq-form.json"), Charset.defaultCharset());
 
     JsonReader reader = new JsonReader(new StringReader(authBookingFormJson));
-    reader.setLenient(true);
     BookingForm bookingForm = gson.fromJson(reader, BookingForm.class);
 
     assertThat(bookingForm.isPayIQAuthForm()).isTrue();

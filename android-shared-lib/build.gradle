@@ -50,4 +50,5 @@ dependencies {
   provided "org.immutables:value:2.3:annotations"
   provided "org.immutables:builder:2.3"
   provided "org.immutables:gson:2.3:annotations"
+  testCompile 'commons-io:commons-io:2.5'
 }

@@ -25,6 +25,7 @@ public class BookingActionTest {
     BookingAction actual = gson.fromJson(testJson, BookingAction.class);
     assertThat(actual.getTitle()).isEqualTo("Next");
     assertThat(actual.isEnable()).isEqualTo(true);
+    assertThat(actual.isDone()).isEqualTo(false);
     assertThat(actual.getUrl()).isEqualTo("http://bb-server.buzzhives.com/satapp-debug/booking/d2a68ee5-7fec-4f6b-be89-e04c2676b0d8/book");
 
     testJson = "{\n" +
@@ -35,7 +36,20 @@ public class BookingActionTest {
     actual = gson.fromJson(testJson, BookingAction.class);
     assertThat(actual.getTitle()).isEqualTo("Next");
     assertThat(actual.isEnable()).isEqualTo(false);
+    assertThat(actual.isDone()).isEqualTo(false);
     assertThat(actual.getUrl()).isEqualTo("http://bb-server.buzzhives.com/satapp-debug/booking/d2a68ee5-7fec-4f6b-be89-e04c2676b0d8/book");
+
+    testJson = "{\n" +
+        "            \"title\": \"Next\",\n" +
+        "            \"done\": true,\n" +
+        "            \"url\": \"http://bb-server.buzzhives.com/satapp-debug/booking/d2a68ee5-7fec-4f6b-be89-e04c2676b0d8/book\" \n" +
+        "          }";
+    actual = gson.fromJson(testJson, BookingAction.class);
+    assertThat(actual.getTitle()).isEqualTo("Next");
+    assertThat(actual.isEnable()).isEqualTo(true);
+    assertThat(actual.isDone()).isEqualTo(true);
+    assertThat(actual.getUrl()).isEqualTo("http://bb-server.buzzhives.com/satapp-debug/booking/d2a68ee5-7fec-4f6b-be89-e04c2676b0d8/book");
+
   }
 
   @Test public void Parcelable() {

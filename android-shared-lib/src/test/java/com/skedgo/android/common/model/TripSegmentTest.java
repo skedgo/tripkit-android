@@ -9,10 +9,12 @@ import com.skedgo.android.common.BuildConfig;
 import com.skedgo.android.common.TestRunner;
 import com.skedgo.android.common.util.LowercaseEnumTypeAdapterFactory;
 
+import org.apache.commons.io.IOUtils;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.robolectric.annotation.Config;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -226,20 +228,11 @@ public class TripSegmentTest {
   }
 
   @Test
-  public void shouldParsePayIQConfirmationSegment() {
+  public void shouldParsePayIQConfirmationSegment() throws IOException {
 
-    String routingResponse = "{\"booking\":" +
-        "{\"confirmation\":{\"status\":{\"title\":\"1min ticket\",\"subtitle\":\"Valid from Friday, 14 October, 23:01\"}," +
-        "\"purchase\":{\"price\":0.009999999776482582,\"currency\":\"EUR\",\"productName\":\"1min ticket\"," +
-        "\"productType\":\"pt_pub\",\"id\":\"5801398e87d4abf77d7a70bd\"}," +
-        "\"actions\":[{\"title\":\"Show Ticket\",\"type\":\"QRCODE\"," +
-        "\"externalURL\":\"qrcode:4f9550149c8912c040090000:5801398e87d4abf77d7a70bd:1min ticket:20161014200117:20161014200217:null:iqt\"," +
-        "\"isDestructive\":false}]}," +
-        "\"title\":\"1min ticket\"," +
-        "\"url\":\"https://bigbang.buzzhives.com/satapp-beta/booking/v1/b1d1399a-2592-4ac2-9889-41371ddfa8ff/status?bsb=1\"}," +
-        "\"endTime\":1476475680,\"segmentTemplateHashCode\":-620371530,\"serviceDirection\":\"Lentoasema\",\"serviceName\":\"Lentoasema-Satama\",\"serviceNumber\":\"1\",\"serviceTripID\":\"14_260472\",\"startTime\":1476475560,\"stops\":2,\"ticketWebsiteURL\":\"http://www.liikennevirasto.fi/\"}";
+    String routingResponse = IOUtils.toString(getClass().getResourceAsStream("/booking-payiq.json"));
 
-    TripSegment segment =bookingGson().fromJson(routingResponse, TripSegment.class);
+    TripSegment segment = bookingGson().fromJson(routingResponse, TripSegment.class);
 
     assertThat(segment.getBooking()).isNotNull();
     assertThat(segment.getBooking().getConfirmation()).isNotNull();
@@ -247,16 +240,9 @@ public class TripSegmentTest {
   }
 
   @Test
-  public void shouldParseUberConfirmationSegment() {
+  public void shouldParseUberConfirmationSegment() throws IOException {
 
-    String routingResponse = "{\"booking\":" +
-        "{\"confirmation\":{\"provider\":{\"title\":\"John\",\"subtitle\":\"4.9\",\"imageURL\":\"https://d1a3f4spazzrp4.cloudfront.net/uberex-sandbox/images/driver.jpg\"}," +
-        "\"vehicle\":{\"title\":\"Prius Toyota\",\"subtitle\":\"UBER-PLATE\",\"imageURL\":\"https://d1a3f4spazzrp4.cloudfront.net/uberex-sandbox/images/prius.jpg\"}," +
-        "\"status\":{\"title\":\"Accepted\",\"subtitle\":\"Your request has been accepted by a driver and is 'en route' to the start location.\",\"value\":\"accepted\"}," +
-        "\"purchase\":{\"price\":8.0,\"currency\":\"AUD\",\"productName\":\"uberX\",\"productType\":\"ps_tnc\",\"id\":\"2d1d002b-d4d0-4411-98e1-673b244878b2\"}," +
-        "\"actions\":[{\"title\":\"Cancel Ride\",\"type\":\"CANCEL\",\"internalURL\":\"https://bigbang.buzzhives.com/satapp-beta/booking/v1/9ccc7b44-2d7d-48e4-bb20-174e7adee466/cancel?bsb=1\",\"isDestructive\":true}," +
-        "{\"title\":\"Call Driver\",\"type\":\"CALL\",\"externalURL\":\"tel:(555)555-5555\",\"isDestructive\":false}]},\"title\":\"Accepted\"}," +
-        "\"endTime\":1476477040,\"realTime\":true,\"segmentTemplateHashCode\":105079429,\"startTime\":1476476663}";
+    String routingResponse = IOUtils.toString(getClass().getResourceAsStream("/booking-uber.json"));
 
     TripSegment segment = bookingGson().fromJson(routingResponse, TripSegment.class);
 
