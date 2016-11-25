@@ -1,0 +1,36 @@
+{
+  "booking": {
+    "confirmation": {
+      "status": {
+        "title": "1min ticket",
+        "subtitle": "Valid from Friday, 14 October, 23:01"
+      },
+      "purchase": {
+        "price": 0.009999999776482582,
+        "currency": "EUR",
+        "productName": "1min ticket",
+        "productType": "pt_pub",
+        "id": "5801398e87d4abf77d7a70bd"
+      },
+      "actions": [
+        {
+          "title": "Show Ticket",
+          "type": "QRCODE",
+          "externalURL": "qrcode:4f9550149c8912c040090000:5801398e87d4abf77d7a70bd:1min ticket:20161014200117:20161014200217:null:iqt",
+          "isDestructive": false
+        }
+      ]
+    },
+    "title": "1min ticket",
+    "url": "https://bigbang.buzzhives.com/satapp-beta/booking/v1/b1d1399a-2592-4ac2-9889-41371ddfa8ff/status?bsb=1"
+  },
+  "endTime": 1476475680,
+  "segmentTemplateHashCode": -620371530,
+  "serviceDirection": "Lentoasema",
+  "serviceName": "Lentoasema-Satama",
+  "serviceNumber": "1",
+  "serviceTripID": "14_260472",
+  "startTime": 1476475560,
+  "stops": 2,
+  "ticketWebsiteURL": "http://www.liikennevirasto.fi/"
+}
