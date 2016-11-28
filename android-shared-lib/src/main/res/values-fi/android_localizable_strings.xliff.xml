@@ -151,9 +151,9 @@
 	<string name="show_agenda_list">Näytä agendalistaus</string>
 	<string name="show_agenda_map">Näytä agendakartta</string>
 	<string name="sort_by">Lajittele</string>
-	<string name="sorted_by_arrival">Lajittelu saapumisajan mukaan</string>
+	<string name="sorted_by_arrival">Lajiteltu saapumisajan mukaan</string>
 	<string name="sorted_by_departure">Lajiteltu lähtöajoittain</string>
-	<string name="sorted_by_duration">Lajittelu keston mukaan</string>
+	<string name="sorted_by_duration">Lajiteltu keston mukaan</string>
 	<string name="view_on_yelp">Näytä Yelpissä</string>
 	<string name="vehicle_modes">Kulkutavat</string>
 	<string name="upcoming_services">Tulevat yhteydet</string>
@@ -168,7 +168,7 @@
 	<string name="title_exclude_event_from_route">Poista tapahtuma reiteiltä?</string>
 	<string name="timetable_no_data">Pysäkiltä ei löytynyt yhteyksiä</string>
 	<string name="trip_to_unknown_dest_about_to_start">Näyttäisi siltä että sinulla on matka alkamassa</string>
-	<string name="trip_to">"Matka kohteeseen "</string>
+	<string name="trip_to">"Matka kohteeseen %s"</string>
 	<string name="trip_preferences">Matkan preferenssit</string>
 	<string name="transport_selector_header">Sisällytä reitin lopputuloksiin</string>
 	<string name="walkthrough_4">Selaa reittejä suoraan Google search -näkymästä ilman että TripGo avautuu.</string>
@@ -180,4 +180,4 @@
 	<string name="you_r_already_at_s">Olet jo kohteessa %s!</string>
 
 </resources>
-<!-- This is an auto generated file (Mon Nov 28 17:15:27 ART 2016) -->
+<!-- This is an auto generated file (Thu Jun 30 10:11:02 ART 2016) -->

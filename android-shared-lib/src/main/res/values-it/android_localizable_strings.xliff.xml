@@ -13,7 +13,7 @@
 	<string name="all_alerts">Tutti avvisi</string>
 	<string name="all_cals_invisible">Tutti i tuoi calendari sono invisibili, si prega di attivarli nelle impostazioni native del calendario app o nelle impostazioni del conto</string>
 	<string name="an_unexpected_network_error">Si è verificato un errore di rete imprevisto. Riprova.</string>
-	<string name="approximately_s_away">Circa % s di distanza</string>
+	<string name="approximately_s_away">Circa %s di distanza</string>
 	<string name="arrivaltimeindication">" (Arrivo "</string>
 	<string name="body_exclude_this_event_from_route">corpo esclude questo evento dal calendario</string>
 	<string name="body_exclude_related_event_from_route">corpo esclude evento legato dal percorso</string>
@@ -168,7 +168,7 @@
 	<string name="title_exclude_event_from_route">Escludere evento dai percorsi?</string>
 	<string name="timetable_no_data">Nessun servizio trovato per questa fermata</string>
 	<string name="trip_to_unknown_dest_about_to_start">Sembra che tu abbia un viaggio per fare</string>
-	<string name="trip_to">"Viaggio a "</string>
+	<string name="trip_to">"Viaggio a %s"</string>
 	<string name="trip_preferences">Preferenze di viaggio</string>
 	<string name="transport_selector_header">Includere nei risultati di percorso</string>
 	<string name="walkthrough_4">Ricerca percorsi direttamente dalla barra di ricerca di Google senza aprire TripGo.</string>
@@ -180,4 +180,4 @@
 	<string name="you_r_already_at_s">Sei già a %s!</string>
 
 </resources>
-<!-- This is an auto generated file (Mon Nov 28 17:15:27 ART 2016) -->
+<!-- This is an auto generated file (Thu Jun 30 10:11:02 ART 2016) -->

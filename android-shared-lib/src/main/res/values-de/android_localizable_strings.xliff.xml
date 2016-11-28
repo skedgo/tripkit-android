@@ -168,7 +168,7 @@
 	<string name="title_exclude_event_from_route">Ereignis von der Route ausschließen?</string>
 	<string name="timetable_no_data">Keine Daten für diese Haltestelle gefunden</string>
 	<string name="trip_to_unknown_dest_about_to_start">Sieht aus als wenn ein Trip ansteht</string>
-	<string name="trip_to">"Trip nach "</string>
+	<string name="trip_to">"Trip nach %s"</string>
 	<string name="trip_preferences">Trip-Einstellungen</string>
 	<string name="transport_selector_header">In Ergebnissen berücksichtigen</string>
 	<string name="walkthrough_4">Plane Routen direkt in der Google-Suchleiste, ohne TripGo zu öffnen.</string>
@@ -180,4 +180,4 @@
 	<string name="you_r_already_at_s">Du bist schon in %s!</string>
 
 </resources>
-<!-- This is an auto generated file (Mon Nov 28 17:15:27 ART 2016) -->
+<!-- This is an auto generated file (Thu Jun 30 10:11:02 ART 2016) -->

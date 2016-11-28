@@ -168,7 +168,7 @@
 	<string name="title_exclude_event_from_route">¿Excluír el evento de las rutas?</string>
 	<string name="timetable_no_data">No se encontraron servicios para esta parada</string>
 	<string name="trip_to_unknown_dest_about_to_start">Parecería que tienes un viaje por hacer</string>
-	<string name="trip_to">"Viaje a "</string>
+	<string name="trip_to">"Viaje a %s"</string>
 	<string name="trip_preferences">Preferencias del viaje</string>
 	<string name="transport_selector_header">Incluir en los resultados de ruta</string>
 	<string name="walkthrough_4">Busca rutas directamente desde la barra de búsqueda de Google sin abrir TripGo.</string>
@@ -180,4 +180,4 @@
 	<string name="you_r_already_at_s">Usted ya se encuentra en %s!</string>
 
 </resources>
-<!-- This is an auto generated file (Mon Nov 28 17:15:27 ART 2016) -->
+<!-- This is an auto generated file (Thu Jun 30 10:11:02 ART 2016) -->
