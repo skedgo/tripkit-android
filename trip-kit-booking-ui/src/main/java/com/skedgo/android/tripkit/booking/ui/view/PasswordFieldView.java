@@ -4,13 +4,14 @@ import android.annotation.TargetApi;
 import android.content.Context;
 import android.os.Build;
 import android.support.annotation.NonNull;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.AttributeSet;
-import android.view.View;
 import android.widget.EditText;
 import android.widget.RelativeLayout;
 
-import com.skedgo.android.tripkit.booking.ui.R;
 import com.skedgo.android.tripkit.booking.PasswordFormField;
+import com.skedgo.android.tripkit.booking.ui.R;
 
 public class PasswordFieldView extends RelativeLayout {
   private EditText editText;
@@ -36,14 +37,19 @@ public class PasswordFieldView extends RelativeLayout {
   public void bindViewModel(@NonNull final PasswordFormField passwordField) {
     setVisibility(passwordField.isHidden() ? GONE : VISIBLE);
     editText.setHint(passwordField.getTitle());
-    editText.setOnFocusChangeListener(new View.OnFocusChangeListener() {
-      @Override
-      public void onFocusChange(View v, boolean hasFocus) {
-        if (!hasFocus) { // user finished input
-          passwordField.setValue(editText.getText().toString());
+    editText.addTextChangedListener(
+        new TextWatcher() {
+          @Override
+          public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) { }
+
+          @Override public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) { }
+
+          public void afterTextChanged(Editable s) {
+            passwordField.setValue(s.toString());
+          }
         }
-      }
-    });
+    );
+
   }
 
   @Override

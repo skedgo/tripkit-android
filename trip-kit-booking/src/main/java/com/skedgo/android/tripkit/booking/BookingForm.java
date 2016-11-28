@@ -64,7 +64,7 @@ public class BookingForm extends FormField {
     dest.writeString(imageUrl);
   }
 
-  public BookingAction getAction() {
+  @Nullable public BookingAction getAction() {
     return action;
   }
 
@@ -99,11 +99,11 @@ public class BookingForm extends FormField {
   }
 
   public boolean isOAuthForm() {
-    return isFormType("authForm");
+    return "authForm".equals(getType());
   }
 
-  private boolean isFormType(String type) {
-    return getType() != null && getType().equals(type);
+  public boolean isPayIQAuthForm() {
+    return "payiq".equals(value);
   }
 
   @Nullable public String getClientID() {

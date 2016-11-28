@@ -1,9 +1,6 @@
 package com.skedgo.android.tripkit.booking.ui.fragment;
 
 import android.app.Activity;
-import android.content.Intent;
-import android.content.SharedPreferences;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
@@ -16,18 +13,6 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.google.gson.Gson;
-import com.skedgo.android.tripkit.booking.ui.R;
-import com.skedgo.android.tripkit.booking.ui.activity.BookingActivity;
-import com.skedgo.android.tripkit.booking.ui.view.DateTimeFieldView;
-import com.skedgo.android.tripkit.booking.ui.view.OptionFieldView;
-import com.skedgo.android.tripkit.booking.ui.view.PasswordFieldView;
-import com.skedgo.android.tripkit.booking.ui.view.PickupSubHeaderView;
-import com.skedgo.android.tripkit.booking.ui.view.StepperView;
-import com.skedgo.android.tripkit.booking.ui.view.StringFieldView;
-import com.skedgo.android.tripkit.booking.ui.view.SwitchView;
-import com.skedgo.android.tripkit.booking.ui.view.TwoLineFieldView;
-import com.skedgo.android.tripkit.booking.ui.view.util.ViewUtils;
-import com.skedgo.android.tripkit.booking.ui.viewmodel.StepperFieldViewModel;
 import com.skedgo.android.tripkit.booking.AddressFormField;
 import com.skedgo.android.tripkit.booking.BookingAction;
 import com.skedgo.android.tripkit.booking.BookingForm;
@@ -40,6 +25,18 @@ import com.skedgo.android.tripkit.booking.PasswordFormField;
 import com.skedgo.android.tripkit.booking.StepperFormField;
 import com.skedgo.android.tripkit.booking.StringFormField;
 import com.skedgo.android.tripkit.booking.SwitchFormField;
+import com.skedgo.android.tripkit.booking.ui.R;
+import com.skedgo.android.tripkit.booking.ui.activity.BookingActivity;
+import com.skedgo.android.tripkit.booking.ui.view.DateTimeFieldView;
+import com.skedgo.android.tripkit.booking.ui.view.OptionFieldView;
+import com.skedgo.android.tripkit.booking.ui.view.PasswordFieldView;
+import com.skedgo.android.tripkit.booking.ui.view.PickupSubHeaderView;
+import com.skedgo.android.tripkit.booking.ui.view.StepperView;
+import com.skedgo.android.tripkit.booking.ui.view.StringFieldView;
+import com.skedgo.android.tripkit.booking.ui.view.SwitchView;
+import com.skedgo.android.tripkit.booking.ui.view.TwoLineFieldView;
+import com.skedgo.android.tripkit.booking.ui.view.util.ViewUtils;
+import com.skedgo.android.tripkit.booking.ui.viewmodel.StepperFieldViewModel;
 import com.skedgo.android.tripkit.booking.viewmodel.DateTimeFieldViewModelImpl;
 import com.skedgo.android.tripkit.booking.viewmodel.OptionFieldViewModel;
 import com.squareup.otto.Bus;
@@ -54,8 +51,9 @@ import javax.inject.Inject;
 import rx.functions.Action1;
 import skedgo.common.view.ButterKnifeFragment;
 
+import static com.skedgo.android.tripkit.booking.ui.activity.BookingActivity.KEY_BOOKING_FORM;
+
 public class BookingFormFragment extends ButterKnifeFragment {
-  public static final String KEY_BOOKING_FORM = "bookingForm";
 
   // TODO: REFACTOR THIS CLASS!!!!
 

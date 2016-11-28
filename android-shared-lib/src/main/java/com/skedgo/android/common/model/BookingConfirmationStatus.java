@@ -2,6 +2,7 @@ package com.skedgo.android.common.model;
 
 import android.os.Parcel;
 import android.os.Parcelable;
+import android.support.annotation.Nullable;
 
 import com.google.gson.annotations.JsonAdapter;
 
@@ -38,6 +39,6 @@ public abstract class BookingConfirmationStatus implements Parcelable {
   }
 
   public abstract String title();
-  public abstract String subtitle();
-  public abstract String value();
+  @Nullable public abstract String subtitle();
+  @Nullable public abstract String value();
 }
