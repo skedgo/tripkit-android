@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.skedgo.android.bookingclient.view.StringFieldView xmlns:android="http://schemas.android.com/apk/res/android"
+<com.skedgo.android.tripkit.booking.ui.view.StringFieldView xmlns:android="http://schemas.android.com/apk/res/android"
   xmlns:tools="http://schemas.android.com/tools"
   android:layout_width="match_parent"
   android:layout_height="wrap_content"
@@ -54,4 +54,4 @@
     android:layout_toRightOf="@id/titleView"
     android:inputType="textCapSentences"
     android:visibility="gone" />
-</com.skedgo.android.bookingclient.view.StringFieldView>
+</com.skedgo.android.tripkit.booking.ui.view.StringFieldView>

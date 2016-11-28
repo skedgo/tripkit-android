@@ -61,8 +61,6 @@ public class ExternalProviderAuthFragment extends ButterKnifeFragment {
     viewModel.handleArgs(getArguments());
 
     binding.webView.getSettings().setJavaScriptEnabled(true);
-    binding.webView.getSettings().setLoadWithOverviewMode(true);
-    binding.webView.getSettings().setUseWideViewPort(true);
     binding.webView.setWebViewClient(viewModel.webViewClient(oAuth2CallbackHandler));
 
     viewModel.intentObservable()

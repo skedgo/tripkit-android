@@ -21,6 +21,8 @@ public abstract class BookingConfirmationPurchase implements Parcelable{
           .price(in.readString())
           .productName(in.readString())
           .productType(in.readString())
+          .validFor(in.readLong())
+          .validFrom(in.readLong())
           .build();
     }
 
@@ -35,6 +37,8 @@ public abstract class BookingConfirmationPurchase implements Parcelable{
     dest.writeString(price());
     dest.writeString(productName());
     dest.writeString(productType());
+    dest.writeLong(validFor());
+    dest.writeLong(validFrom());
   }
 
   @Override public int describeContents() {
@@ -46,4 +50,11 @@ public abstract class BookingConfirmationPurchase implements Parcelable{
   public abstract String price();
   public abstract String productName();
   public abstract String productType();
+  @Value.Default public long validFor() {
+    return 0;
+  }
+  @Value.Default public long validFrom() {
+    return 0;
+  }
+
 }

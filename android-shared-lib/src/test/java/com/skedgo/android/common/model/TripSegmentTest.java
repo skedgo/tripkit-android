@@ -3,14 +3,18 @@ package com.skedgo.android.common.model;
 import android.os.Parcel;
 
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.google.gson.JsonObject;
 import com.skedgo.android.common.BuildConfig;
 import com.skedgo.android.common.TestRunner;
+import com.skedgo.android.common.util.LowercaseEnumTypeAdapterFactory;
 
+import org.apache.commons.io.IOUtils;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.robolectric.annotation.Config;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -224,6 +228,36 @@ public class TripSegmentTest {
   }
 
   @Test
+  public void shouldParsePayIQConfirmationSegment() throws IOException {
+
+    String routingResponse = IOUtils.toString(getClass().getResourceAsStream("/booking-payiq.json"));
+
+    TripSegment segment = bookingGson().fromJson(routingResponse, TripSegment.class);
+
+    assertThat(segment.getBooking()).isNotNull();
+    assertThat(segment.getBooking().getConfirmation()).isNotNull();
+
+  }
+
+  @Test
+  public void shouldParseUberConfirmationSegment() throws IOException {
+
+    String routingResponse = IOUtils.toString(getClass().getResourceAsStream("/booking-uber.json"));
+
+    TripSegment segment = bookingGson().fromJson(routingResponse, TripSegment.class);
+
+    assertThat(segment.getBooking()).isNotNull();
+    assertThat(segment.getBooking().getConfirmation()).isNotNull();
+
+  }
+
+  private Gson bookingGson() {
+    return new GsonBuilder()
+        .registerTypeAdapterFactory(new LowercaseEnumTypeAdapterFactory())
+        .registerTypeAdapterFactory(new GsonAdaptersBooking())
+        .create();
+  }
+
   public void shouldParseMetresAndMetresSafe() throws Exception {
     JsonObject jsonObject = new JsonObject();
     jsonObject.addProperty("metres", 18);
