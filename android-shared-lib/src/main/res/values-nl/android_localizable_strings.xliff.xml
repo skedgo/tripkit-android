@@ -168,16 +168,16 @@
 	<string name="title_exclude_event_from_route">Activiteit in deze reis uitsluiten?</string>
 	<string name="timetable_no_data">Er zijn geen diensten gevonden voor dit station</string>
 	<string name="trip_to_unknown_dest_about_to_start">Het ziet ernaar uit dat u ergens naartoe moet</string>
-	<string name="trip_to">"Reis naar %s"</string>
+	<string name="trip_to">"Reis naar "</string>
 	<string name="trip_preferences">Reis voorkeuren</string>
-	<string name="transport_selector_header">Include in the route results</string>
-	<string name="walkthrough_4">Search routes directly right from Google search bar without opening TripGo.</string>
+	<string name="transport_selector_header">Opnemen in de routes</string>
+	<string name="walkthrough_4">Zoek routes direct vanaf de Google zoekbalk zonder TripGo te openen.</string>
 	<string name="yesterday">Gisteren</string>
-	<string name="walkthrough_2">Never run late. Agenda plans ahead for you and let\'s you know when you need to leave.</string>
-	<string name="walkthrough_3">For those without an agenda, save favorite places.</string>
-	<string name="your_trip_is_about_to_start">Your trip is about to start</string>
+	<string name="walkthrough_2">Kom nooit meer te laat. De agenda plant vooruit en laat u weten wanneer het tijd is om te vertrekken.</string>
+	<string name="walkthrough_3">Voor diegenen zonder een agenda, u kunt ook favoriete locaties opslaan.</string>
+	<string name="your_trip_is_about_to_start">Uw trip staat op het moment om te beginnen</string>
 	<string name="you_are_here">U bent hier</string>
 	<string name="you_r_already_at_s">U bevindt zich al in %s!</string>
 
 </resources>
-<!-- This is an auto generated file (Thu Jun 30 10:11:02 ART 2016) -->
+<!-- This is an auto generated file (Mon Nov 28 17:15:27 ART 2016) -->

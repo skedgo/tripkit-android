@@ -64,6 +64,7 @@
 	<string name="go_to_today">Go to today</string>
 	<string name="include_cal_act">Include checked calendars</string>
 	<string name="include_cal_explanation">Events from those calendars will be used in planning your day</string>
+	<string name="minute">1 minute</string>
 	<string name="navigate_current_location">Navigate from current location</string>
 	<string name="navigate_from">Navigate from %1$s</string>
 	<string name="new_vehicle">New vehicle</string>
@@ -174,4 +175,4 @@
 	<string name="you_r_already_at_s">You are already at %s!</string>
 
 </resources>
-<!-- This is an auto generated file (Thu Jun 30 10:11:02 ART 2016) -->
+<!-- This is an auto generated file (Mon Nov 28 17:15:27 ART 2016) -->
