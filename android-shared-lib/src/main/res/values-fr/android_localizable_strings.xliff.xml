@@ -168,7 +168,7 @@
 	<string name="title_exclude_event_from_route">Exclure les événements des routes?</string>
 	<string name="timetable_no_data">Aucun services trouvés pour cet arrêt</string>
 	<string name="trip_to_unknown_dest_about_to_start">On dirait que vous avez un trajet à faire</string>
-	<string name="trip_to">"Aller à %s"</string>
+	<string name="trip_to">"Trip to %s "</string>
 	<string name="trip_preferences">Préférences de voyage</string>
 	<string name="transport_selector_header">Inclure dans les résultats de l\'itinéraire</string>
 	<string name="walkthrough_4">Recherche d\'itinéraires directement depuis la barre de recherche Google sans ouvrir TripGo.</string>
@@ -180,4 +180,4 @@
 	<string name="you_r_already_at_s">Vous êtes déjà à %s!</string>
 
 </resources>
-<!-- This is an auto generated file (Thu Jun 30 10:11:02 ART 2016) -->
+<!-- This is an auto generated file (Tue Nov 29 10:53:31 ART 2016) -->

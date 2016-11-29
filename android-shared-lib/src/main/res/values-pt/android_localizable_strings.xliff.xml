@@ -96,7 +96,7 @@
 	<string name="repeat_ends_on">Repetir final em</string>
 	<string name="remove_from_favourites">Remover de favoritos</string>
 	<string name="remove_shortcut">Remover atalho</string>
-	<string name="refresh">Refresh</string>
+	<string name="refresh">Atualização</string>
 	<string name="public_transport">Transporte público</string>
 	<string name="rate">Avaliar</string>
 	<string name="service_placeholder">Serviço</string>
@@ -141,7 +141,7 @@
 	<string name="sorted_by_price">Organizado por preço</string>
 	<string name="sorted_by_preferred">Organizado por preferidos</string>
 	<string name="one_more_thing">Mais uma coisa…</string>
-	<string name="taxi">Taxi</string>
+	<string name="taxi">Táxi</string>
 	<string name="terms_and_conditions">Termos e condições</string>
 	<string name="this_loc">essa localização</string>
 	<string name="time_to_leave_for">Hora de ir para %s</string>
@@ -168,7 +168,7 @@
 	<string name="title_exclude_event_from_route">Excluir evento de rotas?</string>
 	<string name="timetable_no_data">Não encontrado serviços para essa parada</string>
 	<string name="trip_to_unknown_dest_about_to_start">Parace que voce tem um trajeto a fazer</string>
-	<string name="trip_to">"Trajeto para %s"</string>
+	<string name="trip_to">"Trajeto para %s "</string>
 	<string name="trip_preferences">Preferências do trajeto</string>
 	<string name="transport_selector_header">Incluir em resultado de rotas</string>
 	<string name="walkthrough_4">Procure rotas diretamente da barra de pesquisa do Google sem abrir TripGo.</string>
@@ -180,4 +180,4 @@
 	<string name="you_r_already_at_s">Voce ja esta em %s!</string>
 
 </resources>
-<!-- This is an auto generated file (Thu Jun 30 10:11:02 ART 2016) -->
+<!-- This is an auto generated file (Tue Nov 29 10:53:31 ART 2016) -->

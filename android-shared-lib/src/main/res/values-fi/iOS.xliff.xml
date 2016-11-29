@@ -1,96 +1,176 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <resources>
+	<!--Instruction to users when there are no upcoming trips-->
+	<string name="plan_a_trip_on_your_phone_or_press_firmly_to_access_your_favourites_dot">Suunnittele matka puhelimellasi tai paina pitkään päästäksesi suosikkeihin.</string>
+	<!--Instruction to users when there are no upcoming trips (for non-interactive Glance)-->
+	<string name="plan_a_trip_on_your_phone_dot">Suunnittele matka puhelimellasi.</string>
+	<!--Format string for going from one location to another. Used to name favourite trips.-->
+	<string name="_pattern_to__pattern">%1$s -</string>
+	<!--Button to save a trip to the agenda-->
+	<string name="add_to_agenda">Lisää Agendalle</string>
+	<!--Add a new stopover-->
+	<string name="addstopover">Lisää välipysäkki</string>
+	<!--Title for button to access agenda-->
+	<string name="agenda">Agenda</string>
+	<!--Error title when agenda isn't yet set up.-->
+	<string name="agenda_is_not_set_up_dot">Agendaa ei ole asetettu.</string>
+	<!--Button to agree to EULA or a similar agreement-->
+	<string name="agree">Hyväksy</string>
+	<!--Option to use this trip for all similar cases.-->
+	<string name="all">Kaikki</string>
+	<!--Option to delete this event and all after in a recurrence-->
+	<string name="all_from_here">Kaikki tästä lähtien</string>
+	<!--Type for regular events that go in the phone's calendar.-->
+	<string name="calendar_event">Tapahtuma</string>
+	<!--Indicating the next trip is a current trip-->
+	<string name="current_trip">Tämänhetkinen matka</string>
+	<!--No comment provided by engineer.-->
+	<string name="database_corrupted_and_lost_dot">Tietokanta vioittunut ja hävinnyt.</string>
+	<!--Button to dismiss something, e.g., an error or action action sheet-->
+	<string name="dismiss">Hylkää</string>
+	<!--Title for button to access favourites-->
+	<string name="favourites">Suosikit</string>
+	<!--Title for a flight-->
+	<string name="flight">Lento</string>
+	<!--Format string for going from one location to others. Used to name favourite stops.-->
+	<string name="from__pattern">Kohteesta %1$s</string>
+	<!--Indicating localisation is in progress-->
+	<string name="getting_current_location">Haetaan tämänhetkistä sijaintia</string>
+	<!--Message to show when trying to get trip for a favorite-->
+	<string name="getting_trip_dot_dot_dot">Matkaa haetaan...</string>
+	<!--Type for events that are regular visit's to one of the user's favorites-->
+	<string name="habitual_visit">Rutiini</string>
+	<!--Typical name that you'd give your home location-->
+	<string name="home">Koti</string>
+	<!--Inidcating the watch app is loading-->
+	<string name="loading_dot_dot_dot">Ladataan...</string>
+	<!--Button to show a map or to modify the map's settings-->
+	<string name="map">Kartta</string>
+	<!--Indicator that a transport mode will appear minimised on the routes screen.-->
+	<string name="minimised">Piilotettu</string>
+	<!--Title for unnamed new event-->
+	<string name="newevent">Uusi tapahtuma</string>
+	<!--Text to show if there's no planned trip.-->
+	<string name="no_planned_trip">Ei suunniteltua matkaa</string>
+	<!--Indicating no trips have been planned within 24 hrs-->
+	<string name="no_planned_trips">Ei suunniteltuja matkoja</string>
+	<!--Option to delete only this event in a recurence-->
+	<string name="only_this">Vain tämä</string>
+	<!--Recovery suggestion when TripGo cannot access its local files-->
+	<string name="please_delete_the_app_and_re_minusinstall_from_the_app_store_dot_sorry_for_the_inconvenience_exclam">Ole hyvä, poista sovellus ja asenna se sitten uudelleen App Storesta. Pahoittelut häiriöstä!</string>
+	<!--Recovery suggestion when database got corrupted-->
+	<string name="please_restart_the_app_dot_sorry_for_the_inconvenience_exclam">Ole hyvä ja käynnistä sovellus uudelleen. Pahoittelut häiriöstä!</string>
+	<!--Recovery suggestion when TripGo cannot update its local files-->
+	<string name="please_try_restarting_the_app_dot_sorry_for_the_inconvenience_exclam">Käynnistä sovellus uudelleen. Pahoittelut häiriöstä!</string>
+	<!--Notification message for a trip. Provided is %destination and %time you need to leave.-->
+	<string name="privatetimetoleave">Aika lähteä! Matkasi kohteeseen %1$s alkaa klo %2$s</string>
+	<!--Notification message for trip with unknown destination. Notification message for a non-public transport trip. Provided is %time you need to leave.-->
+	<string name="privatetimetoleavenolocation">Aika lähteä! Matkasi alkaa klo %1$s</string>
+	<!--Profile tab bar name-->
+	<string name="profile">Profiili</string>
+	<!--Action title to reset something, e.g., settings-->
+	<string name="reset">Nollaa</string>
+	<!--Error recovery suggestion when agenda isn't yet set up but needed for Watch app.-->
+	<string name="set_up_your_agenda_in_the_tripgo_app_dot">Aseta oma Agendasi TripGo-sovelluksessa.</string>
+	<!--Action title to show map for a segment-->
+	<string name="show_map">Näytä kartta</string>
+	<!--Show trip-->
+	<string name="showtrip">Näytä Matka</string>
+	<!--Action button on trip reminders to snooze it for a fixed amount.-->
+	<string name="snooze_5_mins">Snooze 5 mins</string>
+	<!--Action button on public transport trip reminders to skip this service and get reminded for the next service-->
+	<string name="snooze_until_next">Snooze until next</string>
+	<!--Stay, i.e., type for dates you're staying at a hotel, or when moving house.-->
+	<string name="stay">Yöpyminen</string>
+	<!--Number of steps-->
+	<string name="stepsnumber">%1$s askelta</string>
+	<!--Title for stopover event-->
+	<string name="stopover">Välipysäkki</string>
+	<!--Title of button to access timetable-->
+	<string name="timetable">Aikataulu</string>
+	<!--Title for button to access transport modes-->
+	<string name="transport">Kulkutavat</string>
+	<!--No comment provided by engineer.-->
+	<string name="tripgo_cannot_access_its_local_files_dot">TripGo ei saa yhteyttä paikallisiin tiedostoihinsa.</string>
+	<!--No comment provided by engineer.-->
+	<string name="tripgo_cannot_update_its_local_files_dot">TripGo ei voi päivittää paikallisia tiedostojaan.</string>
+	<!--Trips tab bar name-->
+	<string name="trips">Matkat</string>
+	<!--Indicating the next trip is an upcoming trip-->
+	<string name="upcoming_trip">Tuleva Matka</string>
+	<!--Button to view something, e.g., a notification content or the EULA-->
+	<string name="view">Näytä</string>
+	<!--Header for accommodations, i.e., when a user is typically at this location-->
+	<string name="wheniamhereheader">Agenda</string>
 	<!--Title for linked third-party account, e.g., 'Uber Account'-->
 	<string name="_pattern_account">%1$s Tili</string>
 	<!--Filler for a specific service running at a time, e.g., '396 at 11:56am'-->
 	<string name="_pattern_at__pattern">%1$s kello %2$s</string>
 	<!--Filler for a specific frequency-based service indicating its frequency, e.g., 'M10 every 10 minutes'-->
 	<string name="_pattern_every__pattern">%1$s joka %2$s</string>
-	<!--Format string for going from one location to another. Used to name favourite trips.-->
-	<string name="_pattern_to__pattern">Lähtö: %1$s  Kohde: %2$s</string>
 	<!--Error title when access to location hasn't been granted, but location is required.-->
-	<string name="access_to_location_services_required_dot">Sovelluksen pääsy sijaintipalveluihin vaaditaan. Tarkista laitteen sijaintiasetukset</string>
+	<string name="access_to_location_services_required_dot">Sovellus tarvitsee oikeuden paikantaa sijaintisi.</string>
 	<!--Add reminder activity title-->
 	<string name="add_reminder">Lisää Muistutus</string>
 	<!--No comment provided by engineer.-->
 	<string name="add_address_dot_dot_dot">Lisää osoite...</string>
 	<!--No comment provided by engineer.-->
-	<string name="add_another_recurrence">Lisää uusi sarja</string>
-	<!--Add to agenda view title
-   Save trip action-->
-	<string name="add_to_agenda">Lisää Agendalle</string>
+	<string name="add_another_recurrence">Lisää uusi toistuma</string>
 	<!--Add to calendar activity title-->
 	<string name="add_to_calendar">Lisää Kalenteriin</string>
 	<!--Add favourite activity title-->
 	<string name="add_to_favourites">Lisää Suosikkeihin</string>
 	<!--Action title for adding a vehicle-->
 	<string name="add_vehicle">Lisää ajoneuvo</string>
-	<!--Add a new stopover-->
-	<string name="addstopover">lisää välilasku...</string>
 	<!--Add to agenda HUD notice-->
 	<string name="added_to_agenda">Lisätty Agendalle</string>
 	<!--Added to calendar HUD message-->
 	<string name="added_to_calendar">Lisätty Kalenteriin</string>
 	<!--Alert title that indicates an address is missing when creating a new event.-->
 	<string name="address_required">Osoite vaaditaan</string>
-	<!--Title for button to access agenda-->
-	<string name="agenda">Agenda</string>
 	<!--Title for agenda screen while it's still in setup mode.-->
-	<string name="agenda_setup">Agendan asettaminen</string>
-	<!--Error title when agenda isn't yet set up.-->
-	<string name="agenda_is_not_set_up_dot">Asialistaa ei ole asetettu.</string>
-	<!--Agenda tab bar name-->
-	<string name="agendabutton">Agenda</string>
-	<!--Accepting EULA
-   Agree to EULA-->
-	<string name="agree">Hyväksy</string>
+	<string name="agenda_setup">Agendan asetukset</string>
 	<!--Airline flight number with %airline and %flightNumber, e.g., 'Qantas flight QF1'-->
 	<string name="airlineflightnumber">%1$s Lento %2$s</string>
 	<!--Flight from a city to an other one-->
-	<string name="airlinefromto">%1$s (%2$s):stä %3$s (%4$s):iin</string>
+	<string name="airlinefromto">%1$s (%2$s) -</string>
 	<!--No comment provided by engineer.-->
 	<string name="alert">Ilmoitus</string>
 	<!--Description of alert with %title-->
 	<string name="alerttitleformat">Ilmoitus: %1$s</string>
-	<!--No comment provided by engineer.-->
 	<string name="alerts">Ilmoitukset</string>
-	<!--Option to use this trip for all similar cases.-->
-	<string name="all">Kaikki</string>
-	<!--Option to delete this event and all after in a recurence-->
-	<string name="all_from_here">Kaikki tästä</string>
 	<!--Action button title to see alternative options for the case where you can't make the next connection.-->
 	<string name="alternative_routes">Vaihtoehtoiset reitit</string>
 	<!--No comment provided by engineer.-->
-	<string name="ambiguous_event_address_dot">Epäselvä osoite.</string>
-	<!--Arrival date+time for overnight stay
-   Arrival time sorter title-->
+	<string name="ambiguous_event_address_dot">Epäselvä tapahtumaosoite.</string>
+	<!--Arrival date+time for overnight stay-->
 	<string name="arrival">Saapuminen</string>
 	<!--Arrive before button-->
 	<string name="arrivebefore">Perillä</string>
 	<!--Title for section to assign a trip to a vehicle.-->
-	<string name="assign_to_vehicle">Varaa kulkuneuvo</string>
+	<string name="assign_to_vehicle">Valitse kulkuneuvo</string>
 	<!--Filler for a service running at time, e.g., 'At 11:56am'-->
 	<string name="at__pattern">Klo %1$s</string>
 	<!--No comment provided by engineer.-->
 	<string name="authentication_cannot_be_completed_at_this_time_dot_please_try_again_later_dot">Todennusta ei voitu suorittaa tällä kertaa. Ole hyvä, yritä myöhemmin uudelleen.</string>
 	<!--Distance 'automatic'-->
-	<string name="auto">Automaattinen</string>
+	<string name="auto">Autom.</string>
 	<!--Header for settings of reminders automatically added by TripGo through the agenda-->
 	<string name="automatic_reminders">Automaattiset muistutukset</string>
 	<!--Response to positive answer to question whether TripGo is useful, prompting for App Store rating.-->
-	<string name="awesome_exclam_how_about_rating_us_question">Erinomaista! Haluaisitko arvostella meidät?</string>
+	<string name="awesome_exclam_how_about_rating_us_question">Hienoa! Haluaisitko arvostella meidät?</string>
 	<!--vehicle booking action-->
-	<string name="book_vehicle">Varaa auto</string>
+	<string name="book_vehicle">Varaa ajoneuvo</string>
 	<!--Book a taxi-->
 	<string name="booktaxi">Varaa Taxi</string>
+	<!--Description on empty bookings screen-->
+	<string name="bookings_made_with_tripgo_will_appear_here_dot">TripGolla tehdyt varaukset näkyvät täällä.</string>
 	<!--Response to negative answer to question whether TripGo is useful, prompting for feedback.-->
 	<string name="bummer_dot_dot_dot_how_about_some_feedback_question">Harmi... Haluaisitko antaa palautetta?</string>
 	<!--Calendar-->
 	<string name="calendar">Kalenteri</string>
-	<!--Type for regular events that go in the phone's calendar.-->
-	<string name="calendar_event">Tapahtuma</string>
 	<!--Explanation for what calendar events are compared to habituals and stays. Can be long-ish.-->
-	<string name="calendareventdescription">Säännölliset tapahtumat, jotka tallennetaan laitteen kalenteriin.</string>
+	<string name="calendareventdescription">Säännöllisiin tapahtumiin lukeutuvat tapahtumat, jotka tallennetaan laitteen kalenteriin.</string>
 	<!--No comment provided by engineer.-->
 	<string name="calendars">Kalenterit</string>
 	<!--No comment provided by engineer.-->
@@ -101,73 +181,65 @@
 	<string name="clear_search_history">Tyhjennä hakuhistoria</string>
 	<!--School pricing preference-->
 	<string name="concession_pricing">Erikoishinnoittelu</string>
-	<!--Title on the button that asks users to confirm if they want to proceed with booking-->
-	<string name="confirm">Vahvista</string>
 	<!--Hassle preference-->
 	<string name="convenience">Mukavuus</string>
 	<!--Convenience description-->
-	<string name="convenience_is_affected_by_things_such_as_changing_public_transport_services_coma_the_amount_of_walking_coma_and_finding_a_taxi_dot">Mukavuuteen vaikuttavat esimerkiksi muutokset julkisen liikenteen palveluissa, kävelymatka, ja taksin löytäminen.</string>
+	<string name="convenience_is_affected_by_things_such_as_changing_public_transport_services_coma_the_amount_of_walking_coma_and_finding_a_taxi_dot">Mukavuuteen vaikuttavat esimerkiksi muutokset julkisen liikenteen palveluissa, kävelymatkan pituus ja taksin löytäminen.</string>
 	<!--Error title when TripGo couldn't identify the user's current city.-->
-	<string name="could_not_find_your_city_dot">Kaupunkia ei löydy.</string>
+	<string name="could_not_find_your_city_dot">Kaupunkiasi ei löytynyt.</string>
 	<!--Title for critical error-->
 	<string name="criticalerror">Kriittinen virhe</string>
 	<!--Description for critical error where error will be shown below.-->
-	<string name="criticalerrorformat">Sovellus on havainnut vakavan virheen eikä voi periä maksua:</string>
-	<!--Indicating the next trip is a current trip-->
-	<string name="current_trip">Tämänhetkinen matka</string>
+	<string name="criticalerrorformat">Sovellus on havainnut vakavan virheen eikä sitä voida palauttaa:</string>
 	<!--No comment provided by engineer.-->
-	<string name="custom_trip_does_not_fit">Tilaus matka ei sovi</string>
+	<string name="custom_trip_does_not_fit">Mukautettu matka ei sovi</string>
 	<!--No comment provided by engineer.-->
 	<string name="custom_trip_has_been_cancelled">Mukautettu matka on peruttu</string>
 	<!--Cycling speed preference-->
-	<string name="cycle_speed">Polkupyörän nopeus</string>
-	<!--No comment provided by engineer.-->
-	<string name="database_corrupted_and_lost_dot">Tietokantahäiriö tai tieto puuttuu.</string>
+	<string name="cycle_speed">Pyöräilynopeus</string>
 	<!--From %date-->
-	<string name="datefromformat">%1$s:stä</string>
-	<!--From %date1 to %date2-->
-	<string name="datefromtoformat">%1$s:stä to %2$s:iin</string>
-	<!--Departure date+time for overnight stay
-   Departure time sorter title-->
+	<string name="datefromformat">%1$s lähtien</string>
+	<string name="datefromtoformat">%1$s - %2$s</string>
+	<!--Departure date+time for overnight stay-->
 	<string name="departure">Lähtö</string>
-	<!--Dismiss accessibility label
-   Dismiss button label-->
 	<!--Distances preference-->
 	<string name="distances">Etäisyydet</string>
 	<!--Title for transport modes that the user doesn't want included-->
 	<string name="do_not_include">Poista hakutuloksista</string>
 	<!--No comment provided by engineer.-->
-	<string name="do_you_want_to_always_use_this_trip_and_add_it_to_your_favourites_question">Haluatko käyttää tätä matkaa toistuvasti, ja lisätä suosikkeihin?</string>
+	<string name="do_you_want_to_always_use_this_trip_and_add_it_to_your_favourites_question">Haluatko käyttää tätä matkaa toistuvasti ja lisätä sen suosikkeihisi?</string>
 	<!--Walkthrough (skip in here should match translation for 'Skip'.-->
-	<string name="don_apostt_have_a_fixed_place_of_work_or_study_question_skip_this_step_dot">Ei työ- tai opiskelupaikan kiinteää osoitetta? Ohita tämä vaihe.</string>
+	<string name="don_apostt_have_a_fixed_place_of_work_or_study_question_skip_this_step_dot">Työ- tai opiskelupaikalla ei ole kiinteää osoitetta? Ohita tämä vaihe.</string>
 	<!--Title for page for modifying a routine/stay at a specific location-->
-	<string name="edititemheretitle">Agendan Kohta</string>
+	<string name="edititemheretitle">Agendan Merkintä</string>
 	<!--Title for date when an event ends repeating-->
 	<string name="end_date">Päättymispäivä</string>
 	<!--No comment provided by engineer.-->
 	<string name="end_user_licence_agreement">Loppukäyttäjän lisenssisopimus</string>
 	<!--Carbon preference-->
-	<string name="environment">Ympäristö</string>
+	<string name="environment">Ympäristöystävällinen</string>
 	<!--No comment provided by engineer.-->
 	<string name="event">Tapahtuma</string>
 	<!--No comment provided by engineer.-->
 	<string name="event_does_not_fit">Tapahtuma ei sovi</string>
 	<!--No comment provided by engineer.-->
-	<string name="event_is_missing_an_address_dot">Osoite puuttuu.</string>
+	<string name="event_is_missing_an_address_dot">Tapahtuman osoite puuttuu.</string>
 	<!--No comment provided by engineer.-->
 	<string name="event_is_outside_tripgo_aposts_range_dot">Tapahtuma on TripGon valikoiman ulkopuolella</string>
 	<!--No comment provided by engineer.-->
 	<string name="event_was_cancelled">Tapahtuma peruttiin</string>
 	<!--Title for the time an event ends (including date information)-->
-	<string name="eventenddatetime">Päättyy</string>
+	<string name="eventenddatetime">Päättymisaika</string>
 	<!--Title for when an event repeats-->
 	<string name="eventrepeat">Toistuva</string>
 	<!--Title for the time an event starts (including date information)-->
-	<string name="eventstartdatetime">Alku</string>
+	<string name="eventstartdatetime">Alkamisaika</string>
 	<!--Filler for a frequency-based service indicating its frequency, e.g., 'Every 10 minutes'-->
 	<string name="every__pattern">Joka %1$s</string>
 	<!--Text do mark an example-->
 	<string name="example">Esim.</string>
+	<!--Title for example trip-->
+	<string name="example_trip">Example Trip</string>
 	<!--Exclude event action-->
 	<string name="exclude">Poissulje</string>
 	<!--There goes my excuse for being late...-->
@@ -179,47 +251,34 @@
 	<!--No comment provided by engineer.-->
 	<string name="favourite_trip">Suosikkimatka</string>
 	<!--Add favourite HUD notice-->
-	<string name="favourite_added">Suosikki lisätty</string>
+	<string name="favourite_added">Lisätty suosikkeihin</string>
 	<!--Remove trip from favourites HUD notice-->
-	<string name="favourite_removed">Suosikki poistettu</string>
-	<!--Title for button to access favourites-->
-	<string name="favourites">Suosikit</string>
-	<!--Favourites tab bar name-->
-	<string name="favouritesbutton">Suosikit</string>
+	<string name="favourite_removed">Poistettu suosikeista</string>
 	<!--Help title-->
-	<string name="feedback__ampersand_support">Palaute ja tuki</string>
+	<string name="feedback__ampersand_support">"Palaute "</string>
 	<!--Placeholder text for search bar that is used for filtering-->
 	<string name="filter">Suodatin</string>
-	<!--No comment provided by engineer.-->
-	<string name="flight">Lento</string>
-	<!--Flight number prompt-->
 	<string name="flight_number">Lentonumero</string>
-	<!--Date of the flight-->
-	<string name="flightdate">Päivämäärä</string>
-	<!--Details of a flight-->
-	<string name="flightdetails">Tarkemmat tiedot</string>
-	<!--Note concerning the flight-->
-	<string name="flightnote">Huom.</string>
+	<string name="flightdate">Lentopäivä</string>
+	<string name="flightdetails">Tarkemmat lentotiedot</string>
+	<string name="flightnote">Kommentit</string>
 	<!--Title for flight with %flightNumber-->
-	<string name="flightnumberformat">Lento %1$s</string>
-	<!--Search for a flight-->
-	<string name="flightsearch">Etsi Lento</string>
+	<string name="flightnumberformat">Lentonumero %1$s</string>
+	<string name="flightsearch">Hae lentoa</string>
 	<!--Reminder to leave preference-->
-	<string name="for_when_to_leave">Lähteminen</string>
+	<string name="for_when_to_leave">Kun pitää lähteä</string>
 	<!--Free directions-->
-	<string name="freedirections">Tripgo - Ilmaisia ohjeita</string>
+	<string name="freedirections">Tripgo - Ilmaisia reittiohjeita</string>
 	<!--Favorite trip 'from' title-->
-	<string name="from">Lähtösijainti</string>
-	<!--Format string for going from one location to others. Used to name favourite stops.-->
-	<string name="from__pattern">Lähtösijainti: %1$s</string>
+	<string name="from">Kohteesta</string>
 	<!--No comment provided by engineer.-->
-	<string name="from__pattern_coma_leaving_now">Kohteesta %1$s, lähde nyt</string>
+	<string name="from__pattern_coma_leaving_now">Lähde nyt kohteesta %1$s</string>
 	<!--Route here... ...from Current location-->
-	<string name="from_current_location">Nykyisestä sijainnista</string>
+	<string name="from_current_location">Tämänhetkisestä sijainnista</string>
 	<!--Location for trip exported as event going from %location1 to %location2-->
-	<string name="fromtoforeventlocationformat">Mistä: %1$s Mihin: %2$s</string>
+	<string name="fromtoforeventlocationformat">%1$s -</string>
 	<!--Header for list of vehicles garaged at this location-->
-	<string name="garaged_vehicles">Ajoneuvot autotallissa</string>
+	<string name="garaged_vehicles">Ajoneuvot parkkihallissa</string>
 	<!--Title of settings for generic transport stuff-->
 	<string name="general">Yleinen</string>
 	<!--Header for settings for feedback, recommending and rating TripGo-->
@@ -229,79 +288,60 @@
 	<!--No comment provided by engineer.-->
 	<string name="get_off_here">Jää pois tässä</string>
 	<!--No comment provided by engineer.-->
-	<string name="get_on_here">Mene kyytiin tässä</string>
+	<string name="get_on_here">Nouse kyytiin tässä</string>
 	<!--Description for button to get on or off at the selected public transport stop rather than where TripGo suggested.-->
-	<string name="get_on_or_off_here">Mene kyytiin tai jää pois tässä</string>
+	<string name="get_on_or_off_here">Nouse kyytiin tai jää pois tässä</string>
 	<!--I use TripGo to get around-->
-	<string name="getaround">Käytän TripGoa kiertelyyn.</string>
-	<!--Indicating localisation is in progress-->
-	<string name="getting_current_location">Tämänhetkistä sijaintia haetaan</string>
-	<!--Message to show when trying to get trip for a favorite-->
-	<string name="getting_trip_dot_dot_dot">Matkan vieminen...</string>
-	<!--Routine, i.e., type for regular times when at one of the user's favorites
-   Type for events that are regular visit's to one of the user's favorites-->
-	<string name="habitual_visit">Rutiini</string>
+	<string name="getaround">Käytän TripGo:ta päästäkseni paikasta toiseen.</string>
 	<!--Explanation for what routines are compared to calendar events and stays. Can be long-ish.-->
-	<string name="habitualeventdescription">Rutiinit ovat osa päivittäistä liikkumista, mutta ne eivät ole tapahtumia, jotka haluat näkyvän kalenterissa (esim työ). Ne ovat tärkeitä päästäksesi oikeaan paikkaan oikeaan aikaan.</string>
+	<string name="habitualeventdescription">Rutiineihin kuuluvat sellaiset säännölliset matkat, joita et halua merkitä kalenteriisi (esim. työ). Ne ovat tärkeitä, sillä ilman niitä Agenda ei osaisi suunnitella matkojasi siten, että olet aina oikeassa paikassa oikeaan aikaan.</string>
 	<!--No comment provided by engineer.-->
 	<string name="has_tripgo_been_useful_to_you_question">Onko TripGosta ollut sinulle hyötyä?</string>
-	<!--Typical name that you'd give your home location-->
-	<string name="home">Koti</string>
 	<!--Map mode 'streets + satellite'-->
 	<string name="hybrid">Hybridi</string>
 	<!--Include event action-->
 	<string name="include">Sisällytä</string>
 	<!--Title for setting to include step count on Agenda screen-->
-	<string name="include_step_count">Sisällytä askelmäärät</string>
+	<string name="include_step_count">Sisällytä askelmäärä</string>
 	<!--Title for a switch indicating if this event should be included in all-day routes
    Title for setting to include transport mode in trips.-->
 	<string name="include_in_routes">Sisällytä reitteihin</string>
 	<!--Accessibility hint for tapping title in agenda - jumps to 'today'-->
-	<string name="jump_to_today">Tänään</string>
+	<string name="jump_to_today">Siirry tähän päivään</string>
 	<!--Distance 'kilometers'-->
 	<string name="km">Km</string>
 	<!--Leave after button-->
 	<string name="leaveafter">Lähtöaika</string>
 	<!--Button title to switch view to list mode-->
 	<string name="list">Lista</string>
-	<!--Title on the button that indicates to the user that booking is in progressing-->
-	<string name="loading">Lataa</string>
-	<!--Title to show while loading/waiting for results-->
-	<string name="loading_dot_dot_dot">Lataa...</string>
 	<!--Title for showing the details of a location, typically picked from the map after searching or dropping a pin-->
 	<string name="location">Sijainti</string>
 	<!--No comment provided by engineer.-->
 	<string name="location_missing_dot">Sijainti puuttuu.</string>
 	<!--Error title when favourite is missing a location..-->
-	<string name="location_not_set_dot">Sijainti puuttuu.</string>
+	<string name="location_not_set_dot">Sijaintia ei ole asetettu.</string>
 	<!--Where are you going from?-->
 	<string name="locationcomingfrom">Mistä lähdet?</string>
 	<!--Where do you want to go?-->
-	<string name="locationwanttogo">Minne menet?</string>
+	<string name="locationwanttogo">Minne haluat mennä?</string>
 	<!--No comment provided by engineer.-->
-	<string name="long_press_on_the_map_to_choose_a_location">Valise sijainti painamalla haluttua kohtaa pitkään kartalla</string>
+	<string name="long_press_on_the_map_to_choose_a_location">Valitse sijainti painamalla haluttua kohtaa pitkään kartalla</string>
 	<!--I once was lost but now I have found... TripGo-->
-	<string name="lostonce">Kerran eksyin, mutta nyt olen löytynyt.... TripGo.</string>
+	<string name="lostonce">Jätä hyvästit eksymisille.... TripGo.</string>
 	<!--Header for settings of reminders that the user manually added-->
-	<string name="manual_reminders">Omat muistutukset</string>
-	<!--Button title to switch agenda view to map mode
-   Button title to switch to map-->
-	<string name="map">Kartta</string>
+	<string name="manual_reminders">Asetetut muistutukset</string>
 	<!--No comment provided by engineer.-->
-	<string name="marking_a_location_as_a_favourite_will_allow_quick_access_to_routing_results_for_going_there_from_your_current_location_dot">Suosikkisijainnit mahdollistavat nopeat reittivaihtoehdot, missä tahansa oletkin.</string>
+	<string name="marking_a_location_as_a_favourite_will_allow_quick_access_to_routing_results_for_going_there_from_your_current_location_dot">Lisäämällä sijainnin suosikkeihisi saat reittivaihtoehtoja nopeasti tämänhetkisestä sijainnistasi kyseiseen kohteeseen.</string>
 	<!--No comment provided by engineer.-->
-	<string name="marking_a_transit_stop_as_a_favourite_will_allow_quick_access_to_its_timetable_dot">Merkintsemällä välipysäkin suosikkeihin mahdollistaa nopean pääsyn sen aikatauluun.</string>
+	<string name="marking_a_transit_stop_as_a_favourite_will_allow_quick_access_to_its_timetable_dot">Välipysäkin lisääminen suosikkeihisi mahdollistaa nopean pääsyn sen aikatauluihin.</string>
 	<!--Speed preference 'medium'-->
-	<string name="medium">Keskiverto</string>
+	<string name="medium">Keskinopea</string>
 	<!--Distance 'miles'-->
-	<string name="mi">Mailia</string>
+	<string name="mi">Maili(a)</string>
 	<!--Minimum transfer time preference-->
-	<string name="min_transfer_time">Minimi siirtoaika</string>
+	<string name="min_transfer_time">Vaihtoaika (väh.)</string>
 	<!--No comment provided by engineer.-->
-	<string name="minimise_results_for_this_mode_on_the_routes_screen_dot_great_for_transport_options_you_only_use_occasionally_dot">Minimoi tämän kulkumuodon osalta tulokset reittinäytöllä. Ominaisuus helpottaa löytämään kulkutavat joita käytät vain silloin tällöin.</string>
-	<!--Indicator that a transport mode will appear minimised on the routes screen.
-   Title for setting to minimise a transport mode.-->
-	<string name="minimised">Piilotettu</string>
+	<string name="minimise_results_for_this_mode_on_the_routes_screen_dot_great_for_transport_options_you_only_use_occasionally_dot">Piilota tulokset reittinäytöllä tämän kulkumuodon osalta. Tulosten piilottaminen on hyödyllistä erityisesti kulkumuodoille, joita käytät harvoin.</string>
 	<!--Minutes format (used for transfer times)-->
 	<string name="minutes">%.0f min</string>
 	<!--Reminder to leave preference-->
@@ -315,107 +355,85 @@
 	<!--Sample event name ('Movie')-->
 	<string name="movie">Elokuva</string>
 	<!--No comment provided by engineer.-->
-	<string name="my_agenda">Oma Asialista</string>
+	<string name="my_agenda">Oma Agenda</string>
 	<!--Title for profile item that loads a list of user's bookings-->
 	<string name="my_bookings">Omat varaukset</string>
 	<!--User preferences title-->
-	<string name="my_priorities">Omat tärkeysmääritykset</string>
+	<string name="my_priorities">Omat Esivalinnat</string>
 	<!--No comment provided by engineer.-->
-	<string name="my_transport">Oma liikenne</string>
+	<string name="my_transport">Omat kulkutavat</string>
 	<!--Header for list of my vehicles-->
-	<string name="my_vehicles">Omat ajoneuvot</string>
+	<string name="my_vehicles">Omat kulkuneuvot</string>
 	<!--Name of the vehicle-->
 	<string name="namevehicle">Nimi</string>
 	<!--Error recovery suggestion for when TripGo couldn't identify the user's current city.-->
 	<string name="navigate_to_a_supported_city_on_a_map_dot">Siirry tuetun kaupungin kohdalle kartalla.</string>
 	<!--No comment provided by engineer.-->
 	<string name="new_favourite">Uusi suosikki</string>
-	<!--Title for unnamed new event-->
-	<string name="newevent">Uusi tapahtuma</string>
 	<!--Action title for adding a habitual item away from some location-->
 	<string name="newitemawayactiontitle">Määritä uusi paikka</string>
 	<!--Action title for adding another habitual visit to a favourite-->
-	<string name="newitemhereactiontitle">Lisää milloin olen tässä</string>
+	<string name="newitemhereactiontitle">Lisää rutiini suosikkeihin</string>
 	<!--Title for page for adding a new routine/stay at a specific location-->
-	<string name="newitemheretitle">Uusi kohta Agendalle</string>
+	<string name="newitemheretitle">Uusi Agendamerkintä</string>
 	<!--Title for page for adding a new routing/stay at a specific location-->
 	<string name="newstaytitle">Uusi paikka</string>
 	<!--No comment provided by engineer.-->
-	<string name="no__apostfrom_apost_location_selected">Lähtösijaintia ei ole valittu</string>
+	<string name="no__apostfrom_apost_location_selected">Lähtöpaikkaa ei ole valittu</string>
 	<!--No comment provided by engineer.-->
-	<string name="no__apostto_apost_location_selected">Kohdesijaintia ei ole valittu</string>
+	<string name="no__apostto_apost_location_selected">Määränpäätä ei ole valittu</string>
 	<!--Error title for when no calendar found.-->
 	<string name="no_calendar_found_dot">Kalenteria ei löytynyt.</string>
 	<!--No comment provided by engineer.-->
 	<string name="no_locations_set">Ei valittuja sijainteja</string>
-	<!--Text to show if there's no planned trip.-->
-	<string name="no_planned_trip">Ei suunniteltua matkaa</string>
-	<!--Indicating no trips have been planned within 24 hrs-->
-	<string name="no_planned_trips">Ei suunniteltuja matkoja</string>
 	<!--Error title when routing produced no results (but no specific error was returned from routing).-->
 	<string name="no_routes_found_dot">Reittejä ei löytynyt.</string>
 	<!--Negative answer to follow-up question for rating or feedback.-->
 	<string name="no_coma_thanks">Ei kiitos</string>
 	<!--Negative answer to question whether TripGo is useful.-->
-	<string name="not_really">Ei juurikaan</string>
+	<string name="not_really">Ei oikeastaan</string>
 	<!--Countdown cell 'now' indicator-->
 	<string name="now">Nyt</string>
 	<!--Title for route number %1 of %total, where %total -->
-	<string name="numberrouteformat">Reitti %1$s %2$s:stä</string>
+	<string name="numberrouteformat">Reitti %1$s / %2$s</string>
 	<!--No comment provided by engineer.-->
-	<string name="ok">Okei</string>
-	<!--Option to delete only this event in a recurence
-   Option to use this trip just this time.-->
-	<string name="only_this">Vain tämä</string>
+	<string name="ok">Ok</string>
+	<!--Title for homescreen action to open the agenda-->
+	<string name="open_agenda">Open Agenda</string>
 	<!--Error recovery suggestion for favourites with missing location.-->
 	<string name="open_tripgo_app_and_add_the_location_of_this_favourite_dot">Avaa TripGo ja lisää sijainti tälle suosikille.</string>
 	<!--Error recovery suggestion for when watch doesn't have access to location services.-->
-	<string name="open_tripgo_or_settings_app_on_your_phone_and_grant_tripgo_access_to_location_services_dot">Avaa TripGo tai puhelimen Asetukset ja salli TripGolle pääsy sijaintipalveluihin.</string>
+	<string name="open_tripgo_or_settings_app_on_your_phone_and_grant_tripgo_access_to_location_services_dot">Avaa TripGo tai puhelimesi Asetukset ja anna TripGolle lupa käyttää sijaintipalveluita.</string>
 	<!--Button title to open URL-->
 	<string name="open_url">Avaa URL</string>
 	<!--No comment provided by engineer.-->
-	<string name="open_website">Avaa nettisivut</string>
+	<string name="open_website">Avaa nettisivusto</string>
 	<!--No comment provided by engineer.-->
-	<string name="opening_dot_dot_dot">Avataan...</string>
-	<!--No comment provided by engineer.-->
-	<string name="our_end_user_licence_agreement_has_changed_dot_you_must_agree_to_it_before_continuing_use_of_this_app">TripGon käyttäjälisenssi on muuttunut. Sovellusta voi käyttää vain hyväksymällä sen.</string>
+	<string name="our_end_user_licence_agreement_has_changed_dot_you_must_agree_to_it_before_continuing_use_of_this_app">TripGon käyttäjälisenssi on muuttunut. Voit käyttää sovellusta vain hyväksymällä sen.</string>
 	<!--Text displayed when the user has given the app access to private data such as their calendar or contacts, but the user needs to perform the original action again to now see the results.-->
 	<string name="permission_was_granted_dot_please_go_back_and_try_again_dot">Lupa myönnettiin. Palaa takaisin ja yritä uudelleen.</string>
 	<!--No comment provided by engineer.-->
 	<string name="permissions">Luvat</string>
 	<!--Timetable screen title-->
 	<string name="pick_a_time">Valitse Aika</string>
-	<!--Instruction to users when there are no upcoming trips-->
-	<string name="plan_a_trip_on_your_phone_or_press_firmly_to_access_your_favourites_dot">Suunnittele matka puhelimellasi tai paina pitkään päästäksesi suosikkeihin.</string>
-	<!--Instruction to users when there are no upcoming trips (for non-interactive Glance)-->
-	<string name="plan_a_trip_on_your_phone_dot">Suunnittele matka puhelimellasi.</string>
+	<!--Title for homescreen action to plan a new trip-->
+	<string name="plan_trip">Plan Trip</string>
+	<!--Title for butotn that allows users to plan a new trip-->
+	<string name="plan_a_new_trip">Plan a new trip</string>
 	<!--Error recovery suggestion for when routing produced no results (but no specific error was returned from routing).-->
-	<string name="please_adjust_your_query_and_try_again_dot">Muokkaa kyselyä ja yritä uudelleen, kiitos.</string>
+	<string name="please_adjust_your_query_and_try_again_dot">Ole hyvä, muokkaa hakua ja yritä sitten uudelleen.</string>
 	<!--Error recovery suggestion for when no calendar found.-->
-	<string name="please_check_your_calendar_app_and_make_sure_you_have_a_calendar_configured_dot">Tarkista kalenterisovelluksesi ja varmista, että sulla on kalenterin määritetty.</string>
-	<!--Recovery suggestion when TripGo cannot access its local files-->
-	<string name="please_delete_the_app_and_re_minusinstall_from_the_app_store_dot_sorry_for_the_inconvenience_exclam">Pyydämme poistamaan sovelluksen, ja asentamaan sen uudellen App Storesta. Pahoittelut ylimääräisestä vaivasta!</string>
-	<!--Recovery suggestion when database got corrupted-->
-	<string name="please_restart_the_app_dot_sorry_for_the_inconvenience_exclam">Käynnistä sovellus uudelleen. Pahoittelut ylimääräisestä vaivasta!</string>
+	<string name="please_check_your_calendar_app_and_make_sure_you_have_a_calendar_configured_dot">Tarkista kalenterisovelluksesi ja varmista, että kalenteri on määritetty.</string>
 	<!--Alert message that asks users to provide the missing address for a new event.-->
 	<string name="please_specify_an_address_dot">Ole hyvä, määritä osoite.</string>
-	<!--Recovery suggestion when TripGo cannot update its local files-->
-	<string name="please_try_restarting_the_app_dot_sorry_for_the_inconvenience_exclam">Käynnistä sovellus uudelleen. Pahoittelut ylimääräisestä vaivasta!</string>
 	<!--Title for preferred public transport modes.-->
 	<string name="preferred_transport">Ensisijainen kulkutapa</string>
+	<!--Title for list of past bookings-->
+	<string name="previous">Edellinen</string>
 	<!--No comment provided by engineer.-->
-	<string name="priorities">Painopisteet</string>
-	<!--Notification message for a non-public transport trip. Provided is %destination and %time you need to leave.-->
-	<string name="privatetimetoleave">Aika lähteä! Matkasi kohteeseen %1$s alkaa klo %2$s</string>
-	<!--Notification message for a non-public transport trip. Provided is %time you need to leave.-->
-	<string name="privatetimetoleavenolocation">Aika lähteä! Matkasi alkaa %1$s</string>
-	<!--Title for view that shows user's profile-->
-	<string name="profile">Asetukset</string>
-	<!--Profile tab bar name-->
-	<string name="profilebutton">Profile</string>
+	<string name="priorities">Omat esivalinnat</string>
 	<!--Rate us preference-->
 	<string name="rate_tripgo">Arvostele TripGo</string>
-	<!--Action title to add/remove reminder-->
 	<string name="reminder">Muistutus</string>
 	<!--Added reminder notice-->
 	<string name="reminder_added">Muistutus lisätty</string>
@@ -436,22 +454,20 @@
 	<!--Remove from agenda HUD notice-->
 	<string name="removed_from_agenda">Poistettu Agendalta</string>
 	<!--No comment provided by engineer.-->
-	<string name="removing_this_trip_will_exclude_the_following_event_from_your_agenda_dot">Poistamalla tämän matkan, poistuu oheinen tapahtuma agendalta.</string>
-	<!--No comment provided by engineer.-->
-	<string name="removing_this_trip_will_exclude_the_preceeding_event_from_your_agenda_dot">Poistamalla tämän matkan, poistuu edeltävä tapahtuma agendalta.</string>
+	<string name="removing_this_trip_will_exclude_the_following_event_from_your_agenda_dot">Poistamalla tämän matkan, oheinen tapahtuma poistetaan agendalta.</string>
+	<string name="removing_this_trip_will_exclude_the_preceeding_event_from_your_agenda_dot">Poistamalla tämän matkan, edeltävä tapahtuma poistetaan agendalta.</string>
 	<!--Title for switch indicating if an event repeats or not-->
-	<string name="repeat_does_end">Sarja loppuu</string>
+	<string name="repeat_does_end">Toisto loppuu</string>
 	<!--Report problem-->
 	<string name="report_problem">Ilmoita Ongelmasta</string>
+	<!--Title for button that allows users to request support-->
+	<string name="request_support">Request support</string>
 	<!--Title for action to perform by the user if an event is outside TripGo's range. The action will display a feedback form to request the region of that event.-->
 	<string name="request_dot_dot_dot">Pyydä...</string>
-	<!--Reset button for my priorities
-   Title of group of settings related to resetting settings-->
-	<string name="reset">Tyhjennä</string>
 	<!--Action title to reset agenda content.-->
-	<string name="reset_agenda">Tyhjennä agenda</string>
+	<string name="reset_agenda">Nollaa agenda</string>
 	<!--Action title to reset tutorial progress.-->
-	<string name="reset_tutorial">Tyhjennä tutorial</string>
+	<string name="reset_tutorial">Nollaa opastusohjelma</string>
 	<!--Title for selector of return time for a trip-->
 	<string name="return_time">Paluuaika</string>
 	<!--Header for section to configure return trip-->
@@ -464,65 +480,56 @@
 	<string name="route_here">Reitti tänne</string>
 	<!--Results screen title-->
 	<string name="routes">Reitit</string>
+	<!--Error message if interregional routing isn't yet supported-->
+	<string name="routing_from__pattern_to__pattern_is_not_yet_supported">Reititystä välillä %1$s - %2$s ei vielä tueta.</string>
+	<!--Used in the form that requests support for a specific routing-->
+	<string name="routing_request">Routing request</string>
 	<!--Map mode 'satellite'-->
 	<string name="satellite">Satelliitti</string>
 	<!--Price preference-->
 	<string name="save_money">Säästä Rahaa</string>
 	<!--Time preference-->
 	<string name="save_time">Säästä Aikaa</string>
-	<!--No comment provided by engineer.-->
-	<string name="search_for_a_city">Etsi kaupunki</string>
+	<string name="search_for_a_city">Hae kaupunki</string>
 	<!--Agenda onboarding: placeholder text for search bar for 'home'.-->
-	<string name="search_for_your_home_address">Etsi kotiosoitteesi</string>
+	<string name="search_for_your_home_address">Hae kotiosoitteesi</string>
 	<!--Agenda onboarding: placeholder text for search bar for 'work'.-->
-	<string name="search_for_your_work_address">Etsi työpaikkasi</string>
+	<string name="search_for_your_work_address">Hae työpaikkasi</string>
 	<!--Search tab bar name-->
-	<string name="searchbutton">Etsi</string>
-	<!--Placeholder text while waiting for server response when searching for a location.-->
-	<string name="searching_for__apost_pattern_apost_dot_dot_dot">Haetaan sijaintia \'%1$s\'...</string>
-	<!--No comment provided by engineer.-->
-	<string name="select_bike_share">Valitse jaetut pyörät</string>
-	<!--No comment provided by engineer.-->
-	<string name="select_car_park">Valitse autoparkki</string>
+	<string name="searchbutton">Hae</string>
+	<string name="select_bike_share">Valitse kaupunkipyörät</string>
+	<string name="select_car_park">Valitse parkkihalli</string>
 	<!--No comment provided by engineer.-->
 	<string name="select_vehicle">Valitse ajoneuvo</string>
-	<!--Details of a flight prompt to enter date first.-->
 	<string name="select_a_date_to_get_flight_details_dot">Valitse päivämäärä saadaksesi lennon tiedot.</string>
 	<!--Walkthrough-->
 	<string name="select_the_place_where_you_stay_at_the_end_of_each_day">Valitse paikka, jossa yleensä yövyt.</string>
 	<!--Action button title for composing an SMS to a real-time service-->
 	<string name="send_real_minustime_sms">Lähetä Reaaliaikainen tekstiviesti (SMS)</string>
-	<!--Error recovery suggestion when agenda isn't yet set up but needed for Watch app.-->
-	<string name="set_up_your_agenda_in_the_tripgo_app_dot">Aseta oma Asialistasi TripGo-sovelluksessa.</string>
-	<!--Button that goes to the Setting's app-->
 	<string name="settings">Asetukset</string>
 	<!--Action button title for sharing when you arrive
    Share arrival-->
-	<string name="share_arrival">Jaa saapuminen</string>
+	<string name="share_arrival">Jaa saapumisaika</string>
 	<!--Share trip-->
 	<string name="share_trip">Jaa matka</string>
-	<!--Preference to highlight wheelchair information-->
-	<string name="show_wheelchair_information">Näytä Pyörätuolitiedot</string>
 	<!--Button title on trips to show alternatives for it-->
 	<string name="show_alternatives">Näytä vaihtoehdot</string>
 	<!--No comment provided by engineer.-->
 	<string name="show_booking_options">Näytä varausvaihtoehdot</string>
 	<!--No comment provided by engineer.-->
-	<string name="show_details">Näytä tiedot</string>
+	<string name="show_details">Näytä lisätiedot</string>
 	<!--Button to show disclaimers, e.g., info of public transport data.-->
-	<string name="show_disclaimer">Näytä ehdot</string>
+	<string name="show_disclaimer">Näytä vastuuvapautuslauseke</string>
 	<!--No comment provided by engineer.-->
 	<string name="show_info">Näytä tiedot</string>
-	<!--Action title to show map for a segment-->
-	<string name="show_map">Näytä kartta</string>
 	<!--No comment provided by engineer.-->
 	<string name="show_parking_options">Näytä parkkivaihtoehdot</string>
 	<!--Button Title to get to website with ticket details.-->
 	<string name="show_ticket_info">Näytä lipun tiedot</string>
 	<!--Action button title for viewing timetable for public transport-->
 	<string name="show_timetable">Näytä aikataulu</string>
-	<!--Show trip-->
-	<string name="showtrip">Näytä Matka</string>
+	<!--Indicator for how many transport modes are being displayed out of the total available ones for the region of the trip. First placeholder will be replaced with selected number, second with total number.-->
+	<string name="showing__pattern_of__pattern_transport_modes">Showing %1$s of %2$s transport modes</string>
 	<!--Button title to skip a certain step-->
 	<string name="skip">Ohita</string>
 	<!--Speed preference 'slow'-->
@@ -531,86 +538,67 @@
 	<string name="sorry_dot_tripgo_doesn_apostt_work_here_yet_exclam">Pahoittelut. TripGo ei toimi täällä vielä!</string>
 	<!--Spread the word preference-->
 	<string name="spread_the_word">Kerro kaverillesi</string>
-	<!--Title for flight going from %airport1 (%airportCode2) to %airport3 (%airportCode4)-->
-	<string name="srctodstformat">%1$s (%2$s):stä %3$s (%4$s):n</string>
-	<!--Stay, i.e., type for dates you're staying at a hotel, or when moving house.-->
-	<string name="stay">Yövy</string>
+	<string name="srctodstformat">Lento kohteesta %1$s (%2$s) kohteeseen %3$s (%4$s)</string>
 	<!--Explanation for what stays are compared to calendar events and routines. Can be long-ish.-->
-	<string name="stayeventdescription">Vertaa hotellien käyttämistä matkoilla kalenterin tapahtumiin ja rutiineihin.</string>
-	<!--Title for identifying a location where you stay overnight-->
-	<string name="staytitle">Yövy</string>
-	<!--Number of steps-->
-	<string name="stepsnumber">%1$s askelta</string>
+	<string name="stayeventdescription">Yöpymisiä verrataan kalenterin tapahtumiin ja rutiineihin, jotta mahdolliset hotellivaraukset tehdään oikeille päiville oikeissa paikoissa.</string>
 	<!--Additional information for official stop code of a public transport stop.-->
-	<string name="stop_code_2points__pattern">Pysäytyskoodi: %1$s</string>
-	<!--Title for stopover event-->
-	<string name="stopover">Välilasku</string>
+	<string name="stop_code_2points__pattern">Pysäkkikoodi: %1$s</string>
 	<!--Map mode 'streets'-->
 	<string name="streets">Kadut</string>
 	<!--Contact support error button-->
 	<string name="support">Tuki</string>
 	<!--Walkthrough-->
-	<string name="swipe_dates_to_navigate_between_weeks">Rullamalla päiviä voit selailla viikkojen välillä</string>
+	<string name="swipe_dates_to_navigate_between_weeks">Pyyhkäise näyttöä selataksesi viikkonäkymiä</string>
 	<!--Walkthrough - should match translation for '\"Routes\"'-->
-	<string name="tap__apostroutes_apost_for_alternative_routes">Napauta "Reitit" nähdäksesi vaihtoehtoisia reittejä.</string>
+	<string name="tap__apostroutes_apost_for_alternative_routes">Napauta \'Reitit\' nähdäksesi vaihtoehtoisia reittejä</string>
 	<!--Walkthrough-->
-	<string name="tap_and_hold_title_to_jump_directly_to_a_specified_date_dot">Napauta ja pidä hetki otsikkoa päästäksesi suoraan tiettyyn päivämäärään.</string>
+	<string name="tap_and_hold_title_to_jump_directly_to_a_specified_date_dot">Napauta ja paina otsikkoa pitkään päästäksesi suoraan tiettyyn päivämäärään.</string>
 	<!--Walkthrough-->
 	<string name="tap_public_transport_stops_for_access_to_timetable">Napauttamalla joukkoliikenteen pysäkkejä näet niiden aikataulut.</string>
 	<!--Walkthrough-->
-	<string name="tap_title_to_go_to__aposttoday_apost">Napauta otsikkoa mennäksesi \'tänään\'</string>
+	<string name="tap_title_to_go_to__aposttoday_apost">Napauta otsikkoa päästäksesi kohtaan \'tänään\'</string>
 	<!--No comment provided by engineer.-->
-	<string name="tap_to_confirm_hours_or_swipe_to_delete">Napauta varmistaaksesi tunnit tai pyyhkäise poistaaksesi</string>
+	<string name="tap_to_confirm_hours_or_swipe_to_delete">Napauta vahvistaaksesi tunnit tai pyyhkäise poistaaksesi</string>
 	<!--No comment provided by engineer.-->
 	<string name="tap_to_set_address">Napauta asettaaksesi osoitteen</string>
 	<!--No comment provided by engineer.-->
 	<string name="tap_to_set_address_or_swipe_to_delete">Napauta asettaaksesi osoitteen tai pyyhkäise poistaaksesi</string>
 	<!--No comment provided by engineer.-->
-	<string name="tap_to_set_garage">Napauta asettaaksesi autotallin</string>
+	<string name="tap_to_set_garage">Napauta asettaaksesi parkkihallin</string>
 	<!--Thank you HUD notice-->
 	<string name="thank_you_exclam">Kiitos!</string>
+	<!--Indicating that a ticket has expired.-->
+	<string name="ticket_expired">Ticket expired</string>
 	<!--Title for screen to pick your working hours-->
-	<string name="time_at_work">Aika työpaikalla</string>
+	<string name="time_at_work">Työaika</string>
+	<!--Indicating how much time is left for a valid ticket.-->
+	<string name="time_left">Time left</string>
 	<!--Time zone (typically for an event)-->
 	<string name="time_zone">Aikavyöhyke</string>
 	<!--Header for times a user is typically at this location, e.g., working hours-->
 	<string name="times">Ajat</string>
-	<!--Title of button to access timetable-->
-	<string name="timetable">Aikataulu</string>
 	<!--Title event name-->
 	<string name="titleeventname">Otsikko</string>
 	<!--Title favourite name-->
 	<string name="titlefavouritename">Otsikko</string>
 	<!--Favorite trip 'to' title-->
-	<string name="to">Mihin?</string>
-	<!--Title for button to access transport modes
-   Title of settings for generic transport stuff-->
-	<string name="transport">Liikenne</string>
+	<string name="to">Määränpää</string>
 	<!--Transport genius-->
 	<string name="transportgenius">TripGo - Älykästä liikkumista</string>
 	<!--How do you want to go today?-->
-	<string name="transportmodewish">TripGo - Miten haluat kulkea tänään?</string>
-	<!--No comment provided by engineer.-->
-	<string name="tripgo_cannot_access_its_local_files_dot">TripGo ei saanut yhteyttä paikallisiin tiedostoihin.</string>
-	<!--No comment provided by engineer.-->
-	<string name="tripgo_cannot_update_its_local_files_dot">TripGo paikallisten tiedostojen päivitys ei onnistunut.</string>
-	<!--No comment provided by engineer.-->
-	<string name="tripgo_does_not_work_in_this_area_yet_dot_please_navigate_to_on_of_our_supported_regions_and_try_again_dot">TripGo ei toimi tällä alueella vielä. Yritä hakua uudelleen lähimmällä tuetulla alueella.</string>
-	<!--Trips tab bar name-->
-	<string name="tripsbutton">Matkat</string>
+	<string name="transportmodewish">TripGo - Miten pääset tänään perille?</string>
 	<!--Type of the event (calendar event, stay, routine)-->
 	<string name="typeevent">Luokka</string>
 	<!--Type of the vehicle-->
 	<string name="typevehicle">Tyyppi</string>
-	<!--Indicating the next trip is an upcoming trip-->
-	<string name="upcoming_trip">Lähestyvä Matka</string>
+	<!--Title for list of upcoming bookings-->
+	<string name="upcoming">Tuleva</string>
+	<!--No comment provided by engineer.-->
+	<string name="updated_2points_">"Updated: "</string>
 	<!--Which of my vehicles to assign this to-->
 	<string name="vehicle">Ajoneuvo</string>
 	<!--No comment provided by engineer.-->
-	<string name="verify_location_dot_dot_dot">Tarkista sijainti...</string>
-	<!--Positive answer to displayed advertising.
-   Show content of notification.-->
-	<string name="view">Katso</string>
+	<string name="verify_location_dot_dot_dot">Vahvista sijainti...</string>
 	<!--View alternative times for this trip-->
 	<string name="view_times">Selaa aikoja</string>
 	<!--Label for 'Duration' button to sort trips by their total duration.-->
@@ -622,36 +610,172 @@
 	<!--Walking speed preference-->
 	<string name="walk_speed">Kävelynopeus</string>
 	<!--No comment provided by engineer.-->
-	<string name="week_starts">Viikon alku</string>
+	<string name="website">Sivusto</string>
+	<!--No comment provided by engineer.-->
+	<string name="week_starts">Viikko alkaa</string>
 	<!--Title for showing what3words address including info button-->
 	<string name="what3words_address">What3words Osoite</string>
+	<!--Preference to highlight wheelchair information-->
+	<string name="wheelchair_information">Wheelchair information</string>
 	<!--Header for staying away form home, i.e., when a user is NOT at their home-->
-	<string name="wheniamawayheader">Yöpyminen</string>
-	<!--Header for accommodations, i.e., when a user is typically at this location
-   Header for routines and accommodations, i.e., when a user is typically at this location-->
-	<string name="wheniamhereheader">Agenda</string>
+	<string name="wheniamawayheader">Yöpymiset</string>
 	<!--Question for which events in a recurrence to delete (options are typically this/all/any from here)-->
-	<string name="which_would_you_like_to_delete">Minkä haluaisit poistaa</string>
+	<string name="which_would_you_like_to_delete">Minkä haluaisit poistaa?</string>
 	<!--Typical name that you'd give your work location-->
 	<string name="work">Työ</string>
 	<!--Positive answer to follow-up question for rating or feedback.-->
-	<string name="yeah_coma_ok_exclam">Kyllä, ok!</string>
+	<string name="yeah_coma_ok_exclam">Kyllä, sopii!</string>
 	<!--Positive answer to question whether TripGo is useful.-->
 	<string name="yes_exclam">Kyllä!</string>
 	<!--Alert if service running late/early, meaning that the user might not make the next service.-->
-	<string name="you_might_not_make_this_transfer_dot">Huomasimme, että mahdollisesti kyseinen vuoro ei toteudu.</string>
+	<string name="you_might_not_make_this_transfer_dot">Et todennäköisesti ehdi seuraavaan yhteyteen.</string>
 	<!--No comment provided by engineer.-->
 	<string name="zoom_in">Suurenna</string>
 	<!--Walkthrough-->
-	<string name="zoom_into_map_to_view_public_transport_stops">Suurenna karttaa nähdäkseesi joukkoliikenteen pysäkit.</string>
-	<!--Description of the pricing-->
+	<string name="zoom_into_map_to_view_public_transport_stops">Suurenna karttaa nähdäksesi joukkoliikenteen pysäkit</string>
 	<string name="pricingdescription">Hinta</string>
-	<!--Description of the terminal-->
 	<string name="terminaldescription">Terminaali</string>
-	<!--Message that indicates the app is about to sign users out of their user accounts-->
-	<string name="_the_app_will_now_sign_out">" Sovellus sulkeutuu"</string>
+	<!--Format for a service's real-time indicator for a service which is early, e.g., '1 min early. This means #1 is replaced with something like '1 min'.-->
+	<string name="_pattern_early">%1$s etuajassa</string>
+	<!--Format for a service's real-time indicator for a service which is early, e.g., '1 min early (1:10 pm service). This means #1 is replaced with something like '1 min' and #2 is replaced with the original time, e.g., '1:10 pm').-->
+	<string name="_pattern_early__start_parent_pattern_service_end_parent">%1$s etuajassa (%2$s yhteys)</string>
+	<!--Format for a service's real-time indicator for a service which is late, e.g., '1 min late. This means #1 is replaced with something like '1 min'-->
+	<string name="_pattern_late">%1$s myöhässä</string>
+	<!--Format for a service's real-time indicator for a service which is late, e.g., '1 min late (1:10 pm service). This means #1 is replaced with something like '1 min' and #2 is replaced with the original time, e.g., '1:10 pm').-->
+	<string name="_pattern_late__start_parent_pattern_service_end_parent">%1$s myöhässä (%2$s yhteys)</string>
+	<!--Indicator for how cycle-friendly a cycling route is. Placeholder will get replaced with '75%'.-->
+	<string name="_pattern_cycle_friendly">%1$s cycle friendly</string>
+	<!--Duration without traffic-->
+	<string name="_pattern_w_slasho_traffic">%1$s ilman ruuhkaa</string>
+	<!--Indicator for how wheelchair-friendly a wheeelchair route is. Placeholder will get replaced with '75%'.-->
+	<string name="_pattern_wheelchair_friendly">%1$s wheelchair friendly</string>
+	<!--No comment provided by engineer.-->
+	<string name="_1_stop">1 pysähdys</string>
+	<!--Indication of an activity-->
+	<string name="activityindication">Merkki aktiivisuudesta</string>
+	<!--apple maps directions action-->
+	<string name="apple_maps">Apple Maps</string>
+	<!--The place of arrival-->
+	<string name="arrivallocation">Saapumispaikka</string>
+	<!--The place of arrival with time-->
+	<string name="arrivallocationtime">Saapuminen kohteeseen %1$s klo %2$s</string>
+	<!--'Arrive at %@', where '%@' will be replace with the arrival time.
+   Arrival %time.-->
+	<string name="arrivaltime">Saapuu klo %1$s</string>
+	<!--Prefix for selected 'arrive by' time
+   Single line instruction to arrive-->
+	<string name="arrive">Saapuu</string>
+	<!--Title for when you'll arrive when on a trip. Countdown to arrival will be displayed below.-->
+	<string name="arrive_in">Arrive in</string>
+	<!--No comment provided by engineer.-->
+	<string name="book_with_flitways">Varaa FlitWayn kautta</string>
+	<!--No comment provided by engineer.-->
+	<string name="book_with_uber">Varaa Uberin kautta</string>
+	<!--Placeholder title while calculating trips-->
+	<string name="calculating_trips_dot_dot_dot">Lasketaan matkoja...</string>
+	<!--No comment provided by engineer.-->
+	<string name="call">Soita</string>
+	<!--Action title for calling provider of %name-->
+	<string name="calltaxiformat">Soita firmalle %1$s</string>
+	<!--Single line instruction if device is offline and user needs to reconnect to internet to calculate trips-->
+	<string name="connect_to_internet_to_get_trips">Yhdistä nettiin hakeaksesi matkoja</string>
+	<!--Error title when server could not find a given transit stop.-->
+	<string name="could_not_find_transit_stop_dot">Välipysäkkiä ei löytynyt.</string>
+	<!--Time of the bus departure-->
+	<string name="departuretime">Lähtee klo %1$s</string>
+	<!--Destination of the bus-->
+	<string name="direction">Suunta</string>
+	<!--Walking time-->
+	<string name="duration">Kesto %1$s</string>
+	<!--As in 'this bus/train is empty'-->
+	<string name="empty">Tyhjä</string>
+	<!--As in 'this bus/train has few seats available'-->
+	<string name="few_seats_available">Few seats available</string>
+	<!--As in 'this bus/train is full and likely can't accept further passengers'-->
+	<string name="full">Kaikki</string>
+	<!--No comment provided by engineer.-->
+	<string name="get_lyft">Hanki Lyft</string>
+	<!--No comment provided by engineer.-->
+	<string name="get_ola">Hanki Ola</string>
+	<!--No comment provided by engineer.-->
+	<string name="get_ingogo">Hanki Ingogo</string>
+	<!--google maps directions action-->
+	<string name="google_maps">Google Maps</string>
+	<!--%@ is replaced with app name-->
+	<string name="in_the_meantime_coma_let_aposts_keep_exploring__pattern_and_enjoy_your_trips">In the meantime, let\'s keep exploring %1$s and enjoy your trips</string>
+	<!--No comment provided by engineer.-->
+	<string name="in_the_meantime_coma_let_aposts_keep_exploring_and_enjoy_your_trips">In the meantime, let\'s keep exploring and enjoy your trips</string>
+	<!--Prefix for selected 'leave after' time
+   Single line instruction to leave-->
+	<string name="leave">Lähde matkaan</string>
+	<!--Title for when to depart. Countdown to departure will be displayed below.-->
+	<string name="leave_in">Leave in</string>
+	<!--No comment provided by engineer.-->
+	<string name="leave_now">Lähde nyt</string>
+	<!--The place of departure-->
+	<string name="leavelocation">Lähde kohteesta %1$s</string>
+	<!--The place of departure with time-->
+	<string name="leavelocationtime">Lähde kohteesta %1$s klo %2$s</string>
+	<!--Time departure-->
+	<string name="leavetime">Lähde klo %1$s</string>
+	<!--As in 'this bus/train is so full, there's only limited standing room'-->
+	<string name="limited_standing_room_only">Limited standing room only</string>
+	<!--No comment provided by engineer.-->
+	<string name="live_traffic">Live-liikenne</string>
+	<!--As in 'this bus/train has many seats available'-->
+	<string name="many_seats_available">Many seats available</string>
+	<!--ArrivalTime-->
+	<string name="messagearrivaltime">Saapuminen kohteeseen %1$s klo %2$s</string>
+	<!--Title of button to get more details about an alert-->
+	<string name="more_info">Lisätietoja</string>
+	<!--As in 'this bus/train is full and definitely not accepting further passengers'-->
+	<string name="not_accepting_passengers">Not accepting passengers</string>
+	<!--Indicator to show when a service is on time according to real-time data.-->
+	<string name="on_time">Ajoissa</string>
+	<!--No comment provided by engineer.-->
+	<string name="open_lyft">Avaa Lyft</string>
+	<!--No comment provided by engineer.-->
+	<string name="open_ola">Avaa Ola</string>
+	<!--No comment provided by engineer.-->
+	<string name="plan_a_trip_and_it_will_show_up_here_dot">Plan a trip and it will show up here.</string>
+	<!--Arrival Location-->
+	<string name="primarylocationend">Kohteeseen %1$s</string>
+	<!--Departure Location-->
+	<string name="primarylocationstart">Kohteesta %1$s</string>
+	<!--'At %location' indicator for parts of a trip that happen at a single location, e.g., waiting at a platform, parking at a car park-->
+	<string name="primarylocationstationary">Kohteessa %1$s</string>
+	<!--No comment provided by engineer.-->
+	<string name="real_minustime">Reaaliaikainen</string>
+	<!--Error recovery suggestion for when when server could not find a given transit stop.-->
+	<string name="search_for_this_stop_again_or_try_again_later_dot_dot">Hae tämän pysäkin tietoja uudelleen tai yritä myöhemmin uudelleen..</string>
+	<!--Send SMS action-->
+	<string name="send_sms">Lähetä SMS</string>
+	<!--Show website action-->
+	<string name="show_website">Avaa nettisivusto</string>
+	<!--As in 'this bus/train is fairly full and has standing room only'-->
+	<string name="standing_room_only">Standing room only</string>
+	<!--Number of stops before you get off a vehicle-->
+	<string name="stops">%1$s pysäkki(ä)</string>
+	<!--From %time1 to %time2-->
+	<string name="timefromtoshortformat">%1$s - %2$s</string>
+	<!--No comment provided by engineer.-->
+	<string name="trip">Matka</string>
+	<!--Vehicle 'x' updated-->
+	<string name="vehiclecalledupdated">Ajoneuvo %1$s päivitetty %2$s sitten</string>
+	<!--Vehicle updated-->
+	<string name="vehicleupdated">Päivitetty %1$s sitten</string>
+	<!--No comment provided by engineer.-->
+	<string name="we_are_busy_getting_your_upcoming_trip_dot_please_wait_dot_dot_dot">We are busy getting your upcoming trip. Please wait...</string>
+	<!--No comment provided by engineer.-->
+	<string name="we_apostll_keep_you_updated_with_the_latest_transit_alerts_here">We\'ll keep you updated with the latest transit alerts here</string>
+	<!--goCatch action-->
+	<string name="gocatch_a_taxi">goCatch Taksi</string>
+	<!--No comment provided by engineer.-->
+	<string name="ingogo_a_taxi">ingogo Taksi</string>
+	<!--'%@' will be replaced with app's name.-->
+	<string name="_pattern_does_not_work_in_this_area_yet_dot_please_navigate_to_one_of_our_supported_regions_and_try_again_dot">%1$s ei vielä toimi tällä alueella. Yritä hakua uudelleen lähimmällä tuetulla alueella.</string>
 	<!--Authorization restricted alert message-->
-	<string name="access_to_this_feature_has_been_restricted_for_your_device_dot_please_check_the_settings_app__moret_general__moret_restrictions_or_ask_your_device_provider_dot">"Pääsy tähän ominaisuuteen on rajoitettu laitteessasi. Tarkista laitteesi Asetukset "</string>
+	<string name="access_to_this_feature_has_been_restricted_for_your_device_dot_please_check_the_settings_app__moret_general__moret_restrictions_or_ask_your_device_provider_dot">"Tämän ominaisuuden käyttöoikeutta on rajoitettu laitteessasi. Tarkista laitteesi Asetukset "</string>
 	<!--Accessibility label for action button-->
 	<string name="action">Toiminta</string>
 	<!--Option for users if they already owned a SkedGo account-->
@@ -661,7 +785,7 @@
 	<!--Authorisation needed title-->
 	<string name="authorisation_needed">Lupa tarvitaan</string>
 	<!--Type of vehicle : bicycle-->
-	<string name="bicycle">Polkupyörä</string>
+	<string name="bicycle">Pyörä</string>
 	<!--Credit card CVC-->
 	<string name="cvc">CVC</string>
 	<!--No comment provided by engineer.-->
@@ -682,12 +806,16 @@
 	<string name="change_tracking_options">Muuta seurantavaihtoehtoja</string>
 	<!--Accessibility title for a checkmark/tick button-->
 	<string name="checkmark">Valintamerkki</string>
-	<!--Close action-->
+	<!--Button title to dismiss a view
+   Close action-->
 	<string name="close">Sulje</string>
+	<!--Title on the button that asks users to confirm if they want to proceed with an action
+   Title on the button that asks users to confirm if they want to proceed with booking-->
+	<string name="confirm">Vahvista</string>
 	<!--Error title when GPS failed.-->
-	<string name="could_not_determine_your_current_location_dot">Nykyistä sijaintiasi ei voitu määrittää.</string>
+	<string name="could_not_determine_your_current_location_dot">Tämänhetkistä sijaintiasi ei voitu määrittää.</string>
 	<!--Could not download supported regions warning-->
-	<string name="couldnotdownloadsupportedregions">Tuettuja alueita ei voitu ladata TripGo palvelimelle. Yritä myöhemmin uudelleen.</string>
+	<string name="couldnotdownloadsupportedregions">Tuettuja alueita ei voitu ladata TripGon palvelimelle. Yritä myöhemmin uudelleen</string>
 	<!--Message that indicates the app is creating accounts for users-->
 	<string name="creating_account">Luodaan tiliä</string>
 	<!--Section title for credit card payment-->
@@ -703,7 +831,7 @@
 	<!--Sort by distance-->
 	<string name="distance">Etäisyys</string>
 	<!--Option for users if they don't yet have a SkedGo account-->
-	<string name="don_apostt_have_an_account_question_sign_up">Sinulla ei ole vielä tilia? Rekisteröidy</string>
+	<string name="don_apostt_have_an_account_question_sign_up">Sinulla ei ole vielä tiliä? Rekisteröidy</string>
 	<!--Done button
    Keyboard accessory button title-->
 	<string name="done">Valmis</string>
@@ -712,7 +840,8 @@
 	<!--Email address where receipt is sent
    Email used as Facebook username-->
 	<string name="email">Sähköposti</string>
-	<!--'Every %day' in context of repetitions (especially recurring events), e.g., 'Every Monday'-->
+	<!--'Every %day' in context of repetitions (especially recurring events), e.g., 'Every Monday'
+   Every %day, e.g., 'Every Monday'-->
 	<string name="everydayformat">Joka %1$s</string>
 	<!--Everyday in context of repetitions (especially recurring events)-->
 	<string name="everyday">Päivittäin</string>
@@ -733,13 +862,15 @@
 	<!--Instant results proposal-->
 	<string name="instant_results">Pikahaun tulokset</string>
 	<!--Title for alert that indicates the user account has become invalid-->
-	<string name="invalid_account">Tuntematon tili</string>
+	<string name="invalid_account">Virheellinen tili</string>
 	<!--Name placeholder text-->
-	<string name="john_appleseed">Malli Matkaaja</string>
+	<string name="john_appleseed">Milla Matkaaja</string>
 	<!--Used when user signs in using Facebook-->
 	<string name="linking_facebook">Yhdistetään Facebookin kautta</string>
+	<!--Title on the button that indicates to the user that booking is in progressing-->
+	<string name="loading">Ladataan</string>
 	<!--Location iOS6+ authorisation needed text-->
-	<string name="location_services_are_required_to_use_this_feature_dot_please_go_to_the_settings_app__moret_privacy__moret_location_services_coma_make_sure_they_are_turned_on_and_authorise_this_app_dot">"Sijaintipalveluja tarvitaan tähän ominaisuuteen. Mene laitteen Asetukset "</string>
+	<string name="location_services_are_required_to_use_this_feature_dot_please_go_to_the_settings_app__moret_privacy__moret_location_services_coma_make_sure_they_are_turned_on_and_authorise_this_app_dot">"Käyttääksesi tätä ominaisuutta tulee sinun sallia sijaintipalvelujen käyttö. Mene asetuksissa kohtaan Tietosuoja "</string>
 	<!--Indicating a payment is in progress-->
 	<string name="making_payment">Maksua käsitellään</string>
 	<!--More results proposal-->
@@ -751,7 +882,8 @@
 	<!--Name to which receipt is sent
    Name used in Facebook-->
 	<string name="name">Nimi</string>
-	<!--Never in context of repetitions (especially recurring events)-->
+	<!--Never in context of repetitions (especially recurring events)
+   Response to question whether user wants to report a problem when taking a screenshot.-->
 	<string name="never">Ei koskaan</string>
 	<!--Title for sign in view when user does not have an account-->
 	<string name="new_account">Uusi tili</string>
@@ -761,7 +893,7 @@
 	<!--No comment provided by engineer.-->
 	<string name="no_co_2">Ei CO₂</string>
 	<!--Number of repeats-->
-	<string name="numberreccurences">%lu kertaa.</string>
+	<string name="numberreccurences">%lu kerta(a)</string>
 	<!--Button to open Settings app section for this app-->
 	<string name="open_settings">Avaa Asetukset</string>
 	<!--Open in Safari action-->
@@ -775,13 +907,11 @@
 	<!--Please select a location prompt-->
 	<string name="please_select_a_location">Ole hyvä ja valitse sijainti</string>
 	<!--Error recovery suggestion when GPS fails.-->
-	<string name="please_try_again_or_set_your_location_manually_dot">GPS haku epäonnistui, yritä uudelleen tai syötä sijainti manuaalisesti.</string>
+	<string name="please_try_again_or_set_your_location_manually_dot">Yritä uudelleen tai syötä sijainti manuaalisesti.</string>
 	<!--Please verify the location prompt-->
 	<string name="please_verify_the_location">Ole hyvä ja vahvista sijainti</string>
 	<!--Location picker 'no autocompletion results' text. Needs to match text on keyboard.-->
-	<string name="press__apostsearch_apost_for_more_dot_dot_dot">Paina \'Etsi\' lisätuloksiin...</string>
-	<!--Indicator for real-time information-->
-	<string name="real_minustime">Reaaliaikai</string>
+	<string name="press__apostsearch_apost_for_more_dot_dot_dot">Paina \'Etsi\' saadaksesi lisätuloksia...</string>
 	<!--Title for section that asks users where payment receipt should be sent-->
 	<string name="receipt">Kuitti</string>
 	<!--Repeats daily-->
@@ -793,38 +923,38 @@
 	<!--Repeats yearly-->
 	<string name="repeats_yearly">Toistuu vuosittain</string>
 	<!--Error when location search for %input was not successful.-->
-	<string name="requesterrorformat">\'%1$s\' ei löytynyt.</string>
+	<string name="requesterrorformat">Sijaintia \'%1$s\' ei löytynyt</string>
 	<!--Sports utility vehicle abbreviation-->
 	<string name="suv">SUV</string>
 	<!--Sort by overall score, like a ranking.-->
 	<string name="score">Pisteytys</string>
 	<!--Empty search bar placeholder-->
-	<string name="search">Etsi</string>
+	<string name="search">Hae</string>
 	<!--No comment provided by engineer.-->
-	<string name="search_results">Tulokset</string>
-	<!--Label on location with action to select it, e.g., 'Select Hilton, Paris'-->
-	<string name="select__pattern">Valitse %1$s</string>
-	<!--Label to select location which doesn't have a title-->
-	<string name="select_location">Valitse sijainti</string>
+	<string name="search_results">Hakutulokset</string>
+	<!--Placeholder text while waiting for server response when searching for a location.-->
+	<string name="searching_for__apost_pattern_apost_dot_dot_dot">Haetaan sijaintia \'%1$s\'...</string>
 	<!--Tap to set location-->
 	<string name="setlocation">Napauta asettaaksesi sijainti</string>
 	<!--No comment provided by engineer.-->
-	<string name="sign_in">Ilmoittaudu</string>
+	<string name="sign_in">Kirjaudu sisään</string>
 	<!--Instruction for signing out user account-->
 	<string name="sign_out">Kirjaudu ulos</string>
 	<!--No comment provided by engineer.-->
-	<string name="sign_up">Kirjaudu sisään</string>
+	<string name="sign_up">Rekisteröidy</string>
 	<!--No comment provided by engineer.-->
-	<string name="sign_up_cannot_be_completed_without_a_valid_password">Sisäänkirjautuminen ei onnistu ilman voimassa olevaa salasanaa</string>
+	<string name="sign_up_cannot_be_completed_without_a_valid_password">Rekisteröinti ei onnistu ilman voimassa olevaa salasanaa</string>
 	<!--Message that indicates the app is signing users into their user accounts-->
 	<string name="signing_in">Kirjaudutaan sisään</string>
 	<!--Message that indicates the app has successfully completed signing out
    Message that indicates the app is signing users out of their accounts-->
 	<string name="signing_out">Kirjaudutaan ulos</string>
+	<!--Message that indicates the app is about to sign users out of their user accounts-->
+	<string name="the_app_will_now_sign_out">Sovellus sulkeutuu</string>
 	<!--Accessibility - user location button - off-->
 	<string name="tracking__minus_off">Seuranta - pois päältä</string>
 	<!--user location button - follow-->
-	<string name="tracking__minus_on">Seuranta - Päällä</string>
+	<string name="tracking__minus_on">Seuranta - päällä</string>
 	<!--user location button - follow with heading-->
 	<string name="tracking__minus_on_with_heading">Seuranta - päällä (sis. kulkusuunta)</string>
 	<!--No comment provided by engineer.-->
@@ -833,10 +963,16 @@
 	<string name="updating_trip">Matkaa päivitetään</string>
 	<!--Message that informs users that some values are missing from the required fields in a booking form.-->
 	<string name="values_missing_from_required_fields_dot">Osa pakollisista tiedoista puuttuu.</string>
+	<!--Title on the button that indicates to the user that an action is progressing-->
+	<string name="waiting">Odottaa</string>
 	<!--Every weekday in context of repetitions (especially recurring events)-->
 	<string name="weekdays">Arkisin</string>
 	<!--Every weekend day in context of repetitions (especially recurring events)-->
 	<string name="weekends">Viikonloppuisin</string>
+	<!--Indicator for wheelchair accessible services-->
+	<string name="wheelchair_accessible">Pyörätuolilla liikkuminen huomioitu</string>
+	<!--Question asked when user is taking a screenshot-->
+	<string name="would_you_like_to_report_a_problem_question">Would you like to report a problem?</string>
 	<!--Message that informs users that T-->
 	<string name="you_need_to_agree_to_the_booking_terms_and_conditions_dot">Sinun tulee hyväksyä varauksen käyttöehdot.</string>
 	<!--Message that informs users that T-->
@@ -844,13 +980,13 @@
 	<!--Calendar authorisation needed text-->
 	<string name="you_previously_denied_this_app_access_to_your_calendar_dot_please_go_to_the_settings_app__moret_privacy__moret_calendar_and_authorise_this_app_to_use_this_feature_dot">"Et aiemmin sallinut tämän sovelluksen pääsyä kalenteriisi. Ole hyvä, mene kohtaan Asetukset "</string>
 	<!--Contacts authorisation needed text-->
-	<string name="you_previously_denied_this_app_access_to_your_contacts_dot_please_go_to_the_settings_app__moret_privacy__moret_contacts_and_authorise_this_app_to_use_this_feature_dot">"Olet aiemmin kieltänyt tämän sovelluksen pääsyn yhteystietoihisi. Mene kohtaan Asetukset "</string>
+	<string name="you_previously_denied_this_app_access_to_your_contacts_dot_please_go_to_the_settings_app__moret_privacy__moret_contacts_and_authorise_this_app_to_use_this_feature_dot">"Et aiemmin sallinut tämän sovelluksen pääsyä yhteystietoihisi. Mene kohtaan Asetukset "</string>
 	<!--Indicator that an event is all-day-->
 	<string name="all_minusday">koko päivä</string>
 	<!--Estimated time of arrival; parameter is time, e.g., 'arrives 15:30'-->
-	<string name="arrives__pattern">saapuu %1$s</string>
+	<string name="arrives__pattern">saapuu klo %1$s</string>
 	<!--Estimated time of departure; parameter is time, e.g., 'departs 15:30'-->
-	<string name="departs__pattern">lähtee %1$s</string>
+	<string name="departs__pattern">lähtee klo %1$s</string>
 	<!--Short indicator of end-time-->
 	<string name="ends_at__pattern">päättyy klo %1$s</string>
 	<!--Email placeholder text-->
@@ -860,111 +996,11 @@
 	<!--Short indicator of start-time-->
 	<string name="starts_at__pattern">alkaa klo %1$s</string>
 	<!--Name for a {Name}'s place if it's unclear if it's home, work or something else.-->
-	<string name="_start_qbraquetname_end_qbraquet_aposts">Käyttäjän \'{Name}\'</string>
+	<string name="_start_qbraquetname_end_qbraquet_aposts">Käyttäjän %1$s</string>
 	<!--No comment provided by engineer.-->
-	<string name="_start_qbraquetname_end_qbraquet_aposts_home">Käyttäjän \'{Name}\' Koti</string>
+	<string name="_start_qbraquetname_end_qbraquet_aposts_home">Käyttäjän %1$s Koti</string>
 	<!--No comment provided by engineer.-->
-	<string name="_start_qbraquetname_end_qbraquet_aposts_work">Käyttäjän \'{Name}\' Työ</string>
-	<!--Format for a service's real-time indicator for a service which is early, e.g., '1 min early. This means #1 is replaced with something like '1 min'.-->
-	<string name="_pattern_early">%1$s etuajassa</string>
-	<!--Format for a service's real-time indicator for a service which is early, e.g., '1 min early (1:10 pm service). This means #1 is replaced with something like '1 min' and #2 is replaced with the original time, e.g., '1:10 pm').-->
-	<string name="_pattern_early__start_parent_pattern_service_end_parent">%1$s etuajassa (%2$s palvelu)</string>
-	<!--Format for a service's real-time indicator for a service which is late, e.g., '1 min late. This means #1 is replaced with something like '1 min'-->
-	<string name="_pattern_late">%1$s myöhässä</string>
-	<!--Format for a service's real-time indicator for a service which is late, e.g., '1 min late (1:10 pm service). This means #1 is replaced with something like '1 min' and #2 is replaced with the original time, e.g., '1:10 pm').-->
-	<string name="_pattern_late__start_parent_pattern_service_end_parent">%1$s myöhässä (%2$s palvelu)</string>
-	<!--Duration without traffic-->
-	<string name="_pattern_w_slasho_traffic">%1$s Ilman ruuhkaa</string>
-	<!--No comment provided by engineer.-->
-	<string name="_1_stop">1 pysäkki</string>
-	<!--Indication of an activity-->
-	<string name="activityindication">Vien %1$s klo %2$s %3$s:stä.</string>
-	<!--apple maps directions action-->
-	<string name="apple_maps">Apple kartat</string>
-	<!--The place of arrival-->
-	<string name="arrivallocation">Saavu klo %1$s</string>
-	<!--The place of arrival with time-->
-	<string name="arrivallocationtime">Saavu %1$s:lla klo %2$s</string>
-	<!--Arrival %time.
-   Time arrival-->
-	<string name="arrivaltime">Saavu klo %1$s</string>
-	<!--Prefix for selected 'arrive by' time
-   Single line instruction to arrive-->
-	<string name="arrive">Saapuu</string>
-	<!--No comment provided by engineer.-->
-	<string name="book_with_flitways">Varaa FlitWayn kautta</string>
-	<!--No comment provided by engineer.-->
-	<string name="book_with_uber">Varaa Uberin kautta</string>
-	<!--No comment provided by engineer.-->
-	<string name="call">Soita</string>
-	<!--Action title for calling provider of %name-->
-	<string name="calltaxiformat">CallTaxiFormat</string>
-	<!--Error title when server could not find a given transit stop.-->
-	<string name="could_not_find_transit_stop_dot">Välipysäkkiä ei löytynyt.</string>
-	<!--Time of the bus departure-->
-	<string name="departuretime">Klo %1$s</string>
-	<!--Destination of the bus-->
-	<string name="direction">Suunta: %1$s</string>
-	<!--Walking time-->
-	<string name="duration">Kesto %1$s</string>
-	<!--No comment provided by engineer.-->
-	<string name="get_lyft">Hae Lyft</string>
-	<!--No comment provided by engineer.-->
-	<string name="get_ola">Hanki Ola</string>
-	<!--No comment provided by engineer.-->
-	<string name="get_ingogo">Hae Ingogo</string>
-	<!--google maps directions action-->
-	<string name="google_maps">Google Maps</string>
-	<!--Prefix for selected 'leave after' time
-   Single line instruction to leave-->
-	<string name="leave">Lähde</string>
-	<!--No comment provided by engineer.-->
-	<string name="leave_now">Lähde nyt</string>
-	<!--The place of departure-->
-	<string name="leavelocation">Lähde %1$s:stä</string>
-	<!--The place of departure with time-->
-	<string name="leavelocationtime">Lähde %1$s:stä klo %2$s</string>
-	<!--Time departure-->
-	<string name="leavetime">Lähde klo %1$s</string>
-	<!--No comment provided by engineer.-->
-	<string name="live_traffic">Live-liikenne</string>
-	<!--ArrivalTime-->
-	<string name="messagearrivaltime">Saavutaan %1$s klo %2$s.</string>
-	<!--Indicator to show when a service is on time according to real-time data.-->
-	<string name="on_time">Ajoissa</string>
-	<!--No comment provided by engineer.-->
-	<string name="open_lyft">Avaa Lyft</string>
-	<!--No comment provided by engineer.-->
-	<string name="open_ola">Avaa Ola</string>
-	<!--Arrival Location
-   For trip titles, e.g., 'To work'-->
-	<string name="primarylocationend">Kohde: %1$s</string>
-	<!--Departure Location-->
-	<string name="primarylocationstart">Lähtö: %1$s</string>
-	<!--'At %location' indicator for parts of a trip that happen at a single location, e.g., waiting at a platform, parking at a car park-->
-	<string name="primarylocationstationary">%1$s:ssä</string>
-	<!--Error recovery suggestion for when when server could not find a given transit stop.-->
-	<string name="search_for_this_stop_again_or_try_again_later_dot_dot">Search for this stop again or try again later.</string>
-	<!--Send SMS action-->
-	<string name="send_sms">Lähetä SMS</string>
-	<!--Show website action-->
-	<string name="show_website">Avaa Website</string>
-	<!--Number of stops before you get off a vehicle-->
-	<string name="stops">%1$s  pysäkkiä</string>
-	<!--From %time1 to %time2-->
-	<string name="timefromtoshortformat">%1$s - %2$s</string>
-	<!--No comment provided by engineer.-->
-	<string name="to__pattern">Määränpäähän %1$s</string>
-	<!--No comment provided by engineer.-->
-	<string name="trip">Matka</string>
-	<!--Vehicle 'x' updated-->
-	<string name="vehiclecalledupdated">Ajoneuvo %1$s päivitetty %2$s sitten</string>
-	<!--Vehicle updated-->
-	<string name="vehicleupdated">Päivitetty %1$s sitten</string>
-	<!--goCatch action-->
-	<string name="gocatch_a_taxi">goCatch Taksi</string>
-	<!--No comment provided by engineer.-->
-	<string name="ingogo_a_taxi">ingogo Taksi</string>
+	<string name="_start_qbraquetname_end_qbraquet_aposts_work">Käyttäjän %1$s Työ</string>
 
 </resources>
-<!-- This is an auto generated file (Thu Jun 30 10:11:02 ART 2016) -->
+<!-- This is an auto generated file (Tue Nov 29 10:53:30 ART 2016) -->

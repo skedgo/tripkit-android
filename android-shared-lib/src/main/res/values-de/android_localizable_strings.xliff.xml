@@ -15,28 +15,28 @@
 	<string name="an_unexpected_network_error">Unerwarteter Netzwerkfehler. Bitte versuche es noch einmal.</string>
 	<string name="approximately_s_away">Etwa %s entfernt</string>
 	<string name="arrivaltimeindication">" (Ankunft "</string>
-	<string name="body_exclude_this_event_from_route">Dieses Ereignis zeigt keine Route an. Das Ereignis wird weiter angezeigt</string>
+	<string name="body_exclude_this_event_from_route">Routen werden nicht mehr zu diesem Ereignis geplant, aber das Ereignis wird weiterhin angezeigt</string>
 	<string name="body_exclude_related_event_from_route">Das zum Trip zugehörige Ereignis wird ausgeschlossen. Es wird weiter angezeigt</string>
 	<string name="booking">Buchen</string>
 	<string name="cannot_find_that_location">Adresse nicht gefunden</string>
-	<string name="cannot_add_reminder_for_past_trip">Kann keine Erinnerung für Ereignis in der Vergangenheit hinzufügen</string>
+	<string name="cannot_add_reminder_for_past_trip">Erinnerungen für Ereignisse in der Vergangenheit können nicht hinzufügen werden</string>
 	<string name="cant_call_error">Aufruf fehlgeschlagen</string>
-	<string name="cannot_remove_shortcut">Verknüpfung nicht löschbar</string>
+	<string name="cannot_remove_shortcut">Verknüpfung kann nicht gelöscht werden</string>
 	<string name="coordinates_s">Koordinaten: %s</string>
-	<string name="choose_an_alternative">Wähle eine Alternative</string>
+	<string name="choose_an_alternative">Alternative auswählen</string>
 	<string name="del_all_events">Alle Ereignisse</string>
-	<string name="couldnt_find_curr_loc">Konnte deinen gegenwärtigen Ort nicht bestimmen</string>
+	<string name="couldnt_find_curr_loc">Ortung fehlgeschlagen</string>
 	<string name="del_this_and_future_events">Dieses und zukünftige Ereignisse</string>
 	<string name="del_only_this_event">Nur dieses Ereignis</string>
 	<string name="delete_event">Ereignis löschen</string>
-	<string name="destination">Reiseziel</string>
+	<string name="destination">Ziel</string>
 	<string name="did_you_mean">Meintest du</string>
 	<string name="delete_vehicle">Fahrzeug löschen</string>
 	<string name="departuretimeindication">" (Abfahrt "</string>
 	<string name="edit">Bearbeiten</string>
 	<string name="edit_event">Ereignis bearbeiten</string>
 	<string name="enable_calendar_in_tripgo_settings">Alle deine Kalender sind in TripGo deaktiviert. Bitte aktiviere sie in den Einstellungen.</string>
-	<string name="eula_has_changed">Unser Lizenzvertrag wurde geändert. Du musst ihm zustimmen um diese App weiter benutzen zu können.</string>
+	<string name="eula_has_changed">Wir haben unsere EULA aktualisiert. Um die App zu verwenden, muss die neue EULA akzeptiert werden.</string>
 	<string name="edit_favourite">Favorit bearbeiten</string>
 	<string name="empty_event_not_saved">Leeres Ereignis wird nicht gespeichert</string>
 	<string name="event_must_have_location">Ein Ort muss vorhanden sein</string>
@@ -168,7 +168,7 @@
 	<string name="title_exclude_event_from_route">Ereignis von der Route ausschließen?</string>
 	<string name="timetable_no_data">Keine Daten für diese Haltestelle gefunden</string>
 	<string name="trip_to_unknown_dest_about_to_start">Sieht aus als wenn ein Trip ansteht</string>
-	<string name="trip_to">"Trip nach %s"</string>
+	<string name="trip_to">"Trip nach %s "</string>
 	<string name="trip_preferences">Trip-Einstellungen</string>
 	<string name="transport_selector_header">In Ergebnissen berücksichtigen</string>
 	<string name="walkthrough_4">Plane Routen direkt in der Google-Suchleiste, ohne TripGo zu öffnen.</string>
@@ -180,4 +180,4 @@
 	<string name="you_r_already_at_s">Du bist schon in %s!</string>
 
 </resources>
-<!-- This is an auto generated file (Thu Jun 30 10:11:02 ART 2016) -->
+<!-- This is an auto generated file (Tue Nov 29 10:53:31 ART 2016) -->
