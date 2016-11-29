@@ -656,7 +656,7 @@
 	<!--apple maps directions action-->
 	<string name="apple_maps">Apple Maps</string>
 	<!--The place of arrival-->
-	<string name="arrivallocation">Saapumispaikka</string>
+	<string name="arrivallocation">Saapuu kohteeseen %1$s</string>
 	<!--The place of arrival with time-->
 	<string name="arrivallocationtime">Saapuminen kohteeseen %1$s klo %2$s</string>
 	<!--'Arrive at %@', where '%@' will be replace with the arrival time.
@@ -1003,4 +1003,4 @@
 	<string name="_start_qbraquetname_end_qbraquet_aposts_work">Käyttäjän %1$s Työ</string>
 
 </resources>
-<!-- This is an auto generated file (Tue Nov 29 10:53:30 ART 2016) -->
+<!-- This is an auto generated file (Tue Nov 29 15:29:32 ART 2016) -->

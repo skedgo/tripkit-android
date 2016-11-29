@@ -14,6 +14,7 @@
 	<string name="all_cals_invisible">All your calendars are invisible, please switch them on in native calendar app or account settings</string>
 	<string name="an_unexpected_network_error">An unexpected network error has occurred. Please retry.</string>
 	<string name="approximately_s_away">Approximately %s away</string>
+	<string name="arrivaltimeindication">" (arrive "</string>
 	<string name="body_exclude_this_event_from_route">This event will no longer have trips to or from it. The event will still be shown</string>
 	<string name="body_exclude_related_event_from_route">The event related to the trip will be excluded. It will still be shown</string>
 	<string name="booking">Booking</string>
@@ -31,6 +32,7 @@
 	<string name="destination">destination</string>
 	<string name="did_you_mean">Did you mean</string>
 	<string name="delete_vehicle">Delete this vehicle</string>
+	<string name="departuretimeindication">" (depart "</string>
 	<string name="edit">Edit</string>
 	<string name="edit_event">Edit event</string>
 	<string name="enable_calendar_in_tripgo_settings">All your calendars are disabled in TripGo, please enable them in Settings section</string>
@@ -56,6 +58,7 @@
 	<string name="go_to_date">Go to date</string>
 	<string name="go_here">Go Here</string>
 	<string name="get_on">Get On</string>
+	<string name="information_on_concession_pricing_is_subject_to_availability_dot">Information on concession pricing is subject to availability.</string>
 	<string name="invalid_transfer_time">Invalid time, revert to last used value.</string>
 	<string name="its_time_to_leave">It\'s time to leave!</string>
 	<string name="leave_now_to_make_on_time">Leave now to make it on time</string>
@@ -175,4 +178,4 @@
 	<string name="you_r_already_at_s">You are already at %s!</string>
 
 </resources>
-<!-- This is an auto generated file (Tue Nov 29 10:53:31 ART 2016) -->
+<!-- This is an auto generated file (Tue Nov 29 15:29:32 ART 2016) -->

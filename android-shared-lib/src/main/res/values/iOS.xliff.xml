@@ -50,6 +50,8 @@
 	<string name="tripgo_cannot_access_its_local_files_dot">TripGo cannot access its local files.</string>
 	<!--No comment provided by engineer.-->
 	<string name="tripgo_cannot_update_its_local_files_dot">TripGo cannot update its local files.</string>
+	<!--Trips tab bar name-->
+	<string name="trips">Trips</string>
 	<!--Indicating the next trip is an upcoming trip-->
 	<string name="upcoming_trip">Upcoming Trip</string>
 	<!--No comment provided by engineer.-->
@@ -168,6 +170,7 @@
 	<string name="cycle_speed">Cycle speed</string>
 	<!--From %date-->
 	<string name="datefromformat">DateFromFormat</string>
+	<string name="datefromtoformat">From %1$s to %2$s</string>
 	<!--Departure date+time for overnight stay-->
 	<string name="departure">Departure</string>
 	<!--Dismiss accessibility label
@@ -233,8 +236,13 @@
 	<string name="feedback__ampersand_support">"Feedback "</string>
 	<!--Placeholder text for search bar that is used for filtering-->
 	<string name="filter">Filter</string>
+	<string name="flight_number">Flight number</string>
+	<string name="flightdate">Flight date</string>
+	<string name="flightdetails">Flight details</string>
+	<string name="flightnote">Kommentar</string>
 	<!--Title for flight with %flightNumber-->
 	<string name="flightnumberformat">FlightNumberFormat</string>
+	<string name="flightsearch">Flight search</string>
 	<!--Reminder to leave preference-->
 	<string name="for_when_to_leave">For when to leave</string>
 	<!--Free directions-->
@@ -452,6 +460,8 @@
 	<string name="removed_from_agenda">Removed from Agenda</string>
 	<!--No comment provided by engineer.-->
 	<string name="removing_this_trip_will_exclude_the_following_event_from_your_agenda_dot">Removing this trip will exclude the following event from your agenda.</string>
+	<!--No comment provided by engineer.-->
+	<string name="removing_this_trip_will_exclude_the_preceeding_event_from_your_agenda_dot">Removing this trip will exclude the preceeding event from your agenda.</string>
 	<!--Title for switch indicating if an event repeats or not-->
 	<string name="repeat_does_end">Repeat does end</string>
 	<!--Report problem-->
@@ -481,6 +491,8 @@
 	<string name="routes">Routes</string>
 	<!--No comment provided by engineer.-->
 	<string name="routing_from_">"Routing from "</string>
+	<!--Error message if interregional routing isn't yet supported-->
+	<string name="routing_from__pattern_to__pattern_is_not_yet_supported">Routing from %1$s to %2$s is not yet supported</string>
 	<!--Used in the form that requests support for a specific routing-->
 	<string name="routing_request">Routing request</string>
 	<!--Map mode 'satellite'-->
@@ -495,8 +507,11 @@
 	<string name="search_for_your_work_address">Search for your work address</string>
 	<!--Search tab bar name-->
 	<string name="searchbutton">SearchButton</string>
+	<string name="select_bike_share">Select Bike Share</string>
+	<string name="select_car_park">Select Car Park</string>
 	<!--No comment provided by engineer.-->
 	<string name="select_vehicle">Select Vehicle</string>
+	<string name="select_a_date_to_get_flight_details_dot">Select a date to get flight details.</string>
 	<!--Walkthrough-->
 	<string name="select_the_place_where_you_stay_at_the_end_of_each_day">Select the place where you stay at the end of each day</string>
 	<!--Action button title for composing an SMS to a real-time service-->
@@ -534,6 +549,7 @@
 	<string name="sorry_dot_tripgo_doesn_apostt_work_here_yet_exclam">Sorry. TripGo doesn\'t work here yet!</string>
 	<!--Spread the word preference-->
 	<string name="spread_the_word">Spread the word</string>
+	<string name="srctodstformat">%1$s (%2$s) to %3$s (%4$s)</string>
 	<!--Stay, i.e., type for dates you're staying at a hotel, or when moving house.-->
 	<string name="stay">Stay</string>
 	<!--Explanation for what stays are compared to calendar events and routines. Can be long-ish.-->
@@ -643,6 +659,8 @@
 	<string name="zoom_in">Zoom in</string>
 	<!--Walkthrough-->
 	<string name="zoom_into_map_to_view_public_transport_stops">Zoom into map to view public transport stops</string>
+	<string name="pricingdescription">Price</string>
+	<string name="terminaldescription">Terminal</string>
 	<!--Format for a service's real-time indicator for a service which is early, e.g., '1 min early. This means #1 is replaced with something like '1 min'.-->
 	<string name="_pattern_early">%1$s early</string>
 	<!--Format for a service's real-time indicator for a service which is early, e.g., '1 min early (1:10 pm service). This means #1 is replaced with something like '1 min' and #2 is replaced with the original time, e.g., '1:10 pm').-->
@@ -1017,4 +1035,4 @@
 	<string name="_start_qbraquetname_end_qbraquet_aposts_work">%1$s\'s Work</string>
 
 </resources>
-<!-- This is an auto generated file (Tue Nov 29 10:53:30 ART 2016) -->
+<!-- This is an auto generated file (Tue Nov 29 15:29:32 ART 2016) -->
