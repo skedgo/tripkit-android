@@ -67,7 +67,7 @@ public final class RegionAssertionUtils {
                     .filter(new Func1<Region.City, Boolean>() {
                       @Override
                       public Boolean call(Region.City city) {
-                        return !region.contains(city);
+                        return !region.containsLocation(city);
                       }
                     })
                     .toList()

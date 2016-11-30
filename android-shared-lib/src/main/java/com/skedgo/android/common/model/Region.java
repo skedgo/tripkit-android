@@ -82,7 +82,7 @@ public class Region implements Parcelable {
     this.transportModeIds = transportModeIds;
   }
 
-  public boolean contains(@Nullable Location location) {
+  public boolean containsLocation(@Nullable Location location) {
     return location != null && contains(new LatLng(location.getLat(), location.getLon()));
   }
 

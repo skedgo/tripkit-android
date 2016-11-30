@@ -84,12 +84,12 @@ public class RegionTest {
     )));
 
     Location outside = new Location(1.0, 0.5);
-    assertThat(region.contains(outside))
+    assertThat(region.containsLocation(outside))
         .describedAs("This region must not contain given location")
         .isFalse();
 
     Location inside = new Location(1.0, 1.5);
-    assertThat(region.contains(inside))
+    assertThat(region.containsLocation(inside))
         .describedAs("This region must contain given location")
         .isTrue();
   }
@@ -97,7 +97,7 @@ public class RegionTest {
   @Test public void notCrashWithNullableLocation() {
     final Region region = new Region();
     try {
-      final boolean r = region.contains(null);
+      final boolean r = region.containsLocation(null);
       assertThat(r).describedAs("Don't contain nullable location").isFalse();
     } catch (NullPointerException e) {
       Assertions.fail("Don't crash with nullable location");
@@ -107,7 +107,7 @@ public class RegionTest {
   @Test public void notCrashWithNullablePolygon() {
     final Region region = new Region();
     try {
-      final boolean r = region.contains(1, 1);
+      final boolean r = region.contains(new LatLng(1, 1));
       assertThat(r).describedAs("Region having nullable polygon contains no location").isFalse();
     } catch (NullPointerException e) {
       Assertions.fail("Don't crash with nullable polygon");

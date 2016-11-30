@@ -65,7 +65,7 @@ final class RegionServiceImpl implements RegionService {
         .first(new Func1<Region, Boolean>() {
           @Override
           public Boolean call(Region region) {
-            return region.contains(location);
+            return region.containsLocation(location);
           }
         })
         .onErrorResumeNext(new Func1<Throwable, Observable<? extends Region>>() {
