@@ -178,6 +178,20 @@
 	<string name="your_trip_is_about_to_start">O seu trajeto está por começar</string>
 	<string name="you_are_here">Voce está aqui</string>
 	<string name="you_r_already_at_s">Voce ja esta em %s!</string>
+	<!--Settings option to enable/disable news (notifications).-->
+	<string name="news">News</string>
+	<!--In transport mode detail, setting to enable that transport mode to be included in trips.-->
+	<string name="include_in_trips">Include in trips</string>
+	<!--Used for parking slots. Format string for multiple slots. Example: 10 slots available-->
+	<string name="multiple_slots_available">%s slots available</string>
+	<!--Used for parking slots. Format string for one slots. Example: 1 slot available-->
+	<string name="one_slot_available">%s slot available</string>
+	<!--Used for parking slots, when there's no slots available.-->
+	<string name="no_slots_available">No slots available</string>
+	<!--Parking slots, updated time. Example: Updated at: 10am-->
+	<string name="updated_at">Updated at: %s</string>
+	<!--Occupancy almost full-->
+	<string name="almost_full">Almost full</string>
 
 </resources>
-<!-- This is an auto generated file (Tue Nov 29 15:29:32 ART 2016) -->
+<!-- This is an auto generated file (Wed Nov 30 11:06:37 ART 2016) -->
