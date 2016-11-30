@@ -93,8 +93,6 @@ public class Region implements Parcelable {
 
     final List<LatLng> polygon = getPolygon();
     return CollectionUtils.isNotEmpty(polygon)
-        // FIXME: This isn't an optimal solution if it gets called inside a loop, causing a lot of allocations.
-        // See: https://medium.com/google-developers/developing-for-android-ii-bb9a51f8c8b9.
         && PolyUtil.containsLocation(latLng, polygon, true);
   }
 
