@@ -83,10 +83,10 @@ public class Region implements Parcelable {
   }
 
   public boolean contains(@Nullable Location location) {
-    return location != null && contains(location.getLat(), location.getLon());
+    return location != null && contains(new LatLng(location.getLat(), location.getLon()));
   }
 
-  public boolean contains(double lat, double lon) {
+  public boolean contains(LatLng latLng) {
     if (encodedPolyline == null) {
       return false;
     }
@@ -95,7 +95,7 @@ public class Region implements Parcelable {
     return CollectionUtils.isNotEmpty(polygon)
         // FIXME: This isn't an optimal solution if it gets called inside a loop, causing a lot of allocations.
         // See: https://medium.com/google-developers/developing-for-android-ii-bb9a51f8c8b9.
-        && PolyUtil.containsLocation(new LatLng(lat, lon), polygon, true);
+        && PolyUtil.containsLocation(latLng, polygon, true);
   }
 
   @Override
