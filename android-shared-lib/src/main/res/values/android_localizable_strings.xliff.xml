@@ -11,11 +11,13 @@
 	<string name="agenda_set_or_delete">Tap here to set address or long-press to delete</string>
 	<string name="agenda_tip">View your daily agenda and favourites in the tabs below</string>
 	<string name="all_alerts">All Alerts</string>
-	<string name="all_cals_invisible">All your calendars are invisible, please switch them on in native calendar app or account settings</string>
+	<string name="all_cals_invisible">All your calendars are invisible, please switch them on in native calendar app or
+          account settings</string>
 	<string name="an_unexpected_network_error">An unexpected network error has occurred. Please retry.</string>
 	<string name="approximately_s_away">Approximately %s away</string>
 	<string name="arrivaltimeindication">" (arrive "</string>
-	<string name="body_exclude_this_event_from_route">This event will no longer have trips to or from it. The event will still be shown</string>
+	<string name="body_exclude_this_event_from_route">"This event will no longer have trips to or from it. The event will still be shown
+        "</string>
 	<string name="body_exclude_related_event_from_route">The event related to the trip will be excluded. It will still be shown</string>
 	<string name="booking">Booking</string>
 	<string name="cannot_find_that_location">Address not found</string>
@@ -35,8 +37,10 @@
 	<string name="departuretimeindication">" (depart "</string>
 	<string name="edit">Edit</string>
 	<string name="edit_event">Edit event</string>
-	<string name="enable_calendar_in_tripgo_settings">All your calendars are disabled in TripGo, please enable them in Settings section</string>
-	<string name="eula_has_changed">Our End User Licence Agreement has changed. You must agree to it before continuing the use of this app.</string>
+	<string name="enable_calendar_in_tripgo_settings">"All your calendars are disabled in TripGo, please enable them in Settings section
+        "</string>
+	<string name="eula_has_changed">Our End User Licence Agreement has changed. You must agree to it before continuing
+          the use of this app.</string>
 	<string name="edit_favourite">Edit favorite</string>
 	<string name="empty_event_not_saved">Empty event is not saved</string>
 	<string name="event_must_have_location">A location must be set</string>
@@ -53,7 +57,7 @@
 	<string name="failed_2_resolve_link">Failed to resolve link</string>
 	<string name="get_off">Get Off</string>
 	<string name="get_google_play_services">Get Google Play Services</string>
-	<string name="first">"First: "</string>
+	<string name="first">First:</string>
 	<string name="filter_timetable_hint">Filter by service name, number or stop</string>
 	<string name="go_to_date">Go to date</string>
 	<string name="go_here">Go Here</string>
@@ -82,7 +86,8 @@
 	<string name="no_favourites_saved">No favorite locations saved</string>
 	<string name="nicely_informed_error">There was an error and it was reported to us. Please try again</string>
 	<string name="no_google_play_services_title">No Google Play Services!</string>
-	<string name="no_google_play_services_message">This app requires Google Play Services to be installed.\n\nPlease download it to continue using the app</string>
+	<string name="no_google_play_services_message">This app requires Google Play Services to be installed.\n\nPlease download it to
+          continue using the app</string>
 	<string name="priority_convenience_subtext">Hassle of the trip</string>
 	<string name="priority_budget_subtext">Trip cost</string>
 	<string name="priority_time_subtext">Trip duration</string>
@@ -103,7 +108,8 @@
 	<string name="select_calendars">Select calendars</string>
 	<string name="routes_updated">Routes updated</string>
 	<string name="save">Save</string>
-	<string name="routine_explanation">Routines are post of your daily movement, but they aren\'t events that you want in your calendar (e.g. work). They are important for the Agenda to get you to the right location at the right time</string>
+	<string name="routine_explanation">Routines are post of your daily movement, but they aren\'t events that you want in
+          your calendar (e.g. work). They are important for the Agenda to get you to the right</string>
 	<string name="settings_category_usage">Anonymous Data Tracking</string>
 	<string name="settings_category_searching">Searching</string>
 	<string name="settings_category_results">Trip Results</string>
@@ -112,13 +118,15 @@
 	<string name="set_time">Set time</string>
 	<string name="set_start_time">Set start time</string>
 	<string name="set_location">Set Location</string>
-	<string name="settings_summary_searching_calendar">Use your upcoming calendar events as location suggestions. This information is not stored on any server</string>
+	<string name="settings_summary_searching_calendar">Use your upcoming calendar events as location suggestions. This information is not
+          stored on any server</string>
 	<string name="settings_summary_reminder_start_off_trip">Show an alert to leave at the start of a trip</string>
 	<string name="settings_summary_reminder_start_pub_trans">Show an alert before any public transport on your trip</string>
 	<string name="settings_summary_reminder_service_alerts">Show service alerts which affect your upcoming trips</string>
 	<string name="settings_summary_reminder_end_pub_trans">Show an alert towards the end of any public transport on your trip</string>
 	<string name="settings_summary_rate">Rate the app in the store!</string>
-	<string name="settings_summary_gps_submit">Allow TripGo to anonymously track your location when you use it (NOT in the background)</string>
+	<string name="settings_summary_gps_submit">Allow TripGo to anonymously track your location when you use it (NOT in the
+          background)</string>
 	<string name="settings_summary_distance_units">Distance units to use in trip results</string>
 	<string name="settings_title_reminder_start_off_trip">Start of trip</string>
 	<string name="settings_title_reminder_service_alerts">Service alerts</string>
@@ -129,7 +137,8 @@
 	<string name="settings_title_version">Version</string>
 	<string name="settings_title_track_usage">Track App Usage</string>
 	<string name="settings_summary_server">Server to use. Note this will override *ALL* server calls!</string>
-	<string name="settings_summary_searching_contacts">Use your contact addresses as location suggestions. This information is not stored on any server</string>
+	<string name="settings_summary_searching_contacts">Use your contact addresses as location suggestions. This information is not stored
+          on any server</string>
 	<string name="settings_summary_trip_preferences">Influence trip results by setting what\'s most important to you</string>
 	<string name="settings_summary_track_usage">Allow TripGo to anonymously track your app usage</string>
 	<string name="settings_title_cycling_speed">Cycling speed</string>
@@ -157,7 +166,8 @@
 	<string name="upcoming_services">Upcoming Services</string>
 	<string name="unknown_location">Unknown location</string>
 	<string name="walkthrough_1">TripGo helps you finding the best way from A to B using any transport mode.</string>
-	<string name="waiting_for_gps_fix">Waiting for location signal, if fails, you can try turning your GPS off and on..</string>
+	<string name="waiting_for_gps_fix">"Waiting for location signal, if fails, you can try turning your GPS off and on..
+        "</string>
 	<string name="view_timetable_subtitle">Upcoming services</string>
 	<string name="view_timetable_for_stop">View timetable of upcoming services</string>
 	<string name="tomorrow">Tomorrow</string>
@@ -171,16 +181,19 @@
 	<string name="transport_selector_header">Include in the route results</string>
 	<string name="walkthrough_4">Search routes directly right from Google search bar without opening TripGo.</string>
 	<string name="yesterday">Yesterday</string>
-	<string name="walkthrough_2">Never run late. Agenda plans ahead for you and let\'s you know when you need to leave.</string>
+	<string name="walkthrough_2">Never run late. Agenda plans ahead for you and let\'s you know when you need to
+          leave.</string>
 	<string name="walkthrough_3">For those without an agenda, save favorite places.</string>
 	<string name="your_trip_is_about_to_start">Your trip is about to start</string>
 	<string name="you_are_here">You are here</string>
 	<string name="you_r_already_at_s">You are already at %s!</string>
 	<!--Settings option to enable/disable news (notifications).-->
 	<string name="news">News</string>
-	<!--In transport mode detail, setting to enable that transport mode to be included in trips.-->
+	<!--In transport mode detail, setting to enable that transport mode to be included in
+          trips.-->
 	<string name="include_in_trips">Include in trips</string>
-	<!--Used for parking slots. Format string for multiple slots. Example: 10 slots available-->
+	<!--Used for parking slots. Format string for multiple slots. Example: 10 slots
+          available-->
 	<string name="multiple_slots_available">%s slots available</string>
 	<!--Used for parking slots. Format string for one slots. Example: 1 slot available-->
 	<string name="one_slot_available">%s slot available</string>
@@ -190,6 +203,10 @@
 	<string name="updated_at">Updated at: %s</string>
 	<!--Occupancy almost full-->
 	<string name="almost_full">Almost full</string>
+	<!--Valid From title (date)-->
+	<string name="valid_from">Valid From</string>
+	<!--Ticket Info title-->
+	<string name="ticket_info">Ticket Info</string>
 
 </resources>
-<!-- This is an auto generated file (Wed Nov 30 13:20:19 ART 2016) -->
+<!-- This is an auto generated file (Wed Nov 30 14:57:36 ART 2016) -->

@@ -224,6 +224,10 @@
 	<string name="updated_at">Updated at: %s</string>
 	<!--Occupancy almost full-->
 	<string name="almost_full">Almost full</string>
+	<!--Valid From title (date)-->
+	<string name="valid_from">Valid From</string>
+	<!--Ticket Info title-->
+	<string name="ticket_info">Ticket Info</string>
 
 </resources>
-<!-- This is an auto generated file (Wed Nov 30 13:20:19 ART 2016) -->
+<!-- This is an auto generated file (Wed Nov 30 14:57:36 ART 2016) -->
