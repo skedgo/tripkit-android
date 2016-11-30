@@ -1,0 +1,40 @@
+{
+  "type": "bookingForm",
+  "title": "Authorization",
+  "action": {
+    "title": "Authenticate",
+    "hudText": "Validating user",
+    "finalStep": true,
+    "url": "https://matter.buzzhives.com/satapp/auth/signin/79e740e9-f73b-44ac-a970-45f1f3333c83"
+  },
+  "value": "payiq",
+  "form": [
+    {
+      "title": "Log In",
+      "fields": [
+        {
+          "type": "string",
+          "id": "op",
+          "hidden": true,
+          "value": "login",
+          "keyboardType": "TEXT"
+        },
+        {
+          "type": "string",
+          "id": "username",
+          "title": "Email",
+          "required": true,
+          "value": "",
+          "keyboardType": "EMAIL"
+        },
+        {
+          "type": "password",
+          "id": "password",
+          "title": "Password",
+          "required": true,
+          "value": ""
+        }
+      ]
+    }
+  ]
+}

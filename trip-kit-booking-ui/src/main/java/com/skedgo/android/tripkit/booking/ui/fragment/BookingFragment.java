@@ -3,6 +3,8 @@ package com.skedgo.android.tripkit.booking.ui.fragment;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Parcelable;
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -18,7 +20,6 @@ import com.skedgo.android.tripkit.booking.BookingForm;
 import com.skedgo.android.tripkit.booking.LinkFormField;
 import com.skedgo.android.tripkit.booking.ui.R;
 import com.skedgo.android.tripkit.booking.ui.activity.BookingActivity;
-import com.skedgo.android.tripkit.booking.ui.viewmodel.BookingErrorViewModel;
 import com.skedgo.android.tripkit.booking.ui.viewmodel.ExtendedBookingViewModel;
 import com.skedgo.android.tripkit.booking.viewmodel.BookingViewModel;
 import com.squareup.otto.Bus;
@@ -26,9 +27,10 @@ import com.squareup.otto.Subscribe;
 
 import javax.inject.Inject;
 
-import dagger.Lazy;
 import rx.functions.Action1;
 import skedgo.common.view.ButterKnifeFragment;
+
+import static com.skedgo.android.tripkit.booking.ui.activity.BookingActivity.KEY_BOOKING_FORM;
 
 public class BookingFragment extends ButterKnifeFragment implements View.OnClickListener {
   public static final String KEY_PARAM = "param";
@@ -36,11 +38,12 @@ public class BookingFragment extends ButterKnifeFragment implements View.OnClick
   private static final String TAG_BOOKING_FORM = "bookingForm";
   private static final String EXTRA_DONE = "done";
 
+  @Nullable private BookingForm bookingForm = null;
+
   @Inject ExtendedBookingViewModel viewModel;
   @Inject Bus bus;
   ProgressBar progressView;
   TextView hudTextView;
-  @Inject Lazy<BookingErrorViewModel> bookingErrorViewModel;
   TextView backButton;
   TextView errorTitleView;
   TextView errorMessageView;
@@ -197,6 +200,11 @@ public class BookingFragment extends ButterKnifeFragment implements View.OnClick
           public void call(Boolean success) {
             Intent data = new Intent();
             data.putExtra(EXTRA_DONE, true);
+
+            if (bookingForm != null) {
+              data.putExtra(KEY_BOOKING_FORM, (Parcelable) bookingForm);
+            }
+
             if (success) {
               getActivity().setResult(Activity.RESULT_OK, data);
             } else {
@@ -247,7 +255,7 @@ public class BookingFragment extends ButterKnifeFragment implements View.OnClick
         intent.putExtras(bundle);
         getActivity().setResult(Activity.RESULT_OK, intent);
       } else {
-        getActivity().setResult(Activity.RESULT_OK);
+        getActivity().setResult(Activity.RESULT_OK, data);
       }
       getActivity().finish();
     } else if (data != null && data.getBooleanExtra(EXTRA_DONE, false)) {
@@ -264,15 +272,16 @@ public class BookingFragment extends ButterKnifeFragment implements View.OnClick
   }
 
   private void showError(Throwable error) {
-
-    if (error.getClass().isInstance(BookingError.class)) {
+    if (error instanceof BookingError) {
+      BookingError bookingError = (BookingError) error;
       checkAndInflate();
-
-      bookingErrorViewModel.get().setBookingError((BookingError) error);
-      errorTitleView.setText(bookingErrorViewModel.get().getErrorTitle());
-      errorMessageView.setText(bookingErrorViewModel.get().getErrorMessage());
+      if (bookingError.getTitle() != null) {
+        errorTitleView.setText(bookingError.getTitle());
+      }
+      if (bookingError.getError() != null) {
+        errorMessageView.setText(bookingError.getError());
+      }
     }
-
   }
 
   private void checkAndInflate() {
@@ -294,6 +303,9 @@ public class BookingFragment extends ButterKnifeFragment implements View.OnClick
   }
 
   private void showBookingForm(BookingForm form) {
+
+    this.bookingForm = form;
+
     final Fragment oldFragment = getFragmentManager().findFragmentByTag(TAG_BOOKING_FORM);
     if (oldFragment != null) {
       getFragmentManager()
