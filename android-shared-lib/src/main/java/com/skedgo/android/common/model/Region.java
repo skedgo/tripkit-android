@@ -5,14 +5,9 @@ import android.os.Parcelable;
 import android.support.annotation.Nullable;
 import android.text.TextUtils;
 
-import com.google.android.gms.maps.model.LatLng;
 import com.google.gson.annotations.SerializedName;
-import com.google.maps.android.PolyUtil;
-
-import org.apache.commons.collections4.CollectionUtils;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class Region implements Parcelable {
   public static final Creator<Region> CREATOR = new Creator<Region>() {
@@ -38,7 +33,6 @@ public class Region implements Parcelable {
       return new Region[size];
     }
   };
-  private transient volatile List<LatLng> polygon; // Lazily initialized.
 
   @SerializedName("cities") private ArrayList<City> cities;
   @SerializedName("polygon") private String encodedPolyline;
@@ -80,20 +74,6 @@ public class Region implements Parcelable {
 
   public void setTransportModeIds(ArrayList<String> transportModeIds) {
     this.transportModeIds = transportModeIds;
-  }
-
-  public boolean containsLocation(@Nullable Location location) {
-    return location != null && contains(new LatLng(location.getLat(), location.getLon()));
-  }
-
-  public boolean contains(LatLng latLng) {
-    if (encodedPolyline == null) {
-      return false;
-    }
-
-    final List<LatLng> polygon = getPolygon();
-    return CollectionUtils.isNotEmpty(polygon)
-        && PolyUtil.containsLocation(latLng, polygon, true);
   }
 
   @Override
@@ -150,26 +130,6 @@ public class Region implements Parcelable {
 
   public void setCities(ArrayList<City> cities) {
     this.cities = cities;
-  }
-
-  /**
-   * This was copied from the LazyInitializer class of Apache Commons Lang.
-   * It's aimed to lazily initialized polygon thread-safely.
-   *
-   * @see <a href="http://antrix.net/posts/2012/java-lazy-initialization/">Lazy Initialization in Java</a>
-   */
-  List<LatLng> getPolygon() {
-    List<LatLng> var = polygon;
-    if (var == null) {
-      synchronized (this) {
-        var = polygon;
-        if (var == null) {
-          polygon = var = PolyUtil.decode(encodedPolyline);
-        }
-      }
-    }
-
-    return var;
   }
 
   public static class City extends Location {}
