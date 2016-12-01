@@ -9,10 +9,12 @@ import com.skedgo.android.tripkit.tsp.RegionInfo;
 import com.skedgo.android.tripkit.tsp.RegionInfoService;
 
 import org.junit.Before;
+import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
-import org.mockito.MockitoAnnotations;
+import org.mockito.junit.MockitoJUnit;
+import org.mockito.junit.MockitoRule;
 import org.robolectric.annotation.Config;
 
 import java.util.ArrayList;
@@ -28,6 +30,7 @@ import rx.observers.TestSubscriber;
 import static java.util.Collections.singletonList;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Matchers.eq;
+import static org.mockito.Matchers.same;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -35,20 +38,22 @@ import static org.mockito.Mockito.when;
 @RunWith(TestRunner.class)
 @Config(constants = BuildConfig.class, sdk = 21)
 public class RegionServiceImplTest {
+  @Rule public MockitoRule mockitoRule = MockitoJUnit.rule();
   @Mock Cache<List<Region>> regionCache;
   @Mock Cache<Map<String, TransportMode>> modeCache;
   @Mock RegionsFetcher regionsFetcher;
   @Mock RegionInfoService regionInfoService;
   @Mock Factory<RegionInfoService> regionInfoServiceProvider;
+  @Mock RegionFinder regionFinder;
   private RegionServiceImpl regionService;
 
   @Before public void setUp() {
-    MockitoAnnotations.initMocks(this);
     regionService = new RegionServiceImpl(
         regionCache,
         modeCache,
         regionsFetcher,
-        regionInfoServiceProvider
+        regionInfoServiceProvider,
+        regionFinder
     );
     when(regionInfoServiceProvider.get()).thenReturn(regionInfoService);
   }
@@ -75,6 +80,10 @@ public class RegionServiceImplTest {
 
     when(regionCache.getAsync())
         .thenReturn(Observable.just(Arrays.asList(Sydney, NewYork)));
+    when(regionFinder.contains(
+        same(Sydney),
+        eq(-33.86749), eq(151.20699)
+    )).thenReturn(true);
 
     final TestSubscriber<Region> subscriber = new TestSubscriber<>();
     regionService.getRegionByLocationAsync(new Location(-33.86749, 151.20699))
@@ -82,6 +91,7 @@ public class RegionServiceImplTest {
     subscriber.awaitTerminalEvent();
     subscriber.assertNoErrors();
     subscriber.assertTerminalEvent();
+
     final List<Region> regions = subscriber.getOnNextEvents();
     assertThat(regions).hasSize(1);
     assertThat(regions.get(0)).isSameAs(Sydney);
@@ -208,5 +218,6 @@ public class RegionServiceImplTest {
 
     verify(modeCache, times(1)).invalidate();
     verify(regionCache, times(1)).invalidate();
+    verify(regionFinder, times(1)).invalidate();
   }
 }

@@ -27,16 +27,19 @@ final class RegionServiceImpl implements RegionService {
   private final Cache<Map<String, TransportMode>> modeCache;
   private final RegionsFetcher regionsFetcher;
   private final Provider<RegionInfoService> regionInfoServiceProvider;
+  private final RegionFinder regionFinder;
 
   RegionServiceImpl(
       Cache<List<Region>> regionCache,
       Cache<Map<String, TransportMode>> modeCache,
       @NonNull RegionsFetcher regionsFetcher,
-      Provider<RegionInfoService> regionInfoServiceProvider) {
+      Provider<RegionInfoService> regionInfoServiceProvider,
+      RegionFinder regionFinder) {
     this.regionCache = regionCache;
     this.modeCache = modeCache;
     this.regionsFetcher = regionsFetcher;
     this.regionInfoServiceProvider = regionInfoServiceProvider;
+    this.regionFinder = regionFinder;
   }
 
   @Override
@@ -63,9 +66,8 @@ final class RegionServiceImpl implements RegionService {
           }
         })
         .first(new Func1<Region, Boolean>() {
-          @Override
-          public Boolean call(Region region) {
-            return region.containsLocation(location);
+          @Override public Boolean call(Region region) {
+            return regionFinder.contains(region, location.getLat(), location.getLon());
           }
         })
         .onErrorResumeNext(new Func1<Throwable, Observable<? extends Region>>() {
@@ -129,6 +131,7 @@ final class RegionServiceImpl implements RegionService {
           @Override public void call() {
             regionCache.invalidate();
             modeCache.invalidate();
+            regionFinder.invalidate();
           }
         });
   }

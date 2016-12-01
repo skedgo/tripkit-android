@@ -105,7 +105,8 @@ public class MainModule {
         regionCache,
         modeCache,
         regionsFetcher,
-        regionInfoServiceProvider
+        regionInfoServiceProvider,
+        new RegionFinder()
     );
   }
 
