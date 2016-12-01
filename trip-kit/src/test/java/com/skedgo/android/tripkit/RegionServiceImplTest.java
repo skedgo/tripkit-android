@@ -119,8 +119,10 @@ public class RegionServiceImplTest {
         .hasOnlyElementsOfType(OutOfRegionsException.class)
         .extractingResultOf("getMessage")
         .containsExactly("Location lies outside covered area");
-    // noinspection ThrowableResultOfMethodCallIgnored
-    assertThat(((OutOfRegionsException) errors.get(0)).getLocation()).isSameAs(location);
+
+    final OutOfRegionsException error = (OutOfRegionsException) errors.get(0);
+    assertThat(error.latitude()).isEqualTo(location.getLat());
+    assertThat(error.longitude()).isEqualTo(location.getLon());
   }
 
   @Test public void shouldTakeAllCitiesInRegions() {
