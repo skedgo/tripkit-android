@@ -168,7 +168,7 @@
 	<string name="title_exclude_event_from_route">Exclure les événements des routes?</string>
 	<string name="timetable_no_data">Aucun services trouvés pour cet arrêt</string>
 	<string name="trip_to_unknown_dest_about_to_start">On dirait que vous avez un trajet à faire</string>
-	<string name="trip_to">"Aller à %s"</string>
+	<string name="trip_to">"Trip to %s "</string>
 	<string name="trip_preferences">Préférences de voyage</string>
 	<string name="transport_selector_header">Inclure dans les résultats de l\'itinéraire</string>
 	<string name="walkthrough_4">Recherche d\'itinéraires directement depuis la barre de recherche Google sans ouvrir TripGo.</string>
@@ -178,6 +178,24 @@
 	<string name="your_trip_is_about_to_start">Votre trajet va commencer</string>
 	<string name="you_are_here">Vous êtes ici</string>
 	<string name="you_r_already_at_s">Vous êtes déjà à %s!</string>
+	<!--Settings option to enable/disable news (notifications).-->
+	<string name="news">News</string>
+	<!--In transport mode detail, setting to enable that transport mode to be included in trips.-->
+	<string name="include_in_trips">Include in trips</string>
+	<!--Used for parking slots. Format string for multiple slots. Example: 10 slots available-->
+	<string name="multiple_slots_available">%s slots available</string>
+	<!--Used for parking slots. Format string for one slots. Example: 1 slot available-->
+	<string name="one_slot_available">%s slot available</string>
+	<!--Used for parking slots, when there's no slot available.-->
+	<string name="no_slots_available">No slot available</string>
+	<!--Parking slots, updated time. Example: Updated at: 10am-->
+	<string name="updated_at">Updated at: %s</string>
+	<!--Occupancy almost full-->
+	<string name="almost_full">Almost full</string>
+	<!--Valid From title (date)-->
+	<string name="valid_from">Valid From</string>
+	<!--Ticket Info title-->
+	<string name="ticket_info">Ticket Info</string>
 
 </resources>
-<!-- This is an auto generated file (Thu Jun 30 10:11:02 ART 2016) -->
+<!-- This is an auto generated file (Wed Nov 30 14:57:36 ART 2016) -->
