@@ -1,20 +1,25 @@
 package com.skedgo.android.tripkit;
 
-import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 
-import com.skedgo.android.common.model.Location;
-
 public final class OutOfRegionsException extends RuntimeException {
-  private final Location location;
+  private final double latitude;
+  private final double longitude;
 
-  public OutOfRegionsException(@NonNull Location location, @Nullable String detailMessage) {
+  public OutOfRegionsException(
+      @Nullable String detailMessage,
+      double latitude,
+      double longitude) {
     super(detailMessage);
-    this.location = location;
+    this.latitude = latitude;
+    this.longitude = longitude;
   }
 
-  @NonNull
-  public Location getLocation() {
-    return location;
+  public double latitude() {
+    return latitude;
+  }
+
+  public double longitude() {
+    return longitude;
   }
 }
