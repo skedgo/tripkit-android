@@ -17,6 +17,7 @@ import rx.Observable;
 
 public interface RegionService {
   Observable<List<Region>> getRegionsAsync();
+  Observable<Region> getRegionByLocationAsync(double latitude, double longitude);
   Observable<Region> getRegionByLocationAsync(@Nullable Location location);
   Observable<Location> getCitiesAsync();
   Observable<Location> getCitiesByNameAsync(@Nullable String name);

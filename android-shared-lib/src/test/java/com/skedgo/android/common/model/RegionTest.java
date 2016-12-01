@@ -1,13 +1,10 @@
 package com.skedgo.android.common.model;
 
-import com.google.android.gms.maps.model.LatLng;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
-import com.google.maps.android.PolyUtil;
 import com.skedgo.android.common.BuildConfig;
 import com.skedgo.android.common.TestRunner;
 
-import org.assertj.core.api.Assertions;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.robolectric.annotation.Config;
@@ -71,46 +68,5 @@ public class RegionTest {
     assertThat(actual.getCities())
         .describedAs("Parcel cities properly yet?")
         .hasSize(2);
-  }
-
-  @Test public void containsPoint() {
-    // This looks like an arrow.
-    Region region = new Region();
-    region.setEncodedPolyline(PolyUtil.encode(Arrays.asList(
-        new LatLng(0.0, 0.0),
-        new LatLng(1.0, 2.0),
-        new LatLng(2.0, 0.0),
-        new LatLng(1.0, 1.0)
-    )));
-
-    Location outside = new Location(1.0, 0.5);
-    assertThat(region.contains(outside))
-        .describedAs("This region must not contain given location")
-        .isFalse();
-
-    Location inside = new Location(1.0, 1.5);
-    assertThat(region.contains(inside))
-        .describedAs("This region must contain given location")
-        .isTrue();
-  }
-
-  @Test public void notCrashWithNullableLocation() {
-    final Region region = new Region();
-    try {
-      final boolean r = region.contains(null);
-      assertThat(r).describedAs("Don't contain nullable location").isFalse();
-    } catch (NullPointerException e) {
-      Assertions.fail("Don't crash with nullable location");
-    }
-  }
-
-  @Test public void notCrashWithNullablePolygon() {
-    final Region region = new Region();
-    try {
-      final boolean r = region.contains(1, 1);
-      assertThat(r).describedAs("Region having nullable polygon contains no location").isFalse();
-    } catch (NullPointerException e) {
-      Assertions.fail("Don't crash with nullable polygon");
-    }
   }
 }

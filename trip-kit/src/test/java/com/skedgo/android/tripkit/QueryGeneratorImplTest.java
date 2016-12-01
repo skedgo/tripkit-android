@@ -78,7 +78,7 @@ public class QueryGeneratorImplTest {
     final Location arrival = new Location(3, 4);
     query.setToLocation(arrival);
 
-    final OutOfRegionsException error = new OutOfRegionsException(departure, null);
+    final OutOfRegionsException error = new OutOfRegionsException(null, departure.getLat(), departure.getLon());
     when(regionService.getRegionByLocationAsync(any(Location.class)))
         .thenAnswer(new Answer<Observable<Region>>() {
           @Override
@@ -111,7 +111,7 @@ public class QueryGeneratorImplTest {
     final Location arrival = new Location(3, 4);
     query.setToLocation(arrival);
 
-    final OutOfRegionsException error = new OutOfRegionsException(arrival, null);
+    final OutOfRegionsException error = new OutOfRegionsException(null, arrival.getLat(), arrival.getLon());
     when(regionService.getRegionByLocationAsync(any(Location.class)))
         .thenAnswer(new Answer<Observable<Region>>() {
           @Override

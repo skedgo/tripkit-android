@@ -27,16 +27,19 @@ final class RegionServiceImpl implements RegionService {
   private final Cache<Map<String, TransportMode>> modeCache;
   private final RegionsFetcher regionsFetcher;
   private final Provider<RegionInfoService> regionInfoServiceProvider;
+  private final RegionFinder regionFinder;
 
   RegionServiceImpl(
       Cache<List<Region>> regionCache,
       Cache<Map<String, TransportMode>> modeCache,
       @NonNull RegionsFetcher regionsFetcher,
-      Provider<RegionInfoService> regionInfoServiceProvider) {
+      Provider<RegionInfoService> regionInfoServiceProvider,
+      RegionFinder regionFinder) {
     this.regionCache = regionCache;
     this.modeCache = modeCache;
     this.regionsFetcher = regionsFetcher;
     this.regionInfoServiceProvider = regionInfoServiceProvider;
+    this.regionFinder = regionFinder;
   }
 
   @Override
@@ -49,12 +52,9 @@ final class RegionServiceImpl implements RegionService {
     return modeCache.getAsync();
   }
 
-  @Override
-  public Observable<Region> getRegionByLocationAsync(@Nullable final Location location) {
-    if (location == null) {
-      return Observable.error(new NullPointerException("Location is null"));
-    }
-
+  @Override public Observable<Region> getRegionByLocationAsync(
+      final double latitude,
+      final double longitude) {
     return getRegionsAsync()
         .flatMap(new Func1<List<Region>, Observable<Region>>() {
           @Override
@@ -63,19 +63,24 @@ final class RegionServiceImpl implements RegionService {
           }
         })
         .first(new Func1<Region, Boolean>() {
-          @Override
-          public Boolean call(Region region) {
-            return region.contains(location);
+          @Override public Boolean call(Region region) {
+            return regionFinder.contains(region, latitude, longitude);
           }
         })
         .onErrorResumeNext(new Func1<Throwable, Observable<? extends Region>>() {
-          @Override
-          public Observable<? extends Region> call(Throwable error) {
+          @Override public Observable<? extends Region> call(Throwable error) {
             return error instanceof NoSuchElementException
-                ? Observable.<Region>error(new OutOfRegionsException(location, "Location lies outside covered area"))
+                ? Observable.<Region>error(new OutOfRegionsException("Location lies outside covered area", latitude, longitude))
                 : Observable.<Region>error(error);
           }
         });
+  }
+
+  @Override public Observable<Region> getRegionByLocationAsync(@Nullable Location location) {
+    if (location == null) {
+      return Observable.error(new NullPointerException("Location is null"));
+    }
+    return getRegionByLocationAsync(location.getLat(), location.getLon());
   }
 
   @Override
@@ -129,6 +134,7 @@ final class RegionServiceImpl implements RegionService {
           @Override public void call() {
             regionCache.invalidate();
             modeCache.invalidate();
+            regionFinder.invalidate();
           }
         });
   }
