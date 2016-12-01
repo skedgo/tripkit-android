@@ -14,7 +14,7 @@ class RegionFinder {
   public boolean contains(Region region, double lat, double lng) {
     final List<LatLng> polygon = getPolygon(region, polygonCache);
     return polygon != null
-        && PolyUtil.containsLocation(new LatLng(lat, lng), polygon, true);
+        && PolyUtil.containsLocation(lat, lng, polygon, true);
   }
 
   public void invalidate() {
