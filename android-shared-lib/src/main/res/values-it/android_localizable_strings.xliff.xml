@@ -168,7 +168,7 @@
 	<string name="title_exclude_event_from_route">Escludere evento dai percorsi?</string>
 	<string name="timetable_no_data">Nessun servizio trovato per questa fermata</string>
 	<string name="trip_to_unknown_dest_about_to_start">Sembra che tu abbia un viaggio per fare</string>
-	<string name="trip_to">"Viaggio a %s"</string>
+	<string name="trip_to">Viaggio a %s</string>
 	<string name="trip_preferences">Preferenze di viaggio</string>
 	<string name="transport_selector_header">Includere nei risultati di percorso</string>
 	<string name="walkthrough_4">Ricerca percorsi direttamente dalla barra di ricerca di Google senza aprire TripGo.</string>
@@ -178,6 +178,24 @@
 	<string name="your_trip_is_about_to_start">Il vostro viaggio sta per iniziare</string>
 	<string name="you_are_here">Tu sei qui</string>
 	<string name="you_r_already_at_s">Sei già a %s!</string>
+	<!--Settings option to enable/disable news (notifications).-->
+	<string name="news">News</string>
+	<!--In transport mode detail, setting to enable that transport mode to be included in trips.-->
+	<string name="include_in_trips">Include in trips</string>
+	<!--Used for parking slots. Format string for multiple slots. Example: 10 slots available-->
+	<string name="multiple_slots_available">%s slots available</string>
+	<!--Used for parking slots. Format string for one slots. Example: 1 slot available-->
+	<string name="one_slot_available">%s slot available</string>
+	<!--Used for parking slots, when there's no slot available.-->
+	<string name="no_slots_available">No slot available</string>
+	<!--Parking slots, updated time. Example: Updated at: 10am-->
+	<string name="updated_at">Updated at: %s</string>
+	<!--Occupancy almost full-->
+	<string name="almost_full">Almost full</string>
+	<!--Valid From title (date)-->
+	<string name="valid_from">Valid From</string>
+	<!--Ticket Info title-->
+	<string name="ticket_info">Ticket Info</string>
 
 </resources>
-<!-- This is an auto generated file (Thu Jun 30 10:11:02 ART 2016) -->
+<!-- This is an auto generated file (Wed Nov 30 14:57:36 ART 2016) -->
