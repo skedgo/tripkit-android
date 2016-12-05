@@ -63,4 +63,29 @@ public class StringsTest {
     final String s = resources.getString(R.string.trip_to, "Sydney");
     assertThat(s).isEqualTo("Trip to Sydney");
   }
+
+  @Test public void shouldHaveCorrectStringForDepartureLocationHint() {
+    assertThat(resources.getString(R.string.locationcomingfrom))
+        .isEqualTo("Where are you going from?");
+  }
+
+  @Test public void shouldHaveCorrectStringForEventName() {
+    assertThat(resources.getString(R.string.titleeventname))
+        .isEqualTo("Title");
+  }
+
+  @Test public void shouldHaveCorrectStringForStartDateTime() {
+    assertThat(resources.getString(R.string.eventstartdatetime))
+        .isEqualTo("Start");
+  }
+
+  @Test public void shouldHaveCorrectStringForEndDateTime() {
+    assertThat(resources.getString(R.string.eventenddatetime))
+        .isEqualTo("End");
+  }
+
+  @Test public void shouldHaveCorrectStringForRepeats() {
+    assertThat(resources.getString(R.string.eventrepeat))
+        .isEqualTo("Repeats");
+  }
 }
