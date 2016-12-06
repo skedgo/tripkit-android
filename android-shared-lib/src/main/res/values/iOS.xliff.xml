@@ -18,8 +18,6 @@
 	<string name="getting_current_location">Getting current location</string>
 	<!--Typical name that you'd give your home location-->
 	<string name="home">Home</string>
-	<!--Title for unnamed new event-->
-	<string name="newevent">NewEvent</string>
 	<!--Text to show if there's no planned trip.-->
 	<string name="no_planned_trip">No planned trip</string>
 	<!--Recovery suggestion when TripGo cannot access its local files-->
@@ -92,18 +90,18 @@
 	<!--Title for agenda screen while it's still in setup mode.-->
 	<string name="agenda_setup">Agenda Setup</string>
 	<!--Agenda tab bar name-->
-	<string name="agendabutton">AgendaButton</string>
+	<string name="agendabutton">Agenda</string>
 	<!--Accepting EULA
    Agree to EULA-->
 	<string name="agree">Agree</string>
 	<!--Airline flight number with %airline and %flightNumber, e.g., 'Qantas flight QF1'-->
-	<string name="airlineflightnumber">AirlineFlightNumber</string>
+	<string name="airlineflightnumber">%1$s flight %2$s</string>
 	<!--Flight from a city to an other one-->
-	<string name="airlinefromto">AirlineFromTo</string>
+	<string name="airlinefromto">>%1$s (%2$s) to %3$s (%4$s)</string>
 	<!--No comment provided by engineer.-->
 	<string name="alert">Alert</string>
 	<!--Description of alert with %title-->
-	<string name="alerttitleformat">AlertTitleFormat</string>
+	<string name="alerttitleformat">Alert: %1$s</string>
 	<!--Option to use this trip for all similar cases.-->
 	<string name="all">All</string>
 	<!--Option to delete this event and all after in a recurence-->
@@ -131,7 +129,7 @@
 	<!--vehicle booking action-->
 	<string name="book_vehicle">Book vehicle</string>
 	<!--Book a taxi-->
-	<string name="booktaxi">BookTaxi</string>
+	<string name="booktaxi">Book a taxi</string>
 	<!--Description on empty bookings screen-->
 	<string name="bookings_made_with_tripgo_will_appear_here_dot">Bookings made with TripGo will appear here.</string>
 	<!--Response to negative answer to question whether TripGo is useful, prompting for feedback.-->
@@ -139,9 +137,9 @@
 	<!--Calendar-->
 	<string name="calendar">Calendar</string>
 	<!--Type for regular events that go in the phone's calendar.-->
-	<string name="calendar_event">Calendar Event</string>
+	<string name="calendar_event">Event</string>
 	<!--Explanation for what calendar events are compared to habituals and stays. Can be long-ish.-->
-	<string name="calendareventdescription">CalendarEventDescription</string>
+	<string name="calendareventdescription">Regular events which will be saved in your device\'s calendar.</string>
 	<!--No comment provided by engineer.-->
 	<string name="calendars">Calendars</string>
 	<!--No comment provided by engineer.-->
@@ -159,9 +157,9 @@
 	<!--Error title when TripGo couldn't identify the user's current city.-->
 	<string name="could_not_find_your_city_dot">Could not find your city.</string>
 	<!--Title for critical error-->
-	<string name="criticalerror">CriticalError</string>
+	<string name="criticalerror">Critical Error</string>
 	<!--Description for critical error where error will be shown below.-->
-	<string name="criticalerrorformat">CriticalErrorFormat</string>
+	<string name="criticalerrorformat">The application encountered a critical error and can\'t recover:</string>
 	<!--No comment provided by engineer.-->
 	<string name="custom_trip_does_not_fit">Custom trip does not fit</string>
 	<!--No comment provided by engineer.-->
@@ -169,7 +167,7 @@
 	<!--Cycling speed preference-->
 	<string name="cycle_speed">Cycle speed</string>
 	<!--From %date-->
-	<string name="datefromformat">DateFromFormat</string>
+	<string name="datefromformat">From %1$s</string>
 	<string name="datefromtoformat">From %1$s to %2$s</string>
 	<!--Departure date+time for overnight stay-->
 	<string name="departure">Departure</string>
@@ -185,7 +183,7 @@
 	<!--Walkthrough (skip in here should match translation for 'Skip'.-->
 	<string name="don_apostt_have_a_fixed_place_of_work_or_study_question_skip_this_step_dot">Don\'t have a fixed place of work or study? Skip this step.</string>
 	<!--Title for page for modifying a routine/stay at a specific location-->
-	<string name="edititemheretitle">EditItemHereTitle</string>
+	<string name="edititemheretitle">Agenda Item</string>
 	<!--Title for date when an event ends repeating-->
 	<string name="end_date">End Date</string>
 	<!--No comment provided by engineer.-->
@@ -203,11 +201,11 @@
 	<!--No comment provided by engineer.-->
 	<string name="event_was_cancelled">Event was cancelled</string>
 	<!--Title for the time an event ends (including date information)-->
-	<string name="eventenddatetime">EventEndDateTime</string>
+	<string name="eventenddatetime">End</string>
 	<!--Title for when an event repeats-->
-	<string name="eventrepeat">EventRepeat</string>
+	<string name="eventrepeat">Repeats</string>
 	<!--Title for the time an event starts (including date information)-->
-	<string name="eventstartdatetime">EventStartDateTime</string>
+	<string name="eventstartdatetime">Start</string>
 	<!--Filler for a frequency-based service indicating its frequency, e.g., 'Every 10 minutes'-->
 	<string name="every__pattern">Every %1$s</string>
 	<!--Text do mark an example-->
@@ -217,7 +215,7 @@
 	<!--Exclude event action-->
 	<string name="exclude">Exclude</string>
 	<!--There goes my excuse for being late...-->
-	<string name="excuseduetolate">ExcuseDueToLate</string>
+	<string name="excuseduetolate">TripGo - There goes my excuse for being late...</string>
 	<!--Speed preference 'fast'-->
 	<string name="fast">Fast</string>
 	<!--No comment provided by engineer.-->
@@ -231,7 +229,7 @@
 	<!--Title for button to access favourites-->
 	<string name="favourites">Favourites</string>
 	<!--Favourites tab bar name-->
-	<string name="favouritesbutton">FavouritesButton</string>
+	<string name="favouritesbutton">Favourites</string>
 	<!--Help title-->
 	<string name="feedback__ampersand_support">"Feedback "</string>
 	<!--Placeholder text for search bar that is used for filtering-->
@@ -241,12 +239,12 @@
 	<string name="flightdetails">Flight details</string>
 	<string name="flightnote">Kommentar</string>
 	<!--Title for flight with %flightNumber-->
-	<string name="flightnumberformat">FlightNumberFormat</string>
+	<string name="flightnumberformat">Flight %1$s</string>
 	<string name="flightsearch">Flight search</string>
 	<!--Reminder to leave preference-->
 	<string name="for_when_to_leave">For when to leave</string>
 	<!--Free directions-->
-	<string name="freedirections">FreeDirections</string>
+	<string name="freedirections">TripGo - Free directions</string>
 	<!--Favorite trip 'from' title-->
 	<string name="from">From</string>
 	<!--No comment provided by engineer.-->
@@ -254,7 +252,7 @@
 	<!--Route here... ...from Current location-->
 	<string name="from_current_location">From current location</string>
 	<!--Location for trip exported as event going from %location1 to %location2-->
-	<string name="fromtoforeventlocationformat">FromToForEventLocationFormat</string>
+	<string name="fromtoforeventlocationformat">From %1$s to %2$s</string>
 	<!--Header for list of vehicles garaged at this location-->
 	<string name="garaged_vehicles">Garaged Vehicles</string>
 	<!--Title of settings for generic transport stuff-->
@@ -270,14 +268,14 @@
 	<!--Description for button to get on or off at the selected public transport stop rather than where TripGo suggested.-->
 	<string name="get_on_or_off_here">Get on or off here</string>
 	<!--I use TripGo to get around-->
-	<string name="getaround">GetAround</string>
+	<string name="getaround">I use TripGo to get around.</string>
 	<!--Message to show when trying to get trip for a favorite-->
 	<string name="getting_trip_dot_dot_dot">Getting trip...</string>
 	<!--Routine, i.e., type for regular times when at one of the user's favorites
    Type for events that are regular visit's to one of the user's favorites-->
-	<string name="habitual_visit">Habitual Visit</string>
+	<string name="habitual_visit">Routine</string>
 	<!--Explanation for what routines are compared to calendar events and stays. Can be long-ish.-->
-	<string name="habitualeventdescription">HabitualEventDescription</string>
+	<string name="habitualeventdescription">Routines are part of your daily movement, but they aren\'t events that you want in your calendar (e.g., work). They are important for the Agenda to get you to the right location at the right time.</string>
 	<!--No comment provided by engineer.-->
 	<string name="has_tripgo_been_useful_to_you_question">Has TripGo been useful to you?</string>
 	<!--Map mode 'streets + satellite'-->
@@ -306,13 +304,13 @@
 	<!--Error title when favourite is missing a location..-->
 	<string name="location_not_set_dot">Location not set.</string>
 	<!--Where are you going from?-->
-	<string name="locationcomingfrom">LocationComingFrom</string>
+	<string name="locationcomingfrom">Where are you going from?</string>
 	<!--Where do you want to go?-->
 	<string name="locationwanttogo">Where do you want to go?</string>
 	<!--No comment provided by engineer.-->
 	<string name="long_press_on_the_map_to_choose_a_location">Long press on the map to choose a location</string>
 	<!--I once was lost but now I have found... TripGo-->
-	<string name="lostonce">LostOnce</string>
+	<string name="lostonce">I once was lost but now I have found... TripGo.</string>
 	<!--Header for settings of reminders that the user manually added-->
 	<string name="manual_reminders">Manual Reminders</string>
 	<!--Button title to switch agenda view to map mode
@@ -338,7 +336,7 @@
 	<!--Reminder to leave preference-->
 	<string name="minutes_before_trip">Minutes before trip</string>
 	<!--Number of minutes before departure-->
-	<string name="minutesbefore">MinutesBefore</string>
+	<string name="minutesbefore">%.0f minutes before</string>
 	<!--More button accessibility label-->
 	<string name="more">More</string>
 	<!--Header for list of how to get more information (e.g., by opening a website)-->
@@ -361,14 +359,16 @@
 	<string name="navigate_to_a_supported_city_on_a_map_dot">Navigate to a supported city on a map.</string>
 	<!--No comment provided by engineer.-->
 	<string name="new_favourite">New Favourite</string>
+	<!--Title for unnamed new event-->
+	<string name="newevent">New Event</string>
 	<!--Action title for adding a habitual item away from some location-->
-	<string name="newitemawayactiontitle">NewItemAwayActionTitle</string>
+	<string name="newitemawayactiontitle">Stay at a different location</string>
 	<!--Action title for adding another habitual visit to a favourite-->
 	<string name="newitemhereactiontitle">Add when I\'m here</string>
 	<!--Title for page for adding a new routine/stay at a specific location-->
-	<string name="newitemheretitle">NewItemHereTitle</string>
+	<string name="newitemheretitle">Agenda Item</string>
 	<!--Title for page for adding a new routing/stay at a specific location-->
-	<string name="newstaytitle">NewStayTitle</string>
+	<string name="newstaytitle">New Stay</string>
 	<!--No comment provided by engineer.-->
 	<string name="no__apostfrom_apost_location_selected">No \'From\' location selected</string>
 	<!--No comment provided by engineer.-->
@@ -388,7 +388,7 @@
 	<!--Countdown cell 'now' indicator-->
 	<string name="now">Now</string>
 	<!--Title for route number %1 of %total, where %total -->
-	<string name="numberrouteformat">NumberRouteFormat</string>
+	<string name="numberrouteformat">Route %1$s of %2$s</string>
 	<!--No comment provided by engineer.-->
 	<string name="ok">OK</string>
 	<!--Option to delete only this event in a recurence
@@ -506,7 +506,7 @@
 	<!--Agenda onboarding: placeholder text for search bar for 'work'.-->
 	<string name="search_for_your_work_address">Search for your work address</string>
 	<!--Search tab bar name-->
-	<string name="searchbutton">SearchButton</string>
+	<string name="searchbutton">Search</string>
 	<string name="select_bike_share">Select Bike Share</string>
 	<string name="select_car_park">Select Car Park</string>
 	<!--No comment provided by engineer.-->
@@ -593,7 +593,7 @@
 	<!--Title of button to access timetable-->
 	<string name="timetable">Timetable</string>
 	<!--Title event name-->
-	<string name="titleeventname">TitleEventName</string>
+	<string name="titleeventname">Title</string>
 	<!--Title favourite name-->
 	<string name="titlefavouritename">Title</string>
 	<!--Favorite trip 'to' title-->
@@ -602,15 +602,15 @@
    Title of settings for generic transport stuff-->
 	<string name="transport">Transport</string>
 	<!--Transport genius-->
-	<string name="transportgenius">TransportGenius</string>
+	<string name="transportgenius">TripGo - Transport genius</string>
 	<!--How do you want to go today?-->
-	<string name="transportmodewish">TransportModeWish</string>
+	<string name="transportmodewish">TripGo - How do you want to go today?</string>
 	<!--Trips tab bar name-->
-	<string name="tripsbutton">TripsButton</string>
+	<string name="tripsbutton">Trips</string>
 	<!--Type of the event (calendar event, stay, routine)-->
-	<string name="typeevent">TypeEvent</string>
+	<string name="typeevent">Type</string>
 	<!--Type of the vehicle-->
-	<string name="typevehicle">TypeVehicle</string>
+	<string name="typevehicle">Type</string>
 	<!--Title for list of upcoming bookings-->
 	<string name="upcoming">Upcoming</string>
 	<!--No comment provided by engineer.-->
@@ -641,10 +641,10 @@
 	<!--Preference to highlight wheelchair information-->
 	<string name="wheelchair_information">Wheelchair information</string>
 	<!--Header for staying away form home, i.e., when a user is NOT at their home-->
-	<string name="wheniamawayheader">WhenIAmAwayHeader</string>
+	<string name="wheniamawayheader">Stays</string>
 	<!--Header for accommodations, i.e., when a user is typically at this location
    Header for routines and accommodations, i.e., when a user is typically at this location-->
-	<string name="wheniamhereheader">WhenIAmHereHeader</string>
+	<string name="wheniamhereheader">Agenda</string>
 	<!--Question for which events in a recurrence to delete (options are typically this/all/any from here)-->
 	<string name="which_would_you_like_to_delete">Which would you like to delete</string>
 	<!--Typical name that you'd give your work location-->
@@ -734,7 +734,7 @@
 	<!--No comment provided by engineer.-->
 	<string name="in_the_meantime_coma_let_aposts_keep_exploring_and_enjoy_your_trips">In the meantime, let\'s keep exploring and enjoy your trips</string>
 	<!--Prefix for selected 'leave after' time
-   Single line instruction to leave-->
+-->
 	<string name="leave">Leave</string>
 	<!--Title for when to depart. Countdown to departure will be displayed below.-->
 	<string name="leave_in">Leave in</string>
@@ -1035,4 +1035,4 @@
 	<string name="_start_qbraquetname_end_qbraquet_aposts_work">%1$s\'s Work</string>
 
 </resources>
-<!-- This is an auto generated file (Tue Nov 29 15:29:32 ART 2016) -->
+<!-- This is an auto generated file (Mon Dec 05 18:17:50 ART 2016) -->
