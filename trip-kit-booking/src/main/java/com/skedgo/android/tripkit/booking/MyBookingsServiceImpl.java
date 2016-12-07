@@ -2,6 +2,8 @@ package com.skedgo.android.tripkit.booking;
 
 import android.support.annotation.NonNull;
 
+import com.skedgo.android.common.model.BookingConfirmation;
+
 import java.util.List;
 
 import rx.Observable;
@@ -15,7 +17,13 @@ public class MyBookingsServiceImpl implements MyBookingsService {
     this.api = api;
   }
 
-  @Override public Observable<List<String>> getMyBookingsAsync() {
-    return api.getMyBookingsAsync();
+  @Override public Observable<List<BookingConfirmation>> getMyBookingsAsync() {
+    return api.getMyBookingsAsync()
+        .map(new Func1<MyBookingsResponse, List<BookingConfirmation>>() {
+          @Override public List<BookingConfirmation> call(MyBookingsResponse bookingsResponse) {
+            return bookingsResponse.bookings();
+          }
+        });
   }
+
 }
