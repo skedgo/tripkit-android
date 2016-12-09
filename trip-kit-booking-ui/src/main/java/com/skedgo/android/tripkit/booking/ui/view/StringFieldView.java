@@ -4,8 +4,10 @@ import android.annotation.TargetApi;
 import android.content.Context;
 import android.os.Build;
 import android.support.annotation.NonNull;
+import android.text.Editable;
 import android.text.InputType;
 import android.text.TextUtils;
+import android.text.TextWatcher;
 import android.util.AttributeSet;
 import android.view.View;
 import android.widget.EditText;
@@ -56,14 +58,19 @@ public class StringFieldView extends RelativeLayout {
       titleView.setVisibility(GONE);
       valueView.setVisibility(GONE);
       editText.setHint(stringField.getTitle());
-      editText.setOnFocusChangeListener(new OnFocusChangeListener() {
-        @Override
-        public void onFocusChange(View v, boolean hasFocus) {
-          if (!hasFocus) { // user finished input
-            stringField.setValue(editText.getText().toString());
+      editText.addTextChangedListener(
+          new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) { }
+
+            @Override public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) { }
+
+            public void afterTextChanged(Editable s) {
+              stringField.setValue(s.toString());
+            }
           }
-        }
-      });
+      );
+
       if (stringField.getKeyboardType() != null) {
         switch (stringField.getKeyboardType()) {
           case "PHONE":
