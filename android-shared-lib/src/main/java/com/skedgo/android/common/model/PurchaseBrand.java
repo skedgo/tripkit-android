@@ -17,6 +17,7 @@ public abstract class PurchaseBrand implements Parcelable {
     @Override public PurchaseBrand createFromParcel(Parcel in) {
       return ImmutablePurchaseBrand.builder()
           .color((ServiceColor) in.readParcelable(ServiceColor.class.getClassLoader()))
+          .imageURL(in.readString())
           .build();
     }
 
@@ -27,6 +28,7 @@ public abstract class PurchaseBrand implements Parcelable {
 
   @Override public void writeToParcel(Parcel dest, int flags) {
     dest.writeParcelable(color(), flags);
+    dest.writeString(imageURL());
   }
 
   @Override public int describeContents() {
@@ -34,5 +36,6 @@ public abstract class PurchaseBrand implements Parcelable {
   }
 
   public abstract ServiceColor color();
+  public abstract String imageURL();
 
 }
