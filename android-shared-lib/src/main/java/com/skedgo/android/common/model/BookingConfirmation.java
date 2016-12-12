@@ -23,12 +23,15 @@ public abstract class BookingConfirmation implements Parcelable {
       List<BookingConfirmationAction> actions = new ArrayList<>();
       in.readTypedList(actions, BookingConfirmationAction.CREATOR);
 
+      final ArrayList<String> trips = in.readArrayList(ArrayList.class.getClassLoader());
+
       return ImmutableBookingConfirmation.builder()
           .actions(actions)
           .provider((BookingConfirmationImage) in.readParcelable(BookingConfirmationImage.class.getClassLoader()))
           .purchase((BookingConfirmationPurchase) in.readParcelable(BookingConfirmationPurchase.class.getClassLoader()))
           .status((BookingConfirmationStatus) in.readParcelable(BookingConfirmationStatus.class.getClassLoader()))
           .vehicle((BookingConfirmationImage) in.readParcelable(BookingConfirmationImage.class.getClassLoader()))
+          .trips(trips)
           .build();
     }
 
@@ -43,6 +46,7 @@ public abstract class BookingConfirmation implements Parcelable {
     dest.writeParcelable(purchase(), flags);
     dest.writeParcelable(status(), flags);
     dest.writeParcelable(vehicle(), flags);
+    dest.writeList(trips());
 
   }
 
@@ -55,5 +59,6 @@ public abstract class BookingConfirmation implements Parcelable {
   @Nullable public abstract BookingConfirmationPurchase purchase();
   public abstract BookingConfirmationStatus status();
   @Nullable public abstract BookingConfirmationImage vehicle();
+  @Nullable public abstract List<String> trips();
 
 }
