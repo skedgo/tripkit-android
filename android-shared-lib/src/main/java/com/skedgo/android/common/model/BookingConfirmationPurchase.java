@@ -2,6 +2,7 @@ package com.skedgo.android.common.model;
 
 import android.os.Parcel;
 import android.os.Parcelable;
+import android.support.annotation.Nullable;
 
 import com.google.gson.annotations.JsonAdapter;
 
@@ -21,6 +22,7 @@ public abstract class BookingConfirmationPurchase implements Parcelable{
           .price(in.readString())
           .productName(in.readString())
           .productType(in.readString())
+          .brand((PurchaseBrand)in.readParcelable(PurchaseBrand.class.getClassLoader()))
           .validFor(in.readLong())
           .validFrom(in.readLong())
           .build();
@@ -37,6 +39,7 @@ public abstract class BookingConfirmationPurchase implements Parcelable{
     dest.writeString(price());
     dest.writeString(productName());
     dest.writeString(productType());
+    dest.writeParcelable(brand(), flags);
     dest.writeLong(validFor());
     dest.writeLong(validFrom());
   }
@@ -50,6 +53,7 @@ public abstract class BookingConfirmationPurchase implements Parcelable{
   public abstract String price();
   public abstract String productName();
   public abstract String productType();
+  @Nullable public abstract PurchaseBrand brand();
   @Value.Default public long validFor() {
     return 0;
   }
