@@ -27,11 +27,13 @@ public abstract class BookingConfirmation implements Parcelable {
 
       return ImmutableBookingConfirmation.builder()
           .actions(actions)
+          .trips(trips)
+          .count(in.readInt())
+          .index(in.readInt())
           .provider((BookingConfirmationImage) in.readParcelable(BookingConfirmationImage.class.getClassLoader()))
           .purchase((BookingConfirmationPurchase) in.readParcelable(BookingConfirmationPurchase.class.getClassLoader()))
           .status((BookingConfirmationStatus) in.readParcelable(BookingConfirmationStatus.class.getClassLoader()))
           .vehicle((BookingConfirmationImage) in.readParcelable(BookingConfirmationImage.class.getClassLoader()))
-          .trips(trips)
           .build();
     }
 
@@ -42,11 +44,14 @@ public abstract class BookingConfirmation implements Parcelable {
 
   @Override public void writeToParcel(Parcel dest, int flags) {
     dest.writeTypedList(actions());
+    dest.writeList(trips());
+    dest.writeInt(count());
+    dest.writeInt(index());
     dest.writeParcelable(provider(), flags);
     dest.writeParcelable(purchase(), flags);
     dest.writeParcelable(status(), flags);
     dest.writeParcelable(vehicle(), flags);
-    dest.writeList(trips());
+
 
   }
 
@@ -55,6 +60,12 @@ public abstract class BookingConfirmation implements Parcelable {
   }
 
   public abstract List<BookingConfirmationAction> actions();
+  @Value.Default public int count() {
+    return 0;
+  }
+  @Value.Default public int index() {
+    return 0;
+  }
   @Nullable public abstract BookingConfirmationImage provider();
   @Nullable public abstract BookingConfirmationPurchase purchase();
   public abstract BookingConfirmationStatus status();

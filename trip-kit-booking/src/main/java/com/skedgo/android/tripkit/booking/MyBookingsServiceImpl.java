@@ -17,8 +17,9 @@ public class MyBookingsServiceImpl implements MyBookingsService {
     this.api = api;
   }
 
-  @Override public Observable<List<BookingConfirmation>> getMyBookingsAsync() {
-    return api.getMyBookingsAsync()
+  @Override
+  public Observable<List<BookingConfirmation>> getMyBookingsAsync(int first, int pageSize) {
+    return api.getMyBookingsAsync(first, pageSize)
         .map(new Func1<MyBookingsResponse, List<BookingConfirmation>>() {
           @Override public List<BookingConfirmation> call(MyBookingsResponse bookingsResponse) {
             return bookingsResponse.bookings();

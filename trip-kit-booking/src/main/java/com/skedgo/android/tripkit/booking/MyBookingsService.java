@@ -8,5 +8,5 @@ import rx.Observable;
 
 public interface MyBookingsService {
 
-  Observable<List<BookingConfirmation>> getMyBookingsAsync();
+  Observable<List<BookingConfirmation>> getMyBookingsAsync(int first, int pageSize);
 }
