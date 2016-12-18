@@ -35,6 +35,13 @@ final class TripUpdaterImpl implements TripUpdater {
   }
 
   @NonNull @Override
+  public Observable<Trip> getUpdateAsync(@NonNull String tripUrl) {
+    Trip trip = new Trip();
+    trip.setUpdateURL(tripUrl);
+    return getUpdateAsync(trip);
+  }
+
+  @NonNull @Override
   public Observable<Trip> getUpdateAsync(@NonNull Trip trip) {
     if (TextUtils.isEmpty(trip.getUpdateURL())) {
       return Observable.empty();
