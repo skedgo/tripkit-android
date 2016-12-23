@@ -5,8 +5,21 @@ import com.skedgo.android.common.model.BookingConfirmation;
 import java.util.List;
 
 import rx.Observable;
+import rx.functions.Func1;
 
-public interface MyBookingsService {
+public class MyBookingsService {
+  private final MyBookingsApi api;
 
-  Observable<List<BookingConfirmation>> getMyBookingsAsync(int first, int pageSize);
+  public MyBookingsService(MyBookingsApi api) {
+    this.api = api;
+  }
+
+  public Observable<List<BookingConfirmation>> getMyBookingsAsync(int first, int pageSize) {
+    return api.getMyBookingsAsync(first, pageSize)
+        .map(new Func1<MyBookingsResponse, List<BookingConfirmation>>() {
+          @Override public List<BookingConfirmation> call(MyBookingsResponse bookingsResponse) {
+            return bookingsResponse.bookings();
+          }
+        });
+  }
 }

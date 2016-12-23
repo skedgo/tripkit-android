@@ -5,7 +5,6 @@ import android.database.sqlite.SQLiteOpenHelper;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.skedgo.android.tripkit.TripKit;
-import com.skedgo.android.tripkit.TripUpdater;
 import com.skedgo.android.tripkit.booking.viewmodel.AuthenticationViewModel;
 import com.skedgo.android.tripkit.booking.viewmodel.AuthenticationViewModelImpl;
 import com.skedgo.android.tripkit.booking.viewmodel.BookingViewModel;
@@ -66,16 +65,6 @@ public class BookingModule {
         .create(AuthApi.class);
   }
 
-  @Provides MyBookingsApi myBookingsApi(OkHttpClient httpClient) {
-    return new Retrofit.Builder()
-        .baseUrl(HttpUrl.parse("https://tripgo.skedgo.com/satapp/"))
-        .addCallAdapterFactory(RxJavaCallAdapterFactory.createWithScheduler(Schedulers.io()))
-        .addConverterFactory(GsonConverterFactory.create())
-        .client(httpClient)
-        .build()
-        .create(MyBookingsApi.class);
-  }
-
   @Provides AuthService authService(AuthApi authApi) {
     return new AuthServiceImpl(authApi);
   }
@@ -113,13 +102,4 @@ public class BookingModule {
   @Provides QuickBookingService getQuickBookingService(QuickBookingApi quickBookingApi) {
     return new QuickBookingServiceImpl(quickBookingApi);
   }
-
-  @Provides MyBookingsService getMyBookingsService(MyBookingsApi myBookingsServiceApi) {
-    return new MyBookingsServiceImpl(myBookingsServiceApi);
-  }
-
-  @Provides TripUpdater tripUpdater() {
-    return TripKit.singleton().getTripUpdater();
-  }
-
 }
