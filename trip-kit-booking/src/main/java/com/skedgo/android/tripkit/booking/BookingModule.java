@@ -4,7 +4,6 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import com.skedgo.android.common.model.Trip;
 import com.skedgo.android.tripkit.TripKit;
 import com.skedgo.android.tripkit.TripUpdater;
 import com.skedgo.android.tripkit.booking.viewmodel.AuthenticationViewModel;
@@ -68,13 +67,10 @@ public class BookingModule {
   }
 
   @Provides MyBookingsApi myBookingsApi(OkHttpClient httpClient) {
-    final Gson gson = new GsonBuilder()
-        .create();
     return new Retrofit.Builder()
-        /* This base url is ignored as the api relies on @Url. */
         .baseUrl(HttpUrl.parse("https://tripgo.skedgo.com/satapp/"))
         .addCallAdapterFactory(RxJavaCallAdapterFactory.createWithScheduler(Schedulers.io()))
-        .addConverterFactory(GsonConverterFactory.create(gson))
+        .addConverterFactory(GsonConverterFactory.create())
         .client(httpClient)
         .build()
         .create(MyBookingsApi.class);
@@ -92,16 +88,12 @@ public class BookingModule {
     return new AuthenticationViewModelImpl();
   }
 
-  @Provides ExternalOAuthStore getExternalOAuthStore(SQLiteOpenHelper databaseHelper, ExternalOAuthEntityAdapter adapter) {
-    return new ExternalOAuthStoreImpl(databaseHelper, adapter);
+  @Provides ExternalOAuthStore externalOAuthStore(SQLiteOpenHelper databaseHelper) {
+    return new ExternalOAuthStoreImpl(databaseHelper, new ExternalOAuthEntityAdapter());
   }
 
   @Provides SQLiteOpenHelper databaseHelper() {
     return new ExternalOAuthDbHelper(TripKit.singleton().configs().context(), "externalOAuths.db");
-  }
-
-  @Provides ExternalOAuthEntityAdapter provideOlympicEntityAdapter() {
-    return new ExternalOAuthEntityAdapter();
   }
 
   @Provides ExternalOAuthServiceGenerator provideExternalOAuthServiceGenerator() {
@@ -110,10 +102,11 @@ public class BookingModule {
 
   @Provides ExternalOAuthService getExternalOAuthService(ExternalOAuthStore store,
                                                          ExternalOAuthServiceGenerator externalOAuthServiceGenerator) {
-    return new ExternalOAuthServiceImpl(store,externalOAuthServiceGenerator);
+    return new ExternalOAuthServiceImpl(store, externalOAuthServiceGenerator);
   }
 
-  @Provides BookingService getBookingService(BookingApi bookingApi, ExternalOAuthStore externalOAuthStore) {
+  @Provides
+  BookingService getBookingService(BookingApi bookingApi, ExternalOAuthStore externalOAuthStore) {
     return new BookingServiceImpl(bookingApi, externalOAuthStore, new Gson());
   }
 
