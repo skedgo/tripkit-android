@@ -13,7 +13,6 @@ import org.immutables.value.Value;
 @Value.Immutable
 @JsonAdapter(GsonAdaptersBookingConfirmationAction.class)
 public abstract class BookingConfirmationAction implements Parcelable {
-
   public static final String TYPE_CANCEL = "CANCEL";
   public static final String TYPE_CALL = "CALL";
   public static final String TYPE_QR_CODE = "QRCODE";
@@ -51,5 +50,4 @@ public abstract class BookingConfirmationAction implements Parcelable {
   public abstract boolean isDestructive();
   public abstract String title();
   public abstract String type();
-
 }

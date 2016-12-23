@@ -16,10 +16,8 @@ import java.util.List;
 @Value.Immutable
 @JsonAdapter(GsonAdaptersBookingConfirmation.class)
 public abstract class BookingConfirmation implements Parcelable {
-
   public static final Creator<BookingConfirmation> CREATOR = new Creator<BookingConfirmation>() {
     @Override public BookingConfirmation createFromParcel(Parcel in) {
-
       List<BookingConfirmationAction> actions = new ArrayList<>();
       in.readTypedList(actions, BookingConfirmationAction.CREATOR);
 
@@ -51,8 +49,6 @@ public abstract class BookingConfirmation implements Parcelable {
     dest.writeParcelable(purchase(), flags);
     dest.writeParcelable(status(), flags);
     dest.writeParcelable(vehicle(), flags);
-
-
   }
 
   @Override public int describeContents() {
@@ -71,5 +67,4 @@ public abstract class BookingConfirmation implements Parcelable {
   public abstract BookingConfirmationStatus status();
   @Nullable public abstract BookingConfirmationImage vehicle();
   @Nullable public abstract List<String> trips();
-
 }
