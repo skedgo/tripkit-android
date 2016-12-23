@@ -66,7 +66,6 @@ public class StringFieldView extends RelativeLayout {
           stringField.setValue(s.toString());
         }
       });
-
       if (stringField.getKeyboardType() != null) {
         switch (stringField.getKeyboardType()) {
           case "PHONE":

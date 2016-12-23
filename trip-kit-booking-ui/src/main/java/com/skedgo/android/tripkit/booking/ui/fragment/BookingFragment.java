@@ -20,6 +20,7 @@ import com.skedgo.android.tripkit.booking.BookingForm;
 import com.skedgo.android.tripkit.booking.LinkFormField;
 import com.skedgo.android.tripkit.booking.ui.R;
 import com.skedgo.android.tripkit.booking.ui.activity.BookingActivity;
+import com.skedgo.android.tripkit.booking.ui.activity.ExternalProviderAuthActivity;
 import com.skedgo.android.tripkit.booking.ui.viewmodel.ExtendedBookingViewModel;
 import com.skedgo.android.tripkit.booking.viewmodel.BookingViewModel;
 import com.squareup.otto.Bus;
@@ -37,6 +38,8 @@ public class BookingFragment extends ButterKnifeFragment implements View.OnClick
   public static final String KEY_FORM = "form";
   private static final String TAG_BOOKING_FORM = "bookingForm";
   private static final String EXTRA_DONE = "done";
+
+  private static final int RQ_EXTERNAL = 1;
 
   @Nullable private BookingForm bookingForm = null;
 
@@ -237,7 +240,14 @@ public class BookingFragment extends ButterKnifeFragment implements View.OnClick
   public void onEvent(BookingFormFragment.LinkFormFieldClickedEvent event) {
     final LinkFormField linkField = event.linkField;
     final String method = linkField.getMethod();
-    viewModel.performAction(linkField).subscribe();
+
+    if (LinkFormField.METHOD_EXTERNAL.equals(linkField.getMethod())) {
+      Intent intent = ExternalProviderAuthActivity.newIntent(getActivity(), bookingForm);
+      startActivityForResult(intent, RQ_EXTERNAL);
+    } else {
+      viewModel.performAction(linkField).subscribe();
+    }
+
   }
 
   @Subscribe
@@ -249,15 +259,23 @@ public class BookingFragment extends ButterKnifeFragment implements View.OnClick
   public void onActivityResult(int requestCode, int resultCode, Intent data) {
     super.onActivityResult(requestCode, resultCode, data);
     if (resultCode == Activity.RESULT_OK) {
-      final Bundle bundle = getActivity().getIntent().getBundleExtra(BookingActivity.KEY_BOOKING_BUNDLE);
-      if (bundle != null) {
-        Intent intent = new Intent();
-        intent.putExtras(bundle);
-        getActivity().setResult(Activity.RESULT_OK, intent);
+      if (requestCode == RQ_EXTERNAL) {
+        Intent done = new Intent();
+        done.putExtra(EXTRA_DONE, true);
+        getActivity().setResult(resultCode, done);
+        getActivity().finish();
       } else {
-        getActivity().setResult(Activity.RESULT_OK, data);
+        final Bundle bundle = getActivity().getIntent().getBundleExtra(BookingActivity.KEY_BOOKING_BUNDLE);
+        if (bundle != null) {
+          Intent intent = new Intent();
+          intent.putExtras(bundle);
+          getActivity().setResult(Activity.RESULT_OK, intent);
+        } else {
+          getActivity().setResult(Activity.RESULT_OK, data);
+        }
+        getActivity().finish();
       }
-      getActivity().finish();
+
     } else if (data != null && data.getBooleanExtra(EXTRA_DONE, false)) {
       Intent done = new Intent();
       done.putExtra(EXTRA_DONE, true);

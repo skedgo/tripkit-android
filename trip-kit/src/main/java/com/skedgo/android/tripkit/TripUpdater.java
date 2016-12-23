@@ -6,6 +6,7 @@ import com.skedgo.android.common.model.Trip;
 
 import rx.Observable;
 
-interface TripUpdater {
+public interface TripUpdater {
   @NonNull Observable<Trip> getUpdateAsync(@NonNull Trip trip);
+  @NonNull Observable<Trip> getUpdateAsync(@NonNull String tripUrl);
 }

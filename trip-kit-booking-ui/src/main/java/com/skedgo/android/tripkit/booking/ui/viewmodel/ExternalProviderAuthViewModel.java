@@ -127,8 +127,8 @@ public class ExternalProviderAuthViewModel extends BaseViewModel {
       }
       showWebView.set(false);
       return false;
-    } else if (webUrl.startsWith("https://db.skedgo.com/api/booking")) {
-      // handled by db.skedgo, should close
+    } else if (webUrl.startsWith("https://db.skedgo.com/api/booking") || webUrl.startsWith("https://verify.payiq.net/creditcard")) {
+      // handled by db.skedgo, should close. Same case for PayiQ credit card validation
       handledForm(null).subscribe(new Action1<Intent>() {
         @Override public void call(Intent intent) {
           publishSubjectIntent.onNext(intent);

@@ -77,16 +77,12 @@ public class BookingModule {
     return new AuthenticationViewModelImpl();
   }
 
-  @Provides ExternalOAuthStore getExternalOAuthStore(SQLiteOpenHelper databaseHelper, ExternalOAuthEntityAdapter adapter) {
-    return new ExternalOAuthStoreImpl(databaseHelper, adapter);
+  @Provides ExternalOAuthStore externalOAuthStore(SQLiteOpenHelper databaseHelper) {
+    return new ExternalOAuthStoreImpl(databaseHelper, new ExternalOAuthEntityAdapter());
   }
 
   @Provides SQLiteOpenHelper databaseHelper() {
     return new ExternalOAuthDbHelper(TripKit.singleton().configs().context(), "externalOAuths.db");
-  }
-
-  @Provides ExternalOAuthEntityAdapter provideOlympicEntityAdapter() {
-    return new ExternalOAuthEntityAdapter();
   }
 
   @Provides ExternalOAuthServiceGenerator provideExternalOAuthServiceGenerator() {
@@ -95,15 +91,15 @@ public class BookingModule {
 
   @Provides ExternalOAuthService getExternalOAuthService(ExternalOAuthStore store,
                                                          ExternalOAuthServiceGenerator externalOAuthServiceGenerator) {
-    return new ExternalOAuthServiceImpl(store,externalOAuthServiceGenerator);
+    return new ExternalOAuthServiceImpl(store, externalOAuthServiceGenerator);
   }
 
-  @Provides BookingService getBookingService(BookingApi bookingApi, ExternalOAuthStore externalOAuthStore) {
+  @Provides
+  BookingService getBookingService(BookingApi bookingApi, ExternalOAuthStore externalOAuthStore) {
     return new BookingServiceImpl(bookingApi, externalOAuthStore, new Gson());
   }
 
   @Provides QuickBookingService getQuickBookingService(QuickBookingApi quickBookingApi) {
     return new QuickBookingServiceImpl(quickBookingApi);
   }
-
 }

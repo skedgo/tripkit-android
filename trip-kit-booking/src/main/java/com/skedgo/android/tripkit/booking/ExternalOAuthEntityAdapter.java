@@ -7,7 +7,6 @@ import android.support.annotation.NonNull;
 import skedgo.sqlite.SQLiteEntityAdapter;
 
 public class ExternalOAuthEntityAdapter implements SQLiteEntityAdapter<ExternalOAuth> {
-
   @NonNull @Override public ExternalOAuth toEntity(@NonNull Cursor cursor) {
     String authServiceId = cursor.getString(cursor.getColumnIndex(ExternalOAuthTable.AUTH_SERVICE_ID.getName()));
     String token = cursor.getString(cursor.getColumnIndex(ExternalOAuthTable.TOKEN.getName()));
@@ -28,7 +27,6 @@ public class ExternalOAuthEntityAdapter implements SQLiteEntityAdapter<ExternalO
     values.put(ExternalOAuthTable.TOKEN.getName(), entity.token());
     values.put(ExternalOAuthTable.REFRESH_TOKEN.getName(), entity.refreshToken());
     values.put(ExternalOAuthTable.EXPIRES_IN.getName(), entity.expiresIn());
-
     return values;
   }
 }
