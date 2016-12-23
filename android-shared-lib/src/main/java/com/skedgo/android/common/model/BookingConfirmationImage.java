@@ -13,7 +13,6 @@ import org.immutables.value.Value;
 @Value.Immutable
 @JsonAdapter(GsonAdaptersBookingConfirmationImage.class)
 public abstract class BookingConfirmationImage implements Parcelable {
-
   public static final Creator<BookingConfirmationImage> CREATOR = new Creator<BookingConfirmationImage>() {
     @Override public BookingConfirmationImage createFromParcel(Parcel in) {
       return ImmutableBookingConfirmationImage.builder()
