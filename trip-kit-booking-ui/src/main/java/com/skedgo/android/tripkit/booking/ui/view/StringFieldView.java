@@ -9,14 +9,13 @@ import android.text.InputType;
 import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.util.AttributeSet;
-import android.view.View;
 import android.widget.EditText;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.skedgo.android.tripkit.booking.StringFormField;
 import com.skedgo.android.tripkit.booking.ui.R;
 import com.skedgo.android.tripkit.booking.ui.view.util.ViewUtils;
-import com.skedgo.android.tripkit.booking.StringFormField;
 
 public class StringFieldView extends RelativeLayout {
   private TextView titleView;
@@ -58,19 +57,15 @@ public class StringFieldView extends RelativeLayout {
       titleView.setVisibility(GONE);
       valueView.setVisibility(GONE);
       editText.setHint(stringField.getTitle());
-      editText.addTextChangedListener(
-          new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) { }
+      editText.addTextChangedListener(new TextWatcher() {
+        @Override public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
 
-            @Override public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) { }
+        @Override public void onTextChanged(CharSequence s, int start, int before, int count) {}
 
-            public void afterTextChanged(Editable s) {
-              stringField.setValue(s.toString());
-            }
-          }
-      );
-
+        @Override public void afterTextChanged(Editable s) {
+          stringField.setValue(s.toString());
+        }
+      });
       if (stringField.getKeyboardType() != null) {
         switch (stringField.getKeyboardType()) {
           case "PHONE":
