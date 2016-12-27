@@ -5,14 +5,14 @@ import android.util.Log;
 
 import com.google.gson.Gson;
 import com.jakewharton.picasso.OkHttp3Downloader;
-import com.skedgo.android.tripkit.booking.ui.BuildConfig;
-import com.skedgo.android.tripkit.booking.ui.OAuth2CallbackHandler;
-import com.skedgo.android.tripkit.booking.ui.OAuth2CallbackHandlerImpl;
 import com.skedgo.android.common.util.Gsons;
 import com.skedgo.android.common.util.MainThreadBus;
 import com.skedgo.android.tripkit.TripKit;
 import com.skedgo.android.tripkit.booking.BookingService;
 import com.skedgo.android.tripkit.booking.ExternalOAuthService;
+import com.skedgo.android.tripkit.booking.ui.BuildConfig;
+import com.skedgo.android.tripkit.booking.ui.OAuth2CallbackHandler;
+import com.skedgo.android.tripkit.booking.ui.OAuth2CallbackHandlerImpl;
 import com.squareup.otto.Bus;
 import com.squareup.picasso.Picasso;
 
@@ -62,7 +62,8 @@ public class BookingClientModule {
         .build();
   }
 
-  @Provides OAuth2CallbackHandler getOAuth2CallbackHandler(ExternalOAuthService externalOAuthService, BookingService bookingService) {
+  @Provides
+  OAuth2CallbackHandler getOAuth2CallbackHandler(ExternalOAuthService externalOAuthService, BookingService bookingService) {
     return new OAuth2CallbackHandlerImpl(externalOAuthService, bookingService);
   }
 }

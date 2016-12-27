@@ -40,9 +40,6 @@ public class BookingFragment extends ButterKnifeFragment implements View.OnClick
   private static final String EXTRA_DONE = "done";
 
   private static final int RQ_EXTERNAL = 1;
-
-  @Nullable private BookingForm bookingForm = null;
-
   @Inject ExtendedBookingViewModel viewModel;
   @Inject Bus bus;
   ProgressBar progressView;
@@ -50,7 +47,7 @@ public class BookingFragment extends ButterKnifeFragment implements View.OnClick
   TextView backButton;
   TextView errorTitleView;
   TextView errorMessageView;
-
+  @Nullable private BookingForm bookingForm = null;
   private Action1<Throwable> errorAction = new Action1<Throwable>() {
     @Override
     public void call(Throwable error) {

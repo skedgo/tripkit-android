@@ -7,13 +7,13 @@ import android.support.v7.app.ActionBar;
 import android.view.MenuItem;
 import android.widget.Toast;
 
+import com.skedgo.android.tripkit.booking.BookingForm;
 import com.skedgo.android.tripkit.booking.ui.R;
 import com.skedgo.android.tripkit.booking.ui.fragment.BookingFormFragment;
 import com.skedgo.android.tripkit.booking.ui.fragment.BookingFragment;
 import com.skedgo.android.tripkit.booking.ui.module.BookingClientComponent;
 import com.skedgo.android.tripkit.booking.ui.module.BookingClientModule;
 import com.skedgo.android.tripkit.booking.ui.module.DaggerBookingClientComponent;
-import com.skedgo.android.tripkit.booking.BookingForm;
 import com.skedgo.android.tripkit.booking.viewmodel.BookingViewModel;
 import com.skedgo.android.tripkit.booking.viewmodel.ParamImpl;
 
@@ -30,10 +30,6 @@ public class BookingActivity extends AnimatedTransitionActivity implements
   public static final String KEY_BOOKING_FORM = "bookingForm";
 
   public BookingClientComponent component;
-
-  @Override protected void attachBaseContext(Context newBase) {
-    super.attachBaseContext(CalligraphyContextWrapper.wrap(newBase));
-  }
 
   @Override
   public void onCreate(Bundle savedInstanceState) {
@@ -96,6 +92,10 @@ public class BookingActivity extends AnimatedTransitionActivity implements
 
   public void reportProblem() {
 
+  }
+
+  @Override protected void attachBaseContext(Context newBase) {
+    super.attachBaseContext(CalligraphyContextWrapper.wrap(newBase));
   }
 
   private void setupActionBar() {

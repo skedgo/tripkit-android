@@ -1,11 +1,11 @@
 package com.skedgo.android.tripkit.booking.ui.module;
 
+import com.skedgo.android.tripkit.booking.BookingModule;
 import com.skedgo.android.tripkit.booking.ui.OAuth2CallbackHandler;
 import com.skedgo.android.tripkit.booking.ui.activity.BookingActivity;
 import com.skedgo.android.tripkit.booking.ui.fragment.BookingFormFragment;
 import com.skedgo.android.tripkit.booking.ui.fragment.BookingFragment;
 import com.skedgo.android.tripkit.booking.ui.fragment.ExternalProviderAuthFragment;
-import com.skedgo.android.tripkit.booking.BookingModule;
 
 import javax.inject.Singleton;
 
