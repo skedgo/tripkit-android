@@ -153,7 +153,6 @@ public class BookingFragment extends ButterKnifeFragment implements View.OnClick
     if (param != null) {
       hudTextView.setText(param.getHudText());
     }
-
   }
 
   @Override
@@ -217,9 +216,8 @@ public class BookingFragment extends ButterKnifeFragment implements View.OnClick
     viewModel.nextBookingForm()
         .takeUntil(lifecycle().onDestroyView())
         .subscribe(new Action1<Param>() {
-          @Override
-          public void call(Param param) {
-            showNewBookingForm(param);
+          @Override public void call(Param param) {
+            startActivityForResult(BookingActivity.newIntent(param), 0);
           }
         }, errorAction);
 
@@ -318,7 +316,6 @@ public class BookingFragment extends ButterKnifeFragment implements View.OnClick
   }
 
   private void showBookingForm(BookingForm form) {
-
     this.bookingForm = form;
 
     final Fragment oldFragment = getFragmentManager().findFragmentByTag(TAG_BOOKING_FORM);
@@ -333,11 +330,5 @@ public class BookingFragment extends ButterKnifeFragment implements View.OnClick
         .beginTransaction()
         .add(android.R.id.content, BookingFormFragment.newInstance(form), TAG_BOOKING_FORM)
         .commit();
-  }
-
-  private void showNewBookingForm(Param param) {
-    final Intent intent = new Intent(BookingActivity.ACTION_BOOK2);
-    intent.putExtra("param", param);
-    startActivityForResult(intent, 0);
   }
 }

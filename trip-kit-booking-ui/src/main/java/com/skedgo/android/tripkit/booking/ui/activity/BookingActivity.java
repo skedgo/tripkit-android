@@ -1,6 +1,7 @@
 package com.skedgo.android.tripkit.booking.ui.activity;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.ActionBar;
 import android.view.MenuItem;
@@ -19,13 +20,19 @@ import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 public class BookingActivity extends AnimatedTransitionActivity implements
     BookingFormFragment.BookingFormFragmentListener {
   public static final String ACTION_BOOK = "com.skedgo.android.tripkit.booking.ui.ACTION_BOOK";
-  public static final String ACTION_BOOK2 = "com.skedgo.android.tripkit.booking.ui.ACTION_BOOK2";
   public static final String KEY_URL = "url";
   public static final String KEY_FIRST_SCREEN = "firstScreen";
   public static final String KEY_BOOKING_BUNDLE = "bookingBundle";
   public static final String KEY_BOOKING_FORM = "bookingForm";
-
+  private static final String ACTION_BOOK2 = "com.skedgo.android.tripkit.booking.ui.ACTION_BOOK2";
   public BookingClientComponent component;
+
+  public static Intent newIntent(Param param) {
+    final Intent intent = new Intent(BookingActivity.ACTION_BOOK2);
+    intent.setExtrasClassLoader(Param.class.getClassLoader());
+    intent.putExtra("param", param);
+    return intent;
+  }
 
   @Override
   public void onCreate(Bundle savedInstanceState) {
