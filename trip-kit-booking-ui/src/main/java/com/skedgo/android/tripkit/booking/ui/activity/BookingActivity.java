@@ -11,6 +11,7 @@ import com.skedgo.android.tripkit.booking.ui.fragment.BookingFragment;
 import com.skedgo.android.tripkit.booking.ui.module.BookingClientComponent;
 import com.skedgo.android.tripkit.booking.ui.module.BookingClientModule;
 import com.skedgo.android.tripkit.booking.ui.module.DaggerBookingClientComponent;
+import com.skedgo.android.tripkit.booking.viewmodel.Param;
 
 import skedgo.anim.AnimatedTransitionActivity;
 import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
