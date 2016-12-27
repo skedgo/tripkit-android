@@ -1,6 +1,5 @@
 package com.skedgo.android.tripkit.booking;
 
-import com.skedgo.android.common.model.ModeInfo;
 import com.skedgo.android.common.model.Region;
 
 import org.junit.Before;

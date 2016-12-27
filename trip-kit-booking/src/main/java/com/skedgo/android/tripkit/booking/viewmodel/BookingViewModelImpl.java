@@ -130,12 +130,14 @@ public class BookingViewModelImpl implements BookingViewModel {
       @Override
       public void call(Boolean isSuccessful) {
         if (isSuccessful) {
-          loadForm(param).subscribe(Actions.empty(),
-                                    new Action1<Throwable>() {
-                                      @Override
-                                      public void call(Throwable error) {
-                                      }
-                                    });
+          loadForm(param).subscribe(
+              Actions.empty(),
+              new Action1<Throwable>() {
+                @Override
+                public void call(Throwable error) {
+                }
+              }
+          );
         }
       }
     });

@@ -42,7 +42,7 @@ public class BookingViewModelImplTest {
   private BookingViewModel bookingViewModel;
   private BookingService api;
   private InputForm inputForm;
-  private BookingViewModel.Param param;
+  private Param param;
 
   @Test public void fetchNextBookingFormIfAuthenticationSucceeds() {
     when(api.getFormAsync(param.getUrl()))
@@ -111,9 +111,9 @@ public class BookingViewModelImplTest {
     bookingAction.setUrl("url2");
     bookingFormItem.setAction(bookingAction);
     bookingViewModel.performAction(bookingFormItem).toBlocking().single();
-    bookingViewModel.nextBookingForm().subscribe(new Action1<BookingViewModel.Param>() {
+    bookingViewModel.nextBookingForm().subscribe(new Action1<Param>() {
       @Override
-      public void call(BookingViewModel.Param param) {
+      public void call(Param param) {
         assertThat(param.getUrl()).isEqualTo("url2");
         assertThat(param.postBody().input()).isNotNull();
         assertThat(param.postBody().input()).hasSize(4);

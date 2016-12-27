@@ -144,17 +144,6 @@ public class BookingForm extends FormField {
     return null;
   }
 
-  @Nullable private String getValueFromField(@NonNull String fieldName) {
-    for (FormGroup formGroup : form) {
-      for (FormField formField : formGroup.getFields()) {
-        if (fieldName.equals(formField.getId()) && formField.getValue() != null) {
-          return formField.getValue().toString();
-        }
-      }
-    }
-    return null;
-  }
-
   @Nullable public String getScope() {
 
     for (FormGroup formGroup : form) {
@@ -217,14 +206,14 @@ public class BookingForm extends FormField {
     return this;
   }
 
-  public String externalAction(){
+  public String externalAction() {
 
     if (form != null && !CollectionUtils.isEmpty(form)) {
       for (FormGroup group : form) {
-        for (FormField field:group.getFields()){
+        for (FormField field : group.getFields()) {
           if (field instanceof LinkFormField &&
-              (LinkFormField.METHOD_EXTERNAL.equals(((LinkFormField)field).getMethod()))) {
-            return ((LinkFormField)field).getValue();
+              (LinkFormField.METHOD_EXTERNAL.equals(((LinkFormField) field).getMethod()))) {
+            return ((LinkFormField) field).getValue();
           }
         }
       }
@@ -233,5 +222,15 @@ public class BookingForm extends FormField {
     return null;
   }
 
+  @Nullable private String getValueFromField(@NonNull String fieldName) {
+    for (FormGroup formGroup : form) {
+      for (FormField formField : formGroup.getFields()) {
+        if (fieldName.equals(formField.getId()) && formField.getValue() != null) {
+          return formField.getValue().toString();
+        }
+      }
+    }
+    return null;
+  }
 
 }

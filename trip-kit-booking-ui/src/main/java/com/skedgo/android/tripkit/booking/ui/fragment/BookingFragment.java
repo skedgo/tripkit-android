@@ -22,7 +22,7 @@ import com.skedgo.android.tripkit.booking.ui.R;
 import com.skedgo.android.tripkit.booking.ui.activity.BookingActivity;
 import com.skedgo.android.tripkit.booking.ui.activity.ExternalProviderAuthActivity;
 import com.skedgo.android.tripkit.booking.ui.viewmodel.ExtendedBookingViewModel;
-import com.skedgo.android.tripkit.booking.viewmodel.BookingViewModel;
+import com.skedgo.android.tripkit.booking.viewmodel.Param;
 import com.squareup.otto.Bus;
 import com.squareup.otto.Subscribe;
 
@@ -56,7 +56,7 @@ public class BookingFragment extends ButterKnifeFragment implements View.OnClick
     }
   };
 
-  public static BookingFragment newInstance(BookingViewModel.Param param) {
+  public static BookingFragment newInstance(Param param) {
     final Bundle args = new Bundle();
     args.putParcelable(KEY_PARAM, param);
 
@@ -129,7 +129,7 @@ public class BookingFragment extends ButterKnifeFragment implements View.OnClick
   public void onActivityCreated(Bundle savedInstanceState) {
     super.onActivityCreated(savedInstanceState);
 
-    BookingViewModel.Param param = null;
+    Param param = null;
 
     if (getArguments().containsKey(KEY_PARAM)) {
       param = getArguments().getParcelable(KEY_PARAM);
@@ -216,9 +216,9 @@ public class BookingFragment extends ButterKnifeFragment implements View.OnClick
 
     viewModel.nextBookingForm()
         .takeUntil(lifecycle().onDestroyView())
-        .subscribe(new Action1<BookingViewModel.Param>() {
+        .subscribe(new Action1<Param>() {
           @Override
-          public void call(BookingViewModel.Param param) {
+          public void call(Param param) {
             showNewBookingForm(param);
           }
         }, errorAction);
@@ -335,7 +335,7 @@ public class BookingFragment extends ButterKnifeFragment implements View.OnClick
         .commit();
   }
 
-  private void showNewBookingForm(BookingViewModel.Param param) {
+  private void showNewBookingForm(Param param) {
     final Intent intent = new Intent(BookingActivity.ACTION_BOOK2);
     intent.putExtra("param", param);
     startActivityForResult(intent, 0);
