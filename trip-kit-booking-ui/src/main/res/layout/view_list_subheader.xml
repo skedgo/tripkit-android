@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<TextView
-  fontPath="@string/font_medium"
-  xmlns:android="http://schemas.android.com/apk/res/android"
+<TextView xmlns:android="http://schemas.android.com/apk/res/android"
   xmlns:tools="http://schemas.android.com/tools"
+  fontPath="@string/font_medium"
   android:layout_width="match_parent"
   android:layout_height="@dimen/v4_booking_form_field_single_line_height"
   android:gravity="center_vertical"
