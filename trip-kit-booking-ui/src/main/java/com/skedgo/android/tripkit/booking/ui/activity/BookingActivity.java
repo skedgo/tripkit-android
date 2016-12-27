@@ -11,8 +11,6 @@ import com.skedgo.android.tripkit.booking.ui.fragment.BookingFragment;
 import com.skedgo.android.tripkit.booking.ui.module.BookingClientComponent;
 import com.skedgo.android.tripkit.booking.ui.module.BookingClientModule;
 import com.skedgo.android.tripkit.booking.ui.module.DaggerBookingClientComponent;
-import com.skedgo.android.tripkit.booking.viewmodel.Param;
-import com.skedgo.android.tripkit.booking.viewmodel.ParamImpl;
 
 import skedgo.anim.AnimatedTransitionActivity;
 import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
@@ -42,7 +40,7 @@ public class BookingActivity extends AnimatedTransitionActivity implements
       final String url = getIntent().getStringExtra(KEY_URL);
       getSupportFragmentManager()
           .beginTransaction()
-          .add(android.R.id.content, BookingFragment.newInstance(ParamImpl.create(url)))
+          .add(android.R.id.content, BookingFragment.newInstance(Param.create(url)))
           .commit();
     } else if (ACTION_BOOK2.equals(action)) {
       final Param param = getIntent().getParcelableExtra("param");

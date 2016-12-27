@@ -22,7 +22,6 @@ import com.skedgo.android.tripkit.booking.ui.R;
 import com.skedgo.android.tripkit.booking.ui.activity.BookingActivity;
 import com.skedgo.android.tripkit.booking.ui.activity.ExternalProviderAuthActivity;
 import com.skedgo.android.tripkit.booking.ui.viewmodel.ExtendedBookingViewModel;
-import com.skedgo.android.tripkit.booking.viewmodel.Param;
 import com.squareup.otto.Bus;
 import com.squareup.otto.Subscribe;
 
