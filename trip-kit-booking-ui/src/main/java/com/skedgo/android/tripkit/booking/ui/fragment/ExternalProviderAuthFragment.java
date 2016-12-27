@@ -7,7 +7,6 @@ import android.support.annotation.Nullable;
 import android.view.View;
 import android.widget.Toast;
 
-import com.skedgo.android.common.util.LogUtils;
 import com.skedgo.android.tripkit.booking.ui.OAuth2CallbackHandler;
 import com.skedgo.android.tripkit.booking.ui.R;
 import com.skedgo.android.tripkit.booking.ui.databinding.ExternalProviderAuthBinding;
@@ -22,7 +21,6 @@ import rx.functions.Action1;
 import skedgo.common.view.ButterKnifeFragment;
 
 public class ExternalProviderAuthFragment extends ButterKnifeFragment {
-  private static final String TAG_EXTERNAL_AUTH = "externalAuth";
   @Inject ExternalProviderAuthViewModel viewModel;
   @Inject OAuth2CallbackHandler oAuth2CallbackHandler;
 
@@ -71,11 +69,9 @@ public class ExternalProviderAuthFragment extends ButterKnifeFragment {
             getActivity().finish();
           }
         }, new Action1<Throwable>() {
-          @Override public void call(Throwable throwable) {
-            Toast.makeText(getActivity(), throwable.getMessage(), Toast.LENGTH_LONG).show();
-            getActivity().setResult(Activity.RESULT_CANCELED);
+          @Override public void call(Throwable error) {
+            Toast.makeText(getActivity(), error.getMessage(), Toast.LENGTH_LONG).show();
             getActivity().finish();
-            LogUtils.LOGE(TAG_EXTERNAL_AUTH, "Error on external provider auth", throwable);
           }
         });
   }
