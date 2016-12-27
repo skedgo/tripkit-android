@@ -29,7 +29,6 @@ public class BookingActivity extends AnimatedTransitionActivity implements
 
   public static Intent newIntent(Param param) {
     final Intent intent = new Intent(BookingActivity.ACTION_BOOK2);
-    intent.setExtrasClassLoader(Param.class.getClassLoader());
     intent.putExtra("param", param);
     return intent;
   }
@@ -43,15 +42,17 @@ public class BookingActivity extends AnimatedTransitionActivity implements
 
     setupActionBar();
 
-    final String action = getIntent().getAction();
+    final Intent intent = getIntent();
+    final String action = intent.getAction();
     if (ACTION_BOOK.equals(action)) {
-      final String url = getIntent().getStringExtra(KEY_URL);
+      final String url = intent.getStringExtra(KEY_URL);
       getSupportFragmentManager()
           .beginTransaction()
           .add(android.R.id.content, BookingFragment.newInstance(Param.create(url)))
           .commit();
     } else if (ACTION_BOOK2.equals(action)) {
-      final Param param = getIntent().getParcelableExtra("param");
+      intent.setExtrasClassLoader(Param.class.getClassLoader());
+      final Param param = intent.getParcelableExtra("param");
       getSupportFragmentManager()
           .beginTransaction()
           .add(android.R.id.content, BookingFragment.newInstance(param))
