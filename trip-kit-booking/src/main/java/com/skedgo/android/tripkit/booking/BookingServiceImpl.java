@@ -16,6 +16,22 @@ public class BookingServiceImpl implements BookingService {
   private final BookingApi bookingApi;
   private final ExternalOAuthStore externalOAuthStore;
   private final Gson gson;
+  @VisibleForTesting Func1<Response<BookingForm>, Observable<BookingForm>> handleBookingResponse =
+      new Func1<Response<BookingForm>, Observable<BookingForm>>() {
+        @Override
+        public Observable<BookingForm> call(final Response<BookingForm> bookingFormResponse) {
+
+          if (!bookingFormResponse.isSuccessful()) {
+            try {
+              BookingError e = asBookingError(bookingFormResponse.errorBody().string());
+              return Observable.error(e);
+            } catch (IOException e) {
+              return Observable.error(e);
+            }
+          }
+          return Observable.just(bookingFormResponse.body());
+        }
+      };
 
   public BookingServiceImpl(BookingApi bookingApi, ExternalOAuthStore externalOAuthStore, Gson gson) {
     this.bookingApi = bookingApi;
@@ -40,21 +56,4 @@ public class BookingServiceImpl implements BookingService {
   @VisibleForTesting BookingError asBookingError(String bookingErrorJson) {
     return gson.fromJson(bookingErrorJson, BookingError.class);
   }
-
-  @VisibleForTesting Func1<Response<BookingForm>, Observable<BookingForm>> handleBookingResponse =
-      new Func1<Response<BookingForm>, Observable<BookingForm>>() {
-        @Override
-        public Observable<BookingForm> call(final Response<BookingForm> bookingFormResponse) {
-
-          if (!bookingFormResponse.isSuccessful()) {
-            try {
-              BookingError e = asBookingError(bookingFormResponse.errorBody().string());
-              return Observable.error(e);
-            } catch (IOException e) {
-              return Observable.error(e);
-            }
-          }
-          return Observable.just(bookingFormResponse.body());
-        }
-      };
 }

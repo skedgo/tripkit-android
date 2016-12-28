@@ -116,7 +116,7 @@ public class BookingViewModelImpl implements BookingViewModel {
   }
 
   @Override public Param paramFrom(BookingForm form) {
-    return ParamImpl.create(form);
+    return Param.create(form);
   }
 
   @Override
@@ -130,12 +130,14 @@ public class BookingViewModelImpl implements BookingViewModel {
       @Override
       public void call(Boolean isSuccessful) {
         if (isSuccessful) {
-          loadForm(param).subscribe(Actions.empty(),
-                                    new Action1<Throwable>() {
-                                      @Override
-                                      public void call(Throwable error) {
-                                      }
-                                    });
+          loadForm(param).subscribe(
+              Actions.empty(),
+              new Action1<Throwable>() {
+                @Override
+                public void call(Throwable error) {
+                }
+              }
+          );
         }
       }
     });
@@ -153,13 +155,13 @@ public class BookingViewModelImpl implements BookingViewModel {
       }
       return Observable.just(true);
     }
-    nextBookingForm.put(ParamImpl.create(bookingForm.getAction(), postPody));
+    nextBookingForm.put(Param.create(bookingForm.getAction(), postPody));
     return Observable.just(false);
   }
 
   @Override
   public Observable<Boolean> performAction(LinkFormField linkFormField) {
-    nextBookingForm.put(ParamImpl.create(linkFormField));
+    nextBookingForm.put(Param.create(linkFormField));
     return Observable.just(false);
   }
 

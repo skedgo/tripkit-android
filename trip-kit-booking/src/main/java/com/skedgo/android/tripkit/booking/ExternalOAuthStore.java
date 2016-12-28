@@ -5,7 +5,7 @@ import rx.Single;
 
 public interface ExternalOAuthStore {
 
-  Observable<ExternalOAuth> updateExternalOauth (ExternalOAuth externalOAuth);
-  Single<ExternalOAuth> getExternalOauth (String authId);
+  Observable<ExternalOAuth> updateExternalOauth(ExternalOAuth externalOAuth);
+  Single<ExternalOAuth> getExternalOauth(String authId);
 
 }

@@ -1,65 +1,69 @@
 package com.skedgo.android.tripkit.booking.ui.activity;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
-import android.support.v4.app.FragmentManager;
 import android.support.v7.app.ActionBar;
 import android.view.MenuItem;
-import android.widget.Toast;
 
-import com.skedgo.android.tripkit.booking.ui.R;
+import com.skedgo.android.tripkit.booking.BookingForm;
+import com.skedgo.android.tripkit.booking.ui.BookingUiComponent;
+import com.skedgo.android.tripkit.booking.ui.BookingUiModule;
+import com.skedgo.android.tripkit.booking.ui.DaggerBookingUiComponent;
 import com.skedgo.android.tripkit.booking.ui.fragment.BookingFormFragment;
 import com.skedgo.android.tripkit.booking.ui.fragment.BookingFragment;
-import com.skedgo.android.tripkit.booking.ui.module.BookingClientComponent;
-import com.skedgo.android.tripkit.booking.ui.module.BookingClientModule;
-import com.skedgo.android.tripkit.booking.ui.module.DaggerBookingClientComponent;
-import com.skedgo.android.tripkit.booking.BookingForm;
-import com.skedgo.android.tripkit.booking.viewmodel.BookingViewModel;
-import com.skedgo.android.tripkit.booking.viewmodel.ParamImpl;
+import com.skedgo.android.tripkit.booking.viewmodel.Param;
 
 import skedgo.anim.AnimatedTransitionActivity;
 import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 
 public class BookingActivity extends AnimatedTransitionActivity implements
-    FragmentManager.OnBackStackChangedListener, BookingFormFragment.BookingFormFragmentListener {
+    BookingFormFragment.BookingFormFragmentListener {
   public static final String ACTION_BOOK = "com.skedgo.android.tripkit.booking.ui.ACTION_BOOK";
-  public static final String ACTION_BOOK2 = "com.skedgo.android.tripkit.booking.ui.ACTION_BOOK2";
   public static final String KEY_URL = "url";
   public static final String KEY_FIRST_SCREEN = "firstScreen";
   public static final String KEY_BOOKING_BUNDLE = "bookingBundle";
   public static final String KEY_BOOKING_FORM = "bookingForm";
+  public static final String ACTION_BOOK2 = "com.skedgo.android.tripkit.booking.ui.ACTION_BOOK2";
+  private BookingUiComponent component;
 
-  public BookingClientComponent component;
+  public static Intent newIntent(Context context, Param param) {
+    final Intent intent = new Intent(BookingActivity.ACTION_BOOK2);
 
-  @Override protected void attachBaseContext(Context newBase) {
-    super.attachBaseContext(CalligraphyContextWrapper.wrap(newBase));
+    // Limits the components that will resolve this Intent
+    // to those within the app utilizing this library.
+    // Otherwise, the app will run into this issue
+    // https://github.com/skedgo/tripgo-android/issues/1689
+    // that would crash android system process.
+    intent.setPackage(context.getPackageName());
+    intent.putExtra("param", param);
+    return intent;
   }
 
-  @Override
-  public void onCreate(Bundle savedInstanceState) {
+  @Override public void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
-
-    component = DaggerBookingClientComponent.builder()
-        .bookingClientModule(new BookingClientModule(getApplicationContext()))
+    component = DaggerBookingUiComponent.builder()
+        .bookingUiModule(new BookingUiModule(getApplicationContext()))
         .build();
 
     setupActionBar();
 
-    if (ACTION_BOOK.equals(getIntent().getAction())) {
-      final String url = getIntent().getStringExtra(KEY_URL);
+    final Intent intent = getIntent();
+    final String action = intent.getAction();
+    if (ACTION_BOOK.equals(action)) {
+      final String url = intent.getStringExtra(KEY_URL);
       getSupportFragmentManager()
           .beginTransaction()
-          .add(android.R.id.content, BookingFragment.newInstance(ParamImpl.create(url)))
+          .add(android.R.id.content, BookingFragment.newInstance(Param.create(url)))
           .commit();
-    } else if (ACTION_BOOK2.equals(getIntent().getAction())) {
-      final BookingViewModel.Param param = getIntent().getParcelableExtra("param");
+    } else if (ACTION_BOOK2.equals(action)) {
+      final Param param = intent.getParcelableExtra("param");
       getSupportFragmentManager()
           .beginTransaction()
           .add(android.R.id.content, BookingFragment.newInstance(param))
           .commit();
     } else {
-      Toast.makeText(this, "Undefined action", Toast.LENGTH_SHORT).show();
-      finish();
+      throw new IllegalStateException("Unknown action: " + action);
     }
   }
 
@@ -81,34 +85,21 @@ public class BookingActivity extends AnimatedTransitionActivity implements
     }
   }
 
-  @Override
-  public void onBackStackChanged() {
-    if (getSupportFragmentManager().getBackStackEntryCount() > 0) {
-      getSupportActionBar().setHomeAsUpIndicator(0); // 0 means default
-    } else {
-      getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_cross);
-    }
-  }
-
-  public BookingClientComponent getBookingClientComponent() {
+  public BookingUiComponent getBookingClientComponent() {
     return component;
   }
 
-  public void reportProblem() {
+  public void reportProblem() {}
 
+  @Override protected void attachBaseContext(Context newBase) {
+    super.attachBaseContext(CalligraphyContextWrapper.wrap(newBase));
   }
 
   private void setupActionBar() {
-    ActionBar actionBar = getSupportActionBar();
+    final ActionBar actionBar = getSupportActionBar();
     if (actionBar != null) {
       actionBar.setDisplayShowHomeEnabled(true);
       actionBar.setDisplayHomeAsUpEnabled(true);
-      if (getIntent().getBooleanExtra(KEY_FIRST_SCREEN, false)) {
-        actionBar.setHomeAsUpIndicator(R.drawable.ic_cross);
-        getSupportFragmentManager().addOnBackStackChangedListener(this);
-      }
     }
   }
-
 }
-

@@ -28,7 +28,8 @@ public class ExternalOAuthStoreImpl implements ExternalOAuthStore {
     this.entityAdapter = entityAdapter;
   }
 
-  @Override public Observable<ExternalOAuth> updateExternalOauth(final ExternalOAuth externalOAuth) {
+  @Override
+  public Observable<ExternalOAuth> updateExternalOauth(final ExternalOAuth externalOAuth) {
     return Observable
         .fromCallable(new Callable<ExternalOAuth>() {
           @Override public ExternalOAuth call() throws Exception {

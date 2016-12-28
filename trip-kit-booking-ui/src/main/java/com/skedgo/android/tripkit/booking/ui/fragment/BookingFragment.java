@@ -22,7 +22,7 @@ import com.skedgo.android.tripkit.booking.ui.R;
 import com.skedgo.android.tripkit.booking.ui.activity.BookingActivity;
 import com.skedgo.android.tripkit.booking.ui.activity.ExternalProviderAuthActivity;
 import com.skedgo.android.tripkit.booking.ui.viewmodel.ExtendedBookingViewModel;
-import com.skedgo.android.tripkit.booking.viewmodel.BookingViewModel;
+import com.skedgo.android.tripkit.booking.viewmodel.Param;
 import com.squareup.otto.Bus;
 import com.squareup.otto.Subscribe;
 
@@ -40,9 +40,6 @@ public class BookingFragment extends ButterKnifeFragment implements View.OnClick
   private static final String EXTRA_DONE = "done";
 
   private static final int RQ_EXTERNAL = 1;
-
-  @Nullable private BookingForm bookingForm = null;
-
   @Inject ExtendedBookingViewModel viewModel;
   @Inject Bus bus;
   ProgressBar progressView;
@@ -50,7 +47,7 @@ public class BookingFragment extends ButterKnifeFragment implements View.OnClick
   TextView backButton;
   TextView errorTitleView;
   TextView errorMessageView;
-
+  @Nullable private BookingForm bookingForm = null;
   private Action1<Throwable> errorAction = new Action1<Throwable>() {
     @Override
     public void call(Throwable error) {
@@ -59,7 +56,7 @@ public class BookingFragment extends ButterKnifeFragment implements View.OnClick
     }
   };
 
-  public static BookingFragment newInstance(BookingViewModel.Param param) {
+  public static BookingFragment newInstance(Param param) {
     final Bundle args = new Bundle();
     args.putParcelable(KEY_PARAM, param);
 
@@ -93,7 +90,6 @@ public class BookingFragment extends ButterKnifeFragment implements View.OnClick
     if (getActivity() instanceof BookingActivity) {
       ((BookingActivity) getActivity()).getBookingClientComponent().inject(this);
     }
-
   }
 
   @Override
@@ -132,7 +128,7 @@ public class BookingFragment extends ButterKnifeFragment implements View.OnClick
   public void onActivityCreated(Bundle savedInstanceState) {
     super.onActivityCreated(savedInstanceState);
 
-    BookingViewModel.Param param = null;
+    Param param = null;
 
     if (getArguments().containsKey(KEY_PARAM)) {
       param = getArguments().getParcelable(KEY_PARAM);
@@ -156,7 +152,6 @@ public class BookingFragment extends ButterKnifeFragment implements View.OnClick
     if (param != null) {
       hudTextView.setText(param.getHudText());
     }
-
   }
 
   @Override
@@ -219,10 +214,9 @@ public class BookingFragment extends ButterKnifeFragment implements View.OnClick
 
     viewModel.nextBookingForm()
         .takeUntil(lifecycle().onDestroyView())
-        .subscribe(new Action1<BookingViewModel.Param>() {
-          @Override
-          public void call(BookingViewModel.Param param) {
-            showNewBookingForm(param);
+        .subscribe(new Action1<Param>() {
+          @Override public void call(Param param) {
+            startActivityForResult(BookingActivity.newIntent(getActivity(), param), 0);
           }
         }, errorAction);
 
@@ -247,7 +241,6 @@ public class BookingFragment extends ButterKnifeFragment implements View.OnClick
     } else {
       viewModel.performAction(linkField).subscribe();
     }
-
   }
 
   @Subscribe
@@ -275,7 +268,6 @@ public class BookingFragment extends ButterKnifeFragment implements View.OnClick
         }
         getActivity().finish();
       }
-
     } else if (data != null && data.getBooleanExtra(EXTRA_DONE, false)) {
       Intent done = new Intent();
       done.putExtra(EXTRA_DONE, true);
@@ -321,7 +313,6 @@ public class BookingFragment extends ButterKnifeFragment implements View.OnClick
   }
 
   private void showBookingForm(BookingForm form) {
-
     this.bookingForm = form;
 
     final Fragment oldFragment = getFragmentManager().findFragmentByTag(TAG_BOOKING_FORM);
@@ -336,11 +327,5 @@ public class BookingFragment extends ButterKnifeFragment implements View.OnClick
         .beginTransaction()
         .add(android.R.id.content, BookingFormFragment.newInstance(form), TAG_BOOKING_FORM)
         .commit();
-  }
-
-  private void showNewBookingForm(BookingViewModel.Param param) {
-    final Intent intent = new Intent(BookingActivity.ACTION_BOOK2);
-    intent.putExtra("param", param);
-    startActivityForResult(intent, 0);
   }
 }

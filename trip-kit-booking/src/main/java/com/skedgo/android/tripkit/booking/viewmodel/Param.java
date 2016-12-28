@@ -8,14 +8,14 @@ import com.skedgo.android.tripkit.booking.BookingForm;
 import com.skedgo.android.tripkit.booking.InputForm;
 import com.skedgo.android.tripkit.booking.LinkFormField;
 
-public final class ParamImpl implements BookingViewModel.Param {
-  public static final Parcelable.Creator<ParamImpl> CREATOR = new Parcelable.Creator<ParamImpl>() {
-    public ParamImpl createFromParcel(Parcel in) {
-      return new ParamImpl(in);
+public class Param implements Parcelable {
+  public static final Parcelable.Creator<Param> CREATOR = new Parcelable.Creator<Param>() {
+    public Param createFromParcel(Parcel in) {
+      return new Param(in);
     }
 
-    public ParamImpl[] newArray(int size) {
-      return new ParamImpl[size];
+    public Param[] newArray(int size) {
+      return new Param[size];
     }
   };
 
@@ -24,54 +24,50 @@ public final class ParamImpl implements BookingViewModel.Param {
   private final InputForm postBody;
   private final String method;
 
-  private ParamImpl(String url, String method, String hudText, InputForm postBody) {
+  private Param(String url, String method, String hudText, InputForm postBody) {
     this.url = url;
     this.hudText = hudText;
     this.postBody = postBody;
     this.method = method;
   }
 
-  public ParamImpl(Parcel in) {
+  public Param(Parcel in) {
     url = in.readString();
     hudText = in.readString();
     method = in.readString();
     postBody = in.readParcelable(InputForm.class.getClassLoader());
   }
 
-  public static ParamImpl create(String url) {
-    return new ParamImpl(url, LinkFormField.METHOD_GET, null, null);
+  public static Param create(String url) {
+    return new Param(url, LinkFormField.METHOD_GET, null, null);
   }
 
-  public static ParamImpl create(BookingAction bookingAction, InputForm postBody) {
-    return new ParamImpl(bookingAction.getUrl(), LinkFormField.METHOD_POST, bookingAction.getHudText(), postBody);
+  public static Param create(BookingAction bookingAction, InputForm postBody) {
+    return new Param(bookingAction.getUrl(), LinkFormField.METHOD_POST, bookingAction.getHudText(), postBody);
   }
 
-  public static ParamImpl create(LinkFormField linkFormField) {
+  public static Param create(LinkFormField linkFormField) {
     final InputForm postBody = linkFormField.getMethod().equals(LinkFormField.METHOD_POST) ? new InputForm() : null;
-    return new ParamImpl(linkFormField.getValue(), linkFormField.getMethod(), null, postBody);
+    return new Param(linkFormField.getValue(), linkFormField.getMethod(), null, postBody);
   }
 
-  public static ParamImpl create(BookingForm form) {
+  public static Param create(BookingForm form) {
     final InputForm postBody = InputForm.from(form.getForm());
-    return new ParamImpl(form.getAction().getUrl(), LinkFormField.METHOD_POST, null, postBody);
+    return new Param(form.getAction().getUrl(), LinkFormField.METHOD_POST, null, postBody);
   }
 
-  @Override
   public String getMethod() {
     return method;
   }
 
-  @Override
   public String getUrl() {
     return url;
   }
 
-  @Override
   public String getHudText() {
     return hudText;
   }
 
-  @Override
   public InputForm postBody() {
     return postBody;
   }

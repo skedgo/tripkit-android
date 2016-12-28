@@ -42,7 +42,7 @@ public class BookingViewModelImplTest {
   private BookingViewModel bookingViewModel;
   private BookingService api;
   private InputForm inputForm;
-  private BookingViewModel.Param param;
+  private Param param;
 
   @Test public void fetchNextBookingFormIfAuthenticationSucceeds() {
     when(api.getFormAsync(param.getUrl()))
@@ -86,7 +86,7 @@ public class BookingViewModelImplTest {
     when(api.getFormAsync("url"))
         .thenReturn(Observable.just(bookingForm));
 
-    bookingViewModel.loadForm(ParamImpl.create("url")).toBlocking().single();
+    bookingViewModel.loadForm(Param.create("url")).toBlocking().single();
     BookingForm actual = bookingViewModel.bookingForm().toBlocking().first();
     assertThat(actual.getId()).isEqualTo("2");
   }
@@ -111,9 +111,9 @@ public class BookingViewModelImplTest {
     bookingAction.setUrl("url2");
     bookingFormItem.setAction(bookingAction);
     bookingViewModel.performAction(bookingFormItem).toBlocking().single();
-    bookingViewModel.nextBookingForm().subscribe(new Action1<BookingViewModel.Param>() {
+    bookingViewModel.nextBookingForm().subscribe(new Action1<Param>() {
       @Override
-      public void call(BookingViewModel.Param param) {
+      public void call(Param param) {
         assertThat(param.getUrl()).isEqualTo("url2");
         assertThat(param.postBody().input()).isNotNull();
         assertThat(param.postBody().input()).hasSize(4);
@@ -144,7 +144,7 @@ public class BookingViewModelImplTest {
         }));
 
     try {
-      bookingViewModel.loadForm(ParamImpl.create("http://facebook.github.io/stetho/"))
+      bookingViewModel.loadForm(Param.create("http://facebook.github.io/stetho/"))
           .toBlocking().single();
     } catch (Exception e) {
       Assertions.fail("Retry fetching booking form 3 times on any failure", e);
@@ -216,6 +216,6 @@ public class BookingViewModelImplTest {
     inputForm = InputForm.from(new ArrayList<FormGroup>());
     final BookingAction bookingAction = new BookingAction();
     bookingAction.setUrl("url");
-    param = ParamImpl.create(bookingAction, inputForm);
+    param = Param.create(bookingAction, inputForm);
   }
 }

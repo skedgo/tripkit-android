@@ -9,8 +9,6 @@ import org.junit.Test;
 
 import java.io.IOException;
 import java.nio.charset.Charset;
-import java.util.Arrays;
-import java.util.List;
 
 import okhttp3.mockwebserver.MockResponse;
 import okhttp3.mockwebserver.MockWebServer;
@@ -18,8 +16,6 @@ import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
 import rx.observers.TestSubscriber;
-
-import static org.assertj.core.api.Assertions.assertThat;
 
 public class ExternalOAuthApiTest {
 
@@ -59,12 +55,12 @@ public class ExternalOAuthApiTest {
         .build();
 
     TestSubscriber<AccessTokenResponse> subscriber = new TestSubscriber<>();
-    externalOAuthApi.getAccessToken("", "", "","","","")
+    externalOAuthApi.getAccessToken("", "", "", "", "", "")
         .subscribe(subscriber);
     subscriber.awaitTerminalEvent();
 
     subscriber.assertNoErrors();
     subscriber.assertValue(attractionsResponse);
-  
+
   }
 }

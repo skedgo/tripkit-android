@@ -6,9 +6,6 @@ import org.immutables.value.Value;
 
 import java.util.UUID;
 
-import static org.immutables.value.Value.Style.BuilderVisibility.PACKAGE;
-import static org.immutables.value.Value.Style.ImplementationVisibility.PRIVATE;
-
 @Value.Immutable
 public abstract class ExternalOAuth {
 
@@ -20,5 +17,5 @@ public abstract class ExternalOAuth {
   @Value.Default public String id() {
     return UUID.randomUUID().toString();
   }
-  
+
 }

@@ -10,8 +10,6 @@ import java.util.List;
 import okhttp3.HttpUrl;
 import retrofit2.http.Url;
 import rx.Observable;
-import rx.functions.Action0;
-import rx.functions.Action1;
 import rx.functions.Func1;
 
 final class AuthServiceImpl implements AuthService {
@@ -21,7 +19,8 @@ final class AuthServiceImpl implements AuthService {
     this.api = api;
   }
 
-  @Override public Observable<List<AuthProvider>> fetchProvidersByRegionAsync(@NonNull final Region region, @Nullable final String mode) {
+  @Override
+  public Observable<List<AuthProvider>> fetchProvidersByRegionAsync(@NonNull final Region region, @Nullable final String mode) {
     return Observable.from(region.getURLs())
         .concatMapDelayError(new Func1<String, Observable<? extends List<AuthProvider>>>() {
           @Override public Observable<? extends List<AuthProvider>> call(String url) {

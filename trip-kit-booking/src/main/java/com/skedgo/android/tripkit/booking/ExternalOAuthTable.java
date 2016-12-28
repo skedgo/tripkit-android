@@ -15,7 +15,8 @@ public class ExternalOAuthTable {
   public static final DatabaseTable EXTERNAL_AUTHS = new DatabaseTable(
       "external_auths",
       new DatabaseField[] {ID, AUTH_SERVICE_ID, TOKEN, REFRESH_TOKEN, EXPIRES_IN},
-      UniqueIndices.of("external_auths", AUTH_SERVICE_ID));
+      UniqueIndices.of("external_auths", AUTH_SERVICE_ID)
+  );
 
   private ExternalOAuthTable() {}
 }
