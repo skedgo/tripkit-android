@@ -24,17 +24,23 @@ public class BookingActivity extends AnimatedTransitionActivity implements
   public static final String KEY_FIRST_SCREEN = "firstScreen";
   public static final String KEY_BOOKING_BUNDLE = "bookingBundle";
   public static final String KEY_BOOKING_FORM = "bookingForm";
-  private static final String ACTION_BOOK2 = "com.skedgo.android.tripkit.booking.ui.ACTION_BOOK2";
-  public BookingClientComponent component;
+  public static final String ACTION_BOOK2 = "com.skedgo.android.tripkit.booking.ui.ACTION_BOOK2";
+  private BookingClientComponent component;
 
-  public static Intent newIntent(Param param) {
+  public static Intent newIntent(Context context, Param param) {
     final Intent intent = new Intent(BookingActivity.ACTION_BOOK2);
+
+    // Limits the components that will resolve this Intent
+    // to those within the app utilizing this library.
+    // Otherwise, the app will run into this issue
+    // https://github.com/skedgo/tripgo-android/issues/1689
+    // that would crash android system process.
+    intent.setPackage(context.getPackageName());
     intent.putExtra("param", param);
     return intent;
   }
 
-  @Override
-  public void onCreate(Bundle savedInstanceState) {
+  @Override public void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     component = DaggerBookingClientComponent.builder()
         .bookingClientModule(new BookingClientModule(getApplicationContext()))
@@ -51,7 +57,6 @@ public class BookingActivity extends AnimatedTransitionActivity implements
           .add(android.R.id.content, BookingFragment.newInstance(Param.create(url)))
           .commit();
     } else if (ACTION_BOOK2.equals(action)) {
-      intent.setExtrasClassLoader(Param.class.getClassLoader());
       final Param param = intent.getParcelableExtra("param");
       getSupportFragmentManager()
           .beginTransaction()

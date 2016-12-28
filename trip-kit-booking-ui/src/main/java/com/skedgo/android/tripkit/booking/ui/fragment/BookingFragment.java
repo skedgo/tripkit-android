@@ -90,7 +90,6 @@ public class BookingFragment extends ButterKnifeFragment implements View.OnClick
     if (getActivity() instanceof BookingActivity) {
       ((BookingActivity) getActivity()).getBookingClientComponent().inject(this);
     }
-
   }
 
   @Override
@@ -217,7 +216,7 @@ public class BookingFragment extends ButterKnifeFragment implements View.OnClick
         .takeUntil(lifecycle().onDestroyView())
         .subscribe(new Action1<Param>() {
           @Override public void call(Param param) {
-            startActivityForResult(BookingActivity.newIntent(param), 0);
+            startActivityForResult(BookingActivity.newIntent(getActivity(), param), 0);
           }
         }, errorAction);
 
@@ -242,7 +241,6 @@ public class BookingFragment extends ButterKnifeFragment implements View.OnClick
     } else {
       viewModel.performAction(linkField).subscribe();
     }
-
   }
 
   @Subscribe
@@ -270,7 +268,6 @@ public class BookingFragment extends ButterKnifeFragment implements View.OnClick
         }
         getActivity().finish();
       }
-
     } else if (data != null && data.getBooleanExtra(EXTRA_DONE, false)) {
       Intent done = new Intent();
       done.putExtra(EXTRA_DONE, true);
