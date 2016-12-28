@@ -14,11 +14,11 @@ public class TestRunner extends RobolectricTestRunner {
 
   @Override protected AndroidManifest getAppManifest(Config config) {
     // After upgrading to gradle plugin v2.2.0, the file path of
-    // the AM file no longer contained `full` but `aapt`.
+    // the AM file no longer contains `full` but `aapt`.
     // As a result, the RobolectricTestRunner complained
-    // that it didn't find the AM file, resulting a bunch of failures.
+    // that it didn't find the AM file, resulting in a bunch of failures.
     // So this patch was born to fix that issue. Note that it might be
-    // incompatible w/ future release of Robolectric.
+    // incompatible w/ future releases of Robolectric.
     final AndroidManifest appManifest = super.getAppManifest(config);
     final FsFile androidManifestFile = appManifest.getAndroidManifestFile();
     final String androidManifestFilePath = androidManifestFile.getPath().replace("full", "aapt");

@@ -1,11 +1,12 @@
-package com.skedgo.android.tripkit.booking;
+package com.skedgo.android.tripkit.booking.mybookings;
 
 import retrofit2.http.GET;
 import retrofit2.http.Query;
 import rx.Observable;
 
 public interface MyBookingsApi {
-  @GET("booking") Observable<MyBookingsResponse> getMyBookingsAsync(
+  @GET("booking")
+  Observable<MyBookingsResponse> fetchMyBookingsAsync(
       @Query("first") int first,
       @Query("max") int pageSize
   );

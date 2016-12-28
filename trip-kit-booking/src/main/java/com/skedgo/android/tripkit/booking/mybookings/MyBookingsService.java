@@ -1,4 +1,4 @@
-package com.skedgo.android.tripkit.booking;
+package com.skedgo.android.tripkit.booking.mybookings;
 
 import com.skedgo.android.common.model.BookingConfirmation;
 
@@ -15,10 +15,10 @@ public class MyBookingsService {
   }
 
   public Observable<List<BookingConfirmation>> getMyBookingsAsync(int first, int pageSize) {
-    return api.getMyBookingsAsync(first, pageSize)
+    return api.fetchMyBookingsAsync(first, pageSize)
         .map(new Func1<MyBookingsResponse, List<BookingConfirmation>>() {
-          @Override public List<BookingConfirmation> call(MyBookingsResponse bookingsResponse) {
-            return bookingsResponse.bookings();
+          @Override public List<BookingConfirmation> call(MyBookingsResponse response) {
+            return response.bookings();
           }
         });
   }
