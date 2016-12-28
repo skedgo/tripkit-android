@@ -7,11 +7,11 @@ import android.support.annotation.Nullable;
 import android.view.View;
 import android.widget.Toast;
 
+import com.skedgo.android.tripkit.booking.ui.BookingUiModule;
+import com.skedgo.android.tripkit.booking.ui.DaggerBookingUiComponent;
 import com.skedgo.android.tripkit.booking.ui.OAuth2CallbackHandler;
 import com.skedgo.android.tripkit.booking.ui.R;
 import com.skedgo.android.tripkit.booking.ui.databinding.ExternalProviderAuthBinding;
-import com.skedgo.android.tripkit.booking.ui.module.BookingClientModule;
-import com.skedgo.android.tripkit.booking.ui.module.DaggerBookingClientComponent;
 import com.skedgo.android.tripkit.booking.ui.viewmodel.ExternalProviderAuthViewModel;
 
 import javax.inject.Inject;
@@ -34,8 +34,8 @@ public class ExternalProviderAuthFragment extends ButterKnifeFragment {
   public void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setContentLayout(R.layout.external_provider_auth);
-    DaggerBookingClientComponent.builder()
-        .bookingClientModule(new BookingClientModule(getContext().getApplicationContext()))
+    DaggerBookingUiComponent.builder()
+        .bookingUiModule(new BookingUiModule(getContext().getApplicationContext()))
         .build()
         .inject(this);
   }

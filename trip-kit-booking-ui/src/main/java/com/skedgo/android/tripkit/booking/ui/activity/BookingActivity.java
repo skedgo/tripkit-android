@@ -7,11 +7,11 @@ import android.support.v7.app.ActionBar;
 import android.view.MenuItem;
 
 import com.skedgo.android.tripkit.booking.BookingForm;
+import com.skedgo.android.tripkit.booking.ui.BookingUiComponent;
+import com.skedgo.android.tripkit.booking.ui.BookingUiModule;
+import com.skedgo.android.tripkit.booking.ui.DaggerBookingUiComponent;
 import com.skedgo.android.tripkit.booking.ui.fragment.BookingFormFragment;
 import com.skedgo.android.tripkit.booking.ui.fragment.BookingFragment;
-import com.skedgo.android.tripkit.booking.ui.module.BookingClientComponent;
-import com.skedgo.android.tripkit.booking.ui.module.BookingClientModule;
-import com.skedgo.android.tripkit.booking.ui.module.DaggerBookingClientComponent;
 import com.skedgo.android.tripkit.booking.viewmodel.Param;
 
 import skedgo.anim.AnimatedTransitionActivity;
@@ -25,7 +25,7 @@ public class BookingActivity extends AnimatedTransitionActivity implements
   public static final String KEY_BOOKING_BUNDLE = "bookingBundle";
   public static final String KEY_BOOKING_FORM = "bookingForm";
   public static final String ACTION_BOOK2 = "com.skedgo.android.tripkit.booking.ui.ACTION_BOOK2";
-  private BookingClientComponent component;
+  private BookingUiComponent component;
 
   public static Intent newIntent(Context context, Param param) {
     final Intent intent = new Intent(BookingActivity.ACTION_BOOK2);
@@ -42,8 +42,8 @@ public class BookingActivity extends AnimatedTransitionActivity implements
 
   @Override public void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
-    component = DaggerBookingClientComponent.builder()
-        .bookingClientModule(new BookingClientModule(getApplicationContext()))
+    component = DaggerBookingUiComponent.builder()
+        .bookingUiModule(new BookingUiModule(getApplicationContext()))
         .build();
 
     setupActionBar();
@@ -85,7 +85,7 @@ public class BookingActivity extends AnimatedTransitionActivity implements
     }
   }
 
-  public BookingClientComponent getBookingClientComponent() {
+  public BookingUiComponent getBookingClientComponent() {
     return component;
   }
 

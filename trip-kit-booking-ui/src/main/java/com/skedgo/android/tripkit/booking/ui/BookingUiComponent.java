@@ -1,4 +1,4 @@
-package com.skedgo.android.tripkit.booking.ui.module;
+package com.skedgo.android.tripkit.booking.ui;
 
 import com.skedgo.android.tripkit.booking.BookingModule;
 import com.skedgo.android.tripkit.booking.ui.activity.BookingActivity;
@@ -12,10 +12,10 @@ import dagger.Component;
 
 @Singleton
 @Component(modules = {
-    BookingClientModule.class,
+    BookingUiModule.class,
     BookingModule.class
 })
-public interface BookingClientComponent {
+public interface BookingUiComponent {
   void inject(BookingActivity activity);
   void inject(ExternalProviderAuthFragment fragment);
   void inject(BookingFragment fragment);
