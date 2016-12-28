@@ -1,13 +1,10 @@
-package com.skedgo.android.tripkit.booking.ui.module;
+package com.skedgo.android.tripkit.booking.ui;
 
 import android.content.Context;
 import android.util.Log;
 
 import com.google.gson.Gson;
 import com.jakewharton.picasso.OkHttp3Downloader;
-import com.skedgo.android.tripkit.booking.ui.BuildConfig;
-import com.skedgo.android.tripkit.booking.ui.OAuth2CallbackHandler;
-import com.skedgo.android.tripkit.booking.ui.OAuth2CallbackHandlerImpl;
 import com.skedgo.android.common.util.Gsons;
 import com.skedgo.android.common.util.MainThreadBus;
 import com.skedgo.android.tripkit.TripKit;
@@ -24,45 +21,47 @@ import okhttp3.OkHttpClient;
 import rx.functions.Action1;
 
 @Module
-public class BookingClientModule {
-
-  private static final String TAG = "bookingclient";
-
+public class BookingUiModule {
   private final Context appContext;
 
-  public BookingClientModule(Context context) {
+  public BookingUiModule(Context context) {
     this.appContext = context;
   }
 
-  @Provides Context provideContext() { return appContext;}
+  @Provides Context context() {
+    return appContext;
+  }
 
-  @Provides OkHttpClient provideHttpClient() {
+  @Provides OkHttpClient httpClient() {
     return TripKit.singleton().getOkHttpClient3();
   }
 
-  @Provides Gson provideGson() {
+  @Provides Gson gson() {
     return Gsons.createForLowercaseEnum();
   }
 
-  @Provides @Singleton Bus provideBus() {
+  @Provides @Singleton Bus bus() {
     return new MainThreadBus(new Action1<Throwable>() {
       @Override public void call(Throwable error) {
         if (BuildConfig.DEBUG) {
-          Log.e(TAG, null, error);
+          Log.e(MainThreadBus.class.getSimpleName(), error.getMessage(), error);
         }
       }
     });
   }
 
-  @Provides @Singleton Picasso picasso(
+  @Provides @Singleton
+  Picasso picasso(
       Context context,
-      okhttp3.OkHttpClient httpClient) {
+      OkHttpClient httpClient) {
     return new Picasso.Builder(context)
         .downloader(new OkHttp3Downloader(httpClient))
         .build();
   }
 
-  @Provides OAuth2CallbackHandler getOAuth2CallbackHandler(ExternalOAuthService externalOAuthService, BookingService bookingService) {
+  @Provides OAuth2CallbackHandler oAuth2CallbackHandler(
+      ExternalOAuthService externalOAuthService,
+      BookingService bookingService) {
     return new OAuth2CallbackHandlerImpl(externalOAuthService, bookingService);
   }
 }

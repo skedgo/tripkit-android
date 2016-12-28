@@ -23,10 +23,10 @@ import static org.mockito.Mockito.when;
 @RunWith(TestRunner.class)
 @Config(constants = BuildConfig.class)
 public class BookingServiceTest {
-  private Gson gson;
-  private BookingServiceImpl service;
   @Mock BookingApi bookingApi;
   @Mock ExternalOAuthStore externalOAuthStore;
+  private Gson gson;
+  private BookingServiceImpl service;
 
   @Before public void before() {
     MockitoAnnotations.initMocks(this);

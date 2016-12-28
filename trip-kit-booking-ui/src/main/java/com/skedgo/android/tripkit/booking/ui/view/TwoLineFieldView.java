@@ -19,8 +19,6 @@ public class TwoLineFieldView extends RelativeLayout {
   private ImageView imageView;
   private View dividerView;
 
-
-
   public TwoLineFieldView(Context context) {
     super(context);
   }

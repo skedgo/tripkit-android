@@ -4,12 +4,10 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 
-
+import com.skedgo.android.tripkit.booking.BookingForm;
 import com.skedgo.android.tripkit.booking.ui.BuildConfig;
 import com.skedgo.android.tripkit.booking.ui.OAuth2CallbackHandler;
 import com.skedgo.android.tripkit.booking.ui.TestRunner;
-import com.skedgo.android.tripkit.booking.ui.viewmodel.ExternalProviderAuthViewModel;
-import com.skedgo.android.tripkit.booking.BookingForm;
 
 import org.junit.Before;
 import org.junit.Test;

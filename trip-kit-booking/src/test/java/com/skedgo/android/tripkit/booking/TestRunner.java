@@ -7,7 +7,7 @@ import org.robolectric.manifest.AndroidManifest;
 import org.robolectric.res.FileFsFile;
 import org.robolectric.res.FsFile;
 
-public class TestRunner  extends RobolectricTestRunner {
+public class TestRunner extends RobolectricTestRunner {
   public TestRunner(Class<?> klass) throws InitializationError {
     super(klass);
   }

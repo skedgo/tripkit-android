@@ -44,11 +44,13 @@ public class ExternalOAuthServiceTest {
 
     ExternalOAuthApi externalOAuthApi = mock(ExternalOAuthApi.class);
     when(externalOAuthApi.getAccessToken("clientSecret", "clientId", "code",
-                                         "authorization_code", "callback", "scope"))
+                                         "authorization_code", "callback", "scope"
+    ))
         .thenReturn(Observable.just(accessTokenResponse));
 
     when(externalOAuthServiceGenerator.createService("baseUrl", "clientId",
-                                                     "clientSecret", false))
+                                                     "clientSecret", false
+    ))
         .thenReturn(externalOAuthApi);
 
     ExternalOAuth externalOAuth = mock(ExternalOAuth.class);

@@ -23,13 +23,15 @@
     android:textColor="@color/v4_description_text"
     android:textSize="14sp"
     tools:text="SideTitle" />
+
   <LinearLayout
     android:id="@id/titleL"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:orientation="vertical"
     android:layout_alignBottom="@+id/editText"
-    android:layout_alignTop="@id/editText">
+    android:layout_alignTop="@id/editText"
+    android:orientation="vertical">
+
     <TextView
       android:id="@+id/titleView"
       style="@style/TextStyleTitle"
@@ -37,6 +39,7 @@
       android:layout_height="wrap_content"
       android:gravity="center_vertical"
       tools:text="Title" />
+
     <TextView
       android:id="@+id/valueView"
       style="@style/TextStyleValue"

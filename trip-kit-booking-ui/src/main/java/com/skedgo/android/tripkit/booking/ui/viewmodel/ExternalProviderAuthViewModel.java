@@ -54,18 +54,6 @@ public class ExternalProviderAuthViewModel extends BaseViewModel {
     handleArgs(form);
   }
 
-  private void handleArgs(BookingForm form) {
-    this.bookingForm = form;
-
-    if (bookingForm != null) {
-      if (bookingForm.isOAuthForm() && bookingForm.getOAuthLink() != null) {
-        url.set(bookingForm.getOAuthLink().toString());
-      } else if (bookingForm.externalAction() != null) {
-        url.set(bookingForm.externalAction());
-      }
-    }
-  }
-
   public WebViewClient webViewClient(final OAuth2CallbackHandler oAuth2CallbackHandler) {
     return new WebViewClient() {
       @Override
@@ -165,5 +153,17 @@ public class ExternalProviderAuthViewModel extends BaseViewModel {
         subscriber.onCompleted();
       }
     });
+  }
+
+  private void handleArgs(BookingForm form) {
+    this.bookingForm = form;
+
+    if (bookingForm != null) {
+      if (bookingForm.isOAuthForm() && bookingForm.getOAuthLink() != null) {
+        url.set(bookingForm.getOAuthLink().toString());
+      } else if (bookingForm.externalAction() != null) {
+        url.set(bookingForm.externalAction());
+      }
+    }
   }
 }

@@ -16,10 +16,9 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 @RunWith(RobolectricGradleTestRunner.class)
 @Config(constants = BuildConfig.class, sdk = 21)
-public class ParamImplTest {
-
+public class ParamTest {
   @Test public void Create() {
-    ParamImpl param = ParamImpl.create("url");
+    Param param = Param.create("url");
 
     assertThat(param.getMethod())
         .describedAs("Should use method get for just an URL")
@@ -29,7 +28,7 @@ public class ParamImplTest {
   @Test public void Create1() {
     final LinkFormField linkFormField = new LinkFormField();
     linkFormField.setMethod(LinkFormField.METHOD_POST);
-    ParamImpl param = ParamImpl.create(linkFormField);
+    Param param = Param.create(linkFormField);
 
     assertThat(param.getMethod())
         .describedAs("Should parse method from LinkFormField")
@@ -39,24 +38,23 @@ public class ParamImplTest {
   @Test public void Create2() {
     final BookingAction bookingAction = new BookingAction();
     final InputForm postBody = new InputForm();
-    ParamImpl param = ParamImpl.create(bookingAction, postBody);
+    Param param = Param.create(bookingAction, postBody);
 
     assertThat(param.getMethod())
         .describedAs("Should use method post for BookingAction")
         .isEqualTo(LinkFormField.METHOD_POST);
-
   }
 
   @Test public void Parse() {
     final BookingAction bookingAction = new BookingAction();
     final InputForm postBody = new InputForm();
-    ParamImpl expected = ParamImpl.create(bookingAction, postBody);
+    Param expected = Param.create(bookingAction, postBody);
 
     final Parcel parcel = Parcel.obtain();
     expected.writeToParcel(parcel, 0);
     parcel.setDataPosition(0);
 
-    ParamImpl actual = ParamImpl.CREATOR.createFromParcel(parcel);
+    Param actual = Param.CREATOR.createFromParcel(parcel);
 
     assertThat(actual.getUrl()).isEqualTo(expected.getUrl());
     assertThat(actual.getMethod()).isEqualTo(expected.getMethod());

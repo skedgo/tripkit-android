@@ -1,9 +1,6 @@
 package com.skedgo.android.tripkit.booking.viewmodel;
 
-import android.os.Parcelable;
-
 import com.skedgo.android.tripkit.booking.BookingForm;
-import com.skedgo.android.tripkit.booking.InputForm;
 import com.skedgo.android.tripkit.booking.LinkFormField;
 
 import rx.Observable;
@@ -25,10 +22,4 @@ public interface BookingViewModel {
   Observable<Boolean> needsAuthentication(BookingForm form);
   Param paramFrom(BookingForm form);
 
-  interface Param extends Parcelable {
-    String getMethod();
-    String getUrl();
-    String getHudText();
-    InputForm postBody();
-  }
 }

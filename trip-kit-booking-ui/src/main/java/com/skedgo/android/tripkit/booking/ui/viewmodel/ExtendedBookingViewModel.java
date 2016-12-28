@@ -6,6 +6,7 @@ import com.skedgo.android.tripkit.booking.BookingForm;
 import com.skedgo.android.tripkit.booking.LinkFormField;
 import com.skedgo.android.tripkit.booking.viewmodel.AuthenticationViewModel;
 import com.skedgo.android.tripkit.booking.viewmodel.BookingViewModel;
+import com.skedgo.android.tripkit.booking.viewmodel.Param;
 
 import javax.inject.Inject;
 
@@ -66,5 +67,4 @@ public class ExtendedBookingViewModel implements BookingViewModel {
   @Override public Param paramFrom(BookingForm form) {
     return coreViewModel.paramFrom(form);
   }
-
 }

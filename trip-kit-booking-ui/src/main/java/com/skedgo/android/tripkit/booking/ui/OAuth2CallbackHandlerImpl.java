@@ -12,7 +12,6 @@ import rx.Observable;
 import rx.functions.Func1;
 
 public class OAuth2CallbackHandlerImpl implements OAuth2CallbackHandler {
-
   private final ExternalOAuthService externalOAuthService;
   private final BookingService bookingService;
 
@@ -22,9 +21,7 @@ public class OAuth2CallbackHandlerImpl implements OAuth2CallbackHandler {
   }
 
   public Observable<BookingForm> handleOAuthURL(final BookingForm form, Uri uri, String callback) {
-
     if (form != null) {
-
       // save code or show error
       String code = uri.getQueryParameter("code");
       if (code != null) {

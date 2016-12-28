@@ -32,7 +32,8 @@ public class ExternalOAuthServiceImpl implements ExternalOAuthService {
 
     final ExternalOAuthApi externalOAuthApi =
         externalOAuthServiceGenerator.createService(baseUrl, clientId,
-                                                    clientSecret, credentialsInHeader);
+                                                    clientSecret, credentialsInHeader
+        );
 
     return externalOAuthApi.getAccessToken(clientSecret, clientId, code, "authorization_code", callback, scope)
         .filter(new Func1<AccessTokenResponse, Boolean>() {
