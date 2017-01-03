@@ -56,12 +56,15 @@ public abstract class BookingConfirmation implements Parcelable {
   }
 
   public abstract List<BookingConfirmationAction> actions();
+
   @Value.Default public int count() {
     return 0;
   }
+
   @Value.Default public int index() {
     return 0;
   }
+
   @Nullable public abstract BookingConfirmationImage provider();
   @Nullable public abstract BookingConfirmationPurchase purchase();
   public abstract BookingConfirmationStatus status();
