@@ -8,8 +8,7 @@
 	<string name="add_to_contacts">Zu Kontakten hinzufügen</string>
 	<string name="add_to_home_screen">Zum Home-Bildschirm hinzufügen</string>
 	<string name="address">Adresse</string>
-	<string name="agenda_set_or_delete">"Hier tippen um Adresse hinzuzufügen; lange drücken um zu löschen
-        "</string>
+	<string name="agenda_set_or_delete">Hier tippen um Adresse hinzuzufügen; lange drücken um zu löschen</string>
 	<string name="agenda_tip">Auf deine Agenda und Favoriten kannst du unten zugreifen</string>
 	<string name="all_alerts">Alle Alarme</string>
 	<string name="all_cals_invisible">Alle deine Kalender sind ausgeblendet; bitte schalte sie in der
@@ -69,8 +68,7 @@
 	<string name="get_on">Einsteigen</string>
 	<string name="information_on_concession_pricing_is_subject_to_availability_dot">Informationen über Ermässigungen nach
           Verfügbarkeit.</string>
-	<string name="invalid_transfer_time">"Zeit ist ungültig, benutze letzten gültigen Wert.
-        "</string>
+	<string name="invalid_transfer_time">Zeit ist ungültig, benutze letzten gültigen Wert.</string>
 	<string name="its_time_to_leave">Es ist Zeit zu gehen!</string>
 	<string name="leave_now_to_make_on_time">Gehe jetzt los um pünktlich zu kommen</string>
 	<string name="lets_start">Beginnen wir</string>
@@ -158,8 +156,7 @@
           Diese Information wird nicht auf einem Server gespeichert.</string>
 	<string name="settings_summary_trip_preferences">Beeinflusse deine Trip-Ergebnisse indem du eingibst
           was dir wichtig ist.</string>
-	<string name="settings_summary_track_usage">"TripGo erlauben anonym App-Nutzung aufzuzeichnen
-        "</string>
+	<string name="settings_summary_track_usage">TripGo erlauben anonym App-Nutzung aufzuzeichnen</string>
 	<string name="settings_title_cycling_speed">Radfahrgeschwindigkeit</string>
 	<string name="settings_title_contact">Kontaktiere uns</string>
 	<string name="settings_title_reminder_end_pub_trans">Ende öffentliche Verkehrsmittel</string>
@@ -191,7 +188,6 @@
 	<string name="view_timetable_subtitle">Nächste Abfahrten</string>
 	<string name="view_timetable_for_stop">Fahrplan der nächsten Abfahrten sehen</string>
 	<string name="tomorrow">Morgen</string>
-	<string name="tap_to_set_location">Ort auswählen</string>
 	<string name="today">Heute</string>
 	<string name="title_exclude_event_from_route">Ereignis von der Route ausschließen?</string>
 	<string name="timetable_no_data">Keine Daten für diese Haltestelle gefunden</string>
@@ -209,25 +205,33 @@
 	<string name="you_are_here">Du bist hier</string>
 	<string name="you_r_already_at_s">Du bist schon in %s!</string>
 	<!--Settings option to enable/disable news (notifications).-->
-	<string name="news">News</string>
+	<string name="news">Neuigkeiten</string>
 	<!--In transport mode detail, setting to enable that transport mode to be included in
           trips.-->
-	<string name="include_in_trips">Include in trips</string>
-	<!--Used for parking slots. Format string for multiple slots. Example: 10 slots
-          available-->
-	<string name="multiple_slots_available">%s slots available</string>
+	<string name="include_in_trips">Für Routen verwenden</string>
+	<!--Used for parking slots. Format string for multiple slots. Example: 10 slots available
+        -->
+	<string name="multiple_slots_available">%s Parkplätze verfügbar</string>
 	<!--Used for parking slots. Format string for one slots. Example: 1 slot available-->
-	<string name="one_slot_available">%s slot available</string>
+	<string name="one_slot_available">%s Parkplatz verfügbar</string>
 	<!--Used for parking slots, when there's no slot available.-->
-	<string name="no_slots_available">No slot available</string>
+	<string name="no_slots_available">Keine Parkplätze verfügbar</string>
 	<!--Parking slots, updated time. Example: Updated at: 10am-->
-	<string name="updated_at">Updated at: %s</string>
+	<string name="updated_at">Aktualisiert: %s</string>
 	<!--Occupancy almost full-->
-	<string name="almost_full">Almost full</string>
+	<string name="almost_full">Fast voll</string>
 	<!--Valid From title (date)-->
-	<string name="valid_from">Valid From</string>
+	<string name="valid_from">Gültig ab</string>
 	<!--Ticket Info title-->
-	<string name="ticket_info">Ticket Info</string>
+	<string name="ticket_info">Ticketinfos</string>
+	<!--Added reminder notice-->
+	<string name="reminder_added">Erinnerung hinzugefügt</string>
+	<!--Removed reminder HUD notice-->
+	<string name="reminder_removed">Erinnerung gelöscht</string>
+	<!--Add favourite HUD notice-->
+	<string name="favourite_added">Favorit hinzugefügt</string>
+	<!--Remove trip from favourites HUD notice-->
+	<string name="favourite_removed">Favorit gelöscht</string>
 
 </resources>
-<!-- This is an auto generated file (Wed Nov 30 14:57:36 ART 2016) -->
+<!-- This is an auto generated file (Thu Jan 12 12:05:30 ART 2017) -->

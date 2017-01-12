@@ -11,11 +11,13 @@
 	<string name="agenda_set_or_delete">Tik hier om een adres in te instellen of lange-druk om te verwijderen</string>
 	<string name="agenda_tip">Vindt uw agenda en favorieten onderaan in de tabs</string>
 	<string name="all_alerts">Alle meldingen</string>
-	<string name="all_cals_invisible">Alle kalenders zijn uitgeschakeld, schakel kalenders in in uw kalender app of in de account instellingen</string>
+	<string name="all_cals_invisible">"Alle kalenders zijn uitgeschakeld, schakel kalenders in in uw kalender app of in de account instellingen
+        "</string>
 	<string name="an_unexpected_network_error">Er is onverwachts een netwerk fout opgetreden. Probeer opnieuw.</string>
 	<string name="approximately_s_away">Ongeveer % ver weg</string>
 	<string name="arrivaltimeindication">"(arriveer"</string>
-	<string name="body_exclude_this_event_from_route">Deze activiteit heeft geen reizen meer hier naartoe of hier vandaan. De activiteit wordt wel nog steeds getoond</string>
+	<string name="body_exclude_this_event_from_route">"Deze activiteit heeft geen reizen meer hier naartoe of hier vandaan. De activiteit wordt wel nog steeds getoond
+        "</string>
 	<string name="body_exclude_related_event_from_route">De activiteit gerelateerd aan deze reis worden uitgesloten. Het zal nog steeds worden getoond</string>
 	<string name="booking">Boeken</string>
 	<string name="cannot_find_that_location">Adres niet gevonden</string>
@@ -35,8 +37,10 @@
 	<string name="departuretimeindication">"(vertrekken"</string>
 	<string name="edit">Wijzig</string>
 	<string name="edit_event">Wijzig activiteit</string>
-	<string name="enable_calendar_in_tripgo_settings">Alle kalenders zijn gedeactiveerd, ga naar de instellingen om deze te activeren</string>
-	<string name="eula_has_changed">Onze gebruikersovereenkomst is veranderd. U moet hiermee akkoord gaan voordat u verder kunt met het gebruik van deze app.</string>
+	<string name="enable_calendar_in_tripgo_settings">"Alle kalenders zijn gedeactiveerd, ga naar de instellingen om deze te activeren
+        "</string>
+	<string name="eula_has_changed">"Onze gebruikersovereenkomst is veranderd. U moet hiermee akkoord gaan voordat u verder kunt met het gebruik van deze app.
+        "</string>
 	<string name="edit_favourite">Wijzig favoriet</string>
 	<string name="empty_event_not_saved">Lege activiteit kan niet worden opgeslagen</string>
 	<string name="event_must_have_location">De locatie is vereist</string>
@@ -53,7 +57,7 @@
 	<string name="failed_2_resolve_link">De snelkoppeling kon niet gevonden worden</string>
 	<string name="get_off">Stap uit</string>
 	<string name="get_google_play_services">Download Google Play Services</string>
-	<string name="first">"Ten eerste: "</string>
+	<string name="first">Ten eerste:</string>
 	<string name="filter_timetable_hint">Filter op richting, dienstlijn of station</string>
 	<string name="go_to_date">Ga naar datum</string>
 	<string name="go_here">Ga naar hier</string>
@@ -83,7 +87,8 @@
 	<string name="no_favourites_saved">Geen favoriete locaties opgeslagen</string>
 	<string name="nicely_informed_error">Er is een fout opgetreden waarvan we zojuist op de hoogte zijn gesteld. Probeer opnieuw</string>
 	<string name="no_google_play_services_title">Geen Google Play Services!</string>
-	<string name="no_google_play_services_message">Google Play Services is vereist voor deze app.\n\nDownload deze eerst voordat u deze app kunt gebruiken</string>
+	<string name="no_google_play_services_message">"Google Play Services is vereist voor deze app.\n\nDownload deze eerst voordat u deze app kunt gebruiken
+        "</string>
 	<string name="priority_convenience_subtext">Moeite van de reis</string>
 	<string name="priority_budget_subtext">Vind goedkopere reizen</string>
 	<string name="priority_time_subtext">Vind snellere reizen</string>
@@ -105,7 +110,8 @@
 	<string name="select_calendars">Selecteer kalenders</string>
 	<string name="routes_updated">Routes bijgewerkt</string>
 	<string name="save">Opslaan</string>
-	<string name="routine_explanation">"Routines" zijn plaatsen waar u vaak bent maar normaal niet in u uw agenda zet, zoals thuis of het werk. Het is belangrijk voor de agenda om deze locaties te weten zodat alle reizen in uw planning bepaalt kan worden.</string>
+	<string name="routine_explanation">""Routines" zijn plaatsen waar u vaak bent maar normaal niet in u uw agenda zet, zoals thuis of het werk. Het is belangrijk voor de agenda om deze locaties te weten zodat alle reizen in uw planning bepaalt kan worden.
+        "</string>
 	<string name="settings_category_usage">Anonieme Data Tracking</string>
 	<string name="settings_category_searching">Zoeken</string>
 	<string name="settings_category_results">Reis Resultaten</string>
@@ -114,13 +120,15 @@
 	<string name="set_time">Kies een tijd</string>
 	<string name="set_start_time">Vertrektijd instellen</string>
 	<string name="set_location">Stel location in</string>
-	<string name="settings_summary_searching_calendar">Gebruik de locaties van uw activiteiten in de zoeksuggesties.</string>
+	<string name="settings_summary_searching_calendar">"Gebruik de locaties van uw activiteiten in de zoeksuggesties.
+        "</string>
 	<string name="settings_summary_reminder_start_off_trip">Geef een melding wanneer ik moet vertrekken</string>
 	<string name="settings_summary_reminder_start_pub_trans">Geef een melding als het tijd is om te vertrekken indien u met het openbaar vervoer reist</string>
 	<string name="settings_summary_reminder_service_alerts">Geef een melding als er iets aan uw reis veranderd</string>
 	<string name="settings_summary_reminder_end_pub_trans">Geef een melding vlak voordat ik moet uitstappen</string>
 	<string name="settings_summary_rate">Waardeer deze app in de App Store!</string>
-	<string name="settings_summary_gps_submit">Geef TripGo toestemming om anoniem locatie gegevens te verzamelen wanneer u de app gebruikt (dit gebeurd NIET wanneer u TripGo in de achtergrond gebruikt)</string>
+	<string name="settings_summary_gps_submit">"Geef TripGo toestemming om anoniem locatie gegevens te verzamelen wanneer u de app gebruikt (dit gebeurd NIET wanneer u TripGo in de achtergrond gebruikt)
+        "</string>
 	<string name="settings_summary_distance_units">De afstandseenheden die gebruikt worden in de trip resultaten</string>
 	<string name="settings_title_reminder_start_off_trip">Begin van de reis</string>
 	<string name="settings_title_reminder_service_alerts">Onverwachte hinder</string>
@@ -131,7 +139,8 @@
 	<string name="settings_title_version">Versie</string>
 	<string name="settings_title_track_usage">Track App Gebruik</string>
 	<string name="settings_summary_server">Kies de server. Dit zal alle andere server oproepen negeren!</string>
-	<string name="settings_summary_searching_contacts">Geef adressen weer uit uw contactenlijst in de zoeksuggesties.</string>
+	<string name="settings_summary_searching_contacts">"Geef adressen weer uit uw contactenlijst in de zoeksuggesties.
+        "</string>
 	<string name="settings_summary_trip_preferences">Beïnvloed de resultaten door in te stellen wat voor u belangrijk is</string>
 	<string name="settings_summary_track_usage">Geef TripGo toestemming om anoniem app gegevens te verzamelen</string>
 	<string name="settings_title_cycling_speed">Fietssnelheid</string>
@@ -159,43 +168,54 @@
 	<string name="upcoming_services">Eerstvolgende diensten</string>
 	<string name="unknown_location">Onbekende locatie</string>
 	<string name="walkthrough_1">TripGo helpt u bij het vinden van de beste manier om van A naar B te reizen via elk mogelijk vervoermiddel.</string>
-	<string name="waiting_for_gps_fix">Wacht op het GPS signaal.. als er geen signaal gevonden wordt kunt u proberen uw GPS uit en aan te zetten.</string>
+	<string name="waiting_for_gps_fix">"Wacht op het GPS signaal.. als er geen signaal gevonden wordt kunt u proberen uw GPS uit en aan te zetten.
+        "</string>
 	<string name="view_timetable_subtitle">Eerstvolgende diensten</string>
 	<string name="view_timetable_for_stop">Bekijk dienstregeling van opkomende diensten</string>
 	<string name="tomorrow">Morgen</string>
-	<string name="tap_to_set_location">Tik om een locatie in te stellen</string>
 	<string name="today">Vandaag</string>
 	<string name="title_exclude_event_from_route">Activiteit in deze reis uitsluiten?</string>
 	<string name="timetable_no_data">Er zijn geen diensten gevonden voor dit station</string>
 	<string name="trip_to_unknown_dest_about_to_start">Het ziet ernaar uit dat u ergens naartoe moet</string>
-	<string name="trip_to">"Trip to %s "</string>
+	<string name="trip_to">Trip to %s</string>
 	<string name="trip_preferences">Reis voorkeuren</string>
 	<string name="transport_selector_header">Opnemen in de routes</string>
 	<string name="walkthrough_4">Zoek routes direct vanaf de Google zoekbalk zonder TripGo te openen.</string>
 	<string name="yesterday">Gisteren</string>
-	<string name="walkthrough_2">Kom nooit meer te laat. De agenda plant vooruit en laat u weten wanneer het tijd is om te vertrekken.</string>
+	<string name="walkthrough_2">"Kom nooit meer te laat. De agenda plant vooruit en laat u weten wanneer het tijd is om te vertrekken.
+        "</string>
 	<string name="walkthrough_3">Voor diegenen zonder een agenda, u kunt ook favoriete locaties opslaan.</string>
 	<string name="your_trip_is_about_to_start">Uw trip staat op het moment om te beginnen</string>
 	<string name="you_are_here">U bent hier</string>
 	<string name="you_r_already_at_s">U bevindt zich al in %s!</string>
 	<!--Settings option to enable/disable news (notifications).-->
-	<string name="news">News</string>
-	<!--In transport mode detail, setting to enable that transport mode to be included in trips.-->
-	<string name="include_in_trips">Include in trips</string>
-	<!--Used for parking slots. Format string for multiple slots. Example: 10 slots available-->
-	<string name="multiple_slots_available">%s slots available</string>
+	<string name="news">Nieuws</string>
+	<!--In transport mode detail, setting to enable that transport mode to be included in
+          trips.-->
+	<string name="include_in_trips">Meetellen bij reizen</string>
+	<!--Used for parking slots. Format string for multiple slots. Example: 10 slots available
+        -->
+	<string name="multiple_slots_available">%s slots beschikbaar</string>
 	<!--Used for parking slots. Format string for one slots. Example: 1 slot available-->
-	<string name="one_slot_available">%s slot available</string>
+	<string name="one_slot_available">%s slot beschikbaar</string>
 	<!--Used for parking slots, when there's no slot available.-->
-	<string name="no_slots_available">No slot available</string>
+	<string name="no_slots_available">Geen slot beschikbaar</string>
 	<!--Parking slots, updated time. Example: Updated at: 10am-->
-	<string name="updated_at">Updated at: %s</string>
+	<string name="updated_at">Bijgewerkt op %s</string>
 	<!--Occupancy almost full-->
-	<string name="almost_full">Almost full</string>
+	<string name="almost_full">Bijna vol</string>
 	<!--Valid From title (date)-->
-	<string name="valid_from">Valid From</string>
+	<string name="valid_from">Geldig vanaf</string>
 	<!--Ticket Info title-->
 	<string name="ticket_info">Ticket Info</string>
+	<!--Added reminder notice-->
+	<string name="reminder_added">Herinnering toegevoegd</string>
+	<!--Removed reminder HUD notice-->
+	<string name="reminder_removed">Herinnering verwijderd</string>
+	<!--Add favourite HUD notice-->
+	<string name="favourite_added">Favoriet toegevoegd</string>
+	<!--Remove trip from favourites HUD notice-->
+	<string name="favourite_removed">Favoriet verwijderd</string>
 
 </resources>
-<!-- This is an auto generated file (Wed Nov 30 14:57:36 ART 2016) -->
+<!-- This is an auto generated file (Thu Jan 12 12:05:30 ART 2017) -->

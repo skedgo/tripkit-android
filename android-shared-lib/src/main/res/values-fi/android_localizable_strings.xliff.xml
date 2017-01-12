@@ -11,11 +11,13 @@
 	<string name="agenda_set_or_delete">Napauta tästä asettaaksesi osoitteen tai paina pitkään poistaaksesi sen</string>
 	<string name="agenda_tip">Katso päivän agenda ja suosikit allaolevista välilehdistä</string>
 	<string name="all_alerts">Kaikki ilmoitukset</string>
-	<string name="all_cals_invisible">Kalenterisi eivät ole saatavilla. Ole hyvä, laita ne päälle laitteesi kalenterin asetuksista</string>
+	<string name="all_cals_invisible">"Kalenterisi eivät ole saatavilla. Ole hyvä, laita ne päälle laitteesi kalenterin asetuksista
+        "</string>
 	<string name="an_unexpected_network_error">Tapahtui odottamaton verkkovirhe. Ole hyvä, yritä uudelleen.</string>
 	<string name="approximately_s_away">Noin %s etäisyydellä</string>
 	<string name="arrivaltimeindication">" (saapuu "</string>
-	<string name="body_exclude_this_event_from_route">Tapahtuma ei sisällä enää siihen liittyviä matkoja. Tapahtuma kuitenkin jää näkyviin.</string>
+	<string name="body_exclude_this_event_from_route">"Tapahtuma ei sisällä enää siihen liittyviä matkoja. Tapahtuma kuitenkin jää näkyviin.
+        "</string>
 	<string name="body_exclude_related_event_from_route">Valittuun reittiin liittyvä tapahtuma poistetaan. Se jää kuitenkin näkyviin.</string>
 	<string name="booking">Varaaminen</string>
 	<string name="cannot_find_that_location">Osoitetta ei löytynyt</string>
@@ -35,8 +37,10 @@
 	<string name="departuretimeindication">" (lähtee "</string>
 	<string name="edit">Muokkaa</string>
 	<string name="edit_event">Muokkaa tapahtumaa</string>
-	<string name="enable_calendar_in_tripgo_settings">Kaikki kalenterit ovat pois päältä TripGossa. Ole hyvä, aktivoi ne Asetuksissa</string>
-	<string name="eula_has_changed">TripGon käyttäjälisenssi on muuttunut. Sovellusta voi käyttää vain hyväksymällä sen.</string>
+	<string name="enable_calendar_in_tripgo_settings">"Kaikki kalenterit ovat pois päältä TripGossa. Ole hyvä, aktivoi ne Asetuksissa
+        "</string>
+	<string name="eula_has_changed">"TripGon käyttäjälisenssi on muuttunut. Sovellusta voi käyttää vain hyväksymällä sen.
+        "</string>
 	<string name="edit_favourite">Muokkaa suosikkia</string>
 	<string name="empty_event_not_saved">Tyhjää tapahtumaa ei tallennettu.</string>
 	<string name="event_must_have_location">Määritä sijainti</string>
@@ -53,7 +57,7 @@
 	<string name="failed_2_resolve_link">Linkkiä ei voitu avata</string>
 	<string name="get_off">Jää kyydistä</string>
 	<string name="get_google_play_services">Hanki Google Play Palvelut</string>
-	<string name="first">"Ensimmäinen: "</string>
+	<string name="first">Ensimmäinen:</string>
 	<string name="filter_timetable_hint">Suodata yhteyden nimen, numeron tai pysäkin mukaan</string>
 	<string name="go_to_date">Mene päivämäärään</string>
 	<string name="go_here">Mene tänne</string>
@@ -83,7 +87,8 @@
 	<string name="no_favourites_saved">Ei tallennettuja Suosikkisijainteja</string>
 	<string name="nicely_informed_error">Tapahtui virhe, josta saimme ilmoituksen. Ole hyvä, yritä uudelleen</string>
 	<string name="no_google_play_services_title">Google Play Palvelut puuttuvat!</string>
-	<string name="no_google_play_services_message">Tämä sovellus vaatii Google Play Palveluiden asennuksen.\n\nOle hyvä, lataa ne jatkaaksesi sovelluksen käyttöä</string>
+	<string name="no_google_play_services_message">"Tämä sovellus vaatii Google Play Palveluiden asennuksen.\n\nOle hyvä, lataa ne jatkaaksesi sovelluksen käyttöä
+        "</string>
 	<string name="priority_convenience_subtext">Matkan epämukavuudet</string>
 	<string name="priority_budget_subtext">Matkan kulut</string>
 	<string name="priority_time_subtext">Matkan kesto</string>
@@ -105,7 +110,8 @@
 	<string name="select_calendars">Valitse kalenterit</string>
 	<string name="routes_updated">Reitit päivitetty</string>
 	<string name="save">Tallenna</string>
-	<string name="routine_explanation">Rutiinit ovat merkintä päivittäisestä liikkumisestasi, mutta ne eivät eivät lukeudu tapahtumiin, jotka merkitset kalenteriisi (esim. töihin meno). Ne ovat tärkeitä Agendaa varten, joka varmistaa että pääset oikeaan paikkaan oikeaan aikaan</string>
+	<string name="routine_explanation">"Rutiinit ovat merkintä päivittäisestä liikkumisestasi, mutta ne eivät eivät lukeudu tapahtumiin, jotka merkitset kalenteriisi (esim. töihin meno). Ne ovat tärkeitä Agendaa varten, joka varmistaa että pääset oikeaan paikkaan oikeaan aikaan
+        "</string>
 	<string name="settings_category_usage">Nimetön tietojenseuranta</string>
 	<string name="settings_category_searching">Etsii</string>
 	<string name="settings_category_results">Matkan tulokset</string>
@@ -114,13 +120,15 @@
 	<string name="set_time">Aseta aika</string>
 	<string name="set_start_time">Aseta aloitusaika</string>
 	<string name="set_location">Aseta sijainti</string>
-	<string name="settings_summary_searching_calendar">Käytä tulevia kalenteritapahtumia sijaintiehdotuksina. Näitä tietoja ei tallenneta millekään palvelemille</string>
+	<string name="settings_summary_searching_calendar">"Käytä tulevia kalenteritapahtumia sijaintiehdotuksina. Näitä tietoja ei tallenneta millekään palvelemille
+        "</string>
 	<string name="settings_summary_reminder_start_off_trip">Näytä lähtömuistutus matkan alussa</string>
 	<string name="settings_summary_reminder_start_pub_trans">Näytä muistutus aina ennen vaihtamista julkiseen liikenteeseen</string>
 	<string name="settings_summary_reminder_service_alerts">Näytä poikkeustiedotteet, jotka vaikuttavat tuleviin matkoihin</string>
 	<string name="settings_summary_reminder_end_pub_trans">Näytä muistutus julkisella liikenteellä kuljetun etapin loppuessa</string>
 	<string name="settings_summary_rate">Arvostele sovellus Storessa!</string>
-	<string name="settings_summary_gps_submit">Salli TripGon seurata sijaintiasi nimettömästi aina käyttäessäsi sovellusta (EI taustalla)</string>
+	<string name="settings_summary_gps_submit">"Salli TripGon seurata sijaintiasi nimettömästi aina käyttäessäsi sovellusta (EI taustalla)
+        "</string>
 	<string name="settings_summary_distance_units">Etäisyysyksiköt, joita käytetään matkan tuloksissa</string>
 	<string name="settings_title_reminder_start_off_trip">Matkan alku</string>
 	<string name="settings_title_reminder_service_alerts">Poikkeustiedotteet</string>
@@ -131,7 +139,8 @@
 	<string name="settings_title_version">Versio</string>
 	<string name="settings_title_track_usage">Seuraa sovelluksen käyttöä</string>
 	<string name="settings_summary_server">Käytettävä palvelin. Huomaa, että tämä syrjäyttää *KAIKKI* nykyiset palvelinpyynnöt!</string>
-	<string name="settings_summary_searching_contacts">Käytä yhteystietojesi osoitteita sijaintiehdotuksina. Näitä tietoja ei tallenneta millekään palvelimelle</string>
+	<string name="settings_summary_searching_contacts">"Käytä yhteystietojesi osoitteita sijaintiehdotuksina. Näitä tietoja ei tallenneta millekään palvelimelle
+        "</string>
 	<string name="settings_summary_trip_preferences">Vaikuta matkavaihtoehtoihin kertomalla sinulle tärkeimmät asiat matkaan liittyen</string>
 	<string name="settings_summary_track_usage">Salli TripGon seurata sovelluksen käyttöä nimettömästi</string>
 	<string name="settings_title_cycling_speed">Pyöräilynopeus</string>
@@ -159,43 +168,54 @@
 	<string name="upcoming_services">Tulevat yhteydet</string>
 	<string name="unknown_location">Tuntematon sijainti</string>
 	<string name="walkthrough_1">TripGon avulla löydät parhaat tavat matkustaa A:sta B:hen käyttämällä mitä tahansa liikennemuotoa.</string>
-	<string name="waiting_for_gps_fix">Odottaa sijaintitietoa. Jos signaalia ei löydy, kytke GPS ensin pois päältä ja jälleen päälle..</string>
+	<string name="waiting_for_gps_fix">"Odottaa sijaintitietoa. Jos signaalia ei löydy, kytke GPS ensin pois päältä ja jälleen päälle..
+        "</string>
 	<string name="view_timetable_subtitle">Tulevat yhteydet</string>
 	<string name="view_timetable_for_stop">Näytä tulevien yhteyksien aikataulut</string>
 	<string name="tomorrow">Huomenna</string>
-	<string name="tap_to_set_location">Napauta asettaaksesi sijainnin</string>
 	<string name="today">Tänään</string>
 	<string name="title_exclude_event_from_route">Poista tapahtuma reiteistä?</string>
 	<string name="timetable_no_data">Tälle pysäkille ei löytynyt yhteyksiä</string>
 	<string name="trip_to_unknown_dest_about_to_start">Näyttäisi siltä, että matkasi on alkamassa</string>
-	<string name="trip_to">"Matka kohteeseen %s "</string>
+	<string name="trip_to">Matka kohteeseen %s</string>
 	<string name="trip_preferences">Omat matka-asetukset</string>
 	<string name="transport_selector_header">Sisällytä reitin hakutuloksiin</string>
 	<string name="walkthrough_4">Hae reittejä suoraan Google search -kentästä avaamatta TripGota.</string>
 	<string name="yesterday">Eilen</string>
-	<string name="walkthrough_2">Älä koskaan myöhästy. Agenda suunnittelee matkat puolestasi, ja kertoo milloin sinun pitää lähteä.</string>
+	<string name="walkthrough_2">"Älä koskaan myöhästy. Agenda suunnittelee matkat puolestasi, ja kertoo milloin sinun pitää lähteä.
+        "</string>
 	<string name="walkthrough_3">Jos käytössäsi ei vielä ole agendaa, tallenna suosikkipaikkasi.</string>
 	<string name="your_trip_is_about_to_start">Matkasi on alkamassa</string>
 	<string name="you_are_here">Olet täällä</string>
 	<string name="you_r_already_at_s">Olet jo kohteessa %s!</string>
 	<!--Settings option to enable/disable news (notifications).-->
-	<string name="news">News</string>
-	<!--In transport mode detail, setting to enable that transport mode to be included in trips.-->
-	<string name="include_in_trips">Include in trips</string>
-	<!--Used for parking slots. Format string for multiple slots. Example: 10 slots available-->
-	<string name="multiple_slots_available">%s slots available</string>
+	<string name="news">Uutiset</string>
+	<!--In transport mode detail, setting to enable that transport mode to be included in
+          trips.-->
+	<string name="include_in_trips">Sisällytä matkat</string>
+	<!--Used for parking slots. Format string for multiple slots. Example: 10 slots available
+        -->
+	<string name="multiple_slots_available">%s paikkoja vapaana</string>
 	<!--Used for parking slots. Format string for one slots. Example: 1 slot available-->
-	<string name="one_slot_available">%s slot available</string>
+	<string name="one_slot_available">%s paikka vapaana</string>
 	<!--Used for parking slots, when there's no slot available.-->
-	<string name="no_slots_available">No slot available</string>
+	<string name="no_slots_available">Ei vapaita parkkipaikkoja</string>
 	<!--Parking slots, updated time. Example: Updated at: 10am-->
-	<string name="updated_at">Updated at: %s</string>
+	<string name="updated_at">Päivitetty: %s</string>
 	<!--Occupancy almost full-->
-	<string name="almost_full">Almost full</string>
+	<string name="almost_full">Melkein täynnä</string>
 	<!--Valid From title (date)-->
-	<string name="valid_from">Valid From</string>
+	<string name="valid_from">Voimassa alkaen</string>
 	<!--Ticket Info title-->
-	<string name="ticket_info">Ticket Info</string>
+	<string name="ticket_info">Lipun tiedot</string>
+	<!--Added reminder notice-->
+	<string name="reminder_added">Muistutus lisätty</string>
+	<!--Removed reminder HUD notice-->
+	<string name="reminder_removed">Muistutus poistettu</string>
+	<!--Add favourite HUD notice-->
+	<string name="favourite_added">Lisätty suosikkeihin</string>
+	<!--Remove trip from favourites HUD notice-->
+	<string name="favourite_removed">Poistettu suosikeista</string>
 
 </resources>
-<!-- This is an auto generated file (Wed Nov 30 14:57:36 ART 2016) -->
+<!-- This is an auto generated file (Thu Jan 12 12:05:30 ART 2017) -->

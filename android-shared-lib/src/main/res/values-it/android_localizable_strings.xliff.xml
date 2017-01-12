@@ -11,11 +11,13 @@
 	<string name="agenda_set_or_delete">Agenda imposta o cancella</string>
 	<string name="agenda_tip">Visualizza la tua agenda giornaliera e favoriti nelle schede qui sotto</string>
 	<string name="all_alerts">Tutti avvisi</string>
-	<string name="all_cals_invisible">Tutti i tuoi calendari sono invisibili, si prega di attivarli nelle impostazioni native del calendario app o nelle impostazioni del conto</string>
+	<string name="all_cals_invisible">"Tutti i tuoi calendari sono invisibili, si prega di attivarli nelle impostazioni native del calendario app o nelle impostazioni del conto
+        "</string>
 	<string name="an_unexpected_network_error">Si è verificato un errore di rete imprevisto. Riprova.</string>
 	<string name="approximately_s_away">Circa %s di distanza</string>
 	<string name="arrivaltimeindication">" (Arrivo "</string>
-	<string name="body_exclude_this_event_from_route">corpo esclude questo evento dal calendario</string>
+	<string name="body_exclude_this_event_from_route">"corpo esclude questo evento dal calendario
+        "</string>
 	<string name="body_exclude_related_event_from_route">corpo esclude evento legato dal percorso</string>
 	<string name="booking">Prenotazione</string>
 	<string name="cannot_find_that_location">Indirizzo non trovato</string>
@@ -35,8 +37,10 @@
 	<string name="departuretimeindication">" (Partenza "</string>
 	<string name="edit">Modifica</string>
 	<string name="edit_event">Modifica evento</string>
-	<string name="enable_calendar_in_tripgo_settings">Tutti i tuoi calendari sono disabilitati in TripGo, si prega di abilitarli nella sezione Impostazioni</string>
-	<string name="eula_has_changed">Our End User Licence Agreement has changed. You must agree to it before continuing the use of this app.</string>
+	<string name="enable_calendar_in_tripgo_settings">"Tutti i tuoi calendari sono disabilitati in TripGo, si prega di abilitarli nella sezione Impostazioni
+        "</string>
+	<string name="eula_has_changed">"Our End User Licence Agreement has changed. You must agree to it before continuing the use of this app.
+        "</string>
 	<string name="edit_favourite">Modifica preferito</string>
 	<string name="empty_event_not_saved">Evento vuoto non è salvato</string>
 	<string name="event_must_have_location">Una posizione deve essere impostato</string>
@@ -53,7 +57,7 @@
 	<string name="failed_2_resolve_link">Impossibile risolvere collegamento</string>
 	<string name="get_off">Scendi</string>
 	<string name="get_google_play_services">Scarica i servizi di Google Play</string>
-	<string name="first">"primo "</string>
+	<string name="first">primo</string>
 	<string name="filter_timetable_hint">Filtra secondo il nome del servizio, il numero o la fermata</string>
 	<string name="go_to_date">Vai alla data</string>
 	<string name="go_here">Vai qui</string>
@@ -83,7 +87,8 @@
 	<string name="no_favourites_saved">Nessuna località preferite salvati</string>
 	<string name="nicely_informed_error">Si è verificato un errore ed è stato segnalato a noi. Per favore riprova</string>
 	<string name="no_google_play_services_title">No servizi di Google Play!</string>
-	<string name="no_google_play_services_message">Questa applicazione richiede di installare i servizi di Google Play.\n\nSi prega di scaricarlo per continuare ad utilizzare l\'applicazione</string>
+	<string name="no_google_play_services_message">"Questa applicazione richiede di installare i servizi di Google Play.\n\nSi prega di scaricarlo per continuare ad utilizzare l\'applicazione
+        "</string>
 	<string name="priority_convenience_subtext">Problemi del viaggio</string>
 	<string name="priority_budget_subtext">costi di viaggio</string>
 	<string name="priority_time_subtext">durata del viaggio</string>
@@ -105,7 +110,8 @@
 	<string name="select_calendars">Seleziona i calendari</string>
 	<string name="routes_updated">Percorsi aggiornati</string>
 	<string name="save">Salva</string>
-	<string name="routine_explanation">Le routine sono la maggior parte del vostro movimento quotidiano, ma non sono gli eventi che desideri nel tuo calendario (per esempio il lavoro). Sono importanti per l\'agenda per portarti nel posto giusto al momento giusto</string>
+	<string name="routine_explanation">"Le routine sono la maggior parte del vostro movimento quotidiano, ma non sono gli eventi che desideri nel tuo calendario (per esempio il lavoro). Sono importanti per l\'agenda per portarti nel posto giusto al momento giusto
+        "</string>
 	<string name="settings_category_usage">Anonima registrazione dei dati</string>
 	<string name="settings_category_searching">Ricerca</string>
 	<string name="settings_category_results">Risultati di viaggio</string>
@@ -114,13 +120,15 @@
 	<string name="set_time">Imposta ora</string>
 	<string name="set_start_time">Imposta l\'orario di inizio</string>
 	<string name="set_location">Imposta posizione</string>
-	<string name="settings_summary_searching_calendar">Usa i tuoi prossimi eventi del calendario come suggerimenti per la posizione. Questa informazione non è memorizzata su qualsiasi server</string>
+	<string name="settings_summary_searching_calendar">"Usa i tuoi prossimi eventi del calendario come suggerimenti per la posizione. Questa informazione non è memorizzata su qualsiasi server
+        "</string>
 	<string name="settings_summary_reminder_start_off_trip">Mostra un avviso di partire all\'inizio di un viaggio</string>
 	<string name="settings_summary_reminder_start_pub_trans">Mostra un avviso prima di qualsiasi trasporto pubblico sul vostro viaggio</string>
 	<string name="settings_summary_reminder_service_alerts">Mostra avvisi di servizi che interessano i tuoi prossimi viaggi</string>
 	<string name="settings_summary_reminder_end_pub_trans">Mostra un avviso verso la fine di ogni trasporto pubblico durante il viaggio</string>
 	<string name="settings_summary_rate">Valutare le app nel negozio!</string>
-	<string name="settings_summary_gps_submit">Consenti TripGo monitorare anonimo vostra posizione quando lo usi (NON in sottofondo)</string>
+	<string name="settings_summary_gps_submit">"Consenti TripGo monitorare anonimo vostra posizione quando lo usi (NON in sottofondo)
+        "</string>
 	<string name="settings_summary_distance_units">Unità di distanza da utilizzare nei risultati di viaggio</string>
 	<string name="settings_title_reminder_start_off_trip">Inizio del viaggio</string>
 	<string name="settings_title_reminder_service_alerts">avvisi di servizio</string>
@@ -131,7 +139,8 @@
 	<string name="settings_title_version">Versione</string>
 	<string name="settings_title_track_usage">Traccia l\'utilizzo del App</string>
 	<string name="settings_summary_server">Server per l\'utilizzo. Nota questo sovrascriverà * TUTTE * chiamate al server!</string>
-	<string name="settings_summary_searching_contacts">Usa i tuoi indirizzi di contatto come suggerimenti per la posizione. Queste informazioni non sono memorizzate su qualsiasi server</string>
+	<string name="settings_summary_searching_contacts">"Usa i tuoi indirizzi di contatto come suggerimenti per la posizione. Queste informazioni non sono memorizzate su qualsiasi server
+        "</string>
 	<string name="settings_summary_trip_preferences">Influenza i risultati del viaggio impostando ciò che è più importante per voi</string>
 	<string name="settings_summary_track_usage">Consenti TripGo di monitorare anonimamente il tuo uso del app</string>
 	<string name="settings_title_cycling_speed">velocità in bicicletta</string>
@@ -159,11 +168,11 @@
 	<string name="upcoming_services">Prossimi servizi</string>
 	<string name="unknown_location">Posizione sconosciuta</string>
 	<string name="walkthrough_1">TripGo aiuta a trovare il modo migliore per andare da A a B con qualsiasi modalita di trasporto.</string>
-	<string name="waiting_for_gps_fix">In attesa di segnale di posizione, se non riesce, puoi provare a spegnere e riaccendere il tuo GPS..</string>
+	<string name="waiting_for_gps_fix">"In attesa di segnale di posizione, se non riesce, puoi provare a spegnere e riaccendere il tuo GPS..
+        "</string>
 	<string name="view_timetable_subtitle">Prossimi servizi</string>
 	<string name="view_timetable_for_stop">Visualizza orari dei prossimi servizi</string>
 	<string name="tomorrow">Domani</string>
-	<string name="tap_to_set_location">Seleziona un luogo</string>
 	<string name="today">Oggi</string>
 	<string name="title_exclude_event_from_route">Escludere evento dai percorsi?</string>
 	<string name="timetable_no_data">Nessun servizio trovato per questa fermata</string>
@@ -173,16 +182,19 @@
 	<string name="transport_selector_header">Includere nei risultati di percorso</string>
 	<string name="walkthrough_4">Ricerca percorsi direttamente dalla barra di ricerca di Google senza aprire TripGo.</string>
 	<string name="yesterday">Ieri</string>
-	<string name="walkthrough_2">Non essere mai in ritardo. Agenda prevede in anticipo per te e ti fa sapere quando è l\'ora di partire.</string>
+	<string name="walkthrough_2">"Non essere mai in ritardo. Agenda prevede in anticipo per te e ti fa sapere quando è l\'ora di partire.
+        "</string>
 	<string name="walkthrough_3">Per chi non ha una agenda, salvare i posti preferiti.</string>
 	<string name="your_trip_is_about_to_start">Il vostro viaggio sta per iniziare</string>
 	<string name="you_are_here">Tu sei qui</string>
 	<string name="you_r_already_at_s">Sei già a %s!</string>
 	<!--Settings option to enable/disable news (notifications).-->
 	<string name="news">News</string>
-	<!--In transport mode detail, setting to enable that transport mode to be included in trips.-->
+	<!--In transport mode detail, setting to enable that transport mode to be included in
+          trips.-->
 	<string name="include_in_trips">Include in trips</string>
-	<!--Used for parking slots. Format string for multiple slots. Example: 10 slots available-->
+	<!--Used for parking slots. Format string for multiple slots. Example: 10 slots available
+        -->
 	<string name="multiple_slots_available">%s slots available</string>
 	<!--Used for parking slots. Format string for one slots. Example: 1 slot available-->
 	<string name="one_slot_available">%s slot available</string>
@@ -196,6 +208,14 @@
 	<string name="valid_from">Valid From</string>
 	<!--Ticket Info title-->
 	<string name="ticket_info">Ticket Info</string>
+	<!--Added reminder notice-->
+	<string name="reminder_added">Promemoria aggiunto</string>
+	<!--Removed reminder HUD notice-->
+	<string name="reminder_removed">Promemoria rimosso</string>
+	<!--Add favourite HUD notice-->
+	<string name="favourite_added">Preferito aggiunto</string>
+	<!--Remove trip from favourites HUD notice-->
+	<string name="favourite_removed">Preferito rimosso</string>
 
 </resources>
-<!-- This is an auto generated file (Wed Nov 30 14:57:36 ART 2016) -->
+<!-- This is an auto generated file (Thu Jan 12 12:05:30 ART 2017) -->

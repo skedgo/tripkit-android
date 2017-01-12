@@ -171,7 +171,6 @@
 	<string name="view_timetable_subtitle">Upcoming services</string>
 	<string name="view_timetable_for_stop">View timetable of upcoming services</string>
 	<string name="tomorrow">Tomorrow</string>
-	<string name="tap_to_set_location">Tap to set location</string>
 	<string name="today">Today</string>
 	<string name="title_exclude_event_from_route">Exclude event from routes?</string>
 	<string name="timetable_no_data">No services found for this stop</string>
@@ -207,6 +206,14 @@
 	<string name="valid_from">Valid From</string>
 	<!--Ticket Info title-->
 	<string name="ticket_info">Ticket Info</string>
+	<!--Added reminder notice-->
+	<string name="reminder_added">Reminder added</string>
+	<!--Removed reminder HUD notice-->
+	<string name="reminder_removed">Reminder removed</string>
+	<!--Add favourite HUD notice-->
+	<string name="favourite_added">Favourite added</string>
+	<!--Remove trip from favourites HUD notice-->
+	<string name="favourite_removed">Favourite removed</string>
 
 </resources>
-<!-- This is an auto generated file (Wed Nov 30 14:57:36 ART 2016) -->
+<!-- This is an auto generated file (Thu Jan 12 12:05:30 ART 2017) -->
