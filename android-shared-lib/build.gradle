@@ -20,7 +20,7 @@ task(generateStrings, type: org.gradle.api.tasks.JavaExec) {
   classpath(files('XLIFFtoAndroidConverter.jar'))
   main('com.skedgo.tripgo.tools.android.Main')
   args(['./src/main/res', '../../libraries/translations', 'void',
-        'en#es#de#fi#fr#nl#pt#it#zh-Hant#zh-Hans', 'iOS.xliff', 'android_localizable_strings.xliff'])
+        'en#es#de#fi#fr#nl#pt#it#zh-Hant#zh-Hans#da#ko', 'iOS.xliff', 'android_localizable_strings.xliff'])
 }
 
 dependencies {
