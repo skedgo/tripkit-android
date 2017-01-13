@@ -1,5 +1,34 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <resources>
+	<string name="cfbundledisplayname">TripGo Agenda</string>
+	<!--Class = "WKInterfaceSwitch"; title = "Reminder"; ObjectID = "00e-CH-gOu";-->
+	<string name="_00e_minusch_minusgou_dottitle">Herinnering</string>
+	<!--Class = "WKInterfaceLabel"; text = "Description"; ObjectID = "0mK-e0-427";-->
+	<string name="_0mk_minuse0_minus427_dottext">Beschrijving</string>
+	<!--Class = "WKInterfaceLabel"; text = "No Data"; ObjectID = "6Qf-Ve-PDJ";-->
+	<string name="_6qf_minusve_minuspdj_dottext">Geen data beschikbaar</string>
+	<!--Class = "WKInterfaceController"; title = "TripGo"; ObjectID = "AgC-eL-Hgc";-->
+	<string name="agc_minusel_minushgc_dottitle">TripGo</string>
+	<!--Class = "WKInterfaceLabel"; text = "Getting trip"; ObjectID = "F85-mJ-6yD";-->
+	<string name="f85_minusmj_minus6yd_dottext">Reis wordt geladen...</string>
+	<!--Class = "WKInterfaceButton"; title = "Show Map"; ObjectID = "GGf-v0-vEJ";-->
+	<string name="ggf_minusv0_minusvej_dottitle">Geef de kaart weer</string>
+	<!--Class = "WKInterfaceMenuItem"; title = "Favourites"; ObjectID = "RoM-Us-t1Y";-->
+	<string name="rom_minusus_minust1y_dottitle">Favorieten</string>
+	<!--Class = "WKInterfaceMenuItem"; title = "Agenda"; ObjectID = "Uzb-ex-6N5";-->
+	<string name="uzb_minusex_minus6n5_dottitle">Agenda</string>
+	<!--Class = "WKInterfaceMenuItem"; title = "Favourites"; ObjectID = "cAf-NX-Z7L";-->
+	<string name="caf_minusnx_minusz7l_dottitle">Favorieten</string>
+	<!--Class = "WKInterfaceButton"; title = "Timetable"; ObjectID = "h3q-kR-2ID";-->
+	<string name="h3q_minuskr_minus2id_dottitle">Dienstregeling</string>
+	<!--Class = "WKInterfaceLabel"; text = "Alert"; ObjectID = "jYK-Fw-rhR";-->
+	<string name="jyk_minusfw_minusrhr_dottext">Alarm</string>
+	<!--Class = "WKInterfaceMenuItem"; title = "Retry"; ObjectID = "r0K-AY-XvO";-->
+	<string name="r0k_minusay_minusxvo_dottitle">Opnieuw</string>
+	<!--Class = "WKInterfaceController"; title = "Timetable"; ObjectID = "rQN-eo-Bg2";-->
+	<string name="rqn_minuseo_minusbg2_dottitle">Dienstregeling</string>
+	<!--Instruction to users when there are no upcoming trips-->
+	<string name="plan_a_trip_on_your_phone_or_press_firmly_to_access_your_favourites_dot">Plan een trip op uw telefoon of tik en houdt ingedrukt om naar uw favourieten te gaan.</string>
 	<!--Format string for going from one location to another. For example: Used to name favourite trips.-->
 	<string name="_pattern_to__pattern">%1$s naar %2$s</string>
 	<!--Add a new stopover-->
@@ -84,6 +113,44 @@
 	<string name="upcoming_trip">Aankomende trip</string>
 	<!--Button to view something, e.g., a notification content or the EULA-->
 	<string name="view">Bekijk</string>
+	<!--Class = "UITabBarItem"; title = "Trips"; ObjectID = "3d9-Hg-2Fe";-->
+	<string name="_3d9_minushg_minus2fe_dottitle">Reizen</string>
+	<!--Class = "UINavigationItem"; title = "Settings"; ObjectID = "5WK-au-VFq";-->
+	<string name="_5wk_minusau_minusvfq_dottitle">Instellingen</string>
+	<!--Class = "UINavigationItem"; title = "Routes"; ObjectID = "IFX-i9-ymN";-->
+	<string name="ifx_minusi9_minusymn_dottitle">Routes</string>
+	<!--Class = "UINavigationItem"; title = "Service"; ObjectID = "JMk-5m-B22";-->
+	<string name="jmk_minus5m_minusb22_dottitle">Dienst</string>
+	<!--Class = "UINavigationItem"; title = "Trip"; ObjectID = "QTR-Ae-g7f";-->
+	<string name="qtr_minusae_minusg7f_dottitle">Reis</string>
+	<!--Class = "UITabBarItem"; title = "Agenda"; ObjectID = "TNA-bx-79H";-->
+	<string name="tna_minusbx_minus79h_dottitle">Agenda</string>
+	<!--Class = "UITabBarItem"; title = "Profile"; ObjectID = "TYM-9i-XBA";-->
+	<string name="tym_minus9i_minusxba_dottitle">Instellingen</string>
+	<!--Class = "UINavigationItem"; title = "Alerts"; ObjectID = "t3k-Ks-sqa";-->
+	<string name="t3k_minusks_minussqa_dottitle">Alarm</string>
+	<!--Class = "UITabBarItem"; title = "Favourites"; ObjectID = "ye4-ch-zSe";-->
+	<string name="ye4_minusch_minuszse_dottitle">Favorieten</string>
+	<!--Class = "UINavigationItem"; title = "Timetable"; ObjectID = "zCk-Ai-u6n";-->
+	<string name="zck_minusai_minusu6n_dottitle">Dienstregeling</string>
+	<!--Class = "UIButton"; accessibilityLabel = "Swap from and to"; ObjectID = "30";-->
+	<string name="_30_dotaccessibilitylabel">Vertrekpunt en bestemming omwisselen</string>
+	<!--Class = "UIButton"; normalTitle = "Time"; ObjectID = "44";-->
+	<string name="_44_dotnormaltitle">Tijd</string>
+	<!--Class = "UIButton"; accessibilityLabel = "Route"; ObjectID = "57";-->
+	<string name="_57_dotaccessibilitylabel">Route</string>
+	<!--Class = "UIButton"; normalTitle = "Route"; ObjectID = "57";-->
+	<string name="_57_dotnormaltitle">Route</string>
+	<!--Class = "UIButton"; accessibilityLabel = "To Location"; ObjectID = "JFm-H4-fOo";-->
+	<string name="jfm_minush4_minusfoo_dotaccessibilitylabel">Vertrekpunt</string>
+	<!--Class = "UIButton"; accessibilityLabel = "From Location"; ObjectID = "bs1-li-naL";-->
+	<string name="bs1_minusli_minusnal_dotaccessibilitylabel">Bestemming</string>
+	<!--Class = "UILabel"; text = "VALID FROM"; ObjectID = "Ymf-LY-K7e";-->
+	<string name="ymf_minusly_minusk7e_dottext">GELDIG VAN</string>
+	<!--Class = "UILabel"; text = "TO"; ObjectID = "x1o-my-P1Q";-->
+	<string name="x1o_minusmy_minusp1q_dottext">TOT</string>
+	<!--Class = "UIButton"; normalTitle = "Retry"; ObjectID = "xKe-fs-FjF";-->
+	<string name="xke_minusfs_minusfjf_dotnormaltitle">Opnieuw</string>
 	<!--Minutes format (used for transfer times). (old key: Minutes)-->
 	<string name="_perc_dot0f_minutes">%.0f minuten</string>
 	<!--Minutes format (used alert firing X minuts before departure). (old key: MinutesBefore)-->
@@ -218,7 +285,7 @@
 	<!--No comment provided by engineer.-->
 	<string name="favourite_trip">Favoriete reis</string>
 	<!--Help title-->
-	<string name="feedback__ampersand_support">"Feedback "</string>
+	<string name="feedback__ampersand_support">Feedback &amp; Ondersteuning</string>
 	<!--Placeholder text for search bar that is used for filtering-->
 	<string name="filter">Filter</string>
 	<string name="flight_number">Vluchtnummer</string>
@@ -339,7 +406,6 @@
 	<string name="plan_trip">Plan reis</string>
 	<!--Title for button that allows users to plan a new trip-->
 	<string name="plan_a_new_trip">Plan een nieuwe reis</string>
-	<string name="plan_a_trip_on_your_phone_or_press_firmly_to_access_your_favourites_dot">Plan een trip op uw telefoon of tik en houdt ingedrukt om naar uw favourieten te gaan.</string>
 	<string name="plan_a_trip_on_your_phone_dot">Plan een trip op uw telefoon.</string>
 	<!--Error recovery suggestion for when routing produced no results (but no specific error was returned from routing).-->
 	<string name="please_adjust_your_query_and_try_again_dot">Verander de query en probeer opnieuw.</string>
@@ -398,7 +464,7 @@
 	<string name="review_eula">EULA herzien</string>
 	<!--No comment provided by engineer.-->
 	<string name="route">Route</string>
-	<!--Title for options for routing to this location, options are: current location, -->
+	<!--Title for options for routing to this location, options are: current location, <some previously selected location>.-->
 	<string name="route_here">Route naar hier</string>
 	<!--Title of routes screen, that shows all the results for getting from A to B-->
 	<string name="routes">Routes</string>
@@ -486,7 +552,7 @@
 	<!--Description for critical error where error will be shown below.-->
 	<string name="the_application_encountered_a_critical_error_and_can_apostt_recover_2points">De applicatie heeft een ernstige fout opgelopen:</string>
 	<!--Title for view that presents a purchased ticket-->
-	<string name="ticket">Ticket</string>
+	<string name="ticket">lippu</string>
 	<!--Indicating that a ticket has expired.-->
 	<string name="ticket_expired">Ticket verlopen</string>
 	<!--Title for screen to pick your working hours-->
@@ -502,7 +568,7 @@
 	<!--Type of something, e.g., an event (calendar event, stay, routine) or a vehicle (car, motorbike, bicycle). (old key: TypeEvent)-->
 	<string name="type">Type</string>
 	<!--No comment provided by engineer.-->
-	<string name="updated_2points_">"Bijgewerkt: "</string>
+	<string name="updated_2points_">Bijgewerkt:</string>
 	<!--Explanation for what stays are compared to calendar events and routines. Can be long-ish. (old key: StayEventDescription)-->
 	<string name="use_for_hotels_while_travelling_coma_so_that_the_agenda_starts_and_ends_at_the_correct_location_dot">Gebruik op reis voor hotels etc. zodat de agenda begint en endigt op de juiste locatie.</string>
 	<!--Title for list of valid tickets-->
@@ -688,7 +754,7 @@
 	<!--Error when location search for %input was not successful. (old key: RequestErrorFormat)-->
 	<string name="_apost_pattern_apost_not_found_dot">\'%1$s\' niet gevonden.</string>
 	<!--Authorization restricted alert message-->
-	<string name="access_to_this_feature_has_been_restricted_for_your_device_dot_please_check_the_settings_app__moret_general__moret_restrictions_or_ask_your_device_provider_dot">"Toegang tot deze functie is niet toegestaan op uw apparaat. Check Instellingen app "</string>
+	<string name="access_to_this_feature_has_been_restricted_for_your_device_dot_please_check_the_settings_app__moret_general__moret_restrictions_or_ask_your_device_provider_dot">Toegang tot deze functie is niet toegestaan op uw apparaat. Check Instellingen app > Algemeen > Beperkingen of vraag uw aanbieder voor meer informatie.</string>
 	<!--Accessibility label for action button-->
 	<string name="action">Actie</string>
 	<!--Option for users if they already owned a SkedGo account-->
@@ -775,7 +841,7 @@
 	<!--Title on the button that indicates to the user that booking is in progressing-->
 	<string name="loading">Laden</string>
 	<!--Location iOS6+ authorisation needed text-->
-	<string name="location_services_are_required_to_use_this_feature_dot_please_go_to_the_settings_app__moret_privacy__moret_location_services_coma_make_sure_they_are_turned_on_and_authorise_this_app_dot">"Locatievoorzieningen moet ingeschakeld zijn om deze functie te gebruiken. Ga naar Instellingen "</string>
+	<string name="location_services_are_required_to_use_this_feature_dot_please_go_to_the_settings_app__moret_privacy__moret_location_services_coma_make_sure_they_are_turned_on_and_authorise_this_app_dot">Locatievoorzieningen moet ingeschakeld zijn om deze functie te gebruiken. Ga naar Instellingen > Privacy > Locatievoorzieningen om deze in te schakelen en sta dit ook toe voor deze app.</string>
 	<!--Indicating a payment is in progress-->
 	<string name="making_payment">Betaling</string>
 	<!--More results proposal-->
@@ -785,7 +851,9 @@
 	<!--Title for view that shows the summary of a user's account information-->
 	<string name="my_account">Mijn account</string>
 	<!--Name to which receipt is sent
-   Name used in Facebook-->
+   Name used in Facebook
+   Sort by name
+   Title for name of something (or someone)-->
 	<string name="name">Naam</string>
 	<!--Response to question whether user wants to report a problem when taking a screenshot. Also used in context of repetitions (especially recurring events).-->
 	<string name="never">Nooit</string>
@@ -877,14 +945,14 @@
 	<string name="weekends">Weekeinden</string>
 	<!--Question asked when user is taking a screenshot-->
 	<string name="would_you_like_to_report_a_problem_question">Wil je een fout melden?</string>
-	<!--Message that informs users that T-->
+	<!--Message that informs users that T&C must be agreed before booking can be made.-->
 	<string name="you_need_to_agree_to_the_booking_terms_and_conditions_dot">U moet akkoord gaan met de voorwaarden van de boeking.</string>
-	<!--Message that informs users that T-->
+	<!--Message that informs users that T&C for insurance must be agreed before booking can be made.-->
 	<string name="you_need_to_agree_to_the_insurance_terms_and_conditions_dot">U moet akkoord gaan met de verzekeringsvoorwaarden.</string>
 	<!--Calendar authorisation needed text-->
-	<string name="you_previously_denied_this_app_access_to_your_calendar_dot_please_go_to_the_settings_app__moret_privacy__moret_calendar_and_authorise_this_app_to_use_this_feature_dot">"U heeft eerder de toegang van deze app naar uw kalender geweigerd. Ga naar Instellingen "</string>
+	<string name="you_previously_denied_this_app_access_to_your_calendar_dot_please_go_to_the_settings_app__moret_privacy__moret_calendar_and_authorise_this_app_to_use_this_feature_dot">U heeft eerder de toegang van deze app naar uw kalender geweigerd. Ga naar Instellingen > Privacy > Kalender en geef TripGo toestemming om deze functie te gebruiken.</string>
 	<!--Contacts authorisation needed text-->
-	<string name="you_previously_denied_this_app_access_to_your_contacts_dot_please_go_to_the_settings_app__moret_privacy__moret_contacts_and_authorise_this_app_to_use_this_feature_dot">"U heeft eerder de toegang van deze app naar uw kontakten geweigerd. Ga naar Instellingen "</string>
+	<string name="you_previously_denied_this_app_access_to_your_contacts_dot_please_go_to_the_settings_app__moret_privacy__moret_contacts_and_authorise_this_app_to_use_this_feature_dot">U heeft eerder de toegang van deze app naar uw kontakten geweigerd. Ga naar Instellingen > Privacy > Kontacten en geef TripGo toestemming om deze functie te gebruiken.</string>
 	<!--Indicator that an event is all-day-->
 	<string name="all_minusday">hele dag</string>
 	<!--Estimated time of arrival; parameter is time, e.g., 'arrives 15:30'-->
@@ -901,4 +969,4 @@
 	<string name="starts_at__pattern">begint om %1$s</string>
 
 </resources>
-<!-- This is an auto generated file (Thu Jan 12 12:05:30 ART 2017) -->
+<!-- This is an auto generated file (Fri Jan 13 14:57:48 ART 2017) -->

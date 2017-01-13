@@ -11,13 +11,11 @@
 	<string name="agenda_set_or_delete">点击这里设置地址或长按删除</string>
 	<string name="agenda_tip">点击下方的选项栏查看你的日常行程和收藏</string>
 	<string name="all_alerts">所有提示</string>
-	<string name="all_cals_invisible">"你的所有日历都不可见，请切换到本地日历app或账号设置里
-        "</string>
+	<string name="all_cals_invisible">你的所有日历都不可见，请切换到本地日历app或账号设置里</string>
 	<string name="an_unexpected_network_error">您遇到了一个网络错误，请重试</string>
 	<string name="approximately_s_away">走了大约 %s</string>
 	<string name="arrivaltimeindication">到达时间</string>
-	<string name="body_exclude_this_event_from_route">"该事件将不会再有相关行程。但它仍会显示
-        "</string>
+	<string name="body_exclude_this_event_from_route">该事件将不会再有相关行程。但它仍会显示</string>
 	<string name="body_exclude_related_event_from_route">与该行程有关的事件将被移除。但它仍会显示</string>
 	<string name="booking">预订</string>
 	<string name="cannot_find_that_location">无法找到该地址</string>
@@ -37,9 +35,8 @@
 	<string name="departuretimeindication">" (离站 "</string>
 	<string name="edit">编辑</string>
 	<string name="edit_event">编辑事件</string>
-	<string name="enable_calendar_in_tripgo_settings">"TripGo无法使用您的日历，请去设置里授权
-        "</string>
-	<string name="eula_has_changed">我们的最终用户许可协议已经更改。在您使用app之前请同意该协议。</string>
+	<string name="enable_calendar_in_tripgo_settings">TripGo无法使用您的日历，请去设置里授权</string>
+	<string name="eula_has_changed">"我们的最终用户许可协议已经更改。在您使用app之前请同意该协议。 "</string>
 	<string name="edit_favourite">编辑收藏</string>
 	<string name="empty_event_not_saved">无法保存为空的事件</string>
 	<string name="event_must_have_location">必须设置一个地理位置</string>
@@ -60,7 +57,6 @@
 	<string name="filter_timetable_hint">通过公交路线名字、号码或者停靠站进行查询</string>
 	<string name="go_to_date">出发日期</string>
 	<string name="go_here">去这里</string>
-	<string name="get_uber">使用Uber</string>
 	<string name="get_on">上车</string>
 	<string name="information_on_concession_pricing_is_subject_to_availability_dot">取得优惠票价的信息是视情况而定的。</string>
 	<string name="invalid_transfer_time">无效时间，调回到上次使用的时间</string>
@@ -86,14 +82,12 @@
 	<string name="no_favourites_saved">没有被收藏的位置信息</string>
 	<string name="nicely_informed_error">有一个错误已经反馈给我们。请再试一次</string>
 	<string name="no_google_play_services_title">没有Google Play服务!</string>
-	<string name="no_google_play_services_message">"本app要求安装Goole Play服务。\n\n请下载它以便您继续使用该app
-        "</string>
+	<string name="no_google_play_services_message">本app要求安装Goole Play服务。\n\n请下载它以便您继续使用该app</string>
 	<string name="priority_convenience_subtext">路程的方便性</string>
 	<string name="priority_budget_subtext">路程花费</string>
 	<string name="priority_time_subtext">路程历时</string>
 	<string name="priority_environment_subtext">路程对环境的影响</string>
 	<string name="origin">出发地</string>
-	<string name="open_uber">开启Uber</string>
 	<string name="page_between_upcoming_services">即将到来的服务前的中间页</string>
 	<string name="outside_region_error">抱歉，该位置不在TripGo服务范围内!</string>
 	<string name="repeat_end_date_in_past">重复事件结束日期已经过去</string>
@@ -109,8 +103,7 @@
 	<string name="select_calendars">选取日历</string>
 	<string name="routes_updated">路线已被更新</string>
 	<string name="save">保存</string>
-	<string name="routine_explanation">"例行事件是您每天必须要做的事，但是你不想将它们记录在日历中（例如：上班）。例行事件可以让“行程”功能在对的时间带您到对的地方
-        "</string>
+	<string name="routine_explanation">例行事件是您每天必须要做的事，但是你不想将它们记录在日历中（例如：上班）。例行事件可以让“行程”功能在对的时间带您到对的地方</string>
 	<string name="settings_category_usage">匿名数据追踪</string>
 	<string name="settings_category_searching">正在搜索</string>
 	<string name="settings_category_results">路程结果</string>
@@ -119,15 +112,13 @@
 	<string name="set_time">设置时间</string>
 	<string name="set_start_time">设置开始时间</string>
 	<string name="set_location">设置位置</string>
-	<string name="settings_summary_searching_calendar">"使用您日历上即将到来的事件作为您搜索位置时的建议。这些资料将不会存放在服务器上
-        "</string>
+	<string name="settings_summary_searching_calendar">使用您日历上即将到来的事件作为您搜索位置时的建议。这些资料将不会存放在服务器上</string>
 	<string name="settings_summary_reminder_start_off_trip">在行程开始前显示提示</string>
 	<string name="settings_summary_reminder_start_pub_trans">在您行程上任何公共交通路段开始前显示提示</string>
 	<string name="settings_summary_reminder_service_alerts">对任何会对您即将开始的行程造成影响的车次变动显示提示</string>
 	<string name="settings_summary_reminder_end_pub_trans">在您行程上任何公共交通路段结束前显示提示</string>
 	<string name="settings_summary_rate">在Google Play里评价本程序!</string>
-	<string name="settings_summary_gps_submit">"允许TripGo在您使用时（不是后台模式），匿名追踪您的位置
-        "</string>
+	<string name="settings_summary_gps_submit">允许TripGo在您使用时（不是后台模式），匿名追踪您的位置</string>
 	<string name="settings_summary_distance_units">在路程结果中使用的距离单位</string>
 	<string name="settings_title_reminder_start_off_trip">行程开始</string>
 	<string name="settings_title_reminder_service_alerts">车次变动</string>
@@ -138,8 +129,7 @@
 	<string name="settings_title_version">版本</string>
 	<string name="settings_title_track_usage">追踪程序使用情况</string>
 	<string name="settings_summary_server">要使用的服务器。请注意，这将覆盖 * 所有 * 服务器调用 ！</string>
-	<string name="settings_summary_searching_contacts">"使用您通讯录上的地址作为您搜索位置时的建议。这些资料将不会存放在服务器上
-        "</string>
+	<string name="settings_summary_searching_contacts">使用您通讯录上的地址作为您搜索位置时的建议。这些资料将不会存放在服务器上</string>
 	<string name="settings_summary_trip_preferences">您可以通过设置什么对您是最重要的来影响路线规划的结果</string>
 	<string name="settings_summary_track_usage">允许TripGo匿名追踪您的程序使用情况</string>
 	<string name="settings_title_cycling_speed">自行车骑速</string>
@@ -167,8 +157,7 @@
 	<string name="upcoming_services">即将到来的车次</string>
 	<string name="unknown_location">未知的位置</string>
 	<string name="walkthrough_1">TripGo根据所有可使用的交通工具来帮助您规划从A到B的最佳路线。</string>
-	<string name="waiting_for_gps_fix">"正在等待定位信号，如果失败，您可以试着先将GPS关闭再打开..
-        "</string>
+	<string name="waiting_for_gps_fix">正在等待定位信号，如果失败，您可以试着先将GPS关闭再打开..</string>
 	<string name="view_timetable_subtitle">即将到来的车次</string>
 	<string name="view_timetable_for_stop">查阅即将到来的车次的时刻表</string>
 	<string name="tomorrow">明天</string>
@@ -181,8 +170,7 @@
 	<string name="transport_selector_header">显示在路线结果中</string>
 	<string name="walkthrough_4">您不需要打开TripGo，可以直接从Google搜索栏查询路线</string>
 	<string name="yesterday">昨天</string>
-	<string name="walkthrough_2">"再也不会迟到。“行程”功能将提前帮您做好规划，并让您知道何时该出发。
-        "</string>
+	<string name="walkthrough_2">再也不会迟到。“行程”功能将提前帮您做好规划，并让您知道何时该出发。</string>
 	<string name="walkthrough_3">对于不需要“行程”功能的使用者，您可以保存您的常用位置到“收藏”。</string>
 	<string name="your_trip_is_about_to_start">您的行程即将开始</string>
 	<string name="you_are_here">你在这里</string>
@@ -190,16 +178,18 @@
 	<!--Settings option to enable/disable news (notifications).-->
 	<string name="news">消息</string>
 	<!--In transport mode detail, setting to enable that transport mode to be included in
-          trips.-->
+          trips.
+        -->
 	<string name="include_in_trips">添加到该行程中</string>
-	<!--Used for parking slots. Format string for multiple slots. Example: 10 slots available
+	<!--Used for parking slots. Format string for multiple slots. Example: 10 slots
+          available
         -->
 	<string name="multiple_slots_available">%s 个停车位可用</string>
 	<!--Used for parking slots. Format string for one slots. Example: 1 slot available-->
 	<string name="one_slot_available">%s 个停车位可用</string>
 	<!--Used for parking slots, when there's no slot available.-->
 	<string name="no_slots_available">无停车位可用</string>
-	<!--Parking slots, updated time. Example: Updated at: 10am-->
+	<!--Parking slots, updated time. Example: Updated at 10am-->
 	<string name="updated_at">更新于 %s</string>
 	<!--Occupancy almost full-->
 	<string name="almost_full">几乎满位</string>
@@ -217,4 +207,4 @@
 	<string name="favourite_removed">已从常用删除</string>
 
 </resources>
-<!-- This is an auto generated file (Thu Jan 12 12:05:30 ART 2017) -->
+<!-- This is an auto generated file (Fri Jan 13 14:47:21 ART 2017) -->

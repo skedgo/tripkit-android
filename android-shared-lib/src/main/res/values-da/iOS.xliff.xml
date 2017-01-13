@@ -285,7 +285,7 @@
 	<!--No comment provided by engineer.-->
 	<string name="favourite_trip">Foretrukken Tur</string>
 	<!--Help title-->
-	<string name="feedback__ampersand_support">"Feedback "</string>
+	<string name="feedback__ampersand_support">Feedback &amp; support</string>
 	<!--Placeholder text for search bar that is used for filtering-->
 	<string name="filter">Filter</string>
 	<string name="flight_number">Flynummer</string>
@@ -464,7 +464,7 @@
 	<string name="review_eula">Se slutbrugerlicensaftalen</string>
 	<!--No comment provided by engineer.-->
 	<string name="route">Rute</string>
-	<!--Title for options for routing to this location, options are: current location, -->
+	<!--Title for options for routing to this location, options are: current location, <some previously selected location>.-->
 	<string name="route_here">Rute hertil</string>
 	<!--Title of routes screen, that shows all the results for getting from A to B-->
 	<string name="routes">Ruter</string>
@@ -568,7 +568,7 @@
 	<!--Type of something, e.g., an event (calendar event, stay, routine) or a vehicle (car, motorbike, bicycle). (old key: TypeEvent)-->
 	<string name="type">Type</string>
 	<!--No comment provided by engineer.-->
-	<string name="updated_2points_">"Opdateret: "</string>
+	<string name="updated_2points_">Opdateret:</string>
 	<!--Explanation for what stays are compared to calendar events and routines. Can be long-ish. (old key: StayEventDescription)-->
 	<string name="use_for_hotels_while_travelling_coma_so_that_the_agenda_starts_and_ends_at_the_correct_location_dot">Brug til hoteller når de rejser, således at opsætning starter og slutter på den korrekte sted.</string>
 	<!--Title for list of valid tickets-->
@@ -754,7 +754,7 @@
 	<!--Error when location search for %input was not successful. (old key: RequestErrorFormat)-->
 	<string name="_apost_pattern_apost_not_found_dot">%1$s ikke fundet.</string>
 	<!--Authorization restricted alert message-->
-	<string name="access_to_this_feature_has_been_restricted_for_your_device_dot_please_check_the_settings_app__moret_general__moret_restrictions_or_ask_your_device_provider_dot">"Adgang til denne funktion er begrænset til din enhed. Kontroller appens indstillinger "</string>
+	<string name="access_to_this_feature_has_been_restricted_for_your_device_dot_please_check_the_settings_app__moret_general__moret_restrictions_or_ask_your_device_provider_dot">Adgang til denne funktion er begrænset til din enhed. Kontroller appens indstillinger > Generelt > begrænsninger eller spørg din udbyder.</string>
 	<!--Accessibility label for action button-->
 	<string name="action">Aktion</string>
 	<!--Option for users if they already owned a SkedGo account-->
@@ -841,7 +841,7 @@
 	<!--Title on the button that indicates to the user that booking is in progressing-->
 	<string name="loading">Indlæser</string>
 	<!--Location iOS6+ authorisation needed text-->
-	<string name="location_services_are_required_to_use_this_feature_dot_please_go_to_the_settings_app__moret_privacy__moret_location_services_coma_make_sure_they_are_turned_on_and_authorise_this_app_dot">"Placeringstjenester er forpligtet til at bruge denne funktion. Gå Venligst til appens indstillinger "</string>
+	<string name="location_services_are_required_to_use_this_feature_dot_please_go_to_the_settings_app__moret_privacy__moret_location_services_coma_make_sure_they_are_turned_on_and_authorise_this_app_dot">Placeringstjenester er forpligtet til at bruge denne funktion. Gå Venligst til appens indstillinger > privatliv > placeringstjenester, Sørg for de er tændt og godkend denne app.</string>
 	<!--Indicating a payment is in progress-->
 	<string name="making_payment">Foretager betaling</string>
 	<!--More results proposal-->
@@ -851,7 +851,9 @@
 	<!--Title for view that shows the summary of a user's account information-->
 	<string name="my_account">Min konto</string>
 	<!--Name to which receipt is sent
-   Name used in Facebook-->
+   Name used in Facebook
+   Sort by name
+   Title for name of something (or someone)-->
 	<string name="name">Navn</string>
 	<!--Response to question whether user wants to report a problem when taking a screenshot. Also used in context of repetitions (especially recurring events).-->
 	<string name="never">Aldrig</string>
@@ -943,14 +945,14 @@
 	<string name="weekends">Weekender</string>
 	<!--Question asked when user is taking a screenshot-->
 	<string name="would_you_like_to_report_a_problem_question">Ønsker du at rapportere et problem?</string>
-	<!--Message that informs users that T-->
+	<!--Message that informs users that T&C must be agreed before booking can be made.-->
 	<string name="you_need_to_agree_to_the_booking_terms_and_conditions_dot">Du skal acceptere bestillings betingelser og vilkår.</string>
-	<!--Message that informs users that T-->
+	<!--Message that informs users that T&C for insurance must be agreed before booking can be made.-->
 	<string name="you_need_to_agree_to_the_insurance_terms_and_conditions_dot">Du skal accepterer forsikrings vilkår og betingelser.</string>
 	<!--Calendar authorisation needed text-->
-	<string name="you_previously_denied_this_app_access_to_your_calendar_dot_please_go_to_the_settings_app__moret_privacy__moret_calendar_and_authorise_this_app_to_use_this_feature_dot">"Du har tidligere nægtet denne app adgang til din kalender. Gå venligst til appens indstillinger "</string>
+	<string name="you_previously_denied_this_app_access_to_your_calendar_dot_please_go_to_the_settings_app__moret_privacy__moret_calendar_and_authorise_this_app_to_use_this_feature_dot">Du har tidligere nægtet denne app adgang til din kalender. Gå venligst til appens indstillinger > privatliv > kalender og tillad denne app til at bruge denne funktion.</string>
 	<!--Contacts authorisation needed text-->
-	<string name="you_previously_denied_this_app_access_to_your_contacts_dot_please_go_to_the_settings_app__moret_privacy__moret_contacts_and_authorise_this_app_to_use_this_feature_dot">"Du har tidligere nægtet denne app adgang til dine kontakter. gå venligst til appens indstillinger "</string>
+	<string name="you_previously_denied_this_app_access_to_your_contacts_dot_please_go_to_the_settings_app__moret_privacy__moret_contacts_and_authorise_this_app_to_use_this_feature_dot">Du har tidligere nægtet denne app adgang til dine kontakter. gå venligst til appens indstillinger > privatliv > kontakter og tillad denne app at bruge denne funktion.</string>
 	<!--Indicator that an event is all-day-->
 	<string name="all_minusday">hele døgnet</string>
 	<!--Estimated time of arrival; parameter is time, e.g., 'arrives 15:30'-->
@@ -967,4 +969,4 @@
 	<string name="starts_at__pattern">starter ved %1$s</string>
 
 </resources>
-<!-- This is an auto generated file (Thu Jan 12 15:51:36 ART 2017) -->
+<!-- This is an auto generated file (Fri Jan 13 14:57:47 ART 2017) -->

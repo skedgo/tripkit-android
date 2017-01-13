@@ -108,15 +108,13 @@
 	<!--No comment provided by engineer.-->
 	<string name="tripgo_cannot_access_its_local_files_dot">TripGo의 로컬 파일에 액세스할 수 없습니다.</string>
 	<!--Trips tab bar name-->
-	<string name="trips">
-경로</string>
+	<string name="trips">경로</string>
 	<!--Indicating the next trip is an upcoming trip-->
 	<string name="upcoming_trip">스케줄 된 일정</string>
 	<!--Button to view something, e.g., a notification content or the EULA-->
 	<string name="view">보기</string>
 	<!--Class = "UITabBarItem"; title = "Trips"; ObjectID = "3d9-Hg-2Fe";-->
-	<string name="_3d9_minushg_minus2fe_dottitle">
-경로</string>
+	<string name="_3d9_minushg_minus2fe_dottitle">경로</string>
 	<!--Class = "UINavigationItem"; title = "Settings"; ObjectID = "5WK-au-VFq";-->
 	<string name="_5wk_minusau_minusvfq_dottitle">설정</string>
 	<!--Class = "UINavigationItem"; title = "Routes"; ObjectID = "IFX-i9-ymN";-->
@@ -166,7 +164,7 @@
 	<!--Airline flight number with %airline and %flightNumber, e.g., 'Qantas flight QF1'. (old key: AirlineFlightNumber)-->
 	<string name="_pattern_flight__pattern">%1$s 항공편 %2$s</string>
 	<!--Error title when access to location hasn't been granted, but location is required.-->
-	<string name="access_to_location_services_required_dot">" 위치 서비스 연결이 필요합니다."</string>
+	<string name="access_to_location_services_required_dot">위치 서비스 연결이 필요합니다.</string>
 	<!--Add reminder activity title-->
 	<string name="add_reminder">미리 알림 추가</string>
 	<!--No comment provided by engineer.-->
@@ -466,7 +464,7 @@
 	<string name="review_eula">EULA 리뷰</string>
 	<!--No comment provided by engineer.-->
 	<string name="route">경로</string>
-	<!--Title for options for routing to this location, options are: current location, -->
+	<!--Title for options for routing to this location, options are: current location, <some previously selected location>.-->
 	<string name="route_here">여기로 경로탐색</string>
 	<!--Title of routes screen, that shows all the results for getting from A to B-->
 	<string name="routes">경로</string>
@@ -491,7 +489,7 @@
 	<string name="select_vehicle">운송수단 선택</string>
 	<string name="select_a_date_to_get_flight_details_dot">항공편 정보를 위해 날짜를 선택하세요.</string>
 	<!--Walkthrough-->
-	<string name="select_the_place_where_you_stay_at_the_end_of_each_day">"하루가 끝날 때마다 머무는 장소를 선택하세요. "</string>
+	<string name="select_the_place_where_you_stay_at_the_end_of_each_day">하루가 끝날 때마다 머무는 장소를 선택하세요.</string>
 	<!--Action button title for composing an SMS to a real-time service-->
 	<string name="send_real_minustime_sms">실시간 SMS 보내기</string>
 	<!--Action button title for sharing when you arrive-->
@@ -520,7 +518,7 @@
 	<!--Speed preference 'slow'-->
 	<string name="slow">천천히</string>
 	<!--No comment provided by engineer.-->
-	<string name="sorry_dot_tripgo_doesn_apostt_work_here_yet_exclam">"죄송합니다.  여기는 TripGo 서비스 지역을 벗어납니다. "</string>
+	<string name="sorry_dot_tripgo_doesn_apostt_work_here_yet_exclam">죄송합니다.  여기는 TripGo 서비스 지역을 벗어납니다.</string>
 	<!--Spread the word preference-->
 	<string name="spread_the_word">널리 알리기</string>
 	<!--Title for the time an event starts (including date information)-->
@@ -530,7 +528,7 @@
 	<!--Additional information for official stop code of a public transport stop.-->
 	<string name="stop_code_2points__pattern">중지 코드: %1$s</string>
 	<!--Map mode 'streets'-->
-	<string name="streets">" 도로 뷰"</string>
+	<string name="streets">도로 뷰</string>
 	<!--Contact support error button-->
 	<string name="support">고객 지원</string>
 	<!--Walkthrough-->
@@ -552,7 +550,7 @@
 	<!--Thank you HUD notice-->
 	<string name="thank_you_exclam">감사합니다!</string>
 	<!--Description for critical error where error will be shown below.-->
-	<string name="the_application_encountered_a_critical_error_and_can_apostt_recover_2points">"이 어플리케이션에 치명적인 오류가 발생했습니다. "</string>
+	<string name="the_application_encountered_a_critical_error_and_can_apostt_recover_2points">이 어플리케이션에 치명적인 오류가 발생했습니다.</string>
 	<!--Title for view that presents a purchased ticket-->
 	<string name="ticket">티켓</string>
 	<!--Indicating that a ticket has expired.-->
@@ -570,7 +568,7 @@
 	<!--Type of something, e.g., an event (calendar event, stay, routine) or a vehicle (car, motorbike, bicycle). (old key: TypeEvent)-->
 	<string name="type">종류</string>
 	<!--No comment provided by engineer.-->
-	<string name="updated_2points_">"업데이트 완료 "</string>
+	<string name="updated_2points_">업데이트 완료</string>
 	<!--Explanation for what stays are compared to calendar events and routines. Can be long-ish. (old key: StayEventDescription)-->
 	<string name="use_for_hotels_while_travelling_coma_so_that_the_agenda_starts_and_ends_at_the_correct_location_dot">여행하는 동안 일정이 맞는 위치에서 시작과 끝이 실행되게 호텔을 사용합니다.</string>
 	<!--Title for list of valid tickets-->
@@ -679,10 +677,10 @@
 	<!--No comment provided by engineer.-->
 	<string name="in_the_meantime_coma_let_aposts_keep_exploring_and_enjoy_your_trips">In the meantime, let\'s keep exploring and enjoy your trips</string>
 	<!--Prefix for selected 'leave after' time
-   Single li-->
+   Single line instruction to leave-->
 	<string name="leave">떠나기</string>
 	<!--The place of departure. (old key: LeaveLocation)-->
-	<string name="leave__pattern">" %1$s에 떠남"</string>
+	<string name="leave__pattern">%1$s에 떠남</string>
 	<!--The place of departure with time. (old key: LeaveLocationTime)-->
 	<string name="leave__pattern_at__pattern">%1$s에 %2$s를 떠남</string>
 	<!--Time departure. (old key: LeaveTime)-->
@@ -732,7 +730,7 @@
 	<!--Vehicle updated. (old key: VehicleUpdated)-->
 	<string name="updated__pattern_ago">%s 전에 업데이트 됨</string>
 	<!--Vehicle 'x' updated. (old key: VehicleCalledUpdated)-->
-	<string name="vehicle__pattern_updated__pattern_ago">" %1$s이 %2$s 전에 업데이트 됨"</string>
+	<string name="vehicle__pattern_updated__pattern_ago">%1$s이 %2$s 전에 업데이트 됨</string>
 	<!--No comment provided by engineer.-->
 	<string name="we_are_busy_getting_your_upcoming_trip_dot_please_wait_dot_dot_dot">정보를 받고 있습니다. 잠시만 기다려 주세요.</string>
 	<!--No comment provided by engineer.-->
@@ -756,7 +754,7 @@
 	<!--Error when location search for %input was not successful. (old key: RequestErrorFormat)-->
 	<string name="_apost_pattern_apost_not_found_dot">\'%1$s\'을 찾을 수 없습니다.</string>
 	<!--Authorization restricted alert message-->
-	<string name="access_to_this_feature_has_been_restricted_for_your_device_dot_please_check_the_settings_app__moret_general__moret_restrictions_or_ask_your_device_provider_dot">"기기에서 이 기능이 제한되어 있습니다. 설정 "</string>
+	<string name="access_to_this_feature_has_been_restricted_for_your_device_dot_please_check_the_settings_app__moret_general__moret_restrictions_or_ask_your_device_provider_dot">기기에서 이 기능이 제한되어 있습니다. 설정 > , 일반 > 에서 차단 세팅을 확인하거나 통신사에 문의하세요.</string>
 	<!--Accessibility label for action button-->
 	<string name="action">동작</string>
 	<!--Option for users if they already owned a SkedGo account-->
@@ -843,7 +841,7 @@
 	<!--Title on the button that indicates to the user that booking is in progressing-->
 	<string name="loading">로딩</string>
 	<!--Location iOS6+ authorisation needed text-->
-	<string name="location_services_are_required_to_use_this_feature_dot_please_go_to_the_settings_app__moret_privacy__moret_location_services_coma_make_sure_they_are_turned_on_and_authorise_this_app_dot">"위치 서비스는 이 기능을 요구합니다.  설정으로 가서 어플리케이션  "</string>
+	<string name="location_services_are_required_to_use_this_feature_dot_please_go_to_the_settings_app__moret_privacy__moret_location_services_coma_make_sure_they_are_turned_on_and_authorise_this_app_dot">위치 서비스는 이 기능을 요구합니다.  설정으로 가서 어플리케이션 > 개인 정보 > 위치 서비스를 켜주세요.</string>
 	<!--Indicating a payment is in progress-->
 	<string name="making_payment">결제하기</string>
 	<!--More results proposal-->
@@ -853,7 +851,9 @@
 	<!--Title for view that shows the summary of a user's account information-->
 	<string name="my_account">내 계정</string>
 	<!--Name to which receipt is sent
-   Name used in Facebook-->
+   Name used in Facebook
+   Sort by name
+   Title for name of something (or someone)-->
 	<string name="name">이름</string>
 	<!--Response to question whether user wants to report a problem when taking a screenshot. Also used in context of repetitions (especially recurring events).-->
 	<string name="never">사용 안 함</string>
@@ -917,7 +917,7 @@
 	<!--Message that indicates the app is signing users into their user accounts-->
 	<string name="signing_in">로그인 중...</string>
 	<!--Message that indicates the app has successfully completed signing out
-   Message that indicates the app is sig-->
+   Message that indicates the app is signing users out of their accounts-->
 	<string name="signing_out">로그아웃 중...</string>
 	<!--Starting %date. (old key: DateFromFormat)-->
 	<string name="starting__pattern">%1$s에 시작..</string>
@@ -945,14 +945,14 @@
 	<string name="weekends">주말</string>
 	<!--Question asked when user is taking a screenshot-->
 	<string name="would_you_like_to_report_a_problem_question">문제를 보고하시겠습니까?</string>
-	<!--Message that informs users that T-->
+	<!--Message that informs users that T&C must be agreed before booking can be made.-->
 	<string name="you_need_to_agree_to_the_booking_terms_and_conditions_dot">예약 약관에 동의해야 합니다.</string>
-	<!--Message that informs users that T-->
+	<!--Message that informs users that T&C for insurance must be agreed before booking can be made.-->
 	<string name="you_need_to_agree_to_the_insurance_terms_and_conditions_dot">보험 계약 조건에 동의해야 합니다.</string>
 	<!--Calendar authorisation needed text-->
-	<string name="you_previously_denied_this_app_access_to_your_calendar_dot_please_go_to_the_settings_app__moret_privacy__moret_calendar_and_authorise_this_app_to_use_this_feature_dot">"캘린더 엑세스가 거부되어 있습니다. "</string>
+	<string name="you_previously_denied_this_app_access_to_your_calendar_dot_please_go_to_the_settings_app__moret_privacy__moret_calendar_and_authorise_this_app_to_use_this_feature_dot">캘린더 엑세스가 거부되어 있습니다. > 설정으로 가서 > 캘린더 개인 정보 사용을 허용해 주세요.</string>
 	<!--Contacts authorisation needed text-->
-	<string name="you_previously_denied_this_app_access_to_your_contacts_dot_please_go_to_the_settings_app__moret_privacy__moret_contacts_and_authorise_this_app_to_use_this_feature_dot">"주소록 엑세스가 거부되어 있습니다. "</string>
+	<string name="you_previously_denied_this_app_access_to_your_contacts_dot_please_go_to_the_settings_app__moret_privacy__moret_contacts_and_authorise_this_app_to_use_this_feature_dot">주소록 엑세스가 거부되어 있습니다. > 설정으로 가서 > 주소록 개인 정보 사용을 허용해 주세요.</string>
 	<!--Indicator that an event is all-day-->
 	<string name="all_minusday">종일</string>
 	<!--Estimated time of arrival; parameter is time, e.g., 'arrives 15:30'-->
@@ -969,4 +969,4 @@
 	<string name="starts_at__pattern">%1$s에 시작</string>
 
 </resources>
-<!-- This is an auto generated file (Thu Jan 12 15:51:37 ART 2017) -->
+<!-- This is an auto generated file (Fri Jan 13 14:57:47 ART 2017) -->

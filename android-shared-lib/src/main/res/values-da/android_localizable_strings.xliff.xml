@@ -11,13 +11,11 @@
 	<string name="agenda_set_or_delete">Tryk her for at angive adressen eller lang-Tryk for at slette</string>
 	<string name="agenda_tip">Se din daglige dagsorden og foretrukne i fanerne nedenfor</string>
 	<string name="all_alerts">Alle indberetninger</string>
-	<string name="all_cals_invisible">"Alle dine kalendere er usynlige, skift dem i din native kalender app eller konto indstillinger
-        "</string>
+	<string name="all_cals_invisible">Alle dine kalendere er usynlige, skift dem i din native kalender app eller konto indstillinger</string>
 	<string name="an_unexpected_network_error">Der opstod en uventet netværksfejl. Prøv venligst igen.</string>
 	<string name="approximately_s_away">Ca. %s væk</string>
 	<string name="arrivaltimeindication">"(ankommer"</string>
-	<string name="body_exclude_this_event_from_route">"Der vil ikke længere være ture til eller fra denne begivenhed. Arrangementet vil stadig blive vist
-        "</string>
+	<string name="body_exclude_this_event_from_route">Der vil ikke længere være ture til eller fra denne begivenhed. Arrangementet vil stadig blive vist</string>
 	<string name="body_exclude_related_event_from_route">Begivenheden relateret til turen vil være udelukket. Den vil stadig blive vist</string>
 	<string name="booking">Bestilling</string>
 	<string name="cannot_find_that_location">Adressen blev ikke fundet</string>
@@ -37,10 +35,8 @@
 	<string name="departuretimeindication">"(afgår"</string>
 	<string name="edit">Redigér</string>
 	<string name="edit_event">Redigér begivenhed</string>
-	<string name="enable_calendar_in_tripgo_settings">"Alle dine kalendere er deaktiveret i TripGo, de skal aktiveres i sektionen indstillinger
-        "</string>
-	<string name="eula_has_changed">"Vores Slutbruger licensaftalen er ændret. Du skal acceptere det før fortsat brug af denne app.
-        "</string>
+	<string name="enable_calendar_in_tripgo_settings">Alle dine kalendere er deaktiveret i TripGo, de skal aktiveres i sektionen indstillinger</string>
+	<string name="eula_has_changed">Vores Slutbruger licensaftalen er ændret. Du skal acceptere det før fortsat brug af denne app.</string>
 	<string name="edit_favourite">Redigér foretrukne</string>
 	<string name="empty_event_not_saved">Tom begivenhed gemmes ikke</string>
 	<string name="event_must_have_location">En placering skal angives</string>
@@ -86,8 +82,7 @@
 	<string name="no_favourites_saved">Ingen foretrukne placeringer er gemt</string>
 	<string name="nicely_informed_error">Der opstod en fejl og det blev rapporteret til os. Prøv venligst igen</string>
 	<string name="no_google_play_services_title">Ingen Google Play Services!</string>
-	<string name="no_google_play_services_message">"Denne app kræver Google spille tjenester er installeret.\n\nVær venlig at downloade den for fortsat benyttelse af denne app
-        "</string>
+	<string name="no_google_play_services_message">Denne app kræver Google spille tjenester er installeret.\n\nVær venlig at downloade den for fortsat benyttelse af denne app</string>
 	<string name="priority_convenience_subtext">Besværet af turen</string>
 	<string name="priority_budget_subtext">Turens pris</string>
 	<string name="priority_time_subtext">Turens varighed</string>
@@ -108,8 +103,7 @@
 	<string name="select_calendars">Vælg kalendere</string>
 	<string name="routes_updated">Ruter opdateret</string>
 	<string name="save">Gem</string>
-	<string name="routine_explanation">"Rutiner er en del af din daglige bevægelighed, men de er ikke begivenheder, som du ønsker i din kalender (fx arbejde). De er vigtige for dagsordenen til at få dig det rigtige sted hen, på det rigtige tidspunkt
-        "</string>
+	<string name="routine_explanation">Rutiner er en del af din daglige bevægelighed, men de er ikke begivenheder, som du ønsker i din kalender (fx arbejde). De er vigtige for dagsordenen til at få dig det rigtige sted hen, på det rigtige tidspunkt</string>
 	<string name="settings_category_usage">Anonym Data Tracking</string>
 	<string name="settings_category_searching">Søger</string>
 	<string name="settings_category_results">Turens resultater</string>
@@ -118,15 +112,13 @@
 	<string name="set_time">Indstil tiden</string>
 	<string name="set_start_time">Angiv starttidspunkt</string>
 	<string name="set_location">Angiv placering</string>
-	<string name="settings_summary_searching_calendar">"Bruge dine kommende kalenderbegivenheder som beliggenheds forslag. Disse oplysninger gemmes ikke på nogen server
-        "</string>
+	<string name="settings_summary_searching_calendar">Bruge dine kommende kalenderbegivenheder som beliggenheds forslag. Disse oplysninger gemmes ikke på nogen server</string>
 	<string name="settings_summary_reminder_start_off_trip">Vis en advarsel for at forlade i starten af en tur</string>
 	<string name="settings_summary_reminder_start_pub_trans">Vis en advarsel før enhver offentlig transport på rejsen</string>
 	<string name="settings_summary_reminder_service_alerts">Vis service-advarsler, som påvirker dine kommende ture</string>
 	<string name="settings_summary_reminder_end_pub_trans">Vis en advarsel i slutningen af enhver offentlig transport på rejsen</string>
 	<string name="settings_summary_rate">Bedøm app\'en i butikken!</string>
-	<string name="settings_summary_gps_submit">"Tillad TripGo anonymt at spore din placering, når du bruger det (IKKE i baggrunden)
-        "</string>
+	<string name="settings_summary_gps_submit">Tillad TripGo anonymt at spore din placering, når du bruger det (IKKE i baggrunden)</string>
 	<string name="settings_summary_distance_units">Afstands enheder der skal bruges i turens resultater</string>
 	<string name="settings_title_reminder_start_off_trip">Start turen</string>
 	<string name="settings_title_reminder_service_alerts">Service alarmer</string>
@@ -137,8 +129,7 @@
 	<string name="settings_title_version">Version</string>
 	<string name="settings_title_track_usage">Spor App brug</string>
 	<string name="settings_summary_server">Server der skal at bruges. Bemærk, dette vil tilsidesætte * ALLE * server opfordringer!</string>
-	<string name="settings_summary_searching_contacts">"Bruge dine kontaktpersoners adresser som beliggenheds forslag. Disse oplysninger gemmes ikke på nogen server
-        "</string>
+	<string name="settings_summary_searching_contacts">Bruge dine kontaktpersoners adresser som beliggenheds forslag. Disse oplysninger gemmes ikke på nogen server</string>
 	<string name="settings_summary_trip_preferences">Påvirk tur resultater ved at angive, hvad der er vigtigst for dig</string>
 	<string name="settings_summary_track_usage">Tillad TripGo at anonymt spore dit app forbrug</string>
 	<string name="settings_title_cycling_speed">Cykelhastighed</string>
@@ -166,8 +157,7 @@
 	<string name="upcoming_services">Kommende tjenester</string>
 	<string name="unknown_location">Ukendt placering</string>
 	<string name="walkthrough_1">TripGo hjælper dig med at finde den bedste vej fra A til B ved hjælp af hvilken som helst transportmiddel.</string>
-	<string name="waiting_for_gps_fix">"Afventer placeringens signal, hvis det mislykkes, kan du prøve at tænde og slukke din GPS..
-        "</string>
+	<string name="waiting_for_gps_fix">Afventer placeringens signal, hvis det mislykkes, kan du prøve at tænde og slukke din GPS..</string>
 	<string name="view_timetable_subtitle">Kommende tjenester</string>
 	<string name="view_timetable_for_stop">Se tidsplan for kommende tjenester</string>
 	<string name="tomorrow">Imorgen</string>
@@ -180,8 +170,7 @@
 	<string name="transport_selector_header">Medtag i rute resultatetet</string>
 	<string name="walkthrough_4">Søg ruter direkte fra Google search bar uden at åbne TripGo.</string>
 	<string name="yesterday">Igår</string>
-	<string name="walkthrough_2">"Vær aldrig forsent. Dagsorden planer forud for dig og lader dig vide, hvornår du skal tage afsted.
-        "</string>
+	<string name="walkthrough_2">Vær aldrig forsent. Dagsorden planer forud for dig og lader dig vide, hvornår du skal tage afsted.</string>
 	<string name="walkthrough_3">For dem uden en dagsorden, gem foretrukne steder.</string>
 	<string name="your_trip_is_about_to_start">Rejsen skal til at starte</string>
 	<string name="you_are_here">Du er her</string>
@@ -189,10 +178,12 @@
 	<!--Settings option to enable/disable news (notifications).-->
 	<string name="news">Nyheder</string>
 	<!--In transport mode detail, setting to enable that transport mode to be included in
-          trips.-->
+          trips.
+        -->
 	<string name="include_in_trips">Medtag i ture</string>
 	<!--Used for parking slots. Format string for multiple slots. Example: 10 slots
-          available-->
+          available
+        -->
 	<string name="multiple_slots_available">%s pladser til rådighed</string>
 	<!--Used for parking slots. Format string for one slots. Example: 1 slot available-->
 	<string name="one_slot_available">%s plads til rådighed</string>
@@ -216,4 +207,4 @@
 	<string name="favourite_removed">Favourite removed</string>
 
 </resources>
-<!-- This is an auto generated file (Thu Jan 12 15:51:37 ART 2017) -->
+<!-- This is an auto generated file (Fri Jan 13 14:47:20 ART 2017) -->
