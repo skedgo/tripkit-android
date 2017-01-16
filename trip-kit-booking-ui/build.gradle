@@ -1,4 +1,9 @@
 apply plugin: 'com.android.library'
+apply plugin: 'com.github.dcendents.android-maven'
+
+// For https://github.com/dcendents/android-maven-gradle-plugin.
+group = 'com.skedgo'
+version = '1.0'
 
 android {
   compileSdkVersion 24
@@ -44,4 +49,12 @@ dependencies {
   compile 'com.squareup.picasso:picasso:2.5.2'
   compile 'com.jakewharton.picasso:picasso2-okhttp3-downloader:1.0.2'
   compile 'com.github.skedgo:activity-animations:v1.0'
+}
+
+uploadArchives {
+  repositories {
+    mavenDeployer {
+      repository(url: "file://${tripkitAndroidMaven}")
+    }
+  }
 }
