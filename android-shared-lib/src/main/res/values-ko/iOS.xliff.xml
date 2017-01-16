@@ -1,32 +1,5 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <resources>
-	<string name="cfbundledisplayname">TripGo  일정</string>
-	<!--Class = "WKInterfaceSwitch"; title = "Reminder"; ObjectID = "00e-CH-gOu";-->
-	<string name="_00e_minusch_minusgou_dottitle">알림</string>
-	<!--Class = "WKInterfaceLabel"; text = "Description"; ObjectID = "0mK-e0-427";-->
-	<string name="_0mk_minuse0_minus427_dottext">세부내용</string>
-	<!--Class = "WKInterfaceLabel"; text = "No Data"; ObjectID = "6Qf-Ve-PDJ";-->
-	<string name="_6qf_minusve_minuspdj_dottext">자료 없음</string>
-	<!--Class = "WKInterfaceController"; title = "TripGo"; ObjectID = "AgC-eL-Hgc";-->
-	<string name="agc_minusel_minushgc_dottitle">TripGo</string>
-	<!--Class = "WKInterfaceLabel"; text = "Getting trip"; ObjectID = "F85-mJ-6yD";-->
-	<string name="f85_minusmj_minus6yd_dottext">경로을 탐색 중입니다.</string>
-	<!--Class = "WKInterfaceButton"; title = "Show Map"; ObjectID = "GGf-v0-vEJ";-->
-	<string name="ggf_minusv0_minusvej_dottitle">지도 보기</string>
-	<!--Class = "WKInterfaceMenuItem"; title = "Favourites"; ObjectID = "RoM-Us-t1Y";-->
-	<string name="rom_minusus_minust1y_dottitle">즐겨 찾기</string>
-	<!--Class = "WKInterfaceMenuItem"; title = "Agenda"; ObjectID = "Uzb-ex-6N5";-->
-	<string name="uzb_minusex_minus6n5_dottitle">일정</string>
-	<!--Class = "WKInterfaceMenuItem"; title = "Favourites"; ObjectID = "cAf-NX-Z7L";-->
-	<string name="caf_minusnx_minusz7l_dottitle">즐겨찾기</string>
-	<!--Class = "WKInterfaceButton"; title = "Timetable"; ObjectID = "h3q-kR-2ID";-->
-	<string name="h3q_minuskr_minus2id_dottitle">시간표</string>
-	<!--Class = "WKInterfaceLabel"; text = "Alert"; ObjectID = "jYK-Fw-rhR";-->
-	<string name="jyk_minusfw_minusrhr_dottext">알림</string>
-	<!--Class = "WKInterfaceMenuItem"; title = "Retry"; ObjectID = "r0K-AY-XvO";-->
-	<string name="r0k_minusay_minusxvo_dottitle">재시도</string>
-	<!--Class = "WKInterfaceController"; title = "Timetable"; ObjectID = "rQN-eo-Bg2";-->
-	<string name="rqn_minuseo_minusbg2_dottitle">시간표</string>
 	<!--Instruction to users when there are no upcoming trips-->
 	<string name="plan_a_trip_on_your_phone_or_press_firmly_to_access_your_favourites_dot">경로를 입력하거나 즐겨찾기를 실행하세요.</string>
 	<!--Format string for going from one location to another. For example: Used to name favourite trips.-->
@@ -113,44 +86,6 @@
 	<string name="upcoming_trip">스케줄 된 일정</string>
 	<!--Button to view something, e.g., a notification content or the EULA-->
 	<string name="view">보기</string>
-	<!--Class = "UITabBarItem"; title = "Trips"; ObjectID = "3d9-Hg-2Fe";-->
-	<string name="_3d9_minushg_minus2fe_dottitle">경로</string>
-	<!--Class = "UINavigationItem"; title = "Settings"; ObjectID = "5WK-au-VFq";-->
-	<string name="_5wk_minusau_minusvfq_dottitle">설정</string>
-	<!--Class = "UINavigationItem"; title = "Routes"; ObjectID = "IFX-i9-ymN";-->
-	<string name="ifx_minusi9_minusymn_dottitle">다른 노선</string>
-	<!--Class = "UINavigationItem"; title = "Service"; ObjectID = "JMk-5m-B22";-->
-	<string name="jmk_minus5m_minusb22_dottitle">서비스</string>
-	<!--Class = "UINavigationItem"; title = "Trip"; ObjectID = "QTR-Ae-g7f";-->
-	<string name="qtr_minusae_minusg7f_dottitle">경로</string>
-	<!--Class = "UITabBarItem"; title = "Agenda"; ObjectID = "TNA-bx-79H";-->
-	<string name="tna_minusbx_minus79h_dottitle">일정</string>
-	<!--Class = "UITabBarItem"; title = "Profile"; ObjectID = "TYM-9i-XBA";-->
-	<string name="tym_minus9i_minusxba_dottitle">회원 정보</string>
-	<!--Class = "UINavigationItem"; title = "Alerts"; ObjectID = "t3k-Ks-sqa";-->
-	<string name="t3k_minusks_minussqa_dottitle">알림</string>
-	<!--Class = "UITabBarItem"; title = "Favourites"; ObjectID = "ye4-ch-zSe";-->
-	<string name="ye4_minusch_minuszse_dottitle">즐겨찾기</string>
-	<!--Class = "UINavigationItem"; title = "Timetable"; ObjectID = "zCk-Ai-u6n";-->
-	<string name="zck_minusai_minusu6n_dottitle">시간표</string>
-	<!--Class = "UIButton"; accessibilityLabel = "Swap from and to"; ObjectID = "30";-->
-	<string name="_30_dotaccessibilitylabel">도착지와 출발지 맞바꾸기</string>
-	<!--Class = "UIButton"; normalTitle = "Time"; ObjectID = "44";-->
-	<string name="_44_dotnormaltitle">시간</string>
-	<!--Class = "UIButton"; accessibilityLabel = "Route"; ObjectID = "57";-->
-	<string name="_57_dotaccessibilitylabel">경로 보기</string>
-	<!--Class = "UIButton"; normalTitle = "Route"; ObjectID = "57";-->
-	<string name="_57_dotnormaltitle">노선</string>
-	<!--Class = "UIButton"; accessibilityLabel = "To Location"; ObjectID = "JFm-H4-fOo";-->
-	<string name="jfm_minush4_minusfoo_dotaccessibilitylabel">그 위치로</string>
-	<!--Class = "UIButton"; accessibilityLabel = "From Location"; ObjectID = "bs1-li-naL";-->
-	<string name="bs1_minusli_minusnal_dotaccessibilitylabel">그 위치에서</string>
-	<!--Class = "UILabel"; text = "VALID FROM"; ObjectID = "Ymf-LY-K7e";-->
-	<string name="ymf_minusly_minusk7e_dottext">유효한</string>
-	<!--Class = "UILabel"; text = "TO"; ObjectID = "x1o-my-P1Q";-->
-	<string name="x1o_minusmy_minusp1q_dottext">부터</string>
-	<!--Class = "UIButton"; normalTitle = "Retry"; ObjectID = "xKe-fs-FjF";-->
-	<string name="xke_minusfs_minusfjf_dotnormaltitle">재시도</string>
 	<!--Minutes format (used for transfer times). (old key: Minutes)-->
 	<string name="_perc_dot0f_minutes">%.0f분</string>
 	<!--Minutes format (used alert firing X minuts before departure). (old key: MinutesBefore)-->
@@ -969,4 +904,4 @@
 	<string name="starts_at__pattern">%1$s에 시작</string>
 
 </resources>
-<!-- This is an auto generated file (Fri Jan 13 14:57:47 ART 2017) -->
+<!-- This is an auto generated file (Mon Jan 16 19:13:06 ART 2017) -->
