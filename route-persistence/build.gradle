@@ -1,0 +1,46 @@
+apply plugin: 'com.android.library'
+apply plugin: 'com.jakewharton.hugo'
+
+android {
+  compileSdkVersion 25
+  buildToolsVersion '25.0.2'
+
+  // To print Hugo's logs.
+  // defaultPublishConfig 'debug'
+
+  lintOptions {
+    // Continue to check for errors in release builds,
+    // but continue the build even when errors are found.
+    checkReleaseBuilds true
+    abortOnError false
+  }
+
+  defaultConfig {
+    minSdkVersion 15
+    targetSdkVersion 25
+    versionCode 1
+    versionName '1.0'
+    testInstrumentationRunner 'android.support.test.runner.AndroidJUnitRunner'
+  }
+
+  buildTypes {
+    release {
+      minifyEnabled false
+      proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+    }
+  }
+}
+
+dependencies {
+  compile project(':trip-kit')
+  compile 'com.github.skedgo:sqlite-utils:v1.0'
+
+  testCompile 'junit:junit:4.12'
+  testCompile 'org.assertj:assertj-core:1.7.0'
+  testCompile 'org.mockito:mockito-core:2.2.28'
+  testCompile 'org.robolectric:robolectric:3.1.4'
+
+  androidTestCompile 'com.android.support.test.espresso:espresso-core:2.2.2', {
+    exclude group: 'com.android.support', module: 'support-annotations'
+  }
+}
