@@ -6,6 +6,9 @@ buildscript {
   dependencies {
     // See changelog: http://developer.android.com/tools/revisions/gradle-plugin.html.
     classpath 'com.android.tools.build:gradle:2.2.3'
+
+    // To measure execution time of a method.
+    classpath 'com.jakewharton.hugo:hugo-plugin:1.2.1'
   }
 }
 
