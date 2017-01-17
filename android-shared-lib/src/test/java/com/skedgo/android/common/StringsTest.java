@@ -35,7 +35,7 @@ public class StringsTest {
   @Test
   @Config(qualifiers = "it")
   public void correctApproximatelyXAwayInItalian() {
-    assertThat(resources.getString(R.string.approximately_s_away))
+    assertThat(resources.getString(R.string.approximately_nps_away))
         .isEqualTo("Circa %s di distanza");
   }
 
@@ -55,12 +55,12 @@ public class StringsTest {
 
   @Config(qualifiers = "it")
   @Test public void correctFormatOfTripToXInItalian() {
-    final String s = resources.getString(R.string.trip_to, "Sydney");
+    final String s = resources.getString(R.string.trip_to_nps, "Sydney");
     assertThat(s).isEqualTo("Viaggio a Sydney");
   }
 
   @Test public void correctFormatOfTripToXInEnglish() {
-    final String s = resources.getString(R.string.trip_to, "Sydney");
+    final String s = resources.getString(R.string.trip_to_nps, "Sydney");
     assertThat(s).isEqualTo("Trip to Sydney");
   }
 
