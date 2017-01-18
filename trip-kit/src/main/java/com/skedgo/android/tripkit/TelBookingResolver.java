@@ -37,7 +37,7 @@ final class TelBookingResolver implements BookingResolver {
         name = URLDecoder.decode(name, "UTF-8");
       } catch (UnsupportedEncodingException e) {
       }
-      return resources.getString(R.string.calltaxiformat, name);
+      return resources.getString(R.string.call__pattern, name);
     } else {
       return resources.getString(R.string.call);
     }
