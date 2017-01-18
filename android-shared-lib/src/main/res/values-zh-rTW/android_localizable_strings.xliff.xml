@@ -97,7 +97,6 @@
 	<string name="refresh">刷新</string>
 	<string name="public_transport">大眾交通</string>
 	<string name="rate">評價</string>
-	<string name="service">車次</string>
 	<string name="set_end_time">設置結束時間</string>
 	<string name="search_instantly">立即搜尋</string>
 	<string name="select_calendars">選取行事曆</string>
@@ -192,8 +191,6 @@
 	<string name="updated_at_2points_nps">上次更新於: %s</string>
 	<!--Occupancy almost full-->
 	<string name="almost_full">幾乎已滿</string>
-	<!--Valid From title (date)-->
-	<string name="valid_from">有效期從</string>
 	<!--Ticket Info title-->
 	<string name="ticket_info">票證詳情</string>
 	<!--Added reminder notice-->
@@ -206,4 +203,4 @@
 	<string name="favourite_removed">已從常用項目中移除</string>
 
 </resources>
-<!-- This is an auto generated file (Tue Jan 17 12:02:14 ART 2017) -->
+<!-- This is an auto generated file (Wed Jan 18 16:50:14 ART 2017) -->

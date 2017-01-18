@@ -111,7 +111,6 @@
 	<string name="refresh">Aktualisieren</string>
 	<string name="public_transport">Öffentliche Verkehrsmittel</string>
 	<string name="rate">Bewerten</string>
-	<string name="service">Service</string>
 	<string name="set_end_time">Setze Endzeit</string>
 	<string name="search_instantly">Sofort suchen</string>
 	<string name="select_calendars">Kalendar auswählen</string>
@@ -219,8 +218,6 @@
 	<string name="updated_at_2points_nps">Aktualisiert: %s</string>
 	<!--Occupancy almost full-->
 	<string name="almost_full">Fast voll</string>
-	<!--Valid From title (date)-->
-	<string name="valid_from">Gültig ab</string>
 	<!--Ticket Info title-->
 	<string name="ticket_info">Ticketinfos</string>
 	<!--Added reminder notice-->
@@ -233,4 +230,4 @@
 	<string name="favourite_removed">Favorit gelöscht</string>
 
 </resources>
-<!-- This is an auto generated file (Tue Jan 17 12:02:13 ART 2017) -->
+<!-- This is an auto generated file (Wed Jan 18 16:50:14 ART 2017) -->

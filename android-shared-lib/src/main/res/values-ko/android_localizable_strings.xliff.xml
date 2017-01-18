@@ -97,7 +97,6 @@
 	<string name="refresh">새로고침</string>
 	<string name="public_transport">대중 교통</string>
 	<string name="rate">평가</string>
-	<string name="service">서비스</string>
 	<string name="set_end_time">종료시간 설정</string>
 	<string name="search_instantly">즉시 검색</string>
 	<string name="select_calendars">달력 선택</string>
@@ -192,8 +191,6 @@
 	<string name="updated_at_2points_nps">%s에 업데이트</string>
 	<!--Occupancy almost full-->
 	<string name="almost_full">거의 다 참</string>
-	<!--Valid From title (date)-->
-	<string name="valid_from">다음부터 유효함</string>
 	<!--Ticket Info title-->
 	<string name="ticket_info">티켓 정보</string>
 	<!--Added reminder notice-->
@@ -206,4 +203,4 @@
 	<string name="favourite_removed">Favourite removed</string>
 
 </resources>
-<!-- This is an auto generated file (Tue Jan 17 12:02:14 ART 2017) -->
+<!-- This is an auto generated file (Wed Jan 18 16:50:14 ART 2017) -->

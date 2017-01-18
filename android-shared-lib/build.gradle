@@ -33,7 +33,7 @@ task(generateiOSStrings, type: org.gradle.api.tasks.JavaExec) {
         // Format: dirSrc:dirDest#dirSrc:dirDest#...
         'en:en#es_ES:es#de:de#fi:fi#fr:fr#nl:nl#pt_PT:pt#it:it#zh_Hans:zh-Hans#zh_Hant:zh-Hant#da:da#ko:ko',
         // Format: xliffSourceFile:fileElementType | xliffSourceFile (all file elements parsed)
-        'iOS.xliff:.strings'])
+        'iOS.xliff'])
 }
 
 dependencies {

@@ -1,5 +1,30 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <resources>
+	<string name="tripgo_agenda">Agenda di TripGo</string>
+	<string name="notification_extension">Notification Extension</string>
+	<!--Class = "WKInterfaceSwitch"; title = "Reminder"; ObjectID = "00e-CH-gOu";-->
+	<string name="reminder">Promemoria</string>
+	<!--Class = "WKInterfaceLabel"; text = "Description"; ObjectID = "0mK-e0-427";-->
+	<string name="description">Descrizione</string>
+	<!--Class = "WKInterfaceLabel"; text = "No Data"; ObjectID = "6Qf-Ve-PDJ";-->
+	<string name="no_data">Nessun dato</string>
+	<!--Class = "WKInterfaceController"; title = "TripGo"; ObjectID = "AgC-eL-Hgc";-->
+	<string name="tripgo">TripGo</string>
+	<!--Class = "WKInterfaceLabel"; text = "Getting trip"; ObjectID = "F85-mJ-6yD";-->
+	<string name="getting_trip">Guida di viaggio</string>
+	<!--Class = "WKInterfaceButton"; title = "Show Map"; ObjectID = "GGf-v0-vEJ";-->
+	<string name="show_map">Visualizza Mappa</string>
+	<!--Class = "WKInterfaceMenuItem"; title = "Favourites"; ObjectID = "RoM-Us-t1Y";-->
+	<string name="favourites">Preferiti</string>
+	<!--Class = "WKInterfaceMenuItem"; title = "Agenda"; ObjectID = "Uzb-ex-6N5";-->
+	<string name="agenda">Agenda</string>
+	<!--Class = "WKInterfaceButton"; title = "Timetable"; ObjectID = "h3q-kR-2ID";-->
+	<string name="timetable">Orario</string>
+	<!--Class = "WKInterfaceLabel"; text = "Alert"; ObjectID = "jYK-Fw-rhR";-->
+	<string name="alert">Avviso</string>
+	<!--Class = "WKInterfaceMenuItem"; title = "Retry"; ObjectID = "r0K-AY-XvO";-->
+	<string name="retry">Riprova</string>
+	<string name="tripgo_watchkit_extension">TripGo WatchKit Extension</string>
 	<!--Instruction to users when there are no upcoming trips-->
 	<string name="plan_a_trip_on_your_phone_or_press_firmly_to_access_your_favourites_dot">Pianificare un viaggio sul tuo telefono o premere con forza per accedere ai tuoi preferiti.</string>
 	<!--Format string for going from one location to another. For example: Used to name favourite trips.-->
@@ -8,8 +33,6 @@
 	<string name="add_stopover_dot_dot_dot">Aggiungi sosta...</string>
 	<!--Button to save a trip to the agenda-->
 	<string name="add_to_agenda">Aggiungi all\' Agenda</string>
-	<!--Title for button to access agenda-->
-	<string name="agenda">Agenda</string>
 	<!--Error title when agenda isn't yet set up.-->
 	<string name="agenda_is_not_set_up_dot">Ordine del giorno non è impostato.</string>
 	<!--Button to agree to EULA or a similar agreement-->
@@ -26,8 +49,6 @@
 	<string name="database_corrupted_and_lost_dot">Database danneggiato e perso.</string>
 	<!--Button to dismiss something, e.g., an error or action action sheet-->
 	<string name="dismiss">Ignora</string>
-	<!--Title for button to access favourites-->
-	<string name="favourites">Preferiti</string>
 	<!--Title for a flight-->
 	<string name="flight">Volo</string>
 	<!--Indicating localisation is in progress-->
@@ -58,8 +79,6 @@
 	<string name="reset">Resetta</string>
 	<!--Error recovery suggestion when agenda isn't yet set up but needed for Watch app.-->
 	<string name="set_up_your_agenda_in_the_tripgo_app_dot">Set up your Agenda in the TripGo app.</string>
-	<!--Action title to show map for a segment-->
-	<string name="show_map">Visualizza Mappa</string>
 	<!--Show trip-->
 	<string name="show_trip">Show trip</string>
 	<!--Action button on trip reminders to snooze it for a fixed amount.-->
@@ -74,8 +93,6 @@
 	<string name="time_to_leave_exclam_your_trip_commences_at__pattern">Time to leave! Your trip commences at %1$s</string>
 	<!--Notification message for a trip. Provided is %destination and %time you need to leave.-->
 	<string name="time_to_leave_exclam_your_trip_to__pattern_commences_at__pattern">Time to leave! Your trip to %1$s commences at %2$s</string>
-	<!--Title of button to access timetable-->
-	<string name="timetable">Orario</string>
 	<!--Title for button to access transport modes-->
 	<string name="transport">Trasporto</string>
 	<!--No comment provided by engineer.-->
@@ -86,6 +103,30 @@
 	<string name="upcoming_trip">Upcoming Trip</string>
 	<!--Button to view something, e.g., a notification content or the EULA-->
 	<string name="view">View</string>
+	<!--Class = "UINavigationItem"; title = "Settings"; ObjectID = "5WK-au-VFq";-->
+	<string name="settings">Impostazioni</string>
+	<!--Class = "UINavigationItem"; title = "Routes"; ObjectID = "IFX-i9-ymN";-->
+	<string name="routes">Percorsi</string>
+	<!--Class = "UINavigationItem"; title = "Service"; ObjectID = "JMk-5m-B22";-->
+	<string name="service">Servizio</string>
+	<!--Class = "UINavigationItem"; title = "Trip"; ObjectID = "QTR-Ae-g7f";-->
+	<string name="trip">Viaggio</string>
+	<!--Class = "UINavigationItem"; title = "Alerts"; ObjectID = "t3k-Ks-sqa";-->
+	<string name="alerts">Avvisi</string>
+	<!--Class = "UIButton"; accessibilityLabel = "Swap from and to"; ObjectID = "30";-->
+	<string name="swap_from_and_to">Scambiare inizio e fine</string>
+	<!--Class = "UIButton"; normalTitle = "Time"; ObjectID = "44";-->
+	<string name="time">Tempo</string>
+	<!--Class = "UIButton"; accessibilityLabel = "Route"; ObjectID = "57";-->
+	<string name="route">Percorso</string>
+	<!--Class = "UIButton"; accessibilityLabel = "To Location"; ObjectID = "JFm-H4-fOo";-->
+	<string name="to_location">Destinazione</string>
+	<!--Class = "UIButton"; accessibilityLabel = "From Location"; ObjectID = "bs1-li-naL";-->
+	<string name="from_location">Punto di partenza</string>
+	<!--Class = "UILabel"; text = "VALID FROM"; ObjectID = "Ymf-LY-K7e";-->
+	<string name="valid_from">Valida dal</string>
+	<!--Class = "UILabel"; text = "TO"; ObjectID = "x1o-my-P1Q";-->
+	<string name="to">A</string>
 	<!--Minutes format (used for transfer times). (old key: Minutes)-->
 	<string name="_perc_dot0f_minutes">%.0f minuti</string>
 	<!--Minutes format (used alert firing X minuts before departure). (old key: MinutesBefore)-->
@@ -120,9 +161,6 @@
 	<string name="address_required">Indirizzo richiesto</string>
 	<!--Title for agenda screen while it's still in setup mode.-->
 	<string name="agenda_setup">Impostazione dell\'Agenda</string>
-	<!--No comment provided by engineer.-->
-	<string name="alert">Attenzione</string>
-	<string name="alerts">Avvisi</string>
 	<!--Action button title to see alternative options for the case where you can't make the next connection.-->
 	<string name="alternative_routes">Percorsi alternativi</string>
 	<!--No comment provided by engineer.-->
@@ -397,12 +435,8 @@
 	<string name="return_trip">Return trip</string>
 	<!--No comment provided by engineer.-->
 	<string name="review_eula">Leggi l\'EULA</string>
-	<!--No comment provided by engineer.-->
-	<string name="route">Percorso</string>
 	<!--Title for options for routing to this location, options are: current location, <some previously selected location>.-->
 	<string name="route_here">Percorso per qui</string>
-	<!--Title of routes screen, that shows all the results for getting from A to B-->
-	<string name="routes">Percorsi</string>
 	<!--Explanation for what routines are compared to calendar events and stays. Can be long-ish. (old key: HabitualEventDescription)-->
 	<string name="routines_are_part_of_your_daily_movement_coma_but_they_aren_apostt_events_that_you_want_in_your_calendar__start_parente_dotg_dot_coma_work_end_parent_dot_they_are_important_for_the_agenda_to_get_you_to_the_right_location_at_the_right_time_dot">Le routine sono la maggior parte del vostro movimento quotidiano, ma non sono gli eventi che desideri nel tuo calendario (per esempio il lavoro). Sono importanti per l\'agenda per portarti nel posto giusto al momento giusto.</string>
 	<!--Error message if interregional routing isn't yet supported-->
@@ -498,8 +532,6 @@
 	<string name="times">Orari</string>
 	<!--Title, e.g., for event or favourite. (old key: TitleFavouriteName)-->
 	<string name="title">Nome</string>
-	<!--Favorite trip 'to' title-->
-	<string name="to">A</string>
 	<!--Type of something, e.g., an event (calendar event, stay, routine) or a vehicle (car, motorbike, bicycle). (old key: TypeEvent)-->
 	<string name="type">Tipo</string>
 	<!--No comment provided by engineer.-->
@@ -660,8 +692,6 @@
 	<string name="standing_room_only">Standing room only</string>
 	<!--Destination location. For trip titles, e.g., 'To work'. (old key: PrimaryLocationEnd)-->
 	<string name="to__pattern">A %1$s</string>
-	<!--Title for a trip-->
-	<string name="trip">Viaggio</string>
 	<!--Vehicle updated. (old key: VehicleUpdated)-->
 	<string name="updated__pattern_ago">Aggiornato dal %1$s</string>
 	<!--Vehicle 'x' updated. (old key: VehicleCalledUpdated)-->
@@ -818,9 +848,6 @@
 	<string name="press__apostsearch_apost_for_more_dot_dot_dot">Premere \'cerca\' per altro...</string>
 	<!--Title for section that asks users where payment receipt should be sent-->
 	<string name="receipt">Ricevuta</string>
-	<!--Action title to add/remove reminder
-   Section title at the end of a booking that allows users to set reminders-->
-	<string name="reminder">Promemoria</string>
 	<!--Repeats daily-->
 	<string name="repeats_daily">Ripeti tutti i giorni</string>
 	<!--Repeats monthly-->
@@ -839,8 +866,6 @@
 	<string name="search_results">Risultati della ricerca</string>
 	<!--Placeholder text while waiting for server response when searching for a location.-->
 	<string name="searching_for__apost_pattern_apost_dot_dot_dot">Cercando \'%1$s\'...</string>
-	<!--Button that goes to the Setting's app-->
-	<string name="settings">Impostazioni</string>
 	<!--No comment provided by engineer.-->
 	<string name="sign_in">Accedi</string>
 	<!--Instruction for signing out user account-->
@@ -904,4 +929,4 @@
 	<string name="starts_at__pattern">inizia alle %1$s</string>
 
 </resources>
-<!-- This is an auto generated file (Mon Jan 16 19:13:06 ART 2017) -->
+<!-- This is an auto generated file (Wed Jan 18 09:40:37 ART 2017) -->

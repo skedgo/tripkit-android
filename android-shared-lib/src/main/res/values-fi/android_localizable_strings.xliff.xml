@@ -97,7 +97,6 @@
 	<string name="refresh">Päivitä</string>
 	<string name="public_transport">Julkinen liikenne</string>
 	<string name="rate">Arvostele</string>
-	<string name="service">Yhteys</string>
 	<string name="set_end_time">Aseta loppumisaika</string>
 	<string name="search_instantly">Etsi heti</string>
 	<string name="select_calendars">Valitse kalenterit</string>
@@ -192,8 +191,6 @@
 	<string name="updated_at_2points_nps">Päivitetty: %s</string>
 	<!--Occupancy almost full-->
 	<string name="almost_full">Melkein täynnä</string>
-	<!--Valid From title (date)-->
-	<string name="valid_from">Voimassa alkaen</string>
 	<!--Ticket Info title-->
 	<string name="ticket_info">Lipun tiedot</string>
 	<!--Added reminder notice-->
@@ -206,4 +203,4 @@
 	<string name="favourite_removed">Poistettu suosikeista</string>
 
 </resources>
-<!-- This is an auto generated file (Tue Jan 17 12:02:13 ART 2017) -->
+<!-- This is an auto generated file (Wed Jan 18 16:50:14 ART 2017) -->

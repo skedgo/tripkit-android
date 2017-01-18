@@ -100,7 +100,6 @@
 	<string name="refresh">Refresh</string>
 	<string name="public_transport">Public Transport</string>
 	<string name="rate">Rate</string>
-	<string name="service">Service</string>
 	<string name="set_end_time">Set end time</string>
 	<string name="search_instantly">Search instantly</string>
 	<string name="select_calendars">Select calendars</string>
@@ -200,8 +199,6 @@
 	<string name="updated_at_2points_nps">Updated at: %s</string>
 	<!--Occupancy almost full-->
 	<string name="almost_full">Almost full</string>
-	<!--Valid From title (date)-->
-	<string name="valid_from">Valid From</string>
 	<!--Ticket Info title-->
 	<string name="ticket_info">Ticket Info</string>
 	<!--Added reminder notice-->
@@ -214,4 +211,4 @@
 	<string name="favourite_removed">Favourite removed</string>
 
 </resources>
-<!-- This is an auto generated file (Tue Jan 17 12:02:13 ART 2017) -->
+<!-- This is an auto generated file (Wed Jan 18 16:50:14 ART 2017) -->

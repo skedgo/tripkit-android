@@ -117,7 +117,6 @@
 	<string name="refresh">Actualizar</string>
 	<string name="public_transport">Transporte Público</string>
 	<string name="rate">Tarifa</string>
-	<string name="service">Servicio</string>
 	<string name="set_end_time">Establezca la hora de finalización</string>
 	<string name="search_instantly">Búsqueda instantánea</string>
 	<string name="select_calendars">Elegir calendarios</string>
@@ -161,7 +160,7 @@
 	<string name="use_your_contact_addresses_as_location_suggestions_dot_this_information_is_not_stored___________on_any_server_________">"Utilice sus direcciones de contacto como
           sugerencias de ubicación. Esta información no se almacena en ningún servidor "</string>
 	<string name="influence_trip_results_by_setting_what_aposts_most_important_to_you">Modifique los resultados a partir de establecer
-          que es más impo rtante para usted.</string>
+          que es más importante para usted.</string>
 	<string name="allow_tripgo_to_anonymously_track_your_app_usage">Permitir a TripGo realizar un seguimiento de
           forma anónima del uso de la aplicación</string>
 	<string name="cycling_speed">Vel. en bicicleta</string>
@@ -229,8 +228,6 @@
 	<string name="updated_at_2points_nps">Actualizado: %s</string>
 	<!--Occupancy almost full-->
 	<string name="almost_full">Casi lleno</string>
-	<!--Valid From title (date)-->
-	<string name="valid_from">Valido desde</string>
 	<!--Ticket Info title-->
 	<string name="ticket_info">Información del Ticket</string>
 	<!--Added reminder notice-->
@@ -243,4 +240,4 @@
 	<string name="favourite_removed">Favorito eliminado</string>
 
 </resources>
-<!-- This is an auto generated file (Tue Jan 17 12:02:13 ART 2017) -->
+<!-- This is an auto generated file (Wed Jan 18 16:50:14 ART 2017) -->
