@@ -193,14 +193,6 @@
 	<string name="almost_full">幾乎已滿</string>
 	<!--Ticket Info title-->
 	<string name="ticket_info">票證詳情</string>
-	<!--Added reminder notice-->
-	<string name="reminder_added">已新增提醒事項</string>
-	<!--Removed reminder HUD notice-->
-	<string name="reminder_removed">已刪除提醒事項</string>
-	<!--Add favourite HUD notice-->
-	<string name="favourite_added">已加入常用項目</string>
-	<!--Remove trip from favourites HUD notice-->
-	<string name="favourite_removed">已從常用項目中移除</string>
 
 </resources>
-<!-- This is an auto generated file (Wed Jan 18 16:50:14 ART 2017) -->
+<!-- This is an auto generated file (Thu Jan 19 10:54:19 ART 2017) -->

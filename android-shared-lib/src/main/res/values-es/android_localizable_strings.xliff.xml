@@ -230,14 +230,6 @@
 	<string name="almost_full">Casi lleno</string>
 	<!--Ticket Info title-->
 	<string name="ticket_info">Información del Ticket</string>
-	<!--Added reminder notice-->
-	<string name="reminder_added">Recordatorio agregado</string>
-	<!--Removed reminder HUD notice-->
-	<string name="reminder_removed">Recordatorio eliminado</string>
-	<!--Add favourite HUD notice-->
-	<string name="favourite_added">Favorito agregado</string>
-	<!--Remove trip from favourites HUD notice-->
-	<string name="favourite_removed">Favorito eliminado</string>
 
 </resources>
-<!-- This is an auto generated file (Wed Jan 18 16:50:14 ART 2017) -->
+<!-- This is an auto generated file (Thu Jan 19 10:54:19 ART 2017) -->

@@ -193,14 +193,6 @@
 	<string name="almost_full">Bijna vol</string>
 	<!--Ticket Info title-->
 	<string name="ticket_info">Ticket Info</string>
-	<!--Added reminder notice-->
-	<string name="reminder_added">Herinnering toegevoegd</string>
-	<!--Removed reminder HUD notice-->
-	<string name="reminder_removed">Herinnering verwijderd</string>
-	<!--Add favourite HUD notice-->
-	<string name="favourite_added">Favoriet toegevoegd</string>
-	<!--Remove trip from favourites HUD notice-->
-	<string name="favourite_removed">Favoriet verwijderd</string>
 
 </resources>
-<!-- This is an auto generated file (Wed Jan 18 16:50:14 ART 2017) -->
+<!-- This is an auto generated file (Thu Jan 19 10:54:19 ART 2017) -->
