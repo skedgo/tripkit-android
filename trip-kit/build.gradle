@@ -1,4 +1,9 @@
 apply plugin: "com.android.library"
+apply plugin: 'com.github.dcendents.android-maven'
+
+// For https://github.com/dcendents/android-maven-gradle-plugin.
+group = 'com.skedgo'
+version = '1.0'
 
 android {
   compileSdkVersion 24
@@ -71,4 +76,12 @@ dependencies {
   provided 'org.immutables:gson:2.3.9:annotations'
 
   compile project(":android-shared-lib")
+}
+
+uploadArchives {
+  repositories {
+    mavenDeployer {
+      repository(url: "file://${tripkitAndroidMaven}")
+    }
+  }
 }
