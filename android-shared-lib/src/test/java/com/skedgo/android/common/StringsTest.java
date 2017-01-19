@@ -199,5 +199,21 @@ public class StringsTest {
         .isEqualTo("Agenda");
   }
 
+  @Test public void shouldHaveCorrectStringForLongString1() {
+    assertThat(resources.getString(R.string.all_your_calendars_are_invisible_coma_please_switch_them_on_in_native_calendar_app_or_account_settings_________))
+        .isEqualTo("All your calendars are invisible, please switch them on in native calendar app or account settings");
+  }
+
+  @Test public void shouldHaveCorrectStringForLongString2() {
+    assertThat(resources.getString(R.string.our_end_user_licence_agreement_has_changed_dot_you_must_agree_to_it_before_continuing_use_of_this_app))
+        .isEqualTo("Our End User Licence Agreement has changed. You must agree to it before continuing use of this app");
+  }
+
+  @Test public void shouldHaveCorrectStringForLongString3() {
+    assertThat(resources.getString(R.string.routines_are_post_of_your_daily_movement_coma_but_they_aren_apostt_events_that_you_want_in_your_calendar__start_parente_dotg_dot_work_end_parent_dot_they_are_important_for_the_agenda_to_get_you_to_the_right_location_at_the_right_time_________))
+        .isEqualTo("Routines are post of your daily movement, but they aren't events that you want in your calendar (e.g. work). They are important for the Agenda to get you to the right location at the right time");
+  }
+
+
 
 }

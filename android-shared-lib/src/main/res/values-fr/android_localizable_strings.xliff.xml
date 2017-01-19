@@ -11,7 +11,7 @@
 	<string name="tap_here_to_set_address_or_long_minuspress_to_delete">Appuyer ici pour définir l\'adresse or rester appuyer pour supprimer</string>
 	<string name="view_your_daily_agenda_and_favourites_in_the_tabs_below">Voir votre agenda quotidien et favoris dans l\'onglet ci-dessous</string>
 	<string name="all_alerts">Toutes les alertes</string>
-	<string name="all_your_calendars_are_invisible_coma_please_switch_them_on_in_native_calendar_app_or___________account_settings_________">Tout vos calendriers sont invisibles, veuillez les activer sur l\'application de calendrier ou depuis les paramètres</string>
+	<string name="all_your_calendars_are_invisible_coma_please_switch_them_on_in_native_calendar_app_or_account_settings_________">Tout vos calendriers sont invisibles, veuillez les activer sur l\'application de calendrier ou depuis les paramètres</string>
 	<string name="an_unexpected_network_error_has_occurred_dot_please_retry_dot">Une erreur inattendue est survenu. Veuillez réessayer.</string>
 	<string name="approximately_nps_away">Environ à %s</string>
 	<string name="__start_parentarrive_">(arriver</string>
@@ -36,7 +36,7 @@
 	<string name="edit">Editer</string>
 	<string name="edit_event">Editer l\'évenement</string>
 	<string name="all_your_calendars_are_disabled_in_tripgo_coma_please_enable_them_in_settings_section_________">Tout vos calendriers sont désactivés dans TripGo, veuillez les activer dans la section Paramètres</string>
-	<string name="our_end_user_licence_agreement_has_changed_dot_you_must_agree_to_it_before_continuing___________the_use_of_this_app_dot_________">Nos Conditions Générales d\'Utilisation ont changées. Vous devez les accepter afin de poursuivre l\'utilisation du logiciel</string>
+	<string name="our_end_user_licence_agreement_has_changed_dot_you_must_agree_to_it_before_continuing_the_use_of_this_app_dot_________">Nos Conditions Générales d\'Utilisation ont changées. Vous devez les accepter afin de poursuivre l\'utilisation du logiciel</string>
 	<string name="edit_favorite">Editer le favori</string>
 	<string name="empty_event_is_not_saved">Un évenement vide n\'est pas sauvegardé</string>
 	<string name="a_location_must_be_set">Une position doit être spécifiée</string>
@@ -82,7 +82,7 @@
 	<string name="no_favorite_locations_saved">Aucun favoris sauvegardés</string>
 	<string name="there_was_an_error_and_it_was_reported_to_us_dot_please_try_again">Une erreur est survenu et a été relevé. Veuillez réessayer</string>
 	<string name="no_google_play_services_exclam">Google Play Services absent!</string>
-	<string name="this_app_requires_google_play_services_to_be_installed_dot__please_download_it_to___________continue_using_the_app_________">Cet app requiert l\'installation de Google Play Services.\n\nVeuillez le télécharger pour continuer à utiliser l\'application</string>
+	<string name="this_app_requires_google_play_services_to_be_installed_dot__please_download_it_to_continue_using_the_app_________">Cet app requiert l\'installation de Google Play Services.\n\nVeuillez le télécharger pour continuer à utiliser l\'application</string>
 	<string name="hassle_of_the_trip">Difficulté du voyage</string>
 	<string name="trip_cost">Coût du trajet</string>
 	<string name="trip_duration">Durée du trajet</string>
@@ -102,7 +102,7 @@
 	<string name="select_calendars">Sélectionner les calendriers</string>
 	<string name="routes_updated">Itinéraires mis à jour</string>
 	<string name="save">Enregistrer</string>
-	<string name="routines_are_post_of_your_daily_movement_coma_but_they_aren_apostt_events_that_you_want_in___________your_calendar__start_parente_dotg_dot_work_end_parent_dot_they_are_important_for_the_agenda_to_get_you_to_the_right___________location_at_the_right_time_________">Les routines sont des notes sur vos mouvements journaliers, mais ce ne sont pas des événements que vous voulez avoir dans votre calendrier (ex. travail). Ils sont importants dans l\'Agenda pour vous emmener au bon endroit au bon moment</string>
+	<string name="routines_are_post_of_your_daily_movement_coma_but_they_aren_apostt_events_that_you_want_in_your_calendar__start_parente_dotg_dot_work_end_parent_dot_they_are_important_for_the_agenda_to_get_you_to_the_right_location_at_the_right_time_________">Les routines sont des notes sur vos mouvements journaliers, mais ce ne sont pas des événements que vous voulez avoir dans votre calendrier (ex. travail). Ils sont importants dans l\'Agenda pour vous emmener au bon endroit au bon moment</string>
 	<string name="anonymous_data_tracking">Suivi de données anonyme</string>
 	<string name="searching">Recherche</string>
 	<string name="trip_results">Résultats du trajet</string>
@@ -111,13 +111,13 @@
 	<string name="set_time">Définir l\'heure</string>
 	<string name="set_start_time">Définir l\'heure de départ</string>
 	<string name="set_location">Définir une position</string>
-	<string name="use_your_upcoming_calendar_events_as_location_suggestions_dot_this_information_is_not___________stored_on_any_server_________">Utiliser les événements à venir dans vos calendriers comme suggestion d\'emplacement. Cette information n\'est pas stocké sur serveur</string>
+	<string name="use_your_upcoming_calendar_events_as_location_suggestions_dot_this_information_is_not_stored_on_any_server_________">Utiliser les événements à venir dans vos calendriers comme suggestion d\'emplacement. Cette information n\'est pas stocké sur serveur</string>
 	<string name="show_an_alert_to_leave_at_the_start_of_a_trip">Afficher une alerte de départ au début du trajet</string>
 	<string name="show_an_alert_before_any_public_transport_on_your_trip">Afficher une alerte avant l\'entrée dans un transport en commun</string>
 	<string name="show_service_alerts_which_affect_your_upcoming_trips">Afficher les alertes qui affectent vos voyages à venir</string>
 	<string name="show_an_alert_towards_the_end_of_any_public_transport_on_your_trip">Affiche une alerte lors de la sortie d\'un transport en commun sur votre trajet</string>
 	<string name="rate_the_app_in_the_store_exclam">Notez l\'app dans le Store!</string>
-	<string name="allow_tripgo_to_anonymously_track_your_location_when_you_use_it__start_parentnot_in_the___________background_end_parent_________">Autoriser TripGo à accéder à votre position quand vous utilisez l\'application (PAS en tâche de fond)</string>
+	<string name="allow_tripgo_to_anonymously_track_your_location_when_you_use_it__start_parentnot_in_the_background_end_parent_________">Autoriser TripGo à accéder à votre position quand vous utilisez l\'application (PAS en tâche de fond)</string>
 	<string name="distance_units_to_use_in_trip_results">Unité de distance à utiliser dans les resultats de trajet</string>
 	<string name="start_of_trip">Début du trajet</string>
 	<string name="service_alerts">Alertes de transport</string>
@@ -128,7 +128,7 @@
 	<string name="version">Version</string>
 	<string name="track_app_usage">Suivre l\'utilisation des données</string>
 	<string name="server_to_use_dot_note_this_will_override_asteriskallasterisk_server_calls_exclam">Serveur à utiliser. Attention cela va modifier *TOUT* les appels serveur!</string>
-	<string name="use_your_contact_addresses_as_location_suggestions_dot_this_information_is_not_stored___________on_any_server_________">Utiliser l\'adresse de vos contacts comme suggestion d\'emplacement. Cette information n\'est pas stocké sur serveur</string>
+	<string name="use_your_contact_addresses_as_location_suggestions_dot_this_information_is_not_stored_on_any_server_________">Utiliser l\'adresse de vos contacts comme suggestion d\'emplacement. Cette information n\'est pas stocké sur serveur</string>
 	<string name="influence_trip_results_by_setting_what_aposts_most_important_to_you">Changer les résultats de trajet en définissant ce qui est important pour vous</string>
 	<string name="allow_tripgo_to_anonymously_track_your_app_usage">Autoriser TripGo à suivre anonymement l\'utilisation des données de l\'application</string>
 	<string name="cycling_speed">Vitesse à vélo</string>
@@ -168,19 +168,17 @@
 	<string name="include_in_the_route_results">Inclure dans les résultats de l\'itinéraire</string>
 	<string name="search_routes_directly_right_from_google_search_bar_without_opening_tripgo_dot">Recherche d\'itinéraires directement depuis la barre de recherche Google sans ouvrir TripGo.</string>
 	<string name="yesterday">Hier</string>
-	<string name="never_run_late_dot_agenda_plans_ahead_for_you_and_let_aposts_you_know_when_you_need_to___________leave_dot_________">Ne soyez jamais en retard. L\'Agenda prévoit pour vous et vous informe quand vous devez partir.</string>
+	<string name="never_run_late_dot_agenda_plans_ahead_for_you_and_let_aposts_you_know_when_you_need_to_leave_dot_________">Ne soyez jamais en retard. L\'Agenda prévoit pour vous et vous informe quand vous devez partir.</string>
 	<string name="for_those_without_an_agenda_coma_save_favorite_places_dot">Pour ceux sans agenda, enregistrer vos lieux préférés.</string>
 	<string name="your_trip_is_about_to_start">Votre trajet va commencer</string>
 	<string name="you_are_here">Vous êtes ici</string>
 	<string name="you_are_already_at_nps_exclam">Vous êtes déjà à %s!</string>
 	<!--Settings option to enable/disable news (notifications).-->
 	<string name="news">News</string>
-	<!--In transport mode detail, setting to enable that transport mode to be included in
-          trips.
+	<!--In transport mode detail, setting to enable that transport mode to be included in trips.
         -->
 	<string name="include_in_trips">Include in trips</string>
-	<!--Used for parking slots. Format string for multiple slots. Example: 10 slots
-          available
+	<!--Used for parking slots. Format string for multiple slots. Example: 10 slots available
         -->
 	<string name="nps_slots_available">%s slots available</string>
 	<!--Used for parking slots. Format string for one slots. Example: 1 slot available-->
@@ -195,4 +193,4 @@
 	<string name="ticket_info">Ticket Info</string>
 
 </resources>
-<!-- This is an auto generated file (Thu Jan 19 10:54:19 ART 2017) -->
+<!-- This is an auto generated file (Thu Jan 19 14:10:19 ART 2017) -->

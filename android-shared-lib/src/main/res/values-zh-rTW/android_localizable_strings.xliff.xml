@@ -11,7 +11,7 @@
 	<string name="tap_here_to_set_address_or_long_minuspress_to_delete">點擊這裡來設定地址或是長按來刪除</string>
 	<string name="view_your_daily_agenda_and_favourites_in_the_tabs_below">在下方的標籤頁中查看您的每日行程或是常用項目</string>
 	<string name="all_alerts">所有的提示</string>
-	<string name="all_your_calendars_are_invisible_coma_please_switch_them_on_in_native_calendar_app_or___________account_settings_________">您所有的行事曆目前是隱藏的．請在行事曆程序或是帳號設定中將他們開啟</string>
+	<string name="all_your_calendars_are_invisible_coma_please_switch_them_on_in_native_calendar_app_or_account_settings_________">您所有的行事曆目前是隱藏的．請在行事曆程序或是帳號設定中將他們開啟</string>
 	<string name="an_unexpected_network_error_has_occurred_dot_please_retry_dot">發生意外的網路錯誤．請重新嘗試</string>
 	<string name="approximately_nps_away">離目的地大約還有 %s</string>
 	<string name="__start_parentarrive_">" (到達時間 "</string>
@@ -36,7 +36,7 @@
 	<string name="edit">編輯</string>
 	<string name="edit_event">編輯事件</string>
 	<string name="all_your_calendars_are_disabled_in_tripgo_coma_please_enable_them_in_settings_section_________">您在TripGo裡的所有行事曆都是被停用的．請在設定中將他們開啟</string>
-	<string name="our_end_user_licence_agreement_has_changed_dot_you_must_agree_to_it_before_continuing___________the_use_of_this_app_dot_________">我們的終端用戶許可有所更改．您必須同意所有的變更來繼續使用本程序.</string>
+	<string name="our_end_user_licence_agreement_has_changed_dot_you_must_agree_to_it_before_continuing_the_use_of_this_app_dot_________">我們的終端用戶許可有所更改．您必須同意所有的變更來繼續使用本程序.</string>
 	<string name="edit_favorite">編輯常用項目</string>
 	<string name="empty_event_is_not_saved">空白的事件將不會被儲存</string>
 	<string name="a_location_must_be_set">您必須設定一個位置</string>
@@ -82,7 +82,7 @@
 	<string name="no_favorite_locations_saved">沒有常用位置被儲存</string>
 	<string name="there_was_an_error_and_it_was_reported_to_us_dot_please_try_again">發生錯誤並已回報給我們．請重新嘗試</string>
 	<string name="no_google_play_services_exclam">無法找到Google Play服務!</string>
-	<string name="this_app_requires_google_play_services_to_be_installed_dot__please_download_it_to___________continue_using_the_app_________">此程序需要Google Play服務。請下載Google Play來繼續使用本程序</string>
+	<string name="this_app_requires_google_play_services_to_be_installed_dot__please_download_it_to_continue_using_the_app_________">此程序需要Google Play服務。請下載Google Play來繼續使用本程序</string>
 	<string name="hassle_of_the_trip">路程的方便性</string>
 	<string name="trip_cost">路程費用</string>
 	<string name="trip_duration">路程時間</string>
@@ -102,7 +102,7 @@
 	<string name="select_calendars">選取行事曆</string>
 	<string name="routes_updated">路線已被更新</string>
 	<string name="save">儲存</string>
-	<string name="routines_are_post_of_your_daily_movement_coma_but_they_aren_apostt_events_that_you_want_in___________your_calendar__start_parente_dotg_dot_work_end_parent_dot_they_are_important_for_the_agenda_to_get_you_to_the_right___________location_at_the_right_time_________">例行事件是您每天必須要做的事情，但是您並不想要將它們記錄在行事曆中（例如：上班）．例行事件可以讓“行程”功能在對的時間帶您到對的地方</string>
+	<string name="routines_are_post_of_your_daily_movement_coma_but_they_aren_apostt_events_that_you_want_in_your_calendar__start_parente_dotg_dot_work_end_parent_dot_they_are_important_for_the_agenda_to_get_you_to_the_right_location_at_the_right_time_________">例行事件是您每天必須要做的事情，但是您並不想要將它們記錄在行事曆中（例如：上班）．例行事件可以讓“行程”功能在對的時間帶您到對的地方</string>
 	<string name="anonymous_data_tracking">匿名數據追踪</string>
 	<string name="searching">正在搜尋</string>
 	<string name="trip_results">路程結果</string>
@@ -111,13 +111,13 @@
 	<string name="set_time">設置時間</string>
 	<string name="set_start_time">設置開始時間</string>
 	<string name="set_location">設置位置</string>
-	<string name="use_your_upcoming_calendar_events_as_location_suggestions_dot_this_information_is_not___________stored_on_any_server_________">使用您行事曆上即將到來的事件作為您搜尋位置時的建議．這些資料將不會存放在伺服器上。</string>
+	<string name="use_your_upcoming_calendar_events_as_location_suggestions_dot_this_information_is_not_stored_on_any_server_________">使用您行事曆上即將到來的事件作為您搜尋位置時的建議．這些資料將不會存放在伺服器上。</string>
 	<string name="show_an_alert_to_leave_at_the_start_of_a_trip">在路程開始前顯示提示</string>
 	<string name="show_an_alert_before_any_public_transport_on_your_trip">在您路程上任何大眾交通路段開始前顯示提示</string>
 	<string name="show_service_alerts_which_affect_your_upcoming_trips">對任何會對您即將開始的路程造成影響的車次變動顯示提示</string>
 	<string name="show_an_alert_towards_the_end_of_any_public_transport_on_your_trip">在您路程上任何大眾交通路段結束前顯示提示</string>
 	<string name="rate_the_app_in_the_store_exclam">在Google Play裡評價本程序</string>
-	<string name="allow_tripgo_to_anonymously_track_your_location_when_you_use_it__start_parentnot_in_the___________background_end_parent_________">允許TripGo在您使用時（不是在背景模式），匿名追蹤您的位置</string>
+	<string name="allow_tripgo_to_anonymously_track_your_location_when_you_use_it__start_parentnot_in_the_background_end_parent_________">允許TripGo在您使用時（不是在背景模式），匿名追蹤您的位置</string>
 	<string name="distance_units_to_use_in_trip_results">在路程結果中所使用的距離單位</string>
 	<string name="start_of_trip">在路程即將開始時</string>
 	<string name="service_alerts">在車次有變動時</string>
@@ -128,7 +128,7 @@
 	<string name="version">版本</string>
 	<string name="track_app_usage">追蹤程序使用情形</string>
 	<string name="server_to_use_dot_note_this_will_override_asteriskallasterisk_server_calls_exclam">使用的伺服器．請注意，這將取代"所有"的伺服器要求</string>
-	<string name="use_your_contact_addresses_as_location_suggestions_dot_this_information_is_not_stored___________on_any_server_________">使用您通訊錄上的地址作為您搜尋位置時的建議．這些資料將不會存放在伺服器上。</string>
+	<string name="use_your_contact_addresses_as_location_suggestions_dot_this_information_is_not_stored_on_any_server_________">使用您通訊錄上的地址作為您搜尋位置時的建議．這些資料將不會存放在伺服器上。</string>
 	<string name="influence_trip_results_by_setting_what_aposts_most_important_to_you">您可以透過設定什麼對您是最重要的來影響路線規劃的結果</string>
 	<string name="allow_tripgo_to_anonymously_track_your_app_usage">允許TripGo匿名追蹤您的程序使用情形</string>
 	<string name="cycling_speed">單車騎速</string>
@@ -168,19 +168,17 @@
 	<string name="include_in_the_route_results">顯示在路線結果中</string>
 	<string name="search_routes_directly_right_from_google_search_bar_without_opening_tripgo_dot">您可以不需要開啟TripGo，直接在Google搜尋欄查詢路線</string>
 	<string name="yesterday">昨天</string>
-	<string name="never_run_late_dot_agenda_plans_ahead_for_you_and_let_aposts_you_know_when_you_need_to___________leave_dot_________">您將不會再遲到了．“行程”功能會將您的一天規劃好，並讓您知道何時該出發前往您的下一個事件</string>
+	<string name="never_run_late_dot_agenda_plans_ahead_for_you_and_let_aposts_you_know_when_you_need_to_leave_dot_________">您將不會再遲到了．“行程”功能會將您的一天規劃好，並讓您知道何時該出發前往您的下一個事件</string>
 	<string name="for_those_without_an_agenda_coma_save_favorite_places_dot">對那些不需要“行程”的使用者，您可以儲存您常到訪的位置</string>
 	<string name="your_trip_is_about_to_start">您的路程即將開始</string>
 	<string name="you_are_here">您已抵達</string>
 	<string name="you_are_already_at_nps_exclam">您已經在%s!了</string>
 	<!--Settings option to enable/disable news (notifications).-->
 	<string name="news">消息</string>
-	<!--In transport mode detail, setting to enable that transport mode to be included in
-          trips.
+	<!--In transport mode detail, setting to enable that transport mode to be included in trips.
         -->
 	<string name="include_in_trips">顯示在所有路線結果中</string>
-	<!--Used for parking slots. Format string for multiple slots. Example: 10 slots
-          available
+	<!--Used for parking slots. Format string for multiple slots. Example: 10 slots available
         -->
 	<string name="nps_slots_available">%s 個座位</string>
 	<!--Used for parking slots. Format string for one slots. Example: 1 slot available-->
@@ -195,4 +193,4 @@
 	<string name="ticket_info">票證詳情</string>
 
 </resources>
-<!-- This is an auto generated file (Thu Jan 19 10:54:19 ART 2017) -->
+<!-- This is an auto generated file (Thu Jan 19 14:10:19 ART 2017) -->
