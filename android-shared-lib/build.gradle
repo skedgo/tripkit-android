@@ -3,7 +3,7 @@ apply plugin: 'com.github.dcendents.android-maven'
 
 // For https://github.com/dcendents/android-maven-gradle-plugin.
 group = 'com.skedgo'
-version = '1.0'
+version = '1.1'
 
 android {
   compileSdkVersion 24
@@ -21,11 +21,24 @@ android {
   }
 }
 
-task(generateStrings, type: org.gradle.api.tasks.JavaExec) {
+task(generateAndroidStrings, type: org.gradle.api.tasks.JavaExec) {
   classpath(files('XLIFFtoAndroidConverter.jar'))
   main('com.skedgo.tripgo.tools.android.Main')
   args(['./src/main/res', '../../libraries/translations', 'void',
-        'en#es#de#fi#fr#nl#pt#it#zh-Hant#zh-Hans', 'iOS.xliff', 'android_localizable_strings.xliff'])
+        // Format: dirSrc:dirDest#dirSrc:dirDest#...
+        'en:en#es-ES:es#de-DE:de#fi-FI:fi#fr-FR:fr#nl-NL:nl#pt-PT:pt#it-IT:it#zh-CN:zh-Hans#zh-TW:zh-Hant#da-DK:da#ko-KR:ko',
+        // Format: xliffSourceFile:fileElementType | xliffSourceFile (all file elements parsed)
+        'android_localizable_strings.xliff'])
+}
+
+task(generateiOSStrings, type: org.gradle.api.tasks.JavaExec) {
+  classpath(files('XLIFFtoAndroidConverter.jar'))
+  main('com.skedgo.tripgo.tools.android.Main')
+  args(['./src/main/res', '../../libraries/translations/Translations/4_FromCrowdin', 'void',
+        // Format: dirSrc:dirDest#dirSrc:dirDest#...
+        'en:en#es_ES:es#de:de#fi:fi#fr:fr#nl:nl#pt_PT:pt#it:it#zh_Hans:zh-Hans#zh_Hant:zh-Hant#da:da#ko:ko',
+        // Format: xliffSourceFile:fileElementType | xliffSourceFile (all file elements parsed)
+        'iOS.xliff'])
 }
 
 dependencies {

@@ -1,0 +1,932 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<resources>
+	<string name="tripgo_agenda">TripGo dagsorden</string>
+	<string name="notification_extension">Notification Extension</string>
+	<!--Class = "WKInterfaceSwitch"; title = "Reminder"; ObjectID = "00e-CH-gOu";-->
+	<string name="reminder">Påmindelse</string>
+	<!--Class = "WKInterfaceLabel"; text = "Description"; ObjectID = "0mK-e0-427";-->
+	<string name="description">Beskrivelse</string>
+	<!--Class = "WKInterfaceLabel"; text = "No Data"; ObjectID = "6Qf-Ve-PDJ";-->
+	<string name="no_data">Ingen data</string>
+	<!--Class = "WKInterfaceController"; title = "TripGo"; ObjectID = "AgC-eL-Hgc";-->
+	<string name="tripgo">TripGo</string>
+	<!--Class = "WKInterfaceLabel"; text = "Getting trip"; ObjectID = "F85-mJ-6yD";-->
+	<string name="getting_trip">Får en tur</string>
+	<!--Class = "WKInterfaceButton"; title = "Show Map"; ObjectID = "GGf-v0-vEJ";-->
+	<string name="show_map">Vis kort</string>
+	<!--Class = "WKInterfaceMenuItem"; title = "Favourites"; ObjectID = "RoM-Us-t1Y";-->
+	<string name="favourites">Foretrukne</string>
+	<!--Class = "WKInterfaceMenuItem"; title = "Agenda"; ObjectID = "Uzb-ex-6N5";-->
+	<string name="agenda">Dagsorden</string>
+	<!--Class = "WKInterfaceButton"; title = "Timetable"; ObjectID = "h3q-kR-2ID";-->
+	<string name="timetable">Tidsplan</string>
+	<!--Class = "WKInterfaceLabel"; text = "Alert"; ObjectID = "jYK-Fw-rhR";-->
+	<string name="alert">Advarsel</string>
+	<!--Class = "WKInterfaceMenuItem"; title = "Retry"; ObjectID = "r0K-AY-XvO";-->
+	<string name="retry">Prøv Igen</string>
+	<string name="tripgo_watchkit_extension">TripGo WatchKit Extension</string>
+	<!--Instruction to users when there are no upcoming trips-->
+	<string name="plan_a_trip_on_your_phone_or_press_firmly_to_access_your_favourites_dot">Planlæg en tur på din telefon eller tryk fast for at få adgang til dine favoritter.</string>
+	<!--Format string for going from one location to another. For example: Used to name favourite trips.-->
+	<string name="_pattern_to__pattern">%1$s til %2$s</string>
+	<!--Add a new stopover-->
+	<string name="add_stopover_dot_dot_dot">Tilføj mellemlanding...</string>
+	<!--Button to save a trip to the agenda-->
+	<string name="add_to_agenda">Tilføj til dagsorden</string>
+	<!--Error title when agenda isn't yet set up.-->
+	<string name="agenda_is_not_set_up_dot">Dagsordenen er ikke sat op.</string>
+	<!--Button to agree to EULA or a similar agreement-->
+	<string name="agree">Enig</string>
+	<!--Option to use this trip for all similar cases.-->
+	<string name="all">Alle</string>
+	<!--Option to delete this event and all after in a recurrence-->
+	<string name="all_from_here">Alle herfra</string>
+	<!--Type for regular events that go in the phone's calendar.-->
+	<string name="calendar_event">Kalender begivenhed</string>
+	<!--Indicating the next trip is a current trip-->
+	<string name="current_trip">Nuværende tur</string>
+	<!--No comment provided by engineer.-->
+	<string name="database_corrupted_and_lost_dot">Databasen er beskadiget og mistet.</string>
+	<!--Button to dismiss something, e.g., an error or action action sheet-->
+	<string name="dismiss">Afvis</string>
+	<!--Title for a flight-->
+	<string name="flight">Fly</string>
+	<!--Indicating localisation is in progress-->
+	<string name="getting_current_location">Får den nuværende placering</string>
+	<!--Message to show when trying to get trip for a favorite-->
+	<string name="getting_trip_dot_dot_dot">Får en tur...</string>
+	<!--Type for events that are regular visit's to one of the user's favorites-->
+	<string name="habitual_visit">Sædvanlige besøg</string>
+	<!--Typical name that you'd give your home location-->
+	<string name="home">Hjem</string>
+	<!--Inidcating the watch app is loading-->
+	<string name="loading_dot_dot_dot">Indlæser...</string>
+	<!--Button to show a map or to modify the map's settings-->
+	<string name="map">Kort</string>
+	<!--Indicator that a transport mode will appear minimised on the routes screen.-->
+	<string name="minimised">Miniméret</string>
+	<!--Title for unnamed new event-->
+	<string name="new_event">Ny begivenhed</string>
+	<!--Option to delete only this event in a recurence-->
+	<string name="only_this">Kun denne</string>
+	<!--Recovery suggestion when TripGo cannot access its local files-->
+	<string name="please_delete_the_app_and_re_minusinstall_from_the_app_store_dot_sorry_for_the_inconvenience_exclam">Slet venligst appen, og geninstaller fra App Store. Beklager ulejligheden!</string>
+	<!--Recovery suggestion when an app restart is required, e.g., when the database got corrupted and/or the app can't access its local files.-->
+	<string name="please_restart_the_app_dot_sorry_for_the_inconvenience_exclam">Genstart venligst appen. Beklager ulejligheden!</string>
+	<!--Profile tab bar name-->
+	<string name="profile">Profil</string>
+	<!--Action title to reset something, e.g., settings-->
+	<string name="reset">Nulstil</string>
+	<!--Error recovery suggestion when agenda isn't yet set up but needed for Watch app.-->
+	<string name="set_up_your_agenda_in_the_tripgo_app_dot">Konfigurer din dagsorden i TripGo app.</string>
+	<!--Show trip-->
+	<string name="show_trip">Vis tur</string>
+	<!--Action button on trip reminders to snooze it for a fixed amount.-->
+	<string name="snooze_5_mins">Snooze 5 min.</string>
+	<!--Action button on public transport trip reminders to skip this service and get reminded for the next service-->
+	<string name="snooze_until_next">Udsæt indtil næste</string>
+	<!--Stay, i.e., type for dates you're staying at a hotel, or when moving house.-->
+	<string name="stay">Ophold</string>
+	<!--Title for stopover event-->
+	<string name="stopover">Mellemlanding</string>
+	<!--Notification message for trip with unknown destination. Notification message for a non-public transport trip. Provided is %time you need to leave.-->
+	<string name="time_to_leave_exclam_your_trip_commences_at__pattern">Tid til at forlade! Din rejse begynder på %1$s</string>
+	<!--Notification message for a trip. Provided is %destination and %time you need to leave.-->
+	<string name="time_to_leave_exclam_your_trip_to__pattern_commences_at__pattern">Tid til at forlade! Din rejse til %1$s begynder kl. %2$s</string>
+	<!--Title for button to access transport modes-->
+	<string name="transport">Transport</string>
+	<!--No comment provided by engineer.-->
+	<string name="tripgo_cannot_access_its_local_files_dot">TripGo kan ikke få adgang til dens lokale filer.</string>
+	<!--Trips tab bar name-->
+	<string name="trips">Ture</string>
+	<!--Indicating the next trip is an upcoming trip-->
+	<string name="upcoming_trip">Kommende tur</string>
+	<!--Button to view something, e.g., a notification content or the EULA-->
+	<string name="view">Vis</string>
+	<!--Class = "UINavigationItem"; title = "Settings"; ObjectID = "5WK-au-VFq";-->
+	<string name="settings">Indstillinger</string>
+	<!--Class = "UINavigationItem"; title = "Routes"; ObjectID = "IFX-i9-ymN";-->
+	<string name="routes">Ruter</string>
+	<!--Class = "UINavigationItem"; title = "Service"; ObjectID = "JMk-5m-B22";-->
+	<string name="service">Tjeneste</string>
+	<!--Class = "UINavigationItem"; title = "Trip"; ObjectID = "QTR-Ae-g7f";-->
+	<string name="trip">Tur</string>
+	<!--Class = "UINavigationItem"; title = "Alerts"; ObjectID = "t3k-Ks-sqa";-->
+	<string name="alerts">Advarsler</string>
+	<!--Class = "UIButton"; accessibilityLabel = "Swap from and to"; ObjectID = "30";-->
+	<string name="swap_from_and_to">Skift fra og til</string>
+	<!--Class = "UIButton"; normalTitle = "Time"; ObjectID = "44";-->
+	<string name="time">Tid</string>
+	<!--Class = "UIButton"; accessibilityLabel = "Route"; ObjectID = "57";-->
+	<string name="route">Rute</string>
+	<!--Class = "UIButton"; accessibilityLabel = "To Location"; ObjectID = "JFm-H4-fOo";-->
+	<string name="to_location">Til placering</string>
+	<!--Class = "UIButton"; accessibilityLabel = "From Location"; ObjectID = "bs1-li-naL";-->
+	<string name="from_location">Fra placering</string>
+	<!--Class = "UILabel"; text = "VALID FROM"; ObjectID = "Ymf-LY-K7e";-->
+	<string name="valid_from">GYLDIG FRA</string>
+	<!--Class = "UILabel"; text = "TO"; ObjectID = "x1o-my-P1Q";-->
+	<string name="to">TIL</string>
+	<!--Minutes format (used for transfer times). (old key: Minutes)-->
+	<string name="_perc_dot0f_minutes">%.0f minutter</string>
+	<!--Minutes format (used alert firing X minuts before departure). (old key: MinutesBefore)-->
+	<string name="_perc_dot0f_minutes_before">%.0f minutter før</string>
+	<!--Title for linked third-party account, e.g., 'Uber Account'-->
+	<string name="_pattern_account">%1$s konto</string>
+	<!--Filler for a specific service running at a time, e.g., '396 at 11:56am'-->
+	<string name="_pattern_at__pattern">%1$s kl. %2$s</string>
+	<!--Filler for a specific frequency-based service indicating its frequency, e.g., 'M10 every 10 minutes'-->
+	<string name="_pattern_every__pattern">%1$s hver %2$s</string>
+	<!--Airline flight number with %airline and %flightNumber, e.g., 'Qantas flight QF1'. (old key: AirlineFlightNumber)-->
+	<string name="_pattern_flight__pattern">%1$s flyrejse %2$s</string>
+	<!--Error title when access to location hasn't been granted, but location is required.-->
+	<string name="access_to_location_services_required_dot">Adgang til placeringstjenester kræves.</string>
+	<!--Add reminder activity title-->
+	<string name="add_reminder">Tilføj påmindelse</string>
+	<!--No comment provided by engineer.-->
+	<string name="add_address_dot_dot_dot">Tilføj adresse...</string>
+	<!--No comment provided by engineer.-->
+	<string name="add_another_recurrence">Tilføj en anden gentagelse</string>
+	<!--Add to calendar activity title-->
+	<string name="add_to_calendar">Føj til kalender</string>
+	<!--Add favourite activity title-->
+	<string name="add_to_favourites">Føj til foretrukne</string>
+	<!--Action title for adding a vehicle-->
+	<string name="add_vehicle">Tilføj køretøj</string>
+	<!--Action title for adding another habitual visit to a favourite. (old key: NewItemHereActionTitle)-->
+	<string name="add_when_i_apostm_here">Tilføj når jeg her</string>
+	<!--Confirmation that something got added HUD notice-->
+	<string name="added">Tilføjet</string>
+	<!--Alert title that indicates an address is missing when creating a new event.-->
+	<string name="address_required">Adresse påkrævet</string>
+	<!--Title for agenda screen while it's still in setup mode.-->
+	<string name="agenda_setup">Dagsorden opsætning</string>
+	<!--Action button title to see alternative options for the case where you can't make the next connection.-->
+	<string name="alternative_routes">Alternative ruter</string>
+	<!--No comment provided by engineer.-->
+	<string name="ambiguous_event_address_dot">Tvetydige begivenheds adresse.</string>
+	<!--Arrival date+time for overnight stay-->
+	<string name="arrival">Ankomst</string>
+	<!--Arrive before button-->
+	<string name="arrive_by">Ankommer i</string>
+	<!--Title for section to assign a trip to a vehicle.-->
+	<string name="assign_to_vehicle">Tildel til køretøj</string>
+	<!--Filler for a service running at time, e.g., 'At 11:56am'-->
+	<string name="at__pattern">Kl. %1$s</string>
+	<!--Distance 'automatic'-->
+	<string name="auto">Automatisk</string>
+	<!--Header for settings of reminders automatically added by TripGo through the agenda-->
+	<string name="automatic_reminders">Automatiske påmindelser</string>
+	<!--Response to positive answer to question whether TripGo is useful, prompting for App Store rating.-->
+	<string name="awesome_exclam_how_about_rating_us_question">Fantastisk! Hvad med at vurdere os?</string>
+	<!--Book a taxi-->
+	<string name="book_a_taxi">Bestil en Taxi</string>
+	<!--Description on empty bookings screen-->
+	<string name="bookings_made_with_tripgo_will_appear_here_dot">Bestillinger foretaget med TripGo vises her.</string>
+	<!--Response to negative answer to question whether TripGo is useful, prompting for feedback.-->
+	<string name="bummer_dot_dot_dot_how_about_some_feedback_question">Nederen... Hvad med noget feedback?</string>
+	<!--Calendar-->
+	<string name="calendar">Kalender</string>
+	<!--No comment provided by engineer.-->
+	<string name="calendars">Kalendere</string>
+	<!--No comment provided by engineer.-->
+	<string name="change_time">Ændrer tid</string>
+	<!--clear cache preference-->
+	<string name="clear_cache">Tøm cache</string>
+	<!--clear search history preference-->
+	<string name="clear_search_history">Ryd søgehistorik</string>
+	<!--School pricing preference-->
+	<string name="concession_pricing">Koncession prissætning</string>
+	<!--Hassle preference-->
+	<string name="convenience">Bekvemmelighed</string>
+	<!--Convenience description-->
+	<string name="convenience_is_affected_by_things_such_as_changing_public_transport_services_coma_the_amount_of_walking_coma_and_finding_a_taxi_dot">Bekvemmelighed er påvirket af ting som ændring i offentlig transport, mængden af gåture, og at finde en taxa.</string>
+	<!--Error title when TripGo couldn't identify the user's current city.-->
+	<string name="could_not_find_your_city_dot">Kunne ikke finde din by.</string>
+	<!--Title for critical error-->
+	<string name="critical_error">Kritisk fejl</string>
+	<!--No comment provided by engineer.-->
+	<string name="custom_trip_does_not_fit">Brugerdefineret tur passer ikke</string>
+	<!--No comment provided by engineer.-->
+	<string name="custom_trip_has_been_cancelled">Brugerdefineret tur er blevet annulleret</string>
+	<!--Cycling speed preference-->
+	<string name="cycle_speed">Cykel hastighed</string>
+	<!--Departure date+time for overnight stay-->
+	<string name="departure">Afgang</string>
+	<!--Distances preference-->
+	<string name="distances">Afstande</string>
+	<!--Title for transport modes that the user doesn't want included-->
+	<string name="do_not_include">Medtag ikke</string>
+	<!--No comment provided by engineer.-->
+	<string name="do_you_want_to_always_use_this_trip_and_add_it_to_your_favourites_question">Vil du altid bruge denne tur og føje den til dine foretrukne?</string>
+	<!--Walkthrough (skip in here should match translation for 'Skip'.-->
+	<string name="don_apostt_have_a_fixed_place_of_work_or_study_question_skip_this_step_dot">Har ikke en fast arbejds- eller studieplads? Spring dette trin.</string>
+	<!--Label for 'Duration' button to sort trips by their total duration. (old key: ViewDurationButton)-->
+	<string name="duration">Varighed</string>
+	<!--Used in countdown context, indicating when a ticket becomes valid-->
+	<string name="effective_in">Gældende fra</string>
+	<!--Title for the time an event ends (including date information)-->
+	<string name="end_date">Slutdato</string>
+	<!--No comment provided by engineer.-->
+	<string name="end_user_licence_agreement">Slutbrugerlicensaftale</string>
+	<!--Carbon preference-->
+	<string name="environment">Miljø</string>
+	<!--No comment provided by engineer.-->
+	<string name="event">Begivenhed</string>
+	<!--No comment provided by engineer.-->
+	<string name="event_does_not_fit">Event passer ikke</string>
+	<!--No comment provided by engineer.-->
+	<string name="event_is_missing_an_address_dot">Begivenhed mangler en adresse.</string>
+	<!--No comment provided by engineer.-->
+	<string name="event_is_outside_tripgo_aposts_range_dot">Begivenheden er udenfor TripGo rækkevidde.</string>
+	<!--No comment provided by engineer.-->
+	<string name="event_was_cancelled">Begivenheden blev aflyst</string>
+	<!--Filler for a frequency-based service indicating its frequency, e.g., 'Every 10 minutes'-->
+	<string name="every__pattern">Hver %1$s</string>
+	<!--Text do mark an example-->
+	<string name="example">Eksempel</string>
+	<!--Exclude event action-->
+	<string name="exclude">Ekskludér</string>
+	<!--Used in countdown context, indicating when a ticket expires-->
+	<string name="expire_in">Udløber om</string>
+	<!--Title for list of expired tickets-->
+	<string name="expired">Udløbet</string>
+	<!--Speed preference 'fast'-->
+	<string name="fast">Hurtigt</string>
+	<!--No comment provided by engineer.-->
+	<string name="favourite">Foretrukken</string>
+	<!--No comment provided by engineer.-->
+	<string name="favourite_trip">Foretrukken Tur</string>
+	<!--Help title-->
+	<string name="feedback__ampersand_support">Feedback &amp; support</string>
+	<!--Placeholder text for search bar that is used for filtering-->
+	<string name="filter">Filter</string>
+	<string name="flight_number">Flynummer</string>
+	<!--Reminder to leave preference-->
+	<string name="for_when_to_leave">For at forlade</string>
+	<!--Favorite trip 'from' title-->
+	<string name="from">Fra</string>
+	<!--Route here... ...from Current location-->
+	<string name="from_current_location">Fra nuværende placering</string>
+	<!--Header for list of vehicles garaged at this location-->
+	<string name="garaged_vehicles">Parkeret køretøjer</string>
+	<!--Title of settings for generic transport stuff-->
+	<string name="general">Generelt</string>
+	<!--Header for settings for feedback, recommending and rating TripGo-->
+	<string name="get_involved">Bliv involveret</string>
+	<!--Action button title for getting turn-by-turn directions-->
+	<string name="get_directions">Vejvisning</string>
+	<!--Get off here-->
+	<string name="get_off_here">Stå af her</string>
+	<!--Get on here-->
+	<string name="get_on_here">Stå på her</string>
+	<!--Description for button to get on or off at the selected public transport stop rather than where TripGo suggested.-->
+	<string name="get_on_or_off_here">Stå af eller på her</string>
+	<!--No comment provided by engineer.-->
+	<string name="has_tripgo_been_useful_to_you_question">Har TripGo været nyttig for dig?</string>
+	<!--Map mode 'streets + satellite'-->
+	<string name="hybrid">Hybrid</string>
+	<!--Include event action-->
+	<string name="include">Inkluder</string>
+	<string name="include_step_count">Inkludér skridt tæller</string>
+	<!--Title for a switch indicating two things: 1) if transport mode should be included in trips and 2) if this event should be included in all-day routes-->
+	<string name="include_in_routes">Inkludér i ruter</string>
+	<!--Accessibility hint for tapping title in agenda - jumps to 'today'-->
+	<string name="jump_to_today">Spring til i dag</string>
+	<!--Distance 'kilometers'-->
+	<string name="km">Km</string>
+	<!--Leave after button-->
+	<string name="leave_at">Forlad om</string>
+	<!--Button title to switch view to list mode-->
+	<string name="list">Liste</string>
+	<!--Title for showing the details of a location, typically picked from the map after searching or dropping a pin-->
+	<string name="location">Placering</string>
+	<!--No comment provided by engineer.-->
+	<string name="location_missing_dot">Placering mangler.</string>
+	<!--Error title when favourite is missing a location..-->
+	<string name="location_not_set_dot">Placering er ikke sat.</string>
+	<!--No comment provided by engineer.-->
+	<string name="long_press_on_the_map_to_choose_a_location">Langt tryk på kortet for at vælge en placering</string>
+	<!--Header for settings of reminders that the user manually added-->
+	<string name="manual_reminders">Manuel påmindelser</string>
+	<!--No comment provided by engineer.-->
+	<string name="marking_a_location_as_a_favourite_will_allow_quick_access_to_routing_results_for_going_there_from_your_current_location_dot">Markering af en placering som Foretrukken vil give hurtig adgang til rute resultater, for at kommer derhen, fra din nuværende placering.</string>
+	<!--No comment provided by engineer.-->
+	<string name="marking_a_transit_stop_as_a_favourite_will_allow_quick_access_to_its_timetable_dot">Markering af et transit stop som foretrukken vil give hurtig adgang til dens tidsplan.</string>
+	<!--Speed preference 'medium'-->
+	<string name="medium">Medium</string>
+	<!--Distance 'miles'-->
+	<string name="mi">Mi</string>
+	<!--Minimum transfer time preference-->
+	<string name="min_transfer_time">Min. overførsel tid</string>
+	<!--No comment provided by engineer.-->
+	<string name="minimise_results_for_this_mode_on_the_routes_screen_dot_great_for_transport_options_you_only_use_occasionally_dot">Minimer resultater for denne tilstand på skærmen ruter. Fantastisk til transportmuligheder du bruger kun engang i mellem.</string>
+	<!--Reminder to leave preference-->
+	<string name="minutes_before_trip">Minutter før turen</string>
+	<!--More button accessibility label-->
+	<string name="more">Mere</string>
+	<!--Header for list of how to get more information (e.g., by opening a website)-->
+	<string name="more_information">Mere Information</string>
+	<!--Sample event name ('Movie')-->
+	<string name="movie">Film</string>
+	<!--Title for profile item that loads a list of user's bookings-->
+	<string name="my_bookings">Mine bestillinger</string>
+	<!--User preferences title-->
+	<string name="my_priorities">Mine prioriteter</string>
+	<!--No comment provided by engineer.-->
+	<string name="my_transport">Min Transport</string>
+	<!--Header for list of my vehicles-->
+	<string name="my_vehicles">Mine køretøjer</string>
+	<!--Error recovery suggestion for when TripGo couldn't identify the user's current city.-->
+	<string name="navigate_to_a_supported_city_on_a_map_dot">Naviger til en understøttet by på et kort.</string>
+	<!--No comment provided by engineer.-->
+	<string name="new_favourite">Ny Foretrukken</string>
+	<!--No comment provided by engineer.-->
+	<string name="no__apostfrom_apost_location_selected">Ingen \'fra\' placering valgt</string>
+	<!--No comment provided by engineer.-->
+	<string name="no__apostto_apost_location_selected">Ingen \'til\' placering valgt</string>
+	<!--Error title for when no calendar found.-->
+	<string name="no_calendar_found_dot">Ingen kalender fundet.</string>
+	<!--No comment provided by engineer.-->
+	<string name="no_locations_set">Ingen placering sat</string>
+	<!--Error title when routing produced no results (but no specific error was returned from routing).-->
+	<string name="no_routes_found_dot">Ingen ruter fundet.</string>
+	<!--Negative answer to follow-up question for rating or feedback.-->
+	<string name="no_coma_thanks">Nej tak</string>
+	<!--Negative answer to question whether TripGo is useful.-->
+	<string name="not_really">Ikke rigtigt</string>
+	<!--Countdown cell 'now' indicator-->
+	<string name="now">Nu</string>
+	<!--No comment provided by engineer.-->
+	<string name="ok">OK</string>
+	<!--Title for homescreen action to open the agenda-->
+	<string name="open_agenda">Åben dagsorden</string>
+	<!--Error recovery suggestion for favourites with missing location.-->
+	<string name="open_tripgo_app_and_add_the_location_of_this_favourite_dot">Åbne TripGo appen og tilføj placeringen af denne favorit.</string>
+	<!--Error recovery suggestion for when watch doesn't have access to location services.-->
+	<string name="open_tripgo_or_settings_app_on_your_phone_and_grant_tripgo_access_to_location_services_dot">Åbne TripGo eller indstillinger appen på din telefon og giv TripGo adgang til placeringstjenester.</string>
+	<!--No comment provided by engineer.-->
+	<string name="open_website">Åben hjemmeside</string>
+	<!--No comment provided by engineer.-->
+	<string name="our_end_user_licence_agreement_has_changed_dot_you_must_agree_to_it_before_continuing_use_of_this_app">Vores Slutbruger licensaftalen er blevet ændret. Du skal acceptere det før fortsat brug af denne app</string>
+	<!--Text displayed when the user has given the app access to private data such as their calendar or contacts, but the user needs to perform the original action again to now see the results.-->
+	<string name="permission_was_granted_dot_please_go_back_and_try_again_dot">Tilladelse blev givet. Gå tilbage og prøv igen.</string>
+	<!--No comment provided by engineer.-->
+	<string name="permissions">Tilladelser</string>
+	<!--Timetable screen title-->
+	<string name="pick_a_time">Vælg et tidspunkt</string>
+	<!--Title for homescreen action to plan a new trip-->
+	<string name="plan_trip">Planlæg tur</string>
+	<!--Title for button that allows users to plan a new trip-->
+	<string name="plan_a_new_trip">Planlæg en ny tur</string>
+	<string name="plan_a_trip_on_your_phone_dot">Planlæg en tur på din telefon.</string>
+	<!--Error recovery suggestion for when routing produced no results (but no specific error was returned from routing).-->
+	<string name="please_adjust_your_query_and_try_again_dot">Kontrollér din forespørgsel og prøv igen.</string>
+	<!--Error recovery suggestion for when no calendar found.-->
+	<string name="please_check_your_calendar_app_and_make_sure_you_have_a_calendar_configured_dot">Kontroller din kalender app, og sørg for at du har en kalender, der er konfigureret.</string>
+	<!--Alert message that asks users to provide the missing address for a new event.-->
+	<string name="please_specify_an_address_dot">Specificer venligst adressen.</string>
+	<!--Label for 'Overall' button to sort trips by their overall total score considering all factors. (old key: ViewOverallButton)-->
+	<string name="preferred">Foretrukne</string>
+	<!--Title for preferred public transport modes.-->
+	<string name="preferred_transport">Foretrukne transport</string>
+	<!--Label for 'Price' button to sort trips by their total cost. (old key: ViewPriceButton)-->
+	<string name="price">Pris</string>
+	<!--No comment provided by engineer.-->
+	<string name="priorities">Prioriteter</string>
+	<!--Rate us preference-->
+	<string name="rate_tripgo">Vurder TripGo</string>
+	<!--Explanation for what calendar events are compared to habituals and stays. Can be long-ish.-->
+	<string name="regular_events_which_will_be_saved_in_your_device_aposts_calendar_dot">Regelmæssige begivenheder, som vil blive gemt i din enheds kalender.</string>
+	<!--Reminders title-->
+	<string name="reminders">Påmindelser</string>
+	<!--No comment provided by engineer.-->
+	<string name="remove">Fjern</string>
+	<!--Remove favourite activity title-->
+	<string name="remove_favourite">Fjern Foretrukken</string>
+	<!--Remove reminder activity title-->
+	<string name="remove_reminder">Fjern påmindelse</string>
+	<!--No comment provided by engineer.-->
+	<string name="remove_and_exclude_event">Fjern og udeluk begivenhed</string>
+	<!--Unsave trip action-->
+	<string name="remove_from_agenda">Fjern fra dagsordenen</string>
+	<!--Confirmation that something got removed HUD notice-->
+	<string name="removed">Fjernet</string>
+	<!--No comment provided by engineer.-->
+	<string name="removing_this_trip_will_exclude_the_following_event_from_your_agenda_dot">Ved at fjerne denne tur vil du udelukke den følgende begivenhed fra din dagsorden.</string>
+	<string name="removing_this_trip_will_exclude_the_preceeding_event_from_your_agenda_dot">Ved at fjerne denne tur vil du udelukke den foregående begivenhed fra din dagsorden.</string>
+	<!--Title for switch indicating if an event repeats or not-->
+	<string name="repeat_does_end">Gentagelse slutter</string>
+	<!--Title for when an event repeats-->
+	<string name="repeats">Gentag</string>
+	<!--Report problem-->
+	<string name="report_problem">Rapporter problemet</string>
+	<!--Title for button that allows users to request support-->
+	<string name="request_support">Anmod om support</string>
+	<!--Title for action to perform by the user if an event is outside TripGo's range. The action will display a feedback form to request the region of that event.-->
+	<string name="request_dot_dot_dot">Anmod om...</string>
+	<!--Action title to reset agenda content.-->
+	<string name="reset_agenda">Genstart dagsorden</string>
+	<!--Action title to reset tutorial progress.-->
+	<string name="reset_tutorial">Genstart tutorial</string>
+	<!--Title for selector of return time for a trip-->
+	<string name="return_time">Ankomst Tid</string>
+	<!--Header for section to configure return trip-->
+	<string name="return_trip">Returrejse</string>
+	<!--No comment provided by engineer.-->
+	<string name="review_eula">Se slutbrugerlicensaftalen</string>
+	<!--Title for options for routing to this location, options are: current location, <some previously selected location>.-->
+	<string name="route_here">Rute hertil</string>
+	<!--Explanation for what routines are compared to calendar events and stays. Can be long-ish. (old key: HabitualEventDescription)-->
+	<string name="routines_are_part_of_your_daily_movement_coma_but_they_aren_apostt_events_that_you_want_in_your_calendar__start_parente_dotg_dot_coma_work_end_parent_dot_they_are_important_for_the_agenda_to_get_you_to_the_right_location_at_the_right_time_dot">Rutiner er en del af din daglige bevægelse, men de er ikke hændelser, som du ønsker i din kalender (f.eks. arbejde). De er vigtige for dagsordenen til at få dig til det rigtige sted på det rigtige tidspunkt.</string>
+	<!--Error message if interregional routing isn't yet supported-->
+	<string name="routing_from__pattern_to__pattern_is_not_yet_supported">Ruter fra %1$s til %2$s understøttes ikke endnu</string>
+	<!--Used in the form that requests support for a specific routing-->
+	<string name="routing_request">Rute anmodning</string>
+	<!--Map mode 'satellite'-->
+	<string name="satellite">Satellit</string>
+	<!--Price preference-->
+	<string name="save_money">Spar penge</string>
+	<!--Time preference-->
+	<string name="save_time">Spar tid</string>
+	<string name="search_for_a_city">Søg efter en by</string>
+	<!--Agenda onboarding: placeholder text for search bar for 'home'.-->
+	<string name="search_for_your_home_address">Søg efter din hjemadresse</string>
+	<!--Agenda onboarding: placeholder text for search bar for 'work'.-->
+	<string name="search_for_your_work_address">Søg efter din arbejdsadresse</string>
+	<!--No comment provided by engineer.-->
+	<string name="select_vehicle">Vælg et køretøj</string>
+	<string name="select_a_date_to_get_flight_details_dot">Vælg en dato for at få oplysninger om en flyrejse.</string>
+	<!--Walkthrough-->
+	<string name="select_the_place_where_you_stay_at_the_end_of_each_day">Vælg det sted, hvor du opholder dig ved slutningen af hver dag</string>
+	<!--Action button title for composing an SMS to a real-time service-->
+	<string name="send_real_minustime_sms">Send Rigtig-Tid SMS</string>
+	<!--Action button title for sharing when you arrive-->
+	<string name="share_arrival">Del ankomst</string>
+	<!--Share trip-->
+	<string name="share_trip">Start turen</string>
+	<!--Button title on trips to show alternatives for it-->
+	<string name="show_alternatives">Vis alternativer</string>
+	<string name="show_booking_options">Vis Bestillingsmuligheder</string>
+	<!--No comment provided by engineer.-->
+	<string name="show_details">Vis detaljer</string>
+	<!--Button to show disclaimers, e.g., info of public transport data.-->
+	<string name="show_disclaimer">Vis ansvarsfraskrivelsen</string>
+	<!--No comment provided by engineer.-->
+	<string name="show_info">Vis infomation</string>
+	<!--No comment provided by engineer.-->
+	<string name="show_parking_options">Vis Parkerings muligheder</string>
+	<!--Button Title to get to website with ticket details.-->
+	<string name="show_ticket_info">Vis billet Infomation</string>
+	<!--Action button title for viewing timetable for public transport-->
+	<string name="show_timetable">Vis tidsplan</string>
+	<!--Indicator for how many transport modes are being displayed out of the total available ones for the region of the trip. First placeholder will be replaced with selected number, second with total number.-->
+	<string name="showing__pattern_of__pattern_transport_modes">Viser %1$s af %2$s transportformer</string>
+	<!--Button title to skip a certain step-->
+	<string name="skip">Spring over</string>
+	<!--Speed preference 'slow'-->
+	<string name="slow">Langsom</string>
+	<!--No comment provided by engineer.-->
+	<string name="sorry_dot_tripgo_doesn_apostt_work_here_yet_exclam">Beklager. TripGo virker ikke her endnu!</string>
+	<!--Spread the word preference-->
+	<string name="spread_the_word">Spred budskabet</string>
+	<!--Title for the time an event starts (including date information)-->
+	<string name="start">Start</string>
+	<!--Action title for adding a habitual item away from some location. (old key: NewItemAwayActionTitle)-->
+	<string name="stay_at_a_different_location">Bliv på et andet sted</string>
+	<!--Additional information for official stop code of a public transport stop.-->
+	<string name="stop_code_2points__pattern">Stop kode: %1$s</string>
+	<!--Map mode 'streets'-->
+	<string name="streets">Gader</string>
+	<!--Contact support error button-->
+	<string name="support">Brugerhjælp</string>
+	<!--Walkthrough-->
+	<string name="swipe_dates_to_navigate_between_weeks">Swipe mellem datoer til at navigere mellem uger</string>
+	<!--Walkthrough-->
+	<string name="tap_and_hold_title_to_jump_directly_to_a_specified_date_dot">Tryk og hold på titelen for at springe direkte til en bestemt dato.</string>
+	<!--Walkthrough-->
+	<string name="tap_public_transport_stops_for_access_to_timetable">Tryk på offentlig transport stop for adgang til tidsplan</string>
+	<!--Walkthrough-->
+	<string name="tap_title_to_go_to__aposttoday_apost">Tryk på titelen for at gå til \'i dag\'</string>
+	<!--No comment provided by engineer.-->
+	<string name="tap_to_confirm_hours_or_swipe_to_delete">Tryk for at bekræfte timer eller swipe for at slette</string>
+	<!--No comment provided by engineer.-->
+	<string name="tap_to_set_address">Tryk for at sætte adressen</string>
+	<!--No comment provided by engineer.-->
+	<string name="tap_to_set_address_or_swipe_to_delete">Tryk her for at angive adressen eller swipe for at slette</string>
+	<!--No comment provided by engineer.-->
+	<string name="tap_to_set_garage">Tryk for at indstille garage</string>
+	<!--Thank you HUD notice-->
+	<string name="thank_you_exclam">Tak!</string>
+	<!--Description for critical error where error will be shown below.-->
+	<string name="the_application_encountered_a_critical_error_and_can_apostt_recover_2points">Ansøgningen støtte på en kritisk fejl og kan ikke gendannes:</string>
+	<!--Title for view that presents a purchased ticket-->
+	<string name="ticket">Billet</string>
+	<!--Indicating that a ticket has expired.-->
+	<string name="ticket_expired">Billetten er udløbet</string>
+	<!--Title for screen to pick your working hours-->
+	<string name="time_at_work">Tid på arbejde</string>
+	<!--Time zone (typically for an event)-->
+	<string name="time_zone">Tidszone</string>
+	<!--Header for times a user is typically at this location, e.g., working hours-->
+	<string name="times">Tidspunkter</string>
+	<!--Title, e.g., for event or favourite. (old key: TitleFavouriteName)-->
+	<string name="title">Titel</string>
+	<!--Type of something, e.g., an event (calendar event, stay, routine) or a vehicle (car, motorbike, bicycle). (old key: TypeEvent)-->
+	<string name="type">Type</string>
+	<!--No comment provided by engineer.-->
+	<string name="updated_2points_">Opdateret:</string>
+	<!--Explanation for what stays are compared to calendar events and routines. Can be long-ish. (old key: StayEventDescription)-->
+	<string name="use_for_hotels_while_travelling_coma_so_that_the_agenda_starts_and_ends_at_the_correct_location_dot">Brug til hoteller når de rejser, således at opsætning starter og slutter på den korrekte sted.</string>
+	<!--Title for list of valid tickets-->
+	<string name="valid">Gyldig</string>
+	<!--Which of my vehicles to assign this to-->
+	<string name="vehicle">Køretøj</string>
+	<!--No comment provided by engineer.-->
+	<string name="verify_location_dot_dot_dot">Kontroller placering...</string>
+	<!--View alternative times for this trip-->
+	<string name="view_times">Se gange</string>
+	<!--Walking speed preference-->
+	<string name="walk_speed">Gang hastighed</string>
+	<!--No comment provided by engineer.-->
+	<string name="website">Hjemmeside</string>
+	<!--No comment provided by engineer.-->
+	<string name="week_starts">Ugen starter</string>
+	<!--Title for showing what3words address including info button-->
+	<string name="what3words_address">What3words adresse</string>
+	<!--Preference to highlight wheelchair information-->
+	<string name="wheelchair_information">Kørestol oplysninger</string>
+	<!--Where are you going from?-->
+	<string name="where_are_you_going_from_question">Hvor kom du fra?</string>
+	<!--Where do you want to go?-->
+	<string name="where_do_you_want_to_go_question">Hvor vil du hen?</string>
+	<!--Question for which events in a recurrence to delete (options are typically this/all/any from here)-->
+	<string name="which_would_you_like_to_delete">Hvilken ønsker du at slette</string>
+	<!--Typical name that you'd give your work location-->
+	<string name="work">Arbejde</string>
+	<!--Positive answer to follow-up question for rating or feedback.-->
+	<string name="yeah_coma_ok_exclam">Ja, ok!</string>
+	<!--Positive answer to question whether TripGo is useful.-->
+	<string name="yes_exclam">Ja!</string>
+	<!--Alert if service running late/early, meaning that the user might not make the next service.-->
+	<string name="you_might_not_make_this_transfer_dot">Du kan nok ikke lave denne overførsel.</string>
+	<!--No comment provided by engineer.-->
+	<string name="zoom_in">Zoom ind</string>
+	<!--Walkthrough-->
+	<string name="zoom_into_map_to_view_public_transport_stops">Zoom ind på kortet for at se offentlig transport stopper</string>
+	<!--Format for a service's real-time indicator for a service which is early, e.g., '1 min early. This means #1 is replaced with something like '1 min'.-->
+	<string name="_pattern_early">%1$s tidligt</string>
+	<!--Format for a service's real-time indicator for a service which is early, e.g., '1 min early (1:10 pm service). This means #1 is replaced with something like '1 min' and #2 is replaced with the original time, e.g., '1:10 pm').-->
+	<string name="_pattern_early__start_parent_pattern_service_end_parent">%1$s tidligt (%2$s tjeneste)</string>
+	<!--Format for a service's real-time indicator for a service which is late, e.g., '1 min late. This means #1 is replaced with something like '1 min'-->
+	<string name="_pattern_late">%1$s sent</string>
+	<!--Format for a service's real-time indicator for a service which is late, e.g., '1 min late (1:10 pm service). This means #1 is replaced with something like '1 min' and #2 is replaced with the original time, e.g., '1:10 pm').-->
+	<string name="_pattern_late__start_parent_pattern_service_end_parent">%1$s sent (%2$s tjeneste)</string>
+	<!--Indicator for how cycle-friendly a cycling route is. Placeholder will get replaced with '75%'.-->
+	<string name="_pattern_cycle_friendly">%1$s cykle venlig</string>
+	<!--Number of stops before you get off a vehicle, if there are 2 stops or more, e.g., '10 stops'. (old key: Stops)-->
+	<string name="_pattern_stops">%1$s stopper</string>
+	<!--Duration without traffic-->
+	<string name="_pattern_w_slasho_traffic">%1$s uden trafik</string>
+	<!--Indicator for how wheelchair-friendly a wheeelchair route is. Placeholder will get replaced with '75%'.-->
+	<string name="_pattern_wheelchair_friendly">%1$s kørestol venlig</string>
+	<!--Number of stops before you get off a stop, if there's just 1 stop.-->
+	<string name="_1_stop">1 stop</string>
+	<!--apple maps directions action-->
+	<string name="apple_maps">Apple kort</string>
+	<!--Prefix for selected 'arrive by' time
+   Single line instruction to arrive-->
+	<string name="arrive">Ankommer</string>
+	<!--'%@' will be replaced with the arrival time. (old key: ArrivalTime)-->
+	<string name="arrive_at__pattern">Ankom kl. %1$s</string>
+	<!--The first '%@' will be replaced with the place of arrival, the second with the time. (old key: ArrivalLocationTime)-->
+	<string name="arrive_at__pattern_at__pattern">Ankomme til %1$s kl %2$s</string>
+	<!--Title for when you'll arrive when on a trip. Countdown to arrival will be displayed below.-->
+	<string name="arrive_in">Ankommer i</string>
+	<!--No comment provided by engineer.-->
+	<string name="book_with_flitways">Bestil med FlitWays</string>
+	<!--No comment provided by engineer.-->
+	<string name="book_with_uber">Bestil med Uber</string>
+	<!--Placeholder title while calculating trips-->
+	<string name="calculating_trips_dot_dot_dot">Beregner ture...</string>
+	<!--No comment provided by engineer.-->
+	<string name="call">Ring</string>
+	<!--Action title for calling provider of name. (old key: CallTaxiFormat)-->
+	<string name="call__pattern">Opkald %1$s</string>
+	<!--Single line instruction if device is offline and user needs to reconnect to internet to calculate trips-->
+	<string name="connect_to_internet_to_get_trips">Opret forbindelse til internettet for at få ture</string>
+	<!--Error title when server could not find a given transit stop.-->
+	<string name="could_not_find_transit_stop_dot">Kunne ikke finde transit stop.</string>
+	<!--Destination of the bus-->
+	<string name="direction">Retning</string>
+	<!--As in 'this bus/train is empty'-->
+	<string name="empty">Tom</string>
+	<!--As in 'this bus/train has few seats available'-->
+	<string name="few_seats_available">Få pladser tilbage</string>
+	<!--Departure location. (old key: PrimaryLocationStart)-->
+	<string name="from__pattern">Fra %1$s</string>
+	<!--As in 'this bus/train is full and likely can't accept further passengers'-->
+	<string name="full">Fuld</string>
+	<!--No comment provided by engineer.-->
+	<string name="get_lyft">Få Lyft</string>
+	<!--No comment provided by engineer.-->
+	<string name="get_ola">Få Ola</string>
+	<!--No comment provided by engineer.-->
+	<string name="get_ingogo">Få ingogo</string>
+	<!--google maps directions action-->
+	<string name="google_maps">Google Maps</string>
+	<!--First '%@' will be replaced with destination location, second with arrival at that location. (old key: MessageArrivalTime)-->
+	<string name="i_apostll_arrive_at__pattern_at__pattern">Ankommer til %1$s kl %2$s</string>
+	<!--Indication of an activity. (old key: ActivityIndication)-->
+	<string name="i_apostll_take_a__pattern_at__pattern_from__pattern_dot">Jeg vil gerne tage en %1$s kl %2$s fra %3$s.</string>
+	<!--%@ is replaced with app name-->
+	<string name="in_the_meantime_coma_let_aposts_keep_exploring__pattern_and_enjoy_your_trips">I mellemtiden, lad os fortsat udforske %1$s og nyde dine ture</string>
+	<!--No comment provided by engineer.-->
+	<string name="in_the_meantime_coma_let_aposts_keep_exploring_and_enjoy_your_trips">I mellemtiden, lad os fortsat udforske og nyde dine ture</string>
+	<!--Prefix for selected 'leave after' time
+   Single line instruction to leave-->
+	<string name="leave">Forlad</string>
+	<!--The place of departure. (old key: LeaveLocation)-->
+	<string name="leave__pattern">Afgang fra %1$s</string>
+	<!--The place of departure with time. (old key: LeaveLocationTime)-->
+	<string name="leave__pattern_at__pattern">Afgang fra %1$s kl %2$s</string>
+	<!--Time departure. (old key: LeaveTime)-->
+	<string name="leave_at__pattern">Afgang kl %1$s</string>
+	<!--Title for when to depart. Countdown to departure will be displayed below.-->
+	<string name="leave_in">Forlad om</string>
+	<!--No comment provided by engineer.-->
+	<string name="leave_now">Forlad nu</string>
+	<!--As in 'this bus/train is so full, there's only limited standing room'-->
+	<string name="limited_standing_room_only">Begrænset kun ståpladser</string>
+	<!--No comment provided by engineer.-->
+	<string name="live_traffic">Levende trafik</string>
+	<!--As in 'this bus/train has many seats available'-->
+	<string name="many_seats_available">Mange ledige pladser</string>
+	<!--Title of button to get more details about an alert-->
+	<string name="more_info">Mere Information</string>
+	<!--Indicating no trips have been planned within the next 24 hrs-->
+	<string name="no_planned_trips">Ingen planlagte ture</string>
+	<!--As in 'this bus/train is full and definitely not accepting further passengers'-->
+	<string name="not_accepting_passengers">Acceptere ikke passagerer</string>
+	<!--Indicator to show when a service is on time according to real-time data.-->
+	<string name="on_time">På tid</string>
+	<!--No comment provided by engineer.-->
+	<string name="open_lyft">Åben Lyft</string>
+	<!--No comment provided by engineer.-->
+	<string name="open_ola">Åbn Ola</string>
+	<!--Title for opening hours-->
+	<string name="opening_hours">Åbningstider</string>
+	<!--No comment provided by engineer.-->
+	<string name="plan_a_trip_and_it_will_show_up_here_dot">Planlæg en tur og det vil dukke op her.</string>
+	<!--No comment provided by engineer.-->
+	<string name="public_holiday">Helligdag</string>
+	<!--No comment provided by engineer.-->
+	<string name="real_minustime">Rigtig Tid</string>
+	<!--Error recovery suggestion for when when server could not find a given transit stop.-->
+	<string name="search_for_this_stop_again_or_try_again_later_dot_dot">Søg efter dette stop igen eller prøv igen senere..</string>
+	<!--Send SMS action-->
+	<string name="send_sms">Send SMS</string>
+	<!--Show website action-->
+	<string name="show_website">Vis hjemmeside</string>
+	<!--As in 'this bus/train is fairly full and has standing room only'-->
+	<string name="standing_room_only">Kun Ståpladser</string>
+	<!--Destination location. For trip titles, e.g., 'To work'. (old key: PrimaryLocationEnd)-->
+	<string name="to__pattern">Til %1$s</string>
+	<!--Vehicle updated. (old key: VehicleUpdated)-->
+	<string name="updated__pattern_ago">Opdateret for %1$s siden</string>
+	<!--Vehicle 'x' updated. (old key: VehicleCalledUpdated)-->
+	<string name="vehicle__pattern_updated__pattern_ago">Køretøj %1$s opdateret for %2$s siden</string>
+	<!--No comment provided by engineer.-->
+	<string name="we_are_busy_getting_your_upcoming_trip_dot_please_wait_dot_dot_dot">Vi har travlt med at få din kommende rejse. Vent venligst...</string>
+	<!--No comment provided by engineer.-->
+	<string name="we_apostll_keep_you_updated_with_the_latest_transit_alerts_here">Vi vil holde jer opdateret med de nyeste transit advarsler her</string>
+	<!--No comment provided by engineer.-->
+	<string name="wheelchair_accessible">Tilgængelig med kørestol</string>
+	<!--Text indiction for how long a segment might take, where '%@' will be replaced with a duration. E.g., the instruction 'Take bus' might have this next to it as 'for 10 minutes'.-->
+	<string name="for__pattern">for %1$s</string>
+	<!--goCatch action-->
+	<string name="gocatch_a_taxi">goCatch en taxa</string>
+	<!--No comment provided by engineer.-->
+	<string name="ingogo_a_taxi">ingogo en taxa</string>
+	<!--Name for a {%@}'s place if it's unclear if it's home, work or something else.-->
+	<string name="_pattern_aposts">%1$ss</string>
+	<!--No comment provided by engineer.-->
+	<string name="_pattern_aposts_home">%1$ss Hjem</string>
+	<!--No comment provided by engineer.-->
+	<string name="_pattern_aposts_work">%1$ss arbejde</string>
+	<!--Number of repeats. (old key: NumberRecurrences)-->
+	<string name="_perclu_recurrences">%lu gentagelse</string>
+	<!--Error when location search for %input was not successful. (old key: RequestErrorFormat)-->
+	<string name="_apost_pattern_apost_not_found_dot">%1$s ikke fundet.</string>
+	<!--Authorization restricted alert message-->
+	<string name="access_to_this_feature_has_been_restricted_for_your_device_dot_please_check_the_settings_app__moret_general__moret_restrictions_or_ask_your_device_provider_dot">Adgang til denne funktion er begrænset til din enhed. Kontroller appens indstillinger > Generelt > begrænsninger eller spørg din udbyder.</string>
+	<!--Accessibility label for action button-->
+	<string name="action">Aktion</string>
+	<!--Option for users if they already owned a SkedGo account-->
+	<string name="already_have_an_account_question_sign_in">Har du allerede en konto? Log på</string>
+	<!--Source where the account was derived, e.g., Facebook-->
+	<string name="authentication">Godkendelse</string>
+	<!--Authorisation needed title-->
+	<string name="authorisation_needed">Godkendelse nødvendig</string>
+	<!--Type of vehicle : bicycle-->
+	<string name="bicycle">Cykel</string>
+	<!--Credit card CVC-->
+	<string name="cvc">CVC</string>
+	<!--No comment provided by engineer.-->
+	<string name="can_apostt_find_your_current_city">Kan ikke finde din nuværende by</string>
+	<!--Cancel action-->
+	<string name="cancel">Fortryd</string>
+	<!--Label for when a service is cancelled.-->
+	<string name="cancelled">Aflyst</string>
+	<!--No comment provided by engineer.-->
+	<string name="cannot_proceed_without_a_valid_email_address">Kan ikke fortsætte uden en gyldig e-mail adresse</string>
+	<!--Type of vehicle : car-->
+	<string name="car">Bil</string>
+	<!--Credit card number-->
+	<string name="card_no_dot">Kort nr.</string>
+	<!--Instruction for changing password-->
+	<string name="change">Ændre</string>
+	<!--Accessibility - user location button - hint-->
+	<string name="change_tracking_options">Ændre sporings indstillinger</string>
+	<!--Accessibility title for a checkmark/tick button-->
+	<string name="checkmark">Kryds af</string>
+	<!--Close action-->
+	<string name="close">Luk</string>
+	<!--Title on the button that asks users to confirm if they want to proceed with booking-->
+	<string name="confirm">Bekræft</string>
+	<!--Error title when GPS failed.-->
+	<string name="could_not_determine_your_current_location_dot">Kan ikke finde din aktuelle placering.</string>
+	<!--Could not download supported regions warning. (old key: CouldNotDownloadSupportedRegions)-->
+	<string name="could_not_download_supported_regions_from_tripgo_aposts_server_dot_please_try_again_later_dot">Kunne ikke download tilgængellige regioner fra Tripgo\'s server. Prøv igen senere.</string>
+	<!--Message that indicates the app is creating accounts for users-->
+	<string name="creating_account">Opretter konto</string>
+	<!--Section title for credit card payment-->
+	<string name="credit_card">Betalingskort</string>
+	<!--Current city-->
+	<string name="current_city">Nuværende by</string>
+	<!--Title for user's current location-->
+	<string name="current_location">Nuværende Placering</string>
+	<!--Delete action-->
+	<string name="delete">Slet</string>
+	<!--Sort by distance-->
+	<string name="distance">Afstand</string>
+	<!--Option for users if they don't yet have a SkedGo account-->
+	<string name="don_apostt_have_an_account_question_sign_up">Har du ikke en konto? Tilmeld dig</string>
+	<!--Done action-->
+	<string name="done">Færdig</string>
+	<!--Drop new pin-->
+	<string name="drop_new_pin">Sæt nyt markering</string>
+	<!--Email address where receipt is sent
+   Email used as Facebook username-->
+	<string name="email">E-mail</string>
+	<!--Everyday in context of repetitions (especially recurring events)-->
+	<string name="everyday">Hverdag</string>
+	<!--Credit card expiry date-->
+	<string name="expiry_date">Udløbsdato</string>
+	<!--Free as in beer-->
+	<string name="free">Ledig</string>
+	<!--No comment provided by engineer.-->
+	<string name="full_name">Fulde navn</string>
+	<!--No comment provided by engineer.-->
+	<string name="getting_a_lift">Få et lift</string>
+	<!--Accessibility annotation for trips which have a reminder set.-->
+	<string name="has_reminder">Har påmindelser</string>
+	<!--Include contacts.-->
+	<string name="include_contacts">Inkludér komtakter</string>
+	<!--Include events.-->
+	<string name="include_events">Inkludér begivenhed</string>
+	<!--Instant results proposal-->
+	<string name="instant_results">Øjeblikkelige resultater</string>
+	<!--Title for alert that indicates the user account has become invalid-->
+	<string name="invalid_account">Ugyldig konto</string>
+	<!--Name placeholder text-->
+	<string name="john_appleseed">John Appleseed</string>
+	<!--Used when user signs in using Facebook-->
+	<string name="linking_facebook">Forbind med Facebook</string>
+	<!--Title on the button that indicates to the user that booking is in progressing-->
+	<string name="loading">Indlæser</string>
+	<!--Location iOS6+ authorisation needed text-->
+	<string name="location_services_are_required_to_use_this_feature_dot_please_go_to_the_settings_app__moret_privacy__moret_location_services_coma_make_sure_they_are_turned_on_and_authorise_this_app_dot">Placeringstjenester er forpligtet til at bruge denne funktion. Gå Venligst til appens indstillinger > privatliv > placeringstjenester, Sørg for de er tændt og godkend denne app.</string>
+	<!--Indicating a payment is in progress-->
+	<string name="making_payment">Foretager betaling</string>
+	<!--More results proposal-->
+	<string name="more_results">Flere resultater</string>
+	<!--Type of vehicle : motorbike-->
+	<string name="motorbike">Motorcykel</string>
+	<!--Title for view that shows the summary of a user's account information-->
+	<string name="my_account">Min konto</string>
+	<!--Name to which receipt is sent
+   Name used in Facebook
+   Sort by name
+   Title for name of something (or someone)-->
+	<string name="name">Navn</string>
+	<!--Response to question whether user wants to report a problem when taking a screenshot. Also used in context of repetitions (especially recurring events).-->
+	<string name="never">Aldrig</string>
+	<!--Title for sign in view when user does not have an account-->
+	<string name="new_account">Ny konto</string>
+	<!--Next action-->
+	<string name="next">Næste</string>
+	<!--No comment provided by engineer.-->
+	<string name="no_co_2">Ingen CO₂</string>
+	<!--Button to open Settings app section for this app-->
+	<string name="open_settings">Åbn indstillinger</string>
+	<!--Open in Safari action-->
+	<string name="open_in_safari">Åben i Safari</string>
+	<!--No comment provided by engineer.-->
+	<string name="password">Adgangskode</string>
+	<!--Indicating a payment is successful-->
+	<string name="payment_successful">Betaling gennemført</string>
+	<!--Section title for Paypal payment-->
+	<string name="paypal">Paypal</string>
+	<!--Please select a location prompt-->
+	<string name="please_select_a_location">Vælg venligst en placering</string>
+	<!--Error recovery suggestion when GPS fails.-->
+	<string name="please_try_again_or_set_your_location_manually_dot">Prøv venligst igen, eller angiv din position manuelt.</string>
+	<!--Please verify the location prompt-->
+	<string name="please_verify_the_location">Kontroller venligst placeringen</string>
+	<!--Location picker 'no autocompletion results' text. Needs to match text on keyboard.-->
+	<string name="press__apostsearch_apost_for_more_dot_dot_dot">Tryk for \'Søg\' for mere...</string>
+	<!--Title for section that asks users where payment receipt should be sent-->
+	<string name="receipt">Kvittering</string>
+	<!--Repeats daily-->
+	<string name="repeats_daily">Gentager dagligt</string>
+	<!--Repeats monthly-->
+	<string name="repeats_monthly">Gentages månedligt</string>
+	<!--Repeats weekly-->
+	<string name="repeats_weekly">Gentager ugentligt</string>
+	<!--Repeats yearly-->
+	<string name="repeats_yearly">Gentager årligt</string>
+	<!--Sports utility vehicle abbreviation-->
+	<string name="suv">SUV</string>
+	<!--Sort by overall score, like a ranking.-->
+	<string name="score">Subtotal</string>
+	<!--Empty search bar placeholder-->
+	<string name="search">Søg</string>
+	<!--No comment provided by engineer.-->
+	<string name="search_results">Søgeresultater</string>
+	<!--Placeholder text while waiting for server response when searching for a location.-->
+	<string name="searching_for__apost_pattern_apost_dot_dot_dot">Søger efter \'%1$s\'...</string>
+	<!--No comment provided by engineer.-->
+	<string name="sign_in">Log ind</string>
+	<!--Instruction for signing out user account-->
+	<string name="sign_out">Log ud</string>
+	<!--No comment provided by engineer.-->
+	<string name="sign_up">Tilmeld</string>
+	<!--No comment provided by engineer.-->
+	<string name="sign_up_cannot_be_completed_without_a_valid_password">Tilmelding kan ikke fuldføres uden en gyldig adgangskode</string>
+	<!--Message that indicates the app is signing users into their user accounts-->
+	<string name="signing_in">Logger ind</string>
+	<!--Message that indicates the app has successfully completed signing out
+   Message that indicates the app is signing users out of their accounts-->
+	<string name="signing_out">Logger ud</string>
+	<!--Starting %date. (old key: DateFromFormat)-->
+	<string name="starting__pattern">Start %1$s</string>
+	<!--Tap to set location. (old key: SetLocation)-->
+	<string name="tap_to_set_location">Tryk for at indstille placering</string>
+	<!--Message that indicates the app is about to sign users out of their user accounts-->
+	<string name="the_app_will_now_sign_out">Appen vil nu logge ud</string>
+	<!--Accessibility - user location button - off-->
+	<string name="tracking__minus_off">Sporing - fra</string>
+	<!--user location button - follow-->
+	<string name="tracking__minus_on">Sporing - til</string>
+	<!--user location button - follow with heading-->
+	<string name="tracking__minus_on_with_heading">Sporing - fortsæt med overskriften</string>
+	<!--No comment provided by engineer.-->
+	<string name="unknown_error">Ukendt fejl</string>
+	<!--Up to %date. (old key: DateToFormat)-->
+	<string name="up_to__pattern">Indtil %1$s</string>
+	<!--Message that shows app is updating trip after user finalised bookings-->
+	<string name="updating_trip">Opdatere turen</string>
+	<!--Message that informs users that some values are missing from the required fields in a booking form.-->
+	<string name="values_missing_from_required_fields_dot">Værdier mangler fra påkrævede felter.</string>
+	<!--Every weekday in context of repetitions (especially recurring events)-->
+	<string name="weekdays">Hverdage</string>
+	<!--Every weekend day in context of repetitions (especially recurring events)-->
+	<string name="weekends">Weekender</string>
+	<!--Question asked when user is taking a screenshot-->
+	<string name="would_you_like_to_report_a_problem_question">Ønsker du at rapportere et problem?</string>
+	<!--Message that informs users that T&C must be agreed before booking can be made.-->
+	<string name="you_need_to_agree_to_the_booking_terms_and_conditions_dot">Du skal acceptere bestillings betingelser og vilkår.</string>
+	<!--Message that informs users that T&C for insurance must be agreed before booking can be made.-->
+	<string name="you_need_to_agree_to_the_insurance_terms_and_conditions_dot">Du skal accepterer forsikrings vilkår og betingelser.</string>
+	<!--Calendar authorisation needed text-->
+	<string name="you_previously_denied_this_app_access_to_your_calendar_dot_please_go_to_the_settings_app__moret_privacy__moret_calendar_and_authorise_this_app_to_use_this_feature_dot">Du har tidligere nægtet denne app adgang til din kalender. Gå venligst til appens indstillinger > privatliv > kalender og tillad denne app til at bruge denne funktion.</string>
+	<!--Contacts authorisation needed text-->
+	<string name="you_previously_denied_this_app_access_to_your_contacts_dot_please_go_to_the_settings_app__moret_privacy__moret_contacts_and_authorise_this_app_to_use_this_feature_dot">Du har tidligere nægtet denne app adgang til dine kontakter. gå venligst til appens indstillinger > privatliv > kontakter og tillad denne app at bruge denne funktion.</string>
+	<!--Indicator that an event is all-day-->
+	<string name="all_minusday">hele døgnet</string>
+	<!--Estimated time of arrival; parameter is time, e.g., 'arrives 15:30'-->
+	<string name="arrives__pattern">ankommer %1$s</string>
+	<!--Estimated time of departure; parameter is time, e.g., 'departs 15:30'-->
+	<string name="departs__pattern">afgår %1$s</string>
+	<!--Short indicator of end-time-->
+	<string name="ends_at__pattern">ender om %1$s</string>
+	<!--Email placeholder text-->
+	<string name="example_atexample_dotcom">example@example.com</string>
+	<!--Credit card expiry date placeholder, mm/yy-->
+	<string name="mm_slashyy">mm/åå</string>
+	<!--Short indicator of start-time-->
+	<string name="starts_at__pattern">starter ved %1$s</string>
+
+</resources>
+<!-- This is an auto generated file (Wed Jan 18 09:40:37 ART 2017) -->
