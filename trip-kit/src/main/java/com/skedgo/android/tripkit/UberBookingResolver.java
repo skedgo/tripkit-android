@@ -9,6 +9,8 @@ import android.support.annotation.Nullable;
 import rx.Observable;
 import rx.functions.Func1;
 
+@Deprecated
+// TODO: remove uber booking resolver
 final class UberBookingResolver implements BookingResolver {
   private static final String UBER_PACKAGE = "com.ubercab";
   private final Resources resources;
@@ -38,8 +40,6 @@ final class UberBookingResolver implements BookingResolver {
   }
 
   @Nullable @Override public String getTitleForExternalAction(String externalAction) {
-    return isPackageInstalled.call(UBER_PACKAGE)
-        ? resources.getString(R.string.open_uber)
-        : resources.getString(R.string.get_uber);
+    return resources.getString(R.string.book_with_uber);
   }
 }
