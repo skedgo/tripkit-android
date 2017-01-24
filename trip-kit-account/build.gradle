@@ -43,13 +43,13 @@ dependencies {
   provided 'org.immutables:builder:2.3.9'
   provided 'org.immutables:gson:2.3.9:annotations'
 
-  compile "com.squareup.okhttp3:okhttp:3.2.0"
-  compile "com.squareup.okhttp3:logging-interceptor:3.2.0"
-  compile "com.squareup.retrofit2:converter-gson:2.0.2"
-  compile("com.squareup.retrofit2:adapter-rxjava:2.0.2") {
+  compile "com.squareup.okhttp3:okhttp:3.3.0"
+  compile "com.squareup.okhttp3:logging-interceptor:3.3.0"
+  compile "com.squareup.retrofit2:converter-gson:2.1.0"
+  compile("com.squareup.retrofit2:adapter-rxjava:2.1.0") {
     exclude module: 'rxjava'
   }
-  compile("com.squareup.retrofit2:retrofit:2.0.2") {
+  compile("com.squareup.retrofit2:retrofit:2.1.0") {
     // Exclude Retrofit’s OkHttp peer-dependency module and define our own module import.
     exclude module: 'okhttp'
   }
