@@ -6,11 +6,11 @@ import android.support.annotation.VisibleForTesting;
 
 import com.skedgo.android.tripkit.routing.RoutingModule;
 import com.skedgo.android.tripkit.tsp.TspModule;
-import com.squareup.okhttp.OkHttpClient;
 
 import javax.inject.Singleton;
 
 import dagger.Component;
+import okhttp3.OkHttpClient;
 import rx.functions.Action1;
 import rx.functions.Actions;
 
@@ -78,7 +78,7 @@ public abstract class TripKit {
   public abstract RegionService getRegionService();
   public abstract RouteService getRouteService();
   public abstract OkHttpClient getOkHttpClient();
-  public abstract okhttp3.OkHttpClient getOkHttpClient3();
+  public abstract OkHttpClient getOkHttpClient3();
   public abstract ServiceExtrasService getServiceExtrasService();
   public abstract Reporter getReporter();
   public abstract BookingResolver getBookingResolver();

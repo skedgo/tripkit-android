@@ -18,7 +18,6 @@ import com.skedgo.android.tripkit.tsp.GsonAdaptersRegionInfo;
 import com.skedgo.android.tripkit.tsp.GsonAdaptersRegionInfoBody;
 import com.skedgo.android.tripkit.tsp.GsonAdaptersRegionInfoResponse;
 import com.skedgo.android.tripkit.tsp.RegionInfoService;
-import com.squareup.okhttp.OkHttpClient;
 
 import java.util.List;
 import java.util.Locale;
@@ -32,9 +31,7 @@ import dagger.Lazy;
 import dagger.Module;
 import dagger.Provides;
 import okhttp3.HttpUrl;
-import retrofit.RestAdapter;
-import retrofit.client.OkClient;
-import retrofit.converter.GsonConverter;
+import okhttp3.OkHttpClient;
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
@@ -43,8 +40,8 @@ import rx.functions.Func0;
 import rx.functions.Func1;
 import rx.schedulers.Schedulers;
 
-import static retrofit.RestAdapter.LogLevel.FULL;
-import static retrofit.RestAdapter.LogLevel.NONE;
+//import static retrofit.RestAdapter.LogLevel.FULL;
+//import static retrofit.RestAdapter.LogLevel.NONE;
 
 @Module
 public class MainModule {
@@ -69,11 +66,11 @@ public class MainModule {
   }
 
   @Provides RegionsApi getRegionsApi(OkHttpClient httpClient) {
-    return new RestAdapter.Builder()
-        .setLogLevel(configs.debuggable() ? FULL : NONE)
-        .setEndpoint("https://tripgo.skedgo.com/satapp")
-        .setConverter(new GsonConverter(Gsons.createForRegion()))
-        .setClient(new OkClient(httpClient))
+    return new Retrofit.Builder()
+//        .setLogLevel(configs.debuggable() ? FULL : NONE)
+        .baseUrl("https://tripgo.skedgo.com/satapp")
+        .addConverterFactory(GsonConverterFactory.create(Gsons.createForRegion()))
+        .client(httpClient)
         .build()
         .create(RegionsApi.class);
   }
@@ -186,11 +183,11 @@ public class MainModule {
         "https://tripgo.skedgo.com/satapp",
         "skedgo"
     );
-    final ServiceApi serviceApi = new RestAdapter.Builder()
-        .setLogLevel(configs.debuggable() ? FULL : NONE)
-        .setEndpoint(endpoint)
-        .setConverter(new GsonConverter(gson))
-        .setClient(new OkClient(httpClient))
+    final ServiceApi serviceApi = new Retrofit.Builder()
+//        .setLogLevel(configs.debuggable() ? FULL : NONE)
+        .baseUrl(endpoint.toString())
+        .addConverterFactory(GsonConverterFactory.create(gson))
+        .client(httpClient)
         .build()
         .create(ServiceApi.class);
     return new AlphaServiceExtrasService(
@@ -205,11 +202,11 @@ public class MainModule {
       final OkHttpClient httpClient) {
     return new Func1<String, ReportingApi>() {
       @Override public ReportingApi call(String endpoint) {
-        return new RestAdapter.Builder()
-            .setLogLevel(configs.debuggable() ? FULL : NONE)
-            .setEndpoint(endpoint)
-            .setConverter(new GsonConverter(gson))
-            .setClient(new OkClient(httpClient))
+        return new Retrofit.Builder()
+//            .setLogLevel(configs.debuggable() ? FULL : NONE)
+            .baseUrl(endpoint)
+            .addConverterFactory(GsonConverterFactory.create(gson))
+            .client(httpClient)
             .build()
             .create(ReportingApi.class);
       }

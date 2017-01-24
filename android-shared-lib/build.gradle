@@ -63,7 +63,7 @@ dependencies {
   compile 'net.danlew:android.joda:2.9.3.1'
   compile 'io.reactivex:rxjava:1.2.0'
   compile 'io.reactivex:rxandroid:1.2.1', { exclude module: 'rxjava' }
-  compile 'com.google.code.gson:gson:2.6.1'
+//  compile 'com.google.code.gson:gson:2.6.1'
 //  compile 'com.squareup.okhttp:okhttp:2.4.0'
 //  compile 'com.squareup.retrofit:retrofit:1.9.0'
   compile 'com.github.skedgo:commons-collections:v1.0'
@@ -74,6 +74,7 @@ dependencies {
     exclude module: 'okhttp'
   }
   compile 'com.squareup.okhttp3:okhttp:3.3.1'
+  compile 'com.squareup.retrofit2:converter-gson:2.1.0'
   // To generate immutable models.
   // See more at http://immutables.github.io/.
   annotationProcessor 'org.immutables:value:2.3.9'

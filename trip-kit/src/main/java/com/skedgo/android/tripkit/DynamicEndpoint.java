@@ -2,8 +2,8 @@ package com.skedgo.android.tripkit;
 
 import android.support.annotation.NonNull;
 
-import retrofit.Endpoint;
+import retrofit2.http.Url;
 
-interface DynamicEndpoint extends Endpoint {
-  void setUrl(@NonNull String url);
+interface DynamicEndpoint {
+  void setUrl(@Url @NonNull String url);
 }

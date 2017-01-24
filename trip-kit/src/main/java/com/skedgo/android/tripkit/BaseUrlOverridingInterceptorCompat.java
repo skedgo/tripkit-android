@@ -3,15 +3,13 @@ package com.skedgo.android.tripkit;
 import android.support.annotation.NonNull;
 import android.text.TextUtils;
 
-import com.squareup.okhttp.HttpUrl;
-import com.squareup.okhttp.Interceptor;
-import com.squareup.okhttp.OkHttpClient;
-import com.squareup.okhttp.Request;
-import com.squareup.okhttp.Response;
-
 import java.io.IOException;
 import java.util.List;
 
+import okhttp3.HttpUrl;
+import okhttp3.Interceptor;
+import okhttp3.Request;
+import okhttp3.Response;
 import rx.functions.Func0;
 
 /**
@@ -27,7 +25,7 @@ final class BaseUrlOverridingInterceptorCompat implements Interceptor {
   @Override public Response intercept(Chain chain) throws IOException {
     final String newBaseUrl = baseUrlAdapter.call();
     final Request request = chain.request();
-    final HttpUrl requestUrl = request.httpUrl();
+    final HttpUrl requestUrl = request.url();
     final List<String> pathSegments = requestUrl.pathSegments();
     if (!TextUtils.isEmpty(newBaseUrl) && pathSegments.get(0).equals("satapp")) {
       final HttpUrl tempUrl = requestUrl.newBuilder().removePathSegment(0).build();

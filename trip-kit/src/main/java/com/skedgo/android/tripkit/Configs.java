@@ -7,14 +7,13 @@ import com.skedgo.android.tripkit.routing.ExtraQueryMapProvider;
 
 import org.immutables.value.Value;
 
+import retrofit2.Retrofit;
 import rx.functions.Action1;
 import rx.functions.Func0;
 
 @Value.Immutable
 public abstract class Configs {
-  public static ImmutableConfigs.Builder builder() {
-    return ImmutableConfigs.builder();
-  }
+  public static Retrofit.Builder builder() { return new Retrofit.Builder(); }
 
   public abstract Context context();
   public abstract String regionEligibility();

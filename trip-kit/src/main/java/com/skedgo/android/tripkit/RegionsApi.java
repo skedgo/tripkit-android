@@ -3,8 +3,8 @@ package com.skedgo.android.tripkit;
 import com.google.gson.annotations.SerializedName;
 import com.skedgo.android.common.model.RegionsResponse;
 
-import retrofit.http.Body;
-import retrofit.http.POST;
+import retrofit2.http.Body;
+import retrofit2.http.POST;
 import rx.Observable;
 
 interface RegionsApi {

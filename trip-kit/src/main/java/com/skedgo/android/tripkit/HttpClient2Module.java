@@ -1,11 +1,10 @@
 package com.skedgo.android.tripkit;
 
-import com.squareup.okhttp.OkHttpClient;
-
 import javax.inject.Singleton;
 
 import dagger.Module;
 import dagger.Provides;
+import okhttp3.OkHttpClient;
 import rx.functions.Func0;
 
 /**
