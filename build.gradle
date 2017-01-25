@@ -17,7 +17,7 @@ buildscript {
 
 ext {
   tripkitAndroidMaven = "${rootDir}/maven/"
-  okHttpVersion = "3.5.0"
+  okHttpVersion = "3.2.0"
 }
 
 allprojects {
