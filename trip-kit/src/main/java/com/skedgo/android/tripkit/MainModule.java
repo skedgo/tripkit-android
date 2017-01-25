@@ -18,6 +18,9 @@ import com.skedgo.android.tripkit.tsp.GsonAdaptersRegionInfo;
 import com.skedgo.android.tripkit.tsp.GsonAdaptersRegionInfoBody;
 import com.skedgo.android.tripkit.tsp.GsonAdaptersRegionInfoResponse;
 import com.skedgo.android.tripkit.tsp.RegionInfoService;
+import com.skedgo.android.tripkit.waypoints.WaypointApi;
+import com.skedgo.android.tripkit.waypoints.WaypointService;
+import com.skedgo.android.tripkit.waypoints.WaypointServiceImpl;
 import com.squareup.okhttp.OkHttpClient;
 
 import java.util.List;
@@ -260,6 +263,23 @@ public class MainModule {
       LocationInfoApi locationInfoApi,
       RegionService regionService) {
     return new LocationInfoServiceImpl(locationInfoApi, regionService);
+  }
+
+  @Provides
+  WaypointApi waypointApi(Gson gson, okhttp3.OkHttpClient httpClient) {
+    return new Retrofit.Builder()
+        /* This base url is ignored as the api relies on @Url. */
+        .baseUrl(HttpUrl.parse("https://tripgo.skedgo.com/satapp/"))
+        .addCallAdapterFactory(RxJavaCallAdapterFactory.createWithScheduler(Schedulers.io()))
+        .addConverterFactory(GsonConverterFactory.create(gson))
+        .client(httpClient)
+        .build()
+        .create(WaypointApi.class);
+  }
+
+  @Provides WaypointService getWaypointService(
+      WaypointApi api, Gson gson) {
+    return new WaypointServiceImpl(api, context.getResources(), gson);
   }
 
   @Singleton @Provides Gson getGson() {
