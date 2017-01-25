@@ -161,10 +161,10 @@ public class MainModule {
         .build();
   }
 
-  @Singleton @Provides okhttp3.OkHttpClient httpClient3(
-      okhttp3.OkHttpClient.Builder httpClientBuilder,
+  @Singleton @Provides OkHttpClient httpClient3(
+      OkHttpClient.Builder httpClientBuilder,
       BuiltInInterceptor builtInInterceptor) {
-    final okhttp3.OkHttpClient.Builder builder = httpClientBuilder
+    final OkHttpClient.Builder builder = httpClientBuilder
         .addInterceptor(builtInInterceptor);
     if (configs.debuggable()) {
       final Func0<Func0<String>> baseUrlAdapterFactory = configs.baseUrlAdapterFactory();
@@ -185,7 +185,7 @@ public class MainModule {
     );
     final ServiceApi serviceApi = new Retrofit.Builder()
 //        .setLogLevel(configs.debuggable() ? FULL : NONE)
-        .baseUrl(endpoint.toString())
+        .baseUrl(endpoint.getUrl())
         .addConverterFactory(GsonConverterFactory.create(gson))
         .client(httpClient)
         .build()
@@ -227,7 +227,7 @@ public class MainModule {
     );
   }
 
-  @Provides TripUpdateApi getTripUpdateApi(Gson gson, okhttp3.OkHttpClient httpClient) {
+  @Provides TripUpdateApi getTripUpdateApi(Gson gson, OkHttpClient httpClient) {
     return new Retrofit.Builder()
         /* This base url is ignored as the api relies on @Url. */
         .baseUrl(HttpUrl.parse("https://tripgo.skedgo.com/satapp/"))
@@ -242,7 +242,7 @@ public class MainModule {
     return new TripUpdaterImpl(context.getResources(), api, "12", gson);
   }
 
-  @Provides LocationInfoApi getLocationInfoApi(Gson gson, okhttp3.OkHttpClient httpClient) {
+  @Provides LocationInfoApi getLocationInfoApi(Gson gson, OkHttpClient httpClient) {
     return new Retrofit.Builder()
         /* This base url is ignored as the api relies on @Url. */
         .baseUrl(HttpUrl.parse("https://tripgo.skedgo.com/satapp/"))

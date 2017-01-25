@@ -6,4 +6,5 @@ import retrofit2.http.Url;
 
 interface DynamicEndpoint {
   void setUrl(@Url @NonNull String url);
+  String getUrl();
 }

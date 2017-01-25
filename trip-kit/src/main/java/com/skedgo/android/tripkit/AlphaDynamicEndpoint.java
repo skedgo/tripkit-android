@@ -21,7 +21,6 @@ class AlphaDynamicEndpoint implements DynamicEndpoint {
     this.url = url;
   }
 
-  @Override
   public String getName() {
     return name;
   }

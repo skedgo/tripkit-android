@@ -38,6 +38,7 @@ dependencies {
 
   // To generate immutable models.
   // See more at http://immutables.github.io/.
+  annotationProcessor 'org.immutables:gson:2.3.9'
   annotationProcessor 'org.immutables:value:2.3.9'
   provided 'org.immutables:value:2.3.9:annotations'
   provided 'org.immutables:builder:2.3.9'

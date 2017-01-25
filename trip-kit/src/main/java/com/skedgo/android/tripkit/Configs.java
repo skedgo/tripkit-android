@@ -13,7 +13,9 @@ import rx.functions.Func0;
 
 @Value.Immutable
 public abstract class Configs {
-  public static Retrofit.Builder builder() { return new Retrofit.Builder(); }
+  public static ImmutableConfigs.Builder builder() {
+    return ImmutableConfigs.builder();
+  }
 
   public abstract Context context();
   public abstract String regionEligibility();
