@@ -13,7 +13,7 @@ class AlphaDynamicEndpoint implements DynamicEndpoint {
 
   @Override
   public String getUrl() {
-    return url;
+    return url + "/";
   }
 
   @Override
