@@ -4,7 +4,6 @@ import android.app.Application;
 import android.util.Log;
 
 import com.facebook.stetho.Stetho;
-import com.facebook.stetho.okhttp.StethoInterceptor;
 import com.skedgo.android.tripkit.Configs;
 import com.skedgo.android.tripkit.TripKit;
 
@@ -30,8 +29,5 @@ public final class App extends Application {
               }
             })
             .build());
-    TripKit.singleton()
-        .getOkHttpClient()
-        .networkInterceptors().add(new StethoInterceptor());
   }
 }

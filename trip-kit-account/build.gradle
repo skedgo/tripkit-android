@@ -38,14 +38,13 @@ dependencies {
 
   // To generate immutable models.
   // See more at http://immutables.github.io/.
-  annotationProcessor 'org.immutables:gson:2.3.9'
   annotationProcessor 'org.immutables:value:2.3.9'
   provided 'org.immutables:value:2.3.9:annotations'
   provided 'org.immutables:builder:2.3.9'
   provided 'org.immutables:gson:2.3.9:annotations'
 
-  compile "com.squareup.okhttp3:okhttp:3.3.0"
-  compile "com.squareup.okhttp3:logging-interceptor:3.3.0"
+  compile "com.squareup.okhttp3:okhttp:3.2.0"
+  compile "com.squareup.okhttp3:logging-interceptor:3.2.0"
   compile "com.squareup.retrofit2:converter-gson:2.1.0"
   compile("com.squareup.retrofit2:adapter-rxjava:2.1.0") {
     exclude module: 'rxjava'
