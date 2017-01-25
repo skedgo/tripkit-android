@@ -184,7 +184,6 @@ public class MainModule {
         "skedgo"
     );
     final ServiceApi serviceApi = new Retrofit.Builder()
-//        .setLogLevel(configs.debuggable() ? FULL : NONE)
         .baseUrl(endpoint.getUrl())
         .addConverterFactory(GsonConverterFactory.create(gson))
         .client(httpClient)
@@ -203,7 +202,6 @@ public class MainModule {
     return new Func1<String, ReportingApi>() {
       @Override public ReportingApi call(String endpoint) {
         return new Retrofit.Builder()
-//            .setLogLevel(configs.debuggable() ? FULL : NONE)
             .baseUrl(endpoint)
             .addConverterFactory(GsonConverterFactory.create(gson))
             .client(httpClient)
