@@ -67,9 +67,9 @@ public class MainModule {
 
   @Provides RegionsApi getRegionsApi(OkHttpClient httpClient) {
     return new Retrofit.Builder()
-//        .setLogLevel(configs.debuggable() ? FULL : NONE)
-        .baseUrl("https://tripgo.skedgo.com/satapp")
+        .baseUrl("https://tripgo.skedgo.com/satapp/")
         .addConverterFactory(GsonConverterFactory.create(Gsons.createForRegion()))
+        .addCallAdapterFactory(RxJavaCallAdapterFactory.createWithScheduler(Schedulers.io()))
         .client(httpClient)
         .build()
         .create(RegionsApi.class);

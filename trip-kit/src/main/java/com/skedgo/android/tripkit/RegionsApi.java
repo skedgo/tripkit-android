@@ -8,7 +8,8 @@ import retrofit2.http.POST;
 import rx.Observable;
 
 interface RegionsApi {
-  @POST("/regions.json") Observable<RegionsResponse> fetchRegionsAsync(@Body RequestBodyContent bodyContent);
+  @POST("regions.json")
+  Observable<RegionsResponse> fetchRegionsAsync(@Body RequestBodyContent bodyContent);
 
   final class RequestBodyContent {
     @SerializedName("v") private int apiVersion;

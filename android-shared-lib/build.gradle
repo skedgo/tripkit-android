@@ -61,11 +61,11 @@ dependencies {
   compile 'io.reactivex:rxandroid:1.2.1', { exclude module: 'rxjava' }
   compile 'com.google.code.gson:gson:2.6.1'
   compile 'com.github.skedgo:commons-collections:v1.0'
-  compile ('com.squareup.retrofit2:retrofit:2.1.0') {
+  compile 'com.squareup.retrofit2:retrofit:2.1.0', {
     // exclude Retrofit’s OkHttp peer-dependency module and define your own module import
     exclude module: 'okhttp'
   }
-  compile 'com.squareup.okhttp3:okhttp:3.3.1'
+  compile "com.squareup.okhttp3:okhttp:$okHttpVersion"
 
   // To generate immutable models.
   // See more at http://immutables.github.io/.
