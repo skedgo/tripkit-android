@@ -1,5 +1,7 @@
 package com.skedgo.android.tripkit.waypoints;
 
+import android.support.annotation.VisibleForTesting;
+
 import com.skedgo.android.common.model.Region;
 import com.skedgo.android.common.model.SegmentType;
 import com.skedgo.android.common.model.TripGroup;
@@ -52,11 +54,10 @@ public class GetTripsForChangingServiceImpl implements GetTripsForChangingServic
 
   }
 
-  // TODO: move this logic to tripkit when moving TimetableEntry
-  private List<WaypointSegmentAdapter> adaptSegmentList(TripSegment prototypeSegment,
-                                                        TimetableEntry service,
-                                                        Region region,
-                                                        ArrayList<TripSegment> segments) {
+  @VisibleForTesting List<WaypointSegmentAdapter> adaptSegmentList(TripSegment prototypeSegment,
+                                                                   TimetableEntry service,
+                                                                   Region region,
+                                                                   ArrayList<TripSegment> segments) {
 
     List<WaypointSegmentAdapter> waypointSegments = new ArrayList<>(segments.size());
 
