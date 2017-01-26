@@ -37,4 +37,5 @@ public interface ICalendarEvent extends ITimeRange {
   void setEffectiveTimeRange(ITimeRange effectiveTimeRange);
 
   String getUID();
+  int getId();
 }
