@@ -18,6 +18,10 @@ import com.skedgo.android.tripkit.tsp.GsonAdaptersRegionInfo;
 import com.skedgo.android.tripkit.tsp.GsonAdaptersRegionInfoBody;
 import com.skedgo.android.tripkit.tsp.GsonAdaptersRegionInfoResponse;
 import com.skedgo.android.tripkit.tsp.RegionInfoService;
+import com.skedgo.android.tripkit.waypoints.GetTripsForChangingService;
+import com.skedgo.android.tripkit.waypoints.GetTripsForChangingServiceImpl;
+import com.skedgo.android.tripkit.waypoints.GetTripsForChangingStop;
+import com.skedgo.android.tripkit.waypoints.GetTripsForChangingStopImpl;
 import com.skedgo.android.tripkit.waypoints.WaypointApi;
 import com.skedgo.android.tripkit.waypoints.WaypointService;
 import com.skedgo.android.tripkit.waypoints.WaypointServiceImpl;
@@ -280,6 +284,13 @@ public class MainModule {
   @Provides WaypointService getWaypointService(
       WaypointApi api, Gson gson) {
     return new WaypointServiceImpl(api, context.getResources(), gson);
+  }
+
+  @Provides GetTripsForChangingService getTripsForChangingService(WaypointService waypointService) {
+    return new GetTripsForChangingServiceImpl(waypointService);
+
+  }  @Provides GetTripsForChangingStop getTripsForChangingStop(WaypointService waypointService) {
+    return new GetTripsForChangingStopImpl(waypointService);
   }
 
   @Singleton @Provides Gson getGson() {
