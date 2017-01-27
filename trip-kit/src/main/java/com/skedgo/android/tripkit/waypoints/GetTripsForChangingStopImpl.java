@@ -62,7 +62,9 @@ public class GetTripsForChangingStopImpl implements GetTripsForChangingStop {
     boolean changeNextDeparture = false;
     boolean isTimeAdded = false;
 
-    for (TripSegment segment : segments) {
+    for (int i = 0; i < segments.size(); i++) {
+
+      TripSegment segment = segments.get(i);
 
       ImmutableWaypointSegmentAdapter.Builder builder = ImmutableWaypointSegmentAdapter.builder();
 
@@ -109,7 +111,13 @@ public class GetTripsForChangingStopImpl implements GetTripsForChangingStop {
           builder.start(segment.getFrom().getCoordinateString());
         }
 
-        builder.end(segment.getTo().getCoordinateString());
+        // When is get on, check if next segment is the one that changes, meaning "end" changes here
+        if (isGetOn && i < segments.size() - 1 && segments.get(i + 1).getId() == prototypeSegment.getId()) {
+          builder.end(waypoint.getCoordinateString());
+        } else {
+          builder.end(segment.getTo().getCoordinateString());
+        }
+
         builder.modes(Collections.singletonList(segment.getTransportModeId()));
 
         if (!isTimeAdded) {
