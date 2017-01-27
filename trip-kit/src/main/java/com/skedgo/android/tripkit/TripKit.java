@@ -8,7 +8,6 @@ import com.skedgo.android.tripkit.routing.RoutingModule;
 import com.skedgo.android.tripkit.tsp.TspModule;
 import com.skedgo.android.tripkit.waypoints.GetTripsForChangingService;
 import com.skedgo.android.tripkit.waypoints.GetTripsForChangingStop;
-import com.skedgo.android.tripkit.waypoints.WaypointService;
 import com.squareup.okhttp.OkHttpClient;
 
 import javax.inject.Singleton;
