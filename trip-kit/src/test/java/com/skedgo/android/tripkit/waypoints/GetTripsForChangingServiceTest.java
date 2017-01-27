@@ -1,9 +1,7 @@
 package com.skedgo.android.tripkit.waypoints;
 
-import com.skedgo.android.common.model.Location;
 import com.skedgo.android.common.model.Region;
-import com.skedgo.android.common.model.SegmentType;
-import com.skedgo.android.common.model.ServiceStop;
+import com.skedgo.android.common.model.TripGroup;
 import com.skedgo.android.common.model.TripSegment;
 import com.skedgo.android.tripkit.BuildConfig;
 import com.skedgo.android.tripkit.TestRunner;
@@ -16,10 +14,12 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.annotation.Config;
 
-import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
-import static org.assertj.core.api.Assertions.assertThat;
+import rx.Observable;
+import rx.observers.TestSubscriber;
+
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
@@ -28,76 +28,76 @@ import static org.mockito.Mockito.when;
 public class GetTripsForChangingServiceTest {
 
   @Mock private WaypointService waypointService;
+  @Mock private WaypointSegmentAdapterUtils waypointSegmentAdapterUtils;
   private GetTripsForChangingServiceImpl getTripsForChangingService;
 
   @Before public void before() {
     MockitoAnnotations.initMocks(this);
-    getTripsForChangingService = new GetTripsForChangingServiceImpl(waypointService);
+    getTripsForChangingService = new GetTripsForChangingServiceImpl(waypointService, waypointSegmentAdapterUtils);
   }
 
-  @Test public void shouldAdaptSegmentListService() {
-
-    ArrayList<TripSegment> segments = new ArrayList<>();
-    TripSegment busSegment = new TripSegment();
-    busSegment.setId(1L);
-    busSegment.setType(SegmentType.SCHEDULED);
-    busSegment.setServiceTripId("AwesomeSydney");
-    busSegment.setStartStopCode("A");
-    busSegment.setEndStopCode("B");
-    busSegment.setFrom(new Location(1.0, 1.0));
-    busSegment.setTo(new Location(3.0, 3.0));
-    busSegment.setTransportModeId("cool_bus");
-    busSegment.setStartTimeInSecs(47L);
-    busSegment.setEndTimeInSecs(74L);
-
-    TripSegment taxiSegment = new TripSegment();
-    taxiSegment.setId(2);
-    taxiSegment.setType(SegmentType.UNSCHEDULED);
-    taxiSegment.setFrom(new Location(3.0, 3.0));
-    taxiSegment.setTo(new Location(4.0, 4.0));
-    taxiSegment.setTransportModeId("cool_taxi");
-    taxiSegment.setStartTimeInSecs(74);
-    taxiSegment.setEndTimeInSecs(80);
-
-    segments.add(busSegment);
-    segments.add(taxiSegment);
-
-    TimetableEntry timetableEntry = mock(TimetableEntry.class);
-    when(timetableEntry.getStopCode()).thenReturn("stop code");
-    when(timetableEntry.getEndStopCode()).thenReturn("end stop code");
-    when(timetableEntry.getStartTimeInSecs()).thenReturn(10L);
-    when(timetableEntry.getEndTimeInSecs()).thenReturn(20L);
-    when(timetableEntry.getOperator()).thenReturn("operator");
+  @Test public void shouldGetUpdatedTrips() {
 
     Region region = mock(Region.class);
-    when(region.getName()).thenReturn("region");
 
-    List<WaypointSegmentAdapter> adaptedList = getTripsForChangingService.adaptSegmentList(
-        busSegment, timetableEntry, region, segments);
+    TripSegment segment = mock(TripSegment.class);
+    List<TripSegment> tripSegmentList = Collections.singletonList(segment);
 
-    assertThat(adaptedList).isNotNull();
-    assertThat(adaptedList).hasSize(2);
+    TimetableEntry timetableEntry = mock(TimetableEntry.class);
 
-    WaypointSegmentAdapter busSegmentAdapted = adaptedList.get(0);
-    assertThat(busSegmentAdapted.start()).isEqualTo(timetableEntry.getStopCode());
-    assertThat(busSegmentAdapted.end()).isEqualTo(timetableEntry.getEndStopCode());
-    assertThat(busSegmentAdapted.modes()).isNotNull();
-    assertThat(busSegmentAdapted.modes()).hasSize(2);
-    assertThat(busSegmentAdapted.modes().get(0)).isEqualTo("pt_pub");
-    assertThat(busSegmentAdapted.modes().get(1)).isEqualTo("pt_sch");
-    assertThat(busSegmentAdapted.startTime()).isEqualTo((int) timetableEntry.getStartTimeInSecs());
-    assertThat(busSegmentAdapted.endTime()).isEqualTo((int) timetableEntry.getEndTimeInSecs());
-    assertThat(busSegmentAdapted.region()).isEqualTo(region.getName());
+    ConfigurationParams configurationParams = mock(ConfigurationParams.class);
 
-    WaypointSegmentAdapter taxiSegmentAdapted = adaptedList.get(1);
-    assertThat(taxiSegmentAdapted.start()).isEqualTo(taxiSegment.getFrom().getCoordinateString());
-    assertThat(taxiSegmentAdapted.end()).isEqualTo(taxiSegment.getTo().getCoordinateString());
-    assertThat(taxiSegmentAdapted.modes()).isNotNull();
-    assertThat(taxiSegmentAdapted.modes()).hasSize(1);
-    assertThat(taxiSegmentAdapted.modes().get(0)).isEqualTo(taxiSegment.getTransportModeId());
+    WaypointSegmentAdapter segmentAdapter = mock(WaypointSegmentAdapter.class);
+    List<WaypointSegmentAdapter> segmentAdapterList = Collections.singletonList(segmentAdapter);
+
+    when(waypointSegmentAdapterUtils.adaptServiceSegmentList(segment, timetableEntry, region, tripSegmentList))
+        .thenReturn(segmentAdapterList);
+
+    TripGroup updatedSegment = mock(TripGroup.class);
+    List<TripGroup> tripGroups = Collections.singletonList(updatedSegment);
+
+    when(waypointService
+             .fetchChangedTripAsync(configurationParams, segmentAdapterList))
+        .thenReturn(Observable.just(tripGroups));
+
+    final TestSubscriber<List<TripGroup>> subscriber = new TestSubscriber<>();
+    getTripsForChangingService.getTrips(region, tripSegmentList, segment, timetableEntry, configurationParams)
+        .subscribe(subscriber);
+    subscriber.awaitTerminalEvent();
+    subscriber.assertNoErrors();
+    subscriber.assertValue(tripGroups);
 
   }
 
+  @Test public void shouldFailOnGetUpdatedTrips() {
+
+    Region region = mock(Region.class);
+
+    TripSegment segment = mock(TripSegment.class);
+    List<TripSegment> tripSegmentList = Collections.singletonList(segment);
+
+    TimetableEntry timetableEntry = mock(TimetableEntry.class);
+
+    ConfigurationParams configurationParams = mock(ConfigurationParams.class);
+
+    WaypointSegmentAdapter segmentAdapter = mock(WaypointSegmentAdapter.class);
+    List<WaypointSegmentAdapter> segmentAdapterList = Collections.singletonList(segmentAdapter);
+
+    when(waypointSegmentAdapterUtils.adaptServiceSegmentList(segment, timetableEntry, region, tripSegmentList))
+        .thenReturn(segmentAdapterList);
+
+    when(waypointService
+             .fetchChangedTripAsync(configurationParams, segmentAdapterList))
+        .thenReturn(Observable.<List<TripGroup>>error(new Exception()));
+
+    final TestSubscriber<List<TripGroup>> subscriber = new TestSubscriber<>();
+    getTripsForChangingService.getTrips(region, tripSegmentList, segment, timetableEntry, configurationParams)
+        .subscribe(subscriber);
+    subscriber.awaitTerminalEvent();
+    subscriber.assertError(Exception.class);
+    subscriber.assertNoValues();
+
+  }
 
 }
 

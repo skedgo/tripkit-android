@@ -23,6 +23,7 @@ import com.skedgo.android.tripkit.waypoints.GetTripsForChangingServiceImpl;
 import com.skedgo.android.tripkit.waypoints.GetTripsForChangingStop;
 import com.skedgo.android.tripkit.waypoints.GetTripsForChangingStopImpl;
 import com.skedgo.android.tripkit.waypoints.WaypointApi;
+import com.skedgo.android.tripkit.waypoints.WaypointSegmentAdapterUtils;
 import com.skedgo.android.tripkit.waypoints.WaypointService;
 import com.skedgo.android.tripkit.waypoints.WaypointServiceImpl;
 import com.squareup.okhttp.OkHttpClient;
@@ -286,11 +287,13 @@ public class MainModule {
     return new WaypointServiceImpl(api, context.getResources(), gson);
   }
 
-  @Provides GetTripsForChangingService getTripsForChangingService(WaypointService waypointService) {
-    return new GetTripsForChangingServiceImpl(waypointService);
+  @Provides GetTripsForChangingService getTripsForChangingService(WaypointService waypointService,
+                                                                  WaypointSegmentAdapterUtils waypointSegmentAdapterUtils) {
+    return new GetTripsForChangingServiceImpl(waypointService, waypointSegmentAdapterUtils);
 
-  }  @Provides GetTripsForChangingStop getTripsForChangingStop(WaypointService waypointService) {
-    return new GetTripsForChangingStopImpl(waypointService);
+  }  @Provides GetTripsForChangingStop getTripsForChangingStop(WaypointService waypointService,
+                                                               WaypointSegmentAdapterUtils waypointSegmentAdapterUtils) {
+    return new GetTripsForChangingStopImpl(waypointService, waypointSegmentAdapterUtils);
   }
 
   @Singleton @Provides Gson getGson() {
