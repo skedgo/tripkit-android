@@ -24,7 +24,7 @@ import rx.schedulers.Schedulers
 
 
     @Provides fun getWaypointService(api: WaypointApi, gson: Gson): WaypointService =
-            WaypointServiceImpl(api, TripKit.singleton().configs().context().resources, gson)
+            WaypointService(api, TripKit.singleton().configs().context().resources, gson)
 
 
     @Provides fun getTripsByChangingService(waypointService: WaypointService,

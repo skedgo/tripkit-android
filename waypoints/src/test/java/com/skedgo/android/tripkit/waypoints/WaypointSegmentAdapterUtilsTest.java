@@ -59,39 +59,39 @@ public class WaypointSegmentAdapterUtilsTest {
     segments.add(busSegment);
     segments.add(taxiSegment);
 
-    TimetableEntry timetableEntry = Mockito.mock(TimetableEntry.class);
-    Mockito.when(timetableEntry.getStopCode()).thenReturn("stop code");
-    Mockito.when(timetableEntry.getEndStopCode()).thenReturn("end stop code");
-    Mockito.when(timetableEntry.getStartTimeInSecs()).thenReturn(10L);
-    Mockito.when(timetableEntry.getEndTimeInSecs()).thenReturn(20L);
-    Mockito.when(timetableEntry.getOperator()).thenReturn("operator");
+    TimetableEntry timetableEntry = mock(TimetableEntry.class);
+    when(timetableEntry.getStopCode()).thenReturn("stop code");
+    when(timetableEntry.getEndStopCode()).thenReturn("end stop code");
+    when(timetableEntry.getStartTimeInSecs()).thenReturn(10L);
+    when(timetableEntry.getEndTimeInSecs()).thenReturn(20L);
+    when(timetableEntry.getOperator()).thenReturn("operator");
 
-    Region region = Mockito.mock(Region.class);
-    Mockito.when(region.getName()).thenReturn("region");
+    Region region = mock(Region.class);
+    when(region.getName()).thenReturn("region");
 
-    List<WaypointSegmentAdapter> adaptedList = waypointSegmentAdapterUtils.adaptServiceSegmentList(
+    List<WaypointSegmentAdapter> adaptedList = waypointSegmentAdapterUtils.adaptServiceSegmentList$production_sources_for_module_waypoints(
         busSegment, timetableEntry, region, segments);
 
-    Assertions.assertThat(adaptedList).isNotNull();
-    Assertions.assertThat(adaptedList).hasSize(2);
+    assertThat(adaptedList).isNotNull();
+    assertThat(adaptedList).hasSize(2);
 
     WaypointSegmentAdapter busSegmentAdapted = adaptedList.get(0);
-    Assertions.assertThat(busSegmentAdapted.start()).isEqualTo(timetableEntry.getStopCode());
-    Assertions.assertThat(busSegmentAdapted.end()).isEqualTo(timetableEntry.getEndStopCode());
-    Assertions.assertThat(busSegmentAdapted.modes()).isNotNull();
-    Assertions.assertThat(busSegmentAdapted.modes()).hasSize(2);
-    Assertions.assertThat(busSegmentAdapted.modes().get(0)).isEqualTo("pt_pub");
-    Assertions.assertThat(busSegmentAdapted.modes().get(1)).isEqualTo("pt_sch");
-    Assertions.assertThat(busSegmentAdapted.startTime()).isEqualTo((int) timetableEntry.getStartTimeInSecs());
-    Assertions.assertThat(busSegmentAdapted.endTime()).isEqualTo((int) timetableEntry.getEndTimeInSecs());
-    Assertions.assertThat(busSegmentAdapted.region()).isEqualTo(region.getName());
+    assertThat(busSegmentAdapted.getStart()).isEqualTo(timetableEntry.getStopCode());
+    assertThat(busSegmentAdapted.getEnd()).isEqualTo(timetableEntry.getEndStopCode());
+    assertThat(busSegmentAdapted.getModes()).isNotNull();
+    assertThat(busSegmentAdapted.getModes()).hasSize(2);
+    assertThat(busSegmentAdapted.getModes().get(0)).isEqualTo("pt_pub");
+    assertThat(busSegmentAdapted.getModes().get(1)).isEqualTo("pt_sch");
+    assertThat(busSegmentAdapted.getStartTime()).isEqualTo((int) timetableEntry.getStartTimeInSecs());
+    assertThat(busSegmentAdapted.getEndTime()).isEqualTo((int) timetableEntry.getEndTimeInSecs());
+    assertThat(busSegmentAdapted.getRegion()).isEqualTo(region.getName());
 
     WaypointSegmentAdapter taxiSegmentAdapted = adaptedList.get(1);
-    Assertions.assertThat(taxiSegmentAdapted.start()).isEqualTo(taxiSegment.getFrom().getCoordinateString());
-    Assertions.assertThat(taxiSegmentAdapted.end()).isEqualTo(taxiSegment.getTo().getCoordinateString());
-    Assertions.assertThat(taxiSegmentAdapted.modes()).isNotNull();
-    Assertions.assertThat(taxiSegmentAdapted.modes()).hasSize(1);
-    Assertions.assertThat(taxiSegmentAdapted.modes().get(0)).isEqualTo(taxiSegment.getTransportModeId());
+    assertThat(taxiSegmentAdapted.getStart()).isEqualTo(taxiSegment.getFrom().getCoordinateString());
+    assertThat(taxiSegmentAdapted.getEnd()).isEqualTo(taxiSegment.getTo().getCoordinateString());
+    assertThat(taxiSegmentAdapted.getModes()).isNotNull();
+    assertThat(taxiSegmentAdapted.getModes()).hasSize(1);
+    assertThat(taxiSegmentAdapted.getModes().get(0)).isEqualTo(taxiSegment.getTransportModeId());
 
   }
 
@@ -128,30 +128,30 @@ public class WaypointSegmentAdapterUtilsTest {
     // Bus 1,1 to 3,3 + Taxi 3,3 to 4,4.
     // Get on 1st segment (Bus), in 2,2.
     // Result shoud be: Bus 2,2 to 3,3 + Taxi 3,3 to 4,4.
-    List<WaypointSegmentAdapter> adaptedList = waypointSegmentAdapterUtils.adaptStopSegmentList(
+    List<WaypointSegmentAdapter> adaptedList = waypointSegmentAdapterUtils.adaptStopSegmentList$production_sources_for_module_waypoints(
         busSegment, waypoint, true, segments);
 
-    Assertions.assertThat(adaptedList).isNotNull();
-    Assertions.assertThat(adaptedList).hasSize(2);
+    assertThat(adaptedList).isNotNull();
+    assertThat(adaptedList).hasSize(2);
 
     WaypointSegmentAdapter busSegmentAdapted = adaptedList.get(0);
-    Assertions.assertThat(waypoint.getCoordinateString()).isEqualTo("(2.0, 2.0)");
-    Assertions.assertThat(busSegmentAdapted.start()).isEqualTo(waypoint.getCoordinateString());
-    Assertions.assertThat(busSegment.getTo().getCoordinateString()).isEqualTo("(3.0, 3.0)");
-    Assertions.assertThat(busSegmentAdapted.end()).isEqualTo(busSegment.getTo().getCoordinateString());
-    Assertions.assertThat(busSegmentAdapted.modes()).isNotNull();
-    Assertions.assertThat(busSegmentAdapted.modes()).hasSize(1);
-    Assertions.assertThat(busSegmentAdapted.modes().get(0)).isEqualTo(busSegment.getTransportModeId());
-    Assertions.assertThat(busSegmentAdapted.startTime()).isEqualTo((int) busSegment.getStartTimeInSecs());
+    assertThat(waypoint.getCoordinateString()).isEqualTo("(2.0, 2.0)");
+    assertThat(busSegmentAdapted.getStart()).isEqualTo(waypoint.getCoordinateString());
+    assertThat(busSegment.getTo().getCoordinateString()).isEqualTo("(3.0, 3.0)");
+    assertThat(busSegmentAdapted.getEnd()).isEqualTo(busSegment.getTo().getCoordinateString());
+    assertThat(busSegmentAdapted.getModes()).isNotNull();
+    assertThat(busSegmentAdapted.getModes()).hasSize(1);
+    assertThat(busSegmentAdapted.getModes().get(0)).isEqualTo(busSegment.getTransportModeId());
+    assertThat(busSegmentAdapted.getStartTime()).isEqualTo((int) busSegment.getStartTimeInSecs());
 
     WaypointSegmentAdapter taxiSegmentAdapted = adaptedList.get(1);
-    Assertions.assertThat(taxiSegment.getFrom().getCoordinateString()).isEqualTo("(3.0, 3.0)");
-    Assertions.assertThat(taxiSegmentAdapted.start()).isEqualTo(taxiSegment.getFrom().getCoordinateString());
-    Assertions.assertThat(taxiSegment.getTo().getCoordinateString()).isEqualTo("(4.0, 4.0)");
-    Assertions.assertThat(taxiSegmentAdapted.end()).isEqualTo(taxiSegment.getTo().getCoordinateString());
-    Assertions.assertThat(taxiSegmentAdapted.modes()).isNotNull();
-    Assertions.assertThat(taxiSegmentAdapted.modes()).hasSize(1);
-    Assertions.assertThat(taxiSegmentAdapted.modes().get(0)).isEqualTo(taxiSegment.getTransportModeId());
+    assertThat(taxiSegment.getFrom().getCoordinateString()).isEqualTo("(3.0, 3.0)");
+    assertThat(taxiSegmentAdapted.getStart()).isEqualTo(taxiSegment.getFrom().getCoordinateString());
+    assertThat(taxiSegment.getTo().getCoordinateString()).isEqualTo("(4.0, 4.0)");
+    assertThat(taxiSegmentAdapted.getEnd()).isEqualTo(taxiSegment.getTo().getCoordinateString());
+    assertThat(taxiSegmentAdapted.getModes()).isNotNull();
+    assertThat(taxiSegmentAdapted.getModes()).hasSize(1);
+    assertThat(taxiSegmentAdapted.getModes().get(0)).isEqualTo(taxiSegment.getTransportModeId());
 
   }
 
@@ -188,30 +188,30 @@ public class WaypointSegmentAdapterUtilsTest {
     // Taxi 1,1 to 2,2 + Bus 2,2 to 4,4.
     // Get on 2nd segment (Bus), in 3,3.
     // Result shoud be: Taxi 1,1 to 3,3 + Bus 3,3 to 4,4.
-    List<WaypointSegmentAdapter> adaptedList = waypointSegmentAdapterUtils.adaptStopSegmentList(
+    List<WaypointSegmentAdapter> adaptedList = waypointSegmentAdapterUtils.adaptStopSegmentList$production_sources_for_module_waypoints(
         busSegment, waypoint, true, segments);
 
-    Assertions.assertThat(adaptedList).isNotNull();
-    Assertions.assertThat(adaptedList).hasSize(2);
+    assertThat(adaptedList).isNotNull();
+    assertThat(adaptedList).hasSize(2);
 
     WaypointSegmentAdapter taxiSegmentAdapted = adaptedList.get(0);
-    Assertions.assertThat(taxiSegment.getFrom().getCoordinateString()).isEqualTo("(1.0, 1.0)");
-    Assertions.assertThat(taxiSegmentAdapted.start()).isEqualTo(taxiSegment.getFrom().getCoordinateString());
-    Assertions.assertThat(waypoint.getCoordinateString()).isEqualTo("(3.0, 3.0)");
-    Assertions.assertThat(taxiSegmentAdapted.end()).isEqualTo(waypoint.getCoordinateString());
-    Assertions.assertThat(taxiSegmentAdapted.modes()).isNotNull();
-    Assertions.assertThat(taxiSegmentAdapted.modes()).hasSize(1);
-    Assertions.assertThat(taxiSegmentAdapted.modes().get(0)).isEqualTo(taxiSegment.getTransportModeId());
-    Assertions.assertThat(taxiSegmentAdapted.startTime()).isEqualTo((int) taxiSegment.getStartTimeInSecs());
+    assertThat(taxiSegment.getFrom().getCoordinateString()).isEqualTo("(1.0, 1.0)");
+    assertThat(taxiSegmentAdapted.getStart()).isEqualTo(taxiSegment.getFrom().getCoordinateString());
+    assertThat(waypoint.getCoordinateString()).isEqualTo("(3.0, 3.0)");
+    assertThat(taxiSegmentAdapted.getEnd()).isEqualTo(waypoint.getCoordinateString());
+    assertThat(taxiSegmentAdapted.getModes()).isNotNull();
+    assertThat(taxiSegmentAdapted.getModes()).hasSize(1);
+    assertThat(taxiSegmentAdapted.getModes().get(0)).isEqualTo(taxiSegment.getTransportModeId());
+    assertThat(taxiSegmentAdapted.getStartTime()).isEqualTo((int) taxiSegment.getStartTimeInSecs());
 
     WaypointSegmentAdapter busSegmentAdapted = adaptedList.get(1);
-    Assertions.assertThat(waypoint.getCoordinateString()).isEqualTo("(3.0, 3.0)");
-    Assertions.assertThat(busSegmentAdapted.start()).isEqualTo(waypoint.getCoordinateString());
-    Assertions.assertThat(busSegment.getTo().getCoordinateString()).isEqualTo("(4.0, 4.0)");
-    Assertions.assertThat(busSegmentAdapted.end()).isEqualTo(busSegment.getTo().getCoordinateString());
-    Assertions.assertThat(busSegmentAdapted.modes()).isNotNull();
-    Assertions.assertThat(busSegmentAdapted.modes()).hasSize(1);
-    Assertions.assertThat(busSegmentAdapted.modes().get(0)).isEqualTo(busSegment.getTransportModeId());
+    assertThat(waypoint.getCoordinateString()).isEqualTo("(3.0, 3.0)");
+    assertThat(busSegmentAdapted.getStart()).isEqualTo(waypoint.getCoordinateString());
+    assertThat(busSegment.getTo().getCoordinateString()).isEqualTo("(4.0, 4.0)");
+    assertThat(busSegmentAdapted.getEnd()).isEqualTo(busSegment.getTo().getCoordinateString());
+    assertThat(busSegmentAdapted.getModes()).isNotNull();
+    assertThat(busSegmentAdapted.getModes()).hasSize(1);
+    assertThat(busSegmentAdapted.getModes().get(0)).isEqualTo(busSegment.getTransportModeId());
 
   }
 
@@ -248,30 +248,30 @@ public class WaypointSegmentAdapterUtilsTest {
     // Bus 1,1 to 3,3 + Taxi 3,3 to 4,4.
     // Get off 1st segment (Bus), in 2,2.
     // Result shoud be: Bus 1,1 to 2,2 + Taxi 2,2 to 4,4.
-    List<WaypointSegmentAdapter> adaptedList = waypointSegmentAdapterUtils.adaptStopSegmentList(
+    List<WaypointSegmentAdapter> adaptedList = waypointSegmentAdapterUtils.adaptStopSegmentList$production_sources_for_module_waypoints(
         busSegment, waypoint, false, segments);
 
-    Assertions.assertThat(adaptedList).isNotNull();
-    Assertions.assertThat(adaptedList).hasSize(2);
+    assertThat(adaptedList).isNotNull();
+    assertThat(adaptedList).hasSize(2);
 
     WaypointSegmentAdapter busSegmentAdapted = adaptedList.get(0);
-    Assertions.assertThat(busSegment.getFrom().getCoordinateString()).isEqualTo("(1.0, 1.0)");
-    Assertions.assertThat(busSegmentAdapted.start()).isEqualTo(busSegment.getFrom().getCoordinateString());
-    Assertions.assertThat(waypoint.getCoordinateString()).isEqualTo("(2.0, 2.0)");
-    Assertions.assertThat(busSegmentAdapted.end()).isEqualTo(waypoint.getCoordinateString());
-    Assertions.assertThat(busSegmentAdapted.modes()).isNotNull();
-    Assertions.assertThat(busSegmentAdapted.modes()).hasSize(1);
-    Assertions.assertThat(busSegmentAdapted.modes().get(0)).isEqualTo(busSegment.getTransportModeId());
-    Assertions.assertThat(busSegmentAdapted.startTime()).isEqualTo((int) busSegment.getStartTimeInSecs());
+    assertThat(busSegment.getFrom().getCoordinateString()).isEqualTo("(1.0, 1.0)");
+    assertThat(busSegmentAdapted.getStart()).isEqualTo(busSegment.getFrom().getCoordinateString());
+    assertThat(waypoint.getCoordinateString()).isEqualTo("(2.0, 2.0)");
+    assertThat(busSegmentAdapted.getEnd()).isEqualTo(waypoint.getCoordinateString());
+    assertThat(busSegmentAdapted.getModes()).isNotNull();
+    assertThat(busSegmentAdapted.getModes()).hasSize(1);
+    assertThat(busSegmentAdapted.getModes().get(0)).isEqualTo(busSegment.getTransportModeId());
+    assertThat(busSegmentAdapted.getStartTime()).isEqualTo((int) busSegment.getStartTimeInSecs());
 
     WaypointSegmentAdapter taxiSegmentAdapted = adaptedList.get(1);
-    Assertions.assertThat(waypoint.getCoordinateString()).isEqualTo("(2.0, 2.0)");
-    Assertions.assertThat(taxiSegmentAdapted.start()).isEqualTo(waypoint.getCoordinateString());
-    Assertions.assertThat(taxiSegment.getTo().getCoordinateString()).isEqualTo("(4.0, 4.0)");
-    Assertions.assertThat(taxiSegmentAdapted.end()).isEqualTo(taxiSegment.getTo().getCoordinateString());
-    Assertions.assertThat(taxiSegmentAdapted.modes()).isNotNull();
-    Assertions.assertThat(taxiSegmentAdapted.modes()).hasSize(1);
-    Assertions.assertThat(taxiSegmentAdapted.modes().get(0)).isEqualTo(taxiSegment.getTransportModeId());
+    assertThat(waypoint.getCoordinateString()).isEqualTo("(2.0, 2.0)");
+    assertThat(taxiSegmentAdapted.getStart()).isEqualTo(waypoint.getCoordinateString());
+    assertThat(taxiSegment.getTo().getCoordinateString()).isEqualTo("(4.0, 4.0)");
+    assertThat(taxiSegmentAdapted.getEnd()).isEqualTo(taxiSegment.getTo().getCoordinateString());
+    assertThat(taxiSegmentAdapted.getModes()).isNotNull();
+    assertThat(taxiSegmentAdapted.getModes()).hasSize(1);
+    assertThat(taxiSegmentAdapted.getModes().get(0)).isEqualTo(taxiSegment.getTransportModeId());
 
   }
 
@@ -308,30 +308,30 @@ public class WaypointSegmentAdapterUtilsTest {
     // Taxi 1,1 to 2,2 + Bus 2,2 to 4,4.
     // Get off 2nd segment (Bus), in 3,3.
     // Result shoud be: Taxi 1,1 to 2,2 + Bus 2,2 to 3,3.
-    List<WaypointSegmentAdapter> adaptedList = waypointSegmentAdapterUtils.adaptStopSegmentList(
+    List<WaypointSegmentAdapter> adaptedList = waypointSegmentAdapterUtils.adaptStopSegmentList$production_sources_for_module_waypoints(
         busSegment, waypoint, false, segments);
 
-    Assertions.assertThat(adaptedList).isNotNull();
-    Assertions.assertThat(adaptedList).hasSize(2);
+    assertThat(adaptedList).isNotNull();
+    assertThat(adaptedList).hasSize(2);
 
     WaypointSegmentAdapter taxiSegmentAdapted = adaptedList.get(0);
-    Assertions.assertThat(taxiSegment.getFrom().getCoordinateString()).isEqualTo("(1.0, 1.0)");
-    Assertions.assertThat(taxiSegmentAdapted.start()).isEqualTo(taxiSegment.getFrom().getCoordinateString());
-    Assertions.assertThat(taxiSegment.getTo().getCoordinateString()).isEqualTo("(2.0, 2.0)");
-    Assertions.assertThat(taxiSegmentAdapted.end()).isEqualTo(taxiSegment.getTo().getCoordinateString());
-    Assertions.assertThat(taxiSegmentAdapted.modes()).isNotNull();
-    Assertions.assertThat(taxiSegmentAdapted.modes()).hasSize(1);
-    Assertions.assertThat(taxiSegmentAdapted.modes().get(0)).isEqualTo(taxiSegment.getTransportModeId());
-    Assertions.assertThat(taxiSegmentAdapted.startTime()).isEqualTo((int) taxiSegment.getStartTimeInSecs());
+    assertThat(taxiSegment.getFrom().getCoordinateString()).isEqualTo("(1.0, 1.0)");
+    assertThat(taxiSegmentAdapted.getStart()).isEqualTo(taxiSegment.getFrom().getCoordinateString());
+    assertThat(taxiSegment.getTo().getCoordinateString()).isEqualTo("(2.0, 2.0)");
+    assertThat(taxiSegmentAdapted.getEnd()).isEqualTo(taxiSegment.getTo().getCoordinateString());
+    assertThat(taxiSegmentAdapted.getModes()).isNotNull();
+    assertThat(taxiSegmentAdapted.getModes()).hasSize(1);
+    assertThat(taxiSegmentAdapted.getModes().get(0)).isEqualTo(taxiSegment.getTransportModeId());
+    assertThat(taxiSegmentAdapted.getStartTime()).isEqualTo((int) taxiSegment.getStartTimeInSecs());
 
     WaypointSegmentAdapter busSegmentAdapted = adaptedList.get(1);
-    Assertions.assertThat(busSegment.getFrom().getCoordinateString()).isEqualTo("(2.0, 2.0)");
-    Assertions.assertThat(busSegmentAdapted.start()).isEqualTo(busSegment.getFrom().getCoordinateString());
-    Assertions.assertThat(waypoint.getCoordinateString()).isEqualTo("(3.0, 3.0)");
-    Assertions.assertThat(busSegmentAdapted.end()).isEqualTo(waypoint.getCoordinateString());
-    Assertions.assertThat(busSegmentAdapted.modes()).isNotNull();
-    Assertions.assertThat(busSegmentAdapted.modes()).hasSize(1);
-    Assertions.assertThat(busSegmentAdapted.modes().get(0)).isEqualTo(busSegment.getTransportModeId());
+    assertThat(busSegment.getFrom().getCoordinateString()).isEqualTo("(2.0, 2.0)");
+    assertThat(busSegmentAdapted.getStart()).isEqualTo(busSegment.getFrom().getCoordinateString());
+    assertThat(waypoint.getCoordinateString()).isEqualTo("(3.0, 3.0)");
+    assertThat(busSegmentAdapted.getEnd()).isEqualTo(waypoint.getCoordinateString());
+    assertThat(busSegmentAdapted.getModes()).isNotNull();
+    assertThat(busSegmentAdapted.getModes()).hasSize(1);
+    assertThat(busSegmentAdapted.getModes().get(0)).isEqualTo(busSegment.getTransportModeId());
 
   }
 }

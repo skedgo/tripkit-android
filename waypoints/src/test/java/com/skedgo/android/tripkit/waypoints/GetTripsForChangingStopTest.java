@@ -1,14 +1,10 @@
 package com.skedgo.android.tripkit.waypoints;
 
 import com.skedgo.android.common.model.Location;
-import com.skedgo.android.common.model.Region;
-import com.skedgo.android.common.model.SegmentType;
-import com.skedgo.android.common.model.ServiceStop;
 import com.skedgo.android.common.model.TripGroup;
 import com.skedgo.android.common.model.TripSegment;
 import com.skedgo.android.tripkit.BuildConfig;
 import com.skedgo.android.tripkit.TestRunner;
-import com.skedgo.android.tripkit.TimetableEntry;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -17,14 +13,12 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.annotation.Config;
 
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
 import rx.Observable;
 import rx.observers.TestSubscriber;
 
-import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
@@ -33,7 +27,7 @@ import static org.mockito.Mockito.when;
 public class GetTripsForChangingStopTest {
 
   @Mock private WaypointService waypointService;
-  @Mock private  WaypointSegmentAdapterUtils waypointSegmentAdapterUtils;
+  @Mock private WaypointSegmentAdapterUtils waypointSegmentAdapterUtils;
   private GetTripsForChangingStopImpl getTripsForChangingStop;
 
   @Before public void before() {
@@ -43,28 +37,28 @@ public class GetTripsForChangingStopTest {
 
   @Test public void shouldGetUpdatedTrips() {
 
-    TripSegment segment = Mockito.mock(TripSegment.class);
+    TripSegment segment = mock(TripSegment.class);
     List<TripSegment> tripSegmentList = Collections.singletonList(segment);
 
-    ConfigurationParams configurationParams = Mockito.mock(ConfigurationParams.class);
+    ConfigurationParams configurationParams = mock(ConfigurationParams.class);
 
-    Location location = Mockito.mock(Location.class);
+    Location location = mock(Location.class);
 
-    WaypointSegmentAdapter segmentAdapter = Mockito.mock(WaypointSegmentAdapter.class);
+    WaypointSegmentAdapter segmentAdapter = mock(WaypointSegmentAdapter.class);
     List<WaypointSegmentAdapter> segmentAdapterList = Collections.singletonList(segmentAdapter);
 
-    Mockito.when(waypointSegmentAdapterUtils.adaptStopSegmentList(segment, location, true, tripSegmentList))
+    when(waypointSegmentAdapterUtils.adaptStopSegmentList$production_sources_for_module_waypoints(segment, location, true, tripSegmentList))
         .thenReturn(segmentAdapterList);
 
-    TripGroup updatedSegment = Mockito.mock(TripGroup.class);
+    TripGroup updatedSegment = mock(TripGroup.class);
     List<TripGroup> tripGroups = Collections.singletonList(updatedSegment);
 
-    Mockito.when(waypointService
+    when(waypointService
              .fetchChangedTripAsync(configurationParams, segmentAdapterList))
         .thenReturn(Observable.just(tripGroups));
 
     final TestSubscriber<List<TripGroup>> subscriber = new TestSubscriber<>();
-    getTripsForChangingStop.getTrips(tripSegmentList, segment, location, true, configurationParams)
+    getTripsForChangingStop.call(tripSegmentList, segment, location, true, configurationParams)
         .subscribe(subscriber);
     subscriber.awaitTerminalEvent();
     subscriber.assertNoErrors();
@@ -74,25 +68,25 @@ public class GetTripsForChangingStopTest {
 
   @Test public void shouldFailOnGetUpdatedTrips() {
 
-    TripSegment segment = Mockito.mock(TripSegment.class);
+    TripSegment segment = mock(TripSegment.class);
     List<TripSegment> tripSegmentList = Collections.singletonList(segment);
 
-    ConfigurationParams configurationParams = Mockito.mock(ConfigurationParams.class);
+    ConfigurationParams configurationParams = mock(ConfigurationParams.class);
 
-    Location location = Mockito.mock(Location.class);
+    Location location = mock(Location.class);
 
-    WaypointSegmentAdapter segmentAdapter = Mockito.mock(WaypointSegmentAdapter.class);
+    WaypointSegmentAdapter segmentAdapter = mock(WaypointSegmentAdapter.class);
     List<WaypointSegmentAdapter> segmentAdapterList = Collections.singletonList(segmentAdapter);
 
-    Mockito.when(waypointSegmentAdapterUtils.adaptStopSegmentList(segment, location, true, tripSegmentList))
+    when(waypointSegmentAdapterUtils.adaptStopSegmentList$production_sources_for_module_waypoints(segment, location, true, tripSegmentList))
         .thenReturn(segmentAdapterList);
 
-    Mockito.when(waypointService
+    when(waypointService
              .fetchChangedTripAsync(configurationParams, segmentAdapterList))
         .thenReturn(Observable.<List<TripGroup>>error(new Exception()));
 
     final TestSubscriber<List<TripGroup>> subscriber = new TestSubscriber<>();
-    getTripsForChangingStop.getTrips(tripSegmentList, segment, location, true, configurationParams)
+    getTripsForChangingStop.call(tripSegmentList, segment, location, true, configurationParams)
         .subscribe(subscriber);
     subscriber.awaitTerminalEvent();
     subscriber.assertError(Exception.class);

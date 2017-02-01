@@ -25,7 +25,7 @@ public class WaypointsModule {
   }
 
   @Provides WaypointService getWaypointService(WaypointApi api, Gson gson) {
-    return new WaypointServiceImpl(api, TripKit.singleton().configs().context().getResources(), gson);
+    return new WaypointService(api, TripKit.singleton().configs().context().getResources(), gson);
   }
 
   @Provides GetTripByChangingService getTripsByChangingService(WaypointService waypointService,
