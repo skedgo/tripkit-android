@@ -38,25 +38,25 @@ public class GetTripsForChangingServiceTest {
 
   @Test public void shouldGetUpdatedTrips() {
 
-    Region region = mock(Region.class);
+    Region region = Mockito.mock(Region.class);
 
-    TripSegment segment = mock(TripSegment.class);
+    TripSegment segment = Mockito.mock(TripSegment.class);
     List<TripSegment> tripSegmentList = Collections.singletonList(segment);
 
-    TimetableEntry timetableEntry = mock(TimetableEntry.class);
+    TimetableEntry timetableEntry = Mockito.mock(TimetableEntry.class);
 
-    ConfigurationParams configurationParams = mock(ConfigurationParams.class);
+    ConfigurationParams configurationParams = Mockito.mock(ConfigurationParams.class);
 
-    WaypointSegmentAdapter segmentAdapter = mock(WaypointSegmentAdapter.class);
+    WaypointSegmentAdapter segmentAdapter = Mockito.mock(WaypointSegmentAdapter.class);
     List<WaypointSegmentAdapter> segmentAdapterList = Collections.singletonList(segmentAdapter);
 
-    when(waypointSegmentAdapterUtils.adaptServiceSegmentList(segment, timetableEntry, region, tripSegmentList))
+    Mockito.when(waypointSegmentAdapterUtils.adaptServiceSegmentList(segment, timetableEntry, region, tripSegmentList))
         .thenReturn(segmentAdapterList);
 
-    TripGroup updatedSegment = mock(TripGroup.class);
+    TripGroup updatedSegment = Mockito.mock(TripGroup.class);
     List<TripGroup> tripGroups = Collections.singletonList(updatedSegment);
 
-    when(waypointService
+    Mockito.when(waypointService
              .fetchChangedTripAsync(configurationParams, segmentAdapterList))
         .thenReturn(Observable.just(tripGroups));
 
@@ -71,22 +71,22 @@ public class GetTripsForChangingServiceTest {
 
   @Test public void shouldFailOnGetUpdatedTrips() {
 
-    Region region = mock(Region.class);
+    Region region = Mockito.mock(Region.class);
 
-    TripSegment segment = mock(TripSegment.class);
+    TripSegment segment = Mockito.mock(TripSegment.class);
     List<TripSegment> tripSegmentList = Collections.singletonList(segment);
 
-    TimetableEntry timetableEntry = mock(TimetableEntry.class);
+    TimetableEntry timetableEntry = Mockito.mock(TimetableEntry.class);
 
-    ConfigurationParams configurationParams = mock(ConfigurationParams.class);
+    ConfigurationParams configurationParams = Mockito.mock(ConfigurationParams.class);
 
-    WaypointSegmentAdapter segmentAdapter = mock(WaypointSegmentAdapter.class);
+    WaypointSegmentAdapter segmentAdapter = Mockito.mock(WaypointSegmentAdapter.class);
     List<WaypointSegmentAdapter> segmentAdapterList = Collections.singletonList(segmentAdapter);
 
-    when(waypointSegmentAdapterUtils.adaptServiceSegmentList(segment, timetableEntry, region, tripSegmentList))
+    Mockito.when(waypointSegmentAdapterUtils.adaptServiceSegmentList(segment, timetableEntry, region, tripSegmentList))
         .thenReturn(segmentAdapterList);
 
-    when(waypointService
+    Mockito.when(waypointService
              .fetchChangedTripAsync(configurationParams, segmentAdapterList))
         .thenReturn(Observable.<List<TripGroup>>error(new Exception()));
 

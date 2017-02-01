@@ -43,23 +43,23 @@ public class GetTripsForChangingStopTest {
 
   @Test public void shouldGetUpdatedTrips() {
 
-    TripSegment segment = mock(TripSegment.class);
+    TripSegment segment = Mockito.mock(TripSegment.class);
     List<TripSegment> tripSegmentList = Collections.singletonList(segment);
 
-    ConfigurationParams configurationParams = mock(ConfigurationParams.class);
+    ConfigurationParams configurationParams = Mockito.mock(ConfigurationParams.class);
 
-    Location location = mock(Location.class);
+    Location location = Mockito.mock(Location.class);
 
-    WaypointSegmentAdapter segmentAdapter = mock(WaypointSegmentAdapter.class);
+    WaypointSegmentAdapter segmentAdapter = Mockito.mock(WaypointSegmentAdapter.class);
     List<WaypointSegmentAdapter> segmentAdapterList = Collections.singletonList(segmentAdapter);
 
-    when(waypointSegmentAdapterUtils.adaptStopSegmentList(segment, location, true, tripSegmentList))
+    Mockito.when(waypointSegmentAdapterUtils.adaptStopSegmentList(segment, location, true, tripSegmentList))
         .thenReturn(segmentAdapterList);
 
-    TripGroup updatedSegment = mock(TripGroup.class);
+    TripGroup updatedSegment = Mockito.mock(TripGroup.class);
     List<TripGroup> tripGroups = Collections.singletonList(updatedSegment);
 
-    when(waypointService
+    Mockito.when(waypointService
              .fetchChangedTripAsync(configurationParams, segmentAdapterList))
         .thenReturn(Observable.just(tripGroups));
 
@@ -74,20 +74,20 @@ public class GetTripsForChangingStopTest {
 
   @Test public void shouldFailOnGetUpdatedTrips() {
 
-    TripSegment segment = mock(TripSegment.class);
+    TripSegment segment = Mockito.mock(TripSegment.class);
     List<TripSegment> tripSegmentList = Collections.singletonList(segment);
 
-    ConfigurationParams configurationParams = mock(ConfigurationParams.class);
+    ConfigurationParams configurationParams = Mockito.mock(ConfigurationParams.class);
 
-    Location location = mock(Location.class);
+    Location location = Mockito.mock(Location.class);
 
-    WaypointSegmentAdapter segmentAdapter = mock(WaypointSegmentAdapter.class);
+    WaypointSegmentAdapter segmentAdapter = Mockito.mock(WaypointSegmentAdapter.class);
     List<WaypointSegmentAdapter> segmentAdapterList = Collections.singletonList(segmentAdapter);
 
-    when(waypointSegmentAdapterUtils.adaptStopSegmentList(segment, location, true, tripSegmentList))
+    Mockito.when(waypointSegmentAdapterUtils.adaptStopSegmentList(segment, location, true, tripSegmentList))
         .thenReturn(segmentAdapterList);
 
-    when(waypointService
+    Mockito.when(waypointService
              .fetchChangedTripAsync(configurationParams, segmentAdapterList))
         .thenReturn(Observable.<List<TripGroup>>error(new Exception()));
 

@@ -5,6 +5,8 @@ import com.skedgo.android.common.model.TripGroup;
 import com.skedgo.android.common.model.TripSegment;
 import com.skedgo.android.tripkit.TimetableEntry;
 
+import org.jetbrains.annotations.NotNull;
+
 import java.util.List;
 
 import javax.inject.Inject;
@@ -13,7 +15,7 @@ import rx.Single;
 import rx.SingleSubscriber;
 import rx.functions.Action1;
 
-public class GetTripsForChangingServiceImpl implements GetTripsForChangingService {
+public class GetTripsForChangingServiceImpl implements GetTripByChangingService {
 
   private final WaypointService waypointService;
   private final WaypointSegmentAdapterUtils waypointSegmentAdapterUtils;
@@ -24,12 +26,14 @@ public class GetTripsForChangingServiceImpl implements GetTripsForChangingServic
     this.waypointSegmentAdapterUtils = waypointSegmentAdapterUtils;
   }
 
-  public Single<List<TripGroup>> getTrips(final Region region, final List<TripSegment> segments,
-                                          final TripSegment prototypeSegment,
-                                          final TimetableEntry service,
-                                          final ConfigurationParams configurationParams) {
-
-    final List<WaypointSegmentAdapter> waypointSegments = waypointSegmentAdapterUtils.adaptServiceSegmentList(prototypeSegment, service, region, segments);
+  @NotNull @Override
+  public Single<List<TripGroup>> call(@NotNull Region region, @NotNull List<? extends TripSegment> segments,
+                                      @NotNull TripSegment prototypeSegment,
+                                      @NotNull TimetableEntry service,
+                                      final @NotNull ConfigurationParams configurationParams) {
+    final List<WaypointSegmentAdapter> waypointSegments =
+        waypointSegmentAdapterUtils.adaptServiceSegmentList(prototypeSegment, service, region,
+                                                            segments);
 
     return Single
         .create(new Single.OnSubscribe<List<TripGroup>>() {
@@ -49,5 +53,4 @@ public class GetTripsForChangingServiceImpl implements GetTripsForChangingServic
           }
         });
   }
-
 }

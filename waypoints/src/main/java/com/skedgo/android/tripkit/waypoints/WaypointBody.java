@@ -15,5 +15,4 @@ public abstract class WaypointBody {
   public abstract ConfigurationParams config();
   public abstract List<WaypointSegmentAdapter> segments();
 
-
 }

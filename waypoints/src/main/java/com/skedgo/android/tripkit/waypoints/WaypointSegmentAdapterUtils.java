@@ -23,7 +23,7 @@ public class WaypointSegmentAdapterUtils {
   List<WaypointSegmentAdapter> adaptServiceSegmentList(TripSegment prototypeSegment,
                                                        TimetableEntry service,
                                                        Region region,
-                                                       List<TripSegment> segments) {
+                                                       List<? extends TripSegment> segments) {
 
     List<WaypointSegmentAdapter> waypointSegments = new ArrayList<>(segments.size());
 
@@ -59,7 +59,7 @@ public class WaypointSegmentAdapterUtils {
 
   @VisibleForTesting List<WaypointSegmentAdapter> adaptStopSegmentList(TripSegment prototypeSegment,
                                                                        Location waypoint, boolean isGetOn,
-                                                                       List<TripSegment> segments) {
+                                                                       List<? extends TripSegment> segments) {
     List<WaypointSegmentAdapter> waypointSegments = new ArrayList<>(segments.size());
 
     boolean changeNextDeparture = false;

@@ -6,8 +6,6 @@ import android.support.annotation.VisibleForTesting;
 
 import com.skedgo.android.tripkit.routing.RoutingModule;
 import com.skedgo.android.tripkit.tsp.TspModule;
-import com.skedgo.android.tripkit.waypoints.GetTripsForChangingService;
-import com.skedgo.android.tripkit.waypoints.GetTripsForChangingStop;
 import com.squareup.okhttp.OkHttpClient;
 
 import javax.inject.Singleton;
@@ -85,8 +83,6 @@ public abstract class TripKit {
   public abstract Reporter getReporter();
   public abstract BookingResolver getBookingResolver();
   public abstract LocationInfoService getLocationInfoService();
-  public abstract GetTripsForChangingService getTripsForChangingService();
-  public abstract GetTripsForChangingStop getTripsForChangingStop();
   @VisibleForTesting abstract RegionDatabaseHelper getRegionDatabaseHelper();
   public abstract TripUpdater getTripUpdater();
   abstract Action1<Throwable> getErrorHandler();

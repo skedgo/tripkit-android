@@ -4,6 +4,8 @@ import com.skedgo.android.common.model.Location;
 import com.skedgo.android.common.model.TripGroup;
 import com.skedgo.android.common.model.TripSegment;
 
+import org.jetbrains.annotations.NotNull;
+
 import java.util.List;
 
 import javax.inject.Inject;
@@ -12,7 +14,7 @@ import rx.Single;
 import rx.SingleSubscriber;
 import rx.functions.Action1;
 
-public class GetTripsForChangingStopImpl implements GetTripsForChangingStop {
+public class GetTripsForChangingStopImpl implements GetTripByChangingStop {
 
   private final WaypointService waypointService;
   private final WaypointSegmentAdapterUtils waypointSegmentAdapterUtils;
@@ -23,13 +25,15 @@ public class GetTripsForChangingStopImpl implements GetTripsForChangingStop {
     this.waypointSegmentAdapterUtils = waypointSegmentAdapterUtils;
   }
 
-  public Single<List<TripGroup>> getTrips(final List<TripSegment> segments,
-                                          final TripSegment prototypeSegment,
-                                          final Location waypoint,
-                                          final boolean isGetOn,
-                                          final ConfigurationParams configurationParams) {
+  @Override
+  public Single<List<TripGroup>> call(@NotNull final List<? extends TripSegment> segments,
+                                      @NotNull final TripSegment prototypeSegment,
+                                      @NotNull final Location waypoint,
+                                      @NotNull final boolean isGetOn,
+                                      @NotNull final ConfigurationParams configurationParams) {
 
-    final List<WaypointSegmentAdapter> waypointSegments = waypointSegmentAdapterUtils.adaptStopSegmentList(prototypeSegment, waypoint, isGetOn, segments);
+    final List<WaypointSegmentAdapter> waypointSegments =
+        waypointSegmentAdapterUtils.adaptStopSegmentList(prototypeSegment, waypoint, isGetOn, segments);
 
     return Single
         .create(new Single.OnSubscribe<List<TripGroup>>() {
