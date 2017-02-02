@@ -22,6 +22,7 @@ public abstract class BookingConfirmationPurchase implements Parcelable{
           .price(in.readString())
           .productName(in.readString())
           .productType(in.readString())
+          .timezone(in.readString())
           .brand((PurchaseBrand)in.readParcelable(PurchaseBrand.class.getClassLoader()))
           .validFor(in.readLong())
           .validFrom(in.readLong())
@@ -39,6 +40,7 @@ public abstract class BookingConfirmationPurchase implements Parcelable{
     dest.writeString(price());
     dest.writeString(productName());
     dest.writeString(productType());
+    dest.writeString(timezone());
     dest.writeParcelable(brand(), flags);
     dest.writeLong(validFor());
     dest.writeLong(validFrom());
@@ -53,7 +55,9 @@ public abstract class BookingConfirmationPurchase implements Parcelable{
   public abstract String price();
   public abstract String productName();
   public abstract String productType();
+  public abstract String timezone();
   @Nullable public abstract PurchaseBrand brand();
+  @Nullable public abstract BookingSource source();
   @Value.Default public long validFor() {
     return 0;
   }

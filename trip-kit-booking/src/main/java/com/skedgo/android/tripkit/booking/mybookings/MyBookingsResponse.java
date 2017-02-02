@@ -12,5 +12,5 @@ import java.util.List;
 @Gson.TypeAdapters
 @JsonAdapter(GsonAdaptersMyBookingsResponse.class)
 public interface MyBookingsResponse {
-  List<BookingConfirmation> bookings();
+  List<MyBookingsConfirmationResponse> bookings();
 }
