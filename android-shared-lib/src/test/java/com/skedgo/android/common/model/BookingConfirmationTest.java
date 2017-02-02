@@ -17,7 +17,6 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class BookingConfirmationTest {
   @Test public void parcel() {
     final BookingConfirmation expected = ImmutableBookingConfirmation.builder()
-        .trips(Arrays.asList("A", "B"))
         .status(
             ImmutableBookingConfirmationStatus.builder()
                 .title("Some title")
