@@ -40,9 +40,6 @@ import rx.functions.Func0;
 import rx.functions.Func1;
 import rx.schedulers.Schedulers;
 
-//import static retrofit.RestAdapter.LogLevel.FULL;
-//import static retrofit.RestAdapter.LogLevel.NONE;
-
 @Module
 public class MainModule {
   private final Configs configs;
