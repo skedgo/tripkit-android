@@ -14,7 +14,7 @@ public class MyBookingsResponseTest {
   @Test(expected = NullPointerException.class)
   public void bookingsShouldBeNonNull() {
     ImmutableMyBookingsResponse.builder()
-        .addBookings((BookingConfirmation) null)
+        .addBookings((MyBookingsConfirmationResponse) null)
         .build();
   }
 }
