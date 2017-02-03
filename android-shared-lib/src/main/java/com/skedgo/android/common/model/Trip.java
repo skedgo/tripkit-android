@@ -260,7 +260,7 @@ public class Trip implements Parcelable, ITimeRange {
   }
 
   @Nullable public String getPlannedURL() {
-    return plannedURL;
+    return plannedURL + "/";
   }
 
   public void setPlannedURL(String plannedURL) {

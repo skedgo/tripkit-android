@@ -200,6 +200,7 @@ public class MainModule {
       @Override public ReportingApi call(String endpoint) {
         return new Retrofit.Builder()
             .baseUrl(endpoint)
+            .addCallAdapterFactory(RxJavaCallAdapterFactory.createWithScheduler(Schedulers.io()))
             .addConverterFactory(GsonConverterFactory.create(gson))
             .client(httpClient)
             .build()
