@@ -55,7 +55,7 @@ public abstract class BookingConfirmationPurchase implements Parcelable{
   public abstract String price();
   public abstract String productName();
   public abstract String productType();
-  public abstract String timezone();
+  @Nullable public abstract String timezone();
   @Nullable public abstract PurchaseBrand brand();
   @Nullable public abstract BookingSource source();
   @Value.Default public long validFor() {
