@@ -31,4 +31,6 @@ public abstract class MyBookingsConfirmationResponse {
 
   public abstract @Nullable List<String> trips();
 
+  public abstract @Nullable String mode();
+
 }
