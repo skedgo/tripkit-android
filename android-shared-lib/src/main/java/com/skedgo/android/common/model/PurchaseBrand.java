@@ -2,6 +2,7 @@ package com.skedgo.android.common.model;
 
 import android.os.Parcel;
 import android.os.Parcelable;
+import android.support.annotation.Nullable;
 
 import com.google.gson.annotations.JsonAdapter;
 
@@ -17,7 +18,8 @@ public abstract class PurchaseBrand implements Parcelable {
     @Override public PurchaseBrand createFromParcel(Parcel in) {
       return ImmutablePurchaseBrand.builder()
           .color((ServiceColor) in.readParcelable(ServiceColor.class.getClassLoader()))
-          .imageURL(in.readString())
+          .name(in.readString())
+          .remoteIcon(in.readString())
           .build();
     }
 
@@ -28,7 +30,8 @@ public abstract class PurchaseBrand implements Parcelable {
 
   @Override public void writeToParcel(Parcel dest, int flags) {
     dest.writeParcelable(color(), flags);
-    dest.writeString(imageURL());
+    dest.writeString(name());
+    dest.writeString(remoteIcon());
   }
 
   @Override public int describeContents() {
@@ -36,6 +39,7 @@ public abstract class PurchaseBrand implements Parcelable {
   }
 
   public abstract ServiceColor color();
-  public abstract String imageURL();
+  public abstract String name();
+  @Nullable public abstract String remoteIcon();
 
 }

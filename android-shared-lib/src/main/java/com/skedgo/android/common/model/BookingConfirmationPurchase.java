@@ -19,10 +19,12 @@ public abstract class BookingConfirmationPurchase implements Parcelable{
       return ImmutableBookingConfirmationPurchase.builder()
           .currency(in.readString())
           .id(in.readString())
-          .price(in.readString())
+          .price(in.readFloat())
           .productName(in.readString())
           .productType(in.readString())
+          .timezone(in.readString())
           .brand((PurchaseBrand)in.readParcelable(PurchaseBrand.class.getClassLoader()))
+          .source((BookingSource)in.readParcelable(BookingSource.class.getClassLoader()))
           .validFor(in.readLong())
           .validFrom(in.readLong())
           .build();
@@ -36,10 +38,12 @@ public abstract class BookingConfirmationPurchase implements Parcelable{
   @Override public void writeToParcel(Parcel dest, int flags) {
     dest.writeString(currency());
     dest.writeString(id());
-    dest.writeString(price());
+    dest.writeFloat(price());
     dest.writeString(productName());
     dest.writeString(productType());
+    dest.writeString(timezone());
     dest.writeParcelable(brand(), flags);
+    dest.writeParcelable(source(), flags);
     dest.writeLong(validFor());
     dest.writeLong(validFrom());
   }
@@ -50,10 +54,12 @@ public abstract class BookingConfirmationPurchase implements Parcelable{
 
   public abstract String currency();
   public abstract String id();
-  public abstract String price();
+  public abstract float price();
   public abstract String productName();
   public abstract String productType();
+  @Nullable public abstract String timezone();
   @Nullable public abstract PurchaseBrand brand();
+  @Nullable public abstract BookingSource source();
   @Value.Default public long validFor() {
     return 0;
   }
