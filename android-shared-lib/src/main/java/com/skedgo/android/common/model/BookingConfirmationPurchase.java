@@ -12,7 +12,7 @@ import org.immutables.value.Value;
 @Gson.TypeAdapters
 @Value.Immutable
 @JsonAdapter(GsonAdaptersBookingConfirmationPurchase.class)
-public abstract class BookingConfirmationPurchase implements Parcelable{
+public abstract class BookingConfirmationPurchase implements Parcelable {
 
   public static final Creator<BookingConfirmationPurchase> CREATOR = new Creator<BookingConfirmationPurchase>() {
     @Override public BookingConfirmationPurchase createFromParcel(Parcel in) {
@@ -23,10 +23,11 @@ public abstract class BookingConfirmationPurchase implements Parcelable{
           .productName(in.readString())
           .productType(in.readString())
           .timezone(in.readString())
-          .brand((PurchaseBrand)in.readParcelable(PurchaseBrand.class.getClassLoader()))
-          .source((BookingSource)in.readParcelable(BookingSource.class.getClassLoader()))
+          .brand((PurchaseBrand) in.readParcelable(PurchaseBrand.class.getClassLoader()))
+          .source((BookingSource) in.readParcelable(BookingSource.class.getClassLoader()))
           .validFor(in.readLong())
           .validFrom(in.readLong())
+          .valid(in.readByte() == 1)
           .build();
     }
 
@@ -46,6 +47,7 @@ public abstract class BookingConfirmationPurchase implements Parcelable{
     dest.writeParcelable(source(), flags);
     dest.writeLong(validFor());
     dest.writeLong(validFrom());
+    dest.writeByte((byte) (valid() ? 1 : 0));
   }
 
   @Override public int describeContents() {
@@ -60,11 +62,17 @@ public abstract class BookingConfirmationPurchase implements Parcelable{
   @Nullable public abstract String timezone();
   @Nullable public abstract PurchaseBrand brand();
   @Nullable public abstract BookingSource source();
+
   @Value.Default public long validFor() {
     return 0;
   }
+
   @Value.Default public long validFrom() {
     return 0;
+  }
+
+  @Value.Default public boolean valid() {
+    return false;
   }
 
 }
