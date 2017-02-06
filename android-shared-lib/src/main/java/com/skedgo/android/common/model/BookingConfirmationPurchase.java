@@ -71,6 +71,8 @@ public abstract class BookingConfirmationPurchase implements Parcelable {
     return 0;
   }
 
-  public abstract boolean valid();
+  @Value.Default public boolean valid() {
+    return false;
+  }
 
 }
