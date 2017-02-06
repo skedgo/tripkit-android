@@ -41,6 +41,7 @@ final class ReporterImpl implements Reporter {
           .build()
           .create(ReportingApi.class)
           .reportPlannedTripAsync(
+              trip.getPlannedURL() + "/",
               userInfo == null
                   ? Collections.<String, Object>emptyMap()
                   : userInfo
