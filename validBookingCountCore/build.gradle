@@ -40,8 +40,6 @@ dependencies {
   compile 'com.google.dagger:dagger:2.7'
   kapt 'com.google.dagger:dagger-compiler:2.7'
 
-  compile 'com.skedgo:CoreMisc:1.0', { transitive = true }
-
   kapt 'org.immutables:value:2.3.9'
   kapt 'org.immutables:gson:2.3.9'
   provided 'org.immutables:value:2.3.9:annotations'
