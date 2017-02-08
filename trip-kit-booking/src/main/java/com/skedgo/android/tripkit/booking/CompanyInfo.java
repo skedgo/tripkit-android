@@ -11,5 +11,6 @@ import org.immutables.value.Value;
 @Value.Immutable
 @JsonAdapter(GsonAdaptersCompanyInfo.class)
 public interface CompanyInfo {
+  @Nullable String name();
   @Nullable String website();
 }
