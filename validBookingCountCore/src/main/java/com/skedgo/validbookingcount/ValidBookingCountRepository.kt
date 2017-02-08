@@ -4,15 +4,14 @@ import android.content.SharedPreferences
 import rx.Emitter
 import rx.Observable
 import rx.schedulers.Schedulers
-import skedgo.onerrors.logError
 import javax.inject.Inject
 import javax.inject.Named
 
 
 private const val KEY_VALID_BOOKING_COUNT = "validBookingCount"
 
-class ValidBookingCountRepository @Inject constructor(@Named("ValidBookingCountPreferences") val sharedPreferences: SharedPreferences,
-                                                      val api: ValidBookingCountApi) {
+class ValidBookingCountRepository @Inject internal constructor(@Named("ValidBookingCountPreferences") val sharedPreferences: SharedPreferences,
+                                                               private val api: ValidBookingCountApi) {
 
 
   fun validBookingCount(): Observable<Int> {
@@ -31,14 +30,14 @@ class ValidBookingCountRepository @Inject constructor(@Named("ValidBookingCountP
         .subscribeOn(Schedulers.io())
   }
 
-  fun updateValidBookingCount() {
-    api.fetchValidBookingsCountAsync()
+  fun updateValidBookingCount(): Observable<Int> {
+    return api.fetchValidBookingsCountAsync()
         .map { it.count() }
         .observeOn(Schedulers.io())
-        .subscribe({
+        .doOnNext {
           sharedPreferences.edit()
               .putInt(KEY_VALID_BOOKING_COUNT, it)
               .commit()
-        }, ::logError)
+        }
   }
 }
