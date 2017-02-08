@@ -16,8 +16,8 @@ android {
     versionCode 1
     versionName version
     testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
-
   }
+
   buildTypes {
     release {
       minifyEnabled false
@@ -28,10 +28,7 @@ android {
 
 kapt { generateStubs = true }
 
-
 dependencies {
-  compile fileTree(dir: 'libs', include: ['*.jar'])
-  testCompile 'junit:junit:4.12'
   compile 'io.reactivex:rxjava:1.2.4'
   compile "com.squareup.retrofit2:retrofit:2.0.2"
   compile "com.squareup.retrofit2:converter-gson:2.0.2"
@@ -45,10 +42,9 @@ dependencies {
   provided 'org.immutables:value:2.3.9:annotations'
   provided 'org.immutables:builder:2.3.9'
   provided 'org.immutables:gson:2.3.9:annotations'
+
   compile 'com.google.code.gson:gson:2.6.1'
-
   compile "org.jetbrains.kotlin:kotlin-stdlib:$kotlinVersion"
-
 }
 
 uploadArchives {
