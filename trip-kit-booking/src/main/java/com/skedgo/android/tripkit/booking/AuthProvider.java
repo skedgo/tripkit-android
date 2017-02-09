@@ -17,4 +17,5 @@ public interface AuthProvider {
   @Nullable String url();
   @Nullable String actionTitle();
   @Nullable String status();
+  @Nullable CompanyInfo companyInfo();
 }
