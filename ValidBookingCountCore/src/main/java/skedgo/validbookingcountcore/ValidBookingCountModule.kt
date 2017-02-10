@@ -1,4 +1,4 @@
-package com.skedgo.validbookingcount
+package skedgo.validbookingcountcore
 
 import android.content.Context
 import android.content.SharedPreferences

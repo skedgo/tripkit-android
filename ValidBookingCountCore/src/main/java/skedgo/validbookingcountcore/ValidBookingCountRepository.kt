@@ -1,4 +1,4 @@
-package com.skedgo.validbookingcount
+package skedgo.validbookingcountcore
 
 import android.content.SharedPreferences
 import rx.Emitter
@@ -6,13 +6,12 @@ import rx.Observable
 import javax.inject.Inject
 import javax.inject.Named
 
-
-private const val KEY_VALID_BOOKING_COUNT = "validBookingCount"
-
 class ValidBookingCountRepository @Inject internal constructor(
     @Named("ValidBookingCountPreferences") val preferences: SharedPreferences,
     private val api: ValidBookingCountApi
 ) {
+  val KEY_VALID_BOOKING_COUNT = "validBookingCount"
+
   fun validBookingCount(): Observable<Int> {
     return Observable.fromEmitter<Int>({
       if (preferences.contains(KEY_VALID_BOOKING_COUNT)) {

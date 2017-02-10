@@ -1,5 +1,4 @@
-package com.skedgo.validbookingcount
-
+package skedgo.validbookingcountcore
 
 import retrofit2.http.GET
 import rx.Observable
