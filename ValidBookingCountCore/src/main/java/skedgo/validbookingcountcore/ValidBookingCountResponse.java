@@ -1,4 +1,4 @@
-package com.skedgo.validbookingcount;
+package skedgo.validbookingcountcore;
 
 import com.google.gson.annotations.JsonAdapter;
 
