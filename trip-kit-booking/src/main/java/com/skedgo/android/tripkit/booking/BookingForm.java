@@ -106,6 +106,10 @@ public class BookingForm extends FormField {
     return "payiq".equals(value);
   }
 
+  public boolean isUberAuthForm() {
+    return "uber".equals(value);
+  }
+
   @Nullable public String getClientID() {
     return getValueFromField(FormField.CLIENT_ID);
   }
@@ -183,7 +187,6 @@ public class BookingForm extends FormField {
         return builder.build();
 
       }
-
     }
     return null;
   }
