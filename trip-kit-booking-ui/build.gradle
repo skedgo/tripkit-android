@@ -28,9 +28,9 @@ dependencies {
   testCompile 'org.mockito:mockito-core:2.2.28'
   testCompile 'org.robolectric:robolectric:3.1.4'
 
-  androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
+  androidTestCompile 'com.android.support.test.espresso:espresso-core:2.2.2', {
     exclude group: 'com.android.support', module: 'support-annotations'
-  })
+  }
 
   compile project(':trip-kit')
   compile project(':trip-kit-booking')

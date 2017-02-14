@@ -1,7 +1,6 @@
 package com.skedgo.android.tripkit;
 
 import com.skedgo.android.common.util.DiagnosticUtils;
-import com.squareup.okhttp.Interceptor;
 
 import org.assertj.core.api.Condition;
 import org.junit.Before;
@@ -47,7 +46,6 @@ public class TripKitTest {
     when(configs.debuggable()).thenReturn(true);
 
     assertThat(kit.getRegionService()).isNotNull().isSameAs(kit.getRegionService());
-    assertThat(kit.getOkHttpClient()).isNotNull().isSameAs(kit.getOkHttpClient());
     assertThat(kit.getRouteService()).isNotNull().isSameAs(kit.getRouteService());
     assertThat(kit.getRegionDatabaseHelper()).isNotNull().isSameAs(kit.getRegionDatabaseHelper());
     assertThat(kit.getReporter()).isNotNull().isSameAs(kit.getReporter());
@@ -63,8 +61,6 @@ public class TripKitTest {
   @Test public void hasBaseUrlOverridingInterceptors() {
     when(configs.debuggable()).thenReturn(true);
     when(configs.baseUrlAdapterFactory()).thenReturn(baseUrlAdapterFactory);
-    assertThat(kit.getOkHttpClient().interceptors())
-        .hasAtLeastOneElementOfType(BaseUrlOverridingInterceptorCompat.class);
     assertThat(kit.getOkHttpClient3().interceptors())
         .hasAtLeastOneElementOfType(BaseUrlOverridingInterceptor.class);
   }
@@ -72,12 +68,6 @@ public class TripKitTest {
   @Test public void noBaseUrlOverridingInterceptors() {
     when(configs.debuggable()).thenReturn(false);
     when(configs.baseUrlAdapterFactory()).thenReturn(baseUrlAdapterFactory);
-    assertThat(kit.getOkHttpClient().interceptors())
-        .doNotHave(new Condition<Interceptor>() {
-          @Override public boolean matches(Interceptor value) {
-            return value instanceof BaseUrlOverridingInterceptorCompat;
-          }
-        });
     assertThat(kit.getOkHttpClient3().interceptors())
         .doNotHave(new Condition<okhttp3.Interceptor>() {
           @Override public boolean matches(okhttp3.Interceptor value) {
