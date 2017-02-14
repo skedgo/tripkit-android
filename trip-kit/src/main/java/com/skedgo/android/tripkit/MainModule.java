@@ -158,28 +158,6 @@ public class MainModule {
     return builder.build();
   }
 
-  @Provides ServiceExtrasService getServiceExtrasService(
-      Gson gson,
-      OkHttpClient httpClient,
-      RegionService regionService) {
-    final DynamicEndpoint endpoint = new AlphaDynamicEndpoint(
-        "https://tripgo.skedgo.com/satapp",
-        "skedgo"
-    );
-    final ServiceApi serviceApi = new Retrofit.Builder()
-        .baseUrl("https://tripgo.skedgo.com/satapp/")
-        .addConverterFactory(GsonConverterFactory.create(gson))
-        .addCallAdapterFactory(RxJavaCallAdapterFactory.createWithScheduler(Schedulers.io()))
-        .client(httpClient)
-        .build()
-        .create(ServiceApi.class);
-    return new AlphaServiceExtrasService(
-        regionService,
-        endpoint,
-        serviceApi
-    );
-  }
-
   @Provides ReportingApi reportingApi(Gson gson, OkHttpClient httpClient) {
     return new Retrofit.Builder()
         /* This base url is ignored as the api relies on @Url. */

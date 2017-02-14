@@ -76,11 +76,10 @@ public abstract class TripKit {
   public abstract RegionService getRegionService();
   public abstract RouteService getRouteService();
   public abstract okhttp3.OkHttpClient getOkHttpClient3();
-  public abstract ServiceExtrasService getServiceExtrasService();
   public abstract Reporter getReporter();
   public abstract BookingResolver getBookingResolver();
   public abstract LocationInfoService getLocationInfoService();
-  @VisibleForTesting abstract RegionDatabaseHelper getRegionDatabaseHelper();
   public abstract TripUpdater getTripUpdater();
+  @VisibleForTesting abstract RegionDatabaseHelper getRegionDatabaseHelper();
   abstract Action1<Throwable> getErrorHandler();
 }
