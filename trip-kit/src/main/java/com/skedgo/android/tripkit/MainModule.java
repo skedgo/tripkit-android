@@ -145,7 +145,7 @@ public class MainModule {
         .build();
   }
 
-  @Singleton @Provides OkHttpClient httpClient3(
+  @Singleton @Provides OkHttpClient httpClient(
       OkHttpClient.Builder httpClientBuilder,
       BuiltInInterceptor builtInInterceptor) {
     final OkHttpClient.Builder builder = httpClientBuilder
@@ -168,8 +168,9 @@ public class MainModule {
         "skedgo"
     );
     final ServiceApi serviceApi = new Retrofit.Builder()
-        .baseUrl(endpoint.getUrl())
+        .baseUrl("https://tripgo.skedgo.com/satapp/")
         .addConverterFactory(GsonConverterFactory.create(gson))
+        .addCallAdapterFactory(RxJavaCallAdapterFactory.createWithScheduler(Schedulers.io()))
         .client(httpClient)
         .build()
         .create(ServiceApi.class);
