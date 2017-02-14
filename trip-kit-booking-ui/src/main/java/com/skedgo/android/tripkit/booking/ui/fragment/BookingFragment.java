@@ -144,6 +144,7 @@ public class BookingFragment extends ButterKnifeFragment implements View.OnClick
           @Override public void call(BookingForm form) {
             // Server can return a null form indicating end of the process, in authentication for example
             if (form == null) {
+              getActivity().setResult(Activity.RESULT_OK, null);
               getActivity().finish();
             }
           }
