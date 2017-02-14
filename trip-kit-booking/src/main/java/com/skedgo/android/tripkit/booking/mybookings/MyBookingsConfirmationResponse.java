@@ -17,10 +17,6 @@ public abstract class MyBookingsConfirmationResponse {
 
   public abstract BookingConfirmation confirmation();
 
-  @Value.Default public int count() {
-    return 0;
-  }
-
   @Value.Default public int index() {
     return 0;
   }

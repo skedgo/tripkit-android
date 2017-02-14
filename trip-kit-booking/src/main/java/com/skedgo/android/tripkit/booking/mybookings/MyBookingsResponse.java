@@ -10,6 +10,10 @@ import java.util.List;
 @Value.Immutable
 @Gson.TypeAdapters
 @JsonAdapter(GsonAdaptersMyBookingsResponse.class)
-public interface MyBookingsResponse {
-  List<MyBookingsConfirmationResponse> bookings();
+public abstract class MyBookingsResponse {
+  public abstract List<MyBookingsConfirmationResponse> bookings();
+
+  @Value.Default public int count() {
+    return 0;
+  }
 }
