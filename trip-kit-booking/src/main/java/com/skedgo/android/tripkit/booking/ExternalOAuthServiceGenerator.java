@@ -11,18 +11,16 @@ import okhttp3.Interceptor;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
-import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
 import rx.schedulers.Schedulers;
 
 public class ExternalOAuthServiceGenerator {
+  private final OkHttpClient.Builder builder;
 
-  private final OkHttpClient.Builder httpClient;
-
-  public ExternalOAuthServiceGenerator(OkHttpClient.Builder httpClient) {
-    this.httpClient = httpClient;
+  public ExternalOAuthServiceGenerator(OkHttpClient.Builder builder) {
+    this.builder = builder;
   }
 
   public ExternalOAuthApi createService(String baseUrl, String username, String password,
@@ -32,7 +30,7 @@ public class ExternalOAuthServiceGenerator {
       final String basic =
           "Basic " + Base64.encodeToString(credentials.getBytes(), Base64.NO_WRAP);
 
-      httpClient.addInterceptor(new Interceptor() {
+      builder.addInterceptor(new Interceptor() {
         @Override
         public Response intercept(Interceptor.Chain chain) throws IOException {
           Request original = chain.request();
@@ -54,10 +52,6 @@ public class ExternalOAuthServiceGenerator {
         }
 
       });
-
-      HttpLoggingInterceptor logging = new HttpLoggingInterceptor();
-      logging.setLevel(HttpLoggingInterceptor.Level.BODY);
-      httpClient.interceptors().add(logging);
     }
     final Gson gson = new GsonBuilder()
         .registerTypeAdapterFactory(new GsonAdaptersAccessTokenResponse())
@@ -69,9 +63,8 @@ public class ExternalOAuthServiceGenerator {
             .addConverterFactory(GsonConverterFactory.create(gson))
             .addCallAdapterFactory(RxJavaCallAdapterFactory.createWithScheduler(Schedulers.io()));
 
-    OkHttpClient client = httpClient.build();
+    OkHttpClient client = this.builder.build();
     Retrofit retrofit = builder.client(client).build();
     return retrofit.create(ExternalOAuthApi.class);
   }
-
 }
