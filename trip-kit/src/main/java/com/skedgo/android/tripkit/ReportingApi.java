@@ -11,9 +11,6 @@ import rx.Observable;
 
 interface ReportingApi {
   @POST Observable<JsonObject> reportPlannedTripAsync(
-      @Body Map<String, Object> userInfo
-  );
-  @POST Observable<JsonObject> reportPlannedTripAsync(
       @Url String url,
       @Body Map<String, Object> userInfo
   );

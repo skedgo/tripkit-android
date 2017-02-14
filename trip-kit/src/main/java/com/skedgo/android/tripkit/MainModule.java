@@ -37,7 +37,6 @@ import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
 import rx.functions.Action1;
 import rx.functions.Func0;
-import rx.functions.Func1;
 import rx.schedulers.Schedulers;
 
 @Module
@@ -181,26 +180,21 @@ public class MainModule {
     );
   }
 
-  @Provides Func1<String, ReportingApi> getReportingApiFactory(
-      final Gson gson,
-      final OkHttpClient httpClient) {
-    return new Func1<String, ReportingApi>() {
-      @Override public ReportingApi call(String endpoint) {
-        return new Retrofit.Builder()
-            .baseUrl(endpoint)
-            .addCallAdapterFactory(RxJavaCallAdapterFactory.createWithScheduler(Schedulers.io()))
-            .addConverterFactory(GsonConverterFactory.create(gson))
-            .client(httpClient)
-            .build()
-            .create(ReportingApi.class);
-      }
-    };
+  @Provides ReportingApi reportingApi(Gson gson, OkHttpClient httpClient) {
+    return new Retrofit.Builder()
+        /* This base url is ignored as the api relies on @Url. */
+        .baseUrl("https://tripgo.skedgo.com/satapp/")
+        .addCallAdapterFactory(RxJavaCallAdapterFactory.createWithScheduler(Schedulers.io()))
+        .addConverterFactory(GsonConverterFactory.create(gson))
+        .client(httpClient)
+        .build()
+        .create(ReportingApi.class);
   }
 
-  @Singleton @Provides Reporter getReporter(
-      Func1<String, ReportingApi> reportingApiFactory,
+  @Singleton @Provides Reporter reporter(
+      ReportingApi reportingApi,
       Action1<Throwable> errorHandler) {
-    return new ReporterImpl(reportingApiFactory, errorHandler);
+    return new ReporterImpl(reportingApi, errorHandler);
   }
 
   @Provides BookingResolver getBookingResolver() {
