@@ -42,7 +42,7 @@ public class AuthServiceImplTest {
     when(api.fetchProvidersAsync(
         url
     )).thenReturn(Observable.just(Collections.<AuthProvider>emptyList()));
-    service.fetchProvidersByRegionAsync(region, null).subscribe();
+    service.fetchProvidersByRegionAsync(region, null, false).subscribe();
     verify(api).fetchProvidersAsync(eq(url));
   }
 
@@ -56,7 +56,7 @@ public class AuthServiceImplTest {
     when(api.fetchProvidersAsync(
         url
     )).thenReturn(Observable.just(Collections.<AuthProvider>emptyList()));
-    service.fetchProvidersByRegionAsync(region, "uber").subscribe();
+    service.fetchProvidersByRegionAsync(region, "uber", false).subscribe();
     verify(api).fetchProvidersAsync(eq(url));
   }
 

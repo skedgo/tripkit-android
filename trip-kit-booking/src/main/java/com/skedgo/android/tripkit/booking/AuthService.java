@@ -13,5 +13,7 @@ import rx.Observable;
  * Extension of {@link AuthApi} that facilitates fetching providers for a region.
  */
 public interface AuthService extends AuthApi {
-  Observable<List<AuthProvider>> fetchProvidersByRegionAsync(@NonNull Region region, @Nullable String mode);
+  Observable<List<AuthProvider>> fetchProvidersByRegionAsync(@NonNull Region region,
+                                                             @Nullable String mode,
+                                                             boolean bsb);
 }
