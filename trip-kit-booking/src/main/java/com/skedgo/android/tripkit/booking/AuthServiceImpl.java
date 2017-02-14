@@ -20,7 +20,9 @@ final class AuthServiceImpl implements AuthService {
   }
 
   @Override
-  public Observable<List<AuthProvider>> fetchProvidersByRegionAsync(@NonNull final Region region, @Nullable final String mode) {
+  public Observable<List<AuthProvider>> fetchProvidersByRegionAsync(@NonNull final Region region,
+                                                                    @Nullable final String mode,
+                                                                    final boolean bsb) {
     return Observable.from(region.getURLs())
         .concatMapDelayError(new Func1<String, Observable<? extends List<AuthProvider>>>() {
           @Override public Observable<? extends List<AuthProvider>> call(String url) {
@@ -31,6 +33,10 @@ final class AuthServiceImpl implements AuthService {
 
             if (mode != null) {
               builder.addQueryParameter("mode", mode);
+            }
+
+            if (bsb){
+              builder.addQueryParameter("bsb", "1");
             }
 
             return fetchProvidersAsync(builder.build());
