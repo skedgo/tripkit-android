@@ -133,19 +133,6 @@ public class MainModule {
     );
   }
 
-  @Provides BuiltInInterceptorCompat builtInInterceptorCompat(
-      Lazy<UuidProvider> uuidProviderLazy) {
-    // Null to opt-out sending UUID header.
-    final UuidProvider uuidProvider = configs.isUuidOptedOut() ? null : uuidProviderLazy.get();
-    return BuiltInInterceptorCompatBuilder.create()
-        .appVersion(getAppVersion())
-        .locale(Locale.getDefault())
-        .regionEligibility(configs.regionEligibility())
-        .userTokenProvider(configs.userTokenProvider())
-        .uuidProvider(uuidProvider)
-        .build();
-  }
-
   @Provides BuiltInInterceptor builtInInterceptor(Lazy<UuidProvider> uuidProviderLazy) {
     // Null to opt-out sending UUID header.
     final UuidProvider uuidProvider = configs.isUuidOptedOut() ? null : uuidProviderLazy.get();
