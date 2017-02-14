@@ -8,6 +8,7 @@ public interface MyBookingsApi {
   @GET("booking")
   Observable<MyBookingsResponse> fetchMyBookingsAsync(
       @Query("first") int first,
-      @Query("max") int pageSize
+      @Query("max") int pageSize,
+      @Query("bsb") int bsb
   );
 }
