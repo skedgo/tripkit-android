@@ -55,15 +55,10 @@ dependencies {
   compile "com.google.android.gms:play-services-gcm:9.6.1"
 
   compile 'com.github.skedgo:sqlite-utils:v1.0'
-  compile "com.squareup.okhttp3:okhttp:3.2.0"
+  compile "com.squareup.okhttp3:okhttp:$okHttpVersion"
   compile "com.squareup.retrofit2:converter-gson:2.0.2"
-  compile("com.squareup.retrofit2:adapter-rxjava:2.0.2") {
-    exclude module: 'rxjava'
-  }
-  compile("com.squareup.retrofit2:retrofit:2.0.2") {
-    // Exclude Retrofit’s OkHttp peer-dependency module and define our own module import.
-    exclude module: 'okhttp'
-  }
+  compile "com.squareup.retrofit2:adapter-rxjava:2.0.2"
+  compile "com.squareup.retrofit2:retrofit:2.0.2"
 
   compile 'com.google.dagger:dagger:2.7'
   annotationProcessor 'com.google.dagger:dagger-compiler:2.7'
