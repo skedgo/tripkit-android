@@ -51,12 +51,12 @@ public class StringFieldView extends RelativeLayout {
     }
     editText.setVisibility(stringField.isReadOnly() ? GONE : VISIBLE);
     if (!stringField.isReadOnly()) {
-      if (!stringField.isHidden()) {
-        stringField.setValue(editText.getText().toString());
-      }
       titleView.setVisibility(GONE);
       valueView.setVisibility(GONE);
       editText.setHint(stringField.getTitle());
+      if (!TextUtils.isEmpty(stringField.getValue())) {
+        editText.setText(stringField.getValue());
+      }
       editText.addTextChangedListener(new TextWatcher() {
         @Override public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
 
