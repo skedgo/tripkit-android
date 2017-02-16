@@ -5,6 +5,7 @@ import android.content.Context;
 import android.os.Build;
 import android.support.annotation.NonNull;
 import android.text.Editable;
+import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.util.AttributeSet;
 import android.widget.EditText;
@@ -37,6 +38,9 @@ public class PasswordFieldView extends RelativeLayout {
   public void bindViewModel(@NonNull final PasswordFormField passwordField) {
     setVisibility(passwordField.isHidden() ? GONE : VISIBLE);
     editText.setHint(passwordField.getTitle());
+    if (!TextUtils.isEmpty(passwordField.getValue())) {
+      editText.setText(passwordField.getValue());
+    }
     editText.addTextChangedListener(
         new TextWatcher() {
           @Override
