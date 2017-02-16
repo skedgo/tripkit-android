@@ -21,6 +21,7 @@ import com.skedgo.android.tripkit.booking.LinkFormField;
 import com.skedgo.android.tripkit.booking.ui.R;
 import com.skedgo.android.tripkit.booking.ui.activity.BookingActivity;
 import com.skedgo.android.tripkit.booking.ui.activity.ExternalProviderAuthActivity;
+import com.skedgo.android.tripkit.booking.ui.activity.ExternalWebActivity;
 import com.skedgo.android.tripkit.booking.ui.viewmodel.ExtendedBookingViewModel;
 import com.skedgo.android.tripkit.booking.viewmodel.Param;
 import com.squareup.otto.Bus;
@@ -31,7 +32,9 @@ import javax.inject.Inject;
 import rx.functions.Action1;
 import skedgo.common.view.ButterKnifeFragment;
 
+import static com.skedgo.android.tripkit.booking.ui.activity.BookingActivity.ACTION_BOOK;
 import static com.skedgo.android.tripkit.booking.ui.activity.BookingActivity.KEY_BOOKING_FORM;
+import static com.skedgo.android.tripkit.booking.ui.activity.BookingActivity.KEY_URL;
 
 public class BookingFragment extends ButterKnifeFragment implements View.OnClickListener {
   public static final String KEY_PARAM = "param";
@@ -40,6 +43,7 @@ public class BookingFragment extends ButterKnifeFragment implements View.OnClick
   private static final String EXTRA_DONE = "done";
 
   private static final int RQ_EXTERNAL = 1;
+  private static final int RQ_EXTERNAL_WEB = 2;
   @Inject ExtendedBookingViewModel viewModel;
   @Inject Bus bus;
   ProgressBar progressView;
@@ -245,6 +249,14 @@ public class BookingFragment extends ButterKnifeFragment implements View.OnClick
   }
 
   @Subscribe
+  public void onEvent(BookingFormFragment.ExternalFormFieldClickedEvent event) {
+
+    Intent intent = ExternalWebActivity.newIntent(getActivity(), event.externalFormField);
+    startActivityForResult(intent, RQ_EXTERNAL_WEB);
+
+  }
+
+  @Subscribe
   public void onEvent(BookingFormFragment.PerformActionEvent event) {
     viewModel.performAction(event.form).subscribe();
   }
@@ -253,7 +265,16 @@ public class BookingFragment extends ButterKnifeFragment implements View.OnClick
   public void onActivityResult(int requestCode, int resultCode, Intent data) {
     super.onActivityResult(requestCode, resultCode, data);
     if (resultCode == Activity.RESULT_OK) {
-      if (requestCode == RQ_EXTERNAL) {
+      if (requestCode == RQ_EXTERNAL_WEB) {
+
+        String nextUrl = data.getStringExtra(KEY_URL);
+        Intent intent = new Intent(getActivity(), BookingActivity.class);
+        intent.setAction(ACTION_BOOK);
+        intent.putExtra(KEY_URL, nextUrl);
+        startActivityForResult(intent, 0);
+
+
+      } else if (requestCode == RQ_EXTERNAL) {
         Intent done = new Intent();
         done.putExtra(EXTRA_DONE, true);
         getActivity().setResult(resultCode, done);
