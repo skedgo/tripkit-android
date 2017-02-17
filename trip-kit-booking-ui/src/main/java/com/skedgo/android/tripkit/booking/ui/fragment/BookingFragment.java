@@ -268,7 +268,7 @@ public class BookingFragment extends ButterKnifeFragment implements View.OnClick
       if (requestCode == RQ_EXTERNAL_WEB) {
 
         String nextUrl = data.getStringExtra(KEY_URL);
-        Intent intent = new Intent(getActivity(), BookingActivity.class);
+        Intent intent = new Intent(getActivity(), getActivity().getClass());
         intent.setAction(ACTION_BOOK);
         intent.putExtra(KEY_URL, nextUrl);
         startActivityForResult(intent, 0);
