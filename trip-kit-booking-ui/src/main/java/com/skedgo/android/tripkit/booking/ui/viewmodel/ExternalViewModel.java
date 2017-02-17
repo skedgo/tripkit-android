@@ -55,7 +55,12 @@ public class ExternalViewModel extends BaseViewModel {
 
       @Override
       public void onPageFinished(WebView view, final String url) {
-        showWebView.set(true);
+        if (url.startsWith(externalFormField.getDisregardURL()) &&
+            externalFormField.getValue().startsWith(externalFormField.getDisregardURL())) {
+          publishSubjectNextUrl.onNext(externalFormField.getNextURL());
+        } else {
+          showWebView.set(true);
+        }
       }
     };
   }
