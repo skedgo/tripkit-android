@@ -69,9 +69,7 @@ public class StringFieldView extends RelativeLayout {
       if (stringField.getKeyboardType() != null) {
         switch (stringField.getKeyboardType()) {
           case "PHONE":
-            editText.setInputType(InputType.TYPE_CLASS_NUMBER
-                                      | InputType.TYPE_NUMBER_FLAG_DECIMAL
-                                      | InputType.TYPE_NUMBER_FLAG_SIGNED);
+            editText.setInputType(InputType.TYPE_CLASS_PHONE);
             break;
           case "EMAIL":
             editText.setInputType(InputType.TYPE_CLASS_TEXT
