@@ -20,12 +20,11 @@ import javax.inject.Inject;
 
 import rx.android.schedulers.AndroidSchedulers;
 import rx.functions.Action1;
-import skedgo.rxapp.RxActivity;
+import skedgo.rxlifecyclecomponents.RxAppCompatActivity;
 
 import static com.skedgo.android.tripkit.booking.ui.activity.BookingActivity.KEY_URL;
 
-public class ExternalWebActivity extends RxActivity {
-
+public class ExternalWebActivity extends RxAppCompatActivity {
   @Inject ExternalViewModel viewModel;
 
   public static Intent newIntent(
@@ -36,7 +35,7 @@ public class ExternalWebActivity extends RxActivity {
   }
 
   @Override public void onDestroy() {
-    viewModel.onDestroy();
+    viewModel.dispose();
     super.onDestroy();
   }
 
@@ -58,7 +57,7 @@ public class ExternalWebActivity extends RxActivity {
 
     viewModel.nextUrlObservable()
         .observeOn(AndroidSchedulers.mainThread())
-        .takeUntil(getOnDestroyEvent())
+        .compose(this.<String>bindToLifecycle())
         .subscribe(new Action1<String>() {
           @Override public void call(String nextUrl) {
             final Intent data = new Intent();

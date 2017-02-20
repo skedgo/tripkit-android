@@ -1,8 +1,9 @@
 package com.skedgo.android.tripkit.booking.ui.fragment;
 
-import android.app.Activity;
+import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -50,14 +51,13 @@ import java.util.List;
 import javax.inject.Inject;
 
 import rx.functions.Action1;
-import skedgo.common.view.ButterKnifeFragment;
+import rx.functions.Func1;
+import skedgo.rxlifecyclecomponents.FragmentEvent;
+import skedgo.rxlifecyclecomponents.RxFragment;
 
 import static com.skedgo.android.tripkit.booking.ui.activity.BookingActivity.KEY_BOOKING_FORM;
 
-public class BookingFormFragment extends ButterKnifeFragment {
-
-  // TODO: REFACTOR THIS CLASS!!!!
-
+public class BookingFormFragment extends RxFragment {
   @Inject Bus bus;
   @Inject Picasso picasso;
   @Inject Gson gson;
@@ -75,21 +75,26 @@ public class BookingFormFragment extends ButterKnifeFragment {
     return fragment;
   }
 
-  @Override
-  public void onAttach(Activity activity) {
-    super.onAttach(activity);
-
-    inflater = LayoutInflater.from(activity);
+  @Override public void onAttach(Context context) {
+    super.onAttach(context);
+    inflater = LayoutInflater.from(context);
   }
 
   @Override
   public void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
-    setContentLayout(R.layout.fragment_booking_form);
     if (getActivity() instanceof BookingActivity) {
       ((BookingActivity) getActivity()).getBookingClientComponent().inject(this);
       listener = ((BookingActivity) getActivity());
     }
+  }
+
+  @Nullable @Override
+  public View onCreateView(
+      LayoutInflater inflater,
+      @Nullable ViewGroup container,
+      @Nullable Bundle savedInstanceState) {
+    return inflater.inflate(R.layout.fragment_booking_form, container, false);
   }
 
   @Override
@@ -215,15 +220,14 @@ public class BookingFormFragment extends ButterKnifeFragment {
           dateTimeFieldView.bind(viewModel, getChildFragmentManager());
           viewModel.getSelf()
               .observe()
-              .takeUntil(lifecycle().onDestroyView())
+              .compose(this.<DateTimeFieldViewModelImpl>bindToLifecycle())
               .subscribe(new Action1<DateTimeFieldViewModelImpl>() {
                 @Override
                 public void call(DateTimeFieldViewModelImpl viewModel) {
                   dateTimeFieldView.setDateString(viewModel.getDate());
                   dateTimeFieldView.setTimeString(viewModel.getTime());
                 }
-              })
-          ;
+              });
           formItemsView.addView(dateTimeFieldView);
         } else if (field instanceof AddressFormField) {
           final AddressFormField addressField = (AddressFormField) field;
@@ -239,7 +243,11 @@ public class BookingFormFragment extends ButterKnifeFragment {
               (OptionFieldView) inflater.inflate(R.layout.view_field_option, formItemsView, false);
           optionFieldView.bindViewModel(
               OptionFieldViewModel.create((OptionFormField) field),
-              lifecycle().onDestroyView()
+              lifecycle().filter(new Func1<FragmentEvent, Boolean>() {
+                @Override public Boolean call(FragmentEvent fragmentEvent) {
+                  return fragmentEvent == FragmentEvent.DESTROY_VIEW;
+                }
+              })
           );
           formItemsView.addView(optionFieldView);
         } else if (field instanceof StepperFormField) {

@@ -13,10 +13,8 @@ import javax.inject.Inject;
 
 import rx.Observable;
 import rx.subjects.PublishSubject;
-import skedgo.common.BaseViewModel;
 
-public class ExternalViewModel extends BaseViewModel {
-
+public class ExternalViewModel extends DisposableViewModel {
   private final ObservableBoolean showWebView;
   private final ObservableField<String> url;
   private final PublishSubject<String> publishSubjectNextUrl = PublishSubject.create();

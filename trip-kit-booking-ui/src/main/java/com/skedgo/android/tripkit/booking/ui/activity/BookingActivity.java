@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.ActionBar;
+import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
 
 import com.skedgo.android.tripkit.booking.BookingForm;
@@ -14,10 +15,9 @@ import com.skedgo.android.tripkit.booking.ui.fragment.BookingFormFragment;
 import com.skedgo.android.tripkit.booking.ui.fragment.BookingFragment;
 import com.skedgo.android.tripkit.booking.viewmodel.Param;
 
-import skedgo.anim.AnimatedTransitionActivity;
 import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 
-public class BookingActivity extends AnimatedTransitionActivity implements
+public class BookingActivity extends AppCompatActivity implements
     BookingFormFragment.BookingFormFragmentListener {
   public static final String ACTION_BOOK = "com.skedgo.android.tripkit.booking.ui.ACTION_BOOK";
   public static final String KEY_URL = "url";
