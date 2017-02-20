@@ -43,7 +43,7 @@ public class ExternalProviderAuthFragment extends RxFragment {
 
   @Override public void onDestroy() {
     super.onDestroy();
-    viewModel.onDestroy();
+    viewModel.dispose();
   }
 
   @Nullable @Override

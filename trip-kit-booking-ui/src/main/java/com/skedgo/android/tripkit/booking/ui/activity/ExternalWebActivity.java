@@ -35,7 +35,7 @@ public class ExternalWebActivity extends RxAppCompatActivity {
   }
 
   @Override public void onDestroy() {
-    viewModel.onDestroy();
+    viewModel.dispose();
     super.onDestroy();
   }
 
