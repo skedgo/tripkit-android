@@ -21,6 +21,7 @@ import com.skedgo.android.tripkit.booking.LinkFormField;
 import com.skedgo.android.tripkit.booking.ui.R;
 import com.skedgo.android.tripkit.booking.ui.activity.BookingActivity;
 import com.skedgo.android.tripkit.booking.ui.activity.ExternalProviderAuthActivity;
+import com.skedgo.android.tripkit.booking.ui.activity.ExternalWebActivity;
 import com.skedgo.android.tripkit.booking.ui.viewmodel.ExtendedBookingViewModel;
 import com.skedgo.android.tripkit.booking.viewmodel.Param;
 import com.squareup.otto.Bus;
@@ -31,15 +32,19 @@ import javax.inject.Inject;
 import rx.functions.Action1;
 import skedgo.common.view.ButterKnifeFragment;
 
+import static com.skedgo.android.tripkit.booking.ui.activity.BookingActivity.ACTION_BOOK;
 import static com.skedgo.android.tripkit.booking.ui.activity.BookingActivity.KEY_BOOKING_FORM;
+import static com.skedgo.android.tripkit.booking.ui.activity.BookingActivity.KEY_URL;
 
 public class BookingFragment extends ButterKnifeFragment implements View.OnClickListener {
   public static final String KEY_PARAM = "param";
   public static final String KEY_FORM = "form";
   private static final String TAG_BOOKING_FORM = "bookingForm";
   private static final String EXTRA_DONE = "done";
+  private static final String EXTRA_RETRY = "retry";
 
   private static final int RQ_EXTERNAL = 1;
+  private static final int RQ_EXTERNAL_WEB = 2;
   @Inject ExtendedBookingViewModel viewModel;
   @Inject Bus bus;
   ProgressBar progressView;
@@ -48,6 +53,7 @@ public class BookingFragment extends ButterKnifeFragment implements View.OnClick
   TextView errorTitleView;
   TextView errorMessageView;
   @Nullable private BookingForm bookingForm = null;
+  @Nullable private BookingError bookingError = null;
   private Action1<Throwable> errorAction = new Action1<Throwable>() {
     @Override
     public void call(Throwable error) {
@@ -245,6 +251,14 @@ public class BookingFragment extends ButterKnifeFragment implements View.OnClick
   }
 
   @Subscribe
+  public void onEvent(BookingFormFragment.ExternalFormFieldClickedEvent event) {
+
+    Intent intent = ExternalWebActivity.newIntent(getActivity(), event.externalFormField);
+    startActivityForResult(intent, RQ_EXTERNAL_WEB);
+
+  }
+
+  @Subscribe
   public void onEvent(BookingFormFragment.PerformActionEvent event) {
     viewModel.performAction(event.form).subscribe();
   }
@@ -253,10 +267,26 @@ public class BookingFragment extends ButterKnifeFragment implements View.OnClick
   public void onActivityResult(int requestCode, int resultCode, Intent data) {
     super.onActivityResult(requestCode, resultCode, data);
     if (resultCode == Activity.RESULT_OK) {
-      if (requestCode == RQ_EXTERNAL) {
+      if (requestCode == RQ_EXTERNAL_WEB) {
+
+        String nextUrl = data.getStringExtra(KEY_URL);
+        Intent intent = new Intent(getActivity(), getActivity().getClass());
+        intent.setAction(ACTION_BOOK);
+        intent.putExtra(KEY_URL, nextUrl);
+        startActivityForResult(intent, 0);
+
+      } else if (requestCode == RQ_EXTERNAL) {
         Intent done = new Intent();
         done.putExtra(EXTRA_DONE, true);
         getActivity().setResult(resultCode, done);
+        getActivity().finish();
+
+      } else if (data != null && data.getBooleanExtra(EXTRA_RETRY, true)) {
+        String nextUrl = data.getStringExtra(KEY_URL);
+        Intent intent = new Intent(getActivity(), getActivity().getClass());
+        intent.setAction(ACTION_BOOK);
+        intent.putExtra(KEY_URL, nextUrl);
+        startActivityForResult(intent, 0);
         getActivity().finish();
       } else {
         final Bundle bundle = getActivity().getIntent().getBundleExtra(BookingActivity.KEY_BOOKING_BUNDLE);
@@ -279,18 +309,29 @@ public class BookingFragment extends ButterKnifeFragment implements View.OnClick
 
   @Override
   public void onClick(View v) {
-    getActivity().onBackPressed();
+    if (bookingError != null && bookingError.getRecoveryTitle() != null && bookingError.getUrl() != null) {
+      Intent retry = new Intent();
+      retry.putExtra(EXTRA_RETRY, true);
+      retry.putExtra(KEY_URL, bookingError.getUrl());
+      getActivity().setResult(Activity.RESULT_OK, retry);
+      getActivity().finish();
+    } else {
+      getActivity().onBackPressed();
+    }
   }
 
   private void showError(Throwable error) {
     if (error instanceof BookingError) {
-      BookingError bookingError = (BookingError) error;
+      bookingError = (BookingError) error;
       checkAndInflate();
       if (bookingError.getTitle() != null) {
         errorTitleView.setText(bookingError.getTitle());
       }
       if (bookingError.getError() != null) {
         errorMessageView.setText(bookingError.getError());
+      }
+      if (bookingError.getRecoveryTitle() != null && bookingError.getUrl() != null) {
+        backButton.setText(bookingError.getRecoveryTitle());
       }
     }
   }

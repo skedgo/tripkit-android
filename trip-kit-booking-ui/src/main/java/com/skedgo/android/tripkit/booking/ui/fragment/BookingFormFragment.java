@@ -17,6 +17,7 @@ import com.skedgo.android.tripkit.booking.AddressFormField;
 import com.skedgo.android.tripkit.booking.BookingAction;
 import com.skedgo.android.tripkit.booking.BookingForm;
 import com.skedgo.android.tripkit.booking.DateTimeFormField;
+import com.skedgo.android.tripkit.booking.ExternalFormField;
 import com.skedgo.android.tripkit.booking.FormField;
 import com.skedgo.android.tripkit.booking.FormGroup;
 import com.skedgo.android.tripkit.booking.LinkFormField;
@@ -181,6 +182,19 @@ public class BookingFormFragment extends ButterKnifeFragment {
             }
           });
           formItemsView.addView(linkFieldView);
+        } else if (field instanceof ExternalFormField) {
+          final ExternalFormField externalField = (ExternalFormField) field;
+          final LinearLayout externalFieldView = (LinearLayout) inflater
+              .inflate(R.layout.view_field_link, formItemsView, false);
+          TextView externalView = (TextView) externalFieldView.findViewById(R.id.linkView);
+          externalView.setText(externalField.getTitle());
+          externalFieldView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+              bus.post(new ExternalFormFieldClickedEvent(externalField));
+            }
+          });
+          formItemsView.addView(externalFieldView);
         } else if (field instanceof PasswordFormField) {
           final PasswordFormField passField = (PasswordFormField) field;
           final PasswordFieldView passFieldView =
@@ -280,6 +294,14 @@ public class BookingFormFragment extends ButterKnifeFragment {
 
     public LinkFormFieldClickedEvent(LinkFormField linkField) {
       this.linkField = linkField;
+    }
+  }
+
+  public static class ExternalFormFieldClickedEvent {
+    public final ExternalFormField externalFormField;
+
+    public ExternalFormFieldClickedEvent(ExternalFormField externalFormField) {
+      this.externalFormField = externalFormField;
     }
   }
 }

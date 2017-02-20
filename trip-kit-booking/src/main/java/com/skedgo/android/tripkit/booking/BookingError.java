@@ -15,6 +15,9 @@ public class BookingError extends Throwable implements Parcelable {
       bookingError.setErrorCode(source.readInt());
       bookingError.setError(source.readString());
       bookingError.setHasUserError(source.readInt() == 1);
+      bookingError.setRecovery(source.readString());
+      bookingError.setRecoveryTitle(source.readString());
+      bookingError.setUrl(source.readString());
       return bookingError;
     }
 
@@ -32,6 +35,12 @@ public class BookingError extends Throwable implements Parcelable {
   private String error;
   @SerializedName("usererror")
   private boolean hasUserError;
+  @Nullable @SerializedName("recovery")
+  private String recovery;
+  @Nullable @SerializedName("recoveryTitle")
+  private String recoveryTitle;
+  @Nullable @SerializedName("url")
+  private String url;
 
   @Nullable
   public String getTitle() {
@@ -56,6 +65,30 @@ public class BookingError extends Throwable implements Parcelable {
 
   public void setError(String error) {
     this.error = error;
+  }
+
+  @Nullable public String getRecovery() {
+    return recovery;
+  }
+
+  public void setRecovery(@Nullable String recovery) {
+    this.recovery = recovery;
+  }
+
+  @Nullable public String getRecoveryTitle() {
+    return recoveryTitle;
+  }
+
+  public void setRecoveryTitle(@Nullable String recoveryTitle) {
+    this.recoveryTitle = recoveryTitle;
+  }
+
+  @Nullable public String getUrl() {
+    return url;
+  }
+
+  public void setUrl(@Nullable String url) {
+    this.url = url;
   }
 
   public boolean hasUserError() {
@@ -85,5 +118,8 @@ public class BookingError extends Throwable implements Parcelable {
     dest.writeInt(errorCode);
     dest.writeString(error);
     dest.writeInt(hasUserError ? 1 : 0);
+    dest.writeString(recovery);
+    dest.writeString(recoveryTitle);
+    dest.writeString(url);
   }
 }
