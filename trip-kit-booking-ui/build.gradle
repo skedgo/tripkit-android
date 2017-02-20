@@ -49,6 +49,7 @@ dependencies {
   compile 'com.squareup.picasso:picasso:2.5.2'
   compile 'com.jakewharton.picasso:picasso2-okhttp3-downloader:1.0.2'
   compile 'com.github.skedgo:activity-animations:v1.0'
+  compile 'com.skedgo:RxApp:1.0'
 }
 
 uploadArchives {

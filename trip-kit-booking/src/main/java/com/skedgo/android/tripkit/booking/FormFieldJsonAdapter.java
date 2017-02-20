@@ -81,6 +81,9 @@ public final class FormFieldJsonAdapter implements JsonDeserializer<FormField>, 
       case "SWITCH":
         className = SwitchFormField.class.getName();
         break;
+      case "EXTERNAL":
+        className = ExternalFormField.class.getName();
+        break;
     }
     return className;
   }
