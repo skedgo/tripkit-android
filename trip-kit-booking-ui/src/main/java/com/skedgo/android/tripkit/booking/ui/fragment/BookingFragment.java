@@ -6,10 +6,12 @@ import android.os.Bundle;
 import android.os.Parcelable;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.ViewStub;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -30,13 +32,13 @@ import com.squareup.otto.Subscribe;
 import javax.inject.Inject;
 
 import rx.functions.Action1;
-import skedgo.common.view.ButterKnifeFragment;
+import skedgo.rxlifecyclecomponents.RxFragment;
 
 import static com.skedgo.android.tripkit.booking.ui.activity.BookingActivity.ACTION_BOOK;
 import static com.skedgo.android.tripkit.booking.ui.activity.BookingActivity.KEY_BOOKING_FORM;
 import static com.skedgo.android.tripkit.booking.ui.activity.BookingActivity.KEY_URL;
 
-public class BookingFragment extends ButterKnifeFragment implements View.OnClickListener {
+public class BookingFragment extends RxFragment implements View.OnClickListener {
   public static final String KEY_PARAM = "param";
   public static final String KEY_FORM = "form";
   private static final String TAG_BOOKING_FORM = "bookingForm";
@@ -92,7 +94,6 @@ public class BookingFragment extends ButterKnifeFragment implements View.OnClick
   public void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setHasOptionsMenu(true);
-    setContentLayout(R.layout.fragment_booking);
     if (getActivity() instanceof BookingActivity) {
       ((BookingActivity) getActivity()).getBookingClientComponent().inject(this);
     }
@@ -107,7 +108,6 @@ public class BookingFragment extends ButterKnifeFragment implements View.OnClick
   @Override
   public boolean onOptionsItemSelected(MenuItem item) {
     if (item.getItemId() == R.id.reportProblemMenuItem) {
-
       if (getActivity() instanceof BookingActivity) {
         BookingActivity a = (BookingActivity) getActivity();
         a.reportProblem();
@@ -145,7 +145,7 @@ public class BookingFragment extends ButterKnifeFragment implements View.OnClick
     }
 
     viewModel.loadForm(param)
-        .takeUntil(lifecycle().onDestroy())
+        .compose(this.<BookingForm>bindToLifecycle())
         .subscribe(new Action1<BookingForm>() {
           @Override public void call(BookingForm form) {
             // Server can return a null form indicating end of the process, in authentication for example
@@ -161,6 +161,14 @@ public class BookingFragment extends ButterKnifeFragment implements View.OnClick
     }
   }
 
+  @Nullable @Override
+  public View onCreateView(
+      LayoutInflater inflater,
+      @Nullable ViewGroup container,
+      @Nullable Bundle savedInstanceState) {
+    return inflater.inflate(R.layout.fragment_booking, container, false);
+  }
+
   @Override
   public void onViewCreated(View view, Bundle savedInstanceState) {
     super.onViewCreated(view, savedInstanceState);
@@ -169,15 +177,15 @@ public class BookingFragment extends ButterKnifeFragment implements View.OnClick
     hudTextView = (TextView) view.findViewById(R.id.hudTextView);
 
     viewModel.isFetching()
-        .takeUntil(lifecycle().onDestroyView())
+        .compose(this.<Boolean>bindToLifecycle())
         .subscribe(setVisibility(progressView));
 
     viewModel.isFetching()
-        .takeUntil(lifecycle().onDestroyView())
+        .compose(this.<Boolean>bindToLifecycle())
         .subscribe(setVisibility(hudTextView), errorAction);
 
     viewModel.isFetching()
-        .takeUntil(lifecycle().onDestroyView())
+        .compose(this.<Boolean>bindToLifecycle())
         .subscribe(new Action1<Boolean>() {
           @Override
           public void call(Boolean value) {
@@ -199,7 +207,7 @@ public class BookingFragment extends ButterKnifeFragment implements View.OnClick
         }, errorAction);
 
     viewModel.isDone()
-        .takeUntil(lifecycle().onDestroyView())
+        .compose(this.<Boolean>bindToLifecycle())
         .subscribe(new Action1<Boolean>() {
           @Override
           public void call(Boolean success) {
@@ -220,7 +228,7 @@ public class BookingFragment extends ButterKnifeFragment implements View.OnClick
         }, errorAction);
 
     viewModel.nextBookingForm()
-        .takeUntil(lifecycle().onDestroyView())
+        .compose(this.<Param>bindToLifecycle())
         .subscribe(new Action1<Param>() {
           @Override public void call(Param param) {
             startActivityForResult(BookingActivity.newIntent(getActivity(), param), 0);
@@ -228,7 +236,7 @@ public class BookingFragment extends ButterKnifeFragment implements View.OnClick
         }, errorAction);
 
     viewModel.bookingForm()
-        .takeUntil(lifecycle().onDestroyView())
+        .compose(this.<BookingForm>bindToLifecycle())
         .subscribe(new Action1<BookingForm>() {
           @Override
           public void call(BookingForm form) {
@@ -252,10 +260,8 @@ public class BookingFragment extends ButterKnifeFragment implements View.OnClick
 
   @Subscribe
   public void onEvent(BookingFormFragment.ExternalFormFieldClickedEvent event) {
-
     Intent intent = ExternalWebActivity.newIntent(getActivity(), event.externalFormField);
     startActivityForResult(intent, RQ_EXTERNAL_WEB);
-
   }
 
   @Subscribe

@@ -28,6 +28,7 @@ dependencies {
   testCompile 'org.mockito:mockito-core:2.2.28'
   testCompile 'org.robolectric:robolectric:3.1.4'
 
+  androidTestCompile 'com.google.code.findbugs:jsr305:3.0.1'
   androidTestCompile 'com.android.support.test.espresso:espresso-core:2.2.2', {
     exclude group: 'com.android.support', module: 'support-annotations'
   }
@@ -49,7 +50,9 @@ dependencies {
   compile 'com.squareup.picasso:picasso:2.5.2'
   compile 'com.jakewharton.picasso:picasso2-okhttp3-downloader:1.0.2'
   compile 'com.github.skedgo:activity-animations:v1.0'
-  compile 'com.skedgo:RxApp:1.0'
+
+  compile 'com.github.skedgo:RxLifecycleComponents:v1.0'
+  compile 'com.trello:rxlifecycle:1.0'
 }
 
 uploadArchives {
