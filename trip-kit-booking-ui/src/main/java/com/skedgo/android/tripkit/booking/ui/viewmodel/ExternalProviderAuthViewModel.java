@@ -21,11 +21,10 @@ import rx.Subscriber;
 import rx.functions.Action1;
 import rx.functions.Func1;
 import rx.subjects.PublishSubject;
-import skedgo.common.BaseViewModel;
 
 import static com.skedgo.android.tripkit.booking.ui.activity.BookingActivity.KEY_BOOKING_FORM;
 
-public class ExternalProviderAuthViewModel extends BaseViewModel {
+public class ExternalProviderAuthViewModel extends DisposableViewModel {
   private final ObservableBoolean showWebView;
   private final PublishSubject<Intent> publishSubjectIntent = PublishSubject.create();
   private final ObservableField<String> url;
@@ -79,7 +78,7 @@ public class ExternalProviderAuthViewModel extends BaseViewModel {
           String callback = webUrl.substring(0, webUrl.indexOf("?"));
 
           oAuth2CallbackHandler.handleOAuthURL(bookingForm, Uri.parse(webUrl), callback)
-              .takeUntil(destroyed())
+              .takeUntil(onDispose())
               .flatMap(new Func1<BookingForm, Observable<Intent>>() {
                 @Override public Observable<Intent> call(BookingForm bookingForm) {
                   return handledForm(bookingForm);
@@ -96,7 +95,7 @@ public class ExternalProviderAuthViewModel extends BaseViewModel {
               });
         } else if (webUrl.startsWith("tripgo://booking_retry")) {
           oAuth2CallbackHandler.handleRetryURL(bookingForm, Uri.parse(webUrl))
-              .takeUntil(destroyed())
+              .takeUntil(onDispose())
               .flatMap(new Func1<BookingForm, Observable<Intent>>() {
                 @Override public Observable<Intent> call(BookingForm bookingForm) {
                   return handledForm(bookingForm);
