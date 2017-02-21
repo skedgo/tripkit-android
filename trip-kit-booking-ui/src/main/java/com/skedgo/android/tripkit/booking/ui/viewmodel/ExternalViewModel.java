@@ -9,9 +9,12 @@ import android.webkit.WebViewClient;
 
 import com.skedgo.android.tripkit.booking.ExternalFormField;
 
+import java.util.concurrent.TimeUnit;
+
 import javax.inject.Inject;
 
 import rx.Observable;
+import rx.functions.Action1;
 import rx.subjects.PublishSubject;
 
 public class ExternalViewModel extends DisposableViewModel {
@@ -55,7 +58,13 @@ public class ExternalViewModel extends DisposableViewModel {
       public void onPageFinished(WebView view, final String url) {
         if (url.startsWith(externalFormField.getDisregardURL()) &&
             externalFormField.getValue().startsWith(externalFormField.getDisregardURL())) {
-          publishSubjectNextUrl.onNext(externalFormField.getNextURL());
+
+          Observable.timer(5000, TimeUnit.MILLISECONDS)
+              .subscribe(new Action1<Long>() {
+                @Override public void call(Long aLong) {
+                  publishSubjectNextUrl.onNext(externalFormField.getNextURL());
+                }
+              });
         } else {
           showWebView.set(true);
         }
