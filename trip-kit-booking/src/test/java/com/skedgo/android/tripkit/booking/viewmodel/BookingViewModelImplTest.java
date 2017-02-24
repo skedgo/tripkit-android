@@ -126,31 +126,6 @@ public class BookingViewModelImplTest {
     });
   }
 
-  @Test public void threeTimesOnFailureOfFetchingBookingForm() {
-    when(api.getFormAsync(anyString()))
-        .thenReturn(Observable.create(new Observable.OnSubscribe<BookingForm>() {
-          final AtomicInteger retryCounter = new AtomicInteger(0);
-
-          @Override
-          public void call(Subscriber<? super BookingForm> subscriber) {
-            if (retryCounter.incrementAndGet() == 3) {
-              // Ok, this time, let it succeed!
-              subscriber.onNext(new BookingForm());
-              subscriber.onCompleted();
-            } else {
-              subscriber.onError(new Exception("Failed to retrieve booking form"));
-            }
-          }
-        }));
-
-    try {
-      bookingViewModel.loadForm(Param.create("http://facebook.github.io/stetho/"))
-          .toBlocking().single();
-    } catch (Exception e) {
-      Assertions.fail("Retry fetching booking form 3 times on any failure", e);
-    }
-  }
-
   @Test public void doNotCrashWithNullableParam() {
     final Observable<BookingForm> observable;
     try {
