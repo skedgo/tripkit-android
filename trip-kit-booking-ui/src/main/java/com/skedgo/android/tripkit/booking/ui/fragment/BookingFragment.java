@@ -51,7 +51,7 @@ public class BookingFragment extends RxFragment {
   @Inject Bus bus;
   ProgressBar progressView;
   TextView hudTextView;
-  TextView backButton;
+  TextView retryButton;
   TextView cancelButton;
   TextView errorTitleView;
   TextView errorMessageView;
@@ -311,6 +311,9 @@ public class BookingFragment extends RxFragment {
         }
         getActivity().finish();
       }
+    } else if (resultCode == Activity.RESULT_CANCELED) {
+      getActivity().setResult(Activity.RESULT_CANCELED);
+      getActivity().finish();
     }
   }
 
@@ -325,7 +328,7 @@ public class BookingFragment extends RxFragment {
         errorMessageView.setText(bookingError.getError());
       }
       if (bookingError.getRecoveryTitle() != null && bookingError.getUrl() != null) {
-        backButton.setText(bookingError.getRecoveryTitle());
+        retryButton.setText(bookingError.getRecoveryTitle());
       }
     }
   }
@@ -339,7 +342,7 @@ public class BookingFragment extends RxFragment {
     ViewStub viewStub = (ViewStub) rootView.findViewById(R.id.errorLayout);
     if (viewStub != null) { // not inflated yet
       View errorLayout = viewStub.inflate();
-      backButton = (TextView) errorLayout.findViewById(R.id.backButton);
+      retryButton = (TextView) errorLayout.findViewById(R.id.retryButton);
       cancelButton = (TextView) errorLayout.findViewById(R.id.cancelButton);
       errorTitleView = (TextView) errorLayout.findViewById(R.id.errorTitleView);
       errorMessageView = (TextView) errorLayout.findViewById(R.id.errorMessageView);
@@ -347,30 +350,24 @@ public class BookingFragment extends RxFragment {
       progressView.setVisibility(View.GONE);
       hudTextView.setVisibility(View.GONE);
 
-      backButton.setOnClickListener(new View.OnClickListener() {
+      retryButton.setOnClickListener(new View.OnClickListener() {
         @Override public void onClick(View v) {
-          if (bookingError != null && bookingError.getRecoveryTitle() != null && bookingError.getUrl() != null) {
-            Intent retry = new Intent();
-            retry.putExtra(EXTRA_RETRY, true);
-            retry.putExtra(KEY_URL, bookingError.getUrl());
-            getActivity().setResult(Activity.RESULT_OK, retry);
-            getActivity().finish();
-          } else {
-            getActivity().onBackPressed();
-          }
+          Intent retry = new Intent();
+          retry.putExtra(EXTRA_RETRY, true);
+          retry.putExtra(KEY_URL, bookingError.getUrl());
+          getActivity().setResult(Activity.RESULT_OK, retry);
+          getActivity().finish();
         }
       });
       cancelButton.setOnClickListener(new View.OnClickListener() {
         @Override public void onClick(View v) {
-          Intent done = new Intent();
-          done.putExtra(EXTRA_DONE, true);
-          getActivity().setResult(Activity.RESULT_OK, done);
+          getActivity().setResult(Activity.RESULT_CANCELED);
           getActivity().finish();
         }
       });
 
-      if (bookingError != null && bookingError.getRecovery() != null && bookingError.getRecovery().equals("ABORT")) {
-        backButton.setVisibility(View.GONE);
+      if (!(bookingError != null && bookingError.getRecoveryTitle() != null && bookingError.getUrl() != null)) {
+        retryButton.setVisibility(View.GONE);
       }
 
     }
