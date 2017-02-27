@@ -30,14 +30,33 @@
     android:layout_marginBottom="8dp"
     android:gravity="center_horizontal" />
 
-  <!-- TODO: it should be an arrow as the rest of the app -->
-  <TextView
-    android:id="@+id/backButton"
-    fontPath="@string/font_medium"
+  <LinearLayout
     android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:text="Back"
-    android:textColor="@color/v4_color"
-    android:textSize="16sp"
-    app:textAllCaps="true" />
+    android:layout_height="wrap_content" android:orientation="horizontal">
+
+    <TextView
+      android:id="@+id/retryButton"
+      fontPath="@string/font_medium"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:text="@string/retry"
+      android:textColor="@color/v4_color"
+      android:textSize="16sp"
+      android:padding="@dimen/spacing_normal"
+      app:textAllCaps="true" />
+
+    <TextView
+      android:id="@+id/cancelButton"
+      fontPath="@string/font_medium"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:text="@string/cancel"
+      android:textColor="@color/v4_color"
+      android:textSize="16sp"
+      android:padding="@dimen/spacing_normal"
+      app:textAllCaps="true" />
+
+  </LinearLayout>
+
+
 </LinearLayout>
