@@ -25,7 +25,6 @@ import rx.functions.Func1;
 import static rx.android.schedulers.AndroidSchedulers.mainThread;
 
 public class BookingViewModelImpl implements BookingViewModel {
-  private static final int TIME_RETRY = 3;
   private final BookingService bookingService;
   private Var<Param> nextBookingForm = Var.create();
   private Var<BookingForm> bookingForm = Var.create();
@@ -67,7 +66,6 @@ public class BookingViewModelImpl implements BookingViewModel {
     if (param.getMethod().equals(LinkFormField.METHOD_POST)) {
       this.param = param;
       return bookingService.postFormAsync(param.getUrl(), param.postBody())
-          .retry(TIME_RETRY)
           .observeOn(mainThread())
           .doOnNext(new Action1<BookingForm>() {
             @Override
@@ -92,7 +90,6 @@ public class BookingViewModelImpl implements BookingViewModel {
           });
     } else {
       return bookingService.getFormAsync(param.getUrl())
-          .retry(TIME_RETRY)
           .observeOn(mainThread())
           .doOnNext(bookingForm)
           .doOnRequest(new Action1<Long>() {

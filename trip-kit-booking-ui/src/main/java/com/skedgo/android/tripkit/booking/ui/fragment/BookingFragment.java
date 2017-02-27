@@ -38,11 +38,11 @@ import static com.skedgo.android.tripkit.booking.ui.activity.BookingActivity.ACT
 import static com.skedgo.android.tripkit.booking.ui.activity.BookingActivity.KEY_BOOKING_FORM;
 import static com.skedgo.android.tripkit.booking.ui.activity.BookingActivity.KEY_URL;
 
-public class BookingFragment extends RxFragment implements View.OnClickListener {
+public class BookingFragment extends RxFragment {
   public static final String KEY_PARAM = "param";
   public static final String KEY_FORM = "form";
   private static final String TAG_BOOKING_FORM = "bookingForm";
-  private static final String EXTRA_DONE = "done";
+  public static final String EXTRA_DONE = "done";
   private static final String EXTRA_RETRY = "retry";
 
   private static final int RQ_EXTERNAL = 1;
@@ -51,7 +51,8 @@ public class BookingFragment extends RxFragment implements View.OnClickListener 
   @Inject Bus bus;
   ProgressBar progressView;
   TextView hudTextView;
-  TextView backButton;
+  TextView retryButton;
+  TextView cancelButton;
   TextView errorTitleView;
   TextView errorMessageView;
   @Nullable private BookingForm bookingForm = null;
@@ -287,12 +288,17 @@ public class BookingFragment extends RxFragment implements View.OnClickListener 
         getActivity().setResult(resultCode, done);
         getActivity().finish();
 
-      } else if (data != null && data.getBooleanExtra(EXTRA_RETRY, true)) {
+      } else if (data != null && data.getBooleanExtra(EXTRA_RETRY, false)) {
         String nextUrl = data.getStringExtra(KEY_URL);
         Intent intent = new Intent(getActivity(), getActivity().getClass());
         intent.setAction(ACTION_BOOK);
         intent.putExtra(KEY_URL, nextUrl);
         startActivityForResult(intent, 0);
+        getActivity().finish();
+      } else if (data != null && data.getBooleanExtra(EXTRA_DONE, false)) {
+        Intent done = new Intent();
+        done.putExtra(EXTRA_DONE, true);
+        getActivity().setResult(resultCode, done);
         getActivity().finish();
       } else {
         final Bundle bundle = getActivity().getIntent().getBundleExtra(BookingActivity.KEY_BOOKING_BUNDLE);
@@ -305,24 +311,9 @@ public class BookingFragment extends RxFragment implements View.OnClickListener 
         }
         getActivity().finish();
       }
-    } else if (data != null && data.getBooleanExtra(EXTRA_DONE, false)) {
-      Intent done = new Intent();
-      done.putExtra(EXTRA_DONE, true);
-      getActivity().setResult(resultCode, done);
+    } else if (resultCode == Activity.RESULT_CANCELED) {
+      getActivity().setResult(Activity.RESULT_CANCELED);
       getActivity().finish();
-    }
-  }
-
-  @Override
-  public void onClick(View v) {
-    if (bookingError != null && bookingError.getRecoveryTitle() != null && bookingError.getUrl() != null) {
-      Intent retry = new Intent();
-      retry.putExtra(EXTRA_RETRY, true);
-      retry.putExtra(KEY_URL, bookingError.getUrl());
-      getActivity().setResult(Activity.RESULT_OK, retry);
-      getActivity().finish();
-    } else {
-      getActivity().onBackPressed();
     }
   }
 
@@ -337,7 +328,7 @@ public class BookingFragment extends RxFragment implements View.OnClickListener 
         errorMessageView.setText(bookingError.getError());
       }
       if (bookingError.getRecoveryTitle() != null && bookingError.getUrl() != null) {
-        backButton.setText(bookingError.getRecoveryTitle());
+        retryButton.setText(bookingError.getRecoveryTitle());
       }
     }
   }
@@ -351,12 +342,34 @@ public class BookingFragment extends RxFragment implements View.OnClickListener 
     ViewStub viewStub = (ViewStub) rootView.findViewById(R.id.errorLayout);
     if (viewStub != null) { // not inflated yet
       View errorLayout = viewStub.inflate();
-      backButton = (TextView) errorLayout.findViewById(R.id.backButton);
+      retryButton = (TextView) errorLayout.findViewById(R.id.retryButton);
+      cancelButton = (TextView) errorLayout.findViewById(R.id.cancelButton);
       errorTitleView = (TextView) errorLayout.findViewById(R.id.errorTitleView);
       errorMessageView = (TextView) errorLayout.findViewById(R.id.errorMessageView);
-      backButton.setOnClickListener(this);
+
       progressView.setVisibility(View.GONE);
       hudTextView.setVisibility(View.GONE);
+
+      retryButton.setOnClickListener(new View.OnClickListener() {
+        @Override public void onClick(View v) {
+          Intent retry = new Intent();
+          retry.putExtra(EXTRA_RETRY, true);
+          retry.putExtra(KEY_URL, bookingError.getUrl());
+          getActivity().setResult(Activity.RESULT_OK, retry);
+          getActivity().finish();
+        }
+      });
+      cancelButton.setOnClickListener(new View.OnClickListener() {
+        @Override public void onClick(View v) {
+          getActivity().setResult(Activity.RESULT_CANCELED);
+          getActivity().finish();
+        }
+      });
+
+      if (!(bookingError != null && bookingError.getRecoveryTitle() != null && bookingError.getUrl() != null)) {
+        retryButton.setVisibility(View.GONE);
+      }
+
     }
   }
 
