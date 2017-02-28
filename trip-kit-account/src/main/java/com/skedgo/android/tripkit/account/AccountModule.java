@@ -34,17 +34,17 @@ public class AccountModule {
         .create(AccountApi.class);
   }
 
-  @Provides UserTokenStore userTokenStore(Context context) {
-    return new UserTokenStoreImpl(accountPreferences(context));
+  @Provides UserTokenRepository userTokenStore(Context context) {
+    return new UserTokenRepositoryImpl(accountPreferences(context));
   }
 
   @Provides AccountService accountService(
       AccountApi accountApi,
-      UserTokenStore userTokenStore,
+      UserTokenRepository userTokenRepository,
       Context context) {
     return new AccountService(
         accountApi,
-        userTokenStore,
+        userTokenRepository,
         accountPreferences(context)
     );
   }
