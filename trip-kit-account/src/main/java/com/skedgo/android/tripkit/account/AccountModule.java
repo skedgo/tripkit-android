@@ -34,7 +34,7 @@ public class AccountModule {
         .create(AccountApi.class);
   }
 
-  @Provides UserTokenRepository userTokenStore(Context context) {
+  @Provides UserTokenRepository userTokenRepository(Context context) {
     return new UserTokenRepositoryImpl(accountPreferences(context));
   }
 
