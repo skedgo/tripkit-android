@@ -12,5 +12,6 @@ import rx.functions.Func0;
  * TripKit can send appropriate booking requests.
  */
 public abstract class UserTokenStore implements Func0<String> {
+  abstract public String call();
   abstract void put(@Nullable String userToken);
 }
