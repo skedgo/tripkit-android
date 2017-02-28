@@ -14,4 +14,13 @@
     <item name="android:textColor">@color/v4_description_text</item>
     <item name="fontPath">@string/font_regular</item>
   </style>
+
+  <style name="LightToolbarPopupTheme" parent="ThemeOverlay.AppCompat.Light">
+    <item name="android:background">@android:color/white</item>
+    <item name="background">@android:color/white</item>
+  </style>
+
+  <style name="DarkToolbarTheme" parent="ThemeOverlay.AppCompat.Dark.ActionBar">
+    <item name="android:background">?attr/colorPrimary</item>
+  </style>
 </resources>

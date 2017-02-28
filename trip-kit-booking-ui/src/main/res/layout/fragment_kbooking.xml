@@ -4,35 +4,49 @@
 
   <data>
 
+    <import type="com.skedgo.android.tripkit.booking.ui.activity.KBookingActivity" />
+
+    <import type="me.tatarka.bindingcollectionadapter.LayoutManagers" />
+
     <variable
-      name="formViewModel"
+      name="viewModel"
       type="com.skedgo.android.tripkit.booking.ui.viewmodel.KBookingFormViewModel" />
   </data>
 
-  <RelativeLayout
+  <LinearLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="@dimen/spacing_normal">
+    android:orientation="vertical">
 
-    <ProgressBar
-      android:layout_width="wrap_content"
-      android:layout_height="wrap_content"
-      android:layout_gravity="center"
-      android:visibility="@{formViewModel.isLoading}" />
-
-    <TextView
-      android:id="@+id/hudTextView"
-      fontPath="@string/font_regular"
+    <FrameLayout
       android:layout_width="match_parent"
-      android:layout_height="wrap_content"
-      android:layout_alignParentLeft="true"
-      android:layout_alignParentStart="true"
-      android:layout_below="@id/progressView"
-      android:layout_gravity="center"
-      android:gravity="center_horizontal"
-      android:textColor="#221121"
-      android:textSize="16sp" />
+      android:layout_height="match_parent">
 
-  </RelativeLayout>
+      <android.support.v7.widget.RecyclerView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:clipToPadding="false"
+        app:itemView="@{KBookingActivity.bookingFormsView()}"
+        app:items="@{viewModel.items}"
+        app:layoutManager="@{LayoutManagers.linear()}" />
+
+      <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:visibility="@{viewModel.hasError}">
+
+
+      </LinearLayout>
+
+      <ProgressBar
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:visibility="@{viewModel.isLoading}" />
+    </FrameLayout>
+  </LinearLayout>
 </layout>
 
