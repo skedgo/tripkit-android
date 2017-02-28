@@ -5,7 +5,6 @@ import android.content.SharedPreferences;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import com.skedgo.android.tripkit.Configs;
 
 import dagger.Module;
 import dagger.Provides;
@@ -35,24 +34,24 @@ public class AccountModule {
         .create(AccountApi.class);
   }
 
-  @Provides UserTokenStore userTokenStore(Configs configs) {
-    return new UserTokenStoreImpl(accountPreferences(configs));
+  @Provides UserTokenRepository userTokenRepository(Context context) {
+    return new UserTokenRepositoryImpl(accountPreferences(context));
   }
 
   @Provides AccountService accountService(
       AccountApi accountApi,
-      UserTokenStore userTokenStore,
-      Configs configs) {
+      UserTokenRepository userTokenRepository,
+      Context context) {
     return new AccountService(
         accountApi,
-        userTokenStore,
-        accountPreferences(configs)
+        userTokenRepository,
+        accountPreferences(context)
     );
   }
 
-  private SharedPreferences accountPreferences(Configs configs) {
-    return configs.context().getSharedPreferences(
-        "AccountPreferences",
+  private SharedPreferences accountPreferences(Context context) {
+    return context.getSharedPreferences(
+        "AccountPreferences2",
         Context.MODE_PRIVATE
     );
   }

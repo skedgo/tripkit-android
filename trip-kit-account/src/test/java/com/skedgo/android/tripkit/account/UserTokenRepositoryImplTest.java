@@ -13,23 +13,23 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 @RunWith(RobolectricGradleTestRunner.class)
 @Config(constants = BuildConfig.class, sdk = 21)
-public class UserTokenStoreImplTest {
-  private UserTokenStoreImpl userTokenStore;
+public class UserTokenRepositoryImplTest {
+  private UserTokenRepositoryImpl userTokenStore;
 
   @Before public void before() {
-    userTokenStore = new UserTokenStoreImpl(RuntimeEnvironment.application.getSharedPreferences(
-        UserTokenStoreImplTest.class.getSimpleName(),
+    userTokenStore = new UserTokenRepositoryImpl(RuntimeEnvironment.application.getSharedPreferences(
+        UserTokenRepositoryImplTest.class.getSimpleName(),
         Context.MODE_PRIVATE
     ));
   }
 
   @Test public void noDefaultToken() {
-    assertThat(userTokenStore.call()).isNull();
+    assertThat(userTokenStore.getUserToken()).isNull();
   }
 
   @Test public void putAndGetToken() {
     final String userToken = "Some token";
-    userTokenStore.put(userToken);
-    assertThat(userTokenStore.call()).isEqualTo(userToken);
+    userTokenStore.putUserToken(userToken);
+    assertThat(userTokenStore.getUserToken()).isEqualTo(userToken);
   }
 }
