@@ -4,7 +4,7 @@ import android.content.SharedPreferences;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 
-final class UserTokenRepositoryImpl extends UserTokenRepository {
+final class UserTokenRepositoryImpl implements UserTokenRepository {
   private static final String KEY_USER_TOKEN = "userToken";
   private final SharedPreferences preferences;
 
@@ -16,7 +16,7 @@ final class UserTokenRepositoryImpl extends UserTokenRepository {
     return preferences.getString(KEY_USER_TOKEN, null);
   }
 
-  @Override void putUserToken(@Nullable String userToken) {
+  @Override public void putUserToken(@Nullable String userToken) {
     preferences.edit()
         .putString(KEY_USER_TOKEN, userToken)
         .apply();
