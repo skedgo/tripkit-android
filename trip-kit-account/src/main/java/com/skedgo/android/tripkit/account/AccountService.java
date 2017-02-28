@@ -10,15 +10,15 @@ import rx.functions.Action1;
 public class AccountService {
   private static final String KEY_USERNAME = "username";
   private final AccountApi api;
-  private final UserTokenStore tokenStore;
+  private final UserTokenRepository userTokenRepository;
   private final SharedPreferences preferences;
 
   public AccountService(
       AccountApi api,
-      UserTokenStore tokenStore,
+      UserTokenRepository userTokenRepository,
       SharedPreferences preferences) {
     this.api = api;
-    this.tokenStore = tokenStore;
+    this.userTokenRepository = userTokenRepository;
     this.preferences = preferences;
   }
 
@@ -26,7 +26,7 @@ public class AccountService {
     return api.signUpAsync(body)
         .doOnNext(new Action1<SignUpResponse>() {
           @Override public void call(SignUpResponse response) {
-            tokenStore.put(response.userToken());
+            userTokenRepository.putUserToken(response.userToken());
             preferences.edit().putString(KEY_USERNAME, body.username()).apply();
           }
         });
@@ -36,7 +36,7 @@ public class AccountService {
     return api.logInAsync(body)
         .doOnNext(new Action1<LogInResponse>() {
           @Override public void call(LogInResponse response) {
-            tokenStore.put(response.userToken());
+            userTokenRepository.putUserToken(response.userToken());
             preferences.edit().putString(KEY_USERNAME, body.username()).apply();
           }
         });
@@ -46,7 +46,7 @@ public class AccountService {
     return api.logOutAsync()
         .doOnCompleted(new Action0() {
           @Override public void call() {
-            tokenStore.put(null);
+            userTokenRepository.putUserToken(null);
             preferences.edit().clear().apply();
           }
         });
@@ -56,7 +56,7 @@ public class AccountService {
     return api.logInSilentAsync("account/android/" + token)
         .doOnNext(new Action1<LogInResponse>() {
           @Override public void call(LogInResponse response) {
-            tokenStore.put(response.userToken());
+            userTokenRepository.putUserToken(response.userToken());
           }
         });
   }
@@ -65,7 +65,7 @@ public class AccountService {
    * @return True if users already logged in. Otherwise, false.
    */
   public boolean hasUser() {
-    return tokenStore.call() != null;
+    return userTokenRepository.getUserToken() != null;
   }
 
   /**

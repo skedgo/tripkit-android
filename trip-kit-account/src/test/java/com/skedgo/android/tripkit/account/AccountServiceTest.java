@@ -25,7 +25,7 @@ import static org.mockito.Mockito.when;
 @Config(constants = BuildConfig.class)
 public class AccountServiceTest {
   @Mock AccountApi api;
-  @Mock UserTokenStore tokenStore;
+  @Mock UserTokenRepository userTokenRepository;
   private AccountService service;
 
   @Before public void before() {
@@ -34,7 +34,7 @@ public class AccountServiceTest {
         AccountServiceTest.class.getSimpleName(),
         Context.MODE_PRIVATE
     );
-    service = new AccountService(api, tokenStore, preferences);
+    service = new AccountService(api, userTokenRepository, preferences);
   }
 
   @Test public void saveUserTokenAfterSigningUp() {
@@ -47,7 +47,7 @@ public class AccountServiceTest {
 
     service.signUpAsync(mock(SignUpBody.class)).subscribe();
     verify(api).signUpAsync(any(SignUpBody.class));
-    verify(tokenStore).put(eq("Some token"));
+    verify(userTokenRepository).putUserToken(eq("Some token"));
   }
 
   @Test public void saveUserTokenAfterLoggingIn() {
@@ -60,7 +60,7 @@ public class AccountServiceTest {
 
     service.logInAsync(mock(LogInBody.class)).subscribe();
     verify(api).logInAsync(any(LogInBody.class));
-    verify(tokenStore).put(eq("Some token"));
+    verify(userTokenRepository).putUserToken(eq("Some token"));
   }
 
   @Test public void clearUserTokenAfterLoggingOut() {
@@ -68,16 +68,16 @@ public class AccountServiceTest {
 
     service.logOutAsync().subscribe();
     verify(api).logOutAsync();
-    verify(tokenStore).put(isNull(String.class));
+    verify(userTokenRepository).putUserToken(isNull(String.class));
   }
 
   @Test public void hasNoUser() {
-    when(tokenStore.call()).thenReturn(null);
+    when(userTokenRepository.getUserToken()).thenReturn(null);
     assertThat(service.hasUser()).isFalse();
   }
 
   @Test public void hasUser() {
-    when(tokenStore.call()).thenReturn("Some token");
+    when(userTokenRepository.getUserToken()).thenReturn("Some token");
     assertThat(service.hasUser()).isTrue();
   }
 
