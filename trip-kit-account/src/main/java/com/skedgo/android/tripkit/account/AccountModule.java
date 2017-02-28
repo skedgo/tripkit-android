@@ -51,7 +51,7 @@ public class AccountModule {
 
   private SharedPreferences accountPreferences(Context context) {
     return context.getSharedPreferences(
-        "AccountPreferences",
+        "AccountPreferences2",
         Context.MODE_PRIVATE
     );
   }
