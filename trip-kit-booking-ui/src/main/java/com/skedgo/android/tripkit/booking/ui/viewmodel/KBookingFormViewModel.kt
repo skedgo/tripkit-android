@@ -6,6 +6,7 @@ import android.databinding.ObservableField
 import android.databinding.ObservableList
 import android.os.Bundle
 import com.skedgo.android.tripkit.booking.BookingForm
+import com.skedgo.android.tripkit.booking.FormGroup
 import com.skedgo.android.tripkit.booking.PasswordFormField
 import com.skedgo.android.tripkit.booking.StringFormField
 import com.skedgo.android.tripkit.booking.ui.activity.KEY_FORM
@@ -25,6 +26,8 @@ class KBookingFormViewModel
   val isLoading = ObservableBoolean(false)
   val items: ObservableList<Any> = ObservableArrayList()
   val title: ObservableField<String> = ObservableField()
+  val actionTitle: ObservableField<String> = ObservableField()
+  val showAction = ObservableBoolean(false)
 
   val onUpdateFormTitle: PublishSubject<String> = PublishSubject.create()
   val onNextBookingForm: PublishSubject<BookingForm> = PublishSubject.create()
@@ -41,26 +44,35 @@ class KBookingFormViewModel
     }
         .observeOn(mainThread())
         .doOnNext { bookingForm ->
-
-          onUpdateFormTitle.onNext(bookingForm.title ?: "")
-
-          bookingForm.form
-              .flatMap {
-                items.add(it.title)
-                it.fields
-              }
-              .forEach {
-                when (it) {
-                  is StringFormField -> items.add(FieldStringViewModel(it))
-                  is PasswordFormField -> items.add(FieldPasswordViewModel(it))
-                  is BookingForm -> items.add(BookingFormFieldViewModel(it, onNextBookingForm))
-                }
-              }
+          updateBookingFormInfo(bookingForm)
+          updateFieldList(bookingForm.form)
         }
         .doOnSubscribe { isLoading.set(true) }
         .doOnCompleted { isLoading.set(false) }
         .cast(Any::class.java)
 
   }
+
+  private fun updateBookingFormInfo(bookingForm: BookingForm) {
+    onUpdateFormTitle.onNext(bookingForm.title ?: "")
+    actionTitle.set(bookingForm.action?.title)
+    showAction.set(bookingForm.action != null)
+  }
+
+  private fun updateFieldList(form: List<FormGroup>) {
+    form
+        .flatMap {
+          items.add(it.title)
+          it.fields
+        }
+        .forEach {
+          when (it) {
+            is StringFormField -> items.add(FieldStringViewModel(it))
+            is PasswordFormField -> items.add(FieldPasswordViewModel(it))
+            is BookingForm -> items.add(BookingFormFieldViewModel(it, onNextBookingForm))
+          }
+        }
+  }
+
 
 }

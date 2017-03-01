@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-  xmlns:app="http://schemas.android.com/apk/res-auto">
+  xmlns:app="http://schemas.android.com/apk/res-auto"
+  xmlns:tools="http://schemas.android.com/tools">
 
   <data>
 
@@ -18,7 +19,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <FrameLayout
+    <RelativeLayout
       android:layout_width="match_parent"
       android:layout_height="match_parent">
 
@@ -26,9 +27,25 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:clipToPadding="false"
+        android:layout_above="@+id/actionButton"
         app:itemView="@{KBookingActivity.bookingFormsView()}"
         app:items="@{viewModel.items}"
         app:layoutManager="@{LayoutManagers.linear()}" />
+
+      <Button
+        android:id="@id/actionButton"
+        fontPath="@string/font_medium"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:layout_alignParentBottom="true"
+        android:background="@drawable/v4_selector_btn_positive"
+        android:gravity="center"
+        android:textAllCaps="true"
+        android:textColor="@drawable/v4_selector_btn_positive_text"
+        android:textSize="14sp"
+        android:text="@{viewModel.actionTitle}"
+        android:visibility="@{viewModel.showAction}"
+        tools:text="Next" />
 
       <LinearLayout
         android:layout_width="wrap_content"
@@ -46,7 +63,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:visibility="@{viewModel.isLoading}" />
-    </FrameLayout>
+    </RelativeLayout>
   </LinearLayout>
 </layout>
 
