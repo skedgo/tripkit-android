@@ -5,10 +5,14 @@ import android.databinding.ObservableBoolean
 import android.databinding.ObservableField
 import android.databinding.ObservableList
 import android.os.Bundle
+import com.skedgo.android.tripkit.booking.BookingForm
+import com.skedgo.android.tripkit.booking.PasswordFormField
 import com.skedgo.android.tripkit.booking.StringFormField
-import com.skedgo.android.tripkit.booking.ui.activity.BookingActivity.KEY_URL
+import com.skedgo.android.tripkit.booking.ui.activity.KEY_FORM
+import com.skedgo.android.tripkit.booking.ui.activity.KEY_URL
 import com.skedgo.android.tripkit.booking.ui.usecase.GetBookingForm
 import rx.Observable
+import rx.android.schedulers.AndroidSchedulers.mainThread
 import rx.subjects.PublishSubject
 import javax.inject.Inject
 
@@ -23,26 +27,33 @@ class KBookingFormViewModel
   val title: ObservableField<String> = ObservableField()
 
   val onUpdateFormTitle: PublishSubject<String> = PublishSubject.create()
+  val onNextBookingForm: PublishSubject<BookingForm> = PublishSubject.create()
 
   fun fetchBookingFormAsync(bundle: Bundle): Observable<Any?> {
 
     val url = bundle.getString(KEY_URL)
+    val bookingForm: BookingForm? = bundle.getParcelable(KEY_FORM)
 
     return when {
-      url != null -> getBookingForm.fetchBookingFormAsync(url)
+      url != null -> getBookingForm.execute(url)
+      bookingForm != null -> Observable.just(bookingForm)
       else -> Observable.error(Error("Wrong booking form request parameter"))
     }
+        .observeOn(mainThread())
         .doOnNext { bookingForm ->
 
           onUpdateFormTitle.onNext(bookingForm.title ?: "")
 
           bookingForm.form
               .flatMap {
+                items.add(it.title)
                 it.fields
               }
               .forEach {
                 when (it) {
                   is StringFormField -> items.add(FieldStringViewModel(it))
+                  is PasswordFormField -> items.add(FieldPasswordViewModel(it))
+                  is BookingForm -> items.add(BookingFormFieldViewModel(it, onNextBookingForm))
                 }
               }
         }

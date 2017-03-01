@@ -7,7 +7,7 @@ class FieldStringViewModel(val stringFormField: StringFormField) : DisposableVie
 
   val isHidden: Boolean get() = stringFormField.isHidden
   val isReadOnly: Boolean get() = stringFormField.isReadOnly
-  val showValue: Boolean get() = stringFormField.title != stringFormField.value || stringFormField.isReadOnly
+  val showValue: Boolean get() = stringFormField.title != stringFormField.value && stringFormField.isReadOnly
 
   val title: String get() = stringFormField.title ?: ""
   val sideTitle: String get() = stringFormField.sidetitle ?: ""

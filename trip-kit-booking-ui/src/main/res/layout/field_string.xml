@@ -9,9 +9,13 @@
   </data>
 
   <RelativeLayout
-    android:layout_width="wrap_content"
+    android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:visibility="@{viewModel.isHidden}">
+    android:paddingBottom="14dp"
+    android:paddingLeft="@dimen/spacing_normal"
+    android:paddingRight="@dimen/spacing_normal"
+    android:paddingTop="14dp"
+    android:visibility="@{!viewModel.isHidden}">
 
     <TextView
       android:id="@+id/sideTitleView"

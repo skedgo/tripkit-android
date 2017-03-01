@@ -9,7 +9,7 @@ class GetBookingForm @Inject constructor(
     private val bookingService: BookingService
 ) {
 
-  fun fetchBookingFormAsync(url: String): Observable<BookingForm> {
+  fun execute(url: String): Observable<BookingForm> {
     return bookingService.getFormAsync(url)
   }
 

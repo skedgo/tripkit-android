@@ -1,7 +1,9 @@
 package com.skedgo.android.tripkit.booking.ui.activity
 
+import android.content.Intent
 import android.databinding.DataBindingUtil
 import android.os.Bundle
+import android.os.Parcelable
 import android.view.MenuItem
 import android.widget.Toast
 import com.skedgo.android.tripkit.booking.ui.BR
@@ -9,6 +11,8 @@ import com.skedgo.android.tripkit.booking.ui.BookingUiModule
 import com.skedgo.android.tripkit.booking.ui.DaggerBookingUiComponent
 import com.skedgo.android.tripkit.booking.ui.R
 import com.skedgo.android.tripkit.booking.ui.databinding.FragmentKbookingBinding
+import com.skedgo.android.tripkit.booking.ui.viewmodel.BookingFormFieldViewModel
+import com.skedgo.android.tripkit.booking.ui.viewmodel.FieldPasswordViewModel
 import com.skedgo.android.tripkit.booking.ui.viewmodel.FieldStringViewModel
 import com.skedgo.android.tripkit.booking.ui.viewmodel.KBookingFormViewModel
 import me.tatarka.bindingcollectionadapter.ItemViewSelector
@@ -18,15 +22,17 @@ import skedgo.activityanimations.AnimatedTransitionActivity
 import skedgo.rxlifecyclecomponents.bindToLifecycle
 import javax.inject.Inject
 
+const val KEY_URL = "url"
+const val KEY_FORM = "form"
 
 open class KBookingActivity : AnimatedTransitionActivity() {
-
-  val KEY_URL = "url"
 
   companion object {
     @JvmStatic fun bookingFormsView(): ItemViewSelector<Any> {
       return ItemViewClassSelector.builder<Any>()
           .put(FieldStringViewModel::class.java, BR.viewModel, R.layout.field_string)
+          .put(FieldPasswordViewModel::class.java, BR.viewModel, R.layout.field_password)
+          .put(BookingFormFieldViewModel::class.java, BR.viewModel, R.layout.field_booking_form)
           .put(String::class.java, BR.title, R.layout.group_title)
           .build()
     }
@@ -63,6 +69,16 @@ open class KBookingActivity : AnimatedTransitionActivity() {
         .bindToLifecycle(this)
         .subscribe({ title ->
           supportActionBar?.title = title
+        }, onError)
+
+    viewModel.onNextBookingForm
+        .asObservable()
+        .observeOn(mainThread())
+        .bindToLifecycle(this)
+        .subscribe({ bookingForm ->
+          intent = Intent(this, this.javaClass)
+          intent.putExtra(KEY_FORM, bookingForm as Parcelable)
+          startActivity(intent)
         }, onError)
 
     viewModel.fetchBookingFormAsync(intent.extras)
