@@ -1,5 +1,6 @@
 package com.skedgo.android.tripkit.booking.ui.activity
 
+import android.app.Activity
 import android.content.Intent
 import android.databinding.DataBindingUtil
 import android.os.Bundle
@@ -22,8 +23,15 @@ import skedgo.activityanimations.AnimatedTransitionActivity
 import skedgo.rxlifecyclecomponents.bindToLifecycle
 import javax.inject.Inject
 
+const val BOOKING_TYPE_URL = 0
+const val BOOKING_TYPE_FORM = BOOKING_TYPE_URL + 1
+const val BOOKING_TYPE_ACTION = BOOKING_TYPE_FORM + 1
+
+const val KEY_TYPE = "type"
 const val KEY_URL = "url"
 const val KEY_FORM = "form"
+
+const val EXTRA_DONE = "done"
 
 open class KBookingActivity : AnimatedTransitionActivity() {
 
@@ -71,14 +79,34 @@ open class KBookingActivity : AnimatedTransitionActivity() {
           supportActionBar?.title = title
         }, onError)
 
+    viewModel.onDone
+        .asObservable()
+        .observeOn(mainThread())
+        .bindToLifecycle(this)
+        .subscribe({
+          finishWithDone()
+        }, onError)
+
     viewModel.onNextBookingForm
         .asObservable()
         .observeOn(mainThread())
         .bindToLifecycle(this)
         .subscribe({ bookingForm ->
           intent = Intent(this, this.javaClass)
+          intent.putExtra(KEY_TYPE, BOOKING_TYPE_FORM)
           intent.putExtra(KEY_FORM, bookingForm as Parcelable)
-          startActivity(intent)
+          startActivityForResult(intent, 0)
+        }, onError)
+
+    viewModel.onNextBookingFormAction
+        .asObservable()
+        .observeOn(mainThread())
+        .bindToLifecycle(this)
+        .subscribe({ bookingForm ->
+          intent = Intent(this, this.javaClass)
+          intent.putExtra(KEY_TYPE, BOOKING_TYPE_ACTION)
+          intent.putExtra(KEY_FORM, bookingForm as Parcelable)
+          startActivityForResult(intent, 0)
         }, onError)
 
     viewModel.fetchBookingFormAsync(intent.extras)
@@ -96,12 +124,30 @@ open class KBookingActivity : AnimatedTransitionActivity() {
     }
   }
 
+  override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+    super.onActivityResult(requestCode, resultCode, data)
+
+    when (resultCode) {
+      Activity.RESULT_OK ->
+        when {
+          data?.getBooleanExtra(EXTRA_DONE, false) ?: false -> finishWithDone()
+        }
+    }
+  }
 
   open fun reportProblem() {}
 
   override fun onDestroy() {
     super.onDestroy()
     viewModel.dispose()
+  }
+
+
+  private fun finishWithDone() {
+    val done = Intent()
+    done.putExtra(EXTRA_DONE, true)
+    setResult(Activity.RESULT_OK, done)
+    finish()
   }
 
 }

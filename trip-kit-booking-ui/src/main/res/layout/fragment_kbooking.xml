@@ -26,8 +26,8 @@
       <android.support.v7.widget.RecyclerView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:clipToPadding="false"
         android:layout_above="@+id/actionButton"
+        android:clipToPadding="false"
         app:itemView="@{KBookingActivity.bookingFormsView()}"
         app:items="@{viewModel.items}"
         app:layoutManager="@{LayoutManagers.linear()}" />
@@ -40,10 +40,11 @@
         android:layout_alignParentBottom="true"
         android:background="@drawable/v4_selector_btn_positive"
         android:gravity="center"
+        android:onClick="@{() -> viewModel.onAction()}"
+        android:text="@{viewModel.actionTitle}"
         android:textAllCaps="true"
         android:textColor="@drawable/v4_selector_btn_positive_text"
         android:textSize="14sp"
-        android:text="@{viewModel.actionTitle}"
         android:visibility="@{viewModel.showAction}"
         tools:text="Next" />
 

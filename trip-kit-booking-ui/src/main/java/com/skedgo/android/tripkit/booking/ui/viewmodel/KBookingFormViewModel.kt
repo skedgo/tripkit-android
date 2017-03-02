@@ -6,12 +6,12 @@ import android.databinding.ObservableField
 import android.databinding.ObservableList
 import android.os.Bundle
 import com.skedgo.android.tripkit.booking.BookingForm
-import com.skedgo.android.tripkit.booking.FormGroup
 import com.skedgo.android.tripkit.booking.PasswordFormField
 import com.skedgo.android.tripkit.booking.StringFormField
-import com.skedgo.android.tripkit.booking.ui.activity.KEY_FORM
-import com.skedgo.android.tripkit.booking.ui.activity.KEY_URL
+import com.skedgo.android.tripkit.booking.ui.activity.*
 import com.skedgo.android.tripkit.booking.ui.usecase.GetBookingForm
+import com.skedgo.android.tripkit.booking.ui.usecase.GetBookingFormFromAction
+import com.skedgo.android.tripkit.booking.ui.usecase.IsCancelAction
 import rx.Observable
 import rx.android.schedulers.AndroidSchedulers.mainThread
 import rx.subjects.PublishSubject
@@ -19,7 +19,9 @@ import javax.inject.Inject
 
 class KBookingFormViewModel
 @Inject constructor(
-    private val getBookingForm: GetBookingForm
+    private val getBookingForm: GetBookingForm,
+    private val getBookingFormFromAction: GetBookingFormFromAction,
+    private val isCancelAction: IsCancelAction
 ) : DisposableViewModel() {
 
   val hasError = ObservableBoolean(false)
@@ -31,21 +33,40 @@ class KBookingFormViewModel
 
   val onUpdateFormTitle: PublishSubject<String> = PublishSubject.create()
   val onNextBookingForm: PublishSubject<BookingForm> = PublishSubject.create()
+  val onNextBookingFormAction: PublishSubject<BookingForm> = PublishSubject.create()
+  val onDone: PublishSubject<Boolean> = PublishSubject.create()
+  val onCancel: PublishSubject<Boolean> = PublishSubject.create()
+
+  private var bookingForm: BookingForm? = null
+
+  fun onAction() {
+    when {
+      isCancelAction.execute(bookingForm) -> onCancel.onNext(true)
+      else -> onNextBookingFormAction.onNext(bookingForm)
+    }
+  }
 
   fun fetchBookingFormAsync(bundle: Bundle): Observable<Any?> {
 
-    val url = bundle.getString(KEY_URL)
-    val bookingForm: BookingForm? = bundle.getParcelable(KEY_FORM)
+    val type = bundle.getInt(KEY_TYPE, BOOKING_TYPE_URL)
 
-    return when {
-      url != null -> getBookingForm.execute(url)
-      bookingForm != null -> Observable.just(bookingForm)
+    return when (type) {
+      BOOKING_TYPE_URL -> getBookingForm.execute(bundle.getString(KEY_URL))
+      BOOKING_TYPE_FORM -> Observable.just(bundle.getParcelable(KEY_FORM))
+      BOOKING_TYPE_ACTION -> getBookingFormFromAction.execute(bundle.getParcelable(KEY_FORM))
       else -> Observable.error(Error("Wrong booking form request parameter"))
     }
         .observeOn(mainThread())
-        .doOnNext { bookingForm ->
-          updateBookingFormInfo(bookingForm)
-          updateFieldList(bookingForm.form)
+        .doOnNext { nextBookingForm ->
+
+          if (nextBookingForm == null) {
+            onDone.onNext(true)
+          } else {
+            bookingForm = nextBookingForm
+            updateBookingFormInfo()
+            updateFieldList()
+          }
+
         }
         .doOnSubscribe { isLoading.set(true) }
         .doOnCompleted { isLoading.set(false) }
@@ -53,19 +74,19 @@ class KBookingFormViewModel
 
   }
 
-  private fun updateBookingFormInfo(bookingForm: BookingForm) {
-    onUpdateFormTitle.onNext(bookingForm.title ?: "")
-    actionTitle.set(bookingForm.action?.title)
-    showAction.set(bookingForm.action != null)
+  private fun updateBookingFormInfo() {
+    onUpdateFormTitle.onNext(bookingForm?.title ?: "")
+    actionTitle.set(bookingForm?.action?.title)
+    showAction.set(bookingForm?.action != null)
   }
 
-  private fun updateFieldList(form: List<FormGroup>) {
-    form
-        .flatMap {
+  private fun updateFieldList() {
+    bookingForm?.form
+        ?.flatMap {
           items.add(it.title)
           it.fields
         }
-        .forEach {
+        ?.forEach {
           when (it) {
             is StringFormField -> items.add(FieldStringViewModel(it))
             is PasswordFormField -> items.add(FieldPasswordViewModel(it))
@@ -73,6 +94,5 @@ class KBookingFormViewModel
           }
         }
   }
-
 
 }
