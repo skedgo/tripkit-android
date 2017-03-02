@@ -9,7 +9,8 @@ class BookingFormFieldViewModel(val bookingForm: BookingForm,
 
   val title: String get() = bookingForm.title ?: ""
   val subTitle: String get() = bookingForm.subtitle ?: ""
-
+  val hasImageUrl: Boolean get() = !bookingForm.imageUrl.isNullOrEmpty()
+  val imageUrl: String? get() = bookingForm.imageUrl
 
   fun onBookingFormAction() {
     onNextBookingForm.onNext(bookingForm)

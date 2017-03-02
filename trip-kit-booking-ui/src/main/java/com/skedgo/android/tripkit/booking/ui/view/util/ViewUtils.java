@@ -9,6 +9,8 @@ import android.webkit.WebView;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.skedgo.android.tripkit.booking.ui.BookingUiComponent;
+
 public final class ViewUtils {
   private ViewUtils() {}
 
@@ -37,5 +39,12 @@ public final class ViewUtils {
     if (url != null) {
       v.loadUrl(url);
     }
+  }
+
+  @BindingAdapter("imageUrl")
+  public static void loadImageUrl(BookingUiComponent component, ImageView view, String imageUrl) {
+    component.picasso()
+        .load(imageUrl)
+        .into(view);
   }
 }
