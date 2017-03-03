@@ -15,14 +15,14 @@ class FieldStringViewModel(val stringFormField: StringFormField) : DisposableVie
   val editText: String get() = stringFormField.value ?: ""
 
   fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {
-    stringFormField.setValue(s.toString())
+    stringFormField.value = s.toString()
   }
 
   fun inputType(): Int {
     return when (stringFormField.keyboardType) {
       "PHONE" -> InputType.TYPE_CLASS_PHONE
       "EMAIL" -> InputType.TYPE_CLASS_TEXT or InputType.TYPE_TEXT_VARIATION_EMAIL_ADDRESS
-      else -> InputType.TYPE_NULL
+      else -> InputType.TYPE_CLASS_TEXT
     }
   }
 }

@@ -83,7 +83,9 @@ class KBookingFormViewModel
   private fun updateFieldList() {
     bookingForm?.form
         ?.flatMap {
-          items.add(it.title)
+          if (it.title != null) {
+            items.add(it.title)
+          }
           it.fields
         }
         ?.forEach {

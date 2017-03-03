@@ -72,7 +72,9 @@
       android:inputType="@{viewModel.inputType()}"
       android:hint="@{viewModel.title}"
       android:text="@{viewModel.editText}"
-      android:visibility="@{!viewModel.isReadOnly}" />
+      android:visibility="@{!viewModel.isReadOnly}"
+      android:onTextChanged="@{viewModel.onTextChanged}"
+      />
 
   </RelativeLayout>
 
