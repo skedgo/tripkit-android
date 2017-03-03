@@ -12,10 +12,7 @@ import com.skedgo.android.tripkit.booking.ui.BookingUiModule
 import com.skedgo.android.tripkit.booking.ui.DaggerBookingUiComponent
 import com.skedgo.android.tripkit.booking.ui.R
 import com.skedgo.android.tripkit.booking.ui.databinding.FragmentKbookingBinding
-import com.skedgo.android.tripkit.booking.ui.viewmodel.BookingFormFieldViewModel
-import com.skedgo.android.tripkit.booking.ui.viewmodel.FieldPasswordViewModel
-import com.skedgo.android.tripkit.booking.ui.viewmodel.FieldStringViewModel
-import com.skedgo.android.tripkit.booking.ui.viewmodel.KBookingFormViewModel
+import com.skedgo.android.tripkit.booking.ui.viewmodel.*
 import me.tatarka.bindingcollectionadapter.ItemViewSelector
 import me.tatarka.bindingcollectionadapter.itemviews.ItemViewClassSelector
 import rx.android.schedulers.AndroidSchedulers.mainThread
@@ -33,6 +30,10 @@ const val KEY_FORM = "form"
 
 const val EXTRA_DONE = "done"
 
+const val RQ_BOOKING = 0
+const val RQ_EXTERNAL = RQ_BOOKING + 1
+const val RQ_EXTERNAL_WEB = RQ_EXTERNAL + 1
+
 open class KBookingActivity : AnimatedTransitionActivity() {
 
   companion object {
@@ -40,6 +41,7 @@ open class KBookingActivity : AnimatedTransitionActivity() {
       return ItemViewClassSelector.builder<Any>()
           .put(FieldStringViewModel::class.java, BR.viewModel, R.layout.field_string)
           .put(FieldPasswordViewModel::class.java, BR.viewModel, R.layout.field_password)
+          .put(FieldExternalViewModel::class.java, BR.viewModel, R.layout.field_external)
           .put(BookingFormFieldViewModel::class.java, BR.viewModel, R.layout.field_booking_form)
           .put(String::class.java, BR.title, R.layout.group_title)
           .build()
@@ -95,7 +97,7 @@ open class KBookingActivity : AnimatedTransitionActivity() {
           intent = Intent(this, this.javaClass)
           intent.putExtra(KEY_TYPE, BOOKING_TYPE_FORM)
           intent.putExtra(KEY_FORM, bookingForm as Parcelable)
-          startActivityForResult(intent, 0)
+          startActivityForResult(intent, RQ_BOOKING)
         }, onError)
 
     viewModel.onNextBookingFormAction
@@ -106,7 +108,16 @@ open class KBookingActivity : AnimatedTransitionActivity() {
           intent = Intent(this, this.javaClass)
           intent.putExtra(KEY_TYPE, BOOKING_TYPE_ACTION)
           intent.putExtra(KEY_FORM, bookingForm as Parcelable)
-          startActivityForResult(intent, 0)
+          startActivityForResult(intent, RQ_BOOKING)
+        }, onError)
+
+    viewModel.onExternalForm
+        .asObservable()
+        .observeOn(mainThread())
+        .bindToLifecycle(this)
+        .subscribe({ externalFormField ->
+          val intent = ExternalWebActivity.newIntent(this, externalFormField)
+          startActivityForResult(intent, RQ_EXTERNAL_WEB)
         }, onError)
 
     viewModel.fetchBookingFormAsync(intent.extras)
@@ -130,6 +141,7 @@ open class KBookingActivity : AnimatedTransitionActivity() {
     when (resultCode) {
       Activity.RESULT_OK ->
         when {
+          requestCode == RQ_EXTERNAL_WEB -> goNextUrl(data?.getStringExtra(KEY_URL))
           data?.getBooleanExtra(EXTRA_DONE, false) ?: false -> finishWithDone()
         }
     }
@@ -142,6 +154,12 @@ open class KBookingActivity : AnimatedTransitionActivity() {
     viewModel.dispose()
   }
 
+  private fun goNextUrl(url: String?) {
+    intent = Intent(this, this.javaClass)
+    intent.putExtra(KEY_TYPE, BOOKING_TYPE_URL)
+    intent.putExtra(KEY_URL, url)
+    startActivityForResult(intent, RQ_BOOKING)
+  }
 
   private fun finishWithDone() {
     val done = Intent()

@@ -6,6 +6,7 @@ import android.databinding.ObservableField
 import android.databinding.ObservableList
 import android.os.Bundle
 import com.skedgo.android.tripkit.booking.BookingForm
+import com.skedgo.android.tripkit.booking.ExternalFormField
 import com.skedgo.android.tripkit.booking.PasswordFormField
 import com.skedgo.android.tripkit.booking.StringFormField
 import com.skedgo.android.tripkit.booking.ui.activity.*
@@ -34,6 +35,7 @@ class KBookingFormViewModel
   val onUpdateFormTitle: PublishSubject<String> = PublishSubject.create()
   val onNextBookingForm: PublishSubject<BookingForm> = PublishSubject.create()
   val onNextBookingFormAction: PublishSubject<BookingForm> = PublishSubject.create()
+  val onExternalForm: PublishSubject<ExternalFormField> = PublishSubject.create()
   val onDone: PublishSubject<Boolean> = PublishSubject.create()
   val onCancel: PublishSubject<Boolean> = PublishSubject.create()
 
@@ -92,6 +94,7 @@ class KBookingFormViewModel
           when (it) {
             is StringFormField -> items.add(FieldStringViewModel(it))
             is PasswordFormField -> items.add(FieldPasswordViewModel(it))
+            is ExternalFormField -> items.add(FieldExternalViewModel(it, onExternalForm))
             is BookingForm -> items.add(BookingFormFieldViewModel(it, onNextBookingForm))
           }
         }
