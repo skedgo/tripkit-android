@@ -29,7 +29,14 @@ import skedgo.tripkit.account.domain.UserTokenRepository
         .client(httpClient)
         .build()
         .create(SilentLoginApi::class.java)
-    return UserTokenRepositoryImpl(preferences, silentLoginApi)
+    val accountApi = Retrofit.Builder()
+        .baseUrl(HttpUrl.parse("https://tripgo.skedgo.com/satapp/"))
+        .addCallAdapterFactory(RxJavaCallAdapterFactory.createWithScheduler(Schedulers.io()))
+        .addConverterFactory(GsonConverterFactory.create())
+        .client(httpClient)
+        .build()
+        .create(AccountApi::class.java)
+    return UserTokenRepositoryImpl(preferences, silentLoginApi, accountApi)
   }
 
   @Provides fun userRepository(context: Context): UserRepository {

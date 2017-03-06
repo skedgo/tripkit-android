@@ -7,9 +7,8 @@ open class RefreshUserToken @Inject constructor(
     private val userTokenRepository: UserTokenRepository,
     private val getUserIdentifier: GetUserIdentifier
 ) {
-  open fun execute(): Observable<UserToken> {
-    return userTokenRepository.clearUserToken()
-        .flatMap { getUserIdentifier.execute() }
-        .flatMap { userTokenRepository.getUserTokenByUserIdentifier(it) }
-  }
+  open fun execute(): Observable<UserToken>
+      = userTokenRepository.clearUserToken()
+      .flatMap { getUserIdentifier.execute() }
+      .flatMap { userTokenRepository.getUserTokenByUserIdentifier(it) }
 }
