@@ -21,6 +21,8 @@ android {
   }
 }
 
+kapt { generateStubs = true }
+
 dependencies {
   testCompile 'junit:junit:4.12'
   testCompile 'org.assertj:assertj-core:1.7.0'
@@ -28,6 +30,7 @@ dependencies {
   testCompile 'org.robolectric:robolectric:3.1.4'
   testCompile "com.squareup.okhttp3:mockwebserver:$okHttpVersion"
 
+  compile 'com.android.support:support-annotations:25.2.0'
   compile 'io.reactivex:rxjava:1.2.4'
   compile "com.squareup.retrofit2:retrofit:2.0.2"
   compile "com.squareup.retrofit2:converter-gson:2.0.2"
