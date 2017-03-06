@@ -80,15 +80,4 @@ public class AccountServiceTest {
     when(userTokenRepository.getUserToken()).thenReturn("Some token");
     assertThat(service.hasUser()).isTrue();
   }
-
-  @Test public void shouldInvokeApiWithCorrectTokenEndpoint() {
-    when(api.logInSilentAsync(eq("account/android/25251325")))
-        .thenReturn(Observable.<LogInResponse>empty());
-
-    service.logInSilentAsync("25251325").subscribe();
-
-    // There should be no slash `/` before `account`.
-    // Otherwise, the last path from the base url will be removed.
-    verify(api).logInSilentAsync(eq("account/android/25251325"));
-  }
 }

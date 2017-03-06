@@ -52,15 +52,6 @@ public class AccountService {
         });
   }
 
-  public Observable<LogInResponse> logInSilentAsync(String token) {
-    return api.logInSilentAsync("account/android/" + token)
-        .doOnNext(new Action1<LogInResponse>() {
-          @Override public void call(LogInResponse response) {
-            userTokenRepository.putUserToken(response.userToken());
-          }
-        });
-  }
-
   /**
    * @return True if users already logged in. Otherwise, false.
    */
