@@ -17,6 +17,7 @@ import retrofit2.adapter.rxjava.HttpException;
 import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
 import rx.observers.TestSubscriber;
+import skedgo.tripkit.account.data.AccountApi;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -42,7 +43,7 @@ public class AccountApiTest {
     server.enqueue(response);
 
     final TestSubscriber<SignUpResponse> subscriber = new TestSubscriber<>();
-    api.signUpAsync(
+    api.signUp(
         ImmutableSignUpBody.builder()
             .password("Some password")
             .username("Some username")
@@ -70,7 +71,7 @@ public class AccountApiTest {
     server.enqueue(mockResponse);
 
     final TestSubscriber<LogInResponse> subscriber = new TestSubscriber<>();
-    api.logInAsync(
+    api.logIn(
         ImmutableLogInBody.builder()
             .username("Some username")
             .password("Some password")
@@ -97,7 +98,7 @@ public class AccountApiTest {
     server.enqueue(mockResponse);
 
     final TestSubscriber<LogInResponse> subscriber = new TestSubscriber<>();
-    api.logInAsync(
+    api.logIn(
         ImmutableLogInBody.builder()
             .username("Some username")
             .password("Some password")
@@ -115,7 +116,7 @@ public class AccountApiTest {
     server.enqueue(mockResponse);
 
     final TestSubscriber<LogOutResponse> subscriber = new TestSubscriber<>();
-    api.logOutAsync().subscribe(subscriber);
+    api.logOut().subscribe(subscriber);
 
     subscriber.awaitTerminalEvent();
     subscriber.assertNoErrors();

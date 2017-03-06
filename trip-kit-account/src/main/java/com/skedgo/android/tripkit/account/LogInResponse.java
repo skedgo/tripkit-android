@@ -12,8 +12,4 @@ import org.immutables.value.Value;
 @JsonAdapter(GsonAdaptersLogInResponse.class)
 public abstract class LogInResponse {
   @Nullable public abstract String userToken();
-
-  @Value.Default public boolean changed() {
-    return false;
-  }
 }

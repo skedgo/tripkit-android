@@ -9,6 +9,10 @@ import org.immutables.value.Value;
 @Value.Immutable
 @JsonAdapter(GsonAdaptersLogInBody.class)
 public abstract class LogInBody {
+  public static ImmutableLogInBody.Builder builder() {
+    return ImmutableLogInBody.builder();
+  }
+
   public abstract String password();
   public abstract String username();
 }

@@ -11,6 +11,10 @@ import org.immutables.value.Value;
 @Value.Immutable
 @JsonAdapter(GsonAdaptersSignUpBody.class)
 public abstract class SignUpBody {
+  public static ImmutableSignUpBody.Builder builder() {
+    return ImmutableSignUpBody.builder();
+  }
+
   @Nullable public abstract String name();
   public abstract String password();
   public abstract String username();

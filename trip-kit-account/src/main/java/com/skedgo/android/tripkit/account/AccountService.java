@@ -6,6 +6,7 @@ import android.support.annotation.Nullable;
 import rx.Observable;
 import rx.functions.Action0;
 import rx.functions.Action1;
+import skedgo.tripkit.account.data.AccountApi;
 
 public class AccountService {
   private static final String KEY_USERNAME = "username";
@@ -23,7 +24,7 @@ public class AccountService {
   }
 
   public Observable<SignUpResponse> signUpAsync(final SignUpBody body) {
-    return api.signUpAsync(body)
+    return api.signUp(body)
         .doOnNext(new Action1<SignUpResponse>() {
           @Override public void call(SignUpResponse response) {
             userTokenRepository.putUserToken(response.userToken());
@@ -33,7 +34,7 @@ public class AccountService {
   }
 
   public Observable<LogInResponse> logInAsync(final LogInBody body) {
-    return api.logInAsync(body)
+    return api.logIn(body)
         .doOnNext(new Action1<LogInResponse>() {
           @Override public void call(LogInResponse response) {
             userTokenRepository.putUserToken(response.userToken());
@@ -43,7 +44,7 @@ public class AccountService {
   }
 
   public Observable<LogOutResponse> logOutAsync() {
-    return api.logOutAsync()
+    return api.logOut()
         .doOnCompleted(new Action0() {
           @Override public void call() {
             userTokenRepository.putUserToken(null);

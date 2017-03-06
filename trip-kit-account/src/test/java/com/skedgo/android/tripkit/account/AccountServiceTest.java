@@ -12,6 +12,7 @@ import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
 
 import rx.Observable;
+import skedgo.tripkit.account.data.AccountApi;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Matchers.eq;
@@ -42,11 +43,11 @@ public class AccountServiceTest {
         .changed(true)
         .userToken("Some token")
         .build();
-    when(api.signUpAsync(any(SignUpBody.class)))
+    when(api.signUp(any(SignUpBody.class)))
         .thenReturn(Observable.just(response));
 
     service.signUpAsync(mock(SignUpBody.class)).subscribe();
-    verify(api).signUpAsync(any(SignUpBody.class));
+    verify(api).signUp(any(SignUpBody.class));
     verify(userTokenRepository).putUserToken(eq("Some token"));
   }
 
@@ -55,19 +56,19 @@ public class AccountServiceTest {
         .changed(true)
         .userToken("Some token")
         .build();
-    when(api.logInAsync(any(LogInBody.class)))
+    when(api.logIn(any(LogInBody.class)))
         .thenReturn(Observable.just(response));
 
     service.logInAsync(mock(LogInBody.class)).subscribe();
-    verify(api).logInAsync(any(LogInBody.class));
+    verify(api).logIn(any(LogInBody.class));
     verify(userTokenRepository).putUserToken(eq("Some token"));
   }
 
   @Test public void clearUserTokenAfterLoggingOut() {
-    when(api.logOutAsync()).thenReturn(Observable.<LogOutResponse>empty());
+    when(api.logOut()).thenReturn(Observable.<LogOutResponse>empty());
 
     service.logOutAsync().subscribe();
-    verify(api).logOutAsync();
+    verify(api).logOut();
     verify(userTokenRepository).putUserToken(isNull(String.class));
   }
 
