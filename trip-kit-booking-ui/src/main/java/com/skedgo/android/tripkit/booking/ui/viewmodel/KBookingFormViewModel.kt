@@ -10,7 +10,7 @@ import com.skedgo.android.tripkit.booking.ExternalFormField
 import com.skedgo.android.tripkit.booking.PasswordFormField
 import com.skedgo.android.tripkit.booking.StringFormField
 import com.skedgo.android.tripkit.booking.ui.activity.*
-import com.skedgo.android.tripkit.booking.ui.usecase.GetBookingForm
+import com.skedgo.android.tripkit.booking.ui.usecase.GetBookingFormFromUrl
 import com.skedgo.android.tripkit.booking.ui.usecase.GetBookingFormFromAction
 import com.skedgo.android.tripkit.booking.ui.usecase.IsCancelAction
 import rx.Observable
@@ -20,7 +20,7 @@ import javax.inject.Inject
 
 class KBookingFormViewModel
 @Inject constructor(
-    private val getBookingForm: GetBookingForm,
+    private val getBookingFormFromUrl: GetBookingFormFromUrl,
     private val getBookingFormFromAction: GetBookingFormFromAction,
     private val isCancelAction: IsCancelAction
 ) : DisposableViewModel() {
@@ -53,7 +53,7 @@ class KBookingFormViewModel
     val type = bundle.getInt(KEY_TYPE, BOOKING_TYPE_URL)
 
     return when (type) {
-      BOOKING_TYPE_URL -> getBookingForm.execute(bundle.getString(KEY_URL))
+      BOOKING_TYPE_URL -> getBookingFormFromUrl.execute(bundle.getString(KEY_URL))
       BOOKING_TYPE_FORM -> Observable.just(bundle.getParcelable(KEY_FORM))
       BOOKING_TYPE_ACTION -> getBookingFormFromAction.execute(bundle.getParcelable(KEY_FORM))
       else -> Observable.error(Error("Wrong booking form request parameter"))
