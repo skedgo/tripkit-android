@@ -1,4 +1,1 @@
-<manifest package="com.skedgo.android.tripkit.account">
-
-  <application />
-</manifest>
+<manifest package="com.skedgo.android.tripkit.account" />

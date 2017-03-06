@@ -29,6 +29,7 @@ dependencies {
   testCompile "com.squareup.okhttp3:mockwebserver:$okHttpVersion"
 
   compile project(":trip-kit")
+  compile project(":AccountDomain")
 
   compile 'com.google.dagger:dagger:2.7'
   kapt 'com.google.dagger:dagger-compiler:2.7'
