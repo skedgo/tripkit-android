@@ -1,6 +1,7 @@
 package com.skedgo.android.tripkit.booking.ui;
 
 import android.content.Context;
+import android.content.res.Resources;
 import android.util.Log;
 
 import com.google.gson.Gson;
@@ -30,6 +31,10 @@ public class BookingUiModule {
 
   @Provides Context context() {
     return appContext;
+  }
+
+  @Provides Resources resources() {
+    return appContext.getResources();
   }
 
   @Provides OkHttpClient httpClient() {

@@ -89,6 +89,22 @@ open class KBookingActivity : AnimatedTransitionActivity() {
           finishWithDone()
         }, onError)
 
+    viewModel.onCancel
+        .asObservable()
+        .observeOn(mainThread())
+        .bindToLifecycle(this)
+        .subscribe({
+          finishWithCancel()
+        }, onError)
+
+    viewModel.onErrorRetry
+        .asObservable()
+        .observeOn(mainThread())
+        .bindToLifecycle(this)
+        .subscribe({ url ->
+          finishWithRetry(url)
+        }, onError)
+
     viewModel.onNextBookingForm
         .asObservable()
         .observeOn(mainThread())
@@ -144,6 +160,7 @@ open class KBookingActivity : AnimatedTransitionActivity() {
           requestCode == RQ_EXTERNAL_WEB -> goNextUrl(data?.getStringExtra(KEY_URL))
           data?.getBooleanExtra(EXTRA_DONE, false) ?: false -> finishWithDone()
         }
+      Activity.RESULT_CANCELED -> finishWithCancel()
     }
   }
 
@@ -165,6 +182,18 @@ open class KBookingActivity : AnimatedTransitionActivity() {
     val done = Intent()
     done.putExtra(EXTRA_DONE, true)
     setResult(Activity.RESULT_OK, done)
+    finish()
+  }
+
+  private fun finishWithCancel() {
+    setResult(Activity.RESULT_CANCELED)
+    finish()
+  }
+
+  private fun finishWithRetry(nextUrl: String) {
+    val intent = Intent(this, this.javaClass)
+    intent.putExtra(KEY_URL, nextUrl)
+    startActivityForResult(intent, RQ_BOOKING)
     finish()
   }
 

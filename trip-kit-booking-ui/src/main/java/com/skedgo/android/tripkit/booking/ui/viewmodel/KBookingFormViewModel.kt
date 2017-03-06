@@ -1,17 +1,15 @@
 package com.skedgo.android.tripkit.booking.ui.viewmodel
 
+import android.content.res.Resources
 import android.databinding.ObservableArrayList
 import android.databinding.ObservableBoolean
 import android.databinding.ObservableField
 import android.databinding.ObservableList
 import android.os.Bundle
-import com.skedgo.android.tripkit.booking.BookingForm
-import com.skedgo.android.tripkit.booking.ExternalFormField
-import com.skedgo.android.tripkit.booking.PasswordFormField
-import com.skedgo.android.tripkit.booking.StringFormField
+import com.skedgo.android.tripkit.booking.*
 import com.skedgo.android.tripkit.booking.ui.activity.*
-import com.skedgo.android.tripkit.booking.ui.usecase.GetBookingFormFromUrl
 import com.skedgo.android.tripkit.booking.ui.usecase.GetBookingFormFromAction
+import com.skedgo.android.tripkit.booking.ui.usecase.GetBookingFormFromUrl
 import com.skedgo.android.tripkit.booking.ui.usecase.IsCancelAction
 import rx.Observable
 import rx.android.schedulers.AndroidSchedulers.mainThread
@@ -20,6 +18,7 @@ import javax.inject.Inject
 
 class KBookingFormViewModel
 @Inject constructor(
+    private val resources: Resources,
     private val getBookingFormFromUrl: GetBookingFormFromUrl,
     private val getBookingFormFromAction: GetBookingFormFromAction,
     private val isCancelAction: IsCancelAction
@@ -30,7 +29,11 @@ class KBookingFormViewModel
   val items: ObservableList<Any> = ObservableArrayList()
   val title: ObservableField<String> = ObservableField()
   val actionTitle: ObservableField<String> = ObservableField()
+  val errorTitle: ObservableField<String> = ObservableField()
+  val errorMessage: ObservableField<String> = ObservableField()
+  val retryText: ObservableField<String> = ObservableField()
   val showAction = ObservableBoolean(false)
+  val showRetry = ObservableBoolean(false)
 
   val onUpdateFormTitle: PublishSubject<String> = PublishSubject.create()
   val onNextBookingForm: PublishSubject<BookingForm> = PublishSubject.create()
@@ -38,14 +41,24 @@ class KBookingFormViewModel
   val onExternalForm: PublishSubject<ExternalFormField> = PublishSubject.create()
   val onDone: PublishSubject<Boolean> = PublishSubject.create()
   val onCancel: PublishSubject<Boolean> = PublishSubject.create()
+  val onErrorRetry: PublishSubject<String> = PublishSubject.create()
 
   private var bookingForm: BookingForm? = null
+  private var bookingError: BookingError? = null
 
   fun onAction() {
     when {
       isCancelAction.execute(bookingForm) -> onCancel.onNext(true)
       else -> onNextBookingFormAction.onNext(bookingForm)
     }
+  }
+
+  fun onRetry() {
+    onErrorRetry.onNext(bookingError?.url)
+  }
+
+  fun onCancel() {
+    onCancel.onNext(true)
   }
 
   fun fetchBookingFormAsync(bundle: Bundle): Observable<Any?> {
@@ -70,9 +83,34 @@ class KBookingFormViewModel
           }
 
         }
+        .doOnError { bookingError ->
+          if (bookingError is BookingError) {
+            showError(bookingError)
+          }
+        }
         .doOnSubscribe { isLoading.set(true) }
         .doOnCompleted { isLoading.set(false) }
         .cast(Any::class.java)
+
+  }
+
+  private fun showError(error: BookingError) {
+
+    bookingError = error
+
+    hasError.set(true)
+
+    errorTitle.set(error.title)
+    errorMessage.set(error.error)
+
+    showRetry.set(!(error.recoveryTitle != null && error.url != null))
+
+    retryText.set(
+        if (error.recoveryTitle != null && error.url != null) {
+          error.recoveryTitle
+        } else {
+          resources.getString(R.string.retry)
+        })
 
   }
 
