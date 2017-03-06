@@ -1,10 +1,9 @@
-package com.skedgo.android.tripkit.account;
+package skedgo.tripkit.account.data;
 
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.robolectric.RobolectricGradleTestRunner;
 import org.robolectric.annotation.Config;
 
 import java.io.IOException;
@@ -17,11 +16,10 @@ import retrofit2.adapter.rxjava.HttpException;
 import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
 import rx.observers.TestSubscriber;
-import skedgo.tripkit.account.data.AccountApi;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-@RunWith(RobolectricGradleTestRunner.class)
+@RunWith(TestRunner.class)
 @Config(constants = BuildConfig.class, sdk = 21)
 public class AccountApiTest {
   private MockWebServer server;
@@ -47,7 +45,6 @@ public class AccountApiTest {
         ImmutableSignUpBody.builder()
             .password("Some password")
             .username("Some username")
-            .name("Some name")
             .build()
     ).subscribe(subscriber);
 
@@ -55,7 +52,6 @@ public class AccountApiTest {
     subscriber.assertNoErrors();
     subscriber.assertValue(
         ImmutableSignUpResponse.builder()
-            .changed(true)
             .userToken("id5E2lbNJ37V1HwAUKmpLaPSSmpzHK")
             .build()
     );
@@ -82,7 +78,6 @@ public class AccountApiTest {
     subscriber.assertNoErrors();
     subscriber.assertValue(
         ImmutableLogInResponse.builder()
-            .changed(true)
             .userToken("6XzsKaatH0rZNkbDieRligNLy3iYjn")
             .build()
     );
@@ -120,11 +115,7 @@ public class AccountApiTest {
 
     subscriber.awaitTerminalEvent();
     subscriber.assertNoErrors();
-    subscriber.assertValue(
-        ImmutableLogOutResponse.builder()
-            .changed(true)
-            .build()
-    );
+    subscriber.assertValue(ImmutableLogOutResponse.builder().build());
 
     final RecordedRequest request = server.takeRequest();
     assertThat(request.getPath()).containsOnlyOnce("/account/logout");

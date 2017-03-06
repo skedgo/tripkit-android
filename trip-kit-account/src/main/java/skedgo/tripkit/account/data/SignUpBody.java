@@ -1,6 +1,4 @@
-package com.skedgo.android.tripkit.account;
-
-import android.support.annotation.Nullable;
+package skedgo.tripkit.account.data;
 
 import com.google.gson.annotations.JsonAdapter;
 
@@ -10,12 +8,7 @@ import org.immutables.value.Value;
 @Gson.TypeAdapters
 @Value.Immutable
 @JsonAdapter(GsonAdaptersSignUpBody.class)
-public abstract class SignUpBody {
-  public static ImmutableSignUpBody.Builder builder() {
-    return ImmutableSignUpBody.builder();
-  }
-
-  @Nullable public abstract String name();
+abstract class SignUpBody {
   public abstract String password();
   public abstract String username();
 }

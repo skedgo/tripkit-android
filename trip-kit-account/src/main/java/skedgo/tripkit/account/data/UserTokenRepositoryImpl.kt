@@ -1,8 +1,6 @@
 package skedgo.tripkit.account.data
 
 import android.content.SharedPreferences
-import com.skedgo.android.tripkit.account.LogInBody
-import com.skedgo.android.tripkit.account.SignUpBody
 import rx.Emitter
 import rx.Observable
 import rx.schedulers.Schedulers
@@ -27,7 +25,7 @@ internal class UserTokenRepositoryImpl constructor(
       signInCredentials: SignInCredentials): Observable<UserToken>
       = Observable.just(signInCredentials)
       .map {
-        LogInBody.builder()
+        ImmutableLogInBody.builder()
             .username(it.email)
             .password(it.password)
             .build()
@@ -48,7 +46,7 @@ internal class UserTokenRepositoryImpl constructor(
       signUpCredentials: SignUpCredentials): Observable<UserToken>
       = Observable.just(signUpCredentials)
       .map {
-        SignUpBody.builder()
+        ImmutableSignUpBody.builder()
             .username(it.email)
             .password(it.password)
             .build()
