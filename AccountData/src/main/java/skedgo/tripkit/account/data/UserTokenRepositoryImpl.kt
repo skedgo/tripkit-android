@@ -40,7 +40,7 @@ internal class UserTokenRepositoryImpl constructor(
       }
 
   override fun onUserTokenChanged(): Observable<Any>
-      = preferences.onChange(KEY_USER_TOKEN).map { this }
+      = preferences.onChange(KEY_USER_TOKEN).cast(Any::class.java)
 
   override fun getUserTokenBySignUpCredentials(
       signUpCredentials: SignUpCredentials): Observable<UserToken>
@@ -76,7 +76,9 @@ internal class UserTokenRepositoryImpl constructor(
       }
 
   override fun clearUserToken(): Observable<Boolean> = Observable.fromCallable {
-    preferences.edit().clear().apply()
+    preferences.edit()
+        .putString(KEY_USER_TOKEN, null)
+        .apply()
     true
   }
 
