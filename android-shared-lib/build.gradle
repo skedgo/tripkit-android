@@ -1,5 +1,4 @@
 apply plugin: "com.android.library"
-apply plugin: 'kotlin-android'
 apply plugin: 'com.github.dcendents.android-maven'
 
 // For https://github.com/dcendents/android-maven-gradle-plugin.
@@ -69,7 +68,6 @@ dependencies {
   provided 'org.immutables:value:2.3.9:annotations'
   provided 'org.immutables:builder:2.3.9'
   provided 'org.immutables:gson:2.3.9:annotations'
-  compile "org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlin_version"
 }
 
 uploadArchives {
@@ -79,6 +77,4 @@ uploadArchives {
     }
   }
 }
-repositories {
-  mavenCentral()
-}
+
