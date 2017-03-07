@@ -21,11 +21,12 @@ import com.skedgo.routepersistence.TripGroupContract.COL_UPDATE_URL
 import com.skedgo.routepersistence.TripGroupContract.COL_UUID
 import com.skedgo.routepersistence.TripGroupContract.COL_WEIGHTED_SCORE
 import skedgo.sqlite.SQLiteEntityAdapter
+import javax.inject.Inject
 
 
-class TripEntityAdapter : SQLiteEntityAdapter<Trip> {
+class TripEntityAdapter @Inject constructor() {
 
-  override fun toContentValues(trip: Trip): ContentValues {
+  fun toContentValues(trip: Trip, tripGroupId: String): ContentValues {
     val values = ContentValues()
     values.put(COL_ID, trip.getId())
     values.put(COL_UUID, trip.uuid())
@@ -43,10 +44,11 @@ class TripEntityAdapter : SQLiteEntityAdapter<Trip> {
     values.put(COL_PLANNED_URL, trip.getPlannedURL())
     values.put(COL_TEMP_URL, trip.getTemporaryURL())
     values.put(COL_QUERY_IS_LEAVE_AFTER, if (trip.queryIsLeaveAfter()) 1 else 0)
+    values.put(COL_GROUP_ID, tripGroupId)
     return values
   }
 
-  override fun toEntity(cursor: Cursor): Trip {
+  fun toEntity(cursor: Cursor): Trip {
     val id = cursor.getLong(cursor.getColumnIndex(COL_ID))
     val uuid = cursor.getString(cursor.getColumnIndex(COL_UUID))
     val currencySymbol = cursor.getString(cursor.getColumnIndex(COL_CURRENCY_SYMBOL))

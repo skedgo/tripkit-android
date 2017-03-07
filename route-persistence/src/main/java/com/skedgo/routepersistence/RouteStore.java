@@ -27,18 +27,15 @@ import static com.skedgo.routepersistence.TripGroupContract.*;
 
 public class RouteStore {
   private final SQLiteOpenHelper databaseHelper;
-  private final Gson gson;
-  private final SQLiteEntityAdapter<TripGroup> tripGroupEntityAdapter;
-  private final SQLiteEntityAdapter<Trip> tripEntityAdapter;
-  private final SQLiteEntityAdapter<TripSegment> tripSegmentEntityAdapter;
+  private final TripGroupEntityAdapter tripGroupEntityAdapter;
+  private final TripEntityAdapter tripEntityAdapter;
+  private final TripSegmentEntityAdapter tripSegmentEntityAdapter;
 
   public RouteStore(SQLiteOpenHelper databaseHelper,
-                    Gson gson,
-                    SQLiteEntityAdapter<TripGroup> tripGroupEntityAdapter,
-                    SQLiteEntityAdapter<Trip> tripEntityAdapter,
-                    SQLiteEntityAdapter<TripSegment> tripSegmentEntityAdapter) {
+                    TripGroupEntityAdapter tripGroupEntityAdapter,
+                    TripEntityAdapter tripEntityAdapter,
+                    TripSegmentEntityAdapter tripSegmentEntityAdapter) {
     this.databaseHelper = databaseHelper;
-    this.gson = gson;
     this.tripGroupEntityAdapter = tripGroupEntityAdapter;
     this.tripEntityAdapter = tripEntityAdapter;
     this.tripSegmentEntityAdapter = tripSegmentEntityAdapter;
@@ -203,9 +200,7 @@ public class RouteStore {
       TripGroup group,
       boolean isNotifiable) {
     database.delete(TABLE_TRIP_GROUPS, COL_UUID + " = ?", new String[] {group.uuid()});
-
-    ContentValues values = tripGroupEntityAdapter.toContentValues(group);
-    values.put(COL_IS_NOTIFIABLE, isNotifiable ? 1 : 0);
+    ContentValues values = tripGroupEntityAdapter.toContentValues(group, isNotifiable);
     database.insertWithOnConflict(TABLE_TRIP_GROUPS, null, values, SQLiteDatabase.CONFLICT_REPLACE);
     saveRoute(database, requestId, group.uuid());
   }
@@ -235,8 +230,7 @@ public class RouteStore {
       SQLiteDatabase database,
       String groupId,
       Trip trip) {
-    ContentValues tripValues = tripEntityAdapter.toContentValues(trip);
-    tripValues.put(COL_GROUP_ID, groupId);
+    ContentValues tripValues = tripEntityAdapter.toContentValues(trip, groupId);
     database.insertWithOnConflict(TABLE_TRIPS, null, tripValues, SQLiteDatabase.CONFLICT_REPLACE);
   }
 
@@ -257,8 +251,7 @@ public class RouteStore {
       SQLiteDatabase database,
       String tripId,
       TripSegment segment) {
-    ContentValues values = tripSegmentEntityAdapter.toContentValues(segment);
-    values.put(COL_TRIP_ID, tripId);
+    ContentValues values = tripSegmentEntityAdapter.toContentValues(segment, tripId);
     database.insertWithOnConflict(TABLE_SEGMENTS, null, values, SQLiteDatabase.CONFLICT_REPLACE);
   }
 }
