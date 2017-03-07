@@ -122,20 +122,21 @@ class KBookingFormViewModel
 
   private fun updateFieldList() {
     bookingForm?.form
-        ?.flatMap {
+        ?.forEach {
           if (it.title != null) {
             items.add(it.title)
           }
-          it.fields
-        }
-        ?.forEach {
-          when (it) {
-            is StringFormField -> items.add(FieldStringViewModel(it))
-            is PasswordFormField -> items.add(FieldPasswordViewModel(it))
-            is ExternalFormField -> items.add(FieldExternalViewModel(it, onExternalForm))
-            is BookingForm -> items.add(BookingFormFieldViewModel(it, onNextBookingForm))
+          it.fields.forEach {
+            when (it) {
+              is StringFormField -> items.add(FieldStringViewModel(it))
+              is PasswordFormField -> items.add(FieldPasswordViewModel(it))
+              is ExternalFormField -> items.add(FieldExternalViewModel(it, onExternalForm))
+              is BookingForm -> items.add(BookingFormFieldViewModel(it, onNextBookingForm))
+            }
+          }
+          if (it.footer != null) {
+            items.add(it.footer)
           }
         }
   }
-
 }
