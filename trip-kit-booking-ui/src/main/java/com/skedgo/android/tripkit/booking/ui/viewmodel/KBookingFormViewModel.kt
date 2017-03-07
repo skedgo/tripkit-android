@@ -11,6 +11,7 @@ import com.skedgo.android.tripkit.booking.ui.activity.*
 import com.skedgo.android.tripkit.booking.ui.usecase.GetBookingFormFromAction
 import com.skedgo.android.tripkit.booking.ui.usecase.GetBookingFormFromUrl
 import com.skedgo.android.tripkit.booking.ui.usecase.IsCancelAction
+import com.skedgo.android.tripkit.booking.ui.usecase.IsDoneAction
 import rx.Observable
 import rx.android.schedulers.AndroidSchedulers.mainThread
 import rx.subjects.PublishSubject
@@ -21,7 +22,8 @@ class KBookingFormViewModel
     private val resources: Resources,
     private val getBookingFormFromUrl: GetBookingFormFromUrl,
     private val getBookingFormFromAction: GetBookingFormFromAction,
-    private val isCancelAction: IsCancelAction
+    private val isCancelAction: IsCancelAction,
+    private val isDoneAction: IsDoneAction
 ) : DisposableViewModel() {
 
   val hasError = ObservableBoolean(false)
@@ -49,6 +51,7 @@ class KBookingFormViewModel
   fun onAction() {
     when {
       isCancelAction.execute(bookingForm) -> onCancel.onNext(true)
+      isDoneAction.execute(bookingForm) -> onDone.onNext(true)
       else -> onNextBookingFormAction.onNext(bookingForm)
     }
   }
@@ -84,6 +87,7 @@ class KBookingFormViewModel
 
         }
         .doOnError { bookingError ->
+          isLoading.set(false)
           if (bookingError is BookingError) {
             showError(bookingError)
           }
@@ -103,7 +107,7 @@ class KBookingFormViewModel
     errorTitle.set(error.title)
     errorMessage.set(error.error)
 
-    showRetry.set(!(error.recoveryTitle != null && error.url != null))
+    showRetry.set(error.recoveryTitle != null && error.url != null)
 
     retryText.set(
         if (error.recoveryTitle != null && error.url != null) {

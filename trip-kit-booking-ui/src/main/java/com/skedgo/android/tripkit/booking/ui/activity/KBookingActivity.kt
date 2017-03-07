@@ -7,6 +7,7 @@ import android.os.Bundle
 import android.os.Parcelable
 import android.view.MenuItem
 import android.widget.Toast
+import com.skedgo.android.common.util.LogUtils
 import com.skedgo.android.tripkit.booking.ui.BR
 import com.skedgo.android.tripkit.booking.ui.BookingUiModule
 import com.skedgo.android.tripkit.booking.ui.DaggerBookingUiComponent
@@ -34,6 +35,8 @@ const val RQ_BOOKING = 0
 const val RQ_EXTERNAL = RQ_BOOKING + 1
 const val RQ_EXTERNAL_WEB = RQ_EXTERNAL + 1
 
+private const val TAG_BOOKING_FORM = "bookingForm"
+
 open class KBookingActivity : AnimatedTransitionActivity() {
 
   companion object {
@@ -56,8 +59,7 @@ open class KBookingActivity : AnimatedTransitionActivity() {
   private val onError =
       {
         error: Throwable ->
-        Toast.makeText(this, error.message, Toast.LENGTH_LONG).show()
-        finish()
+        LogUtils.LOGE(TAG_BOOKING_FORM, "Error on booking", error)
       }
 
   override fun onCreate(savedInstanceState: Bundle?) {
