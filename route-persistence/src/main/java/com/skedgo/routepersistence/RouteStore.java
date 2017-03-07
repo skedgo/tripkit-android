@@ -21,34 +21,8 @@ import rx.Observable;
 import rx.Subscriber;
 import rx.schedulers.Schedulers;
 
-import static com.skedgo.routepersistence.RouteContract.COL_ARRIVE;
-import static com.skedgo.routepersistence.RouteContract.COL_CALORIES_COST;
-import static com.skedgo.routepersistence.RouteContract.COL_CARBON_COST;
-import static com.skedgo.routepersistence.RouteContract.COL_CURRENCY_SYMBOL;
-import static com.skedgo.routepersistence.RouteContract.COL_DEPART;
-import static com.skedgo.routepersistence.RouteContract.COL_DISPLAY_TRIP_ID;
-import static com.skedgo.routepersistence.RouteContract.COL_FREQUENCY;
-import static com.skedgo.routepersistence.RouteContract.COL_GROUP_ID;
-import static com.skedgo.routepersistence.RouteContract.COL_HASSLE_COST;
-import static com.skedgo.routepersistence.RouteContract.COL_ID;
-import static com.skedgo.routepersistence.RouteContract.COL_IS_NOTIFIABLE;
-import static com.skedgo.routepersistence.RouteContract.COL_JSON;
-import static com.skedgo.routepersistence.RouteContract.COL_MONEY_COST;
-import static com.skedgo.routepersistence.RouteContract.COL_PLANNED_URL;
-import static com.skedgo.routepersistence.RouteContract.COL_PROGRESS_URL;
-import static com.skedgo.routepersistence.RouteContract.COL_QUERY_IS_LEAVE_AFTER;
-import static com.skedgo.routepersistence.RouteContract.COL_REQUEST_ID;
-import static com.skedgo.routepersistence.RouteContract.COL_SAVE_URL;
-import static com.skedgo.routepersistence.RouteContract.COL_TEMP_URL;
-import static com.skedgo.routepersistence.RouteContract.COL_TRIP_ID;
-import static com.skedgo.routepersistence.RouteContract.COL_UPDATE_URL;
-import static com.skedgo.routepersistence.RouteContract.COL_UUID;
-import static com.skedgo.routepersistence.RouteContract.COL_WEIGHTED_SCORE;
-import static com.skedgo.routepersistence.RouteContract.SELECT_SEGMENTS;
-import static com.skedgo.routepersistence.RouteContract.SELECT_TRIPS;
-import static com.skedgo.routepersistence.RouteContract.TABLE_SEGMENTS;
-import static com.skedgo.routepersistence.RouteContract.TABLE_TRIPS;
-import static com.skedgo.routepersistence.RouteContract.TABLE_TRIP_GROUPS;
+import static com.skedgo.routepersistence.RouteContract.ROUTES;
+import static com.skedgo.routepersistence.TripGroupContract.*;
 
 public class RouteStore {
   private final SQLiteOpenHelper databaseHelper;
@@ -266,9 +240,16 @@ public class RouteStore {
     values.put(COL_UUID, group.uuid());
     values.put(COL_FREQUENCY, group.getFrequency());
     values.put(COL_DISPLAY_TRIP_ID, group.getDisplayTripId());
-    values.put(COL_REQUEST_ID, requestId);
     values.put(COL_IS_NOTIFIABLE, isNotifiable ? 1 : 0);
     database.insertWithOnConflict(TABLE_TRIP_GROUPS, null, values, SQLiteDatabase.CONFLICT_REPLACE);
+    saveRoute(database, requestId, group.uuid());
+  }
+
+  private void saveRoute(SQLiteDatabase database, String routeId, String groupId) {
+    ContentValues values = new ContentValues(2);
+    values.put(RouteContract.ROUTE_ID, routeId);
+    values.put(RouteContract.TRIP_GROUP_ID, groupId);
+    database.insertWithOnConflict(ROUTES, null, values, SQLiteDatabase.CONFLICT_REPLACE);
   }
 
   private void saveTrips(SQLiteDatabase database, String groupId, List<Trip> trips) {

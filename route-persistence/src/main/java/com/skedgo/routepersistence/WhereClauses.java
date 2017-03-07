@@ -7,13 +7,7 @@ import com.skedgo.android.common.model.TripGroup;
 
 import java.util.concurrent.TimeUnit;
 
-import static com.skedgo.routepersistence.RouteContract.COL_ARRIVE;
-import static com.skedgo.routepersistence.RouteContract.COL_DISPLAY_TRIP_ID;
-import static com.skedgo.routepersistence.RouteContract.COL_GROUP_ID;
-import static com.skedgo.routepersistence.RouteContract.COL_ID;
-import static com.skedgo.routepersistence.RouteContract.COL_UUID;
-import static com.skedgo.routepersistence.RouteContract.TABLE_TRIPS;
-import static com.skedgo.routepersistence.RouteContract.TABLE_TRIP_GROUPS;
+import static com.skedgo.routepersistence.TripGroupContract.*;
 
 public final class WhereClauses {
   private WhereClauses() {}
