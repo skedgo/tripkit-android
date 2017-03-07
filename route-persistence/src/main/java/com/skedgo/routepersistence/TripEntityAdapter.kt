@@ -20,11 +20,8 @@ import com.skedgo.routepersistence.TripGroupContract.COL_TEMP_URL
 import com.skedgo.routepersistence.TripGroupContract.COL_UPDATE_URL
 import com.skedgo.routepersistence.TripGroupContract.COL_UUID
 import com.skedgo.routepersistence.TripGroupContract.COL_WEIGHTED_SCORE
-import skedgo.sqlite.SQLiteEntityAdapter
-import javax.inject.Inject
 
-
-class TripEntityAdapter @Inject constructor() {
+class TripEntityAdapter constructor() {
 
   fun toContentValues(trip: Trip, tripGroupId: String): ContentValues {
     val values = ContentValues()
