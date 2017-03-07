@@ -51,6 +51,7 @@ public class RouteRepository {
   @DebugLog public synchronized void addTripGroups(
       String requestId,
       @NonNull List<TripGroup> groups) {
+
     CopyOnWriteArrayList<TripGroup> existingGroups;
     existingGroups = memCache.get(requestId);
     if (existingGroups == null) {

@@ -20,6 +20,7 @@ import hugo.weaving.DebugLog;
 import rx.Observable;
 import rx.Subscriber;
 import rx.schedulers.Schedulers;
+import skedgo.sqlite.SQLiteEntityAdapter;
 
 import static com.skedgo.routepersistence.RouteContract.ROUTES;
 import static com.skedgo.routepersistence.TripGroupContract.*;
@@ -27,10 +28,20 @@ import static com.skedgo.routepersistence.TripGroupContract.*;
 public class RouteStore {
   private final SQLiteOpenHelper databaseHelper;
   private final Gson gson;
+  private final SQLiteEntityAdapter<TripGroup> tripGroupEntityAdapter;
+  private final SQLiteEntityAdapter<Trip> tripEntityAdapter;
+  private final SQLiteEntityAdapter<TripSegment> tripSegmentEntityAdapter;
 
-  public RouteStore(SQLiteOpenHelper databaseHelper, Gson gson) {
+  public RouteStore(SQLiteOpenHelper databaseHelper,
+                    Gson gson,
+                    SQLiteEntityAdapter<TripGroup> tripGroupEntityAdapter,
+                    SQLiteEntityAdapter<Trip> tripEntityAdapter,
+                    SQLiteEntityAdapter<TripSegment> tripSegmentEntityAdapter) {
     this.databaseHelper = databaseHelper;
     this.gson = gson;
+    this.tripGroupEntityAdapter = tripGroupEntityAdapter;
+    this.tripEntityAdapter = tripEntityAdapter;
+    this.tripSegmentEntityAdapter = tripSegmentEntityAdapter;
   }
 
   public Observable<Integer> deleteAsync(final Pair<String, String[]> whereClause) {
@@ -143,58 +154,15 @@ public class RouteStore {
   }
 
   private TripSegment asSegment(Cursor cursor) {
-    final String json = cursor.getString(cursor.getColumnIndex(COL_JSON));
-    return gson.fromJson(json, TripSegment.class);
+    return tripSegmentEntityAdapter.toEntity(cursor);
   }
 
   private Trip asTrip(Cursor cursor) {
-    final long id = cursor.getLong(cursor.getColumnIndex(COL_ID));
-    final String uuid = cursor.getString(cursor.getColumnIndex(COL_UUID));
-    final String currencySymbol = cursor.getString(cursor.getColumnIndex(COL_CURRENCY_SYMBOL));
-    final String saveUrl = cursor.getString(cursor.getColumnIndex(COL_SAVE_URL));
-    final long depart = cursor.getLong(cursor.getColumnIndex(COL_DEPART));
-    final long arrive = cursor.getLong(cursor.getColumnIndex(COL_ARRIVE));
-    final float caloriesCost = cursor.getFloat(cursor.getColumnIndex(COL_CALORIES_COST));
-    final float moneyCost = cursor.getFloat(cursor.getColumnIndex(COL_MONEY_COST));
-    final float carbonCost = cursor.getFloat(cursor.getColumnIndex(COL_CARBON_COST));
-    final float hassleCost = cursor.getFloat(cursor.getColumnIndex(COL_HASSLE_COST));
-    final float weightedScore = cursor.getFloat(cursor.getColumnIndex(COL_WEIGHTED_SCORE));
-    final String updateUrl = cursor.getString(cursor.getColumnIndex(COL_UPDATE_URL));
-    final String progressUrl = cursor.getString(cursor.getColumnIndex(COL_PROGRESS_URL));
-    final String plannedUrl = cursor.getString(cursor.getColumnIndex(COL_PLANNED_URL));
-    final String tempUrl = cursor.getString(cursor.getColumnIndex(COL_TEMP_URL));
-    final int queryIsLeaveAfter = cursor.getInt(cursor.getColumnIndex(COL_QUERY_IS_LEAVE_AFTER));
-
-    final Trip trip = new Trip();
-    trip.setId(id);
-    trip.uuid(uuid);
-    trip.setCurrencySymbol(currencySymbol);
-    trip.setSaveURL(saveUrl);
-    trip.setStartTimeInSecs(depart);
-    trip.setEndTimeInSecs(arrive);
-    trip.setCaloriesCost(caloriesCost);
-    trip.setMoneyCost(moneyCost);
-    trip.setCarbonCost(carbonCost);
-    trip.setHassleCost(hassleCost);
-    trip.setWeightedScore(weightedScore);
-    trip.setUpdateURL(updateUrl);
-    trip.setProgressURL(progressUrl);
-    trip.setPlannedURL(plannedUrl);
-    trip.setTemporaryURL(tempUrl);
-    trip.setQueryIsLeaveAfter(queryIsLeaveAfter == 1);
-    return trip;
+    return tripEntityAdapter.toEntity(cursor);
   }
 
   private TripGroup asTripGroup(Cursor cursor) {
-    final String uuid = cursor.getString(cursor.getColumnIndex(COL_UUID));
-    final int frequency = cursor.getInt(cursor.getColumnIndex(COL_FREQUENCY));
-    final long displayTripId = cursor.getLong(cursor.getColumnIndex(COL_DISPLAY_TRIP_ID));
-
-    final TripGroup group = new TripGroup();
-    group.uuid(uuid);
-    group.setFrequency(frequency);
-    group.setDisplayTripId(displayTripId);
-    return group;
+    return tripGroupEntityAdapter.toEntity(cursor);
   }
 
   @DebugLog private void saveTripGroupsInTransaction(
@@ -236,10 +204,7 @@ public class RouteStore {
       boolean isNotifiable) {
     database.delete(TABLE_TRIP_GROUPS, COL_UUID + " = ?", new String[] {group.uuid()});
 
-    final ContentValues values = new ContentValues();
-    values.put(COL_UUID, group.uuid());
-    values.put(COL_FREQUENCY, group.getFrequency());
-    values.put(COL_DISPLAY_TRIP_ID, group.getDisplayTripId());
+    ContentValues values = tripGroupEntityAdapter.toContentValues(group);
     values.put(COL_IS_NOTIFIABLE, isNotifiable ? 1 : 0);
     database.insertWithOnConflict(TABLE_TRIP_GROUPS, null, values, SQLiteDatabase.CONFLICT_REPLACE);
     saveRoute(database, requestId, group.uuid());
@@ -270,25 +235,9 @@ public class RouteStore {
       SQLiteDatabase database,
       String groupId,
       Trip trip) {
-    final ContentValues values = new ContentValues();
-    values.put(COL_ID, trip.getId());
-    values.put(COL_UUID, trip.uuid());
-    values.put(COL_GROUP_ID, groupId);
-    values.put(COL_CURRENCY_SYMBOL, trip.getCurrencySymbol());
-    values.put(COL_SAVE_URL, trip.getSaveURL());
-    values.put(COL_DEPART, trip.getStartTimeInSecs());
-    values.put(COL_ARRIVE, trip.getEndTimeInSecs());
-    values.put(COL_CALORIES_COST, trip.getCaloriesCost());
-    values.put(COL_MONEY_COST, trip.getMoneyCost());
-    values.put(COL_CARBON_COST, trip.getCarbonCost());
-    values.put(COL_HASSLE_COST, trip.getHassleCost());
-    values.put(COL_WEIGHTED_SCORE, trip.getWeightedScore());
-    values.put(COL_UPDATE_URL, trip.getUpdateURL());
-    values.put(COL_PROGRESS_URL, trip.getProgressURL());
-    values.put(COL_PLANNED_URL, trip.getPlannedURL());
-    values.put(COL_TEMP_URL, trip.getTemporaryURL());
-    values.put(COL_QUERY_IS_LEAVE_AFTER, trip.queryIsLeaveAfter() ? 1 : 0);
-    database.insertWithOnConflict(TABLE_TRIPS, null, values, SQLiteDatabase.CONFLICT_REPLACE);
+    ContentValues tripValues = tripEntityAdapter.toContentValues(trip);
+    tripValues.put(COL_GROUP_ID, groupId);
+    database.insertWithOnConflict(TABLE_TRIPS, null, tripValues, SQLiteDatabase.CONFLICT_REPLACE);
   }
 
   @DebugLog
@@ -308,9 +257,8 @@ public class RouteStore {
       SQLiteDatabase database,
       String tripId,
       TripSegment segment) {
-    final ContentValues values = new ContentValues();
+    ContentValues values = tripSegmentEntityAdapter.toContentValues(segment);
     values.put(COL_TRIP_ID, tripId);
-    values.put(COL_JSON, gson.toJson(segment, TripSegment.class));
     database.insertWithOnConflict(TABLE_SEGMENTS, null, values, SQLiteDatabase.CONFLICT_REPLACE);
   }
 }
