@@ -1,5 +1,9 @@
 apply plugin: "kotlin"
 apply plugin: 'java'
+apply plugin: 'maven'
+
+group = 'com.skedgo.tripkit'
+version = '1.0'
 
 // To fix error of converting bytecode to dex.
 targetCompatibility = '1.7'
@@ -16,4 +20,12 @@ dependencies {
   kapt 'com.google.dagger:dagger-compiler:2.7'
 
   compile "org.jetbrains.kotlin:kotlin-stdlib:$kotlinVersion"
+}
+
+uploadArchives {
+  repositories {
+    mavenDeployer {
+      repository(url: "file://${tripkitAndroidMaven}")
+    }
+  }
 }
