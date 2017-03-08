@@ -74,11 +74,6 @@ public class RouteStore {
         });
   }
 
-  @DebugLog private int delete(Pair<String, String[]> whereClause) {
-    final SQLiteDatabase database = databaseHelper.getWritableDatabase();
-    return database.delete(TABLE_TRIP_GROUPS, whereClause.first, whereClause.second);
-  }
-
   @DebugLog private void saveTripGroupsInTransaction(
       String requestId,
       List<TripGroup> groups) {
@@ -100,6 +95,11 @@ public class RouteStore {
     for (TripGroup group : groups) {
       saveRoute(database, requestId, group.uuid());
     }
+  }
+
+  @DebugLog private int delete(Pair<String, String[]> whereClause) {
+    final SQLiteDatabase database = databaseHelper.getWritableDatabase();
+    return database.delete(TABLE_TRIP_GROUPS, whereClause.first, whereClause.second);
   }
 
   private void saveRoute(SQLiteDatabase database, String routeId, String groupId) {
