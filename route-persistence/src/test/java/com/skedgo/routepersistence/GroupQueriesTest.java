@@ -20,7 +20,7 @@ public class GroupQueriesTest {
 
   @Test public void shouldCreateRawQueryToMatchCorrectRequestId() {
     final Pair<String, String[]> r = GroupQueries.hasRequestId("Some id");
-    assertThat(r.first).isEqualTo("select * from tripGroups JOIN routes ON route_id = uuid where route_id = ?");
+    assertThat(r.first).isEqualTo("select * from routes where route_id = ?");
     assertThat(r.second).containsExactly("Some id");
   }
 

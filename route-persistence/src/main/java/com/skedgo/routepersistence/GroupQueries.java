@@ -8,7 +8,9 @@ import com.skedgo.android.common.model.TripGroup;
 
 import java.util.UUID;
 
-import static com.skedgo.routepersistence.TripGroupContract.*;
+import static com.skedgo.routepersistence.TripGroupContract.COL_IS_NOTIFIABLE;
+import static com.skedgo.routepersistence.TripGroupContract.COL_UUID;
+import static com.skedgo.routepersistence.TripGroupContract.TABLE_TRIP_GROUPS;
 
 public final class GroupQueries {
   private GroupQueries() {}
@@ -28,7 +30,8 @@ public final class GroupQueries {
    */
   static Pair<String, String[]> hasRequestId(@NonNull String id) {
     return Pair.create(
-        RouteContract.ROUTE_ID + " = ?",
+        "select * from " + RouteContract.ROUTES
+            + " where " + RouteContract.ROUTE_ID + " = ?",
         new String[] {id}
     );
   }
@@ -38,7 +41,8 @@ public final class GroupQueries {
    */
   static Pair<String, String[]> hasUuid(@NonNull String uuid) {
     return Pair.create(
-        COL_UUID + " = ?",
+        "select * from " + TABLE_TRIP_GROUPS
+            + " where " + COL_UUID + " = ?",
         new String[] {uuid}
     );
   }

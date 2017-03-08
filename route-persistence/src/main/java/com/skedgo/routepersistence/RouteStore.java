@@ -58,7 +58,7 @@ public class RouteStore {
           @Override public Cursor call() throws Exception {
             SQLiteDatabase database = databaseHelper.getReadableDatabase();
             Pair<String, String[]> stringPair = GroupQueries.hasRequestId(routeId);
-            return database.query(RouteContract.ROUTES, null, stringPair.first, stringPair.second, null, null, null, null);
+            return database.rawQuery(stringPair.first, stringPair.second);
           }
         }
     ).flatMap(Cursors.flattenCursor())
