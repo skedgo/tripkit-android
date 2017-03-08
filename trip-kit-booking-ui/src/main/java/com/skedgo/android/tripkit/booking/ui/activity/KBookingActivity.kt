@@ -6,8 +6,8 @@ import android.databinding.DataBindingUtil
 import android.os.Bundle
 import android.os.Parcelable
 import android.view.MenuItem
-import android.widget.Toast
 import com.skedgo.android.common.util.LogUtils
+import com.skedgo.android.tripkit.booking.BookingForm
 import com.skedgo.android.tripkit.booking.ui.BR
 import com.skedgo.android.tripkit.booking.ui.BookingUiModule
 import com.skedgo.android.tripkit.booking.ui.DaggerBookingUiComponent
@@ -30,6 +30,7 @@ const val KEY_URL = "url"
 const val KEY_FORM = "form"
 
 const val EXTRA_DONE = "done"
+const val EXTRA_CANCEL = "cancel"
 
 const val RQ_BOOKING = 0
 const val RQ_EXTERNAL = RQ_BOOKING + 1
@@ -87,8 +88,8 @@ open class KBookingActivity : AnimatedTransitionActivity() {
         .asObservable()
         .observeOn(mainThread())
         .bindToLifecycle(this)
-        .subscribe({
-          finishWithDone()
+        .subscribe({ form ->
+          finishWithDone(form)
         }, onError)
 
     viewModel.onCancel
@@ -160,9 +161,9 @@ open class KBookingActivity : AnimatedTransitionActivity() {
       Activity.RESULT_OK ->
         when {
           requestCode == RQ_EXTERNAL_WEB -> goNextUrl(data?.getStringExtra(KEY_URL))
-          data?.getBooleanExtra(EXTRA_DONE, false) ?: false -> finishWithDone()
+          data?.getBooleanExtra(EXTRA_DONE, false) ?: false ||
+              data?.getBooleanExtra(EXTRA_CANCEL, false) ?: false -> finishOkWithSameData(data!!)
         }
-      Activity.RESULT_CANCELED -> finishWithCancel()
     }
   }
 
@@ -180,15 +181,23 @@ open class KBookingActivity : AnimatedTransitionActivity() {
     startActivityForResult(intent, RQ_BOOKING)
   }
 
-  private fun finishWithDone() {
+  private fun finishWithDone(form: BookingForm) {
     val done = Intent()
     done.putExtra(EXTRA_DONE, true)
+    done.putExtra(KEY_FORM, form as Parcelable)
     setResult(Activity.RESULT_OK, done)
     finish()
   }
 
   private fun finishWithCancel() {
-    setResult(Activity.RESULT_CANCELED)
+    val cancel = Intent()
+    cancel.putExtra(EXTRA_CANCEL, true)
+    setResult(Activity.RESULT_OK, cancel)
+    finish()
+  }
+
+  private fun finishOkWithSameData(data: Intent) {
+    setResult(Activity.RESULT_OK, data)
     finish()
   }
 

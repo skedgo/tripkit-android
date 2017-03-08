@@ -41,7 +41,7 @@ class KBookingFormViewModel
   val onNextBookingForm: PublishSubject<BookingForm> = PublishSubject.create()
   val onNextBookingFormAction: PublishSubject<BookingForm> = PublishSubject.create()
   val onExternalForm: PublishSubject<ExternalFormField> = PublishSubject.create()
-  val onDone: PublishSubject<Boolean> = PublishSubject.create()
+  val onDone: PublishSubject<BookingForm> = PublishSubject.create()
   val onCancel: PublishSubject<Boolean> = PublishSubject.create()
   val onErrorRetry: PublishSubject<String> = PublishSubject.create()
 
@@ -51,7 +51,7 @@ class KBookingFormViewModel
   fun onAction() {
     when {
       isCancelAction.execute(bookingForm) -> onCancel.onNext(true)
-      isDoneAction.execute(bookingForm) -> onDone.onNext(true)
+      isDoneAction.execute(bookingForm) -> onDone.onNext(bookingForm)
       else -> onNextBookingFormAction.onNext(bookingForm)
     }
   }
@@ -78,7 +78,7 @@ class KBookingFormViewModel
         .doOnNext { nextBookingForm ->
 
           if (nextBookingForm == null) {
-            onDone.onNext(true)
+            onDone.onNext(nextBookingForm)
           } else {
             bookingForm = nextBookingForm
             updateBookingFormInfo()
