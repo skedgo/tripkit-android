@@ -7,11 +7,9 @@ import com.skedgo.routepersistence.TripGroupContract.COL_DISPLAY_TRIP_ID
 import com.skedgo.routepersistence.TripGroupContract.COL_FREQUENCY
 import com.skedgo.routepersistence.TripGroupContract.COL_IS_NOTIFIABLE
 import com.skedgo.routepersistence.TripGroupContract.COL_UUID
-import skedgo.sqlite.SQLiteEntityAdapter
-import javax.inject.Inject
 
 
-internal class TripGroupEntityAdapter constructor() {
+class TripGroupEntityAdapter constructor() {
 
   fun toEntity(cursor: Cursor): TripGroup {
     val uuid = cursor.getString(cursor.getColumnIndex(COL_UUID))

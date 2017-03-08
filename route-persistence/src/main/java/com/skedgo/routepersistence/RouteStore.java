@@ -19,7 +19,9 @@ import java.util.concurrent.Callable;
 import hugo.weaving.DebugLog;
 import rx.Observable;
 import rx.Subscriber;
+import rx.functions.Func1;
 import rx.schedulers.Schedulers;
+import skedgo.sqlite.Cursors;
 import skedgo.sqlite.SQLiteEntityAdapter;
 
 import static com.skedgo.routepersistence.RouteContract.ROUTES;
@@ -45,6 +47,11 @@ public class RouteStore {
         .subscribeOn(Schedulers.io());
   }
 
+  @DebugLog private int delete(Pair<String, String[]> whereClause) {
+    final SQLiteDatabase database = databaseHelper.getWritableDatabase();
+    return database.delete(TABLE_TRIP_GROUPS, whereClause.first, whereClause.second);
+  }
+
   public Observable<List<TripGroup>> saveAsync(final String requestId, final List<TripGroup> groups) {
     return Observable
         .fromCallable(new Callable<List<TripGroup>>() {
@@ -56,53 +63,26 @@ public class RouteStore {
         .subscribeOn(Schedulers.io());
   }
 
-  public Observable<TripGroup> getTripGroupsByRouteIdAsync(@NonNull String routeId) {
-    return queryAsync(GroupQueries.hasRequestId(routeId));
-  }
-
-  @DebugLog private Observable<TripGroup> queryAsync(@NonNull Pair<String, String[]> query) {
-    return queryAsync(query.first, query.second);
-  }
-
-  @DebugLog private int delete(Pair<String, String[]> whereClause) {
-    final SQLiteDatabase database = databaseHelper.getWritableDatabase();
-    return database.delete(TABLE_TRIP_GROUPS, whereClause.first, whereClause.second);
-  }
-
-  private Observable<TripGroup> queryAsync(
-      final String selection,
-      final String[] selectionArgs) {
-    return Observable
-        .create(new Observable.OnSubscribe<TripGroup>() {
-          @Override public void call(Subscriber<? super TripGroup> subscriber) {
-            final SQLiteDatabase database = databaseHelper.getReadableDatabase();
-            queryInTransaction(subscriber, database, selection, selectionArgs);
-            subscriber.onCompleted();
+  public Observable<TripGroup> getTripGroupsByRouteIdAsync(@NonNull final String routeId) {
+    return Observable.fromCallable(
+        new Callable<Cursor>() {
+          @Override public Cursor call() throws Exception {
+            SQLiteDatabase database = databaseHelper.getReadableDatabase();
+            Pair<String, String[]> stringPair = GroupQueries.hasRequestId(routeId);
+            return database.query(RouteContract.ROUTES, null, stringPair.first, stringPair.second, null, null, null, null);
+          }
+        }
+    ).flatMap(Cursors.flattenCursor())
+        .map(new Func1<Cursor, String>() {
+          @Override public String call(Cursor cursor) {
+            return cursor.getString(cursor.getColumnIndex(RouteContract.TRIP_GROUP_ID));
           }
         })
-        .subscribeOn(Schedulers.io());
-  }
-
-  @DebugLog private void queryInTransaction(
-      Subscriber<? super TripGroup> subscriber,
-      SQLiteDatabase database,
-      String selection,
-      String[] selectionArgs) {
-    database.beginTransaction();
-    try {
-      query(subscriber, database, selection, selectionArgs);
-      database.setTransactionSuccessful();
-    } finally {
-      database.endTransaction();
-    }
-  }
-
-  private void query(
-      Subscriber<? super TripGroup> subscriber,
-      SQLiteDatabase database,
-      String selection,
-      String[] selectionArgs) {
-
+        .flatMap(new Func1<String, Observable<TripGroup>>() {
+          @Override public Observable<TripGroup> call(String tripGroupId) {
+            return tripGroupStore.getTripGroupById(tripGroupId);
+          }
+        });
   }
 
   @DebugLog private void saveTripGroupsInTransaction(

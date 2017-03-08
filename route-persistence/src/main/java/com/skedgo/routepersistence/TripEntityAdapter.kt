@@ -21,7 +21,7 @@ import com.skedgo.routepersistence.TripGroupContract.COL_UPDATE_URL
 import com.skedgo.routepersistence.TripGroupContract.COL_UUID
 import com.skedgo.routepersistence.TripGroupContract.COL_WEIGHTED_SCORE
 
-internal class TripEntityAdapter constructor() {
+class TripEntityAdapter constructor() {
 
   fun toContentValues(trip: Trip, tripGroupId: String): ContentValues {
     val values = ContentValues()

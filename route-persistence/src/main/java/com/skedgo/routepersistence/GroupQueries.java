@@ -26,11 +26,9 @@ public final class GroupQueries {
    *           whatever {@link UUID#toString()} that
    *           {@link TripGroup}s were associated with when saving them.
    */
-  public static Pair<String, String[]> hasRequestId(@NonNull String id) {
+  static Pair<String, String[]> hasRequestId(@NonNull String id) {
     return Pair.create(
-        "select * from " + TABLE_TRIP_GROUPS + " JOIN " + RouteContract.ROUTES
-            + " ON " + RouteContract.ROUTE_ID + " = " + TripGroupContract.COL_UUID
-            + " where " + RouteContract.ROUTE_ID + " = ?",
+        RouteContract.ROUTE_ID + " = ?",
         new String[] {id}
     );
   }
@@ -38,10 +36,9 @@ public final class GroupQueries {
   /**
    * @param uuid Should be {@link TripGroup#uuid()}.
    */
-  public static Pair<String, String[]> hasUuid(@NonNull String uuid) {
+  static Pair<String, String[]> hasUuid(@NonNull String uuid) {
     return Pair.create(
-        "select * from " + TABLE_TRIP_GROUPS
-            + " where " + COL_UUID + " = ?",
+        COL_UUID + " = ?",
         new String[] {uuid}
     );
   }

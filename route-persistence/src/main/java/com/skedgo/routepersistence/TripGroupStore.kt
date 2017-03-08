@@ -3,26 +3,38 @@ package com.skedgo.routepersistence
 import android.content.ContentValues
 import android.database.Cursor
 import android.database.sqlite.SQLiteDatabase
+import android.util.Pair
 import com.skedgo.android.common.model.Trip
 import com.skedgo.android.common.model.TripGroup
 import com.skedgo.android.common.model.TripSegment
 import com.skedgo.routepersistence.TripGroupContract.SELECT_SEGMENTS
 import com.skedgo.routepersistence.TripGroupContract.SELECT_TRIPS
+import hugo.weaving.DebugLog
 import rx.Observable
 import rx.Subscriber
+import rx.schedulers.Schedulers
 import java.util.*
 
 
-class TripGroupStore internal constructor(val routeDatabaseHelper: RouteDatabaseHelper,
-                                          private val tripEntityAdapter: TripEntityAdapter,
+class TripGroupStore constructor(val routeDatabaseHelper: RouteDatabaseHelper,
                                           private val tripGroupEntityAdapter: TripGroupEntityAdapter,
+                                          private val tripEntityAdapter: TripEntityAdapter,
                                           private val tripSegmentEntityAdapter: TripSegmentEntityAdapter) {
 
-  fun get(uuid: String): Observable<TripGroup> {
+  fun getTripGroupById(uuid: String): Observable<TripGroup> {
+    return queryAsync(GroupQueries.hasUuid(uuid))
+  }
+
+  @DebugLog fun queryAsync(query: Pair<String, Array<String>>): Observable<TripGroup> {
+    return queryAsync(query.first, query.second)
+  }
+
+  private fun queryAsync(
+      selection: String,
+      selectionArgs: Array<String>): Observable<TripGroup> {
     return Observable.fromCallable {
       val database = routeDatabaseHelper.readableDatabase
-      val query = GroupQueries.hasUuid(uuid)
-      val groupCursor = database.query(TripGroupContract.TABLE_TRIP_GROUPS, null, query.first, query.second, null, null, null, null)
+      val groupCursor = database.query(TripGroupContract.TABLE_TRIP_GROUPS, null, selection, selectionArgs, null, null, null, null)
       val groups = ArrayList<TripGroup>(groupCursor.count)
       while (groupCursor.moveToNext()) {
         val group = asTripGroup(groupCursor)
