@@ -7,25 +7,19 @@ import android.database.sqlite.SQLiteOpenHelper;
 import android.support.annotation.NonNull;
 import android.util.Pair;
 
-import com.google.gson.Gson;
-import com.skedgo.android.common.model.Trip;
 import com.skedgo.android.common.model.TripGroup;
-import com.skedgo.android.common.model.TripSegment;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.Callable;
 
 import hugo.weaving.DebugLog;
 import rx.Observable;
-import rx.Subscriber;
 import rx.functions.Func1;
 import rx.schedulers.Schedulers;
 import skedgo.sqlite.Cursors;
-import skedgo.sqlite.SQLiteEntityAdapter;
 
 import static com.skedgo.routepersistence.RouteContract.ROUTES;
-import static com.skedgo.routepersistence.TripGroupContract.*;
+import static com.skedgo.routepersistence.TripGroupContract.TABLE_TRIP_GROUPS;
 
 public class RouteStore {
   private final SQLiteOpenHelper databaseHelper;
@@ -45,11 +39,6 @@ public class RouteStore {
           }
         })
         .subscribeOn(Schedulers.io());
-  }
-
-  @DebugLog private int delete(Pair<String, String[]> whereClause) {
-    final SQLiteDatabase database = databaseHelper.getWritableDatabase();
-    return database.delete(TABLE_TRIP_GROUPS, whereClause.first, whereClause.second);
   }
 
   public Observable<List<TripGroup>> saveAsync(final String requestId, final List<TripGroup> groups) {
@@ -83,6 +72,11 @@ public class RouteStore {
             return tripGroupStore.getTripGroupById(tripGroupId);
           }
         });
+  }
+
+  @DebugLog private int delete(Pair<String, String[]> whereClause) {
+    final SQLiteDatabase database = databaseHelper.getWritableDatabase();
+    return database.delete(TABLE_TRIP_GROUPS, whereClause.first, whereClause.second);
   }
 
   @DebugLog private void saveTripGroupsInTransaction(
