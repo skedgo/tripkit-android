@@ -22,7 +22,7 @@ import rx.functions.Action1;
 import rx.functions.Func1;
 import rx.subjects.PublishSubject;
 
-import static com.skedgo.android.tripkit.booking.ui.activity.BookingActivity.KEY_BOOKING_FORM;
+import static com.skedgo.android.tripkit.booking.ui.activity.KBookingActivityKt.KEY_FORM;
 
 public class ExternalProviderAuthViewModel extends DisposableViewModel {
   private final ObservableBoolean showWebView;
@@ -49,7 +49,7 @@ public class ExternalProviderAuthViewModel extends DisposableViewModel {
   }
 
   public void handleArgs(Bundle args) {
-    BookingForm form = args.getParcelable(KEY_BOOKING_FORM);
+    BookingForm form = args.getParcelable(KEY_FORM);
     handleArgs(form);
   }
 
@@ -146,7 +146,7 @@ public class ExternalProviderAuthViewModel extends DisposableViewModel {
         } else {
           final Intent data = new Intent();
           // Form can be null, indicating booking end (auth case).
-          data.putExtra(KEY_BOOKING_FORM, (Parcelable) form);
+          data.putExtra(KEY_FORM, (Parcelable) form);
           subscriber.onNext(data);
         }
         subscriber.onCompleted();

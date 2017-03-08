@@ -9,12 +9,12 @@ import android.support.v7.app.AppCompatActivity;
 import com.skedgo.android.tripkit.booking.BookingForm;
 import com.skedgo.android.tripkit.booking.ui.fragment.ExternalProviderAuthFragment;
 
-import static com.skedgo.android.tripkit.booking.ui.activity.BookingActivity.KEY_BOOKING_FORM;
+import static com.skedgo.android.tripkit.booking.ui.activity.KBookingActivityKt.KEY_FORM;
 
 public class ExternalProviderAuthActivity extends AppCompatActivity {
   public static Intent newIntent(Context context, BookingForm bookingForm) {
     Intent intent = new Intent(context, ExternalProviderAuthActivity.class);
-    intent.putExtra(KEY_BOOKING_FORM, (Parcelable) bookingForm);
+    intent.putExtra(KEY_FORM, (Parcelable) bookingForm);
     return intent;
   }
 
