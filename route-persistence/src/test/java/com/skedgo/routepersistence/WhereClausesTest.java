@@ -35,7 +35,7 @@ public class WhereClausesTest {
             "SELECT * FROM trips JOIN tripGroups " +
             "ON tripGroups.uuid = trips.groupId " +
             "AND tripGroups.displayTripId = trips.id " +
-            "JOIN routes ON routes.tripgroup_id = tripGroups.uuid " +
+            "JOIN routes ON tripgroup_id = tripGroups.uuid " +
             "WHERE trips.arrive < ?" +
             ")"
     );
