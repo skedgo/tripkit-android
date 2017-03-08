@@ -80,20 +80,13 @@ public class RouteStore {
     final SQLiteDatabase database = databaseHelper.getWritableDatabase();
     database.beginTransaction();
     try {
-      saveTripGroups(database, requestId, groups);
+      tripGroupStore.put(groups);
+      for (TripGroup group : groups) {
+        saveRoute(database, requestId, group.uuid());
+      }
       database.setTransactionSuccessful();
     } finally {
       database.endTransaction();
-    }
-  }
-
-  private void saveTripGroups(
-      SQLiteDatabase database,
-      String requestId,
-      List<TripGroup> groups) {
-    tripGroupStore.put(groups);
-    for (TripGroup group : groups) {
-      saveRoute(database, requestId, group.uuid());
     }
   }
 
