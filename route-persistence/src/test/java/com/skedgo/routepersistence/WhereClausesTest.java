@@ -32,10 +32,11 @@ public class WhereClausesTest {
     final Pair<String, String[]> r = WhereClauses.happenedBefore(2, TimeUnit.DAYS.toMillis(5L));
     assertThat(r.first).isEqualTo(
         "EXISTS (" +
-            "SELECT * FROM trips " +
-            "WHERE tripGroups.uuid = trips.groupId " +
+            "SELECT * FROM trips JOIN tripGroups " +
+            "ON tripGroups.uuid = trips.groupId " +
             "AND tripGroups.displayTripId = trips.id " +
-            "AND trips.arrive < ?" +
+            "JOIN routes ON routes.tripgroup_id = tripGroups.uuid " +
+            "WHERE trips.arrive < ?" +
             ")"
     );
     assertThat(r.second).isEqualTo(new String[] {"424800"});

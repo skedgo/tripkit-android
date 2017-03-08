@@ -23,7 +23,7 @@ public final class WhereClauses {
         + " ON " + TABLE_TRIP_GROUPS + "." + COL_UUID + " = " + TABLE_TRIPS + "." + COL_GROUP_ID
         + " AND " + TABLE_TRIP_GROUPS + "." + COL_DISPLAY_TRIP_ID + " = " + TABLE_TRIPS + "." + COL_ID
         + " JOIN " + RouteContract.ROUTES + " ON " + RouteContract.TRIP_GROUP_ID + " = " + TABLE_TRIP_GROUPS + "." + COL_UUID
-        + " AND " + TABLE_TRIPS + "." + COL_ARRIVE + " < ?"
+        + " WHERE " + TABLE_TRIPS + "." + COL_ARRIVE + " < ?"
         + ")";
     final long secs = TimeUnit.HOURS.toSeconds(hours);
     final long currentSecs = TimeUnit.MILLISECONDS.toSeconds(currentMillis);
