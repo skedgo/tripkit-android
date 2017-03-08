@@ -33,7 +33,7 @@ public class RouteRepository {
       return new ArrayList<>(mem);
     }
 
-    final List<TripGroup> disk = routeStore.queryAsync(GroupQueries.hasRequestId(requestId))
+    final List<TripGroup> disk = routeStore.getTripGroupsByRouteIdAsync(requestId)
         .toList()
         .toBlocking()
         .first();

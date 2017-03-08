@@ -9,7 +9,7 @@ import com.skedgo.routepersistence.TripGroupContract.COL_TRIP_ID
 import javax.inject.Inject
 
 
-class TripSegmentEntityAdapter constructor(val gson: Gson) {
+internal class TripSegmentEntityAdapter constructor(val gson: Gson) {
 
   fun toContentValues(segment: TripSegment, tripId: String): ContentValues {
     val values = ContentValues()

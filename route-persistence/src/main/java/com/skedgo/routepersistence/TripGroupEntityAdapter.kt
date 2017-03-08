@@ -11,7 +11,7 @@ import skedgo.sqlite.SQLiteEntityAdapter
 import javax.inject.Inject
 
 
-class TripGroupEntityAdapter constructor() {
+internal class TripGroupEntityAdapter constructor() {
 
   fun toEntity(cursor: Cursor): TripGroup {
     val uuid = cursor.getString(cursor.getColumnIndex(COL_UUID))
