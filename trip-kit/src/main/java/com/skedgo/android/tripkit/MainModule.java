@@ -38,6 +38,8 @@ import retrofit2.converter.gson.GsonConverterFactory;
 import rx.functions.Action1;
 import rx.functions.Func0;
 import rx.schedulers.Schedulers;
+import skedgo.tripkit.configuration.domain.GetRegionEligibilityHeaderValue;
+import skedgo.tripkit.configuration.domain.RegionEligibility;
 
 @Module
 public class MainModule {
@@ -132,15 +134,28 @@ public class MainModule {
     );
   }
 
-  @Provides BuiltInInterceptor builtInInterceptor(Lazy<UuidProvider> uuidProviderLazy) {
+  @Provides Context context() {
+    return configs.context();
+  }
+
+  @Provides BuiltInInterceptor builtInInterceptor(
+      Lazy<UuidProvider> uuidProviderLazy,
+      final Lazy<GetRegionEligibilityHeaderValue> getRegionEligibilityHeaderValueLazy) {
     // Null to opt-out sending UUID header.
     final UuidProvider uuidProvider = configs.isUuidOptedOut() ? null : uuidProviderLazy.get();
+    final RegionEligibility defaultRegionEligibility = new RegionEligibility(configs.regionEligibility());
     return BuiltInInterceptorBuilder.create()
         .appVersion(getAppVersion())
         .locale(Locale.getDefault())
-        .regionEligibility(configs.regionEligibility())
         .userTokenProvider(configs.userTokenProvider())
         .uuidProvider(uuidProvider)
+        .getRegionEligibility(new Func0<String>() {
+          @Override public String call() {
+            return getRegionEligibilityHeaderValueLazy.get()
+                .execute(defaultRegionEligibility)
+                .toBlocking().first();
+          }
+        })
         .build();
   }
 
