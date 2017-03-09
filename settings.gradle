@@ -1,4 +1,5 @@
 include ':samples', ':ConfigurationDomain', ':ConfigurationData'
+include ':IsEventIncludedDomain', ':IsEventIncludedData'
 include ':android-shared-lib'
 include ':trip-kit'
 include ':AccountDomain'
