@@ -14,7 +14,7 @@ import okhttp3.Response;
 import rx.functions.Func0;
 
 @Value.Style(newBuilder = "create")
-public final class BuiltInInterceptor implements Interceptor {
+final class BuiltInInterceptor implements Interceptor {
   private static final String HEADER_APP_VERSION = "X-TripGo-Version";
   private static final String HEADER_REGION_ELIGIBILITY = "X-TripGo-RegionEligibility";
   private static final String HEADER_UUID = "X-TripGo-UUID";
@@ -24,41 +24,43 @@ public final class BuiltInInterceptor implements Interceptor {
   private static final String HEADER_USER_TOKEN = "userToken";
 
   private final String appVersion;
-  private final String regionEligibility;
   private final Locale locale;
   @Nullable private final Func0<String> uuidProvider;
   @Nullable private final Func0<String> userTokenProvider;
+  private final Func0<String> getRegionEligibility;
 
   private BuiltInInterceptor(
       String appVersion,
-      String regionEligibility,
       Locale locale,
       @Nullable Func0<String> uuidProvider,
-      @Nullable Func0<String> userTokenProvider) {
+      @Nullable Func0<String> userTokenProvider,
+      Func0<String> getRegionEligibility) {
     this.appVersion = appVersion;
-    this.regionEligibility = regionEligibility;
     this.locale = locale;
     this.uuidProvider = uuidProvider;
     this.userTokenProvider = userTokenProvider;
+    this.getRegionEligibility = getRegionEligibility;
   }
 
   @Builder.Factory
   static BuiltInInterceptor builtInInterceptor(
       String appVersion,
-      String regionEligibility,
       Locale locale,
       @Nullable Func0<String> uuidProvider,
-      @Nullable Func0<String> userTokenProvider) {
+      @Nullable Func0<String> userTokenProvider,
+      Func0<String> getRegionEligibility
+  ) {
     return new BuiltInInterceptor(
         appVersion,
-        regionEligibility,
         locale,
         uuidProvider,
-        userTokenProvider
+        userTokenProvider,
+        getRegionEligibility
     );
   }
 
   @Override public Response intercept(Chain chain) throws IOException {
+    final String regionEligibility = getRegionEligibility.call();
     final Request.Builder builder = chain.request().newBuilder()
         .addHeader(HEADER_ACCEPT_LANGUAGE, locale.getLanguage())
         .addHeader(HEADER_APP_VERSION, appVersion)
