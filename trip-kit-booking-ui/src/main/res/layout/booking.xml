@@ -11,7 +11,7 @@
 
     <variable
       name="viewModel"
-      type="com.skedgo.android.tripkit.booking.ui.viewmodel.KBookingFormViewModel" />
+      type="com.skedgo.android.tripkit.booking.ui.viewmodel.BookingFormViewModel" />
   </data>
 
   <LinearLayout

@@ -52,7 +52,7 @@ open class KBookingActivity : AnimatedTransitionActivity() {
     }
   }
 
-  @Inject lateinit var viewModel: KBookingFormViewModel
+  @Inject lateinit var viewModel: BookingFormViewModel
   val binding: FragmentKbookingBinding by lazy {
     DataBindingUtil.setContentView<FragmentKbookingBinding>(this, R.layout.fragment_kbooking)
   }

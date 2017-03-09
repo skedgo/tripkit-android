@@ -17,7 +17,7 @@ import rx.android.schedulers.AndroidSchedulers.mainThread
 import rx.subjects.PublishSubject
 import javax.inject.Inject
 
-class KBookingFormViewModel
+class BookingFormViewModel
 @Inject constructor(
     private val resources: Resources,
     private val getBookingFormFromUrl: GetBookingFormFromUrl,
