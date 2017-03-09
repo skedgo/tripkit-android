@@ -17,7 +17,7 @@ import org.robolectric.annotation.Config;
 import rx.Observable;
 import rx.observers.TestSubscriber;
 
-import static com.skedgo.android.tripkit.booking.ui.activity.BookingActivity.KEY_BOOKING_FORM;
+import static com.skedgo.android.tripkit.booking.ui.activity.KBookingActivityKt.KEY_FORM;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
@@ -38,7 +38,7 @@ public class ExternalProviderAuthViewModelTest {
     when(bookingForm.isOAuthForm()).thenReturn(true);
     when(bookingForm.getOAuthLink()).thenReturn(Uri.parse("http://url"));
 
-    args.putParcelable(KEY_BOOKING_FORM, bookingForm);
+    args.putParcelable(KEY_FORM, bookingForm);
 
     viewModel.handleArgs(args);
 
@@ -53,7 +53,7 @@ public class ExternalProviderAuthViewModelTest {
     when(bookingForm.isOAuthForm()).thenReturn(false);
     when(bookingForm.externalAction()).thenReturn("http://external_url");
 
-    args.putParcelable(KEY_BOOKING_FORM, bookingForm);
+    args.putParcelable(KEY_FORM, bookingForm);
 
     viewModel.handleArgs(args);
 
@@ -138,7 +138,7 @@ public class ExternalProviderAuthViewModelTest {
 
     Intent intent = subscriber.getOnNextEvents().get(0);
 
-    BookingForm bookingFormResult = intent.getParcelableExtra(KEY_BOOKING_FORM);
+    BookingForm bookingFormResult = intent.getParcelableExtra(KEY_FORM);
     assertThat(bookingFormResult).isNull();
   }
 
@@ -156,7 +156,7 @@ public class ExternalProviderAuthViewModelTest {
 
     Intent intent = subscriber.getOnNextEvents().get(0);
 
-    BookingForm bookingFormResult = intent.getParcelableExtra(KEY_BOOKING_FORM);
+    BookingForm bookingFormResult = intent.getParcelableExtra(KEY_FORM);
     assertThat(bookingFormResult).isEqualTo(bookingForm);
   }
 
