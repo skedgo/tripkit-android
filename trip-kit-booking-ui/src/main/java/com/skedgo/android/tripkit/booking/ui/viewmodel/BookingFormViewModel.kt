@@ -135,7 +135,7 @@ class BookingFormViewModel
               is StringFormField -> items.add(FieldStringViewModel(it))
               is PasswordFormField -> items.add(FieldPasswordViewModel(it))
               is ExternalFormField -> items.add(FieldExternalViewModel(it, onExternalForm))
-              is BookingForm -> items.add(BookingFormFieldViewModel(it, onNextBookingForm))
+              is BookingForm -> items.add(FieldBookingFormViewModel(it, onNextBookingForm))
             }
           }
           if (it.footer != null) {

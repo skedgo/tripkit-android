@@ -3,7 +3,7 @@ package com.skedgo.android.tripkit.booking.ui.viewmodel
 import com.skedgo.android.tripkit.booking.BookingForm
 import rx.subjects.PublishSubject
 
-class BookingFormFieldViewModel(val bookingForm: BookingForm,
+class FieldBookingFormViewModel(val bookingForm: BookingForm,
                                 val onNextBookingForm: PublishSubject<BookingForm>
 ) : DisposableViewModel() {
 

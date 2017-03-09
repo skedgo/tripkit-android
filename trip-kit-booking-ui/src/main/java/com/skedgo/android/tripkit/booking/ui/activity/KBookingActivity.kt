@@ -46,7 +46,7 @@ open class KBookingActivity : AnimatedTransitionActivity() {
           .put(FieldStringViewModel::class.java, BR.viewModel, R.layout.field_string)
           .put(FieldPasswordViewModel::class.java, BR.viewModel, R.layout.field_password)
           .put(FieldExternalViewModel::class.java, BR.viewModel, R.layout.field_external)
-          .put(BookingFormFieldViewModel::class.java, BR.viewModel, R.layout.field_booking_form)
+          .put(FieldBookingFormViewModel::class.java, BR.viewModel, R.layout.field_booking_form)
           .put(String::class.java, BR.title, R.layout.group_title)
           .build()
     }
