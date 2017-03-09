@@ -70,7 +70,9 @@ dependencies {
   provided 'org.immutables:builder:2.3.9'
   provided 'org.immutables:gson:2.3.9:annotations'
 
-  compile project(":android-shared-lib")
+  compile project(':android-shared-lib')
+  provided project(':ConfigurationDomain')
+  provided project(':ConfigurationData')
 }
 
 uploadArchives {
