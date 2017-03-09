@@ -22,7 +22,7 @@ import rx.functions.Action1;
 import rx.functions.Func1;
 import rx.subjects.PublishSubject;
 
-import static com.skedgo.android.tripkit.booking.ui.activity.KBookingActivityKt.KEY_FORM;
+import static com.skedgo.android.tripkit.booking.ui.activity.BookingActivityKt.KEY_FORM;
 
 public class ExternalProviderAuthViewModel extends DisposableViewModel {
   private final ObservableBoolean showWebView;

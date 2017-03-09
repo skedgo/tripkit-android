@@ -17,7 +17,7 @@ import org.robolectric.annotation.Config;
 import rx.Observable;
 import rx.observers.TestSubscriber;
 
-import static com.skedgo.android.tripkit.booking.ui.activity.KBookingActivityKt.KEY_FORM;
+import static com.skedgo.android.tripkit.booking.ui.activity.BookingActivityKt.KEY_FORM;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;

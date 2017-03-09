@@ -12,7 +12,7 @@ import com.skedgo.android.tripkit.booking.ui.BR
 import com.skedgo.android.tripkit.booking.ui.BookingUiModule
 import com.skedgo.android.tripkit.booking.ui.DaggerBookingUiComponent
 import com.skedgo.android.tripkit.booking.ui.R
-import com.skedgo.android.tripkit.booking.ui.databinding.FragmentKbookingBinding
+import com.skedgo.android.tripkit.booking.ui.databinding.ActivityBookingBinding
 import com.skedgo.android.tripkit.booking.ui.viewmodel.*
 import me.tatarka.bindingcollectionadapter.ItemViewSelector
 import me.tatarka.bindingcollectionadapter.itemviews.ItemViewClassSelector
@@ -38,7 +38,7 @@ const val RQ_EXTERNAL_WEB = RQ_EXTERNAL + 1
 
 private const val TAG_BOOKING_FORM = "bookingForm"
 
-open class KBookingActivity : AnimatedTransitionActivity() {
+open class BookingActivity : AnimatedTransitionActivity() {
 
   companion object {
     @JvmStatic fun bookingFormsView(): ItemViewSelector<Any> {
@@ -53,8 +53,8 @@ open class KBookingActivity : AnimatedTransitionActivity() {
   }
 
   @Inject lateinit var viewModel: BookingFormViewModel
-  val binding: FragmentKbookingBinding by lazy {
-    DataBindingUtil.setContentView<FragmentKbookingBinding>(this, R.layout.fragment_kbooking)
+  val binding: ActivityBookingBinding by lazy {
+    DataBindingUtil.setContentView<ActivityBookingBinding>(this, R.layout.activity_booking)
   }
 
   private val onError =
@@ -74,7 +74,7 @@ open class KBookingActivity : AnimatedTransitionActivity() {
     supportActionBar?.setDisplayShowHomeEnabled(true)
     supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
-    binding.setViewModel(viewModel)
+   // binding.setViewModel(viewModel)
 
     viewModel.onUpdateFormTitle
         .asObservable()
@@ -181,7 +181,7 @@ open class KBookingActivity : AnimatedTransitionActivity() {
     startActivityForResult(intent, RQ_BOOKING)
   }
 
-  private fun finishWithDone(form: BookingForm) {
+  private fun finishWithDone(form: BookingForm?) {
     val done = Intent()
     done.putExtra(EXTRA_DONE, true)
     done.putExtra(KEY_FORM, form as Parcelable)

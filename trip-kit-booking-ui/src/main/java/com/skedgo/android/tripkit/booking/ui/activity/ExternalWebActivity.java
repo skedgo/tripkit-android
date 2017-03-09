@@ -22,7 +22,7 @@ import rx.android.schedulers.AndroidSchedulers;
 import rx.functions.Action1;
 import skedgo.rxlifecyclecomponents.RxAppCompatActivity;
 
-import static com.skedgo.android.tripkit.booking.ui.activity.KBookingActivityKt.KEY_URL;
+import static com.skedgo.android.tripkit.booking.ui.activity.BookingActivityKt.KEY_URL;
 
 public class ExternalWebActivity extends RxAppCompatActivity {
   @Inject ExternalViewModel viewModel;
