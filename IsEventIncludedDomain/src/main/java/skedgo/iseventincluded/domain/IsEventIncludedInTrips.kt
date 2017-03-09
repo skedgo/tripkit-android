@@ -6,7 +6,7 @@ import javax.inject.Inject
 open class IsEventIncludedInTrips @Inject constructor(
     private val isEventIncludedRepository: IsEventIncludedRepository
 ) {
-  open fun call(eventId: String): Observable<Boolean>
+  open fun execute(eventId: String): Observable<Boolean>
       = isEventIncludedRepository.getIsEventIncluded(eventId)
       .map {
         when (it) {
