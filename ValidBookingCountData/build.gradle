@@ -14,6 +14,11 @@ android {
     minSdkVersion 10
     targetSdkVersion 25
   }
+
+  lintOptions {
+    // Changing to warning because of https://github.com/square/okio/issues/58.
+    warning 'InvalidPackage'
+  }
 }
 
 kapt { generateStubs = true }
