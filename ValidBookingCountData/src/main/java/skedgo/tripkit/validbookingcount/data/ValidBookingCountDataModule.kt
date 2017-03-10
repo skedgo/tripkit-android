@@ -11,7 +11,7 @@ import rx.schedulers.Schedulers
 import skedgo.tripkit.validbookingcount.domain.ValidBookingCountRepository
 
 @Module
-class ValidBookingCountModule {
+class ValidBookingCountDataModule {
   @Provides fun validBookingCountRepository(
       httpClient: OkHttpClient,
       context: Context
