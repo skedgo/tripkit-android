@@ -1,0 +1,57 @@
+apply plugin: 'com.android.library'
+apply plugin: 'kotlin-android'
+apply plugin: 'com.github.dcendents.android-maven'
+
+// For https://github.com/dcendents/android-maven-gradle-plugin.
+group = 'com.skedgo.tripkit'
+version = '1.0'
+
+android {
+  compileSdkVersion 25
+  buildToolsVersion "25.0.2"
+
+  defaultConfig {
+    minSdkVersion 10
+    targetSdkVersion 25
+  }
+
+  lintOptions {
+    // Changing to warning because of https://github.com/square/okio/issues/58.
+    warning 'InvalidPackage'
+  }
+}
+
+kapt { generateStubs = true }
+
+dependencies {
+  testCompile 'junit:junit:4.12'
+  testCompile 'org.robolectric:robolectric:3.3.1'
+  testCompile 'com.nhaarman:mockito-kotlin:1.0.1', { exclude group: 'org.jetbrains.kotlin' }
+
+  compile 'io.reactivex:rxjava:1.2.4'
+  compile "com.squareup.retrofit2:retrofit:2.0.2"
+  compile "com.squareup.retrofit2:converter-gson:2.0.2"
+  compile "com.squareup.retrofit2:adapter-rxjava:2.0.2"
+  compile 'com.google.code.gson:gson:2.6.1'
+
+  compile 'com.google.dagger:dagger:2.7'
+  kapt 'com.google.dagger:dagger-compiler:2.7'
+
+  // To generate immutable models.
+  // See more at http://immutables.github.io/.
+  kapt 'org.immutables:value:2.3.9'
+  provided 'org.immutables:value:2.3.9:annotations'
+  provided 'org.immutables:builder:2.3.9'
+  provided 'org.immutables:gson:2.3.9:annotations'
+
+  compile "org.jetbrains.kotlin:kotlin-stdlib:$kotlinVersion"
+  provided project(':ValidBookingCountDomain')
+}
+
+uploadArchives {
+  repositories {
+    mavenDeployer {
+      repository(url: "file://${tripkitAndroidMaven}")
+    }
+  }
+}
