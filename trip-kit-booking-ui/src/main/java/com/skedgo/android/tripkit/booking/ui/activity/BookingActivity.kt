@@ -74,7 +74,7 @@ open class BookingActivity : AnimatedTransitionActivity() {
     supportActionBar?.setDisplayShowHomeEnabled(true)
     supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
-   // binding.setViewModel(viewModel)
+    binding.setViewModel(viewModel)
 
     viewModel.onUpdateFormTitle
         .asObservable()
@@ -184,7 +184,9 @@ open class BookingActivity : AnimatedTransitionActivity() {
   private fun finishWithDone(form: BookingForm?) {
     val done = Intent()
     done.putExtra(EXTRA_DONE, true)
-    done.putExtra(KEY_FORM, form as Parcelable)
+    if (form != null) {
+      done.putExtra(KEY_FORM, form as Parcelable)
+    }
     setResult(Activity.RESULT_OK, done)
     finish()
   }

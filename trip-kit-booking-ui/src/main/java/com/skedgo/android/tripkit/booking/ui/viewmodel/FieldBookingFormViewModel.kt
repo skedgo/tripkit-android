@@ -7,10 +7,10 @@ class FieldBookingFormViewModel(val bookingForm: BookingForm,
                                 val onNextBookingForm: PublishSubject<BookingForm>
 ) : DisposableViewModel() {
 
-  val title: String get() = bookingForm.title ?: ""
-  val subTitle: String get() = bookingForm.subtitle ?: ""
-  val hasImageUrl: Boolean get() = !bookingForm.imageUrl.isNullOrEmpty()
-  val imageUrl: String? get() = bookingForm.imageUrl
+  val title get() = bookingForm.title ?: ""
+  val subTitle get() = bookingForm.subtitle ?: ""
+  val hasImageUrl get() = !bookingForm.imageUrl.isNullOrEmpty()
+  val imageUrl get() = bookingForm.imageUrl
 
   fun onBookingFormAction() {
     onNextBookingForm.onNext(bookingForm)

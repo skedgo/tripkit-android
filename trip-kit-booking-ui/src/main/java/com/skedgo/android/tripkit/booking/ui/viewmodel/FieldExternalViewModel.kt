@@ -7,7 +7,7 @@ class FieldExternalViewModel(val externalFormField: ExternalFormField,
                              val onExternalForm: PublishSubject<ExternalFormField>
 ) : DisposableViewModel() {
 
-  val title: String get() = externalFormField.title ?: ""
+  val title get() = externalFormField.title ?: ""
 
   fun onExternalFormAction() {
     onExternalForm.onNext(externalFormField)
