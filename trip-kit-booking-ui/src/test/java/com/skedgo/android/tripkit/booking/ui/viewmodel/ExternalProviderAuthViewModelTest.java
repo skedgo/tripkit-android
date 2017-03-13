@@ -42,8 +42,8 @@ public class ExternalProviderAuthViewModelTest {
 
     viewModel.handleArgs(args);
 
-    assertThat(viewModel.bookingForm).isEqualTo(bookingForm);
-    assertThat(viewModel.url().get()).isEqualTo("http://url");
+    assertThat(viewModel.getBookingForm()).isEqualTo(bookingForm);
+    assertThat(viewModel.getUrl().get()).isEqualTo("http://url");
   }
 
   @Test public void shouldSetArgsExternalAction() {
@@ -57,18 +57,18 @@ public class ExternalProviderAuthViewModelTest {
 
     viewModel.handleArgs(args);
 
-    assertThat(viewModel.bookingForm).isEqualTo(bookingForm);
-    assertThat(viewModel.url().get()).isEqualTo("http://external_url");
+    assertThat(viewModel.getBookingForm()).isEqualTo(bookingForm);
+    assertThat(viewModel.getUrl().get()).isEqualTo("http://external_url");
   }
 
   @Test public void shouldHandleAuthCallback() {
     BookingForm bookingForm = mock(BookingForm.class);
 
-    viewModel.bookingForm = mock(BookingForm.class);
+    viewModel.setBookingForm( mock(BookingForm.class));
 
     OAuth2CallbackHandler callbackHandler = mock(OAuth2CallbackHandler.class);
     when(callbackHandler.handleOAuthURL(
-        viewModel.bookingForm,
+        viewModel.getBookingForm(),
         Uri.parse("tripgo://oauth-callback?ABC"),
         "tripgo://oauth-callback"
     ))
@@ -79,17 +79,17 @@ public class ExternalProviderAuthViewModelTest {
         callbackHandler
     );
     assertThat(shouldOverride).isFalse();
-    assertThat(viewModel.showWebView().get()).isFalse();
+    assertThat(viewModel.getShowWebView().get()).isFalse();
   }
 
   @Test public void shouldHandleRetryCallback() {
     BookingForm bookingForm = mock(BookingForm.class);
 
-    viewModel.bookingForm = mock(BookingForm.class);
+    viewModel.setBookingForm( mock(BookingForm.class));
 
     OAuth2CallbackHandler callbackHandler = mock(OAuth2CallbackHandler.class);
     when(callbackHandler.handleRetryURL(
-        viewModel.bookingForm,
+        viewModel.getBookingForm(),
         Uri.parse("tripgo://booking_retry")
     ))
         .thenReturn(Observable.just(bookingForm));
@@ -99,7 +99,7 @@ public class ExternalProviderAuthViewModelTest {
         callbackHandler
     );
     assertThat(shouldOverride).isFalse();
-    assertThat(viewModel.showWebView().get()).isFalse();
+    assertThat(viewModel.getShowWebView().get()).isFalse();
   }
 
   @Test public void shouldHandleNoCallback() {
@@ -108,7 +108,7 @@ public class ExternalProviderAuthViewModelTest {
         mock(OAuth2CallbackHandler.class)
     );
     assertThat(shouldOverride).isTrue();
-    assertThat(viewModel.showWebView().get()).isTrue();
+    assertThat(viewModel.getShowWebView().get()).isTrue();
   }
 
   @Test public void shouldHandleBookingFormAuth() {
@@ -124,8 +124,8 @@ public class ExternalProviderAuthViewModelTest {
     subscriber.assertNoValues();
     subscriber.assertNoErrors();
 
-    assertThat(viewModel.bookingForm).isEqualTo(bookingForm);
-    assertThat(viewModel.url().get()).isEqualTo("http://url");
+    assertThat(viewModel.getBookingForm()).isEqualTo(bookingForm);
+    assertThat(viewModel.getUrl().get()).isEqualTo("http://url");
   }
 
   @Test public void shouldHandleNullBookingForm() {
@@ -173,7 +173,7 @@ public class ExternalProviderAuthViewModelTest {
     subscriber.assertNoValues();
     subscriber.assertNoErrors();
 
-    assertThat(viewModel.bookingForm).isEqualTo(bookingForm);
-    assertThat(viewModel.url().get()).isEqualTo("http://url");
+    assertThat(viewModel.getBookingForm()).isEqualTo(bookingForm);
+    assertThat(viewModel.getUrl().get()).isEqualTo("http://url");
   }
 }
