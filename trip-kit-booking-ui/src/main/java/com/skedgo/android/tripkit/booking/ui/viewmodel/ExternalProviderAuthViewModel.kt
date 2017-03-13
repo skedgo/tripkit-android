@@ -23,7 +23,7 @@ class ExternalProviderAuthViewModel @Inject internal constructor() : DisposableV
   val showWebView: ObservableBoolean = ObservableBoolean(false)
   val intentObservable: Observable<Intent> = publishSubjectIntent.asObservable()
 
-  @VisibleForTesting internal var bookingForm: BookingForm? = null
+  @VisibleForTesting var bookingForm: BookingForm? = null
 
   fun handleArgs(args: Bundle) {
     val form = args.getParcelable<BookingForm>(KEY_FORM)
@@ -43,7 +43,7 @@ class ExternalProviderAuthViewModel @Inject internal constructor() : DisposableV
   }
 
   @VisibleForTesting
-  internal fun handleCallback(webUrl: String, oAuth2CallbackHandler: OAuth2CallbackHandler): Boolean {
+  fun handleCallback(webUrl: String, oAuth2CallbackHandler: OAuth2CallbackHandler): Boolean {
 
     with(webUrl) {
       return when {
@@ -77,7 +77,7 @@ class ExternalProviderAuthViewModel @Inject internal constructor() : DisposableV
   }
 
   @VisibleForTesting
-  internal fun handledForm(form: BookingForm?): Observable<Intent> {
+  fun handledForm(form: BookingForm?): Observable<Intent> {
 
     return Observable.create { subscriber ->
       when {
@@ -94,7 +94,7 @@ class ExternalProviderAuthViewModel @Inject internal constructor() : DisposableV
     }
   }
 
-  private fun handleArgs(form: BookingForm) {
+  private fun handleArgs(form: BookingForm?) {
     this.bookingForm = form
     bookingForm?.let {
       when {
