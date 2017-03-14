@@ -7,6 +7,7 @@ import android.support.annotation.VisibleForTesting
 import android.webkit.WebView
 import android.webkit.WebViewClient
 import com.skedgo.android.tripkit.booking.ExternalFormField
+import com.skedgo.android.tripkit.booking.ui.activity.KEY_EXTERNAL_FORM
 import rx.Observable
 import rx.subjects.PublishSubject
 import javax.inject.Inject
@@ -14,7 +15,7 @@ import javax.inject.Inject
 class ExternalViewModel @Inject internal constructor() : DisposableViewModel() {
 
   private val publishSubjectNextUrl = PublishSubject.create<String>()
-  private var externalFormField: ExternalFormField? = null
+  @VisibleForTesting var externalFormField: ExternalFormField? = null
 
   val showWebView: ObservableBoolean = ObservableBoolean(false)
   val url: ObservableField<String> = ObservableField()
@@ -22,7 +23,7 @@ class ExternalViewModel @Inject internal constructor() : DisposableViewModel() {
 
 
   fun handleArgs(args: Bundle) {
-    externalFormField = args.getParcelable<ExternalFormField>("externalFormField")
+    externalFormField = args.getParcelable<ExternalFormField>(KEY_EXTERNAL_FORM)
     externalFormField?.let { url.set(it.value) }
   }
 
@@ -45,7 +46,7 @@ class ExternalViewModel @Inject internal constructor() : DisposableViewModel() {
   }
 
   @VisibleForTesting
-  internal fun handleCallback(webUrl: String): Boolean {
+  fun handleCallback(webUrl: String): Boolean {
     return when {
       webUrl.startsWith(externalFormField!!.disregardURL) -> {
         publishSubjectNextUrl.onNext(externalFormField!!.nextURL)

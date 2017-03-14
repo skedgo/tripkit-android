@@ -17,6 +17,8 @@ import skedgo.rxlifecyclecomponents.RxAppCompatActivity
 import java.io.Serializable
 import javax.inject.Inject
 
+const val KEY_EXTERNAL_FORM = "externalFormField"
+
 class ExternalWebActivity : RxAppCompatActivity() {
 
   companion object {
@@ -25,7 +27,7 @@ class ExternalWebActivity : RxAppCompatActivity() {
         context: Context,
         externalFormField: ExternalFormField): Intent {
       return Intent(context, ExternalWebActivity::class.java)
-          .putExtra("externalFormField", externalFormField as Serializable)
+          .putExtra(KEY_EXTERNAL_FORM, externalFormField as Serializable)
     }
   }
 

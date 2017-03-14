@@ -4,11 +4,11 @@ import com.skedgo.android.tripkit.booking.BookingForm
 import javax.inject.Inject
 
 
-class IsDoneAction @Inject constructor(
+open class IsDoneAction @Inject constructor(
     private val isCancelAction: IsCancelAction
 ) {
 
-  fun execute(bookingForm: BookingForm?): Boolean {
+  open fun execute(bookingForm: BookingForm?): Boolean {
     return bookingForm?.action?.url == null && !isCancelAction.execute(bookingForm)
   }
 

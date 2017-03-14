@@ -6,7 +6,7 @@ import com.skedgo.android.tripkit.booking.InputForm
 import rx.Observable
 import javax.inject.Inject
 
-class GetBookingFormFromAction @Inject constructor(
+open class GetBookingFormFromAction @Inject constructor(
     private val bookingService: BookingService
 ) {
 

@@ -6,7 +6,7 @@ import javax.inject.Inject
 
 open class IsCancelAction @Inject constructor() {
 
-  fun execute(bookingForm: BookingForm?): Boolean {
+  open fun execute(bookingForm: BookingForm?): Boolean {
     val bookingStatusField = bookingForm?.form?.firstOrNull()?.fields?.firstOrNull()
 
     return bookingStatusField?.value == "Cancelled"
