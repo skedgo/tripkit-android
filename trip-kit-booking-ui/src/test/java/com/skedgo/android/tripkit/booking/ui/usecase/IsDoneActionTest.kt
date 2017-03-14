@@ -30,5 +30,39 @@ class IsDoneActionTest {
     assertThat(actualIsDoneAction).isTrue()
   }
 
-  
+  @Test fun shouldNotBeDoneCancel() {
+
+    val bookingForm = mock<BookingForm>()
+    val action = mock<BookingAction>()
+    whenever(action.url).thenReturn("url")
+    whenever(bookingForm.action).thenReturn(action)
+    val formGroup = mock<FormGroup>()
+    val formField = mock<FormField>()
+    whenever(formField.value).thenReturn("Cancelled")
+    whenever(bookingForm.form).thenReturn(listOf(formGroup))
+    whenever(formGroup.fields).thenReturn(listOf(formField))
+
+    given(isCancelAction.execute(bookingForm)).willReturn(true)
+
+    val actualIsDoneAction = isDoneAction.execute(bookingForm)
+    assertThat(actualIsDoneAction).isFalse()
+  }
+
+  @Test fun shouldBeDoneAction() {
+
+    val bookingForm = mock<BookingForm>()
+    val action = mock<BookingAction>()
+    whenever(action.url).thenReturn(null)
+    whenever(bookingForm.action).thenReturn(action)
+    val formGroup = mock<FormGroup>()
+    val formField = mock<FormField>()
+    whenever(formField.value).thenReturn("any action")
+    whenever(bookingForm.form).thenReturn(listOf(formGroup))
+    whenever(formGroup.fields).thenReturn(listOf(formField))
+
+    given(isCancelAction.execute(bookingForm)).willReturn(false)
+
+    val actualIsDoneAction = isDoneAction.execute(bookingForm)
+    assertThat(actualIsDoneAction).isTrue()
+  }
 }

@@ -10,21 +10,19 @@ import com.skedgo.android.tripkit.booking.ui.BuildConfig
 import com.skedgo.android.tripkit.booking.ui.OAuth2CallbackHandler
 import com.skedgo.android.tripkit.booking.ui.TestRunner
 import com.skedgo.android.tripkit.booking.ui.activity.KEY_FORM
-import org.junit.Before
+import org.assertj.core.api.Assertions.assertThat
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.robolectric.annotation.Config
 import rx.Observable
 import rx.observers.TestSubscriber
-import org.assertj.core.api.Assertions.assertThat
 
 @RunWith(TestRunner::class)
 @Config(constants = BuildConfig::class)
-class ExternalProviderAuthViewModelTest2 {
-  private var viewModel: ExternalProviderAuthViewModel? = null
+class ExternalProviderAuthViewModelTest {
 
-  @Before fun before() {
-    viewModel = ExternalProviderAuthViewModel()
+  private val viewModel: ExternalProviderAuthViewModel by lazy {
+    ExternalProviderAuthViewModel()
   }
 
   @Test fun shouldSetArgsAuth() {
@@ -36,10 +34,10 @@ class ExternalProviderAuthViewModelTest2 {
 
     args.putParcelable(KEY_FORM, bookingForm)
 
-    viewModel!!.handleArgs(args)
+    viewModel.handleArgs(args)
 
-    assertThat(viewModel!!.bookingForm).isEqualTo(bookingForm)
-    assertThat(viewModel!!.url.get()).isEqualTo("http://url")
+    assertThat(viewModel.bookingForm).isEqualTo(bookingForm)
+    assertThat(viewModel.url.get()).isEqualTo("http://url")
   }
 
   @Test fun shouldSetArgsExternalAction() {
@@ -51,60 +49,60 @@ class ExternalProviderAuthViewModelTest2 {
 
     args.putParcelable(KEY_FORM, bookingForm)
 
-    viewModel!!.handleArgs(args)
+    viewModel.handleArgs(args)
 
-    assertThat(viewModel!!.bookingForm).isEqualTo(bookingForm)
-    assertThat(viewModel!!.url.get()).isEqualTo("http://external_url")
+    assertThat(viewModel.bookingForm).isEqualTo(bookingForm)
+    assertThat(viewModel.url.get()).isEqualTo("http://external_url")
   }
 
   @Test fun shouldHandleAuthCallback() {
     val bookingForm = mock<BookingForm>()
 
-    viewModel!!.bookingForm = mock<BookingForm>()
+    viewModel.bookingForm = mock<BookingForm>()
 
     val callbackHandler = mock<OAuth2CallbackHandler>()
     whenever(callbackHandler.handleOAuthURL(
-        viewModel!!.bookingForm!!,
+        viewModel.bookingForm!!,
         Uri.parse("tripgo://oauth-callback?ABC"),
         "tripgo://oauth-callback"
     ))
         .thenReturn(Observable.just<BookingForm>(bookingForm))
 
-    val shouldOverride = viewModel!!.handleCallback(
+    val shouldOverride = viewModel.handleCallback(
         "tripgo://oauth-callback?ABC",
         callbackHandler
     )
     assertThat(shouldOverride).isFalse()
-    assertThat(viewModel!!.showWebView.get()).isFalse()
+    assertThat(viewModel.showWebView.get()).isFalse()
   }
 
   @Test fun shouldHandleRetryCallback() {
     val bookingForm = mock<BookingForm>()
 
-    viewModel!!.bookingForm = mock<BookingForm>()
+    viewModel.bookingForm = mock<BookingForm>()
 
     val callbackHandler = mock<OAuth2CallbackHandler>()
     whenever(callbackHandler.handleRetryURL(
-        viewModel!!.bookingForm!!,
+        viewModel.bookingForm!!,
         Uri.parse("tripgo://booking_retry")
     ))
         .thenReturn(Observable.just<BookingForm>(bookingForm))
 
-    val shouldOverride = viewModel!!.handleCallback(
+    val shouldOverride = viewModel.handleCallback(
         "tripgo://booking_retry",
         callbackHandler
     )
     assertThat(shouldOverride).isFalse()
-    assertThat(viewModel!!.showWebView.get()).isFalse()
+    assertThat(viewModel.showWebView.get()).isFalse()
   }
 
   @Test fun shouldHandleNoCallback() {
-    val shouldOverride = viewModel!!.handleCallback(
+    val shouldOverride = viewModel.handleCallback(
         "http://www.uber.login",
         mock<OAuth2CallbackHandler>()
     )
     assertThat(shouldOverride).isTrue()
-    assertThat(viewModel!!.showWebView.get()).isTrue()
+    assertThat(viewModel.showWebView.get()).isTrue()
   }
 
   @Test fun shouldHandleBookingFormAuth() {
@@ -114,20 +112,20 @@ class ExternalProviderAuthViewModelTest2 {
 
     val subscriber = TestSubscriber<Intent>()
 
-    viewModel!!.handledForm(bookingForm).subscribe(subscriber)
+    viewModel.handledForm(bookingForm).subscribe(subscriber)
 
     subscriber.awaitTerminalEvent()
     subscriber.assertNoValues()
     subscriber.assertNoErrors()
 
-    assertThat(viewModel!!.bookingForm).isEqualTo(bookingForm)
-    assertThat(viewModel!!.url.get()).isEqualTo("http://url")
+    assertThat(viewModel.bookingForm).isEqualTo(bookingForm)
+    assertThat(viewModel.url.get()).isEqualTo("http://url")
   }
 
   @Test fun shouldHandleNullBookingForm() {
 
     val subscriber = TestSubscriber<Intent>()
-    viewModel!!.handledForm(null).subscribe(subscriber)
+    viewModel.handledForm(null).subscribe(subscriber)
 
     subscriber.awaitTerminalEvent()
     subscriber.assertNoErrors()
@@ -145,7 +143,7 @@ class ExternalProviderAuthViewModelTest2 {
 
     val subscriber = TestSubscriber<Intent>()
 
-    viewModel!!.handledForm(bookingForm).subscribe(subscriber)
+    viewModel.handledForm(bookingForm).subscribe(subscriber)
 
     subscriber.awaitTerminalEvent()
     subscriber.assertNoErrors()
@@ -163,13 +161,13 @@ class ExternalProviderAuthViewModelTest2 {
 
     val subscriber = TestSubscriber<Intent>()
 
-    viewModel!!.handledForm(bookingForm).subscribe(subscriber)
+    viewModel.handledForm(bookingForm).subscribe(subscriber)
 
     subscriber.awaitTerminalEvent()
     subscriber.assertNoValues()
     subscriber.assertNoErrors()
 
-    assertThat(viewModel!!.bookingForm).isEqualTo(bookingForm)
-    assertThat(viewModel!!.url.get()).isEqualTo("http://url")
+    assertThat(viewModel.bookingForm).isEqualTo(bookingForm)
+    assertThat(viewModel.url.get()).isEqualTo("http://url")
   }
 }
