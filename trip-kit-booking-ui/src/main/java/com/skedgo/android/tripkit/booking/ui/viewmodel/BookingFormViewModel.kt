@@ -47,7 +47,7 @@ class BookingFormViewModel
   val onErrorRetry: PublishSubject<String> = PublishSubject.create()
 
   @VisibleForTesting var bookingForm: BookingForm? = null
-  @VisibleForTesting  var bookingError: BookingError? = null
+  @VisibleForTesting var bookingError: BookingError? = null
 
   fun onAction() {
     when {
@@ -69,15 +69,17 @@ class BookingFormViewModel
 
     val type = bundle.getInt(KEY_TYPE, BOOKING_TYPE_URL)
 
-    return when (type) {
-      BOOKING_TYPE_URL -> getBookingFormFromUrl.execute(bundle.getString(KEY_URL))
-      BOOKING_TYPE_FORM -> Observable.just(bundle.getParcelable(KEY_FORM))
-      BOOKING_TYPE_ACTION -> getBookingFormFromAction.execute(bundle.getParcelable(KEY_FORM))
+    return when {
+      type == BOOKING_TYPE_URL && bundle.containsKey(KEY_URL) ->
+        getBookingFormFromUrl.execute(bundle.getString(KEY_URL))
+      type == BOOKING_TYPE_FORM && bundle.containsKey(KEY_FORM) ->
+        Observable.just(bundle.getParcelable(KEY_FORM))
+      type == BOOKING_TYPE_ACTION && bundle.containsKey(KEY_FORM) ->
+        getBookingFormFromAction.execute(bundle.getParcelable(KEY_FORM))
       else -> Observable.error(Error("Wrong booking form request parameter"))
     }
         .observeOn(mainThread())
         .doOnNext { nextBookingForm ->
-
           if (nextBookingForm == null) {
             onDone.onNext(nextBookingForm)
           } else {
@@ -85,7 +87,6 @@ class BookingFormViewModel
             updateBookingFormInfo()
             updateFieldList()
           }
-
         }
         .doOnError { bookingError ->
           isLoading.set(false)
@@ -125,7 +126,7 @@ class BookingFormViewModel
     showAction.set(bookingForm?.action != null)
   }
 
-  private fun updateFieldList() {
+  @VisibleForTesting fun updateFieldList() {
     bookingForm?.form
         ?.forEach {
           if (it.title != null) {
