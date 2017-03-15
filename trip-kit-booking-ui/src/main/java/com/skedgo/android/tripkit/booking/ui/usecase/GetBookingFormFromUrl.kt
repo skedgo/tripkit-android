@@ -13,5 +13,4 @@ open class GetBookingFormFromUrl @Inject constructor(
     return bookingService.getFormAsync(url)
   }
 
-
 }

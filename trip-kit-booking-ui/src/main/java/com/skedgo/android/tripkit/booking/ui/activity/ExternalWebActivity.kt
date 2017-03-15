@@ -31,12 +31,10 @@ class ExternalWebActivity : RxAppCompatActivity() {
     }
   }
 
-
   @Inject lateinit var viewModel: ExternalViewModel
   val binding: ExternalWebBinding by lazy {
     DataBindingUtil.setContentView<ExternalWebBinding>(this, R.layout.external_web)
   }
-
 
   public override fun onDestroy() {
     viewModel.dispose()
@@ -72,6 +70,5 @@ class ExternalWebActivity : RxAppCompatActivity() {
           finish()
         }
   }
-
 
 }

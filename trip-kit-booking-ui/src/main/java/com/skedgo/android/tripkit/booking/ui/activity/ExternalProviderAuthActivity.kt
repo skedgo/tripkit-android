@@ -34,13 +34,11 @@ class ExternalProviderAuthActivity : RxAppCompatActivity() {
     }
   }
 
-
   @Inject lateinit var viewModel: ExternalProviderAuthViewModel
   @Inject lateinit var oAuth2CallbackHandler: OAuth2CallbackHandler
   val binding: ExternalProviderAuthBinding by lazy {
     DataBindingUtil.setContentView<ExternalProviderAuthBinding>(this, R.layout.external_provider_auth)
   }
-
 
   public override fun onDestroy() {
     viewModel.dispose()
@@ -78,6 +76,5 @@ class ExternalProviderAuthActivity : RxAppCompatActivity() {
           finish()
         }
   }
-
 
 }

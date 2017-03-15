@@ -3,7 +3,6 @@ package com.skedgo.android.tripkit.booking.ui.usecase
 import com.skedgo.android.tripkit.booking.BookingForm
 import javax.inject.Inject
 
-
 open class IsDoneAction @Inject constructor(
     private val isCancelAction: IsCancelAction
 ) {

@@ -101,23 +101,18 @@ class BookingFormViewModel
   }
 
   @VisibleForTesting fun showError(error: BookingError) {
-
     bookingError = error
 
     hasError.set(true)
-
     errorTitle.set(error.title)
     errorMessage.set(error.error)
-
     showRetry.set(error.recoveryTitle != null && error.url != null)
-
     retryText.set(
         if (error.recoveryTitle != null && error.url != null) {
           error.recoveryTitle
         } else {
           resources.getString(R.string.retry)
         })
-
   }
 
   @VisibleForTesting fun updateBookingFormInfo() {
