@@ -56,9 +56,8 @@ dependencies {
   compile 'com.jakewharton.picasso:picasso2-okhttp3-downloader:1.0.2'
   compile 'me.tatarka.bindingcollectionadapter:bindingcollectionadapter-recyclerview:1.3.0'
 
-  compile 'com.github.skedgo:RxLifecycleComponents:v1.0'
+  compile 'com.github.skedgo:RxLifecycleComponents:v1.3'
   compile 'com.trello:rxlifecycle:1.0'
-
   compile 'com.github.skedgo:ActivityAnimations:v1.1'
 
   compile "org.jetbrains.kotlin:kotlin-stdlib:$kotlinVersion"
