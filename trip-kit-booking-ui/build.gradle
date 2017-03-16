@@ -62,7 +62,7 @@ dependencies {
   compile 'com.github.skedgo:ActivityAnimations:v1.1'
 
   compile "org.jetbrains.kotlin:kotlin-stdlib:$kotlinVersion"
-  kapt 'com.android.databinding:compiler:2.2.3'
+  kapt "com.android.databinding:compiler:$androidPluginVersion"
 }
 
 uploadArchives {
