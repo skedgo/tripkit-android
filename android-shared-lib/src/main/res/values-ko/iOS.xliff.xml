@@ -139,8 +139,12 @@
 	<string name="_pattern_every__pattern">%1$s %2$s마다</string>
 	<!--Airline flight number with %airline and %flightNumber, e.g., 'Qantas flight QF1'. (old key: AirlineFlightNumber)-->
 	<string name="_pattern_flight__pattern">%1$s 항공편 %2$s</string>
+	<!--'About' for a provider, usually takes users to view a web page, e.g., 'About PayiQ'-->
+	<string name="about__pattern">%1$s에 대한</string>
 	<!--Error title when access to location hasn't been granted, but location is required.-->
 	<string name="access_to_location_services_required_dot">위치 서비스 연결이 필요합니다.</string>
+	<!--Error text to show when trying to use a feature which requires an account, but the user hasn't set one up (yet).-->
+	<string name="account_required">계정이 필요합니다.</string>
 	<!--Add reminder activity title-->
 	<string name="add_reminder">미리 알림 추가</string>
 	<!--No comment provided by engineer.-->
@@ -177,12 +181,18 @@
 	<string name="auto">자동</string>
 	<!--Header for settings of reminders automatically added by TripGo through the agenda-->
 	<string name="automatic_reminders">자동 알림</string>
+	<!--No comment provided by engineer.-->
+	<string name="available_bikes">Available bikes</string>
+	<!--No comment provided by engineer.-->
+	<string name="available_spots">Available spots</string>
 	<!--Response to positive answer to question whether TripGo is useful, prompting for App Store rating.-->
 	<string name="awesome_exclam_how_about_rating_us_question">좋아요! 저희에게 별점을 주시겠습니까?</string>
 	<!--Book a taxi-->
 	<string name="book_a_taxi">택시 예약하기</string>
 	<!--Description on empty bookings screen-->
 	<string name="bookings_made_with_tripgo_will_appear_here_dot">TripGo를 통해서 한 예약들은 여기에 표시됩니다.</string>
+	<!--Informing users that they may be viewing cached bookings-->
+	<string name="bookings_may_be_outdated">Bookings may be outdated</string>
 	<!--Response to negative answer to question whether TripGo is useful, prompting for feedback.-->
 	<string name="bummer_dot_dot_dot_how_about_some_feedback_question">아아악... 솔직한 의견을 주시겠습니까?</string>
 	<!--Calendar-->
@@ -203,6 +213,8 @@
 	<string name="convenience_is_affected_by_things_such_as_changing_public_transport_services_coma_the_amount_of_walking_coma_and_finding_a_taxi_dot">편의성은 대중교통 서비스, 걸어야 하는 거리 그리고 택시 잡기같은 변수에 영향을 받을 수 있습니다.</string>
 	<!--Error title when TripGo couldn't identify the user's current city.-->
 	<string name="could_not_find_your_city_dot">당신의 도시를 찾을 수 없습니다.</string>
+	<!--Title for button that allows users to create a user account-->
+	<string name="create_account">Create account</string>
 	<!--Title for critical error-->
 	<string name="critical_error">치명적인 오류</string>
 	<!--No comment provided by engineer.-->
@@ -225,12 +237,16 @@
 	<string name="duration">소요시간</string>
 	<!--Used in countdown context, indicating when a ticket becomes valid-->
 	<string name="effective_in">에 유효함</string>
+	<!--No comment provided by engineer.-->
+	<string name="empty_docks">Empty docks</string>
 	<!--Title for the time an event ends (including date information)-->
 	<string name="end_date">종료일</string>
 	<!--No comment provided by engineer.-->
 	<string name="end_user_licence_agreement">최종 사용자 라이선스 계약</string>
 	<!--Carbon preference-->
-	<string name="environment">환경</string>
+	<string name="environment">친환경</string>
+	<!--No comment provided by engineer.-->
+	<string name="error_encountered">Error encountered</string>
 	<!--No comment provided by engineer.-->
 	<string name="event">일정</string>
 	<!--No comment provided by engineer.-->
@@ -283,9 +299,11 @@
 	<!--Description for button to get on or off at the selected public transport stop rather than where TripGo suggested.-->
 	<string name="get_on_or_off_here">여기서 내리거나 타기</string>
 	<!--No comment provided by engineer.-->
-	<string name="has_tripgo_been_useful_to_you_question">TripGo이 유용했습니까?</string>
+	<string name="has_tripgo_been_useful_to_you_question">TripGo 사용이 유용했다고 생각하세요?</string>
 	<!--Map mode 'streets + satellite'-->
 	<string name="hybrid">하이브리드</string>
+	<!--Instruction text to show when user is trying to make a booking, but he/she needs to create an account first.-->
+	<string name="in_order_to_make_bookings_coma_you_either_need_to_log_into_your_device_with_an_apple_id_or_you_need_to_create_a_tripgo_account_dot">In order to make bookings, you either need to log into your device with an Apple ID or you need to create a TripGo Account.</string>
 	<!--Include event action-->
 	<string name="include">포함</string>
 	<string name="include_step_count">Include Step Count</string>
@@ -345,6 +363,8 @@
 	<string name="no__apostfrom_apost_location_selected">출발지가 선택되지 않음</string>
 	<!--No comment provided by engineer.-->
 	<string name="no__apostto_apost_location_selected">목적지가 선택되지 않음</string>
+	<!--Text to show on screen that lists bookings if user hasn't made a booking yet.-->
+	<string name="no_bookings_yet_exclam">No bookings yet!</string>
 	<!--Error title for when no calendar found.-->
 	<string name="no_calendar_found_dot">캘린더를 찾을 수 없습니다.</string>
 	<!--No comment provided by engineer.-->
@@ -354,7 +374,7 @@
 	<!--Negative answer to follow-up question for rating or feedback.-->
 	<string name="no_coma_thanks">아니오.</string>
 	<!--Negative answer to question whether TripGo is useful.-->
-	<string name="not_really">별로입니다.</string>
+	<string name="not_really">아니오</string>
 	<!--Countdown cell 'now' indicator-->
 	<string name="now">지금</string>
 	<!--No comment provided by engineer.-->
@@ -382,10 +402,16 @@
 	<string name="plan_a_trip_on_your_phone_dot">경로를 입력하세요.</string>
 	<!--Error recovery suggestion for when routing produced no results (but no specific error was returned from routing).-->
 	<string name="please_adjust_your_query_and_try_again_dot">입력값을 바꾸거나 다시 시도하세요.</string>
+	<!--No comment provided by engineer.-->
+	<string name="please_be_advised_that_you_are_viewing_cached_copies_of_your_bookings">Please be advised that you are viewing cached copies of your bookings</string>
 	<!--Error recovery suggestion for when no calendar found.-->
 	<string name="please_check_your_calendar_app_and_make_sure_you_have_a_calendar_configured_dot">캘린더 어플라케이션이 설정되어있는지 확인하세요.</string>
 	<!--Alert message that asks users to provide the missing address for a new event.-->
 	<string name="please_specify_an_address_dot">정확한 주소를 입력해 주세요.</string>
+	<!--No comment provided by engineer.-->
+	<string name="powered_by">제공</string>
+	<!--No comment provided by engineer.-->
+	<string name="powered_by__pattern">Powered by %1$s</string>
 	<!--Label for 'Overall' button to sort trips by their overall total score considering all factors. (old key: ViewOverallButton)-->
 	<string name="preferred">선호</string>
 	<!--Title for preferred public transport modes.-->
@@ -410,6 +436,8 @@
 	<string name="remove_and_exclude_event">일정에서 제외하고 삭제</string>
 	<!--Unsave trip action-->
 	<string name="remove_from_agenda">일정에서 제거</string>
+	<!--No comment provided by engineer.-->
+	<string name="remove_from_favourites">Remove from favourites</string>
 	<!--Confirmation that something got removed HUD notice-->
 	<string name="removed">삭제됨</string>
 	<!--No comment provided by engineer.-->
@@ -435,6 +463,8 @@
 	<string name="return_trip">왕복</string>
 	<!--No comment provided by engineer.-->
 	<string name="review_eula">EULA 리뷰</string>
+	<!--No comment provided by engineer.-->
+	<string name="route_from">Route from</string>
 	<!--Title for options for routing to this location, options are: current location, <some previously selected location>.-->
 	<string name="route_here">여기로 경로탐색</string>
 	<!--Explanation for what routines are compared to calendar events and stays. Can be long-ish. (old key: HabitualEventDescription)-->
@@ -446,9 +476,9 @@
 	<!--Map mode 'satellite'-->
 	<string name="satellite">위성</string>
 	<!--Price preference-->
-	<string name="save_money">비용 절감</string>
+	<string name="save_money">비용</string>
 	<!--Time preference-->
-	<string name="save_time">시간 절약</string>
+	<string name="save_time">시간</string>
 	<string name="search_for_a_city">도시 검색</string>
 	<!--Agenda onboarding: placeholder text for search bar for 'home'.-->
 	<string name="search_for_your_home_address">집 주소 검색</string>
@@ -487,6 +517,8 @@
 	<!--Speed preference 'slow'-->
 	<string name="slow">천천히</string>
 	<!--No comment provided by engineer.-->
+	<string name="some_of_the_trips_failed_to_download_dot_please_try_again">Some of the trips failed to download. Please try again</string>
+	<!--No comment provided by engineer.-->
 	<string name="sorry_dot_tripgo_doesn_apostt_work_here_yet_exclam">죄송합니다.  여기는 TripGo 서비스 지역을 벗어납니다.</string>
 	<!--Spread the word preference-->
 	<string name="spread_the_word">널리 알리기</string>
@@ -498,7 +530,6 @@
 	<string name="stop_code_2points__pattern">중지 코드: %1$s</string>
 	<!--Map mode 'streets'-->
 	<string name="streets">도로 뷰</string>
-	<!--Contact support error button-->
 	<string name="support">고객 지원</string>
 	<!--Walkthrough-->
 	<string name="swipe_dates_to_navigate_between_weeks">날짜를 스와이프하세요.</string>
@@ -532,9 +563,11 @@
 	<string name="times">시간</string>
 	<!--Title, e.g., for event or favourite. (old key: TitleFavouriteName)-->
 	<string name="title">제목</string>
+	<!--No comment provided by engineer.-->
+	<string name="total_spaces">Total spaces</string>
 	<!--Type of something, e.g., an event (calendar event, stay, routine) or a vehicle (car, motorbike, bicycle). (old key: TypeEvent)-->
 	<string name="type">종류</string>
-	<!--No comment provided by engineer.-->
+	<!--This is followed by some date, e.g., Last updated: 11 Nov, 9:28am-->
 	<string name="updated_2points_">업데이트 완료</string>
 	<!--Explanation for what stays are compared to calendar events and routines. Can be long-ish. (old key: StayEventDescription)-->
 	<string name="use_for_hotels_while_travelling_coma_so_that_the_agenda_starts_and_ends_at_the_correct_location_dot">여행하는 동안 일정이 맞는 위치에서 시작과 끝이 실행되게 호텔을 사용합니다.</string>
@@ -567,7 +600,7 @@
 	<!--Positive answer to follow-up question for rating or feedback.-->
 	<string name="yeah_coma_ok_exclam">네, 감사합니다.</string>
 	<!--Positive answer to question whether TripGo is useful.-->
-	<string name="yes_exclam">예이!</string>
+	<string name="yes_exclam">네</string>
 	<!--Alert if service running late/early, meaning that the user might not make the next service.-->
 	<string name="you_might_not_make_this_transfer_dot">경유 옵션을 다시 생각해 보세요.</string>
 	<!--No comment provided by engineer.-->
@@ -619,6 +652,8 @@
 	<string name="could_not_find_transit_stop_dot">환승 정류장을 찾을 수 없습니다.</string>
 	<!--Destination of the bus-->
 	<string name="direction">방향</string>
+	<!--To disconnect/unlink from a service provider, e.g., Uber-->
+	<string name="disconnect">접속끊기</string>
 	<!--As in 'this bus/train is empty'-->
 	<string name="empty">비어 있음</string>
 	<!--As in 'this bus/train has few seats available'-->
@@ -686,6 +721,8 @@
 	<string name="search_for_this_stop_again_or_try_again_later_dot_dot">이 목적지 검색을 중단하거나 나중에 다시 시도해주세요.</string>
 	<!--Send SMS action-->
 	<string name="send_sms">SMS 보내기</string>
+	<!--Set up to connect/link to a service provider, e.g., Uber-->
+	<string name="setup">설정</string>
 	<!--Show website action-->
 	<string name="show_website">웹사이트 보기</string>
 	<!--As in 'this bus/train is fairly full and has standing room only'-->
@@ -754,6 +791,8 @@
 	<string name="close">닫기</string>
 	<!--Title on the button that asks users to confirm if they want to proceed with booking-->
 	<string name="confirm">확인</string>
+	<!--Title for button that allows users to contact our support team to help resolve some error in the app.-->
+	<string name="contact_support">Contact support</string>
 	<!--Error title when GPS failed.-->
 	<string name="could_not_determine_your_current_location_dot">회원님의 위치를 파악 할 수 없습니다.</string>
 	<!--Could not download supported regions warning. (old key: CouldNotDownloadSupportedRegions)-->
@@ -846,6 +885,8 @@
 	<string name="please_verify_the_location">위치를 확인 하십시오</string>
 	<!--Location picker 'no autocompletion results' text. Needs to match text on keyboard.-->
 	<string name="press__apostsearch_apost_for_more_dot_dot_dot">더 자세한 정보를 원하시면 검색을 눌러주세요.</string>
+	<!--No comment provided by engineer.-->
+	<string name="read_more_dot_dot_dot">Read more...</string>
 	<!--Title for section that asks users where payment receipt should be sent-->
 	<string name="receipt">영수증</string>
 	<!--Repeats daily-->
@@ -929,4 +970,4 @@
 	<string name="starts_at__pattern">%1$s에 시작</string>
 
 </resources>
-<!-- This is an auto generated file (Wed Jan 18 09:40:37 ART 2017) -->
+<!-- This is an auto generated file (Fri Mar 17 11:36:55 ART 2017) -->

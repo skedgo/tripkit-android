@@ -132,7 +132,6 @@
 	<string name="influence_trip_results_by_setting_what_aposts_most_important_to_you">Beïnvloed de resultaten door in te stellen wat voor u belangrijk is</string>
 	<string name="allow_tripgo_to_anonymously_track_your_app_usage">Geef TripGo toestemming om anoniem app gegevens te verzamelen</string>
 	<string name="cycling_speed">Fietssnelheid</string>
-	<string name="contact_support">Ondersteuning</string>
 	<string name="end_of_public_transport">Verlaten openbaar vervoer</string>
 	<string name="track_location">Track Locatie</string>
 	<string name="sorted_by_price">Gesort. op Prijs</string>
@@ -175,10 +174,12 @@
 	<string name="you_are_already_at_nps_exclam">U bevindt zich al in %s!</string>
 	<!--Settings option to enable/disable news (notifications).-->
 	<string name="news">Nieuws</string>
-	<!--In transport mode detail, setting to enable that transport mode to be included in trips.
+	<!--In transport mode detail, setting to enable that transport mode to be included in
+          trips.
         -->
 	<string name="include_in_trips">Meetellen bij reizen</string>
-	<!--Used for parking slots. Format string for multiple slots. Example: 10 slots available
+	<!--Used for parking slots. Format string for multiple slots. Example: 10 slots
+          available
         -->
 	<string name="nps_slots_available">%s slots beschikbaar</string>
 	<!--Used for parking slots. Format string for one slots. Example: 1 slot available-->
@@ -193,4 +194,4 @@
 	<string name="ticket_info">Ticket Info</string>
 
 </resources>
-<!-- This is an auto generated file (Thu Jan 19 14:10:19 ART 2017) -->
+<!-- This is an auto generated file (Fri Mar 17 16:26:38 ART 2017) -->

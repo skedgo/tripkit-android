@@ -139,8 +139,12 @@
 	<string name="_pattern_every__pattern">%1$s alle %2$s</string>
 	<!--Airline flight number with %airline and %flightNumber, e.g., 'Qantas flight QF1'. (old key: AirlineFlightNumber)-->
 	<string name="_pattern_flight__pattern">%1$s Flug %2$s</string>
+	<!--'About' for a provider, usually takes users to view a web page, e.g., 'About PayiQ'-->
+	<string name="about__pattern">Über %1$s</string>
 	<!--Error title when access to location hasn't been granted, but location is required.-->
 	<string name="access_to_location_services_required_dot">Zugriff zu Ortungsdienst benötigt.</string>
+	<!--Error text to show when trying to use a feature which requires an account, but the user hasn't set one up (yet).-->
+	<string name="account_required">Kundenkonto erforderlich</string>
 	<!--Add reminder activity title-->
 	<string name="add_reminder">Erinnerung hinzufügen</string>
 	<!--No comment provided by engineer.-->
@@ -177,12 +181,18 @@
 	<string name="auto">autom.</string>
 	<!--Header for settings of reminders automatically added by TripGo through the agenda-->
 	<string name="automatic_reminders">Automatische Erinnerungen</string>
+	<!--No comment provided by engineer.-->
+	<string name="available_bikes">Verfügbare Fahrräder</string>
+	<!--No comment provided by engineer.-->
+	<string name="available_spots">Anzahl freie Plätze</string>
 	<!--Response to positive answer to question whether TripGo is useful, prompting for App Store rating.-->
 	<string name="awesome_exclam_how_about_rating_us_question">Wunderbar! Willst du TripGo bewerten?</string>
 	<!--Book a taxi-->
 	<string name="book_a_taxi">Taxi buchen</string>
 	<!--Description on empty bookings screen-->
 	<string name="bookings_made_with_tripgo_will_appear_here_dot">Buchungen, die mit TripGo gemacht wurden, werden hier angezeigt.</string>
+	<!--Informing users that they may be viewing cached bookings-->
+	<string name="bookings_may_be_outdated">Buchungen könnten veraltet sein</string>
 	<!--Response to negative answer to question whether TripGo is useful, prompting for feedback.-->
 	<string name="bummer_dot_dot_dot_how_about_some_feedback_question">Schade. Willst du uns sagen warum?</string>
 	<!--Calendar-->
@@ -203,6 +213,8 @@
 	<string name="convenience_is_affected_by_things_such_as_changing_public_transport_services_coma_the_amount_of_walking_coma_and_finding_a_taxi_dot">Komfort wird davon beeinflusst, wie oft Verkehrsmittel gewechselt werden müssen, wieviel man laufen muss, die Schwierigkeit ein Taxi finden usw.</string>
 	<!--Error title when TripGo couldn't identify the user's current city.-->
 	<string name="could_not_find_your_city_dot">TripGo konnte deine Stadt nicht finden.</string>
+	<!--Title for button that allows users to create a user account-->
+	<string name="create_account">Konto erstellen</string>
 	<!--Title for critical error-->
 	<string name="critical_error">Kritischer Fehler</string>
 	<!--No comment provided by engineer.-->
@@ -225,12 +237,16 @@
 	<string name="duration">Dauer</string>
 	<!--Used in countdown context, indicating when a ticket becomes valid-->
 	<string name="effective_in">Gültig in</string>
+	<!--No comment provided by engineer.-->
+	<string name="empty_docks">Anzahl freie Plätze</string>
 	<!--Title for the time an event ends (including date information)-->
 	<string name="end_date">Ende</string>
 	<!--No comment provided by engineer.-->
 	<string name="end_user_licence_agreement">Endnutzer-Lizenzvertrag</string>
 	<!--Carbon preference-->
 	<string name="environment">Umweltfreundlich</string>
+	<!--No comment provided by engineer.-->
+	<string name="error_encountered">Fehler aufgetreten</string>
 	<!--No comment provided by engineer.-->
 	<string name="event">Ereignis</string>
 	<!--No comment provided by engineer.-->
@@ -286,6 +302,8 @@
 	<string name="has_tripgo_been_useful_to_you_question">Findest du TripGo nützlich?</string>
 	<!--Map mode 'streets + satellite'-->
 	<string name="hybrid">Hybrid</string>
+	<!--Instruction text to show when user is trying to make a booking, but he/she needs to create an account first.-->
+	<string name="in_order_to_make_bookings_coma_you_either_need_to_log_into_your_device_with_an_apple_id_or_you_need_to_create_a_tripgo_account_dot">Um Buchungen zu machen, müssen Sie Ihr Gerät entweder mit einer Apple-ID verknüpfen oder Sie müssen ein TripGo-Konto erstellen.</string>
 	<!--Include event action-->
 	<string name="include">Einbeziehen</string>
 	<string name="include_step_count">Schrittzähler anzeigen</string>
@@ -345,6 +363,8 @@
 	<string name="no__apostfrom_apost_location_selected">Kein Abfahrtsort ausgewählt</string>
 	<!--No comment provided by engineer.-->
 	<string name="no__apostto_apost_location_selected">Kein Zielort ausgewählt</string>
+	<!--Text to show on screen that lists bookings if user hasn't made a booking yet.-->
+	<string name="no_bookings_yet_exclam">Noch keine Buchungen!</string>
 	<!--Error title for when no calendar found.-->
 	<string name="no_calendar_found_dot">Kein Kalender gefunden.</string>
 	<!--No comment provided by engineer.-->
@@ -382,10 +402,16 @@
 	<string name="plan_a_trip_on_your_phone_dot">Plane ein Route auf deinem iPhone.</string>
 	<!--Error recovery suggestion for when routing produced no results (but no specific error was returned from routing).-->
 	<string name="please_adjust_your_query_and_try_again_dot">Bitte passe deine Suche an und probiere noch einmal.</string>
+	<!--No comment provided by engineer.-->
+	<string name="please_be_advised_that_you_are_viewing_cached_copies_of_your_bookings">Vorsicht: Dies ist eine gecachte Kopie von deinen Buchungen</string>
 	<!--Error recovery suggestion for when no calendar found.-->
 	<string name="please_check_your_calendar_app_and_make_sure_you_have_a_calendar_configured_dot">Bitte öffne deine Kalender-App und überprüfe, dass du einen Kalendar eingerichtet hast.</string>
 	<!--Alert message that asks users to provide the missing address for a new event.-->
 	<string name="please_specify_an_address_dot">Bitte füge die Adresse hinzu.</string>
+	<!--No comment provided by engineer.-->
+	<string name="powered_by">Powered by</string>
+	<!--No comment provided by engineer.-->
+	<string name="powered_by__pattern">Powered by %1$s</string>
 	<!--Label for 'Overall' button to sort trips by their overall total score considering all factors. (old key: ViewOverallButton)-->
 	<string name="preferred">Bevorzugt</string>
 	<!--Title for preferred public transport modes.-->
@@ -410,6 +436,8 @@
 	<string name="remove_and_exclude_event">Trip löschen und Ereignis ausschließen</string>
 	<!--Unsave trip action-->
 	<string name="remove_from_agenda">Von der Agenda löschen</string>
+	<!--No comment provided by engineer.-->
+	<string name="remove_from_favourites">Von Favoriten löschen</string>
 	<!--Confirmation that something got removed HUD notice-->
 	<string name="removed">Entfernt</string>
 	<!--No comment provided by engineer.-->
@@ -435,6 +463,8 @@
 	<string name="return_trip">Rückweg</string>
 	<!--No comment provided by engineer.-->
 	<string name="review_eula">EULA überprüfen</string>
+	<!--No comment provided by engineer.-->
+	<string name="route_from">Route von</string>
 	<!--Title for options for routing to this location, options are: current location, <some previously selected location>.-->
 	<string name="route_here">Route hierher</string>
 	<!--Explanation for what routines are compared to calendar events and stays. Can be long-ish. (old key: HabitualEventDescription)-->
@@ -487,6 +517,8 @@
 	<!--Speed preference 'slow'-->
 	<string name="slow">Langsam</string>
 	<!--No comment provided by engineer.-->
+	<string name="some_of_the_trips_failed_to_download_dot_please_try_again">Nicht alle Trips konnten heruntergeladen werden. Bitte versuchen Sie es erneut</string>
+	<!--No comment provided by engineer.-->
 	<string name="sorry_dot_tripgo_doesn_apostt_work_here_yet_exclam">TripGo funktioniert hier leider noch nicht.</string>
 	<!--Spread the word preference-->
 	<string name="spread_the_word">Weitersagen</string>
@@ -498,7 +530,6 @@
 	<string name="stop_code_2points__pattern">Stop-Code: %1$s</string>
 	<!--Map mode 'streets'-->
 	<string name="streets">Straße</string>
-	<!--Contact support error button-->
 	<string name="support">Hilfe</string>
 	<!--Walkthrough-->
 	<string name="swipe_dates_to_navigate_between_weeks">Um zu anderen Wochen zu gelangen, streichen.</string>
@@ -532,9 +563,11 @@
 	<string name="times">Zeiten</string>
 	<!--Title, e.g., for event or favourite. (old key: TitleFavouriteName)-->
 	<string name="title">Titel</string>
+	<!--No comment provided by engineer.-->
+	<string name="total_spaces">Parkplätze</string>
 	<!--Type of something, e.g., an event (calendar event, stay, routine) or a vehicle (car, motorbike, bicycle). (old key: TypeEvent)-->
 	<string name="type">Typ</string>
-	<!--No comment provided by engineer.-->
+	<!--This is followed by some date, e.g., Last updated: 11 Nov, 9:28am-->
 	<string name="updated_2points_">Aktualisiert:</string>
 	<!--Explanation for what stays are compared to calendar events and routines. Can be long-ish. (old key: StayEventDescription)-->
 	<string name="use_for_hotels_while_travelling_coma_so_that_the_agenda_starts_and_ends_at_the_correct_location_dot">Übernachtungen werden von der Agenda berücksichtigt um an den entsprechenden Tagen am richtigen Ort zu beginnen und enden.</string>
@@ -619,6 +652,8 @@
 	<string name="could_not_find_transit_stop_dot">Haltestelle konnte nicht gefunden werden.</string>
 	<!--Destination of the bus-->
 	<string name="direction">Richtung</string>
+	<!--To disconnect/unlink from a service provider, e.g., Uber-->
+	<string name="disconnect">Abmelden</string>
 	<!--As in 'this bus/train is empty'-->
 	<string name="empty">Leer</string>
 	<!--As in 'this bus/train has few seats available'-->
@@ -686,6 +721,8 @@
 	<string name="search_for_this_stop_again_or_try_again_later_dot_dot">Bitte suche erneut nach dieser Haltestelle oder versuche es später nochmal.</string>
 	<!--Send SMS action-->
 	<string name="send_sms">SMS senden</string>
+	<!--Set up to connect/link to a service provider, e.g., Uber-->
+	<string name="setup">Setup</string>
 	<!--Show website action-->
 	<string name="show_website">Webseite öffnen</string>
 	<!--As in 'this bus/train is fairly full and has standing room only'-->
@@ -754,6 +791,8 @@
 	<string name="close">Schließen</string>
 	<!--Title on the button that asks users to confirm if they want to proceed with booking-->
 	<string name="confirm">Bestätigen</string>
+	<!--Title for button that allows users to contact our support team to help resolve some error in the app.-->
+	<string name="contact_support">Support kontaktieren</string>
 	<!--Error title when GPS failed.-->
 	<string name="could_not_determine_your_current_location_dot">Ortung fehlgeschlagen.</string>
 	<!--Could not download supported regions warning. (old key: CouldNotDownloadSupportedRegions)-->
@@ -846,6 +885,8 @@
 	<string name="please_verify_the_location">Bitte Ort bestätigen</string>
 	<!--Location picker 'no autocompletion results' text. Needs to match text on keyboard.-->
 	<string name="press__apostsearch_apost_for_more_dot_dot_dot">\'Suche\' für mehr drücken...</string>
+	<!--No comment provided by engineer.-->
+	<string name="read_more_dot_dot_dot">Mehr lesen...</string>
 	<!--Title for section that asks users where payment receipt should be sent-->
 	<string name="receipt">Bestätigung</string>
 	<!--Repeats daily-->
@@ -929,4 +970,4 @@
 	<string name="starts_at__pattern">beginnt um %1$s</string>
 
 </resources>
-<!-- This is an auto generated file (Wed Jan 18 09:40:37 ART 2017) -->
+<!-- This is an auto generated file (Fri Mar 17 11:36:55 ART 2017) -->

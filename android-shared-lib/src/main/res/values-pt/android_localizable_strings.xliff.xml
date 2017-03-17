@@ -132,7 +132,6 @@
 	<string name="influence_trip_results_by_setting_what_aposts_most_important_to_you">Influencie os resutados de trajeto ao configurar o que é mais importante para voce</string>
 	<string name="allow_tripgo_to_anonymously_track_your_app_usage">Permita TripGo de anonimamente rastrear o seu uso de aplicativos</string>
 	<string name="cycling_speed">Velocidade de pedalada</string>
-	<string name="contact_support">Contato de suporte</string>
 	<string name="end_of_public_transport">Término do transporte público</string>
 	<string name="track_location">Rastrear localização</string>
 	<string name="sorted_by_price">Organizado por preço</string>
@@ -175,10 +174,12 @@
 	<string name="you_are_already_at_nps_exclam">Voce ja esta em %s!</string>
 	<!--Settings option to enable/disable news (notifications).-->
 	<string name="news">Noticias</string>
-	<!--In transport mode detail, setting to enable that transport mode to be included in trips.
+	<!--In transport mode detail, setting to enable that transport mode to be included in
+          trips.
         -->
 	<string name="include_in_trips">Incluir em viagens</string>
-	<!--Used for parking slots. Format string for multiple slots. Example: 10 slots available
+	<!--Used for parking slots. Format string for multiple slots. Example: 10 slots
+          available
         -->
 	<string name="nps_slots_available">%s lugares disponíveis</string>
 	<!--Used for parking slots. Format string for one slots. Example: 1 slot available-->
@@ -193,4 +194,4 @@
 	<string name="ticket_info">Informação do Bilhete</string>
 
 </resources>
-<!-- This is an auto generated file (Thu Jan 19 14:10:19 ART 2017) -->
+<!-- This is an auto generated file (Fri Mar 17 16:26:38 ART 2017) -->
