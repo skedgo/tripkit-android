@@ -1,9 +1,10 @@
-package com.skedgo.android.tripkit;
+package com.skedgo.android.tripkit.bookingproviders;
 
 import android.content.Intent;
 import android.net.Uri;
 
-import com.skedgo.android.tripkit.bookingproviders.SmsBookingResolver;
+import com.skedgo.android.tripkit.BuildConfig;
+import com.skedgo.android.tripkit.TestRunner;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
