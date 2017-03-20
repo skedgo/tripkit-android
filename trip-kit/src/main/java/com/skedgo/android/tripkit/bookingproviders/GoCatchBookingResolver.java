@@ -1,4 +1,4 @@
-package com.skedgo.android.tripkit;
+package com.skedgo.android.tripkit.bookingproviders;
 
 import android.content.Intent;
 import android.content.res.Resources;
@@ -8,6 +8,11 @@ import android.support.annotation.Nullable;
 
 import com.skedgo.android.common.model.Location;
 import com.skedgo.android.common.model.TripSegment;
+import com.skedgo.android.tripkit.BookingAction;
+import com.skedgo.android.tripkit.ExternalActionParams;
+import com.skedgo.android.tripkit.GeocoderFactory;
+import com.skedgo.android.tripkit.R;
+import com.skedgo.android.tripkit.bookingproviders.BookingResolver;
 
 import rx.Observable;
 import rx.functions.Func1;

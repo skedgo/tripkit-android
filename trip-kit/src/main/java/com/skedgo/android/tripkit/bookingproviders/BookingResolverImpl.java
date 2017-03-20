@@ -1,9 +1,13 @@
-package com.skedgo.android.tripkit;
+package com.skedgo.android.tripkit.bookingproviders;
 
 import android.content.pm.PackageManager;
 import android.content.res.Resources;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+
+import com.skedgo.android.tripkit.BookingAction;
+import com.skedgo.android.tripkit.ExternalActionParams;
+import com.skedgo.android.tripkit.GeocoderFactory;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -31,7 +35,6 @@ public final class BookingResolverImpl implements BookingResolver {
 
     resolverMap = new HashMap<>(8);
     resolverMap.put("gocatch", new GoCatchBookingResolver(resources, isPackageInstalled, geocoderFactory));
-    resolverMap.put("uber", new UberBookingResolver(resources, isPackageInstalled));
     resolverMap.put("ingogo", new IngogoBookingResolver(resources, isPackageInstalled));
     resolverMap.put("lyft", new LyftBookingResolver(resources, isPackageInstalled));
     resolverMap.put("flitways", new FlitWaysBookingResolver(geocoderFactory));

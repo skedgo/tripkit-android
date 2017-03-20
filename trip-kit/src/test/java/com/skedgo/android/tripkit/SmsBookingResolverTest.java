@@ -3,6 +3,8 @@ package com.skedgo.android.tripkit;
 import android.content.Intent;
 import android.net.Uri;
 
+import com.skedgo.android.tripkit.bookingproviders.SmsBookingResolver;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.robolectric.annotation.Config;
