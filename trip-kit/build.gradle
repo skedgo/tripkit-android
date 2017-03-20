@@ -1,5 +1,6 @@
 apply plugin: "com.android.library"
 apply plugin: 'com.github.dcendents.android-maven'
+apply plugin: 'kotlin-android'
 
 // For https://github.com/dcendents/android-maven-gradle-plugin.
 group = 'com.skedgo'
@@ -59,6 +60,8 @@ dependencies {
   compile "com.squareup.retrofit2:converter-gson:2.0.2"
   compile "com.squareup.retrofit2:adapter-rxjava:2.0.2"
   compile "com.squareup.retrofit2:retrofit:2.0.2"
+
+  compile "org.jetbrains.kotlin:kotlin-stdlib:$kotlinVersion"
 
   compile 'com.google.dagger:dagger:2.7'
   annotationProcessor 'com.google.dagger:dagger-compiler:2.7'

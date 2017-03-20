@@ -1,5 +1,6 @@
 package com.skedgo.android.tripkit.bookingproviders;
 
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.content.res.Resources;
 import android.support.annotation.NonNull;
@@ -33,9 +34,16 @@ public final class BookingResolverImpl implements BookingResolver {
       }
     };
 
+    final Func1<String, Intent> getAppIntent = new Func1<String, Intent>() {
+      @Override public Intent call(String packageName) {
+        return packageManager.getLaunchIntentForPackage(packageName);
+      }
+    };
+
     resolverMap = new HashMap<>(8);
-    resolverMap.put("gocatch", new GoCatchBookingResolver(resources, isPackageInstalled, geocoderFactory));
+    resolverMap.put("gocatch", new GoCatchBookingResolver(resources, isPackageInstalled, geocoderFactory,getAppIntent));
     resolverMap.put("ingogo", new IngogoBookingResolver(resources, isPackageInstalled));
+    resolverMap.put("mtaxi", new MTaxiBookingResolver(isPackageInstalled, getAppIntent));
     resolverMap.put("lyft", new LyftBookingResolver(resources, isPackageInstalled));
     resolverMap.put("flitways", new FlitWaysBookingResolver(geocoderFactory));
     resolverMap.put("tel:", new TelBookingResolver(resources));
