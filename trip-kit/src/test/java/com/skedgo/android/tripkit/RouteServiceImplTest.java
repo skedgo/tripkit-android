@@ -74,7 +74,7 @@ public class RouteServiceImplTest {
         .doesNotContainKey("ir");
   }
 
-@Test public void shouldIncludeAddressString() {
+  @Test public void shouldIncludeAddressString() {
     final Query query = createQuery();
     query.getFromLocation().setAddress("from address");
     query.getToLocation().setAddress("to address");
