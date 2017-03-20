@@ -132,7 +132,6 @@
 	<string name="influence_trip_results_by_setting_what_aposts_most_important_to_you">Influence trip results by setting what\'s most important to you</string>
 	<string name="allow_tripgo_to_anonymously_track_your_app_usage">Allow TripGo to anonymously track your app usage</string>
 	<string name="cycling_speed">Cycling speed</string>
-	<string name="contact_support">Contact Support</string>
 	<string name="end_of_public_transport">End of public transport</string>
 	<string name="track_location">Track Location</string>
 	<string name="sorted_by_price">Sorted by Price</string>
@@ -195,4 +194,4 @@
 	<string name="ticket_info">Ticket Info</string>
 
 </resources>
-<!-- This is an auto generated file (Thu Jan 19 14:10:19 ART 2017) -->
+<!-- This is an auto generated file (Fri Mar 17 16:26:37 ART 2017) -->

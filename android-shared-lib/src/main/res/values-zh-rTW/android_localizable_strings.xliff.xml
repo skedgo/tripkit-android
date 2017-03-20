@@ -132,7 +132,6 @@
 	<string name="influence_trip_results_by_setting_what_aposts_most_important_to_you">您可以透過設定什麼對您是最重要的來影響路線規劃的結果</string>
 	<string name="allow_tripgo_to_anonymously_track_your_app_usage">允許TripGo匿名追蹤您的程序使用情形</string>
 	<string name="cycling_speed">單車騎速</string>
-	<string name="contact_support">聯繫支援</string>
 	<string name="end_of_public_transport">在大眾交通路線即將結束時</string>
 	<string name="track_location">追蹤位置</string>
 	<string name="sorted_by_price">以路程費用來排序</string>
@@ -175,10 +174,12 @@
 	<string name="you_are_already_at_nps_exclam">您已經在%s!了</string>
 	<!--Settings option to enable/disable news (notifications).-->
 	<string name="news">消息</string>
-	<!--In transport mode detail, setting to enable that transport mode to be included in trips.
+	<!--In transport mode detail, setting to enable that transport mode to be included in
+          trips.
         -->
 	<string name="include_in_trips">顯示在所有路線結果中</string>
-	<!--Used for parking slots. Format string for multiple slots. Example: 10 slots available
+	<!--Used for parking slots. Format string for multiple slots. Example: 10 slots
+          available
         -->
 	<string name="nps_slots_available">%s 個座位</string>
 	<!--Used for parking slots. Format string for one slots. Example: 1 slot available-->
@@ -193,4 +194,4 @@
 	<string name="ticket_info">票證詳情</string>
 
 </resources>
-<!-- This is an auto generated file (Thu Jan 19 14:10:19 ART 2017) -->
+<!-- This is an auto generated file (Fri Mar 17 16:26:38 ART 2017) -->

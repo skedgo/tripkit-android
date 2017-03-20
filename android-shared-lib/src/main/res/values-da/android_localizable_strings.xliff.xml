@@ -132,7 +132,6 @@
 	<string name="influence_trip_results_by_setting_what_aposts_most_important_to_you">Påvirk tur resultater ved at angive, hvad der er vigtigst for dig</string>
 	<string name="allow_tripgo_to_anonymously_track_your_app_usage">Tillad TripGo at anonymt spore dit app forbrug</string>
 	<string name="cycling_speed">Cykelhastighed</string>
-	<string name="contact_support">Kontakt Support</string>
 	<string name="end_of_public_transport">Offentlig transport er overstået</string>
 	<string name="track_location">Spor placeringen</string>
 	<string name="sorted_by_price">Sorteret efter pris</string>
@@ -156,7 +155,7 @@
 	<string name="upcoming_services">Kommende tjenester</string>
 	<string name="unknown_location">Ukendt placering</string>
 	<string name="tripgo_helps_you_finding_the_best_way_from_a_to_b_using_any_transport_mode_dot">TripGo hjælper dig med at finde den bedste vej fra A til B ved hjælp af hvilken som helst transportmiddel.</string>
-	<string name="waiting_for_location_signal_coma_if_fails_coma_you_can_try_turning_your_gps_off_and_on_dot_dot_________">Afventer placeringens signal, hvis det mislykkes, kan du prøve at tænde og slukke din GPS..</string>
+	<string name="waiting_for_location_signal_coma_if_fails_coma_you_can_try_turning_your_gps_off_and_on_dot_dot_________">"Afventer placeringens signal, hvis det mislykkes, kan du prøve at tænde og slukke din GPS.. "</string>
 	<string name="view_timetable_of_upcoming_services">Se tidsplan for kommende tjenester</string>
 	<string name="tomorrow">Imorgen</string>
 	<string name="today">Idag</string>
@@ -175,10 +174,12 @@
 	<string name="you_are_already_at_nps_exclam">Du er allerede på %s!</string>
 	<!--Settings option to enable/disable news (notifications).-->
 	<string name="news">Nyheder</string>
-	<!--In transport mode detail, setting to enable that transport mode to be included in trips.
+	<!--In transport mode detail, setting to enable that transport mode to be included in
+          trips.
         -->
 	<string name="include_in_trips">Medtag i ture</string>
-	<!--Used for parking slots. Format string for multiple slots. Example: 10 slots available
+	<!--Used for parking slots. Format string for multiple slots. Example: 10 slots
+          available
         -->
 	<string name="nps_slots_available">%s pladser til rådighed</string>
 	<!--Used for parking slots. Format string for one slots. Example: 1 slot available-->
@@ -193,4 +194,4 @@
 	<string name="ticket_info">Billet Info</string>
 
 </resources>
-<!-- This is an auto generated file (Thu Jan 19 14:10:19 ART 2017) -->
+<!-- This is an auto generated file (Fri Mar 17 16:26:37 ART 2017) -->
