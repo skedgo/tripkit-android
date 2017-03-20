@@ -74,6 +74,17 @@ public class RouteServiceImplTest {
         .doesNotContainKey("ir");
   }
 
+  @Test public void shouldIncludeAddressString() {
+    final Query query = createQuery();
+    query.getFromLocation().setAddress("from address");
+    query.getToLocation().setAddress("to address");
+
+    final Map<String, Object> options = routeService.toOptions(query);
+    assertThat(options)
+        .containsEntry("from", "(1.0,2.0)\"from address\"")
+        .containsEntry("to", "(3.0,4.0)\"to address\"");
+  }
+
   /**
    * Given an {@link ExtraQueryMapProvider} that returns an extra query map,
    * we expect that the query map returned by {@link RouteServiceImpl#toOptions(Query)}
