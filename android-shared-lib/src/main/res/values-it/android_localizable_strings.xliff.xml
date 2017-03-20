@@ -36,7 +36,7 @@
 	<string name="edit">Modifica</string>
 	<string name="edit_event">Modifica evento</string>
 	<string name="all_your_calendars_are_disabled_in_tripgo_coma_please_enable_them_in_settings_section_________">Tutti i tuoi calendari sono disabilitati in TripGo, si prega di abilitarli nella sezione Impostazioni</string>
-	<string name="our_end_user_licence_agreement_has_changed_dot_you_must_agree_to_it_before_continuing_the_use_of_this_app_dot_________">Our End User Licence Agreement has changed. You must agree to it before continuing the use of this app.</string>
+	<string name="our_end_user_licence_agreement_has_changed_dot_you_must_agree_to_it_before_continuing_the_use_of_this_app_dot_________">Ha cambiato il nostro accordo di licenza utente finale. È necessario accettare prima di continuare l\'uso di questa app.</string>
 	<string name="edit_favorite">Modifica preferito</string>
 	<string name="empty_event_is_not_saved">Evento vuoto non è salvato</string>
 	<string name="a_location_must_be_set">Una posizione deve essere impostato</string>
@@ -58,7 +58,7 @@
 	<string name="go_to_date">Vai alla data</string>
 	<string name="go_here">Vai qui</string>
 	<string name="get_on">Sali</string>
-	<string name="information_on_concession_pricing_is_subject_to_availability_dot">Information on concession pricing is subject to availability.</string>
+	<string name="information_on_concession_pricing_is_subject_to_availability_dot">Informazioni sui prezzi di concessione sono soggetti a disponibilità.</string>
 	<string name="invalid_time_coma_revert_to_last_used_value_dot">Orario non valido, tornare al ultimo valore usato.</string>
 	<string name="it_aposts_time_to_leave_exclam">E ora di partire</string>
 	<string name="leave_now_to_make_it_on_time">Parti adesso per farlo in tempo</string>
@@ -132,7 +132,6 @@
 	<string name="influence_trip_results_by_setting_what_aposts_most_important_to_you">Influenza i risultati del viaggio impostando ciò che è più importante per voi</string>
 	<string name="allow_tripgo_to_anonymously_track_your_app_usage">Consenti TripGo di monitorare anonimamente il tuo uso del app</string>
 	<string name="cycling_speed">velocità in bicicletta</string>
-	<string name="contact_support">Contatta il supporto</string>
 	<string name="end_of_public_transport">Fine del trasporto pubblico</string>
 	<string name="track_location">Traccia Posizione</string>
 	<string name="sorted_by_price">Ordinati per prezzo</string>
@@ -174,23 +173,25 @@
 	<string name="you_are_here">Tu sei qui</string>
 	<string name="you_are_already_at_nps_exclam">Sei già a %s!</string>
 	<!--Settings option to enable/disable news (notifications).-->
-	<string name="news">News</string>
-	<!--In transport mode detail, setting to enable that transport mode to be included in trips.
+	<string name="news">Notizie</string>
+	<!--In transport mode detail, setting to enable that transport mode to be included in
+          trips.
         -->
-	<string name="include_in_trips">Include in trips</string>
-	<!--Used for parking slots. Format string for multiple slots. Example: 10 slots available
+	<string name="include_in_trips">Includere in viaggi</string>
+	<!--Used for parking slots. Format string for multiple slots. Example: 10 slots
+          available
         -->
-	<string name="nps_slots_available">%s slots available</string>
+	<string name="nps_slots_available">%s posti disponibili</string>
 	<!--Used for parking slots. Format string for one slots. Example: 1 slot available-->
-	<string name="nps_slot_available">%s slot available</string>
+	<string name="nps_slot_available">%s posti disponibili</string>
 	<!--Used for parking slots, when there's no slot available.-->
-	<string name="no_slot_available">No slot available</string>
+	<string name="no_slot_available">Nessuno posto disponibile</string>
 	<!--Parking slots, updated time. Example: Updated at 10am-->
-	<string name="updated_at_2points_nps">Updated at: %s</string>
+	<string name="updated_at_2points_nps">Data di aggiornamento: %s</string>
 	<!--Occupancy almost full-->
-	<string name="almost_full">Almost full</string>
+	<string name="almost_full">Quasi pieno</string>
 	<!--Ticket Info title-->
-	<string name="ticket_info">Ticket Info</string>
+	<string name="ticket_info">Info biglietti</string>
 
 </resources>
-<!-- This is an auto generated file (Thu Jan 19 14:10:19 ART 2017) -->
+<!-- This is an auto generated file (Fri Mar 17 16:26:38 ART 2017) -->
