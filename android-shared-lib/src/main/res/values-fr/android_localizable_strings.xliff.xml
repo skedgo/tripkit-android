@@ -132,7 +132,6 @@
 	<string name="influence_trip_results_by_setting_what_aposts_most_important_to_you">Changer les résultats de trajet en définissant ce qui est important pour vous</string>
 	<string name="allow_tripgo_to_anonymously_track_your_app_usage">Autoriser TripGo à suivre anonymement l\'utilisation des données de l\'application</string>
 	<string name="cycling_speed">Vitesse à vélo</string>
-	<string name="contact_support">Contacter le support</string>
 	<string name="end_of_public_transport">Fin du transport en commun</string>
 	<string name="track_location">Suivre la position</string>
 	<string name="sorted_by_price">Trié par Prix</string>
@@ -163,7 +162,7 @@
 	<string name="exclude_event_from_routes_question">Exclure les événements des routes?</string>
 	<string name="no_services_found_for_this_stop">Aucun services trouvés pour cet arrêt</string>
 	<string name="it_looks_like_you_have_a_trip_to_make">On dirait que vous avez un trajet à faire</string>
-	<string name="trip_to_nps">Trip to %s</string>
+	<string name="trip_to_nps">Voyage à %s</string>
 	<string name="trip_preferences">Préférences de voyage</string>
 	<string name="include_in_the_route_results">Inclure dans les résultats de l\'itinéraire</string>
 	<string name="search_routes_directly_right_from_google_search_bar_without_opening_tripgo_dot">Recherche d\'itinéraires directement depuis la barre de recherche Google sans ouvrir TripGo.</string>
@@ -174,23 +173,25 @@
 	<string name="you_are_here">Vous êtes ici</string>
 	<string name="you_are_already_at_nps_exclam">Vous êtes déjà à %s!</string>
 	<!--Settings option to enable/disable news (notifications).-->
-	<string name="news">News</string>
-	<!--In transport mode detail, setting to enable that transport mode to be included in trips.
+	<string name="news">Actualités</string>
+	<!--In transport mode detail, setting to enable that transport mode to be included in
+          trips.
         -->
-	<string name="include_in_trips">Include in trips</string>
-	<!--Used for parking slots. Format string for multiple slots. Example: 10 slots available
+	<string name="include_in_trips">Inclus dans le voyage</string>
+	<!--Used for parking slots. Format string for multiple slots. Example: 10 slots
+          available
         -->
-	<string name="nps_slots_available">%s slots available</string>
+	<string name="nps_slots_available">%s horaires disponibles</string>
 	<!--Used for parking slots. Format string for one slots. Example: 1 slot available-->
-	<string name="nps_slot_available">%s slot available</string>
+	<string name="nps_slot_available">%s créneaux horaires disponibles</string>
 	<!--Used for parking slots, when there's no slot available.-->
-	<string name="no_slot_available">No slot available</string>
+	<string name="no_slot_available">Aucun créneau horaire disponible</string>
 	<!--Parking slots, updated time. Example: Updated at 10am-->
-	<string name="updated_at_2points_nps">Updated at: %s</string>
+	<string name="updated_at_2points_nps">Mis à jour à %s</string>
 	<!--Occupancy almost full-->
-	<string name="almost_full">Almost full</string>
+	<string name="almost_full">Presque complet</string>
 	<!--Ticket Info title-->
-	<string name="ticket_info">Ticket Info</string>
+	<string name="ticket_info">Info Billets</string>
 
 </resources>
-<!-- This is an auto generated file (Thu Jan 19 14:10:19 ART 2017) -->
+<!-- This is an auto generated file (Fri Mar 17 16:26:38 ART 2017) -->

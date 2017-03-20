@@ -139,8 +139,12 @@
 	<string name="_pattern_every__pattern">%1$s joka %2$s</string>
 	<!--Airline flight number with %airline and %flightNumber, e.g., 'Qantas flight QF1'. (old key: AirlineFlightNumber)-->
 	<string name="_pattern_flight__pattern">%1$s Lento %2$s</string>
+	<!--'About' for a provider, usually takes users to view a web page, e.g., 'About PayiQ'-->
+	<string name="about__pattern">%1$s lisätiedot</string>
 	<!--Error title when access to location hasn't been granted, but location is required.-->
 	<string name="access_to_location_services_required_dot">Sovellus tarvitsee oikeuden paikantaa sijaintisi.</string>
+	<!--Error text to show when trying to use a feature which requires an account, but the user hasn't set one up (yet).-->
+	<string name="account_required">Käyttäjätili vaaditaan</string>
 	<!--Add reminder activity title-->
 	<string name="add_reminder">Lisää Muistutus</string>
 	<!--No comment provided by engineer.-->
@@ -177,12 +181,18 @@
 	<string name="auto">Autom.</string>
 	<!--Header for settings of reminders automatically added by TripGo through the agenda-->
 	<string name="automatic_reminders">Automaattiset muistutukset</string>
+	<!--No comment provided by engineer.-->
+	<string name="available_bikes">Vapaat pyörät</string>
+	<!--No comment provided by engineer.-->
+	<string name="available_spots">Available spots</string>
 	<!--Response to positive answer to question whether TripGo is useful, prompting for App Store rating.-->
 	<string name="awesome_exclam_how_about_rating_us_question">Hienoa! Haluaisitko arvostella meidät?</string>
 	<!--Book a taxi-->
 	<string name="book_a_taxi">Varaa taksi</string>
 	<!--Description on empty bookings screen-->
 	<string name="bookings_made_with_tripgo_will_appear_here_dot">TripGolla tehdyt varaukset näkyvät täällä.</string>
+	<!--Informing users that they may be viewing cached bookings-->
+	<string name="bookings_may_be_outdated">Bookings may be outdated</string>
 	<!--Response to negative answer to question whether TripGo is useful, prompting for feedback.-->
 	<string name="bummer_dot_dot_dot_how_about_some_feedback_question">Harmi... Haluaisitko antaa palautetta?</string>
 	<!--Calendar-->
@@ -203,6 +213,8 @@
 	<string name="convenience_is_affected_by_things_such_as_changing_public_transport_services_coma_the_amount_of_walking_coma_and_finding_a_taxi_dot">Mukavuuteen vaikuttavat esimerkiksi muutokset julkisen liikenteen palveluissa, kävelymatkan pituus ja taksin löytäminen.</string>
 	<!--Error title when TripGo couldn't identify the user's current city.-->
 	<string name="could_not_find_your_city_dot">Kaupunkiasi ei löytynyt.</string>
+	<!--Title for button that allows users to create a user account-->
+	<string name="create_account">Create account</string>
 	<!--Title for critical error-->
 	<string name="critical_error">Kriittinen virhe</string>
 	<!--No comment provided by engineer.-->
@@ -225,12 +237,16 @@
 	<string name="duration">Kesto</string>
 	<!--Used in countdown context, indicating when a ticket becomes valid-->
 	<string name="effective_in">Voimassa</string>
+	<!--No comment provided by engineer.-->
+	<string name="empty_docks">Tyhjiä kenttiä</string>
 	<!--Title for the time an event ends (including date information)-->
 	<string name="end_date">Päättymispäivä</string>
 	<!--No comment provided by engineer.-->
 	<string name="end_user_licence_agreement">Loppukäyttäjän lisenssisopimus</string>
 	<!--Carbon preference-->
 	<string name="environment">Ympäristöystävällinen</string>
+	<!--No comment provided by engineer.-->
+	<string name="error_encountered">Error encountered</string>
 	<!--No comment provided by engineer.-->
 	<string name="event">Tapahtuma</string>
 	<!--No comment provided by engineer.-->
@@ -286,6 +302,8 @@
 	<string name="has_tripgo_been_useful_to_you_question">Onko TripGosta ollut sinulle hyötyä?</string>
 	<!--Map mode 'streets + satellite'-->
 	<string name="hybrid">Hybridi</string>
+	<!--Instruction text to show when user is trying to make a booking, but he/she needs to create an account first.-->
+	<string name="in_order_to_make_bookings_coma_you_either_need_to_log_into_your_device_with_an_apple_id_or_you_need_to_create_a_tripgo_account_dot">Jotta voit tehdä ostoksia, kirjaudu laitteellesi joko Apple ID: lläsi tai luo TripGo tili.</string>
 	<!--Include event action-->
 	<string name="include">Sisällytä</string>
 	<string name="include_step_count">Sisällytä askelmäärä</string>
@@ -345,6 +363,8 @@
 	<string name="no__apostfrom_apost_location_selected">Lähtöpaikkaa ei ole valittu</string>
 	<!--No comment provided by engineer.-->
 	<string name="no__apostto_apost_location_selected">Määränpäätä ei ole valittu</string>
+	<!--Text to show on screen that lists bookings if user hasn't made a booking yet.-->
+	<string name="no_bookings_yet_exclam">Ei vielä varauksia!</string>
 	<!--Error title for when no calendar found.-->
 	<string name="no_calendar_found_dot">Kalenteria ei löytynyt.</string>
 	<!--No comment provided by engineer.-->
@@ -382,10 +402,16 @@
 	<string name="plan_a_trip_on_your_phone_dot">Suunnittele matka puhelimellasi.</string>
 	<!--Error recovery suggestion for when routing produced no results (but no specific error was returned from routing).-->
 	<string name="please_adjust_your_query_and_try_again_dot">Ole hyvä, muokkaa hakua ja yritä sitten uudelleen.</string>
+	<!--No comment provided by engineer.-->
+	<string name="please_be_advised_that_you_are_viewing_cached_copies_of_your_bookings">Please be advised that you are viewing cached copies of your bookings</string>
 	<!--Error recovery suggestion for when no calendar found.-->
 	<string name="please_check_your_calendar_app_and_make_sure_you_have_a_calendar_configured_dot">Tarkista kalenterisovelluksesi ja varmista, että kalenteri on määritetty.</string>
 	<!--Alert message that asks users to provide the missing address for a new event.-->
 	<string name="please_specify_an_address_dot">Ole hyvä, määritä osoite.</string>
+	<!--No comment provided by engineer.-->
+	<string name="powered_by">Powered by</string>
+	<!--No comment provided by engineer.-->
+	<string name="powered_by__pattern">Powered by %1$s</string>
 	<!--Label for 'Overall' button to sort trips by their overall total score considering all factors. (old key: ViewOverallButton)-->
 	<string name="preferred">Suositut</string>
 	<!--Title for preferred public transport modes.-->
@@ -410,6 +436,8 @@
 	<string name="remove_and_exclude_event">Poista ja hylkää tapahtuma</string>
 	<!--Unsave trip action-->
 	<string name="remove_from_agenda">Poista Agendalta</string>
+	<!--No comment provided by engineer.-->
+	<string name="remove_from_favourites">Poista suosikeista</string>
 	<!--Confirmation that something got removed HUD notice-->
 	<string name="removed">Poistettu</string>
 	<!--No comment provided by engineer.-->
@@ -435,6 +463,8 @@
 	<string name="return_trip">Paluumatka</string>
 	<!--No comment provided by engineer.-->
 	<string name="review_eula">Lue EULA</string>
+	<!--No comment provided by engineer.-->
+	<string name="route_from">Reitti kohteesta</string>
 	<!--Title for options for routing to this location, options are: current location, <some previously selected location>.-->
 	<string name="route_here">Reitti tänne</string>
 	<!--Explanation for what routines are compared to calendar events and stays. Can be long-ish. (old key: HabitualEventDescription)-->
@@ -487,6 +517,8 @@
 	<!--Speed preference 'slow'-->
 	<string name="slow">Hidas</string>
 	<!--No comment provided by engineer.-->
+	<string name="some_of_the_trips_failed_to_download_dot_please_try_again">Joidenkin matkojen lataus epäonnistui. Hae uudelleen</string>
+	<!--No comment provided by engineer.-->
 	<string name="sorry_dot_tripgo_doesn_apostt_work_here_yet_exclam">Pahoittelut. TripGo ei toimi täällä vielä!</string>
 	<!--Spread the word preference-->
 	<string name="spread_the_word">Kerro kaverillesi</string>
@@ -498,7 +530,6 @@
 	<string name="stop_code_2points__pattern">Pysäkkikoodi: %1$s</string>
 	<!--Map mode 'streets'-->
 	<string name="streets">Kadut</string>
-	<!--Contact support error button-->
 	<string name="support">Tuki</string>
 	<!--Walkthrough-->
 	<string name="swipe_dates_to_navigate_between_weeks">Pyyhkäise näyttöä selataksesi viikkonäkymiä</string>
@@ -532,9 +563,11 @@
 	<string name="times">Ajat</string>
 	<!--Title, e.g., for event or favourite. (old key: TitleFavouriteName)-->
 	<string name="title">Titteli</string>
+	<!--No comment provided by engineer.-->
+	<string name="total_spaces">Kaikki tilat</string>
 	<!--Type of something, e.g., an event (calendar event, stay, routine) or a vehicle (car, motorbike, bicycle). (old key: TypeEvent)-->
 	<string name="type">Tyyppi</string>
-	<!--No comment provided by engineer.-->
+	<!--This is followed by some date, e.g., Last updated: 11 Nov, 9:28am-->
 	<string name="updated_2points_">Päivitetty:</string>
 	<!--Explanation for what stays are compared to calendar events and routines. Can be long-ish. (old key: StayEventDescription)-->
 	<string name="use_for_hotels_while_travelling_coma_so_that_the_agenda_starts_and_ends_at_the_correct_location_dot">Yöpymisiä verrataan kalenterin tapahtumiin ja rutiineihin, jotta mahdolliset hotellivaraukset tehdään oikeille päiville oikeissa paikoissa.</string>
@@ -619,6 +652,8 @@
 	<string name="could_not_find_transit_stop_dot">Välipysäkkiä ei löytynyt.</string>
 	<!--Destination of the bus-->
 	<string name="direction">Suunta</string>
+	<!--To disconnect/unlink from a service provider, e.g., Uber-->
+	<string name="disconnect">Katkaise yhteys</string>
 	<!--As in 'this bus/train is empty'-->
 	<string name="empty">Tyhjä</string>
 	<!--As in 'this bus/train has few seats available'-->
@@ -686,6 +721,8 @@
 	<string name="search_for_this_stop_again_or_try_again_later_dot_dot">Hae tämän pysäkin tietoja uudelleen tai yritä myöhemmin uudelleen..</string>
 	<!--Send SMS action-->
 	<string name="send_sms">Lähetä SMS</string>
+	<!--Set up to connect/link to a service provider, e.g., Uber-->
+	<string name="setup">Asetukset</string>
 	<!--Show website action-->
 	<string name="show_website">Avaa nettisivusto</string>
 	<!--As in 'this bus/train is fairly full and has standing room only'-->
@@ -754,6 +791,8 @@
 	<string name="close">Sulje</string>
 	<!--Title on the button that asks users to confirm if they want to proceed with booking-->
 	<string name="confirm">Vahvista</string>
+	<!--Title for button that allows users to contact our support team to help resolve some error in the app.-->
+	<string name="contact_support">Ota yhteys tukeen</string>
 	<!--Error title when GPS failed.-->
 	<string name="could_not_determine_your_current_location_dot">Tämänhetkistä sijaintiasi ei voitu määrittää.</string>
 	<!--Could not download supported regions warning. (old key: CouldNotDownloadSupportedRegions)-->
@@ -846,6 +885,8 @@
 	<string name="please_verify_the_location">Ole hyvä ja vahvista sijainti</string>
 	<!--Location picker 'no autocompletion results' text. Needs to match text on keyboard.-->
 	<string name="press__apostsearch_apost_for_more_dot_dot_dot">Paina \'Etsi\' saadaksesi lisätuloksia...</string>
+	<!--No comment provided by engineer.-->
+	<string name="read_more_dot_dot_dot">Lisätiedot...</string>
 	<!--Title for section that asks users where payment receipt should be sent-->
 	<string name="receipt">Kuitti</string>
 	<!--Repeats daily-->
@@ -929,4 +970,4 @@
 	<string name="starts_at__pattern">alkaa klo %1$s</string>
 
 </resources>
-<!-- This is an auto generated file (Wed Jan 18 09:40:37 ART 2017) -->
+<!-- This is an auto generated file (Fri Mar 17 11:36:55 ART 2017) -->
