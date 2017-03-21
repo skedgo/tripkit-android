@@ -5,6 +5,7 @@ apply plugin: 'kotlin-kapt'
 android {
   compileSdkVersion 25
   buildToolsVersion "25.0.2"
+  dataBinding { enabled = true }
 
   defaultConfig {
     applicationId "skedgo.tripkit.demo.a2btrips"
