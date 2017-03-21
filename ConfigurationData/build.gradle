@@ -1,6 +1,7 @@
 apply plugin: 'com.android.library'
 apply plugin: 'com.github.dcendents.android-maven'
 apply plugin: 'kotlin-android'
+apply plugin: 'com.jfrog.bintray'
 
 // For https://github.com/dcendents/android-maven-gradle-plugin.
 group = 'com.skedgo.tripkit'
@@ -50,6 +51,53 @@ dependencies {
   compile "org.jetbrains.kotlin:kotlin-stdlib:$kotlinVersion"
 }
 
+install {
+  repositories.mavenInstaller {
+    pom.project {
+      name 'TripKit Android'
+      description 'Tripkit Android'
+      url 'https://github.com/skedgo/tripkit-android.git'
+      inceptionYear '2013'
+
+      packaging 'aar'
+      groupId project.group
+      artifactId 'ConfigurationData'
+      version project.version
+
+      licenses {
+        license {
+          name 'The MIT License'
+          url 'https://spdx.org/licenses/MIT#licenseText'
+          distribution 'repo'
+        }
+      }
+      developers {
+        developer {
+          name 'SkedGo'
+        }
+      }
+    }
+  }
+}
+
+bintray {
+  user = BINTRAY_USER
+  key = BINTRAY_KEY
+  configurations = ['archives']
+  pkg {
+    repo = 'tripkit-android'
+    name = 'ConfigurationData'
+    userOrg = 'skedgo'
+    licenses = ['MIT']
+    vcsUrl = 'https://github.com/skedgo/tripkit-android.git'
+    version {
+      name = project.version
+      desc = "Tripkit Android $project.version"
+      released  = new Date()
+      vcsTag = project.version
+    }
+  }
+}
 uploadArchives {
   repositories {
     mavenDeployer {
