@@ -15,9 +15,7 @@
       android:name="com.google.android.geo.API_KEY"
       android:value="@string/google_maps_key" />
 
-    <activity
-      android:name=".A2bTripsActivity"
-      android:label="@string/title_activity_a2b_trips">
+    <activity android:name=".A2bTripsActivity">
       <intent-filter>
         <action android:name="android.intent.action.MAIN" />
 

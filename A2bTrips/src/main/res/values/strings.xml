@@ -1,4 +1,3 @@
 <resources>
-  <string name="app_name">A2bTrips</string>
-  <string name="title_activity_a2b_trips">Map</string>
+  <string name="app_name">A-to-B trips</string>
 </resources>
