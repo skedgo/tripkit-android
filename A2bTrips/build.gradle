@@ -1,0 +1,25 @@
+apply plugin: 'com.android.application'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-kapt'
+
+android {
+  compileSdkVersion 25
+  buildToolsVersion "25.0.2"
+
+  defaultConfig {
+    applicationId "skedgo.tripkit.demo.a2btrips"
+    minSdkVersion 15
+    targetSdkVersion 25
+    versionCode 1
+    versionName "1.0"
+    testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+  }
+}
+
+dependencies {
+  testCompile 'junit:junit:4.12'
+  compile "org.jetbrains.kotlin:kotlin-stdlib:$kotlinVersion"
+  compile 'com.android.support:appcompat-v7:25.3.0'
+  compile 'com.google.android.gms:play-services-maps:10.2.0'
+  compile project(':trip-kit'), { transitive = true }
+}
