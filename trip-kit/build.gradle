@@ -80,7 +80,7 @@ install {
   repositories.mavenInstaller {
     pom.project {
       name 'TripKit Android'
-      description 'Tripkit Android'
+      description 'TripKit Android'
       url 'https://github.com/skedgo/tripkit-android.git'
       inceptionYear '2013'
 
@@ -117,8 +117,8 @@ bintray {
     vcsUrl = 'https://github.com/skedgo/tripkit-android.git'
     version {
       name = project.version
-      desc = "Tripkit Android $project.version"
-      released  = new Date()
+      desc = "TripKit Android $project.version"
+      released = new Date()
       vcsTag = project.version
     }
   }
