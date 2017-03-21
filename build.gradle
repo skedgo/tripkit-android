@@ -26,8 +26,6 @@ ext {
   okHttpVersion = "3.2.0"
 }
 
-
-
 allprojects {
   repositories {
     jcenter()
