@@ -33,7 +33,6 @@ dependencies {
   compile 'com.squareup.picasso:picasso:2.5.2'
   compile 'com.facebook.stetho:stetho:1.2.0'
   compile 'com.facebook.stetho:stetho-okhttp:1.2.0'
-//  compile project(":trip-kit")
-  compile 'com.skedgo:trip-kit:1.1'
+  compile project(":trip-kit")
   compile project(":trip-kit-booking")
 }
