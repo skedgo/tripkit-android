@@ -2,10 +2,13 @@ package skedgo.tripkit.demo.a2btrips
 
 import android.databinding.DataBindingUtil
 import android.os.Bundle
+import android.support.v7.app.AlertDialog
+import rx.Observable
 import rx.android.schedulers.AndroidSchedulers.mainThread
 import skedgo.rxlifecyclecomponents.RxAppCompatActivity
 import skedgo.rxlifecyclecomponents.bindToLifecycle
 import skedgo.tripkit.demo.a2btrips.databinding.A2bTripsBinding
+import java.util.concurrent.TimeUnit
 
 class A2bTripsActivity : RxAppCompatActivity() {
   val viewModel: A2bTripsViewModel by lazy { A2bTripsViewModel() }
@@ -22,5 +25,17 @@ class A2bTripsActivity : RxAppCompatActivity() {
         .bindToLifecycle(this)
         .observeOn(mainThread())
         .subscribe { binding.progressLayout.visibility = it }
+
+    Observable.just(Unit)
+        .delay(500, TimeUnit.MILLISECONDS)
+        .flatMap { viewModel.showSampleTrips() }
+        .bindToLifecycle(this)
+        .subscribe({}, {
+          AlertDialog.Builder(this)
+              .setTitle("Error while routing")
+              .setMessage(it.message)
+              .create()
+              .show()
+        })
   }
 }
