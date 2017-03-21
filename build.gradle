@@ -35,7 +35,7 @@ allprojects {
     maven {
       url  "http://skedgo.bintray.com/tripkit-android"
       credentials {
-        username 'tintran'
+        username BINTRAY_USER
         password BINTRAY_KEY
       }
     }
