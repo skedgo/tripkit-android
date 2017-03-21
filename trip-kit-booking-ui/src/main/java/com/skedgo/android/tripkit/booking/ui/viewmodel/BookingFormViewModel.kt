@@ -99,7 +99,7 @@ class BookingFormViewModel
 
   }
 
-  @VisibleForTesting fun showError(error: BookingError) {
+  fun showError(error: BookingError) {
     bookingError = error
 
     hasError.set(true)
@@ -114,13 +114,13 @@ class BookingFormViewModel
         })
   }
 
-  @VisibleForTesting fun updateBookingFormInfo() {
+  fun updateBookingFormInfo() {
     onUpdateFormTitle.onNext(bookingForm?.title ?: "")
     actionTitle.set(bookingForm?.action?.title)
     showAction.set(bookingForm?.action != null)
   }
 
-  @VisibleForTesting fun updateFieldList() {
+  fun updateFieldList() {
     bookingForm?.form
         ?.forEach {
           if (it.title != null) {
