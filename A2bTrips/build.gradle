@@ -23,4 +23,6 @@ dependencies {
   compile 'com.android.support:appcompat-v7:25.3.0'
   compile 'com.google.android.gms:play-services-maps:10.2.0'
   compile project(':trip-kit'), { transitive = true }
+  compile project(':ConfigurationDomain')
+  compile project(':ConfigurationData')
 }
