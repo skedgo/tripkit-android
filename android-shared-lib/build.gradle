@@ -74,15 +74,15 @@ dependencies {
 install {
   repositories.mavenInstaller {
     pom.project {
-      name 'Tripkit Android'
+      name 'TripKit Android'
       description 'Android Shared Lib'
       url 'https://github.com/skedgo/android-shared-lib.git'
       inceptionYear '2013'
 
       packaging 'aar'
-      groupId 'com.skedgo'
+      groupId project.group
       artifactId 'android-shared-lib'
-      version '1.3'
+      version project.version
 
       licenses {
         license {
@@ -111,10 +111,10 @@ bintray {
     licenses = ['MIT']
     vcsUrl = 'https://github.com/skedgo/android-shared-lib.git'
     version {
-      name = '1.3'
-      desc = 'Android Shared Lib 1.3'
+      name = project.version
+      desc = "Android Shared Lib $project.version"
       released  = new Date()
-      vcsTag = '1.3'
+      vcsTag = project.version
     }
   }
 }

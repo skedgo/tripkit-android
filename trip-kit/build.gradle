@@ -79,15 +79,15 @@ dependencies {
 install {
   repositories.mavenInstaller {
     pom.project {
-      name 'Tripkit Android'
+      name 'TripKit Android'
       description 'Tripkit Android'
       url 'https://github.com/skedgo/tripkit-android.git'
       inceptionYear '2013'
 
       packaging 'aar'
-      groupId 'com.skedgo'
+      groupId project.group
       artifactId 'trip-kit'
-      version '1.1'
+      version project.version
 
       licenses {
         license {
@@ -116,10 +116,10 @@ bintray {
     licenses = ['MIT']
     vcsUrl = 'https://github.com/skedgo/tripkit-android.git'
     version {
-      name = '1.1'
-      desc = 'Tripkit Android 1.1'
+      name = project.version
+      desc = "Tripkit Android $project.version"
       released  = new Date()
-      vcsTag = '1.1'
+      vcsTag = project.version
     }
   }
 }
