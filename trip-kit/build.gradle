@@ -86,7 +86,7 @@ install {
 
       packaging 'aar'
       groupId 'com.skedgo'
-      artifactId 'tripkit-android'
+      artifactId 'trip-kit'
       version '1.1'
 
       licenses {
@@ -111,7 +111,7 @@ bintray {
   configurations = ['archives']
   pkg {
     repo = 'tripkit-android'
-    name = 'tripkit-android'
+    name = 'tripkit'
     userOrg = 'skedgo'
     licenses = ['MIT']
     vcsUrl = 'https://github.com/skedgo/tripkit-android.git'

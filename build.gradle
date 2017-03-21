@@ -26,9 +26,18 @@ ext {
   okHttpVersion = "3.2.0"
 }
 
+
+
 allprojects {
   repositories {
     jcenter()
     maven { url "https://jitpack.io" }
+    maven {
+      url  "http://skedgo.bintray.com/tripkit-android"
+      credentials {
+        username 'tintran'
+        password BINTRAY_KEY
+      }
+    }
   }
 }
