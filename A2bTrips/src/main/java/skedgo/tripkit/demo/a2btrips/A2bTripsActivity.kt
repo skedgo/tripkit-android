@@ -21,10 +21,10 @@ class A2bTripsActivity : RxAppCompatActivity() {
 
     binding.progressLayout.isEnabled = false
 
-    viewModel.progressVisibility
+    viewModel.isRefreshing
         .bindToLifecycle(this)
         .observeOn(mainThread())
-        .subscribe { binding.progressLayout.visibility = it }
+        .subscribe { binding.progressLayout.isRefreshing = it }
 
     Observable.just(Unit)
         .delay(500, TimeUnit.MILLISECONDS)

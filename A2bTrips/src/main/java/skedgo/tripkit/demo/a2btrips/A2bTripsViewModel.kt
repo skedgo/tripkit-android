@@ -2,7 +2,6 @@ package skedgo.tripkit.demo.a2btrips
 
 import android.databinding.ObservableArrayList
 import android.databinding.ObservableList
-import android.view.View
 import com.skedgo.android.common.model.Location
 import com.skedgo.android.common.model.Query
 import com.skedgo.android.common.model.TimeTag
@@ -12,8 +11,8 @@ import rx.android.schedulers.AndroidSchedulers.mainThread
 import rx.subjects.BehaviorSubject
 
 class A2bTripsViewModel {
-  private val _progressVisibility: BehaviorSubject<Int> = BehaviorSubject.create(View.GONE)
-  val progressVisibility: Observable<Int> get() = _progressVisibility.asObservable()
+  private val _isRefreshing: BehaviorSubject<Boolean> = BehaviorSubject.create(false)
+  val isRefreshing: Observable<Boolean> get() = _isRefreshing.asObservable()
   val trips: ObservableList<TripViewModel> = ObservableArrayList()
 
   fun showSampleTrips(): Observable<Unit>
@@ -32,8 +31,8 @@ class A2bTripsViewModel {
         query
       }
       .flatMap { TripKit.singleton().routeService.routeAsync(it) }
-      .doOnSubscribe { _progressVisibility.onNext(View.VISIBLE) }
-      .doOnUnsubscribe { _progressVisibility.onNext(View.GONE) }
+      .doOnSubscribe { _isRefreshing.onNext(true) }
+      .doOnUnsubscribe { _isRefreshing.onNext(false) }
       .observeOn(mainThread())
       .doOnNext { trips.add(TripViewModel()) }
       .map { Unit }

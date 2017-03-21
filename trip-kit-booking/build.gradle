@@ -6,14 +6,12 @@ group = 'com.skedgo'
 version = '1.1'
 
 android {
-  compileSdkVersion 24
+  compileSdkVersion 25
   buildToolsVersion '25.0.2'
 
   defaultConfig {
-    minSdkVersion 10
-    targetSdkVersion 22
-    versionCode 1
-    versionName "1.0"
+    minSdkVersion 15
+    targetSdkVersion 25
     testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
   }
 
