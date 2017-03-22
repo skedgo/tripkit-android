@@ -3,13 +3,15 @@ package com.skedgo.android.common.util;
 import android.content.res.Resources;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.text.TextUtils;
 import android.util.DisplayMetrics;
 
 import com.skedgo.android.common.model.ModeInfo;
 import com.skedgo.android.common.model.TransportMode;
 
 public final class TransportModeUtils {
-  public static final String ICON_URL_TEMPLATE = "https://tripgo.skedgo.com/satapp/modeicons/android/%s/ic_transport_%s.png";
+  public static final String ICON_BASE_URL = "https://tripgo.skedgo.com/satapp";
+  public static final String ICON_URL_TEMPLATE = "/modeicons/android/%s/ic_transport_%s.png";
 
   private TransportModeUtils() {}
 
@@ -17,12 +19,24 @@ public final class TransportModeUtils {
   public static String getIconUrlForId(
       @NonNull Resources resources,
       @Nullable String iconId) {
+    return getIconUrlForId(resources, iconId, null);
+  }
+
+  @Nullable
+  public static String getIconUrlForId(
+      @NonNull Resources resources,
+      @Nullable String iconId,
+      @Nullable String baseUrl) {
     if (iconId == null || iconId.length() == 0) {
       return null;
     }
 
+    if (TextUtils.isEmpty(baseUrl)) {
+      baseUrl = TransportModeUtils.ICON_BASE_URL;
+    }
+
     final String densityDpiName = getDensityDpiName(resources.getDisplayMetrics().densityDpi);
-    return String.format(TransportModeUtils.ICON_URL_TEMPLATE, densityDpiName, iconId);
+    return String.format(baseUrl + TransportModeUtils.ICON_URL_TEMPLATE, densityDpiName, iconId);
   }
 
   @Nullable
