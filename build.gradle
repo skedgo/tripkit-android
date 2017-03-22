@@ -10,14 +10,13 @@ buildscript {
     // See changelog: http://developer.android.com/tools/revisions/gradle-plugin.html.
     classpath "com.android.tools.build:gradle:$androidPluginVersion"
     classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlinVersion"
+    classpath 'com.jfrog.bintray.gradle:gradle-bintray-plugin:1.7.3'
 
     // To measure execution time of a method.
     classpath 'com.jakewharton.hugo:hugo-plugin:1.2.1'
 
     // To deploy AAR files to local maven.
     classpath 'com.github.dcendents:android-maven-gradle-plugin:1.5'
-
-    classpath 'com.jfrog.bintray.gradle:gradle-bintray-plugin:1.7.3'
   }
 }
 
@@ -31,7 +30,7 @@ allprojects {
     jcenter()
     maven { url "https://jitpack.io" }
     maven {
-      url  "http://skedgo.bintray.com/tripkit-android"
+      url "http://skedgo.bintray.com/tripkit-android"
       credentials {
         username BINTRAY_USER
         password BINTRAY_KEY
