@@ -14,7 +14,7 @@ public class SamplesActivity extends ListActivity {
     setListAdapter(new ArrayAdapter<>(
         this,
         android.R.layout.simple_list_item_1,
-        new String[] {"Cities", "Transport in Los Angeles, CA, USA", "Routes"}
+        new String[] {"Cities", "Transport in Los Angeles, CA, USA", "Routes", "Trip Details"}
     ));
   }
 
@@ -26,6 +26,8 @@ public class SamplesActivity extends ListActivity {
       startActivity(new Intent(this, TransportModesActivity.class));
     } else if (position == 2) {
       startActivity(new Intent(this, RoutesActivity.class));
+    } else if (position == 3) {
+      startActivity(new Intent(this, TripDetailsActivity.class));
     }
   }
 }

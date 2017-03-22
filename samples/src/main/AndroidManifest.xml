@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest package="com.skedgo.android.samples"
   xmlns:android="http://schemas.android.com/apk/res/android">
+  <uses-permission android:name="android.permission.INTERNET" />
 
   <application
     android:name=".App"
@@ -26,7 +27,10 @@
     <activity
       android:name=".RoutesActivity"
       android:label="Routes" />
-    <activity android:name=".TripDetailsActivity"></activity>
+    <activity android:name=".TripDetailsActivity"
+      android:theme="@style/Theme.AppCompat">
+
+    </activity>
   </application>
 
 </manifest>
