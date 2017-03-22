@@ -7,6 +7,8 @@ import com.facebook.stetho.Stetho;
 import com.skedgo.android.tripkit.Configs;
 import com.skedgo.android.tripkit.TripKit;
 
+import net.danlew.android.joda.JodaTimeAndroid;
+
 import rx.functions.Action1;
 
 public final class App extends Application {
@@ -17,7 +19,7 @@ public final class App extends Application {
   @Override public void onCreate() {
     super.onCreate();
     Stetho.initializeWithDefaults(this);
-
+    JodaTimeAndroid.init(this);
     TripKit.initialize(
         Configs.builder()
             .context(this)
