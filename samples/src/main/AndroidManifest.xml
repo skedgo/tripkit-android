@@ -9,7 +9,7 @@
     android:label="TripKit Samples"
     android:theme="@android:style/Theme.Light">
     <activity
-      android:name="com.skedgo.android.samples.SamplesActivity"
+      android:name=".SamplesActivity"
       android:label="TripKit Samples">
       <intent-filter>
         <action android:name="android.intent.action.MAIN" />
@@ -26,6 +26,7 @@
     <activity
       android:name=".RoutesActivity"
       android:label="Routes" />
+    <activity android:name=".TripDetailsActivity"></activity>
   </application>
 
 </manifest>
