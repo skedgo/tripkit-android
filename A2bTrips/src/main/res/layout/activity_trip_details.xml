@@ -4,12 +4,14 @@
   xmlns:tools="http://schemas.android.com/tools"
   android:layout_width="match_parent"
   android:layout_height="match_parent"
-  tools:context="com.skedgo.android.samples.TripDetailsActivity">
+  tools:context="skedgo.tripkit.demo.a2btrips.TripDetailsActivity">
 
   <FrameLayout
     android:id="@+id/bottomSheet"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@android:color/background_dark"
+    app:theme="@style/ThemeOverlay.AppCompat.Light"
     app:layout_behavior="@string/bottom_sheet_behavior">
 
     <android.support.v7.widget.RecyclerView
