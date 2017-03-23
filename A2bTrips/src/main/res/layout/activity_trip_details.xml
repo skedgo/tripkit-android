@@ -12,15 +12,13 @@
       android:id="@+id/mapFragment"
       class="com.google.android.gms.maps.SupportMapFragment"
       android:layout_width="match_parent"
-      android:layout_height="match_parent">
+      android:layout_height="match_parent" />
 
-    </fragment>
-
-    <FrameLayout
+    <android.support.v7.widget.CardView
       android:id="@+id/bottomSheet"
       android:layout_width="match_parent"
       android:layout_height="match_parent"
-      android:background="@android:color/background_light"
+      android:background="@color/cardview_light_background"
       android:theme="@style/ThemeOverlay.AppCompat.Light"
       app:layout_behavior="@string/bottom_sheet_behavior">
 
@@ -29,7 +27,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 
-    </FrameLayout>
+    </android.support.v7.widget.CardView>
 
   </android.support.design.widget.CoordinatorLayout>
 </layout>
