@@ -23,7 +23,7 @@ public final class App extends Application {
     TripKit.initialize(
         Configs.builder()
             .context(this)
-            .regionEligibility("")
+            .regionEligibility("xum")
             .debuggable(BuildConfig.DEBUG)
             .errorHandler(new Action1<Throwable>() {
               @Override public void call(Throwable error) {
