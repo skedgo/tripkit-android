@@ -11,7 +11,7 @@ import org.robolectric.annotation.Config;
 import static org.assertj.core.api.Assertions.assertThat;
 
 @RunWith(TestRunner.class)
-@Config(constants = BuildConfig.class, sdk = 21)
+@Config(constants = BuildConfig.class)
 public class ServiceStopTest {
   /**
    * To prevent http://crashes.to/s/a42b1958de6.
