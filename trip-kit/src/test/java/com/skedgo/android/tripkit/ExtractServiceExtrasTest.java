@@ -15,7 +15,7 @@ import rx.functions.Func1;
 import static org.assertj.core.api.Assertions.assertThat;
 
 @RunWith(TestRunner.class)
-@Config(constants = BuildConfig.class, sdk = 21)
+@Config(constants = BuildConfig.class)
 public class ExtractServiceExtrasTest {
   @Test
   public void extractTripStops() throws Exception {

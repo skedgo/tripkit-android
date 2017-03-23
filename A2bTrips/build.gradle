@@ -9,17 +9,11 @@ android {
 
   defaultConfig {
     applicationId "skedgo.tripkit.demo.a2btrips"
-    minSdkVersion 21
+    minSdkVersion 15
     targetSdkVersion 25
     versionCode 1
     versionName "1.0"
     testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
-  }
-
-  signingConfigs {
-    debug {
-      storeFile file("../../publish/debug.keystore")
-    }
   }
 }
 
@@ -36,5 +30,4 @@ dependencies {
   compile 'com.github.skedgo:RxLifecycleComponents:v1.3'
   compile 'me.tatarka.bindingcollectionadapter2:bindingcollectionadapter-recyclerview:2.0.1'
   kapt "com.android.databinding:compiler:$androidPluginVersion"
-  compile project(':trip-kit')
 }

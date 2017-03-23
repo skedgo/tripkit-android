@@ -10,7 +10,7 @@ import org.robolectric.annotation.Config;
 import static org.assertj.core.api.Assertions.assertThat;
 
 @RunWith(TestRunner.class)
-@Config(constants = BuildConfig.class, sdk = 21)
+@Config(constants = BuildConfig.class)
 public class SmsBookingResolverTest {
   @Test public void createSmsIntentByActionHavingBothNumberAndBody() {
     final Intent intent = SmsBookingResolver.createSmsIntentByAction("sms:12345?Hello Android!");

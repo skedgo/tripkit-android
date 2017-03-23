@@ -14,7 +14,7 @@ import static com.skedgo.android.tripkit.RouteOptions.WALKING_SPEED_SLOW;
 import static org.assertj.core.api.Assertions.assertThat;
 
 @RunWith(TestRunner.class)
-@Config(constants = BuildConfig.class, sdk = 21)
+@Config(constants = BuildConfig.class)
 public class RouteOptionsTest {
   @Test
   public void shouldBuildRouteOptionsProperly_1() {
