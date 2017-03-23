@@ -7,9 +7,9 @@ import org.robolectric.manifest.AndroidManifest
 import org.robolectric.res.FileFsFile
 
 
-class TestRunner @Throws(InitializationError::class)
-constructor(klass: Class<*>) : RobolectricTestRunner(klass) {
-
+class TestRunner @Throws(InitializationError::class) constructor(
+    klass: Class<*>
+) : RobolectricTestRunner(klass) {
   override fun getAppManifest(config: Config): AndroidManifest {
     // After upgrading to gradle plugin v2.2.0, the file path of
     // the AM file no longer contained `full` but `aapt`.
