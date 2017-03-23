@@ -8,6 +8,7 @@ import android.support.design.widget.BottomSheetBehavior
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
+import android.text.TextUtils
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -60,8 +61,14 @@ class TripDetailsActivity : AppCompatActivity() {
       }
 
       override fun onBindViewHolder(holder: SegmentViewHolder, position: Int) {
-        holder.actionTitle.text = TripSegmentUtils.getTripSegmentAction(holder.itemView.context, trip.segments[position])
+        val tripSegment = trip.segments[position]
+        holder.actionTitle.text = TripSegmentUtils.getTripSegmentAction(holder.itemView.context, tripSegment)
         holder.actionNotes.text = trip.segments[position].getDisplayNotes(holder.itemView.resources)
+        if (!TextUtils.isEmpty(tripSegment.notes)) {
+          holder.actionNotes.visibility = View.VISIBLE
+        } else {
+          holder.actionNotes.visibility = View.GONE
+        }
       }
 
       override fun getItemCount(): Int {
