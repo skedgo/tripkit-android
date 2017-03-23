@@ -20,12 +20,12 @@ import android.util.Log;
 
 import com.skedgo.android.common.BuildConfig;
 
-public class LogUtils {
-
+@Deprecated
+public final class LogUtils {
   private static final String LOG_PREFIX = "sg_";
   private static final int LOG_PREFIX_LENGTH = LOG_PREFIX.length();
   private static final int MAX_LOG_TAG_LENGTH = 23;
-  public static boolean isDebug = BuildConfig.DEBUG;
+  private static boolean isDebug = BuildConfig.DEBUG;
 
   private LogUtils() {
   }

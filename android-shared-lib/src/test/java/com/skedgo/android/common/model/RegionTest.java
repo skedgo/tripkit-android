@@ -17,7 +17,7 @@ import static junit.framework.Assert.assertNotNull;
 import static org.assertj.core.api.Assertions.assertThat;
 
 @RunWith(TestRunner.class)
-@Config(constants = BuildConfig.class, sdk = 21)
+@Config(constants = BuildConfig.class)
 public class RegionTest {
   @Test public void serializedNames() {
     final Region region = new Region();

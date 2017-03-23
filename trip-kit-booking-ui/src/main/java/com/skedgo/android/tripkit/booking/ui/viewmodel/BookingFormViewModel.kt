@@ -5,7 +5,6 @@ import android.databinding.ObservableArrayList
 import android.databinding.ObservableBoolean
 import android.databinding.ObservableField
 import android.databinding.ObservableList
-import android.databinding.repacked.google.common.annotations.VisibleForTesting
 import android.os.Bundle
 import com.skedgo.android.tripkit.booking.*
 import com.skedgo.android.tripkit.booking.ui.activity.*
@@ -46,8 +45,8 @@ class BookingFormViewModel
   val onCancel: PublishSubject<Boolean> = PublishSubject.create()
   val onErrorRetry: PublishSubject<String> = PublishSubject.create()
 
-  @VisibleForTesting var bookingForm: BookingForm? = null
-  @VisibleForTesting var bookingError: BookingError? = null
+  var bookingForm: BookingForm? = null
+  var bookingError: BookingError? = null
 
   fun onAction() {
     when {
@@ -100,7 +99,7 @@ class BookingFormViewModel
 
   }
 
-  @VisibleForTesting fun showError(error: BookingError) {
+  fun showError(error: BookingError) {
     bookingError = error
 
     hasError.set(true)
@@ -115,13 +114,13 @@ class BookingFormViewModel
         })
   }
 
-  @VisibleForTesting fun updateBookingFormInfo() {
+  fun updateBookingFormInfo() {
     onUpdateFormTitle.onNext(bookingForm?.title ?: "")
     actionTitle.set(bookingForm?.action?.title)
     showAction.set(bookingForm?.action != null)
   }
 
-  @VisibleForTesting fun updateFieldList() {
+  fun updateFieldList() {
     bookingForm?.form
         ?.forEach {
           if (it.title != null) {

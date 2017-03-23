@@ -12,7 +12,7 @@ import rx.Subscriber;
 import static org.assertj.core.api.Assertions.assertThat;
 
 @RunWith(TestRunner.class)
-@Config(constants = BuildConfig.class, sdk = 21)
+@Config(constants = BuildConfig.class)
 public class CacheImplTest {
   @Test public void someInitialBehaviors() {
     final AtomicInteger fetcherHitCounter = new AtomicInteger();

@@ -16,7 +16,7 @@ import static junit.framework.Assert.assertEquals;
 import static org.assertj.core.api.Assertions.assertThat;
 
 @RunWith(TestRunner.class)
-@Config(constants = BuildConfig.class, sdk = 21)
+@Config(constants = BuildConfig.class)
 public class TransportModeTest {
   @Test public void serializedNames() {
     final TransportMode mode = new TransportMode();

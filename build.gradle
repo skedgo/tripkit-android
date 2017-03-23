@@ -1,5 +1,5 @@
 buildscript {
-  ext.androidPluginVersion = '2.2.3'
+  ext.androidPluginVersion = '2.3.0'
   ext.kotlinVersion = '1.1.1'
 
   repositories {
