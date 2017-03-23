@@ -24,13 +24,9 @@ android {
 }
 
 dependencies {
-  compile project(':trip-kit')
-  compile project(':trip-kit-booking')
   compile 'com.squareup.picasso:picasso:2.5.2'
   compile 'com.facebook.stetho:stetho:1.2.0'
   compile 'com.facebook.stetho:stetho-okhttp:1.2.0'
-  compile 'com.android.support:appcompat-v7:25.3.0'
-  compile 'com.google.android.gms:play-services-maps:10.0.1'
-  compile 'com.android.support.constraint:constraint-layout:1.0.2'
-  compile 'com.android.support:design:25.3.0'
+  compile project(":trip-kit")
+  compile project(":trip-kit-booking")
 }
