@@ -14,7 +14,7 @@ import org.robolectric.annotation.Config;
 import static org.assertj.core.api.Assertions.assertThat;
 
 @RunWith(TestRunner.class)
-@Config(constants = BuildConfig.class, sdk = 21)
+@Config(constants = BuildConfig.class)
 public class LowercaseEnumTypeAdapterFactoryTest {
   private static final String KEY_SPEED_TYPE = "speedType";
   private Gson gson;

@@ -33,7 +33,7 @@ import static com.skedgo.android.common.model.VehicleMode.from;
 import static org.assertj.core.api.Assertions.assertThat;
 
 @RunWith(TestRunner.class)
-@Config(constants = BuildConfig.class, sdk = 21)
+@Config(constants = BuildConfig.class)
 public class VehicleModeTest {
   @Test
   public void defineLocalTransportIcons() {

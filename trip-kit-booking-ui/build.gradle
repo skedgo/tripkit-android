@@ -1,6 +1,7 @@
 apply plugin: 'com.android.library'
 apply plugin: 'com.github.dcendents.android-maven'
 apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-kapt'
 
 // For https://github.com/dcendents/android-maven-gradle-plugin.
 group = 'com.skedgo'
@@ -21,10 +22,6 @@ android {
     checkReleaseBuilds true
     abortOnError false
   }
-}
-
-kapt {
-  generateStubs = true
 }
 
 dependencies {
