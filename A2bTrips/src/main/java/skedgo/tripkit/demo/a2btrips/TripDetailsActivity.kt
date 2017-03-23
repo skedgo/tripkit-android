@@ -14,8 +14,10 @@ import android.view.ViewGroup
 import android.widget.TextView
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.SupportMapFragment
+import com.google.android.gms.maps.model.BitmapDescriptorFactory
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.LatLngBounds
+import com.google.android.gms.maps.model.MarkerOptions
 import com.google.gson.Gson
 import com.skedgo.android.common.model.Trip
 import com.skedgo.android.common.util.TripSegmentUtils
@@ -28,7 +30,6 @@ const val TRIP_JSON = "{\"caloriesCost\":48.0,\"currencySymbol\":\"đ\",\"carbon
 class TripDetailsActivity : AppCompatActivity() {
 
   val tripLinesProcessor = TripLinesProcessor()
-  val segmentMarkersProcessor = SegmentMarkersProcessor()
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
     val binding = DataBindingUtil.setContentView<ActivityTripDetailsBinding>(this, R.layout.activity_trip_details)
@@ -45,6 +46,12 @@ class TripDetailsActivity : AppCompatActivity() {
           .include(LatLng(trip.from.lat, trip.from.lon))
           .include(LatLng(trip.to.lat, trip.to.lon))
           .build(), 200))
+      map.addMarker(MarkerOptions()
+          .position(LatLng(trip.from.lat, trip.from.lon))
+          .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN)))
+      map.addMarker(MarkerOptions()
+          .position(LatLng(trip.to.lat, trip.to.lon))
+          .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED)))
     }
     binding.segmentList.adapter = object : RecyclerView.Adapter<SegmentViewHolder>() {
 
