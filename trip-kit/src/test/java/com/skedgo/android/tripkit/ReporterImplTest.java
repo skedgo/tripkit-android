@@ -25,7 +25,7 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 @RunWith(TestRunner.class)
-@Config(constants = BuildConfig.class, sdk = 21)
+@Config(constants = BuildConfig.class)
 public class ReporterImplTest {
   private static final String PLANNED_URL = "https://granduni.buzzhives.com/satapp/trip/planned/284f2a16-b996-4f06-ba2e-59c91f4543d7";
   private static final String EXPECTED_PLANNED_URL = "https://granduni.buzzhives.com/satapp/trip/planned/284f2a16-b996-4f06-ba2e-59c91f4543d7/";

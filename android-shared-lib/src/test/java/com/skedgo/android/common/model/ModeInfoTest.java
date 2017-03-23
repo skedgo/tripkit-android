@@ -17,7 +17,7 @@ import java.util.Comparator;
 import static org.assertj.core.api.Assertions.assertThat;
 
 @RunWith(TestRunner.class)
-@Config(constants = BuildConfig.class, sdk = 21)
+@Config(constants = BuildConfig.class)
 public class ModeInfoTest {
   @Test public void parcel() {
     final ModeInfo expected = createModeInfo();
