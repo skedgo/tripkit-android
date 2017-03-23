@@ -26,8 +26,6 @@ public class SamplesActivity extends ListActivity {
       startActivity(new Intent(this, TransportModesActivity.class));
     } else if (position == 2) {
       startActivity(new Intent(this, RoutesActivity.class));
-    } else if (position == 3) {
-      startActivity(new Intent(this, TripDetailsActivity.class));
     }
   }
 }
