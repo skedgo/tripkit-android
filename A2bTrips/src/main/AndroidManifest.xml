@@ -6,6 +6,7 @@
   <uses-feature
     android:glEsVersion="0x00020000"
     android:required="true" />
+
   <application
     android:name=".App"
     android:allowBackup="true"
@@ -18,9 +19,6 @@
     <meta-data
       android:name="com.google.android.geo.API_KEY"
       android:value="@string/google_maps_key" />
-    <meta-data
-      android:name="com.google.android.gms.version"
-      android:value="@integer/google_play_services_version" />
 
     <activity android:name=".A2bTripsActivity">
       <intent-filter>
@@ -29,10 +27,9 @@
         <category android:name="android.intent.category.LAUNCHER" />
       </intent-filter>
     </activity>
+
     <activity
       android:name=".TripDetailsActivity"
-      android:exported="true">
-
-    </activity>
+      android:exported="true" />
   </application>
 </manifest>

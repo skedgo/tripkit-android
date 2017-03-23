@@ -8,20 +8,21 @@
     android:layout_height="match_parent"
     tools:context="skedgo.tripkit.demo.a2btrips.TripDetailsActivity">
 
-    <com.google.android.gms.maps.MapView
-      android:id="@+id/mapView"
-      android:background="@color/colorAccent"
+    <fragment
+      android:id="@+id/mapFragment"
+      class="com.google.android.gms.maps.SupportMapFragment"
       android:layout_width="match_parent"
       android:layout_height="match_parent">
 
-    </com.google.android.gms.maps.MapView>
+    </fragment>
 
     <FrameLayout
       android:id="@+id/bottomSheet"
       android:layout_width="match_parent"
       android:layout_height="match_parent"
-      app:layout_behavior="@string/bottom_sheet_behavior"
-      android:theme="@style/ThemeOverlay.AppCompat.Light">
+      android:background="@android:color/background_light"
+      android:theme="@style/ThemeOverlay.AppCompat.Light"
+      app:layout_behavior="@string/bottom_sheet_behavior">
 
       <android.support.v7.widget.RecyclerView
         android:id="@+id/segmentList"
