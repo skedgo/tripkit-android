@@ -61,6 +61,7 @@ class TripDetailsActivity : AppCompatActivity() {
 
       override fun onBindViewHolder(holder: SegmentViewHolder, position: Int) {
         holder.actionTitle.text = TripSegmentUtils.getTripSegmentAction(holder.itemView.context, trip.segments[position])
+        holder.actionNotes.text = trip.segments[position].getDisplayNotes(holder.itemView.resources)
       }
 
       override fun getItemCount(): Int {
@@ -74,7 +75,8 @@ class TripDetailsActivity : AppCompatActivity() {
   }
 
   private class SegmentViewHolder internal constructor(itemView: View) : RecyclerView.ViewHolder(itemView) {
-    internal val actionTitle: TextView = itemView.findViewById(R.id.segmentTitle) as TextView
+    internal val actionTitle: TextView = itemView.findViewById(R.id.segmentActionTitle) as TextView
+    internal val actionNotes: TextView = itemView.findViewById(R.id.segmentActionNotes) as TextView
   }
 
   companion object {
