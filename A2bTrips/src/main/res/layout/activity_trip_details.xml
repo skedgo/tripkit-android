@@ -1,26 +1,34 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
   xmlns:app="http://schemas.android.com/apk/res-auto"
-  xmlns:tools="http://schemas.android.com/tools"
-  android:layout_width="match_parent"
-  android:layout_height="match_parent"
-  tools:context="skedgo.tripkit.demo.a2btrips.TripDetailsActivity">
+  xmlns:tools="http://schemas.android.com/tools">
 
-  <FrameLayout
-    android:id="@+id/bottomSheet"
+  <android.support.design.widget.CoordinatorLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@android:color/background_dark"
-    app:theme="@style/ThemeOverlay.AppCompat.Light"
-    app:layout_behavior="@string/bottom_sheet_behavior">
+    tools:context="skedgo.tripkit.demo.a2btrips.TripDetailsActivity">
 
-    <android.support.v7.widget.RecyclerView
-      android:id="@+id/segmentList"
+    <com.google.android.gms.maps.MapView
+      android:id="@+id/mapView"
+      android:background="@color/colorAccent"
       android:layout_width="match_parent"
       android:layout_height="match_parent">
 
-    </android.support.v7.widget.RecyclerView>
+    </com.google.android.gms.maps.MapView>
 
-  </FrameLayout>
+    <FrameLayout
+      android:id="@+id/bottomSheet"
+      android:layout_width="match_parent"
+      android:layout_height="match_parent"
+      app:layout_behavior="@string/bottom_sheet_behavior"
+      android:theme="@style/ThemeOverlay.AppCompat.Light">
 
-</android.support.design.widget.CoordinatorLayout>
+      <android.support.v7.widget.RecyclerView
+        android:id="@+id/segmentList"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+    </FrameLayout>
+
+  </android.support.design.widget.CoordinatorLayout>
+</layout>
