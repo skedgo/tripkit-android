@@ -16,7 +16,7 @@ import static org.assertj.core.api.Assertions.assertThat;
  * @see <a href="https://redmine.buzzhives.com/projects/buzzhives/wiki/Inter-city_routing">Inter-city routing</a>
  */
 @RunWith(TestRunner.class)
-@Config(constants = BuildConfig.class, sdk = 21)
+@Config(constants = BuildConfig.class)
 public class InterRegionTest {
   @Test public void shouldUnionModesFromDepartureRegionAndArrivalRegion() {
     final Region departureRegion = new Region();

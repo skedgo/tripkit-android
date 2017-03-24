@@ -1,24 +1,21 @@
 apply plugin: "com.android.library"
 apply plugin: 'com.github.dcendents.android-maven'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-kapt'
+apply plugin: 'com.jfrog.bintray'
 
 // For https://github.com/dcendents/android-maven-gradle-plugin.
 group = 'com.skedgo'
-version = '1.0'
+version = '1.1'
 
 android {
-  compileSdkVersion 24
+  compileSdkVersion 25
   buildToolsVersion '25.0.2'
 
   defaultConfig {
-    minSdkVersion 10
-    targetSdkVersion 22
+    minSdkVersion 15
+    targetSdkVersion 25
     testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
-  }
-
-  buildTypes {
-    release {
-      minifyEnabled false
-    }
   }
 
   packagingOptions {
@@ -52,30 +49,76 @@ dependencies {
   androidTestCompile "com.android.support.test:rules:0.5"
   androidTestCompile "org.assertj:assertj-core:1.7.0"
 
-  compile "com.google.android.gms:play-services-gcm:9.6.1"
+  compile "org.jetbrains.kotlin:kotlin-stdlib:$kotlinVersion"
+  compile "com.google.android.gms:play-services-gcm:10.0.1"
 
   compile 'com.github.skedgo:sqlite-utils:v1.0'
-  compile "com.squareup.okhttp3:okhttp:3.2.0"
+  compile "com.squareup.okhttp3:okhttp:$okHttpVersion"
   compile "com.squareup.retrofit2:converter-gson:2.0.2"
-  compile("com.squareup.retrofit2:adapter-rxjava:2.0.2") {
-    exclude module: 'rxjava'
-  }
-  compile("com.squareup.retrofit2:retrofit:2.0.2") {
-    // Exclude Retrofit’s OkHttp peer-dependency module and define our own module import.
-    exclude module: 'okhttp'
-  }
+  compile "com.squareup.retrofit2:adapter-rxjava:2.0.2"
+  compile "com.squareup.retrofit2:retrofit:2.0.2"
 
   compile 'com.google.dagger:dagger:2.7'
-  annotationProcessor 'com.google.dagger:dagger-compiler:2.7'
+  kapt 'com.google.dagger:dagger-compiler:2.7'
 
   // To generate immutable models.
   // See more at http://immutables.github.io/.
-  annotationProcessor 'org.immutables:value:2.3.9'
+  kapt 'org.immutables:value:2.3.9'
   provided 'org.immutables:value:2.3.9:annotations'
   provided 'org.immutables:builder:2.3.9'
   provided 'org.immutables:gson:2.3.9:annotations'
 
-  compile project(":android-shared-lib")
+  compile project(':android-shared-lib')
+  compile project(':ConfigurationDomain')
+  compile project(':ConfigurationData')
+}
+
+install {
+  repositories.mavenInstaller {
+    pom.project {
+      name 'TripKit Android'
+      description 'TripKit Android'
+      url 'https://github.com/skedgo/tripkit-android.git'
+      inceptionYear '2013'
+
+      packaging 'aar'
+      groupId project.group
+      artifactId 'trip-kit'
+      version project.version
+
+      licenses {
+        license {
+          name 'The MIT License'
+          url 'https://spdx.org/licenses/MIT#licenseText'
+          distribution 'repo'
+        }
+      }
+      developers {
+        developer {
+          name 'SkedGo'
+        }
+      }
+    }
+  }
+}
+
+bintray {
+  user = BINTRAY_USER
+  key = BINTRAY_KEY
+  configurations = ['archives']
+  pkg {
+    repo = 'tripkit-android'
+    name = 'tripkit'
+    userOrg = 'skedgo'
+    licenses = ['MIT']
+    vcsUrl = 'https://github.com/skedgo/tripkit-android.git'
+    version {
+      name = project.version
+      desc = "TripKit Android $project.version"
+      released = new Date()
+      vcsTag = project.version
+    }
+  }
 }
 
 uploadArchives {

@@ -2,7 +2,6 @@ package com.skedgo.android.tripkit.booking;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.robolectric.RobolectricGradleTestRunner;
 import org.robolectric.annotation.Config;
 
 import java.util.ArrayList;
@@ -10,8 +9,8 @@ import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-@RunWith(RobolectricGradleTestRunner.class)
-@Config(constants = BuildConfig.class, sdk = 21)
+@RunWith(TestRunner.class)
+@Config(constants = BuildConfig.class)
 public class InputFormTest {
 
   @Test public void NullInput() {

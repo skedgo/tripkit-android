@@ -4,6 +4,7 @@ import android.os.Parcel;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.google.gson.JsonObject;
 import com.google.gson.stream.JsonReader;
 
 import org.apache.commons.io.IOUtils;
@@ -412,5 +413,12 @@ public class BookingFormTest {
     GsonBuilder builder = new GsonBuilder();
     builder.registerTypeAdapter(FormField.class, new FormFieldJsonAdapter());
     gson = builder.create();
+  }
+
+  @Test public void shouldBeUberBookingForm() throws Exception {
+    JsonObject jsonObject = new JsonObject();
+    jsonObject.addProperty("value", "uber");
+    BookingForm bookingForm = new Gson().fromJson(jsonObject, BookingForm.class);
+    assertThat(bookingForm.isUberAuthForm()).isTrue();
   }
 }

@@ -32,7 +32,7 @@ import static org.mockito.Matchers.any;
 import static org.mockito.Mockito.when;
 
 @RunWith(TestRunner.class)
-@Config(constants = BuildConfig.class, sdk = 21)
+@Config(constants = BuildConfig.class)
 public class QueryGeneratorImplTest {
   @Mock RegionService regionService;
   private Func1<Query, Observable<List<Query>>> queryGenerator;

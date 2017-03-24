@@ -14,7 +14,7 @@ import static java.util.Collections.singletonList;
 import static org.assertj.core.api.Assertions.assertThat;
 
 @RunWith(TestRunner.class)
-@Config(constants = BuildConfig.class, sdk = 21)
+@Config(constants = BuildConfig.class)
 public class BookingTest {
   @Test public void parcel() {
     final Booking expected = ImmutableBooking.builder()

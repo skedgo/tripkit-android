@@ -21,7 +21,7 @@ import thuytrinh.mockwebserverrule.MockWebServerRule;
 import static org.assertj.core.api.Assertions.assertThat;
 
 @RunWith(TestRunner.class)
-@Config(constants = BuildConfig.class, sdk = 21)
+@Config(constants = BuildConfig.class)
 public class BuiltInInterceptorTest {
   @Rule public MockWebServerRule serverRule = new MockWebServerRule();
   private HttpUrl url;
@@ -34,7 +34,11 @@ public class BuiltInInterceptorTest {
     final Interceptor interceptor = BuiltInInterceptorBuilder.create()
         .appVersion("Some version")
         .locale(Locale.JAPANESE)
-        .regionEligibility("Some id")
+        .getRegionEligibility(new Func0<String>() {
+          @Override public String call() {
+            return "Some id";
+          }
+        })
         .userTokenProvider(new Func0<String>() {
           @Override public String call() {
             return "Some token";
@@ -63,7 +67,11 @@ public class BuiltInInterceptorTest {
     final Interceptor interceptor = BuiltInInterceptorBuilder.create()
         .appVersion("Some version")
         .locale(Locale.JAPANESE)
-        .regionEligibility("Some id")
+        .getRegionEligibility(new Func0<String>() {
+          @Override public String call() {
+            return "Some id";
+          }
+        })
         .build();
 
     serverRule.server.enqueue(new MockResponse());
@@ -78,7 +86,11 @@ public class BuiltInInterceptorTest {
     final Interceptor interceptor = BuiltInInterceptorBuilder.create()
         .appVersion("Some version")
         .locale(Locale.JAPANESE)
-        .regionEligibility("Some id")
+        .getRegionEligibility(new Func0<String>() {
+          @Override public String call() {
+            return "Some id";
+          }
+        })
         .uuidProvider(new Func0<String>() {
           @Override public String call() {
             return null;
@@ -96,7 +108,11 @@ public class BuiltInInterceptorTest {
   @Test(expected = IllegalStateException.class)
   public void appVersionIsMandatory() {
     BuiltInInterceptorBuilder.create()
-        .regionEligibility("Some name")
+        .getRegionEligibility(new Func0<String>() {
+          @Override public String call() {
+            return "Some name";
+          }
+        })
         .locale(Locale.US)
         .build();
   }
@@ -113,7 +129,11 @@ public class BuiltInInterceptorTest {
   public void localeIsMandatory() {
     BuiltInInterceptorBuilder.create()
         .appVersion("Some version")
-        .regionEligibility("Some name")
+        .getRegionEligibility(new Func0<String>() {
+          @Override public String call() {
+            return "Some name";
+          }
+        })
         .build();
   }
 
@@ -121,7 +141,11 @@ public class BuiltInInterceptorTest {
     BuiltInInterceptorBuilder.create()
         .appVersion("Some version")
         .locale(Locale.JAPANESE)
-        .regionEligibility("Some name")
+        .getRegionEligibility(new Func0<String>() {
+          @Override public String call() {
+            return "Some name";
+          }
+        })
         .build();
   }
 

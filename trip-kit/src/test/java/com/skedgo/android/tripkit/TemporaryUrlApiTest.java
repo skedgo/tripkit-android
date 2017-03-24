@@ -25,7 +25,7 @@ import rx.observers.TestSubscriber;
 import static org.assertj.core.api.Assertions.assertThat;
 
 @RunWith(TestRunner.class)
-@Config(constants = BuildConfig.class, sdk = 21)
+@Config(constants = BuildConfig.class)
 public class TemporaryUrlApiTest {
   private MockWebServer server;
   private TemporaryUrlApi api;

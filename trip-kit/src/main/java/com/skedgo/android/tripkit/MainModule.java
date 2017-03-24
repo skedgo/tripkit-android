@@ -18,7 +18,6 @@ import com.skedgo.android.tripkit.tsp.GsonAdaptersRegionInfo;
 import com.skedgo.android.tripkit.tsp.GsonAdaptersRegionInfoBody;
 import com.skedgo.android.tripkit.tsp.GsonAdaptersRegionInfoResponse;
 import com.skedgo.android.tripkit.tsp.RegionInfoService;
-import com.squareup.okhttp.OkHttpClient;
 
 import java.util.List;
 import java.util.Locale;
@@ -32,19 +31,15 @@ import dagger.Lazy;
 import dagger.Module;
 import dagger.Provides;
 import okhttp3.HttpUrl;
-import retrofit.RestAdapter;
-import retrofit.client.OkClient;
-import retrofit.converter.GsonConverter;
+import okhttp3.OkHttpClient;
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
 import rx.functions.Action1;
 import rx.functions.Func0;
-import rx.functions.Func1;
 import rx.schedulers.Schedulers;
-
-import static retrofit.RestAdapter.LogLevel.FULL;
-import static retrofit.RestAdapter.LogLevel.NONE;
+import skedgo.tripkit.configuration.domain.GetRegionEligibilityHeaderValue;
+import skedgo.tripkit.configuration.domain.RegionEligibility;
 
 @Module
 public class MainModule {
@@ -69,11 +64,11 @@ public class MainModule {
   }
 
   @Provides RegionsApi getRegionsApi(OkHttpClient httpClient) {
-    return new RestAdapter.Builder()
-        .setLogLevel(configs.debuggable() ? FULL : NONE)
-        .setEndpoint("https://tripgo.skedgo.com/satapp")
-        .setConverter(new GsonConverter(Gsons.createForRegion()))
-        .setClient(new OkClient(httpClient))
+    return new Retrofit.Builder()
+        .baseUrl("https://tripgo.skedgo.com/satapp/")
+        .addConverterFactory(GsonConverterFactory.create(Gsons.createForRegion()))
+        .addCallAdapterFactory(RxJavaCallAdapterFactory.createWithScheduler(Schedulers.io()))
+        .client(httpClient)
         .build()
         .create(RegionsApi.class);
   }
@@ -139,35 +134,35 @@ public class MainModule {
     );
   }
 
-  @Provides BuiltInInterceptorCompat builtInInterceptorCompat(
-      Lazy<UuidProvider> uuidProviderLazy) {
-    // Null to opt-out sending UUID header.
-    final UuidProvider uuidProvider = configs.isUuidOptedOut() ? null : uuidProviderLazy.get();
-    return BuiltInInterceptorCompatBuilder.create()
-        .appVersion(getAppVersion())
-        .locale(Locale.getDefault())
-        .regionEligibility(configs.regionEligibility())
-        .userTokenProvider(configs.userTokenProvider())
-        .uuidProvider(uuidProvider)
-        .build();
+  @Provides Context context() {
+    return configs.context();
   }
 
-  @Provides BuiltInInterceptor builtInInterceptor(Lazy<UuidProvider> uuidProviderLazy) {
+  @Provides BuiltInInterceptor builtInInterceptor(
+      Lazy<UuidProvider> uuidProviderLazy,
+      final Lazy<GetRegionEligibilityHeaderValue> getRegionEligibilityHeaderValueLazy) {
     // Null to opt-out sending UUID header.
     final UuidProvider uuidProvider = configs.isUuidOptedOut() ? null : uuidProviderLazy.get();
+    final RegionEligibility defaultRegionEligibility = new RegionEligibility(configs.regionEligibility());
     return BuiltInInterceptorBuilder.create()
         .appVersion(getAppVersion())
         .locale(Locale.getDefault())
-        .regionEligibility(configs.regionEligibility())
         .userTokenProvider(configs.userTokenProvider())
         .uuidProvider(uuidProvider)
+        .getRegionEligibility(new Func0<String>() {
+          @Override public String call() {
+            return getRegionEligibilityHeaderValueLazy.get()
+                .execute(defaultRegionEligibility)
+                .toBlocking().first();
+          }
+        })
         .build();
   }
 
-  @Singleton @Provides okhttp3.OkHttpClient httpClient3(
-      okhttp3.OkHttpClient.Builder httpClientBuilder,
+  @Singleton @Provides OkHttpClient httpClient(
+      OkHttpClient.Builder httpClientBuilder,
       BuiltInInterceptor builtInInterceptor) {
-    final okhttp3.OkHttpClient.Builder builder = httpClientBuilder
+    final OkHttpClient.Builder builder = httpClientBuilder
         .addInterceptor(builtInInterceptor);
     if (configs.debuggable()) {
       final Func0<Func0<String>> baseUrlAdapterFactory = configs.baseUrlAdapterFactory();
@@ -178,48 +173,21 @@ public class MainModule {
     return builder.build();
   }
 
-  @Provides ServiceExtrasService getServiceExtrasService(
-      Gson gson,
-      OkHttpClient httpClient,
-      RegionService regionService) {
-    final DynamicEndpoint endpoint = new AlphaDynamicEndpoint(
-        "https://tripgo.skedgo.com/satapp",
-        "skedgo"
-    );
-    final ServiceApi serviceApi = new RestAdapter.Builder()
-        .setLogLevel(configs.debuggable() ? FULL : NONE)
-        .setEndpoint(endpoint)
-        .setConverter(new GsonConverter(gson))
-        .setClient(new OkClient(httpClient))
+  @Provides ReportingApi reportingApi(Gson gson, OkHttpClient httpClient) {
+    return new Retrofit.Builder()
+        /* This base url is ignored as the api relies on @Url. */
+        .baseUrl("https://tripgo.skedgo.com/satapp/")
+        .addCallAdapterFactory(RxJavaCallAdapterFactory.createWithScheduler(Schedulers.io()))
+        .addConverterFactory(GsonConverterFactory.create(gson))
+        .client(httpClient)
         .build()
-        .create(ServiceApi.class);
-    return new AlphaServiceExtrasService(
-        regionService,
-        endpoint,
-        serviceApi
-    );
+        .create(ReportingApi.class);
   }
 
-  @Provides Func1<String, ReportingApi> getReportingApiFactory(
-      final Gson gson,
-      final OkHttpClient httpClient) {
-    return new Func1<String, ReportingApi>() {
-      @Override public ReportingApi call(String endpoint) {
-        return new RestAdapter.Builder()
-            .setLogLevel(configs.debuggable() ? FULL : NONE)
-            .setEndpoint(endpoint)
-            .setConverter(new GsonConverter(gson))
-            .setClient(new OkClient(httpClient))
-            .build()
-            .create(ReportingApi.class);
-      }
-    };
-  }
-
-  @Singleton @Provides Reporter getReporter(
-      Func1<String, ReportingApi> reportingApiFactory,
+  @Singleton @Provides Reporter reporter(
+      ReportingApi reportingApi,
       Action1<Throwable> errorHandler) {
-    return new ReporterImpl(reportingApiFactory, errorHandler);
+    return new ReporterImpl(reportingApi, errorHandler);
   }
 
   @Provides BookingResolver getBookingResolver() {
@@ -230,7 +198,7 @@ public class MainModule {
     );
   }
 
-  @Provides TripUpdateApi getTripUpdateApi(Gson gson, okhttp3.OkHttpClient httpClient) {
+  @Provides TripUpdateApi getTripUpdateApi(Gson gson, OkHttpClient httpClient) {
     return new Retrofit.Builder()
         /* This base url is ignored as the api relies on @Url. */
         .baseUrl(HttpUrl.parse("https://tripgo.skedgo.com/satapp/"))
@@ -245,7 +213,7 @@ public class MainModule {
     return new TripUpdaterImpl(context.getResources(), api, "12", gson);
   }
 
-  @Provides LocationInfoApi getLocationInfoApi(Gson gson, okhttp3.OkHttpClient httpClient) {
+  @Provides LocationInfoApi getLocationInfoApi(Gson gson, OkHttpClient httpClient) {
     return new Retrofit.Builder()
         /* This base url is ignored as the api relies on @Url. */
         .baseUrl(HttpUrl.parse("https://tripgo.skedgo.com/satapp/"))

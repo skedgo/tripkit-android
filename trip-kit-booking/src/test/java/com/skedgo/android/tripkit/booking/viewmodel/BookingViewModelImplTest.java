@@ -9,34 +9,31 @@ import com.skedgo.android.tripkit.booking.FormGroup;
 import com.skedgo.android.tripkit.booking.InputForm;
 import com.skedgo.android.tripkit.booking.OptionFormField;
 import com.skedgo.android.tripkit.booking.StringFormField;
+import com.skedgo.android.tripkit.booking.TestRunner;
 
 import org.assertj.core.api.Assertions;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.robolectric.RobolectricGradleTestRunner;
 import org.robolectric.annotation.Config;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.concurrent.atomic.AtomicInteger;
 
 import rx.Observable;
-import rx.Subscriber;
 import rx.functions.Action1;
 import rx.observers.TestSubscriber;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.mockito.Matchers.anyString;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
-@RunWith(RobolectricGradleTestRunner.class)
-@Config(constants = BuildConfig.class, sdk = 21)
+@RunWith(TestRunner.class)
+@Config(constants = BuildConfig.class)
 public class BookingViewModelImplTest {
   private AuthenticationViewModel authenticationViewModel;
   private BookingViewModel bookingViewModel;
@@ -124,31 +121,6 @@ public class BookingViewModelImplTest {
         assertThat(list.get(3)).isInstanceOf(OptionFormField.class);
       }
     });
-  }
-
-  @Test public void threeTimesOnFailureOfFetchingBookingForm() {
-    when(api.getFormAsync(anyString()))
-        .thenReturn(Observable.create(new Observable.OnSubscribe<BookingForm>() {
-          final AtomicInteger retryCounter = new AtomicInteger(0);
-
-          @Override
-          public void call(Subscriber<? super BookingForm> subscriber) {
-            if (retryCounter.incrementAndGet() == 3) {
-              // Ok, this time, let it succeed!
-              subscriber.onNext(new BookingForm());
-              subscriber.onCompleted();
-            } else {
-              subscriber.onError(new Exception("Failed to retrieve booking form"));
-            }
-          }
-        }));
-
-    try {
-      bookingViewModel.loadForm(Param.create("http://facebook.github.io/stetho/"))
-          .toBlocking().single();
-    } catch (Exception e) {
-      Assertions.fail("Retry fetching booking form 3 times on any failure", e);
-    }
   }
 
   @Test public void doNotCrashWithNullableParam() {

@@ -7,7 +7,6 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
-import org.robolectric.RobolectricGradleTestRunner;
 import org.robolectric.annotation.Config;
 
 import java.util.ArrayList;
@@ -21,8 +20,8 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
-@RunWith(RobolectricGradleTestRunner.class)
-@Config(constants = BuildConfig.class, sdk = 21)
+@RunWith(TestRunner.class)
+@Config(constants = BuildConfig.class)
 public class AuthServiceImplTest {
   @Mock AuthApi api;
   private AuthServiceImpl service;
@@ -42,7 +41,7 @@ public class AuthServiceImplTest {
     when(api.fetchProvidersAsync(
         url
     )).thenReturn(Observable.just(Collections.<AuthProvider>emptyList()));
-    service.fetchProvidersByRegionAsync(region, null).subscribe();
+    service.fetchProvidersByRegionAsync(region, null, false).subscribe();
     verify(api).fetchProvidersAsync(eq(url));
   }
 
@@ -56,7 +55,7 @@ public class AuthServiceImplTest {
     when(api.fetchProvidersAsync(
         url
     )).thenReturn(Observable.just(Collections.<AuthProvider>emptyList()));
-    service.fetchProvidersByRegionAsync(region, "uber").subscribe();
+    service.fetchProvidersByRegionAsync(region, "uber", false).subscribe();
     verify(api).fetchProvidersAsync(eq(url));
   }
 

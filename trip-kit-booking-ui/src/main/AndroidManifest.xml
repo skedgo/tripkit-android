@@ -1,10 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<manifest xmlns:android="http://schemas.android.com/apk/res/android"
-  package="com.skedgo.android.tripkit.booking.ui">
+<manifest package="com.skedgo.android.tripkit.booking.ui"
+  xmlns:android="http://schemas.android.com/apk/res/android">
 
   <application>
     <activity
       android:name="com.skedgo.android.tripkit.booking.ui.activity.ExternalProviderAuthActivity"
+      android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
+    <activity
+      android:name="com.skedgo.android.tripkit.booking.ui.activity.ExternalWebActivity"
       android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
   </application>
 </manifest>

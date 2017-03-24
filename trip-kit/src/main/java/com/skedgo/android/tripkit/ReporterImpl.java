@@ -10,16 +10,13 @@ import java.util.Map;
 
 import rx.functions.Action1;
 import rx.functions.Actions;
-import rx.functions.Func1;
 
 final class ReporterImpl implements Reporter {
-  private final Func1<String, ReportingApi> apiFactory;
+  private final ReportingApi api;
   private final Action1<Throwable> errorHandler;
 
-  ReporterImpl(
-      Func1<String, ReportingApi> apiFactory,
-      Action1<Throwable> errorHandler) {
-    this.apiFactory = apiFactory;
+  ReporterImpl(ReportingApi api, Action1<Throwable> errorHandler) {
+    this.api = api;
     this.errorHandler = errorHandler;
   }
 
@@ -27,12 +24,14 @@ final class ReporterImpl implements Reporter {
       @NonNull Trip trip,
       @Nullable Map<String, Object> userInfo) {
     if (trip.getPlannedURL() != null) {
-      apiFactory.call(trip.getPlannedURL())
+      api
           .reportPlannedTripAsync(
+              trip.getPlannedURL() + "/",
               userInfo == null
                   ? Collections.<String, Object>emptyMap()
                   : userInfo
-          ).subscribe(Actions.empty(), errorHandler);
+          )
+          .subscribe(Actions.empty(), errorHandler);
     }
   }
 }

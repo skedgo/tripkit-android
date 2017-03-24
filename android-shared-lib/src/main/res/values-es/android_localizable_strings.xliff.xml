@@ -132,7 +132,6 @@
 	<string name="influence_trip_results_by_setting_what_aposts_most_important_to_you">Modifique los resultados a partir de establecer que es más importante para usted.</string>
 	<string name="allow_tripgo_to_anonymously_track_your_app_usage">Permitir a TripGo realizar un seguimiento de forma anónima del uso de la aplicación</string>
 	<string name="cycling_speed">Vel. en bicicleta</string>
-	<string name="contact_support">Contactar a Soporte</string>
 	<string name="end_of_public_transport">Fin del transporte público</string>
 	<string name="track_location">Seguimiento de la ubicación</string>
 	<string name="sorted_by_price">Ordenado por precio</string>
@@ -193,4 +192,4 @@
 	<string name="ticket_info">Información del Ticket</string>
 
 </resources>
-<!-- This is an auto generated file (Thu Jan 19 14:10:19 ART 2017) -->
+<!-- This is an auto generated file (Fri Mar 17 16:26:38 ART 2017) -->
