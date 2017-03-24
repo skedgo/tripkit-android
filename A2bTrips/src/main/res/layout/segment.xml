@@ -1,24 +1,36 @@
 <?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:tools="http://schemas.android.com/tools">
 
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-  xmlns:tools="http://schemas.android.com/tools"
-  android:layout_width="match_parent"
-  android:layout_height="wrap_content"
-  android:background="@android:color/white"
-  android:layout_margin="16dp"
-  android:orientation="vertical">
+  <data>
 
-  <TextView
-    android:id="@+id/segmentActionTitle"
+    <variable
+      name="viewModel"
+      type="skedgo.tripkit.demo.a2btrips.TripSegmentViewModel" />
+  </data>
+
+  <LinearLayout
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-    tools:text="ABC" />
+    android:layout_margin="24dp"
+    android:background="@android:color/white"
+    android:orientation="vertical">
 
-  <TextView
-    android:id="@+id/segmentActionNotes"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
+    <TextView
+      android:id="@+id/segmentActionTitle"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:text="@{viewModel.actionTitle}"
+      android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+      tools:text="ABC" />
 
-</LinearLayout>
+    <TextView
+      android:id="@+id/segmentActionNotes"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:text="@{viewModel.actionNotes}"
+      android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+      android:visibility="@{viewModel.hasActionNotes}" />
+
+  </LinearLayout>
+</layout>
