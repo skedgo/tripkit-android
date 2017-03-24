@@ -1,4 +1,4 @@
-package com.skedgo.android.tripkit;
+package com.skedgo.android.tripkit.bookingproviders;
 
 import android.support.annotation.IntDef;
 
@@ -11,6 +11,7 @@ import java.lang.annotation.RetentionPolicy;
     BookingResolver.FLITWAYS,
     BookingResolver.GOCATCH,
     BookingResolver.INGOGO,
+    BookingResolver.MTAXI,
     BookingResolver.SMS,
     BookingResolver.OTHERS
 })

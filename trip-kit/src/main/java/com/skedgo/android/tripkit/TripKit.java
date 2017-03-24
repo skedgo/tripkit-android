@@ -4,6 +4,7 @@ import android.content.Context;
 import android.support.annotation.NonNull;
 import android.support.annotation.VisibleForTesting;
 
+import com.skedgo.android.tripkit.bookingproviders.BookingResolver;
 import com.skedgo.android.tripkit.routing.RoutingModule;
 import com.skedgo.android.tripkit.tsp.TspModule;
 

@@ -2,6 +2,8 @@ package com.skedgo.android.tripkit;
 
 import android.content.Intent;
 
+import com.skedgo.android.tripkit.bookingproviders.BookingProvider;
+
 import org.immutables.value.Value;
 
 import static org.immutables.value.Value.Style.BuilderVisibility.PACKAGE;
