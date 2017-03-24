@@ -35,7 +35,8 @@ class TripViewModel constructor(
   val co2Cost by lazy {
     ObservableField<String>("CO2: ${representativeTrip.carbonCost}kg")
   }
-  fun select(){
+
+  fun select() {
     onTripSelected.onNext(representativeTrip)
   }
 }
