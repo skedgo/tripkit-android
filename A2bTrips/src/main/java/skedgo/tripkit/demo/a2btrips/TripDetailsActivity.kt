@@ -15,7 +15,7 @@ import com.google.android.gms.maps.model.MarkerOptions
 import com.skedgo.android.common.model.Trip
 import com.skedgo.android.tripkit.TripLinesProcessor
 import rx.Observable
-import skedgo.tripkit.demo.a2btrips.databinding.ActivityTripDetailsBinding
+import skedgo.tripkit.demo.a2btrips.databinding.TripDetailsBinding
 
 class TripDetailsActivity : AppCompatActivity() {
 
@@ -35,8 +35,9 @@ class TripDetailsActivity : AppCompatActivity() {
 
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
-    val binding = DataBindingUtil.setContentView<ActivityTripDetailsBinding>(this, R.layout.trip_details)
+    val binding = DataBindingUtil.setContentView<TripDetailsBinding>(this, R.layout.trip_details)
     binding.viewModel = viewModel
+
     val mapFragment = supportFragmentManager.findFragmentById(R.id.mapFragment) as SupportMapFragment
     mapFragment.getMapAsync { map ->
       tripLinesProcessor.getPolylineOptionsListAsync(trip.segments)
