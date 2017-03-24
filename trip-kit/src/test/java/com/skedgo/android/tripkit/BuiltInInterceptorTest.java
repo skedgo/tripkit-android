@@ -21,7 +21,7 @@ import thuytrinh.mockwebserverrule.MockWebServerRule;
 import static org.assertj.core.api.Assertions.assertThat;
 
 @RunWith(TestRunner.class)
-@Config(constants = BuildConfig.class, sdk = 21)
+@Config(constants = BuildConfig.class)
 public class BuiltInInterceptorTest {
   @Rule public MockWebServerRule serverRule = new MockWebServerRule();
   private HttpUrl url;

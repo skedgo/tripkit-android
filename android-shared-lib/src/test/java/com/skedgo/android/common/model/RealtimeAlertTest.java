@@ -18,7 +18,7 @@ import static com.skedgo.android.common.model.RealtimeAlert.SEVERITY_WARNING;
 import static org.assertj.core.api.Assertions.assertThat;
 
 @RunWith(TestRunner.class)
-@Config(constants = BuildConfig.class, sdk = 21)
+@Config(constants = BuildConfig.class)
 public class RealtimeAlertTest extends AndroidTestCase {
   @Test public void jsonKeys() {
     final RealtimeAlert alert = ImmutableRealtimeAlert.builder()

@@ -15,7 +15,7 @@ import java.util.Arrays;
 import static org.assertj.core.api.Assertions.assertThat;
 
 @RunWith(TestRunner.class)
-@Config(constants = BuildConfig.class, sdk = 21)
+@Config(constants = BuildConfig.class)
 public class SelectBestDisplayTripTest {
   @Test public void selectDisplayTripHavingLowestWeightedScore() {
     final Trip a = new Trip();

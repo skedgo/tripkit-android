@@ -16,7 +16,7 @@ import static java.util.Collections.singletonList;
 import static org.assertj.core.api.Assertions.assertThat;
 
 @RunWith(RobolectricTestRunner.class)
-@Config(constants = BuildConfig.class, sdk = 21)
+@Config(constants = BuildConfig.class)
 public class VarTest {
   @Test public void shouldNotEmitValueIfNoDefaultValue() {
     final Var<String> v = Var.create();

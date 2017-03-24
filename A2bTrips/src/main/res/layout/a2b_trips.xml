@@ -1,0 +1,32 @@
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:app="http://schemas.android.com/apk/res-auto">
+
+  <data>
+
+    <variable
+      name="viewModel"
+      type="skedgo.tripkit.demo.a2btrips.A2bTripsViewModel" />
+
+    <import type="me.tatarka.bindingcollectionadapter2.LayoutManagers" />
+  </data>
+
+  <LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <android.support.v4.widget.SwipeRefreshLayout
+      android:id="@+id/progressLayout"
+      android:layout_width="match_parent"
+      android:layout_height="match_parent">
+
+      <android.support.v7.widget.RecyclerView
+        android:id="@+id/tripsView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:itemBinding="@{viewModel.itemBinding}"
+        app:items="@{viewModel.trips}"
+        app:layoutManager="@{LayoutManagers.linear()}" />
+    </android.support.v4.widget.SwipeRefreshLayout>
+  </LinearLayout>
+</layout>
