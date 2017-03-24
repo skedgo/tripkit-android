@@ -1,19 +1,24 @@
 package skedgo.tripkit.demo.a2btrips
 
+import android.content.Context
 import android.databinding.ObservableArrayList
 import android.databinding.ObservableList
 import com.skedgo.android.common.model.Location
 import com.skedgo.android.common.model.Query
 import com.skedgo.android.common.model.TimeTag
 import com.skedgo.android.tripkit.TripKit
+import me.tatarka.bindingcollectionadapter2.ItemBinding
 import rx.Observable
 import rx.android.schedulers.AndroidSchedulers.mainThread
 import rx.subjects.BehaviorSubject
 
-class A2bTripsViewModel {
+class A2bTripsViewModel constructor(
+    private val context: Context
+) {
   private val _isRefreshing: BehaviorSubject<Boolean> = BehaviorSubject.create(false)
   val isRefreshing: Observable<Boolean> get() = _isRefreshing.asObservable()
   val trips: ObservableList<TripViewModel> = ObservableArrayList()
+  val itemBinding: ItemBinding<TripViewModel> = ItemBinding.of(BR.viewModel, R.layout.trip)
 
   fun showSampleTrips(): Observable<Unit>
       = Observable
@@ -31,9 +36,10 @@ class A2bTripsViewModel {
         query
       }
       .flatMap { TripKit.singleton().routeService.routeAsync(it) }
+      .flatMap { Observable.from(it) }
       .doOnSubscribe { _isRefreshing.onNext(true) }
       .doOnUnsubscribe { _isRefreshing.onNext(false) }
       .observeOn(mainThread())
-      .doOnNext { trips.add(TripViewModel()) }
+      .doOnNext { trips.add(TripViewModel(context, it)) }
       .map { Unit }
 }
