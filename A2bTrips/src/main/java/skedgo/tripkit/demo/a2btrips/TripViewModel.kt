@@ -6,11 +6,13 @@ import com.skedgo.android.common.model.Trip
 import com.skedgo.android.common.model.TripGroup
 import com.skedgo.android.common.model.Trips
 import com.skedgo.android.common.util.DateTimeFormats
+import rx.subjects.PublishSubject
 import java.util.concurrent.TimeUnit
 
 class TripViewModel constructor(
     private val context: Context,
-    private val tripGroup: TripGroup
+    private val tripGroup: TripGroup,
+    private val onTripSelected: PublishSubject<Trip>
 ) {
   private val representativeTrip: Trip by lazy { tripGroup.displayTrip!! }
   val times by lazy {
@@ -32,5 +34,9 @@ class TripViewModel constructor(
   }
   val co2Cost by lazy {
     ObservableField<String>("CO2: ${representativeTrip.carbonCost}kg")
+  }
+
+  fun select() {
+    onTripSelected.onNext(representativeTrip)
   }
 }

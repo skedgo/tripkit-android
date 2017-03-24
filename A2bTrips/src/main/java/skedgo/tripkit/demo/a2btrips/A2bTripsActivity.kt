@@ -38,5 +38,9 @@ class A2bTripsActivity : RxAppCompatActivity() {
               .create()
               .show()
         })
+    viewModel.onTripSelected
+        .map { TripDetailsActivity.newIntent(this, it) }
+        .bindToLifecycle(this)
+        .subscribe { startActivity(it) }
   }
 }
