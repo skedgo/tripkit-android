@@ -18,6 +18,7 @@ import rx.Observable
 import skedgo.tripkit.demo.a2btrips.databinding.ActivityTripDetailsBinding
 
 class TripDetailsActivity : AppCompatActivity() {
+
   companion object {
     private val TRIP_EXTRA = "TripExtra"
 
@@ -32,6 +33,7 @@ class TripDetailsActivity : AppCompatActivity() {
 
   val viewModel by lazy { TripDetailsViewModel(this, trip) }
   val tripLinesProcessor = TripLinesProcessor()
+
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
     val binding = DataBindingUtil.setContentView<ActivityTripDetailsBinding>(this, R.layout.activity_trip_details)
