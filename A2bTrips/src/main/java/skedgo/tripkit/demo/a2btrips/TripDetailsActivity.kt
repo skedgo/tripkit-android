@@ -58,7 +58,8 @@ class TripDetailsActivity : AppCompatActivity() {
           .position(LatLng(trip.to.lat, trip.to.lon))
           .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED)))
     }
-    val bottomSheet = BottomSheetBehavior.from(binding.bottomSheet)
-    bottomSheet.peekHeight = 360
+
+    val bottomSheetBehavior = BottomSheetBehavior.from(binding.bottomSheet)
+    bottomSheetBehavior.peekHeight = 360
   }
 }
