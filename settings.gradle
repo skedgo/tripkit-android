@@ -10,3 +10,5 @@ include ':trip-kit'
 include ':trip-kit-booking'
 include ':trip-kit-booking-ui'
 include ':route-persistence'
+include ':waypoints'
+
