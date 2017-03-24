@@ -3,6 +3,7 @@ package skedgo.tripkit.demo.a2btrips
 import android.databinding.DataBindingUtil
 import android.os.Bundle
 import android.support.v7.app.AlertDialog
+import android.util.Log
 import rx.Observable
 import rx.android.schedulers.AndroidSchedulers.mainThread
 import skedgo.rxlifecyclecomponents.RxAppCompatActivity
@@ -37,6 +38,14 @@ class A2bTripsActivity : RxAppCompatActivity() {
               .setMessage(it.message)
               .create()
               .show()
+        })
+    viewModel.onTripSelected
+        .bindToLifecycle(this)
+        .subscribe({
+          val intent = TripDetailsActivity.newIntent(this, it)
+          startActivity(intent)
+        }, {
+          Log.d("A2bTripsActivity", it.toString())
         })
   }
 }
