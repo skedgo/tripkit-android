@@ -1,4 +1,4 @@
-package com.skedgo.android.tripkit;
+package com.skedgo.android.tripkit.bookingproviders;
 
 import android.content.Intent;
 import android.content.pm.PackageInfo;
@@ -7,6 +7,11 @@ import android.net.Uri;
 
 import com.skedgo.android.common.model.Location;
 import com.skedgo.android.common.model.TripSegment;
+import com.skedgo.android.tripkit.BookingAction;
+import com.skedgo.android.tripkit.BuildConfig;
+import com.skedgo.android.tripkit.ExternalActionParams;
+import com.skedgo.android.tripkit.GeocoderFactory;
+import com.skedgo.android.tripkit.TestRunner;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -28,13 +33,12 @@ import java.util.concurrent.TimeUnit;
 import rx.Observable;
 import rx.observers.TestSubscriber;
 
-import static com.skedgo.android.tripkit.BookingResolver.FLITWAYS;
-import static com.skedgo.android.tripkit.BookingResolver.GOCATCH;
-import static com.skedgo.android.tripkit.BookingResolver.INGOGO;
-import static com.skedgo.android.tripkit.BookingResolver.LYFT;
-import static com.skedgo.android.tripkit.BookingResolver.OTHERS;
-import static com.skedgo.android.tripkit.BookingResolver.SMS;
-import static com.skedgo.android.tripkit.BookingResolver.UBER;
+import static com.skedgo.android.tripkit.bookingproviders.BookingResolver.FLITWAYS;
+import static com.skedgo.android.tripkit.bookingproviders.BookingResolver.GOCATCH;
+import static com.skedgo.android.tripkit.bookingproviders.BookingResolver.INGOGO;
+import static com.skedgo.android.tripkit.bookingproviders.BookingResolver.LYFT;
+import static com.skedgo.android.tripkit.bookingproviders.BookingResolver.OTHERS;
+import static com.skedgo.android.tripkit.bookingproviders.BookingResolver.SMS;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Matchers.anyDouble;
 import static org.mockito.Matchers.anyInt;
@@ -69,62 +73,6 @@ public class BookingResolverImplTest {
         packageManager,
         geocoderFactory
     );
-  }
-
-  @Test public void hasUberApp() throws PackageManager.NameNotFoundException {
-    when(packageManager.getPackageInfo(
-        eq("com.ubercab"),
-        eq(PackageManager.GET_ACTIVITIES)
-    )).thenReturn(new PackageInfo());
-
-    final TestSubscriber<BookingAction> subscriber = new TestSubscriber<>();
-    bookingResolver.performExternalActionAsync(
-        ExternalActionParams.builder()
-            .action("uber")
-            .segment(mock(TripSegment.class))
-            .build()
-    ).subscribe(subscriber);
-
-    final BookingAction action = BookingAction.builder()
-        .bookingProvider(UBER)
-        .hasApp(true)
-        .data(new Intent(Intent.ACTION_VIEW, Uri.parse("uber://")))
-        .build();
-    subscriber.awaitTerminalEvent();
-    subscriber.assertNoErrors();
-    final List<BookingAction> events = subscriber.getOnNextEvents();
-    assertThat(events).hasSize(1);
-    assertThat(events.get(0))
-        .usingComparator(BOOKING_ACTION_COMPARATOR)
-        .isEqualTo(action);
-  }
-
-  @Test public void hasNoUberApp() throws PackageManager.NameNotFoundException {
-    when(packageManager.getPackageInfo(
-        eq("com.ubercab"),
-        eq(PackageManager.GET_ACTIVITIES)
-    )).thenThrow(new PackageManager.NameNotFoundException());
-
-    final TestSubscriber<BookingAction> subscriber = new TestSubscriber<>();
-    bookingResolver.performExternalActionAsync(
-        ExternalActionParams.builder()
-            .action("uber")
-            .segment(mock(TripSegment.class))
-            .build()
-    ).subscribe(subscriber);
-
-    final BookingAction action = BookingAction.builder()
-        .bookingProvider(UBER)
-        .hasApp(false)
-        .data(new Intent(Intent.ACTION_VIEW, Uri.parse("https://m.uber.com/sign-up")))
-        .build();
-    subscriber.awaitTerminalEvent();
-    subscriber.assertNoErrors();
-    final List<BookingAction> events = subscriber.getOnNextEvents();
-    assertThat(events).hasSize(1);
-    assertThat(events.get(0))
-        .usingComparator(BOOKING_ACTION_COMPARATOR)
-        .isEqualTo(action);
   }
 
   @Test public void hasLyftApp() throws PackageManager.NameNotFoundException {

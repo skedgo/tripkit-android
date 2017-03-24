@@ -1,10 +1,15 @@
-package com.skedgo.android.tripkit;
+package com.skedgo.android.tripkit.bookingproviders;
 
 import android.content.Intent;
 import android.content.res.Resources;
 import android.net.Uri;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+
+import com.skedgo.android.tripkit.BookingAction;
+import com.skedgo.android.tripkit.ExternalActionParams;
+import com.skedgo.android.tripkit.R;
+import com.skedgo.android.tripkit.bookingproviders.BookingResolver;
 
 import rx.Observable;
 import rx.functions.Func1;

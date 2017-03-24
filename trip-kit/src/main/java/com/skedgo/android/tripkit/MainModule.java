@@ -13,6 +13,8 @@ import com.skedgo.android.common.model.TransportMode;
 import com.skedgo.android.common.util.DiagnosticUtils;
 import com.skedgo.android.common.util.Gsons;
 import com.skedgo.android.common.util.LowercaseEnumTypeAdapterFactory;
+import com.skedgo.android.tripkit.bookingproviders.BookingResolver;
+import com.skedgo.android.tripkit.bookingproviders.BookingResolverImpl;
 import com.skedgo.android.tripkit.routing.FailoverRoutingApi;
 import com.skedgo.android.tripkit.tsp.GsonAdaptersRegionInfo;
 import com.skedgo.android.tripkit.tsp.GsonAdaptersRegionInfoBody;
