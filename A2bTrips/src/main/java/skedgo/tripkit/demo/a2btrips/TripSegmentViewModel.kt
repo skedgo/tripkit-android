@@ -3,24 +3,20 @@ package skedgo.tripkit.demo.a2btrips
 import android.content.Context
 import android.databinding.ObservableField
 import android.databinding.ObservableInt
-import android.text.TextUtils
 import android.view.View
 import com.skedgo.android.common.model.TripSegment
 import com.skedgo.android.common.util.TripSegmentUtils
 
-
-class TripSegmentViewModel constructor(context: Context, tripSegment: TripSegment) {
-
+class TripSegmentViewModel constructor(context: Context, segment: TripSegment) {
   val actionTitle by lazy {
-    ObservableField<String>(TripSegmentUtils.getTripSegmentAction(context, tripSegment))
+    ObservableField<String>(TripSegmentUtils.getTripSegmentAction(context, segment))
   }
 
   val hasActionNotes by lazy {
-    ObservableInt(if (!TextUtils.isEmpty(tripSegment.notes)) View.VISIBLE else View.GONE)
+    ObservableInt(if (!segment.notes.isNullOrEmpty()) View.VISIBLE else View.GONE)
   }
 
   val actionNotes by lazy {
-    ObservableField<String>(tripSegment.getDisplayNotes(context.resources))
+    ObservableField<String>(segment.getDisplayNotes(context.resources))
   }
-
 }
