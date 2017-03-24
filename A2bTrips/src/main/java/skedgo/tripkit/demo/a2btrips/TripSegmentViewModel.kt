@@ -3,7 +3,6 @@ package skedgo.tripkit.demo.a2btrips
 import android.content.Context
 import android.databinding.ObservableField
 import android.databinding.ObservableInt
-import android.text.TextUtils
 import android.view.View
 import com.skedgo.android.common.model.TripSegment
 import com.skedgo.android.common.util.TripSegmentUtils
@@ -16,7 +15,7 @@ class TripSegmentViewModel constructor(context: Context, tripSegment: TripSegmen
   }
 
   val hasActionNotes by lazy {
-    ObservableInt(if (!TextUtils.isEmpty(tripSegment.notes)) View.VISIBLE else View.GONE)
+    ObservableInt(if (!tripSegment.notes.isNullOrEmpty()) View.VISIBLE else View.GONE)
   }
 
   val actionNotes by lazy {
