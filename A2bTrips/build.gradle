@@ -22,6 +22,7 @@ dependencies {
   compile "org.jetbrains.kotlin:kotlin-stdlib:$kotlinVersion"
   compile 'com.android.support:appcompat-v7:25.3.0'
   compile 'com.android.support:recyclerview-v7:25.3.0'
+  compile 'com.android.support:design:25.3.0'
   compile 'com.google.android.gms:play-services-maps:10.0.1'
   compile 'com.trello:rxlifecycle:1.0'
   compile 'com.github.skedgo:RxLifecycleComponents:v1.3'
