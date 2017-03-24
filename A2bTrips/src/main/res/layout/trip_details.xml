@@ -23,20 +23,14 @@
       android:layout_width="match_parent"
       android:layout_height="match_parent" />
 
-    <android.support.v7.widget.CardView
+    <android.support.v7.widget.RecyclerView
       android:id="@+id/bottomSheet"
       android:layout_width="match_parent"
       android:layout_height="match_parent"
-      android:theme="@style/ThemeOverlay.AppCompat.Light"
-      app:layout_behavior="@string/bottom_sheet_behavior">
-
-      <android.support.v7.widget.RecyclerView
-        android:id="@+id/segmentList"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        app:itemBinding="@{viewModel.itemBinding}"
-        app:items="@{viewModel.segments}"
-        app:layoutManager="@{LayoutManagers.linear()}" />
-    </android.support.v7.widget.CardView>
+      android:background="@android:color/white"
+      app:itemBinding="@{viewModel.itemBinding}"
+      app:items="@{viewModel.segments}"
+      app:layoutManager="@{LayoutManagers.linear()}"
+      app:layout_behavior="@string/bottom_sheet_behavior" />
   </android.support.design.widget.CoordinatorLayout>
 </layout>
