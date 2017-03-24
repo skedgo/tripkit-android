@@ -30,13 +30,12 @@ class TripDetailsActivity : AppCompatActivity() {
   }
 
   val trip: Trip by lazy { intent.getParcelableExtra<Trip>(TRIP_EXTRA) }
-
   val viewModel by lazy { TripDetailsViewModel(this, trip) }
   val tripLinesProcessor = TripLinesProcessor()
 
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
-    val binding = DataBindingUtil.setContentView<ActivityTripDetailsBinding>(this, R.layout.activity_trip_details)
+    val binding = DataBindingUtil.setContentView<ActivityTripDetailsBinding>(this, R.layout.trip_details)
     binding.viewModel = viewModel
     val mapFragment = supportFragmentManager.findFragmentById(R.id.mapFragment) as SupportMapFragment
     mapFragment.getMapAsync { map ->

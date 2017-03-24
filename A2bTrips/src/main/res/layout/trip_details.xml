@@ -27,7 +27,6 @@
       android:id="@+id/bottomSheet"
       android:layout_width="match_parent"
       android:layout_height="match_parent"
-      android:background="@color/cardview_light_background"
       android:theme="@style/ThemeOverlay.AppCompat.Light"
       app:layout_behavior="@string/bottom_sheet_behavior">
 
@@ -35,11 +34,9 @@
         android:id="@+id/segmentList"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        app:itemBinding="@{viewModel.segmentBinding}"
-        app:items="@{viewModel.tripSegments}"
+        app:itemBinding="@{viewModel.itemBinding}"
+        app:items="@{viewModel.segments}"
         app:layoutManager="@{LayoutManagers.linear()}" />
-
     </android.support.v7.widget.CardView>
-
   </android.support.design.widget.CoordinatorLayout>
 </layout>
