@@ -7,7 +7,6 @@ import com.skedgo.android.common.model.Trip
 import me.tatarka.bindingcollectionadapter2.ItemBinding
 import rx.Observable
 
-
 class TripDetailsViewModel constructor(context: Context, trip: Trip) {
   val segmentBinding = ItemBinding.of<TripSegmentViewModel>(BR.viewModel, R.layout.segment)
   val tripSegments: ObservableList<TripSegmentViewModel> = ObservableArrayList()
