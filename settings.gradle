@@ -3,6 +3,7 @@ include ':A2bTrips'
 include ':ConfigurationDomain', ':ConfigurationData'
 include ':AccountDomain', ':AccountData'
 include ':ValidBookingCountData', ':ValidBookingCountDomain'
+include ':UrlResolverDomain'
 
 include ':samples'
 include ':android-shared-lib'
