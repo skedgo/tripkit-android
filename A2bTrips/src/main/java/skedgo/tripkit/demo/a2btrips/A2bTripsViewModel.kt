@@ -41,10 +41,10 @@ class A2bTripsViewModel constructor(
       }
       .flatMap { TripKit.singleton().routeService.routeAsync(it) }
       .flatMap { Observable.from(it) }
-      .toSortedList { t1, t2 -> t1.displayTrip!!.endTimeInSecs.compareTo(t2.displayTrip!!.endTimeInSecs) }
+      .toSortedList { tripGroupA, tripGroupB -> tripGroupA.displayTrip!!.endTimeInSecs.compareTo(tripGroupB.displayTrip!!.endTimeInSecs) }
       .doOnSubscribe { _isRefreshing.onNext(true) }
       .doOnUnsubscribe { _isRefreshing.onNext(false) }
       .observeOn(mainThread())
-      .doOnNext { it.forEach { trips.add(TripViewModel(context, it, getSegmentsSummary, onTripSelected)) } }
+      .doOnNext { trips.addAll(it.map { TripViewModel(context, it, getSegmentsSummary, onTripSelected) }) }
       .map { Unit }
 }
