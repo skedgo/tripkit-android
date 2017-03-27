@@ -7,7 +7,6 @@ import com.skedgo.android.common.model.Trip
 import com.skedgo.android.common.model.TripGroup
 import com.skedgo.android.common.model.Trips
 import com.skedgo.android.common.util.DateTimeFormats
-import me.tatarka.bindingcollectionadapter2.ItemBinding
 import rx.subjects.PublishSubject
 import java.util.concurrent.TimeUnit
 
@@ -19,13 +18,14 @@ class TripViewModel constructor(
 ) {
 
   private val representativeTrip: Trip by lazy { tripGroup.displayTrip!! }
-  val modeInfos: MutableList<String> = mutableListOf()
-  val itemBinding: ItemBinding<String> = ItemBinding.of(BR.viewModel, R.layout.segment_mode_info)
+  val modeInfos = ObservableField<String>()
 
   init {
     getSegmentSummary.execute(representativeTrip)
+        .toList()
+        .map { it.joinToString(separator = " > ") }
         .subscribe(
-            { modeInfos.add(it) }, { Log.d("TripViewModel", it.toString()) }
+            { modeInfos.set(it) }, { Log.d("TripViewModel", it.toString()) }
         )
   }
 
