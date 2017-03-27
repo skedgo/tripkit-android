@@ -2,7 +2,6 @@ package skedgo.tripkit.demo.a2btrips
 
 import android.content.Context
 import android.databinding.ObservableField
-import android.util.Log
 import com.skedgo.android.common.model.Trip
 import com.skedgo.android.common.model.TripGroup
 import com.skedgo.android.common.model.Trips
@@ -25,9 +24,7 @@ class TripViewModel constructor(
     getSegmentSummary.execute(representativeTrip)
         .map { it.map { it.modeInfo!!.alternativeText } }
         .map { it.joinToString(separator = " > ") }
-        .subscribe(
-            { modeInfos.set(it) }, { Log.d("TripViewModel", it.toString()) }
-        )
+        .subscribe { modeInfos.set(it) }
   }
 
   val times by lazy {

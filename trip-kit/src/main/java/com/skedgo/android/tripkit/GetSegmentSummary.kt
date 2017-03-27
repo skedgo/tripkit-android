@@ -13,7 +13,8 @@ class GetSegmentSummary @Inject constructor() {
         .filter { it != null }
         .defaultIfEmpty(emptyList<TripSegment>())
         .flatMap { Observable.from(it) }
-        .filter { it.type != SegmentType.ARRIVAL && it.isVisibleInContext(TripSegment.VISIBILITY_IN_SUMMARY) }
+        .filter { it.type != SegmentType.ARRIVAL }
+        .filter { it.isVisibleInContext(TripSegment.VISIBILITY_IN_SUMMARY) }
         .toList()
   }
 }
