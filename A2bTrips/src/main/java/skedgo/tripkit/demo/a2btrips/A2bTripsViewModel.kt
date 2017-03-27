@@ -15,7 +15,8 @@ import rx.subjects.BehaviorSubject
 import rx.subjects.PublishSubject
 
 class A2bTripsViewModel constructor(
-    private val context: Context
+    private val context: Context,
+    private val getSegmentsSummary: GetSegmentsSummary
 ) {
   internal val onTripSelected: PublishSubject<Trip> = PublishSubject.create()
   private val _isRefreshing: BehaviorSubject<Boolean> = BehaviorSubject.create(false)
@@ -44,6 +45,6 @@ class A2bTripsViewModel constructor(
       .doOnSubscribe { _isRefreshing.onNext(true) }
       .doOnUnsubscribe { _isRefreshing.onNext(false) }
       .observeOn(mainThread())
-      .doOnNext { it.forEach { trips.add(TripViewModel(context, it, onTripSelected)) } }
+      .doOnNext { it.forEach { trips.add(TripViewModel(context, it, getSegmentsSummary, onTripSelected)) } }
       .map { Unit }
 }

@@ -2,19 +2,33 @@ package skedgo.tripkit.demo.a2btrips
 
 import android.content.Context
 import android.databinding.ObservableField
+import android.util.Log
 import com.skedgo.android.common.model.Trip
 import com.skedgo.android.common.model.TripGroup
 import com.skedgo.android.common.model.Trips
 import com.skedgo.android.common.util.DateTimeFormats
+import me.tatarka.bindingcollectionadapter2.ItemBinding
 import rx.subjects.PublishSubject
 import java.util.concurrent.TimeUnit
 
 class TripViewModel constructor(
     private val context: Context,
     private val tripGroup: TripGroup,
+    private val getSegmentSummary: GetSegmentsSummary,
     private val onTripSelected: PublishSubject<Trip>
 ) {
+
   private val representativeTrip: Trip by lazy { tripGroup.displayTrip!! }
+  val modeInfos: MutableList<String> = mutableListOf()
+  val itemBinding: ItemBinding<String> = ItemBinding.of(BR.viewModel, R.layout.segment_mode_info)
+
+  init {
+    getSegmentSummary.execute(representativeTrip)
+        .subscribe(
+            { modeInfos.add(it) }, { Log.d("TripViewModel", it.toString()) }
+        )
+  }
+
   val times by lazy {
     val departureMillis = TimeUnit.SECONDS.toMillis(representativeTrip.startTimeInSecs)
     val departureTime = DateTimeFormats.printTime(context, departureMillis, Trips.getDepartureTimezone(representativeTrip))

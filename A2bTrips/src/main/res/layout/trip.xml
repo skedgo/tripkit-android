@@ -1,4 +1,5 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:app="http://schemas.android.com/apk/res-auto"
   xmlns:tools="http://schemas.android.com/tools">
 
   <data>
@@ -6,6 +7,11 @@
     <variable
       name="viewModel"
       type="skedgo.tripkit.demo.a2btrips.TripViewModel" />
+
+    <import type="me.tatarka.bindingcollectionadapter2.LayoutManagers" />
+
+    <import type="android.support.v7.widget.LinearLayoutManager" />
+
   </data>
 
   <LinearLayout
@@ -22,6 +28,14 @@
       android:text="@{viewModel.times}"
       android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
       tools:text="Leave at 07:00, arrive by 08:30" />
+
+    <android.support.v7.widget.RecyclerView
+      android:id="@+id/bottomSheet"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      app:itemBinding="@{viewModel.itemBinding}"
+      app:items="@{viewModel.modeInfos}"
+      app:layoutManager="@{LayoutManagers.linear(LinearLayoutManager.HORIZONTAL, false)}" />
 
     <TextView
       android:layout_width="match_parent"

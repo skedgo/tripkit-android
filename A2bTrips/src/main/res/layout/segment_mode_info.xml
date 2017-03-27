@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:tools="http://schemas.android.com/tools">
+
+  <data>
+
+    <variable
+      name="viewModel"
+      type="java.lang.String" />
+  </data>
+
+  <TextView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:padding="8dp"
+    android:text="@{viewModel}"
+    android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+    android:textColor="@android:color/primary_text_light"
+    tools:text="ABCDEF">
+
+  </TextView>
+</layout>
