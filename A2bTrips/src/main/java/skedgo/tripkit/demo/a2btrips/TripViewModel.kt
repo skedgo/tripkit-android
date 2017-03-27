@@ -7,13 +7,14 @@ import com.skedgo.android.common.model.Trip
 import com.skedgo.android.common.model.TripGroup
 import com.skedgo.android.common.model.Trips
 import com.skedgo.android.common.util.DateTimeFormats
+import com.skedgo.android.tripkit.GetSegmentsSummary
 import rx.subjects.PublishSubject
 import java.util.concurrent.TimeUnit
 
 class TripViewModel constructor(
     private val context: Context,
     private val tripGroup: TripGroup,
-    private val getSegmentSummary: GetSegmentsSummary,
+    getSegmentsSummary: GetSegmentsSummary,
     private val onTripSelected: PublishSubject<Trip>
 ) {
 
@@ -21,8 +22,8 @@ class TripViewModel constructor(
   val modeInfos = ObservableField<String>()
 
   init {
-    getSegmentSummary.execute(representativeTrip)
-        .toList()
+    getSegmentsSummary.execute(representativeTrip)
+        .map { it.map { it.modeInfo!!.alternativeText } }
         .map { it.joinToString(separator = " > ") }
         .subscribe(
             { modeInfos.set(it) }, { Log.d("TripViewModel", it.toString()) }

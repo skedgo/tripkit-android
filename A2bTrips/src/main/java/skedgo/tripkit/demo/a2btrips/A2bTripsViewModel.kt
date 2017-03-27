@@ -7,6 +7,7 @@ import com.skedgo.android.common.model.Location
 import com.skedgo.android.common.model.Query
 import com.skedgo.android.common.model.TimeTag
 import com.skedgo.android.common.model.Trip
+import com.skedgo.android.tripkit.GetSegmentsSummary
 import com.skedgo.android.tripkit.TripKit
 import me.tatarka.bindingcollectionadapter2.ItemBinding
 import rx.Observable

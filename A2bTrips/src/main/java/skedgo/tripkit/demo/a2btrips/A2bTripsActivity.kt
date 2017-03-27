@@ -3,6 +3,7 @@ package skedgo.tripkit.demo.a2btrips
 import android.databinding.DataBindingUtil
 import android.os.Bundle
 import android.support.v7.app.AlertDialog
+import com.skedgo.android.tripkit.GetSegmentsSummary
 import rx.Observable
 import rx.android.schedulers.AndroidSchedulers.mainThread
 import skedgo.rxlifecyclecomponents.RxAppCompatActivity
