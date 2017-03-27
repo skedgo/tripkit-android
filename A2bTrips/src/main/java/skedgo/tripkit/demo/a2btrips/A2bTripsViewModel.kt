@@ -3,11 +3,8 @@ package skedgo.tripkit.demo.a2btrips
 import android.content.Context
 import android.databinding.ObservableArrayList
 import android.databinding.ObservableList
-import com.skedgo.android.common.model.Location
-import com.skedgo.android.common.model.Query
-import com.skedgo.android.common.model.TimeTag
-import com.skedgo.android.common.model.Trip
-import com.skedgo.android.tripkit.GetSegmentsSummary
+import com.skedgo.android.common.model.*
+import com.skedgo.android.tripkit.GetSegmentSummary
 import com.skedgo.android.tripkit.TripKit
 import me.tatarka.bindingcollectionadapter2.ItemBinding
 import rx.Observable
@@ -17,7 +14,7 @@ import rx.subjects.PublishSubject
 
 class A2bTripsViewModel constructor(
     private val context: Context,
-    private val getSegmentsSummary: GetSegmentsSummary
+    private val getSegmentSummary: GetSegmentSummary
 ) {
   internal val onTripSelected: PublishSubject<Trip> = PublishSubject.create()
   private val _isRefreshing: BehaviorSubject<Boolean> = BehaviorSubject.create(false)
@@ -42,10 +39,10 @@ class A2bTripsViewModel constructor(
       }
       .flatMap { TripKit.singleton().routeService.routeAsync(it) }
       .flatMap { Observable.from(it) }
-      .toSortedList { tripGroupA, tripGroupB -> tripGroupA.displayTrip!!.endTimeInSecs.compareTo(tripGroupB.displayTrip!!.endTimeInSecs) }
+      .toSortedList { tripGroupA, tripGroupB -> TripGroupComparators.ARRIVAL_COMPARATOR_CHAIN.compare(tripGroupA, tripGroupB) }
       .doOnSubscribe { _isRefreshing.onNext(true) }
       .doOnUnsubscribe { _isRefreshing.onNext(false) }
       .observeOn(mainThread())
-      .doOnNext { trips.addAll(it.map { TripViewModel(context, it, getSegmentsSummary, onTripSelected) }) }
+      .doOnNext { trips.addAll(it.map { TripViewModel(context, it, getSegmentSummary, onTripSelected) }) }
       .map { Unit }
 }

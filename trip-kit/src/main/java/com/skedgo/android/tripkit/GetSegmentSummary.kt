@@ -7,7 +7,7 @@ import rx.Observable
 import javax.inject.Inject
 
 
-class GetSegmentsSummary @Inject constructor() {
+class GetSegmentSummary @Inject constructor() {
   fun execute(trip: Trip): Observable<List<TripSegment>> {
     return Observable.fromCallable <List<TripSegment>> { trip.segments }
         .filter { it != null }

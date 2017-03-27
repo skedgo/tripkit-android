@@ -3,7 +3,7 @@ package skedgo.tripkit.demo.a2btrips
 import android.databinding.DataBindingUtil
 import android.os.Bundle
 import android.support.v7.app.AlertDialog
-import com.skedgo.android.tripkit.GetSegmentsSummary
+import com.skedgo.android.tripkit.GetSegmentSummary
 import rx.Observable
 import rx.android.schedulers.AndroidSchedulers.mainThread
 import skedgo.rxlifecyclecomponents.RxAppCompatActivity
@@ -12,7 +12,7 @@ import skedgo.tripkit.demo.a2btrips.databinding.A2bTripsBinding
 import java.util.concurrent.TimeUnit
 
 class A2bTripsActivity : RxAppCompatActivity() {
-  val viewModel: A2bTripsViewModel by lazy { A2bTripsViewModel(applicationContext, GetSegmentsSummary()) }
+  val viewModel: A2bTripsViewModel by lazy { A2bTripsViewModel(applicationContext, GetSegmentSummary()) }
   val binding: A2bTripsBinding by lazy {
     DataBindingUtil.setContentView<A2bTripsBinding>(this, R.layout.a2b_trips)
   }
