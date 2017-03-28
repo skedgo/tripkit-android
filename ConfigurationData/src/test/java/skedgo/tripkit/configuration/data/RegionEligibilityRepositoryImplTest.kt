@@ -9,7 +9,6 @@ import org.robolectric.RobolectricTestRunner
 import org.robolectric.RuntimeEnvironment
 import org.robolectric.annotation.Config
 import rx.observers.TestSubscriber
-import skedgo.tripkit.configuration.data.RegionEligibilityRepositoryImpl.Companion.KEY_REGION_ELIGIBILITY
 import skedgo.tripkit.configuration.domain.RegionEligibility
 
 @RunWith(RobolectricTestRunner::class)
@@ -30,7 +29,7 @@ class RegionEligibilityRepositoryImplTest {
   }
 
   @Test fun shouldEmitRegionEligibility() {
-    prefs.edit().putString(KEY_REGION_ELIGIBILITY, "beta").apply()
+    prefs.edit().putString("regionEligibility", "beta").apply()
 
     val subscriber = TestSubscriber<RegionEligibility>()
     repository.getRegionEligibility()
@@ -45,7 +44,7 @@ class RegionEligibilityRepositoryImplTest {
     repository.setRegionEligibility(expectedRegionEligibility)
         .subscribe()
 
-    val value = prefs.getString(KEY_REGION_ELIGIBILITY, null)
+    val value = prefs.getString("regionEligibility", null)
     assertThat(value).isEqualTo(expectedRegionEligibility.value)
   }
 }
