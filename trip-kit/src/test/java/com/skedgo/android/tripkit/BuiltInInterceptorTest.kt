@@ -30,7 +30,7 @@ class BuiltInInterceptorTest {
     val recordedRequest = serverRule.server.takeRequest()
     assertThat(recordedRequest.getHeader("X-TripGo-Version")).isEqualTo("Some version")
     assertThat(recordedRequest.getHeader("Accept-Language")).isEqualTo(Locale.JAPANESE.language)
-    assertThat(recordedRequest.getHeader("X-TripGo-RegionEligibility")).isEqualTo("Some id")
+    assertThat(recordedRequest.getHeader("X-TripGo-Key")).isEqualTo("Some id")
     assertThat(recordedRequest.getHeader("userToken")).isEqualTo("Some token")
     assertThat(recordedRequest.getHeader("X-TripGo-UUID")).isEqualTo("Some UUID")
   }
