@@ -17,6 +17,7 @@ public abstract class Configs {
   }
 
   public abstract Context context();
+  public abstract Func0<String> getApiKey();
   public abstract String regionEligibility();
   @Nullable public abstract Action1<Throwable> errorHandler();
   @Nullable public abstract ExcludedTransitModesAdapter excludedTransitModesAdapter();

@@ -1,4 +1,4 @@
-package skedgo.tripkit.configuration.domain
+package skedgo.tripkit.domain.configuration
 
 import com.nhaarman.mockito_kotlin.mock
 import com.nhaarman.mockito_kotlin.whenever

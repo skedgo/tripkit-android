@@ -3,8 +3,8 @@ package skedgo.tripkit.configuration.data
 import android.content.SharedPreferences
 import rx.Observable
 import rx.schedulers.Schedulers
-import skedgo.tripkit.configuration.domain.RegionEligibility
-import skedgo.tripkit.configuration.domain.RegionEligibilityRepository
+import skedgo.tripkit.domain.configuration.RegionEligibility
+import skedgo.tripkit.domain.configuration.RegionEligibilityRepository
 
 internal class RegionEligibilityRepositoryImpl constructor(
     private val preferences: SharedPreferences

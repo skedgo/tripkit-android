@@ -1,4 +1,4 @@
-package skedgo.tripkit.configuration.domain
+package skedgo.tripkit.domain.configuration
 
 import rx.Observable
 

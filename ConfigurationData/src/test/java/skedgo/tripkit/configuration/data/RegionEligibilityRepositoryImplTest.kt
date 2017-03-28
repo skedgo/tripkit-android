@@ -10,7 +10,7 @@ import org.robolectric.RuntimeEnvironment
 import org.robolectric.annotation.Config
 import rx.observers.TestSubscriber
 import skedgo.tripkit.configuration.data.RegionEligibilityRepositoryImpl.Companion.KEY_REGION_ELIGIBILITY
-import skedgo.tripkit.configuration.domain.RegionEligibility
+import skedgo.tripkit.domain.configuration.RegionEligibility
 
 @RunWith(RobolectricTestRunner::class)
 @Config(constants = BuildConfig::class)

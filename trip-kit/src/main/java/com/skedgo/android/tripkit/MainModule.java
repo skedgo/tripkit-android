@@ -40,8 +40,8 @@ import retrofit2.converter.gson.GsonConverterFactory;
 import rx.functions.Action1;
 import rx.functions.Func0;
 import rx.schedulers.Schedulers;
-import skedgo.tripkit.configuration.domain.GetRegionEligibilityHeaderValue;
-import skedgo.tripkit.configuration.domain.RegionEligibility;
+import skedgo.tripkit.domain.configuration.GetRegionEligibilityHeaderValue;
+import skedgo.tripkit.domain.configuration.RegionEligibility;
 
 @Module
 public class MainModule {
