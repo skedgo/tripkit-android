@@ -19,7 +19,7 @@ final class BuiltInInterceptor implements Interceptor {
   private static final String HEADER_REGION_ELIGIBILITY = "X-TripGo-RegionEligibility";
   private static final String HEADER_UUID = "X-TripGo-UUID";
   private static final String HEADER_ACCEPT_LANGUAGE = "Accept-Language";
-  private static final String HEADER_APPLICATION_HEADER = "application/json";
+  private static final String HEADER_APPLICATION_JSON = "application/json";
   private static final String HEADER_ACCEPT = "Accept";
   private static final String HEADER_USER_TOKEN = "userToken";
 
@@ -64,7 +64,7 @@ final class BuiltInInterceptor implements Interceptor {
     final Request.Builder builder = chain.request().newBuilder()
         .addHeader(HEADER_ACCEPT_LANGUAGE, locale.getLanguage())
         .addHeader(HEADER_APP_VERSION, appVersion)
-        .addHeader(HEADER_ACCEPT, HEADER_APPLICATION_HEADER)
+        .addHeader(HEADER_ACCEPT, HEADER_APPLICATION_JSON)
         .addHeader(HEADER_REGION_ELIGIBILITY, regionEligibility);
     if (userTokenProvider != null && userTokenProvider.call() != null) {
       builder.addHeader(HEADER_USER_TOKEN, userTokenProvider.call());
