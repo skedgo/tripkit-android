@@ -2,9 +2,6 @@ package com.skedgo.android.tripkit;
 
 import android.support.annotation.Nullable;
 
-import org.immutables.builder.Builder;
-import org.immutables.value.Value;
-
 import java.io.IOException;
 import java.util.Locale;
 
@@ -13,7 +10,6 @@ import okhttp3.Request;
 import okhttp3.Response;
 import rx.functions.Func0;
 
-@Value.Style(newBuilder = "create")
 final class BuiltInInterceptor implements Interceptor {
   private static final String HEADER_APP_VERSION = "X-TripGo-Version";
   private static final String HEADER_REGION_ELIGIBILITY = "X-TripGo-RegionEligibility";
@@ -29,7 +25,7 @@ final class BuiltInInterceptor implements Interceptor {
   @Nullable private final Func0<String> userTokenProvider;
   private final Func0<String> getRegionEligibility;
 
-  private BuiltInInterceptor(
+  BuiltInInterceptor(
       String appVersion,
       Locale locale,
       @Nullable Func0<String> uuidProvider,
@@ -40,23 +36,6 @@ final class BuiltInInterceptor implements Interceptor {
     this.uuidProvider = uuidProvider;
     this.userTokenProvider = userTokenProvider;
     this.getRegionEligibility = getRegionEligibility;
-  }
-
-  @Builder.Factory
-  static BuiltInInterceptor builtInInterceptor(
-      String appVersion,
-      Locale locale,
-      @Nullable Func0<String> uuidProvider,
-      @Nullable Func0<String> userTokenProvider,
-      Func0<String> getRegionEligibility
-  ) {
-    return new BuiltInInterceptor(
-        appVersion,
-        locale,
-        uuidProvider,
-        userTokenProvider,
-        getRegionEligibility
-    );
   }
 
   @Override public Response intercept(Chain chain) throws IOException {

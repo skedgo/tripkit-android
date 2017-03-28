@@ -146,19 +146,18 @@ public class MainModule {
     // Null to opt-out sending UUID header.
     final UuidProvider uuidProvider = configs.isUuidOptedOut() ? null : uuidProviderLazy.get();
     final RegionEligibility defaultRegionEligibility = new RegionEligibility(configs.regionEligibility());
-    return BuiltInInterceptorBuilder.create()
-        .appVersion(getAppVersion())
-        .locale(Locale.getDefault())
-        .userTokenProvider(configs.userTokenProvider())
-        .uuidProvider(uuidProvider)
-        .getRegionEligibility(new Func0<String>() {
+    return new BuiltInInterceptor(
+        getAppVersion(),
+        Locale.getDefault(),
+        configs.userTokenProvider(),
+        uuidProvider,
+        new Func0<String>() {
           @Override public String call() {
             return getRegionEligibilityHeaderValueLazy.get()
                 .execute(defaultRegionEligibility)
                 .toBlocking().first();
           }
-        })
-        .build();
+        });
   }
 
   @Singleton @Provides OkHttpClient httpClient(
