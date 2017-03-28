@@ -50,6 +50,7 @@ public class Trip implements Parcelable, ITimeRange {
       trip.caloriesCost = in.readFloat();
       trip.plannedURL = in.readString();
       trip.temporaryURL = in.readString();
+      trip.availability = in.readString();
       trip.queryIsLeaveAfter = in.readByte() == 1;
       return trip;
     }
@@ -76,6 +77,7 @@ public class Trip implements Parcelable, ITimeRange {
   @SerializedName("progressURL") private String progressURL;
   @SerializedName("plannedURL") private String plannedURL;
   @SerializedName("temporaryURL") private String temporaryURL;
+  @SerializedName("availability") private String availability;
   private boolean queryIsLeaveAfter;
   private String uuid = UUID.randomUUID().toString();
   private long mId;
@@ -251,6 +253,14 @@ public class Trip implements Parcelable, ITimeRange {
     this.temporaryURL = temporaryURL;
   }
 
+  @Nullable public String getAvailability() {
+    return availability;
+  }
+
+  public void setAvailability(String availability) {
+    this.availability = availability;
+  }
+
   public boolean queryIsLeaveAfter() {
     return queryIsLeaveAfter;
   }
@@ -323,6 +333,7 @@ public class Trip implements Parcelable, ITimeRange {
     dest.writeFloat(caloriesCost);
     dest.writeString(plannedURL);
     dest.writeString(temporaryURL);
+    dest.writeString(availability);
     dest.writeByte((byte) (queryIsLeaveAfter ? 1 : 0));
   }
 
