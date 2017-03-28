@@ -1,3 +1,3 @@
-package skedgo.tripkit.domain.configuration
+package skedgo.tripkit.configuration.domain
 
 data class RegionEligibility(val value: String)

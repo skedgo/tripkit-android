@@ -3,7 +3,7 @@ package skedgo.tripkit.configuration.data
 import android.content.Context
 import dagger.Module
 import dagger.Provides
-import skedgo.tripkit.domain.configuration.RegionEligibilityRepository
+import skedgo.tripkit.configuration.domain.RegionEligibilityRepository
 
 @Module
 class ConfigurationDataModule {

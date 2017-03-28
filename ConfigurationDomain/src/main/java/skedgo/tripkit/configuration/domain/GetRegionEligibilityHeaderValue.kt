@@ -1,4 +1,4 @@
-package skedgo.tripkit.domain.configuration
+package skedgo.tripkit.configuration.domain
 
 import rx.Observable
 import javax.inject.Inject
