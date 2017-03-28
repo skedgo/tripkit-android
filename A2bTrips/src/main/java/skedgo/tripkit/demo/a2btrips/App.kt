@@ -12,7 +12,6 @@ class App : Application() {
     TripKit.initialize(
         Configs.builder()
             .context(this)
-            .regionEligibility("beta")
             .build()
     )
   }

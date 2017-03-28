@@ -4,7 +4,7 @@ import com.nhaarman.mockito_kotlin.mock
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.Test
 import org.robolectric.RuntimeEnvironment
-import skedgo.tripkit.configuration.domain.ApiKey
+import skedgo.tripkit.configuration.ApiKey
 
 class ConfigsTest {
   @Test fun uuidOptedOutShouldBeFalseByDefault() {

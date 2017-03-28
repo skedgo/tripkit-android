@@ -5,7 +5,7 @@ import okhttp3.mockwebserver.MockResponse
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.Rule
 import org.junit.Test
-import skedgo.tripkit.configuration.domain.ApiKey
+import skedgo.tripkit.configuration.ApiKey
 import thuytrinh.mockwebserverrule.MockWebServerRule
 import java.io.IOException
 import java.util.*

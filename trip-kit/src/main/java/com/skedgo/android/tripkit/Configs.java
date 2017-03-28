@@ -9,7 +9,7 @@ import org.immutables.value.Value;
 
 import rx.functions.Action1;
 import rx.functions.Func0;
-import skedgo.tripkit.configuration.domain.ApiKey;
+import skedgo.tripkit.configuration.ApiKey;
 
 @Value.Immutable
 public abstract class Configs {

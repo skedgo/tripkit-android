@@ -12,7 +12,7 @@ import okhttp3.Interceptor;
 import okhttp3.Request;
 import okhttp3.Response;
 import rx.functions.Func0;
-import skedgo.tripkit.configuration.domain.ApiKey;
+import skedgo.tripkit.configuration.ApiKey;
 
 @Value.Style(newBuilder = "create")
 final class BuiltInInterceptor implements Interceptor {

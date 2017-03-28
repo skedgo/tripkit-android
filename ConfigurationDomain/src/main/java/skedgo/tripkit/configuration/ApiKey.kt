@@ -1,4 +1,4 @@
-package skedgo.tripkit.configuration.domain
+package skedgo.tripkit.configuration
 
 /**
  * Represents an API key whose value must be non-null.
