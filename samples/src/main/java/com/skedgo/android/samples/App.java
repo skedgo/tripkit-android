@@ -10,6 +10,8 @@ import com.skedgo.android.tripkit.TripKit;
 import net.danlew.android.joda.JodaTimeAndroid;
 
 import rx.functions.Action1;
+import rx.functions.Func0;
+import skedgo.tripkit.configuration.ApiKey;
 
 public final class App extends Application {
   public static TripKit tripKit() {
@@ -23,7 +25,11 @@ public final class App extends Application {
     TripKit.initialize(
         Configs.builder()
             .context(this)
-            .regionEligibility("xum")
+            .apiKey(new Func0<ApiKey>() {
+              @Override public ApiKey call() {
+                return new ApiKey("dfca814e1a213c3e75ac8d4ecffecdb6");
+              }
+            })
             .debuggable(BuildConfig.DEBUG)
             .errorHandler(new Action1<Throwable>() {
               @Override public void call(Throwable error) {
