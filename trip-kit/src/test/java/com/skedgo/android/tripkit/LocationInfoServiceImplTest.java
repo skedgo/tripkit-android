@@ -79,7 +79,7 @@ public class LocationInfoServiceImplTest {
     )).thenAnswer(new Answer<Observable<LocationInfo>>() {
       @Override
       public Observable<LocationInfo> answer(InvocationOnMock invocation) throws Throwable {
-        final String url = invocation.getArgumentAt(0, String.class);
+        final String url = invocation.getArgument(0);
         switch (url) {
           case "https://inflationary-au-nsw-sydney.tripgo.skedgo.com/satapp/locationInfo.json":
             return Observable.just(locationInfo);
