@@ -43,10 +43,10 @@ dependencies {
 
   // To generate immutable models.
   // See more at http://immutables.github.io/.
-  kapt 'org.immutables:value:2.3.9'
-  provided 'org.immutables:value:2.3.9:annotations'
-  provided 'org.immutables:builder:2.3.9'
-  provided 'org.immutables:gson:2.3.9:annotations'
+  kapt "org.immutables:value:$immutablesVersion"
+  provided "org.immutables:value:$immutablesVersion:annotations"
+  provided "org.immutables:builder:$immutablesVersion"
+  provided "org.immutables:gson:$immutablesVersion:annotations"
 
   compile "org.jetbrains.kotlin:kotlin-stdlib:$kotlinVersion"
 }
