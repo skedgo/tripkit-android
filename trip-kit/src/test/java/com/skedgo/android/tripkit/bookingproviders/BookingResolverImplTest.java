@@ -160,7 +160,7 @@ public class BookingResolverImplTest {
     when(geocoderFactory.firstAddressAsync(anyDouble(), anyDouble(), anyInt()))
         .thenAnswer(new Answer<Observable<String>>() {
           @Override public Observable<String> answer(InvocationOnMock invocation) {
-            final double lat = invocation.getArgumentAt(0, Double.class);
+            final double lat = invocation.getArgument(0);
             if (lat == 1.0) {
               return Observable.just("A");
             } else {
@@ -259,7 +259,7 @@ public class BookingResolverImplTest {
     when(geocoderFactory.firstAddressAsync(anyDouble(), anyDouble(), anyInt()))
         .thenAnswer(new Answer<Observable<String>>() {
           @Override public Observable<String> answer(InvocationOnMock invocation) {
-            final double lat = invocation.getArgumentAt(0, Double.class);
+            final double lat = invocation.getArgument(0);
             if (lat == 1.0) {
               return Observable.just("A");
             } else {

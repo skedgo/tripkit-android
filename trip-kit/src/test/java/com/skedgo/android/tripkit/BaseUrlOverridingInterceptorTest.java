@@ -47,8 +47,7 @@ public class BaseUrlOverridingInterceptorTest {
     interceptor.intercept(chain);
 
     verify(chain).proceed(argThat(new ArgumentMatcher<Request>() {
-      @Override public boolean matches(Object argument) {
-        final Request actualRequest = (Request) argument;
+      @Override public boolean matches(Request actualRequest) {
         return actualRequest.url().equals(expectedRequest.url())
             && actualRequest.method().equals(expectedRequest.method());
       }
@@ -70,10 +69,9 @@ public class BaseUrlOverridingInterceptorTest {
     interceptor.intercept(chain);
 
     verify(chain).proceed(argThat(new ArgumentMatcher<Request>() {
-      @Override public boolean matches(Object argument) {
-        final Request actualRequest = (Request) argument;
-        return actualRequest.url().equals(expectedRequest.url())
-            && actualRequest.method().equals(expectedRequest.method());
+      @Override public boolean matches(Request request) {
+        return request.url().equals(expectedRequest.url())
+            && request.method().equals(expectedRequest.method());
       }
     }));
   }
