@@ -26,7 +26,6 @@ public class TripKitTest {
   @Before public void before() {
     MockitoAnnotations.initMocks(this);
     when(configs.context()).thenReturn(RuntimeEnvironment.application);
-    when(configs.regionEligibility()).thenReturn("lol");
     kit = DaggerTripKit.builder()
         .mainModule(new MainModule(configs))
         .build();
