@@ -83,7 +83,7 @@ public class QueryGeneratorImplTest {
         .thenAnswer(new Answer<Observable<Region>>() {
           @Override
           public Observable<Region> answer(InvocationOnMock invocation) throws Throwable {
-            final Location argument = invocation.getArgumentAt(0, Location.class);
+            final Location argument = invocation.getArgument(0);
             if (argument == departure) {
               return Observable.error(error);
             } else if (argument == arrival) {
@@ -116,7 +116,7 @@ public class QueryGeneratorImplTest {
         .thenAnswer(new Answer<Observable<Region>>() {
           @Override
           public Observable<Region> answer(InvocationOnMock invocation) throws Throwable {
-            final Location argument = invocation.getArgumentAt(0, Location.class);
+            final Location argument = invocation.getArgument(0);
             if (argument == arrival) {
               return Observable.error(error);
             } else if (argument == departure) {

@@ -13,15 +13,13 @@ import javax.inject.Singleton;
 import dagger.Component;
 import rx.functions.Action1;
 import rx.functions.Actions;
-import skedgo.tripkit.configuration.data.ConfigurationDataModule;
 
 @Singleton
 @Component(modules = {
     HttpClientModule.class,
     RoutingModule.class,
     TspModule.class,
-    MainModule.class,
-    ConfigurationDataModule.class
+    MainModule.class
 })
 public abstract class TripKit {
   private static TripKit instance;
