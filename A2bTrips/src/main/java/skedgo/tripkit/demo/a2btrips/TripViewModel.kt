@@ -6,7 +6,7 @@ import com.skedgo.android.common.model.Trip
 import com.skedgo.android.common.model.TripGroup
 import com.skedgo.android.common.model.Trips
 import com.skedgo.android.common.util.DateTimeFormats
-import com.skedgo.android.tripkit.getSummarySegments
+import skedgo.tripkit.routing.getSummarySegments
 import rx.subjects.PublishSubject
 import java.util.concurrent.TimeUnit
 

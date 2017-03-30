@@ -1,4 +1,4 @@
-package com.skedgo.android.tripkit
+package skedgo.tripkit.routing
 
 import com.nhaarman.mockito_kotlin.eq
 import com.nhaarman.mockito_kotlin.mock
@@ -9,7 +9,7 @@ import com.skedgo.android.common.model.TripSegment
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.Test
 
-class TripExtensionsTest {
+class GetSummarySegmentsTest {
   @Test fun arrivalSegmentShouldNotBeInSummaryArea() {
     // Given a trip having arrival segment that is visible on the map.
     val arrivalSegment = TripSegment()
