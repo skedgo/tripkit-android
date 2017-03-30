@@ -13,25 +13,22 @@ import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.LatLngBounds
 import com.google.android.gms.maps.model.MarkerOptions
 import com.skedgo.android.common.model.Trip
-import com.skedgo.android.tripkit.TripLinesProcessor
+import com.skedgo.android.tripkit.GetTripLine
 import rx.Observable
 import skedgo.tripkit.demo.a2btrips.databinding.TripDetailsBinding
 
 class TripDetailsActivity : AppCompatActivity() {
-
   companion object {
-    private val TRIP_EXTRA = "TripExtra"
+    private val tripKey = "trip"
 
-    fun newIntent(context: Context, trip: Trip): Intent {
-      val intent = Intent(context, TripDetailsActivity::class.java)
-      intent.putExtra(TRIP_EXTRA, trip)
-      return intent
-    }
+    fun newIntent(context: Context, trip: Trip): Intent
+        = Intent(context, TripDetailsActivity::class.java)
+        .putExtra(tripKey, trip)
   }
 
-  val trip: Trip by lazy { intent.getParcelableExtra<Trip>(TRIP_EXTRA) }
+  val trip: Trip by lazy { intent.getParcelableExtra<Trip>(tripKey) }
   val viewModel by lazy { TripDetailsViewModel(this, trip) }
-  val tripLinesProcessor = TripLinesProcessor()
+  val getTripLine = GetTripLine()
 
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
@@ -40,13 +37,13 @@ class TripDetailsActivity : AppCompatActivity() {
 
     val mapFragment = supportFragmentManager.findFragmentById(R.id.mapFragment) as SupportMapFragment
     mapFragment.getMapAsync { map ->
-      tripLinesProcessor.getPolylineOptionsListAsync(trip.segments)
+      getTripLine.execute(trip.segments)
           .flatMap { Observable.from(it) }
           .subscribe { map.addPolyline(it) }
-      val height = resources.displayMetrics.heightPixels;
-      val width = resources.displayMetrics.widthPixels;
+      val height = resources.displayMetrics.heightPixels
+      val width = resources.displayMetrics.widthPixels
 
-      map.animateCamera(CameraUpdateFactory.newLatLngBounds(LatLngBounds.Builder()
+      map.moveCamera(CameraUpdateFactory.newLatLngBounds(LatLngBounds.Builder()
           .include(LatLng(trip.from.lat, trip.from.lon))
           .include(LatLng(trip.to.lat, trip.to.lon))
           .build(), width, height, height / 10))

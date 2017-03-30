@@ -14,17 +14,19 @@ import rx.Observable
 import java.util.*
 import javax.inject.Inject
 
-class TripLinesProcessor @Inject constructor() {
+typealias TripLine = List<PolylineOptions>
 
-  fun getPolylineOptionsListAsync(segments: List<TripSegment>): Observable<List<PolylineOptions>> {
-    return Observable
-        .fromCallable<Pair<List<List<LineSegment>>, List<List<LineSegment>>>> { createLinesToDraw(segments) }
-        .map { lineSegmentPair -> createPolylineOptionsList(lineSegmentPair.first, lineSegmentPair.second) }
-  }
+class GetTripLine @Inject constructor() {
+  private val NON_TRAVELLED_LINE_COLOR = 0x88AAAAAA.toInt()
+
+  fun execute(segments: List<TripSegment>): Observable<TripLine>
+      = Observable
+      .fromCallable<Pair<List<List<LineSegment>>, List<List<LineSegment>>>> { createLinesToDraw(segments) }
+      .map { lineSegmentPair -> createPolylineOptionsList(lineSegmentPair.first, lineSegmentPair.second) }
 
   private fun createPolylineOptionsList(
       results: List<List<LineSegment>>?,
-      nonTravelledLinesToDraw: List<List<LineSegment>>?): List<PolylineOptions> {
+      nonTravelledLinesToDraw: List<List<LineSegment>>?): TripLine {
     // Use to collect polylines that will be put onto the map
     val polylineOptionsList = LinkedList<PolylineOptions>()
 
@@ -211,9 +213,5 @@ class TripLinesProcessor @Inject constructor() {
     }
 
     return Pair(linesToDraw, nonTravelledLinesToDraw)
-  }
-
-  companion object {
-    private val NON_TRAVELLED_LINE_COLOR = 0x88AAAAAA.toInt()
   }
 }
