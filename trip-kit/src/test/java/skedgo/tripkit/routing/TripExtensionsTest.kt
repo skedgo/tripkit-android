@@ -1,4 +1,4 @@
-package com.skedgo.android.tripkit
+package skedgo.tripkit.routing
 
 import com.nhaarman.mockito_kotlin.eq
 import com.nhaarman.mockito_kotlin.mock

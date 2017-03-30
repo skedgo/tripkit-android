@@ -13,9 +13,9 @@ import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.LatLngBounds
 import com.google.android.gms.maps.model.MarkerOptions
 import com.skedgo.android.common.model.Trip
-import com.skedgo.android.tripkit.GetTripLine
 import rx.Observable
 import skedgo.tripkit.demo.a2btrips.databinding.TripDetailsBinding
+import skedgo.tripkit.routing.GetTripLine
 
 class TripDetailsActivity : AppCompatActivity() {
   companion object {

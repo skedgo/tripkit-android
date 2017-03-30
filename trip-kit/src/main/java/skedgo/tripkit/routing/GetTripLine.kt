@@ -1,4 +1,4 @@
-package com.skedgo.android.tripkit
+package skedgo.tripkit.routing
 
 import android.graphics.Color
 import android.text.TextUtils
@@ -10,16 +10,18 @@ import com.skedgo.android.common.model.TransportMode
 import com.skedgo.android.common.model.TripSegment
 import com.skedgo.android.common.model.VehicleMode
 import com.skedgo.android.common.util.PolylineEncoderUtils
+import com.skedgo.android.tripkit.LineSegment
 import rx.Observable
 import java.util.*
 import javax.inject.Inject
 
+// FIXME: Create a pure domain model to represent a trip line.
 typealias TripLine = List<PolylineOptions>
 
-class GetTripLine @Inject constructor() {
+open class GetTripLine @Inject constructor() {
   private val NON_TRAVELLED_LINE_COLOR = 0x88AAAAAA.toInt()
 
-  fun execute(segments: List<TripSegment>): Observable<TripLine>
+  open fun execute(segments: List<TripSegment>): Observable<TripLine>
       = Observable
       .fromCallable<Pair<List<List<LineSegment>>, List<List<LineSegment>>>> { createLinesToDraw(segments) }
       .map { lineSegmentPair -> createPolylineOptionsList(lineSegmentPair.first, lineSegmentPair.second) }
