@@ -10,6 +10,5 @@ import java.util.List;
 import rx.Observable;
 
 public interface RouteService {
-  @NonNull Observable<TripGroup> routeAsync(@NonNull RouteOptions options);
   @NonNull Observable<List<TripGroup>> routeAsync(@NonNull Query query);
 }
