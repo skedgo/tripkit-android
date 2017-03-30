@@ -9,12 +9,13 @@ import android.os.Build;
 import static com.skedgo.android.common.util.LogUtils.LOGE;
 import static com.skedgo.android.common.util.LogUtils.makeTag;
 
-public class DiagnosticUtils {
-
+public final class DiagnosticUtils {
   private static final String TAG = makeTag("DiagnosticUtils");
 
+  private DiagnosticUtils() {}
+
   public static String getDeviceInfo() {
-    return Build.MANUFACTURER + " " + Build.MODEL + " (api_level=" + Api.LEVEL + ")";
+    return Build.MANUFACTURER + " " + Build.MODEL + " (api_level=" + Build.VERSION.SDK_INT + ")";
   }
 
   public static String getAppVersionName(Context context) {
