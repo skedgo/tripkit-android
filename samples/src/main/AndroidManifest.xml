@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<manifest package="com.skedgo.android.samples"
-  xmlns:android="http://schemas.android.com/apk/res/android">
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+  package="com.skedgo.android.samples">
 
   <application
     android:name=".App"
@@ -23,9 +23,6 @@
     <activity
       android:name=".TransportModesActivity"
       android:label="Transport in Los Angeles" />
-    <activity
-      android:name=".RoutesActivity"
-      android:label="Routes" />
   </application>
 
 </manifest>
