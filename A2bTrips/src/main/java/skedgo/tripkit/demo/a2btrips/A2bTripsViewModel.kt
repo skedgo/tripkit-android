@@ -3,10 +3,7 @@ package skedgo.tripkit.demo.a2btrips
 import android.content.Context
 import android.databinding.ObservableArrayList
 import android.databinding.ObservableList
-import com.skedgo.android.common.model.Location
-import com.skedgo.android.common.model.Query
-import com.skedgo.android.common.model.TimeTag
-import com.skedgo.android.common.model.Trip
+import com.skedgo.android.common.model.*
 import com.skedgo.android.tripkit.TripKit
 import me.tatarka.bindingcollectionadapter2.ItemBinding
 import rx.Observable
@@ -40,9 +37,10 @@ class A2bTripsViewModel constructor(
       }
       .flatMap { TripKit.singleton().routeService.routeAsync(it) }
       .flatMap { Observable.from(it) }
+      .toSortedList { tripGroupA, tripGroupB -> TripGroupComparators.ARRIVAL_COMPARATOR_CHAIN.compare(tripGroupA, tripGroupB) }
       .doOnSubscribe { _isRefreshing.onNext(true) }
       .doOnUnsubscribe { _isRefreshing.onNext(false) }
       .observeOn(mainThread())
-      .doOnNext { trips.add(TripViewModel(context, it, onTripSelected)) }
+      .doOnNext { trips.addAll(it.map { TripViewModel(context, it, onTripSelected) }) }
       .map { Unit }
 }
