@@ -8,6 +8,7 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.util.concurrent.TimeUnit;
 
+@Deprecated
 public class TimeTag implements Parcelable {
   public static final Creator<TimeTag> CREATOR = new Creator<TimeTag>() {
     @Override
