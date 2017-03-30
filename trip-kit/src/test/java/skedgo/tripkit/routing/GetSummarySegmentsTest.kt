@@ -9,7 +9,7 @@ import com.skedgo.android.common.model.TripSegment
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.Test
 
-class TripExtensionsTest {
+class GetSummarySegmentsTest {
   @Test fun arrivalSegmentShouldNotBeInSummaryArea() {
     // Given a trip having arrival segment that is visible on the map.
     val arrivalSegment = TripSegment()
