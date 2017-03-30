@@ -1,12 +1,11 @@
 package skedgo.tripkit.demo.a2btrips
 
 import android.content.Context
-import android.databinding.ObservableArrayList
-import android.databinding.ObservableList
 import com.skedgo.android.common.model.Trip
 import com.skedgo.android.common.model.TripGroupComparators
 import com.skedgo.android.tripkit.TripKit
 import me.tatarka.bindingcollectionadapter2.ItemBinding
+import me.tatarka.bindingcollectionadapter2.collections.DiffObservableList
 import org.joda.time.DateTime
 import rx.Observable
 import rx.android.schedulers.AndroidSchedulers.mainThread
@@ -21,7 +20,7 @@ class A2bTripsViewModel constructor(
   internal val onTripSelected: PublishSubject<Trip> = PublishSubject.create()
   private val _isRefreshing: BehaviorSubject<Boolean> = BehaviorSubject.create(false)
   val isRefreshing: Observable<Boolean> get() = _isRefreshing.asObservable()
-  val trips: ObservableList<TripViewModel> = ObservableArrayList()
+  val items: DiffObservableList<TripViewModel> = DiffObservableList<TripViewModel>(GroupDiffCallback)
   val itemBinding: ItemBinding<TripViewModel> = ItemBinding.of(BR.viewModel, R.layout.trip)
 
   fun showSampleTrips(): Observable<Unit>
@@ -37,11 +36,15 @@ class A2bTripsViewModel constructor(
                 .build()
         )
       }
-      .flatMap { Observable.from(it) }
-      .toSortedList { lhs, rhs -> TripGroupComparators.ARRIVAL_COMPARATOR_CHAIN.compare(lhs, rhs) }
+      .scan { previous, new -> previous + new }
+      .map { it.sortedWith(TripGroupComparators.ARRIVAL_COMPARATOR_CHAIN) }
+      .map { it.map { TripViewModel(context, it, onTripSelected) } }
+      .map {
+        Pair(it, items.calculateDiff(it))
+      }
       .doOnSubscribe { _isRefreshing.onNext(true) }
       .doOnUnsubscribe { _isRefreshing.onNext(false) }
       .observeOn(mainThread())
-      .doOnNext { trips.addAll(it.map { TripViewModel(context, it, onTripSelected) }) }
+      .doOnNext { items.update(it.first, it.second) }
       .map { Unit }
 }

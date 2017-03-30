@@ -6,16 +6,16 @@ import com.skedgo.android.common.model.Trip
 import com.skedgo.android.common.model.TripGroup
 import com.skedgo.android.common.model.Trips
 import com.skedgo.android.common.util.DateTimeFormats
-import skedgo.tripkit.routing.getSummarySegments
 import rx.subjects.PublishSubject
+import skedgo.tripkit.routing.getSummarySegments
 import java.util.concurrent.TimeUnit
 
 class TripViewModel(
     private val context: Context,
-    private val tripGroup: TripGroup,
+    val group: TripGroup,
     private val onTripSelected: PublishSubject<Trip>
 ) {
-  private val representativeTrip: Trip by lazy { tripGroup.displayTrip!! }
+  private val representativeTrip: Trip by lazy { group.displayTrip!! }
   val modeInfos by lazy {
     representativeTrip.getSummarySegments()
         .map { it.modeInfo!!.alternativeText }
