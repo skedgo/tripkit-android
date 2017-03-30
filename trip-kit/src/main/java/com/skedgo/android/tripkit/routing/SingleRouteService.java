@@ -4,7 +4,6 @@ import android.support.annotation.NonNull;
 
 import com.skedgo.android.common.model.Query;
 import com.skedgo.android.common.model.TripGroup;
-import com.skedgo.android.tripkit.RouteOptions;
 import com.skedgo.android.tripkit.RouteService;
 
 import java.util.List;
@@ -30,12 +29,6 @@ public class SingleRouteService implements RouteService {
 
   public SingleRouteService(RouteService routeService) {
     this.routeService = routeService;
-  }
-
-  @NonNull @Override public Observable<TripGroup> routeAsync(@NonNull RouteOptions options) {
-    cancellationSignal.onNext(null);
-    return routeService.routeAsync(options)
-        .takeUntil(cancellationSignal.asObservable());
   }
 
   @NonNull @Override public Observable<List<TripGroup>> routeAsync(@NonNull Query query) {

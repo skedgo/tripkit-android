@@ -13,13 +13,16 @@ import javax.inject.Singleton;
 import dagger.Component;
 import rx.functions.Action1;
 import rx.functions.Actions;
+import skedgo.tripkit.routing.a2b.A2bRoutingDomainModule;
+import skedgo.tripkit.routing.a2b.GetA2bTrips;
 
 @Singleton
 @Component(modules = {
     HttpClientModule.class,
     RoutingModule.class,
     TspModule.class,
-    MainModule.class
+    MainModule.class,
+    A2bRoutingDomainModule.class
 })
 public abstract class TripKit {
   private static TripKit instance;
@@ -81,6 +84,7 @@ public abstract class TripKit {
   public abstract BookingResolver getBookingResolver();
   public abstract LocationInfoService getLocationInfoService();
   public abstract TripUpdater getTripUpdater();
+  public abstract GetA2bTrips getGetA2bTrips();
   @VisibleForTesting abstract RegionDatabaseHelper getRegionDatabaseHelper();
   abstract Action1<Throwable> getErrorHandler();
 }

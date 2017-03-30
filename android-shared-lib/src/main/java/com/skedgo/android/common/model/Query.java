@@ -15,6 +15,7 @@ import java.util.List;
 import java.util.UUID;
 import java.util.concurrent.TimeUnit;
 
+@Deprecated
 public class Query implements Parcelable {
   public static final String UNIT_AUTO = "auto";
   public static final String UNIT_IMPERIAL = "imperial";
