@@ -4,7 +4,6 @@ import android.content.Context
 import android.databinding.ObservableArrayList
 import android.databinding.ObservableList
 import com.skedgo.android.common.model.*
-import com.skedgo.android.tripkit.GetSegmentSummary
 import com.skedgo.android.tripkit.TripKit
 import me.tatarka.bindingcollectionadapter2.ItemBinding
 import rx.Observable
@@ -13,8 +12,7 @@ import rx.subjects.BehaviorSubject
 import rx.subjects.PublishSubject
 
 class A2bTripsViewModel constructor(
-    private val context: Context,
-    private val getSegmentSummary: GetSegmentSummary
+    private val context: Context
 ) {
   internal val onTripSelected: PublishSubject<Trip> = PublishSubject.create()
   private val _isRefreshing: BehaviorSubject<Boolean> = BehaviorSubject.create(false)
@@ -43,6 +41,6 @@ class A2bTripsViewModel constructor(
       .doOnSubscribe { _isRefreshing.onNext(true) }
       .doOnUnsubscribe { _isRefreshing.onNext(false) }
       .observeOn(mainThread())
-      .doOnNext { trips.addAll(it.map { TripViewModel(context, it, getSegmentSummary, onTripSelected) }) }
+      .doOnNext { trips.addAll(it.map { TripViewModel(context, it, onTripSelected) }) }
       .map { Unit }
 }
