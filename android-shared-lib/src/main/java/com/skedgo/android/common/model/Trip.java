@@ -12,8 +12,6 @@ import com.skedgo.android.common.util.ListUtils;
 import java.math.RoundingMode;
 import java.text.NumberFormat;
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
 import java.util.Locale;
 import java.util.UUID;
 
@@ -423,25 +421,6 @@ public class Trip implements Parcelable, ITimeRange {
       }
     }
     return false;
-  }
-
-  public List<TripSegment> getSummarySegments() {
-    final ArrayList<TripSegment> segments = this.mSegments;
-    if (segments == null) {
-      return Collections.emptyList();
-    }
-
-    final List<TripSegment> summarySegments = new ArrayList<>(segments.size());
-    TripSegment segment;
-    for (int i = 0, size = segments.size(); i < size; i++) {
-      segment = segments.get(i);
-      if (segment.getType() != SegmentType.ARRIVAL
-          && segment.isVisibleInContext(TripSegment.VISIBILITY_IN_SUMMARY)) {
-        summarySegments.add(segment);
-      }
-    }
-
-    return summarySegments;
   }
 
   public String getDisplayCost(String localizedFreeText) {
