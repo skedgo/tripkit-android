@@ -6,12 +6,9 @@ import rx.Observable;
 import rx.functions.Func1;
 
 public class ExternalOAuthServiceImpl implements ExternalOAuthService {
-  private final ExternalOAuthStore externalOAuthStore;
   private final ExternalOAuthServiceGenerator externalOAuthServiceGenerator;
 
-  public ExternalOAuthServiceImpl(ExternalOAuthStore externalOAuthStore,
-                                  ExternalOAuthServiceGenerator externalOAuthServiceGenerator) {
-    this.externalOAuthStore = externalOAuthStore;
+  public ExternalOAuthServiceImpl(ExternalOAuthServiceGenerator externalOAuthServiceGenerator) {
     this.externalOAuthServiceGenerator = externalOAuthServiceGenerator;
   }
 
@@ -53,11 +50,6 @@ public class ExternalOAuthServiceImpl implements ExternalOAuthService {
                 .refreshToken(response.refreshToken())
                 .expiresIn(response.expiresIn())
                 .build();
-          }
-        })
-        .flatMap(new Func1<ExternalOAuth, Observable<ExternalOAuth>>() {
-          @Override public Observable<ExternalOAuth> call(ExternalOAuth externalOAuth) {
-            return externalOAuthStore.updateExternalOauth(externalOAuth);
           }
         });
   }

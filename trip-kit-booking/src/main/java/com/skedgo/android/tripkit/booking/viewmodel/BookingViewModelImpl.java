@@ -162,35 +162,6 @@ public class BookingViewModelImpl implements BookingViewModel {
     return Observable.just(false);
   }
 
-  @Override
-  public Observable<Boolean> needsAuthentication(final BookingForm form) {
-
-    if (form.getValue() != null) {
-      return bookingService.getExternalOauth(form.getValue().toString())
-          .toObservable()
-          .onErrorResumeNext(new Func1<Throwable, Observable<? extends ExternalOAuth>>() {
-            @Override public Observable<? extends ExternalOAuth> call(Throwable throwable) {
-              return Observable.just(null);
-            }
-          })
-          .doOnNext(new Action1<ExternalOAuth>() {
-            @Override public void call(ExternalOAuth externalOAuth) {
-              if (externalOAuth != null) {
-                form.setAuthData(externalOAuth);
-              }
-            }
-          })
-          .map(new Func1<ExternalOAuth, Boolean>() {
-            @Override public Boolean call(ExternalOAuth externalOAuth) {
-              return externalOAuth == null;
-            }
-          });
-    } else {
-      return Observable.just(true);
-    }
-
-  }
-
   private boolean canceled(BookingForm bookingForm) {
     List<FormGroup> formGroups = bookingForm.getForm();
     if (!CollectionUtils.isEmpty(formGroups)) {
