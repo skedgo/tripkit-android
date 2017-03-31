@@ -38,12 +38,10 @@ public class RouteServiceImplTest {
   @Mock ExtraQueryMapProvider extraQueryMapProvider;
   @Mock FailoverRoutingApi routingApi;
   private RouteServiceImpl routeService;
-  private String appVersion = "v1.0";
 
   @Before public void before() {
     MockitoAnnotations.initMocks(this);
     routeService = new RouteServiceImpl(
-        appVersion,
         queryGenerator,
         excludedTransitModesAdapter,
         co2Preferences,
@@ -62,7 +60,6 @@ public class RouteServiceImplTest {
 
     final Map<String, Object> options = routeService.toOptions(query);
     assertThat(options)
-        .containsEntry("version", appVersion)
         .containsEntry("v", "12")
         .containsEntry("unit", query.getUnit())
         .containsEntry("from", "(1.0,2.0)")
