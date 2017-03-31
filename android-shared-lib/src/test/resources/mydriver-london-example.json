@@ -1,0 +1,44 @@
+{
+  "arrive": 1490957137,
+  "availability": "MISSED_PREBOOKING_WINDOW",
+  "caloriesCost": 101,
+  "carbonCost": 9.8,
+  "currencySymbol": "£",
+  "depart": 1490952882,
+  "hassleCost": 2,
+  "mainSegmentHashCode": 675040619,
+  "moneyCost": 50.51,
+  "moneyUSDCost": 75.17,
+  "plannedURL": "http://deep-thought:8080/satapp-debug/trip/planned/b9a7f5e4-e06a-4d65-8d53-8db68b515664",
+  "queryIsLeaveAfter": true,
+  "queryTime": 1490952882,
+  "saveURL": "http://deep-thought:8080/satapp-debug/trip/save/b9a7f5e4-e06a-4d65-8d53-8db68b515664",
+  "segments": [
+    {
+      "alertHashCodes": [
+        -687645253
+      ],
+      "availability": "MISSED_PREBOOKING_WINDOW",
+      "booking": {
+        "externalActions": [
+          "https://www.mydriver.com/en/#/carClasses?type=DISTANCE&from=51.469685,%20-0.453529&to=51.51399620923077,%20-0.1026543476923077&startdate=2017-03-31T10:34:42+0100"
+        ],
+        "title": "Book"
+      },
+      "durationString": "29 mins",
+      "endTime": 1490954595,
+      "segmentTemplateHashCode": 675040619,
+      "startTime": 1490952882
+    },
+    {
+      "availability": "AVAILABLE",
+      "durationString": "43 mins",
+      "endTime": 1490957137,
+      "segmentTemplateHashCode": 1734429216,
+      "startTime": 1490954595
+    }
+  ],
+  "temporaryURL": "http://deep-thought:8080/satapp-debug/trip/b9a7f5e4-e06a-4d65-8d53-8db68b515664",
+  "updateURL": "http://deep-thought:8080/satapp-debug/trip/update/b9a7f5e4-e06a-4d65-8d53-8db68b515664?hash=12710261",
+  "weightedScore": 378.5
+}
