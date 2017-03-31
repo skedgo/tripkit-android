@@ -22,7 +22,6 @@ import rx.Observable;
 import rx.functions.Func1;
 
 final class RouteServiceImpl implements RouteService {
-  private final String appVersion;
   private final Func1<Query, Observable<List<Query>>> queryGenerator;
   private final ExcludedTransitModesAdapter excludedTransitModesAdapter;
   @Nullable private final Co2Preferences co2Preferences;
@@ -31,14 +30,12 @@ final class RouteServiceImpl implements RouteService {
   private final FailoverRoutingApi routingApi;
 
   RouteServiceImpl(
-      @NonNull String appVersion,
       @NonNull Func1<Query, Observable<List<Query>>> queryGenerator,
       @Nullable ExcludedTransitModesAdapter excludedTransitModesAdapter,
       @Nullable Co2Preferences co2Preferences,
       @Nullable TripPreferences tripPreferences,
       @Nullable ExtraQueryMapProvider extraQueryMapProvider,
       FailoverRoutingApi routingApi) {
-    this.appVersion = appVersion;
     this.queryGenerator = queryGenerator;
     this.excludedTransitModesAdapter = excludedTransitModesAdapter;
     this.co2Preferences = co2Preferences;
@@ -121,7 +118,6 @@ final class RouteServiceImpl implements RouteService {
     options.put("arriveBefore", Long.toString(arriveBefore));
     options.put("departAfter", Long.toString(departAfter));
     options.put("unit", unit);
-    options.put("version", appVersion);
     options.put("v", "12");
     options.put("tt", Integer.toString(transferTime));
     options.put("ws", Integer.toString(walkingSpeed));
