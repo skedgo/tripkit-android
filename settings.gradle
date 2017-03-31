@@ -1,10 +1,8 @@
 include ':A2bTrips'
 
-include ':ConfigurationDomain', ':ConfigurationData'
 include ':AccountDomain', ':AccountData'
 include ':ValidBookingCountData', ':ValidBookingCountDomain'
 
-include ':samples'
 include ':android-shared-lib'
 include ':trip-kit'
 include ':trip-kit-booking'

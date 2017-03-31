@@ -10,7 +10,6 @@ import com.google.gson.GsonBuilder;
 import com.skedgo.android.common.model.GsonAdaptersBooking;
 import com.skedgo.android.common.model.Region;
 import com.skedgo.android.common.model.TransportMode;
-import com.skedgo.android.common.util.DiagnosticUtils;
 import com.skedgo.android.common.util.Gsons;
 import com.skedgo.android.common.util.LowercaseEnumTypeAdapterFactory;
 import com.skedgo.android.tripkit.bookingproviders.BookingResolver;
@@ -22,14 +21,12 @@ import com.skedgo.android.tripkit.tsp.GsonAdaptersRegionInfoResponse;
 import com.skedgo.android.tripkit.tsp.RegionInfoService;
 
 import java.util.List;
-import java.util.Locale;
 import java.util.Map;
 
 import javax.inject.Named;
 import javax.inject.Provider;
 import javax.inject.Singleton;
 
-import dagger.Lazy;
 import dagger.Module;
 import dagger.Provides;
 import okhttp3.HttpUrl;
@@ -40,6 +37,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 import rx.functions.Action1;
 import rx.functions.Func0;
 import rx.schedulers.Schedulers;
+import skedgo.tripkit.configuration.AppVersionNameRepository;
 
 @Module
 public class MainModule {
@@ -124,7 +122,6 @@ public class MainModule {
 
     final QueryGeneratorImpl queryGenerator = new QueryGeneratorImpl(regionService);
     return new RouteServiceImpl(
-        getAppVersion(),
         queryGenerator,
         configs.excludedTransitModesAdapter(),
         co2Preferences,
@@ -138,23 +135,11 @@ public class MainModule {
     return configs.context();
   }
 
-  @Provides BuiltInInterceptor builtInInterceptor(Lazy<UuidProvider> uuidProviderLazy) {
-    // Null to opt-out sending UUID header.
-    final UuidProvider uuidProvider = configs.isUuidOptedOut() ? null : uuidProviderLazy.get();
-    return BuiltInInterceptorBuilder.create()
-        .appVersion(getAppVersion())
-        .locale(Locale.getDefault())
-        .userTokenProvider(configs.userTokenProvider())
-        .uuidProvider(uuidProvider)
-        .getApiKey(configs.apiKey())
-        .build();
-  }
-
   @Singleton @Provides OkHttpClient httpClient(
       OkHttpClient.Builder httpClientBuilder,
-      BuiltInInterceptor builtInInterceptor) {
+      AddCustomHeaders addCustomHeaders) {
     final OkHttpClient.Builder builder = httpClientBuilder
-        .addInterceptor(builtInInterceptor);
+        .addInterceptor(addCustomHeaders);
     if (configs.debuggable()) {
       final Func0<Func0<String>> baseUrlAdapterFactory = configs.baseUrlAdapterFactory();
       if (baseUrlAdapterFactory != null) {
@@ -234,10 +219,6 @@ public class MainModule {
         .create();
   }
 
-  @NonNull String getAppVersion() {
-    return "a-" + DiagnosticUtils.getAppVersionName(context);
-  }
-
   @Singleton @Provides Action1<Throwable> getErrorHandler() {
     final Action1<Throwable> errorHandler = configs.errorHandler();
     return new Action1<Throwable>() {
@@ -250,5 +231,9 @@ public class MainModule {
         }
       }
     };
+  }
+
+  @Provides AppVersionNameRepository appVersionNameRepository(Context context) {
+    return new AppVersionNameRepositoryImpl(context);
   }
 }
