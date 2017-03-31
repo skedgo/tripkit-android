@@ -6,6 +6,7 @@
     <variable
       name="viewModel"
       type="skedgo.tripkit.demo.a2btrips.TripViewModel" />
+
   </data>
 
   <LinearLayout
@@ -22,6 +23,12 @@
       android:text="@{viewModel.times}"
       android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
       tools:text="Leave at 07:00, arrive by 08:30" />
+
+    <TextView
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:text="@{viewModel.modeInfos}"
+      android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
 
     <TextView
       android:layout_width="match_parent"

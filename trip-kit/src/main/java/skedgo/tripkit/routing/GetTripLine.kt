@@ -1,4 +1,4 @@
-package com.skedgo.android.tripkit
+package skedgo.tripkit.routing
 
 import android.graphics.Color
 import android.text.TextUtils
@@ -10,21 +10,25 @@ import com.skedgo.android.common.model.TransportMode
 import com.skedgo.android.common.model.TripSegment
 import com.skedgo.android.common.model.VehicleMode
 import com.skedgo.android.common.util.PolylineEncoderUtils
+import com.skedgo.android.tripkit.LineSegment
 import rx.Observable
 import java.util.*
 import javax.inject.Inject
 
-class TripLinesProcessor @Inject constructor() {
+// FIXME: Create a pure domain model to represent a trip line.
+typealias TripLine = List<PolylineOptions>
 
-  fun getPolylineOptionsListAsync(segments: List<TripSegment>): Observable<List<PolylineOptions>> {
-    return Observable
-        .fromCallable<Pair<List<List<LineSegment>>, List<List<LineSegment>>>> { createLinesToDraw(segments) }
-        .map { lineSegmentPair -> createPolylineOptionsList(lineSegmentPair.first, lineSegmentPair.second) }
-  }
+open class GetTripLine @Inject constructor() {
+  private val NON_TRAVELLED_LINE_COLOR = 0x88AAAAAA.toInt()
+
+  open fun execute(segments: List<TripSegment>): Observable<TripLine>
+      = Observable
+      .fromCallable<Pair<List<List<LineSegment>>, List<List<LineSegment>>>> { createLinesToDraw(segments) }
+      .map { lineSegmentPair -> createPolylineOptionsList(lineSegmentPair.first, lineSegmentPair.second) }
 
   private fun createPolylineOptionsList(
       results: List<List<LineSegment>>?,
-      nonTravelledLinesToDraw: List<List<LineSegment>>?): List<PolylineOptions> {
+      nonTravelledLinesToDraw: List<List<LineSegment>>?): TripLine {
     // Use to collect polylines that will be put onto the map
     val polylineOptionsList = LinkedList<PolylineOptions>()
 
@@ -211,9 +215,5 @@ class TripLinesProcessor @Inject constructor() {
     }
 
     return Pair(linesToDraw, nonTravelledLinesToDraw)
-  }
-
-  companion object {
-    private val NON_TRAVELLED_LINE_COLOR = 0x88AAAAAA.toInt()
   }
 }
