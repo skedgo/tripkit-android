@@ -27,21 +27,6 @@ public final class StringUtils {
     return null;
   }
 
-  public static String getNameAndAddressOfLocation(String name, String address) {
-    StringBuilder builder = new StringBuilder();
-    String nameAndAddress;
-    if (!TextUtils.isEmpty(name)) {
-      builder.append(name);
-      builder.append(",");
-    }
-    if (!TextUtils.isEmpty(address)) {
-      nameAndAddress = builder.append(address).toString();
-    } else {
-      nameAndAddress = "";
-    }
-    return nameAndAddress;
-  }
-
   public static String capitalizeFirst(String str) {
     if (TextUtils.isEmpty(str)) {
       return str;
@@ -55,17 +40,6 @@ public final class StringUtils {
     Arrays.fill(args, "?");
     String result = TextUtils.join(",", args);
     return result;
-  }
-
-  /*Join an array of strings by  dilimeter*/
-  public static String join(String[] strings, String dilimeter) {
-    String s = "";
-    for (String s1 : strings) {
-      s += s1 + dilimeter;
-    }
-    int pos = s.lastIndexOf(dilimeter);
-    s = s.substring(0, pos).trim();
-    return s;
   }
 
   /*Join an array of strings by default dilimeter, which is comma*/
@@ -91,33 +65,6 @@ public final class StringUtils {
       s = s.substring(0, pos).trim();
     }
 
-    return s;
-  }
-
-  /*Join an array of strings by default dilimeter, which is comma*/
-  public static String join(int[] args) {
-    if (args == null || args.length == 0) {
-      return "";
-    }
-    return join(args, ",");
-  }
-
-  public static String join(String... strings) {
-    return join(strings, ",");
-  }
-
-  /*Join an array of integer by  dilimeter*/
-  public static String join(int[] args, String dilimeter) {
-    if (args == null || args.length == 0) {
-      return "";
-    }
-
-    String s = "";
-    for (int i = 0; i < args.length; i++) {
-      s += args[i] + dilimeter;
-    }
-    int pos = s.lastIndexOf(dilimeter);
-    s = s.substring(0, pos).trim();
     return s;
   }
 }

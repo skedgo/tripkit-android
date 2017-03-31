@@ -7,7 +7,6 @@ public class StyleManager {
   public static final String FORMAT_TIME_SPAN_NOW = "Now";
   public static final String FORMAT_TIME_SPAN_DAY = "day";
   public static final String FORMAT_TIME_SPAN_HOUR = "h";
-  public static final String FORMAT_DATE = "EE, d MMMM";
 
   /**
    * TODO: i18n
