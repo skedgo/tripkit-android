@@ -59,20 +59,6 @@ public final class LogUtils {
     }
   }
 
-  public static void LOGV(final String tag, String message) {
-    //noinspection PointlessBooleanExpression,ConstantConditions
-    if (isDebug && Log.isLoggable(tag, Log.VERBOSE)) {
-      Log.v(tag, message);
-    }
-  }
-
-  public static void LOGV(final String tag, String message, Throwable cause) {
-    //noinspection PointlessBooleanExpression,ConstantConditions
-    if (isDebug && Log.isLoggable(tag, Log.VERBOSE)) {
-      Log.v(tag, message, cause);
-    }
-  }
-
   public static void LOGI(final String tag, String message) {
     Log.i(tag, message);
   }
