@@ -81,6 +81,7 @@ public abstract class TripKit {
   public abstract BookingResolver getBookingResolver();
   public abstract LocationInfoService getLocationInfoService();
   public abstract TripUpdater getTripUpdater();
+  public abstract ReportingApi getReportingApi();
   @VisibleForTesting abstract RegionDatabaseHelper getRegionDatabaseHelper();
   abstract Action1<Throwable> getErrorHandler();
 }
