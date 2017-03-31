@@ -9,7 +9,7 @@ import org.immutables.value.Value;
 
 import rx.functions.Action1;
 import rx.functions.Func0;
-import skedgo.tripkit.configuration.ApiKey;
+import skedgo.tripkit.configuration.Key;
 
 @Value.Immutable
 public abstract class Configs {
@@ -18,7 +18,7 @@ public abstract class Configs {
   }
 
   public abstract Context context();
-  public abstract Func0<ApiKey> apiKey();
+  public abstract Func0<Key> key();
   @Nullable public abstract Action1<Throwable> errorHandler();
   @Nullable public abstract ExcludedTransitModesAdapter excludedTransitModesAdapter();
   @Nullable public abstract Func0<Co2Preferences> co2PreferencesFactory();

@@ -70,8 +70,6 @@ dependencies {
   provided "org.immutables:gson:$immutablesVersion:annotations"
 
   compile project(':android-shared-lib')
-  compile project(':ConfigurationDomain')
-  compile project(':ConfigurationData')
 }
 
 install {
