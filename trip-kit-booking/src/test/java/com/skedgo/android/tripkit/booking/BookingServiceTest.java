@@ -24,14 +24,13 @@ import static org.mockito.Mockito.when;
 @Config(constants = BuildConfig.class)
 public class BookingServiceTest {
   @Mock BookingApi bookingApi;
-  @Mock ExternalOAuthStore externalOAuthStore;
   private Gson gson;
   private BookingServiceImpl service;
 
   @Before public void before() {
     MockitoAnnotations.initMocks(this);
     gson = new Gson(); // use default Gson
-    service = new BookingServiceImpl(bookingApi, externalOAuthStore, gson);
+    service = new BookingServiceImpl(bookingApi, gson);
   }
 
   @Test public void shouldGetBookingFormAsync() {
