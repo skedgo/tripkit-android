@@ -9,7 +9,6 @@ import com.skedgo.android.common.model.Location;
 import com.skedgo.android.common.model.Query;
 import com.skedgo.android.common.model.Region;
 import com.skedgo.android.common.model.TripGroup;
-import com.skedgo.android.common.util.StringUtils;
 import com.skedgo.android.tripkit.routing.ExtraQueryMapProvider;
 import com.skedgo.android.tripkit.routing.FailoverRoutingApi;
 
@@ -23,7 +22,6 @@ import rx.Observable;
 import rx.functions.Func1;
 
 final class RouteServiceImpl implements RouteService {
-  private final String appVersion;
   private final Func1<Query, Observable<List<Query>>> queryGenerator;
   private final ExcludedTransitModesAdapter excludedTransitModesAdapter;
   @Nullable private final Co2Preferences co2Preferences;
@@ -32,14 +30,12 @@ final class RouteServiceImpl implements RouteService {
   private final FailoverRoutingApi routingApi;
 
   RouteServiceImpl(
-      @NonNull String appVersion,
       @NonNull Func1<Query, Observable<List<Query>>> queryGenerator,
       @Nullable ExcludedTransitModesAdapter excludedTransitModesAdapter,
       @Nullable Co2Preferences co2Preferences,
       @Nullable TripPreferences tripPreferences,
       @Nullable ExtraQueryMapProvider extraQueryMapProvider,
       FailoverRoutingApi routingApi) {
-    this.appVersion = appVersion;
     this.queryGenerator = queryGenerator;
     this.excludedTransitModesAdapter = excludedTransitModesAdapter;
     this.co2Preferences = co2Preferences;
@@ -54,18 +50,6 @@ final class RouteServiceImpl implements RouteService {
       coordinatesText.append("\"").append(location.getAddress()).append("\"");
     }
     return coordinatesText.toString();
-  }
-
-  @NonNull @Override
-  public Observable<TripGroup> routeAsync(@NonNull RouteOptions options) {
-    final Query query = options.toQuery();
-    return routeAsync(query)
-        .flatMap(new Func1<List<TripGroup>, Observable<TripGroup>>() {
-          @Override
-          public Observable<TripGroup> call(List<TripGroup> routes) {
-            return Observable.from(routes);
-          }
-        });
   }
 
   @NonNull @Override
@@ -134,7 +118,6 @@ final class RouteServiceImpl implements RouteService {
     options.put("arriveBefore", Long.toString(arriveBefore));
     options.put("departAfter", Long.toString(departAfter));
     options.put("unit", unit);
-    options.put("version", appVersion);
     options.put("v", "12");
     options.put("tt", Integer.toString(transferTime));
     options.put("ws", Integer.toString(walkingSpeed));
