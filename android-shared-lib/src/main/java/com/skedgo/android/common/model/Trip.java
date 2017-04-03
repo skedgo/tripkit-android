@@ -255,7 +255,6 @@ public class Trip implements Parcelable, ITimeRange {
    * Indicates availability of the trip, e.g., if it's too late to book a trip for the requested
    * departure time, or if a scheduled service has been cancelled..
    */
-
   @Nullable public Availability getAvailability() {
     return  Availability.fromString(availability);
   }
