@@ -44,7 +44,7 @@ public class TripAvailableTest {
     Trip myDriverTrip = gson.fromJson(tripJson, Trip.class);
 
     assertThat(myDriverTrip).isNotNull();
-    assertThat(myDriverTrip.getAvailability()).isNotEqualTo("AVAILABLE");
+    assertThat(myDriverTrip.getAvailability()).isNotEqualTo(Availability.Available);
 
   }
 

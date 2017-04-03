@@ -251,12 +251,17 @@ public class Trip implements Parcelable, ITimeRange {
     this.temporaryURL = temporaryURL;
   }
 
-  @Nullable public String getAvailability() {
-    return availability;
+  /**
+   * Indicates availability of the trip, e.g., if it's too late to book a trip for the requested
+   * departure time, or if a scheduled service has been cancelled..
+   */
+
+  @Nullable public Availability getAvailability() {
+    return  Availability.fromString(availability);
   }
 
-  public void setAvailability(String availability) {
-    this.availability = availability;
+  public void setAvailability(Availability availability) {
+    this.availability = availability.getValue();
   }
 
   public boolean queryIsLeaveAfter() {
