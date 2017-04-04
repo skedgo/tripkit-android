@@ -7,7 +7,7 @@ import javax.inject.Inject
 
 class TripIsPlannedRepositoryImpl @Inject internal constructor(private val reportingApi: ReportingApi) : TripIsPlannedRepository {
 
-  override fun markPlannedTrip(plannedUrl: String) {
+  override fun markPlannedTrip(plannedUrl: String): Completable {
     TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
   }
 
