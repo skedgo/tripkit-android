@@ -1,9 +1,10 @@
 package com.skedgo.android.tripkit
 
-import skedgo.tripkit.analytics.Choice
+import rx.Completable
+import skedgo.tripkit.analytics.UserInfo
 
 interface TripIsPlannedRepository {
 
   fun markPlannedTrip(plannedUrl: String)
-  fun markPlannedTrip(plannedUrl: String, choiceSet : List<Choice>)
+  fun markPlannedTrip(plannedUrl: String, userInfo: UserInfo) : Completable
 }
