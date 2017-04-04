@@ -1,5 +1,6 @@
 apply plugin: "com.android.library"
 apply plugin: 'com.github.dcendents.android-maven'
+apply plugin: 'kotlin-android'
 apply plugin: 'com.jfrog.bintray'
 
 // For https://github.com/dcendents/android-maven-gradle-plugin.
@@ -62,6 +63,8 @@ dependencies {
   compile 'io.reactivex:rxandroid:1.2.1', { exclude module: 'rxjava' }
   compile 'com.google.code.gson:gson:2.6.1'
   compile 'com.github.skedgo:commons-collections:v1.0'
+
+  compile "org.jetbrains.kotlin:kotlin-stdlib:$kotlinVersion"
 
   // To generate immutable models.
   // See more at http://immutables.github.io/.
