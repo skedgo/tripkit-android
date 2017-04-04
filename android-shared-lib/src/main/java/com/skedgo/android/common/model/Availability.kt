@@ -6,7 +6,7 @@ enum class Availability(val value: String) {
   Cancelled("CANCELLED");
 
   companion object {
-    @JvmStatic fun fromString(value: String): Availability? {
+    @JvmStatic fun fromString(value: String?): Availability? {
       return values().firstOrNull { it.value == value }
     }
   }

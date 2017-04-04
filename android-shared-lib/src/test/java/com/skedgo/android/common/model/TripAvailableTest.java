@@ -26,7 +26,7 @@ public class TripAvailableTest {
     gson = builder.create();
   }
 
-  @Test public void shoudHaveNotAvailableTrip() throws IOException {
+  @Test public void shouldHaveNotAvailableTrip() throws IOException {
     String tripJson = IOUtils.toString(getClass().
         getResourceAsStream("/mydriver-london-example.json"), Charset.defaultCharset());
 
@@ -34,5 +34,9 @@ public class TripAvailableTest {
 
     assertThat(myDriverTrip).isNotNull();
     assertThat(myDriverTrip.getAvailability()).isNotEqualTo(Availability.Available);
+  }
+
+  @Test public void shouldBeNullAvailability() throws IOException {
+    assertThat(Availability.fromString(null)).isNull();
   }
 }
