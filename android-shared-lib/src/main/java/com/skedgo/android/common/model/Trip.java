@@ -75,7 +75,7 @@ public class Trip implements Parcelable, ITimeRange {
   @SerializedName("progressURL") private String progressURL;
   @SerializedName("plannedURL") private String plannedURL;
   @SerializedName("temporaryURL") private String temporaryURL;
-  @SerializedName("availability") private String availability;
+  @Nullable @SerializedName("availability") private String availability;
   private boolean queryIsLeaveAfter;
   private String uuid = UUID.randomUUID().toString();
   private long mId;
