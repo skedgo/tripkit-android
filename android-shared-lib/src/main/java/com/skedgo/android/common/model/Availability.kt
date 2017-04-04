@@ -1,7 +1,6 @@
 package com.skedgo.android.common.model
 
-enum class Availability (val value: String) {
-
+enum class Availability(val value: String) {
   Available("AVAILABLE"),
   MissedPrebookingWindow("MISSED_PREBOOKING_WINDOW"),
   Cancelled("CANCELLED");
