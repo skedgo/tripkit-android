@@ -9,7 +9,7 @@ import retrofit2.http.POST;
 import retrofit2.http.Url;
 import rx.Observable;
 
-interface ReportingApi {
+public interface ReportingApi {
   @POST Observable<JsonObject> reportPlannedTripAsync(
       @Url String url,
       @Body Map<String, Object> userInfo
