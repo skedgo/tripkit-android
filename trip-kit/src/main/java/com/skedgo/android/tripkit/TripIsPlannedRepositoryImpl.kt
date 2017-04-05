@@ -5,14 +5,14 @@ import skedgo.tripkit.analytics.UserInfo
 import skedgo.tripkit.analytics.convertToMap
 import javax.inject.Inject
 
-class TripIsPlannedRepositoryImpl @Inject internal constructor(private val reportingApi: ReportingApi) : TripIsPlannedRepository {
-
+class TripIsPlannedRepositoryImpl @Inject internal constructor(
+    private val reportingApi: ReportingApi
+) : TripIsPlannedRepository {
   override fun markPlannedTrip(plannedUrl: String): Completable {
-    TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    TODO("Not implemented")
   }
 
-  override fun markPlannedTrip(plannedUrl: String, userInfo: UserInfo): Completable {
-    return reportingApi.reportPlannedTripAsync(plannedUrl, userInfo.convertToMap())
-        .toCompletable()
-  }
+  override fun markPlannedTrip(plannedUrl: String, userInfo: UserInfo): Completable
+      = reportingApi.reportPlannedTripAsync(plannedUrl, userInfo.convertToMap())
+      .toCompletable()
 }
