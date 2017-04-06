@@ -1,14 +1,12 @@
 package com.skedgo.android.tripkit
 
 import rx.Completable
-import skedgo.tripkit.analytics.UserInfo
-import skedgo.tripkit.analytics.toMutableMap
-import javax.inject.Inject
+import skedgo.tripkit.analytics.MarkTripAsPlannedWithUserInfo
 
-internal class MarkTripAsPlannedWithUserInfoImpl @Inject internal constructor(
+internal class MarkTripAsPlannedWithUserInfoImpl internal constructor(
     private val markTripAsPlannedApi: MarkTripAsPlannedApi
 ) : MarkTripAsPlannedWithUserInfo {
-  override fun execute(plannedUrl: String, userInfo: UserInfo): Completable
-      = markTripAsPlannedApi.execute("$plannedUrl/", userInfo.toMutableMap())
+  override fun execute(plannedUrl: String, userInfo: MutableMap<String, Any>): Completable
+      = markTripAsPlannedApi.execute("$plannedUrl/", userInfo)
       .toCompletable()
 }
