@@ -12,10 +12,14 @@ import rx.schedulers.Schedulers
 @Module
 class AnalyticsDataModule {
   @Provides fun markTripAsPlannedWithUserInfo(
-      markTripAsPlannedWithUserInfoImpl: MarkTripAsPlannedWithUserInfoImpl
-  ): MarkTripAsPlannedWithUserInfo = markTripAsPlannedWithUserInfoImpl
+      gson: Gson,
+      httpClient: OkHttpClient
+  ): MarkTripAsPlannedWithUserInfo {
+    val markTripAsPlannedApi: MarkTripAsPlannedApi = reportingApi(gson, httpClient)
+    return MarkTripAsPlannedWithUserInfoImpl(markTripAsPlannedApi)
+  }
 
-  @Provides internal fun reportingApi(gson: Gson, httpClient: OkHttpClient): ReportingApi
+  private fun reportingApi(gson: Gson, httpClient: OkHttpClient): MarkTripAsPlannedApi
       = Retrofit.Builder()
       /* This base url is ignored as the api relies on @Url. */
       .baseUrl("https://tripgo.skedgo.com/satapp/")
@@ -23,5 +27,5 @@ class AnalyticsDataModule {
       .addConverterFactory(GsonConverterFactory.create(gson))
       .client(httpClient)
       .build()
-      .create(ReportingApi::class.java)
+      .create(MarkTripAsPlannedApi::class.java)
 }
