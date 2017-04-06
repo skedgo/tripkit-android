@@ -6,7 +6,7 @@ data class MiniSegment(
 ) {
   init {
     require(duration >= 0) {
-      "Duration must be greater than or equal to 0.. Found: $duration"
+      "Duration must be greater than or equal to 0. Found: $duration."
     }
   }
 }

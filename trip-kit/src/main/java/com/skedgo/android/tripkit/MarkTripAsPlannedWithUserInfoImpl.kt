@@ -2,7 +2,7 @@ package com.skedgo.android.tripkit
 
 import rx.Completable
 import skedgo.tripkit.analytics.UserInfo
-import skedgo.tripkit.analytics.convertToMap
+import skedgo.tripkit.analytics.toMap
 import javax.inject.Inject
 
 /**
@@ -12,6 +12,6 @@ class MarkTripAsPlannedWithUserInfoImpl @Inject internal constructor(
     private val reportingApi: ReportingApi
 ) : MarkTripAsPlannedWithUserInfo {
   override fun execute(plannedUrl: String, userInfo: UserInfo): Completable
-      = reportingApi.reportPlannedTripAsync("$plannedUrl/", userInfo.convertToMap())
+      = reportingApi.reportPlannedTripAsync("$plannedUrl/", userInfo.toMap())
       .toCompletable()
 }
