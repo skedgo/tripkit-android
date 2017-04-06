@@ -80,7 +80,6 @@ public abstract class TripKit {
   public abstract RegionService getRegionService();
   public abstract RouteService getRouteService();
   public abstract okhttp3.OkHttpClient getOkHttpClient3();
-  public abstract Reporter getReporter();
   public abstract BookingResolver getBookingResolver();
   public abstract LocationInfoService getLocationInfoService();
   public abstract TripUpdater getTripUpdater();
