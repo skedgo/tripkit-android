@@ -5,8 +5,7 @@ import dagger.Provides
 
 @Module
 class AnalyticsModule {
-
-  @Provides fun tripIsPlannedRepository(tripIsPlannedRepositoryImpl: TripIsPlannedRepositoryImpl): TripIsPlannedRepository {
-    return tripIsPlannedRepositoryImpl
-  }
+  @Provides fun markTripAsPlannedWithUserInfo(
+      markTripAsPlannedWithUserInfoImpl: MarkTripAsPlannedWithUserInfoImpl
+  ): MarkTripAsPlannedWithUserInfo = markTripAsPlannedWithUserInfoImpl
 }
