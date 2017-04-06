@@ -1,6 +1,6 @@
 package skedgo.tripkit.analytics
 
-enum class TripSource(val type: String) {
+enum class TripSource(val value: String) {
   Agenda("agenda"),
   Booking("booking"),
   External("external"),

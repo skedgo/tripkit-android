@@ -13,6 +13,6 @@ import rx.Observable
 internal interface MarkTripAsPlannedApi {
   @POST fun execute(
       @Url url: String,
-      @Body userInfo: Map<String, Any>
+      @Body userInfo: MutableMap<String, Any>
   ): Observable<JsonObject>
 }
