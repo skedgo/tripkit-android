@@ -30,7 +30,7 @@ dependencies {
   testCompile 'org.assertj:assertj-core:1.7.0'
   testCompile libs.mockitoCore
   testCompile 'org.robolectric:robolectric:3.1.4'
-  testCompile 'com.nhaarman:mockito-kotlin:1.0.1', { exclude group: 'org.jetbrains.kotlin' }
+  testCompile libs.mockitoKotlin, { exclude group: 'org.jetbrains.kotlin' }
 
   androidTestCompile 'com.google.code.findbugs:jsr305:3.0.1'
   androidTestCompile 'com.android.support.test.espresso:espresso-core:2.2.2', {

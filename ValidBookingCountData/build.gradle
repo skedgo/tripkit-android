@@ -1,3 +1,4 @@
+apply from: "../dependencies.gradle"
 apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
 apply plugin: 'com.github.dcendents.android-maven'
@@ -26,7 +27,7 @@ kapt { generateStubs = true }
 dependencies {
   testCompile 'junit:junit:4.12'
   testCompile 'org.robolectric:robolectric:3.3.1'
-  testCompile 'com.nhaarman:mockito-kotlin:1.0.1', { exclude group: 'org.jetbrains.kotlin' }
+  testCompile libs.mockitoKotlin, { exclude group: 'org.jetbrains.kotlin' }
 
   compile 'io.reactivex:rxjava:1.2.4'
   compile "com.squareup.retrofit2:retrofit:2.0.2"
