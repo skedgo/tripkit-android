@@ -1,3 +1,4 @@
+apply from: "../dependencies.gradle"
 apply plugin: 'com.android.library'
 apply plugin: 'com.github.dcendents.android-maven'
 apply plugin: 'kotlin-android'
@@ -27,7 +28,7 @@ android {
 dependencies {
   testCompile 'junit:junit:4.12'
   testCompile 'org.assertj:assertj-core:1.7.0'
-  testCompile 'org.mockito:mockito-core:2.2.28'
+  testCompile libs.mockitoCore
   testCompile 'org.robolectric:robolectric:3.1.4'
   testCompile 'com.nhaarman:mockito-kotlin:1.0.1', { exclude group: 'org.jetbrains.kotlin' }
 

@@ -1,0 +1,7 @@
+class LibVersions extends Expando {}
+
+class Libs extends Expando {}
+
+project.ext.libs = new Libs()
+project.ext.libs.mockitoKotlin = "com.nhaarman:mockito-kotlin:1.0.1"
+project.ext.libs.mockitoCore = "org.mockito:mockito-core:2.7.5"
