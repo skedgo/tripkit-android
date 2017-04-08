@@ -1,5 +1,6 @@
 include ':CommonCoreLegacy'
 include ':TripKitDomain'
+include ':TripKitDomainLegacy'
 include ':TripKitData'
 include ':TripKitAndroid'
 include ':TripKitSamples'
