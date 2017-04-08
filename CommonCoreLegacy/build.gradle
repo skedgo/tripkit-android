@@ -67,6 +67,7 @@ dependencies {
   compile 'com.google.code.gson:gson:2.6.1'
   compile 'com.github.skedgo:commons-collections:v1.0'
 
+  compile project(':TripKitDomain')
   compile "org.jetbrains.kotlin:kotlin-stdlib:$kotlinVersion"
 
   // To generate immutable models.
