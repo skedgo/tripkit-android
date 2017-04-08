@@ -263,6 +263,10 @@ public class Trip implements Parcelable, ITimeRange {
     return AvailabilityKt.toAvailability(availability);
   }
 
+  /**
+   * Mutability is subject to deletion after we finish migrating to an immutable {@link Trip}.
+   */
+  @Deprecated
   public void setAvailability(@NonNull Availability availability) {
     this.availability = availability.getValue();
   }
@@ -271,6 +275,10 @@ public class Trip implements Parcelable, ITimeRange {
     return queryIsLeaveAfter;
   }
 
+  /**
+   * Mutability is subject to deletion after we finish migrating to an immutable {@link Trip}.
+   */
+  @Deprecated
   public void setQueryIsLeaveAfter(boolean queryIsLeaveAfter) {
     this.queryIsLeaveAfter = queryIsLeaveAfter;
   }
@@ -279,6 +287,10 @@ public class Trip implements Parcelable, ITimeRange {
     return plannedURL;
   }
 
+  /**
+   * Mutability is subject to deletion after we finish migrating to an immutable {@link Trip}.
+   */
+  @Deprecated
   public void setPlannedURL(String plannedURL) {
     this.plannedURL = plannedURL;
   }
@@ -287,6 +299,10 @@ public class Trip implements Parcelable, ITimeRange {
     return currencySymbol;
   }
 
+  /**
+   * Mutability is subject to deletion after we finish migrating to an immutable {@link Trip}.
+   */
+  @Deprecated
   public void setCurrencySymbol(String currencySymbol) {
     this.currencySymbol = currencySymbol;
   }
@@ -295,6 +311,10 @@ public class Trip implements Parcelable, ITimeRange {
     return progressURL;
   }
 
+  /**
+   * Mutability is subject to deletion after we finish migrating to an immutable {@link Trip}.
+   */
+  @Deprecated
   public void setProgressURL(String progressURL) {
     this.progressURL = progressURL;
   }
