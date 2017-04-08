@@ -1,5 +1,6 @@
 apply from: "../dependencies.gradle"
 apply plugin: "kotlin"
+apply plugin: "kotlin-kapt"
 apply plugin: 'java'
 apply plugin: 'maven'
 
@@ -16,11 +17,14 @@ dependencies {
   testCompile libs.mockitoCore
   testCompile libs.mockitoKotlin, { exclude group: 'org.jetbrains.kotlin' }
 
+  compile libs.jodaTime
   compile 'io.reactivex:rxjava:1.2.4'
   compile 'com.google.dagger:dagger:2.7'
   kapt 'com.google.dagger:dagger-compiler:2.7'
 
   compile "org.jetbrains.kotlin:kotlin-stdlib:$kotlinVersion"
+  kapt libs.value
+  compileOnly libs.value
 }
 
 uploadArchives {
