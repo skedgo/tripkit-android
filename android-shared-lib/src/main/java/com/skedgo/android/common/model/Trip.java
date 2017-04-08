@@ -2,6 +2,7 @@ package com.skedgo.android.common.model;
 
 import android.os.Parcel;
 import android.os.Parcelable;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.text.TextUtils;
 
@@ -14,6 +15,9 @@ import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.Locale;
 import java.util.UUID;
+
+import skedgo.tripkit.a2brouting.Availability;
+import skedgo.tripkit.a2brouting.AvailabilityKt;
 
 /**
  * @see <a href="https://redmine.buzzhives.com/projects/buzzhives/wiki/Main_API_formats#Trips">API format</a>
@@ -256,10 +260,14 @@ public class Trip implements Parcelable, ITimeRange {
    * departure time, or if a scheduled service has been cancelled.
    */
   @Nullable public Availability getAvailability() {
-    return  Availability.fromString(availability);
+    return AvailabilityKt.toAvailability(availability);
   }
 
-  public void setAvailability(Availability availability) {
+  /**
+   * Mutability is subject to deletion after we finish migrating to an immutable {@link Trip}.
+   */
+  @Deprecated
+  public void setAvailability(@NonNull Availability availability) {
     this.availability = availability.getValue();
   }
 
@@ -267,6 +275,10 @@ public class Trip implements Parcelable, ITimeRange {
     return queryIsLeaveAfter;
   }
 
+  /**
+   * Mutability is subject to deletion after we finish migrating to an immutable {@link Trip}.
+   */
+  @Deprecated
   public void setQueryIsLeaveAfter(boolean queryIsLeaveAfter) {
     this.queryIsLeaveAfter = queryIsLeaveAfter;
   }
@@ -275,6 +287,10 @@ public class Trip implements Parcelable, ITimeRange {
     return plannedURL;
   }
 
+  /**
+   * Mutability is subject to deletion after we finish migrating to an immutable {@link Trip}.
+   */
+  @Deprecated
   public void setPlannedURL(String plannedURL) {
     this.plannedURL = plannedURL;
   }
@@ -283,6 +299,10 @@ public class Trip implements Parcelable, ITimeRange {
     return currencySymbol;
   }
 
+  /**
+   * Mutability is subject to deletion after we finish migrating to an immutable {@link Trip}.
+   */
+  @Deprecated
   public void setCurrencySymbol(String currencySymbol) {
     this.currencySymbol = currencySymbol;
   }
@@ -291,6 +311,10 @@ public class Trip implements Parcelable, ITimeRange {
     return progressURL;
   }
 
+  /**
+   * Mutability is subject to deletion after we finish migrating to an immutable {@link Trip}.
+   */
+  @Deprecated
   public void setProgressURL(String progressURL) {
     this.progressURL = progressURL;
   }
