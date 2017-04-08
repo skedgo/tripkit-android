@@ -1,4 +1,4 @@
-package skedgo.tripkit.demo.a2btrips
+package skedgo.tripkit.samples.a2brouting
 
 import android.content.Context
 import android.databinding.ObservableArrayList
@@ -6,6 +6,8 @@ import android.databinding.ObservableList
 import com.skedgo.android.common.model.Trip
 import me.tatarka.bindingcollectionadapter2.ItemBinding
 import rx.Observable
+import skedgo.tripkit.samples.BR
+import skedgo.tripkit.samples.R
 
 class TripDetailsViewModel constructor(context: Context, trip: Trip) {
   val itemBinding: ItemBinding<TripSegmentViewModel> = ItemBinding.of(BR.viewModel, R.layout.segment)

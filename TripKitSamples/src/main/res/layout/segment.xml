@@ -6,7 +6,7 @@
 
     <variable
       name="viewModel"
-      type="skedgo.tripkit.demo.a2btrips.TripSegmentViewModel" />
+      type="skedgo.tripkit.samples.a2brouting.TripSegmentViewModel" />
   </data>
 
   <LinearLayout

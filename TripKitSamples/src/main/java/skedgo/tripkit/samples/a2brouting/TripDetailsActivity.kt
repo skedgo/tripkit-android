@@ -1,4 +1,4 @@
-package skedgo.tripkit.demo.a2btrips
+package skedgo.tripkit.samples.a2brouting
 
 import android.content.Context
 import android.content.Intent
@@ -14,8 +14,9 @@ import com.google.android.gms.maps.model.LatLngBounds
 import com.google.android.gms.maps.model.MarkerOptions
 import com.skedgo.android.common.model.Trip
 import rx.Observable
-import skedgo.tripkit.demo.a2btrips.databinding.TripDetailsBinding
 import skedgo.tripkit.routing.GetTripLine
+import skedgo.tripkit.samples.R
+import skedgo.tripkit.samples.databinding.TripDetailsBinding
 
 class TripDetailsActivity : AppCompatActivity() {
   companion object {

@@ -1,4 +1,4 @@
-package skedgo.tripkit.demo.a2btrips
+package skedgo.tripkit.samples.a2brouting
 
 import android.content.Context
 import android.databinding.ObservableField

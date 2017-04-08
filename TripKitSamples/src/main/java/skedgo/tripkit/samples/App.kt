@@ -1,4 +1,4 @@
-package skedgo.tripkit.demo.a2btrips
+package skedgo.tripkit.samples
 
 import android.app.Application
 import com.skedgo.android.tripkit.Configs

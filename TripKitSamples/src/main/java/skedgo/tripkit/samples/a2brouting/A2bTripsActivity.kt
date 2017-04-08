@@ -1,4 +1,4 @@
-package skedgo.tripkit.demo.a2btrips
+package skedgo.tripkit.samples.a2brouting
 
 import android.databinding.DataBindingUtil
 import android.os.Bundle
@@ -7,7 +7,8 @@ import rx.Observable
 import rx.android.schedulers.AndroidSchedulers.mainThread
 import skedgo.rxlifecyclecomponents.RxAppCompatActivity
 import skedgo.rxlifecyclecomponents.bindToLifecycle
-import skedgo.tripkit.demo.a2btrips.databinding.A2bTripsBinding
+import skedgo.tripkit.samples.R
+import skedgo.tripkit.samples.databinding.A2bTripsBinding
 import java.util.concurrent.TimeUnit
 
 class A2bTripsActivity : RxAppCompatActivity() {

@@ -5,7 +5,7 @@
 
     <variable
       name="viewModel"
-      type="skedgo.tripkit.demo.a2btrips.A2bTripsViewModel" />
+      type="skedgo.tripkit.samples.a2brouting.A2bTripsViewModel" />
 
     <import type="me.tatarka.bindingcollectionadapter2.LayoutManagers" />
   </data>

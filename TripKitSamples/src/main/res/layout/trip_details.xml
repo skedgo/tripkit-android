@@ -7,7 +7,7 @@
 
     <variable
       name="viewModel"
-      type="skedgo.tripkit.demo.a2btrips.TripDetailsViewModel" />
+      type="skedgo.tripkit.samples.a2brouting.TripDetailsViewModel" />
 
     <import type="me.tatarka.bindingcollectionadapter2.LayoutManagers" />
   </data>
@@ -15,7 +15,7 @@
   <android.support.design.widget.CoordinatorLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="skedgo.tripkit.demo.a2btrips.TripDetailsActivity">
+    tools:context=".TripDetailsActivity">
 
     <fragment
       android:id="@+id/mapFragment"

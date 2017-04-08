@@ -1,4 +1,4 @@
-package skedgo.tripkit.demo.a2btrips
+package skedgo.tripkit.samples.a2brouting
 
 import android.content.Context
 import com.skedgo.android.common.model.Trip
@@ -13,6 +13,8 @@ import rx.subjects.BehaviorSubject
 import rx.subjects.PublishSubject
 import skedgo.tripkit.routing.a2b.A2bRoutingRequest
 import skedgo.tripkit.routing.a2b.RequestTime.DepartNow
+import skedgo.tripkit.samples.BR
+import skedgo.tripkit.samples.R
 
 class A2bTripsViewModel constructor(
     private val context: Context
