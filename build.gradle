@@ -22,7 +22,7 @@ buildscript {
 }
 
 ext {
-  tripkitAndroidMaven = "${rootDir}/maven/"
+  tripKitAndroidMaven = "${rootDir}/maven/"
   okHttpVersion = "3.2.0"
 }
 

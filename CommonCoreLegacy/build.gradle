@@ -2,6 +2,7 @@ apply from: "../dependencies.gradle"
 apply plugin: "com.android.library"
 apply plugin: 'com.github.dcendents.android-maven'
 apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-kapt'
 apply plugin: 'com.jfrog.bintray'
 
 // For https://github.com/dcendents/android-maven-gradle-plugin.
@@ -70,7 +71,7 @@ dependencies {
 
   // To generate immutable models.
   // See more at http://immutables.github.io/.
-  annotationProcessor "org.immutables:value:$immutablesVersion"
+  kapt "org.immutables:value:$immutablesVersion"
   provided "org.immutables:value:$immutablesVersion:annotations"
   provided "org.immutables:builder:$immutablesVersion"
   provided "org.immutables:gson:$immutablesVersion:annotations"
@@ -80,13 +81,13 @@ install {
   repositories.mavenInstaller {
     pom.project {
       name 'TripKit Android'
-      description 'Android Shared Lib'
-      url 'https://github.com/skedgo/android-shared-lib.git'
+      description 'CommonCoreLegacy'
+      url 'https://github.com/skedgo/tripkit-android'
       inceptionYear '2013'
 
       packaging 'aar'
       groupId project.group
-      artifactId 'android-shared-lib'
+      artifactId 'CommonCoreLegacy'
       version project.version
 
       licenses {
@@ -111,13 +112,13 @@ bintray {
   configurations = ['archives']
   pkg {
     repo = 'tripkit-android'
-    name = 'android-shared-lib'
+    name = 'CommonCoreLegacy'
     userOrg = 'skedgo'
     licenses = ['MIT']
-    vcsUrl = 'https://github.com/skedgo/android-shared-lib.git'
+    vcsUrl = 'https://github.com/skedgo/tripkit-android'
     version {
       name = project.version
-      desc = "Android Shared Lib $project.version"
+      desc = "CommonCoreLegacy $project.version"
       released = new Date()
       vcsTag = project.version
     }
@@ -127,7 +128,7 @@ bintray {
 uploadArchives {
   repositories {
     mavenDeployer {
-      repository(url: "file://${tripkitAndroidMaven}")
+      repository(url: "file://${tripKitAndroidMaven}")
     }
   }
 }

@@ -70,7 +70,7 @@ dependencies {
   provided "org.immutables:builder:$immutablesVersion"
   provided "org.immutables:gson:$immutablesVersion:annotations"
 
-  compile project(':android-shared-lib')
+  compile project(':CommonCoreLegacy')
 }
 
 install {
@@ -124,7 +124,7 @@ bintray {
 uploadArchives {
   repositories {
     mavenDeployer {
-      repository(url: "file://${tripkitAndroidMaven}")
+      repository(url: "file://${tripKitAndroidMaven}")
     }
   }
 }

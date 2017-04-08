@@ -54,7 +54,7 @@ dependencies {
 uploadArchives {
   repositories {
     mavenDeployer {
-      repository(url: "file://${tripkitAndroidMaven}")
+      repository(url: "file://${tripKitAndroidMaven}")
     }
   }
 }
