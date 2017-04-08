@@ -1,6 +1,5 @@
 package skedgo.tripkit.analytics
 
-import com.skedgo.android.common.model.Trip
 import rx.Completable
 
 /**
@@ -10,7 +9,6 @@ import rx.Completable
  */
 interface MarkTripAsPlannedWithUserInfo {
   /**
-   * @param plannedUrl This should be obtained from [Trip.plannedURL].
    * @param userInfo Represents an arbitrary data which must be able to be serialized to JSON.
    */
   fun execute(plannedUrl: String, userInfo: MutableMap<String, Any>): Completable
