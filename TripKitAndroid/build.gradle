@@ -71,19 +71,21 @@ dependencies {
   provided "org.immutables:gson:$immutablesVersion:annotations"
 
   compile project(':CommonCoreLegacy')
+  compile project(':TripKitDomain')
+  compile project(':TripKitData')
 }
 
 install {
   repositories.mavenInstaller {
     pom.project {
-      name 'TripKit Android'
-      description 'TripKit Android'
+      name 'TripKitAndroid'
+      description 'TripKit for Android'
       url 'https://github.com/skedgo/tripkit-android.git'
       inceptionYear '2013'
 
       packaging 'aar'
       groupId project.group
-      artifactId 'trip-kit'
+      artifactId 'TripKitAndroid'
       version project.version
 
       licenses {
@@ -108,13 +110,13 @@ bintray {
   configurations = ['archives']
   pkg {
     repo = 'tripkit-android'
-    name = 'tripkit'
+    name = 'TripKitAndroid'
     userOrg = 'skedgo'
     licenses = ['MIT']
     vcsUrl = 'https://github.com/skedgo/tripkit-android.git'
     version {
       name = project.version
-      desc = "TripKit Android $project.version"
+      desc = "TripKitAndroid $project.version"
       released = new Date()
       vcsTag = project.version
     }

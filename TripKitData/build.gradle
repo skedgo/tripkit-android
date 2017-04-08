@@ -1,0 +1,47 @@
+apply plugin: 'com.android.library'
+apply plugin: 'com.github.dcendents.android-maven'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-kapt'
+
+// For https://github.com/dcendents/android-maven-gradle-plugin.
+group = 'com.skedgo.tripkit'
+version = '1.0'
+
+android {
+  compileSdkVersion 25
+  buildToolsVersion '25.0.2'
+
+  defaultConfig {
+    minSdkVersion 10
+    targetSdkVersion 25
+  }
+
+  lintOptions {
+    // Changing to warning because of https://github.com/square/okio/issues/58.
+    warning 'InvalidPackage'
+  }
+}
+
+dependencies {
+  provided project(":TripKitDomain")
+
+  compile 'com.google.dagger:dagger:2.7'
+  kapt 'com.google.dagger:dagger-compiler:2.7'
+
+  // To generate immutable models.
+  // See more at http://immutables.github.io/.
+  kapt "org.immutables:value:$immutablesVersion"
+  provided "org.immutables:value:$immutablesVersion:annotations"
+  provided "org.immutables:builder:$immutablesVersion"
+  provided "org.immutables:gson:$immutablesVersion:annotations"
+
+  compile "org.jetbrains.kotlin:kotlin-stdlib:$kotlinVersion"
+}
+
+uploadArchives {
+  repositories {
+    mavenDeployer {
+      repository(url: "file://${tripKitAndroidMaven}")
+    }
+  }
+}
