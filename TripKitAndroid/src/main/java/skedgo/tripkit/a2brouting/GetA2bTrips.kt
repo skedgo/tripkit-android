@@ -1,4 +1,4 @@
-package skedgo.tripkit.routing.a2b
+package skedgo.tripkit.a2brouting
 
 import com.skedgo.android.common.model.Location
 import com.skedgo.android.common.model.Query
@@ -7,7 +7,7 @@ import com.skedgo.android.common.model.TripGroup
 import com.skedgo.android.tripkit.RouteService
 import org.joda.time.DateTime
 import rx.Observable
-import skedgo.tripkit.routing.a2b.RequestTime.*
+import skedgo.tripkit.a2brouting.RequestTime.*
 import java.util.concurrent.TimeUnit
 
 open class GetA2bTrips internal constructor(

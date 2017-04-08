@@ -11,8 +11,8 @@ import rx.Observable
 import rx.android.schedulers.AndroidSchedulers.mainThread
 import rx.subjects.BehaviorSubject
 import rx.subjects.PublishSubject
-import skedgo.tripkit.routing.a2b.A2bRoutingRequest
-import skedgo.tripkit.routing.a2b.RequestTime.DepartNow
+import skedgo.tripkit.a2brouting.A2bRoutingRequest
+import skedgo.tripkit.a2brouting.RequestTime.DepartNow
 import skedgo.tripkit.samples.BR
 import skedgo.tripkit.samples.R
 

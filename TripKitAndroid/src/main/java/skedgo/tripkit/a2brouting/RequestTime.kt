@@ -1,4 +1,4 @@
-package skedgo.tripkit.routing.a2b
+package skedgo.tripkit.a2brouting
 
 import org.joda.time.DateTime
 

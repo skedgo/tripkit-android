@@ -8,6 +8,7 @@ import com.skedgo.android.common.model.Trip
 import com.skedgo.android.common.model.TripSegment
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.Test
+import skedgo.tripkit.a2brouting.getSummarySegments
 
 class GetSummarySegmentsTest {
   @Test fun arrivalSegmentShouldNotBeInSummaryArea() {

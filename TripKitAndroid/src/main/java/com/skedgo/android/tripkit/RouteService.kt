@@ -7,7 +7,7 @@ import rx.Observable
 interface RouteService {
   @Deprecated(
       "Use GetA2bTrips instead",
-      ReplaceWith("GetA2bTrips", "skedgo.tripkit.routing.a2b.GetA2bTrips"),
+      ReplaceWith("GetA2bTrips", "skedgo.tripkit.a2brouting.GetA2bTrips"),
       DeprecationLevel.WARNING
   )
   fun routeAsync(query: Query): Observable<List<TripGroup>>

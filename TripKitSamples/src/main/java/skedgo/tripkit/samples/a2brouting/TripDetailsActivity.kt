@@ -14,7 +14,7 @@ import com.google.android.gms.maps.model.LatLngBounds
 import com.google.android.gms.maps.model.MarkerOptions
 import com.skedgo.android.common.model.Trip
 import rx.Observable
-import skedgo.tripkit.routing.GetTripLine
+import skedgo.tripkit.a2brouting.GetTripLine
 import skedgo.tripkit.samples.R
 import skedgo.tripkit.samples.databinding.TripDetailsBinding
 

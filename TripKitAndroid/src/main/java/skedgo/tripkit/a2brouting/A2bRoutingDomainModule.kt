@@ -1,4 +1,4 @@
-package skedgo.tripkit.routing.a2b
+package skedgo.tripkit.a2brouting
 
 import com.skedgo.android.tripkit.RouteService
 import dagger.Module

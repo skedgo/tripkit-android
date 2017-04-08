@@ -1,4 +1,4 @@
-package skedgo.tripkit.routing.a2b
+package skedgo.tripkit.a2brouting
 
 import org.immutables.value.Value
 import org.immutables.value.Value.Style.ImplementationVisibility

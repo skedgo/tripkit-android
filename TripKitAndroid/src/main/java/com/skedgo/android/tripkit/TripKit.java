@@ -13,8 +13,8 @@ import javax.inject.Singleton;
 import dagger.Component;
 import rx.functions.Action1;
 import rx.functions.Actions;
-import skedgo.tripkit.routing.a2b.A2bRoutingDomainModule;
-import skedgo.tripkit.routing.a2b.GetA2bTrips;
+import skedgo.tripkit.a2brouting.A2bRoutingDomainModule;
+import skedgo.tripkit.a2brouting.GetA2bTrips;
 
 @Singleton
 @Component(modules = {

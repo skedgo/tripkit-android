@@ -1,4 +1,4 @@
-package skedgo.tripkit.routing
+package skedgo.tripkit.a2brouting
 
 import com.skedgo.android.common.model.SegmentType
 import com.skedgo.android.common.model.Trip
