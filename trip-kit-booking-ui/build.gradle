@@ -37,7 +37,7 @@ dependencies {
     exclude group: 'com.android.support', module: 'support-annotations'
   }
 
-  compile project(':trip-kit')
+  compile project(':TripKitAndroid')
   compile project(':trip-kit-booking')
 
   compile 'uk.co.chrisjenx:calligraphy:2.1.0'
