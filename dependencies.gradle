@@ -1,3 +1,9 @@
+/**
+ * This is a centralized place to manage Gradle dependencies.
+ * This approach is an adoption of this practice:
+ * http://bytes.babbel.com/en/articles/2017-01-24-android-library-dependencies.html.
+ */
+
 class LibVersions extends Expando {}
 
 class Libs extends Expando {}
