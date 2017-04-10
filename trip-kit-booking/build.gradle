@@ -1,3 +1,4 @@
+apply from: "../dependencies.gradle"
 apply plugin: 'com.android.library'
 apply plugin: 'com.github.dcendents.android-maven'
 
@@ -30,11 +31,11 @@ android {
 dependencies {
   testCompile 'junit:junit:4.12'
   testCompile 'org.assertj:assertj-core:1.7.0'
-  testCompile 'org.mockito:mockito-core:2.2.28'
+  testCompile libs.mockitoCore
   testCompile 'org.robolectric:robolectric:3.1.4'
   testCompile 'com.github.thuytrinh:MockWebServerRule:v1.0'
 
-  compile project(':trip-kit')
+  compile project(':TripKitAndroid')
 
   compile 'com.google.dagger:dagger:2.7'
   annotationProcessor 'com.google.dagger:dagger-compiler:2.7'
@@ -50,7 +51,7 @@ dependencies {
 uploadArchives {
   repositories {
     mavenDeployer {
-      repository(url: "file://${tripkitAndroidMaven}")
+      repository(url: "file://${tripKitAndroidMaven}")
     }
   }
 }

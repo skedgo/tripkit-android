@@ -1,0 +1,23 @@
+/**
+ * This is a centralized place to manage Gradle dependencies.
+ * This approach is an adoption of this practice:
+ * http://bytes.babbel.com/en/articles/2017-01-24-android-library-dependencies.html.
+ */
+
+class LibVersions extends Expando {}
+
+project.ext.libVersions = new LibVersions()
+project.ext.libVersions.immutablesVersion = "2.4.4"
+
+class Libs extends Expando {}
+
+project.ext.libs = new Libs()
+project.ext.libs.mockitoKotlin = "com.nhaarman:mockito-kotlin:1.0.1"
+project.ext.libs.mockitoCore = "org.mockito:mockito-core:2.7.5"
+project.ext.libs.jodaTime = "joda-time:joda-time:2.9.9:no-tzdb"
+project.ext.libs.jodaTimeAndroid = "net.danlew:android.joda:2.9.9"
+
+project.ext.libs.value = "org.immutables:value:$ext.libVersions.immutablesVersion"
+project.ext.libs.valueAnnotations = "org.immutables:value:$ext.libVersions.immutablesVersion:annotations"
+project.ext.libs.builderAnnotations = "org.immutables:builder:$ext.libVersions.immutablesVersion"
+project.ext.libs.gsonAnnotations = "org.immutables:gson:$ext.libVersions.immutablesVersion:annotations"

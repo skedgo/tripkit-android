@@ -1,10 +1,11 @@
-include ':A2bTrips'
-
+include ':CommonCoreLegacy'
+include ':TripKitDomain'
+include ':TripKitDomainLegacy'
+include ':TripKitData'
+include ':TripKitAndroid'
+include ':TripKitSamples'
 include ':AccountDomain', ':AccountData'
 include ':ValidBookingCountData', ':ValidBookingCountDomain'
-
-include ':android-shared-lib'
-include ':trip-kit'
 include ':trip-kit-booking'
 include ':trip-kit-booking-ui'
 include ':route-persistence'

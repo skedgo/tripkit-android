@@ -1,3 +1,4 @@
+apply from: "../dependencies.gradle"
 apply plugin: 'com.android.library'
 apply plugin: 'com.github.dcendents.android-maven'
 apply plugin: 'kotlin-android'
@@ -27,16 +28,16 @@ android {
 dependencies {
   testCompile 'junit:junit:4.12'
   testCompile 'org.assertj:assertj-core:1.7.0'
-  testCompile 'org.mockito:mockito-core:2.2.28'
+  testCompile libs.mockitoCore
   testCompile 'org.robolectric:robolectric:3.1.4'
-  testCompile 'com.nhaarman:mockito-kotlin:1.0.1', { exclude group: 'org.jetbrains.kotlin' }
+  testCompile libs.mockitoKotlin, { exclude group: 'org.jetbrains.kotlin' }
 
   androidTestCompile 'com.google.code.findbugs:jsr305:3.0.1'
   androidTestCompile 'com.android.support.test.espresso:espresso-core:2.2.2', {
     exclude group: 'com.android.support', module: 'support-annotations'
   }
 
-  compile project(':trip-kit')
+  compile project(':TripKitAndroid')
   compile project(':trip-kit-booking')
 
   compile 'uk.co.chrisjenx:calligraphy:2.1.0'
@@ -60,7 +61,7 @@ dependencies {
 uploadArchives {
   repositories {
     mavenDeployer {
-      repository(url: "file://${tripkitAndroidMaven}")
+      repository(url: "file://${tripKitAndroidMaven}")
     }
   }
 }

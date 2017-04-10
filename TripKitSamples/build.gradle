@@ -1,0 +1,45 @@
+apply from: "../dependencies.gradle"
+apply plugin: 'com.android.application'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-kapt'
+
+android {
+  compileSdkVersion 25
+  buildToolsVersion "25.0.2"
+  dataBinding { enabled = true }
+
+  defaultConfig {
+    applicationId "skedgo.tripkit.samples"
+    minSdkVersion 15
+    targetSdkVersion 25
+    versionCode 1
+    versionName "1.0"
+    testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+  }
+
+  signingConfigs {
+    debug {
+      storeFile file("keystores/debug.keystore")
+    }
+
+    release {
+      storeFile file("keystores/debug.keystore")
+    }
+  }
+
+  lintOptions { abortOnError false }
+}
+
+dependencies {
+  testCompile 'junit:junit:4.12'
+  compile "org.jetbrains.kotlin:kotlin-stdlib:$kotlinVersion"
+  compile 'com.android.support:appcompat-v7:25.3.0'
+  compile 'com.android.support:recyclerview-v7:25.3.0'
+  compile 'com.android.support:design:25.3.0'
+  compile 'com.google.android.gms:play-services-maps:10.0.1'
+  compile 'com.trello:rxlifecycle:1.0'
+  compile 'com.github.skedgo:RxLifecycleComponents:v1.3'
+  compile 'me.tatarka.bindingcollectionadapter2:bindingcollectionadapter-recyclerview:2.0.1'
+  kapt "com.android.databinding:compiler:$androidPluginVersion"
+  compile project(':TripKitAndroid'), { transitive = true }
+}
