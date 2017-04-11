@@ -19,6 +19,7 @@ public interface RegionService {
   Observable<List<Region>> getRegionsAsync();
   Observable<Region> getRegionByLocationAsync(double latitude, double longitude);
   Observable<Region> getRegionByLocationAsync(@Nullable Location location);
+  Observable<Region> getLastUsedRegion();
   Observable<Location> getCitiesAsync();
   Observable<Location> getCitiesByNameAsync(@Nullable String name);
   Observable<Map<String, TransportMode>> getTransportModesAsync();

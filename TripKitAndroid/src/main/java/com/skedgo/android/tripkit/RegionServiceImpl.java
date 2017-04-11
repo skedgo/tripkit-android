@@ -20,7 +20,9 @@ import javax.inject.Provider;
 
 import rx.Observable;
 import rx.functions.Action0;
+import rx.functions.Action1;
 import rx.functions.Func1;
+import rx.subjects.BehaviorSubject;
 
 final class RegionServiceImpl implements RegionService {
   private final Cache<List<Region>> regionCache;
@@ -28,6 +30,7 @@ final class RegionServiceImpl implements RegionService {
   private final RegionsFetcher regionsFetcher;
   private final Provider<RegionInfoService> regionInfoServiceProvider;
   private final RegionFinder regionFinder;
+  private final BehaviorSubject<Region> lastRegionSubject = BehaviorSubject.create();
 
   RegionServiceImpl(
       Cache<List<Region>> regionCache,
@@ -73,6 +76,11 @@ final class RegionServiceImpl implements RegionService {
                 ? Observable.<Region>error(new OutOfRegionsException("Location lies outside covered area", latitude, longitude))
                 : Observable.<Region>error(error);
           }
+        })
+        .doOnNext(new Action1<Region>() {
+          @Override public void call(Region region) {
+            lastRegionSubject.onNext(region);
+          }
         });
   }
 
@@ -81,6 +89,13 @@ final class RegionServiceImpl implements RegionService {
       return Observable.error(new NullPointerException("Location is null"));
     }
     return getRegionByLocationAsync(location.getLat(), location.getLon());
+  }
+
+  @Override public Observable<Region> getLastUsedRegion() {
+    if (!lastRegionSubject.hasValue()) {
+      lastRegionSubject.onError(new Error("No region used yet"));
+    }
+    return lastRegionSubject.asObservable();
   }
 
   @Override
