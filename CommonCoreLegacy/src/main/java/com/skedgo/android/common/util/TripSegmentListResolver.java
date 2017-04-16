@@ -72,9 +72,16 @@ public class TripSegmentListResolver {
     String arrivalAction;
 
     if (TextUtils.isEmpty(destinationName)) {
-      arrivalAction = String.format(resources.getString(R.string.arrive_at__pattern), resources.getString(R.string.destination));
+      arrivalAction = String.format(
+          resources.getString(R.string.arrive_at__pattern),
+          resources.getString(R.string.destination)
+      );
     } else {
-      arrivalAction = String.format(resources.getString(R.string.arrive_at__pattern_at__pattern), destinationName, "<TIME>");
+      arrivalAction = String.format(
+          resources.getString(R.string.arrive_at__pattern_at__pattern),
+          destinationName,
+          "<TIME>"
+      );
     }
 
     final TripSegment arrivalSegment = new TripSegment();
@@ -99,9 +106,16 @@ public class TripSegmentListResolver {
 
     String departureAction;
     if (TextUtils.isEmpty(originName)) {
-      departureAction = String.format(resources.getString(R.string.leave__pattern), resources.getString(R.string.origin));
+      departureAction = String.format(
+          resources.getString(R.string.leave__pattern),
+          resources.getString(R.string.origin)
+      );
     } else {
-      departureAction = String.format(resources.getString(R.string.leave__pattern_at__pattern), originName, "<TIME>");
+      departureAction = String.format(
+          resources.getString(R.string.leave__pattern_at__pattern),
+          originName,
+          "<TIME>"
+      );
     }
 
     final TripSegment departureSegment = new TripSegment();

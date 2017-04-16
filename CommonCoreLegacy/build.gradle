@@ -56,6 +56,7 @@ dependencies {
   testCompile 'commons-io:commons-io:2.5'
   testCompile libs.mockitoKotlin
   testCompile libs.mockitoCore
+  testCompile libs.jodaTimeTzdb
 
   // See https://github.com/skedgo/android-maps-utils.
   compile 'com.github.skedgo:android-maps-utils:241fc89'
