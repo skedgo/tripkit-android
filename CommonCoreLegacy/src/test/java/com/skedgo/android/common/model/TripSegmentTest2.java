@@ -17,9 +17,6 @@ import org.robolectric.annotation.Config;
 import java.util.Arrays;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
-import java.util.concurrent.atomic.AtomicLong;
-
-import rx.functions.Action1;
 
 import static com.skedgo.android.common.model.TripSegment.VISIBILITY_HIDDEN;
 import static com.skedgo.android.common.model.TripSegment.VISIBILITY_IN_DETAILS;
@@ -96,58 +93,6 @@ public class TripSegmentTest2 {
     assertFalse(segment.isVisibleInContext(VISIBILITY_IN_SUMMARY));
     assertFalse(segment.isVisibleInContext(VISIBILITY_ON_MAP));
     assertFalse(segment.isVisibleInContext(VISIBILITY_HIDDEN));
-  }
-
-  @Test public void shouldNotifyStartTimeChangedEvent() {
-    TripSegment segment = new TripSegment();
-
-    // (M/D/Y @ h:m:s): 8 / 2 / 2002 @ 0:0:0 UTC
-    int expectedStartTimeInSecs1 = 1028246400;
-    segment.setStartTimeInSecs(expectedStartTimeInSecs1);
-
-    final AtomicLong timeRecorder = new AtomicLong();
-    segment.whenTimeChanged().subscribe(new Action1<TripSegment>() {
-      @Override
-      public void call(TripSegment segment) {
-        timeRecorder.set(segment.getStartTimeInSecs());
-      }
-    });
-
-    assertThat(timeRecorder.get())
-        .isEqualTo(expectedStartTimeInSecs1);
-
-    // (M/D/Y @ h:m:s): 8 / 1 / 2002 @ 0:0:0 UTC
-    int expectedStartTimeInSecs2 = 1028160000;
-    segment.setStartTimeInSecs(expectedStartTimeInSecs2);
-
-    assertThat(timeRecorder.get())
-        .isEqualTo(expectedStartTimeInSecs2);
-  }
-
-  @Test public void shouldNotifyEndTimeChangedEvent() {
-    TripSegment segment = new TripSegment();
-
-    // (M/D/Y @ h:m:s): 8 / 2 / 2002 @ 0:0:0 UTC
-    int expectedEndTimeInSecs1 = 1028246400;
-    segment.setEndTimeInSecs(expectedEndTimeInSecs1);
-
-    final AtomicLong timeRecorder = new AtomicLong();
-    segment.whenTimeChanged().subscribe(new Action1<TripSegment>() {
-      @Override
-      public void call(TripSegment segment) {
-        timeRecorder.set(segment.getEndTimeInSecs());
-      }
-    });
-
-    assertThat(timeRecorder.get())
-        .isEqualTo(expectedEndTimeInSecs1);
-
-    // (M/D/Y @ h:m:s): 8 / 1 / 2002 @ 0:0:0 UTC
-    int expectedEndTimeInSecs2 = 1028160000;
-    segment.setEndTimeInSecs(expectedEndTimeInSecs2);
-
-    assertThat(timeRecorder.get())
-        .isEqualTo(expectedEndTimeInSecs2);
   }
 
   /**
