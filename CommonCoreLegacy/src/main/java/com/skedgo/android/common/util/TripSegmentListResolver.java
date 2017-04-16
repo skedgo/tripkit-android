@@ -13,8 +13,6 @@ import org.apache.commons.collections4.CollectionUtils;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicLong;
 
-import rx.functions.Action1;
-
 /**
  * Puts a Departure segment before head of,
  * and puts an Arrival segment after tail of a segment list.
@@ -87,13 +85,6 @@ public class TripSegmentListResolver {
     arrivalSegment.setVisibility(TripSegment.VISIBILITY_ON_MAP);
     arrivalSegment.setStartTimeInSecs(lastSegment.getEndTimeInSecs());
     arrivalSegment.setEndTimeInSecs(lastSegment.getEndTimeInSecs());
-    lastSegment.whenTimeChanged().subscribe(new Action1<TripSegment>() {
-      @Override
-      public void call(TripSegment segment) {
-        arrivalSegment.setStartTimeInSecs(segment.getEndTimeInSecs());
-        arrivalSegment.setEndTimeInSecs(segment.getEndTimeInSecs());
-      }
-    });
     return arrivalSegment;
   }
 
@@ -121,13 +112,6 @@ public class TripSegmentListResolver {
     departureSegment.setVisibility(TripSegment.VISIBILITY_IN_DETAILS);
     departureSegment.setStartTimeInSecs(firstSegment.getStartTimeInSecs());
     departureSegment.setEndTimeInSecs(firstSegment.getStartTimeInSecs());
-    firstSegment.whenTimeChanged().subscribe(new Action1<TripSegment>() {
-      @Override
-      public void call(TripSegment segment) {
-        departureSegment.setStartTimeInSecs(segment.getStartTimeInSecs());
-        departureSegment.setEndTimeInSecs(segment.getStartTimeInSecs());
-      }
-    });
     return departureSegment;
   }
 

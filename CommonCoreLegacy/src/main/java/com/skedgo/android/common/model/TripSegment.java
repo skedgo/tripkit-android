@@ -25,7 +25,6 @@ import java.util.Locale;
 
 import rx.functions.Action1;
 import rx.functions.Actions;
-import rx.subjects.BehaviorSubject;
 
 import static com.skedgo.android.common.model.VehicleMode.createLightDrawable;
 
@@ -102,7 +101,6 @@ public class TripSegment implements Parcelable, IRealTimeElement, ITimeRange {
   private final transient Var<BitmapDrawable> remoteIcon = Var.create();
   private long mId;
   private transient Trip mTrip;
-  private transient BehaviorSubject<TripSegment> mWhenTimeChanged;
   @SerializedName("booking")
   private Booking booking;
   @SerializedName("modeInfo")
@@ -281,12 +279,7 @@ public class TripSegment implements Parcelable, IRealTimeElement, ITimeRange {
   }
 
   public void setStartTimeInSecs(long newStartTimeInSecs) {
-    if (newStartTimeInSecs != mStartTimeInSecs) {
-      mStartTimeInSecs = newStartTimeInSecs;
-
-      // Notify subscribers that time has changed.
-      whenTimeChanged().onNext(this);
-    }
+    mStartTimeInSecs = newStartTimeInSecs;
   }
 
   public void setMetresSafe(int metresSafe) {
@@ -303,12 +296,7 @@ public class TripSegment implements Parcelable, IRealTimeElement, ITimeRange {
   }
 
   public void setEndTimeInSecs(long newEndTimeInSecs) {
-    if (newEndTimeInSecs != mEndTimeInSecs) {
-      mEndTimeInSecs = newEndTimeInSecs;
-
-      // Notify subscribers that time has changed.
-      whenTimeChanged().onNext(this);
-    }
+    mEndTimeInSecs = newEndTimeInSecs;
   }
 
   @Deprecated
@@ -670,14 +658,6 @@ public class TripSegment implements Parcelable, IRealTimeElement, ITimeRange {
     } else {
       return true;
     }
-  }
-
-  public BehaviorSubject<TripSegment> whenTimeChanged() {
-    if (mWhenTimeChanged == null) {
-      mWhenTimeChanged = BehaviorSubject.create(this);
-    }
-
-    return mWhenTimeChanged;
   }
 
   public Var<List<ServiceStop>> stops() {
