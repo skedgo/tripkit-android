@@ -4,18 +4,22 @@
  * http://bytes.babbel.com/en/articles/2017-01-24-android-library-dependencies.html.
  */
 
-class LibVersions extends Expando {}
-
-project.ext.libVersions = new LibVersions()
+project.ext.libVersions = new Expando()
 project.ext.libVersions.immutablesVersion = "2.4.4"
+project.ext.libVersions.devMinSdkVersion = 21
+project.ext.libVersions.proMinSdkVersion = 15
+project.ext.libVersions.compileSdkVersion = 25
+project.ext.libVersions.buildToolsVersion = "25.0.2"
+project.ext.libVersions.targetSdkVersion = 22
 
-class Libs extends Expando {}
-
-project.ext.libs = new Libs()
+project.ext.libs = new Expando()
 project.ext.libs.mockitoKotlin = "com.nhaarman:mockito-kotlin:1.0.1"
 project.ext.libs.mockitoCore = "org.mockito:mockito-core:2.7.5"
 project.ext.libs.jodaTime = "joda-time:joda-time:2.9.9:no-tzdb"
+project.ext.libs.jodaTimeTzdb = "joda-time:joda-time:2.9.9"
 project.ext.libs.jodaTimeAndroid = "net.danlew:android.joda:2.9.9"
+project.ext.libs.multidex = "com.android.support:multidex:1.0.1"
+project.ext.libs.androidJob = "com.evernote:android-job:1.1.8"
 
 project.ext.libs.value = "org.immutables:value:$ext.libVersions.immutablesVersion"
 project.ext.libs.valueAnnotations = "org.immutables:value:$ext.libVersions.immutablesVersion:annotations"

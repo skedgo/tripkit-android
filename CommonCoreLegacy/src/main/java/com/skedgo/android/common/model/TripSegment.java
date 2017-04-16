@@ -25,6 +25,7 @@ import java.util.Locale;
 
 import rx.functions.Action1;
 import rx.functions.Actions;
+import skedgo.tripkit.routing.TripSegmentExKt;
 
 import static com.skedgo.android.common.model.VehicleMode.createLightDrawable;
 
@@ -273,11 +274,18 @@ public class TripSegment implements Parcelable, IRealTimeElement, ITimeRange {
     mType = type;
   }
 
+  /**
+   * Use {@link TripSegmentExKt#startDateTime(TripSegment)} instead.
+   */
+  @Deprecated
   @Override
   public long getStartTimeInSecs() {
     return mStartTimeInSecs;
   }
 
+  /**
+   * NOTE: You should only use this setter for testing purpose.
+   */
   public void setStartTimeInSecs(long newStartTimeInSecs) {
     mStartTimeInSecs = newStartTimeInSecs;
   }
@@ -290,11 +298,18 @@ public class TripSegment implements Parcelable, IRealTimeElement, ITimeRange {
     this.metres = metres;
   }
 
+  /**
+   * Use {@link TripSegmentExKt#endDateTime(TripSegment)} instead.
+   */
+  @Deprecated
   @Override
   public long getEndTimeInSecs() {
     return mEndTimeInSecs;
   }
 
+  /**
+   * NOTE: You should only use this setter for testing purpose.
+   */
   public void setEndTimeInSecs(long newEndTimeInSecs) {
     mEndTimeInSecs = newEndTimeInSecs;
   }

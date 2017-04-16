@@ -9,6 +9,8 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.gson.annotations.SerializedName;
 import com.skedgo.android.common.util.StringUtils;
 
+import skedgo.tripkit.routing.LocationExKt;
+
 public class Location implements Parcelable, ILatLon {
   public static final double SYDNEY_LAT = -33.871008;
   public static final double SYDNEY_LON = 151.209555;
@@ -366,10 +368,17 @@ public class Location implements Parcelable, ILatLon {
     return !(lat == ZERO_LAT && lon == ZERO_LON);
   }
 
+  /**
+   * Use {@link LocationExKt#getDateTimeZone(Location)} instead.
+   */
+  @Deprecated
   @Nullable public String getTimeZone() {
     return timeZone;
   }
 
+  /**
+   * NOTE: You should only use this setter for testing purpose.
+   */
   public void setTimeZone(@Nullable String timeZone) {
     this.timeZone = timeZone;
   }
