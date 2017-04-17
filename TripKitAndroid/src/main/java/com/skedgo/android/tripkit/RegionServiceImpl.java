@@ -2,6 +2,7 @@ package com.skedgo.android.tripkit;
 
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.util.Log;
 
 import com.skedgo.android.common.model.Location;
 import com.skedgo.android.common.model.ModeInfo;
@@ -10,6 +11,7 @@ import com.skedgo.android.common.model.TransportMode;
 import com.skedgo.android.tripkit.tsp.Paratransit;
 import com.skedgo.android.tripkit.tsp.RegionInfo;
 import com.skedgo.android.tripkit.tsp.RegionInfoService;
+import com.skedgo.android.tripkit.urlresolver.GetLastUsedRegionUrls;
 
 import java.util.Collections;
 import java.util.List;
@@ -21,8 +23,8 @@ import javax.inject.Provider;
 import rx.Observable;
 import rx.functions.Action0;
 import rx.functions.Action1;
+import rx.functions.Actions;
 import rx.functions.Func1;
-import rx.subjects.BehaviorSubject;
 
 final class RegionServiceImpl implements RegionService {
   private final Cache<List<Region>> regionCache;
@@ -30,19 +32,21 @@ final class RegionServiceImpl implements RegionService {
   private final RegionsFetcher regionsFetcher;
   private final Provider<RegionInfoService> regionInfoServiceProvider;
   private final RegionFinder regionFinder;
-  private final BehaviorSubject<Region> lastRegionSubject = BehaviorSubject.create();
+  private final GetLastUsedRegionUrls getLastUsedRegionUrls;
 
   RegionServiceImpl(
       Cache<List<Region>> regionCache,
       Cache<Map<String, TransportMode>> modeCache,
       @NonNull RegionsFetcher regionsFetcher,
       Provider<RegionInfoService> regionInfoServiceProvider,
-      RegionFinder regionFinder) {
+      RegionFinder regionFinder,
+      GetLastUsedRegionUrls getLastUsedRegionUrls) {
     this.regionCache = regionCache;
     this.modeCache = modeCache;
     this.regionsFetcher = regionsFetcher;
     this.regionInfoServiceProvider = regionInfoServiceProvider;
     this.regionFinder = regionFinder;
+    this.getLastUsedRegionUrls = getLastUsedRegionUrls;
   }
 
   @Override
@@ -79,7 +83,12 @@ final class RegionServiceImpl implements RegionService {
         })
         .doOnNext(new Action1<Region>() {
           @Override public void call(Region region) {
-            lastRegionSubject.onNext(region);
+            getLastUsedRegionUrls.setLastUsedRegionUrls(region)
+                .subscribe(Actions.empty(), new Action1<Throwable>() {
+                  @Override public void call(Throwable throwable) {
+                    Log.e("RegionServiceImpl", throwable.getMessage());
+                  }
+                });
           }
         });
   }
@@ -89,13 +98,6 @@ final class RegionServiceImpl implements RegionService {
       return Observable.error(new NullPointerException("Location is null"));
     }
     return getRegionByLocationAsync(location.getLat(), location.getLon());
-  }
-
-  @Override public Observable<Region> getLastUsedRegion() {
-    if (!lastRegionSubject.hasValue()) {
-      lastRegionSubject.onError(new Error("No region used yet"));
-    }
-    return lastRegionSubject.asObservable();
   }
 
   @Override

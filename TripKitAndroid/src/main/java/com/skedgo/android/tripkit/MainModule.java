@@ -21,6 +21,7 @@ import com.skedgo.android.tripkit.tsp.GsonAdaptersRegionInfoResponse;
 import com.skedgo.android.tripkit.tsp.RegionInfoService;
 import com.skedgo.android.tripkit.urlresolver.GetBaseServer;
 import com.skedgo.android.tripkit.urlresolver.GetHitServers;
+import com.skedgo.android.tripkit.urlresolver.GetLastUsedRegionUrls;
 import com.skedgo.android.tripkit.urlresolver.UrlResolverInterceptor;
 
 import java.util.List;
@@ -84,7 +85,8 @@ public class MainModule {
   @Singleton @Provides RegionService getRegionService(
       RegionDatabaseHelper databaseHelper,
       RegionsApi regionsApi,
-      Provider<RegionInfoService> regionInfoServiceProvider) {
+      Provider<RegionInfoService> regionInfoServiceProvider,
+      GetLastUsedRegionUrls getLastUsedRegionUrls) {
     final RegionsFetcher regionsFetcher = new RegionsFetcherImpl(
         regionsApi,
         databaseHelper
@@ -102,7 +104,8 @@ public class MainModule {
         modeCache,
         regionsFetcher,
         regionInfoServiceProvider,
-        new RegionFinder()
+        new RegionFinder(),
+        getLastUsedRegionUrls
     );
   }
 
@@ -193,6 +196,10 @@ public class MainModule {
       LocationInfoApi locationInfoApi,
       RegionService regionService) {
     return new LocationInfoServiceImpl(locationInfoApi, regionService);
+  }
+
+  @Provides GetLastUsedRegionUrls getLastUsedRegionUrls() {
+    return new GetLastUsedRegionUrls(preferences());
   }
 
   @Singleton @Provides Gson getGson() {
