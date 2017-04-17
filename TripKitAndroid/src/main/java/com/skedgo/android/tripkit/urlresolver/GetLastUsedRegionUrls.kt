@@ -1,7 +1,6 @@
 package com.skedgo.android.tripkit.urlresolver
 
 import android.content.SharedPreferences
-import android.support.v4.util.ArraySet
 import com.skedgo.android.common.model.Region
 import rx.Observable
 
@@ -16,9 +15,8 @@ open class GetLastUsedRegionUrls constructor(
     if (!isSavedRegion(region))
       preferences.edit()
           .putString(LAST_REGION_NAME, region.name)
-          .putStringSet(LAST_REGION_URLS, ArraySet(region.urLs))
+          .putStringSet(LAST_REGION_URLS, region.urLs?.toSet())
           .apply()
-
   }
 
   open fun getLastUsedRegionUrls(): Observable<List<String>>

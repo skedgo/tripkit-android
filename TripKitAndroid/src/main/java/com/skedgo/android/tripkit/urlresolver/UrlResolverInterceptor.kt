@@ -9,16 +9,12 @@ import java.io.IOException
 class UrlResolverInterceptor(private val getHitServers: GetHitServers,
                              private val getBaseServer: GetBaseServer) : Interceptor {
 
-
   @Throws(IOException::class)
-  override fun intercept(chain: Interceptor.Chain): Response {
-
+  override fun intercept(chain: Interceptor.Chain): Response? {
 
     val request = chain.request()
     val requestUrl = request.url()
-
     val baseUrl: String = getBaseServer.execute().toBlocking().first()
-
 
     if (requestUrl.toString().startsWith(baseUrl)) {
 
@@ -42,10 +38,7 @@ class UrlResolverInterceptor(private val getHitServers: GetHitServers,
         }
       }
     }
-
     return chain.proceed(request)
-
   }
-
 
 }
