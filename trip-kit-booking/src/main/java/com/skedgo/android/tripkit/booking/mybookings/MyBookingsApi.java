@@ -6,9 +6,8 @@ import retrofit2.http.Url;
 import rx.Observable;
 
 public interface MyBookingsApi {
-  @GET()
-  Observable<MyBookingsResponse> fetchMyBookingsAsync(@Url String url,
-                                                      @Query("first") int first,
+  @GET("booking")
+  Observable<MyBookingsResponse> fetchMyBookingsAsync(@Query("first") int first,
                                                       @Query("max") int pageSize,
                                                       @Query("bsb") int bsb
   );

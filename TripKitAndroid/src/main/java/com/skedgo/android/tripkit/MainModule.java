@@ -19,6 +19,9 @@ import com.skedgo.android.tripkit.tsp.GsonAdaptersRegionInfo;
 import com.skedgo.android.tripkit.tsp.GsonAdaptersRegionInfoBody;
 import com.skedgo.android.tripkit.tsp.GsonAdaptersRegionInfoResponse;
 import com.skedgo.android.tripkit.tsp.RegionInfoService;
+import com.skedgo.android.tripkit.urlresolver.GetBaseServer;
+import com.skedgo.android.tripkit.urlresolver.GetHitServers;
+import com.skedgo.android.tripkit.urlresolver.UrlResolverInterceptor;
 
 import java.util.List;
 import java.util.Map;
@@ -137,7 +140,9 @@ public class MainModule {
 
   @Singleton @Provides OkHttpClient httpClient(
       OkHttpClient.Builder httpClientBuilder,
-      AddCustomHeaders addCustomHeaders) {
+      AddCustomHeaders addCustomHeaders,
+      GetBaseServer getBaseServer,
+      GetHitServers getHitServers) {
     final OkHttpClient.Builder builder = httpClientBuilder
         .addInterceptor(addCustomHeaders);
     if (configs.debuggable()) {
@@ -146,6 +151,7 @@ public class MainModule {
         builder.addInterceptor(new BaseUrlOverridingInterceptor(baseUrlAdapterFactory.call()));
       }
     }
+    builder.addInterceptor(new UrlResolverInterceptor(getHitServers, getBaseServer));
     return builder.build();
   }
 

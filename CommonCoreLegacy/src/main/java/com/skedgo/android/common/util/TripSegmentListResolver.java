@@ -13,8 +13,6 @@ import org.apache.commons.collections4.CollectionUtils;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicLong;
 
-import rx.functions.Action1;
-
 /**
  * Puts a Departure segment before head of,
  * and puts an Arrival segment after tail of a segment list.
@@ -74,9 +72,16 @@ public class TripSegmentListResolver {
     String arrivalAction;
 
     if (TextUtils.isEmpty(destinationName)) {
-      arrivalAction = String.format(resources.getString(R.string.arrive_at__pattern), resources.getString(R.string.destination));
+      arrivalAction = String.format(
+          resources.getString(R.string.arrive_at__pattern),
+          resources.getString(R.string.destination)
+      );
     } else {
-      arrivalAction = String.format(resources.getString(R.string.arrive_at__pattern_at__pattern), destinationName, "<TIME>");
+      arrivalAction = String.format(
+          resources.getString(R.string.arrive_at__pattern_at__pattern),
+          destinationName,
+          "<TIME>"
+      );
     }
 
     final TripSegment arrivalSegment = new TripSegment();
@@ -87,13 +92,6 @@ public class TripSegmentListResolver {
     arrivalSegment.setVisibility(TripSegment.VISIBILITY_ON_MAP);
     arrivalSegment.setStartTimeInSecs(lastSegment.getEndTimeInSecs());
     arrivalSegment.setEndTimeInSecs(lastSegment.getEndTimeInSecs());
-    lastSegment.whenTimeChanged().subscribe(new Action1<TripSegment>() {
-      @Override
-      public void call(TripSegment segment) {
-        arrivalSegment.setStartTimeInSecs(segment.getEndTimeInSecs());
-        arrivalSegment.setEndTimeInSecs(segment.getEndTimeInSecs());
-      }
-    });
     return arrivalSegment;
   }
 
@@ -108,9 +106,16 @@ public class TripSegmentListResolver {
 
     String departureAction;
     if (TextUtils.isEmpty(originName)) {
-      departureAction = String.format(resources.getString(R.string.leave__pattern), resources.getString(R.string.origin));
+      departureAction = String.format(
+          resources.getString(R.string.leave__pattern),
+          resources.getString(R.string.origin)
+      );
     } else {
-      departureAction = String.format(resources.getString(R.string.leave__pattern_at__pattern), originName, "<TIME>");
+      departureAction = String.format(
+          resources.getString(R.string.leave__pattern_at__pattern),
+          originName,
+          "<TIME>"
+      );
     }
 
     final TripSegment departureSegment = new TripSegment();
@@ -121,13 +126,6 @@ public class TripSegmentListResolver {
     departureSegment.setVisibility(TripSegment.VISIBILITY_IN_DETAILS);
     departureSegment.setStartTimeInSecs(firstSegment.getStartTimeInSecs());
     departureSegment.setEndTimeInSecs(firstSegment.getStartTimeInSecs());
-    firstSegment.whenTimeChanged().subscribe(new Action1<TripSegment>() {
-      @Override
-      public void call(TripSegment segment) {
-        departureSegment.setStartTimeInSecs(segment.getStartTimeInSecs());
-        departureSegment.setEndTimeInSecs(segment.getStartTimeInSecs());
-      }
-    });
     return departureSegment;
   }
 
