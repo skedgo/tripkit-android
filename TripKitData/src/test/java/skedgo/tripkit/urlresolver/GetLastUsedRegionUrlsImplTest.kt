@@ -1,7 +1,7 @@
 package skedgo.tripkit.urlresolver
 
 import android.content.Context
-import android.support.v4.util.ArraySet
+import android.util.ArraySet
 import com.nhaarman.mockito_kotlin.mock
 import com.nhaarman.mockito_kotlin.whenever
 import com.skedgo.android.common.model.Region
@@ -29,7 +29,7 @@ class GetLastUsedRegionUrlsImplTest {
 
     val regionUrls = listOf("url 1", "url 2")
 
-    prefs.edit().putStringSet(LAST_REGION_URLS, ArraySet(regionUrls)).apply()
+    prefs.edit().putStringSet(LAST_REGION_URLS, regionUrls.toSet()).apply()
 
     val subscriber = TestSubscriber<List<String>>()
     getLastUsedRegionUrls.getLastUsedRegionUrls()
