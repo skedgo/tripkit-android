@@ -3,6 +3,7 @@ package com.skedgo.android.tripkit.urlresolver
 import android.text.TextUtils
 import okhttp3.HttpUrl
 import okhttp3.Interceptor
+import okhttp3.Request
 import okhttp3.Response
 import skedgo.tripkit.urlresolver.GetBaseServer
 import skedgo.tripkit.urlresolver.GetHitServers
@@ -35,7 +36,7 @@ class UrlResolverInterceptor(private val getHitServers: GetHitServers,
 
         val response = chain.proceed(newRequest)
 
-        if (response.isSuccessful) {
+        if (response?.isSuccessful ?: false) {
           return response
         }
       }

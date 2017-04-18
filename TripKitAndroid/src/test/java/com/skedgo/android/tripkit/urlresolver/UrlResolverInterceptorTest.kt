@@ -50,7 +50,7 @@ class UrlResolverInterceptorTest {
     verify(chain).proceed(ArgumentMatchers.same(chainRequest))
   }
 
-  //@Test NPE in response.isSuccessful, Response cannot be mock
+  @Test
   @Throws(IOException::class)
   fun `should override url`() {
 
@@ -70,13 +70,60 @@ class UrlResolverInterceptorTest {
     whenever(chain.request()).thenReturn(chainRequest)
 
     val expectedRequest = chainRequest.newBuilder()
-        .url(HttpUrl.parse(tripGoUrl1 +"/service.json"))
+        .url(HttpUrl.parse(tripGoUrl1 + "/service.json"))
         .build()
 
     urlResolverInterceptor.intercept(chain)
 
     verify(chain).proceed(ArgumentMatchers.argThat {
-      request -> request.url() != expectedRequest.url()})
+      actualRequest ->
+      actualRequest.url() == expectedRequest.url()
+          && actualRequest.method() == expectedRequest.method()
+    })
+
+  }
+
+  @Test
+  @Throws(IOException::class)
+  fun `should override multiple urls`() {
+
+    val tripGoBaseUrl = "https://tripgo.skedgo.com/satapp"
+    val tripGoUrl1 = "https://granduni.skedgo.com/satapp"
+    val tripGoUrl2 = "https://lepton.skedgo.com/satapp"
+
+    whenever(getBaseServer.execute())
+        .thenReturn(Observable.just(tripGoBaseUrl))
+
+    whenever(getHitServers.execute())
+        .thenReturn(Observable.from(listOf(tripGoUrl1, tripGoUrl2)))
+
+    val chain = mock<Interceptor.Chain>()
+    val chainRequest = Request.Builder()
+        .url(tripGoBaseUrl + "/service.json")
+        .build()
+    whenever(chain.request()).thenReturn(chainRequest)
+
+    val expectedRequest = chainRequest.newBuilder()
+        .url(HttpUrl.parse(tripGoUrl1 + "/service.json"))
+        .build()
+
+    val expectedRequest2 = chainRequest.newBuilder()
+        .url(HttpUrl.parse(tripGoUrl2 + "/service.json"))
+        .build()
+
+    urlResolverInterceptor.intercept(chain)
+
+    verify(chain).proceed(ArgumentMatchers.argThat {
+      actualRequest ->
+      actualRequest.url() == expectedRequest.url()
+          && actualRequest.method() == expectedRequest.method()
+    })
+
+    verify(chain).proceed(ArgumentMatchers.argThat {
+      actualRequest ->
+      actualRequest.url() == expectedRequest2.url()
+          && actualRequest.method() == expectedRequest2.method()
+    })
   }
 
 }
