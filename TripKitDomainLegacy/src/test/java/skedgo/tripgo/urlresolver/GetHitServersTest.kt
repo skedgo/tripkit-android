@@ -1,4 +1,4 @@
-package com.skedgo.android.tripkit.urlresolver
+package skedgo.tripgo.urlresolver
 
 
 import com.nhaarman.mockito_kotlin.mock
@@ -6,6 +6,9 @@ import com.nhaarman.mockito_kotlin.whenever
 import org.junit.Test
 import rx.Observable
 import rx.observers.TestSubscriber
+import skedgo.tripkit.urlresolver.GetBaseServer
+import skedgo.tripkit.urlresolver.GetHitServers
+import skedgo.tripkit.urlresolver.GetLastUsedRegionUrls
 
 @Suppress("IllegalIdentifier")
 class GetHitServersTest {

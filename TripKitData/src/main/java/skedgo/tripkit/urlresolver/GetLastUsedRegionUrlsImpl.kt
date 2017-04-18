@@ -1,4 +1,4 @@
-package com.skedgo.android.tripkit.urlresolver
+package skedgo.tripkit.urlresolver
 
 import android.content.SharedPreferences
 import com.skedgo.android.common.model.Region
@@ -7,10 +7,10 @@ import rx.Observable
 const val LAST_REGION_NAME = "last_region_name"
 const val LAST_REGION_URLS = "last_region_urls"
 
-open class GetLastUsedRegionUrls constructor(
+internal open class GetLastUsedRegionUrlsImpl constructor(
     private val preferences: SharedPreferences
-) {
-  open fun setLastUsedRegionUrls(region: Region): Observable<Unit>
+) :GetLastUsedRegionUrls {
+  override fun setLastUsedRegionUrls(region: Region): Observable<Unit>
       = Observable.fromCallable {
     if (!isSavedRegion(region))
       preferences.edit()
@@ -19,7 +19,7 @@ open class GetLastUsedRegionUrls constructor(
           .apply()
   }
 
-  open fun getLastUsedRegionUrls(): Observable<List<String>>
+  override fun getLastUsedRegionUrls(): Observable<List<String>>
       = Observable.fromCallable {
     val urls = preferences.getStringSet(LAST_REGION_URLS, null)
     if (urls != null) {

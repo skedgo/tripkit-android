@@ -4,6 +4,8 @@ import android.text.TextUtils
 import okhttp3.HttpUrl
 import okhttp3.Interceptor
 import okhttp3.Response
+import skedgo.tripkit.urlresolver.GetBaseServer
+import skedgo.tripkit.urlresolver.GetHitServers
 import java.io.IOException
 
 class UrlResolverInterceptor(private val getHitServers: GetHitServers,

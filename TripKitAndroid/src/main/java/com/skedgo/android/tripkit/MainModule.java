@@ -19,9 +19,9 @@ import com.skedgo.android.tripkit.tsp.GsonAdaptersRegionInfo;
 import com.skedgo.android.tripkit.tsp.GsonAdaptersRegionInfoBody;
 import com.skedgo.android.tripkit.tsp.GsonAdaptersRegionInfoResponse;
 import com.skedgo.android.tripkit.tsp.RegionInfoService;
-import com.skedgo.android.tripkit.urlresolver.GetBaseServer;
-import com.skedgo.android.tripkit.urlresolver.GetHitServers;
-import com.skedgo.android.tripkit.urlresolver.GetLastUsedRegionUrls;
+import skedgo.tripkit.urlresolver.GetBaseServer;
+import skedgo.tripkit.urlresolver.GetHitServers;
+import skedgo.tripkit.urlresolver.GetLastUsedRegionUrls;
 import com.skedgo.android.tripkit.urlresolver.UrlResolverInterceptor;
 
 import java.util.List;
@@ -196,10 +196,6 @@ public class MainModule {
       LocationInfoApi locationInfoApi,
       RegionService regionService) {
     return new LocationInfoServiceImpl(locationInfoApi, regionService);
-  }
-
-  @Provides GetLastUsedRegionUrls getLastUsedRegionUrls() {
-    return new GetLastUsedRegionUrls(preferences());
   }
 
   @Singleton @Provides Gson getGson() {

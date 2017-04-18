@@ -1,4 +1,4 @@
-package com.skedgo.android.tripkit.urlresolver
+package skedgo.tripkit.urlresolver
 
 import rx.Observable
 import javax.inject.Inject

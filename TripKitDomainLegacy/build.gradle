@@ -13,7 +13,7 @@ android {
   buildToolsVersion '25.0.2'
 
   defaultConfig {
-    minSdkVersion 10
+    minSdkVersion 15
     targetSdkVersion 25
   }
 
@@ -24,7 +24,13 @@ android {
 }
 
 dependencies {
+  testCompile 'junit:junit:4.12'
+  testCompile libs.mockitoCore
+  testCompile 'org.robolectric:robolectric:3.3.1'
+  testCompile libs.mockitoKotlin, { exclude group: 'org.jetbrains.kotlin' }
+
   compile project(":TripKitDomain")
+  compile project(':CommonCoreLegacy')
   compile 'com.google.dagger:dagger:2.7'
   kapt 'com.google.dagger:dagger-compiler:2.7'
   kapt libs.value

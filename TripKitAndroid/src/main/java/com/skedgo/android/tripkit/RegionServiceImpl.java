@@ -11,7 +11,7 @@ import com.skedgo.android.common.model.TransportMode;
 import com.skedgo.android.tripkit.tsp.Paratransit;
 import com.skedgo.android.tripkit.tsp.RegionInfo;
 import com.skedgo.android.tripkit.tsp.RegionInfoService;
-import com.skedgo.android.tripkit.urlresolver.GetLastUsedRegionUrls;
+import skedgo.tripkit.urlresolver.GetLastUsedRegionUrls;
 
 import java.util.Collections;
 import java.util.List;

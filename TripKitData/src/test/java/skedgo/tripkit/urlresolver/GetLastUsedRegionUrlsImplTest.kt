@@ -1,27 +1,27 @@
-package com.skedgo.android.tripkit.urlresolver
+package skedgo.tripkit.urlresolver
 
 import android.content.Context
 import android.support.v4.util.ArraySet
-import com.skedgo.android.tripkit.BuildConfig
+import com.nhaarman.mockito_kotlin.mock
+import com.nhaarman.mockito_kotlin.whenever
+import com.skedgo.android.common.model.Region
+import org.assertj.core.api.Assertions.assertThat
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.robolectric.RobolectricTestRunner
 import org.robolectric.RuntimeEnvironment
 import org.robolectric.annotation.Config
 import rx.observers.TestSubscriber
-import org.assertj.core.api.Assertions.assertThat
-import com.nhaarman.mockito_kotlin.mock
-import com.nhaarman.mockito_kotlin.whenever
-import com.skedgo.android.common.model.Region
+import skedgo.tripkit.data.BuildConfig
 
 @RunWith(RobolectricTestRunner::class)
 @Config(constants = BuildConfig::class)
 @Suppress("IllegalIdentifier")
-class GetLastUsedRegionUrlsTest {
+class GetLastUsedRegionUrlsImplTest {
 
   val prefs = RuntimeEnvironment.application.getSharedPreferences("", Context.MODE_PRIVATE)
-  internal val getLastUsedRegionUrls: GetLastUsedRegionUrls by lazy {
-    GetLastUsedRegionUrls(prefs)
+  internal val getLastUsedRegionUrls: GetLastUsedRegionUrlsImpl by lazy {
+    GetLastUsedRegionUrlsImpl(prefs)
   }
 
   @Test

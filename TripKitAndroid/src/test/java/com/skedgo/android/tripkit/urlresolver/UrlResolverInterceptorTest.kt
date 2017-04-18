@@ -16,6 +16,8 @@ import org.junit.runner.RunWith
 import org.mockito.ArgumentMatchers
 import org.robolectric.annotation.Config
 import rx.Observable
+import skedgo.tripkit.urlresolver.GetBaseServer
+import skedgo.tripkit.urlresolver.GetHitServers
 import java.io.IOException
 
 @Suppress("IllegalIdentifier")

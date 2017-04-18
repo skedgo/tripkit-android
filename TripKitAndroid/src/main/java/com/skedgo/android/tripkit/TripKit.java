@@ -15,6 +15,7 @@ import rx.functions.Action1;
 import rx.functions.Actions;
 import skedgo.tripkit.a2brouting.A2bRoutingDomainModule;
 import skedgo.tripkit.a2brouting.GetA2bTrips;
+import skedgo.tripkit.urlresolver.UrlResolverDataModule;
 
 @Singleton
 @Component(modules = {
@@ -22,7 +23,8 @@ import skedgo.tripkit.a2brouting.GetA2bTrips;
     RoutingModule.class,
     TspModule.class,
     MainModule.class,
-    A2bRoutingDomainModule.class
+    A2bRoutingDomainModule.class,
+    UrlResolverDataModule.class
 })
 public abstract class TripKit {
   private static TripKit instance;
