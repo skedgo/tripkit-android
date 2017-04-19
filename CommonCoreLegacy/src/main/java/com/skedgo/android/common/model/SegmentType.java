@@ -6,8 +6,6 @@ import android.text.TextUtils;
 import java.util.Locale;
 
 public enum SegmentType {
-  /* TODO: Should use int constants instead? */
-    /* Arguably, https://medium.com/google-developers/developing-for-android-ii-bb9a51f8c8b9 */
   DEPARTURE, SCHEDULED, UNSCHEDULED, STATIONARY, ARRIVAL;
 
   @Nullable
