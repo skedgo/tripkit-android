@@ -16,8 +16,7 @@ import java.util.ArrayList;
 import java.util.Locale;
 import java.util.UUID;
 
-import skedgo.tripkit.a2brouting.Availability;
-import skedgo.tripkit.a2brouting.AvailabilityKt;
+import skedgo.tripkit.routing.Availability;
 import skedgo.tripkit.routing.TripExtensionsKt;
 
 /**
@@ -275,7 +274,7 @@ public class Trip implements Parcelable, ITimeRange {
    * departure time, or if a scheduled service has been cancelled.
    */
   @Nullable public Availability getAvailability() {
-    return AvailabilityKt.toAvailability(availability);
+    return skedgo.tripkit.routing.AvailabilityKt.toAvailability(availability);
   }
 
   /**

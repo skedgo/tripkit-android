@@ -1,4 +1,4 @@
-package skedgo.tripkit.a2brouting
+package skedgo.tripkit.routing
 
 enum class Availability(val value: String) {
   Available("AVAILABLE"),

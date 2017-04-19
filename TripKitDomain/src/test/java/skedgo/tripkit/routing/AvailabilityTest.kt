@@ -1,4 +1,4 @@
-package skedgo.tripkit.a2brouting
+package skedgo.tripkit.routing
 
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.Test
