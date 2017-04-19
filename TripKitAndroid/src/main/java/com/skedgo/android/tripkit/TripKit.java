@@ -14,6 +14,7 @@ import rx.functions.Action1;
 import rx.functions.Actions;
 import skedgo.tripkit.a2brouting.A2bRoutingDomainModule;
 import skedgo.tripkit.a2brouting.GetA2bRoutingResults;
+import skedgo.tripkit.datetime.DateTimeComponent;
 
 @Singleton
 @Component(modules = {
@@ -83,5 +84,7 @@ public abstract class TripKit {
   public abstract LocationInfoService getLocationInfoService();
   public abstract TripUpdater getTripUpdater();
   public abstract GetA2bRoutingResults getGetA2bRoutingResults();
+  public abstract DateTimeComponent dateTimeComponent();
+
   abstract Action1<Throwable> getErrorHandler();
 }
