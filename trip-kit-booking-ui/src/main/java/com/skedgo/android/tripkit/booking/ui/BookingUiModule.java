@@ -34,7 +34,7 @@ public class BookingUiModule {
   }
 
   @Provides OkHttpClient httpClient() {
-    return TripKit.singleton().getOkHttpClient3();
+    return TripKit.getInstance().getOkHttpClient3();
   }
 
   @Provides Gson gson() {

@@ -27,10 +27,10 @@ import skedgo.tripkit.datetime.DateTimeComponent;
 public abstract class TripKit {
   private static TripKit instance;
 
-  public static TripKit singleton() {
+  public static TripKit getInstance() {
     synchronized (TripKit.class) {
       if (instance == null) {
-        throw new IllegalStateException("Must initialize TripKit before using singleton()");
+        throw new IllegalStateException("Must initialize TripKit before using getInstance()");
       }
 
       return instance;

@@ -37,7 +37,7 @@ class TripViewModel(
   }
 
   init {
-    val printTime = TripKit.singleton().dateTimeComponent().printTime()
+    val printTime = TripKit.getInstance().dateTimeComponent().printTime()
     printTime.execute(representativeTrip.startDateTime())
         .withLatestFrom(printTime.execute(representativeTrip.endDateTime())) {
           startTimeText, endTimeText ->

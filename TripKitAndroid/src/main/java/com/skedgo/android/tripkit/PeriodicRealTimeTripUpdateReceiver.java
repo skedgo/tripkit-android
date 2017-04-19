@@ -22,7 +22,7 @@ public abstract class PeriodicRealTimeTripUpdateReceiver implements RealTimeTrip
 
   public static Builder builder() {
     return new PeriodicRealTimeTripUpdateReceiverBuilder()
-        .tripUpdater(TripKit.singleton().getTripUpdater());
+        .tripUpdater(TripKit.getInstance().getTripUpdater());
   }
 
   @Override public Observable<TripGroup> startAsync() {
