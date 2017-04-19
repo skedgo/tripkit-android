@@ -18,7 +18,7 @@ import java.util.UUID;
 
 import skedgo.tripkit.a2brouting.Availability;
 import skedgo.tripkit.a2brouting.AvailabilityKt;
-import skedgo.tripkit.routing.TripExKt;
+import skedgo.tripkit.routing.TripExtensionsKt;
 
 /**
  * @see <a href="https://redmine.buzzhives.com/projects/buzzhives/wiki/Main_API_formats#Trips">API format</a>
@@ -121,7 +121,7 @@ public class Trip implements Parcelable, ITimeRange {
   }
 
   /**
-   * Use {@link TripExKt#startDateTime(Trip)} instead.
+   * Use {@link TripExtensionsKt#startDateTime(Trip)} instead.
    */
   @Deprecated
   public long getStartTimeInSecs() {
@@ -136,7 +136,7 @@ public class Trip implements Parcelable, ITimeRange {
   }
 
   /**
-   * Use {@link TripExKt#endDateTime(Trip)} instead.
+   * Use {@link TripExtensionsKt#endDateTime(Trip)} instead.
    */
   @Deprecated
   public long getEndTimeInSecs() {

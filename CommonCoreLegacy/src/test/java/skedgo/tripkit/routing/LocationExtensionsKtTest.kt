@@ -5,7 +5,7 @@ import org.assertj.core.api.Assertions.assertThat
 import org.joda.time.DateTimeZone
 import org.junit.Test
 
-class LocationExKtTest {
+class LocationExtensionsKtTest {
   @Test fun shouldConvertToDateTimeZoneCorrectly() {
     val location = Location()
     location.timeZone = "Asia/Bangkok"

@@ -25,7 +25,7 @@ import java.util.Locale;
 
 import rx.functions.Action1;
 import rx.functions.Actions;
-import skedgo.tripkit.routing.TripSegmentExKt;
+import skedgo.tripkit.routing.TripSegmentExtensionsKt;
 
 import static com.skedgo.android.common.model.VehicleMode.createLightDrawable;
 
@@ -275,7 +275,7 @@ public class TripSegment implements Parcelable, IRealTimeElement, ITimeRange {
   }
 
   /**
-   * Use {@link TripSegmentExKt#startDateTime(TripSegment)} instead.
+   * Use {@link TripSegmentExtensionsKt#startDateTime(TripSegment)} instead.
    */
   @Deprecated
   @Override
@@ -299,7 +299,7 @@ public class TripSegment implements Parcelable, IRealTimeElement, ITimeRange {
   }
 
   /**
-   * Use {@link TripSegmentExKt#endDateTime(TripSegment)} instead.
+   * Use {@link TripSegmentExtensionsKt#endDateTime(TripSegment)} instead.
    */
   @Deprecated
   @Override

@@ -7,7 +7,7 @@ import org.joda.time.DateTime
 import org.joda.time.DateTimeZone
 import org.junit.Test
 
-class TripSegmentExKtTest {
+class TripSegmentExtensionsKtTest {
   @Test fun shouldReturnZonedStartDateTimeWithDepartureLocationTimeZone() {
     val departureLocation = Location()
     departureLocation.timeZone = "Asia/Bangkok"

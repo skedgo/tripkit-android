@@ -9,7 +9,7 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.gson.annotations.SerializedName;
 import com.skedgo.android.common.util.StringUtils;
 
-import skedgo.tripkit.routing.LocationExKt;
+import skedgo.tripkit.routing.LocationExtensionsKt;
 
 public class Location implements Parcelable, ILatLon {
   public static final double SYDNEY_LAT = -33.871008;
@@ -369,7 +369,7 @@ public class Location implements Parcelable, ILatLon {
   }
 
   /**
-   * Use {@link LocationExKt#getDateTimeZone(Location)} instead.
+   * Use {@link LocationExtensionsKt#getDateTimeZone(Location)} instead.
    */
   @Deprecated
   @Nullable public String getTimeZone() {
