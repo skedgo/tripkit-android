@@ -8,8 +8,9 @@ import com.skedgo.android.tripkit.RouteService
 import rx.Observable
 import skedgo.tripkit.a2brouting.RequestTime.*
 import skedgo.tripkit.routing.toSeconds
+import javax.inject.Inject
 
-open class GetA2bRoutingResults internal constructor(
+open class GetA2bRoutingResults @Inject internal constructor(
     private val routeService: RouteService
 ) {
   open fun execute(request: A2bRoutingRequest): Observable<List<TripGroup>>

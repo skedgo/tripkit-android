@@ -28,7 +28,10 @@ class A2bTripsViewModel constructor(
   fun showSampleTrips(): Observable<Unit>
       = Observable
       .defer {
-        TripKit.getInstance().getA2bRoutingResults.execute(
+        val getA2bRoutingResults = TripKit.getInstance()
+            .a2bRoutingComponent()
+            .getA2bRoutingResults()
+        getA2bRoutingResults.execute(
             A2bRoutingRequest.builder()
                 .origin(Pair(34.193984, -118.392930))
                 .originAddress("11923 Vanowen St, North Hollywood, CA 91605, USA")

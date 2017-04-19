@@ -18,7 +18,7 @@ import javax.inject.Inject
 // FIXME: Create a pure domain model to represent a trip line.
 typealias TripLine = List<PolylineOptions>
 
-open class GetTripLine @Inject constructor() {
+open class GetTripLine @Inject internal constructor() {
   private val NON_TRAVELLED_LINE_COLOR = 0x88AAAAAA.toInt()
 
   open fun execute(segments: List<TripSegment>): Observable<TripLine>
