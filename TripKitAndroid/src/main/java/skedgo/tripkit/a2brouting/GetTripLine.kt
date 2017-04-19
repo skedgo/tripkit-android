@@ -5,6 +5,7 @@ import android.text.TextUtils
 import android.util.Pair
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.PolylineOptions
+import com.google.maps.android.PolyUtil
 import com.skedgo.android.common.model.SegmentType
 import com.skedgo.android.common.model.TransportMode
 import com.skedgo.android.common.model.TripSegment
@@ -119,7 +120,7 @@ open class GetTripLine @Inject internal constructor() {
 
           var wps: List<LatLng>? = null
           if (!TextUtils.isEmpty(shape.encodedWaypoints)) {
-            wps = PolylineEncoderUtils.decode(shape.encodedWaypoints)
+            wps = PolyUtil.decode(shape.encodedWaypoints)
           }
 
           val nonTravelledLines = ArrayList<LineSegment>()

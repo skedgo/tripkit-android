@@ -6,7 +6,10 @@ import rx.subjects.BehaviorSubject;
 
 /**
  * Represents a mutable property that can be observed via {@link Observable}.
+ * <p>
+ * Use {@link BehaviorSubject} instead.
  */
+@Deprecated
 public abstract class Var<T> implements Action1<T> {
   public static <T> Var<T> create() {
     return new Impl<T>();
