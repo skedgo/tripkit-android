@@ -2,7 +2,6 @@ package com.skedgo.android.tripkit;
 
 import android.content.Context;
 import android.support.annotation.NonNull;
-import android.support.annotation.VisibleForTesting;
 
 import com.skedgo.android.tripkit.bookingproviders.BookingResolver;
 import com.skedgo.android.tripkit.routing.RoutingModule;
@@ -14,7 +13,7 @@ import dagger.Component;
 import rx.functions.Action1;
 import rx.functions.Actions;
 import skedgo.tripkit.a2brouting.A2bRoutingDomainModule;
-import skedgo.tripkit.a2brouting.GetA2bTrips;
+import skedgo.tripkit.a2brouting.GetA2bRoutingResults;
 
 @Singleton
 @Component(modules = {
@@ -83,7 +82,6 @@ public abstract class TripKit {
   public abstract BookingResolver getBookingResolver();
   public abstract LocationInfoService getLocationInfoService();
   public abstract TripUpdater getTripUpdater();
-  public abstract GetA2bTrips getGetA2bTrips();
-  @VisibleForTesting abstract RegionDatabaseHelper getRegionDatabaseHelper();
+  public abstract GetA2bRoutingResults getGetA2bRoutingResults();
   abstract Action1<Throwable> getErrorHandler();
 }

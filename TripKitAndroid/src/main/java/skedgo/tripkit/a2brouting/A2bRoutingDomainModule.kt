@@ -7,5 +7,5 @@ import dagger.Provides
 @Module
 class A2bRoutingDomainModule {
   @Provides fun getA2bTrips(routeService: RouteService)
-      = GetA2bTrips(routeService)
+      = GetA2bRoutingResults(routeService)
 }
