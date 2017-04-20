@@ -6,7 +6,7 @@ import android.util.Pair
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.PolylineOptions
 import com.google.maps.android.PolyUtil
-import com.skedgo.android.common.model.SegmentType
+import skedgo.tripkit.routing.SegmentType
 import com.skedgo.android.common.model.TransportMode
 import com.skedgo.android.common.model.TripSegment
 import com.skedgo.android.common.model.VehicleMode

@@ -1,4 +1,4 @@
-package com.skedgo.android.common.model;
+package skedgo.tripkit.routing;
 
 import android.support.annotation.Nullable;
 import android.text.TextUtils;

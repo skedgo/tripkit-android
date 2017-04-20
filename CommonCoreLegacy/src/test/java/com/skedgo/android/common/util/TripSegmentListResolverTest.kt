@@ -2,7 +2,7 @@ package com.skedgo.android.common.util
 
 import com.skedgo.android.common.BuildConfig
 import com.skedgo.android.common.TestRunner
-import com.skedgo.android.common.model.SegmentType
+import skedgo.tripkit.routing.SegmentType
 import com.skedgo.android.common.model.TripSegment
 import com.skedgo.android.common.model.TripSegment.VISIBILITY_IN_DETAILS
 import com.skedgo.android.common.model.TripSegment.VISIBILITY_ON_MAP

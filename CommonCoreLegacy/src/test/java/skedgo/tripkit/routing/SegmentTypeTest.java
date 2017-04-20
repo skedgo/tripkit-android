@@ -1,4 +1,4 @@
-package com.skedgo.android.common.model;
+package skedgo.tripkit.routing;
 
 import com.skedgo.android.common.BuildConfig;
 import com.skedgo.android.common.TestRunner;
@@ -7,8 +7,8 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.robolectric.annotation.Config;
 
-import static com.skedgo.android.common.model.SegmentType.from;
 import static org.assertj.core.api.Assertions.assertThat;
+import static skedgo.tripkit.routing.SegmentType.from;
 
 @RunWith(TestRunner.class)
 @Config(constants = BuildConfig.class)

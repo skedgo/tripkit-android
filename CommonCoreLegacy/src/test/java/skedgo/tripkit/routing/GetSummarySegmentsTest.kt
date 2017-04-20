@@ -3,7 +3,7 @@ package skedgo.tripkit.routing
 import com.nhaarman.mockito_kotlin.eq
 import com.nhaarman.mockito_kotlin.mock
 import com.nhaarman.mockito_kotlin.whenever
-import com.skedgo.android.common.model.SegmentType
+import skedgo.tripkit.routing.SegmentType
 import com.skedgo.android.common.model.Trip
 import com.skedgo.android.common.model.TripSegment
 import org.assertj.core.api.Assertions.assertThat

@@ -5,7 +5,7 @@ import android.text.TextUtils;
 
 import com.skedgo.android.common.R;
 import com.skedgo.android.common.model.Location;
-import com.skedgo.android.common.model.SegmentType;
+import skedgo.tripkit.routing.SegmentType;
 import com.skedgo.android.common.model.TripSegment;
 
 import org.apache.commons.collections4.CollectionUtils;

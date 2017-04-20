@@ -18,6 +18,8 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Random;
 
+import skedgo.tripkit.routing.SegmentType;
+
 import static org.assertj.core.api.Assertions.assertThat;
 
 @RunWith(TestRunner.class)
