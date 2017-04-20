@@ -1,6 +1,10 @@
-package com.skedgo.android.common.model;
+package skedgo.tripkit.routing;
 
 import android.support.annotation.Nullable;
+
+import com.skedgo.android.common.model.ModeInfo;
+import com.skedgo.android.common.model.ServiceColor;
+import com.skedgo.android.common.model.TripSegment;
 
 public final class TripSegments {
   private TripSegments() {}

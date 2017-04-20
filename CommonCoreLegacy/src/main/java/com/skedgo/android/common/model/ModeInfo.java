@@ -124,7 +124,7 @@ public class ModeInfo implements Parcelable {
     return color;
   }
 
-  void setColor(ServiceColor color) {
+  public void setColor(ServiceColor color) {
     this.color = color;
   }
 }

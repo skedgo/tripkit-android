@@ -1,8 +1,9 @@
-package com.skedgo.android.common.model;
+package skedgo.tripkit.routing;
 
 import android.support.annotation.Nullable;
 
-import skedgo.tripkit.routing.TripExtensionsKt;
+import com.skedgo.android.common.model.Location;
+import com.skedgo.android.common.model.Trip;
 
 /**
  * Use extension functions in {@link TripExtensionsKt} instead.
