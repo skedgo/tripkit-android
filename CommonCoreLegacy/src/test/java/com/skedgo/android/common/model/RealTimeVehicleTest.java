@@ -18,11 +18,11 @@ public class RealTimeVehicleTest {
   @Test public void canBeParcelable() {
     final RealTimeVehicle v = new RealTimeVehicle();
     v.setIcon("uber-uberX");
-    v.setOccupancy(Occupancy.Empty);
+    v.setOccupancy(Occupancy.EMPTY);
 
     final RealTimeVehicle actual = RealTimeVehicle.CREATOR.createFromParcel(Parcels.parcel(v));
     assertThat(actual.getIcon()).isEqualTo(v.getIcon());
-    assertThat(actual.getOccupancy()).isEqualTo(Occupancy.Empty);
+    assertThat(actual.getOccupancy()).isEqualTo(Occupancy.EMPTY);
   }
 
   @Test public void canBeCreatedFromJson() {
@@ -53,7 +53,7 @@ public class RealTimeVehicleTest {
     jsonObject.addProperty("occupancy", "FULL");
 
     RealTimeVehicle realTimeVehicle = new Gson().fromJson(jsonObject, RealTimeVehicle.class);
-    assertThat(realTimeVehicle.getOccupancy()).isEqualTo(Occupancy.Full);
+    assertThat(realTimeVehicle.getOccupancy()).isEqualTo(Occupancy.FULL);
   }
 
   @Test
