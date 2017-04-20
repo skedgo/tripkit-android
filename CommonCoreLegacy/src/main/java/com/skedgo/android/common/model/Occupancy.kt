@@ -1,11 +1,11 @@
 package com.skedgo.android.common.model
 
 enum class Occupancy(val string: String) {
-  EMPTY("EMPTY"),
-  MANY_SEATS_AVAILABLE("MANY_SEATS_AVAILABLE"),
-  FEW_SEATS_AVAILABLE("FEW_SEATS_AVAILABLE"),
-  STANDING_ROOM_ONLY("STANDING_ROOM_ONLY"),
-  CRUSHED_STANDING_ROOM_ONLY("CRUSHED_STANDING_ROOM_ONLY"),
-  FULL("FULL"),
-  NOT_ACCEPTING_PASSENGERS("NOT_ACCEPTING_PASSENGERS")
+  Empty("EMPTY"),
+  ManySeatsAvailable("MANY_SEATS_AVAILABLE"),
+  FewSeatsAvailable("FEW_SEATS_AVAILABLE"),
+  StandingRoomOnly("STANDING_ROOM_ONLY"),
+  CrushedStandingRoomOnly("CRUSHED_STANDING_ROOM_ONLY"),
+  Full("FULL"),
+  NotAcceptingPassengers("NOT_ACCEPTING_PASSENGERS")
 }
