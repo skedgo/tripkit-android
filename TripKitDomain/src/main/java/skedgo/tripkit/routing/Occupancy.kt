@@ -1,5 +1,4 @@
-package com.skedgo.android.common.model
-
+package skedgo.tripkit.routing
 
 enum class Occupancy(val value: String) {
   Empty("EMPTY"),

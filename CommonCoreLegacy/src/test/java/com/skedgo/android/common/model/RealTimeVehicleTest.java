@@ -10,6 +10,8 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.robolectric.annotation.Config;
 
+import skedgo.tripkit.routing.Occupancy;
+
 import static org.assertj.core.api.Assertions.assertThat;
 
 @RunWith(TestRunner.class)
