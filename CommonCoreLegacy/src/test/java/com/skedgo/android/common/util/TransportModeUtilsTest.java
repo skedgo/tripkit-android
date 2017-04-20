@@ -8,7 +8,7 @@ import android.util.DisplayMetrics;
 
 import com.skedgo.android.common.BuildConfig;
 import com.skedgo.android.common.TestRunner;
-import com.skedgo.android.common.model.ModeInfo;
+import skedgo.tripkit.routing.ModeInfo;
 import com.skedgo.android.common.model.TransportMode;
 
 import org.junit.Before;

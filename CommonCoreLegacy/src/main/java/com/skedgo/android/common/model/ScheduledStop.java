@@ -9,6 +9,8 @@ import com.skedgo.android.common.R;
 
 import java.util.ArrayList;
 
+import skedgo.tripkit.routing.ModeInfo;
+
 public class ScheduledStop extends Location {
 
   public static final Creator<ScheduledStop> CREATOR = new Creator<ScheduledStop>() {

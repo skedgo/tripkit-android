@@ -1,4 +1,4 @@
-package com.skedgo.android.common.model;
+package skedgo.tripkit.routing;
 
 import android.text.TextUtils;
 
@@ -6,6 +6,8 @@ import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import com.skedgo.android.common.BuildConfig;
 import com.skedgo.android.common.TestRunner;
+import com.skedgo.android.common.model.ServiceColor;
+import com.skedgo.android.common.model.Utils;
 
 import org.assertj.core.api.Assertions;
 import org.junit.Test;

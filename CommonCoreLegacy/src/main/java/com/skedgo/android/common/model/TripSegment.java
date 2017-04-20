@@ -25,6 +25,7 @@ import java.util.Locale;
 
 import rx.functions.Action1;
 import rx.functions.Actions;
+import skedgo.tripkit.routing.ModeInfo;
 import skedgo.tripkit.routing.SegmentType;
 import skedgo.tripkit.routing.SegmentTypeKt;
 import skedgo.tripkit.routing.Trip;

@@ -3,7 +3,7 @@ package com.skedgo.android.tripkit.tsp;
 import android.support.annotation.Nullable;
 
 import com.google.gson.annotations.JsonAdapter;
-import com.skedgo.android.common.model.ModeInfo;
+import skedgo.tripkit.routing.ModeInfo;
 
 import org.immutables.gson.Gson;
 import org.immutables.value.Value;

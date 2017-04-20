@@ -13,6 +13,8 @@ import com.skedgo.android.common.R;
 
 import java.util.Locale;
 
+import skedgo.tripkit.routing.ModeInfo;
+
 /**
  * As of v11, this denotes local transport icons.
  *

@@ -18,6 +18,8 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
+import skedgo.tripkit.routing.ModeInfo;
+
 import static com.skedgo.android.common.model.TripSegment.VISIBILITY_HIDDEN;
 import static com.skedgo.android.common.model.TripSegment.VISIBILITY_IN_DETAILS;
 import static com.skedgo.android.common.model.TripSegment.VISIBILITY_IN_SUMMARY;
