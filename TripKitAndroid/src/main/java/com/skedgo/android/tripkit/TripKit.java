@@ -2,7 +2,6 @@ package com.skedgo.android.tripkit;
 
 import android.content.Context;
 import android.support.annotation.NonNull;
-import android.support.annotation.VisibleForTesting;
 
 import com.skedgo.android.tripkit.bookingproviders.BookingResolver;
 import com.skedgo.android.tripkit.routing.RoutingModule;
@@ -13,24 +12,23 @@ import javax.inject.Singleton;
 import dagger.Component;
 import rx.functions.Action1;
 import rx.functions.Actions;
-import skedgo.tripkit.a2brouting.A2bRoutingDomainModule;
-import skedgo.tripkit.a2brouting.GetA2bTrips;
+import skedgo.tripkit.a2brouting.A2bRoutingComponent;
+import skedgo.tripkit.datetime.DateTimeComponent;
 
 @Singleton
 @Component(modules = {
     HttpClientModule.class,
     RoutingModule.class,
     TspModule.class,
-    MainModule.class,
-    A2bRoutingDomainModule.class
+    MainModule.class
 })
 public abstract class TripKit {
   private static TripKit instance;
 
-  public static TripKit singleton() {
+  public static TripKit getInstance() {
     synchronized (TripKit.class) {
       if (instance == null) {
-        throw new IllegalStateException("Must initialize TripKit before using singleton()");
+        throw new IllegalStateException("Must initialize TripKit before using getInstance()");
       }
 
       return instance;
@@ -44,7 +42,7 @@ public abstract class TripKit {
    * <p>
    * Note that you should only use this
    * when you totally understand what you're doing.
-   * Otherwise, just go w/ {@link #initialize(Configs)}.
+   * Otherwise, just go with {@link #initialize(Configs)} instead.
    *
    * @param context A {@link Context} to launch {@link FetchRegionsService}.
    * @param tripKit Can be created via {@link DaggerTripKit}.
@@ -83,7 +81,9 @@ public abstract class TripKit {
   public abstract BookingResolver getBookingResolver();
   public abstract LocationInfoService getLocationInfoService();
   public abstract TripUpdater getTripUpdater();
-  public abstract GetA2bTrips getGetA2bTrips();
-  @VisibleForTesting abstract RegionDatabaseHelper getRegionDatabaseHelper();
+
+  public abstract A2bRoutingComponent a2bRoutingComponent();
+  public abstract DateTimeComponent dateTimeComponent();
+
   abstract Action1<Throwable> getErrorHandler();
 }

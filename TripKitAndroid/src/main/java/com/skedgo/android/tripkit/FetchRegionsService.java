@@ -36,7 +36,7 @@ public final class FetchRegionsService extends GcmTaskService {
   }
 
   @Override public int onRunTask(TaskParams taskParams) {
-    final TripKit kit = TripKit.singleton();
+    final TripKit kit = TripKit.getInstance();
     try {
       kit.getRegionService()
           .refreshAsync()

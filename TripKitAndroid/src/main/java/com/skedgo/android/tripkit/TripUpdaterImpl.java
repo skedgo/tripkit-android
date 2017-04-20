@@ -5,9 +5,9 @@ import android.support.annotation.NonNull;
 import android.text.TextUtils;
 
 import com.google.gson.Gson;
-import com.skedgo.android.common.model.RoutingResponse;
-import com.skedgo.android.common.model.Trip;
-import com.skedgo.android.common.model.TripGroup;
+import skedgo.tripkit.routing.RoutingResponse;
+import skedgo.tripkit.routing.Trip;
+import skedgo.tripkit.routing.TripGroup;
 
 import org.apache.commons.collections4.CollectionUtils;
 

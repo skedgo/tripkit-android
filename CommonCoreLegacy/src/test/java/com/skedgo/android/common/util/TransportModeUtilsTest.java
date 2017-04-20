@@ -8,13 +8,14 @@ import android.util.DisplayMetrics;
 
 import com.skedgo.android.common.BuildConfig;
 import com.skedgo.android.common.TestRunner;
-import com.skedgo.android.common.model.ModeInfo;
 import com.skedgo.android.common.model.TransportMode;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.robolectric.annotation.Config;
+
+import skedgo.tripkit.routing.ModeInfo;
 
 import static android.util.DisplayMetrics.DENSITY_HIGH;
 import static android.util.DisplayMetrics.DENSITY_MEDIUM;

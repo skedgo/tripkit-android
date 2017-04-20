@@ -1,7 +1,7 @@
 package com.skedgo.android.tripkit;
 
-import com.skedgo.android.common.model.Trip;
-import com.skedgo.android.common.model.TripGroup;
+import skedgo.tripkit.routing.Trip;
+import skedgo.tripkit.routing.TripGroup;
 
 import org.immutables.value.Value;
 
@@ -22,7 +22,7 @@ public abstract class PeriodicRealTimeTripUpdateReceiver implements RealTimeTrip
 
   public static Builder builder() {
     return new PeriodicRealTimeTripUpdateReceiverBuilder()
-        .tripUpdater(TripKit.singleton().getTripUpdater());
+        .tripUpdater(TripKit.getInstance().getTripUpdater());
   }
 
   @Override public Observable<TripGroup> startAsync() {

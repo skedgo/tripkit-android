@@ -2,7 +2,7 @@ package com.skedgo.routepersistence;
 
 import android.util.Pair;
 
-import com.skedgo.android.common.model.TripGroup;
+import skedgo.tripkit.routing.TripGroup;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;

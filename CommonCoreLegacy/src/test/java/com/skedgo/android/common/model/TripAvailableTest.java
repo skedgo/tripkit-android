@@ -12,7 +12,8 @@ import org.robolectric.annotation.Config;
 import java.io.IOException;
 import java.nio.charset.Charset;
 
-import skedgo.tripkit.a2brouting.Availability;
+import skedgo.tripkit.routing.Availability;
+import skedgo.tripkit.routing.Trip;
 
 import static org.assertj.core.api.Assertions.assertThat;
 

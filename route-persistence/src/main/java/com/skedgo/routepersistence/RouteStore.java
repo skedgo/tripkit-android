@@ -8,9 +8,9 @@ import android.support.annotation.NonNull;
 import android.util.Pair;
 
 import com.google.gson.Gson;
-import com.skedgo.android.common.model.Trip;
-import com.skedgo.android.common.model.TripGroup;
-import com.skedgo.android.common.model.TripSegment;
+import skedgo.tripkit.routing.Trip;
+import skedgo.tripkit.routing.TripGroup;
+import skedgo.tripkit.routing.TripSegment;
 
 import java.util.ArrayList;
 import java.util.List;

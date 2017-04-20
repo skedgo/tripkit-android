@@ -1,6 +1,6 @@
 package com.skedgo.android.tripkit.routing;
 
-import com.skedgo.android.common.model.RoutingResponse;
+import skedgo.tripkit.routing.RoutingResponse;
 
 import java.util.List;
 import java.util.Map;

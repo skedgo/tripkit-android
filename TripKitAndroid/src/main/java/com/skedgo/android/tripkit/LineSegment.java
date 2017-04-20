@@ -1,7 +1,7 @@
 package com.skedgo.android.tripkit;
 
 import com.google.android.gms.maps.model.LatLng;
-import com.skedgo.android.common.model.Trip;
+import skedgo.tripkit.routing.Trip;
 
 /**
  * Represents a segment of a polyline denoting a {@link Trip}.

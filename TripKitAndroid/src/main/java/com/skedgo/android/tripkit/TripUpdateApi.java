@@ -1,6 +1,6 @@
 package com.skedgo.android.tripkit;
 
-import com.skedgo.android.common.model.RoutingResponse;
+import skedgo.tripkit.routing.RoutingResponse;
 
 import retrofit2.http.GET;
 import retrofit2.http.Query;

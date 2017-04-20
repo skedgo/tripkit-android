@@ -2,8 +2,8 @@ package com.skedgo.android.tripkit.routing;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
-import com.skedgo.android.common.model.Trip;
-import com.skedgo.android.common.model.TripGroup;
+import skedgo.tripkit.routing.Trip;
+import skedgo.tripkit.routing.TripGroup;
 import com.skedgo.android.tripkit.BuildConfig;
 import com.skedgo.android.tripkit.TestRunner;
 

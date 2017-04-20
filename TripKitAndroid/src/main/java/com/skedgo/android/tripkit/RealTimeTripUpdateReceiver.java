@@ -1,6 +1,6 @@
 package com.skedgo.android.tripkit;
 
-import com.skedgo.android.common.model.TripGroup;
+import skedgo.tripkit.routing.TripGroup;
 
 import rx.Observable;
 
