@@ -1,7 +1,5 @@
 package com.skedgo.android.common.model;
 
-import android.os.Parcel;
-
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import com.skedgo.android.common.BuildConfig;
@@ -12,6 +10,8 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.robolectric.annotation.Config;
 
+import skedgo.tripkit.routing.Occupancy;
+
 import static org.assertj.core.api.Assertions.assertThat;
 
 @RunWith(TestRunner.class)
@@ -20,11 +20,11 @@ public class RealTimeVehicleTest {
   @Test public void canBeParcelable() {
     final RealTimeVehicle v = new RealTimeVehicle();
     v.setIcon("uber-uberX");
-    v.setOccupancy(Occupancy.EMPTY);
+    v.setOccupancy("EMPTY");
 
     final RealTimeVehicle actual = RealTimeVehicle.CREATOR.createFromParcel(Parcels.parcel(v));
     assertThat(actual.getIcon()).isEqualTo(v.getIcon());
-    assertThat(actual.getOccupancy()).isEqualTo(Occupancy.EMPTY);
+    assertThat(actual.getOccupancy()).isEqualTo(Occupancy.Empty);
   }
 
   @Test public void canBeCreatedFromJson() {
@@ -55,7 +55,7 @@ public class RealTimeVehicleTest {
     jsonObject.addProperty("occupancy", "FULL");
 
     RealTimeVehicle realTimeVehicle = new Gson().fromJson(jsonObject, RealTimeVehicle.class);
-    assertThat(realTimeVehicle.getOccupancy()).isEqualTo(Occupancy.FULL);
+    assertThat(realTimeVehicle.getOccupancy()).isEqualTo(Occupancy.Full);
   }
 
   @Test

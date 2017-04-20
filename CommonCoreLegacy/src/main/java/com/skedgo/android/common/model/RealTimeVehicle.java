@@ -8,6 +8,8 @@ import com.google.gson.annotations.SerializedName;
 
 import java.util.ArrayList;
 
+import skedgo.tripkit.routing.Occupancy;
+
 public class RealTimeVehicle implements Parcelable {
   public static final Creator<RealTimeVehicle> CREATOR = new Creator<RealTimeVehicle>() {
     public RealTimeVehicle createFromParcel(Parcel in) {
@@ -43,7 +45,7 @@ public class RealTimeVehicle implements Parcelable {
   @SerializedName("label") private String mLabel;
   @SerializedName("lastUpdate") private long mLastUpdateTime;
   @SerializedName("icon") @Nullable private String icon;
-  @Occupancy @Nullable private String occupancy;
+  @Nullable private String occupancy;
 
   public long getId() {
     return mId;
@@ -158,8 +160,8 @@ public class RealTimeVehicle implements Parcelable {
     dest.writeString(occupancy);
   }
 
-  @Nullable @Occupancy public String getOccupancy() {
-    return occupancy;
+  @Nullable public Occupancy getOccupancy() {
+    return OccupancyKt.toOccupancy(occupancy);
   }
 
   @Nullable public String getIcon() {
