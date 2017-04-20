@@ -1,4 +1,4 @@
-package com.skedgo.android.common.model;
+package skedgo.tripkit.routing;
 
 public enum GroupVisibility {
   FULL(1), COMPACT(0);

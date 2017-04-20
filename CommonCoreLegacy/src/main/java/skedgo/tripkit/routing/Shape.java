@@ -1,13 +1,12 @@
-package com.skedgo.android.common.model;
+package skedgo.tripkit.routing;
 
 import android.os.Parcel;
 import android.os.Parcelable;
 
 import com.google.gson.annotations.SerializedName;
+import com.skedgo.android.common.model.ServiceStop;
 
 import java.util.List;
-
-import skedgo.tripkit.routing.ServiceColor;
 
 public class Shape implements Parcelable {
   public static final Creator<Shape> CREATOR = new Creator<Shape>() {

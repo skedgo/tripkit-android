@@ -20,7 +20,6 @@ import com.skedgo.android.common.model.ITimeRange;
 import com.skedgo.android.common.model.Location;
 import com.skedgo.android.common.model.RealtimeAlert;
 import com.skedgo.android.common.model.ServiceStop;
-import com.skedgo.android.common.model.Shape;
 import com.skedgo.android.common.model.Street;
 import com.skedgo.android.common.model.TransportMode;
 import com.skedgo.android.common.rx.Var;

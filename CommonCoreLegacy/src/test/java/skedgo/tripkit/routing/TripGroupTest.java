@@ -12,11 +12,11 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
-import static com.skedgo.android.common.model.GroupVisibility.COMPACT;
-import static com.skedgo.android.common.model.GroupVisibility.FULL;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
+import static skedgo.tripkit.routing.GroupVisibility.COMPACT;
+import static skedgo.tripkit.routing.GroupVisibility.FULL;
 
 @RunWith(TestRunner.class)
 @Config(constants = BuildConfig.class)

@@ -7,7 +7,6 @@ import android.support.annotation.Nullable;
 import android.util.Pair;
 
 import com.google.gson.annotations.SerializedName;
-import com.skedgo.android.common.model.GroupVisibility;
 import com.skedgo.android.common.model.ServiceStop;
 import com.skedgo.android.common.model.TransportMode;
 
