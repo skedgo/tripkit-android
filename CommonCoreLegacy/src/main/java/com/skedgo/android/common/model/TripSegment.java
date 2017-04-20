@@ -26,6 +26,7 @@ import java.util.Locale;
 import rx.functions.Action1;
 import rx.functions.Actions;
 import skedgo.tripkit.routing.SegmentType;
+import skedgo.tripkit.routing.SegmentTypeKt;
 import skedgo.tripkit.routing.TripSegmentExtensionsKt;
 
 import static com.skedgo.android.common.model.VehicleMode.createLightDrawable;
@@ -46,7 +47,7 @@ public class TripSegment implements Parcelable, IRealTimeElement, ITimeRange {
       TripSegment segment = new TripSegment();
 
       segment.mId = in.readLong();
-      segment.mType = SegmentType.from(in.readString());
+      segment.mType = SegmentTypeKt.from(in.readString());
 
       long startTimeInSecs = in.readLong();
       segment.setStartTimeInSecs(startTimeInSecs);
