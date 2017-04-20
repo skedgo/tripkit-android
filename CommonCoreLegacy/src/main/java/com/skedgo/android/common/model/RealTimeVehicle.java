@@ -23,8 +23,7 @@ public class RealTimeVehicle implements Parcelable {
       v.mArriveAtStartStopTime = in.readLong();
       v.mAlerts = in.readArrayList(RealtimeAlert.class.getClassLoader());
       v.icon = in.readString();
-      String occupancy = in.readString();
-      v.occupancy = occupancy != null ? Occupancy.valueOf(occupancy) : null;
+      v.occupancy = in.readString();
       return v;
     }
 
@@ -44,7 +43,7 @@ public class RealTimeVehicle implements Parcelable {
   @SerializedName("label") private String mLabel;
   @SerializedName("lastUpdate") private long mLastUpdateTime;
   @SerializedName("icon") @Nullable private String icon;
-  @Nullable private Occupancy occupancy;
+  @Nullable private String occupancy;
 
   public long getId() {
     return mId;
@@ -156,11 +155,11 @@ public class RealTimeVehicle implements Parcelable {
     dest.writeLong(mArriveAtStartStopTime);
     dest.writeList(mAlerts);
     dest.writeString(icon);
-    dest.writeString(occupancy != null ? occupancy.getString() : null);
+    dest.writeString(occupancy);
   }
 
   @Nullable public Occupancy getOccupancy() {
-    return occupancy;
+    return OccupancyKt.toOccupancy(occupancy);
   }
 
   @Nullable public String getIcon() {
@@ -171,7 +170,7 @@ public class RealTimeVehicle implements Parcelable {
     this.icon = icon;
   }
 
-  public void setOccupancy(@Nullable Occupancy occupancy) {
+  public void setOccupancy(@Nullable String occupancy) {
     this.occupancy = occupancy;
   }
 }

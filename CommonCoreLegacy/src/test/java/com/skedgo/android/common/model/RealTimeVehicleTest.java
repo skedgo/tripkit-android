@@ -18,7 +18,7 @@ public class RealTimeVehicleTest {
   @Test public void canBeParcelable() {
     final RealTimeVehicle v = new RealTimeVehicle();
     v.setIcon("uber-uberX");
-    v.setOccupancy(Occupancy.Empty);
+    v.setOccupancy("EMPTY");
 
     final RealTimeVehicle actual = RealTimeVehicle.CREATOR.createFromParcel(Parcels.parcel(v));
     assertThat(actual.getIcon()).isEqualTo(v.getIcon());

@@ -1,6 +1,7 @@
 package com.skedgo.android.common.model
 
-enum class Occupancy(val string: String) {
+
+enum class Occupancy(val value: String) {
   Empty("EMPTY"),
   ManySeatsAvailable("MANY_SEATS_AVAILABLE"),
   FewSeatsAvailable("FEW_SEATS_AVAILABLE"),
@@ -8,4 +9,8 @@ enum class Occupancy(val string: String) {
   CrushedStandingRoomOnly("CRUSHED_STANDING_ROOM_ONLY"),
   Full("FULL"),
   NotAcceptingPassengers("NOT_ACCEPTING_PASSENGERS")
+}
+
+fun String?.toOccupancy(): Occupancy? = this?.let {
+  Occupancy.values().first { it.value == this }
 }
