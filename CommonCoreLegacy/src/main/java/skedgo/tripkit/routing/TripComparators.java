@@ -1,4 +1,4 @@
-package com.skedgo.android.common.model;
+package skedgo.tripkit.routing;
 
 import org.apache.commons.collections4.ComparatorUtils;
 import org.apache.commons.collections4.comparators.ComparatorChain;

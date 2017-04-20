@@ -19,6 +19,9 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
 
+import skedgo.tripkit.routing.Trip;
+import skedgo.tripkit.routing.TripComparators;
+
 public class RoutingResponse {
   public static final String TEMPLATE_DIRECTION = "<DIRECTION>";
   public static final String TEMPLATE_LINE_NAME = "<LINE_NAME>";

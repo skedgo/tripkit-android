@@ -2,8 +2,8 @@ package com.skedgo.android.tripkit.routing;
 
 import android.support.annotation.NonNull;
 
-import com.skedgo.android.common.model.Trip;
-import com.skedgo.android.common.model.TripComparators;
+import skedgo.tripkit.routing.Trip;
+import skedgo.tripkit.routing.TripComparators;
 import com.skedgo.android.common.model.TripGroup;
 
 import java.util.Collections;

@@ -2,7 +2,7 @@ package skedgo.tripkit.samples.a2brouting
 
 import android.content.Context
 import android.databinding.ObservableField
-import com.skedgo.android.common.model.Trip
+import skedgo.tripkit.routing.Trip
 import com.skedgo.android.common.model.TripGroup
 import com.skedgo.android.tripkit.TripKit
 import rx.subjects.PublishSubject

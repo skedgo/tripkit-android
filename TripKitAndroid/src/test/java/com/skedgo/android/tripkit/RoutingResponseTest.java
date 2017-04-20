@@ -5,7 +5,7 @@ import com.google.gson.JsonPrimitive;
 import com.skedgo.android.common.model.RealtimeAlert;
 import com.skedgo.android.common.model.RealtimeAlerts;
 import com.skedgo.android.common.model.RoutingResponse;
-import com.skedgo.android.common.model.Trip;
+import skedgo.tripkit.routing.Trip;
 import com.skedgo.android.common.model.TripGroup;
 import com.skedgo.android.common.model.TripSegment;
 import com.skedgo.android.common.util.Gsons;

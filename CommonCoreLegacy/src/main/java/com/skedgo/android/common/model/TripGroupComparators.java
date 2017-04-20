@@ -7,6 +7,9 @@ import org.apache.commons.collections4.comparators.ComparatorChain;
 import java.util.Arrays;
 import java.util.Comparator;
 
+import skedgo.tripkit.routing.Trip;
+import skedgo.tripkit.routing.TripComparators;
+
 public final class TripGroupComparators {
   public static final Transformer<TripGroup, Trip> DISPLAY_TRIP_TRANSFORMER =
       new Transformer<TripGroup, Trip>() {

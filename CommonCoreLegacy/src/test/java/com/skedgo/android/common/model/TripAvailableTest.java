@@ -13,6 +13,7 @@ import java.io.IOException;
 import java.nio.charset.Charset;
 
 import skedgo.tripkit.routing.Availability;
+import skedgo.tripkit.routing.Trip;
 
 import static org.assertj.core.api.Assertions.assertThat;
 

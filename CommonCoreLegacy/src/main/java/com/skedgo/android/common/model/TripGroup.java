@@ -16,6 +16,8 @@ import java.util.UUID;
 
 import rx.Observable;
 import rx.subjects.PublishSubject;
+import skedgo.tripkit.routing.Trip;
+import skedgo.tripkit.routing.TripComparators;
 
 public class TripGroup implements Parcelable {
   public static final Creator<TripGroup> CREATOR = new Creator<TripGroup>() {

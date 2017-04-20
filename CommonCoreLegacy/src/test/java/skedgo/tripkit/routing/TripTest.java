@@ -1,22 +1,16 @@
-package com.skedgo.android.common.model;
+package skedgo.tripkit.routing;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import com.skedgo.android.common.BuildConfig;
 import com.skedgo.android.common.TestRunner;
+import com.skedgo.android.common.model.Utils;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.robolectric.annotation.Config;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.mockito.Mockito.eq;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
 
 @RunWith(TestRunner.class)
 @Config(constants = BuildConfig.class)

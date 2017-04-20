@@ -1,4 +1,4 @@
-package com.skedgo.android.common.model;
+package skedgo.tripkit.routing;
 
 import android.os.Parcel;
 import android.os.Parcelable;
@@ -8,6 +8,12 @@ import android.text.TextUtils;
 
 import com.google.gson.JsonObject;
 import com.google.gson.annotations.SerializedName;
+import com.skedgo.android.common.model.ITimeRange;
+import com.skedgo.android.common.model.Location;
+import com.skedgo.android.common.model.TransportMode;
+import com.skedgo.android.common.model.TripGroup;
+import com.skedgo.android.common.model.TripSegment;
+import com.skedgo.android.common.model.VehicleMode;
 import com.skedgo.android.common.util.ListUtils;
 
 import java.math.RoundingMode;
@@ -15,9 +21,6 @@ import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.Locale;
 import java.util.UUID;
-
-import skedgo.tripkit.routing.Availability;
-import skedgo.tripkit.routing.TripExtensionsKt;
 
 /**
  * @see <a href="https://redmine.buzzhives.com/projects/buzzhives/wiki/Main_API_formats#Trips">API format</a>

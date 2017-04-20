@@ -1,4 +1,4 @@
-package com.skedgo.android.common.model;
+package skedgo.tripkit.routing;
 
 import com.skedgo.android.common.BuildConfig;
 import com.skedgo.android.common.TestRunner;
@@ -12,15 +12,15 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
-import static com.skedgo.android.common.model.TripComparators.CARBON_COST_COMPARATOR;
-import static com.skedgo.android.common.model.TripComparators.DURATION_COMPARATOR;
-import static com.skedgo.android.common.model.TripComparators.MONEY_COST_COMPARATOR;
-import static com.skedgo.android.common.model.TripComparators.TIME_COMPARATOR_CHAIN;
-import static com.skedgo.android.common.model.TripComparators.WEIGHTED_SCORE_COMPARATOR;
-import static com.skedgo.android.common.model.TripComparators.compareLongs;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
+import static skedgo.tripkit.routing.TripComparators.CARBON_COST_COMPARATOR;
+import static skedgo.tripkit.routing.TripComparators.DURATION_COMPARATOR;
+import static skedgo.tripkit.routing.TripComparators.MONEY_COST_COMPARATOR;
+import static skedgo.tripkit.routing.TripComparators.TIME_COMPARATOR_CHAIN;
+import static skedgo.tripkit.routing.TripComparators.WEIGHTED_SCORE_COMPARATOR;
+import static skedgo.tripkit.routing.TripComparators.compareLongs;
 
 @RunWith(TestRunner.class)
 @Config(constants = BuildConfig.class)

@@ -2,7 +2,6 @@ package skedgo.tripkit.routing;
 
 import com.skedgo.android.common.BuildConfig;
 import com.skedgo.android.common.model.Location;
-import com.skedgo.android.common.model.Trip;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;

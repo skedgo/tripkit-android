@@ -12,7 +12,7 @@ import com.google.android.gms.maps.model.BitmapDescriptorFactory
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.LatLngBounds
 import com.google.android.gms.maps.model.MarkerOptions
-import com.skedgo.android.common.model.Trip
+import skedgo.tripkit.routing.Trip
 import com.skedgo.android.tripkit.TripKit
 import rx.Observable
 import skedgo.tripkit.samples.R

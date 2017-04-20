@@ -12,6 +12,8 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
+import skedgo.tripkit.routing.Trip;
+
 import static com.skedgo.android.common.model.GroupVisibility.COMPACT;
 import static com.skedgo.android.common.model.GroupVisibility.FULL;
 import static org.assertj.core.api.Assertions.assertThat;

@@ -2,7 +2,7 @@ package com.skedgo.android.tripkit;
 
 import android.test.UiThreadTest;
 
-import com.skedgo.android.common.model.Trip;
+import skedgo.tripkit.routing.Trip;
 import com.skedgo.android.common.model.TripGroup;
 
 import org.junit.Before;
