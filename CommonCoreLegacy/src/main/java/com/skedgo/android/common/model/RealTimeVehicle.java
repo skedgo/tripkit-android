@@ -9,6 +9,7 @@ import com.google.gson.annotations.SerializedName;
 import java.util.ArrayList;
 
 import skedgo.tripkit.routing.Occupancy;
+import skedgo.tripkit.routing.OccupancyKt;
 
 public class RealTimeVehicle implements Parcelable {
   public static final Creator<RealTimeVehicle> CREATOR = new Creator<RealTimeVehicle>() {
