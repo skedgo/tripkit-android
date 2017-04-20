@@ -5,11 +5,10 @@ import android.net.Uri;
 import android.support.annotation.Nullable;
 
 import com.skedgo.android.common.model.Location;
-import com.skedgo.android.common.model.TripSegment;
+import skedgo.tripkit.routing.TripSegment;
 import com.skedgo.android.tripkit.BookingAction;
 import com.skedgo.android.tripkit.ExternalActionParams;
 import com.skedgo.android.tripkit.GeocoderFactory;
-import com.skedgo.android.tripkit.bookingproviders.BookingResolver;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;

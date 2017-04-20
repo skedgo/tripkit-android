@@ -6,8 +6,6 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 
 import com.google.gson.annotations.SerializedName;
-import com.skedgo.android.common.model.ServiceColor;
-import com.skedgo.android.common.model.VehicleMode;
 
 /**
  * @see <a href="https://github.com/skedgo/tripkit-ios/wiki/Mode%20Identifiers">Mode Identifiers</a>

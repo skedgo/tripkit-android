@@ -6,7 +6,7 @@ import android.content.pm.PackageManager;
 import android.net.Uri;
 
 import com.skedgo.android.common.model.Location;
-import com.skedgo.android.common.model.TripSegment;
+import skedgo.tripkit.routing.TripSegment;
 import com.skedgo.android.tripkit.BookingAction;
 import com.skedgo.android.tripkit.BuildConfig;
 import com.skedgo.android.tripkit.ExternalActionParams;

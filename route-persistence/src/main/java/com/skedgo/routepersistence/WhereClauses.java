@@ -3,7 +3,7 @@ package com.skedgo.routepersistence;
 import android.support.annotation.NonNull;
 import android.util.Pair;
 
-import com.skedgo.android.common.model.TripGroup;
+import skedgo.tripkit.routing.TripGroup;
 
 import java.util.concurrent.TimeUnit;
 

@@ -1,4 +1,4 @@
-package com.skedgo.android.common.model;
+package skedgo.tripkit.routing;
 
 import android.os.Parcel;
 import android.os.Parcelable;
@@ -7,6 +7,9 @@ import android.support.annotation.Nullable;
 import android.util.Pair;
 
 import com.google.gson.annotations.SerializedName;
+import com.skedgo.android.common.model.GroupVisibility;
+import com.skedgo.android.common.model.ServiceStop;
+import com.skedgo.android.common.model.TransportMode;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -16,8 +19,6 @@ import java.util.UUID;
 
 import rx.Observable;
 import rx.subjects.PublishSubject;
-import skedgo.tripkit.routing.Trip;
-import skedgo.tripkit.routing.TripComparators;
 
 public class TripGroup implements Parcelable {
   public static final Creator<TripGroup> CREATOR = new Creator<TripGroup>() {

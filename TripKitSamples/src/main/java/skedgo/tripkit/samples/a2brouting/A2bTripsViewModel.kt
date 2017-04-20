@@ -2,7 +2,7 @@ package skedgo.tripkit.samples.a2brouting
 
 import android.content.Context
 import skedgo.tripkit.routing.Trip
-import com.skedgo.android.common.model.TripGroupComparators
+import skedgo.tripkit.routing.TripGroupComparators
 import com.skedgo.android.tripkit.TripKit
 import me.tatarka.bindingcollectionadapter2.ItemBinding
 import me.tatarka.bindingcollectionadapter2.collections.DiffObservableList

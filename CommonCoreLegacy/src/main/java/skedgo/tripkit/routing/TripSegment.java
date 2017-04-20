@@ -1,4 +1,4 @@
-package com.skedgo.android.common.model;
+package skedgo.tripkit.routing;
 
 import android.content.res.Resources;
 import android.graphics.Color;
@@ -15,6 +15,14 @@ import com.google.gson.annotations.SerializedName;
 import com.skedgo.android.common.R;
 import com.skedgo.android.common.StyleManager;
 import com.skedgo.android.common.agenda.IRealTimeElement;
+import com.skedgo.android.common.model.Booking;
+import com.skedgo.android.common.model.ITimeRange;
+import com.skedgo.android.common.model.Location;
+import com.skedgo.android.common.model.RealtimeAlert;
+import com.skedgo.android.common.model.ServiceStop;
+import com.skedgo.android.common.model.Shape;
+import com.skedgo.android.common.model.Street;
+import com.skedgo.android.common.model.TransportMode;
 import com.skedgo.android.common.rx.Var;
 import com.skedgo.android.common.util.TimeUtils;
 import com.skedgo.android.common.util.TripSegmentUtils;
@@ -25,13 +33,8 @@ import java.util.Locale;
 
 import rx.functions.Action1;
 import rx.functions.Actions;
-import skedgo.tripkit.routing.ModeInfo;
-import skedgo.tripkit.routing.SegmentType;
-import skedgo.tripkit.routing.SegmentTypeKt;
-import skedgo.tripkit.routing.Trip;
-import skedgo.tripkit.routing.TripSegmentExtensionsKt;
 
-import static com.skedgo.android.common.model.VehicleMode.createLightDrawable;
+import static skedgo.tripkit.routing.VehicleMode.createLightDrawable;
 
 public class TripSegment implements Parcelable, IRealTimeElement, ITimeRange {
   public static final String VISIBILITY_IN_SUMMARY = "in summary";
@@ -221,7 +224,7 @@ public class TripSegment implements Parcelable, IRealTimeElement, ITimeRange {
    * FIXME: Should replace this with Quantity Strings.
    * See http://developer.android.com/intl/vi/guide/topics/resources/string-resource.html#Plurals.
    */
-  static String convertStopCountToText(int stopCount) {
+  public static String convertStopCountToText(int stopCount) {
     if (stopCount > 0) {
       return String.format(Locale.US, (stopCount == 1) ? FORMAT_STOP : FORMAT_STOPS, stopCount);
     } else {
@@ -292,14 +295,6 @@ public class TripSegment implements Parcelable, IRealTimeElement, ITimeRange {
    */
   public void setStartTimeInSecs(long newStartTimeInSecs) {
     mStartTimeInSecs = newStartTimeInSecs;
-  }
-
-  public void setMetresSafe(int metresSafe) {
-    this.metresSafe = metresSafe;
-  }
-
-  public void setMetres(int metres) {
-    this.metres = metres;
   }
 
   /**
@@ -405,13 +400,13 @@ public class TripSegment implements Parcelable, IRealTimeElement, ITimeRange {
     return mServiceTripId;
   }
 
+  public void setServiceTripId(String serviceTripId) {
+    mServiceTripId = serviceTripId;
+  }
+
   @Override
   public String getOperator() {
     return mServiceOperator;
-  }
-
-  public void setServiceTripId(String serviceTripId) {
-    mServiceTripId = serviceTripId;
   }
 
   public String getServiceName() {
@@ -488,8 +483,16 @@ public class TripSegment implements Parcelable, IRealTimeElement, ITimeRange {
     return mAlerts;
   }
 
+  public void setAlerts(ArrayList<RealtimeAlert> alerts) {
+    mAlerts = alerts;
+  }
+
   public boolean getWheelchairAccessible() {
     return wheelchairAccessible;
+  }
+
+  public void setWheelchairAccessible(boolean wheelchairAccessible) {
+    this.wheelchairAccessible = wheelchairAccessible;
   }
 
   public int getWheelchairFriendliness() {
@@ -504,16 +507,16 @@ public class TripSegment implements Parcelable, IRealTimeElement, ITimeRange {
     return metres;
   }
 
+  public void setMetres(int metres) {
+    this.metres = metres;
+  }
+
   public int getMetresSafe() {
     return metresSafe;
   }
 
-  void setWheelchairAccessible(boolean wheelchairAccessible) {
-    this.wheelchairAccessible = wheelchairAccessible;
-  }
-
-  public void setAlerts(ArrayList<RealtimeAlert> alerts) {
-    mAlerts = alerts;
+  public void setMetresSafe(int metresSafe) {
+    this.metresSafe = metresSafe;
   }
 
   @Override
@@ -600,7 +603,7 @@ public class TripSegment implements Parcelable, IRealTimeElement, ITimeRange {
     return templateHashCode;
   }
 
-  void setTemplateHashCode(long templateHashCode) {
+  public void setTemplateHashCode(long templateHashCode) {
     this.templateHashCode = templateHashCode;
   }
 
@@ -774,26 +777,23 @@ public class TripSegment implements Parcelable, IRealTimeElement, ITimeRange {
     return durationWithoutTraffic;
   }
 
-  /**
-   * Visible only for testing.
-   */
-  void setDurationWithoutTraffic(long durationWithoutTraffic) {
+  public void setDurationWithoutTraffic(long durationWithoutTraffic) {
     this.durationWithoutTraffic = durationWithoutTraffic;
   }
 
-  int getStopCount() {
+  public int getStopCount() {
     return stopCount;
   }
 
-  void setStopCount(int stopCount) {
+  public void setStopCount(int stopCount) {
     this.stopCount = stopCount;
   }
 
-  @Nullable String getPlatform() {
+  @Nullable public String getPlatform() {
     return platform;
   }
 
-  void setPlatform(String platform) {
+  public void setPlatform(String platform) {
     this.platform = platform;
   }
 

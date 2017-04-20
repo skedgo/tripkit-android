@@ -10,6 +10,7 @@ import com.skedgo.android.common.R;
 import java.util.ArrayList;
 
 import skedgo.tripkit.routing.ModeInfo;
+import skedgo.tripkit.routing.VehicleMode;
 
 public class ScheduledStop extends Location {
 

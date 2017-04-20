@@ -1,4 +1,4 @@
-package com.skedgo.android.common.model;
+package skedgo.tripkit.routing;
 
 import com.skedgo.android.common.BuildConfig;
 import com.skedgo.android.common.TestRunner;
@@ -11,8 +11,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
-
-import skedgo.tripkit.routing.Trip;
 
 import static com.skedgo.android.common.model.GroupVisibility.COMPACT;
 import static com.skedgo.android.common.model.GroupVisibility.FULL;

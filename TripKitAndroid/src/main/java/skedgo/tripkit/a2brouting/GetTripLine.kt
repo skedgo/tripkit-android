@@ -8,8 +8,8 @@ import com.google.android.gms.maps.model.PolylineOptions
 import com.google.maps.android.PolyUtil
 import skedgo.tripkit.routing.SegmentType
 import com.skedgo.android.common.model.TransportMode
-import com.skedgo.android.common.model.TripSegment
-import com.skedgo.android.common.model.VehicleMode
+import skedgo.tripkit.routing.TripSegment
+import skedgo.tripkit.routing.VehicleMode
 import com.skedgo.android.common.util.PolylineEncoderUtils
 import com.skedgo.android.tripkit.LineSegment
 import rx.Observable

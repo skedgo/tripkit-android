@@ -1,4 +1,4 @@
-package com.skedgo.android.common.model;
+package skedgo.tripkit.routing;
 
 import com.skedgo.android.common.BuildConfig;
 import com.skedgo.android.common.TestRunner;

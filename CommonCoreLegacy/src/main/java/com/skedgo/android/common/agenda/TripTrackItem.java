@@ -1,7 +1,7 @@
 package com.skedgo.android.common.agenda;
 
 import com.google.gson.annotations.SerializedName;
-import com.skedgo.android.common.model.TripGroup;
+import skedgo.tripkit.routing.TripGroup;
 
 import java.util.ArrayList;
 

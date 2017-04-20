@@ -7,6 +7,8 @@ import com.google.gson.annotations.SerializedName;
 
 import java.util.List;
 
+import skedgo.tripkit.routing.ServiceColor;
+
 public class Shape implements Parcelable {
   public static final Creator<Shape> CREATOR = new Creator<Shape>() {
     public Shape createFromParcel(Parcel in) {

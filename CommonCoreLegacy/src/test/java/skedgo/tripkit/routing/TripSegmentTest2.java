@@ -1,4 +1,4 @@
-package com.skedgo.android.common.model;
+package skedgo.tripkit.routing;
 
 import android.content.Context;
 import android.content.res.Resources;
@@ -6,6 +6,9 @@ import android.content.res.Resources;
 import com.skedgo.android.common.BuildConfig;
 import com.skedgo.android.common.R;
 import com.skedgo.android.common.TestRunner;
+import com.skedgo.android.common.model.ImmutableBooking;
+import com.skedgo.android.common.model.ServiceStop;
+import com.skedgo.android.common.model.Utils;
 
 import org.assertj.core.api.Condition;
 import org.junit.Before;
@@ -18,15 +21,13 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
-import skedgo.tripkit.routing.ModeInfo;
-
-import static com.skedgo.android.common.model.TripSegment.VISIBILITY_HIDDEN;
-import static com.skedgo.android.common.model.TripSegment.VISIBILITY_IN_DETAILS;
-import static com.skedgo.android.common.model.TripSegment.VISIBILITY_IN_SUMMARY;
-import static com.skedgo.android.common.model.TripSegment.VISIBILITY_ON_MAP;
 import static junit.framework.Assert.assertFalse;
 import static junit.framework.Assert.assertTrue;
 import static org.assertj.core.api.Assertions.assertThat;
+import static skedgo.tripkit.routing.TripSegment.VISIBILITY_HIDDEN;
+import static skedgo.tripkit.routing.TripSegment.VISIBILITY_IN_DETAILS;
+import static skedgo.tripkit.routing.TripSegment.VISIBILITY_IN_SUMMARY;
+import static skedgo.tripkit.routing.TripSegment.VISIBILITY_ON_MAP;
 
 @RunWith(TestRunner.class)
 @Config(constants = BuildConfig.class)

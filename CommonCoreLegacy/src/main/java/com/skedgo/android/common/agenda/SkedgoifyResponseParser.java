@@ -6,8 +6,8 @@ import android.util.SparseArray;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonPrimitive;
-import com.skedgo.android.common.model.RoutingResponse;
-import com.skedgo.android.common.model.TripGroup;
+import skedgo.tripkit.routing.RoutingResponse;
+import skedgo.tripkit.routing.TripGroup;
 
 import org.json.JSONException;
 

@@ -1,15 +1,14 @@
-package com.skedgo.android.common.model;
+package skedgo.tripkit.routing;
 
 import android.os.Parcel;
 import android.os.Parcelable;
 import android.support.annotation.Nullable;
 
 import com.google.gson.annotations.SerializedName;
+import com.skedgo.android.common.model.Location;
+import com.skedgo.android.common.model.RealtimeAlert;
 
 import java.util.ArrayList;
-
-import skedgo.tripkit.routing.Occupancy;
-import skedgo.tripkit.routing.OccupancyKt;
 
 public class RealTimeVehicle implements Parcelable {
   public static final Creator<RealTimeVehicle> CREATOR = new Creator<RealTimeVehicle>() {
@@ -165,15 +164,15 @@ public class RealTimeVehicle implements Parcelable {
     return OccupancyKt.toOccupancy(occupancy);
   }
 
+  public void setOccupancy(@Nullable String occupancy) {
+    this.occupancy = occupancy;
+  }
+
   @Nullable public String getIcon() {
     return icon;
   }
 
   public void setIcon(@Nullable String icon) {
     this.icon = icon;
-  }
-
-  public void setOccupancy(@Nullable String occupancy) {
-    this.occupancy = occupancy;
   }
 }

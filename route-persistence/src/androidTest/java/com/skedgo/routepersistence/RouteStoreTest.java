@@ -13,8 +13,8 @@ import com.skedgo.android.common.model.GsonAdaptersBooking;
 import com.skedgo.android.common.model.GsonAdaptersRealtimeAlert;
 import com.skedgo.android.common.model.Location;
 import skedgo.tripkit.routing.Trip;
-import com.skedgo.android.common.model.TripGroup;
-import com.skedgo.android.common.model.TripSegment;
+import skedgo.tripkit.routing.TripGroup;
+import skedgo.tripkit.routing.TripSegment;
 import com.skedgo.android.common.util.LowercaseEnumTypeAdapterFactory;
 
 import org.junit.After;

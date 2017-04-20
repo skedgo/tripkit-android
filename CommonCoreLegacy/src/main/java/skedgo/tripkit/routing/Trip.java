@@ -11,9 +11,6 @@ import com.google.gson.annotations.SerializedName;
 import com.skedgo.android.common.model.ITimeRange;
 import com.skedgo.android.common.model.Location;
 import com.skedgo.android.common.model.TransportMode;
-import com.skedgo.android.common.model.TripGroup;
-import com.skedgo.android.common.model.TripSegment;
-import com.skedgo.android.common.model.VehicleMode;
 import com.skedgo.android.common.util.ListUtils;
 
 import java.math.RoundingMode;

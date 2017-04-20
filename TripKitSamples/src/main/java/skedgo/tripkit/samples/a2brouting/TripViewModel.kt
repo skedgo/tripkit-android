@@ -3,7 +3,7 @@ package skedgo.tripkit.samples.a2brouting
 import android.content.Context
 import android.databinding.ObservableField
 import skedgo.tripkit.routing.Trip
-import com.skedgo.android.common.model.TripGroup
+import skedgo.tripkit.routing.TripGroup
 import com.skedgo.android.tripkit.TripKit
 import rx.subjects.PublishSubject
 import skedgo.tripkit.routing.endDateTime

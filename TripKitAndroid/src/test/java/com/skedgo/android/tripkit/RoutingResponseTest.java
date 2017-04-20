@@ -4,10 +4,10 @@ import com.google.gson.Gson;
 import com.google.gson.JsonPrimitive;
 import com.skedgo.android.common.model.RealtimeAlert;
 import com.skedgo.android.common.model.RealtimeAlerts;
-import com.skedgo.android.common.model.RoutingResponse;
+import skedgo.tripkit.routing.RoutingResponse;
 import skedgo.tripkit.routing.Trip;
-import com.skedgo.android.common.model.TripGroup;
-import com.skedgo.android.common.model.TripSegment;
+import skedgo.tripkit.routing.TripGroup;
+import skedgo.tripkit.routing.TripSegment;
 import com.skedgo.android.common.util.Gsons;
 
 import org.assertj.core.api.Condition;

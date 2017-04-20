@@ -1,8 +1,6 @@
 package skedgo.tripkit.routing;
 
 import com.skedgo.android.common.BuildConfig;
-import com.skedgo.android.common.model.ServiceColor;
-import com.skedgo.android.common.model.TripSegment;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;

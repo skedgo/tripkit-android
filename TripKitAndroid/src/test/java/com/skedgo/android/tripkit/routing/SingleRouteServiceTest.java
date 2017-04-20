@@ -1,7 +1,7 @@
 package com.skedgo.android.tripkit.routing;
 
 import com.skedgo.android.common.model.Query;
-import com.skedgo.android.common.model.TripGroup;
+import skedgo.tripkit.routing.TripGroup;
 import com.skedgo.android.tripkit.RouteService;
 
 import org.junit.Before;

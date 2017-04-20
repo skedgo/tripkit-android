@@ -1,6 +1,5 @@
 package skedgo.tripkit.routing
 
-import com.skedgo.android.common.model.TripSegment
 import org.joda.time.DateTime
 import java.util.concurrent.TimeUnit
 

@@ -1,4 +1,4 @@
-package com.skedgo.android.common.model;
+package skedgo.tripkit.routing;
 
 import com.skedgo.android.common.BuildConfig;
 import com.skedgo.android.common.TestRunner;
@@ -7,30 +7,30 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.robolectric.annotation.Config;
 
-import static com.skedgo.android.common.model.VehicleMode.AEROPLANE;
-import static com.skedgo.android.common.model.VehicleMode.BICYCLE;
-import static com.skedgo.android.common.model.VehicleMode.BICYCLE_SHARE;
-import static com.skedgo.android.common.model.VehicleMode.BUS;
-import static com.skedgo.android.common.model.VehicleMode.CABLECAR;
-import static com.skedgo.android.common.model.VehicleMode.CAR;
-import static com.skedgo.android.common.model.VehicleMode.CAR_POOL;
-import static com.skedgo.android.common.model.VehicleMode.CAR_RIDE_SHARE;
-import static com.skedgo.android.common.model.VehicleMode.CAR_SHARE;
-import static com.skedgo.android.common.model.VehicleMode.COACH;
-import static com.skedgo.android.common.model.VehicleMode.FERRY;
-import static com.skedgo.android.common.model.VehicleMode.MONORAIL;
-import static com.skedgo.android.common.model.VehicleMode.MOTORBIKE;
-import static com.skedgo.android.common.model.VehicleMode.PARKING;
-import static com.skedgo.android.common.model.VehicleMode.PUBLIC_TRANSPORT;
-import static com.skedgo.android.common.model.VehicleMode.SHUTTLE_BUS;
-import static com.skedgo.android.common.model.VehicleMode.SUBWAY;
-import static com.skedgo.android.common.model.VehicleMode.TAXI;
-import static com.skedgo.android.common.model.VehicleMode.TRAIN;
-import static com.skedgo.android.common.model.VehicleMode.TRAIN_INTERCITY;
-import static com.skedgo.android.common.model.VehicleMode.TRAM;
-import static com.skedgo.android.common.model.VehicleMode.WALK;
-import static com.skedgo.android.common.model.VehicleMode.from;
 import static org.assertj.core.api.Assertions.assertThat;
+import static skedgo.tripkit.routing.VehicleMode.AEROPLANE;
+import static skedgo.tripkit.routing.VehicleMode.BICYCLE;
+import static skedgo.tripkit.routing.VehicleMode.BICYCLE_SHARE;
+import static skedgo.tripkit.routing.VehicleMode.BUS;
+import static skedgo.tripkit.routing.VehicleMode.CABLECAR;
+import static skedgo.tripkit.routing.VehicleMode.CAR;
+import static skedgo.tripkit.routing.VehicleMode.CAR_POOL;
+import static skedgo.tripkit.routing.VehicleMode.CAR_RIDE_SHARE;
+import static skedgo.tripkit.routing.VehicleMode.CAR_SHARE;
+import static skedgo.tripkit.routing.VehicleMode.COACH;
+import static skedgo.tripkit.routing.VehicleMode.FERRY;
+import static skedgo.tripkit.routing.VehicleMode.MONORAIL;
+import static skedgo.tripkit.routing.VehicleMode.MOTORBIKE;
+import static skedgo.tripkit.routing.VehicleMode.PARKING;
+import static skedgo.tripkit.routing.VehicleMode.PUBLIC_TRANSPORT;
+import static skedgo.tripkit.routing.VehicleMode.SHUTTLE_BUS;
+import static skedgo.tripkit.routing.VehicleMode.SUBWAY;
+import static skedgo.tripkit.routing.VehicleMode.TAXI;
+import static skedgo.tripkit.routing.VehicleMode.TRAIN;
+import static skedgo.tripkit.routing.VehicleMode.TRAIN_INTERCITY;
+import static skedgo.tripkit.routing.VehicleMode.TRAM;
+import static skedgo.tripkit.routing.VehicleMode.WALK;
+import static skedgo.tripkit.routing.VehicleMode.from;
 
 @RunWith(TestRunner.class)
 @Config(constants = BuildConfig.class)

@@ -3,9 +3,9 @@ package com.skedgo.android.tripkit;
 import android.content.res.Resources;
 
 import com.google.gson.Gson;
-import com.skedgo.android.common.model.RoutingResponse;
+import skedgo.tripkit.routing.RoutingResponse;
 import skedgo.tripkit.routing.Trip;
-import com.skedgo.android.common.model.TripGroup;
+import skedgo.tripkit.routing.TripGroup;
 
 import org.junit.Before;
 import org.junit.Test;

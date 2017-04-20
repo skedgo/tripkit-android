@@ -1,4 +1,4 @@
-package com.skedgo.android.common.model;
+package skedgo.tripkit.routing;
 
 import android.content.res.Resources;
 import android.text.TextUtils;
@@ -9,6 +9,7 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonPrimitive;
 import com.google.gson.annotations.SerializedName;
+import com.skedgo.android.common.model.RealtimeAlert;
 import com.skedgo.android.common.util.TripSegmentListResolver;
 
 import org.apache.commons.collections4.CollectionUtils;
@@ -18,9 +19,6 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
-
-import skedgo.tripkit.routing.Trip;
-import skedgo.tripkit.routing.TripComparators;
 
 public class RoutingResponse {
   public static final String TEMPLATE_DIRECTION = "<DIRECTION>";

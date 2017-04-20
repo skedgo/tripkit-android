@@ -5,7 +5,7 @@ import android.support.annotation.Nullable;
 
 import com.skedgo.android.common.R;
 import com.skedgo.android.common.model.Location;
-import com.skedgo.android.common.model.TripSegment;
+import skedgo.tripkit.routing.TripSegment;
 
 public final class TripSegmentUtils {
   public static final String TEMPLATE_TIME = "<TIME>";

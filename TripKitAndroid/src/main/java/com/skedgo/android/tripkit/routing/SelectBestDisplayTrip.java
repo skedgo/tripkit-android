@@ -4,7 +4,7 @@ import android.support.annotation.NonNull;
 
 import skedgo.tripkit.routing.Trip;
 import skedgo.tripkit.routing.TripComparators;
-import com.skedgo.android.common.model.TripGroup;
+import skedgo.tripkit.routing.TripGroup;
 
 import java.util.Collections;
 import java.util.List;

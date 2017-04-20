@@ -1,4 +1,4 @@
-package com.skedgo.android.common.model;
+package skedgo.tripkit.routing;
 
 import android.os.Parcel;
 
@@ -7,6 +7,10 @@ import com.google.gson.GsonBuilder;
 import com.google.gson.JsonObject;
 import com.skedgo.android.common.BuildConfig;
 import com.skedgo.android.common.TestRunner;
+import com.skedgo.android.common.model.GsonAdaptersBooking;
+import com.skedgo.android.common.model.ImmutableBooking;
+import com.skedgo.android.common.model.Location;
+import com.skedgo.android.common.model.Utils;
 import com.skedgo.android.common.util.LowercaseEnumTypeAdapterFactory;
 
 import org.apache.commons.io.IOUtils;
@@ -17,9 +21,6 @@ import org.robolectric.annotation.Config;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Random;
-
-import skedgo.tripkit.routing.ModeInfo;
-import skedgo.tripkit.routing.SegmentType;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -216,20 +217,6 @@ public class TripSegmentTest {
     assertThat(actual.getWheelchairAccessible()).isFalse();
   }
 
-  private ArrayList<TripSegment> createSamplePlaneSegments() {
-    final ArrayList<TripSegment> planeSegments = new ArrayList<>();
-    final Random random = new Random();
-    for (int i = 0; i < 10; i++) {
-      final String provider = String.valueOf(random.nextInt());
-      final TripSegment segment = new TripSegment();
-      segment.setType(SegmentType.SCHEDULED);
-      segment.setServiceTripId("id_" + provider);
-      segment.setTransportModeId("in_air_" + provider);
-      planeSegments.add(segment);
-    }
-    return planeSegments;
-  }
-
   @Test
   public void shouldParsePayIQConfirmationSegment() throws IOException {
 
@@ -252,13 +239,6 @@ public class TripSegmentTest {
     assertThat(segment.getBooking()).isNotNull();
     assertThat(segment.getBooking().getConfirmation()).isNotNull();
 
-  }
-
-  private Gson bookingGson() {
-    return new GsonBuilder()
-        .registerTypeAdapterFactory(new LowercaseEnumTypeAdapterFactory())
-        .registerTypeAdapterFactory(new GsonAdaptersBooking())
-        .create();
   }
 
   public void shouldParseMetresAndMetresSafe() throws Exception {
@@ -305,5 +285,26 @@ public class TripSegmentTest {
     Parcel parcel = Utils.parcel(tripSegment);
     TripSegment actual = TripSegment.CREATOR.createFromParcel(parcel);
     assertThat(actual.getMetresSafe()).isEqualTo(17);
+  }
+
+  private ArrayList<TripSegment> createSamplePlaneSegments() {
+    final ArrayList<TripSegment> planeSegments = new ArrayList<>();
+    final Random random = new Random();
+    for (int i = 0; i < 10; i++) {
+      final String provider = String.valueOf(random.nextInt());
+      final TripSegment segment = new TripSegment();
+      segment.setType(SegmentType.SCHEDULED);
+      segment.setServiceTripId("id_" + provider);
+      segment.setTransportModeId("in_air_" + provider);
+      planeSegments.add(segment);
+    }
+    return planeSegments;
+  }
+
+  private Gson bookingGson() {
+    return new GsonBuilder()
+        .registerTypeAdapterFactory(new LowercaseEnumTypeAdapterFactory())
+        .registerTypeAdapterFactory(new GsonAdaptersBooking())
+        .create();
   }
 }

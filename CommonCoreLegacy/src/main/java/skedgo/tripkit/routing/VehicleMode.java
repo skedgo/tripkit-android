@@ -1,4 +1,4 @@
-package com.skedgo.android.common.model;
+package skedgo.tripkit.routing;
 
 import android.content.res.Resources;
 import android.graphics.Color;
@@ -12,8 +12,6 @@ import android.text.TextUtils;
 import com.skedgo.android.common.R;
 
 import java.util.Locale;
-
-import skedgo.tripkit.routing.ModeInfo;
 
 /**
  * As of v11, this denotes local transport icons.
@@ -98,7 +96,7 @@ public enum VehicleMode {
   /**
    * FIXME: This is view-related logic.
    */
-  static Drawable createLightDrawable(@NonNull Resources resources, int iconRes) {
+  public static Drawable createLightDrawable(@NonNull Resources resources, int iconRes) {
     Drawable drawable = resources.getDrawable(iconRes);
     if (drawable != null) {
       drawable = drawable.mutate();

@@ -4,8 +4,8 @@ import android.content.res.Resources;
 
 import com.google.gson.Gson;
 import com.skedgo.android.common.model.Region;
-import com.skedgo.android.common.model.RoutingResponse;
-import com.skedgo.android.common.model.TripGroup;
+import skedgo.tripkit.routing.RoutingResponse;
+import skedgo.tripkit.routing.TripGroup;
 import com.skedgo.android.tripkit.RoutingUserError;
 
 import org.apache.commons.collections4.CollectionUtils;

@@ -5,7 +5,7 @@ import android.test.AndroidTestCase;
 import com.google.gson.Gson;
 import com.google.gson.stream.JsonReader;
 import com.skedgo.android.common.model.Location;
-import com.skedgo.android.common.model.RealTimeVehicle;
+import skedgo.tripkit.routing.RealTimeVehicle;
 import com.skedgo.android.common.model.Shape;
 
 import java.io.IOException;

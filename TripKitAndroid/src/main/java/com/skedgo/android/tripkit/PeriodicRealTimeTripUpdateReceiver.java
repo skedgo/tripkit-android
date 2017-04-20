@@ -1,7 +1,7 @@
 package com.skedgo.android.tripkit;
 
 import skedgo.tripkit.routing.Trip;
-import com.skedgo.android.common.model.TripGroup;
+import skedgo.tripkit.routing.TripGroup;
 
 import org.immutables.value.Value;
 
