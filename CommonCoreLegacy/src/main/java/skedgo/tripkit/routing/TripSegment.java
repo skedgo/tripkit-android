@@ -281,7 +281,7 @@ public class TripSegment implements Parcelable, IRealTimeElement, ITimeRange {
   }
 
   /**
-   * Use {@link TripSegmentExtensionsKt#startDateTime(TripSegment)} instead.
+   * Use {@link TripSegmentExtensionsKt#getStartDateTime(TripSegment)} instead.
    */
   @Deprecated
   @Override
@@ -297,7 +297,7 @@ public class TripSegment implements Parcelable, IRealTimeElement, ITimeRange {
   }
 
   /**
-   * Use {@link TripSegmentExtensionsKt#endDateTime(TripSegment)} instead.
+   * Use {@link TripSegmentExtensionsKt#getEndDateTime(TripSegment)} instead.
    */
   @Deprecated
   @Override

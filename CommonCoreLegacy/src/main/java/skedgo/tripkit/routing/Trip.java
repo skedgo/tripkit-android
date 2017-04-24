@@ -120,7 +120,7 @@ public class Trip implements Parcelable, ITimeRange {
   }
 
   /**
-   * Use {@link TripExtensionsKt#startDateTime(Trip)} instead.
+   * Use {@link TripExtensionsKt#getStartDateTime(Trip)} instead.
    */
   @Deprecated
   public long getStartTimeInSecs() {
@@ -135,7 +135,7 @@ public class Trip implements Parcelable, ITimeRange {
   }
 
   /**
-   * Use {@link TripExtensionsKt#endDateTime(Trip)} instead.
+   * Use {@link TripExtensionsKt#getEndDateTime(Trip)} instead.
    */
   @Deprecated
   public long getEndTimeInSecs() {

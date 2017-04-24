@@ -6,17 +6,17 @@ import java.util.concurrent.TimeUnit
 /**
  * Gets a start date-time with time-zone.
  */
-fun Trip.startDateTime(): DateTime = DateTime(
+val Trip.startDateTime: DateTime get() = DateTime(
     TimeUnit.SECONDS.toMillis(startTimeInSecs),
-    from.getDateTimeZone()
+    from.dateTimeZone
 )
 
 /**
  * Get an end date-time with time-zone.
  */
-fun Trip.endDateTime(): DateTime = DateTime(
+val Trip.endDateTime: DateTime get() = DateTime(
     TimeUnit.SECONDS.toMillis(endTimeInSecs),
-    to.getDateTimeZone()
+    to.dateTimeZone
 )
 
 /**

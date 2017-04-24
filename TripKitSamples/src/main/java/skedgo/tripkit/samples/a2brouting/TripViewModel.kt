@@ -2,13 +2,9 @@ package skedgo.tripkit.samples.a2brouting
 
 import android.content.Context
 import android.databinding.ObservableField
-import skedgo.tripkit.routing.Trip
-import skedgo.tripkit.routing.TripGroup
 import com.skedgo.android.tripkit.TripKit
 import rx.subjects.PublishSubject
-import skedgo.tripkit.routing.endDateTime
-import skedgo.tripkit.routing.getSummarySegments
-import skedgo.tripkit.routing.startDateTime
+import skedgo.tripkit.routing.*
 import java.util.concurrent.TimeUnit
 
 class TripViewModel(
@@ -38,8 +34,8 @@ class TripViewModel(
 
   init {
     val printTime = TripKit.getInstance().dateTimeComponent().printTime()
-    printTime.execute(representativeTrip.startDateTime())
-        .withLatestFrom(printTime.execute(representativeTrip.endDateTime())) {
+    printTime.execute(representativeTrip.startDateTime)
+        .withLatestFrom(printTime.execute(representativeTrip.endDateTime)) {
           startTimeText, endTimeText ->
           "Leave at $startTimeText, arrive by $endTimeText"
         }

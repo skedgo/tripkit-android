@@ -9,7 +9,7 @@ class LocationExtensionsKtTest {
   @Test fun shouldConvertToDateTimeZoneCorrectly() {
     val location = Location()
     location.timeZone = "Asia/Bangkok"
-    assertThat(location.getDateTimeZone())
+    assertThat(location.dateTimeZone)
         .isEqualTo(DateTimeZone.forID("Asia/Bangkok"))
   }
 }
