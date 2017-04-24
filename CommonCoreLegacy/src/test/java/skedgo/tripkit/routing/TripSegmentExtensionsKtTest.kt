@@ -15,7 +15,7 @@ class TripSegmentExtensionsKtTest {
     segment.from = departureLocation
     segment.startTimeInSecs = DateTime.parse("2012-06-30T00:00").toSeconds()
 
-    assertThat(segment.startDateTime()).isEqualTo(
+    assertThat(segment.startDateTime).isEqualTo(
         DateTime.parse("2012-06-30T00:00")
             .withZone(DateTimeZone.forID("Asia/Bangkok"))
     )
@@ -29,7 +29,7 @@ class TripSegmentExtensionsKtTest {
     segment.to = arrival
     segment.endTimeInSecs = DateTime.parse("2012-06-30T00:00").toSeconds()
 
-    assertThat(segment.endDateTime()).isEqualTo(
+    assertThat(segment.endDateTime).isEqualTo(
         DateTime.parse("2012-06-30T00:00")
             .withZone(DateTimeZone.forID("Asia/Bangkok"))
     )
