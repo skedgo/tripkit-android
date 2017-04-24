@@ -2,7 +2,7 @@ package skedgo.tripkit.samples.a2brouting
 
 import android.content.Context
 import android.databinding.ObservableField
-import com.skedgo.android.tripkit.TripKit
+import skedgo.tripkit.android.TripKit
 import rx.subjects.PublishSubject
 import skedgo.tripkit.routing.*
 import java.util.concurrent.TimeUnit

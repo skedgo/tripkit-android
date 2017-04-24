@@ -1,5 +1,6 @@
 package com.skedgo.android.tripkit;
 
+import skedgo.tripkit.android.TripKit;
 import skedgo.tripkit.routing.Trip;
 import skedgo.tripkit.routing.TripGroup;
 

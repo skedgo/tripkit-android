@@ -14,9 +14,10 @@ import java.util.concurrent.TimeUnit;
 import rx.Observable;
 import rx.Subscriber;
 import rx.functions.Actions;
+import skedgo.tripkit.android.TripKit;
 
 public final class FetchRegionsService extends GcmTaskService {
-  static Observable<Void> scheduleAsync(@NonNull final Context context) {
+  public static Observable<Void> scheduleAsync(@NonNull final Context context) {
     return Observable.create(new Observable.OnSubscribe<Void>() {
       @Override public void call(Subscriber<? super Void> subscriber) {
         final OneoffTask task = new OneoffTask.Builder()

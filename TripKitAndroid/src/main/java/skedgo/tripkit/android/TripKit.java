@@ -1,8 +1,17 @@
-package com.skedgo.android.tripkit;
+package skedgo.tripkit.android;
 
 import android.content.Context;
 import android.support.annotation.NonNull;
 
+import com.skedgo.android.tripkit.Configs;
+import com.skedgo.android.tripkit.DaggerTripKit;
+import com.skedgo.android.tripkit.FetchRegionsService;
+import com.skedgo.android.tripkit.HttpClientModule;
+import com.skedgo.android.tripkit.LocationInfoService;
+import com.skedgo.android.tripkit.MainModule;
+import com.skedgo.android.tripkit.RegionService;
+import com.skedgo.android.tripkit.RouteService;
+import com.skedgo.android.tripkit.TripUpdater;
 import com.skedgo.android.tripkit.bookingproviders.BookingResolver;
 import com.skedgo.android.tripkit.routing.RoutingModule;
 import com.skedgo.android.tripkit.tsp.TspModule;
@@ -12,8 +21,6 @@ import javax.inject.Singleton;
 import dagger.Component;
 import rx.functions.Action1;
 import rx.functions.Actions;
-import skedgo.tripkit.a2brouting.A2bRoutingComponent;
-import skedgo.tripkit.datetime.DateTimeComponent;
 
 @Singleton
 @Component(modules = {
@@ -85,5 +92,5 @@ public abstract class TripKit {
   public abstract A2bRoutingComponent a2bRoutingComponent();
   public abstract DateTimeComponent dateTimeComponent();
 
-  abstract Action1<Throwable> getErrorHandler();
+  public abstract Action1<Throwable> getErrorHandler();
 }

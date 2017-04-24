@@ -37,6 +37,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 import rx.functions.Action1;
 import rx.functions.Func0;
 import rx.schedulers.Schedulers;
+import skedgo.tripkit.android.TripKit;
 import skedgo.tripkit.configuration.AppVersionNameRepository;
 
 @Module
