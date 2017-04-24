@@ -4,7 +4,6 @@ import android.content.Context;
 import android.support.annotation.NonNull;
 
 import com.skedgo.android.tripkit.Configs;
-import com.skedgo.android.tripkit.DaggerTripKit;
 import com.skedgo.android.tripkit.FetchRegionsService;
 import com.skedgo.android.tripkit.HttpClientModule;
 import com.skedgo.android.tripkit.LocationInfoService;
