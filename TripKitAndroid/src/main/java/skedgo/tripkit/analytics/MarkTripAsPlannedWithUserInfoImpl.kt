@@ -1,7 +1,7 @@
-package com.skedgo.android.tripkit
+/* FIXME: Move this class to the TripKitData module. */
+package skedgo.tripkit.analytics
 
 import rx.Completable
-import skedgo.tripkit.analytics.MarkTripAsPlannedWithUserInfo
 
 internal class MarkTripAsPlannedWithUserInfoImpl internal constructor(
     private val markTripAsPlannedApi: MarkTripAsPlannedApi

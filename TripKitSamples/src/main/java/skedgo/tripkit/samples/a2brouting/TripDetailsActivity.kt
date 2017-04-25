@@ -12,9 +12,9 @@ import com.google.android.gms.maps.model.BitmapDescriptorFactory
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.LatLngBounds
 import com.google.android.gms.maps.model.MarkerOptions
-import skedgo.tripkit.routing.Trip
-import com.skedgo.android.tripkit.TripKit
 import rx.Observable
+import skedgo.tripkit.android.TripKit
+import skedgo.tripkit.routing.Trip
 import skedgo.tripkit.samples.R
 import skedgo.tripkit.samples.databinding.TripDetailsBinding
 
@@ -29,7 +29,7 @@ class TripDetailsActivity : AppCompatActivity() {
 
   val trip: Trip by lazy { intent.getParcelableExtra<Trip>(tripKey) }
   val viewModel by lazy { TripDetailsViewModel(this, trip) }
-  val getTripLine = TripKit.getInstance().a2bRoutingComponent().getTripLine()
+  val getTripLine = TripKit.getInstance().a2bRoutingComponent().getTripLine
 
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)

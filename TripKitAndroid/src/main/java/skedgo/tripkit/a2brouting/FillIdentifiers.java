@@ -1,12 +1,11 @@
-package com.skedgo.android.tripkit.routing;
-
-import skedgo.tripkit.routing.Trip;
-import skedgo.tripkit.routing.TripGroup;
+package skedgo.tripkit.a2brouting;
 
 import java.util.List;
 import java.util.concurrent.atomic.AtomicLong;
 
 import rx.functions.Func1;
+import skedgo.tripkit.routing.Trip;
+import skedgo.tripkit.routing.TripGroup;
 
 /**
  * Fills id for {@link Trip}.

@@ -1,16 +1,15 @@
-package com.skedgo.android.tripkit.routing;
+package skedgo.tripkit.a2brouting;
 
 import android.support.annotation.NonNull;
 
 import com.skedgo.android.common.model.Query;
-import skedgo.tripkit.routing.TripGroup;
-import com.skedgo.android.tripkit.RouteService;
 
 import java.util.List;
 
 import rx.Observable;
 import rx.subjects.PublishSubject;
 import rx.subjects.Subject;
+import skedgo.tripkit.routing.TripGroup;
 
 /**
  * A decorator of {@link RouteService} that performs only one routing request.

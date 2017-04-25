@@ -1,4 +1,4 @@
-package com.skedgo.android.tripkit;
+package skedgo.tripkit.android;
 
 import android.content.Context;
 import android.support.annotation.NonNull;
@@ -16,7 +16,7 @@ import rx.Subscriber;
 import rx.functions.Actions;
 
 public final class FetchRegionsService extends GcmTaskService {
-  static Observable<Void> scheduleAsync(@NonNull final Context context) {
+  public static Observable<Void> scheduleAsync(@NonNull final Context context) {
     return Observable.create(new Observable.OnSubscribe<Void>() {
       @Override public void call(Subscriber<? super Void> subscriber) {
         final OneoffTask task = new OneoffTask.Builder()

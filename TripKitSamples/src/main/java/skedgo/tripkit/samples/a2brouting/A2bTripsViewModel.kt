@@ -1,9 +1,6 @@
 package skedgo.tripkit.samples.a2brouting
 
 import android.content.Context
-import skedgo.tripkit.routing.Trip
-import skedgo.tripkit.routing.TripGroupComparators
-import com.skedgo.android.tripkit.TripKit
 import me.tatarka.bindingcollectionadapter2.ItemBinding
 import me.tatarka.bindingcollectionadapter2.collections.DiffObservableList
 import org.joda.time.DateTime
@@ -13,6 +10,9 @@ import rx.subjects.BehaviorSubject
 import rx.subjects.PublishSubject
 import skedgo.tripkit.a2brouting.A2bRoutingRequest
 import skedgo.tripkit.a2brouting.RequestTime.DepartNow
+import skedgo.tripkit.android.TripKit
+import skedgo.tripkit.routing.Trip
+import skedgo.tripkit.routing.TripGroupComparators
 import skedgo.tripkit.samples.BR
 import skedgo.tripkit.samples.R
 
@@ -30,7 +30,7 @@ class A2bTripsViewModel constructor(
       .defer {
         val getA2bRoutingResults = TripKit.getInstance()
             .a2bRoutingComponent()
-            .getA2bRoutingResults()
+            .getA2bRoutingResults
         getA2bRoutingResults.execute(
             A2bRoutingRequest.builder()
                 .origin(Pair(34.193984, -118.392930))

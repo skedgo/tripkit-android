@@ -2,7 +2,7 @@ package skedgo.tripkit.samples
 
 import android.app.Application
 import com.skedgo.android.tripkit.Configs
-import com.skedgo.android.tripkit.TripKit
+import skedgo.tripkit.android.TripKit
 import net.danlew.android.joda.JodaTimeAndroid
 import skedgo.tripkit.configuration.Key
 

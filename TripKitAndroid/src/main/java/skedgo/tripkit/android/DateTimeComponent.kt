@@ -1,6 +1,8 @@
-package skedgo.tripkit.datetime
+package skedgo.tripkit.android
 
 import dagger.Subcomponent
+import skedgo.tripkit.datetime.DateTimeDataModule
+import skedgo.tripkit.datetime.PrintTime
 import javax.inject.Singleton
 
 /**
@@ -11,5 +13,5 @@ import javax.inject.Singleton
     DateTimeDataModule::class
 ))
 interface DateTimeComponent {
-  fun printTime(): PrintTime
+  val printTime: PrintTime
 }

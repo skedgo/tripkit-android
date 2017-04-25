@@ -1,7 +1,5 @@
-package com.skedgo.android.tripkit.routing;
+package skedgo.tripkit.a2brouting;
 
-import skedgo.tripkit.routing.Trip;
-import skedgo.tripkit.routing.TripGroup;
 import com.skedgo.android.tripkit.BuildConfig;
 import com.skedgo.android.tripkit.TestRunner;
 
@@ -11,6 +9,9 @@ import org.robolectric.annotation.Config;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+
+import skedgo.tripkit.routing.Trip;
+import skedgo.tripkit.routing.TripGroup;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
