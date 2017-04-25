@@ -3,10 +3,10 @@ package skedgo.tripkit.a2brouting
 import com.skedgo.android.common.model.Location
 import com.skedgo.android.common.model.Query
 import com.skedgo.android.common.model.TimeTag
-import skedgo.tripkit.routing.TripGroup
 import com.skedgo.android.tripkit.RouteService
 import rx.Observable
 import skedgo.tripkit.a2brouting.RequestTime.*
+import skedgo.tripkit.routing.TripGroup
 import skedgo.tripkit.routing.toSeconds
 import javax.inject.Inject
 
