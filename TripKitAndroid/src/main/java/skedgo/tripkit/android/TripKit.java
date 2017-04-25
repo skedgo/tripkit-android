@@ -89,6 +89,7 @@ public abstract class TripKit {
   public abstract TripUpdater getTripUpdater();
 
   public abstract A2bRoutingComponent a2bRoutingComponent();
+  public abstract AnalyticsComponent analyticsComponent();
   public abstract DateTimeComponent dateTimeComponent();
 
   public abstract Action1<Throwable> getErrorHandler();
