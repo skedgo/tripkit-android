@@ -13,5 +13,5 @@ import javax.inject.Singleton
     DateTimeDataModule::class
 ))
 interface DateTimeComponent {
-  fun printTime(): PrintTime
+  val printTime: PrintTime
 }
