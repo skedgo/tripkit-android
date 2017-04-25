@@ -1,4 +1,5 @@
-package com.skedgo.android.tripkit
+/* FIXME: Move this class to the TripKitData module. */
+package skedgo.tripkit.analytics
 
 import com.google.gson.JsonObject
 

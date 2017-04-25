@@ -1,8 +1,7 @@
+/* FIXME: Move this class to the TripKitData module. */
 package skedgo.tripkit.analytics
 
 import com.google.gson.Gson
-import com.skedgo.android.tripkit.MarkTripAsPlannedApi
-import com.skedgo.android.tripkit.MarkTripAsPlannedWithUserInfoImpl
 import dagger.Module
 import dagger.Provides
 import okhttp3.OkHttpClient
@@ -11,7 +10,6 @@ import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
 import rx.schedulers.Schedulers
 
-/* FIXME: Move this class to the TripKitData module. */
 @Module
 class AnalyticsDataModule {
   @Provides fun markTripAsPlannedWithUserInfo(
