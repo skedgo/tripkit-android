@@ -8,9 +8,11 @@ import android.text.TextUtils;
 import com.skedgo.android.common.model.Location;
 import com.skedgo.android.common.model.Query;
 import com.skedgo.android.common.model.Region;
+
+import skedgo.tripkit.a2brouting.RouteService;
 import skedgo.tripkit.routing.TripGroup;
 import com.skedgo.android.tripkit.routing.ExtraQueryMapProvider;
-import com.skedgo.android.tripkit.routing.FailoverRoutingApi;
+import skedgo.tripkit.a2brouting.FailoverRoutingApi;
 
 import java.util.Collections;
 import java.util.HashMap;

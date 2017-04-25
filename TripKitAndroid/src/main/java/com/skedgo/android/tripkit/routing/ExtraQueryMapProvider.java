@@ -4,6 +4,8 @@ import android.support.annotation.NonNull;
 
 import java.util.Map;
 
+import skedgo.tripkit.a2brouting.RoutingApi;
+
 /**
  * A decorator that puts additional query params
  * into the query map that is supplied into {@link RoutingApi}.

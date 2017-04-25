@@ -10,6 +10,8 @@ import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
 import rx.schedulers.Schedulers;
+import skedgo.tripkit.a2brouting.FailoverRoutingApi;
+import skedgo.tripkit.a2brouting.RoutingApi;
 
 @Module
 public class RoutingModule {

@@ -4,12 +4,10 @@ import android.content.Context;
 import android.support.annotation.NonNull;
 
 import com.skedgo.android.tripkit.Configs;
-import com.skedgo.android.tripkit.FetchRegionsService;
 import com.skedgo.android.tripkit.HttpClientModule;
 import com.skedgo.android.tripkit.LocationInfoService;
 import com.skedgo.android.tripkit.MainModule;
 import com.skedgo.android.tripkit.RegionService;
-import com.skedgo.android.tripkit.RouteService;
 import com.skedgo.android.tripkit.TripUpdater;
 import com.skedgo.android.tripkit.bookingproviders.BookingResolver;
 import com.skedgo.android.tripkit.routing.RoutingModule;
@@ -20,6 +18,7 @@ import javax.inject.Singleton;
 import dagger.Component;
 import rx.functions.Action1;
 import rx.functions.Actions;
+import skedgo.tripkit.a2brouting.RouteService;
 
 @Singleton
 @Component(modules = {

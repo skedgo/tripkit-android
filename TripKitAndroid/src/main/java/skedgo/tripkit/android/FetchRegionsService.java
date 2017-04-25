@@ -1,4 +1,4 @@
-package com.skedgo.android.tripkit;
+package skedgo.tripkit.android;
 
 import android.content.Context;
 import android.support.annotation.NonNull;
@@ -14,7 +14,6 @@ import java.util.concurrent.TimeUnit;
 import rx.Observable;
 import rx.Subscriber;
 import rx.functions.Actions;
-import skedgo.tripkit.android.TripKit;
 
 public final class FetchRegionsService extends GcmTaskService {
   public static Observable<Void> scheduleAsync(@NonNull final Context context) {

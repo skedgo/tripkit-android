@@ -4,7 +4,7 @@ import com.skedgo.android.common.model.Location;
 import com.skedgo.android.common.model.Query;
 import com.skedgo.android.common.model.TimeTag;
 import com.skedgo.android.tripkit.routing.ExtraQueryMapProvider;
-import com.skedgo.android.tripkit.routing.FailoverRoutingApi;
+import skedgo.tripkit.a2brouting.FailoverRoutingApi;
 
 import org.assertj.core.data.MapEntry;
 import org.assertj.core.util.Maps;

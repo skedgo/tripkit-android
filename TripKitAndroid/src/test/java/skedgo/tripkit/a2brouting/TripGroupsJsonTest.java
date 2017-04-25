@@ -1,9 +1,7 @@
-package com.skedgo.android.tripkit.routing;
+package skedgo.tripkit.a2brouting;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
-import skedgo.tripkit.routing.Trip;
-import skedgo.tripkit.routing.TripGroup;
 import com.skedgo.android.tripkit.BuildConfig;
 import com.skedgo.android.tripkit.TestRunner;
 
@@ -25,6 +23,8 @@ import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
 import rx.observers.TestSubscriber;
+import skedgo.tripkit.routing.Trip;
+import skedgo.tripkit.routing.TripGroup;
 import thuytrinh.mockwebserverrule.MockWebServerRule;
 
 import static org.assertj.core.api.Assertions.assertThat;

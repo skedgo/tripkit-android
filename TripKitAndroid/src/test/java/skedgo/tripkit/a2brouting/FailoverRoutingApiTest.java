@@ -1,8 +1,6 @@
-package com.skedgo.android.tripkit.routing;
+package skedgo.tripkit.a2brouting;
 
 import com.google.gson.Gson;
-import skedgo.tripkit.routing.RoutingResponse;
-import skedgo.tripkit.routing.TripGroup;
 import com.skedgo.android.tripkit.BuildConfig;
 import com.skedgo.android.tripkit.RoutingUserError;
 import com.skedgo.android.tripkit.TestRunner;
@@ -23,6 +21,8 @@ import java.util.List;
 
 import rx.Observable;
 import rx.observers.TestSubscriber;
+import skedgo.tripkit.routing.RoutingResponse;
+import skedgo.tripkit.routing.TripGroup;
 
 import static org.mockito.Matchers.anyListOf;
 import static org.mockito.Matchers.anyMapOf;

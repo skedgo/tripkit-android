@@ -1,15 +1,14 @@
-package com.skedgo.android.tripkit.routing;
+package skedgo.tripkit.a2brouting;
 
 import android.support.annotation.NonNull;
-
-import skedgo.tripkit.routing.Trip;
-import skedgo.tripkit.routing.TripComparators;
-import skedgo.tripkit.routing.TripGroup;
 
 import java.util.Collections;
 import java.util.List;
 
 import rx.functions.Func1;
+import skedgo.tripkit.routing.Trip;
+import skedgo.tripkit.routing.TripComparators;
+import skedgo.tripkit.routing.TripGroup;
 
 import static org.apache.commons.collections4.CollectionUtils.isNotEmpty;
 

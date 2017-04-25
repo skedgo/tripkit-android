@@ -1,6 +1,4 @@
-package com.skedgo.android.tripkit.routing;
-
-import skedgo.tripkit.routing.RoutingResponse;
+package skedgo.tripkit.a2brouting;
 
 import java.util.List;
 import java.util.Map;
@@ -10,6 +8,7 @@ import retrofit2.http.Query;
 import retrofit2.http.QueryMap;
 import retrofit2.http.Url;
 import rx.Observable;
+import skedgo.tripkit.routing.RoutingResponse;
 
 /**
  * Calculates door-to-door trips for the specified mode(s).

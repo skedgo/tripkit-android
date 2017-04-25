@@ -4,7 +4,7 @@
   <application>
     <!-- This will be merged into the Manifest of projects depending on this library. -->
     <service
-      android:name=".FetchRegionsService"
+      android:name="skedgo.tripkit.android.FetchRegionsService"
       android:exported="true"
       android:permission="com.google.android.gms.permission.BIND_NETWORK_TASK_SERVICE">
       <intent-filter>

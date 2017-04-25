@@ -1,8 +1,6 @@
-package com.skedgo.android.tripkit.routing;
+package skedgo.tripkit.a2brouting;
 
 import com.skedgo.android.common.model.Query;
-import skedgo.tripkit.routing.TripGroup;
-import com.skedgo.android.tripkit.RouteService;
 
 import org.junit.Before;
 import org.junit.Rule;
@@ -14,6 +12,7 @@ import org.mockito.junit.MockitoRule;
 import java.util.List;
 
 import rx.subjects.PublishSubject;
+import skedgo.tripkit.routing.TripGroup;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Matchers.any;
