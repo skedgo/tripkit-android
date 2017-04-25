@@ -4,7 +4,7 @@ import com.skedgo.android.common.model.Location;
 import com.skedgo.android.common.model.Query;
 import com.skedgo.android.common.model.TimeTag;
 import com.skedgo.android.tripkit.routing.ExtraQueryMapProvider;
-import skedgo.tripkit.a2brouting.FailoverRoutingApi;
+import skedgo.tripkit.a2brouting.FailoverA2bRoutingApi;
 
 import org.assertj.core.data.MapEntry;
 import org.assertj.core.util.Maps;
@@ -36,7 +36,7 @@ public class RouteServiceImplTest {
   @Mock Co2Preferences co2Preferences;
   @Mock TripPreferences tripPreferences;
   @Mock ExtraQueryMapProvider extraQueryMapProvider;
-  @Mock FailoverRoutingApi routingApi;
+  @Mock FailoverA2bRoutingApi routingApi;
   private RouteServiceImpl routeService;
 
   @Before public void before() {

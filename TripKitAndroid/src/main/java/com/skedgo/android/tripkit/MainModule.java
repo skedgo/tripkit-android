@@ -14,7 +14,7 @@ import com.skedgo.android.common.util.Gsons;
 import com.skedgo.android.common.util.LowercaseEnumTypeAdapterFactory;
 import com.skedgo.android.tripkit.bookingproviders.BookingResolver;
 import com.skedgo.android.tripkit.bookingproviders.BookingResolverImpl;
-import skedgo.tripkit.a2brouting.FailoverRoutingApi;
+import skedgo.tripkit.a2brouting.FailoverA2bRoutingApi;
 import com.skedgo.android.tripkit.tsp.GsonAdaptersRegionInfo;
 import com.skedgo.android.tripkit.tsp.GsonAdaptersRegionInfoBody;
 import com.skedgo.android.tripkit.tsp.GsonAdaptersRegionInfoResponse;
@@ -106,7 +106,7 @@ public class MainModule {
   }
 
   @Singleton @Provides RouteService routeService(
-      FailoverRoutingApi routingApi,
+      FailoverA2bRoutingApi routingApi,
       RegionService regionService,
       Configs configs
   ) {

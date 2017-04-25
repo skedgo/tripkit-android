@@ -10,7 +10,7 @@ import com.skedgo.android.tripkit.MainModule;
 import com.skedgo.android.tripkit.RegionService;
 import com.skedgo.android.tripkit.TripUpdater;
 import com.skedgo.android.tripkit.bookingproviders.BookingResolver;
-import com.skedgo.android.tripkit.routing.RoutingModule;
+import skedgo.tripkit.a2brouting.A2bRoutingDataModule;
 import com.skedgo.android.tripkit.tsp.TspModule;
 
 import javax.inject.Singleton;
@@ -23,7 +23,7 @@ import skedgo.tripkit.a2brouting.RouteService;
 @Singleton
 @Component(modules = {
     HttpClientModule.class,
-    RoutingModule.class,
+    A2bRoutingDataModule.class,
     TspModule.class,
     MainModule.class
 })

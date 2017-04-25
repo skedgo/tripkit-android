@@ -12,10 +12,10 @@ import skedgo.tripkit.routing.RoutingResponse;
 
 /**
  * Calculates door-to-door trips for the specified mode(s).
- * See http://skedgo.github.io/tripgo-api/swagger/#!/Routing/get_routing_json.
+ * See more at https://skedgo.github.io/tripgo-api/#tag/Routing%2Fpaths%2F~1routing.json%2Fget.
  */
-public interface RoutingApi {
-  @GET Observable<RoutingResponse> fetchRoutesAsync(
+public interface A2bRoutingApi {
+  @GET Observable<RoutingResponse> execute(
       @Url String url,
       @Query("modes") List<String> modes,
       @Query("avoid") List<String> excludedTransitModes,

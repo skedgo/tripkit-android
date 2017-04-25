@@ -34,19 +34,19 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class TripGroupsJsonTest {
   private static final Type TRIP_GROUP_TYPE = new TypeToken<List<TripGroup>>() {}.getType();
   @Rule public MockWebServerRule serverRule = new MockWebServerRule();
-  private FailoverRoutingApi api;
+  private FailoverA2bRoutingApi api;
 
   @Before public void before() {
-    final RoutingApi routingApi = new Retrofit.Builder()
+    final A2bRoutingApi a2bRoutingApi = new Retrofit.Builder()
         .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
         .addConverterFactory(GsonConverterFactory.create())
         .baseUrl(serverRule.server.url("/"))
         .build()
-        .create(RoutingApi.class);
-    api = new FailoverRoutingApi(
+        .create(A2bRoutingApi.class);
+    api = new FailoverA2bRoutingApi(
         RuntimeEnvironment.application.getResources(),
         new Gson(),
-        routingApi
+        a2bRoutingApi
     );
   }
 

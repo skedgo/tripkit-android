@@ -9,10 +9,10 @@ import com.skedgo.android.common.model.Location;
 import com.skedgo.android.common.model.Query;
 import com.skedgo.android.common.model.Region;
 
+import skedgo.tripkit.a2brouting.FailoverA2bRoutingApi;
 import skedgo.tripkit.a2brouting.RouteService;
 import skedgo.tripkit.routing.TripGroup;
 import com.skedgo.android.tripkit.routing.ExtraQueryMapProvider;
-import skedgo.tripkit.a2brouting.FailoverRoutingApi;
 
 import java.util.Collections;
 import java.util.HashMap;
@@ -29,7 +29,7 @@ final class RouteServiceImpl implements RouteService {
   @Nullable private final Co2Preferences co2Preferences;
   @Nullable private final TripPreferences tripPreferences;
   @Nullable private final ExtraQueryMapProvider extraQueryMapProvider;
-  private final FailoverRoutingApi routingApi;
+  private final FailoverA2bRoutingApi routingApi;
 
   RouteServiceImpl(
       @NonNull Func1<Query, Observable<List<Query>>> queryGenerator,
@@ -37,7 +37,7 @@ final class RouteServiceImpl implements RouteService {
       @Nullable Co2Preferences co2Preferences,
       @Nullable TripPreferences tripPreferences,
       @Nullable ExtraQueryMapProvider extraQueryMapProvider,
-      FailoverRoutingApi routingApi) {
+      FailoverA2bRoutingApi routingApi) {
     this.queryGenerator = queryGenerator;
     this.excludedTransitModesAdapter = excludedTransitModesAdapter;
     this.co2Preferences = co2Preferences;

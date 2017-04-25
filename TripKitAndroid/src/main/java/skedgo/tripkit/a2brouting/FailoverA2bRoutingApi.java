@@ -18,24 +18,24 @@ import skedgo.tripkit.routing.RoutingResponse;
 import skedgo.tripkit.routing.TripGroup;
 
 /**
- * A wrapper of {@link RoutingApi} that requests `routing.json`
+ * A wrapper of {@link A2bRoutingApi} that requests `routing.json`
  * on multiple servers w/ failover.
  */
-public class FailoverRoutingApi {
+public class FailoverA2bRoutingApi {
   private final SelectBestDisplayTrip selectBestDisplayTrip = new SelectBestDisplayTrip();
   private final FillIdentifiers fillIdentifiers = new FillIdentifiers();
   private final Resources resources;
   private final Gson gson;
-  private final RoutingApi routingApi;
+  private final A2bRoutingApi a2bRoutingApi;
 
-  public FailoverRoutingApi(
+  public FailoverA2bRoutingApi(
       Resources resources,
       Gson gson,
-      RoutingApi routingApi
+      A2bRoutingApi a2bRoutingApi
   ) {
     this.resources = resources;
     this.gson = gson;
-    this.routingApi = routingApi;
+    this.a2bRoutingApi = a2bRoutingApi;
   }
 
   /**
@@ -102,8 +102,8 @@ public class FailoverRoutingApi {
       final List<String> excludedTransitModes,
       final Map<String, Object> options
   ) {
-    return routingApi
-        .fetchRoutesAsync(url, modes, excludedTransitModes, options)
+    return a2bRoutingApi
+        .execute(url, modes, excludedTransitModes, options)
         .filter(new Func1<RoutingResponse, Boolean>() {
           @Override public Boolean call(RoutingResponse response) {
             return !(response.getErrorMessage() != null && !response.hasError());

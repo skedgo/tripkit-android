@@ -33,13 +33,13 @@ import static org.mockito.Mockito.when;
 
 @RunWith(TestRunner.class)
 @Config(constants = BuildConfig.class)
-public class FailoverRoutingApiTest {
+public class FailoverA2bRoutingApiTest {
   @Rule public MockitoRule rule = MockitoJUnit.rule();
-  @Mock RoutingApi api;
-  private FailoverRoutingApi failoverRoutingApi;
+  @Mock A2bRoutingApi api;
+  private FailoverA2bRoutingApi failoverA2bRoutingApi;
 
   @Before public void before() {
-    failoverRoutingApi = new FailoverRoutingApi(
+    failoverA2bRoutingApi = new FailoverA2bRoutingApi(
         RuntimeEnvironment.application.getResources(),
         new Gson(),
         api
@@ -48,7 +48,7 @@ public class FailoverRoutingApiTest {
 
   @Test public void shouldFailSilentlyIfMissingUrls() {
     final TestSubscriber<List<TripGroup>> subscriber = new TestSubscriber<>();
-    failoverRoutingApi.fetchRoutesAsync(
+    failoverA2bRoutingApi.fetchRoutesAsync(
         Collections.<String>emptyList(),
         Collections.<String>emptyList(),
         Collections.<String>emptyList(),
@@ -60,7 +60,7 @@ public class FailoverRoutingApiTest {
   }
 
   @Test public void shouldFailSilentlyIfAllRequestsFail() {
-    when(api.fetchRoutesAsync(
+    when(api.execute(
         anyString(),
         anyListOf(String.class),
         anyListOf(String.class),
@@ -68,7 +68,7 @@ public class FailoverRoutingApiTest {
     )).thenThrow(new RuntimeException());
 
     final TestSubscriber<List<TripGroup>> subscriber = new TestSubscriber<>();
-    failoverRoutingApi.fetchRoutesAsync(
+    failoverA2bRoutingApi.fetchRoutesAsync(
         Arrays.asList("https://www.abc.com", "https://www.def.com"),
         Arrays.asList("hyperloop", "drone"),
         Collections.<String>emptyList(),
@@ -81,7 +81,7 @@ public class FailoverRoutingApiTest {
 
   @Test public void shouldFailSilentlyIfNoTripGroupsFoundOnAllUrls() {
     final RoutingResponse response = new RoutingResponse();
-    when(api.fetchRoutesAsync(
+    when(api.execute(
         anyString(),
         anyListOf(String.class),
         anyListOf(String.class),
@@ -89,7 +89,7 @@ public class FailoverRoutingApiTest {
     )).thenReturn(Observable.just(response));
 
     final TestSubscriber<List<TripGroup>> subscriber = new TestSubscriber<>();
-    failoverRoutingApi.fetchRoutesAsync(
+    failoverA2bRoutingApi.fetchRoutesAsync(
         Arrays.asList("https://www.abc.com", "https://www.def.com"),
         Arrays.asList("hyperloop", "drone"),
         Collections.<String>emptyList(),
@@ -104,7 +104,7 @@ public class FailoverRoutingApiTest {
     final RoutingResponse response = mock(RoutingResponse.class);
     when(response.getErrorMessage()).thenReturn("Some user error");
     when(response.hasError()).thenReturn(true);
-    when(api.fetchRoutesAsync(
+    when(api.execute(
         eq("https://www.abc.com/routing.json"),
         anyListOf(String.class),
         anyListOf(String.class),
@@ -112,7 +112,7 @@ public class FailoverRoutingApiTest {
     )).thenReturn(Observable.just(response));
 
     final TestSubscriber<List<TripGroup>> subscriber = new TestSubscriber<>();
-    failoverRoutingApi.fetchRoutesAsync(
+    failoverA2bRoutingApi.fetchRoutesAsync(
         Arrays.asList("https://www.abc.com", "https://www.def.com"),
         Collections.<String>emptyList(),
         Collections.<String>emptyList(),
@@ -128,7 +128,7 @@ public class FailoverRoutingApiTest {
     final RoutingResponse response = mock(RoutingResponse.class);
     when(response.getErrorMessage()).thenReturn("Some user error");
     when(response.hasError()).thenReturn(true);
-    when(api.fetchRoutesAsync(
+    when(api.execute(
         eq("Link 0"),
         anyListOf(String.class),
         anyListOf(String.class),
@@ -136,7 +136,7 @@ public class FailoverRoutingApiTest {
     )).thenReturn(Observable.just(response));
 
     final TestSubscriber<RoutingResponse> subscriber = new TestSubscriber<>();
-    failoverRoutingApi.fetchRoutesPerUrlAsync(
+    failoverA2bRoutingApi.fetchRoutesPerUrlAsync(
         "Link 0",
         Collections.<String>emptyList(),
         Collections.<String>emptyList(),
@@ -152,7 +152,7 @@ public class FailoverRoutingApiTest {
     final RoutingResponse response = mock(RoutingResponse.class);
     when(response.getErrorMessage()).thenReturn("Some error");
     when(response.hasError()).thenReturn(false);
-    when(api.fetchRoutesAsync(
+    when(api.execute(
         eq("Link 0"),
         anyListOf(String.class),
         anyListOf(String.class),
@@ -160,7 +160,7 @@ public class FailoverRoutingApiTest {
     )).thenReturn(Observable.just(response));
 
     final TestSubscriber<RoutingResponse> subscriber = new TestSubscriber<>();
-    failoverRoutingApi.fetchRoutesPerUrlAsync(
+    failoverA2bRoutingApi.fetchRoutesPerUrlAsync(
         "Link 0",
         Collections.<String>emptyList(),
         Collections.<String>emptyList(),
