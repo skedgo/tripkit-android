@@ -11,6 +11,6 @@ import javax.inject.Singleton
 @Singleton
 @Subcomponent
 interface A2bRoutingComponent {
-  fun getA2bRoutingResults(): GetA2bRoutingResults
-  fun getTripLine(): GetTripLine
+  val getA2bRoutingResults: GetA2bRoutingResults
+  val getTripLine: GetTripLine
 }
