@@ -42,7 +42,7 @@ task(generateTripkitStrings, type: org.gradle.api.tasks.JavaExec) {
 dependencies {
   testCompile 'junit:junit:4.12'
   testCompile 'org.assertj:assertj-core:3.6.2'
-  testCompile 'org.robolectric:robolectric:3.1.2'
+  testCompile 'org.robolectric:robolectric:3.3.2'
   testCompile libs.mockitoCore
   testCompile libs.mockitoKotlin, { exclude group: 'org.jetbrains.kotlin' }
   testCompile 'com.github.thuytrinh:MockWebServerRule:v1.0'
