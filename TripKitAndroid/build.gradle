@@ -52,7 +52,7 @@ dependencies {
   androidTestCompile "org.assertj:assertj-core:1.7.0"
 
   compile "org.jetbrains.kotlin:kotlin-stdlib:$kotlinVersion"
-  compile "com.google.android.gms:play-services-gcm:10.0.1"
+  compile libs.playServicesGcm
 
   compile 'com.github.skedgo:sqlite-utils:v1.0'
   compile "com.squareup.okhttp3:okhttp:$okHttpVersion"
