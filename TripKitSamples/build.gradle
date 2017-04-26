@@ -1,7 +1,6 @@
 apply from: "../dependencies.gradle"
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
-apply plugin: 'kotlin-kapt'
 
 android {
   compileSdkVersion 25
@@ -28,6 +27,11 @@ android {
   }
 
   lintOptions { abortOnError false }
+}
+
+
+kapt {
+  generateStubs = true
 }
 
 dependencies {
