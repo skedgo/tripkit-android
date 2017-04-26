@@ -39,7 +39,7 @@ import static com.skedgo.android.tripkit.bookingproviders.BookingResolver.INGOGO
 import static com.skedgo.android.tripkit.bookingproviders.BookingResolver.LYFT;
 import static com.skedgo.android.tripkit.bookingproviders.BookingResolver.OTHERS;
 import static com.skedgo.android.tripkit.bookingproviders.BookingResolver.SMS;
-import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Java6Assertions.*;
 import static org.mockito.Matchers.anyDouble;
 import static org.mockito.Matchers.anyInt;
 import static org.mockito.Matchers.eq;

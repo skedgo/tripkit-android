@@ -13,7 +13,7 @@ import java.util.Arrays;
 import skedgo.tripkit.routing.Trip;
 import skedgo.tripkit.routing.TripGroup;
 
-import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Java6Assertions.*;
 
 @RunWith(TestRunner.class)
 @Config(constants = BuildConfig.class)

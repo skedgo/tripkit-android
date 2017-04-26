@@ -20,7 +20,7 @@ import java.io.IOException;
 
 import okhttp3.mockwebserver.MockResponse;
 
-import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Java6Assertions.*;
 import static thuytrinh.mockwebserverrule.MockWebServerRule.createMockResponse;
 
 @RunWith(TestRunner.class)

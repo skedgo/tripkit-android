@@ -3,7 +3,7 @@ package skedgo.tripkit.routing
 import com.nhaarman.mockito_kotlin.eq
 import com.nhaarman.mockito_kotlin.mock
 import com.nhaarman.mockito_kotlin.whenever
-import org.assertj.core.api.Assertions.assertThat
+import org.assertj.core.api.Java6Assertions.assertThat
 import org.junit.Test
 
 class GetSummarySegmentsTest {

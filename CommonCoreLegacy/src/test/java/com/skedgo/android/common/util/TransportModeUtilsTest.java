@@ -28,7 +28,7 @@ import static com.skedgo.android.common.util.TransportModeUtils.getDensityDpiNam
 import static com.skedgo.android.common.util.TransportModeUtils.getIconUrlForId;
 import static com.skedgo.android.common.util.TransportModeUtils.getIconUrlForModeInfo;
 import static com.skedgo.android.common.util.TransportModeUtils.getIconUrlForTransportMode;
-import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Java6Assertions.*;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 

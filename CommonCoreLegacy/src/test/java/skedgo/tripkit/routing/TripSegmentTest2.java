@@ -23,7 +23,7 @@ import java.util.concurrent.TimeUnit;
 
 import static junit.framework.Assert.assertFalse;
 import static junit.framework.Assert.assertTrue;
-import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Java6Assertions.*;
 import static skedgo.tripkit.routing.TripSegment.VISIBILITY_HIDDEN;
 import static skedgo.tripkit.routing.TripSegment.VISIBILITY_IN_DETAILS;
 import static skedgo.tripkit.routing.TripSegment.VISIBILITY_IN_SUMMARY;

@@ -11,7 +11,7 @@ import static com.skedgo.android.common.model.RealTimeStatus.CAPABLE;
 import static com.skedgo.android.common.model.RealTimeStatus.INCAPABLE;
 import static com.skedgo.android.common.model.RealTimeStatus.IS_REAL_TIME;
 import static com.skedgo.android.common.model.RealTimeStatus.from;
-import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Java6Assertions.*;
 
 @RunWith(TestRunner.class)
 @Config(constants = BuildConfig.class)

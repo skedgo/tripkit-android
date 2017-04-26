@@ -1,11 +1,9 @@
 package com.skedgo.android.tripkit.booking.ui.usecase
 
 import com.nhaarman.mockito_kotlin.mock
-import com.nhaarman.mockito_kotlin.whenever
-import com.skedgo.android.tripkit.booking.BookingAction
 import com.skedgo.android.tripkit.booking.BookingForm
 import com.skedgo.android.tripkit.booking.BookingService
-import org.assertj.core.api.Assertions.assertThat
+import org.assertj.core.api.Java6Assertions.assertThat
 import org.junit.Test
 import org.mockito.BDDMockito.given
 import rx.Observable.just

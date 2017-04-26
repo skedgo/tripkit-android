@@ -14,7 +14,7 @@ import java.util.List;
 import rx.subjects.PublishSubject;
 import skedgo.tripkit.routing.TripGroup;
 
-import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Java6Assertions.*;
 import static org.mockito.Matchers.any;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
