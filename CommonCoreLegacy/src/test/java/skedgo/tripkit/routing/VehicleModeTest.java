@@ -7,7 +7,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.robolectric.annotation.Config;
 
-import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Java6Assertions.*;
 import static skedgo.tripkit.routing.VehicleMode.AEROPLANE;
 import static skedgo.tripkit.routing.VehicleMode.BICYCLE;
 import static skedgo.tripkit.routing.VehicleMode.BICYCLE_SHARE;

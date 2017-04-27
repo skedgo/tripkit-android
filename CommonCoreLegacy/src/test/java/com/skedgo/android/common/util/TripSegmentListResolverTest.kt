@@ -2,7 +2,7 @@ package com.skedgo.android.common.util
 
 import com.skedgo.android.common.BuildConfig
 import com.skedgo.android.common.TestRunner
-import org.assertj.core.api.Assertions.assertThat
+import org.assertj.core.api.Java6Assertions.assertThat
 import org.joda.time.DateTime
 import org.junit.Test
 import org.junit.runner.RunWith

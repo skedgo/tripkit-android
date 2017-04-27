@@ -5,7 +5,7 @@ import com.nhaarman.mockito_kotlin.whenever
 import com.skedgo.android.tripkit.booking.BookingForm
 import com.skedgo.android.tripkit.booking.FormField
 import com.skedgo.android.tripkit.booking.FormGroup
-import org.assertj.core.api.Assertions.assertThat
+import org.assertj.core.api.Java6Assertions.assertThat
 import org.junit.Test
 
 class IsCancelActionTest {

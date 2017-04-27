@@ -10,7 +10,7 @@ import com.skedgo.android.tripkit.booking.ui.BuildConfig
 import com.skedgo.android.tripkit.booking.ui.OAuth2CallbackHandler
 import com.skedgo.android.tripkit.booking.ui.TestRunner
 import com.skedgo.android.tripkit.booking.ui.activity.KEY_FORM
-import org.assertj.core.api.Assertions.assertThat
+import org.assertj.core.api.Java6Assertions.assertThat
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.robolectric.annotation.Config

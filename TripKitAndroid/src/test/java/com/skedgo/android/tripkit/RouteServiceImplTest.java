@@ -4,10 +4,8 @@ import com.skedgo.android.common.model.Location;
 import com.skedgo.android.common.model.Query;
 import com.skedgo.android.common.model.TimeTag;
 import com.skedgo.android.tripkit.routing.ExtraQueryMapProvider;
-import skedgo.tripkit.a2brouting.FailoverA2bRoutingApi;
 
 import org.assertj.core.data.MapEntry;
-import org.assertj.core.util.Maps;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -23,8 +21,9 @@ import java.util.Map;
 
 import rx.Observable;
 import rx.functions.Func1;
+import skedgo.tripkit.a2brouting.FailoverA2bRoutingApi;
 
-import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Java6Assertions.*;
 import static org.mockito.Matchers.eq;
 import static org.mockito.Mockito.when;
 
@@ -164,7 +163,7 @@ public class RouteServiceImplTest {
   }
 
   @Test public void includeCo2Profile() {
-    final Map<String, Float> co2Profile = Maps.newHashMap();
+    final Map<String, Float> co2Profile = new HashMap<>();
     co2Profile.put("a", 2f);
     co2Profile.put("b", 5f);
     when(co2Preferences.getCo2Profile()).thenReturn(co2Profile);

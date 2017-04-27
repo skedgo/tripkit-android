@@ -5,14 +5,15 @@ import android.test.AndroidTestCase;
 import com.google.gson.Gson;
 import com.google.gson.stream.JsonReader;
 import com.skedgo.android.common.model.Location;
-import skedgo.tripkit.routing.RealTimeVehicle;
-import skedgo.tripkit.routing.Shape;
 
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 
-import static org.assertj.core.api.Assertions.assertThat;
+import skedgo.tripkit.routing.RealTimeVehicle;
+import skedgo.tripkit.routing.Shape;
+
+import static org.assertj.core.api.Java6Assertions.assertThat;
 
 public class ServiceResponseTest extends AndroidTestCase {
   public void testSerialize() throws IOException {

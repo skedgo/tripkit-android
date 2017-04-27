@@ -17,7 +17,7 @@ import static com.skedgo.android.common.model.StopType.TAXI;
 import static com.skedgo.android.common.model.StopType.TRAIN;
 import static com.skedgo.android.common.model.StopType.TRAM;
 import static com.skedgo.android.common.model.StopType.from;
-import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Java6Assertions.*;
 
 @RunWith(TestRunner.class)
 @Config(constants = BuildConfig.class)

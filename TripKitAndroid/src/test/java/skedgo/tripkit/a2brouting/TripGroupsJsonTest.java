@@ -27,7 +27,7 @@ import skedgo.tripkit.routing.Trip;
 import skedgo.tripkit.routing.TripGroup;
 import thuytrinh.mockwebserverrule.MockWebServerRule;
 
-import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Java6Assertions.*;
 
 @RunWith(TestRunner.class)
 @Config(constants = BuildConfig.class)

@@ -14,8 +14,11 @@ project.ext.libVersions.targetSdkVersion = 22
 project.ext.libVersions.playServicesVersion = "10.2.1"
 
 project.ext.libs = new Expando()
-project.ext.libs.mockitoKotlin = "com.nhaarman:mockito-kotlin:1.0.1"
-project.ext.libs.mockitoCore = "org.mockito:mockito-core:2.7.5"
+project.ext.libs.mockitoKotlin = "com.nhaarman:mockito-kotlin:1.4.0"
+project.ext.libs.mockitoCore = "org.mockito:mockito-core:2.8.8"
+project.ext.libs.robolectric = "org.robolectric:robolectric:3.3.2"
+project.ext.libs.robolectricShadowsMultidex = "org.robolectric:shadows-multidex:3.3.2"
+project.ext.libs.assertjCore = "org.assertj:assertj-core:2.6.0"
 project.ext.libs.jodaTime = "joda-time:joda-time:2.9.9:no-tzdb"
 project.ext.libs.jodaTimeTzdb = "joda-time:joda-time:2.9.9"
 project.ext.libs.jodaTimeAndroid = "net.danlew:android.joda:2.9.9"

@@ -1,7 +1,7 @@
 package skedgo.tripkit.routing
 
 import com.skedgo.android.common.model.Location
-import org.assertj.core.api.Assertions.assertThat
+import org.assertj.core.api.Java6Assertions.assertThat
 import org.joda.time.DateTime
 import org.joda.time.DateTimeZone
 import org.junit.Test
