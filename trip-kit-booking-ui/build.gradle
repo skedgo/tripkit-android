@@ -27,9 +27,9 @@ android {
 
 dependencies {
   testCompile 'junit:junit:4.12'
-  testCompile 'org.assertj:assertj-core:3.6.2'
+  testCompile libs.assertjCore
   testCompile libs.mockitoCore
-  testCompile 'org.robolectric:robolectric:3.3.2'
+  testCompile libs.robolectric
   testCompile libs.mockitoKotlin, { exclude group: 'org.jetbrains.kotlin' }
 
   androidTestCompile 'com.google.code.findbugs:jsr305:3.0.1'

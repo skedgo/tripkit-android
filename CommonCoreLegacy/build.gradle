@@ -46,13 +46,13 @@ task(generateiOSStrings, type: org.gradle.api.tasks.JavaExec) {
 }
 
 dependencies {
-  androidTestCompile 'org.assertj:assertj-core:3.6.2'
+  androidTestCompile libs.assertjCore
   androidTestCompile 'com.android.support.test:runner:0.5'
   androidTestCompile 'com.android.support.test:rules:0.5'
 
   testCompile 'junit:junit:4.12'
-  testCompile 'org.assertj:assertj-core:3.6.2'
-  testCompile 'org.robolectric:robolectric:3.3.2'
+  testCompile libs.assertjCore
+  testCompile libs.robolectric
   testCompile 'commons-io:commons-io:2.5'
   testCompile libs.mockitoKotlin
   testCompile libs.mockitoCore
