@@ -21,6 +21,7 @@ dependencies {
   kapt 'com.google.dagger:dagger-compiler:2.7'
 
   compile "org.jetbrains.kotlin:kotlin-stdlib:$kotlinVersion"
+  compileOnly project(":TripKitDomain")
 }
 
 uploadArchives {

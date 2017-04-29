@@ -2,6 +2,7 @@ apply from: "../dependencies.gradle"
 apply plugin: 'com.android.library'
 apply plugin: 'com.github.dcendents.android-maven'
 apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-kapt'
 
 // For https://github.com/dcendents/android-maven-gradle-plugin.
 group = 'com.skedgo.tripkit'
@@ -22,8 +23,6 @@ android {
   }
 }
 
-kapt { generateStubs = true }
-
 dependencies {
   testCompile 'junit:junit:4.12'
   testCompile libs.assertjCore
@@ -38,6 +37,7 @@ dependencies {
   compile "com.squareup.retrofit2:adapter-rxjava:2.0.2"
   compile 'com.google.code.gson:gson:2.6.1'
   provided project(":AccountDomain")
+  provided project(":TripKitDomain")
 
   compile 'com.google.dagger:dagger:2.7'
   kapt 'com.google.dagger:dagger-compiler:2.7'

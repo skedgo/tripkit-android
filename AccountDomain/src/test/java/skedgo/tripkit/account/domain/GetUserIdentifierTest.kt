@@ -1,7 +1,7 @@
 package skedgo.tripkit.account.domain
 
 import com.nhaarman.mockito_kotlin.mock
-import static org.assertj.core.api.Java6Assertions.assertThat
+import org.assertj.core.api.Java6Assertions.assertThat
 import org.junit.Test
 import org.mockito.BDDMockito.given
 import rx.Observable.just

@@ -40,6 +40,7 @@ import rx.schedulers.Schedulers;
 import skedgo.tripkit.a2brouting.RouteService;
 import skedgo.tripkit.android.TripKit;
 import skedgo.tripkit.configuration.AppVersionNameRepository;
+import skedgo.tripkit.configuration.Server;
 
 @Module
 public class MainModule {
@@ -65,7 +66,7 @@ public class MainModule {
 
   @Provides RegionsApi getRegionsApi(OkHttpClient httpClient) {
     return new Retrofit.Builder()
-        .baseUrl("https://tripgo.skedgo.com/satapp/")
+        .baseUrl(Server.Inflationary.getValue())
         .addConverterFactory(GsonConverterFactory.create(Gsons.createForRegion()))
         .addCallAdapterFactory(RxJavaCallAdapterFactory.createWithScheduler(Schedulers.io()))
         .client(httpClient)
@@ -162,7 +163,7 @@ public class MainModule {
   @Provides TripUpdateApi getTripUpdateApi(Gson gson, OkHttpClient httpClient) {
     return new Retrofit.Builder()
         /* This base url is ignored as the api relies on @Url. */
-        .baseUrl(HttpUrl.parse("https://tripgo.skedgo.com/satapp/"))
+        .baseUrl(Server.Inflationary.getValue())
         .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
         .addConverterFactory(GsonConverterFactory.create(gson))
         .client(httpClient)
@@ -177,7 +178,7 @@ public class MainModule {
   @Provides LocationInfoApi getLocationInfoApi(Gson gson, OkHttpClient httpClient) {
     return new Retrofit.Builder()
         /* This base url is ignored as the api relies on @Url. */
-        .baseUrl(HttpUrl.parse("https://tripgo.skedgo.com/satapp/"))
+        .baseUrl(Server.Inflationary.getValue())
         .addCallAdapterFactory(RxJavaCallAdapterFactory.createWithScheduler(Schedulers.io()))
         .addConverterFactory(GsonConverterFactory.create(gson))
         .client(httpClient)

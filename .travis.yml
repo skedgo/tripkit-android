@@ -26,4 +26,6 @@ android:
     - extra-google-m2repository
 
 script:
-  ./gradlew clean testDebugUnitTest
+  # It should be `test` not `testDebugUnitTest` to
+  # execute tests for pure Java/Kotlin modules.
+  ./gradlew clean test
