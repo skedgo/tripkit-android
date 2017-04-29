@@ -37,6 +37,7 @@ dependencies {
   compile "com.squareup.retrofit2:adapter-rxjava:2.0.2"
   compile 'com.google.code.gson:gson:2.6.1'
   provided project(":AccountDomain")
+  provided project(":TripKitDomain")
 
   compile 'com.google.dagger:dagger:2.7'
   kapt 'com.google.dagger:dagger-compiler:2.7'
