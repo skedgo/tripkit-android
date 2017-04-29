@@ -2,6 +2,7 @@ apply from: "../dependencies.gradle"
 apply plugin: 'com.android.library'
 apply plugin: 'com.github.dcendents.android-maven'
 apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-kapt'
 
 // For https://github.com/dcendents/android-maven-gradle-plugin.
 group = 'com.skedgo.tripkit'
@@ -21,8 +22,6 @@ android {
     warning 'InvalidPackage'
   }
 }
-
-kapt { generateStubs = true }
 
 dependencies {
   testCompile 'junit:junit:4.12'
