@@ -45,6 +45,7 @@ dependencies {
   provided "org.immutables:gson:$immutablesVersion:annotations"
 
   compile "org.jetbrains.kotlin:kotlin-stdlib:$kotlinVersion"
+  provided project(':TripKitDomain')
   provided project(':ValidBookingCountDomain')
 }
 

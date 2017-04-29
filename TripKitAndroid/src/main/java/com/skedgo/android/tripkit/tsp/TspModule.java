@@ -7,6 +7,7 @@ import dagger.Provides;
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
+import skedgo.tripkit.configuration.Server;
 
 import static rx.schedulers.Schedulers.io;
 
@@ -16,7 +17,7 @@ public class TspModule {
       Gson gson,
       okhttp3.OkHttpClient httpClient) {
     return new Retrofit.Builder()
-        .baseUrl("https://tripgo.skedgo.com/satapp/")
+        .baseUrl(Server.Inflationary.getValue())
         .client(httpClient)
         .addConverterFactory(GsonConverterFactory.create(gson))
         .addCallAdapterFactory(RxJavaCallAdapterFactory.createWithScheduler(io()))
