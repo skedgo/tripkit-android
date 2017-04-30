@@ -2,6 +2,7 @@ package skedgo.tripkit.android
 
 import dagger.Subcomponent
 import skedgo.tripkit.datetime.DateTimeDataModule
+import skedgo.tripkit.datetime.PrintFullDate
 import skedgo.tripkit.datetime.PrintTime
 import javax.inject.Singleton
 
@@ -14,4 +15,5 @@ import javax.inject.Singleton
 ))
 interface DateTimeComponent {
   val printTime: PrintTime
+  val printFullDate: PrintFullDate
 }

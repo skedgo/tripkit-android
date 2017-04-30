@@ -8,4 +8,6 @@ import dagger.Provides
 class DateTimeDataModule {
   @Provides fun printTime(context: Context): PrintTime
       = PrintTimeImpl(context)
+
+  @Provides fun printFullDate(): PrintFullDate = PrintFullDateImpl()
 }
