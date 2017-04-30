@@ -1,16 +1,16 @@
 apply from: "../dependencies.gradle"
-apply plugin: 'com.android.library'
-apply plugin: 'com.github.dcendents.android-maven'
-apply plugin: 'kotlin-android'
-apply plugin: 'kotlin-kapt'
+apply plugin: "com.android.library"
+apply plugin: "com.github.dcendents.android-maven"
+apply plugin: "kotlin-android"
+apply plugin: "kotlin-kapt"
 
 // For https://github.com/dcendents/android-maven-gradle-plugin.
-group = 'com.skedgo.tripkit'
-version = '1.0'
+group = "com.skedgo.tripkit"
+version = "1.0"
 
 android {
-  compileSdkVersion 25
-  buildToolsVersion '25.0.2'
+  compileSdkVersion libVersions.compileSdkVersion
+  buildToolsVersion libVersions.buildToolsVersion
 
   defaultConfig {
     minSdkVersion 10
@@ -19,15 +19,21 @@ android {
 
   lintOptions {
     // Changing to warning because of https://github.com/square/okio/issues/58.
-    warning 'InvalidPackage'
+    warning "InvalidPackage"
   }
 }
 
 dependencies {
+  testCompile "junit:junit:4.12"
+  testCompile libs.assertjCore
+  testCompile libs.mockitoCore
+  testCompile libs.mockitoKotlin, { exclude group: "org.jetbrains.kotlin" }
+  testCompile libs.jodaTimeTzdb
+
   compile project(":TripKitDomain")
   compile project(":TripKitDomainLegacy")
-  compile 'com.google.dagger:dagger:2.7'
-  kapt 'com.google.dagger:dagger-compiler:2.7'
+  compile "com.google.dagger:dagger:2.7"
+  kapt "com.google.dagger:dagger-compiler:2.7"
   kapt libs.value
   provided libs.valueAnnotations
   provided libs.builderAnnotations
