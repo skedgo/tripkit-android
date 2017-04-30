@@ -15,5 +15,10 @@ import javax.inject.Singleton
 ))
 interface DateTimeComponent {
   val printTime: PrintTime
+
+  /**
+   * For example, `Monday, 1 May 2017`
+   * if the default locale is [java.util.Locale.US].
+   */
   val printFullDate: PrintFullDate
 }
