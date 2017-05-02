@@ -1,6 +1,7 @@
 apply from: "../dependencies.gradle"
 apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-kapt'
 apply plugin: 'com.github.dcendents.android-maven'
 
 // For https://github.com/dcendents/android-maven-gradle-plugin.
@@ -22,11 +23,9 @@ android {
   }
 }
 
-kapt { generateStubs = true }
-
 dependencies {
   testCompile 'junit:junit:4.12'
-  testCompile 'org.robolectric:robolectric:3.3.1'
+  testCompile libs.robolectric
   testCompile libs.mockitoKotlin, { exclude group: 'org.jetbrains.kotlin' }
 
   compile 'io.reactivex:rxjava:1.2.4'
@@ -46,6 +45,7 @@ dependencies {
   provided "org.immutables:gson:$immutablesVersion:annotations"
 
   compile "org.jetbrains.kotlin:kotlin-stdlib:$kotlinVersion"
+  provided project(':TripKitDomain')
   provided project(':ValidBookingCountDomain')
 }
 

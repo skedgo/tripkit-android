@@ -9,6 +9,8 @@ import com.google.gson.annotations.JsonAdapter;
 import org.immutables.gson.Gson;
 import org.immutables.value.Value;
 
+import skedgo.tripkit.routing.ServiceColor;
+
 @Gson.TypeAdapters
 @Value.Immutable
 @JsonAdapter(GsonAdaptersPurchaseBrand.class)

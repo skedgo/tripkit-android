@@ -10,6 +10,7 @@ import com.skedgo.android.common.util.DateTimeFormats;
 import java.util.concurrent.TimeUnit;
 
 import rx.functions.Action1;
+import skedgo.tripkit.routing.TripSegment;
 
 /**
  * Represents a future stop of a service in a trip.

@@ -12,6 +12,8 @@ import com.skedgo.android.common.R;
 
 import java.util.ArrayList;
 
+import skedgo.tripkit.routing.ServiceColor;
+
 public final class TransportMode implements Parcelable {
   public static final String MIDDLE_FIX_CAR = "car-s";
   public static final String MIDDLE_FIX_BIC = "bic-s";

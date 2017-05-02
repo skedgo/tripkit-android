@@ -12,7 +12,7 @@ import com.skedgo.android.tripkit.booking.ui.usecase.GetBookingFormFromAction
 import com.skedgo.android.tripkit.booking.ui.usecase.GetBookingFormFromUrl
 import com.skedgo.android.tripkit.booking.ui.usecase.IsCancelAction
 import com.skedgo.android.tripkit.booking.ui.usecase.IsDoneAction
-import org.assertj.core.api.Assertions.assertThat
+import org.assertj.core.api.Java6Assertions.assertThat
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.robolectric.annotation.Config

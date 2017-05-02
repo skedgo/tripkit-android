@@ -15,7 +15,7 @@ import org.junit.runner.RunWith;
 import org.robolectric.annotation.Config;
 
 import static com.skedgo.android.common.model.RealtimeAlert.SEVERITY_WARNING;
-import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Java6Assertions.*;
 
 @RunWith(TestRunner.class)
 @Config(constants = BuildConfig.class)

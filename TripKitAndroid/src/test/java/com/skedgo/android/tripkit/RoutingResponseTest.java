@@ -4,10 +4,10 @@ import com.google.gson.Gson;
 import com.google.gson.JsonPrimitive;
 import com.skedgo.android.common.model.RealtimeAlert;
 import com.skedgo.android.common.model.RealtimeAlerts;
-import com.skedgo.android.common.model.RoutingResponse;
-import com.skedgo.android.common.model.Trip;
-import com.skedgo.android.common.model.TripGroup;
-import com.skedgo.android.common.model.TripSegment;
+import skedgo.tripkit.routing.RoutingResponse;
+import skedgo.tripkit.routing.Trip;
+import skedgo.tripkit.routing.TripGroup;
+import skedgo.tripkit.routing.TripSegment;
 import com.skedgo.android.common.util.Gsons;
 
 import org.assertj.core.api.Condition;
@@ -20,7 +20,7 @@ import java.io.IOException;
 
 import okhttp3.mockwebserver.MockResponse;
 
-import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Java6Assertions.*;
 import static thuytrinh.mockwebserverrule.MockWebServerRule.createMockResponse;
 
 @RunWith(TestRunner.class)

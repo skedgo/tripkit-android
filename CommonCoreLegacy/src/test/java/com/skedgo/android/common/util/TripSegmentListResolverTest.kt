@@ -2,16 +2,16 @@ package com.skedgo.android.common.util
 
 import com.skedgo.android.common.BuildConfig
 import com.skedgo.android.common.TestRunner
-import com.skedgo.android.common.model.SegmentType
-import com.skedgo.android.common.model.TripSegment
-import com.skedgo.android.common.model.TripSegment.VISIBILITY_IN_DETAILS
-import com.skedgo.android.common.model.TripSegment.VISIBILITY_ON_MAP
-import org.assertj.core.api.Assertions.assertThat
+import org.assertj.core.api.Java6Assertions.assertThat
 import org.joda.time.DateTime
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.robolectric.RuntimeEnvironment
 import org.robolectric.annotation.Config
+import skedgo.tripkit.routing.SegmentType
+import skedgo.tripkit.routing.TripSegment
+import skedgo.tripkit.routing.TripSegment.VISIBILITY_IN_DETAILS
+import skedgo.tripkit.routing.TripSegment.VISIBILITY_ON_MAP
 import skedgo.tripkit.routing.toSeconds
 
 @RunWith(TestRunner::class)

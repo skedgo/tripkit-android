@@ -3,8 +3,8 @@ package com.skedgo.android.tripkit;
 import android.support.annotation.Nullable;
 
 import com.google.gson.annotations.JsonAdapter;
-import com.skedgo.android.common.model.RealTimeVehicle;
-import com.skedgo.android.common.model.Shape;
+import skedgo.tripkit.routing.RealTimeVehicle;
+import skedgo.tripkit.routing.Shape;
 
 import org.immutables.gson.Gson;
 import org.immutables.value.Value;

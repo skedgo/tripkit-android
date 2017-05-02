@@ -7,7 +7,6 @@ import com.skedgo.android.tripkit.tsp.ImmutableRegionInfo;
 import com.skedgo.android.tripkit.tsp.Paratransit;
 import com.skedgo.android.tripkit.tsp.RegionInfo;
 import com.skedgo.android.tripkit.tsp.RegionInfoService;
-import skedgo.tripkit.urlresolver.GetLastUsedRegionUrls;
 
 import org.junit.Before;
 import org.junit.Rule;
@@ -25,13 +24,11 @@ import java.util.List;
 import java.util.Map;
 
 import dagger.internal.Factory;
-import kotlin.Unit;
 import rx.Observable;
 import rx.observers.TestSubscriber;
 
 import static java.util.Collections.singletonList;
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.mockito.ArgumentMatchers.any;
+import static org.assertj.core.api.Java6Assertions.*;
 import static org.mockito.Matchers.eq;
 import static org.mockito.Matchers.same;
 import static org.mockito.Mockito.times;
@@ -48,7 +45,6 @@ public class RegionServiceImplTest {
   @Mock RegionInfoService regionInfoService;
   @Mock Factory<RegionInfoService> regionInfoServiceProvider;
   @Mock RegionFinder regionFinder;
-  @Mock GetLastUsedRegionUrls getLastUsedRegionUrls;
   private RegionServiceImpl regionService;
 
   @Before public void setUp() {
@@ -57,10 +53,8 @@ public class RegionServiceImplTest {
         modeCache,
         regionsFetcher,
         regionInfoServiceProvider,
-        regionFinder,
-        getLastUsedRegionUrls
+        regionFinder
     );
-    when(getLastUsedRegionUrls.setLastUsedRegionUrls(any(Region.class))).thenReturn(Observable.<Unit>empty());
     when(regionInfoServiceProvider.get()).thenReturn(regionInfoService);
   }
 

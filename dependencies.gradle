@@ -11,15 +11,24 @@ project.ext.libVersions.proMinSdkVersion = 15
 project.ext.libVersions.compileSdkVersion = 25
 project.ext.libVersions.buildToolsVersion = "25.0.2"
 project.ext.libVersions.targetSdkVersion = 22
+project.ext.libVersions.playServicesVersion = "10.2.1"
 
 project.ext.libs = new Expando()
-project.ext.libs.mockitoKotlin = "com.nhaarman:mockito-kotlin:1.0.1"
-project.ext.libs.mockitoCore = "org.mockito:mockito-core:2.7.5"
+project.ext.libs.mockitoKotlin = "com.nhaarman:mockito-kotlin:1.4.0"
+project.ext.libs.mockitoCore = "org.mockito:mockito-core:2.8.8"
+project.ext.libs.robolectric = "org.robolectric:robolectric:3.3.2"
+project.ext.libs.robolectricShadowsMultidex = "org.robolectric:shadows-multidex:3.3.2"
+project.ext.libs.assertjCore = "org.assertj:assertj-core:2.6.0"
 project.ext.libs.jodaTime = "joda-time:joda-time:2.9.9:no-tzdb"
 project.ext.libs.jodaTimeTzdb = "joda-time:joda-time:2.9.9"
 project.ext.libs.jodaTimeAndroid = "net.danlew:android.joda:2.9.9"
 project.ext.libs.multidex = "com.android.support:multidex:1.0.1"
 project.ext.libs.androidJob = "com.evernote:android-job:1.1.8"
+project.ext.libs.playServicesMaps = "com.google.android.gms:play-services-maps:$ext.libVersions.playServicesVersion"
+project.ext.libs.playServicesLocation = "com.google.android.gms:play-services-location:$ext.libVersions.playServicesVersion"
+project.ext.libs.playServicesAnalytics = "com.google.android.gms:play-services-analytics:$ext.libVersions.playServicesVersion"
+project.ext.libs.playServicesGcm = "com.google.android.gms:play-services-gcm:$ext.libVersions.playServicesVersion"
+project.ext.libs.playServicesPlaces = "com.google.android.gms:play-services-places:$ext.libVersions.playServicesVersion"
 
 project.ext.libs.value = "org.immutables:value:$ext.libVersions.immutablesVersion"
 project.ext.libs.valueAnnotations = "org.immutables:value:$ext.libVersions.immutablesVersion:annotations"

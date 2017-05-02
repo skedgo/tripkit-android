@@ -4,7 +4,7 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 
 import com.skedgo.android.common.model.Location;
-import com.skedgo.android.common.model.ModeInfo;
+import skedgo.tripkit.routing.ModeInfo;
 import com.skedgo.android.common.model.Region;
 import com.skedgo.android.common.model.TransportMode;
 import com.skedgo.android.tripkit.tsp.Paratransit;

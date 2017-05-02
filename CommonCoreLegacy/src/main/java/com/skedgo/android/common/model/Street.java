@@ -1,7 +1,3 @@
-/*
- * Copyright (c) SkedGo 2013
- */
-
 package com.skedgo.android.common.model;
 
 import android.os.Parcel;

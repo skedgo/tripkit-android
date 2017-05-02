@@ -4,7 +4,7 @@ import android.content.Context
 import android.databinding.ObservableField
 import android.databinding.ObservableInt
 import android.view.View
-import com.skedgo.android.common.model.TripSegment
+import skedgo.tripkit.routing.TripSegment
 import com.skedgo.android.common.util.TripSegmentUtils
 
 class TripSegmentViewModel constructor(context: Context, segment: TripSegment) {

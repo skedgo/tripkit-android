@@ -6,7 +6,7 @@ import android.content.pm.PackageManager;
 import android.net.Uri;
 
 import com.skedgo.android.common.model.Location;
-import com.skedgo.android.common.model.TripSegment;
+import skedgo.tripkit.routing.TripSegment;
 import com.skedgo.android.tripkit.BookingAction;
 import com.skedgo.android.tripkit.BuildConfig;
 import com.skedgo.android.tripkit.ExternalActionParams;
@@ -39,7 +39,7 @@ import static com.skedgo.android.tripkit.bookingproviders.BookingResolver.INGOGO
 import static com.skedgo.android.tripkit.bookingproviders.BookingResolver.LYFT;
 import static com.skedgo.android.tripkit.bookingproviders.BookingResolver.OTHERS;
 import static com.skedgo.android.tripkit.bookingproviders.BookingResolver.SMS;
-import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Java6Assertions.*;
 import static org.mockito.Matchers.anyDouble;
 import static org.mockito.Matchers.anyInt;
 import static org.mockito.Matchers.eq;

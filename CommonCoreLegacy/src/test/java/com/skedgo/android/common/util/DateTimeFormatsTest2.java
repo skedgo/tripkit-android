@@ -15,7 +15,7 @@ import org.robolectric.annotation.Config;
 
 import static android.text.format.DateFormat.is24HourFormat;
 import static com.skedgo.android.common.util.DateTimeFormats.printTime;
-import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Java6Assertions.*;
 
 @RunWith(TestRunner.class)
 @Config(constants = BuildConfig.class)

@@ -8,8 +8,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created: 30/03/13 10:17 PM
+ * Use `PolyUtil` from https://github.com/googlemaps/android-maps-utils instead.
  */
+@Deprecated
 public class PolylineEncoderUtils {
   private static final String TAG = LogUtils.makeTag(PolylineEncoderUtils.class);
 

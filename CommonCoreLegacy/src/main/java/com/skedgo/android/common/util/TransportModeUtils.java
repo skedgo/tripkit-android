@@ -5,7 +5,7 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.util.DisplayMetrics;
 
-import com.skedgo.android.common.model.ModeInfo;
+import skedgo.tripkit.routing.ModeInfo;
 import com.skedgo.android.common.model.TransportMode;
 
 public final class TransportModeUtils {

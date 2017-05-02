@@ -8,13 +8,14 @@ import android.util.DisplayMetrics;
 
 import com.skedgo.android.common.BuildConfig;
 import com.skedgo.android.common.TestRunner;
-import com.skedgo.android.common.model.ModeInfo;
 import com.skedgo.android.common.model.TransportMode;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.robolectric.annotation.Config;
+
+import skedgo.tripkit.routing.ModeInfo;
 
 import static android.util.DisplayMetrics.DENSITY_HIGH;
 import static android.util.DisplayMetrics.DENSITY_MEDIUM;
@@ -27,7 +28,7 @@ import static com.skedgo.android.common.util.TransportModeUtils.getDensityDpiNam
 import static com.skedgo.android.common.util.TransportModeUtils.getIconUrlForId;
 import static com.skedgo.android.common.util.TransportModeUtils.getIconUrlForModeInfo;
 import static com.skedgo.android.common.util.TransportModeUtils.getIconUrlForTransportMode;
-import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Java6Assertions.*;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 

@@ -2,7 +2,7 @@ package com.skedgo.android.tripkit;
 
 import android.support.annotation.Nullable;
 
-import com.skedgo.android.common.model.TripSegment;
+import skedgo.tripkit.routing.TripSegment;
 
 import org.immutables.value.Value;
 

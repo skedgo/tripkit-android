@@ -12,9 +12,19 @@ import org.joda.time.format.DateTimeFormatter;
 
 import java.util.Locale;
 
+import skedgo.tripkit.datetime.PrintTime;
+
+/**
+ * Use {@link PrintTime} instead.
+ */
+@Deprecated
 public final class DateTimeFormats {
   private DateTimeFormats() {}
 
+  /**
+   * Use {@link PrintTime} instead.
+   */
+  @Deprecated
   public static String printTime(Context context, long millis, @Nullable String timezone) {
     final DateTime dateTime;
     if (!TextUtils.isEmpty(timezone)) {

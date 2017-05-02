@@ -5,20 +5,21 @@ import android.text.TextUtils
 import android.util.Pair
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.PolylineOptions
-import com.skedgo.android.common.model.SegmentType
+import com.google.maps.android.PolyUtil
 import com.skedgo.android.common.model.TransportMode
-import com.skedgo.android.common.model.TripSegment
-import com.skedgo.android.common.model.VehicleMode
 import com.skedgo.android.common.util.PolylineEncoderUtils
 import com.skedgo.android.tripkit.LineSegment
 import rx.Observable
+import skedgo.tripkit.routing.SegmentType
+import skedgo.tripkit.routing.TripSegment
+import skedgo.tripkit.routing.VehicleMode
 import java.util.*
 import javax.inject.Inject
 
 // FIXME: Create a pure domain model to represent a trip line.
 typealias TripLine = List<PolylineOptions>
 
-open class GetTripLine @Inject constructor() {
+open class GetTripLine @Inject internal constructor() {
   private val NON_TRAVELLED_LINE_COLOR = 0x88AAAAAA.toInt()
 
   open fun execute(segments: List<TripSegment>): Observable<TripLine>
@@ -119,7 +120,7 @@ open class GetTripLine @Inject constructor() {
 
           var wps: List<LatLng>? = null
           if (!TextUtils.isEmpty(shape.encodedWaypoints)) {
-            wps = PolylineEncoderUtils.decode(shape.encodedWaypoints)
+            wps = PolyUtil.decode(shape.encodedWaypoints)
           }
 
           val nonTravelledLines = ArrayList<LineSegment>()

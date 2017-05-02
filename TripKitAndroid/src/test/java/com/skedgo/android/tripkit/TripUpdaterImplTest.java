@@ -3,9 +3,9 @@ package com.skedgo.android.tripkit;
 import android.content.res.Resources;
 
 import com.google.gson.Gson;
-import com.skedgo.android.common.model.RoutingResponse;
-import com.skedgo.android.common.model.Trip;
-import com.skedgo.android.common.model.TripGroup;
+import skedgo.tripkit.routing.RoutingResponse;
+import skedgo.tripkit.routing.Trip;
+import skedgo.tripkit.routing.TripGroup;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -20,7 +20,7 @@ import rx.Observable;
 import rx.observers.TestSubscriber;
 
 import static java.util.Collections.singletonList;
-import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Java6Assertions.*;
 import static org.mockito.Matchers.eq;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;

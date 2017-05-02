@@ -9,7 +9,8 @@ import rx.Completable
  */
 interface MarkTripAsPlannedWithUserInfo {
   /**
-   * @param userInfo Represents an arbitrary data which must be able to be serialized to JSON.
+   * @param userInfo This parameter is to optionally attach a kind of arbitrary data
+   * which represents user preferences. `userInfo` must be able to be serialized to JSON.
    */
   fun execute(plannedUrl: String, userInfo: MutableMap<String, Any>): Completable
 }

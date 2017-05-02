@@ -9,9 +9,9 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.gson.annotations.SerializedName;
 import com.skedgo.android.common.util.StringUtils;
 
-import skedgo.tripkit.routing.LocationExKt;
+import skedgo.tripkit.routing.LocationExtensionsKt;
 
-public class Location implements Parcelable, ILatLon {
+public class Location implements Parcelable {
   public static final double SYDNEY_LAT = -33.871008;
   public static final double SYDNEY_LON = 151.209555;
 
@@ -232,22 +232,18 @@ public class Location implements Parcelable, ILatLon {
     this.address = address;
   }
 
-  @Override
   public double getLat() {
     return lat;
   }
 
-  @Override
   public void setLat(double lat) {
     this.lat = lat;
   }
 
-  @Override
   public double getLon() {
     return lon;
   }
 
-  @Override
   public void setLon(double lon) {
     this.lon = lon;
   }
@@ -369,7 +365,7 @@ public class Location implements Parcelable, ILatLon {
   }
 
   /**
-   * Use {@link LocationExKt#getDateTimeZone(Location)} instead.
+   * Use {@link LocationExtensionsKt#getDateTimeZone(Location)} instead.
    */
   @Deprecated
   @Nullable public String getTimeZone() {

@@ -18,7 +18,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 import rx.observers.TestSubscriber;
 import thuytrinh.mockwebserverrule.MockWebServerRule;
 
-import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Java6Assertions.*;
 import static rx.schedulers.Schedulers.immediate;
 
 @RunWith(TestRunner.class)

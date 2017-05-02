@@ -12,7 +12,7 @@ import java.util.List;
 import rx.Observable;
 import rx.functions.Func1;
 
-import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Java6Assertions.*;
 
 @RunWith(TestRunner.class)
 @Config(constants = BuildConfig.class)
