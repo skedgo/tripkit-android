@@ -25,7 +25,7 @@ class GetHitServersTest {
 
     val baseUrl = "base url"
     whenever(getBaseServer.execute()).thenReturn(Observable.just(baseUrl))
-    whenever(getLastUsedRegionUrls.getLastUsedRegionUrls()).thenReturn(Observable.just(null))
+    whenever(getLastUsedRegionUrls.getLastUsedRegionUrls()).thenReturn(Observable.just(emptyList<String>()))
 
     val subscriber = TestSubscriber<Any>()
     getHitServers.execute().subscribe(subscriber)

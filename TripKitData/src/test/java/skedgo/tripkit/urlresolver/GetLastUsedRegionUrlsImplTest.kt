@@ -49,7 +49,7 @@ class GetLastUsedRegionUrlsImplTest {
 
     val urls: List<String>? = subscriber.onNextEvents[0]
 
-    assertThat(urls).isNull()
+    assertThat(urls).isEmpty()
 
   }
 
