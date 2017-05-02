@@ -21,20 +21,6 @@ class GetHitServersTest {
   }
 
   @Test
-  fun `hit server list should be just base url after error`() {
-
-    val baseUrl = "base url"
-    whenever(getBaseServer.execute()).thenReturn(Observable.just(baseUrl))
-    whenever(getLastUsedRegionUrls.getLastUsedRegionUrls()).thenReturn(Observable.error(Error()))
-
-    val subscriber = TestSubscriber<Any>()
-    getHitServers.execute().subscribe(subscriber)
-
-    subscriber.assertValues(baseUrl)
-
-  }
-
-  @Test
   fun `hit server list should be just base url after null`() {
 
     val baseUrl = "base url"

@@ -12,7 +12,6 @@ open class GetHitServers @Inject constructor(
     return getLastUsedRegionUrls.getLastUsedRegionUrls()
         .flatMap { urls -> Observable.from<String>(urls) }
         .concatWith(getBaseServer.execute())
-        .onErrorResumeNext { getBaseServer.execute() }
 
   }
 

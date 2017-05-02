@@ -25,9 +25,8 @@ internal open class GetLastUsedRegionUrlsImpl constructor(
     if (urls != null) {
       ArrayList(urls)
     } else {
-      null
+      emptyList<String>()
     }
-
   }
 
   open fun isSavedRegion(region: Region): Boolean {
