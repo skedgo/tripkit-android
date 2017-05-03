@@ -1,17 +1,20 @@
+apply from: "../dependencies.gradle"
 apply plugin: 'com.android.library'
 apply plugin: 'com.github.dcendents.android-maven'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-kapt'
 
 // For https://github.com/dcendents/android-maven-gradle-plugin.
 group = 'com.skedgo'
 version = '1.0'
 
 android {
-  compileSdkVersion 24
+  compileSdkVersion 25
   buildToolsVersion '25.0.2'
 
   defaultConfig {
     minSdkVersion 15
-    targetSdkVersion 22
+    targetSdkVersion 25
     testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
   }
 
@@ -24,39 +27,41 @@ android {
 
 dependencies {
   testCompile 'junit:junit:4.12'
-  testCompile 'org.assertj:assertj-core:1.7.0'
-  testCompile 'org.mockito:mockito-core:2.2.28'
-  testCompile 'org.robolectric:robolectric:3.1.4'
+  testCompile libs.assertjCore
+  testCompile libs.mockitoCore
+  testCompile libs.robolectric
+  testCompile libs.mockitoKotlin, { exclude group: 'org.jetbrains.kotlin' }
 
   androidTestCompile 'com.google.code.findbugs:jsr305:3.0.1'
   androidTestCompile 'com.android.support.test.espresso:espresso-core:2.2.2', {
     exclude group: 'com.android.support', module: 'support-annotations'
   }
 
-  compile project(':trip-kit')
+  compile project(':TripKitAndroid')
   compile project(':trip-kit-booking')
 
-  compile('com.github.skedgo:bux:v1.0') { exclude module: 'rxjava' }
-  compile 'com.nineoldandroids:library:2.4.0'
   compile 'uk.co.chrisjenx:calligraphy:2.1.0'
   compile 'com.github.skedgo:robotos:v1.1'
-  compile 'com.github.skedgo:simple-adapter:v1.0'
 
   compile 'com.google.dagger:dagger:2.7'
-  annotationProcessor 'com.google.dagger:dagger-compiler:2.7'
+  kapt 'com.google.dagger:dagger-compiler:2.7'
 
-  compile 'com.squareup:otto:1.3.8'
   compile 'com.squareup.picasso:picasso:2.5.2'
   compile 'com.jakewharton.picasso:picasso2-okhttp3-downloader:1.0.2'
+  compile 'me.tatarka.bindingcollectionadapter:bindingcollectionadapter-recyclerview:1.3.0'
 
-  compile 'com.github.skedgo:RxLifecycleComponents:v1.0'
+  compile 'com.github.skedgo:RxLifecycleComponents:v1.3'
   compile 'com.trello:rxlifecycle:1.0'
+  compile 'com.github.skedgo:ActivityAnimations:v1.1'
+
+  compile "org.jetbrains.kotlin:kotlin-stdlib:$kotlinVersion"
+  kapt "com.android.databinding:compiler:$androidPluginVersion"
 }
 
 uploadArchives {
   repositories {
     mavenDeployer {
-      repository(url: "file://${tripkitAndroidMaven}")
+      repository(url: "file://${tripKitAndroidMaven}")
     }
   }
 }

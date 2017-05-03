@@ -8,7 +8,7 @@ import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonToken;
 import com.google.gson.stream.JsonWriter;
 import com.skedgo.android.common.model.Location;
-import com.skedgo.android.common.model.TripSegment;
+import skedgo.tripkit.routing.TripSegment;
 
 import java.io.IOException;
 

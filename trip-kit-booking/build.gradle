@@ -1,3 +1,4 @@
+apply from: "../dependencies.gradle"
 apply plugin: 'com.android.library'
 apply plugin: 'com.github.dcendents.android-maven'
 
@@ -6,14 +7,12 @@ group = 'com.skedgo'
 version = '1.1'
 
 android {
-  compileSdkVersion 24
+  compileSdkVersion 25
   buildToolsVersion '25.0.2'
 
   defaultConfig {
-    minSdkVersion 10
-    targetSdkVersion 22
-    versionCode 1
-    versionName "1.0"
+    minSdkVersion 15
+    targetSdkVersion 25
     testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
   }
 
@@ -31,32 +30,28 @@ android {
 
 dependencies {
   testCompile 'junit:junit:4.12'
-  testCompile 'org.assertj:assertj-core:1.7.0'
-  testCompile 'org.mockito:mockito-core:1.10.19'
-  testCompile 'org.robolectric:robolectric:3.1.2'
+  testCompile libs.assertjCore
+  testCompile libs.mockitoCore
+  testCompile libs.robolectric
   testCompile 'com.github.thuytrinh:MockWebServerRule:v1.0'
 
-  androidTestCompile "com.android.support.test:runner:0.5"
-  androidTestCompile "com.android.support.test:rules:0.5"
-  androidTestCompile 'org.assertj:assertj-core:1.7.0'
-
-  compile project(':trip-kit')
+  compile project(':TripKitAndroid')
 
   compile 'com.google.dagger:dagger:2.7'
   annotationProcessor 'com.google.dagger:dagger-compiler:2.7'
 
   // To generate immutable models.
   // See more at http://immutables.github.io/.
-  annotationProcessor 'org.immutables:value:2.3.9'
-  provided 'org.immutables:value:2.3.9:annotations'
-  provided 'org.immutables:builder:2.3.9'
-  provided 'org.immutables:gson:2.3.9:annotations'
+  annotationProcessor "org.immutables:value:$immutablesVersion"
+  provided "org.immutables:value:$immutablesVersion:annotations"
+  provided "org.immutables:builder:$immutablesVersion"
+  provided "org.immutables:gson:$immutablesVersion:annotations"
 }
 
 uploadArchives {
   repositories {
     mavenDeployer {
-      repository(url: "file://${tripkitAndroidMaven}")
+      repository(url: "file://${tripKitAndroidMaven}")
     }
   }
 }

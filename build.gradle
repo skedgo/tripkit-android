@@ -1,5 +1,7 @@
 buildscript {
-  ext.kotlinVersion = '1.0.6'
+  ext.androidPluginVersion = '2.3.0'
+  ext.kotlinVersion = '1.1.1'
+  ext.immutablesVersion = '2.4.4'
 
   repositories {
     jcenter()
@@ -7,8 +9,9 @@ buildscript {
 
   dependencies {
     // See changelog: http://developer.android.com/tools/revisions/gradle-plugin.html.
-    classpath 'com.android.tools.build:gradle:2.2.3'
+    classpath "com.android.tools.build:gradle:$androidPluginVersion"
     classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlinVersion"
+    classpath 'com.jfrog.bintray.gradle:gradle-bintray-plugin:1.7.3'
 
     // To measure execution time of a method.
     classpath 'com.jakewharton.hugo:hugo-plugin:1.2.1'
@@ -19,7 +22,7 @@ buildscript {
 }
 
 ext {
-  tripkitAndroidMaven = "${rootDir}/maven/"
+  tripKitAndroidMaven = "${rootDir}/maven/"
   okHttpVersion = "3.2.0"
 }
 
@@ -27,5 +30,12 @@ allprojects {
   repositories {
     jcenter()
     maven { url "https://jitpack.io" }
+    maven {
+      url "http://skedgo.bintray.com/tripkit-android"
+      credentials {
+        username BINTRAY_USER
+        password BINTRAY_KEY
+      }
+    }
   }
 }

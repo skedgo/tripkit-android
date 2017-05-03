@@ -1,10 +1,8 @@
 package com.skedgo.android.tripkit.booking;
 
-import android.database.sqlite.SQLiteOpenHelper;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import com.skedgo.android.tripkit.TripKit;
 import com.skedgo.android.tripkit.booking.viewmodel.AuthenticationViewModel;
 import com.skedgo.android.tripkit.booking.viewmodel.AuthenticationViewModelImpl;
 import com.skedgo.android.tripkit.booking.viewmodel.BookingViewModel;
@@ -18,6 +16,7 @@ import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
 import rx.schedulers.Schedulers;
+import skedgo.tripkit.configuration.Server;
 
 @Module
 public class BookingModule {
@@ -27,7 +26,7 @@ public class BookingModule {
         .create();
     return new Retrofit.Builder()
         /* This base url is ignored as the api relies on @Url. */
-        .baseUrl(HttpUrl.parse("https://tripgo.skedgo.com/satapp/"))
+        .baseUrl(Server.Inflationary.getValue())
         .addCallAdapterFactory(RxJavaCallAdapterFactory.createWithScheduler(Schedulers.io()))
         .addConverterFactory(GsonConverterFactory.create(gson))
         .client(httpClient)
@@ -41,7 +40,7 @@ public class BookingModule {
         .create();
     return new Retrofit.Builder()
         /* This base url is ignored as the api relies on @Url. */
-        .baseUrl(HttpUrl.parse("https://tripgo.skedgo.com/satapp/"))
+        .baseUrl(Server.Inflationary.getValue())
         .addCallAdapterFactory(RxJavaCallAdapterFactory.createWithScheduler(Schedulers.io()))
         .addConverterFactory(GsonConverterFactory.create(gson))
         .client(httpClient)
@@ -57,7 +56,7 @@ public class BookingModule {
         .create();
     return new Retrofit.Builder()
         /* This base url is ignored as the api relies on @Url. */
-        .baseUrl(HttpUrl.parse("https://tripgo.skedgo.com/satapp/"))
+        .baseUrl(Server.Inflationary.getValue())
         .addCallAdapterFactory(RxJavaCallAdapterFactory.createWithScheduler(Schedulers.io()))
         .addConverterFactory(GsonConverterFactory.create(gson))
         .client(httpClient)
@@ -77,26 +76,18 @@ public class BookingModule {
     return new AuthenticationViewModelImpl();
   }
 
-  @Provides ExternalOAuthStore externalOAuthStore(SQLiteOpenHelper databaseHelper) {
-    return new ExternalOAuthStoreImpl(databaseHelper, new ExternalOAuthEntityAdapter());
-  }
-
-  @Provides SQLiteOpenHelper databaseHelper() {
-    return new ExternalOAuthDbHelper(TripKit.singleton().configs().context(), "externalOAuths.db");
-  }
-
   @Provides ExternalOAuthServiceGenerator provideExternalOAuthServiceGenerator() {
     return new ExternalOAuthServiceGenerator(new OkHttpClient.Builder());
   }
 
-  @Provides ExternalOAuthService getExternalOAuthService(ExternalOAuthStore store,
-                                                         ExternalOAuthServiceGenerator externalOAuthServiceGenerator) {
-    return new ExternalOAuthServiceImpl(store, externalOAuthServiceGenerator);
+  @Provides
+  ExternalOAuthService getExternalOAuthService(ExternalOAuthServiceGenerator externalOAuthServiceGenerator) {
+    return new ExternalOAuthServiceImpl(externalOAuthServiceGenerator);
   }
 
   @Provides
-  BookingService getBookingService(BookingApi bookingApi, ExternalOAuthStore externalOAuthStore) {
-    return new BookingServiceImpl(bookingApi, externalOAuthStore, new Gson());
+  BookingService getBookingService(BookingApi bookingApi) {
+    return new BookingServiceImpl(bookingApi, new Gson());
   }
 
   @Provides QuickBookingService getQuickBookingService(QuickBookingApi quickBookingApi) {

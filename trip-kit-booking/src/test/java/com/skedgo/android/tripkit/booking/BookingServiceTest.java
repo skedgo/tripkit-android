@@ -15,7 +15,7 @@ import retrofit2.Response;
 import rx.Observable;
 import rx.observers.TestSubscriber;
 
-import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Java6Assertions.*;
 import static org.junit.Assert.assertNull;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
@@ -24,14 +24,13 @@ import static org.mockito.Mockito.when;
 @Config(constants = BuildConfig.class)
 public class BookingServiceTest {
   @Mock BookingApi bookingApi;
-  @Mock ExternalOAuthStore externalOAuthStore;
   private Gson gson;
   private BookingServiceImpl service;
 
   @Before public void before() {
     MockitoAnnotations.initMocks(this);
     gson = new Gson(); // use default Gson
-    service = new BookingServiceImpl(bookingApi, externalOAuthStore, gson);
+    service = new BookingServiceImpl(bookingApi, gson);
   }
 
   @Test public void shouldGetBookingFormAsync() {

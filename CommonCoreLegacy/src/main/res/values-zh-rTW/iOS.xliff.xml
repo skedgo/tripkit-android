@@ -1,0 +1,973 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<resources>
+	<string name="tripgo_agenda">TripGo行程</string>
+	<string name="notification_extension">通知擴展</string>
+	<!--Class = "WKInterfaceSwitch"; title = "Reminder"; ObjectID = "00e-CH-gOu";-->
+	<string name="reminder">提醒</string>
+	<!--Class = "WKInterfaceLabel"; text = "Description"; ObjectID = "0mK-e0-427";-->
+	<string name="description">描述</string>
+	<!--Class = "WKInterfaceLabel"; text = "No Data"; ObjectID = "6Qf-Ve-PDJ";-->
+	<string name="no_data">沒有資料</string>
+	<!--Class = "WKInterfaceController"; title = "TripGo"; ObjectID = "AgC-eL-Hgc";-->
+	<string name="tripgo">TrioGo</string>
+	<!--Class = "WKInterfaceLabel"; text = "Getting trip"; ObjectID = "F85-mJ-6yD";-->
+	<string name="getting_trip">正在搜尋路線</string>
+	<!--Class = "WKInterfaceButton"; title = "Show Map"; ObjectID = "GGf-v0-vEJ";-->
+	<string name="show_map">顯示地圖</string>
+	<!--Class = "WKInterfaceMenuItem"; title = "Favourites"; ObjectID = "RoM-Us-t1Y";-->
+	<string name="favourites">常用項目</string>
+	<!--Class = "WKInterfaceMenuItem"; title = "Agenda"; ObjectID = "Uzb-ex-6N5";-->
+	<string name="agenda">行程</string>
+	<!--Class = "WKInterfaceButton"; title = "Timetable"; ObjectID = "h3q-kR-2ID";-->
+	<string name="timetable">時刻表</string>
+	<!--Class = "WKInterfaceLabel"; text = "Alert"; ObjectID = "jYK-Fw-rhR";-->
+	<string name="alert">提示</string>
+	<!--Class = "WKInterfaceMenuItem"; title = "Retry"; ObjectID = "r0K-AY-XvO";-->
+	<string name="retry">重試</string>
+	<string name="tripgo_watchkit_extension">TripGo WatchKit Extension</string>
+	<!--Instruction to users when there are no upcoming trips-->
+	<string name="plan_a_trip_on_your_phone_or_press_firmly_to_access_your_favourites_dot">請在您的手機上規劃一條路線或是下壓螢幕來查閱您的常用路線</string>
+	<!--Format string for going from one location to another. For example: Used to name favourite trips.-->
+	<string name="_pattern_to__pattern">從%1$s到%2$s</string>
+	<!--Add a new stopover-->
+	<string name="add_stopover_dot_dot_dot">新增中轉點...</string>
+	<!--Button to save a trip to the agenda-->
+	<string name="add_to_agenda">加到行程</string>
+	<!--Error title when agenda isn't yet set up.-->
+	<string name="agenda_is_not_set_up_dot">尚未設定行程</string>
+	<!--Button to agree to EULA or a similar agreement-->
+	<string name="agree">同意</string>
+	<!--Option to use this trip for all similar cases.-->
+	<string name="all">刪除所有事件</string>
+	<!--Option to delete this event and all after in a recurrence-->
+	<string name="all_from_here">刪除所有將來的事件</string>
+	<!--Type for regular events that go in the phone's calendar.-->
+	<string name="calendar_event">事件</string>
+	<!--Indicating the next trip is a current trip-->
+	<string name="current_trip">當前的旅程段</string>
+	<!--No comment provided by engineer.-->
+	<string name="database_corrupted_and_lost_dot">資料庫損毀或遺失</string>
+	<!--Button to dismiss something, e.g., an error or action action sheet-->
+	<string name="dismiss">關閉</string>
+	<!--Title for a flight-->
+	<string name="flight">航班</string>
+	<!--Indicating localisation is in progress-->
+	<string name="getting_current_location">正在取得目前位置</string>
+	<!--Message to show when trying to get trip for a favorite-->
+	<string name="getting_trip_dot_dot_dot">正在規劃路線</string>
+	<!--Type for events that are regular visit's to one of the user's favorites-->
+	<string name="habitual_visit">例行事件</string>
+	<!--Typical name that you'd give your home location-->
+	<string name="home">住家</string>
+	<!--Inidcating the watch app is loading-->
+	<string name="loading_dot_dot_dot">載入中...</string>
+	<!--Button to show a map or to modify the map's settings-->
+	<string name="map">地圖</string>
+	<!--Indicator that a transport mode will appear minimised on the routes screen.-->
+	<string name="minimised">最小化</string>
+	<!--Title for unnamed new event-->
+	<string name="new_event">新事件</string>
+	<!--Option to delete only this event in a recurence-->
+	<string name="only_this">僅此事件</string>
+	<!--Recovery suggestion when TripGo cannot access its local files-->
+	<string name="please_delete_the_app_and_re_minusinstall_from_the_app_store_dot_sorry_for_the_inconvenience_exclam">請將本程式從手機上移除並再次從App Store下載．很抱歉造成您的不便</string>
+	<!--Recovery suggestion when an app restart is required, e.g., when the database got corrupted and/or the app can't access its local files.-->
+	<string name="please_restart_the_app_dot_sorry_for_the_inconvenience_exclam">請重新啟動本程式．很抱歉造成您的不便</string>
+	<!--Profile tab bar name-->
+	<string name="profile">關於我</string>
+	<!--Action title to reset something, e.g., settings-->
+	<string name="reset">重置</string>
+	<!--Error recovery suggestion when agenda isn't yet set up but needed for Watch app.-->
+	<string name="set_up_your_agenda_in_the_tripgo_app_dot">請在TripGo程序上設定您的“行程”</string>
+	<!--Show trip-->
+	<string name="show_trip">顯示路線</string>
+	<!--Action button on trip reminders to snooze it for a fixed amount.-->
+	<string name="snooze_5_mins">五分鐘後再次提醒</string>
+	<!--Action button on public transport trip reminders to skip this service and get reminded for the next service-->
+	<string name="snooze_until_next">下個路線段前不再提醒</string>
+	<!--Stay, i.e., type for dates you're staying at a hotel, or when moving house.-->
+	<string name="stay">住宿</string>
+	<!--Title for stopover event-->
+	<string name="stopover">中轉點</string>
+	<!--Notification message for trip with unknown destination. Notification message for a non-public transport trip. Provided is %time you need to leave.-->
+	<string name="time_to_leave_exclam_your_trip_commences_at__pattern">請準備出發！您的旅程將從 %1$s 開始</string>
+	<!--Notification message for a trip. Provided is %destination and %time you need to leave.-->
+	<string name="time_to_leave_exclam_your_trip_to__pattern_commences_at__pattern">請準備出發！您到 %1$s 的旅程將在 %2$s 開始</string>
+	<!--Title for button to access transport modes-->
+	<string name="transport">交通工具</string>
+	<!--No comment provided by engineer.-->
+	<string name="tripgo_cannot_access_its_local_files_dot">TripGo無法存取本地檔案</string>
+	<!--Trips tab bar name-->
+	<string name="trips">路線</string>
+	<!--Indicating the next trip is an upcoming trip-->
+	<string name="upcoming_trip">即將開始的路線</string>
+	<!--Button to view something, e.g., a notification content or the EULA-->
+	<string name="view">查看</string>
+	<!--Class = "UINavigationItem"; title = "Settings"; ObjectID = "5WK-au-VFq";-->
+	<string name="settings">設定</string>
+	<!--Class = "UINavigationItem"; title = "Routes"; ObjectID = "IFX-i9-ymN";-->
+	<string name="routes">所有路線</string>
+	<!--Class = "UINavigationItem"; title = "Service"; ObjectID = "JMk-5m-B22";-->
+	<string name="service">班次</string>
+	<!--Class = "UINavigationItem"; title = "Trip"; ObjectID = "QTR-Ae-g7f";-->
+	<string name="trip">路線</string>
+	<!--Class = "UINavigationItem"; title = "Alerts"; ObjectID = "t3k-Ks-sqa";-->
+	<string name="alerts">提示</string>
+	<!--Class = "UIButton"; accessibilityLabel = "Swap from and to"; ObjectID = "30";-->
+	<string name="swap_from_and_to">對調出發地與目的地</string>
+	<!--Class = "UIButton"; normalTitle = "Time"; ObjectID = "44";-->
+	<string name="time">時刻</string>
+	<!--Class = "UIButton"; accessibilityLabel = "Route"; ObjectID = "57";-->
+	<string name="route">規劃路線</string>
+	<!--Class = "UIButton"; accessibilityLabel = "To Location"; ObjectID = "JFm-H4-fOo";-->
+	<string name="to_location">出發地</string>
+	<!--Class = "UIButton"; accessibilityLabel = "From Location"; ObjectID = "bs1-li-naL";-->
+	<string name="from_location">目的地</string>
+	<!--Class = "UILabel"; text = "VALID FROM"; ObjectID = "Ymf-LY-K7e";-->
+	<string name="valid_from">有效期從</string>
+	<!--Class = "UILabel"; text = "TO"; ObjectID = "x1o-my-P1Q";-->
+	<string name="to">到</string>
+	<!--Minutes format (used for transfer times). (old key: Minutes)-->
+	<string name="_perc_dot0f_minutes">%.0f分鐘</string>
+	<!--Minutes format (used alert firing X minuts before departure). (old key: MinutesBefore)-->
+	<string name="_perc_dot0f_minutes_before">%.0f分鐘前</string>
+	<!--Title for linked third-party account, e.g., 'Uber Account'-->
+	<string name="_pattern_account">%1$s 帳戶</string>
+	<!--Filler for a specific service running at a time, e.g., '396 at 11:56am'-->
+	<string name="_pattern_at__pattern">%1$s 於 %2$s</string>
+	<!--Filler for a specific frequency-based service indicating its frequency, e.g., 'M10 every 10 minutes'-->
+	<string name="_pattern_every__pattern">%1$s 每 %2$s</string>
+	<!--Airline flight number with %airline and %flightNumber, e.g., 'Qantas flight QF1'. (old key: AirlineFlightNumber)-->
+	<string name="_pattern_flight__pattern">%1$s航班%2$s</string>
+	<!--'About' for a provider, usually takes users to view a web page, e.g., 'About PayiQ'-->
+	<string name="about__pattern">關於 %1$s</string>
+	<!--Error title when access to location hasn't been granted, but location is required.-->
+	<string name="access_to_location_services_required_dot">需要使用定位服務</string>
+	<!--Error text to show when trying to use a feature which requires an account, but the user hasn't set one up (yet).-->
+	<string name="account_required">需要使用者帳號</string>
+	<!--Add reminder activity title-->
+	<string name="add_reminder">新增提醒事項</string>
+	<!--No comment provided by engineer.-->
+	<string name="add_address_dot_dot_dot">新增地址...</string>
+	<!--No comment provided by engineer.-->
+	<string name="add_another_recurrence">新增另一個重複事件</string>
+	<!--Add to calendar activity title-->
+	<string name="add_to_calendar">加到行事曆</string>
+	<!--Add favourite activity title-->
+	<string name="add_to_favourites">加到常用項目</string>
+	<!--Action title for adding a vehicle-->
+	<string name="add_vehicle">新增車輛</string>
+	<!--Action title for adding another habitual visit to a favourite. (old key: NewItemHereActionTitle)-->
+	<string name="add_when_i_apostm_here">加入另一行程</string>
+	<!--Confirmation that something got added HUD notice-->
+	<string name="added">已添加</string>
+	<!--Alert title that indicates an address is missing when creating a new event.-->
+	<string name="address_required">需要一個地址</string>
+	<!--Title for agenda screen while it's still in setup mode.-->
+	<string name="agenda_setup">設定行程</string>
+	<!--Action button title to see alternative options for the case where you can't make the next connection.-->
+	<string name="alternative_routes">其他路線</string>
+	<!--No comment provided by engineer.-->
+	<string name="ambiguous_event_address_dot">無法辨識的事件地址</string>
+	<!--Arrival date+time for overnight stay-->
+	<string name="arrival">到達</string>
+	<!--Arrive before button-->
+	<string name="arrive_by">此前到達</string>
+	<!--Title for section to assign a trip to a vehicle.-->
+	<string name="assign_to_vehicle">指定使用的車輛</string>
+	<!--Filler for a service running at time, e.g., 'At 11:56am'-->
+	<string name="at__pattern">在 %1$s</string>
+	<!--Distance 'automatic'-->
+	<string name="auto">自動</string>
+	<!--Header for settings of reminders automatically added by TripGo through the agenda-->
+	<string name="automatic_reminders">自動新增提醒事件</string>
+	<!--No comment provided by engineer.-->
+	<string name="available_bikes">可租用的自行車</string>
+	<!--No comment provided by engineer.-->
+	<string name="available_spots">可停車位</string>
+	<!--Response to positive answer to question whether TripGo is useful, prompting for App Store rating.-->
+	<string name="awesome_exclam_how_about_rating_us_question">太棒了！給我們評價吧?</string>
+	<!--Book a taxi-->
+	<string name="book_a_taxi">預定計程車</string>
+	<!--Description on empty bookings screen-->
+	<string name="bookings_made_with_tripgo_will_appear_here_dot">所有透過TripGo預定的旅程將會顯示在這裡</string>
+	<!--Informing users that they may be viewing cached bookings-->
+	<string name="bookings_may_be_outdated">Bookings may be outdated</string>
+	<!--Response to negative answer to question whether TripGo is useful, prompting for feedback.-->
+	<string name="bummer_dot_dot_dot_how_about_some_feedback_question">真遺憾．可以給我們一些建議嗎？</string>
+	<!--Calendar-->
+	<string name="calendar">行事曆</string>
+	<!--No comment provided by engineer.-->
+	<string name="calendars">所有行事曆</string>
+	<!--No comment provided by engineer.-->
+	<string name="change_time">更改時間</string>
+	<!--clear cache preference-->
+	<string name="clear_cache">清除暫存檔</string>
+	<!--clear search history preference-->
+	<string name="clear_search_history">清除搜尋結果</string>
+	<!--School pricing preference-->
+	<string name="concession_pricing">優惠票價</string>
+	<!--Hassle preference-->
+	<string name="convenience">方便性</string>
+	<!--Convenience description-->
+	<string name="convenience_is_affected_by_things_such_as_changing_public_transport_services_coma_the_amount_of_walking_coma_and_finding_a_taxi_dot">旅程的方便性會受到是否需要更換大眾交通，您需要步行的距離及是否尋找計程車等的影響.</string>
+	<!--Error title when TripGo couldn't identify the user's current city.-->
+	<string name="could_not_find_your_city_dot">無法找到您的城市</string>
+	<!--Title for button that allows users to create a user account-->
+	<string name="create_account">Create account</string>
+	<!--Title for critical error-->
+	<string name="critical_error">嚴重錯誤</string>
+	<!--No comment provided by engineer.-->
+	<string name="custom_trip_does_not_fit">自定路線與既定的行程無法相容</string>
+	<!--No comment provided by engineer.-->
+	<string name="custom_trip_has_been_cancelled">自訂路線已被取消</string>
+	<!--Cycling speed preference-->
+	<string name="cycle_speed">自行車騎速</string>
+	<!--Departure date+time for overnight stay-->
+	<string name="departure">離站時間</string>
+	<!--Distances preference-->
+	<string name="distances">距離</string>
+	<!--Title for transport modes that the user doesn't want included-->
+	<string name="do_not_include">不要包含</string>
+	<!--No comment provided by engineer.-->
+	<string name="do_you_want_to_always_use_this_trip_and_add_it_to_your_favourites_question">您想要每次都使用這個路線並將其加為常用項目嗎?</string>
+	<!--Walkthrough (skip in here should match translation for 'Skip'.-->
+	<string name="don_apostt_have_a_fixed_place_of_work_or_study_question_skip_this_step_dot">如果您沒有固定的上班或是上學地點，您可以略過此步驟</string>
+	<!--Label for 'Duration' button to sort trips by their total duration. (old key: ViewDurationButton)-->
+	<string name="duration">歷時</string>
+	<!--Used in countdown context, indicating when a ticket becomes valid-->
+	<string name="effective_in">以下時間後有效</string>
+	<!--No comment provided by engineer.-->
+	<string name="empty_docks">可用停車柱</string>
+	<!--Title for the time an event ends (including date information)-->
+	<string name="end_date">結束日期</string>
+	<!--No comment provided by engineer.-->
+	<string name="end_user_licence_agreement">終端使用者協議</string>
+	<!--Carbon preference-->
+	<string name="environment">減少碳足跡</string>
+	<!--No comment provided by engineer.-->
+	<string name="error_encountered">Error encountered</string>
+	<!--No comment provided by engineer.-->
+	<string name="event">事件</string>
+	<!--No comment provided by engineer.-->
+	<string name="event_does_not_fit">事件與既定的行程無法相容</string>
+	<!--No comment provided by engineer.-->
+	<string name="event_is_missing_an_address_dot">事件缺乏地址</string>
+	<!--No comment provided by engineer.-->
+	<string name="event_is_outside_tripgo_aposts_range_dot">事件的地點不在TripGo支援的範圍內</string>
+	<!--No comment provided by engineer.-->
+	<string name="event_was_cancelled">事件已被取消</string>
+	<!--Filler for a frequency-based service indicating its frequency, e.g., 'Every 10 minutes'-->
+	<string name="every__pattern">每 %1$s</string>
+	<!--Text do mark an example-->
+	<string name="example">範例</string>
+	<!--Exclude event action-->
+	<string name="exclude">排除此事件</string>
+	<!--Used in countdown context, indicating when a ticket expires-->
+	<string name="expire_in">剩餘有效期</string>
+	<!--Title for list of expired tickets-->
+	<string name="expired">逾期票</string>
+	<!--Speed preference 'fast'-->
+	<string name="fast">快</string>
+	<!--No comment provided by engineer.-->
+	<string name="favourite">常用項目</string>
+	<!--No comment provided by engineer.-->
+	<string name="favourite_trip">常用路線</string>
+	<!--Help title-->
+	<string name="feedback__ampersand_support">技術支援與問題回報</string>
+	<!--Placeholder text for search bar that is used for filtering-->
+	<string name="filter">篩選</string>
+	<string name="flight_number">航班號碼</string>
+	<!--Reminder to leave preference-->
+	<string name="for_when_to_leave">出發時間</string>
+	<!--Favorite trip 'from' title-->
+	<string name="from">從</string>
+	<!--Route here... ...from Current location-->
+	<string name="from_current_location">從當前的位置</string>
+	<!--Header for list of vehicles garaged at this location-->
+	<string name="garaged_vehicles">停放在此處的車輛</string>
+	<!--Title of settings for generic transport stuff-->
+	<string name="general">一般</string>
+	<!--Header for settings for feedback, recommending and rating TripGo-->
+	<string name="get_involved">使用者參與</string>
+	<!--Action button title for getting turn-by-turn directions-->
+	<string name="get_directions">使用導航</string>
+	<!--Get off here-->
+	<string name="get_off_here">在這裡結束搭乘</string>
+	<!--Get on here-->
+	<string name="get_on_here">在這裡開始搭乘</string>
+	<!--Description for button to get on or off at the selected public transport stop rather than where TripGo suggested.-->
+	<string name="get_on_or_off_here">在這裡開始/結束搭乘</string>
+	<!--No comment provided by engineer.-->
+	<string name="has_tripgo_been_useful_to_you_question">TripGo對您來說有幫助嗎?</string>
+	<!--Map mode 'streets + satellite'-->
+	<string name="hybrid">混合</string>
+	<!--Instruction text to show when user is trying to make a booking, but he/she needs to create an account first.-->
+	<string name="in_order_to_make_bookings_coma_you_either_need_to_log_into_your_device_with_an_apple_id_or_you_need_to_create_a_tripgo_account_dot">如需訂票，請使用您的Apple ID來登入您的行動設備，或您可以創建一個TripGo帳號</string>
+	<!--Include event action-->
+	<string name="include">包含此事件</string>
+	<string name="include_step_count">包含步行數</string>
+	<!--Title for a switch indicating two things: 1) if transport mode should be included in trips and 2) if this event should be included in all-day routes-->
+	<string name="include_in_routes">包含在行程中</string>
+	<!--Accessibility hint for tapping title in agenda - jumps to 'today'-->
+	<string name="jump_to_today">回到今日</string>
+	<!--Distance 'kilometers'-->
+	<string name="km">公里</string>
+	<!--Leave after button-->
+	<string name="leave_at">此前離開</string>
+	<!--Button title to switch view to list mode-->
+	<string name="list">列表</string>
+	<!--Title for showing the details of a location, typically picked from the map after searching or dropping a pin-->
+	<string name="location">地點詳情</string>
+	<!--No comment provided by engineer.-->
+	<string name="location_missing_dot">缺乏地點.</string>
+	<!--Error title when favourite is missing a location..-->
+	<string name="location_not_set_dot">尚未設置地點</string>
+	<!--No comment provided by engineer.-->
+	<string name="long_press_on_the_map_to_choose_a_location">在地圖上長按來選取地點</string>
+	<!--Header for settings of reminders that the user manually added-->
+	<string name="manual_reminders">手動設定提醒事件</string>
+	<!--No comment provided by engineer.-->
+	<string name="marking_a_location_as_a_favourite_will_allow_quick_access_to_routing_results_for_going_there_from_your_current_location_dot">常用地點讓您可以快速的規劃從您目前所在位置到這些地點的旅程.</string>
+	<!--No comment provided by engineer.-->
+	<string name="marking_a_transit_stop_as_a_favourite_will_allow_quick_access_to_its_timetable_dot">當您將車站加入常用地點時，您將可以快速地取得此車站的時刻表.</string>
+	<!--Speed preference 'medium'-->
+	<string name="medium">中</string>
+	<!--Distance 'miles'-->
+	<string name="mi">哩</string>
+	<!--Minimum transfer time preference-->
+	<string name="min_transfer_time">最短轉運時間</string>
+	<!--No comment provided by engineer.-->
+	<string name="minimise_results_for_this_mode_on_the_routes_screen_dot_great_for_transport_options_you_only_use_occasionally_dot">將此交通工具相關的結果最小化．您可以在不常使用的交通選項上啟用此功能</string>
+	<!--Reminder to leave preference-->
+	<string name="minutes_before_trip">多久前提醒</string>
+	<!--More button accessibility label-->
+	<string name="more">更多</string>
+	<!--Header for list of how to get more information (e.g., by opening a website)-->
+	<string name="more_information">更多資訊</string>
+	<!--Sample event name ('Movie')-->
+	<string name="movie">電影</string>
+	<!--Title for profile item that loads a list of user's bookings-->
+	<string name="my_bookings">我的訂購</string>
+	<!--User preferences title-->
+	<string name="my_priorities">我的優先順序</string>
+	<!--No comment provided by engineer.-->
+	<string name="my_transport">我的交通選項</string>
+	<!--Header for list of my vehicles-->
+	<string name="my_vehicles">我的車輛</string>
+	<!--Error recovery suggestion for when TripGo couldn't identify the user's current city.-->
+	<string name="navigate_to_a_supported_city_on_a_map_dot">請將地圖移到任何一個支援的城市上</string>
+	<!--No comment provided by engineer.-->
+	<string name="new_favourite">新的常用項目</string>
+	<!--No comment provided by engineer.-->
+	<string name="no__apostfrom_apost_location_selected">您未選取您的出發地</string>
+	<!--No comment provided by engineer.-->
+	<string name="no__apostto_apost_location_selected">您未選取您的目的地</string>
+	<!--Text to show on screen that lists bookings if user hasn't made a booking yet.-->
+	<string name="no_bookings_yet_exclam">尚未有訂票紀錄</string>
+	<!--Error title for when no calendar found.-->
+	<string name="no_calendar_found_dot">無法在您的裝置上找到任何行事曆．</string>
+	<!--No comment provided by engineer.-->
+	<string name="no_locations_set">尚未設定地點</string>
+	<!--Error title when routing produced no results (but no specific error was returned from routing).-->
+	<string name="no_routes_found_dot">無法找到任何合適的路線</string>
+	<!--Negative answer to follow-up question for rating or feedback.-->
+	<string name="no_coma_thanks">不用．謝謝．</string>
+	<!--Negative answer to question whether TripGo is useful.-->
+	<string name="not_really">並不願意</string>
+	<!--Countdown cell 'now' indicator-->
+	<string name="now">現在</string>
+	<!--No comment provided by engineer.-->
+	<string name="ok">好</string>
+	<!--Title for homescreen action to open the agenda-->
+	<string name="open_agenda">開啟"行程"</string>
+	<!--Error recovery suggestion for favourites with missing location.-->
+	<string name="open_tripgo_app_and_add_the_location_of_this_favourite_dot">請在手機上開啟TripGo為此常用項目設定地點</string>
+	<!--Error recovery suggestion for when watch doesn't have access to location services.-->
+	<string name="open_tripgo_or_settings_app_on_your_phone_and_grant_tripgo_access_to_location_services_dot">請在手機上開啟TripGo或是系統的設定來授權TripGo存取您的定位服務</string>
+	<!--No comment provided by engineer.-->
+	<string name="open_website">開啟網頁</string>
+	<!--No comment provided by engineer.-->
+	<string name="our_end_user_licence_agreement_has_changed_dot_you_must_agree_to_it_before_continuing_use_of_this_app">我們的終端使用者協議有所變更．您必須同意以繼續使用本程序</string>
+	<!--Text displayed when the user has given the app access to private data such as their calendar or contacts, but the user needs to perform the original action again to now see the results.-->
+	<string name="permission_was_granted_dot_please_go_back_and_try_again_dot">已取得授權．請返回之前的畫面並重新嘗試一次.</string>
+	<!--No comment provided by engineer.-->
+	<string name="permissions">授權</string>
+	<!--Timetable screen title-->
+	<string name="pick_a_time">選取一個時間</string>
+	<!--Title for homescreen action to plan a new trip-->
+	<string name="plan_trip">規劃路線</string>
+	<!--Title for button that allows users to plan a new trip-->
+	<string name="plan_a_new_trip">規劃新的路線</string>
+	<string name="plan_a_trip_on_your_phone_dot">請在您的手機上規劃一條路線</string>
+	<!--Error recovery suggestion for when routing produced no results (but no specific error was returned from routing).-->
+	<string name="please_adjust_your_query_and_try_again_dot">請調整一下您的搜索條件並再次嘗試</string>
+	<!--No comment provided by engineer.-->
+	<string name="please_be_advised_that_you_are_viewing_cached_copies_of_your_bookings">Please be advised that you are viewing cached copies of your bookings</string>
+	<!--Error recovery suggestion for when no calendar found.-->
+	<string name="please_check_your_calendar_app_and_make_sure_you_have_a_calendar_configured_dot">請確任您已在此裝置上設定的行事曆．</string>
+	<!--Alert message that asks users to provide the missing address for a new event.-->
+	<string name="please_specify_an_address_dot">請指定一個地址</string>
+	<!--No comment provided by engineer.-->
+	<string name="powered_by">資料提供商</string>
+	<!--No comment provided by engineer.-->
+	<string name="powered_by__pattern">資料提供商為 %1$s</string>
+	<!--Label for 'Overall' button to sort trips by their overall total score considering all factors. (old key: ViewOverallButton)-->
+	<string name="preferred">自動</string>
+	<!--Title for preferred public transport modes.-->
+	<string name="preferred_transport">偏好的交通工具</string>
+	<!--Label for 'Price' button to sort trips by their total cost. (old key: ViewPriceButton)-->
+	<string name="price">票價</string>
+	<!--No comment provided by engineer.-->
+	<string name="priorities">優先順序</string>
+	<!--Rate us preference-->
+	<string name="rate_tripgo">請給我們評價</string>
+	<!--Explanation for what calendar events are compared to habituals and stays. Can be long-ish.-->
+	<string name="regular_events_which_will_be_saved_in_your_device_aposts_calendar_dot">一般事件將會被加入您裝置上的行事曆</string>
+	<!--Reminders title-->
+	<string name="reminders">提醒事項</string>
+	<!--No comment provided by engineer.-->
+	<string name="remove">移除</string>
+	<!--Remove favourite activity title-->
+	<string name="remove_favourite">刪除常用項目</string>
+	<!--Remove reminder activity title-->
+	<string name="remove_reminder">刪除提醒事項</string>
+	<!--No comment provided by engineer.-->
+	<string name="remove_and_exclude_event">排除此事件</string>
+	<!--Unsave trip action-->
+	<string name="remove_from_agenda">從行程中移除</string>
+	<!--No comment provided by engineer.-->
+	<string name="remove_from_favourites">從常用項目中移除</string>
+	<!--Confirmation that something got removed HUD notice-->
+	<string name="removed">移除</string>
+	<!--No comment provided by engineer.-->
+	<string name="removing_this_trip_will_exclude_the_following_event_from_your_agenda_dot">移除此路線將會同時把它以後的事件從您的行程中排除</string>
+	<string name="removing_this_trip_will_exclude_the_preceeding_event_from_your_agenda_dot">移除此路線將會同時把它之前的事件從您的行程中排除</string>
+	<!--Title for switch indicating if an event repeats or not-->
+	<string name="repeat_does_end">結束重複</string>
+	<!--Title for when an event repeats-->
+	<string name="repeats">重複</string>
+	<!--Report problem-->
+	<string name="report_problem">回報問題</string>
+	<!--Title for button that allows users to request support-->
+	<string name="request_support">請求支援</string>
+	<!--Title for action to perform by the user if an event is outside TripGo's range. The action will display a feedback form to request the region of that event.-->
+	<string name="request_dot_dot_dot">要求...</string>
+	<!--Action title to reset agenda content.-->
+	<string name="reset_agenda">重置行程</string>
+	<!--Action title to reset tutorial progress.-->
+	<string name="reset_tutorial">重置教學</string>
+	<!--Title for selector of return time for a trip-->
+	<string name="return_time">回程時間</string>
+	<!--Header for section to configure return trip-->
+	<string name="return_trip">回程路線</string>
+	<!--No comment provided by engineer.-->
+	<string name="review_eula">查閱終端使用者協議</string>
+	<!--No comment provided by engineer.-->
+	<string name="route_from">從此地點開始規劃路線</string>
+	<!--Title for options for routing to this location, options are: current location, <some previously selected location>.-->
+	<string name="route_here">規劃到此的路線</string>
+	<!--Explanation for what routines are compared to calendar events and stays. Can be long-ish. (old key: HabitualEventDescription)-->
+	<string name="routines_are_part_of_your_daily_movement_coma_but_they_aren_apostt_events_that_you_want_in_your_calendar__start_parente_dotg_dot_coma_work_end_parent_dot_they_are_important_for_the_agenda_to_get_you_to_the_right_location_at_the_right_time_dot">例行事件是您每天必須要做的事情，但是您並不想要將它們記錄在行事曆中（例如：上班）．例行事件可以讓“行程”功能在對的時間帶您到對的地方</string>
+	<!--Error message if interregional routing isn't yet supported-->
+	<string name="routing_from__pattern_to__pattern_is_not_yet_supported">尚未支援從%1$s到%2$s的路線</string>
+	<!--Used in the form that requests support for a specific routing-->
+	<string name="routing_request">請求規劃路線</string>
+	<!--Map mode 'satellite'-->
+	<string name="satellite">衛星</string>
+	<!--Price preference-->
+	<string name="save_money">節省金錢</string>
+	<!--Time preference-->
+	<string name="save_time">節省時間</string>
+	<string name="search_for_a_city">搜尋您的城市</string>
+	<!--Agenda onboarding: placeholder text for search bar for 'home'.-->
+	<string name="search_for_your_home_address">搜尋您的住家位置</string>
+	<!--Agenda onboarding: placeholder text for search bar for 'work'.-->
+	<string name="search_for_your_work_address">搜尋您的上班位置</string>
+	<!--No comment provided by engineer.-->
+	<string name="select_vehicle">選擇您的車輛</string>
+	<string name="select_a_date_to_get_flight_details_dot">選取一個日期來獲取航班詳細資料.</string>
+	<!--Walkthrough-->
+	<string name="select_the_place_where_you_stay_at_the_end_of_each_day">選擇一個您在每一天結束後回到的地點</string>
+	<!--Action button title for composing an SMS to a real-time service-->
+	<string name="send_real_minustime_sms">發送及時簡訊</string>
+	<!--Action button title for sharing when you arrive-->
+	<string name="share_arrival">分享您已到達</string>
+	<!--Share trip-->
+	<string name="share_trip">分享路線</string>
+	<!--Button title on trips to show alternatives for it-->
+	<string name="show_alternatives">顯示替代路線</string>
+	<string name="show_booking_options">顯示訂票選項</string>
+	<!--No comment provided by engineer.-->
+	<string name="show_details">顯示詳細資料</string>
+	<!--Button to show disclaimers, e.g., info of public transport data.-->
+	<string name="show_disclaimer">顯示免責聲明</string>
+	<!--No comment provided by engineer.-->
+	<string name="show_info">顯示資料</string>
+	<!--No comment provided by engineer.-->
+	<string name="show_parking_options">顯示停車場選項</string>
+	<!--Button Title to get to website with ticket details.-->
+	<string name="show_ticket_info">顯示票價資訊</string>
+	<!--Action button title for viewing timetable for public transport-->
+	<string name="show_timetable">顯示時刻表</string>
+	<!--Indicator for how many transport modes are being displayed out of the total available ones for the region of the trip. First placeholder will be replaced with selected number, second with total number.-->
+	<string name="showing__pattern_of__pattern_transport_modes">在 %1$s 種所有運輸模式中顯示 %2$s 個</string>
+	<!--Button title to skip a certain step-->
+	<string name="skip">略過</string>
+	<!--Speed preference 'slow'-->
+	<string name="slow">慢</string>
+	<!--No comment provided by engineer.-->
+	<string name="some_of_the_trips_failed_to_download_dot_please_try_again">無法下載某些旅程，請再嘗試一次</string>
+	<!--No comment provided by engineer.-->
+	<string name="sorry_dot_tripgo_doesn_apostt_work_here_yet_exclam">抱歉. TripGo目前不支援此地區.</string>
+	<!--Spread the word preference-->
+	<string name="spread_the_word">幫我們宣傳</string>
+	<!--Title for the time an event starts (including date information)-->
+	<string name="start">開始日期</string>
+	<!--Action title for adding a habitual item away from some location. (old key: NewItemAwayActionTitle)-->
+	<string name="stay_at_a_different_location">在不同的地點停留</string>
+	<!--Additional information for official stop code of a public transport stop.-->
+	<string name="stop_code_2points__pattern">車站代碼: %1$s</string>
+	<!--Map mode 'streets'-->
+	<string name="streets">標準</string>
+	<string name="support">支援</string>
+	<!--Walkthrough-->
+	<string name="swipe_dates_to_navigate_between_weeks">在日期上滑動可以在不同星期間瀏覽</string>
+	<!--Walkthrough-->
+	<string name="tap_and_hold_title_to_jump_directly_to_a_specified_date_dot">點選後按住可以直接跳到指定的日期</string>
+	<!--Walkthrough-->
+	<string name="tap_public_transport_stops_for_access_to_timetable">在大眾交通的車站上按一下可取得時刻表</string>
+	<!--Walkthrough-->
+	<string name="tap_title_to_go_to__aposttoday_apost">點選頁面標題可立即轉換到今日</string>
+	<!--No comment provided by engineer.-->
+	<string name="tap_to_confirm_hours_or_swipe_to_delete">輕觸確認時間或滑動刪除</string>
+	<!--No comment provided by engineer.-->
+	<string name="tap_to_set_address">輕觸來設定地址</string>
+	<!--No comment provided by engineer.-->
+	<string name="tap_to_set_address_or_swipe_to_delete">輕觸設定地址或滑動刪除</string>
+	<!--No comment provided by engineer.-->
+	<string name="tap_to_set_garage">按此來設定車庫</string>
+	<!--Thank you HUD notice-->
+	<string name="thank_you_exclam">感謝您!</string>
+	<!--Description for critical error where error will be shown below.-->
+	<string name="the_application_encountered_a_critical_error_and_can_apostt_recover_2points">本App遭遇無法還原的嚴重錯誤:</string>
+	<!--Title for view that presents a purchased ticket-->
+	<string name="ticket">票證</string>
+	<!--Indicating that a ticket has expired.-->
+	<string name="ticket_expired">票證已過期</string>
+	<!--Title for screen to pick your working hours-->
+	<string name="time_at_work">上班時間</string>
+	<!--Time zone (typically for an event)-->
+	<string name="time_zone">時區</string>
+	<!--Header for times a user is typically at this location, e.g., working hours-->
+	<string name="times">時間</string>
+	<!--Title, e.g., for event or favourite. (old key: TitleFavouriteName)-->
+	<string name="title">名稱</string>
+	<!--No comment provided by engineer.-->
+	<string name="total_spaces">所有車位</string>
+	<!--Type of something, e.g., an event (calendar event, stay, routine) or a vehicle (car, motorbike, bicycle). (old key: TypeEvent)-->
+	<string name="type">種類</string>
+	<!--This is followed by some date, e.g., Last updated: 11 Nov, 9:28am-->
+	<string name="updated_2points_">已更新</string>
+	<!--Explanation for what stays are compared to calendar events and routines. Can be long-ish. (old key: StayEventDescription)-->
+	<string name="use_for_hotels_while_travelling_coma_so_that_the_agenda_starts_and_ends_at_the_correct_location_dot">您可使用”停留”來指定在行程上的暫時居住地，例如旅程中停留的旅館．</string>
+	<!--Title for list of valid tickets-->
+	<string name="valid">有效票</string>
+	<!--Which of my vehicles to assign this to-->
+	<string name="vehicle">車輛</string>
+	<!--No comment provided by engineer.-->
+	<string name="verify_location_dot_dot_dot">確認地點...</string>
+	<!--View alternative times for this trip-->
+	<string name="view_times">顯示時刻表</string>
+	<!--Walking speed preference-->
+	<string name="walk_speed">步行速度</string>
+	<!--No comment provided by engineer.-->
+	<string name="website">網站</string>
+	<!--No comment provided by engineer.-->
+	<string name="week_starts">每週開始日</string>
+	<!--Title for showing what3words address including info button-->
+	<string name="what3words_address">What3words 地址</string>
+	<!--Preference to highlight wheelchair information-->
+	<string name="wheelchair_information">輪椅資訊</string>
+	<!--Where are you going from?-->
+	<string name="where_are_you_going_from_question">您的出發地?</string>
+	<!--Where do you want to go?-->
+	<string name="where_do_you_want_to_go_question">您的目的地?</string>
+	<!--Question for which events in a recurrence to delete (options are typically this/all/any from here)-->
+	<string name="which_would_you_like_to_delete">您想刪除那一個事件</string>
+	<!--Typical name that you'd give your work location-->
+	<string name="work">公司</string>
+	<!--Positive answer to follow-up question for rating or feedback.-->
+	<string name="yeah_coma_ok_exclam">好的．沒問題！</string>
+	<!--Positive answer to question whether TripGo is useful.-->
+	<string name="yes_exclam">是的！</string>
+	<!--Alert if service running late/early, meaning that the user might not make the next service.-->
+	<string name="you_might_not_make_this_transfer_dot">您有可能錯過這次的轉乘</string>
+	<!--No comment provided by engineer.-->
+	<string name="zoom_in">放大</string>
+	<!--Walkthrough-->
+	<string name="zoom_into_map_to_view_public_transport_stops">放大地圖來顯示大眾交通車站訊息</string>
+	<!--Format for a service's real-time indicator for a service which is early, e.g., '1 min early. This means #1 is replaced with something like '1 min'.-->
+	<string name="_pattern_early">提前%1$s</string>
+	<!--Format for a service's real-time indicator for a service which is early, e.g., '1 min early (1:10 pm service). This means #1 is replaced with something like '1 min' and #2 is replaced with the original time, e.g., '1:10 pm').-->
+	<string name="_pattern_early__start_parent_pattern_service_end_parent">提前%1$s (%2$s 的班次)</string>
+	<!--Format for a service's real-time indicator for a service which is late, e.g., '1 min late. This means #1 is replaced with something like '1 min'-->
+	<string name="_pattern_late">延誤%1$s</string>
+	<!--Format for a service's real-time indicator for a service which is late, e.g., '1 min late (1:10 pm service). This means #1 is replaced with something like '1 min' and #2 is replaced with the original time, e.g., '1:10 pm').-->
+	<string name="_pattern_late__start_parent_pattern_service_end_parent">延誤%1$s (%2$s 的班次)</string>
+	<!--Indicator for how cycle-friendly a cycling route is. Placeholder will get replaced with '75%'.-->
+	<string name="_pattern_cycle_friendly">自行車友善度%1$s</string>
+	<!--Number of stops before you get off a vehicle, if there are 2 stops or more, e.g., '10 stops'. (old key: Stops)-->
+	<string name="_pattern_stops">%1$s站</string>
+	<!--Duration without traffic-->
+	<string name="_pattern_w_slasho_traffic">%1$s 路況良好下</string>
+	<!--Indicator for how wheelchair-friendly a wheeelchair route is. Placeholder will get replaced with '75%'.-->
+	<string name="_pattern_wheelchair_friendly">輪椅友善度%1$s</string>
+	<!--Number of stops before you get off a stop, if there's just 1 stop.-->
+	<string name="_1_stop">1站</string>
+	<!--apple maps directions action-->
+	<string name="apple_maps">蘋果地圖</string>
+	<!--Prefix for selected 'arrive by' time
+   Single line instruction to arrive-->
+	<string name="arrive">到達</string>
+	<!--'%@' will be replaced with the arrival time. (old key: ArrivalTime)-->
+	<string name="arrive_at__pattern">在%1$s到達</string>
+	<!--The first '%@' will be replaced with the place of arrival, the second with the time. (old key: ArrivalLocationTime)-->
+	<string name="arrive_at__pattern_at__pattern">在%1$s到達%2$s</string>
+	<!--Title for when you'll arrive when on a trip. Countdown to arrival will be displayed below.-->
+	<string name="arrive_in">離到達</string>
+	<!--No comment provided by engineer.-->
+	<string name="book_with_flitways">預定FlitWays</string>
+	<!--No comment provided by engineer.-->
+	<string name="book_with_uber">預定優步</string>
+	<!--Placeholder title while calculating trips-->
+	<string name="calculating_trips_dot_dot_dot">正在計算最合適的路線</string>
+	<!--No comment provided by engineer.-->
+	<string name="call">聯繫計程車</string>
+	<!--Action title for calling provider of name. (old key: CallTaxiFormat)-->
+	<string name="call__pattern">聯繫%1$s</string>
+	<!--Single line instruction if device is offline and user needs to reconnect to internet to calculate trips-->
+	<string name="connect_to_internet_to_get_trips">請連接網路以取得路線</string>
+	<!--Error title when server could not find a given transit stop.-->
+	<string name="could_not_find_transit_stop_dot">無法找到車站</string>
+	<!--Destination of the bus-->
+	<string name="direction">方向</string>
+	<!--To disconnect/unlink from a service provider, e.g., Uber-->
+	<string name="disconnect">登出連結的帳戶</string>
+	<!--As in 'this bus/train is empty'-->
+	<string name="empty">空車</string>
+	<!--As in 'this bus/train has few seats available'-->
+	<string name="few_seats_available">只有幾個座位</string>
+	<!--Departure location. (old key: PrimaryLocationStart)-->
+	<string name="from__pattern">出發地: %1$s</string>
+	<!--As in 'this bus/train is full and likely can't accept further passengers'-->
+	<string name="full">車已滿</string>
+	<!--No comment provided by engineer.-->
+	<string name="get_lyft">使用Lyft</string>
+	<!--No comment provided by engineer.-->
+	<string name="get_ola">取得Ola</string>
+	<!--No comment provided by engineer.-->
+	<string name="get_ingogo">使用Ingogo</string>
+	<!--google maps directions action-->
+	<string name="google_maps">Google地圖</string>
+	<!--First '%@' will be replaced with destination location, second with arrival at that location. (old key: MessageArrivalTime)-->
+	<string name="i_apostll_arrive_at__pattern_at__pattern">我將於%1$s到達%2$s.</string>
+	<!--Indication of an activity. (old key: ActivityIndication)-->
+	<string name="i_apostll_take_a__pattern_at__pattern_from__pattern_dot">我將於%1$s從%2$s搭乘%3$s.</string>
+	<!--%@ is replaced with app name-->
+	<string name="in_the_meantime_coma_let_aposts_keep_exploring__pattern_and_enjoy_your_trips">在此同時，讓我們繼續使用 %1$s，享受你的旅行</string>
+	<!--No comment provided by engineer.-->
+	<string name="in_the_meantime_coma_let_aposts_keep_exploring_and_enjoy_your_trips">在此同時，讓我們繼續探索，享受你的旅行</string>
+	<!--Prefix for selected 'leave after' time
+   Single line instruction to leave-->
+	<string name="leave">出發</string>
+	<!--The place of departure. (old key: LeaveLocation)-->
+	<string name="leave__pattern">離開%1$s</string>
+	<!--The place of departure with time. (old key: LeaveLocationTime)-->
+	<string name="leave__pattern_at__pattern">在%1$s離開%2$s</string>
+	<!--Time departure. (old key: LeaveTime)-->
+	<string name="leave_at__pattern">於%1$s離開</string>
+	<!--Title for when to depart. Countdown to departure will be displayed below.-->
+	<string name="leave_in">離出發</string>
+	<!--No comment provided by engineer.-->
+	<string name="leave_now">現在出發</string>
+	<!--As in 'this bus/train is so full, there's only limited standing room'-->
+	<string name="limited_standing_room_only">站位數量有限</string>
+	<!--No comment provided by engineer.-->
+	<string name="live_traffic">即時路況</string>
+	<!--As in 'this bus/train has many seats available'-->
+	<string name="many_seats_available">尚有很多座位</string>
+	<!--Title of button to get more details about an alert-->
+	<string name="more_info">更多資訊</string>
+	<!--Indicating no trips have been planned within the next 24 hrs-->
+	<string name="no_planned_trips">沒有已規劃的路線</string>
+	<!--As in 'this bus/train is full and definitely not accepting further passengers'-->
+	<string name="not_accepting_passengers">不再接受乘客</string>
+	<!--Indicator to show when a service is on time according to real-time data.-->
+	<string name="on_time">準點</string>
+	<!--No comment provided by engineer.-->
+	<string name="open_lyft">開啟Lyft</string>
+	<!--No comment provided by engineer.-->
+	<string name="open_ola">開啟Ola</string>
+	<!--Title for opening hours-->
+	<string name="opening_hours">營業時間</string>
+	<!--No comment provided by engineer.-->
+	<string name="plan_a_trip_and_it_will_show_up_here_dot">您在TripGo中所規劃的路線將會顯示在這裡．</string>
+	<!--No comment provided by engineer.-->
+	<string name="public_holiday">公共假期</string>
+	<!--No comment provided by engineer.-->
+	<string name="real_minustime">即時</string>
+	<!--Error recovery suggestion for when when server could not find a given transit stop.-->
+	<string name="search_for_this_stop_again_or_try_again_later_dot_dot">Search for this stop again or try again later.</string>
+	<!--Send SMS action-->
+	<string name="send_sms">傳送簡訊</string>
+	<!--Set up to connect/link to a service provider, e.g., Uber-->
+	<string name="setup">設定</string>
+	<!--Show website action-->
+	<string name="show_website">開啟網站</string>
+	<!--As in 'this bus/train is fairly full and has standing room only'-->
+	<string name="standing_room_only">只有站位</string>
+	<!--Destination location. For trip titles, e.g., 'To work'. (old key: PrimaryLocationEnd)-->
+	<string name="to__pattern">目的地: %1$s</string>
+	<!--Vehicle updated. (old key: VehicleUpdated)-->
+	<string name="updated__pattern_ago">%1$s前更新</string>
+	<!--Vehicle 'x' updated. (old key: VehicleCalledUpdated)-->
+	<string name="vehicle__pattern_updated__pattern_ago">車輛%1$s的位置在%2$s前更新</string>
+	<!--No comment provided by engineer.-->
+	<string name="we_are_busy_getting_your_upcoming_trip_dot_please_wait_dot_dot_dot">我們正忙著規劃您的路線．請稍候．．．</string>
+	<!--No comment provided by engineer.-->
+	<string name="we_apostll_keep_you_updated_with_the_latest_transit_alerts_here">我們將在這裡提供您最新的交通提示</string>
+	<!--No comment provided by engineer.-->
+	<string name="wheelchair_accessible">無障礙通道</string>
+	<!--Text indiction for how long a segment might take, where '%@' will be replaced with a duration. E.g., the instruction 'Take bus' might have this next to it as 'for 10 minutes'.-->
+	<string name="for__pattern">%1$s</string>
+	<!--goCatch action-->
+	<string name="gocatch_a_taxi">使用goCatch</string>
+	<!--No comment provided by engineer.-->
+	<string name="ingogo_a_taxi">Ingogo叫車服務</string>
+	<!--Name for a {%@}'s place if it's unclear if it's home, work or something else.-->
+	<string name="_pattern_aposts">%1$s的</string>
+	<!--No comment provided by engineer.-->
+	<string name="_pattern_aposts_home">%1$s的住家</string>
+	<!--No comment provided by engineer.-->
+	<string name="_pattern_aposts_work">%1$s的公司</string>
+	<!--Number of repeats. (old key: NumberRecurrences)-->
+	<string name="_perclu_recurrences">重複%lu次</string>
+	<!--Error when location search for %input was not successful. (old key: RequestErrorFormat)-->
+	<string name="_apost_pattern_apost_not_found_dot">無法找到\'%1$s\'.</string>
+	<!--Authorization restricted alert message-->
+	<string name="access_to_this_feature_has_been_restricted_for_your_device_dot_please_check_the_settings_app__moret_general__moret_restrictions_or_ask_your_device_provider_dot">在此裝置上使用本功能是受到限制的. 請到設定 > 一般 > 取用限制檢查您的設定或詢問您的裝置提供商.</string>
+	<!--Accessibility label for action button-->
+	<string name="action">動作</string>
+	<!--Option for users if they already owned a SkedGo account-->
+	<string name="already_have_an_account_question_sign_in">已經註冊？立即登錄！</string>
+	<!--Source where the account was derived, e.g., Facebook-->
+	<string name="authentication">認證服務提供商</string>
+	<!--Authorisation needed title-->
+	<string name="authorisation_needed">需要用戶授權</string>
+	<!--Type of vehicle : bicycle-->
+	<string name="bicycle">自行車</string>
+	<!--Credit card CVC-->
+	<string name="cvc">安全碼</string>
+	<!--No comment provided by engineer.-->
+	<string name="can_apostt_find_your_current_city">無法取得您當前的城市</string>
+	<!--Cancel action-->
+	<string name="cancel">取消</string>
+	<!--Label for when a service is cancelled.-->
+	<string name="cancelled">已被取消</string>
+	<!--No comment provided by engineer.-->
+	<string name="cannot_proceed_without_a_valid_email_address">需要一個有效的電子郵件來進行下一步</string>
+	<!--Type of vehicle : car-->
+	<string name="car">轎車</string>
+	<!--Credit card number-->
+	<string name="card_no_dot">卡號</string>
+	<!--Instruction for changing password-->
+	<string name="change">更改</string>
+	<!--Accessibility - user location button - hint-->
+	<string name="change_tracking_options">變更追蹤選項</string>
+	<!--Accessibility title for a checkmark/tick button-->
+	<string name="checkmark">選取標記</string>
+	<!--Close action-->
+	<string name="close">關閉</string>
+	<!--Title on the button that asks users to confirm if they want to proceed with booking-->
+	<string name="confirm">確認</string>
+	<!--Title for button that allows users to contact our support team to help resolve some error in the app.-->
+	<string name="contact_support">聯繫支援</string>
+	<!--Error title when GPS failed.-->
+	<string name="could_not_determine_your_current_location_dot">無法確認您的當前位置</string>
+	<!--Could not download supported regions warning. (old key: CouldNotDownloadSupportedRegions)-->
+	<string name="could_not_download_supported_regions_from_tripgo_aposts_server_dot_please_try_again_later_dot">無法從我們的伺服器下載所支援地區的列表．請稍後再嘗試一次。</string>
+	<!--Message that indicates the app is creating accounts for users-->
+	<string name="creating_account">註冊帳戶</string>
+	<!--Section title for credit card payment-->
+	<string name="credit_card">信用卡</string>
+	<!--Current city-->
+	<string name="current_city">當前城市</string>
+	<!--Title for user's current location-->
+	<string name="current_location">當前位置</string>
+	<!--Delete action-->
+	<string name="delete">刪除</string>
+	<!--Sort by distance-->
+	<string name="distance">距離</string>
+	<!--Option for users if they don't yet have a SkedGo account-->
+	<string name="don_apostt_have_an_account_question_sign_up">沒有帳戶嗎？註冊</string>
+	<!--Done action-->
+	<string name="done">完成</string>
+	<!--Drop new pin-->
+	<string name="drop_new_pin">放置新的大頭針</string>
+	<!--Email address where receipt is sent
+   Email used as Facebook username-->
+	<string name="email">電子信箱</string>
+	<!--Everyday in context of repetitions (especially recurring events)-->
+	<string name="everyday">每天</string>
+	<!--Credit card expiry date-->
+	<string name="expiry_date">到期日</string>
+	<!--Free as in beer-->
+	<string name="free">免費</string>
+	<!--No comment provided by engineer.-->
+	<string name="full_name">全名</string>
+	<!--No comment provided by engineer.-->
+	<string name="getting_a_lift">與人共乘</string>
+	<!--Accessibility annotation for trips which have a reminder set.-->
+	<string name="has_reminder">有提醒事項</string>
+	<!--Include contacts.-->
+	<string name="include_contacts">包含聯絡人</string>
+	<!--Include events.-->
+	<string name="include_events">包含事件</string>
+	<!--Instant results proposal-->
+	<string name="instant_results">快速搜尋結果</string>
+	<!--Title for alert that indicates the user account has become invalid-->
+	<string name="invalid_account">無效的帳戶</string>
+	<!--Name placeholder text-->
+	<string name="john_appleseed">您的姓名</string>
+	<!--Used when user signs in using Facebook-->
+	<string name="linking_facebook">正在連結Facebook</string>
+	<!--Title on the button that indicates to the user that booking is in progressing-->
+	<string name="loading">載入中</string>
+	<!--Location iOS6+ authorisation needed text-->
+	<string name="location_services_are_required_to_use_this_feature_dot_please_go_to_the_settings_app__moret_privacy__moret_location_services_coma_make_sure_they_are_turned_on_and_authorise_this_app_dot">本功能需要使用定位服務. 請到設定 > 隱私 > 定位服務確認服務是開啟的，同時也請確認您已授權本App使用定位服務.</string>
+	<!--Indicating a payment is in progress-->
+	<string name="making_payment">正在進行付款手續</string>
+	<!--More results proposal-->
+	<string name="more_results">更多搜尋結果</string>
+	<!--Type of vehicle : motorbike-->
+	<string name="motorbike">摩托車</string>
+	<!--Title for view that shows the summary of a user's account information-->
+	<string name="my_account">我的帳戶</string>
+	<!--Name to which receipt is sent
+   Name used in Facebook
+   Sort by name
+   Title for name of something (or someone)-->
+	<string name="name">名稱</string>
+	<!--Response to question whether user wants to report a problem when taking a screenshot. Also used in context of repetitions (especially recurring events).-->
+	<string name="never">永不重複</string>
+	<!--Title for sign in view when user does not have an account-->
+	<string name="new_account">設定新帳戶</string>
+	<!--Next action-->
+	<string name="next">下一步</string>
+	<!--No comment provided by engineer.-->
+	<string name="no_co_2">無碳足跡</string>
+	<!--Button to open Settings app section for this app-->
+	<string name="open_settings">開啟設定</string>
+	<!--Open in Safari action-->
+	<string name="open_in_safari">在Safari中開啟</string>
+	<!--No comment provided by engineer.-->
+	<string name="password">密碼</string>
+	<!--Indicating a payment is successful-->
+	<string name="payment_successful">付款成功</string>
+	<!--Section title for Paypal payment-->
+	<string name="paypal">Paypal</string>
+	<!--Please select a location prompt-->
+	<string name="please_select_a_location">請選擇一個地點</string>
+	<!--Error recovery suggestion when GPS fails.-->
+	<string name="please_try_again_or_set_your_location_manually_dot">請再次嘗試一次或手動設定您的位置</string>
+	<!--Please verify the location prompt-->
+	<string name="please_verify_the_location">請確認地點</string>
+	<!--Location picker 'no autocompletion results' text. Needs to match text on keyboard.-->
+	<string name="press__apostsearch_apost_for_more_dot_dot_dot">點擊\'搜尋\'來取得更多結果...</string>
+	<!--No comment provided by engineer.-->
+	<string name="read_more_dot_dot_dot">更多資訊</string>
+	<!--Title for section that asks users where payment receipt should be sent-->
+	<string name="receipt">確認信</string>
+	<!--Repeats daily-->
+	<string name="repeats_daily">每天重複</string>
+	<!--Repeats monthly-->
+	<string name="repeats_monthly">每月重複</string>
+	<!--Repeats weekly-->
+	<string name="repeats_weekly">每週重複</string>
+	<!--Repeats yearly-->
+	<string name="repeats_yearly">每年重複</string>
+	<!--Sports utility vehicle abbreviation-->
+	<string name="suv">休旅車</string>
+	<!--Sort by overall score, like a ranking.-->
+	<string name="score">評分</string>
+	<!--Empty search bar placeholder-->
+	<string name="search">搜尋</string>
+	<!--No comment provided by engineer.-->
+	<string name="search_results">搜尋結果</string>
+	<!--Placeholder text while waiting for server response when searching for a location.-->
+	<string name="searching_for__apost_pattern_apost_dot_dot_dot">正在搜尋%1$s…</string>
+	<!--No comment provided by engineer.-->
+	<string name="sign_in">登入</string>
+	<!--Instruction for signing out user account-->
+	<string name="sign_out">登出</string>
+	<!--No comment provided by engineer.-->
+	<string name="sign_up">註冊</string>
+	<!--No comment provided by engineer.-->
+	<string name="sign_up_cannot_be_completed_without_a_valid_password">需要一個有效的密碼來完成註冊</string>
+	<!--Message that indicates the app is signing users into their user accounts-->
+	<string name="signing_in">登入中...</string>
+	<!--Message that indicates the app has successfully completed signing out
+   Message that indicates the app is signing users out of their accounts-->
+	<string name="signing_out">登出中...</string>
+	<!--Starting %date. (old key: DateFromFormat)-->
+	<string name="starting__pattern">從%1$s</string>
+	<!--Tap to set location. (old key: SetLocation)-->
+	<string name="tap_to_set_location">點擊來選取地點</string>
+	<!--Message that indicates the app is about to sign users out of their user accounts-->
+	<string name="the_app_will_now_sign_out">此App即將登出</string>
+	<!--Accessibility - user location button - off-->
+	<string name="tracking__minus_off">關閉使用者位置追蹤功能</string>
+	<!--user location button - follow-->
+	<string name="tracking__minus_on">開啟使用者位置追蹤功能</string>
+	<!--user location button - follow with heading-->
+	<string name="tracking__minus_on_with_heading">開啟使用者位置與航向追蹤功能</string>
+	<!--No comment provided by engineer.-->
+	<string name="unknown_error">未知錯誤</string>
+	<!--Up to %date. (old key: DateToFormat)-->
+	<string name="up_to__pattern">到%1$s</string>
+	<!--Message that shows app is updating trip after user finalised bookings-->
+	<string name="updating_trip">更新路線</string>
+	<!--Message that informs users that some values are missing from the required fields in a booking form.-->
+	<string name="values_missing_from_required_fields_dot">請填寫所有必要的項目</string>
+	<!--Every weekday in context of repetitions (especially recurring events)-->
+	<string name="weekdays">平日</string>
+	<!--Every weekend day in context of repetitions (especially recurring events)-->
+	<string name="weekends">週末</string>
+	<!--Question asked when user is taking a screenshot-->
+	<string name="would_you_like_to_report_a_problem_question">你想要回報問題嗎？</string>
+	<!--Message that informs users that T&C must be agreed before booking can be made.-->
+	<string name="you_need_to_agree_to_the_booking_terms_and_conditions_dot">您必須同意關於訂票的相關服務條款</string>
+	<!--Message that informs users that T&C for insurance must be agreed before booking can be made.-->
+	<string name="you_need_to_agree_to_the_insurance_terms_and_conditions_dot">您必須同意關於附加保險的相關服務條款</string>
+	<!--Calendar authorisation needed text-->
+	<string name="you_previously_denied_this_app_access_to_your_calendar_dot_please_go_to_the_settings_app__moret_privacy__moret_calendar_and_authorise_this_app_to_use_this_feature_dot">您之前拒絕了App使用您的行事曆．如想要使用本功能，請到設定 > 隱私 > 行事曆中更新您的授權.</string>
+	<!--Contacts authorisation needed text-->
+	<string name="you_previously_denied_this_app_access_to_your_contacts_dot_please_go_to_the_settings_app__moret_privacy__moret_contacts_and_authorise_this_app_to_use_this_feature_dot">您之前拒絕了App使用您的聯絡資訊．如想要使用本功能，請到設定 > 隱私 > 聯絡資訊中更新您的授權.</string>
+	<!--Indicator that an event is all-day-->
+	<string name="all_minusday">整天</string>
+	<!--Estimated time of arrival; parameter is time, e.g., 'arrives 15:30'-->
+	<string name="arrives__pattern">抵達時刻 %1$s</string>
+	<!--Estimated time of departure; parameter is time, e.g., 'departs 15:30'-->
+	<string name="departs__pattern">出發時刻 %1$s</string>
+	<!--Short indicator of end-time-->
+	<string name="ends_at__pattern">在%1$s結束</string>
+	<!--Email placeholder text-->
+	<string name="example_atexample_dotcom">example@example.com</string>
+	<!--Credit card expiry date placeholder, mm/yy-->
+	<string name="mm_slashyy">月份/年份</string>
+	<!--Short indicator of start-time-->
+	<string name="starts_at__pattern">從%1$s開始</string>
+
+</resources>
+<!-- This is an auto generated file (Fri Mar 17 11:36:56 ART 2017) -->

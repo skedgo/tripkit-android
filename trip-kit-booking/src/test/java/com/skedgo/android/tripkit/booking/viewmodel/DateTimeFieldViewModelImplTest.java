@@ -4,19 +4,19 @@ import android.os.Parcel;
 
 import com.skedgo.android.tripkit.booking.BuildConfig;
 import com.skedgo.android.tripkit.booking.DateTimeFormField;
+import com.skedgo.android.tripkit.booking.TestRunner;
 
 import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.robolectric.RobolectricGradleTestRunner;
 import org.robolectric.annotation.Config;
 
 import java.util.Calendar;
 
-import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Java6Assertions.*;
 
-@RunWith(RobolectricGradleTestRunner.class)
-@Config(constants = BuildConfig.class, sdk = 21)
+@RunWith(TestRunner.class)
+@Config(constants = BuildConfig.class)
 public class DateTimeFieldViewModelImplTest {
   /**
    * FIXME: Temporarily ignore as it's flaky by the use of {@link Calendar#getInstance()}.

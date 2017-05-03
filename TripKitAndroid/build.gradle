@@ -1,0 +1,128 @@
+apply from: "../dependencies.gradle"
+apply plugin: "com.android.library"
+apply plugin: 'com.github.dcendents.android-maven'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-kapt'
+apply plugin: 'com.jfrog.bintray'
+
+// For https://github.com/dcendents/android-maven-gradle-plugin.
+group = 'com.skedgo'
+version = '1.1'
+
+android {
+  compileSdkVersion 25
+  buildToolsVersion '25.0.2'
+
+  defaultConfig {
+    minSdkVersion 15
+    targetSdkVersion 25
+    testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+  }
+
+  packagingOptions {
+    // To avoid conflicts with ASL.
+    // We don't utilize ServiceLoader, so this is unneeded.
+    exclude 'META-INF/services/com.google.gson.TypeAdapterFactory'
+  }
+
+  lintOptions {
+    checkReleaseBuilds true
+    abortOnError false
+  }
+}
+
+// Generation relative to tripgo! Add translations repo to tripkit?
+task(generateTripkitStrings, type: org.gradle.api.tasks.JavaExec) {
+  classpath(files('IOStoAndroidStringsConverter.jar'))
+  main('com.skedgo.tripgo.tools.android.Main')
+  args(['./src/main/res', '../../libraries/translations', 'void',
+        'en#es#de#fi#pt#zh-Hant#zh-Hans', 'Tripkit.strings'])
+}
+
+dependencies {
+  testCompile 'junit:junit:4.12'
+  testCompile libs.assertjCore
+  testCompile libs.robolectric
+  testCompile libs.mockitoCore
+  testCompile libs.mockitoKotlin, { exclude group: 'org.jetbrains.kotlin' }
+  testCompile 'com.github.thuytrinh:MockWebServerRule:v1.0'
+
+  androidTestCompile "com.android.support.test:runner:0.5"
+  androidTestCompile "com.android.support.test:rules:0.5"
+  androidTestCompile libs.assertjCore
+
+  compile "org.jetbrains.kotlin:kotlin-stdlib:$kotlinVersion"
+  compile libs.playServicesGcm
+
+  compile 'com.github.skedgo:sqlite-utils:v1.0'
+  compile "com.squareup.okhttp3:okhttp:$okHttpVersion"
+  compile "com.squareup.retrofit2:converter-gson:2.0.2"
+  compile "com.squareup.retrofit2:adapter-rxjava:2.0.2"
+  compile "com.squareup.retrofit2:retrofit:2.0.2"
+
+  compile 'com.google.dagger:dagger:2.7'
+  kapt 'com.google.dagger:dagger-compiler:2.7'
+  kapt libs.value
+  provided libs.valueAnnotations
+  provided libs.builderAnnotations
+  provided libs.gsonAnnotations
+  compile project(':CommonCoreLegacy')
+  compile project(':TripKitDomain')
+  compile project(':TripKitData')
+}
+
+install {
+  repositories.mavenInstaller {
+    pom.project {
+      name 'TripKitAndroid'
+      description 'TripKit for Android'
+      url 'https://github.com/skedgo/tripkit-android.git'
+      inceptionYear '2013'
+
+      packaging 'aar'
+      groupId project.group
+      artifactId 'TripKitAndroid'
+      version project.version
+
+      licenses {
+        license {
+          name 'The MIT License'
+          url 'https://spdx.org/licenses/MIT#licenseText'
+          distribution 'repo'
+        }
+      }
+      developers {
+        developer {
+          name 'SkedGo'
+        }
+      }
+    }
+  }
+}
+
+bintray {
+  user = BINTRAY_USER
+  key = BINTRAY_KEY
+  configurations = ['archives']
+  pkg {
+    repo = 'tripkit-android'
+    name = 'TripKitAndroid'
+    userOrg = 'skedgo'
+    licenses = ['MIT']
+    vcsUrl = 'https://github.com/skedgo/tripkit-android.git'
+    version {
+      name = project.version
+      desc = "TripKitAndroid $project.version"
+      released = new Date()
+      vcsTag = project.version
+    }
+  }
+}
+
+uploadArchives {
+  repositories {
+    mavenDeployer {
+      repository(url: "file://${tripKitAndroidMaven}")
+    }
+  }
+}

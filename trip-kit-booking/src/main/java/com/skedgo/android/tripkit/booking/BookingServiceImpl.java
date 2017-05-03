@@ -14,7 +14,6 @@ import rx.functions.Func1;
 public class BookingServiceImpl implements BookingService {
 
   private final BookingApi bookingApi;
-  private final ExternalOAuthStore externalOAuthStore;
   private final Gson gson;
   @VisibleForTesting Func1<Response<BookingForm>, Observable<BookingForm>> handleBookingResponse =
       new Func1<Response<BookingForm>, Observable<BookingForm>>() {
@@ -33,9 +32,8 @@ public class BookingServiceImpl implements BookingService {
         }
       };
 
-  public BookingServiceImpl(BookingApi bookingApi, ExternalOAuthStore externalOAuthStore, Gson gson) {
+  public BookingServiceImpl(BookingApi bookingApi, Gson gson) {
     this.bookingApi = bookingApi;
-    this.externalOAuthStore = externalOAuthStore;
     this.gson = gson;
   }
 
@@ -47,10 +45,6 @@ public class BookingServiceImpl implements BookingService {
 
     return bookingApi.postFormAsync(url, inputForm)
         .flatMap(handleBookingResponse);
-  }
-
-  @Override public Single<ExternalOAuth> getExternalOauth(String authId) {
-    return externalOAuthStore.getExternalOauth(authId);
   }
 
   @VisibleForTesting BookingError asBookingError(String bookingErrorJson) {
