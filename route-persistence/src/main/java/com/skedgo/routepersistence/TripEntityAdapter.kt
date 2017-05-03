@@ -2,7 +2,6 @@ package com.skedgo.routepersistence
 
 import android.content.ContentValues
 import android.database.Cursor
-import com.skedgo.android.common.model.Trip
 import com.skedgo.routepersistence.TripGroupContract.COL_ARRIVE
 import com.skedgo.routepersistence.TripGroupContract.COL_CALORIES_COST
 import com.skedgo.routepersistence.TripGroupContract.COL_CARBON_COST
@@ -20,6 +19,7 @@ import com.skedgo.routepersistence.TripGroupContract.COL_TEMP_URL
 import com.skedgo.routepersistence.TripGroupContract.COL_UPDATE_URL
 import com.skedgo.routepersistence.TripGroupContract.COL_UUID
 import com.skedgo.routepersistence.TripGroupContract.COL_WEIGHTED_SCORE
+import skedgo.tripkit.routing.Trip
 
 class TripEntityAdapter constructor() {
 
