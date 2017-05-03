@@ -3,9 +3,9 @@ package com.skedgo.routepersistence
 import android.content.ContentValues
 import android.database.Cursor
 import com.google.gson.Gson
-import com.skedgo.android.common.model.TripSegment
 import com.skedgo.routepersistence.TripGroupContract.COL_JSON
 import com.skedgo.routepersistence.TripGroupContract.COL_TRIP_ID
+import skedgo.tripkit.routing.TripSegment
 import javax.inject.Inject
 
 

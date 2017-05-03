@@ -2,11 +2,11 @@ package com.skedgo.routepersistence
 
 import android.content.ContentValues
 import android.database.Cursor
-import com.skedgo.android.common.model.TripGroup
 import com.skedgo.routepersistence.TripGroupContract.COL_DISPLAY_TRIP_ID
 import com.skedgo.routepersistence.TripGroupContract.COL_FREQUENCY
 import com.skedgo.routepersistence.TripGroupContract.COL_IS_NOTIFIABLE
 import com.skedgo.routepersistence.TripGroupContract.COL_UUID
+import skedgo.tripkit.routing.TripGroup
 
 
 class TripGroupEntityAdapter constructor() {

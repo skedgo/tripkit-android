@@ -4,7 +4,6 @@ import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
-import com.skedgo.android.common.model.TripGroup;
 
 public class RouteDatabaseHelper extends SQLiteOpenHelper {
   private static final int DATABASE_VERSION = 2;
