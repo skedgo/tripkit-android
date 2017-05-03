@@ -19,7 +19,7 @@ public final class TripSegmentUtils {
     if (action != null && action.contains(TEMPLATE_DURATION)) {
       action = processDurationTemplate(
           action,
-          " " + context.getResources().getString(R.string.duration),
+          " " + context.getResources().getString(R.string.for__pattern),
           segment.getStartTimeInSecs(),
           segment.getEndTimeInSecs()
       );
