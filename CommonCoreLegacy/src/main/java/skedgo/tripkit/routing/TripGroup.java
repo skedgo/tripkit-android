@@ -7,8 +7,11 @@ import android.support.annotation.Nullable;
 import android.util.Pair;
 
 import com.google.gson.annotations.SerializedName;
+import com.skedgo.android.common.model.Booking;
 import com.skedgo.android.common.model.ServiceStop;
 import com.skedgo.android.common.model.TransportMode;
+
+import org.apache.commons.collections4.Predicate;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -18,6 +21,8 @@ import java.util.UUID;
 
 import rx.Observable;
 import rx.subjects.PublishSubject;
+
+import static org.apache.commons.collections4.CollectionUtils.find;
 
 public class TripGroup implements Parcelable {
   public static final Creator<TripGroup> CREATOR = new Creator<TripGroup>() {
@@ -218,5 +223,16 @@ public class TripGroup implements Parcelable {
 
   public String uuid() {
     return uuid;
+  }
+
+  @Nullable public TripSegment getBookingSegment() {
+    return  find(
+        getDisplayTrip().getSegments(),
+        new Predicate<TripSegment>() {
+          @Override public boolean evaluate(TripSegment segment) {
+            return segment.getBooking() != null;
+          }
+        }
+    );
   }
 }
