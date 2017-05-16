@@ -24,10 +24,9 @@ public abstract class Source implements Parcelable {
 
   public static final Creator<Source> CREATOR = new Creator<Source>() {
     @Override public Source createFromParcel(Parcel in) {
-      Provider provider = in.readParcelable(Provider.class.getClassLoader());
       return ImmutableSource.builder()
           .disclaimer(in.readString())
-          .provider(provider)
+          .provider((Provider) in.readParcelable(Provider.class.getClassLoader()))
           .build();
     }
 
