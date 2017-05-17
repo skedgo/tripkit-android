@@ -13,18 +13,6 @@ import org.immutables.value.Value;
 @Value.Immutable
 @JsonAdapter(GsonAdaptersSource.class)
 public abstract class Source implements Parcelable {
-  public abstract @Nullable String disclaimer();
-  public abstract @Nullable Provider provider();
-
-  @Override public int describeContents() {
-    return 0;
-  }
-
-  @Override public void writeToParcel(Parcel dest, int flags) {
-    dest.writeString(disclaimer());
-    dest.writeParcelable(provider(), flags);
-  }
-
   public static final Creator<Source> CREATOR = new Creator<Source>() {
     @Override public Source createFromParcel(Parcel in) {
       return ImmutableSource.builder()
@@ -37,4 +25,16 @@ public abstract class Source implements Parcelable {
       return new Source[size];
     }
   };
+
+  public abstract @Nullable String disclaimer();
+  public abstract @Nullable Provider provider();
+
+  @Override public int describeContents() {
+    return 0;
+  }
+
+  @Override public void writeToParcel(Parcel dest, int flags) {
+    dest.writeString(disclaimer());
+    dest.writeParcelable(provider(), flags);
+  }
 }

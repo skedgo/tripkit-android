@@ -13,14 +13,6 @@ import org.immutables.value.Value;
 @Value.Immutable
 @JsonAdapter(GsonAdaptersProvider.class)
 public abstract class Provider implements Parcelable {
-  public abstract @Nullable String name();
-
-  @Override public int describeContents() { return 0; }
-
-  @Override public void writeToParcel(Parcel dest, int flags) {
-    dest.writeString(name());
-  }
-
   public static final Creator<Provider> CREATOR = new Creator<Provider>() {
     @Override public Provider createFromParcel(Parcel in) {
       return ImmutableProvider.builder()
@@ -32,4 +24,12 @@ public abstract class Provider implements Parcelable {
       return new Provider[size];
     }
   };
+
+  public abstract @Nullable String name();
+
+  @Override public int describeContents() { return 0; }
+
+  @Override public void writeToParcel(Parcel dest, int flags) {
+    dest.writeString(name());
+  }
 }
