@@ -4,11 +4,14 @@ import android.os.Parcel;
 import android.os.Parcelable;
 import android.support.annotation.Nullable;
 
+import com.google.gson.annotations.JsonAdapter;
+
 import org.immutables.gson.Gson;
 import org.immutables.value.Value;
 
 @Gson.TypeAdapters
 @Value.Immutable
+@JsonAdapter(GsonAdaptersSource.class)
 public abstract class Source implements Parcelable {
   public abstract @Nullable String disclaimer();
   public abstract @Nullable Provider provider();
