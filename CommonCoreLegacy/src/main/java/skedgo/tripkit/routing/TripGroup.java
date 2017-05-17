@@ -34,6 +34,7 @@ public class TripGroup implements Parcelable {
       }
 
       tripGroup.frequency = in.readInt();
+      tripGroup.sources = in.readArrayList(Source.class.getClassLoader());
       return tripGroup;
     }
 
@@ -199,6 +200,7 @@ public class TripGroup implements Parcelable {
     out.writeLong(displayTripId);
     out.writeList(trips);
     out.writeInt(frequency);
+    out.writeList(sources);
   }
 
   public Observable<Pair<ServiceStop, Boolean>> onChangeStop() {
