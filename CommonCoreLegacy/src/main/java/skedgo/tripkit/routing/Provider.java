@@ -27,7 +27,9 @@ public abstract class Provider implements Parcelable {
 
   public abstract @Nullable String name();
 
-  @Override public int describeContents() { return 0; }
+  @Override public int describeContents() {
+    return 0;
+  }
 
   @Override public void writeToParcel(Parcel dest, int flags) {
     dest.writeString(name());
