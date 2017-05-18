@@ -4,6 +4,7 @@ import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import com.nhaarman.mockito_kotlin.mock
+import com.nhaarman.mockito_kotlin.verify
 import com.nhaarman.mockito_kotlin.whenever
 import com.skedgo.android.tripkit.booking.BookingForm
 import com.skedgo.android.tripkit.booking.ui.BuildConfig
@@ -94,6 +95,11 @@ class ExternalProviderAuthViewModelTest {
     )
     assertThat(shouldOverride).isFalse()
     assertThat(viewModel.showWebView.get()).isFalse()
+
+    verify(callbackHandler).handleRetryURL(
+        viewModel.bookingForm!!,
+        Uri.parse("tripgo://booking_retry")
+    )
   }
 
   @Test fun shouldHandleNoCallback() {

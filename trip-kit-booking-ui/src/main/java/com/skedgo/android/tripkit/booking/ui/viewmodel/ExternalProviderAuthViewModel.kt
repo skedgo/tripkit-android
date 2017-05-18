@@ -54,7 +54,7 @@ class ExternalProviderAuthViewModel @Inject internal constructor() : DisposableV
                 val callback = substring(0, indexOf("?"))
                 oAuth2CallbackHandler.handleOAuthURL(bookingForm!!, Uri.parse(this), callback)
               }
-              startsWith("tripgo://oauth-callback") -> oAuth2CallbackHandler.handleRetryURL(bookingForm!!, Uri.parse(this))
+              startsWith("tripgo://booking_retry") -> oAuth2CallbackHandler.handleRetryURL(bookingForm!!, Uri.parse(this))
               else -> null
             }
                 ?.takeUntil(onDispose())
