@@ -79,7 +79,7 @@ public final class TransportMode implements Parcelable {
   }
 
   @DrawableRes
-  public static int getLocalIconResId(String identifier) {
+  public static int getLocalIconResId(@Nullable String identifier) {
     if (ID_BICYCLE.equals(identifier)) {
       return R.drawable.ic_bicycle;
     } else if (ID_WALK.equals(identifier)) {
@@ -96,6 +96,8 @@ public final class TransportMode implements Parcelable {
       return R.drawable.ic_car;
     } else if (ID_AIR.equals(identifier)) {
       return R.drawable.ic_aeroplane;
+    } else if (identifier != null && identifier.startsWith(ID_BICYCLE) && identifier.contains(MIDDLE_FIX_BIC)) {
+      return R.drawable.ic_bicycle_share;
     } else {
       return 0;
     }
