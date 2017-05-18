@@ -223,7 +223,7 @@ public class TripGroup implements Parcelable {
     return uuid;
   }
 
-  public List<Source> getSource() {
+  public List<Source> getSources() {
     return sources;
   }
 }
