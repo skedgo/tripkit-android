@@ -33,7 +33,6 @@ import javax.inject.Singleton;
 
 import dagger.Module;
 import dagger.Provides;
-import okhttp3.HttpUrl;
 import okhttp3.OkHttpClient;
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory;
@@ -157,7 +156,7 @@ public class MainModule {
         builder.addInterceptor(new BaseUrlOverridingInterceptor(baseUrlAdapterFactory.call()));
       }
     }
-    builder.addInterceptor(new UrlResolverInterceptor(getHitServers, getBaseServer));
+    builder.addInterceptor(new UrlResolverInterceptor(getHitServers));
     return builder.build();
   }
 

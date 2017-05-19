@@ -1,6 +1,5 @@
 package com.skedgo.android.tripkit.urlresolver
 
-import com.nhaarman.mockito_kotlin.any
 import com.nhaarman.mockito_kotlin.mock
 import com.nhaarman.mockito_kotlin.verify
 import com.nhaarman.mockito_kotlin.whenever
@@ -9,8 +8,6 @@ import com.skedgo.android.tripkit.TestRunner
 import okhttp3.HttpUrl
 import okhttp3.Interceptor
 import okhttp3.Request
-import okhttp3.Response
-import okhttp3.mockwebserver.MockResponse
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.mockito.ArgumentMatchers
@@ -24,11 +21,10 @@ import java.io.IOException
 @RunWith(TestRunner::class)
 @Config(constants = BuildConfig::class)
 class UrlResolverInterceptorTest {
-
   val getHitServers: GetHitServers = mock()
   val getBaseServer: GetBaseServer = mock()
   private val urlResolverInterceptor: UrlResolverInterceptor by lazy {
-    UrlResolverInterceptor(getHitServers, getBaseServer)
+    UrlResolverInterceptor(getHitServers)
   }
 
   @Test @Throws(IOException::class)
