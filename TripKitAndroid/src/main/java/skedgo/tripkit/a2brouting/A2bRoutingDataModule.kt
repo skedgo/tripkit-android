@@ -2,7 +2,6 @@ package skedgo.tripkit.a2brouting
 
 import com.google.gson.Gson
 import com.skedgo.android.tripkit.Configs
-
 import dagger.Module
 import dagger.Provides
 import okhttp3.OkHttpClient

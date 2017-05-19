@@ -1,0 +1,40 @@
+package skedgo.tripkit.routing;
+
+import android.os.Parcel;
+import android.os.Parcelable;
+import android.support.annotation.Nullable;
+
+import com.google.gson.annotations.JsonAdapter;
+
+import org.immutables.gson.Gson;
+import org.immutables.value.Value;
+
+@Gson.TypeAdapters
+@Value.Immutable
+@JsonAdapter(GsonAdaptersSource.class)
+public abstract class Source implements Parcelable {
+  public static final Creator<Source> CREATOR = new Creator<Source>() {
+    @Override public Source createFromParcel(Parcel in) {
+      return ImmutableSource.builder()
+          .disclaimer(in.readString())
+          .provider((Provider) in.readParcelable(Provider.class.getClassLoader()))
+          .build();
+    }
+
+    @Override public Source[] newArray(int size) {
+      return new Source[size];
+    }
+  };
+
+  public abstract @Nullable String disclaimer();
+  public abstract @Nullable Provider provider();
+
+  @Override public int describeContents() {
+    return 0;
+  }
+
+  @Override public void writeToParcel(Parcel dest, int flags) {
+    dest.writeString(disclaimer());
+    dest.writeParcelable(provider(), flags);
+  }
+}
