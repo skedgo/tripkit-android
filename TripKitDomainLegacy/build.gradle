@@ -26,7 +26,7 @@ android {
 dependencies {
   testCompile 'junit:junit:4.12'
   testCompile libs.mockitoCore
-  testCompile 'org.robolectric:robolectric:3.3.1'
+  testCompile libs.robolectric
   testCompile libs.mockitoKotlin, { exclude group: 'org.jetbrains.kotlin' }
 
   compile project(":TripKitDomain")
