@@ -96,7 +96,7 @@ public final class TransportMode implements Parcelable {
       return R.drawable.ic_car;
     } else if (ID_AIR.equals(identifier)) {
       return R.drawable.ic_aeroplane;
-    } else if (identifier != null && identifier.startsWith(ID_BICYCLE) && identifier.contains(MIDDLE_FIX_BIC)) {
+    } else if (identifier != null && identifier.startsWith("cy_bic-s")) {
       return R.drawable.ic_bicycle_share;
     } else {
       return 0;

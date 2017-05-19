@@ -2,13 +2,21 @@ package com.skedgo.android.common.model
 
 import com.google.gson.Gson
 import com.skedgo.android.common.BaseUnitTest
+import com.skedgo.android.common.R
 import junit.framework.Assert.assertEquals
+import org.amshove.kluent.shouldEqualTo
 import org.assertj.core.api.Java6Assertions.assertThat
 import org.junit.Test
 import skedgo.tripkit.routing.ServiceColor
 import java.util.*
 
+@Suppress("IllegalIdentifier")
 class TransportModeTest : BaseUnitTest() {
+  @Test fun `should associate bike-share icon with id starting with "cy_bic-s"`() {
+    val localIconResId = TransportMode.getLocalIconResId("cy_bic-s")
+    localIconResId.shouldEqualTo(R.drawable.ic_bicycle_share)
+  }
+
   @Test fun serializedNames() {
     val mode = TransportMode()
     mode.id = "Some id"
