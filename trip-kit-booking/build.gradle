@@ -1,6 +1,8 @@
 apply from: "../dependencies.gradle"
-apply plugin: 'com.android.library'
-apply plugin: 'com.github.dcendents.android-maven'
+apply plugin: "com.android.library"
+apply plugin: "com.github.dcendents.android-maven"
+apply plugin: "kotlin-android"
+apply plugin: "kotlin-kapt"
 
 // For https://github.com/dcendents/android-maven-gradle-plugin.
 group = 'com.skedgo'
@@ -37,15 +39,13 @@ dependencies {
 
   compile project(':TripKitAndroid')
 
-  compile 'com.google.dagger:dagger:2.7'
-  annotationProcessor 'com.google.dagger:dagger-compiler:2.7'
+  compile libs.dagger
+  kapt libs.daggerCompiler
 
-  // To generate immutable models.
-  // See more at http://immutables.github.io/.
-  annotationProcessor "org.immutables:value:$immutablesVersion"
-  provided "org.immutables:value:$immutablesVersion:annotations"
-  provided "org.immutables:builder:$immutablesVersion"
-  provided "org.immutables:gson:$immutablesVersion:annotations"
+  kapt libs.value
+  provided libs.valueAnnotations
+  provided libs.builderAnnotations
+  provided libs.gsonAnnotations
 }
 
 uploadArchives {
