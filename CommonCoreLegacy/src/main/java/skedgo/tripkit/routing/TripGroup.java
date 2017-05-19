@@ -45,11 +45,12 @@ public class TripGroup implements Parcelable {
   private String uuid = UUID.randomUUID().toString();
   private long displayTripId;
 
-  @SerializedName("sources") private List<Source> sources;
+  @SerializedName("sources") @Nullable private List<Source> sources;
   @SerializedName("trips") private ArrayList<Trip> trips;
   @SerializedName("frequency") private int frequency;
   private transient GroupVisibility visibility = GroupVisibility.FULL;
 
+  /* FIXME: Should have not left this here. */
   private transient PublishSubject<Pair<ServiceStop, Boolean>> onChangeStop = PublishSubject.create();
 
   public long getDisplayTripId() {
@@ -223,7 +224,11 @@ public class TripGroup implements Parcelable {
     return uuid;
   }
 
-  public List<Source> getSources() {
+  @Nullable public List<Source> getSources() {
     return sources;
+  }
+
+  public void setSources(@Nullable List<Source> sources) {
+    this.sources = sources;
   }
 }
