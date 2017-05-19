@@ -225,14 +225,4 @@ public class TripGroup implements Parcelable {
     return uuid;
   }
 
-  @Nullable public TripSegment getBookingSegment() {
-    return  find(
-        getDisplayTrip().getSegments(),
-        new Predicate<TripSegment>() {
-          @Override public boolean evaluate(TripSegment segment) {
-            return segment.getBooking() != null;
-          }
-        }
-    );
-  }
 }

@@ -490,4 +490,13 @@ public class Trip implements Parcelable, ITimeRange {
       return (currencySymbol != null ? currencySymbol : "$") + value;
     }
   }
+
+  @Nullable public TripSegment getFirstBookingSegment() {
+    for (TripSegment segment : getSegments()) {
+      if (segment.getBooking() != null) {
+        return segment;
+      }
+    }
+    return null;
+  }
 }
