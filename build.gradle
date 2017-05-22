@@ -27,6 +27,8 @@ ext {
 }
 
 allprojects {
+  apply from: "${rootDir}/dependencies.gradle"
+
   repositories {
     jcenter()
     maven { url "https://jitpack.io" }

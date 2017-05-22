@@ -1,4 +1,3 @@
-apply from: "../dependencies.gradle"
 apply plugin: "kotlin"
 apply plugin: "kotlin-kapt"
 apply plugin: 'java'
@@ -22,7 +21,7 @@ dependencies {
   compile 'com.google.dagger:dagger:2.7'
   kapt 'com.google.dagger:dagger-compiler:2.7'
 
-  compile "org.jetbrains.kotlin:kotlin-stdlib:$kotlinVersion"
+  compile libs.kotlin
   kapt libs.value
   compileOnly libs.value
 }
