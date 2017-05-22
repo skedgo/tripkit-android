@@ -1,4 +1,3 @@
-apply from: "../dependencies.gradle"
 apply plugin: 'com.android.library'
 apply plugin: 'com.github.dcendents.android-maven'
 apply plugin: 'kotlin-android'
@@ -49,7 +48,7 @@ dependencies {
   provided "org.immutables:builder:$immutablesVersion"
   provided "org.immutables:gson:$immutablesVersion:annotations"
 
-  compile "org.jetbrains.kotlin:kotlin-stdlib:$kotlinVersion"
+  compile libs.kotlin
 }
 
 uploadArchives {
