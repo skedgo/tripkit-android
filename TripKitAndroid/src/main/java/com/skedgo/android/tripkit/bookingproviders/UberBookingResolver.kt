@@ -16,11 +16,11 @@ class UberBookingResolver(private val isPackageInstalled: Func1<String, Boolean>
     val actionBuilder = BookingAction.builder()
     actionBuilder.bookingProvider(BookingResolver.UBER)
 
-    val segment = params.segment()
-
     if (isPackageInstalled.call(UBER_PACKAGE)) {
 
       val intent = getAppIntent.call(UBER_PACKAGE)
+
+      val segment = params.segment()
 
       intent.data = Uri.parse("uber://?action=setPickup" +
           "&pickup[latitude]=${segment.from.lat}" +

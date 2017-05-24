@@ -1,23 +1,18 @@
 package com.skedgo.android.tripkit.bookingproviders
 
 import android.content.Intent
-import com.skedgo.android.common.BuildConfig
-import com.skedgo.android.common.TestRunner
 import com.skedgo.android.common.model.Location
+import com.skedgo.android.tripkit.BaseUnitTest
 import com.skedgo.android.tripkit.BookingAction
 import com.skedgo.android.tripkit.ExternalActionParams
 import org.amshove.kluent.*
 import org.junit.Test
-import org.junit.runner.RunWith
-import org.robolectric.annotation.Config
 import rx.functions.Func1
 import rx.observers.TestSubscriber
 import skedgo.tripkit.routing.TripSegment
 
 @Suppress("IllegalIdentifier")
-@RunWith(TestRunner::class)
-@Config(constants = BuildConfig::class)
-class UberBookingResolverTest {
+class UberBookingResolverTest : BaseUnitTest() {
 
   val isPackageInstalled: Func1<String, Boolean> = mock()
   val getAppIntent: Func1<String, Intent> = mock()
@@ -28,7 +23,7 @@ class UberBookingResolverTest {
     getTripGroupActionType.getTitleForExternalAction("any action") `should be` null
   }
 
-  @Test fun `should be quick booking type`() {
+  @Test fun `should be uber app intent`() {
 
     val params: ExternalActionParams = mock()
 
@@ -58,14 +53,29 @@ class UberBookingResolverTest {
     val bookingAction = subscriber.onNextEvents[0]
 
     bookingAction.data() `should not be` null
-    bookingAction.data().toString() `should be` "uber://?action=setPickup" +
-        "&pickup[latitude]=${segment.from.lat}" +
-        "&pickup[longitude]=${segment.from.lon}" +
-        "&dropoff[latitude]=${segment.to.lat}" +
-        "&dropoff[longitude]=${segment.to.lon}"
-    bookingAction.hasApp() `should not be` true
+    bookingAction.data().data.toString() `should equal` "uber://?action=setPickup&pickup[latitude]=1.0&pickup[longitude]=2.0&dropoff[latitude]=3.0&dropoff[longitude]=4.0"
+    bookingAction.hasApp() `should be` true
 
   }
 
+  @Test fun `should be uber play store intent`() {
+
+    val params: ExternalActionParams = mock()
+
+    When calling isPackageInstalled.call(UBER_PACKAGE) itReturns false
+
+    val subscriber = TestSubscriber<BookingAction>()
+
+    getTripGroupActionType.performExternalActionAsync(params).subscribe(subscriber)
+
+    subscriber.assertNoErrors()
+
+    val bookingAction = subscriber.onNextEvents[0]
+
+    bookingAction.data() `should not be` null
+    bookingAction.data().data.toString() `should equal` "https://play.google.com/store/apps/details?id=" + UBER_PACKAGE
+    bookingAction.hasApp() `should be` false
+
+  }
 
 }
