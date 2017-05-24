@@ -8,10 +8,8 @@ import com.skedgo.android.tripkit.routing.ExtraQueryMapProvider;
 import org.assertj.core.data.MapEntry;
 import org.junit.Before;
 import org.junit.Test;
-import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
-import org.robolectric.annotation.Config;
 
 import java.util.Arrays;
 import java.util.Collections;
@@ -23,13 +21,11 @@ import rx.Observable;
 import rx.functions.Func1;
 import skedgo.tripkit.a2brouting.FailoverA2bRoutingApi;
 
-import static org.assertj.core.api.Java6Assertions.*;
+import static org.assertj.core.api.Java6Assertions.assertThat;
 import static org.mockito.Matchers.eq;
 import static org.mockito.Mockito.when;
 
-@RunWith(TestRunner.class)
-@Config(constants = BuildConfig.class)
-public class RouteServiceImplTest {
+public class RouteServiceImplTest extends BaseUnitTest {
   @Mock Func1<Query, Observable<List<Query>>> queryGenerator;
   @Mock ExcludedTransitModesAdapter excludedTransitModesAdapter;
   @Mock Co2Preferences co2Preferences;
@@ -56,6 +52,7 @@ public class RouteServiceImplTest {
     final Query query = createQuery();
     query.setTimeTag(TimeTag.createForArriveBy(25251325));
     query.setIsInterRegional(false);
+    query.setCyclingSpeed(3);
 
     final Map<String, Object> options = routeService.toOptions(query);
     assertThat(options)
@@ -67,6 +64,7 @@ public class RouteServiceImplTest {
         .containsEntry("departAfter", "0")
         .containsEntry("tt", "2")
         .containsEntry("ws", "4")
+        .containsEntry("cs", "3")
         .doesNotContainKey("ir");
   }
 
