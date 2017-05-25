@@ -5,9 +5,11 @@
   <application>
     <activity
       android:name="com.skedgo.android.tripkit.booking.ui.activity.ExternalProviderAuthActivity"
+      android:screenOrientation="sensorPortrait"
       android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
     <activity
       android:name="com.skedgo.android.tripkit.booking.ui.activity.ExternalWebActivity"
+      android:screenOrientation="sensorPortrait"
       android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
   </application>
 </manifest>
