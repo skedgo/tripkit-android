@@ -29,11 +29,6 @@ public class Shape implements Parcelable {
   private long id;
   @SerializedName("travelled")
   private boolean isTravelled;
-  /**
-   * FIXME: This was deprecated.
-   * Shape json no longer contains 'stops' due to https://redmine.buzzhives.com/issues/3872.
-   */
-  @Deprecated
   @SerializedName("stops")
   private List<ServiceStop> stops;
   @SerializedName("serviceColor")

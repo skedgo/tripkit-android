@@ -25,10 +25,12 @@ class A2bRoutingDataModule {
   @Provides internal fun failoverA2bRoutingApi(
       configs: Configs,
       gson: Gson,
-      a2bRoutingApi: A2bRoutingApi
+      a2bRoutingApi: A2bRoutingApi,
+      setTripStopsFromSegmentTemplate: SetTripStopsFromSegmentTemplate
   ): FailoverA2bRoutingApi = FailoverA2bRoutingApi(
       configs.context().resources,
       gson,
-      a2bRoutingApi
+      a2bRoutingApi,
+      setTripStopsFromSegmentTemplate
   )
 }

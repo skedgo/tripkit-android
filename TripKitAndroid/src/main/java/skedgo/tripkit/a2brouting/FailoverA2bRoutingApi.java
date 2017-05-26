@@ -27,15 +27,18 @@ public class FailoverA2bRoutingApi {
   private final Resources resources;
   private final Gson gson;
   private final A2bRoutingApi a2bRoutingApi;
+  private final SetTripStopsFromSegmentTemplate setTripStopsFromSegmentTemplate;
 
   public FailoverA2bRoutingApi(
       Resources resources,
       Gson gson,
-      A2bRoutingApi a2bRoutingApi
+      A2bRoutingApi a2bRoutingApi,
+      SetTripStopsFromSegmentTemplate setTripStopsFromSegmentTemplate
   ) {
     this.resources = resources;
     this.gson = gson;
     this.a2bRoutingApi = a2bRoutingApi;
+    this.setTripStopsFromSegmentTemplate = setTripStopsFromSegmentTemplate;
   }
 
   /**
@@ -70,6 +73,7 @@ public class FailoverA2bRoutingApi {
         .map(new Func1<RoutingResponse, List<TripGroup>>() {
           @Override public List<TripGroup> call(RoutingResponse response) {
             response.processRawData(resources, gson);
+            setTripStopsFromSegmentTemplate.execute(response);
             return response.getTripGroupList();
           }
         })
