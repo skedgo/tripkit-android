@@ -8,9 +8,9 @@ import skedgo.tripkit.routing.endDateTime
 import skedgo.tripkit.routing.toSeconds
 import javax.inject.Inject
 
-class SetTripStopsFromSegmentTemplate @Inject constructor(private val gson: Gson) {
+open class SetTripStopsFromSegmentTemplate @Inject constructor(private val gson: Gson) {
 
-  fun execute(routingResponse: RoutingResponse) {
+  open fun execute(routingResponse: RoutingResponse) {
     val segmentTemplateMap = routingResponse.createSegmentTemplateMap()
 
     routingResponse.tripGroupList?.forEach {

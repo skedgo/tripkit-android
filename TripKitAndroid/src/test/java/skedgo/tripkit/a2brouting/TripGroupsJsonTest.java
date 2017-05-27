@@ -28,6 +28,7 @@ import skedgo.tripkit.routing.TripGroup;
 import thuytrinh.mockwebserverrule.MockWebServerRule;
 
 import static org.assertj.core.api.Java6Assertions.*;
+import static org.mockito.Mockito.mock;
 
 @RunWith(TestRunner.class)
 @Config(constants = BuildConfig.class)
@@ -46,7 +47,8 @@ public class TripGroupsJsonTest {
     api = new FailoverA2bRoutingApi(
         RuntimeEnvironment.application.getResources(),
         new Gson(),
-        a2bRoutingApi
+        a2bRoutingApi,
+        mock(SetTripStopsFromSegmentTemplate.class)
     );
   }
 
