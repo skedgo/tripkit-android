@@ -45,6 +45,7 @@ dependencies {
   testCompile libs.mockitoCore
   testCompile libs.mockitoKotlin, { exclude group: 'org.jetbrains.kotlin' }
   testCompile 'com.github.thuytrinh:MockWebServerRule:v1.0'
+  testCompile libs.kluent
 
   androidTestCompile "com.android.support.test:runner:0.5"
   androidTestCompile "com.android.support.test:rules:0.5"

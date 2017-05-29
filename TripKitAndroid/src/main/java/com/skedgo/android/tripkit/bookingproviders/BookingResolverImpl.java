@@ -44,6 +44,7 @@ public final class BookingResolverImpl implements BookingResolver {
     resolverMap.put("gocatch", new GoCatchBookingResolver(resources, isPackageInstalled, geocoderFactory));
     resolverMap.put("ingogo", new IngogoBookingResolver(resources, isPackageInstalled));
     resolverMap.put("mtaxi", new MTaxiBookingResolver(isPackageInstalled, getAppIntent));
+    resolverMap.put("uber", new UberBookingResolver(isPackageInstalled, getAppIntent));
     resolverMap.put("lyft", new LyftBookingResolver(resources, isPackageInstalled));
     resolverMap.put("flitways", new FlitWaysBookingResolver(geocoderFactory));
     resolverMap.put("tel:", new TelBookingResolver(resources));
