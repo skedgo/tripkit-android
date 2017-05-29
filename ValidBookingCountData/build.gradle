@@ -1,4 +1,3 @@
-apply from: "../dependencies.gradle"
 apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-kapt'
@@ -24,18 +23,18 @@ android {
 }
 
 dependencies {
-  testCompile 'junit:junit:4.12'
+  testCompile libs.junit
   testCompile libs.robolectric
   testCompile libs.mockitoKotlin, { exclude group: 'org.jetbrains.kotlin' }
 
-  compile 'io.reactivex:rxjava:1.2.4'
+  compile libs.rxjava
   compile "com.squareup.retrofit2:retrofit:2.0.2"
   compile "com.squareup.retrofit2:converter-gson:2.0.2"
   compile "com.squareup.retrofit2:adapter-rxjava:2.0.2"
-  compile 'com.google.code.gson:gson:2.6.1'
+  compile libs.gson
 
-  compile 'com.google.dagger:dagger:2.7'
-  kapt 'com.google.dagger:dagger-compiler:2.7'
+  compile libs.dagger
+  kapt libs.daggerCompiler
 
   // To generate immutable models.
   // See more at http://immutables.github.io/.
@@ -44,7 +43,7 @@ dependencies {
   provided "org.immutables:builder:$immutablesVersion"
   provided "org.immutables:gson:$immutablesVersion:annotations"
 
-  compile "org.jetbrains.kotlin:kotlin-stdlib:$kotlinVersion"
+  compile libs.kotlin
   provided project(':TripKitDomain')
   provided project(':ValidBookingCountDomain')
 }

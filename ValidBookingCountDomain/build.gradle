@@ -1,4 +1,3 @@
-apply from: "../dependencies.gradle"
 apply plugin: "kotlin"
 apply plugin: 'java'
 apply plugin: 'maven'
@@ -11,16 +10,16 @@ targetCompatibility = '1.7'
 sourceCompatibility = '1.7'
 
 dependencies {
-  testCompile 'junit:junit:4.12'
+  testCompile libs.junit
   testCompile libs.assertjCore
   testCompile libs.mockitoCore
   testCompile libs.mockitoKotlin, { exclude group: 'org.jetbrains.kotlin' }
   testCompile project(":AccountDomain")
 
-  compile "org.jetbrains.kotlin:kotlin-stdlib:$kotlinVersion"
-  compile 'io.reactivex:rxjava:1.2.4'
-  compile 'com.google.dagger:dagger:2.7'
-  kapt 'com.google.dagger:dagger-compiler:2.7'
+  compile libs.kotlin
+  compile libs.rxjava
+  compile libs.dagger
+  kapt libs.daggerCompiler
 
   // Use `compileOnly` to achieve similar effect of `provided` scope.
   // See more https://blog.gradle.org/introducing-compile-only-dependencies.

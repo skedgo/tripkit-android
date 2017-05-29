@@ -4,40 +4,40 @@
  * http://bytes.babbel.com/en/articles/2017-01-24-android-library-dependencies.html.
  */
 
-project.ext.libVersions = new Expando()
-project.ext.libVersions.immutablesVersion = "2.4.4"
-project.ext.libVersions.devMinSdkVersion = 21
-project.ext.libVersions.proMinSdkVersion = 15
-project.ext.libVersions.compileSdkVersion = 25
-project.ext.libVersions.buildToolsVersion = "25.0.2"
-project.ext.libVersions.targetSdkVersion = 22
-project.ext.libVersions.playServicesVersion = "10.2.1"
-project.ext.libVersions.firebaseAppIndexingVersion = "10.2.1"
+def libVersions = new Expando()
+libVersions.immutablesVersion = "2.4.4"
+libVersions.devMinSdkVersion = 21
+libVersions.proMinSdkVersion = 15
+libVersions.compileSdkVersion = 25
+libVersions.buildToolsVersion = "25.0.2"
+libVersions.targetSdkVersion = 22
+libVersions.playServicesVersion = "10.2.1"
+libVersions.firebaseAppIndexingVersion = "10.2.1"
+libVersions.kotlinVersion = "1.1.2-3"
+ext.libVersions = libVersions
 
 Expando libs = new Expando()
-project.ext.libs = libs
-project.ext.libs.mockitoKotlin = "com.nhaarman:mockito-kotlin:1.4.0"
-project.ext.libs.mockitoCore = "org.mockito:mockito-core:2.8.8"
-project.ext.libs.robolectric = "org.robolectric:robolectric:3.3.2"
-project.ext.libs.robolectricShadowsMultidex = "org.robolectric:shadows-multidex:3.3.2"
-project.ext.libs.assertjCore = "org.assertj:assertj-core:2.6.0"
-project.ext.libs.jodaTime = "joda-time:joda-time:2.9.9:no-tzdb"
-project.ext.libs.jodaTimeTzdb = "joda-time:joda-time:2.9.9"
-project.ext.libs.jodaTimeAndroid = "net.danlew:android.joda:2.9.9"
-project.ext.libs.multidex = "com.android.support:multidex:1.0.1"
-project.ext.libs.androidJob = "com.evernote:android-job:1.1.8"
-project.ext.libs.androidReactiveLocation = "com.github.skedgo:Android-ReactiveLocation:8f7e161e61815fee3d6a76d950ef0e1f44ede42f"
-project.ext.libs.playServicesMaps = "com.google.android.gms:play-services-maps:$ext.libVersions.playServicesVersion"
-project.ext.libs.playServicesLocation = "com.google.android.gms:play-services-location:$ext.libVersions.playServicesVersion"
-project.ext.libs.playServicesAnalytics = "com.google.android.gms:play-services-analytics:$ext.libVersions.playServicesVersion"
-project.ext.libs.playServicesGcm = "com.google.android.gms:play-services-gcm:$ext.libVersions.playServicesVersion"
-project.ext.libs.playServicesPlaces = "com.google.android.gms:play-services-places:$ext.libVersions.playServicesVersion"
-project.ext.libs.firebaseAppIndexing = "com.google.firebase:firebase-appindexing:$ext.libVersions.firebaseAppIndexingVersion"
+libs.mockitoKotlin = "com.nhaarman:mockito-kotlin:1.4.0"
+libs.mockitoCore = "org.mockito:mockito-core:2.8.8"
+libs.robolectric = "org.robolectric:robolectric:3.3.2"
+libs.robolectricShadowsMultidex = "org.robolectric:shadows-multidex:3.3.2"
+libs.assertjCore = "org.assertj:assertj-core:2.6.0"
+libs.jodaTime = "joda-time:joda-time:2.9.9:no-tzdb"
+libs.jodaTimeTzdb = "joda-time:joda-time:2.9.9"
+libs.jodaTimeAndroid = "net.danlew:android.joda:2.9.9"
+libs.multidex = "com.android.support:multidex:1.0.1"
+libs.androidJob = "com.evernote:android-job:1.1.8"
+libs.androidReactiveLocation = "com.github.skedgo:Android-ReactiveLocation:636ef5d15581b54b60fb5ace003b812cc84c413a"
+libs.playServicesMaps = "com.google.android.gms:play-services-maps:$libVersions.playServicesVersion"
+libs.playServicesLocation = "com.google.android.gms:play-services-location:$libVersions.playServicesVersion"
+libs.playServicesAnalytics = "com.google.android.gms:play-services-analytics:$libVersions.playServicesVersion"
+libs.playServicesGcm = "com.google.android.gms:play-services-gcm:$libVersions.playServicesVersion"
+libs.firebaseAppIndexing = "com.google.firebase:firebase-appindexing:$libVersions.firebaseAppIndexingVersion"
 
-project.ext.libs.value = "org.immutables:value:$ext.libVersions.immutablesVersion"
-project.ext.libs.valueAnnotations = "org.immutables:value:$ext.libVersions.immutablesVersion:annotations"
-project.ext.libs.builderAnnotations = "org.immutables:builder:$ext.libVersions.immutablesVersion"
-project.ext.libs.gsonAnnotations = "org.immutables:gson:$ext.libVersions.immutablesVersion:annotations"
+libs.value = "org.immutables:value:$libVersions.immutablesVersion"
+libs.valueAnnotations = "org.immutables:value:$libVersions.immutablesVersion:annotations"
+libs.builderAnnotations = "org.immutables:builder:$libVersions.immutablesVersion"
+libs.gsonAnnotations = "org.immutables:gson:$libVersions.immutablesVersion:annotations"
 
 libs.dagger = "com.google.dagger:dagger:2.10"
 libs.daggerAndroid = "com.google.dagger:dagger-android:2.10"
@@ -45,5 +45,10 @@ libs.daggerAndroidSupport = "com.google.dagger:dagger-android-support:2.10"
 libs.daggerCompiler = "com.google.dagger:dagger-compiler:2.10"
 libs.daggerAndroidProcessor = "com.google.dagger:dagger-android-processor:2.10"
 
+libs.rxjava = "io.reactivex:rxjava:1.2.4"
 libs.rxrelay1 = "com.jakewharton.rxrelay:rxrelay:1.2.0"
 libs.kluent = "org.amshove.kluent:kluent:1.20"
+libs.kotlin = "org.jetbrains.kotlin:kotlin-stdlib:$libVersions.kotlinVersion"
+libs.gson = "com.google.code.gson:gson:2.7"
+libs.junit = "junit:junit:4.12"
+ext.libs = libs
