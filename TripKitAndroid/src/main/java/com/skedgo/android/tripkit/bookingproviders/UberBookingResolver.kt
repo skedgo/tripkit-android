@@ -31,7 +31,7 @@ class UberBookingResolver(
       return Observable.just(action)
     } else {
       val data = Intent(Intent.ACTION_VIEW)
-          .setData(Uri.parse("https://play.google.com/store/apps/details?id=" + UBER_PACKAGE))
+          .setData(Uri.parse("https://play.google.com/store/apps/details?id=$UBER_PACKAGE"))
       val action = actionBuilder
           .hasApp(false)
           .data(data)
