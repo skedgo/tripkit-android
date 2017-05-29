@@ -34,6 +34,7 @@ public class TripGroup implements Parcelable {
       }
 
       tripGroup.frequency = in.readInt();
+      tripGroup.sources = in.readArrayList(Source.class.getClassLoader());
       return tripGroup;
     }
 
@@ -44,10 +45,12 @@ public class TripGroup implements Parcelable {
   private String uuid = UUID.randomUUID().toString();
   private long displayTripId;
 
+  @SerializedName("sources") @Nullable private List<Source> sources;
   @SerializedName("trips") private ArrayList<Trip> trips;
   @SerializedName("frequency") private int frequency;
   private transient GroupVisibility visibility = GroupVisibility.FULL;
 
+  /* FIXME: Should have not left this here. */
   private transient PublishSubject<Pair<ServiceStop, Boolean>> onChangeStop = PublishSubject.create();
 
   public long getDisplayTripId() {
@@ -198,6 +201,7 @@ public class TripGroup implements Parcelable {
     out.writeLong(displayTripId);
     out.writeList(trips);
     out.writeInt(frequency);
+    out.writeList(sources);
   }
 
   public Observable<Pair<ServiceStop, Boolean>> onChangeStop() {
@@ -218,5 +222,13 @@ public class TripGroup implements Parcelable {
 
   public String uuid() {
     return uuid;
+  }
+
+  @Nullable public List<Source> getSources() {
+    return sources;
+  }
+
+  public void setSources(@Nullable List<Source> sources) {
+    this.sources = sources;
   }
 }

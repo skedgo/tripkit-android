@@ -8,10 +8,6 @@ import android.text.TextUtils;
 import com.skedgo.android.common.model.Location;
 import com.skedgo.android.common.model.Query;
 import com.skedgo.android.common.model.Region;
-
-import skedgo.tripkit.a2brouting.FailoverA2bRoutingApi;
-import skedgo.tripkit.a2brouting.RouteService;
-import skedgo.tripkit.routing.TripGroup;
 import com.skedgo.android.tripkit.routing.ExtraQueryMapProvider;
 
 import java.util.Collections;
@@ -22,6 +18,9 @@ import java.util.concurrent.TimeUnit;
 
 import rx.Observable;
 import rx.functions.Func1;
+import skedgo.tripkit.a2brouting.FailoverA2bRoutingApi;
+import skedgo.tripkit.a2brouting.RouteService;
+import skedgo.tripkit.routing.TripGroup;
 
 final class RouteServiceImpl implements RouteService {
   private final Func1<Query, Observable<List<Query>>> queryGenerator;
@@ -113,6 +112,7 @@ final class RouteServiceImpl implements RouteService {
     final String unit = query.getUnit();
     final int transferTime = query.getTransferTime();
     final int walkingSpeed = query.getWalkingSpeed();
+    final int cyclingSpeed = query.getCyclingSpeed();
 
     final Map<String, Object> options = new HashMap<>();
     options.put("from", departureCoordinates);
@@ -123,6 +123,7 @@ final class RouteServiceImpl implements RouteService {
     options.put("v", "12");
     options.put("tt", Integer.toString(transferTime));
     options.put("ws", Integer.toString(walkingSpeed));
+    options.put("cs", Integer.toString(cyclingSpeed));
 
     if (query.isInterRegional()) {
       options.put("ir", "1");

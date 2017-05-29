@@ -1,4 +1,3 @@
-apply from: "../dependencies.gradle"
 apply plugin: "com.android.library"
 apply plugin: 'com.github.dcendents.android-maven'
 apply plugin: 'kotlin-android'
@@ -40,7 +39,7 @@ task(generateTripkitStrings, type: org.gradle.api.tasks.JavaExec) {
 }
 
 dependencies {
-  testCompile 'junit:junit:4.12'
+  testCompile libs.junit
   testCompile libs.assertjCore
   testCompile libs.robolectric
   testCompile libs.mockitoCore
@@ -51,7 +50,7 @@ dependencies {
   androidTestCompile "com.android.support.test:rules:0.5"
   androidTestCompile libs.assertjCore
 
-  compile "org.jetbrains.kotlin:kotlin-stdlib:$kotlinVersion"
+  compile libs.kotlin
   compile libs.playServicesGcm
 
   compile 'com.github.skedgo:sqlite-utils:v1.0'
@@ -60,8 +59,8 @@ dependencies {
   compile "com.squareup.retrofit2:adapter-rxjava:2.0.2"
   compile "com.squareup.retrofit2:retrofit:2.0.2"
 
-  compile 'com.google.dagger:dagger:2.7'
-  kapt 'com.google.dagger:dagger-compiler:2.7'
+  compile libs.dagger
+  kapt libs.daggerCompiler
   kapt libs.value
   provided libs.valueAnnotations
   provided libs.builderAnnotations
