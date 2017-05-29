@@ -7,19 +7,18 @@ import com.skedgo.android.tripkit.ExternalActionParams
 import rx.Observable
 import rx.functions.Func1
 
-const val UBER_PACKAGE = "com.ubercab"
+internal const val UBER_PACKAGE = "com.ubercab"
 
-class UberBookingResolver(private val isPackageInstalled: Func1<String, Boolean>,
-                          private val getAppIntent: Func1<String, Intent>) : BookingResolver {
-
+class UberBookingResolver(
+    private val isPackageInstalled: Func1<String, Boolean>,
+    private val getAppIntent: Func1<String, Intent>
+) : BookingResolver {
   override fun performExternalActionAsync(params: ExternalActionParams): Observable<BookingAction> {
     val actionBuilder = BookingAction.builder()
     actionBuilder.bookingProvider(BookingResolver.UBER)
 
     if (isPackageInstalled.call(UBER_PACKAGE)) {
-
       val intent = getAppIntent.call(UBER_PACKAGE)
-
       val segment = params.segment()
 
       intent.data = Uri.parse("uber://?action=setPickup" +
@@ -41,8 +40,5 @@ class UberBookingResolver(private val isPackageInstalled: Func1<String, Boolean>
     }
   }
 
-  override fun getTitleForExternalAction(externalAction: String): String? {
-    return null
-  }
-
+  override fun getTitleForExternalAction(externalAction: String): String? = null
 }
