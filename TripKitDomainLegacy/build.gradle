@@ -24,8 +24,8 @@ android {
 
 dependencies {
   compile project(":TripKitDomain")
-  compile 'com.google.dagger:dagger:2.7'
-  kapt 'com.google.dagger:dagger-compiler:2.7'
+  compile libs.dagger
+  kapt libs.daggerCompiler
   kapt libs.value
   provided libs.valueAnnotations
   provided libs.builderAnnotations
