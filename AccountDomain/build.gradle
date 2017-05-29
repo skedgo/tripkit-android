@@ -10,14 +10,14 @@ targetCompatibility = '1.7'
 sourceCompatibility = '1.7'
 
 dependencies {
-  testCompile 'junit:junit:4.12'
+  testCompile libs.junit
   testCompile libs.assertjCore
   testCompile libs.mockitoCore
   testCompile libs.mockitoKotlin, { exclude group: 'org.jetbrains.kotlin' }
 
-  compile 'io.reactivex:rxjava:1.2.4'
-  compile 'com.google.dagger:dagger:2.7'
-  kapt 'com.google.dagger:dagger-compiler:2.7'
+  compile libs.rxjava
+  compile libs.dagger
+  kapt libs.daggerCompiler
 
   compile libs.kotlin
   compileOnly project(":TripKitDomain")

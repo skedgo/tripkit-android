@@ -39,7 +39,7 @@ task(generateTripkitStrings, type: org.gradle.api.tasks.JavaExec) {
 }
 
 dependencies {
-  testCompile 'junit:junit:4.12'
+  testCompile libs.junit
   testCompile libs.assertjCore
   testCompile libs.robolectric
   testCompile libs.mockitoCore
@@ -59,8 +59,8 @@ dependencies {
   compile "com.squareup.retrofit2:adapter-rxjava:2.0.2"
   compile "com.squareup.retrofit2:retrofit:2.0.2"
 
-  compile 'com.google.dagger:dagger:2.7'
-  kapt 'com.google.dagger:dagger-compiler:2.7'
+  compile libs.dagger
+  kapt libs.daggerCompiler
   kapt libs.value
   provided libs.valueAnnotations
   provided libs.builderAnnotations

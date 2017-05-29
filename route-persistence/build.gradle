@@ -40,7 +40,7 @@ dependencies {
   compile project(':TripKitAndroid')
   compile 'com.github.skedgo:sqlite-utils:v1.0'
 
-  testCompile 'junit:junit:4.12'
+  testCompile libs.junit
   testCompile libs.assertjCore
   testCompile libs.mockitoCore
   testCompile libs.robolectric
