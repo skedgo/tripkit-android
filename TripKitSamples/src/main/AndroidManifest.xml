@@ -16,7 +16,9 @@
       android:name="com.google.android.geo.API_KEY"
       android:value="@string/google_maps_key" />
 
-    <activity android:name=".a2brouting.A2bTripsActivity">
+    <activity
+      android:name=".a2brouting.A2bTripsActivity"
+      android:screenOrientation="sensorPortrait">
       <intent-filter>
         <action android:name="android.intent.action.MAIN" />
 
@@ -24,6 +26,8 @@
       </intent-filter>
     </activity>
 
-    <activity android:name=".a2brouting.TripDetailsActivity" />
+    <activity
+      android:name=".a2brouting.TripDetailsActivity"
+      android:screenOrientation="sensorPortrait" />
   </application>
 </manifest>
