@@ -1,0 +1,5482 @@
+{
+  "groups": [
+    {
+      "frequency": 20,
+      "sources": [
+        {
+          "disclaimer": "\u00a9 OpenStreetMap contributors\n\nMap data available under the Open Database License. For more information, see http://www.openstreetmap.org/copyright.",
+          "provider": {
+            "name": "OpenStreetMap",
+            "website": "https://www.openstreetmap.org"
+          }
+        },
+        {
+          "provider": {
+            "name": "State Transit Sydney"
+          }
+        }
+      ],
+      "trips": [
+        {
+          "arrive": 1495720601,
+          "availability": "AVAILABLE",
+          "caloriesCost": 7,
+          "carbonCost": 0.1,
+          "currencySymbol": "$",
+          "depart": 1495719985,
+          "hassleCost": 2,
+          "mainSegmentHashCode": 1935529356,
+          "moneyCost": 2.1,
+          "moneyUSDCost": 1.65,
+          "plannedURL": "https://darkages.buzzhives.com/satapp/trip/planned/d4d4b364-82b7-435f-bcd5-f578a1d23e53",
+          "queryIsLeaveAfter": true,
+          "queryTime": 1495719024,
+          "saveURL": "https://darkages.buzzhives.com/satapp/trip/save/d4d4b364-82b7-435f-bcd5-f578a1d23e53",
+          "segments": [
+            {
+              "availability": "AVAILABLE",
+              "endTime": 1495720266,
+              "segmentTemplateHashCode": -1642755443,
+              "startTime": 1495719985
+            },
+            {
+              "availability": "AVAILABLE",
+              "endTime": 1495720601,
+              "realTime": true,
+              "realtimeVehicle": {
+                "id": "405003",
+                "label": "",
+                "lastUpdate": 1495719108,
+                "location": {
+                  "bearing": 210,
+                  "lat": -33.8766,
+                  "lng": 151.14166
+                },
+                "occupancy": "MANY_SEATS_AVAILABLE",
+                "wifi": false
+              },
+              "segmentTemplateHashCode": 1935529356,
+              "serviceColor": {
+                "blue": 239,
+                "green": 181,
+                "red": 0
+              },
+              "serviceDirection": "CITY Martin Place",
+              "serviceName": "Abbotsford to City Martin Place",
+              "serviceNumber": "438",
+              "serviceTripID": "405003",
+              "startTime": 1495720266,
+              "stops": 4,
+              "ticketWebsiteURL": "https://www.opal.com.au/en/fares-and-benefits/",
+              "wheelchairAccessible": true
+            }
+          ],
+          "temporaryURL": "https://darkages.buzzhives.com/satapp/trip/d4d4b364-82b7-435f-bcd5-f578a1d23e53",
+          "updateURL": "https://darkages.buzzhives.com/satapp/trip/update/d4d4b364-82b7-435f-bcd5-f578a1d23e53?hash=1425332971",
+          "weightedScore": 9
+        },
+        {
+          "arrive": 1495719824,
+          "availability": "AVAILABLE",
+          "caloriesCost": 7,
+          "carbonCost": 0.1,
+          "currencySymbol": "$",
+          "depart": 1495719390,
+          "hassleCost": 2,
+          "mainSegmentHashCode": -255288863,
+          "moneyCost": 2.1,
+          "moneyUSDCost": 1.65,
+          "plannedURL": "https://darkages.buzzhives.com/satapp/trip/planned/6b29f5b5-a1fc-4de0-85f4-1e9293029992",
+          "queryIsLeaveAfter": true,
+          "queryTime": 1495719024,
+          "saveURL": "https://darkages.buzzhives.com/satapp/trip/save/6b29f5b5-a1fc-4de0-85f4-1e9293029992",
+          "segments": [
+            {
+              "availability": "AVAILABLE",
+              "endTime": 1495719530,
+              "segmentTemplateHashCode": 1921867951,
+              "startTime": 1495719390
+            },
+            {
+              "availability": "AVAILABLE",
+              "endTime": 1495719824,
+              "realTime": true,
+              "realtimeVehicle": {
+                "id": "304988",
+                "label": "",
+                "lastUpdate": 1495719118,
+                "location": {
+                  "bearing": 8,
+                  "lat": -33.89358,
+                  "lng": 151.21219
+                },
+                "occupancy": "MANY_SEATS_AVAILABLE",
+                "wifi": false
+              },
+              "segmentTemplateHashCode": -255288863,
+              "serviceColor": {
+                "blue": 239,
+                "green": 181,
+                "red": 0
+              },
+              "serviceDirection": "CITY Circular Quay",
+              "serviceName": "Eastgardens to City Circular Quay via Mascot",
+              "serviceNumber": "301",
+              "serviceTripID": "304988",
+              "startTime": 1495719530,
+              "stops": 4,
+              "ticketWebsiteURL": "https://www.opal.com.au/en/fares-and-benefits/",
+              "wheelchairAccessible": true
+            }
+          ],
+          "temporaryURL": "https://darkages.buzzhives.com/satapp/trip/6b29f5b5-a1fc-4de0-85f4-1e9293029992",
+          "updateURL": "https://darkages.buzzhives.com/satapp/trip/update/6b29f5b5-a1fc-4de0-85f4-1e9293029992?hash=301308591",
+          "weightedScore": 7.5
+        },
+        {
+          "arrive": 1495721772,
+          "availability": "AVAILABLE",
+          "caloriesCost": 7,
+          "carbonCost": 0.1,
+          "currencySymbol": "$",
+          "depart": 1495721100,
+          "hassleCost": 2,
+          "mainSegmentHashCode": -994965650,
+          "moneyCost": 2.1,
+          "moneyUSDCost": 1.65,
+          "plannedURL": "https://darkages.buzzhives.com/satapp/trip/planned/fc3174b6-e630-4049-986d-1b567aa30218",
+          "queryIsLeaveAfter": true,
+          "queryTime": 1495719024,
+          "saveURL": "https://darkages.buzzhives.com/satapp/trip/save/fc3174b6-e630-4049-986d-1b567aa30218",
+          "segments": [
+            {
+              "availability": "AVAILABLE",
+              "endTime": 1495721352,
+              "segmentTemplateHashCode": -353001021,
+              "startTime": 1495721100
+            },
+            {
+              "availability": "AVAILABLE",
+              "endTime": 1495721772,
+              "realTime": true,
+              "segmentTemplateHashCode": -994965650,
+              "serviceColor": {
+                "blue": 239,
+                "green": 181,
+                "red": 0
+              },
+              "serviceDirection": "Chatswood",
+              "serviceName": "Kingsford to Chatswood",
+              "serviceNumber": "343",
+              "serviceTripID": "371030",
+              "startTime": 1495721352,
+              "stops": 4,
+              "ticketWebsiteURL": "https://www.opal.com.au/en/fares-and-benefits/",
+              "wheelchairAccessible": true
+            }
+          ],
+          "temporaryURL": "https://darkages.buzzhives.com/satapp/trip/fc3174b6-e630-4049-986d-1b567aa30218",
+          "updateURL": "https://darkages.buzzhives.com/satapp/trip/update/fc3174b6-e630-4049-986d-1b567aa30218?hash=1452304958",
+          "weightedScore": 9.2
+        },
+        {
+          "arrive": 1495727820,
+          "availability": "AVAILABLE",
+          "caloriesCost": 7,
+          "carbonCost": 0.1,
+          "currencySymbol": "$",
+          "depart": 1495727380,
+          "hassleCost": 2,
+          "mainSegmentHashCode": -255288863,
+          "moneyCost": 2.1,
+          "moneyUSDCost": 1.65,
+          "plannedURL": "https://darkages.buzzhives.com/satapp/trip/planned/170fc275-f6c6-4575-82fb-dfd41ff6b309",
+          "queryIsLeaveAfter": true,
+          "queryTime": 1495719024,
+          "saveURL": "https://darkages.buzzhives.com/satapp/trip/save/170fc275-f6c6-4575-82fb-dfd41ff6b309",
+          "segments": [
+            {
+              "availability": "AVAILABLE",
+              "endTime": 1495727520,
+              "segmentTemplateHashCode": 1921867951,
+              "startTime": 1495727380
+            },
+            {
+              "availability": "AVAILABLE",
+              "endTime": 1495727820,
+              "segmentTemplateHashCode": -255288863,
+              "serviceColor": {
+                "blue": 239,
+                "green": 181,
+                "red": 0
+              },
+              "serviceDirection": "CITY Circular Quay",
+              "serviceName": "Eastgardens to City Circular Quay via Mascot",
+              "serviceNumber": "301",
+              "serviceTripID": "398812",
+              "startTime": 1495727520,
+              "stops": 4,
+              "ticketWebsiteURL": "https://www.opal.com.au/en/fares-and-benefits/",
+              "wheelchairAccessible": true
+            }
+          ],
+          "temporaryURL": "https://darkages.buzzhives.com/satapp/trip/170fc275-f6c6-4575-82fb-dfd41ff6b309",
+          "updateURL": "https://darkages.buzzhives.com/satapp/trip/update/170fc275-f6c6-4575-82fb-dfd41ff6b309?hash=-1284529421",
+          "weightedScore": 29.2
+        },
+        {
+          "arrive": 1495722420,
+          "availability": "AVAILABLE",
+          "caloriesCost": 7,
+          "carbonCost": 0.1,
+          "currencySymbol": "$",
+          "depart": 1495721748,
+          "hassleCost": 2,
+          "mainSegmentHashCode": -197038755,
+          "moneyCost": 2.1,
+          "moneyUSDCost": 1.65,
+          "plannedURL": "https://darkages.buzzhives.com/satapp/trip/planned/ec3b4bd3-ffb7-4989-a4d2-9b4030b70d33",
+          "queryIsLeaveAfter": true,
+          "queryTime": 1495719024,
+          "saveURL": "https://darkages.buzzhives.com/satapp/trip/save/ec3b4bd3-ffb7-4989-a4d2-9b4030b70d33",
+          "segments": [
+            {
+              "availability": "AVAILABLE",
+              "endTime": 1495722000,
+              "segmentTemplateHashCode": -353001021,
+              "startTime": 1495721748
+            },
+            {
+              "availability": "AVAILABLE",
+              "endTime": 1495722420,
+              "segmentTemplateHashCode": -197038755,
+              "serviceColor": {
+                "blue": 239,
+                "green": 181,
+                "red": 0
+              },
+              "serviceDirection": "Chatswood",
+              "serviceName": "Kingsford to Chatswood",
+              "serviceNumber": "343",
+              "serviceTripID": "371276",
+              "startTime": 1495722000,
+              "stops": 4,
+              "ticketWebsiteURL": "https://www.opal.com.au/en/fares-and-benefits/",
+              "wheelchairAccessible": true
+            }
+          ],
+          "temporaryURL": "https://darkages.buzzhives.com/satapp/trip/ec3b4bd3-ffb7-4989-a4d2-9b4030b70d33",
+          "updateURL": "https://darkages.buzzhives.com/satapp/trip/update/ec3b4bd3-ffb7-4989-a4d2-9b4030b70d33?hash=1074520518",
+          "weightedScore": 14.2
+        },
+        {
+          "arrive": 1495720301,
+          "availability": "AVAILABLE",
+          "caloriesCost": 7,
+          "carbonCost": 0.1,
+          "currencySymbol": "$",
+          "depart": 1495719728,
+          "hassleCost": 2,
+          "mainSegmentHashCode": 2142107207,
+          "moneyCost": 2.1,
+          "moneyUSDCost": 1.65,
+          "plannedURL": "https://darkages.buzzhives.com/satapp/trip/planned/236ae008-2d95-4b05-9967-daf7d39f481e",
+          "queryIsLeaveAfter": true,
+          "queryTime": 1495719024,
+          "saveURL": "https://darkages.buzzhives.com/satapp/trip/save/236ae008-2d95-4b05-9967-daf7d39f481e",
+          "segments": [
+            {
+              "availability": "AVAILABLE",
+              "endTime": 1495719980,
+              "segmentTemplateHashCode": -353001021,
+              "startTime": 1495719728
+            },
+            {
+              "availability": "AVAILABLE",
+              "endTime": 1495720301,
+              "realTime": true,
+              "realtimeVehicle": {
+                "id": "304661",
+                "label": "",
+                "lastUpdate": 1495719112,
+                "location": {
+                  "bearing": 283,
+                  "lat": -33.91285,
+                  "lng": 151.23972
+                },
+                "occupancy": "MANY_SEATS_AVAILABLE",
+                "wifi": false
+              },
+              "segmentTemplateHashCode": 2142107207,
+              "serviceColor": {
+                "blue": 239,
+                "green": 181,
+                "red": 0
+              },
+              "serviceDirection": "CITY Circular Quay",
+              "serviceName": "Coogee to City Circular Quay via Bream St",
+              "serviceNumber": "374",
+              "serviceTripID": "304661",
+              "startTime": 1495719980,
+              "stops": 4,
+              "ticketWebsiteURL": "https://www.opal.com.au/en/fares-and-benefits/",
+              "wheelchairAccessible": true
+            }
+          ],
+          "temporaryURL": "https://darkages.buzzhives.com/satapp/trip/236ae008-2d95-4b05-9967-daf7d39f481e",
+          "updateURL": "https://darkages.buzzhives.com/satapp/trip/update/236ae008-2d95-4b05-9967-daf7d39f481e?hash=619114531",
+          "weightedScore": 8.7
+        },
+        {
+          "arrive": 1495721113,
+          "availability": "AVAILABLE",
+          "caloriesCost": 7,
+          "carbonCost": 0.1,
+          "currencySymbol": "$",
+          "depart": 1495720705,
+          "hassleCost": 2,
+          "mainSegmentHashCode": -990565536,
+          "moneyCost": 2.1,
+          "moneyUSDCost": 1.65,
+          "plannedURL": "https://darkages.buzzhives.com/satapp/trip/planned/6cc676a2-0891-433e-b03b-c021b72b8e28",
+          "queryIsLeaveAfter": true,
+          "queryTime": 1495719024,
+          "saveURL": "https://darkages.buzzhives.com/satapp/trip/save/6cc676a2-0891-433e-b03b-c021b72b8e28",
+          "segments": [
+            {
+              "availability": "AVAILABLE",
+              "endTime": 1495720845,
+              "segmentTemplateHashCode": 1921867951,
+              "startTime": 1495720705
+            },
+            {
+              "availability": "AVAILABLE",
+              "endTime": 1495721113,
+              "realTime": true,
+              "realtimeVehicle": {
+                "id": "305019",
+                "label": "",
+                "lastUpdate": 1495719112,
+                "location": {
+                  "bearing": 11,
+                  "lat": -33.9315,
+                  "lng": 151.19414
+                },
+                "occupancy": "MANY_SEATS_AVAILABLE",
+                "wifi": false
+              },
+              "segmentTemplateHashCode": -990565536,
+              "serviceColor": {
+                "blue": 239,
+                "green": 181,
+                "red": 0
+              },
+              "serviceDirection": "CITY Circular Quay",
+              "serviceName": "Sans Souci to City Circular Quay via Mascot",
+              "serviceNumber": "303",
+              "serviceTripID": "305019",
+              "startTime": 1495720845,
+              "stops": 4,
+              "ticketWebsiteURL": "https://www.opal.com.au/en/fares-and-benefits/",
+              "wheelchairAccessible": true
+            }
+          ],
+          "temporaryURL": "https://darkages.buzzhives.com/satapp/trip/6cc676a2-0891-433e-b03b-c021b72b8e28",
+          "updateURL": "https://darkages.buzzhives.com/satapp/trip/update/6cc676a2-0891-433e-b03b-c021b72b8e28?hash=-1086386751",
+          "weightedScore": 10.7
+        },
+        {
+          "arrive": 1495724220,
+          "availability": "AVAILABLE",
+          "caloriesCost": 7,
+          "carbonCost": 0.1,
+          "currencySymbol": "$",
+          "depart": 1495723780,
+          "hassleCost": 2,
+          "mainSegmentHashCode": -255288863,
+          "moneyCost": 2.1,
+          "moneyUSDCost": 1.65,
+          "plannedURL": "https://darkages.buzzhives.com/satapp/trip/planned/cc2c0102-35f4-4086-9825-d96ae964260d",
+          "queryIsLeaveAfter": true,
+          "queryTime": 1495719024,
+          "saveURL": "https://darkages.buzzhives.com/satapp/trip/save/cc2c0102-35f4-4086-9825-d96ae964260d",
+          "segments": [
+            {
+              "availability": "AVAILABLE",
+              "endTime": 1495723920,
+              "segmentTemplateHashCode": 1921867951,
+              "startTime": 1495723780
+            },
+            {
+              "availability": "AVAILABLE",
+              "endTime": 1495724220,
+              "segmentTemplateHashCode": -255288863,
+              "serviceColor": {
+                "blue": 239,
+                "green": 181,
+                "red": 0
+              },
+              "serviceDirection": "CITY Circular Quay",
+              "serviceName": "Eastgardens to City Circular Quay via Mascot",
+              "serviceNumber": "301",
+              "serviceTripID": "398811",
+              "startTime": 1495723920,
+              "stops": 4,
+              "ticketWebsiteURL": "https://www.opal.com.au/en/fares-and-benefits/",
+              "wheelchairAccessible": true
+            }
+          ],
+          "temporaryURL": "https://darkages.buzzhives.com/satapp/trip/cc2c0102-35f4-4086-9825-d96ae964260d",
+          "updateURL": "https://darkages.buzzhives.com/satapp/trip/update/cc2c0102-35f4-4086-9825-d96ae964260d?hash=-1284823641",
+          "weightedScore": 19.2
+        }
+      ]
+    },
+    {
+      "frequency": 10,
+      "sources": [
+        {
+          "disclaimer": "\u00a9 OpenStreetMap contributors\n\nMap data available under the Open Database License. For more information, see http://www.openstreetmap.org/copyright.",
+          "provider": {
+            "name": "OpenStreetMap",
+            "website": "https://www.openstreetmap.org"
+          }
+        },
+        {
+          "provider": {
+            "name": "State Transit Sydney"
+          }
+        }
+      ],
+      "trips": [
+        {
+          "arrive": 1495719060,
+          "availability": "AVAILABLE",
+          "caloriesCost": 11,
+          "carbonCost": 0.1,
+          "currencySymbol": "$",
+          "depart": 1495718404,
+          "hassleCost": 2,
+          "mainSegmentHashCode": 1798772591,
+          "moneyCost": 2.1,
+          "moneyUSDCost": 1.65,
+          "plannedURL": "https://darkages.buzzhives.com/satapp/trip/planned/04b81322-b3c4-44aa-ac64-823e48eeeb53",
+          "queryIsLeaveAfter": true,
+          "queryTime": 1495719024,
+          "saveURL": "https://darkages.buzzhives.com/satapp/trip/save/04b81322-b3c4-44aa-ac64-823e48eeeb53",
+          "segments": [
+            {
+              "availability": "AVAILABLE",
+              "endTime": 1495718700,
+              "segmentTemplateHashCode": -531260062,
+              "startTime": 1495718404
+            },
+            {
+              "availability": "AVAILABLE",
+              "endTime": 1495719060,
+              "platform": "Stand E",
+              "segmentTemplateHashCode": 1798772591,
+              "serviceColor": {
+                "blue": 239,
+                "green": 181,
+                "red": 0
+              },
+              "serviceDirection": "CITY Martin Place",
+              "serviceName": "Campsie to City Martin Place via Earlwood",
+              "serviceNumber": "412",
+              "serviceTripID": "418283",
+              "startTime": 1495718700,
+              "stops": 3,
+              "ticketWebsiteURL": "https://www.opal.com.au/en/fares-and-benefits/",
+              "wheelchairAccessible": true
+            }
+          ],
+          "temporaryURL": "https://darkages.buzzhives.com/satapp/trip/04b81322-b3c4-44aa-ac64-823e48eeeb53",
+          "updateURL": "https://darkages.buzzhives.com/satapp/trip/update/04b81322-b3c4-44aa-ac64-823e48eeeb53?hash=-1245720512",
+          "weightedScore": 48.4
+        },
+        {
+          "arrive": 1495724040,
+          "availability": "AVAILABLE",
+          "caloriesCost": 11,
+          "carbonCost": 0.1,
+          "currencySymbol": "$",
+          "depart": 1495723384,
+          "hassleCost": 2,
+          "mainSegmentHashCode": -1124513104,
+          "moneyCost": 2.1,
+          "moneyUSDCost": 1.65,
+          "plannedURL": "https://darkages.buzzhives.com/satapp/trip/planned/f856b031-b1bd-4ef6-9cb7-06724061cad8",
+          "queryIsLeaveAfter": true,
+          "queryTime": 1495719024,
+          "saveURL": "https://darkages.buzzhives.com/satapp/trip/save/f856b031-b1bd-4ef6-9cb7-06724061cad8",
+          "segments": [
+            {
+              "availability": "AVAILABLE",
+              "endTime": 1495723680,
+              "segmentTemplateHashCode": -531260062,
+              "startTime": 1495723384
+            },
+            {
+              "availability": "AVAILABLE",
+              "endTime": 1495724040,
+              "platform": "Stand E",
+              "segmentTemplateHashCode": -1124513104,
+              "serviceColor": {
+                "blue": 239,
+                "green": 181,
+                "red": 0
+              },
+              "serviceDirection": "CITY Martin Place",
+              "serviceName": "Kingsgrove to City Martin Place",
+              "serviceNumber": "423",
+              "serviceTripID": "389311",
+              "startTime": 1495723680,
+              "stops": 3,
+              "ticketWebsiteURL": "https://www.opal.com.au/en/fares-and-benefits/",
+              "wheelchairAccessible": true
+            }
+          ],
+          "temporaryURL": "https://darkages.buzzhives.com/satapp/trip/f856b031-b1bd-4ef6-9cb7-06724061cad8",
+          "updateURL": "https://darkages.buzzhives.com/satapp/trip/update/f856b031-b1bd-4ef6-9cb7-06724061cad8?hash=-2094892622",
+          "weightedScore": 19.1
+        },
+        {
+          "arrive": 1495718940,
+          "availability": "AVAILABLE",
+          "caloriesCost": 11,
+          "carbonCost": 0.1,
+          "currencySymbol": "$",
+          "depart": 1495718404,
+          "hassleCost": 2,
+          "mainSegmentHashCode": 1369397310,
+          "moneyCost": 2.1,
+          "moneyUSDCost": 1.65,
+          "plannedURL": "https://darkages.buzzhives.com/satapp/trip/planned/e8dbd4ce-3970-4ece-9ada-90170fb7abd8",
+          "queryIsLeaveAfter": true,
+          "queryTime": 1495719024,
+          "saveURL": "https://darkages.buzzhives.com/satapp/trip/save/e8dbd4ce-3970-4ece-9ada-90170fb7abd8",
+          "segments": [
+            {
+              "availability": "AVAILABLE",
+              "endTime": 1495718700,
+              "segmentTemplateHashCode": -531260062,
+              "startTime": 1495718404
+            },
+            {
+              "availability": "AVAILABLE",
+              "endTime": 1495718940,
+              "platform": "Stand E",
+              "segmentTemplateHashCode": 1369397310,
+              "serviceColor": {
+                "blue": 239,
+                "green": 181,
+                "red": 0
+              },
+              "serviceDirection": "CITY Gresham St",
+              "serviceName": "Clovelly to City Gresham St",
+              "serviceNumber": "339",
+              "serviceTripID": "328950",
+              "startTime": 1495718700,
+              "stops": 3,
+              "ticketWebsiteURL": "https://www.opal.com.au/en/fares-and-benefits/",
+              "wheelchairAccessible": true
+            }
+          ],
+          "temporaryURL": "https://darkages.buzzhives.com/satapp/trip/e8dbd4ce-3970-4ece-9ada-90170fb7abd8",
+          "updateURL": "https://darkages.buzzhives.com/satapp/trip/update/e8dbd4ce-3970-4ece-9ada-90170fb7abd8?hash=705239259",
+          "weightedScore": 48
+        },
+        {
+          "arrive": 1495720470,
+          "availability": "AVAILABLE",
+          "caloriesCost": 11,
+          "carbonCost": 0.1,
+          "currencySymbol": "$",
+          "depart": 1495719978,
+          "hassleCost": 2,
+          "mainSegmentHashCode": 1798772591,
+          "moneyCost": 2.1,
+          "moneyUSDCost": 1.65,
+          "plannedURL": "https://darkages.buzzhives.com/satapp/trip/planned/4d77e1ed-a32b-4f2d-8cde-0567948fb52d",
+          "queryIsLeaveAfter": true,
+          "queryTime": 1495719024,
+          "saveURL": "https://darkages.buzzhives.com/satapp/trip/save/4d77e1ed-a32b-4f2d-8cde-0567948fb52d",
+          "segments": [
+            {
+              "availability": "AVAILABLE",
+              "endTime": 1495720274,
+              "segmentTemplateHashCode": -531260062,
+              "startTime": 1495719978
+            },
+            {
+              "availability": "AVAILABLE",
+              "endTime": 1495720470,
+              "platform": "Stand E",
+              "realTime": true,
+              "realtimeVehicle": {
+                "id": "127233",
+                "label": "",
+                "lastUpdate": 1495719108,
+                "location": {
+                  "bearing": 32,
+                  "lat": -33.89391,
+                  "lng": 151.14543
+                },
+                "occupancy": "MANY_SEATS_AVAILABLE",
+                "wifi": false
+              },
+              "segmentTemplateHashCode": 1798772591,
+              "serviceColor": {
+                "blue": 239,
+                "green": 181,
+                "red": 0
+              },
+              "serviceDirection": "CITY Martin Place",
+              "serviceName": "Campsie to City Martin Place via Canterbury",
+              "serviceNumber": "413",
+              "serviceTripID": "127233",
+              "startTime": 1495720274,
+              "stops": 3,
+              "ticketWebsiteURL": "https://www.opal.com.au/en/fares-and-benefits/",
+              "wheelchairAccessible": true
+            }
+          ],
+          "temporaryURL": "https://darkages.buzzhives.com/satapp/trip/4d77e1ed-a32b-4f2d-8cde-0567948fb52d",
+          "updateURL": "https://darkages.buzzhives.com/satapp/trip/update/4d77e1ed-a32b-4f2d-8cde-0567948fb52d?hash=-1565545724",
+          "weightedScore": 9.4
+        },
+        {
+          "arrive": 1495719325,
+          "availability": "AVAILABLE",
+          "caloriesCost": 11,
+          "carbonCost": 0.1,
+          "currencySymbol": "$",
+          "depart": 1495718879,
+          "hassleCost": 2,
+          "mainSegmentHashCode": 707691056,
+          "moneyCost": 2.1,
+          "moneyUSDCost": 1.65,
+          "plannedURL": "https://darkages.buzzhives.com/satapp/trip/planned/f3f6c78e-a1eb-4dd3-873b-af6ac23c363c",
+          "queryIsLeaveAfter": true,
+          "queryTime": 1495719024,
+          "saveURL": "https://darkages.buzzhives.com/satapp/trip/save/f3f6c78e-a1eb-4dd3-873b-af6ac23c363c",
+          "segments": [
+            {
+              "availability": "AVAILABLE",
+              "endTime": 1495719175,
+              "segmentTemplateHashCode": -531260062,
+              "startTime": 1495718879
+            },
+            {
+              "availability": "AVAILABLE",
+              "endTime": 1495719325,
+              "platform": "Stand E",
+              "realTime": true,
+              "realtimeVehicle": {
+                "id": "325053",
+                "label": "",
+                "lastUpdate": 1495719113,
+                "location": {
+                  "bearing": 9,
+                  "lat": -33.87684,
+                  "lng": 151.20947
+                },
+                "occupancy": "MANY_SEATS_AVAILABLE",
+                "wifi": false
+              },
+              "segmentTemplateHashCode": 707691056,
+              "serviceColor": {
+                "blue": 239,
+                "green": 181,
+                "red": 0
+              },
+              "serviceDirection": "CITY Martin Place",
+              "serviceName": "Canterbury to City Martin Place",
+              "serviceNumber": "428",
+              "serviceTripID": "325053",
+              "startTime": 1495719175,
+              "stops": 3,
+              "ticketWebsiteURL": "https://www.opal.com.au/en/fares-and-benefits/",
+              "wheelchairAccessible": true
+            }
+          ],
+          "temporaryURL": "https://darkages.buzzhives.com/satapp/trip/f3f6c78e-a1eb-4dd3-873b-af6ac23c363c",
+          "updateURL": "https://darkages.buzzhives.com/satapp/trip/update/f3f6c78e-a1eb-4dd3-873b-af6ac23c363c?hash=1115347394",
+          "weightedScore": 35.1
+        },
+        {
+          "arrive": 1495720209,
+          "availability": "AVAILABLE",
+          "caloriesCost": 11,
+          "carbonCost": 0.1,
+          "currencySymbol": "$",
+          "depart": 1495719714,
+          "hassleCost": 2,
+          "mainSegmentHashCode": 370085319,
+          "moneyCost": 2.1,
+          "moneyUSDCost": 1.65,
+          "plannedURL": "https://darkages.buzzhives.com/satapp/trip/planned/028f3a26-c793-4a75-ac90-74eeb00b36e1",
+          "queryIsLeaveAfter": true,
+          "queryTime": 1495719024,
+          "saveURL": "https://darkages.buzzhives.com/satapp/trip/save/028f3a26-c793-4a75-ac90-74eeb00b36e1",
+          "segments": [
+            {
+              "availability": "AVAILABLE",
+              "endTime": 1495720010,
+              "segmentTemplateHashCode": -531260062,
+              "startTime": 1495719714
+            },
+            {
+              "availability": "AVAILABLE",
+              "endTime": 1495720209,
+              "platform": "Stand E",
+              "realTime": true,
+              "realtimeVehicle": {
+                "id": "95619",
+                "label": "",
+                "lastUpdate": 1495719118,
+                "location": {
+                  "bearing": 111,
+                  "lat": -33.88151,
+                  "lng": 151.17101
+                },
+                "occupancy": "MANY_SEATS_AVAILABLE",
+                "wifi": false
+              },
+              "segmentTemplateHashCode": 370085319,
+              "serviceColor": {
+                "blue": 239,
+                "green": 181,
+                "red": 0
+              },
+              "serviceDirection": "CITY Martin Place",
+              "serviceName": "Lilyfield to City Martin Place",
+              "serviceNumber": "470",
+              "serviceTripID": "95619",
+              "startTime": 1495720010,
+              "stops": 3,
+              "ticketWebsiteURL": "https://www.opal.com.au/en/fares-and-benefits/",
+              "wheelchairAccessible": true
+            }
+          ],
+          "temporaryURL": "https://darkages.buzzhives.com/satapp/trip/028f3a26-c793-4a75-ac90-74eeb00b36e1",
+          "updateURL": "https://darkages.buzzhives.com/satapp/trip/update/028f3a26-c793-4a75-ac90-74eeb00b36e1?hash=-251672991",
+          "weightedScore": 8.5
+        },
+        {
+          "arrive": 1495718940,
+          "availability": "AVAILABLE",
+          "caloriesCost": 11,
+          "carbonCost": 0.1,
+          "currencySymbol": "$",
+          "depart": 1495718344,
+          "hassleCost": 2,
+          "mainSegmentHashCode": 1278370511,
+          "moneyCost": 2.1,
+          "moneyUSDCost": 1.65,
+          "plannedURL": "https://darkages.buzzhives.com/satapp/trip/planned/471174a1-f8bb-4473-893f-385138af2e96",
+          "queryIsLeaveAfter": true,
+          "queryTime": 1495719024,
+          "saveURL": "https://darkages.buzzhives.com/satapp/trip/save/471174a1-f8bb-4473-893f-385138af2e96",
+          "segments": [
+            {
+              "availability": "AVAILABLE",
+              "endTime": 1495718640,
+              "segmentTemplateHashCode": -531260062,
+              "startTime": 1495718344
+            },
+            {
+              "availability": "AVAILABLE",
+              "endTime": 1495718940,
+              "platform": "Stand E",
+              "realtimeVehicle": {
+                "id": "405053",
+                "label": "",
+                "lastUpdate": 1495719117,
+                "location": {
+                  "bearing": 6,
+                  "lat": -33.87239,
+                  "lng": 151.21002
+                },
+                "occupancy": "MANY_SEATS_AVAILABLE",
+                "wifi": false
+              },
+              "segmentTemplateHashCode": 1278370511,
+              "serviceColor": {
+                "blue": 239,
+                "green": 181,
+                "red": 0
+              },
+              "serviceDirection": "CITY Martin Place",
+              "serviceName": "Abbotsford to City Martin Place",
+              "serviceNumber": "438",
+              "serviceTripID": "405053",
+              "startTime": 1495718640,
+              "stops": 3,
+              "ticketWebsiteURL": "https://www.opal.com.au/en/fares-and-benefits/",
+              "wheelchairAccessible": true
+            }
+          ],
+          "temporaryURL": "https://darkages.buzzhives.com/satapp/trip/471174a1-f8bb-4473-893f-385138af2e96",
+          "updateURL": "https://darkages.buzzhives.com/satapp/trip/update/471174a1-f8bb-4473-893f-385138af2e96?hash=-2079557807",
+          "weightedScore": 51.5
+        },
+        {
+          "arrive": 1495718820,
+          "availability": "AVAILABLE",
+          "caloriesCost": 11,
+          "carbonCost": 0.1,
+          "currencySymbol": "$",
+          "depart": 1495718224,
+          "hassleCost": 2,
+          "mainSegmentHashCode": 1252631887,
+          "moneyCost": 2.1,
+          "moneyUSDCost": 1.65,
+          "plannedURL": "https://darkages.buzzhives.com/satapp/trip/planned/da80fa49-a0a6-4305-82ba-03bc1ef6c195",
+          "queryIsLeaveAfter": true,
+          "queryTime": 1495719024,
+          "saveURL": "https://darkages.buzzhives.com/satapp/trip/save/da80fa49-a0a6-4305-82ba-03bc1ef6c195",
+          "segments": [
+            {
+              "availability": "AVAILABLE",
+              "endTime": 1495718520,
+              "segmentTemplateHashCode": -531260062,
+              "startTime": 1495718224
+            },
+            {
+              "availability": "AVAILABLE",
+              "endTime": 1495718820,
+              "platform": "Stand E",
+              "realtimeVehicle": {
+                "id": "371029",
+                "label": "",
+                "lastUpdate": 1495719114,
+                "location": {
+                  "bearing": 258,
+                  "lat": -33.86435,
+                  "lng": 151.20499
+                },
+                "occupancy": "MANY_SEATS_AVAILABLE",
+                "wifi": false
+              },
+              "segmentTemplateHashCode": 1252631887,
+              "serviceColor": {
+                "blue": 239,
+                "green": 181,
+                "red": 0
+              },
+              "serviceDirection": "Chatswood",
+              "serviceName": "Kingsford to Chatswood",
+              "serviceNumber": "343",
+              "serviceTripID": "371029",
+              "startTime": 1495718520,
+              "stops": 3,
+              "ticketWebsiteURL": "https://www.opal.com.au/en/fares-and-benefits/",
+              "wheelchairAccessible": true
+            }
+          ],
+          "temporaryURL": "https://darkages.buzzhives.com/satapp/trip/da80fa49-a0a6-4305-82ba-03bc1ef6c195",
+          "updateURL": "https://darkages.buzzhives.com/satapp/trip/update/da80fa49-a0a6-4305-82ba-03bc1ef6c195?hash=-360882631",
+          "weightedScore": 58.2
+        },
+        {
+          "arrive": 1495720861,
+          "availability": "AVAILABLE",
+          "caloriesCost": 11,
+          "carbonCost": 0.1,
+          "currencySymbol": "$",
+          "depart": 1495720392,
+          "hassleCost": 2,
+          "mainSegmentHashCode": 707691056,
+          "moneyCost": 2.1,
+          "moneyUSDCost": 1.65,
+          "plannedURL": "https://darkages.buzzhives.com/satapp/trip/planned/fcc0ad50-42e2-4b01-a7f4-cc9d24b95ed2",
+          "queryIsLeaveAfter": true,
+          "queryTime": 1495719024,
+          "saveURL": "https://darkages.buzzhives.com/satapp/trip/save/fcc0ad50-42e2-4b01-a7f4-cc9d24b95ed2",
+          "segments": [
+            {
+              "availability": "AVAILABLE",
+              "endTime": 1495720688,
+              "segmentTemplateHashCode": -531260062,
+              "startTime": 1495720392
+            },
+            {
+              "availability": "AVAILABLE",
+              "endTime": 1495720861,
+              "platform": "Stand E",
+              "realTime": true,
+              "realtimeVehicle": {
+                "id": "389312",
+                "label": "",
+                "lastUpdate": 1495719112,
+                "location": {
+                  "bearing": 64,
+                  "lat": -33.92624,
+                  "lng": 151.13116
+                },
+                "occupancy": "MANY_SEATS_AVAILABLE",
+                "wifi": false
+              },
+              "segmentTemplateHashCode": 707691056,
+              "serviceColor": {
+                "blue": 239,
+                "green": 181,
+                "red": 0
+              },
+              "serviceDirection": "CITY Martin Place",
+              "serviceName": "Kingsgrove to City Martin Place",
+              "serviceNumber": "423",
+              "serviceTripID": "389312",
+              "startTime": 1495720688,
+              "stops": 3,
+              "ticketWebsiteURL": "https://www.opal.com.au/en/fares-and-benefits/",
+              "wheelchairAccessible": true
+            }
+          ],
+          "temporaryURL": "https://darkages.buzzhives.com/satapp/trip/fcc0ad50-42e2-4b01-a7f4-cc9d24b95ed2",
+          "updateURL": "https://darkages.buzzhives.com/satapp/trip/update/fcc0ad50-42e2-4b01-a7f4-cc9d24b95ed2?hash=-594080018",
+          "weightedScore": 11.4
+        },
+        {
+          "arrive": 1495719781,
+          "availability": "AVAILABLE",
+          "caloriesCost": 11,
+          "carbonCost": 0.1,
+          "currencySymbol": "$",
+          "depart": 1495719282,
+          "hassleCost": 2,
+          "mainSegmentHashCode": 707691056,
+          "moneyCost": 2.1,
+          "moneyUSDCost": 1.65,
+          "plannedURL": "https://darkages.buzzhives.com/satapp/trip/planned/a1f2903a-7b50-4f82-a6f1-273f5b5dd4ca",
+          "queryIsLeaveAfter": true,
+          "queryTime": 1495719024,
+          "saveURL": "https://darkages.buzzhives.com/satapp/trip/save/a1f2903a-7b50-4f82-a6f1-273f5b5dd4ca",
+          "segments": [
+            {
+              "availability": "AVAILABLE",
+              "endTime": 1495719578,
+              "segmentTemplateHashCode": -531260062,
+              "startTime": 1495719282
+            },
+            {
+              "availability": "AVAILABLE",
+              "endTime": 1495719781,
+              "platform": "Stand E",
+              "realTime": true,
+              "realtimeVehicle": {
+                "id": "327065",
+                "label": "",
+                "lastUpdate": 1495719112,
+                "location": {
+                  "bearing": 87,
+                  "lat": -33.88422,
+                  "lng": 151.19588
+                },
+                "occupancy": "MANY_SEATS_AVAILABLE",
+                "wifi": false
+              },
+              "segmentTemplateHashCode": 707691056,
+              "serviceColor": {
+                "blue": 239,
+                "green": 181,
+                "red": 0
+              },
+              "serviceDirection": "CITY Martin Place",
+              "serviceName": "Dulwich Hill to City Martin Place",
+              "serviceNumber": "426",
+              "serviceTripID": "327065",
+              "startTime": 1495719578,
+              "stops": 3,
+              "ticketWebsiteURL": "https://www.opal.com.au/en/fares-and-benefits/",
+              "wheelchairAccessible": true
+            }
+          ],
+          "temporaryURL": "https://darkages.buzzhives.com/satapp/trip/a1f2903a-7b50-4f82-a6f1-273f5b5dd4ca",
+          "updateURL": "https://darkages.buzzhives.com/satapp/trip/update/a1f2903a-7b50-4f82-a6f1-273f5b5dd4ca?hash=-1961186694",
+          "weightedScore": 8.4
+        },
+        {
+          "arrive": 1495719660,
+          "availability": "AVAILABLE",
+          "caloriesCost": 11,
+          "carbonCost": 0.1,
+          "currencySymbol": "$",
+          "depart": 1495719004,
+          "hassleCost": 2,
+          "mainSegmentHashCode": 707691056,
+          "moneyCost": 2.1,
+          "moneyUSDCost": 1.65,
+          "plannedURL": "https://darkages.buzzhives.com/satapp/trip/planned/c97af67a-533e-4d18-9526-60825ea1e238",
+          "queryIsLeaveAfter": true,
+          "queryTime": 1495719024,
+          "saveURL": "https://darkages.buzzhives.com/satapp/trip/save/c97af67a-533e-4d18-9526-60825ea1e238",
+          "segments": [
+            {
+              "availability": "AVAILABLE",
+              "endTime": 1495719300,
+              "segmentTemplateHashCode": -531260062,
+              "startTime": 1495719004
+            },
+            {
+              "availability": "AVAILABLE",
+              "endTime": 1495719660,
+              "platform": "Stand E",
+              "realtimeVehicle": {
+                "id": "389445",
+                "label": "",
+                "lastUpdate": 1495719109,
+                "location": {
+                  "bearing": 6,
+                  "lat": -33.87335,
+                  "lng": 151.20992
+                },
+                "occupancy": "MANY_SEATS_AVAILABLE",
+                "wifi": false
+              },
+              "segmentTemplateHashCode": 707691056,
+              "serviceColor": {
+                "blue": 239,
+                "green": 181,
+                "red": 0
+              },
+              "serviceDirection": "CITY Martin Place",
+              "serviceName": "Kingsgrove to City Martin Place",
+              "serviceNumber": "423",
+              "serviceTripID": "389445",
+              "startTime": 1495719300,
+              "stops": 3,
+              "ticketWebsiteURL": "https://www.opal.com.au/en/fares-and-benefits/",
+              "wheelchairAccessible": true
+            }
+          ],
+          "temporaryURL": "https://darkages.buzzhives.com/satapp/trip/c97af67a-533e-4d18-9526-60825ea1e238",
+          "updateURL": "https://darkages.buzzhives.com/satapp/trip/update/c97af67a-533e-4d18-9526-60825ea1e238?hash=-622893304",
+          "weightedScore": 15.1
+        },
+        {
+          "arrive": 1495718520,
+          "availability": "AVAILABLE",
+          "caloriesCost": 11,
+          "carbonCost": 0.1,
+          "currencySymbol": "$",
+          "depart": 1495717804,
+          "hassleCost": 2,
+          "mainSegmentHashCode": 1837322862,
+          "moneyCost": 2.1,
+          "moneyUSDCost": 1.65,
+          "plannedURL": "https://darkages.buzzhives.com/satapp/trip/planned/33cb5b0e-5421-472c-91cd-82c872250787",
+          "queryIsLeaveAfter": true,
+          "queryTime": 1495719024,
+          "saveURL": "https://darkages.buzzhives.com/satapp/trip/save/33cb5b0e-5421-472c-91cd-82c872250787",
+          "segments": [
+            {
+              "availability": "AVAILABLE",
+              "endTime": 1495718100,
+              "segmentTemplateHashCode": -531260062,
+              "startTime": 1495717804
+            },
+            {
+              "availability": "AVAILABLE",
+              "endTime": 1495718520,
+              "platform": "Stand E",
+              "segmentTemplateHashCode": 1837322862,
+              "serviceColor": {
+                "blue": 239,
+                "green": 181,
+                "red": 0
+              },
+              "serviceDirection": "CITY Martin Place",
+              "serviceName": "Glebe Point to City Martin Place",
+              "serviceNumber": "431",
+              "serviceTripID": "101319",
+              "startTime": 1495718100,
+              "stops": 3,
+              "ticketWebsiteURL": "https://www.opal.com.au/en/fares-and-benefits/",
+              "wheelchairAccessible": true
+            }
+          ],
+          "temporaryURL": "https://darkages.buzzhives.com/satapp/trip/33cb5b0e-5421-472c-91cd-82c872250787",
+          "updateURL": "https://darkages.buzzhives.com/satapp/trip/update/33cb5b0e-5421-472c-91cd-82c872250787?hash=859577419",
+          "weightedScore": 82
+        },
+        {
+          "arrive": 1495722240,
+          "availability": "AVAILABLE",
+          "caloriesCost": 11,
+          "carbonCost": 0.1,
+          "currencySymbol": "$",
+          "depart": 1495721584,
+          "hassleCost": 2,
+          "mainSegmentHashCode": -1124513104,
+          "moneyCost": 2.1,
+          "moneyUSDCost": 1.65,
+          "plannedURL": "https://darkages.buzzhives.com/satapp/trip/planned/8a007ccf-4167-4738-9dc0-bbf715f38140",
+          "queryIsLeaveAfter": true,
+          "queryTime": 1495719024,
+          "saveURL": "https://darkages.buzzhives.com/satapp/trip/save/8a007ccf-4167-4738-9dc0-bbf715f38140",
+          "segments": [
+            {
+              "availability": "AVAILABLE",
+              "endTime": 1495721880,
+              "segmentTemplateHashCode": -531260062,
+              "startTime": 1495721584
+            },
+            {
+              "availability": "AVAILABLE",
+              "endTime": 1495722240,
+              "platform": "Stand E",
+              "realTime": true,
+              "realtimeVehicle": {
+                "id": "389346",
+                "label": "",
+                "lastUpdate": 1495719117,
+                "location": {
+                  "bearing": 155,
+                  "lat": -33.92218,
+                  "lng": 151.10689
+                },
+                "occupancy": "MANY_SEATS_AVAILABLE",
+                "wifi": false
+              },
+              "segmentTemplateHashCode": -1124513104,
+              "serviceColor": {
+                "blue": 239,
+                "green": 181,
+                "red": 0
+              },
+              "serviceDirection": "CITY Martin Place",
+              "serviceName": "Kingsgrove to City Martin Place",
+              "serviceNumber": "423",
+              "serviceTripID": "389346",
+              "startTime": 1495721880,
+              "stops": 3,
+              "ticketWebsiteURL": "https://www.opal.com.au/en/fares-and-benefits/",
+              "wheelchairAccessible": true
+            }
+          ],
+          "temporaryURL": "https://darkages.buzzhives.com/satapp/trip/8a007ccf-4167-4738-9dc0-bbf715f38140",
+          "updateURL": "https://darkages.buzzhives.com/satapp/trip/update/8a007ccf-4167-4738-9dc0-bbf715f38140?hash=-237241694",
+          "weightedScore": 14.1
+        },
+        {
+          "arrive": 1495720534,
+          "availability": "AVAILABLE",
+          "caloriesCost": 11,
+          "carbonCost": 0.1,
+          "currencySymbol": "$",
+          "depart": 1495720041,
+          "hassleCost": 2,
+          "mainSegmentHashCode": 707691056,
+          "moneyCost": 2.1,
+          "moneyUSDCost": 1.65,
+          "plannedURL": "https://darkages.buzzhives.com/satapp/trip/planned/a18c7c65-72c0-42bb-8560-520d01502854",
+          "queryIsLeaveAfter": true,
+          "queryTime": 1495719024,
+          "saveURL": "https://darkages.buzzhives.com/satapp/trip/save/a18c7c65-72c0-42bb-8560-520d01502854",
+          "segments": [
+            {
+              "availability": "AVAILABLE",
+              "endTime": 1495720337,
+              "segmentTemplateHashCode": -531260062,
+              "startTime": 1495720041
+            },
+            {
+              "availability": "AVAILABLE",
+              "endTime": 1495720534,
+              "platform": "Stand E",
+              "realTime": true,
+              "realtimeVehicle": {
+                "id": "325054",
+                "label": "",
+                "lastUpdate": 1495719115,
+                "location": {
+                  "bearing": 118,
+                  "lat": -33.89988,
+                  "lng": 151.15775
+                },
+                "occupancy": "MANY_SEATS_AVAILABLE",
+                "wifi": false
+              },
+              "segmentTemplateHashCode": 707691056,
+              "serviceColor": {
+                "blue": 239,
+                "green": 181,
+                "red": 0
+              },
+              "serviceDirection": "CITY Martin Place",
+              "serviceName": "Canterbury to City Martin Place",
+              "serviceNumber": "428",
+              "serviceTripID": "325054",
+              "startTime": 1495720337,
+              "stops": 3,
+              "ticketWebsiteURL": "https://www.opal.com.au/en/fares-and-benefits/",
+              "wheelchairAccessible": true
+            }
+          ],
+          "temporaryURL": "https://darkages.buzzhives.com/satapp/trip/a18c7c65-72c0-42bb-8560-520d01502854",
+          "updateURL": "https://darkages.buzzhives.com/satapp/trip/update/a18c7c65-72c0-42bb-8560-520d01502854?hash=-1800582198",
+          "weightedScore": 10.1
+        },
+        {
+          "arrive": 1495719462,
+          "availability": "AVAILABLE",
+          "caloriesCost": 11,
+          "carbonCost": 0.1,
+          "currencySymbol": "$",
+          "depart": 1495718960,
+          "hassleCost": 2,
+          "mainSegmentHashCode": 707691056,
+          "moneyCost": 2.1,
+          "moneyUSDCost": 1.65,
+          "plannedURL": "https://darkages.buzzhives.com/satapp/trip/planned/94b22ad2-be80-42b8-ab97-a3e6c43e6e8e",
+          "queryIsLeaveAfter": true,
+          "queryTime": 1495719024,
+          "saveURL": "https://darkages.buzzhives.com/satapp/trip/save/94b22ad2-be80-42b8-ab97-a3e6c43e6e8e",
+          "segments": [
+            {
+              "availability": "AVAILABLE",
+              "endTime": 1495719256,
+              "segmentTemplateHashCode": -531260062,
+              "startTime": 1495718960
+            },
+            {
+              "availability": "AVAILABLE",
+              "endTime": 1495719462,
+              "platform": "Stand E",
+              "realTime": true,
+              "realtimeVehicle": {
+                "id": "327064",
+                "label": "",
+                "lastUpdate": 1495719122,
+                "location": {
+                  "bearing": 14,
+                  "lat": -33.87846,
+                  "lng": 151.20734
+                },
+                "occupancy": "MANY_SEATS_AVAILABLE",
+                "wifi": false
+              },
+              "segmentTemplateHashCode": 707691056,
+              "serviceColor": {
+                "blue": 239,
+                "green": 181,
+                "red": 0
+              },
+              "serviceDirection": "CITY Martin Place",
+              "serviceName": "Dulwich Hill to City Martin Place",
+              "serviceNumber": "426",
+              "serviceTripID": "327064",
+              "startTime": 1495719256,
+              "stops": 3,
+              "ticketWebsiteURL": "https://www.opal.com.au/en/fares-and-benefits/",
+              "wheelchairAccessible": true
+            }
+          ],
+          "temporaryURL": "https://darkages.buzzhives.com/satapp/trip/94b22ad2-be80-42b8-ab97-a3e6c43e6e8e",
+          "updateURL": "https://darkages.buzzhives.com/satapp/trip/update/94b22ad2-be80-42b8-ab97-a3e6c43e6e8e?hash=629479986",
+          "weightedScore": 61.8
+        }
+      ]
+    },
+    {
+      "frequency": 10,
+      "sources": [
+        {
+          "disclaimer": "\u00a9 OpenStreetMap contributors\n\nMap data available under the Open Database License. For more information, see http://www.openstreetmap.org/copyright.",
+          "provider": {
+            "name": "OpenStreetMap",
+            "website": "https://www.openstreetmap.org"
+          }
+        },
+        {
+          "provider": {
+            "name": "State Transit Sydney"
+          }
+        }
+      ],
+      "trips": [
+        {
+          "arrive": 1495718700,
+          "availability": "AVAILABLE",
+          "caloriesCost": 16,
+          "carbonCost": 0.1,
+          "currencySymbol": "$",
+          "depart": 1495718037,
+          "hassleCost": 2,
+          "mainSegmentHashCode": 1737232016,
+          "moneyCost": 2.1,
+          "moneyUSDCost": 1.65,
+          "plannedURL": "https://darkages.buzzhives.com/satapp/trip/planned/57898354-4f0f-47f6-b11a-86b4c452b34f",
+          "queryIsLeaveAfter": true,
+          "queryTime": 1495719024,
+          "saveURL": "https://darkages.buzzhives.com/satapp/trip/save/57898354-4f0f-47f6-b11a-86b4c452b34f",
+          "segments": [
+            {
+              "availability": "AVAILABLE",
+              "endTime": 1495718400,
+              "segmentTemplateHashCode": -1285600201,
+              "startTime": 1495718037
+            },
+            {
+              "availability": "AVAILABLE",
+              "endTime": 1495718700,
+              "segmentTemplateHashCode": 1737232016,
+              "serviceColor": {
+                "blue": 239,
+                "green": 181,
+                "red": 0
+              },
+              "serviceDirection": "CITY Circular Quay",
+              "serviceName": "Maroubra Beach to City Circular Quay",
+              "serviceNumber": "396",
+              "serviceTripID": "418243",
+              "startTime": 1495718400,
+              "stops": 2,
+              "ticketWebsiteURL": "https://www.opal.com.au/en/fares-and-benefits/",
+              "wheelchairAccessible": true
+            }
+          ],
+          "temporaryURL": "https://darkages.buzzhives.com/satapp/trip/57898354-4f0f-47f6-b11a-86b4c452b34f",
+          "updateURL": "https://darkages.buzzhives.com/satapp/trip/update/57898354-4f0f-47f6-b11a-86b4c452b34f?hash=183651994",
+          "weightedScore": 69.5
+        },
+        {
+          "arrive": 1495723440,
+          "availability": "AVAILABLE",
+          "caloriesCost": 16,
+          "carbonCost": 0.1,
+          "currencySymbol": "$",
+          "depart": 1495722777,
+          "hassleCost": 2,
+          "mainSegmentHashCode": -1101278390,
+          "moneyCost": 2.1,
+          "moneyUSDCost": 1.65,
+          "plannedURL": "https://darkages.buzzhives.com/satapp/trip/planned/266877c1-6f71-42df-8dce-554e121ff3b9",
+          "queryIsLeaveAfter": true,
+          "queryTime": 1495719024,
+          "saveURL": "https://darkages.buzzhives.com/satapp/trip/save/266877c1-6f71-42df-8dce-554e121ff3b9",
+          "segments": [
+            {
+              "availability": "AVAILABLE",
+              "endTime": 1495723140,
+              "segmentTemplateHashCode": -1285600201,
+              "startTime": 1495722777
+            },
+            {
+              "availability": "AVAILABLE",
+              "endTime": 1495723440,
+              "segmentTemplateHashCode": -1101278390,
+              "serviceColor": {
+                "blue": 239,
+                "green": 181,
+                "red": 0
+              },
+              "serviceDirection": "CITY Circular Quay",
+              "serviceName": "Watsons Bay to City Circular Quay via Bondi Junction",
+              "serviceNumber": "380",
+              "serviceTripID": "310854",
+              "startTime": 1495723140,
+              "stops": 3,
+              "ticketWebsiteURL": "https://www.opal.com.au/en/fares-and-benefits/",
+              "wheelchairAccessible": true
+            }
+          ],
+          "temporaryURL": "https://darkages.buzzhives.com/satapp/trip/266877c1-6f71-42df-8dce-554e121ff3b9",
+          "updateURL": "https://darkages.buzzhives.com/satapp/trip/update/266877c1-6f71-42df-8dce-554e121ff3b9?hash=-802003091",
+          "weightedScore": 18.1
+        },
+        {
+          "arrive": 1495722960,
+          "availability": "AVAILABLE",
+          "caloriesCost": 16,
+          "carbonCost": 0.1,
+          "currencySymbol": "$",
+          "depart": 1495722297,
+          "hassleCost": 2,
+          "mainSegmentHashCode": -1101278390,
+          "moneyCost": 2.1,
+          "moneyUSDCost": 1.65,
+          "plannedURL": "https://darkages.buzzhives.com/satapp/trip/planned/2c8fd97f-50e1-4d2c-9955-06156da94f08",
+          "queryIsLeaveAfter": true,
+          "queryTime": 1495719024,
+          "saveURL": "https://darkages.buzzhives.com/satapp/trip/save/2c8fd97f-50e1-4d2c-9955-06156da94f08",
+          "segments": [
+            {
+              "availability": "AVAILABLE",
+              "endTime": 1495722660,
+              "segmentTemplateHashCode": -1285600201,
+              "startTime": 1495722297
+            },
+            {
+              "availability": "AVAILABLE",
+              "endTime": 1495722960,
+              "segmentTemplateHashCode": -1101278390,
+              "serviceColor": {
+                "blue": 239,
+                "green": 181,
+                "red": 0
+              },
+              "serviceDirection": "CITY Circular Quay",
+              "serviceName": "Watsons Bay to City Circular Quay via Bondi Junction",
+              "serviceNumber": "380",
+              "serviceTripID": "310853",
+              "startTime": 1495722660,
+              "stops": 3,
+              "ticketWebsiteURL": "https://www.opal.com.au/en/fares-and-benefits/",
+              "wheelchairAccessible": true
+            }
+          ],
+          "temporaryURL": "https://darkages.buzzhives.com/satapp/trip/2c8fd97f-50e1-4d2c-9955-06156da94f08",
+          "updateURL": "https://darkages.buzzhives.com/satapp/trip/update/2c8fd97f-50e1-4d2c-9955-06156da94f08?hash=-802037242",
+          "weightedScore": 16.8
+        },
+        {
+          "arrive": 1495721460,
+          "availability": "AVAILABLE",
+          "caloriesCost": 16,
+          "carbonCost": 0.1,
+          "currencySymbol": "$",
+          "depart": 1495720797,
+          "hassleCost": 2,
+          "mainSegmentHashCode": -1101278390,
+          "moneyCost": 2.1,
+          "moneyUSDCost": 1.65,
+          "plannedURL": "https://darkages.buzzhives.com/satapp/trip/planned/3cf34e3a-a1cc-4da1-9ccf-ed65c96812f2",
+          "queryIsLeaveAfter": true,
+          "queryTime": 1495719024,
+          "saveURL": "https://darkages.buzzhives.com/satapp/trip/save/3cf34e3a-a1cc-4da1-9ccf-ed65c96812f2",
+          "segments": [
+            {
+              "availability": "AVAILABLE",
+              "endTime": 1495721160,
+              "segmentTemplateHashCode": -1285600201,
+              "startTime": 1495720797
+            },
+            {
+              "availability": "AVAILABLE",
+              "endTime": 1495721460,
+              "segmentTemplateHashCode": -1101278390,
+              "serviceColor": {
+                "blue": 239,
+                "green": 181,
+                "red": 0
+              },
+              "serviceDirection": "CITY Circular Quay",
+              "serviceName": "Watsons Bay to City Circular Quay via Bondi Junction",
+              "serviceNumber": "380",
+              "serviceTripID": "310857",
+              "startTime": 1495721160,
+              "stops": 3,
+              "ticketWebsiteURL": "https://www.opal.com.au/en/fares-and-benefits/",
+              "wheelchairAccessible": true
+            }
+          ],
+          "temporaryURL": "https://darkages.buzzhives.com/satapp/trip/3cf34e3a-a1cc-4da1-9ccf-ed65c96812f2",
+          "updateURL": "https://darkages.buzzhives.com/satapp/trip/update/3cf34e3a-a1cc-4da1-9ccf-ed65c96812f2?hash=-801857129",
+          "weightedScore": 12.6
+        },
+        {
+          "arrive": 1495724040,
+          "availability": "AVAILABLE",
+          "caloriesCost": 16,
+          "carbonCost": 0.1,
+          "currencySymbol": "$",
+          "depart": 1495723377,
+          "hassleCost": 2,
+          "mainSegmentHashCode": -1101278390,
+          "moneyCost": 2.1,
+          "moneyUSDCost": 1.65,
+          "plannedURL": "https://darkages.buzzhives.com/satapp/trip/planned/22598c83-1f7e-4a16-8367-c6e8de6066ec",
+          "queryIsLeaveAfter": true,
+          "queryTime": 1495719024,
+          "saveURL": "https://darkages.buzzhives.com/satapp/trip/save/22598c83-1f7e-4a16-8367-c6e8de6066ec",
+          "segments": [
+            {
+              "availability": "AVAILABLE",
+              "endTime": 1495723740,
+              "segmentTemplateHashCode": -1285600201,
+              "startTime": 1495723377
+            },
+            {
+              "availability": "AVAILABLE",
+              "endTime": 1495724040,
+              "segmentTemplateHashCode": -1101278390,
+              "serviceColor": {
+                "blue": 239,
+                "green": 181,
+                "red": 0
+              },
+              "serviceDirection": "CITY Circular Quay",
+              "serviceName": "Watsons Bay to City Circular Quay via Bondi Junction",
+              "serviceNumber": "380",
+              "serviceTripID": "310855",
+              "startTime": 1495723740,
+              "stops": 3,
+              "ticketWebsiteURL": "https://www.opal.com.au/en/fares-and-benefits/",
+              "wheelchairAccessible": true
+            }
+          ],
+          "temporaryURL": "https://darkages.buzzhives.com/satapp/trip/22598c83-1f7e-4a16-8367-c6e8de6066ec",
+          "updateURL": "https://darkages.buzzhives.com/satapp/trip/update/22598c83-1f7e-4a16-8367-c6e8de6066ec?hash=-801966116",
+          "weightedScore": 19.8
+        },
+        {
+          "arrive": 1495719818,
+          "availability": "AVAILABLE",
+          "caloriesCost": 16,
+          "carbonCost": 0.1,
+          "currencySymbol": "$",
+          "depart": 1495719181,
+          "hassleCost": 2,
+          "mainSegmentHashCode": -1101278390,
+          "moneyCost": 2.1,
+          "moneyUSDCost": 1.65,
+          "plannedURL": "https://darkages.buzzhives.com/satapp/trip/planned/a64c51f0-3a82-404c-9779-bd55dc73d9a3",
+          "queryIsLeaveAfter": true,
+          "queryTime": 1495719024,
+          "saveURL": "https://darkages.buzzhives.com/satapp/trip/save/a64c51f0-3a82-404c-9779-bd55dc73d9a3",
+          "segments": [
+            {
+              "availability": "AVAILABLE",
+              "endTime": 1495719544,
+              "segmentTemplateHashCode": -1285600201,
+              "startTime": 1495719181
+            },
+            {
+              "availability": "AVAILABLE",
+              "endTime": 1495719818,
+              "realTime": true,
+              "realtimeVehicle": {
+                "id": "311173",
+                "label": "",
+                "lastUpdate": 1495719113,
+                "location": {
+                  "bearing": 316,
+                  "lat": -33.88775,
+                  "lng": 151.23096
+                },
+                "occupancy": "MANY_SEATS_AVAILABLE",
+                "wifi": false
+              },
+              "segmentTemplateHashCode": -1101278390,
+              "serviceColor": {
+                "blue": 239,
+                "green": 181,
+                "red": 0
+              },
+              "serviceDirection": "CITY Circular Quay",
+              "serviceName": "Watsons Bay to City Circular Quay via Bondi Junction",
+              "serviceNumber": "380",
+              "serviceTripID": "311173",
+              "startTime": 1495719544,
+              "stops": 3,
+              "ticketWebsiteURL": "https://www.opal.com.au/en/fares-and-benefits/",
+              "wheelchairAccessible": true
+            }
+          ],
+          "temporaryURL": "https://darkages.buzzhives.com/satapp/trip/a64c51f0-3a82-404c-9779-bd55dc73d9a3",
+          "updateURL": "https://darkages.buzzhives.com/satapp/trip/update/a64c51f0-3a82-404c-9779-bd55dc73d9a3?hash=1975440767",
+          "weightedScore": 8.1
+        },
+        {
+          "arrive": 1495721580,
+          "availability": "AVAILABLE",
+          "caloriesCost": 16,
+          "carbonCost": 0.1,
+          "currencySymbol": "$",
+          "depart": 1495720857,
+          "hassleCost": 2,
+          "mainSegmentHashCode": 1181126724,
+          "moneyCost": 2.1,
+          "moneyUSDCost": 1.65,
+          "plannedURL": "https://darkages.buzzhives.com/satapp/trip/planned/744bf0e8-b434-4cf8-8392-d28c6a346646",
+          "queryIsLeaveAfter": true,
+          "queryTime": 1495719024,
+          "saveURL": "https://darkages.buzzhives.com/satapp/trip/save/744bf0e8-b434-4cf8-8392-d28c6a346646",
+          "segments": [
+            {
+              "availability": "AVAILABLE",
+              "endTime": 1495721220,
+              "segmentTemplateHashCode": -1285600201,
+              "startTime": 1495720857
+            },
+            {
+              "availability": "AVAILABLE",
+              "endTime": 1495721580,
+              "segmentTemplateHashCode": 1181126724,
+              "serviceColor": {
+                "blue": 239,
+                "green": 181,
+                "red": 0
+              },
+              "serviceDirection": "CITY Circular Quay",
+              "serviceName": "Maroubra Beach to City Circular Quay",
+              "serviceNumber": "377",
+              "serviceTripID": "304614",
+              "startTime": 1495721220,
+              "stops": 2,
+              "ticketWebsiteURL": "https://www.opal.com.au/en/fares-and-benefits/",
+              "wheelchairAccessible": true
+            }
+          ],
+          "temporaryURL": "https://darkages.buzzhives.com/satapp/trip/744bf0e8-b434-4cf8-8392-d28c6a346646",
+          "updateURL": "https://darkages.buzzhives.com/satapp/trip/update/744bf0e8-b434-4cf8-8392-d28c6a346646?hash=180679122",
+          "weightedScore": 13
+        },
+        {
+          "arrive": 1495721984,
+          "availability": "AVAILABLE",
+          "caloriesCost": 16,
+          "carbonCost": 0.1,
+          "currencySymbol": "$",
+          "depart": 1495721321,
+          "hassleCost": 2,
+          "mainSegmentHashCode": 1737232016,
+          "moneyCost": 2.1,
+          "moneyUSDCost": 1.65,
+          "plannedURL": "https://darkages.buzzhives.com/satapp/trip/planned/e9646e2b-ba94-4161-9d7a-a4652df2cc6c",
+          "queryIsLeaveAfter": true,
+          "queryTime": 1495719024,
+          "saveURL": "https://darkages.buzzhives.com/satapp/trip/save/e9646e2b-ba94-4161-9d7a-a4652df2cc6c",
+          "segments": [
+            {
+              "availability": "AVAILABLE",
+              "endTime": 1495721684,
+              "segmentTemplateHashCode": -1285600201,
+              "startTime": 1495721321
+            },
+            {
+              "availability": "AVAILABLE",
+              "endTime": 1495721984,
+              "realTime": true,
+              "realtimeVehicle": {
+                "id": "417937",
+                "label": "",
+                "lastUpdate": 1495719113,
+                "location": {
+                  "bearing": 220,
+                  "lat": -33.98095,
+                  "lng": 151.24414
+                },
+                "occupancy": "MANY_SEATS_AVAILABLE",
+                "wifi": false
+              },
+              "segmentTemplateHashCode": 1737232016,
+              "serviceColor": {
+                "blue": 239,
+                "green": 181,
+                "red": 0
+              },
+              "serviceDirection": "CITY Circular Quay",
+              "serviceName": "La Perouse to City Circular Quay via Malabar Beach & Maroubra Junction",
+              "serviceNumber": "399",
+              "serviceTripID": "417937",
+              "startTime": 1495721684,
+              "stops": 2,
+              "ticketWebsiteURL": "https://www.opal.com.au/en/fares-and-benefits/",
+              "wheelchairAccessible": true
+            }
+          ],
+          "temporaryURL": "https://darkages.buzzhives.com/satapp/trip/e9646e2b-ba94-4161-9d7a-a4652df2cc6c",
+          "updateURL": "https://darkages.buzzhives.com/satapp/trip/update/e9646e2b-ba94-4161-9d7a-a4652df2cc6c?hash=887494926",
+          "weightedScore": 13.6
+        },
+        {
+          "arrive": 1495719770,
+          "availability": "AVAILABLE",
+          "caloriesCost": 16,
+          "carbonCost": 0.1,
+          "currencySymbol": "$",
+          "depart": 1495719136,
+          "hassleCost": 2,
+          "mainSegmentHashCode": 1181126724,
+          "moneyCost": 2.1,
+          "moneyUSDCost": 1.65,
+          "plannedURL": "https://darkages.buzzhives.com/satapp/trip/planned/b0d2884d-56df-47c8-ae48-9729d21eb2d1",
+          "queryIsLeaveAfter": true,
+          "queryTime": 1495719024,
+          "saveURL": "https://darkages.buzzhives.com/satapp/trip/save/b0d2884d-56df-47c8-ae48-9729d21eb2d1",
+          "segments": [
+            {
+              "availability": "AVAILABLE",
+              "endTime": 1495719499,
+              "segmentTemplateHashCode": -1285600201,
+              "startTime": 1495719136
+            },
+            {
+              "availability": "AVAILABLE",
+              "endTime": 1495719770,
+              "realTime": true,
+              "realtimeVehicle": {
+                "id": "304613",
+                "label": "",
+                "lastUpdate": 1495719117,
+                "location": {
+                  "bearing": 352,
+                  "lat": -33.89452,
+                  "lng": 151.22134
+                },
+                "occupancy": "MANY_SEATS_AVAILABLE",
+                "wifi": false
+              },
+              "segmentTemplateHashCode": 1181126724,
+              "serviceColor": {
+                "blue": 239,
+                "green": 181,
+                "red": 0
+              },
+              "serviceDirection": "CITY Circular Quay",
+              "serviceName": "Maroubra Beach to City Circular Quay",
+              "serviceNumber": "377",
+              "serviceTripID": "304613",
+              "startTime": 1495719499,
+              "stops": 2,
+              "ticketWebsiteURL": "https://www.opal.com.au/en/fares-and-benefits/",
+              "wheelchairAccessible": true
+            }
+          ],
+          "temporaryURL": "https://darkages.buzzhives.com/satapp/trip/b0d2884d-56df-47c8-ae48-9729d21eb2d1",
+          "updateURL": "https://darkages.buzzhives.com/satapp/trip/update/b0d2884d-56df-47c8-ae48-9729d21eb2d1?hash=714767139",
+          "weightedScore": 13.1
+        },
+        {
+          "arrive": 1495720820,
+          "availability": "AVAILABLE",
+          "caloriesCost": 16,
+          "carbonCost": 0.1,
+          "currencySymbol": "$",
+          "depart": 1495720189,
+          "hassleCost": 2,
+          "mainSegmentHashCode": -1101278390,
+          "moneyCost": 2.1,
+          "moneyUSDCost": 1.65,
+          "plannedURL": "https://darkages.buzzhives.com/satapp/trip/planned/eec57df2-0a7f-4707-a701-09f02185197f",
+          "queryIsLeaveAfter": true,
+          "queryTime": 1495719024,
+          "saveURL": "https://darkages.buzzhives.com/satapp/trip/save/eec57df2-0a7f-4707-a701-09f02185197f",
+          "segments": [
+            {
+              "availability": "AVAILABLE",
+              "endTime": 1495720552,
+              "segmentTemplateHashCode": -1285600201,
+              "startTime": 1495720189
+            },
+            {
+              "availability": "AVAILABLE",
+              "endTime": 1495720820,
+              "realTime": true,
+              "realtimeVehicle": {
+                "id": "310856",
+                "label": "",
+                "lastUpdate": 1495719116,
+                "location": {
+                  "bearing": 222,
+                  "lat": -33.89241,
+                  "lng": 151.27325
+                },
+                "occupancy": "MANY_SEATS_AVAILABLE",
+                "wifi": false
+              },
+              "segmentTemplateHashCode": -1101278390,
+              "serviceColor": {
+                "blue": 239,
+                "green": 181,
+                "red": 0
+              },
+              "serviceDirection": "CITY Circular Quay",
+              "serviceName": "Watsons Bay to City Circular Quay via Bondi Junction",
+              "serviceNumber": "380",
+              "serviceTripID": "310856",
+              "startTime": 1495720552,
+              "stops": 3,
+              "ticketWebsiteURL": "https://www.opal.com.au/en/fares-and-benefits/",
+              "wheelchairAccessible": true
+            }
+          ],
+          "temporaryURL": "https://darkages.buzzhives.com/satapp/trip/eec57df2-0a7f-4707-a701-09f02185197f",
+          "updateURL": "https://darkages.buzzhives.com/satapp/trip/update/eec57df2-0a7f-4707-a701-09f02185197f?hash=295618341",
+          "weightedScore": 10.4
+        },
+        {
+          "arrive": 1495722060,
+          "availability": "AVAILABLE",
+          "caloriesCost": 16,
+          "carbonCost": 0.1,
+          "currencySymbol": "$",
+          "depart": 1495721337,
+          "hassleCost": 2,
+          "mainSegmentHashCode": 1181126724,
+          "moneyCost": 2.1,
+          "moneyUSDCost": 1.65,
+          "plannedURL": "https://darkages.buzzhives.com/satapp/trip/planned/9fd3bb79-8b48-43e5-9a71-ad588f1d75e1",
+          "queryIsLeaveAfter": true,
+          "queryTime": 1495719024,
+          "saveURL": "https://darkages.buzzhives.com/satapp/trip/save/9fd3bb79-8b48-43e5-9a71-ad588f1d75e1",
+          "segments": [
+            {
+              "availability": "AVAILABLE",
+              "endTime": 1495721700,
+              "segmentTemplateHashCode": -1285600201,
+              "startTime": 1495721337
+            },
+            {
+              "availability": "AVAILABLE",
+              "endTime": 1495722060,
+              "realTime": true,
+              "realtimeVehicle": {
+                "id": "304860",
+                "label": "",
+                "lastUpdate": 1495719099,
+                "location": {
+                  "bearing": 191,
+                  "lat": -33.91988,
+                  "lng": 151.257
+                },
+                "occupancy": "MANY_SEATS_AVAILABLE",
+                "wifi": false
+              },
+              "segmentTemplateHashCode": 1181126724,
+              "serviceColor": {
+                "blue": 239,
+                "green": 181,
+                "red": 0
+              },
+              "serviceDirection": "CITY Circular Quay",
+              "serviceName": "Coogee to City Circular Quay via Belmore Rd",
+              "serviceNumber": "373",
+              "serviceTripID": "304860",
+              "startTime": 1495721700,
+              "stops": 2,
+              "ticketWebsiteURL": "https://www.opal.com.au/en/fares-and-benefits/",
+              "wheelchairAccessible": true
+            }
+          ],
+          "temporaryURL": "https://darkages.buzzhives.com/satapp/trip/9fd3bb79-8b48-43e5-9a71-ad588f1d75e1",
+          "updateURL": "https://darkages.buzzhives.com/satapp/trip/update/9fd3bb79-8b48-43e5-9a71-ad588f1d75e1?hash=2090942388",
+          "weightedScore": 14.3
+        },
+        {
+          "arrive": 1495723620,
+          "availability": "AVAILABLE",
+          "caloriesCost": 16,
+          "carbonCost": 0.1,
+          "currencySymbol": "$",
+          "depart": 1495722957,
+          "hassleCost": 2,
+          "mainSegmentHashCode": 1737232016,
+          "moneyCost": 2.1,
+          "moneyUSDCost": 1.65,
+          "plannedURL": "https://darkages.buzzhives.com/satapp/trip/planned/03ea6559-c2e9-4aaa-aa8e-41f1f8633ba8",
+          "queryIsLeaveAfter": true,
+          "queryTime": 1495719024,
+          "saveURL": "https://darkages.buzzhives.com/satapp/trip/save/03ea6559-c2e9-4aaa-aa8e-41f1f8633ba8",
+          "segments": [
+            {
+              "availability": "AVAILABLE",
+              "endTime": 1495723320,
+              "segmentTemplateHashCode": -1285600201,
+              "startTime": 1495722957
+            },
+            {
+              "availability": "AVAILABLE",
+              "endTime": 1495723620,
+              "segmentTemplateHashCode": 1737232016,
+              "serviceColor": {
+                "blue": 239,
+                "green": 181,
+                "red": 0
+              },
+              "serviceDirection": "CITY Circular Quay",
+              "serviceName": "City Circular Quay to La Perouse via Maroubra & Kingsford",
+              "serviceNumber": "394",
+              "serviceTripID": "418139",
+              "startTime": 1495723320,
+              "stops": 2,
+              "ticketWebsiteURL": "https://www.opal.com.au/en/fares-and-benefits/",
+              "wheelchairAccessible": true
+            }
+          ],
+          "temporaryURL": "https://darkages.buzzhives.com/satapp/trip/03ea6559-c2e9-4aaa-aa8e-41f1f8633ba8",
+          "updateURL": "https://darkages.buzzhives.com/satapp/trip/update/03ea6559-c2e9-4aaa-aa8e-41f1f8633ba8?hash=-1042220307",
+          "weightedScore": 18.6
+        },
+        {
+          "arrive": 1495720720,
+          "availability": "AVAILABLE",
+          "caloriesCost": 16,
+          "carbonCost": 0.1,
+          "currencySymbol": "$",
+          "depart": 1495720087,
+          "hassleCost": 2,
+          "mainSegmentHashCode": 1737232016,
+          "moneyCost": 2.1,
+          "moneyUSDCost": 1.65,
+          "plannedURL": "https://darkages.buzzhives.com/satapp/trip/planned/0299f1be-b371-4530-a745-30064f906082",
+          "queryIsLeaveAfter": true,
+          "queryTime": 1495719024,
+          "saveURL": "https://darkages.buzzhives.com/satapp/trip/save/0299f1be-b371-4530-a745-30064f906082",
+          "segments": [
+            {
+              "availability": "AVAILABLE",
+              "endTime": 1495720450,
+              "segmentTemplateHashCode": -1285600201,
+              "startTime": 1495720087
+            },
+            {
+              "availability": "AVAILABLE",
+              "endTime": 1495720720,
+              "realTime": true,
+              "realtimeVehicle": {
+                "id": "418244",
+                "label": "",
+                "lastUpdate": 1495719115,
+                "location": {
+                  "bearing": 306,
+                  "lat": -33.94165,
+                  "lng": 151.25378
+                },
+                "occupancy": "MANY_SEATS_AVAILABLE",
+                "wifi": false
+              },
+              "segmentTemplateHashCode": 1737232016,
+              "serviceColor": {
+                "blue": 239,
+                "green": 181,
+                "red": 0
+              },
+              "serviceDirection": "CITY Circular Quay",
+              "serviceName": "Maroubra Beach to City Circular Quay",
+              "serviceNumber": "396",
+              "serviceTripID": "418244",
+              "startTime": 1495720450,
+              "stops": 2,
+              "ticketWebsiteURL": "https://www.opal.com.au/en/fares-and-benefits/",
+              "wheelchairAccessible": true
+            }
+          ],
+          "temporaryURL": "https://darkages.buzzhives.com/satapp/trip/0299f1be-b371-4530-a745-30064f906082",
+          "updateURL": "https://darkages.buzzhives.com/satapp/trip/update/0299f1be-b371-4530-a745-30064f906082?hash=1167332006",
+          "weightedScore": 10.1
+        },
+        {
+          "arrive": 1495722180,
+          "availability": "AVAILABLE",
+          "caloriesCost": 16,
+          "carbonCost": 0.1,
+          "currencySymbol": "$",
+          "depart": 1495721517,
+          "hassleCost": 2,
+          "mainSegmentHashCode": -1101278390,
+          "moneyCost": 2.1,
+          "moneyUSDCost": 1.65,
+          "plannedURL": "https://darkages.buzzhives.com/satapp/trip/planned/3e65dd0c-690b-48da-9126-d657e8a0986c",
+          "queryIsLeaveAfter": true,
+          "queryTime": 1495719024,
+          "saveURL": "https://darkages.buzzhives.com/satapp/trip/save/3e65dd0c-690b-48da-9126-d657e8a0986c",
+          "segments": [
+            {
+              "availability": "AVAILABLE",
+              "endTime": 1495721880,
+              "segmentTemplateHashCode": -1285600201,
+              "startTime": 1495721517
+            },
+            {
+              "availability": "AVAILABLE",
+              "endTime": 1495722180,
+              "realTime": true,
+              "realtimeVehicle": {
+                "id": "311174",
+                "label": "",
+                "lastUpdate": 1495718954,
+                "location": {
+                  "bearing": 111,
+                  "lat": -33.89039,
+                  "lng": 151.24266
+                },
+                "occupancy": "MANY_SEATS_AVAILABLE",
+                "wifi": false
+              },
+              "segmentTemplateHashCode": -1101278390,
+              "serviceColor": {
+                "blue": 239,
+                "green": 181,
+                "red": 0
+              },
+              "serviceDirection": "CITY Circular Quay",
+              "serviceName": "Watsons Bay to City Circular Quay via Bondi Junction",
+              "serviceNumber": "380",
+              "serviceTripID": "311174",
+              "startTime": 1495721880,
+              "stops": 3,
+              "ticketWebsiteURL": "https://www.opal.com.au/en/fares-and-benefits/",
+              "wheelchairAccessible": true
+            }
+          ],
+          "temporaryURL": "https://darkages.buzzhives.com/satapp/trip/3e65dd0c-690b-48da-9126-d657e8a0986c",
+          "updateURL": "https://darkages.buzzhives.com/satapp/trip/update/3e65dd0c-690b-48da-9126-d657e8a0986c?hash=942301656",
+          "weightedScore": 14.6
+        },
+        {
+          "arrive": 1495719774,
+          "availability": "AVAILABLE",
+          "caloriesCost": 16,
+          "carbonCost": 0.1,
+          "currencySymbol": "$",
+          "depart": 1495719140,
+          "hassleCost": 2,
+          "mainSegmentHashCode": 1737232016,
+          "moneyCost": 2.1,
+          "moneyUSDCost": 1.65,
+          "plannedURL": "https://darkages.buzzhives.com/satapp/trip/planned/666dde17-e692-4ae2-93e2-1a4f85d2a0e4",
+          "queryIsLeaveAfter": true,
+          "queryTime": 1495719024,
+          "saveURL": "https://darkages.buzzhives.com/satapp/trip/save/666dde17-e692-4ae2-93e2-1a4f85d2a0e4",
+          "segments": [
+            {
+              "availability": "AVAILABLE",
+              "endTime": 1495719503,
+              "segmentTemplateHashCode": -1285600201,
+              "startTime": 1495719140
+            },
+            {
+              "availability": "AVAILABLE",
+              "endTime": 1495719774,
+              "realTime": true,
+              "realtimeVehicle": {
+                "id": "418142",
+                "label": "",
+                "lastUpdate": 1495719114,
+                "location": {
+                  "bearing": 352,
+                  "lat": -33.89431,
+                  "lng": 151.22133
+                },
+                "occupancy": "MANY_SEATS_AVAILABLE",
+                "wifi": false
+              },
+              "segmentTemplateHashCode": 1737232016,
+              "serviceColor": {
+                "blue": 239,
+                "green": 181,
+                "red": 0
+              },
+              "serviceDirection": "CITY Circular Quay",
+              "serviceName": "City Circular Quay to La Perouse via Maroubra & Kingsford",
+              "serviceNumber": "394",
+              "serviceTripID": "418142",
+              "startTime": 1495719503,
+              "stops": 2,
+              "ticketWebsiteURL": "https://www.opal.com.au/en/fares-and-benefits/",
+              "wheelchairAccessible": true
+            }
+          ],
+          "temporaryURL": "https://darkages.buzzhives.com/satapp/trip/666dde17-e692-4ae2-93e2-1a4f85d2a0e4",
+          "updateURL": "https://darkages.buzzhives.com/satapp/trip/update/666dde17-e692-4ae2-93e2-1a4f85d2a0e4?hash=1907012212",
+          "weightedScore": 8.6
+        }
+      ]
+    },
+    {
+      "frequency": 5,
+      "sources": [
+        {
+          "disclaimer": "\u00a9 OpenStreetMap contributors\n\nMap data available under the Open Database License. For more information, see http://www.openstreetmap.org/copyright.",
+          "provider": {
+            "name": "OpenStreetMap",
+            "website": "https://www.openstreetmap.org"
+          }
+        },
+        {
+          "provider": {
+            "name": "State Transit Sydney"
+          }
+        }
+      ],
+      "trips": [
+        {
+          "arrive": 1495719619,
+          "availability": "AVAILABLE",
+          "caloriesCost": 19,
+          "carbonCost": 0.1,
+          "currencySymbol": "$",
+          "depart": 1495718940,
+          "hassleCost": 2,
+          "mainSegmentHashCode": -1207441675,
+          "moneyCost": 2.1,
+          "moneyUSDCost": 1.65,
+          "plannedURL": "https://darkages.buzzhives.com/satapp/trip/planned/9996c43b-507a-45b8-84c1-70f91e2c3f88",
+          "queryIsLeaveAfter": true,
+          "queryTime": 1495719024,
+          "saveURL": "https://darkages.buzzhives.com/satapp/trip/save/9996c43b-507a-45b8-84c1-70f91e2c3f88",
+          "segments": [
+            {
+              "availability": "AVAILABLE",
+              "endTime": 1495719487,
+              "segmentTemplateHashCode": 1980088525,
+              "startTime": 1495718940
+            },
+            {
+              "availability": "AVAILABLE",
+              "endTime": 1495719619,
+              "platform": "Stand D",
+              "realTime": true,
+              "realtimeVehicle": {
+                "id": "304859",
+                "label": "",
+                "lastUpdate": 1495719109,
+                "location": {
+                  "bearing": 336,
+                  "lat": -33.88472,
+                  "lng": 151.21785
+                },
+                "occupancy": "MANY_SEATS_AVAILABLE",
+                "wifi": false
+              },
+              "segmentTemplateHashCode": -1207441675,
+              "serviceColor": {
+                "blue": 239,
+                "green": 181,
+                "red": 0
+              },
+              "serviceDirection": "CITY Circular Quay",
+              "serviceName": "Coogee to City Circular Quay via Belmore Rd",
+              "serviceNumber": "373",
+              "serviceTripID": "304859",
+              "startTime": 1495719487,
+              "stops": 1,
+              "ticketWebsiteURL": "https://www.opal.com.au/en/fares-and-benefits/",
+              "wheelchairAccessible": true
+            }
+          ],
+          "temporaryURL": "https://darkages.buzzhives.com/satapp/trip/9996c43b-507a-45b8-84c1-70f91e2c3f88",
+          "updateURL": "https://darkages.buzzhives.com/satapp/trip/update/9996c43b-507a-45b8-84c1-70f91e2c3f88?hash=-826885497",
+          "weightedScore": 20.2
+        },
+        {
+          "arrive": 1495719297,
+          "availability": "AVAILABLE",
+          "caloriesCost": 19,
+          "carbonCost": 0.1,
+          "currencySymbol": "$",
+          "depart": 1495718611,
+          "hassleCost": 2,
+          "mainSegmentHashCode": -293906670,
+          "moneyCost": 2.1,
+          "moneyUSDCost": 1.65,
+          "plannedURL": "https://darkages.buzzhives.com/satapp/trip/planned/169654b2-fe39-41a3-a398-74564a0de730",
+          "queryIsLeaveAfter": true,
+          "queryTime": 1495719024,
+          "saveURL": "https://darkages.buzzhives.com/satapp/trip/save/169654b2-fe39-41a3-a398-74564a0de730",
+          "segments": [
+            {
+              "availability": "AVAILABLE",
+              "endTime": 1495719158,
+              "segmentTemplateHashCode": 1980088525,
+              "startTime": 1495718611
+            },
+            {
+              "availability": "AVAILABLE",
+              "endTime": 1495719297,
+              "platform": "Stand D",
+              "realTime": true,
+              "realtimeVehicle": {
+                "id": "115113",
+                "label": "",
+                "lastUpdate": 1495719112,
+                "location": {
+                  "bearing": 6,
+                  "lat": -33.87499,
+                  "lng": 151.2097
+                },
+                "occupancy": "MANY_SEATS_AVAILABLE",
+                "wifi": false
+              },
+              "segmentTemplateHashCode": -293906670,
+              "serviceColor": {
+                "blue": 239,
+                "green": 181,
+                "red": 0
+              },
+              "serviceDirection": "CITY Circular Quay",
+              "serviceName": "PrePay Only - North Bondi to City Circular Quay",
+              "serviceNumber": "333",
+              "serviceTripID": "115113",
+              "startTime": 1495719158,
+              "stops": 2,
+              "ticketWebsiteURL": "https://www.opal.com.au/en/fares-and-benefits/",
+              "wheelchairAccessible": true
+            }
+          ],
+          "temporaryURL": "https://darkages.buzzhives.com/satapp/trip/169654b2-fe39-41a3-a398-74564a0de730",
+          "updateURL": "https://darkages.buzzhives.com/satapp/trip/update/169654b2-fe39-41a3-a398-74564a0de730?hash=-1859266311",
+          "weightedScore": 43.3
+        },
+        {
+          "arrive": 1495719293,
+          "availability": "AVAILABLE",
+          "caloriesCost": 19,
+          "carbonCost": 0.1,
+          "currencySymbol": "$",
+          "depart": 1495718620,
+          "hassleCost": 2,
+          "mainSegmentHashCode": -944726807,
+          "moneyCost": 2.1,
+          "moneyUSDCost": 1.65,
+          "plannedURL": "https://darkages.buzzhives.com/satapp/trip/planned/d0961f2b-fdfa-4e55-ad00-bc9ee8a6e25c",
+          "queryIsLeaveAfter": true,
+          "queryTime": 1495719024,
+          "saveURL": "https://darkages.buzzhives.com/satapp/trip/save/d0961f2b-fdfa-4e55-ad00-bc9ee8a6e25c",
+          "segments": [
+            {
+              "availability": "AVAILABLE",
+              "endTime": 1495719167,
+              "segmentTemplateHashCode": 1980088525,
+              "startTime": 1495718620
+            },
+            {
+              "availability": "AVAILABLE",
+              "endTime": 1495719293,
+              "platform": "Stand D",
+              "realTime": true,
+              "realtimeVehicle": {
+                "id": "418489",
+                "label": "",
+                "lastUpdate": 1495719115,
+                "location": {
+                  "bearing": 6,
+                  "lat": -33.87518,
+                  "lng": 151.20967
+                },
+                "occupancy": "MANY_SEATS_AVAILABLE",
+                "wifi": false
+              },
+              "segmentTemplateHashCode": -944726807,
+              "serviceColor": {
+                "blue": 239,
+                "green": 181,
+                "red": 0
+              },
+              "serviceDirection": "CITY Circular Quay",
+              "serviceName": "La Perouse to City Circular Quay via Eastgardens & Prince Henry Hospital",
+              "serviceNumber": "392",
+              "serviceTripID": "418489",
+              "startTime": 1495719167,
+              "stops": 1,
+              "ticketWebsiteURL": "https://www.opal.com.au/en/fares-and-benefits/",
+              "wheelchairAccessible": true
+            }
+          ],
+          "temporaryURL": "https://darkages.buzzhives.com/satapp/trip/d0961f2b-fdfa-4e55-ad00-bc9ee8a6e25c",
+          "updateURL": "https://darkages.buzzhives.com/satapp/trip/update/d0961f2b-fdfa-4e55-ad00-bc9ee8a6e25c?hash=1934695701",
+          "weightedScore": 43.3
+        }
+      ]
+    }
+  ],
+  "realTimeStamp": 1495719060,
+  "region": "AU_NSW_Sydney",
+  "regions": [
+    "AU_NSW_Sydney"
+  ],
+  "segmentTemplates": [
+    {
+      "action": "<TIME>: Walk",
+      "from": {
+        "address": "2 Foster Street Surry Hills NSW 2010",
+        "class": "Location",
+        "lat": -33.87962,
+        "lng": 151.21057,
+        "timezone": "Australia/Sydney"
+      },
+      "hashCode": -1642755443,
+      "metres": 327,
+      "mini": {
+        "description": "Hay St opp Belmore Park",
+        "instruction": "Walk",
+        "mainValue": "350m"
+      },
+      "modeIdentifier": "wa_wal",
+      "modeInfo": {
+        "alt": "Walk",
+        "identifier": "wa_wal",
+        "localIcon": "walk"
+      },
+      "notes": "<DURATION> ⋅ 350m",
+      "streets": [
+        {
+          "encodedWaypoints": "tbxmEai|y[SMMR??hCrBJJt@h@?A??]~CP^??Iv@G^Gh@OA"
+        }
+      ],
+      "to": {
+        "address": "Hay St opp Belmore Park",
+        "class": "Location",
+        "lat": -33.88021,
+        "lng": 151.20811,
+        "timezone": "Australia/Sydney"
+      },
+      "travelDirection": 250,
+      "type": "unscheduled",
+      "visibility": "in summary"
+    },
+    {
+      "action": "<TIME>: Take <NUMBER>",
+      "endStopCode": "2000421",
+      "from": {
+        "address": "Hay St opp Belmore Park",
+        "class": "Location",
+        "lat": -33.88021,
+        "lng": 151.20811,
+        "timezone": "Australia/Sydney"
+      },
+      "hashCode": 1935529356,
+      "mini": {
+        "description": "<DIRECTION>",
+        "instruction": "Take <NUMBER> ⋅ <PLATFORM>"
+      },
+      "modeIdentifier": "pt_pub",
+      "modeInfo": {
+        "alt": "Bus",
+        "identifier": "pt_pub_bus",
+        "localIcon": "bus"
+      },
+      "notes": "<LINE_NAME>\n<DIRECTION>\n<PLATFORM>\n<DURATION> ⋅ <STOPS> ⋅\u00a0Opal (bus) ($2.10)",
+      "operatorID": "2438",
+      "serviceOperator": "State Transit Sydney",
+      "shapes": [
+        {
+          "encodedWaypoints": "zaymEczwy[??L@?c@?yBJeLGgDGcAAw@KJ????HKAQSaDWkGEaBCq@WeE??N?O?N??MEoAC_CE{E?_AI}FAg@McE??H?CoAk@yCY_BOi@q@wAQSg@g@IH????HIm@q@Yu@Ia@]_AiCeD_@_AIKMMmAwAMKKKy@k@GEKEMEwBa@Hm@D_@ZuCOE",
+          "stops": [
+            {
+              "bearing": 90,
+              "code": "203769",
+              "lat": -33.88461,
+              "lng": 151.1877,
+              "name": "University of Sydney Footbridge, Parramatta Rd",
+              "relativeDeparture": -546
+            },
+            {
+              "bearing": 86,
+              "code": "203770",
+              "lat": -33.88459,
+              "lng": 151.192,
+              "name": "Parramatta Rd opp Victoria Park",
+              "relativeArrival": -486,
+              "relativeDeparture": -486
+            },
+            {
+              "bearing": 89,
+              "code": "200721",
+              "lat": -33.88425,
+              "lng": 151.19602,
+              "name": "Broadway before Mountain St",
+              "relativeArrival": -426,
+              "relativeDeparture": -426
+            },
+            {
+              "bearing": 69,
+              "code": "200723",
+              "lat": -33.88411,
+              "lng": 151.201,
+              "name": "University of Technology Sydney, Broadway",
+              "relativeArrival": -366,
+              "relativeDeparture": -366
+            },
+            {
+              "code": "200017",
+              "lat": -33.88313,
+              "lng": 151.20356,
+              "name": "Central Station, Railway Square, Stand J",
+              "relativeArrival": -306,
+              "relativeDeparture": -306,
+              "shortName": "Stand J"
+            }
+          ],
+          "travelled": false
+        },
+        {
+          "encodedWaypoints": "hfxmEsy{y[??NBJu@P}AUAkBm@cAKw@IyCQ}@GoCQG?CT????@U}AI_K[??@SAR@Su@GiG_@MA{FI??@UAT@UaG_@s@Gc@AgBKuBMuDWcBKuCQBT",
+          "stops": [
+            {
+              "bearing": 23,
+              "code": "2000429",
+              "lat": -33.88021,
+              "lng": 151.20811,
+              "name": "Hay St opp Belmore Park",
+              "relativeDeparture": -126
+            },
+            {
+              "bearing": 8,
+              "code": "200049",
+              "lat": -33.87731,
+              "lng": 151.20928,
+              "name": "Museum Station, Downing Centre, Stand E",
+              "relativeArrival": -6,
+              "relativeDeparture": -6,
+              "shortName": "Stand E"
+            },
+            {
+              "bearing": 8,
+              "code": "200055",
+              "lat": -33.87493,
+              "lng": 151.20958,
+              "name": "Museum Station, Elizabeth St, Stand D",
+              "relativeArrival": 54,
+              "relativeDeparture": 54,
+              "shortName": "Stand D"
+            },
+            {
+              "bearing": 7,
+              "code": "200057",
+              "lat": -33.872,
+              "lng": 151.20995,
+              "name": "Sheraton on the Park, Elizabeth St",
+              "relativeArrival": 174,
+              "relativeDeparture": 174
+            },
+            {
+              "code": "2000421",
+              "lat": -33.86703,
+              "lng": 151.21055,
+              "name": "Martin Place Station, Elizabeth St, Stand C",
+              "relativeArrival": 294,
+              "shortName": "Stand C"
+            }
+          ],
+          "travelled": true
+        }
+      ],
+      "stopCode": "2000429",
+      "to": {
+        "address": "Martin Place Station, Elizabeth St, Stand C",
+        "class": "Location",
+        "lat": -33.86703,
+        "lng": 151.21055,
+        "timezone": "Australia/Sydney"
+      },
+      "travelDirection": 11,
+      "type": "scheduled",
+      "visibility": "in summary"
+    },
+    {
+      "action": "<TIME>: Walk",
+      "from": {
+        "address": "2 Foster Street Surry Hills NSW 2010",
+        "class": "Location",
+        "lat": -33.87962,
+        "lng": 151.21057,
+        "timezone": "Australia/Sydney"
+      },
+      "hashCode": 1921867951,
+      "metres": 159,
+      "mini": {
+        "description": "Campbell St at Foster St",
+        "instruction": "Walk",
+        "mainValue": "200m"
+      },
+      "modeIdentifier": "wa_wal",
+      "modeInfo": {
+        "alt": "Walk",
+        "identifier": "wa_wal",
+        "localIcon": "walk"
+      },
+      "notes": "<DURATION> ⋅ 200m",
+      "streets": [
+        {
+          "encodedWaypoints": "tbxmEai|y[SMMR??hCrBJJ??Yn@HB"
+        }
+      ],
+      "to": {
+        "address": "Campbell St at Foster St",
+        "class": "Location",
+        "lat": -33.88012,
+        "lng": 151.20964,
+        "timezone": "Australia/Sydney"
+      },
+      "travelDirection": 241,
+      "type": "unscheduled",
+      "visibility": "in summary"
+    },
+    {
+      "action": "<TIME>: Take <NUMBER>",
+      "endStopCode": "2000421",
+      "from": {
+        "address": "Campbell St at Foster St",
+        "class": "Location",
+        "lat": -33.88012,
+        "lng": 151.20964,
+        "timezone": "Australia/Sydney"
+      },
+      "hashCode": -255288863,
+      "mini": {
+        "description": "<DIRECTION>",
+        "instruction": "Take <NUMBER> ⋅ <PLATFORM>"
+      },
+      "modeIdentifier": "pt_pub",
+      "modeInfo": {
+        "alt": "Bus",
+        "identifier": "pt_pub_bus",
+        "localIcon": "bus"
+      },
+      "notes": "<LINE_NAME>\n<DIRECTION>\n<PLATFORM>\n<DURATION> ⋅ <STOPS> ⋅\u00a0Opal (bus) ($2.10)",
+      "operatorID": "2441",
+      "serviceOperator": "State Transit Sydney",
+      "shapes": [
+        {
+          "encodedWaypoints": "zqymEy{|y[??@O[CWE{@KwAQs@GAR?????S}C_@kC[s@G_CY}AOy@ICN????BOYE}Dc@sBWHV????IUs@KSpBUrBIn@LD????MCGf@e@tEEZBH?x@ANC|@CtACfA?dAIj@GLUj@HF",
+          "stops": [
+            {
+              "bearing": 11,
+              "code": "201022",
+              "lat": -33.88717,
+              "lng": 151.21357,
+              "name": "Crown St at Arthur St",
+              "relativeDeparture": -110
+            },
+            {
+              "bearing": 11,
+              "code": "201023",
+              "lat": -33.88591,
+              "lng": 151.2138,
+              "name": "Crown St before Foveaux St",
+              "relativeArrival": -50,
+              "relativeDeparture": -50
+            },
+            {
+              "bearing": 11,
+              "code": "201096",
+              "lat": -33.88275,
+              "lng": 151.21441,
+              "name": "Crown St opp Crown Street Public School",
+              "relativeArrival": 10,
+              "relativeDeparture": 10
+            },
+            {
+              "bearing": 292,
+              "code": "201097",
+              "lat": -33.88115,
+              "lng": 151.21471,
+              "name": "Crown St at Campbell St",
+              "relativeArrival": 70,
+              "relativeDeparture": 70
+            },
+            {
+              "code": "201024",
+              "lat": -33.88066,
+              "lng": 151.21346,
+              "name": "Campbell St at Riley St",
+              "relativeArrival": 130,
+              "relativeDeparture": 130
+            }
+          ],
+          "travelled": false
+        },
+        {
+          "encodedWaypoints": "xexmEgc|y[??KGe@fAKd@GL_AKw@I{CQ{@GqCQI?AT????????@U}AI_K[??????@SAR@Su@GiG_@MA{FK?@????@UAT@UaG_@s@Gc@AgBKuBMuDWcBKuCQBT??",
+          "stops": [
+            {
+              "bearing": 353,
+              "code": "201025",
+              "lat": -33.88012,
+              "lng": 151.20964,
+              "name": "Campbell St at Foster St",
+              "relativeDeparture": 190
+            },
+            {
+              "bearing": 8,
+              "code": "200049",
+              "lat": -33.87731,
+              "lng": 151.20928,
+              "name": "Museum Station, Downing Centre, Stand E",
+              "relativeArrival": 310,
+              "relativeDeparture": 310,
+              "shortName": "Stand E"
+            },
+            {
+              "bearing": 8,
+              "code": "200055",
+              "lat": -33.87493,
+              "lng": 151.20958,
+              "name": "Museum Station, Elizabeth St, Stand D",
+              "relativeArrival": 370,
+              "relativeDeparture": 370,
+              "shortName": "Stand D"
+            },
+            {
+              "bearing": 7,
+              "code": "200057",
+              "lat": -33.872,
+              "lng": 151.20995,
+              "name": "Sheraton on the Park, Elizabeth St",
+              "relativeArrival": 430,
+              "relativeDeparture": 430
+            },
+            {
+              "code": "2000421",
+              "lat": -33.86703,
+              "lng": 151.21055,
+              "name": "Martin Place Station, Elizabeth St, Stand C",
+              "relativeArrival": 490,
+              "relativeDeparture": 490,
+              "shortName": "Stand C"
+            }
+          ],
+          "travelled": true
+        },
+        {
+          "encodedWaypoints": "~sumE}h|y[????CU}@GgAESCY_@U_@OKeD{AgAMmCG??????@IAH@IgAMu@GM?mAIAT?A",
+          "stops": [
+            {
+              "bearing": 6,
+              "code": "200059",
+              "lat": -33.86403,
+              "lng": 151.2117,
+              "name": "Museum of Sydney, Phillip St",
+              "relativeDeparture": 610
+            },
+            {
+              "code": "200067",
+              "lat": -33.86293,
+              "lng": 151.21181,
+              "name": "Circular Quay, Phillip St, Stand C",
+              "relativeArrival": 670,
+              "shortName": "Stand C"
+            }
+          ],
+          "travelled": false
+        }
+      ],
+      "stopCode": "201025",
+      "to": {
+        "address": "Martin Place Station, Elizabeth St, Stand C",
+        "class": "Location",
+        "lat": -33.86703,
+        "lng": 151.21055,
+        "timezone": "Australia/Sydney"
+      },
+      "travelDirection": 4,
+      "type": "scheduled",
+      "visibility": "in summary"
+    },
+    {
+      "action": "<TIME>: Walk",
+      "from": {
+        "address": "2 Foster Street Surry Hills NSW 2010",
+        "class": "Location",
+        "lat": -33.87962,
+        "lng": 151.21057,
+        "timezone": "Australia/Sydney"
+      },
+      "hashCode": -353001021,
+      "metres": 305,
+      "mini": {
+        "description": "Elizabeth St at Hay St",
+        "instruction": "Walk",
+        "mainValue": "350m"
+      },
+      "modeIdentifier": "wa_wal",
+      "modeInfo": {
+        "alt": "Walk",
+        "identifier": "wa_wal",
+        "localIcon": "walk"
+      },
+      "notes": "<DURATION> ⋅ 350m",
+      "streets": [
+        {
+          "encodedWaypoints": "tbxmEai|y[SMMR??hCrBJJt@h@BBp@d@Gx@IhAx@RML"
+        }
+      ],
+      "to": {
+        "address": "Elizabeth St at Hay St",
+        "class": "Location",
+        "lat": -33.88087,
+        "lng": 151.20865,
+        "timezone": "Australia/Sydney"
+      },
+      "travelDirection": 234,
+      "type": "unscheduled",
+      "visibility": "in summary"
+    },
+    {
+      "action": "<TIME>: Take <NUMBER>",
+      "endStopCode": "2000421",
+      "from": {
+        "address": "Elizabeth St at Hay St",
+        "class": "Location",
+        "lat": -33.88087,
+        "lng": 151.20865,
+        "timezone": "Australia/Sydney"
+      },
+      "hashCode": -994965650,
+      "mini": {
+        "description": "<DIRECTION>",
+        "instruction": "Take <NUMBER> ⋅ <PLATFORM>"
+      },
+      "modeIdentifier": "pt_pub",
+      "modeInfo": {
+        "alt": "Bus",
+        "identifier": "pt_pub_bus",
+        "localIcon": "bus"
+      },
+      "notes": "<LINE_NAME>\n<DIRECTION>\n<PLATFORM>\n<DURATION> ⋅ <STOPS> ⋅\u00a0Opal (bus) ($2.10)",
+      "operatorID": "2441",
+      "serviceOperator": "State Transit Sydney",
+      "shapes": [
+        {
+          "encodedWaypoints": "hnzmE}i{y[????EOeIm@??????FQGPFQI?eAOKAaEg@ML????????NOQCuEm@sC[e@KcAF@A????a@WaAMbBd@a@WaAMsAU}@QQEMIMEyDgC?A????BE}AgAgBUSCa@?eEc@sAMcAMAP??",
+          "stops": [
+            {
+              "bearing": 11,
+              "code": "201615",
+              "lat": -33.89173,
+              "lng": 151.20559,
+              "name": "Chalmers St after Wells St",
+              "relativeDeparture": -1495721353
+            },
+            {
+              "bearing": 12,
+              "code": "201616",
+              "lat": -33.89007,
+              "lng": 151.20591,
+              "name": "Chalmers St before Cleveland St",
+              "relativeArrival": -1495721293,
+              "relativeDeparture": -1495721353
+            },
+            {
+              "bearing": 13,
+              "code": "201015",
+              "lat": -33.8886,
+              "lng": 151.20621,
+              "name": "Chalmers St opp Belvoir St",
+              "relativeArrival": -1495721353,
+              "relativeDeparture": -1495721353
+            },
+            {
+              "bearing": 27,
+              "code": "201016",
+              "lat": -33.88626,
+              "lng": 151.20671,
+              "name": "Central Station, Chalmers St, Stand G",
+              "relativeArrival": -1495721293,
+              "relativeDeparture": -1495721353,
+              "shortName": "Stand G"
+            },
+            {
+              "code": "2000193",
+              "lat": -33.88388,
+              "lng": 151.2079,
+              "name": "Central Station, Chalmers St, Stand H",
+              "relativeArrival": -1495721293,
+              "relativeDeparture": -1495721353,
+              "shortName": "Stand H"
+            }
+          ],
+          "travelled": false
+        },
+        {
+          "encodedWaypoints": "njxmEa}{y[????@Qi@GYEWASAmBm@_AKw@I{CS{@EqCSI?AV????????@U}AI_K[??????@SAR@Su@GiG_@MA{FK?@????@UAT@UaG_@s@Gc@AgBKuBMuDWcBKuCQBT??",
+          "stops": [
+            {
+              "bearing": 11,
+              "code": "200047",
+              "lat": -33.88087,
+              "lng": 151.20865,
+              "name": "Elizabeth St at Hay St",
+              "relativeDeparture": -1495721353
+            },
+            {
+              "bearing": 8,
+              "code": "200049",
+              "lat": -33.87731,
+              "lng": 151.20928,
+              "name": "Museum Station, Downing Centre, Stand E",
+              "relativeArrival": -1495721233,
+              "relativeDeparture": -1495721353,
+              "shortName": "Stand E"
+            },
+            {
+              "bearing": 8,
+              "code": "200055",
+              "lat": -33.87493,
+              "lng": 151.20958,
+              "name": "Museum Station, Elizabeth St, Stand D",
+              "relativeArrival": -1495721293,
+              "relativeDeparture": -1495721353,
+              "shortName": "Stand D"
+            },
+            {
+              "bearing": 7,
+              "code": "200057",
+              "lat": -33.872,
+              "lng": 151.20995,
+              "name": "Sheraton on the Park, Elizabeth St",
+              "relativeArrival": -1495721293,
+              "relativeDeparture": -1495721353
+            },
+            {
+              "code": "2000421",
+              "lat": -33.86703,
+              "lng": 151.21055,
+              "name": "Martin Place Station, Elizabeth St, Stand C",
+              "relativeArrival": -1495721173,
+              "relativeDeparture": -1495721353,
+              "shortName": "Stand C"
+            }
+          ],
+          "travelled": true
+        },
+        {
+          "encodedWaypoints": "~sumE}h|y[????CU}@GgAESCY_@U_@OKgB{@KR????HS{@_@]n@e@n@_@f@g@r@EJSb@@LLvC{BLJR????KQW@FlBBj@DhBLEA@??????IDBp@?`@Gf@IN[RIJGLCf@?dCCvBBjA@NCLEJIFIFIHIBSFQHM?_@E[ASGq@Us@SkA[o@GmB]cD}@}@]iB_AsAk@iPoIgh@cXu@Sw@Ss@Mm@E{BBcALaATcB^kFjAcBp@}HvB}Ah@{@p@u@|@kAvAsCnDOREZ?VBVFT@RA\\KpAO~D??????GAF@GAIl@iBSeDQ??",
+          "stops": [
+            {
+              "bearing": 310,
+              "code": "2000415",
+              "lat": -33.86534,
+              "lng": 151.21134,
+              "name": "Chifley Square, Phillip St",
+              "relativeDeparture": -1495721353
+            },
+            {
+              "bearing": 272,
+              "code": "2000150",
+              "lat": -33.86378,
+              "lng": 151.20942,
+              "name": "Gresham St at Bridge St",
+              "relativeArrival": -1495721293,
+              "relativeDeparture": -1495721353
+            },
+            {
+              "bearing": 357,
+              "code": "2000417",
+              "lat": -33.86376,
+              "lng": 151.20822,
+              "name": "Burns Philp Building, Bridge St",
+              "relativeArrival": -1495721353,
+              "relativeDeparture": -1495721353
+            },
+            {
+              "bearing": 359,
+              "code": "206011",
+              "lat": -33.84091,
+              "lng": 151.20669,
+              "name": "North Sydney Station, Blue St, Stand A",
+              "relativeArrival": -1495720813,
+              "relativeDeparture": 86328,
+              "shortName": "Stand A"
+            },
+            {
+              "code": "206013",
+              "lat": -33.83945,
+              "lng": 151.20665,
+              "name": "Miller St before Pacific Hwy",
+              "relativeArrival": 86328,
+              "relativeDeparture": 86328
+            }
+          ],
+          "travelled": false
+        }
+      ],
+      "stopCode": "200047",
+      "to": {
+        "address": "Martin Place Station, Elizabeth St, Stand C",
+        "class": "Location",
+        "lat": -33.86703,
+        "lng": 151.21055,
+        "timezone": "Australia/Sydney"
+      },
+      "travelDirection": 8,
+      "type": "scheduled",
+      "visibility": "in summary"
+    },
+    {
+      "action": "<TIME>: Take <NUMBER>",
+      "endStopCode": "2000421",
+      "from": {
+        "address": "Elizabeth St at Hay St",
+        "class": "Location",
+        "lat": -33.88087,
+        "lng": 151.20865,
+        "timezone": "Australia/Sydney"
+      },
+      "hashCode": -197038755,
+      "mini": {
+        "description": "<DIRECTION>",
+        "instruction": "Take <NUMBER> ⋅ <PLATFORM>"
+      },
+      "modeIdentifier": "pt_pub",
+      "modeInfo": {
+        "alt": "Bus",
+        "identifier": "pt_pub_bus",
+        "localIcon": "bus"
+      },
+      "notes": "<LINE_NAME>\n<DIRECTION>\n<PLATFORM>\n<DURATION> ⋅ <STOPS> ⋅\u00a0Opal (bus) ($2.10)",
+      "operatorID": "2441",
+      "serviceOperator": "State Transit Sydney",
+      "shapes": [
+        {
+          "encodedWaypoints": "hnzmE}i{y[????EOeIm@??????FQGPFQI?eAOKAaEg@ML????????NOQCuEm@sC[e@KcAF@A????a@WaAMbBd@a@WaAMsAU}@QQEMIMEyDgC?A????BE}AgAgBUSCa@?eEc@sAMcAMAP??",
+          "stops": [
+            {
+              "bearing": 11,
+              "code": "201615",
+              "lat": -33.89173,
+              "lng": 151.20559,
+              "name": "Chalmers St after Wells St",
+              "relativeDeparture": -300
+            },
+            {
+              "bearing": 12,
+              "code": "201616",
+              "lat": -33.89007,
+              "lng": 151.20591,
+              "name": "Chalmers St before Cleveland St",
+              "relativeArrival": -240,
+              "relativeDeparture": -240
+            },
+            {
+              "bearing": 13,
+              "code": "201015",
+              "lat": -33.8886,
+              "lng": 151.20621,
+              "name": "Chalmers St opp Belvoir St",
+              "relativeArrival": -240,
+              "relativeDeparture": -240
+            },
+            {
+              "bearing": 27,
+              "code": "201016",
+              "lat": -33.88626,
+              "lng": 151.20671,
+              "name": "Central Station, Chalmers St, Stand G",
+              "relativeArrival": -180,
+              "relativeDeparture": -180,
+              "shortName": "Stand G"
+            },
+            {
+              "code": "2000193",
+              "lat": -33.88388,
+              "lng": 151.2079,
+              "name": "Central Station, Chalmers St, Stand H",
+              "relativeArrival": -120,
+              "relativeDeparture": -120,
+              "shortName": "Stand H"
+            }
+          ],
+          "travelled": false
+        },
+        {
+          "encodedWaypoints": "njxmEa}{y[????@Qi@GYEWASAmBm@_AKw@I{CS{@EqCSI?AV????????@U}AI_K[??????@SAR@Su@GiG_@MA{FK?@????@UAT@UaG_@s@Gc@AgBKuBMuDWcBKuCQBT??",
+          "stops": [
+            {
+              "bearing": 11,
+              "code": "200047",
+              "lat": -33.88087,
+              "lng": 151.20865,
+              "name": "Elizabeth St at Hay St",
+              "relativeDeparture": 0
+            },
+            {
+              "bearing": 8,
+              "code": "200049",
+              "lat": -33.87731,
+              "lng": 151.20928,
+              "name": "Museum Station, Downing Centre, Stand E",
+              "relativeArrival": 120,
+              "relativeDeparture": 120,
+              "shortName": "Stand E"
+            },
+            {
+              "bearing": 8,
+              "code": "200055",
+              "lat": -33.87493,
+              "lng": 151.20958,
+              "name": "Museum Station, Elizabeth St, Stand D",
+              "relativeArrival": 180,
+              "relativeDeparture": 180,
+              "shortName": "Stand D"
+            },
+            {
+              "bearing": 7,
+              "code": "200057",
+              "lat": -33.872,
+              "lng": 151.20995,
+              "name": "Sheraton on the Park, Elizabeth St",
+              "relativeArrival": 240,
+              "relativeDeparture": 240
+            },
+            {
+              "code": "2000421",
+              "lat": -33.86703,
+              "lng": 151.21055,
+              "name": "Martin Place Station, Elizabeth St, Stand C",
+              "relativeArrival": 420,
+              "relativeDeparture": 420,
+              "shortName": "Stand C"
+            }
+          ],
+          "travelled": true
+        },
+        {
+          "encodedWaypoints": "~sumE}h|y[????CU}@GgAESCY_@U_@OKgB{@KR????HS{@_@]n@e@n@_@f@g@r@EJSb@@LLvC{BLJR????KQW@FlBBj@DhBLEA@??????IDBp@?`@Gf@IN[RIJGLCf@?dCCvBBjA@NCLEJIFIFIHIBSFQHM?_@E[ASGq@Us@SkA[o@GmB]cD}@}@]iB_AsAk@iPoIgh@cXu@Sw@Ss@Mm@E{BBcALaATcB^kFjAcBp@}HvB}Ah@{@p@u@|@kAvAsCnDOREZ?VBVFT@RA\\KpAO~D??????GAF@GAIl@iBSeDQ??",
+          "stops": [
+            {
+              "bearing": 310,
+              "code": "2000415",
+              "lat": -33.86534,
+              "lng": 151.21134,
+              "name": "Chifley Square, Phillip St",
+              "relativeDeparture": 480
+            },
+            {
+              "bearing": 272,
+              "code": "2000150",
+              "lat": -33.86378,
+              "lng": 151.20942,
+              "name": "Gresham St at Bridge St",
+              "relativeArrival": 540,
+              "relativeDeparture": 540
+            },
+            {
+              "bearing": 357,
+              "code": "2000417",
+              "lat": -33.86376,
+              "lng": 151.20822,
+              "name": "Burns Philp Building, Bridge St",
+              "relativeArrival": 540,
+              "relativeDeparture": 540
+            },
+            {
+              "bearing": 359,
+              "code": "206011",
+              "lat": -33.84091,
+              "lng": 151.20669,
+              "name": "North Sydney Station, Blue St, Stand A",
+              "relativeArrival": 1080,
+              "relativeDeparture": 1080,
+              "shortName": "Stand A"
+            },
+            {
+              "code": "206013",
+              "lat": -33.83945,
+              "lng": 151.20665,
+              "name": "Miller St before Pacific Hwy",
+              "relativeArrival": 1080,
+              "relativeDeparture": 1080
+            }
+          ],
+          "travelled": false
+        }
+      ],
+      "stopCode": "200047",
+      "to": {
+        "address": "Martin Place Station, Elizabeth St, Stand C",
+        "class": "Location",
+        "lat": -33.86703,
+        "lng": 151.21055,
+        "timezone": "Australia/Sydney"
+      },
+      "travelDirection": 8,
+      "type": "scheduled",
+      "visibility": "in summary"
+    },
+    {
+      "action": "<TIME>: Take <NUMBER>",
+      "endStopCode": "2000421",
+      "from": {
+        "address": "Elizabeth St at Hay St",
+        "class": "Location",
+        "lat": -33.88087,
+        "lng": 151.20865,
+        "timezone": "Australia/Sydney"
+      },
+      "hashCode": 2142107207,
+      "mini": {
+        "description": "<DIRECTION>",
+        "instruction": "Take <NUMBER> ⋅ <PLATFORM>"
+      },
+      "modeIdentifier": "pt_pub",
+      "modeInfo": {
+        "alt": "Bus",
+        "identifier": "pt_pub_bus",
+        "localIcon": "bus"
+      },
+      "notes": "<LINE_NAME>\n<DIRECTION>\n<PLATFORM>\n<DURATION> ⋅ <STOPS> ⋅\u00a0Opal (bus) ($2.10)",
+      "operatorID": "2441",
+      "serviceOperator": "State Transit Sydney",
+      "shapes": [
+        {
+          "encodedWaypoints": "tg{mEkm~y[AU@TAUU@}ANsAT_HbA??AM@LAMsAN_D\\aBT}B^uEdAuCr@_Bf@aBd@o@TqAb@s@Xm@RsAf@ALo@tA]bAQ`@c@lAe@nAOb@FF????GIIRKZ]~@{@~B`@~AMrAIjAIv@NA????M?C\\MtAEl@Gh@MvAKrAKdAO|AEP]jAu@fCu@hC_@jAJD????KEWx@Od@i@bBiBQSGa@@cEc@sAOcAKCR@A",
+          "stops": [
+            {
+              "bearing": 351,
+              "code": "202112",
+              "lat": -33.89578,
+              "lng": 151.22151,
+              "name": "Anzac Pde before Cleveland St",
+              "relativeDeparture": -440
+            },
+            {
+              "bearing": 332,
+              "code": "202116",
+              "lat": -33.89334,
+              "lng": 151.22108,
+              "name": "Sydney Girls High School, Anzac Pde",
+              "relativeArrival": -380,
+              "relativeDeparture": -380
+            },
+            {
+              "bearing": 281,
+              "code": "201037",
+              "lat": -33.88573,
+              "lng": 151.21691,
+              "name": "Fitzroy St at Marshall St",
+              "relativeArrival": -200,
+              "relativeDeparture": -200
+            },
+            {
+              "bearing": 285,
+              "code": "201038",
+              "lat": -33.88521,
+              "lng": 151.2142,
+              "name": "Foveaux St at Crown St",
+              "relativeArrival": -140,
+              "relativeDeparture": -140
+            },
+            {
+              "code": "201039",
+              "lat": -33.8839,
+              "lng": 151.20926,
+              "name": "Central Station, Foveaux St, Stand F",
+              "relativeArrival": -80,
+              "relativeDeparture": -80,
+              "shortName": "Stand F"
+            }
+          ],
+          "travelled": false
+        },
+        {
+          "encodedWaypoints": "njxmEa}{y[????@Qi@GYEWASAmBm@_AKw@I{CS{@EqCSI?AV????????@U}AI_K[??????@SAR@Su@GiG_@MA{FK?@????@UAT@UaG_@s@Gc@AgBKuBMuDWcBKuCQBT??",
+          "stops": [
+            {
+              "bearing": 11,
+              "code": "200047",
+              "lat": -33.88087,
+              "lng": 151.20865,
+              "name": "Elizabeth St at Hay St",
+              "relativeDeparture": 40
+            },
+            {
+              "bearing": 8,
+              "code": "200049",
+              "lat": -33.87731,
+              "lng": 151.20928,
+              "name": "Museum Station, Downing Centre, Stand E",
+              "relativeArrival": 160,
+              "relativeDeparture": 160,
+              "shortName": "Stand E"
+            },
+            {
+              "bearing": 8,
+              "code": "200055",
+              "lat": -33.87493,
+              "lng": 151.20958,
+              "name": "Museum Station, Elizabeth St, Stand D",
+              "relativeArrival": 220,
+              "relativeDeparture": 220,
+              "shortName": "Stand D"
+            },
+            {
+              "bearing": 7,
+              "code": "200057",
+              "lat": -33.872,
+              "lng": 151.20995,
+              "name": "Sheraton on the Park, Elizabeth St",
+              "relativeArrival": 280,
+              "relativeDeparture": 280
+            },
+            {
+              "code": "2000421",
+              "lat": -33.86703,
+              "lng": 151.21055,
+              "name": "Martin Place Station, Elizabeth St, Stand C",
+              "relativeArrival": 460,
+              "relativeDeparture": 460,
+              "shortName": "Stand C"
+            }
+          ],
+          "travelled": true
+        },
+        {
+          "encodedWaypoints": "~sumE}h|y[????CU}@GgAESCY_@U_@OKeD{AgAMmCG??????@IAH@IgAMu@GM?mAIAT?A",
+          "stops": [
+            {
+              "bearing": 6,
+              "code": "200059",
+              "lat": -33.86403,
+              "lng": 151.2117,
+              "name": "Museum of Sydney, Phillip St",
+              "relativeDeparture": 640
+            },
+            {
+              "code": "200067",
+              "lat": -33.86293,
+              "lng": 151.21181,
+              "name": "Circular Quay, Phillip St, Stand C",
+              "relativeArrival": 700,
+              "shortName": "Stand C"
+            }
+          ],
+          "travelled": false
+        }
+      ],
+      "stopCode": "200047",
+      "to": {
+        "address": "Martin Place Station, Elizabeth St, Stand C",
+        "class": "Location",
+        "lat": -33.86703,
+        "lng": 151.21055,
+        "timezone": "Australia/Sydney"
+      },
+      "travelDirection": 8,
+      "type": "scheduled",
+      "visibility": "in summary"
+    },
+    {
+      "action": "<TIME>: Take <NUMBER>",
+      "endStopCode": "2000421",
+      "from": {
+        "address": "Campbell St at Foster St",
+        "class": "Location",
+        "lat": -33.88012,
+        "lng": 151.20964,
+        "timezone": "Australia/Sydney"
+      },
+      "hashCode": -990565536,
+      "mini": {
+        "description": "<DIRECTION>",
+        "instruction": "Take <NUMBER> ⋅ <PLATFORM>"
+      },
+      "modeIdentifier": "pt_pub",
+      "modeInfo": {
+        "alt": "Bus",
+        "identifier": "pt_pub_bus",
+        "localIcon": "bus"
+      },
+      "notes": "<LINE_NAME>\n<DIRECTION>\n<PLATFORM>\n<DURATION> ⋅ <STOPS> ⋅\u00a0Opal (bus) ($2.10)",
+      "operatorID": "2441",
+      "serviceOperator": "State Transit Sydney",
+      "shapes": [
+        {
+          "encodedWaypoints": "zqymEy{|y[??@O[CWE{@KwAQs@GAR?????S}C_@kC[s@G_CY}AOy@ICN????BOYE}Dc@sBWHV????IUs@KSpBUrBIn@LD????MCGf@e@tEEZBH?x@ANC|@CtACfA?dAIj@GLUj@HF",
+          "stops": [
+            {
+              "bearing": 11,
+              "code": "201022",
+              "lat": -33.88717,
+              "lng": 151.21357,
+              "name": "Crown St at Arthur St",
+              "relativeDeparture": -1495720846
+            },
+            {
+              "bearing": 11,
+              "code": "201023",
+              "lat": -33.88591,
+              "lng": 151.2138,
+              "name": "Crown St before Foveaux St",
+              "relativeArrival": -1495720786,
+              "relativeDeparture": -1495720846
+            },
+            {
+              "bearing": 11,
+              "code": "201096",
+              "lat": -33.88275,
+              "lng": 151.21441,
+              "name": "Crown St opp Crown Street Public School",
+              "relativeArrival": -1495720786,
+              "relativeDeparture": -1495720846
+            },
+            {
+              "bearing": 292,
+              "code": "201097",
+              "lat": -33.88115,
+              "lng": 151.21471,
+              "name": "Crown St at Campbell St",
+              "relativeArrival": -1495720786,
+              "relativeDeparture": -1495720846
+            },
+            {
+              "code": "201024",
+              "lat": -33.88066,
+              "lng": 151.21346,
+              "name": "Campbell St at Riley St",
+              "relativeArrival": -1495720786,
+              "relativeDeparture": 86355
+            }
+          ],
+          "travelled": false
+        },
+        {
+          "encodedWaypoints": "xexmEgc|y[??KGe@fAKd@GL_AKw@I{CQ{@GqCQI?AT????????@U}AI_K[??????@SAR@Su@GiG_@MA{FK?@????@UAT@UaG_@s@Gc@AgBKuBMuDWcBKuCQBT??",
+          "stops": [
+            {
+              "bearing": 353,
+              "code": "201025",
+              "lat": -33.88012,
+              "lng": 151.20964,
+              "name": "Campbell St at Foster St",
+              "relativeDeparture": 86415
+            },
+            {
+              "bearing": 8,
+              "code": "200049",
+              "lat": -33.87731,
+              "lng": 151.20928,
+              "name": "Museum Station, Downing Centre, Stand E",
+              "relativeArrival": 86535,
+              "relativeDeparture": 86535,
+              "shortName": "Stand E"
+            },
+            {
+              "bearing": 8,
+              "code": "200055",
+              "lat": -33.87493,
+              "lng": 151.20958,
+              "name": "Museum Station, Elizabeth St, Stand D",
+              "relativeArrival": 86595,
+              "relativeDeparture": 86595,
+              "shortName": "Stand D"
+            },
+            {
+              "bearing": 7,
+              "code": "200057",
+              "lat": -33.872,
+              "lng": 151.20995,
+              "name": "Sheraton on the Park, Elizabeth St",
+              "relativeArrival": 86655,
+              "relativeDeparture": 86655
+            },
+            {
+              "code": "2000421",
+              "lat": -33.86703,
+              "lng": 151.21055,
+              "name": "Martin Place Station, Elizabeth St, Stand C",
+              "relativeArrival": 86715,
+              "relativeDeparture": 86715,
+              "shortName": "Stand C"
+            }
+          ],
+          "travelled": true
+        },
+        {
+          "encodedWaypoints": "~sumE}h|y[????CU}@GgAESCY_@U_@OKeD{AgAMmCG??????@IAH@IgAMu@GM?mAIAT?A",
+          "stops": [
+            {
+              "bearing": 6,
+              "code": "200059",
+              "lat": -33.86403,
+              "lng": 151.2117,
+              "name": "Museum of Sydney, Phillip St",
+              "relativeDeparture": 86835
+            },
+            {
+              "code": "200067",
+              "lat": -33.86293,
+              "lng": 151.21181,
+              "name": "Circular Quay, Phillip St, Stand C",
+              "relativeArrival": 86895,
+              "shortName": "Stand C"
+            }
+          ],
+          "travelled": false
+        }
+      ],
+      "stopCode": "201025",
+      "to": {
+        "address": "Martin Place Station, Elizabeth St, Stand C",
+        "class": "Location",
+        "lat": -33.86703,
+        "lng": 151.21055,
+        "timezone": "Australia/Sydney"
+      },
+      "travelDirection": 4,
+      "type": "scheduled",
+      "visibility": "in summary"
+    },
+    {
+      "action": "<TIME>: Walk",
+      "from": {
+        "address": "2 Foster Street Surry Hills NSW 2010",
+        "class": "Location",
+        "lat": -33.87962,
+        "lng": 151.21057,
+        "timezone": "Australia/Sydney"
+      },
+      "hashCode": -531260062,
+      "metres": 355,
+      "mini": {
+        "description": "Museum Station, Downing Centre, Stand E",
+        "instruction": "Walk",
+        "mainValue": "400m"
+      },
+      "modeIdentifier": "wa_wal",
+      "modeInfo": {
+        "alt": "Walk",
+        "identifier": "wa_wal",
+        "localIcon": "walk"
+      },
+      "notes": "<DURATION> ⋅ 400m",
+      "streets": [
+        {
+          "encodedWaypoints": "tbxmEai|y[SMMR}BPu@RKz@??{@I??SzC????m@CmAGSAMT"
+        }
+      ],
+      "to": {
+        "address": "Museum Station, Downing Centre, Stand E",
+        "class": "Location",
+        "lat": -33.87731,
+        "lng": 151.20928,
+        "timezone": "Australia/Sydney"
+      },
+      "travelDirection": 321,
+      "type": "unscheduled",
+      "visibility": "in summary"
+    },
+    {
+      "action": "<TIME>: Take <NUMBER>",
+      "endStopCode": "2000421",
+      "from": {
+        "address": "Museum Station, Downing Centre, Stand E",
+        "class": "Location",
+        "lat": -33.87731,
+        "lng": 151.20928,
+        "timezone": "Australia/Sydney"
+      },
+      "hashCode": 1798772591,
+      "mini": {
+        "description": "<DIRECTION>",
+        "instruction": "Take <NUMBER> ⋅ <PLATFORM>"
+      },
+      "modeIdentifier": "pt_pub",
+      "modeInfo": {
+        "alt": "Bus",
+        "identifier": "pt_pub_bus",
+        "localIcon": "bus"
+      },
+      "notes": "<LINE_NAME>\n<DIRECTION>\n<PLATFORM>\n<DURATION> ⋅ <STOPS> ⋅\u00a0Opal (bus) ($2.10)",
+      "operatorID": "2438",
+      "serviceOperator": "State Transit Sydney",
+      "shapes": [
+        {
+          "encodedWaypoints": "vaymE}txy[??HKAQSaDWkGEaBCq@WeE??N?O?N??MEoAC_CE{E?_AI}FAg@McE??H?CoAk@yCY_BOi@q@wAQSg@g@IH????HIm@q@Yu@Ia@]_AiCeD_@_AIKMMmAwAMKKKs@g@IR????HSMIIEOEyBa@y@QiAOiBY{Cg@f@gFTeC}@GqCQG?AT",
+          "stops": [
+            {
+              "bearing": 86,
+              "code": "203770",
+              "lat": -33.88459,
+              "lng": 151.192,
+              "name": "Parramatta Rd opp Victoria Park",
+              "relativeDeparture": -540
+            },
+            {
+              "bearing": 89,
+              "code": "200721",
+              "lat": -33.88425,
+              "lng": 151.19602,
+              "name": "Broadway before Mountain St",
+              "relativeArrival": -480,
+              "relativeDeparture": -480
+            },
+            {
+              "bearing": 69,
+              "code": "200723",
+              "lat": -33.88411,
+              "lng": 151.201,
+              "name": "University of Technology Sydney, Broadway",
+              "relativeArrival": -420,
+              "relativeDeparture": -420
+            },
+            {
+              "bearing": 53,
+              "code": "200017",
+              "lat": -33.88313,
+              "lng": 151.20356,
+              "name": "Central Station, Railway Square, Stand J",
+              "relativeArrival": -360,
+              "relativeDeparture": -360,
+              "shortName": "Stand J"
+            },
+            {
+              "code": "2000434",
+              "lat": -33.88081,
+              "lng": 151.20656,
+              "name": "Pitt St before Hay St",
+              "relativeArrival": -240,
+              "relativeDeparture": -240
+            }
+          ],
+          "travelled": false
+        },
+        {
+          "encodedWaypoints": "dtwmE_a|y[??@U}AI_K[??@SAR@Su@GiG_@MA{FI??@UAT@UaG_@s@Gc@AgBKuBMuDWcBKuCQBT",
+          "stops": [
+            {
+              "bearing": 8,
+              "code": "200049",
+              "lat": -33.87731,
+              "lng": 151.20928,
+              "name": "Museum Station, Downing Centre, Stand E",
+              "relativeDeparture": 0,
+              "shortName": "Stand E"
+            },
+            {
+              "bearing": 8,
+              "code": "200055",
+              "lat": -33.87493,
+              "lng": 151.20958,
+              "name": "Museum Station, Elizabeth St, Stand D",
+              "relativeArrival": 60,
+              "relativeDeparture": 60,
+              "shortName": "Stand D"
+            },
+            {
+              "bearing": 7,
+              "code": "200057",
+              "lat": -33.872,
+              "lng": 151.20995,
+              "name": "Sheraton on the Park, Elizabeth St",
+              "relativeArrival": 180,
+              "relativeDeparture": 180
+            },
+            {
+              "code": "2000421",
+              "lat": -33.86703,
+              "lng": 151.21055,
+              "name": "Martin Place Station, Elizabeth St, Stand C",
+              "relativeArrival": 360,
+              "shortName": "Stand C"
+            }
+          ],
+          "travelled": true
+        }
+      ],
+      "stopCode": "200049",
+      "to": {
+        "address": "Martin Place Station, Elizabeth St, Stand C",
+        "class": "Location",
+        "lat": -33.86703,
+        "lng": 151.21055,
+        "timezone": "Australia/Sydney"
+      },
+      "travelDirection": 8,
+      "type": "scheduled",
+      "visibility": "in summary"
+    },
+    {
+      "action": "<TIME>: Take <NUMBER>",
+      "endStopCode": "2000421",
+      "from": {
+        "address": "Museum Station, Downing Centre, Stand E",
+        "class": "Location",
+        "lat": -33.87731,
+        "lng": 151.20928,
+        "timezone": "Australia/Sydney"
+      },
+      "hashCode": -1124513104,
+      "mini": {
+        "description": "<DIRECTION>",
+        "instruction": "Take <NUMBER> ⋅ <PLATFORM>"
+      },
+      "modeIdentifier": "pt_pub",
+      "modeInfo": {
+        "alt": "Bus",
+        "identifier": "pt_pub_bus",
+        "localIcon": "bus"
+      },
+      "notes": "<LINE_NAME>\n<DIRECTION>\n<PLATFORM>\n<DURATION> ⋅ <STOPS> ⋅\u00a0Opal (bus) ($2.10)",
+      "operatorID": "2438",
+      "serviceOperator": "State Transit Sydney",
+      "shapes": [
+        {
+          "encodedWaypoints": "loymEm_yy[??BOm@SeDkAuAc@qAc@y@[WOYm@WcE??N?O?N??MEoAC_CE{E?_AI}FAg@McE??H?CoAk@yCY_BOi@q@wAQSg@g@IH????HIm@q@Yu@Ia@]_AiCeD_@_AIKMMmAwAMKKKs@g@IR????HSMIIEOEyBa@y@QiAOiBY{Cg@f@gFTeC}@GqCQG?AT",
+          "stops": [
+            {
+              "bearing": 43,
+              "code": "205039",
+              "lat": -33.88678,
+              "lng": 151.19367,
+              "name": "City Rd opp Myrtle St",
+              "relativeDeparture": -540
+            },
+            {
+              "bearing": 89,
+              "code": "200721",
+              "lat": -33.88425,
+              "lng": 151.19602,
+              "name": "Broadway before Mountain St",
+              "relativeArrival": -480,
+              "relativeDeparture": -480
+            },
+            {
+              "bearing": 69,
+              "code": "200723",
+              "lat": -33.88411,
+              "lng": 151.201,
+              "name": "University of Technology Sydney, Broadway",
+              "relativeArrival": -420,
+              "relativeDeparture": -420
+            },
+            {
+              "bearing": 53,
+              "code": "200017",
+              "lat": -33.88313,
+              "lng": 151.20356,
+              "name": "Central Station, Railway Square, Stand J",
+              "relativeArrival": -360,
+              "relativeDeparture": -360,
+              "shortName": "Stand J"
+            },
+            {
+              "code": "2000434",
+              "lat": -33.88081,
+              "lng": 151.20656,
+              "name": "Pitt St before Hay St",
+              "relativeArrival": -240,
+              "relativeDeparture": -240
+            }
+          ],
+          "travelled": false
+        },
+        {
+          "encodedWaypoints": "dtwmE_a|y[??@U}AI_K[??@SAR@Su@GiG_@MA{FI??@UAT@UaG_@s@Gc@AgBKuBMuDWcBKuCQBT",
+          "stops": [
+            {
+              "bearing": 8,
+              "code": "200049",
+              "lat": -33.87731,
+              "lng": 151.20928,
+              "name": "Museum Station, Downing Centre, Stand E",
+              "relativeDeparture": 0,
+              "shortName": "Stand E"
+            },
+            {
+              "bearing": 8,
+              "code": "200055",
+              "lat": -33.87493,
+              "lng": 151.20958,
+              "name": "Museum Station, Elizabeth St, Stand D",
+              "relativeArrival": 60,
+              "relativeDeparture": 60,
+              "shortName": "Stand D"
+            },
+            {
+              "bearing": 7,
+              "code": "200057",
+              "lat": -33.872,
+              "lng": 151.20995,
+              "name": "Sheraton on the Park, Elizabeth St",
+              "relativeArrival": 180,
+              "relativeDeparture": 180
+            },
+            {
+              "code": "2000421",
+              "lat": -33.86703,
+              "lng": 151.21055,
+              "name": "Martin Place Station, Elizabeth St, Stand C",
+              "relativeArrival": 360,
+              "shortName": "Stand C"
+            }
+          ],
+          "travelled": true
+        }
+      ],
+      "stopCode": "200049",
+      "to": {
+        "address": "Martin Place Station, Elizabeth St, Stand C",
+        "class": "Location",
+        "lat": -33.86703,
+        "lng": 151.21055,
+        "timezone": "Australia/Sydney"
+      },
+      "travelDirection": 8,
+      "type": "scheduled",
+      "visibility": "in summary"
+    },
+    {
+      "action": "<TIME>: Take <NUMBER>",
+      "endStopCode": "2000421",
+      "from": {
+        "address": "Museum Station, Downing Centre, Stand E",
+        "class": "Location",
+        "lat": -33.87731,
+        "lng": 151.20928,
+        "timezone": "Australia/Sydney"
+      },
+      "hashCode": 1369397310,
+      "mini": {
+        "description": "<DIRECTION>",
+        "instruction": "Take <NUMBER> ⋅ <PLATFORM>"
+      },
+      "modeIdentifier": "pt_pub",
+      "modeInfo": {
+        "alt": "Bus",
+        "identifier": "pt_pub_bus",
+        "localIcon": "bus"
+      },
+      "notes": "<LINE_NAME>\n<DIRECTION>\n<PLATFORM>\n<DURATION> ⋅ <STOPS> ⋅\u00a0Opal (bus) ($2.10)",
+      "operatorID": "2441",
+      "serviceOperator": "State Transit Sydney",
+      "shapes": [
+        {
+          "encodedWaypoints": "jxzmEuj~y[AM@LAMsAN_D\\aBT}B^uEdAuCr@_Bf@aBd@o@TqAb@s@Xm@RsAf@ALo@tA]bAQ`@c@lAe@nAOb@FF????GIIRKZ]~@{@~B`@~AMrAIjAIv@NA????M?C\\MtAEl@Gh@MvAKrAKdAO|AEP]jAu@fCu@hC_@jAJD????KEWx@Od@i@bBiBQSGa@@cEc@sAOcAKCR@A??????@Qi@GYEWASAmBm@_AKw@I{CS{@EqCSI?AV??",
+          "stops": [
+            {
+              "bearing": 332,
+              "code": "202116",
+              "lat": -33.89334,
+              "lng": 151.22108,
+              "name": "Sydney Girls High School, Anzac Pde",
+              "relativeDeparture": -480
+            },
+            {
+              "bearing": 281,
+              "code": "201037",
+              "lat": -33.88573,
+              "lng": 151.21691,
+              "name": "Fitzroy St at Marshall St",
+              "relativeArrival": -300,
+              "relativeDeparture": -300
+            },
+            {
+              "bearing": 285,
+              "code": "201038",
+              "lat": -33.88521,
+              "lng": 151.2142,
+              "name": "Foveaux St at Crown St",
+              "relativeArrival": -240,
+              "relativeDeparture": -240
+            },
+            {
+              "bearing": 349,
+              "code": "201039",
+              "lat": -33.8839,
+              "lng": 151.20926,
+              "name": "Central Station, Foveaux St, Stand F",
+              "relativeArrival": -180,
+              "relativeDeparture": -180,
+              "shortName": "Stand F"
+            },
+            {
+              "code": "200047",
+              "lat": -33.88087,
+              "lng": 151.20865,
+              "name": "Elizabeth St at Hay St",
+              "relativeArrival": -120,
+              "relativeDeparture": -120
+            }
+          ],
+          "travelled": false
+        },
+        {
+          "encodedWaypoints": "dtwmE_a|y[????@U}AI_K[??????@SAR@Su@GiG_@MA{FK?@????@UAT@UaG_@s@Gc@AgBKuBMuDWcBKuCQBT??",
+          "stops": [
+            {
+              "bearing": 8,
+              "code": "200049",
+              "lat": -33.87731,
+              "lng": 151.20928,
+              "name": "Museum Station, Downing Centre, Stand E",
+              "relativeDeparture": 0,
+              "shortName": "Stand E"
+            },
+            {
+              "bearing": 8,
+              "code": "200055",
+              "lat": -33.87493,
+              "lng": 151.20958,
+              "name": "Museum Station, Elizabeth St, Stand D",
+              "relativeArrival": 60,
+              "relativeDeparture": 60,
+              "shortName": "Stand D"
+            },
+            {
+              "bearing": 7,
+              "code": "200057",
+              "lat": -33.872,
+              "lng": 151.20995,
+              "name": "Sheraton on the Park, Elizabeth St",
+              "relativeArrival": 120,
+              "relativeDeparture": 120
+            },
+            {
+              "code": "2000421",
+              "lat": -33.86703,
+              "lng": 151.21055,
+              "name": "Martin Place Station, Elizabeth St, Stand C",
+              "relativeArrival": 240,
+              "relativeDeparture": 240,
+              "shortName": "Stand C"
+            }
+          ],
+          "travelled": true
+        },
+        {
+          "encodedWaypoints": "~sumE}h|y[????CU}@GgAESCY_@U_@OKgB{@KR????HS{@_@]n@e@n@_@f@g@r@EJSb@@LLvC{BLJR",
+          "stops": [
+            {
+              "bearing": 310,
+              "code": "2000415",
+              "lat": -33.86534,
+              "lng": 151.21134,
+              "name": "Chifley Square, Phillip St",
+              "relativeDeparture": 300
+            },
+            {
+              "code": "2000150",
+              "lat": -33.86378,
+              "lng": 151.20942,
+              "name": "Gresham St at Bridge St",
+              "relativeArrival": 420
+            }
+          ],
+          "travelled": false
+        }
+      ],
+      "stopCode": "200049",
+      "to": {
+        "address": "Martin Place Station, Elizabeth St, Stand C",
+        "class": "Location",
+        "lat": -33.86703,
+        "lng": 151.21055,
+        "timezone": "Australia/Sydney"
+      },
+      "travelDirection": 8,
+      "type": "scheduled",
+      "visibility": "in summary"
+    },
+    {
+      "action": "<TIME>: Take <NUMBER>",
+      "endStopCode": "2000421",
+      "from": {
+        "address": "Museum Station, Downing Centre, Stand E",
+        "class": "Location",
+        "lat": -33.87731,
+        "lng": 151.20928,
+        "timezone": "Australia/Sydney"
+      },
+      "hashCode": 707691056,
+      "mini": {
+        "description": "<DIRECTION>",
+        "instruction": "Take <NUMBER> ⋅ <PLATFORM>"
+      },
+      "modeIdentifier": "pt_pub",
+      "modeInfo": {
+        "alt": "Bus",
+        "identifier": "pt_pub_bus",
+        "localIcon": "bus"
+      },
+      "notes": "<LINE_NAME>\n<DIRECTION>\n<PLATFORM>\n<DURATION> ⋅ <STOPS> ⋅\u00a0Opal (bus) ($2.10)",
+      "operatorID": "2438",
+      "serviceOperator": "State Transit Sydney",
+      "shapes": [
+        {
+          "encodedWaypoints": "loymEm_yy[??BOm@SeDkAuAc@qAc@y@[WOYm@WcE??N?O?N??MEoAC_CE{E?_AI}FAg@McE??H?CoAk@yCY_BOi@q@wAQSg@g@IH????HIm@q@Yu@Ia@]_AiCeD_@_AIKMMmAwAMKKKs@g@IR????HSMIIEOEyBa@y@QiAOiBY{Cg@f@gFTeC}@GqCQG?AT",
+          "stops": [
+            {
+              "bearing": 43,
+              "code": "205039",
+              "lat": -33.88678,
+              "lng": 151.19367,
+              "name": "City Rd opp Myrtle St",
+              "relativeDeparture": -835
+            },
+            {
+              "bearing": 89,
+              "code": "200721",
+              "lat": -33.88425,
+              "lng": 151.19602,
+              "name": "Broadway before Mountain St",
+              "relativeArrival": -775,
+              "relativeDeparture": -775
+            },
+            {
+              "bearing": 69,
+              "code": "200723",
+              "lat": -33.88411,
+              "lng": 151.201,
+              "name": "University of Technology Sydney, Broadway",
+              "relativeArrival": -655,
+              "relativeDeparture": -655
+            },
+            {
+              "bearing": 53,
+              "code": "200017",
+              "lat": -33.88313,
+              "lng": 151.20356,
+              "name": "Central Station, Railway Square, Stand J",
+              "relativeArrival": -595,
+              "relativeDeparture": -595,
+              "shortName": "Stand J"
+            },
+            {
+              "code": "2000434",
+              "lat": -33.88081,
+              "lng": 151.20656,
+              "name": "Pitt St before Hay St",
+              "relativeArrival": -475,
+              "relativeDeparture": -475
+            }
+          ],
+          "travelled": false
+        },
+        {
+          "encodedWaypoints": "dtwmE_a|y[??@U}AI_K[??@SAR@Su@GiG_@MA{FI??@UAT@UaG_@s@Gc@AgBKuBMuDWcBKuCQBT",
+          "stops": [
+            {
+              "bearing": 8,
+              "code": "200049",
+              "lat": -33.87731,
+              "lng": 151.20928,
+              "name": "Museum Station, Downing Centre, Stand E",
+              "relativeDeparture": -235,
+              "shortName": "Stand E"
+            },
+            {
+              "bearing": 8,
+              "code": "200055",
+              "lat": -33.87493,
+              "lng": 151.20958,
+              "name": "Museum Station, Elizabeth St, Stand D",
+              "relativeArrival": -175,
+              "relativeDeparture": -175,
+              "shortName": "Stand D"
+            },
+            {
+              "bearing": 7,
+              "code": "200057",
+              "lat": -33.872,
+              "lng": 151.20995,
+              "name": "Sheraton on the Park, Elizabeth St",
+              "relativeArrival": -55,
+              "relativeDeparture": -55
+            },
+            {
+              "code": "2000421",
+              "lat": -33.86703,
+              "lng": 151.21055,
+              "name": "Martin Place Station, Elizabeth St, Stand C",
+              "relativeArrival": 125,
+              "shortName": "Stand C"
+            }
+          ],
+          "travelled": true
+        }
+      ],
+      "stopCode": "200049",
+      "to": {
+        "address": "Martin Place Station, Elizabeth St, Stand C",
+        "class": "Location",
+        "lat": -33.86703,
+        "lng": 151.21055,
+        "timezone": "Australia/Sydney"
+      },
+      "travelDirection": 8,
+      "type": "scheduled",
+      "visibility": "in summary"
+    },
+    {
+      "action": "<TIME>: Take <NUMBER>",
+      "endStopCode": "2000421",
+      "from": {
+        "address": "Museum Station, Downing Centre, Stand E",
+        "class": "Location",
+        "lat": -33.87731,
+        "lng": 151.20928,
+        "timezone": "Australia/Sydney"
+      },
+      "hashCode": 370085319,
+      "mini": {
+        "description": "<DIRECTION>",
+        "instruction": "Take <NUMBER> ⋅ <PLATFORM>"
+      },
+      "modeIdentifier": "pt_pub",
+      "modeInfo": {
+        "alt": "Bus",
+        "identifier": "pt_pub_bus",
+        "localIcon": "bus"
+      },
+      "notes": "<LINE_NAME>\n<DIRECTION>\n<PLATFORM>\n<DURATION> ⋅ <STOPS> ⋅\u00a0Opal (bus) ($2.10)",
+      "operatorID": "2438",
+      "serviceOperator": "State Transit Sydney",
+      "shapes": [
+        {
+          "encodedWaypoints": "vaymE}txy[??HKAQSaDWkGEaBCq@WeE??N?O?N??MEoAC_CE{E?_AI}FAg@McE??H?CoAk@yCY_BOi@q@wAQSg@g@IH????HIm@q@Yu@Ia@]_AiCeD_@_AIKMMmAwAMKKKy@k@GEKEMEwBa@Hm@D_@ZuCOE????NBJu@P}AUAkBm@cAKw@IyCQ}@GoCQG?CT",
+          "stops": [
+            {
+              "bearing": 86,
+              "code": "203770",
+              "lat": -33.88459,
+              "lng": 151.192,
+              "name": "Parramatta Rd opp Victoria Park",
+              "relativeDeparture": -710
+            },
+            {
+              "bearing": 89,
+              "code": "200721",
+              "lat": -33.88425,
+              "lng": 151.19602,
+              "name": "Broadway before Mountain St",
+              "relativeArrival": -650,
+              "relativeDeparture": -650
+            },
+            {
+              "bearing": 69,
+              "code": "200723",
+              "lat": -33.88411,
+              "lng": 151.201,
+              "name": "University of Technology Sydney, Broadway",
+              "relativeArrival": -590,
+              "relativeDeparture": -590
+            },
+            {
+              "bearing": 58,
+              "code": "200017",
+              "lat": -33.88313,
+              "lng": 151.20356,
+              "name": "Central Station, Railway Square, Stand J",
+              "relativeArrival": -530,
+              "relativeDeparture": -530,
+              "shortName": "Stand J"
+            },
+            {
+              "code": "2000429",
+              "lat": -33.88021,
+              "lng": 151.20811,
+              "name": "Hay St opp Belmore Park",
+              "relativeArrival": -410,
+              "relativeDeparture": -410
+            }
+          ],
+          "travelled": false
+        },
+        {
+          "encodedWaypoints": "dtwmE_a|y[??@U}AI_K[??@SAR@Su@GiG_@MA{FI??@UAT@UaG_@s@Gc@AgBKuBMuDWcBKuCQBT",
+          "stops": [
+            {
+              "bearing": 8,
+              "code": "200049",
+              "lat": -33.87731,
+              "lng": 151.20928,
+              "name": "Museum Station, Downing Centre, Stand E",
+              "relativeDeparture": -230,
+              "shortName": "Stand E"
+            },
+            {
+              "bearing": 8,
+              "code": "200055",
+              "lat": -33.87493,
+              "lng": 151.20958,
+              "name": "Museum Station, Elizabeth St, Stand D",
+              "relativeArrival": -110,
+              "relativeDeparture": -110,
+              "shortName": "Stand D"
+            },
+            {
+              "bearing": 7,
+              "code": "200057",
+              "lat": -33.872,
+              "lng": 151.20995,
+              "name": "Sheraton on the Park, Elizabeth St",
+              "relativeArrival": 10,
+              "relativeDeparture": 10
+            },
+            {
+              "code": "2000421",
+              "lat": -33.86703,
+              "lng": 151.21055,
+              "name": "Martin Place Station, Elizabeth St, Stand C",
+              "relativeArrival": 190,
+              "shortName": "Stand C"
+            }
+          ],
+          "travelled": true
+        }
+      ],
+      "stopCode": "200049",
+      "to": {
+        "address": "Martin Place Station, Elizabeth St, Stand C",
+        "class": "Location",
+        "lat": -33.86703,
+        "lng": 151.21055,
+        "timezone": "Australia/Sydney"
+      },
+      "travelDirection": 8,
+      "type": "scheduled",
+      "visibility": "in summary"
+    },
+    {
+      "action": "<TIME>: Take <NUMBER>",
+      "endStopCode": "2000421",
+      "from": {
+        "address": "Museum Station, Downing Centre, Stand E",
+        "class": "Location",
+        "lat": -33.87731,
+        "lng": 151.20928,
+        "timezone": "Australia/Sydney"
+      },
+      "hashCode": 1278370511,
+      "mini": {
+        "description": "<DIRECTION>",
+        "instruction": "Take <NUMBER> ⋅ <PLATFORM>"
+      },
+      "modeIdentifier": "pt_pub",
+      "modeInfo": {
+        "alt": "Bus",
+        "identifier": "pt_pub_bus",
+        "localIcon": "bus"
+      },
+      "notes": "<LINE_NAME>\n<DIRECTION>\n<PLATFORM>\n<DURATION> ⋅ <STOPS> ⋅\u00a0Opal (bus) ($2.10)",
+      "operatorID": "2438",
+      "serviceOperator": "State Transit Sydney",
+      "shapes": [
+        {
+          "encodedWaypoints": "vaymE}txy[??HKAQSaDWkGEaBCq@WeE??N?O?N??MEoAC_CE{E?_AI}FAg@McE??H?CoAk@yCY_BOi@q@wAQSg@g@IH????HIm@q@Yu@Ia@]_AiCeD_@_AIKMMmAwAMKKKy@k@GEKEMEwBa@Hm@D_@ZuCOE????NBJu@P}AUAkBm@cAKw@IyCQ}@GoCQG?CT",
+          "stops": [
+            {
+              "bearing": 86,
+              "code": "203770",
+              "lat": -33.88459,
+              "lng": 151.192,
+              "name": "Parramatta Rd opp Victoria Park",
+              "relativeDeparture": -540
+            },
+            {
+              "bearing": 89,
+              "code": "200721",
+              "lat": -33.88425,
+              "lng": 151.19602,
+              "name": "Broadway before Mountain St",
+              "relativeArrival": -420,
+              "relativeDeparture": -420
+            },
+            {
+              "bearing": 69,
+              "code": "200723",
+              "lat": -33.88411,
+              "lng": 151.201,
+              "name": "University of Technology Sydney, Broadway",
+              "relativeArrival": -360,
+              "relativeDeparture": -360
+            },
+            {
+              "bearing": 58,
+              "code": "200017",
+              "lat": -33.88313,
+              "lng": 151.20356,
+              "name": "Central Station, Railway Square, Stand J",
+              "relativeArrival": -300,
+              "relativeDeparture": -300,
+              "shortName": "Stand J"
+            },
+            {
+              "code": "2000429",
+              "lat": -33.88021,
+              "lng": 151.20811,
+              "name": "Hay St opp Belmore Park",
+              "relativeArrival": -120,
+              "relativeDeparture": -120
+            }
+          ],
+          "travelled": false
+        },
+        {
+          "encodedWaypoints": "dtwmE_a|y[??@U}AI_K[??@SAR@Su@GiG_@MA{FI??@UAT@UaG_@s@Gc@AgBKuBMuDWcBKuCQBT",
+          "stops": [
+            {
+              "bearing": 8,
+              "code": "200049",
+              "lat": -33.87731,
+              "lng": 151.20928,
+              "name": "Museum Station, Downing Centre, Stand E",
+              "relativeDeparture": 0,
+              "shortName": "Stand E"
+            },
+            {
+              "bearing": 8,
+              "code": "200055",
+              "lat": -33.87493,
+              "lng": 151.20958,
+              "name": "Museum Station, Elizabeth St, Stand D",
+              "relativeArrival": 60,
+              "relativeDeparture": 60,
+              "shortName": "Stand D"
+            },
+            {
+              "bearing": 7,
+              "code": "200057",
+              "lat": -33.872,
+              "lng": 151.20995,
+              "name": "Sheraton on the Park, Elizabeth St",
+              "relativeArrival": 180,
+              "relativeDeparture": 180
+            },
+            {
+              "code": "2000421",
+              "lat": -33.86703,
+              "lng": 151.21055,
+              "name": "Martin Place Station, Elizabeth St, Stand C",
+              "relativeArrival": 300,
+              "shortName": "Stand C"
+            }
+          ],
+          "travelled": true
+        }
+      ],
+      "stopCode": "200049",
+      "to": {
+        "address": "Martin Place Station, Elizabeth St, Stand C",
+        "class": "Location",
+        "lat": -33.86703,
+        "lng": 151.21055,
+        "timezone": "Australia/Sydney"
+      },
+      "travelDirection": 8,
+      "type": "scheduled",
+      "visibility": "in summary"
+    },
+    {
+      "action": "<TIME>: Take <NUMBER>",
+      "endStopCode": "2000421",
+      "from": {
+        "address": "Museum Station, Downing Centre, Stand E",
+        "class": "Location",
+        "lat": -33.87731,
+        "lng": 151.20928,
+        "timezone": "Australia/Sydney"
+      },
+      "hashCode": 1252631887,
+      "mini": {
+        "description": "<DIRECTION>",
+        "instruction": "Take <NUMBER> ⋅ <PLATFORM>"
+      },
+      "modeIdentifier": "pt_pub",
+      "modeInfo": {
+        "alt": "Bus",
+        "identifier": "pt_pub_bus",
+        "localIcon": "bus"
+      },
+      "notes": "<LINE_NAME>\n<DIRECTION>\n<PLATFORM>\n<DURATION> ⋅ <STOPS> ⋅\u00a0Opal (bus) ($2.10)",
+      "operatorID": "2441",
+      "serviceOperator": "State Transit Sydney",
+      "shapes": [
+        {
+          "encodedWaypoints": "|czmE{k{y[??FQGPFQI?eAOKAaEg@ML????????NOQCuEm@sC[e@KcAF@A????a@WaAMbBd@a@WaAMsAU}@QQEMIMEyDgC?A????BE}AgAgBUSCa@?eEc@sAMcAMAP????????@Qi@GYEWASAmBm@_AKw@I{CS{@EqCSI?AV??",
+          "stops": [
+            {
+              "bearing": 12,
+              "code": "201616",
+              "lat": -33.89007,
+              "lng": 151.20591,
+              "name": "Chalmers St before Cleveland St",
+              "relativeDeparture": -360
+            },
+            {
+              "bearing": 13,
+              "code": "201015",
+              "lat": -33.8886,
+              "lng": 151.20621,
+              "name": "Chalmers St opp Belvoir St",
+              "relativeArrival": -360,
+              "relativeDeparture": -360
+            },
+            {
+              "bearing": 27,
+              "code": "201016",
+              "lat": -33.88626,
+              "lng": 151.20671,
+              "name": "Central Station, Chalmers St, Stand G",
+              "relativeArrival": -300,
+              "relativeDeparture": -300,
+              "shortName": "Stand G"
+            },
+            {
+              "bearing": 15,
+              "code": "2000193",
+              "lat": -33.88388,
+              "lng": 151.2079,
+              "name": "Central Station, Chalmers St, Stand H",
+              "relativeArrival": -240,
+              "relativeDeparture": -240,
+              "shortName": "Stand H"
+            },
+            {
+              "code": "200047",
+              "lat": -33.88087,
+              "lng": 151.20865,
+              "name": "Elizabeth St at Hay St",
+              "relativeArrival": -120,
+              "relativeDeparture": -120
+            }
+          ],
+          "travelled": false
+        },
+        {
+          "encodedWaypoints": "dtwmE_a|y[????@U}AI_K[??????@SAR@Su@GiG_@MA{FK?@????@UAT@UaG_@s@Gc@AgBKuBMuDWcBKuCQBT??",
+          "stops": [
+            {
+              "bearing": 8,
+              "code": "200049",
+              "lat": -33.87731,
+              "lng": 151.20928,
+              "name": "Museum Station, Downing Centre, Stand E",
+              "relativeDeparture": 0,
+              "shortName": "Stand E"
+            },
+            {
+              "bearing": 8,
+              "code": "200055",
+              "lat": -33.87493,
+              "lng": 151.20958,
+              "name": "Museum Station, Elizabeth St, Stand D",
+              "relativeArrival": 60,
+              "relativeDeparture": 60,
+              "shortName": "Stand D"
+            },
+            {
+              "bearing": 7,
+              "code": "200057",
+              "lat": -33.872,
+              "lng": 151.20995,
+              "name": "Sheraton on the Park, Elizabeth St",
+              "relativeArrival": 120,
+              "relativeDeparture": 120
+            },
+            {
+              "code": "2000421",
+              "lat": -33.86703,
+              "lng": 151.21055,
+              "name": "Martin Place Station, Elizabeth St, Stand C",
+              "relativeArrival": 300,
+              "relativeDeparture": 300,
+              "shortName": "Stand C"
+            }
+          ],
+          "travelled": true
+        },
+        {
+          "encodedWaypoints": "~sumE}h|y[????CU}@GgAESCY_@U_@OKgB{@KR????HS{@_@]n@e@n@_@f@g@r@EJSb@@LLvC{BLJR????KQW@FlBBj@DhBLEA@??????IDBp@?`@Gf@IN[RIJGLCf@?dCCvBBjA@NCLEJIFIFIHIBSFQHM?_@E[ASGq@Us@SkA[o@GmB]cD}@}@]iB_AsAk@iPoIgh@cXu@Sw@Ss@Mm@E{BBcALaATcB^kFjAcBp@}HvB}Ah@{@p@u@|@kAvAsCnDOREZ?VBVFT@RA\\KpAO~D??????GAF@GAIl@iBSeDQ??",
+          "stops": [
+            {
+              "bearing": 310,
+              "code": "2000415",
+              "lat": -33.86534,
+              "lng": 151.21134,
+              "name": "Chifley Square, Phillip St",
+              "relativeDeparture": 360
+            },
+            {
+              "bearing": 272,
+              "code": "2000150",
+              "lat": -33.86378,
+              "lng": 151.20942,
+              "name": "Gresham St at Bridge St",
+              "relativeArrival": 420,
+              "relativeDeparture": 420
+            },
+            {
+              "bearing": 357,
+              "code": "2000417",
+              "lat": -33.86376,
+              "lng": 151.20822,
+              "name": "Burns Philp Building, Bridge St",
+              "relativeArrival": 420,
+              "relativeDeparture": 420
+            },
+            {
+              "bearing": 359,
+              "code": "206011",
+              "lat": -33.84091,
+              "lng": 151.20669,
+              "name": "North Sydney Station, Blue St, Stand A",
+              "relativeArrival": 960,
+              "relativeDeparture": 960,
+              "shortName": "Stand A"
+            },
+            {
+              "code": "206013",
+              "lat": -33.83945,
+              "lng": 151.20665,
+              "name": "Miller St before Pacific Hwy",
+              "relativeArrival": 960,
+              "relativeDeparture": 960
+            }
+          ],
+          "travelled": false
+        }
+      ],
+      "stopCode": "200049",
+      "to": {
+        "address": "Martin Place Station, Elizabeth St, Stand C",
+        "class": "Location",
+        "lat": -33.86703,
+        "lng": 151.21055,
+        "timezone": "Australia/Sydney"
+      },
+      "travelDirection": 8,
+      "type": "scheduled",
+      "visibility": "in summary"
+    },
+    {
+      "action": "<TIME>: Take <NUMBER>",
+      "endStopCode": "2000421",
+      "from": {
+        "address": "Museum Station, Downing Centre, Stand E",
+        "class": "Location",
+        "lat": -33.87731,
+        "lng": 151.20928,
+        "timezone": "Australia/Sydney"
+      },
+      "hashCode": 1837322862,
+      "mini": {
+        "description": "<DIRECTION>",
+        "instruction": "Take <NUMBER> ⋅ <PLATFORM>"
+      },
+      "modeIdentifier": "pt_pub",
+      "modeInfo": {
+        "alt": "Bus",
+        "identifier": "pt_pub_bus",
+        "localIcon": "bus"
+      },
+      "notes": "<LINE_NAME>\n<DIRECTION>\n<PLATFORM>\n<DURATION> ⋅ <STOPS> ⋅\u00a0Opal (bus) ($2.10)",
+      "operatorID": "2438",
+      "serviceOperator": "State Transit Sydney",
+      "shapes": [
+        {
+          "encodedWaypoints": "~_ymE}zxy[??LPLONAYkGCaBCq@WeE??N?O?N??MEoAC_CE{E?_AI}FAg@McE??H?CoAk@yCY_BOi@q@wAQSg@g@IH????HIm@q@Yu@Ia@]_AiCeD_@_AIKMMmAwAMKKKy@k@GEKEMEwBa@Hm@D_@ZuCOE????NBJu@P}AUAkBm@cAKw@IyCQ}@GoCQG?CT",
+          "stops": [
+            {
+              "bearing": 89,
+              "code": "203728",
+              "lat": -33.88432,
+              "lng": 151.19295,
+              "name": "Glebe Point Rd at Broadway",
+              "relativeDeparture": -480
+            },
+            {
+              "bearing": 89,
+              "code": "200721",
+              "lat": -33.88425,
+              "lng": 151.19602,
+              "name": "Broadway before Mountain St",
+              "relativeArrival": -420,
+              "relativeDeparture": -420
+            },
+            {
+              "bearing": 69,
+              "code": "200723",
+              "lat": -33.88411,
+              "lng": 151.201,
+              "name": "University of Technology Sydney, Broadway",
+              "relativeArrival": -360,
+              "relativeDeparture": -360
+            },
+            {
+              "bearing": 58,
+              "code": "200017",
+              "lat": -33.88313,
+              "lng": 151.20356,
+              "name": "Central Station, Railway Square, Stand J",
+              "relativeArrival": -300,
+              "relativeDeparture": -300,
+              "shortName": "Stand J"
+            },
+            {
+              "code": "2000429",
+              "lat": -33.88021,
+              "lng": 151.20811,
+              "name": "Hay St opp Belmore Park",
+              "relativeArrival": -180,
+              "relativeDeparture": -180
+            }
+          ],
+          "travelled": false
+        },
+        {
+          "encodedWaypoints": "dtwmE_a|y[??@U}AI_K[??@SAR@Su@GiG_@MA{FI??@UAT@UaG_@s@Gc@AgBKuBMuDWcBKuCQBT",
+          "stops": [
+            {
+              "bearing": 8,
+              "code": "200049",
+              "lat": -33.87731,
+              "lng": 151.20928,
+              "name": "Museum Station, Downing Centre, Stand E",
+              "relativeDeparture": 0,
+              "shortName": "Stand E"
+            },
+            {
+              "bearing": 8,
+              "code": "200055",
+              "lat": -33.87493,
+              "lng": 151.20958,
+              "name": "Museum Station, Elizabeth St, Stand D",
+              "relativeArrival": 120,
+              "relativeDeparture": 120,
+              "shortName": "Stand D"
+            },
+            {
+              "bearing": 7,
+              "code": "200057",
+              "lat": -33.872,
+              "lng": 151.20995,
+              "name": "Sheraton on the Park, Elizabeth St",
+              "relativeArrival": 240,
+              "relativeDeparture": 240
+            },
+            {
+              "code": "2000421",
+              "lat": -33.86703,
+              "lng": 151.21055,
+              "name": "Martin Place Station, Elizabeth St, Stand C",
+              "relativeArrival": 420,
+              "shortName": "Stand C"
+            }
+          ],
+          "travelled": true
+        }
+      ],
+      "stopCode": "200049",
+      "to": {
+        "address": "Martin Place Station, Elizabeth St, Stand C",
+        "class": "Location",
+        "lat": -33.86703,
+        "lng": 151.21055,
+        "timezone": "Australia/Sydney"
+      },
+      "travelDirection": 8,
+      "type": "scheduled",
+      "visibility": "in summary"
+    },
+    {
+      "action": "<TIME>: Walk",
+      "from": {
+        "address": "Hunt Street & Foster Street",
+        "class": "Location",
+        "lat": -33.87945,
+        "lng": 151.21054,
+        "timezone": "Australia/Sydney"
+      },
+      "hashCode": -1285600201,
+      "metres": 397,
+      "mini": {
+        "description": "Oxford St at Brisbane St",
+        "instruction": "Walk",
+        "mainValue": "400m"
+      },
+      "modeIdentifier": "wa_wal",
+      "modeInfo": {
+        "alt": "Walk",
+        "identifier": "wa_wal",
+        "localIcon": "walk"
+      },
+      "notes": "<DURATION> ⋅ 400m",
+      "streets": [
+        {
+          "encodedWaypoints": "raxmE{h|y[}BP??o@{@Fi@??JcBF_A????mAu@q@i@g@]MM??iAgAVW"
+        }
+      ],
+      "to": {
+        "address": "Oxford St at Brisbane St",
+        "class": "Location",
+        "lat": -33.87757,
+        "lng": 151.21297,
+        "timezone": "Australia/Sydney"
+      },
+      "travelDirection": 52,
+      "type": "unscheduled",
+      "visibility": "in summary"
+    },
+    {
+      "action": "<TIME>: Take <NUMBER>",
+      "endStopCode": "2000421",
+      "from": {
+        "address": "Oxford St at Brisbane St",
+        "class": "Location",
+        "lat": -33.87757,
+        "lng": 151.21297,
+        "timezone": "Australia/Sydney"
+      },
+      "hashCode": 1737232016,
+      "mini": {
+        "description": "<DIRECTION>",
+        "instruction": "Take <NUMBER> ⋅ <PLATFORM>"
+      },
+      "modeIdentifier": "pt_pub",
+      "modeInfo": {
+        "alt": "Bus",
+        "identifier": "pt_pub_bus",
+        "localIcon": "bus"
+      },
+      "notes": "<LINE_NAME>\n<DIRECTION>\n<PLATFORM>\n<DURATION> ⋅ <STOPS> ⋅\u00a0Opal (bus) ($2.10)",
+      "operatorID": "2441",
+      "serviceOperator": "State Transit Sydney",
+      "shapes": [
+        {
+          "encodedWaypoints": "tg{mEkm~y[AU@TAUU@}ANsAT_HbA??AM@LAMsAN_D\\aBT}B^uEdAuCr@_Bf@aBd@o@TqAb@s@Xm@RsAf@KDiGjCWJgDdB???M?L?M_A\\yC^qBPyC^sALuCZm@|@gAjB??????EGsCrDoB|C@?????KMJLKMm@x@{@dASV}ArBSXJJA?",
+          "stops": [
+            {
+              "bearing": 351,
+              "code": "202112",
+              "lat": -33.89578,
+              "lng": 151.22151,
+              "name": "Anzac Pde before Cleveland St",
+              "relativeDeparture": -420
+            },
+            {
+              "bearing": 340,
+              "code": "202116",
+              "lat": -33.89334,
+              "lng": 151.22108,
+              "name": "Sydney Girls High School, Anzac Pde",
+              "relativeArrival": -360,
+              "relativeDeparture": -360
+            },
+            {
+              "bearing": 340,
+              "code": "201011",
+              "lat": -33.88428,
+              "lng": 151.21763,
+              "name": "Flinders St before Albion St",
+              "relativeArrival": -180,
+              "relativeDeparture": -180
+            },
+            {
+              "bearing": 309,
+              "code": "201051",
+              "lat": -33.88009,
+              "lng": 151.21608,
+              "name": "Oxford St opp Palmer St",
+              "relativeArrival": -120,
+              "relativeDeparture": -120
+            },
+            {
+              "code": "201053",
+              "lat": -33.87877,
+              "lng": 151.21443,
+              "name": "Oxford St at Riley St",
+              "relativeArrival": -60,
+              "relativeDeparture": -60
+            }
+          ],
+          "travelled": false
+        },
+        {
+          "encodedWaypoints": "xuwmE_x|y[????IKW\\oAfBGh@CP?v@?hC?^A^AfB?jBMr@_K[??????@SAR@Su@GiG_@MA{N_Aq@Gc@AiBMsBKwDWeBMuCMDR??",
+          "stops": [
+            {
+              "bearing": 308,
+              "code": "201056",
+              "lat": -33.87757,
+              "lng": 151.21297,
+              "name": "Oxford St at Brisbane St",
+              "relativeDeparture": 0
+            },
+            {
+              "bearing": 7,
+              "code": "200055",
+              "lat": -33.87493,
+              "lng": 151.20958,
+              "name": "Museum Station, Elizabeth St, Stand D",
+              "relativeArrival": 120,
+              "relativeDeparture": 120,
+              "shortName": "Stand D"
+            },
+            {
+              "code": "2000421",
+              "lat": -33.86703,
+              "lng": 151.21055,
+              "name": "Martin Place Station, Elizabeth St, Stand C",
+              "relativeArrival": 300,
+              "relativeDeparture": 300,
+              "shortName": "Stand C"
+            }
+          ],
+          "travelled": true
+        },
+        {
+          "encodedWaypoints": "~sumE}h|y[????CU}@GgAESCY_@U_@OKeD{AgAMmCG??????@IAH@IgAMu@GLbDMCw@EiCMsAKAL",
+          "stops": [
+            {
+              "bearing": 345,
+              "code": "200059",
+              "lat": -33.86403,
+              "lng": 151.2117,
+              "name": "Museum of Sydney, Phillip St",
+              "relativeDeparture": 480
+            },
+            {
+              "code": "200065",
+              "lat": -33.862,
+              "lng": 151.21115,
+              "name": "Circular Quay, Young St, Stand D",
+              "relativeArrival": 600,
+              "shortName": "Stand D"
+            }
+          ],
+          "travelled": false
+        }
+      ],
+      "stopCode": "201056",
+      "to": {
+        "address": "Martin Place Station, Elizabeth St, Stand C",
+        "class": "Location",
+        "lat": -33.86703,
+        "lng": 151.21055,
+        "timezone": "Australia/Sydney"
+      },
+      "travelDirection": 348,
+      "type": "scheduled",
+      "visibility": "in summary"
+    },
+    {
+      "action": "<TIME>: Take <NUMBER>",
+      "endStopCode": "2000421",
+      "from": {
+        "address": "Oxford St at Brisbane St",
+        "class": "Location",
+        "lat": -33.87757,
+        "lng": 151.21297,
+        "timezone": "Australia/Sydney"
+      },
+      "hashCode": -1101278390,
+      "mini": {
+        "description": "<DIRECTION>",
+        "instruction": "Take <NUMBER> ⋅ <PLATFORM>"
+      },
+      "modeIdentifier": "pt_pub",
+      "modeInfo": {
+        "alt": "Bus",
+        "identifier": "pt_pub_bus",
+        "localIcon": "bus"
+      },
+      "notes": "<LINE_NAME>\n<DIRECTION>\n<PLATFORM>\n<DURATION> ⋅ <STOPS> ⋅\u00a0Opal (bus) ($2.10)",
+      "operatorID": "2441",
+      "serviceOperator": "State Transit Sydney",
+      "shapes": [
+        {
+          "encodedWaypoints": "n|xmEin~y[??CAYhA]z@QNqAdAqAhASNa@ZDJ????????CKu@l@a@z@_@z@O^YnA@?????GEIPe@zAiAnDQ`@MRi@x@iAlB??????EGsCrDoB|C@?????KMJLKMm@x@{@dASV}ArBSXJJA?",
+          "stops": [
+            {
+              "bearing": 310,
+              "code": "202155",
+              "lat": -33.88375,
+              "lng": 151.22166,
+              "name": "Oxford St opp Hopewell St",
+              "relativeDeparture": -240
+            },
+            {
+              "bearing": 302,
+              "code": "202196",
+              "lat": -33.88231,
+              "lng": 151.21992,
+              "name": "Oxford St after Verona St",
+              "relativeArrival": -180,
+              "relativeDeparture": -180
+            },
+            {
+              "bearing": 299,
+              "code": "201060",
+              "lat": -33.88148,
+              "lng": 151.21859,
+              "name": "Oxford St after South Dowling St",
+              "relativeArrival": -180,
+              "relativeDeparture": -180
+            },
+            {
+              "bearing": 309,
+              "code": "201051",
+              "lat": -33.88009,
+              "lng": 151.21608,
+              "name": "Oxford St opp Palmer St",
+              "relativeArrival": -120,
+              "relativeDeparture": -120
+            },
+            {
+              "code": "201053",
+              "lat": -33.87877,
+              "lng": 151.21443,
+              "name": "Oxford St at Riley St",
+              "relativeArrival": -60,
+              "relativeDeparture": -60
+            }
+          ],
+          "travelled": false
+        },
+        {
+          "encodedWaypoints": "xuwmE_x|y[????IKW\\oAfBGh@CP?v@?hC?^A^AfB?jBMr@_K[??????@SAR@Su@GiG_@MA{FK?@????@UAT@UaG_@s@Gc@AgBKuBMuDWcBKuCQBT??",
+          "stops": [
+            {
+              "bearing": 308,
+              "code": "201056",
+              "lat": -33.87757,
+              "lng": 151.21297,
+              "name": "Oxford St at Brisbane St",
+              "relativeDeparture": 0
+            },
+            {
+              "bearing": 8,
+              "code": "200055",
+              "lat": -33.87493,
+              "lng": 151.20958,
+              "name": "Museum Station, Elizabeth St, Stand D",
+              "relativeArrival": 120,
+              "relativeDeparture": 120,
+              "shortName": "Stand D"
+            },
+            {
+              "bearing": 7,
+              "code": "200057",
+              "lat": -33.872,
+              "lng": 151.20995,
+              "name": "Sheraton on the Park, Elizabeth St",
+              "relativeArrival": 240,
+              "relativeDeparture": 240
+            },
+            {
+              "code": "2000421",
+              "lat": -33.86703,
+              "lng": 151.21055,
+              "name": "Martin Place Station, Elizabeth St, Stand C",
+              "relativeArrival": 300,
+              "relativeDeparture": 300,
+              "shortName": "Stand C"
+            }
+          ],
+          "travelled": true
+        },
+        {
+          "encodedWaypoints": "~sumE}h|y[????CU}@GgAESCY_@U_@OKeD{AgAMmCG??????@IAH@IgAMu@GLbDMCw@EiCMsAKAL",
+          "stops": [
+            {
+              "bearing": 345,
+              "code": "200059",
+              "lat": -33.86403,
+              "lng": 151.2117,
+              "name": "Museum of Sydney, Phillip St",
+              "relativeDeparture": 420
+            },
+            {
+              "code": "200065",
+              "lat": -33.862,
+              "lng": 151.21115,
+              "name": "Circular Quay, Young St, Stand D",
+              "relativeArrival": 480,
+              "shortName": "Stand D"
+            }
+          ],
+          "travelled": false
+        }
+      ],
+      "stopCode": "201056",
+      "to": {
+        "address": "Martin Place Station, Elizabeth St, Stand C",
+        "class": "Location",
+        "lat": -33.86703,
+        "lng": 151.21055,
+        "timezone": "Australia/Sydney"
+      },
+      "travelDirection": 348,
+      "type": "scheduled",
+      "visibility": "in summary"
+    },
+    {
+      "action": "<TIME>: Take <NUMBER>",
+      "endStopCode": "2000421",
+      "from": {
+        "address": "Oxford St at Brisbane St",
+        "class": "Location",
+        "lat": -33.87757,
+        "lng": 151.21297,
+        "timezone": "Australia/Sydney"
+      },
+      "hashCode": 1181126724,
+      "mini": {
+        "description": "<DIRECTION>",
+        "instruction": "Take <NUMBER> ⋅ <PLATFORM>"
+      },
+      "modeIdentifier": "pt_pub",
+      "modeInfo": {
+        "alt": "Bus",
+        "identifier": "pt_pub_bus",
+        "localIcon": "bus"
+      },
+      "notes": "<LINE_NAME>\n<DIRECTION>\n<PLATFORM>\n<DURATION> ⋅ <STOPS> ⋅\u00a0Opal (bus) ($2.10)",
+      "operatorID": "2441",
+      "serviceOperator": "State Transit Sydney",
+      "shapes": [
+        {
+          "encodedWaypoints": "tg{mEkm~y[AU@TAUU@}ANsAT_HbA??AM@LAMsAN_D\\aBT}B^uEdAuCr@_Bf@aBd@o@TqAb@s@Xm@RsAf@KDiGjCWJgDdB???M?L?M_A\\yC^qBPyC^sALuCZm@|@gAjB??????EGsCrDoB|C@?????KMJLKMm@x@{@dASV}ArBSXJJA?",
+          "stops": [
+            {
+              "bearing": 351,
+              "code": "202112",
+              "lat": -33.89578,
+              "lng": 151.22151,
+              "name": "Anzac Pde before Cleveland St",
+              "relativeDeparture": 86040
+            },
+            {
+              "bearing": 340,
+              "code": "202116",
+              "lat": -33.89334,
+              "lng": 151.22108,
+              "name": "Sydney Girls High School, Anzac Pde",
+              "relativeArrival": 86100,
+              "relativeDeparture": 86100
+            },
+            {
+              "bearing": 340,
+              "code": "201011",
+              "lat": -33.88428,
+              "lng": 151.21763,
+              "name": "Flinders St before Albion St",
+              "relativeArrival": 86220,
+              "relativeDeparture": 86220
+            },
+            {
+              "bearing": 309,
+              "code": "201051",
+              "lat": -33.88009,
+              "lng": 151.21608,
+              "name": "Oxford St opp Palmer St",
+              "relativeArrival": 86280,
+              "relativeDeparture": 86280
+            },
+            {
+              "code": "201053",
+              "lat": -33.87877,
+              "lng": 151.21443,
+              "name": "Oxford St at Riley St",
+              "relativeArrival": 86340,
+              "relativeDeparture": 86340
+            }
+          ],
+          "travelled": false
+        },
+        {
+          "encodedWaypoints": "xuwmE_x|y[????IKW\\oAfBGh@CP?v@?hC?^A^AfB?jBMr@_K[??????@SAR@Su@GiG_@MA{N_Aq@Gc@AiBMsBKwDWeBMuCMDR??",
+          "stops": [
+            {
+              "bearing": 308,
+              "code": "201056",
+              "lat": -33.87757,
+              "lng": 151.21297,
+              "name": "Oxford St at Brisbane St",
+              "relativeDeparture": 86400
+            },
+            {
+              "bearing": 7,
+              "code": "200055",
+              "lat": -33.87493,
+              "lng": 151.20958,
+              "name": "Museum Station, Elizabeth St, Stand D",
+              "relativeArrival": 86520,
+              "relativeDeparture": 86520,
+              "shortName": "Stand D"
+            },
+            {
+              "code": "2000421",
+              "lat": -33.86703,
+              "lng": 151.21055,
+              "name": "Martin Place Station, Elizabeth St, Stand C",
+              "relativeArrival": 86760,
+              "relativeDeparture": 86760,
+              "shortName": "Stand C"
+            }
+          ],
+          "travelled": true
+        },
+        {
+          "encodedWaypoints": "~sumE}h|y[????CU}@GgAESCY_@U_@OKeD{AgAMmCG??????@IAH@IgAMu@GM?mAIAT?A",
+          "stops": [
+            {
+              "bearing": 6,
+              "code": "200059",
+              "lat": -33.86403,
+              "lng": 151.2117,
+              "name": "Museum of Sydney, Phillip St",
+              "relativeDeparture": 86940
+            },
+            {
+              "code": "200067",
+              "lat": -33.86293,
+              "lng": 151.21181,
+              "name": "Circular Quay, Phillip St, Stand C",
+              "relativeArrival": 87000,
+              "shortName": "Stand C"
+            }
+          ],
+          "travelled": false
+        }
+      ],
+      "stopCode": "201056",
+      "to": {
+        "address": "Martin Place Station, Elizabeth St, Stand C",
+        "class": "Location",
+        "lat": -33.86703,
+        "lng": 151.21055,
+        "timezone": "Australia/Sydney"
+      },
+      "travelDirection": 348,
+      "type": "scheduled",
+      "visibility": "in summary"
+    },
+    {
+      "action": "<TIME>: Walk",
+      "from": {
+        "address": "2 Foster Street Surry Hills NSW 2010",
+        "class": "Location",
+        "lat": -33.87962,
+        "lng": 151.21057,
+        "timezone": "Australia/Sydney"
+      },
+      "hashCode": 1980088525,
+      "metres": 630,
+      "mini": {
+        "description": "Museum Station, Elizabeth St, Stand D",
+        "instruction": "Walk",
+        "mainValue": "650m"
+      },
+      "modeIdentifier": "wa_wal",
+      "modeInfo": {
+        "alt": "Walk",
+        "identifier": "wa_wal",
+        "localIcon": "walk"
+      },
+      "notes": "<DURATION> ⋅ 650m",
+      "streets": [
+        {
+          "encodedWaypoints": "tbxmEai|y[SMMR}BPu@RKz@??{@I??SzC????m@CmAGSAcBOOG{@GqAIaBKaCQC`@"
+        }
+      ],
+      "to": {
+        "address": "Museum Station, Elizabeth St, Stand D",
+        "class": "Location",
+        "lat": -33.87493,
+        "lng": 151.20958,
+        "timezone": "Australia/Sydney"
+      },
+      "travelDirection": 321,
+      "type": "unscheduled",
+      "visibility": "in summary"
+    },
+    {
+      "action": "<TIME>: Take <NUMBER>",
+      "endStopCode": "2000421",
+      "from": {
+        "address": "Museum Station, Elizabeth St, Stand D",
+        "class": "Location",
+        "lat": -33.87493,
+        "lng": 151.20958,
+        "timezone": "Australia/Sydney"
+      },
+      "hashCode": -1207441675,
+      "mini": {
+        "description": "<DIRECTION>",
+        "instruction": "Take <NUMBER> ⋅ <PLATFORM>"
+      },
+      "modeIdentifier": "pt_pub",
+      "modeInfo": {
+        "alt": "Bus",
+        "identifier": "pt_pub_bus",
+        "localIcon": "bus"
+      },
+      "notes": "<LINE_NAME>\n<DIRECTION>\n<PLATFORM>\n<DURATION> ⋅ <STOPS> ⋅\u00a0Opal (bus) ($2.10)",
+      "operatorID": "2441",
+      "serviceOperator": "State Transit Sydney",
+      "shapes": [
+        {
+          "encodedWaypoints": "jxzmEuj~y[AM@LAMsAN_D\\aBT}B^uEdAuCr@_Bf@aBd@o@TqAb@s@Xm@RsAf@KDiGjCWJgDdB???M?L?M_A\\yC^qBPyC^sALuCZm@|@gAjB??????EGsCrDoB|C@?????KMJLKMm@x@{@dASV}ArBSXJJA???????IKW\\oAfBGh@CP?v@?hC?^A^AfB?jBMr@_K[??",
+          "stops": [
+            {
+              "bearing": 340,
+              "code": "202116",
+              "lat": -33.89334,
+              "lng": 151.22108,
+              "name": "Sydney Girls High School, Anzac Pde",
+              "relativeDeparture": -427
+            },
+            {
+              "bearing": 340,
+              "code": "201011",
+              "lat": -33.88428,
+              "lng": 151.21763,
+              "name": "Flinders St before Albion St",
+              "relativeArrival": -307,
+              "relativeDeparture": -307
+            },
+            {
+              "bearing": 309,
+              "code": "201051",
+              "lat": -33.88009,
+              "lng": 151.21608,
+              "name": "Oxford St opp Palmer St",
+              "relativeArrival": -247,
+              "relativeDeparture": -247
+            },
+            {
+              "bearing": 310,
+              "code": "201053",
+              "lat": -33.87877,
+              "lng": 151.21443,
+              "name": "Oxford St at Riley St",
+              "relativeArrival": -187,
+              "relativeDeparture": -187
+            },
+            {
+              "code": "201056",
+              "lat": -33.87757,
+              "lng": 151.21297,
+              "name": "Oxford St at Brisbane St",
+              "relativeArrival": -127,
+              "relativeDeparture": -127
+            }
+          ],
+          "travelled": false
+        },
+        {
+          "encodedWaypoints": "hewmE{b|y[??@SAR@Su@GiG_@MA{N_Aq@Gc@AiBMsBKwDWeBMuCMDR??",
+          "stops": [
+            {
+              "bearing": 7,
+              "code": "200055",
+              "lat": -33.87493,
+              "lng": 151.20958,
+              "name": "Museum Station, Elizabeth St, Stand D",
+              "relativeDeparture": -7,
+              "shortName": "Stand D"
+            },
+            {
+              "code": "2000421",
+              "lat": -33.86703,
+              "lng": 151.21055,
+              "name": "Martin Place Station, Elizabeth St, Stand C",
+              "relativeArrival": 233,
+              "relativeDeparture": 233,
+              "shortName": "Stand C"
+            }
+          ],
+          "travelled": true
+        },
+        {
+          "encodedWaypoints": "~sumE}h|y[????CU}@GgAESCY_@U_@OKeD{AgAMmCG??????@IAH@IgAMu@GM?mAIAT?A",
+          "stops": [
+            {
+              "bearing": 6,
+              "code": "200059",
+              "lat": -33.86403,
+              "lng": 151.2117,
+              "name": "Museum of Sydney, Phillip St",
+              "relativeDeparture": 413
+            },
+            {
+              "code": "200067",
+              "lat": -33.86293,
+              "lng": 151.21181,
+              "name": "Circular Quay, Phillip St, Stand C",
+              "relativeArrival": 473,
+              "shortName": "Stand C"
+            }
+          ],
+          "travelled": false
+        }
+      ],
+      "stopCode": "200055",
+      "to": {
+        "address": "Martin Place Station, Elizabeth St, Stand C",
+        "class": "Location",
+        "lat": -33.86703,
+        "lng": 151.21055,
+        "timezone": "Australia/Sydney"
+      },
+      "travelDirection": 7,
+      "type": "scheduled",
+      "visibility": "in summary"
+    },
+    {
+      "action": "<TIME>: Take <NUMBER>",
+      "endStopCode": "2000421",
+      "from": {
+        "address": "Museum Station, Elizabeth St, Stand D",
+        "class": "Location",
+        "lat": -33.87493,
+        "lng": 151.20958,
+        "timezone": "Australia/Sydney"
+      },
+      "hashCode": -293906670,
+      "mini": {
+        "description": "<DIRECTION>",
+        "instruction": "Take <NUMBER> ⋅ <PLATFORM>"
+      },
+      "modeIdentifier": "pt_pub",
+      "modeInfo": {
+        "alt": "Bus",
+        "identifier": "pt_pub_bus",
+        "localIcon": "bus"
+      },
+      "notes": "<LINE_NAME>\n<DIRECTION>\n<PLATFORM>\n<DURATION> ⋅ <STOPS> ⋅\u00a0Opal (bus) ($2.10)",
+      "operatorID": "2441",
+      "serviceOperator": "State Transit Sydney",
+      "shapes": [
+        {
+          "encodedWaypoints": "|tymE}g`z[??EIDHEIo@t@qEjHe@p@eCnD_@v@Uv@K~@Ir@APE~@JC????????IBEn@KtBCr@SzAG\\g@lBw@rCw@|Ck@~BQnA??????CAYhA]z@QNqAdAqAhASNuAhAa@|@_@x@O^i@zAe@|AiAnDS^IRk@z@iAjB??????EGsCrDiDhEy@dASX}ApBKNHHIIGHHJ????????IKW\\oAfBGh@CP?v@?hC?^A^AfB?jBMr@_K[??",
+          "stops": [
+            {
+              "bearing": 301,
+              "code": "202151",
+              "lat": -33.88767,
+              "lng": 151.23087,
+              "name": "Paddington Public School, Oxford St",
+              "relativeDeparture": -578
+            },
+            {
+              "bearing": 286,
+              "code": "202153",
+              "lat": -33.88512,
+              "lng": 151.22649,
+              "name": "Oxford St at Oatley Rd",
+              "relativeArrival": -518,
+              "relativeDeparture": -518
+            },
+            {
+              "bearing": 304,
+              "code": "202155",
+              "lat": -33.88375,
+              "lng": 151.22166,
+              "name": "Oxford St opp Hopewell St",
+              "relativeArrival": -458,
+              "relativeDeparture": -458
+            },
+            {
+              "bearing": 310,
+              "code": "201051",
+              "lat": -33.88009,
+              "lng": 151.21608,
+              "name": "Oxford St opp Palmer St",
+              "relativeArrival": -338,
+              "relativeDeparture": -338
+            },
+            {
+              "code": "201056",
+              "lat": -33.87757,
+              "lng": 151.21297,
+              "name": "Oxford St at Brisbane St",
+              "relativeArrival": -218,
+              "relativeDeparture": -218
+            }
+          ],
+          "travelled": false
+        },
+        {
+          "encodedWaypoints": "hewmE{b|y[??@SAR@Su@GiG_@MA{FK?@????@UAT@UaG_@s@Gc@AgBKuBMuDWcBKuCQBT??",
+          "stops": [
+            {
+              "bearing": 8,
+              "code": "200055",
+              "lat": -33.87493,
+              "lng": 151.20958,
+              "name": "Museum Station, Elizabeth St, Stand D",
+              "relativeDeparture": -98,
+              "shortName": "Stand D"
+            },
+            {
+              "bearing": 7,
+              "code": "200057",
+              "lat": -33.872,
+              "lng": 151.20995,
+              "name": "Sheraton on the Park, Elizabeth St",
+              "relativeArrival": -38,
+              "relativeDeparture": -38
+            },
+            {
+              "code": "2000421",
+              "lat": -33.86703,
+              "lng": 151.21055,
+              "name": "Martin Place Station, Elizabeth St, Stand C",
+              "relativeArrival": 82,
+              "relativeDeparture": 82,
+              "shortName": "Stand C"
+            }
+          ],
+          "travelled": true
+        },
+        {
+          "encodedWaypoints": "~sumE}h|y[????CU}@GgAESCY_@U_@OKeD{AgAMmCG??????@IAH@IgAMu@GLbDMCw@EiCMsAKAL",
+          "stops": [
+            {
+              "bearing": 345,
+              "code": "200059",
+              "lat": -33.86403,
+              "lng": 151.2117,
+              "name": "Museum of Sydney, Phillip St",
+              "relativeDeparture": 202
+            },
+            {
+              "code": "200065",
+              "lat": -33.862,
+              "lng": 151.21115,
+              "name": "Circular Quay, Young St, Stand D",
+              "relativeArrival": 262,
+              "shortName": "Stand D"
+            }
+          ],
+          "travelled": false
+        }
+      ],
+      "stopCode": "200055",
+      "to": {
+        "address": "Martin Place Station, Elizabeth St, Stand C",
+        "class": "Location",
+        "lat": -33.86703,
+        "lng": 151.21055,
+        "timezone": "Australia/Sydney"
+      },
+      "travelDirection": 7,
+      "type": "scheduled",
+      "visibility": "in summary"
+    },
+    {
+      "action": "<TIME>: Take <NUMBER>",
+      "endStopCode": "2000421",
+      "from": {
+        "address": "Museum Station, Elizabeth St, Stand D",
+        "class": "Location",
+        "lat": -33.87493,
+        "lng": 151.20958,
+        "timezone": "Australia/Sydney"
+      },
+      "hashCode": -944726807,
+      "mini": {
+        "description": "<DIRECTION>",
+        "instruction": "Take <NUMBER> ⋅ <PLATFORM>"
+      },
+      "modeIdentifier": "pt_pub",
+      "modeInfo": {
+        "alt": "Bus",
+        "identifier": "pt_pub_bus",
+        "localIcon": "bus"
+      },
+      "notes": "<LINE_NAME>\n<DIRECTION>\n<PLATFORM>\n<DURATION> ⋅ <STOPS> ⋅\u00a0Opal (bus) ($2.10)",
+      "operatorID": "2441",
+      "serviceOperator": "State Transit Sydney",
+      "shapes": [
+        {
+          "encodedWaypoints": "jxzmEuj~y[AM@LAMsAN_D\\aBT}B^uEdAuCr@_Bf@aBd@o@TqAb@s@Xm@RsAf@KDiGjCWJgDdB???M?L?M_A\\yC^qBPyC^sALuCZm@|@gAjB??????EGsCrDoB|C@?????KMJLKMm@x@{@dASV}ArBSXJJA???????IKW\\oAfBGh@CP?v@?hC?^A^AfB?jBMr@_K[??",
+          "stops": [
+            {
+              "bearing": 340,
+              "code": "202116",
+              "lat": -33.89334,
+              "lng": 151.22108,
+              "name": "Sydney Girls High School, Anzac Pde",
+              "relativeDeparture": -587
+            },
+            {
+              "bearing": 340,
+              "code": "201011",
+              "lat": -33.88428,
+              "lng": 151.21763,
+              "name": "Flinders St before Albion St",
+              "relativeArrival": -407,
+              "relativeDeparture": -407
+            },
+            {
+              "bearing": 309,
+              "code": "201051",
+              "lat": -33.88009,
+              "lng": 151.21608,
+              "name": "Oxford St opp Palmer St",
+              "relativeArrival": -347,
+              "relativeDeparture": -347
+            },
+            {
+              "bearing": 310,
+              "code": "201053",
+              "lat": -33.87877,
+              "lng": 151.21443,
+              "name": "Oxford St at Riley St",
+              "relativeArrival": -287,
+              "relativeDeparture": -287
+            },
+            {
+              "code": "201056",
+              "lat": -33.87757,
+              "lng": 151.21297,
+              "name": "Oxford St at Brisbane St",
+              "relativeArrival": -227,
+              "relativeDeparture": -227
+            }
+          ],
+          "travelled": false
+        },
+        {
+          "encodedWaypoints": "hewmE{b|y[??@SAR@Su@GiG_@MA{N_Aq@Gc@AiBMsBKwDWeBMuCMDR??",
+          "stops": [
+            {
+              "bearing": 7,
+              "code": "200055",
+              "lat": -33.87493,
+              "lng": 151.20958,
+              "name": "Museum Station, Elizabeth St, Stand D",
+              "relativeDeparture": -107,
+              "shortName": "Stand D"
+            },
+            {
+              "code": "2000421",
+              "lat": -33.86703,
+              "lng": 151.21055,
+              "name": "Martin Place Station, Elizabeth St, Stand C",
+              "relativeArrival": 73,
+              "relativeDeparture": 73,
+              "shortName": "Stand C"
+            }
+          ],
+          "travelled": true
+        },
+        {
+          "encodedWaypoints": "~sumE}h|y[????CU}@GgAESCY_@U_@OKeD{AgAMmCG??????@IAH@IgAMu@GLbDMCw@EiCMsAKAL",
+          "stops": [
+            {
+              "bearing": 345,
+              "code": "200059",
+              "lat": -33.86403,
+              "lng": 151.2117,
+              "name": "Museum of Sydney, Phillip St",
+              "relativeDeparture": 133
+            },
+            {
+              "code": "200065",
+              "lat": -33.862,
+              "lng": 151.21115,
+              "name": "Circular Quay, Young St, Stand D",
+              "relativeArrival": 193,
+              "shortName": "Stand D"
+            }
+          ],
+          "travelled": false
+        }
+      ],
+      "stopCode": "200055",
+      "to": {
+        "address": "Martin Place Station, Elizabeth St, Stand C",
+        "class": "Location",
+        "lat": -33.86703,
+        "lng": 151.21055,
+        "timezone": "Australia/Sydney"
+      },
+      "travelDirection": 7,
+      "type": "scheduled",
+      "visibility": "in summary"
+    }
+  ]
+}
