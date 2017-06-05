@@ -140,6 +140,21 @@ public class RouteServiceImplTest extends BaseUnitTest {
     assertThat(options).containsEntry("ir", "1");
   }
 
+  @Test public void shouldContainOptionIncludeStops() {
+    final Query query = createQuery();
+    query.setIncludeStops(true);
+
+    final Map<String, Object> options = routeService.toOptions(query);
+    assertThat(options).containsEntry("includeStops", "1");
+  }
+
+  @Test public void shouldContainOptionIncludeStopsByDefault() {
+    final Query query = createQuery();
+
+    final Map<String, Object> options = routeService.toOptions(query);
+    assertThat(options).containsEntry("includeStops", "1");
+  }
+
   @Test public void getExcludedTransitModesAsNonNull() {
     final String regionName = "Some region name";
     assertThat(routeService.getExcludedTransitModesAsNonNull(

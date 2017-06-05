@@ -41,6 +41,7 @@ public class Query implements Parcelable {
       query.transportModeIds = query.readTransportModeIds(in);
       query.maxWalkingTime = in.readInt();
       query.mIsInterRegional = in.readByte() == 1;
+      query.includeStops = in.readByte() == 1;
       return query;
     }
 
@@ -70,6 +71,7 @@ public class Query implements Parcelable {
    */
   private int maxWalkingTime;
   private boolean mIsInterRegional = false;
+  private boolean includeStops = true;
 
   public Query() {}
 
@@ -93,6 +95,7 @@ public class Query implements Parcelable {
     query.mRegion = mRegion;
     query.maxWalkingTime = maxWalkingTime;
     query.mIsInterRegional = mIsInterRegional;
+    query.includeStops = includeStops;
 
     // Perform deep copy of modes, so that removing member of one list doesn't affect the other.
     if (cloneTransportMode) {
@@ -273,6 +276,14 @@ public class Query implements Parcelable {
     this.mIsInterRegional = isInterRegional;
   }
 
+  public boolean includeStops() {
+    return this.includeStops;
+  }
+
+  public void setIncludeStops(boolean includeStops) {
+    this.includeStops = includeStops;
+  }
+
   @Override
   public boolean equals(final Object o) {
     if (this == o) {
@@ -312,6 +323,7 @@ public class Query implements Parcelable {
     dest.writeStringList(transportModeIds);
     dest.writeInt(maxWalkingTime);
     dest.writeByte((byte) (mIsInterRegional ? 1 : 0));
+    dest.writeByte((byte) (includeStops ? 1 : 0));
   }
 
   /**
