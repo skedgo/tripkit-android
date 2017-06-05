@@ -25,7 +25,7 @@ android {
 }
 
 dependencies {
-  testCompile 'junit:junit:4.12'
+  testCompile libs.junit
   testCompile libs.assertjCore
   testCompile libs.mockitoCore
   testCompile libs.robolectric
@@ -42,8 +42,8 @@ dependencies {
   compile 'uk.co.chrisjenx:calligraphy:2.1.0'
   compile 'com.github.skedgo:robotos:v1.1'
 
-  compile 'com.google.dagger:dagger:2.7'
-  kapt 'com.google.dagger:dagger-compiler:2.7'
+  compile libs.dagger
+  kapt libs.daggerCompiler
 
   compile 'com.squareup.picasso:picasso:2.5.2'
   compile 'com.jakewharton.picasso:picasso2-okhttp3-downloader:1.0.2'

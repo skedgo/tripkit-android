@@ -30,7 +30,7 @@ android {
 }
 
 dependencies {
-  testCompile 'junit:junit:4.12'
+  testCompile libs.junit
   compile libs.kotlin
   compile 'com.android.support:appcompat-v7:25.3.0'
   compile 'com.android.support:recyclerview-v7:25.3.0'

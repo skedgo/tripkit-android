@@ -23,7 +23,7 @@ android {
 }
 
 dependencies {
-  testCompile "junit:junit:4.12"
+  testCompile libs.junit
   testCompile libs.assertjCore
   testCompile libs.mockitoCore
   testCompile libs.mockitoKotlin, { exclude group: "org.jetbrains.kotlin" }
@@ -31,8 +31,8 @@ dependencies {
 
   compile project(":TripKitDomain")
   compile project(":TripKitDomainLegacy")
-  compile "com.google.dagger:dagger:2.7"
-  kapt "com.google.dagger:dagger-compiler:2.7"
+  compile libs.dagger
+  kapt libs.daggerCompiler
   kapt libs.value
   provided libs.valueAnnotations
   provided libs.builderAnnotations
