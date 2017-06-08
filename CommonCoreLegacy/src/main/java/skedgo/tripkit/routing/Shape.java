@@ -52,10 +52,6 @@ public class Shape implements Parcelable {
     this.isTravelled = isTravelled;
   }
 
-  /**
-   * No longer being used due to https://redmine.buzzhives.com/issues/3872.
-   */
-  @Deprecated
   public List<ServiceStop> getStops() {
     return stops;
   }

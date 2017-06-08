@@ -104,7 +104,6 @@ public class TripSegment implements Parcelable, IRealTimeElement, ITimeRange {
   /**
    * Used only for {@link SegmentType#SCHEDULED} (Public Transport) segment.
    */
-  private final transient Var<List<ServiceStop>> stops = Var.create();
   private final transient Var<BitmapDrawable> remoteIcon = Var.create();
   private long mId;
   private transient Trip mTrip;
@@ -204,20 +203,6 @@ public class TripSegment implements Parcelable, IRealTimeElement, ITimeRange {
   private int stopCount;
   private int metres;
   private int metresSafe;
-
-  public TripSegment() {
-    stops.observe()
-        .doOnNext(new Action1<List<ServiceStop>>() {
-          @Override
-          public void call(List<ServiceStop> value) {
-            // We can know which segment a stop belongs to.
-            for (ServiceStop stop : value) {
-              stop.segment().put(TripSegment.this);
-            }
-          }
-        })
-        .subscribe(Actions.empty());
-  }
 
   /**
    * FIXME: Should replace this with Quantity Strings.
@@ -681,8 +666,14 @@ public class TripSegment implements Parcelable, IRealTimeElement, ITimeRange {
     }
   }
 
-  public Var<List<ServiceStop>> stops() {
-    return stops;
+  public @Nullable List<ServiceStop> stops() {
+
+    for (Shape shape : mShapes) {
+      if (shape.isTravelled()) {
+        return shape.getStops();
+      }
+    }
+    return null;
   }
 
   /**
