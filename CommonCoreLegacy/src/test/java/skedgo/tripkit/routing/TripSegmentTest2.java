@@ -98,29 +98,6 @@ public class TripSegmentTest2 {
     assertFalse(segment.isVisibleInContext(VISIBILITY_HIDDEN));
   }
 
-  /**
-   * A {@link ServiceStop} can let us know which bus/train segment it belongs to.
-   * When updating stop list for a bus/train segment, we must change the segment of each of stop.
-   */
-  @Test public void shouldUpdateSegmentForServiceStops() {
-    final TripSegment segment = new TripSegment();
-
-    List<ServiceStop> stops = Arrays.asList(
-        new ServiceStop(),
-        new ServiceStop(),
-        new ServiceStop()
-    );
-
-    segment.stops().put(stops);
-
-    assertThat(stops).are(new Condition<ServiceStop>() {
-      @Override
-      public boolean matches(ServiceStop value) {
-        return segment == value.segment().value();
-      }
-    });
-  }
-
   @Test public void shouldGiveCorrectRealtimeStatusText() {
     Resources resources = context.getResources();
     {

@@ -42,8 +42,7 @@ public class FailoverA2bRoutingApiTest {
     failoverA2bRoutingApi = new FailoverA2bRoutingApi(
         RuntimeEnvironment.application.getResources(),
         new Gson(),
-        api,
-        mock(SetTripStopsFromSegmentTemplate.class)
+        api
     );
   }
 

@@ -47,8 +47,7 @@ public class TripGroupsJsonTest {
     api = new FailoverA2bRoutingApi(
         RuntimeEnvironment.application.getResources(),
         new Gson(),
-        a2bRoutingApi,
-        mock(SetTripStopsFromSegmentTemplate.class)
+        a2bRoutingApi
     );
   }
 
