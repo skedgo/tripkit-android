@@ -2,6 +2,7 @@ package com.skedgo.android.common.model;
 
 import android.content.Context;
 import android.os.Parcel;
+import android.support.annotation.Nullable;
 
 import com.google.gson.annotations.SerializedName;
 import com.skedgo.android.common.rx.Var;
@@ -26,6 +27,7 @@ public class ServiceStop extends Location {
       stop.relativeArrival = in.readLong();
       stop.relativeDeparture = in.readLong();
       stop.code = in.readString();
+      stop.shortName = in.readString();
       stop.type = StopType.from(in.readString());
 
       return stop;
@@ -57,6 +59,8 @@ public class ServiceStop extends Location {
   private long arrivalTime;
   @SerializedName("code")
   private String code;
+  @Nullable @SerializedName("shortName")
+  private String shortName;
 
   public ServiceStop() {}
 
@@ -96,6 +100,14 @@ public class ServiceStop extends Location {
     this.code = code;
   }
 
+  public String getShortName() {
+    return shortName;
+  }
+
+  public void setShortName(String shortName) {
+    this.shortName = shortName;
+  }
+
   public StopType getType() {
     return type;
   }
@@ -130,6 +142,7 @@ public class ServiceStop extends Location {
       departureSecs().put(otherStop.departureSecs().value());
       arrivalTime = otherStop.arrivalTime;
       code = otherStop.code;
+      shortName = otherStop.shortName;
     }
   }
 
@@ -141,6 +154,7 @@ public class ServiceStop extends Location {
     out.writeLong(relativeArrival);
     out.writeLong(relativeDeparture);
     out.writeString(code);
+    out.writeString(shortName);
     out.writeString(type == null ? null : type.toString());
   }
 
