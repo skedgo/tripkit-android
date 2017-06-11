@@ -424,7 +424,7 @@ public class TripSegment implements Parcelable, IRealTimeElement, ITimeRange {
     return shapes;
   }
 
-  public void setShapes(ArrayList<Shape> shapes) {
+  public void setShapes(@Nullable ArrayList<Shape> shapes) {
     this.shapes = shapes;
   }
 

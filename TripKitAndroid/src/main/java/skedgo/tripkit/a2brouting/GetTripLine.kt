@@ -109,8 +109,9 @@ open class GetTripLine @Inject internal constructor() {
 
       var hasAddedLines = false
 
-      if (segment.shapes != null && !segment.shapes.isEmpty()) {
-        for (shape in segment.shapes) {
+      val shapes = segment.shapes ?: emptyList()
+      if (shapes.isNotEmpty()) {
+        for (shape in shapes) {
           color = if (shape.serviceColor == null || shape.serviceColor.color == Color.BLACK)
             color
           else
