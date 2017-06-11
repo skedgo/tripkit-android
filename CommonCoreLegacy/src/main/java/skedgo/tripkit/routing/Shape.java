@@ -2,6 +2,7 @@ package skedgo.tripkit.routing;
 
 import android.os.Parcel;
 import android.os.Parcelable;
+import android.support.annotation.Nullable;
 
 import com.google.gson.annotations.SerializedName;
 import com.skedgo.android.common.model.ServiceStop;
@@ -27,14 +28,10 @@ public class Shape implements Parcelable {
     }
   };
   private long id;
-  @SerializedName("travelled")
-  private boolean isTravelled;
-  @SerializedName("stops")
-  private List<ServiceStop> stops;
-  @SerializedName("serviceColor")
-  private ServiceColor serviceColor;
-  @SerializedName("encodedWaypoints")
-  private String encodedWaypoints;
+  @SerializedName("travelled") private boolean isTravelled;
+  @SerializedName("stops") private @Nullable List<ServiceStop> stops;
+  @SerializedName("serviceColor") private ServiceColor serviceColor;
+  @SerializedName("encodedWaypoints") private String encodedWaypoints;
 
   public long getId() {
     return id;
@@ -52,15 +49,11 @@ public class Shape implements Parcelable {
     this.isTravelled = isTravelled;
   }
 
-  public List<ServiceStop> getStops() {
+  public @Nullable List<ServiceStop> getStops() {
     return stops;
   }
 
-  /**
-   * No longer being used due to https://redmine.buzzhives.com/issues/3872.
-   */
-  @Deprecated
-  public void setStops(List<ServiceStop> stops) {
+  public void setStops(@Nullable List<ServiceStop> stops) {
     this.stops = stops;
   }
 

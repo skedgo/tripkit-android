@@ -49,18 +49,12 @@ public class ServiceStop extends Location {
   /**
    * This field is primarily used to interact with Gson.
    */
-  @SerializedName("departure")
-  private long serializedDepartureSecs;
-  @SerializedName("relativeDeparture")
-  private long relativeArrival;
-  @SerializedName("relativeArrival")
-  private long relativeDeparture;
-  @SerializedName("arrival")
-  private long arrivalTime;
-  @SerializedName("code")
-  private String code;
-  @Nullable @SerializedName("shortName")
-  private String shortName;
+  @SerializedName("departure") private long serializedDepartureSecs;
+  @SerializedName("relativeDeparture") private long relativeArrival;
+  @SerializedName("relativeArrival") private long relativeDeparture;
+  @SerializedName("arrival") private long arrivalTime;
+  @SerializedName("code") private String code;
+  @SerializedName("shortName") private @Nullable String shortName;
 
   public ServiceStop() {}
 
