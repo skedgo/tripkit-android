@@ -24,8 +24,8 @@ public class ServiceStop extends Location {
 
       stop.departureSecs().put(in.readLong());
       stop.arrivalTime = in.readLong();
-      stop.relativeArrival = in.readLong();
-      stop.relativeDeparture = in.readLong();
+      stop.relativeArrival = (Long) in.readValue(Long.class.getClassLoader());
+      stop.relativeDeparture = (Long) in.readValue(Long.class.getClassLoader());
       stop.code = in.readString();
       stop.shortName = in.readString();
       stop.type = StopType.from(in.readString());
@@ -50,8 +50,8 @@ public class ServiceStop extends Location {
    * This field is primarily used to interact with Gson.
    */
   @SerializedName("departure") private long serializedDepartureSecs;
-  @SerializedName("relativeDeparture") private long relativeArrival;
-  @SerializedName("relativeArrival") private long relativeDeparture;
+  @SerializedName("relativeDeparture") private @Nullable Long relativeArrival;
+  @SerializedName("relativeArrival") private @Nullable Long relativeDeparture;
   @SerializedName("arrival") private long arrivalTime;
   @SerializedName("code") private String code;
   @SerializedName("shortName") private @Nullable String shortName;
@@ -70,19 +70,19 @@ public class ServiceStop extends Location {
     this.arrivalTime = arrivalTime;
   }
 
-  public long getRelativeDeparture() {
+  public @Nullable Long getRelativeDeparture() {
     return relativeDeparture;
   }
 
-  public void setRelativeDeparture(long relativeDeparture) {
+  public void setRelativeDeparture(@Nullable Long relativeDeparture) {
     this.relativeDeparture = relativeDeparture;
   }
 
-  public long getRelativeArrival() {
+  public @Nullable Long getRelativeArrival() {
     return relativeArrival;
   }
 
-  public void setRelativeArrival(long relativeArrival) {
+  public void setRelativeArrival(@Nullable Long relativeArrival) {
     this.relativeArrival = relativeArrival;
   }
 
@@ -145,8 +145,8 @@ public class ServiceStop extends Location {
     super.writeToParcel(out, flags);
     out.writeLong(departureSecs().value());
     out.writeLong(arrivalTime);
-    out.writeLong(relativeArrival);
-    out.writeLong(relativeDeparture);
+    out.writeValue(relativeArrival);
+    out.writeValue(relativeDeparture);
     out.writeString(code);
     out.writeString(shortName);
     out.writeString(type == null ? null : type.toString());
