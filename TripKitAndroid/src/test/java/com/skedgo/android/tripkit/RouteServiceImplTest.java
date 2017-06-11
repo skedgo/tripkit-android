@@ -25,7 +25,7 @@ import static org.assertj.core.api.Java6Assertions.assertThat;
 import static org.mockito.Matchers.eq;
 import static org.mockito.Mockito.when;
 
-public class RouteServiceImplTest extends BaseUnitTest {
+public class RouteServiceImplTest extends RobolectricTest {
   @Mock Func1<Query, Observable<List<Query>>> queryGenerator;
   @Mock ExcludedTransitModesAdapter excludedTransitModesAdapter;
   @Mock Co2Preferences co2Preferences;

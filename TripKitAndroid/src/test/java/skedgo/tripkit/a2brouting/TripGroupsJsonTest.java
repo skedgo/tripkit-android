@@ -2,15 +2,12 @@ package skedgo.tripkit.a2brouting;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
-import com.skedgo.android.tripkit.BuildConfig;
-import com.skedgo.android.tripkit.TestRunner;
+import com.skedgo.android.tripkit.RobolectricTest;
 
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
-import org.junit.runner.RunWith;
 import org.robolectric.RuntimeEnvironment;
-import org.robolectric.annotation.Config;
 
 import java.io.IOException;
 import java.lang.reflect.Type;
@@ -27,12 +24,9 @@ import skedgo.tripkit.routing.Trip;
 import skedgo.tripkit.routing.TripGroup;
 import thuytrinh.mockwebserverrule.MockWebServerRule;
 
-import static org.assertj.core.api.Java6Assertions.*;
-import static org.mockito.Mockito.mock;
+import static org.assertj.core.api.Java6Assertions.assertThat;
 
-@RunWith(TestRunner.class)
-@Config(constants = BuildConfig.class)
-public class TripGroupsJsonTest {
+public class TripGroupsJsonTest extends RobolectricTest {
   private static final Type TRIP_GROUP_TYPE = new TypeToken<List<TripGroup>>() {}.getType();
   @Rule public MockWebServerRule serverRule = new MockWebServerRule();
   private FailoverA2bRoutingApi api;
