@@ -25,7 +25,7 @@ import static org.assertj.core.api.Java6Assertions.assertThat;
 import static org.mockito.Matchers.eq;
 import static org.mockito.Mockito.when;
 
-public class RouteServiceImplTest extends BaseUnitTest {
+public class RouteServiceImplTest extends RobolectricTest {
   @Mock Func1<Query, Observable<List<Query>>> queryGenerator;
   @Mock ExcludedTransitModesAdapter excludedTransitModesAdapter;
   @Mock Co2Preferences co2Preferences;
@@ -138,6 +138,21 @@ public class RouteServiceImplTest extends BaseUnitTest {
 
     final Map<String, Object> options = routeService.toOptions(query);
     assertThat(options).containsEntry("ir", "1");
+  }
+
+  @Test public void shouldContainOptionIncludeStops() {
+    final Query query = createQuery();
+    query.setIncludeStops(true);
+
+    final Map<String, Object> options = routeService.toOptions(query);
+    assertThat(options).containsEntry("includeStops", "1");
+  }
+
+  @Test public void shouldContainOptionIncludeStopsByDefault() {
+    final Query query = createQuery();
+
+    final Map<String, Object> options = routeService.toOptions(query);
+    assertThat(options).containsEntry("includeStops", "1");
   }
 
   @Test public void getExcludedTransitModesAsNonNull() {

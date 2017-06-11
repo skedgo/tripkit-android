@@ -2,7 +2,7 @@ package com.skedgo.android.tripkit.bookingproviders
 
 import android.content.Intent
 import com.skedgo.android.common.model.Location
-import com.skedgo.android.tripkit.BaseUnitTest
+import com.skedgo.android.tripkit.RobolectricTest
 import com.skedgo.android.tripkit.ExternalActionParams
 import org.amshove.kluent.*
 import org.junit.Test
@@ -10,7 +10,7 @@ import rx.functions.Func1
 import skedgo.tripkit.routing.TripSegment
 
 @Suppress("IllegalIdentifier")
-class UberBookingResolverTest : BaseUnitTest() {
+class UberBookingResolverTest : RobolectricTest() {
   val isPackageInstalled: Func1<String, Boolean> = mock()
   val getAppIntent: Func1<String, Intent> = mock()
   val resolver by lazy { UberBookingResolver(isPackageInstalled, getAppIntent) }

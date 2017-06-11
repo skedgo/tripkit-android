@@ -2,6 +2,7 @@ package com.skedgo.android.common.model;
 
 import android.content.Context;
 import android.os.Parcel;
+import android.support.annotation.Nullable;
 
 import com.google.gson.annotations.SerializedName;
 import com.skedgo.android.common.rx.Var;
@@ -10,7 +11,6 @@ import com.skedgo.android.common.util.DateTimeFormats;
 import java.util.concurrent.TimeUnit;
 
 import rx.functions.Action1;
-import skedgo.tripkit.routing.TripSegment;
 
 /**
  * Represents a future stop of a service in a trip.
@@ -23,7 +23,10 @@ public class ServiceStop extends Location {
 
       stop.departureSecs().put(in.readLong());
       stop.arrivalTime = in.readLong();
+      stop.relativeArrival = (Long) in.readValue(Long.class.getClassLoader());
+      stop.relativeDeparture = (Long) in.readValue(Long.class.getClassLoader());
       stop.code = in.readString();
+      stop.shortName = in.readString();
       stop.type = StopType.from(in.readString());
 
       return stop;
@@ -34,10 +37,6 @@ public class ServiceStop extends Location {
     }
   };
   /**
-   * This should be a bus/train segment.
-   */
-  private final transient Var<TripSegment> segment = Var.create();
-  /**
    * This gets initialized lazily. So don't access it directly. Use its getter instead.
    */
   private transient Var<Long> departureSecs;
@@ -45,12 +44,12 @@ public class ServiceStop extends Location {
   /**
    * This field is primarily used to interact with Gson.
    */
-  @SerializedName("departure")
-  private long serializedDepartureSecs;
-  @SerializedName("arrival")
-  private long arrivalTime;
-  @SerializedName("code")
-  private String code;
+  @SerializedName("departure") private long serializedDepartureSecs;
+  @SerializedName("relativeDeparture") private @Nullable Long relativeArrival;
+  @SerializedName("relativeArrival") private @Nullable Long relativeDeparture;
+  @SerializedName("arrival") private long arrivalTime;
+  @SerializedName("code") private String code;
+  @SerializedName("shortName") private @Nullable String shortName;
 
   public ServiceStop() {}
 
@@ -66,12 +65,36 @@ public class ServiceStop extends Location {
     this.arrivalTime = arrivalTime;
   }
 
+  public @Nullable Long getRelativeDeparture() {
+    return relativeDeparture;
+  }
+
+  public void setRelativeDeparture(@Nullable Long relativeDeparture) {
+    this.relativeDeparture = relativeDeparture;
+  }
+
+  public @Nullable Long getRelativeArrival() {
+    return relativeArrival;
+  }
+
+  public void setRelativeArrival(@Nullable Long relativeArrival) {
+    this.relativeArrival = relativeArrival;
+  }
+
   public String getCode() {
     return code;
   }
 
   public void setCode(String code) {
     this.code = code;
+  }
+
+  @Nullable public String getShortName() {
+    return shortName;
+  }
+
+  public void setShortName(@Nullable String shortName) {
+    this.shortName = shortName;
   }
 
   public StopType getType() {
@@ -108,6 +131,7 @@ public class ServiceStop extends Location {
       departureSecs().put(otherStop.departureSecs().value());
       arrivalTime = otherStop.arrivalTime;
       code = otherStop.code;
+      shortName = otherStop.shortName;
     }
   }
 
@@ -116,7 +140,10 @@ public class ServiceStop extends Location {
     super.writeToParcel(out, flags);
     out.writeLong(departureSecs().value());
     out.writeLong(arrivalTime);
+    out.writeValue(relativeArrival);
+    out.writeValue(relativeDeparture);
     out.writeString(code);
+    out.writeString(shortName);
     out.writeString(type == null ? null : type.toString());
   }
 
@@ -135,9 +162,5 @@ public class ServiceStop extends Location {
     }
 
     return departureSecs;
-  }
-
-  public Var<TripSegment> segment() {
-    return segment;
   }
 }

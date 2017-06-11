@@ -44,6 +44,7 @@ dependencies {
   testCompile libs.robolectric
   testCompile libs.mockitoCore
   testCompile libs.mockitoKotlin, { exclude group: 'org.jetbrains.kotlin' }
+  testCompile libs.kluent
   testCompile 'com.github.thuytrinh:MockWebServerRule:v1.0'
   testCompile libs.kluent
 

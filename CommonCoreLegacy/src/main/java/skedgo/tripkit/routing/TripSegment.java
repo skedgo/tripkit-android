@@ -19,7 +19,6 @@ import com.skedgo.android.common.model.Booking;
 import com.skedgo.android.common.model.ITimeRange;
 import com.skedgo.android.common.model.Location;
 import com.skedgo.android.common.model.RealtimeAlert;
-import com.skedgo.android.common.model.ServiceStop;
 import com.skedgo.android.common.model.Street;
 import com.skedgo.android.common.model.TransportMode;
 import com.skedgo.android.common.rx.Var;
@@ -29,9 +28,6 @@ import com.skedgo.android.common.util.TripSegmentUtils;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
-
-import rx.functions.Action1;
-import rx.functions.Actions;
 
 import static skedgo.tripkit.routing.VehicleMode.createLightDrawable;
 
@@ -77,7 +73,7 @@ public class TripSegment implements Parcelable, IRealTimeElement, ITimeRange {
       segment.mStartStopCode = in.readString();
       segment.mEndStopCode = in.readString();
       segment.mStreets = in.readArrayList(Street.class.getClassLoader());
-      segment.mShapes = in.readArrayList(Shape.class.getClassLoader());
+      segment.shapes = in.readArrayList(Shape.class.getClassLoader());
       segment.mRealTimeVehicle = in.readParcelable(RealTimeVehicle.class.getClassLoader());
       segment.mAlerts = in.readArrayList(RealtimeAlert.class.getClassLoader());
 
@@ -104,58 +100,33 @@ public class TripSegment implements Parcelable, IRealTimeElement, ITimeRange {
   /**
    * Used only for {@link SegmentType#SCHEDULED} (Public Transport) segment.
    */
-  private final transient Var<List<ServiceStop>> stops = Var.create();
   private final transient Var<BitmapDrawable> remoteIcon = Var.create();
   private long mId;
   private transient Trip mTrip;
-  @SerializedName("booking")
-  private Booking booking;
-  @SerializedName("modeInfo")
-  private ModeInfo modeInfo;
-  @SerializedName("type")
-  private SegmentType mType;
-  @SerializedName("startTime")
-  private long mStartTimeInSecs;
-  @SerializedName("endTime")
-  private long mEndTimeInSecs;
-  @SerializedName("visibility")
-  private String mVisibility;
-  @SerializedName("from")
-  private Location mFrom;
-  @SerializedName("to")
-  private Location mTo;
-  @SerializedName("location")
-  private Location mSingleLocation;
-  @SerializedName("action")
-  private String mAction;
-  @SerializedName("travelDirection")
-  private int mDirection;
-  @SerializedName("notes")
-  private String mNotes;
-  @SerializedName("serviceIsFrequencyBased")
-  private boolean mIsFrequencyBased;
-  @SerializedName("frequency")
-  private int mFrequency;
-  @SerializedName("serviceTripID")
-  private String mServiceTripId;
-  @SerializedName("serviceName")
-  private String mServiceName;
-  @SerializedName("serviceColor")
-  private ServiceColor mServiceColor;
-  @SerializedName("serviceNumber")
-  private String mServiceNumber;
-  @SerializedName("serviceOperator")
-  private String mServiceOperator;
-  @SerializedName("stopCode")
-  private String mStartStopCode;
-  @SerializedName("endStopCode")
-  private String mEndStopCode;
-  @SerializedName("streets")
-  private ArrayList<Street> mStreets;
-  @SerializedName("shapes")
-  private ArrayList<Shape> mShapes;
-  @SerializedName("realtimeVehicle")
-  private RealTimeVehicle mRealTimeVehicle;
+  @SerializedName("booking") private Booking booking;
+  @SerializedName("modeInfo") private ModeInfo modeInfo;
+  @SerializedName("type") private SegmentType mType;
+  @SerializedName("startTime") private long mStartTimeInSecs;
+  @SerializedName("endTime") private long mEndTimeInSecs;
+  @SerializedName("visibility") private String mVisibility;
+  @SerializedName("from") private Location mFrom;
+  @SerializedName("to") private Location mTo;
+  @SerializedName("location") private Location mSingleLocation;
+  @SerializedName("action") private String mAction;
+  @SerializedName("travelDirection") private int mDirection;
+  @SerializedName("notes") private String mNotes;
+  @SerializedName("serviceIsFrequencyBased") private boolean mIsFrequencyBased;
+  @SerializedName("frequency") private int mFrequency;
+  @SerializedName("serviceTripID") private String mServiceTripId;
+  @SerializedName("serviceName") private String mServiceName;
+  @SerializedName("serviceColor") private ServiceColor mServiceColor;
+  @SerializedName("serviceNumber") private String mServiceNumber;
+  @SerializedName("serviceOperator") private String mServiceOperator;
+  @SerializedName("stopCode") private String mStartStopCode;
+  @SerializedName("endStopCode") private String mEndStopCode;
+  @SerializedName("streets") private ArrayList<Street> mStreets;
+  @SerializedName("shapes") private @Nullable ArrayList<Shape> shapes;
+  @SerializedName("realtimeVehicle") private RealTimeVehicle mRealTimeVehicle;
   private boolean wheelchairAccessible;
 
   /**
@@ -204,20 +175,6 @@ public class TripSegment implements Parcelable, IRealTimeElement, ITimeRange {
   private int stopCount;
   private int metres;
   private int metresSafe;
-
-  public TripSegment() {
-    stops.observe()
-        .doOnNext(new Action1<List<ServiceStop>>() {
-          @Override
-          public void call(List<ServiceStop> value) {
-            // We can know which segment a stop belongs to.
-            for (ServiceStop stop : value) {
-              stop.segment().put(TripSegment.this);
-            }
-          }
-        })
-        .subscribe(Actions.empty());
-  }
 
   /**
    * FIXME: Should replace this with Quantity Strings.
@@ -461,12 +418,12 @@ public class TripSegment implements Parcelable, IRealTimeElement, ITimeRange {
     mEndStopCode = endStopCode;
   }
 
-  public List<Shape> getShapes() {
-    return mShapes;
+  public @Nullable List<Shape> getShapes() {
+    return shapes;
   }
 
-  public void setShapes(ArrayList<Shape> shapes) {
-    mShapes = shapes;
+  public void setShapes(@Nullable ArrayList<Shape> shapes) {
+    this.shapes = shapes;
   }
 
   public RealTimeVehicle getRealTimeVehicle() {
@@ -547,7 +504,7 @@ public class TripSegment implements Parcelable, IRealTimeElement, ITimeRange {
     out.writeString(mStartStopCode);
     out.writeString(mEndStopCode);
     out.writeList(mStreets);
-    out.writeList(mShapes);
+    out.writeList(shapes);
     out.writeParcelable(mRealTimeVehicle, 0);
     out.writeList(mAlerts);
     out.writeString(mTerms);
@@ -679,10 +636,6 @@ public class TripSegment implements Parcelable, IRealTimeElement, ITimeRange {
     } else {
       return true;
     }
-  }
-
-  public Var<List<ServiceStop>> stops() {
-    return stops;
   }
 
   /**

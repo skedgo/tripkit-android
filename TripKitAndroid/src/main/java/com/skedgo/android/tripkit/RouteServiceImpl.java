@@ -125,6 +125,10 @@ final class RouteServiceImpl implements RouteService {
     options.put("ws", Integer.toString(walkingSpeed));
     options.put("cs", Integer.toString(cyclingSpeed));
 
+    if (query.includeStops()) {
+      options.put("includeStops", "1");
+    }
+
     if (query.isInterRegional()) {
       options.put("ir", "1");
     }
