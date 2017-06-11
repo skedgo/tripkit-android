@@ -100,11 +100,11 @@ public class ServiceStop extends Location {
     this.code = code;
   }
 
-  public String getShortName() {
+  @Nullable public String getShortName() {
     return shortName;
   }
 
-  public void setShortName(String shortName) {
+  public void setShortName(@Nullable String shortName) {
     this.shortName = shortName;
   }
 
