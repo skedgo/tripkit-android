@@ -4,10 +4,8 @@ import android.os.Parcel;
 import android.os.Parcelable;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.util.Pair;
 
 import com.google.gson.annotations.SerializedName;
-import com.skedgo.android.common.model.ServiceStop;
 import com.skedgo.android.common.model.TransportMode;
 
 import java.util.ArrayList;
@@ -15,9 +13,6 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 import java.util.UUID;
-
-import rx.Observable;
-import rx.subjects.PublishSubject;
 
 public class TripGroup implements Parcelable {
   public static final Creator<TripGroup> CREATOR = new Creator<TripGroup>() {
@@ -49,9 +44,6 @@ public class TripGroup implements Parcelable {
   @SerializedName("trips") private ArrayList<Trip> trips;
   @SerializedName("frequency") private int frequency;
   private transient GroupVisibility visibility = GroupVisibility.FULL;
-
-  /* FIXME: Should have not left this here. */
-  private transient PublishSubject<Pair<ServiceStop, Boolean>> onChangeStop = PublishSubject.create();
 
   public long getDisplayTripId() {
     return displayTripId;
@@ -185,13 +177,6 @@ public class TripGroup implements Parcelable {
     return this;
   }
 
-  /**
-   * Change stop for the display trip.
-   */
-  public void changeStop(Pair<ServiceStop, Boolean> args) {
-    onChangeStop.onNext(args);
-  }
-
   @Override public int describeContents() {
     return 0;
   }
@@ -202,10 +187,6 @@ public class TripGroup implements Parcelable {
     out.writeList(trips);
     out.writeInt(frequency);
     out.writeList(sources);
-  }
-
-  public Observable<Pair<ServiceStop, Boolean>> onChangeStop() {
-    return onChangeStop;
   }
 
   public GroupVisibility getVisibility() {

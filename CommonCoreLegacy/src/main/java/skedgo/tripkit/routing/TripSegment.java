@@ -19,7 +19,6 @@ import com.skedgo.android.common.model.Booking;
 import com.skedgo.android.common.model.ITimeRange;
 import com.skedgo.android.common.model.Location;
 import com.skedgo.android.common.model.RealtimeAlert;
-import com.skedgo.android.common.model.ServiceStop;
 import com.skedgo.android.common.model.Street;
 import com.skedgo.android.common.model.TransportMode;
 import com.skedgo.android.common.rx.Var;
@@ -27,7 +26,6 @@ import com.skedgo.android.common.util.TimeUtils;
 import com.skedgo.android.common.util.TripSegmentUtils;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 import java.util.Locale;
 
@@ -638,17 +636,6 @@ public class TripSegment implements Parcelable, IRealTimeElement, ITimeRange {
     } else {
       return true;
     }
-  }
-
-  public List<ServiceStop> getStops() {
-    if (shapes != null) {
-      for (Shape shape : shapes) {
-        if (shape.isTravelled()) {
-          return shape.getStops();
-        }
-      }
-    }
-    return Collections.emptyList();
   }
 
   /**

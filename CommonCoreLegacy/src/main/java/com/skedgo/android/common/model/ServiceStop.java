@@ -11,7 +11,6 @@ import com.skedgo.android.common.util.DateTimeFormats;
 import java.util.concurrent.TimeUnit;
 
 import rx.functions.Action1;
-import skedgo.tripkit.routing.TripSegment;
 
 /**
  * Represents a future stop of a service in a trip.
@@ -37,10 +36,6 @@ public class ServiceStop extends Location {
       return new ServiceStop[size];
     }
   };
-  /**
-   * This should be a bus/train segment.
-   */
-  private final transient Var<TripSegment> segment = Var.create();
   /**
    * This gets initialized lazily. So don't access it directly. Use its getter instead.
    */
@@ -167,9 +162,5 @@ public class ServiceStop extends Location {
     }
 
     return departureSecs;
-  }
-
-  public Var<TripSegment> segment() {
-    return segment;
   }
 }
