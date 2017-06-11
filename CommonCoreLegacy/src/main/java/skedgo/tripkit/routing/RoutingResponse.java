@@ -29,9 +29,6 @@ public class RoutingResponse {
   public static final String NODE_SERVICE_NUMBER = "serviceNumber";
   public static final String NODE_ACTION = "action";
   public static final String NODE_NOTES = "notes";
-  public static final String NODE_SHAPES = "shapes";
-  public static final String NODE_STOPS = "stops";
-  public static final String NODE_TRAVELLED = "travelled";
   public static final String NODE_SERVICE_NAME = "serviceName";
   public static final String NODE_HASH_CODE = "hashCode";
   public static final String NODE_SEGMENT_TEMPLATE_HASH_CODE = "segmentTemplateHashCode";
@@ -163,10 +160,6 @@ public class RoutingResponse {
 
     resolveTripGroupList(tripGroups);
     return tripGroups;
-  }
-
-  public SparseArray<JsonObject> createSegmentTemplateMap() {
-    return createSegmentTemplateMap(segmentTemplates);
   }
 
   public SparseArray<JsonObject> createSegmentTemplateMap(ArrayList<JsonObject> segmentTemplates) {
