@@ -1,5 +1,7 @@
-apply plugin: 'com.android.library'
-apply plugin: 'com.github.dcendents.android-maven'
+apply plugin: "com.android.library"
+apply plugin: "com.github.dcendents.android-maven"
+apply plugin: "kotlin-android"
+apply plugin: "kotlin-kapt"
 
 // For https://github.com/dcendents/android-maven-gradle-plugin.
 group = 'com.skedgo'
@@ -10,7 +12,7 @@ android {
   buildToolsVersion '25.0.2'
 
   defaultConfig {
-    minSdkVersion 15
+    minSdkVersion libVersions.proMinSdkVersion
     targetSdkVersion 25
     testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
   }
@@ -35,16 +37,13 @@ dependencies {
   testCompile 'com.github.thuytrinh:MockWebServerRule:v1.0'
 
   compile project(':TripKitAndroid')
-
   compile libs.dagger
-  annotationProcessor libs.daggerCompiler
+  kapt libs.daggerCompiler
 
-  // To generate immutable models.
-  // See more at http://immutables.github.io/.
-  annotationProcessor "org.immutables:value:$immutablesVersion"
-  provided "org.immutables:value:$immutablesVersion:annotations"
-  provided "org.immutables:builder:$immutablesVersion"
-  provided "org.immutables:gson:$immutablesVersion:annotations"
+  kapt libs.value
+  provided libs.valueAnnotations
+  provided libs.builderAnnotations
+  provided libs.gsonAnnotations
 }
 
 uploadArchives {

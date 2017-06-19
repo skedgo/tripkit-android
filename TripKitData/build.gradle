@@ -12,7 +12,7 @@ android {
   buildToolsVersion libVersions.buildToolsVersion
 
   defaultConfig {
-    minSdkVersion 10
+    minSdkVersion libVersions.proMinSdkVersion
     targetSdkVersion 25
   }
 
@@ -28,6 +28,7 @@ dependencies {
   testCompile libs.mockitoCore
   testCompile libs.mockitoKotlin, { exclude group: "org.jetbrains.kotlin" }
   testCompile libs.jodaTimeTzdb
+  testCompile libs.robolectric
 
   compile project(":TripKitDomain")
   compile project(":TripKitDomainLegacy")

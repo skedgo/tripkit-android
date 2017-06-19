@@ -9,7 +9,7 @@ android {
 
   defaultConfig {
     applicationId "skedgo.tripkit.samples"
-    minSdkVersion 15
+    minSdkVersion libVersions.proMinSdkVersion
     targetSdkVersion 25
     versionCode 1
     versionName "1.0"

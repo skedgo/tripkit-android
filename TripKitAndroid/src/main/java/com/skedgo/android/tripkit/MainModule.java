@@ -19,6 +19,10 @@ import com.skedgo.android.tripkit.tsp.GsonAdaptersRegionInfo;
 import com.skedgo.android.tripkit.tsp.GsonAdaptersRegionInfoBody;
 import com.skedgo.android.tripkit.tsp.GsonAdaptersRegionInfoResponse;
 import com.skedgo.android.tripkit.tsp.RegionInfoService;
+import skedgo.tripkit.urlresolver.GetBaseServer;
+import skedgo.tripkit.urlresolver.GetHitServers;
+import skedgo.tripkit.urlresolver.GetLastUsedRegionUrls;
+import com.skedgo.android.tripkit.urlresolver.UrlResolverInterceptor;
 
 import java.util.List;
 import java.util.Map;
@@ -29,7 +33,6 @@ import javax.inject.Singleton;
 
 import dagger.Module;
 import dagger.Provides;
-import okhttp3.HttpUrl;
 import okhttp3.OkHttpClient;
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory;
@@ -84,7 +87,8 @@ public class MainModule {
   @Singleton @Provides RegionService getRegionService(
       RegionDatabaseHelper databaseHelper,
       RegionsApi regionsApi,
-      Provider<RegionInfoService> regionInfoServiceProvider) {
+      Provider<RegionInfoService> regionInfoServiceProvider,
+      GetLastUsedRegionUrls getLastUsedRegionUrls) {
     final RegionsFetcher regionsFetcher = new RegionsFetcherImpl(
         regionsApi,
         databaseHelper
@@ -102,7 +106,8 @@ public class MainModule {
         modeCache,
         regionsFetcher,
         regionInfoServiceProvider,
-        new RegionFinder()
+        new RegionFinder(),
+        getLastUsedRegionUrls
     );
   }
 
@@ -140,7 +145,9 @@ public class MainModule {
 
   @Singleton @Provides OkHttpClient httpClient(
       OkHttpClient.Builder httpClientBuilder,
-      AddCustomHeaders addCustomHeaders) {
+      AddCustomHeaders addCustomHeaders,
+      GetBaseServer getBaseServer,
+      GetHitServers getHitServers) {
     final OkHttpClient.Builder builder = httpClientBuilder
         .addInterceptor(addCustomHeaders);
     if (configs.debuggable()) {
@@ -149,6 +156,7 @@ public class MainModule {
         builder.addInterceptor(new BaseUrlOverridingInterceptor(baseUrlAdapterFactory.call()));
       }
     }
+    builder.addInterceptor(new UrlResolverInterceptor(getHitServers));
     return builder.build();
   }
 

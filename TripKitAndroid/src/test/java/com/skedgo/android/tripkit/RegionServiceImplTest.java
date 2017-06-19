@@ -24,11 +24,13 @@ import java.util.List;
 import java.util.Map;
 
 import dagger.internal.Factory;
+import kotlin.Unit;
 import rx.Observable;
 import rx.observers.TestSubscriber;
+import skedgo.tripkit.urlresolver.GetLastUsedRegionUrls;
 
 import static java.util.Collections.singletonList;
-import static org.assertj.core.api.Java6Assertions.*;
+import static org.assertj.core.api.Java6Assertions.assertThat;
 import static org.mockito.Matchers.eq;
 import static org.mockito.Matchers.same;
 import static org.mockito.Mockito.times;
@@ -45,6 +47,7 @@ public class RegionServiceImplTest {
   @Mock RegionInfoService regionInfoService;
   @Mock Factory<RegionInfoService> regionInfoServiceProvider;
   @Mock RegionFinder regionFinder;
+  @Mock GetLastUsedRegionUrls getLastUsedRegionUrls;
   private RegionServiceImpl regionService;
 
   @Before public void setUp() {
@@ -53,7 +56,8 @@ public class RegionServiceImplTest {
         modeCache,
         regionsFetcher,
         regionInfoServiceProvider,
-        regionFinder
+        regionFinder,
+        getLastUsedRegionUrls
     );
     when(regionInfoServiceProvider.get()).thenReturn(regionInfoService);
   }
@@ -85,6 +89,9 @@ public class RegionServiceImplTest {
         eq(-33.86749), eq(151.20699)
     )).thenReturn(true);
 
+    when(getLastUsedRegionUrls.setLastUsedRegionUrls(Sydney))
+        .thenReturn(Observable.<Unit>empty());
+
     final TestSubscriber<Region> subscriber = new TestSubscriber<>();
     regionService.getRegionByLocationAsync(new Location(-33.86749, 151.20699))
         .subscribe(subscriber);
@@ -95,6 +102,8 @@ public class RegionServiceImplTest {
     final List<Region> regions = subscriber.getOnNextEvents();
     assertThat(regions).hasSize(1);
     assertThat(regions.get(0)).isSameAs(Sydney);
+
+    verify(getLastUsedRegionUrls).setLastUsedRegionUrls(Sydney);
   }
 
   @Test public void shouldPropagateOutOfRegionsExceptionIfNoRegionIsFound() {

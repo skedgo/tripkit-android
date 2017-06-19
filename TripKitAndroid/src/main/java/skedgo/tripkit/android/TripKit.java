@@ -18,6 +18,7 @@ import javax.inject.Singleton;
 import dagger.Component;
 import rx.functions.Action1;
 import rx.functions.Actions;
+import skedgo.tripkit.urlresolver.UrlResolverDataModule;
 import skedgo.tripkit.a2brouting.RouteService;
 
 @Singleton
@@ -25,7 +26,8 @@ import skedgo.tripkit.a2brouting.RouteService;
     HttpClientModule.class,
     A2bRoutingDataModule.class,
     TspModule.class,
-    MainModule.class
+    MainModule.class,
+    UrlResolverDataModule.class
 })
 public abstract class TripKit {
   private static TripKit instance;
