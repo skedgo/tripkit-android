@@ -3,7 +3,6 @@ package com.skedgo.android.common.model
 import com.google.gson.Gson
 import com.skedgo.android.common.BaseUnitTest
 import com.skedgo.android.common.R
-import junit.framework.Assert.assertEquals
 import org.amshove.kluent.shouldEqualTo
 import org.assertj.core.api.Java6Assertions.assertThat
 import org.junit.Test
@@ -59,27 +58,5 @@ class TransportModeTest : BaseUnitTest() {
   @Test fun newFromId() {
     val bus = TransportMode.fromId("bus")
     assertThat(bus.id).isEqualTo("bus")
-  }
-
-  @Test fun parcel() {
-    val mode = TransportMode()
-    mode.id = "Some id"
-    mode.setURL("skedgo.com")
-    mode.title = "Some title"
-    mode.iconId = "Some icon id"
-    mode.setDarkIcon("Some dark icon")
-    mode.setImplies(ArrayList(Arrays.asList("Aha", "Uhu", "Huh?")))
-    mode.setColor(ServiceColor(1, 2, 3))
-
-    val actual = TransportMode.CREATOR.createFromParcel(Utils.parcel(mode))
-
-    assertThat(actual).isNotNull()
-    assertEquals(mode.id, actual.id)
-    assertEquals(mode.url, actual.url)
-    assertEquals(mode.title, actual.title)
-    assertEquals(mode.iconId, actual.iconId)
-    assertEquals(mode.darkIcon, actual.darkIcon)
-    assertThat(actual.color).isEqualTo(mode.color)
-    assertThat(actual.implies).containsExactlyElementsOf(mode.implies)
   }
 }

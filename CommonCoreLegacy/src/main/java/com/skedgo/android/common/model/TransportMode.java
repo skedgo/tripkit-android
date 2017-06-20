@@ -1,7 +1,5 @@
 package com.skedgo.android.common.model;
 
-import android.os.Parcel;
-import android.os.Parcelable;
 import android.support.annotation.DrawableRes;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -14,7 +12,7 @@ import java.util.ArrayList;
 
 import skedgo.tripkit.routing.ServiceColor;
 
-public final class TransportMode implements Parcelable {
+public class TransportMode {
   public static final String MIDDLE_FIX_CAR = "car-s";
   public static final String MIDDLE_FIX_BIC = "bic-s";
 
@@ -35,17 +33,6 @@ public final class TransportMode implements Parcelable {
    * Replacement seems to be 'pt_ltd_SCHOOLBUS'.
    */
   public static final String ID_SHUTTLE_BUS = "ps_shu";
-  public static final Parcelable.Creator<TransportMode> CREATOR = new Parcelable.Creator<TransportMode>() {
-    @Override
-    public TransportMode createFromParcel(Parcel source) {
-      return new TransportMode(source);
-    }
-
-    @Override
-    public TransportMode[] newArray(int size) {
-      return new TransportMode[size];
-    }
-  };
 
   @SerializedName("id") private String id;
   @SerializedName("URL") private String url;
@@ -57,20 +44,6 @@ public final class TransportMode implements Parcelable {
   @SerializedName("color") private ServiceColor color;
 
   public TransportMode() {}
-
-  private TransportMode(Parcel parcel) {
-    id = parcel.readString();
-    url = parcel.readString();
-    title = parcel.readString();
-    iconId = parcel.readString();
-
-    implies = new ArrayList<>();
-    parcel.readStringList(implies);
-
-    isRequired = parcel.readInt() == 1;
-    color = parcel.readParcelable(ServiceColor.class.getClassLoader());
-    darkIcon = parcel.readString();
-  }
 
   public static TransportMode fromId(@NonNull String id) {
     final TransportMode mode = new TransportMode();
@@ -153,23 +126,6 @@ public final class TransportMode implements Parcelable {
 
   public void setId(String id) {
     this.id = id;
-  }
-
-  @Override
-  public int describeContents() {
-    return 0;
-  }
-
-  @Override
-  public void writeToParcel(Parcel dest, int flags) {
-    dest.writeString(id);
-    dest.writeString(url);
-    dest.writeString(title);
-    dest.writeString(iconId);
-    dest.writeStringList(implies);
-    dest.writeInt(isRequired ? 1 : 0);
-    dest.writeParcelable(color, 0);
-    dest.writeString(darkIcon);
   }
 
   @Override
