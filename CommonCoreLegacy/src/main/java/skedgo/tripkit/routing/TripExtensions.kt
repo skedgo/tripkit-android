@@ -1,5 +1,6 @@
 package skedgo.tripkit.routing
 
+import com.skedgo.android.common.model.TransportMode
 import org.joda.time.DateTime
 import java.util.concurrent.TimeUnit
 
@@ -27,3 +28,13 @@ fun Trip.getSummarySegments(): List<TripSegment>
     ?.filter { it.type != SegmentType.ARRIVAL }
     ?.filter { it.isVisibleInContext(TripSegment.VISIBILITY_IN_SUMMARY) }
     ?: emptyList()
+
+fun Trip.getModeIds(): List<String> =
+    segments
+        .map { it.transportModeId }
+        .filterNotNull()
+
+fun Trip.hasWalkOnly(): Boolean {
+  val modeIds = getModeIds()
+  return modeIds.size == 1 && modeIds.contains(TransportMode.ID_WALK)
+}

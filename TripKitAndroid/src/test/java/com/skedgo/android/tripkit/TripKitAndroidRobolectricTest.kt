@@ -10,4 +10,4 @@ import org.robolectric.annotation.Config
  */
 @RunWith(TestRunner::class)
 @Config(constants = BuildConfig::class)
-abstract class RobolectricTest
+abstract class TripKitAndroidRobolectricTest

@@ -11,7 +11,6 @@ import com.google.gson.annotations.SerializedName;
 import com.skedgo.android.common.model.ITimeRange;
 import com.skedgo.android.common.model.Location;
 import com.skedgo.android.common.model.TransportMode;
-import com.skedgo.android.common.util.ListUtils;
 
 import java.math.RoundingMode;
 import java.text.NumberFormat;
@@ -375,22 +374,6 @@ public class Trip implements Parcelable, ITimeRange {
     dest.writeString(temporaryURL);
     dest.writeString(availability);
     dest.writeByte((byte) (queryIsLeaveAfter ? 1 : 0));
-  }
-
-  public ArrayList<String> getTripModes() {
-    if (ListUtils.isEmpty(mSegments)) {
-      return null;
-    }
-
-    ArrayList<String> modes = new ArrayList<String>();
-    for (TripSegment segment : mSegments) {
-      String mode = segment.getTransportModeId();
-      if (!TextUtils.isEmpty(mode)) {
-        modes.add(mode);
-      }
-    }
-
-    return modes;
   }
 
   /**
