@@ -6,7 +6,6 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 
 import com.google.gson.annotations.SerializedName;
-import com.skedgo.android.common.model.TransportMode;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -107,32 +106,6 @@ public class TripGroup implements Parcelable {
     }
 
     trips.add(trip);
-  }
-
-  public boolean containThisMode(TransportMode mode) {
-    if (trips == null) {
-      return false;
-    }
-
-    for (Trip trip : trips) {
-      for (TripSegment segment : trip.getSegments()) {
-        if (mode.getId().equals(segment.getTransportModeId())) {
-          return true;
-        }
-      }
-    }
-
-    return false;
-  }
-
-  public boolean containAnyOfTheseModes(List<TransportMode> modes) {
-    for (TransportMode mode : modes) {
-      if (containThisMode(mode)) {
-        return true;
-      }
-    }
-
-    return false;
   }
 
   /**
