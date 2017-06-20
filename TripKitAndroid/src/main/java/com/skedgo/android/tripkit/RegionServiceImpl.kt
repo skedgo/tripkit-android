@@ -56,6 +56,15 @@ internal class RegionServiceImpl(
   override fun getCitiesByNameAsync(name: String?): Observable<Location> =
       getCitiesAsync().filter(Utils.matchCityName(name))
 
+  override fun getTransportModeByIdAsync(modeId: String): Observable<TransportMode> =
+      getTransportModesAsync()
+          .flatMap {
+            val mode: TransportMode? = it[modeId]
+            mode?.let {
+              Observable.just(mode)
+            } ?: Observable.empty()
+          }
+
   override fun getTransportModesByIdsAsync(modeIds: List<String>): Observable<List<TransportMode>> =
       getTransportModesAsync().map(Utils.findModesByIds(modeIds))
 

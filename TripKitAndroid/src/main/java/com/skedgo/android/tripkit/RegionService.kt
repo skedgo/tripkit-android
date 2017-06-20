@@ -17,6 +17,7 @@ interface RegionService {
   fun getCitiesAsync(): Observable<Location>
   fun getCitiesByNameAsync(name: String?): Observable<Location>
   fun getTransportModesAsync(): Observable<Map<String, TransportMode>>
+  fun getTransportModeByIdAsync(modeId: String): Observable<TransportMode>
   fun getTransportModesByIdsAsync(modeIds: List<String>): Observable<List<TransportMode>>
   fun getTransportModesByRegionAsync(region: Region): Observable<List<TransportMode>>
   fun getTransportModesByLocationAsync(location: Location): Observable<List<TransportMode>>
