@@ -10,10 +10,10 @@ libVersions.devMinSdkVersion = 21
 libVersions.proMinSdkVersion = 15
 libVersions.compileSdkVersion = 25
 libVersions.buildToolsVersion = "25.0.2"
-libVersions.targetSdkVersion = 22
+libVersions.targetSdkVersion = 23
 libVersions.playServicesVersion = "10.2.1"
 libVersions.firebaseAppIndexingVersion = "10.2.1"
-libVersions.kotlinVersion = "1.1.2-3"
+libVersions.kotlinVersion = "1.1.3"
 ext.libVersions = libVersions
 
 Expando libs = new Expando()
