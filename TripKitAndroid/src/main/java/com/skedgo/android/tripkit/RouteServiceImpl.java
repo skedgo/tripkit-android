@@ -20,6 +20,7 @@ import rx.Observable;
 import rx.functions.Func1;
 import skedgo.tripkit.a2brouting.FailoverA2bRoutingApi;
 import skedgo.tripkit.a2brouting.RouteService;
+import skedgo.tripkit.android.ToWeightingProfileString;
 import skedgo.tripkit.routing.TripGroup;
 
 final class RouteServiceImpl implements RouteService {
@@ -124,15 +125,8 @@ final class RouteServiceImpl implements RouteService {
     options.put("tt", Integer.toString(transferTime));
     options.put("ws", Integer.toString(walkingSpeed));
     options.put("cs", Integer.toString(cyclingSpeed));
-
-    if (query.includeStops()) {
-      options.put("includeStops", "1");
-    }
-
-    if (query.isInterRegional()) {
-      options.put("ir", "1");
-    }
-
+    options.put("includeStops", "1");
+    options.put("wp", ToWeightingProfileString.INSTANCE.toWeightingProfileString(query));
     options.putAll(getParamsByPreferences());
     if (extraQueryMapProvider != null) {
       final Map<String, Object> extraQueryMap = extraQueryMapProvider.call();
