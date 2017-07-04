@@ -51,7 +51,6 @@ public class RouteServiceImplTest extends TripKitAndroidRobolectricTest {
   @Test public void shouldIncludeSomeOptions() {
     final Query query = createQuery();
     query.setTimeTag(TimeTag.createForArriveBy(25251325));
-    query.setIsInterRegional(false);
     query.setCyclingSpeed(3);
 
     final Map<String, Object> options = routeService.toOptions(query);
@@ -87,7 +86,6 @@ public class RouteServiceImplTest extends TripKitAndroidRobolectricTest {
   @Test public void shouldIncludeExtraQueryMap() {
     final Query query = createQuery();
     query.setTimeTag(TimeTag.createForArriveBy(25251325));
-    query.setIsInterRegional(false);
 
     final Map<String, Object> extraQueryMap = new HashMap<>();
     extraQueryMap.put("bsb", 1);
@@ -123,7 +121,6 @@ public class RouteServiceImplTest extends TripKitAndroidRobolectricTest {
   @Test public void shouldIncludeOptionDepartAfter() {
     final Query query = createQuery();
     query.setTimeTag(TimeTag.createForLeaveAfter(25251325));
-    query.setIsInterRegional(false);
 
     final Map<String, Object> options = routeService.toOptions(query);
     assertThat(options)
@@ -131,19 +128,8 @@ public class RouteServiceImplTest extends TripKitAndroidRobolectricTest {
         .containsEntry("departAfter", "25251325");
   }
 
-  @Test public void shouldContainOptionInterRegional() {
-    final Query query = createQuery();
-    query.setTimeTag(TimeTag.createForLeaveAfter(25251325));
-    query.setIsInterRegional(true);
-
-    final Map<String, Object> options = routeService.toOptions(query);
-    assertThat(options).containsEntry("ir", "1");
-  }
-
   @Test public void shouldContainOptionIncludeStops() {
     final Query query = createQuery();
-    query.setIncludeStops(true);
-
     final Map<String, Object> options = routeService.toOptions(query);
     assertThat(options).containsEntry("includeStops", "1");
   }
