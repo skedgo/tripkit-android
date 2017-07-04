@@ -20,7 +20,7 @@ import rx.Observable;
 import rx.functions.Func1;
 import skedgo.tripkit.a2brouting.FailoverA2bRoutingApi;
 import skedgo.tripkit.a2brouting.RouteService;
-import skedgo.tripkit.android.ToWeightingProfileString;
+import skedgo.tripkit.a2brouting.ToWeightingProfileString;
 import skedgo.tripkit.routing.TripGroup;
 
 final class RouteServiceImpl implements RouteService {
