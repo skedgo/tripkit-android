@@ -38,12 +38,16 @@ android {
 
 dependencies {
   implementation project(':TripKitAndroid')
+  implementation project(':CommonCoreLegacy')
   implementation 'com.github.skedgo:sqlite-utils:v1.0'
+  implementation 'com.android.support:appcompat-v7:25.3.0'
+  implementation libs.gson
 
   testImplementation libs.junit
   testImplementation libs.assertjCore
   testImplementation libs.mockitoCore
   testImplementation libs.robolectric
+
 
   androidTestImplementation 'com.android.support.test.espresso:espresso-core:2.2.2', {
     exclude group: 'com.android.support', module: 'support-annotations'
