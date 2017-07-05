@@ -14,8 +14,8 @@ import com.skedgo.android.tripkit.booking.ui.DaggerBookingUiComponent
 import com.skedgo.android.tripkit.booking.ui.R
 import com.skedgo.android.tripkit.booking.ui.databinding.ActivityBookingBinding
 import com.skedgo.android.tripkit.booking.ui.viewmodel.*
-import me.tatarka.bindingcollectionadapter.ItemViewSelector
-import me.tatarka.bindingcollectionadapter.itemviews.ItemViewClassSelector
+import me.tatarka.bindingcollectionadapter2.ItemBinding
+import me.tatarka.bindingcollectionadapter2.itembindings.OnItemBindClass
 import rx.android.schedulers.AndroidSchedulers.mainThread
 import skedgo.activityanimations.AnimatedTransitionActivity
 import skedgo.rxlifecyclecomponents.bindToLifecycle
@@ -41,14 +41,16 @@ private const val TAG_BOOKING_FORM = "bookingForm"
 open class BookingActivity : AnimatedTransitionActivity() {
 
   companion object {
-    @JvmStatic fun bookingFormsView(): ItemViewSelector<Any> {
-      return ItemViewClassSelector.builder<Any>()
-          .put(FieldStringViewModel::class.java, BR.viewModel, R.layout.field_string)
-          .put(FieldPasswordViewModel::class.java, BR.viewModel, R.layout.field_password)
-          .put(FieldExternalViewModel::class.java, BR.viewModel, R.layout.field_external)
-          .put(FieldBookingFormViewModel::class.java, BR.viewModel, R.layout.field_booking_form)
-          .put(String::class.java, BR.title, R.layout.group_title)
-          .build()
+    @JvmStatic fun bookingFormsView(): ItemBinding<Any> {
+      return ItemBinding.of(
+          OnItemBindClass<Any>()
+              .map(FieldStringViewModel::class.java, BR.viewModel, R.layout.field_string)
+              .map(FieldPasswordViewModel::class.java, BR.viewModel, R.layout.field_password)
+              .map(FieldExternalViewModel::class.java, BR.viewModel, R.layout.field_external)
+              .map(FieldBookingFormViewModel::class.java, BR.viewModel, R.layout.field_booking_form)
+              .map(String::class.java, BR.title, R.layout.group_title)
+      )
+
     }
   }
 
