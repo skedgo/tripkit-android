@@ -32,6 +32,8 @@ dependencies {
   implementation project(":TripKitDomain")
   implementation project(":TripKitDomainLegacy")
   implementation libs.dagger
+  implementation libs.rxjava
+  implementation libs.jodaTimeAndroid
   kapt libs.daggerCompiler
   kapt libs.value
   compileOnly libs.valueAnnotations

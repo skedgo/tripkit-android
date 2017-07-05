@@ -54,12 +54,18 @@ dependencies {
 
   implementation libs.kotlin
   implementation libs.playServicesGcm
+  implementation libs.jodaTimeAndroid
+  implementation 'com.github.skedgo:commons-collections:v1.0'
 
   implementation 'com.github.skedgo:sqlite-utils:v1.0'
   implementation "com.squareup.okhttp3:okhttp:$okHttpVersion"
   implementation "com.squareup.retrofit2:converter-gson:2.0.2"
   implementation "com.squareup.retrofit2:adapter-rxjava:2.0.2"
   implementation "com.squareup.retrofit2:retrofit:2.0.2"
+  implementation libs.playServicesMaps
+  implementation libs.rxjava
+  implementation 'io.reactivex:rxandroid:1.2.1', { exclude module: 'rxjava' }
+  implementation 'com.github.skedgo:android-maps-utils:241fc89'
 
   implementation libs.dagger
   kapt libs.daggerCompiler
