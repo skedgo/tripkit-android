@@ -30,15 +30,15 @@ android {
 }
 
 dependencies {
-  testCompile libs.junit
-  compile libs.kotlin
-  compile 'com.android.support:appcompat-v7:25.3.0'
-  compile 'com.android.support:recyclerview-v7:25.3.0'
-  compile 'com.android.support:design:25.3.0'
-  compile 'com.google.android.gms:play-services-maps:10.0.1'
-  compile 'com.trello:rxlifecycle:1.0'
-  compile 'com.github.skedgo:RxLifecycleComponents:v1.3'
-  compile 'me.tatarka.bindingcollectionadapter2:bindingcollectionadapter-recyclerview:2.0.1'
+  testImplementation libs.junit
+  implementation libs.kotlin
+  implementation 'com.android.support:appcompat-v7:25.3.0'
+  implementation 'com.android.support:recyclerview-v7:25.3.0'
+  implementation 'com.android.support:design:25.3.0'
+  implementation 'com.google.android.gms:play-services-maps:10.0.1'
+  implementation 'com.trello:rxlifecycle:1.0'
+  implementation 'com.github.skedgo:RxLifecycleComponents:v1.3'
+  implementation 'me.tatarka.bindingcollectionadapter2:bindingcollectionadapter-recyclerview:2.0.1'
   kapt "com.android.databinding:compiler:$androidPluginVersion"
-  compile project(':TripKitAndroid'), { transitive = true }
+  implementation project(':TripKitAndroid'), { transitive = true }
 }

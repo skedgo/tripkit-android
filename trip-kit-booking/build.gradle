@@ -28,23 +28,23 @@ android {
 }
 
 dependencies {
-  testCompile libs.junit
-  testCompile libs.assertjCore
-  testCompile libs.mockitoCore
-  testCompile libs.robolectric
-  testCompile 'com.github.thuytrinh:MockWebServerRule:v1.0'
+  testImplementation libs.junit
+  testImplementation libs.assertjCore
+  testImplementation libs.mockitoCore
+  testImplementation libs.robolectric
+  testImplementation 'com.github.thuytrinh:MockWebServerRule:v1.0'
 
-  compile project(':TripKitAndroid')
+  implementation project(':TripKitAndroid')
 
-  compile libs.dagger
+  implementation libs.dagger
   annotationProcessor libs.daggerCompiler
 
   // To generate immutable models.
   // See more at http://immutables.github.io/.
   annotationProcessor "org.immutables:value:$immutablesVersion"
-  provided "org.immutables:value:$immutablesVersion:annotations"
-  provided "org.immutables:builder:$immutablesVersion"
-  provided "org.immutables:gson:$immutablesVersion:annotations"
+  compileOnly "org.immutables:value:$immutablesVersion:annotations"
+  compileOnly "org.immutables:builder:$immutablesVersion"
+  compileOnly "org.immutables:gson:$immutablesVersion:annotations"
 }
 
 uploadArchives {

@@ -23,32 +23,32 @@ android {
 }
 
 dependencies {
-  testCompile libs.junit
-  testCompile libs.assertjCore
-  testCompile libs.mockitoCore
-  testCompile libs.robolectric
-  testCompile "com.squareup.okhttp3:mockwebserver:$okHttpVersion"
+  testImplementation libs.junit
+  testImplementation libs.assertjCore
+  testImplementation libs.mockitoCore
+  testImplementation libs.robolectric
+  testImplementation "com.squareup.okhttp3:mockwebserver:$okHttpVersion"
 
-  compile 'com.android.support:support-annotations:25.2.0'
-  compile libs.rxjava
-  compile "com.squareup.retrofit2:retrofit:2.0.2"
-  compile "com.squareup.retrofit2:converter-gson:2.0.2"
-  compile "com.squareup.retrofit2:adapter-rxjava:2.0.2"
-  compile libs.gson
-  provided project(":AccountDomain")
-  provided project(":TripKitDomain")
+  implementation 'com.android.support:support-annotations:25.2.0'
+  implementation libs.rxjava
+  implementation "com.squareup.retrofit2:retrofit:2.0.2"
+  implementation "com.squareup.retrofit2:converter-gson:2.0.2"
+  implementation "com.squareup.retrofit2:adapter-rxjava:2.0.2"
+  implementation libs.gson
+  compileOnly project(":AccountDomain")
+  compileOnly project(":TripKitDomain")
 
-  compile libs.dagger
+  implementation libs.dagger
   kapt libs.daggerCompiler
 
   // To generate immutable models.
   // See more at http://immutables.github.io/.
   kapt "org.immutables:value:$immutablesVersion"
-  provided "org.immutables:value:$immutablesVersion:annotations"
-  provided "org.immutables:builder:$immutablesVersion"
-  provided "org.immutables:gson:$immutablesVersion:annotations"
+  compileOnly "org.immutables:value:$immutablesVersion:annotations"
+  compileOnly "org.immutables:builder:$immutablesVersion"
+  compileOnly "org.immutables:gson:$immutablesVersion:annotations"
 
-  compile libs.kotlin
+  implementation libs.kotlin
 }
 
 uploadArchives {

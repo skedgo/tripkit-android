@@ -23,29 +23,29 @@ android {
 }
 
 dependencies {
-  testCompile libs.junit
-  testCompile libs.robolectric
-  testCompile libs.mockitoKotlin, { exclude group: 'org.jetbrains.kotlin' }
+  testImplementation libs.junit
+  testImplementation libs.robolectric
+  testImplementation libs.mockitoKotlin, { exclude group: 'org.jetbrains.kotlin' }
 
-  compile libs.rxjava
-  compile "com.squareup.retrofit2:retrofit:2.0.2"
-  compile "com.squareup.retrofit2:converter-gson:2.0.2"
-  compile "com.squareup.retrofit2:adapter-rxjava:2.0.2"
-  compile libs.gson
+  implementation libs.rxjava
+  implementation "com.squareup.retrofit2:retrofit:2.0.2"
+  implementation "com.squareup.retrofit2:converter-gson:2.0.2"
+  implementation "com.squareup.retrofit2:adapter-rxjava:2.0.2"
+  implementation libs.gson
 
-  compile libs.dagger
+  implementation libs.dagger
   kapt libs.daggerCompiler
 
   // To generate immutable models.
   // See more at http://immutables.github.io/.
   kapt "org.immutables:value:$immutablesVersion"
-  provided "org.immutables:value:$immutablesVersion:annotations"
-  provided "org.immutables:builder:$immutablesVersion"
-  provided "org.immutables:gson:$immutablesVersion:annotations"
+  compileOnly "org.immutables:value:$immutablesVersion:annotations"
+  compileOnly "org.immutables:builder:$immutablesVersion"
+  compileOnly "org.immutables:gson:$immutablesVersion:annotations"
 
-  compile libs.kotlin
-  provided project(':TripKitDomain')
-  provided project(':ValidBookingCountDomain')
+  implementation libs.kotlin
+  compileOnly project(':TripKitDomain')
+  compileOnly project(':ValidBookingCountDomain')
 }
 
 uploadArchives {

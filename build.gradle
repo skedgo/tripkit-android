@@ -1,10 +1,13 @@
 buildscript {
-  ext.androidPluginVersion = '2.3.0'
-  ext.kotlinVersion = '1.1.1'
+  ext.androidPluginVersion = '3.0.0-alpha5'
+  ext.kotlinVersion = '1.1.3'
   ext.immutablesVersion = '2.4.4'
 
   repositories {
     jcenter()
+    maven {
+      url 'https://maven.google.com'
+    }
   }
 
   dependencies {
@@ -39,5 +42,6 @@ allprojects {
         password BINTRAY_KEY
       }
     }
+    maven { url 'https://maven.google.com' }
   }
 }

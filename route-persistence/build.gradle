@@ -37,15 +37,15 @@ android {
 }
 
 dependencies {
-  compile project(':TripKitAndroid')
-  compile 'com.github.skedgo:sqlite-utils:v1.0'
+  implementation project(':TripKitAndroid')
+  implementation 'com.github.skedgo:sqlite-utils:v1.0'
 
-  testCompile libs.junit
-  testCompile libs.assertjCore
-  testCompile libs.mockitoCore
-  testCompile libs.robolectric
+  testImplementation libs.junit
+  testImplementation libs.assertjCore
+  testImplementation libs.mockitoCore
+  testImplementation libs.robolectric
 
-  androidTestCompile 'com.android.support.test.espresso:espresso-core:2.2.2', {
+  androidTestImplementation 'com.android.support.test.espresso:espresso-core:2.2.2', {
     exclude group: 'com.android.support', module: 'support-annotations'
   }
 }
