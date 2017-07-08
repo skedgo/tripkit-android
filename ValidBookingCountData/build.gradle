@@ -44,8 +44,8 @@ dependencies {
   compileOnly "org.immutables:gson:$immutablesVersion:annotations"
 
   implementation libs.kotlin
-  compileOnly project(':TripKitDomain')
-  compileOnly project(':ValidBookingCountDomain')
+  implementation project(':TripKitDomain')
+  implementation project(':ValidBookingCountDomain')
 }
 
 uploadArchives {
