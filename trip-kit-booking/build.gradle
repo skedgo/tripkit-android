@@ -38,13 +38,10 @@ dependencies {
 
   compile libs.dagger
   annotationProcessor libs.daggerCompiler
-
-  // To generate immutable models.
-  // See more at http://immutables.github.io/.
-  annotationProcessor "org.immutables:value:$immutablesVersion"
-  provided "org.immutables:value:$immutablesVersion:annotations"
-  provided "org.immutables:builder:$immutablesVersion"
-  provided "org.immutables:gson:$immutablesVersion:annotations"
+  annotationProcessor libs.value
+  provided libs.valueAnnotations
+  provided libs.builderAnnotations
+  provided libs.gsonAnnotations
 }
 
 uploadArchives {
