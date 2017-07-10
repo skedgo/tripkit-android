@@ -49,12 +49,10 @@ dependencies {
   implementation "com.squareup.retrofit2:adapter-rxjava:2.0.2"
   annotationProcessor libs.daggerCompiler
 
-  // To generate immutable models.
-  // See more at http://immutables.github.io/.
-  annotationProcessor "org.immutables:value:$immutablesVersion"
-  compileOnly "org.immutables:value:$immutablesVersion:annotations"
-  compileOnly "org.immutables:builder:$immutablesVersion"
-  compileOnly "org.immutables:gson:$immutablesVersion:annotations"
+  annotationProcessor libs.value
+  provided libs.valueAnnotations
+  provided libs.builderAnnotations
+  provided libs.gsonAnnotations
 }
 
 uploadArchives {
