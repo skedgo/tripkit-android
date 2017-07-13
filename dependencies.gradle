@@ -5,7 +5,7 @@
  */
 
 def libVersions = new Expando()
-libVersions.immutablesVersion = "2.4.4"
+libVersions.immutablesVersion = "2.5.5"
 libVersions.devMinSdkVersion = 21
 libVersions.proMinSdkVersion = 15
 libVersions.compileSdkVersion = 25
@@ -38,9 +38,9 @@ libs.firebaseAppIndexing = "com.google.firebase:firebase-appindexing:$libVersion
 libs.supportAnnotations = "com.android.support:support-annotations:$libVersions.supportLibraryVersion"
 
 libs.value = "org.immutables:value:$libVersions.immutablesVersion"
-libs.valueAnnotations = "org.immutables:value:$libVersions.immutablesVersion:annotations"
+libs.valueAnnotations = "org.immutables:value:$libVersions.immutablesVersion"
 libs.builderAnnotations = "org.immutables:builder:$libVersions.immutablesVersion"
-libs.gsonAnnotations = "org.immutables:gson:$libVersions.immutablesVersion:annotations"
+libs.gsonAnnotations = "org.immutables:gson:$libVersions.immutablesVersion"
 
 libs.dagger = "com.google.dagger:dagger:2.10"
 libs.daggerAndroid = "com.google.dagger:dagger-android:2.10"
