@@ -5,7 +5,7 @@
  */
 
 def libVersions = new Expando()
-libVersions.immutablesVersion = "2.4.4"
+libVersions.immutablesVersion = "2.5.5"
 libVersions.devMinSdkVersion = 21
 libVersions.proMinSdkVersion = 15
 libVersions.compileSdkVersion = 25
@@ -28,7 +28,7 @@ libs.jodaTime = "joda-time:joda-time:2.9.9:no-tzdb"
 libs.jodaTimeTzdb = "joda-time:joda-time:2.9.9"
 libs.jodaTimeAndroid = "net.danlew:android.joda:2.9.9"
 libs.multidex = "com.android.support:multidex:1.0.1"
-libs.androidJob = "com.evernote:android-job:1.1.8"
+libs.androidJob = "com.evernote:android-job:1.1.11"
 libs.androidReactiveLocation = "com.github.skedgo:Android-ReactiveLocation:636ef5d15581b54b60fb5ace003b812cc84c413a"
 libs.playServicesMaps = "com.google.android.gms:play-services-maps:$libVersions.playServicesVersion"
 libs.playServicesLocation = "com.google.android.gms:play-services-location:$libVersions.playServicesVersion"
@@ -38,9 +38,9 @@ libs.firebaseAppIndexing = "com.google.firebase:firebase-appindexing:$libVersion
 libs.supportAnnotations = "com.android.support:support-annotations:$libVersions.supportLibraryVersion"
 
 libs.value = "org.immutables:value:$libVersions.immutablesVersion"
-libs.valueAnnotations = "org.immutables:value:$libVersions.immutablesVersion:annotations"
+libs.valueAnnotations = "org.immutables:value:$libVersions.immutablesVersion"
 libs.builderAnnotations = "org.immutables:builder:$libVersions.immutablesVersion"
-libs.gsonAnnotations = "org.immutables:gson:$libVersions.immutablesVersion:annotations"
+libs.gsonAnnotations = "org.immutables:gson:$libVersions.immutablesVersion"
 
 libs.dagger = "com.google.dagger:dagger:2.10"
 libs.daggerAndroid = "com.google.dagger:dagger-android:2.10"
