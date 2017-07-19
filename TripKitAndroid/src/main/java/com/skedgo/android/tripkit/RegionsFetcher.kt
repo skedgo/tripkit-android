@@ -1,7 +1,7 @@
 package com.skedgo.android.tripkit
 
-import rx.Observable
+import rx.Completable
 
 internal interface RegionsFetcher {
-  fun fetchAsync(): Observable<Void>
+  fun fetchAsync(): Completable
 }

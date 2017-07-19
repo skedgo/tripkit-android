@@ -2,6 +2,7 @@ package com.skedgo.android.tripkit
 
 import org.assertj.core.api.Java6Assertions.assertThat
 import org.junit.Test
+import rx.Completable
 import rx.Observable
 import rx.Subscriber
 import java.util.concurrent.atomic.AtomicInteger
@@ -9,10 +10,8 @@ import java.util.concurrent.atomic.AtomicInteger
 class CacheImplTest : TripKitAndroidRobolectricTest() {
   @Test fun someInitialBehaviors() {
     val fetcherHitCounter = AtomicInteger()
-    val fetcher = Observable.create(Observable.OnSubscribe<Void> { subscriber ->
-      fetcherHitCounter.incrementAndGet()
-      subscriber.onCompleted()
-    })
+    val fetcher = Completable.complete()
+        .doOnCompleted { fetcherHitCounter.incrementAndGet() }
     val loader = Observable.create(object : Observable.OnSubscribe<String> {
       private val hitCounter = AtomicInteger(-1)
 

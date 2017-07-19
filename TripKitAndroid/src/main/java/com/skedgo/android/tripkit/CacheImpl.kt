@@ -1,5 +1,6 @@
 package com.skedgo.android.tripkit
 
+import rx.Completable
 import rx.Observable
 import rx.functions.Func1
 import java.util.concurrent.atomic.AtomicReference
@@ -9,7 +10,7 @@ import java.util.concurrent.atomic.AtomicReference
  * @param loader  Always loads data from disk. It shouldn't cache data in memory.
  */
 internal class CacheImpl<TData>(
-    fetcher: Observable<Void>,
+    fetcher: Completable,
     loader: Observable<TData>
 ) : Cache<TData> {
   private val memory = AtomicReference<TData>()
@@ -19,8 +20,7 @@ internal class CacheImpl<TData>(
 
   init {
     this.fetcher = fetcher
-        .map { null as TData }
-        .ignoreElements()
+        .toObservable<TData>()
         .replay().refCount()
     this.loader = loader
         /* Cache in memory. */

@@ -37,13 +37,15 @@ class FetchRegionsService : GcmTaskService() {
   }
 }
 
-internal fun Observable<TripKit>.refreshRegions() =
-    flatMap { it.regionService.refreshAsync() }
-        .map { GcmNetworkManager.RESULT_SUCCESS }
-        .onErrorReturn { GcmNetworkManager.RESULT_RESCHEDULE }
-        // To avoid NoSuchElementException when using first().
-        // The case of empty emission can happen
-        // when `regions.json` request returns nothing.
-        .defaultIfEmpty(GcmNetworkManager.RESULT_RESCHEDULE)
-        .toBlocking()
-        .first()
+internal fun Observable<TripKit>.refreshRegions() = this
+    .flatMap {
+      it.regionService
+          .refreshAsync()
+          .toObservable<Unit>()
+    }
+    .map { GcmNetworkManager.RESULT_SUCCESS }
+    .onErrorReturn { GcmNetworkManager.RESULT_RESCHEDULE }
+    // To avoid NoSuchElementException when using first().
+    .defaultIfEmpty(GcmNetworkManager.RESULT_SUCCESS)
+    .toBlocking()
+    .first()

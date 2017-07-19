@@ -5,6 +5,7 @@ import com.skedgo.android.common.model.Region
 import com.skedgo.android.common.model.TransportMode
 import com.skedgo.android.tripkit.tsp.Paratransit
 import com.skedgo.android.tripkit.tsp.RegionInfo
+import rx.Completable
 
 import rx.Observable
 import skedgo.tripkit.routing.ModeInfo
@@ -21,7 +22,7 @@ interface RegionService {
   fun getTransportModesByIdsAsync(modeIds: List<String>): Observable<List<TransportMode>>
   fun getTransportModesByRegionAsync(region: Region): Observable<List<TransportMode>>
   fun getTransportModesByLocationAsync(location: Location): Observable<List<TransportMode>>
-  fun refreshAsync(): Observable<Void>
+  fun refreshAsync(): Completable
   fun getRegionInfoByRegionAsync(region: Region): Observable<RegionInfo>
   fun fetchParatransitByRegionAsync(region: Region): Observable<Paratransit>
   fun getTransitModesByRegionAsync(region: Region): Observable<List<ModeInfo>>
