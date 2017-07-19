@@ -16,17 +16,7 @@ class FetchRegionsService : GcmTaskService() {
             // the task is rescheduled after TripKit initialization.
             TripKit.getInstance()
           }
-          .flatMap {
-            it.regionService.refreshAsync()
-          }
-          .map { GcmNetworkManager.RESULT_SUCCESS }
-          .onErrorReturn { GcmNetworkManager.RESULT_RESCHEDULE }
-          // To avoid NoSuchElementException when using first().
-          // The case of empty emission can happen
-          // when `regions.json` request returns nothing.
-          .defaultIfEmpty(GcmNetworkManager.RESULT_RESCHEDULE)
-          .toBlocking()
-          .first()
+          .refreshRegions()
 
   companion object {
     fun scheduleAsync(context: Context): Observable<Void> =
@@ -46,3 +36,14 @@ class FetchRegionsService : GcmTaskService() {
         }
   }
 }
+
+internal fun Observable<TripKit>.refreshRegions() =
+    flatMap { it.regionService.refreshAsync() }
+        .map { GcmNetworkManager.RESULT_SUCCESS }
+        .onErrorReturn { GcmNetworkManager.RESULT_RESCHEDULE }
+        // To avoid NoSuchElementException when using first().
+        // The case of empty emission can happen
+        // when `regions.json` request returns nothing.
+        .defaultIfEmpty(GcmNetworkManager.RESULT_RESCHEDULE)
+        .toBlocking()
+        .first()
