@@ -21,6 +21,10 @@ class FetchRegionsService : GcmTaskService() {
           }
           .map { GcmNetworkManager.RESULT_SUCCESS }
           .onErrorReturn { GcmNetworkManager.RESULT_RESCHEDULE }
+          // To avoid NoSuchElementException when using first().
+          // The case of empty emission can happen
+          // when `regions.json` request returns nothing.
+          .defaultIfEmpty(GcmNetworkManager.RESULT_RESCHEDULE)
           .toBlocking()
           .first()
 
