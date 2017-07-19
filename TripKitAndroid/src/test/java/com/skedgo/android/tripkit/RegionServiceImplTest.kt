@@ -13,6 +13,7 @@ import dagger.internal.Factory
 import org.assertj.core.api.Java6Assertions.assertThat
 import org.junit.Test
 import org.mockito.Mockito.*
+import rx.Completable
 import rx.Observable
 import rx.observers.TestSubscriber
 import java.util.*
@@ -185,7 +186,7 @@ class RegionServiceImplTest : TripKitAndroidRobolectricTest() {
   }
 
   @Test fun shouldInvalidateCachesAfterRefreshing() {
-    whenever(regionsFetcher.fetchAsync()).thenReturn(Observable.empty<Void>())
+    whenever(regionsFetcher.fetchAsync()).thenReturn(Completable.complete())
     val subscriber = TestSubscriber<Void>()
     regionService.refreshAsync().subscribe(subscriber)
 
