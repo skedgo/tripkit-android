@@ -41,6 +41,7 @@ class A2bTripsViewModel constructor(
                 .build()
         )
       }
+      .observeOn(mainThread())
       .scan { previous, new -> previous + new }
       .map { it.sortedWith(TripGroupComparators.ARRIVAL_COMPARATOR_CHAIN) }
       .map { it.map { TripViewModel(context, it, onTripSelected) } }
@@ -49,7 +50,6 @@ class A2bTripsViewModel constructor(
       }
       .doOnSubscribe { _isRefreshing.onNext(true) }
       .doOnUnsubscribe { _isRefreshing.onNext(false) }
-      .observeOn(mainThread())
       .doOnNext { items.update(it.first, it.second) }
       .map { Unit }
 }
