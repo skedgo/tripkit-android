@@ -6,8 +6,8 @@ group = 'com.skedgo'
 version = '1.1'
 
 android {
-  compileSdkVersion 25
-  buildToolsVersion '25.0.2'
+  compileSdkVersion libVersions.compileSdkVersion
+  buildToolsVersion libVersions.buildToolsVersion
 
   defaultConfig {
     minSdkVersion 15
