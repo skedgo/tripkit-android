@@ -1,14 +1,11 @@
 package com.skedgo.android.tripkit;
 
-import skedgo.tripkit.routing.RoutingResponse;
 import com.skedgo.android.common.util.Gsons;
 
 import org.apache.commons.io.IOUtils;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.robolectric.annotation.Config;
 
 import java.io.IOException;
 import java.nio.charset.Charset;
@@ -21,12 +18,11 @@ import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
 import rx.observers.TestSubscriber;
+import skedgo.tripkit.routing.RoutingResponse;
 
-import static org.assertj.core.api.Java6Assertions.*;
+import static org.assertj.core.api.Java6Assertions.assertThat;
 
-@RunWith(TestRunner.class)
-@Config(constants = BuildConfig.class)
-public class TemporaryUrlApiTest {
+public class TemporaryUrlApiTest extends TripKitAndroidRobolectricTest {
   private MockWebServer server;
   private TemporaryUrlApi api;
   private HttpUrl baseUrl;

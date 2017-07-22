@@ -1,14 +1,11 @@
 package com.skedgo.android.tripkit.alerts;
 
 import com.skedgo.android.common.model.ImmutableRealtimeAlert;
-import com.skedgo.android.tripkit.BuildConfig;
-import com.skedgo.android.tripkit.TestRunner;
+import com.skedgo.android.tripkit.TripKitAndroidRobolectricTest;
 
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.robolectric.annotation.Config;
 
 import java.io.IOException;
 import java.util.Arrays;
@@ -22,9 +19,7 @@ import thuytrinh.mockwebserverrule.MockWebServerRule;
 import static rx.schedulers.Schedulers.immediate;
 import static thuytrinh.mockwebserverrule.MockWebServerRule.createMockResponse;
 
-@RunWith(TestRunner.class)
-@Config(constants = BuildConfig.class)
-public class RealtimeAlertApiTest {
+public class RealtimeAlertApiTest extends TripKitAndroidRobolectricTest {
   @Rule public final MockWebServerRule serverRule = new MockWebServerRule();
   private RealtimeAlertApi api;
 

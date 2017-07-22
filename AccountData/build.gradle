@@ -31,9 +31,9 @@ dependencies {
 
   compile libs.supportAnnotations
   compile libs.rxjava
-  compile "com.squareup.retrofit2:retrofit:2.0.2"
-  compile "com.squareup.retrofit2:converter-gson:2.0.2"
-  compile "com.squareup.retrofit2:adapter-rxjava:2.0.2"
+  compile libs.retrofitConverterGson
+  compile libs.retrofitAdapterRxJava
+  compile libs.retrofit
   compile libs.gson
   provided project(":AccountDomain")
   provided project(":TripKitDomain")
