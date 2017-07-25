@@ -8,8 +8,8 @@ group = 'com.skedgo'
 version = '1.0'
 
 android {
-  compileSdkVersion 25
-  buildToolsVersion '25.0.2'
+  compileSdkVersion libVersions.compileSdkVersion
+  buildToolsVersion libVersions.buildToolsVersion
 
   defaultConfig {
     minSdkVersion 15
@@ -39,7 +39,7 @@ dependencies {
   compile project(':TripKitAndroid')
   compile project(':trip-kit-booking')
 
-  compile 'uk.co.chrisjenx:calligraphy:2.1.0'
+  compile libs.calligraphy
   compile 'com.github.skedgo:robotos:v1.1'
 
   compile libs.dagger
