@@ -8,8 +8,8 @@ group = 'com.skedgo.tripkit'
 version = '1.0'
 
 android {
-  compileSdkVersion 25
-  buildToolsVersion "25.0.2"
+  compileSdkVersion libVersions.compileSdkVersion
+  buildToolsVersion libVersions.buildToolsVersion
 
   defaultConfig {
     minSdkVersion 10
