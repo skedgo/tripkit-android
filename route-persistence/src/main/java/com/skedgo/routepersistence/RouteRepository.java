@@ -33,7 +33,7 @@ public class RouteRepository {
       return new ArrayList<>(mem);
     }
 
-    final List<TripGroup> disk = routeStore.queryAsync(GroupQueries.hasRequestId(requestId))
+    final List<TripGroup> disk = routeStore.getTripGroupsByRouteIdAsync(requestId)
         .toList()
         .toBlocking()
         .first();
@@ -51,6 +51,7 @@ public class RouteRepository {
   @DebugLog public synchronized void addTripGroups(
       String requestId,
       @NonNull List<TripGroup> groups) {
+
     CopyOnWriteArrayList<TripGroup> existingGroups;
     existingGroups = memCache.get(requestId);
     if (existingGroups == null) {

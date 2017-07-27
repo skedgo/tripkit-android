@@ -7,13 +7,7 @@ import skedgo.tripkit.routing.TripGroup;
 
 import java.util.concurrent.TimeUnit;
 
-import static com.skedgo.routepersistence.RouteContract.COL_ARRIVE;
-import static com.skedgo.routepersistence.RouteContract.COL_DISPLAY_TRIP_ID;
-import static com.skedgo.routepersistence.RouteContract.COL_GROUP_ID;
-import static com.skedgo.routepersistence.RouteContract.COL_ID;
-import static com.skedgo.routepersistence.RouteContract.COL_UUID;
-import static com.skedgo.routepersistence.RouteContract.TABLE_TRIPS;
-import static com.skedgo.routepersistence.RouteContract.TABLE_TRIP_GROUPS;
+import static com.skedgo.routepersistence.TripGroupContract.*;
 
 public final class WhereClauses {
   private WhereClauses() {}
@@ -25,10 +19,11 @@ public final class WhereClauses {
    */
   public static Pair<String, String[]> happenedBefore(long hours, long currentMillis) {
     final String where = "EXISTS ("
-        + "SELECT * FROM " + TABLE_TRIPS
-        + " WHERE " + TABLE_TRIP_GROUPS + "." + COL_UUID + " = " + TABLE_TRIPS + "." + COL_GROUP_ID
+        + "SELECT * FROM " + TABLE_TRIPS + " JOIN " + TABLE_TRIP_GROUPS
+        + " ON " + TABLE_TRIP_GROUPS + "." + COL_UUID + " = " + TABLE_TRIPS + "." + COL_GROUP_ID
         + " AND " + TABLE_TRIP_GROUPS + "." + COL_DISPLAY_TRIP_ID + " = " + TABLE_TRIPS + "." + COL_ID
-        + " AND " + TABLE_TRIPS + "." + COL_ARRIVE + " < ?"
+        + " JOIN " + RouteContract.ROUTES + " ON " + RouteContract.TRIP_GROUP_ID + " = " + TABLE_TRIP_GROUPS + "." + COL_UUID
+        + " WHERE " + TABLE_TRIPS + "." + COL_ARRIVE + " < ?"
         + ")";
     final long secs = TimeUnit.HOURS.toSeconds(hours);
     final long currentSecs = TimeUnit.MILLISECONDS.toSeconds(currentMillis);
