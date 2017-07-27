@@ -8,8 +8,8 @@ group = 'com.skedgo.tripkit'
 version = '1.0'
 
 android {
-  compileSdkVersion 25
-  buildToolsVersion "25.0.2"
+  compileSdkVersion libVersions.compileSdkVersion
+  buildToolsVersion libVersions.buildToolsVersion
 
   defaultConfig {
     minSdkVersion 10
@@ -28,9 +28,9 @@ dependencies {
   testCompile libs.mockitoKotlin, { exclude group: 'org.jetbrains.kotlin' }
 
   compile libs.rxjava
-  compile "com.squareup.retrofit2:retrofit:2.0.2"
-  compile "com.squareup.retrofit2:converter-gson:2.0.2"
-  compile "com.squareup.retrofit2:adapter-rxjava:2.0.2"
+  compile libs.retrofitConverterGson
+  compile libs.retrofitAdapterRxJava
+  compile libs.retrofit
   compile libs.gson
 
   compile libs.dagger

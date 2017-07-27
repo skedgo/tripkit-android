@@ -2,6 +2,7 @@ buildscript {
   apply from: "dependencies.gradle"
   ext.kotlinVersion = libVersions.kotlinVersion
   ext.androidPluginVersion = libVersions.androidPluginVersion
+  ext.okHttpVersion = libVersions.okHttpVersion
 
   repositories {
     jcenter()
@@ -23,15 +24,28 @@ buildscript {
 
 ext {
   tripKitAndroidMaven = "${rootDir}/maven/"
-  okHttpVersion = "3.2.0"
 }
 
 allprojects {
   apply from: "${rootDir}/dependencies.gradle"
 
+  // A workaround for https://code.google.com/p/android/issues/detail?id=72430
+  // and http://g.co/androidstudio/app-test-app-conflict.
+  configurations.all {
+    resolutionStrategy {
+      force libs.rxjava
+      force libs.okHttp
+      force libs.mockWebServer
+      force libs.retrofit
+      force libs.retrofitAdapterRxJava
+      force libs.retrofitConverterGson
+    }
+  }
+
   repositories {
     jcenter()
     maven { url "https://jitpack.io" }
+    maven { url "https://maven.google.com" }
     maven {
       url "http://skedgo.bintray.com/tripkit-android"
       credentials {

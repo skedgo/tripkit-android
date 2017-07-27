@@ -15,13 +15,13 @@ import retrofit2.Response;
 import rx.Observable;
 import rx.observers.TestSubscriber;
 
-import static org.assertj.core.api.Java6Assertions.*;
+import static org.assertj.core.api.Java6Assertions.assertThat;
 import static org.junit.Assert.assertNull;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 @RunWith(TestRunner.class)
-@Config(constants = BuildConfig.class)
+@Config(constants = BuildConfig.class, sdk = 23)
 public class BookingServiceTest {
   @Mock BookingApi bookingApi;
   private Gson gson;

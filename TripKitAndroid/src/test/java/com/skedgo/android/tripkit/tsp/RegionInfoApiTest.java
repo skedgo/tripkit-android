@@ -1,13 +1,10 @@
 package com.skedgo.android.tripkit.tsp;
 
-import com.skedgo.android.tripkit.BuildConfig;
-import com.skedgo.android.tripkit.TestRunner;
+import com.skedgo.android.tripkit.TripKitAndroidRobolectricTest;
 
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.robolectric.annotation.Config;
 
 import java.io.IOException;
 
@@ -18,12 +15,10 @@ import retrofit2.converter.gson.GsonConverterFactory;
 import rx.observers.TestSubscriber;
 import thuytrinh.mockwebserverrule.MockWebServerRule;
 
-import static org.assertj.core.api.Java6Assertions.*;
+import static org.assertj.core.api.Java6Assertions.assertThat;
 import static rx.schedulers.Schedulers.immediate;
 
-@RunWith(TestRunner.class)
-@Config(constants = BuildConfig.class)
-public class RegionInfoApiTest {
+public class RegionInfoApiTest extends TripKitAndroidRobolectricTest {
   @Rule public final MockWebServerRule serverRule = new MockWebServerRule();
   private RegionInfoApi api;
 
