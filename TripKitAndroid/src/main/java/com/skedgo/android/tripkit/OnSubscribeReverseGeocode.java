@@ -27,6 +27,10 @@ final class OnSubscribeReverseGeocode implements Observable.OnSubscribe<List<Add
   }
 
   @Override public void call(Subscriber<? super List<Address>> subscriber) {
+    if (!Geocoder.isPresent()) {
+      subscriber.onError(new UnsupportedOperationException("Geocoder Not available"));
+      return;
+    }
     final Geocoder geocoder = new Geocoder(context);
     try {
       subscriber.onNext(geocoder.getFromLocation(latitude, longitude, maxResults));
