@@ -2,7 +2,6 @@ package com.skedgo.android.tripkit;
 
 import android.content.Context;
 import android.location.Address;
-import android.text.TextUtils;
 
 import java.util.List;
 
@@ -32,13 +31,20 @@ public class GeocoderFactory {
         })
         .map(new Func1<List<Address>, String>() {
           @Override public String call(List<Address> addresses) {
-            // See http://developer.android.com/training/location/display-address.html.
+            // The old way used solution in
+            // http://developer.android.com/training/location/display-address.html.
+            // but we get empty string when getMaxAddressLineIndex = 0
+            // while getAddressLine() has got their string address.
+            // So that I suggest that we should calculate addressLine based on
+            // the actual addressLine of address.
             final Address address = addresses.get(0);
-            String[] addressLines = new String[address.getMaxAddressLineIndex()];
-            for (int i = 0; i < addressLines.length; i++) {
-              addressLines[i] = address.getAddressLine(i);
+            String addressDetail = address.getAddressLine(0) != null
+                ? address.getAddressLine(0) : "";
+            int index = 1;
+            while (address.getAddressLine(index) != null) {
+              addressDetail = addressDetail.concat(" " + address.getAddressLine(index++));
             }
-            return TextUtils.join(" ", addressLines);
+            return addressDetail;
           }
         })
         .subscribeOn(Schedulers.io());
