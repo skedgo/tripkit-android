@@ -69,5 +69,5 @@ libs.crashlytics = "com.crashlytics.sdk.android:crashlytics:2.6.5@aar"
 libs.retrofit = "com.squareup.retrofit2:retrofit:$libVersions.retrofitVersion"
 libs.retrofitAdapterRxJava = "com.squareup.retrofit2:adapter-rxjava:$libVersions.retrofitVersion"
 libs.retrofitConverterGson = "com.squareup.retrofit2:converter-gson:$libVersions.retrofitVersion"
-libs.calligraphy = "uk.co.chrisjenx:calligraphy:2.2.0"
+libs.calligraphy = "uk.co.chrisjenx:calligraphy:2.3.0"
 ext.libs = libs
