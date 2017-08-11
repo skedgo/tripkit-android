@@ -38,3 +38,5 @@ fun Trip.hasWalkOnly(): Boolean {
   val modeIds = getModeIds()
   return modeIds.size == 1 && modeIds.contains(TransportMode.ID_WALK)
 }
+
+fun Trip.getTripSegment(segmentId: Long): TripSegment? = segments?.find { it.id == segmentId }

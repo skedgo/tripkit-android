@@ -34,24 +34,6 @@ public class TripTest {
     assertThat(jsonTrip.has("plannedURL")).isTrue();
   }
 
-  @Test public void parcel() {
-    Trip trip = new Trip();
-    trip.setUpdateURL("https://trip.go");
-    trip.setProgressURL("https://trip.awesome");
-    trip.setWeightedScore(4.0f);
-    trip.setCurrencySymbol("$M");
-    trip.setCaloriesCost(12f);
-    trip.setPlannedURL("https://granduni.buzzhives.com/satapp/trip/planned/cdfcc687-d577-4ba3-9a2b-a76cc289aa94");
-
-    Trip actual = Trip.CREATOR.createFromParcel(Utils.parcel(trip));
-    assertThat(actual.getUpdateURL()).isEqualTo(trip.getUpdateURL());
-    assertThat(actual.getProgressURL()).isEqualTo(trip.getProgressURL());
-    assertThat(actual.getWeightedScore()).isEqualTo(trip.getWeightedScore());
-    assertThat(actual.getCurrencySymbol()).isEqualTo(trip.getCurrencySymbol());
-    assertThat(actual.getCaloriesCost()).isEqualTo(trip.getCaloriesCost());
-    assertThat(actual.getPlannedURL()).isEqualTo(trip.getPlannedURL());
-  }
-
   @Test public void displayCost() {
     final Trip trip = new Trip();
     trip.setCurrencySymbol("VND");
