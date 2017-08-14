@@ -40,6 +40,9 @@ public class Query implements Parcelable {
       query.mWalkingSpeed = in.readInt();
       query.transportModeIds = query.readTransportModeIds(in);
       query.maxWalkingTime = in.readInt();
+
+      query.mIsFromAtCurrentLocation = in.readByte() != 0;
+      query.mIsToAtCurrentLocation = in.readByte() != 0;
       return query;
     }
 
@@ -62,6 +65,8 @@ public class Query implements Parcelable {
   private int mCyclingSpeed;
   private int mWalkingSpeed;
   private int mTransferTime;
+  private boolean mIsFromAtCurrentLocation;
+  private boolean mIsToAtCurrentLocation;
 
   /**
    * This is only used for XUM project. TripGo may not need it.
@@ -90,6 +95,8 @@ public class Query implements Parcelable {
     query.mWalkingSpeed = mWalkingSpeed;
     query.mRegion = mRegion;
     query.maxWalkingTime = maxWalkingTime;
+    query.mIsFromAtCurrentLocation = mIsFromAtCurrentLocation;
+    query.mIsToAtCurrentLocation = mIsToAtCurrentLocation;
 
     // Perform deep copy of modes, so that removing member of one list doesn't affect the other.
     if (cloneTransportMode) {
@@ -262,6 +269,22 @@ public class Query implements Parcelable {
     mWalkingSpeed = walkingSpeed;
   }
 
+  public boolean isFromAtCurrentLocation() {
+    return mIsFromAtCurrentLocation;
+  }
+
+  public boolean isToAtCurrentLocation() {
+    return mIsToAtCurrentLocation;
+  }
+
+  public void setIsFromAtCurrentLocation(boolean isFromAtCurrentLocation) {
+    this.mIsFromAtCurrentLocation = isFromAtCurrentLocation;
+  }
+
+  public void setIsToAtCurrentLocation(boolean isToAtCurrentLocation) {
+    this.mIsToAtCurrentLocation = isToAtCurrentLocation;
+  }
+
   @Override
   public boolean equals(final Object o) {
     if (this == o) {
@@ -300,6 +323,8 @@ public class Query implements Parcelable {
     dest.writeInt(mWalkingSpeed);
     dest.writeStringList(transportModeIds);
     dest.writeInt(maxWalkingTime);
+    dest.writeByte((byte) (mIsFromAtCurrentLocation ? 1 : 0));
+    dest.writeByte((byte) (mIsToAtCurrentLocation ? 1 : 0));
   }
 
   /**
