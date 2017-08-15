@@ -6,18 +6,18 @@ import rx.subjects.PublishSubject
 import skedgo.tripkit.routing.TripGroup
 import java.util.concurrent.ConcurrentHashMap
 
-class RouteRepository constructor(
+open class RouteRepository constructor(
     private val routeStore: RouteStore,
     private val currentMillisProvider: Func0<Long>) {
 
-  private val requestIdTripGroupIdCache: ConcurrentHashMap<String, List<String>> = ConcurrentHashMap()
+  private val requestIdTripGroupIdCache: ConcurrentHashMap<String, MutableList<String>> = ConcurrentHashMap()
   private val tripGroupCache: ConcurrentHashMap<String, TripGroup> = ConcurrentHashMap()
   private val onNewTripGroupsAvailable = PublishSubject.create<String>()
 
-  fun getTripGroups(requestId: String): List<TripGroup> =
-      if (requestIdTripGroupIdCache.contains(requestId)) {
+  open fun getTripGroups(requestId: String): List<TripGroup> =
+      if (requestIdTripGroupIdCache.containsKey(requestId)) {
         requestIdTripGroupIdCache[requestId]
-            ?.filter { tripGroupCache.contains(it) }
+            ?.filter { tripGroupCache.containsKey(it) }
             ?.map { tripGroupCache[it]!! }!!
       } else {
         routeStore.queryAsync(GroupQueries.hasRequestId(requestId))
@@ -27,25 +27,30 @@ class RouteRepository constructor(
             .first()
       }
 
-  fun getTripGroup(uuid: String) = tripGroupCache[uuid]
+  open fun getTripGroup(uuid: String): TripGroup? = tripGroupCache[uuid]
 
-  fun deletePastRoutesAsync(): Observable<Int> = routeStore.deleteAsync(
+  open fun deletePastRoutesAsync(): Observable<Int> = routeStore.deleteAsync(
       WhereClauses.happenedBefore(
           3, /* hours */
           currentMillisProvider.call()
       ))
 
-  fun addTripGroups(requestId: String, groups: List<TripGroup>) {
-    requestIdTripGroupIdCache[requestId] = groups.map { tripGroup ->
+  open fun addTripGroups(requestId: String, groups: List<TripGroup>) {
+    val tripGroupIds = groups.map { tripGroup ->
       addTripGroup(tripGroup)
       tripGroup.uuid()
     }
+    if (requestIdTripGroupIdCache[requestId] == null) {
+      requestIdTripGroupIdCache[requestId] = mutableListOf()
+    }
+    requestIdTripGroupIdCache[requestId]!!.addAll(tripGroupIds)
+    onNewTripGroupsAvailable.onNext(requestId)
   }
 
-  fun addTripGroup(tripGroup: TripGroup) {
+  open fun addTripGroup(tripGroup: TripGroup) {
     tripGroupCache[tripGroup.uuid()] = tripGroup
   }
 
-  fun onNewTripGroupsAvailable(): Observable<String> = onNewTripGroupsAvailable.asObservable()
+  open fun onNewTripGroupsAvailable(): Observable<String> = onNewTripGroupsAvailable.asObservable()
 
 }
