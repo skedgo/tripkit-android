@@ -10,8 +10,8 @@ open class RouteRepository constructor(
     private val routeStore: RouteStore,
     private val currentMillisProvider: Func0<Long>) {
 
-  private val requestIdTripGroupIdCache: ConcurrentHashMap<String, MutableList<String>> = ConcurrentHashMap()
-  private val tripGroupCache: ConcurrentHashMap<String, TripGroup> = ConcurrentHashMap()
+  internal var requestIdTripGroupIdCache: ConcurrentHashMap<String, MutableList<String>> = ConcurrentHashMap()
+  internal var tripGroupCache: ConcurrentHashMap<String, TripGroup> = ConcurrentHashMap()
   private val onNewTripGroupsAvailable = PublishSubject.create<String>()
 
   open fun getTripGroups(requestId: String): List<TripGroup> =
