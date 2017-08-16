@@ -10,7 +10,7 @@ import skedgo.tripkit.routing.TripSegment;
 import com.skedgo.android.tripkit.BookingAction;
 import com.skedgo.android.tripkit.BuildConfig;
 import com.skedgo.android.tripkit.ExternalActionParams;
-import com.skedgo.android.tripkit.GeocoderFactory;
+import skedgo.tripkit.geocoding.Geocodable;
 import com.skedgo.android.tripkit.TestRunner;
 
 import org.junit.Before;
@@ -41,7 +41,6 @@ import static com.skedgo.android.tripkit.bookingproviders.BookingResolver.OTHERS
 import static com.skedgo.android.tripkit.bookingproviders.BookingResolver.SMS;
 import static org.assertj.core.api.Java6Assertions.*;
 import static org.mockito.Matchers.anyDouble;
-import static org.mockito.Matchers.anyInt;
 import static org.mockito.Matchers.eq;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
@@ -63,7 +62,7 @@ public class BookingResolverImplTest {
         }
       };
   @Mock PackageManager packageManager;
-  @Mock GeocoderFactory geocoderFactory;
+  @Mock Geocodable geocoderFactory;
   private BookingResolverImpl bookingResolver;
 
   @Before public void before() {
@@ -157,7 +156,7 @@ public class BookingResolverImplTest {
   }
 
   @Test public void hasNoFlitwaysApp_hasPartnerKey() {
-    when(geocoderFactory.firstAddressAsync(anyDouble(), anyDouble(), anyInt()))
+    when(geocoderFactory.getAddress(anyDouble(), anyDouble()))
         .thenAnswer(new Answer<Observable<String>>() {
           @Override public Observable<String> answer(InvocationOnMock invocation) {
             final double lat = invocation.getArgument(0);
@@ -256,7 +255,7 @@ public class BookingResolverImplTest {
   }
 
   @Test public void hasGoCatchApp() throws PackageManager.NameNotFoundException {
-    when(geocoderFactory.firstAddressAsync(anyDouble(), anyDouble(), anyInt()))
+    when(geocoderFactory.getAddress(anyDouble(), anyDouble()))
         .thenAnswer(new Answer<Observable<String>>() {
           @Override public Observable<String> answer(InvocationOnMock invocation) {
             final double lat = invocation.getArgument(0);
