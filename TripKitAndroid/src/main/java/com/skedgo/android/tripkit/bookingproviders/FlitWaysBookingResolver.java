@@ -67,8 +67,8 @@ final class FlitWaysBookingResolver implements BookingResolver {
           .flatMap(new Func1<HttpUrl.Builder, Observable<BookingAction>>() {
             @Override public Observable<BookingAction> call(final HttpUrl.Builder builder) {
               return Observable.combineLatest(
-                  geocoderFactory.firstAddressAsync(departure.getLat(), departure.getLon(), 1),
-                  geocoderFactory.firstAddressAsync(arrival.getLat(), arrival.getLon(), 1),
+                  geocoderFactory.getFirstAddress(departure.getLat(), departure.getLon(), 1),
+                  geocoderFactory.getFirstAddress(arrival.getLat(), arrival.getLon(), 1),
                   new Func2<String, String, BookingAction>() {
                     @Override
                     public BookingAction call(String departureAddress, String arrivalAddress) {

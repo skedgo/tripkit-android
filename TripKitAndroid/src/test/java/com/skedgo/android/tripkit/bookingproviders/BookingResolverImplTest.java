@@ -157,7 +157,7 @@ public class BookingResolverImplTest {
   }
 
   @Test public void hasNoFlitwaysApp_hasPartnerKey() {
-    when(geocoderFactory.firstAddressAsync(anyDouble(), anyDouble(), anyInt()))
+    when(geocoderFactory.getFirstAddress(anyDouble(), anyDouble(), anyInt()))
         .thenAnswer(new Answer<Observable<String>>() {
           @Override public Observable<String> answer(InvocationOnMock invocation) {
             final double lat = invocation.getArgument(0);
@@ -256,7 +256,7 @@ public class BookingResolverImplTest {
   }
 
   @Test public void hasGoCatchApp() throws PackageManager.NameNotFoundException {
-    when(geocoderFactory.firstAddressAsync(anyDouble(), anyDouble(), anyInt()))
+    when(geocoderFactory.getFirstAddress(anyDouble(), anyDouble(), anyInt()))
         .thenAnswer(new Answer<Observable<String>>() {
           @Override public Observable<String> answer(InvocationOnMock invocation) {
             final double lat = invocation.getArgument(0);
