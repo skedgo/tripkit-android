@@ -8,7 +8,7 @@ import android.support.annotation.Nullable;
 
 import com.skedgo.android.tripkit.BookingAction;
 import com.skedgo.android.tripkit.ExternalActionParams;
-import com.skedgo.android.tripkit.Geocodable;
+import skedgo.tripkit.geocoding.Geocodable;
 
 import java.util.HashMap;
 import java.util.Map;

@@ -8,6 +8,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import rx.observers.TestSubscriber;
+import skedgo.tripkit.geocoding.Geocodable;
 
 @RunWith(AndroidJUnit4.class)
 public class GeocodableTest {

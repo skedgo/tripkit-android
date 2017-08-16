@@ -4,6 +4,7 @@ import android.content.Context
 import android.text.TextUtils
 import rx.Observable
 import rx.schedulers.Schedulers
+import skedgo.tripkit.geocoding.Geocodable
 
 class GeocoderFactory(private val context: Context) : Geocodable {
   override fun getAddress(latitude: Double, longitude: Double): Observable<String> {

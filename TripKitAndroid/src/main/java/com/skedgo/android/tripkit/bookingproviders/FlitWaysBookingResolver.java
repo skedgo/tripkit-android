@@ -8,7 +8,7 @@ import com.skedgo.android.common.model.Location;
 import skedgo.tripkit.routing.TripSegment;
 import com.skedgo.android.tripkit.BookingAction;
 import com.skedgo.android.tripkit.ExternalActionParams;
-import com.skedgo.android.tripkit.Geocodable;
+import skedgo.tripkit.geocoding.Geocodable;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;

@@ -1,4 +1,4 @@
-package com.skedgo.android.tripkit
+package skedgo.tripkit.geocoding
 
 import rx.Observable
 
