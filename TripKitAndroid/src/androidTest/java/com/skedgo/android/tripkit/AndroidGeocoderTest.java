@@ -11,11 +11,11 @@ import rx.observers.TestSubscriber;
 import skedgo.tripkit.geocoding.Geocodable;
 
 @RunWith(AndroidJUnit4.class)
-public class GeocodableTest {
+public class AndroidGeocoderTest {
   private Geocodable factory;
 
   @Before public void before() {
-    factory = new GeocoderFactory(InstrumentationRegistry.getInstrumentation().getTargetContext());
+    factory = new AndroidGeocoder(InstrumentationRegistry.getInstrumentation().getTargetContext());
   }
 
   /* This test may fail if devices don't have network. */

@@ -6,7 +6,7 @@ import rx.Observable
 import rx.schedulers.Schedulers
 import skedgo.tripkit.geocoding.Geocodable
 
-class GeocoderFactory(private val context: Context) : Geocodable {
+class AndroidGeocoder(private val context: Context) : Geocodable {
   override fun getAddress(latitude: Double, longitude: Double): Observable<String> {
     return Observable
         .create(OnSubscribeReverseGeocode(context, latitude, longitude, 1))
