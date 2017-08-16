@@ -6,13 +6,9 @@ import rx.Observable
 import rx.schedulers.Schedulers
 
 class GeocoderFactory(private val context: Context) {
-  fun getFirstAddress(
-      latitude: Double,
-      longitude: Double,
-      maxResults: Int
-  ): Observable<String> {
+  fun getAddress(latitude: Double, longitude: Double): Observable<String> {
     return Observable
-        .create(OnSubscribeReverseGeocode(context, latitude, longitude, maxResults))
+        .create(OnSubscribeReverseGeocode(context, latitude, longitude, 1))
         .filter { addresses -> addresses != null && !addresses.isEmpty() }
         .map { addresses ->
           // See http://developer.android.com/training/location/display-address.html.

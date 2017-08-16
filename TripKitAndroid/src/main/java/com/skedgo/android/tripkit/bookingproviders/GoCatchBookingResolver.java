@@ -39,7 +39,7 @@ final class GoCatchBookingResolver implements BookingResolver {
       final TripSegment segment = params.segment();
       final Location departure = segment.getFrom();
       final Location arrival = segment.getTo();
-      return geocoderFactory.getFirstAddress(arrival.getLat(), arrival.getLon(), 1)
+      return geocoderFactory.getAddress(arrival.getLat(), arrival.getLon())
           .map(new Func1<String, BookingAction>() {
             @Override public BookingAction call(String arrivalAddress) {
               final Uri uri = Uri.parse("gocatch://referral")

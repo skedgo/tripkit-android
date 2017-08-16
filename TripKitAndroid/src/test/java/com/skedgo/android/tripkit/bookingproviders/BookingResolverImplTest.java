@@ -41,7 +41,6 @@ import static com.skedgo.android.tripkit.bookingproviders.BookingResolver.OTHERS
 import static com.skedgo.android.tripkit.bookingproviders.BookingResolver.SMS;
 import static org.assertj.core.api.Java6Assertions.*;
 import static org.mockito.Matchers.anyDouble;
-import static org.mockito.Matchers.anyInt;
 import static org.mockito.Matchers.eq;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
@@ -157,7 +156,7 @@ public class BookingResolverImplTest {
   }
 
   @Test public void hasNoFlitwaysApp_hasPartnerKey() {
-    when(geocoderFactory.getFirstAddress(anyDouble(), anyDouble(), anyInt()))
+    when(geocoderFactory.getAddress(anyDouble(), anyDouble()))
         .thenAnswer(new Answer<Observable<String>>() {
           @Override public Observable<String> answer(InvocationOnMock invocation) {
             final double lat = invocation.getArgument(0);
@@ -256,7 +255,7 @@ public class BookingResolverImplTest {
   }
 
   @Test public void hasGoCatchApp() throws PackageManager.NameNotFoundException {
-    when(geocoderFactory.getFirstAddress(anyDouble(), anyDouble(), anyInt()))
+    when(geocoderFactory.getAddress(anyDouble(), anyDouble()))
         .thenAnswer(new Answer<Observable<String>>() {
           @Override public Observable<String> answer(InvocationOnMock invocation) {
             final double lat = invocation.getArgument(0);
