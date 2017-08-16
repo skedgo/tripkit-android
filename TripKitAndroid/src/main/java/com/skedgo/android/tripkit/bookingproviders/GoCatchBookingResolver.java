@@ -10,7 +10,7 @@ import com.skedgo.android.common.model.Location;
 import skedgo.tripkit.routing.TripSegment;
 import com.skedgo.android.tripkit.BookingAction;
 import com.skedgo.android.tripkit.ExternalActionParams;
-import com.skedgo.android.tripkit.GeocoderFactory;
+import com.skedgo.android.tripkit.Geocodable;
 import com.skedgo.android.tripkit.R;
 
 import rx.Observable;
@@ -22,12 +22,12 @@ final class GoCatchBookingResolver implements BookingResolver {
 
   private final Resources resources;
   private final Func1<String, Boolean> isPackageInstalled;
-  private final GeocoderFactory geocoderFactory;
+  private final Geocodable geocoderFactory;
 
   GoCatchBookingResolver(
       @NonNull Resources resources,
       @NonNull Func1<String, Boolean> isPackageInstalled,
-      @NonNull GeocoderFactory geocoderFactory) {
+      @NonNull Geocodable geocoderFactory) {
     this.resources = resources;
     this.isPackageInstalled = isPackageInstalled;
     this.geocoderFactory = geocoderFactory;

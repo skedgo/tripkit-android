@@ -8,7 +8,7 @@ import com.skedgo.android.common.model.Location;
 import skedgo.tripkit.routing.TripSegment;
 import com.skedgo.android.tripkit.BookingAction;
 import com.skedgo.android.tripkit.ExternalActionParams;
-import com.skedgo.android.tripkit.GeocoderFactory;
+import com.skedgo.android.tripkit.Geocodable;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -23,9 +23,9 @@ import rx.functions.Func2;
 import rx.schedulers.Schedulers;
 
 final class FlitWaysBookingResolver implements BookingResolver {
-  private final GeocoderFactory geocoderFactory;
+  private final Geocodable geocoderFactory;
 
-  FlitWaysBookingResolver(GeocoderFactory geocoderFactory) {
+  FlitWaysBookingResolver(Geocodable geocoderFactory) {
     this.geocoderFactory = geocoderFactory;
   }
 

@@ -10,7 +10,7 @@ import skedgo.tripkit.routing.TripSegment;
 import com.skedgo.android.tripkit.BookingAction;
 import com.skedgo.android.tripkit.BuildConfig;
 import com.skedgo.android.tripkit.ExternalActionParams;
-import com.skedgo.android.tripkit.GeocoderFactory;
+import com.skedgo.android.tripkit.Geocodable;
 import com.skedgo.android.tripkit.TestRunner;
 
 import org.junit.Before;
@@ -62,7 +62,7 @@ public class BookingResolverImplTest {
         }
       };
   @Mock PackageManager packageManager;
-  @Mock GeocoderFactory geocoderFactory;
+  @Mock Geocodable geocoderFactory;
   private BookingResolverImpl bookingResolver;
 
   @Before public void before() {

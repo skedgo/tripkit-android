@@ -8,7 +8,7 @@ import android.support.annotation.Nullable;
 
 import com.skedgo.android.tripkit.BookingAction;
 import com.skedgo.android.tripkit.ExternalActionParams;
-import com.skedgo.android.tripkit.GeocoderFactory;
+import com.skedgo.android.tripkit.Geocodable;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -22,7 +22,7 @@ public final class BookingResolverImpl implements BookingResolver {
   public BookingResolverImpl(
       @NonNull Resources resources,
       @NonNull final PackageManager packageManager,
-      @NonNull GeocoderFactory geocoderFactory) {
+      @NonNull Geocodable geocoderFactory) {
     final Func1<String, Boolean> isPackageInstalled = new Func1<String, Boolean>() {
       @Override public Boolean call(String packageName) {
         try {

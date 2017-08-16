@@ -5,8 +5,8 @@ import android.text.TextUtils
 import rx.Observable
 import rx.schedulers.Schedulers
 
-class GeocoderFactory(private val context: Context) {
-  fun getAddress(latitude: Double, longitude: Double): Observable<String> {
+class GeocoderFactory(private val context: Context) : Geocodable {
+  override fun getAddress(latitude: Double, longitude: Double): Observable<String> {
     return Observable
         .create(OnSubscribeReverseGeocode(context, latitude, longitude, 1))
         .filter { addresses -> addresses != null && !addresses.isEmpty() }

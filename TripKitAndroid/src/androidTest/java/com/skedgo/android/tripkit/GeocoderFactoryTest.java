@@ -10,8 +10,8 @@ import org.junit.runner.RunWith;
 import rx.observers.TestSubscriber;
 
 @RunWith(AndroidJUnit4.class)
-public class GeocoderFactoryTest {
-  private GeocoderFactory factory;
+public class GeocodableTest {
+  private Geocodable factory;
 
   @Before public void before() {
     factory = new GeocoderFactory(InstrumentationRegistry.getInstrumentation().getTargetContext());
