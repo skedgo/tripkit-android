@@ -8,7 +8,7 @@ import com.skedgo.android.common.model.Location;
 import skedgo.tripkit.routing.TripSegment;
 import com.skedgo.android.tripkit.BookingAction;
 import com.skedgo.android.tripkit.ExternalActionParams;
-import com.skedgo.android.tripkit.GeocoderFactory;
+import skedgo.tripkit.geocoding.Geocodable;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -23,9 +23,9 @@ import rx.functions.Func2;
 import rx.schedulers.Schedulers;
 
 final class FlitWaysBookingResolver implements BookingResolver {
-  private final GeocoderFactory geocoderFactory;
+  private final Geocodable geocoderFactory;
 
-  FlitWaysBookingResolver(GeocoderFactory geocoderFactory) {
+  FlitWaysBookingResolver(Geocodable geocoderFactory) {
     this.geocoderFactory = geocoderFactory;
   }
 
@@ -67,8 +67,8 @@ final class FlitWaysBookingResolver implements BookingResolver {
           .flatMap(new Func1<HttpUrl.Builder, Observable<BookingAction>>() {
             @Override public Observable<BookingAction> call(final HttpUrl.Builder builder) {
               return Observable.combineLatest(
-                  geocoderFactory.firstAddressAsync(departure.getLat(), departure.getLon(), 1),
-                  geocoderFactory.firstAddressAsync(arrival.getLat(), arrival.getLon(), 1),
+                  geocoderFactory.getAddress(departure.getLat(), departure.getLon()),
+                  geocoderFactory.getAddress(arrival.getLat(), arrival.getLon()),
                   new Func2<String, String, BookingAction>() {
                     @Override
                     public BookingAction call(String departureAddress, String arrivalAddress) {

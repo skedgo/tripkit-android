@@ -8,19 +8,20 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import rx.observers.TestSubscriber;
+import skedgo.tripkit.geocoding.Geocodable;
 
 @RunWith(AndroidJUnit4.class)
-public class GeocoderFactoryTest {
-  private GeocoderFactory factory;
+public class AndroidGeocoderTest {
+  private Geocodable factory;
 
   @Before public void before() {
-    factory = new GeocoderFactory(InstrumentationRegistry.getInstrumentation().getTargetContext());
+    factory = new AndroidGeocoder(InstrumentationRegistry.getInstrumentation().getTargetContext());
   }
 
   /* This test may fail if devices don't have network. */
   @Test public void reverseGeocodeInCA() {
     final TestSubscriber<String> subscriber = new TestSubscriber<>();
-    factory.firstAddressAsync(33.956252, -118.217896, 1).subscribe(subscriber);
+    factory.getAddress(33.956252, -118.217896).subscribe(subscriber);
     subscriber.awaitTerminalEvent();
     subscriber.assertNoErrors();
     subscriber.assertValue("8677-8681 Evergreen Avenue South Gate, CA 90280");

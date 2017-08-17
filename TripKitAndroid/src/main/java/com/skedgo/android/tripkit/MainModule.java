@@ -29,7 +29,6 @@ import javax.inject.Singleton;
 
 import dagger.Module;
 import dagger.Provides;
-import okhttp3.HttpUrl;
 import okhttp3.OkHttpClient;
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory;
@@ -156,7 +155,7 @@ public class MainModule {
     return new BookingResolverImpl(
         context.getResources(),
         context.getPackageManager(),
-        new GeocoderFactory(context)
+        new AndroidGeocoder(context)
     );
   }
 
