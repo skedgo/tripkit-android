@@ -1,6 +1,7 @@
 apply plugin: 'com.android.library'
 apply plugin: 'com.jakewharton.hugo'
 apply plugin: 'com.github.dcendents.android-maven'
+apply plugin: 'kotlin-android'
 
 // For https://github.com/dcendents/android-maven-gradle-plugin.
 group = 'com.skedgo'
@@ -44,6 +45,8 @@ dependencies {
   testCompile libs.assertjCore
   testCompile libs.mockitoCore
   testCompile libs.robolectric
+  testCompile libs.mockitoKotlin, { exclude group: 'org.jetbrains.kotlin' }
+  testCompile libs.kluent
 
   androidTestCompile 'com.android.support.test.espresso:espresso-core:2.2.2', {
     exclude group: 'com.android.support', module: 'support-annotations'
