@@ -13,7 +13,8 @@ libVersions.buildToolsVersion = "26.0.1"
 libVersions.targetSdkVersion = 23
 libVersions.playServicesVersion = "11.0.2"
 libVersions.firebaseAppIndexingVersion = "11.0.2"
-libVersions.kotlinVersion = "1.1.4"
+// See change-log at https://github.com/JetBrains/kotlin/blob/master/ChangeLog.md.
+libVersions.kotlinVersion = "1.1.4-2"
 libVersions.supportLibraryVersion = "26.0.0"
 libVersions.androidPluginVersion = "2.3.3"
 libVersions.okHttpVersion = "3.8.1"
