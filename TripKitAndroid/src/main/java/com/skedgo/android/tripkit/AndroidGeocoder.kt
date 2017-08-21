@@ -14,7 +14,7 @@ class AndroidGeocoder(private val context: Context) : Geocodable {
         .map { addresses ->
           // See http://developer.android.com/training/location/display-address.html.
           val address = addresses[0]
-          val addressLines = arrayOfNulls<String>(address.maxAddressLineIndex)
+          val addressLines = arrayOfNulls<String>(address.maxAddressLineIndex + 1)
           for (i in addressLines.indices) {
             addressLines[i] = address.getAddressLine(i)
           }
