@@ -8,6 +8,7 @@ import android.support.annotation.NonNull;
 import android.util.Pair;
 
 import com.google.gson.Gson;
+
 import skedgo.tripkit.routing.Trip;
 import skedgo.tripkit.routing.TripGroup;
 import skedgo.tripkit.routing.TripSegment;
@@ -67,6 +68,30 @@ public class RouteStore {
           }
         })
         .subscribeOn(Schedulers.io());
+  }
+
+  public Observable<List<TripGroup>> updateAsync(final List<TripGroup> groups) {
+    return Observable.fromCallable(new Callable<List<TripGroup>>() {
+      @Override public List<TripGroup> call() throws Exception {
+        final SQLiteDatabase database = databaseHelper.getWritableDatabase();
+        database.beginTransaction();
+        try {
+          for (TripGroup group : groups) {
+            final boolean isNotifiable = group.getDisplayTrip().isFavourite();
+            final ContentValues values = new ContentValues();
+            values.put(COL_FREQUENCY, group.getFrequency());
+            values.put(COL_DISPLAY_TRIP_ID, group.getDisplayTripId());
+            values.put(COL_IS_NOTIFIABLE, isNotifiable ? 1 : 0);
+            database.update(TABLE_TRIP_GROUPS, values, COL_UUID + "= ?", new String[] {group.uuid()});
+            saveTrips(database, group.uuid(), group.getTrips());
+          }
+          database.setTransactionSuccessful();
+        } finally {
+          database.endTransaction();
+        }
+        return groups;
+      }
+    });
   }
 
   public Observable<List<TripGroup>> saveAsync(final String requestId, final List<TripGroup> groups) {
