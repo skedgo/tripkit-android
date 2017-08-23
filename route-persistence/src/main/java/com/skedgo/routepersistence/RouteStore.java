@@ -77,12 +77,11 @@ public class RouteStore {
         database.beginTransaction();
         try {
           for (TripGroup group : groups) {
-            final boolean isNotifiable = group.getDisplayTrip().isFavourite();
             final ContentValues values = new ContentValues();
-            values.put(COL_FREQUENCY, group.getFrequency());
             values.put(COL_DISPLAY_TRIP_ID, group.getDisplayTripId());
-            values.put(COL_IS_NOTIFIABLE, isNotifiable ? 1 : 0);
             database.update(TABLE_TRIP_GROUPS, values, COL_UUID + "= ?", new String[] {group.uuid()});
+            database.delete(TABLE_SEGMENTS, "tripId IN (SELECT tripId FROM trips WHERE trips.groupId = ?)", new String[] {group.uuid()});
+            database.delete(TABLE_TRIPS, COL_GROUP_ID + " = ?", new String[] {group.uuid()});
             saveTrips(database, group.uuid(), group.getTrips());
           }
           database.setTransactionSuccessful();
