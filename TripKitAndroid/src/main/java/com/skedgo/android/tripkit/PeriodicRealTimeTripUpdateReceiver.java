@@ -1,7 +1,7 @@
 package com.skedgo.android.tripkit;
 
-import android.support.v4.util.Pair;
 
+import kotlin.Pair;
 import skedgo.tripkit.android.TripKit;
 import skedgo.tripkit.routing.Trip;
 import skedgo.tripkit.routing.TripGroup;
@@ -44,28 +44,6 @@ public abstract class PeriodicRealTimeTripUpdateReceiver implements RealTimeTrip
             return new Pair<>(trip, group());
           }
         })
-//        .map(new Func1<Trip, TripGroup>() {
-//          @Override public TripGroup call(Trip tripUpdate) {
-//
-//            final Trip displayTrip = group().getDisplayTrip();
-//            if (displayTrip != null) {
-//              // FIXME: Just ditch the old display trip after receiving realtime data.
-//              // See more https://www.flowdock.com/app/skedgo/tripgo-v4/threads/WhEA69BC4SQNO2f7qcPHUw2kQNq.
-//
-//              displayTrip.setStartTimeInSecs(tripUpdate.getStartTimeInSecs());
-//              displayTrip.setEndTimeInSecs(tripUpdate.getEndTimeInSecs());
-//              displayTrip.setSaveURL(tripUpdate.getSaveURL());
-//              displayTrip.setUpdateURL(tripUpdate.getUpdateURL());
-//              displayTrip.setProgressURL(tripUpdate.getProgressURL());
-//              displayTrip.setCarbonCost(tripUpdate.getCarbonCost());
-//              displayTrip.setMoneyCost(tripUpdate.getMoneyCost());
-//              displayTrip.setHassleCost(tripUpdate.getHassleCost());
-//              displayTrip.setSegments(tripUpdate.getSegments());
-//
-//            }
-//            return group();
-//          }
-//        })
         .takeUntil(stop.asObservable());
   }
 

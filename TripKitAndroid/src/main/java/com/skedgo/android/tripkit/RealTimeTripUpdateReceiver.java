@@ -1,7 +1,7 @@
 package com.skedgo.android.tripkit;
 
-import android.support.v4.util.Pair;
 
+import kotlin.Pair;
 import skedgo.tripkit.routing.Trip;
 import skedgo.tripkit.routing.TripGroup;
 
