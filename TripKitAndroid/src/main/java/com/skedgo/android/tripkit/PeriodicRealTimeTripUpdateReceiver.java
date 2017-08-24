@@ -1,5 +1,7 @@
 package com.skedgo.android.tripkit;
 
+import android.support.v4.util.Pair;
+
 import skedgo.tripkit.android.TripKit;
 import skedgo.tripkit.routing.Trip;
 import skedgo.tripkit.routing.TripGroup;
@@ -26,7 +28,7 @@ public abstract class PeriodicRealTimeTripUpdateReceiver implements RealTimeTrip
         .tripUpdater(TripKit.getInstance().getTripUpdater());
   }
 
-  @Override public Observable<TripGroup> startAsync() {
+  @Override public Observable<Pair<Trip, TripGroup>> startAsync() {
     return Observable.interval(initialDelay(), period(), timeUnit())
         .flatMap(new Func1<Long, Observable<Trip>>() {
           @Override public Observable<Trip> call(Long interval) {
@@ -36,27 +38,34 @@ public abstract class PeriodicRealTimeTripUpdateReceiver implements RealTimeTrip
           }
         })
         .observeOn(AndroidSchedulers.mainThread())
-        .map(new Func1<Trip, TripGroup>() {
-          @Override public TripGroup call(Trip tripUpdate) {
-            final Trip displayTrip = group().getDisplayTrip();
-            if (displayTrip != null) {
-              // FIXME: Just ditch the old display trip after receiving realtime data.
-              // See more https://www.flowdock.com/app/skedgo/tripgo-v4/threads/WhEA69BC4SQNO2f7qcPHUw2kQNq.
-
-              displayTrip.setStartTimeInSecs(tripUpdate.getStartTimeInSecs());
-              displayTrip.setEndTimeInSecs(tripUpdate.getEndTimeInSecs());
-              displayTrip.setSaveURL(tripUpdate.getSaveURL());
-              displayTrip.setUpdateURL(tripUpdate.getUpdateURL());
-              displayTrip.setProgressURL(tripUpdate.getProgressURL());
-              displayTrip.setCarbonCost(tripUpdate.getCarbonCost());
-              displayTrip.setMoneyCost(tripUpdate.getMoneyCost());
-              displayTrip.setHassleCost(tripUpdate.getHassleCost());
-              displayTrip.setSegments(tripUpdate.getSegments());
-
-            }
-            return group();
+        .map(new Func1<Trip, Pair<Trip, TripGroup>>() {
+          @Override public Pair<Trip, TripGroup> call(Trip trip) {
+            group().getDisplayTrip().setUpdateURL(trip.getUpdateURL());
+            return new Pair<>(trip, group());
           }
         })
+//        .map(new Func1<Trip, TripGroup>() {
+//          @Override public TripGroup call(Trip tripUpdate) {
+//
+//            final Trip displayTrip = group().getDisplayTrip();
+//            if (displayTrip != null) {
+//              // FIXME: Just ditch the old display trip after receiving realtime data.
+//              // See more https://www.flowdock.com/app/skedgo/tripgo-v4/threads/WhEA69BC4SQNO2f7qcPHUw2kQNq.
+//
+//              displayTrip.setStartTimeInSecs(tripUpdate.getStartTimeInSecs());
+//              displayTrip.setEndTimeInSecs(tripUpdate.getEndTimeInSecs());
+//              displayTrip.setSaveURL(tripUpdate.getSaveURL());
+//              displayTrip.setUpdateURL(tripUpdate.getUpdateURL());
+//              displayTrip.setProgressURL(tripUpdate.getProgressURL());
+//              displayTrip.setCarbonCost(tripUpdate.getCarbonCost());
+//              displayTrip.setMoneyCost(tripUpdate.getMoneyCost());
+//              displayTrip.setHassleCost(tripUpdate.getHassleCost());
+//              displayTrip.setSegments(tripUpdate.getSegments());
+//
+//            }
+//            return group();
+//          }
+//        })
         .takeUntil(stop.asObservable());
   }
 
