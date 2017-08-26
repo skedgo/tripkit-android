@@ -2,6 +2,7 @@ package com.skedgo.android.tripkit;
 
 import android.test.UiThreadTest;
 
+import kotlin.Pair;
 import skedgo.tripkit.routing.Trip;
 import skedgo.tripkit.routing.TripGroup;
 
@@ -46,7 +47,7 @@ public class PeriodicRealTimeTripUpdateReceiverTest {
     when(tripUpdater.getUpdateAsync(eq(displayTrip)))
         .thenReturn(Observable.<Trip>error(new RuntimeException()));
 
-    final TestSubscriber<TripGroup> subscriber = new TestSubscriber<>();
+    final TestSubscriber<Pair<Trip, TripGroup>> subscriber = new TestSubscriber<>();
     receiver.startAsync().subscribe(subscriber);
     subscriber.awaitTerminalEvent(3, TimeUnit.SECONDS);
     receiver.stop();
