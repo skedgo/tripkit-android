@@ -70,7 +70,8 @@ public abstract class PeriodicRealTimeTripUpdateReceiver implements RealTimeTrip
             return new Pair<>(trip, group());
           }
         })
-        .takeUntil(stop.asObservable());
+        .takeUntil(stop.asObservable())
+        .subscribeOn(Schedulers.io());
   }
 
   @Override public void stop() {
