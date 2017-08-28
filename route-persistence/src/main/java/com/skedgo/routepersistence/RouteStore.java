@@ -11,21 +11,19 @@ import com.google.gson.Gson;
 
 import org.jetbrains.annotations.NotNull;
 
-import kotlin.Unit;
-import rx.Completable;
-import rx.functions.Action0;
-import skedgo.tripkit.routing.Trip;
-import skedgo.tripkit.routing.TripGroup;
-import skedgo.tripkit.routing.TripSegment;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.Callable;
 
 import hugo.weaving.DebugLog;
+import rx.Completable;
 import rx.Observable;
 import rx.Subscriber;
+import rx.functions.Action0;
 import rx.schedulers.Schedulers;
+import skedgo.tripkit.routing.Trip;
+import skedgo.tripkit.routing.TripGroup;
+import skedgo.tripkit.routing.TripSegment;
 
 import static com.skedgo.routepersistence.RouteContract.COL_ARRIVE;
 import static com.skedgo.routepersistence.RouteContract.COL_CALORIES_COST;
@@ -75,7 +73,7 @@ public class RouteStore {
         .subscribeOn(Schedulers.io());
   }
 
-  public Observable<List<TripGroup>> updateAsync(final List<TripGroup> groups) {
+  public Observable<List<TripGroup>> updateTripGroupsAsync(final List<TripGroup> groups) {
     return Observable.fromCallable(new Callable<List<TripGroup>>() {
       @Override public List<TripGroup> call() throws Exception {
         final SQLiteDatabase database = databaseHelper.getWritableDatabase();
