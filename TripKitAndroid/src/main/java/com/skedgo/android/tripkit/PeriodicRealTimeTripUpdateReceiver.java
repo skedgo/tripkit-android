@@ -1,30 +1,19 @@
 package com.skedgo.android.tripkit;
 
-import android.util.Log;
-
-import kotlin.Pair;
-import rx.Observer;
-import rx.Single;
-import rx.functions.Action1;
-import rx.functions.Func0;
-import rx.functions.Func2;
-import rx.functions.Func3;
-import rx.observables.AsyncOnSubscribe;
-import rx.observables.SyncOnSubscribe;
-import rx.schedulers.Schedulers;
-import skedgo.tripkit.android.TripKit;
-import skedgo.tripkit.routing.Trip;
-import skedgo.tripkit.routing.TripGroup;
-
 import org.immutables.value.Value;
 
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicReference;
 
+import kotlin.Pair;
 import rx.Observable;
-import rx.android.schedulers.AndroidSchedulers;
+import rx.functions.Action1;
 import rx.functions.Func1;
+import rx.schedulers.Schedulers;
 import rx.subjects.PublishSubject;
+import skedgo.tripkit.android.TripKit;
+import skedgo.tripkit.routing.Trip;
+import skedgo.tripkit.routing.TripGroup;
 
 import static org.immutables.value.Value.Style.BuilderVisibility.PACKAGE;
 import static org.immutables.value.Value.Style.ImplementationVisibility.PRIVATE;
