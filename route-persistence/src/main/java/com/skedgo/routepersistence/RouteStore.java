@@ -8,18 +8,22 @@ import android.support.annotation.NonNull;
 import android.util.Pair;
 
 import com.google.gson.Gson;
-import skedgo.tripkit.routing.Trip;
-import skedgo.tripkit.routing.TripGroup;
-import skedgo.tripkit.routing.TripSegment;
+
+import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.Callable;
 
 import hugo.weaving.DebugLog;
+import rx.Completable;
 import rx.Observable;
 import rx.Subscriber;
+import rx.functions.Action0;
 import rx.schedulers.Schedulers;
+import skedgo.tripkit.routing.Trip;
+import skedgo.tripkit.routing.TripGroup;
+import skedgo.tripkit.routing.TripSegment;
 
 import static com.skedgo.routepersistence.RouteContract.COL_ARRIVE;
 import static com.skedgo.routepersistence.RouteContract.COL_CALORIES_COST;
@@ -69,6 +73,29 @@ public class RouteStore {
         .subscribeOn(Schedulers.io());
   }
 
+  public Observable<List<TripGroup>> updateTripGroupsAsync(final List<TripGroup> groups) {
+    return Observable.fromCallable(new Callable<List<TripGroup>>() {
+      @Override public List<TripGroup> call() throws Exception {
+        final SQLiteDatabase database = databaseHelper.getWritableDatabase();
+        database.beginTransaction();
+        try {
+          for (TripGroup group : groups) {
+            final ContentValues values = new ContentValues();
+            values.put(COL_DISPLAY_TRIP_ID, group.getDisplayTripId());
+            database.update(TABLE_TRIP_GROUPS, values, COL_UUID + "= ?", new String[] {group.uuid()});
+            database.delete(TABLE_SEGMENTS, COL_TRIP_ID + " IN (SELECT " + COL_TRIP_ID + " FROM " + TABLE_TRIPS + " WHERE " + COL_GROUP_ID + " = ?)", new String[] {group.uuid()});
+            database.delete(TABLE_TRIPS, COL_GROUP_ID + " = ?", new String[] {group.uuid()});
+            saveTrips(database, group.uuid(), group.getTrips());
+          }
+          database.setTransactionSuccessful();
+        } finally {
+          database.endTransaction();
+        }
+        return groups;
+      }
+    });
+  }
+
   public Observable<List<TripGroup>> saveAsync(final String requestId, final List<TripGroup> groups) {
     return Observable
         .fromCallable(new Callable<List<TripGroup>>() {
@@ -82,6 +109,35 @@ public class RouteStore {
 
   @DebugLog public Observable<TripGroup> queryAsync(@NonNull Pair<String, String[]> query) {
     return queryAsync(query.first, query.second);
+  }
+
+  @NotNull
+  public Completable updateTripAsync(@NotNull final String oldTripUuid, @NotNull final Trip trip) {
+    return Completable
+        .fromAction(new Action0() {
+          @Override public void call() {
+            SQLiteDatabase database = databaseHelper.getWritableDatabase();
+            ContentValues values = new ContentValues();
+            values.put(COL_DEPART, trip.getStartTimeInSecs());
+            values.put(COL_ARRIVE, trip.getEndTimeInSecs());
+            values.put(COL_SAVE_URL, trip.getSaveURL());
+            values.put(COL_UPDATE_URL, trip.getUpdateURL());
+            values.put(COL_PROGRESS_URL, trip.getProgressURL());
+            values.put(COL_CARBON_COST, trip.getCarbonCost());
+            values.put(COL_MONEY_COST, trip.getMoneyCost());
+            values.put(COL_HASSLE_COST, trip.getHassleCost());
+
+            database.beginTransaction();
+            try {
+              database.update(TABLE_TRIPS, values, COL_UUID + " = ?", new String[] {oldTripUuid});
+              database.delete(TABLE_SEGMENTS, COL_TRIP_ID + " = ?", new String[] {oldTripUuid});
+              saveSegments(database, oldTripUuid, trip.getSegments());
+              database.setTransactionSuccessful();
+            } finally {
+              database.endTransaction();
+            }
+          }
+        }).subscribeOn(Schedulers.io());
   }
 
   @DebugLog private int delete(Pair<String, String[]> whereClause) {

@@ -1,17 +1,19 @@
 package com.skedgo.android.tripkit;
 
-import skedgo.tripkit.android.TripKit;
-import skedgo.tripkit.routing.Trip;
-import skedgo.tripkit.routing.TripGroup;
-
 import org.immutables.value.Value;
 
 import java.util.concurrent.TimeUnit;
+import java.util.concurrent.atomic.AtomicReference;
 
+import kotlin.Pair;
 import rx.Observable;
-import rx.android.schedulers.AndroidSchedulers;
+import rx.functions.Action1;
 import rx.functions.Func1;
+import rx.schedulers.Schedulers;
 import rx.subjects.PublishSubject;
+import skedgo.tripkit.android.TripKit;
+import skedgo.tripkit.routing.Trip;
+import skedgo.tripkit.routing.TripGroup;
 
 import static org.immutables.value.Value.Style.BuilderVisibility.PACKAGE;
 import static org.immutables.value.Value.Style.ImplementationVisibility.PRIVATE;
@@ -26,38 +28,39 @@ public abstract class PeriodicRealTimeTripUpdateReceiver implements RealTimeTrip
         .tripUpdater(TripKit.getInstance().getTripUpdater());
   }
 
-  @Override public Observable<TripGroup> startAsync() {
-    return Observable.interval(initialDelay(), period(), timeUnit())
-        .flatMap(new Func1<Long, Observable<Trip>>() {
-          @Override public Observable<Trip> call(Long interval) {
-            final Trip displayTrip = group().getDisplayTrip();
-            return tripUpdater().getUpdateAsync(displayTrip)
-                .onErrorResumeNext(Observable.<Trip>empty());
+  @Override public Observable<Pair<Trip, TripGroup>> startAsync() {
+    return Observable.interval(initialDelay(), period(), timeUnit(), Schedulers.trampoline())
+        .map(new Func1<Long, String>() {
+          @Override public String call(Long aLong) {
+            return group().getDisplayTrip().getUpdateURL();
           }
         })
-        .observeOn(AndroidSchedulers.mainThread())
-        .map(new Func1<Trip, TripGroup>() {
-          @Override public TripGroup call(Trip tripUpdate) {
-            final Trip displayTrip = group().getDisplayTrip();
-            if (displayTrip != null) {
-              // FIXME: Just ditch the old display trip after receiving realtime data.
-              // See more https://www.flowdock.com/app/skedgo/tripgo-v4/threads/WhEA69BC4SQNO2f7qcPHUw2kQNq.
-
-              displayTrip.setStartTimeInSecs(tripUpdate.getStartTimeInSecs());
-              displayTrip.setEndTimeInSecs(tripUpdate.getEndTimeInSecs());
-              displayTrip.setSaveURL(tripUpdate.getSaveURL());
-              displayTrip.setUpdateURL(tripUpdate.getUpdateURL());
-              displayTrip.setProgressURL(tripUpdate.getProgressURL());
-              displayTrip.setCarbonCost(tripUpdate.getCarbonCost());
-              displayTrip.setMoneyCost(tripUpdate.getMoneyCost());
-              displayTrip.setHassleCost(tripUpdate.getHassleCost());
-              displayTrip.setSegments(tripUpdate.getSegments());
-
-            }
-            return group();
+        .onBackpressureDrop()
+        .compose(new Observable.Transformer<String, Trip>() {
+          @Override public Observable<Trip> call(Observable<String> updateUrl) {
+            final AtomicReference<String> url = new AtomicReference<String>();
+            return updateUrl
+                .flatMap(new Func1<String, Observable<Trip>>() {
+                  @Override public Observable<Trip> call(String s) {
+                    final String lastUrl = url.get();
+                    return tripUpdater().getUpdateAsync(lastUrl != null ? lastUrl : s)
+                        .onErrorResumeNext(Observable.<Trip>empty());
+                  }
+                })
+                .doOnNext(new Action1<Trip>() {
+                  @Override public void call(Trip trip) {
+                    url.set(trip.getUpdateURL());
+                  }
+                });
           }
         })
-        .takeUntil(stop.asObservable());
+        .map(new Func1<Trip, Pair<Trip, TripGroup>>() {
+          @Override public Pair<Trip, TripGroup> call(Trip trip) {
+            return new Pair<>(trip, group());
+          }
+        })
+        .takeUntil(stop.asObservable())
+        .subscribeOn(Schedulers.io());
   }
 
   @Override public void stop() {
