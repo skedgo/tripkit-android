@@ -83,8 +83,6 @@ public class RouteStore {
             final ContentValues values = new ContentValues();
             values.put(COL_DISPLAY_TRIP_ID, group.getDisplayTripId());
             database.update(TABLE_TRIP_GROUPS, values, COL_UUID + "= ?", new String[] {group.uuid()});
-            database.delete(TABLE_SEGMENTS, COL_TRIP_ID + " IN (SELECT " + COL_TRIP_ID + " FROM " + TABLE_TRIPS + " WHERE " + COL_GROUP_ID + " = ?)", new String[] {group.uuid()});
-            database.delete(TABLE_TRIPS, COL_GROUP_ID + " = ?", new String[] {group.uuid()});
             saveTrips(database, group.uuid(), group.getTrips());
           }
           database.setTransactionSuccessful();
