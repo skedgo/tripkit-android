@@ -98,7 +98,7 @@ public class RouteStore {
       @Override public void call() {
         final SQLiteDatabase database = databaseHelper.getWritableDatabase();
         final ContentValues values = new ContentValues();
-        values.put(COL_IS_NOTIFIABLE, isFavorite);
+        values.put(COL_IS_NOTIFIABLE, isFavorite ? 1 : 0);
         database.update(TABLE_TRIP_GROUPS, values, COL_UUID + "= ?", new String[] {groupId});
       }
     });
