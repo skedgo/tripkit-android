@@ -93,13 +93,13 @@ public class RouteStore {
     });
   }
 
-  public Completable updateNotifiability(final TripGroup group, final boolean isFavorite) {
+  public Completable updateNotifiability(final String groupId, final boolean isFavorite) {
     return Completable.fromAction(new Action0() {
       @Override public void call() {
         final SQLiteDatabase database = databaseHelper.getWritableDatabase();
         final ContentValues values = new ContentValues();
         values.put(COL_IS_NOTIFIABLE, isFavorite);
-        database.update(TABLE_TRIP_GROUPS, values, COL_UUID + "= ?", new String[] {group.uuid()});
+        database.update(TABLE_TRIP_GROUPS, values, COL_UUID + "= ?", new String[] {groupId});
       }
     });
   }
