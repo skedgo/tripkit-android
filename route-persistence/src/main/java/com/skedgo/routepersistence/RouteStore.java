@@ -73,7 +73,7 @@ public class RouteStore {
         .subscribeOn(Schedulers.io());
   }
 
-  public Observable<List<TripGroup>> updateTripGroupsAsync(final List<TripGroup> groups) {
+  public Observable<List<TripGroup>> updateAlternativeTrips(final List<TripGroup> groups) {
     return Observable.fromCallable(new Callable<List<TripGroup>>() {
       @Override public List<TripGroup> call() throws Exception {
         final SQLiteDatabase database = databaseHelper.getWritableDatabase();
@@ -89,6 +89,17 @@ public class RouteStore {
           database.endTransaction();
         }
         return groups;
+      }
+    });
+  }
+
+  public Completable updateNotifiability(final String groupId, final boolean isFavorite) {
+    return Completable.fromAction(new Action0() {
+      @Override public void call() {
+        final SQLiteDatabase database = databaseHelper.getWritableDatabase();
+        final ContentValues values = new ContentValues();
+        values.put(COL_IS_NOTIFIABLE, isFavorite ? 1 : 0);
+        database.update(TABLE_TRIP_GROUPS, values, COL_UUID + "= ?", new String[] {groupId});
       }
     });
   }
@@ -183,7 +194,7 @@ public class RouteStore {
         final ArrayList<Trip> trips = new ArrayList<>(tripCursor.getCount());
         try {
           while (!subscriber.isUnsubscribed() && tripCursor.moveToNext()) {
-            final Trip trip = asTrip(tripCursor);
+            final Trip trip = asTrip(tripCursor, groupCursor);
             final Cursor segmentCursor = database.rawQuery(SELECT_SEGMENTS, new String[] {trip.uuid()});
             final ArrayList<TripSegment> segments = asSegments(subscriber, segmentCursor);
             trip.setSegments(segments);
@@ -226,23 +237,25 @@ public class RouteStore {
     return gson.fromJson(json, TripSegment.class);
   }
 
-  private Trip asTrip(Cursor cursor) {
-    final long id = cursor.getLong(cursor.getColumnIndex(COL_ID));
-    final String uuid = cursor.getString(cursor.getColumnIndex(COL_UUID));
-    final String currencySymbol = cursor.getString(cursor.getColumnIndex(COL_CURRENCY_SYMBOL));
-    final String saveUrl = cursor.getString(cursor.getColumnIndex(COL_SAVE_URL));
-    final long depart = cursor.getLong(cursor.getColumnIndex(COL_DEPART));
-    final long arrive = cursor.getLong(cursor.getColumnIndex(COL_ARRIVE));
-    final float caloriesCost = cursor.getFloat(cursor.getColumnIndex(COL_CALORIES_COST));
-    final float moneyCost = cursor.getFloat(cursor.getColumnIndex(COL_MONEY_COST));
-    final float carbonCost = cursor.getFloat(cursor.getColumnIndex(COL_CARBON_COST));
-    final float hassleCost = cursor.getFloat(cursor.getColumnIndex(COL_HASSLE_COST));
-    final float weightedScore = cursor.getFloat(cursor.getColumnIndex(COL_WEIGHTED_SCORE));
-    final String updateUrl = cursor.getString(cursor.getColumnIndex(COL_UPDATE_URL));
-    final String progressUrl = cursor.getString(cursor.getColumnIndex(COL_PROGRESS_URL));
-    final String plannedUrl = cursor.getString(cursor.getColumnIndex(COL_PLANNED_URL));
-    final String tempUrl = cursor.getString(cursor.getColumnIndex(COL_TEMP_URL));
-    final int queryIsLeaveAfter = cursor.getInt(cursor.getColumnIndex(COL_QUERY_IS_LEAVE_AFTER));
+  private Trip asTrip(Cursor tripCursor, Cursor groupCursor) {
+    final long id = tripCursor.getLong(tripCursor.getColumnIndex(COL_ID));
+    final String uuid = tripCursor.getString(tripCursor.getColumnIndex(COL_UUID));
+    final String currencySymbol = tripCursor.getString(tripCursor.getColumnIndex(COL_CURRENCY_SYMBOL));
+    final String saveUrl = tripCursor.getString(tripCursor.getColumnIndex(COL_SAVE_URL));
+    final long depart = tripCursor.getLong(tripCursor.getColumnIndex(COL_DEPART));
+    final long arrive = tripCursor.getLong(tripCursor.getColumnIndex(COL_ARRIVE));
+    final float caloriesCost = tripCursor.getFloat(tripCursor.getColumnIndex(COL_CALORIES_COST));
+    final float moneyCost = tripCursor.getFloat(tripCursor.getColumnIndex(COL_MONEY_COST));
+    final float carbonCost = tripCursor.getFloat(tripCursor.getColumnIndex(COL_CARBON_COST));
+    final float hassleCost = tripCursor.getFloat(tripCursor.getColumnIndex(COL_HASSLE_COST));
+    final float weightedScore = tripCursor.getFloat(tripCursor.getColumnIndex(COL_WEIGHTED_SCORE));
+    final String updateUrl = tripCursor.getString(tripCursor.getColumnIndex(COL_UPDATE_URL));
+    final String progressUrl = tripCursor.getString(tripCursor.getColumnIndex(COL_PROGRESS_URL));
+    final String plannedUrl = tripCursor.getString(tripCursor.getColumnIndex(COL_PLANNED_URL));
+    final String tempUrl = tripCursor.getString(tripCursor.getColumnIndex(COL_TEMP_URL));
+    final int queryIsLeaveAfter = tripCursor.getInt(tripCursor.getColumnIndex(COL_QUERY_IS_LEAVE_AFTER));
+
+    final boolean isNotifable = groupCursor.getInt(groupCursor.getColumnIndex(COL_IS_NOTIFIABLE)) == 1;
 
     final Trip trip = new Trip();
     trip.setId(id);
@@ -261,6 +274,7 @@ public class RouteStore {
     trip.setPlannedURL(plannedUrl);
     trip.setTemporaryURL(tempUrl);
     trip.setQueryIsLeaveAfter(queryIsLeaveAfter == 1);
+    trip.isFavourite(isNotifable);
     return trip;
   }
 
