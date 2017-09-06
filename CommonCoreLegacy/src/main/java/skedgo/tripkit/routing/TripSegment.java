@@ -29,8 +29,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
-import static skedgo.tripkit.routing.VehicleMode.createLightDrawable;
-
 public class TripSegment implements Parcelable, IRealTimeElement, ITimeRange {
   public static final String VISIBILITY_IN_SUMMARY = "in summary";
   public static final String VISIBILITY_ON_MAP = "on map";
@@ -700,16 +698,6 @@ public class TripSegment implements Parcelable, IRealTimeElement, ITimeRange {
           : modeInfo.getModeCompat().getIconRes();
     } else {
       return 0;
-    }
-  }
-
-  public Drawable getLightTransportIcon(@NonNull Resources resources) {
-    if (modeInfo != null && modeInfo.getModeCompat() != null) {
-      return isRealTime
-          ? modeInfo.getModeCompat().getRealtimeMapIconRes(resources)
-          : modeInfo.getModeCompat().getMapIconRes(resources);
-    } else {
-      return createLightDrawable(resources, R.drawable.v4_ic_map_location);
     }
   }
 
