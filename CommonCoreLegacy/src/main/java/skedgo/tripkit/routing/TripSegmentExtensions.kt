@@ -24,12 +24,12 @@ val TripSegment.endDateTime get(): DateTime = DateTime(
 )
 
 fun TripSegment.getLightTransportIcon(resources: Resources): Drawable {
-  if (this.modeInfo != null && this.modeInfo!!.modeCompat != null) {
-    return if (this.isRealTime)
+  return if (this.modeInfo != null && this.modeInfo!!.modeCompat != null) {
+    if (this.isRealTime)
       this.modeInfo!!.modeCompat.getRealtimeMapIconRes(resources)
     else
       this.modeInfo!!.modeCompat.getMapIconRes(resources)
   } else {
-    return resources.createLightDrawable(R.drawable.v4_ic_map_location)
+    resources.createLightDrawable(R.drawable.v4_ic_map_location)
   }
 }

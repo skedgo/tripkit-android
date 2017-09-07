@@ -98,7 +98,6 @@ public class TripSegment implements Parcelable, IRealTimeElement, ITimeRange {
   /**
    * Used only for {@link SegmentType#SCHEDULED} (Public Transport) segment.
    */
-  private final transient Var<BitmapDrawable> remoteIcon = Var.create();
   private long mId;
   private transient Trip mTrip;
   @SerializedName("booking") private Booking booking;
@@ -583,13 +582,6 @@ public class TripSegment implements Parcelable, IRealTimeElement, ITimeRange {
       return location.getTimeZone();
     }
     return null;
-  }
-
-  /**
-   * FIXME: This is view-related code.
-   */
-  public Var<BitmapDrawable> remoteIcon() {
-    return remoteIcon;
   }
 
   public Booking getBooking() {
