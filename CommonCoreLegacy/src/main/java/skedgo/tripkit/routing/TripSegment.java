@@ -27,7 +27,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
-import static skedgo.tripkit.routing.VehicleMode.createLightDrawable;
+import static skedgo.tripkit.routing.VehicleDrawables.createLightDrawable;
 
 public class TripSegment implements Parcelable, IRealTimeElement, ITimeRange {
   public static final String VISIBILITY_IN_SUMMARY = "in summary";
