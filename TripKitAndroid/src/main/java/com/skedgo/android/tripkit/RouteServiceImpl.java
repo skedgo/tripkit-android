@@ -126,12 +126,19 @@ final class RouteServiceImpl implements RouteService {
     options.put("ws", Integer.toString(walkingSpeed));
     options.put("cs", Integer.toString(cyclingSpeed));
     options.put("includeStops", "1");
-    options.put("wheelchair", "true");
+    // FIXME: wheelchair option should be retrieved from settings (Vinh is working on that)
+    options.put("wheelchair", "1");
     options.put("wp", ToWeightingProfileString.INSTANCE.toWeightingProfileString(query));
     options.putAll(getParamsByPreferences());
     if (extraQueryMapProvider != null) {
       final Map<String, Object> extraQueryMap = extraQueryMapProvider.call();
       options.putAll(extraQueryMap);
+    }
+    List<String> excludeStops = query.getExcludedStopCodes();
+    if (excludeStops != null) {
+      for (String stop : excludeStops) {
+        options.put("avoidStops", stop);
+      }
     }
     return options;
   }
