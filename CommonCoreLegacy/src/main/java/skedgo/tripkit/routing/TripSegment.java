@@ -2,7 +2,6 @@ package skedgo.tripkit.routing;
 
 import android.content.res.Resources;
 import android.graphics.Color;
-import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Parcel;
 import android.os.Parcelable;
@@ -21,7 +20,6 @@ import com.skedgo.android.common.model.Location;
 import com.skedgo.android.common.model.RealtimeAlert;
 import com.skedgo.android.common.model.Street;
 import com.skedgo.android.common.model.TransportMode;
-import com.skedgo.android.common.rx.Var;
 import com.skedgo.android.common.util.TimeUtils;
 import com.skedgo.android.common.util.TripSegmentUtils;
 
@@ -29,7 +27,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
-import static skedgo.tripkit.routing.VehicleMode.createLightDrawable;
+import static skedgo.tripkit.routing.VehicleDrawables.createLightDrawable;
 
 public class TripSegment implements Parcelable, IRealTimeElement, ITimeRange {
   public static final String VISIBILITY_IN_SUMMARY = "in summary";
@@ -97,10 +95,6 @@ public class TripSegment implements Parcelable, IRealTimeElement, ITimeRange {
       return new TripSegment[size];
     }
   };
-  /**
-   * Used only for {@link SegmentType#SCHEDULED} (Public Transport) segment.
-   */
-  private final transient Var<BitmapDrawable> remoteIcon = Var.create();
   private long mId;
   private transient Trip mTrip;
   @SerializedName("booking") private Booking booking;
@@ -585,13 +579,6 @@ public class TripSegment implements Parcelable, IRealTimeElement, ITimeRange {
       return location.getTimeZone();
     }
     return null;
-  }
-
-  /**
-   * FIXME: This is view-related code.
-   */
-  public Var<BitmapDrawable> remoteIcon() {
-    return remoteIcon;
   }
 
   public Booking getBooking() {
