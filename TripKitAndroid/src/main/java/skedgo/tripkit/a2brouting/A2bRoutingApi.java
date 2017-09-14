@@ -19,6 +19,7 @@ public interface A2bRoutingApi {
       @Url String url,
       @Query("modes") List<String> modes,
       @Query("avoid") List<String> excludedTransitModes,
+      @Query("avoidStops") List<String> excludeStops,
       @QueryMap Map<String, Object> options
   );
 }

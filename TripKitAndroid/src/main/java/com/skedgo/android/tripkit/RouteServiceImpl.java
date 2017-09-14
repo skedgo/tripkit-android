@@ -4,6 +4,7 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.util.ArrayMap;
 import android.text.TextUtils;
+import android.util.Log;
 
 import com.skedgo.android.common.model.Location;
 import com.skedgo.android.common.model.Query;
@@ -62,12 +63,13 @@ final class RouteServiceImpl implements RouteService {
             final Region region = subQuery.getRegion();
             final List<String> baseUrls = region.getURLs();
             final List<String> modes = subQuery.getTransportModeIds();
+            final List<String> excludeStops = subQuery.getExcludedStopCodes();
             final List<String> excludedTransitModes = getExcludedTransitModesAsNonNull(
                 excludedTransitModesAdapter,
                 region.getName()
             );
             final Map<String, Object> options = toOptions(subQuery);
-            return routingApi.fetchRoutesAsync(baseUrls, modes, excludedTransitModes, options);
+            return routingApi.fetchRoutesAsync(baseUrls, modes, excludedTransitModes, excludeStops, options);
           }
         });
   }
@@ -133,12 +135,6 @@ final class RouteServiceImpl implements RouteService {
     if (extraQueryMapProvider != null) {
       final Map<String, Object> extraQueryMap = extraQueryMapProvider.call();
       options.putAll(extraQueryMap);
-    }
-    List<String> excludeStops = query.getExcludedStopCodes();
-    if (excludeStops != null) {
-      for (String stop : excludeStops) {
-        options.put("avoidStops", stop);
-      }
     }
     return options;
   }
