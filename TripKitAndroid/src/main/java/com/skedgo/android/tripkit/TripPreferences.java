@@ -15,6 +15,6 @@ public interface TripPreferences {
    * This option should be used when {@link RegionInfo#transitWheelchairAccessibility()} is true.
    */
   boolean isWheelchairPreferred();
-  Observable<Boolean> hasWheelchairInformation();
+  Observable<Boolean> whenWheelchairPreferenceChanges();
   void setWheelchairPreferred(boolean isWheelchairPreferred);
 }
