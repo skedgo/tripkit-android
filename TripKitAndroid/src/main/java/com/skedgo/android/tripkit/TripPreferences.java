@@ -9,13 +9,23 @@ public interface TripPreferences {
    * This option should be used when {@link RegionInfo#supportsConcessionPricing()} is true.
    */
   boolean isConcessionPricingPreferred();
-  Observable<Boolean> whenConcessionPricingPreferenceChanges();
   void setConcessionPricingPreferred(boolean isConcessionPricingPreferred);
+
+  /**
+   * @return An {@link Observable} which emits value of {@link #isConcessionPricingPreferred()}
+   * when it has changed.
+   */
+  Observable<Boolean> whenConcessionPricingPreferenceChanges();
 
   /**
    * This option should be used when {@link RegionInfo#transitWheelchairAccessibility()} is true.
    */
   boolean isWheelchairPreferred();
-  Observable<Boolean> whenWheelchairPreferenceChanges();
   void setWheelchairPreferred(boolean isWheelchairPreferred);
+
+  /**
+   * @return An {@link Observable} which emits value of {@link #isWheelchairPreferred()}
+   * when it has changed.
+   */
+  Observable<Boolean> whenWheelchairPreferenceChanges();
 }
