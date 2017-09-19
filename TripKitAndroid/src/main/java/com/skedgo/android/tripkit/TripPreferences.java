@@ -9,6 +9,7 @@ public interface TripPreferences {
    * This option should be used when {@link RegionInfo#supportsConcessionPricing()} is true.
    */
   boolean isConcessionPricingPreferred();
+  Observable<Boolean> whenConcessionPricingPreferenceChanges();
   void setConcessionPricingPreferred(boolean isConcessionPricingPreferred);
 
   /**
