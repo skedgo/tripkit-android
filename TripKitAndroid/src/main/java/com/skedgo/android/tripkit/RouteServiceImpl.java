@@ -127,8 +127,6 @@ final class RouteServiceImpl implements RouteService {
     options.put("ws", Integer.toString(walkingSpeed));
     options.put("cs", Integer.toString(cyclingSpeed));
     options.put("includeStops", "1");
-    // FIXME: wheelchair option should be retrieved from settings (Vinh is working on that)
-    options.put("wheelchair", "1");
     options.put("wp", ToWeightingProfileString.INSTANCE.toWeightingProfileString(query));
     options.putAll(getParamsByPreferences());
     if (extraQueryMapProvider != null) {
