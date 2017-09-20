@@ -11,9 +11,17 @@ internal const val wheelchairPrefKey = "isWheelchairPreferred"
 class DefaultTripPreferences(
     private val preferences: SharedPreferences
 ) : TripPreferences {
-
   override fun isConcessionPricingPreferred(): Boolean =
       preferences.getBoolean(concessionPricingPrefKey, false)
+
+  override fun whenConcessionPricingPreferenceChanges(): Observable<Boolean> =
+      preferences
+          .onChanged()
+          .filter { it == concessionPricingPrefKey }
+          .map {
+            preferences.getBoolean(concessionPricingPrefKey, false)
+          }
+          .subscribeOn(Schedulers.io())
 
   override fun setConcessionPricingPreferred(isConcessionPricingPreferred: Boolean) {
     preferences.edit()
