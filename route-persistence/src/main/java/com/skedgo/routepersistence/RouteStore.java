@@ -20,7 +20,9 @@ import rx.Completable;
 import rx.Observable;
 import rx.Subscriber;
 import rx.functions.Action0;
+import rx.functions.Func1;
 import rx.schedulers.Schedulers;
+import skedgo.sqlite.Cursors;
 import skedgo.tripkit.routing.Trip;
 import skedgo.tripkit.routing.TripGroup;
 import skedgo.tripkit.routing.TripSegment;
@@ -117,6 +119,28 @@ public class RouteStore {
 
   @DebugLog public Observable<TripGroup> queryAsync(@NonNull Pair<String, String[]> query) {
     return queryAsync(query.first, query.second);
+  }
+
+  public Observable<String> queryTripGroupIdsByRequestIdAsync(final String requestId) {
+    return Observable
+        .fromCallable(
+            new Callable<Cursor>() {
+              @Override public Cursor call() throws Exception {
+                SQLiteDatabase database = databaseHelper.getReadableDatabase();
+                return database.query(TABLE_TRIP_GROUPS,
+                                      new String[] {COL_UUID},
+                                      COL_REQUEST_ID + " =?",
+                                      new String[] {requestId},
+                                      null, null, null);
+              }
+            }
+        )
+        .flatMap(Cursors.flattenCursor())
+        .map(new Func1<Cursor, String>() {
+          @Override public String call(Cursor cursor) {
+            return cursor.getString(cursor.getColumnIndex(COL_UUID));
+          }
+        });
   }
 
   @NotNull
