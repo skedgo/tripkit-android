@@ -18,11 +18,8 @@ import java.util.concurrent.Callable;
 import hugo.weaving.DebugLog;
 import rx.Completable;
 import rx.Observable;
-import rx.Subscriber;
 import rx.functions.Action0;
 import rx.functions.Func1;
-import rx.schedulers.Schedulers;
-import skedgo.sqlite.Cursors;
 import skedgo.tripkit.routing.Trip;
 import skedgo.tripkit.routing.TripGroup;
 import skedgo.tripkit.routing.TripSegment;
@@ -55,6 +52,8 @@ import static com.skedgo.routepersistence.RouteContract.SELECT_TRIPS;
 import static com.skedgo.routepersistence.RouteContract.TABLE_SEGMENTS;
 import static com.skedgo.routepersistence.RouteContract.TABLE_TRIPS;
 import static com.skedgo.routepersistence.RouteContract.TABLE_TRIP_GROUPS;
+import static rx.schedulers.Schedulers.io;
+import static skedgo.sqlite.Cursors.flattenCursor;
 
 public class RouteStore {
   private final SQLiteOpenHelper databaseHelper;
@@ -72,7 +71,7 @@ public class RouteStore {
             return delete(whereClause);
           }
         })
-        .subscribeOn(Schedulers.io());
+        .subscribeOn(io());
   }
 
   public Observable<List<TripGroup>> updateAlternativeTrips(final List<TripGroup> groups) {
@@ -114,7 +113,7 @@ public class RouteStore {
             return groups;
           }
         })
-        .subscribeOn(Schedulers.io());
+        .subscribeOn(io());
   }
 
   @DebugLog public Observable<TripGroup> queryAsync(@NonNull Pair<String, String[]> query) {
@@ -135,7 +134,7 @@ public class RouteStore {
               }
             }
         )
-        .flatMap(Cursors.flattenCursor())
+        .flatMap(flattenCursor())
         .map(new Func1<Cursor, String>() {
           @Override public String call(Cursor cursor) {
             return cursor.getString(cursor.getColumnIndex(COL_UUID));
@@ -169,7 +168,7 @@ public class RouteStore {
               database.endTransaction();
             }
           }
-        }).subscribeOn(Schedulers.io());
+        }).subscribeOn(io());
   }
 
   @DebugLog private int delete(Pair<String, String[]> whereClause) {
@@ -187,13 +186,13 @@ public class RouteStore {
             return database.rawQuery(selection, selectionArgs);
           }
         })
-        .flatMap(Cursors.flattenCursor())
+        .flatMap(flattenCursor())
         .flatMap(new Func1<Cursor, Observable<TripGroup>>() {
           @Override public Observable<TripGroup> call(final Cursor groupCursor) {
             return queryTripsOfTripGroup(groupCursor);
           }
         })
-        .subscribeOn(Schedulers.io());
+        .subscribeOn(io());
   }
 
   @NonNull private Observable<TripGroup> queryTripsOfTripGroup(final Cursor groupCursor) {
@@ -205,7 +204,7 @@ public class RouteStore {
             return database.rawQuery(SELECT_TRIPS, new String[] {group.uuid()});
           }
         })
-        .flatMap(Cursors.flattenCursor())
+        .flatMap(flattenCursor())
         .flatMap(new Func1<Cursor, Observable<Trip>>() {
           @Override public Observable<Trip> call(Cursor tripCursor) {
             return querySegmentsOfTrip(tripCursor, groupCursor);
@@ -230,7 +229,7 @@ public class RouteStore {
             return database.rawQuery(SELECT_SEGMENTS, new String[] {trip.uuid()});
           }
         })
-        .flatMap(Cursors.flattenCursor())
+        .flatMap(flattenCursor())
         .map(new Func1<Cursor, ArrayList<TripSegment>>() {
           @Override public ArrayList<TripSegment> call(Cursor segmentsCursor) {
             return asSegments(segmentsCursor);
