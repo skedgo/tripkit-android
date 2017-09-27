@@ -66,6 +66,8 @@ public class Location implements Parcelable {
   /**
    * Source
    */
+  public static final String TRIPGO = "tripgo";
+  public static final String LOCAL = "local";
   public static final String GOOGLE = "google";
   public static final String FOURSQUARE = "foursquare";
   public static final Creator<Location> CREATOR = new Creator<Location>() {
