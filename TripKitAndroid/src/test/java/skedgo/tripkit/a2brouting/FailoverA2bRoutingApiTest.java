@@ -52,6 +52,7 @@ public class FailoverA2bRoutingApiTest {
         Collections.<String>emptyList(),
         Collections.<String>emptyList(),
         Collections.<String>emptyList(),
+        Collections.<String>emptyList(),
         Collections.<String, Object>emptyMap()
     ).subscribe(subscriber);
 
@@ -64,6 +65,7 @@ public class FailoverA2bRoutingApiTest {
         anyString(),
         anyListOf(String.class),
         anyListOf(String.class),
+        anyListOf(String.class),
         anyMapOf(String.class, Object.class)
     )).thenThrow(new RuntimeException());
 
@@ -71,6 +73,7 @@ public class FailoverA2bRoutingApiTest {
     failoverA2bRoutingApi.fetchRoutesAsync(
         Arrays.asList("https://www.abc.com", "https://www.def.com"),
         Arrays.asList("hyperloop", "drone"),
+        Collections.<String>emptyList(),
         Collections.<String>emptyList(),
         Collections.<String, Object>emptyMap()
     ).subscribe(subscriber);
@@ -85,6 +88,7 @@ public class FailoverA2bRoutingApiTest {
         anyString(),
         anyListOf(String.class),
         anyListOf(String.class),
+        anyListOf(String.class),
         anyMapOf(String.class, Object.class)
     )).thenReturn(Observable.just(response));
 
@@ -92,6 +96,7 @@ public class FailoverA2bRoutingApiTest {
     failoverA2bRoutingApi.fetchRoutesAsync(
         Arrays.asList("https://www.abc.com", "https://www.def.com"),
         Arrays.asList("hyperloop", "drone"),
+        Collections.<String>emptyList(),
         Collections.<String>emptyList(),
         Collections.<String, Object>emptyMap()
     ).subscribe(subscriber);
@@ -108,12 +113,14 @@ public class FailoverA2bRoutingApiTest {
         eq("https://www.abc.com/routing.json"),
         anyListOf(String.class),
         anyListOf(String.class),
+        anyListOf(String.class),
         anyMapOf(String.class, Object.class)
     )).thenReturn(Observable.just(response));
 
     final TestSubscriber<List<TripGroup>> subscriber = new TestSubscriber<>();
     failoverA2bRoutingApi.fetchRoutesAsync(
         Arrays.asList("https://www.abc.com", "https://www.def.com"),
+        Collections.<String>emptyList(),
         Collections.<String>emptyList(),
         Collections.<String>emptyList(),
         Collections.<String, Object>emptyMap()
@@ -132,12 +139,14 @@ public class FailoverA2bRoutingApiTest {
         eq("Link 0"),
         anyListOf(String.class),
         anyListOf(String.class),
+        anyListOf(String.class),
         anyMapOf(String.class, Object.class)
     )).thenReturn(Observable.just(response));
 
     final TestSubscriber<RoutingResponse> subscriber = new TestSubscriber<>();
     failoverA2bRoutingApi.fetchRoutesPerUrlAsync(
         "Link 0",
+        Collections.<String>emptyList(),
         Collections.<String>emptyList(),
         Collections.<String>emptyList(),
         Collections.<String, Object>emptyMap()
@@ -156,12 +165,14 @@ public class FailoverA2bRoutingApiTest {
         eq("Link 0"),
         anyListOf(String.class),
         anyListOf(String.class),
+        anyListOf(String.class),
         anyMapOf(String.class, Object.class)
     )).thenReturn(Observable.just(response));
 
     final TestSubscriber<RoutingResponse> subscriber = new TestSubscriber<>();
     failoverA2bRoutingApi.fetchRoutesPerUrlAsync(
         "Link 0",
+        Collections.<String>emptyList(),
         Collections.<String>emptyList(),
         Collections.<String>emptyList(),
         Collections.<String, Object>emptyMap()
