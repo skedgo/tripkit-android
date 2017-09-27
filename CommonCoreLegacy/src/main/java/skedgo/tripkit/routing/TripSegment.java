@@ -88,6 +88,7 @@ public class TripSegment implements Parcelable, IRealTimeElement, ITimeRange {
       segment.wheelchairAccessible = in.readByte() == 1;
       segment.metres = in.readInt();
       segment.metresSafe = in.readInt();
+      segment.metresUnsafe = in.readInt();
       return segment;
     }
 
@@ -167,8 +168,12 @@ public class TripSegment implements Parcelable, IRealTimeElement, ITimeRange {
   private String platform;
   @SerializedName("stops")
   private int stopCount;
+  @SerializedName("metres")
   private int metres;
+  @SerializedName("metresSafe")
   private int metresSafe;
+  @SerializedName("metresUnsafe")
+  private int metresUnsafe;
 
   /**
    * FIXME: Should replace this with Quantity Strings.
@@ -469,6 +474,14 @@ public class TripSegment implements Parcelable, IRealTimeElement, ITimeRange {
     this.metresSafe = metresSafe;
   }
 
+  public int getMetresUnsafe() {
+    return metresUnsafe;
+  }
+
+  public void setMetresUnsafe(int metresUnsafe) {
+    this.metresUnsafe = metresUnsafe;
+  }
+
   @Override
   public int describeContents() {
     return 0;
@@ -514,6 +527,7 @@ public class TripSegment implements Parcelable, IRealTimeElement, ITimeRange {
     out.writeByte((byte) (wheelchairAccessible ? 1 : 0));
     out.writeInt(metres);
     out.writeInt(metresSafe);
+    out.writeInt(metresUnsafe);
   }
 
   public boolean isContinuation() {
