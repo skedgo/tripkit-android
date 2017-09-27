@@ -31,7 +31,6 @@ public abstract class RealtimeAlert implements Parcelable {
           .location((Location) in.readParcelable(Location.class.getClassLoader()))
           .url(in.readString())
           .remoteIcon(in.readString())
-          .alertAction((AlertAction) in.readParcelable(AlertAction.class.getClassLoader()))
           .build();
     }
 
@@ -49,7 +48,6 @@ public abstract class RealtimeAlert implements Parcelable {
   @AlertSeverity @Nullable public abstract String severity();
   @Nullable public abstract String url();
   @Nullable public abstract String remoteIcon();
-  @SerializedName("action") @Nullable public abstract AlertAction alertAction();
 
   @Override public int describeContents() {
     return 0;
@@ -65,6 +63,5 @@ public abstract class RealtimeAlert implements Parcelable {
     out.writeParcelable(location(), 0);
     out.writeString(url());
     out.writeString(remoteIcon());
-    out.writeParcelable(alertAction(), 0);
   }
 }

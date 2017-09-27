@@ -54,7 +54,6 @@ public class TripGroupsJsonTest extends TripKitAndroidRobolectricTest {
         Collections.singletonList(serverRule.server.url("/").toString()),
         Collections.<String>emptyList(),
         Collections.<String>emptyList(),
-        Collections.<String>emptyList(),
         new HashMap<String, Object>()
     ).subscribe(subscriber);
 

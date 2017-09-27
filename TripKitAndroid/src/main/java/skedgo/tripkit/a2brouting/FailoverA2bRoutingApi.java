@@ -48,7 +48,6 @@ public class FailoverA2bRoutingApi {
       List<String> baseUrls,
       final List<String> modes,
       final List<String> excludedTransitModes,
-      final List<String> excludeStops,
       final Map<String, Object> options
   ) {
     // Regarding url failover, see more
@@ -64,7 +63,7 @@ public class FailoverA2bRoutingApi {
         })
         .concatMap(new Func1<String, Observable<RoutingResponse>>() {
           @Override public Observable<RoutingResponse> call(String url) {
-            return fetchRoutesPerUrlAsync(url, modes, excludedTransitModes, excludeStops, options);
+            return fetchRoutesPerUrlAsync(url, modes, excludedTransitModes, options);
           }
         })
         .first()
@@ -101,11 +100,10 @@ public class FailoverA2bRoutingApi {
       final String url,
       final List<String> modes,
       final List<String> excludedTransitModes,
-      final List<String> excludeStops,
       final Map<String, Object> options
   ) {
     return a2bRoutingApi
-        .execute(url, modes, excludedTransitModes, excludeStops, options)
+        .execute(url, modes, excludedTransitModes, options)
         .filter(new Func1<RoutingResponse, Boolean>() {
           @Override public Boolean call(RoutingResponse response) {
             return !(response.getErrorMessage() != null && !response.hasError());

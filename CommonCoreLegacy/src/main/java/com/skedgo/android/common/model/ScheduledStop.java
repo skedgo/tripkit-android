@@ -2,7 +2,6 @@ package com.skedgo.android.common.model;
 
 import android.os.Parcel;
 import android.support.annotation.DrawableRes;
-import android.support.annotation.Nullable;
 import android.text.TextUtils;
 
 import com.google.gson.annotations.SerializedName;
@@ -30,8 +29,6 @@ public class ScheduledStop extends Location {
       stop.mCurrentFilter = in.readString();
       stop.mType = StopType.from(in.readString());
       stop.modeInfo = in.readParcelable(ModeInfo.class.getClassLoader());
-      stop.wheelchairAccessible = (Boolean) in.readValue(Boolean.class.getClassLoader());
-      stop.alertHashCodes = in.readArrayList(Long.class.getClassLoader());
       return stop;
     }
 
@@ -54,8 +51,6 @@ public class ScheduledStop extends Location {
   private ModeInfo modeInfo;
   private transient long mParentId;
   private transient String mCurrentFilter;
-  @SerializedName("wheelchairAccessible") private @Nullable Boolean wheelchairAccessible;
-  @SerializedName("alertHashCodes") private @Nullable ArrayList<Long> alertHashCodes;
 
   public ScheduledStop() {
     super();
@@ -134,8 +129,6 @@ public class ScheduledStop extends Location {
       modeInfo = other.modeInfo;
       mParentId = other.mParentId;
       mCurrentFilter = other.mCurrentFilter;
-      wheelchairAccessible = other.wheelchairAccessible;
-      alertHashCodes = other.alertHashCodes;
     }
   }
 
@@ -214,14 +207,6 @@ public class ScheduledStop extends Location {
     mParentId = parent;
   }
 
-  @Nullable public ArrayList<Long> getAlertHashCodes() {
-    return alertHashCodes;
-  }
-
-  public void setAlertHashCodes(@Nullable ArrayList<Long> alertHashCodes) {
-    this.alertHashCodes = alertHashCodes;
-  }
-
   /**
    * This was deprecated. {@link #isParent()} is now a deriving property of {@link #getChildren()}.
    * If a stop has children, it's a parent stop.
@@ -242,14 +227,6 @@ public class ScheduledStop extends Location {
   @Override
   public int getLocationType() {
     return Location.TYPE_SCHEDULED_STOP;
-  }
-
-  @Nullable public Boolean getWheelchairAccessible() {
-    return wheelchairAccessible;
-  }
-
-  public void setWheelchairAccessible(@Nullable Boolean wheelchairAccessible) {
-    this.wheelchairAccessible = wheelchairAccessible;
   }
 
   @Override
@@ -284,7 +261,5 @@ public class ScheduledStop extends Location {
     out.writeString(mCurrentFilter);
     out.writeString(mType == null ? null : mType.toString());
     out.writeParcelable(modeInfo, 0);
-    out.writeValue(wheelchairAccessible);
-    out.writeList(alertHashCodes);
   }
 }

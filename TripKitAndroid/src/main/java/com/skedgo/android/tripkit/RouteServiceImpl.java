@@ -62,13 +62,12 @@ final class RouteServiceImpl implements RouteService {
             final Region region = subQuery.getRegion();
             final List<String> baseUrls = region.getURLs();
             final List<String> modes = subQuery.getTransportModeIds();
-            final List<String> excludeStops = subQuery.getExcludedStopCodes();
             final List<String> excludedTransitModes = getExcludedTransitModesAsNonNull(
                 excludedTransitModesAdapter,
                 region.getName()
             );
             final Map<String, Object> options = toOptions(subQuery);
-            return routingApi.fetchRoutesAsync(baseUrls, modes, excludedTransitModes, excludeStops, options);
+            return routingApi.fetchRoutesAsync(baseUrls, modes, excludedTransitModes, options);
           }
         });
   }
