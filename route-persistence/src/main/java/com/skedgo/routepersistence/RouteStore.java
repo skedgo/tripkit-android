@@ -181,70 +181,74 @@ public class RouteStore {
       final String selection,
       final String[] selectionArgs) {
     return Observable
-        .create(new Observable.OnSubscribe<TripGroup>() {
-          @Override public void call(Subscriber<? super TripGroup> subscriber) {
+        .fromCallable(new Callable<Cursor>() {
+          @Override public Cursor call() throws Exception {
             final SQLiteDatabase database = databaseHelper.getReadableDatabase();
-            queryInTransaction(subscriber, database, selection, selectionArgs);
-            subscriber.onCompleted();
+            return database.rawQuery(selection, selectionArgs);
+          }
+        })
+        .flatMap(Cursors.flattenCursor())
+        .flatMap(new Func1<Cursor, Observable<TripGroup>>() {
+          @Override public Observable<TripGroup> call(final Cursor groupCursor) {
+            return queryTripsOfTripGroup(groupCursor);
           }
         })
         .subscribeOn(Schedulers.io());
   }
 
-  @DebugLog private void queryInTransaction(
-      Subscriber<? super TripGroup> subscriber,
-      SQLiteDatabase database,
-      String selection,
-      String[] selectionArgs) {
-    database.beginTransaction();
-    try {
-      query(subscriber, database, selection, selectionArgs);
-      database.setTransactionSuccessful();
-    } finally {
-      database.endTransaction();
-    }
+  @NonNull private Observable<TripGroup> queryTripsOfTripGroup(final Cursor groupCursor) {
+    final TripGroup group = asTripGroup(groupCursor);
+    return Observable
+        .fromCallable(new Callable<Cursor>() {
+          @Override public Cursor call() throws Exception {
+            final SQLiteDatabase database = databaseHelper.getReadableDatabase();
+            return database.rawQuery(SELECT_TRIPS, new String[] {group.uuid()});
+          }
+        })
+        .flatMap(Cursors.flattenCursor())
+        .flatMap(new Func1<Cursor, Observable<Trip>>() {
+          @Override public Observable<Trip> call(Cursor tripCursor) {
+            return querySegmentsOfTrip(tripCursor, groupCursor);
+          }
+        })
+        .toList()
+        .map(new Func1<List<Trip>, TripGroup>() {
+          @Override public TripGroup call(List<Trip> trips) {
+            group.setTrips(new ArrayList<>(trips));
+            return group;
+          }
+        });
   }
 
-  private void query(
-      Subscriber<? super TripGroup> subscriber,
-      SQLiteDatabase database,
-      String selection,
-      String[] selectionArgs) {
-    final Cursor groupCursor = database.rawQuery(selection, selectionArgs);
-    try {
-      while (!subscriber.isUnsubscribed() && groupCursor.moveToNext()) {
-        final TripGroup group = asTripGroup(groupCursor);
-        final Cursor tripCursor = database.rawQuery(SELECT_TRIPS, new String[] {group.uuid()});
-        final ArrayList<Trip> trips = new ArrayList<>(tripCursor.getCount());
-        try {
-          while (!subscriber.isUnsubscribed() && tripCursor.moveToNext()) {
-            final Trip trip = asTrip(tripCursor, groupCursor);
-            final Cursor segmentCursor = database.rawQuery(SELECT_SEGMENTS, new String[] {trip.uuid()});
-            final ArrayList<TripSegment> segments = asSegments(subscriber, segmentCursor);
-            trip.setSegments(segments);
-            trips.add(trip);
+  @NonNull
+  private Observable<Trip> querySegmentsOfTrip(Cursor tripCursor, Cursor groupCursor) {
+    final Trip trip = asTrip(tripCursor, groupCursor);
+    return Observable
+        .fromCallable(new Callable<Cursor>() {
+          @Override public Cursor call() throws Exception {
+            final SQLiteDatabase database = databaseHelper.getReadableDatabase();
+            return database.rawQuery(SELECT_SEGMENTS, new String[] {trip.uuid()});
           }
-        } finally {
-          if (!tripCursor.isClosed()) {
-            tripCursor.close();
+        })
+        .flatMap(Cursors.flattenCursor())
+        .map(new Func1<Cursor, ArrayList<TripSegment>>() {
+          @Override public ArrayList<TripSegment> call(Cursor segmentsCursor) {
+            return asSegments(segmentsCursor);
           }
-        }
-        group.setTrips(trips);
-        subscriber.onNext(group);
-      }
-    } finally {
-      if (!groupCursor.isClosed()) {
-        groupCursor.close();
-      }
-    }
+        })
+        .map(new Func1<ArrayList<TripSegment>, Trip>() {
+          @Override public Trip call(ArrayList<TripSegment> tripSegments) {
+            trip.setSegments(tripSegments);
+            return trip;
+          }
+        });
   }
 
   private ArrayList<TripSegment> asSegments(
-      Subscriber<? super TripGroup> subscriber,
       Cursor segmentCursor) {
     final ArrayList<TripSegment> segments = new ArrayList<>(segmentCursor.getCount());
     try {
-      while (!subscriber.isUnsubscribed() && segmentCursor.moveToNext()) {
+      while (segmentCursor.moveToNext()) {
         final TripSegment segment = asSegment(segmentCursor);
         segments.add(segment);
       }
