@@ -27,6 +27,7 @@ public class ServiceStop extends Location {
       stop.relativeDeparture = (Long) in.readValue(Long.class.getClassLoader());
       stop.code = in.readString();
       stop.shortName = in.readString();
+      stop.wheelchairAccessible = (Boolean) in.readValue(Boolean.class.getClassLoader());
       stop.type = StopType.from(in.readString());
 
       return stop;
@@ -50,6 +51,7 @@ public class ServiceStop extends Location {
   @SerializedName("arrival") private long arrivalTime;
   @SerializedName("code") private String code;
   @SerializedName("shortName") private @Nullable String shortName;
+  @SerializedName("wheelchairAccessible") private @Nullable Boolean wheelchairAccessible;
 
   public ServiceStop() {}
 
@@ -97,6 +99,14 @@ public class ServiceStop extends Location {
     this.shortName = shortName;
   }
 
+  @Nullable public Boolean getWheelchairAccessible() {
+    return wheelchairAccessible;
+  }
+
+  public void setWheelchairAccessible(@Nullable Boolean wheelchairAccessible) {
+    this.wheelchairAccessible = wheelchairAccessible;
+  }
+
   public StopType getType() {
     return type;
   }
@@ -132,6 +142,7 @@ public class ServiceStop extends Location {
       arrivalTime = otherStop.arrivalTime;
       code = otherStop.code;
       shortName = otherStop.shortName;
+      wheelchairAccessible = otherStop.wheelchairAccessible;
     }
   }
 
@@ -144,6 +155,7 @@ public class ServiceStop extends Location {
     out.writeValue(relativeDeparture);
     out.writeString(code);
     out.writeString(shortName);
+    out.writeValue(wheelchairAccessible);
     out.writeString(type == null ? null : type.toString());
   }
 

@@ -40,6 +40,10 @@ public class Query implements Parcelable {
       query.mWalkingSpeed = in.readInt();
       query.transportModeIds = query.readTransportModeIds(in);
       query.maxWalkingTime = in.readInt();
+
+      List<String> stops = new ArrayList<>();
+      in.readStringList(stops);
+      query.excludedStopCodes = stops;
       return query;
     }
 
@@ -62,6 +66,7 @@ public class Query implements Parcelable {
   private int mCyclingSpeed;
   private int mWalkingSpeed;
   private int mTransferTime;
+  private List<String> excludedStopCodes = new ArrayList<>();
 
   /**
    * This is only used for XUM project. TripGo may not need it.
@@ -97,6 +102,11 @@ public class Query implements Parcelable {
       cloneTransportModeIds.addAll(transportModeIds);
       query.setTransportModeIds(cloneTransportModeIds);
     }
+
+    // clone excludedStopCodes
+    List<String> cloneExcludedStopCodes = new ArrayList<>(excludedStopCodes.size());
+    cloneExcludedStopCodes.addAll(excludedStopCodes);
+    query.setExcludedStopCodes(cloneExcludedStopCodes);
 
     return query;
   }
@@ -180,6 +190,14 @@ public class Query implements Parcelable {
 
   public void setTransportModeIds(List<String> transportModeIds) {
     this.transportModeIds = transportModeIds;
+  }
+
+  public List<String> getExcludedStopCodes() {
+    return excludedStopCodes;
+  }
+
+  public void setExcludedStopCodes(List<String> excludedStopCodes) {
+    this.excludedStopCodes = excludedStopCodes;
   }
 
   public int getTimeWeight() {
@@ -300,6 +318,7 @@ public class Query implements Parcelable {
     dest.writeInt(mWalkingSpeed);
     dest.writeStringList(transportModeIds);
     dest.writeInt(maxWalkingTime);
+    dest.writeStringList(excludedStopCodes);
   }
 
   /**
