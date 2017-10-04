@@ -227,9 +227,7 @@ public class RouteStore {
           @Override public ArrayList<TripSegment> call() throws Exception {
             final SQLiteDatabase database = databaseHelper.getReadableDatabase();
             Cursor segmentsCursor = database.rawQuery(SELECT_SEGMENTS, new String[] {trip.uuid()});
-            ArrayList<TripSegment> tripSegments = asSegments(segmentsCursor);
-            segmentsCursor.close();
-            return tripSegments;
+            return asSegments(segmentsCursor);
           }
         })
         .map(new Func1<ArrayList<TripSegment>, Trip>() {
