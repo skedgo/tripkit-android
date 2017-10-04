@@ -223,15 +223,10 @@ public class RouteStore {
   private Observable<Trip> querySegmentsOfTrip(Cursor tripCursor, Cursor groupCursor) {
     final Trip trip = asTrip(tripCursor, groupCursor);
     return Observable
-        .fromCallable(new Callable<Cursor>() {
-          @Override public Cursor call() throws Exception {
+        .fromCallable(new Callable<ArrayList<TripSegment>>() {
+          @Override public ArrayList<TripSegment> call() throws Exception {
             final SQLiteDatabase database = databaseHelper.getReadableDatabase();
-            return database.rawQuery(SELECT_SEGMENTS, new String[] {trip.uuid()});
-          }
-        })
-        .flatMap(flattenCursor())
-        .map(new Func1<Cursor, ArrayList<TripSegment>>() {
-          @Override public ArrayList<TripSegment> call(Cursor segmentsCursor) {
+            Cursor segmentsCursor = database.rawQuery(SELECT_SEGMENTS, new String[] {trip.uuid()});
             return asSegments(segmentsCursor);
           }
         })
