@@ -44,13 +44,14 @@ class App : Application() {
     super.onCreate()
     JodaTimeAndroid.init(this)
     TripKit.initialize(
-      Configs.builder()
-        .context(this)
-        .key { Key.ApiKey("YOUR_API_KEY") }
-        .build()
+        Configs.builder()
+            .context(this)
+            .key { Key.ApiKey("YOUR_API_KEY") }
+            .build()
     )
   }
 }
+
 ```
 
 With `"YOUR_API_KEY"` is the key that you obtained from [https://tripgo.3scale.net](https://tripgo.3scale.net) in the previous step.
