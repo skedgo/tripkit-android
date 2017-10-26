@@ -40,7 +40,7 @@ dependencies {
   compile 'com.github.skedgo:RxLifecycleComponents:v1.3'
   compile 'me.tatarka.bindingcollectionadapter2:bindingcollectionadapter-recyclerview:2.0.1'
   kapt "com.android.databinding:compiler:$androidPluginVersion"
-  compile 'com.github.skedgo.tripkit-android:TripKitAndroid:ef1851d68c477b97c7d33ad04783997f56b46c35', {
+  compile 'com.github.skedgo.tripkit-android:TripKitAndroid:v1.15', {
     transitive = true
   }
 }
