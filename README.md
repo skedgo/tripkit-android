@@ -5,14 +5,28 @@
 
 ### Add TripKit to your Android project
 
-For now we recommend including [TripKit](https://github.com/skedgo/tripkit-android) as a [git submodule](https://git-scm.com/docs/git-submodule) in your project. Once done, you can add the [TripKitAndroid](https://github.com/skedgo/tripkit-android/tree/dev/TripKitAndroid) module as a dependency to your `build.gradle` file:
+First, add [JitPack maven](https://jitpack.io/):
 
 ```groovy
-// In app's build file.
-dependencies {
-  compile project(':TripKitAndroid')
+allprojects {
+  repositories {
+    jcenter()
+    maven { url "https://jitpack.io" }
+  }
 }
 ```
+
+Then, in app's build file, add `TripKitAndroid` dependency into dependencies section:
+
+```groovy
+dependencies {
+  compile 'com.github.skedgo.tripkit-android:TripKitAndroid:v1.15', {
+    transitive = true
+  }
+}
+```
+
+Note that, the `transitive = true` line is a must for TripKit to work properly.
 
 For a full setup, you can have a look at TripKitSamples' build file [here](https://github.com/skedgo/tripkit-android/blob/dev/TripKitSamples/build.gradle).
 
