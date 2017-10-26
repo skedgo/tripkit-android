@@ -1,4 +1,5 @@
 # TripKit for Android
+[![Build Status](https://travis-ci.com/skedgo/tripkit-android.svg?branch=master)](https://travis-ci.com/skedgo/tripkit-android)
 
 ## Set up TripKit
 
