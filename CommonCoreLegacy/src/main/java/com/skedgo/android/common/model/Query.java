@@ -1,7 +1,10 @@
 package com.skedgo.android.common.model;
 
+import android.content.Intent;
+import android.os.Bundle;
 import android.os.Parcel;
 import android.os.Parcelable;
+import android.os.TransactionTooLargeException;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.text.TextUtils;
@@ -13,6 +16,10 @@ import java.util.concurrent.TimeUnit;
 
 /**
  * Represents a query to find routes from A to B.
+ * <p>
+ * Note that, to avoid {@link TransactionTooLargeException}, it's discouraged to
+ * pass any instance of {@link Query} to {@link Intent} or {@link Bundle}.
+ * The {@link Parcelable} is subject to deletion at anytime.
  */
 public class Query implements Parcelable {
   public static final Creator<Query> CREATOR = new Creator<Query>() {

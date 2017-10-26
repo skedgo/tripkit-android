@@ -7,6 +7,7 @@ import com.skedgo.android.common.R;
 import com.skedgo.android.common.model.Location;
 import skedgo.tripkit.routing.SegmentType;
 import skedgo.tripkit.routing.TripSegment;
+import skedgo.tripkit.routing.Visibilities;
 
 import org.apache.commons.collections4.CollectionUtils;
 
@@ -89,7 +90,7 @@ public class TripSegmentListResolver {
     arrivalSegment.setFrom(destination);
     arrivalSegment.setTo(destination);
     arrivalSegment.setAction(arrivalAction);
-    arrivalSegment.setVisibility(TripSegment.VISIBILITY_ON_MAP);
+    arrivalSegment.setVisibility(Visibilities.VISIBILITY_ON_MAP);
     arrivalSegment.setStartTimeInSecs(lastSegment.getEndTimeInSecs());
     arrivalSegment.setEndTimeInSecs(lastSegment.getEndTimeInSecs());
     return arrivalSegment;
@@ -123,7 +124,7 @@ public class TripSegmentListResolver {
     departureSegment.setFrom(origin);
     departureSegment.setTo(origin);
     departureSegment.setAction(departureAction);
-    departureSegment.setVisibility(TripSegment.VISIBILITY_IN_DETAILS);
+    departureSegment.setVisibility(Visibilities.VISIBILITY_IN_DETAILS);
     departureSegment.setStartTimeInSecs(firstSegment.getStartTimeInSecs());
     departureSegment.setEndTimeInSecs(firstSegment.getStartTimeInSecs());
     return departureSegment;
