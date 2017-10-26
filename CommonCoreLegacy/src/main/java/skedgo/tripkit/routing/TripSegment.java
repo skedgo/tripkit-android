@@ -34,9 +34,22 @@ import java.util.Locale;
 import static skedgo.tripkit.routing.VehicleDrawables.createLightDrawable;
 
 /**
+ * To go from A to B, sometimes we have to travel X, Y, Z locations between A and B.
+ * That means, we travel A to X, then X to Y, then Y to Z, then Z to B which is the destination.
+ * To show how to travel from A to X, we use {@link TripSegment}. So, in this case,
+ * a trip from A to B comprises 6 segments:
+ * - A segment whose type is {@link SegmentType#DEPARTURE}.
+ * - A segment from A to X.
+ * - A segment from X to Y.
+ * - A segment from Y to Z.
+ * - A segment from Z to B.
+ * - A segment whose type is {@link SegmentType#ARRIVAL}.
+ * <p>
  * Note that, to avoid {@link TransactionTooLargeException}, it's discouraged to
  * pass any instance of {@link Query} to {@link Intent} or {@link Bundle}.
  * The {@link Parcelable} is subject to deletion at anytime.
+ *
+ * @see <a href="http://skedgo.github.io/tripgo-api/site/faq/#trips-groups-frequencies-and-templates">Trips, groups, frequencies and templates</a>
  */
 public class TripSegment implements Parcelable, IRealTimeElement, ITimeRange {
   public static final Creator<TripSegment> CREATOR = new Creator<TripSegment>() {
