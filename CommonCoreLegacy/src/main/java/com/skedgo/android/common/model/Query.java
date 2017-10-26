@@ -11,11 +11,10 @@ import java.util.List;
 import java.util.UUID;
 import java.util.concurrent.TimeUnit;
 
+/**
+ * Represents a query to find routes from A to B.
+ */
 public class Query implements Parcelable {
-  public static final String UNIT_AUTO = "auto";
-  public static final String UNIT_IMPERIAL = "imperial";
-  public static final String UNIT_METRIC = "metric";
-
   public static final Creator<Query> CREATOR = new Creator<Query>() {
     public Query createFromParcel(Parcel in) {
       Query query = new Query();
@@ -106,18 +105,23 @@ public class Query implements Parcelable {
     return query;
   }
 
+  /**
+   * @return values of {@link Units}.
+   */
   public String getUnit() {
     if (TextUtils.isEmpty(mUnit)) {
-      mUnit = UNIT_AUTO;
+      mUnit = Units.UNIT_AUTO;
     }
-
     return mUnit;
   }
 
+  /**
+   * @param unit Must be values of {@link Units}.
+   */
   public void setUnit(final String unit) {
     this.mUnit = unit;
     if (TextUtils.isEmpty(this.mUnit)) {
-      this.mUnit = UNIT_AUTO;
+      this.mUnit = Units.UNIT_AUTO;
     }
   }
 
