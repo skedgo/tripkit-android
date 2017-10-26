@@ -35,8 +35,7 @@ class TripViewModel(
   init {
     val printTime = TripKit.getInstance().dateTimeComponent().printTime
     printTime.execute(representativeTrip.startDateTime)
-        .withLatestFrom(printTime.execute(representativeTrip.endDateTime)) {
-          startTimeText, endTimeText ->
+        .withLatestFrom(printTime.execute(representativeTrip.endDateTime)) { startTimeText, endTimeText ->
           "Leave at $startTimeText, arrive by $endTimeText"
         }
         .subscribe { times.set(it) }

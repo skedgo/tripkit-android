@@ -4,8 +4,8 @@ import android.content.Context
 import android.databinding.ObservableField
 import android.databinding.ObservableInt
 import android.view.View
-import skedgo.tripkit.routing.TripSegment
 import com.skedgo.android.common.util.TripSegmentUtils
+import skedgo.tripkit.routing.TripSegment
 
 class TripSegmentViewModel constructor(context: Context, segment: TripSegment) {
   val actionTitle by lazy {

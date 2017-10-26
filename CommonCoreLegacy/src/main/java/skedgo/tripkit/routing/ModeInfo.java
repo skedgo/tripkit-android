@@ -8,7 +8,7 @@ import android.support.annotation.Nullable;
 import com.google.gson.annotations.SerializedName;
 
 /**
- * @see <a href="https://github.com/skedgo/tripkit-ios/wiki/Mode%20Identifiers">Mode Identifiers</a>
+ * @see <a href="http://skedgo.github.io/tripgo-api/site/faq/#mode-identifiers">Mode Identifiers</a>
  */
 public class ModeInfo implements Parcelable {
   public static final Creator<ModeInfo> CREATOR = new Creator<ModeInfo>() {
@@ -110,6 +110,9 @@ public class ModeInfo implements Parcelable {
     return VehicleMode.from(localIconName);
   }
 
+  /**
+   * @see <a href="http://skedgo.github.io/tripgo-api/site/faq/#mode-identifiers">Mode Identifiers</a>
+   */
   @Nullable
   public String getId() {
     return id;

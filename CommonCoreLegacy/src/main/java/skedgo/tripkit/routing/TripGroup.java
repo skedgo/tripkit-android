@@ -11,7 +11,18 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.UUID;
 
-public class TripGroup  {
+/**
+ * Represents a list of {@link Trip}s. A list of {@link Trip}s comprises
+ * of a display trip (aka representative trip) and alternative trips.
+ * A display trip can be accessed via {@link #getDisplayTrip()} while
+ * alternative trips can be retrieved via {@link #getTrips()} minus
+ * {@link #getDisplayTrip()}. That's because {@link #getTrips()} returns
+ * a list of {@link Trip}s including alternative trips and display trip.
+ * <p>
+ * Besides, a {@link TripGroup} also hold info related to {@link Source}
+ * via {@link #getSources()}.
+ */
+public class TripGroup {
 
   private String uuid = UUID.randomUUID().toString();
   private long displayTripId;
@@ -126,7 +137,7 @@ public class TripGroup  {
     displayTripId = trip.getId();
     return this;
   }
-  
+
   public GroupVisibility getVisibility() {
     return visibility;
   }

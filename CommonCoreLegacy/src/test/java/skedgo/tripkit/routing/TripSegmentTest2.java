@@ -7,27 +7,23 @@ import com.skedgo.android.common.BuildConfig;
 import com.skedgo.android.common.R;
 import com.skedgo.android.common.TestRunner;
 import com.skedgo.android.common.model.ImmutableBooking;
-import com.skedgo.android.common.model.ServiceStop;
 import com.skedgo.android.common.model.Utils;
 
-import org.assertj.core.api.Condition;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
 
-import java.util.Arrays;
-import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 import static junit.framework.Assert.assertFalse;
 import static junit.framework.Assert.assertTrue;
 import static org.assertj.core.api.Java6Assertions.*;
-import static skedgo.tripkit.routing.TripSegment.VISIBILITY_HIDDEN;
-import static skedgo.tripkit.routing.TripSegment.VISIBILITY_IN_DETAILS;
-import static skedgo.tripkit.routing.TripSegment.VISIBILITY_IN_SUMMARY;
-import static skedgo.tripkit.routing.TripSegment.VISIBILITY_ON_MAP;
+import static skedgo.tripkit.routing.Visibilities.VISIBILITY_HIDDEN;
+import static skedgo.tripkit.routing.Visibilities.VISIBILITY_IN_DETAILS;
+import static skedgo.tripkit.routing.Visibilities.VISIBILITY_IN_SUMMARY;
+import static skedgo.tripkit.routing.Visibilities.VISIBILITY_ON_MAP;
 
 @RunWith(TestRunner.class)
 @Config(constants = BuildConfig.class)

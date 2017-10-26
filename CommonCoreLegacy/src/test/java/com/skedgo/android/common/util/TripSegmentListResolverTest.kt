@@ -10,8 +10,8 @@ import org.robolectric.RuntimeEnvironment
 import org.robolectric.annotation.Config
 import skedgo.tripkit.routing.SegmentType
 import skedgo.tripkit.routing.TripSegment
-import skedgo.tripkit.routing.TripSegment.VISIBILITY_IN_DETAILS
-import skedgo.tripkit.routing.TripSegment.VISIBILITY_ON_MAP
+import skedgo.tripkit.routing.Visibilities.VISIBILITY_IN_DETAILS
+import skedgo.tripkit.routing.Visibilities.VISIBILITY_ON_MAP
 import skedgo.tripkit.routing.toSeconds
 
 @RunWith(TestRunner::class)
