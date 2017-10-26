@@ -3,8 +3,8 @@ apply plugin: "kotlin-kapt"
 apply plugin: 'java'
 apply plugin: 'maven'
 
+// To publish via JitPack.
 group = 'com.skedgo.tripkit'
-version = '1.0'
 
 // To fix error of converting bytecode to dex.
 targetCompatibility = '1.7'
@@ -24,12 +24,4 @@ dependencies {
   compile libs.kotlin
   kapt libs.value
   compileOnly libs.value
-}
-
-uploadArchives {
-  repositories {
-    mavenDeployer {
-      repository(url: "file://${tripKitAndroidMaven}")
-    }
-  }
 }
