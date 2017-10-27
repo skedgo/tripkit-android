@@ -161,7 +161,6 @@
 	<string name="clear_search_history">Limpar histórico de procuras</string>
 	<!--School pricing preference-->
 	<string name="concession_pricing">Concessão de preços</string>
-	<string name="convenience_is_affected_by_things_such_as_changing_public_transport_services_coma_the_amount_of_walking_coma_and_finding_a_taxi_dot">Conveniência é afetada por motivos como:  mudança no serviço de transporte público, distãncia da caminhada, achar um taxi.</string>
 	<!--Error title when TripGo couldnt identify the users current city-->
 	<string name="could_not_find_your_city_dot">Não foi possível localizar a sua cidade.</string>
 	<!--Title for button that allows users to create a user account-->
@@ -791,6 +790,8 @@
 	<string name="next">Continuar</string>
 	<!--No comment provided by engineer.-->
 	<string name="no_co_2">Sem CO₂</string>
+	<!--Indicator for wheelchair not accessible services-->
+	<string name="not_wheelchair_accessible">Not wheelchair accessible</string>
 	<!--Button to open Settings app section for this app-->
 	<string name="open_settings">Abrir Configurações</string>
 	<!--Open in Safari action-->
@@ -870,6 +871,8 @@
 	<string name="weekdays">Dia de semana</string>
 	<!--Every weekend day in context of repetitions (especially recurring events)-->
 	<string name="weekends">Fim de semana</string>
+	<!--Indicator for unknow if service or station is wheelchair accessible or not-->
+	<string name="wheelchair_accessibility_unknown">Wheelchair accessibility unknown</string>
 	<!--Indicator for wheelchair accessible services-->
 	<string name="wheelchair_accessible">Acesso a cadeiras de rodas</string>
 	<!--Question asked when user is taking a screenshot-->
@@ -906,6 +909,8 @@
 	<string name="_pattern_late">%1$s atrasado</string>
 	<!--Format for a service's real-time indicator for a service which is late, e.g., '1 min late (1:10 pm service). This means #1 is replaced with something like '1 min' and #2 is replaced with the original time, e.g., '1:10 pm').-->
 	<string name="_pattern_late__start_parent_pattern_service_end_parent">%1$s atrasado (%2$s serviço)</string>
+	<!--Number of alerts, in this case, there are multiple (plural-->
+	<string name="_pattern_alerts">%1$s alerts</string>
 	<!--Indicator for how cycle-friendly a cycling route is. Placeholder will get replaced with '75%'.-->
 	<string name="_pattern_cycle_friendly">%1$s ciclo amigável</string>
 	<!--Number of stops before you get off a vehicle, if there are 2 stops or more, e.g., '10 stops'. (old key: Stops)-->
@@ -949,6 +954,8 @@
 	<string name="empty">Vazio</string>
 	<!--As in 'this bus/train has few seats available'-->
 	<string name="few_seats_available">Poucos lugares disponíveis</string>
+	<!--Indicating a path is wheelchair/cycyling friendly-->
+	<string name="friendly">Friendly</string>
 	<!--Departure location. (old key: PrimaryLocationStart)-->
 	<string name="from__pattern">De %1$s</string>
 	<!--As in 'this bus/train is full and likely can't accept further passengers'-->
@@ -1012,10 +1019,16 @@
 	<string name="send_sms">Enviar SMS</string>
 	<!--Set up to connect/link to a service provider, e.g., Uber-->
 	<string name="setup">Configuração</string>
+	<!--Title for button that, when tapped, shows something, e.g., a list of alert-->
+	<string name="show">Show</string>
 	<!--Show website action-->
 	<string name="show_website">Mostrar website</string>
 	<!--As in 'this bus/train is fairly full and has standing room only'-->
 	<string name="standing_room_only">Sala de pé só</string>
+	<!--Indicating a path is wheelchair/cycyling unfriendly-->
+	<string name="unfriendly">Unfriendly</string>
+	<!--Indicating the wheelchair/cycling friendliness of a path is unknown-->
+	<string name="unknown">Unknown</string>
 	<!--Vehicle updated. (old key: VehicleUpdated)-->
 	<string name="updated__pattern_ago">Atualizado %1$s atrás</string>
 	<!--Vehicle 'x' updated. (old key: VehicleCalledUpdated)-->
@@ -1032,4 +1045,4 @@
 	<string name="ingogo_a_taxi">ingogo um Taxi</string>
 
 </resources>
-<!-- This is an auto generated file (Mon Oct 09 11:27:38 ART 2017) -->
+<!-- This is an auto generated file (Fri Oct 27 15:16:35 ART 2017) -->

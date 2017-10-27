@@ -161,7 +161,6 @@
 	<string name="clear_search_history">검색기록 지우기</string>
 	<!--School pricing preference-->
 	<string name="concession_pricing">할인 가격</string>
-	<string name="convenience_is_affected_by_things_such_as_changing_public_transport_services_coma_the_amount_of_walking_coma_and_finding_a_taxi_dot">편의성은 대중교통 서비스, 걸어야 하는 거리 그리고 택시 잡기같은 변수에 영향을 받을 수 있습니다.</string>
 	<!--Error title when TripGo couldnt identify the users current city-->
 	<string name="could_not_find_your_city_dot">당신의 도시를 찾을 수 없습니다.</string>
 	<!--Title for button that allows users to create a user account-->
@@ -791,6 +790,8 @@
 	<string name="next">다음</string>
 	<!--No comment provided by engineer.-->
 	<string name="no_co_2">No CO₂</string>
+	<!--Indicator for wheelchair not accessible services-->
+	<string name="not_wheelchair_accessible">Not wheelchair accessible</string>
 	<!--Button to open Settings app section for this app-->
 	<string name="open_settings">설정 열기</string>
 	<!--Open in Safari action-->
@@ -870,6 +871,8 @@
 	<string name="weekdays">주중</string>
 	<!--Every weekend day in context of repetitions (especially recurring events)-->
 	<string name="weekends">주말</string>
+	<!--Indicator for unknow if service or station is wheelchair accessible or not-->
+	<string name="wheelchair_accessibility_unknown">Wheelchair accessibility unknown</string>
 	<!--Indicator for wheelchair accessible services-->
 	<string name="wheelchair_accessible">휠체어 사용가능</string>
 	<!--Question asked when user is taking a screenshot-->
@@ -906,6 +909,8 @@
 	<string name="_pattern_late">%1$s 지연</string>
 	<!--Format for a service's real-time indicator for a service which is late, e.g., '1 min late (1:10 pm service). This means #1 is replaced with something like '1 min' and #2 is replaced with the original time, e.g., '1:10 pm').-->
 	<string name="_pattern_late__start_parent_pattern_service_end_parent">%1$s 지연 (%2$s 서비스)</string>
+	<!--Number of alerts, in this case, there are multiple (plural-->
+	<string name="_pattern_alerts">%1$s alerts</string>
 	<!--Indicator for how cycle-friendly a cycling route is. Placeholder will get replaced with '75%'.-->
 	<string name="_pattern_cycle_friendly">%1$s 자전거 이용 가능</string>
 	<!--Number of stops before you get off a vehicle, if there are 2 stops or more, e.g., '10 stops'. (old key: Stops)-->
@@ -949,6 +954,8 @@
 	<string name="empty">비어 있음</string>
 	<!--As in 'this bus/train has few seats available'-->
 	<string name="few_seats_available">자리가 몇 개 안 남았습니다.</string>
+	<!--Indicating a path is wheelchair/cycyling friendly-->
+	<string name="friendly">Friendly</string>
 	<!--Departure location. (old key: PrimaryLocationStart)-->
 	<string name="from__pattern">%1$s부터</string>
 	<!--As in 'this bus/train is full and likely can't accept further passengers'-->
@@ -1012,10 +1019,16 @@
 	<string name="send_sms">SMS 보내기</string>
 	<!--Set up to connect/link to a service provider, e.g., Uber-->
 	<string name="setup">설정</string>
+	<!--Title for button that, when tapped, shows something, e.g., a list of alert-->
+	<string name="show">Show</string>
 	<!--Show website action-->
 	<string name="show_website">웹사이트 보기</string>
 	<!--As in 'this bus/train is fairly full and has standing room only'-->
 	<string name="standing_room_only">설자리만 남아있습니다.</string>
+	<!--Indicating a path is wheelchair/cycyling unfriendly-->
+	<string name="unfriendly">Unfriendly</string>
+	<!--Indicating the wheelchair/cycling friendliness of a path is unknown-->
+	<string name="unknown">Unknown</string>
 	<!--Vehicle updated. (old key: VehicleUpdated)-->
 	<string name="updated__pattern_ago">%s 전에 업데이트 됨</string>
 	<!--Vehicle 'x' updated. (old key: VehicleCalledUpdated)-->
@@ -1032,4 +1045,4 @@
 	<string name="ingogo_a_taxi">ingogo 택시</string>
 
 </resources>
-<!-- This is an auto generated file (Mon Oct 09 11:27:38 ART 2017) -->
+<!-- This is an auto generated file (Fri Oct 27 15:16:36 ART 2017) -->

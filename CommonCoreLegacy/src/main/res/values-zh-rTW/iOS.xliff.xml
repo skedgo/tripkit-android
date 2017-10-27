@@ -161,7 +161,6 @@
 	<string name="clear_search_history">清除搜尋結果</string>
 	<!--School pricing preference-->
 	<string name="concession_pricing">優惠票價</string>
-	<string name="convenience_is_affected_by_things_such_as_changing_public_transport_services_coma_the_amount_of_walking_coma_and_finding_a_taxi_dot">旅程的方便性會受到是否需要更換大眾交通，您需要步行的距離及是否尋找計程車等的影響.</string>
 	<!--Error title when TripGo couldnt identify the users current city-->
 	<string name="could_not_find_your_city_dot">無法找到您的城市</string>
 	<!--Title for button that allows users to create a user account-->
@@ -530,7 +529,7 @@
 	<!--Button to show welcome screens again-->
 	<string name="welcome_screens">歡迎畫面</string>
 	<!--Preference to highlight wheelchair information-->
-	<string name="wheelchair_information">輪椅資訊</string>
+	<string name="wheelchair_information">無障礙通道資訊</string>
 	<!--Where are you going from?-->
 	<string name="where_are_you_going_from_question">您的出發地?</string>
 	<!--Where do you want to go?-->
@@ -658,7 +657,7 @@
 	<!--Class = "UINavigationItem"; title = "Trip"; ObjectID = "QTR-Ae-g7f";-->
 	<string name="trip">路線</string>
 	<!--Class = "UINavigationItem"; title = "Alerts"; ObjectID = "t3k-Ks-sqa";-->
-	<string name="alerts">提示</string>
+	<string name="alerts">警示</string>
 	<!--Class = "UIButton"; accessibilityLabel = "Swap from and to"; ObjectID = "30";-->
 	<string name="swap_from_and_to">對調出發地與目的地</string>
 	<!--Class = "UIButton"; accessibilityLabel = "To Location"; ObjectID = "JFm-H4-fOo";-->
@@ -791,6 +790,8 @@
 	<string name="next">下一步</string>
 	<!--No comment provided by engineer.-->
 	<string name="no_co_2">無碳足跡</string>
+	<!--Indicator for wheelchair not accessible services-->
+	<string name="not_wheelchair_accessible">沒有無障礙通道</string>
 	<!--Button to open Settings app section for this app-->
 	<string name="open_settings">開啟設定</string>
 	<!--Open in Safari action-->
@@ -870,6 +871,8 @@
 	<string name="weekdays">平日</string>
 	<!--Every weekend day in context of repetitions (especially recurring events)-->
 	<string name="weekends">週末</string>
+	<!--Indicator for unknow if service or station is wheelchair accessible or not-->
+	<string name="wheelchair_accessibility_unknown">無法取得無障礙通道資訊</string>
 	<!--Indicator for wheelchair accessible services-->
 	<string name="wheelchair_accessible">無障礙通道</string>
 	<!--Question asked when user is taking a screenshot-->
@@ -906,6 +909,8 @@
 	<string name="_pattern_late">延誤%1$s</string>
 	<!--Format for a service's real-time indicator for a service which is late, e.g., '1 min late (1:10 pm service). This means #1 is replaced with something like '1 min' and #2 is replaced with the original time, e.g., '1:10 pm').-->
 	<string name="_pattern_late__start_parent_pattern_service_end_parent">延誤%1$s (%2$s 的班次)</string>
+	<!--Number of alerts, in this case, there are multiple (plural-->
+	<string name="_pattern_alerts">%1$s 提示</string>
 	<!--Indicator for how cycle-friendly a cycling route is. Placeholder will get replaced with '75%'.-->
 	<string name="_pattern_cycle_friendly">自行車友善度%1$s</string>
 	<!--Number of stops before you get off a vehicle, if there are 2 stops or more, e.g., '10 stops'. (old key: Stops)-->
@@ -913,7 +918,7 @@
 	<!--Duration without traffic-->
 	<string name="_pattern_w_slasho_traffic">%1$s 路況良好下</string>
 	<!--Indicator for how wheelchair-friendly a wheeelchair route is. Placeholder will get replaced with '75%'.-->
-	<string name="_pattern_wheelchair_friendly">輪椅友善度%1$s</string>
+	<string name="_pattern_wheelchair_friendly">無障礙通道比例 %1$s</string>
 	<!--Number of stops before you get off a stop, if there's just 1 stop.-->
 	<string name="_1_stop">1站</string>
 	<!--apple maps directions action-->
@@ -949,6 +954,8 @@
 	<string name="empty">空車</string>
 	<!--As in 'this bus/train has few seats available'-->
 	<string name="few_seats_available">只有幾個座位</string>
+	<!--Indicating a path is wheelchair/cycyling friendly-->
+	<string name="friendly">友善</string>
 	<!--Departure location. (old key: PrimaryLocationStart)-->
 	<string name="from__pattern">出發地: %1$s</string>
 	<!--As in 'this bus/train is full and likely can't accept further passengers'-->
@@ -1012,10 +1019,16 @@
 	<string name="send_sms">傳送簡訊</string>
 	<!--Set up to connect/link to a service provider, e.g., Uber-->
 	<string name="setup">設定</string>
+	<!--Title for button that, when tapped, shows something, e.g., a list of alert-->
+	<string name="show">顯示</string>
 	<!--Show website action-->
 	<string name="show_website">開啟網站</string>
 	<!--As in 'this bus/train is fairly full and has standing room only'-->
 	<string name="standing_room_only">只有站位</string>
+	<!--Indicating a path is wheelchair/cycyling unfriendly-->
+	<string name="unfriendly">不友善</string>
+	<!--Indicating the wheelchair/cycling friendliness of a path is unknown-->
+	<string name="unknown">未知</string>
 	<!--Vehicle updated. (old key: VehicleUpdated)-->
 	<string name="updated__pattern_ago">%1$s前更新</string>
 	<!--Vehicle 'x' updated. (old key: VehicleCalledUpdated)-->
@@ -1023,7 +1036,7 @@
 	<!--No comment provided by engineer.-->
 	<string name="we_are_busy_getting_your_upcoming_trip_dot_please_wait_dot_dot_dot">我們正忙著規劃您的路線．請稍候．．．</string>
 	<!--No comment provided by engineer.-->
-	<string name="we_apostll_keep_you_updated_with_the_latest_transit_alerts_here">我們將在這裡提供您最新的交通提示</string>
+	<string name="we_apostll_keep_you_updated_with_the_latest_transit_alerts_here">我們將在這裡提供您最新的交通警示</string>
 	<!--Text indiction for how long a segment might take, where '%@' will be replaced with a duration. E.g., the instruction 'Take bus' might have this next to it as 'for 10 minutes'.-->
 	<string name="for__pattern">%1$s</string>
 	<!--goCatch action-->
@@ -1032,4 +1045,4 @@
 	<string name="ingogo_a_taxi">Ingogo叫車服務</string>
 
 </resources>
-<!-- This is an auto generated file (Mon Oct 09 11:27:38 ART 2017) -->
+<!-- This is an auto generated file (Fri Oct 27 15:16:36 ART 2017) -->
