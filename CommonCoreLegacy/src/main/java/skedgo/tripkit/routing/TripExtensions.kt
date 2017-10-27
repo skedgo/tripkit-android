@@ -26,7 +26,7 @@ val Trip.endDateTime: DateTime get() = DateTime(
 fun Trip.getSummarySegments(): List<TripSegment>
     = segments
     ?.filter { it.type != SegmentType.ARRIVAL }
-    ?.filter { it.isVisibleInContext(TripSegment.VISIBILITY_IN_SUMMARY) }
+    ?.filter { it.isVisibleInContext(Visibilities.VISIBILITY_IN_SUMMARY) }
     ?: emptyList()
 
 fun Trip.getModeIds(): List<String> =

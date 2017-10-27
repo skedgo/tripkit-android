@@ -1,11 +1,10 @@
-/*
- * Copyright (c) SkedGo 2013
- */
-
 package com.skedgo.android.common.model;
 
+import android.content.Intent;
+import android.os.Bundle;
 import android.os.Parcel;
 import android.os.Parcelable;
+import android.os.TransactionTooLargeException;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.text.TextUtils;
@@ -15,12 +14,14 @@ import java.util.List;
 import java.util.UUID;
 import java.util.concurrent.TimeUnit;
 
-@Deprecated
+/**
+ * Represents a query to find routes from A to B.
+ * <p>
+ * Note that, to avoid {@link TransactionTooLargeException}, it's discouraged to
+ * pass any instance of {@link Query} to {@link Intent} or {@link Bundle}.
+ * The {@link Parcelable} is subject to deletion at anytime.
+ */
 public class Query implements Parcelable {
-  public static final String UNIT_AUTO = "auto";
-  public static final String UNIT_IMPERIAL = "imperial";
-  public static final String UNIT_METRIC = "metric";
-
   public static final Creator<Query> CREATOR = new Creator<Query>() {
     public Query createFromParcel(Parcel in) {
       Query query = new Query();
@@ -111,18 +112,23 @@ public class Query implements Parcelable {
     return query;
   }
 
+  /**
+   * @return values of {@link Units}.
+   */
   public String getUnit() {
     if (TextUtils.isEmpty(mUnit)) {
-      mUnit = UNIT_AUTO;
+      mUnit = Units.UNIT_AUTO;
     }
-
     return mUnit;
   }
 
+  /**
+   * @param unit Must be values of {@link Units}.
+   */
   public void setUnit(final String unit) {
     this.mUnit = unit;
     if (TextUtils.isEmpty(this.mUnit)) {
-      this.mUnit = UNIT_AUTO;
+      this.mUnit = Units.UNIT_AUTO;
     }
   }
 

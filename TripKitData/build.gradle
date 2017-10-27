@@ -1,11 +1,12 @@
 apply plugin: "com.android.library"
+// To publish via JitPack.
+// See https://jitpack.io/docs/ANDROID/.
 apply plugin: "com.github.dcendents.android-maven"
 apply plugin: "kotlin-android"
 apply plugin: "kotlin-kapt"
 
 // For https://github.com/dcendents/android-maven-gradle-plugin.
 group = "com.skedgo.tripkit"
-version = "1.0"
 
 android {
   compileSdkVersion libVersions.compileSdkVersion
@@ -38,12 +39,4 @@ dependencies {
   provided libs.builderAnnotations
   provided libs.gsonAnnotations
   compile libs.kotlin
-}
-
-uploadArchives {
-  repositories {
-    mavenDeployer {
-      repository(url: "file://${tripKitAndroidMaven}")
-    }
-  }
 }

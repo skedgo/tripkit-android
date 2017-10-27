@@ -11,7 +11,7 @@ class GetSummarySegmentsTest {
     // Given a trip having arrival segment that is visible on the map.
     val arrivalSegment = TripSegment()
     arrivalSegment.type = SegmentType.ARRIVAL
-    arrivalSegment.visibility = TripSegment.VISIBILITY_ON_MAP
+    arrivalSegment.visibility = Visibilities.VISIBILITY_ON_MAP
     val trip = Trip()
     trip.segments = arrayListOf(arrivalSegment)
 
@@ -27,11 +27,11 @@ class GetSummarySegmentsTest {
 
   @Test fun summaryAreaShouldOnlyIncludeSegmentsVisibleOnSummary() {
     val a = mock<TripSegment>()
-    whenever(a.isVisibleInContext(eq(TripSegment.VISIBILITY_IN_SUMMARY)))
+    whenever(a.isVisibleInContext(eq(Visibilities.VISIBILITY_IN_SUMMARY)))
         .thenReturn(true)
 
     val b = mock<TripSegment>()
-    whenever(b.isVisibleInContext(eq(TripSegment.VISIBILITY_IN_SUMMARY)))
+    whenever(b.isVisibleInContext(eq(Visibilities.VISIBILITY_IN_SUMMARY)))
         .thenReturn(false)
 
     val trip = Trip()
