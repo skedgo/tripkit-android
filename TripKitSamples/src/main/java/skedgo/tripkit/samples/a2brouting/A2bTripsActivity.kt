@@ -7,12 +7,18 @@ import rx.Observable
 import rx.android.schedulers.AndroidSchedulers.mainThread
 import skedgo.rxlifecyclecomponents.RxAppCompatActivity
 import skedgo.rxlifecyclecomponents.bindToLifecycle
+import skedgo.tripkit.android.TripKit
 import skedgo.tripkit.samples.R
 import skedgo.tripkit.samples.databinding.A2bTripsBinding
 import java.util.concurrent.TimeUnit
 
 class A2bTripsActivity : RxAppCompatActivity() {
-  val viewModel: A2bTripsViewModel by lazy { A2bTripsViewModel(applicationContext) }
+  val viewModel: A2bTripsViewModel by lazy {
+    A2bTripsViewModel(
+        applicationContext,
+        TripKit.getInstance().routeService
+    )
+  }
   val binding: A2bTripsBinding by lazy {
     DataBindingUtil.setContentView<A2bTripsBinding>(this, R.layout.a2b_trips)
   }

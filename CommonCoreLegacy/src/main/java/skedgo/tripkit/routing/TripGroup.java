@@ -1,7 +1,5 @@
 package skedgo.tripkit.routing;
 
-import android.os.Parcel;
-import android.os.Parcelable;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 
@@ -13,29 +11,19 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.UUID;
 
-public class TripGroup implements Parcelable {
-  public static final Creator<TripGroup> CREATOR = new Creator<TripGroup>() {
-    public TripGroup createFromParcel(Parcel in) {
-      TripGroup tripGroup = new TripGroup();
-      tripGroup.uuid = in.readString();
-      tripGroup.displayTripId = in.readLong();
-      tripGroup.trips = in.readArrayList(Trip.class.getClassLoader());
+/**
+ * Represents a list of {@link Trip}s. A list of {@link Trip}s comprises
+ * of a display trip (aka representative trip) and alternative trips.
+ * A display trip can be accessed via {@link #getDisplayTrip()} while
+ * alternative trips can be retrieved via {@link #getTrips()} minus
+ * {@link #getDisplayTrip()}. That's because {@link #getTrips()} returns
+ * a list of {@link Trip}s including alternative trips and display trip.
+ * <p>
+ * Besides, a {@link TripGroup} also hold info related to {@link Source}
+ * via {@link #getSources()}.
+ */
+public class TripGroup {
 
-      if (tripGroup.trips != null) {
-        for (Trip trip : tripGroup.trips) {
-          trip.setGroup(tripGroup);
-        }
-      }
-
-      tripGroup.frequency = in.readInt();
-      tripGroup.sources = in.readArrayList(Source.class.getClassLoader());
-      return tripGroup;
-    }
-
-    public TripGroup[] newArray(int size) {
-      return new TripGroup[size];
-    }
-  };
   private String uuid = UUID.randomUUID().toString();
   private long displayTripId;
 
@@ -148,18 +136,6 @@ public class TripGroup implements Parcelable {
 
     displayTripId = trip.getId();
     return this;
-  }
-
-  @Override public int describeContents() {
-    return 0;
-  }
-
-  @Override public void writeToParcel(Parcel out, int flags) {
-    out.writeString(uuid);
-    out.writeLong(displayTripId);
-    out.writeList(trips);
-    out.writeInt(frequency);
-    out.writeList(sources);
   }
 
   public GroupVisibility getVisibility() {

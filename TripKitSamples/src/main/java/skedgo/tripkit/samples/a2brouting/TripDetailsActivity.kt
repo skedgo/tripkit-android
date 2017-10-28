@@ -24,11 +24,14 @@ class TripDetailsActivity : AppCompatActivity() {
 
     fun newIntent(context: Context, trip: Trip): Intent
         = Intent(context, TripDetailsActivity::class.java)
-        .putExtra(tripKey, trip)
+        .putExtra(tripKey, trip.id)
   }
 
-  val trip: Trip by lazy { intent.getParcelableExtra<Trip>(tripKey) }
-  val viewModel by lazy { TripDetailsViewModel(this, trip) }
+  val trip: Trip? by lazy {
+    intent.getLongExtra(tripKey, 0).let { TripGroupRepository.getTrip(it) }
+  }
+
+  val viewModel by lazy { trip?.let { TripDetailsViewModel(this, it) } }
   val getTripLine = TripKit.getInstance().a2bRoutingComponent().getTripLine
 
   override fun onCreate(savedInstanceState: Bundle?) {
@@ -36,27 +39,28 @@ class TripDetailsActivity : AppCompatActivity() {
     val binding = DataBindingUtil.setContentView<TripDetailsBinding>(this, R.layout.trip_details)
     binding.viewModel = viewModel
 
-    val mapFragment = supportFragmentManager.findFragmentById(R.id.mapFragment) as SupportMapFragment
-    mapFragment.getMapAsync { map ->
-      getTripLine.execute(trip.segments)
-          .flatMap { Observable.from(it) }
-          .subscribe { map.addPolyline(it) }
-      val height = resources.displayMetrics.heightPixels
-      val width = resources.displayMetrics.widthPixels
+    trip?.let { trip ->
+      val mapFragment = supportFragmentManager.findFragmentById(R.id.mapFragment) as SupportMapFragment
+      mapFragment.getMapAsync { map ->
+        getTripLine.execute(trip.segments)
+            .flatMap { Observable.from(it) }
+            .subscribe { map.addPolyline(it) }
+        val height = resources.displayMetrics.heightPixels
+        val width = resources.displayMetrics.widthPixels
 
-      map.moveCamera(CameraUpdateFactory.newLatLngBounds(LatLngBounds.Builder()
-          .include(LatLng(trip.from.lat, trip.from.lon))
-          .include(LatLng(trip.to.lat, trip.to.lon))
-          .build(), width, height, height / 10))
+        map.moveCamera(CameraUpdateFactory.newLatLngBounds(LatLngBounds.Builder()
+            .include(LatLng(trip.from.lat, trip.from.lon))
+            .include(LatLng(trip.to.lat, trip.to.lon))
+            .build(), width, height, height / 10))
 
-      map.addMarker(MarkerOptions()
-          .position(LatLng(trip.from.lat, trip.from.lon))
-          .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN)))
-      map.addMarker(MarkerOptions()
-          .position(LatLng(trip.to.lat, trip.to.lon))
-          .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED)))
+        map.addMarker(MarkerOptions()
+            .position(LatLng(trip.from.lat, trip.from.lon))
+            .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN)))
+        map.addMarker(MarkerOptions()
+            .position(LatLng(trip.to.lat, trip.to.lon))
+            .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED)))
+      }
     }
-
     val bottomSheetBehavior = BottomSheetBehavior.from(binding.bottomSheet)
     bottomSheetBehavior.peekHeight = 360
   }

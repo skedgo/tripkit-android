@@ -6,6 +6,7 @@ import com.skedgo.android.common.model.TransportMode
 import com.skedgo.android.tripkit.tsp.Paratransit
 import com.skedgo.android.tripkit.tsp.RegionInfo
 import com.skedgo.android.tripkit.tsp.RegionInfoService
+import rx.Completable
 import rx.Observable
 import skedgo.tripkit.routing.ModeInfo
 import java.util.*
@@ -88,7 +89,7 @@ internal class RegionServiceImpl(
               Observable.just(emptyList<TransportMode>())
           }
 
-  override fun refreshAsync(): Observable<Void> =
+  override fun refreshAsync(): Completable =
       regionsFetcher.fetchAsync()
           .doOnCompleted {
             regionCache.invalidate()

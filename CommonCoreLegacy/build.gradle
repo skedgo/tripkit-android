@@ -1,16 +1,16 @@
 apply plugin: "com.android.library"
-apply plugin: 'com.github.dcendents.android-maven'
-apply plugin: 'kotlin-android'
-apply plugin: 'kotlin-kapt'
-apply plugin: 'com.jfrog.bintray'
+// To publish via JitPack.
+// See https://jitpack.io/docs/ANDROID/.
+apply plugin: "com.github.dcendents.android-maven"
+apply plugin: "kotlin-android"
+apply plugin: "kotlin-kapt"
 
 // For https://github.com/dcendents/android-maven-gradle-plugin.
-group = 'com.skedgo'
-version = '1.3'
+group = "com.skedgo.tripkit"
 
 android {
-  compileSdkVersion 25
-  buildToolsVersion '25.0.2'
+  compileSdkVersion libVersions.compileSdkVersion
+  buildToolsVersion libVersions.buildToolsVersion
 
   defaultConfig {
     minSdkVersion 15
@@ -74,60 +74,4 @@ dependencies {
   compileOnly libs.valueAnnotations
   compileOnly libs.builderAnnotations
   compileOnly libs.gsonAnnotations
-}
-
-install {
-  repositories.mavenInstaller {
-    pom.project {
-      name 'TripKit Android'
-      description 'CommonCoreLegacy'
-      url 'https://github.com/skedgo/tripkit-android'
-      inceptionYear '2013'
-
-      packaging 'aar'
-      groupId project.group
-      artifactId 'CommonCoreLegacy'
-      version project.version
-
-      licenses {
-        license {
-          name 'The MIT License'
-          url 'https://spdx.org/licenses/MIT#licenseText'
-          distribution 'repo'
-        }
-      }
-      developers {
-        developer {
-          name 'SkedGo'
-        }
-      }
-    }
-  }
-}
-
-bintray {
-  user = BINTRAY_USER
-  key = BINTRAY_KEY
-  configurations = ['archives']
-  pkg {
-    repo = 'tripkit-android'
-    name = 'CommonCoreLegacy'
-    userOrg = 'skedgo'
-    licenses = ['MIT']
-    vcsUrl = 'https://github.com/skedgo/tripkit-android'
-    version {
-      name = project.version
-      desc = "CommonCoreLegacy $project.version"
-      released = new Date()
-      vcsTag = project.version
-    }
-  }
-}
-
-uploadArchives {
-  repositories {
-    mavenDeployer {
-      repository(url: "file://${tripKitAndroidMaven}")
-    }
-  }
 }

@@ -57,7 +57,7 @@ public abstract class TripKit {
       if (instance == null) {
         instance = tripKit;
       }
-      FetchRegionsService.scheduleAsync(context)
+      FetchRegionsService.Companion.scheduleAsync(context)
           .subscribe(Actions.empty(), instance.getErrorHandler());
     }
   }
@@ -74,7 +74,7 @@ public abstract class TripKit {
             .build();
       }
 
-      FetchRegionsService.scheduleAsync(configs.context())
+      FetchRegionsService.Companion.scheduleAsync(configs.context())
           .subscribe(Actions.empty(), instance.getErrorHandler());
     }
   }

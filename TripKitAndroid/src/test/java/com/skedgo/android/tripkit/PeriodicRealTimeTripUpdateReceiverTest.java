@@ -2,6 +2,8 @@ package com.skedgo.android.tripkit;
 
 import android.test.UiThreadTest;
 
+import kotlin.Pair;
+import rx.schedulers.Schedulers;
 import skedgo.tripkit.routing.Trip;
 import skedgo.tripkit.routing.TripGroup;
 
@@ -17,6 +19,8 @@ import java.util.concurrent.TimeUnit;
 import rx.Observable;
 import rx.observers.TestSubscriber;
 
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Matchers.eq;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
@@ -42,11 +46,12 @@ public class PeriodicRealTimeTripUpdateReceiverTest {
   @UiThreadTest @Test
   public void ignoreErrorByTripUpdater() {
     final Trip displayTrip = mock(Trip.class);
+    when(displayTrip.getUpdateURL()).thenReturn("AUG 2016");
     when(group.getDisplayTrip()).thenReturn(displayTrip);
-    when(tripUpdater.getUpdateAsync(eq(displayTrip)))
+    when(tripUpdater.getUpdateAsync("AUG 2016"))
         .thenReturn(Observable.<Trip>error(new RuntimeException()));
 
-    final TestSubscriber<TripGroup> subscriber = new TestSubscriber<>();
+    final TestSubscriber<Pair<Trip, TripGroup>> subscriber = new TestSubscriber<>();
     receiver.startAsync().subscribe(subscriber);
     subscriber.awaitTerminalEvent(3, TimeUnit.SECONDS);
     receiver.stop();

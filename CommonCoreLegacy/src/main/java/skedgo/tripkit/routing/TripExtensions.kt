@@ -26,7 +26,7 @@ val Trip.endDateTime: DateTime get() = DateTime(
 fun Trip.getSummarySegments(): List<TripSegment>
     = segments
     ?.filter { it.type != SegmentType.ARRIVAL }
-    ?.filter { it.isVisibleInContext(TripSegment.VISIBILITY_IN_SUMMARY) }
+    ?.filter { it.isVisibleInContext(Visibilities.VISIBILITY_IN_SUMMARY) }
     ?: emptyList()
 
 fun Trip.getModeIds(): List<String> =
@@ -38,3 +38,5 @@ fun Trip.hasWalkOnly(): Boolean {
   val modeIds = getModeIds()
   return modeIds.size == 1 && modeIds.contains(TransportMode.ID_WALK)
 }
+
+fun Trip.getTripSegment(segmentId: Long): TripSegment? = segments?.find { it.id == segmentId }

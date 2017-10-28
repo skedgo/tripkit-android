@@ -8,18 +8,21 @@ import android.support.annotation.NonNull;
 import android.util.Pair;
 
 import com.google.gson.Gson;
-import skedgo.tripkit.routing.Trip;
-import skedgo.tripkit.routing.TripGroup;
-import skedgo.tripkit.routing.TripSegment;
+
+import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.Callable;
 
 import hugo.weaving.DebugLog;
+import rx.Completable;
 import rx.Observable;
-import rx.Subscriber;
-import rx.schedulers.Schedulers;
+import rx.functions.Action0;
+import rx.functions.Func1;
+import skedgo.tripkit.routing.Trip;
+import skedgo.tripkit.routing.TripGroup;
+import skedgo.tripkit.routing.TripSegment;
 
 import static com.skedgo.routepersistence.RouteContract.COL_ARRIVE;
 import static com.skedgo.routepersistence.RouteContract.COL_CALORIES_COST;
@@ -49,6 +52,8 @@ import static com.skedgo.routepersistence.RouteContract.SELECT_TRIPS;
 import static com.skedgo.routepersistence.RouteContract.TABLE_SEGMENTS;
 import static com.skedgo.routepersistence.RouteContract.TABLE_TRIPS;
 import static com.skedgo.routepersistence.RouteContract.TABLE_TRIP_GROUPS;
+import static rx.schedulers.Schedulers.io;
+import static skedgo.sqlite.Cursors.flattenCursor;
 
 public class RouteStore {
   private final SQLiteOpenHelper databaseHelper;
@@ -66,7 +71,38 @@ public class RouteStore {
             return delete(whereClause);
           }
         })
-        .subscribeOn(Schedulers.io());
+        .subscribeOn(io());
+  }
+
+  public Observable<List<TripGroup>> updateAlternativeTrips(final List<TripGroup> groups) {
+    return Observable.fromCallable(new Callable<List<TripGroup>>() {
+      @Override public List<TripGroup> call() throws Exception {
+        final SQLiteDatabase database = databaseHelper.getWritableDatabase();
+        database.beginTransaction();
+        try {
+          for (TripGroup group : groups) {
+            final ContentValues values = new ContentValues();
+            values.put(COL_DISPLAY_TRIP_ID, group.getDisplayTripId());
+            database.update(TABLE_TRIP_GROUPS, values, COL_UUID + "= ?", new String[] {group.uuid()});
+          }
+          database.setTransactionSuccessful();
+        } finally {
+          database.endTransaction();
+        }
+        return groups;
+      }
+    });
+  }
+
+  public Completable updateNotifiability(final String groupId, final boolean isFavorite) {
+    return Completable.fromAction(new Action0() {
+      @Override public void call() {
+        final SQLiteDatabase database = databaseHelper.getWritableDatabase();
+        final ContentValues values = new ContentValues();
+        values.put(COL_IS_NOTIFIABLE, isFavorite ? 1 : 0);
+        database.update(TABLE_TRIP_GROUPS, values, COL_UUID + "= ?", new String[] {groupId});
+      }
+    });
   }
 
   public Observable<List<TripGroup>> saveAsync(final String requestId, final List<TripGroup> groups) {
@@ -77,11 +113,62 @@ public class RouteStore {
             return groups;
           }
         })
-        .subscribeOn(Schedulers.io());
+        .subscribeOn(io());
   }
 
   @DebugLog public Observable<TripGroup> queryAsync(@NonNull Pair<String, String[]> query) {
     return queryAsync(query.first, query.second);
+  }
+
+  public Observable<String> queryTripGroupIdsByRequestIdAsync(final String requestId) {
+    return Observable
+        .fromCallable(
+            new Callable<Cursor>() {
+              @Override public Cursor call() throws Exception {
+                SQLiteDatabase database = databaseHelper.getReadableDatabase();
+                return database.query(TABLE_TRIP_GROUPS,
+                                      new String[] {COL_UUID},
+                                      COL_REQUEST_ID + " =?",
+                                      new String[] {requestId},
+                                      null, null, null);
+              }
+            }
+        )
+        .flatMap(flattenCursor())
+        .map(new Func1<Cursor, String>() {
+          @Override public String call(Cursor cursor) {
+            return cursor.getString(cursor.getColumnIndex(COL_UUID));
+          }
+        });
+  }
+
+  @NotNull
+  public Completable updateTripAsync(@NotNull final String oldTripUuid, @NotNull final Trip trip) {
+    return Completable
+        .fromAction(new Action0() {
+          @Override public void call() {
+            SQLiteDatabase database = databaseHelper.getWritableDatabase();
+            ContentValues values = new ContentValues();
+            values.put(COL_DEPART, trip.getStartTimeInSecs());
+            values.put(COL_ARRIVE, trip.getEndTimeInSecs());
+            values.put(COL_SAVE_URL, trip.getSaveURL());
+            values.put(COL_UPDATE_URL, trip.getUpdateURL());
+            values.put(COL_PROGRESS_URL, trip.getProgressURL());
+            values.put(COL_CARBON_COST, trip.getCarbonCost());
+            values.put(COL_MONEY_COST, trip.getMoneyCost());
+            values.put(COL_HASSLE_COST, trip.getHassleCost());
+
+            database.beginTransaction();
+            try {
+              database.update(TABLE_TRIPS, values, COL_UUID + " = ?", new String[] {oldTripUuid});
+              database.delete(TABLE_SEGMENTS, COL_TRIP_ID + " = ?", new String[] {oldTripUuid});
+              saveSegments(database, oldTripUuid, trip.getSegments());
+              database.setTransactionSuccessful();
+            } finally {
+              database.endTransaction();
+            }
+          }
+        }).subscribeOn(io());
   }
 
   @DebugLog private int delete(Pair<String, String[]> whereClause) {
@@ -93,70 +180,69 @@ public class RouteStore {
       final String selection,
       final String[] selectionArgs) {
     return Observable
-        .create(new Observable.OnSubscribe<TripGroup>() {
-          @Override public void call(Subscriber<? super TripGroup> subscriber) {
+        .fromCallable(new Callable<Cursor>() {
+          @Override public Cursor call() throws Exception {
             final SQLiteDatabase database = databaseHelper.getReadableDatabase();
-            queryInTransaction(subscriber, database, selection, selectionArgs);
-            subscriber.onCompleted();
+            return database.rawQuery(selection, selectionArgs);
           }
         })
-        .subscribeOn(Schedulers.io());
+        .flatMap(flattenCursor())
+        .flatMap(new Func1<Cursor, Observable<TripGroup>>() {
+          @Override public Observable<TripGroup> call(final Cursor groupCursor) {
+            return queryTripsOfTripGroup(groupCursor);
+          }
+        })
+        .subscribeOn(io());
   }
 
-  @DebugLog private void queryInTransaction(
-      Subscriber<? super TripGroup> subscriber,
-      SQLiteDatabase database,
-      String selection,
-      String[] selectionArgs) {
-    database.beginTransaction();
-    try {
-      query(subscriber, database, selection, selectionArgs);
-      database.setTransactionSuccessful();
-    } finally {
-      database.endTransaction();
-    }
+  @NonNull private Observable<TripGroup> queryTripsOfTripGroup(final Cursor groupCursor) {
+    final TripGroup group = asTripGroup(groupCursor);
+    return Observable
+        .fromCallable(new Callable<Cursor>() {
+          @Override public Cursor call() throws Exception {
+            final SQLiteDatabase database = databaseHelper.getReadableDatabase();
+            return database.rawQuery(SELECT_TRIPS, new String[] {group.uuid()});
+          }
+        })
+        .flatMap(flattenCursor())
+        .flatMap(new Func1<Cursor, Observable<Trip>>() {
+          @Override public Observable<Trip> call(Cursor tripCursor) {
+            return querySegmentsOfTrip(tripCursor, groupCursor);
+          }
+        })
+        .toList()
+        .map(new Func1<List<Trip>, TripGroup>() {
+          @Override public TripGroup call(List<Trip> trips) {
+            group.setTrips(new ArrayList<>(trips));
+            return group;
+          }
+        });
   }
 
-  private void query(
-      Subscriber<? super TripGroup> subscriber,
-      SQLiteDatabase database,
-      String selection,
-      String[] selectionArgs) {
-    final Cursor groupCursor = database.rawQuery(selection, selectionArgs);
-    try {
-      while (!subscriber.isUnsubscribed() && groupCursor.moveToNext()) {
-        final TripGroup group = asTripGroup(groupCursor);
-        final Cursor tripCursor = database.rawQuery(SELECT_TRIPS, new String[] {group.uuid()});
-        final ArrayList<Trip> trips = new ArrayList<>(tripCursor.getCount());
-        try {
-          while (!subscriber.isUnsubscribed() && tripCursor.moveToNext()) {
-            final Trip trip = asTrip(tripCursor);
-            final Cursor segmentCursor = database.rawQuery(SELECT_SEGMENTS, new String[] {trip.uuid()});
-            final ArrayList<TripSegment> segments = asSegments(subscriber, segmentCursor);
-            trip.setSegments(segments);
-            trips.add(trip);
+  @NonNull
+  private Observable<Trip> querySegmentsOfTrip(Cursor tripCursor, Cursor groupCursor) {
+    final Trip trip = asTrip(tripCursor, groupCursor);
+    return Observable
+        .fromCallable(new Callable<ArrayList<TripSegment>>() {
+          @Override public ArrayList<TripSegment> call() throws Exception {
+            final SQLiteDatabase database = databaseHelper.getReadableDatabase();
+            Cursor segmentsCursor = database.rawQuery(SELECT_SEGMENTS, new String[] {trip.uuid()});
+            return asSegments(segmentsCursor);
           }
-        } finally {
-          if (!tripCursor.isClosed()) {
-            tripCursor.close();
+        })
+        .map(new Func1<ArrayList<TripSegment>, Trip>() {
+          @Override public Trip call(ArrayList<TripSegment> tripSegments) {
+            trip.setSegments(tripSegments);
+            return trip;
           }
-        }
-        group.setTrips(trips);
-        subscriber.onNext(group);
-      }
-    } finally {
-      if (!groupCursor.isClosed()) {
-        groupCursor.close();
-      }
-    }
+        });
   }
 
   private ArrayList<TripSegment> asSegments(
-      Subscriber<? super TripGroup> subscriber,
       Cursor segmentCursor) {
     final ArrayList<TripSegment> segments = new ArrayList<>(segmentCursor.getCount());
     try {
-      while (!subscriber.isUnsubscribed() && segmentCursor.moveToNext()) {
+      while (segmentCursor.moveToNext()) {
         final TripSegment segment = asSegment(segmentCursor);
         segments.add(segment);
       }
@@ -173,23 +259,25 @@ public class RouteStore {
     return gson.fromJson(json, TripSegment.class);
   }
 
-  private Trip asTrip(Cursor cursor) {
-    final long id = cursor.getLong(cursor.getColumnIndex(COL_ID));
-    final String uuid = cursor.getString(cursor.getColumnIndex(COL_UUID));
-    final String currencySymbol = cursor.getString(cursor.getColumnIndex(COL_CURRENCY_SYMBOL));
-    final String saveUrl = cursor.getString(cursor.getColumnIndex(COL_SAVE_URL));
-    final long depart = cursor.getLong(cursor.getColumnIndex(COL_DEPART));
-    final long arrive = cursor.getLong(cursor.getColumnIndex(COL_ARRIVE));
-    final float caloriesCost = cursor.getFloat(cursor.getColumnIndex(COL_CALORIES_COST));
-    final float moneyCost = cursor.getFloat(cursor.getColumnIndex(COL_MONEY_COST));
-    final float carbonCost = cursor.getFloat(cursor.getColumnIndex(COL_CARBON_COST));
-    final float hassleCost = cursor.getFloat(cursor.getColumnIndex(COL_HASSLE_COST));
-    final float weightedScore = cursor.getFloat(cursor.getColumnIndex(COL_WEIGHTED_SCORE));
-    final String updateUrl = cursor.getString(cursor.getColumnIndex(COL_UPDATE_URL));
-    final String progressUrl = cursor.getString(cursor.getColumnIndex(COL_PROGRESS_URL));
-    final String plannedUrl = cursor.getString(cursor.getColumnIndex(COL_PLANNED_URL));
-    final String tempUrl = cursor.getString(cursor.getColumnIndex(COL_TEMP_URL));
-    final int queryIsLeaveAfter = cursor.getInt(cursor.getColumnIndex(COL_QUERY_IS_LEAVE_AFTER));
+  private Trip asTrip(Cursor tripCursor, Cursor groupCursor) {
+    final long id = tripCursor.getLong(tripCursor.getColumnIndex(COL_ID));
+    final String uuid = tripCursor.getString(tripCursor.getColumnIndex(COL_UUID));
+    final String currencySymbol = tripCursor.getString(tripCursor.getColumnIndex(COL_CURRENCY_SYMBOL));
+    final String saveUrl = tripCursor.getString(tripCursor.getColumnIndex(COL_SAVE_URL));
+    final long depart = tripCursor.getLong(tripCursor.getColumnIndex(COL_DEPART));
+    final long arrive = tripCursor.getLong(tripCursor.getColumnIndex(COL_ARRIVE));
+    final float caloriesCost = tripCursor.getFloat(tripCursor.getColumnIndex(COL_CALORIES_COST));
+    final float moneyCost = tripCursor.getFloat(tripCursor.getColumnIndex(COL_MONEY_COST));
+    final float carbonCost = tripCursor.getFloat(tripCursor.getColumnIndex(COL_CARBON_COST));
+    final float hassleCost = tripCursor.getFloat(tripCursor.getColumnIndex(COL_HASSLE_COST));
+    final float weightedScore = tripCursor.getFloat(tripCursor.getColumnIndex(COL_WEIGHTED_SCORE));
+    final String updateUrl = tripCursor.getString(tripCursor.getColumnIndex(COL_UPDATE_URL));
+    final String progressUrl = tripCursor.getString(tripCursor.getColumnIndex(COL_PROGRESS_URL));
+    final String plannedUrl = tripCursor.getString(tripCursor.getColumnIndex(COL_PLANNED_URL));
+    final String tempUrl = tripCursor.getString(tripCursor.getColumnIndex(COL_TEMP_URL));
+    final int queryIsLeaveAfter = tripCursor.getInt(tripCursor.getColumnIndex(COL_QUERY_IS_LEAVE_AFTER));
+
+    final boolean isNotifable = groupCursor.getInt(groupCursor.getColumnIndex(COL_IS_NOTIFIABLE)) == 1;
 
     final Trip trip = new Trip();
     trip.setId(id);
@@ -208,6 +296,7 @@ public class RouteStore {
     trip.setPlannedURL(plannedUrl);
     trip.setTemporaryURL(tempUrl);
     trip.setQueryIsLeaveAfter(queryIsLeaveAfter == 1);
+    trip.isFavourite(isNotifable);
     return trip;
   }
 

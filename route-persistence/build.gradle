@@ -1,14 +1,15 @@
 apply plugin: 'com.android.library'
 apply plugin: 'com.jakewharton.hugo'
 apply plugin: 'com.github.dcendents.android-maven'
+apply plugin: 'kotlin-android'
 
 // For https://github.com/dcendents/android-maven-gradle-plugin.
 group = 'com.skedgo'
 version = '1.0'
 
 android {
-  compileSdkVersion 25
-  buildToolsVersion '25.0.2'
+  compileSdkVersion libVersions.compileSdkVersion
+  buildToolsVersion libVersions.buildToolsVersion
 
   // To print Hugo's logs.
   // defaultPublishConfig 'debug'
@@ -47,7 +48,8 @@ dependencies {
   testImplementation libs.assertjCore
   testImplementation libs.mockitoCore
   testImplementation libs.robolectric
-
+  testImplementation libs.mockitoKotlin, { exclude group: 'org.jetbrains.kotlin' }
+  testImplementation libs.kluent
 
   androidTestImplementation 'com.android.support.test.espresso:espresso-core:2.2.2', {
     exclude group: 'com.android.support', module: 'support-annotations'

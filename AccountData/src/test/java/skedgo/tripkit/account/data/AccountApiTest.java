@@ -20,7 +20,7 @@ import rx.observers.TestSubscriber;
 import static org.assertj.core.api.Java6Assertions.*;
 
 @RunWith(TestRunner.class)
-@Config(constants = BuildConfig.class, sdk = 21)
+@Config(constants = BuildConfig.class, sdk = 23)
 public class AccountApiTest {
   private MockWebServer server;
   private AccountApi api;

@@ -1,7 +1,5 @@
 package skedgo.tripkit.routing;
 
-import android.os.Parcel;
-import android.os.Parcelable;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.text.TextUtils;
@@ -19,47 +17,17 @@ import java.util.Locale;
 import java.util.UUID;
 
 /**
- * @see <a href="https://redmine.buzzhives.com/projects/buzzhives/wiki/Main_API_formats#Trips">API format</a>
+ * A {@link Trip} will mainly hold a list of {@link TripSegment}s which denotes
+ * how to go from {@link Trip#getFrom()} to {@link Trip#getTo()}.
+ * <p>
+ * Main use-cases:
+ * - Trip's segments: {@link Trip#getSegments()}.
+ * - Trip's start time: {@link TripExtensionsKt#getStartDateTime(Trip)}.
+ * - Trip's end time: {@link TripExtensionsKt#getEndDateTime(Trip)}}.
+ * - Trip's costs: {@link #getCaloriesCost()}, {@link #getMoneyCost()}, {@link #getCarbonCost()}.
  */
-public class Trip implements Parcelable, ITimeRange {
+public class Trip implements ITimeRange {
   public static final float UNKNOWN_COST = -9999.9999F;
-  public static final Creator<Trip> CREATOR = new Creator<Trip>() {
-    public Trip createFromParcel(Parcel in) {
-      Trip trip = new Trip();
-
-      trip.uuid = in.readString();
-      trip.mId = in.readLong();
-      trip.mStartTimeInSecs = in.readLong();
-      trip.mEndTimeInSecs = in.readLong();
-      trip.mMoneyCost = in.readFloat();
-      trip.mCarbonCost = in.readFloat();
-      trip.mHassleCost = in.readFloat();
-      trip.mSegments = in.readArrayList(TripSegment.class.getClassLoader());
-
-      if (trip.mSegments != null) {
-        for (TripSegment segment : trip.mSegments) {
-          segment.setTrip(trip);
-        }
-      }
-
-      trip.mIsFavourite = in.readInt() == 1;
-      trip.saveURL = in.readString();
-      trip.updateURL = in.readString();
-      trip.progressURL = in.readString();
-      trip.weightedScore = in.readFloat();
-      trip.currencySymbol = in.readString();
-      trip.caloriesCost = in.readFloat();
-      trip.plannedURL = in.readString();
-      trip.temporaryURL = in.readString();
-      trip.availability = in.readString();
-      trip.queryIsLeaveAfter = in.readByte() == 1;
-      return trip;
-    }
-
-    public Trip[] newArray(int size) {
-      return new Trip[size];
-    }
-  };
 
   /**
    * This will be transformed into a list of {@link TripSegment}.
@@ -346,34 +314,6 @@ public class Trip implements Parcelable, ITimeRange {
     }
 
     return false;
-  }
-
-  @Override
-  public int describeContents() {
-    return 0;
-  }
-
-  @Override
-  public void writeToParcel(final Parcel dest, final int flags) {
-    dest.writeString(uuid);
-    dest.writeLong(mId);
-    dest.writeLong(mStartTimeInSecs);
-    dest.writeLong(mEndTimeInSecs);
-    dest.writeFloat(mMoneyCost);
-    dest.writeFloat(mCarbonCost);
-    dest.writeFloat(mHassleCost);
-    dest.writeList(mSegments);
-    dest.writeInt(mIsFavourite ? 1 : 0);
-    dest.writeString(saveURL);
-    dest.writeString(updateURL);
-    dest.writeString(progressURL);
-    dest.writeFloat(weightedScore);
-    dest.writeString(currencySymbol);
-    dest.writeFloat(caloriesCost);
-    dest.writeString(plannedURL);
-    dest.writeString(temporaryURL);
-    dest.writeString(availability);
-    dest.writeByte((byte) (queryIsLeaveAfter ? 1 : 0));
   }
 
   /**

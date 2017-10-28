@@ -5,42 +5,53 @@
  */
 
 def libVersions = new Expando()
-libVersions.immutablesVersion = "2.4.4"
+libVersions.immutablesVersion = "2.5.5"
 libVersions.devMinSdkVersion = 21
 libVersions.proMinSdkVersion = 15
-libVersions.compileSdkVersion = 25
-libVersions.buildToolsVersion = "25.0.2"
+libVersions.compileSdkVersion = 26
+libVersions.buildToolsVersion = "26.0.1"
 libVersions.targetSdkVersion = 23
-libVersions.playServicesVersion = "10.2.1"
-libVersions.firebaseAppIndexingVersion = "10.2.1"
+libVersions.playServicesVersion = "11.0.2"
+libVersions.firebaseAppIndexingVersion = "11.0.2"
+// See change-log at https://github.com/JetBrains/kotlin/blob/master/ChangeLog.md.
 libVersions.kotlinVersion = "1.1.3-2"
-libVersions.supportLibraryVersion = "25.3.1"
-libVersions.androidPluginVersion = "3.0.0-alpha4"
+libVersions.supportLibraryVersion = "26.0.0"
+// See change-log at https://twitter.com/AGPVersions.
+libVersions.androidPluginVersion = "3.0.0"
+libVersions.okHttpVersion = "3.8.1"
+libVersions.retrofitVersion = "2.3.0"
 ext.libVersions = libVersions
 
 Expando libs = new Expando()
 libs.mockitoKotlin = "com.nhaarman:mockito-kotlin-kt1.1:1.5.0"
 libs.mockitoCore = "org.mockito:mockito-core:2.8.9"
-libs.robolectric = "org.robolectric:robolectric:3.3.2"
+libs.robolectric = "org.robolectric:robolectric:3.4.2"
 libs.robolectricShadowsMultidex = "org.robolectric:shadows-multidex:3.3.2"
 libs.assertjCore = "org.assertj:assertj-core:2.6.0"
 libs.jodaTime = "joda-time:joda-time:2.9.9:no-tzdb"
 libs.jodaTimeTzdb = "joda-time:joda-time:2.9.9"
 libs.jodaTimeAndroid = "net.danlew:android.joda:2.9.9"
-libs.multidex = "com.android.support:multidex:1.0.1"
-libs.androidJob = "com.evernote:android-job:1.1.8"
+libs.androidJob = "com.evernote:android-job:1.1.11"
 libs.androidReactiveLocation = "com.github.skedgo:Android-ReactiveLocation:636ef5d15581b54b60fb5ace003b812cc84c413a"
 libs.playServicesMaps = "com.google.android.gms:play-services-maps:$libVersions.playServicesVersion"
 libs.playServicesLocation = "com.google.android.gms:play-services-location:$libVersions.playServicesVersion"
 libs.playServicesAnalytics = "com.google.android.gms:play-services-analytics:$libVersions.playServicesVersion"
 libs.playServicesGcm = "com.google.android.gms:play-services-gcm:$libVersions.playServicesVersion"
 libs.firebaseAppIndexing = "com.google.firebase:firebase-appindexing:$libVersions.firebaseAppIndexingVersion"
+
+// Support Library package
+libs.multidex = "com.android.support:multidex:1.0.1"
 libs.supportAnnotations = "com.android.support:support-annotations:$libVersions.supportLibraryVersion"
+libs.recyclerView = "com.android.support:recyclerview-v7:$libVersions.supportLibraryVersion"
+libs.cardView = "com.android.support:cardview-v7:$libVersions.supportLibraryVersion"
+libs.supportDesign = "com.android.support:design:$libVersions.supportLibraryVersion"
+libs.supportV4 = "com.android.support:support-v4:$libVersions.supportLibraryVersion"
+libs.appCompat = "com.android.support:appcompat-v7:$libVersions.supportLibraryVersion"
 
 libs.value = "org.immutables:value:$libVersions.immutablesVersion"
-libs.valueAnnotations = "org.immutables:value:$libVersions.immutablesVersion:annotations"
+libs.valueAnnotations = "org.immutables:value:$libVersions.immutablesVersion"
 libs.builderAnnotations = "org.immutables:builder:$libVersions.immutablesVersion"
-libs.gsonAnnotations = "org.immutables:gson:$libVersions.immutablesVersion:annotations"
+libs.gsonAnnotations = "org.immutables:gson:$libVersions.immutablesVersion"
 
 libs.dagger = "com.google.dagger:dagger:2.10"
 libs.daggerAndroid = "com.google.dagger:dagger-android:2.10"
@@ -55,4 +66,15 @@ libs.kotlin = "org.jetbrains.kotlin:kotlin-stdlib:$libVersions.kotlinVersion"
 libs.gson = "com.google.code.gson:gson:2.7"
 libs.junit = "junit:junit:4.12"
 libs.flexbox = "com.google.android:flexbox:0.3.0"
+libs.okHttp = "com.squareup.okhttp3:okhttp:$libVersions.okHttpVersion"
+libs.mockWebServer = "com.squareup.okhttp3:mockwebserver:$libVersions.okHttpVersion"
+libs.crashlytics = "com.crashlytics.sdk.android:crashlytics:2.6.5@aar"
+libs.retrofit = "com.squareup.retrofit2:retrofit:$libVersions.retrofitVersion"
+libs.retrofitAdapterRxJava = "com.squareup.retrofit2:adapter-rxjava:$libVersions.retrofitVersion"
+libs.retrofitConverterGson = "com.squareup.retrofit2:converter-gson:$libVersions.retrofitVersion"
+libs.calligraphy = "uk.co.chrisjenx:calligraphy:2.3.0"
+libs.materialProgressBar = "me.zhanghai.android.materialprogressbar:library:1.4.1"
+libs.timber = "com.jakewharton.timber:timber:4.5.1"
+libs.rxtry = "com.github.thuytrinh:RxTry:c2f002df6c"
+libs.koptional = "com.gojuno.koptional:koptional:1.2.0"
 ext.libs = libs

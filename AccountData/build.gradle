@@ -8,8 +8,8 @@ group = 'com.skedgo.tripkit'
 version = '1.0'
 
 android {
-  compileSdkVersion 25
-  buildToolsVersion '25.0.2'
+  compileSdkVersion libVersions.compileSdkVersion
+  buildToolsVersion libVersions.buildToolsVersion
 
   defaultConfig {
     minSdkVersion 10
@@ -31,9 +31,9 @@ dependencies {
 
   implementation libs.supportAnnotations
   implementation libs.rxjava
-  implementation "com.squareup.retrofit2:retrofit:2.0.2"
-  implementation "com.squareup.retrofit2:converter-gson:2.0.2"
-  implementation "com.squareup.retrofit2:adapter-rxjava:2.0.2"
+  implementation libs.retrofitConverterGson
+  implementation libs.retrofitAdapterRxJava
+  implementation libs.retrofit
   implementation libs.gson
   compileOnly project(":AccountDomain")
   compileOnly project(":TripKitDomain")
