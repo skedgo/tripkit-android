@@ -36,7 +36,8 @@ dependencies {
   implementation libs.dagger
   kapt libs.daggerCompiler
 
-  kapt libs.value
+  implementation libs.value
+  annotationProcessor libs.value
   provided libs.valueAnnotations
   provided libs.builderAnnotations
   provided libs.gsonAnnotations

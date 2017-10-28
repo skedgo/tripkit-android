@@ -70,7 +70,8 @@ dependencies {
 
   implementation project(':TripKitDomain')
   implementation libs.kotlin
-  kapt libs.value
+  implementation libs.value
+  annotationProcessor libs.value
   compileOnly libs.valueAnnotations
   compileOnly libs.builderAnnotations
   compileOnly libs.gsonAnnotations

@@ -27,7 +27,8 @@ dependencies {
   implementation project(":TripKitDomain")
   implementation libs.dagger
   kapt libs.daggerCompiler
-  kapt libs.value
+  implementation libs.value
+  annotationProcessor libs.value
   compileOnly libs.valueAnnotations
   compileOnly libs.builderAnnotations
   compileOnly libs.gsonAnnotations

@@ -43,6 +43,7 @@ dependencies {
   implementation 'com.github.skedgo:sqlite-utils:v1.0'
   implementation 'com.android.support:appcompat-v7:25.3.0'
   implementation libs.gson
+  implementation libs.supportAnnotations
 
   testImplementation libs.junit
   testImplementation libs.assertjCore

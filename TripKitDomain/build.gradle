@@ -22,6 +22,7 @@ dependencies {
   kapt libs.daggerCompiler
 
   implementation libs.kotlin
+  implementation libs.value
   kapt libs.value
   compileOnly libs.value
 }
