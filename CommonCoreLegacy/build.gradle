@@ -3,7 +3,6 @@ apply plugin: "com.android.library"
 // See https://jitpack.io/docs/ANDROID/.
 apply plugin: "com.github.dcendents.android-maven"
 apply plugin: "kotlin-android"
-apply plugin: "kotlin-kapt"
 
 // For https://github.com/dcendents/android-maven-gradle-plugin.
 group = "com.skedgo.tripkit"
