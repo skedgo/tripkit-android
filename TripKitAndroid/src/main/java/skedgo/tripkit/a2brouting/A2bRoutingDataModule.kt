@@ -14,19 +14,20 @@ import java.util.concurrent.TimeUnit
 
 @Module
 class A2bRoutingDataModule {
-  @Provides internal fun a2bRoutingApi(gson: Gson, httpClient: OkHttpClient): A2bRoutingApi
-      = Retrofit.Builder()
-      .addCallAdapterFactory(RxJavaCallAdapterFactory.createWithScheduler(Schedulers.io()))
-      .addConverterFactory(GsonConverterFactory.create(gson))
-      .baseUrl(Server.Inflationary.value)
-      .client(httpClient
-          .newBuilder()
-          .readTimeout(30, TimeUnit.SECONDS)
-          .connectTimeout(1, TimeUnit.SECONDS)
-          .build()
-      )
-      .build()
-      .create(A2bRoutingApi::class.java)
+  @Provides internal fun a2bRoutingApi(gson: Gson, httpClient: OkHttpClient): A2bRoutingApi {
+    val client = httpClient
+        .newBuilder()
+        .readTimeout(30, TimeUnit.SECONDS)
+        .connectTimeout(1, TimeUnit.SECONDS)
+        .build()
+    return Retrofit.Builder()
+        .addCallAdapterFactory(RxJavaCallAdapterFactory.createWithScheduler(Schedulers.io()))
+        .addConverterFactory(GsonConverterFactory.create(gson))
+        .baseUrl(Server.Inflationary.value)
+        .client(client)
+        .build()
+        .create(A2bRoutingApi::class.java)
+  }
 
   @Provides internal fun failoverA2bRoutingApi(
       configs: Configs,
