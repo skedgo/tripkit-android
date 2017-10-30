@@ -44,8 +44,6 @@ dependencies {
 
   implementation 'com.github.skedgo:RxLifecycleComponents:v1.3'
   implementation 'me.tatarka.bindingcollectionadapter2:bindingcollectionadapter-recyclerview:2.0.1'
-  implementation project(':TripKitDomain')
-  implementation project(':CommonCoreLegacy')
   implementation 'com.github.skedgo.tripkit-android:TripKitAndroid:v1.15', {
     transitive = true
   }
