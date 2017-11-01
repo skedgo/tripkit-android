@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <string name="cancel">Cancella</string>
+  <string name="loading_dot_dot_dot">Caricamento...</string>
+  <string name="arrive_at__pattern">Arriva alle %1$s</string>
+  <string name="arrive_at__pattern_at__pattern">Arriva a %1$s alle %2$s</string>
+  <string name="leave__pattern">Parte da %1$s</string>
+  <string name="leave__pattern_at__pattern">Parte da %1$s alle %2$s</string>
+  <string name="real_minustime">Tempo reale</string>
+  <string name="_pattern_w_slasho_traffic">%1$s w/o traffico</string>
+  <string name="for__pattern">per %1$s</string>
+  <string name="gocatch_a_taxi">Prendi un goCatch</string>
+  <string name="ingogo_a_taxi">Prendi un ingogo</string>
+  <string name="live_traffic">traffico in tempo reale</string>
+  <string name="show_website">Apri Sito</string>
+  <string name="get_lyft">Prendere Lyft</string>
+  <string name="open_lyft">Apri Lyft</string>
+  <string name="call">Chiama</string>
+  <string name="call__pattern">Chiama %1$s</string>
+  <string name="retry">Riprova</string>
+  <string name="origin">origine</string>
+  <string name="destination">Destinazione</string>
+</resources>

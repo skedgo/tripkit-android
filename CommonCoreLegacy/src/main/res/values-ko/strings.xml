@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <string name="cancel">취소</string>
+  <string name="loading_dot_dot_dot">로딩 중...</string>
+  <string name="arrive_at__pattern">%1$s에 도착</string>
+  <string name="arrive_at__pattern_at__pattern">%1$s에 %2$s시에 도착</string>
+  <string name="leave__pattern">%1$s에 떠남</string>
+  <string name="leave__pattern_at__pattern">%1$s에 %2$s를 떠남</string>
+  <string name="real_minustime">실시간</string>
+  <string name="_pattern_w_slasho_traffic">%1$s 교통지체 없이</string>
+  <string name="for__pattern">%1$s동안</string>
+  <string name="gocatch_a_taxi">goCatch 택시</string>
+  <string name="ingogo_a_taxi">ingogo 택시</string>
+  <string name="live_traffic">실시간 교통</string>
+  <string name="show_website">웹사이트 보기</string>
+  <string name="get_lyft">리프트 부르기</string>
+  <string name="open_lyft">Lyft 앱 열기</string>
+  <string name="call">전화걸기</string>
+  <string name="call__pattern">%1$s에 전화</string>
+  <string name="retry">재시도</string>
+  <string name="origin">근원지</string>
+  <string name="destination">도착지</string>
+</resources>
