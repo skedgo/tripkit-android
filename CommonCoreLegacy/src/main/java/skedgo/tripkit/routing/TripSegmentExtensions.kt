@@ -25,6 +25,10 @@ val TripSegment.noActionAlerts
   get() =
     alerts?.filter { it.alertAction() == null }
 
-val TripSegment.actionAlert
+val TripSegment.firstActionAlert
   get() =
     alerts?.firstOrNull { it.alertAction() != null }
+
+val TripSegment.actionAlertsText
+  get() =
+    alerts?.filter { it.alertAction() != null }?.map { it.text() }.orEmpty().joinToString(separator = "\n")
