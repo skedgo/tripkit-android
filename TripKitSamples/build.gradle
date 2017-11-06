@@ -47,4 +47,6 @@ dependencies {
   implementation 'com.github.skedgo.tripkit-android:TripKitAndroid:v1.15', {
     transitive = true
   }
+
+  implementation project(":AccountData")
 }

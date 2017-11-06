@@ -14,7 +14,7 @@ libVersions.targetSdkVersion = 23
 libVersions.playServicesVersion = "11.0.2"
 libVersions.firebaseAppIndexingVersion = "11.0.2"
 // See change-log at https://github.com/JetBrains/kotlin/blob/master/ChangeLog.md.
-libVersions.kotlinVersion = "1.1.3-2"
+libVersions.kotlinVersion = "1.1.51"
 libVersions.supportLibraryVersion = "26.0.0"
 // See change-log at https://twitter.com/AGPVersions.
 libVersions.androidPluginVersion = "3.0.0"
