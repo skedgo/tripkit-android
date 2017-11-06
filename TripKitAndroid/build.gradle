@@ -24,6 +24,12 @@ android {
     exclude 'META-INF/services/com.google.gson.TypeAdapterFactory'
   }
 
+  testOptions {
+    unitTests {
+      includeAndroidResources = true
+    }
+  }
+
   lintOptions {
     checkReleaseBuilds true
     abortOnError false
