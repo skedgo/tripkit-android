@@ -69,7 +69,7 @@
 	<string name="events_from_those_calendars_will_be_used_in_planning_your_day">Begivenheder fra disse kalendere vil blive brugt i planlægningen af din dag</string>
 	<string name="_1_minute">1 minut</string>
 	<string name="navigate_from_current_location">Naviger fra nuværende placering</string>
-	<string name="navigate_from__perc1$s">Naviger fra %1$s</string>
+	<string name="navigate_from__perc">Naviger fra %1$s</string>
 	<string name="new_vehicle">Nyt køretøj</string>
 	<string name="location_name">Placeringens navn</string>
 	<string name="location_not_found">Placeringen blev ikke fundet</string>
