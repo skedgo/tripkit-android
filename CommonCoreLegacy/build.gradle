@@ -17,6 +17,12 @@ android {
     testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
   }
 
+  testOptions {
+    unitTests {
+      includeAndroidResources = true
+    }
+  }
+
   lintOptions {
     checkReleaseBuilds true
     abortOnError false
