@@ -74,7 +74,7 @@ dependencies {
   compileOnly libs.valueAnnotations
   compileOnly libs.builderAnnotations
   compileOnly libs.gsonAnnotations
-  implementation project(':CommonCoreLegacy')
-  implementation project(':TripKitDomain')
-  implementation project(':TripKitData')
+  api project(':CommonCoreLegacy')
+  api project(':TripKitDomain')
+  api project(':TripKitData')
 }
