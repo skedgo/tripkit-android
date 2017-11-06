@@ -15,6 +15,11 @@ import com.skedgo.android.common.util.LowercaseEnumTypeAdapterFactory;
 import com.skedgo.android.tripkit.bookingproviders.BookingResolver;
 import com.skedgo.android.tripkit.bookingproviders.BookingResolverImpl;
 import skedgo.tripkit.a2brouting.FailoverA2bRoutingApi;
+
+import com.skedgo.android.tripkit.servererror.NotifyServerError;
+import com.skedgo.android.tripkit.servererror.ObserveNotifyServerError;
+import com.skedgo.android.tripkit.servererror.ObserveServerError;
+import com.skedgo.android.tripkit.servererror.ServerErrorInterceptor;
 import com.skedgo.android.tripkit.tsp.GsonAdaptersRegionInfo;
 import com.skedgo.android.tripkit.tsp.GsonAdaptersRegionInfoBody;
 import com.skedgo.android.tripkit.tsp.GsonAdaptersRegionInfoResponse;
@@ -139,9 +144,11 @@ public class MainModule {
 
   @Singleton @Provides OkHttpClient httpClient(
       OkHttpClient.Builder httpClientBuilder,
-      AddCustomHeaders addCustomHeaders) {
+      AddCustomHeaders addCustomHeaders,
+      ServerErrorInterceptor serverErrorInterceptor) {
     final OkHttpClient.Builder builder = httpClientBuilder
-        .addInterceptor(addCustomHeaders);
+        .addInterceptor(addCustomHeaders)
+        .addInterceptor(serverErrorInterceptor);
     if (configs.debuggable()) {
       final Func0<Func0<String>> baseUrlAdapterFactory = configs.baseUrlAdapterFactory();
       if (baseUrlAdapterFactory != null) {
@@ -221,4 +228,17 @@ public class MainModule {
   @Provides AppVersionNameRepository appVersionNameRepository(Context context) {
     return new AppVersionNameRepositoryImpl(context);
   }
+
+  @Singleton @Provides ObserveNotifyServerError observeNotifyServerError() {
+    return new ObserveNotifyServerError();
+  }
+
+  @Provides NotifyServerError notifyServerError(ObserveNotifyServerError observeNotifyServerError) {
+    return observeNotifyServerError;
+  }
+
+  @Provides ObserveServerError observeServerError(ObserveNotifyServerError observeNotifyServerError) {
+    return observeNotifyServerError;
+  }
+
 }

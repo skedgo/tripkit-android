@@ -11,6 +11,8 @@ import com.skedgo.android.tripkit.RegionService;
 import com.skedgo.android.tripkit.TripUpdater;
 import com.skedgo.android.tripkit.bookingproviders.BookingResolver;
 import skedgo.tripkit.a2brouting.A2bRoutingDataModule;
+
+import com.skedgo.android.tripkit.servererror.ObserveServerError;
 import com.skedgo.android.tripkit.tsp.TspModule;
 
 import javax.inject.Singleton;
@@ -92,4 +94,6 @@ public abstract class TripKit {
   public abstract DateTimeComponent dateTimeComponent();
 
   public abstract Action1<Throwable> getErrorHandler();
+
+  public abstract ObserveServerError getObserveServerError();
 }
