@@ -39,7 +39,7 @@ dependencies {
   implementation 'com.trello:rxlifecycle:1.0'
   implementation libs.jodaTimeAndroid
   implementation libs.rxjava
-  implementation 'io.reactivex:rxandroid:1.2.1', { exclude module: 'rxjava' }
+  implementation libs.rxAndroid
   kapt "com.android.databinding:compiler:$androidPluginVersion"
 
   implementation 'com.github.skedgo:RxLifecycleComponents:v1.3'

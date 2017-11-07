@@ -70,7 +70,7 @@ dependencies {
   implementation "com.squareup.retrofit2:retrofit:2.0.2"
   implementation libs.playServicesMaps
   implementation libs.rxjava
-  implementation 'io.reactivex:rxandroid:1.2.1', { exclude module: 'rxjava' }
+  implementation libs.rxAndroid
   implementation 'com.github.skedgo:android-maps-utils:241fc89'
 
   implementation libs.dagger
