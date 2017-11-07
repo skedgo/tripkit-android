@@ -32,10 +32,11 @@ android {
 dependencies {
   testImplementation libs.junit
   implementation libs.kotlin
-  implementation 'com.android.support:appcompat-v7:25.3.0'
-  implementation 'com.android.support:recyclerview-v7:25.3.0'
-  implementation 'com.android.support:design:25.3.0'
-  implementation 'com.google.android.gms:play-services-maps:11.0.2'
+  implementation libs.appCompat
+  implementation libs.recyclerView
+  implementation libs.playServicesMaps
+  implementation libs.supportDesign
+
   implementation 'com.trello:rxlifecycle:1.0'
   implementation libs.jodaTimeAndroid
   implementation libs.rxjava
@@ -43,7 +44,7 @@ dependencies {
   kapt "com.android.databinding:compiler:$androidPluginVersion"
 
   implementation 'com.github.skedgo:RxLifecycleComponents:v1.3'
-  implementation 'me.tatarka.bindingcollectionadapter2:bindingcollectionadapter-recyclerview:2.0.1'
+  implementation 'me.tatarka.bindingcollectionadapter2:bindingcollectionadapter-recyclerview:2.1.0'
 
   implementation project(":AccountData")
   implementation project(":TripKitAndroid")
