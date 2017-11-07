@@ -69,7 +69,7 @@ dependencies {
   implementation libs.playServicesMaps
   implementation libs.jodaTimeAndroid
   implementation libs.rxjava
-  implementation 'io.reactivex:rxandroid:1.2.1', { exclude module: 'rxjava' }
+  implementation libs.rxAndroid
   implementation libs.gson
   implementation 'com.github.skedgo:commons-collections:v1.0'
 

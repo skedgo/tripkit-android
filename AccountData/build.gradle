@@ -27,7 +27,7 @@ dependencies {
   testImplementation libs.assertjCore
   testImplementation libs.mockitoCore
   testImplementation libs.robolectric
-  testImplementation "com.squareup.okhttp3:mockwebserver:$okHttpVersion"
+  testImplementation libs.mockWebServer
 
   implementation libs.supportAnnotations
   implementation libs.rxjava

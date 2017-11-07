@@ -60,6 +60,7 @@ libs.daggerCompiler = "com.google.dagger:dagger-compiler:2.10"
 libs.daggerAndroidProcessor = "com.google.dagger:dagger-android-processor:2.10"
 
 libs.rxjava = "io.reactivex:rxjava:1.2.4"
+libs.rxAndroid = "io.reactivex:rxandroid:1.2.1"
 libs.rxrelay1 = "com.jakewharton.rxrelay:rxrelay:1.2.0"
 libs.kluent = "org.amshove.kluent:kluent:1.20"
 libs.kotlin = "org.jetbrains.kotlin:kotlin-stdlib:$libVersions.kotlinVersion"
