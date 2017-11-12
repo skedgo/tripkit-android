@@ -3,7 +3,6 @@ apply plugin: "com.android.library"
 // See https://jitpack.io/docs/ANDROID/.
 apply plugin: "com.github.dcendents.android-maven"
 apply plugin: "kotlin-android"
-apply plugin: "kotlin-kapt"
 
 // For https://github.com/dcendents/android-maven-gradle-plugin.
 group = "com.skedgo.tripkit"
@@ -16,6 +15,12 @@ android {
     minSdkVersion 15
     targetSdkVersion 25
     testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+  }
+
+  testOptions {
+    unitTests {
+      includeAndroidResources = true
+    }
   }
 
   lintOptions {
@@ -45,33 +50,34 @@ task(generateiOSStrings, type: org.gradle.api.tasks.JavaExec) {
 }
 
 dependencies {
-  androidTestCompile libs.assertjCore
-  androidTestCompile 'com.android.support.test:runner:0.5'
-  androidTestCompile 'com.android.support.test:rules:0.5'
+  androidTestImplementation libs.assertjCore
+  androidTestImplementation 'com.android.support.test:runner:0.5'
+  androidTestImplementation 'com.android.support.test:rules:0.5'
 
-  testCompile libs.junit
-  testCompile libs.assertjCore
-  testCompile libs.robolectric
-  testCompile 'commons-io:commons-io:2.5'
-  testCompile libs.mockitoKotlin
-  testCompile libs.mockitoCore
-  testCompile libs.jodaTimeTzdb
-  testCompile libs.kluent
+  testImplementation libs.junit
+  testImplementation libs.assertjCore
+  testImplementation libs.robolectric
+  testImplementation 'commons-io:commons-io:2.5'
+  testImplementation libs.mockitoKotlin
+  testImplementation libs.mockitoCore
+  testImplementation libs.jodaTimeTzdb
+  testImplementation libs.kluent
 
   // See https://github.com/skedgo/android-maps-utils.
-  compile 'com.github.skedgo:android-maps-utils:241fc89'
-  compile 'com.android.support:support-annotations:25.3.0'
-  compile libs.playServicesMaps
-  compile libs.jodaTimeAndroid
-  compile libs.rxjava
-  compile 'io.reactivex:rxandroid:1.2.1', { exclude module: 'rxjava' }
-  compile libs.gson
-  compile 'com.github.skedgo:commons-collections:v1.0'
+  implementation 'com.github.skedgo:android-maps-utils:241fc89'
+  implementation 'com.android.support:support-annotations:25.3.0'
+  implementation libs.playServicesMaps
+  implementation libs.jodaTimeAndroid
+  implementation libs.rxjava
+  implementation libs.rxAndroid
+  implementation libs.gson
+  implementation 'com.github.skedgo:commons-collections:v1.0'
 
-  compile project(':TripKitDomain')
-  compile libs.kotlin
-  kapt libs.value
-  provided libs.valueAnnotations
-  provided libs.builderAnnotations
-  provided libs.gsonAnnotations
+  implementation project(':TripKitDomain')
+  implementation libs.kotlin
+  implementation libs.value
+  annotationProcessor libs.value
+  compileOnly libs.valueAnnotations
+  compileOnly libs.builderAnnotations
+  compileOnly libs.gsonAnnotations
 }

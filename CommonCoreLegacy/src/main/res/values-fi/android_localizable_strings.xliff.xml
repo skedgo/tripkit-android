@@ -69,7 +69,7 @@
 	<string name="events_from_those_calendars_will_be_used_in_planning_your_day">Tapahtumia näistä kalentereista käytetään päiväsi suunnitteluun</string>
 	<string name="_1_minute">1 minuutti</string>
 	<string name="navigate_from_current_location">Suunnittele reitti nykyisestä sijainnista</string>
-	<string name="navigate_from__perc1$s">Reitin lähtöpaikka: %1$s</string>
+	<string name="navigate_from__perc">Reitin lähtöpaikka: %1$s</string>
 	<string name="new_vehicle">Uusi ajoneuvo</string>
 	<string name="location_name">Sijainnin nimi</string>
 	<string name="location_not_found">Sijaintia ei löytynyt</string>

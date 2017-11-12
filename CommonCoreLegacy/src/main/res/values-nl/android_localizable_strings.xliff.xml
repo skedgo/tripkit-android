@@ -69,7 +69,7 @@
 	<string name="events_from_those_calendars_will_be_used_in_planning_your_day">Activiteiten in deze kalenders zijn zichtbaar in uw TripGo agenda</string>
 	<string name="_1_minute">1 minuut</string>
 	<string name="navigate_from_current_location">Navigeer vanaf de huidige locatie</string>
-	<string name="navigate_from__perc1$s">Navigeer vanaf %1$s</string>
+	<string name="navigate_from__perc">Navigeer vanaf %1$s</string>
 	<string name="new_vehicle">Nieuw voertuig</string>
 	<string name="location_name">Locatie Naam</string>
 	<string name="location_not_found">Locatie niet gevonden</string>
