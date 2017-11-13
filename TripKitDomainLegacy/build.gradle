@@ -24,12 +24,13 @@ android {
 }
 
 dependencies {
-  compile project(":TripKitDomain")
-  compile libs.dagger
+  implementation project(":TripKitDomain")
+  implementation libs.dagger
   kapt libs.daggerCompiler
-  kapt libs.value
-  provided libs.valueAnnotations
-  provided libs.builderAnnotations
-  provided libs.gsonAnnotations
-  compile libs.kotlin
+  implementation libs.value
+  annotationProcessor libs.value
+  compileOnly libs.valueAnnotations
+  compileOnly libs.builderAnnotations
+  compileOnly libs.gsonAnnotations
+  implementation libs.kotlin
 }

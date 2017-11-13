@@ -18,7 +18,6 @@
   <string name="tripgo_api_version_stable" translatable="false">10</string>
   <string name="tripgo_api_version_dev" translatable="false">11</string>
 
-
   <string name="cancel">Cancel</string>
   <string name="loading_dot_dot_dot">Loading...</string>
   <string name="arrive_at__pattern">Arrive at %1$s</string>
@@ -37,9 +36,6 @@
   <string name="call">Call</string>
   <string name="call__pattern">Call %1$s</string>
   <string name="retry">Retry</string>
-
   <string name="origin">origin</string>
   <string name="destination">destination</string>
-
-
 </resources>
