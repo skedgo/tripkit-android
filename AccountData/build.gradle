@@ -42,7 +42,6 @@ dependencies {
   kapt libs.daggerCompiler
 
   annotationProcessor libs.value
-  implementation libs.value
   compileOnly libs.valueAnnotations
   compileOnly libs.builderAnnotations
   compileOnly libs.gsonAnnotations
