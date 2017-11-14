@@ -36,7 +36,6 @@ dependencies {
   implementation libs.rxjava
   implementation libs.jodaTimeAndroid
   kapt libs.daggerCompiler
-  implementation libs.value
   annotationProcessor libs.value
   compileOnly libs.valueAnnotations
   compileOnly libs.builderAnnotations

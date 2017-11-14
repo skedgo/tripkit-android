@@ -75,7 +75,6 @@ dependencies {
 
   implementation libs.dagger
   kapt libs.daggerCompiler
-  implementation libs.value
   annotationProcessor libs.value
   compileOnly libs.valueAnnotations
   compileOnly libs.builderAnnotations

@@ -55,7 +55,6 @@ dependencies {
 
   implementation project(':TripKitDomain')
   implementation libs.kotlin
-  implementation libs.value
   annotationProcessor libs.value
   compileOnly libs.valueAnnotations
   compileOnly libs.builderAnnotations
