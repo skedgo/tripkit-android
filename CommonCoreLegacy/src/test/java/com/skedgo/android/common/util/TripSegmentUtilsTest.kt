@@ -19,7 +19,7 @@ class TripSegmentUtilsTest {
   @Test
   fun shouldReplaceDurationTemplate() {
     val segment: TripSegment = mock()
-    whenever(segment.action).thenReturn("Ride Taxi <DURATION>")
+    whenever(segment.action).thenReturn("Ride Taxi<DURATION>")
     whenever(segment.startTimeInSecs).thenReturn(1000)
     whenever(segment.endTimeInSecs).thenReturn(1060)
     val action = TripSegmentUtils.getTripSegmentAction(RuntimeEnvironment.application, segment)
