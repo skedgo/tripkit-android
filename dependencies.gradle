@@ -4,23 +4,23 @@
  * http://bytes.babbel.com/en/articles/2017-01-24-android-library-dependencies.html.
  */
 
-def libVersions = new Expando()
-libVersions.immutablesVersion = "2.5.5"
-libVersions.devMinSdkVersion = 21
-libVersions.proMinSdkVersion = 15
-libVersions.compileSdkVersion = 26
-libVersions.buildToolsVersion = "26.0.2"
-libVersions.targetSdkVersion = 23
-libVersions.playServicesVersion = "11.0.2"
-libVersions.firebaseAppIndexingVersion = "11.0.2"
+def versions = new Expando()
+versions.immutablesVersion = "2.5.5"
+versions.devMinSdkVersion = 21
+versions.proMinSdkVersion = 15
+versions.compileSdkVersion = 26
+versions.buildToolsVersion = "26.0.2"
+versions.targetSdkVersion = 23
+versions.playServicesVersion = "11.0.2"
+versions.firebaseAppIndexingVersion = "11.0.2"
 // See change-log at https://github.com/JetBrains/kotlin/blob/master/ChangeLog.md.
-libVersions.kotlinVersion = "1.1.51"
-libVersions.supportLibraryVersion = "26.0.0"
+versions.kotlinVersion = "1.1.51"
+versions.supportLibraryVersion = "26.0.0"
 // See change-log at https://twitter.com/AGPVersions.
-libVersions.androidPluginVersion = "3.0.0"
-libVersions.okHttpVersion = "3.8.1"
-libVersions.retrofitVersion = "2.3.0"
-ext.libVersions = libVersions
+versions.androidPluginVersion = "3.0.0"
+versions.okHttpVersion = "3.8.1"
+versions.retrofitVersion = "2.3.0"
+ext.versions = versions
 
 Expando libs = new Expando()
 libs.mockitoKotlin = "com.nhaarman:mockito-kotlin-kt1.1:1.5.0"
@@ -33,25 +33,25 @@ libs.jodaTimeTzdb = "joda-time:joda-time:2.9.9"
 libs.jodaTimeAndroid = "net.danlew:android.joda:2.9.9"
 libs.androidJob = "com.evernote:android-job:1.1.11"
 libs.androidReactiveLocation = "com.github.skedgo:Android-ReactiveLocation:636ef5d15581b54b60fb5ace003b812cc84c413a"
-libs.playServicesMaps = "com.google.android.gms:play-services-maps:$libVersions.playServicesVersion"
-libs.playServicesLocation = "com.google.android.gms:play-services-location:$libVersions.playServicesVersion"
-libs.playServicesAnalytics = "com.google.android.gms:play-services-analytics:$libVersions.playServicesVersion"
-libs.playServicesGcm = "com.google.android.gms:play-services-gcm:$libVersions.playServicesVersion"
-libs.firebaseAppIndexing = "com.google.firebase:firebase-appindexing:$libVersions.firebaseAppIndexingVersion"
+libs.playServicesMaps = "com.google.android.gms:play-services-maps:$versions.playServicesVersion"
+libs.playServicesLocation = "com.google.android.gms:play-services-location:$versions.playServicesVersion"
+libs.playServicesAnalytics = "com.google.android.gms:play-services-analytics:$versions.playServicesVersion"
+libs.playServicesGcm = "com.google.android.gms:play-services-gcm:$versions.playServicesVersion"
+libs.firebaseAppIndexing = "com.google.firebase:firebase-appindexing:$versions.firebaseAppIndexingVersion"
 
 // Support Library package
 libs.multidex = "com.android.support:multidex:1.0.2"
-libs.supportAnnotations = "com.android.support:support-annotations:$libVersions.supportLibraryVersion"
-libs.recyclerView = "com.android.support:recyclerview-v7:$libVersions.supportLibraryVersion"
-libs.cardView = "com.android.support:cardview-v7:$libVersions.supportLibraryVersion"
-libs.supportDesign = "com.android.support:design:$libVersions.supportLibraryVersion"
-libs.supportV4 = "com.android.support:support-v4:$libVersions.supportLibraryVersion"
-libs.appCompat = "com.android.support:appcompat-v7:$libVersions.supportLibraryVersion"
+libs.supportAnnotations = "com.android.support:support-annotations:$versions.supportLibraryVersion"
+libs.recyclerView = "com.android.support:recyclerview-v7:$versions.supportLibraryVersion"
+libs.cardView = "com.android.support:cardview-v7:$versions.supportLibraryVersion"
+libs.supportDesign = "com.android.support:design:$versions.supportLibraryVersion"
+libs.supportV4 = "com.android.support:support-v4:$versions.supportLibraryVersion"
+libs.appCompat = "com.android.support:appcompat-v7:$versions.supportLibraryVersion"
 
-libs.value = "org.immutables:value:$libVersions.immutablesVersion"
-libs.valueAnnotations = "org.immutables:value:$libVersions.immutablesVersion"
-libs.builderAnnotations = "org.immutables:builder:$libVersions.immutablesVersion"
-libs.gsonAnnotations = "org.immutables:gson:$libVersions.immutablesVersion"
+libs.value = "org.immutables:value:$versions.immutablesVersion"
+libs.valueAnnotations = "org.immutables:value:$versions.immutablesVersion"
+libs.builderAnnotations = "org.immutables:builder:$versions.immutablesVersion"
+libs.gsonAnnotations = "org.immutables:gson:$versions.immutablesVersion"
 
 libs.dagger = "com.google.dagger:dagger:2.10"
 libs.daggerAndroid = "com.google.dagger:dagger-android:2.10"
@@ -63,16 +63,16 @@ libs.rxjava = "io.reactivex:rxjava:1.2.4"
 libs.rxAndroid = "io.reactivex:rxandroid:1.2.1"
 libs.rxrelay1 = "com.jakewharton.rxrelay:rxrelay:1.2.0"
 libs.kluent = "org.amshove.kluent:kluent:1.30"
-libs.kotlin = "org.jetbrains.kotlin:kotlin-stdlib:$libVersions.kotlinVersion"
+libs.kotlin = "org.jetbrains.kotlin:kotlin-stdlib:$versions.kotlinVersion"
 libs.gson = "com.google.code.gson:gson:2.7"
 libs.junit = "junit:junit:4.12"
 libs.flexbox = "com.google.android:flexbox:0.3.0"
-libs.okHttp = "com.squareup.okhttp3:okhttp:$libVersions.okHttpVersion"
-libs.mockWebServer = "com.squareup.okhttp3:mockwebserver:$libVersions.okHttpVersion"
+libs.okHttp = "com.squareup.okhttp3:okhttp:$versions.okHttpVersion"
+libs.mockWebServer = "com.squareup.okhttp3:mockwebserver:$versions.okHttpVersion"
 libs.crashlytics = "com.crashlytics.sdk.android:crashlytics:2.6.5@aar"
-libs.retrofit = "com.squareup.retrofit2:retrofit:$libVersions.retrofitVersion"
-libs.retrofitAdapterRxJava = "com.squareup.retrofit2:adapter-rxjava:$libVersions.retrofitVersion"
-libs.retrofitConverterGson = "com.squareup.retrofit2:converter-gson:$libVersions.retrofitVersion"
+libs.retrofit = "com.squareup.retrofit2:retrofit:$versions.retrofitVersion"
+libs.retrofitAdapterRxJava = "com.squareup.retrofit2:adapter-rxjava:$versions.retrofitVersion"
+libs.retrofitConverterGson = "com.squareup.retrofit2:converter-gson:$versions.retrofitVersion"
 libs.calligraphy = "uk.co.chrisjenx:calligraphy:2.3.0"
 libs.materialProgressBar = "me.zhanghai.android.materialprogressbar:library:1.4.1"
 libs.timber = "com.jakewharton.timber:timber:4.5.1"
