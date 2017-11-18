@@ -21,17 +21,6 @@ import java.util.Map;
 import java.util.Set;
 
 public class RoutingResponse {
-  public static final String TEMPLATE_DIRECTION = "<DIRECTION>";
-  public static final String TEMPLATE_LINE_NAME = "<LINE_NAME>";
-  public static final String TEMPLATE_NUMBER = "<NUMBER>";
-
-  public static final String NODE_SERVICE_DIRECTION = "serviceDirection";
-  public static final String NODE_SERVICE_NUMBER = "serviceNumber";
-  public static final String NODE_ACTION = "action";
-  public static final String NODE_NOTES = "notes";
-  public static final String NODE_SERVICE_NAME = "serviceName";
-  public static final String NODE_HASH_CODE = "hashCode";
-  public static final String NODE_SEGMENT_TEMPLATE_HASH_CODE = "segmentTemplateHashCode";
   public static final String FORMAT_DIRECTION = "Direction: %s";
 
   /**
@@ -74,14 +63,14 @@ public class RoutingResponse {
     if (!isElementMissing(serviceDirectionNode)) {
       String serviceDirection = serviceDirectionNode.getAsString();
       if (!TextUtils.isEmpty(serviceDirection)) {
-        notes = notes.replace(TEMPLATE_DIRECTION, String.format(FORMAT_DIRECTION, serviceDirection));
+        notes = notes.replace(SegmentNotesTemplates.TEMPLATE_DIRECTION, String.format(FORMAT_DIRECTION, serviceDirection));
       } else {
         // The 'serviceDirection' node is empty, clear the template.
-        notes = notes.replace(TEMPLATE_DIRECTION, "");
+        notes = notes.replace(SegmentNotesTemplates.TEMPLATE_DIRECTION, "");
       }
     } else {
       // The 'serviceDirection' node doesn't exist, clear the template.
-      notes = notes.replace(TEMPLATE_DIRECTION, "");
+      notes = notes.replace(SegmentNotesTemplates.TEMPLATE_DIRECTION, "");
     }
 
     return notes;
@@ -167,7 +156,7 @@ public class RoutingResponse {
     if (CollectionUtils.isNotEmpty(segmentTemplates)) {
       for (JsonObject segmentTemplate : segmentTemplates) {
         if (segmentTemplate != null) {
-          JsonPrimitive hashCodeNode = segmentTemplate.getAsJsonPrimitive(NODE_HASH_CODE);
+          JsonPrimitive hashCodeNode = segmentTemplate.getAsJsonPrimitive(SegmentJsonKeys.NODE_HASH_CODE);
           if (isElementMissing(hashCodeNode)) {
             continue;
           }
@@ -225,7 +214,7 @@ public class RoutingResponse {
         continue;
       }
 
-      JsonPrimitive hashCodeNode = rawSegment.getAsJsonPrimitive(NODE_SEGMENT_TEMPLATE_HASH_CODE);
+      JsonPrimitive hashCodeNode = rawSegment.getAsJsonPrimitive(SegmentJsonKeys.NODE_SEGMENT_TEMPLATE_HASH_CODE);
       if (isElementMissing(hashCodeNode)) {
         continue;
       }
@@ -248,9 +237,9 @@ public class RoutingResponse {
         String key = entry.getKey();
         JsonElement value = entry.getValue();
 
-        if (NODE_ACTION.equals(key)) {
+        if (SegmentJsonKeys.NODE_ACTION.equals(key)) {
           processSegmentTemplateAction(rawSegment, value);
-        } else if (NODE_NOTES.equals(key)) {
+        } else if (SegmentJsonKeys.NODE_NOTES.equals(key)) {
           processSegmentTemplateNotes(rawSegment, value);
         } else {
           rawSegment.add(key, value);
@@ -288,19 +277,19 @@ public class RoutingResponse {
 
     String notes = notesNode.getAsString();
     if (!TextUtils.isEmpty(notes)) {
-      JsonPrimitive serviceNameNode = rawSegment.getAsJsonPrimitive(NODE_SERVICE_NAME);
+      JsonPrimitive serviceNameNode = rawSegment.getAsJsonPrimitive(SegmentJsonKeys.NODE_SERVICE_NAME);
       if (!isElementMissing(serviceNameNode)) {
         final String serviceName = serviceNameNode.getAsString();
         if (serviceName != null) {
           // No need to check empty. Reason: https://redmine.buzzhives.com/issues/5803.
-          notes = notes.replace(TEMPLATE_LINE_NAME, serviceName);
+          notes = notes.replace(SegmentNotesTemplates.TEMPLATE_LINE_NAME, serviceName);
         }
       }
 
       // Replaces '<DIRECTION>' with segment's 'serviceDirection'
-      notes = processDirectionTemplate(rawSegment.getAsJsonPrimitive(NODE_SERVICE_DIRECTION), notes);
+      notes = processDirectionTemplate(rawSegment.getAsJsonPrimitive(SegmentJsonKeys.NODE_SERVICE_DIRECTION), notes);
 
-      rawSegment.addProperty(NODE_NOTES, notes);
+      rawSegment.addProperty(SegmentJsonKeys.NODE_NOTES, notes);
     }
   }
 
@@ -312,17 +301,17 @@ public class RoutingResponse {
     String action = actionNode.getAsString();
     if (!TextUtils.isEmpty(action)) {
       action = processActionNumber(rawSegment, action);
-      rawSegment.addProperty(NODE_ACTION, action);
+      rawSegment.addProperty(SegmentJsonKeys.NODE_ACTION, action);
     }
   }
 
   private String processActionNumber(JsonObject rawSegment, String action) {
-    JsonPrimitive serviceNumberNode = rawSegment.getAsJsonPrimitive(NODE_SERVICE_NUMBER);
+    JsonPrimitive serviceNumberNode = rawSegment.getAsJsonPrimitive(SegmentJsonKeys.NODE_SERVICE_NUMBER);
     if (!isElementMissing(serviceNumberNode)) {
       String serviceNumber = serviceNumberNode.getAsString();
       if (!TextUtils.isEmpty(serviceNumber)) {
-        action = action.replace(TEMPLATE_NUMBER, serviceNumber);
-      } else if (action.contains(TEMPLATE_NUMBER)) {
+        action = action.replace(SegmentActionTemplates.TEMPLATE_NUMBER, serviceNumber);
+      } else if (action.contains(SegmentActionTemplates.TEMPLATE_NUMBER)) {
         // Doesn't have service number but the template still exists.
         // We'll replace it with mode value instead.
         // 'Take <NUMBER>' will then become 'Take the bus' if the mode is 'bus'.
@@ -330,7 +319,7 @@ public class RoutingResponse {
         if (!isElementMissing(modeNode)) {
           String mode = modeNode.getAsString();
           if (!TextUtils.isEmpty(mode)) {
-            action = action.replace(TEMPLATE_NUMBER, "the " + mode);
+            action = action.replace(SegmentActionTemplates.TEMPLATE_NUMBER, "the " + mode);
           }
 
           // Else? if it takes place, call backend guys right away.

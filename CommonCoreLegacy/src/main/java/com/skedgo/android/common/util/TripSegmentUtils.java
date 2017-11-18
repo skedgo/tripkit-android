@@ -5,18 +5,18 @@ import android.support.annotation.Nullable;
 
 import com.skedgo.android.common.R;
 import com.skedgo.android.common.model.Location;
+
+import skedgo.tripkit.routing.SegmentActionTemplates;
 import skedgo.tripkit.routing.TripSegment;
 
 public final class TripSegmentUtils {
-  public static final String TEMPLATE_TIME = "<TIME>";
-  public static final String TEMPLATE_DURATION = "<DURATION>";
-
   private TripSegmentUtils() {}
 
   @Nullable
   public static String getTripSegmentAction(Context context, TripSegment segment) {
     String action = segment.getAction();
-    if (action != null && action.contains(TEMPLATE_DURATION)) {
+    if (action != null && action.contains(SegmentActionTemplates.TEMPLATE_DURATION)) {
+      // Prepend a space due to https://redmine.buzzhives.com/issues/8971.
       action = processDurationTemplate(
           action,
           " " + context.getResources().getString(R.string.for__pattern),
@@ -26,7 +26,7 @@ public final class TripSegmentUtils {
     }
 
     String timezone = segment.getTimeZone();
-    if (action != null && action.contains(TEMPLATE_TIME)) {
+    if (action != null && action.contains(SegmentActionTemplates.TEMPLATE_TIME)) {
       action = processTimeTemplate(
           context,
           action,
@@ -44,16 +44,16 @@ public final class TripSegmentUtils {
       @Nullable String pattern,
       long startTimeInSecs,
       long endTimeInSecs) {
-    if (templateText == null || !templateText.contains(TEMPLATE_DURATION)) {
+    if (templateText == null || !templateText.contains(SegmentActionTemplates.TEMPLATE_DURATION)) {
       return templateText;
     }
 
     long minutes = (endTimeInSecs - startTimeInSecs) / 60;
     if (minutes < 0) {
-      templateText = templateText.replace(TEMPLATE_DURATION, "");
+      templateText = templateText.replace(SegmentActionTemplates.TEMPLATE_DURATION, "");
     } else {
       templateText = templateText.replace(
-          TEMPLATE_DURATION,
+          SegmentActionTemplates.TEMPLATE_DURATION,
           pattern != null
               ? String.format(pattern, getDurationFromMinutes(minutes))
               : getDurationFromMinutes(minutes)
@@ -68,9 +68,9 @@ public final class TripSegmentUtils {
       String templateText,
       String timezone,
       long timeInMillis) {
-    if (templateText.contains(TEMPLATE_TIME)) {
+    if (templateText.contains(SegmentActionTemplates.TEMPLATE_TIME)) {
       String timeText = DateTimeFormats.printTime(context, timeInMillis, timezone);
-      templateText = templateText.replace(TEMPLATE_TIME, timeText);
+      templateText = templateText.replace(SegmentActionTemplates.TEMPLATE_TIME, timeText);
     }
 
     return templateText;
