@@ -8,8 +8,8 @@ apply plugin: "kotlin-android"
 group = "com.skedgo.tripkit"
 
 android {
-  compileSdkVersion libVersions.compileSdkVersion
-  buildToolsVersion libVersions.buildToolsVersion
+  compileSdkVersion versions.compileSdkVersion
+  buildToolsVersion versions.buildToolsVersion
 
   defaultConfig {
     minSdkVersion 15
