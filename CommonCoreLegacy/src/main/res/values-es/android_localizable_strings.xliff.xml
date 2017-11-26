@@ -69,7 +69,7 @@
 	<string name="events_from_those_calendars_will_be_used_in_planning_your_day">Los eventos de esos calendarios serán usados para planificar tu día</string>
 	<string name="_1_minute">1 minuto</string>
 	<string name="navigate_from_current_location">Navegar desde la ubicación actual</string>
-	<string name="navigate_from__perc1$s">Navegar desde %1$s</string>
+	<string name="navigate_from__perc">Navegar desde %1$s</string>
 	<string name="new_vehicle">Nuevo vehículo</string>
 	<string name="location_name">Nombre de la Ubicación</string>
 	<string name="location_not_found">Ubicación no encontrada</string>

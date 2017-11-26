@@ -1,11 +1,12 @@
 buildscript {
   apply from: "dependencies.gradle"
-  ext.kotlinVersion = libVersions.kotlinVersion
-  ext.androidPluginVersion = libVersions.androidPluginVersion
-  ext.okHttpVersion = libVersions.okHttpVersion
+  ext.kotlinVersion = versions.kotlinVersion
+  ext.androidPluginVersion = versions.androidPluginVersion
+  ext.okHttpVersion = versions.okHttpVersion
 
   repositories {
     jcenter()
+    google()
   }
 
   dependencies {
@@ -43,7 +44,7 @@ allprojects {
 
   repositories {
     jcenter()
+    google()
     maven { url "https://jitpack.io" }
-    maven { url "https://maven.google.com" }
   }
 }

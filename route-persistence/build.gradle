@@ -8,8 +8,8 @@ group = 'com.skedgo'
 version = '1.0'
 
 android {
-  compileSdkVersion libVersions.compileSdkVersion
-  buildToolsVersion libVersions.buildToolsVersion
+  compileSdkVersion versions.compileSdkVersion
+  buildToolsVersion versions.buildToolsVersion
 
   // To print Hugo's logs.
   // defaultPublishConfig 'debug'
@@ -38,17 +38,21 @@ android {
 }
 
 dependencies {
-  compile project(':TripKitAndroid')
-  compile 'com.github.skedgo:sqlite-utils:v1.0'
+  implementation project(':TripKitAndroid')
+  implementation project(':CommonCoreLegacy')
+  implementation 'com.github.skedgo:sqlite-utils:v1.0'
+  implementation 'com.android.support:appcompat-v7:25.3.0'
+  implementation libs.gson
+  implementation libs.supportAnnotations
 
-  testCompile libs.junit
-  testCompile libs.assertjCore
-  testCompile libs.mockitoCore
-  testCompile libs.robolectric
-  testCompile libs.mockitoKotlin, { exclude group: 'org.jetbrains.kotlin' }
-  testCompile libs.kluent
+  testImplementation libs.junit
+  testImplementation libs.assertjCore
+  testImplementation libs.mockitoCore
+  testImplementation libs.robolectric
+  testImplementation libs.mockitoKotlin, { exclude group: 'org.jetbrains.kotlin' }
+  testImplementation libs.kluent
 
-  androidTestCompile 'com.android.support.test.espresso:espresso-core:2.2.2', {
+  androidTestImplementation 'com.android.support.test.espresso:espresso-core:2.2.2', {
     exclude group: 'com.android.support', module: 'support-annotations'
   }
 }

@@ -69,7 +69,7 @@
 	<string name="events_from_those_calendars_will_be_used_in_planning_your_day">那些行事曆上的事件將被用於規劃您當天的行程</string>
 	<string name="_1_minute">1分鐘</string>
 	<string name="navigate_from_current_location">從當前位址開始導航</string>
-	<string name="navigate_from__perc1$s">從%1$s開始導航</string>
+	<string name="navigate_from__perc">從%1$s開始導航</string>
 	<string name="new_vehicle">新的車輛</string>
 	<string name="location_name">位置名稱</string>
 	<string name="location_not_found">無法找到位置</string>

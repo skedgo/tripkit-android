@@ -9,8 +9,8 @@ apply plugin: "kotlin-kapt"
 group = "com.skedgo.tripkit"
 
 android {
-  compileSdkVersion libVersions.compileSdkVersion
-  buildToolsVersion libVersions.buildToolsVersion
+  compileSdkVersion versions.compileSdkVersion
+  buildToolsVersion versions.buildToolsVersion
 
   defaultConfig {
     minSdkVersion 15
@@ -22,6 +22,12 @@ android {
     // To avoid conflicts with ASL.
     // We don't utilize ServiceLoader, so this is unneeded.
     exclude 'META-INF/services/com.google.gson.TypeAdapterFactory'
+  }
+
+  testOptions {
+    unitTests {
+      includeAndroidResources = true
+    }
   }
 
   lintOptions {
@@ -39,35 +45,41 @@ task(generateTripkitStrings, type: org.gradle.api.tasks.JavaExec) {
 }
 
 dependencies {
-  testCompile libs.junit
-  testCompile libs.assertjCore
-  testCompile libs.robolectric
-  testCompile libs.mockitoCore
-  testCompile libs.mockitoKotlin, { exclude group: 'org.jetbrains.kotlin' }
-  testCompile libs.kluent
-  testCompile 'com.github.thuytrinh:MockWebServerRule:v1.0'
-  testCompile libs.kluent
+  testImplementation libs.junit
+  testImplementation libs.assertjCore
+  testImplementation libs.robolectric
+  testImplementation libs.mockitoCore
+  testImplementation libs.mockitoKotlin, { exclude group: 'org.jetbrains.kotlin' }
+  testImplementation libs.kluent
+  testImplementation 'com.github.thuytrinh:MockWebServerRule:v1.0'
+  testImplementation libs.kluent
 
-  androidTestCompile "com.android.support.test:runner:0.5"
-  androidTestCompile "com.android.support.test:rules:0.5"
-  androidTestCompile libs.assertjCore
+  androidTestImplementation "com.android.support.test:runner:0.5"
+  androidTestImplementation "com.android.support.test:rules:0.5"
+  androidTestImplementation libs.assertjCore
 
-  compile libs.kotlin
-  compile libs.playServicesGcm
+  implementation libs.kotlin
+  implementation libs.playServicesGcm
+  implementation libs.jodaTimeAndroid
+  implementation 'com.github.skedgo:commons-collections:v1.0'
 
-  compile 'com.github.skedgo:sqlite-utils:v1.0'
-  compile libs.okHttp
-  compile libs.retrofitConverterGson
-  compile libs.retrofitAdapterRxJava
-  compile libs.retrofit
+  implementation 'com.github.skedgo:sqlite-utils:v1.0'
+  implementation libs.okHttp
+  implementation libs.retrofit
+  implementation libs.retrofitAdapterRxJava
+  implementation libs.retrofitConverterGson
+  implementation libs.playServicesMaps
+  implementation libs.rxjava
+  implementation libs.rxAndroid
+  implementation 'com.github.skedgo:android-maps-utils:241fc89'
 
-  compile libs.dagger
+  implementation libs.dagger
   kapt libs.daggerCompiler
-  kapt libs.value
-  provided libs.valueAnnotations
-  provided libs.builderAnnotations
-  provided libs.gsonAnnotations
-  compile project(':CommonCoreLegacy')
-  compile project(':TripKitDomain')
-  compile project(':TripKitData')
+  annotationProcessor libs.value
+  compileOnly libs.valueAnnotations
+  compileOnly libs.builderAnnotations
+  compileOnly libs.gsonAnnotations
+  api project(':CommonCoreLegacy')
+  api project(':TripKitDomain')
+  api project(':TripKitData')
 }

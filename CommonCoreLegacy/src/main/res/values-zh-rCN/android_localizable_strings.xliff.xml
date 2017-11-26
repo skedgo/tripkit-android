@@ -69,7 +69,7 @@
 	<string name="events_from_those_calendars_will_be_used_in_planning_your_day">从日历里获取的这些事件将被用于规划你的行程</string>
 	<string name="_1_minute">1分钟</string>
 	<string name="navigate_from_current_location">从当前位置导航</string>
-	<string name="navigate_from__perc1$s">从 %1$s 导航</string>
+	<string name="navigate_from__perc">从 %1$s 导航</string>
 	<string name="new_vehicle">新的车辆</string>
 	<string name="location_name">位置名称</string>
 	<string name="location_not_found">无法找到位置</string>
