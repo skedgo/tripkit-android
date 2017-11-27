@@ -5,14 +5,13 @@ import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
 import rx.Completable
 import rx.Single
-import rx.schedulers.Schedulers
-import skedgo.sqlite.Cursors
+import rx.schedulers.Schedulers.io
 
-class RoutingStatusStore constructor(private val dbHelper: SQLiteOpenHelper) {
+class RoutingStatusStore constructor(private val databaseHelper: SQLiteOpenHelper) {
   fun getLastStatus(requestId: String): Single<String> {
     return Single
         .fromCallable {
-          val cursor = dbHelper.readableDatabase.query(RoutingStatusContract.ROUTING_STATUS,
+          val cursor = databaseHelper.readableDatabase.query(RoutingStatusContract.ROUTING_STATUS,
               arrayOf(RoutingStatusContract.STATUS),
               "${RoutingStatusContract.REQUEST_ID} = ?",
               arrayOf(requestId),
@@ -23,7 +22,7 @@ class RoutingStatusStore constructor(private val dbHelper: SQLiteOpenHelper) {
           cursor.close()
           status
         }
-        .subscribeOn(Schedulers.io())
+        .subscribeOn(io())
   }
 
   fun updateStatus(requestId: String, status: String): Completable {
@@ -32,14 +31,13 @@ class RoutingStatusStore constructor(private val dbHelper: SQLiteOpenHelper) {
           val contentValues = ContentValues()
           contentValues.put(RoutingStatusContract.STATUS, status)
           contentValues.put(RoutingStatusContract.REQUEST_ID, requestId)
-          dbHelper.writableDatabase.insertWithOnConflict(
+          databaseHelper.writableDatabase.insertWithOnConflict(
               RoutingStatusContract.ROUTING_STATUS,
               null,
               contentValues,
               SQLiteDatabase.CONFLICT_REPLACE
           )
         }
-        .subscribeOn(Schedulers.io())
+        .subscribeOn(io())
   }
-
 }

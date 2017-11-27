@@ -16,7 +16,6 @@ public class RouteDatabaseHelper extends SQLiteOpenHelper {
   }
 
   @Override public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-
     switch (oldVersion) {
       case 1:
         RoutingStatusContract.INSTANCE.create(db);

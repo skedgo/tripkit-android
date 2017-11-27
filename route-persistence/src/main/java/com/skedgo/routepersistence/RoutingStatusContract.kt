@@ -6,7 +6,6 @@ import skedgo.sqlite.DatabaseTable
 import skedgo.sqlite.UniqueIndices
 
 object RoutingStatusContract {
-
   const val REQUEST_ID = "requestId"
   const val STATUS = "status"
   const val ROUTING_STATUS = "routingStatus"
@@ -20,5 +19,4 @@ object RoutingStatusContract {
         UniqueIndices.of(ROUTING_STATUS, requestId)
     ).create(database)
   }
-
 }
