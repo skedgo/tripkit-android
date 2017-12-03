@@ -59,7 +59,7 @@ dependencies {
   implementation libs.rxjava
   implementation libs.rxAndroid
 
-  kapt "com.android.databinding:compiler:$androidPluginVersion"
+  kapt libs.dataBindingCompiler
 }
 
 uploadArchives {

@@ -1,8 +1,6 @@
 buildscript {
   apply from: "dependencies.gradle"
   ext.kotlinVersion = versions.kotlinVersion
-  ext.androidPluginVersion = versions.androidPluginVersion
-  ext.okHttpVersion = versions.okHttpVersion
 
   repositories {
     jcenter()
@@ -10,8 +8,7 @@ buildscript {
   }
 
   dependencies {
-    // See changelog: http://developer.android.com/tools/revisions/gradle-plugin.html.
-    classpath "com.android.tools.build:gradle:$androidPluginVersion"
+    classpath libs.androidGradlePlugin
     classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlinVersion"
 
     // To measure execution time of a method.
