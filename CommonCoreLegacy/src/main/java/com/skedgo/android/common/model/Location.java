@@ -54,6 +54,7 @@ public class Location implements Parcelable {
    * Location is info from the users personal contact card (home/work address etc)
    */
   public static final int TYPE_HOME = 7; //so we never delete this location
+  public static final int TYPE_WORK = 8;
 
   /**
    * What3Words type
