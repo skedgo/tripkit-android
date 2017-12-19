@@ -43,8 +43,8 @@ dependencies {
   implementation libs.rxAndroid
   kapt libs.dataBindingCompiler
 
-  implementation 'com.github.skedgo:RxLifecycleComponents:v1.3'
-  implementation 'me.tatarka.bindingcollectionadapter2:bindingcollectionadapter-recyclerview:2.1.0'
+  implementation libs.rxLifecycleComponents
+  implementation libs.bindingCollectionAdapterRecyclerView
 
   implementation project(":AccountData")
   implementation project(":TripKitAndroid")
