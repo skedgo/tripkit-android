@@ -1,5 +1,6 @@
 apply plugin: 'com.android.library'
 apply plugin: 'com.github.dcendents.android-maven'
+apply plugin: "kotlin-android"
 
 // For https://github.com/dcendents/android-maven-gradle-plugin.
 group = 'com.skedgo'
@@ -32,6 +33,8 @@ dependencies {
   testImplementation libs.assertjCore
   testImplementation libs.mockitoCore
   testImplementation libs.robolectric
+  testImplementation libs.mockitoKotlin
+  testImplementation libs.kluent
   testImplementation 'com.github.thuytrinh:MockWebServerRule:v1.0'
 
   implementation project(':TripKitAndroid')
@@ -47,6 +50,7 @@ dependencies {
   implementation "com.squareup.retrofit2:retrofit:2.0.2"
   implementation "com.squareup.retrofit2:converter-gson:2.0.2"
   implementation "com.squareup.retrofit2:adapter-rxjava:2.0.2"
+  implementation libs.kotlin
   annotationProcessor libs.daggerCompiler
 
   annotationProcessor libs.value
