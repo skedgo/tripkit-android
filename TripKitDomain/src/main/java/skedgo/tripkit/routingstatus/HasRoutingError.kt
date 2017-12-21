@@ -10,7 +10,7 @@ open class HasRoutingError @Inject internal constructor(
       = routingRequestId.flatMap { routingStatusRepository.getRoutingStatus(it) }
       .map {
         when (it.status) {
-          is Status.Error -> Pair(true, "")
+          is Status.Error -> Pair(true, it.status.message)
           else -> Pair(false, "")
         }
       }

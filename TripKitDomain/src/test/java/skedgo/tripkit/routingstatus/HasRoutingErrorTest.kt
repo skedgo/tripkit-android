@@ -18,7 +18,7 @@ class HasRoutingErrorTest {
     whenever(getRoutingStatus.getRoutingStatus(any())).thenReturn(Observable.just(
         RoutingStatus(
             routingRequestId = "123",
-            status = Status.Error()
+            status = Status.Error("some message")
         ))
     )
 
