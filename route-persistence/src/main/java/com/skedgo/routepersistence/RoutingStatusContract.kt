@@ -12,14 +12,24 @@ object RoutingStatusContract {
   const val MESSAGE: String = "message"
 
   fun create(database: SQLiteDatabase) {
+    createVersion2(database)
+    upgradeToVersion3(database)
+  }
+
+  fun createVersion2(database: SQLiteDatabase) {
     val requestId = DatabaseField(REQUEST_ID, "TEXT")
     val status = DatabaseField(STATUS, "TEXT")
-    val message = DatabaseField(MESSAGE, "TEXT")
     DatabaseTable(
         ROUTING_STATUS,
-        arrayOf(requestId, status, message),
+        arrayOf(requestId, status),
         UniqueIndices.of(ROUTING_STATUS, requestId)
     ).create(database)
   }
+
+  fun upgradeToVersion3(database: SQLiteDatabase) {
+    val message = DatabaseField(MESSAGE, "TEXT")
+    database.execSQL("ALTER TABLE $ROUTING_STATUS ADD $MESSAGE ${message.type};")
+  }
+
 
 }
