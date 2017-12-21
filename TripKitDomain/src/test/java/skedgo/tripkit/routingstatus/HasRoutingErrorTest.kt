@@ -13,7 +13,7 @@ class HasRoutingErrorTest {
   }
 
   @Test
-  fun `message should be empty`() {
+  fun `message should not be empty`() {
     // Arrange.
     whenever(getRoutingStatus.getRoutingStatus(any())).thenReturn(Observable.just(
         RoutingStatus(
