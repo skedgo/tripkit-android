@@ -25,6 +25,6 @@ class HasRoutingErrorTest {
     // Act & assert.
     hasRoutingError.execute(Observable.just("123"))
         .test()
-        .assertValue(Pair(true, ""))
+        .assertValue(Pair(true, "some message"))
   }
 }

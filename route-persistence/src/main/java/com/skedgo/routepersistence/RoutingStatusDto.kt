@@ -2,6 +2,7 @@ package com.skedgo.routepersistence
 
 import skedgo.tripkit.routingstatus.Status
 
+typealias RoutingStatusDto = Pair<String, String>
 fun Status.toDto(): RoutingStatusDto {
   return when (this) {
     is Status.Completed -> RoutingStatusDto("Completed", "")
@@ -18,4 +19,3 @@ fun RoutingStatusDto.toStatus(): Status {
     else -> error("Unknown status: ${this}")
   }
 }
-typealias RoutingStatusDto = Pair<String, String>
