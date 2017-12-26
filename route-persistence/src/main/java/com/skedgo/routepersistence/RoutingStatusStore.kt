@@ -8,31 +8,29 @@ import rx.Single
 import rx.schedulers.Schedulers.io
 
 class RoutingStatusStore constructor(private val databaseHelper: SQLiteOpenHelper) {
-  fun getLastStatus(requestId: String): Single<RoutingStatusDto> {
+  fun getLastStatus(requestId: String): Single<String> {
     return Single
         .fromCallable {
           val cursor = databaseHelper.readableDatabase.query(RoutingStatusContract.ROUTING_STATUS,
-              arrayOf(RoutingStatusContract.STATUS, RoutingStatusContract.MESSAGE),
+              arrayOf(RoutingStatusContract.STATUS),
               "${RoutingStatusContract.REQUEST_ID} = ?",
               arrayOf(requestId),
               null, null, null
           )
           cursor.moveToFirst()
           val status = cursor.getString(cursor.getColumnIndex(RoutingStatusContract.STATUS))
-          val message = cursor.getString(cursor.getColumnIndex(RoutingStatusContract.MESSAGE))
           cursor.close()
-          RoutingStatusDto(status, message)
+          status
         }
         .subscribeOn(io())
   }
 
-  fun updateStatus(requestId: String, status: RoutingStatusDto): Completable {
+  fun updateStatus(requestId: String, status: String): Completable {
     return Completable
         .fromAction {
           val contentValues = ContentValues()
-          contentValues.put(RoutingStatusContract.STATUS, status.first)
+          contentValues.put(RoutingStatusContract.STATUS, status)
           contentValues.put(RoutingStatusContract.REQUEST_ID, requestId)
-          contentValues.put(RoutingStatusContract.MESSAGE, status.second)
           databaseHelper.writableDatabase.insertWithOnConflict(
               RoutingStatusContract.ROUTING_STATUS,
               null,

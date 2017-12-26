@@ -2,19 +2,18 @@ package com.skedgo.routepersistence
 
 import skedgo.tripkit.routingstatus.Status
 
-typealias RoutingStatusDto = Pair<String, String>
-fun Status.toDto(): RoutingStatusDto {
+fun Status.toDto(): String {
   return when (this) {
-    is Status.Completed -> RoutingStatusDto("Completed", "")
-    is Status.Error -> RoutingStatusDto("Error", this.message)
-    is Status.InProgress -> RoutingStatusDto("InProgress", "")
+    is Status.Completed -> "Completed"
+    is Status.Error -> "Error"
+    is Status.InProgress -> "InProgress"
   }
 }
 
-fun RoutingStatusDto.toStatus(): Status {
-  return when (this.first) {
+fun String.toStatus(): Status {
+  return when (this) {
     "Completed" -> Status.Completed()
-    "Error" -> Status.Error(this.second)
+    "Error" -> Status.Error()
     "InProgress" -> Status.InProgress()
     else -> error("Unknown status: ${this}")
   }

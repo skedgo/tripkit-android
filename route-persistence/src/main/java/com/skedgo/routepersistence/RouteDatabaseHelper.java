@@ -5,7 +5,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
 public class RouteDatabaseHelper extends SQLiteOpenHelper {
-  private static int DATABASE_VERSION = 3;
+  private static int DATABASE_VERSION = 2;
 
   public RouteDatabaseHelper(Context context, String name) {
     super(context, name, null, DATABASE_VERSION);
@@ -19,9 +19,7 @@ public class RouteDatabaseHelper extends SQLiteOpenHelper {
   @Override public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
     switch (oldVersion) {
       case 1:
-        RoutingStatusContract.INSTANCE.createVersion2(db);
-      case 2:
-        RoutingStatusContract.INSTANCE.upgradeToVersion3(db);
+        RoutingStatusContract.INSTANCE.create(db);
     }
   }
 }

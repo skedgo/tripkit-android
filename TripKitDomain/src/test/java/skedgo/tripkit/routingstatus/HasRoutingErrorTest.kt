@@ -13,18 +13,18 @@ class HasRoutingErrorTest {
   }
 
   @Test
-  fun `message should not be empty`() {
+  fun `status should be error`() {
     // Arrange.
     whenever(getRoutingStatus.getRoutingStatus(any())).thenReturn(Observable.just(
         RoutingStatus(
             routingRequestId = "123",
-            status = Status.Error("some message")
+            status = Status.Error()
         ))
     )
 
     // Act & assert.
     hasRoutingError.execute(Observable.just("123"))
         .test()
-        .assertValue(Pair(true, "some message"))
+        .assertValue(true)
   }
 }
