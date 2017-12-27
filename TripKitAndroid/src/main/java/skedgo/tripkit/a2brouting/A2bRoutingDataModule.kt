@@ -23,7 +23,7 @@ class A2bRoutingDataModule {
     return Retrofit.Builder()
         .addCallAdapterFactory(RxJavaCallAdapterFactory.createWithScheduler(Schedulers.io()))
         .addConverterFactory(GsonConverterFactory.create(gson))
-        .baseUrl(Server.Inflationary.value)
+        .baseUrl(Server.ApiTripgo.value)
         .client(client)
         .build()
         .create(A2bRoutingApi::class.java)
