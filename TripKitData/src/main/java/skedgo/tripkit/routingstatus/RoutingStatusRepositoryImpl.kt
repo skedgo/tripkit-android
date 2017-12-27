@@ -15,19 +15,19 @@ class RoutingStatusRepositoryImpl @Inject constructor(
 ) : RoutingStatusRepository {
   private val routingStatusUpdates: PublishRelay<String> = PublishRelay.create()
 
-  override fun getRoutingStatus(requestId: String): Observable<RoutingStatus> {
-    return routingStatusStore.getLastStatus(requestId)
-        .map { RoutingStatus(requestId, it.toStatus()) }
-        .toObservable()
-        .repeatWhen {
-          routingStatusUpdates.asObservable().filter { it == requestId }
-        }
-  }
+  override fun getRoutingStatus(requestId: String): Observable<RoutingStatus> =
+      routingStatusStore
+          .getLastStatus(requestId)
+          .map { RoutingStatus(requestId, it.toStatus()) }
+          .toObservable()
+          .repeatWhen {
+            routingStatusUpdates.asObservable().filter { it == requestId }
+          }
 
-  override fun putRoutingStatus(routingStatus: RoutingStatus): Completable {
-    return routingStatusStore.updateStatus(routingStatus.routingRequestId, routingStatus.status.toDto())
-        .andThen(Completable.fromAction {
-          this.routingStatusUpdates.call(routingStatus.routingRequestId)
-        })
-  }
+  override fun putRoutingStatus(routingStatus: RoutingStatus): Completable =
+      routingStatusStore
+          .updateStatus(routingStatus.routingRequestId, routingStatus.status.toDto())
+          .andThen(Completable.fromAction {
+            routingStatusUpdates.call(routingStatus.routingRequestId)
+          })
 }

@@ -13,8 +13,8 @@ android {
   buildToolsVersion versions.buildToolsVersion
 
   defaultConfig {
-    minSdkVersion 15
-    targetSdkVersion 25
+    minSdkVersion versions.proMinSdkVersion
+    targetSdkVersion versions.targetSdkVersion
   }
 
   lintOptions {
