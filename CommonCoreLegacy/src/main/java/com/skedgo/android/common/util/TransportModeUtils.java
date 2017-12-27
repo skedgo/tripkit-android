@@ -10,7 +10,7 @@ import skedgo.tripkit.routing.ModeInfo;
 import com.skedgo.android.common.model.TransportMode;
 
 public final class TransportModeUtils {
-  public static final String ICON_URL_TEMPLATE = Server.ApiTripgo.getValue() + "modeicons/android/%s/ic_transport_%s.png";
+  public static final String ICON_URL_TEMPLATE = Server.ApiTripGo.getValue() + "modeicons/android/%s/ic_transport_%s.png";
 
   private TransportModeUtils() {}
 

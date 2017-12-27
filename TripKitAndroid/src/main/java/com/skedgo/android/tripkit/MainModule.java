@@ -65,7 +65,7 @@ public class MainModule {
 
   @Provides RegionsApi getRegionsApi(OkHttpClient httpClient) {
     return new Retrofit.Builder()
-        .baseUrl(Server.ApiTripgo.getValue())
+        .baseUrl(Server.ApiTripGo.getValue())
         .addConverterFactory(GsonConverterFactory.create(Gsons.createForRegion()))
         .addCallAdapterFactory(RxJavaCallAdapterFactory.createWithScheduler(Schedulers.io()))
         .client(httpClient)
@@ -162,7 +162,7 @@ public class MainModule {
   @Provides TripUpdateApi getTripUpdateApi(Gson gson, OkHttpClient httpClient) {
     return new Retrofit.Builder()
         /* This base url is ignored as the api relies on @Url. */
-        .baseUrl(Server.ApiTripgo.getValue())
+        .baseUrl(Server.ApiTripGo.getValue())
         .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
         .addConverterFactory(GsonConverterFactory.create(gson))
         .client(httpClient)
@@ -177,7 +177,7 @@ public class MainModule {
   @Provides LocationInfoApi getLocationInfoApi(Gson gson, OkHttpClient httpClient) {
     return new Retrofit.Builder()
         /* This base url is ignored as the api relies on @Url. */
-        .baseUrl(Server.ApiTripgo.getValue())
+        .baseUrl(Server.ApiTripGo.getValue())
         .addCallAdapterFactory(RxJavaCallAdapterFactory.createWithScheduler(Schedulers.io()))
         .addConverterFactory(GsonConverterFactory.create(gson))
         .client(httpClient)

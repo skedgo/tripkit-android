@@ -46,7 +46,7 @@ public class TransportModeUtilsTest {
     when(resources.getDisplayMetrics()).thenReturn(createDisplayMetricsByDpi(DENSITY_XHIGH));
     final String iconId = "pt-opal";
     assertThat(getIconUrlForId(resources, iconId))
-        .isEqualTo(Server.ApiTripgo.getValue() + "modeicons/android/xhdpi/ic_transport_pt-opal.png");
+        .isEqualTo("https://api.tripgo.com/v1/modeicons/android/xhdpi/ic_transport_pt-opal.png");
   }
 
   @Test public void getIconUrlForId_nullId() {
@@ -64,7 +64,7 @@ public class TransportModeUtilsTest {
     final ModeInfo modeInfo = new ModeInfo();
     modeInfo.setRemoteIconName("pt-opal");
     assertThat(getIconUrlForModeInfo(resources, modeInfo))
-        .isEqualTo(Server.ApiTripgo.getValue() + "modeicons/android/xhdpi/ic_transport_pt-opal.png");
+        .isEqualTo("https://api.tripgo.com/v1/modeicons/android/xhdpi/ic_transport_pt-opal.png");
   }
 
   @Test public void getIconUrlForModeInfo_null() {
@@ -84,7 +84,7 @@ public class TransportModeUtilsTest {
     final ModeInfo modeInfo = new ModeInfo();
     modeInfo.setRemoteDarkIconName("lyft-dark");
     assertThat(getDarkIconUrlForModeInfo(resources, modeInfo))
-        .isEqualTo(Server.ApiTripgo.getValue() + "modeicons/android/xhdpi/ic_transport_lyft-dark.png");
+        .isEqualTo("https://api.tripgo.com/v1/modeicons/android/xhdpi/ic_transport_lyft-dark.png");
   }
 
   @Test public void getDarkIconUrlForModeInfo_null() {
@@ -104,7 +104,7 @@ public class TransportModeUtilsTest {
     final TransportMode mode = new TransportMode();
     mode.setIconId("pt-opal");
     assertThat(getIconUrlForTransportMode(resources, mode))
-        .isEqualTo(Server.ApiTripgo.getValue() + "modeicons/android/xhdpi/ic_transport_pt-opal.png");
+        .isEqualTo("https://api.tripgo.com/v1/modeicons/android/xhdpi/ic_transport_pt-opal.png");
   }
 
   @Test public void getIconUrlForTransportMode_nonNullTransportModeButNullIconId() {
@@ -124,7 +124,7 @@ public class TransportModeUtilsTest {
     final TransportMode mode = new TransportMode();
     mode.setDarkIcon("some-dark-icon");
     assertThat(getDarkIconUrlForTransportMode(resources, mode))
-        .isEqualTo(Server.ApiTripgo.getValue() + "modeicons/android/xhdpi/ic_transport_some-dark-icon.png");
+        .isEqualTo("https://api.tripgo.com/v1/modeicons/android/xhdpi/ic_transport_some-dark-icon.png");
   }
 
   @Test public void getDarkIconUrlForTransportMode_nonNullTransportModeButNullIconId() {

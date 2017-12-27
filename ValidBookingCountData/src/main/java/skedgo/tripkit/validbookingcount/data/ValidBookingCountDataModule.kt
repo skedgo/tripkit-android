@@ -19,7 +19,7 @@ class ValidBookingCountDataModule {
   ): ValidBookingCountRepository {
     val api = Retrofit.Builder()
         .client(httpClient)
-        .baseUrl(Server.ApiTripgo.value)
+        .baseUrl(Server.ApiTripGo.value)
         .addCallAdapterFactory(RxJavaCallAdapterFactory.createWithScheduler(Schedulers.io()))
         .addConverterFactory(GsonConverterFactory.create())
         .build()

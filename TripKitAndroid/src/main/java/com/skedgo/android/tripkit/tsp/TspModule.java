@@ -17,7 +17,7 @@ public class TspModule {
       Gson gson,
       okhttp3.OkHttpClient httpClient) {
     return new Retrofit.Builder()
-        .baseUrl(Server.ApiTripgo.getValue())
+        .baseUrl(Server.ApiTripGo.getValue())
         .client(httpClient)
         .addConverterFactory(GsonConverterFactory.create(gson))
         .addCallAdapterFactory(RxJavaCallAdapterFactory.createWithScheduler(io()))

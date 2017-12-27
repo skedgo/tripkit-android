@@ -25,7 +25,7 @@ public class BookingModule {
         .create();
     return new Retrofit.Builder()
         /* This base url is ignored as the api relies on @Url. */
-        .baseUrl(Server.ApiTripgo.getValue())
+        .baseUrl(Server.ApiTripGo.getValue())
         .addCallAdapterFactory(RxJavaCallAdapterFactory.createWithScheduler(Schedulers.io()))
         .addConverterFactory(GsonConverterFactory.create(gson))
         .client(httpClient)
@@ -39,7 +39,7 @@ public class BookingModule {
         .create();
     return new Retrofit.Builder()
         /* This base url is ignored as the api relies on @Url. */
-        .baseUrl(Server.ApiTripgo.getValue())
+        .baseUrl(Server.ApiTripGo.getValue())
         .addCallAdapterFactory(RxJavaCallAdapterFactory.createWithScheduler(Schedulers.io()))
         .addConverterFactory(GsonConverterFactory.create(gson))
         .client(httpClient)
@@ -55,7 +55,7 @@ public class BookingModule {
         .create();
     return new Retrofit.Builder()
         /* This base url is ignored as the api relies on @Url. */
-        .baseUrl(Server.ApiTripgo.getValue())
+        .baseUrl(Server.ApiTripGo.getValue())
         .addCallAdapterFactory(RxJavaCallAdapterFactory.createWithScheduler(Schedulers.io()))
         .addConverterFactory(GsonConverterFactory.create(gson))
         .client(httpClient)

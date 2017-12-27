@@ -24,7 +24,7 @@ class AnalyticsDataModule {
   private fun reportingApi(gson: Gson, httpClient: OkHttpClient): MarkTripAsPlannedApi
       = Retrofit.Builder()
       /* This base url is ignored as the api relies on @Url. */
-      .baseUrl(Server.ApiTripgo.value)
+      .baseUrl(Server.ApiTripGo.value)
       .addCallAdapterFactory(RxJavaCallAdapterFactory.createWithScheduler(Schedulers.io()))
       .addConverterFactory(GsonConverterFactory.create(gson))
       .client(httpClient)
