@@ -14,7 +14,6 @@ import com.skedgo.android.common.util.Gsons;
 import com.skedgo.android.common.util.LowercaseEnumTypeAdapterFactory;
 import com.skedgo.android.tripkit.bookingproviders.BookingResolver;
 import com.skedgo.android.tripkit.bookingproviders.BookingResolverImpl;
-import skedgo.tripkit.a2brouting.FailoverA2bRoutingApi;
 import com.skedgo.android.tripkit.tsp.GsonAdaptersRegionInfo;
 import com.skedgo.android.tripkit.tsp.GsonAdaptersRegionInfoBody;
 import com.skedgo.android.tripkit.tsp.GsonAdaptersRegionInfoResponse;
@@ -36,6 +35,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 import rx.functions.Action1;
 import rx.functions.Func0;
 import rx.schedulers.Schedulers;
+import skedgo.tripkit.a2brouting.FailoverA2bRoutingApi;
 import skedgo.tripkit.a2brouting.RouteService;
 import skedgo.tripkit.android.TripKit;
 import skedgo.tripkit.configuration.AppVersionNameRepository;
@@ -65,7 +65,7 @@ public class MainModule {
 
   @Provides RegionsApi getRegionsApi(OkHttpClient httpClient) {
     return new Retrofit.Builder()
-        .baseUrl(Server.Inflationary.getValue())
+        .baseUrl(Server.ApiTripGo.getValue())
         .addConverterFactory(GsonConverterFactory.create(Gsons.createForRegion()))
         .addCallAdapterFactory(RxJavaCallAdapterFactory.createWithScheduler(Schedulers.io()))
         .client(httpClient)
@@ -162,7 +162,7 @@ public class MainModule {
   @Provides TripUpdateApi getTripUpdateApi(Gson gson, OkHttpClient httpClient) {
     return new Retrofit.Builder()
         /* This base url is ignored as the api relies on @Url. */
-        .baseUrl(Server.Inflationary.getValue())
+        .baseUrl(Server.ApiTripGo.getValue())
         .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
         .addConverterFactory(GsonConverterFactory.create(gson))
         .client(httpClient)
@@ -177,7 +177,7 @@ public class MainModule {
   @Provides LocationInfoApi getLocationInfoApi(Gson gson, OkHttpClient httpClient) {
     return new Retrofit.Builder()
         /* This base url is ignored as the api relies on @Url. */
-        .baseUrl(Server.Inflationary.getValue())
+        .baseUrl(Server.ApiTripGo.getValue())
         .addCallAdapterFactory(RxJavaCallAdapterFactory.createWithScheduler(Schedulers.io()))
         .addConverterFactory(GsonConverterFactory.create(gson))
         .client(httpClient)
