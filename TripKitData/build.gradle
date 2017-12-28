@@ -13,8 +13,8 @@ android {
   buildToolsVersion versions.buildToolsVersion
 
   defaultConfig {
-    minSdkVersion 10
-    targetSdkVersion 25
+    minSdkVersion versions.proMinSdkVersion
+    targetSdkVersion versions.targetSdkVersion
   }
 
   lintOptions {
@@ -32,8 +32,10 @@ dependencies {
 
   implementation project(":TripKitDomain")
   implementation project(":TripKitDomainLegacy")
+  api project(":route-persistence")
   implementation libs.dagger
   implementation libs.rxjava
+  implementation libs.rxrelay1
   implementation libs.jodaTimeAndroid
   kapt libs.daggerCompiler
   annotationProcessor libs.value
