@@ -8,11 +8,11 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import rx.observers.TestSubscriber;
-import skedgo.tripkit.geocoding.Geocodable;
+import skedgo.tripkit.geocoding.ReverseGeocodable;
 
 @RunWith(AndroidJUnit4.class)
 public class AndroidGeocoderTest {
-  private Geocodable factory;
+  private ReverseGeocodable factory;
 
   @Before public void before() {
     factory = new AndroidGeocoder(InstrumentationRegistry.getInstrumentation().getTargetContext());
