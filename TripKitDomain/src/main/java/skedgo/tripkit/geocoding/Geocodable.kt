@@ -2,6 +2,6 @@ package skedgo.tripkit.geocoding
 
 import rx.Observable
 
-interface GeoCodable {
+interface Geocodable {
   fun getCoordinates(address: String): Observable<Pair<Double, Double>>
 }
