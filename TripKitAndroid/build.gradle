@@ -81,5 +81,6 @@ dependencies {
   compileOnly libs.gsonAnnotations
   api project(':CommonCoreLegacy')
   api project(':TripKitDomain')
+  api project(':TripKitDomainLegacy')
   api project(':TripKitData')
 }
