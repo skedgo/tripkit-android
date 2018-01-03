@@ -4,9 +4,9 @@ import android.content.Context
 import android.text.TextUtils
 import rx.Observable
 import rx.schedulers.Schedulers
-import skedgo.tripkit.geocoding.Geocodable
+import skedgo.tripkit.geocoding.ReverseGeocodable
 
-class AndroidGeocoder(private val context: Context) : Geocodable {
+class AndroidGeocoder(private val context: Context) : ReverseGeocodable {
   override fun getAddress(latitude: Double, longitude: Double): Observable<String> {
     return Observable
         .create(OnSubscribeReverseGeocode(context, latitude, longitude, 1))
