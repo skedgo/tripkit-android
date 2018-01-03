@@ -149,7 +149,7 @@ public class TripSegment implements Parcelable, IRealTimeElement, ITimeRange {
   @SerializedName("serviceDirection")
   private String mServiceDirection;
   /**
-   * NOTE: Values are defined by 'modes' in http://tripgo.skedgo.com/satapp/regions.json
+   * NOTE: Values are defined by 'modes' in https://api.tripgo.com/v1/regions.json
    */
   @SerializedName("modeIdentifier")
   private String transportModeId;
