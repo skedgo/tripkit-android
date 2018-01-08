@@ -23,6 +23,6 @@ dependencies {
 
   implementation libs.kotlin
   kapt libs.value
-  compileOnly "org.immutables:android-stub:$versions.immutablesVersion"
+  compileOnly libs.immutablesAndroidStub
   compileOnly libs.value
 }
