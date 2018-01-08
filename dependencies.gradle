@@ -42,6 +42,7 @@ libs.playServicesAnalytics = "com.google.android.gms:play-services-analytics:$ve
 libs.playServicesGcm = "com.google.android.gms:play-services-gcm:$versions.playServicesVersion"
 libs.firebaseAppIndexing = "com.google.firebase:firebase-appindexing:$versions.firebaseAppIndexingVersion"
 libs.facebookSdk = "com.facebook.android:facebook-android-sdk:4.28.0"
+libs.androidMapsUtils = "com.github.skedgo:android-maps-utils:241fc89"
 
 // Support Library package
 libs.multidex = "com.android.support:multidex:1.0.2"

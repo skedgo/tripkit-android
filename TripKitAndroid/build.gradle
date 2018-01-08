@@ -71,7 +71,7 @@ dependencies {
   implementation libs.playServicesMaps
   implementation libs.rxjava
   implementation libs.rxAndroid
-  implementation 'com.github.skedgo:android-maps-utils:241fc89'
+  implementation libs.androidMapsUtils
 
   implementation libs.dagger
   kapt libs.daggerCompiler
