@@ -57,6 +57,7 @@ libs.value = "org.immutables:value:$versions.immutablesVersion"
 libs.valueAnnotations = "org.immutables:value:$versions.immutablesVersion"
 libs.builderAnnotations = "org.immutables:builder:$versions.immutablesVersion"
 libs.gsonAnnotations = "org.immutables:gson:$versions.immutablesVersion"
+libs.immutablesAndroidStub = "org.immutables:android-stub:$versions.immutablesVersion"
 
 libs.dagger = "com.google.dagger:dagger:$versions.dagger"
 libs.daggerAndroid = "com.google.dagger:dagger-android:$versions.dagger"

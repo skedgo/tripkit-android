@@ -23,5 +23,6 @@ dependencies {
 
   implementation libs.kotlin
   kapt libs.value
+  compileOnly libs.immutablesAndroidStub
   compileOnly libs.value
 }
