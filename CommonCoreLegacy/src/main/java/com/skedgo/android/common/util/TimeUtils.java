@@ -10,7 +10,6 @@ import android.text.format.Time;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
-import java.util.Random;
 import java.util.TimeZone;
 
 import static java.util.concurrent.TimeUnit.SECONDS;
@@ -146,22 +145,6 @@ public class TimeUtils {
       mTime.setToNow();
       return mTime.toMillis(true);
     }
-  }
-
-  /**
-   * This is NOT a 'time' util, but it's a waste of memory to create a new class for so few functions
-   *
-   * @param n max value
-   * @return a random value between 0 and n
-   */
-  public static long nextLong(Random random, long n) {
-    // Error checking and 2^x checking removed for simplicity.
-    long bits, val;
-    do {
-      bits = (random.nextLong() << 1) >>> 1;
-      val = bits % n;
-    } while (bits - val + (n - 1) < 0L);
-    return val;
   }
 
   @Nullable
