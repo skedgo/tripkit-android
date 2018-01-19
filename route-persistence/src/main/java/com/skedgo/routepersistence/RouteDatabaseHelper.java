@@ -14,12 +14,16 @@ public class RouteDatabaseHelper extends SQLiteOpenHelper {
   @Override public void onCreate(SQLiteDatabase database) {
     RouteContract.createTables(database);
     RoutingStatusContract.INSTANCE.create(database);
+    ManualTripsContract.INSTANCE.create(database);
   }
 
   @Override public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
     switch (oldVersion) {
       case 1:
         RoutingStatusContract.INSTANCE.create(db);
+
+      case 2:
+        ManualTripsContract.INSTANCE.create(db);
     }
   }
 }
