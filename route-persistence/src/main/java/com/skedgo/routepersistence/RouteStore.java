@@ -5,6 +5,7 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.util.Pair;
 
 import com.google.gson.Gson;
@@ -103,7 +104,7 @@ public class RouteStore {
     });
   }
 
-  public Observable<List<TripGroup>> saveAsync(final String requestId, final List<TripGroup> groups) {
+  public Observable<List<TripGroup>> saveAsync(@Nullable final String requestId, final List<TripGroup> groups) {
     return Observable
         .fromCallable(new Callable<List<TripGroup>>() {
           @Override public List<TripGroup> call() throws Exception {
@@ -311,7 +312,7 @@ public class RouteStore {
   }
 
   @DebugLog private void saveTripGroupsInTransaction(
-      String requestId,
+      @Nullable String requestId,
       List<TripGroup> groups) {
     final SQLiteDatabase database = databaseHelper.getWritableDatabase();
     database.beginTransaction();
@@ -325,7 +326,7 @@ public class RouteStore {
 
   private void saveTripGroups(
       SQLiteDatabase database,
-      String requestId,
+      @Nullable String requestId,
       List<TripGroup> groups) {
     for (int i = 0, size = groups.size(); i < size; i++) {
       final TripGroup group = groups.get(i);
@@ -335,7 +336,7 @@ public class RouteStore {
 
   private void saveTripGroupAndTrips(
       SQLiteDatabase database,
-      String requestId,
+      @Nullable String requestId,
       TripGroup group) {
     final Trip trip = group.getDisplayTrip();
     saveTripGroup(database, requestId, group, trip.isFavourite());
@@ -344,7 +345,7 @@ public class RouteStore {
 
   @DebugLog private void saveTripGroup(
       SQLiteDatabase database,
-      String requestId,
+      @Nullable String requestId,
       TripGroup group,
       boolean isNotifiable) {
     database.delete(TABLE_TRIP_GROUPS, COL_UUID + " = ?", new String[] {group.uuid()});
