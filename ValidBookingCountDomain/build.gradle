@@ -13,7 +13,7 @@ dependencies {
   testImplementation libs.junit
   testImplementation libs.assertjCore
   testImplementation libs.mockitoCore
-  testImplementation libs.mockitoKotlin, { exclude group: 'org.jetbrains.kotlin' }
+  testImplementation libs.mockitoKotlin
   testImplementation project(":AccountDomain")
 
   implementation libs.kotlin
@@ -24,12 +24,4 @@ dependencies {
   // Use `compileOnly` to achieve similar effect of `provided` scope.
   // See more https://blog.gradle.org/introducing-compile-only-dependencies.
   compileOnly project(":AccountDomain")
-}
-
-uploadArchives {
-  repositories {
-    mavenDeployer {
-      repository(url: "file://${tripKitAndroidMaven}")
-    }
-  }
 }
