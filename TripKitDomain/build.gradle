@@ -14,7 +14,7 @@ dependencies {
   testImplementation libs.junit
   testImplementation libs.assertjCore
   testImplementation libs.mockitoCore
-  testImplementation libs.mockitoKotlin, { exclude group: 'org.jetbrains.kotlin' }
+  testImplementation libs.mockitoKotlin
 
   implementation libs.jodaTime
   implementation libs.rxjava

@@ -48,11 +48,3 @@ dependencies {
 
   implementation libs.kotlin
 }
-
-uploadArchives {
-  repositories {
-    mavenDeployer {
-      repository(url: "file://${tripKitAndroidMaven}")
-    }
-  }
-}
