@@ -14,7 +14,7 @@ class ManualTripsContractTest {
   fun `should not emit errors creating table`() {
     Completable
         .fromAction {
-          val database = SQLiteDatabase.openOrCreateDatabase(null, null, null)
+          val database = SQLiteDatabase.create(null)
           ManualTripsContract.create(database)
         }
         .test()
