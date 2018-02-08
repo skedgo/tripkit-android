@@ -6,7 +6,7 @@ import skedgo.sqlite.DatabaseField;
 import skedgo.sqlite.DatabaseTable;
 import skedgo.sqlite.UniqueIndices;
 
-public final class RouteContract {
+final class RouteContract {
   static final String COL_REQUEST_ID = "requestId";
   static final String COL_UUID = "uuid";
   static final String COL_GROUP_ID = "groupId";
