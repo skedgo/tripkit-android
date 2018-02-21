@@ -5,6 +5,11 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.os.Build;
 
+import skedgo.sqlite.DatabaseField;
+import skedgo.sqlite.UniqueIndices;
+
+import static com.skedgo.routepersistence.RouteContract.COL_UUID;
+
 public class RouteDatabaseHelper extends SQLiteOpenHelper {
   private static int DATABASE_VERSION = 3;
 
@@ -15,6 +20,7 @@ public class RouteDatabaseHelper extends SQLiteOpenHelper {
   @Override public void onCreate(SQLiteDatabase database) {
     RouteContract.createTables(database);
     RoutingStatusContract.INSTANCE.create(database);
+    RouteContract.upgradeToVersion3(database);
     ManualTripsContract.INSTANCE.create(database);
     ReturnTripsContract.INSTANCE.create(database);
   }
@@ -34,6 +40,7 @@ public class RouteDatabaseHelper extends SQLiteOpenHelper {
         RoutingStatusContract.INSTANCE.create(db);
 
       case 2:
+        RouteContract.upgradeToVersion3(db);
         ManualTripsContract.INSTANCE.create(db);
         ReturnTripsContract.INSTANCE.create(db);
     }
