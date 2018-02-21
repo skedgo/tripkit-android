@@ -20,9 +20,7 @@ public class RouteDatabaseHelper extends SQLiteOpenHelper {
   @Override public void onCreate(SQLiteDatabase database) {
     RouteContract.createTables(database);
     RoutingStatusContract.INSTANCE.create(database);
-    RouteContract.upgradeToVersion3(database);
-    ManualTripsContract.INSTANCE.create(database);
-    ReturnTripsContract.INSTANCE.create(database);
+    upgradeToVersion3(database);
   }
 
   @Override public void onConfigure(SQLiteDatabase db) {
@@ -40,9 +38,13 @@ public class RouteDatabaseHelper extends SQLiteOpenHelper {
         RoutingStatusContract.INSTANCE.create(db);
 
       case 2:
-        RouteContract.upgradeToVersion3(db);
-        ManualTripsContract.INSTANCE.create(db);
-        ReturnTripsContract.INSTANCE.create(db);
+        upgradeToVersion3(db);
     }
+  }
+
+  private static void upgradeToVersion3(SQLiteDatabase db) {
+    RouteContract.upgradeToVersion3(db);
+    ManualTripsContract.INSTANCE.create(db);
+    ReturnTripsContract.INSTANCE.create(db);
   }
 }
