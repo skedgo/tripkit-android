@@ -14,10 +14,13 @@ object ReturnTripsContract {
   fun create(database: SQLiteDatabase) {
     val tripGroupId = DatabaseField(TRIPGROUP_ID, "TEXT", "NON NULL")
     val manualTripId = DatabaseField(MANUAL_TRIP_ID, "TEXT", "NON NULL")
-    DatabaseTable(RETURN_TRIPS,
-        arrayOf(tripGroupId, manualTripId),
-        UniqueIndices.of(RETURN_TRIPS, tripGroupId),
-        UniqueIndices.of(RETURN_TRIPS, manualTripId)
-    ).create(database)
+
+    database.execSQL("CREATE TABLE ${RETURN_TRIPS}(" +
+        "${TRIPGROUP_ID} TEXT NON NULL," +
+        "${MANUAL_TRIP_ID} TEXT NON NULL," +
+        "FOREIGN KEY($TRIPGROUP_ID) REFERENCES ${RouteContract.TABLE_TRIP_GROUPS}(${RouteContract.COL_UUID}), " +
+        "FOREIGN KEY($MANUAL_TRIP_ID) REFERENCES ${ManualTripsContract.TABLE_MANUAL_TRIPS}(${ManualTripsContract.TRIPGROUP_ID}))")
+    database.execSQL(UniqueIndices.of(RETURN_TRIPS, tripGroupId))
+    database.execSQL(UniqueIndices.of(RETURN_TRIPS, manualTripId))
   }
 }
