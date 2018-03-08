@@ -71,6 +71,8 @@ public class TransportMode {
       return R.drawable.ic_aeroplane;
     } else if (identifier != null && identifier.startsWith("cy_bic-s")) {
       return R.drawable.ic_bicycle_share;
+    } else if (ID_WHEEL_CHAIR.equals(identifier)) {
+      return R.drawable.ic_wheelchair;
     } else {
       return 0;
     }
