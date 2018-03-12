@@ -2,4 +2,4 @@ package skedgo.tripkit.routing
 
 import android.graphics.Color
 
-fun ServiceColor.toInt(alpha:Int) = Color.argb(0xff, red, green, blue)
+fun ServiceColor.toInt(alpha: Int) = Color.argb(alpha, red, green, blue)
