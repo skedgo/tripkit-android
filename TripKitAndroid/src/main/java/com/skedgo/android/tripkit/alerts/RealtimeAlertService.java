@@ -7,6 +7,8 @@ import com.skedgo.android.common.model.Region;
 
 import java.util.List;
 
+import javax.inject.Inject;
+
 import okhttp3.HttpUrl;
 import retrofit2.http.Query;
 import rx.Observable;
@@ -15,6 +17,7 @@ import rx.functions.Func1;
 public class RealtimeAlertService {
   private final RealtimeAlertApi api;
 
+  @Inject
   public RealtimeAlertService(@NonNull RealtimeAlertApi api) {
     this.api = api;
   }
