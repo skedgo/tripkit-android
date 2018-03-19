@@ -53,14 +53,15 @@ fun Trip.constructPlainText(context: Context): String =
     }.toString()
 
 private fun StringBuilder.addAddress(segment: TripSegment) {
-  if (shouldAdAddress(segment))
-    append("${segment.from.address}, ")
+  if (shouldAdAddress(segment)) {
+    append("${segment.from?.address}, ")
+  }
 }
 
 private fun shouldAdAddress(segment: TripSegment) =
-    !segment.from.address.isNullOrEmpty() &&
+    !segment.from?.address.isNullOrEmpty() &&
         segment.type != SegmentType.STATIONARY &&
-        !segment.from.isNear(segment.to)
+        !(segment.from?.isNear(segment.to) ?: false)
 
 private fun StringBuilder.addSegmentAction(context: Context, segment: TripSegment) {
   append("${TripSegmentUtils.getTripSegmentAction(context, segment)}\n")
