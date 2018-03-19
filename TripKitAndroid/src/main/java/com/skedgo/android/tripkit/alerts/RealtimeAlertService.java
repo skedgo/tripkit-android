@@ -35,7 +35,8 @@ public class RealtimeAlertService {
               final String url = HttpUrl.parse(baseUrl)
                   .newBuilder()
                   .addPathSegments("alerts/transit.json")
-                  .build().toString();
+                  .build()
+                  .toString();
               return api.fetchRealtimeAlertsAsync(url, regionName);
             }
           })
