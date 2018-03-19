@@ -1,6 +1,5 @@
 package com.skedgo.android.tripkit.alerts;
 
-
 import android.support.annotation.Nullable;
 
 import com.google.gson.annotations.JsonAdapter;
@@ -15,11 +14,11 @@ import org.immutables.value.Value;
 public interface AlertBlock {
   RealtimeAlert alert();
 
-  @Nullable String disruptionType();
-  @Nullable Long fromDate();
-  @Nullable String modeIdentifier();
-  @Nullable String[] operators();
-  @Nullable Long publishedOn();
+  String disruptionType();
+  long fromDate();
+  String modeIdentifier();
+  String[] operators();
+  long publishedOn();
   @Nullable Route[] routes();
   @Nullable Long toDate();
   @Nullable String transportType();
@@ -30,10 +29,12 @@ public interface AlertBlock {
 @Value.Immutable
 @Gson.TypeAdapters
 @JsonAdapter(GsonAdaptersRoute.class)
-interface Route {
-  String id();
+abstract class Route {
+  @Nullable abstract String id();
 
-  String name();
+  @Nullable abstract String name();
 
-  int type();
+  @Value.Default int type() {
+    return -1;
+  }
 }
