@@ -128,4 +128,22 @@ class TripExtensionsKtTest {
     // Assert.
     text `should equal to` "ACTION for 2mins\n\n"
   }
+
+  @Test
+  fun `should create segments plain text with null locations` () {
+    // Arrange.
+    val context: Context = mock()
+
+    val segment = TripSegment()
+    segment.action = "ACTION"
+
+    val trip = Trip()
+    trip.segments = arrayListOf(segment)
+
+    // Act.
+    val text = trip.constructPlainText(context)
+
+    // Assert.
+    text `should equal to` "ACTION\n\n"
+  }
 }
