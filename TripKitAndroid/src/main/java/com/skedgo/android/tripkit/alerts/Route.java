@@ -11,7 +11,9 @@ import org.immutables.value.Value;
 public abstract class Route {
   public abstract String id();
 
-   public abstract String name();
+  public abstract String name();
+
+  public abstract String number();
 
   @Value.Default int type() {
     return -1;
