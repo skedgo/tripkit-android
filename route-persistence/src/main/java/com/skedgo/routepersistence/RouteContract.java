@@ -97,4 +97,9 @@ final class RouteContract {
     );
     segments.create(database);
   }
+
+  static void upgradeToVersion3(SQLiteDatabase database) {
+    final DatabaseField uuid = new DatabaseField(COL_UUID, "text");
+    database.execSQL(UniqueIndices.of(RouteContract.TABLE_TRIP_GROUPS, uuid));
+  }
 }
