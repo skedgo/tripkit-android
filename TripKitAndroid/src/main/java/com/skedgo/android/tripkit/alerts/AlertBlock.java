@@ -26,15 +26,3 @@ public interface AlertBlock {
   @Nullable String[] serviceTripIDs();
 }
 
-@Value.Immutable
-@Gson.TypeAdapters
-@JsonAdapter(GsonAdaptersRoute.class)
-abstract class Route {
-  @Nullable abstract String id();
-
-  @Nullable abstract String name();
-
-  @Value.Default int type() {
-    return -1;
-  }
-}
