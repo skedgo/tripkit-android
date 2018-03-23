@@ -7,6 +7,8 @@ import com.skedgo.android.common.model.Region;
 
 import java.util.List;
 
+import javax.inject.Inject;
+
 import okhttp3.HttpUrl;
 import retrofit2.http.Query;
 import rx.Observable;
@@ -15,6 +17,7 @@ import rx.functions.Func1;
 public class RealtimeAlertService {
   private final RealtimeAlertApi api;
 
+  @Inject
   public RealtimeAlertService(@NonNull RealtimeAlertApi api) {
     this.api = api;
   }
@@ -35,7 +38,8 @@ public class RealtimeAlertService {
               final String url = HttpUrl.parse(baseUrl)
                   .newBuilder()
                   .addPathSegments("alerts/transit.json")
-                  .build().toString();
+                  .build()
+                  .toString();
               return api.fetchRealtimeAlertsAsync(url, regionName);
             }
           })
