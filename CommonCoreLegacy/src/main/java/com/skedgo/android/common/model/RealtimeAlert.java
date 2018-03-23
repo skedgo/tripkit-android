@@ -49,8 +49,8 @@ public abstract class RealtimeAlert implements Parcelable {
   @Nullable public abstract String url();
   @Nullable public abstract String remoteIcon();
   @Nullable public abstract Location location();
-  public abstract String modeIdentifier();
-  public abstract long lastUpdated();
+  @Nullable public abstract String modeIdentifier();
+  @Nullable public abstract long lastUpdated();
 
   @Deprecated @Nullable public abstract String serviceTripID();
 
