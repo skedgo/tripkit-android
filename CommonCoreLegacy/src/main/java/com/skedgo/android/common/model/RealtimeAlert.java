@@ -33,6 +33,7 @@ public abstract class RealtimeAlert implements Parcelable {
           .remoteIcon(in.readString())
           .alertAction((AlertAction) in.readParcelable(AlertAction.class.getClassLoader()))
           .modeIdentifier(in.readString())
+          .lastUpdated(in.readLong())
           .build();
     }
 
@@ -49,6 +50,7 @@ public abstract class RealtimeAlert implements Parcelable {
   @Nullable public abstract String remoteIcon();
   @Nullable public abstract Location location();
   public abstract String modeIdentifier();
+  public abstract long lastUpdated();
 
   @Deprecated @Nullable public abstract String serviceTripID();
 
@@ -72,5 +74,6 @@ public abstract class RealtimeAlert implements Parcelable {
     out.writeString(remoteIcon());
     out.writeParcelable(alertAction(), 0);
     out.writeString(modeIdentifier());
+    out.writeLong(lastUpdated());
   }
 }
