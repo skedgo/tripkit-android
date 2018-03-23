@@ -12,10 +12,10 @@ import org.immutables.value.Value;
 @Gson.TypeAdapters
 @JsonAdapter(GsonAdaptersAlertBlock.class)
 public interface AlertBlock {
-  RealtimeAlert alert();
+  @Nullable RealtimeAlert alert();
 
-  String disruptionType();
-  String[] operators();
+  @Nullable String disruptionType();
+  @Nullable String[] operators();
   @Nullable Route[] routes();
   @Nullable String transportType();
   @Nullable String[] stopCodes();
