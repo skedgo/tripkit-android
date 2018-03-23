@@ -19,7 +19,7 @@ public abstract class Route {
 
   @Nullable public abstract String number();
 
-  public abstract ModeInfo modeInfo();
+  @Nullable public abstract ModeInfo modeInfo();
 
   @Value.Default int type() {
     return -1;
