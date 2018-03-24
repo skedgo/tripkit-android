@@ -17,7 +17,7 @@ public interface AlertBlock {
   @Nullable String disruptionType();
   @Nullable String[] operators();
   @Nullable Route[] routes();
-  TransportType transportType();
+  @Nullable TransportType transportType();
   @Nullable String[] stopCodes();
   @Nullable String[] serviceTripIDs();
 }
