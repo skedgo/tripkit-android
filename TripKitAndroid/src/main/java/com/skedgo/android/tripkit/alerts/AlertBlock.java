@@ -13,4 +13,11 @@ import org.immutables.value.Value;
 @JsonAdapter(GsonAdaptersAlertBlock.class)
 public interface AlertBlock {
   @Nullable RealtimeAlert alert();
+
+  @Nullable String disruptionType();
+  @Nullable String[] operators();
+  @Nullable Route[] routes();
+  @Nullable TransportType transportType();
+  @Nullable String[] stopCodes();
+  @Nullable String[] serviceTripIDs();
 }

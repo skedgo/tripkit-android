@@ -14,7 +14,7 @@ internal class ValidBookingCountRepositoryImpl(
   }
 
   override fun getLocalValidBookingCount(): Observable<Int>
-      = Observable.fromEmitter<Int>({
+      = Observable.create<Int>({
     if (preferences.contains(KEY_VALID_BOOKING_COUNT)) {
       it.onNext(preferences.getInt(KEY_VALID_BOOKING_COUNT, -1))
     }
