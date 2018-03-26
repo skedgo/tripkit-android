@@ -33,6 +33,7 @@ public abstract class RealtimeAlert implements Parcelable {
           .remoteIcon(in.readString())
           .alertAction((AlertAction) in.readParcelable(AlertAction.class.getClassLoader()))
           .lastUpdated(in.readLong())
+          .fromDate(in.readLong())
           .build();
     }
 
@@ -50,6 +51,10 @@ public abstract class RealtimeAlert implements Parcelable {
   @Nullable public abstract Location location();
 
   @Value.Default public long lastUpdated() {
+    return -1L;
+  }
+
+  @Value.Default public long fromDate() {
     return -1L;
   }
 
@@ -75,5 +80,6 @@ public abstract class RealtimeAlert implements Parcelable {
     out.writeString(remoteIcon());
     out.writeParcelable(alertAction(), 0);
     out.writeLong(lastUpdated());
+    out.writeLong(fromDate());
   }
 }
