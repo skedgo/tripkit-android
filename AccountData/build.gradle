@@ -41,10 +41,11 @@ dependencies {
   implementation libs.dagger
   kapt libs.daggerCompiler
 
-  annotationProcessor libs.value
-  compileOnly libs.valueAnnotations
+  kapt libs.value
+
   compileOnly libs.builderAnnotations
   compileOnly libs.gsonAnnotations
+  compileOnly libs.valueAnnotations
 
   implementation libs.kotlin
 }
