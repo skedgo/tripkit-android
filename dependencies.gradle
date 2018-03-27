@@ -56,7 +56,7 @@ libs.appCompat = "com.android.support:appcompat-v7:$versions.supportLibraryVersi
 libs.value = "org.immutables:value:$versions.immutablesVersion"
 libs.valueAnnotations = "org.immutables:value:$versions.immutablesVersion:annotations"
 libs.builderAnnotations = "org.immutables:builder:$versions.immutablesVersion"
-libs.gsonAnnotations = "org.immutables:gson:$versions.immutablesVersion:annotations"
+libs.immutablesGson = "org.immutables:gson:$versions.immutablesVersion:annotations"
 libs.immutablesAndroidStub = "org.immutables:android-stub:$versions.immutablesVersion"
 
 libs.dagger = "com.google.dagger:dagger:$versions.dagger"

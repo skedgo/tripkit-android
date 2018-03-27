@@ -37,14 +37,13 @@ dependencies {
   implementation libs.gson
   implementation project(":AccountDomain")
   implementation project(":TripKitDomain")
-
   implementation libs.dagger
   kapt libs.daggerCompiler
 
   kapt libs.value
 
   compileOnly libs.builderAnnotations
-  compileOnly libs.gsonAnnotations
+  implementation libs.immutablesGson
   compileOnly libs.valueAnnotations
 
   implementation libs.kotlin

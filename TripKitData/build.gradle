@@ -41,6 +41,6 @@ dependencies {
   kapt libs.value
   compileOnly libs.valueAnnotations
   compileOnly libs.builderAnnotations
-  compileOnly libs.gsonAnnotations
+  implementation libs.immutablesGson
   implementation libs.kotlin
 }
