@@ -3,8 +3,8 @@ buildscript {
   ext.kotlinVersion = versions.kotlinVersion
 
   repositories {
-    jcenter()
     google()
+    jcenter()
   }
 
   dependencies {
