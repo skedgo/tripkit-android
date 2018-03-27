@@ -12,7 +12,7 @@ import skedgo.tripkit.routing.ServiceColor;
 @Value.Immutable
 @Gson.TypeAdapters
 @JsonAdapter(GsonAdaptersTransportType.class)
-public interface TransportType {
+public interface ModeInfo {
   @Nullable ServiceColor color();
   @Nullable String identifier();
   String modeIdentifier();
