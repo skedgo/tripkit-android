@@ -15,5 +15,4 @@ import skedgo.tripkit.routing.ServiceColor;
 public interface ModeInfo {
   @Nullable ServiceColor color();
   @Nullable String identifier();
-  String modeIdentifier();
 }
