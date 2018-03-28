@@ -42,7 +42,6 @@ dependencies {
   implementation libs.rxjava
   implementation libs.rxAndroid
   kapt libs.dataBindingCompiler
-  annotationProcessor libs.dataBindingCompiler
 
   implementation libs.rxLifecycleComponents
   implementation libs.bindingCollectionAdapterRecyclerView
