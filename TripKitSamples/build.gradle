@@ -43,7 +43,7 @@ dependencies {
   implementation libs.rxAndroid
   kapt libs.dataBindingCompiler
 
-  implementation project(":RxLifecycleComponents")
+  implementation libs.rxLifecycleComponents
   implementation libs.bindingCollectionAdapterRecyclerView
 
   implementation project(":AccountData")
