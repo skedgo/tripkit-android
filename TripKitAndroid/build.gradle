@@ -75,10 +75,10 @@ dependencies {
 
   implementation libs.dagger
   kapt libs.daggerCompiler
-  annotationProcessor libs.value
+  kapt libs.value
   compileOnly libs.valueAnnotations
   compileOnly libs.builderAnnotations
-  compileOnly libs.gsonAnnotations
+  implementation libs.immutablesGson
   api project(':CommonCoreLegacy')
   api project(':TripKitDomain')
   api project(':TripKitDomainLegacy')

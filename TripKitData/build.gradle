@@ -38,9 +38,9 @@ dependencies {
   implementation libs.rxrelay1
   implementation libs.jodaTimeAndroid
   kapt libs.daggerCompiler
-  annotationProcessor libs.value
+  kapt libs.value
   compileOnly libs.valueAnnotations
   compileOnly libs.builderAnnotations
-  compileOnly libs.gsonAnnotations
+  implementation libs.immutablesGson
   implementation libs.kotlin
 }
