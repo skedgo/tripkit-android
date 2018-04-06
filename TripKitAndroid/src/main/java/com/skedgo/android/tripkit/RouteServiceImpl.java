@@ -18,13 +18,14 @@ import java.util.concurrent.TimeUnit;
 
 import rx.Observable;
 import rx.functions.Func1;
+import rx.functions.Func2;
 import skedgo.tripkit.a2brouting.FailoverA2bRoutingApi;
 import skedgo.tripkit.a2brouting.RouteService;
 import skedgo.tripkit.a2brouting.ToWeightingProfileString;
 import skedgo.tripkit.routing.TripGroup;
 
 final class RouteServiceImpl implements RouteService {
-  private final Func1<Query, Observable<List<Query>>> queryGenerator;
+  private final Func2<Query, ModeFilter, Observable<List<Query>>> queryGenerator;
   private final ExcludedTransitModesAdapter excludedTransitModesAdapter;
   @Nullable private final Co2Preferences co2Preferences;
   @Nullable private final TripPreferences tripPreferences;
@@ -32,7 +33,7 @@ final class RouteServiceImpl implements RouteService {
   private final FailoverA2bRoutingApi routingApi;
 
   RouteServiceImpl(
-      @NonNull Func1<Query, Observable<List<Query>>> queryGenerator,
+      @NonNull Func2<Query, ModeFilter, Observable<List<Query>>> queryGenerator,
       @Nullable ExcludedTransitModesAdapter excludedTransitModesAdapter,
       @Nullable Co2Preferences co2Preferences,
       @Nullable TripPreferences tripPreferences,
@@ -55,8 +56,8 @@ final class RouteServiceImpl implements RouteService {
   }
 
   @NonNull @Override
-  public Observable<List<TripGroup>> routeAsync(@NonNull Query query) {
-    return flatSubQueries(query)
+  public Observable<List<TripGroup>> routeAsync(@NonNull Query query, @NonNull ModeFilter modeFilter) {
+    return flatSubQueries(query, modeFilter)
         .flatMap(new Func1<Query, Observable<List<TripGroup>>>() {
           @Override public Observable<List<TripGroup>> call(Query subQuery) {
             final Region region = subQuery.getRegion();
@@ -136,8 +137,8 @@ final class RouteServiceImpl implements RouteService {
     return options;
   }
 
-  private Observable<Query> flatSubQueries(@NonNull Query query) {
-    return queryGenerator.call(query)
+  private Observable<Query> flatSubQueries(@NonNull Query query, @NonNull ModeFilter modeFilter) {
+    return queryGenerator.call(query, modeFilter)
         .flatMap(new Func1<List<Query>, Observable<Query>>() {
           @Override
           public Observable<Query> call(List<Query> queries) {
