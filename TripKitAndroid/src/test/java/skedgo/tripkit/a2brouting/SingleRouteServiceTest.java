@@ -7,6 +7,7 @@ import com.skedgo.android.tripkit.ModeFilter;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
+import org.mockito.ArgumentMatchers;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnit;
 import org.mockito.junit.MockitoRule;
@@ -40,7 +41,7 @@ public class SingleRouteServiceTest {
   @Test public void shouldCancelPreviousRequest_withQuery() {
     final PublishSubject<List<TripGroup>> emitter1 = PublishSubject.create();
     final PublishSubject<List<TripGroup>> emitter2 = PublishSubject.create();
-    when(routeService.routeAsync(any(Query.class), modeFilter))
+    when(routeService.routeAsync(any(Query.class), ArgumentMatchers.eq(modeFilter)))
         .thenReturn(emitter1.asObservable())
         .thenReturn(emitter2.asObservable());
 
