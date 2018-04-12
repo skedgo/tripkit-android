@@ -51,7 +51,7 @@ public class ModeInfo implements Parcelable {
   /**
    * Indicates a human-readable name of the transport (e.g, "Train").
    */
-  @Nullable
+  @NonNull
   public String getAlternativeText() {
     return alternativeText;
   }
