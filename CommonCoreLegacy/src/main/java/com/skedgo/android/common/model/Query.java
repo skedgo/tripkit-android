@@ -132,6 +132,14 @@ public class Query implements Parcelable {
     }
   }
 
+  public boolean originIsCurrentLocation() {
+    return mFromLocation == null;
+  }
+
+  public boolean destinationIsCurrentLocation() {
+    return mToLocation == null;
+  }
+
   @Nullable
   public Location getFromLocation() {
     return mFromLocation;

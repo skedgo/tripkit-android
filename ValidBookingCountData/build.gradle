@@ -37,10 +37,10 @@ dependencies {
   implementation libs.dagger
   kapt libs.daggerCompiler
 
-  annotationProcessor libs.value
+  kapt libs.value
   compileOnly libs.valueAnnotations
   compileOnly libs.builderAnnotations
-  compileOnly libs.gsonAnnotations
+  implementation libs.immutablesGson
 
   implementation libs.kotlin
   implementation project(':TripKitDomain')

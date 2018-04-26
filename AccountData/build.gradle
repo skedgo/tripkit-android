@@ -35,16 +35,16 @@ dependencies {
   implementation libs.retrofitAdapterRxJava
   implementation libs.retrofit
   implementation libs.gson
-  compileOnly project(":AccountDomain")
-  compileOnly project(":TripKitDomain")
-
+  implementation project(":AccountDomain")
+  implementation project(":TripKitDomain")
   implementation libs.dagger
   kapt libs.daggerCompiler
 
-  annotationProcessor libs.value
-  compileOnly libs.valueAnnotations
+  kapt libs.value
+
   compileOnly libs.builderAnnotations
-  compileOnly libs.gsonAnnotations
+  implementation libs.immutablesGson
+  compileOnly libs.valueAnnotations
 
   implementation libs.kotlin
 }
