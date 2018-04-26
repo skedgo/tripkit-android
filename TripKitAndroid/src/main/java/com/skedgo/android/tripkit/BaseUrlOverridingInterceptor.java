@@ -24,7 +24,8 @@ final class BaseUrlOverridingInterceptor implements Interceptor {
     final Request request = chain.request();
     final HttpUrl requestUrl = request.url();
     final List<String> pathSegments = requestUrl.pathSegments();
-    if (!TextUtils.isEmpty(newBaseUrl) && pathSegments.get(0).equals("satapp")) {
+    boolean isFromSkedGo = pathSegments.get(0).equals("satapp") || requestUrl.host().contains("skedgo.com") || requestUrl.host().contains("tripgo.com");
+    if (!TextUtils.isEmpty(newBaseUrl) && isFromSkedGo) {
       final HttpUrl tempUrl = requestUrl.newBuilder().removePathSegment(0).build();
       final String query = tempUrl.query();
       final String encodedPath = TextUtils.join("/", tempUrl.encodedPathSegments());
