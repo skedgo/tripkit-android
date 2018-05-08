@@ -5,7 +5,7 @@ import android.webkit.WebView
 import android.widget.ImageView
 import com.skedgo.android.tripkit.booking.ui.BookingUiComponent
 
-@BindingAdapter("imageUrl")
+@BindingAdapter("bookingImageUrl")
 fun loadImageUrl(component: BookingUiComponent, view: ImageView, imageUrl: String) {
   component.picasso()
       .load(imageUrl)
@@ -18,5 +18,3 @@ fun setUrl(v: WebView, url: String?) {
     v.loadUrl(url)
   }
 }
-
-
