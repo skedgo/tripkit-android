@@ -7,6 +7,7 @@ apply plugin: "kotlin-kapt"
 
 // For https://github.com/dcendents/android-maven-gradle-plugin.
 group = "com.skedgo.tripkit"
+version = "1.2"
 
 android {
   compileSdkVersion versions.compileSdkVersion
@@ -44,3 +45,11 @@ dependencies {
   implementation libs.immutablesGson
   implementation libs.kotlin
 }
+uploadArchives {
+  repositories {
+    mavenDeployer {
+      repository(url: "file://${localMaven}")
+    }
+  }
+}
+
