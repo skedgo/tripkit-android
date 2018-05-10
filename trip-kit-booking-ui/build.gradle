@@ -13,6 +13,27 @@ android {
     testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
   }
 
+  buildTypes {
+    release {
+      minifyEnabled true
+      shrinkResources false
+      proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+      proguardFile "${rootDir}/proguard/proguard-tripgo.pro"
+      proguardFile "${rootDir}/proguard/proguard-square-otto.pro"
+      proguardFile "${rootDir}/proguard/proguard-databinding.pro"
+      proguardFile "${rootDir}/proguard/proguard-rx-java.pro"
+      proguardFile "${rootDir}/proguard/proguard-square-retrofit.pro"
+      proguardFile "${rootDir}/proguard/proguard-okhttp.pro"
+      proguardFile "${rootDir}/proguard/proguard-crashlytics.pro"
+      proguardFile "${rootDir}/proguard/proguard-support-v7-cardview.pro"
+      proguardFile "${rootDir}/proguard/proguard-support-v7-appcompat.pro"
+      proguardFile "${rootDir}/proguard/proguard-support-v4.pro"
+      proguardFile "${rootDir}/proguard/proguard-gson.pro"
+      proguardFile "${rootDir}/proguard/retrolambda.pro"
+      proguardFile "${rootDir}/proguard/proguard-immutables.pro"
+    }
+  }
+
   dataBinding { enabled = true }
   lintOptions {
     checkReleaseBuilds true
