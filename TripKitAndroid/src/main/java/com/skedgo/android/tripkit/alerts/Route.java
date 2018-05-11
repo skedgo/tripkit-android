@@ -9,8 +9,13 @@ import org.immutables.value.Value;
 
 import skedgo.tripkit.routing.ModeInfo;
 
-@Value.Immutable
-@Gson.TypeAdapters
+import static org.immutables.gson.Gson.TypeAdapters;
+import static org.immutables.value.Value.Immutable;
+import static org.immutables.value.Value.Style;
+
+@Immutable
+@TypeAdapters
+@Style(passAnnotations = JsonAdapter.class)
 @JsonAdapter(GsonAdaptersRoute.class)
 public abstract class Route {
   public abstract String id();

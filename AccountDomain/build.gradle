@@ -23,3 +23,12 @@ dependencies {
   implementation libs.kotlin
   compileOnly project(":TripKitDomain")
 }
+
+
+uploadArchives {
+  repositories {
+    mavenDeployer {
+      repository(url: "file://${localMaven}")
+    }
+  }
+}
