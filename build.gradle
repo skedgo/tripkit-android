@@ -21,7 +21,7 @@ buildscript {
 }
 
 ext {
-  localMaven = "${rootDir}/maven/"
+  localMaven = "${rootDir}/../maven/"
 }
 
 allprojects {

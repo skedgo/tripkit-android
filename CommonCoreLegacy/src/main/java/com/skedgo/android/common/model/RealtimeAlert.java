@@ -10,11 +10,16 @@ import com.google.gson.annotations.SerializedName;
 import org.immutables.gson.Gson;
 import org.immutables.value.Value;
 
+import static org.immutables.gson.Gson.TypeAdapters;
+import static org.immutables.value.Value.Immutable;
+import static org.immutables.value.Value.Style;
+
 /**
  * @see <a href="https://github.com/skedgo/skedgo-java/blob/production/RealTime/src/main/java/com/buzzhives/Realtime/RealtimeAlert.java">RealtimeAlert</a>
  */
-@Value.Immutable
-@Gson.TypeAdapters
+@Immutable
+@TypeAdapters
+@Style(passAnnotations = JsonAdapter.class)
 @JsonAdapter(GsonAdaptersRealtimeAlert.class)
 public abstract class RealtimeAlert implements Parcelable {
   public static final String SEVERITY_ALERT = "alert";
