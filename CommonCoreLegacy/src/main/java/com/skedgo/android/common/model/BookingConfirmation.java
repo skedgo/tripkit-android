@@ -12,8 +12,13 @@ import org.immutables.value.Value;
 import java.util.ArrayList;
 import java.util.List;
 
-@Gson.TypeAdapters
-@Value.Immutable
+import static org.immutables.gson.Gson.TypeAdapters;
+import static org.immutables.value.Value.Immutable;
+import static org.immutables.value.Value.Style;
+
+@TypeAdapters
+@Immutable
+@Style(passAnnotations = JsonAdapter.class)
 @JsonAdapter(GsonAdaptersBookingConfirmation.class)
 public abstract class BookingConfirmation implements Parcelable {
   public static final Creator<BookingConfirmation> CREATOR = new Creator<BookingConfirmation>() {

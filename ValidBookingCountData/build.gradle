@@ -46,3 +46,11 @@ dependencies {
   implementation project(':TripKitDomain')
   implementation project(':ValidBookingCountDomain')
 }
+
+uploadArchives {
+  repositories {
+    mavenDeployer {
+      repository(url: "file://${localMaven}")
+    }
+  }
+}

@@ -101,6 +101,7 @@ public class TripSegment implements Parcelable, IRealTimeElement, ITimeRange {
       segment.metres = in.readInt();
       segment.metresSafe = in.readInt();
       segment.metresUnsafe = in.readInt();
+      segment.turnByTurn = in.readString();
       return segment;
     }
 
@@ -186,6 +187,8 @@ public class TripSegment implements Parcelable, IRealTimeElement, ITimeRange {
   private int metresSafe;
   @SerializedName("metresUnsafe")
   private int metresUnsafe;
+  @SerializedName("turn-by-turn")
+  private String turnByTurn;
 
   /**
    * FIXME: Should replace this with Quantity Strings.
@@ -494,6 +497,14 @@ public class TripSegment implements Parcelable, IRealTimeElement, ITimeRange {
     this.metresUnsafe = metresUnsafe;
   }
 
+  @Nullable public TurnByTurn getTurnByTurn() {
+    if (turnByTurn != null) {
+      return TurnByTurn.valueOf(turnByTurn);
+    } else {
+      return null;
+    }
+  }
+
   @Override
   public int describeContents() {
     return 0;
@@ -540,6 +551,7 @@ public class TripSegment implements Parcelable, IRealTimeElement, ITimeRange {
     out.writeInt(metres);
     out.writeInt(metresSafe);
     out.writeInt(metresUnsafe);
+    out.writeString(turnByTurn);
   }
 
   public boolean isContinuation() {

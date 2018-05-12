@@ -3,10 +3,6 @@ apply plugin: 'com.github.dcendents.android-maven'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-kapt'
 
-// For https://github.com/dcendents/android-maven-gradle-plugin.
-group = 'com.skedgo'
-version = '1.0'
-
 android {
   compileSdkVersion versions.compileSdkVersion
   buildToolsVersion versions.buildToolsVersion
@@ -58,4 +54,14 @@ dependencies {
   implementation libs.rxAndroid
 
   kapt libs.dataBindingCompiler
+}
+group = ext.versions.tripGoGroup
+version = ext.versions.tripGoLibrary
+
+uploadArchives {
+  repositories {
+    mavenDeployer {
+      repository(url: "file://${localMaven}")
+    }
+  }
 }
