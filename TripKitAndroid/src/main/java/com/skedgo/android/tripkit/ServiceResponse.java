@@ -11,8 +11,13 @@ import org.immutables.value.Value;
 
 import java.util.List;
 
-@Value.Immutable
-@Gson.TypeAdapters
+import static org.immutables.gson.Gson.TypeAdapters;
+import static org.immutables.value.Value.Immutable;
+import static org.immutables.value.Value.Style;
+
+@Immutable
+@TypeAdapters
+@Style(passAnnotations = JsonAdapter.class)
 @JsonAdapter(GsonAdaptersServiceResponse.class)
 public interface ServiceResponse {
   String realTimeStatus();
