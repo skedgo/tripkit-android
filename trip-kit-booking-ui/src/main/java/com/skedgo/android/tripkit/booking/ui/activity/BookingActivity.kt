@@ -51,7 +51,8 @@ open class BookingActivity : RxAppCompatActivity() {
     }
   }
 
-  @Inject lateinit var viewModel: BookingFormViewModel
+  @Inject
+  lateinit var viewModel: BookingFormViewModel
   val binding: ActivityBookingBinding by lazy {
     DataBindingUtil.setContentView<ActivityBookingBinding>(this, R.layout.activity_booking)
   }
@@ -63,15 +64,16 @@ open class BookingActivity : RxAppCompatActivity() {
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
 
-    DaggerBookingUiComponent.builder()
+    val bookingUiComponent = DaggerBookingUiComponent.builder()
         .bookingUiModule(BookingUiModule(applicationContext))
         .build()
+    DataBindingUtil.setDefaultComponent(bookingUiComponent)
+    bookingUiComponent
         .inject(this)
 
     supportActionBar?.setDisplayShowHomeEnabled(true)
     supportActionBar?.setDisplayHomeAsUpEnabled(true)
-
-    binding.setViewModel(viewModel)
+    binding.viewModel = viewModel
 
     viewModel.onUpdateFormTitle
         .asObservable()
@@ -126,6 +128,7 @@ open class BookingActivity : RxAppCompatActivity() {
           intent.putExtra(KEY_FORM, bookingForm as Parcelable)
           startActivityForResult(intent, RQ_BOOKING)
         }, onError)
+
 
     viewModel.onExternalForm
         .asObservable()
