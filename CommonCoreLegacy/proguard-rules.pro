@@ -1,0 +1,3 @@
+-keep class com.skedgo.android.common.model.** { *; }
+-keep class skedgo.tripkit.routing.ModeInfo { *; }
+-keep class skedgo.tripkit.routing.SegmentType { *; }

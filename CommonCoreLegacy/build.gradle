@@ -25,6 +25,12 @@ android {
     }
   }
 
+  buildTypes {
+    release {
+      consumerProguardFile 'proguard-rules.pro'
+    }
+  }
+
   lintOptions {
     checkReleaseBuilds true
     abortOnError false
