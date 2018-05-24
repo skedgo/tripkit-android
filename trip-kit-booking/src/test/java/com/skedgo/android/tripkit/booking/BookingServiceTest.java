@@ -10,6 +10,7 @@ import org.mockito.MockitoAnnotations;
 import org.robolectric.annotation.Config;
 
 import okhttp3.MediaType;
+import okhttp3.Protocol;
 import okhttp3.ResponseBody;
 import retrofit2.Response;
 import rx.Observable;
@@ -142,6 +143,29 @@ public class BookingServiceTest {
     BookingForm result = subscriber.getOnNextEvents().get(0);
 
     assertThat(bookingForm).isEqualTo(result);
+
+  }
+
+  @Test public void shouldHandleBookingEmptyResponse() {
+
+    final Response<BookingForm> response = Response.success(
+        new BookingForm(),
+        new okhttp3.Response.Builder()
+            .request(new okhttp3.Request.Builder().url("http://skedgo.com").build())
+            .code(204)
+            .message("")
+            .protocol(Protocol.HTTP_1_1)
+            .build());
+
+    final TestSubscriber<BookingForm> subscriber = new TestSubscriber<>();
+
+    service.getHandleBookingResponse().call(response).subscribe(subscriber);
+    subscriber.awaitTerminalEvent();
+    subscriber.assertNoErrors();
+
+    BookingForm result = subscriber.getOnNextEvents().get(0);
+
+    assertThat(NullBookingForm.INSTANCE).isEqualTo(result);
 
   }
 

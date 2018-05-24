@@ -18,7 +18,7 @@ class BookingServiceImpl(private val bookingApi: BookingApi, private val gson: G
 
     } else {
       if (bookingFormResponse.code() == 204) {
-        Observable.just(NullBookingForm() as BookingForm)
+        Observable.just(NullBookingForm as BookingForm)
       } else {
         Observable.just(bookingFormResponse.body())
       }
