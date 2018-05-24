@@ -1,6 +1,5 @@
 package com.skedgo.android.tripkit.booking
 
-import android.support.annotation.VisibleForTesting
 import com.google.gson.Gson
 import retrofit2.Response
 import rx.Observable
@@ -8,8 +7,7 @@ import rx.functions.Func1
 import java.io.IOException
 
 class BookingServiceImpl(private val bookingApi: BookingApi, private val gson: Gson) : BookingService {
-  @VisibleForTesting
-  internal var handleBookingResponse: Func1<Response<BookingForm>, Observable<BookingForm>> = Func1 { bookingFormResponse ->
+  var handleBookingResponse: Func1<Response<BookingForm>, Observable<BookingForm>> = Func1 { bookingFormResponse ->
     if (!bookingFormResponse.isSuccessful) {
       try {
         val e = asBookingError(bookingFormResponse.errorBody().string())
@@ -34,8 +32,7 @@ class BookingServiceImpl(private val bookingApi: BookingApi, private val gson: G
   override fun postFormAsync(url: String, inputForm: InputForm): Observable<BookingForm> = bookingApi.postFormAsync(url, inputForm)
       .flatMap(handleBookingResponse)
 
-  @VisibleForTesting
-  internal fun asBookingError(bookingErrorJson: String): BookingError {
+  fun asBookingError(bookingErrorJson: String): BookingError {
     return gson.fromJson(bookingErrorJson, BookingError::class.java)
   }
 }

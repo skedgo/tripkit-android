@@ -135,7 +135,7 @@ public class BookingServiceTest {
 
     final TestSubscriber<BookingForm> subscriber = new TestSubscriber<>();
 
-    service.handleBookingResponse.call(response).subscribe(subscriber);
+    service.getHandleBookingResponse().call(response).subscribe(subscriber);
     subscriber.awaitTerminalEvent();
     subscriber.assertNoErrors();
 
@@ -154,7 +154,7 @@ public class BookingServiceTest {
 
     final TestSubscriber<BookingForm> subscriber = new TestSubscriber<>();
 
-    service.handleBookingResponse.call(response).subscribe(subscriber);
+    service.getHandleBookingResponse().call(response).subscribe(subscriber);
     subscriber.awaitTerminalEvent();
     subscriber.assertError(BookingError.class);
 
