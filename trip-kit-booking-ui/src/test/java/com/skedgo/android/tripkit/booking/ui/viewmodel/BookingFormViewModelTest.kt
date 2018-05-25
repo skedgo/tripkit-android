@@ -289,4 +289,23 @@ class BookingFormViewModelTest {
     subscriber.assertValue(null)
     subscriberDone.assertValue(null)
   }
+
+  @Test fun shouldEmitDoneOnFetchNullBookingForm() {
+    val bookingFormAction = mock<BookingForm>()
+
+    val bundle = Bundle()
+    bundle.putInt(KEY_TYPE, BOOKING_TYPE_ACTION)
+    bundle.putParcelable(KEY_FORM, bookingFormAction)
+
+    whenever(getBookingFormFromAction.execute(bookingFormAction)).thenReturn(Observable.just(NullBookingForm))
+
+    val subscriber = TestSubscriber<Any?>()
+    val subscriberDone = TestSubscriber<Any?>()
+
+    viewModel.onDone.subscribe(subscriberDone)
+    viewModel.fetchBookingFormAsync(bundle).subscribe(subscriber)
+
+    subscriber.assertValue(NullBookingForm)
+    subscriberDone.assertValue(NullBookingForm)
+  }
 }
