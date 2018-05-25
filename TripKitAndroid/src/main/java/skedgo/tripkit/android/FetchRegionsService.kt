@@ -1,51 +1,66 @@
 package skedgo.tripkit.android
 
 import android.content.Context
-import com.google.android.gms.gcm.*
+import com.firebase.jobdispatcher.*
+import rx.Completable
 import rx.Observable
-import java.util.concurrent.TimeUnit
+import rx.Subscription
+import rx.schedulers.Schedulers
 
-class FetchRegionsService : GcmTaskService() {
-  override fun onRunTask(taskParams: TaskParams): Int =
-      Observable
-          .fromCallable {
-            // Pulling this into fromCallable() is actually a trick to deal with an issue
-            // when this getInstance() was called before we initialize TripKit after
-            // the super.onCreate() in the sub Application class.
-            // So when it happens, we just let it throw error, and thus
-            // the task is rescheduled after TripKit initialization.
-            TripKit.getInstance()
-          }
-          .refreshRegions()
+
+class FetchRegionsService : JobService() {
+  var runningJob: Subscription? = null
+  override fun onStopJob(job: JobParameters?): Boolean {
+    if (runningJob != null && runningJob!!.isUnsubscribed.not()) {
+      runningJob?.unsubscribe()
+      return true
+    } else {
+      return false
+    }
+  }
+
+  override fun onStartJob(job: JobParameters?): Boolean {
+    runningJob = Observable
+        .fromCallable {
+          // Pulling this into fromCallable() is actually a trick to deal with an issue
+          // when this getInstance() was called before we initialize TripKit after
+          // the super.onCreate() in the sub Application class.
+          // So when it happens, we just let it throw error, and thus
+          // the task is rescheduled after TripKit initialization.
+          TripKit.getInstance()
+        }
+        .flatMap {
+          it.regionService
+              .refreshAsync()
+              .toObservable<Unit>()
+        }
+        .subscribeOn(Schedulers.io())
+        .subscribe()
+    return true
+  }
 
   companion object {
-    fun scheduleAsync(context: Context): Observable<Void> =
-        Observable.create { subscriber ->
-          val task = OneoffTask.Builder()
-              .setService(FetchRegionsService::class.java)
-              .setTag("FetchRegions")
-              .setExecutionWindow(0, TimeUnit.MINUTES.toSeconds(1))
-              .setPersisted(true)
-              .setUpdateCurrent(true)
-              .setRequiredNetwork(Task.NETWORK_STATE_CONNECTED)
-              .setRequiresCharging(true)
-              .build()
-          GcmNetworkManager.getInstance(context.applicationContext)
-              .schedule(task)
-          subscriber.onCompleted()
-        }
+    fun scheduleAsync(context: Context): Observable<Void> {
+      return Completable
+          .fromAction {
+            val dispatcher = FirebaseJobDispatcher(GooglePlayDriver(context))
+            val myJob = dispatcher.newJobBuilder()
+                .setService(FetchRegionsService::class.java)
+                .setTag("FetchRegions")
+                .setRecurring(false)
+                .setLifetime(Lifetime.UNTIL_NEXT_BOOT)
+                .setTrigger(Trigger.executionWindow(0, 60))
+                .setReplaceCurrent(true)
+                .setRetryStrategy(RetryStrategy.DEFAULT_EXPONENTIAL)
+                .setConstraints(
+                    Constraint.ON_ANY_NETWORK,
+                    Constraint.DEVICE_CHARGING
+                )
+                .build()
+            dispatcher.mustSchedule(myJob)
+          }
+          .toObservable<Void>()
+
+    }
   }
 }
-
-internal fun Observable<TripKit>.refreshRegions() = this
-    .flatMap {
-      it.regionService
-          .refreshAsync()
-          .toObservable<Unit>()
-    }
-    .map { GcmNetworkManager.RESULT_SUCCESS }
-    .onErrorReturn { GcmNetworkManager.RESULT_RESCHEDULE }
-    // To avoid NoSuchElementException when using first().
-    .defaultIfEmpty(GcmNetworkManager.RESULT_SUCCESS)
-    .toBlocking()
-    .first()
