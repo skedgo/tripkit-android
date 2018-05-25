@@ -10,6 +10,7 @@ import rx.schedulers.Schedulers
 
 class FetchRegionsService : JobService() {
   var runningJob: Subscription? = null
+
   override fun onStopJob(job: JobParameters?): Boolean {
     if (runningJob != null && runningJob!!.isUnsubscribed.not()) {
       runningJob?.unsubscribe()
@@ -19,7 +20,7 @@ class FetchRegionsService : JobService() {
     }
   }
 
-  override fun onStartJob(job: JobParameters?): Boolean {
+  override fun onStartJob(job: JobParameters): Boolean {
     runningJob = Observable
         .fromCallable {
           // Pulling this into fromCallable() is actually a trick to deal with an issue
@@ -35,7 +36,9 @@ class FetchRegionsService : JobService() {
               .toObservable<Unit>()
         }
         .subscribeOn(Schedulers.io())
-        .subscribe()
+        .subscribe({ },
+            { jobFinished(job, true) },
+            { jobFinished(job, false) })
     return true
   }
 
@@ -60,7 +63,6 @@ class FetchRegionsService : JobService() {
             dispatcher.mustSchedule(myJob)
           }
           .toObservable<Void>()
-
     }
   }
 }
