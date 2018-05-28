@@ -37,8 +37,8 @@ class FetchRegionsService : JobService() {
         }
         .subscribeOn(Schedulers.io())
         .subscribe({ },
-            { jobFinished(job, true) },
-            { jobFinished(job, false) })
+            { jobFinished(job, false) },
+            { jobFinished(job, true) })
     return true
   }
 
@@ -52,7 +52,7 @@ class FetchRegionsService : JobService() {
                 .setTag("FetchRegions")
                 .setRecurring(false)
                 .setLifetime(Lifetime.UNTIL_NEXT_BOOT)
-                .setTrigger(Trigger.executionWindow(0, 60))
+                .setTrigger(Trigger.NOW)
                 .setReplaceCurrent(true)
                 .setRetryStrategy(RetryStrategy.DEFAULT_EXPONENTIAL)
                 .setConstraints(
