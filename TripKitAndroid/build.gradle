@@ -60,7 +60,6 @@ dependencies {
   androidTestImplementation libs.assertjCore
 
   implementation libs.kotlin
-  implementation libs.playServicesGcm
   implementation libs.jodaTimeAndroid
   implementation 'com.github.skedgo:commons-collections:v1.0'
 
@@ -73,6 +72,7 @@ dependencies {
   implementation libs.rxjava
   implementation libs.rxAndroid
   implementation libs.androidMapsUtils
+  implementation 'com.firebase:firebase-jobdispatcher:0.8.5'
 
   implementation libs.dagger
   kapt libs.daggerCompiler
