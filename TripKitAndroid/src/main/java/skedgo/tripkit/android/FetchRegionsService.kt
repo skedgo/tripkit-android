@@ -6,8 +6,6 @@ import rx.Completable
 import rx.Observable
 import rx.Subscription
 import rx.schedulers.Schedulers
-
-
 class FetchRegionsService : JobService() {
   var runningJob: Subscription? = null
 
@@ -30,17 +28,14 @@ class FetchRegionsService : JobService() {
           // the task is rescheduled after TripKit initialization.
           TripKit.getInstance()
         }
-        .flatMap {
-          it.regionService
-              .refreshAsync()
-              .toObservable<Unit>()
-        }
+        .refreshRegions()
         .subscribeOn(Schedulers.io())
         .subscribe({ },
             { jobFinished(job, false) },
             { jobFinished(job, true) })
     return true
   }
+
 
   companion object {
     fun scheduleAsync(context: Context): Observable<Void> {
@@ -66,3 +61,10 @@ class FetchRegionsService : JobService() {
     }
   }
 }
+
+fun Observable<TripKit>.refreshRegions(): Observable<Unit> = this
+    .flatMap {
+      it.regionService
+          .refreshAsync()
+          .toObservable<Unit>()
+    }
