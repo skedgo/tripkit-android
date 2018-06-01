@@ -79,7 +79,7 @@ class BookingFormViewModel
     }
         .observeOn(mainThread())
         .doOnNext { nextBookingForm ->
-          if (nextBookingForm == null) {
+          if (nextBookingForm == null || nextBookingForm == NullBookingForm) {
             onDone.onNext(nextBookingForm)
           } else {
             bookingForm = nextBookingForm
