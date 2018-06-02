@@ -6,8 +6,6 @@ import rx.Completable
 import rx.Observable
 import rx.Subscription
 import rx.schedulers.Schedulers
-
-
 class FetchRegionsService : JobService() {
   var runningJob: Subscription? = null
 
@@ -63,7 +61,6 @@ class FetchRegionsService : JobService() {
     }
   }
 }
-
 
 fun Observable<TripKit>.refreshRegions(): Observable<Unit> = this
     .flatMap {
