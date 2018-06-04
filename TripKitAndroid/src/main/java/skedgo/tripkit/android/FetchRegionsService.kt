@@ -36,7 +36,8 @@ class FetchRegionsService : JobService() {
               .toObservable<Unit>()
         }
         .subscribeOn(Schedulers.io())
-        .subscribe({ },
+        .toCompletable()
+        .subscribe(
             { jobFinished(job, false) },
             { jobFinished(job, true) })
     return true
@@ -55,10 +56,7 @@ class FetchRegionsService : JobService() {
                 .setTrigger(Trigger.NOW)
                 .setReplaceCurrent(true)
                 .setRetryStrategy(RetryStrategy.DEFAULT_EXPONENTIAL)
-                .setConstraints(
-                    Constraint.ON_ANY_NETWORK,
-                    Constraint.DEVICE_CHARGING
-                )
+                .setConstraints(Constraint.ON_ANY_NETWORK)
                 .build()
             dispatcher.mustSchedule(myJob)
           }
