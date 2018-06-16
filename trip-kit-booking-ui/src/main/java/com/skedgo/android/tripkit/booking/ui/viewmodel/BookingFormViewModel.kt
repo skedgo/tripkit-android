@@ -106,7 +106,16 @@ class BookingFormViewModel
         .doOnCompleted {
           isLoading.set(false)
         }
-        .retryWhen { onRetryClicked }
+        .retryWhen {
+          it.flatMap {
+            if (it is Error) {
+              Observable.error<Any>(it)
+            } else {
+              onRetryClicked
+                  .first()
+            }
+          }
+        }
         .cast(Any::class.java)
   }
 
