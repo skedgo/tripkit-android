@@ -33,7 +33,7 @@ libs.assertjCore = "org.assertj:assertj-core:2.6.0"
 libs.jodaTime = "joda-time:joda-time:2.9.9:no-tzdb"
 libs.jodaTimeTzdb = "joda-time:joda-time:2.9.9"
 libs.jodaTimeAndroid = "net.danlew:android.joda:2.9.9"
-libs.androidJob = "com.evernote:android-job:1.1.11"
+libs.androidJob = "com.evernote:android-job:1.2.6"
 libs.androidReactiveLocation = "com.github.skedgo:Android-ReactiveLocation:1de14cd99af0253d82184c04d91ebe3447914a54"
 libs.playServicesMaps = "com.google.android.gms:play-services-maps:$versions.playServicesVersion"
 libs.playServicesLocation = "com.google.android.gms:play-services-location:$versions.playServicesVersion"
@@ -84,7 +84,7 @@ libs.timber = "com.jakewharton.timber:timber:4.5.1"
 libs.rxtry = "com.github.thuytrinh:RxTry:c2f002df6c"
 libs.koptional = "com.gojuno.koptional:koptional:1.2.0"
 libs.bindingCollectionAdapterRecyclerView = "me.tatarka.bindingcollectionadapter2:bindingcollectionadapter-recyclerview:2.3.0-beta1"
-libs.rxLifecycleComponents = "com.github.skedgo:RxLifecycleComponents:v1.3"
+libs.rxLifecycleComponents = "com.github.skedgo:RxLifecycleComponents:v1.5"
 
 // See changelog at http://developer.android.com/tools/revisions/gradle-plugin.html
 // and https://twitter.com/AGPVersions.
