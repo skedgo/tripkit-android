@@ -171,7 +171,7 @@ public class MainModule {
   }
 
   @Singleton @Provides TripUpdater getTripUpdater(TripUpdateApi api, Gson gson) {
-    return new TripUpdaterImpl(context.getResources(), api, "12", gson);
+    return new TripUpdaterImpl(context.getResources(), api, gson);
   }
 
   @Provides LocationInfoApi getLocationInfoApi(Gson gson, OkHttpClient httpClient) {
