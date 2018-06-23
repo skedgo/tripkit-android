@@ -1,6 +1,7 @@
 package com.skedgo.android.common.model;
 
 import android.support.annotation.DrawableRes;
+import android.support.annotation.Keep;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.text.TextUtils;
@@ -12,6 +13,7 @@ import java.util.ArrayList;
 
 import skedgo.tripkit.routing.ServiceColor;
 
+@Keep
 public class TransportMode {
   public static final String MIDDLE_FIX_CAR = "car-s";
   public static final String MIDDLE_FIX_BIC = "bic-s";
