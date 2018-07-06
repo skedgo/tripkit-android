@@ -21,8 +21,7 @@ public class RouteDatabaseHelper extends SQLiteOpenHelper {
       case 1:
         RoutingStatusContract.INSTANCE.create(db);
       case 2:
-        db.execSQL("ALTER TABLE " + RouteContract.TABLE_TRIP_GROUPS +
-                       " ADD COLUMN " + RouteContract.COL_SOURCES + " TEXT ");
+        db.execSQL("ALTER TABLE tripGroups ADD COLUMN sources TEXT");
     }
   }
 }
