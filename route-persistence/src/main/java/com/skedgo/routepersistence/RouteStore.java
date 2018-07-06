@@ -10,6 +10,8 @@ import android.util.Pair;
 import com.google.gson.Gson;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 import java.util.concurrent.Callable;
 
@@ -18,6 +20,7 @@ import rx.Completable;
 import rx.Observable;
 import rx.functions.Action0;
 import rx.functions.Func1;
+import skedgo.tripkit.routing.Source;
 import skedgo.tripkit.routing.Trip;
 import skedgo.tripkit.routing.TripGroup;
 import skedgo.tripkit.routing.TripSegment;
@@ -40,6 +43,7 @@ import static com.skedgo.routepersistence.RouteContract.COL_PROGRESS_URL;
 import static com.skedgo.routepersistence.RouteContract.COL_QUERY_IS_LEAVE_AFTER;
 import static com.skedgo.routepersistence.RouteContract.COL_REQUEST_ID;
 import static com.skedgo.routepersistence.RouteContract.COL_SAVE_URL;
+import static com.skedgo.routepersistence.RouteContract.COL_SOURCES;
 import static com.skedgo.routepersistence.RouteContract.COL_TEMP_URL;
 import static com.skedgo.routepersistence.RouteContract.COL_TRIP_ID;
 import static com.skedgo.routepersistence.RouteContract.COL_UPDATE_URL;
@@ -302,11 +306,14 @@ public class RouteStore {
     final String uuid = cursor.getString(cursor.getColumnIndex(COL_UUID));
     final int frequency = cursor.getInt(cursor.getColumnIndex(COL_FREQUENCY));
     final long displayTripId = cursor.getLong(cursor.getColumnIndex(COL_DISPLAY_TRIP_ID));
-
+    final Source[] sources = gson.fromJson(cursor.getString(cursor.getColumnIndex(COL_SOURCES)), Source[].class);
     final TripGroup group = new TripGroup();
     group.uuid(uuid);
     group.setFrequency(frequency);
     group.setDisplayTripId(displayTripId);
+    if (sources != null) {
+      group.setSources(Arrays.asList(sources));
+    }
     return group;
   }
 
@@ -355,6 +362,9 @@ public class RouteStore {
     values.put(COL_DISPLAY_TRIP_ID, group.getDisplayTripId());
     values.put(COL_REQUEST_ID, requestId);
     values.put(COL_IS_NOTIFIABLE, isNotifiable ? 1 : 0);
+    if (group.getSources() != null) {
+      values.put(COL_SOURCES, gson.toJson(group.getSources().toArray(), Source[].class));
+    }
     database.insertWithOnConflict(TABLE_TRIP_GROUPS, null, values, SQLiteDatabase.CONFLICT_REPLACE);
   }
 
