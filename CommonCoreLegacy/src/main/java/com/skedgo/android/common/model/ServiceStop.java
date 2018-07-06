@@ -15,7 +15,7 @@ import rx.functions.Action1;
 /**
  * Represents a future stop of a service in a trip.
  */
-public class ServiceStop extends Location {
+public class ServiceStop extends Location implements WheelchairAccessible {
   public static final Creator<ServiceStop> CREATOR = new Creator<ServiceStop>() {
     public ServiceStop createFromParcel(Parcel in) {
       Location location = Location.CREATOR.createFromParcel(in);

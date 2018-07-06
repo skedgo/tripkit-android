@@ -14,8 +14,9 @@ import java.util.Set;
 
 import rx.Observable;
 import rx.functions.Func1;
+import rx.functions.Func2;
 
-final class QueryGeneratorImpl implements Func1<Query, Observable<List<Query>>> {
+final class QueryGeneratorImpl implements Func2<Query, ModeFilter, Observable<List<Query>>> {
   private final RegionService regionService;
   private final ModeCombinationStrategy modeCombinationStrategy = new ModeCombinationStrategy();
   private final TripRegionResolver tripRegionResolver;
@@ -26,7 +27,7 @@ final class QueryGeneratorImpl implements Func1<Query, Observable<List<Query>>> 
   }
 
   @Override
-  public Observable<List<Query>> call(@NonNull final Query query) {
+  public Observable<List<Query>> call(@NonNull final Query query, @NonNull final ModeFilter modeFilter) {
     final Location departure = query.getFromLocation();
     if (departure == null) {
       return Observable.error(new NullPointerException("Departure is null"));
@@ -42,7 +43,7 @@ final class QueryGeneratorImpl implements Func1<Query, Observable<List<Query>>> 
           @Override
           public Observable<Map<String, TransportMode>> call(Region region) {
             query.setRegion(region);
-            final ArrayList<String> modeIds = region.getTransportModeIds();
+            final List<String> modeIds = modeFilter.execute(region);
             if (modeIds != null) {
               query.setTransportModeIds(new ArrayList<>(modeIds));
             }

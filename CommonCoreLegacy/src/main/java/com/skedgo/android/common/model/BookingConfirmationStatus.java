@@ -9,8 +9,13 @@ import com.google.gson.annotations.JsonAdapter;
 import org.immutables.gson.Gson;
 import org.immutables.value.Value;
 
-@Gson.TypeAdapters
-@Value.Immutable
+import static org.immutables.gson.Gson.TypeAdapters;
+import static org.immutables.value.Value.Immutable;
+import static org.immutables.value.Value.Style;
+
+@TypeAdapters
+@Immutable
+@Style(passAnnotations = JsonAdapter.class)
 @JsonAdapter(GsonAdaptersBookingConfirmationStatus.class)
 public abstract class BookingConfirmationStatus implements Parcelable {
 

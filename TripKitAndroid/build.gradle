@@ -1,20 +1,21 @@
 apply plugin: "com.android.library"
-apply plugin: 'com.github.dcendents.android-maven'
-apply plugin: 'kotlin-android'
-apply plugin: 'kotlin-kapt'
-apply plugin: 'com.jfrog.bintray'
+// To publish via JitPack.
+// See https://jitpack.io/docs/ANDROID/.
+apply plugin: "com.github.dcendents.android-maven"
+apply plugin: "kotlin-android"
+apply plugin: "kotlin-kapt"
 
 // For https://github.com/dcendents/android-maven-gradle-plugin.
-group = 'com.skedgo'
-version = '1.1'
+group = "com.skedgo.tripkit"
+version = "1.2"
 
 android {
-  compileSdkVersion libVersions.compileSdkVersion
-  buildToolsVersion libVersions.buildToolsVersion
+  compileSdkVersion versions.compileSdkVersion
+  buildToolsVersion versions.buildToolsVersion
 
   defaultConfig {
     minSdkVersion 15
-    targetSdkVersion 25
+    targetSdkVersion 27
     testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
   }
 
@@ -22,6 +23,12 @@ android {
     // To avoid conflicts with ASL.
     // We don't utilize ServiceLoader, so this is unneeded.
     exclude 'META-INF/services/com.google.gson.TypeAdapterFactory'
+  }
+
+  testOptions {
+    unitTests {
+      includeAndroidResources = true
+    }
   }
 
   lintOptions {
@@ -39,91 +46,52 @@ task(generateTripkitStrings, type: org.gradle.api.tasks.JavaExec) {
 }
 
 dependencies {
-  testCompile libs.junit
-  testCompile libs.assertjCore
-  testCompile libs.robolectric
-  testCompile libs.mockitoCore
-  testCompile libs.mockitoKotlin, { exclude group: 'org.jetbrains.kotlin' }
-  testCompile libs.kluent
-  testCompile 'com.github.thuytrinh:MockWebServerRule:v1.0'
-  testCompile libs.kluent
+  testImplementation libs.junit
+  testImplementation libs.assertjCore
+  testImplementation libs.robolectric
+  testImplementation libs.mockitoCore
+  testImplementation libs.mockitoKotlin, { exclude group: 'org.jetbrains.kotlin' }
+  testImplementation libs.kluent
+  testImplementation 'com.github.thuytrinh:MockWebServerRule:v1.0'
+  testImplementation libs.kluent
 
-  androidTestCompile "com.android.support.test:runner:0.5"
-  androidTestCompile "com.android.support.test:rules:0.5"
-  androidTestCompile libs.assertjCore
+  androidTestImplementation "com.android.support.test:runner:0.5"
+  androidTestImplementation "com.android.support.test:rules:0.5"
+  androidTestImplementation libs.assertjCore
 
-  compile libs.kotlin
-  compile libs.playServicesGcm
+  implementation libs.kotlin
+  implementation libs.jodaTimeAndroid
+  implementation 'com.github.skedgo:commons-collections:v1.0'
 
-  compile 'com.github.skedgo:sqlite-utils:v1.0'
-  compile libs.okHttp
-  compile libs.retrofitConverterGson
-  compile libs.retrofitAdapterRxJava
-  compile libs.retrofit
+  implementation 'com.github.skedgo:sqlite-utils:v1.0'
+  implementation libs.okHttp
+  implementation libs.retrofit
+  implementation libs.retrofitAdapterRxJava
+  implementation libs.retrofitConverterGson
+  implementation libs.playServicesMaps
+  implementation libs.rxjava
+  implementation libs.rxAndroid
+  implementation libs.androidMapsUtils
+  implementation 'com.firebase:firebase-jobdispatcher:0.8.5'
 
-  compile libs.dagger
+  implementation libs.dagger
   kapt libs.daggerCompiler
   kapt libs.value
-  provided libs.valueAnnotations
-  provided libs.builderAnnotations
-  provided libs.gsonAnnotations
-  compile project(':CommonCoreLegacy')
-  compile project(':TripKitDomain')
-  compile project(':TripKitData')
+  compileOnly libs.valueAnnotations
+  compileOnly libs.builderAnnotations
+  implementation libs.immutablesGson
+  api project(':CommonCoreLegacy')
+  api project(':TripKitDomain')
+  api project(':TripKitDomainLegacy')
+  api project(':TripKitData')
 }
 
-install {
-  repositories.mavenInstaller {
-    pom.project {
-      name 'TripKitAndroid'
-      description 'TripKit for Android'
-      url 'https://github.com/skedgo/tripkit-android.git'
-      inceptionYear '2013'
 
-      packaging 'aar'
-      groupId project.group
-      artifactId 'TripKitAndroid'
-      version project.version
-
-      licenses {
-        license {
-          name 'The MIT License'
-          url 'https://spdx.org/licenses/MIT#licenseText'
-          distribution 'repo'
-        }
-      }
-      developers {
-        developer {
-          name 'SkedGo'
-        }
-      }
-    }
-  }
-}
-
-bintray {
-  user = BINTRAY_USER
-  key = BINTRAY_KEY
-  configurations = ['archives']
-  pkg {
-    repo = 'tripkit-android'
-    name = 'TripKitAndroid'
-    userOrg = 'skedgo'
-    licenses = ['MIT']
-    vcsUrl = 'https://github.com/skedgo/tripkit-android.git'
-    version {
-      name = project.version
-      desc = "TripKitAndroid $project.version"
-      released = new Date()
-      vcsTag = project.version
-    }
-  }
-}
 
 uploadArchives {
   repositories {
     mavenDeployer {
-      repository(url: "file://${tripKitAndroidMaven}")
+      repository(url: "file://${localMaven}")
     }
   }
 }

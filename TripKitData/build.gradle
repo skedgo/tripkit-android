@@ -1,19 +1,21 @@
 apply plugin: "com.android.library"
+// To publish via JitPack.
+// See https://jitpack.io/docs/ANDROID/.
 apply plugin: "com.github.dcendents.android-maven"
 apply plugin: "kotlin-android"
 apply plugin: "kotlin-kapt"
 
 // For https://github.com/dcendents/android-maven-gradle-plugin.
 group = "com.skedgo.tripkit"
-version = "1.0"
+version = "1.2"
 
 android {
-  compileSdkVersion libVersions.compileSdkVersion
-  buildToolsVersion libVersions.buildToolsVersion
+  compileSdkVersion versions.compileSdkVersion
+  buildToolsVersion versions.buildToolsVersion
 
   defaultConfig {
-    minSdkVersion 10
-    targetSdkVersion 25
+    minSdkVersion versions.proMinSdkVersion
+    targetSdkVersion versions.targetSdkVersion
   }
 
   lintOptions {
@@ -23,27 +25,31 @@ android {
 }
 
 dependencies {
-  testCompile libs.junit
-  testCompile libs.assertjCore
-  testCompile libs.mockitoCore
-  testCompile libs.mockitoKotlin, { exclude group: "org.jetbrains.kotlin" }
-  testCompile libs.jodaTimeTzdb
+  testImplementation libs.junit
+  testImplementation libs.assertjCore
+  testImplementation libs.mockitoCore
+  testImplementation libs.mockitoKotlin, { exclude group: "org.jetbrains.kotlin" }
+  testImplementation libs.jodaTimeTzdb
 
-  compile project(":TripKitDomain")
-  compile project(":TripKitDomainLegacy")
-  compile libs.dagger
+  implementation project(":TripKitDomain")
+  implementation project(":TripKitDomainLegacy")
+  api project(":route-persistence")
+  implementation libs.dagger
+  implementation libs.rxjava
+  implementation libs.rxrelay1
+  implementation libs.jodaTimeAndroid
   kapt libs.daggerCompiler
   kapt libs.value
-  provided libs.valueAnnotations
-  provided libs.builderAnnotations
-  provided libs.gsonAnnotations
-  compile libs.kotlin
+  compileOnly libs.valueAnnotations
+  compileOnly libs.builderAnnotations
+  implementation libs.immutablesGson
+  implementation libs.kotlin
 }
-
 uploadArchives {
   repositories {
     mavenDeployer {
-      repository(url: "file://${tripKitAndroidMaven}")
+      repository(url: "file://${localMaven}")
     }
   }
 }
+

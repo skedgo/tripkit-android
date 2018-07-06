@@ -1,29 +1,27 @@
 buildscript {
   apply from: "dependencies.gradle"
-  ext.kotlinVersion = libVersions.kotlinVersion
-  ext.androidPluginVersion = libVersions.androidPluginVersion
-  ext.okHttpVersion = libVersions.okHttpVersion
+  ext.kotlinVersion = versions.kotlinVersion
 
   repositories {
+    mavenCentral()
+    google()
     jcenter()
   }
 
   dependencies {
-    // See changelog: http://developer.android.com/tools/revisions/gradle-plugin.html.
-    classpath "com.android.tools.build:gradle:$androidPluginVersion"
+    classpath libs.androidGradlePlugin
     classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlinVersion"
-    classpath 'com.jfrog.bintray.gradle:gradle-bintray-plugin:1.7.3'
 
     // To measure execution time of a method.
     classpath 'com.jakewharton.hugo:hugo-plugin:1.2.1'
 
     // To deploy AAR files to local maven.
-    classpath 'com.github.dcendents:android-maven-gradle-plugin:1.5'
+    classpath 'com.github.dcendents:android-maven-gradle-plugin:2.1'
   }
 }
 
 ext {
-  tripKitAndroidMaven = "${rootDir}/maven/"
+  localMaven = "${rootDir}/../maven/"
 }
 
 allprojects {
@@ -43,15 +41,9 @@ allprojects {
   }
 
   repositories {
+    google()
+    mavenCentral()
     jcenter()
     maven { url "https://jitpack.io" }
-    maven { url "https://maven.google.com" }
-    maven {
-      url "http://skedgo.bintray.com/tripkit-android"
-      credentials {
-        username BINTRAY_USER
-        password BINTRAY_KEY
-      }
-    }
   }
 }

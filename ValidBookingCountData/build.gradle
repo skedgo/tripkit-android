@@ -8,12 +8,12 @@ group = 'com.skedgo.tripkit'
 version = '1.0'
 
 android {
-  compileSdkVersion libVersions.compileSdkVersion
-  buildToolsVersion libVersions.buildToolsVersion
+  compileSdkVersion versions.compileSdkVersion
+  buildToolsVersion versions.buildToolsVersion
 
   defaultConfig {
-    minSdkVersion 10
-    targetSdkVersion 25
+    minSdkVersion versions.proMinSdkVersion
+    targetSdkVersion versions.targetSdkVersion
   }
 
   lintOptions {
@@ -23,33 +23,34 @@ android {
 }
 
 dependencies {
-  testCompile libs.junit
-  testCompile libs.robolectric
-  testCompile libs.mockitoKotlin, { exclude group: 'org.jetbrains.kotlin' }
+  testImplementation libs.junit
+  testImplementation libs.robolectric
+  testImplementation libs.mockitoKotlin
+  testImplementation libs.assertjCore
 
-  compile libs.rxjava
-  compile libs.retrofitConverterGson
-  compile libs.retrofitAdapterRxJava
-  compile libs.retrofit
-  compile libs.gson
+  implementation libs.rxjava
+  implementation libs.retrofit
+  implementation libs.retrofitConverterGson
+  implementation libs.retrofitAdapterRxJava
+  implementation libs.gson
 
-  compile libs.dagger
+  implementation libs.dagger
   kapt libs.daggerCompiler
 
   kapt libs.value
-  provided libs.valueAnnotations
-  provided libs.builderAnnotations
-  provided libs.gsonAnnotations
+  compileOnly libs.valueAnnotations
+  compileOnly libs.builderAnnotations
+  implementation libs.immutablesGson
 
-  compile libs.kotlin
-  provided project(':TripKitDomain')
-  provided project(':ValidBookingCountDomain')
+  implementation libs.kotlin
+  implementation project(':TripKitDomain')
+  implementation project(':ValidBookingCountDomain')
 }
 
 uploadArchives {
   repositories {
     mavenDeployer {
-      repository(url: "file://${tripKitAndroidMaven}")
+      repository(url: "file://${localMaven}")
     }
   }
 }

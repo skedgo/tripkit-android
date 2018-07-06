@@ -1,6 +1,14 @@
 package skedgo.tripkit.routing
 
+import android.content.Context
+import android.content.res.Resources
+import com.nhaarman.mockito_kotlin.mock
+import com.skedgo.android.common.R
 import com.skedgo.android.common.model.Location
+import org.amshove.kluent.When
+import org.amshove.kluent.`should equal to`
+import org.amshove.kluent.calling
+import org.amshove.kluent.itReturns
 import org.assertj.core.api.Java6Assertions.assertThat
 import org.joda.time.DateTime
 import org.joda.time.DateTimeZone
@@ -39,5 +47,103 @@ class TripExtensionsKtTest {
         DateTime.parse("2012-06-30T00:00")
             .withZone(DateTimeZone.forID("Asia/Bangkok"))
     )
+  }
+
+  @Test
+  fun `should create segments plain text` () {
+    // Arrange.
+    val context: Context = mock()
+
+    val from = Location()
+    val to = Location()
+
+    val segment = TripSegment()
+    segment.from = from
+    segment.to = to
+    segment.action = "ACTION"
+
+    val trip = Trip()
+    trip.segments = arrayListOf(segment)
+
+    // Act.
+    val text = trip.constructPlainText(context)
+
+    // Assert.
+    text `should equal to` "ACTION\n\n"
+  }
+
+  @Test
+  fun `should create segments plain text with address` () {
+    // Arrange.
+    val context: Context = mock()
+
+    val from = Location()
+    from.lat = 100.0
+    from.lon = 100.0
+    val to = Location()
+    to.lat = 10.0
+    to.lon = 10.0
+
+    from.address = "A"
+
+    val segment = TripSegment()
+    segment.from = from
+    segment.to = to
+    segment.action = "ACTION"
+
+    val trip = Trip()
+    trip.segments = arrayListOf(segment)
+
+    // Act.
+    val text = trip.constructPlainText(context)
+
+    // Assert.
+    text `should equal to` "A, ACTION\n\n"
+  }
+
+  @Test
+  fun `should create segments plain text with notes` () {
+    // Arrange.
+    val context: Context = mock()
+    val resources: Resources = mock()
+    When calling context.resources itReturns resources
+    When calling resources.getString(R.string.for__pattern) itReturns "for %1\$s"
+
+    val from = Location()
+    val to = Location()
+
+    val segment = TripSegment()
+    segment.from = from
+    segment.to = to
+    segment.action = "ACTION<DURATION>"
+    segment.startTimeInSecs = 0
+    segment.endTimeInSecs = 120
+
+    val trip = Trip()
+    trip.segments = arrayListOf(segment)
+
+    // Act.
+    val text = trip.constructPlainText(context)
+
+    // Assert.
+    text `should equal to` "ACTION for 2mins\n\n"
+  }
+
+  @Test
+  fun `should create segments plain text with null locations` () {
+    // Arrange.
+    val context: Context = mock()
+
+    val segment = TripSegment()
+    segment.action = "ACTION"
+
+    val trip = Trip()
+    trip.segments = arrayListOf(segment)
+
+    // Act.
+    val text = trip.constructPlainText(context)
+
+    // Assert.
+    text `should equal to` "ACTION\n\n"
   }
 }

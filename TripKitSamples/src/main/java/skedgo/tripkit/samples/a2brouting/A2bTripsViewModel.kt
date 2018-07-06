@@ -1,23 +1,24 @@
 package skedgo.tripkit.samples.a2brouting
 
 import android.content.Context
+import com.skedgo.android.common.model.Location
+import com.skedgo.android.common.model.Query
+import com.skedgo.android.common.model.TimeTag
 import me.tatarka.bindingcollectionadapter2.ItemBinding
 import me.tatarka.bindingcollectionadapter2.collections.DiffObservableList
-import org.joda.time.DateTime
 import rx.Observable
 import rx.android.schedulers.AndroidSchedulers.mainThread
 import rx.subjects.BehaviorSubject
 import rx.subjects.PublishSubject
-import skedgo.tripkit.a2brouting.A2bRoutingRequest
-import skedgo.tripkit.a2brouting.RequestTime.DepartNow
-import skedgo.tripkit.android.TripKit
+import skedgo.tripkit.a2brouting.RouteService
 import skedgo.tripkit.routing.Trip
 import skedgo.tripkit.routing.TripGroupComparators
 import skedgo.tripkit.samples.BR
 import skedgo.tripkit.samples.R
 
 class A2bTripsViewModel constructor(
-    private val context: Context
+    private val context: Context,
+    private val routeService: RouteService
 ) {
   internal val onTripSelected: PublishSubject<Trip> = PublishSubject.create()
   private val _isRefreshing: BehaviorSubject<Boolean> = BehaviorSubject.create(false)
@@ -28,18 +29,16 @@ class A2bTripsViewModel constructor(
   fun showSampleTrips(): Observable<Unit>
       = Observable
       .defer {
-        val getA2bRoutingResults = TripKit.getInstance()
-            .a2bRoutingComponent()
-            .getA2bRoutingResults
-        getA2bRoutingResults.execute(
-            A2bRoutingRequest.builder()
-                .origin(Pair(34.193984, -118.392930))
-                .originAddress("11923 Vanowen St, North Hollywood, CA 91605, USA")
-                .destination(Pair(34.184923, -118.353576))
-                .destinationAddress("2001-2027 N Maple St, Burbank, CA 91505, USA")
-                .time(DepartNow { DateTime.now() })
-                .build()
-        )
+        val query = Query().apply {
+          fromLocation = Location(34.193984, -118.392930).also {
+            it.address = "11923 Vanowen St, North Hollywood, CA 91605, USA"
+          }
+          toLocation = Location(34.184923, -118.353576).also {
+            it.address = "2001-2027 N Maple St, Burbank, CA 91505, USA"
+          }
+          setTimeTag(TimeTag.createForLeaveNow())
+        }
+        routeService.routeAsync(query)
       }
       .observeOn(mainThread())
       .scan { previous, new -> previous + new }

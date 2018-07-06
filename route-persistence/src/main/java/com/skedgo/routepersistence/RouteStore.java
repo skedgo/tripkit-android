@@ -9,8 +9,6 @@ import android.util.Pair;
 
 import com.google.gson.Gson;
 
-import org.jetbrains.annotations.NotNull;
-
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -146,8 +144,8 @@ public class RouteStore {
         });
   }
 
-  @NotNull
-  public Completable updateTripAsync(@NotNull final String oldTripUuid, @NotNull final Trip trip) {
+  @NonNull
+  public Completable updateTripAsync(@NonNull final String oldTripUuid, @NonNull final Trip trip) {
     return Completable
         .fromAction(new Action0() {
           @Override public void call() {

@@ -1,10 +1,13 @@
 package skedgo.tripkit.routing;
 
+import android.content.Intent;
 import android.content.res.Resources;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
+import android.os.Bundle;
 import android.os.Parcel;
 import android.os.Parcelable;
+import android.os.TransactionTooLargeException;
 import android.support.annotation.DrawableRes;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -17,6 +20,7 @@ import com.skedgo.android.common.agenda.IRealTimeElement;
 import com.skedgo.android.common.model.Booking;
 import com.skedgo.android.common.model.ITimeRange;
 import com.skedgo.android.common.model.Location;
+import com.skedgo.android.common.model.Query;
 import com.skedgo.android.common.model.RealtimeAlert;
 import com.skedgo.android.common.model.Street;
 import com.skedgo.android.common.model.TransportMode;
@@ -29,17 +33,25 @@ import java.util.Locale;
 
 import static skedgo.tripkit.routing.VehicleDrawables.createLightDrawable;
 
+/**
+ * To go from A to B, sometimes we have to travel X, Y, Z locations between A and B.
+ * That means, we travel A to X, then X to Y, then Y to Z, then Z to B which is the destination.
+ * To show how to travel from A to X, we use {@link TripSegment}. So, in this case,
+ * a trip from A to B comprises 6 segments:
+ * - A segment whose type is {@link SegmentType#DEPARTURE}.
+ * - A segment from A to X.
+ * - A segment from X to Y.
+ * - A segment from Y to Z.
+ * - A segment from Z to B.
+ * - A segment whose type is {@link SegmentType#ARRIVAL}.
+ * <p>
+ * Note that, to avoid {@link TransactionTooLargeException}, it's discouraged to
+ * pass any instance of {@link Query} to {@link Intent} or {@link Bundle}.
+ * The {@link Parcelable} is subject to deletion at anytime.
+ *
+ * @see <a href="http://skedgo.github.io/tripgo-api/site/faq/#trips-groups-frequencies-and-templates">Trips, groups, frequencies and templates</a>
+ */
 public class TripSegment implements Parcelable, IRealTimeElement, ITimeRange {
-  public static final String VISIBILITY_IN_SUMMARY = "in summary";
-  public static final String VISIBILITY_ON_MAP = "on map";
-  public static final String VISIBILITY_IN_DETAILS = "in details";
-  public static final String VISIBILITY_HIDDEN = "hidden";
-  public static final String TEMPLATE_STOPS = "<STOPS>";
-  public static final String TEMPLATE_PLATFORM = "<PLATFORM>";
-  public static final String TEMPLATE_TRAFFIC = "<TRAFFIC>";
-  public static final String FORMAT_STOPS = "%d stops"; /* TODO: i18n */
-  public static final String FORMAT_STOP = "%d stop"; /* TODO: i18n */
-  public static final String FORMAT_PLATFORM = "Platform: %s"; /* TODO: i18n */
   public static final Creator<TripSegment> CREATOR = new Creator<TripSegment>() {
     public TripSegment createFromParcel(Parcel in) {
       TripSegment segment = new TripSegment();
@@ -89,6 +101,7 @@ public class TripSegment implements Parcelable, IRealTimeElement, ITimeRange {
       segment.metres = in.readInt();
       segment.metresSafe = in.readInt();
       segment.metresUnsafe = in.readInt();
+      segment.turnByTurn = in.readString();
       return segment;
     }
 
@@ -137,7 +150,7 @@ public class TripSegment implements Parcelable, IRealTimeElement, ITimeRange {
   @SerializedName("serviceDirection")
   private String mServiceDirection;
   /**
-   * NOTE: Values are defined by 'modes' in http://tripgo.skedgo.com/satapp/regions.json
+   * NOTE: Values are defined by 'modes' in https://api.tripgo.com/v1/regions.json
    */
   @SerializedName("modeIdentifier")
   private String transportModeId;
@@ -174,6 +187,8 @@ public class TripSegment implements Parcelable, IRealTimeElement, ITimeRange {
   private int metresSafe;
   @SerializedName("metresUnsafe")
   private int metresUnsafe;
+  @SerializedName("turn-by-turn")
+  private String turnByTurn;
 
   /**
    * FIXME: Should replace this with Quantity Strings.
@@ -181,7 +196,7 @@ public class TripSegment implements Parcelable, IRealTimeElement, ITimeRange {
    */
   public static String convertStopCountToText(int stopCount) {
     if (stopCount > 0) {
-      return String.format(Locale.US, (stopCount == 1) ? FORMAT_STOP : FORMAT_STOPS, stopCount);
+      return String.format(Locale.US, (stopCount == 1) ? Templates.FORMAT_STOP : Templates.FORMAT_STOPS, stopCount);
     } else {
       return "";
     }
@@ -482,6 +497,14 @@ public class TripSegment implements Parcelable, IRealTimeElement, ITimeRange {
     this.metresUnsafe = metresUnsafe;
   }
 
+  @Nullable public TurnByTurn getTurnByTurn() {
+    if (turnByTurn != null) {
+      return TurnByTurn.valueOf(turnByTurn);
+    } else {
+      return null;
+    }
+  }
+
   @Override
   public int describeContents() {
     return 0;
@@ -528,6 +551,7 @@ public class TripSegment implements Parcelable, IRealTimeElement, ITimeRange {
     out.writeInt(metres);
     out.writeInt(metresSafe);
     out.writeInt(metresUnsafe);
+    out.writeString(turnByTurn);
   }
 
   public boolean isContinuation() {
@@ -552,7 +576,7 @@ public class TripSegment implements Parcelable, IRealTimeElement, ITimeRange {
    * <p/>
    * For more information about the transport. Please check out {@link TripSegment#getModeInfo()}.
    *
-   * @see <a href="https://github.com/skedgo/tripkit-ios/wiki/Mode%20Identifiers">Mode Identifiers</a>
+   * @see <a href="http://skedgo.github.io/tripgo-api/site/faq/#mode-identifiers">Mode Identifiers</a>
    */
   @Nullable
   public String getTransportModeId() {
@@ -572,7 +596,7 @@ public class TripSegment implements Parcelable, IRealTimeElement, ITimeRange {
   }
 
   /**
-   * @see <a href="https://github.com/skedgo/tripkit-ios/wiki/Mode%20Identifiers">Mode Identifiers</a>
+   * @see <a href="http://skedgo.github.io/tripgo-api/site/faq/#mode-identifiers">Mode Identifiers</a>
    */
   @Nullable
   public ModeInfo getModeInfo() {
@@ -622,16 +646,16 @@ public class TripSegment implements Parcelable, IRealTimeElement, ITimeRange {
   public boolean isVisibleInContext(String contextVisibility) {
     if (TextUtils.isEmpty(mVisibility) ||
         TextUtils.isEmpty(contextVisibility) ||
-        mVisibility.equals(VISIBILITY_HIDDEN) ||
-        contextVisibility.equals(VISIBILITY_HIDDEN)) {
+        mVisibility.equals(Visibilities.VISIBILITY_HIDDEN) ||
+        contextVisibility.equals(Visibilities.VISIBILITY_HIDDEN)) {
       return false;
     }
 
-    if (contextVisibility.equals(VISIBILITY_IN_SUMMARY)) {
-      return mVisibility.equals(VISIBILITY_ON_MAP) || mVisibility.equals(VISIBILITY_IN_SUMMARY);
-    } else if (contextVisibility.equals(VISIBILITY_ON_MAP)) {
-      return !mVisibility.equals(VISIBILITY_IN_DETAILS);
-    } else if (contextVisibility.equals(VISIBILITY_IN_DETAILS)) {
+    if (contextVisibility.equals(Visibilities.VISIBILITY_IN_SUMMARY)) {
+      return mVisibility.equals(Visibilities.VISIBILITY_ON_MAP) || mVisibility.equals(Visibilities.VISIBILITY_IN_SUMMARY);
+    } else if (contextVisibility.equals(Visibilities.VISIBILITY_ON_MAP)) {
+      return !mVisibility.equals(Visibilities.VISIBILITY_IN_DETAILS);
+    } else if (contextVisibility.equals(Visibilities.VISIBILITY_IN_DETAILS)) {
       // Show segment in details, no matter what the type
       return true;
     } else {
@@ -658,12 +682,12 @@ public class TripSegment implements Parcelable, IRealTimeElement, ITimeRange {
     }
 
     if (platform != null) {
-      notes = notes.replace(TEMPLATE_PLATFORM, String.format(FORMAT_PLATFORM, platform));
+      notes = notes.replace(Templates.TEMPLATE_PLATFORM, String.format(Templates.FORMAT_PLATFORM, platform));
     } else {
-      notes = notes.replace(TEMPLATE_PLATFORM, "");
+      notes = notes.replace(Templates.TEMPLATE_PLATFORM, "");
     }
 
-    notes = notes.replace(TEMPLATE_STOPS, convertStopCountToText(stopCount));
+    notes = notes.replace(Templates.TEMPLATE_STOPS, convertStopCountToText(stopCount));
 
     if (durationWithoutTraffic == 0) {
       return notes;
@@ -674,10 +698,10 @@ public class TripSegment implements Parcelable, IRealTimeElement, ITimeRange {
       // Plus 60 secs since we show both duration types in minutes.
       // For instance, if durationWithTraffic is 65 secs, and durationWithoutTraffic is 60 secs,
       // they will be both shown as '1min'. Thus, no need to show this difference.
-      return notes.replace(TEMPLATE_TRAFFIC, getDurationWithoutTrafficText(resources));
+      return notes.replace(Templates.TEMPLATE_TRAFFIC, getDurationWithoutTrafficText(resources));
     } else {
       // TODO: Probably we also need to remove a redundant dot char next to the template.
-      return notes.replace(TEMPLATE_TRAFFIC, "");
+      return notes.replace(Templates.TEMPLATE_TRAFFIC, "");
     }
   }
 

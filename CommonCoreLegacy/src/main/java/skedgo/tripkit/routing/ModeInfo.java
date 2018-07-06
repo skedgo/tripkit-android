@@ -8,8 +8,9 @@ import android.support.annotation.Nullable;
 import com.google.gson.annotations.SerializedName;
 
 /**
- * @see <a href="https://github.com/skedgo/tripkit-ios/wiki/Mode%20Identifiers">Mode Identifiers</a>
+ * @see <a href="http://skedgo.github.io/tripgo-api/site/faq/#mode-identifiers">Mode Identifiers</a>
  */
+// FIXME let's remove Parcelable and maybe migrate to a data class
 public class ModeInfo implements Parcelable {
   public static final Creator<ModeInfo> CREATOR = new Creator<ModeInfo>() {
     @Override
@@ -32,6 +33,7 @@ public class ModeInfo implements Parcelable {
   @SerializedName("description") private String description;
   @SerializedName("identifier") private String id;
   @SerializedName("color") private ServiceColor color;
+  private boolean remoteIconIsTemplate;
 
   public ModeInfo() {}
 
@@ -43,12 +45,13 @@ public class ModeInfo implements Parcelable {
     description = source.readString();
     id = source.readString();
     color = source.readParcelable(ServiceColor.class.getClassLoader());
+    remoteIconIsTemplate = source.readInt() == 1;
   }
 
   /**
    * Indicates a human-readable name of the transport (e.g, "Train").
    */
-  @Nullable
+  @NonNull
   public String getAlternativeText() {
     return alternativeText;
   }
@@ -71,6 +74,11 @@ public class ModeInfo implements Parcelable {
     dest.writeString(description);
     dest.writeString(id);
     dest.writeParcelable(color, 0);
+    dest.writeInt(remoteIconIsTemplate ? 1 : 0);
+  }
+
+  public boolean getRemoteIconIsTemplate() {
+    return remoteIconIsTemplate;
   }
 
   public String getLocalIconName() {
@@ -110,6 +118,9 @@ public class ModeInfo implements Parcelable {
     return VehicleMode.from(localIconName);
   }
 
+  /**
+   * @see <a href="http://skedgo.github.io/tripgo-api/site/faq/#mode-identifiers">Mode Identifiers</a>
+   */
   @Nullable
   public String getId() {
     return id;

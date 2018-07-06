@@ -3,33 +3,36 @@ apply plugin: "kotlin-kapt"
 apply plugin: 'java'
 apply plugin: 'maven'
 
+// To publish via JitPack.
 group = 'com.skedgo.tripkit'
-version = '1.0'
+version = "1.2"
 
 // To fix error of converting bytecode to dex.
 targetCompatibility = '1.7'
 sourceCompatibility = '1.7'
 
 dependencies {
-  testCompile libs.junit
-  testCompile libs.assertjCore
-  testCompile libs.mockitoCore
-  testCompile libs.mockitoKotlin, { exclude group: 'org.jetbrains.kotlin' }
+  testImplementation libs.junit
+  testImplementation libs.assertjCore
+  testImplementation libs.mockitoCore
+  testImplementation libs.mockitoKotlin
 
-  compile libs.jodaTime
-  compile libs.rxjava
-  compile libs.dagger
+  implementation libs.jodaTime
+  implementation libs.rxjava
+  implementation libs.dagger
   kapt libs.daggerCompiler
 
-  compile libs.kotlin
+  implementation libs.kotlin
   kapt libs.value
+  compileOnly libs.immutablesAndroidStub
   compileOnly libs.value
 }
+
 
 uploadArchives {
   repositories {
     mavenDeployer {
-      repository(url: "file://${tripKitAndroidMaven}")
+      repository(url: "file://${localMaven}")
     }
   }
 }

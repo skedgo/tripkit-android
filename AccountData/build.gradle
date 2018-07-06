@@ -8,12 +8,12 @@ group = 'com.skedgo.tripkit'
 version = '1.0'
 
 android {
-  compileSdkVersion libVersions.compileSdkVersion
-  buildToolsVersion libVersions.buildToolsVersion
+  compileSdkVersion versions.compileSdkVersion
+  buildToolsVersion versions.buildToolsVersion
 
   defaultConfig {
-    minSdkVersion 10
-    targetSdkVersion 25
+    targetSdkVersion versions.targetSdkVersion
+    minSdkVersion versions.proMinSdkVersion
   }
 
   lintOptions {
@@ -23,34 +23,36 @@ android {
 }
 
 dependencies {
-  testCompile libs.junit
-  testCompile libs.assertjCore
-  testCompile libs.mockitoCore
-  testCompile libs.robolectric
-  testCompile "com.squareup.okhttp3:mockwebserver:$okHttpVersion"
+  testImplementation libs.junit
+  testImplementation libs.assertjCore
+  testImplementation libs.mockitoCore
+  testImplementation libs.robolectric
+  testImplementation libs.mockWebServer
 
-  compile libs.supportAnnotations
-  compile libs.rxjava
-  compile libs.retrofitConverterGson
-  compile libs.retrofitAdapterRxJava
-  compile libs.retrofit
-  compile libs.gson
-  provided project(":AccountDomain")
-  provided project(":TripKitDomain")
-
-  compile libs.dagger
+  implementation libs.supportAnnotations
+  implementation libs.rxjava
+  implementation libs.retrofitConverterGson
+  implementation libs.retrofitAdapterRxJava
+  implementation libs.retrofit
+  implementation libs.gson
+  implementation project(":AccountDomain")
+  implementation project(":TripKitDomain")
+  implementation libs.dagger
   kapt libs.daggerCompiler
+
   kapt libs.value
-  provided libs.valueAnnotations
-  provided libs.builderAnnotations
-  provided libs.gsonAnnotations
-  compile libs.kotlin
+
+  compileOnly libs.builderAnnotations
+  implementation libs.immutablesGson
+  compileOnly libs.valueAnnotations
+
+  implementation libs.kotlin
 }
 
 uploadArchives {
   repositories {
     mavenDeployer {
-      repository(url: "file://${tripKitAndroidMaven}")
+      repository(url: "file://${localMaven}")
     }
   }
 }

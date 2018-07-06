@@ -1,7 +1,5 @@
 package skedgo.tripkit.routing;
 
-import android.os.Parcel;
-import android.os.Parcelable;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.text.TextUtils;
@@ -19,7 +17,14 @@ import java.util.Locale;
 import java.util.UUID;
 
 /**
- * @see <a href="https://redmine.buzzhives.com/projects/buzzhives/wiki/Main_API_formats#Trips">API format</a>
+ * A {@link Trip} will mainly hold a list of {@link TripSegment}s which denotes
+ * how to go from {@link Trip#getFrom()} to {@link Trip#getTo()}.
+ * <p>
+ * Main use-cases:
+ * - Trip's segments: {@link Trip#getSegments()}.
+ * - Trip's start time: {@link TripExtensionsKt#getStartDateTime(Trip)}.
+ * - Trip's end time: {@link TripExtensionsKt#getEndDateTime(Trip)}}.
+ * - Trip's costs: {@link #getCaloriesCost()}, {@link #getMoneyCost()}, {@link #getCarbonCost()}.
  */
 public class Trip implements ITimeRange {
   public static final float UNKNOWN_COST = -9999.9999F;

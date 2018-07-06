@@ -1,19 +1,21 @@
-apply plugin: 'com.android.library'
-apply plugin: 'com.github.dcendents.android-maven'
-apply plugin: 'kotlin-android'
-apply plugin: 'kotlin-kapt'
+apply plugin: "com.android.library"
+// To publish via JitPack.
+// See https://jitpack.io/docs/ANDROID/.
+apply plugin: "com.github.dcendents.android-maven"
+apply plugin: "kotlin-android"
+apply plugin: "kotlin-kapt"
 
 // For https://github.com/dcendents/android-maven-gradle-plugin.
-group = 'com.skedgo.tripkit'
-version = '1.0'
+group = "com.skedgo.tripkit"
+version = "1.2"
 
 android {
-  compileSdkVersion libVersions.compileSdkVersion
-  buildToolsVersion libVersions.buildToolsVersion
+  compileSdkVersion versions.compileSdkVersion
+  buildToolsVersion versions.buildToolsVersion
 
   defaultConfig {
-    minSdkVersion 10
-    targetSdkVersion 25
+    minSdkVersion versions.proMinSdkVersion
+    targetSdkVersion versions.targetSdkVersion
   }
 
   lintOptions {
@@ -23,20 +25,23 @@ android {
 }
 
 dependencies {
-  compile project(":TripKitDomain")
-  compile libs.dagger
+  implementation project(":TripKitDomain")
+  implementation project(':CommonCoreLegacy')
+
+  implementation libs.dagger
   kapt libs.daggerCompiler
   kapt libs.value
-  provided libs.valueAnnotations
-  provided libs.builderAnnotations
-  provided libs.gsonAnnotations
-  compile libs.kotlin
+  compileOnly libs.valueAnnotations
+  compileOnly libs.builderAnnotations
+  implementation libs.immutablesGson
+  implementation libs.kotlin
+  implementation libs.rxjava
 }
 
 uploadArchives {
   repositories {
     mavenDeployer {
-      repository(url: "file://${tripKitAndroidMaven}")
+      repository(url: "file://${localMaven}")
     }
   }
 }

@@ -3,14 +3,14 @@ apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-kapt'
 
 android {
-  compileSdkVersion libVersions.compileSdkVersion
-  buildToolsVersion libVersions.buildToolsVersion
+  compileSdkVersion versions.compileSdkVersion
+  buildToolsVersion versions.buildToolsVersion
   dataBinding { enabled = true }
 
   defaultConfig {
     applicationId "skedgo.tripkit.samples"
     minSdkVersion 15
-    targetSdkVersion 25
+    targetSdkVersion 27
     versionCode 1
     versionName "1.0"
     testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
@@ -30,15 +30,22 @@ android {
 }
 
 dependencies {
-  testCompile libs.junit
-  compile libs.kotlin
-  compile 'com.android.support:appcompat-v7:25.3.0'
-  compile 'com.android.support:recyclerview-v7:25.3.0'
-  compile 'com.android.support:design:25.3.0'
-  compile 'com.google.android.gms:play-services-maps:10.0.1'
-  compile 'com.trello:rxlifecycle:1.0'
-  compile 'com.github.skedgo:RxLifecycleComponents:v1.3'
-  compile 'me.tatarka.bindingcollectionadapter2:bindingcollectionadapter-recyclerview:2.0.1'
-  kapt "com.android.databinding:compiler:$androidPluginVersion"
-  compile project(':TripKitAndroid'), { transitive = true }
+  testImplementation libs.junit
+  implementation libs.kotlin
+  implementation libs.appCompat
+  implementation libs.recyclerView
+  implementation libs.playServicesMaps
+  implementation libs.supportDesign
+
+  implementation 'com.trello:rxlifecycle:1.0'
+  implementation libs.jodaTimeAndroid
+  implementation libs.rxjava
+  implementation libs.rxAndroid
+  kapt libs.dataBindingCompiler
+
+  implementation libs.rxLifecycleComponents
+  implementation libs.bindingCollectionAdapterRecyclerView
+
+  implementation project(":AccountData")
+  implementation project(":TripKitAndroid")
 }

@@ -5,7 +5,6 @@ import org.junit.Test
 
 class ServerTest {
   @Test fun `Server should end with a slash`() {
-    assertThat(Server.Inflationary.value).endsWith("/")
-    assertThat(Server.BigBang.value).endsWith("/")
+    Server.values().forEach { assertThat(it.value).endsWith("/") }
   }
 }
