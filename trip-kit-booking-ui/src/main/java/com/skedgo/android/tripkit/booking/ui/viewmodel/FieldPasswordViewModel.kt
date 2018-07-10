@@ -7,7 +7,7 @@ class FieldPasswordViewModel(val passwordFormField: PasswordFormField) : Disposa
   val isHidden: Boolean get() = passwordFormField.isHidden
 
   val editText: String get() = passwordFormField.value ?: ""
-
+  val hint: String = passwordFormField.title.orEmpty()
   fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {
     passwordFormField.setValue(s.toString())
   }
