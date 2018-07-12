@@ -6,6 +6,9 @@ import android.databinding.ObservableBoolean
 import android.databinding.ObservableField
 import android.databinding.ObservableList
 import android.os.Bundle
+import android.view.KeyEvent
+import android.view.inputmethod.EditorInfo
+import android.widget.TextView
 import com.skedgo.android.tripkit.booking.*
 import com.skedgo.android.tripkit.booking.ui.activity.*
 import com.skedgo.android.tripkit.booking.ui.usecase.GetBookingFormFromAction
@@ -136,6 +139,16 @@ class BookingFormViewModel
           }
           if (it.footer != null) {
             items.add(it.footer)
+          }
+        }
+
+    items.lastOrNull { it is FieldPasswordViewModel }
+        ?.let { it as FieldPasswordViewModel }
+        ?.let {
+          it.imeOptions = EditorInfo.IME_ACTION_SEND
+          it.onEditorActionListener = TextView.OnEditorActionListener { _, _, _ ->
+            onAction()
+            true
           }
         }
   }
