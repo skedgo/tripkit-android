@@ -5,5 +5,4 @@ import rx.Single
 
 interface UserRepository {
   fun getUserKey(): Single<String>
-  fun setUserKey(userKey: String): Completable
 }

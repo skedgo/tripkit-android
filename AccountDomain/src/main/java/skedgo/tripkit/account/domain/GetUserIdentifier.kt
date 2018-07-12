@@ -9,22 +9,7 @@ import javax.inject.Inject
  * The emitted identifier can be used later for [SilentlyLogIn].
  */
 open class GetUserIdentifier @Inject constructor(
-    private val userRepository: UserRepository,
-    private val generateUserKey:GenerateUserKey
+    private val userRepository: UserRepository
 ) {
-  open fun execute(): Observable<String>
-      = userRepository.getUserKey().toObservable()
-      .flatMap {
-        when {
-          it.isEmpty() -> {
-            generateUserKey.execute().toObservable()
-                .flatMap {
-                  userRepository.setUserKey(it)
-                      .andThen(Single.just(it))
-                      .toObservable()
-                }
-          }
-            else -> Observable.just(it)
-        }
-      }
+  open fun execute(): Observable<String> = userRepository.getUserKey().toObservable()
 }
