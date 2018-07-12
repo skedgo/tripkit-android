@@ -1,7 +1,7 @@
 package skedgo.tripkit.account.data
 
-import android.accounts.AccountManager
 import android.content.Context
+import android.content.SharedPreferences
 import dagger.Module
 import dagger.Provides
 import okhttp3.OkHttpClient
@@ -12,6 +12,7 @@ import rx.schedulers.Schedulers
 import skedgo.tripkit.account.domain.UserRepository
 import skedgo.tripkit.account.domain.UserTokenRepository
 import skedgo.tripkit.configuration.Server
+import javax.inject.Named
 
 @Module class AccountDataModule {
   @Provides fun userTokenRepository(
@@ -39,6 +40,8 @@ import skedgo.tripkit.configuration.Server
     return UserTokenRepositoryImpl(preferences, silentLoginApi, accountApi)
   }
 
-  @Provides fun userRepository(context: Context): UserRepository
-      = DeviceUserRepository(AccountManager.get(context))
+  @Provides fun userRepository(
+      @Named(AccountDataPrefsModule.AccountDataPrefs) prefs: SharedPreferences
+  ): UserRepository
+      = UserKeyRepositoryImpl(prefs)
 }

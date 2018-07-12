@@ -1,7 +1,9 @@
 package skedgo.tripkit.account.domain
 
-import rx.Observable
+import rx.Completable
+import rx.Single
 
 interface UserRepository {
-  fun getUser(): Observable<User>
+  fun getUserKey(): Single<String>
+  fun setUserKey(userKey: String): Completable
 }
