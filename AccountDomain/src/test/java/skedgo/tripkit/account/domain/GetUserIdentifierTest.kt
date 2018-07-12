@@ -6,8 +6,8 @@ import org.amshove.kluent.When
 import org.amshove.kluent.`it returns`
 import org.amshove.kluent.`should equal to`
 import org.amshove.kluent.calling
-import org.assertj.core.api.Java6Assertions.assertThat
 import org.junit.Test
+import rx.Completable
 import rx.Single
 
 class GetUserIdentifierTest {
@@ -35,6 +35,7 @@ class GetUserIdentifierTest {
   fun `should return new key`() {
     // Arrange.
     When calling userRepository.getUserKey() `it returns` Single.just("")
+    When calling userRepository.setUserKey("new key") `it returns` Completable.complete()
     When calling generateUserKey.execute() `it returns` Single.just("new key")
 
     // Act.
