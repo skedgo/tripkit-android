@@ -5,7 +5,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
 public class RouteDatabaseHelper extends SQLiteOpenHelper {
-  private static int DATABASE_VERSION = 2;
+  private static int DATABASE_VERSION = 3;
 
   public RouteDatabaseHelper(Context context, String name) {
     super(context, name, null, DATABASE_VERSION);
@@ -20,6 +20,8 @@ public class RouteDatabaseHelper extends SQLiteOpenHelper {
     switch (oldVersion) {
       case 1:
         RoutingStatusContract.INSTANCE.create(db);
+      case 2:
+        db.execSQL("ALTER TABLE tripGroups ADD COLUMN sources TEXT");
     }
   }
 }
