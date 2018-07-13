@@ -6,10 +6,12 @@ import android.databinding.ObservableBoolean
 import android.databinding.ObservableField
 import android.databinding.ObservableList
 import android.os.Bundle
+import com.skedgo.android.tripkit.booking.ui.*
 import android.view.KeyEvent
 import android.view.inputmethod.EditorInfo
 import android.widget.TextView
 import com.skedgo.android.tripkit.booking.*
+import com.skedgo.android.tripkit.booking.ui.R
 import com.skedgo.android.tripkit.booking.ui.activity.*
 import com.skedgo.android.tripkit.booking.ui.usecase.GetBookingFormFromAction
 import com.skedgo.android.tripkit.booking.ui.usecase.GetBookingFormFromUrl
@@ -51,6 +53,8 @@ class BookingFormViewModel
   var bookingForm: BookingForm? = null
   var bookingError: BookingError? = null
 
+  private val onRetryClicked = PublishSubject.create<Unit>()
+
   fun onAction() {
     when {
       isCancelAction.execute(bookingForm) -> onCancel.onNext(true)
@@ -60,7 +64,11 @@ class BookingFormViewModel
   }
 
   fun onRetry() {
-    onErrorRetry.onNext(bookingError?.url)
+    if (bookingError != null) {
+      onErrorRetry.onNext(bookingError?.url)
+    } else {
+      onRetryClicked.onNext(Unit)
+    }
   }
 
   fun onCancel() {
@@ -92,29 +100,51 @@ class BookingFormViewModel
         }
         .doOnError { bookingError ->
           isLoading.set(false)
-          if (bookingError is BookingError) {
-            showError(bookingError)
+          showError(bookingError)
+        }
+        .doOnSubscribe {
+          hasError.set(false)
+          isLoading.set(true)
+        }
+        .doOnCompleted {
+          isLoading.set(false)
+        }
+        .retryWhen {
+          it.flatMap {
+            if (it is Error) {
+              Observable.error<Any>(it)
+            } else {
+              onRetryClicked
+                  .first()
+            }
           }
         }
-        .doOnSubscribe { isLoading.set(true) }
-        .doOnCompleted { isLoading.set(false) }
         .cast(Any::class.java)
-
   }
 
-  fun showError(error: BookingError) {
-    bookingError = error
-
-    hasError.set(true)
-    errorTitle.set(error.title)
-    errorMessage.set(error.error)
-    showRetry.set(error.recoveryTitle != null && error.url != null)
-    retryText.set(
-        if (error.recoveryTitle != null && error.url != null) {
-          error.recoveryTitle
-        } else {
-          resources.getString(R.string.retry)
-        })
+  fun showError(error: Throwable) {
+    if (error is BookingError) {
+      // user error case
+      bookingError = error
+      hasError.set(true)
+      errorTitle.set(error.title)
+      errorMessage.set(error.error)
+      showRetry.set(error.recoveryTitle != null && error.url != null)
+      retryText.set(
+          if (error.recoveryTitle != null && error.url != null) {
+            error.recoveryTitle
+          } else {
+            resources.getString(R.string.retry)
+          })
+    } else {
+      // network error case
+      bookingError = null
+      hasError.set(true)
+      errorTitle.set(resources.getString(R.string.an_error_has_occured))
+      errorMessage.set(null)
+      showRetry.set(true)
+      retryText.set(resources.getString(R.string.retry))
+    }
   }
 
   fun updateBookingFormInfo() {

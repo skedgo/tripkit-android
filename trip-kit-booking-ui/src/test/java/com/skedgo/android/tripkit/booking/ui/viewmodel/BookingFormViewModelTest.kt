@@ -15,16 +15,18 @@ import com.skedgo.android.tripkit.booking.ui.usecase.IsDoneAction
 import org.assertj.core.api.Java6Assertions.assertThat
 import org.junit.Test
 import org.junit.runner.RunWith
+import org.robolectric.RuntimeEnvironment
 import org.robolectric.annotation.Config
 import rx.Observable
 import rx.observers.TestSubscriber
+import java.net.SocketTimeoutException
 
 
 @RunWith(TestRunner::class)
 @Config(constants = BuildConfig::class)
 class BookingFormViewModelTest {
 
-  private val resources: Resources = mock()
+  private val resources: Resources = RuntimeEnvironment.application.resources
   private val getBookingFormFromUrl: GetBookingFormFromUrl = mock()
   private val getBookingFormFromAction: GetBookingFormFromAction = mock()
   private val isCancelAction: IsCancelAction = mock()
@@ -35,7 +37,8 @@ class BookingFormViewModelTest {
         getBookingFormFromAction, isCancelAction, isDoneAction)
   }
 
-  @Test fun shouldActionEmitCancel() {
+  @Test
+  fun shouldActionEmitCancel() {
     val bookingForm = mock<BookingForm>()
 
     whenever(isCancelAction.execute(bookingForm)).thenReturn(true)
@@ -52,7 +55,8 @@ class BookingFormViewModelTest {
 
   }
 
-  @Test fun shouldActionEmitDone() {
+  @Test
+  fun shouldActionEmitDone() {
     val bookingForm = mock<BookingForm>()
 
     whenever(isCancelAction.execute(bookingForm)).thenReturn(false)
@@ -69,7 +73,8 @@ class BookingFormViewModelTest {
 
   }
 
-  @Test fun shouldActionEmitNextBookingForm() {
+  @Test
+  fun shouldActionEmitNextBookingForm() {
     val bookingForm = mock<BookingForm>()
 
     whenever(isCancelAction.execute(bookingForm)).thenReturn(false)
@@ -86,7 +91,8 @@ class BookingFormViewModelTest {
 
   }
 
-  @Test fun shouldEmitRetry() {
+  @Test
+  fun shouldEmitRetry() {
     val bookingError = mock<BookingError>()
     whenever(bookingError.url).thenReturn("retry url")
 
@@ -101,7 +107,8 @@ class BookingFormViewModelTest {
 
   }
 
-  @Test fun shouldEmitCancel() {
+  @Test
+  fun shouldEmitCancel() {
     val subscriber = TestSubscriber<Boolean>()
     viewModel.onCancel.subscribe(subscriber)
 
@@ -111,7 +118,8 @@ class BookingFormViewModelTest {
 
   }
 
-  @Test fun shouldShowRecoveryError() {
+  @Test
+  fun shouldShowRecoveryError() {
     val bookingError = mock<BookingError>()
     whenever(bookingError.title).thenReturn("error title")
     whenever(bookingError.error).thenReturn("error message")
@@ -128,7 +136,8 @@ class BookingFormViewModelTest {
 
   }
 
-  @Test fun shouldShowRetryError() {
+  @Test
+  fun shouldShowRetryError() {
     val bookingError = mock<BookingError>()
     whenever(bookingError.title).thenReturn("error title")
     whenever(bookingError.error).thenReturn("error message")
@@ -145,7 +154,8 @@ class BookingFormViewModelTest {
 
   }
 
-  @Test fun shouldUpdateBookingFormInfoWithAction() {
+  @Test
+  fun shouldUpdateBookingFormInfoWithAction() {
     val bookingForm = mock<BookingForm>()
     val action = mock<BookingAction>()
     whenever(bookingForm.action).thenReturn(action)
@@ -166,7 +176,8 @@ class BookingFormViewModelTest {
 
   }
 
-  @Test fun shouldUpdateBookingFormInfoWithNoAction() {
+  @Test
+  fun shouldUpdateBookingFormInfoWithNoAction() {
     val bookingForm = mock<BookingForm>()
     whenever(bookingForm.action).thenReturn(null)
     whenever(bookingForm.title).thenReturn("booking title")
@@ -185,7 +196,8 @@ class BookingFormViewModelTest {
 
   }
 
-  @Test fun shouldUpdateFieldList() {
+  @Test
+  fun shouldUpdateFieldList() {
     val bookingForm = mock<BookingForm>()
     val formGroup = mock<FormGroup>()
     val stringField = mock<StringFormField>()
@@ -212,7 +224,8 @@ class BookingFormViewModelTest {
 
   }
 
-  @Test fun shouldEmitErrorOnFetchBookingForm() {
+  @Test
+  fun shouldEmitErrorOnFetchBookingForm() {
     val bundle = Bundle()
     val subscriber = TestSubscriber<Any?>()
 
@@ -221,7 +234,8 @@ class BookingFormViewModelTest {
     subscriber.assertError(Error::class.java)
   }
 
-  @Test fun shouldEmitBundleFormOnFetchBookingForm() {
+  @Test
+  fun shouldEmitBundleFormOnFetchBookingForm() {
     val bookingForm = mock<BookingForm>()
 
     val bundle = Bundle()
@@ -236,7 +250,8 @@ class BookingFormViewModelTest {
     assertThat(viewModel.bookingForm).isEqualTo(bookingForm)
   }
 
-  @Test fun shouldEmitBookingFormFromUrlOnFetchBookingForm() {
+  @Test
+  fun shouldEmitBookingFormFromUrlOnFetchBookingForm() {
     val bookingForm = mock<BookingForm>()
 
     val bundle = Bundle()
@@ -253,7 +268,8 @@ class BookingFormViewModelTest {
     assertThat(viewModel.bookingForm).isEqualTo(bookingForm)
   }
 
-  @Test fun shouldEmitBookingFormFromActionOnFetchBookingForm() {
+  @Test
+  fun shouldEmitBookingFormFromActionOnFetchBookingForm() {
     val bookingForm = mock<BookingForm>()
     val bookingFormAction = mock<BookingForm>()
 
@@ -271,7 +287,8 @@ class BookingFormViewModelTest {
     assertThat(viewModel.bookingForm).isEqualTo(bookingForm)
   }
 
-  @Test fun shouldEmitDoneOnFetchBookingForm() {
+  @Test
+  fun shouldEmitDoneOnFetchBookingForm() {
     val bookingFormAction = mock<BookingForm>()
 
     val bundle = Bundle()
@@ -290,7 +307,8 @@ class BookingFormViewModelTest {
     subscriberDone.assertValue(null)
   }
 
-  @Test fun shouldEmitDoneOnFetchNullBookingForm() {
+  @Test
+  fun shouldEmitDoneOnFetchNullBookingForm() {
     val bookingFormAction = mock<BookingForm>()
 
     val bundle = Bundle()
@@ -307,5 +325,23 @@ class BookingFormViewModelTest {
 
     subscriber.assertValue(NullBookingForm)
     subscriberDone.assertValue(NullBookingForm)
+  }
+
+  @Test
+  fun `should show error for network error`() {
+    val bundle = Bundle()
+    bundle.putInt(KEY_TYPE, BOOKING_TYPE_URL)
+    bundle.putString(KEY_URL, "abc")
+
+    whenever(getBookingFormFromUrl.execute("abc")).thenReturn(Observable.error(SocketTimeoutException()))
+    viewModel.fetchBookingFormAsync(bundle)
+        .test()
+        .assertNoErrors()
+
+    assertThat(viewModel.hasError.get()).isTrue()
+    assertThat(viewModel.bookingError).isNull()
+    assertThat(viewModel.errorTitle.get()).isEqualTo("An unexpected network error has occurred.")
+    assertThat(viewModel.errorMessage.get()).isNull()
+    assertThat(viewModel.showRetry.get()).isTrue()
   }
 }
