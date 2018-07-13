@@ -76,12 +76,12 @@ public class BaseUrlOverridingInterceptorTest {
     }));
   }
 
-  @Test public void ignoreNonSatappRequest() throws IOException {
+  @Test public void ignoreNonTripgoRequest() throws IOException {
     when(baseUrlAdapter.call()).thenReturn("https://granduni.buzzhives.com/satapp-beta/");
 
     final Interceptor.Chain chain = mock(Interceptor.Chain.class);
     final Request chainRequest = new Request.Builder()
-        .url(HttpUrl.parse("https://skedgo.com/tripgo"))
+        .url(HttpUrl.parse("https://google.com/haha"))
         .build();
     when(chain.request()).thenReturn(chainRequest);
 

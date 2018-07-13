@@ -1,0 +1,1 @@
+-keep class com.skedgo.android.tripkit.booking.BookingError { *; }

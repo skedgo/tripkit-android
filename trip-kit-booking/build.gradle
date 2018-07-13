@@ -1,5 +1,7 @@
 apply plugin: 'com.android.library'
 apply plugin: 'com.github.dcendents.android-maven'
+apply plugin: "kotlin-android"
+apply plugin: "kotlin-kapt"
 
 // For https://github.com/dcendents/android-maven-gradle-plugin.
 group = 'com.skedgo'
@@ -11,7 +13,7 @@ android {
 
   defaultConfig {
     minSdkVersion 15
-    targetSdkVersion 25
+    targetSdkVersion 27
     testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
   }
 
@@ -32,6 +34,8 @@ dependencies {
   testImplementation libs.assertjCore
   testImplementation libs.mockitoCore
   testImplementation libs.robolectric
+  testImplementation libs.mockitoKotlin
+  testImplementation libs.kluent
   testImplementation 'com.github.thuytrinh:MockWebServerRule:v1.0'
 
   implementation project(':TripKitAndroid')
@@ -47,18 +51,19 @@ dependencies {
   implementation "com.squareup.retrofit2:retrofit:2.0.2"
   implementation "com.squareup.retrofit2:converter-gson:2.0.2"
   implementation "com.squareup.retrofit2:adapter-rxjava:2.0.2"
-  annotationProcessor libs.daggerCompiler
+  implementation libs.kotlin
+  kapt libs.daggerCompiler
 
-  annotationProcessor libs.value
+  kapt libs.value
   compileOnly libs.valueAnnotations
   compileOnly libs.builderAnnotations
-  compileOnly libs.gsonAnnotations
+  implementation libs.immutablesGson
 }
 
 uploadArchives {
   repositories {
     mavenDeployer {
-      repository(url: "file://${tripKitAndroidMaven}")
+      repository(url: "file://${localMaven}")
     }
   }
 }

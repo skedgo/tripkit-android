@@ -1,6 +1,7 @@
 package skedgo.tripkit.datetime
 
 import org.joda.time.DateTime
+import org.joda.time.LocalTime
 import rx.Observable
 
 /**
@@ -9,4 +10,5 @@ import rx.Observable
  */
 interface PrintTime {
   fun execute(dateTime: DateTime): Observable<String>
+  fun printLocalTime(localTime: LocalTime): String
 }

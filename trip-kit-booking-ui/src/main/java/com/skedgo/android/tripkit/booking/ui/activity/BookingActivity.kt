@@ -5,8 +5,8 @@ import android.content.Intent
 import android.databinding.DataBindingUtil
 import android.os.Bundle
 import android.os.Parcelable
+import android.util.Log
 import android.view.MenuItem
-import com.skedgo.android.common.util.LogUtils
 import com.skedgo.android.tripkit.booking.BookingForm
 import com.skedgo.android.tripkit.booking.ui.BR
 import com.skedgo.android.tripkit.booking.ui.BookingUiModule
@@ -17,7 +17,7 @@ import com.skedgo.android.tripkit.booking.ui.viewmodel.*
 import me.tatarka.bindingcollectionadapter2.ItemBinding
 import me.tatarka.bindingcollectionadapter2.itembindings.OnItemBindClass
 import rx.android.schedulers.AndroidSchedulers.mainThread
-import skedgo.activityanimations.AnimatedTransitionActivity
+import skedgo.rxlifecyclecomponents.RxAppCompatActivity
 import skedgo.rxlifecyclecomponents.bindToLifecycle
 import javax.inject.Inject
 
@@ -36,12 +36,10 @@ const val RQ_BOOKING = 0
 const val RQ_EXTERNAL = RQ_BOOKING + 1
 const val RQ_EXTERNAL_WEB = RQ_EXTERNAL + 1
 
-private const val TAG_BOOKING_FORM = "bookingForm"
-
-open class BookingActivity : AnimatedTransitionActivity() {
-
+open class BookingActivity : RxAppCompatActivity() {
   companion object {
-    @JvmStatic fun bookingFormsView(): ItemBinding<Any> {
+    @JvmStatic
+    fun bookingFormsView(): ItemBinding<Any> {
       return ItemBinding.of(
           OnItemBindClass<Any>()
               .map(FieldStringViewModel::class.java, BR.viewModel, R.layout.field_string)
@@ -50,33 +48,32 @@ open class BookingActivity : AnimatedTransitionActivity() {
               .map(FieldBookingFormViewModel::class.java, BR.viewModel, R.layout.field_booking_form)
               .map(String::class.java, BR.title, R.layout.group_title)
       )
-
     }
   }
 
-  @Inject lateinit var viewModel: BookingFormViewModel
+  @Inject
+  lateinit var viewModel: BookingFormViewModel
   val binding: ActivityBookingBinding by lazy {
     DataBindingUtil.setContentView<ActivityBookingBinding>(this, R.layout.activity_booking)
   }
 
-  private val onError =
-      {
-        error: Throwable ->
-        LogUtils.LOGE(TAG_BOOKING_FORM, "Error on booking", error)
-      }
+  private val onError: (Throwable) -> Unit = { error: Throwable ->
+    Log.e("BookingActivity", "Error on booking", error)
+  }
 
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
 
-    DaggerBookingUiComponent.builder()
+    val bookingUiComponent = DaggerBookingUiComponent.builder()
         .bookingUiModule(BookingUiModule(applicationContext))
         .build()
+    DataBindingUtil.setDefaultComponent(bookingUiComponent)
+    bookingUiComponent
         .inject(this)
 
     supportActionBar?.setDisplayShowHomeEnabled(true)
     supportActionBar?.setDisplayHomeAsUpEnabled(true)
-
-    binding.setViewModel(viewModel)
+    binding.viewModel = viewModel
 
     viewModel.onUpdateFormTitle
         .asObservable()
@@ -131,6 +128,7 @@ open class BookingActivity : AnimatedTransitionActivity() {
           intent.putExtra(KEY_FORM, bookingForm as Parcelable)
           startActivityForResult(intent, RQ_BOOKING)
         }, onError)
+
 
     viewModel.onExternalForm
         .asObservable()
@@ -211,5 +209,4 @@ open class BookingActivity : AnimatedTransitionActivity() {
     startActivityForResult(intent, RQ_BOOKING)
     finish()
   }
-
 }

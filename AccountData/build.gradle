@@ -12,8 +12,8 @@ android {
   buildToolsVersion versions.buildToolsVersion
 
   defaultConfig {
-    minSdkVersion 10
-    targetSdkVersion 25
+    targetSdkVersion versions.targetSdkVersion
+    minSdkVersion versions.proMinSdkVersion
   }
 
   lintOptions {
@@ -35,16 +35,16 @@ dependencies {
   implementation libs.retrofitAdapterRxJava
   implementation libs.retrofit
   implementation libs.gson
-  compileOnly project(":AccountDomain")
-  compileOnly project(":TripKitDomain")
-
+  implementation project(":AccountDomain")
+  implementation project(":TripKitDomain")
   implementation libs.dagger
   kapt libs.daggerCompiler
 
-  annotationProcessor libs.value
-  compileOnly libs.valueAnnotations
+  kapt libs.value
+
   compileOnly libs.builderAnnotations
-  compileOnly libs.gsonAnnotations
+  implementation libs.immutablesGson
+  compileOnly libs.valueAnnotations
 
   implementation libs.kotlin
 }
@@ -52,7 +52,7 @@ dependencies {
 uploadArchives {
   repositories {
     mavenDeployer {
-      repository(url: "file://${tripKitAndroidMaven}")
+      repository(url: "file://${localMaven}")
     }
   }
 }

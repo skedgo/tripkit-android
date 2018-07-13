@@ -53,7 +53,7 @@ class ExternalProviderAuthActivity : RxAppCompatActivity() {
         .build()
         .inject(this)
 
-    binding.setViewModel(viewModel)
+    binding.viewModel = viewModel
 
     val args = intent.extras
     viewModel.handleArgs(args)

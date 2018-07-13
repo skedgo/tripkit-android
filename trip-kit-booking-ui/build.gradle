@@ -3,17 +3,13 @@ apply plugin: 'com.github.dcendents.android-maven'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-kapt'
 
-// For https://github.com/dcendents/android-maven-gradle-plugin.
-group = 'com.skedgo'
-version = '1.0'
-
 android {
   compileSdkVersion versions.compileSdkVersion
   buildToolsVersion versions.buildToolsVersion
 
   defaultConfig {
     minSdkVersion 15
-    targetSdkVersion 25
+    targetSdkVersion 27
     testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
   }
 
@@ -21,6 +17,12 @@ android {
   lintOptions {
     checkReleaseBuilds true
     abortOnError false
+  }
+
+  testOptions {
+    unitTests {
+      includeAndroidResources = true
+    }
   }
 }
 
@@ -48,24 +50,24 @@ dependencies {
 
   implementation 'com.squareup.picasso:picasso:2.5.2'
   implementation 'com.jakewharton.picasso:picasso2-okhttp3-downloader:1.0.2'
-  implementation 'me.tatarka.bindingcollectionadapter2:bindingcollectionadapter-recyclerview:2.1.0'
-
-  implementation 'com.github.skedgo:RxLifecycleComponents:v1.3'
+  implementation libs.bindingCollectionAdapterRecyclerView
+  implementation libs.rxLifecycleComponents
   implementation 'com.trello:rxlifecycle:1.0'
-  implementation 'com.github.skedgo:ActivityAnimations:v1.1'
 
   implementation libs.kotlin
   implementation libs.gson
   implementation libs.rxjava
   implementation libs.rxAndroid
 
-  kapt "com.android.databinding:compiler:$androidPluginVersion"
+  kapt libs.dataBindingCompiler
 }
+group = ext.versions.tripGoGroup
+version = ext.versions.tripGoLibrary
 
 uploadArchives {
   repositories {
     mavenDeployer {
-      repository(url: "file://${tripKitAndroidMaven}")
+      repository(url: "file://${localMaven}")
     }
   }
 }

@@ -7,6 +7,7 @@ apply plugin: "kotlin-kapt"
 
 // For https://github.com/dcendents/android-maven-gradle-plugin.
 group = "com.skedgo.tripkit"
+version = "1.2"
 
 android {
   compileSdkVersion versions.compileSdkVersion
@@ -14,7 +15,7 @@ android {
 
   defaultConfig {
     minSdkVersion 15
-    targetSdkVersion 25
+    targetSdkVersion 27
     testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
   }
 
@@ -59,7 +60,6 @@ dependencies {
   androidTestImplementation libs.assertjCore
 
   implementation libs.kotlin
-  implementation libs.playServicesGcm
   implementation libs.jodaTimeAndroid
   implementation 'com.github.skedgo:commons-collections:v1.0'
 
@@ -71,15 +71,27 @@ dependencies {
   implementation libs.playServicesMaps
   implementation libs.rxjava
   implementation libs.rxAndroid
-  implementation 'com.github.skedgo:android-maps-utils:241fc89'
+  implementation libs.androidMapsUtils
+  implementation 'com.firebase:firebase-jobdispatcher:0.8.5'
 
   implementation libs.dagger
   kapt libs.daggerCompiler
-  annotationProcessor libs.value
+  kapt libs.value
   compileOnly libs.valueAnnotations
   compileOnly libs.builderAnnotations
-  compileOnly libs.gsonAnnotations
+  implementation libs.immutablesGson
   api project(':CommonCoreLegacy')
   api project(':TripKitDomain')
+  api project(':TripKitDomainLegacy')
   api project(':TripKitData')
+}
+
+
+
+uploadArchives {
+  repositories {
+    mavenDeployer {
+      repository(url: "file://${localMaven}")
+    }
+  }
 }

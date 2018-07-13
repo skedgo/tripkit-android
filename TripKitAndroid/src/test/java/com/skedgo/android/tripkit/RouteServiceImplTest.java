@@ -2,6 +2,7 @@ package com.skedgo.android.tripkit;
 
 import com.skedgo.android.common.model.Location;
 import com.skedgo.android.common.model.Query;
+import com.skedgo.android.common.model.Region;
 import com.skedgo.android.common.model.TimeTag;
 import com.skedgo.android.tripkit.routing.ExtraQueryMapProvider;
 
@@ -19,6 +20,7 @@ import java.util.Map;
 
 import rx.Observable;
 import rx.functions.Func1;
+import rx.functions.Func2;
 import skedgo.tripkit.a2brouting.FailoverA2bRoutingApi;
 
 import static org.assertj.core.api.Java6Assertions.assertThat;
@@ -26,7 +28,7 @@ import static org.mockito.Matchers.eq;
 import static org.mockito.Mockito.when;
 
 public class RouteServiceImplTest extends TripKitAndroidRobolectricTest {
-  @Mock Func1<Query, Observable<List<Query>>> queryGenerator;
+  @Mock Func2<Query, ModeFilter, Observable<List<Query>>> queryGenerator;
   @Mock ExcludedTransitModesAdapter excludedTransitModesAdapter;
   @Mock Co2Preferences co2Preferences;
   @Mock TripPreferences tripPreferences;

@@ -102,8 +102,8 @@ public class BookingForm extends FormField {
     return "authForm".equals(getType());
   }
 
-  public boolean isPayIQAuthForm() {
-    return "payiq".equals(value);
+  public boolean isSpecificAuthForm() {
+    return "payiq".equals(value) || "myki".equals(value);
   }
 
   public boolean isUberAuthForm() {

@@ -10,7 +10,7 @@ android {
   defaultConfig {
     applicationId "skedgo.tripkit.samples"
     minSdkVersion 15
-    targetSdkVersion 25
+    targetSdkVersion 27
     versionCode 1
     versionName "1.0"
     testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
@@ -41,10 +41,10 @@ dependencies {
   implementation libs.jodaTimeAndroid
   implementation libs.rxjava
   implementation libs.rxAndroid
-  kapt "com.android.databinding:compiler:$androidPluginVersion"
+  kapt libs.dataBindingCompiler
 
-  implementation 'com.github.skedgo:RxLifecycleComponents:v1.3'
-  implementation 'me.tatarka.bindingcollectionadapter2:bindingcollectionadapter-recyclerview:2.1.0'
+  implementation libs.rxLifecycleComponents
+  implementation libs.bindingCollectionAdapterRecyclerView
 
   implementation project(":AccountData")
   implementation project(":TripKitAndroid")

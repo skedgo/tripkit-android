@@ -23,7 +23,7 @@ android {
 
   defaultConfig {
     minSdkVersion 15
-    targetSdkVersion 25
+    targetSdkVersion 27
     versionCode 1
     versionName '1.0'
     testInstrumentationRunner 'android.support.test.runner.AndroidJUnitRunner'
@@ -38,13 +38,13 @@ android {
 }
 
 dependencies {
-  implementation project(':TripKitAndroid')
   implementation project(':CommonCoreLegacy')
   implementation 'com.github.skedgo:sqlite-utils:v1.0'
-  implementation 'com.android.support:appcompat-v7:25.3.0'
+  implementation 'com.android.support:appcompat-v7:27.1.1'
   implementation libs.gson
   implementation libs.supportAnnotations
-
+  implementation project(":TripKitDomain")
+  implementation libs.kotlin
   testImplementation libs.junit
   testImplementation libs.assertjCore
   testImplementation libs.mockitoCore
@@ -60,7 +60,7 @@ dependencies {
 uploadArchives {
   repositories {
     mavenDeployer {
-      repository(url: "file://${tripKitAndroidMaven}")
+      repository(url: "file://${localMaven}")
     }
   }
 }

@@ -7,14 +7,15 @@ apply plugin: "kotlin-kapt"
 
 // For https://github.com/dcendents/android-maven-gradle-plugin.
 group = "com.skedgo.tripkit"
+version = "1.2"
 
 android {
   compileSdkVersion versions.compileSdkVersion
   buildToolsVersion versions.buildToolsVersion
 
   defaultConfig {
-    minSdkVersion 10
-    targetSdkVersion 25
+    minSdkVersion versions.proMinSdkVersion
+    targetSdkVersion versions.targetSdkVersion
   }
 
   lintOptions {
@@ -32,13 +33,23 @@ dependencies {
 
   implementation project(":TripKitDomain")
   implementation project(":TripKitDomainLegacy")
+  api project(":route-persistence")
   implementation libs.dagger
   implementation libs.rxjava
+  implementation libs.rxrelay1
   implementation libs.jodaTimeAndroid
   kapt libs.daggerCompiler
-  annotationProcessor libs.value
+  kapt libs.value
   compileOnly libs.valueAnnotations
   compileOnly libs.builderAnnotations
-  compileOnly libs.gsonAnnotations
+  implementation libs.immutablesGson
   implementation libs.kotlin
 }
+uploadArchives {
+  repositories {
+    mavenDeployer {
+      repository(url: "file://${localMaven}")
+    }
+  }
+}
+
