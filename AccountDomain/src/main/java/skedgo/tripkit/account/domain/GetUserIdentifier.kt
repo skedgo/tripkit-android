@@ -1,7 +1,6 @@
 package skedgo.tripkit.account.domain
 
 import rx.Observable
-import rx.Single
 import javax.inject.Inject
 
 /**
@@ -9,7 +8,7 @@ import javax.inject.Inject
  * The emitted identifier can be used later for [SilentlyLogIn].
  */
 open class GetUserIdentifier @Inject constructor(
-    private val userRepository: UserRepository
+    private val userKeyRepository: UserKeyRepository
 ) {
-  open fun execute(): Observable<String> = userRepository.getUserKey().toObservable()
+  open fun execute(): Observable<String> = userKeyRepository.getUserKey().toObservable()
 }

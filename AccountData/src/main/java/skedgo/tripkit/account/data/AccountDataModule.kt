@@ -10,13 +10,15 @@ import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
 import rx.schedulers.Schedulers
 import skedgo.tripkit.account.domain.GenerateUserKey
-import skedgo.tripkit.account.domain.UserRepository
+import skedgo.tripkit.account.domain.UserKeyRepository
 import skedgo.tripkit.account.domain.UserTokenRepository
 import skedgo.tripkit.configuration.Server
 import javax.inject.Named
 
-@Module class AccountDataModule {
-  @Provides fun userTokenRepository(
+@Module
+class AccountDataModule {
+  @Provides
+  fun userTokenRepository(
       httpClient: OkHttpClient,
       context: Context
   ): UserTokenRepository {
@@ -31,6 +33,7 @@ import javax.inject.Named
         .client(httpClient)
         .build()
         .create(SilentLoginApi::class.java)
+
     val accountApi = Retrofit.Builder()
         .baseUrl(Server.ApiTripGo.value)
         .addCallAdapterFactory(RxJavaCallAdapterFactory.createWithScheduler(Schedulers.io()))
@@ -41,9 +44,8 @@ import javax.inject.Named
     return UserTokenRepositoryImpl(preferences, silentLoginApi, accountApi)
   }
 
-  @Provides fun userRepository(
-      generateUserKey: GenerateUserKey,
-      @Named(AccountDataPrefsModule.AccountDataPrefs) prefs: SharedPreferences
-  ): UserRepository
-      = UserKeyRepositoryImpl(prefs, generateUserKey)
+  @Provides
+  fun userRepository(generateUserKey: GenerateUserKey,
+                     @Named(AccountDataPrefsModule.AccountDataPrefs) prefs: SharedPreferences
+  ): UserKeyRepository = UserKeyRepositoryImpl(prefs, generateUserKey)
 }

@@ -4,12 +4,12 @@ import android.content.SharedPreferences
 import rx.Completable
 import rx.Single
 import skedgo.tripkit.account.domain.GenerateUserKey
-import skedgo.tripkit.account.domain.UserRepository
+import skedgo.tripkit.account.domain.UserKeyRepository
 
 internal class UserKeyRepositoryImpl(
     private val prefs: SharedPreferences,
     private val generateUserKey: GenerateUserKey
-) : UserRepository {
+) : UserKeyRepository {
 
   private val userKeyKey = "userKey"
 
