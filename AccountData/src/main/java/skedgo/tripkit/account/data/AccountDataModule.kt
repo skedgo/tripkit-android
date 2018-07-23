@@ -17,15 +17,15 @@ import javax.inject.Named
 
 @Module
 class AccountDataModule {
+
+  companion object {
+    const val UserTokenPreferences = "UserTokenPreferences"
+  }
+
   @Provides
   fun userTokenRepository(
-      httpClient: OkHttpClient,
-      context: Context
+      httpClient: OkHttpClient, @Named(UserTokenPreferences) prefs: SharedPreferences
   ): UserTokenRepository {
-    val preferences = context.getSharedPreferences(
-        "UserTokenPreferences",
-        Context.MODE_PRIVATE
-    )
     val silentLoginApi = Retrofit.Builder()
         .baseUrl(Server.ApiTripGo.value)
         .addCallAdapterFactory(RxJavaCallAdapterFactory.createWithScheduler(Schedulers.io()))
@@ -41,11 +41,17 @@ class AccountDataModule {
         .client(httpClient)
         .build()
         .create(AccountApi::class.java)
-    return UserTokenRepositoryImpl(preferences, silentLoginApi, accountApi)
+    return UserTokenRepositoryImpl(prefs, silentLoginApi, accountApi)
   }
 
   @Provides
   fun userRepository(generateUserKey: GenerateUserKey,
-                     @Named(AccountDataPrefsModule.AccountDataPrefs) prefs: SharedPreferences
-  ): UserKeyRepository = UserKeyRepositoryImpl(prefs, generateUserKey)
+                     @Named(UserTokenPreferences) prefs: SharedPreferences): UserKeyRepository =
+      UserKeyRepositoryImpl(prefs, generateUserKey)
+
+
+  @Provides
+  @Named(UserTokenPreferences)
+  fun userTokenPreferences(context: Context): SharedPreferences =
+      context.getSharedPreferences(UserTokenPreferences, Context.MODE_PRIVATE)
 }

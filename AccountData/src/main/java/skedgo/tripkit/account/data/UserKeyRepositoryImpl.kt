@@ -11,14 +11,14 @@ internal class UserKeyRepositoryImpl(
     private val generateUserKey: GenerateUserKey
 ) : UserKeyRepository {
 
-  private val userKeyKey = "userKey"
+  private val KEY_USER_UUID = "userUUID"
 
   override fun getUserKey(): Single<String> =
       Single.fromCallable {
-        prefs.getString(userKeyKey, "")
+        prefs.getString(KEY_USER_UUID, null)
       }.flatMap { key ->
         when {
-          key.isEmpty() ->
+          key.isNullOrEmpty() ->
             generateUserKey.execute()
                 .flatMap { setUserKey(it).andThen(Single.just(it)) }
           else -> Single.just(key)
@@ -28,7 +28,7 @@ internal class UserKeyRepositoryImpl(
   private fun setUserKey(userKey: String): Completable =
       Completable.fromCallable {
         prefs.edit()
-            .putString(userKey, userKey)
+            .putString(KEY_USER_UUID, userKey)
             .apply()
       }
 }
