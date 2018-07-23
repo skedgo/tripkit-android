@@ -32,7 +32,7 @@ class UserKeyRepositoryImplTest {
   fun `should return saved key`() {
     // Arrange.
     prefs.edit()
-        .putString("userKey", "key")
+        .putString("userUUID", "key")
         .apply()
 
     // Act.
