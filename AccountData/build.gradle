@@ -25,6 +25,7 @@ android {
 dependencies {
   testImplementation libs.junit
   testImplementation libs.assertjCore
+  testImplementation libs.kluent
   testImplementation libs.mockitoCore
   testImplementation libs.robolectric
   testImplementation libs.mockWebServer
