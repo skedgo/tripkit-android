@@ -5,10 +5,10 @@ import rx.Completable
 import rx.Single
 import skedgo.tripkit.account.domain.GenerateUserKey
 import skedgo.tripkit.account.domain.UserKeyRepository
+import java.util.*
 
 internal class UserKeyRepositoryImpl(
-    private val prefs: SharedPreferences,
-    private val generateUserKey: GenerateUserKey
+    private val prefs: SharedPreferences
 ) : UserKeyRepository {
 
   private val KEY_USER_UUID = "userUUID"
@@ -19,8 +19,9 @@ internal class UserKeyRepositoryImpl(
       }.flatMap { key ->
         when {
           key.isNullOrEmpty() ->
-            generateUserKey.execute()
-                .flatMap { setUserKey(it).andThen(Single.just(it)) }
+            UUID.randomUUID().toString().let {
+              setUserKey(it).andThen(Single.just(it))
+            }
           else -> Single.just(key)
         }
       }
