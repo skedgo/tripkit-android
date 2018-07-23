@@ -1,5 +1,6 @@
 package skedgo.tripkit.account.data
 
+import android.app.backup.BackupManager
 import android.content.Context
 import android.content.SharedPreferences
 import dagger.Module
@@ -44,8 +45,8 @@ class AccountDataModule {
   }
 
   @Provides
-  fun userRepository(@Named(UserTokenPreferences) prefs: SharedPreferences): UserKeyRepository =
-      UserKeyRepositoryImpl(prefs)
+  fun userRepository(@Named(UserTokenPreferences) prefs: SharedPreferences, context: Context): UserKeyRepository =
+      UserKeyRepositoryImpl(prefs, BackupManager(context))
 
 
   @Provides
