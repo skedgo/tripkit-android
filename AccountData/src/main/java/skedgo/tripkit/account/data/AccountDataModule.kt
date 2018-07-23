@@ -9,7 +9,6 @@ import retrofit2.Retrofit
 import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
 import rx.schedulers.Schedulers
-import skedgo.tripkit.account.domain.GenerateUserKey
 import skedgo.tripkit.account.domain.UserKeyRepository
 import skedgo.tripkit.account.domain.UserTokenRepository
 import skedgo.tripkit.configuration.Server
@@ -45,9 +44,8 @@ class AccountDataModule {
   }
 
   @Provides
-  fun userRepository(generateUserKey: GenerateUserKey,
-                     @Named(UserTokenPreferences) prefs: SharedPreferences): UserKeyRepository =
-      UserKeyRepositoryImpl(prefs, generateUserKey)
+  fun userRepository(@Named(UserTokenPreferences) prefs: SharedPreferences): UserKeyRepository =
+      UserKeyRepositoryImpl(prefs)
 
 
   @Provides
