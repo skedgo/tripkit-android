@@ -3,7 +3,6 @@ package skedgo.tripkit.account.data
 import android.content.SharedPreferences
 import rx.Completable
 import rx.Single
-import skedgo.tripkit.account.domain.GenerateUserKey
 import skedgo.tripkit.account.domain.UserKeyRepository
 import java.util.*
 
