@@ -1,8 +1,11 @@
 package skedgo.tripkit.account.data
 
+import android.app.backup.BackupManager
 import android.content.Context
 import android.content.SharedPreferences
+import com.nhaarman.mockito_kotlin.verify
 import org.amshove.kluent.`should equal to`
+import org.amshove.kluent.mock
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.robolectric.RobolectricTestRunner
@@ -13,11 +16,12 @@ import java.util.*
 @RunWith(RobolectricTestRunner::class)
 @Config(constants = BuildConfig::class)
 class UserKeyRepositoryImplTest {
+  private val backupManager: BackupManager = mock()
   private val prefs: SharedPreferences by lazy {
     RuntimeEnvironment.application.getSharedPreferences("", Context.MODE_PRIVATE)
   }
   private val userKeyRepository: UserKeyRepositoryImpl by lazy {
-    UserKeyRepositoryImpl(prefs)
+    UserKeyRepositoryImpl(prefs, backupManager)
   }
 
   @Test
@@ -46,5 +50,6 @@ class UserKeyRepositoryImplTest {
 
     // Assert.
     actualUserIdentifier.let { UUID.fromString(it) }
+    verify(backupManager).dataChanged()
   }
 }
