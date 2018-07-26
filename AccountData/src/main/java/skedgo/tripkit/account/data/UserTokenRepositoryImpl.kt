@@ -1,5 +1,6 @@
 package skedgo.tripkit.account.data
 
+import android.app.backup.BackupManager
 import android.content.SharedPreferences
 import rx.Emitter
 import rx.Observable
@@ -12,10 +13,16 @@ import skedgo.tripkit.account.domain.UserTokenRepository
 internal class UserTokenRepositoryImpl constructor(
     private val preferences: SharedPreferences,
     private val silentLoginApi: SilentLoginApi,
-    private val accountApi: AccountApi
+    private val accountApi: AccountApi,
+    private val backupManager: BackupManager
 ) : UserTokenRepository {
   companion object {
     const val KEY_USER_TOKEN = "userToken"
+  }
+
+  init {
+    onUserTokenChanged()
+        .subscribe { backupManager.dataChanged() }
   }
 
   override fun clearUserTokenByLoggingOut(): Observable<Boolean> =

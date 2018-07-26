@@ -14,6 +14,7 @@ import skedgo.tripkit.account.domain.UserKeyRepository
 import skedgo.tripkit.account.domain.UserTokenRepository
 import skedgo.tripkit.configuration.Server
 import javax.inject.Named
+import javax.inject.Singleton
 
 @Module
 class AccountDataModule {
@@ -24,7 +25,8 @@ class AccountDataModule {
 
   @Provides
   fun userTokenRepository(
-      httpClient: OkHttpClient, @Named(UserTokenPreferences) prefs: SharedPreferences
+      httpClient: OkHttpClient, @Named(UserTokenPreferences) prefs: SharedPreferences,
+      backupManager: BackupManager
   ): UserTokenRepository {
     val silentLoginApi = Retrofit.Builder()
         .baseUrl(Server.ApiTripGo.value)
@@ -41,16 +43,20 @@ class AccountDataModule {
         .client(httpClient)
         .build()
         .create(AccountApi::class.java)
-    return UserTokenRepositoryImpl(prefs, silentLoginApi, accountApi)
+    return UserTokenRepositoryImpl(prefs, silentLoginApi, accountApi, backupManager)
   }
 
   @Provides
-  fun userRepository(@Named(UserTokenPreferences) prefs: SharedPreferences, context: Context): UserKeyRepository =
-      UserKeyRepositoryImpl(prefs, BackupManager(context))
+  fun userRepository(@Named(UserTokenPreferences) prefs: SharedPreferences, backupManager: BackupManager): UserKeyRepository =
+      UserKeyRepositoryImpl(prefs, backupManager)
 
 
   @Provides
   @Named(UserTokenPreferences)
   fun userTokenPreferences(context: Context): SharedPreferences =
       context.getSharedPreferences(UserTokenPreferences, Context.MODE_PRIVATE)
+
+  @Provides
+  @Singleton
+  fun backupManager(context: Context): BackupManager = BackupManager(context)
 }
