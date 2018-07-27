@@ -45,7 +45,7 @@ public class RealTimeVehicle implements Parcelable {
   @SerializedName("label") private String mLabel;
   @SerializedName("lastUpdate") private long mLastUpdateTime;
   @SerializedName("icon") @Nullable private String icon;
-  @Nullable private String occupancy;
+  @SerializedName("occupancy") @Nullable private String occupancy;
 
   public long getId() {
     return mId;
