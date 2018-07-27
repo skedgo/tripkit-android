@@ -36,6 +36,9 @@ android {
     abortOnError false
   }
 }
+kapt {
+  correctErrorTypes = true
+}
 
 dependencies {
   androidTestImplementation libs.assertjCore
