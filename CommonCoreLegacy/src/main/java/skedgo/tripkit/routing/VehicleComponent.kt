@@ -8,10 +8,23 @@ import org.immutables.value.Value
 @Gson.TypeAdapters()
 @Value.Style(passAnnotations = [JsonAdapter::class])
 @JsonAdapter(value = GsonAdaptersVehicleComponent::class)
-interface VehicleComponent {
-  fun occupancy(): Occupancy
-  fun wifi(): Boolean
-  fun airConditioned(): Boolean
-  fun wheelchairAccessible(): Boolean
-  fun model(): String
+abstract class VehicleComponent {
+  abstract fun occupancy(): Occupancy
+
+  @Value.Default
+  open fun wifi(): Boolean {
+    return false
+  }
+
+  @Value.Default
+  open fun airConditioned(): Boolean {
+    return false
+  }
+
+  @Value.Default
+  open fun wheelchairAccessible(): Boolean {
+    return false
+  }
+
+  abstract fun model(): String?
 }

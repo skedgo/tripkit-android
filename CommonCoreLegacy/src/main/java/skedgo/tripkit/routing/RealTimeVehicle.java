@@ -47,7 +47,7 @@ public class RealTimeVehicle implements Parcelable {
   @SerializedName("lastUpdate") private long mLastUpdateTime;
   @SerializedName("icon") @Nullable private String icon;
   @SerializedName("occupancy") @Nullable private String occupancy;
-  @SerializedName("components") @Nullable private List<VehicleComponent> components;
+  @SerializedName("components") @Nullable private List<List<VehicleComponent>> components;
 
   public long getId() {
     return mId;
@@ -162,19 +162,19 @@ public class RealTimeVehicle implements Parcelable {
     dest.writeString(occupancy);
   }
 
-  @Nullable public Occupancy getOccupancy() {
-    return OccupancyKt.toOccupancy(occupancy);
-  }
+//  @Nullable public Occupancy getOccupancy() {
+//    return OccupancyKt.toOccupancy(occupancy);
+//  }
 
   public void setOccupancy(@Nullable String occupancy) {
     this.occupancy = occupancy;
   }
 
-  @Nullable public List<VehicleComponent> getComponents() {
+  @Nullable public List<List<VehicleComponent>> getComponents() {
     return components;
   }
 
-  public void setComponents(@Nullable List<VehicleComponent> components) {
+  public void setComponents(@Nullable List<List<VehicleComponent>> components) {
     this.components = components;
   }
 
