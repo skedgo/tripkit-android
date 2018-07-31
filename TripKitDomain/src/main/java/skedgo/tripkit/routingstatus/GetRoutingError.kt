@@ -4,7 +4,7 @@ import rx.Observable
 import javax.inject.Inject
 import com.gojuno.koptional.*
 
-open class HasRoutingError @Inject internal constructor(
+open class GetRoutingError @Inject internal constructor(
     private val routingStatusRepository: RoutingStatusRepository
 ) {
   open fun execute(routingRequestId: Observable<String>): Observable<Optional<Status.Error>>

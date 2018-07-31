@@ -1,30 +1,32 @@
 package skedgo.tripkit.routingstatus
 
+import com.gojuno.koptional.Some
 import com.nhaarman.mockito_kotlin.any
 import com.nhaarman.mockito_kotlin.mock
 import com.nhaarman.mockito_kotlin.whenever
 import org.junit.Test
 import rx.Observable
 
-class HasRoutingErrorTest {
+class GetRoutingErrorTest {
   private val getRoutingStatus: RoutingStatusRepository = mock()
-  private val hasRoutingError: HasRoutingError by lazy {
-    HasRoutingError(getRoutingStatus)
+  private val getRoutingError: GetRoutingError by lazy {
+    GetRoutingError(getRoutingStatus)
   }
 
   @Test
   fun `status should be error`() {
     // Arrange.
+    val status = Status.Error("error")
     whenever(getRoutingStatus.getRoutingStatus(any())).thenReturn(Observable.just(
         RoutingStatus(
             routingRequestId = "123",
-            status = Status.Error()
+            status = status
         ))
     )
 
     // Act & assert.
-    hasRoutingError.execute(Observable.just("123"))
+    getRoutingError.execute(Observable.just("123"))
         .test()
-        .assertValue(true)
+        .assertValue(Some(status))
   }
 }
