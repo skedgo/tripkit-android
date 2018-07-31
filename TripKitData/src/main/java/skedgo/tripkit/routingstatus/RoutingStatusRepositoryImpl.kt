@@ -18,16 +18,17 @@ class RoutingStatusRepositoryImpl @Inject constructor(
   override fun getRoutingStatus(requestId: String): Observable<RoutingStatus> =
       routingStatusStore
           .getLastStatus(requestId)
-          .map { RoutingStatus(requestId, it.toStatus()) }
+          .map { RoutingStatus(requestId, it.first.toStatus(it.second)) }
           .toObservable()
           .repeatWhen {
             routingStatusUpdates.asObservable().filter { it == requestId }
           }
 
-  override fun putRoutingStatus(routingStatus: RoutingStatus): Completable =
-      routingStatusStore
-          .updateStatus(routingStatus.routingRequestId, routingStatus.status.toDto())
-          .andThen(Completable.fromAction {
-            routingStatusUpdates.call(routingStatus.routingRequestId)
-          })
+  override fun putRoutingStatus(routingStatus: RoutingStatus): Completable {
+    return routingStatusStore
+        .updateStatus(routingStatus.routingRequestId, routingStatus.status.toDto(), routingStatus.status.message)
+        .andThen(Completable.fromAction {
+          routingStatusUpdates.call(routingStatus.routingRequestId)
+        })
+  }
 }

@@ -8,28 +8,35 @@ import rx.Single
 import rx.schedulers.Schedulers.io
 
 class RoutingStatusStore constructor(private val databaseHelper: SQLiteOpenHelper) {
-  fun getLastStatus(requestId: String): Single<String> {
+  fun getLastStatus(requestId: String): Single<Pair<String, String>> {
     return Single
         .fromCallable {
           val cursor = databaseHelper.readableDatabase.query(RoutingStatusContract.ROUTING_STATUS,
-              arrayOf(RoutingStatusContract.STATUS),
+              arrayOf(RoutingStatusContract.STATUS, RoutingStatusContract.STATUS_MESSAGE),
               "${RoutingStatusContract.REQUEST_ID} = ?",
               arrayOf(requestId),
               null, null, null
           )
-          cursor.moveToFirst()
-          val status = cursor.getString(cursor.getColumnIndex(RoutingStatusContract.STATUS))
-          cursor.close()
-          status
+          try {
+            cursor.moveToFirst()
+            val status = cursor.getString(cursor.getColumnIndex(RoutingStatusContract.STATUS))
+            val message = cursor.getString(cursor.getColumnIndex(RoutingStatusContract.STATUS_MESSAGE))
+            Pair(status, message)
+          } catch (e: Exception) {
+            error(e)
+          } finally {
+            cursor.close()
+          }
         }
         .subscribeOn(io())
   }
 
-  fun updateStatus(requestId: String, status: String): Completable {
+  fun updateStatus(requestId: String, status: String, message: String?): Completable {
     return Completable
         .fromAction {
           val contentValues = ContentValues()
           contentValues.put(RoutingStatusContract.STATUS, status)
+          contentValues.put(RoutingStatusContract.STATUS_MESSAGE, message ?: "")
           contentValues.put(RoutingStatusContract.REQUEST_ID, requestId)
           databaseHelper.writableDatabase.insertWithOnConflict(
               RoutingStatusContract.ROUTING_STATUS,
