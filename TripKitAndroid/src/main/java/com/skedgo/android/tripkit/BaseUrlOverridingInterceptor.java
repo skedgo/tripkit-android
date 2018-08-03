@@ -20,12 +20,13 @@ final class BaseUrlOverridingInterceptor implements Interceptor {
   }
 
   @Override public Response intercept(Chain chain) throws IOException {
+
     final String newBaseUrl = baseUrlAdapter.call();
     final Request request = chain.request();
     final HttpUrl requestUrl = request.url();
     final List<String> pathSegments = requestUrl.pathSegments();
     boolean isFromSkedGo = pathSegments.get(0).equals("satapp") || requestUrl.host().contains("skedgo.com") || requestUrl.host().contains("tripgo.com");
-    if (!TextUtils.isEmpty(newBaseUrl) && isFromSkedGo) {
+    if (!TextUtils.isEmpty(newBaseUrl) && isFromSkedGo && !requestUrl.host().contains("beta-payments")) {
       final HttpUrl tempUrl = requestUrl.newBuilder().removePathSegment(0).build();
       final String query = tempUrl.query();
       final String encodedPath = TextUtils.join("/", tempUrl.encodedPathSegments());
