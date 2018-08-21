@@ -1,13 +1,16 @@
 package skedgo.tripkit.account.data
 
+import android.app.backup.BackupManager
 import android.content.SharedPreferences
 import rx.Completable
 import rx.Single
 import skedgo.tripkit.account.domain.UserKeyRepository
 import java.util.*
 
+
 internal class UserKeyRepositoryImpl(
-    private val prefs: SharedPreferences
+    private val prefs: SharedPreferences,
+    private val backupManager: BackupManager
 ) : UserKeyRepository {
 
   private val KEY_USER_UUID = "userUUID"
@@ -31,4 +34,7 @@ internal class UserKeyRepositoryImpl(
             .putString(KEY_USER_UUID, userKey)
             .apply()
       }
+          .andThen(Completable.fromCallable {
+            backupManager.dataChanged()
+          })
 }
