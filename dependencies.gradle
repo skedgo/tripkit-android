@@ -11,8 +11,6 @@ versions.proMinSdkVersion = 15
 versions.compileSdkVersion = 27
 versions.buildToolsVersion = "27.0.3"
 versions.targetSdkVersion = 27
-versions.playServicesVersion = "11.4.2"
-versions.firebaseAppIndexingVersion = "11.4.2"
 // See change-log at https://github.com/JetBrains/kotlin/blob/master/ChangeLog.md.
 versions.kotlinVersion = "1.2.30"
 versions.supportLibraryVersion = "27.1.1"
@@ -35,12 +33,11 @@ libs.jodaTimeTzdb = "joda-time:joda-time:2.9.9"
 libs.jodaTimeAndroid = "net.danlew:android.joda:2.9.9"
 libs.androidJob = "com.evernote:android-job:1.2.6"
 libs.androidReactiveLocation = "com.github.skedgo:Android-ReactiveLocation:1de14cd99af0253d82184c04d91ebe3447914a54"
-libs.playServicesMaps = "com.google.android.gms:play-services-maps:$versions.playServicesVersion"
-libs.playServicesLocation = "com.google.android.gms:play-services-location:$versions.playServicesVersion"
-libs.playServicesPlaces = "com.google.android.gms:play-services-places:$versions.playServicesVersion"
-libs.playServicesAnalytics = "com.google.android.gms:play-services-analytics:$versions.playServicesVersion"
-libs.playServicesGcm = "com.google.android.gms:play-services-gcm:$versions.playServicesVersion"
-libs.firebaseAppIndexing = "com.google.firebase:firebase-appindexing:$versions.firebaseAppIndexingVersion"
+libs.playServicesMaps = "com.google.android.gms:play-services-maps:15.0.1"
+libs.playServicesLocation = "com.google.android.gms:play-services-location:15.0.1"
+libs.playServicesPlaces = "com.google.android.gms:play-services-places:15.0.1"
+libs.playServicesAnalytics = "com.google.android.gms:play-services-analytics:16.0.1"
+libs.firebaseAppIndexing = "com.google.firebase:firebase-appindexing:16.0.1"
 libs.androidMapsUtils = "com.github.skedgo:android-maps-utils:241fc89"
 
 // Support Library package
