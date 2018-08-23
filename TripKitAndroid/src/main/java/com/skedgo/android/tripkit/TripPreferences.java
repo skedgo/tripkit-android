@@ -23,6 +23,9 @@ public interface TripPreferences {
   boolean isWheelchairPreferred();
   void setWheelchairPreferred(boolean isWheelchairPreferred);
 
+  boolean isWheelchairPreferredOnBoarding();
+  void setWheelchairPreferredOnBoarding(boolean isWheelchairPreferred);
+
   /**
    * @return An {@link Observable} which emits value of {@link #isWheelchairPreferred()}
    * when it has changed.
