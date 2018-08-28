@@ -4,13 +4,13 @@ import com.skedgo.android.common.model.Region
 import rx.Observable
 import javax.inject.Inject
 
-class RegionInfoRepository @Inject constructor(
+open class RegionInfoRepository @Inject constructor(
     private val regionInfoService: RegionInfoService
 ) {
 
   private val regionInfoMap = HashMap<String, RegionInfo>()
 
-  fun getRegionInfoByRegion(region: Region): Observable<RegionInfo> =
+  open fun getRegionInfoByRegion(region: Region): Observable<RegionInfo> =
       if (regionInfoMap.containsKey(region.name))
         Observable.just(regionInfoMap[region.name])
   else

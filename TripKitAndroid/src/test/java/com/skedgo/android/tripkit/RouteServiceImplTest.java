@@ -1,16 +1,19 @@
 package com.skedgo.android.tripkit;
 
+import android.util.ArrayMap;
+
 import com.skedgo.android.common.model.Location;
 import com.skedgo.android.common.model.Query;
-import com.skedgo.android.common.model.Region;
 import com.skedgo.android.common.model.TimeTag;
 import com.skedgo.android.tripkit.routing.ExtraQueryMapProvider;
+import com.skedgo.android.tripkit.tsp.RegionInfo;
 import com.skedgo.android.tripkit.tsp.RegionInfoRepository;
 
 import org.assertj.core.data.MapEntry;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mock;
+import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 
 import java.util.Arrays;
@@ -20,7 +23,6 @@ import java.util.List;
 import java.util.Map;
 
 import rx.Observable;
-import rx.functions.Func1;
 import rx.functions.Func2;
 import skedgo.tripkit.a2brouting.FailoverA2bRoutingApi;
 
@@ -121,6 +123,36 @@ public class RouteServiceImplTest extends TripKitAndroidRobolectricTest {
   @Test public void excludeWheelchairInfo() {
     when(tripPreferences.isWheelchairPreferred()).thenReturn(false);
     assertThat(routeService.getParamsByPreferences()).doesNotContainKey("wheelchair");
+  }
+
+  @Test public void excludeWheelchairWhenRegionDoesNotSupportsIt() {
+    // Arrange.
+    RegionInfo regionInfo = Mockito.mock(RegionInfo.class);
+    when(regionInfo.transitWheelchairAccessibility()).thenReturn(false);
+
+    // Act.
+    final Map<String, Object> map = new ArrayMap();
+    map.put("wheelchair", true);
+
+    routeService.fixWheelChair(map, regionInfo);
+
+    // Assert.
+    assertThat(map).doesNotContainKey("wheelchair");
+  }
+
+  @Test public void shoudNotExcludeWheelchairWhenRegionDoesSupportsIt() {
+    // Arrange.
+    RegionInfo regionInfo = Mockito.mock(RegionInfo.class);
+    when(regionInfo.transitWheelchairAccessibility()).thenReturn(true);
+
+    // Act.
+    final Map<String, Object> map = new ArrayMap();
+    map.put("wheelchair", true);
+
+    routeService.fixWheelChair(map, regionInfo);
+
+    // Assert.
+    assertThat(map).containsKey("wheelchair");
   }
 
   @Test public void shouldIncludeOptionDepartAfter() {
