@@ -4,7 +4,7 @@ import com.skedgo.android.common.model.Region
 import rx.Observable
 import javax.inject.Inject
 
-internal class RegionInfoRepository @Inject constructor(
+class RegionInfoRepository @Inject constructor(
     private val regionInfoService: RegionInfoService
 ) {
 

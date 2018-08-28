@@ -5,6 +5,7 @@ import com.skedgo.android.common.model.Query;
 import com.skedgo.android.common.model.Region;
 import com.skedgo.android.common.model.TimeTag;
 import com.skedgo.android.tripkit.routing.ExtraQueryMapProvider;
+import com.skedgo.android.tripkit.tsp.RegionInfoRepository;
 
 import org.assertj.core.data.MapEntry;
 import org.junit.Before;
@@ -34,6 +35,7 @@ public class RouteServiceImplTest extends TripKitAndroidRobolectricTest {
   @Mock TripPreferences tripPreferences;
   @Mock ExtraQueryMapProvider extraQueryMapProvider;
   @Mock FailoverA2bRoutingApi routingApi;
+  @Mock RegionInfoRepository regionInfoRepository;
   private RouteServiceImpl routeService;
 
   @Before public void before() {
@@ -44,7 +46,8 @@ public class RouteServiceImplTest extends TripKitAndroidRobolectricTest {
         co2Preferences,
         tripPreferences,
         extraQueryMapProvider,
-        routingApi
+        routingApi,
+        regionInfoRepository
     );
     when(extraQueryMapProvider.call())
         .thenReturn(Collections.<String, Object>emptyMap());

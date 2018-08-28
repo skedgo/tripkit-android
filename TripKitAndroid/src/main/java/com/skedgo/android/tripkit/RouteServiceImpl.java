@@ -64,8 +64,9 @@ final class RouteServiceImpl implements RouteService {
   @NonNull @Override
   public Observable<List<TripGroup>> routeAsync(@NonNull Query query, @NonNull ModeFilter modeFilter) {
     return flatSubQueries(query, modeFilter)
-        .flatMap(subQuery -> regionInfoRepository.getRegionInfoByRegion(subQuery.getRegion())
-            .map(useWheelchair -> new Pair<>(subQuery, useWheelchair)))
+        .concatMap(subQuery ->
+                       regionInfoRepository.getRegionInfoByRegion(subQuery.getRegion())
+                           .map(regionInfo -> new Pair<>(subQuery, regionInfo)))
         .flatMap(pair -> {
           Query subQuery = pair.getFirst();
           final Region region = subQuery.getRegion();
@@ -76,9 +77,16 @@ final class RouteServiceImpl implements RouteService {
               excludedTransitModesAdapter,
               region.getName()
           );
-          final Map<String, Object> options = toOptions(pair);
+          final Map<String, Object> options = toOptions(subQuery);
+          fixWheelChair(options, pair.getSecond());
           return routingApi.fetchRoutesAsync(baseUrls, modes, excludedTransitModes, excludeStops, options);
         });
+  }
+
+  void fixWheelChair(Map<String, Object> options, RegionInfo regionInfo) {
+    if (options.containsKey("wheelchair") && !regionInfo.transitWheelchairAccessibility()) {
+      options.remove("wheelchair");
+    }
   }
 
   @NonNull List<String> getExcludedTransitModesAsNonNull(
@@ -93,13 +101,13 @@ final class RouteServiceImpl implements RouteService {
   }
 
   /* TODO: Consider making this public for Xerox team. */
-  @NonNull Map<String, Object> getParamsByPreferences(Boolean regionSupportsWheelchair) {
+  @NonNull Map<String, Object> getParamsByPreferences() {
     final ArrayMap<String, Object> map = new ArrayMap<>();
     if (tripPreferences != null) {
       if (tripPreferences.isConcessionPricingPreferred()) {
         map.put("conc", true);
       }
-      if (tripPreferences.isWheelchairPreferred() && regionSupportsWheelchair) {
+      if (tripPreferences.isWheelchairPreferred()) {
         map.put("wheelchair", true);
       }
     }
@@ -114,8 +122,7 @@ final class RouteServiceImpl implements RouteService {
     return map;
   }
 
-  @NonNull Map<String, Object> toOptions(@NonNull Pair<Query, RegionInfo> pair) {
-    Query query = pair.getFirst();
+  @NonNull Map<String, Object> toOptions(@NonNull Query query) {
     final String departureCoordinates = toCoordinatesText(query.getFromLocation());
     final String arrivalCoordinates = toCoordinatesText(query.getToLocation());
     final long arriveBefore = TimeUnit.MILLISECONDS.toSeconds(query.getArriveBy());
@@ -137,7 +144,7 @@ final class RouteServiceImpl implements RouteService {
     options.put("cs", Integer.toString(cyclingSpeed));
     options.put("includeStops", "1");
     options.put("wp", ToWeightingProfileString.INSTANCE.toWeightingProfileString(query));
-    options.putAll(getParamsByPreferences(pair.getSecond().transitWheelchairAccessibility()));
+    options.putAll(getParamsByPreferences());
     if (extraQueryMapProvider != null) {
       final Map<String, Object> extraQueryMap = extraQueryMapProvider.call();
       options.putAll(extraQueryMap);
