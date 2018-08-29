@@ -125,8 +125,6 @@ public class RouteServiceImplTest extends TripKitAndroidRobolectricTest {
 
   @Test public void excludeWheelchairWhenRegionDoesNotSupportsIt() {
     // Arrange.
-    RegionInfo regionInfo = Mockito.mock(RegionInfo.class);
-    when(regionInfo.transitWheelchairAccessibility()).thenReturn(false);
     when(tripPreferences.isWheelchairPreferred()).thenReturn(true);
 
     // Act.
@@ -138,7 +136,6 @@ public class RouteServiceImplTest extends TripKitAndroidRobolectricTest {
 
   @Test public void shoudNotExcludeWheelchairWhenRegionDoesSupportsIt() {
     // Arrange.
-    RegionInfo regionInfo = Mockito.mock(RegionInfo.class);
     when(regionInfo.transitWheelchairAccessibility()).thenReturn(true);
     when(tripPreferences.isWheelchairPreferred()).thenReturn(true);
 
