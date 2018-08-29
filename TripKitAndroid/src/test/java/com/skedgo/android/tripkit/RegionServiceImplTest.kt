@@ -5,10 +5,7 @@ import com.nhaarman.mockito_kotlin.whenever
 import com.skedgo.android.common.model.Location
 import com.skedgo.android.common.model.Region
 import com.skedgo.android.common.model.TransportMode
-import com.skedgo.android.tripkit.tsp.ImmutableRegionInfo
-import com.skedgo.android.tripkit.tsp.Paratransit
-import com.skedgo.android.tripkit.tsp.RegionInfo
-import com.skedgo.android.tripkit.tsp.RegionInfoService
+import com.skedgo.android.tripkit.tsp.*
 import dagger.internal.Factory
 import org.assertj.core.api.Java6Assertions.assertThat
 import org.junit.Test
@@ -22,14 +19,14 @@ class RegionServiceImplTest : TripKitAndroidRobolectricTest() {
   internal val regionCache: Cache<List<Region>> = mock()
   internal val modeCache: Cache<Map<String, TransportMode>> = mock()
   internal val regionsFetcher: RegionsFetcher = mock()
-  internal val regionInfoService: RegionInfoService = mock()
+  internal val regionInfoRepository: RegionInfoRepository = mock()
   internal val regionFinder: RegionFinder = mock()
   private val regionService: RegionService by lazy {
     RegionServiceImpl(
         regionCache,
         modeCache,
         regionsFetcher,
-        Factory { regionInfoService },
+        regionInfoRepository,
         regionFinder
     )
   }
@@ -164,14 +161,12 @@ class RegionServiceImplTest : TripKitAndroidRobolectricTest() {
     val regionInfo = ImmutableRegionInfo.builder()
         .paratransit(paratransit)
         .build()
-    whenever(regionInfoService.fetchRegionInfoAsync(
-        eq(listOf("https://lepton-us-ca-losangeles.tripgo.skedgo.com/satapp")),
-        eq("US_CA_LosAngeles")
-    )).thenReturn(Observable.just<RegionInfo>(regionInfo))
 
     val region = Region()
     region.setURLs(ArrayList(listOf("https://lepton-us-ca-losangeles.tripgo.skedgo.com/satapp")))
     region.setName("US_CA_LosAngeles")
+
+    whenever(regionInfoRepository.getRegionInfoByRegion(region)).thenReturn(Observable.just<RegionInfo>(regionInfo))
 
     val subscriber = TestSubscriber<Paratransit>()
     regionService.fetchParatransitByRegionAsync(region)
