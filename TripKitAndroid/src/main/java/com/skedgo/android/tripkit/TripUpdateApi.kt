@@ -9,8 +9,10 @@ import rx.Observable
 
 internal interface TripUpdateApi {
 
-  @GET fun fetchUpdateAsync(
+  @GET
+  fun fetchUpdateAsync(
       @Url url: String,
-      @Query("includeStops") includeStops: Boolean = true
+      @Query("includeStops") includeStops: Boolean = true,
+      @Query("v") v: Int = 12
   ): Observable<RoutingResponse>
 }

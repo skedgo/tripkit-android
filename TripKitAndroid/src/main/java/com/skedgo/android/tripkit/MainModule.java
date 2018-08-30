@@ -17,6 +17,7 @@ import com.skedgo.android.tripkit.bookingproviders.BookingResolverImpl;
 import com.skedgo.android.tripkit.tsp.GsonAdaptersRegionInfo;
 import com.skedgo.android.tripkit.tsp.GsonAdaptersRegionInfoBody;
 import com.skedgo.android.tripkit.tsp.GsonAdaptersRegionInfoResponse;
+import com.skedgo.android.tripkit.tsp.RegionInfoRepository;
 import com.skedgo.android.tripkit.tsp.RegionInfoService;
 
 import java.util.List;
@@ -83,7 +84,7 @@ public class MainModule {
   @Singleton @Provides RegionService getRegionService(
       RegionDatabaseHelper databaseHelper,
       RegionsApi regionsApi,
-      Provider<RegionInfoService> regionInfoServiceProvider) {
+      RegionInfoRepository regionInfoRepository) {
     final RegionsFetcher regionsFetcher = new RegionsFetcherImpl(
         regionsApi,
         databaseHelper
@@ -100,7 +101,7 @@ public class MainModule {
         regionCache,
         modeCache,
         regionsFetcher,
-        regionInfoServiceProvider,
+        regionInfoRepository,
         new RegionFinder()
     );
   }
@@ -108,7 +109,8 @@ public class MainModule {
   @Singleton @Provides RouteService routeService(
       FailoverA2bRoutingApi routingApi,
       RegionService regionService,
-      Configs configs
+      Configs configs,
+      RegionInfoRepository regionInfoRepository
   ) {
     Co2Preferences co2Preferences = null;
     final Func0<Co2Preferences> co2PreferencesFactory = configs.co2PreferencesFactory();
@@ -129,7 +131,8 @@ public class MainModule {
         co2Preferences,
         tripPreferences,
         configs.extraQueryMapProvider(),
-        routingApi
+        routingApi,
+        regionInfoRepository
     );
   }
 

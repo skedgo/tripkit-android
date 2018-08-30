@@ -5,6 +5,7 @@ import com.skedgo.android.common.model.Region
 import com.skedgo.android.common.model.TransportMode
 import com.skedgo.android.tripkit.tsp.Paratransit
 import com.skedgo.android.tripkit.tsp.RegionInfo
+import com.skedgo.android.tripkit.tsp.RegionInfoRepository
 import com.skedgo.android.tripkit.tsp.RegionInfoService
 import rx.Completable
 import rx.Observable
@@ -16,7 +17,7 @@ internal class RegionServiceImpl(
     private val regionCache: Cache<List<Region>>,
     private val modeCache: Cache<Map<String, TransportMode>>,
     private val regionsFetcher: RegionsFetcher,
-    private val regionInfoServiceProvider: Provider<RegionInfoService>,
+    private val regionInfoRepository: RegionInfoRepository,
     private val regionFinder: RegionFinder) : RegionService {
   override fun getRegionsAsync(): Observable<List<Region>> = regionCache.async
 
@@ -102,8 +103,7 @@ internal class RegionServiceImpl(
           .map { regionInfo -> regionInfo.paratransit() }
 
   override fun getRegionInfoByRegionAsync(region: Region): Observable<RegionInfo> =
-      regionInfoServiceProvider.get()
-          .fetchRegionInfoAsync(region.urLs, region.name)
+      regionInfoRepository.getRegionInfoByRegion(region)
 
   override fun getTransitModesByRegionAsync(region: Region): Observable<List<ModeInfo>> =
       getRegionInfoByRegionAsync(region)
