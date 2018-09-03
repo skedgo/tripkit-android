@@ -20,7 +20,7 @@ import static org.immutables.value.Value.Style;
 public abstract class Route {
   public abstract String id();
 
-  public abstract String name();
+  @Nullable public abstract String name();
 
   @Nullable public abstract String number();
 
