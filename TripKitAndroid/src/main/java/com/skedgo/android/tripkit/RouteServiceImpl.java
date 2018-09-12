@@ -5,6 +5,9 @@ import android.support.annotation.Nullable;
 import android.support.v4.util.ArrayMap;
 import android.text.TextUtils;
 
+import com.gojuno.koptional.None;
+import com.gojuno.koptional.Optional;
+import com.gojuno.koptional.Some;
 import com.skedgo.android.common.model.Location;
 import com.skedgo.android.common.model.Query;
 import com.skedgo.android.common.model.Region;
@@ -64,9 +67,16 @@ final class RouteServiceImpl implements RouteService {
   @NonNull @Override
   public Observable<List<TripGroup>> routeAsync(@NonNull Query query, @NonNull ModeFilter modeFilter) {
     return flatSubQueries(query, modeFilter)
-        .concatMap(subQuery ->
-                       regionInfoRepository.getRegionInfoByRegion(subQuery.getRegion())
-                           .map(regionInfo -> new Pair<>(subQuery, regionInfo)))
+        .concatMap(subQuery -> regionInfoRepository.getRegionInfoByRegion(subQuery.getRegion())
+            .flatMap(regionInfo ->
+                         Observable.just(
+                             new Pair<Query, Optional<RegionInfo>>
+                                 (subQuery, new Some(regionInfo))))
+            .onErrorResumeNext(it ->
+                                   Observable.just(
+                                       new Pair<>(subQuery, (Optional<RegionInfo>) None.INSTANCE))
+            )
+        )
         .flatMap(pair -> {
           Query subQuery = pair.getFirst();
           final Region region = subQuery.getRegion();
@@ -94,13 +104,15 @@ final class RouteServiceImpl implements RouteService {
   }
 
   /* TODO: Consider making this public for Xerox team. */
-  @NonNull Map<String, Object> getParamsByPreferences(RegionInfo regionInfo) {
+  @NonNull Map<String, Object> getParamsByPreferences(Optional<RegionInfo> regionInfo) {
     final ArrayMap<String, Object> map = new ArrayMap<>();
     if (tripPreferences != null) {
       if (tripPreferences.isConcessionPricingPreferred()) {
         map.put("conc", true);
       }
-      if (tripPreferences.isWheelchairPreferred() && regionInfo.transitWheelchairAccessibility()) {
+      if (tripPreferences.isWheelchairPreferred() &&
+          regionInfo instanceof Some
+          && ((RegionInfo) ((Some) regionInfo).getValue()).transitWheelchairAccessibility()) {
         map.put("wheelchair", true);
       }
     }
@@ -115,7 +127,8 @@ final class RouteServiceImpl implements RouteService {
     return map;
   }
 
-  @NonNull Map<String, Object> toOptions(@NonNull Query query, @NonNull RegionInfo regionInfo) {
+  @NonNull
+  Map<String, Object> toOptions(@NonNull Query query, @NonNull Optional<RegionInfo> regionInfo) {
     final String departureCoordinates = toCoordinatesText(query.getFromLocation());
     final String arrivalCoordinates = toCoordinatesText(query.getToLocation());
     final long arriveBefore = TimeUnit.MILLISECONDS.toSeconds(query.getArriveBy());
