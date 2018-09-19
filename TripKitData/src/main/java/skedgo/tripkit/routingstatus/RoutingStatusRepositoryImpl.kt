@@ -25,8 +25,14 @@ class RoutingStatusRepositoryImpl @Inject constructor(
           }
 
   override fun putRoutingStatus(routingStatus: RoutingStatus): Completable {
+    val status = routingStatus.status
+    val message: String? = if (status is Status.Error) {
+      status.message
+    } else {
+      null
+    }
     return routingStatusStore
-        .updateStatus(routingStatus.routingRequestId, routingStatus.status.toDto(), routingStatus.status.message)
+        .updateStatus(routingStatus.routingRequestId, status.toDto(), message)
         .andThen(Completable.fromAction {
           routingStatusUpdates.call(routingStatus.routingRequestId)
         })
