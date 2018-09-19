@@ -17,16 +17,11 @@ class RoutingStatusStore constructor(private val databaseHelper: SQLiteOpenHelpe
               arrayOf(requestId),
               null, null, null
           )
-          try {
-            cursor.moveToFirst()
-            val status = cursor.getString(cursor.getColumnIndex(RoutingStatusContract.STATUS))
-            val message = cursor.getString(cursor.getColumnIndex(RoutingStatusContract.STATUS_MESSAGE))
-            Pair(status, message)
-          } catch (e: Exception) {
-            error(e)
-          } finally {
-            cursor.close()
-          }
+          cursor.moveToFirst()
+          val status = cursor.getString(cursor.getColumnIndex(RoutingStatusContract.STATUS))
+          val message = cursor.getString(cursor.getColumnIndex(RoutingStatusContract.STATUS_MESSAGE))
+          cursor.close()
+          Pair(status, message)
         }
         .subscribeOn(io())
   }
@@ -36,7 +31,7 @@ class RoutingStatusStore constructor(private val databaseHelper: SQLiteOpenHelpe
         .fromAction {
           val contentValues = ContentValues()
           contentValues.put(RoutingStatusContract.STATUS, status)
-          contentValues.put(RoutingStatusContract.STATUS_MESSAGE, message ?: "")
+          contentValues.put(RoutingStatusContract.STATUS_MESSAGE, message)
           contentValues.put(RoutingStatusContract.REQUEST_ID, requestId)
           databaseHelper.writableDatabase.insertWithOnConflict(
               RoutingStatusContract.ROUTING_STATUS,

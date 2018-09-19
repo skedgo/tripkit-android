@@ -5,7 +5,7 @@ import skedgo.tripkit.routingstatus.Status
 fun Status.toDto(): String {
   return when (this) {
     is Status.Completed -> "Completed"
-    is Status.Error -> "Error"
+    is Status.Error -> this.message?.let { "Error: $it" } ?: "Error"
     is Status.InProgress -> "InProgress"
   }
 }

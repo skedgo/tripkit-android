@@ -1,7 +1,7 @@
 package skedgo.tripkit.routingstatus
 
-sealed class Status(val message: String? = null) {
+sealed class Status() {
   class InProgress : Status()
   class Completed : Status()
-  class Error(message: String?) : Status(message)
+  class Error(val message: String?) : Status()
 }
