@@ -85,7 +85,7 @@ libs.rxLifecycleComponents = "com.github.skedgo:RxLifecycleComponents:v1.5"
 // See changelog at http://developer.android.com/tools/revisions/gradle-plugin.html
 // and https://twitter.com/AGPVersions.
 libs.androidGradlePlugin = "com.android.tools.build:gradle:$versions.androidGradlePlugin"
-libs.dataBindingCompiler = "com.android.databinding:compiler:3.2.0-alpha10"
+libs.dataBindingCompiler = "com.android.databinding:library:3.2.0"
 
 // Architecture Components
 libs.roomRuntime = "android.arch.persistence.room:runtime:$versions.architectureComponents"
