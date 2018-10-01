@@ -4,7 +4,6 @@ apply plugin: 'kotlin-kapt'
 
 android {
   compileSdkVersion versions.compileSdkVersion
-  buildToolsVersion versions.buildToolsVersion
   dataBinding { enabled = true }
 
   defaultConfig {
