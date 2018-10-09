@@ -9,7 +9,6 @@ version = '1.0'
 
 android {
   compileSdkVersion versions.compileSdkVersion
-  buildToolsVersion versions.buildToolsVersion
 
   // To print Hugo's logs.
   // defaultPublishConfig 'debug'
