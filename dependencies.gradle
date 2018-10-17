@@ -79,7 +79,7 @@ libs.materialProgressBar = "me.zhanghai.android.materialprogressbar:library:1.4.
 libs.timber = "com.jakewharton.timber:timber:4.5.1"
 libs.rxtry = "com.github.thuytrinh:RxTry:c2f002df6c"
 libs.koptional = "com.gojuno.koptional:koptional:1.2.0"
-libs.bindingCollectionAdapterRecyclerView = "me.tatarka.bindingcollectionadapter2:bindingcollectionadapter-recyclerview:2.3.0-beta1"
+libs.bindingCollectionAdapterRecyclerView = "me.tatarka.bindingcollectionadapter2:bindingcollectionadapter-recyclerview:3.0.0-beta3"
 libs.rxLifecycleComponents = "com.github.skedgo:RxLifecycleComponents:v1.5"
 
 // See changelog at http://developer.android.com/tools/revisions/gradle-plugin.html

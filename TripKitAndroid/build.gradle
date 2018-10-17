@@ -15,7 +15,7 @@ android {
   defaultConfig {
     minSdkVersion 15
     targetSdkVersion 27
-    testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+    testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
   }
 
   packagingOptions {
@@ -59,8 +59,8 @@ dependencies {
   testImplementation 'com.github.thuytrinh:MockWebServerRule:v1.0'
   testImplementation libs.kluent
 
-  androidTestImplementation "com.android.support.test:runner:0.5"
-  androidTestImplementation "com.android.support.test:rules:0.5"
+  androidTestImplementation "androidx.test:runner:1.1.0-beta02"
+  androidTestImplementation "androidx.test:rules:1.1.0-beta02"
   androidTestImplementation libs.assertjCore
 
   implementation libs.kotlin

@@ -1,6 +1,6 @@
 package skedgo.tripkit.a2brouting;
 
-import android.support.annotation.NonNull;
+import androidx.annotation.NonNull;
 
 import com.skedgo.android.common.model.Query;
 import com.skedgo.android.tripkit.ModeFilter;

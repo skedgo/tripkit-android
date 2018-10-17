@@ -15,7 +15,7 @@ android {
   defaultConfig {
     minSdkVersion 15
     targetSdkVersion 27
-    testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+    testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
   }
 
   testOptions {
@@ -38,8 +38,8 @@ android {
 
 dependencies {
   androidTestImplementation libs.assertjCore
-  androidTestImplementation 'com.android.support.test:runner:0.5'
-  androidTestImplementation 'com.android.support.test:rules:0.5'
+  androidTestImplementation 'androidx.test:runner:1.1.0-beta02'
+  androidTestImplementation 'androidx.test:rules:1.1.0-beta02'
 
   testImplementation libs.junit
   testImplementation libs.assertjCore
@@ -52,7 +52,7 @@ dependencies {
 
   // See https://github.com/skedgo/android-maps-utils.
   implementation libs.androidMapsUtils
-  implementation 'com.android.support:support-annotations:25.3.0'
+  implementation libs.supportAnnotations
   implementation libs.playServicesMaps
   implementation libs.jodaTimeAndroid
   implementation libs.rxjava
