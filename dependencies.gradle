@@ -9,11 +9,11 @@ versions.immutablesVersion = "2.5.5"
 versions.devMinSdkVersion = 21
 versions.proMinSdkVersion = 15
 versions.compileSdkVersion = 28
-versions.targetSdkVersion = 27
+versions.targetSdkVersion = 28
 // See change-log at https://github.com/JetBrains/kotlin/blob/master/ChangeLog.md.
 versions.kotlinVersion = "1.2.71"
 versions.supportLibraryVersion = "28.0.0"
-versions.androidGradlePlugin = "3.2.0"
+versions.androidGradlePlugin = "3.2.1"
 versions.okHttpVersion = "3.8.1"
 versions.retrofitVersion = "2.3.0"
 versions.architectureComponents = "1.0.0"
@@ -42,11 +42,6 @@ libs.androidMapsUtils = "com.github.skedgo:android-maps-utils:241fc89"
 // Support Library package
 libs.multidex = "com.android.support:multidex:1.0.2"
 libs.supportAnnotations = "com.android.support:support-annotations:$versions.supportLibraryVersion"
-libs.recyclerView = "com.android.support:recyclerview-v7:$versions.supportLibraryVersion"
-libs.cardView = "com.android.support:cardview-v7:$versions.supportLibraryVersion"
-libs.supportDesign = "com.android.support:design:$versions.supportLibraryVersion"
-libs.supportV4 = "com.android.support:support-v4:$versions.supportLibraryVersion"
-libs.appCompat = "com.android.support:appcompat-v7:$versions.supportLibraryVersion"
 
 libs.value = "org.immutables:value:$versions.immutablesVersion"
 libs.valueAnnotations = "org.immutables:value:$versions.immutablesVersion:annotations"

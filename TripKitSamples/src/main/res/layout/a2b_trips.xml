@@ -15,7 +15,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <androidx.core.widget.SwipeRefreshLayout
+    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
       android:id="@+id/progressLayout"
       android:layout_width="match_parent"
       android:layout_height="match_parent">
@@ -27,6 +27,6 @@
         app:itemBinding="@{viewModel.itemBinding}"
         app:items="@{viewModel.items}"
         app:layoutManager="@{LayoutManagers.linear()}" />
-    </androidx.core.widget.SwipeRefreshLayout>
+    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
   </LinearLayout>
 </layout>

@@ -12,7 +12,7 @@
     <import type="me.tatarka.bindingcollectionadapter2.LayoutManagers" />
   </data>
 
-  <android.support.design.widget.CoordinatorLayout
+  <androidx.coordinatorlayout.widget.CoordinatorLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".TripDetailsActivity">
@@ -32,5 +32,5 @@
       app:items="@{viewModel.segments}"
       app:layoutManager="@{LayoutManagers.linear()}"
       app:layout_behavior="@string/bottom_sheet_behavior" />
-  </android.support.design.widget.CoordinatorLayout>
+  </androidx.coordinatorlayout.widget.CoordinatorLayout>
 </layout>

@@ -4,12 +4,13 @@ apply plugin: 'kotlin-kapt'
 
 android {
   compileSdkVersion versions.compileSdkVersion
+
   dataBinding { enabled = true }
 
   defaultConfig {
     applicationId "skedgo.tripkit.samples"
     minSdkVersion 15
-    targetSdkVersion 27
+    targetSdkVersion 28
     versionCode 1
     versionName "1.0"
     testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
@@ -36,16 +37,15 @@ android {
 dependencies {
   testImplementation libs.junit
   implementation libs.kotlin
-  implementation libs.appCompat
-  implementation libs.recyclerView
   implementation libs.playServicesMaps
-  implementation libs.supportDesign
 
   implementation 'com.trello:rxlifecycle:1.0'
   implementation libs.jodaTimeAndroid
   implementation libs.rxjava
   implementation libs.rxAndroid
   kapt libs.dataBindingCompiler
+  implementation 'androidx.appcompat:appcompat:1.0.0'
+  implementation 'com.google.android.material:material:1.0.0'
 
   implementation project(':RxLifecycleComponents')
   implementation libs.bindingCollectionAdapterRecyclerView
