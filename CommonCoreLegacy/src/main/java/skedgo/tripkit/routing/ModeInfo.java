@@ -33,7 +33,7 @@ public class ModeInfo implements Parcelable {
   @SerializedName("description") private String description;
   @SerializedName("identifier") private String id;
   @SerializedName("color") private ServiceColor color;
-  private boolean remoteIconIsTemplate;
+  @SerializedName("remoteIconIsTemplate") private boolean remoteIconIsTemplate;
 
   public ModeInfo() {}
 
@@ -79,6 +79,10 @@ public class ModeInfo implements Parcelable {
 
   public boolean getRemoteIconIsTemplate() {
     return remoteIconIsTemplate;
+  }
+
+  public void setRemoteIconIsTemplate(boolean remoteIconIsTemplate) {
+    this.remoteIconIsTemplate = remoteIconIsTemplate;
   }
 
   public String getLocalIconName() {
