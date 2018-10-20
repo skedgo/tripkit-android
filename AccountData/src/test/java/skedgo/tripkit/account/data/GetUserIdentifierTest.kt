@@ -2,7 +2,7 @@ package skedgo.tripkit.account.data
 
 import android.content.Context
 import android.content.SharedPreferences
-import org.amshove.kluent.`should equal to`
+import org.amshove.kluent.`should be equal to`
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.robolectric.RobolectricTestRunner
@@ -33,7 +33,7 @@ class UserKeyRepositoryImplTest {
         .onNextEvents[0]
 
     // Assert.
-    userKey `should equal to` "key"
+    userKey `should be equal to` "key"
   }
 
   @Test

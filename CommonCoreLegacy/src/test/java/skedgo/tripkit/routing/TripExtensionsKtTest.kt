@@ -6,7 +6,7 @@ import com.nhaarman.mockito_kotlin.mock
 import com.skedgo.android.common.R
 import com.skedgo.android.common.model.Location
 import org.amshove.kluent.When
-import org.amshove.kluent.`should equal to`
+import org.amshove.kluent.`should be equal to`
 import org.amshove.kluent.calling
 import org.amshove.kluent.itReturns
 import org.assertj.core.api.Java6Assertions.assertThat
@@ -69,7 +69,7 @@ class TripExtensionsKtTest {
     val text = trip.constructPlainText(context)
 
     // Assert.
-    text `should equal to` "ACTION\n\n"
+    text `should be equal to` "ACTION\n\n"
   }
 
   @Test
@@ -98,7 +98,7 @@ class TripExtensionsKtTest {
     val text = trip.constructPlainText(context)
 
     // Assert.
-    text `should equal to` "A, ACTION\n\n"
+    text `should be equal to` "A, ACTION\n\n"
   }
 
   @Test
@@ -126,7 +126,7 @@ class TripExtensionsKtTest {
     val text = trip.constructPlainText(context)
 
     // Assert.
-    text `should equal to` "ACTION for 2mins\n\n"
+    text `should be equal to` "ACTION for 2mins\n\n"
   }
 
   @Test
@@ -144,6 +144,6 @@ class TripExtensionsKtTest {
     val text = trip.constructPlainText(context)
 
     // Assert.
-    text `should equal to` "ACTION\n\n"
+    text `should be equal to` "ACTION\n\n"
   }
 }
