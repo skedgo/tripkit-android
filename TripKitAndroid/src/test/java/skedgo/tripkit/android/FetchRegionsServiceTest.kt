@@ -1,6 +1,6 @@
 package skedgo.tripkit.android
 
-import com.nhaarman.mockito_kotlin.mock
+import com.nhaarman.mockitokotlin2.mock
 import com.skedgo.android.tripkit.RegionService
 import com.skedgo.android.tripkit.TripKitAndroidRobolectricTest
 import org.amshove.kluent.When

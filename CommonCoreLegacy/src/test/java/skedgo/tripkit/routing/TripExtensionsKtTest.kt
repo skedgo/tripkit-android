@@ -2,7 +2,7 @@ package skedgo.tripkit.routing
 
 import android.content.Context
 import android.content.res.Resources
-import com.nhaarman.mockito_kotlin.mock
+import com.nhaarman.mockitokotlin2.mock
 import com.skedgo.android.common.R
 import com.skedgo.android.common.model.Location
 import org.amshove.kluent.When

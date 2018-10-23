@@ -1,7 +1,7 @@
 package com.skedgo.android.common.util
 
-import com.nhaarman.mockito_kotlin.mock
-import com.nhaarman.mockito_kotlin.whenever
+import com.nhaarman.mockitokotlin2.mock
+import com.nhaarman.mockitokotlin2.whenever
 import com.skedgo.android.common.BuildConfig
 import com.skedgo.android.common.TestRunner
 import org.assertj.core.api.Assertions.assertThat
