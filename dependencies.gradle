@@ -17,7 +17,7 @@ versions.androidGradlePlugin = "3.2.0"
 versions.okHttpVersion = "3.8.1"
 versions.retrofitVersion = "2.3.0"
 versions.architectureComponents = "1.0.0"
-versions.dagger = "2.13"
+versions.dagger = "2.18"
 ext.versions = versions
 
 Expando libs = new Expando()
