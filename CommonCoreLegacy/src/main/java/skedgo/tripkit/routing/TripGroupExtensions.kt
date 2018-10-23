@@ -3,7 +3,7 @@ package skedgo.tripkit.routing
 fun TripGroup.containsMode(modeId: String): Boolean =
     trips?.any {
       it.segments.any {
-        it.transportModeId == modeId
+        it.transportModeId?.startsWith(modeId) ?: false
       }
     } ?: false
 
