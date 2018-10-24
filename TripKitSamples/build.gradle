@@ -44,7 +44,7 @@ dependencies {
   implementation libs.rxjava
   implementation libs.rxAndroid
   kapt libs.dataBindingCompiler
-  implementation 'androidx.appcompat:appcompat:1.0.0'
+  implementation libs.appCompat
   implementation 'com.google.android.material:material:1.0.0'
 
   implementation project(':RxLifecycleComponents')

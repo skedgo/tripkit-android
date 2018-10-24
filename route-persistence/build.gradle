@@ -39,7 +39,7 @@ android {
 dependencies {
   implementation project(':CommonCoreLegacy')
   implementation 'com.github.skedgo:sqlite-utils:v1.0'
-  implementation 'androidx.appcompat:appcompat:1.0.0'
+  implementation libs.appCompat
   implementation libs.gson
   implementation libs.supportAnnotations
   implementation project(":TripKitDomain")
