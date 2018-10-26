@@ -1,6 +1,6 @@
 package skedgo.tripkit.account.domain
 
-import com.nhaarman.mockito_kotlin.mock
+import com.nhaarman.mockitokotlin2.mock
 import org.junit.Test
 import org.mockito.BDDMockito.given
 import org.mockito.Mockito.verify
