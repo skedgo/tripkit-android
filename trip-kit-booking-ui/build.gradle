@@ -58,7 +58,6 @@ dependencies {
   implementation libs.rxjava
   implementation libs.rxAndroid
 
-  kapt libs.dataBindingCompiler
 }
 group = ext.versions.tripGoGroup
 version = ext.versions.tripGoLibrary

@@ -43,7 +43,6 @@ dependencies {
   implementation libs.jodaTimeAndroid
   implementation libs.rxjava
   implementation libs.rxAndroid
-  kapt libs.dataBindingCompiler
   implementation libs.appCompat
   implementation 'com.google.android.material:material:1.0.0'
 

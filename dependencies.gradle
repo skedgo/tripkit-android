@@ -41,7 +41,7 @@ libs.androidMapsUtils = "com.github.skedgo:android-maps-utils:241fc89"
 
 // Support Library package
 libs.multidex = "com.android.support:multidex:1.0.2"
-libs.supportAnnotations = "com.android.support:support-annotations:$versions.supportLibraryVersion"
+libs.supportAnnotations = 'androidx.appcompat:appcompat:1.0.0-alpha1'
 
 libs.value = "org.immutables:value:$versions.immutablesVersion"
 libs.valueAnnotations = "org.immutables:value:$versions.immutablesVersion:annotations"
@@ -80,7 +80,6 @@ libs.rxLifecycleComponents = "com.github.skedgo:RxLifecycleComponents:v1.5"
 // See changelog at http://developer.android.com/tools/revisions/gradle-plugin.html
 // and https://twitter.com/AGPVersions.
 libs.androidGradlePlugin = "com.android.tools.build:gradle:$versions.androidGradlePlugin"
-libs.dataBindingCompiler = "com.android.databinding:library:$versions.androidGradlePlugin"
 
 // Architecture Components
 libs.roomRuntime = "android.arch.persistence.room:runtime:$versions.architectureComponents"
