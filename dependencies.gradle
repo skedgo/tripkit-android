@@ -16,6 +16,7 @@ versions.supportLibraryVersion = "28.0.0"
 versions.androidGradlePlugin = "3.2.1"
 versions.okHttpVersion = "3.8.1"
 versions.retrofitVersion = "2.3.0"
+versions.androidxVersion = "1.0.0"
 versions.architectureComponents = "1.0.0"
 versions.dagger = "2.18"
 ext.versions = versions
@@ -41,7 +42,7 @@ libs.androidMapsUtils = "com.github.skedgo:android-maps-utils:241fc89"
 
 // Support Library package
 libs.multidex = "com.android.support:multidex:1.0.2"
-libs.supportAnnotations = 'androidx.appcompat:appcompat:1.0.0-alpha1'
+libs.supportAnnotations = "androidx.appcompat:appcompat:$versions.androidxVersion"
 
 libs.value = "org.immutables:value:$versions.immutablesVersion"
 libs.valueAnnotations = "org.immutables:value:$versions.immutablesVersion:annotations"

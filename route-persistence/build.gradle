@@ -51,7 +51,7 @@ dependencies {
   testImplementation libs.mockitoKotlin, { exclude group: 'org.jetbrains.kotlin' }
   testImplementation libs.kluent
 
-  androidTestImplementation 'androidx.test.espresso:espresso-core:3.1.0-beta02', {
+  androidTestImplementation 'androidx.test.espresso:espresso-core:3.1.0', {
     exclude group: 'com.android.support', module: 'support-annotations'
   }
 }

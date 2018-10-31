@@ -33,7 +33,7 @@ dependencies {
   testImplementation libs.mockitoKotlin, { exclude group: 'org.jetbrains.kotlin' }
 
   androidTestImplementation 'com.google.code.findbugs:jsr305:3.0.2'
-  androidTestImplementation 'androidx.test.espresso:espresso-core:3.1.0-beta02', {
+  androidTestImplementation 'androidx.test.espresso:espresso-core:3.1.0', {
     exclude group: 'com.android.support', module: 'support-annotations'
   }
 
@@ -50,7 +50,7 @@ dependencies {
   implementation 'com.squareup.picasso:picasso:2.5.2'
   implementation 'com.jakewharton.picasso:picasso2-okhttp3-downloader:1.0.2'
   implementation libs.bindingCollectionAdapterRecyclerView
-  implementation project(':RxLifecycleComponents')
+  implementation libs.rxLifecycleComponents
   implementation 'com.trello:rxlifecycle:1.0'
 
   implementation libs.kotlin

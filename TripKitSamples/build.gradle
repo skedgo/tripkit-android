@@ -46,7 +46,7 @@ dependencies {
   implementation libs.appCompat
   implementation 'com.google.android.material:material:1.0.0'
 
-  implementation project(':RxLifecycleComponents')
+  implementation libs.rxLifecycleComponents
   implementation libs.bindingCollectionAdapterRecyclerView
 
   implementation project(":AccountData")
