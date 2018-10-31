@@ -27,4 +27,4 @@ android:
 script:
   # It should be `test` not `testDebugUnitTest` to
   # execute tests for pure Java/Kotlin modules.
-  ./gradlew clean test
+  ./gradlew assembleRelease test
