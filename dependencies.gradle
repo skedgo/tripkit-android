@@ -42,7 +42,8 @@ libs.androidMapsUtils = "com.github.skedgo:android-maps-utils:241fc89"
 
 // Support Library package
 libs.multidex = "com.android.support:multidex:1.0.2"
-libs.supportAnnotations = "androidx.appcompat:appcompat:$versions.androidxVersion"
+libs.supportAnnotations = "androidx.annotation:annotation:$versions.androidxVersion"
+libs.appCompat = "androidx.appcompat:appcompat:$versions.androidxVersion"
 
 libs.value = "org.immutables:value:$versions.immutablesVersion"
 libs.valueAnnotations = "org.immutables:value:$versions.immutablesVersion:annotations"
