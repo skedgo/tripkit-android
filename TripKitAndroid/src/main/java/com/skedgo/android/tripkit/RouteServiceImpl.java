@@ -35,6 +35,7 @@ final class RouteServiceImpl implements RouteService {
   @Nullable private final ExtraQueryMapProvider extraQueryMapProvider;
   private final FailoverA2bRoutingApi routingApi;
   private final RegionInfoRepository regionInfoRepository;
+  private final RegionService regionService;
 
   RouteServiceImpl(
       @NonNull Func2<Query, ModeFilter, Observable<List<Query>>> queryGenerator,
@@ -43,7 +44,8 @@ final class RouteServiceImpl implements RouteService {
       @Nullable TripPreferences tripPreferences,
       @Nullable ExtraQueryMapProvider extraQueryMapProvider,
       FailoverA2bRoutingApi routingApi,
-      RegionInfoRepository regionInfoRepository) {
+      RegionInfoRepository regionInfoRepository,
+      RegionService regionService) {
     this.queryGenerator = queryGenerator;
     this.excludedTransitModesAdapter = excludedTransitModesAdapter;
     this.co2Preferences = co2Preferences;
@@ -51,6 +53,7 @@ final class RouteServiceImpl implements RouteService {
     this.extraQueryMapProvider = extraQueryMapProvider;
     this.routingApi = routingApi;
     this.regionInfoRepository = regionInfoRepository;
+    this.regionService = regionService;
   }
 
   private static String toCoordinatesText(Location location) {
@@ -65,8 +68,12 @@ final class RouteServiceImpl implements RouteService {
   public Observable<List<TripGroup>> routeAsync(@NonNull Query query, @NonNull ModeFilter modeFilter) {
     return flatSubQueries(query, modeFilter)
         .concatMap(subQuery ->
-                       regionInfoRepository.getRegionInfoByRegion(subQuery.getRegion())
-                           .map(regionInfo -> new Pair<>(subQuery, regionInfo)))
+                       useWheelchair(query.getFromLocation())
+                           .flatMap(useWheelchairFrom ->
+                                        useWheelchair(query.getToLocation())
+                                            .map(useWheelchairTo -> useWheelchairFrom && useWheelchairTo)
+                           )
+                           .map(useWheelchair -> new Pair<>(subQuery, useWheelchair)))
         .flatMap(pair -> {
           Query subQuery = pair.getFirst();
           final Region region = subQuery.getRegion();
@@ -82,6 +89,12 @@ final class RouteServiceImpl implements RouteService {
         });
   }
 
+  private Observable<Boolean> useWheelchair(Location location) {
+    return regionService.getRegionByLocationAsync(location)
+        .flatMap(regionInfoRepository::getRegionInfoByRegion)
+        .map(RegionInfo::transitWheelchairAccessibility);
+  }
+
   @NonNull List<String> getExcludedTransitModesAsNonNull(
       @Nullable ExcludedTransitModesAdapter excludedTransitModesAdapter,
       String regionName) {
@@ -94,13 +107,13 @@ final class RouteServiceImpl implements RouteService {
   }
 
   /* TODO: Consider making this public for Xerox team. */
-  @NonNull Map<String, Object> getParamsByPreferences(RegionInfo regionInfo) {
+  @NonNull Map<String, Object> getParamsByPreferences(boolean useWheelchair) {
     final ArrayMap<String, Object> map = new ArrayMap<>();
     if (tripPreferences != null) {
       if (tripPreferences.isConcessionPricingPreferred()) {
         map.put("conc", true);
       }
-      if (tripPreferences.isWheelchairPreferred() && regionInfo.transitWheelchairAccessibility()) {
+      if (tripPreferences.isWheelchairPreferred() && useWheelchair) {
         map.put("wheelchair", true);
       }
     }
@@ -115,7 +128,7 @@ final class RouteServiceImpl implements RouteService {
     return map;
   }
 
-  @NonNull Map<String, Object> toOptions(@NonNull Query query, @NonNull RegionInfo regionInfo) {
+  @NonNull Map<String, Object> toOptions(@NonNull Query query, boolean useWheelchair) {
     final String departureCoordinates = toCoordinatesText(query.getFromLocation());
     final String arrivalCoordinates = toCoordinatesText(query.getToLocation());
     final long arriveBefore = TimeUnit.MILLISECONDS.toSeconds(query.getArriveBy());
@@ -137,7 +150,7 @@ final class RouteServiceImpl implements RouteService {
     options.put("cs", Integer.toString(cyclingSpeed));
     options.put("includeStops", "1");
     options.put("wp", ToWeightingProfileString.INSTANCE.toWeightingProfileString(query));
-    options.putAll(getParamsByPreferences(regionInfo));
+    options.putAll(getParamsByPreferences(useWheelchair));
     if (extraQueryMapProvider != null) {
       final Map<String, Object> extraQueryMap = extraQueryMapProvider.call();
       options.putAll(extraQueryMap);
