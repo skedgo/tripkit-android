@@ -8,8 +8,8 @@ android {
 
   defaultConfig {
     minSdkVersion 15
-    targetSdkVersion 27
-    testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+    targetSdkVersion versions.targetSdkVersion
+    testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
   }
 
   dataBinding { enabled = true }
@@ -32,8 +32,8 @@ dependencies {
   testImplementation libs.robolectric
   testImplementation libs.mockitoKotlin, { exclude group: 'org.jetbrains.kotlin' }
 
-  androidTestImplementation 'com.google.code.findbugs:jsr305:3.0.1'
-  androidTestImplementation 'com.android.support.test.espresso:espresso-core:2.2.2', {
+  androidTestImplementation 'com.google.code.findbugs:jsr305:3.0.2'
+  androidTestImplementation 'androidx.test.espresso:espresso-core:3.1.0', {
     exclude group: 'com.android.support', module: 'support-annotations'
   }
 
@@ -41,7 +41,7 @@ dependencies {
   implementation project(':CommonCoreLegacy')
   implementation project(':trip-kit-booking')
 
-  implementation 'uk.co.chrisjenx:calligraphy:2.1.0'
+  implementation 'uk.co.chrisjenx:calligraphy:2.3.0'
   implementation 'com.github.skedgo:robotos:v1.1'
 
   implementation libs.dagger
@@ -58,7 +58,6 @@ dependencies {
   implementation libs.rxjava
   implementation libs.rxAndroid
 
-  kapt libs.dataBindingCompiler
 }
 group = ext.versions.tripGoGroup
 version = ext.versions.tripGoLibrary

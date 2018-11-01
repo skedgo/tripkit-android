@@ -1,6 +1,6 @@
 package com.skedgo.android.tripkit.booking;
 
-import android.support.annotation.Nullable;
+import androidx.annotation.Nullable;
 
 import org.immutables.value.Value;
 

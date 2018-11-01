@@ -2,7 +2,7 @@ package com.skedgo.android.tripkit.bookingproviders;
 
 import android.content.Intent;
 import android.net.Uri;
-import android.support.annotation.Nullable;
+import androidx.annotation.Nullable;
 
 import com.skedgo.android.common.model.Location;
 import skedgo.tripkit.routing.TripSegment;

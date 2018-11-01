@@ -1,6 +1,6 @@
 package com.skedgo.android.tripkit;
 
-import android.support.annotation.Nullable;
+import androidx.annotation.Nullable;
 
 import com.google.gson.annotations.JsonAdapter;
 import skedgo.tripkit.routing.RealTimeVehicle;

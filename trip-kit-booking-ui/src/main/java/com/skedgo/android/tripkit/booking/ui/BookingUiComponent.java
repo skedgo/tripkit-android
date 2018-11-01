@@ -1,6 +1,6 @@
 package com.skedgo.android.tripkit.booking.ui;
 
-import android.databinding.DataBindingComponent;
+import androidx.databinding.DataBindingComponent;
 
 import com.skedgo.android.tripkit.booking.BookingModule;
 import com.skedgo.android.tripkit.booking.ui.activity.BookingActivity;

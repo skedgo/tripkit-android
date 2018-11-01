@@ -3,9 +3,9 @@ package com.skedgo.routepersistence;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-import android.support.test.InstrumentationRegistry;
-import android.support.test.espresso.core.deps.guava.collect.Lists;
-import android.support.test.runner.AndroidJUnit4;
+import androidx.test.InstrumentationRegistry;
+import androidx.test.espresso.core.deps.guava.collect.Lists;
+import androidx.test.runner.AndroidJUnit4;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;

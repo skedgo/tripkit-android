@@ -3,7 +3,7 @@ package com.skedgo.android.common.util;
 import android.annotation.TargetApi;
 import android.content.res.Resources;
 import android.os.Build;
-import android.support.annotation.NonNull;
+import androidx.annotation.NonNull;
 import android.util.DisplayMetrics;
 
 import com.skedgo.android.common.BuildConfig;
