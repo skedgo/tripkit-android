@@ -1,10 +1,16 @@
 package com.skedgo.routepersistence
 
 import com.google.gson.GsonBuilder
+import com.nhaarman.mockito_kotlin.mock
+import com.nhaarman.mockito_kotlin.whenever
 import com.skedgo.android.common.model.GsonAdaptersBooking
 import com.skedgo.android.common.model.GsonAdaptersRealtimeAlert
 import com.skedgo.android.common.model.Location
 import com.skedgo.android.common.util.LowercaseEnumTypeAdapterFactory
+import org.amshove.kluent.`should be in`
+import org.amshove.kluent.`should contain all`
+import org.amshove.kluent.`should equal`
+import org.assertj.core.api.Assertions.assertThat
 import org.junit.Assert.assertEquals
 import org.junit.Before
 import org.junit.Test
@@ -21,7 +27,7 @@ import java.util.concurrent.TimeUnit
 @RunWith(RobolectricTestRunner::class)
 class RouteStoreTest {
   private var databaseHelper: RouteDatabaseHelper? = null
-  private var store: RouteStore? = null
+  private lateinit var store: RouteStore
 
   @Before
   fun before() {
@@ -206,6 +212,47 @@ class RouteStoreTest {
 
     subscriber.awaitTerminalEvent()
     subscriber.assertNoValues()
+  }
+
+  @Test
+  fun `should add trip as display Trip`() {
+    val trip = mock<Trip>().apply {
+      whenever(this.uuid()).thenReturn("b")
+      whenever(this.id).thenReturn(1)
+    }
+    val group = mock<TripGroup>().apply {
+      whenever(this.uuid()).thenReturn("a")
+      whenever(this.displayTrip).thenReturn(trip)
+      whenever(this.trips).thenReturn(arrayListOf(trip))
+    }
+    group.displayTripId = 1
+    group.trips = arrayListOf(trip)
+
+    store.saveAsync(null, listOf(group))
+        .test()
+        .awaitTerminalEvent()
+        .assertCompleted()
+
+    val newDisplayTrip = Trip().apply {
+      this.uuid("c")
+      this.id = 10
+    }
+    store.addTripToTripGroup("a", newDisplayTrip)
+        .test()
+        .awaitTerminalEvent()
+        .assertCompleted()
+
+    store.queryAsync(GroupQueries.hasUuid("a"))
+        .test()
+        .awaitTerminalEvent()
+        .assertCompleted()
+        .assertValueCount(1)
+        .onNextEvents.first()
+        .let {
+          it.displayTripId `should equal` 2
+          it.trips!!.map { it.uuid() } `should contain all` (listOf("b", "c"))
+          it.displayTrip!!.uuid() `should equal` "c"
+        }
   }
 
   @Test
