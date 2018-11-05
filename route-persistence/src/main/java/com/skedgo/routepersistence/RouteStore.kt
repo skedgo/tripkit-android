@@ -58,15 +58,15 @@ import rx.schedulers.Schedulers.io
 import skedgo.sqlite.Cursors.flattenCursor
 import kotlin.math.max
 
-class RouteStore(private val databaseHelper: SQLiteOpenHelper, private val gson: Gson) {
+open class RouteStore(private val databaseHelper: SQLiteOpenHelper, private val gson: Gson) {
 
-  fun deleteAsync(whereClause: Pair<String, Array<String>>): Observable<Int> {
+  open fun deleteAsync(whereClause: Pair<String, Array<String>>): Observable<Int> {
     return Observable
         .fromCallable { delete(whereClause) }
         .subscribeOn(io())
   }
 
-  fun updateAlternativeTrips(groups: List<TripGroup>): Observable<List<TripGroup>> {
+  open fun updateAlternativeTrips(groups: List<TripGroup>): Observable<List<TripGroup>> {
     return Observable.fromCallable {
       val database = databaseHelper.writableDatabase
       database.beginTransaction()
@@ -84,7 +84,7 @@ class RouteStore(private val databaseHelper: SQLiteOpenHelper, private val gson:
     }
   }
 
-  fun updateNotifiability(groupId: String, isFavorite: Boolean): Completable {
+  open fun updateNotifiability(groupId: String, isFavorite: Boolean): Completable {
     return Completable.fromAction {
       val database = databaseHelper.writableDatabase
       val values = ContentValues()
@@ -93,7 +93,7 @@ class RouteStore(private val databaseHelper: SQLiteOpenHelper, private val gson:
     }
   }
 
-  fun saveAsync(requestId: String?, groups: List<TripGroup>): Observable<List<TripGroup>> {
+  open fun saveAsync(requestId: String?, groups: List<TripGroup>): Observable<List<TripGroup>> {
     return Observable
         .fromCallable {
           saveTripGroupsInTransaction(requestId, groups)
@@ -103,11 +103,11 @@ class RouteStore(private val databaseHelper: SQLiteOpenHelper, private val gson:
   }
 
   @DebugLog
-  fun queryAsync(query: Pair<String, Array<String>>): Observable<TripGroup> {
+  open fun queryAsync(query: Pair<String, Array<String>>): Observable<TripGroup> {
     return queryAsync(query.first, query.second)
   }
 
-  fun queryTripGroupIdsByRequestIdAsync(requestId: String): Observable<String> {
+  open fun queryTripGroupIdsByRequestIdAsync(requestId: String): Observable<String> {
     return Observable
         .fromCallable {
           val database = databaseHelper.readableDatabase
@@ -120,7 +120,7 @@ class RouteStore(private val databaseHelper: SQLiteOpenHelper, private val gson:
         .map { cursor -> cursor.getString(cursor.getColumnIndex(COL_UUID)) }
   }
 
-  fun updateTripAsync(oldTripUuid: String, trip: Trip): Completable {
+  open fun updateTripAsync(oldTripUuid: String, trip: Trip): Completable {
     return Completable
         .fromAction {
           val database = databaseHelper.writableDatabase
@@ -146,7 +146,7 @@ class RouteStore(private val databaseHelper: SQLiteOpenHelper, private val gson:
         }.subscribeOn(io())
   }
 
-  fun addTripToTripGroup(tripGroupId: String, displayTrip: Trip): Completable {
+  open fun addTripToTripGroup(tripGroupId: String, displayTrip: Trip): Completable {
     return Completable
         .fromAction {
           val database = databaseHelper.writableDatabase
