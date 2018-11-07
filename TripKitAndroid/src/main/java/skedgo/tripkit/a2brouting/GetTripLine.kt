@@ -186,7 +186,11 @@ open class GetTripLine @Inject internal constructor() {
 
               val modeId = segment.transportModeId
               if (TransportMode.ID_WHEEL_CHAIR == modeId || TransportMode.ID_BICYCLE == modeId) {
-                color = if (street.safe()) Color.GREEN else Color.YELLOW
+                color = when {
+                  street.safe() -> Color.GREEN
+                  street.dismount() -> Color.RED
+                  else -> Color.YELLOW
+                }
               }
 
               lineSegmentsToDraw.add(LineSegment(start, end, type, color))
