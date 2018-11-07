@@ -1,6 +1,6 @@
 package skedgo.tripkit.a2brouting;
 
-import android.support.annotation.NonNull;
+import androidx.annotation.NonNull;
 
 import java.util.Collections;
 import java.util.List;
