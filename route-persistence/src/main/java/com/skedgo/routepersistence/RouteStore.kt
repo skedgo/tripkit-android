@@ -4,59 +4,20 @@ import android.content.ContentValues
 import android.database.Cursor
 import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
-import android.support.annotation.Nullable
 import android.util.Pair
-
 import com.google.gson.Gson
-
-import java.util.ArrayList
-import java.util.Arrays
-import java.util.Collections
-import java.util.concurrent.Callable
-
+import com.skedgo.routepersistence.RouteContract.*
 import hugo.weaving.DebugLog
 import rx.Completable
 import rx.Observable
-import rx.functions.Action0
-import rx.functions.Func1
+import rx.schedulers.Schedulers
+import rx.schedulers.Schedulers.io
+import skedgo.sqlite.Cursors.flattenCursor
 import skedgo.tripkit.routing.Source
 import skedgo.tripkit.routing.Trip
 import skedgo.tripkit.routing.TripGroup
 import skedgo.tripkit.routing.TripSegment
-
-import com.skedgo.routepersistence.RouteContract.COL_ARRIVE
-import com.skedgo.routepersistence.RouteContract.COL_CALORIES_COST
-import com.skedgo.routepersistence.RouteContract.COL_CARBON_COST
-import com.skedgo.routepersistence.RouteContract.COL_CURRENCY_SYMBOL
-import com.skedgo.routepersistence.RouteContract.COL_DEPART
-import com.skedgo.routepersistence.RouteContract.COL_DISPLAY_TRIP_ID
-import com.skedgo.routepersistence.RouteContract.COL_FREQUENCY
-import com.skedgo.routepersistence.RouteContract.COL_GROUP_ID
-import com.skedgo.routepersistence.RouteContract.COL_HASSLE_COST
-import com.skedgo.routepersistence.RouteContract.COL_ID
-import com.skedgo.routepersistence.RouteContract.COL_IS_NOTIFIABLE
-import com.skedgo.routepersistence.RouteContract.COL_JSON
-import com.skedgo.routepersistence.RouteContract.COL_MONEY_COST
-import com.skedgo.routepersistence.RouteContract.COL_PLANNED_URL
-import com.skedgo.routepersistence.RouteContract.COL_PROGRESS_URL
-import com.skedgo.routepersistence.RouteContract.COL_QUERY_IS_LEAVE_AFTER
-import com.skedgo.routepersistence.RouteContract.COL_REQUEST_ID
-import com.skedgo.routepersistence.RouteContract.COL_SAVE_URL
-import com.skedgo.routepersistence.RouteContract.COL_SOURCES
-import com.skedgo.routepersistence.RouteContract.COL_TEMP_URL
-import com.skedgo.routepersistence.RouteContract.COL_TRIP_ID
-import com.skedgo.routepersistence.RouteContract.COL_UPDATE_URL
-import com.skedgo.routepersistence.RouteContract.COL_UUID
-import com.skedgo.routepersistence.RouteContract.COL_WEIGHTED_SCORE
-import com.skedgo.routepersistence.RouteContract.SELECT_SEGMENTS
-import com.skedgo.routepersistence.RouteContract.SELECT_TRIPS
-import com.skedgo.routepersistence.RouteContract.TABLE_SEGMENTS
-import com.skedgo.routepersistence.RouteContract.TABLE_TRIPS
-import com.skedgo.routepersistence.RouteContract.TABLE_TRIP_GROUPS
-import rx.schedulers.Schedulers
-import rx.schedulers.Schedulers.io
-import skedgo.sqlite.Cursors.flattenCursor
-import kotlin.math.max
+import java.util.*
 
 open class RouteStore(private val databaseHelper: SQLiteOpenHelper, private val gson: Gson) {
 
