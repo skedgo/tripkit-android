@@ -1,6 +1,6 @@
 package com.skedgo.routepersistence;
 
-import android.support.annotation.NonNull;
+import androidx.annotation.NonNull;
 import android.util.Pair;
 
 import skedgo.tripkit.routing.TripGroup;

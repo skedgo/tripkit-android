@@ -1,7 +1,7 @@
 package skedgo.tripkit.android;
 
 import android.content.Context;
-import android.support.annotation.NonNull;
+import androidx.annotation.NonNull;
 
 import com.skedgo.android.tripkit.Configs;
 import com.skedgo.android.tripkit.HttpClientModule;

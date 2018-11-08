@@ -1,6 +1,6 @@
 package com.skedgo.android.tripkit.bookingproviders;
 
-import android.support.annotation.Nullable;
+import androidx.annotation.Nullable;
 
 import com.skedgo.android.tripkit.BookingAction;
 import com.skedgo.android.tripkit.ExternalActionParams;

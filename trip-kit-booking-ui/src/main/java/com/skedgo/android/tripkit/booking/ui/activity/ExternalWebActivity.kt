@@ -3,7 +3,7 @@ package com.skedgo.android.tripkit.booking.ui.activity
 import android.app.Activity
 import android.content.Context
 import android.content.Intent
-import android.databinding.DataBindingUtil
+import androidx.databinding.DataBindingUtil
 import android.os.Bundle
 import android.widget.Toast
 import com.skedgo.android.tripkit.booking.ExternalFormField
@@ -31,7 +31,8 @@ class ExternalWebActivity : RxAppCompatActivity() {
     }
   }
 
-  @Inject lateinit var viewModel: ExternalViewModel
+  @Inject
+  lateinit var viewModel: ExternalViewModel
   val binding: ExternalWebBinding by lazy {
     DataBindingUtil.setContentView<ExternalWebBinding>(this, R.layout.external_web)
   }
