@@ -1,7 +1,5 @@
 package com.skedgo.android.tripkit;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import android.text.TextUtils;
 
 import com.skedgo.android.common.model.Location;
@@ -17,9 +15,12 @@ import java.util.List;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.collection.ArrayMap;
 import kotlin.Pair;
 import rx.Observable;
+import rx.Single;
 import rx.functions.Func1;
 import rx.functions.Func2;
 import skedgo.tripkit.a2brouting.FailoverA2bRoutingApi;
@@ -68,12 +69,11 @@ final class RouteServiceImpl implements RouteService {
   public Observable<List<TripGroup>> routeAsync(@NonNull Query query, @NonNull ModeFilter modeFilter) {
     return flatSubQueries(query, modeFilter)
         .concatMap(subQuery ->
-                       useWheelchair(query.getFromLocation())
-                           .flatMap(useWheelchairFrom ->
-                                        useWheelchair(query.getToLocation())
-                                            .map(useWheelchairTo -> useWheelchairFrom && useWheelchairTo)
-                           )
-                           .map(useWheelchair -> new Pair<>(subQuery, useWheelchair)))
+                       Observable.just(subQuery.getFromLocation(), subQuery.getToLocation())
+                           .flatMapSingle((Func1<Location, Single<Boolean>>) this::useWheelchair)
+                           .all(regionHasWheelchair -> regionHasWheelchair)
+                           .map(aBoolean -> new Pair<>(subQuery, aBoolean))
+        )
         .flatMap(pair -> {
           Query subQuery = pair.getFirst();
           final Region region = subQuery.getRegion();
@@ -89,10 +89,11 @@ final class RouteServiceImpl implements RouteService {
         });
   }
 
-  private Observable<Boolean> useWheelchair(Location location) {
+  private Single<Boolean> useWheelchair(Location location) {
     return regionService.getRegionByLocationAsync(location)
         .flatMap(regionInfoRepository::getRegionInfoByRegion)
-        .map(RegionInfo::transitWheelchairAccessibility);
+        .map(RegionInfo::transitWheelchairAccessibility)
+        .toSingle();
   }
 
   @NonNull List<String> getExcludedTransitModesAsNonNull(
