@@ -22,8 +22,7 @@ typealias TripLine = List<PolylineOptions>
 open class GetTripLine @Inject internal constructor() {
   private val NON_TRAVELLED_LINE_COLOR = 0x88AAAAAA.toInt()
 
-  open fun execute(segments: List<TripSegment>): Observable<TripLine>
-      = Observable
+  open fun execute(segments: List<TripSegment>): Observable<TripLine> = Observable
       .fromCallable<Pair<List<List<LineSegment>>, List<List<LineSegment>>>> { createLinesToDraw(segments) }
       .map { lineSegmentPair -> createPolylineOptionsList(lineSegmentPair.first, lineSegmentPair.second) }
 
@@ -185,12 +184,10 @@ open class GetTripLine @Inject internal constructor() {
               }
 
               val modeId = segment.transportModeId
-              if (TransportMode.ID_WHEEL_CHAIR == modeId || TransportMode.ID_BICYCLE == modeId) {
-                color = when {
-                  street.safe() -> Color.GREEN
-                  street.dismount() -> Color.RED
-                  else -> Color.YELLOW
-                }
+              color = when {
+                (TransportMode.ID_WHEEL_CHAIR == modeId || TransportMode.ID_BICYCLE == modeId) && street.safe() -> Color.GREEN
+                TransportMode.ID_BICYCLE == modeId && street.dismount() -> Color.RED
+                else -> Color.YELLOW
               }
 
               lineSegmentsToDraw.add(LineSegment(start, end, type, color))
