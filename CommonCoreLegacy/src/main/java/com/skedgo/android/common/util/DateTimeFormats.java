@@ -1,7 +1,7 @@
 package com.skedgo.android.common.util;
 
 import android.content.Context;
-import android.support.annotation.Nullable;
+import androidx.annotation.Nullable;
 import android.text.TextUtils;
 import android.text.format.DateFormat;
 

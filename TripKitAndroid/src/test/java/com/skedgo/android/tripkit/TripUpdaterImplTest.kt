@@ -3,8 +3,8 @@ package com.skedgo.android.tripkit
 import android.content.res.Resources
 
 import com.google.gson.Gson
-import com.nhaarman.mockito_kotlin.eq
-import com.nhaarman.mockito_kotlin.whenever
+import com.nhaarman.mockitokotlin2.eq
+import com.nhaarman.mockitokotlin2.whenever
 import skedgo.tripkit.routing.RoutingResponse
 import skedgo.tripkit.routing.Trip
 import skedgo.tripkit.routing.TripGroup

@@ -2,8 +2,8 @@ package skedgo.tripkit.validbookingcount.data
 
 import android.content.Context
 import android.content.SharedPreferences
-import com.nhaarman.mockito_kotlin.mock
-import com.nhaarman.mockito_kotlin.whenever
+import com.nhaarman.mockitokotlin2.mock
+import com.nhaarman.mockitokotlin2.whenever
 import org.assertj.core.api.Java6Assertions.assertThat
 import org.junit.Test
 import org.junit.runner.RunWith

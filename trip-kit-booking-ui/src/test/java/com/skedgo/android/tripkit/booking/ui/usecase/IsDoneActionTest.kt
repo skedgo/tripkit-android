@@ -1,7 +1,7 @@
 package com.skedgo.android.tripkit.booking.ui.usecase
 
-import com.nhaarman.mockito_kotlin.mock
-import com.nhaarman.mockito_kotlin.whenever
+import com.nhaarman.mockitokotlin2.mock
+import com.nhaarman.mockitokotlin2.whenever
 import com.skedgo.android.tripkit.booking.BookingAction
 import com.skedgo.android.tripkit.booking.BookingForm
 import com.skedgo.android.tripkit.booking.FormField

@@ -1,8 +1,8 @@
 package skedgo.tripkit.samples.a2brouting
 
 import android.content.Context
-import android.databinding.ObservableArrayList
-import android.databinding.ObservableList
+import androidx.databinding.ObservableArrayList
+import androidx.databinding.ObservableList
 import me.tatarka.bindingcollectionadapter2.ItemBinding
 import rx.Observable
 import skedgo.tripkit.routing.Trip

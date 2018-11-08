@@ -3,7 +3,7 @@ package com.skedgo.android.tripkit.booking.ui.activity
 import android.app.Activity
 import android.content.Context
 import android.content.Intent
-import android.databinding.DataBindingUtil
+import androidx.databinding.DataBindingUtil
 import android.os.Bundle
 import android.os.Parcelable
 import android.widget.Toast
@@ -34,8 +34,10 @@ class ExternalProviderAuthActivity : RxAppCompatActivity() {
     }
   }
 
-  @Inject lateinit var viewModel: ExternalProviderAuthViewModel
-  @Inject lateinit var oAuth2CallbackHandler: OAuth2CallbackHandler
+  @Inject
+  lateinit var viewModel: ExternalProviderAuthViewModel
+  @Inject
+  lateinit var oAuth2CallbackHandler: OAuth2CallbackHandler
   val binding: ExternalProviderAuthBinding by lazy {
     DataBindingUtil.setContentView<ExternalProviderAuthBinding>(this, R.layout.external_provider_auth)
   }

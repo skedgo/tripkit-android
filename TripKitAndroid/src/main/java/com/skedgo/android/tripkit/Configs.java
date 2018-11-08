@@ -1,7 +1,7 @@
 package com.skedgo.android.tripkit;
 
 import android.content.Context;
-import android.support.annotation.Nullable;
+import androidx.annotation.Nullable;
 
 import com.skedgo.android.tripkit.routing.ExtraQueryMapProvider;
 

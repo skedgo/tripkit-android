@@ -1,7 +1,7 @@
 package com.skedgo.android.tripkit
 
-import com.nhaarman.mockito_kotlin.mock
-import com.nhaarman.mockito_kotlin.whenever
+import com.nhaarman.mockitokotlin2.mock
+import com.nhaarman.mockitokotlin2.whenever
 import com.skedgo.android.common.model.Location
 import com.skedgo.android.common.model.Region
 import com.skedgo.android.common.model.TransportMode
