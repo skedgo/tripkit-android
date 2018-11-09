@@ -3,10 +3,13 @@ package skedgo.tripkit.a2brouting
 import android.graphics.Color
 import android.text.TextUtils
 import android.util.Pair
+import androidx.annotation.ColorInt
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.PolylineOptions
 import com.google.maps.android.PolyUtil
+import com.skedgo.android.common.model.Street
 import com.skedgo.android.common.model.TransportMode
+import com.skedgo.android.common.model.TransportMode.*
 import com.skedgo.android.common.util.PolylineEncoderUtils
 import com.skedgo.android.tripkit.LineSegment
 import rx.Observable
@@ -184,10 +187,8 @@ open class GetTripLine @Inject internal constructor() {
               }
 
               val modeId = segment.transportModeId
-              color = when {
-                (TransportMode.ID_WHEEL_CHAIR == modeId || TransportMode.ID_BICYCLE == modeId) && street.safe() -> Color.GREEN
-                TransportMode.ID_BICYCLE == modeId && street.dismount() -> Color.RED
-                else -> Color.YELLOW
+              getColorForWheelchairAndBicycle(street, modeId)?.let {
+                color = it
               }
 
               lineSegmentsToDraw.add(LineSegment(start, end, type, color))
@@ -218,5 +219,15 @@ open class GetTripLine @Inject internal constructor() {
     }
 
     return Pair(linesToDraw, nonTravelledLinesToDraw)
+  }
+
+  @ColorInt
+  fun getColorForWheelchairAndBicycle(street: Street, modeId: String?): Int? {
+    return when {
+      (ID_WHEEL_CHAIR == modeId || ID_BICYCLE == modeId) && street.safe() -> Color.GREEN
+      ID_BICYCLE == modeId && street.dismount() -> Color.RED
+      (ID_WHEEL_CHAIR == modeId || ID_BICYCLE == modeId) -> Color.YELLOW
+      else -> null
+    }
   }
 }
