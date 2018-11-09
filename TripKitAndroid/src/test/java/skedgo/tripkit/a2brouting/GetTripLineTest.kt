@@ -29,7 +29,7 @@ class GetTripLineTest {
   }
 
   @Test
-  fun `should return green for dismount street with bicycle`() {
+  fun `should return red for dismount street with bicycle`() {
     val street = mock<Street>().apply {
       whenever(this.dismount()).thenReturn(true)
     }
@@ -37,7 +37,7 @@ class GetTripLineTest {
   }
 
   @Test
-  fun `should return green for unsafe street with bicycle or wheelchair`() {
+  fun `should return yellow for unsafe street with bicycle or wheelchair`() {
     val street = mock<Street>().apply {
       whenever(this.safe()).thenReturn(false)
       whenever(this.dismount()).thenReturn(false)
