@@ -5,23 +5,24 @@ apply plugin: "com.github.dcendents.android-maven"
 apply plugin: "kotlin-android"
 apply plugin: "kotlin-kapt"
 
-// For https://github.com/dcendents/android-maven-gradle-plugin.
-group = "com.skedgo.tripkit"
-
 android {
   compileSdkVersion versions.compileSdkVersion
-  buildToolsVersion versions.buildToolsVersion
 
   defaultConfig {
     minSdkVersion 15
-    targetSdkVersion 25
-    testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+    targetSdkVersion versions.targetSdkVersion
+    testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
   }
 
   packagingOptions {
     // To avoid conflicts with ASL.
     // We don't utilize ServiceLoader, so this is unneeded.
     exclude 'META-INF/services/com.google.gson.TypeAdapterFactory'
+  }
+
+  compileOptions {
+    sourceCompatibility JavaVersion.VERSION_1_8
+    targetCompatibility JavaVersion.VERSION_1_8
   }
 
   testOptions {
@@ -54,12 +55,11 @@ dependencies {
   testImplementation 'com.github.thuytrinh:MockWebServerRule:v1.0'
   testImplementation libs.kluent
 
-  androidTestImplementation "com.android.support.test:runner:0.5"
-  androidTestImplementation "com.android.support.test:rules:0.5"
+  androidTestImplementation "androidx.test:runner:1.1.0"
+  androidTestImplementation "androidx.test:rules:1.1.0"
   androidTestImplementation libs.assertjCore
 
   implementation libs.kotlin
-  implementation libs.playServicesGcm
   implementation libs.jodaTimeAndroid
   implementation 'com.github.skedgo:commons-collections:v1.0'
 
@@ -72,15 +72,50 @@ dependencies {
   implementation libs.rxjava
   implementation libs.rxAndroid
   implementation libs.androidMapsUtils
+  implementation 'com.firebase:firebase-jobdispatcher:0.8.5'
 
   implementation libs.dagger
   kapt libs.daggerCompiler
-  annotationProcessor libs.value
+  kapt libs.value
   compileOnly libs.valueAnnotations
   compileOnly libs.builderAnnotations
-  compileOnly libs.gsonAnnotations
+  implementation libs.immutablesGson
   api project(':CommonCoreLegacy')
   api project(':TripKitDomain')
   api project(':TripKitDomainLegacy')
   api project(':TripKitData')
+}
+
+// build a jar with source files
+task sourcesJar(type: Jar) {
+  from android.sourceSets.main.java.srcDirs
+  classifier = 'sources'
+}
+
+task javadoc(type: Javadoc) {
+  failOnError  false
+  source = android.sourceSets.main.java.sourceFiles
+  classpath += project.files(android.getBootClasspath().join(File.pathSeparator))
+  classpath += configurations.compile
+}
+
+// build a jar with javadoc
+task javadocJar(type: Jar, dependsOn: javadoc) {
+  classifier = 'javadoc'
+  from javadoc.destinationDir
+}
+
+artifacts {
+  archives sourcesJar
+  archives javadocJar
+}
+
+uploadArchives {
+  repositories {
+    mavenDeployer {
+      repository(url: "file://${localMaven}")
+      pom.groupId = tripkitGroup
+      pom.version = tripkitVersion
+    }
+  }
 }

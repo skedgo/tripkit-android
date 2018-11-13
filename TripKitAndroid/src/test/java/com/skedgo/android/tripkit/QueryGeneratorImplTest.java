@@ -1,6 +1,6 @@
 package com.skedgo.android.tripkit;
 
-import android.support.annotation.NonNull;
+import androidx.annotation.NonNull;
 
 import com.skedgo.android.common.model.Location;
 import com.skedgo.android.common.model.Query;
@@ -23,6 +23,7 @@ import java.util.Map;
 
 import rx.Observable;
 import rx.functions.Func1;
+import rx.functions.Func2;
 import rx.observers.TestSubscriber;
 
 import static java.util.Arrays.asList;
@@ -35,7 +36,9 @@ import static org.mockito.Mockito.when;
 @Config(constants = BuildConfig.class)
 public class QueryGeneratorImplTest {
   @Mock RegionService regionService;
-  private Func1<Query, Observable<List<Query>>> queryGenerator;
+  private Func2<Query, ModeFilter, Observable<List<Query>>> queryGenerator;
+
+  ModeFilter modeFilter = new DefaultModeFilter();
 
   @Before
   public void setUp() {
@@ -46,7 +49,7 @@ public class QueryGeneratorImplTest {
   @Test
   public void shouldPropagateNullPointerExceptionIfDepartureIsNull() {
     final TestSubscriber<List<Query>> subscriber = new TestSubscriber<>();
-    queryGenerator.call(new Query()).subscribe(subscriber);
+    queryGenerator.call(new Query(), modeFilter).subscribe(subscriber);
     subscriber.awaitTerminalEvent();
     assertThat(subscriber.getOnErrorEvents())
         .hasSize(1)
@@ -61,7 +64,7 @@ public class QueryGeneratorImplTest {
     query.setFromLocation(new Location());
 
     final TestSubscriber<List<Query>> subscriber = new TestSubscriber<>();
-    queryGenerator.call(query).subscribe(subscriber);
+    queryGenerator.call(query, modeFilter).subscribe(subscriber);
     subscriber.awaitTerminalEvent();
     assertThat(subscriber.getOnErrorEvents())
         .hasSize(1)
@@ -95,7 +98,7 @@ public class QueryGeneratorImplTest {
         });
 
     final TestSubscriber<List<Query>> subscriber = new TestSubscriber<>();
-    queryGenerator.call(query).subscribe(subscriber);
+    queryGenerator.call(query, modeFilter).subscribe(subscriber);
     subscriber.awaitTerminalEvent();
     assertThat(subscriber.getOnErrorEvents())
         .hasSize(1)
@@ -128,7 +131,7 @@ public class QueryGeneratorImplTest {
         });
 
     final TestSubscriber<List<Query>> subscriber = new TestSubscriber<>();
-    queryGenerator.call(query).subscribe(subscriber);
+    queryGenerator.call(query, modeFilter).subscribe(subscriber);
     subscriber.awaitTerminalEvent();
     assertThat(subscriber.getOnErrorEvents())
         .hasSize(1)
@@ -150,7 +153,7 @@ public class QueryGeneratorImplTest {
         .thenReturn(Observable.just(createBangaloreRegion()));
 
     final TestSubscriber<List<Query>> subscriber = new TestSubscriber<>();
-    queryGenerator.call(query).subscribe(subscriber);
+    queryGenerator.call(query, modeFilter).subscribe(subscriber);
 
     subscriber.awaitTerminalEvent();
     subscriber.assertNoErrors();

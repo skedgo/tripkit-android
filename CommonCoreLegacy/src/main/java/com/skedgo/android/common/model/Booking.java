@@ -2,8 +2,9 @@ package com.skedgo.android.common.model;
 
 import android.os.Parcel;
 import android.os.Parcelable;
-import android.support.annotation.Nullable;
+import androidx.annotation.Nullable;
 
+import com.google.gson.annotations.JsonAdapter;
 import com.google.gson.annotations.SerializedName;
 
 import org.immutables.gson.Gson;
@@ -14,6 +15,8 @@ import java.util.List;
 
 @Gson.TypeAdapters
 @Value.Immutable
+@Value.Style(passAnnotations = JsonAdapter.class)
+@JsonAdapter(GsonAdaptersBooking.class)
 public abstract class Booking implements Parcelable {
   public static final Creator<Booking> CREATOR = new Creator<Booking>() {
     @SuppressWarnings("unchecked")

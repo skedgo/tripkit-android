@@ -2,7 +2,7 @@ package com.skedgo.android.common.model;
 
 import android.os.Parcel;
 import android.os.Parcelable;
-import android.support.annotation.Nullable;
+import androidx.annotation.Nullable;
 
 import com.google.gson.annotations.JsonAdapter;
 
@@ -12,8 +12,13 @@ import org.immutables.value.Value;
 import java.util.ArrayList;
 import java.util.List;
 
-@Value.Immutable
-@Gson.TypeAdapters
+import static org.immutables.gson.Gson.TypeAdapters;
+import static org.immutables.value.Value.Immutable;
+import static org.immutables.value.Value.Style;
+
+@Immutable
+@TypeAdapters
+@Style(passAnnotations = JsonAdapter.class)
 @JsonAdapter(GsonAdaptersAlertAction.class)
 public abstract class AlertAction implements Parcelable {
 

@@ -1,6 +1,6 @@
 package com.skedgo.android.tripkit.alerts;
 
-import android.support.annotation.Nullable;
+import androidx.annotation.Nullable;
 
 import com.google.gson.annotations.JsonAdapter;
 import com.skedgo.android.common.model.RealtimeAlert;
@@ -8,8 +8,13 @@ import com.skedgo.android.common.model.RealtimeAlert;
 import org.immutables.gson.Gson;
 import org.immutables.value.Value;
 
-@Value.Immutable
-@Gson.TypeAdapters
+import static org.immutables.gson.Gson.TypeAdapters;
+import static org.immutables.value.Value.Immutable;
+import static org.immutables.value.Value.Style;
+
+@Immutable
+@TypeAdapters
+@Style(passAnnotations = JsonAdapter.class)
 @JsonAdapter(GsonAdaptersAlertBlock.class)
 public interface AlertBlock {
   @Nullable RealtimeAlert alert();
@@ -17,7 +22,7 @@ public interface AlertBlock {
   @Nullable String disruptionType();
   @Nullable String[] operators();
   @Nullable Route[] routes();
-  @Nullable TransportType transportType();
+  @Nullable ModeInfo modeInfo();
   @Nullable String[] stopCodes();
   @Nullable String[] serviceTripIDs();
 }

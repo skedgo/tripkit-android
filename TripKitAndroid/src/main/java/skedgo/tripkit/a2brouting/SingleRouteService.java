@@ -1,8 +1,11 @@
 package skedgo.tripkit.a2brouting;
 
-import android.support.annotation.NonNull;
+import androidx.annotation.NonNull;
 
 import com.skedgo.android.common.model.Query;
+import com.skedgo.android.tripkit.ModeFilter;
+
+import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
 
@@ -30,9 +33,10 @@ public class SingleRouteService implements RouteService {
     this.routeService = routeService;
   }
 
-  @NonNull @Override public Observable<List<TripGroup>> routeAsync(@NonNull Query query) {
+  @NotNull @Override
+  public Observable<List<TripGroup>> routeAsync(@NotNull Query query, @NotNull ModeFilter modeFilter) {
     cancellationSignal.onNext(null);
-    return routeService.routeAsync(query)
+    return routeService.routeAsync(query, modeFilter)
         .takeUntil(cancellationSignal.asObservable());
   }
 }

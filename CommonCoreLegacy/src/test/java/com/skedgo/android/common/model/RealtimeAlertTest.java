@@ -1,7 +1,6 @@
 package com.skedgo.android.common.model;
 
 import android.os.Parcel;
-import android.test.AndroidTestCase;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -19,7 +18,7 @@ import static org.assertj.core.api.Java6Assertions.*;
 
 @RunWith(TestRunner.class)
 @Config(constants = BuildConfig.class)
-public class RealtimeAlertTest extends AndroidTestCase {
+public class RealtimeAlertTest {
   @Test public void jsonKeys() {
     final RealtimeAlert alert = ImmutableRealtimeAlert.builder()
         .title("Some title")

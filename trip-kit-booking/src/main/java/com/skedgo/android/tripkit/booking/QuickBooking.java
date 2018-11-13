@@ -2,7 +2,7 @@ package com.skedgo.android.tripkit.booking;
 
 import android.os.Parcel;
 import android.os.Parcelable;
-import android.support.annotation.Nullable;
+import androidx.annotation.Nullable;
 
 import com.google.gson.annotations.JsonAdapter;
 import com.google.gson.annotations.SerializedName;
@@ -10,8 +10,13 @@ import com.google.gson.annotations.SerializedName;
 import org.immutables.gson.Gson;
 import org.immutables.value.Value;
 
-@Gson.TypeAdapters
-@Value.Immutable
+import static org.immutables.gson.Gson.TypeAdapters;
+import static org.immutables.value.Value.Immutable;
+import static org.immutables.value.Value.Style;
+
+@TypeAdapters
+@Immutable
+@Style(passAnnotations = JsonAdapter.class)
 @JsonAdapter(GsonAdaptersQuickBooking.class)
 public abstract class QuickBooking implements Parcelable {
   public static final Creator<QuickBooking> CREATOR = new Creator<QuickBooking>() {

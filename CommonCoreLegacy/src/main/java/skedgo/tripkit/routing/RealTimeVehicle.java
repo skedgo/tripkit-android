@@ -2,7 +2,7 @@ package skedgo.tripkit.routing;
 
 import android.os.Parcel;
 import android.os.Parcelable;
-import android.support.annotation.Nullable;
+import androidx.annotation.Nullable;
 
 import com.google.gson.annotations.SerializedName;
 import com.skedgo.android.common.model.Location;
@@ -45,7 +45,7 @@ public class RealTimeVehicle implements Parcelable {
   @SerializedName("label") private String mLabel;
   @SerializedName("lastUpdate") private long mLastUpdateTime;
   @SerializedName("icon") @Nullable private String icon;
-  @Nullable private String occupancy;
+  @SerializedName("occupancy") @Nullable private String occupancy;
 
   public long getId() {
     return mId;

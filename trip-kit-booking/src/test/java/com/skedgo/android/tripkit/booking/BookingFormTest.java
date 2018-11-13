@@ -405,7 +405,7 @@ public class BookingFormTest {
     JsonReader reader = new JsonReader(new StringReader(authBookingFormJson));
     BookingForm bookingForm = gson.fromJson(reader, BookingForm.class);
 
-    assertThat(bookingForm.isPayIQAuthForm()).isTrue();
+    assertThat(bookingForm.isSpecificAuthForm()).isTrue();
 
   }
 

@@ -2,15 +2,20 @@ package com.skedgo.android.common.model;
 
 import android.os.Parcel;
 import android.os.Parcelable;
-import android.support.annotation.Nullable;
+import androidx.annotation.Nullable;
 
 import com.google.gson.annotations.JsonAdapter;
 
 import org.immutables.gson.Gson;
 import org.immutables.value.Value;
 
-@Value.Immutable
-@Gson.TypeAdapters
+import static org.immutables.gson.Gson.TypeAdapters;
+import static org.immutables.value.Value.Immutable;
+import static org.immutables.value.Value.Style;
+
+@Immutable
+@TypeAdapters
+@Style(passAnnotations = JsonAdapter.class)
 @JsonAdapter(GsonAdaptersStreet.class)
 public abstract class Street implements Parcelable {
   public static final Creator<Street> CREATOR = new Creator<Street>() {
@@ -20,6 +25,7 @@ public abstract class Street implements Parcelable {
           .meters(in.readFloat())
           .encodedWaypoints(in.readString())
           .safe(in.readByte() == 1)
+          .dismount(in.readByte() == 1)
           .build();
     }
 
@@ -39,6 +45,10 @@ public abstract class Street implements Parcelable {
     return false;
   }
 
+  @Value.Default public boolean dismount() {
+    return false;
+  }
+
   @Override public int describeContents() {
     return 0;
   }
@@ -49,5 +59,6 @@ public abstract class Street implements Parcelable {
     dest.writeFloat(meters());
     dest.writeString(encodedWaypoints());
     dest.writeByte((byte) (safe() ? 1 : 0));
+    dest.writeByte((byte) (dismount() ? 1 : 0));
   }
 }

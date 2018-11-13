@@ -2,7 +2,7 @@ package com.skedgo.android.common.model;
 
 import android.os.Parcel;
 import android.os.Parcelable;
-import android.support.annotation.Nullable;
+import androidx.annotation.Nullable;
 
 import com.google.gson.annotations.JsonAdapter;
 import com.google.gson.annotations.SerializedName;
@@ -10,11 +10,16 @@ import com.google.gson.annotations.SerializedName;
 import org.immutables.gson.Gson;
 import org.immutables.value.Value;
 
+import static org.immutables.gson.Gson.TypeAdapters;
+import static org.immutables.value.Value.Immutable;
+import static org.immutables.value.Value.Style;
+
 /**
  * @see <a href="https://github.com/skedgo/skedgo-java/blob/production/RealTime/src/main/java/com/buzzhives/Realtime/RealtimeAlert.java">RealtimeAlert</a>
  */
-@Value.Immutable
-@Gson.TypeAdapters
+@Immutable
+@TypeAdapters
+@Style(passAnnotations = JsonAdapter.class)
 @JsonAdapter(GsonAdaptersRealtimeAlert.class)
 public abstract class RealtimeAlert implements Parcelable {
   public static final String SEVERITY_ALERT = "alert";
@@ -33,6 +38,7 @@ public abstract class RealtimeAlert implements Parcelable {
           .remoteIcon(in.readString())
           .alertAction((AlertAction) in.readParcelable(AlertAction.class.getClassLoader()))
           .lastUpdated(in.readLong())
+          .fromDate(in.readLong())
           .build();
     }
 
@@ -50,6 +56,10 @@ public abstract class RealtimeAlert implements Parcelable {
   @Nullable public abstract Location location();
 
   @Value.Default public long lastUpdated() {
+    return -1L;
+  }
+
+  @Value.Default public long fromDate() {
     return -1L;
   }
 
@@ -75,5 +85,6 @@ public abstract class RealtimeAlert implements Parcelable {
     out.writeString(remoteIcon());
     out.writeParcelable(alertAction(), 0);
     out.writeLong(lastUpdated());
+    out.writeLong(fromDate());
   }
 }

@@ -1,6 +1,6 @@
 package com.skedgo.android.tripkit;
 
-import android.support.annotation.Nullable;
+import androidx.annotation.Nullable;
 
 import com.google.gson.annotations.JsonAdapter;
 import skedgo.tripkit.routing.RealTimeVehicle;
@@ -11,8 +11,13 @@ import org.immutables.value.Value;
 
 import java.util.List;
 
-@Value.Immutable
-@Gson.TypeAdapters
+import static org.immutables.gson.Gson.TypeAdapters;
+import static org.immutables.value.Value.Immutable;
+import static org.immutables.value.Value.Style;
+
+@Immutable
+@TypeAdapters
+@Style(passAnnotations = JsonAdapter.class)
 @JsonAdapter(GsonAdaptersServiceResponse.class)
 public interface ServiceResponse {
   String realTimeStatus();

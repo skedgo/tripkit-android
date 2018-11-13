@@ -1,6 +1,6 @@
 package com.skedgo.android.tripkit;
 
-import android.support.annotation.NonNull;
+import androidx.annotation.NonNull;
 
 import skedgo.tripkit.routing.Trip;
 

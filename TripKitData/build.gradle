@@ -5,12 +5,8 @@ apply plugin: "com.github.dcendents.android-maven"
 apply plugin: "kotlin-android"
 apply plugin: "kotlin-kapt"
 
-// For https://github.com/dcendents/android-maven-gradle-plugin.
-group = "com.skedgo.tripkit"
-
 android {
   compileSdkVersion versions.compileSdkVersion
-  buildToolsVersion versions.buildToolsVersion
 
   defaultConfig {
     minSdkVersion versions.proMinSdkVersion
@@ -38,9 +34,44 @@ dependencies {
   implementation libs.rxrelay1
   implementation libs.jodaTimeAndroid
   kapt libs.daggerCompiler
-  annotationProcessor libs.value
+  kapt libs.value
   compileOnly libs.valueAnnotations
   compileOnly libs.builderAnnotations
-  compileOnly libs.gsonAnnotations
+  implementation libs.immutablesGson
   implementation libs.kotlin
+}
+
+
+// build a jar with source files
+task sourcesJar(type: Jar) {
+  from android.sourceSets.main.java.srcDirs
+  classifier = 'sources'
+}
+
+task javadoc(type: Javadoc) {
+  failOnError  false
+  source = android.sourceSets.main.java.sourceFiles
+  classpath += project.files(android.getBootClasspath().join(File.pathSeparator))
+  classpath += configurations.compile
+}
+
+// build a jar with javadoc
+task javadocJar(type: Jar, dependsOn: javadoc) {
+  classifier = 'javadoc'
+  from javadoc.destinationDir
+}
+
+artifacts {
+  archives sourcesJar
+  archives javadocJar
+}
+
+uploadArchives {
+  repositories {
+    mavenDeployer {
+      repository(url: "file://${localMaven}")
+      pom.groupId = tripkitGroup
+      pom.version = tripkitVersion
+    }
+  }
 }

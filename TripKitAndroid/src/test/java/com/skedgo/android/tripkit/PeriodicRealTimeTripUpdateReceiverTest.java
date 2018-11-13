@@ -1,12 +1,5 @@
 package com.skedgo.android.tripkit;
 
-import android.test.UiThreadTest;
-
-import kotlin.Pair;
-import rx.schedulers.Schedulers;
-import skedgo.tripkit.routing.Trip;
-import skedgo.tripkit.routing.TripGroup;
-
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -16,12 +9,12 @@ import org.robolectric.annotation.Config;
 
 import java.util.concurrent.TimeUnit;
 
+import kotlin.Pair;
 import rx.Observable;
 import rx.observers.TestSubscriber;
+import skedgo.tripkit.routing.Trip;
+import skedgo.tripkit.routing.TripGroup;
 
-import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.ArgumentMatchers.anyString;
-import static org.mockito.Matchers.eq;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
@@ -43,7 +36,7 @@ public class PeriodicRealTimeTripUpdateReceiverTest {
         .build();
   }
 
-  @UiThreadTest @Test
+  @Test
   public void ignoreErrorByTripUpdater() {
     final Trip displayTrip = mock(Trip.class);
     when(displayTrip.getUpdateURL()).thenReturn("AUG 2016");

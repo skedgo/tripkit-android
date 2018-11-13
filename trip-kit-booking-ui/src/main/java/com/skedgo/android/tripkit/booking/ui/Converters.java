@@ -1,6 +1,6 @@
 package com.skedgo.android.tripkit.booking.ui;
 
-import android.databinding.BindingConversion;
+import androidx.databinding.BindingConversion;
 import android.view.View;
 
 public final class Converters {

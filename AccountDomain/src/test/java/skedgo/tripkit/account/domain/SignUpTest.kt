@@ -1,6 +1,6 @@
 package skedgo.tripkit.account.domain
 
-import com.nhaarman.mockito_kotlin.*
+import com.nhaarman.mockitokotlin2.*
 import org.junit.Test
 import rx.Observable
 import rx.observers.TestSubscriber

@@ -3,8 +3,9 @@ buildscript {
   ext.kotlinVersion = versions.kotlinVersion
 
   repositories {
-    jcenter()
+    mavenCentral()
     google()
+    jcenter()
   }
 
   dependencies {
@@ -15,12 +16,14 @@ buildscript {
     classpath 'com.jakewharton.hugo:hugo-plugin:1.2.1'
 
     // To deploy AAR files to local maven.
-    classpath 'com.github.dcendents:android-maven-gradle-plugin:1.5'
+    classpath 'com.github.dcendents:android-maven-gradle-plugin:2.1'
   }
 }
 
 ext {
-  tripKitAndroidMaven = "${rootDir}/maven/"
+  localMaven = "${rootDir}/../maven/"
+  tripkitGroup = "com.skedgo.tripkit"
+  tripkitVersion= "v1.20"
 }
 
 allprojects {
@@ -40,8 +43,9 @@ allprojects {
   }
 
   repositories {
-    jcenter()
     google()
+    mavenCentral()
+    jcenter()
     maven { url "https://jitpack.io" }
   }
 }

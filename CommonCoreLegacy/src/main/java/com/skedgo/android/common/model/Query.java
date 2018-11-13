@@ -5,8 +5,8 @@ import android.os.Bundle;
 import android.os.Parcel;
 import android.os.Parcelable;
 import android.os.TransactionTooLargeException;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import android.text.TextUtils;
 
 import java.util.ArrayList;
@@ -130,6 +130,14 @@ public class Query implements Parcelable {
     if (TextUtils.isEmpty(this.mUnit)) {
       this.mUnit = Units.UNIT_AUTO;
     }
+  }
+
+  public boolean originIsCurrentLocation() {
+    return mFromLocation == null;
+  }
+
+  public boolean destinationIsCurrentLocation() {
+    return mToLocation == null;
   }
 
   @Nullable

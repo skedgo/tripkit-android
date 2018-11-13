@@ -2,9 +2,9 @@ package skedgo.tripkit.routing;
 
 import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
-import android.support.annotation.DrawableRes;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
+import androidx.annotation.DrawableRes;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import android.text.TextUtils;
 
 import com.skedgo.android.common.R;
@@ -48,6 +48,7 @@ public enum VehicleMode {
   TRAM("tram", R.drawable.ic_tram, R.drawable.ic_tram_realtime),
   WALK("walk", R.drawable.ic_walk, R.drawable.ic_walk),
   WHEEL_CHAIR("wheelchair", R.drawable.ic_wheelchair, R.drawable.ic_wheelchair),
+  FUNICULAR("funicular", R.drawable.ic_icon_mode_funicular, R.drawable.ic_icon_mode_funicular),
 
   // FIXME: Is this still being used?
   TOLL("toll", R.drawable.ic_toll, R.drawable.ic_toll);
@@ -88,7 +89,7 @@ public enum VehicleMode {
   }
 
   public static VehicleMode[] getPublicTransportModes() {
-    return new VehicleMode[] {FERRY, TRAIN, MONORAIL, SUBWAY, BUS, TRAM, CABLECAR};
+    return new VehicleMode[] {FERRY, TRAIN, MONORAIL, SUBWAY, BUS, TRAM, CABLECAR, FUNICULAR};
   }
 
   public boolean isPublicTransport() {

@@ -1,5 +1,7 @@
 package com.skedgo.android.tripkit.booking.ui;
 
+import androidx.databinding.DataBindingComponent;
+
 import com.skedgo.android.tripkit.booking.BookingModule;
 import com.skedgo.android.tripkit.booking.ui.activity.BookingActivity;
 import com.skedgo.android.tripkit.booking.ui.activity.ExternalProviderAuthActivity;
@@ -15,7 +17,7 @@ import dagger.Component;
     BookingUiModule.class,
     BookingModule.class
 })
-public interface BookingUiComponent {
+public interface BookingUiComponent extends DataBindingComponent {
   Picasso picasso();
 
   void inject(BookingActivity activity);

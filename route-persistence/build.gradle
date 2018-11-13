@@ -3,13 +3,8 @@ apply plugin: 'com.jakewharton.hugo'
 apply plugin: 'com.github.dcendents.android-maven'
 apply plugin: 'kotlin-android'
 
-// For https://github.com/dcendents/android-maven-gradle-plugin.
-group = 'com.skedgo'
-version = '1.0'
-
 android {
   compileSdkVersion versions.compileSdkVersion
-  buildToolsVersion versions.buildToolsVersion
 
   // To print Hugo's logs.
   // defaultPublishConfig 'debug'
@@ -23,10 +18,10 @@ android {
 
   defaultConfig {
     minSdkVersion 15
-    targetSdkVersion 25
+    targetSdkVersion 27
     versionCode 1
     versionName '1.0'
-    testInstrumentationRunner 'android.support.test.runner.AndroidJUnitRunner'
+    testInstrumentationRunner 'androidx.test.runner.AndroidJUnitRunner'
   }
 
   buildTypes {
@@ -40,7 +35,7 @@ android {
 dependencies {
   implementation project(':CommonCoreLegacy')
   implementation 'com.github.skedgo:sqlite-utils:v1.0'
-  implementation 'com.android.support:appcompat-v7:25.3.0'
+  implementation libs.appCompat
   implementation libs.gson
   implementation libs.supportAnnotations
   implementation project(":TripKitDomain")
@@ -52,7 +47,7 @@ dependencies {
   testImplementation libs.mockitoKotlin, { exclude group: 'org.jetbrains.kotlin' }
   testImplementation libs.kluent
 
-  androidTestImplementation 'com.android.support.test.espresso:espresso-core:2.2.2', {
+  androidTestImplementation 'androidx.test.espresso:espresso-core:3.1.0', {
     exclude group: 'com.android.support', module: 'support-annotations'
   }
 }
@@ -60,7 +55,9 @@ dependencies {
 uploadArchives {
   repositories {
     mavenDeployer {
-      repository(url: "file://${tripKitAndroidMaven}")
+      repository(url: "file://${localMaven}")
+      pom.groupId = tripkitGroup
+      pom.version = tripkitVersion
     }
   }
 }

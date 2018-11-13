@@ -1,12 +1,12 @@
 package com.skedgo.android.tripkit.booking.ui.viewmodel
 
 import android.content.Intent
-import android.databinding.ObservableBoolean
-import android.databinding.ObservableField
+import androidx.databinding.ObservableBoolean
+import androidx.databinding.ObservableField
 import android.net.Uri
 import android.os.Bundle
 import android.os.Parcelable
-import android.support.annotation.VisibleForTesting
+import androidx.annotation.VisibleForTesting
 import android.webkit.WebView
 import android.webkit.WebViewClient
 import com.skedgo.android.tripkit.booking.BookingForm
