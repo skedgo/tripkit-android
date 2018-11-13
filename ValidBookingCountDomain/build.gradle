@@ -33,10 +33,3 @@ uploadArchives {
     }
   }
 }
-
-install {
-  repositories.mavenInstaller {
-    pom.groupId = tripkitGroup
-    pom.version = tripkitVersion
-  }
-}
