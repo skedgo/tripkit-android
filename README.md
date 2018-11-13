@@ -24,7 +24,7 @@ dependencies {
 }
 ```
 [![Release](https://jitpack.io/v/skedgo/tripkit-android.svg)]
-(https://jitpack.io/skedgo/tripkit-android)
+(https://jitpack.io/#skedgo/tripkit-android)
 
 For a full setup, you can have a look at TripKitSamples' build file [here](https://github.com/skedgo/tripkit-android/blob/dev/TripKitSamples/build.gradle).
 
