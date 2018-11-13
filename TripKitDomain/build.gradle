@@ -26,6 +26,7 @@ dependencies {
   kapt libs.value
   compileOnly libs.immutablesAndroidStub
   compileOnly libs.value
+  implementation libs.koptional
 }
 
 

@@ -13,15 +13,16 @@ versions.targetSdkVersion = 27
 // See change-log at https://github.com/JetBrains/kotlin/blob/master/ChangeLog.md.
 versions.kotlinVersion = "1.2.71"
 versions.supportLibraryVersion = "28.0.0"
-versions.androidGradlePlugin = "3.2.0"
+versions.androidGradlePlugin = "3.2.1"
 versions.okHttpVersion = "3.8.1"
 versions.retrofitVersion = "2.3.0"
+versions.androidxVersion = "1.0.0"
 versions.architectureComponents = "1.0.0"
-versions.dagger = "2.13"
+versions.dagger = "2.18"
 ext.versions = versions
 
 Expando libs = new Expando()
-libs.mockitoKotlin = "com.nhaarman:mockito-kotlin-kt1.1:1.5.0"
+libs.mockitoKotlin = "com.nhaarman.mockitokotlin2:mockito-kotlin:2.0.0-RC3"
 libs.mockitoCore = "org.mockito:mockito-core:2.8.9"
 libs.mockitoAndroid = "org.mockito:mockito-android:2.8.9"
 libs.robolectric = "org.robolectric:robolectric:3.6.1"
@@ -41,12 +42,8 @@ libs.androidMapsUtils = "com.github.skedgo:android-maps-utils:241fc89"
 
 // Support Library package
 libs.multidex = "com.android.support:multidex:1.0.2"
-libs.supportAnnotations = "com.android.support:support-annotations:$versions.supportLibraryVersion"
-libs.recyclerView = "com.android.support:recyclerview-v7:$versions.supportLibraryVersion"
-libs.cardView = "com.android.support:cardview-v7:$versions.supportLibraryVersion"
-libs.supportDesign = "com.android.support:design:$versions.supportLibraryVersion"
-libs.supportV4 = "com.android.support:support-v4:$versions.supportLibraryVersion"
-libs.appCompat = "com.android.support:appcompat-v7:$versions.supportLibraryVersion"
+libs.supportAnnotations = "androidx.annotation:annotation:$versions.androidxVersion"
+libs.appCompat = "androidx.appcompat:appcompat:$versions.androidxVersion"
 
 libs.value = "org.immutables:value:$versions.immutablesVersion"
 libs.valueAnnotations = "org.immutables:value:$versions.immutablesVersion:annotations"
@@ -61,9 +58,13 @@ libs.daggerCompiler = "com.google.dagger:dagger-compiler:$versions.dagger"
 libs.daggerAndroidProcessor = "com.google.dagger:dagger-android-processor:$versions.dagger"
 
 libs.rxjava = "io.reactivex:rxjava:1.3.5"
+libs.rxjava2 = "io.reactivex.rxjava2:rxjava:2.2.3"
 libs.rxAndroid = "io.reactivex:rxandroid:1.2.1"
+libs.rxAndroid2 = "io.reactivex.rxjava2:rxandroid:2.1.0"
+libs.rxjava2Interop = "com.github.akarnokd:rxjava2-interop:0.13.3"
 libs.rxrelay1 = "com.jakewharton.rxrelay:rxrelay:1.2.0"
-libs.kluent = "org.amshove.kluent:kluent:1.30"
+libs.rxrelay2 = "com.jakewharton.rxrelay2:rxrelay:2.1.0"
+libs.kluent = "org.amshove.kluent:kluent:1.38"
 libs.kotlin = "org.jetbrains.kotlin:kotlin-stdlib:$versions.kotlinVersion"
 libs.gson = "com.google.code.gson:gson:2.7"
 libs.junit = "junit:junit:4.12"
@@ -79,13 +80,12 @@ libs.materialProgressBar = "me.zhanghai.android.materialprogressbar:library:1.4.
 libs.timber = "com.jakewharton.timber:timber:4.5.1"
 libs.rxtry = "com.github.thuytrinh:RxTry:c2f002df6c"
 libs.koptional = "com.gojuno.koptional:koptional:1.2.0"
-libs.bindingCollectionAdapterRecyclerView = "me.tatarka.bindingcollectionadapter2:bindingcollectionadapter-recyclerview:2.3.0-beta1"
+libs.bindingCollectionAdapterRecyclerView = "me.tatarka.bindingcollectionadapter2:bindingcollectionadapter-recyclerview:3.0.0-beta3"
 libs.rxLifecycleComponents = "com.github.skedgo:RxLifecycleComponents:v1.5"
 
 // See changelog at http://developer.android.com/tools/revisions/gradle-plugin.html
 // and https://twitter.com/AGPVersions.
 libs.androidGradlePlugin = "com.android.tools.build:gradle:$versions.androidGradlePlugin"
-libs.dataBindingCompiler = "com.android.databinding:library:$versions.androidGradlePlugin"
 
 // Architecture Components
 libs.roomRuntime = "android.arch.persistence.room:runtime:$versions.architectureComponents"

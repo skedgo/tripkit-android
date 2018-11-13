@@ -2,7 +2,7 @@ package com.skedgo.android.common.model;
 
 import android.os.Parcel;
 import android.os.Parcelable;
-import android.support.annotation.Nullable;
+import androidx.annotation.Nullable;
 
 import com.google.gson.annotations.JsonAdapter;
 
@@ -25,6 +25,7 @@ public abstract class Street implements Parcelable {
           .meters(in.readFloat())
           .encodedWaypoints(in.readString())
           .safe(in.readByte() == 1)
+          .dismount(in.readByte() == 1)
           .build();
     }
 
@@ -44,6 +45,10 @@ public abstract class Street implements Parcelable {
     return false;
   }
 
+  @Value.Default public boolean dismount() {
+    return false;
+  }
+
   @Override public int describeContents() {
     return 0;
   }
@@ -54,5 +59,6 @@ public abstract class Street implements Parcelable {
     dest.writeFloat(meters());
     dest.writeString(encodedWaypoints());
     dest.writeByte((byte) (safe() ? 1 : 0));
+    dest.writeByte((byte) (dismount() ? 1 : 0));
   }
 }

@@ -1,7 +1,7 @@
 package com.skedgo.android.common.util;
 
 import android.content.Context;
-import android.support.annotation.Nullable;
+import androidx.annotation.Nullable;
 
 import com.skedgo.android.common.R;
 import com.skedgo.android.common.model.Location;

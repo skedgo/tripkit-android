@@ -4,7 +4,7 @@ import android.content.res.Resources;
 import android.graphics.Color;
 import android.graphics.LightingColorFilter;
 import android.graphics.drawable.Drawable;
-import android.support.annotation.NonNull;
+import androidx.annotation.NonNull;
 
 public final class VehicleDrawables {
   private VehicleDrawables() {}

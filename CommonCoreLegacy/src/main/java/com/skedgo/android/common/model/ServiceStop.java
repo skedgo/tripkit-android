@@ -2,7 +2,7 @@ package com.skedgo.android.common.model;
 
 import android.content.Context;
 import android.os.Parcel;
-import android.support.annotation.Nullable;
+import androidx.annotation.Nullable;
 
 import com.google.gson.annotations.SerializedName;
 import com.skedgo.android.common.rx.Var;

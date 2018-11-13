@@ -1,8 +1,7 @@
 package com.skedgo.android.tripkit;
 
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-import android.support.v4.util.ArrayMap;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import android.text.TextUtils;
 
 import com.gojuno.koptional.None;
@@ -21,6 +20,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
+import androidx.collection.ArrayMap;
 import kotlin.Pair;
 import rx.Observable;
 import rx.functions.Func1;

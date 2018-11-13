@@ -1,6 +1,6 @@
 package com.skedgo.android.tripkit;
 
-import android.support.annotation.Nullable;
+import androidx.annotation.Nullable;
 
 public final class OutOfRegionsException extends RuntimeException {
   private final double latitude;

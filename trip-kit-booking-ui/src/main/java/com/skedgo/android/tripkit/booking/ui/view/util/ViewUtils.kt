@@ -1,6 +1,6 @@
 package com.skedgo.android.tripkit.booking.ui.view.util
 
-import android.databinding.BindingAdapter
+import androidx.databinding.BindingAdapter
 import android.webkit.WebView
 import android.widget.ImageView
 import com.skedgo.android.tripkit.booking.ui.BookingUiComponent

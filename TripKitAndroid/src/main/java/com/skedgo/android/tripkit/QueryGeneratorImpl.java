@@ -1,6 +1,6 @@
 package com.skedgo.android.tripkit;
 
-import android.support.annotation.NonNull;
+import androidx.annotation.NonNull;
 
 import com.skedgo.android.common.model.Location;
 import com.skedgo.android.common.model.Query;

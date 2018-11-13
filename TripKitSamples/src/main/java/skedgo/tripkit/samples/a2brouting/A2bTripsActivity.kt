@@ -1,8 +1,8 @@
 package skedgo.tripkit.samples.a2brouting
 
-import android.databinding.DataBindingUtil
+import androidx.databinding.DataBindingUtil
 import android.os.Bundle
-import android.support.v7.app.AlertDialog
+import androidx.appcompat.app.AlertDialog
 import rx.Observable
 import rx.android.schedulers.AndroidSchedulers.mainThread
 import skedgo.rxlifecyclecomponents.RxAppCompatActivity

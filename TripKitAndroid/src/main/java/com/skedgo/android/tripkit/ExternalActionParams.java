@@ -1,6 +1,6 @@
 package com.skedgo.android.tripkit;
 
-import android.support.annotation.Nullable;
+import androidx.annotation.Nullable;
 
 import skedgo.tripkit.routing.TripSegment;
 

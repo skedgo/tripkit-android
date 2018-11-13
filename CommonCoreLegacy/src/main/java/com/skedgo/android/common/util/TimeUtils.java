@@ -4,7 +4,7 @@
 
 package com.skedgo.android.common.util;
 
-import android.support.annotation.Nullable;
+import androidx.annotation.Nullable;
 import android.text.format.Time;
 
 import java.util.Calendar;
