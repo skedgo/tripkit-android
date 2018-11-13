@@ -23,8 +23,8 @@ dependencies {
   compile 'com.github.skedgo.tripkit-android:TripKitAndroid:<insert-newest-version-here>'
 }
 ```
-[![Release](https://jitpack.io/v/User/Repo.svg)]
-(https://jitpack.io/#User/Repo)
+[![Release](https://jitpack.io/v/skedgo/tripkit-android.svg)]
+(https://jitpack.io/skedgo/tripkit-android)
 
 For a full setup, you can have a look at TripKitSamples' build file [here](https://github.com/skedgo/tripkit-android/blob/dev/TripKitSamples/build.gradle).
 
