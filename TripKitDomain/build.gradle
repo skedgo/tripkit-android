@@ -3,10 +3,6 @@ apply plugin: "kotlin-kapt"
 apply plugin: 'java'
 apply plugin: 'maven'
 
-// To publish via JitPack.
-group = 'com.skedgo.tripkit'
-version = "1.2"
-
 // To fix error of converting bytecode to dex.
 targetCompatibility = '1.7'
 sourceCompatibility = '1.7'
@@ -29,11 +25,19 @@ dependencies {
   implementation libs.koptional
 }
 
-
 uploadArchives {
   repositories {
     mavenDeployer {
       repository(url: "file://${localMaven}")
+      pom.groupId = tripkitGroup
+      pom.version = tripkitVersion
     }
+  }
+}
+
+install {
+  repositories.mavenInstaller {
+    pom.groupId = tripkitGroup
+    pom.version = tripkitVersion
   }
 }

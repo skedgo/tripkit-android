@@ -59,13 +59,20 @@ dependencies {
   implementation libs.rxAndroid
 
 }
-group = ext.versions.tripGoGroup
-version = ext.versions.tripGoLibrary
 
 uploadArchives {
   repositories {
     mavenDeployer {
       repository(url: "file://${localMaven}")
+      pom.groupId = tripkitGroup
+      pom.version = tripkitVersion
     }
+  }
+}
+
+install {
+  repositories.mavenInstaller {
+    pom.groupId = tripkitGroup
+    pom.version = tripkitVersion
   }
 }

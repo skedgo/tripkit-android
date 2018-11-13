@@ -5,10 +5,6 @@ apply plugin: "com.github.dcendents.android-maven"
 apply plugin: "kotlin-android"
 apply plugin: "kotlin-kapt"
 
-// For https://github.com/dcendents/android-maven-gradle-plugin.
-group = "com.skedgo.tripkit"
-version = "1.2"
-
 android {
   compileSdkVersion versions.compileSdkVersion
 
@@ -73,7 +69,15 @@ uploadArchives {
   repositories {
     mavenDeployer {
       repository(url: "file://${localMaven}")
+      pom.groupId = tripkitGroup
+      pom.version = tripkitVersion
     }
   }
 }
 
+install {
+  repositories.mavenInstaller {
+    pom.groupId = tripkitGroup
+    pom.version = tripkitVersion
+  }
+}
