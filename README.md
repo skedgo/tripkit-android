@@ -23,8 +23,8 @@ dependencies {
   compile 'com.github.skedgo.tripkit-android:TripKitAndroid:<insert-newest-version-here>'
 }
 ```
-
-Note that, the `transitive = true` line is a must for TripKit to work properly.
+[![Release](https://jitpack.io/v/User/Repo.svg)]
+(https://jitpack.io/#User/Repo)
 
 For a full setup, you can have a look at TripKitSamples' build file [here](https://github.com/skedgo/tripkit-android/blob/dev/TripKitSamples/build.gradle).
 
