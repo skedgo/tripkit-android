@@ -1,8 +1,8 @@
 package skedgo.tripkit.a2brouting
 
 import com.skedgo.android.common.model.Query
-import com.skedgo.android.tripkit.DefaultModeFilter
-import com.skedgo.android.tripkit.ModeFilter
+import com.skedgo.android.tripkit.TransitModeFilter
+import com.skedgo.android.tripkit.TransportModeFilter
 import rx.Observable
 import skedgo.tripkit.routing.TripGroup
 
@@ -20,5 +20,8 @@ interface RouteService {
    * So be sure to [Observable.observeOn] with [rx.android.schedulers.AndroidSchedulers.mainThread]
    * to render [TripGroup]s on the main thread.
    */
-  fun routeAsync(query: Query, modeFilter: ModeFilter = DefaultModeFilter()): Observable<List<TripGroup>>
+  fun routeAsync(query: Query,
+                 transportModeFilter: TransportModeFilter = object : TransportModeFilter {},
+                 transitModeFilter: TransitModeFilter = object : TransitModeFilter {}):
+      Observable<List<TripGroup>>
 }

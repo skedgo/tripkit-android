@@ -127,7 +127,6 @@ public class MainModule {
     final QueryGeneratorImpl queryGenerator = new QueryGeneratorImpl(regionService);
     return new RouteServiceImpl(
         queryGenerator,
-        configs.excludedTransitModesAdapter(),
         co2Preferences,
         tripPreferences,
         configs.extraQueryMapProvider(),
