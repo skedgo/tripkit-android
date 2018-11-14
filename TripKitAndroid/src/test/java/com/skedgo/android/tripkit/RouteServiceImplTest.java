@@ -32,8 +32,7 @@ import static org.mockito.Matchers.eq;
 import static org.mockito.Mockito.when;
 
 public class RouteServiceImplTest extends TripKitAndroidRobolectricTest {
-  @Mock Func2<Query, ModeFilter, Observable<List<Query>>> queryGenerator;
-  @Mock ExcludedTransitModesAdapter excludedTransitModesAdapter;
+  @Mock QueryGenerator queryGenerator;
   @Mock Co2Preferences co2Preferences;
   @Mock TripPreferences tripPreferences;
   @Mock ExtraQueryMapProvider extraQueryMapProvider;
@@ -46,7 +45,6 @@ public class RouteServiceImplTest extends TripKitAndroidRobolectricTest {
     MockitoAnnotations.initMocks(this);
     routeService = new RouteServiceImpl(
         queryGenerator,
-        excludedTransitModesAdapter,
         co2Preferences,
         tripPreferences,
         extraQueryMapProvider,
@@ -169,25 +167,25 @@ public class RouteServiceImplTest extends TripKitAndroidRobolectricTest {
     assertThat(options).containsEntry("includeStops", "1");
   }
 
-  @Test public void getExcludedTransitModesAsNonNull() {
-    final String regionName = "Some region name";
-    assertThat(routeService.getExcludedTransitModesAsNonNull(
-        null,
-        regionName
-    )).isEmpty();
-    assertThat(routeService.getExcludedTransitModesAsNonNull(
-        excludedTransitModesAdapter,
-        regionName
-    )).isEmpty();
-
-    final List<String> excludedTransitModes = Arrays.asList("a", "b", "c");
-    when(excludedTransitModesAdapter.call(eq(regionName)))
-        .thenReturn(excludedTransitModes);
-    assertThat(routeService.getExcludedTransitModesAsNonNull(
-        excludedTransitModesAdapter,
-        regionName
-    )).isSameAs(excludedTransitModes);
-  }
+//  @Test public void getExcludedTransitModesAsNonNull() {
+//    final String regionName = "Some region name";
+//    assertThat(routeService.getExcludedTransitModesAsNonNull(
+//        null,
+//        regionName
+//    )).isEmpty();
+//    assertThat(routeService.getExcludedTransitModesAsNonNull(
+//        excludedTransitModesAdapter,
+//        regionName
+//    )).isEmpty();
+//
+//    final List<String> excludedTransitModes = Arrays.asList("a", "b", "c");
+//    when(excludedTransitModesAdapter.call(eq(regionName)))
+//        .thenReturn(excludedTransitModes);
+//    assertThat(routeService.getExcludedTransitModesAsNonNull(
+//        excludedTransitModesAdapter,
+//        regionName
+//    )).isSameAs(excludedTransitModes);
+//  }
 
   @Test public void includeCo2Profile() {
     final Map<String, Float> co2Profile = new HashMap<>();
