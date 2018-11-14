@@ -1,11 +1,14 @@
 package com.skedgo.android.tripkit
 
+import com.skedgo.android.tripkit.tsp.RegionInfo
+import skedgo.tripkit.routing.ModeInfo
+
 interface TransitModeFilter {
   /**
-   * @param allTransitModes is all transport modes supported by the routing region
+   * @param regionInfo is the regionInfo of the Region that will be used for routing
    * @return Return modes that will be included in routing requests
    */
-  fun filterTransitModes(allTransitModes: List<String>): List<String> {
-    return allTransitModes
+  fun filterTransitModes(regionInfo: RegionInfo): List<ModeInfo> {
+    return regionInfo.transitModes()!!
   }
 }

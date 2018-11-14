@@ -1,8 +1,6 @@
 package skedgo.tripkit.a2brouting
 
 import com.skedgo.android.common.model.Query
-import com.skedgo.android.tripkit.DefaultModeFilter
-import com.skedgo.android.tripkit.ModeFilter
 import com.skedgo.android.tripkit.TransitModeFilter
 import com.skedgo.android.tripkit.TransportModeFilter
 import rx.Observable

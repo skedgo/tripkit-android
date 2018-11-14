@@ -31,7 +31,7 @@ internal class QueryGeneratorImpl(private val regionService: RegionService) : Qu
         }
         .flatMap { (region, query) ->
           val allTransportModes = when {
-            query.transportModeIds.isEmpty() -> query.transportModeIds
+            query.transportModeIds.isNotEmpty() -> query.transportModeIds
             else -> {
               region.transportModeIds!!
             }
