@@ -1,6 +1,10 @@
 package skedgo.tripkit.a2brouting
 
+import com.nhaarman.mockitokotlin2.any
+import com.nhaarman.mockitokotlin2.eq
+import com.nhaarman.mockitokotlin2.whenever
 import com.skedgo.android.common.model.Query
+import com.skedgo.android.tripkit.TransitModeFilter
 import com.skedgo.android.tripkit.TransportModeFilter
 import org.assertj.core.api.Java6Assertions.assertThat
 import org.junit.Before
@@ -17,16 +21,18 @@ import skedgo.tripkit.routing.TripGroup
 
 class SingleRouteServiceTest {
   @Rule
+  @JvmField
   var rule = MockitoJUnit.rule()
   @Mock
-  internal var routeService: RouteService? = null
+  internal lateinit var routeService: RouteService
 
   internal var transportModeFilter = object : TransportModeFilter {}
-  private var singleRouteService: SingleRouteService? = null
+  internal var transitModeFilter = object : TransitModeFilter {}
+  private lateinit var singleRouteService: SingleRouteService
 
   @Before
   fun before() {
-    singleRouteService = SingleRouteService(routeService!!)
+    singleRouteService = SingleRouteService(routeService)
   }
 
   /**
@@ -38,14 +44,14 @@ class SingleRouteServiceTest {
   fun shouldCancelPreviousRequest_withQuery() {
     val emitter1 = PublishSubject.create<List<TripGroup>>()
     val emitter2 = PublishSubject.create<List<TripGroup>>()
-    `when`<Observable<List<TripGroup>>>(routeService!!.routeAsync(ArgumentMatchers.any(Query::class.java), ArgumentMatchers.eq<TransportModeFilter>(transportModeFilter)))
+    whenever(routeService.routeAsync(any(), eq(transportModeFilter), eq(transitModeFilter)))
         .thenReturn(emitter1.asObservable())
         .thenReturn(emitter2.asObservable())
 
-    singleRouteService!!.routeAsync(mock(Query::class.java), transportModeFilter).subscribe()
+    singleRouteService.routeAsync(mock(Query::class.java), transportModeFilter, transitModeFilter).subscribe()
     assertThat(emitter1.hasObservers()).isTrue()
 
-    singleRouteService!!.routeAsync(mock(Query::class.java), transportModeFilter).subscribe()
+    singleRouteService.routeAsync(mock(Query::class.java), transportModeFilter, transitModeFilter).subscribe()
     assertThat(emitter1.hasObservers()).isFalse()
     assertThat(emitter2.hasObservers()).isTrue()
   }
