@@ -23,7 +23,7 @@ buildscript {
 ext {
   localMaven = "${rootDir}/../maven/"
   tripkitGroup = "com.skedgo.tripkit"
-  tripkitVersion= "v1.20"
+  tripkitVersion= "v1.21"
 }
 
 allprojects {
