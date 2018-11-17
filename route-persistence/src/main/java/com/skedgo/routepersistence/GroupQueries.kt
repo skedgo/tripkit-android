@@ -26,7 +26,7 @@ object GroupQueries {
    * whatever [UUID.toString] that
    * [TripGroup]s were associated with when saving them.
    */
-  fun hasRequestId(id: String): Pair<String, Array<String>> {
+  fun hasRequestId(id: String): Pair<String, Array<String>?> {
     return Pair.create(
         "select * from " + TABLE_TRIP_GROUPS
             + " where " + COL_REQUEST_ID + " = ?",
@@ -37,7 +37,7 @@ object GroupQueries {
   /**
    * @param uuid Should be [TripGroup.uuid].
    */
-  fun hasUuid(uuid: String): Pair<String, Array<String>> {
+  fun hasUuid(uuid: String): Pair<String, Array<String>?> {
     return Pair.create(
         "select * from " + TABLE_TRIP_GROUPS
             + " where " + COL_UUID + " = ?",
