@@ -64,7 +64,7 @@ open class RouteStore(private val databaseHelper: SQLiteOpenHelper, private val 
   }
 
   @DebugLog
-  open fun queryAsync(query: Pair<String, Array<String>>): Observable<TripGroup> {
+  open fun queryAsync(query: Pair<String, Array<String>?>): Observable<TripGroup> {
     return queryAsync(query.first, query.second)
   }
 
@@ -138,7 +138,7 @@ open class RouteStore(private val databaseHelper: SQLiteOpenHelper, private val 
 
   private fun queryAsync(
       selection: String,
-      selectionArgs: Array<String>): Observable<TripGroup> {
+      selectionArgs: Array<String>?): Observable<TripGroup> {
     return Observable
         .fromCallable {
           val database = databaseHelper.readableDatabase
