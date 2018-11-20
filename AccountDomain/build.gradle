@@ -3,9 +3,6 @@ apply plugin: 'java'
 apply plugin: 'maven'
 apply plugin: 'kotlin-kapt'
 
-group = 'com.skedgo.tripkit'
-version = '1.0'
-
 // To fix error of converting bytecode to dex.
 targetCompatibility = '1.7'
 sourceCompatibility = '1.7'
@@ -25,11 +22,27 @@ dependencies {
   compileOnly project(":TripKitDomain")
 }
 
+task sourcesJar(type: Jar, dependsOn: classes) {
+  classifier = 'sources'
+  from sourceSets.main.allSource
+}
+
+task javadocJar(type: Jar, dependsOn: javadoc) {
+  classifier = 'javadoc'
+  from javadoc.destinationDir
+}
+
+artifacts {
+  archives sourcesJar
+  archives javadocJar
+}
 
 uploadArchives {
   repositories {
     mavenDeployer {
       repository(url: "file://${localMaven}")
+      pom.groupId = tripkitGroup
+      pom.version = tripkitVersion
     }
   }
 }
