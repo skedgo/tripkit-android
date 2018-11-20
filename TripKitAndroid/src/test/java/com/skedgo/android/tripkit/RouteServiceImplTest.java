@@ -1,7 +1,5 @@
 package com.skedgo.android.tripkit;
 
-import android.util.ArrayMap;
-
 import com.skedgo.android.common.model.Location;
 import com.skedgo.android.common.model.Query;
 import com.skedgo.android.common.model.TimeTag;
@@ -13,27 +11,21 @@ import org.assertj.core.data.MapEntry;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mock;
-import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import rx.Observable;
-import rx.functions.Func2;
 import skedgo.tripkit.a2brouting.FailoverA2bRoutingApi;
 
 import static org.assertj.core.api.Java6Assertions.assertThat;
 import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.Matchers.eq;
 import static org.mockito.Mockito.when;
 
 public class RouteServiceImplTest extends TripKitAndroidRobolectricTest {
-  @Mock Func2<Query, ModeFilter, Observable<List<Query>>> queryGenerator;
-  @Mock ExcludedTransitModesAdapter excludedTransitModesAdapter;
+  @Mock QueryGenerator queryGenerator;
   @Mock Co2Preferences co2Preferences;
   @Mock TripPreferences tripPreferences;
   @Mock ExtraQueryMapProvider extraQueryMapProvider;
@@ -46,7 +38,6 @@ public class RouteServiceImplTest extends TripKitAndroidRobolectricTest {
     MockitoAnnotations.initMocks(this);
     routeService = new RouteServiceImpl(
         queryGenerator,
-        excludedTransitModesAdapter,
         co2Preferences,
         tripPreferences,
         extraQueryMapProvider,
@@ -167,26 +158,6 @@ public class RouteServiceImplTest extends TripKitAndroidRobolectricTest {
 
     final Map<String, Object> options = routeService.toOptions(query, regionInfo);
     assertThat(options).containsEntry("includeStops", "1");
-  }
-
-  @Test public void getExcludedTransitModesAsNonNull() {
-    final String regionName = "Some region name";
-    assertThat(routeService.getExcludedTransitModesAsNonNull(
-        null,
-        regionName
-    )).isEmpty();
-    assertThat(routeService.getExcludedTransitModesAsNonNull(
-        excludedTransitModesAdapter,
-        regionName
-    )).isEmpty();
-
-    final List<String> excludedTransitModes = Arrays.asList("a", "b", "c");
-    when(excludedTransitModesAdapter.call(eq(regionName)))
-        .thenReturn(excludedTransitModes);
-    assertThat(routeService.getExcludedTransitModesAsNonNull(
-        excludedTransitModesAdapter,
-        regionName
-    )).isSameAs(excludedTransitModes);
   }
 
   @Test public void includeCo2Profile() {

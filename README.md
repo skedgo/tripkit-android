@@ -20,13 +20,11 @@ Then, in app's build file, add `TripKitAndroid` dependency into dependencies sec
 
 ```groovy
 dependencies {
-  compile 'com.github.skedgo.tripkit-android:TripKitAndroid:v1.15', {
-    transitive = true
-  }
+  compile 'com.github.skedgo.tripkit-android:TripKitAndroid:<insert-newest-version-here>'
 }
 ```
-
-Note that, the `transitive = true` line is a must for TripKit to work properly.
+[![Release](https://jitpack.io/v/skedgo/tripkit-android.svg)]
+(https://jitpack.io/#skedgo/tripkit-android)
 
 For a full setup, you can have a look at TripKitSamples' build file [here](https://github.com/skedgo/tripkit-android/blob/dev/TripKitSamples/build.gradle).
 
