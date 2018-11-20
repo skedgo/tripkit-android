@@ -3,10 +3,13 @@ package skedgo.tripkit.a2brouting
 import android.graphics.Color
 import android.text.TextUtils
 import android.util.Pair
+import androidx.annotation.ColorInt
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.PolylineOptions
 import com.google.maps.android.PolyUtil
+import com.skedgo.android.common.model.Street
 import com.skedgo.android.common.model.TransportMode
+import com.skedgo.android.common.model.TransportMode.*
 import com.skedgo.android.common.util.PolylineEncoderUtils
 import com.skedgo.android.tripkit.LineSegment
 import rx.Observable
@@ -22,8 +25,7 @@ typealias TripLine = List<PolylineOptions>
 open class GetTripLine @Inject internal constructor() {
   private val NON_TRAVELLED_LINE_COLOR = 0x88AAAAAA.toInt()
 
-  open fun execute(segments: List<TripSegment>): Observable<TripLine>
-      = Observable
+  open fun execute(segments: List<TripSegment>): Observable<TripLine> = Observable
       .fromCallable<Pair<List<List<LineSegment>>, List<List<LineSegment>>>> { createLinesToDraw(segments) }
       .map { lineSegmentPair -> createPolylineOptionsList(lineSegmentPair.first, lineSegmentPair.second) }
 
@@ -185,8 +187,8 @@ open class GetTripLine @Inject internal constructor() {
               }
 
               val modeId = segment.transportModeId
-              if (TransportMode.ID_WHEEL_CHAIR == modeId || TransportMode.ID_BICYCLE == modeId) {
-                color = if (street.safe()) Color.GREEN else Color.YELLOW
+              getColorForWheelchairAndBicycle(street, modeId)?.let {
+                color = it
               }
 
               lineSegmentsToDraw.add(LineSegment(start, end, type, color))
@@ -217,5 +219,15 @@ open class GetTripLine @Inject internal constructor() {
     }
 
     return Pair(linesToDraw, nonTravelledLinesToDraw)
+  }
+
+  @ColorInt
+  fun getColorForWheelchairAndBicycle(street: Street, modeId: String?): Int? {
+    return when {
+      (ID_WHEEL_CHAIR == modeId || ID_BICYCLE == modeId) && street.safe() -> Color.GREEN
+      ID_BICYCLE == modeId && street.dismount() -> Color.RED
+      (ID_WHEEL_CHAIR == modeId || ID_BICYCLE == modeId) -> Color.YELLOW
+      else -> null
+    }
   }
 }
