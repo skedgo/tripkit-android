@@ -2,18 +2,17 @@ package skedgo.tripkit.samples.a2brouting
 
 import android.content.Context
 import android.content.Intent
-import androidx.databinding.DataBindingUtil
+import android.graphics.Color
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import androidx.databinding.DataBindingUtil
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.SupportMapFragment
-import com.google.android.gms.maps.model.BitmapDescriptorFactory
-import com.google.android.gms.maps.model.LatLng
-import com.google.android.gms.maps.model.LatLngBounds
-import com.google.android.gms.maps.model.MarkerOptions
+import com.google.android.gms.maps.model.*
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import rx.Observable
-import skedgo.tripkit.android.TripKit
+import skedgo.tripkit.a2brouting.GetNonTravelledLineForTrip
+import skedgo.tripkit.a2brouting.GetTravelledLineForTrip
 import skedgo.tripkit.routing.Trip
 import skedgo.tripkit.samples.R
 import skedgo.tripkit.samples.databinding.TripDetailsBinding
@@ -22,8 +21,7 @@ class TripDetailsActivity : AppCompatActivity() {
   companion object {
     private val tripKey = "trip"
 
-    fun newIntent(context: Context, trip: Trip): Intent
-        = Intent(context, TripDetailsActivity::class.java)
+    fun newIntent(context: Context, trip: Trip): Intent = Intent(context, TripDetailsActivity::class.java)
         .putExtra(tripKey, trip.id)
   }
 
@@ -32,17 +30,52 @@ class TripDetailsActivity : AppCompatActivity() {
   }
 
   val viewModel by lazy { trip?.let { TripDetailsViewModel(this, it) } }
-  val getTripLine = TripKit.getInstance().a2bRoutingComponent().getTripLine
+  val getNonTravelledLineForTrip = GetNonTravelledLineForTrip()
+
+  val getTravelledLineForTrip = GetTravelledLineForTrip()
 
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
+
     val binding = DataBindingUtil.setContentView<TripDetailsBinding>(this, R.layout.trip_details)
     binding.viewModel = viewModel
 
     trip?.let { trip ->
       val mapFragment = supportFragmentManager.findFragmentById(R.id.mapFragment) as SupportMapFragment
       mapFragment.getMapAsync { map ->
-        getTripLine.execute(trip.segments)
+        Observable.zip(getTravelledLineForTrip.execute(trip.segments).toList(),
+            getNonTravelledLineForTrip.execute(trip.segments).toList()) { travelled, nonTravelled -> travelled to nonTravelled }
+            .map { (travelled, nonTravelled) ->
+              val travelledPolyLines =
+                  travelled.map {
+                    val latLngList = it
+                        .flatMap {
+                          listOf(it.start, it.end)
+                        }
+                        .map { LatLng(it.latitude, it.longitude) }
+
+                    PolylineOptions()
+                        .addAll(latLngList)
+                        .color(it.first().color)
+                        .width(7f)
+                  }
+
+              val nonTravelledPolyLines =
+                  nonTravelled
+                      .map {
+                        val latLngList = it
+                            .flatMap {
+                              listOf(it.start, it.end)
+                            }
+                            .map { LatLng(it.latitude, it.longitude) }
+
+                        PolylineOptions()
+                            .addAll(latLngList)
+                            .color(Color.parseColor("#88AAAAAA"))
+                            .width(7f)
+                      }
+              travelledPolyLines + nonTravelledPolyLines
+            }
             .flatMap { Observable.from(it) }
             .subscribe { map.addPolyline(it) }
         val height = resources.displayMetrics.heightPixels

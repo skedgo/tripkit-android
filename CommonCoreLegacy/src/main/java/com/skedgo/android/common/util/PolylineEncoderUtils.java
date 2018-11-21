@@ -2,7 +2,7 @@ package com.skedgo.android.common.util;
 
 import android.text.TextUtils;
 
-import com.google.android.gms.maps.model.LatLng;
+import com.skedgo.android.common.model.Location;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -22,13 +22,13 @@ public class PolylineEncoderUtils {
    * @param encoded A string encoding of a polyline as output by the Encoded Polyline Algorithm Format
    * @return a list of decoded coordinates
    */
-  public static List<LatLng> decode(String encoded) {
+  public static List<TripKitLatLng> decode(String encoded) {
     if (TextUtils.isEmpty(encoded)) {
       return null;
     }
 
     try {
-      List<LatLng> coords = new ArrayList<LatLng>();
+      List<TripKitLatLng> coords = new ArrayList<TripKitLatLng>();
       int len = encoded.length();
       int index = 0;
       int lat = 0;
@@ -54,7 +54,7 @@ public class PolylineEncoderUtils {
         int dlng = ((result & 1) != 0 ? ~(result >> 1) : (result >> 1));
         lng += dlng;
 
-        coords.add(new LatLng(lat / 1E5, lng / 1E5));
+        coords.add(new TripKitLatLng(lat / 1E5, lng / 1E5));
       }
 
       return coords;
