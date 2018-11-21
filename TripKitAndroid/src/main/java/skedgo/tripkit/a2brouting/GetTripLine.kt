@@ -22,7 +22,7 @@ import javax.inject.Inject
 typealias TripLine = List<PolylineOptions>
 
 open class GetTripLine @Inject internal constructor() {
-  private val NON_TRAVELLED_LINE_COLOR: Int = Color.parseColor("#88AAAAAA")
+  private val NON_TRAVELLED_LINE_COLOR: Int = 0x88AAAAAA.toInt()
 
   open fun execute(segments: List<TripSegment>): Observable<TripLine> = Observable
       .fromCallable<Pair<List<List<LineSegment>>, List<List<LineSegment>>>> {
