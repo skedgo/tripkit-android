@@ -2,7 +2,6 @@ package skedgo.tripkit.a2brouting
 
 import android.graphics.Color
 import android.text.TextUtils
-import android.util.Pair
 import androidx.annotation.ColorInt
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.PolylineOptions
@@ -26,7 +25,9 @@ open class GetTripLine @Inject internal constructor() {
   private val NON_TRAVELLED_LINE_COLOR = 0x88AAAAAA.toInt()
 
   open fun execute(segments: List<TripSegment>): Observable<TripLine> = Observable
-      .fromCallable<Pair<List<List<LineSegment>>, List<List<LineSegment>>>> { createLinesToDraw(segments) }
+      .fromCallable<Pair<List<List<LineSegment>>, List<List<LineSegment>>>> {
+        createLinesToDraw(segments) to createNonLinesToDraw(segments)
+      }
       .map { lineSegmentPair -> createPolylineOptionsList(lineSegmentPair.first, lineSegmentPair.second) }
 
   private fun createPolylineOptionsList(
@@ -89,11 +90,49 @@ open class GetTripLine @Inject internal constructor() {
     return polylineOptionsList
   }
 
-  private fun createLinesToDraw(segments: List<TripSegment>?): Pair<List<List<LineSegment>>, List<List<LineSegment>>> {
+  private fun createNonLinesToDraw(segments: List<TripSegment>?): List<List<LineSegment>> {
+    return segments.orEmpty()
+        .filterNot {
+          it.from == null || it.to == null
+        }
+        .map {
+          val color = if (it.serviceColor == null)
+            Color.BLACK
+          else
+            it.serviceColor!!.color
+
+          val shapes = it.shapes ?: emptyList()
+          var type = LineSegment.SOLID
+          if (it.mode == VehicleMode.WALK) {
+            type = LineSegment.SMALL_DASH
+          } else if (it.type == SegmentType.UNSCHEDULED) {
+            type = LineSegment.LARGE_DASH
+          }
+          Triple(shapes, color, type)
+        }
+        .flatMap { (shapes, defaultColor, type) ->
+          shapes.filterNot { it.isTravelled }
+              .filter {
+                it.encodedWaypoints.isNotEmpty()
+              }
+              .map {
+                val color = if (it.serviceColor == null || it.serviceColor.color == Color.BLACK)
+                  defaultColor
+                else
+                  it.serviceColor.color
+                PolyUtil.decode(it.encodedWaypoints)
+                    .zipWithNext()
+                    .map { (start, end) ->
+                      LineSegment(start, end, type, color)
+                    }
+              }
+        }
+  }
+
+  private fun createLinesToDraw(segments: List<TripSegment>?): List<List<LineSegment>> {
     val linesToDraw = LinkedList<List<LineSegment>>()
-    val nonTravelledLinesToDraw = LinkedList<List<LineSegment>>()
     if (segments == null) {
-      return Pair(linesToDraw, nonTravelledLinesToDraw)
+      return linesToDraw
     }
 
     for (segment in segments) {
@@ -126,7 +165,6 @@ open class GetTripLine @Inject internal constructor() {
             wps = PolyUtil.decode(shape.encodedWaypoints)
           }
 
-          val nonTravelledLines = ArrayList<LineSegment>()
           if (wps != null && !wps.isEmpty()) {
             var j = 0
             val size = wps.size - 1
@@ -142,14 +180,7 @@ open class GetTripLine @Inject internal constructor() {
               }
 
               if (shape.isTravelled) {
-                if (!nonTravelledLines.isEmpty()) {
-                  nonTravelledLinesToDraw.add(ArrayList(nonTravelledLines))
-                  nonTravelledLines.clear()
-                }
-
                 lineSegmentsToDraw.add(LineSegment(start, end, type, color))
-              } else {
-                nonTravelledLines.add(LineSegment(start, end, type, color))
               }
               j++
             }
@@ -158,11 +189,6 @@ open class GetTripLine @Inject internal constructor() {
           }
 
           linesToDraw.add(lineSegmentsToDraw)
-
-          if (!nonTravelledLines.isEmpty()) {
-            nonTravelledLinesToDraw.add(ArrayList(nonTravelledLines))
-            nonTravelledLines.clear()
-          }
         }
       } else if (segment.streets != null && !segment.streets.isEmpty()) {
         for (street in segment.streets) {
@@ -218,7 +244,7 @@ open class GetTripLine @Inject internal constructor() {
       }
     }
 
-    return Pair(linesToDraw, nonTravelledLinesToDraw)
+    return linesToDraw
   }
 
   @ColorInt
