@@ -30,10 +30,7 @@ class TripDetailsActivity : AppCompatActivity() {
   }
 
   val viewModel by lazy { trip?.let { TripDetailsViewModel(this, it) } }
-  val getNonTravelledLineForTrip = GetNonTravelledLineForTrip()
-
-  val getTravelledLineForTrip = GetTravelledLineForTrip()
-
+  val createTripLines = CreateTripLines()
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
 
@@ -43,40 +40,7 @@ class TripDetailsActivity : AppCompatActivity() {
     trip?.let { trip ->
       val mapFragment = supportFragmentManager.findFragmentById(R.id.mapFragment) as SupportMapFragment
       mapFragment.getMapAsync { map ->
-        Observable.zip(getTravelledLineForTrip.execute(trip.segments).toList(),
-            getNonTravelledLineForTrip.execute(trip.segments).toList()) { travelled, nonTravelled -> travelled to nonTravelled }
-            .map { (travelled, nonTravelled) ->
-              val travelledPolyLines =
-                  travelled.map {
-                    val latLngList = it
-                        .flatMap {
-                          listOf(it.start, it.end)
-                        }
-                        .map { LatLng(it.latitude, it.longitude) }
-
-                    PolylineOptions()
-                        .addAll(latLngList)
-                        .color(it.first().color)
-                        .width(7f)
-                  }
-
-              val nonTravelledPolyLines =
-                  nonTravelled
-                      .map {
-                        val latLngList = it
-                            .flatMap {
-                              listOf(it.start, it.end)
-                            }
-                            .map { LatLng(it.latitude, it.longitude) }
-
-                        PolylineOptions()
-                            .addAll(latLngList)
-                            .color(Color.parseColor("#88AAAAAA"))
-                            .width(7f)
-                      }
-              travelledPolyLines + nonTravelledPolyLines
-            }
-            .flatMap { Observable.from(it) }
+        createTripLines.execute(trip.segments)
             .subscribe { map.addPolyline(it) }
         val height = resources.displayMetrics.heightPixels
         val width = resources.displayMetrics.widthPixels
