@@ -22,7 +22,7 @@ import javax.inject.Inject
 typealias TripLine = List<PolylineOptions>
 
 open class GetTripLine @Inject internal constructor() {
-  private val NON_TRAVELLED_LINE_COLOR = 0x88AAAAAA.toInt()
+  private val NON_TRAVELLED_LINE_COLOR: Int = Color.parseColor("#88AAAAAA")
 
   open fun execute(segments: List<TripSegment>): Observable<TripLine> = Observable
       .fromCallable<Pair<List<List<LineSegment>>, List<List<LineSegment>>>> {
@@ -130,121 +130,52 @@ open class GetTripLine @Inject internal constructor() {
   }
 
   private fun createLinesToDraw(segments: List<TripSegment>?): List<List<LineSegment>> {
-    val linesToDraw = LinkedList<List<LineSegment>>()
-    if (segments == null) {
-      return linesToDraw
-    }
-
-    for (segment in segments) {
-      val from = segment.from
-      val to = segment.to
-
-      if (from == null || to == null) {
-        continue
-      }
-
-      var color = if (segment.serviceColor == null)
-        Color.BLACK
-      else
-        segment.serviceColor!!.color
-
-      var hasAddedLines = false
-
-      val shapes = segment.shapes ?: emptyList()
-      if (shapes.isNotEmpty()) {
-        for (shape in shapes) {
-          color = if (shape.serviceColor == null || shape.serviceColor.color == Color.BLACK)
-            color
+    return segments.orEmpty().filter { it.from != null && it.to != null }
+        .map { segment ->
+          val from = segment.from
+          val to = segment.to
+          var color = if (segment.serviceColor == null)
+            Color.BLACK
           else
-            shape.serviceColor.color
+            segment.serviceColor!!.color
 
-          val lineSegmentsToDraw = LinkedList<LineSegment>()
-
-          var wps: List<LatLng>? = null
-          if (!TextUtils.isEmpty(shape.encodedWaypoints)) {
-            wps = PolyUtil.decode(shape.encodedWaypoints)
+          val shapes = segment.shapes ?: emptyList()
+          var type = LineSegment.SOLID
+          if (segment.mode == VehicleMode.WALK) {
+            type = LineSegment.SMALL_DASH
+          } else if (segment.type == SegmentType.UNSCHEDULED) {
+            type = LineSegment.LARGE_DASH
           }
-
-          if (wps != null && !wps.isEmpty()) {
-            var j = 0
-            val size = wps.size - 1
-            while (j < size) {
-              val start = wps[j]
-              val end = wps[j + 1]
-
-              var type = LineSegment.SOLID
-              if (segment.mode == VehicleMode.WALK) {
-                type = LineSegment.SMALL_DASH
-              } else if (segment.type == SegmentType.UNSCHEDULED) {
-                type = LineSegment.LARGE_DASH
+          val modeId = segment.transportModeId
+          val lineSegmentsFromShapes = shapes.filter { it.isTravelled }
+              .flatMap {
+                color = if (it.serviceColor == null || it.serviceColor.color == Color.BLACK)
+                  color
+                else
+                  it.serviceColor.color
+                PolyUtil.decode(it.encodedWaypoints)
+                    .orEmpty().zipWithNext()
+                    .map { (start, end) ->
+                      LineSegment(start, end, type, color)
+                    }
               }
-
-              if (shape.isTravelled) {
-                lineSegmentsToDraw.add(LineSegment(start, end, type, color))
+          val lineSegmentsFromStreets = segment.streets.orEmpty()
+              .filter { it.encodedWaypoints() != null }
+              .flatMap { street ->
+                PolylineEncoderUtils.decode(street.encodedWaypoints())
+                    .zipWithNext()
+                    .map { (start, end) ->
+                      (getColorForWheelchairAndBicycle(street, modeId) ?: color).let {
+                        LineSegment(start, end, type, it)
+                      }
+                    }
               }
-              j++
-            }
-
-            hasAddedLines = true
-          }
-
-          linesToDraw.add(lineSegmentsToDraw)
+          listOf(lineSegmentsFromShapes, lineSegmentsFromStreets,
+              listOf(LineSegment(LatLng(from.lat, from.lon), LatLng(to.lat, to.lon), type, color)))
+              .first {
+                it.isNotEmpty()
+              }
         }
-      } else if (segment.streets != null && !segment.streets.isEmpty()) {
-        for (street in segment.streets) {
-          val lineSegmentsToDraw = LinkedList<LineSegment>()
-          var wps: List<LatLng>? = null
-          if (!TextUtils.isEmpty(street.encodedWaypoints())) {
-            wps = PolylineEncoderUtils.decode(street.encodedWaypoints())
-          }
-
-          if (wps != null && !wps.isEmpty()) {
-            var j = 0
-            val size = wps.size - 1
-            while (j < size) {
-              val start = wps[j]
-              val end = wps[j + 1]
-
-              var type = LineSegment.SOLID
-              if (segment.mode == VehicleMode.WALK) {
-                type = LineSegment.SMALL_DASH
-              } else if (segment.type == SegmentType.UNSCHEDULED) {
-                type = LineSegment.LARGE_DASH
-              }
-
-              val modeId = segment.transportModeId
-              getColorForWheelchairAndBicycle(street, modeId)?.let {
-                color = it
-              }
-
-              lineSegmentsToDraw.add(LineSegment(start, end, type, color))
-              j++
-            }
-
-            hasAddedLines = true
-          }
-
-          linesToDraw.add(lineSegmentsToDraw)
-        }
-      }
-
-      if (!hasAddedLines) {
-        // We don't have any specific way points, lets check for a 'To' location.
-        val start = LatLng(from.lat, from.lon)
-        val end = LatLng(to.lat, to.lon)
-
-        var type = LineSegment.SOLID
-        if (segment.mode == VehicleMode.WALK) {
-          type = LineSegment.SMALL_DASH
-        } else if (segment.type == SegmentType.UNSCHEDULED) {
-          type = LineSegment.LARGE_DASH
-        }
-
-        linesToDraw.add(listOf(LineSegment(start, end, type, color)))
-      }
-    }
-
-    return linesToDraw
   }
 
   @ColorInt
