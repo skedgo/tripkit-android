@@ -30,7 +30,11 @@ class TripDetailsActivity : AppCompatActivity() {
   }
 
   val viewModel by lazy { trip?.let { TripDetailsViewModel(this, it) } }
-  val createTripLines = CreateTripLines()
+  val createTripLines = CreateTripLines(
+      getTravelledLineForTrip = GetTravelledLineForTrip(),
+      getNonTravelledLineForTrip = GetNonTravelledLineForTrip()
+  )
+
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
 
