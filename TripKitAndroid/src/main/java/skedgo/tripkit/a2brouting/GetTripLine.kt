@@ -28,14 +28,36 @@ open class GetTripLine @Inject internal constructor() {
       .fromCallable<Pair<List<List<LineSegment>>, List<List<LineSegment>>>> {
         createLinesToDraw(segments) to createNonLinesToDraw(segments)
       }
-      .map { lineSegmentPair -> createPolylineOptionsList(lineSegmentPair.first, lineSegmentPair.second) }
+      .map {
+        createPolylineListForTravelledLines(it.first) + createPolylineListForNonTravelledLines(it.second)
+      }
 
-  private fun createPolylineOptionsList(
-      results: List<List<LineSegment>>?,
-      nonTravelledLinesToDraw: List<List<LineSegment>>?): TripLine {
-    // Use to collect polylines that will be put onto the map
-    val polylineOptionsList = LinkedList<PolylineOptions>()
+  private fun createPolylineListForNonTravelledLines(nonTravelledLinesToDraw: List<List<LineSegment>>?): List<PolylineOptions> {
+    val polylineOptionsList = mutableListOf<PolylineOptions>()
+    if (nonTravelledLinesToDraw != null && !nonTravelledLinesToDraw.isEmpty()) {
+      val lines = mutableListOf<LatLng>()
+      for (list in nonTravelledLinesToDraw) {
+        lines.clear()
+        for (line in list) {
+          lines.add(line.start)
+          lines.add(line.end)
+        }
 
+        if (!lines.isEmpty()) {
+          polylineOptionsList.add(
+              PolylineOptions()
+                  .addAll(lines)
+                  .color(NON_TRAVELLED_LINE_COLOR)
+                  .width(7f)
+          )
+        }
+      }
+    }
+    return polylineOptionsList
+  }
+
+  private fun createPolylineListForTravelledLines(results: List<List<LineSegment>>?): List<PolylineOptions> {
+    val polylineOptionsList = mutableListOf<PolylineOptions>()
     if (results != null && !results.isEmpty()) {
       val lines = LinkedList<LatLng>()
       for (list in results) {
@@ -67,26 +89,6 @@ open class GetTripLine @Inject internal constructor() {
         }
       }
     }
-
-    if (nonTravelledLinesToDraw != null && !nonTravelledLinesToDraw.isEmpty()) {
-      val lines = LinkedList<LatLng>()
-      for (list in nonTravelledLinesToDraw) {
-        lines.clear()
-        for (line in list) {
-          lines.add(line.start)
-          lines.add(line.end)
-        }
-
-        if (!lines.isEmpty()) {
-          polylineOptionsList.add(
-              PolylineOptions()
-                  .addAll(lines)
-                  .color(NON_TRAVELLED_LINE_COLOR)
-                  .width(7f)
-          )
-        }
-      }
-    }
     return polylineOptionsList
   }
 
@@ -102,15 +104,9 @@ open class GetTripLine @Inject internal constructor() {
             it.serviceColor!!.color
 
           val shapes = it.shapes ?: emptyList()
-          var type = LineSegment.SOLID
-          if (it.mode == VehicleMode.WALK) {
-            type = LineSegment.SMALL_DASH
-          } else if (it.type == SegmentType.UNSCHEDULED) {
-            type = LineSegment.LARGE_DASH
-          }
-          Triple(shapes, color, type)
+          shapes to color
         }
-        .flatMap { (shapes, defaultColor, type) ->
+        .flatMap { (shapes, defaultColor) ->
           shapes.filterNot { it.isTravelled }
               .filter {
                 it.encodedWaypoints.isNotEmpty()
@@ -123,7 +119,7 @@ open class GetTripLine @Inject internal constructor() {
                 PolyUtil.decode(it.encodedWaypoints)
                     .zipWithNext()
                     .map { (start, end) ->
-                      LineSegment(start, end, type, color)
+                      LineSegment(start, end, color)
                     }
               }
         }
@@ -140,12 +136,6 @@ open class GetTripLine @Inject internal constructor() {
             segment.serviceColor!!.color
 
           val shapes = segment.shapes ?: emptyList()
-          var type = LineSegment.SOLID
-          if (segment.mode == VehicleMode.WALK) {
-            type = LineSegment.SMALL_DASH
-          } else if (segment.type == SegmentType.UNSCHEDULED) {
-            type = LineSegment.LARGE_DASH
-          }
           val modeId = segment.transportModeId
           val lineSegmentsFromShapes = shapes.filter { it.isTravelled }
               .flatMap {
@@ -156,7 +146,7 @@ open class GetTripLine @Inject internal constructor() {
                 PolyUtil.decode(it.encodedWaypoints)
                     .orEmpty().zipWithNext()
                     .map { (start, end) ->
-                      LineSegment(start, end, type, color)
+                      LineSegment(start, end, color)
                     }
               }
           val lineSegmentsFromStreets = segment.streets.orEmpty()
@@ -166,12 +156,12 @@ open class GetTripLine @Inject internal constructor() {
                     .zipWithNext()
                     .map { (start, end) ->
                       (getColorForWheelchairAndBicycle(street, modeId) ?: color).let {
-                        LineSegment(start, end, type, it)
+                        LineSegment(start, end, it)
                       }
                     }
               }
           listOf(lineSegmentsFromShapes, lineSegmentsFromStreets,
-              listOf(LineSegment(LatLng(from.lat, from.lon), LatLng(to.lat, to.lon), type, color)))
+              listOf(LineSegment(LatLng(from.lat, from.lon), LatLng(to.lat, to.lon), color)))
               .first {
                 it.isNotEmpty()
               }
