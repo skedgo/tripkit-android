@@ -68,10 +68,9 @@ dependencies {
   implementation libs.retrofit
   implementation libs.retrofitAdapterRxJava
   implementation libs.retrofitConverterGson
-  implementation libs.playServicesMaps
+
   implementation libs.rxjava
   implementation libs.rxAndroid
-  implementation libs.androidMapsUtils
   implementation 'com.firebase:firebase-jobdispatcher:0.8.5'
 
   implementation libs.dagger

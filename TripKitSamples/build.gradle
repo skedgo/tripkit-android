@@ -36,7 +36,7 @@ android {
 dependencies {
   testImplementation libs.junit
   implementation libs.kotlin
-  implementation libs.playServicesMaps
+  implementation "com.google.android.gms:play-services-maps:15.0.1"
 
   implementation 'com.trello:rxlifecycle:1.0'
   implementation libs.jodaTimeAndroid
