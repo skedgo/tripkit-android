@@ -8,10 +8,6 @@ import android.os.Bundle;
 import android.os.Parcel;
 import android.os.Parcelable;
 import android.os.TransactionTooLargeException;
-import androidx.annotation.DrawableRes;
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import android.text.TextUtils;
 
 import com.google.gson.annotations.SerializedName;
 import com.skedgo.android.common.R;
@@ -30,6 +26,10 @@ import com.skedgo.android.common.util.TripSegmentUtils;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
+
+import androidx.annotation.DrawableRes;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
 import static skedgo.tripkit.routing.VehicleDrawables.createLightDrawable;
 
@@ -644,8 +644,8 @@ public class TripSegment implements Parcelable, IRealTimeElement, ITimeRange {
   }
 
   public boolean isVisibleInContext(String contextVisibility) {
-    if (TextUtils.isEmpty(mVisibility) ||
-        TextUtils.isEmpty(contextVisibility) ||
+    if (mVisibility == null || mVisibility.isEmpty() ||
+        contextVisibility == null || contextVisibility.isEmpty() ||
         mVisibility.equals(Visibilities.VISIBILITY_HIDDEN) ||
         contextVisibility.equals(Visibilities.VISIBILITY_HIDDEN)) {
       return false;
