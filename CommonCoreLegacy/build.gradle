@@ -47,9 +47,7 @@ dependencies {
   testImplementation libs.kluent
 
   // See https://github.com/skedgo/android-maps-utils.
-  implementation libs.androidMapsUtils
   implementation libs.supportAnnotations
-  implementation libs.playServicesMaps
   implementation libs.jodaTimeAndroid
   implementation libs.rxjava
   implementation libs.rxAndroid
