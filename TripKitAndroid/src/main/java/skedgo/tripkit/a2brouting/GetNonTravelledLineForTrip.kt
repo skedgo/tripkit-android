@@ -2,10 +2,9 @@ package skedgo.tripkit.a2brouting
 
 import android.graphics.Color
 import androidx.annotation.ColorInt
-import com.google.maps.android.PolyUtil
 import com.skedgo.android.common.model.Street
 import com.skedgo.android.common.model.TransportMode
-import com.skedgo.android.common.util.PolylineEncoderUtils
+import com.skedgo.android.common.util.PolyUtil
 import com.skedgo.android.tripkit.LineSegment
 import rx.Observable
 import rx.Single
@@ -43,7 +42,7 @@ class GetNonTravelledLineForTrip @Inject constructor() {
                   defaultColor
                 else
                   it.serviceColor.color
-                PolylineEncoderUtils.decode(it.encodedWaypoints)
+                PolyUtil.decode(it.encodedWaypoints)
                     .zipWithNext()
                     .map { (start, end) ->
                       LineSegment(start, end, color)

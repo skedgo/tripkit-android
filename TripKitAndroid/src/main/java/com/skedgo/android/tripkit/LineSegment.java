@@ -1,6 +1,5 @@
 package com.skedgo.android.tripkit;
 
-import com.google.android.gms.maps.model.LatLng;
 import com.skedgo.android.common.util.TripKitLatLng;
 
 import skedgo.tripkit.routing.Trip;

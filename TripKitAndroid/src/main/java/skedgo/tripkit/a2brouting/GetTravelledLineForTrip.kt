@@ -4,7 +4,7 @@ import android.graphics.Color
 import androidx.annotation.ColorInt
 import com.skedgo.android.common.model.Street
 import com.skedgo.android.common.model.TransportMode
-import com.skedgo.android.common.util.PolylineEncoderUtils
+import com.skedgo.android.common.util.PolyUtil
 import com.skedgo.android.common.util.TripKitLatLng
 import com.skedgo.android.tripkit.LineSegment
 import rx.Observable
@@ -39,7 +39,7 @@ class GetTravelledLineForTrip @Inject constructor() {
                   color
                 else
                   it.serviceColor.color
-                PolylineEncoderUtils.decode(it.encodedWaypoints)
+                PolyUtil.decode(it.encodedWaypoints)
                     .orEmpty().zipWithNext()
                     .map { (start, end) ->
                       LineSegment(start, end, color)
@@ -48,7 +48,7 @@ class GetTravelledLineForTrip @Inject constructor() {
           val lineSegmentsFromStreets = segment.streets.orEmpty()
               .filter { it.encodedWaypoints() != null }
               .flatMap { street ->
-                PolylineEncoderUtils.decode(street.encodedWaypoints())
+                PolyUtil.decode(street.encodedWaypoints())
                     .zipWithNext()
                     .map { (start, end) ->
                       (getColorForWheelchairAndBicycle(street, modeId) ?: color).let {

@@ -1,3 +1,5 @@
 package com.skedgo.android.common.util
 
-data class TripKitLatLng(val latitude: Double, val longitude: Double)
+data class TripKitLatLng(
+
+    @JvmField val latitude: Double, @JvmField  val longitude: Double)
