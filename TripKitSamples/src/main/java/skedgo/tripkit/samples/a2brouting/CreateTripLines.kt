@@ -14,8 +14,21 @@ class CreateTripLines(private val getTravelledLineForTrip: GetTravelledLineForTr
     return Observable.zip(getTravelledLineForTrip.execute(segments).toList(),
         getNonTravelledLineForTrip.execute(segments).toList()) { travelled, nonTravelled -> travelled to nonTravelled }
         .map { (travelled, nonTravelled) ->
-          val travelledPolyLines =
-              travelled.map {
+          val travelledPolyLines = travelled.map {
+            val latLngList = it
+                .flatMap {
+                  listOf(it.start, it.end)
+                }
+                .map { LatLng(it.latitude, it.longitude) }
+
+            PolylineOptions()
+                .addAll(latLngList)
+                .color(it.first().color)
+                .width(7f)
+          }
+
+          val nonTravelledPolyLines = nonTravelled
+              .map {
                 val latLngList = it
                     .flatMap {
                       listOf(it.start, it.end)
@@ -24,24 +37,9 @@ class CreateTripLines(private val getTravelledLineForTrip: GetTravelledLineForTr
 
                 PolylineOptions()
                     .addAll(latLngList)
-                    .color(it.first().color)
+                    .color(Color.parseColor("#88AAAAAA"))
                     .width(7f)
               }
-
-          val nonTravelledPolyLines =
-              nonTravelled
-                  .map {
-                    val latLngList = it
-                        .flatMap {
-                          listOf(it.start, it.end)
-                        }
-                        .map { LatLng(it.latitude, it.longitude) }
-
-                    PolylineOptions()
-                        .addAll(latLngList)
-                        .color(Color.parseColor("#88AAAAAA"))
-                        .width(7f)
-                  }
           travelledPolyLines + nonTravelledPolyLines
         }
         .flatMap { Observable.from(it) }
