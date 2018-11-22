@@ -31,7 +31,6 @@ android {
     sourceCompatibility 1.8
     targetCompatibility 1.8
   }
-
 }
 
 dependencies {
@@ -48,7 +47,6 @@ dependencies {
 
   implementation libs.rxLifecycleComponents
   implementation libs.bindingCollectionAdapterRecyclerView
-
-  implementation project(":AccountData")
-  implementation project(":TripKitAndroid")
+//  implementation 'com.github.skedgo:tripkit-android:v1.20'
+  implementation project(':TripKitAndroid')
 }

@@ -17,6 +17,7 @@ versions.androidGradlePlugin = "3.2.1"
 versions.okHttpVersion = "3.8.1"
 versions.retrofitVersion = "2.3.0"
 versions.androidxVersion = "1.0.0"
+versions.room = "2.0.0"
 versions.architectureComponents = "1.0.0"
 versions.dagger = "2.18"
 ext.versions = versions
@@ -88,7 +89,7 @@ libs.rxLifecycleComponents = "com.github.skedgo:RxLifecycleComponents:v1.5"
 libs.androidGradlePlugin = "com.android.tools.build:gradle:$versions.androidGradlePlugin"
 
 // Architecture Components
-libs.roomRuntime = "android.arch.persistence.room:runtime:$versions.architectureComponents"
-libs.roomCompiler = "android.arch.persistence.room:compiler:$versions.architectureComponents"
+libs.roomRuntime = "androidx.room:room-runtime:$versions.room"
+libs.roomCompiler = "androidx.room:room-compiler:$versions.room"
 
 ext.libs = libs
