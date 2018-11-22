@@ -8,9 +8,11 @@ import android.os.Bundle;
 import android.os.Parcel;
 import android.os.Parcelable;
 import android.os.TransactionTooLargeException;
+
 import androidx.annotation.DrawableRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+
 import android.text.TextUtils;
 
 import com.google.gson.annotations.SerializedName;
@@ -24,6 +26,7 @@ import com.skedgo.android.common.model.Query;
 import com.skedgo.android.common.model.RealtimeAlert;
 import com.skedgo.android.common.model.Street;
 import com.skedgo.android.common.model.TransportMode;
+import com.skedgo.android.common.util.StringUtils;
 import com.skedgo.android.common.util.TimeUtils;
 import com.skedgo.android.common.util.TripSegmentUtils;
 
@@ -644,8 +647,8 @@ public class TripSegment implements Parcelable, IRealTimeElement, ITimeRange {
   }
 
   public boolean isVisibleInContext(String contextVisibility) {
-    if (TextUtils.isEmpty(mVisibility) ||
-        TextUtils.isEmpty(contextVisibility) ||
+    if (mVisibility == null || mVisibility.isEmpty() ||
+        contextVisibility == null || contextVisibility.isEmpty() ||
         mVisibility.equals(Visibilities.VISIBILITY_HIDDEN) ||
         contextVisibility.equals(Visibilities.VISIBILITY_HIDDEN)) {
       return false;
