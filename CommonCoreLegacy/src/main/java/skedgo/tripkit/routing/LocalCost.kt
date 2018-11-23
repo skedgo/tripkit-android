@@ -16,32 +16,6 @@ import org.immutables.value.Value
 @Gson.TypeAdapters
 @JsonAdapter(GsonAdaptersLocalCost::class)
 abstract class LocalCost : Parcelable {
-  val CREATOR: Parcelable.Creator<LocalCost> = object : Parcelable.Creator<LocalCost> {
-    override fun createFromParcel(`in`: Parcel): LocalCost {
-      return ImmutableLocalCost.builder()
-          .minCost(`in`.readFloat().takeIf { it >= 0 })
-          .maxCost(`in`.readFloat().takeIf { it >= 0 })
-          .cost(`in`.readFloat())
-          .accuracy(`in`.readString().let { LocalCostAccuracy.valueOf(it) })
-          .currency(`in`.readString())
-          .build()
-    }
-
-    override fun newArray(size: Int): Array<LocalCost?> {
-      return arrayOfNulls(size)
-    }
-  }
-
-  override fun writeToParcel(dest: Parcel, flags: Int) {
-    dest.writeFloat(this.minCost() ?: -1f)
-    dest.writeFloat(this.maxCost() ?: -1f)
-    dest.writeFloat(this.cost())
-    dest.writeString(this.accuracy().name)
-    dest.writeString(this.currency())
-  }
-
-  override fun describeContents(): Int = 0
-
   /**
    * @return Minimum value for when the price is within a range
    */
