@@ -21,6 +21,7 @@ object GroupQueries {
         null
     )
 
+
   /**
    * @param id Should be [Query.uuid] or
    * whatever [UUID.toString] that
