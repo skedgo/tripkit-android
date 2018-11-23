@@ -135,7 +135,8 @@ public class TripSegment implements Parcelable, IRealTimeElement, ITimeRange {
   @SerializedName("streets") private ArrayList<Street> mStreets;
   @SerializedName("shapes") private @Nullable ArrayList<Shape> shapes;
   @SerializedName("realtimeVehicle") private RealTimeVehicle mRealTimeVehicle;
-  private boolean wheelchairAccessible;
+  @SerializedName("wheelchairAccessible") private boolean wheelchairAccessible;
+  @SerializedName("localCost") @Nullable private LocalCost localCost;
 
   /**
    * This is no longer a part of json returned from server due to Version 6.
@@ -503,6 +504,10 @@ public class TripSegment implements Parcelable, IRealTimeElement, ITimeRange {
     } else {
       return null;
     }
+  }
+
+  @Nullable public LocalCost getLocalCost() {
+    return localCost;
   }
 
   @Override
