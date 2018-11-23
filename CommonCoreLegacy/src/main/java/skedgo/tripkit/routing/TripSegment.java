@@ -102,6 +102,7 @@ public class TripSegment implements Parcelable, IRealTimeElement, ITimeRange {
       segment.metresSafe = in.readInt();
       segment.metresUnsafe = in.readInt();
       segment.turnByTurn = in.readString();
+      segment.localCost = in.readParcelable(LocalCost.class.getClassLoader());
       return segment;
     }
 
@@ -557,6 +558,7 @@ public class TripSegment implements Parcelable, IRealTimeElement, ITimeRange {
     out.writeInt(metresSafe);
     out.writeInt(metresUnsafe);
     out.writeString(turnByTurn);
+    out.writeParcelable(localCost, 0);
   }
 
   public boolean isContinuation() {
