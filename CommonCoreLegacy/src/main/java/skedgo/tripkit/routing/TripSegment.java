@@ -8,10 +8,6 @@ import android.os.Bundle;
 import android.os.Parcel;
 import android.os.Parcelable;
 import android.os.TransactionTooLargeException;
-import androidx.annotation.DrawableRes;
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import android.text.TextUtils;
 
 import com.google.gson.annotations.SerializedName;
 import com.skedgo.android.common.R;
@@ -30,6 +26,10 @@ import com.skedgo.android.common.util.TripSegmentUtils;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
+
+import androidx.annotation.DrawableRes;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
 import static skedgo.tripkit.routing.VehicleDrawables.createLightDrawable;
 
@@ -51,64 +51,8 @@ import static skedgo.tripkit.routing.VehicleDrawables.createLightDrawable;
  *
  * @see <a href="http://skedgo.github.io/tripgo-api/site/faq/#trips-groups-frequencies-and-templates">Trips, groups, frequencies and templates</a>
  */
-public class TripSegment implements Parcelable, IRealTimeElement, ITimeRange {
-  public static final Creator<TripSegment> CREATOR = new Creator<TripSegment>() {
-    public TripSegment createFromParcel(Parcel in) {
-      TripSegment segment = new TripSegment();
+public class TripSegment implements IRealTimeElement, ITimeRange {
 
-      segment.mId = in.readLong();
-      segment.mType = SegmentTypeKt.from(in.readString());
-
-      long startTimeInSecs = in.readLong();
-      segment.setStartTimeInSecs(startTimeInSecs);
-
-      long endTimeInSecs = in.readLong();
-      segment.setEndTimeInSecs(endTimeInSecs);
-
-      segment.mVisibility = in.readString();
-      segment.mFrom = in.readParcelable(Location.class.getClassLoader());
-      segment.mTo = in.readParcelable(Location.class.getClassLoader());
-      segment.mSingleLocation = in.readParcelable(Location.class.getClassLoader());
-      segment.mAction = in.readString();
-      segment.mDirection = in.readInt();
-      segment.mNotes = in.readString();
-      segment.mIsFrequencyBased = in.readInt() == 1;
-      segment.mFrequency = in.readInt();
-      segment.mServiceTripId = in.readString();
-      segment.mServiceName = in.readString();
-      segment.mServiceColor = new ServiceColor(in.readInt());
-      segment.mServiceNumber = in.readString();
-      segment.mServiceOperator = in.readString();
-      segment.mServiceDirection = in.readString();
-      segment.mStartStopCode = in.readString();
-      segment.mEndStopCode = in.readString();
-      segment.mStreets = in.readArrayList(Street.class.getClassLoader());
-      segment.shapes = in.readArrayList(Shape.class.getClassLoader());
-      segment.mRealTimeVehicle = in.readParcelable(RealTimeVehicle.class.getClassLoader());
-      segment.mAlerts = in.readArrayList(RealtimeAlert.class.getClassLoader());
-
-      segment.mTerms = in.readString();
-      segment.mIsContinuation = (in.readByte() != 0);
-      segment.transportModeId = in.readString();
-      segment.isRealTime = in.readByte() != 0;
-      segment.durationWithoutTraffic = in.readLong();
-      segment.templateHashCode = in.readLong();
-      segment.modeInfo = in.readParcelable(ModeInfo.class.getClassLoader());
-      segment.booking = in.readParcelable(Booking.class.getClassLoader());
-      segment.platform = in.readString();
-      segment.stopCount = in.readInt();
-      segment.wheelchairAccessible = in.readByte() == 1;
-      segment.metres = in.readInt();
-      segment.metresSafe = in.readInt();
-      segment.metresUnsafe = in.readInt();
-      segment.turnByTurn = in.readString();
-      return segment;
-    }
-
-    public TripSegment[] newArray(int size) {
-      return new TripSegment[size];
-    }
-  };
   private long mId;
   private transient Trip mTrip;
   @SerializedName("booking") private Booking booking;
@@ -135,7 +79,8 @@ public class TripSegment implements Parcelable, IRealTimeElement, ITimeRange {
   @SerializedName("streets") private ArrayList<Street> mStreets;
   @SerializedName("shapes") private @Nullable ArrayList<Shape> shapes;
   @SerializedName("realtimeVehicle") private RealTimeVehicle mRealTimeVehicle;
-  private boolean wheelchairAccessible;
+  @SerializedName("wheelchairAccessible") private boolean wheelchairAccessible;
+  @SerializedName("localCost") @Nullable private LocalCost localCost;
 
   /**
    * This is no longer a part of json returned from server due to Version 6.
@@ -505,53 +450,8 @@ public class TripSegment implements Parcelable, IRealTimeElement, ITimeRange {
     }
   }
 
-  @Override
-  public int describeContents() {
-    return 0;
-  }
-
-  @Override
-  public void writeToParcel(Parcel out, int flags) {
-    out.writeLong(mId);
-    out.writeString(mType == null ? null : mType.toString());
-    out.writeLong(mStartTimeInSecs);
-    out.writeLong(mEndTimeInSecs);
-    out.writeString(mVisibility);
-    out.writeParcelable(mFrom, 0);
-    out.writeParcelable(mTo, 0);
-    out.writeParcelable(mSingleLocation, 0);
-    out.writeString(mAction);
-    out.writeInt(mDirection);
-    out.writeString(mNotes);
-    out.writeInt(mIsFrequencyBased ? 1 : 0);
-    out.writeInt(mFrequency);
-    out.writeString(mServiceTripId);
-    out.writeString(mServiceName);
-    out.writeInt(mServiceColor == null ? Color.BLACK : mServiceColor.getColor());
-    out.writeString(mServiceNumber);
-    out.writeString(mServiceOperator);
-    out.writeString(mServiceDirection);
-    out.writeString(mStartStopCode);
-    out.writeString(mEndStopCode);
-    out.writeList(mStreets);
-    out.writeList(shapes);
-    out.writeParcelable(mRealTimeVehicle, 0);
-    out.writeList(mAlerts);
-    out.writeString(mTerms);
-    out.writeByte((byte) (mIsContinuation ? 1 : 0));
-    out.writeString(transportModeId);
-    out.writeByte((byte) (isRealTime ? 1 : 0));
-    out.writeLong(durationWithoutTraffic);
-    out.writeLong(templateHashCode);
-    out.writeParcelable(modeInfo, 0);
-    out.writeParcelable(booking, 0);
-    out.writeString(platform);
-    out.writeInt(stopCount);
-    out.writeByte((byte) (wheelchairAccessible ? 1 : 0));
-    out.writeInt(metres);
-    out.writeInt(metresSafe);
-    out.writeInt(metresUnsafe);
-    out.writeString(turnByTurn);
+  @Nullable public LocalCost getLocalCost() {
+    return localCost;
   }
 
   public boolean isContinuation() {
@@ -644,8 +544,8 @@ public class TripSegment implements Parcelable, IRealTimeElement, ITimeRange {
   }
 
   public boolean isVisibleInContext(String contextVisibility) {
-    if (TextUtils.isEmpty(mVisibility) ||
-        TextUtils.isEmpty(contextVisibility) ||
+    if (mVisibility == null || mVisibility.isEmpty() ||
+        contextVisibility == null || contextVisibility.isEmpty() ||
         mVisibility.equals(Visibilities.VISIBILITY_HIDDEN) ||
         contextVisibility.equals(Visibilities.VISIBILITY_HIDDEN)) {
       return false;

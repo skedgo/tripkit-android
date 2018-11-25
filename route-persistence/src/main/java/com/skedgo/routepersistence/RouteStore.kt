@@ -10,6 +10,7 @@ import com.skedgo.routepersistence.RouteContract.*
 import hugo.weaving.DebugLog
 import rx.Completable
 import rx.Observable
+import rx.Single
 import rx.schedulers.Schedulers
 import rx.schedulers.Schedulers.io
 import skedgo.sqlite.Cursors.flattenCursor
@@ -64,8 +65,23 @@ open class RouteStore(private val databaseHelper: SQLiteOpenHelper, private val 
   }
 
   @DebugLog
-  open fun queryAsync(query: Pair<String, Array<String>>): Observable<TripGroup> {
+  open fun queryAsync(query: Pair<String, Array<String>?>): Observable<TripGroup> {
     return queryAsync(query.first, query.second)
+  }
+
+  open fun querySegmentByIdAndTripId(segmentId: Long, tripId: String): Single<TripSegment> {
+    return Single
+        .fromCallable {
+          val database = databaseHelper.readableDatabase
+          val cursor = database.query(TABLE_SEGMENTS,
+              null,
+              "$COL_TRIP_ID = ?",
+              arrayOf(tripId), null, null, null)
+          val tripSegments = asSegments(cursor)
+          cursor.close()
+          tripSegments.first { it.id == segmentId }
+        }
+        .subscribeOn(io())
   }
 
   open fun queryTripGroupIdsByRequestIdAsync(requestId: String): Observable<String> {
@@ -138,7 +154,7 @@ open class RouteStore(private val databaseHelper: SQLiteOpenHelper, private val 
 
   private fun queryAsync(
       selection: String,
-      selectionArgs: Array<String>): Observable<TripGroup> {
+      selectionArgs: Array<String>?): Observable<TripGroup> {
     return Observable
         .fromCallable {
           val database = databaseHelper.readableDatabase
