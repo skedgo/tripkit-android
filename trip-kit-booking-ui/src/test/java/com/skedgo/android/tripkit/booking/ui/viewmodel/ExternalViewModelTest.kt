@@ -1,8 +1,8 @@
 package com.skedgo.android.tripkit.booking.ui.viewmodel
 
 import android.os.Bundle
-import com.nhaarman.mockito_kotlin.mock
-import com.nhaarman.mockito_kotlin.whenever
+import com.nhaarman.mockitokotlin2.mock
+import com.nhaarman.mockitokotlin2.whenever
 import com.skedgo.android.tripkit.booking.ExternalFormField
 import com.skedgo.android.tripkit.booking.ui.BuildConfig
 import com.skedgo.android.tripkit.booking.ui.TestRunner

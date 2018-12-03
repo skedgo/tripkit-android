@@ -5,8 +5,10 @@ import android.os.Bundle;
 import android.os.Parcel;
 import android.os.Parcelable;
 import android.os.TransactionTooLargeException;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+
 import android.text.TextUtils;
 
 import java.util.ArrayList;
@@ -159,10 +161,16 @@ public class Query implements Parcelable {
   }
 
   @Nullable
+  @Deprecated
   public Region getRegion() {
     return mRegion;
   }
 
+  /**
+   * This method is deprecated. Region will be chosen using the from and to location.
+   * @param region
+   */
+  @Deprecated
   public void setRegion(Region region) {
     mRegion = region;
   }
@@ -198,10 +206,16 @@ public class Query implements Parcelable {
     }
   }
 
+  @Deprecated
   public List<String> getTransportModeIds() {
     return transportModeIds;
   }
 
+  /**
+   * Use TransportModeFilter instead to exclude certain modes from routing results
+   * @param transportModeIds
+   */
+  @Deprecated
   public void setTransportModeIds(List<String> transportModeIds) {
     this.transportModeIds = transportModeIds;
   }

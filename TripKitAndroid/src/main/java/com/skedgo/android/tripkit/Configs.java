@@ -1,7 +1,7 @@
 package com.skedgo.android.tripkit;
 
 import android.content.Context;
-import android.support.annotation.Nullable;
+import androidx.annotation.Nullable;
 
 import com.skedgo.android.tripkit.routing.ExtraQueryMapProvider;
 
@@ -20,7 +20,6 @@ public abstract class Configs {
   public abstract Context context();
   public abstract Func0<Key> key();
   @Nullable public abstract Action1<Throwable> errorHandler();
-  @Nullable public abstract ExcludedTransitModesAdapter excludedTransitModesAdapter();
   @Nullable public abstract Func0<Co2Preferences> co2PreferencesFactory();
   @Nullable public abstract Func0<TripPreferences> tripPreferencesFactory();
   @Nullable public abstract ExtraQueryMapProvider extraQueryMapProvider();

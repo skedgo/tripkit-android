@@ -10,10 +10,10 @@ fun Status.toDto(): String {
   }
 }
 
-fun String.toStatus(): Status {
+fun String.toStatus(message: String? = null): Status {
   return when (this) {
     "Completed" -> Status.Completed()
-    "Error" -> Status.Error()
+    "Error" -> Status.Error(message)
     "InProgress" -> Status.InProgress()
     else -> error("Unknown status: ${this}")
   }

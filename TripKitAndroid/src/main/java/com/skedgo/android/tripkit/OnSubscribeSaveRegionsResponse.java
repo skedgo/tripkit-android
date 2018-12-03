@@ -2,7 +2,7 @@ package com.skedgo.android.tripkit;
 
 import android.content.ContentValues;
 import android.database.sqlite.SQLiteDatabase;
-import android.support.annotation.NonNull;
+import androidx.annotation.NonNull;
 
 import com.google.gson.Gson;
 import com.skedgo.android.common.model.Region;

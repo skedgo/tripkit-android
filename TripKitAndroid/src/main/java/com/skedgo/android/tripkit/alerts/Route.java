@@ -1,6 +1,6 @@
 package com.skedgo.android.tripkit.alerts;
 
-import android.support.annotation.Nullable;
+import androidx.annotation.Nullable;
 
 import com.google.gson.annotations.JsonAdapter;
 
@@ -20,7 +20,7 @@ import static org.immutables.value.Value.Style;
 public abstract class Route {
   public abstract String id();
 
-  public abstract String name();
+  @Nullable public abstract String name();
 
   @Nullable public abstract String number();
 
