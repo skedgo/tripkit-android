@@ -162,9 +162,9 @@ public class RealTimeVehicle implements Parcelable {
     dest.writeString(occupancy);
   }
 
-//  @Nullable public Occupancy getOccupancy() {
-//    return OccupancyKt.toOccupancy(occupancy);
-//  }
+  @Nullable public Occupancy getOccupancy() {
+    return OccupancyKt.toOccupancy(occupancy);
+  }
 
   public void setOccupancy(@Nullable String occupancy) {
     this.occupancy = occupancy;
