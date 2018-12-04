@@ -9,7 +9,7 @@ import org.immutables.value.Value
 @Value.Style(passAnnotations = [JsonAdapter::class])
 @JsonAdapter(value = GsonAdaptersVehicleComponent::class)
 abstract class VehicleComponent {
-  abstract fun occupancy(): Occupancy
+  abstract fun occupancy(): Occupancy?
 
   @Value.Default
   open fun wifi(): Boolean {
