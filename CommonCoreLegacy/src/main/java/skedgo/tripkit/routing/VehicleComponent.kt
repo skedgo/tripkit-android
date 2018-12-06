@@ -1,5 +1,6 @@
 package skedgo.tripkit.routing
 
+import androidx.annotation.Nullable
 import com.google.gson.annotations.JsonAdapter
 import org.immutables.gson.Gson
 import org.immutables.value.Value
@@ -9,7 +10,7 @@ import org.immutables.value.Value
 @Value.Style(passAnnotations = [JsonAdapter::class])
 @JsonAdapter(value = GsonAdaptersVehicleComponent::class)
 abstract class VehicleComponent {
-  abstract fun occupancy(): Occupancy?
+  abstract fun occupancy(): String?
 
   @Value.Default
   open fun wifi(): Boolean {
@@ -27,4 +28,9 @@ abstract class VehicleComponent {
   }
 
   abstract fun model(): String?
+
+  @Nullable
+  fun getOccupancy(): Occupancy? {
+    return occupancy().toOccupancy()
+  }
 }
