@@ -27,7 +27,7 @@ public class RouteDatabaseHelper extends SQLiteOpenHelper {
         try {
           db.execSQL("ALTER TABLE routingStatus ADD COLUMN statusMessage TEXT");
         } catch (SQLiteException ex) {
-          // ignored
+          // ignored if the column exists
         }
     }
   }
