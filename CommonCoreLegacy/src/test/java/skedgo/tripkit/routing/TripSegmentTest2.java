@@ -34,35 +34,6 @@ public class TripSegmentTest2 {
     context = RuntimeEnvironment.application.getApplicationContext();
   }
 
-  @Test public void parcel() {
-    final TripSegment expected = new TripSegment();
-    expected.setServiceDirection("Fake Service Direction");
-    expected.setTerms("Fake terms");
-    expected.setTransportModeId("wa_wal");
-    expected.setServiceOperator("Fake Operator");
-    expected.setRealTime(true);
-    expected.setDurationWithoutTraffic(123L);
-    expected.setTemplateHashCode(12L);
-    expected.setModeInfo(new ModeInfo());
-    expected.setBooking(ImmutableBooking.builder().build());
-    expected.setPlatform("Platform 2");
-    expected.setStopCount(7);
-
-    final TripSegment actual = TripSegment.CREATOR.createFromParcel(Utils.parcel(expected));
-
-    assertThat(expected.getServiceDirection()).isEqualTo(actual.getServiceDirection());
-    assertThat(expected.getTerms()).isEqualTo(actual.getTerms());
-    assertThat(expected.getTransportModeId()).isEqualTo(actual.getTransportModeId());
-    assertThat(expected.getServiceOperator()).isEqualTo(actual.getServiceOperator());
-    assertThat(actual.isRealTime()).isTrue();
-    assertThat(actual.getDurationWithoutTraffic()).isEqualTo(expected.getDurationWithoutTraffic());
-    assertThat(actual.getTemplateHashCode()).isEqualTo(expected.getTemplateHashCode());
-    assertThat(actual.getModeInfo()).isNotNull();
-    assertThat(actual.getBooking()).isNotNull();
-    assertThat(actual.getPlatform()).isEqualTo(expected.getPlatform());
-    assertThat(actual.getStopCount()).isEqualTo(expected.getStopCount());
-  }
-
   @Test public void shouldShowHideSegmentProperly() {
     TripSegment segment = new TripSegment();
     segment.setVisibility(VISIBILITY_IN_DETAILS);

@@ -16,16 +16,6 @@ import static org.assertj.core.api.Java6Assertions.*;
 @RunWith(TestRunner.class)
 @Config(constants = BuildConfig.class)
 public class BookingTest {
-  @Test public void parcel() {
-    final Booking expected = ImmutableBooking.builder()
-        .quickBookingsUrl("https://granduni.buzzhives.com/satapp-beta/booking/v1/8ce3829b-9f66-4ae1-87df-259202b06a27/quick")
-        .title("Get a ride")
-        .url("https://granduni.buzzhives.com/satapp-beta/booking/8ce3829b-9f66-4ae1-87df-259202b06a27/info")
-        .externalActions(singletonList("Get a ride"))
-        .build();
-    final Booking actual = Booking.CREATOR.createFromParcel(Utils.parcel(expected));
-    assertThat(actual).isEqualTo(expected);
-  }
 
   @Test public void jsonKeys() {
     final Gson gson = new GsonBuilder()

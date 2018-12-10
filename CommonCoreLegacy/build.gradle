@@ -49,7 +49,6 @@ dependencies {
   testImplementation libs.jodaTimeTzdb
   testImplementation libs.kluent
 
-  // See https://github.com/skedgo/android-maps-utils.
   implementation libs.supportAnnotations
   implementation libs.jodaTimeAndroid
   implementation libs.rxjava
