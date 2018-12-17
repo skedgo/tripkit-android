@@ -2,8 +2,10 @@ package com.skedgo.android.tripkit.booking;
 
 import android.net.Uri;
 import android.os.Parcel;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+
 import android.text.TextUtils;
 
 import com.google.gson.annotations.SerializedName;
@@ -16,18 +18,6 @@ import java.util.UUID;
 
 public class BookingForm extends FormField {
 
-  public static final Creator<BookingForm> CREATOR = new Creator<BookingForm>() {
-    @Override
-    public BookingForm createFromParcel(Parcel in) {
-      in.readInt();
-      return new BookingForm(in);
-    }
-
-    @Override
-    public BookingForm[] newArray(int size) {
-      return new BookingForm[size];
-    }
-  };
   @SerializedName("action")
   private BookingAction action;
   @SerializedName("form")
@@ -38,31 +28,6 @@ public class BookingForm extends FormField {
   private String refreshURLForSourceObject;
   @SerializedName("image")
   private String imageUrl;
-
-  public BookingForm(Parcel in) {
-    super(in);
-    this.action = in.readParcelable(BookingAction.class.getClassLoader());
-    this.form = new ArrayList<>();
-    in.readTypedList(this.form, FormGroup.CREATOR);
-    this.value = in.readString();
-    this.refreshURLForSourceObject = in.readString();
-    this.imageUrl = in.readString();
-  }
-
-  public BookingForm() {
-    super();
-  }
-
-  @Override
-  public void writeToParcel(Parcel dest, int flags) {
-    dest.writeInt(BOOKINGFORM);
-    super.writeToParcel(dest, flags);
-    dest.writeParcelable(action, flags);
-    dest.writeTypedList(form);
-    dest.writeString(value);
-    dest.writeString(refreshURLForSourceObject);
-    dest.writeString(imageUrl);
-  }
 
   @Nullable public BookingAction getAction() {
     return action;
