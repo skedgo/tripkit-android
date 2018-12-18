@@ -1,7 +1,5 @@
 package com.skedgo.android.tripkit.booking.viewmodel;
 
-import android.os.Parcel;
-
 import com.skedgo.android.tripkit.booking.BookingAction;
 import com.skedgo.android.tripkit.booking.BuildConfig;
 import com.skedgo.android.tripkit.booking.InputForm;
@@ -12,7 +10,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.robolectric.annotation.Config;
 
-import static org.assertj.core.api.Java6Assertions.*;
+import static org.assertj.core.api.Java6Assertions.assertThat;
 
 @RunWith(TestRunner.class)
 @Config(constants = BuildConfig.class)
@@ -43,20 +41,5 @@ public class ParamTest {
     assertThat(param.getMethod())
         .describedAs("Should use method post for BookingAction")
         .isEqualTo(LinkFormField.METHOD_POST);
-  }
-
-  @Test public void Parse() {
-    final BookingAction bookingAction = new BookingAction();
-    final InputForm postBody = new InputForm();
-    Param expected = Param.create(bookingAction, postBody);
-
-    final Parcel parcel = Parcel.obtain();
-    expected.writeToParcel(parcel, 0);
-    parcel.setDataPosition(0);
-
-    Param actual = Param.CREATOR.createFromParcel(parcel);
-
-    assertThat(actual.getUrl()).isEqualTo(expected.getUrl());
-    assertThat(actual.getMethod()).isEqualTo(expected.getMethod());
   }
 }

@@ -2,30 +2,12 @@ package com.skedgo.android.tripkit.booking;
 
 import android.os.Parcel;
 import android.os.Parcelable;
+
 import androidx.annotation.Nullable;
 
 import com.google.gson.annotations.SerializedName;
 
-public class BookingError extends Throwable implements Parcelable {
-  public static final Creator<BookingError> CREATOR = new Creator<BookingError>() {
-    @Override
-    public BookingError createFromParcel(Parcel source) {
-      BookingError bookingError = new BookingError();
-      bookingError.setTitle(source.readString());
-      bookingError.setErrorCode(source.readInt());
-      bookingError.setError(source.readString());
-      bookingError.setHasUserError(source.readInt() == 1);
-      bookingError.setRecovery(source.readString());
-      bookingError.setRecoveryTitle(source.readString());
-      bookingError.setUrl(source.readString());
-      return bookingError;
-    }
-
-    @Override
-    public BookingError[] newArray(int size) {
-      return new BookingError[size];
-    }
-  };
+public class BookingError extends Throwable {
 
   @Nullable @SerializedName("title")
   private String title;
@@ -107,19 +89,4 @@ public class BookingError extends Throwable implements Parcelable {
     }
   }
 
-  @Override
-  public int describeContents() {
-    return 0;
-  }
-
-  @Override
-  public void writeToParcel(Parcel dest, int flags) {
-    dest.writeString(title);
-    dest.writeInt(errorCode);
-    dest.writeString(error);
-    dest.writeInt(hasUserError ? 1 : 0);
-    dest.writeString(recovery);
-    dest.writeString(recoveryTitle);
-    dest.writeString(url);
-  }
 }

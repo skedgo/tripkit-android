@@ -1,17 +1,14 @@
 package com.skedgo.android.common.model;
 
-import android.os.Parcel;
-import android.os.Parcelable;
-import androidx.annotation.Nullable;
-
 import com.google.gson.annotations.JsonAdapter;
 import com.google.gson.annotations.SerializedName;
 
 import org.immutables.gson.Gson;
 import org.immutables.value.Value;
 
-import java.util.ArrayList;
 import java.util.List;
+
+import androidx.annotation.Nullable;
 
 @Gson.TypeAdapters
 @Value.Immutable

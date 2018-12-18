@@ -8,25 +8,9 @@ import com.google.gson.annotations.SerializedName;
 import java.util.ArrayList;
 import java.util.List;
 
-public class InputForm implements Parcelable {
-  public static final Parcelable.Creator<InputForm> CREATOR = new Parcelable.Creator<InputForm>() {
-    public InputForm createFromParcel(Parcel in) {
-      return new InputForm(in);
-    }
-
-    public InputForm[] newArray(int size) {
-      return new InputForm[size];
-    }
-  };
+public class InputForm {
   @SerializedName("input")
   private List<FormField> input;
-
-  public InputForm() {}
-
-  private InputForm(Parcel in) {
-    input = new ArrayList<>();
-    in.readTypedList(input, FormField.CREATOR);
-  }
 
   // Collecting user data
   public static InputForm from(List<FormGroup> formGroups) {
@@ -47,16 +31,6 @@ public class InputForm implements Parcelable {
     InputForm input = new InputForm();
     input.input = bookingItems;
     return input;
-  }
-
-  @Override
-  public int describeContents() {
-    return 0;
-  }
-
-  @Override
-  public void writeToParcel(Parcel dest, int i) {
-    dest.writeTypedList(input);
   }
 
   public List<FormField> input() {

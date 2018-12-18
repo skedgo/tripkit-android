@@ -1,7 +1,5 @@
 package com.skedgo.android.tripkit.booking.viewmodel;
 
-import android.os.Parcel;
-
 import com.skedgo.android.tripkit.booking.BuildConfig;
 import com.skedgo.android.tripkit.booking.DateTimeFormField;
 import com.skedgo.android.tripkit.booking.TestRunner;
@@ -13,7 +11,7 @@ import org.robolectric.annotation.Config;
 
 import java.util.Calendar;
 
-import static org.assertj.core.api.Java6Assertions.*;
+import static org.assertj.core.api.Java6Assertions.assertThat;
 
 @RunWith(TestRunner.class)
 @Config(constants = BuildConfig.class)
@@ -58,29 +56,6 @@ public class DateTimeFieldViewModelImplTest {
 
     final DateTimeFieldViewModelImpl viewModel = DateTimeFieldViewModelImpl.create(field);
     assertThat(viewModel.getHour()).isEqualTo(13);
-  }
-
-  @Test
-  public void shouldBeParcelledProperly() {
-    final DateTimeFormField field = new DateTimeFormField();
-    field.setValue(1234567890);
-    field.setTitle("Time");
-    final DateTimeFieldViewModelImpl expected = DateTimeFieldViewModelImpl.create(field);
-
-    final Parcel parcel = Parcel.obtain();
-    expected.writeToParcel(parcel, 0);
-    parcel.setDataPosition(0);
-
-    final DateTimeFieldViewModelImpl actual = DateTimeFieldViewModelImpl.CREATOR.createFromParcel(parcel);
-    assertThat(actual.getTitle())
-        .describedAs("Title should be parcelled properly")
-        .isEqualTo(expected.getTitle());
-    assertThat(actual.getDate())
-        .describedAs("Date should parcelled properly")
-        .isEqualTo(expected.getDate());
-    assertThat(actual.getTime())
-        .describedAs("Time should parcelled properly")
-        .isEqualTo(expected.getTime());
   }
 
   @Test
