@@ -2,6 +2,7 @@ package com.skedgo.android.tripkit.booking;
 
 import android.os.Parcel;
 import android.os.Parcelable;
+
 import androidx.annotation.Nullable;
 
 import com.google.gson.annotations.JsonAdapter;
@@ -18,44 +19,7 @@ import static org.immutables.value.Value.Style;
 @Immutable
 @Style(passAnnotations = JsonAdapter.class)
 @JsonAdapter(GsonAdaptersQuickBooking.class)
-public abstract class QuickBooking implements Parcelable {
-  public static final Creator<QuickBooking> CREATOR = new Creator<QuickBooking>() {
-    @Override public QuickBooking createFromParcel(Parcel in) {
-      return ImmutableQuickBooking.builder()
-          .bookingURL(in.readString())
-          .tripUpdateURL(in.readString())
-          .priceInUSD(in.readFloat())
-          .imageURL(in.readString())
-          .title(in.readString())
-          .subtitle(in.readString())
-          .bookingTitle(in.readString())
-          .priceString(in.readString())
-          .price(in.readFloat())
-          .eta(in.readFloat())
-          .build();
-    }
-
-    @Override public QuickBooking[] newArray(int size) {
-      return new QuickBooking[size];
-    }
-  };
-
-  @Override public void writeToParcel(Parcel dest, int flags) {
-    dest.writeString(bookingURL());
-    dest.writeString(tripUpdateURL());
-    dest.writeFloat(priceInUSD());
-    dest.writeString(imageURL());
-    dest.writeString(title());
-    dest.writeString(subtitle());
-    dest.writeString(bookingTitle());
-    dest.writeString(priceString());
-    dest.writeFloat(price());
-    dest.writeFloat(eta());
-  }
-
-  @Override public int describeContents() {
-    return 0;
-  }
+public abstract class QuickBooking {
 
   /**
    * @return URL to book this option.
