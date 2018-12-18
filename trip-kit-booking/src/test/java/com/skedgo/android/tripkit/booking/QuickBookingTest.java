@@ -13,22 +13,6 @@ import static org.assertj.core.api.Java6Assertions.*;
 @RunWith(TestRunner.class)
 @Config(constants = BuildConfig.class)
 public class QuickBookingTest {
-  @Test public void parcel() {
-    final QuickBooking expected = ImmutableQuickBooking.builder()
-        .bookingURL("Some booking url")
-        .tripUpdateURL("Some trip update url")
-        .priceInUSD(32.917942f)
-        .imageURL("Some image url")
-        .title("Some title")
-        .subtitle("Some subtitle")
-        .bookingTitle("Some booking title")
-        .priceString("A$32-42")
-        .price(42f)
-        .eta(120f)
-        .build();
-    final QuickBooking actual = QuickBooking.CREATOR.createFromParcel(Parcels.parcel(expected));
-    assertThat(actual).isEqualTo(expected);
-  }
 
   @Test public void jsonKeys() {
     final QuickBooking booking = ImmutableQuickBooking.builder()

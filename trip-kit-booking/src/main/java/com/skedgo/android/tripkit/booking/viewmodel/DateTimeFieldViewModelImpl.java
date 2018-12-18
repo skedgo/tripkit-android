@@ -1,9 +1,5 @@
 package com.skedgo.android.tripkit.booking.viewmodel;
 
-import android.os.Parcel;
-import android.os.Parcelable;
-import androidx.annotation.NonNull;
-
 import com.skedgo.android.common.rx.Var;
 import com.skedgo.android.tripkit.booking.DateTimeFormField;
 
@@ -13,18 +9,9 @@ import java.util.Date;
 import java.util.Locale;
 import java.util.concurrent.TimeUnit;
 
-public final class DateTimeFieldViewModelImpl implements DateTimeViewModel, Parcelable {
-  public static final Creator<DateTimeFieldViewModelImpl> CREATOR = new Creator<DateTimeFieldViewModelImpl>() {
-    @Override
-    public DateTimeFieldViewModelImpl createFromParcel(Parcel in) {
-      return new DateTimeFieldViewModelImpl(in);
-    }
+import androidx.annotation.NonNull;
 
-    @Override
-    public DateTimeFieldViewModelImpl[] newArray(int size) {
-      return new DateTimeFieldViewModelImpl[size];
-    }
-  };
+public final class DateTimeFieldViewModelImpl implements DateTimeViewModel {
 
   private final Var<DateTimeFieldViewModelImpl> self = Var.create();
   private DateTimeFormField field;
@@ -34,11 +21,6 @@ public final class DateTimeFieldViewModelImpl implements DateTimeViewModel, Parc
     this.field = field;
     this.calendar = Calendar.getInstance();
     this.calendar.setTimeInMillis(TimeUnit.SECONDS.toMillis(field.getValue()));
-  }
-
-  protected DateTimeFieldViewModelImpl(Parcel in) {
-    field = in.readParcelable(DateTimeFormField.class.getClassLoader());
-    calendar = (Calendar) in.readSerializable();
   }
 
   public static DateTimeFieldViewModelImpl create(DateTimeFormField dateTimeFormField) {
@@ -60,17 +42,6 @@ public final class DateTimeFieldViewModelImpl implements DateTimeViewModel, Parc
     calendar.set(year, month, day);
     field.setValue(TimeUnit.MILLISECONDS.toSeconds(calendar.getTimeInMillis()));
     self.put(this);
-  }
-
-  @Override
-  public int describeContents() {
-    return 0;
-  }
-
-  @Override
-  public void writeToParcel(Parcel dest, int flags) {
-    dest.writeParcelable(field, flags);
-    dest.writeSerializable(calendar);
   }
 
   @Override

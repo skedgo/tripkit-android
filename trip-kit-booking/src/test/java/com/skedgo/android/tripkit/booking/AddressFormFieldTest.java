@@ -41,19 +41,4 @@ public class AddressFormFieldTest {
     assertThat(address.getLatitude()).isEqualTo(39.76256);
     assertThat(address.getLongitude()).isEqualTo(-105.03584);
   }
-
-  @Test public void Parcelable() {
-    AddressFormField expected = new AddressFormField();
-    AddressFormField.Address address = new AddressFormField.Address();
-    address.setLatitude(10.0);
-    address.setLongitude(12.0);
-    expected.setValue(address);
-    Parcel parcel = Parcel.obtain();
-    expected.writeToParcel(parcel, 0);
-    parcel.setDataPosition(0);
-    AddressFormField actual = AddressFormField.CREATOR.createFromParcel(parcel);
-    AddressFormField.Address actualAdd = actual.getValue();
-    assertThat(actualAdd.getLatitude()).isEqualTo(10.0);
-    assertThat(actualAdd.getLongitude()).isEqualTo(12.0);
-  }
 }

@@ -6,19 +6,7 @@ import com.google.gson.annotations.SerializedName;
 
 import java.io.Serializable;
 
-public class ExternalFormField extends FormField implements Serializable {
-  public static final Creator<ExternalFormField> CREATOR = new Creator<ExternalFormField>() {
-    @Override
-    public ExternalFormField createFromParcel(Parcel in) {
-      in.readInt();
-      return new ExternalFormField(in);
-    }
-
-    @Override
-    public ExternalFormField[] newArray(int size) {
-      return new ExternalFormField[size];
-    }
-  };
+public class ExternalFormField extends FormField {
   @SerializedName("disregardURL")
   private String disregardURL;
   @SerializedName("nextHudText")
@@ -30,14 +18,6 @@ public class ExternalFormField extends FormField implements Serializable {
 
   public ExternalFormField() {
     super();
-  }
-
-  public ExternalFormField(Parcel in) {
-    super(in);
-    this.disregardURL = in.readString();
-    this.nextHudText = in.readString();
-    this.nextURL = in.readString();
-    this.value = in.readString();
   }
 
   @Override
@@ -57,13 +37,4 @@ public class ExternalFormField extends FormField implements Serializable {
     return nextURL;
   }
 
-  @Override
-  public void writeToParcel(Parcel dest, int flags) {
-    dest.writeInt(EXTERNAL);
-    super.writeToParcel(dest, flags);
-    dest.writeString(disregardURL);
-    dest.writeString(nextHudText);
-    dest.writeString(nextURL);
-    dest.writeString(value);
-  }
 }

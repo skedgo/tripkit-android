@@ -8,16 +8,7 @@ import com.skedgo.android.tripkit.booking.BookingForm;
 import com.skedgo.android.tripkit.booking.InputForm;
 import com.skedgo.android.tripkit.booking.LinkFormField;
 
-public class Param implements Parcelable {
-  public static final Parcelable.Creator<Param> CREATOR = new Parcelable.Creator<Param>() {
-    public Param createFromParcel(Parcel in) {
-      return new Param(in);
-    }
-
-    public Param[] newArray(int size) {
-      return new Param[size];
-    }
-  };
+public class Param {
 
   private final String url;
   private final String hudText;
@@ -29,13 +20,6 @@ public class Param implements Parcelable {
     this.hudText = hudText;
     this.postBody = postBody;
     this.method = method;
-  }
-
-  public Param(Parcel in) {
-    url = in.readString();
-    hudText = in.readString();
-    method = in.readString();
-    postBody = in.readParcelable(InputForm.class.getClassLoader());
   }
 
   public static Param create(String url) {
@@ -72,16 +56,4 @@ public class Param implements Parcelable {
     return postBody;
   }
 
-  @Override
-  public int describeContents() {
-    return 0;
-  }
-
-  @Override
-  public void writeToParcel(Parcel dest, int i) {
-    dest.writeString(url);
-    dest.writeString(hudText);
-    dest.writeString(method);
-    dest.writeParcelable(postBody, i);
-  }
 }

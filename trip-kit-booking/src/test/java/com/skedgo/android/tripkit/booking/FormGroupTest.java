@@ -98,36 +98,4 @@ public class FormGroupTest {
     assertThat(actual.getFields().get(2)).isInstanceOf(OptionFormField.class);
   }
 
-  @Test public void Parcelable() {
-    FormGroup expect = new FormGroup();
-    List<FormField> list = new ArrayList<>();
-    for (int i = 0; i < 3; i++) {
-      StringFormField item = new StringFormField();
-      item.setValue("" + i);
-      list.add(item);
-    }
-    LinkFormField item = new LinkFormField();
-    item.setValue("a");
-    list.add(item);
-    SwitchFormField switchFormField = new SwitchFormField();
-    switchFormField.setValue(false);
-    list.add(switchFormField);
-
-    expect.setFields(list);
-    Parcel parcel = Parcel.obtain();
-    expect.writeToParcel(parcel, 0);
-    parcel.setDataPosition(0);
-    FormGroup actual = FormGroup.CREATOR.createFromParcel(parcel);
-    assertThat(actual.getFields()).hasSize(5);
-    assertThat(actual.getFields().get(0)).isInstanceOf(StringFormField.class);
-    assertThat(actual.getFields().get(0).getValue()).isEqualTo("0");
-    assertThat(actual.getFields().get(1)).isInstanceOf(StringFormField.class);
-    assertThat(actual.getFields().get(1).getValue()).isEqualTo("1");
-    assertThat(actual.getFields().get(2)).isInstanceOf(StringFormField.class);
-    assertThat(actual.getFields().get(2).getValue()).isEqualTo("2");
-    assertThat(actual.getFields().get(3)).isInstanceOf(LinkFormField.class);
-    assertThat(actual.getFields().get(3).getValue()).isEqualTo("a");
-    assertThat(actual.getFields().get(4)).isInstanceOf(SwitchFormField.class);
-    assertThat(actual.getFields().get(4).getValue()).isEqualTo(false);
-  }
 }
