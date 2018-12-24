@@ -1,15 +1,13 @@
 package com.skedgo.android.common.model;
 
-import android.content.Context;
 import android.os.Parcel;
-import androidx.annotation.Nullable;
 
 import com.google.gson.annotations.SerializedName;
 import com.skedgo.android.common.rx.Var;
-import com.skedgo.android.common.util.DateTimeFormats;
 
 import java.util.concurrent.TimeUnit;
 
+import androidx.annotation.Nullable;
 import rx.functions.Action1;
 
 /**
@@ -115,13 +113,11 @@ public class ServiceStop extends Location implements WheelchairAccessible {
     this.type = type;
   }
 
-  public String getDisplayTime(Context context) {
+  public Long getDisplayTime() {
     if (departureSecs().value() != 0) {
-      final long millis = TimeUnit.SECONDS.toMillis(departureSecs().value());
-      return DateTimeFormats.printTime(context, millis, getTimeZone());
+      return TimeUnit.SECONDS.toMillis(departureSecs().value());
     } else if (arrivalTime != 0) {
-      final long millis = TimeUnit.SECONDS.toMillis(arrivalTime);
-      return DateTimeFormats.printTime(context, millis, getTimeZone());
+      return TimeUnit.SECONDS.toMillis(arrivalTime);
     } else {
       return null;
     }
