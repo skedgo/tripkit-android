@@ -52,6 +52,9 @@ dependencies {
   }
 }
 
+group = tripkitGroup
+version = tripkitVersion
+
 uploadArchives {
   repositories {
     mavenDeployer {
