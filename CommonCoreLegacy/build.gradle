@@ -90,6 +90,9 @@ artifacts {
   archives javadocJar
 }
 
+group = tripkitGroup
+version = tripkitVersion
+
 uploadArchives {
   repositories {
     mavenDeployer {
