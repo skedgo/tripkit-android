@@ -9,6 +9,7 @@ import com.skedgo.android.common.model.Location;
 import com.skedgo.android.common.model.RealtimeAlert;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class RealTimeVehicle implements Parcelable {
   public static final Creator<RealTimeVehicle> CREATOR = new Creator<RealTimeVehicle>() {
@@ -46,6 +47,7 @@ public class RealTimeVehicle implements Parcelable {
   @SerializedName("lastUpdate") private long mLastUpdateTime;
   @SerializedName("icon") @Nullable private String icon;
   @SerializedName("occupancy") @Nullable private String occupancy;
+  @SerializedName("components") @Nullable private List<List<VehicleComponent>> components;
 
   public long getId() {
     return mId;
@@ -166,6 +168,14 @@ public class RealTimeVehicle implements Parcelable {
 
   public void setOccupancy(@Nullable String occupancy) {
     this.occupancy = occupancy;
+  }
+
+  @Nullable public List<List<VehicleComponent>> getComponents() {
+    return components;
+  }
+
+  public void setComponents(@Nullable List<List<VehicleComponent>> components) {
+    this.components = components;
   }
 
   @Nullable public String getIcon() {
