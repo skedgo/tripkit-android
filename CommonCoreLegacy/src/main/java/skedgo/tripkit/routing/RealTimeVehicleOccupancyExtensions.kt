@@ -1,14 +1,29 @@
 package skedgo.tripkit.routing
 
-fun RealTimeVehicle.getAverageOccupancy(): Occupancy? =
-    this.components?.let { components ->
-      Occupancy.values()[components.flatten().map {
-        it.getOccupancy()?.ordinal ?: 0
-      }.average().toInt()]
+fun RealTimeVehicle.getAverageOccupancy(): Occupancy? {
+  return with(this.components) {
+    if (this.isNullOrEmpty()) {
+      null
+    } else {
+      this.flatten()
+          .map {
+            it.getOccupancy()!!.ordinal
+          }
+          .average()
+          .toInt()
+          .let {
+            Occupancy.values()[it]
+          }
     }
+  }
+}
 
-fun RealTimeVehicle.hasVehiclesOccupancy(): Boolean =
-    components?.isNotEmpty() ?: false && components?.first()?.size ?: 0 > 1
+fun RealTimeVehicle.hasVehiclesOccupancy(): Boolean {
+  return with(components) { this != null && this.flatten().size > 1 }
+}
 
-fun RealTimeVehicle.hasSingleVehicleOccupancy(): Boolean =
-    components?.isNotEmpty() ?: false && components?.first()?.size ?: 0 == 1
+fun RealTimeVehicle.hasSingleVehicleOccupancy(): Boolean {
+  return with(components) {
+    this != null && this.isNotEmpty() && this.size == 1 && this.first().size == 1
+  }
+}
