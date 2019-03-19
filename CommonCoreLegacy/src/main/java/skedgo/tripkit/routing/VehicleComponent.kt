@@ -29,8 +29,4 @@ abstract class VehicleComponent {
 
   abstract fun model(): String?
 
-  @Nullable
-  fun getOccupancy(): Occupancy? {
-    return occupancy().toOccupancy()
-  }
 }
