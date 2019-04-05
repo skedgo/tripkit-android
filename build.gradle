@@ -14,6 +14,9 @@ buildscript {
 
     // To measure execution time of a method.
     classpath 'com.jakewharton.hugo:hugo-plugin:1.2.1'
+
+    // To deploy AAR files to local maven.
+    classpath 'digital.wup:android-maven-publish:3.6.2'
   }
 }
 

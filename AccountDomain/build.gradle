@@ -40,12 +40,12 @@ artifacts {
 group = tripkitGroup
 version = tripkitVersion
 
-//uploadArchives {
-//  repositories {
-//    mavenDeployer {
-//      repository(url: "file://${localMaven}")
-//      pom.groupId = tripkitGroup
-//      pom.version = tripkitVersion
-//    }
-//  }
-//}
+uploadArchives {
+  repositories {
+    mavenDeployer {
+      repository(url: "file://${localMaven}")
+      pom.groupId = tripkitGroup
+      pom.version = tripkitVersion
+    }
+  }
+}
