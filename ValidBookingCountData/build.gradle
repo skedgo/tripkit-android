@@ -69,12 +69,9 @@ artifacts {
 group = tripkitGroup
 version = tripkitVersion
 
-
 publishing {
   repositories {
-    maven {
-      url = "file://${localMaven}"
-    }
+    maven { url = "file://${localMaven}" }
   }
   publications {
     mavenAar(MavenPublication) {

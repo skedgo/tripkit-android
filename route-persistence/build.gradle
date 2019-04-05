@@ -55,12 +55,16 @@ dependencies {
 group = tripkitGroup
 version = tripkitVersion
 
-//uploadArchives {
-//  repositories {
-//    mavenDeployer {
-//      repository(url: "file://${localMaven}")
-//      pom.groupId = tripkitGroup
-//      pom.version = tripkitVersion
-//    }
-//  }
-//}
+
+publishing {
+  repositories {
+    maven { url = "file://${localMaven}" }
+  }
+  publications {
+    mavenAar(MavenPublication) {
+      groupId = group
+      version = version
+      from components.android
+    }
+  }
+}
