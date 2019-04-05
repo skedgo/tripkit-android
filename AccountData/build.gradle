@@ -1,5 +1,4 @@
 apply plugin: 'com.android.library'
-apply plugin: 'com.github.dcendents.android-maven'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-kapt'
 
@@ -71,13 +70,13 @@ artifacts {
 
 group = tripkitGroup
 version = tripkitVersion
-
-uploadArchives {
-  repositories {
-    mavenDeployer {
-      repository(url: "file://${localMaven}")
-      pom.groupId = tripkitGroup
-      pom.version = tripkitVersion
-    }
-  }
-}
+//
+//uploadArchives {
+//  repositories {
+//    mavenDeployer {
+//      repository(url: "file://${localMaven}")
+//      pom.groupId = tripkitGroup
+//      pom.version = tripkitVersion
+//    }
+//  }
+//}

@@ -1,6 +1,6 @@
 apply plugin: 'com.android.library'
 apply plugin: 'com.jakewharton.hugo'
-apply plugin: 'com.github.dcendents.android-maven'
+//apply plugin: 'com.github.dcendents.android-maven'
 apply plugin: 'kotlin-android'
 
 android {
@@ -55,12 +55,12 @@ dependencies {
 group = tripkitGroup
 version = tripkitVersion
 
-uploadArchives {
-  repositories {
-    mavenDeployer {
-      repository(url: "file://${localMaven}")
-      pom.groupId = tripkitGroup
-      pom.version = tripkitVersion
-    }
-  }
-}
+//uploadArchives {
+//  repositories {
+//    mavenDeployer {
+//      repository(url: "file://${localMaven}")
+//      pom.groupId = tripkitGroup
+//      pom.version = tripkitVersion
+//    }
+//  }
+//}

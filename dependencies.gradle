@@ -13,7 +13,7 @@ versions.targetSdkVersion = 27
 // See change-log at https://github.com/JetBrains/kotlin/blob/master/ChangeLog.md.
 versions.kotlinVersion = "1.2.71"
 versions.supportLibraryVersion = "28.0.0"
-versions.androidGradlePlugin = "3.2.1"
+versions.androidGradlePlugin = "3.5.0-alpha09"
 versions.okHttpVersion = "3.8.1"
 versions.retrofitVersion = "2.3.0"
 versions.androidxVersion = "1.0.0"
