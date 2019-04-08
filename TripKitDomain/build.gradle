@@ -1,7 +1,7 @@
 apply plugin: "kotlin"
 apply plugin: "kotlin-kapt"
 apply plugin: 'java'
-apply plugin: 'maven'
+apply plugin: 'maven-publish'
 
 // To fix error of converting bytecode to dex.
 targetCompatibility = '1.7'
@@ -43,12 +43,15 @@ artifacts {
 group = tripkitGroup
 version = tripkitVersion
 
-uploadArchives {
+publishing {
   repositories {
-    mavenDeployer {
-      repository(url: "file://${localMaven}")
-      pom.groupId = tripkitGroup
-      pom.version = tripkitVersion
+    maven { url = "file://${localMaven}" }
+  }
+  publications {
+    mavenJava(MavenPublication) {
+      groupId = group
+      version = version
+      from components.java
     }
   }
 }

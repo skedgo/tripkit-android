@@ -1,10 +1,9 @@
 package com.skedgo.android.tripkit
 
-import com.nhaarman.mockito_kotlin.mock
-import com.nhaarman.mockito_kotlin.whenever
+import com.nhaarman.mockitokotlin2.mock
+import com.nhaarman.mockitokotlin2.whenever
 import com.skedgo.android.tripkit.tsp.RegionInfo
 import org.amshove.kluent.`should contain all`
-import org.junit.Assert.*
 import org.junit.Test
 import skedgo.tripkit.routing.ModeInfo
 
