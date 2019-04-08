@@ -45,7 +45,7 @@ publishing {
     maven { url = "file://${localMaven}" }
   }
   publications {
-    mavenAar(MavenPublication) {
+    mavenJava(MavenPublication) {
       groupId = group
       version = version
       from components.java
