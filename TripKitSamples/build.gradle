@@ -47,6 +47,6 @@ dependencies {
 
   implementation libs.rxLifecycleComponents
   implementation libs.bindingCollectionAdapterRecyclerView
-//  implementation 'com.github.skedgo:tripkit-android:v1.20'
-  implementation project(':TripKitAndroid')
+  implementation 'com.github.skedgo.tripkit-android:TripKitAndroid:v1.23.0-dev'
+//  implementation project(':TripKitAndroid')
 }
