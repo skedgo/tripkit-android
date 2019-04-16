@@ -15,7 +15,6 @@ import skedgo.tripkit.routing.ModeInfo;
 import static org.assertj.core.api.Java6Assertions.*;
 
 @RunWith(TestRunner.class)
-@Config(constants = BuildConfig.class)
 public class ScheduledStopTest {
   @Test public void parseFromJson() {
     final String json = "{\n" +

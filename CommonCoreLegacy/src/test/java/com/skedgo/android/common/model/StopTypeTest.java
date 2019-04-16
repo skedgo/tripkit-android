@@ -1,11 +1,9 @@
 package com.skedgo.android.common.model;
 
-import com.skedgo.android.common.BuildConfig;
 import com.skedgo.android.common.TestRunner;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.robolectric.annotation.Config;
 
 import static com.skedgo.android.common.model.StopType.BUS;
 import static com.skedgo.android.common.model.StopType.CABLECAR;
@@ -17,10 +15,9 @@ import static com.skedgo.android.common.model.StopType.TAXI;
 import static com.skedgo.android.common.model.StopType.TRAIN;
 import static com.skedgo.android.common.model.StopType.TRAM;
 import static com.skedgo.android.common.model.StopType.from;
-import static org.assertj.core.api.Java6Assertions.*;
+import static org.assertj.core.api.Java6Assertions.assertThat;
 
 @RunWith(TestRunner.class)
-@Config(constants = BuildConfig.class)
 public class StopTypeTest {
   @Test
   public void shouldConvertIntoBus() {

@@ -1,31 +1,23 @@
 package com.skedgo.android.tripkit
 
 import android.content.res.Resources
-
 import com.google.gson.Gson
-import com.nhaarman.mockitokotlin2.eq
 import com.nhaarman.mockitokotlin2.whenever
-import skedgo.tripkit.routing.RoutingResponse
-import skedgo.tripkit.routing.Trip
-import skedgo.tripkit.routing.TripGroup
-
+import org.assertj.core.api.Java6Assertions.assertThat
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.mockito.Mock
+import org.mockito.Mockito.mock
 import org.mockito.MockitoAnnotations
-import org.robolectric.annotation.Config
-
-import java.util.ArrayList
-
 import rx.Observable
 import rx.observers.TestSubscriber
-
-import org.assertj.core.api.Java6Assertions.*
-import org.mockito.Mockito.mock
+import skedgo.tripkit.routing.RoutingResponse
+import skedgo.tripkit.routing.Trip
+import skedgo.tripkit.routing.TripGroup
+import java.util.*
 
 @RunWith(TestRunner::class)
-@Config(constants = BuildConfig::class)
 class TripUpdaterImplTest {
   @Mock
   internal var resources: Resources? = null

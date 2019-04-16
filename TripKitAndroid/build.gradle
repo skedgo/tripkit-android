@@ -54,6 +54,7 @@ dependencies {
   testImplementation libs.kluent
   testImplementation 'com.github.thuytrinh:MockWebServerRule:v1.0'
   testImplementation libs.kluent
+  testImplementation libs.androidxTesting
 
   androidTestImplementation "androidx.test:runner:1.1.0"
   androidTestImplementation "androidx.test:rules:1.1.0"

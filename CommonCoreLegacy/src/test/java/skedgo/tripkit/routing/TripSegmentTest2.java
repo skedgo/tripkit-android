@@ -3,35 +3,31 @@ package skedgo.tripkit.routing;
 import android.content.Context;
 import android.content.res.Resources;
 
-import com.skedgo.android.common.BuildConfig;
 import com.skedgo.android.common.R;
 import com.skedgo.android.common.TestRunner;
-import com.skedgo.android.common.model.ImmutableBooking;
-import com.skedgo.android.common.model.Utils;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.robolectric.RuntimeEnvironment;
-import org.robolectric.annotation.Config;
 
 import java.util.concurrent.TimeUnit;
 
+import androidx.test.core.app.ApplicationProvider;
+
 import static junit.framework.Assert.assertFalse;
 import static junit.framework.Assert.assertTrue;
-import static org.assertj.core.api.Java6Assertions.*;
+import static org.assertj.core.api.Java6Assertions.assertThat;
 import static skedgo.tripkit.routing.Visibilities.VISIBILITY_HIDDEN;
 import static skedgo.tripkit.routing.Visibilities.VISIBILITY_IN_DETAILS;
 import static skedgo.tripkit.routing.Visibilities.VISIBILITY_IN_SUMMARY;
 import static skedgo.tripkit.routing.Visibilities.VISIBILITY_ON_MAP;
 
 @RunWith(TestRunner.class)
-@Config(constants = BuildConfig.class)
 public class TripSegmentTest2 {
   private Context context;
 
   @Before public void setUp() {
-    context = RuntimeEnvironment.application.getApplicationContext();
+    context = ApplicationProvider.getApplicationContext().getApplicationContext();
   }
 
   @Test public void shouldShowHideSegmentProperly() {

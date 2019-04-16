@@ -1,16 +1,13 @@
 package skedgo.tripkit.routing;
 
-import com.skedgo.android.common.BuildConfig;
 import com.skedgo.android.common.TestRunner;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.robolectric.annotation.Config;
 
-import static org.assertj.core.api.Java6Assertions.*;
+import static org.assertj.core.api.Java6Assertions.assertThat;
 
 @RunWith(TestRunner.class)
-@Config(constants = BuildConfig.class)
 public class ServiceColorTest {
   @Test
   public void shouldEqual() {

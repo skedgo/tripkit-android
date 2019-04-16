@@ -46,6 +46,7 @@ dependencies {
   testImplementation libs.mockitoCore
   testImplementation libs.jodaTimeTzdb
   testImplementation libs.kluent
+  testImplementation libs.androidxTesting
 
   implementation libs.supportAnnotations
   implementation libs.jodaTimeAndroid

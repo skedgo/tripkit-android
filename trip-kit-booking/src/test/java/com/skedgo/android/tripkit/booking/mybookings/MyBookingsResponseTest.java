@@ -9,14 +9,12 @@ import com.skedgo.android.common.model.BookingConfirmationPurchase;
 import com.skedgo.android.common.model.BookingProvider;
 import com.skedgo.android.common.model.BookingSource;
 import com.skedgo.android.common.model.PurchaseBrand;
-import com.skedgo.android.tripkit.booking.BuildConfig;
 import com.skedgo.android.tripkit.booking.TestRunner;
 
 import org.apache.commons.io.IOUtils;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.robolectric.annotation.Config;
 
 import java.io.IOException;
 import java.io.StringReader;
@@ -26,7 +24,6 @@ import java.util.List;
 import static org.assertj.core.api.Java6Assertions.assertThat;
 
 @RunWith(TestRunner.class)
-@Config(constants = BuildConfig.class)
 public class MyBookingsResponseTest {
   private Gson gson;
 

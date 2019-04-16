@@ -6,19 +6,18 @@ import android.content.SharedPreferences;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.robolectric.RuntimeEnvironment;
-import org.robolectric.annotation.Config;
 
-import static org.assertj.core.api.Java6Assertions.*;
+import androidx.test.core.app.ApplicationProvider;
+
+import static org.assertj.core.api.Java6Assertions.assertThat;
 
 @RunWith(TestRunner.class)
-@Config(constants = BuildConfig.class)
 public class UuidProviderTest {
   private UuidProvider provider;
   private SharedPreferences preferences;
 
   @Before public void before() {
-    preferences = RuntimeEnvironment.application.getSharedPreferences(
+    preferences = ApplicationProvider.getApplicationContext().getSharedPreferences(
         "TripKit",
         Context.MODE_PRIVATE
     );

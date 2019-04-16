@@ -1,17 +1,14 @@
 package com.skedgo.android.common.model;
 
 import com.google.gson.Gson;
-import com.skedgo.android.common.BuildConfig;
 import com.skedgo.android.common.TestRunner;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.robolectric.annotation.Config;
 
-import static org.assertj.core.api.Java6Assertions.*;
+import static org.assertj.core.api.Java6Assertions.assertThat;
 
 @RunWith(TestRunner.class)
-@Config(constants = BuildConfig.class)
 public class ServiceStopTest {
   /**
    * To prevent http://crashes.to/s/a42b1958de6.

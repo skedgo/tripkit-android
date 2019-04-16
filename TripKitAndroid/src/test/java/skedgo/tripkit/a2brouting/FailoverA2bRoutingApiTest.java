@@ -1,7 +1,6 @@
 package skedgo.tripkit.a2brouting;
 
 import com.google.gson.Gson;
-import com.skedgo.android.tripkit.BuildConfig;
 import com.skedgo.android.tripkit.RoutingUserError;
 import com.skedgo.android.tripkit.TestRunner;
 
@@ -12,13 +11,12 @@ import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnit;
 import org.mockito.junit.MockitoRule;
-import org.robolectric.RuntimeEnvironment;
-import org.robolectric.annotation.Config;
 
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
+import androidx.test.core.app.ApplicationProvider;
 import rx.Observable;
 import rx.observers.TestSubscriber;
 import skedgo.tripkit.routing.RoutingResponse;
@@ -32,7 +30,6 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 @RunWith(TestRunner.class)
-@Config(constants = BuildConfig.class)
 public class FailoverA2bRoutingApiTest {
   @Rule public MockitoRule rule = MockitoJUnit.rule();
   @Mock A2bRoutingApi api;
@@ -40,7 +37,7 @@ public class FailoverA2bRoutingApiTest {
 
   @Before public void before() {
     failoverA2bRoutingApi = new FailoverA2bRoutingApi(
-        RuntimeEnvironment.application.getResources(),
+        ApplicationProvider.getApplicationContext().getResources(),
         new Gson(),
         api
     );

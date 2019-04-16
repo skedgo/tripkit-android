@@ -4,17 +4,14 @@ import android.os.Bundle
 import com.nhaarman.mockitokotlin2.mock
 import com.nhaarman.mockitokotlin2.whenever
 import com.skedgo.android.tripkit.booking.ExternalFormField
-import com.skedgo.android.tripkit.booking.ui.BuildConfig
 import com.skedgo.android.tripkit.booking.ui.TestRunner
 import com.skedgo.android.tripkit.booking.ui.activity.KEY_EXTERNAL_FORM
 import org.assertj.core.api.Java6Assertions.assertThat
 import org.junit.Test
 import org.junit.runner.RunWith
-import org.robolectric.annotation.Config
 import rx.observers.TestSubscriber
 
 @RunWith(TestRunner::class)
-@Config(constants = BuildConfig::class)
 class ExternalViewModelTest {
 
   private val viewModel: ExternalViewModel by lazy {

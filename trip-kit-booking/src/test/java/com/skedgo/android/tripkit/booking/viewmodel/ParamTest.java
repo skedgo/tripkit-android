@@ -3,19 +3,16 @@ package com.skedgo.android.tripkit.booking.viewmodel;
 import android.os.Parcel;
 
 import com.skedgo.android.tripkit.booking.BookingAction;
-import com.skedgo.android.tripkit.booking.BuildConfig;
 import com.skedgo.android.tripkit.booking.InputForm;
 import com.skedgo.android.tripkit.booking.LinkFormField;
 import com.skedgo.android.tripkit.booking.TestRunner;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.robolectric.annotation.Config;
 
-import static org.assertj.core.api.Java6Assertions.*;
+import static org.assertj.core.api.Java6Assertions.assertThat;
 
 @RunWith(TestRunner.class)
-@Config(constants = BuildConfig.class)
 public class ParamTest {
   @Test public void Create() {
     Param param = Param.create("url");

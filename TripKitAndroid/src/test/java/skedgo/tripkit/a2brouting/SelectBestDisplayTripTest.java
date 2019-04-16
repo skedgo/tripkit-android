@@ -1,11 +1,9 @@
 package skedgo.tripkit.a2brouting;
 
-import com.skedgo.android.tripkit.BuildConfig;
 import com.skedgo.android.tripkit.TestRunner;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.robolectric.annotation.Config;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -13,10 +11,9 @@ import java.util.Arrays;
 import skedgo.tripkit.routing.Trip;
 import skedgo.tripkit.routing.TripGroup;
 
-import static org.assertj.core.api.Java6Assertions.*;
+import static org.assertj.core.api.Java6Assertions.assertThat;
 
 @RunWith(TestRunner.class)
-@Config(constants = BuildConfig.class)
 public class SelectBestDisplayTripTest {
   @Test public void selectDisplayTripHavingLowestWeightedScore() {
     final Trip a = new Trip();

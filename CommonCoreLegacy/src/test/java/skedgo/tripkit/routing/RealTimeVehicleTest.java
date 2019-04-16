@@ -2,19 +2,16 @@ package skedgo.tripkit.routing;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
-import com.skedgo.android.common.BuildConfig;
 import com.skedgo.android.common.Parcels;
 import com.skedgo.android.common.TestRunner;
 import com.skedgo.android.common.model.Location;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.robolectric.annotation.Config;
 
-import static org.assertj.core.api.Java6Assertions.*;
+import static org.assertj.core.api.Java6Assertions.assertThat;
 
 @RunWith(TestRunner.class)
-@Config(constants = BuildConfig.class)
 public class RealTimeVehicleTest {
   @Test public void canBeParcelable() {
     final RealTimeVehicle v = new RealTimeVehicle();

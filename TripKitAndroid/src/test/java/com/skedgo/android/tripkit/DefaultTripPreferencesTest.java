@@ -5,18 +5,17 @@ import android.content.Context;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.robolectric.RuntimeEnvironment;
-import org.robolectric.annotation.Config;
 
-import static org.assertj.core.api.Java6Assertions.*;
+import androidx.test.core.app.ApplicationProvider;
+
+import static org.assertj.core.api.Java6Assertions.assertThat;
 
 @RunWith(TestRunner.class)
-@Config(constants = BuildConfig.class)
 public class DefaultTripPreferencesTest {
   private DefaultTripPreferences preferences;
 
   @Before public void before() {
-    preferences = new DefaultTripPreferences(RuntimeEnvironment.application.getSharedPreferences(
+    preferences = new DefaultTripPreferences(ApplicationProvider.getApplicationContext().getSharedPreferences(
         "SomePreferences",
         Context.MODE_PRIVATE
     ));

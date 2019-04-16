@@ -1,6 +1,5 @@
 package com.skedgo.android.tripkit.alerts;
 
-import com.skedgo.android.tripkit.BuildConfig;
 import com.skedgo.android.tripkit.TestRunner;
 
 import org.junit.Before;
@@ -10,7 +9,6 @@ import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnit;
 import org.mockito.junit.MockitoRule;
-import org.robolectric.annotation.Config;
 
 import java.util.Arrays;
 import java.util.List;
@@ -26,7 +24,6 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 @RunWith(TestRunner.class)
-@Config(constants = BuildConfig.class)
 public class RealtimeAlertServiceTest {
   @Rule public final MockitoRule rule = MockitoJUnit.rule();
   @Mock RealtimeAlertApi api;

@@ -1,7 +1,6 @@
 package com.skedgo.android.tripkit
 
 import org.junit.runner.RunWith
-import org.robolectric.annotation.Config
 
 /**
  * A base class that all Robolectric-based test classes should extend.
@@ -9,5 +8,4 @@ import org.robolectric.annotation.Config
  * and the `Config` annotation.
  */
 @RunWith(TestRunner::class)
-@Config(constants = BuildConfig::class)
 abstract class TripKitAndroidRobolectricTest

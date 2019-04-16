@@ -19,7 +19,6 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 @RunWith(TestRunner.class)
-@Config(constants = BuildConfig.class)
 public class PeriodicRealTimeTripUpdateReceiverTest {
   @Mock TripUpdater tripUpdater;
   @Mock TripGroup group;

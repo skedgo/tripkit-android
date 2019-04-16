@@ -16,7 +16,7 @@ import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.robolectric.RobolectricTestRunner
-import org.robolectric.RuntimeEnvironment
+import androidx.test.core.app.ApplicationProvider
 import rx.observers.TestSubscriber
 import skedgo.tripkit.routing.Trip
 import skedgo.tripkit.routing.TripGroup
@@ -24,14 +24,14 @@ import skedgo.tripkit.routing.TripSegment
 import java.util.*
 import java.util.concurrent.TimeUnit
 
-@RunWith(RobolectricTestRunner::class)
+@RunWith(AndroidJUnit4::class)
 class RouteStoreTest {
   private var databaseHelper: RouteDatabaseHelper? = null
   private lateinit var store: RouteStore
 
   @Before
   fun before() {
-    val context = RuntimeEnvironment.application
+    val context = ApplicationProvider.getApplicationContext()
     databaseHelper = RouteDatabaseHelper(context, RouteStoreTest::class.java.simpleName)
     val gson = GsonBuilder()
         .registerTypeAdapterFactory(LocationTypeAdapterFactory())

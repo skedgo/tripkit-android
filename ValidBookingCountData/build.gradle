@@ -22,6 +22,8 @@ dependencies {
   testImplementation libs.robolectric
   testImplementation libs.mockitoKotlin
   testImplementation libs.assertjCore
+  testImplementation libs.androidxTesting
+  testImplementation libs.androidxJUnitExtTesting
 
   implementation libs.rxjava
   implementation libs.retrofit
