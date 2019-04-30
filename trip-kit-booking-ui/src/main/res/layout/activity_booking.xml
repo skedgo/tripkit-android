@@ -36,7 +36,7 @@
       <Button
         android:id="@id/actionButton"
         style="@style/Widget.AppCompat.Button.Colored"
-        android:fontFamily="@font/roboto_medium"
+        android:fontFamily="@font/font_medium"
         android:layout_width="match_parent"
         android:layout_height="48dp"
         android:layout_alignParentBottom="true"
@@ -88,7 +88,7 @@
 
           <TextView
             android:id="@+id/retryButton"
-            android:fontFamily="@font/roboto_medium"
+            android:fontFamily="@font/font_medium"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:onClick="@{() -> viewModel.onRetry()}"
@@ -101,7 +101,7 @@
 
           <TextView
             android:id="@+id/cancelButton"
-            android:fontFamily="@font/roboto_medium"
+            android:fontFamily="@font/font_medium"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:onClick="@{() -> viewModel.onCancel()}"

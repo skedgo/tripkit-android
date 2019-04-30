@@ -19,7 +19,7 @@
 
     <TextView
       android:id="@+id/sideTitleView"
-      android:fontFamily="@font/roboto_regular"
+      android:fontFamily="@font/font_regular"
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
       android:layout_alignBottom="@+id/titleL"
