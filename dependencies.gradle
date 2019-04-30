@@ -7,7 +7,7 @@
 def versions = new Expando()
 versions.immutablesVersion = "2.5.5"
 versions.devMinSdkVersion = 21
-versions.proMinSdkVersion = 15
+versions.proMinSdkVersion = 16
 versions.compileSdkVersion = 28
 versions.targetSdkVersion = 27
 // See change-log at https://github.com/JetBrains/kotlin/blob/master/ChangeLog.md.
@@ -69,7 +69,6 @@ libs.crashlytics = "com.crashlytics.sdk.android:crashlytics:2.6.5@aar"
 libs.retrofit = "com.squareup.retrofit2:retrofit:$versions.retrofitVersion"
 libs.retrofitAdapterRxJava = "com.squareup.retrofit2:adapter-rxjava:$versions.retrofitVersion"
 libs.retrofitConverterGson = "com.squareup.retrofit2:converter-gson:$versions.retrofitVersion"
-libs.calligraphy = "uk.co.chrisjenx:calligraphy:2.3.0"
 libs.materialProgressBar = "me.zhanghai.android.materialprogressbar:library:1.4.1"
 libs.timber = "com.jakewharton.timber:timber:4.5.1"
 libs.rxtry = "com.github.thuytrinh:RxTry:c2f002df6c"

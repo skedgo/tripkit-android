@@ -1,7 +1,18 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="MissingTranslation">
-  <string name="font_medium">@string/robotoMedium</string>
-  <string name="font_regular">@string/robotoRegular</string>
-  <string name="font_light">@string/robotoLight</string>
-  <string name="font_bold">@string/robotoBold</string>
+  <style name="mediumFontStyle" parent="@android:style/TextAppearance.Small">
+    <item name="android:fontFamily">@font/roboto_medium</item>
+  </style>
+
+  <style name="mediumFontRegular" parent="@android:style/TextAppearance.Small">
+    <item name="android:fontFamily">@font/roboto_regular</item>
+  </style>
+
+  <style name="mediumFontLight" parent="@android:style/TextAppearance.Small">
+    <item name="android:fontFamily">@font/roboto_light</item>
+  </style>
+
+  <style name="mediumFontBold" parent="@android:style/TextAppearance.Small">
+    <item name="android:fontFamily">@font/roboto_bold</item>
+  </style>
 </resources>

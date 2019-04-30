@@ -4,7 +4,7 @@
   <style name="TextStyleTitle">
     <item name="android:textSize">16sp</item>
     <item name="android:textColor">@color/v4_title_text</item>
-    <item name="fontPath">@string/font_light</item>
+    <item name="android:fontFamily">@font/roboto_light</item>
     <item name="android:singleLine">true</item>
     <item name="android:ellipsize">marquee</item>
   </style>
@@ -12,15 +12,11 @@
   <style name="TextStyleValue">
     <item name="android:textSize">14sp</item>
     <item name="android:textColor">@color/v4_description_text</item>
-    <item name="fontPath">@string/font_regular</item>
+    <item name="android:fontFamily">@font/roboto_regular</item>
   </style>
 
-  <style name="LightToolbarPopupTheme" parent="ThemeOverlay.AppCompat.Light">
-    <item name="android:background">@android:color/white</item>
-    <item name="background">@android:color/white</item>
-  </style>
-
-  <style name="DarkToolbarTheme" parent="ThemeOverlay.AppCompat.Dark.ActionBar">
-    <item name="android:background">?attr/colorPrimary</item>
+  <style name="Theme.AppCompat.Light.NoActionBar">
+    <item name="windowActionBar">false</item>
+    <item name="windowNoTitle">true</item>
   </style>
 </resources>

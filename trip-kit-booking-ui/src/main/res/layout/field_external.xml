@@ -18,7 +18,7 @@
 
     <TextView
       android:id="@+id/linkView"
-      fontPath="@string/font_medium"
+      android:fontFamily="@font/roboto_medium"
       android:layout_width="match_parent"
       android:layout_height="@dimen/v4_booking_form_field_single_line_height"
       android:gravity="center_vertical"
