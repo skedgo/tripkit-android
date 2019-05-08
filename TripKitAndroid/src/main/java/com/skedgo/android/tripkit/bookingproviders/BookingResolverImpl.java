@@ -42,7 +42,7 @@ public final class BookingResolverImpl implements BookingResolver {
 
     resolverMap = new HashMap<>(8);
     resolverMap.put("gocatch", new GoCatchBookingResolver(resources, isPackageInstalled, getAppIntent));
-    resolverMap.put("ingogo", new IngogoBookingResolver(resources, isPackageInstalled));
+    resolverMap.put("ingogo", new IngogoBookingResolver(resources, isPackageInstalled, getAppIntent));
     resolverMap.put("mtaxi", new MTaxiBookingResolver(isPackageInstalled, getAppIntent));
     resolverMap.put("uber", new UberBookingResolver(isPackageInstalled, getAppIntent));
     resolverMap.put("lyft", new LyftBookingResolver(resources, isPackageInstalled));
