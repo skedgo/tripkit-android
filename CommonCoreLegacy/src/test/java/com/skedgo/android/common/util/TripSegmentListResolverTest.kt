@@ -16,7 +16,7 @@ import skedgo.tripkit.routing.toSeconds
 @RunWith(TestRunner::class)
 class TripSegmentListResolverTest {
   private val resolver by lazy {
-    TripSegmentListResolver((ApplicationProvider.getApplicationContext() as Context).resources)
+    TripSegmentListResolver(ApplicationProvider.getApplicationContext<Context>().resources)
   }
 
   @Test fun shouldOnlyShowDepartureSegmentInDetails() {

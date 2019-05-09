@@ -16,7 +16,7 @@ import rx.observers.TestSubscriber
 class ValidBookingCountRepositoryImplTest {
   private val api: ValidBookingCountApi = mock()
   private val prefs: SharedPreferences by lazy {
-    (ApplicationProvider.getApplicationContext() as Context).getSharedPreferences("", Context.MODE_PRIVATE)
+    ApplicationProvider.getApplicationContext<Context>().getSharedPreferences("", Context.MODE_PRIVATE)
   }
   private val repository: ValidBookingCountRepositoryImpl by lazy {
     ValidBookingCountRepositoryImpl(api, prefs)

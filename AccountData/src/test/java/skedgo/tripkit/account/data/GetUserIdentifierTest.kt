@@ -12,7 +12,7 @@ import androidx.test.ext.junit.runners.AndroidJUnit4
 @RunWith(AndroidJUnit4::class)
 class UserKeyRepositoryImplTest {
   private val prefs: SharedPreferences by lazy {
-    (ApplicationProvider.getApplicationContext() as Context).getSharedPreferences("", Context.MODE_PRIVATE)
+    ApplicationProvider.getApplicationContext<Context>().getSharedPreferences("", Context.MODE_PRIVATE)
   }
   private val userKeyRepository: UserKeyRepositoryImpl by lazy {
     UserKeyRepositoryImpl(prefs)
