@@ -255,22 +255,13 @@ public class BookingResolverImplTest {
   }
 
   @Test public void hasGoCatchApp() throws PackageManager.NameNotFoundException {
-    when(geocoderFactory.getAddress(anyDouble(), anyDouble()))
-        .thenAnswer(new Answer<Observable<String>>() {
-          @Override public Observable<String> answer(InvocationOnMock invocation) {
-            final double lat = invocation.getArgument(0);
-            if (lat == 1.0) {
-              return Observable.just("A");
-            } else {
-              return Observable.just("B");
-            }
-          }
-        });
-
     when(packageManager.getPackageInfo(
         eq("com.gocatchapp.goCatch"),
         eq(PackageManager.GET_ACTIVITIES)
     )).thenReturn(new PackageInfo());
+
+    when(packageManager.getLaunchIntentForPackage("com.gocatchapp.goCatch"))
+        .thenReturn(new Intent(Intent.ACTION_VIEW, Uri.parse("gocatch://")));
 
     final TripSegment segment = mock(TripSegment.class);
     when(segment.getFrom()).thenReturn(new Location(1.0, 2.0));
@@ -286,7 +277,7 @@ public class BookingResolverImplTest {
     final BookingAction action = BookingAction.builder()
         .bookingProvider(GOCATCH)
         .hasApp(true)
-        .data(new Intent(Intent.ACTION_VIEW, Uri.parse("gocatch://referral?code=tripgo&destination=B&pickup=&lat=1.0&lng=2.0")))
+        .data(new Intent(Intent.ACTION_VIEW, Uri.parse("gocatch://")))
         .build();
     subscriber.awaitTerminalEvent();
     subscriber.assertNoErrors();
@@ -302,6 +293,9 @@ public class BookingResolverImplTest {
         eq("com.ingogo.passenger"),
         eq(PackageManager.GET_ACTIVITIES)
     )).thenReturn(new PackageInfo());
+
+    when(packageManager.getLaunchIntentForPackage("com.ingogo.passenger"))
+        .thenReturn(new Intent(Intent.ACTION_VIEW, Uri.parse("ingogo://")));
 
     final TestSubscriber<BookingAction> subscriber = new TestSubscriber<>();
     bookingResolver.performExternalActionAsync(
