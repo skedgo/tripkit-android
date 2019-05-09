@@ -3,11 +3,13 @@ package com.skedgo.android.tripkit.bookingproviders;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.content.res.Resources;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import com.skedgo.android.tripkit.BookingAction;
 import com.skedgo.android.tripkit.ExternalActionParams;
+
 import skedgo.tripkit.geocoding.ReverseGeocodable;
 
 import java.util.HashMap;
@@ -22,27 +24,24 @@ public final class BookingResolverImpl implements BookingResolver {
   public BookingResolverImpl(
       @NonNull Resources resources,
       @NonNull final PackageManager packageManager,
-      @NonNull ReverseGeocodable geocoderFactory) {
-    final Func1<String, Boolean> isPackageInstalled = new Func1<String, Boolean>() {
-      @Override public Boolean call(String packageName) {
-        try {
-          packageManager.getPackageInfo(packageName, PackageManager.GET_ACTIVITIES);
-          return true;
-        } catch (PackageManager.NameNotFoundException ignored) {
-        }
-        return false;
+      @NonNull ReverseGeocodable geocoderFactory
+  ) {
+    final Func1<String, Boolean> isPackageInstalled = packageName -> {
+      try {
+        packageManager.getPackageInfo(packageName, PackageManager.GET_ACTIVITIES);
+        return true;
+      } catch (PackageManager.NameNotFoundException ignored) {
       }
+      return false;
     };
 
-    final Func1<String, Intent> getAppIntent = new Func1<String, Intent>() {
-      @Override public Intent call(String packageName) {
-        return packageManager.getLaunchIntentForPackage(packageName);
-      }
-    };
+    final Func1<String, Intent> getAppIntent = packageManager::getLaunchIntentForPackage;
+
+    SimpleOpenAppBookingResolver simpleOpenAppBookingResolver = new SimpleOpenAppBookingResolver(isPackageInstalled, getAppIntent);
 
     resolverMap = new HashMap<>(8);
-    resolverMap.put("gocatch", new GoCatchBookingResolver(resources, isPackageInstalled, getAppIntent));
-    resolverMap.put("ingogo", new IngogoBookingResolver(resources, isPackageInstalled, getAppIntent));
+    resolverMap.put("gocatch", new GoCatchBookingResolver(resources, simpleOpenAppBookingResolver));
+    resolverMap.put("ingogo", new IngogoBookingResolver(resources, simpleOpenAppBookingResolver));
     resolverMap.put("mtaxi", new MTaxiBookingResolver(isPackageInstalled, getAppIntent));
     resolverMap.put("uber", new UberBookingResolver(isPackageInstalled, getAppIntent));
     resolverMap.put("lyft", new LyftBookingResolver(resources, isPackageInstalled));
