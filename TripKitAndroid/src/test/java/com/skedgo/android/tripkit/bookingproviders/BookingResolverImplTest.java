@@ -8,7 +8,6 @@ import android.net.Uri;
 import com.skedgo.android.common.model.Location;
 import com.skedgo.android.tripkit.BookingAction;
 import com.skedgo.android.tripkit.ExternalActionParams;
-import com.skedgo.android.tripkit.TestRunner;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -17,6 +16,7 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.mockito.invocation.InvocationOnMock;
 import org.mockito.stubbing.Answer;
+import org.robolectric.RobolectricTestRunner;
 
 import java.util.Calendar;
 import java.util.Comparator;
@@ -44,7 +44,7 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 @SuppressWarnings("WrongConstant")
-@RunWith(TestRunner.class)
+@RunWith(RobolectricTestRunner.class)
 public class BookingResolverImplTest {
   private static final Comparator<BookingAction> BOOKING_ACTION_COMPARATOR =
       new Comparator<BookingAction>() {

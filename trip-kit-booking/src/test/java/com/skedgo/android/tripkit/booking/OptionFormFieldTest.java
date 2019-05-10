@@ -4,13 +4,14 @@ import android.os.Parcel;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.robolectric.RobolectricTestRunner;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import static org.assertj.core.api.Java6Assertions.assertThat;
 
-@RunWith(TestRunner.class)
+@RunWith(RobolectricTestRunner.class)
 public class OptionFormFieldTest {
 
   @Test public void Parcelable() {

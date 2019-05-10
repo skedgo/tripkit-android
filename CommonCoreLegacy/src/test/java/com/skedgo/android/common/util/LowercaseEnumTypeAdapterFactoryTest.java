@@ -3,15 +3,15 @@ package com.skedgo.android.common.util;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonElement;
-import com.skedgo.android.common.TestRunner;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.robolectric.RobolectricTestRunner;
 
 import static org.assertj.core.api.Java6Assertions.assertThat;
 
-@RunWith(TestRunner.class)
+@RunWith(RobolectricTestRunner.class)
 public class LowercaseEnumTypeAdapterFactoryTest {
   private static final String KEY_SPEED_TYPE = "speedType";
   private Gson gson;

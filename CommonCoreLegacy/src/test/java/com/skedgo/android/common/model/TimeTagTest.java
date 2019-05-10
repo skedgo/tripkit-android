@@ -2,16 +2,15 @@ package com.skedgo.android.common.model;
 
 import android.os.Parcel;
 
-import com.skedgo.android.common.TestRunner;
-
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.robolectric.RobolectricTestRunner;
 
 import java.util.concurrent.TimeUnit;
 
 import static org.assertj.core.api.Java6Assertions.assertThat;
 
-@RunWith(TestRunner.class)
+@RunWith(RobolectricTestRunner.class)
 public class TimeTagTest {
   @Test
   public void shouldParcel() throws Exception {

@@ -3,17 +3,17 @@ package com.skedgo.android.tripkit.booking.viewmodel;
 import android.os.Parcel;
 
 import com.skedgo.android.tripkit.booking.DateTimeFormField;
-import com.skedgo.android.tripkit.booking.TestRunner;
 
 import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.robolectric.RobolectricTestRunner;
 
 import java.util.Calendar;
 
 import static org.assertj.core.api.Java6Assertions.assertThat;
 
-@RunWith(TestRunner.class)
+@RunWith(RobolectricTestRunner.class)
 public class DateTimeFieldViewModelImplTest {
   /**
    * FIXME: Temporarily ignore as it's flaky by the use of {@link Calendar#getInstance()}.

@@ -1,11 +1,11 @@
 package com.skedgo.android.common.model;
 
 import com.google.gson.Gson;
-import com.skedgo.android.common.TestRunner;
 
 import org.apache.commons.io.IOUtils;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.robolectric.RobolectricTestRunner;
 
 import java.io.IOException;
 import java.nio.charset.Charset;
@@ -15,7 +15,7 @@ import skedgo.tripkit.routing.Trip;
 
 import static org.assertj.core.api.Java6Assertions.assertThat;
 
-@RunWith(TestRunner.class)
+@RunWith(RobolectricTestRunner.class)
 public class TripAvailableTest {
   private Gson gson = new Gson();
 

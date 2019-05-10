@@ -5,6 +5,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.robolectric.RobolectricTestRunner;
 import org.robolectric.annotation.Config;
 
 import java.util.concurrent.TimeUnit;
@@ -18,7 +19,7 @@ import skedgo.tripkit.routing.TripGroup;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
-@RunWith(TestRunner.class)
+@RunWith(RobolectricTestRunner.class)
 public class PeriodicRealTimeTripUpdateReceiverTest {
   @Mock TripUpdater tripUpdater;
   @Mock TripGroup group;

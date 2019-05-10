@@ -3,7 +3,6 @@ package skedgo.tripkit.routing;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonObject;
-import com.skedgo.android.common.TestRunner;
 import com.skedgo.android.common.model.GsonAdaptersBooking;
 import com.skedgo.android.common.model.ImmutableBooking;
 import com.skedgo.android.common.model.Location;
@@ -12,6 +11,7 @@ import com.skedgo.android.common.util.LowercaseEnumTypeAdapterFactory;
 import org.apache.commons.io.IOUtils;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.robolectric.RobolectricTestRunner;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -19,7 +19,7 @@ import java.util.Random;
 
 import static org.assertj.core.api.Java6Assertions.assertThat;
 
-@RunWith(TestRunner.class)
+@RunWith(RobolectricTestRunner.class)
 public class TripSegmentTest {
   @Test
   public void shouldDefineCorrectSerializedNames() {

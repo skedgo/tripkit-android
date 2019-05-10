@@ -6,10 +6,11 @@ import com.google.gson.JsonObject;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.robolectric.RobolectricTestRunner;
 
 import static org.assertj.core.api.Java6Assertions.assertThat;
 
-@RunWith(TestRunner.class)
+@RunWith(RobolectricTestRunner.class)
 public class QuickBookingTest {
   @Test public void parcel() {
     final QuickBooking expected = ImmutableQuickBooking.builder()

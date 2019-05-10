@@ -12,13 +12,14 @@ import org.mockito.ArgumentMatchers
 import org.mockito.Mock
 import org.mockito.Mockito.`when`
 import org.mockito.MockitoAnnotations
+import org.robolectric.RobolectricTestRunner
 import rx.Observable
 import rx.functions.Func2
 import rx.observers.TestSubscriber
 import java.util.*
 import java.util.Arrays.asList
 
-@RunWith(TestRunner::class)
+@RunWith(RobolectricTestRunner::class)
 class QueryGeneratorImplTest {
   @Mock
   internal var regionService: RegionService? = null

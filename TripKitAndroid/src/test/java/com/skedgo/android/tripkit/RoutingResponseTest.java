@@ -9,6 +9,7 @@ import com.skedgo.android.common.util.Gsons;
 import org.assertj.core.api.Condition;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.robolectric.RobolectricTestRunner;
 
 import java.io.IOException;
 
@@ -22,7 +23,7 @@ import skedgo.tripkit.routing.TripSegment;
 import static org.assertj.core.api.Java6Assertions.assertThat;
 import static thuytrinh.mockwebserverrule.MockWebServerRule.createMockResponse;
 
-@RunWith(TestRunner.class)
+@RunWith(RobolectricTestRunner.class)
 public class RoutingResponseTest {
   @Test public void processDirectionTemplate() {
     // Case 1

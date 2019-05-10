@@ -10,6 +10,7 @@ import org.junit.runner.RunWith
 import org.mockito.Mock
 import org.mockito.Mockito.mock
 import org.mockito.MockitoAnnotations
+import org.robolectric.RobolectricTestRunner
 import rx.Observable
 import rx.observers.TestSubscriber
 import skedgo.tripkit.routing.RoutingResponse
@@ -17,7 +18,7 @@ import skedgo.tripkit.routing.Trip
 import skedgo.tripkit.routing.TripGroup
 import java.util.*
 
-@RunWith(TestRunner::class)
+@RunWith(RobolectricTestRunner::class)
 class TripUpdaterImplTest {
   @Mock
   internal var resources: Resources? = null

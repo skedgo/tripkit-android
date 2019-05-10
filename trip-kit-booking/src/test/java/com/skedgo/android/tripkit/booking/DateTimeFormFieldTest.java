@@ -4,10 +4,11 @@ import android.os.Parcel;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.robolectric.RobolectricTestRunner;
 
 import static org.assertj.core.api.Java6Assertions.assertThat;
 
-@RunWith(TestRunner.class)
+@RunWith(RobolectricTestRunner.class)
 public class DateTimeFormFieldTest {
 
   @Test public void Parcelable() {

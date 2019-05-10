@@ -1,9 +1,8 @@
 package com.skedgo.android.common.model;
 
-import com.skedgo.android.common.TestRunner;
-
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.robolectric.RobolectricTestRunner;
 
 import static com.skedgo.android.common.model.RealTimeStatus.CAPABLE;
 import static com.skedgo.android.common.model.RealTimeStatus.INCAPABLE;
@@ -11,7 +10,7 @@ import static com.skedgo.android.common.model.RealTimeStatus.IS_REAL_TIME;
 import static com.skedgo.android.common.model.RealTimeStatus.from;
 import static org.assertj.core.api.Java6Assertions.assertThat;
 
-@RunWith(TestRunner.class)
+@RunWith(RobolectricTestRunner.class)
 public class RealTimeStatusTest {
   @Test
   public void shouldConvertIntoCapable() {

@@ -1,7 +1,5 @@
 package com.skedgo.android.common.util;
 
-import com.skedgo.android.common.TestRunner;
-
 import net.danlew.android.joda.JodaTimeAndroid;
 
 import org.joda.time.DateTime;
@@ -9,13 +7,14 @@ import org.joda.time.DateTimeZone;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.robolectric.RobolectricTestRunner;
 
 import androidx.test.core.app.ApplicationProvider;
 
 import static com.skedgo.android.common.util.DateTimeFormats.printTime;
 import static org.assertj.core.api.Java6Assertions.assertThat;
 
-@RunWith(TestRunner.class)
+@RunWith(RobolectricTestRunner.class)
 public class DateTimeFormatsTest {
   @Before public void before() {
     JodaTimeAndroid.init(ApplicationProvider.getApplicationContext());

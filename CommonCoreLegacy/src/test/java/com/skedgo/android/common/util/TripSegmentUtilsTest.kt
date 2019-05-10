@@ -3,13 +3,13 @@ package com.skedgo.android.common.util
 import androidx.test.core.app.ApplicationProvider
 import com.nhaarman.mockitokotlin2.mock
 import com.nhaarman.mockitokotlin2.whenever
-import com.skedgo.android.common.TestRunner
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.Test
 import org.junit.runner.RunWith
+import org.robolectric.RobolectricTestRunner
 import skedgo.tripkit.routing.TripSegment
 
-@RunWith(TestRunner::class)
+@RunWith(RobolectricTestRunner::class)
 class TripSegmentUtilsTest {
 
   @Test

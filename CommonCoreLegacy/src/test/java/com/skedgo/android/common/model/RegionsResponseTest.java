@@ -2,10 +2,10 @@ package com.skedgo.android.common.model;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
-import com.skedgo.android.common.TestRunner;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.robolectric.RobolectricTestRunner;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -13,7 +13,7 @@ import java.util.HashMap;
 
 import static org.assertj.core.api.Java6Assertions.assertThat;
 
-@RunWith(TestRunner.class)
+@RunWith(RobolectricTestRunner.class)
 public class RegionsResponseTest {
   @Test
   public void shouldHasCorrectSerializeNames() {
