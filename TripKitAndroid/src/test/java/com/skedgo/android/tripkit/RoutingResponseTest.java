@@ -22,7 +22,7 @@ import skedgo.tripkit.routing.TripSegment;
 import static org.assertj.core.api.Java6Assertions.assertThat;
 import static thuytrinh.mockwebserverrule.MockWebServerRule.createMockResponse;
 
-
+@RunWith(TestRunner.class)
 public class RoutingResponseTest {
   @Test public void processDirectionTemplate() {
     // Case 1

@@ -10,7 +10,7 @@ import androidx.test.core.app.ApplicationProvider;
 
 import static org.assertj.core.api.Java6Assertions.assertThat;
 
-
+@RunWith(TestRunner.class)
 public class DefaultCo2PreferencesTest {
   private DefaultCo2Preferences preferences;
 

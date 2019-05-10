@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.res.Resources;
 
 import com.skedgo.android.common.R;
+import com.skedgo.android.common.TestRunner;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -21,7 +22,7 @@ import static skedgo.tripkit.routing.Visibilities.VISIBILITY_IN_DETAILS;
 import static skedgo.tripkit.routing.Visibilities.VISIBILITY_IN_SUMMARY;
 import static skedgo.tripkit.routing.Visibilities.VISIBILITY_ON_MAP;
 
-
+@RunWith(TestRunner.class)
 public class TripSegmentTest2 {
   private Context context;
 

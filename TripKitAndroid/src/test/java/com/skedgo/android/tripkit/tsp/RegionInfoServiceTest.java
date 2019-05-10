@@ -26,7 +26,7 @@ import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
-
+@RunWith(TestRunner.class)
 public class RegionInfoServiceTest {
   @Rule public final MockitoRule rule = MockitoJUnit.rule();
   @Mock RegionInfoApi api;

@@ -1,5 +1,7 @@
 package com.skedgo.android.common.util;
 
+import com.skedgo.android.common.TestRunner;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
@@ -9,7 +11,7 @@ import java.util.TimeZone;
 
 import static org.assertj.core.api.Java6Assertions.assertThat;
 
-
+@RunWith(TestRunner.class)
 public class TimeUtilsTest {
   // Most used languages
   private final Locale locale_en_AU = new Locale("en", "AU");

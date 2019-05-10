@@ -10,7 +10,7 @@ import org.junit.runner.RunWith;
 
 import static org.assertj.core.api.Java6Assertions.assertThat;
 
-
+@RunWith(TestRunner.class)
 public class SmsBookingResolverTest {
   @Test public void createSmsIntentByActionHavingBothNumberAndBody() {
     final Intent intent = SmsBookingResolver.createSmsIntentByAction("sms:12345?Hello Android!");

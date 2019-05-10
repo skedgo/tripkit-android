@@ -10,7 +10,7 @@ import java.util.List;
 
 import static org.assertj.core.api.Java6Assertions.assertThat;
 
-
+@RunWith(TestRunner.class)
 public class OptionValueTest {
   @Test public void Parse() {
     Gson gson = new GsonBuilder().serializeNulls().create();

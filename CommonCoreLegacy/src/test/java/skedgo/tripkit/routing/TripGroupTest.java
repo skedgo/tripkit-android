@@ -1,5 +1,7 @@
 package skedgo.tripkit.routing;
 
+import com.skedgo.android.common.TestRunner;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
@@ -14,7 +16,7 @@ import static org.mockito.Mockito.when;
 import static skedgo.tripkit.routing.GroupVisibility.COMPACT;
 import static skedgo.tripkit.routing.GroupVisibility.FULL;
 
-
+@RunWith(TestRunner.class)
 public class TripGroupTest {
   @Test public void addAsDisplayTrip() {
     final Trip a = mock(Trip.class);

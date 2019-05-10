@@ -30,7 +30,7 @@ import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
-
+@RunWith(TestRunner.class)
 public class BookingViewModelImplTest {
   private AuthenticationViewModel authenticationViewModel;
   private BookingViewModel bookingViewModel;

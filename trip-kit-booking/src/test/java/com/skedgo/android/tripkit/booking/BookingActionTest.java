@@ -10,7 +10,7 @@ import org.junit.runner.RunWith;
 
 import static org.assertj.core.api.Java6Assertions.assertThat;
 
-
+@RunWith(TestRunner.class)
 public class BookingActionTest {
   @Test public void Parse() {
     Gson gson = new GsonBuilder().serializeNulls().create();

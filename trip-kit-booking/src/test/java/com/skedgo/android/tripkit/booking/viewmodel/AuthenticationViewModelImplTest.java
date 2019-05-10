@@ -7,7 +7,7 @@ import org.junit.runner.RunWith;
 
 import static org.assertj.core.api.Java6Assertions.assertThat;
 
-
+@RunWith(TestRunner.class)
 public class AuthenticationViewModelImplTest {
   @Test public void AuthenticationSucceeds() {
     final AuthenticationViewModelImpl viewModel = new AuthenticationViewModelImpl();

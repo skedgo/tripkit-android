@@ -2,6 +2,7 @@ package com.skedgo.android.common.model;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
+import com.skedgo.android.common.TestRunner;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -13,7 +14,7 @@ import static junit.framework.Assert.assertEquals;
 import static junit.framework.Assert.assertNotNull;
 import static org.assertj.core.api.Java6Assertions.assertThat;
 
-
+@RunWith(TestRunner.class)
 public class RegionTest {
   @Test public void serializedNames() {
     final Region region = new Region();

@@ -44,7 +44,7 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 @SuppressWarnings("WrongConstant")
-
+@RunWith(TestRunner.class)
 public class BookingResolverImplTest {
   private static final Comparator<BookingAction> BOOKING_ACTION_COMPARATOR =
       new Comparator<BookingAction>() {

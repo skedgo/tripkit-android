@@ -1,13 +1,14 @@
 package com.skedgo.android.common.model;
 
 import com.skedgo.android.common.Parcels;
+import com.skedgo.android.common.TestRunner;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import static org.assertj.core.api.Java6Assertions.assertThat;
 
-
+@RunWith(TestRunner.class)
 public class BookingConfirmationTest {
   @Test public void parcel() {
     final BookingConfirmation expected = ImmutableBookingConfirmation.builder()

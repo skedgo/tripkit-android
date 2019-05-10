@@ -1,5 +1,7 @@
 package com.skedgo.android.common.model;
 
+import com.skedgo.android.common.TestRunner;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
@@ -15,7 +17,7 @@ import static com.skedgo.android.common.model.StopType.TRAM;
 import static com.skedgo.android.common.model.StopType.from;
 import static org.assertj.core.api.Java6Assertions.assertThat;
 
-
+@RunWith(TestRunner.class)
 public class StopTypeTest {
   @Test
   public void shouldConvertIntoBus() {

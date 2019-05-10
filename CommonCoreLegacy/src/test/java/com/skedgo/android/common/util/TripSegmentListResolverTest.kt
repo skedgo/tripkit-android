@@ -2,6 +2,7 @@ package com.skedgo.android.common.util
 
 import android.content.Context
 import androidx.test.core.app.ApplicationProvider
+import com.skedgo.android.common.TestRunner
 import org.assertj.core.api.Java6Assertions.assertThat
 import org.joda.time.DateTime
 import org.junit.Test

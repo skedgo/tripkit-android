@@ -2,16 +2,19 @@ package com.skedgo.android.common.model;
 
 import android.os.Parcel;
 
+import com.skedgo.android.common.BuildConfig;
+import com.skedgo.android.common.TestRunner;
 import com.skedgo.android.common.util.Gsons;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.robolectric.annotation.Config;
 
 import skedgo.tripkit.routing.ModeInfo;
 
 import static org.assertj.core.api.Java6Assertions.*;
 
-
+@RunWith(TestRunner.class)
 public class ScheduledStopTest {
   @Test public void parseFromJson() {
     final String json = "{\n" +

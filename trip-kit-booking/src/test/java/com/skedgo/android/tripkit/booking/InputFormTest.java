@@ -8,7 +8,7 @@ import java.util.List;
 
 import static org.assertj.core.api.Java6Assertions.assertThat;
 
-
+@RunWith(TestRunner.class)
 public class InputFormTest {
 
   @Test public void NullInput() {

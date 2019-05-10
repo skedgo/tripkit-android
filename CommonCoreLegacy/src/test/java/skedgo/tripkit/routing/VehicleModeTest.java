@@ -1,5 +1,7 @@
 package skedgo.tripkit.routing;
 
+import com.skedgo.android.common.TestRunner;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
@@ -28,7 +30,7 @@ import static skedgo.tripkit.routing.VehicleMode.TRAM;
 import static skedgo.tripkit.routing.VehicleMode.WALK;
 import static skedgo.tripkit.routing.VehicleMode.from;
 
-
+@RunWith(TestRunner.class)
 public class VehicleModeTest {
   @Test
   public void defineLocalTransportIcons() {

@@ -1,5 +1,7 @@
 package com.skedgo.android.common.util;
 
+import com.skedgo.android.common.TestRunner;
+
 import net.danlew.android.joda.JodaTimeAndroid;
 
 import org.joda.time.DateTime;
@@ -14,7 +16,7 @@ import static android.text.format.DateFormat.is24HourFormat;
 import static com.skedgo.android.common.util.DateTimeFormats.printTime;
 import static org.assertj.core.api.Java6Assertions.assertThat;
 
-
+@RunWith(TestRunner.class)
 public class DateTimeFormatsTest2 {
   @Before public void before() {
     JodaTimeAndroid.init(ApplicationProvider.getApplicationContext());

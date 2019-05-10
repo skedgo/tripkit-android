@@ -1,5 +1,7 @@
 package skedgo.tripkit.routing;
 
+import com.skedgo.android.common.TestRunner;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
@@ -18,7 +20,7 @@ import static skedgo.tripkit.routing.TripComparators.TIME_COMPARATOR_CHAIN;
 import static skedgo.tripkit.routing.TripComparators.WEIGHTED_SCORE_COMPARATOR;
 import static skedgo.tripkit.routing.TripComparators.compareLongs;
 
-
+@RunWith(TestRunner.class)
 public class TripComparatorsTest {
   @Test public void compareWeightedScores() {
     final Trip lhs = mock(Trip.class);
