@@ -18,7 +18,7 @@ import rx.observers.TestSubscriber;
 
 import static org.assertj.core.api.Java6Assertions.assertThat;
 
-@RunWith(TestRunner.class)
+@RunWith(AndroidJUnit4::class)
 public class AccountApiTest {
   private MockWebServer server;
   private AccountApi api;
