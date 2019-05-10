@@ -44,6 +44,8 @@ dependencies {
   testImplementation libs.assertjCore
   testImplementation libs.mockitoCore
   testImplementation libs.robolectric
+  testImplementation libs.androidxTesting
+  testImplementation libs.androidxJUnitExtTesting
   testImplementation libs.mockitoKotlin, { exclude group: 'org.jetbrains.kotlin' }
   testImplementation libs.kluent
 

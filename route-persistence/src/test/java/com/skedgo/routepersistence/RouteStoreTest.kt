@@ -1,5 +1,7 @@
 package com.skedgo.routepersistence
 
+import android.content.Context
+import androidx.test.core.app.ApplicationProvider
 import com.google.gson.GsonBuilder
 import com.nhaarman.mockitokotlin2.mock
 import com.nhaarman.mockitokotlin2.whenever
@@ -15,8 +17,8 @@ import org.junit.Assert.assertEquals
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
-import org.robolectric.RobolectricTestRunner
-import androidx.test.core.app.ApplicationProvider
+
+import androidx.test.ext.junit.runners.AndroidJUnit4
 import rx.observers.TestSubscriber
 import skedgo.tripkit.routing.Trip
 import skedgo.tripkit.routing.TripGroup
@@ -31,7 +33,7 @@ class RouteStoreTest {
 
   @Before
   fun before() {
-    val context = ApplicationProvider.getApplicationContext()
+    val context = ApplicationProvider.getApplicationContext<Context>()
     databaseHelper = RouteDatabaseHelper(context, RouteStoreTest::class.java.simpleName)
     val gson = GsonBuilder()
         .registerTypeAdapterFactory(LocationTypeAdapterFactory())
