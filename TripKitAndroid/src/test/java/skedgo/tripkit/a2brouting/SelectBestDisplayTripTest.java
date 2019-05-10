@@ -13,7 +13,7 @@ import skedgo.tripkit.routing.TripGroup;
 
 import static org.assertj.core.api.Java6Assertions.assertThat;
 
-@RunWith(TestRunner.class)
+
 public class SelectBestDisplayTripTest {
   @Test public void selectDisplayTripHavingLowestWeightedScore() {
     final Trip a = new Trip();

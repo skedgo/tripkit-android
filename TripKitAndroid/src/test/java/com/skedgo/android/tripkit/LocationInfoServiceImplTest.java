@@ -24,7 +24,7 @@ import static org.mockito.Matchers.eq;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
-@RunWith(TestRunner.class)
+
 public class LocationInfoServiceImplTest {
   @Mock LocationInfoApi api;
   @Mock RegionService regionService;

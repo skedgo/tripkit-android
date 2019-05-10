@@ -6,7 +6,6 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonObject;
 import com.skedgo.android.common.Parcels;
-import com.skedgo.android.common.TestRunner;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -14,7 +13,7 @@ import org.junit.runner.RunWith;
 import static com.skedgo.android.common.model.RealtimeAlert.SEVERITY_WARNING;
 import static org.assertj.core.api.Java6Assertions.assertThat;
 
-@RunWith(TestRunner.class)
+
 public class RealtimeAlertTest {
   @Test public void jsonKeys() {
     final RealtimeAlert alert = ImmutableRealtimeAlert.builder()

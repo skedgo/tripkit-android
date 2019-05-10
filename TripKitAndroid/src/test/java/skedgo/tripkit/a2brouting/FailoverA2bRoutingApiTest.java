@@ -29,7 +29,7 @@ import static org.mockito.Matchers.eq;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
-@RunWith(TestRunner.class)
+
 public class FailoverA2bRoutingApiTest {
   @Rule public MockitoRule rule = MockitoJUnit.rule();
   @Mock A2bRoutingApi api;

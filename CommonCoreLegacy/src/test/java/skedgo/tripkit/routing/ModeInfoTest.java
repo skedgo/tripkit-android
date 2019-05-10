@@ -4,7 +4,6 @@ import android.text.TextUtils;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
-import com.skedgo.android.common.TestRunner;
 import com.skedgo.android.common.model.Utils;
 
 import org.junit.Test;
@@ -14,7 +13,7 @@ import java.util.Comparator;
 
 import static org.assertj.core.api.Java6Assertions.assertThat;
 
-@RunWith(TestRunner.class)
+
 public class ModeInfoTest {
   @Test public void parcel() {
     final ModeInfo expected = createModeInfo();

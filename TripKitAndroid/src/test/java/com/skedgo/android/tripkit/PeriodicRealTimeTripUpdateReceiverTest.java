@@ -18,7 +18,7 @@ import skedgo.tripkit.routing.TripGroup;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
-@RunWith(TestRunner.class)
+
 public class PeriodicRealTimeTripUpdateReceiverTest {
   @Mock TripUpdater tripUpdater;
   @Mock TripGroup group;

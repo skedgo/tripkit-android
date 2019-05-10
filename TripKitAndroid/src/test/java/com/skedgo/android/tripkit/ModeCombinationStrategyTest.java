@@ -19,7 +19,7 @@ import static java.util.Arrays.asList;
 import static java.util.Collections.singletonList;
 import static org.assertj.core.api.Java6Assertions.assertThat;
 
-@RunWith(TestRunner.class)
+
 public class ModeCombinationStrategyTest {
   @Test
   public void shouldDealWithModesNotFound() {

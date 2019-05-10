@@ -5,7 +5,6 @@ import android.content.res.Resources;
 import android.os.Build;
 import android.util.DisplayMetrics;
 
-import com.skedgo.android.common.TestRunner;
 import com.skedgo.android.common.model.TransportMode;
 
 import org.junit.Before;
@@ -30,7 +29,7 @@ import static org.assertj.core.api.Java6Assertions.assertThat;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
-@RunWith(TestRunner.class)
+
 public class TransportModeUtilsTest {
   private Resources resources;
 

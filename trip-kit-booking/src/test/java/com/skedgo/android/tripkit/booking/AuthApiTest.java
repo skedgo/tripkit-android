@@ -24,7 +24,7 @@ import rx.observers.TestSubscriber;
 
 import static org.assertj.core.api.Java6Assertions.assertThat;
 
-@RunWith(TestRunner.class)
+
 public class AuthApiTest {
   private MockWebServer server;
   private AuthApi api;

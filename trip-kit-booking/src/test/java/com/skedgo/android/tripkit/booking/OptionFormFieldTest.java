@@ -10,7 +10,7 @@ import java.util.List;
 
 import static org.assertj.core.api.Java6Assertions.assertThat;
 
-@RunWith(TestRunner.class)
+
 public class OptionFormFieldTest {
 
   @Test public void Parcelable() {

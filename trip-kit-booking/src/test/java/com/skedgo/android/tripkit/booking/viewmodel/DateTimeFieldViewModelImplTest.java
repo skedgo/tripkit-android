@@ -13,7 +13,7 @@ import java.util.Calendar;
 
 import static org.assertj.core.api.Java6Assertions.assertThat;
 
-@RunWith(TestRunner.class)
+
 public class DateTimeFieldViewModelImplTest {
   /**
    * FIXME: Temporarily ignore as it's flaky by the use of {@link Calendar#getInstance()}.

@@ -20,7 +20,7 @@ import static org.junit.Assert.assertNull;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
-@RunWith(TestRunner.class)
+
 public class BookingServiceTest {
   @Mock BookingApi bookingApi;
   private Gson gson;

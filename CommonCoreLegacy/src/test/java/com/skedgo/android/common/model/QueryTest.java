@@ -2,8 +2,6 @@ package com.skedgo.android.common.model;
 
 import android.os.Parcel;
 
-import com.skedgo.android.common.TestRunner;
-
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
@@ -12,7 +10,7 @@ import java.util.Arrays;
 
 import static org.assertj.core.api.Java6Assertions.assertThat;
 
-@RunWith(TestRunner.class)
+
 public class QueryTest {
   @Test public void shouldParcel() {
     final Region expectedRegion = new Region();
