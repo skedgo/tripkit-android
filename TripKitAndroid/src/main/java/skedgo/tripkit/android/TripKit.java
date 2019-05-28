@@ -8,6 +8,7 @@ import com.skedgo.android.tripkit.HttpClientModule;
 import com.skedgo.android.tripkit.LocationInfoService;
 import com.skedgo.android.tripkit.MainModule;
 import com.skedgo.android.tripkit.RegionService;
+import com.skedgo.android.tripkit.ServiceService;
 import com.skedgo.android.tripkit.TripUpdater;
 import com.skedgo.android.tripkit.bookingproviders.BookingResolver;
 import skedgo.tripkit.a2brouting.A2bRoutingDataModule;
@@ -81,6 +82,7 @@ public abstract class TripKit {
 
   public abstract Configs configs();
   public abstract RegionService getRegionService();
+  public abstract ServiceService getServiceService();
   public abstract RouteService getRouteService();
   public abstract okhttp3.OkHttpClient getOkHttpClient3();
   public abstract BookingResolver getBookingResolver();

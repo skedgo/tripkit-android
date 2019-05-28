@@ -20,7 +20,7 @@ import static org.immutables.value.Value.Style;
 @Style(passAnnotations = JsonAdapter.class)
 @JsonAdapter(GsonAdaptersServiceResponse.class)
 public interface ServiceResponse {
-  String realTimeStatus();
+  @Nullable String realTimeStatus();
   String type();
   List<Shape> shapes();
   @Nullable RealTimeVehicle realtimeVehicle();

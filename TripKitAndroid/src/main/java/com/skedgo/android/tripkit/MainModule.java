@@ -2,7 +2,9 @@ package com.skedgo.android.tripkit;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+
 import androidx.annotation.NonNull;
+
 import android.util.Log;
 
 import com.google.gson.Gson;
@@ -191,6 +193,22 @@ public class MainModule {
       LocationInfoApi locationInfoApi,
       RegionService regionService) {
     return new LocationInfoServiceImpl(locationInfoApi, regionService);
+  }
+
+  @Provides ServiceApi getServiceApi(Gson gson, OkHttpClient httpClient) {
+    return new Retrofit.Builder()
+        /* This base url is ignored as the api relies on @Url. */
+        .baseUrl(Server.ApiTripGo.getValue())
+        .addCallAdapterFactory(RxJavaCallAdapterFactory.createWithScheduler(Schedulers.io()))
+        .addConverterFactory(GsonConverterFactory.create(gson))
+        .client(httpClient)
+        .build()
+        .create(ServiceApi.class);
+  }
+
+  @Singleton @Provides ServiceService getServiceService(
+      ServiceApi serviceApi) {
+    return new ServiceServiceImpl(serviceApi);
   }
 
   @Singleton @Provides Gson getGson() {
