@@ -13,6 +13,6 @@ internal class ServiceServiceImpl (
 ) : ServiceService {
 
   override fun getServiceShapes(region: String, tripId: String, timeInSecs: Long): Observable<List<Shape>> =
-      serviceApi.getServiceAsync(region, tripId, timeInSecs, false)
+      serviceApi.getServiceAsync(region, tripId, timeInSecs, true)
           .map { it.shapes() }
 }

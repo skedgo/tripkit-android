@@ -1,54 +1,54 @@
 package skedgo.tripkit.a2brouting
 
 import android.graphics.Color
-import androidx.annotation.ColorInt
-import com.skedgo.android.common.model.Street
-import com.skedgo.android.common.model.TransportMode
 import com.skedgo.android.common.util.PolyUtil
 import com.skedgo.android.tripkit.LineSegment
+import com.skedgo.android.tripkit.RegionService
+import com.skedgo.android.tripkit.ServiceService
 import rx.Observable
-import rx.Single
 import skedgo.tripkit.routing.TripSegment
+import skedgo.tripkit.routing.startDateTime
+import skedgo.tripkit.routing.toSeconds
 import javax.inject.Inject
 
-class GetNonTravelledLineForTrip @Inject constructor() {
+class GetNonTravelledLineForTrip @Inject constructor(
+    private val serviceService: ServiceService,
+    private val regionService: RegionService
+) {
 
   fun execute(segments: List<TripSegment>): Observable<List<LineSegment>> {
-    return Observable.fromCallable { createNonTravelledLinesToDraw(segments) }
+    return createNonTravelledLinesToDrawForStops(segments)
         .flatMap { Observable.from(it) }
   }
 
-  private fun createNonTravelledLinesToDraw(segments: List<TripSegment>?): List<List<LineSegment>> {
-    return segments.orEmpty()
-        .filterNot {
-          it.from == null || it.to == null
-        }
-        .map {
-          val color = if (it.serviceColor == null)
-            Color.BLACK
-          else
-            it.serviceColor!!.color
-
-          val shapes = it.shapes ?: emptyList()
-          shapes to color
-        }
-        .flatMap { (shapes, defaultColor) ->
-          shapes.filterNot { it.isTravelled }
-              .filter {
-                it.encodedWaypoints.isNotEmpty()
+  private fun createNonTravelledLinesToDrawForStops(segments: List<TripSegment>?): Observable<List<List<LineSegment>>> {
+    return Observable.fromCallable {
+      segments.orEmpty()
+          .filterNot {
+            it.from == null || it.to == null || it.serviceTripId == null
+          }
+    }
+        .flatMapIterable { it }
+        .flatMap { segment ->
+          regionService.getRegionByLocationAsync(segment.from)
+              .map { segment to it }
+              .flatMap { (segment, region) ->
+                serviceService
+                    .getServiceShapes(region.name!!, segment.serviceTripId, segment.startDateTime.toSeconds())
               }
-              .map {
-                val color = if (it.serviceColor == null || it.serviceColor.color == Color.BLACK)
-                  defaultColor
-                else
-                  it.serviceColor.color
-                PolyUtil.decode(it.encodedWaypoints)
-                    .zipWithNext()
-                    .map { (start, end) ->
-                      LineSegment(start, end, color)
+              .map { shapes ->
+                shapes
+                    .filter {
+                      it.encodedWaypoints.isNotEmpty()
+                    }
+                    .map {
+                      PolyUtil.decode(it.encodedWaypoints)
+                          .zipWithNext()
+                          .map { (start, end) ->
+                            LineSegment(start, end, Color.BLACK)
+                          }
                     }
               }
         }
   }
-
 }
