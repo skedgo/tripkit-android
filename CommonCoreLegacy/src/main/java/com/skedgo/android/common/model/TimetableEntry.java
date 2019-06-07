@@ -139,16 +139,6 @@ public class TimetableEntry implements Parcelable, IRealTimeElement, ITimeRange,
             }
           }
         });
-
-    // For debug purpose only.
-    /*if (BuildConfig.DEBUG) {
-      stops.observe().subscribe(new Action1<List<StopInfo>>() {
-        @Override
-        public void call(List<StopInfo> stops) {
-          Log.w("LoadStops", "Got " + stops.size() + " stops for: " + serviceNumber + " - " + TimetableEntry.this);
-        }
-      });
-    }*/
   }
 
   @Nullable public String getServiceDirection() {
