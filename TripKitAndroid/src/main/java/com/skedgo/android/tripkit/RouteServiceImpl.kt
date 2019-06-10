@@ -14,6 +14,7 @@ import java.util.HashMap
 import java.util.concurrent.TimeUnit
 
 import androidx.collection.ArrayMap
+import com.skedgo.android.tripkit.tsp.hasWheelChairInformation
 import rx.Observable
 import rx.functions.Func1
 import rx.functions.Func2
@@ -68,7 +69,7 @@ internal class RouteServiceImpl(
       if (tripPreferences.isConcessionPricingPreferred) {
         map["conc"] = true
       }
-      if (tripPreferences.isWheelchairPreferred && regionInfo.transitWheelchairAccessibility()) {
+      if (tripPreferences.isWheelchairPreferred && regionInfo.hasWheelChairInformation()) {
         map["wheelchair"] = true
       }
     }
