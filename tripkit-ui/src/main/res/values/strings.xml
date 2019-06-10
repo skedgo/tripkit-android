@@ -1,0 +1,10 @@
+<resources>
+  <string name="app_name">TripKitUI</string>
+  <string name="_pattern_every__pattern">\"%1$s every %2$s\"</string>
+  <string name="service">Service</string>
+  <string name="_pattern_at__pattern">Arrive at %1$s at %2$s</string>
+  <string name="no_realtime_available">No real-time available</string>
+  <string name="on_time">On time</string>
+  <string name="_pattern_early__start_parent_pattern_service_end_parent">%1$s early (%2$s service)</string>
+  <string name="_pattern_late__start_parent_pattern_service_end_parent">%1$s late (%2$s service)</string>
+</resources>
