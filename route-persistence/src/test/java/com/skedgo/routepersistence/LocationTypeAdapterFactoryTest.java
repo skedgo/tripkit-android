@@ -8,12 +8,10 @@ import com.skedgo.android.common.model.Location;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.robolectric.RobolectricTestRunner;
-import org.robolectric.annotation.Config;
 
-import static org.assertj.core.api.Java6Assertions.*;
+import static org.assertj.core.api.Java6Assertions.assertThat;
 
 @RunWith(RobolectricTestRunner.class)
-@Config(constants = BuildConfig.class, sdk = 22)
 public class LocationTypeAdapterFactoryTest {
   @Test public void shouldOnlyWriteNecessaryProperties() {
     final Gson gson = new GsonBuilder()

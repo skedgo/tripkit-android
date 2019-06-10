@@ -4,28 +4,22 @@ import com.skedgo.android.common.model.Location
 import com.skedgo.android.common.model.Query
 import com.skedgo.android.common.model.Region
 import com.skedgo.android.common.model.TransportMode
-
+import org.assertj.core.api.Java6Assertions.assertThat
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
+import org.mockito.ArgumentMatchers
 import org.mockito.Mock
+import org.mockito.Mockito.`when`
 import org.mockito.MockitoAnnotations
-import org.robolectric.annotation.Config
-
-import java.util.ArrayList
-import java.util.HashMap
-
+import org.robolectric.RobolectricTestRunner
 import rx.Observable
 import rx.functions.Func2
 import rx.observers.TestSubscriber
-
+import java.util.*
 import java.util.Arrays.asList
-import org.assertj.core.api.Java6Assertions.*
-import org.mockito.ArgumentMatchers
-import org.mockito.Mockito.`when`
 
-@RunWith(TestRunner::class)
-@Config(constants = BuildConfig::class)
+@RunWith(RobolectricTestRunner::class)
 class QueryGeneratorImplTest {
   @Mock
   internal var regionService: RegionService? = null
