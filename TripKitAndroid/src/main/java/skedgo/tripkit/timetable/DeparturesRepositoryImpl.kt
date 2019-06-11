@@ -20,8 +20,7 @@ class DeparturesRepositoryImpl @Inject constructor(
       region: String,
       embarkationStopCodes: List<String>,
       disembarkationStopCodes: List<String>?,
-      timeInSecs: Long,
-      config: JsonObject
+      timeInSecs: Long
   ): Observable<DeparturesResponse> =
       regionService.getRegionByNameAsync(region)
           .flatMap { Observable.from(it.urLs) }
@@ -38,7 +37,6 @@ class DeparturesRepositoryImpl @Inject constructor(
                 .disembarkationStops(disembarkationStopCodes)
                 .regionName(region)
                 .timeInSecs(timeInSecs)
-                .config(config)
                 .build()
 
             departuresApi.request(url, requestBody)

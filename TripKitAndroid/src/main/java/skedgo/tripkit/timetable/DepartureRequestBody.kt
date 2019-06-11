@@ -1,6 +1,5 @@
 package skedgo.tripkit.timetable
 
-import com.google.gson.JsonObject
 import com.google.gson.annotations.JsonAdapter
 import com.google.gson.annotations.SerializedName
 import org.immutables.gson.Gson
@@ -21,7 +20,4 @@ interface DepartureRequestBody {
 
   @SerializedName("timeStamp")
   fun timeInSecs(): Long
-
-  fun config(): JsonObject
-
 }
