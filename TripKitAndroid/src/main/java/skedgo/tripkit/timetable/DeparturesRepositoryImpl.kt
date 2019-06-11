@@ -1,11 +1,8 @@
 package skedgo.tripkit.timetable
 
-import android.os.Parcelable
-import com.google.gson.JsonObject
 import com.skedgo.android.common.model.DeparturesResponse
 import com.skedgo.android.tripkit.RegionService
 import okhttp3.HttpUrl
-import org.json.JSONObject
 import rx.Observable
 import javax.inject.Inject
 

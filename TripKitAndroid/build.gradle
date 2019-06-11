@@ -69,6 +69,7 @@ dependencies {
   implementation libs.retrofitAdapterRxJava
   implementation libs.retrofitConverterGson
 
+  implementation libs.rxrelay1
   implementation libs.rxjava
   implementation libs.rxAndroid
   implementation 'com.firebase:firebase-jobdispatcher:0.8.5'
