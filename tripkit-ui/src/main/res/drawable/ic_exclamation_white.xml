@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+  android:width="12dp"
+  android:height="16dp"
+  android:viewportHeight="16"
+  android:viewportWidth="12">
+
+  <path
+    android:name="exclamation"
+    android:fillColor="#FFFFFF"
+    android:pathData="M9,6 L8.47438618,9 L7.51288269,9 L7,6 L7,4 L9,4 L9,6 Z M9,12 L7,12 L7,10 L9,10
+L9,12 Z" />
+</vector>

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+  android:width="16dp"
+  android:height="16dp"
+  android:viewportHeight="16"
+  android:viewportWidth="16">
+
+  <path
+    android:name="Oval"
+    android:fillColor="#FFB500"
+    android:pathData="M 8 0 C 12.4182779986 0 16 3.58172200135 16 8 C 16 12.4182779986 12.4182779986 16 8 16 C 3.58172200135 16 0 12.4182779986 0 8 C 0 3.58172200135 3.58172200135 0 8 0 Z" />
+  <path
+    android:name="Path"
+    android:pathData="M 5 8 L 7 10 L 11 6 "
+    android:strokeColor="#FFFFFF"
+    android:strokeWidth="1.5" />
+</vector>

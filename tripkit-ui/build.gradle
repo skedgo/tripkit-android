@@ -23,6 +23,8 @@ android {
     }
   }
 
+  dataBinding { enabled = true }
+
 }
 
 dependencies {
@@ -41,5 +43,9 @@ dependencies {
   implementation libs.kotlin
   implementation libs.rxjava
   implementation libs.rxAndroid
+  implementation libs.rxrelay1
   implementation libs.jodaTimeAndroid
+
+  implementation libs.bindingCollectionAdapter
+  implementation libs.bindingCollectionAdapterRecyclerView
 }

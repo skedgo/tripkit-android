@@ -7,4 +7,16 @@
   <string name="on_time">On time</string>
   <string name="_pattern_early__start_parent_pattern_service_end_parent">%1$s early (%2$s service)</string>
   <string name="_pattern_late__start_parent_pattern_service_end_parent">%1$s late (%2$s service)</string>
+
+  <string name="many_seats_available">Many seats available</string>
+  <string name="few_seats_available">Few seats available</string>
+  <string name="standing_room_only">Standing room only</string>
+  <string name="limited_standing_room_only">Limited standing room only</string>
+  <string name="almost_full">Almost full</string>
+  <string name="full">Full</string>
+  <string name="wheelchair_accessible">Wheelchair accessible</string>
+  <string name="not_wheelchair_accessible">Not wheelchair accessible</string>
+
+  <string name="alerts">Alerts</string>
+
 </resources>

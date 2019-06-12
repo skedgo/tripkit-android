@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <color name="occupancyManySeats">#23B15E</color>
+  <color name="occupancyFewSeats">#FFB500</color>
+  <color name="occupancyStandingOnly">#FF9600</color>
+  <color name="occupancyAlmostFull">#FF9600</color>
+  <color name="occupancyFull">#FF4B47</color>
+  <color name="wheelchairTextColor">#009BDF</color>
+  <color name="light_blue">#009bdf</color>
+  <color name="light_grey_4">#9B9B9B</color>
+</resources>
