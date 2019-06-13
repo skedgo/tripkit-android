@@ -21,7 +21,7 @@ public class ServiceStopTest {
     final ServiceStop expected = new ServiceStop();
     expected.setCode("SomeCode");
     expected.setArrivalTime(345L);
-    expected.departureSecs().put(123L);
+    expected.setDepartureSecs(123L);
     expected.setType(StopType.BUS);
 
     final Gson gson = new Gson();
@@ -29,7 +29,7 @@ public class ServiceStopTest {
 
     assertThat(actual.getCode()).isEqualTo(expected.getCode());
     assertThat(actual.getArrivalTime()).isEqualTo(expected.getArrivalTime());
-    assertThat(actual.departureSecs().value()).isEqualTo(expected.departureSecs().value());
+    assertThat(actual.departureSecs()).isEqualTo(expected.departureSecs());
     assertThat(actual.getType()).isEqualTo(expected.getType());
   }
 }
