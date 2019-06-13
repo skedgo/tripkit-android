@@ -1,11 +1,8 @@
 package com.skedgo.android.common.rx;
 
-import com.skedgo.android.common.BuildConfig;
-
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.robolectric.RobolectricTestRunner;
-import org.robolectric.annotation.Config;
 
 import java.util.Arrays;
 
@@ -13,10 +10,9 @@ import rx.observers.TestSubscriber;
 import rx.subjects.Subject;
 
 import static java.util.Collections.singletonList;
-import static org.assertj.core.api.Java6Assertions.*;
+import static org.assertj.core.api.Java6Assertions.assertThat;
 
 @RunWith(RobolectricTestRunner.class)
-@Config(constants = BuildConfig.class)
 public class VarTest {
   @Test public void shouldNotEmitValueIfNoDefaultValue() {
     final Var<String> v = Var.create();

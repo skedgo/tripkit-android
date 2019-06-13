@@ -24,6 +24,8 @@ dependencies {
   testImplementation libs.mockitoCore
   testImplementation libs.robolectric
   testImplementation libs.mockWebServer
+  testImplementation libs.androidxTesting
+  testImplementation libs.androidxJUnitExtTesting
 
   implementation libs.supportAnnotations
   implementation libs.rxjava

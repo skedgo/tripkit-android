@@ -3,19 +3,17 @@ package com.skedgo.android.tripkit.booking.viewmodel;
 import com.skedgo.android.tripkit.booking.BookingAction;
 import com.skedgo.android.tripkit.booking.BookingForm;
 import com.skedgo.android.tripkit.booking.BookingService;
-import com.skedgo.android.tripkit.booking.BuildConfig;
 import com.skedgo.android.tripkit.booking.FormField;
 import com.skedgo.android.tripkit.booking.FormGroup;
 import com.skedgo.android.tripkit.booking.InputForm;
 import com.skedgo.android.tripkit.booking.OptionFormField;
 import com.skedgo.android.tripkit.booking.StringFormField;
-import com.skedgo.android.tripkit.booking.TestRunner;
 
 import org.assertj.core.api.Assertions;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.robolectric.annotation.Config;
+import org.robolectric.RobolectricTestRunner;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -25,15 +23,14 @@ import rx.Observable;
 import rx.functions.Action1;
 import rx.observers.TestSubscriber;
 
-import static org.assertj.core.api.Java6Assertions.*;
+import static org.assertj.core.api.Java6Assertions.assertThat;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
-@RunWith(TestRunner.class)
-@Config(constants = BuildConfig.class)
+@RunWith(RobolectricTestRunner.class)
 public class BookingViewModelImplTest {
   private AuthenticationViewModel authenticationViewModel;
   private BookingViewModel bookingViewModel;
