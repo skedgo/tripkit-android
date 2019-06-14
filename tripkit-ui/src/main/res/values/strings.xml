@@ -18,5 +18,10 @@
   <string name="not_wheelchair_accessible">Not wheelchair accessible</string>
 
   <string name="alerts">Alerts</string>
+  <string name="upcoming_services">Upcoming Services</string>
+  <string name="view">View</string>
+  <string name="go_to_now">Go to Now</string>
+
+  <string name="filter_by_service_name_coma_number_or_stop">Filter by service name, number or stop</string>
 
 </resources>

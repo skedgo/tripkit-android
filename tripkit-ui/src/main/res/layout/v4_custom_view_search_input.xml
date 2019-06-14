@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<merge xmlns:android="http://schemas.android.com/apk/res/android">
+
+  <ProgressBar
+    android:id="@+id/v4_query_progress_bar"
+    android:layout_width="@dimen/v4_query_progress_bar_size"
+    android:layout_height="@dimen/v4_query_progress_bar_size"
+    android:layout_centerVertical="true"
+    android:layout_marginLeft="@dimen/v4_content_padding"
+    android:visibility="gone" />
+
+  <ImageButton
+    android:id="@+id/v4_btn_clear"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_alignParentRight="true"
+    android:layout_centerVertical="true"
+    android:layout_marginRight="@dimen/v4_half_content_padding"
+    android:background="@null"
+    android:padding="@dimen/v4_content_padding"
+    android:src="@drawable/v4_selector_btn_clear"
+    android:visibility="gone" />
+
+  <view
+    android:id="@+id/v4_query_field"
+    class="android.widget.EditText"
+    fontPath="@string/font_light"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_alignWithParentIfMissing="true"
+    android:layout_toLeftOf="@id/v4_btn_clear"
+    android:layout_toRightOf="@id/v4_query_progress_bar"
+    android:background="@null"
+    android:ellipsize="end"
+    android:imeOptions="actionSearch"
+    android:inputType="textPostalAddress"
+    android:padding="@dimen/v4_content_padding"
+    android:singleLine="true"
+    android:textSize="16sp" />
+
+</merge>

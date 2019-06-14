@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:tools="http://schemas.android.com/tools"
+  xmlns:app="http://schemas.android.com/apk/res-auto">
+
+  <data>
+
+    <variable
+      name="viewModel"
+      type="skedgo.tripkit.ui.timetable.services.TimetableViewModel" />
+
+    <import type="me.tatarka.bindingcollectionadapter2.LayoutManagers" />
+  </data>
+
+  <RelativeLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <skedgo.tripkit.ui.view.SearchInputView
+      android:id="@+id/serviceFilterView"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:background="@android:color/white" />
+
+    <View
+      android:id="@+id/timetableDivider"
+      android:layout_width="match_parent"
+      android:layout_height="@dimen/v4_divider_size"
+      android:layout_below="@id/serviceFilterView"
+      android:background="@drawable/horizontal_divider" />
+
+    <ProgressBar
+      android:id="@+id/loading"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_alignParentBottom="true"
+      android:layout_centerHorizontal="true"
+      android:visibility="@{viewModel.showLoading}"/>
+
+    <androidx.recyclerview.widget.RecyclerView
+      android:id="@+id/timetableList"
+      style="@style/TimetableListViewStyle"
+      android:layout_width="match_parent"
+      android:layout_height="match_parent"
+      android:layout_below="@id/timetableDivider"
+      android:layout_above="@id/loading"
+      android:paddingEnd="16dp"
+      android:paddingLeft="16dp"
+      android:paddingRight="16dp"
+      android:paddingStart="16dp"
+      app:itemBinding="@{viewModel.itemBinding}"
+      app:items="@{viewModel.services}"
+      app:layoutManager="@{LayoutManagers.linear()}"/>
+
+    <androidx.appcompat.widget.AppCompatTextView
+      android:id="@android:id/empty"
+      android:layout_width="match_parent"
+      android:layout_height="match_parent"
+      android:layout_below="@id/timetableDivider"
+      android:gravity="center"
+      android:text="@string/loading_dot_dot_dot"
+      android:textColor="@color/empty_list_dark_background"
+      android:textSize="16sp"
+      android:textStyle="bold"
+      android:visibility="gone"
+      tools:visibility="visible" />
+
+    <Button
+      android:id="@+id/goToNowButton"
+      style="@style/ToNowButtonStyle"
+      android:layout_below="@id/timetableDivider"
+      android:layout_centerHorizontal="true"
+      android:layout_marginTop="48dp"
+      android:text="@string/go_to_now"
+      android:visibility="gone" />
+
+    <!--
+     <com.buzzhives.android.tripplanner.view.ServiceAlertWarningView
+      android:id="@+id/serviceAlertView"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:layout_alignParentBottom="true"
+      android:minHeight="?android:attr/listPreferredItemHeight"
+      android:visibility="gone" />
+    -->
+
+  </RelativeLayout>
+</layout>

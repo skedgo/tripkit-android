@@ -8,4 +8,11 @@
   <color name="wheelchairTextColor">#009BDF</color>
   <color name="light_blue">#009bdf</color>
   <color name="light_grey_4">#9B9B9B</color>
+  <color name="v4_title_text">#212121</color>
+  <color name="v4_secondary_text">#747474</color>
+  <color name="v4_tertiary_text">#b7b7b7</color>
+  <color name="v4_color">#00CC66</color>
+  <color name="empty_list_dark_background">#ff808080</color>
+  <color name="v4_back_to_top_bg">#CC344E6D</color>
+  <color name="v4_back_to_top_stroke">#344E6D</color>
 </resources>

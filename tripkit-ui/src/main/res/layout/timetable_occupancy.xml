@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:app="http://schemas.android.com/apk/res-auto"
+  xmlns:tools="http://schemas.android.com/tools">
+
+  <data>
+
+    <variable
+      name="viewModel"
+      type="skedgo.tripkit.ui.trip.details.OccupancyViewModel" />
+
+    <import type="me.tatarka.bindingcollectionadapter2.LayoutManagers" />
+
+    <import type="androidx.recyclerview.widget.LinearLayoutManager" />
+
+  </data>
+
+  <merge tools:showIn="@layout/timetable_entry">
+
+    <androidx.recyclerview.widget.RecyclerView
+      android:id="@+id/list"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:layout_gravity="center"
+      android:layout_marginTop="8dp"
+      android:visibility="@{viewModel != null &amp;&amp; viewModel.hasOccupancyInformation}"
+      app:itemBinding="@{viewModel.itemBinding}"
+      app:items="@{viewModel.items}"
+      app:layoutManager="@{LayoutManagers.linear(LinearLayoutManager.HORIZONTAL, false)}" />
+
+    <TextView
+      android:id="@+id/occupancyView"
+      style="@style/OccupancyViewStyle"
+      android:layout_marginTop="4dp"
+      android:background="@{viewModel.background}"
+      android:drawableLeft="@{viewModel.drawableLeft}"
+      android:drawableStart="@{viewModel.drawableLeft}"
+      android:text="@{viewModel.occupancyText}"
+      android:textColor="@{viewModel.textColor}"
+      android:visibility="@{viewModel != null &amp;&amp; viewModel.hasOccupancySingleInformation}"
+      tools:ignore="SmallSp" />
+
+  </merge>
+</layout>

@@ -44,7 +44,16 @@ dependencies {
   implementation libs.rxjava
   implementation libs.rxAndroid
   implementation libs.rxrelay1
+  implementation libs.rxLifecycleComponents
+  implementation 'com.trello:rxlifecycle:1.0'
+  implementation libs.lifeCycleRx
+  implementation libs.lifecycle
+  implementation libs.lifeCycleJava8
   implementation libs.jodaTimeAndroid
+  implementation 'com.github.skedgo:RxProperty:1.6'
+  implementation 'com.squareup.picasso:picasso:2.5.2'
+  implementation 'com.jakewharton.picasso:picasso2-okhttp3-downloader:1.0.2'
+  implementation 'com.nineoldandroids:library:2.4.0'
 
   implementation libs.bindingCollectionAdapter
   implementation libs.bindingCollectionAdapterRecyclerView

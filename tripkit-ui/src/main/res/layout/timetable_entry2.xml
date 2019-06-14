@@ -1,0 +1,225 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:tools="http://schemas.android.com/tools"
+  xmlns:app="http://schemas.android.com/apk/res-auto">
+
+  <data>
+
+    <variable
+      name="viewModel"
+      type="skedgo.tripkit.ui.timetable.services.ServiceViewModel" />
+
+  </data>
+
+  <LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/v4_selector_bg_shadow"
+    android:divider="@drawable/horizontal_divider"
+    android:dividerPadding="@dimen/v4_content_padding"
+    android:gravity="center_vertical"
+    android:orientation="vertical"
+    android:showDividers="middle"
+    android:alpha="@{viewModel.alpha}"
+    android:onClick="@{() -> viewModel.onItemClick.perform()}"
+    >
+
+
+    <RelativeLayout
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:layout_marginBottom="12dp"
+      android:layout_marginTop="@dimen/spacing_small">
+
+      <RelativeLayout
+        android:id="@+id/iconContainerView"
+        android:layout_width="56dp"
+        android:layout_height="56dp"
+        android:layout_alignParentLeft="true"
+        android:layout_centerVertical="true">
+
+        <ImageView
+          android:id="@+id/iconView"
+          android:layout_width="24dp"
+          android:layout_height="24dp"
+          android:layout_centerInParent="true"
+          android:scaleType="fitCenter"
+          android:src="@{viewModel.modeInfo}"
+          />
+
+        <ImageView
+          android:id="@+id/serviceAlertView"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:layout_alignBottom="@id/iconView"
+          android:layout_alignRight="@id/iconView"
+          android:scaleType="centerInside"
+          android:src="@drawable/ic_alert_red_overlay"
+          android:visibility="gone" />
+
+        <View
+          android:id="@+id/serviceColorView"
+          android:layout_width="match_parent"
+          android:layout_height="4dp"
+          android:layout_alignParentLeft="true"
+          android:layout_below="@id/iconView"
+          android:visibility="@{viewModel.serviceColorViewVisible}"
+          android:background="@{viewModel.serviceColor}"
+          android:layout_marginLeft="@dimen/v4_content_padding"
+          android:layout_marginRight="@dimen/v4_content_padding" />
+      </RelativeLayout>
+
+      <TextView
+        android:id="@+id/countDownTimeTextView"
+        fontPath="@string/font_regular"
+        android:layout_width="@dimen/v4_countdown_active_item_width"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="@dimen/v4_half_content_padding"
+        android:layout_marginRight="@dimen/v4_content_padding"
+        android:background="@{viewModel.countDownTimeTextBack}"
+        android:ellipsize="marquee"
+        android:gravity="center_horizontal"
+        android:paddingBottom="@dimen/v4_half_content_padding"
+        android:paddingTop="@dimen/v4_half_content_padding"
+        android:singleLine="true"
+        android:textColor="@android:color/white"
+        android:textSize="16sp"
+        android:text="@{viewModel.countDownTimeText}"
+        />
+
+      <LinearLayout
+        android:id="@+id/textContainerView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_toLeftOf="@id/countDownTimeTextView"
+        android:layout_toRightOf="@id/iconContainerView"
+        android:orientation="vertical">
+
+        <TextView
+          android:id="@+id/primaryTextView"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:ellipsize="marquee"
+          android:gravity="left|bottom"
+          android:includeFontPadding="false"
+          android:singleLine="true"
+          android:textColor="@color/v4_title_text"
+          android:textSize="16sp"
+          android:text="@{viewModel.primaryText}"
+          tools:text="Sample Title" />
+
+        <TextView
+          android:id="@+id/secondaryTextView"
+          fontPath="@string/font_light"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:ellipsize="marquee"
+          android:gravity="left|center_vertical"
+          android:singleLine="true"
+          android:textColor="@color/v4_secondary_text"
+          android:textSize="12sp"
+          android:text="@{viewModel.secondaryText}"
+          tools:text="Sample Description" />
+
+        <TextView
+          android:id="@+id/tertiaryTextView"
+          fontPath="@string/font_light"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:ellipsize="marquee"
+          android:gravity="left|center_vertical"
+          android:singleLine="true"
+          android:textColor="@color/v4_tertiary_text"
+          android:textSize="12sp"
+          android:text="@{viewModel.tertiaryText}"
+          tools:text="Sample Description" />
+
+        <include
+          layout="@layout/timetable_occupancy"
+          app:viewModel="@{viewModel.occupancyViewModel}" />
+
+      </LinearLayout>
+    </RelativeLayout>
+
+    <LinearLayout
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:layout_marginBottom="@dimen/spacing_small"
+      android:layout_marginLeft="@dimen/v4_content_padding"
+      android:layout_marginTop="@dimen/spacing_small"
+      android:visibility="@{viewModel.wheelchairAvailabilityViewModel.hasWheelchairInformation}">
+
+      <ImageView
+        android:id="@+id/wheelchairImageView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@{viewModel.wheelchairAvailabilityViewModel.image}" />
+
+      <TextView
+        fontPath="@string/font_light"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="4dp"
+        android:gravity="left|center_vertical"
+        android:text="@{viewModel.wheelchairAvailabilityViewModel.title}"
+        android:textColor="@{viewModel.wheelchairAvailabilityViewModel.textColor}"
+        android:textSize="12sp"
+        tools:text="Sample Description" />
+    </LinearLayout>
+
+    <RelativeLayout
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:layout_marginBottom="@dimen/spacing_small"
+      android:layout_marginLeft="@dimen/v4_content_padding"
+      android:layout_marginTop="@dimen/spacing_small"
+      android:layout_marginRight="@dimen/v4_content_padding"
+      android:visibility="@{viewModel.timetableEntryServiceViewModel.hasAlerts}">
+
+      <ImageView
+        android:id="@+id/alertIcon"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_centerInParent="true"
+        android:src="@drawable/ic_alert_yellow_overlay" />
+
+      <TextView
+        android:id="@+id/textView"
+        fontPath="@string/font_light"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:layout_marginLeft="4dp"
+        android:layout_toLeftOf="@+id/show"
+        android:layout_toRightOf="@id/alertIcon"
+        android:ellipsize="marquee"
+        android:gravity="left|center_vertical"
+        android:lines="1"
+        android:text="@{viewModel.timetableEntryServiceViewModel.title}"
+        android:textSize="12sp"
+        tools:text="alert alert alert alert alert and more alerts, alert alert alert alert alert alerts" />
+
+      <TextView
+        android:id="@id/show"
+        fontPath="@string/font_light"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:layout_alignBaseline="@+id/textView"
+        android:onClick="@{() -> viewModel.timetableEntryServiceViewModel.onShow()}"
+        android:layout_alignBottom="@+id/textView"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:gravity="end"
+        android:padding="@dimen/spacing_small"
+        android:text="@string/view"
+        android:textColor="@color/v4_color"
+        android:textSize="14sp" />
+    </RelativeLayout>
+
+  </LinearLayout>
+</layout>

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <dimen name="spacing_normal">16dp</dimen>
+  <dimen name="spacing_small">8dp</dimen>
+  <dimen name="v4_content_padding">12dp</dimen>
+  <dimen name="v4_countdown_active_item_width">60dp</dimen>
+  <dimen name="v4_half_content_padding">6dp</dimen>
+  <dimen name="v4_divider_size">1dp</dimen>
+</resources>
