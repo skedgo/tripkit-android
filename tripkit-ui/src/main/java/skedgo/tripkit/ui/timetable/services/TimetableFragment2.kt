@@ -45,8 +45,8 @@ class TimetableFragment2 : RxFragment() {
     }
   }
 
-  @Inject
-  internal lateinit var timetableViewModel: TimetableViewModel
+  //@Inject
+ // internal lateinit var timetableViewModel: TimetableViewModel
 
   private var mRefreshMenuItem: MenuItem? = null
 
@@ -71,7 +71,7 @@ class TimetableFragment2 : RxFragment() {
     val view = inflater.inflate(R.layout.fragment_view_timetable, container, false)
 
     binding = DataBindingUtil.bind(view)
-    binding!!.viewModel = timetableViewModel
+   // binding!!.viewModel = timetableViewModel
 
     binding!!.timetableList.addOnScrollListener(object : RecyclerView.OnScrollListener() {
 
@@ -88,11 +88,11 @@ class TimetableFragment2 : RxFragment() {
         super.onScrollStateChanged(recyclerView, newState)
 
         if (!recyclerView.canScrollVertically(1)) {
-          timetableViewModel.downloadMoreTimetableAsync()
+         // timetableViewModel.downloadMoreTimetableAsync()
         }
       }
     })
-
+/*
     timetableViewModel.onAlertClicks
         .observeOn(AndroidSchedulers.mainThread())
         // .takeUntil(lifecycle().onDestroy())
@@ -119,7 +119,7 @@ class TimetableFragment2 : RxFragment() {
        //   binding!!.serviceAlertView.setText(RealtimeAlerts.getDisplayText(alert))
        //   binding!!.serviceAlertView.show()
         }, { Log.e("TimetableFragment2", "Error $it") })
-
+*/
     return view
   }
 
@@ -133,7 +133,7 @@ class TimetableFragment2 : RxFragment() {
    // animate(binding!!.serviceAlertView).alpha(0.0f)
     presentGoToNowButton()
 
-    timetableViewModel.stop.call(stop)
+   // timetableViewModel.stop.call(stop)
   }
 
   override fun onActivityCreated(savedInstanceState: Bundle?) {
@@ -143,7 +143,7 @@ class TimetableFragment2 : RxFragment() {
 
   override fun onDestroy() {
     super.onDestroy()
-    timetableViewModel.onCleared()
+   // timetableViewModel.onCleared()
   }
 
   override fun onCreateOptionsMenu(menu: Menu?, inflater: MenuInflater?) {
@@ -158,8 +158,8 @@ class TimetableFragment2 : RxFragment() {
 
     val shareTimetable = menu.findItem(R.id.shareQuery)
 
-    shareTimetable.isVisible = timetableViewModel.services.get() != null && !timetableViewModel.services.get()!!.isEmpty()
-    shareTimetable.isEnabled = timetableViewModel.services.get() != null && !timetableViewModel.services.get()!!.isEmpty()
+   // shareTimetable.isVisible = timetableViewModel.services.get() != null && !timetableViewModel.services.get()!!.isEmpty()
+  //  shareTimetable.isEnabled = timetableViewModel.services.get() != null && !timetableViewModel.services.get()!!.isEmpty()
 
     super.onPrepareOptionsMenu(menu)
   }
@@ -170,14 +170,14 @@ class TimetableFragment2 : RxFragment() {
       refresh()
 
     } else if (i == R.id.shareQuery) {
-      timetableViewModel.getShareUrl()
+    /*  timetableViewModel.getShareUrl()
           .subscribe { url: String ->
             val intentPartager = Intent(Intent.ACTION_SEND)
             intentPartager.type = "text/plain"
             intentPartager.putExtra(Intent.EXTRA_TEXT, url)
             val startingIntent = Intent.createChooser(intentPartager, "Share this using...")
             startActivity(startingIntent)
-          }
+          }*/
     } else if (i == R.id.setTimeMenuItem) {
       /*val datePicker = TimeDatePickerFragment
           .newInstance(getString(R.string.set_time))
@@ -196,18 +196,18 @@ class TimetableFragment2 : RxFragment() {
   }*/
 
   private fun presentGoToNowButton() {
-    binding!!.goToNowButton.setOnClickListener { v: View -> binding!!.timetableList.scrollToPosition(timetableViewModel.getFirstNowPosition()) }
+ //   binding!!.goToNowButton.setOnClickListener { v: View -> binding!!.timetableList.scrollToPosition(timetableViewModel.getFirstNowPosition()) }
   }
 
   private fun presentServiceFilterView() {
     binding!!.serviceFilterView.queryField.setHint(R.string.filter_by_service_name_coma_number_or_stop)
-    binding!!.serviceFilterView.setOnQueryTextListener { newText:CharSequence -> timetableViewModel.filter.call(newText.toString()) }
+  //  binding!!.serviceFilterView.setOnQueryTextListener { newText:CharSequence -> timetableViewModel.filter.call(newText.toString()) }
   }
 
   private fun presentActionBarText() {
     val actionBar = (activity as AppCompatActivity).supportActionBar
-    actionBar!!.title = timetableViewModel.getActionBarTitle()
-    actionBar.subtitle = timetableViewModel.getActionBarSubTitle()
+    //actionBar!!.title = timetableViewModel.getActionBarTitle()
+   // actionBar.subtitle = timetableViewModel.getActionBarSubTitle()
   }
 
   private fun refresh() {
@@ -215,10 +215,10 @@ class TimetableFragment2 : RxFragment() {
   }
 
   private fun downloadTimetableAsync() {
-    timetableViewModel.downloadTimetableAsync(null)
+   // timetableViewModel.downloadTimetableAsync(null)
   }
 
   private fun downloadTimetableAsync(sinceTimeInMillis: Long) {
-    timetableViewModel.downloadTimetableAsync(sinceTimeInMillis)
+   // timetableViewModel.downloadTimetableAsync(sinceTimeInMillis)
   }
 }

@@ -5,9 +5,7 @@
 
   <data>
 
-    <variable
-      name="viewModel"
-      type="skedgo.tripkit.ui.timetable.services.TimetableViewModel" />
+
 
     <import type="me.tatarka.bindingcollectionadapter2.LayoutManagers" />
   </data>
@@ -35,7 +33,7 @@
       android:layout_height="wrap_content"
       android:layout_alignParentBottom="true"
       android:layout_centerHorizontal="true"
-      android:visibility="@{viewModel.showLoading}"/>
+      />
 
     <androidx.recyclerview.widget.RecyclerView
       android:id="@+id/timetableList"
@@ -48,8 +46,6 @@
       android:paddingLeft="16dp"
       android:paddingRight="16dp"
       android:paddingStart="16dp"
-      app:itemBinding="@{viewModel.itemBinding}"
-      app:items="@{viewModel.services}"
       app:layoutManager="@{LayoutManagers.linear()}"/>
 
     <androidx.appcompat.widget.AppCompatTextView
