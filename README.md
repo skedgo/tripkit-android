@@ -37,7 +37,7 @@ TripKit supports for Android apps running [Android 4.0.3](https://developer.andr
 ```groovy
 android {
   defaultConfig {
-    minSdkVersion 15
+    minSdkVersion 16
   }
 }
 ```

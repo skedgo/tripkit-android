@@ -12,7 +12,7 @@ public class StopInfo {
   public final boolean sortByArrive;
   public final ServiceStop stop;
   public final int serviceColor;
-  public final boolean travelled;
+  public boolean travelled;
 
   public StopInfo(int id,
                   RealTimeStatus realTimeStatus,

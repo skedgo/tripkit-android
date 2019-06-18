@@ -133,7 +133,7 @@ public class TimetableEntry implements Parcelable, IRealTimeElement, ITimeRange,
               startSecs().observe().subscribe(new Action1<Long>() {
                 @Override
                 public void call(Long secs) {
-                  stop.stop.departureSecs().put(secs);
+                  stop.stop.setDepartureSecs(secs);
                 }
               });
             }
