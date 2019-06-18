@@ -5,6 +5,8 @@ import com.google.gson.annotations.SerializedName;
 import java.util.ArrayList;
 import java.util.List;
 
+import androidx.annotation.Nullable;
+
 /**
  * @see <a href="https://redmine.buzzhives.com/projects/buzzhives/wiki/RealTime_API#DepartureServlet-new-servlet-departuresjson">departures.json API</a>
  */
@@ -44,6 +46,7 @@ public class DeparturesResponse {
 
   private List<TimetableEntry> mServiceList;
 
+  @Nullable
   public ScheduledStop getParentInfo() {
     return parentInfo;
   }

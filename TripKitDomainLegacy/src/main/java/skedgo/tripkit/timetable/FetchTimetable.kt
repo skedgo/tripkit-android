@@ -1,7 +1,7 @@
 package skedgo.tripkit.timetable
 
-import com.skedgo.android.common.model.RealtimeAlert
 import com.skedgo.android.common.model.Region
+import com.skedgo.android.common.model.ScheduledStop
 import com.skedgo.android.common.model.TimetableEntry
 import rx.Observable
 import skedgo.tripkit.realtime.RealtimeAlertRepository
@@ -14,13 +14,13 @@ open class FetchTimetable @Inject constructor(
 
   open fun execute(embarkationStopCodes: List<String>,
                    region: Region,
-                   startTimeInMillis: Long
-  ): Observable<List<TimetableEntry>> =
+                   startTimeInSecs: Long
+  ): Observable<Pair<List<TimetableEntry>, ScheduledStop?>> =
       departuresRepository.getTimetableEntries(
           region.name!!,
           embarkationStopCodes,
           null,
-          startTimeInMillis / 1000)
+          startTimeInSecs)
           .first()
           .map { response ->
             if (response == null) {
@@ -44,12 +44,12 @@ open class FetchTimetable @Inject constructor(
               service.startStop = response.parentInfo?.children?.find { it.code == service.stopCode }
             }
 
-            response.serviceList
-          }.map {
-            it.forEach { timetable ->
+            response.serviceList to response.parentInfo
+          }
+          .map {
+            it.first.forEach { timetable ->
               val savedAlerts = realtimeAlertRepository.getAlerts(timetable.serviceTripId)
-              timetable.alerts = java.util.ArrayList<RealtimeAlert>()
-              savedAlerts?.forEach { timetable.alerts.add(it) }
+              timetable.alerts = ArrayList(savedAlerts.orEmpty())
             }
             it
           }
