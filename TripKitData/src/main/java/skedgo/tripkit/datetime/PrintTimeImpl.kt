@@ -29,4 +29,8 @@ internal class PrintTimeImpl constructor(
         .fromCallable { this.printLocalTime(dateTime.toLocalTime()) }
         .subscribeOn(computation())
   }
+
+  override fun print(dateTime: DateTime): String {
+    return this.printLocalTime(dateTime.toLocalTime())
+  }
 }
