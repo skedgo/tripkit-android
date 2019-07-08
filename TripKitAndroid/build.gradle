@@ -62,6 +62,8 @@ dependencies {
 
   implementation libs.kotlin
   implementation libs.jodaTimeAndroid
+  implementation libs.supportDesign
+  implementation libs.rxrelay1
   implementation 'com.github.skedgo:commons-collections:v1.0'
 
   implementation 'com.github.skedgo:sqlite-utils:v1.0'
