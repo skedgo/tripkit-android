@@ -7,19 +7,16 @@ import com.nhaarman.mockitokotlin2.mock
 import com.nhaarman.mockitokotlin2.verify
 import com.nhaarman.mockitokotlin2.whenever
 import com.skedgo.android.tripkit.booking.BookingForm
-import com.skedgo.android.tripkit.booking.ui.BuildConfig
 import com.skedgo.android.tripkit.booking.ui.OAuth2CallbackHandler
-import com.skedgo.android.tripkit.booking.ui.TestRunner
 import com.skedgo.android.tripkit.booking.ui.activity.KEY_FORM
 import org.assertj.core.api.Java6Assertions.assertThat
 import org.junit.Test
 import org.junit.runner.RunWith
-import org.robolectric.annotation.Config
+import org.robolectric.RobolectricTestRunner
 import rx.Observable
 import rx.observers.TestSubscriber
 
-@RunWith(TestRunner::class)
-@Config(constants = BuildConfig::class)
+@RunWith(RobolectricTestRunner::class)
 class ExternalProviderAuthViewModelTest {
 
   private val viewModel: ExternalProviderAuthViewModel by lazy {

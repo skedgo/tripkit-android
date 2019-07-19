@@ -1,11 +1,7 @@
 apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-kapt'
-apply plugin: 'com.github.dcendents.android-maven'
-
-// For https://github.com/dcendents/android-maven-gradle-plugin.
-group = 'com.skedgo.tripkit'
-version = '1.0'
+apply plugin: 'digital.wup.android-maven-publish'
 
 android {
   compileSdkVersion versions.compileSdkVersion
@@ -26,6 +22,8 @@ dependencies {
   testImplementation libs.robolectric
   testImplementation libs.mockitoKotlin
   testImplementation libs.assertjCore
+  testImplementation libs.androidxTesting
+  testImplementation libs.androidxJUnitExtTesting
 
   implementation libs.rxjava
   implementation libs.retrofit
@@ -46,10 +44,42 @@ dependencies {
   implementation project(':ValidBookingCountDomain')
 }
 
-uploadArchives {
+// build a jar with source files
+task sourcesJar(type: Jar) {
+  from android.sourceSets.main.java.srcDirs
+  classifier = 'sources'
+}
+
+task javadoc(type: Javadoc) {
+  failOnError false
+  source = android.sourceSets.main.java.sourceFiles
+  classpath += project.files(android.getBootClasspath().join(File.pathSeparator))
+  classpath += configurations.compile
+}
+
+// build a jar with javadoc
+task javadocJar(type: Jar, dependsOn: javadoc) {
+  classifier = 'javadoc'
+  from javadoc.destinationDir
+}
+
+artifacts {
+  archives sourcesJar
+  archives javadocJar
+}
+
+group = tripkitGroup
+version = tripkitVersion
+
+publishing {
   repositories {
-    mavenDeployer {
-      repository(url: "file://${localMaven}")
+    maven { url = "file://${localMaven}" }
+  }
+  publications {
+    mavenAar(MavenPublication) {
+      groupId = group
+      version = version
+      from components.android
     }
   }
 }

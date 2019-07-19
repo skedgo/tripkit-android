@@ -3,64 +3,31 @@ package skedgo.tripkit.routing;
 import android.content.Context;
 import android.content.res.Resources;
 
-import com.skedgo.android.common.BuildConfig;
 import com.skedgo.android.common.R;
-import com.skedgo.android.common.TestRunner;
-import com.skedgo.android.common.model.ImmutableBooking;
-import com.skedgo.android.common.model.Utils;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.robolectric.RuntimeEnvironment;
-import org.robolectric.annotation.Config;
+import org.robolectric.RobolectricTestRunner;
 
 import java.util.concurrent.TimeUnit;
 
+import androidx.test.core.app.ApplicationProvider;
+
 import static junit.framework.Assert.assertFalse;
 import static junit.framework.Assert.assertTrue;
-import static org.assertj.core.api.Java6Assertions.*;
+import static org.assertj.core.api.Java6Assertions.assertThat;
 import static skedgo.tripkit.routing.Visibilities.VISIBILITY_HIDDEN;
 import static skedgo.tripkit.routing.Visibilities.VISIBILITY_IN_DETAILS;
 import static skedgo.tripkit.routing.Visibilities.VISIBILITY_IN_SUMMARY;
 import static skedgo.tripkit.routing.Visibilities.VISIBILITY_ON_MAP;
 
-@RunWith(TestRunner.class)
-@Config(constants = BuildConfig.class)
+@RunWith(RobolectricTestRunner.class)
 public class TripSegmentTest2 {
   private Context context;
 
   @Before public void setUp() {
-    context = RuntimeEnvironment.application.getApplicationContext();
-  }
-
-  @Test public void parcel() {
-    final TripSegment expected = new TripSegment();
-    expected.setServiceDirection("Fake Service Direction");
-    expected.setTerms("Fake terms");
-    expected.setTransportModeId("wa_wal");
-    expected.setServiceOperator("Fake Operator");
-    expected.setRealTime(true);
-    expected.setDurationWithoutTraffic(123L);
-    expected.setTemplateHashCode(12L);
-    expected.setModeInfo(new ModeInfo());
-    expected.setBooking(ImmutableBooking.builder().build());
-    expected.setPlatform("Platform 2");
-    expected.setStopCount(7);
-
-    final TripSegment actual = TripSegment.CREATOR.createFromParcel(Utils.parcel(expected));
-
-    assertThat(expected.getServiceDirection()).isEqualTo(actual.getServiceDirection());
-    assertThat(expected.getTerms()).isEqualTo(actual.getTerms());
-    assertThat(expected.getTransportModeId()).isEqualTo(actual.getTransportModeId());
-    assertThat(expected.getServiceOperator()).isEqualTo(actual.getServiceOperator());
-    assertThat(actual.isRealTime()).isTrue();
-    assertThat(actual.getDurationWithoutTraffic()).isEqualTo(expected.getDurationWithoutTraffic());
-    assertThat(actual.getTemplateHashCode()).isEqualTo(expected.getTemplateHashCode());
-    assertThat(actual.getModeInfo()).isNotNull();
-    assertThat(actual.getBooking()).isNotNull();
-    assertThat(actual.getPlatform()).isEqualTo(expected.getPlatform());
-    assertThat(actual.getStopCount()).isEqualTo(expected.getStopCount());
+    context = ApplicationProvider.getApplicationContext().getApplicationContext();
   }
 
   @Test public void shouldShowHideSegmentProperly() {

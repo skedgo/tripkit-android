@@ -3,17 +3,14 @@ package com.skedgo.android.tripkit.booking.ui.viewmodel
 import com.nhaarman.mockitokotlin2.mock
 import com.nhaarman.mockitokotlin2.whenever
 import com.skedgo.android.tripkit.booking.BookingForm
-import com.skedgo.android.tripkit.booking.ui.BuildConfig
-import com.skedgo.android.tripkit.booking.ui.TestRunner
 import org.assertj.core.api.Java6Assertions.assertThat
 import org.junit.Test
 import org.junit.runner.RunWith
-import org.robolectric.annotation.Config
+import org.robolectric.RobolectricTestRunner
 import rx.observers.TestSubscriber
 import rx.subjects.PublishSubject
 
-@RunWith(TestRunner::class)
-@Config(constants = BuildConfig::class)
+@RunWith(RobolectricTestRunner::class)
 class FieldBookingFormViewModelTest {
 
   @Test fun shouldSetTitle() {

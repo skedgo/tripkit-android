@@ -1,31 +1,25 @@
 package skedgo.tripkit.routing;
 
-import android.os.Parcel;
-
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonObject;
-import com.skedgo.android.common.BuildConfig;
-import com.skedgo.android.common.TestRunner;
 import com.skedgo.android.common.model.GsonAdaptersBooking;
 import com.skedgo.android.common.model.ImmutableBooking;
 import com.skedgo.android.common.model.Location;
-import com.skedgo.android.common.model.Utils;
 import com.skedgo.android.common.util.LowercaseEnumTypeAdapterFactory;
 
 import org.apache.commons.io.IOUtils;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.robolectric.annotation.Config;
+import org.robolectric.RobolectricTestRunner;
 
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Random;
 
-import static org.assertj.core.api.Java6Assertions.*;
+import static org.assertj.core.api.Java6Assertions.assertThat;
 
-@RunWith(TestRunner.class)
-@Config(constants = BuildConfig.class)
+@RunWith(RobolectricTestRunner.class)
 public class TripSegmentTest {
   @Test
   public void shouldDefineCorrectSerializedNames() {
@@ -202,22 +196,6 @@ public class TripSegmentTest {
   }
 
   @Test
-  public void shouldParcelTrueWheelchairAccessible() {
-    TripSegment tripSegment = new TripSegment();
-    tripSegment.setWheelchairAccessible(true);
-    TripSegment actual = TripSegment.CREATOR.createFromParcel(Utils.parcel(tripSegment));
-    assertThat(actual.getWheelchairAccessible()).isTrue();
-  }
-
-  @Test
-  public void shouldParcelFalseWheelchairAccessible() {
-    TripSegment tripSegment = new TripSegment();
-    tripSegment.setWheelchairAccessible(false);
-    TripSegment actual = TripSegment.CREATOR.createFromParcel(Utils.parcel(tripSegment));
-    assertThat(actual.getWheelchairAccessible()).isFalse();
-  }
-
-  @Test
   public void shouldParsePayIQConfirmationSegment() throws IOException {
 
     String routingResponse = IOUtils.toString(getClass().getResourceAsStream("/booking-payiq.json"));
@@ -270,21 +248,23 @@ public class TripSegmentTest {
   }
 
   @Test
-  public void shouldParcelMetres() throws Exception {
-    TripSegment tripSegment = new TripSegment();
-    tripSegment.setMetres(10);
-    Parcel parcel = Utils.parcel(tripSegment);
-    TripSegment actual = TripSegment.CREATOR.createFromParcel(parcel);
-    assertThat(actual.getMetres()).isEqualTo(10);
-  }
+  public void shouldSerializeAndDeserializeLocalCostCorrectly() {
+    Gson gson = new GsonBuilder()
+        .registerTypeAdapterFactory(new LowercaseEnumTypeAdapterFactory())
+        .create();
+    LocalCost mockLocalCost = ImmutableLocalCost.builder()
+        .cost(1.8f)
+        .minCost(1.1f)
+        .maxCost(1.2f)
+        .accuracy(LocalCostAccuracy.External_Estimate)
+        .currency("ABC")
+        .build();
+    JsonObject jsonObject = new JsonObject();
+    jsonObject.add("localCost", gson.toJsonTree(mockLocalCost));
 
-  @Test
-  public void shouldParcelMetresSafe() throws Exception {
-    TripSegment tripSegment = new TripSegment();
-    tripSegment.setMetresSafe(17);
-    Parcel parcel = Utils.parcel(tripSegment);
-    TripSegment actual = TripSegment.CREATOR.createFromParcel(parcel);
-    assertThat(actual.getMetresSafe()).isEqualTo(17);
+    TripSegment tripSegment = gson.fromJson(jsonObject, TripSegment.class);
+
+    assertThat(tripSegment.getLocalCost()).isEqualTo(mockLocalCost);
   }
 
   private ArrayList<TripSegment> createSamplePlaneSegments() {

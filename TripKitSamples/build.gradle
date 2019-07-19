@@ -9,7 +9,7 @@ android {
 
   defaultConfig {
     applicationId "skedgo.tripkit.samples"
-    minSdkVersion 15
+    minSdkVersion 16
     targetSdkVersion versions.targetSdkVersion
     versionCode 1
     versionName "1.0"
@@ -31,13 +31,12 @@ android {
     sourceCompatibility 1.8
     targetCompatibility 1.8
   }
-
 }
 
 dependencies {
   testImplementation libs.junit
   implementation libs.kotlin
-  implementation libs.playServicesMaps
+  implementation "com.google.android.gms:play-services-maps:15.0.1"
 
   implementation 'com.trello:rxlifecycle:1.0'
   implementation libs.jodaTimeAndroid
@@ -48,7 +47,6 @@ dependencies {
 
   implementation libs.rxLifecycleComponents
   implementation libs.bindingCollectionAdapterRecyclerView
-
-  implementation project(":AccountData")
-  implementation project(":TripKitAndroid")
+  implementation 'com.github.skedgo.tripkit-android:TripKitAndroid:v1.22.0'
+//  implementation project(':TripKitAndroid')
 }

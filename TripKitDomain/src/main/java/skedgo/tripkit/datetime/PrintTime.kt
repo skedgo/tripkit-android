@@ -11,4 +11,5 @@ import rx.Observable
 interface PrintTime {
   fun execute(dateTime: DateTime): Observable<String>
   fun printLocalTime(localTime: LocalTime): String
+  fun print(dateTime: DateTime): String
 }

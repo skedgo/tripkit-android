@@ -8,16 +8,15 @@ import com.google.gson.stream.JsonReader;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.robolectric.annotation.Config;
+import org.robolectric.RobolectricTestRunner;
 
 import java.io.StringReader;
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.assertj.core.api.Java6Assertions.*;
+import static org.assertj.core.api.Java6Assertions.assertThat;
 
-@RunWith(TestRunner.class)
-@Config(constants = BuildConfig.class)
+@RunWith(RobolectricTestRunner.class)
 public class FormGroupTest {
   @Test public void Parse() {
     GsonBuilder builder = new GsonBuilder();

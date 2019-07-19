@@ -1,5 +1,5 @@
 apply plugin: 'com.android.library'
-apply plugin: 'com.github.dcendents.android-maven'
+apply plugin: 'digital.wup.android-maven-publish'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-kapt'
 
@@ -7,7 +7,7 @@ android {
   compileSdkVersion versions.compileSdkVersion
 
   defaultConfig {
-    minSdkVersion 15
+    minSdkVersion 16
     targetSdkVersion versions.targetSdkVersion
     testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
   }
@@ -31,8 +31,8 @@ dependencies {
   testImplementation libs.mockitoCore
   testImplementation libs.robolectric
   testImplementation libs.mockitoKotlin, { exclude group: 'org.jetbrains.kotlin' }
+  testImplementation libs.androidxTesting
 
-  androidTestImplementation 'com.google.code.findbugs:jsr305:3.0.2'
   androidTestImplementation 'androidx.test.espresso:espresso-core:3.1.0', {
     exclude group: 'com.android.support', module: 'support-annotations'
   }
@@ -59,13 +59,45 @@ dependencies {
   implementation libs.rxAndroid
 
 }
-group = ext.versions.tripGoGroup
-version = ext.versions.tripGoLibrary
 
-uploadArchives {
+
+
+// build a jar with source files
+task sourcesJar(type: Jar) {
+  from android.sourceSets.main.java.srcDirs
+  classifier = 'sources'
+}
+
+task javadoc(type: Javadoc) {
+  failOnError  false
+  source = android.sourceSets.main.java.sourceFiles
+  classpath += project.files(android.getBootClasspath().join(File.pathSeparator))
+  classpath += configurations.compile
+}
+
+// build a jar with javadoc
+task javadocJar(type: Jar, dependsOn: javadoc) {
+  classifier = 'javadoc'
+  from javadoc.destinationDir
+}
+
+artifacts {
+  archives sourcesJar
+  archives javadocJar
+}
+
+group = tripkitGroup
+version = tripkitVersion
+
+publishing {
   repositories {
-    mavenDeployer {
-      repository(url: "file://${localMaven}")
+    maven { url = "file://${localMaven}" }
+  }
+  publications {
+    mavenAar(MavenPublication) {
+      groupId = group
+      version = version
+      from components.android
     }
   }
 }

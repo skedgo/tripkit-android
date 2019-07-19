@@ -5,8 +5,6 @@ import android.os.Bundle
 import com.nhaarman.mockitokotlin2.mock
 import com.nhaarman.mockitokotlin2.whenever
 import com.skedgo.android.tripkit.booking.*
-import com.skedgo.android.tripkit.booking.ui.BuildConfig
-import com.skedgo.android.tripkit.booking.ui.TestRunner
 import com.skedgo.android.tripkit.booking.ui.activity.*
 import com.skedgo.android.tripkit.booking.ui.usecase.GetBookingFormFromAction
 import com.skedgo.android.tripkit.booking.ui.usecase.GetBookingFormFromUrl
@@ -15,18 +13,17 @@ import com.skedgo.android.tripkit.booking.ui.usecase.IsDoneAction
 import org.assertj.core.api.Java6Assertions.assertThat
 import org.junit.Test
 import org.junit.runner.RunWith
-import org.robolectric.RuntimeEnvironment
-import org.robolectric.annotation.Config
+import androidx.test.core.app.ApplicationProvider
+import org.robolectric.RobolectricTestRunner
 import rx.Observable
 import rx.observers.TestSubscriber
 import java.net.SocketTimeoutException
 
 
-@RunWith(TestRunner::class)
-@Config(constants = BuildConfig::class)
+@RunWith(RobolectricTestRunner::class)
 class BookingFormViewModelTest {
 
-  private val resources: Resources = RuntimeEnvironment.application.resources
+  private val resources: Resources = (ApplicationProvider.getApplicationContext() as android.content.Context).resources
   private val getBookingFormFromUrl: GetBookingFormFromUrl = mock()
   private val getBookingFormFromAction: GetBookingFormFromAction = mock()
   private val isCancelAction: IsCancelAction = mock()

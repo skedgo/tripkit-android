@@ -2,20 +2,16 @@ package com.skedgo.android.common.model;
 
 import android.os.Parcel;
 
-import com.skedgo.android.common.BuildConfig;
-import com.skedgo.android.common.TestRunner;
-
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.robolectric.annotation.Config;
+import org.robolectric.RobolectricTestRunner;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 
-import static org.assertj.core.api.Java6Assertions.*;
+import static org.assertj.core.api.Java6Assertions.assertThat;
 
-@RunWith(TestRunner.class)
-@Config(constants = BuildConfig.class)
+@RunWith(RobolectricTestRunner.class)
 public class QueryTest {
   @Test public void shouldParcel() {
     final Region expectedRegion = new Region();

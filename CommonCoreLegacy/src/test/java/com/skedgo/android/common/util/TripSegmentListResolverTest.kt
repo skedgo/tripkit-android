@@ -1,24 +1,22 @@
 package com.skedgo.android.common.util
 
-import com.skedgo.android.common.BuildConfig
-import com.skedgo.android.common.TestRunner
+import android.content.Context
+import androidx.test.core.app.ApplicationProvider
 import org.assertj.core.api.Java6Assertions.assertThat
 import org.joda.time.DateTime
 import org.junit.Test
 import org.junit.runner.RunWith
-import org.robolectric.RuntimeEnvironment
-import org.robolectric.annotation.Config
+import org.robolectric.RobolectricTestRunner
 import skedgo.tripkit.routing.SegmentType
 import skedgo.tripkit.routing.TripSegment
 import skedgo.tripkit.routing.Visibilities.VISIBILITY_IN_DETAILS
 import skedgo.tripkit.routing.Visibilities.VISIBILITY_ON_MAP
 import skedgo.tripkit.routing.toSeconds
 
-@RunWith(TestRunner::class)
-@Config(constants = BuildConfig::class)
+@RunWith(RobolectricTestRunner::class)
 class TripSegmentListResolverTest {
   private val resolver by lazy {
-    TripSegmentListResolver(RuntimeEnvironment.application.resources)
+    TripSegmentListResolver(ApplicationProvider.getApplicationContext<Context>().resources)
   }
 
   @Test fun shouldOnlyShowDepartureSegmentInDetails() {

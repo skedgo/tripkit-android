@@ -1,22 +1,18 @@
 package com.skedgo.android.common.model;
 
-import com.skedgo.android.common.BuildConfig;
-import com.skedgo.android.common.TestRunner;
-
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.robolectric.annotation.Config;
+import org.robolectric.RobolectricTestRunner;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 
-import static org.assertj.core.api.Java6Assertions.*;
+import static org.assertj.core.api.Java6Assertions.assertThat;
 
 /**
  * @see <a href="https://redmine.buzzhives.com/projects/buzzhives/wiki/Inter-city_routing">Inter-city routing</a>
  */
-@RunWith(TestRunner.class)
-@Config(constants = BuildConfig.class)
+@RunWith(RobolectricTestRunner.class)
 public class InterRegionTest {
   @Test public void shouldUnionModesFromDepartureRegionAndArrivalRegion() {
     final Region departureRegion = new Region();

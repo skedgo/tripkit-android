@@ -5,7 +5,6 @@ import android.os.Parcelable;
 import androidx.annotation.Nullable;
 import android.text.TextUtils;
 
-import com.google.android.gms.maps.model.LatLng;
 import com.google.gson.annotations.SerializedName;
 import com.skedgo.android.common.util.StringUtils;
 
@@ -152,10 +151,6 @@ public class Location implements Parcelable {
   public Location(Location other) {
     this();
     fillFrom(other);
-  }
-
-  public Location(LatLng ll) {
-    this(ll == null ? 0.0 : ll.latitude, ll == null ? 0.0 : ll.longitude);
   }
 
   public Location(double lat, double lon) {

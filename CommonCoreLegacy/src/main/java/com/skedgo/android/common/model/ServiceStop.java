@@ -1,15 +1,13 @@
 package com.skedgo.android.common.model;
 
-import android.content.Context;
 import android.os.Parcel;
-import androidx.annotation.Nullable;
 
 import com.google.gson.annotations.SerializedName;
 import com.skedgo.android.common.rx.Var;
-import com.skedgo.android.common.util.DateTimeFormats;
 
 import java.util.concurrent.TimeUnit;
 
+import androidx.annotation.Nullable;
 import rx.functions.Action1;
 
 /**
@@ -21,7 +19,7 @@ public class ServiceStop extends Location implements WheelchairAccessible {
       Location location = Location.CREATOR.createFromParcel(in);
       ServiceStop stop = new ServiceStop(location);
 
-      stop.departureSecs().put(in.readLong());
+      stop.departure = in.readLong();
       stop.arrivalTime = in.readLong();
       stop.relativeArrival = (Long) in.readValue(Long.class.getClassLoader());
       stop.relativeDeparture = (Long) in.readValue(Long.class.getClassLoader());
@@ -40,12 +38,11 @@ public class ServiceStop extends Location implements WheelchairAccessible {
   /**
    * This gets initialized lazily. So don't access it directly. Use its getter instead.
    */
-  private transient Var<Long> departureSecs;
   private StopType type;
   /**
    * This field is primarily used to interact with Gson.
    */
-  @SerializedName("departure") private long serializedDepartureSecs;
+  @SerializedName("departure") private long departure;
   @SerializedName("relativeDeparture") private @Nullable Long relativeArrival;
   @SerializedName("relativeArrival") private @Nullable Long relativeDeparture;
   @SerializedName("arrival") private long arrivalTime;
@@ -115,13 +112,11 @@ public class ServiceStop extends Location implements WheelchairAccessible {
     this.type = type;
   }
 
-  public String getDisplayTime(Context context) {
-    if (departureSecs().value() != 0) {
-      final long millis = TimeUnit.SECONDS.toMillis(departureSecs().value());
-      return DateTimeFormats.printTime(context, millis, getTimeZone());
+  public Long getDisplayTime() {
+    if (departure != 0) {
+      return TimeUnit.SECONDS.toMillis(departure);
     } else if (arrivalTime != 0) {
-      final long millis = TimeUnit.SECONDS.toMillis(arrivalTime);
-      return DateTimeFormats.printTime(context, millis, getTimeZone());
+      return TimeUnit.SECONDS.toMillis(arrivalTime);
     } else {
       return null;
     }
@@ -138,7 +133,7 @@ public class ServiceStop extends Location implements WheelchairAccessible {
     if (other instanceof ServiceStop) {
       ServiceStop otherStop = (ServiceStop) other;
       type = otherStop.type;
-      departureSecs().put(otherStop.departureSecs().value());
+      departure = otherStop.departureSecs();
       arrivalTime = otherStop.arrivalTime;
       code = otherStop.code;
       shortName = otherStop.shortName;
@@ -149,7 +144,7 @@ public class ServiceStop extends Location implements WheelchairAccessible {
   @Override
   public void writeToParcel(Parcel out, int flags) {
     super.writeToParcel(out, flags);
-    out.writeLong(departureSecs().value());
+    out.writeLong(departure);
     out.writeLong(arrivalTime);
     out.writeValue(relativeArrival);
     out.writeValue(relativeDeparture);
@@ -159,20 +154,11 @@ public class ServiceStop extends Location implements WheelchairAccessible {
     out.writeString(type == null ? null : type.toString());
   }
 
-  public Var<Long> departureSecs() {
-    if (departureSecs == null) {
-      // We have to lazily initialize this to synchronize
-      // the default value with the value updated by Gson or by Parcel beforehand.
-      departureSecs = Var.create(serializedDepartureSecs);
-      departureSecs.observe().subscribe(new Action1<Long>() {
-        @Override
-        public void call(Long secs) {
-          // This makes sure Gson or Parcel will persist the latest value.
-          serializedDepartureSecs = secs;
-        }
-      });
-    }
+  public long departureSecs() {
+    return departure;
+  }
 
-    return departureSecs;
+  public void setDepartureSecs(long secs) {
+    departure = secs;
   }
 }
