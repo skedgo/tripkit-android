@@ -1,11 +1,7 @@
 apply plugin: 'com.android.library'
 apply plugin: 'com.jakewharton.hugo'
-apply plugin: 'com.github.dcendents.android-maven'
+apply plugin: 'digital.wup.android-maven-publish'
 apply plugin: 'kotlin-android'
-
-// For https://github.com/dcendents/android-maven-gradle-plugin.
-group = 'com.skedgo'
-version = '1.0'
 
 android {
   compileSdkVersion versions.compileSdkVersion
@@ -21,7 +17,7 @@ android {
   }
 
   defaultConfig {
-    minSdkVersion 15
+    minSdkVersion 16
     targetSdkVersion 27
     versionCode 1
     versionName '1.0'
@@ -48,6 +44,8 @@ dependencies {
   testImplementation libs.assertjCore
   testImplementation libs.mockitoCore
   testImplementation libs.robolectric
+  testImplementation libs.androidxTesting
+  testImplementation libs.androidxJUnitExtTesting
   testImplementation libs.mockitoKotlin, { exclude group: 'org.jetbrains.kotlin' }
   testImplementation libs.kluent
 
@@ -56,10 +54,19 @@ dependencies {
   }
 }
 
-uploadArchives {
+group = tripkitGroup
+version = tripkitVersion
+
+
+publishing {
   repositories {
-    mavenDeployer {
-      repository(url: "file://${localMaven}")
+    maven { url = "file://${localMaven}" }
+  }
+  publications {
+    mavenAar(MavenPublication) {
+      groupId = group
+      version = version
+      from components.android
     }
   }
 }

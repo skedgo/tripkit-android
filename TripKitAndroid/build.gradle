@@ -1,19 +1,15 @@
 apply plugin: "com.android.library"
 // To publish via JitPack.
 // See https://jitpack.io/docs/ANDROID/.
-apply plugin: "com.github.dcendents.android-maven"
+apply plugin: 'digital.wup.android-maven-publish'
 apply plugin: "kotlin-android"
 apply plugin: "kotlin-kapt"
-
-// For https://github.com/dcendents/android-maven-gradle-plugin.
-group = "com.skedgo.tripkit"
-version = "1.2"
 
 android {
   compileSdkVersion versions.compileSdkVersion
 
   defaultConfig {
-    minSdkVersion 15
+    minSdkVersion 16
     targetSdkVersion versions.targetSdkVersion
     testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
   }
@@ -58,6 +54,7 @@ dependencies {
   testImplementation libs.kluent
   testImplementation 'com.github.thuytrinh:MockWebServerRule:v1.0'
   testImplementation libs.kluent
+  testImplementation libs.androidxTesting
 
   androidTestImplementation "androidx.test:runner:1.1.0"
   androidTestImplementation "androidx.test:rules:1.1.0"
@@ -72,7 +69,7 @@ dependencies {
   implementation libs.retrofit
   implementation libs.retrofitAdapterRxJava
   implementation libs.retrofitConverterGson
-  implementation libs.playServicesMaps
+
   implementation libs.rxjava
   implementation libs.rxAndroid
   implementation libs.androidMapsUtils
@@ -91,12 +88,43 @@ dependencies {
   api project(':TripKitData')
 }
 
+// build a jar with source files
+task sourcesJar(type: Jar) {
+  from android.sourceSets.main.java.srcDirs
+  classifier = 'sources'
+}
+
+task javadoc(type: Javadoc) {
+  failOnError  false
+  source = android.sourceSets.main.java.sourceFiles
+  classpath += project.files(android.getBootClasspath().join(File.pathSeparator))
+  classpath += configurations.compile
+}
+
+// build a jar with javadoc
+task javadocJar(type: Jar, dependsOn: javadoc) {
+  classifier = 'javadoc'
+  from javadoc.destinationDir
+}
+
+artifacts {
+  archives sourcesJar
+  archives javadocJar
+}
+
+group = tripkitGroup
+version = tripkitVersion
 
 
-uploadArchives {
+publishing {
   repositories {
-    mavenDeployer {
-      repository(url: "file://${localMaven}")
+    maven { url = "file://${localMaven}" }
+  }
+  publications {
+    mavenAar(MavenPublication) {
+      groupId = group
+      version = version
+      from components.android
     }
   }
 }

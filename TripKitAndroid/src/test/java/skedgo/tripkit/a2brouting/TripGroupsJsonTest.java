@@ -7,7 +7,7 @@ import com.skedgo.android.tripkit.TripKitAndroidRobolectricTest;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
-import org.robolectric.RuntimeEnvironment;
+import androidx.test.core.app.ApplicationProvider;
 
 import java.io.IOException;
 import java.lang.reflect.Type;
@@ -39,7 +39,7 @@ public class TripGroupsJsonTest extends TripKitAndroidRobolectricTest {
         .build()
         .create(A2bRoutingApi.class);
     api = new FailoverA2bRoutingApi(
-        RuntimeEnvironment.application.getResources(),
+        ApplicationProvider.getApplicationContext().getResources(),
         new Gson(),
         a2bRoutingApi
     );

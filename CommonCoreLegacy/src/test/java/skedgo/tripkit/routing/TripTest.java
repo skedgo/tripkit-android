@@ -2,18 +2,14 @@ package skedgo.tripkit.routing;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
-import com.skedgo.android.common.BuildConfig;
-import com.skedgo.android.common.TestRunner;
-import com.skedgo.android.common.model.Utils;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.robolectric.annotation.Config;
+import org.robolectric.RobolectricTestRunner;
 
-import static org.assertj.core.api.Java6Assertions.*;
+import static org.assertj.core.api.Java6Assertions.assertThat;
 
-@RunWith(TestRunner.class)
-@Config(constants = BuildConfig.class)
+@RunWith(RobolectricTestRunner.class)
 public class TripTest {
   @Test public void json() {
     Trip trip = new Trip();

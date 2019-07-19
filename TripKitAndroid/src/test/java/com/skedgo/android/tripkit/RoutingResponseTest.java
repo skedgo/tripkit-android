@@ -4,27 +4,26 @@ import com.google.gson.Gson;
 import com.google.gson.JsonPrimitive;
 import com.skedgo.android.common.model.RealtimeAlert;
 import com.skedgo.android.common.model.RealtimeAlerts;
-import skedgo.tripkit.routing.RoutingResponse;
-import skedgo.tripkit.routing.Trip;
-import skedgo.tripkit.routing.TripGroup;
-import skedgo.tripkit.routing.TripSegment;
 import com.skedgo.android.common.util.Gsons;
 
 import org.assertj.core.api.Condition;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.robolectric.RuntimeEnvironment;
-import org.robolectric.annotation.Config;
+import org.robolectric.RobolectricTestRunner;
 
 import java.io.IOException;
 
+import androidx.test.core.app.ApplicationProvider;
 import okhttp3.mockwebserver.MockResponse;
+import skedgo.tripkit.routing.RoutingResponse;
+import skedgo.tripkit.routing.Trip;
+import skedgo.tripkit.routing.TripGroup;
+import skedgo.tripkit.routing.TripSegment;
 
-import static org.assertj.core.api.Java6Assertions.*;
+import static org.assertj.core.api.Java6Assertions.assertThat;
 import static thuytrinh.mockwebserverrule.MockWebServerRule.createMockResponse;
 
-@RunWith(TestRunner.class)
-@Config(constants = BuildConfig.class)
+@RunWith(RobolectricTestRunner.class)
 public class RoutingResponseTest {
   @Test public void processDirectionTemplate() {
     // Case 1
@@ -57,7 +56,7 @@ public class RoutingResponseTest {
 
     Gson gson = Gsons.createForLowercaseEnum();
     RoutingResponse response = gson.fromJson(routingJson, RoutingResponse.class);
-    response.processRawData(RuntimeEnvironment.application.getResources(), gson);
+    response.processRawData(ApplicationProvider.getApplicationContext().getResources(), gson);
 
     for (final TripGroup group : response.getTripGroupList()) {
       assertThat(group.getTrips())
@@ -77,7 +76,7 @@ public class RoutingResponseTest {
 
     Gson gson = Gsons.createForLowercaseEnum();
     RoutingResponse response = gson.fromJson(routingJson, RoutingResponse.class);
-    response.processRawData(RuntimeEnvironment.application.getResources(), gson);
+    response.processRawData(ApplicationProvider.getApplicationContext().getResources(), gson);
 
     assertThat(response).isNotNull();
     assertThat(response.getAlerts()).hasSize(1);
@@ -104,7 +103,7 @@ public class RoutingResponseTest {
 
     Gson gson = Gsons.createForLowercaseEnum();
     RoutingResponse response = gson.fromJson(routingJson, RoutingResponse.class);
-    response.processRawData(RuntimeEnvironment.application.getResources(), gson);
+    response.processRawData(ApplicationProvider.getApplicationContext().getResources(), gson);
 
     assertThat(response).isNotNull();
     assertThat(response.getTripGroupList()).hasSize(1).doesNotContainNull();
