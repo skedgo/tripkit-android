@@ -1,12 +1,10 @@
 apply plugin: 'com.android.library'
-apply plugin: 'com.jakewharton.hugo'
 apply plugin: 'digital.wup.android-maven-publish'
 apply plugin: 'kotlin-android'
 
 android {
   compileSdkVersion versions.compileSdkVersion
 
-  // To print Hugo's logs.
   // defaultPublishConfig 'debug'
 
   lintOptions {
