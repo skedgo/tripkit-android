@@ -8,7 +8,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
-import skedgo.tripkit.geocoding.ReverseGeocodable;
+import com.skedgo.tripkit.geocoding.ReverseGeocodable;
 
 @RunWith(AndroidJUnit4.class)
 public class AndroidGeocoderTest {

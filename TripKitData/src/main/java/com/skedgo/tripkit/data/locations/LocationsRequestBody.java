@@ -5,7 +5,7 @@ import androidx.annotation.Nullable;
 
 import com.google.gson.JsonObject;
 import com.google.gson.annotations.SerializedName;
-import com.skedgo.android.common.model.Region;
+import com.skedgo.tripkit.common.model.Region;
 
 import java.util.ArrayList;
 import java.util.List;

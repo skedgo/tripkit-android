@@ -5,10 +5,10 @@
 
   <data>
 
-    <import type="com.skedgo.android.tripkit.booking.ui.activity.BookingActivity" />
+    <import type="com.skedgo.tripkit.booking.ui.activity.BookingActivity" />
     <variable
       name="viewModel"
-      type="com.skedgo.android.tripkit.booking.ui.viewmodel.BookingFormViewModel" />
+      type="com.skedgo.tripkit.booking.ui.viewmodel.BookingFormViewModel" />
   </data>
 
   <LinearLayout

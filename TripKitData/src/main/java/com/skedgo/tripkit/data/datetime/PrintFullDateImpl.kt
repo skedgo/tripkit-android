@@ -4,7 +4,7 @@ import io.reactivex.Flowable
 import io.reactivex.schedulers.Schedulers
 import org.joda.time.DateTime
 import org.joda.time.format.DateTimeFormat
-import skedgo.tripkit.datetime.PrintFullDate
+import com.skedgo.tripkit.datetime.PrintFullDate
 import java.text.DateFormat
 import java.util.Locale;
 import java.util.Date;

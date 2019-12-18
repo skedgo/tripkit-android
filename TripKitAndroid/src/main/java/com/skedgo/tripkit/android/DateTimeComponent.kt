@@ -2,8 +2,8 @@ package com.skedgo.tripkit.android
 
 import dagger.Subcomponent
 import com.skedgo.tripkit.data.datetime.DateTimeDataModule
-import skedgo.tripkit.datetime.PrintFullDate
-import skedgo.tripkit.datetime.PrintTime
+import com.skedgo.tripkit.datetime.PrintFullDate
+import com.skedgo.tripkit.datetime.PrintTime
 
 /**
  * Creates UseCases and Repositories related to the DateTime feature.

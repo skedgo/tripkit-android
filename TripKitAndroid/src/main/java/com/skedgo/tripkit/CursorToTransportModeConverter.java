@@ -3,7 +3,7 @@ package com.skedgo.tripkit;
 import android.database.Cursor;
 
 import com.google.gson.Gson;
-import com.skedgo.android.common.model.TransportMode;
+import com.skedgo.tripkit.common.model.TransportMode;
 import io.reactivex.functions.Function;
 
 final class CursorToTransportModeConverter implements Function<Cursor, TransportMode> {

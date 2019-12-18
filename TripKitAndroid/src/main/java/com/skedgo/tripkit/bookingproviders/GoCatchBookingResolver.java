@@ -6,15 +6,13 @@ import android.net.Uri;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import com.skedgo.android.common.model.Location;
+import com.skedgo.tripkit.common.model.Location;
 import com.skedgo.tripkit.BookingAction;
 import com.skedgo.tripkit.ExternalActionParams;
 import io.reactivex.Observable;
 import io.reactivex.functions.Function;
-import skedgo.tripkit.routing.TripSegment;
-import com.skedgo.tripkit.BookingAction;
-import com.skedgo.tripkit.ExternalActionParams;
-import skedgo.tripkit.geocoding.ReverseGeocodable;
+import com.skedgo.tripkit.routing.TripSegment;
+import com.skedgo.tripkit.geocoding.ReverseGeocodable;
 import com.skedgo.tripkit.R;
 
 final class GoCatchBookingResolver implements BookingResolver {

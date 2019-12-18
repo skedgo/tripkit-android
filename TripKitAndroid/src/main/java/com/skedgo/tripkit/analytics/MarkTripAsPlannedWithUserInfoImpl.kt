@@ -2,7 +2,6 @@
 package com.skedgo.tripkit.analytics
 
 import io.reactivex.Completable
-import skedgo.tripkit.analytics.MarkTripAsPlannedWithUserInfo
 
 
 internal class MarkTripAsPlannedWithUserInfoImpl internal constructor(

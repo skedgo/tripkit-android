@@ -1,8 +1,8 @@
 package com.skedgo.tripkit
 
-import com.skedgo.android.common.model.Location
-import com.skedgo.android.common.model.Region
-import com.skedgo.android.common.model.TransportMode
+import com.skedgo.tripkit.common.model.Location
+import com.skedgo.tripkit.common.model.Region
+import com.skedgo.tripkit.common.model.TransportMode
 import com.skedgo.tripkit.data.regions.RegionService
 import com.skedgo.tripkit.data.tsp.Paratransit
 import com.skedgo.tripkit.data.tsp.RegionInfo
@@ -10,7 +10,7 @@ import com.skedgo.tripkit.tsp.RegionInfoRepository
 import io.reactivex.Completable
 import io.reactivex.Observable
 import io.reactivex.Single
-import skedgo.tripkit.routing.ModeInfo
+import com.skedgo.tripkit.routing.ModeInfo
 
 internal class RegionServiceImpl(
         private val regionCache: com.skedgo.tripkit.Cache<List<Region>>,

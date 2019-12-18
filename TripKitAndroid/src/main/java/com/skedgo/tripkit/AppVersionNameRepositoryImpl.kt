@@ -2,7 +2,7 @@ package com.skedgo.tripkit
 
 import android.content.Context
 import io.reactivex.Observable
-import skedgo.tripkit.configuration.AppVersionNameRepository
+import com.skedgo.tripkit.configuration.AppVersionNameRepository
 
 internal class AppVersionNameRepositoryImpl constructor(
     private val context: Context

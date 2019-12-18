@@ -7,11 +7,11 @@ import android.util.Log;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import com.skedgo.android.common.model.GsonAdaptersBooking;
-import com.skedgo.android.common.model.Region;
-import com.skedgo.android.common.model.TransportMode;
-import com.skedgo.android.common.util.Gsons;
-import com.skedgo.android.common.util.LowercaseEnumTypeAdapterFactory;
+import com.skedgo.tripkit.common.model.GsonAdaptersBooking;
+import com.skedgo.tripkit.common.model.Region;
+import com.skedgo.tripkit.common.model.TransportMode;
+import com.skedgo.tripkit.common.util.Gsons;
+import com.skedgo.tripkit.common.util.LowercaseEnumTypeAdapterFactory;
 import com.skedgo.tripkit.bookingproviders.BookingResolver;
 import com.skedgo.tripkit.bookingproviders.BookingResolverImpl;
 import com.skedgo.tripkit.data.regions.RegionService;
@@ -39,8 +39,8 @@ import io.reactivex.schedulers.Schedulers;
 import com.skedgo.tripkit.a2brouting.FailoverA2bRoutingApi;
 import com.skedgo.tripkit.a2brouting.RouteService;
 import com.skedgo.TripKit;
-import skedgo.tripkit.configuration.AppVersionNameRepository;
-import skedgo.tripkit.configuration.Server;
+import com.skedgo.tripkit.configuration.AppVersionNameRepository;
+import com.skedgo.tripkit.configuration.Server;
 
 @Module
 public class MainModule {

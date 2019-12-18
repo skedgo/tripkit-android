@@ -2,7 +2,7 @@ package com.skedgo.tripkit
 
 import android.database.sqlite.SQLiteOpenHelper
 
-import com.skedgo.android.common.model.RegionsResponse
+import com.skedgo.tripkit.common.model.RegionsResponse
 import io.reactivex.Completable
 import io.reactivex.Observable
 import io.reactivex.functions.Function

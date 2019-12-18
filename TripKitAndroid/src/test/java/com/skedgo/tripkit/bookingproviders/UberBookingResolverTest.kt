@@ -1,14 +1,12 @@
 package com.skedgo.tripkit.bookingproviders
 
 import android.content.Intent
-import com.skedgo.android.common.model.Location
-import com.skedgo.tripkit.BookingAction
+import com.skedgo.tripkit.common.model.Location
 import com.skedgo.tripkit.TripKitAndroidRobolectricTest
-import com.skedgo.tripkit.ExternalActionParams
 import org.amshove.kluent.*
 import org.junit.Test
 import io.reactivex.functions.Function
-import skedgo.tripkit.routing.TripSegment
+import com.skedgo.tripkit.routing.TripSegment
 
 @Suppress("IllegalIdentifier")
 class UberBookingResolverTest : TripKitAndroidRobolectricTest() {

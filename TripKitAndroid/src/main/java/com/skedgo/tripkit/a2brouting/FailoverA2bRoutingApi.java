@@ -2,9 +2,8 @@ package com.skedgo.tripkit.a2brouting;
 
 import android.content.res.Resources;
 
-import android.util.Log;
 import com.google.gson.Gson;
-import com.skedgo.android.common.model.Region;
+import com.skedgo.tripkit.common.model.Region;
 import com.skedgo.tripkit.RoutingUserError;
 
 import io.reactivex.Maybe;
@@ -16,8 +15,8 @@ import java.util.List;
 import java.util.Map;
 
 import okhttp3.HttpUrl;
-import skedgo.tripkit.routing.RoutingResponse;
-import skedgo.tripkit.routing.TripGroup;
+import com.skedgo.tripkit.routing.RoutingResponse;
+import com.skedgo.tripkit.routing.TripGroup;
 
 /**
  * A wrapper of {@link A2bRoutingApi} that requests `routing.json`

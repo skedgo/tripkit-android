@@ -1,6 +1,6 @@
 package com.skedgo.tripkit.a2brouting
 
-import com.skedgo.android.common.model.Query
+import com.skedgo.tripkit.common.model.Query
 
 object ToWeightingProfileString {
   fun toWeightingProfileString(query: Query): String {

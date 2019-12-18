@@ -7,8 +7,8 @@ import org.robolectric.RobolectricTestRunner;
 import java.util.ArrayList;
 import java.util.Arrays;
 
-import skedgo.tripkit.routing.Trip;
-import skedgo.tripkit.routing.TripGroup;
+import com.skedgo.tripkit.routing.Trip;
+import com.skedgo.tripkit.routing.TripGroup;
 
 import static org.assertj.core.api.Java6Assertions.assertThat;
 

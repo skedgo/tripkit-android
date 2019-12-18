@@ -1,8 +1,7 @@
 package com.skedgo.tripkit;
 
-import com.skedgo.android.common.model.TransportMode;
+import com.skedgo.tripkit.common.model.TransportMode;
 
-import com.skedgo.tripkit.ModeCombinationStrategy;
 import org.assertj.core.util.Sets;
 import org.junit.Test;
 import org.junit.runner.RunWith;

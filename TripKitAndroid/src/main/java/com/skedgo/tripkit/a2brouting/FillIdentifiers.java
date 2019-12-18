@@ -4,8 +4,8 @@ import java.util.List;
 import java.util.concurrent.atomic.AtomicLong;
 
 import io.reactivex.functions.Function;
-import skedgo.tripkit.routing.Trip;
-import skedgo.tripkit.routing.TripGroup;
+import com.skedgo.tripkit.routing.Trip;
+import com.skedgo.tripkit.routing.TripGroup;
 
 /**
  * Fills id for {@link Trip}.

@@ -6,9 +6,9 @@ import java.util.Collections;
 import java.util.List;
 
 import io.reactivex.functions.Function;
-import skedgo.tripkit.routing.Trip;
-import skedgo.tripkit.routing.TripComparators;
-import skedgo.tripkit.routing.TripGroup;
+import com.skedgo.tripkit.routing.Trip;
+import com.skedgo.tripkit.routing.TripComparators;
+import com.skedgo.tripkit.routing.TripGroup;
 
 import static org.apache.commons.collections4.CollectionUtils.isNotEmpty;
 

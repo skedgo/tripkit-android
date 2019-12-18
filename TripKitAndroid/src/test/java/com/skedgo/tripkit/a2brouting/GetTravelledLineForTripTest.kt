@@ -2,9 +2,8 @@ package com.skedgo.tripkit.a2brouting
 
 import android.graphics.Color
 import com.nhaarman.mockitokotlin2.whenever
-import com.skedgo.android.common.model.Street
-import com.skedgo.android.common.model.TransportMode
-import com.skedgo.tripkit.a2brouting.GetTravelledLineForTrip
+import com.skedgo.tripkit.common.model.Street
+import com.skedgo.tripkit.common.model.TransportMode
 import org.amshove.kluent.`should equal`
 import org.amshove.kluent.mock
 import org.junit.Test

@@ -1,6 +1,6 @@
 package com.skedgo.tripkit.tsp;
 
-import com.skedgo.android.common.model.Region;
+import com.skedgo.tripkit.common.model.Region;
 
 import retrofit2.http.Body;
 import retrofit2.http.POST;

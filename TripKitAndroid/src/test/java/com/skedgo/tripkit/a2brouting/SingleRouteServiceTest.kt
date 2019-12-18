@@ -3,21 +3,18 @@ package com.skedgo.tripkit.a2brouting
 import com.nhaarman.mockitokotlin2.any
 import com.nhaarman.mockitokotlin2.eq
 import com.nhaarman.mockitokotlin2.whenever
-import com.skedgo.android.common.model.Query
+import com.skedgo.tripkit.common.model.Query
 import com.skedgo.tripkit.TransitModeFilter
 import com.skedgo.tripkit.TransportModeFilter
 import org.assertj.core.api.Java6Assertions.assertThat
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
-import org.mockito.ArgumentMatchers
 import org.mockito.Mock
-import org.mockito.Mockito.`when`
 import org.mockito.Mockito.mock
 import org.mockito.junit.MockitoJUnit
-import io.reactivex.Observable
 import io.reactivex.subjects.PublishSubject
-import skedgo.tripkit.routing.TripGroup
+import com.skedgo.tripkit.routing.TripGroup
 
 class SingleRouteServiceTest {
   @Rule

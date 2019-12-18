@@ -1,5 +1,5 @@
 package com.skedgo.tripkit.data.locations
-import com.skedgo.android.common.model.Region
+import com.skedgo.tripkit.common.model.Region
 import com.skedgo.tripkit.data.database.locations.bikepods.BikePodRepository
 import com.skedgo.tripkit.data.database.locations.carparks.CarParkMapper
 import com.skedgo.tripkit.data.database.locations.carparks.CarParkPersistor
@@ -10,10 +10,9 @@ import com.skedgo.tripkit.data.database.locations.onstreetparking.OnStreetParkin
 import io.reactivex.Completable
 import io.reactivex.Observable
 import io.reactivex.schedulers.Schedulers
-import okhttp3.HttpUrl
 import okhttp3.HttpUrl.Companion.toHttpUrlOrNull
 import org.apache.commons.collections4.CollectionUtils
-import skedgo.tripkit.agenda.ConfigRepository
+import com.skedgo.tripkit.agenda.ConfigRepository
 import java.util.*
 
 open class StopsFetcher(private val api: LocationsApi,

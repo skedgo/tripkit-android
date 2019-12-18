@@ -9,13 +9,13 @@ import io.reactivex.Observable
 import io.reactivex.schedulers.Schedulers
 
 import org.joda.time.LocalTime
-import skedgo.tripkit.parkingspots.models.OffStreetParking
-import skedgo.tripkit.parkingspots.models.ParkingOperator
-import skedgo.tripkit.parkingspots.models.PricingEntry
-import skedgo.tripkit.parkingspots.models.PricingTable
-import skedgo.tripkit.location.GeoPoint
-import skedgo.tripkit.parkingspots.ParkingRepository
-import skedgo.tripkit.parkingspots.models.OpeningHour
+import com.skedgo.tripkit.parkingspots.models.OffStreetParking
+import com.skedgo.tripkit.parkingspots.models.ParkingOperator
+import com.skedgo.tripkit.parkingspots.models.PricingEntry
+import com.skedgo.tripkit.parkingspots.models.PricingTable
+import com.skedgo.tripkit.location.GeoPoint
+import com.skedgo.tripkit.parkingspots.ParkingRepository
+import com.skedgo.tripkit.parkingspots.models.OpeningHour
 
 internal class ParkingRepositoryImpl(val api: LocationsApi,
                                      val regionService: RegionService,

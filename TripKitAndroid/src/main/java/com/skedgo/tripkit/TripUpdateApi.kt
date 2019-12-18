@@ -1,6 +1,6 @@
 package com.skedgo.tripkit
 
-import skedgo.tripkit.routing.RoutingResponse
+import com.skedgo.tripkit.routing.RoutingResponse
 
 import retrofit2.http.GET
 import retrofit2.http.Query

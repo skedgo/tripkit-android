@@ -1,6 +1,6 @@
 package com.skedgo.tripkit.data.database.timetables
 
-import com.skedgo.android.common.model.*
+import com.skedgo.tripkit.common.model.*
 import java.util.*
 import javax.inject.Inject
 

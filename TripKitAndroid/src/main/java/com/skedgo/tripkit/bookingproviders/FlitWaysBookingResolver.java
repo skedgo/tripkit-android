@@ -4,17 +4,15 @@ import android.content.Intent;
 import android.net.Uri;
 import androidx.annotation.Nullable;
 
-import com.skedgo.android.common.model.Location;
+import com.skedgo.tripkit.common.model.Location;
 import com.skedgo.tripkit.BookingAction;
 import com.skedgo.tripkit.ExternalActionParams;
 import io.reactivex.Observable;
 import io.reactivex.functions.BiFunction;
 import io.reactivex.functions.Function;
 import io.reactivex.schedulers.Schedulers;
-import skedgo.tripkit.routing.TripSegment;
-import com.skedgo.tripkit.BookingAction;
-import com.skedgo.tripkit.ExternalActionParams;
-import skedgo.tripkit.geocoding.ReverseGeocodable;
+import com.skedgo.tripkit.routing.TripSegment;
+import com.skedgo.tripkit.geocoding.ReverseGeocodable;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;

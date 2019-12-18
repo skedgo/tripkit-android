@@ -4,7 +4,7 @@ import android.app.Application
 import com.skedgo.TripKit
 import com.skedgo.tripkit.Configs
 import net.danlew.android.joda.JodaTimeAndroid
-import skedgo.tripkit.configuration.Key
+import com.skedgo.tripkit.configuration.Key
 
 class App : Application() {
   override fun onCreate() {

@@ -2,7 +2,7 @@ package com.skedgo.tripkit.data.database.locations.carparks
 
 import com.google.gson.annotations.JsonAdapter
 
-import skedgo.tripkit.routing.ModeInfo
+import com.skedgo.tripkit.routing.ModeInfo
 
 import org.immutables.gson.Gson.TypeAdapters
 import org.immutables.value.Value.Immutable

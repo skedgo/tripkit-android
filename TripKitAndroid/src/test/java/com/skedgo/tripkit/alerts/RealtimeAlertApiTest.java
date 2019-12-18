@@ -1,11 +1,8 @@
 package com.skedgo.tripkit.alerts;
 
-import com.skedgo.android.common.model.ImmutableRealtimeAlert;
+import com.skedgo.tripkit.common.model.ImmutableRealtimeAlert;
 import com.skedgo.tripkit.TripKitAndroidRobolectricTest;
 
-import com.skedgo.tripkit.alerts.AlertBlock;
-import com.skedgo.tripkit.alerts.RealtimeAlertApi;
-import com.skedgo.tripkit.alerts.RealtimeAlertResponse;
 import io.reactivex.observers.TestObserver;
 import org.junit.Before;
 import org.junit.Rule;

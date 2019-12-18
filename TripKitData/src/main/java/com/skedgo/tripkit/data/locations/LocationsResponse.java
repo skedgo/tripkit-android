@@ -4,7 +4,7 @@ import androidx.annotation.VisibleForTesting;
 
 import com.google.gson.Gson;
 import com.google.gson.annotations.SerializedName;
-import com.skedgo.android.common.model.ScheduledStop;
+import com.skedgo.tripkit.common.model.ScheduledStop;
 
 import java.util.ArrayList;
 import java.util.List;

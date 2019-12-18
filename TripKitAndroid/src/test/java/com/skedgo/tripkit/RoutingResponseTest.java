@@ -2,9 +2,9 @@ package com.skedgo.tripkit;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonPrimitive;
-import com.skedgo.android.common.model.RealtimeAlert;
-import com.skedgo.android.common.model.RealtimeAlerts;
-import com.skedgo.android.common.util.Gsons;
+import com.skedgo.tripkit.common.model.RealtimeAlert;
+import com.skedgo.tripkit.common.model.RealtimeAlerts;
+import com.skedgo.tripkit.common.util.Gsons;
 
 import org.assertj.core.api.Condition;
 import org.junit.Test;
@@ -15,10 +15,10 @@ import java.io.IOException;
 
 import androidx.test.core.app.ApplicationProvider;
 import okhttp3.mockwebserver.MockResponse;
-import skedgo.tripkit.routing.RoutingResponse;
-import skedgo.tripkit.routing.Trip;
-import skedgo.tripkit.routing.TripGroup;
-import skedgo.tripkit.routing.TripSegment;
+import com.skedgo.tripkit.routing.RoutingResponse;
+import com.skedgo.tripkit.routing.Trip;
+import com.skedgo.tripkit.routing.TripGroup;
+import com.skedgo.tripkit.routing.TripSegment;
 
 import static org.assertj.core.api.Java6Assertions.assertThat;
 import static thuytrinh.mockwebserverrule.MockWebServerRule.createMockResponse;

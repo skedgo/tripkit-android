@@ -2,8 +2,8 @@ package com.skedgo.tripkit
 
 import okhttp3.Interceptor
 import okhttp3.Response
-import skedgo.tripkit.configuration.GetAppVersion
-import skedgo.tripkit.configuration.Key
+import com.skedgo.tripkit.configuration.GetAppVersion
+import com.skedgo.tripkit.configuration.Key
 import java.io.IOException
 import java.util.*
 import java.util.concurrent.Callable

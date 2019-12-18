@@ -3,10 +3,7 @@ package com.skedgo.tripkit.alerts;
 import androidx.annotation.Nullable;
 
 import com.google.gson.annotations.JsonAdapter;
-import com.skedgo.android.common.model.RealtimeAlert;
-
-import org.immutables.gson.Gson;
-import org.immutables.value.Value;
+import com.skedgo.tripkit.common.model.RealtimeAlert;
 
 import static org.immutables.gson.Gson.TypeAdapters;
 import static org.immutables.value.Value.Immutable;

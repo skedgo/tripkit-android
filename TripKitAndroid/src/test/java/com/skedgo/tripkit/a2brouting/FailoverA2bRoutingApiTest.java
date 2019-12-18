@@ -4,7 +4,6 @@ import com.google.gson.Gson;
 import com.skedgo.tripkit.RoutingUserError;
 
 import io.reactivex.observers.TestObserver;
-import io.reactivex.subscribers.TestSubscriber;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
@@ -20,8 +19,8 @@ import java.util.List;
 
 import androidx.test.core.app.ApplicationProvider;
 import io.reactivex.Observable;
-import skedgo.tripkit.routing.RoutingResponse;
-import skedgo.tripkit.routing.TripGroup;
+import com.skedgo.tripkit.routing.RoutingResponse;
+import com.skedgo.tripkit.routing.TripGroup;
 
 import static org.mockito.Matchers.anyListOf;
 import static org.mockito.Matchers.anyMapOf;

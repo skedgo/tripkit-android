@@ -1,8 +1,5 @@
 package com.skedgo.tripkit;
 
-import com.skedgo.tripkit.RealTimeTripUpdateReceiver;
-import com.skedgo.tripkit.TripUpdater;
-import io.reactivex.observers.TestObserver;
 import io.reactivex.subscribers.TestSubscriber;
 import org.junit.Before;
 import org.junit.Test;
@@ -10,14 +7,13 @@ import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RobolectricTestRunner;
-import org.robolectric.annotation.Config;
 
 import java.util.concurrent.TimeUnit;
 
 import kotlin.Pair;
 import io.reactivex.Observable;
-import skedgo.tripkit.routing.Trip;
-import skedgo.tripkit.routing.TripGroup;
+import com.skedgo.tripkit.routing.Trip;
+import com.skedgo.tripkit.routing.TripGroup;
 
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;

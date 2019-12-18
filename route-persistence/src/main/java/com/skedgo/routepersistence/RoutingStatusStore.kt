@@ -3,12 +3,9 @@ package com.skedgo.routepersistence
 import android.content.ContentValues
 import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
-import android.util.Log
 import io.reactivex.Completable
-import io.reactivex.Observable
 import io.reactivex.Single
 import io.reactivex.schedulers.Schedulers
-import skedgo.tripkit.routingstatus.Status
 
 class RoutingStatusStore constructor(private val databaseHelper: SQLiteOpenHelper) {
   fun getLastStatus(requestId: String): Single<Pair<String, String>> {

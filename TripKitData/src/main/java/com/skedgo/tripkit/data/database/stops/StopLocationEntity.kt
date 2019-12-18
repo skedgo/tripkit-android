@@ -3,12 +3,12 @@ package com.skedgo.tripkit.data.database.stops
 import androidx.room.Embedded
 import androidx.room.Entity
 import androidx.room.PrimaryKey
-import com.skedgo.android.common.model.ScheduledStop
-import com.skedgo.android.common.model.StopType
+import com.skedgo.tripkit.common.model.ScheduledStop
+import com.skedgo.tripkit.common.model.StopType
 import com.skedgo.tripkit.data.database.locations.bikepods.ModeInfoEntity
 import com.skedgo.tripkit.data.database.locations.bikepods.ServiceColorEntity
-import skedgo.tripkit.routing.ModeInfo
-import skedgo.tripkit.routing.ServiceColor
+import com.skedgo.tripkit.routing.ModeInfo
+import com.skedgo.tripkit.routing.ServiceColor
 
 @Entity(tableName = "stopLocations")
 class StopLocationEntity {

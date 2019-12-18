@@ -13,10 +13,9 @@ import org.mockito.MockitoAnnotations
 import org.robolectric.RobolectricTestRunner
 import io.reactivex.Observable
 import io.reactivex.observers.TestObserver
-import io.reactivex.subscribers.TestSubscriber
-import skedgo.tripkit.routing.RoutingResponse
-import skedgo.tripkit.routing.Trip
-import skedgo.tripkit.routing.TripGroup
+import com.skedgo.tripkit.routing.RoutingResponse
+import com.skedgo.tripkit.routing.Trip
+import com.skedgo.tripkit.routing.TripGroup
 import java.util.*
 
 @RunWith(RobolectricTestRunner::class)

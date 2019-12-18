@@ -5,7 +5,7 @@ import io.reactivex.Completable
 import io.reactivex.Observable
 import io.reactivex.Single
 import io.reactivex.schedulers.Schedulers
-import skedgo.tripkit.location.GeoPoint
+import com.skedgo.tripkit.location.GeoPoint
 
 
 class BikePodRepositoryImpl(val tripGoDatabase2: TripKitDatabase) : BikePodRepository {

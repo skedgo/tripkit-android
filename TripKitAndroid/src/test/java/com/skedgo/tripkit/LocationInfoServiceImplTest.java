@@ -1,7 +1,7 @@
 package com.skedgo.tripkit;
 
-import com.skedgo.android.common.model.Location;
-import com.skedgo.android.common.model.Region;
+import com.skedgo.tripkit.common.model.Location;
+import com.skedgo.tripkit.common.model.Region;
 
 import com.skedgo.tripkit.data.regions.RegionService;
 import io.reactivex.observers.TestObserver;

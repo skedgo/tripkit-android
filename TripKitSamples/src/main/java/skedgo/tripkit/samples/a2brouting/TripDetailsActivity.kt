@@ -2,7 +2,6 @@ package skedgo.tripkit.samples.a2brouting
 
 import android.content.Context
 import android.content.Intent
-import android.graphics.Color
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
@@ -12,8 +11,7 @@ import com.google.android.gms.maps.model.*
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.skedgo.tripkit.a2brouting.GetNonTravelledLineForTrip
 import com.skedgo.tripkit.a2brouting.GetTravelledLineForTrip
-import io.reactivex.Observable
-import skedgo.tripkit.routing.Trip
+import com.skedgo.tripkit.routing.Trip
 import skedgo.tripkit.samples.R
 import skedgo.tripkit.samples.databinding.TripDetailsBinding
 

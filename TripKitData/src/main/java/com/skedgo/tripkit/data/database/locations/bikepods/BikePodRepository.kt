@@ -3,7 +3,7 @@ package com.skedgo.tripkit.data.database.locations.bikepods
 import io.reactivex.Completable
 import io.reactivex.Observable
 import io.reactivex.Single
-import skedgo.tripkit.location.GeoPoint
+import com.skedgo.tripkit.location.GeoPoint
 
 interface BikePodRepository {
   fun saveBikePods(key: String, bikePods: List<BikePodLocationEntity>): Completable

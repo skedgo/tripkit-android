@@ -2,13 +2,12 @@ package com.skedgo.tripkit.data.datetime
 
 import android.content.Context
 import android.text.format.DateFormat
-import android.util.Log
 import io.reactivex.Flowable
 import io.reactivex.schedulers.Schedulers
 import org.joda.time.DateTime
 import org.joda.time.LocalTime
 import org.joda.time.format.DateTimeFormat
-import skedgo.tripkit.datetime.PrintTime
+import com.skedgo.tripkit.datetime.PrintTime
 import java.util.*
 
 internal class PrintTimeImpl constructor(

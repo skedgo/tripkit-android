@@ -6,9 +6,9 @@ import com.skedgo.routepersistence.toDto
 import com.skedgo.routepersistence.toStatus
 import io.reactivex.Completable
 import io.reactivex.Observable
-import skedgo.tripkit.routingstatus.RoutingStatus
-import skedgo.tripkit.routingstatus.RoutingStatusRepository
-import skedgo.tripkit.routingstatus.Status
+import com.skedgo.tripkit.routingstatus.RoutingStatus
+import com.skedgo.tripkit.routingstatus.RoutingStatusRepository
+import com.skedgo.tripkit.routingstatus.Status
 import javax.inject.Inject
 import javax.inject.Singleton
 

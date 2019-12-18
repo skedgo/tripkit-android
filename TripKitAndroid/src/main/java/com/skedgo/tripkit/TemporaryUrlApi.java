@@ -1,7 +1,7 @@
 package com.skedgo.tripkit;
 
-import skedgo.tripkit.routing.RoutingResponse;
-import skedgo.tripkit.routing.Trip;
+import com.skedgo.tripkit.routing.RoutingResponse;
+import com.skedgo.tripkit.routing.Trip;
 
 import java.util.Map;
 

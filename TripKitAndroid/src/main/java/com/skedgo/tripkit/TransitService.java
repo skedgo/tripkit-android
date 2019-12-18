@@ -2,8 +2,8 @@ package com.skedgo.tripkit;
 
 import com.google.gson.annotations.JsonAdapter;
 
-import skedgo.tripkit.routing.RealTimeVehicle;
-import skedgo.tripkit.routing.Shape;
+import com.skedgo.tripkit.routing.RealTimeVehicle;
+import com.skedgo.tripkit.routing.Shape;
 
 import org.immutables.gson.Gson;
 import org.immutables.value.Value;

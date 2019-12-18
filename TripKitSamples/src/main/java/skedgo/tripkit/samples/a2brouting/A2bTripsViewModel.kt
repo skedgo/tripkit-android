@@ -1,9 +1,9 @@
 package skedgo.tripkit.samples.a2brouting
 
 import android.content.Context
-import com.skedgo.android.common.model.Location
-import com.skedgo.android.common.model.Query
-import com.skedgo.android.common.model.TimeTag
+import com.skedgo.tripkit.common.model.Location
+import com.skedgo.tripkit.common.model.Query
+import com.skedgo.tripkit.common.model.TimeTag
 import com.skedgo.tripkit.a2brouting.RouteService
 import me.tatarka.bindingcollectionadapter2.ItemBinding
 import me.tatarka.bindingcollectionadapter2.collections.DiffObservableList
@@ -11,8 +11,8 @@ import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers.mainThread
 import io.reactivex.subjects.BehaviorSubject
 import io.reactivex.subjects.PublishSubject
-import skedgo.tripkit.routing.Trip
-import skedgo.tripkit.routing.TripGroupComparators
+import com.skedgo.tripkit.routing.Trip
+import com.skedgo.tripkit.routing.TripGroupComparators
 import skedgo.tripkit.samples.BR
 import skedgo.tripkit.samples.R
 

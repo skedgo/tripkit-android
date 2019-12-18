@@ -2,11 +2,9 @@ package com.skedgo.tripkit
 
 import android.content.Context
 import android.text.TextUtils
-import io.reactivex.BackpressureStrategy
-import io.reactivex.Flowable
 import io.reactivex.Observable
 import io.reactivex.schedulers.Schedulers
-import skedgo.tripkit.geocoding.ReverseGeocodable
+import com.skedgo.tripkit.geocoding.ReverseGeocodable
 
 class AndroidGeocoder(private val context: Context) : ReverseGeocodable {
   override fun getAddress(latitude: Double, longitude: Double): Observable<String> {

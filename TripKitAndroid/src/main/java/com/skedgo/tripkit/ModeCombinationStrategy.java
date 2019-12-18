@@ -2,7 +2,7 @@ package com.skedgo.tripkit;
 
 import androidx.annotation.NonNull;
 
-import com.skedgo.android.common.model.TransportMode;
+import com.skedgo.tripkit.common.model.TransportMode;
 
 import io.reactivex.functions.BiFunction;
 import org.apache.commons.collections4.CollectionUtils;

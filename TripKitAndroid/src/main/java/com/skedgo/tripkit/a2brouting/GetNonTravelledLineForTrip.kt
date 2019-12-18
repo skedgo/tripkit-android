@@ -1,13 +1,9 @@
 package com.skedgo.tripkit.a2brouting
 
 import android.graphics.Color
-import androidx.annotation.ColorInt
-import com.skedgo.android.common.model.Street
-import com.skedgo.android.common.model.TransportMode
-import com.skedgo.android.common.util.PolyUtil
-import com.skedgo.tripkit.LineSegment
+import com.skedgo.tripkit.common.util.PolyUtil
 import io.reactivex.Observable
-import skedgo.tripkit.routing.TripSegment
+import com.skedgo.tripkit.routing.TripSegment
 import javax.inject.Inject
 
 class GetNonTravelledLineForTrip @Inject constructor() {

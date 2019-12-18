@@ -1,7 +1,7 @@
 package com.skedgo.tripkit;
 
 import com.google.gson.annotations.SerializedName;
-import com.skedgo.android.common.model.RegionsResponse;
+import com.skedgo.tripkit.common.model.RegionsResponse;
 
 import retrofit2.http.Body;
 import retrofit2.http.POST;

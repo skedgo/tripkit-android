@@ -1,7 +1,6 @@
 package com.skedgo.tripkit
 
-import android.util.Log
-import com.skedgo.android.common.model.Query
+import com.skedgo.tripkit.common.model.Query
 import com.skedgo.tripkit.data.regions.RegionService
 import io.reactivex.Observable
 

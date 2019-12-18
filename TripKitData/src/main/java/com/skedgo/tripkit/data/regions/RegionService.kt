@@ -1,13 +1,13 @@
 package com.skedgo.tripkit.data.regions
 
-import com.skedgo.android.common.model.Location
-import com.skedgo.android.common.model.Region
-import com.skedgo.android.common.model.TransportMode
+import com.skedgo.tripkit.common.model.Location
+import com.skedgo.tripkit.common.model.Region
+import com.skedgo.tripkit.common.model.TransportMode
 import com.skedgo.tripkit.data.tsp.Paratransit
 import com.skedgo.tripkit.data.tsp.RegionInfo
 import io.reactivex.Completable
 import io.reactivex.Observable
-import skedgo.tripkit.routing.ModeInfo
+import com.skedgo.tripkit.routing.ModeInfo
 
 interface RegionService {
   fun getRegionsAsync(): Observable<List<Region>>

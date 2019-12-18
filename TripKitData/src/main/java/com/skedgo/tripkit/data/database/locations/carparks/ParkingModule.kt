@@ -6,7 +6,7 @@ import com.skedgo.tripkit.data.locations.LocationsApi
 import com.skedgo.tripkit.data.locations.StopsFetcher
 import dagger.Module
 import dagger.Provides
-import skedgo.tripkit.parkingspots.ParkingRepository
+import com.skedgo.tripkit.parkingspots.ParkingRepository
 
 @Module
 class ParkingModule {

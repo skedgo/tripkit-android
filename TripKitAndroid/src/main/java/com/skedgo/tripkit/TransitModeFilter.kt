@@ -1,8 +1,7 @@
 package com.skedgo.tripkit
 
-import android.util.Log
 import com.skedgo.tripkit.data.tsp.RegionInfo
-import skedgo.tripkit.routing.ModeInfo
+import com.skedgo.tripkit.routing.ModeInfo
 
 interface TransitModeFilter {
   /**

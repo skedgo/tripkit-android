@@ -1,7 +1,6 @@
 package com.skedgo.tripkit.tsp
 
-import android.util.Log
-import com.skedgo.android.common.model.Region
+import com.skedgo.tripkit.common.model.Region
 import com.skedgo.tripkit.data.tsp.RegionInfo
 import io.reactivex.Observable
 import javax.inject.Inject

@@ -1,6 +1,6 @@
 package com.skedgo.tripkit.alerts;
 
-import com.skedgo.android.common.model.Region;
+import com.skedgo.tripkit.common.model.Region;
 
 import retrofit2.http.GET;
 import retrofit2.http.Query;

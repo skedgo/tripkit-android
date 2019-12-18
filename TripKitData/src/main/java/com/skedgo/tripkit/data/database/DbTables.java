@@ -1,7 +1,7 @@
 package com.skedgo.tripkit.data.database;
 
 
-import com.skedgo.android.common.model.Location;
+import com.skedgo.tripkit.common.model.Location;
 import com.skedgo.sqlite.DatabaseField;
 import com.skedgo.sqlite.DatabaseTable;
 

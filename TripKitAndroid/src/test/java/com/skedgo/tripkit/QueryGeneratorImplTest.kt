@@ -1,9 +1,9 @@
 package com.skedgo.tripkit
 
-import com.skedgo.android.common.model.Location
-import com.skedgo.android.common.model.Query
-import com.skedgo.android.common.model.Region
-import com.skedgo.android.common.model.TransportMode
+import com.skedgo.tripkit.common.model.Location
+import com.skedgo.tripkit.common.model.Query
+import com.skedgo.tripkit.common.model.Region
+import com.skedgo.tripkit.common.model.TransportMode
 import com.skedgo.tripkit.data.regions.RegionService
 import io.reactivex.Observable
 import io.reactivex.functions.BiFunction

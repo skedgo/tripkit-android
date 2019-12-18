@@ -1,8 +1,7 @@
 package com.skedgo.tripkit;
 
-import com.skedgo.android.common.util.Gsons;
+import com.skedgo.tripkit.common.util.Gsons;
 
-import com.skedgo.tripkit.TemporaryUrlApi;
 import io.reactivex.observers.TestObserver;
 import org.apache.commons.io.IOUtils;
 import org.junit.After;
@@ -19,7 +18,7 @@ import okhttp3.mockwebserver.MockWebServer;
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
-import skedgo.tripkit.routing.RoutingResponse;
+import com.skedgo.tripkit.routing.RoutingResponse;
 
 import static org.assertj.core.api.Java6Assertions.assertThat;
 

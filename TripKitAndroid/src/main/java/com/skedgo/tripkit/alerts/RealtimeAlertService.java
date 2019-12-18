@@ -3,7 +3,7 @@ package com.skedgo.tripkit.alerts;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import com.skedgo.android.common.model.Region;
+import com.skedgo.tripkit.common.model.Region;
 
 import java.util.List;
 

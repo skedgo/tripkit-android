@@ -1,9 +1,9 @@
 package com.skedgo.tripkit;
 
 import androidx.test.core.app.ApplicationProvider;
-import com.skedgo.android.common.model.Location;
-import com.skedgo.android.common.model.Query;
-import com.skedgo.android.common.model.TimeTag;
+import com.skedgo.tripkit.common.model.Location;
+import com.skedgo.tripkit.common.model.Query;
+import com.skedgo.tripkit.common.model.TimeTag;
 import com.skedgo.tripkit.routing.ExtraQueryMapProvider;
 import com.skedgo.tripkit.data.tsp.RegionInfo;
 import com.skedgo.tripkit.tsp.RegionInfoRepository;
@@ -20,7 +20,6 @@ import java.util.Map;
 
 import io.reactivex.Observable;
 import com.skedgo.tripkit.a2brouting.FailoverA2bRoutingApi;
-import org.robolectric.RuntimeEnvironment;
 
 import static org.assertj.core.api.Java6Assertions.assertThat;
 import static org.mockito.ArgumentMatchers.any;

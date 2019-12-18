@@ -1,8 +1,7 @@
 package com.skedgo.tripkit.a2brouting
 
-import com.skedgo.android.common.model.Query
+import com.skedgo.tripkit.common.model.Query
 import com.skedgo.tripkit.TripKitAndroidRobolectricTest
-import com.skedgo.tripkit.a2brouting.ToWeightingProfileString
 import org.amshove.kluent.shouldEqualTo
 import org.junit.Test
 

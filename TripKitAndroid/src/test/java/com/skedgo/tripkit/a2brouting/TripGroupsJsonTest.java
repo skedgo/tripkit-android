@@ -4,10 +4,7 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.skedgo.tripkit.TripKitAndroidRobolectricTest;
 
-import com.skedgo.tripkit.a2brouting.A2bRoutingApi;
-import com.skedgo.tripkit.a2brouting.FailoverA2bRoutingApi;
 import io.reactivex.observers.TestObserver;
-import io.reactivex.subscribers.TestSubscriber;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
@@ -23,8 +20,8 @@ import okhttp3.mockwebserver.MockResponse;
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
-import skedgo.tripkit.routing.Trip;
-import skedgo.tripkit.routing.TripGroup;
+import com.skedgo.tripkit.routing.Trip;
+import com.skedgo.tripkit.routing.TripGroup;
 import thuytrinh.mockwebserverrule.MockWebServerRule;
 
 import static org.assertj.core.api.Java6Assertions.assertThat;

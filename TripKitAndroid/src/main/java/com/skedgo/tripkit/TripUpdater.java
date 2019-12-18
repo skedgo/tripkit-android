@@ -2,7 +2,7 @@ package com.skedgo.tripkit;
 
 import androidx.annotation.NonNull;
 
-import skedgo.tripkit.routing.Trip;
+import com.skedgo.tripkit.routing.Trip;
 
 import io.reactivex.Observable;
 

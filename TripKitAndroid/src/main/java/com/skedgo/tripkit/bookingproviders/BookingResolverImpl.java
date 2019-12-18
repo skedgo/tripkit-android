@@ -8,11 +8,9 @@ import androidx.annotation.Nullable;
 
 import com.skedgo.tripkit.BookingAction;
 import com.skedgo.tripkit.ExternalActionParams;
-import com.skedgo.tripkit.BookingAction;
-import com.skedgo.tripkit.ExternalActionParams;
 import io.reactivex.Observable;
 import io.reactivex.functions.Function;
-import skedgo.tripkit.geocoding.ReverseGeocodable;
+import com.skedgo.tripkit.geocoding.ReverseGeocodable;
 
 import java.util.HashMap;
 import java.util.Map;

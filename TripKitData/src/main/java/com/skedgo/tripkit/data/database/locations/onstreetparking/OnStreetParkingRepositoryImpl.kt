@@ -1,18 +1,18 @@
 package com.skedgo.tripkit.data.database.locations.onstreetparking
 
 import com.gojuno.koptional.toOptional
-import com.skedgo.android.common.util.PolyUtil
+import com.skedgo.tripkit.common.util.PolyUtil
 import com.skedgo.tripkit.data.database.TripKitDatabase
 import io.reactivex.Observable
 import io.reactivex.Single
 import io.reactivex.schedulers.Schedulers
 import skedgo.tripgo.parkingspots.models.*
-import skedgo.tripkit.location.GeoPoint
-import skedgo.tripkit.parkingspots.OnStreetParkingRepository
-import skedgo.tripkit.parkingspots.models.OnStreetParking
-import skedgo.tripkit.parkingspots.models.Parking
-import skedgo.tripkit.parkingspots.models.ParkingOperator
-import skedgo.tripkit.parkingspots.models.PaymentType
+import com.skedgo.tripkit.location.GeoPoint
+import com.skedgo.tripkit.parkingspots.OnStreetParkingRepository
+import com.skedgo.tripkit.parkingspots.models.OnStreetParking
+import com.skedgo.tripkit.parkingspots.models.Parking
+import com.skedgo.tripkit.parkingspots.models.ParkingOperator
+import com.skedgo.tripkit.parkingspots.models.PaymentType
 import javax.inject.Inject
 
 class OnStreetParkingRepositoryImpl @Inject constructor(

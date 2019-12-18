@@ -4,9 +4,9 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import android.text.TextUtils;
 
-import com.skedgo.android.common.model.Location;
-import com.skedgo.android.common.model.Region;
-import com.skedgo.android.common.model.TransportMode;
+import com.skedgo.tripkit.common.model.Location;
+import com.skedgo.tripkit.common.model.Region;
+import com.skedgo.tripkit.common.model.TransportMode;
 
 import io.reactivex.ObservableTransformer;
 import io.reactivex.functions.Function;

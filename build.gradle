@@ -24,10 +24,7 @@ buildscript {
 ext {
     localMaven = "${rootDir}/../maven/"
     tripkitGroup = "com.skedgo.tripkit"
-    tripkitVersion = "2.0.27"
-    publishMavenUrl = "https://www.myget.org/F/skedgo/maven"
-    publishMavenUsername = "mbarringer"
-    publishMavenToken = "764d1786-7ac2-4754-adf5-de72f640cbf4"
+    tripkitVersion = "2.0.28"
 }
 
 allprojects {

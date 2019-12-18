@@ -5,11 +5,10 @@ import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.net.Uri;
 
-import com.skedgo.android.common.model.Location;
+import com.skedgo.tripkit.common.model.Location;
 import com.skedgo.tripkit.BookingAction;
 import com.skedgo.tripkit.ExternalActionParams;
 
-import com.skedgo.tripkit.bookingproviders.BookingResolverImpl;
 import io.reactivex.observers.TestObserver;
 import org.junit.Before;
 import org.junit.Test;
@@ -29,8 +28,8 @@ import java.util.concurrent.TimeUnit;
 
 import androidx.test.core.app.ApplicationProvider;
 import io.reactivex.Observable;
-import skedgo.tripkit.geocoding.ReverseGeocodable;
-import skedgo.tripkit.routing.TripSegment;
+import com.skedgo.tripkit.geocoding.ReverseGeocodable;
+import com.skedgo.tripkit.routing.TripSegment;
 
 import static com.skedgo.tripkit.bookingproviders.BookingResolver.FLITWAYS;
 import static com.skedgo.tripkit.bookingproviders.BookingResolver.GOCATCH;

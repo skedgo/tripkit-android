@@ -9,8 +9,7 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import io.reactivex.schedulers.Schedulers
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
-import skedgo.tripkit.analytics.MarkTripAsPlannedWithUserInfo
-import skedgo.tripkit.configuration.Server
+import com.skedgo.tripkit.configuration.Server
 
 /**
  * @suppress

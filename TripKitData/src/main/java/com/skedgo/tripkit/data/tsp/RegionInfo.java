@@ -4,8 +4,7 @@ import androidx.annotation.Nullable;
 
 import com.google.gson.annotations.JsonAdapter;
 
-import com.skedgo.tripkit.data.tsp.Paratransit;
-import skedgo.tripkit.routing.ModeInfo;
+import com.skedgo.tripkit.routing.ModeInfo;
 
 import org.immutables.value.Value;
 

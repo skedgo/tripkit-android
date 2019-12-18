@@ -3,15 +3,15 @@ package skedgo.tripkit.samples.a2brouting
 import android.content.Context
 import androidx.databinding.ObservableField
 import com.skedgo.TripKit
+import com.skedgo.tripkit.routing.*
 import io.reactivex.functions.BiFunction
 import io.reactivex.subjects.PublishSubject
-import skedgo.tripkit.routing.*
 import java.util.concurrent.TimeUnit
 
 class TripViewModel(
-    private val context: Context,
-    val group: TripGroup,
-    private val onTripSelected: PublishSubject<Trip>
+        private val context: Context,
+        val group: TripGroup,
+        private val onTripSelected: PublishSubject<Trip>
 ) {
   private val representativeTrip: Trip by lazy { group.displayTrip!! }
   val modeInfos by lazy {

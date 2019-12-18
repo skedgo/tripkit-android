@@ -2,10 +2,9 @@ package com.skedgo.tripkit
 
 import android.content.Context
 import android.text.TextUtils
-import android.util.Log
 
-import com.skedgo.android.common.model.Location
-import com.skedgo.android.common.model.Query
+import com.skedgo.tripkit.common.model.Location
+import com.skedgo.tripkit.common.model.Query
 import com.skedgo.tripkit.tsp.RegionInfoRepository
 
 import java.util.HashMap
@@ -18,7 +17,7 @@ import com.skedgo.tripkit.a2brouting.FailoverA2bRoutingApi
 import com.skedgo.tripkit.a2brouting.RouteService
 import com.skedgo.tripkit.a2brouting.ToWeightingProfileString
 import com.skedgo.tripkit.data.tsp.RegionInfo
-import skedgo.tripkit.routing.TripGroup
+import com.skedgo.tripkit.routing.TripGroup
 
 internal class RouteServiceImpl(
         private val context: Context,

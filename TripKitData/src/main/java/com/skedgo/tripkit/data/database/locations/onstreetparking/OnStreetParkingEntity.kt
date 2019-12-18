@@ -2,7 +2,7 @@ package com.skedgo.tripkit.data.database.locations.onstreetparking
 
 import androidx.room.*
 import com.skedgo.tripkit.data.database.locations.carparks.ParkingOperatorEntity
-import skedgo.tripkit.parkingspots.models.Parking
+import com.skedgo.tripkit.parkingspots.models.Parking
 
 @Entity(tableName = "onStreetParkings")
 @TypeConverters(VacancyConverters::class)

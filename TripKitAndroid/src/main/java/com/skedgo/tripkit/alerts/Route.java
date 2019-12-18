@@ -4,10 +4,9 @@ import androidx.annotation.Nullable;
 
 import com.google.gson.annotations.JsonAdapter;
 
-import org.immutables.gson.Gson;
 import org.immutables.value.Value;
 
-import skedgo.tripkit.routing.ModeInfo;
+import com.skedgo.tripkit.routing.ModeInfo;
 
 import static org.immutables.gson.Gson.TypeAdapters;
 import static org.immutables.value.Value.Immutable;

@@ -8,7 +8,7 @@ import org.robolectric.RobolectricTestRunner;
 
 import java.util.concurrent.TimeUnit;
 
-import skedgo.tripkit.routing.TripGroup;
+import com.skedgo.tripkit.routing.TripGroup;
 
 import static org.assertj.core.api.Java6Assertions.assertThat;
 import static org.mockito.Mockito.mock;

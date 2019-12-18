@@ -8,7 +8,7 @@ import com.skedgo.tripkit.a2brouting.GetNonTravelledLineForTrip
 import com.skedgo.tripkit.a2brouting.GetTravelledLineForTrip
 import io.reactivex.Observable
 import io.reactivex.functions.BiFunction
-import skedgo.tripkit.routing.TripSegment
+import com.skedgo.tripkit.routing.TripSegment
 
 class CreateTripLines(private val getTravelledLineForTrip: GetTravelledLineForTrip,
                       private val getNonTravelledLineForTrip: GetNonTravelledLineForTrip) {

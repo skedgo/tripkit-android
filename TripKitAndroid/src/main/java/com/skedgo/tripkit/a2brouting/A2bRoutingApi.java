@@ -8,7 +8,7 @@ import retrofit2.http.GET;
 import retrofit2.http.Query;
 import retrofit2.http.QueryMap;
 import retrofit2.http.Url;
-import skedgo.tripkit.routing.RoutingResponse;
+import com.skedgo.tripkit.routing.RoutingResponse;
 
 /**
  * Calculates door-to-door trips for the specified mode(s).

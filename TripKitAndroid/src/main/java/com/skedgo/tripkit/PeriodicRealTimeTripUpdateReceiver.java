@@ -13,8 +13,8 @@ import java.util.concurrent.atomic.AtomicReference;
 import kotlin.Pair;
 import org.reactivestreams.Publisher;
 import com.skedgo.TripKit;
-import skedgo.tripkit.routing.Trip;
-import skedgo.tripkit.routing.TripGroup;
+import com.skedgo.tripkit.routing.Trip;
+import com.skedgo.tripkit.routing.TripGroup;
 
 import static org.immutables.value.Value.Style.BuilderVisibility.PACKAGE;
 import static org.immutables.value.Value.Style.ImplementationVisibility.PRIVATE;

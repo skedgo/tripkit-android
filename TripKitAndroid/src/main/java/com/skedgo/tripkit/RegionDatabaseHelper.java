@@ -4,8 +4,8 @@ import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
-import com.skedgo.android.common.model.Region;
-import com.skedgo.android.common.model.TransportMode;
+import com.skedgo.tripkit.common.model.Region;
+import com.skedgo.tripkit.common.model.TransportMode;
 
 import java.util.List;
 import java.util.Map;

@@ -8,7 +8,7 @@ import com.skedgo.tripkit.routing.ExtraQueryMapProvider;
 import io.reactivex.functions.Consumer;
 import org.immutables.value.Value;
 
-import skedgo.tripkit.configuration.Key;
+import com.skedgo.tripkit.configuration.Key;
 
 import java.util.concurrent.Callable;
 

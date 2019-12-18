@@ -5,11 +5,11 @@ import io.reactivex.Completable
 import io.reactivex.Observable
 import io.reactivex.Single
 import io.reactivex.schedulers.Schedulers
-import skedgo.tripkit.location.GeoPoint
-import skedgo.tripkit.locations.CarPod
-import skedgo.tripkit.locations.Operator
-import skedgo.tripkit.locations.RealTimeInfo
-import skedgo.tripkit.locations.Vehicle
+import com.skedgo.tripkit.location.GeoPoint
+import com.skedgo.tripkit.locations.CarPod
+import com.skedgo.tripkit.locations.Operator
+import com.skedgo.tripkit.locations.RealTimeInfo
+import com.skedgo.tripkit.locations.Vehicle
 
 import javax.inject.Inject
 

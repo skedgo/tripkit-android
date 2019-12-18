@@ -1,9 +1,8 @@
 package com.skedgo.tripkit.tsp;
 
 import com.google.gson.annotations.JsonAdapter;
-import com.skedgo.android.common.model.Region;
+import com.skedgo.tripkit.common.model.Region;
 
-import org.immutables.gson.Gson;
 import org.immutables.value.Value;
 
 import static org.immutables.gson.Gson.TypeAdapters;

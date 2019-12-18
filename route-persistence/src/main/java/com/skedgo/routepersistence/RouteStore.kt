@@ -12,10 +12,10 @@ import io.reactivex.Completable
 import io.reactivex.Observable
 import io.reactivex.Single
 import io.reactivex.schedulers.Schedulers
-import skedgo.tripkit.routing.Source
-import skedgo.tripkit.routing.Trip
-import skedgo.tripkit.routing.TripGroup
-import skedgo.tripkit.routing.TripSegment
+import com.skedgo.tripkit.routing.Source
+import com.skedgo.tripkit.routing.Trip
+import com.skedgo.tripkit.routing.TripGroup
+import com.skedgo.tripkit.routing.TripSegment
 import java.util.*
 import kotlin.collections.ArrayList
 

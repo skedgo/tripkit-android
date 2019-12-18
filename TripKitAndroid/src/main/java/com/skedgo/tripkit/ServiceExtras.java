@@ -2,7 +2,7 @@ package com.skedgo.tripkit;
 
 import androidx.annotation.Nullable;
 
-import com.skedgo.android.common.model.ServiceStop;
+import com.skedgo.tripkit.common.model.ServiceStop;
 
 import java.util.List;
 

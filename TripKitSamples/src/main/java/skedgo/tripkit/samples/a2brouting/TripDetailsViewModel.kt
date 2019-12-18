@@ -5,7 +5,7 @@ import androidx.databinding.ObservableArrayList
 import androidx.databinding.ObservableList
 import me.tatarka.bindingcollectionadapter2.ItemBinding
 import io.reactivex.Observable
-import skedgo.tripkit.routing.Trip
+import com.skedgo.tripkit.routing.Trip
 import skedgo.tripkit.samples.BR
 import skedgo.tripkit.samples.R
 

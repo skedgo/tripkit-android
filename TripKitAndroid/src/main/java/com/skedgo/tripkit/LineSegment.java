@@ -1,8 +1,8 @@
 package com.skedgo.tripkit;
 
-import com.skedgo.android.common.util.TripKitLatLng;
+import com.skedgo.tripkit.common.util.TripKitLatLng;
 
-import skedgo.tripkit.routing.Trip;
+import com.skedgo.tripkit.routing.Trip;
 
 /**
  * Represents a segment of a polyline denoting a {@link Trip}.

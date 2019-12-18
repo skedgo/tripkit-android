@@ -1,13 +1,12 @@
 package com.skedgo.tripkit
 
 import android.content.res.Resources
-import android.text.TextUtils
 
 import com.google.gson.Gson
 import io.reactivex.Observable
 import io.reactivex.schedulers.Schedulers
-import skedgo.tripkit.routing.Trip
-import skedgo.tripkit.routing.TripGroup
+import com.skedgo.tripkit.routing.Trip
+import com.skedgo.tripkit.routing.TripGroup
 
 internal class TripUpdaterImpl(
     private val resources: Resources,

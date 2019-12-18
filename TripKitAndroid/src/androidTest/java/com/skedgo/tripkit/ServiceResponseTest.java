@@ -5,17 +5,16 @@ import androidx.test.platform.app.InstrumentationRegistry;
 import androidx.test.runner.AndroidJUnit4;
 import com.google.gson.Gson;
 import com.google.gson.stream.JsonReader;
-import com.skedgo.android.common.model.Location;
+import com.skedgo.tripkit.common.model.Location;
 
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 
-import com.skedgo.tripkit.ServiceResponse;
 import org.junit.Before;
 import org.junit.runner.RunWith;
-import skedgo.tripkit.routing.RealTimeVehicle;
-import skedgo.tripkit.routing.Shape;
+import com.skedgo.tripkit.routing.RealTimeVehicle;
+import com.skedgo.tripkit.routing.Shape;
 
 import static org.assertj.core.api.Java6Assertions.assertThat;
 

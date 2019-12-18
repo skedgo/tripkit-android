@@ -4,7 +4,7 @@ import com.google.gson.annotations.JsonAdapter
 import com.skedgo.tripkit.data.database.locations.carparks.ParkingOperator
 import org.immutables.gson.Gson
 import org.immutables.value.Value
-import skedgo.tripkit.parkingspots.models.Parking
+import com.skedgo.tripkit.parkingspots.models.Parking
 
 @Value.Immutable
 @Gson.TypeAdapters

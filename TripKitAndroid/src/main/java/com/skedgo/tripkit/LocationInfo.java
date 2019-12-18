@@ -3,7 +3,7 @@ package com.skedgo.tripkit;
 import androidx.annotation.Nullable;
 
 import com.google.gson.annotations.JsonAdapter;
-import com.skedgo.android.common.model.ScheduledStop;
+import com.skedgo.tripkit.common.model.ScheduledStop;
 
 import org.immutables.gson.Gson;
 import org.immutables.value.Value;

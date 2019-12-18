@@ -4,7 +4,7 @@ import dagger.Lazy
 import dagger.Module
 import dagger.Provides
 import okhttp3.OkHttpClient
-import skedgo.tripkit.configuration.GetAppVersion
+import com.skedgo.tripkit.configuration.GetAppVersion
 import java.util.*
 
 /**

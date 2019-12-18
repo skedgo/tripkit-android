@@ -1,8 +1,8 @@
 package com.skedgo.tripkit;
 
-import com.skedgo.android.common.model.Region;
-import com.skedgo.android.common.util.PolyUtil;
-import com.skedgo.android.common.util.TripKitLatLng;
+import com.skedgo.tripkit.common.model.Region;
+import com.skedgo.tripkit.common.util.PolyUtil;
+import com.skedgo.tripkit.common.util.TripKitLatLng;
 
 import java.util.List;
 import java.util.Map;

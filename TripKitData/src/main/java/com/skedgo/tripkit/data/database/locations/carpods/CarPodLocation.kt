@@ -1,7 +1,7 @@
 package com.skedgo.tripkit.data.database.locations.carpods
 
 import androidx.annotation.Keep
-import skedgo.tripkit.routing.ModeInfo
+import com.skedgo.tripkit.routing.ModeInfo
 
 @Keep
 class CarPodLocation {

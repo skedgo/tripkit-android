@@ -3,8 +3,8 @@ package com.skedgo.tripkit.data.datetime
 import android.content.Context
 import dagger.Module
 import dagger.Provides
-import skedgo.tripkit.datetime.PrintFullDate
-import skedgo.tripkit.datetime.PrintTime
+import com.skedgo.tripkit.datetime.PrintFullDate
+import com.skedgo.tripkit.datetime.PrintTime
 
 @Module
 class DateTimeDataModule {

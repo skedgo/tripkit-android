@@ -1,10 +1,9 @@
 package com.skedgo.tripkit;
 
-import com.skedgo.android.common.model.Location;
-import com.skedgo.android.common.model.Region;
-import com.skedgo.android.common.model.TransportMode;
+import com.skedgo.tripkit.common.model.Location;
+import com.skedgo.tripkit.common.model.Region;
+import com.skedgo.tripkit.common.model.TransportMode;
 
-import com.skedgo.tripkit.Utils;
 import io.reactivex.observers.TestObserver;
 import org.junit.Test;
 import org.junit.runner.RunWith;

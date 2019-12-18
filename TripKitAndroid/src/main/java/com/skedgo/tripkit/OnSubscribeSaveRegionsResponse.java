@@ -5,9 +5,9 @@ import android.database.sqlite.SQLiteDatabase;
 import androidx.annotation.NonNull;
 
 import com.google.gson.Gson;
-import com.skedgo.android.common.model.Region;
-import com.skedgo.android.common.model.RegionsResponse;
-import com.skedgo.android.common.model.TransportMode;
+import com.skedgo.tripkit.common.model.Region;
+import com.skedgo.tripkit.common.model.RegionsResponse;
+import com.skedgo.tripkit.common.model.TransportMode;
 import io.reactivex.ObservableEmitter;
 import io.reactivex.ObservableOnSubscribe;
 

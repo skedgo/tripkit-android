@@ -1,6 +1,6 @@
 package com.skedgo.tripkit
 
-import com.skedgo.android.common.model.Query
+import com.skedgo.tripkit.common.model.Query
 import io.reactivex.Observable
 import io.reactivex.functions.BiFunction
 

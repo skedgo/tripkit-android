@@ -3,7 +3,7 @@ package com.skedgo.tripkit;
 import android.database.Cursor;
 
 import com.google.gson.Gson;
-import com.skedgo.android.common.model.Region;
+import com.skedgo.tripkit.common.model.Region;
 import io.reactivex.functions.Function;
 
 final class CursorToRegionConverter implements Function<Cursor, Region> {

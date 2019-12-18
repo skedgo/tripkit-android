@@ -5,24 +5,19 @@ import androidx.test.core.app.ApplicationProvider
 import com.google.gson.GsonBuilder
 import com.nhaarman.mockitokotlin2.mock
 import com.nhaarman.mockitokotlin2.whenever
-import com.skedgo.android.common.model.GsonAdaptersBooking
-import com.skedgo.android.common.model.GsonAdaptersRealtimeAlert
-import com.skedgo.android.common.model.Location
-import com.skedgo.android.common.util.LowercaseEnumTypeAdapterFactory
-import org.amshove.kluent.`should be in`
-import org.amshove.kluent.`should contain all`
-import org.amshove.kluent.`should equal`
-import org.assertj.core.api.Assertions.assertThat
+import com.skedgo.tripkit.common.model.GsonAdaptersBooking
+import com.skedgo.tripkit.common.model.GsonAdaptersRealtimeAlert
+import com.skedgo.tripkit.common.model.Location
+import com.skedgo.tripkit.common.util.LowercaseEnumTypeAdapterFactory
 import org.junit.Assert.assertEquals
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
 
 import androidx.test.ext.junit.runners.AndroidJUnit4
-import io.reactivex.subscribers.TestSubscriber
-import skedgo.tripkit.routing.Trip
-import skedgo.tripkit.routing.TripGroup
-import skedgo.tripkit.routing.TripSegment
+import com.skedgo.tripkit.routing.Trip
+import com.skedgo.tripkit.routing.TripGroup
+import com.skedgo.tripkit.routing.TripSegment
 import java.util.*
 import java.util.concurrent.TimeUnit
 
