@@ -7,9 +7,8 @@ import org.apache.commons.io.IOUtils
 import org.junit.After
 import org.junit.Test
 import retrofit2.Retrofit
-import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory
+import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
-import rx.observers.TestSubscriber
 import java.io.IOException
 import java.nio.charset.Charset
 import java.util.*
@@ -25,7 +24,7 @@ class QuickBookingApiTest {
         .create()
     Retrofit.Builder()
         .baseUrl(baseUrl)
-        .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
+        .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
         .addConverterFactory(GsonConverterFactory.create(gson))
         .build()
         .create<QuickBookingApi>(QuickBookingApi::class.java)
@@ -55,8 +54,7 @@ class QuickBookingApiTest {
         .build()
         .toString()
 
-    val subscriber = TestSubscriber<List<QuickBooking>>()
-    api.fetchQuickBookingsAsync(url).subscribe(subscriber)
+    val subscriber = api.fetchQuickBookingsAsync(url).test()
 
     val quickBooking = ImmutableQuickBooking
         .builder()

@@ -89,7 +89,6 @@ public class Trip implements ITimeRange {
   /**
    * Use {@link TripExtensionsKt#getStartDateTime(Trip)} instead.
    */
-  @Deprecated
   public long getStartTimeInSecs() {
     return mStartTimeInSecs;
   }
@@ -104,9 +103,12 @@ public class Trip implements ITimeRange {
   /**
    * Use {@link TripExtensionsKt#getEndDateTime(Trip)} instead.
    */
-  @Deprecated
   public long getEndTimeInSecs() {
     return mEndTimeInSecs;
+  }
+
+  public long durationInSeconds() {
+    return mEndTimeInSecs - mStartTimeInSecs;
   }
 
   /**
@@ -399,6 +401,7 @@ public class Trip implements ITimeRange {
     return false;
   }
 
+  @Nullable
   public String getDisplayCost(String localizedFreeText) {
     if (mMoneyCost == 0) {
       return localizedFreeText;
@@ -412,5 +415,42 @@ public class Trip implements ITimeRange {
       String value = numberFormat.format(mMoneyCost);
       return (currencySymbol != null ? currencySymbol : "$") + value;
     }
+  }
+
+  @Nullable
+  public String getDisplayCarbonCost() {
+    if (mCarbonCost > 0) {
+      return mCarbonCost + "kg";
+    } else {
+      return null;
+    }
+  }
+
+  public String getDisplayCalories() {
+    return caloriesCost + " kcal";
+  }
+
+  public boolean isMixedModal(boolean ignoreWalking) {
+    String previousMode = "";
+    for (TripSegment segment : mSegments) {
+      if (segment.getModeInfo() == null || segment.getModeInfo().getId() == null) {
+        continue;
+      }
+
+      String currentMode = segment.getModeInfo().getId();
+      if (segment.getType() == SegmentType.STATIONARY || currentMode.isEmpty()) {
+        continue;
+      }
+
+      if ((segment.isWalking() && ignoreWalking) || !segment.getVisibility().equals(Visibilities.VISIBILITY_IN_SUMMARY)) {
+        continue;
+      }
+      if (!previousMode.isEmpty() && !currentMode.equals(previousMode)) {
+        return true;
+      }
+      previousMode = currentMode;
+    }
+
+    return false;
   }
 }

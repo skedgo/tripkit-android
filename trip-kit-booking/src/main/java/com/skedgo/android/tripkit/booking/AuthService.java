@@ -7,7 +7,7 @@ import com.skedgo.android.common.model.Region;
 
 import java.util.List;
 
-import rx.Observable;
+import io.reactivex.Observable;
 
 /**
  * Extension of {@link AuthApi} that facilitates fetching providers for a region.

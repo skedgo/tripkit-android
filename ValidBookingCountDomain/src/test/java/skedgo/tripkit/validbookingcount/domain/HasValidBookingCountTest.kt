@@ -3,8 +3,8 @@ package skedgo.tripkit.validbookingcount.domain
 import com.nhaarman.mockitokotlin2.mock
 import com.nhaarman.mockitokotlin2.whenever
 import org.junit.Test
-import rx.Observable
-import rx.observers.TestSubscriber
+import io.reactivex.Observable
+import io.reactivex.observers.TestSubscriber
 
 class HasValidBookingCountTest {
   val validBookingCountRepository: ValidBookingCountRepository = mock()

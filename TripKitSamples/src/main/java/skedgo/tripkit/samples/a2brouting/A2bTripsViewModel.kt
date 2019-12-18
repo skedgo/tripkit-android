@@ -4,25 +4,25 @@ import android.content.Context
 import com.skedgo.android.common.model.Location
 import com.skedgo.android.common.model.Query
 import com.skedgo.android.common.model.TimeTag
+import com.skedgo.tripkit.a2brouting.RouteService
 import me.tatarka.bindingcollectionadapter2.ItemBinding
 import me.tatarka.bindingcollectionadapter2.collections.DiffObservableList
-import rx.Observable
-import rx.android.schedulers.AndroidSchedulers.mainThread
-import rx.subjects.BehaviorSubject
-import rx.subjects.PublishSubject
-import skedgo.tripkit.a2brouting.RouteService
+import io.reactivex.Observable
+import io.reactivex.android.schedulers.AndroidSchedulers.mainThread
+import io.reactivex.subjects.BehaviorSubject
+import io.reactivex.subjects.PublishSubject
 import skedgo.tripkit.routing.Trip
 import skedgo.tripkit.routing.TripGroupComparators
 import skedgo.tripkit.samples.BR
 import skedgo.tripkit.samples.R
 
 class A2bTripsViewModel constructor(
-    private val context: Context,
-    private val routeService: RouteService
+        private val routeService: RouteService,
+        private val context: Context
 ) {
   internal val onTripSelected: PublishSubject<Trip> = PublishSubject.create()
-  private val _isRefreshing: BehaviorSubject<Boolean> = BehaviorSubject.create(false)
-  val isRefreshing: Observable<Boolean> get() = _isRefreshing.asObservable()
+  private val _isRefreshing: BehaviorSubject<Boolean> = BehaviorSubject.create()
+  val isRefreshing: Observable<Boolean> get() = _isRefreshing.hide()
   val items: DiffObservableList<TripViewModel> = DiffObservableList<TripViewModel>(GroupDiffCallback)
   val itemBinding: ItemBinding<TripViewModel> = ItemBinding.of(BR.viewModel, R.layout.trip)
 
@@ -49,7 +49,7 @@ class A2bTripsViewModel constructor(
         Pair(it, items.calculateDiff(it))
       }
       .doOnSubscribe { _isRefreshing.onNext(true) }
-      .doOnUnsubscribe { _isRefreshing.onNext(false) }
+      .doFinally { _isRefreshing.onNext(false) }
       .doOnNext { items.update(it.first, it.second) }
       .map { Unit }
 }

@@ -3,9 +3,8 @@ package skedgo.tripkit.account.domain
 import com.nhaarman.mockitokotlin2.mock
 import com.nhaarman.mockitokotlin2.whenever
 import org.junit.Test
-import rx.Observable.*
-import rx.observers.TestSubscriber
-import rx.subjects.PublishSubject
+import io.reactivex.Observable.*
+import io.reactivex.subjects.PublishSubject
 
 class HasUserTokenTest {
   val userTokenRepository: UserTokenRepository = mock()
@@ -16,9 +15,7 @@ class HasUserTokenTest {
     whenever(userTokenRepository.getLastKnownUserToken()).thenReturn(just(userToken))
     whenever(userTokenRepository.onUserTokenChanged()).thenReturn(never())
 
-    val subscriber = TestSubscriber<Boolean>()
-    hasUserToken.execute().subscribe(subscriber)
-
+    val subscriber = hasUserToken.execute().test()
     subscriber.assertValue(true)
   }
 
@@ -26,9 +23,7 @@ class HasUserTokenTest {
     whenever(userTokenRepository.getLastKnownUserToken()).thenReturn(empty())
     whenever(userTokenRepository.onUserTokenChanged()).thenReturn(never())
 
-    val subscriber = TestSubscriber<Boolean>()
-    hasUserToken.execute().subscribe(subscriber)
-
+    val subscriber = hasUserToken.execute().test()
     subscriber.assertValue(false)
   }
 
@@ -39,12 +34,11 @@ class HasUserTokenTest {
     val onUserTokenChanged: PublishSubject<Any> = PublishSubject.create()
     whenever(userTokenRepository.onUserTokenChanged()).thenReturn(onUserTokenChanged)
 
-    val subscriber = TestSubscriber<Boolean>()
-    hasUserToken.execute().subscribe(subscriber)
+    val subscriber = hasUserToken.execute().test()
 
     subscriber.assertValue(true)
 
-    onUserTokenChanged.onNext(null)
+    onUserTokenChanged.onNext(String())
     subscriber.assertValues(true, true)
   }
 }

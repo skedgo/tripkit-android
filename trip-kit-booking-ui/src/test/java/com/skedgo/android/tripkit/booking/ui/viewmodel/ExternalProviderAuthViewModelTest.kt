@@ -7,19 +7,15 @@ import com.nhaarman.mockitokotlin2.mock
 import com.nhaarman.mockitokotlin2.verify
 import com.nhaarman.mockitokotlin2.whenever
 import com.skedgo.android.tripkit.booking.BookingForm
-import com.skedgo.android.tripkit.booking.ui.BuildConfig
 import com.skedgo.android.tripkit.booking.ui.OAuth2CallbackHandler
-import com.skedgo.android.tripkit.booking.ui.TestRunner
 import com.skedgo.android.tripkit.booking.ui.activity.KEY_FORM
 import org.assertj.core.api.Java6Assertions.assertThat
 import org.junit.Test
 import org.junit.runner.RunWith
-import org.robolectric.annotation.Config
-import rx.Observable
-import rx.observers.TestSubscriber
+import org.robolectric.RobolectricTestRunner
+import io.reactivex.Observable
 
-@RunWith(TestRunner::class)
-@Config(constants = BuildConfig::class)
+@RunWith(RobolectricTestRunner::class)
 class ExternalProviderAuthViewModelTest {
 
   private val viewModel: ExternalProviderAuthViewModel by lazy {
@@ -116,9 +112,7 @@ class ExternalProviderAuthViewModelTest {
     whenever(bookingForm.isOAuthForm).thenReturn(true)
     whenever(bookingForm.oAuthLink).thenReturn(Uri.parse("http://url"))
 
-    val subscriber = TestSubscriber<Intent>()
-
-    viewModel.handledForm(bookingForm).subscribe(subscriber)
+    val subscriber = viewModel.handledForm(bookingForm).test()
 
     subscriber.awaitTerminalEvent()
     subscriber.assertNoValues()
@@ -130,13 +124,12 @@ class ExternalProviderAuthViewModelTest {
 
   @Test fun shouldHandleNullBookingForm() {
 
-    val subscriber = TestSubscriber<Intent>()
-    viewModel.handledForm(null).subscribe(subscriber)
+    val subscriber = viewModel.handledForm(null).test()
 
     subscriber.awaitTerminalEvent()
     subscriber.assertNoErrors()
 
-    val intent = subscriber.onNextEvents[0]
+    val intent = subscriber.values()[0]
 
     val bookingFormResult = intent.getParcelableExtra<BookingForm>(KEY_FORM)
     assertThat(bookingFormResult).isNull()
@@ -147,14 +140,12 @@ class ExternalProviderAuthViewModelTest {
     whenever(bookingForm.isOAuthForm).thenReturn(false)
     whenever(bookingForm.oAuthLink).thenReturn(null)
 
-    val subscriber = TestSubscriber<Intent>()
-
-    viewModel.handledForm(bookingForm).subscribe(subscriber)
+    val subscriber = viewModel.handledForm(bookingForm).test()
 
     subscriber.awaitTerminalEvent()
     subscriber.assertNoErrors()
 
-    val intent = subscriber.onNextEvents[0]
+    val intent = subscriber.values()[0]
 
     val bookingFormResult = intent.getParcelableExtra<BookingForm>(KEY_FORM)
     assertThat(bookingFormResult).isEqualTo(bookingForm)
@@ -165,9 +156,7 @@ class ExternalProviderAuthViewModelTest {
     whenever(bookingForm.isOAuthForm).thenReturn(true)
     whenever(bookingForm.oAuthLink).thenReturn(Uri.parse("http://url"))
 
-    val subscriber = TestSubscriber<Intent>()
-
-    viewModel.handledForm(bookingForm).subscribe(subscriber)
+    val subscriber = viewModel.handledForm(bookingForm).test()
 
     subscriber.awaitTerminalEvent()
     subscriber.assertNoValues()

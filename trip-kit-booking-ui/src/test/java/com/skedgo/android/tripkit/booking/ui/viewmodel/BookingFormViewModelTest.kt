@@ -5,8 +5,6 @@ import android.os.Bundle
 import com.nhaarman.mockitokotlin2.mock
 import com.nhaarman.mockitokotlin2.whenever
 import com.skedgo.android.tripkit.booking.*
-import com.skedgo.android.tripkit.booking.ui.BuildConfig
-import com.skedgo.android.tripkit.booking.ui.TestRunner
 import com.skedgo.android.tripkit.booking.ui.activity.*
 import com.skedgo.android.tripkit.booking.ui.usecase.GetBookingFormFromAction
 import com.skedgo.android.tripkit.booking.ui.usecase.GetBookingFormFromUrl
@@ -15,18 +13,16 @@ import com.skedgo.android.tripkit.booking.ui.usecase.IsDoneAction
 import org.assertj.core.api.Java6Assertions.assertThat
 import org.junit.Test
 import org.junit.runner.RunWith
-import org.robolectric.RuntimeEnvironment
-import org.robolectric.annotation.Config
-import rx.Observable
-import rx.observers.TestSubscriber
+import androidx.test.core.app.ApplicationProvider
+import org.robolectric.RobolectricTestRunner
+import io.reactivex.Observable
 import java.net.SocketTimeoutException
 
 
-@RunWith(TestRunner::class)
-@Config(constants = BuildConfig::class)
+@RunWith(RobolectricTestRunner::class)
 class BookingFormViewModelTest {
 
-  private val resources: Resources = RuntimeEnvironment.application.resources
+  private val resources: Resources = (ApplicationProvider.getApplicationContext() as android.content.Context).resources
   private val getBookingFormFromUrl: GetBookingFormFromUrl = mock()
   private val getBookingFormFromAction: GetBookingFormFromAction = mock()
   private val isCancelAction: IsCancelAction = mock()
@@ -44,8 +40,7 @@ class BookingFormViewModelTest {
     whenever(isCancelAction.execute(bookingForm)).thenReturn(true)
     whenever(isDoneAction.execute(bookingForm)).thenReturn(true)
 
-    val subscriber = TestSubscriber<Boolean>()
-    viewModel.onCancel.subscribe(subscriber)
+    val subscriber = viewModel.onCancel.test()
 
     viewModel.bookingForm = bookingForm
 
@@ -62,8 +57,7 @@ class BookingFormViewModelTest {
     whenever(isCancelAction.execute(bookingForm)).thenReturn(false)
     whenever(isDoneAction.execute(bookingForm)).thenReturn(true)
 
-    val subscriber = TestSubscriber<BookingForm>()
-    viewModel.onDone.subscribe(subscriber)
+    val subscriber = viewModel.onDone.test()
 
     viewModel.bookingForm = bookingForm
 
@@ -80,8 +74,7 @@ class BookingFormViewModelTest {
     whenever(isCancelAction.execute(bookingForm)).thenReturn(false)
     whenever(isDoneAction.execute(bookingForm)).thenReturn(false)
 
-    val subscriber = TestSubscriber<BookingForm>()
-    viewModel.onNextBookingFormAction.subscribe(subscriber)
+    val subscriber = viewModel.onNextBookingFormAction.test()
 
     viewModel.bookingForm = bookingForm
 
@@ -96,8 +89,7 @@ class BookingFormViewModelTest {
     val bookingError = mock<BookingError>()
     whenever(bookingError.url).thenReturn("retry url")
 
-    val subscriber = TestSubscriber<String>()
-    viewModel.onErrorRetry.subscribe(subscriber)
+    val subscriber = viewModel.onErrorRetry.test()
 
     viewModel.bookingError = bookingError
 
@@ -109,8 +101,7 @@ class BookingFormViewModelTest {
 
   @Test
   fun shouldEmitCancel() {
-    val subscriber = TestSubscriber<Boolean>()
-    viewModel.onCancel.subscribe(subscriber)
+    val subscriber = viewModel.onCancel.test()
 
     viewModel.onCancel()
 
@@ -164,8 +155,7 @@ class BookingFormViewModelTest {
 
     viewModel.bookingForm = bookingForm
 
-    val subscriber = TestSubscriber<String>()
-    viewModel.onUpdateFormTitle.subscribe(subscriber)
+    val subscriber = viewModel.onUpdateFormTitle.test()
 
     viewModel.updateBookingFormInfo()
 
@@ -184,8 +174,7 @@ class BookingFormViewModelTest {
 
     viewModel.bookingForm = bookingForm
 
-    val subscriber = TestSubscriber<String>()
-    viewModel.onUpdateFormTitle.subscribe(subscriber)
+    val subscriber = viewModel.onUpdateFormTitle.test()
 
     viewModel.updateBookingFormInfo()
 
@@ -227,9 +216,7 @@ class BookingFormViewModelTest {
   @Test
   fun shouldEmitErrorOnFetchBookingForm() {
     val bundle = Bundle()
-    val subscriber = TestSubscriber<Any?>()
-
-    viewModel.fetchBookingFormAsync(bundle).subscribe(subscriber)
+    val subscriber = viewModel.fetchBookingFormAsync(bundle).test()
 
     subscriber.assertError(Error::class.java)
   }
@@ -242,9 +229,7 @@ class BookingFormViewModelTest {
     bundle.putInt(KEY_TYPE, BOOKING_TYPE_FORM)
     bundle.putParcelable(KEY_FORM, bookingForm)
 
-    val subscriber = TestSubscriber<Any?>()
-
-    viewModel.fetchBookingFormAsync(bundle).subscribe(subscriber)
+    val subscriber = viewModel.fetchBookingFormAsync(bundle).test()
 
     subscriber.assertValue(bookingForm)
     assertThat(viewModel.bookingForm).isEqualTo(bookingForm)
@@ -260,9 +245,7 @@ class BookingFormViewModelTest {
 
     whenever(getBookingFormFromUrl.execute("url")).thenReturn(Observable.just(bookingForm))
 
-    val subscriber = TestSubscriber<Any?>()
-
-    viewModel.fetchBookingFormAsync(bundle).subscribe(subscriber)
+    val subscriber = viewModel.fetchBookingFormAsync(bundle).test()
 
     subscriber.assertValue(bookingForm)
     assertThat(viewModel.bookingForm).isEqualTo(bookingForm)
@@ -279,9 +262,7 @@ class BookingFormViewModelTest {
 
     whenever(getBookingFormFromAction.execute(bookingFormAction)).thenReturn(Observable.just(bookingForm))
 
-    val subscriber = TestSubscriber<Any?>()
-
-    viewModel.fetchBookingFormAsync(bundle).subscribe(subscriber)
+    val subscriber = viewModel.fetchBookingFormAsync(bundle).test()
 
     subscriber.assertValue(bookingForm)
     assertThat(viewModel.bookingForm).isEqualTo(bookingForm)
@@ -295,16 +276,13 @@ class BookingFormViewModelTest {
     bundle.putInt(KEY_TYPE, BOOKING_TYPE_ACTION)
     bundle.putParcelable(KEY_FORM, bookingFormAction)
 
-    whenever(getBookingFormFromAction.execute(bookingFormAction)).thenReturn(Observable.just(null))
+    whenever(getBookingFormFromAction.execute(bookingFormAction)).thenReturn(Observable.empty())
 
-    val subscriber = TestSubscriber<Any?>()
-    val subscriberDone = TestSubscriber<Any?>()
+    val subscriberDone = viewModel.onDone.test()
+    val subscriber = viewModel.fetchBookingFormAsync(bundle).test()
 
-    viewModel.onDone.subscribe(subscriberDone)
-    viewModel.fetchBookingFormAsync(bundle).subscribe(subscriber)
-
-    subscriber.assertValue(null)
-    subscriberDone.assertValue(null)
+    subscriber.assertComplete()
+    subscriberDone.assertEmpty()
   }
 
   @Test
@@ -317,11 +295,8 @@ class BookingFormViewModelTest {
 
     whenever(getBookingFormFromAction.execute(bookingFormAction)).thenReturn(Observable.just(NullBookingForm))
 
-    val subscriber = TestSubscriber<Any?>()
-    val subscriberDone = TestSubscriber<Any?>()
-
-    viewModel.onDone.subscribe(subscriberDone)
-    viewModel.fetchBookingFormAsync(bundle).subscribe(subscriber)
+    val subscriberDone = viewModel.onDone.test()
+    val subscriber = viewModel.fetchBookingFormAsync(bundle).test()
 
     subscriber.assertValue(NullBookingForm)
     subscriberDone.assertValue(NullBookingForm)

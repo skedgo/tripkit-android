@@ -8,8 +8,8 @@ import android.webkit.WebView
 import android.webkit.WebViewClient
 import com.skedgo.android.tripkit.booking.ExternalFormField
 import com.skedgo.android.tripkit.booking.ui.activity.KEY_EXTERNAL_FORM
-import rx.Observable
-import rx.subjects.PublishSubject
+import io.reactivex.Observable
+import io.reactivex.subjects.PublishSubject
 import javax.inject.Inject
 
 class ExternalViewModel @Inject internal constructor() : DisposableViewModel() {
@@ -19,7 +19,7 @@ class ExternalViewModel @Inject internal constructor() : DisposableViewModel() {
 
   val showWebView: ObservableBoolean = ObservableBoolean(false)
   val url: ObservableField<String> = ObservableField()
-  val nextUrlObservable: Observable<String> = publishSubjectNextUrl.asObservable()
+  val nextUrlObservable: Observable<String> = publishSubjectNextUrl.hide()
 
 
   fun handleArgs(args: Bundle) {

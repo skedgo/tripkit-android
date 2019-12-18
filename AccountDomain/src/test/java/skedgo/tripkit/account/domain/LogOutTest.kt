@@ -4,8 +4,7 @@ import com.nhaarman.mockitokotlin2.mock
 import org.junit.Test
 import org.mockito.BDDMockito.given
 import org.mockito.Mockito.verify
-import rx.Observable.just
-import rx.observers.TestSubscriber
+import io.reactivex.Observable.just
 
 class LogOutTest {
   val userTokenRepository: UserTokenRepository = mock()
@@ -14,8 +13,7 @@ class LogOutTest {
   @Test fun shouldClearTokenByLoggingOut() {
     given(userTokenRepository.clearUserTokenByLoggingOut()).willReturn(just(true))
 
-    val subscriber = TestSubscriber<Boolean>()
-    logOut.execute().subscribe(subscriber)
+    val subscriber = logOut.execute().test()
 
     subscriber.assertValue(true)
     verify(userTokenRepository).clearUserTokenByLoggingOut()

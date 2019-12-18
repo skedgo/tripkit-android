@@ -10,9 +10,9 @@ import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.*
 import com.google.android.material.bottomsheet.BottomSheetBehavior
-import rx.Observable
-import skedgo.tripkit.a2brouting.GetNonTravelledLineForTrip
-import skedgo.tripkit.a2brouting.GetTravelledLineForTrip
+import com.skedgo.tripkit.a2brouting.GetNonTravelledLineForTrip
+import com.skedgo.tripkit.a2brouting.GetTravelledLineForTrip
+import io.reactivex.Observable
 import skedgo.tripkit.routing.Trip
 import skedgo.tripkit.samples.R
 import skedgo.tripkit.samples.databinding.TripDetailsBinding

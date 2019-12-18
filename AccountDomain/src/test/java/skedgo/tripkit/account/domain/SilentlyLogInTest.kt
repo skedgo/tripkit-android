@@ -2,9 +2,8 @@ package skedgo.tripkit.account.domain
 
 import com.nhaarman.mockitokotlin2.*
 import org.junit.Test
-import rx.Observable.empty
-import rx.Observable.just
-import rx.observers.TestSubscriber
+import io.reactivex.Observable.empty
+import io.reactivex.Observable.just
 
 class SilentlyLogInTest {
   val userTokenRepository: UserTokenRepository = mock()
@@ -17,8 +16,7 @@ class SilentlyLogInTest {
     val userToken = UserToken("In critical moments, men sometimes see exactly what they wish to see.")
     whenever(userTokenRepository.getLastKnownUserToken()).thenReturn(just(userToken))
 
-    val subscriber = TestSubscriber<UserToken>()
-    silentlyLogIn.execute().subscribe(subscriber)
+    val subscriber = silentlyLogIn.execute().test()
 
     subscriber.assertValue(userToken)
     verify(userTokenRepository).getLastKnownUserToken()
@@ -32,8 +30,7 @@ class SilentlyLogInTest {
     whenever(userTokenRepository.getUserTokenByUserIdentifier(any())).thenReturn(just(userToken))
     whenever(getUserIdentifier.execute()).thenReturn(just("spock@vulcan.com"))
 
-    val subscriber = TestSubscriber<UserToken>()
-    silentlyLogIn.execute().subscribe(subscriber)
+    val subscriber = silentlyLogIn.execute().test()
 
     subscriber.assertValue(userToken)
     verify(userTokenRepository).getLastKnownUserToken()

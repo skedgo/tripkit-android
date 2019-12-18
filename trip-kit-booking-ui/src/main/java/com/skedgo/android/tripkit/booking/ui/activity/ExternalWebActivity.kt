@@ -12,8 +12,8 @@ import com.skedgo.android.tripkit.booking.ui.DaggerBookingUiComponent
 import com.skedgo.android.tripkit.booking.ui.R
 import com.skedgo.android.tripkit.booking.ui.databinding.ExternalWebBinding
 import com.skedgo.android.tripkit.booking.ui.viewmodel.ExternalViewModel
-import rx.android.schedulers.AndroidSchedulers
-import skedgo.rxlifecyclecomponents.RxAppCompatActivity
+import io.reactivex.android.schedulers.AndroidSchedulers
+import com.skedgo.rxlifecyclecomponents.RxAppCompatActivity
 import java.io.Serializable
 import javax.inject.Inject
 

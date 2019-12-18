@@ -3,6 +3,7 @@ package skedgo.tripkit.datetime
 import com.nhaarman.mockitokotlin2.eq
 import com.nhaarman.mockitokotlin2.mock
 import com.nhaarman.mockitokotlin2.whenever
+import com.skedgo.tripkit.data.datetime.PrintFullDateImpl
 import org.joda.time.DateTime
 import org.junit.Test
 import java.util.*
@@ -13,7 +14,7 @@ class PrintFullDateImplTest {
   private val printFullDateByJoda: (DateTime, Locale) -> String = mock()
   private val printFullDateByJava: (Date, Locale) -> String = mock()
   private val printFullDate: PrintFullDate by lazy {
-    PrintFullDateImpl(getLocale, printFullDateByJoda, printFullDateByJava)
+      PrintFullDateImpl(getLocale, printFullDateByJoda, printFullDateByJava)
   }
 
   @Test fun `Should print full date by Java`() {
@@ -26,11 +27,11 @@ class PrintFullDateImplTest {
     whenever(printFullDateByJava.invoke(eq(dateTime.toDate()), eq(Locale.US)))
         .thenReturn(expectedPrint)
 
-    printFullDate.execute(dateTime)
+    val subscriber = printFullDate.execute(dateTime)
         .test()
-        .awaitTerminalEvent()
-        .assertNoErrors()
-        .assertValue(expectedPrint)
+    subscriber.awaitTerminalEvent();
+    subscriber.assertNoErrors()
+    subscriber.assertValue(expectedPrint)
   }
 
   @Test fun `Should print full date by Joda`() {
@@ -41,19 +42,19 @@ class PrintFullDateImplTest {
     whenever(printFullDateByJoda.invoke(eq(dateTime), eq(Locale.US)))
         .thenReturn(expectedPrint)
 
-    printFullDate.execute(dateTime)
-        .test()
-        .awaitTerminalEvent()
-        .assertNoErrors()
-        .assertValue(expectedPrint)
+    val subscriber = printFullDate.execute(dateTime)
+            .test()
+    subscriber.awaitTerminalEvent();
+    subscriber.assertNoErrors()
+    subscriber.assertValue(expectedPrint)
   }
 
   @Test fun `Should print full date correctly when using default impls`() {
-    PrintFullDateImpl(getLocale = { Locale.US })
+    val subscriber = PrintFullDateImpl(getLocale = { Locale.US })
         .execute(DateTime.parse("2017-05-01T00:00"))
         .test()
-        .awaitTerminalEvent()
-        .assertNoErrors()
-        .assertValue("Monday, May 1, 2017")
+    subscriber.awaitTerminalEvent()
+    subscriber.assertNoErrors()
+    subscriber.assertValue("Monday, May 1, 2017")
   }
 }

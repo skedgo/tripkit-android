@@ -6,9 +6,6 @@
   <data>
 
     <import type="com.skedgo.android.tripkit.booking.ui.activity.BookingActivity" />
-
-    <import type="me.tatarka.bindingcollectionadapter2.LayoutManagers" />
-
     <variable
       name="viewModel"
       type="com.skedgo.android.tripkit.booking.ui.viewmodel.BookingFormViewModel" />
@@ -31,7 +28,7 @@
         android:visibility="@{!viewModel.hasError}"
         app:itemBinding="@{BookingActivity.bookingFormsView()}"
         app:items="@{viewModel.items}"
-        app:layoutManager="@{LayoutManagers.linear()}" />
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"/>
 
       <Button
         android:id="@id/actionButton"

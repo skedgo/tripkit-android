@@ -1,40 +1,33 @@
 package com.skedgo.android.common.rx;
 
-import com.skedgo.android.common.BuildConfig;
-
+import io.reactivex.subjects.Subject;
+import io.reactivex.subscribers.TestSubscriber;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.robolectric.RobolectricTestRunner;
-import org.robolectric.annotation.Config;
 
 import java.util.Arrays;
 
-import rx.observers.TestSubscriber;
-import rx.subjects.Subject;
-
 import static java.util.Collections.singletonList;
-import static org.assertj.core.api.Java6Assertions.*;
+import static org.assertj.core.api.Java6Assertions.assertThat;
 
 @RunWith(RobolectricTestRunner.class)
-@Config(constants = BuildConfig.class)
 public class VarTest {
   @Test public void shouldNotEmitValueIfNoDefaultValue() {
     final Var<String> v = Var.create();
-    final TestSubscriber<String> subscriber = new TestSubscriber<>();
-    v.observe().subscribe(subscriber);
+    final TestSubscriber<String> subscriber = v.observe().test();
 
     subscriber.assertNoErrors();
-    assertThat(subscriber.getOnNextEvents()).isEmpty();
+    assertThat(subscriber.getEvents().get(0)).isEmpty();
   }
 
   @Test public void shouldEmitDefaultValue() {
     final String defaultValue = "Awesome!";
     final Var<String> v = Var.create(defaultValue);
-    final TestSubscriber<String> subscriber = new TestSubscriber<>();
-    v.observe().subscribe(subscriber);
+    final TestSubscriber<String> subscriber = v.observe().test();
 
     subscriber.assertNoErrors();
-    subscriber.assertReceivedOnNext(singletonList(defaultValue));
+    subscriber.assertValueSequence(singletonList(defaultValue));
   }
 
   @Test public void valueShouldBeDefaultValue() {
@@ -63,11 +56,11 @@ public class VarTest {
     final TestSubscriber<String> subscriber = new TestSubscriber<>();
     v.observe().subscribe(subscriber);
     v.put("A");
-    subscriber.assertReceivedOnNext(singletonList("A"));
+    subscriber.assertValueSequence(singletonList("A"));
     v.put("B");
-    subscriber.assertReceivedOnNext(Arrays.asList("A", "B"));
+    subscriber.assertValueSequence(Arrays.asList("A", "B"));
     v.put("C");
-    subscriber.assertReceivedOnNext(Arrays.asList("A", "B", "C"));
+    subscriber.assertValueSequence(Arrays.asList("A", "B", "C"));
   }
 
   @Test public void shouldNotLeakSubject() {

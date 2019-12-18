@@ -5,7 +5,7 @@ import retrofit2.http.Body;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
 import retrofit2.http.Url;
-import rx.Observable;
+import io.reactivex.Observable;
 
 public interface BookingApi {
   @GET Observable<Response<BookingForm>> getFormAsync(@Url String url);

@@ -3,17 +3,13 @@ package com.skedgo.android.tripkit.booking.ui.viewmodel
 import com.nhaarman.mockitokotlin2.mock
 import com.nhaarman.mockitokotlin2.whenever
 import com.skedgo.android.tripkit.booking.ExternalFormField
-import com.skedgo.android.tripkit.booking.ui.BuildConfig
-import com.skedgo.android.tripkit.booking.ui.TestRunner
 import org.assertj.core.api.Java6Assertions.assertThat
 import org.junit.Test
 import org.junit.runner.RunWith
-import org.robolectric.annotation.Config
-import rx.observers.TestSubscriber
-import rx.subjects.PublishSubject
+import org.robolectric.RobolectricTestRunner
+import io.reactivex.subjects.PublishSubject
 
-@RunWith(TestRunner::class)
-@Config(constants = BuildConfig::class)
+@RunWith(RobolectricTestRunner::class)
 class FieldExternalViewModelTest {
 
   @Test fun shouldSetTitle() {
@@ -44,8 +40,7 @@ class FieldExternalViewModelTest {
 
     val onExternalForm: PublishSubject<ExternalFormField> = PublishSubject.create()
 
-    val subscriber = TestSubscriber<ExternalFormField>()
-    onExternalForm.subscribe(subscriber)
+    val subscriber = onExternalForm.test()
 
     val viewModel: FieldExternalViewModel = FieldExternalViewModel(externalFormField, onExternalForm)
 

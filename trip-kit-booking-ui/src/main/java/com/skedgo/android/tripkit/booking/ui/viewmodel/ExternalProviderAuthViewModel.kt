@@ -12,8 +12,8 @@ import android.webkit.WebViewClient
 import com.skedgo.android.tripkit.booking.BookingForm
 import com.skedgo.android.tripkit.booking.ui.OAuth2CallbackHandler
 import com.skedgo.android.tripkit.booking.ui.activity.KEY_FORM
-import rx.Observable
-import rx.subjects.PublishSubject
+import io.reactivex.Observable
+import io.reactivex.subjects.PublishSubject
 import javax.inject.Inject
 
 class ExternalProviderAuthViewModel @Inject internal constructor() : DisposableViewModel() {
@@ -21,7 +21,7 @@ class ExternalProviderAuthViewModel @Inject internal constructor() : DisposableV
   private val publishSubjectIntent = PublishSubject.create<Intent>()
   val url: ObservableField<String> = ObservableField()
   val showWebView: ObservableBoolean = ObservableBoolean(false)
-  val intentObservable: Observable<Intent> = publishSubjectIntent.asObservable()
+  val intentObservable: Observable<Intent> = publishSubjectIntent.hide()
 
   @VisibleForTesting var bookingForm: BookingForm? = null
 
@@ -90,7 +90,7 @@ class ExternalProviderAuthViewModel @Inject internal constructor() : DisposableV
           subscriber.onNext(data)
         }
       }
-      subscriber.onCompleted()
+      subscriber.onComplete()
     }
   }
 

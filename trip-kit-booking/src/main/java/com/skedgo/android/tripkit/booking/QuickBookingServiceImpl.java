@@ -4,7 +4,7 @@ import androidx.annotation.NonNull;
 
 import java.util.List;
 
-import rx.Observable;
+import io.reactivex.Observable;
 
 public class QuickBookingServiceImpl implements QuickBookingService {
 

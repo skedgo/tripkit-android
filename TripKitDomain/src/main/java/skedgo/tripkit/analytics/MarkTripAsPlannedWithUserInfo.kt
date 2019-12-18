@@ -1,6 +1,7 @@
 package skedgo.tripkit.analytics
 
-import rx.Completable
+import io.reactivex.Completable
+
 
 /**
  * Example use-case: Mark a trip as planned, and

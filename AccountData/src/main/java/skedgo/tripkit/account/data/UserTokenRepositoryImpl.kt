@@ -1,9 +1,11 @@
 package skedgo.tripkit.account.data
 
 import android.content.SharedPreferences
-import rx.Emitter
-import rx.Observable
-import rx.schedulers.Schedulers
+import io.reactivex.BackpressureStrategy
+import io.reactivex.Emitter
+import io.reactivex.Flowable
+import io.reactivex.Observable
+import io.reactivex.schedulers.Schedulers
 import skedgo.tripkit.account.domain.SignInCredentials
 import skedgo.tripkit.account.domain.SignUpCredentials
 import skedgo.tripkit.account.domain.UserToken
@@ -84,13 +86,13 @@ internal class UserTokenRepositoryImpl constructor(
     true
   }
 
-  private fun SharedPreferences.onChange(observedKey: String) = Observable
+  private fun SharedPreferences.onChange(observedKey: String) = Flowable
       .create<String>({
         val listener = SharedPreferences.OnSharedPreferenceChangeListener { _, key ->
           it.onNext(key)
         }
         registerOnSharedPreferenceChangeListener(listener)
-        it.setCancellation { unregisterOnSharedPreferenceChangeListener(listener) }
-      }, Emitter.BackpressureMode.BUFFER)
-      .filter { it == observedKey }
+        it.setCancellable { unregisterOnSharedPreferenceChangeListener(listener) }
+      }, BackpressureStrategy.BUFFER)
+      .filter { it == observedKey }.toObservable()
 }

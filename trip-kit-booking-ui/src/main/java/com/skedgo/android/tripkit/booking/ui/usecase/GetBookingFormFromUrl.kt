@@ -2,7 +2,7 @@ package com.skedgo.android.tripkit.booking.ui.usecase
 
 import com.skedgo.android.tripkit.booking.BookingForm
 import com.skedgo.android.tripkit.booking.BookingService
-import rx.Observable
+import io.reactivex.Observable
 import javax.inject.Inject
 
 open class GetBookingFormFromUrl @Inject constructor(
@@ -10,7 +10,7 @@ open class GetBookingFormFromUrl @Inject constructor(
 ) {
 
   open fun execute(url: String): Observable<BookingForm> {
-    return bookingService.getFormAsync(url)
+    return bookingService.getFormAsync(url).toObservable()
   }
 
 }

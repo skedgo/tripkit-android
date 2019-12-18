@@ -11,9 +11,6 @@ import com.skedgo.android.common.util.StringUtils;
 import skedgo.tripkit.routing.LocationExtensionsKt;
 
 public class Location implements Parcelable {
-  public static final double SYDNEY_LAT = -33.871008;
-  public static final double SYDNEY_LON = 151.209555;
-
   /**
    * No known location type
    */

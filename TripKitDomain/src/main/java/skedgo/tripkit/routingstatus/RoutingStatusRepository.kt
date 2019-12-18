@@ -1,7 +1,7 @@
 package skedgo.tripkit.routingstatus
 
-import rx.Completable
-import rx.Observable
+import io.reactivex.Completable
+import io.reactivex.Observable
 
 interface RoutingStatusRepository {
   fun getRoutingStatus(requestId: String): Observable<RoutingStatus>

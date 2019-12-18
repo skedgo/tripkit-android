@@ -9,8 +9,8 @@ import java.util.List;
 
 import okhttp3.HttpUrl;
 import retrofit2.http.Url;
-import rx.Observable;
-import rx.functions.Func1;
+import io.reactivex.Observable;
+import io.reactivex.functions.Function;
 
 final class AuthServiceImpl implements AuthService {
   private final AuthApi api;
@@ -23,9 +23,9 @@ final class AuthServiceImpl implements AuthService {
   public Observable<List<AuthProvider>> fetchProvidersByRegionAsync(@NonNull final Region region,
                                                                     @Nullable final String mode,
                                                                     final boolean bsb) {
-    return Observable.from(region.getURLs())
-        .concatMapDelayError(new Func1<String, Observable<? extends List<AuthProvider>>>() {
-          @Override public Observable<? extends List<AuthProvider>> call(String url) {
+    return Observable.fromIterable(region.getURLs())
+        .concatMapDelayError(new Function<String, Observable<? extends List<AuthProvider>>>() {
+          @Override public Observable<? extends List<AuthProvider>> apply(String url) {
 
             HttpUrl.Builder builder = HttpUrl.parse(url).newBuilder()
                 .addPathSegment("auth")
@@ -42,7 +42,7 @@ final class AuthServiceImpl implements AuthService {
             return fetchProvidersAsync(builder.build());
           }
         })
-        .first();
+        .firstElement().toObservable();
   }
 
   @Override public Observable<List<AuthProvider>> fetchProvidersAsync(@Url HttpUrl url) {

@@ -3,12 +3,13 @@ package com.skedgo.android.tripkit.booking;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
+import io.reactivex.observers.TestObserver;
 import org.apache.commons.io.IOUtils;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.robolectric.annotation.Config;
+import org.robolectric.RobolectricTestRunner;
 
 import java.io.IOException;
 import java.nio.charset.Charset;
@@ -19,14 +20,12 @@ import okhttp3.HttpUrl;
 import okhttp3.mockwebserver.MockResponse;
 import okhttp3.mockwebserver.MockWebServer;
 import retrofit2.Retrofit;
-import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory;
+import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
-import rx.observers.TestSubscriber;
 
-import static org.assertj.core.api.Java6Assertions.*;
+import static org.assertj.core.api.Java6Assertions.assertThat;
 
-@RunWith(TestRunner.class)
-@Config(constants = BuildConfig.class)
+@RunWith(RobolectricTestRunner.class)
 public class AuthApiTest {
   private MockWebServer server;
   private AuthApi api;
@@ -40,7 +39,7 @@ public class AuthApiTest {
     baseUrl = server.url("/");
     api = new Retrofit.Builder()
         .baseUrl(baseUrl)
-        .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
+        .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
         .addConverterFactory(GsonConverterFactory.create(gson))
         .build()
         .create(AuthApi.class);
@@ -63,8 +62,7 @@ public class AuthApiTest {
         .addPathSegment("auth")
         .addPathSegment("US_CO_Denver")
         .build();
-    final TestSubscriber<List<AuthProvider>> subscriber = new TestSubscriber<>();
-    api.fetchProvidersAsync(url).subscribe(subscriber);
+    final TestObserver<List<AuthProvider>> subscriber = api.fetchProvidersAsync(url).test();
 
     subscriber.awaitTerminalEvent();
     subscriber.assertNoErrors();
@@ -103,12 +101,11 @@ public class AuthApiTest {
         .addPathSegment("signin")
         .build()
         .toString();
-    final TestSubscriber<BookingForm> subscriber = new TestSubscriber<>();
-    api.signInAsync(url).subscribe(subscriber);
+    final TestObserver<BookingForm> subscriber = api.signInAsync(url).test();
 
     subscriber.awaitTerminalEvent();
     subscriber.assertNoErrors();
-    final BookingForm form = subscriber.getOnNextEvents().get(0);
+    final BookingForm form = subscriber.values().get(0);
     assertThat(form.getTitle()).isEqualTo("Authorization");
     assertThat(form.getAction()).isNotNull();
     assertThat(form.getForm()).hasSize(1);
@@ -124,8 +121,7 @@ public class AuthApiTest {
         .addPathSegments("auth/uber/logout")
         .build()
         .toString();
-    final TestSubscriber<LogOutResponse> subscriber = new TestSubscriber<>();
-    api.logOutAsync(url).subscribe(subscriber);
+    final TestObserver<LogOutResponse> subscriber = api.logOutAsync(url).test();
 
     subscriber.awaitTerminalEvent();
     subscriber.assertNoErrors();

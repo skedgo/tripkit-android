@@ -3,9 +3,8 @@ package skedgo.tripkit.account.domain
 import com.nhaarman.mockitokotlin2.mock
 import org.junit.Test
 import org.mockito.BDDMockito.given
-import rx.Observable.empty
-import rx.Observable.just
-import rx.observers.TestSubscriber
+import io.reactivex.Observable.empty
+import io.reactivex.Observable.just
 
 class GetUserTokenHeaderValueTest {
   val userTokenRepository: UserTokenRepository = mock()
@@ -16,17 +15,15 @@ class GetUserTokenHeaderValueTest {
   @Test fun emitNullStringIfThereIsNoUserToken() {
     given(userTokenRepository.getLastKnownUserToken()).willReturn(empty())
 
-    val subscriber = TestSubscriber<String?>()
-    getUserTokenHeaderValue.execute().subscribe(subscriber)
-    subscriber.assertValue(null)
+    val subscriber = getUserTokenHeaderValue.execute().test()
+    subscriber.assertValue(String())
   }
 
   @Test fun emitUserTokenValue() {
     val userToken = UserToken("Without followers, evil cannot spread")
     given(userTokenRepository.getLastKnownUserToken()).willReturn(just(userToken))
 
-    val subscriber = TestSubscriber<String?>()
-    getUserTokenHeaderValue.execute().subscribe(subscriber)
+    val subscriber = getUserTokenHeaderValue.execute().test()
     subscriber.assertValue("Without followers, evil cannot spread")
   }
 }

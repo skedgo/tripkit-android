@@ -1,6 +1,6 @@
 package skedgo.tripkit.validbookingcount.domain
 
-import rx.Observable
+import io.reactivex.Observable
 import javax.inject.Inject
 
 open class HasValidBookingCount @Inject constructor(

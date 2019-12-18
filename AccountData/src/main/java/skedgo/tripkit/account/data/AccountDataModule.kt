@@ -6,9 +6,9 @@ import dagger.Module
 import dagger.Provides
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
-import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory
+import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
-import rx.schedulers.Schedulers
+import io.reactivex.schedulers.Schedulers
 import skedgo.tripkit.account.domain.UserKeyRepository
 import skedgo.tripkit.account.domain.UserTokenRepository
 import skedgo.tripkit.configuration.Server
@@ -27,7 +27,7 @@ class AccountDataModule {
   ): UserTokenRepository {
     val silentLoginApi = Retrofit.Builder()
         .baseUrl(Server.ApiTripGo.value)
-        .addCallAdapterFactory(RxJavaCallAdapterFactory.createWithScheduler(Schedulers.io()))
+        .addCallAdapterFactory(RxJava2CallAdapterFactory.createWithScheduler(Schedulers.io()))
         .addConverterFactory(GsonConverterFactory.create())
         .client(httpClient)
         .build()
@@ -35,7 +35,7 @@ class AccountDataModule {
 
     val accountApi = Retrofit.Builder()
         .baseUrl(Server.ApiTripGo.value)
-        .addCallAdapterFactory(RxJavaCallAdapterFactory.createWithScheduler(Schedulers.io()))
+        .addCallAdapterFactory(RxJava2CallAdapterFactory.createWithScheduler(Schedulers.io()))
         .addConverterFactory(GsonConverterFactory.create())
         .client(httpClient)
         .build()

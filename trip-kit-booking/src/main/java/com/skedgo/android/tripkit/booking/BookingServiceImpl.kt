@@ -1,20 +1,23 @@
 package com.skedgo.android.tripkit.booking
 
 import com.google.gson.Gson
+import io.reactivex.BackpressureStrategy
+import io.reactivex.Flowable
 import retrofit2.Response
-import rx.Observable
-import rx.functions.Func1
+import io.reactivex.Observable
+import io.reactivex.functions.Function
+import org.intellij.lang.annotations.Flow
 import java.io.IOException
 
 class BookingServiceImpl(private val bookingApi: BookingApi, private val gson: Gson) : BookingService {
-  var handleBookingResponse: Func1<Response<BookingForm>, Observable<BookingForm>> =
-      Func1 { bookingFormResponse ->
+  var handleBookingResponse: Function<Response<BookingForm>, Observable<BookingForm>> =
+      Function { bookingFormResponse ->
         if (!bookingFormResponse.isSuccessful) {
           try {
             val e = asBookingError(bookingFormResponse.errorBody()!!.string())
-            return@Func1 Observable.error(e)
+            return@Function Observable.error(e)
           } catch (e: IOException) {
-            return@Func1 Observable.error(e)
+            return@Function Observable.error(e)
           }
 
         } else {
@@ -26,13 +29,13 @@ class BookingServiceImpl(private val bookingApi: BookingApi, private val gson: G
         }
       }
 
-  override fun getFormAsync(url: String): Observable<BookingForm> {
-    return bookingApi.getFormAsync(url).flatMap(handleBookingResponse)
+  override fun getFormAsync(url: String): Flowable<BookingForm> {
+    return bookingApi.getFormAsync(url).flatMap(handleBookingResponse).toFlowable(BackpressureStrategy.BUFFER)
   }
 
-  override fun postFormAsync(url: String, inputForm: InputForm): Observable<BookingForm> =
+  override fun postFormAsync(url: String, inputForm: InputForm): Flowable<BookingForm> =
       bookingApi.postFormAsync(url, inputForm)
-          .flatMap(handleBookingResponse)
+          .flatMap(handleBookingResponse).toFlowable(BackpressureStrategy.BUFFER)
 
   fun asBookingError(bookingErrorJson: String): BookingError {
     return gson.fromJson(bookingErrorJson, BookingError::class.java)

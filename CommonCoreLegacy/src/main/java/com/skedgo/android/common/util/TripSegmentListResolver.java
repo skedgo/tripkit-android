@@ -3,6 +3,7 @@ package com.skedgo.android.common.util;
 import android.content.res.Resources;
 import android.text.TextUtils;
 
+import android.util.Log;
 import com.skedgo.android.common.R;
 import com.skedgo.android.common.model.Location;
 import skedgo.tripkit.routing.SegmentType;
@@ -79,10 +80,8 @@ public class TripSegmentListResolver {
       );
     } else {
       arrivalAction = String.format(
-          resources.getString(R.string.arrive_at__pattern_at__pattern),
-          destinationName,
-          "<TIME>"
-      );
+              resources.getString(R.string.arrive_at__pattern),
+          destinationName);
     }
 
     final TripSegment arrivalSegment = new TripSegment();
@@ -113,10 +112,8 @@ public class TripSegmentListResolver {
       );
     } else {
       departureAction = String.format(
-          resources.getString(R.string.leave__pattern_at__pattern),
-          originName,
-          "<TIME>"
-      );
+              resources.getString(R.string.leave__pattern),
+          originName);
     }
 
     final TripSegment departureSegment = new TripSegment();

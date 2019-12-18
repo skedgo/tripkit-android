@@ -1,8 +1,8 @@
 package skedgo.tripkit.account.data
 
 import android.content.SharedPreferences
-import rx.Completable
-import rx.Single
+import io.reactivex.Completable
+import io.reactivex.Single
 import skedgo.tripkit.account.domain.UserKeyRepository
 import java.util.*
 
@@ -14,10 +14,11 @@ internal class UserKeyRepositoryImpl(
 
   override fun getUserKey(): Single<String> =
       Single.fromCallable {
+
         prefs.getString(KEY_USER_UUID, null)
       }.flatMap { key ->
         when {
-          key.isNullOrEmpty() ->
+          key.isEmpty() ->
             UUID.randomUUID().toString().let {
               setUserKey(it).andThen(Single.just(it))
             }

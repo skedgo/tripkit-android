@@ -4,8 +4,8 @@ import com.nhaarman.mockitokotlin2.mock
 import org.junit.Test
 import org.mockito.BDDMockito.given
 import org.mockito.Mockito.verify
-import rx.Observable.empty
-import rx.Observable.just
+import io.reactivex.Observable.empty
+import io.reactivex.Observable.just
 
 class RefreshUserTokenTest {
   val userTokenRepository: UserTokenRepository = mock()

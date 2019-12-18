@@ -470,6 +470,9 @@ public class TripSegment implements IRealTimeElement, ITimeRange {
     );
   }
 
+  public boolean isStationary() {
+    return (mType != SegmentType.SCHEDULED && mType != SegmentType.UNSCHEDULED);
+  }
   /**
    * Segments having type as {@link SegmentType#DEPARTURE}, {@link SegmentType#ARRIVAL},
    * and {@link SegmentType#STATIONARY} will have this property as null.
@@ -650,6 +653,19 @@ public class TripSegment implements IRealTimeElement, ITimeRange {
         && !(mIsContinuation || isPlane());
   }
 
+
+  public boolean isWalking() {
+    return (transportModeId != null  && transportModeId.startsWith("wa_"));
+  }
+
+  public boolean isCycling() {
+    return (transportModeId != null  && transportModeId.startsWith("bic"));
+  }
+
+  public boolean isWheelchair() {
+    return (transportModeId != null  && transportModeId.equals(TransportMode.ID_WHEEL_CHAIR));
+  }
+
   public long getDurationWithoutTraffic() {
     return durationWithoutTraffic;
   }
@@ -678,4 +694,10 @@ public class TripSegment implements IRealTimeElement, ITimeRange {
     String durationText = TimeUtils.getDurationInDaysHoursMins((int) durationWithoutTraffic);
     return resources.getString(R.string._pattern_w_slasho_traffic, durationText);
   }
+
+  public int lineColor() {
+      if (isStationary() || isWalking() || mServiceColor == null) return Color.TRANSPARENT;
+      return mServiceColor.getColor();
+  }
+
 }

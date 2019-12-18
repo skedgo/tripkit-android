@@ -1,10 +1,9 @@
 package com.skedgo.android.tripkit.booking;
 
-import rx.Observable;
-import rx.Single;
+import io.reactivex.Flowable;
+import io.reactivex.Observable;
 
 public interface BookingService {
-
-  Observable<BookingForm> getFormAsync(String url);
-  Observable<BookingForm> postFormAsync(String url, InputForm inputForm);
+  Flowable<BookingForm> getFormAsync(String url);
+  Flowable<BookingForm> postFormAsync(String url, InputForm inputForm);
 }

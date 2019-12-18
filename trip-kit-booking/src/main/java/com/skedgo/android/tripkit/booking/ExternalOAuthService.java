@@ -1,6 +1,6 @@
 package com.skedgo.android.tripkit.booking;
 
-import rx.Observable;
+import io.reactivex.Observable;
 
 public interface ExternalOAuthService {
 

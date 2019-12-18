@@ -1,7 +1,7 @@
 package com.skedgo.android.tripkit.booking;
 
-import skedgo.tripkit.android.TripKit;
-import com.skedgo.android.tripkit.scope.ExtensionScope;
+import com.skedgo.TripKit;
+import com.skedgo.tripkit.scope.ExtensionScope;
 
 import dagger.Component;
 

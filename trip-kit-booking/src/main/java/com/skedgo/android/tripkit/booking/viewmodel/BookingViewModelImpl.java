@@ -5,24 +5,24 @@ import com.google.gson.GsonBuilder;
 import com.skedgo.android.common.rx.Var;
 import com.skedgo.android.tripkit.booking.BookingForm;
 import com.skedgo.android.tripkit.booking.BookingService;
-import com.skedgo.android.tripkit.booking.ExternalOAuth;
 import com.skedgo.android.tripkit.booking.FormField;
 import com.skedgo.android.tripkit.booking.FormFieldJsonAdapter;
 import com.skedgo.android.tripkit.booking.FormGroup;
 import com.skedgo.android.tripkit.booking.InputForm;
 import com.skedgo.android.tripkit.booking.LinkFormField;
 
+import io.reactivex.BackpressureStrategy;
+import io.reactivex.Flowable;
+import io.reactivex.Observable;
+import io.reactivex.functions.Action;
+import io.reactivex.functions.Consumer;
+import io.reactivex.functions.LongConsumer;
 import org.apache.commons.collections4.CollectionUtils;
+import org.intellij.lang.annotations.Flow;
 
 import java.util.List;
 
-import rx.Observable;
-import rx.functions.Action0;
-import rx.functions.Action1;
-import rx.functions.Actions;
-import rx.functions.Func1;
-
-import static rx.android.schedulers.AndroidSchedulers.mainThread;
+import static io.reactivex.android.schedulers.AndroidSchedulers.mainThread;
 
 public class BookingViewModelImpl implements BookingViewModel {
   private final BookingService bookingService;
@@ -44,12 +44,12 @@ public class BookingViewModelImpl implements BookingViewModel {
   }
 
   @Override
-  public Observable<BookingForm> bookingForm() {
+  public Flowable<BookingForm> bookingForm() {
     return bookingForm.observe();
   }
 
   @Override
-  public Observable<Param> nextBookingForm() {
+  public Flowable<Param> nextBookingForm() {
     return nextBookingForm.observe();
   }
 
@@ -59,7 +59,7 @@ public class BookingViewModelImpl implements BookingViewModel {
    * else reload the page with the last data
    */
   @Override
-  public Observable<BookingForm> loadForm(Param param) {
+  public Flowable<BookingForm> loadForm(Param param) {
     if (param == null) {
       return null;
     }
@@ -67,40 +67,48 @@ public class BookingViewModelImpl implements BookingViewModel {
       this.param = param;
       return bookingService.postFormAsync(param.getUrl(), param.postBody())
           .observeOn(mainThread())
-          .doOnNext(new Action1<BookingForm>() {
+          .doOnNext(new Consumer<BookingForm>() {
             @Override
-            public void call(BookingForm bookingFormItem) {
+            public void accept(BookingForm bookingFormItem) {
               // Server can return an empty form
               if (bookingFormItem != null) {
                 bookingForm.put(bookingFormItem);
               }
             }
           })
-          .doOnRequest(new Action1<Long>() {
+          .doOnRequest(new LongConsumer() {
             @Override
-            public void call(Long value) {
+            public void accept(long t) throws Exception {
               isFetching.put(true);
+
             }
           })
-          .doOnCompleted(new Action0() {
+          .doOnComplete(new Action() {
             @Override
-            public void call() {
+            public void run() {
               isFetching.put(false);
             }
           });
     } else {
       return bookingService.getFormAsync(param.getUrl())
           .observeOn(mainThread())
-          .doOnNext(bookingForm)
-          .doOnRequest(new Action1<Long>() {
+              .doOnNext(new Consumer<BookingForm>() {
+                @Override
+                public void accept(BookingForm bookingFormItem) throws Exception {
+                  if (bookingForm != null) {
+                      bookingForm.put(bookingFormItem);
+                  }
+                }
+              })
+          .doOnRequest(new LongConsumer() {
             @Override
-            public void call(Long value) {
+            public void accept(long value) {
               isFetching.put(true);
             }
           })
-          .doOnCompleted(new Action0() {
+          .doOnComplete(new Action() {
             @Override
-            public void call() {
+            public void run() {
               isFetching.put(false);
             }
           });
@@ -108,7 +116,7 @@ public class BookingViewModelImpl implements BookingViewModel {
   }
 
   @Override
-  public Observable<Boolean> isFetching() {
+  public Flowable<Boolean> isFetching() {
     return isFetching.observe();
   }
 
@@ -117,21 +125,21 @@ public class BookingViewModelImpl implements BookingViewModel {
   }
 
   @Override
-  public Observable<Boolean> isDone() {
+  public Flowable<Boolean> isDone() {
     return isDone.observe();
   }
 
   @Override
   public void observeAuthentication(AuthenticationViewModel authenticationViewModel) {
-    authenticationViewModel.isSuccessful().subscribe(new Action1<Boolean>() {
+    authenticationViewModel.isSuccessful().subscribe(new Consumer<Boolean>() {
       @Override
-      public void call(Boolean isSuccessful) {
+      public void accept(Boolean isSuccessful) {
         if (isSuccessful) {
           loadForm(param).subscribe(
-              Actions.empty(),
-              new Action1<Throwable>() {
+              unused -> {},
+              new Consumer<Throwable>() {
                 @Override
-                public void call(Throwable error) {
+                public void accept(Throwable error) {
                 }
               }
           );
@@ -141,7 +149,7 @@ public class BookingViewModelImpl implements BookingViewModel {
   }
 
   @Override
-  public Observable<Boolean> performAction(BookingForm bookingForm) {
+  public Flowable<Boolean> performAction(BookingForm bookingForm) {
     String url = bookingForm.getAction().getUrl();
     InputForm postPody = InputForm.from(bookingForm.getForm());
     if (url == null) {
@@ -150,16 +158,16 @@ public class BookingViewModelImpl implements BookingViewModel {
       } else {
         isDone.put(false);
       }
-      return Observable.just(true);
+      return Flowable.just(true);
     }
     nextBookingForm.put(Param.create(bookingForm.getAction(), postPody));
-    return Observable.just(false);
+    return Flowable.just(false);
   }
 
   @Override
-  public Observable<Boolean> performAction(LinkFormField linkFormField) {
+  public Flowable<Boolean> performAction(LinkFormField linkFormField) {
     nextBookingForm.put(Param.create(linkFormField));
-    return Observable.just(false);
+    return Flowable.just(false);
   }
 
   private boolean canceled(BookingForm bookingForm) {

@@ -2,7 +2,7 @@ package com.skedgo.android.tripkit.booking.mybookings;
 
 import retrofit2.http.GET;
 import retrofit2.http.Query;
-import rx.Observable;
+import io.reactivex.Observable;
 
 public interface MyBookingsApi {
   @GET("booking")

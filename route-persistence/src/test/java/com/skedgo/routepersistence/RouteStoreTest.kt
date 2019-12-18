@@ -1,8 +1,10 @@
 package com.skedgo.routepersistence
 
+import android.content.Context
+import androidx.test.core.app.ApplicationProvider
 import com.google.gson.GsonBuilder
-import com.nhaarman.mockito_kotlin.mock
-import com.nhaarman.mockito_kotlin.whenever
+import com.nhaarman.mockitokotlin2.mock
+import com.nhaarman.mockitokotlin2.whenever
 import com.skedgo.android.common.model.GsonAdaptersBooking
 import com.skedgo.android.common.model.GsonAdaptersRealtimeAlert
 import com.skedgo.android.common.model.Location
@@ -15,23 +17,23 @@ import org.junit.Assert.assertEquals
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
-import org.robolectric.RobolectricTestRunner
-import org.robolectric.RuntimeEnvironment
-import rx.observers.TestSubscriber
+
+import androidx.test.ext.junit.runners.AndroidJUnit4
+import io.reactivex.subscribers.TestSubscriber
 import skedgo.tripkit.routing.Trip
 import skedgo.tripkit.routing.TripGroup
 import skedgo.tripkit.routing.TripSegment
 import java.util.*
 import java.util.concurrent.TimeUnit
 
-@RunWith(RobolectricTestRunner::class)
+@RunWith(AndroidJUnit4::class)
 class RouteStoreTest {
   private var databaseHelper: RouteDatabaseHelper? = null
   private lateinit var store: RouteStore
 
   @Before
   fun before() {
-    val context = RuntimeEnvironment.application
+    val context = ApplicationProvider.getApplicationContext<Context>()
     databaseHelper = RouteDatabaseHelper(context, RouteStoreTest::class.java.simpleName)
     val gson = GsonBuilder()
         .registerTypeAdapterFactory(LocationTypeAdapterFactory())
@@ -54,12 +56,12 @@ class RouteStoreTest {
     group.trips = arrayListOf(trip)
 
     val requestId = UUID.randomUUID().toString()
-    store!!.saveAsync(requestId, listOf(group))
-        .toBlocking().first()
+    store.saveAsync(requestId, listOf(group))
+        .blockingFirst()
 
-    val groups = store!!.queryAsync(GroupQueries.hasRequestId(requestId))
+    val groups = store.queryAsync(GroupQueries.hasRequestId(requestId))
         .toList()
-        .toBlocking().first()
+        .blockingGet()
     assertEquals(1, groups.size.toLong())
     val actualGroup = groups[0]
     assertEquals(group.uuid(), actualGroup.uuid())
@@ -82,10 +84,10 @@ class RouteStoreTest {
     group.trips = arrayListOf(trip)
 
     val requestId = UUID.randomUUID().toString()
-    store!!.saveAsync(requestId, listOf(group))
-        .toBlocking().first()
-    store!!.deleteAsync(WhereClauses.matchesUuidOf(group))
-        .toBlocking().first()
+    store.saveAsync(requestId, listOf(group))
+        .blockingFirst()
+    store.deleteAsync(WhereClauses.matchesUuidOf(group))
+        .blockingFirst()
 
     // Deleting a group should trigger deleting its trips too.
     val database = databaseHelper!!.readableDatabase
@@ -111,10 +113,10 @@ class RouteStoreTest {
       trip.segments = arrayListOf(segment)
       group2.trips = arrayListOf(trip)
     }
-    store!!.saveAsync(requestId, listOf(group2))
+    var observer = store.saveAsync(requestId, listOf(group2))
         .test()
-        .awaitTerminalEvent()
-        .assertCompleted()
+    observer.awaitTerminalEvent()
+    observer.assertComplete()
 
     val group1 = TripGroup()
     run {
@@ -125,19 +127,17 @@ class RouteStoreTest {
       trip.segments = arrayListOf(segment)
       group1.trips = arrayListOf(trip)
     }
-    store!!.saveAsync(requestId, listOf(group1))
+    observer = store.saveAsync(requestId, listOf(group1))
         .test()
-        .awaitTerminalEvent()
-        .assertCompleted()
+    observer.awaitTerminalEvent()
+    observer.assertComplete()
 
-    val subscriber = TestSubscriber<TripGroup>()
-    store!!.queryAsync(GroupQueries.hasUuid(group2.uuid())).subscribe(subscriber)
-
+    val subscriber = store.queryAsync(GroupQueries.hasUuid(group2.uuid())).test()
     subscriber.awaitTerminalEvent()
     subscriber.assertNoErrors()
-    assertEquals(1, subscriber.valueCount.toLong())
+    assertEquals(1, subscriber.values().count().toLong())
 
-    val group = subscriber.onNextEvents[0]
+    val group = subscriber.values().first()
     assertEquals(group2.uuid(), group.uuid())
   }
 
@@ -153,9 +153,8 @@ class RouteStoreTest {
       trip0.segments = arrayListOf(segment)
       group0.trips = arrayListOf(trip0)
     }
-    store!!.saveAsync(requestId, listOf(group0))
-        .toBlocking().first()
-
+    store.saveAsync(requestId, listOf(group0))
+        .blockingFirst()
     val trip1 = Trip()
     run {
       val segment = TripSegment()
@@ -164,11 +163,11 @@ class RouteStoreTest {
       trip1.segments = arrayListOf(segment)
       group0.trips = arrayListOf(trip1)
     }
-    store!!.saveAsync(requestId, listOf(group0))
-        .toBlocking().first()
+    store.saveAsync(requestId, listOf(group0))
+        .blockingFirst()
 
-    val actualGroup = store!!.queryAsync(GroupQueries.hasUuid(group0.uuid()))
-        .toBlocking().first()
+    val actualGroup = store.queryAsync(GroupQueries.hasUuid(group0.uuid()))
+        .blockingFirst()
 
     val actualTrips = actualGroup.trips
     assertEquals(1, actualTrips!!.size.toLong())
@@ -193,23 +192,20 @@ class RouteStoreTest {
       group.trips = arrayListOf(trip)
     }
     val requestId = UUID.randomUUID().toString()
-    store!!.saveAsync(requestId, listOf(group))
-        .toBlocking().first()
+    store.saveAsync(requestId, listOf(group))
+        .blockingFirst()
 
-    store!!.queryAsync(GroupQueries.hasUuid(group.uuid()))
-        .toBlocking().first()
+    store.queryAsync(GroupQueries.hasUuid(group.uuid()))
+        .blockingFirst()
 
     val currentMillis = TimeUnit.HOURS.toMillis(4L)
-    val deletedCount = store!!.deleteAsync(WhereClauses.happenedBefore(
+    val deletedCount = store.deleteAsync(WhereClauses.happenedBefore(
         2, // hours
         currentMillis
-    )).toBlocking().first()
+    )).blockingFirst()
     assertEquals(1, deletedCount.toLong())
 
-    val subscriber = TestSubscriber<TripGroup>()
-    store!!.queryAsync(GroupQueries.hasUuid(group.uuid()))
-        .subscribe(subscriber)
-
+    val subscriber = store.queryAsync(GroupQueries.hasUuid(group.uuid())).test()
     subscriber.awaitTerminalEvent()
     subscriber.assertNoValues()
   }
@@ -228,26 +224,26 @@ class RouteStoreTest {
     group.displayTripId = 1
     group.trips = arrayListOf(trip)
 
-    store.saveAsync(null, listOf(group))
+    var observer = store.saveAsync(null, listOf(group))
         .test()
-        .awaitTerminalEvent()
-        .assertCompleted()
+    observer.awaitTerminalEvent()
+    observer.assertComplete()
 
     val newDisplayTrip = Trip().apply {
       this.uuid("c")
       this.id = 10
     }
-    store.addTripToTripGroup("a", newDisplayTrip)
+    var observer2 = store.addTripToTripGroup("a", newDisplayTrip)
         .test()
-        .awaitTerminalEvent()
-        .assertCompleted()
+    observer2.awaitTerminalEvent()
+    observer2.assertComplete()
 
-    store.queryAsync(GroupQueries.hasUuid("a"))
+    var observer3 = store.queryAsync(GroupQueries.hasUuid("a"))
         .test()
-        .awaitTerminalEvent()
-        .assertCompleted()
-        .assertValueCount(1)
-        .onNextEvents.first()
+
+    observer3.awaitTerminalEvent()
+    observer3.assertComplete().assertValueCount(1)
+        .values().first()
         .let {
           it.displayTripId `should equal` 2
           it.trips!!.map { it.uuid() } `should contain all` (listOf("b", "c"))
@@ -270,20 +266,20 @@ class RouteStoreTest {
       group.trips = arrayListOf(trip)
     }
     val requestId = UUID.randomUUID().toString()
-    store!!.saveAsync(requestId, listOf(group))
-        .toBlocking().first()
+    store.saveAsync(requestId, listOf(group))
+        .blockingFirst()
 
-    store!!.queryAsync(GroupQueries.hasUuid(group.uuid()))
-        .toBlocking().first()
+    store.queryAsync(GroupQueries.hasUuid(group.uuid()))
+        .blockingFirst()
 
     val currentMillis = TimeUnit.HOURS.toMillis(4L)
-    val deletedCount = store!!.deleteAsync(WhereClauses.happenedBefore(
+    val deletedCount = store.deleteAsync(WhereClauses.happenedBefore(
         2, // hours
         currentMillis
-    )).toBlocking().first()
+    )).blockingFirst()
     assertEquals(0, deletedCount.toLong())
 
-    store!!.queryAsync(GroupQueries.hasUuid(group.uuid()))
-        .toBlocking().first()
+    store.queryAsync(GroupQueries.hasUuid(group.uuid()))
+        .blockingFirst()
   }
 }

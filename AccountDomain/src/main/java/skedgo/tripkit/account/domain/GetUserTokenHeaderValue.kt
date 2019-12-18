@@ -1,6 +1,6 @@
 package skedgo.tripkit.account.domain
 
-import rx.Observable
+import io.reactivex.Observable
 import javax.inject.Inject
 
 open class GetUserTokenHeaderValue @Inject constructor(
@@ -9,5 +9,5 @@ open class GetUserTokenHeaderValue @Inject constructor(
   open fun execute(): Observable<String?>
       = userTokenRepository.getLastKnownUserToken()
       .map { it.value }
-      .defaultIfEmpty(null)
+      .defaultIfEmpty(String())
 }

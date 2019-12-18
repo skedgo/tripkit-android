@@ -10,6 +10,7 @@ import com.google.gson.annotations.SerializedName;
 import com.skedgo.android.common.R;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import skedgo.tripkit.routing.ModeInfo;
 import skedgo.tripkit.routing.VehicleMode;
@@ -251,6 +252,11 @@ public class ScheduledStop extends Location {
 
   public void setWheelchairAccessible(@Nullable Boolean wheelchairAccessible) {
     this.wheelchairAccessible = wheelchairAccessible;
+  }
+  public List<String> getEmbarkationStopCode() {
+     ArrayList<String> list = new ArrayList<>();
+     list.add(getCode());
+     return list;
   }
 
   @Override

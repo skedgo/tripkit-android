@@ -1,15 +1,16 @@
 apply plugin: "com.android.library"
 // To publish via JitPack.
 // See https://jitpack.io/docs/ANDROID/.
-apply plugin: "com.github.dcendents.android-maven"
+apply plugin: 'digital.wup.android-maven-publish'
 apply plugin: "kotlin-android"
 apply plugin: "kotlin-kapt"
+apply plugin: 'org.jetbrains.dokka'
 
 android {
   compileSdkVersion versions.compileSdkVersion
 
   defaultConfig {
-    minSdkVersion 15
+      minSdkVersion versions.proMinSdkVersion
     targetSdkVersion versions.targetSdkVersion
     testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
   }
@@ -54,6 +55,7 @@ dependencies {
   testImplementation libs.kluent
   testImplementation 'com.github.thuytrinh:MockWebServerRule:v1.0'
   testImplementation libs.kluent
+  testImplementation libs.androidxTesting
 
   androidTestImplementation "androidx.test:runner:1.1.0"
   androidTestImplementation "androidx.test:rules:1.1.0"
@@ -63,14 +65,14 @@ dependencies {
   implementation libs.jodaTimeAndroid
   implementation 'com.github.skedgo:commons-collections:v1.0'
 
-  implementation 'com.github.skedgo:sqlite-utils:v1.0'
   implementation libs.okHttp
+  implementation libs.okHttpLogging
   implementation libs.retrofit
   implementation libs.retrofitAdapterRxJava
   implementation libs.retrofitConverterGson
 
-  implementation libs.rxjava
-  implementation libs.rxAndroid
+  implementation libs.rxjava2
+  implementation libs.rxAndroid2
   implementation 'com.firebase:firebase-jobdispatcher:0.8.5'
 
   implementation libs.dagger
@@ -79,10 +81,12 @@ dependencies {
   compileOnly libs.valueAnnotations
   compileOnly libs.builderAnnotations
   implementation libs.immutablesGson
+
   api project(':CommonCoreLegacy')
   api project(':TripKitDomain')
   api project(':TripKitDomainLegacy')
   api project(':TripKitData')
+  api project(':sqliteutils')
 }
 
 // build a jar with source files
@@ -109,12 +113,35 @@ artifacts {
   archives javadocJar
 }
 
-uploadArchives {
+group = tripkitGroup
+version = tripkitVersion
+
+publishing {
   repositories {
-    mavenDeployer {
-      repository(url: "file://${localMaven}")
-      pom.groupId = tripkitGroup
-      pom.version = tripkitVersion
+    maven {
+//      url = "file://${localMaven}"
+      url = publishMavenUrl
+      credentials {
+          username = publishMavenUsername
+          password = publishMavenToken
+        }
+    }
+  }
+
+  publications {
+    mavenAar(MavenPublication) {
+      groupId = group
+      version = version
+      from components.android
+      pom {
+        licenses {
+          license {
+            name = 'Commercial'
+          }
+        }
+
+      }
     }
   }
 }
+

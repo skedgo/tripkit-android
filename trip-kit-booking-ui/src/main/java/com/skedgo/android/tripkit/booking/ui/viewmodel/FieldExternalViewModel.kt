@@ -1,7 +1,7 @@
 package com.skedgo.android.tripkit.booking.ui.viewmodel
 
 import com.skedgo.android.tripkit.booking.ExternalFormField
-import rx.subjects.PublishSubject
+import io.reactivex.subjects.PublishSubject
 
 class FieldExternalViewModel(val externalFormField: ExternalFormField,
                              val onExternalForm: PublishSubject<ExternalFormField>

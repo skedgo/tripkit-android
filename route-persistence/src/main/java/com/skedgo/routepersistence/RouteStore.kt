@@ -7,25 +7,24 @@ import android.database.sqlite.SQLiteOpenHelper
 import android.util.Pair
 import com.google.gson.Gson
 import com.skedgo.routepersistence.RouteContract.*
-import hugo.weaving.DebugLog
-import rx.Completable
-import rx.Observable
-import rx.Single
-import rx.schedulers.Schedulers
-import rx.schedulers.Schedulers.io
-import skedgo.sqlite.Cursors.flattenCursor
+import com.skedgo.sqlite.Cursors.flattenCursor
+import io.reactivex.Completable
+import io.reactivex.Observable
+import io.reactivex.Single
+import io.reactivex.schedulers.Schedulers
 import skedgo.tripkit.routing.Source
 import skedgo.tripkit.routing.Trip
 import skedgo.tripkit.routing.TripGroup
 import skedgo.tripkit.routing.TripSegment
 import java.util.*
+import kotlin.collections.ArrayList
 
 open class RouteStore(private val databaseHelper: SQLiteOpenHelper, private val gson: Gson) {
 
   open fun deleteAsync(whereClause: Pair<String, Array<String>>): Observable<Int> {
     return Observable
         .fromCallable { delete(whereClause) }
-        .subscribeOn(io())
+        .subscribeOn(Schedulers.io())
   }
 
   open fun updateAlternativeTrips(groups: List<TripGroup>): Observable<List<TripGroup>> {
@@ -61,10 +60,9 @@ open class RouteStore(private val databaseHelper: SQLiteOpenHelper, private val 
           saveTripGroupsInTransaction(requestId, groups)
           groups
         }
-        .subscribeOn(io())
+        .subscribeOn(Schedulers.io())
   }
 
-  @DebugLog
   open fun queryAsync(query: Pair<String, Array<String>?>): Observable<TripGroup> {
     return queryAsync(query.first, query.second)
   }
@@ -81,7 +79,7 @@ open class RouteStore(private val databaseHelper: SQLiteOpenHelper, private val 
           cursor.close()
           tripSegments.first { it.id == segmentId }
         }
-        .subscribeOn(io())
+        .subscribeOn(Schedulers.io())
   }
 
   open fun queryTripGroupIdsByRequestIdAsync(requestId: String): Observable<String> {
@@ -120,7 +118,7 @@ open class RouteStore(private val databaseHelper: SQLiteOpenHelper, private val 
           } finally {
             database.endTransaction()
           }
-        }.subscribeOn(io())
+        }.subscribeOn(Schedulers.io())
   }
 
   open fun addTripToTripGroup(tripGroupId: String, displayTrip: Trip): Completable {
@@ -146,7 +144,6 @@ open class RouteStore(private val databaseHelper: SQLiteOpenHelper, private val 
         .subscribeOn(Schedulers.io())
   }
 
-  @DebugLog
   private fun delete(whereClause: Pair<String, Array<String>>): Int {
     val database = databaseHelper.writableDatabase
     return database.delete(TABLE_TRIP_GROUPS, whereClause.first, whereClause.second)
@@ -162,7 +159,7 @@ open class RouteStore(private val databaseHelper: SQLiteOpenHelper, private val 
         }
         .flatMap(flattenCursor())
         .flatMap { groupCursor -> queryTripsOfTripGroup(groupCursor) }
-        .subscribeOn(io())
+        .subscribeOn(Schedulers.io())
   }
 
   private fun queryTripsOfTripGroup(groupCursor: Cursor): Observable<TripGroup> {
@@ -178,7 +175,7 @@ open class RouteStore(private val databaseHelper: SQLiteOpenHelper, private val 
         .map { trips ->
           group.trips = ArrayList(trips)
           group
-        }
+        }.toObservable()
   }
 
   private fun querySegmentsOfTrip(tripCursor: Cursor, groupCursor: Cursor): Observable<Trip> {
@@ -272,7 +269,6 @@ open class RouteStore(private val databaseHelper: SQLiteOpenHelper, private val 
     return group
   }
 
-  @DebugLog
   private fun saveTripGroupsInTransaction(
       requestId: String?,
       groups: List<TripGroup>) {
@@ -308,7 +304,6 @@ open class RouteStore(private val databaseHelper: SQLiteOpenHelper, private val 
     saveTrips(database, group.uuid(), group.trips)
   }
 
-  @DebugLog
   private fun saveTripGroup(
       database: SQLiteDatabase,
       requestId: String?,
@@ -345,7 +340,6 @@ open class RouteStore(private val databaseHelper: SQLiteOpenHelper, private val 
     saveSegments(database, trip.uuid(), trip.segments)
   }
 
-  @DebugLog
   private fun saveTrip(
       database: SQLiteDatabase,
       groupId: String,
@@ -371,7 +365,6 @@ open class RouteStore(private val databaseHelper: SQLiteOpenHelper, private val 
     database.insertWithOnConflict(TABLE_TRIPS, null, values, SQLiteDatabase.CONFLICT_REPLACE)
   }
 
-  @DebugLog
   private fun saveSegments(
       database: SQLiteDatabase,
       tripId: String,

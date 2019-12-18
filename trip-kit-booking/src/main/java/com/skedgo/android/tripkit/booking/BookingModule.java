@@ -12,9 +12,9 @@ import dagger.Module;
 import dagger.Provides;
 import okhttp3.OkHttpClient;
 import retrofit2.Retrofit;
-import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory;
+import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
-import rx.schedulers.Schedulers;
+import io.reactivex.schedulers.Schedulers;
 import skedgo.tripkit.configuration.Server;
 
 @Module
@@ -26,7 +26,7 @@ public class BookingModule {
     return new Retrofit.Builder()
         /* This base url is ignored as the api relies on @Url. */
         .baseUrl(Server.ApiTripGo.getValue())
-        .addCallAdapterFactory(RxJavaCallAdapterFactory.createWithScheduler(Schedulers.io()))
+        .addCallAdapterFactory(RxJava2CallAdapterFactory.createWithScheduler(Schedulers.io()))
         .addConverterFactory(GsonConverterFactory.create(gson))
         .client(httpClient)
         .build()
@@ -40,7 +40,7 @@ public class BookingModule {
     return new Retrofit.Builder()
         /* This base url is ignored as the api relies on @Url. */
         .baseUrl(Server.ApiTripGo.getValue())
-        .addCallAdapterFactory(RxJavaCallAdapterFactory.createWithScheduler(Schedulers.io()))
+        .addCallAdapterFactory(RxJava2CallAdapterFactory.createWithScheduler(Schedulers.io()))
         .addConverterFactory(GsonConverterFactory.create(gson))
         .client(httpClient)
         .build()
@@ -56,7 +56,7 @@ public class BookingModule {
     return new Retrofit.Builder()
         /* This base url is ignored as the api relies on @Url. */
         .baseUrl(Server.ApiTripGo.getValue())
-        .addCallAdapterFactory(RxJavaCallAdapterFactory.createWithScheduler(Schedulers.io()))
+        .addCallAdapterFactory(RxJava2CallAdapterFactory.createWithScheduler(Schedulers.io()))
         .addConverterFactory(GsonConverterFactory.create(gson))
         .client(httpClient)
         .build()

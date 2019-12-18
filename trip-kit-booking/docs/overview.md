@@ -17,7 +17,7 @@ final AuthService authService = component.authService();
 final Location somewhereInDenverUS = new Location(39.740774, -104.993161);
 TripKit.singleton().getRegionService()
     .getRegionByLocationAsync(somewhereInDenverUS)
-    .flatMap(new Func1<Region, Observable<List<AuthProvider>>>() {
+    .flatMap(new Function<Region, Observable<List<AuthProvider>>>() {
       @Override public Observable<List<AuthProvider>> call(Region region) {
         return authService.fetchProvidersByRegionAsync(region);
       }

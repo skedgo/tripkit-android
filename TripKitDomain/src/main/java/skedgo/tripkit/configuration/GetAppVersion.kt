@@ -1,6 +1,6 @@
 package skedgo.tripkit.configuration
 
-import rx.Observable
+import io.reactivex.Observable
 import javax.inject.Inject
 
 open class GetAppVersion @Inject constructor(

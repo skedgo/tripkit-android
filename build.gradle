@@ -1,51 +1,88 @@
 buildscript {
-  apply from: "dependencies.gradle"
-  ext.kotlinVersion = versions.kotlinVersion
+    ext.kotlin_version = '1.3.50'
+    apply from: "dependencies.gradle"
+    ext.kotlinVersion = versions.kotlinVersion
+    ext.dokkaVersion = '0.10.0'
 
-  repositories {
-    mavenCentral()
-    google()
-    jcenter()
-  }
+    repositories {
+        mavenCentral()
+        google()
+        jcenter()
+    }
 
-  dependencies {
-    classpath libs.androidGradlePlugin
-    classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlinVersion"
+    dependencies {
+        classpath libs.androidGradlePlugin
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlinVersion"
+        classpath "org.jetbrains.dokka:dokka-gradle-plugin:$dokkaVersion"
 
-    // To measure execution time of a method.
-    classpath 'com.jakewharton.hugo:hugo-plugin:1.2.1'
-
-    // To deploy AAR files to local maven.
-    classpath 'com.github.dcendents:android-maven-gradle-plugin:2.1'
-  }
+        // To deploy AAR files to local maven.
+        classpath 'digital.wup:android-maven-publish:3.6.2'
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
+    }
 }
 
 ext {
-  localMaven = "${rootDir}/../maven/"
-  tripkitGroup = "com.skedgo.tripkit"
-  tripkitVersion= "v1.22.0"
+    localMaven = "${rootDir}/../maven/"
+    tripkitGroup = "com.skedgo.tripkit"
+    tripkitVersion = "2.0.27"
+    publishMavenUrl = "https://www.myget.org/F/skedgo/maven"
+    publishMavenUsername = "mbarringer"
+    publishMavenToken = "764d1786-7ac2-4754-adf5-de72f640cbf4"
 }
 
 allprojects {
-  apply from: "${rootDir}/dependencies.gradle"
+    apply from: "${rootDir}/dependencies.gradle"
 
-  // A workaround for https://code.google.com/p/android/issues/detail?id=72430
-  // and http://g.co/androidstudio/app-test-app-conflict.
-  configurations.all {
-    resolutionStrategy {
-      force libs.rxjava
-      force libs.okHttp
-      force libs.mockWebServer
-      force libs.retrofit
-      force libs.retrofitAdapterRxJava
-      force libs.retrofitConverterGson
+    // A workaround for https://code.google.com/p/android/issues/detail?id=72430
+    // and http://g.co/androidstudio/app-test-app-conflict.
+    configurations.all {
+        resolutionStrategy {
+            force libs.rxjava2
+            force libs.okHttp
+            force libs.mockWebServer
+            force libs.retrofit
+            force libs.retrofitAdapterRxJava
+            force libs.retrofitConverterGson
+        }
     }
-  }
 
-  repositories {
-    google()
-    mavenCentral()
-    jcenter()
-    maven { url "https://jitpack.io" }
-  }
+    repositories {
+        google()
+        mavenCentral()
+        jcenter()
+        maven { url "https://jitpack.io" }
+    }
+}
+
+apply plugin: 'org.jetbrains.dokka'
+
+dokka {
+    outputFormat = 'gfm' // This will be displayed properly by mkdocs, whereas "markdown" will not
+    outputDirectory = "$buildDir/javadoc"
+    subProjects = ["CommonCoreLegacy",
+                   "TripKitAndroid",
+                   "TripKitData",
+                    "TripKitDomain",
+                    "TripKitDomainLegacy"]
+
+    // TODO - We can take advantage of the @sample tag and add module documentation
+    configuration {
+        moduleName = "tripkit-android"
+        includeNonPublic = false
+        skipDeprecated = true
+        reportUndocumented = false
+        platform = "JVM"
+        jdkVersion = 7
+        noStdlibLink = false
+        noJdkLink = false
+
+        // Do not create index pages for empty packages
+        skipEmptyPackages = true
+
+        // Don't document the internal DI
+        perPackageOption {
+            prefix = "com.skedgo.tripkit.ui.core.module"
+            suppress = true
+        }
+    }
 }

@@ -1,18 +1,15 @@
 package skedgo.tripkit.routing;
 
-import com.skedgo.android.common.BuildConfig;
-import com.skedgo.android.common.TestRunner;
-
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.robolectric.annotation.Config;
+import org.robolectric.RobolectricTestRunner;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
-import static org.assertj.core.api.Java6Assertions.*;
+import static org.assertj.core.api.Java6Assertions.assertThat;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 import static skedgo.tripkit.routing.TripComparators.CARBON_COST_COMPARATOR;
@@ -22,8 +19,7 @@ import static skedgo.tripkit.routing.TripComparators.TIME_COMPARATOR_CHAIN;
 import static skedgo.tripkit.routing.TripComparators.WEIGHTED_SCORE_COMPARATOR;
 import static skedgo.tripkit.routing.TripComparators.compareLongs;
 
-@RunWith(TestRunner.class)
-@Config(constants = BuildConfig.class)
+@RunWith(RobolectricTestRunner.class)
 public class TripComparatorsTest {
   @Test public void compareWeightedScores() {
     final Trip lhs = mock(Trip.class);

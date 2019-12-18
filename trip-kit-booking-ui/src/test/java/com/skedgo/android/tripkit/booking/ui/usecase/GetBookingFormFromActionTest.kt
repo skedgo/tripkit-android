@@ -5,10 +5,11 @@ import com.nhaarman.mockitokotlin2.whenever
 import com.skedgo.android.tripkit.booking.BookingAction
 import com.skedgo.android.tripkit.booking.BookingForm
 import com.skedgo.android.tripkit.booking.BookingService
+import io.reactivex.BackpressureStrategy
 import org.assertj.core.api.Java6Assertions.assertThat
 import org.junit.Test
 import org.mockito.BDDMockito.given
-import rx.Observable.just
+import io.reactivex.Observable.just
 
 class GetBookingFormFromActionTest {
   val bookingService: BookingService = mock()
@@ -26,9 +27,9 @@ class GetBookingFormFromActionTest {
 
     val expectedBookingForm = mock<BookingForm>()
 
-    given(bookingService.postFormAsync("action url", null)).willReturn(just(expectedBookingForm))
+    given(bookingService.postFormAsync("action url", null)).willReturn(just(expectedBookingForm).toFlowable(BackpressureStrategy.BUFFER))
 
-    val actualBookingForm = getBookingFormFromAction.execute(bookingForm).toBlocking().first()
-    assertThat(actualBookingForm).isEqualTo(expectedBookingForm)
+    val actualBookingForm = getBookingFormFromAction.execute(bookingForm).test()
+    assertThat(actualBookingForm.values().first()).isEqualTo(expectedBookingForm)
   }
 }

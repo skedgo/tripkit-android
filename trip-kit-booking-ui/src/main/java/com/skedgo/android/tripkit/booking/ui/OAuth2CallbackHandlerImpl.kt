@@ -2,8 +2,8 @@ package com.skedgo.android.tripkit.booking.ui
 
 import android.net.Uri
 import com.skedgo.android.tripkit.booking.*
-import rx.Observable
-import rx.functions.Func1
+import io.reactivex.Observable
+import io.reactivex.functions.Function
 
 
 class OAuth2CallbackHandlerImpl(private val externalOAuthService: ExternalOAuthService, private val bookingService: BookingService) : OAuth2CallbackHandler {
@@ -16,7 +16,7 @@ class OAuth2CallbackHandlerImpl(private val externalOAuthService: ExternalOAuthS
       // get access token
       return externalOAuthService.getAccessToken(bookingForm, code, "authorization_code", callback)
           .flatMap { externalOAuth -> Observable.just(bookingForm.setAuthData(externalOAuth)) }
-          .flatMap { bookingForm -> bookingService.postFormAsync(bookingForm.action!!.url, InputForm.from(bookingForm.form)) }
+          .flatMap { bookingForm -> bookingService.postFormAsync(bookingForm.action!!.url, InputForm.from(bookingForm.form)).toObservable() }
 
     } else if (uri.getQueryParameter("error") != null) {
       return Observable.error<BookingForm>(Error(uri.getQueryParameter("error")))
@@ -26,6 +26,6 @@ class OAuth2CallbackHandlerImpl(private val externalOAuthService: ExternalOAuthS
   }
 
   override fun handleRetryURL(bookingForm: BookingForm, uri: Uri): Observable<BookingForm> {
-    return bookingService.postFormAsync(bookingForm.action!!.url, InputForm.from(bookingForm.form))
+    return bookingService.postFormAsync(bookingForm.action!!.url, InputForm.from(bookingForm.form)).toObservable()
   }
 }

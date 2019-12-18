@@ -6,7 +6,7 @@ import android.content.res.Resources;
 import com.google.gson.Gson;
 import com.jakewharton.picasso.OkHttp3Downloader;
 import com.skedgo.android.common.util.Gsons;
-import skedgo.tripkit.android.TripKit;
+import com.skedgo.TripKit;
 import com.skedgo.android.tripkit.booking.BookingService;
 import com.skedgo.android.tripkit.booking.ExternalOAuthService;
 import com.squareup.picasso.Picasso;

@@ -1,7 +1,7 @@
 package com.skedgo.android.tripkit.booking.ui.viewmodel
 
 import com.skedgo.android.tripkit.booking.BookingForm
-import rx.subjects.PublishSubject
+import io.reactivex.subjects.PublishSubject
 
 class FieldBookingFormViewModel(val bookingForm: BookingForm,
                                 val onNextBookingForm: PublishSubject<BookingForm>

@@ -4,7 +4,7 @@ import android.content.Context
 import androidx.databinding.ObservableArrayList
 import androidx.databinding.ObservableList
 import me.tatarka.bindingcollectionadapter2.ItemBinding
-import rx.Observable
+import io.reactivex.Observable
 import skedgo.tripkit.routing.Trip
 import skedgo.tripkit.samples.BR
 import skedgo.tripkit.samples.R
@@ -14,11 +14,11 @@ class TripDetailsViewModel constructor(context: Context, trip: Trip) {
   val segments: ObservableList<TripSegmentViewModel> = ObservableArrayList()
 
   init {
-    Observable.from(trip.segments)
+    Observable.fromIterable(trip.segments)
         .map { TripSegmentViewModel(context, it) }
         .toList()
-        .subscribe {
+        .subscribe( {
           segments.addAll(it)
-        }
+        }, {})
   }
 }

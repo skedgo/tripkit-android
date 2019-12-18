@@ -3,6 +3,7 @@ package com.skedgo.android.tripkit.booking;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
+import io.reactivex.observers.TestObserver;
 import org.apache.commons.io.IOUtils;
 import org.junit.Before;
 import org.junit.Test;
@@ -13,9 +14,8 @@ import java.nio.charset.Charset;
 import okhttp3.mockwebserver.MockResponse;
 import okhttp3.mockwebserver.MockWebServer;
 import retrofit2.Retrofit;
-import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory;
+import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
-import rx.observers.TestSubscriber;
 
 public class ExternalOAuthApiTest {
 
@@ -37,7 +37,7 @@ public class ExternalOAuthApiTest {
 
     externalOAuthApi = new Retrofit.Builder()
         .baseUrl(mockWebServer.url(""))
-        .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
+        .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
         .addConverterFactory(GsonConverterFactory.create(gson))
         .build()
         .create(ExternalOAuthApi.class);
@@ -54,9 +54,8 @@ public class ExternalOAuthApiTest {
         .tokenType("Bearer")
         .build();
 
-    TestSubscriber<AccessTokenResponse> subscriber = new TestSubscriber<>();
-    externalOAuthApi.getAccessToken("", "", "", "", "", "")
-        .subscribe(subscriber);
+    TestObserver<AccessTokenResponse> subscriber = externalOAuthApi.getAccessToken("", "", "", "", "", "")
+        .test();
     subscriber.awaitTerminalEvent();
 
     subscriber.assertNoErrors();

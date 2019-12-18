@@ -1,8 +1,12 @@
 package com.skedgo.android.common.rx;
 
-import rx.Observable;
-import rx.functions.Action1;
-import rx.subjects.BehaviorSubject;
+
+import io.reactivex.BackpressureStrategy;
+import io.reactivex.Flowable;
+import io.reactivex.Observable;
+import io.reactivex.functions.Consumer;
+import io.reactivex.subjects.BehaviorSubject;
+import org.intellij.lang.annotations.Flow;
 
 /**
  * Represents a mutable property that can be observed via {@link Observable}.
@@ -10,7 +14,7 @@ import rx.subjects.BehaviorSubject;
  * Use {@link BehaviorSubject} instead.
  */
 @Deprecated
-public abstract class Var<T> implements Action1<T> {
+public abstract class Var<T> implements Consumer<T> {
   public static <T> Var<T> create() {
     return new Impl<T>();
   }
@@ -22,7 +26,7 @@ public abstract class Var<T> implements Action1<T> {
   public abstract T value();
   public abstract void put(T value);
   public abstract boolean hasValue();
-  public abstract Observable<T> observe();
+  public abstract Flowable<T> observe();
 
   private static class Impl<T> extends Var<T> {
     private final BehaviorSubject<T> subject;
@@ -34,7 +38,7 @@ public abstract class Var<T> implements Action1<T> {
 
     Impl(T defaultValue) {
       this.value = defaultValue;
-      subject = BehaviorSubject.create(defaultValue);
+      subject = BehaviorSubject.createDefault(defaultValue);
     }
 
     @Override public T value() {
@@ -50,11 +54,12 @@ public abstract class Var<T> implements Action1<T> {
       return value != null;
     }
 
-    @Override public Observable<T> observe() {
-      return subject.asObservable();
+    @Override public Flowable<T> observe() {
+      return subject.toFlowable(BackpressureStrategy.BUFFER);
     }
 
-    @Override public void call(T value) {
+    @Override
+    public void accept(T t) throws Exception {
       put(value);
     }
   }

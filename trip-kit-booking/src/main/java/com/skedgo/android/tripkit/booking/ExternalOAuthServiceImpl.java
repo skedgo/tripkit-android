@@ -2,8 +2,9 @@ package com.skedgo.android.tripkit.booking;
 
 import android.text.TextUtils;
 
-import rx.Observable;
-import rx.functions.Func1;
+import io.reactivex.Observable;
+import io.reactivex.functions.Function;
+import io.reactivex.functions.Predicate;
 
 public class ExternalOAuthServiceImpl implements ExternalOAuthService {
   private final ExternalOAuthServiceGenerator externalOAuthServiceGenerator;
@@ -33,13 +34,13 @@ public class ExternalOAuthServiceImpl implements ExternalOAuthService {
         );
 
     return externalOAuthApi.getAccessToken(clientSecret, clientId, code, "authorization_code", callback, scope)
-        .filter(new Func1<AccessTokenResponse, Boolean>() {
-          @Override public Boolean call(AccessTokenResponse response) {
+        .filter(new Predicate<AccessTokenResponse>() {
+          @Override public boolean test(AccessTokenResponse response) {
             return response != null && response.refreshToken() != null;
           }
         })
-        .map(new Func1<AccessTokenResponse, ExternalOAuth>() {
-          @Override public ExternalOAuth call(AccessTokenResponse response) {
+        .map(new Function<AccessTokenResponse, ExternalOAuth>() {
+          @Override public ExternalOAuth apply(AccessTokenResponse response) {
             String serviceIdString = "";
             if (serviceId != null) {
               serviceIdString = serviceId.toString();

@@ -1,6 +1,7 @@
 package skedgo.tripkit.routing
 
 import org.joda.time.DateTime
+import org.joda.time.DateTimeZone
 import java.util.concurrent.TimeUnit
 
 /**
@@ -9,7 +10,7 @@ import java.util.concurrent.TimeUnit
 val TripSegment.startDateTime
   get(): DateTime = DateTime(
       TimeUnit.SECONDS.toMillis(startTimeInSecs),
-      from.dateTimeZone
+      from?.dateTimeZone ?: DateTimeZone.getDefault()
   )
 
 /**
@@ -18,7 +19,7 @@ val TripSegment.startDateTime
 val TripSegment.endDateTime
   get(): DateTime = DateTime(
       TimeUnit.SECONDS.toMillis(endTimeInSecs),
-      to.dateTimeZone
+      to?.dateTimeZone ?: DateTimeZone.getDefault()
   )
 
 val TripSegment.noActionAlerts

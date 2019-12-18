@@ -8,6 +8,10 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.util.concurrent.TimeUnit;
 
+/**
+ * A TimeTag encapsulates a departure or arrival time, including a dynamic time of "now".
+ *
+ */
 public class TimeTag implements Parcelable {
   public static final Creator<TimeTag> CREATOR = new Creator<TimeTag>() {
     @Override
@@ -21,7 +25,13 @@ public class TimeTag implements Parcelable {
     }
   };
 
+  /**
+   * The time should be used for ARRIVE_BY calculations.
+   */
   public static final int TIME_TYPE_ARRIVE_BY = 1;
+  /**
+   * The time should be used for LEAVE_AFTER calculations (default).
+   */
   public static final int TIME_TYPE_LEAVE_AFTER = 0;
 
   @TimeType
@@ -99,6 +109,8 @@ public class TimeTag implements Parcelable {
   public void setTimeInSecs(long timeInSecs) {
     this.timeInSecs = timeInSecs;
   }
+
+  public long getTimeInMillis() {  return timeInSecs * 1000; }
 
   /**
    * @return True if the time was chosen as 'Now'. Otherwise, false.

@@ -2,27 +2,28 @@ package com.skedgo.android.tripkit.booking;
 
 import com.google.gson.Gson;
 
+import io.reactivex.observers.TestObserver;
+import io.reactivex.subscribers.TestSubscriber;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
-import org.robolectric.annotation.Config;
+import org.robolectric.RobolectricTestRunner;
 
 import okhttp3.MediaType;
 import okhttp3.Protocol;
 import okhttp3.ResponseBody;
 import retrofit2.Response;
-import rx.Observable;
-import rx.observers.TestSubscriber;
+import io.reactivex.Observable;
 
 import static org.assertj.core.api.Java6Assertions.assertThat;
 import static org.junit.Assert.assertNull;
+import static org.junit.Assert.fail;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
-@RunWith(TestRunner.class)
-@Config(constants = BuildConfig.class, sdk = 23)
+@RunWith(RobolectricTestRunner.class)
 public class BookingServiceTest {
   @Mock BookingApi bookingApi;
   private Gson gson;
@@ -44,13 +45,11 @@ public class BookingServiceTest {
     when(bookingApi.getFormAsync("url"))
         .thenReturn(Observable.just(response));
 
-    final TestSubscriber<BookingForm> subscriber = new TestSubscriber<>();
-
-    service.getFormAsync("url").subscribe(subscriber);
+    final TestSubscriber<BookingForm> subscriber = service.getFormAsync("url").test();
     subscriber.awaitTerminalEvent();
     subscriber.assertNoErrors();
 
-    BookingForm result = subscriber.getOnNextEvents().get(0);
+    BookingForm result = subscriber.values().get(0);
 
     assertThat(bookingForm).isEqualTo(result);
 
@@ -67,14 +66,11 @@ public class BookingServiceTest {
     when(bookingApi.getFormAsync("url"))
         .thenReturn(Observable.just(response));
 
-    final TestSubscriber<BookingForm> subscriber = new TestSubscriber<>();
-
-    service.getFormAsync("url").subscribe(subscriber);
+    final TestSubscriber<BookingForm> subscriber = service.getFormAsync("url").test();
     subscriber.awaitTerminalEvent();
     subscriber.assertError(BookingError.class);
 
-    Throwable error = subscriber.getOnErrorEvents().get(0);
-
+    Throwable error = subscriber.errors().get(0);
     assertThat(error.getMessage()).isEqualTo("That userToken is unrecognised.");
 
   }
@@ -90,13 +86,11 @@ public class BookingServiceTest {
     when(bookingApi.postFormAsync("url", inputForm))
         .thenReturn(Observable.just(response));
 
-    final TestSubscriber<BookingForm> subscriber = new TestSubscriber<>();
-
-    service.postFormAsync("url", inputForm).subscribe(subscriber);
+    final TestSubscriber<BookingForm> subscriber = service.postFormAsync("url", inputForm).test();
     subscriber.awaitTerminalEvent();
     subscriber.assertNoErrors();
 
-    BookingForm result = subscriber.getOnNextEvents().get(0);
+    BookingForm result = subscriber.values().get(0);
 
     assertThat(bookingForm).isEqualTo(result);
 
@@ -115,13 +109,11 @@ public class BookingServiceTest {
     when(bookingApi.postFormAsync("url", inputForm))
         .thenReturn(Observable.just(response));
 
-    final TestSubscriber<BookingForm> subscriber = new TestSubscriber<>();
-
-    service.postFormAsync("url", inputForm).subscribe(subscriber);
+    final TestSubscriber<BookingForm> subscriber = service.postFormAsync("url", inputForm).test();
     subscriber.awaitTerminalEvent();
     subscriber.assertError(BookingError.class);
 
-    Throwable error = subscriber.getOnErrorEvents().get(0);
+    Throwable error = subscriber.errors().get(0);
 
     assertThat(error.getMessage()).isEqualTo("That userToken is unrecognised.");
 
@@ -134,15 +126,18 @@ public class BookingServiceTest {
 
     final Response<BookingForm> response = Response.success(bookingForm);
 
-    final TestSubscriber<BookingForm> subscriber = new TestSubscriber<>();
+    try {
+      final TestObserver<BookingForm> subscriber = service.getHandleBookingResponse().apply(response).test();
+      subscriber.awaitTerminalEvent();
+      subscriber.assertNoErrors();
 
-    service.getHandleBookingResponse().call(response).subscribe(subscriber);
-    subscriber.awaitTerminalEvent();
-    subscriber.assertNoErrors();
+      BookingForm result = subscriber.values().get(0);
 
-    BookingForm result = subscriber.getOnNextEvents().get(0);
+      assertThat(bookingForm).isEqualTo(result);
 
-    assertThat(bookingForm).isEqualTo(result);
+    } catch (Exception e) {
+      fail();
+    }
 
   }
 
@@ -157,32 +152,31 @@ public class BookingServiceTest {
             .protocol(Protocol.HTTP_1_1)
             .build());
 
-    final TestSubscriber<BookingForm> subscriber = new TestSubscriber<>();
+    try {
+      final TestObserver<BookingForm> subscriber = service.getHandleBookingResponse().apply(response).test();
+      subscriber.awaitTerminalEvent();
+      subscriber.assertNoErrors();
 
-    service.getHandleBookingResponse().call(response).subscribe(subscriber);
-    subscriber.awaitTerminalEvent();
-    subscriber.assertNoErrors();
+      BookingForm result = subscriber.values().get(0);
 
-    BookingForm result = subscriber.getOnNextEvents().get(0);
-
-    assertThat(NullBookingForm.INSTANCE).isEqualTo(result);
-
+      assertThat(NullBookingForm.INSTANCE).isEqualTo(result);
+    } catch( Exception e) {
+      fail();
+    }
   }
 
-  @Test public void shouldHandleBookingErrorResponse() {
+  @Test public void shouldHandleBookingErrorResponse() throws Exception {
     String responseError = "{\"error\":\"That userToken is unrecognised.\",\"errorCode\":401,\"usererror\":false}";
 
     ResponseBody responseBody = ResponseBody.create(MediaType.parse("application/json"), responseError);
 
     final Response<BookingForm> response = Response.error(401, responseBody);
 
-    final TestSubscriber<BookingForm> subscriber = new TestSubscriber<>();
-
-    service.getHandleBookingResponse().call(response).subscribe(subscriber);
+    final TestObserver<BookingForm> subscriber = service.getHandleBookingResponse().apply(response).test();
     subscriber.awaitTerminalEvent();
     subscriber.assertError(BookingError.class);
 
-    Throwable error = subscriber.getOnErrorEvents().get(0);
+    Throwable error = subscriber.errors().get(0);
 
     assertThat(error.getMessage()).isEqualTo("That userToken is unrecognised.");
 

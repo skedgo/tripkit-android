@@ -2,8 +2,7 @@ package skedgo.tripkit.account.domain
 
 import com.nhaarman.mockitokotlin2.*
 import org.junit.Test
-import rx.Observable.just
-import rx.observers.TestSubscriber
+import io.reactivex.Observable.just
 
 class SignInTest {
   val userTokenRepository: UserTokenRepository = mock()
@@ -15,8 +14,7 @@ class SignInTest {
         .thenReturn(just(userToken))
 
     val credentials = SignInCredentials("spock@vulcan.com", "Insufficient facts always invite danger.")
-    val subscriber = TestSubscriber<UserToken>()
-    signIn.execute(credentials).subscribe(subscriber)
+    val subscriber = signIn.execute(credentials).test()
 
     subscriber.assertValue(userToken)
     verify(userTokenRepository).getUserTokenBySignInCredentials(eq(credentials))

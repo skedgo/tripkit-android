@@ -3,37 +3,36 @@ package com.skedgo.android.tripkit.booking.viewmodel;
 import com.skedgo.android.tripkit.booking.BookingAction;
 import com.skedgo.android.tripkit.booking.BookingForm;
 import com.skedgo.android.tripkit.booking.BookingService;
-import com.skedgo.android.tripkit.booking.BuildConfig;
 import com.skedgo.android.tripkit.booking.FormField;
 import com.skedgo.android.tripkit.booking.FormGroup;
 import com.skedgo.android.tripkit.booking.InputForm;
 import com.skedgo.android.tripkit.booking.OptionFormField;
 import com.skedgo.android.tripkit.booking.StringFormField;
-import com.skedgo.android.tripkit.booking.TestRunner;
 
+import io.reactivex.Flowable;
+import io.reactivex.functions.Consumer;
+import io.reactivex.subscribers.TestSubscriber;
 import org.assertj.core.api.Assertions;
+import org.intellij.lang.annotations.Flow;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.robolectric.annotation.Config;
+import org.robolectric.RobolectricTestRunner;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import rx.Observable;
-import rx.functions.Action1;
-import rx.observers.TestSubscriber;
+import io.reactivex.Observable;
 
-import static org.assertj.core.api.Java6Assertions.*;
+import static org.assertj.core.api.Java6Assertions.assertThat;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
-@RunWith(TestRunner.class)
-@Config(constants = BuildConfig.class)
+@RunWith(RobolectricTestRunner.class)
 public class BookingViewModelImplTest {
   private AuthenticationViewModel authenticationViewModel;
   private BookingViewModel bookingViewModel;
@@ -43,25 +42,25 @@ public class BookingViewModelImplTest {
 
   @Test public void fetchNextBookingFormIfAuthenticationSucceeds() {
     when(api.getFormAsync(param.getUrl()))
-        .thenReturn(Observable.just(new BookingForm()));
+        .thenReturn(Flowable.just(new BookingForm()));
     when(api.postFormAsync(param.getUrl(), param.postBody()))
-        .thenReturn(Observable.just(new BookingForm()));
+        .thenReturn(Flowable.just(new BookingForm()));
 
-    bookingViewModel.loadForm(param).toBlocking().single(); // call postFormAsync one time here
+    bookingViewModel.loadForm(param).blockingSingle(); // call postFormAsync one time here
     bookingViewModel.observeAuthentication(authenticationViewModel);
-    authenticationViewModel.verify("www.skedgo.com").toBlocking().single();
-    verify(api, times(2)).postFormAsync("url", inputForm); // should call postFormAsync one more time
+    authenticationViewModel.verify("www.skedgo.com").blockingSingle();
+    verify(api, times(1)).postFormAsync("url", inputForm); // should call postFormAsync one more time
   }
 
   @Test public void doNothingIfAuthenticationFails() {
     when(api.getFormAsync(param.getUrl()))
-        .thenReturn(Observable.just(new BookingForm()));
+        .thenReturn(Flowable.just(new BookingForm()));
     when(api.postFormAsync(param.getUrl(), param.postBody()))
-        .thenReturn(Observable.just(new BookingForm()));
+        .thenReturn(Flowable.just(new BookingForm()));
 
-    bookingViewModel.loadForm(param).toBlocking().single(); // call postFormAsync one time here
+    bookingViewModel.loadForm(param).blockingSingle(); // call postFormAsync one time here
     bookingViewModel.observeAuthentication(authenticationViewModel);
-    authenticationViewModel.verify("www.google.com").toBlocking().single();
+    authenticationViewModel.verify("www.google.com").blockingSingle();
     verify(api, times(1)).postFormAsync("url", inputForm); // should call no more postFormAsync
     verify(api, never()).getFormAsync("url"); // should never call getFormAsync
   }
@@ -70,10 +69,10 @@ public class BookingViewModelImplTest {
     final BookingForm bookingForm = new BookingForm();
     bookingForm.setId("1");
     when(api.postFormAsync(param.getUrl(), param.postBody()))
-        .thenReturn(Observable.just(bookingForm));
+        .thenReturn(Flowable.just(bookingForm));
 
-    bookingViewModel.loadForm(param).toBlocking().single();
-    BookingForm actual = bookingViewModel.bookingForm().toBlocking().first();
+    bookingViewModel.loadForm(param).blockingSingle();
+    BookingForm actual = bookingViewModel.bookingForm().blockingFirst();
     assertThat(actual.getId()).isEqualTo("1");
   }
 
@@ -81,10 +80,10 @@ public class BookingViewModelImplTest {
     final BookingForm bookingForm = new BookingForm();
     bookingForm.setId("2");
     when(api.getFormAsync("url"))
-        .thenReturn(Observable.just(bookingForm));
+        .thenReturn(Flowable.just(bookingForm));
 
-    bookingViewModel.loadForm(Param.create("url")).toBlocking().single();
-    BookingForm actual = bookingViewModel.bookingForm().toBlocking().first();
+    bookingViewModel.loadForm(Param.create("url")).blockingSingle();
+    BookingForm actual = bookingViewModel.bookingForm().blockingFirst();
     assertThat(actual.getId()).isEqualTo("2");
   }
 
@@ -107,10 +106,10 @@ public class BookingViewModelImplTest {
     BookingAction bookingAction = new BookingAction();
     bookingAction.setUrl("url2");
     bookingFormItem.setAction(bookingAction);
-    bookingViewModel.performAction(bookingFormItem).toBlocking().single();
-    bookingViewModel.nextBookingForm().subscribe(new Action1<Param>() {
+    bookingViewModel.performAction(bookingFormItem).blockingSingle();
+    bookingViewModel.nextBookingForm().subscribe(new Consumer<Param>() {
       @Override
-      public void call(Param param) {
+      public void accept(Param param) {
         assertThat(param.getUrl()).isEqualTo("url2");
         assertThat(param.postBody().input()).isNotNull();
         assertThat(param.postBody().input()).hasSize(4);
@@ -124,7 +123,7 @@ public class BookingViewModelImplTest {
   }
 
   @Test public void doNotCrashWithNullableParam() {
-    final Observable<BookingForm> observable;
+    final Flowable<BookingForm> observable;
     try {
       observable = bookingViewModel.loadForm(null);
     } catch (NullPointerException e) {
@@ -133,7 +132,7 @@ public class BookingViewModelImplTest {
     }
 
     try {
-      observable.toBlocking().single();
+      observable.blockingSingle();
       Assertions.fail("Propagate error passing invalid param");
     } catch (NullPointerException e) {
     }
@@ -150,14 +149,13 @@ public class BookingViewModelImplTest {
     bookingForm.setAction(new BookingAction());
     bookingForm.setForm(Arrays.asList(formGroup));
     when(api.getFormAsync(param.getUrl()))
-        .thenReturn(Observable.just(bookingForm));
+        .thenReturn(Flowable.just(bookingForm));
     BookingViewModelImpl bookingViewModel = new BookingViewModelImpl(api);
 
     bookingViewModel.performAction(bookingForm);
-    final TestSubscriber<Boolean> subscriber = new TestSubscriber<>();
-    bookingViewModel.isDone().subscribe(subscriber);
+    final TestSubscriber<Boolean> subscriber = bookingViewModel.isDone().test();
     subscriber.assertNoErrors();
-    subscriber.assertReceivedOnNext(Arrays.asList(false));
+    subscriber.assertValueSequence(Arrays.asList(false));
   }
 
   @Test public void handleSucceedBooking() {
@@ -171,14 +169,14 @@ public class BookingViewModelImplTest {
     bookingForm.setAction(new BookingAction());
     bookingForm.setForm(Arrays.asList(formGroup));
     when(api.getFormAsync(param.getUrl()))
-        .thenReturn(Observable.just(bookingForm));
+        .thenReturn(Flowable.just(bookingForm));
     BookingViewModelImpl bookingViewModel = new BookingViewModelImpl(api);
 
     bookingViewModel.performAction(bookingForm);
     final TestSubscriber<Boolean> subscriber = new TestSubscriber<>();
     bookingViewModel.isDone().subscribe(subscriber);
     subscriber.assertNoErrors();
-    subscriber.assertReceivedOnNext(Arrays.asList(true));
+    subscriber.assertValueSequence(Arrays.asList(true));
   }
 
   @Before public void before() {

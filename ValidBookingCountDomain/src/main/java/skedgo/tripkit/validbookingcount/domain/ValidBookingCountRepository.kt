@@ -1,6 +1,6 @@
 package skedgo.tripkit.validbookingcount.domain
 
-import rx.Observable
+import io.reactivex.Observable
 
 interface ValidBookingCountRepository {
   fun getLocalValidBookingCount(): Observable<Int>

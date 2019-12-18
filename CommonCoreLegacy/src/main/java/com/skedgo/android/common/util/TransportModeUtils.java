@@ -1,6 +1,7 @@
 package com.skedgo.android.common.util;
 
 import android.content.res.Resources;
+import android.util.Log;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import android.util.DisplayMetrics;

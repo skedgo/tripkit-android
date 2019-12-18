@@ -17,9 +17,9 @@ import com.skedgo.android.tripkit.booking.ui.usecase.GetBookingFormFromAction
 import com.skedgo.android.tripkit.booking.ui.usecase.GetBookingFormFromUrl
 import com.skedgo.android.tripkit.booking.ui.usecase.IsCancelAction
 import com.skedgo.android.tripkit.booking.ui.usecase.IsDoneAction
-import rx.Observable
-import rx.android.schedulers.AndroidSchedulers.mainThread
-import rx.subjects.PublishSubject
+import io.reactivex.Observable
+import io.reactivex.android.schedulers.AndroidSchedulers.mainThread
+import io.reactivex.subjects.PublishSubject
 import javax.inject.Inject
 
 class BookingFormViewModel
@@ -58,14 +58,14 @@ class BookingFormViewModel
   fun onAction() {
     when {
       isCancelAction.execute(bookingForm) -> onCancel.onNext(true)
-      isDoneAction.execute(bookingForm) -> onDone.onNext(bookingForm)
-      else -> onNextBookingFormAction.onNext(bookingForm)
+      isDoneAction.execute(bookingForm) -> onDone.onNext(bookingForm!!)
+      else -> onNextBookingFormAction.onNext(bookingForm!!)
     }
   }
 
   fun onRetry() {
     if (bookingError != null) {
-      onErrorRetry.onNext(bookingError?.url)
+      onErrorRetry.onNext(bookingError?.url!!)
     } else {
       onRetryClicked.onNext(Unit)
     }
@@ -85,13 +85,13 @@ class BookingFormViewModel
       type == BOOKING_TYPE_FORM && bundle.containsKey(KEY_FORM) ->
         Observable.just(bundle.getParcelable(KEY_FORM))
       type == BOOKING_TYPE_ACTION && bundle.containsKey(KEY_FORM) ->
-        getBookingFormFromAction.execute(bundle.getParcelable(KEY_FORM))
+        getBookingFormFromAction.execute(bundle.getParcelable(KEY_FORM)!!)
       else -> Observable.error(Error("Wrong booking form request parameter"))
     }
         .observeOn(mainThread())
         .doOnNext { nextBookingForm ->
           if (nextBookingForm == null || nextBookingForm == NullBookingForm) {
-            onDone.onNext(nextBookingForm)
+            onDone.onNext(NullBookingForm)
           } else {
             bookingForm = nextBookingForm
             updateBookingFormInfo()
@@ -106,7 +106,7 @@ class BookingFormViewModel
           hasError.set(false)
           isLoading.set(true)
         }
-        .doOnCompleted {
+        .doOnComplete {
           isLoading.set(false)
         }
         .retryWhen {
@@ -115,7 +115,7 @@ class BookingFormViewModel
               Observable.error<Any>(it)
             } else {
               onRetryClicked
-                  .first()
+                  .firstOrError().toObservable()
             }
           }
         }

@@ -5,9 +5,9 @@ import com.nhaarman.mockitokotlin2.verify
 import com.nhaarman.mockitokotlin2.verifyZeroInteractions
 import com.nhaarman.mockitokotlin2.whenever
 import org.junit.Test
-import rx.Observable.empty
-import rx.Observable.just
-import rx.observers.TestSubscriber
+import io.reactivex.Observable.empty
+import io.reactivex.Observable.just
+import io.reactivex.observers.TestSubscriber
 import skedgo.tripkit.account.domain.HasUserToken
 
 class GetRemoteValidBookingCountTest {

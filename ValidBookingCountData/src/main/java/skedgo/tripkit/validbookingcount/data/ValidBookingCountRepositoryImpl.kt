@@ -1,8 +1,10 @@
 package skedgo.tripkit.validbookingcount.data
 
 import android.content.SharedPreferences
-import rx.Emitter
-import rx.Observable
+import io.reactivex.BackpressureStrategy
+import io.reactivex.Emitter
+import io.reactivex.Flowable
+import io.reactivex.Observable
 import skedgo.tripkit.validbookingcount.domain.ValidBookingCountRepository
 
 internal class ValidBookingCountRepositoryImpl(
@@ -14,7 +16,7 @@ internal class ValidBookingCountRepositoryImpl(
   }
 
   override fun getLocalValidBookingCount(): Observable<Int>
-      = Observable.create<Int>({
+      = Flowable.create<Int>({
     if (preferences.contains(KEY_VALID_BOOKING_COUNT)) {
       it.onNext(preferences.getInt(KEY_VALID_BOOKING_COUNT, -1))
     }
@@ -24,8 +26,8 @@ internal class ValidBookingCountRepositoryImpl(
       }
     }
     preferences.registerOnSharedPreferenceChangeListener(listener)
-    it.setCancellation { preferences.unregisterOnSharedPreferenceChangeListener(listener) }
-  }, Emitter.BackpressureMode.BUFFER)
+    it.setCancellable { preferences.unregisterOnSharedPreferenceChangeListener(listener) }
+  }, BackpressureStrategy.BUFFER).toObservable()
 
   override fun getRemoteValidBookingCount(): Observable<Int>
       = api.fetchValidBookingCount()

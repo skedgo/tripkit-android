@@ -1,7 +1,7 @@
 apply plugin: 'com.android.library'
-apply plugin: 'com.github.dcendents.android-maven'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-kapt'
+apply plugin: 'digital.wup.android-maven-publish'
 
 android {
   compileSdkVersion versions.compileSdkVersion
@@ -24,9 +24,11 @@ dependencies {
   testImplementation libs.mockitoCore
   testImplementation libs.robolectric
   testImplementation libs.mockWebServer
+  testImplementation libs.androidxTesting
+  testImplementation libs.androidxJUnitExtTesting
 
   implementation libs.supportAnnotations
-  implementation libs.rxjava
+  implementation libs.rxjava2
   implementation libs.retrofitConverterGson
   implementation libs.retrofitAdapterRxJava
   implementation libs.retrofit
@@ -69,12 +71,35 @@ artifacts {
   archives javadocJar
 }
 
-uploadArchives {
+group = tripkitGroup
+version = tripkitVersion
+
+publishing {
   repositories {
-    mavenDeployer {
-      repository(url: "file://${localMaven}")
-      pom.groupId = tripkitGroup
-      pom.version = tripkitVersion
+    maven {
+//      url = "file://${localMaven}"
+      url = publishMavenUrl
+      credentials {
+        username = publishMavenUsername
+        password = publishMavenToken
+      }
+    }
+  }
+
+  publications {
+    mavenAar(MavenPublication) {
+      groupId = group
+      version = version
+      from components.android
+      pom {
+        licenses {
+          license {
+            name = 'Commercial'
+          }
+        }
+
+      }
     }
   }
 }
+

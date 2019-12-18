@@ -3,19 +3,16 @@ package com.skedgo.android.common.util;
 import android.annotation.TargetApi;
 import android.content.res.Resources;
 import android.os.Build;
-import androidx.annotation.NonNull;
 import android.util.DisplayMetrics;
 
-import com.skedgo.android.common.BuildConfig;
-import com.skedgo.android.common.TestRunner;
 import com.skedgo.android.common.model.TransportMode;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.robolectric.annotation.Config;
+import org.robolectric.RobolectricTestRunner;
 
-import skedgo.tripkit.configuration.Server;
+import androidx.annotation.NonNull;
 import skedgo.tripkit.routing.ModeInfo;
 
 import static android.util.DisplayMetrics.DENSITY_HIGH;
@@ -33,8 +30,7 @@ import static org.assertj.core.api.Java6Assertions.assertThat;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
-@RunWith(TestRunner.class)
-@Config(constants = BuildConfig.class)
+@RunWith(RobolectricTestRunner.class)
 public class TransportModeUtilsTest {
   private Resources resources;
 

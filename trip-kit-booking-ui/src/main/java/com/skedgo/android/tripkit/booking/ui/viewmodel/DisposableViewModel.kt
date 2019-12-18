@@ -1,17 +1,21 @@
 package com.skedgo.android.tripkit.booking.ui.viewmodel
 
 import androidx.annotation.CallSuper
-import rx.Observable
-import rx.subjects.PublishSubject
+import io.reactivex.Observable
+import io.reactivex.subjects.PublishSubject
+
+enum class Nothing {
+  INSTANCE
+}
 
 abstract class DisposableViewModel {
-  private val _onDispose = PublishSubject.create<Void>()
+  private val _onDispose = PublishSubject.create<Nothing>()
 
-  fun onDispose(): Observable<Void> {
-    return _onDispose.asObservable()
+  fun onDispose(): Observable<Nothing> {
+    return _onDispose.hide()
   }
 
   @CallSuper fun dispose() {
-    _onDispose.onNext(null)
+    _onDispose.onNext(Nothing.INSTANCE)
   }
 }

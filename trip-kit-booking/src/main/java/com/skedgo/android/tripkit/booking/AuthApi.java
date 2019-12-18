@@ -7,7 +7,7 @@ import java.util.List;
 import okhttp3.HttpUrl;
 import retrofit2.http.GET;
 import retrofit2.http.Url;
-import rx.Observable;
+import io.reactivex.Observable;
 
 /**
  * @see <a href="http://skedgo.github.io/tripgo-api/swagger/?url=http://skedgo.github.io/tripgo-api/auth.swagger.yaml#/Auth">Auth APIs</a>

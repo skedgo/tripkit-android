@@ -18,10 +18,10 @@ import java.util.concurrent.TimeUnit;
 
 /**
  * Represents a query to find routes from A to B.
- * <p>
- * Note that, to avoid {@link TransactionTooLargeException}, it's discouraged to
- * pass any instance of {@link Query} to {@link Intent} or {@link Bundle}.
- * The {@link Parcelable} is subject to deletion at anytime.
+ *
+ * Note that, to avoid `TransactionTooLargeException`, it's discouraged to
+ * pass any instance of `Query` to an `Intent` or a `Bundle`.
+ * The `Parcelable` is subject to deletion at anytime.
  */
 public class Query implements Parcelable {
   public static final Creator<Query> CREATOR = new Creator<Query>() {
@@ -115,7 +115,7 @@ public class Query implements Parcelable {
   }
 
   /**
-   * @return values of {@link Units}.
+   * @return values of [Units](/tripkit-android/com.skedgo.android.common.model/-units/).
    */
   public String getUnit() {
     if (TextUtils.isEmpty(mUnit)) {
@@ -125,7 +125,7 @@ public class Query implements Parcelable {
   }
 
   /**
-   * @param unit Must be values of {@link Units}.
+   * @param unit Must be values of [Units](/tripkit-android/com.skedgo.android.common.model/-units/).
    */
   public void setUnit(final String unit) {
     this.mUnit = unit;

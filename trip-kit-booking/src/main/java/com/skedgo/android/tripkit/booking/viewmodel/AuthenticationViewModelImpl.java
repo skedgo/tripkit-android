@@ -1,9 +1,9 @@
 package com.skedgo.android.tripkit.booking.viewmodel;
 
 import com.skedgo.android.common.rx.Var;
-
-import rx.Observable;
-import rx.Subscriber;
+import io.reactivex.Observable;
+import io.reactivex.ObservableEmitter;
+import io.reactivex.ObservableOnSubscribe;
 
 public final class AuthenticationViewModelImpl implements AuthenticationViewModel {
   private final Var<Boolean> isSuccessful = Var.create(false);
@@ -16,18 +16,18 @@ public final class AuthenticationViewModelImpl implements AuthenticationViewMode
 
   @Override
   public Observable<Boolean> isSuccessful() {
-    return isSuccessful.observe();
+    return isSuccessful.observe().toObservable();
   }
 
   @Override
   public Observable<Boolean> verify(final Object param) {
     return Observable
-        .create(new Observable.OnSubscribe<Boolean>() {
+        .create(new ObservableOnSubscribe<Boolean>() {
           @Override
-          public void call(Subscriber<? super Boolean> subscriber) {
+          public void subscribe(ObservableEmitter<Boolean> subscriber) {
             final String url = String.valueOf(param);
             subscriber.onNext(url != null && url.contains("skedgo.com"));
-            subscriber.onCompleted();
+            subscriber.onComplete();
           }
         })
         .doOnNext(isSuccessful);

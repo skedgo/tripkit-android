@@ -7,11 +7,12 @@ import android.text.TextUtils;
 import com.skedgo.android.common.rx.Var;
 import com.skedgo.android.tripkit.booking.OptionFormField;
 
+import io.reactivex.Flowable;
 import org.apache.commons.collections4.CollectionUtils;
 
 import java.util.List;
 
-import rx.Observable;
+import io.reactivex.Observable;
 
 public class OptionFieldViewModel implements TwoLineViewModel {
   private final OptionFormField optionField;
@@ -28,7 +29,7 @@ public class OptionFieldViewModel implements TwoLineViewModel {
     return new OptionFieldViewModel(optionField);
   }
 
-  public Observable<OptionFieldViewModel> onValueSelected() {
+  public Flowable<OptionFieldViewModel> onValueSelected() {
     return onValueSelected.observe();
   }
 

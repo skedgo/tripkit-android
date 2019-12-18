@@ -14,11 +14,11 @@ import com.skedgo.android.tripkit.booking.ui.DaggerBookingUiComponent
 import com.skedgo.android.tripkit.booking.ui.R
 import com.skedgo.android.tripkit.booking.ui.databinding.ActivityBookingBinding
 import com.skedgo.android.tripkit.booking.ui.viewmodel.*
+import com.skedgo.rxlifecyclecomponents.RxAppCompatActivity
+import com.skedgo.rxlifecyclecomponents.bindToLifecycle
 import me.tatarka.bindingcollectionadapter2.ItemBinding
 import me.tatarka.bindingcollectionadapter2.itembindings.OnItemBindClass
-import rx.android.schedulers.AndroidSchedulers.mainThread
-import skedgo.rxlifecyclecomponents.RxAppCompatActivity
-import skedgo.rxlifecyclecomponents.bindToLifecycle
+import io.reactivex.android.schedulers.AndroidSchedulers.mainThread
 import javax.inject.Inject
 
 const val BOOKING_TYPE_URL = 0
@@ -76,7 +76,6 @@ open class BookingActivity : RxAppCompatActivity() {
     binding.viewModel = viewModel
 
     viewModel.onUpdateFormTitle
-        .asObservable()
         .observeOn(mainThread())
         .bindToLifecycle(this)
         .subscribe({ title ->
@@ -84,7 +83,6 @@ open class BookingActivity : RxAppCompatActivity() {
         }, onError)
 
     viewModel.onDone
-        .asObservable()
         .observeOn(mainThread())
         .bindToLifecycle(this)
         .subscribe({ form ->
@@ -92,7 +90,6 @@ open class BookingActivity : RxAppCompatActivity() {
         }, onError)
 
     viewModel.onCancel
-        .asObservable()
         .observeOn(mainThread())
         .bindToLifecycle(this)
         .subscribe({
@@ -100,7 +97,6 @@ open class BookingActivity : RxAppCompatActivity() {
         }, onError)
 
     viewModel.onErrorRetry
-        .asObservable()
         .observeOn(mainThread())
         .bindToLifecycle(this)
         .subscribe({ url ->
@@ -108,7 +104,6 @@ open class BookingActivity : RxAppCompatActivity() {
         }, onError)
 
     viewModel.onNextBookingForm
-        .asObservable()
         .observeOn(mainThread())
         .bindToLifecycle(this)
         .subscribe({ bookingForm ->
@@ -119,7 +114,6 @@ open class BookingActivity : RxAppCompatActivity() {
         }, onError)
 
     viewModel.onNextBookingFormAction
-        .asObservable()
         .observeOn(mainThread())
         .bindToLifecycle(this)
         .subscribe({ bookingForm ->
@@ -131,7 +125,6 @@ open class BookingActivity : RxAppCompatActivity() {
 
 
     viewModel.onExternalForm
-        .asObservable()
         .observeOn(mainThread())
         .bindToLifecycle(this)
         .subscribe({ externalFormField ->
