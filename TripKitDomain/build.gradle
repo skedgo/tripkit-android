@@ -1,7 +1,7 @@
 apply plugin: "kotlin"
 apply plugin: "kotlin-kapt"
 apply plugin: 'java'
-apply plugin: 'maven'
+apply plugin: 'maven-publish'
 
 // To fix error of converting bytecode to dex.
 targetCompatibility = '1.7'
@@ -14,9 +14,10 @@ dependencies {
   testImplementation libs.mockitoKotlin
 
   implementation libs.jodaTime
-  implementation libs.rxjava
+  implementation libs.rxjava2
   implementation libs.dagger
   kapt libs.daggerCompiler
+  implementation libs.gson
 
   implementation libs.kotlin
   kapt libs.value
@@ -40,12 +41,35 @@ artifacts {
   archives javadocJar
 }
 
-uploadArchives {
+group = tripkitGroup
+version = tripkitVersion
+
+publishing {
   repositories {
-    mavenDeployer {
-      repository(url: "file://${localMaven}")
-      pom.groupId = tripkitGroup
-      pom.version = tripkitVersion
+    maven {
+//      url = "file://${localMaven}"
+      url = publishMavenUrl
+      credentials {
+        username = publishMavenUsername
+        password = publishMavenToken
+      }
+    }
+  }
+
+  publications {
+    mavenAar(MavenPublication) {
+      groupId = group
+      version = version
+      from components.java
+      pom {
+        licenses {
+          license {
+            name = 'Commercial'
+          }
+        }
+
+      }
     }
   }
 }
+

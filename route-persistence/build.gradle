@@ -1,12 +1,10 @@
 apply plugin: 'com.android.library'
-apply plugin: 'com.jakewharton.hugo'
-apply plugin: 'com.github.dcendents.android-maven'
+apply plugin: 'digital.wup.android-maven-publish'
 apply plugin: 'kotlin-android'
 
 android {
   compileSdkVersion versions.compileSdkVersion
 
-  // To print Hugo's logs.
   // defaultPublishConfig 'debug'
 
   lintOptions {
@@ -17,8 +15,8 @@ android {
   }
 
   defaultConfig {
-    minSdkVersion 15
-    targetSdkVersion 27
+    minSdkVersion versions.proMinSdkVersion
+    targetSdkVersion versions.targetSdkVersion
     versionCode 1
     versionName '1.0'
     testInstrumentationRunner 'androidx.test.runner.AndroidJUnitRunner'
@@ -34,30 +32,56 @@ android {
 
 dependencies {
   implementation project(':CommonCoreLegacy')
-  implementation 'com.github.skedgo:sqlite-utils:v1.0'
+  implementation project(':sqliteutils')
   implementation libs.appCompat
   implementation libs.gson
   implementation libs.supportAnnotations
   implementation project(":TripKitDomain")
   implementation libs.kotlin
+  implementation libs.rxjava2
+
   testImplementation libs.junit
   testImplementation libs.assertjCore
   testImplementation libs.mockitoCore
   testImplementation libs.robolectric
+  testImplementation libs.androidxTesting
+  testImplementation libs.androidxJUnitExtTesting
   testImplementation libs.mockitoKotlin, { exclude group: 'org.jetbrains.kotlin' }
   testImplementation libs.kluent
-
   androidTestImplementation 'androidx.test.espresso:espresso-core:3.1.0', {
     exclude group: 'com.android.support', module: 'support-annotations'
   }
 }
 
-uploadArchives {
+group = tripkitGroup
+version = tripkitVersion
+
+publishing {
   repositories {
-    mavenDeployer {
-      repository(url: "file://${localMaven}")
-      pom.groupId = tripkitGroup
-      pom.version = tripkitVersion
+    maven {
+//      url = "file://${localMaven}"
+      url = publishMavenUrl
+      credentials {
+        username = publishMavenUsername
+        password = publishMavenToken
+      }
+    }
+  }
+
+  publications {
+    mavenAar(MavenPublication) {
+      groupId = group
+      version = version
+      from components.android
+      pom {
+        licenses {
+          license {
+            name = 'Commercial'
+          }
+        }
+
+      }
     }
   }
 }
+

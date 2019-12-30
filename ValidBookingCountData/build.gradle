@@ -1,7 +1,7 @@
 apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-kapt'
-apply plugin: 'com.github.dcendents.android-maven'
+apply plugin: 'digital.wup.android-maven-publish'
 
 android {
   compileSdkVersion versions.compileSdkVersion
@@ -22,8 +22,10 @@ dependencies {
   testImplementation libs.robolectric
   testImplementation libs.mockitoKotlin
   testImplementation libs.assertjCore
+  testImplementation libs.androidxTesting
+  testImplementation libs.androidxJUnitExtTesting
 
-  implementation libs.rxjava
+  implementation libs.rxjava2
   implementation libs.retrofit
   implementation libs.retrofitConverterGson
   implementation libs.retrofitAdapterRxJava
@@ -49,7 +51,7 @@ task sourcesJar(type: Jar) {
 }
 
 task javadoc(type: Javadoc) {
-  failOnError  false
+  failOnError false
   source = android.sourceSets.main.java.sourceFiles
   classpath += project.files(android.getBootClasspath().join(File.pathSeparator))
   classpath += configurations.compile
@@ -66,12 +68,35 @@ artifacts {
   archives javadocJar
 }
 
-uploadArchives {
+group = tripkitGroup
+version = tripkitVersion
+
+publishing {
   repositories {
-    mavenDeployer {
-      repository(url: "file://${localMaven}")
-      pom.groupId = tripkitGroup
-      pom.version = tripkitVersion
+    maven {
+//      url = "file://${localMaven}"
+      url = publishMavenUrl
+      credentials {
+        username = publishMavenUsername
+        password = publishMavenToken
+      }
+    }
+  }
+
+  publications {
+    mavenAar(MavenPublication) {
+      groupId = group
+      version = version
+      from components.android
+      pom {
+        licenses {
+          license {
+            name = 'Commercial'
+          }
+        }
+
+      }
     }
   }
 }
+

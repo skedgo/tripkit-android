@@ -2,21 +2,19 @@ package com.skedgo.routepersistence;
 
 import android.util.Pair;
 
-import skedgo.tripkit.routing.TripGroup;
-
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.robolectric.RobolectricTestRunner;
-import org.robolectric.annotation.Config;
 
 import java.util.concurrent.TimeUnit;
 
-import static org.assertj.core.api.Java6Assertions.*;
+import com.skedgo.tripkit.routing.TripGroup;
+
+import static org.assertj.core.api.Java6Assertions.assertThat;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 @RunWith(RobolectricTestRunner.class)
-@Config(constants = BuildConfig.class, sdk = 22)
 public class WhereClausesTest {
   @Test public void shouldCreateClauseToMatchUuid() {
     final TripGroup group = mock(TripGroup.class);

@@ -1,6 +1,6 @@
 package com.skedgo.routepersistence
 
-import skedgo.tripkit.routingstatus.Status
+import com.skedgo.tripkit.routingstatus.Status
 
 fun Status.toDto(): String {
   return when (this) {

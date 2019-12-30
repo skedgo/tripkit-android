@@ -1,10 +1,17 @@
-<manifest package="com.skedgo.android.tripkit"
+<manifest package="com.skedgo.tripkit"
   xmlns:android="http://schemas.android.com/apk/res/android">
+  <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+  <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+  <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+  <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+  <uses-permission android:name="android.permission.INTERNET" />
+  <uses-permission android:name="android.permission.READ_CALENDAR" />
+  <uses-permission android:name="android.permission.WRITE_CALENDAR" />
+  <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
 
   <application>
-    <!-- This will be merged into the Manifest of projects depending on this library. -->
     <service
-      android:name="skedgo.tripkit.android.FetchRegionsService"
+      android:name="com.skedgo.tripkit.android.FetchRegionsService"
       android:exported="false">
       <intent-filter>
         <action android:name="com.firebase.jobdispatcher.ACTION_EXECUTE" />

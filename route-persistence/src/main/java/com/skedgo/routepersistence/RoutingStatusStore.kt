@@ -3,9 +3,9 @@ package com.skedgo.routepersistence
 import android.content.ContentValues
 import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
-import rx.Completable
-import rx.Single
-import rx.schedulers.Schedulers.io
+import io.reactivex.Completable
+import io.reactivex.Single
+import io.reactivex.schedulers.Schedulers
 
 class RoutingStatusStore constructor(private val databaseHelper: SQLiteOpenHelper) {
   fun getLastStatus(requestId: String): Single<Pair<String, String>> {
@@ -17,13 +17,17 @@ class RoutingStatusStore constructor(private val databaseHelper: SQLiteOpenHelpe
               arrayOf(requestId),
               null, null, null
           )
-          cursor.moveToFirst()
-          val status = cursor.getString(cursor.getColumnIndex(RoutingStatusContract.STATUS))
-          val message = cursor.getString(cursor.getColumnIndex(RoutingStatusContract.STATUS_MESSAGE))
-          cursor.close()
-          Pair(status, message)
+          if (cursor.moveToFirst()) {
+              val status = cursor.getString(cursor.getColumnIndex(RoutingStatusContract.STATUS))
+              val message = cursor.getString(cursor.getColumnIndex(RoutingStatusContract.STATUS_MESSAGE))
+              cursor.close()
+              Pair(status, message)
+          } else {
+              Pair("Error", "Not Started Yet")
+          }
+
         }
-        .subscribeOn(io())
+        .subscribeOn(Schedulers.io())
   }
 
   fun updateStatus(requestId: String, status: String, message: String?): Completable {
@@ -40,6 +44,6 @@ class RoutingStatusStore constructor(private val databaseHelper: SQLiteOpenHelpe
               SQLiteDatabase.CONFLICT_REPLACE
           )
         }
-        .subscribeOn(io())
+        .subscribeOn(Schedulers.io())
   }
 }

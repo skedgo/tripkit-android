@@ -2,9 +2,9 @@ package com.skedgo.routepersistence;
 
 import android.database.sqlite.SQLiteDatabase;
 
-import skedgo.sqlite.DatabaseField;
-import skedgo.sqlite.DatabaseTable;
-import skedgo.sqlite.UniqueIndices;
+import com.skedgo.sqlite.DatabaseField;
+import com.skedgo.sqlite.DatabaseTable;
+import com.skedgo.sqlite.UniqueIndices;
 
 final class RouteContract {
   static final String COL_REQUEST_ID = "requestId";
