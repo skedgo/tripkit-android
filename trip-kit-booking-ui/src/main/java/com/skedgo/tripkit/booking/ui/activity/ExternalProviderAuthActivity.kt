@@ -55,7 +55,7 @@ class ExternalProviderAuthActivity : RxAppCompatActivity() {
     binding.viewModel = viewModel
 
     val args = intent.extras
-    viewModel.handleArgs(args)
+    args?.let { viewModel.handleArgs(it) }
 
     // hack to solve web view keyboard issue
     binding.edit.isFocusable = true

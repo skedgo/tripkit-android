@@ -79,7 +79,7 @@ class BookingFormViewModel
 
     return when {
       type == BOOKING_TYPE_URL && bundle.containsKey(KEY_URL) ->
-        getBookingFormFromUrl.execute(bundle.getString(KEY_URL))
+        getBookingFormFromUrl.execute(bundle.getString(KEY_URL)!!)
       type == BOOKING_TYPE_FORM && bundle.containsKey(KEY_FORM) ->
         Observable.just(bundle.getParcelable(KEY_FORM))
       type == BOOKING_TYPE_ACTION && bundle.containsKey(KEY_FORM) ->

@@ -53,7 +53,7 @@ class ExternalWebActivity : RxAppCompatActivity() {
     binding.setViewModel(viewModel)
 
     val args = intent.extras
-    viewModel.handleArgs(args)
+    args?.let { viewModel.handleArgs(it) }
 
     binding.webView.settings.javaScriptEnabled = true
     binding.webView.setWebViewClient(viewModel.webViewClient())
