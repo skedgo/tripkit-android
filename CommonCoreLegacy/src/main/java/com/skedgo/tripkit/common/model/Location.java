@@ -5,6 +5,7 @@ import android.os.Parcelable;
 import androidx.annotation.Nullable;
 import android.text.TextUtils;
 
+import com.google.gson.Gson;
 import com.google.gson.annotations.SerializedName;
 import com.skedgo.tripkit.common.util.StringUtils;
 
