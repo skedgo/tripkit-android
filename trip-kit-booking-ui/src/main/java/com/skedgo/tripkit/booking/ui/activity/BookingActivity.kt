@@ -132,9 +132,11 @@ open class BookingActivity : RxAppCompatActivity() {
           startActivityForResult(intent, RQ_EXTERNAL_WEB)
         }, onError)
 
-    viewModel.fetchBookingFormAsync(intent.extras)
-        .bindToLifecycle(this)
-        .subscribe({}, onError)
+    intent.extras?.let {
+      viewModel.fetchBookingFormAsync(it)
+              .bindToLifecycle(this)
+              .subscribe({}, onError)
+    }
 
   }
 
