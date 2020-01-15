@@ -1,7 +1,6 @@
 package com.skedgo.tripkit.a2brouting
 
 import com.skedgo.tripkit.common.model.Query
-import com.skedgo.tripkit.TransitModeFilter
 import com.skedgo.tripkit.TransportModeFilter
 import io.reactivex.Observable
 import io.reactivex.subjects.PublishSubject
@@ -22,10 +21,9 @@ class SingleRouteService(private val routeService: RouteService) : RouteService 
   private val cancellationSignal = PublishSubject.create<Any>().toSerialized()
 
   override fun routeAsync(query: Query,
-                          transportModeFilter: TransportModeFilter,
-                          transitModeFilter: TransitModeFilter): Observable<List<TripGroup>> {
+                          transportModeFilter: TransportModeFilter): Observable<List<TripGroup>> {
     cancellationSignal.onNext(Any())
-    return routeService.routeAsync(query, transportModeFilter, transitModeFilter)
+    return routeService.routeAsync(query, transportModeFilter)
         .takeUntil(cancellationSignal)
   }
 }

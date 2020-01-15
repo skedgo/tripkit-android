@@ -4,7 +4,6 @@ import com.nhaarman.mockitokotlin2.any
 import com.nhaarman.mockitokotlin2.eq
 import com.nhaarman.mockitokotlin2.whenever
 import com.skedgo.tripkit.common.model.Query
-import com.skedgo.tripkit.TransitModeFilter
 import com.skedgo.tripkit.TransportModeFilter
 import org.assertj.core.api.Java6Assertions.assertThat
 import org.junit.Before
@@ -24,7 +23,6 @@ class SingleRouteServiceTest {
   internal lateinit var routeService: RouteService
 
   internal var transportModeFilter = object : TransportModeFilter {}
-  internal var transitModeFilter = object : TransitModeFilter {}
   private lateinit var singleRouteService: SingleRouteService
 
   @Before
@@ -41,14 +39,14 @@ class SingleRouteServiceTest {
   fun shouldCancelPreviousRequest_withQuery() {
     val emitter1 = PublishSubject.create<List<TripGroup>>()
     val emitter2 = PublishSubject.create<List<TripGroup>>()
-    whenever(routeService.routeAsync(any(), eq(transportModeFilter), eq(transitModeFilter)))
+    whenever(routeService.routeAsync(any(), eq(transportModeFilter)))
         .thenReturn(emitter1)
         .thenReturn(emitter2)
 
-    singleRouteService.routeAsync(mock(Query::class.java), transportModeFilter, transitModeFilter).subscribe()
+    singleRouteService.routeAsync(mock(Query::class.java), transportModeFilter).subscribe()
     assertThat(emitter1.hasObservers()).isTrue()
 
-    singleRouteService.routeAsync(mock(Query::class.java), transportModeFilter, transitModeFilter).subscribe()
+    singleRouteService.routeAsync(mock(Query::class.java), transportModeFilter).subscribe()
     assertThat(emitter1.hasObservers()).isFalse()
     assertThat(emitter2.hasObservers()).isTrue()
   }
