@@ -38,8 +38,7 @@ internal class RouteServiceImpl(
 
   override fun routeAsync(
       query: Query,
-      transportModeFilter: TransportModeFilter,
-      transitModeFilter: TransitModeFilter): Observable<List<TripGroup>> {
+      transportModeFilter: TransportModeFilter): Observable<List<TripGroup>> {
     return flatSubQueries(query, transportModeFilter)
         .concatMap { subQuery ->
           regionInfoRepository.getRegionInfoByRegion(subQuery.region!!)
@@ -52,27 +51,8 @@ internal class RouteServiceImpl(
           val excludeStops = subQuery.excludedStopCodes
           val allTransitModes = regionInfo.transitModes().orEmpty().map { it.id!! }
 
-          // TODO This was causing the entire chain to hang sometimes, but I'm not sure why.
-          // Temporarily grabbing the excluded modes directly
-//          val excludedTransitModes = allTransitModes
-//              .subtract(transitModeFilter.filterTransitModes(regionInfo).map {
-//                it.id!! })
-//              .toList()
-
-          val prefs = context.getSharedPreferences("IsModeIncludedInTripsPrefs", Context.MODE_PRIVATE)
-          val excluded = prefs.all
-                  .filter {
-                    it.value as Boolean
-                  }
-                  .map {
-                    it.key as String
-                  }
-          val excludedTransitModes = allTransitModes
-              .subtract(excluded)
-              .toList()
-
           val options = toOptions(subQuery, regionInfo)
-          routingApi.fetchRoutesAsync(baseUrls, modes, excludedTransitModes, excludeStops, options)
+          routingApi.fetchRoutesAsync(baseUrls, modes, transportModeFilter.avoidTransportModes(allTransitModes), excludeStops, options)
         }
   }
 
