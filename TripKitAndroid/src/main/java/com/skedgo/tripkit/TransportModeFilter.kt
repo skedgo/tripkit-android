@@ -4,15 +4,14 @@ import android.os.Parcelable
 
 interface TransportModeFilter : Parcelable {
   /**
-   * Used when routing to specify the desired transit mode options. The default implementation requests all
-   * transport modes in a region. The actual requested routes will be a mix of routes involving the individual
-   * modes as well as multi-modal routes combining two or more of the specified modes.
+   * Used when routing to specify the desired transit modes. The default implementation supports all modes available
+   * in a region.
    *
-   * @param allTransportModes is all transport modes supported by the routing region
-   * @return Return mode IDs that will be included in routing requests
+   * @param mode is a transport mode
+   * @return Return true if it should be used for routing, false if not.
    */
-  fun transportModes(allTransportModes: List<String>): List<String> {
-    return allTransportModes
+  fun useTransportMode(mode: String): Boolean {
+    return true
   }
 
   /**
@@ -20,11 +19,11 @@ interface TransportModeFilter : Parcelable {
    * from `transportModes` but you want to avoid ferries by specifying "pt_pub_ferry" as one to avoid. The default implementation
    * does not avoid any modes.
    *
-   * @param allTransportModes is all transport modes supported by the routing region
-   * @return Return mode IDs that will be avoided in routing requests
+   * @param mode is a transport mode
+   * @return Return true if it should be avoided in routing, false if not.
    */
-  fun avoidTransportModes(allTransportModes: List<String>): List<String> {
-    return listOf()
-  }
 
+  fun avoidTransportMode(mode: String): Boolean {
+    return false
+  }
 }

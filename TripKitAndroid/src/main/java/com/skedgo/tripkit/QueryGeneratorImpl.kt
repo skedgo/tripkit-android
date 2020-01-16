@@ -32,7 +32,8 @@ internal class QueryGeneratorImpl(private val regionService: RegionService) : Qu
                             region.transportModeIds!!
                         }
                     }
-                    val filteredTransportModes = transportModeFilter.transportModes(allTransportModes)
+
+                    val filteredTransportModes = allTransportModes.filter { transportModeFilter.useTransportMode(it) }
                     query.transportModeIds = filteredTransportModes
                     regionService.getTransportModesAsync()
                 }
