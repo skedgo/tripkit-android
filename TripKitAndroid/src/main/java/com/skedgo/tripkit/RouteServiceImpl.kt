@@ -49,10 +49,10 @@ internal class RouteServiceImpl(
           val baseUrls = region!!.urLs
           val modes = subQuery.transportModeIds
           val excludeStops = subQuery.excludedStopCodes
-          val allTransitModes = regionInfo.transitModes().orEmpty().map { it.id!! }
+          val avoidModes = regionInfo.transitModes().orEmpty().map { it.id!! }.filter { transportModeFilter.avoidTransportMode(it) }
 
           val options = toOptions(subQuery, regionInfo)
-          routingApi.fetchRoutesAsync(baseUrls, modes, transportModeFilter.avoidTransportModes(allTransitModes), excludeStops, options)
+          routingApi.fetchRoutesAsync(baseUrls, modes, avoidModes, excludeStops, options)
         }
   }
 
