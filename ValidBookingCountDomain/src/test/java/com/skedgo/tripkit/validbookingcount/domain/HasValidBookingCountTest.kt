@@ -4,7 +4,6 @@ import com.nhaarman.mockitokotlin2.mock
 import com.nhaarman.mockitokotlin2.whenever
 import org.junit.Test
 import io.reactivex.Observable
-import io.reactivex.observers.TestSubscriber
 
 class HasValidBookingCountTest {
   val validBookingCountRepository: ValidBookingCountRepository = mock()
@@ -16,21 +15,19 @@ class HasValidBookingCountTest {
     whenever(validBookingCountRepository.getLocalValidBookingCount())
         .thenReturn(Observable.just(1))
 
-    val subscriber = TestSubscriber<Boolean>()
-    hasValidBookingCount.execute().subscribe(subscriber)
+    val subscriber = hasValidBookingCount.execute().test()
 
     subscriber.assertValue(true)
-    subscriber.assertCompleted()
+    subscriber.assertComplete()
   }
 
   @Test fun shouldBeFalseIfHavingLessThanOne() {
     whenever(validBookingCountRepository.getLocalValidBookingCount())
         .thenReturn(Observable.just(0))
 
-    val subscriber = TestSubscriber<Boolean>()
-    hasValidBookingCount.execute().subscribe(subscriber)
+    val subscriber = hasValidBookingCount.execute().test()
 
     subscriber.assertValue(false)
-    subscriber.assertCompleted()
+    subscriber.assertComplete()
   }
 }
