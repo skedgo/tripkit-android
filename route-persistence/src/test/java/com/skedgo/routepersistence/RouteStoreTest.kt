@@ -18,6 +18,8 @@ import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.skedgo.tripkit.routing.Trip
 import com.skedgo.tripkit.routing.TripGroup
 import com.skedgo.tripkit.routing.TripSegment
+import org.amshove.kluent.`should contain all`
+import org.amshove.kluent.`should equal`
 import java.util.*
 import java.util.concurrent.TimeUnit
 
