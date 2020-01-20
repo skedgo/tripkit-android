@@ -1,5 +1,6 @@
 package com.skedgo.tripkit.a2brouting
 
+import android.os.Parcel
 import com.nhaarman.mockitokotlin2.any
 import com.nhaarman.mockitokotlin2.eq
 import com.nhaarman.mockitokotlin2.whenever
@@ -22,7 +23,15 @@ class SingleRouteServiceTest {
   @Mock
   internal lateinit var routeService: RouteService
 
-  internal var transportModeFilter = object : TransportModeFilter {}
+  internal var transportModeFilter = object : TransportModeFilter{
+    override fun writeToParcel(dest: Parcel?, flags: Int) {
+
+    }
+
+    override fun describeContents(): Int {
+      return 0
+    }
+  }
   private lateinit var singleRouteService: SingleRouteService
 
   @Before

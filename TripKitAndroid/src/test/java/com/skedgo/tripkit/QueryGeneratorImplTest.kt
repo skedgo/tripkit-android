@@ -1,5 +1,6 @@
 package com.skedgo.tripkit
 
+import android.os.Parcel
 import com.skedgo.tripkit.common.model.Location
 import com.skedgo.tripkit.common.model.Query
 import com.skedgo.tripkit.common.model.Region
@@ -25,7 +26,15 @@ class QueryGeneratorImplTest {
   internal var regionService: RegionService? = null
   private var queryGenerator: BiFunction<Query, TransportModeFilter, io.reactivex.Observable<@JvmSuppressWildcards List<Query>>>? = null
 
-  internal var transportModeFilter = object : TransportModeFilter {}
+  internal var transportModeFilter = object : TransportModeFilter{
+    override fun writeToParcel(dest: Parcel?, flags: Int) {
+
+    }
+
+    override fun describeContents(): Int {
+      return 0
+    }
+  }
 
   @Before
   fun setUp() {

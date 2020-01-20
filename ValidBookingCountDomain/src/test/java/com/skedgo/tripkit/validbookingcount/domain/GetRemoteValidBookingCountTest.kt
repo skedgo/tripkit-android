@@ -7,7 +7,6 @@ import com.nhaarman.mockitokotlin2.whenever
 import org.junit.Test
 import io.reactivex.Observable.empty
 import io.reactivex.Observable.just
-import io.reactivex.observers.TestSubscriber
 import com.skedgo.tripkit.account.domain.HasUserToken
 
 class GetRemoteValidBookingCountTest {
@@ -33,11 +32,10 @@ class GetRemoteValidBookingCountTest {
     whenever(validBookingCountRepository.getRemoteValidBookingCount())
         .thenReturn(just(expectedValidBookingCount))
 
-    val subscriber = TestSubscriber<Int>()
-    getRemoteValidBookingCount.execute().subscribe(subscriber)
+    val subscriber = getRemoteValidBookingCount.execute().test()
 
     subscriber.assertValue(expectedValidBookingCount)
-    subscriber.assertCompleted()
+    subscriber.assertComplete()
     verify(validBookingCountRepository).getRemoteValidBookingCount()
   }
 }
