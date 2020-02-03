@@ -1,9 +1,9 @@
 apply plugin: "com.android.library"
 // To publish via JitPack.
 // See https://jitpack.io/docs/ANDROID/.
+apply plugin: "com.github.dcendents.android-maven"
 apply plugin: "kotlin-android"
 apply plugin: "kotlin-kapt"
-apply plugin: 'digital.wup.android-maven-publish'
 
 android {
   compileSdkVersion versions.compileSdkVersion
@@ -66,18 +66,12 @@ artifacts {
   archives javadocJar
 }
 
-publishing {
+uploadArchives {
   repositories {
-    maven {
-      url = "file://${localMaven}"
-    }
-  }
-
-  publications {
-    mavenAar(MavenPublication) {
-      groupId = tripkitGroup
-      version = tripkitVersion
-      from components.android
+    mavenDeployer {
+      repository(url: "file://${localMaven}")
+      pom.groupId = tripkitGroup
+      pom.version = tripkitVersion
     }
   }
 }
