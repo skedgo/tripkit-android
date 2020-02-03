@@ -230,6 +230,7 @@ open class RouteStore(private val databaseHelper: SQLiteOpenHelper, private val 
     val plannedUrl = tripCursor.getString(tripCursor.getColumnIndex(COL_PLANNED_URL))
     val tempUrl = tripCursor.getString(tripCursor.getColumnIndex(COL_TEMP_URL))
     val queryIsLeaveAfter = tripCursor.getInt(tripCursor.getColumnIndex(COL_QUERY_IS_LEAVE_AFTER))
+    val logUrl = tripCursor.getString(tripCursor.getColumnIndex(COL_LOG_URL))
 
     val isNotifable = groupCursor.getInt(groupCursor.getColumnIndex(COL_IS_NOTIFIABLE)) == 1
 
@@ -249,6 +250,7 @@ open class RouteStore(private val databaseHelper: SQLiteOpenHelper, private val 
     trip.progressURL = progressUrl
     trip.plannedURL = plannedUrl
     trip.temporaryURL = tempUrl
+    trip.logURL = logUrl
     trip.setQueryIsLeaveAfter(queryIsLeaveAfter == 1)
     trip.isFavourite(isNotifable)
     return trip
@@ -362,6 +364,7 @@ open class RouteStore(private val databaseHelper: SQLiteOpenHelper, private val 
     values.put(COL_PLANNED_URL, trip.plannedURL)
     values.put(COL_TEMP_URL, trip.temporaryURL)
     values.put(COL_QUERY_IS_LEAVE_AFTER, if (trip.queryIsLeaveAfter()) 1 else 0)
+    values.put(COL_LOG_URL, trip.logURL)
     database.insertWithOnConflict(TABLE_TRIPS, null, values, SQLiteDatabase.CONFLICT_REPLACE)
   }
 

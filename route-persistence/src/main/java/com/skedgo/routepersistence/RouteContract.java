@@ -16,6 +16,7 @@ final class RouteContract {
   static final String COL_CURRENCY_SYMBOL = "currencySymbol";
   static final String COL_SAVE_URL = "saveURL";
   static final String COL_UPDATE_URL = "updateURL";
+  static final String COL_LOG_URL = "logURL";
   static final String COL_PROGRESS_URL = "progressURL";
   static final String COL_PLANNED_URL = "plannedURL";
   static final String COL_TEMP_URL = "temporaryURL";
@@ -52,6 +53,7 @@ final class RouteContract {
     final DatabaseField moneyCost = new DatabaseField(COL_MONEY_COST, "real");
     final DatabaseField carbonCost = new DatabaseField(COL_CARBON_COST, "real");
     final DatabaseField updateUrl = new DatabaseField(COL_UPDATE_URL, "text");
+    final DatabaseField logUrl = new DatabaseField(COL_LOG_URL, "text");
     final DatabaseField saveUrl = new DatabaseField(COL_SAVE_URL, "text");
     final DatabaseField currencySymbol = new DatabaseField(COL_CURRENCY_SYMBOL, "text");
     final DatabaseField hassleCost = new DatabaseField(COL_HASSLE_COST, "real");
@@ -84,7 +86,7 @@ final class RouteContract {
             currencySymbol, saveUrl, depart, arrive,
             caloriesCost, moneyCost, carbonCost, hassleCost, weightedScore,
             updateUrl, progressUrl, plannedUrl, tempUrl,
-            queryIsLeaveAfter
+            queryIsLeaveAfter, logUrl
         },
         UniqueIndices.of(TABLE_TRIPS, id, groupId, uuid),
         "CREATE TRIGGER deleteSegments AFTER DELETE ON " + TABLE_TRIPS + " BEGIN " +
