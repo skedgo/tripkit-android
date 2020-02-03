@@ -9,7 +9,7 @@ android {
 
   defaultConfig {
     applicationId "skedgo.tripkit.samples"
-    minSdkVersion 15
+    minSdkVersion 16
     targetSdkVersion versions.targetSdkVersion
     versionCode 1
     versionName "1.0"
@@ -47,6 +47,6 @@ dependencies {
 
   implementation libs.rxLifecycleComponents
   implementation libs.bindingCollectionAdapterRecyclerView
-//  implementation 'com.github.skedgo:tripkit-android:v1.20'
-  implementation project(':TripKitAndroid')
+  implementation 'com.github.skedgo.tripkit-android:TripKitAndroid:v1.22.0'
+//  implementation project(':TripKitAndroid')
 }

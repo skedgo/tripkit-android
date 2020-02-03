@@ -6,12 +6,8 @@ import android.content.pm.PackageManager;
 import android.net.Uri;
 
 import com.skedgo.android.common.model.Location;
-import skedgo.tripkit.routing.TripSegment;
 import com.skedgo.android.tripkit.BookingAction;
-import com.skedgo.android.tripkit.BuildConfig;
 import com.skedgo.android.tripkit.ExternalActionParams;
-import skedgo.tripkit.geocoding.ReverseGeocodable;
-import com.skedgo.android.tripkit.TestRunner;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -20,8 +16,7 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.mockito.invocation.InvocationOnMock;
 import org.mockito.stubbing.Answer;
-import org.robolectric.RuntimeEnvironment;
-import org.robolectric.annotation.Config;
+import org.robolectric.RobolectricTestRunner;
 
 import java.util.Calendar;
 import java.util.Comparator;
@@ -30,8 +25,11 @@ import java.util.Locale;
 import java.util.TimeZone;
 import java.util.concurrent.TimeUnit;
 
+import androidx.test.core.app.ApplicationProvider;
 import rx.Observable;
 import rx.observers.TestSubscriber;
+import skedgo.tripkit.geocoding.ReverseGeocodable;
+import skedgo.tripkit.routing.TripSegment;
 
 import static com.skedgo.android.tripkit.bookingproviders.BookingResolver.FLITWAYS;
 import static com.skedgo.android.tripkit.bookingproviders.BookingResolver.GOCATCH;
@@ -39,15 +37,14 @@ import static com.skedgo.android.tripkit.bookingproviders.BookingResolver.INGOGO
 import static com.skedgo.android.tripkit.bookingproviders.BookingResolver.LYFT;
 import static com.skedgo.android.tripkit.bookingproviders.BookingResolver.OTHERS;
 import static com.skedgo.android.tripkit.bookingproviders.BookingResolver.SMS;
-import static org.assertj.core.api.Java6Assertions.*;
+import static org.assertj.core.api.Java6Assertions.assertThat;
 import static org.mockito.Matchers.anyDouble;
 import static org.mockito.Matchers.eq;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 @SuppressWarnings("WrongConstant")
-@RunWith(TestRunner.class)
-@Config(constants = BuildConfig.class)
+@RunWith(RobolectricTestRunner.class)
 public class BookingResolverImplTest {
   private static final Comparator<BookingAction> BOOKING_ACTION_COMPARATOR =
       new Comparator<BookingAction>() {
@@ -68,7 +65,7 @@ public class BookingResolverImplTest {
   @Before public void before() {
     MockitoAnnotations.initMocks(this);
     bookingResolver = new BookingResolverImpl(
-        RuntimeEnvironment.application.getResources(),
+        ApplicationProvider.getApplicationContext().getResources(),
         packageManager,
         geocoderFactory
     );

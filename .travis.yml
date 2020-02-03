@@ -1,6 +1,5 @@
 language: android
-jdk:
-  - oraclejdk8
+dist: trusty
 
 # To avoid following similar issues:
 # * https://github.com/travis-ci/travis-ci/issues/5582
@@ -27,4 +26,4 @@ android:
 script:
   # It should be `test` not `testDebugUnitTest` to
   # execute tests for pure Java/Kotlin modules.
-  ./gradlew assembleRelease test
+  ./gradlew test

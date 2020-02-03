@@ -1,5 +1,5 @@
 apply plugin: 'com.android.library'
-apply plugin: 'com.github.dcendents.android-maven'
+apply plugin: 'digital.wup.android-maven-publish'
 apply plugin: "kotlin-android"
 apply plugin: "kotlin-kapt"
 
@@ -7,7 +7,7 @@ android {
   compileSdkVersion versions.compileSdkVersion
 
   defaultConfig {
-    minSdkVersion 15
+    minSdkVersion 16
     targetSdkVersion versions.targetSdkVersion
     testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
   }
@@ -80,12 +80,19 @@ artifacts {
   archives javadocJar
 }
 
-uploadArchives {
+group = tripkitGroup
+version = tripkitVersion
+
+
+publishing {
   repositories {
-    mavenDeployer {
-      repository(url: "file://${localMaven}")
-      pom.groupId = tripkitGroup
-      pom.version = tripkitVersion
+    maven { url = "file://${localMaven}" }
+  }
+  publications {
+    mavenAar(MavenPublication) {
+      groupId = group
+      version = version
+      from components.android
     }
   }
 }

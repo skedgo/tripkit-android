@@ -7,7 +7,6 @@ import android.database.sqlite.SQLiteOpenHelper
 import android.util.Pair
 import com.google.gson.Gson
 import com.skedgo.routepersistence.RouteContract.*
-import hugo.weaving.DebugLog
 import rx.Completable
 import rx.Observable
 import rx.Single
@@ -64,7 +63,6 @@ open class RouteStore(private val databaseHelper: SQLiteOpenHelper, private val 
         .subscribeOn(io())
   }
 
-  @DebugLog
   open fun queryAsync(query: Pair<String, Array<String>?>): Observable<TripGroup> {
     return queryAsync(query.first, query.second)
   }
@@ -146,7 +144,6 @@ open class RouteStore(private val databaseHelper: SQLiteOpenHelper, private val 
         .subscribeOn(Schedulers.io())
   }
 
-  @DebugLog
   private fun delete(whereClause: Pair<String, Array<String>>): Int {
     val database = databaseHelper.writableDatabase
     return database.delete(TABLE_TRIP_GROUPS, whereClause.first, whereClause.second)
@@ -274,7 +271,6 @@ open class RouteStore(private val databaseHelper: SQLiteOpenHelper, private val 
     return group
   }
 
-  @DebugLog
   private fun saveTripGroupsInTransaction(
       requestId: String?,
       groups: List<TripGroup>) {
@@ -310,7 +306,6 @@ open class RouteStore(private val databaseHelper: SQLiteOpenHelper, private val 
     saveTrips(database, group.uuid(), group.trips)
   }
 
-  @DebugLog
   private fun saveTripGroup(
       database: SQLiteDatabase,
       requestId: String?,
@@ -347,7 +342,6 @@ open class RouteStore(private val databaseHelper: SQLiteOpenHelper, private val 
     saveSegments(database, trip.uuid(), trip.segments)
   }
 
-  @DebugLog
   private fun saveTrip(
       database: SQLiteDatabase,
       groupId: String,
@@ -374,7 +368,6 @@ open class RouteStore(private val databaseHelper: SQLiteOpenHelper, private val 
     database.insertWithOnConflict(TABLE_TRIPS, null, values, SQLiteDatabase.CONFLICT_REPLACE)
   }
 
-  @DebugLog
   private fun saveSegments(
       database: SQLiteDatabase,
       tripId: String,

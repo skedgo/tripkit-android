@@ -1,12 +1,10 @@
 apply plugin: 'com.android.library'
-apply plugin: 'com.jakewharton.hugo'
-apply plugin: 'com.github.dcendents.android-maven'
+apply plugin: 'digital.wup.android-maven-publish'
 apply plugin: 'kotlin-android'
 
 android {
   compileSdkVersion versions.compileSdkVersion
 
-  // To print Hugo's logs.
   // defaultPublishConfig 'debug'
 
   lintOptions {
@@ -17,7 +15,7 @@ android {
   }
 
   defaultConfig {
-    minSdkVersion 15
+    minSdkVersion 16
     targetSdkVersion 27
     versionCode 1
     versionName '1.0'
@@ -44,6 +42,8 @@ dependencies {
   testImplementation libs.assertjCore
   testImplementation libs.mockitoCore
   testImplementation libs.robolectric
+  testImplementation libs.androidxTesting
+  testImplementation libs.androidxJUnitExtTesting
   testImplementation libs.mockitoKotlin, { exclude group: 'org.jetbrains.kotlin' }
   testImplementation libs.kluent
 
@@ -52,12 +52,19 @@ dependencies {
   }
 }
 
-uploadArchives {
+group = tripkitGroup
+version = tripkitVersion
+
+
+publishing {
   repositories {
-    mavenDeployer {
-      repository(url: "file://${localMaven}")
-      pom.groupId = tripkitGroup
-      pom.version = tripkitVersion
+    maven { url = "file://${localMaven}" }
+  }
+  publications {
+    mavenAar(MavenPublication) {
+      groupId = group
+      version = version
+      from components.android
     }
   }
 }

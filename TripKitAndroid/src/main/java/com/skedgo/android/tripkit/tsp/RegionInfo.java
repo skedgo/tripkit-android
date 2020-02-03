@@ -3,6 +3,7 @@ package com.skedgo.android.tripkit.tsp;
 import androidx.annotation.Nullable;
 
 import com.google.gson.annotations.JsonAdapter;
+
 import skedgo.tripkit.routing.ModeInfo;
 
 import org.immutables.gson.Gson;
@@ -29,6 +30,9 @@ public abstract class RegionInfo {
    */
   @Value.Default
   public boolean transitWheelchairAccessibility() { return false; }
+
+  @Value.Default
+  public boolean streetWheelchairAccessibility() {return false;}
 
   @Value.Default
   public boolean supportsConcessionPricing() { return false; }

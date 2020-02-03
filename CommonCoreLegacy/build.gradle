@@ -1,15 +1,16 @@
 apply plugin: "com.android.library"
 // To publish via JitPack.
 // See https://jitpack.io/docs/ANDROID/.
-apply plugin: "com.github.dcendents.android-maven"
+apply plugin: 'digital.wup.android-maven-publish'
 apply plugin: "kotlin-android"
 apply plugin: "kotlin-kapt"
+
 
 android {
   compileSdkVersion versions.compileSdkVersion
 
   defaultConfig {
-    minSdkVersion 15
+    minSdkVersion 16
     targetSdkVersion 27
     testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
   }
@@ -45,6 +46,7 @@ dependencies {
   testImplementation libs.mockitoCore
   testImplementation libs.jodaTimeTzdb
   testImplementation libs.kluent
+  testImplementation libs.androidxTesting
 
   implementation libs.supportAnnotations
   implementation libs.jodaTimeAndroid
@@ -87,12 +89,18 @@ artifacts {
   archives javadocJar
 }
 
-uploadArchives {
+group = tripkitGroup
+version = tripkitVersion
+
+publishing {
   repositories {
-    mavenDeployer {
-      repository(url: "file://${localMaven}")
-      pom.groupId = tripkitGroup
-      pom.version = tripkitVersion
+    maven { url = "file://${localMaven}" }
+  }
+  publications {
+    mavenAar(MavenPublication) {
+      groupId = group
+      version = version
+      from components.android
     }
   }
 }
