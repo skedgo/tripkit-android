@@ -47,6 +47,7 @@ public class Trip implements ITimeRange {
   @SerializedName("plannedURL") private String plannedURL;
   @SerializedName("temporaryURL") private String temporaryURL;
   @SerializedName("logURL") private String logURL;
+  @Nullable @SerializedName("shareURL") private String shareURL;
   @Nullable @SerializedName("availability") private String availability;
   private boolean queryIsLeaveAfter;
   private String uuid = UUID.randomUUID().toString();
@@ -218,6 +219,10 @@ public class Trip implements ITimeRange {
   }
 
   public void setLogURL(String logURL) { this.logURL = logURL; }
+
+  @Nullable public String getShareURL() { return shareURL; }
+
+  public void setShareURL(String shareURL) { this.shareURL = shareURL; }
 
   public float getWeightedScore() {
     return weightedScore;
