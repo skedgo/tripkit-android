@@ -89,7 +89,7 @@ final class RouteContract {
             currencySymbol, saveUrl, depart, arrive,
             caloriesCost, moneyCost, carbonCost, hassleCost, weightedScore,
             updateUrl, progressUrl, plannedUrl, tempUrl,
-            queryIsLeaveAfter, logUrl
+            queryIsLeaveAfter, logUrl, shareUrl
         },
         UniqueIndices.of(TABLE_TRIPS, id, groupId, uuid),
         "CREATE TRIGGER deleteSegments AFTER DELETE ON " + TABLE_TRIPS + " BEGIN " +
