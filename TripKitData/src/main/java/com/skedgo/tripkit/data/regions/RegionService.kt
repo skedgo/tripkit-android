@@ -21,6 +21,7 @@ interface RegionService {
   fun getTransportModesByIdsAsync(modeIds: List<String>): Observable<List<TransportMode>>
   fun getTransportModesByRegionAsync(region: Region): Observable<List<TransportMode>>
   fun getTransportModesByLocationAsync(location: Location): Observable<List<TransportMode>>
+  fun getTransportModesByLocationsAsync(location1: Location, location2: Location): Observable<List<TransportMode>>
   fun refreshAsync(): Completable
   fun getRegionInfoByRegionAsync(region: Region): Observable<RegionInfo>
   fun fetchParatransitByRegionAsync(region: Region): Observable<Paratransit>

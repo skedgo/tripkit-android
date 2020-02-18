@@ -40,30 +40,26 @@ internal class RouteServiceImpl(
       query: Query,
       transportModeFilter: TransportModeFilter): Observable<List<TripGroup>> {
     return flatSubQueries(query, transportModeFilter)
-        .concatMap { subQuery ->
-          regionInfoRepository.getRegionInfoByRegion(subQuery.region!!)
-              .map { regionInfo -> Pair(subQuery, regionInfo) }
-        }
-        .flatMap { (subQuery, regionInfo) ->
-          val region = subQuery.region
-          val baseUrls = region!!.urLs
-          val modes = subQuery.transportModeIds
-          val excludeStops = subQuery.excludedStopCodes
-          val avoidModes = regionInfo.transitModes().orEmpty().map { it.id!! }.filter { transportModeFilter.avoidTransportMode(it) }
+          .flatMap { subQuery ->
+            val region = subQuery.region
+            val baseUrls = region!!.urLs
+            val modes = subQuery.transportModeIds
+            val excludeStops = subQuery.excludedStopCodes
+            val avoidModes = region.transportModeIds.orEmpty().map { it }.filter { transportModeFilter.avoidTransportMode(it) }
 
-          val options = toOptions(subQuery, regionInfo)
-          routingApi.fetchRoutesAsync(baseUrls, modes, avoidModes, excludeStops, options)
+            val options = toOptions(subQuery)
+            routingApi.fetchRoutesAsync(baseUrls, modes, avoidModes, excludeStops, options)
         }
   }
 
   /* TODO: Consider making this public for Xerox team. */
-  fun getParamsByPreferences(regionInfo: RegionInfo): Map<String, Any> {
+  fun getParamsByPreferences(): Map<String, Any> {
     val map = ArrayMap<String, Any>()
     if (tripPreferences != null) {
       if (tripPreferences.isConcessionPricingPreferred) {
         map["conc"] = true
       }
-      if (tripPreferences.isWheelchairPreferred && regionInfo.hasWheelChairInformation()) {
+      if (tripPreferences.isWheelchairPreferred) {
         map["wheelchair"] = true
       }
     }
@@ -78,7 +74,7 @@ internal class RouteServiceImpl(
     return map
   }
 
-  fun toOptions(query: Query, regionInfo: RegionInfo): Map<String, Any> {
+  fun toOptions(query: Query): Map<String, Any> {
     val departureCoordinates = toCoordinatesText(query.fromLocation!!)
     val arrivalCoordinates = toCoordinatesText(query.toLocation!!)
     val arriveBefore = TimeUnit.MILLISECONDS.toSeconds(query.arriveBy)
@@ -95,12 +91,13 @@ internal class RouteServiceImpl(
     options["departAfter"] = java.lang.Long.toString(departAfter)
     options["unit"] = unit
     options["v"] = "12"
+    options["ir"] = "1"
     options["tt"] = Integer.toString(transferTime)
     options["ws"] = Integer.toString(walkingSpeed)
     options["cs"] = Integer.toString(cyclingSpeed)
     options["includeStops"] = "1"
     options["wp"] = ToWeightingProfileString.toWeightingProfileString(query)
-    options.putAll(getParamsByPreferences(regionInfo))
+    options.putAll(getParamsByPreferences())
     if (extraQueryMapProvider != null) {
       val extraQueryMap = extraQueryMapProvider.call()
       options.putAll(extraQueryMap)
