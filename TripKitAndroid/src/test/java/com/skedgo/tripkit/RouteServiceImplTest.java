@@ -11,6 +11,7 @@ import com.skedgo.tripkit.tsp.RegionInfoRepository;
 import org.assertj.core.data.MapEntry;
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
@@ -20,12 +21,14 @@ import java.util.Map;
 
 import io.reactivex.Observable;
 import com.skedgo.tripkit.a2brouting.FailoverA2bRoutingApi;
+import org.robolectric.RobolectricTestRunner;
 
 import static org.assertj.core.api.Java6Assertions.assertThat;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
 
-public class RouteServiceImplTest extends TripKitAndroidRobolectricTest {
+@RunWith(RobolectricTestRunner.class)
+public class RouteServiceImplTest  {
   @Mock QueryGenerator queryGenerator;
   @Mock
   Co2Preferences co2Preferences;
@@ -58,7 +61,7 @@ public class RouteServiceImplTest extends TripKitAndroidRobolectricTest {
     query.setTimeTag(TimeTag.createForArriveBy(25251325));
     query.setCyclingSpeed(3);
 
-    final Map<String, Object> options = routeService.toOptions(query, regionInfo);
+    final Map<String, Object> options = routeService.toOptions(query);
     assertThat(options)
         .containsEntry("v", "12")
         .containsEntry("unit", query.getUnit())
@@ -77,7 +80,7 @@ public class RouteServiceImplTest extends TripKitAndroidRobolectricTest {
     query.getFromLocation().setAddress("from address");
     query.getToLocation().setAddress("to address");
 
-    final Map<String, Object> options = routeService.toOptions(query, regionInfo);
+    final Map<String, Object> options = routeService.toOptions(query);
     assertThat(options)
         .containsEntry("from", "(1.0,2.0)\"from address\"")
         .containsEntry("to", "(3.0,4.0)\"to address\"");
@@ -97,54 +100,31 @@ public class RouteServiceImplTest extends TripKitAndroidRobolectricTest {
     when(extraQueryMapProvider.call())
         .thenReturn(extraQueryMap);
 
-    final Map<String, Object> options = routeService.toOptions(query, regionInfo);
+    final Map<String, Object> options = routeService.toOptions(query);
     assertThat(options).contains(MapEntry.entry("bsb", 1));
   }
 
   @Test public void includeConcessionPricing() {
     when(tripPreferences.isConcessionPricingPreferred()).thenReturn(true);
-    assertThat(routeService.getParamsByPreferences(regionInfo)).containsEntry("conc", true);
+    assertThat(routeService.getParamsByPreferences()).containsEntry("conc", true);
   }
 
   @Test public void excludeConcessionPricing() {
     when(tripPreferences.isConcessionPricingPreferred()).thenReturn(false);
-    assertThat(routeService.getParamsByPreferences(regionInfo)).doesNotContainKey("conc");
+    assertThat(routeService.getParamsByPreferences()).doesNotContainKey("conc");
   }
 
   /* See https://redmine.buzzhives.com/issues/7663. */
   @Test public void excludeWheelchairInfo() {
     when(tripPreferences.isWheelchairPreferred()).thenReturn(false);
-    assertThat(routeService.getParamsByPreferences(regionInfo)).doesNotContainKey("wheelchair");
-  }
-
-  @Test public void excludeWheelchairWhenRegionDoesNotSupportsIt() {
-    // Arrange.
-    when(tripPreferences.isWheelchairPreferred()).thenReturn(true);
-
-    // Act.
-    final Map<String, Object> map = routeService.getParamsByPreferences(regionInfo);
-
-    // Assert.
-    assertThat(map).doesNotContainKey("wheelchair");
-  }
-
-  @Test public void shoudNotExcludeWheelchairWhenRegionDoesSupportsIt() {
-    // Arrange.
-    when(regionInfo.transitWheelchairAccessibility()).thenReturn(true);
-    when(tripPreferences.isWheelchairPreferred()).thenReturn(true);
-
-    // Act
-    final Map<String, Object> map = routeService.getParamsByPreferences(regionInfo);
-
-    // Assert.
-    assertThat(map).containsKey("wheelchair");
+    assertThat(routeService.getParamsByPreferences()).doesNotContainKey("wheelchair");
   }
 
   @Test public void shouldIncludeOptionDepartAfter() {
     final Query query = createQuery();
     query.setTimeTag(TimeTag.createForLeaveAfter(25251325));
 
-    final Map<String, Object> options = routeService.toOptions(query, regionInfo);
+    final Map<String, Object> options = routeService.toOptions(query);
     assertThat(options)
         .containsEntry("arriveBefore", "0")
         .containsEntry("departAfter", "25251325");
@@ -152,14 +132,14 @@ public class RouteServiceImplTest extends TripKitAndroidRobolectricTest {
 
   @Test public void shouldContainOptionIncludeStops() {
     final Query query = createQuery();
-    final Map<String, Object> options = routeService.toOptions(query, regionInfo);
+    final Map<String, Object> options = routeService.toOptions(query);
     assertThat(options).containsEntry("includeStops", "1");
   }
 
   @Test public void shouldContainOptionIncludeStopsByDefault() {
     final Query query = createQuery();
 
-    final Map<String, Object> options = routeService.toOptions(query, regionInfo);
+    final Map<String, Object> options = routeService.toOptions(query);
     assertThat(options).containsEntry("includeStops", "1");
   }
 
@@ -168,7 +148,7 @@ public class RouteServiceImplTest extends TripKitAndroidRobolectricTest {
     co2Profile.put("a", 2f);
     co2Profile.put("b", 5f);
     when(co2Preferences.getCo2Profile()).thenReturn(co2Profile);
-    assertThat(routeService.getParamsByPreferences(regionInfo))
+    assertThat(routeService.getParamsByPreferences())
         .hasSize(2)
         .containsEntry("co2[a]", 2f)
         .containsEntry("co2[b]", 5f);

@@ -91,7 +91,6 @@ internal class RouteServiceImpl(
     options["departAfter"] = java.lang.Long.toString(departAfter)
     options["unit"] = unit
     options["v"] = "12"
-    options["ir"] = "1"
     options["tt"] = Integer.toString(transferTime)
     options["ws"] = Integer.toString(walkingSpeed)
     options["cs"] = Integer.toString(cyclingSpeed)
