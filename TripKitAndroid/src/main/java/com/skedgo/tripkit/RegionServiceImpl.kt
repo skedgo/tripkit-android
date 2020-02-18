@@ -11,6 +11,7 @@ import io.reactivex.Completable
 import io.reactivex.Observable
 import io.reactivex.Single
 import com.skedgo.tripkit.routing.ModeInfo
+import io.reactivex.functions.BiFunction
 
 internal class RegionServiceImpl(
         private val regionCache: com.skedgo.tripkit.Cache<List<Region>>,
@@ -78,6 +79,18 @@ internal class RegionServiceImpl(
     else
       Observable.just(emptyList<TransportMode>())
   }
+
+    override fun getTransportModesByLocationsAsync(location1: Location, location2: Location): Observable<List<TransportMode>> {
+        return Observable.zip(getRegionByLocationAsync(location1), getRegionByLocationAsync(location2),
+                BiFunction { first:Region, second:Region -> first.transportModeIds to second.transportModeIds } )
+                .flatMap {
+                    val list1 = it.first ?: arrayListOf<String>()
+                    val list2 = it.second ?: arrayListOf<String>()
+
+                    getTransportModesByIdsAsync(list1.union(list2).toList())
+                }
+
+    }
 
   override fun getTransportModesByLocationAsync(
       location: Location
