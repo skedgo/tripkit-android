@@ -86,13 +86,17 @@ open class RouteStore(private val databaseHelper: SQLiteOpenHelper, private val 
     return Observable
         .fromCallable {
           val database = databaseHelper.readableDatabase
-          database.query(TABLE_TRIP_GROUPS,
+          val cursor = database.query(TABLE_TRIP_GROUPS,
               arrayOf(COL_UUID),
               "$COL_REQUEST_ID =?",
               arrayOf(requestId), null, null, null)
-        }
-        .flatMap(flattenCursor())
-        .map { cursor -> cursor.getString(cursor.getColumnIndex(COL_UUID)) }
+          var list = mutableListOf<String>()
+          while (cursor.moveToNext()) {
+            list.add(cursor.getString(cursor.getColumnIndex(COL_UUID)))
+          }
+          cursor.close()
+          list
+        }.flatMap { Observable.fromIterable(it) }
   }
 
   open fun updateTripAsync(oldTripUuid: String, trip: Trip): Completable {
@@ -152,25 +156,23 @@ open class RouteStore(private val databaseHelper: SQLiteOpenHelper, private val 
   private fun queryAsync(
       selection: String,
       selectionArgs: Array<String>?): Observable<TripGroup> {
-    return Observable
-        .fromCallable {
-          val database = databaseHelper.readableDatabase
-          database.rawQuery(selection, selectionArgs)
-        }
-        .flatMap(flattenCursor())
-        .flatMap { groupCursor -> queryTripsOfTripGroup(groupCursor) }
-        .subscribeOn(Schedulers.io())
+
+     return Observable.using({ databaseHelper.readableDatabase.rawQuery(selection, selectionArgs) },
+            { flattenCursor().apply(it) }, { cursor -> cursor.close()})
+            .flatMap { groupCursor ->
+              queryTripsOfTripGroup(groupCursor)
+            }.subscribeOn(Schedulers.io())
   }
 
+  // groupCursor will be closed by queryAsync()
   private fun queryTripsOfTripGroup(groupCursor: Cursor): Observable<TripGroup> {
     val group = asTripGroup(groupCursor)
-    return Observable
-        .fromCallable {
-          val database = databaseHelper.readableDatabase
-          database.rawQuery(SELECT_TRIPS, arrayOf(group.uuid()))
+    return Observable.using({ databaseHelper.readableDatabase.rawQuery(SELECT_TRIPS, arrayOf(group.uuid())) },
+                            { flattenCursor().apply(it)},
+                            { it.close() })
+            .flatMap { tripCursor ->
+            querySegmentsOfTrip(tripCursor, groupCursor)
         }
-        .flatMap(flattenCursor())
-        .flatMap { tripCursor -> querySegmentsOfTrip(tripCursor, groupCursor) }
         .toList()
         .map { trips ->
           group.trips = ArrayList(trips)

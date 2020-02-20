@@ -23,6 +23,7 @@ class RoutingStatusStore constructor(private val databaseHelper: SQLiteOpenHelpe
               cursor.close()
               Pair(status, message)
           } else {
+              cursor.close()
               Pair("Error", "Not Started Yet")
           }
 

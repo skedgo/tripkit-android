@@ -16,13 +16,20 @@ final class OnSubscribeLoadRegions implements ObservableOnSubscribe<Cursor> {
 
   @Override
   public void subscribe(ObservableEmitter<Cursor> emitter) throws Exception {
+    Cursor cursor = null;
     try {
       final SQLiteDatabase database = databaseHelper.getReadableDatabase();
-      final Cursor cursor = database.rawQuery("select * from " + Tables.REGIONS.getName(), null);
+      cursor = database.rawQuery("select * from " + Tables.REGIONS.getName(), null);
       emitter.onNext(cursor);
-      emitter.onComplete();
+      if (!emitter.isDisposed()) {
+        emitter.onComplete();
+      }
     } catch (Exception e) {
       emitter.onError(e);
+    } finally {
+      if (cursor != null && !cursor.isClosed()) {
+        cursor.close();
+      }
     }
 
   }
