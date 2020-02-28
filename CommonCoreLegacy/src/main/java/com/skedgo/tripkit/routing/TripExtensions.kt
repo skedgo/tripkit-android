@@ -69,7 +69,7 @@ private fun StringBuilder.addSegmentAction(context: Context, segment: TripSegmen
 
 private fun StringBuilder.addNotes(context: Context, segment: TripSegment) {
   if (!segment.notes.isNullOrEmpty()) {
-    append("${segment.getDisplayNotes(context.resources)}\n")
+    append("${segment.getDisplayNotes(context.resources, true)}\n")
   }
 }
 

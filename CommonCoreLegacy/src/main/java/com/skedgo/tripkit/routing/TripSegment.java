@@ -81,6 +81,10 @@ public class TripSegment implements IRealTimeElement, ITimeRange {
   @SerializedName("wheelchairAccessible") private boolean wheelchairAccessible;
   @SerializedName("localCost") @Nullable private LocalCost localCost;
 
+
+  @SerializedName("timetableStartTime") @Nullable private long mTimetableStartTime;
+  @SerializedName("timetableEndTime") @Nullable private long mTimetableEndTime;
+
   /**
    * This is no longer a part of json returned from server due to Version 6.
    * It's currently being used for json-based persistence on app local.
@@ -404,7 +408,6 @@ public class TripSegment implements IRealTimeElement, ITimeRange {
   public boolean getWheelchairAccessible() {
     return wheelchairAccessible;
   }
-
   public void setWheelchairAccessible(boolean wheelchairAccessible) {
     this.wheelchairAccessible = wheelchairAccessible;
   }
@@ -545,6 +548,7 @@ public class TripSegment implements IRealTimeElement, ITimeRange {
     this.isRealTime = isRealTime;
   }
 
+
   public boolean isVisibleInContext(String contextVisibility) {
     if (mVisibility == null || mVisibility.isEmpty() ||
         contextVisibility == null || contextVisibility.isEmpty() ||
@@ -571,7 +575,7 @@ public class TripSegment implements IRealTimeElement, ITimeRange {
    * Some essential templates will be resolved before being presented by the views.
    */
   @Nullable
-  public String getDisplayNotes(Resources resources) {
+  public String getDisplayNotes(Resources resources, boolean withPlatform) {
     String notes = TripSegmentUtils.processDurationTemplate(
         mNotes,
         null,
@@ -583,10 +587,11 @@ public class TripSegment implements IRealTimeElement, ITimeRange {
       return null;
     }
 
-    if (platform != null) {
+
+    if (platform != null && withPlatform) {
       notes = notes.replace(Templates.TEMPLATE_PLATFORM, String.format(Templates.FORMAT_PLATFORM, platform));
     } else {
-      notes = notes.replace(Templates.TEMPLATE_PLATFORM, "");
+      notes = notes.replace(Templates.TEMPLATE_PLATFORM + "\n", "");
     }
 
     notes = notes.replace(Templates.TEMPLATE_STOPS, convertStopCountToText(stopCount));
@@ -695,8 +700,29 @@ public class TripSegment implements IRealTimeElement, ITimeRange {
   }
 
   public int lineColor() {
-      if (isStationary() || isWalking() || mServiceColor == null) return Color.TRANSPARENT;
+      if (isWalking()) return Color.TRANSPARENT;
+      if (mServiceColor == null) {
+        if (modeInfo != null && modeInfo.getColor() != null) {
+          return modeInfo.getColor().getColor();
+        }
+        return Color.TRANSPARENT;
+      }
       return mServiceColor.getColor();
+  }
+  public long getTimetableStartTime() {
+    return mTimetableStartTime;
+  }
+
+  public void setTimetableStartTime(long timetableStartTime) {
+    mTimetableStartTime = timetableStartTime;
+  }
+
+  public long getTimetableEndTime() {
+    return mTimetableEndTime;
+  }
+
+  public void setTimetableEndTime(long timetableEndTime) {
+    mTimetableEndTime = timetableEndTime;
   }
 
 }
