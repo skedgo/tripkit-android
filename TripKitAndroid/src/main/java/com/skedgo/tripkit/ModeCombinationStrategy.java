@@ -67,8 +67,14 @@ final class ModeCombinationStrategy implements
       seenModeIds.addAll(newSet);
     }
 
-    // Create an union set which combines all given modeIds.
-    modeIdSets.add(new HashSet<>(modeIds));
+    // Create a union set which combines all given modeIds.
+    // There is one exception: wa_wal is implied in multi-modal, so we don't need to specify it. We also don't want
+    // to duplicate a query if there aren't enough modes to justify multi-modal, so do some final checking.
+    HashSet<String> multiModal = new HashSet<>(modeIds);
+    multiModal.remove(TransportMode.ID_WALK);
+    if (multiModal.size() > 1) {
+      modeIdSets.add(multiModal);
+    }
     return modeIdSets;
   }
 }
