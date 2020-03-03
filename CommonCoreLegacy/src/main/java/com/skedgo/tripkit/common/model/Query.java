@@ -44,6 +44,8 @@ public class Query implements Parcelable {
       List<String> stops = new ArrayList<>();
       in.readStringList(stops);
       query.excludedStopCodes = stops;
+
+      query.mUseWheelchair = in.readBoolean();
       return query;
     }
 
@@ -68,6 +70,9 @@ public class Query implements Parcelable {
   private int mTransferTime;
   private List<String> excludedStopCodes = new ArrayList<>();
 
+
+
+  private boolean mUseWheelchair = false;
   /**
    * This is only used for XUM project. TripGo may not need it.
    * See more: https://www.flowdock.com/app/skedgo/androiddev/threads/nZJbtLU0jgsgziQpuoqhcaB-U9A.
@@ -95,6 +100,7 @@ public class Query implements Parcelable {
     query.mWalkingSpeed = mWalkingSpeed;
     query.mRegion = mRegion;
     query.maxWalkingTime = maxWalkingTime;
+    query.mUseWheelchair = mUseWheelchair;
 
     // Perform deep copy of modes, so that removing member of one list doesn't affect the other.
     if (cloneTransportMode) {
@@ -344,6 +350,7 @@ public class Query implements Parcelable {
     dest.writeStringList(transportModeIds);
     dest.writeInt(maxWalkingTime);
     dest.writeStringList(excludedStopCodes);
+    dest.writeBoolean(mUseWheelchair);
   }
 
   /**
@@ -366,6 +373,13 @@ public class Query implements Parcelable {
     return uuid;
   }
 
+  public boolean useWheelchair() {
+    return mUseWheelchair;
+  }
+
+  public void setUseWheelchair(boolean useWheelchair) {
+    mUseWheelchair = useWheelchair;
+  }
   private List<String> readTransportModeIds(Parcel in) {
     List<String> ids = new ArrayList<>();
     in.readStringList(ids);

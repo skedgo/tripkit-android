@@ -1,6 +1,7 @@
 package com.skedgo.tripkit
 
 import com.skedgo.tripkit.common.model.Query
+import com.skedgo.tripkit.common.model.TransportMode
 import com.skedgo.tripkit.data.regions.RegionService
 import io.reactivex.Observable
 
@@ -31,6 +32,10 @@ internal class QueryGeneratorImpl(private val regionService: RegionService) : Qu
                         else -> {
                             region.transportModeIds!!
                         }
+                    }
+
+                    if (allTransportModes.contains(TransportMode.ID_WALK) && !allTransportModes.contains(TransportMode.ID_WHEEL_CHAIR)) {
+                        allTransportModes.add(TransportMode.ID_WHEEL_CHAIR)
                     }
 
                     val filteredTransportModes = allTransportModes.filter { transportModeFilter.useTransportMode(it) }

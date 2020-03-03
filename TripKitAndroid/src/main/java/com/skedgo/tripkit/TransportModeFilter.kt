@@ -26,4 +26,5 @@ interface TransportModeFilter : Parcelable {
   fun avoidTransportMode(mode: String): Boolean {
     return false
   }
+
 }

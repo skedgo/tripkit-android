@@ -11,6 +11,7 @@ import io.reactivex.Completable
 import io.reactivex.Observable
 import io.reactivex.Single
 import com.skedgo.tripkit.routing.ModeInfo
+import com.skedgo.tripkit.tsp.hasWheelChairInformation
 import io.reactivex.functions.BiFunction
 
 internal class RegionServiceImpl(
@@ -80,17 +81,33 @@ internal class RegionServiceImpl(
       Observable.just(emptyList<TransportMode>())
   }
 
+
     override fun getTransportModesByLocationsAsync(location1: Location, location2: Location): Observable<List<TransportMode>> {
         return Observable.zip(getRegionByLocationAsync(location1), getRegionByLocationAsync(location2),
-                BiFunction { first:Region, second:Region -> first.transportModeIds to second.transportModeIds } )
+                BiFunction { first:Region, second:Region -> first to second } )
+                .flatMap { regionPair ->
+                    Observable.zip(getRegionInfoByRegionAsync(regionPair.first), getRegionInfoByRegionAsync(regionPair.second),
+                            BiFunction { regionInfoOne: RegionInfo, regionInfoTwo: RegionInfo ->
+                                var transportModesOne = regionPair.first.transportModeIds
+                                var transportModesTwo = regionPair.second.transportModeIds
+                                if (regionInfoOne.hasWheelChairInformation()) {
+                                    transportModesOne?.add(TransportMode.ID_WHEEL_CHAIR)
+                                }
+
+                                if (regionInfoTwo.hasWheelChairInformation()) {
+                                    transportModesTwo?.add(TransportMode.ID_WHEEL_CHAIR)
+                                }
+                                transportModesOne to transportModesTwo
+                            })
+                }
                 .flatMap {
                     val list1 = it.first ?: arrayListOf<String>()
                     val list2 = it.second ?: arrayListOf<String>()
 
                     getTransportModesByIdsAsync(list1.union(list2).toList())
                 }
-
     }
+
 
   override fun getTransportModesByLocationAsync(
       location: Location

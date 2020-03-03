@@ -59,9 +59,6 @@ internal class RouteServiceImpl(
       if (tripPreferences.isConcessionPricingPreferred) {
         map["conc"] = true
       }
-      if (tripPreferences.isWheelchairPreferred) {
-        map["wheelchair"] = true
-      }
     }
 
     if (co2Preferences != null) {
@@ -96,6 +93,10 @@ internal class RouteServiceImpl(
     options["cs"] = Integer.toString(cyclingSpeed)
     options["includeStops"] = "1"
     options["wp"] = ToWeightingProfileString.toWeightingProfileString(query)
+    if (query.useWheelchair()) {
+        options["wheelchair"] = "1"
+    }
+
     options.putAll(getParamsByPreferences())
     if (extraQueryMapProvider != null) {
       val extraQueryMap = extraQueryMapProvider.call()
