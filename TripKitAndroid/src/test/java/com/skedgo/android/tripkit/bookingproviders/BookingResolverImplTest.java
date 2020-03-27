@@ -183,7 +183,7 @@ public class BookingResolverImplTest {
             .build()
     ).subscribe(subscriber);
 
-    final String url = "https://flitways.com/api/link?trip_date=02/14/2014%2011:10%20AM&key=25251325&pickup=A&destination=B";
+    final String url = "https://flitways.com/api/link?trip_date=02%2F14%2F2014%2011%3A10%20AM&key=25251325&pickup=A&destination=B";
     final BookingAction action = BookingAction.builder()
         .bookingProvider(FLITWAYS)
         .hasApp(false)
