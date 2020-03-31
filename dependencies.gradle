@@ -7,7 +7,7 @@
 def versions = new Expando()
 versions.immutablesVersion = "2.5.5"
 versions.devMinSdkVersion = 21
-versions.proMinSdkVersion = 15
+versions.proMinSdkVersion = 21
 versions.compileSdkVersion = 28
 versions.targetSdkVersion = 27
 // See change-log at https://github.com/JetBrains/kotlin/blob/master/ChangeLog.md.
