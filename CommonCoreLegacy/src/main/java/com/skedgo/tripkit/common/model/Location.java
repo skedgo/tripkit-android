@@ -53,6 +53,8 @@ public class Location implements Parcelable {
   public static final int TYPE_HOME = 7; //so we never delete this location
   public static final int TYPE_WORK = 8;
 
+  public static final int TYPE_CURRENT_LOCATION = 9; // Doesn't actually resolve to anything, but makes life easier for keeping track
+
   /**
    * What3Words type
    */

@@ -81,7 +81,7 @@ libs.rxLifecycleComponents = "com.github.skedgo:RxLifecycleComponents:1.6"
 libs.androidxTesting = "androidx.test:core:$versions.testcore"
 libs.androidxJUnitExtTesting = "androidx.test.ext:junit:1.0.0"
 
-libs.supportDesign = "com.google.android.material:material:$versions.androidxVersion"
+libs.supportDesign = "com.google.android.material:material:1.2.0-alpha05"
 libs.recyclerView = "androidx.recyclerview:recyclerview:$versions.androidxVersion"
 libs.cardView = "androidx.cardview:cardview:1.0.0"
 libs.appCompat = "androidx.appcompat:appcompat:$versions.androidxVersion"
