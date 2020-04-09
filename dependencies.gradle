@@ -86,7 +86,7 @@ libs.recyclerView = "androidx.recyclerview:recyclerview:$versions.androidxVersio
 libs.cardView = "androidx.cardview:cardview:1.0.0"
 libs.appCompat = "androidx.appcompat:appcompat:$versions.androidxVersion"
 libs.fragment = "androidx.fragment:fragment:$versions.androidxVersion"
-
+libs.places = "com.google.android.libraries.places:places:2.2.0"
 // See changelog at http://developer.android.com/tools/revisions/gradle-plugin.html
 // and https://twitter.com/AGPVersions.
 libs.androidGradlePlugin = "com.android.tools.build:gradle:$versions.androidGradlePlugin"
