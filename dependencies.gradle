@@ -11,7 +11,7 @@ versions.proMinSdkVersion = 19
 versions.compileSdkVersion = 29
 versions.targetSdkVersion = 29
 // See change-log at https://github.com/JetBrains/kotlin/blob/master/ChangeLog.md.
-versions.kotlinVersion = "1.3.30"
+versions.kotlinVersion = "1.3.72"
 versions.supportLibraryVersion = "28.0.0"
 versions.androidGradlePlugin = "3.4.0"
 versions.okHttpVersion = "4.1.1"
