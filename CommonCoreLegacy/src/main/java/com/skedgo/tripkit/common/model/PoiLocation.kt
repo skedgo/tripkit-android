@@ -5,10 +5,14 @@ import android.os.Parcelable
 
 class PoiLocation : Location {
     constructor() : super()
-    constructor(location: Location) : super(location)
+    constructor(location: Location, placeId: String? = null) : super(location) {
+        this.placeId = placeId
+    }
 
+    var placeId: String? = null
     override fun writeToParcel(parcel: Parcel, flags: Int) {
         super.writeToParcel(parcel, flags)
+        parcel.writeString(placeId)
     }
 
     override fun describeContents(): Int {
@@ -18,7 +22,8 @@ class PoiLocation : Location {
     companion object CREATOR : Parcelable.Creator<PoiLocation> {
         override fun createFromParcel(parcel: Parcel): PoiLocation {
             val location = Location.CREATOR.createFromParcel(parcel)
-            return PoiLocation(location)
+            val placeId = parcel.readString()
+            return PoiLocation(location, placeId)
         }
 
         override fun newArray(size: Int): Array<PoiLocation> {
