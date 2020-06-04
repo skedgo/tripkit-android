@@ -1,10 +1,7 @@
 package com.skedgo.tripkit
 
-import io.reactivex.Completable
-import io.reactivex.Maybe
-import io.reactivex.Observable
-import io.reactivex.functions.Function
-import io.reactivex.functions.Predicate
+import io.reactivex.*
+import io.reactivex.schedulers.Schedulers.io
 import java.util.concurrent.atomic.AtomicReference
 
 /**
@@ -12,31 +9,32 @@ import java.util.concurrent.atomic.AtomicReference
  * @param loader  Always loads data from disk. It shouldn't cache data in memory.
  */
 internal class CacheImpl<TData>(
-    fetcher: Completable,
+    private val fetcher: Completable,
     loader: Observable<TData>
 ) : com.skedgo.tripkit.Cache<TData> {
   private val memory = AtomicReference<TData>()
-  fun getMemory(): Observable<TData> {
-    return Observable.create<TData> { emitter ->
-      if (memory.get() != null) {
-        emitter.onNext(memory.get())
-      }
-      emitter.onComplete()
+  fun getMemory(): Maybe<TData> {
+    return if (memory.get() != null) {
+      Maybe.just(memory.get())
+    } else {
+      Maybe.empty()
     }
   }
 
-  private val fetcher: Observable<TData>
-  private val loader: Observable<TData>
-  private val isAvailable = Predicate<TData> { data -> data != null }
+  fun loadFromDb(): Single<TData> {
+    return loader
+            .switchIfEmpty(Maybe.defer {
+              fetcher.andThen(loader) } )
+            .toSingle()
+  }
+
+  private val loader: Maybe<TData>
 
   init {
-    this.fetcher = fetcher
-        .toObservable<TData>()
-        .replay().refCount()
     this.loader = loader
-        /* Cache in memory. */
-        .doOnNext { data -> memory.set(data) }
-        .replay().refCount()
+            .onErrorResumeNext(Observable.empty())
+            .doOnNext { data -> memory.set(data) }
+            .firstElement()
   }
 
   /**
@@ -45,15 +43,15 @@ internal class CacheImpl<TData>(
    * Fetcher will fetch data and save it to disk as its responsibility.
    * Then re-asks loader to load data saved by fetcher above.
    */
-  override fun getAsync(): Observable<TData>  {
-    return Observable
-            .concat(getMemory(), loader, fetcher, loader)
-            .filter(isAvailable)
-            .firstElement().toObservable()
+  override fun getAsync(): Single<TData> {
+    return getMemory()
+            .switchIfEmpty(loadFromDb())
+            .subscribeOn(io())
   }
 
   /**
    * Clears memory cache.
    */
   override fun invalidate() = memory.set(null)
+
 }

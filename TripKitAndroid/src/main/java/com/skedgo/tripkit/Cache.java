@@ -1,8 +1,8 @@
 package com.skedgo.tripkit;
 
-import io.reactivex.Observable;
+import io.reactivex.Single;
 
 interface Cache<TData> {
-  Observable<TData> getAsync();
+  Single<TData> getAsync();
   void invalidate();
 }

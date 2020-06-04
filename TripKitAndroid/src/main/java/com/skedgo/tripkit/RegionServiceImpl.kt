@@ -20,7 +20,7 @@ internal class RegionServiceImpl(
         private val regionsFetcher: RegionsFetcher,
         private val regionInfoRepository: RegionInfoRepository,
         private val regionFinder: com.skedgo.tripkit.RegionFinder) : RegionService {
-  override fun getRegionsAsync(): Observable<List<Region>> = regionCache.async
+  override fun getRegionsAsync(): Observable<List<Region>> = regionCache.async.toObservable()
 
   override fun getRegionByNameAsync(regionName: String): Observable<Region> =
       getRegionsAsync()
@@ -29,7 +29,7 @@ internal class RegionServiceImpl(
               .first(Region()).toObservable()
 
   override fun getTransportModesAsync(): Observable<Map<String, TransportMode>> =
-      modeCache.async
+      modeCache.async.toObservable()
 
   override fun getRegionByLocationAsync(latitude: Double, longitude: Double): Observable<Region> =
       getRegionsAsync()
