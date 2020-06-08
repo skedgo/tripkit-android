@@ -47,6 +47,8 @@ public class Trip implements ITimeRange {
   @SerializedName("plannedURL") private String plannedURL;
   @SerializedName("temporaryURL") private String temporaryURL;
   @Nullable @SerializedName("availability") private String availability;
+  @SerializedName("mainSegmentHashCode") private long mainSegmentHashCode;
+
   private boolean queryIsLeaveAfter;
   private String uuid = UUID.randomUUID().toString();
   private long mId;
@@ -452,5 +454,13 @@ public class Trip implements ITimeRange {
     }
 
     return false;
+  }
+
+  public Long getMainSegmentHashCode() {
+    return mainSegmentHashCode;
+  }
+
+  public void setMainSegmentHashCode(long mainSegmentHashCode) {
+    this.mainSegmentHashCode = mainSegmentHashCode;
   }
 }

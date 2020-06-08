@@ -12,13 +12,7 @@ import com.google.gson.annotations.SerializedName;
 import com.skedgo.tripkit.common.R;
 import com.skedgo.tripkit.common.StyleManager;
 import com.skedgo.tripkit.common.agenda.IRealTimeElement;
-import com.skedgo.tripkit.common.model.Booking;
-import com.skedgo.tripkit.common.model.ITimeRange;
-import com.skedgo.tripkit.common.model.Location;
-import com.skedgo.tripkit.common.model.Query;
-import com.skedgo.tripkit.common.model.RealtimeAlert;
-import com.skedgo.tripkit.common.model.Street;
-import com.skedgo.tripkit.common.model.TransportMode;
+import com.skedgo.tripkit.common.model.*;
 import com.skedgo.tripkit.common.util.TimeUtils;
 import com.skedgo.tripkit.common.util.TripSegmentUtils;
 
@@ -55,6 +49,7 @@ public class TripSegment implements IRealTimeElement, ITimeRange {
   private long mId;
   private transient Trip mTrip;
   @SerializedName("booking") private Booking booking;
+  @SerializedName("mini") @Nullable private MiniInstruction mMiniInstruction;
   @SerializedName("modeInfo") private ModeInfo modeInfo;
   @SerializedName("type") private SegmentType mType;
   @SerializedName("startTime") private long mStartTimeInSecs;
@@ -80,7 +75,6 @@ public class TripSegment implements IRealTimeElement, ITimeRange {
   @SerializedName("realtimeVehicle") private RealTimeVehicle mRealTimeVehicle;
   @SerializedName("wheelchairAccessible") private boolean wheelchairAccessible;
   @SerializedName("localCost") @Nullable private LocalCost localCost;
-
 
   @SerializedName("timetableStartTime") @Nullable private long mTimetableStartTime;
   @SerializedName("timetableEndTime") @Nullable private long mTimetableEndTime;
@@ -231,6 +225,7 @@ public class TripSegment implements IRealTimeElement, ITimeRange {
     mEndTimeInSecs = newEndTimeInSecs;
   }
 
+  public MiniInstruction getMiniInstruction() { return mMiniInstruction; }
   @Deprecated
   public VehicleMode getMode() {
     return modeInfo != null ? modeInfo.getModeCompat() : null;
