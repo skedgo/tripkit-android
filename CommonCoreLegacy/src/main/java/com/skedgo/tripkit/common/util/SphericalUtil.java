@@ -176,6 +176,15 @@ public class SphericalUtil {
     return computeAngleBetween(from, to) * EARTH_RADIUS;
   }
 
+  public static double computeAngleBetween(double fromLatitude, double fromLongitude, double toLatitude, double toLongitude) {
+    return distanceRadians(toRadians(fromLatitude), toRadians(fromLongitude),
+            toRadians(toLatitude), toRadians(toLongitude));
+  }
+
+  public static double computeDistanceBetween(double fromLatitude, double fromLongitude, double toLatitude, double toLongitude) {
+    return computeAngleBetween(fromLatitude, fromLongitude, toLatitude, toLongitude) * EARTH_RADIUS;
+  }
+
   /**
    * Returns the length of the given path, in meters, on Earth.
    */

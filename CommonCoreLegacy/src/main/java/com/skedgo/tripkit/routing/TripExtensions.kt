@@ -48,6 +48,17 @@ fun Trip.getMainTripSegment(): TripSegment? {
   }
 }
 
+fun Trip.getBookingSegment(): TripSegment? {
+  var bookingSegment = segments.find { segment -> segment.booking?.quickBookingsUrl != null }
+  if (bookingSegment == null) {
+    val mainSegment = getMainTripSegment()
+    if (mainSegment != null && mainSegment.miniInstruction != null && mainSegment.miniInstruction.instruction != null) {
+      bookingSegment = mainSegment
+    }
+  }
+
+  return bookingSegment
+}
 fun Trip.constructPlainText(context: Context): String =
     StringBuilder().apply {
       segments?.forEach {

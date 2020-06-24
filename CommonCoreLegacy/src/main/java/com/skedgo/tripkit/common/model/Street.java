@@ -6,6 +6,7 @@ import androidx.annotation.Nullable;
 
 import com.google.gson.annotations.JsonAdapter;
 
+import com.google.gson.annotations.SerializedName;
 import org.immutables.value.Value;
 
 import static org.immutables.gson.Gson.TypeAdapters;
@@ -21,7 +22,7 @@ public abstract class Street implements Parcelable {
     @Override public Street createFromParcel(Parcel in) {
       return ImmutableStreet.builder()
           .name(in.readString())
-          .meters(in.readFloat())
+          .metres(in.readFloat())
           .encodedWaypoints(in.readString())
           .safe(in.readByte() == 1)
           .dismount(in.readByte() == 1)
@@ -36,7 +37,7 @@ public abstract class Street implements Parcelable {
   public abstract @Nullable String name();
   public abstract @Nullable String encodedWaypoints();
 
-  @Value.Default public float meters() {
+  @Value.Default public float metres() {
     return 0f;
   }
 
@@ -48,6 +49,20 @@ public abstract class Street implements Parcelable {
     return false;
   }
 
+
+  public enum Instruction {
+    @SerializedName("HEAD_TOWARDS") HEAD_TOWARDS,
+    @SerializedName("CONTINUE_STRAIGHT") CONTINUE_STRAIGHT,
+    @SerializedName("TURN_SLIGHTLY_LEFT") TURN_SLIGHTLY_LEFT,
+    @SerializedName("TURN_LEFT") TURN_LEFT,
+    @SerializedName("TURN_SHARPLY_LEFT") TURN_SHARPLY_LEFT,
+    @SerializedName("TURN_SLIGHTLY_RIGHT") TURN_SLIGHTLY_RIGHT,
+    @SerializedName("TURN_RIGHT") TURN_RIGHT,
+    @SerializedName("TURN_SHARPLY_RIGHT") TURN_SHARPLY_RIGHT
+  }
+
+  public abstract @Nullable Instruction instruction();
+
   @Override public int describeContents() {
     return 0;
   }
@@ -55,7 +70,7 @@ public abstract class Street implements Parcelable {
   @Override
   public void writeToParcel(final Parcel dest, final int flags) {
     dest.writeString(name());
-    dest.writeFloat(meters());
+    dest.writeFloat(metres());
     dest.writeString(encodedWaypoints());
     dest.writeByte((byte) (safe() ? 1 : 0));
     dest.writeByte((byte) (dismount() ? 1 : 0));

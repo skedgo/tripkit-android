@@ -19,6 +19,9 @@ class BikePodLocationEntity {
   var timezone: String? = null
   @Embedded
   lateinit var bikePod: BikePodEntity
+
+  @Embedded(prefix = "modeinfo_")
+  var modeInfo: ModeInfoEntity? = null
 }
 
 @Entity
@@ -36,9 +39,6 @@ class BikePodEntity {
 
   @Embedded(prefix = "datasource_")
   var dataSource: DataSourceAttribution? = null
-
-  @Embedded(prefix = "modeinfo_")
-  var modeInfo: ModeInfoEntity? = null
 }
 
 @Entity
