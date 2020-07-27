@@ -159,16 +159,17 @@ public class MainModule {
       HttpLoggingInterceptor interceptor = new HttpLoggingInterceptor();
       interceptor.level(HttpLoggingInterceptor.Level.BODY);
       builder.addInterceptor(interceptor);
+    }
 
-      final Callable<Callable<String>> baseUrlAdapterFactory = configs.baseUrlAdapterFactory();
-      if (baseUrlAdapterFactory != null) {
-        try {
-          builder.addInterceptor(new BaseUrlOverridingInterceptor(baseUrlAdapterFactory.call()));
-        } catch (Exception e) {
-          e.printStackTrace();
-        }
+    final Callable<String> baseUrlAdapterFactory = configs.baseUrlAdapterFactory();
+    if (baseUrlAdapterFactory != null) {
+      try {
+        builder.addInterceptor(new BaseUrlOverridingInterceptor(baseUrlAdapterFactory));
+      } catch (Exception e) {
+        e.printStackTrace();
       }
     }
+
     return builder.build();
   }
 

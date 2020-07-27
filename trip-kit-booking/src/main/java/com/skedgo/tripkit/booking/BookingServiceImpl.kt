@@ -32,9 +32,19 @@ class BookingServiceImpl(private val bookingApi: BookingApi, private val gson: G
     return bookingApi.getFormAsync(url).flatMap(handleBookingResponse).toFlowable(BackpressureStrategy.BUFFER)
   }
 
-  override fun postFormAsync(url: String, inputForm: InputForm): Flowable<BookingForm> =
+  override fun postActionInputAsync(url: String, field: String, value: String): Flowable<BookingForm> =
+    bookingApi.postFormAsync(url, ActionInputForm(listOf(ActionInputFormField(field, value))))
+            .flatMap (handleBookingResponse).toFlowable(BackpressureStrategy.BUFFER)
+
+  override fun postFormAsync(url: String, inputForm: InputForm?): Flowable<BookingForm>{
+    return if (inputForm != null) {
       bookingApi.postFormAsync(url, inputForm)
-          .flatMap(handleBookingResponse).toFlowable(BackpressureStrategy.BUFFER)
+              .flatMap(handleBookingResponse).toFlowable(BackpressureStrategy.BUFFER)
+    } else {
+      bookingApi.postFormAsync(url)
+              .flatMap(handleBookingResponse).toFlowable(BackpressureStrategy.BUFFER)
+    }
+  }
 
   fun asBookingError(bookingErrorJson: String): BookingError {
     return gson.fromJson(bookingErrorJson, BookingError::class.java)

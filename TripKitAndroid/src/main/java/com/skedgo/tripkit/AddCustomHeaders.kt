@@ -8,7 +8,7 @@ import java.io.IOException
 import java.util.*
 import java.util.concurrent.Callable
 
-internal class AddCustomHeaders constructor(
+class AddCustomHeaders constructor(
     private val getAppVersion: GetAppVersion,
     private val getLocale: () -> Locale,
     private val getUuid: Callable<String>?,

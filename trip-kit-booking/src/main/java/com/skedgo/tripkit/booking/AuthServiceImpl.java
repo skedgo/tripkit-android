@@ -12,10 +12,10 @@ import retrofit2.http.Url;
 import io.reactivex.Observable;
 import io.reactivex.functions.Function;
 
-final class AuthServiceImpl implements AuthService {
+class AuthServiceImpl implements AuthService {
   private final AuthApi api;
 
-  AuthServiceImpl(@NonNull AuthApi api) {
+  public AuthServiceImpl(@NonNull AuthApi api) {
     this.api = api;
   }
 

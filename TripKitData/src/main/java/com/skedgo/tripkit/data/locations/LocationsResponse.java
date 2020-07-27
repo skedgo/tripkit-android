@@ -16,7 +16,7 @@ import com.skedgo.tripkit.data.database.locations.carparks.CarParkLocation;
 import com.skedgo.tripkit.data.database.locations.carpods.CarPodLocation;
 import com.skedgo.tripkit.data.database.locations.carrentals.CarRentalCompany;
 import com.skedgo.tripkit.data.database.locations.carrentals.CarRentalLocation;
-import com.skedgo.tripkit.data.database.locations.freefloating.FreeFloatingLocation;
+import com.skedgo.tripkit.data.database.locations.freefloating.FreeFloatingLocationEntity;
 import com.skedgo.tripkit.data.database.locations.onstreetparking.OnStreetParkingLocation;
 
 public class LocationsResponse {
@@ -39,7 +39,7 @@ public class LocationsResponse {
     List<BikePodLocationEntity> bikePods;
 
     @SerializedName("freeFloating")
-    List<FreeFloatingLocation> freeFloating;
+    List<FreeFloatingLocationEntity> freeFloating;
 
     @SerializedName("carParks")
     List<CarParkLocation> carParks;
@@ -93,7 +93,7 @@ public class LocationsResponse {
       this.key = key;
     }
 
-    public List<FreeFloatingLocation> getFreeFloating() { return freeFloating; }
+    public List<FreeFloatingLocationEntity> getFreeFloating() { return freeFloating; }
     public List<BikePodLocationEntity> getBikePods() { return bikePods; }
     public List<CarRentalLocation> getCarRentals() { return carRentals; }
     public List<CarParkLocation> getCarParks() { return carParks; }

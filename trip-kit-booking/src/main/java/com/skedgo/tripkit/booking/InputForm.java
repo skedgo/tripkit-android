@@ -43,6 +43,10 @@ public class InputForm implements Parcelable {
       }
     }
 
+    return InputForm.fromFields(bookingItems);
+  }
+
+  public static InputForm fromFields(List<FormField> bookingItems) {
     // Create new post data object
     InputForm input = new InputForm();
     input.input = bookingItems;

@@ -84,6 +84,9 @@ public final class FormFieldJsonAdapter implements JsonDeserializer<FormField>, 
       case "EXTERNAL":
         className = ExternalFormField.class.getName();
         break;
+      case "QRCODE":
+        className = QrFormField.class.getName();
+        break;
     }
     return className;
   }

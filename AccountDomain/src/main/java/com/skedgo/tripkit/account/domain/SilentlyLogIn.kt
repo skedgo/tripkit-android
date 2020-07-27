@@ -10,7 +10,8 @@ open class SilentlyLogIn @Inject constructor(
   open fun execute(): Observable<UserToken>
       = userTokenRepository.getLastKnownUserToken()
       .switchIfEmpty(
-          Observable.defer { getUserIdentifier.execute() }
+          Observable.defer {
+              getUserIdentifier.execute() }
               .flatMap { userTokenRepository.getUserTokenByUserIdentifier(it) }
       )
 }

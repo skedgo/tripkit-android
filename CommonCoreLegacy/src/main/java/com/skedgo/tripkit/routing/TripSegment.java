@@ -53,6 +53,9 @@ public class TripSegment implements IRealTimeElement, ITimeRange {
     @SerializedName("mini")
     @Nullable
     private MiniInstruction mMiniInstruction;
+    @SerializedName("sharedVehicle")
+    @Nullable
+    private SharedVehicle sharedVehicle;
     @SerializedName("modeInfo")
     private ModeInfo modeInfo;
     @SerializedName("type")
@@ -571,6 +574,9 @@ public class TripSegment implements IRealTimeElement, ITimeRange {
     public void setBooking(Booking booking) {
         this.booking = booking;
     }
+
+    public SharedVehicle getSharedVehicle() { return sharedVehicle; }
+    public void setSharedVehicle(SharedVehicle vehicle) { this.sharedVehicle = sharedVehicle; }
 
     public long[] getAlertHashCodes() {
         return alertHashCodes;

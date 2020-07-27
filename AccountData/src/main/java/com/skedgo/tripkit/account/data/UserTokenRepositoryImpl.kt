@@ -1,6 +1,7 @@
 package com.skedgo.tripkit.account.data
 
 import android.content.SharedPreferences
+import android.util.Log
 import io.reactivex.BackpressureStrategy
 import io.reactivex.Flowable
 import io.reactivex.Observable
@@ -64,8 +65,9 @@ internal class UserTokenRepositoryImpl constructor(
           }
 
   override fun getLastKnownUserToken(): Observable<UserToken> =
-      Observable.fromCallable { preferences.getString(KEY_USER_TOKEN, null) }
-          .filter { it != null }
+      Observable.fromCallable {
+         preferences.getString(KEY_USER_TOKEN, "") ?: "" }
+          .filter { it.isNotBlank() }
           .map(::UserToken)
           .subscribeOn(Schedulers.io())
 

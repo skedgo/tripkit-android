@@ -13,4 +13,10 @@ public interface BookingApi {
       @Url String url,
       @Body InputForm inputForm
   );
+  @POST Observable<Response<BookingForm>> postFormAsync(@Url String url);
+  @POST Observable<Response<BookingForm>> postFormAsync(
+          @Url String url,
+          @Body ActionInputForm inputForm
+  );
+
 }

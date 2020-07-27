@@ -31,7 +31,7 @@ public abstract class Configs {
    * to override all the 'satapp' requests made by TripKit's apis.
    * The factory is in use only when {@link #debuggable()} is true.
    */
-  @Nullable public abstract Callable<Callable<String>> baseUrlAdapterFactory();
+  @Nullable public abstract Callable<String> baseUrlAdapterFactory();
 
   @Value.Default public boolean debuggable() { return false; }
 

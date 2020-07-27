@@ -87,6 +87,7 @@ dependencies {
   api project(':TripKitDomainLegacy')
   api project(':TripKitData')
   api project(':sqliteutils')
+  api project(':AccountDomain')
 }
 
 // build a jar with source files

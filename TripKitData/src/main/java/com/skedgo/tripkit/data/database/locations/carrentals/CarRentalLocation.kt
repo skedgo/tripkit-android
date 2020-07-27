@@ -1,7 +1,6 @@
 package com.skedgo.tripkit.data.database.locations.carrentals
 
 import com.google.gson.annotations.JsonAdapter
-import com.skedgo.tripkit.data.database.locations.freefloating.GsonAdaptersFreeFloatingVehicle
 import com.skedgo.tripkit.routing.ModeInfo
 import org.immutables.gson.Gson
 import org.immutables.value.Value

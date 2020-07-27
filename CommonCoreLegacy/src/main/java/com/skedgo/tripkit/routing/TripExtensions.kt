@@ -43,9 +43,7 @@ fun Trip.hasWalkOnly(): Boolean {
 fun Trip.getTripSegment(segmentId: Long): TripSegment? = segments?.find { it.id == segmentId }
 
 fun Trip.getMainTripSegment(): TripSegment? {
-  return this.segments.find { segment ->
-    (mainSegmentHashCode >0 && mainSegmentHashCode == segment.templateHashCode)
-  }
+  return this.segments.find { segment -> mainSegmentHashCode == segment.templateHashCode  }
 }
 
 fun Trip.getBookingSegment(): TripSegment? {

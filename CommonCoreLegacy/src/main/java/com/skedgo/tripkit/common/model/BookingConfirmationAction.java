@@ -6,6 +6,8 @@ import androidx.annotation.Nullable;
 
 import com.google.gson.annotations.JsonAdapter;
 
+import java.util.ArrayList;
+
 import static org.immutables.gson.Gson.TypeAdapters;
 import static org.immutables.value.Value.Immutable;
 import static org.immutables.value.Value.Style;
@@ -18,6 +20,8 @@ public abstract class BookingConfirmationAction implements Parcelable {
   public static final String TYPE_CANCEL = "CANCEL";
   public static final String TYPE_CALL = "CALL";
   public static final String TYPE_QR_CODE = "QRCODE";
+  public static final String TYPE_LOCK = "LOCK";
+  public static final String TYPE_UNLOCK = "UNLOCK";
 
   public static final Creator<BookingConfirmationAction> CREATOR = new Creator<BookingConfirmationAction>() {
     @Override public BookingConfirmationAction createFromParcel(Parcel in) {
@@ -52,4 +56,5 @@ public abstract class BookingConfirmationAction implements Parcelable {
   public abstract boolean isDestructive();
   public abstract String title();
   public abstract String type();
+  @Nullable public abstract ArrayList< BookingConfirmationInput> input();
 }

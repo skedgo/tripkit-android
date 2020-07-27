@@ -21,7 +21,9 @@ internal class OnSubscribeReverseGeocode(
             emitter.onNext(geocoder.getFromLocation(latitude, longitude, maxResults))
             emitter.onComplete()
         } catch (e: Exception) {
-            emitter.onError(e)
+            if (!emitter.isDisposed) {
+                emitter.onError(e)
+            }
         }
     }
 }

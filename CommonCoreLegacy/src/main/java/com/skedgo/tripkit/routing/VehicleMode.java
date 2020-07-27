@@ -28,9 +28,14 @@ public enum VehicleMode {
   CAR("car", R.drawable.ic_car, R.drawable.ic_car),
   COACH("coach", R.drawable.ic_coach, R.drawable.ic_coach),
   FERRY("ferry", R.drawable.ic_ferry, R.drawable.ic_ferry_realtime),
+  KICK_SCOOTER("kickscooter-share", R.drawable.ic_kickscooter_sharing, R.drawable.ic_kickscooter_sharing),
   MONORAIL("monorail", R.drawable.ic_monorail, R.drawable.ic_monorail_realtime),
   MOTORBIKE("motorbike", R.drawable.ic_motorbike, R.drawable.ic_motorbike),
+  MOTO_SCOOTER("moto_scooter", R.drawable.ic_motorbike, R.drawable.ic_motorbike),
+
   PARKING("parking", R.drawable.ic_parking, R.drawable.ic_parking),
+  PEDELEC("pedelec", R.drawable.ic_bicycle, R.drawable.ic_bicycle),
+
   PUBLIC_TRANSPORT(
       "public-transport",
       R.drawable.ic_public_transport,

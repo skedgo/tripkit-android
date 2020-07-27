@@ -9,17 +9,17 @@ import com.google.gson.annotations.SerializedName;
 import java.io.Serializable;
 
 public abstract class FormField implements Parcelable, Serializable {
-
-  public static final int ADDRESS = 5;
-  public static final int BOOKINGFORM = 7;
-  public static final int DATETIME = 3;
-  public static final int LINK = 6;
-  public static final int OPTION = 2;
-  public static final int STEPPER = 4;
   public static final int STRING = 1;
+  public static final int OPTION = 2;
+  public static final int DATETIME = 3;
+  public static final int STEPPER = 4;
+  public static final int ADDRESS = 5;
+  public static final int LINK = 6;
+  public static final int BOOKINGFORM = 7;
   public static final int SWITCH = 8;
   public static final int PASSWORD = 9;
   public static final int EXTERNAL = 10;
+  public static final int QRCODE = 11;
 
   public static final String ACCESS_TOKEN = "access_token";
   public static final String EXPIRES_IN = "expires_in";
@@ -53,6 +53,8 @@ public abstract class FormField implements Parcelable, Serializable {
           return new BookingForm(in);
         case SWITCH:
           return new SwitchFormField(in);
+        case QRCODE:
+          return new QrFormField(in);
         default:
           return null;
       }

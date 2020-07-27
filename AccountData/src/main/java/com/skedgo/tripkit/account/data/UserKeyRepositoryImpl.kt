@@ -6,7 +6,7 @@ import io.reactivex.Single
 import com.skedgo.tripkit.account.domain.UserKeyRepository
 import java.util.*
 
-internal class UserKeyRepositoryImpl(
+class UserKeyRepositoryImpl(
     private val prefs: SharedPreferences
 ) : UserKeyRepository {
 
@@ -14,8 +14,7 @@ internal class UserKeyRepositoryImpl(
 
   override fun getUserKey(): Single<String> =
       Single.fromCallable {
-
-        prefs.getString(KEY_USER_UUID, null)
+        prefs.getString(KEY_USER_UUID, "")
       }.flatMap { key ->
         when {
           key.isEmpty() ->

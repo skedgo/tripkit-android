@@ -13,6 +13,7 @@ import io.reactivex.schedulers.Schedulers
 import okhttp3.HttpUrl.Companion.toHttpUrlOrNull
 import org.apache.commons.collections4.CollectionUtils
 import com.skedgo.tripkit.agenda.ConfigRepository
+import com.skedgo.tripkit.data.database.locations.freefloating.FreeFloatingRepository
 import java.util.*
 
 open class StopsFetcher(private val api: LocationsApi,
@@ -21,6 +22,7 @@ open class StopsFetcher(private val api: LocationsApi,
                         private val stopsPersistor: IStopsPersistor,
                         private val configCreator: ConfigRepository,
                         private val bikePodRepository: BikePodRepository,
+                        private val freeFloatingRepository: FreeFloatingRepository,
                         private val carParkPersistor: CarParkPersistor,
                         private val onStreetParkingPersistor: OnStreetParkingPersistor,
                         private val carParkMapper: CarParkMapper,
@@ -149,8 +151,10 @@ open class StopsFetcher(private val api: LocationsApi,
         ).plus(
             cells.filter { it.carParks != null && it.carParks.isNotEmpty() }
                 .map { carParkPersistor.saveCarParks(carParkMapper.toEntity(it.key, it.carParks)) }
-        )
-        .plus(
+        ).plus(
+            cells.filter { it.freeFloating != null && it.freeFloating.isNotEmpty() }
+                .map { freeFloatingRepository.saveFreeFloatingLocations(it.key, it.freeFloating) }
+        ).plus(
             cells.filter { it.onStreetParkings != null && it.onStreetParkings.isNotEmpty() }
                 .map {
                   onStreetParkingPersistor.saveOnStreetParkings(
