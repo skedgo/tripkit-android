@@ -2,23 +2,15 @@ package com.skedgo.tripkit;
 
 import android.content.Context;
 import androidx.annotation.Nullable;
-
+import com.skedgo.tripkit.configuration.Key;
 import com.skedgo.tripkit.routing.ExtraQueryMapProvider;
-
 import io.reactivex.functions.Consumer;
 import org.immutables.value.Value;
 
-import com.skedgo.tripkit.configuration.Key;
-
 import java.util.concurrent.Callable;
 
-@Value.Immutable
-public abstract class Configs {
-  public static ImmutableConfigs.Builder builder() {
-    return ImmutableConfigs.builder();
-  }
-
-  public abstract Context context();
+public interface Configs {
+  Context context();
   public abstract Callable<Key> key();
   @Nullable public abstract Consumer<Throwable> errorHandler();
   @Nullable public abstract Callable<Co2Preferences> co2PreferencesFactory();
@@ -32,8 +24,10 @@ public abstract class Configs {
    * The factory is in use only when {@link #debuggable()} is true.
    */
   @Nullable public abstract Callable<String> baseUrlAdapterFactory();
+  public boolean debuggable();
+  public boolean isUuidOptedOut();
 
-  @Value.Default public boolean debuggable() { return false; }
-
-  @Value.Default public boolean isUuidOptedOut() { return false; }
+//  @Value.Default public boolean debuggable() { return false; }
+//
+//  @Value.Default public boolean isUuidOptedOut() { return false; }
 }

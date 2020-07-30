@@ -106,4 +106,5 @@ libs.camerax = "androidx.camera:camera-camera2:1.0.0-beta06"
 libs.cameraxView = "androidx.camera:camera-view:1.0.0-alpha13"
 libs.cameraxLifecycle= "androidx.camera:camera-lifecycle:1.0.0-beta06"
 libs.uber = "com.uber.sdk:rides-android:0.10.2"
+libs.excuseMe = "com.github.AraujoJordan:ExcuseMe:0.9.5"
 ext.libs = libs
