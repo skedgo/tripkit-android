@@ -5,7 +5,7 @@
  */
 
 def versions = new Expando()
-versions.immutablesVersion = "2.5.5"
+versions.immutablesVersion = "2.8.2"
 versions.devMinSdkVersion = 21
 versions.proMinSdkVersion = 21
 versions.compileSdkVersion = 29
@@ -13,7 +13,7 @@ versions.targetSdkVersion = 29
 // See change-log at https://github.com/JetBrains/kotlin/blob/master/ChangeLog.md.
 versions.kotlinVersion = "1.3.72"
 versions.supportLibraryVersion = "28.0.0"
-versions.androidGradlePlugin = "3.4.0"
+versions.androidGradlePlugin = "4.0.1"
 versions.okHttpVersion = "4.1.1"
 versions.retrofitVersion = "2.6.1"
 versions.androidxVersion = "1.1.0"
@@ -59,7 +59,7 @@ libs.rxrelay2 = "com.jakewharton.rxrelay2:rxrelay:2.1.0"
 libs.rxkotlin = "io.reactivex.rxjava2:rxkotlin:2.4.0"
 libs.kluent = "org.amshove.kluent:kluent:1.38"
 libs.kotlin = "org.jetbrains.kotlin:kotlin-stdlib:$versions.kotlinVersion"
-libs.gson = "com.google.code.gson:gson:2.7"
+libs.gson = "com.google.code.gson:gson:2.8.6"
 libs.junit = "junit:junit:4.12"
 libs.flexbox = "com.google.android:flexbox:0.3.2"
 libs.okHttp = "com.squareup.okhttp3:okhttp:$versions.okHttpVersion"
@@ -74,8 +74,8 @@ libs.materialProgressBar = "me.zhanghai.android.materialprogressbar:library:1.4.
 libs.timber = "com.jakewharton.timber:timber:4.5.1"
 libs.rxtry = "com.github.thuytrinh:RxTry:c2f002df6c"
 libs.koptional = "com.gojuno.koptional:koptional:1.2.0"
-libs.bindingCollectionAdapter = "me.tatarka.bindingcollectionadapter2:bindingcollectionadapter:3.1.1"
-libs.bindingCollectionAdapterRecyclerView = "me.tatarka.bindingcollectionadapter2:bindingcollectionadapter-recyclerview:3.1.1"
+libs.bindingCollectionAdapter = "me.tatarka.bindingcollectionadapter2:bindingcollectionadapter:4.0.0"
+libs.bindingCollectionAdapterRecyclerView = "me.tatarka.bindingcollectionadapter2:bindingcollectionadapter-recyclerview:4.0.0"
 libs.playServicesMaps = "com.google.android.gms:play-services-maps:17.0.0"
 
 libs.rxLifecycleComponents = "com.github.skedgo:RxLifecycleComponents:1.6"
@@ -107,4 +107,6 @@ libs.cameraxView = "androidx.camera:camera-view:1.0.0-alpha13"
 libs.cameraxLifecycle= "androidx.camera:camera-lifecycle:1.0.0-beta06"
 libs.uber = "com.uber.sdk:rides-android:0.10.2"
 libs.excuseMe = "com.github.AraujoJordan:ExcuseMe:0.9.5"
+libs.coreKtx = "androidx.core:core-ktx:1.3.1"
+
 ext.libs = libs

@@ -12,7 +12,10 @@ android {
     testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
   }
 
-  dataBinding { enabled = true }
+  buildFeatures {
+    dataBinding true
+  }
+
   lintOptions {
     checkReleaseBuilds true
     abortOnError false

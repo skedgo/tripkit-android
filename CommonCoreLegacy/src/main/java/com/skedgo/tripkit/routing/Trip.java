@@ -46,6 +46,9 @@ public class Trip implements ITimeRange {
   @SerializedName("progressURL") private String progressURL;
   @SerializedName("plannedURL") private String plannedURL;
   @SerializedName("temporaryURL") private String temporaryURL;
+  @SerializedName("logURL") private String logURL;
+  @SerializedName("shareURL") private String shareURL;
+
   @Nullable @SerializedName("availability") private String availability;
   @SerializedName("mainSegmentHashCode") private long mainSegmentHashCode;
 
@@ -215,6 +218,11 @@ public class Trip implements ITimeRange {
   public void setUpdateURL(String updateURL) {
     this.updateURL = updateURL;
   }
+  @Nullable public String getLogURL() {
+    return logURL;
+  }
+
+  public void setLogURL(String logURL) { this.logURL = logURL; }
 
   public float getWeightedScore() {
     return weightedScore;
@@ -462,5 +470,13 @@ public class Trip implements ITimeRange {
 
   public void setMainSegmentHashCode(long mainSegmentHashCode) {
     this.mainSegmentHashCode = mainSegmentHashCode;
+  }
+
+  public String getShareURL() {
+    return shareURL;
+  }
+
+  public void setShareURL(String shareURL) {
+    this.shareURL = shareURL;
   }
 }

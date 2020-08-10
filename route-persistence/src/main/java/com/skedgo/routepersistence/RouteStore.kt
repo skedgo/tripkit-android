@@ -108,6 +108,8 @@ open class RouteStore(private val databaseHelper: SQLiteOpenHelper, private val 
           values.put(COL_ARRIVE, trip.endTimeInSecs)
           values.put(COL_SAVE_URL, trip.saveURL)
           values.put(COL_UPDATE_URL, trip.updateURL)
+          values.put(COL_LOG_URL, trip.logURL)
+          values.put(COL_SHARE_URL, trip.shareURL)
           values.put(COL_PROGRESS_URL, trip.progressURL)
           values.put(COL_CARBON_COST, trip.carbonCost)
           values.put(COL_MONEY_COST, trip.moneyCost)
@@ -228,11 +230,13 @@ open class RouteStore(private val databaseHelper: SQLiteOpenHelper, private val 
     val hassleCost = tripCursor.getFloat(tripCursor.getColumnIndex(COL_HASSLE_COST))
     val weightedScore = tripCursor.getFloat(tripCursor.getColumnIndex(COL_WEIGHTED_SCORE))
     val updateUrl = tripCursor.getString(tripCursor.getColumnIndex(COL_UPDATE_URL))
+    val logUrl = tripCursor.getString(tripCursor.getColumnIndex(COL_LOG_URL))
     val progressUrl = tripCursor.getString(tripCursor.getColumnIndex(COL_PROGRESS_URL))
     val plannedUrl = tripCursor.getString(tripCursor.getColumnIndex(COL_PLANNED_URL))
     val tempUrl = tripCursor.getString(tripCursor.getColumnIndex(COL_TEMP_URL))
     val queryIsLeaveAfter = tripCursor.getInt(tripCursor.getColumnIndex(COL_QUERY_IS_LEAVE_AFTER))
     val mainSegmentHashCode = tripCursor.getLong(tripCursor.getColumnIndex(COL_MAIN_SEGMENT_HASH_CODE))
+    val shareUrl = tripCursor.getString(tripCursor.getColumnIndex(COL_SHARE_URL))
 
     val isNotifable = groupCursor.getInt(groupCursor.getColumnIndex(COL_IS_NOTIFIABLE)) == 1
 
@@ -249,6 +253,8 @@ open class RouteStore(private val databaseHelper: SQLiteOpenHelper, private val 
     trip.hassleCost = hassleCost
     trip.weightedScore = weightedScore
     trip.updateURL = updateUrl
+    trip.shareURL = shareUrl
+    trip.logURL = logUrl
     trip.progressURL = progressUrl
     trip.plannedURL = plannedUrl
     trip.temporaryURL = tempUrl
@@ -362,11 +368,13 @@ open class RouteStore(private val databaseHelper: SQLiteOpenHelper, private val 
     values.put(COL_HASSLE_COST, trip.hassleCost)
     values.put(COL_WEIGHTED_SCORE, trip.weightedScore)
     values.put(COL_UPDATE_URL, trip.updateURL)
+    values.put(COL_LOG_URL, trip.logURL)
     values.put(COL_PROGRESS_URL, trip.progressURL)
     values.put(COL_PLANNED_URL, trip.plannedURL)
     values.put(COL_TEMP_URL, trip.temporaryURL)
     values.put(COL_QUERY_IS_LEAVE_AFTER, if (trip.queryIsLeaveAfter()) 1 else 0)
     values.put(COL_MAIN_SEGMENT_HASH_CODE, trip.mainSegmentHashCode)
+    values.put(COL_SHARE_URL, trip.shareURL)
     database.insertWithOnConflict(TABLE_TRIPS, null, values, SQLiteDatabase.CONFLICT_REPLACE)
   }
 

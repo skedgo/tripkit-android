@@ -6,7 +6,7 @@ import android.database.sqlite.SQLiteException;
 import android.database.sqlite.SQLiteOpenHelper;
 
 public class RouteDatabaseHelper extends SQLiteOpenHelper {
-  private static int DATABASE_VERSION = 5;
+  private static int DATABASE_VERSION = 7;
 
   public RouteDatabaseHelper(Context context, String name) {
     super(context, name, null, DATABASE_VERSION);
@@ -34,6 +34,11 @@ public class RouteDatabaseHelper extends SQLiteOpenHelper {
           db.execSQL("ALTER TABLE trips ADD COLUMN mainSegmentHashCode INTEGER");
         } catch (SQLiteException ex) {
         }
+      case 5:
+        db.execSQL("ALTER TABLE trips ADD COLUMN logURL TEXT");
+      case 6:
+        db.execSQL("ALTER TABLE trips ADD COLUMN shareURL TEXT");
+
     }
   }
 }
