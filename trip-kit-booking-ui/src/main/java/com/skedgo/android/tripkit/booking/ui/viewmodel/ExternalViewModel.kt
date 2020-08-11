@@ -22,9 +22,11 @@ class ExternalViewModel @Inject internal constructor() : DisposableViewModel() {
   val nextUrlObservable: Observable<String> = publishSubjectNextUrl.asObservable()
 
 
-  fun handleArgs(args: Bundle) {
-    externalFormField = args.getParcelable<ExternalFormField>(KEY_EXTERNAL_FORM)
-    externalFormField?.let { url.set(it.value) }
+  fun handleArgs(args: Bundle?) {
+    args?.let {
+      externalFormField = args.getParcelable<ExternalFormField>(KEY_EXTERNAL_FORM)
+      externalFormField?.let { url.set(it.value) }
+    }
   }
 
   fun webViewClient(): WebViewClient {

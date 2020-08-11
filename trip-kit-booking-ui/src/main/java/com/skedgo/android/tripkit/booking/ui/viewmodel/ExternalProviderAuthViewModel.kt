@@ -25,9 +25,11 @@ class ExternalProviderAuthViewModel @Inject internal constructor() : DisposableV
 
   @VisibleForTesting var bookingForm: BookingForm? = null
 
-  fun handleArgs(args: Bundle) {
-    val form = args.getParcelable<BookingForm>(KEY_FORM)
-    handleArgs(form)
+  fun handleArgs(args: Bundle?) {
+    args?.let {
+      val form = args.getParcelable<BookingForm>(KEY_FORM)
+      handleArgs(form)
+    }
   }
 
   fun webViewClient(oAuth2CallbackHandler: OAuth2CallbackHandler): WebViewClient {
