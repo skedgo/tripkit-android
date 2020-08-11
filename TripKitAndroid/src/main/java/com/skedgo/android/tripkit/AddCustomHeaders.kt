@@ -37,7 +37,7 @@ internal class AddCustomHeaders constructor(
       is Key.RegionEligibility -> builder.addHeader(regionEligibilityHeader, key.value)
     }
 
-    if (getUserToken != null && getUserToken.call() != null) {
+    if (getUserToken?.call() != null) {
       builder.addHeader(userTokenHeader, getUserToken.call())
     }
 
