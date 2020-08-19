@@ -4,8 +4,8 @@ import android.content.Context;
 import android.content.res.Resources;
 
 import com.google.gson.Gson;
-import com.jakewharton.picasso.OkHttp3Downloader;
 import com.skedgo.android.common.util.Gsons;
+import com.squareup.picasso.OkHttp3Downloader;
 import skedgo.tripkit.android.TripKit;
 import com.skedgo.android.tripkit.booking.BookingService;
 import com.skedgo.android.tripkit.booking.ExternalOAuthService;
