@@ -53,7 +53,7 @@ public enum VehicleMode {
   TRAM("tram", R.drawable.ic_tram, R.drawable.ic_tram_realtime),
   WALK("walk", R.drawable.ic_walk, R.drawable.ic_walk),
   WHEEL_CHAIR("wheelchair", R.drawable.ic_wheelchair, R.drawable.ic_wheelchair),
-  FUNICULAR("funicular", R.drawable.ic_icon_mode_funicular, R.drawable.ic_icon_mode_funicular),
+  FUNICULAR("funicular", R.drawable.ic_funicular, R.drawable.ic_funicular),
 
   // FIXME: Is this still being used?
   TOLL("toll", R.drawable.ic_toll, R.drawable.ic_toll);
