@@ -40,10 +40,6 @@ final class LocationInfoServiceImpl implements LocationInfoService {
             );
           }
         })
-        .first(new Func1<LocationInfo, Boolean>() {
-          @Override public Boolean call(LocationInfo response) {
-            return response != null;
-          }
-        });
+        .first(response -> response != null);
   }
 }
