@@ -14,11 +14,7 @@ import com.skedgo.tripkit.common.util.TripSegmentListResolver;
 
 import org.apache.commons.collections4.CollectionUtils;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
 public class RoutingResponse {
   public static final String FORMAT_DIRECTION = "Direction: %s";
@@ -151,7 +147,7 @@ public class RoutingResponse {
     return tripGroups;
   }
 
-  public SparseArray<JsonObject> createSegmentTemplateMap(ArrayList<JsonObject> segmentTemplates) {
+  public SparseArray<JsonObject> createSegmentTemplateMap(List<JsonObject> segmentTemplates) {
     SparseArray<JsonObject> segmentTemplateMap = new SparseArray<JsonObject>();
     if (CollectionUtils.isNotEmpty(segmentTemplates)) {
       for (JsonObject segmentTemplate : segmentTemplates) {
