@@ -12,16 +12,12 @@ dependencies {
   testImplementation libs.assertjCore
   testImplementation libs.mockitoCore
   testImplementation libs.mockitoKotlin
-  testImplementation project(":AccountDomain")
 
   implementation libs.kotlin
   implementation libs.rxjava2
   implementation libs.dagger
   kapt libs.daggerCompiler
 
-  // Use `compileOnly` to achieve similar effect of `provided` scope.
-  // See more https://blog.gradle.org/introducing-compile-only-dependencies.
-  compileOnly project(":AccountDomain")
 }
 
 

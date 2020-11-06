@@ -79,6 +79,7 @@ public abstract class TripKit {
       if (instance == null) {
         instance = DaggerTripKit.builder()
             .mainModule(new MainModule(configs))
+            .httpClientModule(new HttpClientModule(null, null, configs))
             .build();
         JodaTimeAndroid.init(configs.context());
       }

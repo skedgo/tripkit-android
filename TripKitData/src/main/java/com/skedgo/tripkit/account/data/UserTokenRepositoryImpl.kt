@@ -1,15 +1,14 @@
 package com.skedgo.tripkit.account.data
 
 import android.content.SharedPreferences
-import android.util.Log
-import io.reactivex.BackpressureStrategy
-import io.reactivex.Flowable
-import io.reactivex.Observable
-import io.reactivex.schedulers.Schedulers
 import com.skedgo.tripkit.account.domain.SignInCredentials
 import com.skedgo.tripkit.account.domain.SignUpCredentials
 import com.skedgo.tripkit.account.domain.UserToken
 import com.skedgo.tripkit.account.domain.UserTokenRepository
+import io.reactivex.BackpressureStrategy
+import io.reactivex.Flowable
+import io.reactivex.Observable
+import io.reactivex.schedulers.Schedulers
 
 internal class UserTokenRepositoryImpl constructor(
     private val preferences: SharedPreferences,
@@ -42,7 +41,7 @@ internal class UserTokenRepositoryImpl constructor(
                 .apply()
           }
 
-  override fun onUserTokenChanged(): Observable<Any> =
+    override fun onUserTokenChanged(): Observable<Any> =
       preferences.onChange(KEY_USER_TOKEN).cast(Any::class.java)
 
   override fun getUserTokenBySignUpCredentials(
@@ -80,7 +79,15 @@ internal class UserTokenRepositoryImpl constructor(
                 .apply()
           }
 
-  override fun clearUserToken(): Observable<Boolean> = Observable.fromCallable {
+    override fun setUserToken(userToken: String) {
+        preferences.edit()
+                .putString(KEY_USER_TOKEN, userToken)
+                .apply()
+
+    }
+
+
+    override fun clearUserToken(): Observable<Boolean> = Observable.fromCallable {
     preferences.edit()
         .putString(KEY_USER_TOKEN, null)
         .apply()

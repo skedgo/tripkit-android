@@ -11,6 +11,7 @@ interface UserTokenRepository {
   fun getUserTokenByUserIdentifier(userIdentifier: String): Observable<UserToken>
   fun getUserTokenBySignUpCredentials(signUpCredentials: SignUpCredentials): Observable<UserToken>
   fun getUserTokenBySignInCredentials(signInCredentials: SignInCredentials): Observable<UserToken>
+  fun setUserToken(userToken: String)
   fun clearUserToken(): Observable<Boolean>
   fun clearUserTokenByLoggingOut(): Observable<Boolean>
   fun onUserTokenChanged(): Observable<Any>

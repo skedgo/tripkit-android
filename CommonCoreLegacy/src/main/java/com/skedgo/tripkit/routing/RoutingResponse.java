@@ -2,6 +2,7 @@ package com.skedgo.tripkit.routing;
 
 import android.content.res.Resources;
 import android.text.TextUtils;
+import android.util.Log;
 import android.util.SparseArray;
 
 import com.google.gson.Gson;
@@ -110,13 +111,11 @@ public class RoutingResponse {
         alertCache.put(alert.remoteHashCode(), alert);
       }
     }
-
     for (TripGroup tripGroup : tripGroups) {
       ArrayList<Trip> trips = tripGroup.getTrips();
       if (CollectionUtils.isEmpty(trips)) {
         continue;
       }
-
       for (Trip trip : trips) {
         trip.setGroup(tripGroup);
 
@@ -132,7 +131,6 @@ public class RoutingResponse {
             rawSegments
         );
         trip.setSegments(segments);
-
         processTripSegmentRealTimeVehicle(segments);
       }
 
@@ -206,6 +204,7 @@ public class RoutingResponse {
                                                             ArrayList<JsonObject> rawSegments) {
     ArrayList<TripSegment> segments = new ArrayList<TripSegment>(rawSegments.size());
     for (JsonObject rawSegment : rawSegments) {
+
       if (rawSegment == null) {
         continue;
       }
@@ -242,8 +241,13 @@ public class RoutingResponse {
         }
       }
     }
-
-    TripSegment segment = gson.fromJson(rawSegment, TripSegment.class);
+    TripSegment segment = new TripSegment();
+    try {
+      segment = gson.fromJson(rawSegment, TripSegment.class);
+    } catch (Exception e ) {
+      Log.e("TripKit", "GSON ERROR", e);
+      Log.e("TripKit", rawSegment.toString());
+    }
     if (segment.getAlertHashCodes() != null && alertCache != null) {
       ArrayList<RealtimeAlert> segmentAlerts = null;
       for (long alertHashCode : segment.getAlertHashCodes()) {
@@ -262,7 +266,6 @@ public class RoutingResponse {
         segment.setAlerts(segmentAlerts);
       }
     }
-
     return segment;
   }
 

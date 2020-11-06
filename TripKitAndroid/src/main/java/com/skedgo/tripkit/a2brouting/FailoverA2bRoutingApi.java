@@ -2,6 +2,7 @@ package com.skedgo.tripkit.a2brouting;
 
 import android.content.res.Resources;
 
+import android.util.Log;
 import com.google.gson.Gson;
 import com.skedgo.tripkit.common.model.Region;
 import com.skedgo.tripkit.RoutingUserError;
@@ -63,14 +64,14 @@ public class FailoverA2bRoutingApi {
         .first(new RoutingResponse())
         .map((Function<RoutingResponse, List<TripGroup>>) response -> {
           response.processRawData(resources, gson);
-          return response.getTripGroupList();
+            return response.getTripGroupList();
         })
         .filter(CollectionUtils::isNotEmpty)
         .map(fillIdentifiers)
         .map(groups -> {
             for (TripGroup group : groups) {
-            selectBestDisplayTrip.apply(group);
-          }
+                selectBestDisplayTrip.apply(group);
+            }
           return groups;
         })
         .onErrorResumeNext((Function<Throwable, Maybe<? extends List<TripGroup>>>) error -> error instanceof RoutingUserError

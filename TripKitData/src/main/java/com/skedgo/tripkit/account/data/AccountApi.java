@@ -1,8 +1,8 @@
 package com.skedgo.tripkit.account.data;
 
+import io.reactivex.Observable;
 import retrofit2.http.Body;
 import retrofit2.http.POST;
-import io.reactivex.Observable;
 
 interface AccountApi {
   @POST("account/signup") Observable<SignUpResponse> signUp(@Body SignUpBody body);

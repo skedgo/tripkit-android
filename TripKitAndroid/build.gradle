@@ -26,7 +26,9 @@ android {
     sourceCompatibility JavaVersion.VERSION_1_8
     targetCompatibility JavaVersion.VERSION_1_8
   }
-
+  kotlinOptions {
+    jvmTarget = JavaVersion.VERSION_1_8.toString()
+  }
   testOptions {
     unitTests {
       includeAndroidResources = true
@@ -65,6 +67,10 @@ dependencies {
   androidTestImplementation libs.assertjCore
 
   implementation libs.kotlin
+  implementation libs.coroutinesCore
+  implementation libs.coroutinesAndroid
+  implementation libs.coroutinesRx
+
   implementation libs.jodaTimeAndroid
   implementation 'com.github.skedgo:commons-collections:v1.0'
 
@@ -84,13 +90,13 @@ dependencies {
   compileOnly libs.valueAnnotations
   compileOnly libs.builderAnnotations
   implementation libs.immutablesGson
+  implementation libs.networkResponse
 
   api project(':CommonCoreLegacy')
   api project(':TripKitDomain')
   api project(':TripKitDomainLegacy')
   api project(':TripKitData')
   api project(':sqliteutils')
-  api project(':AccountDomain')
 }
 
 // build a jar with source files

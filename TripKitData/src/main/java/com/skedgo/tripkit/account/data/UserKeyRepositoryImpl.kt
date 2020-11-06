@@ -1,9 +1,9 @@
 package com.skedgo.tripkit.account.data
 
 import android.content.SharedPreferences
+import com.skedgo.tripkit.account.domain.UserKeyRepository
 import io.reactivex.Completable
 import io.reactivex.Single
-import com.skedgo.tripkit.account.domain.UserKeyRepository
 import java.util.*
 
 class UserKeyRepositoryImpl(

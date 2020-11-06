@@ -52,13 +52,7 @@ public class MainModule {
     context = configs.context().getApplicationContext();
   }
 
-  /**
-   * @return A {@link SharedPreferences} that contains
-   * internal persistent configs (e.g. UUID) for TripKit.
-   */
-  @Provides @Named("TripKitPrefs") SharedPreferences preferences() {
-    return context.getSharedPreferences("TripKit", Context.MODE_PRIVATE);
-  }
+
 
   @Provides Configs configs() {
     return configs;
@@ -149,30 +143,6 @@ public class MainModule {
     return configs.context();
   }
 
-  @Singleton @Provides OkHttpClient httpClient(
-      OkHttpClient.Builder httpClientBuilder,
-      AddCustomHeaders addCustomHeaders) {
-
-    final OkHttpClient.Builder builder = httpClientBuilder
-        .addInterceptor(addCustomHeaders);
-    if (configs.debuggable()) {
-      HttpLoggingInterceptor interceptor = new HttpLoggingInterceptor();
-      interceptor.level(HttpLoggingInterceptor.Level.BODY);
-      builder.addInterceptor(interceptor);
-    }
-
-    final Callable<String> baseUrlAdapterFactory = configs.baseUrlAdapterFactory();
-    if (baseUrlAdapterFactory != null) {
-      try {
-        builder.addInterceptor(new BaseUrlOverridingInterceptor(baseUrlAdapterFactory));
-      } catch (Exception e) {
-        e.printStackTrace();
-      }
-    }
-
-    return builder.build();
-  }
-
   @Provides BookingResolver getBookingResolver() {
     return new BookingResolverImpl(
         context.getResources(),
@@ -181,20 +151,7 @@ public class MainModule {
     );
   }
 
-  @Provides TripUpdateApi getTripUpdateApi(Gson gson, OkHttpClient httpClient) {
-    return new Retrofit.Builder()
-        /* This base url is ignored as the api relies on @Url. */
-        .baseUrl(Server.ApiTripGo.getValue())
-        .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
-        .addConverterFactory(GsonConverterFactory.create(gson))
-        .client(httpClient)
-        .build()
-        .create(TripUpdateApi.class);
-  }
 
-  @Singleton @Provides TripUpdater getTripUpdater(TripUpdateApi api, Gson gson) {
-    return new TripUpdaterImpl(context.getResources(), api, gson);
-  }
 
   @Provides LocationInfoApi getLocationInfoApi(Gson gson, OkHttpClient httpClient) {
     return new Retrofit.Builder()
@@ -239,9 +196,5 @@ public class MainModule {
         }
       }
     };
-  }
-
-  @Provides AppVersionNameRepository appVersionNameRepository(Context context) {
-    return new AppVersionNameRepositoryImpl(context);
   }
 }

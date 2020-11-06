@@ -2,16 +2,16 @@ package com.skedgo.tripkit.account.data
 
 import android.content.Context
 import android.content.SharedPreferences
+import com.skedgo.tripkit.account.domain.UserKeyRepository
+import com.skedgo.tripkit.account.domain.UserTokenRepository
+import com.skedgo.tripkit.configuration.Server
 import dagger.Module
 import dagger.Provides
+import io.reactivex.schedulers.Schedulers
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
-import io.reactivex.schedulers.Schedulers
-import com.skedgo.tripkit.account.domain.UserKeyRepository
-import com.skedgo.tripkit.account.domain.UserTokenRepository
-import com.skedgo.tripkit.configuration.Server
 import javax.inject.Named
 
 @Module

@@ -23,14 +23,14 @@ abstract class LocalCost : Parcelable {
   /**
    * @return Cost of this segment in local currency (it's an average for ranges, considering quartile info)
    */
-  abstract fun cost(): Float
+  abstract fun cost(): Float?
 
-  abstract fun accuracy(): LocalCostAccuracy
+  abstract fun accuracy(): LocalCostAccuracy?
 
   /**
    * @return The ISO 4217 currency code
    */
-  abstract fun currency(): String
+  abstract fun currency(): String?
 }
 
 enum class LocalCostAccuracy {

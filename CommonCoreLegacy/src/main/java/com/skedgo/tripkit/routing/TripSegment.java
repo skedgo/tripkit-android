@@ -50,6 +50,9 @@ public class TripSegment implements IRealTimeElement, ITimeRange {
     private transient Trip mTrip;
     @SerializedName("booking")
     private Booking booking;
+    @SerializedName("bookingHashCode")
+    @Nullable
+    private Long bookingHashCode;
     @SerializedName("mini")
     @Nullable
     private MiniInstruction mMiniInstruction;
@@ -565,6 +568,13 @@ public class TripSegment implements IRealTimeElement, ITimeRange {
             return location.getTimeZone();
         }
         return null;
+    }
+
+    public Long getBookingHashCode() {
+        return bookingHashCode;
+    }
+    public void setBookingHashCode(Long bookingHashCode) {
+        this.bookingHashCode = bookingHashCode;
     }
 
     public Booking getBooking() {

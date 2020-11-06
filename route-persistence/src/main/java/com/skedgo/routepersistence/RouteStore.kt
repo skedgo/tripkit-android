@@ -4,6 +4,7 @@ import android.content.ContentValues
 import android.database.Cursor
 import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
+import android.util.Log
 import android.util.Pair
 import com.google.gson.Gson
 import com.skedgo.routepersistence.RouteContract.*
@@ -114,12 +115,12 @@ open class RouteStore(private val databaseHelper: SQLiteOpenHelper, private val 
           values.put(COL_CARBON_COST, trip.carbonCost)
           values.put(COL_MONEY_COST, trip.moneyCost)
           values.put(COL_HASSLE_COST, trip.hassleCost)
-
+          values.put(COL_UUID, trip.uuid())
           database.beginTransaction()
           try {
             database.update(TABLE_TRIPS, values, "$COL_UUID = ?", arrayOf(oldTripUuid))
             database.delete(TABLE_SEGMENTS, "$COL_TRIP_ID = ?", arrayOf(oldTripUuid))
-            saveSegments(database, oldTripUuid, trip.segments)
+            saveSegments(database, trip.uuid(), trip.segments)
             database.setTransactionSuccessful()
           } finally {
             database.endTransaction()

@@ -25,6 +25,12 @@ dependencies {
   testImplementation libs.mockitoCore
   testImplementation libs.mockitoKotlin, { exclude group: "org.jetbrains.kotlin" }
   testImplementation libs.jodaTimeTzdb
+  testImplementation libs.mockWebServer
+  testImplementation libs.kluent
+  testImplementation libs.robolectric
+  testImplementation libs.androidxTesting
+  testImplementation libs.androidxJUnitExtTesting
+
   implementation 'com.github.skedgo:commons-collections:v1.0'
 
   implementation project(":CommonCoreLegacy")

@@ -1,5 +1,6 @@
 package com.skedgo.tripkit.data.routingstatus
 
+import android.util.Log
 import com.jakewharton.rxrelay2.PublishRelay
 import com.skedgo.routepersistence.RoutingStatusStore
 import com.skedgo.routepersistence.toDto
