@@ -45,7 +45,7 @@ public class Query implements Parcelable {
       in.readStringList(stops);
       query.excludedStopCodes = stops;
 
-      query.mUseWheelchair = in.readBoolean();
+      query.mUseWheelchair = in.readInt() != 0;
       return query;
     }
 
@@ -350,7 +350,7 @@ public class Query implements Parcelable {
     dest.writeStringList(transportModeIds);
     dest.writeInt(maxWalkingTime);
     dest.writeStringList(excludedStopCodes);
-    dest.writeBoolean(mUseWheelchair);
+    dest.writeInt(mUseWheelchair ? 1 : 0);
   }
 
   /**
