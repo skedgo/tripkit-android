@@ -27,7 +27,7 @@ abstract class SharedVehicle {
     abstract fun available(): Boolean
     abstract fun batteryLevel(): Int?
     abstract fun batteryRange(): Int?
-    abstract fun lastUpdate(): Long
+    abstract fun lastUpdate(): Long?
     abstract fun operator(): Operator
     abstract fun vehicleType(): SharedVehicleType
 }
