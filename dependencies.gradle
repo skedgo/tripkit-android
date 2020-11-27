@@ -103,6 +103,8 @@ libs.lifecycle = "androidx.lifecycle:lifecycle-extensions:$versions.lifecycle"
 libs.lifecycleCompiler = "androidx.lifecycle:lifecycle-compiler:$versions.lifecycle"
 libs.lifecycleViewModel = "androidx.lifecycle:lifecycle-viewmodel-ktx:$versions.lifecycle"
 libs.lifecycleRuntime = "androidx.lifecycle:lifecycle-runtime-ktx:$versions.lifecycle"
+libs.lifecycleLiveData = "androidx.lifecycle:lifecycle-livedata-ktx:$versions.lifecycle"
+
 libs.constraintLayout = "androidx.constraintlayout:constraintlayout:2.0.0-beta4"
 libs.preferences = "androidx.preference:preference:1.1.0"
 libs.mlkit = "com.google.mlkit:barcode-scanning:16.0.0"
