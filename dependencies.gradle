@@ -70,6 +70,8 @@ libs.crashlytics = "com.crashlytics.sdk.android:crashlytics:2.10.0"
 libs.retrofit = "com.squareup.retrofit2:retrofit:$versions.retrofitVersion"
 libs.retrofitAdapterRxJava = "com.squareup.retrofit2:adapter-rxjava2:$versions.retrofitVersion"
 libs.retrofitConverterGson = "com.squareup.retrofit2:converter-gson:$versions.retrofitVersion"
+libs.retrofitConverterScalars = "com.squareup.retrofit2:converter-scalars:$versions.retrofitVersion"
+
 libs.calligraphy = "uk.co.chrisjenx:calligraphy:2.3.0"
 libs.materialProgressBar = "me.zhanghai.android.materialprogressbar:library:1.4.1"
 libs.timber = "com.jakewharton.timber:timber:4.5.1"
@@ -120,4 +122,5 @@ libs.coroutinesRx = "org.jetbrains.kotlinx:kotlinx-coroutines-rx2:$versions.kotl
 libs.networkResponse = "com.github.haroldadmin:NetworkResponseAdapter:4.0.1"
 libs.ktxActivity = "androidx.activity:activity-ktx:1.1.0"
 libs.picasso="com.squareup.picasso:picasso:2.71828"
+libs.flowPreferences="com.github.tfcporciuncula.flow-preferences:flow-preferences:1.3.3"
 ext.libs = libs
