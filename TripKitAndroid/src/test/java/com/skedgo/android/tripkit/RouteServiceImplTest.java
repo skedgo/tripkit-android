@@ -24,6 +24,7 @@ import static org.assertj.core.api.Java6Assertions.assertThat;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
 
+@SuppressWarnings("KotlinInternalInJava")
 public class RouteServiceImplTest extends TripKitAndroidRobolectricTest {
   @Mock QueryGenerator queryGenerator;
   @Mock Co2Preferences co2Preferences;
@@ -135,6 +136,17 @@ public class RouteServiceImplTest extends TripKitAndroidRobolectricTest {
 
     // Assert.
     assertThat(map).containsKey("wheelchair");
+  }
+
+  @Test public void excludeWheelchairWhenNoRegionInfo() {
+    // Arrange.
+    when(tripPreferences.isWheelchairPreferred()).thenReturn(true);
+
+    // Act.
+    final Map<String, Object> map = routeService.getParamsByPreferences(null);
+
+    // Assert.
+    assertThat(map).doesNotContainKey("wheelchair");
   }
 
   @Test public void shouldIncludeOptionDepartAfter() {

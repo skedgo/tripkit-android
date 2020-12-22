@@ -14,6 +14,8 @@ import java.util.HashMap
 import java.util.concurrent.TimeUnit
 
 import androidx.collection.ArrayMap
+import com.gojuno.koptional.Optional
+import com.gojuno.koptional.Some
 import com.skedgo.android.tripkit.tsp.hasWheelChairInformation
 import rx.Observable
 import rx.functions.Func1
@@ -46,7 +48,8 @@ internal class RouteServiceImpl(
     return flatSubQueries(query, transportModeFilter)
         .concatMap { subQuery ->
           regionInfoRepository.getRegionInfoByRegion(subQuery.region!!)
-              .map { regionInfo -> Pair(subQuery, regionInfo) }
+              .map { subQuery to it }
+              .onErrorReturn { subQuery to null }
         }
         .flatMap { (subQuery, regionInfo) ->
           val region = subQuery.region
@@ -63,13 +66,13 @@ internal class RouteServiceImpl(
   }
 
   /* TODO: Consider making this public for Xerox team. */
-  fun getParamsByPreferences(regionInfo: RegionInfo): Map<String, Any> {
+  fun getParamsByPreferences(regionInfo: RegionInfo?): Map<String, Any> {
     val map = ArrayMap<String, Any>()
     if (tripPreferences != null) {
       if (tripPreferences.isConcessionPricingPreferred) {
         map["conc"] = true
       }
-      if (tripPreferences.isWheelchairPreferred && regionInfo.hasWheelChairInformation()) {
+      if (tripPreferences.isWheelchairPreferred && regionInfo != null && regionInfo.hasWheelChairInformation()) {
         map["wheelchair"] = true
       }
     }
@@ -84,7 +87,7 @@ internal class RouteServiceImpl(
     return map
   }
 
-  fun toOptions(query: Query, regionInfo: RegionInfo): Map<String, Any> {
+  fun toOptions(query: Query, regionInfo: RegionInfo?): Map<String, Any> {
     val departureCoordinates = toCoordinatesText(query.fromLocation!!)
     val arrivalCoordinates = toCoordinatesText(query.toLocation!!)
     val arriveBefore = TimeUnit.MILLISECONDS.toSeconds(query.arriveBy)
