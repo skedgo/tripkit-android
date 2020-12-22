@@ -84,13 +84,13 @@ internal class RouteServiceImpl(
     val options = HashMap<String, Any>()
     options["from"] = departureCoordinates
     options["to"] = arrivalCoordinates
-    options["arriveBefore"] = java.lang.Long.toString(arriveBefore)
-    options["departAfter"] = java.lang.Long.toString(departAfter)
+    options["arriveBefore"] = arriveBefore.toString()
+    options["departAfter"] = departAfter.toString()
     options["unit"] = unit
     options["v"] = "12"
-    options["tt"] = Integer.toString(transferTime)
-    options["ws"] = Integer.toString(walkingSpeed)
-    options["cs"] = Integer.toString(cyclingSpeed)
+    options["tt"] = transferTime.toString()
+    options["ws"] = walkingSpeed.toString()
+    options["cs"] = cyclingSpeed.toString()
     options["includeStops"] = "1"
     options["wp"] = ToWeightingProfileString.toWeightingProfileString(query)
     if (query.useWheelchair()) {
