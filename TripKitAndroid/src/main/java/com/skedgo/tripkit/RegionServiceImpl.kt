@@ -75,6 +75,7 @@ internal class RegionServiceImpl(
 
   override fun getTransportModesByRegionAsync(region: Region): Observable<List<TransportMode>> {
     val modeIds = region.transportModeIds
+
     return if (modeIds != null)
       getTransportModesByIdsAsync(modeIds)
     else
@@ -90,11 +91,12 @@ internal class RegionServiceImpl(
                             BiFunction { regionInfoOne: RegionInfo, regionInfoTwo: RegionInfo ->
                                 var transportModesOne = regionPair.first.transportModeIds
                                 var transportModesTwo = regionPair.second.transportModeIds
-                                if (regionInfoOne.hasWheelChairInformation()) {
+
+                                if (regionInfoOne.hasWheelChairInformation() && transportModesOne?.contains(TransportMode.ID_WHEEL_CHAIR) != true) {
                                     transportModesOne?.add(TransportMode.ID_WHEEL_CHAIR)
                                 }
 
-                                if (regionInfoTwo.hasWheelChairInformation()) {
+                                if (regionInfoTwo.hasWheelChairInformation() && transportModesTwo?.contains(TransportMode.ID_WHEEL_CHAIR) != true) {
                                     transportModesTwo?.add(TransportMode.ID_WHEEL_CHAIR)
                                 }
                                 transportModesOne to transportModesTwo
