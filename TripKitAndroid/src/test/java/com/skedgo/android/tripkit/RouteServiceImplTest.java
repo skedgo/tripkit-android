@@ -32,6 +32,7 @@ public class RouteServiceImplTest extends TripKitAndroidRobolectricTest {
   @Mock FailoverA2bRoutingApi routingApi;
   @Mock RegionInfoRepository regionInfoRepository;
   @Mock RegionInfo regionInfo;
+  @Mock RegionService regionService;
   private RouteServiceImpl routeService;
 
   @Before public void before() {
@@ -42,7 +43,8 @@ public class RouteServiceImplTest extends TripKitAndroidRobolectricTest {
         tripPreferences,
         extraQueryMapProvider,
         routingApi,
-        regionInfoRepository
+        regionInfoRepository,
+        regionService
     );
     when(extraQueryMapProvider.call())
         .thenReturn(Collections.<String, Object>emptyMap());
@@ -55,7 +57,7 @@ public class RouteServiceImplTest extends TripKitAndroidRobolectricTest {
     query.setTimeTag(TimeTag.createForArriveBy(25251325));
     query.setCyclingSpeed(3);
 
-    final Map<String, Object> options = routeService.toOptions(query, regionInfo);
+    final Map<String, Object> options = routeService.toOptions(query, false);
     assertThat(options)
         .containsEntry("v", "12")
         .containsEntry("unit", query.getUnit())
@@ -74,7 +76,7 @@ public class RouteServiceImplTest extends TripKitAndroidRobolectricTest {
     query.getFromLocation().setAddress("from address");
     query.getToLocation().setAddress("to address");
 
-    final Map<String, Object> options = routeService.toOptions(query, regionInfo);
+    final Map<String, Object> options = routeService.toOptions(query, false);
     assertThat(options)
         .containsEntry("from", "(1.0,2.0)\"from address\"")
         .containsEntry("to", "(3.0,4.0)\"to address\"");
@@ -82,7 +84,7 @@ public class RouteServiceImplTest extends TripKitAndroidRobolectricTest {
 
   /**
    * Given an {@link ExtraQueryMapProvider} that returns an extra query map,
-   * we expect that the query map returned by {@link RouteServiceImpl#toOptions(Query, RegionInfo)}
+   * we expect that the query map returned by {@link RouteServiceImpl#toOptions(Query, boolean)}
    * should contain all the entries from the extra query map.
    */
   @Test public void shouldIncludeExtraQueryMap() {
@@ -94,24 +96,24 @@ public class RouteServiceImplTest extends TripKitAndroidRobolectricTest {
     when(extraQueryMapProvider.call())
         .thenReturn(extraQueryMap);
 
-    final Map<String, Object> options = routeService.toOptions(query, regionInfo);
+    final Map<String, Object> options = routeService.toOptions(query, false);
     assertThat(options).contains(MapEntry.entry("bsb", 1));
   }
 
   @Test public void includeConcessionPricing() {
     when(tripPreferences.isConcessionPricingPreferred()).thenReturn(true);
-    assertThat(routeService.getParamsByPreferences(regionInfo)).containsEntry("conc", true);
+    assertThat(routeService.getParamsByPreferences(false)).containsEntry("conc", true);
   }
 
   @Test public void excludeConcessionPricing() {
     when(tripPreferences.isConcessionPricingPreferred()).thenReturn(false);
-    assertThat(routeService.getParamsByPreferences(regionInfo)).doesNotContainKey("conc");
+    assertThat(routeService.getParamsByPreferences(false)).doesNotContainKey("conc");
   }
 
   /* See https://redmine.buzzhives.com/issues/7663. */
   @Test public void excludeWheelchairInfo() {
     when(tripPreferences.isWheelchairPreferred()).thenReturn(false);
-    assertThat(routeService.getParamsByPreferences(regionInfo)).doesNotContainKey("wheelchair");
+    assertThat(routeService.getParamsByPreferences(false)).doesNotContainKey("wheelchair");
   }
 
   @Test public void excludeWheelchairWhenRegionDoesNotSupportsIt() {
@@ -119,7 +121,7 @@ public class RouteServiceImplTest extends TripKitAndroidRobolectricTest {
     when(tripPreferences.isWheelchairPreferred()).thenReturn(true);
 
     // Act.
-    final Map<String, Object> map = routeService.getParamsByPreferences(regionInfo);
+    final Map<String, Object> map = routeService.getParamsByPreferences(false);
 
     // Assert.
     assertThat(map).doesNotContainKey("wheelchair");
@@ -131,7 +133,7 @@ public class RouteServiceImplTest extends TripKitAndroidRobolectricTest {
     when(tripPreferences.isWheelchairPreferred()).thenReturn(true);
 
     // Act
-    final Map<String, Object> map = routeService.getParamsByPreferences(regionInfo);
+    final Map<String, Object> map = routeService.getParamsByPreferences(true);
 
     // Assert.
     assertThat(map).containsKey("wheelchair");
@@ -141,7 +143,7 @@ public class RouteServiceImplTest extends TripKitAndroidRobolectricTest {
     final Query query = createQuery();
     query.setTimeTag(TimeTag.createForLeaveAfter(25251325));
 
-    final Map<String, Object> options = routeService.toOptions(query, regionInfo);
+    final Map<String, Object> options = routeService.toOptions(query, false);
     assertThat(options)
         .containsEntry("arriveBefore", "0")
         .containsEntry("departAfter", "25251325");
@@ -149,14 +151,14 @@ public class RouteServiceImplTest extends TripKitAndroidRobolectricTest {
 
   @Test public void shouldContainOptionIncludeStops() {
     final Query query = createQuery();
-    final Map<String, Object> options = routeService.toOptions(query, regionInfo);
+    final Map<String, Object> options = routeService.toOptions(query, false);
     assertThat(options).containsEntry("includeStops", "1");
   }
 
   @Test public void shouldContainOptionIncludeStopsByDefault() {
     final Query query = createQuery();
 
-    final Map<String, Object> options = routeService.toOptions(query, regionInfo);
+    final Map<String, Object> options = routeService.toOptions(query, false);
     assertThat(options).containsEntry("includeStops", "1");
   }
 
@@ -165,7 +167,7 @@ public class RouteServiceImplTest extends TripKitAndroidRobolectricTest {
     co2Profile.put("a", 2f);
     co2Profile.put("b", 5f);
     when(co2Preferences.getCo2Profile()).thenReturn(co2Profile);
-    assertThat(routeService.getParamsByPreferences(regionInfo))
+    assertThat(routeService.getParamsByPreferences(false))
         .hasSize(2)
         .containsEntry("co2[a]", 2f)
         .containsEntry("co2[b]", 5f);

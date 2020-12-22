@@ -131,7 +131,8 @@ public class MainModule {
         tripPreferences,
         configs.extraQueryMapProvider(),
         routingApi,
-        regionInfoRepository
+        regionInfoRepository,
+        regionService
     );
   }
 
