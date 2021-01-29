@@ -1,7 +1,7 @@
 package com.skedgo.tripkit.validbookingcount.domain
 
 import io.reactivex.Observable
-import com.skedgo.tripkit.account.domain.HasUserToken
+import com.skedgo.tripkit.viewaccount.domain.HasUserToken
 import javax.inject.Inject
 
 /**
