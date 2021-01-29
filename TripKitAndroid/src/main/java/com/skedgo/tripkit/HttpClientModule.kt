@@ -11,6 +11,7 @@ import com.skedgo.tripkit.configuration.Server
 import dagger.Lazy
 import dagger.Module
 import dagger.Provides
+import okhttp3.Dispatcher
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
@@ -50,7 +51,8 @@ open class HttpClientModule(private val buildFlavor: String?,
 
   @Provides
   open fun httpClientBuilder(): OkHttpClient.Builder {
-    val builder = OkHttpClient.Builder()
+      val dispatcher = Dispatcher().apply { maxRequestsPerHost = 15 }
+    val builder = OkHttpClient.Builder().dispatcher(dispatcher)
     if (buildFlavor != null && version != null) {
       builder.addInterceptor(AddCustomUserAgent(buildFlavor, version))
     }
