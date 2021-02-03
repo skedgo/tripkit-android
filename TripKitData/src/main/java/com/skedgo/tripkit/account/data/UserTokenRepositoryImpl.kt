@@ -94,6 +94,8 @@ internal class UserTokenRepositoryImpl constructor(
     true
   }
 
+  override fun hasUserToken(): Boolean = preferences.getString(KEY_USER_TOKEN, "") != ""
+
   private fun SharedPreferences.onChange(observedKey: String) = Flowable
       .create<String>({
         val listener = SharedPreferences.OnSharedPreferenceChangeListener { _, key ->

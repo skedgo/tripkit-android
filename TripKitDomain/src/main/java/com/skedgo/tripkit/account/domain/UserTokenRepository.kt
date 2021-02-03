@@ -15,4 +15,5 @@ interface UserTokenRepository {
   fun clearUserToken(): Observable<Boolean>
   fun clearUserTokenByLoggingOut(): Observable<Boolean>
   fun onUserTokenChanged(): Observable<Any>
+  fun hasUserToken(): Boolean
 }
