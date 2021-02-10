@@ -719,7 +719,7 @@ public class TripSegment implements IRealTimeElement, ITimeRange {
     }
 
     public boolean isCycling() {
-        return (transportModeId != null && transportModeId.startsWith("bic"));
+        return (transportModeId != null && (transportModeId.startsWith("bic") || transportModeId.startsWith("cy_")));
     }
 
     public boolean isWheelchair() {
