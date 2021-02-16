@@ -22,12 +22,13 @@ enum class SharedVehicleType(@DrawableRes val iconId: Int) {
 @Value.Style(passAnnotations = [JsonAdapter::class])
 @JsonAdapter(GsonAdaptersSharedVehicle::class)
 abstract class SharedVehicle {
-    abstract fun identifier(): String
-    abstract fun name(): String
-    abstract fun available(): Boolean
+    abstract fun identifier(): String?
+    abstract fun name(): String?
+    abstract fun available(): Boolean?
     abstract fun batteryLevel(): Int?
     abstract fun batteryRange(): Int?
     abstract fun lastUpdate(): Long?
-    abstract fun operator(): Operator
-    abstract fun vehicleType(): SharedVehicleType
+    abstract fun operator(): Operator?
+    abstract fun type(): SharedVehicleType?
+    abstract fun vehicleType(): SharedVehicleType?
 }
