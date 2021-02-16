@@ -518,7 +518,7 @@ public class TripSegment implements IRealTimeElement, ITimeRange {
     }
 
     public boolean isStationary() {
-        return (mType != SegmentType.SCHEDULED && mType != SegmentType.UNSCHEDULED);
+        return mType == null || mType == SegmentType.STATIONARY;
     }
 
     /**
