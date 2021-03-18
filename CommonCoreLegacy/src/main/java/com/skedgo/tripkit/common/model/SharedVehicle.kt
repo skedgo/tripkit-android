@@ -31,4 +31,6 @@ abstract class SharedVehicle {
     abstract fun operator(): Operator?
     abstract fun type(): SharedVehicleType?
     abstract fun vehicleType(): SharedVehicleType?
+    abstract fun appURLAndroid(): String?
+    abstract fun deepLink(): String?
 }
