@@ -26,7 +26,13 @@ class RealTimeInfo(
 class Operator(
     val name: String,
     var phone: String?,
-    var website: String?
+    var website: String?,
+    var appInfo: AppInfo?,
+)
+
+class AppInfo (
+    val appURLAndroid: String?,
+    val deepLink: String?
 )
 
 class Vehicle(

@@ -6,10 +6,7 @@ import io.reactivex.Observable
 import io.reactivex.Single
 import io.reactivex.schedulers.Schedulers
 import com.skedgo.tripkit.location.GeoPoint
-import com.skedgo.tripkit.locations.CarPod
-import com.skedgo.tripkit.locations.Operator
-import com.skedgo.tripkit.locations.RealTimeInfo
-import com.skedgo.tripkit.locations.Vehicle
+import com.skedgo.tripkit.locations.*
 
 import javax.inject.Inject
 
@@ -57,7 +54,7 @@ open class CarPodRepository @Inject constructor(private val database: TripKitDat
           name = it.name,
           deepLink = it.deepLink,
           appLinkAndroid = it.appURLAndroid,
-          operator = Operator(it.operatorName, it.operatorPhone, it.operatorWebsite),
+          operator = Operator(it.operatorName, it.operatorPhone, it.operatorWebsite, AppInfo(it.appURLAndroid, it.deepLink)),
           realTimeInfo = getRealTimeInfo(it),
           remoteIcon = it.remoteIcon,
           vehicles = vehicles?.map { Vehicle(name = it.name, fuelType = it.fuelType, licensePlate = it.licensePlate) }
