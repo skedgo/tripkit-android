@@ -19,6 +19,7 @@ import java.util.Locale;
 public enum VehicleMode {
   AEROPLANE("aeroplane", R.drawable.ic_aeroplane, R.drawable.ic_aeroplane),
   BICYCLE_SHARE("bicycle-share", R.drawable.ic_bicycle_share, R.drawable.ic_bicycle_share),
+  BICYCLE_ELECTRIC_SHARE("bicycle-electric-share", R.drawable.ic_bicycle_share, R.drawable.ic_bicycle_share),
   BICYCLE("bicycle", R.drawable.ic_bicycle, R.drawable.ic_bicycle),
   BUS("bus", R.drawable.ic_bus, R.drawable.ic_bus_realtime),
   CABLECAR("cablecar", R.drawable.ic_cablecar, R.drawable.ic_cablecar_realtime),
