@@ -1,10 +1,9 @@
 package com.skedgo.tripkit.common.model
 
 import androidx.annotation.DrawableRes
-import androidx.annotation.StringRes
 import com.google.gson.annotations.JsonAdapter
-import com.google.gson.annotations.SerializedName
 import com.skedgo.tripkit.common.R
+import com.skedgo.tripkit.locations.Garage
 import com.skedgo.tripkit.locations.Operator
 import org.immutables.gson.Gson
 import org.immutables.value.Value
@@ -33,4 +32,6 @@ abstract class SharedVehicle {
     abstract fun vehicleType(): SharedVehicleType?
     abstract fun appURLAndroid(): String?
     abstract fun deepLink(): String?
+    abstract fun bookingURL(): String?
+    abstract fun garage(): Garage?
 }
