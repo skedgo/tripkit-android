@@ -28,7 +28,7 @@ class FreeFloatingRepositoryImpl(val tripGoDatabase2: TripKitDatabase) : FreeFlo
   }
 
   override fun getFreeFloatingLocationsWithinBounds(cellIds: List<String>, southwest: GeoPoint, northEast: GeoPoint): Observable<List<FreeFloatingLocationEntity>> {
-    return tripGoDatabase2.freeFloatingLocationDao().getAllByCellsAndLatLngBounds(cellIds, southwest.latitude, southwest.longitude, northEast.latitude, northEast.longitude)
+      return tripGoDatabase2.freeFloatingLocationDao().getAllInCells(cellIds)
         .subscribeOn(Schedulers.io()).toObservable()
   }
 

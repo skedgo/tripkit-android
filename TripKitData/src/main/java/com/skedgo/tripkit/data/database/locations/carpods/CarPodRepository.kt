@@ -91,11 +91,7 @@ open class CarPodRepository @Inject constructor(private val database: TripKitDat
     }
 
     fun getCarPodsByCellIdsWithinBounds(cellIds: List<String>, southwest: GeoPoint, northEast: GeoPoint): Observable<List<CarPod>> {
-        return database.carPodDao().getCarPodsByCellIdsWithinBounds(cellIds,
-                southWestLat = southwest.latitude,
-                southWestLng = southwest.longitude,
-                northEastLat = northEast.latitude,
-                northEastLng = northEast.longitude)
+        return database.carPodDao().getCarPodsByCellIds(cellIds)
                 .onBackpressureLatest()
                 .map { it.map { toModel(it, database.carPodDao().getVehiclesByCarPodId(it.id)) } }
                 .subscribeOn(Schedulers.io()).toObservable()

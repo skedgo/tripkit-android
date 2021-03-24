@@ -140,27 +140,29 @@ open class StopsFetcher(private val api: LocationsApi,
 
   private fun saveStopsAsync(cells: List<LocationsResponse.Group>): Observable<List<LocationsResponse.Group>> {
     return Completable
-        .fromAction { stopsPersistor.saveStopsSync(cells) }
-        .let { listOf(it) }
-        .plus(
-            cells.filter { it.bikePods != null && it.bikePods.isNotEmpty() }
-                .map { bikePodRepository.saveBikePods(it.key, it.bikePods) }
-        ).plus(
-            cells.filter { it.carPods != null && it.carPods.isNotEmpty() }
-                .map { carPodRepository.saveCarPods(carPodMapper.toEntity(it.key, it.carPods)) }
-        ).plus(
-            cells.filter { it.carParks != null && it.carParks.isNotEmpty() }
-                .map { carParkPersistor.saveCarParks(carParkMapper.toEntity(it.key, it.carParks)) }
-        ).plus(
-            cells.filter { it.freeFloating != null && it.freeFloating.isNotEmpty() }
-                .map { freeFloatingRepository.saveFreeFloatingLocations(it.key, it.freeFloating) }
-        ).plus(
-            cells.filter { it.onStreetParkings != null && it.onStreetParkings.isNotEmpty() }
-                .map {
-                  onStreetParkingPersistor.saveOnStreetParkings(
-                      onStreetParkingMapper.toEntity(it.key, it.onStreetParkings))
-                }
-        )
+            .fromAction { stopsPersistor.saveStopsSync(cells) }
+            .let { listOf(it) }
+            .asSequence()
+            .plus(
+                    cells.filter { it.bikePods != null && it.bikePods.isNotEmpty() }
+                            .map { bikePodRepository.saveBikePods(it.key, it.bikePods) }
+            ).plus(
+                    cells.filter { it.carParks != null && it.carParks.isNotEmpty() }
+                            .map { carParkPersistor.saveCarParks(carParkMapper.toEntity(it.key, it.carParks)) }
+            ).plus(
+                    cells.filter { it.freeFloating != null && it.freeFloating.isNotEmpty() }
+                            .map { freeFloatingRepository.saveFreeFloatingLocations(it.key, it.freeFloating) }
+            ).plus(
+                    cells.filter { it.onStreetParkings != null && it.onStreetParkings.isNotEmpty() }
+                            .map {
+                              onStreetParkingPersistor.saveOnStreetParkings(
+                                      onStreetParkingMapper.toEntity(it.key, it.onStreetParkings))
+                            }
+            ).plus(
+                    cells.filter { it.carPods != null && it.carPods.isNotEmpty() }
+                            .map { carPodRepository.saveCarPods(carPodMapper.toEntity(it.key, it.carPods)) }
+            )
+            .toList()
         .let {
           Completable.merge(it)
         }
