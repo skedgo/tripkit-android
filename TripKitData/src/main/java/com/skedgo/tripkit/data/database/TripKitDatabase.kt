@@ -36,7 +36,7 @@ import com.skedgo.tripkit.data.database.timetables.ServiceAlertsEntity
         StopLocationEntity::class,
         ScheduledServiceRealtimeInfoEntity::class,
         ParentStopEntity::class,
-        ServiceAlertsEntity::class], version = 5)
+        ServiceAlertsEntity::class], version = 2)
 abstract class TripKitDatabase : RoomDatabase() {
         abstract fun carParkDao(): CarParkDao
         abstract fun carPodDao(): CarPodDao
@@ -51,7 +51,7 @@ abstract class TripKitDatabase : RoomDatabase() {
                 fun getInstance(context: Context): TripKitDatabase {
                         return Room.databaseBuilder(context.applicationContext,
                                 TripKitDatabase::class.java, "tripkit.db")
-                                .fallbackToDestructiveMigration()
+                                .fallbackToDestructiveMigrationFrom(1)
                                 .build()
                 }
         }

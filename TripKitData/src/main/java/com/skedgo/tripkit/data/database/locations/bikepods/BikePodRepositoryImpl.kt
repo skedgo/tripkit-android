@@ -28,7 +28,7 @@ class BikePodRepositoryImpl(val tripGoDatabase2: TripKitDatabase) : BikePodRepos
   }
 
   override fun getBikePodsWithinBounds(cellIds: List<String>, southwest: GeoPoint, northEast: GeoPoint): Observable<List<BikePodLocationEntity>> {
-    return tripGoDatabase2.bikePodDao().getAllByCellsAndLatLngBounds(cellIds, southwest.latitude, southwest.longitude, northEast.latitude, northEast.longitude)
+    return tripGoDatabase2.bikePodDao().getAllInCells(cellIds)
         .subscribeOn(Schedulers.io()).toObservable()
   }
 
