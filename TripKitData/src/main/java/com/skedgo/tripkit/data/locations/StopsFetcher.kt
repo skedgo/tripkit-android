@@ -158,10 +158,11 @@ open class StopsFetcher(private val api: LocationsApi,
                               onStreetParkingPersistor.saveOnStreetParkings(
                                       onStreetParkingMapper.toEntity(it.key, it.onStreetParkings))
                             }
-            ).plus(
-                    cells.filter { it.carPods != null && it.carPods.isNotEmpty() }
-                            .map { carPodRepository.saveCarPods(carPodMapper.toEntity(it.key, it.carPods)) }
             )
+//            .plus(
+//                    cells.filter { it.carPods != null && it.carPods.isNotEmpty() }
+//                            .map { carPodRepository.saveCarPods(carPodMapper.toEntity(it.key, it.carPods)) }
+//            )
             .toList()
         .let {
           Completable.merge(it)
