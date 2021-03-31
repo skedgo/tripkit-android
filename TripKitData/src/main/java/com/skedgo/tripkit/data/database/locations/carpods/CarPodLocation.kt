@@ -22,7 +22,7 @@ class CarPodLocation {
         var lastUpdate: Long? = null
         var deepLink: String? = null
         lateinit var operator: Operator
-        lateinit var garage: Garage
+        var garage: Garage? = null
 
         var vehicles: List<Vehicle>? = null
     }

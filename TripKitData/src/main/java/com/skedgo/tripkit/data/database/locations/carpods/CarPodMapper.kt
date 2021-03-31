@@ -25,7 +25,7 @@ open class CarPodMapper @Inject constructor() {
                     entity.lastUpdate = it.carPod.lastUpdate
                     entity.deepLink = it.carPod.deepLink
                     entity.appURLAndroid = it.carPod.operator.appInfo?.appURLAndroid
-                    entity.garageAddress = it.carPod.garage.address
+                    entity.garageAddress = it.carPod.garage?.address
                     entity to it.carPod.vehicles?.map {
                         val carPodVehicle = CarPodVehicle()
                         carPodVehicle.carPodId = entity.id
