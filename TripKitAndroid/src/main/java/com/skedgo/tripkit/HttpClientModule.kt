@@ -18,6 +18,7 @@ import retrofit2.Retrofit
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
 import java.util.*
+import java.util.concurrent.TimeUnit
 import javax.inject.Named
 import javax.inject.Singleton
 
@@ -56,6 +57,8 @@ open class HttpClientModule(private val buildFlavor: String?,
     if (buildFlavor != null && version != null) {
       builder.addInterceptor(AddCustomUserAgent(buildFlavor, version))
     }
+    builder.connectTimeout(30, TimeUnit.SECONDS)
+    builder.readTimeout(30, TimeUnit.SECONDS)
     return builder
   }
 
