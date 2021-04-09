@@ -55,6 +55,7 @@ fun ModeInfoEntity.toModeInfo(): ModeInfo {
     it.remoteDarkIconName = this.remoteDarkIcon
     it.remoteIconName = this.remoteIcon
     it.remoteIconIsTemplate = this.remoteIconIsTemplate
+    it.remoteIconIsBranding = this.remoteIconIsBranding
     it.color = this.color?.let { ServiceColor(it.red, it.green, it.blue) }
     it
   }
@@ -69,6 +70,7 @@ fun ModeInfo.toEntity(): ModeInfoEntity {
     it.remoteDarkIcon = this.remoteDarkIconName
     it.remoteIcon = this.remoteIconName
     it.remoteIconIsTemplate = this.remoteIconIsTemplate
+    it.remoteIconIsBranding = this.remoteIconIsBranding
     it.color = this.color?.let {
       ServiceColorEntity().apply {
         this.red = it.red
