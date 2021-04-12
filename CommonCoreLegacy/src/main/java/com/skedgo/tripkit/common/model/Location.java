@@ -55,6 +55,8 @@ public class Location implements Parcelable {
 
   public static final int TYPE_CURRENT_LOCATION = 9; // Doesn't actually resolve to anything, but makes life easier for keeping track
 
+  public static final int TYPE_E_BIKE = 10; //Neuron or Lime
+
   /**
    * What3Words type
    */
