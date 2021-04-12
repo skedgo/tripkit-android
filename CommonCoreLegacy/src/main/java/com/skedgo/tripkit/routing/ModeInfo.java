@@ -36,6 +36,7 @@ public class ModeInfo implements Parcelable {
   @SerializedName("remoteIconIsTemplate") private boolean remoteIconIsTemplate;
   @SerializedName("remoteIconIsBranding") private boolean remoteIconIsBranding;
 
+
   public ModeInfo() {}
 
   private ModeInfo(@NonNull Parcel source) {
