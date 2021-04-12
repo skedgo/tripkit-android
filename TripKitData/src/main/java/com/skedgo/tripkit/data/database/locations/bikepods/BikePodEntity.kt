@@ -84,6 +84,7 @@ class ModeInfoEntity {
 
   var description: String? = null
   var remoteIconIsTemplate: Boolean = false
+  var remoteIconIsBranding: Boolean = false
 
   @Embedded(prefix = "serviceColor_")
   var color: ServiceColorEntity? = null

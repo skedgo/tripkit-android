@@ -34,6 +34,8 @@ public class ModeInfo implements Parcelable {
   @SerializedName("identifier") private String id;
   @SerializedName("color") private ServiceColor color;
   @SerializedName("remoteIconIsTemplate") private boolean remoteIconIsTemplate;
+  @SerializedName("remoteIconIsBranding") private boolean remoteIconIsBranding;
+
 
   public ModeInfo() {}
 
@@ -46,6 +48,7 @@ public class ModeInfo implements Parcelable {
     id = source.readString();
     color = source.readParcelable(ServiceColor.class.getClassLoader());
     remoteIconIsTemplate = source.readInt() == 1;
+    remoteIconIsBranding = source.readInt() == 0;
   }
 
   /**
@@ -75,6 +78,7 @@ public class ModeInfo implements Parcelable {
     dest.writeString(id);
     dest.writeParcelable(color, 0);
     dest.writeInt(remoteIconIsTemplate ? 1 : 0);
+    dest.writeInt(remoteIconIsBranding ? 1 : 0);
   }
 
   public boolean getRemoteIconIsTemplate() {
@@ -83,6 +87,14 @@ public class ModeInfo implements Parcelable {
 
   public void setRemoteIconIsTemplate(boolean remoteIconIsTemplate) {
     this.remoteIconIsTemplate = remoteIconIsTemplate;
+  }
+
+  public boolean getRemoteIconIsBranding() {
+    return remoteIconIsBranding;
+  }
+
+  public void setRemoteIconIsBranding(boolean remoteIconIsBranding) {
+    this.remoteIconIsBranding = remoteIconIsBranding;
   }
 
   public String getLocalIconName() {
