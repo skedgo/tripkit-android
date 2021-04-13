@@ -97,6 +97,7 @@ public class Location implements Parcelable {
       location.locationClass = in.readString();
       location.w3w = in.readString();
       location.w3wInfoURL = in.readString();
+      location.appUrl = in.readString();
 
       return location;
     }
@@ -139,6 +140,7 @@ public class Location implements Parcelable {
   @SerializedName("class") private String locationClass;
   @SerializedName("w3w") private String w3w;
   @SerializedName("w3wInfoURL") private String w3wInfoURL;
+  @SerializedName("appUrl") private String appUrl;
 
   public Location() {
     lat = ZERO_LAT;
@@ -198,6 +200,7 @@ public class Location implements Parcelable {
     locationClass = other.locationClass;
     w3w = other.w3w;
     w3wInfoURL = other.w3wInfoURL;
+    appUrl = other.appUrl;
   }
 
   public long getId() {
@@ -411,6 +414,14 @@ public class Location implements Parcelable {
     this.w3wInfoURL = w3wInfoURL;
   }
 
+  public String getAppUrl() {
+    return appUrl;
+  }
+
+  public void setAppUrl(String appUrl) {
+    this.appUrl = appUrl;
+  }
+
   /**
    * Get the distance between this and another point
    * <p/>
@@ -491,6 +502,7 @@ public class Location implements Parcelable {
     out.writeString(locationClass);
     out.writeString(w3w);
     out.writeString(w3wInfoURL);
+    out.writeString(appUrl);
   }
 
   public long getLastUpdatedTime() {
