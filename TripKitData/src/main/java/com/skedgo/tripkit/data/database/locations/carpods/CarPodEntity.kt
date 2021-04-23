@@ -1,10 +1,7 @@
 package com.skedgo.tripkit.data.database.locations.carpods
 
-import androidx.room.ColumnInfo
-import androidx.room.Entity
-import androidx.room.ForeignKey
+import androidx.room.*
 import androidx.room.ForeignKey.CASCADE
-import androidx.room.PrimaryKey
 
 @Entity(tableName = "carPods")
 class CarPodEntity {
@@ -30,6 +27,10 @@ class CarPodEntity {
     var deepLink: String? = null
     var appURLAndroid: String? = null
     var bookingURL: String? = null
+
+    var red: Int = 0
+    var green: Int = 0
+    var blue: Int = 0
 }
 
 @Entity(foreignKeys = [ForeignKey(entity = CarPodEntity::class,

@@ -15,7 +15,8 @@ class CarPod constructor(
         val realTimeInfo: RealTimeInfo?,
         val operator: Operator,
         val vehicles: List<Vehicle>?,
-        val garage: Garage
+        val garage: Garage,
+        val modeInfo: ModeInfo?
 )
 
 class RealTimeInfo(
@@ -46,4 +47,14 @@ class Vehicle(
 
 class Garage(
         val address: String?
+)
+
+class ModeInfo(
+        val color: ModeInfoColor?
+)
+
+class ModeInfoColor(
+        val red: Int?,
+        val blue: Int?,
+        val green: Int?
 )
