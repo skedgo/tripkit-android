@@ -59,7 +59,8 @@ open class CarPodRepository @Inject constructor(private val database: TripKitDat
                     realTimeInfo = getRealTimeInfo(it),
                     remoteIcon = it.remoteIcon,
                     vehicles = vehicles?.map { Vehicle(name = it.name, fuelType = it.fuelType, licensePlate = it.licensePlate) },
-                    garage = Garage(it.garageAddress)
+                    garage = Garage(it.garageAddress),
+                    modeInfo = ModeInfo(ModeInfoColor(it.red, it.blue, it.green))
             )
         }
     }

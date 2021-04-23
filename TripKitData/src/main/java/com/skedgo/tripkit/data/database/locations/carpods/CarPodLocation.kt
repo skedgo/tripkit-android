@@ -47,9 +47,9 @@ class CarPodLocation {
         var licensePlate: String? = null
     }
 
-  @Keep
-  class Garage(
-          val address: String?
-  )
+    @Keep
+    class Garage(
+            val address: String?
+    )
 }
 
