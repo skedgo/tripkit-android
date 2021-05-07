@@ -19,6 +19,7 @@ import java.util.*;
 
 public class RoutingResponse {
   public static final String FORMAT_DIRECTION = "Direction: %s";
+  public static final Integer ERROR_CODE_NO_FROM_LOCATION = 1102;
 
   /**
    * This is used for parsing saved trip from shared url.
@@ -31,6 +32,9 @@ public class RoutingResponse {
 
   @SerializedName("error")
   private String mErrorMessage;
+
+  @SerializedName("errorCode")
+  private Integer mErrorCode;
 
   @SerializedName("segmentTemplates")
   private ArrayList<JsonObject> segmentTemplates;
@@ -87,6 +91,10 @@ public class RoutingResponse {
 
   public String getErrorMessage() {
     return mErrorMessage;
+  }
+
+  public Integer getErrorCode() {
+    return mErrorCode;
   }
 
   public ArrayList<TripGroup> getTripGroupList() {
