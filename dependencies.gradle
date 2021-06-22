@@ -24,6 +24,9 @@ versions.architectureComponents = "1.0.0"
 versions.testcore = "1.1.0"
 versions.dagger = "2.24"
 versions.lifecycle = "2.2.0"
+versions.volley = "1.2.0"
+versions.jetBrainsJava5 = '15.0'
+versions.glide = "4.11.0"
 
 ext.versions = versions
 
@@ -130,4 +133,9 @@ libs.uservoice = "com.uservoice:uservoice-android-sdk:1.2.10"
 libs.paging = "androidx.paging:paging-runtime:3.0.0-alpha12"
 libs.pdfViewer = "com.github.barteksc:android-pdf-viewer:2.8.2"
 libs.fragmentKtx = "androidx.fragment:fragment-ktx:1.3.2"
+libs.glide = "com.github.bumptech.glide:glide:$versions.glide"
+
+libs.volley = "com.android.volley:volley:$versions.volley"
+libs.jetBrainsAnnotation = "org.jetbrains:annotations-java5:$versions.jetBrainsJava5"
+
 ext.libs = libs
