@@ -9,5 +9,6 @@ public final class SegmentJsonKeys {
   public static final String NODE_HASH_CODE = "hashCode";
   public static final String NODE_SEGMENT_TEMPLATE_HASH_CODE = "segmentTemplateHashCode";
   public static final String NODE_MINI = "mini";
+  public static final String NODE_REGION = "region";
   private SegmentJsonKeys() {}
 }
