@@ -20,4 +20,5 @@ public abstract class Booking {
   @SerializedName("url") @Nullable public abstract String getUrl();
   @SerializedName("quickBookingsUrl") @Nullable public abstract String getQuickBookingsUrl();
   @SerializedName("confirmation") @Nullable public abstract BookingConfirmation getConfirmation();
+  @SerializedName("virtualBookingUrl") @Nullable public abstract String getVirtualBookingUrl();
 }
