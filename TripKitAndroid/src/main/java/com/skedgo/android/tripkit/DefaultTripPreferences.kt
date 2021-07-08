@@ -7,6 +7,7 @@ import util.onChanged
 
 internal const val concessionPricingPrefKey = "isConcessionPricingPreferred"
 internal const val wheelchairPrefKey = "isWheelchairPreferred"
+internal const val wheelchairOnBoardingPrefKey = "isWheelchairPreferredOnBoarding"
 
 class DefaultTripPreferences(
     private val preferences: SharedPreferences
@@ -32,6 +33,9 @@ class DefaultTripPreferences(
   override fun isWheelchairPreferred(): Boolean =
       preferences.getBoolean(wheelchairPrefKey, false)
 
+  override fun isWheelchairPreferredOnBoarding(): Boolean =
+      preferences.getBoolean(wheelchairOnBoardingPrefKey, false)
+
   override fun whenWheelchairPreferenceChanges(): Observable<Boolean> =
       preferences
           .onChanged()
@@ -44,6 +48,12 @@ class DefaultTripPreferences(
   override fun setWheelchairPreferred(isWheelchairPreferred: Boolean) {
     preferences.edit()
         .putBoolean(wheelchairPrefKey, isWheelchairPreferred)
+        .apply()
+  }
+
+  override fun setWheelchairPreferredOnBoarding(isWheelchairPreferred: Boolean) {
+    preferences.edit()
+        .putBoolean(wheelchairOnBoardingPrefKey, isWheelchairPreferred)
         .apply()
   }
 }
