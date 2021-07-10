@@ -62,6 +62,7 @@ public class TripSegment implements IRealTimeElement, ITimeRange {
     @SerializedName("modeInfo")
     private ModeInfo modeInfo;
     @SerializedName("type")
+    private String type;
     private SegmentType mType;
     @SerializedName("startTime")
     private long mStartTimeInSecs;
@@ -229,7 +230,10 @@ public class TripSegment implements IRealTimeElement, ITimeRange {
 
     @Nullable
     public SegmentType getType() {
-        return mType;
+        if (type == null) {
+            return mType;
+        }
+        return SegmentTypeKt.from(type);
     }
 
     public void setType(SegmentType type) {
@@ -518,7 +522,7 @@ public class TripSegment implements IRealTimeElement, ITimeRange {
     }
 
     public boolean isStationary() {
-        return mType == null || mType == SegmentType.STATIONARY;
+        return getType() == null || getType() == SegmentType.STATIONARY;
     }
 
     /**
@@ -573,6 +577,7 @@ public class TripSegment implements IRealTimeElement, ITimeRange {
     public Long getBookingHashCode() {
         return bookingHashCode;
     }
+
     public void setBookingHashCode(Long bookingHashCode) {
         this.bookingHashCode = bookingHashCode;
     }
@@ -585,8 +590,13 @@ public class TripSegment implements IRealTimeElement, ITimeRange {
         this.booking = booking;
     }
 
-    public SharedVehicle getSharedVehicle() { return sharedVehicle; }
-    public void setSharedVehicle(SharedVehicle vehicle) { this.sharedVehicle = sharedVehicle; }
+    public SharedVehicle getSharedVehicle() {
+        return sharedVehicle;
+    }
+
+    public void setSharedVehicle(SharedVehicle vehicle) {
+        this.sharedVehicle = sharedVehicle;
+    }
 
     public long[] getAlertHashCodes() {
         return alertHashCodes;
@@ -702,13 +712,13 @@ public class TripSegment implements IRealTimeElement, ITimeRange {
     }
 
     public boolean isPlane() {
-        return mType == SegmentType.SCHEDULED
+        return getType() == SegmentType.SCHEDULED
                 && transportModeId != null
                 && transportModeId.startsWith(TransportMode.ID_AIR);
     }
 
     public boolean hasTimeTable() {
-        return mType == SegmentType.SCHEDULED
+        return getType() == SegmentType.SCHEDULED
                 && mServiceTripId != null
                 && !(mIsContinuation || isPlane());
     }
