@@ -281,9 +281,12 @@ public class ScheduledStop extends Location {
     }
 
     public List<String> getDisembarkationStopCode() {
-        ArrayList<String> list = new ArrayList<>();
-        list.add(getEndStopCode());
-        return list;
+        if (getEndStopCode() != null) {
+            ArrayList<String> list = new ArrayList<>();
+            list.add(getEndStopCode());
+            return list;
+        }
+        return null;
     }
 
     @Override
