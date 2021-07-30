@@ -1,6 +1,6 @@
 package com.skedgo.tripkit.analytics
 
-import io.reactivex.Completable
+import io.reactivex.Observable
 
 
 /**
@@ -13,5 +13,6 @@ interface MarkTripAsPlannedWithUserInfo {
    * @param userInfo This parameter is to optionally attach a kind of arbitrary data
    * which represents user preferences. `userInfo` must be able to be serialized to JSON.
    */
-  fun execute(plannedUrl: String, userInfo: MutableMap<String, Any>): Completable
+  fun execute(plannedUrl: String, userInfo: MutableMap<String, Any>): Observable<Unit>
 }
+
