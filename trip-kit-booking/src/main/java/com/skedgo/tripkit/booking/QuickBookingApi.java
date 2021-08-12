@@ -8,6 +8,7 @@ import retrofit2.http.GET;
 import retrofit2.http.Url;
 import io.reactivex.Observable;
 
+@Deprecated
 public interface QuickBookingApi {
   /**
    * @param quickBookingsUrl This should be obtained by {@link Booking#getQuickBookingsUrl()}.
