@@ -18,7 +18,7 @@ data class Option(
 
 data class Input(
         val id: String,
-        val options: List<Option>,
+        val options: List<Option>?,
         val required: Boolean,
         val title: String,
         val type: String,
