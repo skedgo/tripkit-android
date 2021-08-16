@@ -12,5 +12,5 @@ interface QuickBookingApi {
     fun getQuickBooking(@Url url: String): Single<List<QuickBooking>>
 
     @POST
-    fun book(@Url url: String, @Body inputs: List<Input>): Single<QuickBookResponse>
+    fun book(@Url url: String, @Body request: QuickBookRequest): Single<QuickBookResponse>
 }
