@@ -22,6 +22,6 @@ data class Input(
         val required: Boolean,
         val title: String,
         val type: String,
-        val value: String,
-        val values: List<Any>
+        var value: String?,
+        var values: List<String>?
 )
