@@ -1,5 +1,6 @@
 package com.skedgo.tripkit.booking.quickbooking
 
+import com.skedgo.tripkit.routing.RoutingResponse
 import io.reactivex.Observable
 import io.reactivex.Single
 import retrofit2.http.Body
@@ -13,4 +14,7 @@ interface QuickBookingApi {
 
     @POST
     fun book(@Url url: String, @Body request: QuickBookRequest): Single<QuickBookResponse>
+
+    @GET
+    fun getBookingUpdate(@Url url: String): Single<RoutingResponse>
 }
