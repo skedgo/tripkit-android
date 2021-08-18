@@ -3,6 +3,8 @@ package com.skedgo.tripkit.common.model;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import androidx.annotation.Nullable;
+
 import com.google.gson.annotations.JsonAdapter;
 
 import java.util.ArrayList;
@@ -71,7 +73,7 @@ public abstract class BookingConfirmationInputNew implements Parcelable {
 
     public abstract List<BookingConfirmationInputOptions> options();
 
-    public abstract String value();
+    @Nullable public abstract String value();
 
-    public abstract List<String> values();
+    @Nullable public abstract List<String> values();
 }

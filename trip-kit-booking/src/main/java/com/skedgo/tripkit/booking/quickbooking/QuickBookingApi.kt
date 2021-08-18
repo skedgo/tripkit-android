@@ -17,4 +17,7 @@ interface QuickBookingApi {
 
     @GET
     fun getBookingUpdate(@Url url: String): Single<RoutingResponse>
+
+    @GET
+    fun executeBookingAction(@Url url: String): Single<QuickBookResponse>
 }

@@ -11,6 +11,7 @@ interface QuickBookingService {
     fun getQuickBooking(url: String): Single<List<QuickBooking>>
     fun quickBook(url: String, request: QuickBookRequest): Single<QuickBookResponse>
     fun getBookingUpdate(url: String): Single<RoutingResponse>
+    fun executeBookingAction(url: String): Single<QuickBookResponse>
 
     class QuickBookingServiceImpl(private val api: QuickBookingApi) : QuickBookingService {
         override fun getQuickBooking(url: String): Single<List<QuickBooking>> =
@@ -21,5 +22,8 @@ interface QuickBookingService {
 
         override fun getBookingUpdate(url: String): Single<RoutingResponse> =
                 api.getBookingUpdate(url)
+
+        override fun executeBookingAction(url: String): Single<QuickBookResponse> =
+                api.executeBookingAction(url)
     }
 }
