@@ -6,6 +6,7 @@ import java.util.List;
 
 import io.reactivex.Observable;
 
+@Deprecated
 public class QuickBookingServiceImpl implements QuickBookingService {
 
   private final QuickBookingApi api;

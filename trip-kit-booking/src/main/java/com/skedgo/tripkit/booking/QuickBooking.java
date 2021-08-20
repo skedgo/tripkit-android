@@ -17,6 +17,7 @@ import static org.immutables.value.Value.Style;
 @Immutable
 @Style(passAnnotations = JsonAdapter.class)
 @JsonAdapter(GsonAdaptersQuickBooking.class)
+@Deprecated
 public abstract class QuickBooking implements Parcelable {
   public static final Creator<QuickBooking> CREATOR = new Creator<QuickBooking>() {
     @Override public QuickBooking createFromParcel(Parcel in) {
