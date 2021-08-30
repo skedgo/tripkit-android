@@ -15,11 +15,11 @@ import com.skedgo.tripkit.tsp.hasWheelChairInformation
 import io.reactivex.functions.BiFunction
 
 internal class RegionServiceImpl(
-        private val regionCache: com.skedgo.tripkit.Cache<List<Region>>,
-        private val modeCache: com.skedgo.tripkit.Cache<Map<String, TransportMode>>,
+        private val regionCache: Cache<List<Region>>,
+        private val modeCache: Cache<Map<String, TransportMode>>,
         private val regionsFetcher: RegionsFetcher,
         private val regionInfoRepository: RegionInfoRepository,
-        private val regionFinder: com.skedgo.tripkit.RegionFinder) : RegionService {
+        private val regionFinder: RegionFinder) : RegionService {
   override fun getRegionsAsync(): Observable<List<Region>> = regionCache.async.toObservable()
 
   override fun getRegionByNameAsync(regionName: String): Observable<Region> =
@@ -33,8 +33,12 @@ internal class RegionServiceImpl(
 
   override fun getRegionByLocationAsync(latitude: Double, longitude: Double): Observable<Region> =
       getRegionsAsync()
-          .flatMap { regions -> Observable.fromIterable(regions) }
-          .filter { region -> regionFinder.contains(region, latitude, longitude) }
+          .flatMap {
+              regions -> Observable.fromIterable(regions)
+          }
+          .filter { region ->
+              regionFinder.contains(region, latitude, longitude)
+          }
           .firstOrError()
           .onErrorResumeNext { error ->
             if (error is NoSuchElementException)

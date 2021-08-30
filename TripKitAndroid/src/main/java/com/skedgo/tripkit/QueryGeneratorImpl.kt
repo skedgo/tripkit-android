@@ -27,12 +27,14 @@ internal class QueryGeneratorImpl(private val regionService: RegionService) : Qu
                             .map { it to query }
                 }
                 .flatMap { (region, query) ->
-                    val allTransportModes = when {
-                        query.transportModeIds.isNotEmpty() -> query.transportModeIds
-                        else -> {
-                            region.transportModeIds!!
-                        }
-                    }
+                    val allTransportModes = region.transportModeIds!!
+
+//                     when {
+//                        query.transportModeIds.isNotEmpty() -> region.transportModeIds!!
+//                        else -> {
+//                            region.transportModeIds!!
+//                        }
+//                    }
 
                     if (allTransportModes.contains(TransportMode.ID_WALK) && !allTransportModes.contains(TransportMode.ID_WHEEL_CHAIR)) {
                         allTransportModes.add(TransportMode.ID_WHEEL_CHAIR)
