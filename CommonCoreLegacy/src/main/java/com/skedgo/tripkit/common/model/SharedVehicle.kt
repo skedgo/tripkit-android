@@ -10,11 +10,18 @@ import org.immutables.value.Value
 
 enum class SharedVehicleType(@DrawableRes val iconId: Int) {
     BIKE(R.drawable.ic_bicycle_share),
-    CAR (R.drawable.ic_car),
-    KICK_SCOOTER (R.drawable.ic_kickscooter_sharing),
-    MOTO_SCOOTER (R.drawable.ic_motorbike),
-    PEDELEC (R.drawable.ic_bicycle_share)
+    CAR(R.drawable.ic_car),
+    KICK_SCOOTER(R.drawable.ic_kickscooter_sharing),
+    SCOOTER(R.drawable.ic_kickscooter_sharing),
+    MOTO_SCOOTER(R.drawable.ic_motorbike),
+    PEDELEC(R.drawable.ic_bicycle_share)
 }
+
+class VehicleTypeInfo(
+        var formFactor: String = "",
+        var maxRangeMeters: Long = 0,
+        var propulsionType: String = ""
+)
 
 @Gson.TypeAdapters
 @Value.Immutable
@@ -34,4 +41,5 @@ abstract class SharedVehicle {
     abstract fun deepLink(): String?
     abstract fun bookingURL(): String?
     abstract fun garage(): Garage?
+    abstract fun vehicleTypeInfo(): VehicleTypeInfo?
 }

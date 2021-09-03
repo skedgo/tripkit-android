@@ -1,11 +1,10 @@
 package com.skedgo.tripkit.data.database.locations.freefloating
 
 import androidx.annotation.Keep
-import androidx.room.Embedded
-import androidx.room.Entity
-import androidx.room.Ignore
-import androidx.room.PrimaryKey
+import androidx.room.*
 import com.skedgo.tripkit.data.database.locations.bikepods.ModeInfoEntity
+import com.skedgo.tripkit.data.database.locations.onstreetparking.VacancyConverters
+import com.skedgo.tripkit.parkingspots.models.Parking
 
 @Entity(tableName = "freeFloatingLocations")
 @Keep
@@ -35,6 +34,8 @@ class FreeFloatingVehicleEntity {
     var qrCode: String? = null
     var name: String = ""
     var vehicleType: String = ""
+    @Embedded(prefix = "freefloating_vehicletypeinfo_")
+    var vehicleTypeInfo: FreeFloatingVehicleTypeInfoEntity? = null
 
     @Embedded(prefix = "freefloating_operator_")
     lateinit var operator: FreeFloatingOperatorEntity
@@ -56,4 +57,12 @@ class FreeFloatingOperatorEntity {
 class FreeFloatingAppInfoEntity {
     var name: String? = null
     var appURLAndroid: String? = null
+}
+
+@Entity
+@Keep
+class FreeFloatingVehicleTypeInfoEntity {
+    var formFactor: String = ""
+    var maxRangeMeters: Long = 0
+    var propulsionType: String = ""
 }
