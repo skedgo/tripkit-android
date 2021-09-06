@@ -10,6 +10,7 @@ import org.immutables.value.Value
 
 enum class SharedVehicleType(@DrawableRes val iconId: Int) {
     BIKE(R.drawable.ic_bicycle_share),
+    BICYCLE(R.drawable.ic_bicycle_share),
     CAR(R.drawable.ic_car),
     KICK_SCOOTER(R.drawable.ic_kickscooter_sharing),
     SCOOTER(R.drawable.ic_kickscooter_sharing),
