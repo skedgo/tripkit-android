@@ -100,6 +100,7 @@ public class Location implements Parcelable {
             location.w3w = in.readString();
             location.w3wInfoURL = in.readString();
             location.appUrl = in.readString();
+            location.withExternalApp = in.readInt() == 1;
             location.region = in.readString();
 
             return location;
@@ -160,6 +161,8 @@ public class Location implements Parcelable {
     private String w3wInfoURL;
     @SerializedName("appUrl")
     private String appUrl;
+    @SerializedName("withExternalApp")
+    private boolean withExternalApp;
 
     public Location() {
         lat = ZERO_LAT;
@@ -221,6 +224,7 @@ public class Location implements Parcelable {
         w3w = other.w3w;
         w3wInfoURL = other.w3wInfoURL;
         appUrl = other.appUrl;
+        withExternalApp = other.withExternalApp;
         region = other.region;
     }
 
@@ -445,6 +449,14 @@ public class Location implements Parcelable {
         this.appUrl = appUrl;
     }
 
+    public boolean isWithExternalApp() {
+        return withExternalApp;
+    }
+
+    public void setWithExternalApp(boolean withExternalApp) {
+        this.withExternalApp = withExternalApp;
+    }
+
     public String getRegion() {
         return region;
     }
@@ -534,6 +546,7 @@ public class Location implements Parcelable {
         out.writeString(w3w);
         out.writeString(w3wInfoURL);
         out.writeString(appUrl);
+        out.writeInt(withExternalApp ? 1 : 0);
         out.writeString(region);
     }
 
