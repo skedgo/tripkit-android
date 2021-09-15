@@ -129,7 +129,6 @@ public class Location implements Parcelable {
     protected float mAverageRating;
     protected String mRatingImageUrl;
     protected String mSource;
-    private long lastUpdatedTime;
 
     @SerializedName("name")
     private String name;
@@ -548,14 +547,6 @@ public class Location implements Parcelable {
         out.writeString(appUrl);
         out.writeInt(withExternalApp ? 1 : 0);
         out.writeString(region);
-    }
-
-    public long getLastUpdatedTime() {
-        return lastUpdatedTime;
-    }
-
-    public void setLastUpdatedTime(long lastUpdatedTime) {
-        this.lastUpdatedTime = lastUpdatedTime;
     }
 
     /**

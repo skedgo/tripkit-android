@@ -65,9 +65,9 @@ public class TripSegment implements IRealTimeElement, ITimeRange {
     private String type;
     private SegmentType mType;
     @SerializedName("startTime")
-    private long mStartTimeInSecs;
+    private String startTime;
     @SerializedName("endTime")
-    private long mEndTimeInSecs;
+    private String endTime;
     @SerializedName("visibility")
     private String mVisibility;
     @SerializedName("from")
@@ -119,6 +119,9 @@ public class TripSegment implements IRealTimeElement, ITimeRange {
     @SerializedName("timetableEndTime")
     @Nullable
     private long mTimetableEndTime;
+
+    private long mStartTimeInSecs;
+    private long mEndTimeInSecs;
 
     /**
      * This is no longer a part of json returned from server due to Version 6.
