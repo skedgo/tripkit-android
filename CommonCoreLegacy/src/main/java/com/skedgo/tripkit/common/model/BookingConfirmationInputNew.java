@@ -73,6 +73,8 @@ public abstract class BookingConfirmationInputNew implements Parcelable {
 
     public abstract List<BookingConfirmationInputOptions> options();
 
+    public abstract List<BookingConfirmationNotes> notes();
+
     @Nullable public abstract String value();
 
     @Nullable public abstract List<String> values();
