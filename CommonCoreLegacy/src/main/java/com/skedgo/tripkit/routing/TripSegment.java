@@ -17,12 +17,15 @@ import com.skedgo.tripkit.common.util.TimeUtils;
 import com.skedgo.tripkit.common.util.TripSegmentUtils;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
 import androidx.annotation.DrawableRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+
+import org.joda.time.format.ISODateTimeFormat;
 
 import static com.skedgo.tripkit.routing.VehicleDrawables.createLightDrawable;
 
@@ -249,7 +252,25 @@ public class TripSegment implements IRealTimeElement, ITimeRange {
     @Deprecated
     @Override
     public long getStartTimeInSecs() {
-        return mStartTimeInSecs;
+        if (mStartTimeInSecs > 0) {
+            return mStartTimeInSecs;
+        }
+
+        long millis = -1L;
+        try {
+            millis = Long.parseLong(startTime);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        if (millis < 0 && startTime != null) {
+            millis = ISODateTimeFormat.dateTimeNoMillis().parseDateTime(startTime).getMillis();
+        }
+
+        if (startTime == null) {
+            millis = 0;
+        }
+        return millis;
     }
 
     /**
@@ -265,7 +286,25 @@ public class TripSegment implements IRealTimeElement, ITimeRange {
     @Deprecated
     @Override
     public long getEndTimeInSecs() {
-        return mEndTimeInSecs;
+        if (mEndTimeInSecs > 0) {
+            return mEndTimeInSecs;
+        }
+
+        long millis = -1L;
+        try {
+            millis = Long.parseLong(endTime);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        if (millis < 0 && endTime != null) {
+            millis = ISODateTimeFormat.dateTimeNoMillis().parseDateTime(endTime).getMillis();
+        }
+
+        if (endTime == null) {
+            millis = 0;
+        }
+        return millis;
     }
 
     /**
