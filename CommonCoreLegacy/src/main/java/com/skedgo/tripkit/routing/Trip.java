@@ -11,6 +11,8 @@ import com.skedgo.tripkit.common.model.ITimeRange;
 import com.skedgo.tripkit.common.model.Location;
 import com.skedgo.tripkit.common.model.TransportMode;
 
+import org.joda.time.format.ISODateTimeFormat;
+
 import java.math.RoundingMode;
 import java.text.NumberFormat;
 import java.util.ArrayList;
@@ -118,7 +120,25 @@ public class Trip implements ITimeRange {
      * Use {@link TripExtensionsKt#getStartDateTime(Trip)} instead.
      */
     public long getStartTimeInSecs() {
-        return mStartTimeInSecs;
+        if (mStartTimeInSecs > 0) {
+            return mStartTimeInSecs;
+        }
+
+        long millis = -1L;
+        try {
+            millis = Long.parseLong(arrive);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        if (millis < 0 && arrive != null) {
+            millis = ISODateTimeFormat.dateTimeNoMillis().parseDateTime(arrive).getMillis();
+        }
+
+        if (arrive == null) {
+            millis = 0;
+        }
+        return millis;
     }
 
     /**
@@ -132,7 +152,25 @@ public class Trip implements ITimeRange {
      * Use {@link TripExtensionsKt#getEndDateTime(Trip)} instead.
      */
     public long getEndTimeInSecs() {
-        return mEndTimeInSecs;
+        if (mEndTimeInSecs > 0) {
+            return mEndTimeInSecs;
+        }
+
+        long millis = -1L;
+        try {
+            millis = Long.parseLong(depart);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        if (millis < 0 && depart != null) {
+            millis = ISODateTimeFormat.dateTimeNoMillis().parseDateTime(depart).getMillis();
+        }
+
+        if (depart == null) {
+            millis = 0;
+        }
+        return millis;
     }
 
     public long durationInSeconds() {
