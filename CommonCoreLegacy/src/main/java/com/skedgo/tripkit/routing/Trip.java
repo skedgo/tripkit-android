@@ -126,16 +126,16 @@ public class Trip implements ITimeRange {
 
         long millis = -1L;
         try {
-            millis = Long.parseLong(arrive);
+            millis = Long.parseLong(depart);
         } catch (Exception e) {
             e.printStackTrace();
         }
 
-        if (millis < 0 && arrive != null) {
-            millis = ISODateTimeFormat.dateTimeNoMillis().parseDateTime(arrive).getMillis();
+        if (millis < 0 && depart != null) {
+            millis = ISODateTimeFormat.dateTimeNoMillis().parseDateTime(depart).getMillis();
         }
 
-        if (arrive == null) {
+        if (depart == null) {
             millis = 0;
         }
         return millis;
@@ -158,16 +158,16 @@ public class Trip implements ITimeRange {
 
         long millis = -1L;
         try {
-            millis = Long.parseLong(depart);
+            millis = Long.parseLong(arrive);
         } catch (Exception e) {
             e.printStackTrace();
         }
 
-        if (millis < 0 && depart != null) {
-            millis = ISODateTimeFormat.dateTimeNoMillis().parseDateTime(depart).getMillis();
+        if (millis < 0 && arrive != null) {
+            millis = ISODateTimeFormat.dateTimeNoMillis().parseDateTime(arrive).getMillis();
         }
 
-        if (depart == null) {
+        if (arrive == null) {
             millis = 0;
         }
         return millis;
