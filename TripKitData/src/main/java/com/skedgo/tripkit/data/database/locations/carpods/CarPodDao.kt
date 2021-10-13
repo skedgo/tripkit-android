@@ -27,4 +27,7 @@ interface CarPodDao {
 
   @Query("SELECT * FROM carPodVehicles WHERE carPodId == :carPodId")
   fun getVehiclesByCarPodId(carPodId: String): List<CarPodVehicle>?
+
+  @Query("DELETE FROM carPods")
+  fun clearCarPods()
 }
