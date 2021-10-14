@@ -170,6 +170,10 @@ open class StopsFetcher(private val api: LocationsApi,
                 .toObservable()
     }
 
+    fun clearCarPods(): Completable {
+        return carPodRepository.clearCarPods()
+    }
+
     /**
      * @see [The Dependency Inversion Principle](http://www.codeproject.com/Articles/93369/How-I-explained-OOD-to-my-wife)
      */

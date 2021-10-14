@@ -23,6 +23,12 @@ open class CarPodRepository @Inject constructor(private val database: TripKitDat
                 .subscribeOn(Schedulers.io())
     }
 
+    fun clearCarPods(): Completable {
+        return Completable.fromAction {
+            database.carPodDao().clearCarPods()
+        }.subscribeOn(Schedulers.io())
+    }
+
     fun getCarPodsByCellIds(cellIds: List<String>): Observable<List<CarPod>> {
         return database.carPodDao().getCarPodsByCellIds(cellIds)
                 .onBackpressureLatest()
