@@ -31,6 +31,7 @@ public abstract class BookingConfirmationAction implements Parcelable {
           .isDestructive(in.readByte() != 0)
           .title(in.readString())
           .type(in.readString())
+          .confirmationMessage(in.readString())
           .build();
     }
 
@@ -45,6 +46,7 @@ public abstract class BookingConfirmationAction implements Parcelable {
     dest.writeByte((byte) (isDestructive() ? 1 : 0));
     dest.writeString(title());
     dest.writeString(type());
+    dest.writeString(confirmationMessage());
   }
 
   @Override public int describeContents() {
@@ -57,4 +59,5 @@ public abstract class BookingConfirmationAction implements Parcelable {
   public abstract String title();
   public abstract String type();
   @Nullable public abstract ArrayList< BookingConfirmationInput> input();
+  public abstract String confirmationMessage();
 }
