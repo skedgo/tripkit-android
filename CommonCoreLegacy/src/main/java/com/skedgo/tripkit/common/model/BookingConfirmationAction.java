@@ -59,5 +59,5 @@ public abstract class BookingConfirmationAction implements Parcelable {
   public abstract String title();
   public abstract String type();
   @Nullable public abstract ArrayList< BookingConfirmationInput> input();
-  public abstract String confirmationMessage();
+  @Nullable public abstract String confirmationMessage();
 }
