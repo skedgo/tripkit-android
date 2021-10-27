@@ -15,7 +15,18 @@ enum class SharedVehicleType(@DrawableRes val iconId: Int) {
     KICK_SCOOTER(R.drawable.ic_kickscooter_sharing),
     SCOOTER(R.drawable.ic_kickscooter_sharing),
     MOTO_SCOOTER(R.drawable.ic_motorbike),
-    PEDELEC(R.drawable.ic_bicycle_share)
+    PEDELEC(R.drawable.ic_bicycle_share);
+}
+
+fun getSharedVehicleType(type: String): SharedVehicleType? {
+    var vehicleType: SharedVehicleType? = null
+    SharedVehicleType.values().forEach {
+        if (it.name.equals(type, true)) {
+            vehicleType = it
+        }
+    }
+
+    return vehicleType
 }
 
 class VehicleTypeInfo(
