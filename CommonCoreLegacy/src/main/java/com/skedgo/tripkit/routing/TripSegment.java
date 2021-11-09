@@ -123,6 +123,9 @@ public class TripSegment implements IRealTimeElement, ITimeRange {
     @Nullable
     private long mTimetableEndTime;
 
+    @SerializedName("availability")
+    private String mAvailability;
+
     private long mStartTimeInSecs;
     private long mEndTimeInSecs;
 
@@ -656,6 +659,13 @@ public class TripSegment implements IRealTimeElement, ITimeRange {
         this.isRealTime = isRealTime;
     }
 
+    public String getAvailability() {
+        return mAvailability;
+    }
+
+    public void setAvailability(String mAvailability) {
+        this.mAvailability = mAvailability;
+    }
 
     public boolean isVisibleInContext(String contextVisibility) {
         if (mVisibility == null || mVisibility.isEmpty() ||

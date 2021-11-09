@@ -91,6 +91,7 @@ public class TripSegmentListResolver {
     arrivalSegment.setVisibility(Visibilities.VISIBILITY_ON_MAP);
     arrivalSegment.setStartTimeInSecs(lastSegment.getEndTimeInSecs());
     arrivalSegment.setEndTimeInSecs(lastSegment.getEndTimeInSecs());
+    arrivalSegment.setAvailability(lastSegment.getAvailability());
     return arrivalSegment;
   }
 
@@ -123,6 +124,7 @@ public class TripSegmentListResolver {
     departureSegment.setVisibility(Visibilities.VISIBILITY_IN_DETAILS);
     departureSegment.setStartTimeInSecs(firstSegment.getStartTimeInSecs());
     departureSegment.setEndTimeInSecs(firstSegment.getStartTimeInSecs());
+    departureSegment.setAvailability(firstSegment.getAvailability());
     return departureSegment;
   }
 
