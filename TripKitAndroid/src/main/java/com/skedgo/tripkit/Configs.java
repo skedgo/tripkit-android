@@ -6,6 +6,7 @@ import com.skedgo.tripkit.configuration.Key;
 import com.skedgo.tripkit.routing.ExtraQueryMapProvider;
 import io.reactivex.functions.Consumer;
 import org.immutables.value.Value;
+import org.joda.time.DateTime;
 
 import java.util.concurrent.Callable;
 
@@ -17,6 +18,7 @@ public interface Configs {
   @Nullable public abstract Callable<TripPreferences> tripPreferencesFactory();
   @Nullable public abstract ExtraQueryMapProvider extraQueryMapProvider();
   @Nullable public abstract Callable<String> userTokenProvider();
+  @Nullable public abstract DateTimePickerConfig dateTimePickerConfig();
 
   /**
    * @return A factory to create a sort of adapter that specifies a base url
