@@ -34,6 +34,8 @@ public class TimeTag implements Parcelable {
    */
   public static final int TIME_TYPE_LEAVE_AFTER = 0;
 
+  public static final int TIME_TYPE_SINGLE_SELECTION = 2;
+
   @TimeType
   private int type = TIME_TYPE_LEAVE_AFTER;
   private long timeInSecs = TimeUnit.MILLISECONDS.toSeconds(System.currentTimeMillis());
@@ -126,7 +128,7 @@ public class TimeTag implements Parcelable {
   /**
    * See: http://tools.android.com/tech-docs/support-annotations.
    */
-  @IntDef({TIME_TYPE_LEAVE_AFTER, TIME_TYPE_ARRIVE_BY})
+  @IntDef({TIME_TYPE_LEAVE_AFTER, TIME_TYPE_ARRIVE_BY, TIME_TYPE_SINGLE_SELECTION})
   @Retention(RetentionPolicy.SOURCE)
   public @interface TimeType {}
 }
