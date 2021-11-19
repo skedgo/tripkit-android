@@ -37,6 +37,7 @@ data class Input(
         val required: Boolean,
         val title: String,
         val type: String,
+        var raw_value: String,
         var value: String?,
         var values: List<String>?
 )
