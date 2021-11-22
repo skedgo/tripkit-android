@@ -41,6 +41,8 @@ public class TimeTag implements Parcelable {
   private long timeInSecs = TimeUnit.MILLISECONDS.toSeconds(System.currentTimeMillis());
   private boolean isDynamic = false;
 
+  public boolean isLeaveNow = false;
+
   protected TimeTag(Parcel in) {
     // noinspection ResourceType
     type = in.readInt();
@@ -56,6 +58,7 @@ public class TimeTag implements Parcelable {
     timeTag.setIsDynamic(true);
     timeTag.setTimeInSecs(TimeUnit.MILLISECONDS.toSeconds(System.currentTimeMillis()));
     timeTag.setType(TimeTag.TIME_TYPE_LEAVE_AFTER);
+    timeTag.isLeaveNow = true;
     return timeTag;
   }
 
