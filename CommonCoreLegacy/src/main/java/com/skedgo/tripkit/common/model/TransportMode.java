@@ -27,6 +27,7 @@ public class TransportMode {
   public static final String ID_MOTORBIKE = "me_mot";
   public static final String ID_CAR = "me_car";
   public static final String ID_WHEEL_CHAIR = "wa_whe";
+  public static final String ID_PS_DRT = "ps_drt";
 
   /**
    * FIXME: It seems we no longer need this id.
