@@ -4,19 +4,18 @@ import android.content.ContentValues
 import android.database.Cursor
 import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
-import android.util.Log
 import android.util.Pair
 import com.google.gson.Gson
 import com.skedgo.routepersistence.RouteContract.*
 import com.skedgo.sqlite.Cursors.flattenCursor
-import io.reactivex.Completable
-import io.reactivex.Observable
-import io.reactivex.Single
-import io.reactivex.schedulers.Schedulers
 import com.skedgo.tripkit.routing.Source
 import com.skedgo.tripkit.routing.Trip
 import com.skedgo.tripkit.routing.TripGroup
 import com.skedgo.tripkit.routing.TripSegment
+import io.reactivex.Completable
+import io.reactivex.Observable
+import io.reactivex.Single
+import io.reactivex.schedulers.Schedulers
 import java.util.*
 import kotlin.collections.ArrayList
 
@@ -116,6 +115,7 @@ open class RouteStore(private val databaseHelper: SQLiteOpenHelper, private val 
                     values.put(COL_MONEY_COST, trip.moneyCost)
                     values.put(COL_HASSLE_COST, trip.hassleCost)
                     values.put(COL_UUID, trip.uuid())
+                    values.put(COL_IS_HIDE_EXACT_TIMES, if (trip.isHideExactTimes) 1 else 0)
                     database.beginTransaction()
                     try {
                         database.update(TABLE_TRIPS, values, "$COL_UUID = ?", arrayOf(oldTripUuid))
@@ -238,6 +238,7 @@ open class RouteStore(private val databaseHelper: SQLiteOpenHelper, private val 
         val queryIsLeaveAfter = tripCursor.getInt(tripCursor.getColumnIndex(COL_QUERY_IS_LEAVE_AFTER))
         val mainSegmentHashCode = tripCursor.getLong(tripCursor.getColumnIndex(COL_MAIN_SEGMENT_HASH_CODE))
         val shareUrl = tripCursor.getString(tripCursor.getColumnIndex(COL_SHARE_URL))
+        val isHideExactTimes = tripCursor.getInt(tripCursor.getColumnIndex(COL_IS_HIDE_EXACT_TIMES)) == 1
 
         val isNotifable = groupCursor.getInt(groupCursor.getColumnIndex(COL_IS_NOTIFIABLE)) == 1
 
@@ -260,6 +261,7 @@ open class RouteStore(private val databaseHelper: SQLiteOpenHelper, private val 
         trip.plannedURL = plannedUrl
         trip.temporaryURL = tempUrl
         trip.mainSegmentHashCode = mainSegmentHashCode
+        trip.isHideExactTimes = isHideExactTimes
         trip.setQueryIsLeaveAfter(queryIsLeaveAfter == 1)
         trip.isFavourite(isNotifable)
         return trip
@@ -376,6 +378,7 @@ open class RouteStore(private val databaseHelper: SQLiteOpenHelper, private val 
         values.put(COL_QUERY_IS_LEAVE_AFTER, if (trip.queryIsLeaveAfter()) 1 else 0)
         values.put(COL_MAIN_SEGMENT_HASH_CODE, trip.mainSegmentHashCode)
         values.put(COL_SHARE_URL, trip.shareURL)
+        values.put(COL_IS_HIDE_EXACT_TIMES, trip.isHideExactTimes)
         database.insertWithOnConflict(TABLE_TRIPS, null, values, SQLiteDatabase.CONFLICT_REPLACE)
     }
 

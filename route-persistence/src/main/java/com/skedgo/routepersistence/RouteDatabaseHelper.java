@@ -7,7 +7,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 import android.widget.Toast;
 
 public class RouteDatabaseHelper extends SQLiteOpenHelper {
-    private static final int DATABASE_VERSION = 8;
+    private static final int DATABASE_VERSION = 9;
 
     public RouteDatabaseHelper(Context context, String name) {
         super(context, name, null, DATABASE_VERSION);
@@ -86,6 +86,13 @@ public class RouteDatabaseHelper extends SQLiteOpenHelper {
             if (newVersion > 6) {
                 try {
                     db.execSQL("ALTER TABLE trips ADD COLUMN shareURL TEXT");
+                } catch (SQLiteException ex) {
+                    // ignored if the column exists
+                }
+            }
+            if (newVersion > 7) {
+                try {
+                    db.execSQL("ALTER TABLE trips ADD COLUMN isHideExactTimes INTEGER");
                 } catch (SQLiteException ex) {
                     // ignored if the column exists
                 }
