@@ -38,6 +38,7 @@ final class RouteContract {
     static final String SELECT_TRIPS = "select * from " + TABLE_TRIPS + " where " + COL_GROUP_ID + " = ?";
     static final String TABLE_TRIP_GROUPS = "tripGroups";
     static final String COL_IS_NOTIFIABLE = "isNotifiable";
+    static final String COL_IS_HIDE_EXACT_TIMES = "isHideExactTimes";
     static final String COL_SOURCES = "sources";
 
     private RouteContract() {
@@ -71,6 +72,7 @@ final class RouteContract {
         final DatabaseField uuid = new DatabaseField(COL_UUID, "text");
         final DatabaseField requestId = new DatabaseField(COL_REQUEST_ID, "text");
         final DatabaseField isNotifiable = new DatabaseField(COL_IS_NOTIFIABLE, "integer");
+        final DatabaseField isHideExactTimes = new DatabaseField(COL_IS_HIDE_EXACT_TIMES, "integer");
         final DatabaseField sources = new DatabaseField(COL_SOURCES, "text");
         final DatabaseTable tripGroups = new DatabaseTable(
                 TABLE_TRIP_GROUPS,
@@ -91,7 +93,7 @@ final class RouteContract {
                         currencySymbol, saveUrl, depart, arrive,
                         caloriesCost, moneyCost, carbonCost, hassleCost, weightedScore,
                         updateUrl, progressUrl, plannedUrl, tempUrl,
-                        queryIsLeaveAfter, logUrl, shareUrl, mainSegmentHashCode
+                        queryIsLeaveAfter, logUrl, shareUrl, mainSegmentHashCode, isHideExactTimes
                 },
                 UniqueIndices.of(TABLE_TRIPS, id, groupId, uuid),
                 "CREATE TRIGGER deleteSegments AFTER DELETE ON " + TABLE_TRIPS + " BEGIN " +

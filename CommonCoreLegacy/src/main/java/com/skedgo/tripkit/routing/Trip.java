@@ -76,6 +76,8 @@ public class Trip implements ITimeRange {
     private String availability;
     @SerializedName("mainSegmentHashCode")
     private long mainSegmentHashCode;
+    @SerializedName("hideExactTimes")
+    private boolean hideExactTimes;
 
     private boolean queryIsLeaveAfter;
     private String uuid = UUID.randomUUID().toString();
@@ -547,5 +549,13 @@ public class Trip implements ITimeRange {
 
     public void setShareURL(String shareURL) {
         this.shareURL = shareURL;
+    }
+
+    public boolean isHideExactTimes() {
+        return hideExactTimes;
+    }
+
+    public void setHideExactTimes(boolean hideExactTimes) {
+        this.hideExactTimes = hideExactTimes;
     }
 }
