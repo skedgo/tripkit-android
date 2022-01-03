@@ -7,7 +7,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 import android.widget.Toast;
 
 public class RouteDatabaseHelper extends SQLiteOpenHelper {
-    private static final int DATABASE_VERSION = 9;
+    private static final int DATABASE_VERSION = 10;
 
     public RouteDatabaseHelper(Context context, String name) {
         super(context, name, null, DATABASE_VERSION);
@@ -97,7 +97,13 @@ public class RouteDatabaseHelper extends SQLiteOpenHelper {
                     // ignored if the column exists
                 }
             }
-
+            if (newVersion > 8) {
+                try {
+                    db.execSQL("ALTER TABLE trips ADD COLUMN queryTime LONG");
+                } catch (SQLiteException ex) {
+                    // ignored if the column exists
+                }
+            }
         } else {
             RoutingStatusContract.INSTANCE.create(db);
         }

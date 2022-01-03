@@ -78,8 +78,11 @@ public class Trip implements ITimeRange {
     private long mainSegmentHashCode;
     @SerializedName("hideExactTimes")
     private boolean hideExactTimes;
-
+    @SerializedName("queryIsLeaveAfter")
     private boolean queryIsLeaveAfter;
+    @SerializedName("queryTime")
+    private long queryTime;
+
     private String uuid = UUID.randomUUID().toString();
     private long mId;
     private transient TripGroup mGroup;
@@ -341,7 +344,6 @@ public class Trip implements ITimeRange {
     /**
      * Mutability is subject to deletion after we finish migrating to an immutable {@link Trip}.
      */
-    @Deprecated
     public void setQueryIsLeaveAfter(boolean queryIsLeaveAfter) {
         this.queryIsLeaveAfter = queryIsLeaveAfter;
     }
@@ -557,5 +559,13 @@ public class Trip implements ITimeRange {
 
     public void setHideExactTimes(boolean hideExactTimes) {
         this.hideExactTimes = hideExactTimes;
+    }
+
+    public long getQueryTime() {
+        return queryTime;
+    }
+
+    public void setQueryTime(long queryTime) {
+        this.queryTime = queryTime;
     }
 }
