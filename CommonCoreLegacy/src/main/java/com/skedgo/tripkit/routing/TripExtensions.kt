@@ -25,6 +25,15 @@ val Trip.endDateTime: DateTime
   )
 
 /**
+ * Gets a query date-time with time-zone based on from location
+ */
+val Trip.queryDateTime: DateTime
+  get() = DateTime(
+          TimeUnit.SECONDS.toMillis(queryTime),
+          from.dateTimeZone
+  )
+
+/**
  * Gets a list of [TripSegment]s visible on the summary area of a [Trip].
  */
 fun Trip.getSummarySegments(): List<TripSegment> = segments
