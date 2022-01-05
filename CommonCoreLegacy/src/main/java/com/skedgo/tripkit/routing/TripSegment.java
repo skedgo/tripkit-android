@@ -697,8 +697,8 @@ public class TripSegment implements IRealTimeElement, ITimeRange {
         String notes = TripSegmentUtils.processDurationTemplate(
                 mNotes,
                 null,
-                mStartTimeInSecs,
-                mEndTimeInSecs
+                mStartTimeInSecs == 0 && Long.parseLong(startTime) > 0 ? Long.parseLong(startTime) : mStartTimeInSecs,
+                mEndTimeInSecs == 0 && Long.parseLong(endTime) > 0 ? Long.parseLong(endTime) : mEndTimeInSecs
         );
 
         if (notes == null) {
