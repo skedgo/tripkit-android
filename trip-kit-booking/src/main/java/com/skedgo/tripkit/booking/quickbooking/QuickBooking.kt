@@ -25,7 +25,7 @@ data class Option(
           return Option(opt.id(), opt.title())
       }
 
-      fun parseBookingConfirmationInputOptions(opt: BookingConfirmationNotes): Option {
+      fun parseBookingConfirmationNotes(opt: BookingConfirmationNotes): Option {
           return Option(opt.timestamp(), opt.text(), opt.timestamp(), opt.provider())
       }
   }
