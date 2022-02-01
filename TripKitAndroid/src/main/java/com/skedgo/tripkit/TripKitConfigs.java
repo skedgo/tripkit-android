@@ -22,4 +22,6 @@ public abstract class TripKitConfigs implements Configs {
 
   @Value.Default public boolean isUuidOptedOut() { return false; }
 
+  @Value.Default public boolean hideTripMetrics() { return false; }
+
 }
