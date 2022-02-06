@@ -22,6 +22,7 @@ public abstract class BookingConfirmationAction implements Parcelable {
   public static final String TYPE_QR_CODE = "QRCODE";
   public static final String TYPE_LOCK = "LOCK";
   public static final String TYPE_UNLOCK = "UNLOCK";
+  public static final String TYPE_REQUEST_ANOTHER = "REQUESTANOTHER";
 
   public static final Creator<BookingConfirmationAction> CREATOR = new Creator<BookingConfirmationAction>() {
     @Override public BookingConfirmationAction createFromParcel(Parcel in) {
