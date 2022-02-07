@@ -129,6 +129,8 @@ public class TripSegment implements IRealTimeElement, ITimeRange {
     private long mStartTimeInSecs;
     private long mEndTimeInSecs;
 
+    private boolean hideExactTimes;
+
     /**
      * This is no longer a part of json returned from server due to Version 6.
      * It's currently being used for json-based persistence on app local.
@@ -853,4 +855,11 @@ public class TripSegment implements IRealTimeElement, ITimeRange {
         this.hasCarParks = hasCarParks;
     }
 
+    public boolean isHideExactTimes() {
+        return hideExactTimes;
+    }
+
+    public void setHideExactTimes(boolean hideExactTimes) {
+        this.hideExactTimes = hideExactTimes;
+    }
 }
