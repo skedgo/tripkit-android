@@ -37,6 +37,9 @@ public interface Configs {
     @Nullable
     public abstract DateTimePickerConfig dateTimePickerConfig();
 
+    @Nullable
+    public abstract TransportModeConfig transportModeConfig();
+
     /**
      * @return A factory to create a sort of adapter that specifies a base url
      * to override all the 'satapp' requests made by TripKit's apis.

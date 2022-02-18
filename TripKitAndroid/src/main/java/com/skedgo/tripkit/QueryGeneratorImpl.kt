@@ -6,7 +6,7 @@ import com.skedgo.tripkit.data.regions.RegionService
 import io.reactivex.Observable
 
 internal class QueryGeneratorImpl(private val regionService: RegionService) : QueryGenerator {
-  private val modeCombinationStrategy by lazy { com.skedgo.tripkit.ModeCombinationStrategy() }
+    private val modeCombinationStrategy by lazy { com.skedgo.tripkit.ModeCombinationStrategy() }
     override fun apply(query: Query, transportModeFilter: TransportModeFilter): Observable<List<Query>> {
         val departure = query.fromLocation
                 ?: return Observable.error(NullPointerException("Departure is null"))
@@ -60,5 +60,5 @@ internal class QueryGeneratorImpl(private val regionService: RegionService) : Qu
                 }
     }
 
-  private val tripRegionResolver: com.skedgo.tripkit.TripRegionResolver by lazy { com.skedgo.tripkit.TripRegionResolver.create(regionService) }
+    private val tripRegionResolver: com.skedgo.tripkit.TripRegionResolver by lazy { com.skedgo.tripkit.TripRegionResolver.create(regionService) }
 }
