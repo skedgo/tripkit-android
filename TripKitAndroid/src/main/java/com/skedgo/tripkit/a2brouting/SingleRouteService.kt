@@ -17,13 +17,13 @@ import com.skedgo.tripkit.routing.TripGroup
  * the cancellation of the request A-to-B to be done to get started.
  */
 class SingleRouteService(private val routeService: RouteService) : RouteService {
-  /* toSerialized() to be thread-safe. */
-  private val cancellationSignal = PublishSubject.create<Any>().toSerialized()
+    /* toSerialized() to be thread-safe. */
+    private val cancellationSignal = PublishSubject.create<Any>().toSerialized()
 
-  override fun routeAsync(query: Query,
-                          transportModeFilter: TransportModeFilter): Observable<List<TripGroup>> {
-    cancellationSignal.onNext(Any())
-    return routeService.routeAsync(query, transportModeFilter)
-        .takeUntil(cancellationSignal)
-  }
+    override fun routeAsync(query: Query,
+                            transportModeFilter: TransportModeFilter): Observable<List<TripGroup>> {
+        cancellationSignal.onNext(Any())
+        return routeService.routeAsync(query, transportModeFilter)
+                .takeUntil(cancellationSignal)
+    }
 }
