@@ -21,7 +21,7 @@ val Trip.startDateTime: DateTime
 val Trip.endDateTime: DateTime
   get() = DateTime(
       TimeUnit.SECONDS.toMillis(endTimeInSecs),
-      to.dateTimeZone
+      to?.dateTimeZone
   )
 
 /**
