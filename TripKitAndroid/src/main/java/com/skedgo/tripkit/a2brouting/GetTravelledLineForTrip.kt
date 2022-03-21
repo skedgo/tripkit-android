@@ -31,8 +31,6 @@ class GetTravelledLineForTrip @Inject constructor() {
                     else
                         segment.serviceColor!!.color
 
-                    Log.e("MIKE", "createTravelledLinesToDraw")
-
                     val shapes = segment.shapes ?: emptyList()
                     val modeId = segment.transportModeId
                     val lineSegmentsFromShapes = shapes.filter { it.isTravelled }
