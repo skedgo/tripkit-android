@@ -8,8 +8,6 @@
     <variable
       name="viewModel"
       type="skedgo.tripkit.samples.a2brouting.TripDetailsViewModel" />
-
-    <import type="me.tatarka.bindingcollectionadapter2.LayoutManagers" />
   </data>
 
   <androidx.coordinatorlayout.widget.CoordinatorLayout
@@ -30,7 +28,6 @@
       android:background="@android:color/white"
       app:itemBinding="@{viewModel.itemBinding}"
       app:items="@{viewModel.segments}"
-      app:layoutManager="@{LayoutManagers.linear()}"
       app:layout_behavior="@string/bottom_sheet_behavior" />
   </androidx.coordinatorlayout.widget.CoordinatorLayout>
 </layout>

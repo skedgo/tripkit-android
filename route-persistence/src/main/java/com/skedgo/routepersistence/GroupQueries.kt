@@ -2,8 +2,8 @@ package com.skedgo.routepersistence
 
 import android.util.Pair
 
-import com.skedgo.android.common.model.Query
-import skedgo.tripkit.routing.TripGroup
+import com.skedgo.tripkit.common.model.Query
+import com.skedgo.tripkit.routing.TripGroup
 
 import java.util.UUID
 

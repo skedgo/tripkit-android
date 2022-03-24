@@ -1,7 +1,7 @@
 apply plugin: "com.android.library"
 // To publish via JitPack.
 // See https://jitpack.io/docs/ANDROID/.
-apply plugin: "com.github.dcendents.android-maven"
+apply plugin: 'digital.wup.android-maven-publish'
 apply plugin: "kotlin-android"
 apply plugin: "kotlin-kapt"
 
@@ -25,20 +25,41 @@ dependencies {
   testImplementation libs.mockitoCore
   testImplementation libs.mockitoKotlin, { exclude group: "org.jetbrains.kotlin" }
   testImplementation libs.jodaTimeTzdb
+  testImplementation libs.mockWebServer
+  testImplementation libs.kluent
+  testImplementation libs.robolectric
+  testImplementation libs.androidxTesting
+  testImplementation libs.androidxJUnitExtTesting
 
+  implementation 'com.github.skedgo:commons-collections:v1.0'
+
+  implementation project(":CommonCoreLegacy")
   implementation project(":TripKitDomain")
   implementation project(":TripKitDomainLegacy")
   api project(":route-persistence")
   implementation libs.dagger
-  implementation libs.rxjava
-  implementation libs.rxrelay1
+  implementation libs.rxjava2
+  implementation libs.rxrelay2
   implementation libs.jodaTimeAndroid
+  implementation libs.roomRuntime
+  implementation libs.roomRxjava2
+  implementation libs.retrofitConverterGson
+  implementation libs.retrofitAdapterRxJava
+  implementation libs.retrofit
+
+  kapt libs.roomCompiler
+  implementation libs.koptional
+
+
   kapt libs.daggerCompiler
   kapt libs.value
   compileOnly libs.valueAnnotations
   compileOnly libs.builderAnnotations
+  implementation libs.gson
   implementation libs.immutablesGson
   implementation libs.kotlin
+
+  api project(':sqliteutils')
 }
 
 
@@ -66,12 +87,35 @@ artifacts {
   archives javadocJar
 }
 
-uploadArchives {
+group = tripkitGroup
+version = tripkitVersion
+
+publishing {
   repositories {
-    mavenDeployer {
-      repository(url: "file://${localMaven}")
-      pom.groupId = tripkitGroup
-      pom.version = tripkitVersion
+    maven {
+//      url = "file://${localMaven}"
+      url = publishMavenUrl
+      credentials {
+        username = publishMavenUsername
+        password = publishMavenToken
+      }
+    }
+  }
+
+  publications {
+    mavenAar(MavenPublication) {
+      groupId = group
+      version = version
+      from components.android
+      pom {
+        licenses {
+          license {
+            name = 'Commercial'
+          }
+        }
+
+      }
     }
   }
 }
+

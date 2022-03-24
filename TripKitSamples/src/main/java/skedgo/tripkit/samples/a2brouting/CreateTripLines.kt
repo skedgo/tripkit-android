@@ -3,16 +3,18 @@ package skedgo.tripkit.samples.a2brouting
 import android.graphics.Color
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.PolylineOptions
-import rx.Observable
-import skedgo.tripkit.a2brouting.GetNonTravelledLineForTrip
-import skedgo.tripkit.a2brouting.GetTravelledLineForTrip
-import skedgo.tripkit.routing.TripSegment
+import com.skedgo.tripkit.LineSegment
+import com.skedgo.tripkit.a2brouting.GetNonTravelledLineForTrip
+import com.skedgo.tripkit.a2brouting.GetTravelledLineForTrip
+import io.reactivex.Observable
+import io.reactivex.functions.BiFunction
+import com.skedgo.tripkit.routing.TripSegment
 
 class CreateTripLines(private val getTravelledLineForTrip: GetTravelledLineForTrip,
                       private val getNonTravelledLineForTrip: GetNonTravelledLineForTrip) {
   fun execute(segments: List<TripSegment>): Observable<PolylineOptions> {
-    return Observable.zip(getTravelledLineForTrip.execute(segments).toList(),
-        getNonTravelledLineForTrip.execute(segments).toList()) { travelled, nonTravelled -> travelled to nonTravelled }
+    return Observable.zip(getTravelledLineForTrip.execute(segments).toList().toObservable(),
+        getNonTravelledLineForTrip.execute(segments).toList().toObservable(), BiFunction { travelled: List<List<LineSegment>>, nonTravelled: List<List<LineSegment>> -> travelled to nonTravelled })
         .map { (travelled, nonTravelled) ->
           val travelledPolyLines = travelled.map {
             val latLngList = it
@@ -42,6 +44,6 @@ class CreateTripLines(private val getTravelledLineForTrip: GetTravelledLineForTr
               }
           travelledPolyLines + nonTravelledPolyLines
         }
-        .flatMap { Observable.from(it) }
+        .flatMap { Observable.fromIterable(it) }
   }
 }

@@ -5,7 +5,7 @@
 
     <variable
       name="viewModel"
-      type="com.skedgo.android.tripkit.booking.ui.viewmodel.ExternalProviderAuthViewModel" />
+      type="com.skedgo.tripkit.booking.ui.viewmodel.ExternalProviderAuthViewModel" />
   </data>
 
   <RelativeLayout

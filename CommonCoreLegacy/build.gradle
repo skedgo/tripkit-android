@@ -1,16 +1,17 @@
 apply plugin: "com.android.library"
 // To publish via JitPack.
 // See https://jitpack.io/docs/ANDROID/.
-apply plugin: "com.github.dcendents.android-maven"
+apply plugin: 'digital.wup.android-maven-publish'
 apply plugin: "kotlin-android"
 apply plugin: "kotlin-kapt"
+
 
 android {
   compileSdkVersion versions.compileSdkVersion
 
   defaultConfig {
-    minSdkVersion 15
-    targetSdkVersion 27
+    minSdkVersion versions.proMinSdkVersion
+    targetSdkVersion versions.targetSdkVersion
     testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
   }
 
@@ -45,11 +46,12 @@ dependencies {
   testImplementation libs.mockitoCore
   testImplementation libs.jodaTimeTzdb
   testImplementation libs.kluent
+  testImplementation libs.androidxTesting
 
   implementation libs.supportAnnotations
   implementation libs.jodaTimeAndroid
-  implementation libs.rxjava
-  implementation libs.rxAndroid
+  implementation libs.rxjava2
+  implementation libs.rxAndroid2
   implementation libs.gson
   implementation 'com.github.skedgo:commons-collections:v1.0'
 
@@ -86,13 +88,34 @@ artifacts {
   archives sourcesJar
   archives javadocJar
 }
+group = tripkitGroup
+version = tripkitVersion
 
-uploadArchives {
+publishing {
   repositories {
-    mavenDeployer {
-      repository(url: "file://${localMaven}")
-      pom.groupId = tripkitGroup
-      pom.version = tripkitVersion
+    maven {
+//      url = "file://${localMaven}"
+      url = publishMavenUrl
+      credentials {
+        username = publishMavenUsername
+        password = publishMavenToken
+      }
+    }
+  }
+
+  publications {
+    mavenAar(MavenPublication) {
+      groupId = group
+      version = version
+      from components.android
+      pom {
+        licenses {
+          license {
+            name = 'Commercial'
+          }
+        }
+      }
     }
   }
 }
+

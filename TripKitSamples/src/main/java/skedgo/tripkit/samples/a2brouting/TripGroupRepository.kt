@@ -1,6 +1,6 @@
 package skedgo.tripkit.samples.a2brouting
 
-import skedgo.tripkit.routing.TripGroup
+import com.skedgo.tripkit.routing.TripGroup
 
 object TripGroupRepository {
 

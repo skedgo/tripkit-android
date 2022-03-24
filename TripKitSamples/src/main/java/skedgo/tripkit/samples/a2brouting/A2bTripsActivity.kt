@@ -3,21 +3,18 @@ package skedgo.tripkit.samples.a2brouting
 import androidx.databinding.DataBindingUtil
 import android.os.Bundle
 import androidx.appcompat.app.AlertDialog
-import rx.Observable
-import rx.android.schedulers.AndroidSchedulers.mainThread
-import skedgo.rxlifecyclecomponents.RxAppCompatActivity
-import skedgo.rxlifecyclecomponents.bindToLifecycle
-import skedgo.tripkit.android.TripKit
+import com.skedgo.TripKit
+import io.reactivex.Observable
+import io.reactivex.android.schedulers.AndroidSchedulers.mainThread
+import com.skedgo.rxlifecyclecomponents.RxAppCompatActivity
+import com.skedgo.rxlifecyclecomponents.bindToLifecycle
 import skedgo.tripkit.samples.R
 import skedgo.tripkit.samples.databinding.A2bTripsBinding
 import java.util.concurrent.TimeUnit
 
 class A2bTripsActivity : RxAppCompatActivity() {
   val viewModel: A2bTripsViewModel by lazy {
-    A2bTripsViewModel(
-        applicationContext,
-        TripKit.getInstance().routeService
-    )
+    A2bTripsViewModel(TripKit.getInstance().routeService, applicationContext)
   }
   val binding: A2bTripsBinding by lazy {
     DataBindingUtil.setContentView<A2bTripsBinding>(this, R.layout.a2b_trips)

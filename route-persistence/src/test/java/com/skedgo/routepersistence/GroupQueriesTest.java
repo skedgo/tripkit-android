@@ -5,12 +5,10 @@ import android.util.Pair;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.robolectric.RobolectricTestRunner;
-import org.robolectric.annotation.Config;
 
-import static org.assertj.core.api.Java6Assertions.*;
+import static org.assertj.core.api.Java6Assertions.assertThat;
 
 @RunWith(RobolectricTestRunner.class)
-@Config(constants = BuildConfig.class, sdk = 22)
 public class GroupQueriesTest {
   @Test public void shouldCreateRawQueryToMatchNotifiableRoutes() {
     final Pair<String, String[]> r = GroupQueries.INSTANCE.isNotifiable();
