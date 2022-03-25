@@ -77,6 +77,7 @@ class AccountApiTest {
     subscriber.assertValue(
         ImmutableLogInResponse.builder()
             .userToken("6XzsKaatH0rZNkbDieRligNLy3iYjn")
+            .changed(true)
             .build()
     )
 

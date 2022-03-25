@@ -13,39 +13,42 @@ import io.reactivex.Observable
 
 @RunWith(AndroidJUnit4::class)
 class ValidBookingCountRepositoryImplTest {
-  private val api: ValidBookingCountApi = mock()
-  private val prefs: SharedPreferences by lazy {
-    ApplicationProvider.getApplicationContext<Context>().getSharedPreferences("", Context.MODE_PRIVATE)
-  }
-  private val repository: ValidBookingCountRepositoryImpl by lazy {
-    ValidBookingCountRepositoryImpl(api, prefs)
-  }
+    private val api: ValidBookingCountApi = mock()
+    private val prefs: SharedPreferences by lazy {
+        ApplicationProvider.getApplicationContext<Context>()
+            .getSharedPreferences("", Context.MODE_PRIVATE)
+    }
+    private val repository: ValidBookingCountRepositoryImpl by lazy {
+        ValidBookingCountRepositoryImpl(api, prefs)
+    }
 
-  @Test fun shouldSaveToDiskAfterFetchingFromRemote() {
-    whenever(api.fetchValidBookingCount())
-        .then {
-          val response: ValidBookingCountResponse = mock()
-          whenever(response.count()).thenReturn(2)
-          Observable.just(response)
-        }
+    @Test
+    fun shouldSaveToDiskAfterFetchingFromRemote() {
+        whenever(api.fetchValidBookingCount())
+            .then {
+                val response: ValidBookingCountResponse = mock()
+                whenever(response.count()).thenReturn(2)
+                Observable.just(response)
+            }
 
 
-    val subscriber = repository.getRemoteValidBookingCount().test()
+        val subscriber = repository.getRemoteValidBookingCount().test()
 
-    subscriber.assertValue(2)
-    subscriber.assertComplete()
-    assertThat(prefs.getInt("validBookingCount", 0)).isEqualTo(2)
-  }
+        subscriber.assertValue(2)
+        subscriber.assertComplete()
+        assertThat(prefs.getInt("validBookingCount", 0)).isEqualTo(2)
+    }
 
-  @Test fun shouldReEmitLocalValidBookingCount() {
-    val subscriber =     repository.getLocalValidBookingCount().test()
+    @Test
+    fun shouldReEmitLocalValidBookingCount() {
+        val subscriber = repository.getLocalValidBookingCount().test()
 
-    subscriber.assertNoValues()
+        subscriber.assertNoValues()
 
-    prefs.edit().putInt("validBookingCount", 1).apply()
-    subscriber.assertValue(1)
+        prefs.edit().putInt("validBookingCount", 1).apply()
+        subscriber.assertValue(1)
 
-    prefs.edit().putInt("validBookingCount", 2).apply()
-    subscriber.assertValues(1, 2)
-  }
+        prefs.edit().putInt("validBookingCount", 2).apply()
+        subscriber.assertValues(1, 2)
+    }
 }

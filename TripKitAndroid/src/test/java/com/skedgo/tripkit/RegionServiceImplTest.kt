@@ -15,6 +15,7 @@ import org.junit.Test
 import org.mockito.Mockito.*
 import io.reactivex.Completable
 import io.reactivex.Observable
+import io.reactivex.Single
 import io.reactivex.observers.TestObserver
 import java.util.*
 import kotlin.collections.ArrayList
@@ -56,7 +57,7 @@ class RegionServiceImplTest : TripKitAndroidRobolectricTest() {
     NewYork.setEncodedPolyline("oecvFnzhdM_}tA??o~oE~|tA?")
 
     whenever(regionCache.async)
-        .thenReturn(Observable.just(Arrays.asList(Sydney, NewYork)))
+        .thenReturn(Single.just(Arrays.asList(Sydney, NewYork)))
     whenever(regionFinder.contains(
         same(Sydney),
         eq(-33.86749),
@@ -82,7 +83,7 @@ class RegionServiceImplTest : TripKitAndroidRobolectricTest() {
     NewYork.encodedPolyline = "oecvFnzhdM_}tA??o~oE~|tA?"
 
     whenever(regionCache.async)
-        .thenReturn(Observable.just(Arrays.asList(Sydney, NewYork)))
+        .thenReturn(Single.just(Arrays.asList(Sydney, NewYork)))
 
     val subscriber = TestObserver<Region>()
     val location = Location(1.0, 2.0)
@@ -116,7 +117,7 @@ class RegionServiceImplTest : TripKitAndroidRobolectricTest() {
     US.setCities(ArrayList<Region.City>(Arrays.asList(NewYork, SanJose)))
 
     whenever(regionCache.async)
-        .thenReturn(Observable.just(Arrays.asList(AU, US)))
+        .thenReturn(Single.just(Arrays.asList(AU, US)))
 
     val subscriber = TestObserver<Location>()
     regionService.getCitiesAsync().subscribe(subscriber)
@@ -130,7 +131,7 @@ class RegionServiceImplTest : TripKitAndroidRobolectricTest() {
     val modeMap = HashMap<String, TransportMode>()
     modeMap.put("car", TransportMode())
     modeMap.put("walk", TransportMode())
-    whenever(modeCache.async).thenReturn(Observable.just<Map<String, TransportMode>>(modeMap))
+    whenever(modeCache.async).thenReturn(Single.just<Map<String, TransportMode>>(modeMap))
 
     val subscriber = TestObserver<Map<String, TransportMode>>()
     regionService.getTransportModesAsync().subscribe(subscriber)
@@ -142,7 +143,7 @@ class RegionServiceImplTest : TripKitAndroidRobolectricTest() {
 
   @Test fun shouldTakeRegionsFromRegionsLoader() {
     val regions = Arrays.asList(Region(), Region())
-    whenever(regionCache.async).thenReturn(Observable.just(regions))
+    whenever(regionCache.async).thenReturn(Single.just(regions))
 
     val subscriber = regionService.getRegionsAsync().test()
     subscriber.awaitTerminalEvent()

@@ -147,7 +147,7 @@ class QueryGeneratorImplTest {
     subscriber.assertNoErrors()
 
     val queries = subscriber.events[0] as List<List<Query>>
-    assertThat(queries.first()).isNotNull.hasSize(9).doesNotContainNull()
+    assertThat(queries.first()).isNotNull.hasSize(10).doesNotContainNull()
   }
 
   private fun createSampleModeMap(): Map<String, TransportMode> {
