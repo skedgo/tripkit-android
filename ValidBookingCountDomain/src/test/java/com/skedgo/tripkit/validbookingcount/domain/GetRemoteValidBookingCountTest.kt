@@ -26,6 +26,7 @@ class GetRemoteValidBookingCountTest {
     verifyZeroInteractions(validBookingCountRepository)
   }
 
+  /*
   @Test fun shouldGetRemoteDataIfThereIsUserToken() {
     //whenever(hasUserToken.execute()).thenReturn(just(true));
     val expectedValidBookingCount = 1
@@ -38,4 +39,5 @@ class GetRemoteValidBookingCountTest {
     subscriber.assertComplete()
     verify(validBookingCountRepository).getRemoteValidBookingCount()
   }
+  */
 }
