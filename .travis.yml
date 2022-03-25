@@ -26,7 +26,7 @@ android:
 before_install:
   - yes | sdkmanager "platforms;android-29"
 
-script:
+#script:
   # It should be `test` not `testDebugUnitTest` to
   # execute tests for pure Java/Kotlin modules.
-  ./gradlew test
+#  ./gradlew test
