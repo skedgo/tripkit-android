@@ -23,6 +23,9 @@ android:
     - extra-android-m2repository
     - extra-google-m2repository
 
+before_install:
+  - yes | sdkmanager "platforms;android-29"
+
 script:
   # It should be `test` not `testDebugUnitTest` to
   # execute tests for pure Java/Kotlin modules.
