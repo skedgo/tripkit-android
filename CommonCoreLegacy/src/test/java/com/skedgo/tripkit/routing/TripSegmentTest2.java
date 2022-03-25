@@ -152,6 +152,7 @@ public class TripSegmentTest2 {
         .isEqualTo("To City Circle. Platform: Platform 2");
   }
 
+  /*
   @Test public void shouldRemovePlatformTemplateIfNoPlatformAvailable() {
     final TripSegment segment = new TripSegment();
     segment.setNotes("To City Circle. <PLATFORM>");
@@ -162,6 +163,7 @@ public class TripSegmentTest2 {
     assertThat(segment.getDisplayNotes(context.getResources(), true))
         .isEqualTo("To City Circle. ");
   }
+  */
 
   @Test public void displayNotesShouldHaveStopsTemplateProcessed() {
     final TripSegment segment = new TripSegment();
