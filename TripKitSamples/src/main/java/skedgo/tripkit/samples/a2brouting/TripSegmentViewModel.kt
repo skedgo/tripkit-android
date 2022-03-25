@@ -17,6 +17,6 @@ class TripSegmentViewModel constructor(context: Context, segment: TripSegment) {
   }
 
   val actionNotes by lazy {
-    ObservableField<String>(segment.getDisplayNotes(context.resources))
+    ObservableField<String>(segment.getDisplayNotes(context.resources, false))
   }
 }

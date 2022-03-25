@@ -25,6 +25,9 @@ ext {
     localMaven = "${rootDir}/../maven/"
     tripkitGroup = "com.skedgo.tripkit"
     tripkitVersion = "2.1.43"
+    publishMavenUrl = "https://www.myget.org/F/skedgo/maven"
+    publishMavenUsername = "mbarringer"
+    publishMavenToken = "568c7266-7ea8-484b-8c58-cc9a69e09809"
 }
 
 allprojects {

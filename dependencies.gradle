@@ -6,7 +6,7 @@
  */
 
 def versions = new Expando()
-versions.desugaring="1.0.9"
+versions.desugaring="1.1.5"
 versions.immutablesVersion = "2.8.2"
 versions.devMinSdkVersion = 21
 versions.proMinSdkVersion = 21

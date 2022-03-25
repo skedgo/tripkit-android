@@ -1,6 +1,8 @@
 package skedgo.tripkit.samples.a2brouting
 
 import android.content.Context
+import android.os.Parcel
+import com.skedgo.tripkit.TransportModeFilter
 import com.skedgo.tripkit.common.model.Location
 import com.skedgo.tripkit.common.model.Query
 import com.skedgo.tripkit.common.model.TimeTag
@@ -38,7 +40,15 @@ class A2bTripsViewModel constructor(
           }
           setTimeTag(TimeTag.createForLeaveNow())
         }
-        routeService.routeAsync(query)
+        routeService.routeAsync(query, object: TransportModeFilter {
+            override fun writeToParcel(p0: Parcel?, p1: Int) {
+
+            }
+
+            override fun describeContents(): Int {
+                return 0
+            }
+        })
       }
       .observeOn(mainThread())
       .scan { previous, new -> previous + new }

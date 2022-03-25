@@ -37,6 +37,8 @@ android {
 }
 
 dependencies {
+  coreLibraryDesugaring libs.desugar
+
   testImplementation libs.junit
   implementation libs.kotlin
   implementation "com.google.android.gms:play-services-maps:15.0.1"
