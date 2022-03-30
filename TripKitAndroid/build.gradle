@@ -97,7 +97,7 @@ dependencies {
   api project(':TripKitDomainLegacy')
   api project(':TripKitData')
   api project(':sqliteutils')
-  //api project(':SnapshotTaker')
+  api project(':SnapshotTaker')
 }
 
 // build a jar with source files
