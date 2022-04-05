@@ -127,7 +127,7 @@ public class TripSegmentTest2 {
     segment.setStartTimeInSecs(TimeUnit.MINUTES.toSeconds(2));
     segment.setEndTimeInSecs(TimeUnit.MINUTES.toSeconds(3));
 
-    assertThat(segment.getDisplayNotes(context.getResources(), true))
+    assertThat(segment.getDisplayNotes(context, true))
         .isNull();
   }
 
@@ -137,7 +137,7 @@ public class TripSegmentTest2 {
     segment.setStartTimeInSecs(TimeUnit.MINUTES.toSeconds(2));
     segment.setEndTimeInSecs(TimeUnit.MINUTES.toSeconds(3));
 
-    assertThat(segment.getDisplayNotes(context.getResources(), true))
+    assertThat(segment.getDisplayNotes(context, true))
         .isEqualTo("Stay on train for 1min");
   }
 
@@ -148,7 +148,7 @@ public class TripSegmentTest2 {
     segment.setEndTimeInSecs(TimeUnit.MINUTES.toSeconds(3));
     segment.setPlatform("Platform 2");
 
-    assertThat(segment.getDisplayNotes(context.getResources(), true))
+    assertThat(segment.getDisplayNotes(context, true))
         .isEqualTo("To City Circle. Platform: Platform 2");
   }
 
@@ -159,7 +159,7 @@ public class TripSegmentTest2 {
     segment.setEndTimeInSecs(TimeUnit.MINUTES.toSeconds(3));
     segment.setPlatform(null);
 
-    assertThat(segment.getDisplayNotes(context.getResources(), true))
+    assertThat(segment.getDisplayNotes(context, true))
         .isEqualTo("To City Circle. ");
   }
 
@@ -170,7 +170,7 @@ public class TripSegmentTest2 {
     segment.setEndTimeInSecs(TimeUnit.MINUTES.toSeconds(3));
     segment.setStopCount(3);
 
-    assertThat(segment.getDisplayNotes(context.getResources(), true))
+    assertThat(segment.getDisplayNotes(context, true))
         .isEqualTo("To City Circle. 3 stops");
   }
 
@@ -181,7 +181,7 @@ public class TripSegmentTest2 {
     segment.setEndTimeInSecs(TimeUnit.MINUTES.toSeconds(3));
     segment.setStopCount(0);
 
-    assertThat(segment.getDisplayNotes(context.getResources(), true))
+    assertThat(segment.getDisplayNotes(context, true))
         .isEqualTo("To City Circle. ");
   }
 
@@ -192,7 +192,7 @@ public class TripSegmentTest2 {
     segment.setEndTimeInSecs(TimeUnit.MINUTES.toSeconds(3));
     segment.setStopCount(-2);
 
-    assertThat(segment.getDisplayNotes(context.getResources(), true))
+    assertThat(segment.getDisplayNotes(context, true))
         .isEqualTo("To City Circle. ");
   }
 }
