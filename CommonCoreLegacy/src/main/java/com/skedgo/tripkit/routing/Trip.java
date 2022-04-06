@@ -217,6 +217,7 @@ public class Trip implements ITimeRange {
         this.mHassleCost = hassleCost;
     }
 
+    @Nullable
     public Location getTo() {
         if (mSegments == null || mSegments.isEmpty()) {
             return null;

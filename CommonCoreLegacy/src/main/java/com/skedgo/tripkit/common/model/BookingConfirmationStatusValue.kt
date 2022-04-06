@@ -23,5 +23,6 @@ annotation class BookingConfirmationStatusValue {
         const val PROVIDER_CANCELED = "PROVIDER_CANCELED"
         const val USER_CANCELED = "USER_CANCELED"
         const val COMPLETED = "COMPLETED"
+        const val PENDING_CHANGES = "PENDING_CHANGES"
     }
 }
