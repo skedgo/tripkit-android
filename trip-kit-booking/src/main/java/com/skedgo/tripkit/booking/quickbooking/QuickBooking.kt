@@ -39,5 +39,7 @@ data class Input(
         val type: String,
         var raw_value: String,
         var value: String?,
-        var values: List<String>?
+        var values: List<String>?,
+        val minValue: Int,
+        val maxValue: Int
 )
