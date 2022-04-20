@@ -37,4 +37,7 @@
   <string name="retry">Retry</string>
   <string name="origin">origin</string>
   <string name="destination">destination</string>
+  <string name="str_mins">mins</string>
+  <string name="str_hr">hrs</string>
+  <string name="str_hrs">hrs</string>
 </resources>

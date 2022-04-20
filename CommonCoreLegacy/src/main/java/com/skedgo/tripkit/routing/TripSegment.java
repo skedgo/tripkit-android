@@ -1,5 +1,6 @@
 package com.skedgo.tripkit.routing;
 
+import android.content.Context;
 import android.content.Intent;
 import android.content.res.Resources;
 import android.graphics.Color;
@@ -695,8 +696,9 @@ public class TripSegment implements IRealTimeElement, ITimeRange {
      * Some essential templates will be resolved before being presented by the views.
      */
     @Nullable
-    public String getDisplayNotes(Resources resources, boolean withPlatform) {
+    public String getDisplayNotes(Context context, boolean withPlatform) {
         String notes = TripSegmentUtils.processDurationTemplate(
+                context,
                 mNotes,
                 null,
                 mStartTimeInSecs == 0 && Long.parseLong(startTime) > 0 ? Long.parseLong(startTime) : mStartTimeInSecs,
@@ -725,7 +727,7 @@ public class TripSegment implements IRealTimeElement, ITimeRange {
             // Plus 60 secs since we show both duration types in minutes.
             // For instance, if durationWithTraffic is 65 secs, and durationWithoutTraffic is 60 secs,
             // they will be both shown as '1min'. Thus, no need to show this difference.
-            return notes.replace(Templates.TEMPLATE_TRAFFIC, getDurationWithoutTrafficText(resources));
+            return notes.replace(Templates.TEMPLATE_TRAFFIC, getDurationWithoutTrafficText(context));
         } else {
             // TODO: Probably we also need to remove a redundant dot char next to the template.
             return notes.replace(Templates.TEMPLATE_TRAFFIC, "");
@@ -815,9 +817,9 @@ public class TripSegment implements IRealTimeElement, ITimeRange {
         this.platform = platform;
     }
 
-    private String getDurationWithoutTrafficText(Resources resources) {
-        String durationText = TimeUtils.getDurationInDaysHoursMins((int) durationWithoutTraffic);
-        return resources.getString(R.string._pattern_w_slasho_traffic, durationText);
+    private String getDurationWithoutTrafficText(Context context) {
+        String durationText = TimeUtils.getDurationInDaysHoursMins(context, (int) durationWithoutTraffic);
+        return context.getResources().getString(R.string._pattern_w_slasho_traffic, durationText);
     }
 
     public int lineColor() {
