@@ -29,24 +29,24 @@ public class RoutingResponseTest {
     // Case 1
     JsonPrimitive serviceDirectionNode = new JsonPrimitive("Service direction");
     String notes = "This is a <DIRECTION>";
-    String result = RoutingResponse.processDirectionTemplate(serviceDirectionNode, notes);
+    String result = RoutingResponse.processDirectionTemplate(serviceDirectionNode, notes, null);
     assertThat("This is a Direction: Service direction").isEqualTo(result);
 
     // Case 2
     serviceDirectionNode = new JsonPrimitive("");
     notes = "This is a <DIRECTION>";
-    result = RoutingResponse.processDirectionTemplate(serviceDirectionNode, notes);
+    result = RoutingResponse.processDirectionTemplate(serviceDirectionNode, notes, null);
     assertThat("This is a ").isEqualTo(result);
 
     // Case 3
     notes = "This is a <DIRECTION>";
-    result = RoutingResponse.processDirectionTemplate(null, notes);
+    result = RoutingResponse.processDirectionTemplate(null, notes, null);
     assertThat("This is a ").isEqualTo(result);
 
     // Case 4
-    result = RoutingResponse.processDirectionTemplate(null, null);
+    result = RoutingResponse.processDirectionTemplate(null, null, null);
     assertThat(result).isNull();
-    result = RoutingResponse.processDirectionTemplate(null, "");
+    result = RoutingResponse.processDirectionTemplate(null, "", null);
     assertThat("").isEqualTo(result);
   }
 
