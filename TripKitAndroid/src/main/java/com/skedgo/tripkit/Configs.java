@@ -61,4 +61,6 @@ public interface Configs {
 
     public boolean hideTripMetrics();
 
+    public boolean showReportProblemOnTripAction();
+
 }

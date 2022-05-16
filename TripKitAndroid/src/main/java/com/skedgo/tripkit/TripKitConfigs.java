@@ -23,4 +23,9 @@ public abstract class TripKitConfigs implements Configs {
         return false;
     }
 
+    @Value.Default
+    public boolean showReportProblemOnTripAction() {
+        return false;
+    }
+
 }
