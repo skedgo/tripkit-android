@@ -192,12 +192,8 @@ public class TripSegment implements IRealTimeElement, ITimeRange {
      * FIXME: Should replace this with Quantity Strings.
      * See http://developer.android.com/intl/vi/guide/topics/resources/string-resource.html#Plurals.
      */
-    public static String convertStopCountToText(int stopCount) {
-        if (stopCount > 0) {
-            return String.format(Locale.US, (stopCount == 1) ? Templates.FORMAT_STOP : Templates.FORMAT_STOPS, stopCount);
-        } else {
-            return "";
-        }
+    public static String convertStopCountToText(Context context, int stopCount) {
+        return String.format(Locale.US, context.getResources().getQuantityString(R.plurals.number_of_stops, stopCount), stopCount);
     }
 
     public String getTerms() {
@@ -716,7 +712,7 @@ public class TripSegment implements IRealTimeElement, ITimeRange {
             notes = notes.replace(Templates.TEMPLATE_PLATFORM + "\n", "");
         }
 
-        notes = notes.replace(Templates.TEMPLATE_STOPS, convertStopCountToText(stopCount));
+        notes = notes.replace(Templates.TEMPLATE_STOPS, convertStopCountToText(context, stopCount));
 
         if (durationWithoutTraffic == 0) {
             return notes;
