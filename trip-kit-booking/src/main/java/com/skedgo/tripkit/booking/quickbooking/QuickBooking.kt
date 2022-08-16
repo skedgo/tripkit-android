@@ -11,7 +11,8 @@ data class QuickBooking(
         val index: Int,
         val input: List<Input>,
         val title: String,
-        val tripUpdateURL: String
+        val tripUpdateURL: String,
+        val tickets: List<Ticket>
 )
 
 data class Option(
@@ -42,4 +43,13 @@ data class Input(
         var values: List<String>?,
         val minValue: Int,
         val maxValue: Int
+)
+
+data class Ticket(
+    val id: String,
+    val currency: String,
+    val description: String,
+    val name: String,
+    val price: Double,
+    val value: Long
 )
