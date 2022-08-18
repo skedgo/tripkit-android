@@ -20,4 +20,7 @@ interface QuickBookingApi {
 
     @GET
     fun executeBookingAction(@Url url: String): Single<QuickBookResponse>
+
+    @GET
+    fun getPaymentIntent(@Url url: String): Single<PaymentIntent>
 }
