@@ -21,15 +21,15 @@ data class Option(
         val timestamp: String? = null,
         val provider: String? = null
 ) {
-  companion object{
-      fun parseBookingConfirmationInputOptions(opt: BookingConfirmationInputOptions): Option {
-          return Option(opt.id(), opt.title())
-      }
+    companion object {
+        fun parseBookingConfirmationInputOptions(opt: BookingConfirmationInputOptions): Option {
+            return Option(opt.id(), opt.title())
+        }
 
-      fun parseBookingConfirmationNotes(opt: BookingConfirmationNotes): Option {
-          return Option(opt.timestamp(), opt.text(), opt.timestamp(), opt.provider())
-      }
-  }
+        fun parseBookingConfirmationNotes(opt: BookingConfirmationNotes): Option {
+            return Option(opt.timestamp(), opt.text(), opt.timestamp(), opt.provider())
+        }
+    }
 }
 
 data class Input(
@@ -46,10 +46,10 @@ data class Input(
 )
 
 data class Ticket(
-    val id: String,
-    val currency: String,
-    val description: String,
-    val name: String,
-    val price: Double,
-    var value: Long
+        val id: String,
+        val currency: String,
+        val description: String,
+        val name: String,
+        val price: Double,
+        var value: Long?
 )
