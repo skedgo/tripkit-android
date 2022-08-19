@@ -52,7 +52,7 @@ data class Review(
 ) {
     fun getPriceWithCurrency(): String {
         val symbol = if (currency == "USD") "$" else currency
-        return String.format("%s%.2f", symbol, price)
+        return String.format("%s%.2f", symbol, price / 100.0)
     }
 }
 
