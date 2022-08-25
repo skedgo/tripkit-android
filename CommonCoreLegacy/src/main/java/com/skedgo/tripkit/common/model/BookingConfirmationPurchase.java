@@ -65,6 +65,7 @@ public abstract class BookingConfirmationPurchase implements Parcelable {
         return 0;
     }
 
+    @Nullable
     public abstract String currency();
 
     public abstract String id();
