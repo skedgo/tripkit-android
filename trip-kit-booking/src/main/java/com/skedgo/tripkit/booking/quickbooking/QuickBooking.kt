@@ -11,7 +11,8 @@ data class QuickBooking(
         val index: Int,
         val input: List<Input>,
         val title: String,
-        val tripUpdateURL: String
+        val tripUpdateURL: String,
+        val tickets: List<Ticket>
 )
 
 data class Option(
@@ -20,15 +21,15 @@ data class Option(
         val timestamp: String? = null,
         val provider: String? = null
 ) {
-  companion object{
-      fun parseBookingConfirmationInputOptions(opt: BookingConfirmationInputOptions): Option {
-          return Option(opt.id(), opt.title())
-      }
+    companion object {
+        fun parseBookingConfirmationInputOptions(opt: BookingConfirmationInputOptions): Option {
+            return Option(opt.id(), opt.title())
+        }
 
-      fun parseBookingConfirmationNotes(opt: BookingConfirmationNotes): Option {
-          return Option(opt.timestamp(), opt.text(), opt.timestamp(), opt.provider())
-      }
-  }
+        fun parseBookingConfirmationNotes(opt: BookingConfirmationNotes): Option {
+            return Option(opt.timestamp(), opt.text(), opt.timestamp(), opt.provider())
+        }
+    }
 }
 
 data class Input(
@@ -42,4 +43,13 @@ data class Input(
         var values: List<String>?,
         val minValue: Int,
         val maxValue: Int
+)
+
+data class Ticket(
+        val id: String,
+        val currency: String,
+        val description: String,
+        val name: String,
+        val price: Double,
+        var value: Long?
 )
