@@ -1,5 +1,6 @@
 package com.skedgo.tripkit.booking.quickbooking
 
+import com.skedgo.tripkit.common.model.BookingConfirmationInputNew
 import com.skedgo.tripkit.common.model.BookingConfirmationInputOptions
 import com.skedgo.tripkit.common.model.BookingConfirmationNotes
 
@@ -43,7 +44,26 @@ data class Input(
         var values: List<String>?,
         val minValue: Int,
         val maxValue: Int
-)
+) {
+    companion object {
+        fun parse(bookingConfirmationInput: BookingConfirmationInputNew): Input =
+                Input(
+                        bookingConfirmationInput.id(),
+                        bookingConfirmationInput.options().map {
+                            Option.parseBookingConfirmationInputOptions(it)
+                        },
+                        bookingConfirmationInput.required(),
+                        bookingConfirmationInput.title(),
+                        bookingConfirmationInput.type(),
+                        "",
+                        bookingConfirmationInput.value(),
+                        bookingConfirmationInput.values(),
+                        0,
+                        0
+                )
+
+    }
+}
 
 data class Ticket(
         val id: String,
