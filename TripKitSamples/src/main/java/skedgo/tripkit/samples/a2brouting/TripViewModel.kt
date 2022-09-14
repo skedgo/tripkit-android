@@ -2,15 +2,16 @@ package skedgo.tripkit.samples.a2brouting
 
 import android.content.Context
 import androidx.databinding.ObservableField
-import rx.subjects.PublishSubject
-import skedgo.tripkit.android.TripKit
-import skedgo.tripkit.routing.*
+import com.skedgo.TripKit
+import com.skedgo.tripkit.routing.*
+import io.reactivex.functions.BiFunction
+import io.reactivex.subjects.PublishSubject
 import java.util.concurrent.TimeUnit
 
 class TripViewModel(
-    private val context: Context,
-    val group: TripGroup,
-    private val onTripSelected: PublishSubject<Trip>
+        private val context: Context,
+        val group: TripGroup,
+        private val onTripSelected: PublishSubject<Trip>
 ) {
   private val representativeTrip: Trip by lazy { group.displayTrip!! }
   val modeInfos by lazy {
@@ -35,9 +36,9 @@ class TripViewModel(
   init {
     val printTime = TripKit.getInstance().dateTimeComponent().printTime
     printTime.execute(representativeTrip.startDateTime)
-        .withLatestFrom(printTime.execute(representativeTrip.endDateTime)) { startTimeText, endTimeText ->
+        .withLatestFrom(printTime.execute(representativeTrip.endDateTime), BiFunction { startTimeText: String, endTimeText: String ->
           "Leave at $startTimeText, arrive by $endTimeText"
-        }
+        })
         .subscribe { times.set(it) }
   }
 

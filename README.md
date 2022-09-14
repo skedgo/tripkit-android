@@ -20,7 +20,7 @@ Then, in app's build file, add `TripKitAndroid` dependency into dependencies sec
 
 ```groovy
 dependencies {
-  compile 'com.github.skedgo.tripkit-android:TripKitAndroid:<insert-newest-version-here>'
+  implementation 'com.github.skedgo.tripkit-android:TripKitAndroid:<insert-newest-version-here>'
 }
 ```
 [![Release](https://jitpack.io/v/skedgo/tripkit-android.svg)]
@@ -37,7 +37,7 @@ TripKit supports for Android apps running [Android 4.0.3](https://developer.andr
 ```groovy
 android {
   defaultConfig {
-    minSdkVersion 15
+    minSdkVersion 16
   }
 }
 ```
