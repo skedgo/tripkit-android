@@ -40,6 +40,9 @@ public interface Configs {
     @Nullable
     public abstract TransportModeConfig transportModeConfig();
 
+    @Nullable
+    public abstract RoutesScreenConfig routeScreenConfig();
+
     /**
      * @return A factory to create a sort of adapter that specifies a base url
      * to override all the 'satapp' requests made by TripKit's apis.
@@ -57,5 +60,7 @@ public interface Configs {
 //  @Value.Default public boolean isUuidOptedOut() { return false; }
 
     public boolean hideTripMetrics();
+
+    public boolean showReportProblemOnTripAction();
 
 }

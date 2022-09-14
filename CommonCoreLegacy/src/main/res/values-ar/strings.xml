@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="str_mins">الدقائق</string>
+    <string name="str_hr">ساعة</string>
+    <string name="str_hrs">ساعات</string>
+    <string name="direction">الاتجاه</string>
+</resources>

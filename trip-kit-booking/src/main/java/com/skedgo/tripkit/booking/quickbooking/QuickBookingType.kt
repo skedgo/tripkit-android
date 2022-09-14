@@ -7,7 +7,8 @@ import androidx.annotation.StringDef
         QuickBookingType.MULTIPLE_CHOICE,
         QuickBookingType.SINGLE_CHOICE,
         QuickBookingType.LONG_TEXT,
-        QuickBookingType.RETURN_TRIP
+        QuickBookingType.RETURN_TRIP,
+        QuickBookingType.NUMBER
 )
 annotation class QuickBookingType {
     companion object {
@@ -15,5 +16,6 @@ annotation class QuickBookingType {
         const val SINGLE_CHOICE = "SINGLE_CHOICE"
         const val LONG_TEXT = "LONG_TEXT"
         const val RETURN_TRIP = "RETURN_TRIP"
+        const val NUMBER = "NUMBER"
     }
 }

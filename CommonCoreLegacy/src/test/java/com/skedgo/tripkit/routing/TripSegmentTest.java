@@ -167,21 +167,6 @@ public class TripSegmentTest {
   }
 
   @Test
-  public void stopCountTextShouldBe7Stops() {
-    assertThat(TripSegment.convertStopCountToText(7)).isEqualTo("7 stops");
-  }
-
-  @Test
-  public void stopCountTextShouldBe1Stop() {
-    assertThat(TripSegment.convertStopCountToText(1)).isEqualTo("1 stop");
-  }
-
-  @Test
-  public void stopCountTextShouldBeEmpty() {
-    assertThat(TripSegment.convertStopCountToText(0)).isEmpty();
-  }
-
-  @Test
   public void shouldWheelchairAccessibleBeTrue() {
     JsonObject tripSegmentJson = new JsonObject();
     tripSegmentJson.addProperty("wheelchairAccessible", true);

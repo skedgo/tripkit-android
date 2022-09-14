@@ -10,6 +10,7 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonPrimitive;
 import com.google.gson.annotations.SerializedName;
+import com.skedgo.tripkit.common.R;
 import com.skedgo.tripkit.common.model.RealtimeAlert;
 import com.skedgo.tripkit.common.util.TripSegmentListResolver;
 
@@ -55,7 +56,7 @@ public class RoutingResponse {
      * @param notes                The 'notes' text that contains the '<DIRECTION>' template
      * @return The 'notes' text that has been processed
      */
-    public static String processDirectionTemplate(JsonPrimitive serviceDirectionNode, String notes) {
+    public static String processDirectionTemplate(JsonPrimitive serviceDirectionNode, String notes, Resources resources) {
         // Ignore processing if the 'notes' text is empty
         if (TextUtils.isEmpty(notes)) {
             return notes;
@@ -64,7 +65,7 @@ public class RoutingResponse {
         if (!isElementMissing(serviceDirectionNode)) {
             String serviceDirection = serviceDirectionNode.getAsString();
             if (!TextUtils.isEmpty(serviceDirection)) {
-                notes = notes.replace(SegmentNotesTemplates.TEMPLATE_DIRECTION, String.format(FORMAT_DIRECTION, serviceDirection));
+                notes = notes.replace(SegmentNotesTemplates.TEMPLATE_DIRECTION, String.format(getFormatDirection(resources), serviceDirection));
             } else {
                 // The 'serviceDirection' node is empty, clear the template.
                 notes = notes.replace(SegmentNotesTemplates.TEMPLATE_DIRECTION, "");
@@ -75,6 +76,13 @@ public class RoutingResponse {
         }
 
         return notes;
+    }
+
+    private static String getFormatDirection(Resources resources) {
+        if (resources == null) {
+            return FORMAT_DIRECTION;
+        }
+        return resources.getString(R.string.direction) + ": %s";
     }
 
     private static boolean isElementMissing(JsonElement element) {
@@ -136,7 +144,8 @@ public class RoutingResponse {
                 ArrayList<TripSegment> segments = createSegmentsFromTemplate(
                         gson,
                         segmentTemplateMap,
-                        rawSegments
+                        rawSegments,
+                        resources
                 );
                 trip.setSegments(segments);
                 processTripSegmentRealTimeVehicle(segments);
@@ -209,7 +218,8 @@ public class RoutingResponse {
 
     private ArrayList<TripSegment> createSegmentsFromTemplate(Gson gson,
                                                               SparseArray<JsonObject> segmentTemplateMap,
-                                                              ArrayList<JsonObject> rawSegments) {
+                                                              ArrayList<JsonObject> rawSegments,
+                                                              Resources resources) {
         ArrayList<TripSegment> segments = new ArrayList<TripSegment>(rawSegments.size());
         for (JsonObject rawSegment : rawSegments) {
 
@@ -224,7 +234,7 @@ public class RoutingResponse {
 
             int hashCode = hashCodeNode.getAsInt();
             JsonObject segmentTemplate = segmentTemplateMap.get(hashCode);
-            TripSegment segment = createSegmentFromTemplate(gson, rawSegment, segmentTemplate);
+            TripSegment segment = createSegmentFromTemplate(gson, rawSegment, segmentTemplate, resources);
             segments.add(segment);
         }
 
@@ -233,7 +243,8 @@ public class RoutingResponse {
 
     private TripSegment createSegmentFromTemplate(Gson gson,
                                                   JsonObject rawSegment,
-                                                  JsonObject segmentTemplate) {
+                                                  JsonObject segmentTemplate,
+                                                  Resources resources) {
         if (segmentTemplate != null) {
             Set<Map.Entry<String, JsonElement>> entrySet = segmentTemplate.entrySet();
             for (Map.Entry<String, JsonElement> entry : entrySet) {
@@ -243,7 +254,7 @@ public class RoutingResponse {
                 if (SegmentJsonKeys.NODE_ACTION.equals(key)) {
                     processSegmentTemplateAction(rawSegment, value);
                 } else if (SegmentJsonKeys.NODE_NOTES.equals(key)) {
-                    processSegmentTemplateNotes(rawSegment, value);
+                    processSegmentTemplateNotes(rawSegment, value, resources);
                 } else {
                     rawSegment.add(key, value);
                 }
@@ -277,7 +288,7 @@ public class RoutingResponse {
         return segment;
     }
 
-    private void processSegmentTemplateNotes(JsonObject rawSegment, JsonElement notesNode) {
+    private void processSegmentTemplateNotes(JsonObject rawSegment, JsonElement notesNode, Resources resources) {
         if (isElementMissing(notesNode)) {
             return;
         }
@@ -294,7 +305,7 @@ public class RoutingResponse {
             }
 
             // Replaces '<DIRECTION>' with segment's 'serviceDirection'
-            notes = processDirectionTemplate(rawSegment.getAsJsonPrimitive(SegmentJsonKeys.NODE_SERVICE_DIRECTION), notes);
+            notes = processDirectionTemplate(rawSegment.getAsJsonPrimitive(SegmentJsonKeys.NODE_SERVICE_DIRECTION), notes, resources);
 
             rawSegment.addProperty(SegmentJsonKeys.NODE_NOTES, notes);
         }

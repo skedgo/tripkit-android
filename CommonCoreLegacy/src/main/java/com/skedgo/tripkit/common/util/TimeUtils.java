@@ -5,7 +5,11 @@
 package com.skedgo.tripkit.common.util;
 
 import androidx.annotation.Nullable;
+
+import android.content.Context;
 import android.text.format.Time;
+
+import com.skedgo.tripkit.common.R;
 
 import java.util.Calendar;
 import java.util.Date;
@@ -90,44 +94,44 @@ public class TimeUtils {
    *
    * @return e.g, 1 day 2 hrs 30 mins
    */
-  public static String getDurationInDaysHoursMins(int seconds) {
+  public static String getDurationInDaysHoursMins(Context context, int seconds) {
     if (seconds > InSeconds.DAY) {
-      return getDurationWithDaysInIt(seconds);
+      return getDurationWithDaysInIt(context, seconds);
     } else {
-      return getDurationInHoursMins(seconds);
+      return getDurationInHoursMins(context, seconds);
     }
   }
 
-  private static String getHrsAndMinsString(int hour, int minutes, String time) {
+  private static String getHrsAndMinsString(Context context, int hour, int minutes, String time) {
     if (hour == 1) {
-      time += hour + " hr";
+      time += hour + " " + context.getString(R.string.str_hr);
     } else if (hour > 1) {
-      time += hour + " hrs";
+      time += hour + " " + context.getString(R.string.str_hrs);
     }
 
     if (minutes == 1) {
       if (hour >= 1) {
         time += " ";
       }
-      time += minutes + " min";
+      time += minutes + " " + context.getString(R.string.str_mins);
     } else if (minutes > 1) {
       if (hour >= 1) {
         time += " ";
       }
-      time += minutes + " mins";
+      time += minutes + " " + context.getString(R.string.str_mins);
     }
 
     return time;
   }
 
-  public static String getDurationInHoursMins(int seconds) {
+  public static String getDurationInHoursMins(Context context, int seconds) {
     int hour = seconds / InSeconds.HOUR;
     int minutes = (seconds % InSeconds.HOUR) / InSeconds.MINUTE;
     String time = "";
-    return getHrsAndMinsString(hour, minutes, time);
+    return getHrsAndMinsString(context, hour, minutes, time);
   }
 
-  public static String getDurationWithDaysInIt(int seconds) {
+  public static String getDurationWithDaysInIt(Context context, int seconds) {
     int days = seconds / InSeconds.DAY;
     int hour = (seconds % InSeconds.DAY) / InSeconds.HOUR;
     int minutes = (seconds % InSeconds.HOUR) / InSeconds.MINUTE;
@@ -137,7 +141,7 @@ public class TimeUtils {
     } else if (days > 1) {
       time += days + " days";
     }
-    return getHrsAndMinsString(hour, minutes, time);
+    return getHrsAndMinsString(context, hour, minutes, time);
   }
 
   public static long getCurrentMillis() {

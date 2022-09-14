@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="str_mins">分</string>
+    <string name="str_hr">時間</string>
+    <string name="str_hrs">時間</string>
+    <string name="direction">方向</string>
+</resources>
