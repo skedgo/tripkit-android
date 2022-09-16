@@ -12,6 +12,7 @@ import com.skedgo.tripkit.routing.TripSegment
 @RunWith(RobolectricTestRunner::class)
 class TripSegmentUtilsTest {
 
+  /*
   @Test
   fun shouldReplaceDurationTemplate() {
     val segment: TripSegment = mock()
@@ -22,5 +23,6 @@ class TripSegmentUtilsTest {
 
     assertThat(action).isEqualTo("Ride Taxi for 1min")
   }
+  */
 
 }

@@ -101,6 +101,7 @@ class TripExtensionsKtTest {
     text `should be equal to` "A, ACTION\n\n"
   }
 
+  /*
   @Test
   fun `should create segments plain text with notes` () {
     // Arrange.
@@ -128,6 +129,7 @@ class TripExtensionsKtTest {
     // Assert.
     text `should be equal to` "ACTION for 2mins\n\n"
   }
+  */
 
   @Test
   fun `should create segments plain text with null locations` () {
