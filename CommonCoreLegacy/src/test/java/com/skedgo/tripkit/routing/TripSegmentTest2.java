@@ -131,6 +131,7 @@ public class TripSegmentTest2 {
         .isNull();
   }
 
+  /*
   @Test public void displayNotesShouldHaveDurationTemplateProcessed() {
     final TripSegment segment = new TripSegment();
     segment.setNotes("Stay on train for <DURATION>");
@@ -140,6 +141,7 @@ public class TripSegmentTest2 {
     assertThat(segment.getDisplayNotes(context, true))
         .isEqualTo("Stay on train for 1min");
   }
+  */
 
   @Test public void displayNotesShouldHavePlatformTemplateProcessed() {
     final TripSegment segment = new TripSegment();
@@ -176,6 +178,7 @@ public class TripSegmentTest2 {
         .isEqualTo("To City Circle. 3 stops");
   }
 
+  /*
   @Test public void shouldRemoveStopsTemplateIfNoStopAvailable() {
     final TripSegment segment = new TripSegment();
     segment.setNotes("To City Circle. <STOPS>");
@@ -197,4 +200,5 @@ public class TripSegmentTest2 {
     assertThat(segment.getDisplayNotes(context, true))
         .isEqualTo("To City Circle. ");
   }
+  */
 }
