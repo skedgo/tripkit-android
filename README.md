@@ -50,7 +50,7 @@ An API key is necessary to use TripKit's services, such as A-2-B routing, and al
 
 We recommend to have an `Application` subclass. Next, in the `onCreate()` method, you can initiate following setup:
 
-for `< v1.23.0-dev`
+for `<= v1.23.0-dev`
 ```kotlin
 class App : Application() {
   override fun onCreate() {
@@ -67,7 +67,7 @@ class App : Application() {
 
 ```
 
-for `> v2.1.43`
+for `>= v2.1.43`
 ```kotlin
 class App : Application() {
   override fun onCreate() {
