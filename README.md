@@ -50,6 +50,7 @@ An API key is necessary to use TripKit's services, such as A-2-B routing, and al
 
 We recommend to have an `Application` subclass. Next, in the `onCreate()` method, you can initiate following setup:
 
+for `< v1.23.0-dev`
 ```kotlin
 class App : Application() {
   override fun onCreate() {
@@ -61,6 +62,31 @@ class App : Application() {
             .key { Key.ApiKey("YOUR_API_KEY") }
             .build()
     )
+  }
+}
+
+```
+
+for `> v2.1.43`
+```kotlin
+class App : Application() {
+  override fun onCreate() {
+    super.onCreate()
+    JodaTimeAndroid.init(this)
+    
+    TripKitConfigs.builder().context(this)
+            .debuggable(true)          
+            .key { key }
+            .build()
+
+	val httpClientModule = HttpClientModule(null, null, configs)
+
+	val tripKit = DaggerTripKit.builder()
+                .mainModule(MainModule(configs))
+                .httpClientModule(httpClientModule)
+                .build()
+
+    TripKit.initialize(this, tripKit)            
   }
 }
 
