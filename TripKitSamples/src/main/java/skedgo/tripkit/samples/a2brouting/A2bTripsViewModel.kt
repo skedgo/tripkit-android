@@ -40,15 +40,7 @@ class A2bTripsViewModel constructor(
           }
           setTimeTag(TimeTag.createForLeaveNow())
         }
-        routeService.routeAsync(query, object: TransportModeFilter {
-            override fun writeToParcel(p0: Parcel?, p1: Int) {
-
-            }
-
-            override fun describeContents(): Int {
-                return 0
-            }
-        })
+        routeService.routeAsync(query, SampleTransportModeFilter())
       }
       .observeOn(mainThread())
       .scan { previous, new -> previous + new }
@@ -58,8 +50,14 @@ class A2bTripsViewModel constructor(
       .map {
         Pair(it, items.calculateDiff(it))
       }
-      .doOnSubscribe { _isRefreshing.onNext(true) }
-      .doFinally { _isRefreshing.onNext(false) }
-      .doOnNext { items.update(it.first, it.second) }
+      .doOnSubscribe {
+          _isRefreshing.onNext(true)
+      }
+      .doFinally {
+          _isRefreshing.onNext(false)
+      }
+      .doOnNext {
+          items.update(it.first, it.second)
+      }
       .map { Unit }
 }

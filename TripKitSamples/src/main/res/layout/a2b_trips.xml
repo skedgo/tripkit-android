@@ -1,29 +1,45 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-  xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
-  <data>
+    <data>
 
-    <variable
-      name="viewModel"
-      type="skedgo.tripkit.samples.a2brouting.A2bTripsViewModel" />
-  </data>
+        <variable
+            name="viewModel"
+            type="skedgo.tripkit.samples.a2brouting.A2bTripsViewModel" />
+    </data>
 
-  <LinearLayout
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical">
-
-    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
-      android:id="@+id/progressLayout"
-      android:layout_width="match_parent"
-      android:layout_height="match_parent">
-
-      <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/tripsView"
+    <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        app:itemBinding="@{viewModel.itemBinding}"
-        app:items="@{viewModel.items}"/>
-    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
-  </LinearLayout>
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+                android:id="@+id/progressLayout"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/tripsView"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                    app:itemBinding="@{viewModel.itemBinding}"
+                    app:items="@{viewModel.items}" />
+
+            </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+
+        </LinearLayout>
+
+        <ProgressBar
+            android:id="@+id/progress"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:elevation="4dp" />
+
+    </FrameLayout>
 </layout>

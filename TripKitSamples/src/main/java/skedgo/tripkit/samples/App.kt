@@ -9,6 +9,7 @@ import com.skedgo.tripkit.*
 import com.skedgo.tripkit.BuildConfig
 import com.skedgo.tripkit.configuration.Key
 import com.skedgo.tripkit.configuration.Key.ApiKey
+import com.skedgo.tripkit.data.HttpClientCustomDataStore
 import net.danlew.android.joda.JodaTimeAndroid
 
 
@@ -29,6 +30,18 @@ class App : Application() {
 
             val httpClientModule = HttpClientModule(null, null, configs)
 
+            HttpClientCustomDataStore.apply {
+                init(this@App)
+                setCustomBaseUrl("https://www.samplecustombaseurl.com")
+                setCustomHeaders(
+                        mapOf(
+                                "CustomHeader1" to "CustomHeader1Value",
+                                "CustomHeader2" to "CustomHeader2Value",
+                                "CustomHeader3" to "CustomHeader3Value"
+                        )
+                )
+            }
+
             val tripKit = DaggerTripKit.builder()
                 .mainModule(MainModule(configs))
                 .httpClientModule(httpClientModule)
@@ -40,7 +53,7 @@ class App : Application() {
 
     }
 
-    fun buildTripKitConfig(context: Context, key: ApiKey?): Configs? {
+    private fun buildTripKitConfig(context: Context, key: ApiKey?): Configs? {
         val isDebuggable = 0 != (context.applicationInfo.flags
                 and ApplicationInfo.FLAG_DEBUGGABLE) || BuildConfig.DEBUG
         return TripKitConfigs.builder().context(context)
@@ -50,7 +63,7 @@ class App : Application() {
                     "UserTokenPreferences",
                     Context.MODE_PRIVATE
                 )
-                prefs.getString("userToken", "")!!
+                prefs.getString("userToken", "")
             }
             .key { key }
             .build()
