@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import com.skedgo.tripkit.common.model.Region;
+import com.skedgo.tripkit.data.HttpClientCustomDataStore;
 
 import java.util.List;
 
@@ -23,7 +24,8 @@ class AuthServiceImpl implements AuthService {
   public Observable<List<AuthProvider>> fetchProvidersByRegionAsync(@NonNull final Region region,
                                                                     @Nullable final String mode,
                                                                     final boolean bsb) {
-    return Observable.fromIterable(region.getURLs())
+    String customBaseUrl = HttpClientCustomDataStore.INSTANCE.getCustomBaseUrl();
+    return Observable.fromIterable(region.getURLs(customBaseUrl))
         .concatMapDelayError(new Function<String, Observable<? extends List<AuthProvider>>>() {
           @Override public Observable<? extends List<AuthProvider>> apply(String url) {
 

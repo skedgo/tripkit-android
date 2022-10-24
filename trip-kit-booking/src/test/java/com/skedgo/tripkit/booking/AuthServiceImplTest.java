@@ -32,7 +32,7 @@ public class AuthServiceImplTest {
 
   @Test public void delegateFetchingProviders() {
     final Region region = mock(Region.class);
-    when(region.getURLs()).thenReturn(new ArrayList<>(
+    when(region.getURLs(null)).thenReturn(new ArrayList<>(
         Collections.singletonList("https://tripgo.skedgo.com/satapp/")
     ));
     when(region.getName()).thenReturn("The_Ark");
@@ -46,7 +46,7 @@ public class AuthServiceImplTest {
 
   @Test public void fetchingProvidersByModeTest() {
     final Region region = mock(Region.class);
-    when(region.getURLs()).thenReturn(new ArrayList<>(
+    when(region.getURLs(null)).thenReturn(new ArrayList<>(
         Collections.singletonList("https://tripgo.skedgo.com/satapp/")
     ));
     when(region.getName()).thenReturn("The_Ark");

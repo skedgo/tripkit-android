@@ -8,6 +8,8 @@ import android.text.TextUtils;
 import com.google.gson.annotations.SerializedName;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
 
 public class Region implements Parcelable {
   public static final Creator<Region> CREATOR = new Creator<Region>() {
@@ -51,8 +53,11 @@ public class Region implements Parcelable {
   }
 
   @Nullable
-  public ArrayList<String> getURLs() {
-    return urls;
+  public ArrayList<String> getURLs(@Nullable String customUrl) {
+    if(customUrl != null)
+      return new ArrayList<String>(Collections.singletonList(customUrl));
+    else
+      return urls;
   }
 
   public void setURLs(final ArrayList<String> urls) {

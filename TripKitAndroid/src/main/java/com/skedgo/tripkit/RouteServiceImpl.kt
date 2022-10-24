@@ -15,6 +15,7 @@ import io.reactivex.Observable
 import com.skedgo.tripkit.a2brouting.FailoverA2bRoutingApi
 import com.skedgo.tripkit.a2brouting.RouteService
 import com.skedgo.tripkit.a2brouting.ToWeightingProfileString
+import com.skedgo.tripkit.data.HttpClientCustomDataStore
 import com.skedgo.tripkit.routing.TripGroup
 
 internal class RouteServiceImpl(
@@ -40,9 +41,8 @@ internal class RouteServiceImpl(
         return flatSubQueries(query, transportModeFilter)
                 .flatMap { subQuery ->
 
-
                     val region = subQuery.region
-                    val baseUrls = region!!.urLs
+                    val baseUrls = region!!.getURLs(HttpClientCustomDataStore.getCustomBaseUrl())
                     val modes = subQuery.transportModeIds
                     val excludeStops = subQuery.excludedStopCodes
                     val avoidModes = region.transportModeIds.orEmpty().map { it }.filter { transportModeFilter.avoidTransportMode(it) }
@@ -60,6 +60,7 @@ internal class RouteServiceImpl(
                 map["conc"] = true
             }
         }
+
 
         if (co2Preferences != null) {
             val co2Profile = co2Preferences.co2Profile

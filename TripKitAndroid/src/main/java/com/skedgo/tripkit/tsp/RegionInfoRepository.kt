@@ -1,6 +1,7 @@
 package com.skedgo.tripkit.tsp
 
 import com.skedgo.tripkit.common.model.Region
+import com.skedgo.tripkit.data.HttpClientCustomDataStore
 import com.skedgo.tripkit.data.tsp.RegionInfo
 import io.reactivex.Observable
 import javax.inject.Inject
@@ -15,7 +16,7 @@ open class RegionInfoRepository @Inject constructor(
       if (regionInfoMap.containsKey(region.name)) {
           Observable.just(regionInfoMap[region.name])
       } else {
-          regionInfoService.fetchRegionInfoAsync(region.urLs!!, region.name)
+          regionInfoService.fetchRegionInfoAsync(region.getURLs(HttpClientCustomDataStore.getCustomBaseUrl())!!, region.name)
                   .doOnNext { regionInfoMap[region.name!!] = it }
       }
 }
