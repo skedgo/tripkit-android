@@ -1,0 +1,111 @@
+{
+  "formatVersion": "1.1",
+  "component": {
+    "group": "com.skedgo.tripkit",
+    "module": "route-persistence",
+    "version": "2.1.43",
+    "attributes": {
+      "org.gradle.status": "release"
+    }
+  },
+  "createdBy": {
+    "gradle": {
+      "version": "6.5",
+      "buildId": "r2pgdtly2befbpju7basigddta"
+    }
+  },
+  "variants": [
+    {
+      "name": "runtime",
+      "attributes": {
+        "org.gradle.usage": "java-runtime"
+      },
+      "dependencies": [
+        {
+          "group": "com.skedgo.tripkit",
+          "module": "CommonCoreLegacy",
+          "version": {
+            "requires": "2.1.43"
+          }
+        },
+        {
+          "group": "com.skedgo.tripkit",
+          "module": "sqliteutils",
+          "version": {
+            "requires": "2.1.43"
+          }
+        },
+        {
+          "group": "androidx.appcompat",
+          "module": "appcompat",
+          "version": {
+            "requires": "1.2.0"
+          }
+        },
+        {
+          "group": "com.google.code.gson",
+          "module": "gson",
+          "version": {
+            "requires": "2.8.6"
+          }
+        },
+        {
+          "group": "androidx.annotation",
+          "module": "annotation",
+          "version": {
+            "requires": "1.1.0"
+          }
+        },
+        {
+          "group": "com.skedgo.tripkit",
+          "module": "TripKitDomain",
+          "version": {
+            "requires": "2.1.43"
+          }
+        },
+        {
+          "group": "org.jetbrains.kotlin",
+          "module": "kotlin-stdlib",
+          "version": {
+            "requires": "1.4.10"
+          }
+        },
+        {
+          "group": "io.reactivex.rxjava2",
+          "module": "rxjava",
+          "version": {
+            "requires": "2.2.3"
+          }
+        }
+      ],
+      "files": [
+        {
+          "name": "route-persistence-2.1.43.aar",
+          "url": "route-persistence-2.1.43.aar",
+          "size": 62861,
+          "sha512": "d591282d5a4ecc26f09c5b7f72c06d8747ef68f4ddd8c9f2fb03621e8490e3b8989279ada8e595fcd1fe7df7f063f1b77aecae63ca25cfc742dd044fdfe8e46a",
+          "sha256": "57454bef63d9c6d4faa9bdbb525cc62bad401aa5a744d60f9e2fd0ca058defd2",
+          "sha1": "b4ce4d46a88f5700b70be6a438ec4eb62eeba30c",
+          "md5": "3d5a0f7b32862f16a65319a607e99633"
+        }
+      ]
+    },
+    {
+      "name": "api",
+      "attributes": {
+        "org.gradle.usage": "java-api"
+      },
+      "files": [
+        {
+          "name": "route-persistence-2.1.43.aar",
+          "url": "route-persistence-2.1.43.aar",
+          "size": 62861,
+          "sha512": "d591282d5a4ecc26f09c5b7f72c06d8747ef68f4ddd8c9f2fb03621e8490e3b8989279ada8e595fcd1fe7df7f063f1b77aecae63ca25cfc742dd044fdfe8e46a",
+          "sha256": "57454bef63d9c6d4faa9bdbb525cc62bad401aa5a744d60f9e2fd0ca058defd2",
+          "sha1": "b4ce4d46a88f5700b70be6a438ec4eb62eeba30c",
+          "md5": "3d5a0f7b32862f16a65319a607e99633"
+        }
+      ]
+    }
+  ]
+}

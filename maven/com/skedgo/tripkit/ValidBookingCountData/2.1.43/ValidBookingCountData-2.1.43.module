@@ -1,0 +1,161 @@
+{
+  "formatVersion": "1.1",
+  "component": {
+    "group": "com.skedgo.tripkit",
+    "module": "ValidBookingCountData",
+    "version": "2.1.43",
+    "attributes": {
+      "org.gradle.status": "release"
+    }
+  },
+  "createdBy": {
+    "gradle": {
+      "version": "6.5",
+      "buildId": "k5sfpeogojgxjochk7gdliafa4"
+    }
+  },
+  "variants": [
+    {
+      "name": "runtime",
+      "attributes": {
+        "org.gradle.usage": "java-runtime"
+      },
+      "dependencies": [
+        {
+          "group": "io.reactivex.rxjava2",
+          "module": "rxjava",
+          "version": {
+            "requires": "2.2.3"
+          }
+        },
+        {
+          "group": "com.squareup.retrofit2",
+          "module": "retrofit",
+          "version": {
+            "requires": "2.8.1"
+          }
+        },
+        {
+          "group": "com.squareup.retrofit2",
+          "module": "converter-gson",
+          "version": {
+            "requires": "2.8.1"
+          }
+        },
+        {
+          "group": "com.squareup.retrofit2",
+          "module": "adapter-rxjava2",
+          "version": {
+            "requires": "2.8.1"
+          }
+        },
+        {
+          "group": "com.google.code.gson",
+          "module": "gson",
+          "version": {
+            "requires": "2.8.6"
+          }
+        },
+        {
+          "group": "com.google.dagger",
+          "module": "dagger",
+          "version": {
+            "requires": "2.24"
+          }
+        },
+        {
+          "group": "org.immutables",
+          "module": "gson",
+          "version": {
+            "requires": "2.8.2"
+          }
+        },
+        {
+          "group": "org.jetbrains.kotlin",
+          "module": "kotlin-stdlib",
+          "version": {
+            "requires": "1.4.10"
+          }
+        },
+        {
+          "group": "com.skedgo.tripkit",
+          "module": "TripKitDomain",
+          "version": {
+            "requires": "2.1.43"
+          }
+        },
+        {
+          "group": "com.skedgo.tripkit",
+          "module": "ValidBookingCountDomain",
+          "version": {
+            "requires": "2.1.43"
+          }
+        }
+      ],
+      "files": [
+        {
+          "name": "ValidBookingCountData-2.1.43-sources.jar",
+          "url": "ValidBookingCountData-2.1.43-sources.jar",
+          "size": 3124,
+          "sha512": "a0f1b72be74d8bd2bd85155f79f9587933698a500568023b3f25a0edc6b8ec3f532a1d0598c604cb9d2c38acbf630005a6de7d33f2265d182c29200a722d6384",
+          "sha256": "a9701a9bc7b5efef275c676b64068523b9dba695f5fbaa43aa8e72721f273431",
+          "sha1": "45b9158763f8c1c1ca7f5cbbd40b19d1097d0615",
+          "md5": "a7a3713b6749b2f40af8de5d2f0b547d"
+        },
+        {
+          "name": "ValidBookingCountData-2.1.43-javadoc.jar",
+          "url": "ValidBookingCountData-2.1.43-javadoc.jar",
+          "size": 261,
+          "sha512": "928ef7d54c4082b5a5e450165c10142e712dd2df86ffc10e424bcfc145a08c97c025298993f22ce12287e9c622bcdd639761a7103277345eadc4df9ed0174d38",
+          "sha256": "978cf23614b2d5d53b2cdfa0f94adc8641838af8bfdda4792bcab111329cc6eb",
+          "sha1": "ea85a94a4b764e963fe13c7c19c79ce7bfbd5b0d",
+          "md5": "79a814ea52ca8f87f628de023fbb9141"
+        },
+        {
+          "name": "ValidBookingCountData-2.1.43.aar",
+          "url": "ValidBookingCountData-2.1.43.aar",
+          "size": 17662,
+          "sha512": "6254c0c644e5ec887f8f5a933410eb0d4a17dcd9370efbd44b197ed76d5ce8192df73132c04821e924354e6740b003646bfdfed2435407fd351d374ffedbcbe8",
+          "sha256": "6670c5d97838d00ae340d5254be1755d707f7fa097441aa2227fe868a4b96c5c",
+          "sha1": "d84401ded23fc7c2d50b8f932a9a277b110b2aed",
+          "md5": "4e3dfe433511adb390fc2b50327edd69"
+        }
+      ]
+    },
+    {
+      "name": "api",
+      "attributes": {
+        "org.gradle.usage": "java-api"
+      },
+      "files": [
+        {
+          "name": "ValidBookingCountData-2.1.43-sources.jar",
+          "url": "ValidBookingCountData-2.1.43-sources.jar",
+          "size": 3124,
+          "sha512": "a0f1b72be74d8bd2bd85155f79f9587933698a500568023b3f25a0edc6b8ec3f532a1d0598c604cb9d2c38acbf630005a6de7d33f2265d182c29200a722d6384",
+          "sha256": "a9701a9bc7b5efef275c676b64068523b9dba695f5fbaa43aa8e72721f273431",
+          "sha1": "45b9158763f8c1c1ca7f5cbbd40b19d1097d0615",
+          "md5": "a7a3713b6749b2f40af8de5d2f0b547d"
+        },
+        {
+          "name": "ValidBookingCountData-2.1.43-javadoc.jar",
+          "url": "ValidBookingCountData-2.1.43-javadoc.jar",
+          "size": 261,
+          "sha512": "928ef7d54c4082b5a5e450165c10142e712dd2df86ffc10e424bcfc145a08c97c025298993f22ce12287e9c622bcdd639761a7103277345eadc4df9ed0174d38",
+          "sha256": "978cf23614b2d5d53b2cdfa0f94adc8641838af8bfdda4792bcab111329cc6eb",
+          "sha1": "ea85a94a4b764e963fe13c7c19c79ce7bfbd5b0d",
+          "md5": "79a814ea52ca8f87f628de023fbb9141"
+        },
+        {
+          "name": "ValidBookingCountData-2.1.43.aar",
+          "url": "ValidBookingCountData-2.1.43.aar",
+          "size": 17662,
+          "sha512": "6254c0c644e5ec887f8f5a933410eb0d4a17dcd9370efbd44b197ed76d5ce8192df73132c04821e924354e6740b003646bfdfed2435407fd351d374ffedbcbe8",
+          "sha256": "6670c5d97838d00ae340d5254be1755d707f7fa097441aa2227fe868a4b96c5c",
+          "sha1": "d84401ded23fc7c2d50b8f932a9a277b110b2aed",
+          "md5": "4e3dfe433511adb390fc2b50327edd69"
+        }
+      ]
+    }
+  ]
+}

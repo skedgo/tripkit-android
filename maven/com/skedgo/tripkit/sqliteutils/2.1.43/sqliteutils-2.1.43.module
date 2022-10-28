@@ -1,0 +1,69 @@
+{
+  "formatVersion": "1.1",
+  "component": {
+    "group": "com.skedgo.tripkit",
+    "module": "sqliteutils",
+    "version": "2.1.43",
+    "attributes": {
+      "org.gradle.status": "release"
+    }
+  },
+  "createdBy": {
+    "gradle": {
+      "version": "6.5",
+      "buildId": "gu3yf6jypbgufk3rtvbpfmnybi"
+    }
+  },
+  "variants": [
+    {
+      "name": "runtime",
+      "attributes": {
+        "org.gradle.usage": "java-runtime"
+      },
+      "dependencies": [
+        {
+          "group": "com.android.support",
+          "module": "support-annotations",
+          "version": {
+            "requires": "28.0.0"
+          }
+        },
+        {
+          "group": "io.reactivex.rxjava2",
+          "module": "rxjava",
+          "version": {
+            "requires": "2.2.3"
+          }
+        }
+      ],
+      "files": [
+        {
+          "name": "sqliteutils-2.1.43.aar",
+          "url": "sqliteutils-2.1.43.aar",
+          "size": 6509,
+          "sha512": "857c22d71f1e0236e16d9a4c07c5c66acf6f7af9e55a3f8cfff3067028ac68c4516cd765fa90c542f1ecec6b518fc1b05a10227c6d63e117b9e1effc2b35977a",
+          "sha256": "c428c3da55202f6058164dc3aa00769ed3b56c5fc9d5a9148ac1224203617f5e",
+          "sha1": "991dcb7767d58eecf3959743b37b49cfe5b8454c",
+          "md5": "58c8e6530ff1806379be082ec773ee07"
+        }
+      ]
+    },
+    {
+      "name": "api",
+      "attributes": {
+        "org.gradle.usage": "java-api"
+      },
+      "files": [
+        {
+          "name": "sqliteutils-2.1.43.aar",
+          "url": "sqliteutils-2.1.43.aar",
+          "size": 6509,
+          "sha512": "857c22d71f1e0236e16d9a4c07c5c66acf6f7af9e55a3f8cfff3067028ac68c4516cd765fa90c542f1ecec6b518fc1b05a10227c6d63e117b9e1effc2b35977a",
+          "sha256": "c428c3da55202f6058164dc3aa00769ed3b56c5fc9d5a9148ac1224203617f5e",
+          "sha1": "991dcb7767d58eecf3959743b37b49cfe5b8454c",
+          "md5": "58c8e6530ff1806379be082ec773ee07"
+        }
+      ]
+    }
+  ]
+}

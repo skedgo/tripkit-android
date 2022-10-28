@@ -1,0 +1,118 @@
+{
+  "formatVersion": "1.1",
+  "component": {
+    "group": "com.skedgo.tripkit",
+    "module": "TripKitAndroidUIDomain",
+    "version": "2.1.43",
+    "attributes": {
+      "org.gradle.status": "release"
+    }
+  },
+  "createdBy": {
+    "gradle": {
+      "version": "6.5",
+      "buildId": "fn6ymurvx5bfdj62fleooolyte"
+    }
+  },
+  "variants": [
+    {
+      "name": "runtime",
+      "attributes": {
+        "org.gradle.usage": "java-runtime"
+      },
+      "dependencies": [
+        {
+          "group": "org.jetbrains.kotlin",
+          "module": "kotlin-android-extensions-runtime",
+          "version": {
+            "requires": "1.4.10"
+          }
+        },
+        {
+          "group": "org.jetbrains.kotlin",
+          "module": "kotlin-stdlib",
+          "version": {
+            "requires": "1.4.10"
+          }
+        },
+        {
+          "group": "io.reactivex.rxjava2",
+          "module": "rxjava",
+          "version": {
+            "requires": "2.2.3"
+          }
+        },
+        {
+          "group": "com.jakewharton.rxrelay2",
+          "module": "rxrelay",
+          "version": {
+            "requires": "2.1.0"
+          }
+        },
+        {
+          "group": "net.danlew",
+          "module": "android.joda",
+          "version": {
+            "requires": "2.10.3"
+          }
+        },
+        {
+          "group": "com.google.dagger",
+          "module": "dagger",
+          "version": {
+            "requires": "2.24"
+          }
+        },
+        {
+          "group": "com.jakewharton.timber",
+          "module": "timber",
+          "version": {
+            "requires": "4.5.1"
+          }
+        },
+        {
+          "group": "com.gojuno.koptional",
+          "module": "koptional",
+          "version": {
+            "requires": "1.2.0"
+          }
+        },
+        {
+          "group": "com.skedgo.tripkit",
+          "module": "TripKitAndroid",
+          "version": {
+            "requires": "2.1.43"
+          }
+        }
+      ],
+      "files": [
+        {
+          "name": "TripKitAndroidUIDomain-2.1.43.aar",
+          "url": "TripKitAndroidUIDomain-2.1.43.aar",
+          "size": 167658,
+          "sha512": "7e94bf68a44734e2ddd8307bb8f59018a306011ac6a4e546c5036fbde123cf57d7a28bf6f280c591742497f66fb9401bffe39cb573b6f710b2a0e0727ed07180",
+          "sha256": "1bbc5d6e5457ec606904961a16e0271c2f5bc551ab75b95f0d62991ba6a25228",
+          "sha1": "2e175a0a2df139493de398e75789a35a8a8557aa",
+          "md5": "0d1d0384bec5fc6b990a3131238d9203"
+        }
+      ]
+    },
+    {
+      "name": "api",
+      "attributes": {
+        "org.gradle.usage": "java-api"
+      },
+      "files": [
+        {
+          "name": "TripKitAndroidUIDomain-2.1.43.aar",
+          "url": "TripKitAndroidUIDomain-2.1.43.aar",
+          "size": 167658,
+          "sha512": "7e94bf68a44734e2ddd8307bb8f59018a306011ac6a4e546c5036fbde123cf57d7a28bf6f280c591742497f66fb9401bffe39cb573b6f710b2a0e0727ed07180",
+          "sha256": "1bbc5d6e5457ec606904961a16e0271c2f5bc551ab75b95f0d62991ba6a25228",
+          "sha1": "2e175a0a2df139493de398e75789a35a8a8557aa",
+          "md5": "0d1d0384bec5fc6b990a3131238d9203"
+        }
+      ]
+    }
+  ]
+}

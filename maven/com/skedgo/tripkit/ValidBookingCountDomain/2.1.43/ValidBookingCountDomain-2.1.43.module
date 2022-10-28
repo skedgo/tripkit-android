@@ -1,0 +1,88 @@
+{
+  "formatVersion": "1.1",
+  "component": {
+    "group": "com.skedgo.tripkit",
+    "module": "ValidBookingCountDomain",
+    "version": "2.1.43",
+    "attributes": {
+      "org.gradle.status": "release"
+    }
+  },
+  "createdBy": {
+    "gradle": {
+      "version": "6.5",
+      "buildId": "2hixiit445fg7nzwewvwde2pau"
+    }
+  },
+  "variants": [
+    {
+      "name": "apiElements",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.jvm.version": 7,
+        "org.gradle.libraryelements": "jar",
+        "org.gradle.usage": "java-api",
+        "org.jetbrains.kotlin.localToProject": "public",
+        "org.jetbrains.kotlin.platform.type": "jvm"
+      },
+      "files": [
+        {
+          "name": "ValidBookingCountDomain-2.1.43.jar",
+          "url": "ValidBookingCountDomain-2.1.43.jar",
+          "size": 6971,
+          "sha512": "40cada4f34702ee873176efad3661b673aadc634f789d78e656da2e5727ed3c9c3a5d5ac57032d184c756f05fed32d456e88009163388c819ed64ed3a2acce31",
+          "sha256": "59c636b5c2fb8ddc09a72b1d83dfd9786b108e95e9fd3974965ed9e849b790a8",
+          "sha1": "fa7aa8621d7fbff559aa816a9fe6ae1baba6343f",
+          "md5": "fa77401639de320a9a4cfa4b8775040b"
+        }
+      ]
+    },
+    {
+      "name": "runtimeElements",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.jvm.version": 7,
+        "org.gradle.libraryelements": "jar",
+        "org.gradle.usage": "java-runtime",
+        "org.jetbrains.kotlin.localToProject": "public",
+        "org.jetbrains.kotlin.platform.type": "jvm"
+      },
+      "dependencies": [
+        {
+          "group": "org.jetbrains.kotlin",
+          "module": "kotlin-stdlib",
+          "version": {
+            "requires": "1.4.10"
+          }
+        },
+        {
+          "group": "io.reactivex.rxjava2",
+          "module": "rxjava",
+          "version": {
+            "requires": "2.2.3"
+          }
+        },
+        {
+          "group": "com.google.dagger",
+          "module": "dagger",
+          "version": {
+            "requires": "2.24"
+          }
+        }
+      ],
+      "files": [
+        {
+          "name": "ValidBookingCountDomain-2.1.43.jar",
+          "url": "ValidBookingCountDomain-2.1.43.jar",
+          "size": 6971,
+          "sha512": "40cada4f34702ee873176efad3661b673aadc634f789d78e656da2e5727ed3c9c3a5d5ac57032d184c756f05fed32d456e88009163388c819ed64ed3a2acce31",
+          "sha256": "59c636b5c2fb8ddc09a72b1d83dfd9786b108e95e9fd3974965ed9e849b790a8",
+          "sha1": "fa7aa8621d7fbff559aa816a9fe6ae1baba6343f",
+          "md5": "fa77401639de320a9a4cfa4b8775040b"
+        }
+      ]
+    }
+  ]
+}

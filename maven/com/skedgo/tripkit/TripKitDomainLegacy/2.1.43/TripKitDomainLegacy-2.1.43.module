@@ -1,0 +1,133 @@
+{
+  "formatVersion": "1.1",
+  "component": {
+    "group": "com.skedgo.tripkit",
+    "module": "TripKitDomainLegacy",
+    "version": "2.1.43",
+    "attributes": {
+      "org.gradle.status": "release"
+    }
+  },
+  "createdBy": {
+    "gradle": {
+      "version": "6.5",
+      "buildId": "ln7nzorktbc4bjmuueictqyage"
+    }
+  },
+  "variants": [
+    {
+      "name": "runtime",
+      "attributes": {
+        "org.gradle.usage": "java-runtime"
+      },
+      "dependencies": [
+        {
+          "group": "com.skedgo.tripkit",
+          "module": "TripKitDomain",
+          "version": {
+            "requires": "2.1.43"
+          }
+        },
+        {
+          "group": "com.skedgo.tripkit",
+          "module": "CommonCoreLegacy",
+          "version": {
+            "requires": "2.1.43"
+          }
+        },
+        {
+          "group": "com.google.dagger",
+          "module": "dagger",
+          "version": {
+            "requires": "2.24"
+          }
+        },
+        {
+          "group": "org.immutables",
+          "module": "gson",
+          "version": {
+            "requires": "2.8.2"
+          }
+        },
+        {
+          "group": "org.jetbrains.kotlin",
+          "module": "kotlin-stdlib",
+          "version": {
+            "requires": "1.4.10"
+          }
+        },
+        {
+          "group": "io.reactivex.rxjava2",
+          "module": "rxjava",
+          "version": {
+            "requires": "2.2.3"
+          }
+        }
+      ],
+      "files": [
+        {
+          "name": "TripKitDomainLegacy-2.1.43-sources.jar",
+          "url": "TripKitDomainLegacy-2.1.43-sources.jar",
+          "size": 1023,
+          "sha512": "7d36cd49b40cfa7f02421eaa978bfcf037fd8aec57e43de2232bbd7f958171924b1535d1b94c6b39ffc0d7752088129c6850d5b976f7000b1d14f2117aeb2e20",
+          "sha256": "6e4f0239853822ca0ddd375271dd5b1663313992012844bf90f4b1432e7825eb",
+          "sha1": "02626b99c230d124e62a8502e1b080625575fa4e",
+          "md5": "7580ce14989f521b07129e1b6220bffe"
+        },
+        {
+          "name": "TripKitDomainLegacy-2.1.43-javadoc.jar",
+          "url": "TripKitDomainLegacy-2.1.43-javadoc.jar",
+          "size": 261,
+          "sha512": "0301a13cd96f5ebc0c4a538dabde067861e5263cd518936b4309947518c81c6412107a795f4524c20a829a2c03e733bdc9e8cba310512d0f1ec9743d6dcb1a8a",
+          "sha256": "a87b8309f0138e32dfa1dd32b60d928cc2275baa80dd691e0467511336d660cc",
+          "sha1": "ee55fc3000e8546903c4a5eafd7e21b425fc551e",
+          "md5": "c270ef3fa60d7ecc8f393d49c4c1711d"
+        },
+        {
+          "name": "TripKitDomainLegacy-2.1.43.aar",
+          "url": "TripKitDomainLegacy-2.1.43.aar",
+          "size": 6123,
+          "sha512": "ef9ca84f4ee501c9cfbb2f4cf84c1f7d6d742481488d8fc38dbb20498bcf250b2f1fcbd31afea3cd35b081edb4035145143884e2d2d76ad245f56d53da7eb372",
+          "sha256": "4f468e697690f066c22b37dee08f75612cdb3256ca94246876ed982e1e4e7f78",
+          "sha1": "da942604357ad63c8b57f0758d392c3df5c8f9e0",
+          "md5": "c0107b74816cd972660e2f5f1a61b0bf"
+        }
+      ]
+    },
+    {
+      "name": "api",
+      "attributes": {
+        "org.gradle.usage": "java-api"
+      },
+      "files": [
+        {
+          "name": "TripKitDomainLegacy-2.1.43-sources.jar",
+          "url": "TripKitDomainLegacy-2.1.43-sources.jar",
+          "size": 1023,
+          "sha512": "7d36cd49b40cfa7f02421eaa978bfcf037fd8aec57e43de2232bbd7f958171924b1535d1b94c6b39ffc0d7752088129c6850d5b976f7000b1d14f2117aeb2e20",
+          "sha256": "6e4f0239853822ca0ddd375271dd5b1663313992012844bf90f4b1432e7825eb",
+          "sha1": "02626b99c230d124e62a8502e1b080625575fa4e",
+          "md5": "7580ce14989f521b07129e1b6220bffe"
+        },
+        {
+          "name": "TripKitDomainLegacy-2.1.43-javadoc.jar",
+          "url": "TripKitDomainLegacy-2.1.43-javadoc.jar",
+          "size": 261,
+          "sha512": "0301a13cd96f5ebc0c4a538dabde067861e5263cd518936b4309947518c81c6412107a795f4524c20a829a2c03e733bdc9e8cba310512d0f1ec9743d6dcb1a8a",
+          "sha256": "a87b8309f0138e32dfa1dd32b60d928cc2275baa80dd691e0467511336d660cc",
+          "sha1": "ee55fc3000e8546903c4a5eafd7e21b425fc551e",
+          "md5": "c270ef3fa60d7ecc8f393d49c4c1711d"
+        },
+        {
+          "name": "TripKitDomainLegacy-2.1.43.aar",
+          "url": "TripKitDomainLegacy-2.1.43.aar",
+          "size": 6123,
+          "sha512": "ef9ca84f4ee501c9cfbb2f4cf84c1f7d6d742481488d8fc38dbb20498bcf250b2f1fcbd31afea3cd35b081edb4035145143884e2d2d76ad245f56d53da7eb372",
+          "sha256": "4f468e697690f066c22b37dee08f75612cdb3256ca94246876ed982e1e4e7f78",
+          "sha1": "da942604357ad63c8b57f0758d392c3df5c8f9e0",
+          "md5": "c0107b74816cd972660e2f5f1a61b0bf"
+        }
+      ]
+    }
+  ]
+}
