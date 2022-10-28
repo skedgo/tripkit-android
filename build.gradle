@@ -26,8 +26,8 @@ ext {
     tripkitGroup = "com.skedgo.tripkit"
     tripkitVersion = "2.1.43"
     publishMavenUrl = "https://www.myget.org/F/skedgo/maven"
-    publishMavenUsername = "mbarringer"
-    publishMavenToken = "568c7266-7ea8-484b-8c58-cc9a69e09809"
+    publishMavenUsername = "skedgo"
+    publishMavenToken = "9b1742e0-6370-45bc-b0b5-0348b01031c2"
 }
 
 allprojects {
