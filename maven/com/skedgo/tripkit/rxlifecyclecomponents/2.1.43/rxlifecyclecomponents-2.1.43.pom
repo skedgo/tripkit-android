@@ -22,6 +22,7 @@
       <artifactId>rxlifecycle</artifactId>
       <version>3.0.0</version>
       <scope>compile</scope>
+      <type>aar</type>
     </dependency>
   </dependencies>
 </project>

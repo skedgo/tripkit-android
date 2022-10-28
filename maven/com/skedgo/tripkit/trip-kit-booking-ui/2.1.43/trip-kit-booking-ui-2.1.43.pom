@@ -22,18 +22,21 @@
       <artifactId>databinding-common</artifactId>
       <version>4.0.1</version>
       <scope>compile</scope>
+      <type>aar</type>
     </dependency>
     <dependency>
       <groupId>androidx.databinding</groupId>
       <artifactId>databinding-runtime</artifactId>
       <version>4.0.1</version>
       <scope>compile</scope>
+      <type>aar</type>
     </dependency>
     <dependency>
       <groupId>androidx.databinding</groupId>
       <artifactId>databinding-adapters</artifactId>
       <version>4.0.1</version>
       <scope>compile</scope>
+      <type>aar</type>
     </dependency>
     <dependency>
       <groupId>com.skedgo.tripkit</groupId>

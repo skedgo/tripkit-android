@@ -22,54 +22,63 @@
       <artifactId>rxdogtag</artifactId>
       <version>0.3.0</version>
       <scope>compile</scope>
+      <type>aar</type>
     </dependency>
     <dependency>
       <groupId>androidx.cardview</groupId>
       <artifactId>cardview</artifactId>
       <version>1.0.0</version>
       <scope>compile</scope>
+      <type>aar</type>
     </dependency>
     <dependency>
       <groupId>com.skedgo.tripkit</groupId>
       <artifactId>trip-kit-booking</artifactId>
       <version>2.1.43</version>
       <scope>compile</scope>
+      <type>aar</type>
     </dependency>
     <dependency>
       <groupId>com.skedgo.tripkit</groupId>
       <artifactId>TripKitAndroid</artifactId>
       <version>2.1.43</version>
       <scope>compile</scope>
+      <type>aar</type>
     </dependency>
     <dependency>
       <groupId>com.skedgo.tripkit</groupId>
       <artifactId>TripKitAndroidUIData</artifactId>
       <version>2.1.43</version>
       <scope>compile</scope>
+      <type>aar</type>
     </dependency>
     <dependency>
       <groupId>com.skedgo.tripkit</groupId>
       <artifactId>TripKitAndroidUIDomain</artifactId>
       <version>2.1.43</version>
       <scope>compile</scope>
+      <type>aar</type>
     </dependency>
     <dependency>
       <groupId>androidx.databinding</groupId>
       <artifactId>databinding-common</artifactId>
       <version>4.0.1</version>
       <scope>compile</scope>
+      <type>aar</type>
     </dependency>
     <dependency>
       <groupId>androidx.databinding</groupId>
       <artifactId>databinding-runtime</artifactId>
       <version>4.0.1</version>
       <scope>compile</scope>
+      <type>aar</type>
     </dependency>
     <dependency>
       <groupId>androidx.databinding</groupId>
       <artifactId>databinding-adapters</artifactId>
       <version>4.0.1</version>
       <scope>compile</scope>
+      <type>aar</type>
     </dependency>
     <dependency>
       <groupId>org.jetbrains.kotlin</groupId>

@@ -22,12 +22,14 @@
       <artifactId>route-persistence</artifactId>
       <version>2.1.43</version>
       <scope>compile</scope>
+      <type>aar</type>
     </dependency>
     <dependency>
       <groupId>com.skedgo.tripkit</groupId>
       <artifactId>sqliteutils</artifactId>
       <version>2.1.43</version>
       <scope>compile</scope>
+      <type>aar</type>
     </dependency>
     <dependency>
       <groupId>com.github.skedgo</groupId>

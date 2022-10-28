@@ -22,30 +22,35 @@
       <artifactId>CommonCoreLegacy</artifactId>
       <version>2.1.43</version>
       <scope>compile</scope>
+      <type>aar</type>
     </dependency>
     <dependency>
       <groupId>com.skedgo.tripkit</groupId>
       <artifactId>TripKitDomain</artifactId>
       <version>2.1.43</version>
       <scope>compile</scope>
+      <type>aar</type>
     </dependency>
     <dependency>
       <groupId>com.skedgo.tripkit</groupId>
       <artifactId>TripKitDomainLegacy</artifactId>
       <version>2.1.43</version>
       <scope>compile</scope>
+      <type>aar</type>
     </dependency>
     <dependency>
       <groupId>com.skedgo.tripkit</groupId>
       <artifactId>TripKitData</artifactId>
       <version>2.1.43</version>
       <scope>compile</scope>
+      <type>aar</type>
     </dependency>
     <dependency>
       <groupId>com.skedgo.tripkit</groupId>
       <artifactId>sqliteutils</artifactId>
       <version>2.1.43</version>
       <scope>compile</scope>
+      <type>aar</type>
     </dependency>
     <dependency>
       <groupId>org.jetbrains.kotlin</groupId>
