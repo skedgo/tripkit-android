@@ -11,7 +11,7 @@
   "createdBy": {
     "gradle": {
       "version": "6.5",
-      "buildId": "ln7nzorktbc4bjmuueictqyage"
+      "buildId": "pv6a4wu4zbe3teydlubhqg6p6q"
     }
   },
   "variants": [
@@ -66,22 +66,13 @@
       ],
       "files": [
         {
-          "name": "TripKitDomainLegacy-2.1.43-sources.jar",
-          "url": "TripKitDomainLegacy-2.1.43-sources.jar",
-          "size": 1023,
-          "sha512": "7d36cd49b40cfa7f02421eaa978bfcf037fd8aec57e43de2232bbd7f958171924b1535d1b94c6b39ffc0d7752088129c6850d5b976f7000b1d14f2117aeb2e20",
-          "sha256": "6e4f0239853822ca0ddd375271dd5b1663313992012844bf90f4b1432e7825eb",
-          "sha1": "02626b99c230d124e62a8502e1b080625575fa4e",
-          "md5": "7580ce14989f521b07129e1b6220bffe"
-        },
-        {
           "name": "TripKitDomainLegacy-2.1.43-javadoc.jar",
           "url": "TripKitDomainLegacy-2.1.43-javadoc.jar",
           "size": 261,
-          "sha512": "0301a13cd96f5ebc0c4a538dabde067861e5263cd518936b4309947518c81c6412107a795f4524c20a829a2c03e733bdc9e8cba310512d0f1ec9743d6dcb1a8a",
-          "sha256": "a87b8309f0138e32dfa1dd32b60d928cc2275baa80dd691e0467511336d660cc",
-          "sha1": "ee55fc3000e8546903c4a5eafd7e21b425fc551e",
-          "md5": "c270ef3fa60d7ecc8f393d49c4c1711d"
+          "sha512": "09433c9697dd7f679a3a084cd006e3f115fefec7df2858a295b9c227a796d95965a9ace92a9ed4177b2243437130c36d508d00a095a5dead1ed897c7fbb00df2",
+          "sha256": "856b7d23b2390c47ca28d66907f1cd5b3f1426104dab82dbc55ec05bc23e899a",
+          "sha1": "50a32c684d6470c3bdeb0f20ec10fdc8bd5a02c3",
+          "md5": "6bdec6ef5b53785d91dad287d45412f6"
         },
         {
           "name": "TripKitDomainLegacy-2.1.43.aar",
@@ -91,6 +82,15 @@
           "sha256": "4f468e697690f066c22b37dee08f75612cdb3256ca94246876ed982e1e4e7f78",
           "sha1": "da942604357ad63c8b57f0758d392c3df5c8f9e0",
           "md5": "c0107b74816cd972660e2f5f1a61b0bf"
+        },
+        {
+          "name": "TripKitDomainLegacy-2.1.43-sources.jar",
+          "url": "TripKitDomainLegacy-2.1.43-sources.jar",
+          "size": 1023,
+          "sha512": "619f85c7dcd4d4ad916c673785a06e6af596b1b87bc5fa3ebdb23ccc68ac533957c29652ed5eca97fd853e6efdca7433c5f50faa824a6015f904976f3ac03c7b",
+          "sha256": "943c9a74ce7e3f2e8cb25348c7f72f12874fb889800a4d116329a0fd2e0e9934",
+          "sha1": "d3bacb653fc3e5d794adccdd5dc05758605972a8",
+          "md5": "b3c66d1999eb0b9c2113e36aad1b51a7"
         }
       ]
     },
@@ -101,22 +101,13 @@
       },
       "files": [
         {
-          "name": "TripKitDomainLegacy-2.1.43-sources.jar",
-          "url": "TripKitDomainLegacy-2.1.43-sources.jar",
-          "size": 1023,
-          "sha512": "7d36cd49b40cfa7f02421eaa978bfcf037fd8aec57e43de2232bbd7f958171924b1535d1b94c6b39ffc0d7752088129c6850d5b976f7000b1d14f2117aeb2e20",
-          "sha256": "6e4f0239853822ca0ddd375271dd5b1663313992012844bf90f4b1432e7825eb",
-          "sha1": "02626b99c230d124e62a8502e1b080625575fa4e",
-          "md5": "7580ce14989f521b07129e1b6220bffe"
-        },
-        {
           "name": "TripKitDomainLegacy-2.1.43-javadoc.jar",
           "url": "TripKitDomainLegacy-2.1.43-javadoc.jar",
           "size": 261,
-          "sha512": "0301a13cd96f5ebc0c4a538dabde067861e5263cd518936b4309947518c81c6412107a795f4524c20a829a2c03e733bdc9e8cba310512d0f1ec9743d6dcb1a8a",
-          "sha256": "a87b8309f0138e32dfa1dd32b60d928cc2275baa80dd691e0467511336d660cc",
-          "sha1": "ee55fc3000e8546903c4a5eafd7e21b425fc551e",
-          "md5": "c270ef3fa60d7ecc8f393d49c4c1711d"
+          "sha512": "09433c9697dd7f679a3a084cd006e3f115fefec7df2858a295b9c227a796d95965a9ace92a9ed4177b2243437130c36d508d00a095a5dead1ed897c7fbb00df2",
+          "sha256": "856b7d23b2390c47ca28d66907f1cd5b3f1426104dab82dbc55ec05bc23e899a",
+          "sha1": "50a32c684d6470c3bdeb0f20ec10fdc8bd5a02c3",
+          "md5": "6bdec6ef5b53785d91dad287d45412f6"
         },
         {
           "name": "TripKitDomainLegacy-2.1.43.aar",
@@ -126,6 +117,15 @@
           "sha256": "4f468e697690f066c22b37dee08f75612cdb3256ca94246876ed982e1e4e7f78",
           "sha1": "da942604357ad63c8b57f0758d392c3df5c8f9e0",
           "md5": "c0107b74816cd972660e2f5f1a61b0bf"
+        },
+        {
+          "name": "TripKitDomainLegacy-2.1.43-sources.jar",
+          "url": "TripKitDomainLegacy-2.1.43-sources.jar",
+          "size": 1023,
+          "sha512": "619f85c7dcd4d4ad916c673785a06e6af596b1b87bc5fa3ebdb23ccc68ac533957c29652ed5eca97fd853e6efdca7433c5f50faa824a6015f904976f3ac03c7b",
+          "sha256": "943c9a74ce7e3f2e8cb25348c7f72f12874fb889800a4d116329a0fd2e0e9934",
+          "sha1": "d3bacb653fc3e5d794adccdd5dc05758605972a8",
+          "md5": "b3c66d1999eb0b9c2113e36aad1b51a7"
         }
       ]
     }

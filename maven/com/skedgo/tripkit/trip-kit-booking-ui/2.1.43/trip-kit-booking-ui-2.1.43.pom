@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd" xmlns="http://maven.apache.org/POM/4.0.0"
-    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <!-- This module was also published with a richer model, Gradle metadata,  -->
   <!-- which should be used instead. Do not delete the following line which  -->
   <!-- is to indicate to Gradle or any Gradle module metadata file consumer  -->
@@ -43,90 +42,105 @@
       <artifactId>TripKitAndroid</artifactId>
       <version>2.1.43</version>
       <scope>runtime</scope>
+      <type>aar</type>
     </dependency>
     <dependency>
       <groupId>com.skedgo.tripkit</groupId>
       <artifactId>CommonCoreLegacy</artifactId>
       <version>2.1.43</version>
       <scope>runtime</scope>
+      <type>aar</type>
     </dependency>
     <dependency>
       <groupId>com.skedgo.tripkit</groupId>
       <artifactId>trip-kit-booking</artifactId>
       <version>2.1.43</version>
       <scope>runtime</scope>
+      <type>aar</type>
     </dependency>
     <dependency>
       <groupId>uk.co.chrisjenx</groupId>
       <artifactId>calligraphy</artifactId>
       <version>2.3.0</version>
       <scope>runtime</scope>
+      <type>aar</type>
     </dependency>
     <dependency>
       <groupId>com.github.skedgo</groupId>
       <artifactId>robotos</artifactId>
       <version>v1.1</version>
       <scope>runtime</scope>
+      <type>aar</type>
     </dependency>
     <dependency>
       <groupId>com.google.dagger</groupId>
       <artifactId>dagger</artifactId>
       <version>2.24</version>
       <scope>runtime</scope>
+      <type>aar</type>
     </dependency>
     <dependency>
       <groupId>com.squareup.picasso</groupId>
       <artifactId>picasso</artifactId>
       <version>2.5.2</version>
       <scope>runtime</scope>
+      <type>aar</type>
     </dependency>
     <dependency>
       <groupId>com.jakewharton.picasso</groupId>
       <artifactId>picasso2-okhttp3-downloader</artifactId>
       <version>1.0.2</version>
       <scope>runtime</scope>
+      <type>aar</type>
     </dependency>
     <dependency>
       <groupId>me.tatarka.bindingcollectionadapter2</groupId>
       <artifactId>bindingcollectionadapter</artifactId>
       <version>4.0.0</version>
       <scope>runtime</scope>
+      <type>aar</type>
     </dependency>
     <dependency>
       <groupId>me.tatarka.bindingcollectionadapter2</groupId>
       <artifactId>bindingcollectionadapter-recyclerview</artifactId>
       <version>4.0.0</version>
       <scope>runtime</scope>
+      <type>aar</type>
     </dependency>
     <dependency>
       <groupId>com.skedgo.tripkit</groupId>
       <artifactId>rxlifecyclecomponents</artifactId>
       <version>2.1.43</version>
       <scope>runtime</scope>
+      <type>aar</type>
     </dependency>
     <dependency>
       <groupId>org.jetbrains.kotlin</groupId>
       <artifactId>kotlin-stdlib</artifactId>
       <version>1.4.10</version>
       <scope>runtime</scope>
+      <type>aar</type>
     </dependency>
     <dependency>
       <groupId>com.google.code.gson</groupId>
       <artifactId>gson</artifactId>
       <version>2.8.6</version>
       <scope>runtime</scope>
+      <type>aar</type>
     </dependency>
     <dependency>
       <groupId>io.reactivex.rxjava2</groupId>
       <artifactId>rxjava</artifactId>
       <version>2.2.3</version>
       <scope>runtime</scope>
+      <type>aar</type>
     </dependency>
     <dependency>
       <groupId>io.reactivex.rxjava2</groupId>
       <artifactId>rxandroid</artifactId>
       <version>2.1.0</version>
       <scope>runtime</scope>
+      <type>aar</type>
     </dependency>
   </dependencies>
 </project>

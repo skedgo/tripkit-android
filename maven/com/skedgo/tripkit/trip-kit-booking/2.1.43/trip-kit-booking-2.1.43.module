@@ -11,7 +11,7 @@
   "createdBy": {
     "gradle": {
       "version": "6.5",
-      "buildId": "kt3fgzjvorfvjhqi4f3ijd3ery"
+      "buildId": "pv6a4wu4zbe3teydlubhqg6p6q"
     }
   },
   "variants": [
@@ -118,19 +118,19 @@
           "name": "trip-kit-booking-2.1.43-javadoc.jar",
           "url": "trip-kit-booking-2.1.43-javadoc.jar",
           "size": 176744,
-          "sha512": "0d18ed1462f53b0fdb5e75f71f236c47bb6bcf763ee1e111cbd552075dd68fb344a423e81e2f7a559ebb39cabe0e98cfa05dc871ede7536213406d19d1d4381f",
-          "sha256": "8a0c19eb76e216c6e8e55d2021a270e14e03052d185a09439d9d6958f6e62029",
-          "sha1": "cbb11b4035c85ef876e0aca7bf1a14d97891a5bd",
-          "md5": "af2d957cbeb9c238268c890a40d8d1ab"
+          "sha512": "163144919192979e8c2d12310f8048097835a0fc95d9772b0e280d0c1a603b5f3b0285dbf94f12f00ce063366ef18a79dae9c00fe38b49f8db6ad6b61f1fd825",
+          "sha256": "b81dd0bffdf0f5c195c91d216a7f8d2371135b4ee0cd39f8ee0d1f42575a5a01",
+          "sha1": "145964b7099c9cc52747efb7c93fde8e6e13f367",
+          "md5": "92ab45abcab3dbfd44df7b843c7312aa"
         },
         {
           "name": "trip-kit-booking-2.1.43-sources.jar",
           "url": "trip-kit-booking-2.1.43-sources.jar",
           "size": 39901,
-          "sha512": "f67102900068e5ea4ff8de8030e55c1dce28c2b49f977a8874b2b7d4ab1b64d8095976be22b15dae54160bdec03a6b9f41425f570578b89eca223cd3d9605738",
-          "sha256": "a51938c61fbc066b7c93b6d7b64a0400f8bbb6c2f95e0a4cf504de03912a23e9",
-          "sha1": "e4ad835bc488b8ebec39d87d420c7c920d2de887",
-          "md5": "6834b4efc609bf38d9f9555710a08317"
+          "sha512": "670c64d56c6d79a93c23e1955e964564afb4f5ab8a5f943b1f4b1caa1a4b240fc25aeb91e25a741b5a39badd03e933cef337cf5073a4681fbd94e6564c283a4f",
+          "sha256": "1338d3ca7cdd1694553fb05d6a71c1aa97596a689d69247db227e8d37265af6f",
+          "sha1": "5eee40eaa1fbb16dae7a512ed7a26071cfb4c191",
+          "md5": "0ef10ab4896951fc86f556724ed7bee6"
         },
         {
           "name": "trip-kit-booking-2.1.43.aar",
@@ -153,19 +153,19 @@
           "name": "trip-kit-booking-2.1.43-javadoc.jar",
           "url": "trip-kit-booking-2.1.43-javadoc.jar",
           "size": 176744,
-          "sha512": "0d18ed1462f53b0fdb5e75f71f236c47bb6bcf763ee1e111cbd552075dd68fb344a423e81e2f7a559ebb39cabe0e98cfa05dc871ede7536213406d19d1d4381f",
-          "sha256": "8a0c19eb76e216c6e8e55d2021a270e14e03052d185a09439d9d6958f6e62029",
-          "sha1": "cbb11b4035c85ef876e0aca7bf1a14d97891a5bd",
-          "md5": "af2d957cbeb9c238268c890a40d8d1ab"
+          "sha512": "163144919192979e8c2d12310f8048097835a0fc95d9772b0e280d0c1a603b5f3b0285dbf94f12f00ce063366ef18a79dae9c00fe38b49f8db6ad6b61f1fd825",
+          "sha256": "b81dd0bffdf0f5c195c91d216a7f8d2371135b4ee0cd39f8ee0d1f42575a5a01",
+          "sha1": "145964b7099c9cc52747efb7c93fde8e6e13f367",
+          "md5": "92ab45abcab3dbfd44df7b843c7312aa"
         },
         {
           "name": "trip-kit-booking-2.1.43-sources.jar",
           "url": "trip-kit-booking-2.1.43-sources.jar",
           "size": 39901,
-          "sha512": "f67102900068e5ea4ff8de8030e55c1dce28c2b49f977a8874b2b7d4ab1b64d8095976be22b15dae54160bdec03a6b9f41425f570578b89eca223cd3d9605738",
-          "sha256": "a51938c61fbc066b7c93b6d7b64a0400f8bbb6c2f95e0a4cf504de03912a23e9",
-          "sha1": "e4ad835bc488b8ebec39d87d420c7c920d2de887",
-          "md5": "6834b4efc609bf38d9f9555710a08317"
+          "sha512": "670c64d56c6d79a93c23e1955e964564afb4f5ab8a5f943b1f4b1caa1a4b240fc25aeb91e25a741b5a39badd03e933cef337cf5073a4681fbd94e6564c283a4f",
+          "sha256": "1338d3ca7cdd1694553fb05d6a71c1aa97596a689d69247db227e8d37265af6f",
+          "sha1": "5eee40eaa1fbb16dae7a512ed7a26071cfb4c191",
+          "md5": "0ef10ab4896951fc86f556724ed7bee6"
         },
         {
           "name": "trip-kit-booking-2.1.43.aar",
