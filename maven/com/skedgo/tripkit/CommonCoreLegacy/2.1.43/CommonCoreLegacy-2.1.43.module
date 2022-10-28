@@ -11,7 +11,7 @@
   "createdBy": {
     "gradle": {
       "version": "6.5",
-      "buildId": "pv6a4wu4zbe3teydlubhqg6p6q"
+      "buildId": "za62czknhbfenc3c6xll7wah4y"
     }
   },
   "variants": [
@@ -87,15 +87,6 @@
       ],
       "files": [
         {
-          "name": "CommonCoreLegacy-2.1.43-javadoc.jar",
-          "url": "CommonCoreLegacy-2.1.43-javadoc.jar",
-          "size": 322296,
-          "sha512": "68f8ff2bdef404afa4c009ac235cd6364a7b160bf6eb441d9f01c65425dac3011474e3aecdb953c1b169738273c5601fa685c8eccd32c482b972c9dfb0da81b2",
-          "sha256": "fb605781325ab0cbafb27d0ee9498c4359c016f97e2bb53cdd2e31dc835a98af",
-          "sha1": "6c67ddf73b79c8c5ef28db0605a82c85da48ad3d",
-          "md5": "d0a72043c4c22fc0b1025363193ebf91"
-        },
-        {
           "name": "CommonCoreLegacy-2.1.43-sources.jar",
           "url": "CommonCoreLegacy-2.1.43-sources.jar",
           "size": 93544,
@@ -112,6 +103,15 @@
           "sha256": "5e2be9284feeda9ac9b47d3d094ab11cdf03a5b35241659f92a8a35df010f93e",
           "sha1": "a1e86b72952fecfe634905c8b29f51f2e50b6dc0",
           "md5": "ab9657e6c5d0b18dc2afffbaee28a96a"
+        },
+        {
+          "name": "CommonCoreLegacy-2.1.43-javadoc.jar",
+          "url": "CommonCoreLegacy-2.1.43-javadoc.jar",
+          "size": 322296,
+          "sha512": "68f8ff2bdef404afa4c009ac235cd6364a7b160bf6eb441d9f01c65425dac3011474e3aecdb953c1b169738273c5601fa685c8eccd32c482b972c9dfb0da81b2",
+          "sha256": "fb605781325ab0cbafb27d0ee9498c4359c016f97e2bb53cdd2e31dc835a98af",
+          "sha1": "6c67ddf73b79c8c5ef28db0605a82c85da48ad3d",
+          "md5": "d0a72043c4c22fc0b1025363193ebf91"
         }
       ]
     },
@@ -122,15 +122,6 @@
       },
       "files": [
         {
-          "name": "CommonCoreLegacy-2.1.43-javadoc.jar",
-          "url": "CommonCoreLegacy-2.1.43-javadoc.jar",
-          "size": 322296,
-          "sha512": "68f8ff2bdef404afa4c009ac235cd6364a7b160bf6eb441d9f01c65425dac3011474e3aecdb953c1b169738273c5601fa685c8eccd32c482b972c9dfb0da81b2",
-          "sha256": "fb605781325ab0cbafb27d0ee9498c4359c016f97e2bb53cdd2e31dc835a98af",
-          "sha1": "6c67ddf73b79c8c5ef28db0605a82c85da48ad3d",
-          "md5": "d0a72043c4c22fc0b1025363193ebf91"
-        },
-        {
           "name": "CommonCoreLegacy-2.1.43-sources.jar",
           "url": "CommonCoreLegacy-2.1.43-sources.jar",
           "size": 93544,
@@ -147,6 +138,15 @@
           "sha256": "5e2be9284feeda9ac9b47d3d094ab11cdf03a5b35241659f92a8a35df010f93e",
           "sha1": "a1e86b72952fecfe634905c8b29f51f2e50b6dc0",
           "md5": "ab9657e6c5d0b18dc2afffbaee28a96a"
+        },
+        {
+          "name": "CommonCoreLegacy-2.1.43-javadoc.jar",
+          "url": "CommonCoreLegacy-2.1.43-javadoc.jar",
+          "size": 322296,
+          "sha512": "68f8ff2bdef404afa4c009ac235cd6364a7b160bf6eb441d9f01c65425dac3011474e3aecdb953c1b169738273c5601fa685c8eccd32c482b972c9dfb0da81b2",
+          "sha256": "fb605781325ab0cbafb27d0ee9498c4359c016f97e2bb53cdd2e31dc835a98af",
+          "sha1": "6c67ddf73b79c8c5ef28db0605a82c85da48ad3d",
+          "md5": "d0a72043c4c22fc0b1025363193ebf91"
         }
       ]
     }
