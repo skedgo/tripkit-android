@@ -64,8 +64,8 @@ version = tripkitVersion
 publishing {
   repositories {
     maven {
-      //url = "file://${localMaven}"
-      url = publishMavenUrl
+      url = "file://${localMaven}"
+      //url = publishMavenUrl
       credentials {
         username = publishMavenUsername
         password = publishMavenToken
