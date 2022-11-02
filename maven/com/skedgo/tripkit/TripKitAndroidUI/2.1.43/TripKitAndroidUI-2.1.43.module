@@ -1,0 +1,568 @@
+{
+  "formatVersion": "1.1",
+  "component": {
+    "group": "com.skedgo.tripkit",
+    "module": "TripKitAndroidUI",
+    "version": "2.1.43",
+    "attributes": {
+      "org.gradle.status": "release"
+    }
+  },
+  "createdBy": {
+    "gradle": {
+      "version": "6.5",
+      "buildId": "nvijr37ekzbqlnly7w7ga3v6bm"
+    }
+  },
+  "variants": [
+    {
+      "name": "runtime",
+      "attributes": {
+        "org.gradle.usage": "java-runtime"
+      },
+      "dependencies": [
+        {
+          "group": "com.uber.rxdogtag",
+          "module": "rxdogtag",
+          "version": {
+            "requires": "0.3.0"
+          }
+        },
+        {
+          "group": "androidx.cardview",
+          "module": "cardview",
+          "version": {
+            "requires": "1.0.0"
+          }
+        },
+        {
+          "group": "com.skedgo.tripkit",
+          "module": "trip-kit-booking",
+          "version": {
+            "requires": "2.1.43"
+          }
+        },
+        {
+          "group": "com.skedgo.tripkit",
+          "module": "TripKitAndroid",
+          "version": {
+            "requires": "2.1.43"
+          }
+        },
+        {
+          "group": "com.skedgo.tripkit",
+          "module": "TripKitAndroidUIData",
+          "version": {
+            "requires": "2.1.43"
+          }
+        },
+        {
+          "group": "com.skedgo.tripkit",
+          "module": "TripKitAndroidUIDomain",
+          "version": {
+            "requires": "2.1.43"
+          }
+        },
+        {
+          "group": "androidx.databinding",
+          "module": "databinding-common",
+          "version": {
+            "requires": "4.0.1"
+          }
+        },
+        {
+          "group": "androidx.databinding",
+          "module": "databinding-runtime",
+          "version": {
+            "requires": "4.0.1"
+          }
+        },
+        {
+          "group": "androidx.databinding",
+          "module": "databinding-adapters",
+          "version": {
+            "requires": "4.0.1"
+          }
+        },
+        {
+          "group": "org.jetbrains.kotlin",
+          "module": "kotlin-android-extensions-runtime",
+          "version": {
+            "requires": "1.4.10"
+          }
+        },
+        {
+          "group": "org.jetbrains.kotlin",
+          "module": "kotlin-stdlib",
+          "version": {
+            "requires": "1.3.50"
+          }
+        },
+        {
+          "group": "com.google.android.material",
+          "module": "material",
+          "version": {
+            "requires": "1.3.0-alpha04"
+          }
+        },
+        {
+          "group": "com.gojuno.koptional",
+          "module": "koptional",
+          "version": {
+            "requires": "1.2.0"
+          }
+        },
+        {
+          "group": "org.jetbrains.kotlin",
+          "module": "kotlin-stdlib",
+          "version": {
+            "requires": "1.4.10"
+          }
+        },
+        {
+          "group": "androidx.appcompat",
+          "module": "appcompat",
+          "version": {
+            "requires": "1.2.0"
+          }
+        },
+        {
+          "group": "androidx.constraintlayout",
+          "module": "constraintlayout",
+          "version": {
+            "requires": "2.0.0-beta4"
+          }
+        },
+        {
+          "group": "com.google.android.libraries.places",
+          "module": "places",
+          "version": {
+            "requires": "2.2.0"
+          }
+        },
+        {
+          "group": "com.squareup.okhttp3",
+          "module": "logging-interceptor",
+          "version": {
+            "requires": "4.2.0"
+          }
+        },
+        {
+          "group": "androidx.legacy",
+          "module": "legacy-support-v4",
+          "version": {
+            "requires": "1.0.0"
+          }
+        },
+        {
+          "group": "com.google.android",
+          "module": "flexbox",
+          "version": {
+            "requires": "1.1.1"
+          }
+        },
+        {
+          "group": "com.github.skedgo",
+          "module": "wheel",
+          "version": {
+            "requires": "v1.0"
+          }
+        },
+        {
+          "group": "org.jetbrains.kotlinx",
+          "module": "kotlinx-coroutines-rx2",
+          "version": {
+            "requires": "1.4.0"
+          }
+        },
+        {
+          "group": "androidx.room",
+          "module": "room-runtime",
+          "version": {
+            "requires": "2.2.5"
+          }
+        },
+        {
+          "group": "androidx.room",
+          "module": "room-rxjava2",
+          "version": {
+            "requires": "2.2.5"
+          }
+        },
+        {
+          "group": "androidx.room",
+          "module": "room-ktx",
+          "version": {
+            "requires": "2.2.5"
+          }
+        },
+        {
+          "group": "com.squareup",
+          "module": "otto",
+          "version": {
+            "requires": "1.3.8"
+          }
+        },
+        {
+          "group": "com.squareup.picasso",
+          "module": "picasso",
+          "version": {
+            "requires": "2.71828"
+          }
+        },
+        {
+          "group": "com.squareup.retrofit2",
+          "module": "retrofit",
+          "version": {
+            "requires": "2.8.1"
+          }
+        },
+        {
+          "group": "com.squareup.retrofit2",
+          "module": "adapter-rxjava2",
+          "version": {
+            "requires": "2.8.1"
+          }
+        },
+        {
+          "group": "com.squareup.retrofit2",
+          "module": "converter-gson",
+          "version": {
+            "requires": "2.8.1"
+          }
+        },
+        {
+          "group": "com.google.android.gms",
+          "module": "play-services-maps",
+          "version": {
+            "requires": "17.0.0"
+          }
+        },
+        {
+          "group": "com.google.maps.android",
+          "module": "android-maps-utils",
+          "version": {
+            "requires": "0.5"
+          }
+        },
+        {
+          "group": "androidx.core",
+          "module": "core-ktx",
+          "version": {
+            "requires": "1.5.0-alpha05"
+          }
+        },
+        {
+          "group": "io.reactivex.rxjava2",
+          "module": "rxandroid",
+          "version": {
+            "requires": "2.1.0"
+          }
+        },
+        {
+          "group": "io.reactivex.rxjava2",
+          "module": "rxjava",
+          "version": {
+            "requires": "2.2.3"
+          }
+        },
+        {
+          "group": "com.jakewharton.rxrelay2",
+          "module": "rxrelay",
+          "version": {
+            "requires": "2.1.0"
+          }
+        },
+        {
+          "group": "io.reactivex.rxjava2",
+          "module": "rxkotlin",
+          "version": {
+            "requires": "2.4.0"
+          }
+        },
+        {
+          "group": "net.danlew",
+          "module": "android.joda",
+          "version": {
+            "requires": "2.10.3"
+          }
+        },
+        {
+          "group": "com.github.skedgo",
+          "module": "RxProperty",
+          "version": {
+            "requires": "1.6"
+          }
+        },
+        {
+          "group": "com.jakewharton.rxbinding3",
+          "module": "rxbinding",
+          "version": {
+            "requires": "3.0.0"
+          }
+        },
+        {
+          "group": "androidx.viewpager",
+          "module": "viewpager",
+          "version": {
+            "requires": "1.0.0"
+          }
+        },
+        {
+          "group": "com.google.dagger",
+          "module": "dagger",
+          "version": {
+            "requires": "2.24"
+          }
+        },
+        {
+          "group": "com.google.dagger",
+          "module": "dagger-android-support",
+          "version": {
+            "requires": "2.24"
+          }
+        },
+        {
+          "group": "androidx.lifecycle",
+          "module": "lifecycle-extensions",
+          "version": {
+            "requires": "2.2.0"
+          }
+        },
+        {
+          "group": "androidx.lifecycle",
+          "module": "lifecycle-viewmodel-ktx",
+          "version": {
+            "requires": "2.2.0"
+          }
+        },
+        {
+          "group": "androidx.lifecycle",
+          "module": "lifecycle-runtime-ktx",
+          "version": {
+            "requires": "2.2.0"
+          }
+        },
+        {
+          "group": "androidx.recyclerview",
+          "module": "recyclerview",
+          "version": {
+            "requires": "1.1.0"
+          }
+        },
+        {
+          "group": "androidx.fragment",
+          "module": "fragment",
+          "version": {
+            "requires": "1.2.5"
+          }
+        },
+        {
+          "group": "me.tatarka.bindingcollectionadapter2",
+          "module": "bindingcollectionadapter",
+          "version": {
+            "requires": "4.0.0"
+          }
+        },
+        {
+          "group": "me.tatarka.bindingcollectionadapter2",
+          "module": "bindingcollectionadapter-recyclerview",
+          "version": {
+            "requires": "4.0.0"
+          }
+        },
+        {
+          "group": "com.github.haroldadmin",
+          "module": "NetworkResponseAdapter",
+          "version": {
+            "requires": "4.0.1"
+          }
+        },
+        {
+          "group": "org.immutables",
+          "module": "gson",
+          "version": {
+            "requires": "2.8.2"
+          }
+        },
+        {
+          "group": "com.google.mlkit",
+          "module": "barcode-scanning",
+          "version": {
+            "requires": "16.0.0"
+          }
+        },
+        {
+          "group": "androidx.camera",
+          "module": "camera-camera2",
+          "version": {
+            "requires": "1.0.0-beta06"
+          }
+        },
+        {
+          "group": "androidx.camera",
+          "module": "camera-view",
+          "version": {
+            "requires": "1.0.0-alpha13"
+          }
+        },
+        {
+          "group": "androidx.camera",
+          "module": "camera-lifecycle",
+          "version": {
+            "requires": "1.0.0-beta06"
+          }
+        },
+        {
+          "group": "com.github.bumptech.glide",
+          "module": "glide",
+          "version": {
+            "requires": "4.11.0"
+          }
+        },
+        {
+          "group": "com.jakewharton.timber",
+          "module": "timber",
+          "version": {
+            "requires": "4.5.1"
+          }
+        },
+        {
+          "group": "com.google.code.gson",
+          "module": "gson",
+          "version": {
+            "requires": "2.8.6"
+          }
+        },
+        {
+          "group": "com.github.AraujoJordan",
+          "module": "ExcuseMe",
+          "version": {
+            "requires": "0.9.5"
+          }
+        },
+        {
+          "group": "com.github.barteksc",
+          "module": "android-pdf-viewer",
+          "version": {
+            "requires": "2.8.2"
+          }
+        },
+        {
+          "group": "androidx.fragment",
+          "module": "fragment-ktx",
+          "version": {
+            "requires": "1.3.2"
+          }
+        },
+        {
+          "group": "com.afollestad.material-dialogs",
+          "module": "core",
+          "version": {
+            "requires": "3.3.0"
+          }
+        },
+        {
+          "group": "com.afollestad.material-dialogs",
+          "module": "bottomsheets",
+          "version": {
+            "requires": "3.2.1"
+          }
+        }
+      ],
+      "files": [
+        {
+          "name": "TripKitAndroidUI-2.1.43.aar",
+          "url": "TripKitAndroidUI-2.1.43.aar",
+          "size": 3390962,
+          "sha512": "692824373dd8834940fb1a5ae44c5c8bec57d6846717c5ab9a7cd6162903e828fdbc350aab6e4e728ae227224fd74c70aaa512559a3e8cb8fb2ea3e48cad689a",
+          "sha256": "82487c29eb9c03d7c1b7ba1428370f5f95f301fb33f4a6709e1496eb4e8c4b73",
+          "sha1": "55795a035686050903f3e917fb122a8926352bcc",
+          "md5": "7b81abc42750b26c0f4a78437b189881"
+        }
+      ]
+    },
+    {
+      "name": "api",
+      "attributes": {
+        "org.gradle.usage": "java-api"
+      },
+      "dependencies": [
+        {
+          "group": "com.uber.rxdogtag",
+          "module": "rxdogtag",
+          "version": {
+            "requires": "0.3.0"
+          }
+        },
+        {
+          "group": "androidx.cardview",
+          "module": "cardview",
+          "version": {
+            "requires": "1.0.0"
+          }
+        },
+        {
+          "group": "com.skedgo.tripkit",
+          "module": "trip-kit-booking",
+          "version": {
+            "requires": "2.1.43"
+          }
+        },
+        {
+          "group": "com.skedgo.tripkit",
+          "module": "TripKitAndroid",
+          "version": {
+            "requires": "2.1.43"
+          }
+        },
+        {
+          "group": "com.skedgo.tripkit",
+          "module": "TripKitAndroidUIData",
+          "version": {
+            "requires": "2.1.43"
+          }
+        },
+        {
+          "group": "com.skedgo.tripkit",
+          "module": "TripKitAndroidUIDomain",
+          "version": {
+            "requires": "2.1.43"
+          }
+        },
+        {
+          "group": "androidx.databinding",
+          "module": "databinding-common",
+          "version": {
+            "requires": "4.0.1"
+          }
+        },
+        {
+          "group": "androidx.databinding",
+          "module": "databinding-runtime",
+          "version": {
+            "requires": "4.0.1"
+          }
+        },
+        {
+          "group": "androidx.databinding",
+          "module": "databinding-adapters",
+          "version": {
+            "requires": "4.0.1"
+          }
+        }
+      ],
+      "files": [
+        {
+          "name": "TripKitAndroidUI-2.1.43.aar",
+          "url": "TripKitAndroidUI-2.1.43.aar",
+          "size": 3390962,
+          "sha512": "692824373dd8834940fb1a5ae44c5c8bec57d6846717c5ab9a7cd6162903e828fdbc350aab6e4e728ae227224fd74c70aaa512559a3e8cb8fb2ea3e48cad689a",
+          "sha256": "82487c29eb9c03d7c1b7ba1428370f5f95f301fb33f4a6709e1496eb4e8c4b73",
+          "sha1": "55795a035686050903f3e917fb122a8926352bcc",
+          "md5": "7b81abc42750b26c0f4a78437b189881"
+        }
+      ]
+    }
+  ]
+}
