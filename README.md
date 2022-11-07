@@ -23,8 +23,7 @@ dependencies {
   implementation 'com.github.skedgo.tripkit-android:TripKitAndroid:<insert-newest-version-here>'
 }
 ```
-[![Release](https://jitpack.io/v/skedgo/tripkit-android.svg)]
-(https://jitpack.io/#skedgo/tripkit-android)
+[![Release](https://jitpack.io/v/skedgo/tripkit-android.svg)](https://jitpack.io/#skedgo/tripkit-android)
 
 For a full setup, you can have a look at TripKitSamples' build file [here](https://github.com/skedgo/tripkit-android/blob/dev/TripKitSamples/build.gradle).
 
@@ -49,23 +48,6 @@ An API key is necessary to use TripKit's services, such as A-2-B routing, and al
 #### Create TripKit instance to access TripKit's services
 
 We recommend to have an `Application` subclass. Next, in the `onCreate()` method, you can initiate following setup:
-
-for `<= v1.23.0-dev`
-```kotlin
-class App : Application() {
-  override fun onCreate() {
-    super.onCreate()
-    JodaTimeAndroid.init(this)
-    TripKit.initialize(
-        Configs.builder()
-            .context(this)
-            .key { Key.ApiKey("YOUR_API_KEY") }
-            .build()
-    )
-  }
-}
-
-```
 
 for `>= v2.1.43`
 ```kotlin
