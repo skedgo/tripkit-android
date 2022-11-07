@@ -1,0 +1,71 @@
+{
+  "formatVersion": "1.1",
+  "component": {
+    "group": "com.skedgo.tripkit",
+    "module": "rxlifecyclecomponents",
+    "version": "2.1.43",
+    "attributes": {
+      "org.gradle.status": "release"
+    }
+  },
+  "createdBy": {
+    "gradle": {
+      "version": "6.5",
+      "buildId": "za62czknhbfenc3c6xll7wah4y"
+    }
+  },
+  "variants": [
+    {
+      "name": "runtime",
+      "attributes": {
+        "org.gradle.usage": "java-runtime"
+      },
+      "dependencies": [
+        {
+          "group": "com.trello.rxlifecycle3",
+          "module": "rxlifecycle",
+          "version": {
+            "requires": "3.0.0"
+          }
+        }
+      ],
+      "files": [
+        {
+          "name": "rxlifecyclecomponents-2.1.43.aar",
+          "url": "rxlifecyclecomponents-2.1.43.aar",
+          "size": 22254,
+          "sha512": "7c3bf8f235aa69f802375e30f2b26ceb454f270ddfb4bef9164127a93532c5e057c9fa9957c12203c2d97675aafa62806db2ba7e6fb3a0630b4cf3b8333bfe12",
+          "sha256": "8dd457cd149dd164c9260ed349f775d96fdcf439bac07b1f0663191d1d3403a9",
+          "sha1": "57fbd5261407648da5478f630d0f61625207609d",
+          "md5": "ecb144e961e073aa6c9d7f0e4f2b072c"
+        }
+      ]
+    },
+    {
+      "name": "api",
+      "attributes": {
+        "org.gradle.usage": "java-api"
+      },
+      "dependencies": [
+        {
+          "group": "com.trello.rxlifecycle3",
+          "module": "rxlifecycle",
+          "version": {
+            "requires": "3.0.0"
+          }
+        }
+      ],
+      "files": [
+        {
+          "name": "rxlifecyclecomponents-2.1.43.aar",
+          "url": "rxlifecyclecomponents-2.1.43.aar",
+          "size": 22254,
+          "sha512": "7c3bf8f235aa69f802375e30f2b26ceb454f270ddfb4bef9164127a93532c5e057c9fa9957c12203c2d97675aafa62806db2ba7e6fb3a0630b4cf3b8333bfe12",
+          "sha256": "8dd457cd149dd164c9260ed349f775d96fdcf439bac07b1f0663191d1d3403a9",
+          "sha1": "57fbd5261407648da5478f630d0f61625207609d",
+          "md5": "ecb144e961e073aa6c9d7f0e4f2b072c"
+        }
+      ]
+    }
+  ]
+}

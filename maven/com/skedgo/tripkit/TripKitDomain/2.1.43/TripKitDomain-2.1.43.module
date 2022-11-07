@@ -1,0 +1,117 @@
+{
+  "formatVersion": "1.1",
+  "component": {
+    "group": "com.skedgo.tripkit",
+    "module": "TripKitDomain",
+    "version": "2.1.43",
+    "attributes": {
+      "org.gradle.status": "release"
+    }
+  },
+  "createdBy": {
+    "gradle": {
+      "version": "6.5",
+      "buildId": "za62czknhbfenc3c6xll7wah4y"
+    }
+  },
+  "variants": [
+    {
+      "name": "apiElements",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.jvm.version": 7,
+        "org.gradle.libraryelements": "jar",
+        "org.gradle.usage": "java-api",
+        "org.jetbrains.kotlin.localToProject": "public",
+        "org.jetbrains.kotlin.platform.type": "jvm"
+      },
+      "files": [
+        {
+          "name": "TripKitDomain-2.1.43.jar",
+          "url": "TripKitDomain-2.1.43.jar",
+          "size": 98751,
+          "sha512": "c14b21a350d80dc59a20741e4f692001186970c2f3adfdadd21aa7d7525842565dc7b9b4b05e3c5d945d27f2a5e85c1ca7bc46225490a34bfc58d1cc4c0678dd",
+          "sha256": "663f050f16065301d184e2d2be367912723d96fbd6cae84568377d2fbad3c138",
+          "sha1": "0da8c08421c61a20852d393f7e9e33c74f5993b2",
+          "md5": "ce4ca4986084fc20b8bd5d5e84ee1cb9"
+        }
+      ]
+    },
+    {
+      "name": "runtimeElements",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.jvm.version": 7,
+        "org.gradle.libraryelements": "jar",
+        "org.gradle.usage": "java-runtime",
+        "org.jetbrains.kotlin.localToProject": "public",
+        "org.jetbrains.kotlin.platform.type": "jvm"
+      },
+      "dependencies": [
+        {
+          "group": "joda-time",
+          "module": "joda-time",
+          "version": {
+            "requires": "2.9.9"
+          },
+          "thirdPartyCompatibility": {
+            "artifactSelector": {
+              "name": "joda-time",
+              "type": "jar",
+              "extension": "jar",
+              "classifier": "no-tzdb"
+            }
+          }
+        },
+        {
+          "group": "io.reactivex.rxjava2",
+          "module": "rxjava",
+          "version": {
+            "requires": "2.2.3"
+          }
+        },
+        {
+          "group": "com.google.dagger",
+          "module": "dagger",
+          "version": {
+            "requires": "2.24"
+          }
+        },
+        {
+          "group": "com.google.code.gson",
+          "module": "gson",
+          "version": {
+            "requires": "2.8.6"
+          }
+        },
+        {
+          "group": "org.jetbrains.kotlin",
+          "module": "kotlin-stdlib",
+          "version": {
+            "requires": "1.4.10"
+          }
+        },
+        {
+          "group": "com.gojuno.koptional",
+          "module": "koptional",
+          "version": {
+            "requires": "1.2.0"
+          }
+        }
+      ],
+      "files": [
+        {
+          "name": "TripKitDomain-2.1.43.jar",
+          "url": "TripKitDomain-2.1.43.jar",
+          "size": 98751,
+          "sha512": "c14b21a350d80dc59a20741e4f692001186970c2f3adfdadd21aa7d7525842565dc7b9b4b05e3c5d945d27f2a5e85c1ca7bc46225490a34bfc58d1cc4c0678dd",
+          "sha256": "663f050f16065301d184e2d2be367912723d96fbd6cae84568377d2fbad3c138",
+          "sha1": "0da8c08421c61a20852d393f7e9e33c74f5993b2",
+          "md5": "ce4ca4986084fc20b8bd5d5e84ee1cb9"
+        }
+      ]
+    }
+  ]
+}

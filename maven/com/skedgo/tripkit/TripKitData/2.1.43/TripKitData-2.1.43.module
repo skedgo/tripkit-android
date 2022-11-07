@@ -1,0 +1,240 @@
+{
+  "formatVersion": "1.1",
+  "component": {
+    "group": "com.skedgo.tripkit",
+    "module": "TripKitData",
+    "version": "2.1.43",
+    "attributes": {
+      "org.gradle.status": "release"
+    }
+  },
+  "createdBy": {
+    "gradle": {
+      "version": "6.5",
+      "buildId": "za62czknhbfenc3c6xll7wah4y"
+    }
+  },
+  "variants": [
+    {
+      "name": "runtime",
+      "attributes": {
+        "org.gradle.usage": "java-runtime"
+      },
+      "dependencies": [
+        {
+          "group": "com.skedgo.tripkit",
+          "module": "route-persistence",
+          "version": {
+            "requires": "2.1.43"
+          }
+        },
+        {
+          "group": "com.skedgo.tripkit",
+          "module": "sqliteutils",
+          "version": {
+            "requires": "2.1.43"
+          }
+        },
+        {
+          "group": "com.github.skedgo",
+          "module": "commons-collections",
+          "version": {
+            "requires": "v1.0"
+          }
+        },
+        {
+          "group": "com.skedgo.tripkit",
+          "module": "CommonCoreLegacy",
+          "version": {
+            "requires": "2.1.43"
+          }
+        },
+        {
+          "group": "com.skedgo.tripkit",
+          "module": "TripKitDomain",
+          "version": {
+            "requires": "2.1.43"
+          }
+        },
+        {
+          "group": "com.skedgo.tripkit",
+          "module": "TripKitDomainLegacy",
+          "version": {
+            "requires": "2.1.43"
+          }
+        },
+        {
+          "group": "com.google.dagger",
+          "module": "dagger",
+          "version": {
+            "requires": "2.24"
+          }
+        },
+        {
+          "group": "io.reactivex.rxjava2",
+          "module": "rxjava",
+          "version": {
+            "requires": "2.2.3"
+          }
+        },
+        {
+          "group": "com.jakewharton.rxrelay2",
+          "module": "rxrelay",
+          "version": {
+            "requires": "2.1.0"
+          }
+        },
+        {
+          "group": "net.danlew",
+          "module": "android.joda",
+          "version": {
+            "requires": "2.10.3"
+          }
+        },
+        {
+          "group": "androidx.room",
+          "module": "room-runtime",
+          "version": {
+            "requires": "2.2.5"
+          }
+        },
+        {
+          "group": "androidx.room",
+          "module": "room-rxjava2",
+          "version": {
+            "requires": "2.2.5"
+          }
+        },
+        {
+          "group": "com.squareup.retrofit2",
+          "module": "converter-gson",
+          "version": {
+            "requires": "2.8.1"
+          }
+        },
+        {
+          "group": "com.squareup.retrofit2",
+          "module": "adapter-rxjava2",
+          "version": {
+            "requires": "2.8.1"
+          }
+        },
+        {
+          "group": "com.squareup.retrofit2",
+          "module": "retrofit",
+          "version": {
+            "requires": "2.8.1"
+          }
+        },
+        {
+          "group": "com.gojuno.koptional",
+          "module": "koptional",
+          "version": {
+            "requires": "1.2.0"
+          }
+        },
+        {
+          "group": "com.google.code.gson",
+          "module": "gson",
+          "version": {
+            "requires": "2.8.6"
+          }
+        },
+        {
+          "group": "org.immutables",
+          "module": "gson",
+          "version": {
+            "requires": "2.8.2"
+          }
+        },
+        {
+          "group": "org.jetbrains.kotlin",
+          "module": "kotlin-stdlib",
+          "version": {
+            "requires": "1.4.10"
+          }
+        }
+      ],
+      "files": [
+        {
+          "name": "TripKitData-2.1.43-sources.jar",
+          "url": "TripKitData-2.1.43-sources.jar",
+          "size": 57353,
+          "sha512": "7dafa9364c61211aa53fc38acd68edb6ea9f6ad382a067f11abcafa4415baf705f2c61f724ebf88fb341e585162ac5f194a935a3baaccbf68c25c0b0d78cac03",
+          "sha256": "5ece95a934c3721aa8f3e69762ea883dbd45ea0e134cbc52fca2475d628c613a",
+          "sha1": "135daebc81deada18a3bc203a06b1e80edc082db",
+          "md5": "d2bc4f764a05422dec1090430a873333"
+        },
+        {
+          "name": "TripKitData-2.1.43-javadoc.jar",
+          "url": "TripKitData-2.1.43-javadoc.jar",
+          "size": 63383,
+          "sha512": "18704f6986a4053f513b0a1c001822c95cef18ed04e2a508273385156477ab5322872f0e1876563d05ef4ba338d08a1d1d22f8fcc8b6d6b7056d06b5f7df04c3",
+          "sha256": "87d222b1ee15df08bcfb9f89e056e33b886f24c73c63ff8d532ecb2d126f8399",
+          "sha1": "70c70b809397b02cb842c2b417f03ccfe9232987",
+          "md5": "aa214ccc11cda31718d447ebb37a5710"
+        },
+        {
+          "name": "TripKitData-2.1.43.aar",
+          "url": "TripKitData-2.1.43.aar",
+          "size": 555853,
+          "sha512": "6620f4b880c631b2298130563c056dde6945756054acbb441d9a37c6d427dd5bc726a9c061707c9dd82ad22830c8a77cce40411ef876674e024814cfb069f98f",
+          "sha256": "dd38c93e95bd92e619441cf5a24f3fd313a93f9fec78b8b73b18883aecabbdc3",
+          "sha1": "40a3d83ea4dc71dcb68b8c8bd594e4de542d5439",
+          "md5": "eb8d77874486b6036bb59b7be6826c7e"
+        }
+      ]
+    },
+    {
+      "name": "api",
+      "attributes": {
+        "org.gradle.usage": "java-api"
+      },
+      "dependencies": [
+        {
+          "group": "com.skedgo.tripkit",
+          "module": "route-persistence",
+          "version": {
+            "requires": "2.1.43"
+          }
+        },
+        {
+          "group": "com.skedgo.tripkit",
+          "module": "sqliteutils",
+          "version": {
+            "requires": "2.1.43"
+          }
+        }
+      ],
+      "files": [
+        {
+          "name": "TripKitData-2.1.43-sources.jar",
+          "url": "TripKitData-2.1.43-sources.jar",
+          "size": 57353,
+          "sha512": "7dafa9364c61211aa53fc38acd68edb6ea9f6ad382a067f11abcafa4415baf705f2c61f724ebf88fb341e585162ac5f194a935a3baaccbf68c25c0b0d78cac03",
+          "sha256": "5ece95a934c3721aa8f3e69762ea883dbd45ea0e134cbc52fca2475d628c613a",
+          "sha1": "135daebc81deada18a3bc203a06b1e80edc082db",
+          "md5": "d2bc4f764a05422dec1090430a873333"
+        },
+        {
+          "name": "TripKitData-2.1.43-javadoc.jar",
+          "url": "TripKitData-2.1.43-javadoc.jar",
+          "size": 63383,
+          "sha512": "18704f6986a4053f513b0a1c001822c95cef18ed04e2a508273385156477ab5322872f0e1876563d05ef4ba338d08a1d1d22f8fcc8b6d6b7056d06b5f7df04c3",
+          "sha256": "87d222b1ee15df08bcfb9f89e056e33b886f24c73c63ff8d532ecb2d126f8399",
+          "sha1": "70c70b809397b02cb842c2b417f03ccfe9232987",
+          "md5": "aa214ccc11cda31718d447ebb37a5710"
+        },
+        {
+          "name": "TripKitData-2.1.43.aar",
+          "url": "TripKitData-2.1.43.aar",
+          "size": 555853,
+          "sha512": "6620f4b880c631b2298130563c056dde6945756054acbb441d9a37c6d427dd5bc726a9c061707c9dd82ad22830c8a77cce40411ef876674e024814cfb069f98f",
+          "sha256": "dd38c93e95bd92e619441cf5a24f3fd313a93f9fec78b8b73b18883aecabbdc3",
+          "sha1": "40a3d83ea4dc71dcb68b8c8bd594e4de542d5439",
+          "md5": "eb8d77874486b6036bb59b7be6826c7e"
+        }
+      ]
+    }
+  ]
+}

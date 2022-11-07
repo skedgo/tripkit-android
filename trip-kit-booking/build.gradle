@@ -96,8 +96,8 @@ version = tripkitVersion
 publishing {
   repositories {
     maven {
-//      url = "file://${localMaven}"
-      url = publishMavenUrl
+      url = "file://${localMaven}"
+      //url = publishMavenUrl
       credentials {
         username = publishMavenUsername
         password = publishMavenToken
@@ -115,6 +115,17 @@ publishing {
           license {
             name = 'Commercial'
           }
+        }
+      }
+      pom.withXml {
+        asNode().dependencies.'*'
+                .findAll() {
+                  (it.scope.text() == 'runtime' || it.scope.text() == 'compile') &&
+                          project.configurations.implementation.allDependencies.find {
+                            dep -> dep.name == it.artifactId.text()
+                          }
+                }.each {
+          it.appendNode("type", "aar")
         }
       }
     }

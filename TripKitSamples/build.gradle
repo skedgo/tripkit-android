@@ -3,54 +3,54 @@ apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-kapt'
 
 android {
-  compileSdkVersion versions.compileSdkVersion
+    compileSdkVersion versions.compileSdkVersion
 
-  buildFeatures {
-    dataBinding true
-  }
-
-  defaultConfig {
-    applicationId "skedgo.tripkit.samples"
-    minSdkVersion versions.proMinSdkVersion
-    targetSdkVersion versions.targetSdkVersion
-    versionCode 1
-    versionName "1.0"
-    testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
-  }
-
-  signingConfigs {
-    debug {
-      storeFile file("keystores/debug.keystore")
+    buildFeatures {
+        dataBinding true
     }
 
-    release {
-      storeFile file("keystores/debug.keystore")
+    defaultConfig {
+        applicationId "skedgo.tripkit.samples"
+        minSdkVersion versions.proMinSdkVersion
+        targetSdkVersion versions.targetSdkVersion
+        versionCode 1
+        versionName "1.0"
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
-  }
 
-  lintOptions { abortOnError false }
-  compileOptions {
-    coreLibraryDesugaringEnabled true
-    sourceCompatibility JavaVersion.VERSION_1_8
-    targetCompatibility JavaVersion.VERSION_1_8
-  }
+    signingConfigs {
+        debug {
+            storeFile file("keystores/debug.keystore")
+        }
+
+        release {
+            storeFile file("keystores/debug.keystore")
+        }
+    }
+
+    lintOptions { abortOnError false }
+    compileOptions {
+        coreLibraryDesugaringEnabled true
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
 }
 
 dependencies {
-  coreLibraryDesugaring libs.desugar
+    coreLibraryDesugaring libs.desugar
 
-  testImplementation libs.junit
-  implementation libs.kotlin
-  implementation "com.google.android.gms:play-services-maps:15.0.1"
+    testImplementation libs.junit
+    implementation libs.kotlin
+    implementation "com.google.android.gms:play-services-maps:15.0.1"
 
-  implementation 'com.trello:rxlifecycle:1.0'
-  implementation libs.jodaTimeAndroid
-  implementation libs.rxjava2
-  implementation libs.rxAndroid2
-  implementation libs.appCompat
-  implementation 'com.google.android.material:material:1.0.0'
+    implementation 'com.trello:rxlifecycle:1.0'
+    implementation libs.jodaTimeAndroid
+    implementation libs.rxjava2
+    implementation libs.rxAndroid2
+    implementation libs.appCompat
+    implementation 'com.google.android.material:material:1.0.0'
 
-  implementation libs.bindingCollectionAdapterRecyclerView
-  implementation project(':TripKitAndroid')
-  implementation project(':rxlifecyclecomponents')
+    implementation libs.bindingCollectionAdapterRecyclerView
+    implementation project(':TripKitAndroid')
+    implementation project(':rxlifecyclecomponents')
 }

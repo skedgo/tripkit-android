@@ -1,0 +1,282 @@
+{
+  "formatVersion": "1.1",
+  "component": {
+    "group": "com.skedgo.tripkit",
+    "module": "TripKitAndroid",
+    "version": "2.1.43",
+    "attributes": {
+      "org.gradle.status": "release"
+    }
+  },
+  "createdBy": {
+    "gradle": {
+      "version": "6.5",
+      "buildId": "za62czknhbfenc3c6xll7wah4y"
+    }
+  },
+  "variants": [
+    {
+      "name": "runtime",
+      "attributes": {
+        "org.gradle.usage": "java-runtime"
+      },
+      "dependencies": [
+        {
+          "group": "com.skedgo.tripkit",
+          "module": "CommonCoreLegacy",
+          "version": {
+            "requires": "2.1.43"
+          }
+        },
+        {
+          "group": "com.skedgo.tripkit",
+          "module": "TripKitDomain",
+          "version": {
+            "requires": "2.1.43"
+          }
+        },
+        {
+          "group": "com.skedgo.tripkit",
+          "module": "TripKitDomainLegacy",
+          "version": {
+            "requires": "2.1.43"
+          }
+        },
+        {
+          "group": "com.skedgo.tripkit",
+          "module": "TripKitData",
+          "version": {
+            "requires": "2.1.43"
+          }
+        },
+        {
+          "group": "com.skedgo.tripkit",
+          "module": "sqliteutils",
+          "version": {
+            "requires": "2.1.43"
+          }
+        },
+        {
+          "group": "org.jetbrains.kotlin",
+          "module": "kotlin-stdlib",
+          "version": {
+            "requires": "1.4.10"
+          }
+        },
+        {
+          "group": "org.jetbrains.kotlinx",
+          "module": "kotlinx-coroutines-core",
+          "version": {
+            "requires": "1.4.0"
+          }
+        },
+        {
+          "group": "org.jetbrains.kotlinx",
+          "module": "kotlinx-coroutines-android",
+          "version": {
+            "requires": "1.4.0"
+          }
+        },
+        {
+          "group": "org.jetbrains.kotlinx",
+          "module": "kotlinx-coroutines-rx2",
+          "version": {
+            "requires": "1.4.0"
+          }
+        },
+        {
+          "group": "net.danlew",
+          "module": "android.joda",
+          "version": {
+            "requires": "2.10.3"
+          }
+        },
+        {
+          "group": "com.github.skedgo",
+          "module": "commons-collections",
+          "version": {
+            "requires": "v1.0"
+          }
+        },
+        {
+          "group": "com.squareup.okhttp3",
+          "module": "okhttp",
+          "version": {
+            "requires": "4.9.0"
+          }
+        },
+        {
+          "group": "com.squareup.okhttp3",
+          "module": "logging-interceptor",
+          "version": {
+            "requires": "4.9.0"
+          }
+        },
+        {
+          "group": "com.squareup.retrofit2",
+          "module": "retrofit",
+          "version": {
+            "requires": "2.8.1"
+          }
+        },
+        {
+          "group": "com.squareup.retrofit2",
+          "module": "adapter-rxjava2",
+          "version": {
+            "requires": "2.8.1"
+          }
+        },
+        {
+          "group": "com.squareup.retrofit2",
+          "module": "converter-gson",
+          "version": {
+            "requires": "2.8.1"
+          }
+        },
+        {
+          "group": "io.reactivex.rxjava2",
+          "module": "rxjava",
+          "version": {
+            "requires": "2.2.3"
+          }
+        },
+        {
+          "group": "io.reactivex.rxjava2",
+          "module": "rxandroid",
+          "version": {
+            "requires": "2.1.0"
+          }
+        },
+        {
+          "group": "com.firebase",
+          "module": "firebase-jobdispatcher",
+          "version": {
+            "requires": "0.8.5"
+          }
+        },
+        {
+          "group": "com.google.dagger",
+          "module": "dagger",
+          "version": {
+            "requires": "2.24"
+          }
+        },
+        {
+          "group": "org.immutables",
+          "module": "gson",
+          "version": {
+            "requires": "2.8.2"
+          }
+        },
+        {
+          "group": "com.github.haroldadmin",
+          "module": "NetworkResponseAdapter",
+          "version": {
+            "requires": "4.0.1"
+          }
+        }
+      ],
+      "files": [
+        {
+          "name": "TripKitAndroid-2.1.43.aar",
+          "url": "TripKitAndroid-2.1.43.aar",
+          "size": 418615,
+          "sha512": "003dbb4afa991b0b0600d154a9c29693ce58e8a1a3cf68e388dfb7b0b6688e8c9f0271534ba4a5834b13d8e0f6fcdd90a7076d29fe8460c109aa2f07eae87739",
+          "sha256": "fa4c7606a19a4a27f8af87bd69a1078f03b01fa826cadada9589485aad25f204",
+          "sha1": "d3479baa69e69588badd1842083d3fdec9cf936f",
+          "md5": "ef8f6399a136cc47de1b2d0d750f8bfc"
+        },
+        {
+          "name": "TripKitAndroid-2.1.43-sources.jar",
+          "url": "TripKitAndroid-2.1.43-sources.jar",
+          "size": 89590,
+          "sha512": "f626a4929d6b30f8f49b34336e31fb98c5a9c517b03159661969b0a07e46650204f3e62b5a26c7948c686404dacc9e7867db5e57583bcef3ccd756de871ec8f3",
+          "sha256": "a4acae0775f391f4e9d158a7e0c72f452cceadc65f924d38e50d1af54eee62bf",
+          "sha1": "1c9bf5828dc6eaae9c4ce2ed2265a7ef5e5f8ace",
+          "md5": "749650177bd7a84cc1a50fa80c30214a"
+        },
+        {
+          "name": "TripKitAndroid-2.1.43-javadoc.jar",
+          "url": "TripKitAndroid-2.1.43-javadoc.jar",
+          "size": 225363,
+          "sha512": "4e5041eb24aa2b88092636f4faf2ca92355fb85d709fa68d3ed1777b91483461168b59ee5a72f5e7ddce8f30cb04cbb95db19c5c0f28494b284e6fb2b43b9ab6",
+          "sha256": "a6dbc715303163095457d0405c2406d7fb4b4963edbf2b8839cee89eef9ed522",
+          "sha1": "3c1f8e0474259035d17da552b393f610b42573a0",
+          "md5": "2e2ae6b1c51d2114a258ac97555040d9"
+        }
+      ]
+    },
+    {
+      "name": "api",
+      "attributes": {
+        "org.gradle.usage": "java-api"
+      },
+      "dependencies": [
+        {
+          "group": "com.skedgo.tripkit",
+          "module": "CommonCoreLegacy",
+          "version": {
+            "requires": "2.1.43"
+          }
+        },
+        {
+          "group": "com.skedgo.tripkit",
+          "module": "TripKitDomain",
+          "version": {
+            "requires": "2.1.43"
+          }
+        },
+        {
+          "group": "com.skedgo.tripkit",
+          "module": "TripKitDomainLegacy",
+          "version": {
+            "requires": "2.1.43"
+          }
+        },
+        {
+          "group": "com.skedgo.tripkit",
+          "module": "TripKitData",
+          "version": {
+            "requires": "2.1.43"
+          }
+        },
+        {
+          "group": "com.skedgo.tripkit",
+          "module": "sqliteutils",
+          "version": {
+            "requires": "2.1.43"
+          }
+        }
+      ],
+      "files": [
+        {
+          "name": "TripKitAndroid-2.1.43.aar",
+          "url": "TripKitAndroid-2.1.43.aar",
+          "size": 418615,
+          "sha512": "003dbb4afa991b0b0600d154a9c29693ce58e8a1a3cf68e388dfb7b0b6688e8c9f0271534ba4a5834b13d8e0f6fcdd90a7076d29fe8460c109aa2f07eae87739",
+          "sha256": "fa4c7606a19a4a27f8af87bd69a1078f03b01fa826cadada9589485aad25f204",
+          "sha1": "d3479baa69e69588badd1842083d3fdec9cf936f",
+          "md5": "ef8f6399a136cc47de1b2d0d750f8bfc"
+        },
+        {
+          "name": "TripKitAndroid-2.1.43-sources.jar",
+          "url": "TripKitAndroid-2.1.43-sources.jar",
+          "size": 89590,
+          "sha512": "f626a4929d6b30f8f49b34336e31fb98c5a9c517b03159661969b0a07e46650204f3e62b5a26c7948c686404dacc9e7867db5e57583bcef3ccd756de871ec8f3",
+          "sha256": "a4acae0775f391f4e9d158a7e0c72f452cceadc65f924d38e50d1af54eee62bf",
+          "sha1": "1c9bf5828dc6eaae9c4ce2ed2265a7ef5e5f8ace",
+          "md5": "749650177bd7a84cc1a50fa80c30214a"
+        },
+        {
+          "name": "TripKitAndroid-2.1.43-javadoc.jar",
+          "url": "TripKitAndroid-2.1.43-javadoc.jar",
+          "size": 225363,
+          "sha512": "4e5041eb24aa2b88092636f4faf2ca92355fb85d709fa68d3ed1777b91483461168b59ee5a72f5e7ddce8f30cb04cbb95db19c5c0f28494b284e6fb2b43b9ab6",
+          "sha256": "a6dbc715303163095457d0405c2406d7fb4b4963edbf2b8839cee89eef9ed522",
+          "sha1": "3c1f8e0474259035d17da552b393f610b42573a0",
+          "md5": "2e2ae6b1c51d2114a258ac97555040d9"
+        }
+      ]
+    }
+  ]
+}

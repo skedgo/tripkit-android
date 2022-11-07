@@ -9,6 +9,8 @@ import com.skedgo.tripkit.configuration.AppVersionNameRepository
 import com.skedgo.tripkit.configuration.GetAppVersion
 import com.skedgo.tripkit.configuration.Server
 import com.skedgo.tripkit.data.HttpClientCustomDataStore
+import com.skedgo.tripkit.regionrouting.GetRegionRoutingService
+import com.skedgo.tripkit.regionrouting.RegionRoutingApi
 import dagger.Lazy
 import dagger.Module
 import dagger.Provides
@@ -127,5 +129,18 @@ open class HttpClientModule(
         return TripUpdaterImpl(context.resources, api, gson)
     }
 
+    @Provides
+    open fun getRegionRoutingApi(builder: Retrofit.Builder, httpClient: OkHttpClient): RegionRoutingApi {
+        return builder
+                .client(httpClient)
+                .build()
+                .create(RegionRoutingApi::class.java)
+    }
+
+    @Singleton
+    @Provides
+    open fun getRegionRoutingService(api: RegionRoutingApi): GetRegionRoutingService {
+        return GetRegionRoutingService.GetRegionRoutingServiceImpl(api)
+    }
 
 }
