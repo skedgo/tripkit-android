@@ -1,9 +1,9 @@
-package com.skedgo.tripkit.regionrouting
+package com.skedgo.tripkit.regionrouting.data
 
 import com.skedgo.tripkit.routing.ModeInfo
 import com.skedgo.tripkit.routing.ServiceColor
 
-data class GetRegionRouteResponse(
+data class RegionRoute(
         val id: String,
         val operatorID: String,
         val shortName: String,

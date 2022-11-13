@@ -9,7 +9,8 @@ import com.skedgo.tripkit.configuration.AppVersionNameRepository
 import com.skedgo.tripkit.configuration.GetAppVersion
 import com.skedgo.tripkit.configuration.Server
 import com.skedgo.tripkit.data.HttpClientCustomDataStore
-import com.skedgo.tripkit.regionrouting.GetRegionRoutingService
+import com.skedgo.tripkit.data.regions.RegionService
+import com.skedgo.tripkit.regionrouting.RegionRoutingRepository
 import com.skedgo.tripkit.regionrouting.RegionRoutingApi
 import dagger.Lazy
 import dagger.Module
@@ -139,8 +140,8 @@ open class HttpClientModule(
 
     @Singleton
     @Provides
-    open fun getRegionRoutingService(api: RegionRoutingApi): GetRegionRoutingService {
-        return GetRegionRoutingService.GetRegionRoutingServiceImpl(api)
+    open fun getRegionRoutingService(api: RegionRoutingApi, regionService: RegionService): RegionRoutingRepository {
+        return RegionRoutingRepository.RegionRoutingRepositoryImpl(api, regionService)
     }
 
 }
