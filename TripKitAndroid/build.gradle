@@ -5,9 +5,14 @@ apply plugin: 'digital.wup.android-maven-publish'
 apply plugin: "kotlin-android"
 apply plugin: "kotlin-kapt"
 apply plugin: 'org.jetbrains.dokka'
+apply plugin: 'org.jetbrains.kotlin.android.extensions'
 
 android {
   compileSdkVersion versions.compileSdkVersion
+
+  androidExtensions {
+    experimental = true
+  }
 
   defaultConfig {
       minSdkVersion versions.proMinSdkVersion

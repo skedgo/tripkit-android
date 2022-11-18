@@ -4,10 +4,15 @@ apply plugin: "com.android.library"
 apply plugin: 'digital.wup.android-maven-publish'
 apply plugin: "kotlin-android"
 apply plugin: "kotlin-kapt"
-
+apply plugin: 'kotlin-android-extensions'
+apply plugin: "org.jetbrains.kotlin.android.extensions"
 
 android {
     compileSdkVersion versions.compileSdkVersion
+
+    androidExtensions {
+        experimental = true
+    }
 
     defaultConfig {
         minSdkVersion versions.proMinSdkVersion

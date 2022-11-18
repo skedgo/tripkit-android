@@ -7,11 +7,15 @@ import androidx.annotation.Nullable;
 
 import android.text.TextUtils;
 
-import com.google.gson.Gson;
 import com.google.gson.annotations.SerializedName;
+import com.skedgo.tripkit.regionrouting.data.Operator;
 import com.skedgo.tripkit.common.util.StringUtils;
 
+import com.skedgo.tripkit.regionrouting.data.RouteDetails;
 import com.skedgo.tripkit.routing.LocationExtensionsKt;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class Location implements Parcelable {
     /**
@@ -103,6 +107,13 @@ public class Location implements Parcelable {
             location.withExternalApp = in.readInt() == 1;
             location.region = in.readString();
 
+            List<Operator> operators = new ArrayList<>();
+            in.readTypedList(operators, Operator.CREATOR);
+            location.operators = operators;
+
+            List<RouteDetails> routes = new ArrayList<>();
+            in.readTypedList(routes, RouteDetails.CREATOR);
+
             return location;
         }
 
@@ -162,6 +173,8 @@ public class Location implements Parcelable {
     private String appUrl;
     @SerializedName("withExternalApp")
     private boolean withExternalApp;
+    private List<Operator> operators;
+    private List<RouteDetails> routes;
 
     public Location() {
         lat = ZERO_LAT;
@@ -547,6 +560,8 @@ public class Location implements Parcelable {
         out.writeString(appUrl);
         out.writeInt(withExternalApp ? 1 : 0);
         out.writeString(region);
+        out.writeTypedList(operators);
+        out.writeTypedList(routes);
     }
 
     /**
@@ -607,6 +622,8 @@ public class Location implements Parcelable {
                 && equals(locationClass, another.locationClass)
                 && equals(w3w, another.w3w)
                 && equals(w3wInfoURL, another.w3wInfoURL)
-                && equals(region, another.region);
+                && equals(region, another.region)
+                && equals(operators, another.operators)
+                && equals(routes, another.routes);
     }
 }
