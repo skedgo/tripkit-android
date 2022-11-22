@@ -14,7 +14,9 @@ data class RegionRoute(
         val modeInfo: ModeInfo,
         val stops: List<String>,
         val routeColor: ServiceColor,
-        val realTime: RealTime
+        val realTime: RealTime,
+        val routeName: String,
+        val routeDescription: String
 )
 
 data class RealTime(

@@ -17,7 +17,7 @@ data class RouteDetails(
         val routeColor: ServiceColor?,
         val routeName: String?,
         val shortName: String?,
-        val routeDescription: String?,
+        val routeDescription: String?
 ) : KParcelable {
 
     private constructor(p: Parcel) : this(
