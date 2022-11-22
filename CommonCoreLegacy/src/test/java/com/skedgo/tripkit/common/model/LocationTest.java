@@ -2,10 +2,13 @@ package com.skedgo.tripkit.common.model;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
+import com.skedgo.tripkit.regionrouting.data.Operator;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.robolectric.RobolectricTestRunner;
+
+import java.util.ArrayList;
 
 import static org.assertj.core.api.Java6Assertions.assertThat;
 
@@ -75,6 +78,7 @@ public class LocationTest {
     expected.setLocationClass("Location Class");
     expected.setW3w("w3w");
     expected.setW3wInfoURL("w3wInfoUrl");
+    expected.setOperators(new ArrayList<Operator>());
 
     Location actual = Location.CREATOR.createFromParcel(Utils.parcel(expected));
     assertThat(actual).isEqualTo(expected);

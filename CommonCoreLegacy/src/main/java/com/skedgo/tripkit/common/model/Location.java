@@ -477,6 +477,12 @@ public class Location implements Parcelable {
         this.region = region;
     }
 
+    public List<Operator> getOperators() { return operators; }
+
+    public void setOperators( List<Operator> operators) {
+        this.operators = operators;
+    }
+
     /**
      * Get the distance between this and another point
      * <p/>
