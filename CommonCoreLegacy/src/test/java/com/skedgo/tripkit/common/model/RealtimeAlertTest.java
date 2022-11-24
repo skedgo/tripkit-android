@@ -6,10 +6,13 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonObject;
 import com.skedgo.tripkit.common.Parcels;
+import com.skedgo.tripkit.regionrouting.data.Operator;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.robolectric.RobolectricTestRunner;
+
+import java.util.ArrayList;
 
 import static com.skedgo.tripkit.common.model.RealtimeAlert.SEVERITY_WARNING;
 import static org.assertj.core.api.Java6Assertions.assertThat;
@@ -41,13 +44,17 @@ public class RealtimeAlertTest {
   }
 
   @Test public void parcel() {
+
+    Location location = new Location(1.0, 2.0);
+    location.setOperators(new ArrayList<Operator>());
+
     final RealtimeAlert expected = ImmutableRealtimeAlert.builder()
         .title("Some title")
         .text("Some text")
         .stopCode("Some code")
         .serviceTripID("Some id")
         .severity(RealtimeAlert.SEVERITY_ALERT)
-        .location(new Location(1.0, 2.0))
+        .location(location)
         .remoteHashCode(25251325)
         .url("Some url")
         .build();
