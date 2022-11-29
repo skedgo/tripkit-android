@@ -97,6 +97,12 @@ dependencies {
   implementation libs.immutablesGson
   implementation libs.networkResponse
 
+  implementation libs.playServicesMaps
+  implementation libs.map_utils
+  implementation libs.map_utils_ktx
+  implementation libs.map_extension
+  implementation libs.location
+
   api project(':CommonCoreLegacy')
   api project(':TripKitDomain')
   api project(':TripKitDomainLegacy')

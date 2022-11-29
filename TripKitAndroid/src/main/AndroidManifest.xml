@@ -17,5 +17,13 @@
         <action android:name="com.firebase.jobdispatcher.ACTION_EXECUTE" />
       </intent-filter>
     </service>
+    <receiver
+        android:name=".routing.GeofenceBroadcastReceiver"
+        android:enabled="true"
+        android:exported="true">
+      <intent-filter>
+        <action android:name="com.skedgo.tripkit.routing.GeofenceBroadcastReceiver.ACTION_GEOFENCE_EVENT" />
+      </intent-filter>
+    </receiver>
   </application>
 </manifest>
