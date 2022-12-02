@@ -71,5 +71,6 @@ data class Ticket(
         val description: String,
         val name: String,
         val price: Double,
-        var value: Long?
+        var value: Long?,
+        val max: Int? = null
 )

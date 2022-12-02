@@ -1,7 +1,9 @@
 package com.skedgo.tripkit.booking.quickbooking
 
+import com.skedgo.tripkit.booking.mybookings.PaymentRequest
 import com.skedgo.tripkit.routing.RoutingResponse
 import io.reactivex.Single
+import okhttp3.ResponseBody
 import retrofit2.http.Body
 import retrofit2.http.GET
 import retrofit2.http.POST
@@ -23,6 +25,12 @@ interface QuickBookingApi {
     @GET
     fun getPaymentIntent(@Url url: String): Single<QuickBookingPaymentIntent>
 
+    @POST
+    fun postPaymentMethod(@Url url: String, @Body request: PaymentRequest): Single<ConfirmPaymentUpdateResponse>
+
     @GET
     fun confirmPaymentUpdate(@Url url: String): Single<ConfirmPaymentUpdateResponse>
+
+    @GET
+    fun getTicketHTML(@Url url: String): Single<ResponseBody>
 }

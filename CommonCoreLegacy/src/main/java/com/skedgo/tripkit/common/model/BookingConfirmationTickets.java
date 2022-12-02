@@ -3,10 +3,15 @@ package com.skedgo.tripkit.common.model;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import androidx.annotation.Nullable;
+
 import com.google.gson.annotations.JsonAdapter;
 
 import org.immutables.gson.Gson;
 import org.immutables.value.Value;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Gson.TypeAdapters
 @Value.Immutable
@@ -17,6 +22,9 @@ public abstract class BookingConfirmationTickets implements Parcelable {
     public static final Creator<BookingConfirmationTickets> CREATOR = new Creator<BookingConfirmationTickets>() {
         @Override
         public BookingConfirmationTickets createFromParcel(Parcel in) {
+            List<BookingConfirmationPurchasedTicket> tickets = new ArrayList<>();
+            in.readTypedList(tickets, BookingConfirmationPurchasedTicket.CREATOR);
+
             return ImmutableBookingConfirmationTickets.builder()
                     .currency(in.readString())
                     .description(in.readString())
@@ -24,6 +32,7 @@ public abstract class BookingConfirmationTickets implements Parcelable {
                     .name(in.readString())
                     .price(in.readDouble())
                     .value(in.readLong())
+                    .purchasedTickets(tickets)
                     .build();
         }
 
@@ -41,6 +50,7 @@ public abstract class BookingConfirmationTickets implements Parcelable {
         dest.writeString(name());
         dest.writeDouble(price());
         dest.writeLong(value());
+        dest.writeTypedList(purchasedTickets());
     }
 
     @Override
@@ -59,4 +69,7 @@ public abstract class BookingConfirmationTickets implements Parcelable {
     public abstract Double price();
 
     public abstract Long value();
+
+    @Nullable
+    public abstract List<BookingConfirmationPurchasedTicket> purchasedTickets();
 }

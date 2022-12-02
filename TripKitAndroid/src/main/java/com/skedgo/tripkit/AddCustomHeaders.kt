@@ -25,7 +25,7 @@ class AddCustomHeaders constructor(
     private val keyHeader = "X-TripGo-Key"
     private val regionEligibilityHeader = "X-TripGo-RegionEligibility"
     private val acceptLanguageHeader = "Accept-Language"
-    private val appJsonValue = "application/json"
+    private val appJsonValue = "*/*"
     private val acceptHeader = "Accept"
     private val userTokenHeader = "userToken"
 
