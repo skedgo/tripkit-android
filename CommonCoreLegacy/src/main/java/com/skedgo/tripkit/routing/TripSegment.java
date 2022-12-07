@@ -131,7 +131,7 @@ public class TripSegment implements IRealTimeElement, ITimeRange {
     private long mEndTimeInSecs;
 
     private boolean hideExactTimes;
-
+    @Nullable
     private List<Geofence> geofences;
 
     /**
@@ -863,6 +863,7 @@ public class TripSegment implements IRealTimeElement, ITimeRange {
         this.hideExactTimes = hideExactTimes;
     }
 
+    @Nullable
     public List<Geofence> getGeofences() { return geofences; }
 
     public void setGeofences(List<Geofence> geofences) {

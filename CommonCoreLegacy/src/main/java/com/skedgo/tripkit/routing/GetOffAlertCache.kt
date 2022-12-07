@@ -14,7 +14,12 @@ object GetOffAlertCache {
 
     fun setTripAlertOnState(tripUuid: String, onState: Boolean) {
         if (onState) {
-            sharedPreferences.edit().putBoolean(tripUuid, onState).apply()
+            //As per adrian, only one trip can have alerts on, so will need to clear first to make sure no other trips has alerts on
+            sharedPreferences.edit().apply {
+                clear()
+                putBoolean(tripUuid, onState).apply()
+            }.apply()
+            //sharedPreferences.edit().putBoolean(tripUuid, onState).apply()
         } else {
             sharedPreferences.edit().remove(tripUuid).apply()
         }

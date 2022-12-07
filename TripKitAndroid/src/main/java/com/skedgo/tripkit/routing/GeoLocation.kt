@@ -6,6 +6,7 @@ import android.content.Context
 import android.util.Log
 import com.google.android.gms.location.GeofencingClient
 import com.google.android.gms.location.GeofencingRequest
+import com.google.android.gms.location.LocationServices
 import com.skedgo.tripkit.BuildConfig
 
 
@@ -14,7 +15,9 @@ object GeoLocation {
 
     val TAG = GeoLocation::class.java.simpleName
     lateinit var context: Context
-    lateinit var geofencingClient: GeofencingClient
+    private val geofencingClient: GeofencingClient by lazy {
+        LocationServices.getGeofencingClient(context)
+    }
     private val currentGeofenceList = mutableListOf<com.google.android.gms.location.Geofence>()
     private val geofencePendingIntent: PendingIntent by lazy {
         GeofenceBroadcastReceiver.getPendingIntent(context)
@@ -28,6 +31,9 @@ object GeoLocation {
     fun createGeoFences(geofences: List<Geofence>) {
         val gsmGeofences = mutableListOf<com.google.android.gms.location.Geofence>()
         gsmGeofences.addAll(geofences.map { it.toGsmGeofence() })
+
+        currentGeofenceList.clear()
+        currentGeofenceList.addAll(gsmGeofences)
 
         createGeoFencingRequest()?.let { request ->
             if (currentGeofenceList.isNotEmpty()) {
@@ -58,6 +64,11 @@ object GeoLocation {
         }
 
         return null
+    }
+
+    fun clearGeofences() {
+        currentGeofenceList.clear()
+        removeGeoFences()
     }
 
     private fun removeGeoFences(onRemoveCallback: (() -> Unit)? = null) {

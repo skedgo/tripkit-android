@@ -15,6 +15,7 @@ import com.skedgo.tripkit.bookingproviders.BookingResolver;
 import io.reactivex.functions.Consumer;
 
 import com.skedgo.tripkit.a2brouting.A2bRoutingDataModule;
+import com.skedgo.tripkit.routing.GeoLocation;
 import com.skedgo.tripkit.routing.GetOffAlertCache;
 import com.skedgo.tripkit.tsp.TspModule;
 
@@ -95,6 +96,7 @@ public abstract class TripKit {
                         .build();
                 JodaTimeAndroid.init(configs.context());
                 GetOffAlertCache.INSTANCE.init(configs.context());
+                GeoLocation.INSTANCE.init(configs.context());
             }
 
             FetchRegionsService.Companion.scheduleAsync(configs.context())
