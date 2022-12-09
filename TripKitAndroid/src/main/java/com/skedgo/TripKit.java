@@ -1,6 +1,8 @@
 package com.skedgo;
 
+import android.app.NotificationChannel;
 import android.content.Context;
+import android.os.Build;
 
 import androidx.annotation.NonNull;
 
@@ -15,6 +17,7 @@ import com.skedgo.tripkit.bookingproviders.BookingResolver;
 import io.reactivex.functions.Consumer;
 
 import com.skedgo.tripkit.a2brouting.A2bRoutingDataModule;
+import com.skedgo.tripkit.notification.NotificationKt;
 import com.skedgo.tripkit.routing.GeoLocation;
 import com.skedgo.tripkit.routing.GetOffAlertCache;
 import com.skedgo.tripkit.tsp.TspModule;
@@ -30,6 +33,12 @@ import com.skedgo.tripkit.android.DateTimeComponent;
 import com.skedgo.tripkit.android.FetchRegionsService;
 
 import net.danlew.android.joda.JodaTimeAndroid;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import static com.skedgo.tripkit.routing.TripAlarmBroadcastReceiver.NOTIFICATION_CHANNEL_START_TRIP;
+import static com.skedgo.tripkit.routing.TripAlarmBroadcastReceiver.NOTIFICATION_CHANNEL_START_TRIP_ID;
 
 @Singleton
 @Component(modules = {
@@ -97,6 +106,17 @@ public abstract class TripKit {
                 JodaTimeAndroid.init(configs.context());
                 GetOffAlertCache.INSTANCE.init(configs.context());
                 GeoLocation.INSTANCE.init(configs.context());
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                    List<NotificationChannel> channels = new ArrayList<>();
+                    channels.add(NotificationKt.createChannel(
+                            NOTIFICATION_CHANNEL_START_TRIP_ID,
+                            NOTIFICATION_CHANNEL_START_TRIP)
+                    );
+                    NotificationKt.createNotificationChannels(
+                            configs.context(),
+                            channels
+                    );
+                }
             }
 
             FetchRegionsService.Companion.scheduleAsync(configs.context())

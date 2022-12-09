@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.skedgo.tripkit">
 
@@ -12,13 +13,19 @@
     <uses-permission android:name="android.permission.ACCESS_BACKGROUND_LOCATION" />
 
     <application>
+        <receiver
+            android:name=".routing.TripAlarmBroadcastReceiver"
+            android:enabled="true"
+            android:exported="true"></receiver>
+
         <service
-            android:name="com.skedgo.tripkit.android.FetchRegionsService"
+            android:name=".android.FetchRegionsService"
             android:exported="false">
             <intent-filter>
                 <action android:name="com.firebase.jobdispatcher.ACTION_EXECUTE" />
             </intent-filter>
         </service>
+
         <receiver
             android:name=".routing.GeofenceBroadcastReceiver"
             android:enabled="true"
@@ -28,4 +35,5 @@
             </intent-filter>
         </receiver>
     </application>
+
 </manifest>

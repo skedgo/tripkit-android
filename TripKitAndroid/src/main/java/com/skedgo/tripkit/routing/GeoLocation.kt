@@ -3,10 +3,12 @@ package com.skedgo.tripkit.routing
 import android.annotation.SuppressLint
 import android.app.PendingIntent
 import android.content.Context
+import android.os.Bundle
 import android.util.Log
 import com.google.android.gms.location.GeofencingClient
 import com.google.android.gms.location.GeofencingRequest
 import com.google.android.gms.location.LocationServices
+import com.google.gson.Gson
 import com.skedgo.tripkit.BuildConfig
 
 
@@ -19,9 +21,7 @@ object GeoLocation {
         LocationServices.getGeofencingClient(context)
     }
     private val currentGeofenceList = mutableListOf<com.google.android.gms.location.Geofence>()
-    private val geofencePendingIntent: PendingIntent by lazy {
-        GeofenceBroadcastReceiver.getPendingIntent(context)
-    }
+    private var geofencePendingIntent: PendingIntent? = null
 
     fun init(context: Context) {
         this.context = context
@@ -34,6 +34,10 @@ object GeoLocation {
 
         currentGeofenceList.clear()
         currentGeofenceList.addAll(gsmGeofences)
+
+        val bundle = Bundle()
+        bundle.putString(GeofenceBroadcastReceiver.EXTRA_GEOFENCES, Gson().toJson(geofences))
+        geofencePendingIntent = GeofenceBroadcastReceiver.getPendingIntent(context, bundle)
 
         createGeoFencingRequest()?.let { request ->
             if (currentGeofenceList.isNotEmpty()) {
@@ -68,7 +72,9 @@ object GeoLocation {
 
     fun clearGeofences() {
         currentGeofenceList.clear()
-        removeGeoFences()
+        if (geofencePendingIntent != null) {
+            removeGeoFences()
+        }
     }
 
     private fun removeGeoFences(onRemoveCallback: (() -> Unit)? = null) {

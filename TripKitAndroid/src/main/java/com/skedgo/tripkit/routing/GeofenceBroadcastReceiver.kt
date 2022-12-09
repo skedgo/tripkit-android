@@ -4,13 +4,18 @@ import android.app.PendingIntent
 import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
+import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
 import com.google.android.gms.location.Geofence
 import com.google.android.gms.location.GeofenceStatusCodes
 import com.google.android.gms.location.GeofencingEvent
+import com.google.gson.Gson
 import com.skedgo.tripkit.BuildConfig
 import com.skedgo.tripkit.R
+import com.skedgo.tripkit.extensions.fromJson
+import com.skedgo.tripkit.notification.createNotification
+import com.skedgo.tripkit.notification.fire
 
 class GeofenceBroadcastReceiver : BroadcastReceiver() {
 
@@ -22,6 +27,8 @@ class GeofenceBroadcastReceiver : BroadcastReceiver() {
 
 
         if (intent.action == ACTION_GEOFENCE_EVENT) {
+            val geofences: List<com.skedgo.tripkit.routing.Geofence> =
+                    Gson().fromJson(intent.getStringExtra(EXTRA_GEOFENCES) ?: "")
             val geofencingEvent = GeofencingEvent.fromIntent(intent)
 
             if (geofencingEvent.hasError()) {
@@ -40,14 +47,14 @@ class GeofenceBroadcastReceiver : BroadcastReceiver() {
                     }
                 }
 
-                val geofenceIds = mutableListOf<String>()
-                geofencingEvent.triggeringGeofences.forEach { triggeringGeofence ->
-                    geofenceIds.add(
-                            triggeringGeofence.requestId
-                    )
-                }
-
-
+                val geofence = geofences.first { it.id == geofenceId }
+                context.createNotification(
+                        channelId = TripAlarmBroadcastReceiver.NOTIFICATION_CHANNEL_START_TRIP_ID,
+                        smallIcon = R.drawable.v4_ic_map_location,
+                        contentTitle = geofence.messageTitle,
+                        contentText = geofence.messageBody,
+                        bigText = geofence.messageBody
+                ).fire(context)
             }
         }
     }
@@ -71,9 +78,11 @@ class GeofenceBroadcastReceiver : BroadcastReceiver() {
     companion object {
         const val TAG = "GeofenceReceiver"
         const val ACTION_GEOFENCE_EVENT = "ACTION_GEOFENCE_EVENT"
+        const val EXTRA_GEOFENCES = "EXTRA_GEOFENCES"
 
-        fun getPendingIntent(context: Context): PendingIntent {
+        fun getPendingIntent(context: Context, bundle: Bundle? = null): PendingIntent {
             val intent = Intent(context, GeofenceBroadcastReceiver::class.java)
+            bundle?.let { intent.putExtras(bundle) }
             intent.action = ACTION_GEOFENCE_EVENT
             return PendingIntent.getBroadcast(
                     context,
