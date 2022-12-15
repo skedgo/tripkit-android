@@ -9,15 +9,22 @@ data class Geofence(
         val messageType: String,
         val messageTitle: String,
         val messageBody: String
-)
+) {
+    var timeline: Long = -1L
+
+    fun computeAndSetTimeline(tripEndDateTimeInMillis: Long): Long {
+        val currentTimeInMillis = System.currentTimeMillis()
+        return tripEndDateTimeInMillis - currentTimeInMillis
+    }
+}
 
 data class Coordinate(
         val lat: Double,
         val lng: Double
 )
 
-enum class Trigger {
-    ENTER, EXIT
+enum class Trigger(val value: String) {
+    ENTER("ENTER"), EXIT("EXIT")
 }
 
 enum class MessageType {

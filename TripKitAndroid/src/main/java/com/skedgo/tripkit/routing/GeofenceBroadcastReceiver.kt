@@ -37,7 +37,8 @@ class GeofenceBroadcastReceiver : BroadcastReceiver() {
                 return
             }
 
-            if (geofencingEvent.geofenceTransition == Geofence.GEOFENCE_TRANSITION_ENTER) {
+            if (geofencingEvent.geofenceTransition == Geofence.GEOFENCE_TRANSITION_ENTER ||
+                    geofencingEvent.geofenceTransition == Geofence.GEOFENCE_TRANSITION_EXIT) {
                 val geofenceId = when {
                     geofencingEvent.triggeringGeofences.isNotEmpty() ->
                         geofencingEvent.triggeringGeofences[0].requestId

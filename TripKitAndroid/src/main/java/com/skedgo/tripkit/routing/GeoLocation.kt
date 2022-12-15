@@ -30,7 +30,9 @@ object GeoLocation {
     @SuppressLint("MissingPermission")
     fun createGeoFences(geofences: List<Geofence>) {
         val gsmGeofences = mutableListOf<com.google.android.gms.location.Geofence>()
-        gsmGeofences.addAll(geofences.map { it.toGsmGeofence() })
+        gsmGeofences.addAll(
+                geofences.map { it.toGsmGeofence() }
+        )
 
         currentGeofenceList.clear()
         currentGeofenceList.addAll(gsmGeofences)
