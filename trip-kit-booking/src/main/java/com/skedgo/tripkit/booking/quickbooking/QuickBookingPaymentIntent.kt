@@ -5,5 +5,6 @@ data class QuickBookingPaymentIntent(
     val paymentIntentID: String,
     val url: String,
     val stripeApiKey: String? = null,
-    val updateURL: String? = null
+    val updateURL: String? = null,
+    val type: String? = null
 )
