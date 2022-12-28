@@ -12,6 +12,7 @@ import com.skedgo.tripkit.data.HttpClientCustomDataStore
 import com.skedgo.tripkit.data.regions.RegionService
 import com.skedgo.tripkit.regionrouting.RegionRoutingRepository
 import com.skedgo.tripkit.regionrouting.RegionRoutingApi
+import com.skedgo.tripkit.regionrouting.RegionRoutingAutoCompleter
 import dagger.Lazy
 import dagger.Module
 import dagger.Provides
@@ -144,4 +145,9 @@ open class HttpClientModule(
         return RegionRoutingRepository.RegionRoutingRepositoryImpl(api, regionService)
     }
 
+    @Singleton
+    @Provides
+    open fun getRegionRoutingAutoCompleter(api: RegionRoutingApi, regionService: RegionService): RegionRoutingAutoCompleter {
+        return RegionRoutingAutoCompleter.RegionRoutingAutoCompleterImpl(api, regionService)
+    }
 }

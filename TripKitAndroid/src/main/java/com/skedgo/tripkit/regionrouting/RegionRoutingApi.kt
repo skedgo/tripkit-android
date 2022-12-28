@@ -7,10 +7,14 @@ import com.skedgo.tripkit.regionrouting.data.RouteDetails
 import io.reactivex.Single
 import retrofit2.http.Body
 import retrofit2.http.POST
+import retrofit2.http.Url
 
 interface RegionRoutingApi {
     @POST("info/routes.json")
     fun getRegionRoutes(@Body request: GetRegionRouteRequest): Single<List<RegionRoute>>
+
+    @POST
+    fun getRegionRoutes(@Url customUrl: String, @Body request: GetRegionRouteRequest): Single<List<RegionRoute>>
 
     @POST("info/routeInfo.json")
     fun getRegionRouteInfo(@Body request: GetRouteDetailsRequest): Single<RouteDetails>
