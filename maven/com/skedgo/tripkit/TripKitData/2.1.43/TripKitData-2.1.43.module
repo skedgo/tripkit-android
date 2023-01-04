@@ -11,7 +11,7 @@
   "createdBy": {
     "gradle": {
       "version": "6.5",
-      "buildId": "za62czknhbfenc3c6xll7wah4y"
+      "buildId": "bomxtxgncnefbnsuxrdgmklcoi"
     }
   },
   "variants": [
@@ -157,24 +157,6 @@
       ],
       "files": [
         {
-          "name": "TripKitData-2.1.43-sources.jar",
-          "url": "TripKitData-2.1.43-sources.jar",
-          "size": 57353,
-          "sha512": "7dafa9364c61211aa53fc38acd68edb6ea9f6ad382a067f11abcafa4415baf705f2c61f724ebf88fb341e585162ac5f194a935a3baaccbf68c25c0b0d78cac03",
-          "sha256": "5ece95a934c3721aa8f3e69762ea883dbd45ea0e134cbc52fca2475d628c613a",
-          "sha1": "135daebc81deada18a3bc203a06b1e80edc082db",
-          "md5": "d2bc4f764a05422dec1090430a873333"
-        },
-        {
-          "name": "TripKitData-2.1.43-javadoc.jar",
-          "url": "TripKitData-2.1.43-javadoc.jar",
-          "size": 63383,
-          "sha512": "18704f6986a4053f513b0a1c001822c95cef18ed04e2a508273385156477ab5322872f0e1876563d05ef4ba338d08a1d1d22f8fcc8b6d6b7056d06b5f7df04c3",
-          "sha256": "87d222b1ee15df08bcfb9f89e056e33b886f24c73c63ff8d532ecb2d126f8399",
-          "sha1": "70c70b809397b02cb842c2b417f03ccfe9232987",
-          "md5": "aa214ccc11cda31718d447ebb37a5710"
-        },
-        {
           "name": "TripKitData-2.1.43.aar",
           "url": "TripKitData-2.1.43.aar",
           "size": 555853,
@@ -182,6 +164,24 @@
           "sha256": "dd38c93e95bd92e619441cf5a24f3fd313a93f9fec78b8b73b18883aecabbdc3",
           "sha1": "40a3d83ea4dc71dcb68b8c8bd594e4de542d5439",
           "md5": "eb8d77874486b6036bb59b7be6826c7e"
+        },
+        {
+          "name": "TripKitData-2.1.43-sources.jar",
+          "url": "TripKitData-2.1.43-sources.jar",
+          "size": 57353,
+          "sha512": "053ba8869bc691908656b8e59d8f150d4f1a18cf884699d785a05919306954f27bb34d1ab5d3a93df3bacc83a488ad0f3b2bf7e325949642b0a1b8a2ee187795",
+          "sha256": "b03636cffc50fbe7e766e293b8a30bec9dc890334c36075bd3b422289e24ae6f",
+          "sha1": "f262b97f8a3fa92aa78a25bd06e191d7c91a5d77",
+          "md5": "c4af731ba92f46f47ccd80ca69caffd4"
+        },
+        {
+          "name": "TripKitData-2.1.43-javadoc.jar",
+          "url": "TripKitData-2.1.43-javadoc.jar",
+          "size": 63383,
+          "sha512": "210c2c3dd59e2184c486906ba5e3273c110e017160767997fe28973570eaad56d75eb2567553d1f0f1d9f5feb655ea4a850eba1936ac33d3694a62289879d158",
+          "sha256": "9da781941293261fa5f460bcf9d70da9407ae61862b79ccbef7efc30deacefa8",
+          "sha1": "c73984740a443a0fb695eeb1c283292c060161d8",
+          "md5": "78c8fe71673468b3553d6867414bbfc8"
         }
       ]
     },
@@ -208,24 +208,6 @@
       ],
       "files": [
         {
-          "name": "TripKitData-2.1.43-sources.jar",
-          "url": "TripKitData-2.1.43-sources.jar",
-          "size": 57353,
-          "sha512": "7dafa9364c61211aa53fc38acd68edb6ea9f6ad382a067f11abcafa4415baf705f2c61f724ebf88fb341e585162ac5f194a935a3baaccbf68c25c0b0d78cac03",
-          "sha256": "5ece95a934c3721aa8f3e69762ea883dbd45ea0e134cbc52fca2475d628c613a",
-          "sha1": "135daebc81deada18a3bc203a06b1e80edc082db",
-          "md5": "d2bc4f764a05422dec1090430a873333"
-        },
-        {
-          "name": "TripKitData-2.1.43-javadoc.jar",
-          "url": "TripKitData-2.1.43-javadoc.jar",
-          "size": 63383,
-          "sha512": "18704f6986a4053f513b0a1c001822c95cef18ed04e2a508273385156477ab5322872f0e1876563d05ef4ba338d08a1d1d22f8fcc8b6d6b7056d06b5f7df04c3",
-          "sha256": "87d222b1ee15df08bcfb9f89e056e33b886f24c73c63ff8d532ecb2d126f8399",
-          "sha1": "70c70b809397b02cb842c2b417f03ccfe9232987",
-          "md5": "aa214ccc11cda31718d447ebb37a5710"
-        },
-        {
           "name": "TripKitData-2.1.43.aar",
           "url": "TripKitData-2.1.43.aar",
           "size": 555853,
@@ -233,6 +215,24 @@
           "sha256": "dd38c93e95bd92e619441cf5a24f3fd313a93f9fec78b8b73b18883aecabbdc3",
           "sha1": "40a3d83ea4dc71dcb68b8c8bd594e4de542d5439",
           "md5": "eb8d77874486b6036bb59b7be6826c7e"
+        },
+        {
+          "name": "TripKitData-2.1.43-sources.jar",
+          "url": "TripKitData-2.1.43-sources.jar",
+          "size": 57353,
+          "sha512": "053ba8869bc691908656b8e59d8f150d4f1a18cf884699d785a05919306954f27bb34d1ab5d3a93df3bacc83a488ad0f3b2bf7e325949642b0a1b8a2ee187795",
+          "sha256": "b03636cffc50fbe7e766e293b8a30bec9dc890334c36075bd3b422289e24ae6f",
+          "sha1": "f262b97f8a3fa92aa78a25bd06e191d7c91a5d77",
+          "md5": "c4af731ba92f46f47ccd80ca69caffd4"
+        },
+        {
+          "name": "TripKitData-2.1.43-javadoc.jar",
+          "url": "TripKitData-2.1.43-javadoc.jar",
+          "size": 63383,
+          "sha512": "210c2c3dd59e2184c486906ba5e3273c110e017160767997fe28973570eaad56d75eb2567553d1f0f1d9f5feb655ea4a850eba1936ac33d3694a62289879d158",
+          "sha256": "9da781941293261fa5f460bcf9d70da9407ae61862b79ccbef7efc30deacefa8",
+          "sha1": "c73984740a443a0fb695eeb1c283292c060161d8",
+          "md5": "78c8fe71673468b3553d6867414bbfc8"
         }
       ]
     }

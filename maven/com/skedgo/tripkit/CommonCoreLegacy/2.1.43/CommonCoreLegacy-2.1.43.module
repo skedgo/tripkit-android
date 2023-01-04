@@ -11,7 +11,7 @@
   "createdBy": {
     "gradle": {
       "version": "6.5",
-      "buildId": "za62czknhbfenc3c6xll7wah4y"
+      "buildId": "qqyl2pwsfzbnbkxdhsg7prd4ey"
     }
   },
   "variants": [
@@ -21,6 +21,13 @@
         "org.gradle.usage": "java-runtime"
       },
       "dependencies": [
+        {
+          "group": "org.jetbrains.kotlin",
+          "module": "kotlin-android-extensions-runtime",
+          "version": {
+            "requires": "1.4.10"
+          }
+        },
         {
           "group": "androidx.annotation",
           "module": "annotation",
@@ -89,29 +96,29 @@
         {
           "name": "CommonCoreLegacy-2.1.43-sources.jar",
           "url": "CommonCoreLegacy-2.1.43-sources.jar",
-          "size": 93544,
-          "sha512": "bb50bc352b38ccd20ce517be2b1034230a8afd19fe94bd3eefefd3cc2742d5b9c9eda49b7145540de7f7ce2fd4ffc6f5a0a9307e2492d8961a6d75e1f72376bd",
-          "sha256": "57b6c968eb69271d75cf20204773e92eecf866fc7ef9b715e65d266cd39963c9",
-          "sha1": "5894343ffacd45021a1ee1992fe7035168f32454",
-          "md5": "b86ad977c6f807d7d3aa311c002af790"
+          "size": 97469,
+          "sha512": "4556f950113ec8bcca765e7206ce671237add047b4e5fb49841a7193583d05c3ebef1bc3f57758fc6f35ba637b31f8743c916a5cbe76e8b8b26a419254c07448",
+          "sha256": "7d518d02ab88eec8ff5b94de61fdbe0f0fb0cbb6f63859b7faa19540bd4e299a",
+          "sha1": "c222160c7a10f2dda17903d817618fa68a8d9737",
+          "md5": "1e41e6075e9ef164055ff68c721be720"
         },
         {
           "name": "CommonCoreLegacy-2.1.43.aar",
           "url": "CommonCoreLegacy-2.1.43.aar",
-          "size": 577654,
-          "sha512": "b7ab5580aae28c84e1b80d1013b8cb1d774b537028039df8e2d122f16e0973efbb419fcbc57eafbd17406c7f49952e61fe4ac8485e06ee1c9e5a0004588f2313",
-          "sha256": "5e2be9284feeda9ac9b47d3d094ab11cdf03a5b35241659f92a8a35df010f93e",
-          "sha1": "a1e86b72952fecfe634905c8b29f51f2e50b6dc0",
-          "md5": "ab9657e6c5d0b18dc2afffbaee28a96a"
+          "size": 607469,
+          "sha512": "b94bbc6cd441cc5b41d52b5372efec91e7e7fef89aa26cb67f9d626c37601be84b9f3001a7ed71ce03aeabb162a328b7066005686e5f2ada0f38b7a17bf4b850",
+          "sha256": "243613b9532d5d6f1f878b99b2cd89a838d87bba1e97a94a88099a6d968964b7",
+          "sha1": "eb137a44a264a192383ddeb34670230897a10167",
+          "md5": "cb801e3c9c0e9fdb101afe5cce9ec21c"
         },
         {
           "name": "CommonCoreLegacy-2.1.43-javadoc.jar",
           "url": "CommonCoreLegacy-2.1.43-javadoc.jar",
-          "size": 322296,
-          "sha512": "68f8ff2bdef404afa4c009ac235cd6364a7b160bf6eb441d9f01c65425dac3011474e3aecdb953c1b169738273c5601fa685c8eccd32c482b972c9dfb0da81b2",
-          "sha256": "fb605781325ab0cbafb27d0ee9498c4359c016f97e2bb53cdd2e31dc835a98af",
-          "sha1": "6c67ddf73b79c8c5ef28db0605a82c85da48ad3d",
-          "md5": "d0a72043c4c22fc0b1025363193ebf91"
+          "size": 329474,
+          "sha512": "e7cbce5a1d8359486b2e61cfc5135ac62ef96d520f9e5d6d3a37cbffc71899d14ed18d556bcc04576632e850d9cfd2e3b45531462cbf0d0b7fedcaa71cda4f27",
+          "sha256": "3549165a449fc529f8581e3adc79af82061db0e4d5e9c15a18303652414c427a",
+          "sha1": "4721351575636d2c3222f3cb2bbfb8f29484e529",
+          "md5": "f2ac41c79ba55817f90786232084d7fd"
         }
       ]
     },
@@ -124,29 +131,29 @@
         {
           "name": "CommonCoreLegacy-2.1.43-sources.jar",
           "url": "CommonCoreLegacy-2.1.43-sources.jar",
-          "size": 93544,
-          "sha512": "bb50bc352b38ccd20ce517be2b1034230a8afd19fe94bd3eefefd3cc2742d5b9c9eda49b7145540de7f7ce2fd4ffc6f5a0a9307e2492d8961a6d75e1f72376bd",
-          "sha256": "57b6c968eb69271d75cf20204773e92eecf866fc7ef9b715e65d266cd39963c9",
-          "sha1": "5894343ffacd45021a1ee1992fe7035168f32454",
-          "md5": "b86ad977c6f807d7d3aa311c002af790"
+          "size": 97469,
+          "sha512": "4556f950113ec8bcca765e7206ce671237add047b4e5fb49841a7193583d05c3ebef1bc3f57758fc6f35ba637b31f8743c916a5cbe76e8b8b26a419254c07448",
+          "sha256": "7d518d02ab88eec8ff5b94de61fdbe0f0fb0cbb6f63859b7faa19540bd4e299a",
+          "sha1": "c222160c7a10f2dda17903d817618fa68a8d9737",
+          "md5": "1e41e6075e9ef164055ff68c721be720"
         },
         {
           "name": "CommonCoreLegacy-2.1.43.aar",
           "url": "CommonCoreLegacy-2.1.43.aar",
-          "size": 577654,
-          "sha512": "b7ab5580aae28c84e1b80d1013b8cb1d774b537028039df8e2d122f16e0973efbb419fcbc57eafbd17406c7f49952e61fe4ac8485e06ee1c9e5a0004588f2313",
-          "sha256": "5e2be9284feeda9ac9b47d3d094ab11cdf03a5b35241659f92a8a35df010f93e",
-          "sha1": "a1e86b72952fecfe634905c8b29f51f2e50b6dc0",
-          "md5": "ab9657e6c5d0b18dc2afffbaee28a96a"
+          "size": 607469,
+          "sha512": "b94bbc6cd441cc5b41d52b5372efec91e7e7fef89aa26cb67f9d626c37601be84b9f3001a7ed71ce03aeabb162a328b7066005686e5f2ada0f38b7a17bf4b850",
+          "sha256": "243613b9532d5d6f1f878b99b2cd89a838d87bba1e97a94a88099a6d968964b7",
+          "sha1": "eb137a44a264a192383ddeb34670230897a10167",
+          "md5": "cb801e3c9c0e9fdb101afe5cce9ec21c"
         },
         {
           "name": "CommonCoreLegacy-2.1.43-javadoc.jar",
           "url": "CommonCoreLegacy-2.1.43-javadoc.jar",
-          "size": 322296,
-          "sha512": "68f8ff2bdef404afa4c009ac235cd6364a7b160bf6eb441d9f01c65425dac3011474e3aecdb953c1b169738273c5601fa685c8eccd32c482b972c9dfb0da81b2",
-          "sha256": "fb605781325ab0cbafb27d0ee9498c4359c016f97e2bb53cdd2e31dc835a98af",
-          "sha1": "6c67ddf73b79c8c5ef28db0605a82c85da48ad3d",
-          "md5": "d0a72043c4c22fc0b1025363193ebf91"
+          "size": 329474,
+          "sha512": "e7cbce5a1d8359486b2e61cfc5135ac62ef96d520f9e5d6d3a37cbffc71899d14ed18d556bcc04576632e850d9cfd2e3b45531462cbf0d0b7fedcaa71cda4f27",
+          "sha256": "3549165a449fc529f8581e3adc79af82061db0e4d5e9c15a18303652414c427a",
+          "sha1": "4721351575636d2c3222f3cb2bbfb8f29484e529",
+          "md5": "f2ac41c79ba55817f90786232084d7fd"
         }
       ]
     }

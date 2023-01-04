@@ -11,7 +11,7 @@
   "createdBy": {
     "gradle": {
       "version": "6.5",
-      "buildId": "za62czknhbfenc3c6xll7wah4y"
+      "buildId": "zhb47y27ejbqfcd2zvgydngcmm"
     }
   },
   "variants": [
@@ -97,10 +97,10 @@
           "name": "ValidBookingCountData-2.1.43-javadoc.jar",
           "url": "ValidBookingCountData-2.1.43-javadoc.jar",
           "size": 261,
-          "sha512": "55aa90abbc2b5ec52d19afeacfd6ad7b8d788a2031bcb977493cc21d6b60bbdeedc80490e702d3e32ca96d41f7045b89657d557eafcc73889200719ccceb6258",
-          "sha256": "85e60e109fea02462f91f91f0d7ca646b4c8a2edfc7314b19284d2fc87f348a4",
-          "sha1": "98cb5afcea2e712e7d0c2a21ca514314fdb8281f",
-          "md5": "f66a692fa67e5a3d1ab0da2e4009f379"
+          "sha512": "d93407b27697f696a60316cce3109e9b81b9b895bc1b516423528cb362e7a9e1999dd88c6f88e48e82ad711099553ae3975056994597d94aec52b34a04537b76",
+          "sha256": "9f2632267d234f763b84829e2e421c730887e68dd2163df5f875bba61a60dd89",
+          "sha1": "62ea2ac014a9d2d49176ecb1c0798a6fe22d31ab",
+          "md5": "80d1a95aacfa16a16dc54140798738e8"
         },
         {
           "name": "ValidBookingCountData-2.1.43.aar",
@@ -115,10 +115,10 @@
           "name": "ValidBookingCountData-2.1.43-sources.jar",
           "url": "ValidBookingCountData-2.1.43-sources.jar",
           "size": 3124,
-          "sha512": "ee363fc827ebea903022d5518aa78da7c61799cd318fa7e3015e913f2b0bb7d86a313a87ecff3f4960ae7cedc98fc87abebaa0ae846e5239b02f9bc2af66c71c",
-          "sha256": "e285fa98ccad86ed34b94fd4c0156ff27c2d70de3d55213dc8eb906d3f345e91",
-          "sha1": "598f0447cee9bdc8ed57aab3e1594cf9d2082199",
-          "md5": "964596e82ba45cb2f333d2729f60dbfe"
+          "sha512": "78cb4e6429dd7208d2e16ca81f25542dd4a131e42fce99d98287bb2d21638a4f430455bb2bd8e703a9ee106e157e65a9db45f4d55bf15f0e6f5ed5e11679a36c",
+          "sha256": "d03262b86d45c844607a0940a171b25b1709d70e4194fd8f9a3c5f709afde7b4",
+          "sha1": "bc12834679a128e8018fc62df7fa1aa63c73ad7e",
+          "md5": "c02d8d4aaa926e799be2b61212dd475a"
         }
       ]
     },
@@ -132,10 +132,10 @@
           "name": "ValidBookingCountData-2.1.43-javadoc.jar",
           "url": "ValidBookingCountData-2.1.43-javadoc.jar",
           "size": 261,
-          "sha512": "55aa90abbc2b5ec52d19afeacfd6ad7b8d788a2031bcb977493cc21d6b60bbdeedc80490e702d3e32ca96d41f7045b89657d557eafcc73889200719ccceb6258",
-          "sha256": "85e60e109fea02462f91f91f0d7ca646b4c8a2edfc7314b19284d2fc87f348a4",
-          "sha1": "98cb5afcea2e712e7d0c2a21ca514314fdb8281f",
-          "md5": "f66a692fa67e5a3d1ab0da2e4009f379"
+          "sha512": "d93407b27697f696a60316cce3109e9b81b9b895bc1b516423528cb362e7a9e1999dd88c6f88e48e82ad711099553ae3975056994597d94aec52b34a04537b76",
+          "sha256": "9f2632267d234f763b84829e2e421c730887e68dd2163df5f875bba61a60dd89",
+          "sha1": "62ea2ac014a9d2d49176ecb1c0798a6fe22d31ab",
+          "md5": "80d1a95aacfa16a16dc54140798738e8"
         },
         {
           "name": "ValidBookingCountData-2.1.43.aar",
@@ -150,10 +150,10 @@
           "name": "ValidBookingCountData-2.1.43-sources.jar",
           "url": "ValidBookingCountData-2.1.43-sources.jar",
           "size": 3124,
-          "sha512": "ee363fc827ebea903022d5518aa78da7c61799cd318fa7e3015e913f2b0bb7d86a313a87ecff3f4960ae7cedc98fc87abebaa0ae846e5239b02f9bc2af66c71c",
-          "sha256": "e285fa98ccad86ed34b94fd4c0156ff27c2d70de3d55213dc8eb906d3f345e91",
-          "sha1": "598f0447cee9bdc8ed57aab3e1594cf9d2082199",
-          "md5": "964596e82ba45cb2f333d2729f60dbfe"
+          "sha512": "78cb4e6429dd7208d2e16ca81f25542dd4a131e42fce99d98287bb2d21638a4f430455bb2bd8e703a9ee106e157e65a9db45f4d55bf15f0e6f5ed5e11679a36c",
+          "sha256": "d03262b86d45c844607a0940a171b25b1709d70e4194fd8f9a3c5f709afde7b4",
+          "sha1": "bc12834679a128e8018fc62df7fa1aa63c73ad7e",
+          "md5": "c02d8d4aaa926e799be2b61212dd475a"
         }
       ]
     }
