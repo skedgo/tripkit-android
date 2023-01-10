@@ -10,6 +10,8 @@ import com.google.gson.annotations.JsonAdapter;
 import org.immutables.gson.Gson;
 import org.immutables.value.Value;
 
+import java.util.List;
+
 @Gson.TypeAdapters
 @Value.Immutable
 @Value.Style(passAnnotations = JsonAdapter.class)
@@ -23,6 +25,8 @@ public abstract class BookingConfirmationPurchasedTicket implements Parcelable {
                     .id(in.readString())
                     .status(in.readString())
                     .ticketURL(in.readString())
+                    .activateURL(in.readString())
+                    .fare((BookingConfirmationPurchasedTicketFare) in.readParcelable(BookingConfirmationPurchasedTicketFare.class.getClassLoader()))
                     .build();
         }
 
@@ -37,6 +41,8 @@ public abstract class BookingConfirmationPurchasedTicket implements Parcelable {
         dest.writeString(status());
         dest.writeString(ticketURL());
         dest.writeString(id());
+        dest.writeString(activateURL());
+        dest.writeParcelable(fare(), flags);
     }
 
     @Override
@@ -44,9 +50,14 @@ public abstract class BookingConfirmationPurchasedTicket implements Parcelable {
         return 0;
     }
 
-    public abstract String status();
+    @Nullable public abstract String status();
 
     @Nullable public abstract String ticketURL();
+
+    @Nullable public abstract String activateURL();
+
+    @Nullable
+    public abstract BookingConfirmationPurchasedTicketFare fare();
 
     public abstract String id();
 }

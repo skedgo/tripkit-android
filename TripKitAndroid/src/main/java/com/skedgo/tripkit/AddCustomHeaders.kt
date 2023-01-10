@@ -28,6 +28,7 @@ class AddCustomHeaders constructor(
     private val appJsonValue = "*/*"
     private val acceptHeader = "Accept"
     private val userTokenHeader = "userToken"
+    private val deviceHeader = "X-TripGo-Device-Id"
 
     @Throws(IOException::class)
     override fun intercept(chain: Interceptor.Chain): Response {
@@ -42,15 +43,19 @@ class AddCustomHeaders constructor(
             is Key.RegionEligibility -> builder.addHeader(regionEligibilityHeader, key.value)
         }
 
-        if (getUserToken != null && getUserToken.call() != null) {
+        if (getUserToken?.call() != null) {
             builder.addHeader(userTokenHeader, getUserToken.call())
         }
 
         val hasTripSelection = preferences?.getBoolean("tripSelection", false) ?: false
-        if (getUuid != null && hasTripSelection) {
-            val uuid = getUuid.call()
-            if (uuid != null) {
-                builder.addHeader(uuidHeader, uuid)
+        if (getUuid != null) {
+            builder.addHeader(deviceHeader, getUuid.call())
+
+            if (hasTripSelection) {
+                val uuid = getUuid.call()
+                if (uuid != null) {
+                    builder.addHeader(uuidHeader, uuid)
+                }
             }
         }
 
