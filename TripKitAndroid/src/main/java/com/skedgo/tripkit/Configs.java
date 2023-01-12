@@ -63,4 +63,6 @@ public interface Configs {
 
     public boolean showReportProblemOnTripAction();
 
+    @Value.Default public default boolean hasTripLabels() { return false; }
+
 }
