@@ -4,4 +4,6 @@
     <string name="str_hr">時間</string>
     <string name="str_hrs">時間</string>
     <string name="direction">方向</string>
+    <string name="more_exercise">エクササイズ</string>
+    <string name="use_the_sliders_to_tell_us_what_most_important_to_you">スライダを使用して、旅行中の優先度の最高と最低を選択します。最大化できる優先度は 1 つだけです。 %s は、これらの設定に従って検索結果を表示します。</string>
 </resources>

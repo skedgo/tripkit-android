@@ -3,11 +3,11 @@ package com.skedgo.tripkit.booking.quickbooking
 import com.google.gson.annotations.SerializedName
 
 data class QuickBookResponse(
-    val action: Action,
-    val form: List<Form>,
-    val refreshURLForSourceObject: String,
-    val title: String,
-    val type: String,
+    val action: Action?,
+    val form: List<Form>?,
+    val refreshURLForSourceObject: String?,
+    val title: String?,
+    val type: String?,
     val paymentOptions: List<PaymentOption>?,
     val review: List<Review>?,
     val publishableApiKey: String?,
@@ -54,7 +54,7 @@ data class Review(
     val origin: Origin,
     val price: Double,
     val provider: Provider,
-    val tickets: List<Ticket>
+    val tickets: List<Ticket>?
 ) {
     fun getPriceWithCurrency(): String {
         val symbol = if (currency == "USD") "$" else currency
@@ -67,19 +67,19 @@ data class Review(
 }
 
 data class Destination(
-    val address: String,
+    val address: String?,
     val lat: Double,
     val lng: Double
 )
 
 data class Origin(
-    val address: String,
+    val address: String?,
     val lat: Double,
     val lng: Double
 )
 
 data class Provider(
-    val subtitle: String,
+    val subtitle: String?,
     val title: String
 )
 

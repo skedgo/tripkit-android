@@ -13,7 +13,8 @@ data class QuickBooking(
         val input: List<Input>,
         val title: String,
         val tripUpdateURL: String,
-        val tickets: List<Ticket>
+        val tickets: List<Ticket>,
+        val billingEnabled: Boolean
 )
 
 data class Option(
