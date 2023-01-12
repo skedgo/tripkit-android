@@ -11,7 +11,7 @@
   "createdBy": {
     "gradle": {
       "version": "6.5",
-      "buildId": "za62czknhbfenc3c6xll7wah4y"
+      "buildId": "oibxvhluengelcs6tdrmheuqg4"
     }
   },
   "variants": [
@@ -31,10 +31,10 @@
           "name": "TripKitDomain-2.1.43.jar",
           "url": "TripKitDomain-2.1.43.jar",
           "size": 98751,
-          "sha512": "c14b21a350d80dc59a20741e4f692001186970c2f3adfdadd21aa7d7525842565dc7b9b4b05e3c5d945d27f2a5e85c1ca7bc46225490a34bfc58d1cc4c0678dd",
-          "sha256": "663f050f16065301d184e2d2be367912723d96fbd6cae84568377d2fbad3c138",
-          "sha1": "0da8c08421c61a20852d393f7e9e33c74f5993b2",
-          "md5": "ce4ca4986084fc20b8bd5d5e84ee1cb9"
+          "sha512": "0e7187d624a2830d098e9f927e8f8902b8383ed5bfd69512181e4ba6fc0734e001da517f951d4f0ff0bb3fd1105c1dafb016044b33cf782aa456aaac4ec54d81",
+          "sha256": "7ef0a00c60286d3de15d55c3f30a069b2ca971206c8e82e942fd0ae7ffc46432",
+          "sha1": "affe104fac9444ce51e02e280ca1ea0f6834bddb",
+          "md5": "7a7d4772d67f7e96bbf1b4c224a8a7cc"
         }
       ]
     },
@@ -106,10 +106,10 @@
           "name": "TripKitDomain-2.1.43.jar",
           "url": "TripKitDomain-2.1.43.jar",
           "size": 98751,
-          "sha512": "c14b21a350d80dc59a20741e4f692001186970c2f3adfdadd21aa7d7525842565dc7b9b4b05e3c5d945d27f2a5e85c1ca7bc46225490a34bfc58d1cc4c0678dd",
-          "sha256": "663f050f16065301d184e2d2be367912723d96fbd6cae84568377d2fbad3c138",
-          "sha1": "0da8c08421c61a20852d393f7e9e33c74f5993b2",
-          "md5": "ce4ca4986084fc20b8bd5d5e84ee1cb9"
+          "sha512": "0e7187d624a2830d098e9f927e8f8902b8383ed5bfd69512181e4ba6fc0734e001da517f951d4f0ff0bb3fd1105c1dafb016044b33cf782aa456aaac4ec54d81",
+          "sha256": "7ef0a00c60286d3de15d55c3f30a069b2ca971206c8e82e942fd0ae7ffc46432",
+          "sha1": "affe104fac9444ce51e02e280ca1ea0f6834bddb",
+          "md5": "7a7d4772d67f7e96bbf1b4c224a8a7cc"
         }
       ]
     }

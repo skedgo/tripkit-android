@@ -17,6 +17,13 @@
   </licenses>
   <dependencies>
     <dependency>
+      <groupId>org.jetbrains.kotlin</groupId>
+      <artifactId>kotlin-android-extensions-runtime</artifactId>
+      <version>1.4.10</version>
+      <scope>compile</scope>
+      <type>aar</type>
+    </dependency>
+    <dependency>
       <groupId>androidx.annotation</groupId>
       <artifactId>annotation</artifactId>
       <version>1.1.0</version>

@@ -11,7 +11,7 @@
   "createdBy": {
     "gradle": {
       "version": "6.5",
-      "buildId": "za62czknhbfenc3c6xll7wah4y"
+      "buildId": "jzr6xexlqbclhaca4ogiey7re4"
     }
   },
   "variants": [
@@ -54,6 +54,20 @@
           "module": "sqliteutils",
           "version": {
             "requires": "2.1.43"
+          }
+        },
+        {
+          "group": "org.jetbrains.kotlin",
+          "module": "kotlin-android-extensions-runtime",
+          "version": {
+            "requires": "1.4.10"
+          }
+        },
+        {
+          "group": "org.jetbrains.kotlin",
+          "module": "kotlin-stdlib",
+          "version": {
+            "requires": "1.3.50"
           }
         },
         {
@@ -180,29 +194,29 @@
         {
           "name": "TripKitAndroid-2.1.43.aar",
           "url": "TripKitAndroid-2.1.43.aar",
-          "size": 418615,
-          "sha512": "003dbb4afa991b0b0600d154a9c29693ce58e8a1a3cf68e388dfb7b0b6688e8c9f0271534ba4a5834b13d8e0f6fcdd90a7076d29fe8460c109aa2f07eae87739",
-          "sha256": "fa4c7606a19a4a27f8af87bd69a1078f03b01fa826cadada9589485aad25f204",
-          "sha1": "d3479baa69e69588badd1842083d3fdec9cf936f",
-          "md5": "ef8f6399a136cc47de1b2d0d750f8bfc"
-        },
-        {
-          "name": "TripKitAndroid-2.1.43-sources.jar",
-          "url": "TripKitAndroid-2.1.43-sources.jar",
-          "size": 89590,
-          "sha512": "f626a4929d6b30f8f49b34336e31fb98c5a9c517b03159661969b0a07e46650204f3e62b5a26c7948c686404dacc9e7867db5e57583bcef3ccd756de871ec8f3",
-          "sha256": "a4acae0775f391f4e9d158a7e0c72f452cceadc65f924d38e50d1af54eee62bf",
-          "sha1": "1c9bf5828dc6eaae9c4ce2ed2265a7ef5e5f8ace",
-          "md5": "749650177bd7a84cc1a50fa80c30214a"
+          "size": 450868,
+          "sha512": "70718418410df4cebc3c844749ddad345b16622447903961f64ddc0bc99970aeacd53e09def30f0fb9b98ba89bd369019a219390588242f8434a7dc9ef8ce54b",
+          "sha256": "509029c1c6b28eaaa617a9e888584ba76f7865303ec0b6afc2291a6c18c8f1b7",
+          "sha1": "fd6c84edbe8c7a10edbdf485f36fe451d45f279b",
+          "md5": "c9ca5c022f5da5be51717a9a09ee71b7"
         },
         {
           "name": "TripKitAndroid-2.1.43-javadoc.jar",
           "url": "TripKitAndroid-2.1.43-javadoc.jar",
           "size": 225363,
-          "sha512": "4e5041eb24aa2b88092636f4faf2ca92355fb85d709fa68d3ed1777b91483461168b59ee5a72f5e7ddce8f30cb04cbb95db19c5c0f28494b284e6fb2b43b9ab6",
-          "sha256": "a6dbc715303163095457d0405c2406d7fb4b4963edbf2b8839cee89eef9ed522",
-          "sha1": "3c1f8e0474259035d17da552b393f610b42573a0",
-          "md5": "2e2ae6b1c51d2114a258ac97555040d9"
+          "sha512": "fa2b5f790d653fdb2ad32b66d28e7347042837596985737d5b6c13d59ba8fb052c30e6ad8200ac22be96ee2a7b3d33d365396da7089d3263ea630c36624942b7",
+          "sha256": "60b477ccf088c1868cd5b4c6288dd5835fafdd608884d2c4bbde8d50464fd0da",
+          "sha1": "02df9c34ef7ff311fd889993ea5d2aaf133b8c56",
+          "md5": "13a89f2eb92b7a2e0ffb393b0c028578"
+        },
+        {
+          "name": "TripKitAndroid-2.1.43-sources.jar",
+          "url": "TripKitAndroid-2.1.43-sources.jar",
+          "size": 93797,
+          "sha512": "41dbe0f8f34eda295c4f8479b91a05cc1f112f3c653e3617e251aafd91352125a0992cf21743f8a2281a1cf8727d3d6346d1988a0b632b5158f5c3f13d3862ea",
+          "sha256": "52fda92a60b38c130129601dba41323dc7dcac4e2f802c0e38e8a4266b207549",
+          "sha1": "1bd2d0e491b77cd37695d6ea2759f74bf5582844",
+          "md5": "49597e0628c03ba1d032d880824a6e17"
         }
       ]
     },
@@ -252,29 +266,29 @@
         {
           "name": "TripKitAndroid-2.1.43.aar",
           "url": "TripKitAndroid-2.1.43.aar",
-          "size": 418615,
-          "sha512": "003dbb4afa991b0b0600d154a9c29693ce58e8a1a3cf68e388dfb7b0b6688e8c9f0271534ba4a5834b13d8e0f6fcdd90a7076d29fe8460c109aa2f07eae87739",
-          "sha256": "fa4c7606a19a4a27f8af87bd69a1078f03b01fa826cadada9589485aad25f204",
-          "sha1": "d3479baa69e69588badd1842083d3fdec9cf936f",
-          "md5": "ef8f6399a136cc47de1b2d0d750f8bfc"
-        },
-        {
-          "name": "TripKitAndroid-2.1.43-sources.jar",
-          "url": "TripKitAndroid-2.1.43-sources.jar",
-          "size": 89590,
-          "sha512": "f626a4929d6b30f8f49b34336e31fb98c5a9c517b03159661969b0a07e46650204f3e62b5a26c7948c686404dacc9e7867db5e57583bcef3ccd756de871ec8f3",
-          "sha256": "a4acae0775f391f4e9d158a7e0c72f452cceadc65f924d38e50d1af54eee62bf",
-          "sha1": "1c9bf5828dc6eaae9c4ce2ed2265a7ef5e5f8ace",
-          "md5": "749650177bd7a84cc1a50fa80c30214a"
+          "size": 450868,
+          "sha512": "70718418410df4cebc3c844749ddad345b16622447903961f64ddc0bc99970aeacd53e09def30f0fb9b98ba89bd369019a219390588242f8434a7dc9ef8ce54b",
+          "sha256": "509029c1c6b28eaaa617a9e888584ba76f7865303ec0b6afc2291a6c18c8f1b7",
+          "sha1": "fd6c84edbe8c7a10edbdf485f36fe451d45f279b",
+          "md5": "c9ca5c022f5da5be51717a9a09ee71b7"
         },
         {
           "name": "TripKitAndroid-2.1.43-javadoc.jar",
           "url": "TripKitAndroid-2.1.43-javadoc.jar",
           "size": 225363,
-          "sha512": "4e5041eb24aa2b88092636f4faf2ca92355fb85d709fa68d3ed1777b91483461168b59ee5a72f5e7ddce8f30cb04cbb95db19c5c0f28494b284e6fb2b43b9ab6",
-          "sha256": "a6dbc715303163095457d0405c2406d7fb4b4963edbf2b8839cee89eef9ed522",
-          "sha1": "3c1f8e0474259035d17da552b393f610b42573a0",
-          "md5": "2e2ae6b1c51d2114a258ac97555040d9"
+          "sha512": "fa2b5f790d653fdb2ad32b66d28e7347042837596985737d5b6c13d59ba8fb052c30e6ad8200ac22be96ee2a7b3d33d365396da7089d3263ea630c36624942b7",
+          "sha256": "60b477ccf088c1868cd5b4c6288dd5835fafdd608884d2c4bbde8d50464fd0da",
+          "sha1": "02df9c34ef7ff311fd889993ea5d2aaf133b8c56",
+          "md5": "13a89f2eb92b7a2e0ffb393b0c028578"
+        },
+        {
+          "name": "TripKitAndroid-2.1.43-sources.jar",
+          "url": "TripKitAndroid-2.1.43-sources.jar",
+          "size": 93797,
+          "sha512": "41dbe0f8f34eda295c4f8479b91a05cc1f112f3c653e3617e251aafd91352125a0992cf21743f8a2281a1cf8727d3d6346d1988a0b632b5158f5c3f13d3862ea",
+          "sha256": "52fda92a60b38c130129601dba41323dc7dcac4e2f802c0e38e8a4266b207549",
+          "sha1": "1bd2d0e491b77cd37695d6ea2759f74bf5582844",
+          "md5": "49597e0628c03ba1d032d880824a6e17"
         }
       ]
     }

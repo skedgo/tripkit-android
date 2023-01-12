@@ -11,7 +11,7 @@
   "createdBy": {
     "gradle": {
       "version": "6.5",
-      "buildId": "za62czknhbfenc3c6xll7wah4y"
+      "buildId": "2e4aecsn35gbfg5ytbxtrcyyuy"
     }
   },
   "variants": [
@@ -31,10 +31,10 @@
           "name": "ValidBookingCountDomain-2.1.43.jar",
           "url": "ValidBookingCountDomain-2.1.43.jar",
           "size": 6971,
-          "sha512": "0ac341bcf9a8837d5f73b2693bd727bb30529ca157a90f523765deae7eb21446dd006c033f5cfe3ad39144bc5fe66fbf7293266f1c87942bb7172bd5ee5d15be",
-          "sha256": "2606ccd89e02526d6f148bff996471bb87e5e25898b73a1fdf19f8f60ed470ce",
-          "sha1": "1855bcd5f78ba878467b3fa39a1fafcdf90d8f40",
-          "md5": "5402239f328977a5d85722134e820356"
+          "sha512": "2de1161bfec69fa3f4e8de73a89497928d2ad10c667f3cc9851d42d2de84127cfca611f3bf89959c3f77a10d56ebad2754b4ce557936ec21b4d3aff8d594f6fe",
+          "sha256": "69e5588f7860ec68215d5c880599113ca50d47b3b6a87fe07b4a5982c806f9a5",
+          "sha1": "8a37e6bcc881e05830aff45cd17e287e2d75174d",
+          "md5": "f8757483209069e9de0241cf700a244d"
         }
       ]
     },
@@ -77,10 +77,10 @@
           "name": "ValidBookingCountDomain-2.1.43.jar",
           "url": "ValidBookingCountDomain-2.1.43.jar",
           "size": 6971,
-          "sha512": "0ac341bcf9a8837d5f73b2693bd727bb30529ca157a90f523765deae7eb21446dd006c033f5cfe3ad39144bc5fe66fbf7293266f1c87942bb7172bd5ee5d15be",
-          "sha256": "2606ccd89e02526d6f148bff996471bb87e5e25898b73a1fdf19f8f60ed470ce",
-          "sha1": "1855bcd5f78ba878467b3fa39a1fafcdf90d8f40",
-          "md5": "5402239f328977a5d85722134e820356"
+          "sha512": "2de1161bfec69fa3f4e8de73a89497928d2ad10c667f3cc9851d42d2de84127cfca611f3bf89959c3f77a10d56ebad2754b4ce557936ec21b4d3aff8d594f6fe",
+          "sha256": "69e5588f7860ec68215d5c880599113ca50d47b3b6a87fe07b4a5982c806f9a5",
+          "sha1": "8a37e6bcc881e05830aff45cd17e287e2d75174d",
+          "md5": "f8757483209069e9de0241cf700a244d"
         }
       ]
     }
