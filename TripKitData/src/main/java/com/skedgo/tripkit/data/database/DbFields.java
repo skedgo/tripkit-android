@@ -100,5 +100,6 @@ public final class DbFields {
   public static final DatabaseField WHEELCHAIR_ACCESSIBLE = new DatabaseField("wheelchair_accessible", "integer");
   public static final DatabaseField OCCUPANCY = new DatabaseField("occupancy", "text");
   public static final DatabaseField START_STOP_SHORT_NAME = new DatabaseField("start_stop_short_name", "text");
+  public static final DatabaseField START_PLATFORM = new DatabaseField("start_platform", "text");
   private DbFields() {}
 }

@@ -28,4 +28,9 @@ public abstract class TripKitConfigs implements Configs {
         return false;
     }
 
+    @Value.Default
+    public boolean showOperatorNames() {
+        return false;
+    }
+
 }

@@ -65,4 +65,6 @@ public interface Configs {
 
     @Value.Default public default boolean hasTripLabels() { return false; }
 
+    public boolean showOperatorNames();
+
 }
