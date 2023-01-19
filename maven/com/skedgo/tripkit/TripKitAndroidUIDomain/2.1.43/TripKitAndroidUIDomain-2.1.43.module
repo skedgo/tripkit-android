@@ -11,7 +11,7 @@
   "createdBy": {
     "gradle": {
       "version": "6.5",
-      "buildId": "cw4umztxfjcjri2hldzyrhozj4"
+      "buildId": "y2t7luvzkjc6jblzy22lsyolga"
     }
   },
   "variants": [
@@ -89,11 +89,11 @@
         {
           "name": "TripKitAndroidUIDomain-2.1.43.aar",
           "url": "TripKitAndroidUIDomain-2.1.43.aar",
-          "size": 167658,
-          "sha512": "7e94bf68a44734e2ddd8307bb8f59018a306011ac6a4e546c5036fbde123cf57d7a28bf6f280c591742497f66fb9401bffe39cb573b6f710b2a0e0727ed07180",
-          "sha256": "1bbc5d6e5457ec606904961a16e0271c2f5bc551ab75b95f0d62991ba6a25228",
-          "sha1": "2e175a0a2df139493de398e75789a35a8a8557aa",
-          "md5": "0d1d0384bec5fc6b990a3131238d9203"
+          "size": 169340,
+          "sha512": "2fc9cbfce8fbbd35ec84f6474c54945942bec1e6c33a4335f78c052b2b31ff417ccc18c273cab310ae94e5206942cb5a8567c02727f3aedfd738772569799cd6",
+          "sha256": "d902c20e5d4ebb5ac1c735e4817f0114cad628879c4e16d146e387595ded10cd",
+          "sha1": "d1655dcba0d29ab046fb1c6e729dd206a74db01d",
+          "md5": "9d83409c15c964450a979a7300fdedfc"
         }
       ]
     },
@@ -106,11 +106,11 @@
         {
           "name": "TripKitAndroidUIDomain-2.1.43.aar",
           "url": "TripKitAndroidUIDomain-2.1.43.aar",
-          "size": 167658,
-          "sha512": "7e94bf68a44734e2ddd8307bb8f59018a306011ac6a4e546c5036fbde123cf57d7a28bf6f280c591742497f66fb9401bffe39cb573b6f710b2a0e0727ed07180",
-          "sha256": "1bbc5d6e5457ec606904961a16e0271c2f5bc551ab75b95f0d62991ba6a25228",
-          "sha1": "2e175a0a2df139493de398e75789a35a8a8557aa",
-          "md5": "0d1d0384bec5fc6b990a3131238d9203"
+          "size": 169340,
+          "sha512": "2fc9cbfce8fbbd35ec84f6474c54945942bec1e6c33a4335f78c052b2b31ff417ccc18c273cab310ae94e5206942cb5a8567c02727f3aedfd738772569799cd6",
+          "sha256": "d902c20e5d4ebb5ac1c735e4817f0114cad628879c4e16d146e387595ded10cd",
+          "sha1": "d1655dcba0d29ab046fb1c6e729dd206a74db01d",
+          "md5": "9d83409c15c964450a979a7300fdedfc"
         }
       ]
     }

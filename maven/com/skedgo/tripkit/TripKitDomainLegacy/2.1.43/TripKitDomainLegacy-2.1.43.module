@@ -11,7 +11,7 @@
   "createdBy": {
     "gradle": {
       "version": "6.5",
-      "buildId": "rb2hqqviwjh7nhjrdfvkhywyl4"
+      "buildId": "3cevzsxkarge5jodpfls2m53ju"
     }
   },
   "variants": [
@@ -66,31 +66,31 @@
       ],
       "files": [
         {
-          "name": "TripKitDomainLegacy-2.1.43-sources.jar",
-          "url": "TripKitDomainLegacy-2.1.43-sources.jar",
-          "size": 1023,
-          "sha512": "213e2fa7c723060cc907252adc142558e9aa80535db0f88824fe08e2289bcf5f64870db7ccc0bf7611edb88051d886b5ef941a971e7b75751dd4d4724db252aa",
-          "sha256": "1a8f698c64887b14114677ed0a5dfec1ed383198506a94d8ac1f7ae7e96c53ec",
-          "sha1": "f2b2192e4f55bda7db9ab9b8f36ca864c1edb5f1",
-          "md5": "767dd04f4c5c1105b48e8ebd71792ee8"
+          "name": "TripKitDomainLegacy-2.1.43-javadoc.jar",
+          "url": "TripKitDomainLegacy-2.1.43-javadoc.jar",
+          "size": 261,
+          "sha512": "71ce2f6f6f16608b74d1f93d31fd5d84aa4c14d32f0caf5d560aaa2854332c5aaa3f5d7802d12fcb2770e9a3373415d9339c604d9183b7c82b725b1d96ca78a7",
+          "sha256": "d5164a34680a3e75dc0b45fba7cdfde29995905f4ada59abefd13d259f261b11",
+          "sha1": "f8049e83c5b06a5e60e727ee3e2b9e2a4f363154",
+          "md5": "dbb6b85b2b03405802fe5c2573ccf865"
         },
         {
           "name": "TripKitDomainLegacy-2.1.43.aar",
           "url": "TripKitDomainLegacy-2.1.43.aar",
-          "size": 6123,
-          "sha512": "ef9ca84f4ee501c9cfbb2f4cf84c1f7d6d742481488d8fc38dbb20498bcf250b2f1fcbd31afea3cd35b081edb4035145143884e2d2d76ad245f56d53da7eb372",
-          "sha256": "4f468e697690f066c22b37dee08f75612cdb3256ca94246876ed982e1e4e7f78",
-          "sha1": "da942604357ad63c8b57f0758d392c3df5c8f9e0",
-          "md5": "c0107b74816cd972660e2f5f1a61b0bf"
+          "size": 6173,
+          "sha512": "d97418e8e41731ed2c0ac4752e42dce7ecbde2bb86f1bf2a958e1041f91d7d3024a98c56849d188a8ce3096b05d6bf8f2d967d99793537942feba4a257513bfc",
+          "sha256": "e3e5bbd022f2ca5628dbe681fa773f3f9c73de6f21021f52feae2a39dff34336",
+          "sha1": "c3c56addf752e5ddddcfd8a38b0a90494f16a420",
+          "md5": "5d3492804c4959c1f76e43901366b614"
         },
         {
-          "name": "TripKitDomainLegacy-2.1.43-javadoc.jar",
-          "url": "TripKitDomainLegacy-2.1.43-javadoc.jar",
-          "size": 261,
-          "sha512": "f112e3d8e20860f379b27d7e33b98aca94a4ccb356584a205c4cf0c7453aaf5af34672e4cfa466c867536022ec19f83b324333acab275d1b73d8c0c67ece3d2d",
-          "sha256": "73a769f18f06f4abe7b437863aa126f81b6f5721729652ceecfb11ceb23c072e",
-          "sha1": "eba9ef84fba4d38fa878bed1397af2e8f87dc8eb",
-          "md5": "dccb66876070e1f19af72e29a1fbded0"
+          "name": "TripKitDomainLegacy-2.1.43-sources.jar",
+          "url": "TripKitDomainLegacy-2.1.43-sources.jar",
+          "size": 1023,
+          "sha512": "faf28e7c2f7d2925e42dd027f1b91792ff523100f674c97f7b33205fbcd04bc37fb037b0b094ca16fc0ab60e00937b8965bb773bdc45efb874df1bd1fcbe746c",
+          "sha256": "9d93ceb846b78c37399e1e68da719846bdbb1a8ad8795347f00db040cc739e30",
+          "sha1": "064cfd3b3c25fd3974162a0fb147ba3a9368b1d9",
+          "md5": "10f24c96eee7a54dd3c794644ed3ceb5"
         }
       ]
     },
@@ -101,31 +101,31 @@
       },
       "files": [
         {
-          "name": "TripKitDomainLegacy-2.1.43-sources.jar",
-          "url": "TripKitDomainLegacy-2.1.43-sources.jar",
-          "size": 1023,
-          "sha512": "213e2fa7c723060cc907252adc142558e9aa80535db0f88824fe08e2289bcf5f64870db7ccc0bf7611edb88051d886b5ef941a971e7b75751dd4d4724db252aa",
-          "sha256": "1a8f698c64887b14114677ed0a5dfec1ed383198506a94d8ac1f7ae7e96c53ec",
-          "sha1": "f2b2192e4f55bda7db9ab9b8f36ca864c1edb5f1",
-          "md5": "767dd04f4c5c1105b48e8ebd71792ee8"
+          "name": "TripKitDomainLegacy-2.1.43-javadoc.jar",
+          "url": "TripKitDomainLegacy-2.1.43-javadoc.jar",
+          "size": 261,
+          "sha512": "71ce2f6f6f16608b74d1f93d31fd5d84aa4c14d32f0caf5d560aaa2854332c5aaa3f5d7802d12fcb2770e9a3373415d9339c604d9183b7c82b725b1d96ca78a7",
+          "sha256": "d5164a34680a3e75dc0b45fba7cdfde29995905f4ada59abefd13d259f261b11",
+          "sha1": "f8049e83c5b06a5e60e727ee3e2b9e2a4f363154",
+          "md5": "dbb6b85b2b03405802fe5c2573ccf865"
         },
         {
           "name": "TripKitDomainLegacy-2.1.43.aar",
           "url": "TripKitDomainLegacy-2.1.43.aar",
-          "size": 6123,
-          "sha512": "ef9ca84f4ee501c9cfbb2f4cf84c1f7d6d742481488d8fc38dbb20498bcf250b2f1fcbd31afea3cd35b081edb4035145143884e2d2d76ad245f56d53da7eb372",
-          "sha256": "4f468e697690f066c22b37dee08f75612cdb3256ca94246876ed982e1e4e7f78",
-          "sha1": "da942604357ad63c8b57f0758d392c3df5c8f9e0",
-          "md5": "c0107b74816cd972660e2f5f1a61b0bf"
+          "size": 6173,
+          "sha512": "d97418e8e41731ed2c0ac4752e42dce7ecbde2bb86f1bf2a958e1041f91d7d3024a98c56849d188a8ce3096b05d6bf8f2d967d99793537942feba4a257513bfc",
+          "sha256": "e3e5bbd022f2ca5628dbe681fa773f3f9c73de6f21021f52feae2a39dff34336",
+          "sha1": "c3c56addf752e5ddddcfd8a38b0a90494f16a420",
+          "md5": "5d3492804c4959c1f76e43901366b614"
         },
         {
-          "name": "TripKitDomainLegacy-2.1.43-javadoc.jar",
-          "url": "TripKitDomainLegacy-2.1.43-javadoc.jar",
-          "size": 261,
-          "sha512": "f112e3d8e20860f379b27d7e33b98aca94a4ccb356584a205c4cf0c7453aaf5af34672e4cfa466c867536022ec19f83b324333acab275d1b73d8c0c67ece3d2d",
-          "sha256": "73a769f18f06f4abe7b437863aa126f81b6f5721729652ceecfb11ceb23c072e",
-          "sha1": "eba9ef84fba4d38fa878bed1397af2e8f87dc8eb",
-          "md5": "dccb66876070e1f19af72e29a1fbded0"
+          "name": "TripKitDomainLegacy-2.1.43-sources.jar",
+          "url": "TripKitDomainLegacy-2.1.43-sources.jar",
+          "size": 1023,
+          "sha512": "faf28e7c2f7d2925e42dd027f1b91792ff523100f674c97f7b33205fbcd04bc37fb037b0b094ca16fc0ab60e00937b8965bb773bdc45efb874df1bd1fcbe746c",
+          "sha256": "9d93ceb846b78c37399e1e68da719846bdbb1a8ad8795347f00db040cc739e30",
+          "sha1": "064cfd3b3c25fd3974162a0fb147ba3a9368b1d9",
+          "md5": "10f24c96eee7a54dd3c794644ed3ceb5"
         }
       ]
     }

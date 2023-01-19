@@ -11,7 +11,7 @@
   "createdBy": {
     "gradle": {
       "version": "6.5",
-      "buildId": "fajj2a4msbaynj3mtnpokkwhta"
+      "buildId": "fojk3vsuhrgt7ajtndfq6qr7ia"
     }
   },
   "variants": [
@@ -115,31 +115,31 @@
       ],
       "files": [
         {
-          "name": "trip-kit-booking-2.1.43-javadoc.jar",
-          "url": "trip-kit-booking-2.1.43-javadoc.jar",
-          "size": 176744,
-          "sha512": "ad3d4a80598c26eff54bda4e6ae91db4b44ba6ac62a576c502e350dd594b803fc62c2dbe9642ca5c80b47f4cc0ffc2f8e35fd9956ba87c167c67c34080fc0b7d",
-          "sha256": "07d000d915d14874d91640e25678dbc39f750dd338e4164d6d4b205ad5961e60",
-          "sha1": "245a2c53266636fdb23fd6bcca1776d583a7ef39",
-          "md5": "bae255c8200b24150c289ce28431e3b0"
+          "name": "trip-kit-booking-2.1.43-sources.jar",
+          "url": "trip-kit-booking-2.1.43-sources.jar",
+          "size": 39901,
+          "sha512": "2effee91d88aa6743ae45a6970d435a8cd9c1125bc731961d67279602a0bef7a0cda459acc41f6f7443887d0b8187ff4f5ef6d013ebc81bc320d7490cee9993f",
+          "sha256": "b5e967e445803cf104dd1697264bf0e8ce8141485818678a29575909713d2843",
+          "sha1": "b131e2fa2ccb373665764f31595d906599df21e0",
+          "md5": "9047e1bb15c747f3e32bc4c2180f8ae3"
         },
         {
           "name": "trip-kit-booking-2.1.43.aar",
           "url": "trip-kit-booking-2.1.43.aar",
-          "size": 202067,
-          "sha512": "092796561c8198e047fe06aa9f7488e8efbda56bd3948e5f2955c7d57a0c48ea46e54f6048286826d410ab604ee9dec1da5e91132c9084d7b53f6f6e3fa9cc21",
-          "sha256": "a4459ce3cc325eab442bdba22b502c507c64caa5639b8b8644fcfaef8c4fbe68",
-          "sha1": "33251c13464b1ffe67554b9794bb7a065e1eea70",
-          "md5": "472b7a557119ea6076bdd4e17355a169"
+          "size": 203749,
+          "sha512": "01b189ff7705840a6905e494c16131ba9b2717d1bb147d3d2bbbb2f3fae1dc8ab43cf7aab862f2e9abaebf84425e89ce36760b051decb05fc8f1196444717e79",
+          "sha256": "b70cc1fc5e062180003b447e862961bbe81cbfbafbe5d7c1098902cf2257069b",
+          "sha1": "1db1de31de64ea269d25eb1b75c8bbc785061681",
+          "md5": "18be0fa4b8e629a08034acb30311c4e1"
         },
         {
-          "name": "trip-kit-booking-2.1.43-sources.jar",
-          "url": "trip-kit-booking-2.1.43-sources.jar",
-          "size": 39901,
-          "sha512": "fd870dbd0e2fb8edef4e61d8e8e4a3d932e08c108ae17a3d455a5539a60d2e49ba2f565ca25a9606a5ae8c7ba0cf59fe9dd1461312ae7fea64b6096fcbbb1ac9",
-          "sha256": "783c6c88efa25944acf170d31b0b179205f535e24c1062a35beaa712f0553583",
-          "sha1": "189dbef81b208a064df5af45c3eefe3688b610fa",
-          "md5": "0ff1788cd06255f15296510cfdea1a91"
+          "name": "trip-kit-booking-2.1.43-javadoc.jar",
+          "url": "trip-kit-booking-2.1.43-javadoc.jar",
+          "size": 176744,
+          "sha512": "f641a036859fdf2fc77b17eca113b951a883389b0d1a33004ea2e009d5d2a3bf047b48258e93bacbf90cb453421bb1b8898e6efc480c340eaa7d9e01ec3a773c",
+          "sha256": "f4e10d1c7a64b0ff64e926a0d90f2e382d67d0108e03e56cae26d40d6e0f611b",
+          "sha1": "89e69711b7cf0d7f7d46a6faca8e25f1255f38f9",
+          "md5": "26fc8fc9c54658c6e18e008291268e73"
         }
       ]
     },
@@ -150,31 +150,31 @@
       },
       "files": [
         {
-          "name": "trip-kit-booking-2.1.43-javadoc.jar",
-          "url": "trip-kit-booking-2.1.43-javadoc.jar",
-          "size": 176744,
-          "sha512": "ad3d4a80598c26eff54bda4e6ae91db4b44ba6ac62a576c502e350dd594b803fc62c2dbe9642ca5c80b47f4cc0ffc2f8e35fd9956ba87c167c67c34080fc0b7d",
-          "sha256": "07d000d915d14874d91640e25678dbc39f750dd338e4164d6d4b205ad5961e60",
-          "sha1": "245a2c53266636fdb23fd6bcca1776d583a7ef39",
-          "md5": "bae255c8200b24150c289ce28431e3b0"
+          "name": "trip-kit-booking-2.1.43-sources.jar",
+          "url": "trip-kit-booking-2.1.43-sources.jar",
+          "size": 39901,
+          "sha512": "2effee91d88aa6743ae45a6970d435a8cd9c1125bc731961d67279602a0bef7a0cda459acc41f6f7443887d0b8187ff4f5ef6d013ebc81bc320d7490cee9993f",
+          "sha256": "b5e967e445803cf104dd1697264bf0e8ce8141485818678a29575909713d2843",
+          "sha1": "b131e2fa2ccb373665764f31595d906599df21e0",
+          "md5": "9047e1bb15c747f3e32bc4c2180f8ae3"
         },
         {
           "name": "trip-kit-booking-2.1.43.aar",
           "url": "trip-kit-booking-2.1.43.aar",
-          "size": 202067,
-          "sha512": "092796561c8198e047fe06aa9f7488e8efbda56bd3948e5f2955c7d57a0c48ea46e54f6048286826d410ab604ee9dec1da5e91132c9084d7b53f6f6e3fa9cc21",
-          "sha256": "a4459ce3cc325eab442bdba22b502c507c64caa5639b8b8644fcfaef8c4fbe68",
-          "sha1": "33251c13464b1ffe67554b9794bb7a065e1eea70",
-          "md5": "472b7a557119ea6076bdd4e17355a169"
+          "size": 203749,
+          "sha512": "01b189ff7705840a6905e494c16131ba9b2717d1bb147d3d2bbbb2f3fae1dc8ab43cf7aab862f2e9abaebf84425e89ce36760b051decb05fc8f1196444717e79",
+          "sha256": "b70cc1fc5e062180003b447e862961bbe81cbfbafbe5d7c1098902cf2257069b",
+          "sha1": "1db1de31de64ea269d25eb1b75c8bbc785061681",
+          "md5": "18be0fa4b8e629a08034acb30311c4e1"
         },
         {
-          "name": "trip-kit-booking-2.1.43-sources.jar",
-          "url": "trip-kit-booking-2.1.43-sources.jar",
-          "size": 39901,
-          "sha512": "fd870dbd0e2fb8edef4e61d8e8e4a3d932e08c108ae17a3d455a5539a60d2e49ba2f565ca25a9606a5ae8c7ba0cf59fe9dd1461312ae7fea64b6096fcbbb1ac9",
-          "sha256": "783c6c88efa25944acf170d31b0b179205f535e24c1062a35beaa712f0553583",
-          "sha1": "189dbef81b208a064df5af45c3eefe3688b610fa",
-          "md5": "0ff1788cd06255f15296510cfdea1a91"
+          "name": "trip-kit-booking-2.1.43-javadoc.jar",
+          "url": "trip-kit-booking-2.1.43-javadoc.jar",
+          "size": 176744,
+          "sha512": "f641a036859fdf2fc77b17eca113b951a883389b0d1a33004ea2e009d5d2a3bf047b48258e93bacbf90cb453421bb1b8898e6efc480c340eaa7d9e01ec3a773c",
+          "sha256": "f4e10d1c7a64b0ff64e926a0d90f2e382d67d0108e03e56cae26d40d6e0f611b",
+          "sha1": "89e69711b7cf0d7f7d46a6faca8e25f1255f38f9",
+          "md5": "26fc8fc9c54658c6e18e008291268e73"
         }
       ]
     }
