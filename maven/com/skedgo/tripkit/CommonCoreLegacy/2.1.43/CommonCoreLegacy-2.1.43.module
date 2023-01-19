@@ -11,7 +11,7 @@
   "createdBy": {
     "gradle": {
       "version": "6.5",
-      "buildId": "qqyl2pwsfzbnbkxdhsg7prd4ey"
+      "buildId": "kglmk4ufcbaehfkz54bpz5vvtm"
     }
   },
   "variants": [
@@ -94,31 +94,31 @@
       ],
       "files": [
         {
-          "name": "CommonCoreLegacy-2.1.43-sources.jar",
-          "url": "CommonCoreLegacy-2.1.43-sources.jar",
-          "size": 97469,
-          "sha512": "4556f950113ec8bcca765e7206ce671237add047b4e5fb49841a7193583d05c3ebef1bc3f57758fc6f35ba637b31f8743c916a5cbe76e8b8b26a419254c07448",
-          "sha256": "7d518d02ab88eec8ff5b94de61fdbe0f0fb0cbb6f63859b7faa19540bd4e299a",
-          "sha1": "c222160c7a10f2dda17903d817618fa68a8d9737",
-          "md5": "1e41e6075e9ef164055ff68c721be720"
+          "name": "CommonCoreLegacy-2.1.43-javadoc.jar",
+          "url": "CommonCoreLegacy-2.1.43-javadoc.jar",
+          "size": 329609,
+          "sha512": "3ded05aeea29ce909c3d9ad2614dc799671e228cfa35af963f6a4cc38013a04d9e513670128924d7ad17a34d9f51c96173fc5871da9d3f42252b72ec336b9f20",
+          "sha256": "080bc468ca3e4ff2c8fee9e11171cd3b4e40a87860e8c211ec56f2d307f34742",
+          "sha1": "532956ad40677a8767b1a81b8906595cf361c295",
+          "md5": "bef3be9707f80f085aa5b76aa49f63d1"
         },
         {
           "name": "CommonCoreLegacy-2.1.43.aar",
           "url": "CommonCoreLegacy-2.1.43.aar",
-          "size": 607469,
-          "sha512": "b94bbc6cd441cc5b41d52b5372efec91e7e7fef89aa26cb67f9d626c37601be84b9f3001a7ed71ce03aeabb162a328b7066005686e5f2ada0f38b7a17bf4b850",
-          "sha256": "243613b9532d5d6f1f878b99b2cd89a838d87bba1e97a94a88099a6d968964b7",
-          "sha1": "eb137a44a264a192383ddeb34670230897a10167",
-          "md5": "cb801e3c9c0e9fdb101afe5cce9ec21c"
+          "size": 614580,
+          "sha512": "6fbe7f319be63ae2a565ed80a4d80ee1c244aba0053a643208add17fc5e272fbd61558b8674a6b9636016316e4fdd6dd280c30e5806bdd45cbebdeaf2c0561cc",
+          "sha256": "961d4131ab48cdfbca3f564d0f5783fae1a4288651b0c2b4b43bda32dc85081b",
+          "sha1": "fdce40b6abc9080969a3c5e8c062a3d0bc856c4c",
+          "md5": "0af40a6fc0d05d80ea91d8aca2d5c4af"
         },
         {
-          "name": "CommonCoreLegacy-2.1.43-javadoc.jar",
-          "url": "CommonCoreLegacy-2.1.43-javadoc.jar",
-          "size": 329474,
-          "sha512": "e7cbce5a1d8359486b2e61cfc5135ac62ef96d520f9e5d6d3a37cbffc71899d14ed18d556bcc04576632e850d9cfd2e3b45531462cbf0d0b7fedcaa71cda4f27",
-          "sha256": "3549165a449fc529f8581e3adc79af82061db0e4d5e9c15a18303652414c427a",
-          "sha1": "4721351575636d2c3222f3cb2bbfb8f29484e529",
-          "md5": "f2ac41c79ba55817f90786232084d7fd"
+          "name": "CommonCoreLegacy-2.1.43-sources.jar",
+          "url": "CommonCoreLegacy-2.1.43-sources.jar",
+          "size": 98613,
+          "sha512": "501f3a910c2edbfb94a8395825fb15a5888898d70beb3d02504877213f3b87f206388d044a8f978752ad1e244ad8a01c4072c20e8bfd3a77bb42b53af8d39e50",
+          "sha256": "98230b5715f0d97652f219a21fcca2c8134bd14276eb7ff78c3f199525640e51",
+          "sha1": "78145b27792931066acf275653456803609b5769",
+          "md5": "7b637c907af7bebcf639ab4d6b75b6ef"
         }
       ]
     },
@@ -129,31 +129,31 @@
       },
       "files": [
         {
-          "name": "CommonCoreLegacy-2.1.43-sources.jar",
-          "url": "CommonCoreLegacy-2.1.43-sources.jar",
-          "size": 97469,
-          "sha512": "4556f950113ec8bcca765e7206ce671237add047b4e5fb49841a7193583d05c3ebef1bc3f57758fc6f35ba637b31f8743c916a5cbe76e8b8b26a419254c07448",
-          "sha256": "7d518d02ab88eec8ff5b94de61fdbe0f0fb0cbb6f63859b7faa19540bd4e299a",
-          "sha1": "c222160c7a10f2dda17903d817618fa68a8d9737",
-          "md5": "1e41e6075e9ef164055ff68c721be720"
+          "name": "CommonCoreLegacy-2.1.43-javadoc.jar",
+          "url": "CommonCoreLegacy-2.1.43-javadoc.jar",
+          "size": 329609,
+          "sha512": "3ded05aeea29ce909c3d9ad2614dc799671e228cfa35af963f6a4cc38013a04d9e513670128924d7ad17a34d9f51c96173fc5871da9d3f42252b72ec336b9f20",
+          "sha256": "080bc468ca3e4ff2c8fee9e11171cd3b4e40a87860e8c211ec56f2d307f34742",
+          "sha1": "532956ad40677a8767b1a81b8906595cf361c295",
+          "md5": "bef3be9707f80f085aa5b76aa49f63d1"
         },
         {
           "name": "CommonCoreLegacy-2.1.43.aar",
           "url": "CommonCoreLegacy-2.1.43.aar",
-          "size": 607469,
-          "sha512": "b94bbc6cd441cc5b41d52b5372efec91e7e7fef89aa26cb67f9d626c37601be84b9f3001a7ed71ce03aeabb162a328b7066005686e5f2ada0f38b7a17bf4b850",
-          "sha256": "243613b9532d5d6f1f878b99b2cd89a838d87bba1e97a94a88099a6d968964b7",
-          "sha1": "eb137a44a264a192383ddeb34670230897a10167",
-          "md5": "cb801e3c9c0e9fdb101afe5cce9ec21c"
+          "size": 614580,
+          "sha512": "6fbe7f319be63ae2a565ed80a4d80ee1c244aba0053a643208add17fc5e272fbd61558b8674a6b9636016316e4fdd6dd280c30e5806bdd45cbebdeaf2c0561cc",
+          "sha256": "961d4131ab48cdfbca3f564d0f5783fae1a4288651b0c2b4b43bda32dc85081b",
+          "sha1": "fdce40b6abc9080969a3c5e8c062a3d0bc856c4c",
+          "md5": "0af40a6fc0d05d80ea91d8aca2d5c4af"
         },
         {
-          "name": "CommonCoreLegacy-2.1.43-javadoc.jar",
-          "url": "CommonCoreLegacy-2.1.43-javadoc.jar",
-          "size": 329474,
-          "sha512": "e7cbce5a1d8359486b2e61cfc5135ac62ef96d520f9e5d6d3a37cbffc71899d14ed18d556bcc04576632e850d9cfd2e3b45531462cbf0d0b7fedcaa71cda4f27",
-          "sha256": "3549165a449fc529f8581e3adc79af82061db0e4d5e9c15a18303652414c427a",
-          "sha1": "4721351575636d2c3222f3cb2bbfb8f29484e529",
-          "md5": "f2ac41c79ba55817f90786232084d7fd"
+          "name": "CommonCoreLegacy-2.1.43-sources.jar",
+          "url": "CommonCoreLegacy-2.1.43-sources.jar",
+          "size": 98613,
+          "sha512": "501f3a910c2edbfb94a8395825fb15a5888898d70beb3d02504877213f3b87f206388d044a8f978752ad1e244ad8a01c4072c20e8bfd3a77bb42b53af8d39e50",
+          "sha256": "98230b5715f0d97652f219a21fcca2c8134bd14276eb7ff78c3f199525640e51",
+          "sha1": "78145b27792931066acf275653456803609b5769",
+          "md5": "7b637c907af7bebcf639ab4d6b75b6ef"
         }
       ]
     }
