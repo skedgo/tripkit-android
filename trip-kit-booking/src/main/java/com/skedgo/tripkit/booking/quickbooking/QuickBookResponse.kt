@@ -1,6 +1,9 @@
 package com.skedgo.tripkit.booking.quickbooking
 
 import com.google.gson.annotations.SerializedName
+import com.skedgo.tripkit.common.util.decimalFormatWithCurrencySymbol
+import com.skedgo.tripkit.common.util.factor100
+import com.skedgo.tripkit.common.util.nonDecimalFormatWithCurrencySymbol
 
 data class QuickBookResponse(
     val action: Action?,
@@ -58,7 +61,14 @@ data class Review(
 ) {
     fun getPriceWithCurrency(): String {
         val symbol = if (currency == "USD") "$" else currency
-        return String.format("%s%.2f", symbol, price / 100.0)
+
+        val price = price / 100.0
+
+        return if(price.factor100()){
+            price.toInt().nonDecimalFormatWithCurrencySymbol(symbol)
+        } else {
+            price.decimalFormatWithCurrencySymbol(symbol)
+        }
     }
 
     fun getFormattedPrice(): Double {
