@@ -19,7 +19,9 @@ interface RouteService {
      * So be sure to [Observable.observeOn] with [rx.android.schedulers.AndroidSchedulers.mainThread]
      * to render [TripGroup]s on the main thread.
      */
-    fun routeAsync(query: Query,
-                   transportModeFilter: TransportModeFilter):
+    fun routeAsync(
+        query: Query,
+        transportModeFilter: TransportModeFilter
+    ):
             Observable<List<TripGroup>>
 }

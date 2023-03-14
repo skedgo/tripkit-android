@@ -42,8 +42,10 @@ internal class RouteServiceImpl(
                 .flatMap { subQuery ->
 
                     val region = subQuery.region
+
                     val baseUrls = region!!.getURLs(HttpClientCustomDataStore.getCustomBaseUrl())
-                    val modes = subQuery.transportModeIds
+                    val modes = transportModeFilter.getFilteredMode(subQuery.transportModeIds)
+
                     val excludeStops = subQuery.excludedStopCodes
                     val avoidModes = region.transportModeIds.orEmpty().map { it }.filter { transportModeFilter.avoidTransportMode(it) }
 
