@@ -20,7 +20,8 @@ internal class RegionServiceImpl(
         private val regionsFetcher: RegionsFetcher,
         private val regionInfoRepository: RegionInfoRepository,
         private val regionFinder: RegionFinder) : RegionService {
-    override fun getRegionsAsync(): Observable<List<Region>> = regionCache.async.toObservable()
+    override fun getRegionsAsync(): Observable<List<Region>> =
+        regionCache.async.toObservable()
 
     override fun getRegionByNameAsync(regionName: String): Observable<Region> =
             getRegionsAsync()

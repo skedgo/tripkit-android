@@ -12,146 +12,156 @@ import com.google.gson.annotations.SerializedName;
  */
 // FIXME let's remove Parcelable and maybe migrate to a data class
 public class ModeInfo implements Parcelable {
-  public static final Creator<ModeInfo> CREATOR = new Creator<ModeInfo>() {
-    @Override
-    public ModeInfo createFromParcel(Parcel source) {
-      return new ModeInfo(source);
+    public static final Creator<ModeInfo> CREATOR = new Creator<ModeInfo>() {
+        @Override
+        public ModeInfo createFromParcel(Parcel source) {
+            return new ModeInfo(source);
+        }
+
+        @Override
+        public ModeInfo[] newArray(int size) {
+            return new ModeInfo[0];
+        }
+    };
+
+    public static final float MAP_LIST_SIZE_RATIO = 1f;
+
+    @SerializedName("alt")
+    private String alternativeText;
+    @SerializedName("localIcon")
+    private String localIconName;
+    @SerializedName("remoteIcon")
+    private String remoteIconName;
+    @SerializedName("remoteDarkIcon")
+    private String remoteDarkIconName;
+    @SerializedName("description")
+    private String description;
+    @SerializedName("identifier")
+    private String id;
+    @SerializedName("color")
+    private ServiceColor color;
+    @SerializedName("remoteIconIsTemplate")
+    private boolean remoteIconIsTemplate;
+    @SerializedName("remoteIconIsBranding")
+    private boolean remoteIconIsBranding;
+
+
+    public ModeInfo() {
+    }
+
+    private ModeInfo(@NonNull Parcel source) {
+        alternativeText = source.readString();
+        localIconName = source.readString();
+        remoteIconName = source.readString();
+        remoteDarkIconName = source.readString();
+        description = source.readString();
+        id = source.readString();
+        color = source.readParcelable(ServiceColor.class.getClassLoader());
+        remoteIconIsTemplate = source.readInt() == 1;
+        remoteIconIsBranding = source.readInt() == 0;
+    }
+
+    /**
+     * Indicates a human-readable name of the transport (e.g, "Train").
+     */
+    @NonNull
+    public String getAlternativeText() {
+        return alternativeText;
+    }
+
+    public void setAlternativeText(String alternativeText) {
+        this.alternativeText = alternativeText;
     }
 
     @Override
-    public ModeInfo[] newArray(int size) {
-      return new ModeInfo[0];
+    public int describeContents() {
+        return 0;
     }
-  };
 
-  public static final float MAP_LIST_SIZE_RATIO = 1f;
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(alternativeText);
+        dest.writeString(localIconName);
+        dest.writeString(remoteIconName);
+        dest.writeString(remoteDarkIconName);
+        dest.writeString(description);
+        dest.writeString(id);
+        dest.writeParcelable(color, 0);
+        dest.writeInt(remoteIconIsTemplate ? 1 : 0);
+        dest.writeInt(remoteIconIsBranding ? 1 : 0);
+    }
 
-  @SerializedName("alt") private String alternativeText;
-  @SerializedName("localIcon") private String localIconName;
-  @SerializedName("remoteIcon") private String remoteIconName;
-  @SerializedName("remoteDarkIcon") private String remoteDarkIconName;
-  @SerializedName("description") private String description;
-  @SerializedName("identifier") private String id;
-  @SerializedName("color") private ServiceColor color;
-  @SerializedName("remoteIconIsTemplate") private boolean remoteIconIsTemplate;
-  @SerializedName("remoteIconIsBranding") private boolean remoteIconIsBranding;
+    public boolean getRemoteIconIsTemplate() {
+        return remoteIconIsTemplate;
+    }
 
+    public void setRemoteIconIsTemplate(boolean remoteIconIsTemplate) {
+        this.remoteIconIsTemplate = remoteIconIsTemplate;
+    }
 
-  public ModeInfo() {}
+    public boolean getRemoteIconIsBranding() {
+        return remoteIconIsBranding;
+    }
 
-  private ModeInfo(@NonNull Parcel source) {
-    alternativeText = source.readString();
-    localIconName = source.readString();
-    remoteIconName = source.readString();
-    remoteDarkIconName = source.readString();
-    description = source.readString();
-    id = source.readString();
-    color = source.readParcelable(ServiceColor.class.getClassLoader());
-    remoteIconIsTemplate = source.readInt() == 1;
-    remoteIconIsBranding = source.readInt() == 0;
-  }
+    public void setRemoteIconIsBranding(boolean remoteIconIsBranding) {
+        this.remoteIconIsBranding = remoteIconIsBranding;
+    }
 
-  /**
-   * Indicates a human-readable name of the transport (e.g, "Train").
-   */
-  @NonNull
-  public String getAlternativeText() {
-    return alternativeText;
-  }
+    public String getLocalIconName() {
+        return localIconName;
+    }
 
-  public void setAlternativeText(String alternativeText) {
-    this.alternativeText = alternativeText;
-  }
+    public void setLocalIconName(String localIconName) {
+        this.localIconName = localIconName;
+    }
 
-  @Override
-  public int describeContents() {
-    return 0;
-  }
+    public String getRemoteIconName() {
+        return remoteIconName;
+    }
 
-  @Override
-  public void writeToParcel(Parcel dest, int flags) {
-    dest.writeString(alternativeText);
-    dest.writeString(localIconName);
-    dest.writeString(remoteIconName);
-    dest.writeString(remoteDarkIconName);
-    dest.writeString(description);
-    dest.writeString(id);
-    dest.writeParcelable(color, 0);
-    dest.writeInt(remoteIconIsTemplate ? 1 : 0);
-    dest.writeInt(remoteIconIsBranding ? 1 : 0);
-  }
+    public void setRemoteIconName(String remoteIconName) {
+        this.remoteIconName = remoteIconName;
+    }
 
-  public boolean getRemoteIconIsTemplate() {
-    return remoteIconIsTemplate;
-  }
+    @Nullable
+    public String getRemoteDarkIconName() {
+        return remoteDarkIconName;
+    }
 
-  public void setRemoteIconIsTemplate(boolean remoteIconIsTemplate) {
-    this.remoteIconIsTemplate = remoteIconIsTemplate;
-  }
+    public void setRemoteDarkIconName(String remoteDarkIconName) {
+        this.remoteDarkIconName = remoteDarkIconName;
+    }
 
-  public boolean getRemoteIconIsBranding() {
-    return remoteIconIsBranding;
-  }
+    public String getDescription() {
+        return description;
+    }
 
-  public void setRemoteIconIsBranding(boolean remoteIconIsBranding) {
-    this.remoteIconIsBranding = remoteIconIsBranding;
-  }
+    public void setDescription(String description) {
+        this.description = description;
+    }
 
-  public String getLocalIconName() {
-    return localIconName;
-  }
+    public VehicleMode getModeCompat() {
+        return VehicleMode.from(localIconName);
+    }
 
-  public void setLocalIconName(String localIconName) {
-    this.localIconName = localIconName;
-  }
+    /**
+     * @see <a href="http://skedgo.github.io/tripgo-api/site/faq/#mode-identifiers">Mode Identifiers</a>
+     */
+    @Nullable
+    public String getId() {
+        return id;
+    }
 
-  public String getRemoteIconName() {
-    return remoteIconName;
-  }
+    public void setId(String id) {
+        this.id = id;
+    }
 
-  public void setRemoteIconName(String remoteIconName) {
-    this.remoteIconName = remoteIconName;
-  }
+    @Nullable
+    public ServiceColor getColor() {
+        return color;
+    }
 
-  @Nullable
-  public String getRemoteDarkIconName() {
-    return remoteDarkIconName;
-  }
-
-  public void setRemoteDarkIconName(String remoteDarkIconName) {
-    this.remoteDarkIconName = remoteDarkIconName;
-  }
-
-  public String getDescription() {
-    return description;
-  }
-
-  public void setDescription(String description) {
-    this.description = description;
-  }
-
-  public VehicleMode getModeCompat() {
-    return VehicleMode.from(localIconName);
-  }
-
-  /**
-   * @see <a href="http://skedgo.github.io/tripgo-api/site/faq/#mode-identifiers">Mode Identifiers</a>
-   */
-  @Nullable
-  public String getId() {
-    return id;
-  }
-
-  public void setId(String id) {
-    this.id = id;
-  }
-
-  @Nullable
-  public ServiceColor getColor() {
-    return color;
-  }
-
-  public void setColor(ServiceColor color) {
-    this.color = color;
-  }
+    public void setColor(ServiceColor color) {
+        this.color = color;
+    }
 }

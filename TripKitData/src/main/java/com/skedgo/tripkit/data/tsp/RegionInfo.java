@@ -8,6 +8,7 @@ import com.skedgo.tripkit.routing.ModeInfo;
 
 import org.immutables.value.Value;
 
+import java.util.HashMap;
 import java.util.List;
 
 import static org.immutables.gson.Gson.TypeAdapters;
@@ -21,6 +22,7 @@ import static org.immutables.value.Value.Style;
 public abstract class RegionInfo {
   @Nullable public abstract List<ModeInfo> transitModes();
   @Nullable public abstract Paratransit paratransit();
+  @Nullable public abstract HashMap<String, Mode> modes();
 
   /**
    * @return If true, indicates that we have wheelchair accessibility
