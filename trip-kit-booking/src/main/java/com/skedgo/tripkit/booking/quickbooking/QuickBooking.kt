@@ -64,6 +64,28 @@ data class Input(
                 )
 
     }
+
+    fun setValuesFromId() {
+        value = value?.run { options?.firstOrNull { it.title == this }?.id }
+        values = values?.run {
+            val data = mutableListOf<String>()
+            forEach { value ->
+                data.add(options?.firstOrNull { it.title == value }?.id ?: "")
+            }
+            data
+        }
+    }
+
+    fun setValuesFromTitle() {
+        value = value?.run { options?.firstOrNull { it.id == this }?.title }
+        values = values?.run {
+            val data = mutableListOf<String>()
+            forEach { value ->
+                data.add(options?.firstOrNull { it.id == value }?.title ?: "")
+            }
+            data
+        }
+    }
 }
 
 data class Ticket(

@@ -2,6 +2,7 @@ package com.skedgo.tripkit.common.model;
 
 import android.os.Parcel;
 import android.os.Parcelable;
+import android.text.TextUtils;
 
 import androidx.annotation.Nullable;
 
@@ -75,7 +76,34 @@ public abstract class BookingConfirmationInputNew implements Parcelable {
 
     public abstract List<BookingConfirmationNotes> notes();
 
-    @Nullable public abstract String value();
+    @Nullable
+    public abstract String value();
 
-    @Nullable public abstract List<String> values();
+    @Nullable
+    public abstract List<String> values();
+
+    public List<String> obtainValue() {
+        List<String> result = new ArrayList<String>();
+        if (value() != null && !TextUtils.isEmpty(value())) {
+            result.add(getValueFromOptions(value()));
+        }
+        if (values() != null && values().size() > 0) {
+            for (String value : values()) {
+                result.add(getValueFromOptions(value));
+            }
+        }
+
+        return result;
+    }
+
+    private String getValueFromOptions(String key) {
+        String result = key;
+        for (BookingConfirmationInputOptions option : options()) {
+            if (option.id().equals(key)) {
+                result = option.title();
+            }
+        }
+
+        return result;
+    }
 }
