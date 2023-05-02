@@ -755,6 +755,16 @@ public class TripSegment implements IRealTimeElement, ITimeRange {
         }
     }
 
+    @DrawableRes
+    public int getDarkVehicleIconWithNoRealtimeChecking() {
+        if (modeInfo != null && modeInfo.getModeCompat() != null) {
+            return modeInfo.getModeCompat().getIconRes();
+        } else {
+            return 0;
+        }
+    }
+
+
     public Drawable getLightTransportIcon(@NonNull Resources resources) {
         if (modeInfo != null && modeInfo.getModeCompat() != null) {
             return isRealTime
