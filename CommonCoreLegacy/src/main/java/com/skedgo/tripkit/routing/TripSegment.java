@@ -773,7 +773,6 @@ public class TripSegment implements IRealTimeElement, ITimeRange {
         }
     }
 
-
     public Drawable getLightTransportIcon(@NonNull Resources resources) {
         if (modeInfo != null && modeInfo.getModeCompat() != null) {
             return isRealTime
