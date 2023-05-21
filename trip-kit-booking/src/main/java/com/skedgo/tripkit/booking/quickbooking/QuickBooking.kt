@@ -66,16 +66,24 @@ data class Input(
     }
 
     fun setValuesFromId() {
-        if (options != null) {
-            value = value?.run { options.firstOrNull { it.title == this }?.id }
-            values = values?.run {
-                val data = mutableListOf<String>()
-                forEach { value ->
-                    options.firstOrNull { it.title == value }?.id?.let {
-                        data.add(it)
+        when {
+            options != null -> {
+                value = value?.run { options.firstOrNull { it.title == this }?.id ?: "" }
+                values = values?.run {
+                    val data = mutableListOf<String>()
+                    forEach { value ->
+                        options.firstOrNull { it.title == value }?.id?.let {
+                            data.add(it)
+                        }
                     }
+                    data
                 }
-                data
+            }
+            value == type.getDefaultValueByType(title) -> {
+                value = ""
+            }
+            values == listOf(type.getDefaultValueByType(title)) -> {
+                values = emptyList()
             }
         }
     }
