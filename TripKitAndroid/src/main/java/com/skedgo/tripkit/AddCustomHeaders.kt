@@ -20,6 +20,11 @@ class AddCustomHeaders constructor(
         private val getKey: () -> Key,
         private val preferences: SharedPreferences?
 ) : Interceptor {
+
+    companion object {
+        const val PREF_KEY_CLIENT_ID = "pref_key_client_id"
+    }
+
     private val appVersionHeader = "X-TripGo-Version"
     private val uuidHeader = "X-TripGo-UUID"
     private val keyHeader = "X-TripGo-Key"
@@ -29,6 +34,7 @@ class AddCustomHeaders constructor(
     private val acceptHeader = "Accept"
     private val userTokenHeader = "userToken"
     private val deviceHeader = "X-TripGo-Device-Id"
+    private val clientIdHeader = "X-TripGo-Client-Id"
 
     @Throws(IOException::class)
     override fun intercept(chain: Interceptor.Chain): Response {
@@ -65,6 +71,10 @@ class AddCustomHeaders constructor(
             headersMap.forEach {
                 builder.addHeader(it.key, it.value)
             }
+        }
+
+        preferences?.getString(PREF_KEY_CLIENT_ID, null)?.let { clientId ->
+            builder.addHeader(clientIdHeader, clientId)
         }
 
         return chain.proceed(builder.build())

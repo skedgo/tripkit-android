@@ -88,8 +88,9 @@ open class HttpClientModule(
 
     @Provides
     internal fun addCustomHeaders(
-            getAppVersion: GetAppVersion,
-            uuidProviderLazy: Lazy<com.skedgo.tripkit.UuidProvider>
+        getAppVersion: GetAppVersion,
+        uuidProviderLazy: Lazy<com.skedgo.tripkit.UuidProvider>,
+        @Named("TripKitPrefs") sharedPreferences: SharedPreferences
     ): AddCustomHeaders {
         return AddCustomHeaders(
                 getAppVersion,
