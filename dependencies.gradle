@@ -6,29 +6,30 @@
 
 def versions = new Expando()
 versions.desugaring = "1.1.5"
-versions.immutablesVersion = "2.8.2"
+versions.immutablesVersion = "2.8.8"
 versions.devMinSdkVersion = 21
 versions.proMinSdkVersion = 21
-versions.compileSdkVersion = 29
+versions.compileSdkVersion = 31
 versions.targetSdkVersion = 29
 // See change-log at https://github.com/JetBrains/kotlin/blob/master/ChangeLog.md.
-versions.kotlinVersion = "1.4.10"
+versions.kotlinVersion = "1.6.20"
 versions.kotlinCoroutinesVersion = "1.4.0"
 versions.supportLibraryVersion = "28.0.0"
-versions.androidGradlePlugin = "4.0.1"
+versions.androidGradlePlugin = "7.3.0"
 versions.okHttpVersion = "4.9.0"
 versions.retrofitVersion = "2.8.1"
 versions.androidxVersion = "1.1.0"
-versions.room = "2.2.5"
+versions.room = "2.4.1"
 versions.architectureComponents = "1.0.0"
 versions.testcore = "1.1.0"
 versions.dagger = "2.24"
-versions.lifecycle = "2.2.0"
+versions.lifecycle = "2.4.0"
 versions.volley = "1.2.0"
 versions.jetBrainsJava5 = '15.0'
 versions.glide = "4.11.0"
 versions.tripGoLibrary = "1.0"
 versions.tripGoGroup = "com.skedgo"
+versions.javaxAnnotation = "1.3.2"
 
 ext.versions = versions
 
@@ -43,6 +44,7 @@ libs.jodaTime = "joda-time:joda-time:2.9.9:no-tzdb"
 libs.jodaTimeTzdb = "joda-time:joda-time:2.9.9"
 libs.jodaTimeAndroid = "net.danlew:android.joda:2.10.3"
 libs.androidJob = "com.evernote:android-job:1.2.6"
+libs.javaxAnnotation = "javax.annotation:javax.annotation-api:$versions.javaxAnnotation"
 
 // Support Library package
 libs.supportAnnotations = "androidx.annotation:annotation:$versions.androidxVersion"
@@ -68,7 +70,7 @@ libs.rxrelay2 = "com.jakewharton.rxrelay2:rxrelay:2.1.0"
 libs.rxkotlin = "io.reactivex.rxjava2:rxkotlin:2.4.0"
 libs.kluent = "org.amshove.kluent:kluent:1.38"
 libs.kotlin = "org.jetbrains.kotlin:kotlin-stdlib:$versions.kotlinVersion"
-libs.gson = "com.google.code.gson:gson:2.8.6"
+libs.gson = "com.google.code.gson:gson:2.8.8"
 libs.junit = "junit:junit:4.12"
 libs.okHttp = "com.squareup.okhttp3:okhttp:$versions.okHttpVersion"
 libs.okHttpLogging = "com.squareup.okhttp3:logging-interceptor:$versions.okHttpVersion"
@@ -114,8 +116,9 @@ libs.roomCompiler = "androidx.room:room-compiler:$versions.room"
 libs.roomRxjava2 = "androidx.room:room-rxjava2:$versions.room"
 libs.roomKtx = "androidx.room:room-ktx:$versions.room"
 
-libs.lifecycle = "androidx.lifecycle:lifecycle-extensions:$versions.lifecycle"
+libs.lifecycle = "androidx.lifecycle:lifecycle-extensions:2.2.0"
 libs.lifecycleCompiler = "androidx.lifecycle:lifecycle-compiler:$versions.lifecycle"
+libs.lifecycleViewModelJava = "androidx.lifecycle:lifecycle-viewmodel:$versions.lifecycle"
 libs.lifecycleViewModel = "androidx.lifecycle:lifecycle-viewmodel-ktx:$versions.lifecycle"
 libs.lifecycleRuntime = "androidx.lifecycle:lifecycle-runtime-ktx:$versions.lifecycle"
 libs.lifecycleLiveData = "androidx.lifecycle:lifecycle-livedata-ktx:$versions.lifecycle"

@@ -36,6 +36,11 @@ android {
         checkReleaseBuilds true
         abortOnError false
     }
+
+    compileOptions {
+        sourceCompatibility = JavaVersion.VERSION_1_8
+        targetCompatibility = JavaVersion.VERSION_1_8
+    }
 }
 
 dependencies {
@@ -67,6 +72,8 @@ dependencies {
     compileOnly libs.valueAnnotations
     compileOnly libs.builderAnnotations
     implementation libs.immutablesGson
+    implementation libs.javaxAnnotation
+    compileOnly 'com.github.pengrad:jdk9-deps:1.0'
 }
 
 
@@ -80,7 +87,7 @@ task javadoc(type: Javadoc) {
     failOnError false
     source = android.sourceSets.main.java.sourceFiles
     classpath += project.files(android.getBootClasspath().join(File.pathSeparator))
-    classpath += configurations.compile
+    classpath += configurations.implementation
 }
 
 // build a jar with javadoc
