@@ -10,4 +10,6 @@ interface ClientsApi {
     @GET
     fun getClients(@Url url: String): Single<List<Client>>
 
+    @GET("clients.json")
+    fun getClients(): Single<List<Client>>
 }

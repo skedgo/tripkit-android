@@ -8,13 +8,18 @@ import javax.inject.Inject
 interface ClientsRepository {
 
     fun getClients(url: String): Single<List<Client>>
+    fun getClients(): Single<List<Client>>
 
     class ClientRepositoryImpl @Inject constructor(
         private val api: ClientsApi
-    ): ClientsRepository {
-        override fun getClients(url: String): Single<List<Client>> {
-            return api.getClients(url).subscribeOn(Schedulers.io())
-        }
+    ) : ClientsRepository {
+        override fun getClients(url: String): Single<List<Client>> =
+            api.getClients(url).subscribeOn(Schedulers.io())
+
+
+        override fun getClients(): Single<List<Client>> =
+            api.getClients().subscribeOn(Schedulers.io())
+
     }
 
 }

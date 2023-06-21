@@ -83,7 +83,7 @@ open class HttpClientModule(
     @Provides
     @Named("TripKitPrefs")
     open fun preferences(context: Context): SharedPreferences {
-        return context.getSharedPreferences("TripKit", Context.MODE_PRIVATE)
+        return context.getSharedPreferences(TripKitConstants.PREF_NAME_TRIP_KIT, Context.MODE_PRIVATE)
     }
 
     @Provides

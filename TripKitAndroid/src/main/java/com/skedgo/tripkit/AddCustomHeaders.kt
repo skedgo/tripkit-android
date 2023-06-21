@@ -21,10 +21,6 @@ class AddCustomHeaders constructor(
         private val preferences: SharedPreferences?
 ) : Interceptor {
 
-    companion object {
-        const val PREF_KEY_CLIENT_ID = "pref_key_client_id"
-    }
-
     private val appVersionHeader = "X-TripGo-Version"
     private val uuidHeader = "X-TripGo-UUID"
     private val keyHeader = "X-TripGo-Key"
@@ -73,7 +69,7 @@ class AddCustomHeaders constructor(
             }
         }
 
-        preferences?.getString(PREF_KEY_CLIENT_ID, null)?.let { clientId ->
+        preferences?.getString(TripKitConstants.PREF_KEY_CLIENT_ID, null)?.let { clientId ->
             builder.addHeader(clientIdHeader, clientId)
         }
 
