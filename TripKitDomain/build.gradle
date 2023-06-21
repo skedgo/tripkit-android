@@ -4,8 +4,8 @@ apply plugin: 'java'
 apply plugin: 'maven-publish'
 
 // To fix error of converting bytecode to dex.
-targetCompatibility = '1.7'
-sourceCompatibility = '1.7'
+//targetCompatibility = '1.7'
+//sourceCompatibility = '1.7'
 
 dependencies {
   testImplementation libs.junit
@@ -24,6 +24,7 @@ dependencies {
   compileOnly libs.immutablesAndroidStub
   compileOnly libs.value
   implementation libs.koptional
+  implementation libs.javaxAnnotation
 }
 
 task sourcesJar(type: Jar, dependsOn: classes) {

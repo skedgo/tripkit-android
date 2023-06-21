@@ -12,8 +12,6 @@ open class GetRemoteValidBookingCount @Inject constructor(
     /*private val hasUserToken: HasUserToken,*/
     private val validBookingCountRepository: ValidBookingCountRepository
 ) {
-  open fun execute(): Observable<Int>
-      = Observable.just(1) /*hasUserToken.execute()
-      .filter { it }
-      .flatMap { validBookingCountRepository.getRemoteValidBookingCount() }*/
+    open fun execute(): Observable<Int>
+            = validBookingCountRepository.getRemoteValidBookingCount()
 }

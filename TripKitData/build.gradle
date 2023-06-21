@@ -11,11 +11,25 @@ android {
   defaultConfig {
     minSdkVersion versions.proMinSdkVersion
     targetSdkVersion versions.targetSdkVersion
+
+    javaCompileOptions {
+      annotationProcessorOptions {
+        arguments += ["room.schemaLocation": "$projectDir/schemas".toString()]
+      }
+    }
   }
 
   lintOptions {
     // Changing to warning because of https://github.com/square/okio/issues/58.
     warning "InvalidPackage"
+  }
+  compileOptions {
+    sourceCompatibility JavaVersion.VERSION_1_8
+    targetCompatibility JavaVersion.VERSION_1_8
+  }
+
+  kotlinOptions {
+    jvmTarget = JavaVersion.VERSION_1_8.toString()
   }
 }
 
@@ -39,29 +53,57 @@ dependencies {
   api project(":route-persistence")
   implementation libs.dagger
   implementation libs.rxjava2
+  implementation libs.rxAndroid2
   implementation libs.rxrelay2
   implementation libs.jodaTimeAndroid
-  implementation libs.roomRuntime
-  implementation libs.roomRxjava2
   implementation libs.retrofitConverterGson
   implementation libs.retrofitAdapterRxJava
   implementation libs.retrofit
-
-  kapt libs.roomCompiler
+  implementation libs.supportAnnotations
   implementation libs.koptional
 
+  implementation libs.roomRuntime
+  annotationProcessor libs.roomCompiler
+  kapt libs.roomCompiler
+  implementation libs.roomRxjava2
 
   kapt libs.daggerCompiler
-  kapt libs.value
-  compileOnly libs.valueAnnotations
-  compileOnly libs.builderAnnotations
+  implementation libs.daggerAndroidSupport
+  annotationProcessor libs.daggerCompiler
+  annotationProcessor libs.daggerAndroidProcessor
+
+  implementation libs.value
+  implementation libs.kotlin
   implementation libs.gson
   implementation libs.immutablesGson
-  implementation libs.kotlin
+
+  kapt libs.value
+  annotationProcessor libs.value
+
+  kapt libs.gson
+  annotationProcessor libs.gson
+
+  kapt libs.valueAnnotations
+  compileOnly libs.valueAnnotations
+
+  kapt libs.builderAnnotations
+  compileOnly libs.builderAnnotations
+
+  kapt libs.immutablesGson
+  annotationProcessor libs.immutablesGson
+
+  //compileOnly libs.valueAnnotations
+  //compileOnly libs.builderAnnotations
+
+  implementation libs.javaxAnnotation
+  compileOnly 'com.github.pengrad:jdk9-deps:1.0'
 
   api project(':sqliteutils')
 }
 
+kapt {
+  correctErrorTypes = true
+}
 
 // build a jar with source files
 task sourcesJar(type: Jar) {
@@ -73,7 +115,7 @@ task javadoc(type: Javadoc) {
   failOnError  false
   source = android.sourceSets.main.java.sourceFiles
   classpath += project.files(android.getBootClasspath().join(File.pathSeparator))
-  classpath += configurations.compile
+  classpath += configurations.implementation
 }
 
 // build a jar with javadoc
@@ -93,8 +135,8 @@ version = tripkitVersion
 publishing {
   repositories {
     maven {
-      url = "file://${localMaven}"
-      //url = publishMavenUrl
+//      url = "file://${localMaven}"
+      url = publishMavenUrl
       credentials {
         username = publishMavenUsername
         password = publishMavenToken

@@ -109,6 +109,9 @@ dependencies {
   api project(':TripKitData')
   api project(':sqliteutils')
   //api project(':SnapshotTaker') Uncomment when using in TripGo-v5
+
+  implementation libs.javaxAnnotation
+  compileOnly 'com.github.pengrad:jdk9-deps:1.0'
 }
 
 // build a jar with source files
@@ -121,7 +124,7 @@ task javadoc(type: Javadoc) {
   failOnError  false
   source = android.sourceSets.main.java.sourceFiles
   classpath += project.files(android.getBootClasspath().join(File.pathSeparator))
-  classpath += configurations.compile
+  classpath += configurations.implementation
 }
 
 // build a jar with javadoc
