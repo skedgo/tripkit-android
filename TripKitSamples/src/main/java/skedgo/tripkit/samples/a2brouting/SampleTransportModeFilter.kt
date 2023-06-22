@@ -38,6 +38,10 @@ class SampleTransportModeFilter() : TransportModeFilter {
         }
     }
 
+    override fun getFilteredMode(originalModes: List<String>): List<String> {
+        return emptyList()
+    }
+
     constructor(parcel: Parcel) : this() {
         var list = mutableListOf<String>()
         parcel.readStringList(list)
