@@ -19,3 +19,20 @@ annotation class QuickBookingType {
         const val NUMBER = "NUMBER"
     }
 }
+
+fun String.getDefaultValueByType(
+    title: String,
+    values: List<String>? = null
+): String {
+    return when (this) {
+        QuickBookingType.LONG_TEXT -> {
+            String.format("Tap to %s", title)
+        }
+        QuickBookingType.NUMBER -> {
+            values?.firstOrNull() ?: "0"
+        }
+        else -> {
+            "Tap to make selections"
+        }
+    }
+}

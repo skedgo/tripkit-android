@@ -20,14 +20,17 @@ class AddCustomHeaders constructor(
         private val getKey: () -> Key,
         private val preferences: SharedPreferences?
 ) : Interceptor {
+
     private val appVersionHeader = "X-TripGo-Version"
     private val uuidHeader = "X-TripGo-UUID"
     private val keyHeader = "X-TripGo-Key"
     private val regionEligibilityHeader = "X-TripGo-RegionEligibility"
     private val acceptLanguageHeader = "Accept-Language"
-    private val appJsonValue = "application/json"
+    private val appJsonValue = "*/*"
     private val acceptHeader = "Accept"
     private val userTokenHeader = "userToken"
+    private val deviceHeader = "X-TripGo-Device-Id"
+    private val clientIdHeader = "X-TripGo-Client-Id"
 
     @Throws(IOException::class)
     override fun intercept(chain: Interceptor.Chain): Response {
@@ -42,15 +45,19 @@ class AddCustomHeaders constructor(
             is Key.RegionEligibility -> builder.addHeader(regionEligibilityHeader, key.value)
         }
 
-        if (getUserToken != null && getUserToken.call() != null) {
+        if (getUserToken?.call() != null) {
             builder.addHeader(userTokenHeader, getUserToken.call())
         }
 
         val hasTripSelection = preferences?.getBoolean("tripSelection", false) ?: false
-        if (getUuid != null && hasTripSelection) {
-            val uuid = getUuid.call()
-            if (uuid != null) {
-                builder.addHeader(uuidHeader, uuid)
+        if (getUuid != null) {
+            builder.addHeader(deviceHeader, getUuid.call())
+
+            if (hasTripSelection) {
+                val uuid = getUuid.call()
+                if (uuid != null) {
+                    builder.addHeader(uuidHeader, uuid)
+                }
             }
         }
 
@@ -60,6 +67,10 @@ class AddCustomHeaders constructor(
             headersMap.forEach {
                 builder.addHeader(it.key, it.value)
             }
+        }
+
+        preferences?.getString(TripKitConstants.PREF_KEY_CLIENT_ID, null)?.let { clientId ->
+            builder.addHeader(clientIdHeader, clientId)
         }
 
         return chain.proceed(builder.build())

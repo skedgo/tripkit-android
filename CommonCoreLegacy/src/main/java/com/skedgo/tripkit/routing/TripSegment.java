@@ -190,6 +190,15 @@ public class TripSegment implements IRealTimeElement, ITimeRange {
     @SerializedName("hasCarParks")
     private boolean hasCarParks;
 
+    @SerializedName("ticket")
+    private Ticket ticket;
+
+    @SerializedName("ticketWebsiteURL")
+    private String ticketURL;
+
+    @SerializedName("tickets")
+    private List<Ticket> tickets;
+
     /**
      * FIXME: Should replace this with Quantity Strings.
      * See http://developer.android.com/intl/vi/guide/topics/resources/string-resource.html#Plurals.
@@ -764,7 +773,6 @@ public class TripSegment implements IRealTimeElement, ITimeRange {
         }
     }
 
-
     public Drawable getLightTransportIcon(@NonNull Resources resources) {
         if (modeInfo != null && modeInfo.getModeCompat() != null) {
             return isRealTime
@@ -878,5 +886,13 @@ public class TripSegment implements IRealTimeElement, ITimeRange {
 
     public void setGeofences(List<Geofence> geofences) {
         this.geofences = geofences;
+    }
+
+    public Ticket getTicket() {
+        return ticket;
+    }
+
+    public String getTicketURL() {
+        return ticketURL;
     }
 }

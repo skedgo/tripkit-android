@@ -30,6 +30,7 @@ versions.glide = "4.11.0"
 versions.tripGoLibrary = "1.0"
 versions.tripGoGroup = "com.skedgo"
 versions.javaxAnnotation = "1.3.2"
+versions.instabug = '11.11.0'
 
 ext.versions = versions
 
@@ -45,6 +46,7 @@ libs.jodaTimeTzdb = "joda-time:joda-time:2.9.9"
 libs.jodaTimeAndroid = "net.danlew:android.joda:2.10.3"
 libs.androidJob = "com.evernote:android-job:1.2.6"
 libs.javaxAnnotation = "javax.annotation:javax.annotation-api:$versions.javaxAnnotation"
+libs.instabug = "com.instabug.library:instabug:$versions.instabug"
 
 // Support Library package
 libs.supportAnnotations = "androidx.annotation:annotation:$versions.androidxVersion"

@@ -8,6 +8,7 @@ import android.util.Pair
 import com.google.gson.Gson
 import com.skedgo.routepersistence.RouteContract.*
 import com.skedgo.sqlite.Cursors.flattenCursor
+import com.skedgo.tripkit.common.BuildConfig
 import com.skedgo.tripkit.routing.Source
 import com.skedgo.tripkit.routing.Trip
 import com.skedgo.tripkit.routing.TripGroup
@@ -59,6 +60,14 @@ open class RouteStore(private val databaseHelper: SQLiteOpenHelper, private val 
                 .fromCallable {
                     saveTripGroupsInTransaction(requestId, groups)
                     groups
+                }.onExceptionResumeNext {
+                    Observable.just(it)
+                }
+                .onErrorResumeNext { throwable: Throwable ->
+                    if (BuildConfig.DEBUG) {
+                        throwable.printStackTrace()
+                    }
+                    Observable.just(groups)
                 }
                 .subscribeOn(Schedulers.io())
     }
