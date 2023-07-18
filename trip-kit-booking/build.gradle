@@ -31,6 +31,13 @@ android {
     jvmTarget = "1.8"
   }
 
+  publishing {
+    singleVariant("release") {
+      // if you don't want sources/javadoc, remove these lines
+      withSourcesJar()
+      withJavadocJar()
+    }
+  }
 }
 
 dependencies {
@@ -42,9 +49,12 @@ dependencies {
   testImplementation libs.kluent
   testImplementation 'com.github.thuytrinh:MockWebServerRule:v1.0'
 
-  implementation project(':TripKitAndroid')
-  implementation project(':TripKitDomain')
-  implementation project(':CommonCoreLegacy')
+  debugImplementation project(':TripKitAndroid')
+  releaseImplementation project(':TripKitAndroid')
+  debugImplementation project(':TripKitDomain')
+  releaseImplementation project(':TripKitDomain')
+  debugImplementation project(':CommonCoreLegacy')
+  releaseImplementation project(':CommonCoreLegacy')
 
 
   implementation libs.dagger
@@ -78,8 +88,11 @@ task sourcesJar(type: Jar) {
 task javadoc(type: Javadoc) {
   failOnError  false
   source = android.sourceSets.main.java.sourceFiles
+  configurations.implementation.canBeResolved = true
+  configurations.api.canBeResolved = true
   classpath += project.files(android.getBootClasspath().join(File.pathSeparator))
   classpath += configurations.implementation
+  classpath += configurations.api
 }
 
 // build a jar with javadoc
@@ -109,10 +122,13 @@ publishing {
   }
 
   publications {
-    mavenAar(MavenPublication) {
+    release(MavenPublication) {
       groupId = group
       version = version
-      from components.android
+      artifactId = 'trip-kit-booking'
+      afterEvaluate {
+        from components.release
+      }
       pom {
         licenses {
           license {

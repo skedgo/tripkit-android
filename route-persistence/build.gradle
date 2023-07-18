@@ -28,15 +28,29 @@ android {
       proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
     }
   }
+
+  publishing {
+    singleVariant("release") {
+      // if you don't want sources/javadoc, remove these lines
+      withSourcesJar()
+      withJavadocJar()
+    }
+  }
 }
 
 dependencies {
-  implementation project(':CommonCoreLegacy')
-  implementation project(':sqliteutils')
+  debugImplementation project(':CommonCoreLegacy')
+  releaseImplementation project(':CommonCoreLegacy')
+  debugImplementation project(':sqliteutils')
+  releaseImplementation project(':sqliteutils')
+
   implementation libs.appCompat
   implementation libs.gson
   implementation libs.supportAnnotations
-  implementation project(":TripKitDomain")
+
+  debugImplementation project(":TripKitDomain")
+  releaseImplementation project(":TripKitDomain")
+
   implementation libs.kotlin
   implementation libs.rxjava2
 
@@ -69,10 +83,13 @@ publishing {
   }
 
   publications {
-    mavenAar(MavenPublication) {
+    release(MavenPublication) {
       groupId = group
       version = version
-      from components.android
+      artifactId = 'route-persistence'
+      afterEvaluate {
+        from components.release
+      }
       pom {
         licenses {
           license {

@@ -26,6 +26,14 @@ android {
       includeAndroidResources = true
     }
   }
+
+  publishing {
+    singleVariant("release") {
+      // if you don't want sources/javadoc, remove these lines
+      withSourcesJar()
+      withJavadocJar()
+    }
+  }
 }
 
 dependencies {
@@ -40,9 +48,12 @@ dependencies {
     exclude group: 'com.android.support', module: 'support-annotations'
   }
 
-  implementation project(':TripKitAndroid')
-  implementation project(':CommonCoreLegacy')
-  implementation project(':trip-kit-booking')
+  debugImplementation project(':TripKitAndroid')
+  releaseImplementation project(':TripKitAndroid')
+  debugImplementation project(':CommonCoreLegacy')
+  releaseImplementation project(':CommonCoreLegacy')
+  debugImplementation project(':trip-kit-booking')
+  releaseImplementation project(':trip-kit-booking')
 
   implementation 'uk.co.chrisjenx:calligraphy:2.3.0'
   implementation 'com.github.skedgo:robotos:v1.1'
@@ -55,7 +66,8 @@ dependencies {
   implementation libs.bindingCollectionAdapter
   implementation libs.bindingCollectionAdapterRecyclerView
 
-  implementation project(':rxlifecyclecomponents')
+  debugImplementation project(':rxlifecyclecomponents')
+  releaseImplementation project(':rxlifecyclecomponents')
   implementation libs.kotlin
   implementation libs.gson
   implementation libs.rxjava2
@@ -72,10 +84,13 @@ task sourcesJar(type: Jar) {
 }
 
 task javadoc(type: Javadoc) {
-  failOnError  false
-  source = android.sourceSets.main.java.sourceFiles
-  classpath += project.files(android.getBootClasspath().join(File.pathSeparator))
-  classpath += configurations.implementation
+    failOnError false
+    source = android.sourceSets.main.java.sourceFiles
+    configurations.implementation.canBeResolved = true
+    configurations.api.canBeResolved = true
+    classpath += project.files(android.getBootClasspath().join(File.pathSeparator))
+    classpath += configurations.implementation
+    classpath += configurations.api
 }
 
 // build a jar with javadoc
@@ -105,10 +120,13 @@ publishing {
   }
 
   publications {
-    mavenAar(MavenPublication) {
+    release(MavenPublication) {
       groupId = group
       version = version
-      from components.android
+      artifactId = 'trip-kit-booking-ui'
+      afterEvaluate {
+        from components.release
+      }
       pom {
         licenses {
           license {
