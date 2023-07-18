@@ -44,6 +44,14 @@ android {
     checkReleaseBuilds true
     abortOnError false
   }
+
+  publishing {
+    singleVariant("release") {
+      // if you don't want sources/javadoc, remove these lines
+      withSourcesJar()
+      withJavadocJar()
+    }
+  }
 }
 
 // Generation relative to tripgo! Add translations repo to tripkit?
@@ -103,11 +111,16 @@ dependencies {
   implementation libs.map_extension
   implementation libs.location
 
-  api project(':CommonCoreLegacy')
-  api project(':TripKitDomain')
-  api project(':TripKitDomainLegacy')
-  api project(':TripKitData')
-  api project(':sqliteutils')
+  debugApi project(':CommonCoreLegacy')
+  releaseApi project(':CommonCoreLegacy')
+  debugApi project(':TripKitDomain')
+  releaseApi project(':TripKitDomain')
+  debugApi project(':TripKitDomainLegacy')
+  releaseApi project(':TripKitDomainLegacy')
+  debugApi project(':TripKitData')
+  releaseApi project(':TripKitData')
+  debugApi project(':sqliteutils')
+  releaseApi project(':sqliteutils')
   //api project(':SnapshotTaker') Uncomment when using in TripGo-v5
 
   implementation libs.javaxAnnotation
@@ -121,10 +134,13 @@ task sourcesJar(type: Jar) {
 }
 
 task javadoc(type: Javadoc) {
-  failOnError  false
-  source = android.sourceSets.main.java.sourceFiles
-  classpath += project.files(android.getBootClasspath().join(File.pathSeparator))
-  classpath += configurations.implementation
+    failOnError false
+    source = android.sourceSets.main.java.sourceFiles
+    configurations.implementation.canBeResolved = true
+    configurations.api.canBeResolved = true
+    classpath += project.files(android.getBootClasspath().join(File.pathSeparator))
+    classpath += configurations.implementation
+    classpath += configurations.api
 }
 
 // build a jar with javadoc
@@ -154,10 +170,13 @@ publishing {
   }
 
   publications {
-    mavenAar(MavenPublication) {
+    release(MavenPublication) {
       groupId = group
       version = version
-      from components.android
+      artifactId = 'TripKitAndroid'
+      afterEvaluate {
+        from components.release
+      }
       pom {
         licenses {
           license {

@@ -10,14 +10,73 @@
   },
   "createdBy": {
     "gradle": {
-      "version": "6.5",
-      "buildId": "7keafez5snhqvjykhdqykxq5ci"
+      "version": "7.6"
     }
   },
   "variants": [
     {
-      "name": "runtime",
+      "name": "releaseVariantReleaseApiPublication",
       "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.libraryelements": "aar",
+        "org.gradle.usage": "java-api"
+      },
+      "dependencies": [
+        {
+          "group": "com.skedgo.tripkit",
+          "module": "CommonCoreLegacy",
+          "version": {
+            "requires": "2.1.43"
+          }
+        },
+        {
+          "group": "com.skedgo.tripkit",
+          "module": "TripKitDomain",
+          "version": {
+            "requires": "2.1.43"
+          }
+        },
+        {
+          "group": "com.skedgo.tripkit",
+          "module": "TripKitDomainLegacy",
+          "version": {
+            "requires": "2.1.43"
+          }
+        },
+        {
+          "group": "com.skedgo.tripkit",
+          "module": "TripKitData",
+          "version": {
+            "requires": "2.1.43"
+          }
+        },
+        {
+          "group": "com.skedgo.tripkit",
+          "module": "sqliteutils",
+          "version": {
+            "requires": "2.1.43"
+          }
+        }
+      ],
+      "files": [
+        {
+          "name": "TripKitAndroid-2.1.43.aar",
+          "url": "TripKitAndroid-2.1.43.aar",
+          "size": 427313,
+          "sha512": "975985c8b4458d97511b46605c0fdf61d98be57a7f99550eaefedb98c3f17d707d4d93864de16575ab6dcd3de63e61dade4483bb846db9646146e6321525e07b",
+          "sha256": "a6a5f01a4f1f72d863c3851b01486110e6d3c4e248a0c2f07eb6fb99d36f0dab",
+          "sha1": "ab0d289f4588af26d11075002a8fce1bcf3b0d63",
+          "md5": "108beda31fd23a2e6c03eb09c0d82abd"
+        }
+      ]
+    },
+    {
+      "name": "releaseVariantReleaseRuntimePublication",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.libraryelements": "aar",
         "org.gradle.usage": "java-runtime"
       },
       "dependencies": [
@@ -60,14 +119,14 @@
           "group": "org.jetbrains.kotlin",
           "module": "kotlin-android-extensions-runtime",
           "version": {
-            "requires": "1.4.10"
+            "requires": "1.6.20"
           }
         },
         {
           "group": "org.jetbrains.kotlin",
           "module": "kotlin-stdlib",
           "version": {
-            "requires": "1.4.10"
+            "requires": "1.6.20"
           }
         },
         {
@@ -172,7 +231,7 @@
           "group": "org.immutables",
           "module": "gson",
           "version": {
-            "requires": "2.8.2"
+            "requires": "2.8.8"
           }
         },
         {
@@ -216,107 +275,64 @@
           "version": {
             "requires": "17.1.0"
           }
+        },
+        {
+          "group": "javax.annotation",
+          "module": "javax.annotation-api",
+          "version": {
+            "requires": "1.3.2"
+          }
         }
       ],
       "files": [
         {
-          "name": "TripKitAndroid-2.1.43-sources.jar",
-          "url": "TripKitAndroid-2.1.43-sources.jar",
-          "size": 98851,
-          "sha512": "5ba6acda004f6f24f7c43ea3c034be77586a7ad3d8f796aa236aa7d59fd0ee434b8d04efdd95d8cc108679ccc6acc9ff480debf01a521af0c47f1a20d4808f99",
-          "sha256": "4e15ad77ef17303a5a27ad15c2722db1c602ecae67b61f9b23b007f7088b8124",
-          "sha1": "089c33233e8e888f7fab72ba3511b7819aebd5df",
-          "md5": "f6e86d3b06c3535dfc0d47f6cf81ada5"
-        },
-        {
-          "name": "TripKitAndroid-2.1.43-javadoc.jar",
-          "url": "TripKitAndroid-2.1.43-javadoc.jar",
-          "size": 225363,
-          "sha512": "617c8905cafc9094bc57abaf50c6a4c8f9a84f6d4bcd426ada89fd0fede66db8fc0fb2f4b683c0fd929616daffd11304d8198fb531123960e71316b466b0ed4f",
-          "sha256": "c66fde39e1c00c0685d20cbaf0ed0a7afd18ac0fb447e10efb74537757eb5452",
-          "sha1": "a113d6570a2c47cad5c9d219e9e670cde7041324",
-          "md5": "fabf2de2307f4c379fb17c4acc0c510f"
-        },
-        {
           "name": "TripKitAndroid-2.1.43.aar",
           "url": "TripKitAndroid-2.1.43.aar",
-          "size": 476827,
-          "sha512": "3c8b37732ba148af175d9e6c61ede455df1213f24525b63da11bb497f5266c18e38f8e48e1eb68a00322e63c6fea5a0d375923aa94bbfa1effd94b4f09115a64",
-          "sha256": "eb781fc6784545fd28d4f197521b5e783ab42f3b1d742c2f0269091b9f5c3d04",
-          "sha1": "c15b35e230247a26ee65584240cb31a40be58ca2",
-          "md5": "fcf135d2169cdd30b0c976c59506c295"
+          "size": 427313,
+          "sha512": "975985c8b4458d97511b46605c0fdf61d98be57a7f99550eaefedb98c3f17d707d4d93864de16575ab6dcd3de63e61dade4483bb846db9646146e6321525e07b",
+          "sha256": "a6a5f01a4f1f72d863c3851b01486110e6d3c4e248a0c2f07eb6fb99d36f0dab",
+          "sha1": "ab0d289f4588af26d11075002a8fce1bcf3b0d63",
+          "md5": "108beda31fd23a2e6c03eb09c0d82abd"
         }
       ]
     },
     {
-      "name": "api",
+      "name": "releaseVariantReleaseSourcePublication",
       "attributes": {
-        "org.gradle.usage": "java-api"
+        "org.gradle.category": "documentation",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.docstype": "sources",
+        "org.gradle.usage": "java-runtime"
       },
-      "dependencies": [
-        {
-          "group": "com.skedgo.tripkit",
-          "module": "CommonCoreLegacy",
-          "version": {
-            "requires": "2.1.43"
-          }
-        },
-        {
-          "group": "com.skedgo.tripkit",
-          "module": "TripKitDomain",
-          "version": {
-            "requires": "2.1.43"
-          }
-        },
-        {
-          "group": "com.skedgo.tripkit",
-          "module": "TripKitDomainLegacy",
-          "version": {
-            "requires": "2.1.43"
-          }
-        },
-        {
-          "group": "com.skedgo.tripkit",
-          "module": "TripKitData",
-          "version": {
-            "requires": "2.1.43"
-          }
-        },
-        {
-          "group": "com.skedgo.tripkit",
-          "module": "sqliteutils",
-          "version": {
-            "requires": "2.1.43"
-          }
-        }
-      ],
       "files": [
         {
           "name": "TripKitAndroid-2.1.43-sources.jar",
           "url": "TripKitAndroid-2.1.43-sources.jar",
-          "size": 98851,
-          "sha512": "5ba6acda004f6f24f7c43ea3c034be77586a7ad3d8f796aa236aa7d59fd0ee434b8d04efdd95d8cc108679ccc6acc9ff480debf01a521af0c47f1a20d4808f99",
-          "sha256": "4e15ad77ef17303a5a27ad15c2722db1c602ecae67b61f9b23b007f7088b8124",
-          "sha1": "089c33233e8e888f7fab72ba3511b7819aebd5df",
-          "md5": "f6e86d3b06c3535dfc0d47f6cf81ada5"
-        },
+          "size": 183963,
+          "sha512": "23255dd167dd809a423a6d844b49308c6e67a08d871c495e8bb8f6a308547760dccc47be0cf3db1c3c46632e8cb790f0ca4003fc56e41eb8a9ebe40652ebcdb8",
+          "sha256": "0ed3f7c9a4e0482250804d246762d8854e233b2bce5f4bcb3b88c2da39c628a7",
+          "sha1": "74d45d964f182d38dabf4a5bb0a3bb340d8c66ea",
+          "md5": "b2def9388d52f1d81786bd392b75d23e"
+        }
+      ]
+    },
+    {
+      "name": "releaseVariantReleaseJavaDocPublication",
+      "attributes": {
+        "org.gradle.category": "documentation",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.docstype": "javadoc",
+        "org.gradle.usage": "java-runtime"
+      },
+      "files": [
         {
           "name": "TripKitAndroid-2.1.43-javadoc.jar",
           "url": "TripKitAndroid-2.1.43-javadoc.jar",
-          "size": 225363,
-          "sha512": "617c8905cafc9094bc57abaf50c6a4c8f9a84f6d4bcd426ada89fd0fede66db8fc0fb2f4b683c0fd929616daffd11304d8198fb531123960e71316b466b0ed4f",
-          "sha256": "c66fde39e1c00c0685d20cbaf0ed0a7afd18ac0fb447e10efb74537757eb5452",
-          "sha1": "a113d6570a2c47cad5c9d219e9e670cde7041324",
-          "md5": "fabf2de2307f4c379fb17c4acc0c510f"
-        },
-        {
-          "name": "TripKitAndroid-2.1.43.aar",
-          "url": "TripKitAndroid-2.1.43.aar",
-          "size": 476827,
-          "sha512": "3c8b37732ba148af175d9e6c61ede455df1213f24525b63da11bb497f5266c18e38f8e48e1eb68a00322e63c6fea5a0d375923aa94bbfa1effd94b4f09115a64",
-          "sha256": "eb781fc6784545fd28d4f197521b5e783ab42f3b1d742c2f0269091b9f5c3d04",
-          "sha1": "c15b35e230247a26ee65584240cb31a40be58ca2",
-          "md5": "fcf135d2169cdd30b0c976c59506c295"
+          "size": 1001008,
+          "sha512": "f34252e4393b5ec7c63adcc2ffddf5a81ce61822276c7e4fd2c8508a70f1e064dc424b73fbedc34a77ee5e38d60ce19f9ebde6c4b3f2e7a2be51c810b95cf763",
+          "sha256": "969be0e1d2dc79a41b09631df9135b7146cca844ca665fe9cb1d1eec5fc46a19",
+          "sha1": "fd5faa473d8d539d72cab3be0954b2069b995192",
+          "md5": "5175070879c878705c953cb689fcf8da"
         }
       ]
     }

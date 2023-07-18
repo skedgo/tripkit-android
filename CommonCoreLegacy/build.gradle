@@ -41,6 +41,14 @@ android {
         sourceCompatibility = JavaVersion.VERSION_1_8
         targetCompatibility = JavaVersion.VERSION_1_8
     }
+
+    publishing {
+        singleVariant("release") {
+            // if you don't want sources/javadoc, remove these lines
+            withSourcesJar()
+            withJavadocJar()
+        }
+    }
 }
 
 dependencies {
@@ -65,7 +73,9 @@ dependencies {
     implementation libs.gson
     implementation 'com.github.skedgo:commons-collections:v1.0'
 
-    implementation project(':TripKitDomain')
+    debugImplementation project(':TripKitDomain')
+    releaseImplementation project(':TripKitDomain')
+
     implementation libs.kotlin
 
     kapt libs.value
@@ -86,8 +96,11 @@ task sourcesJar(type: Jar) {
 task javadoc(type: Javadoc) {
     failOnError false
     source = android.sourceSets.main.java.sourceFiles
+    configurations.implementation.canBeResolved = true
+    configurations.api.canBeResolved = true
     classpath += project.files(android.getBootClasspath().join(File.pathSeparator))
     classpath += configurations.implementation
+    classpath += configurations.api
 }
 
 // build a jar with javadoc
@@ -116,10 +129,13 @@ publishing {
     }
 
     publications {
-        mavenAar(MavenPublication) {
+        release(MavenPublication) {
             groupId = group
             version = version
-            from components.android
+            artifactId = 'CommonCoreLegacy'
+            afterEvaluate {
+                from components.release
+            }
             pom {
                 licenses {
                     license {

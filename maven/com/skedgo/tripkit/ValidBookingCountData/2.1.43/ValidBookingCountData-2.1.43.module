@@ -10,17 +10,53 @@
   },
   "createdBy": {
     "gradle": {
-      "version": "6.5",
-      "buildId": "nhhjbugwarfx7cif4yxkcdb3da"
+      "version": "7.6"
     }
   },
   "variants": [
     {
-      "name": "runtime",
+      "name": "releaseVariantReleaseApiPublication",
       "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.libraryelements": "aar",
+        "org.gradle.usage": "java-api"
+      },
+      "files": [
+        {
+          "name": "ValidBookingCountData-2.1.43.aar",
+          "url": "ValidBookingCountData-2.1.43.aar",
+          "size": 13975,
+          "sha512": "7186643a9c76c14fa82739a6b34b049aba22ce695a54b394d926538b3ca8dcc799fd71c1abaf823ca4780aa6f986ebcab56686c115e3d61b48578127a1037e76",
+          "sha256": "ab02286143d64be3b56d671be0ebac631583c156607e1ac9ff9ff60178df51f1",
+          "sha1": "acb3fc48dffcb5bee19e7d96c323d336da1de2a7",
+          "md5": "29527a76faa42ab127e2f98421ccc3e9"
+        }
+      ]
+    },
+    {
+      "name": "releaseVariantReleaseRuntimePublication",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.libraryelements": "aar",
         "org.gradle.usage": "java-runtime"
       },
       "dependencies": [
+        {
+          "group": "com.skedgo.tripkit",
+          "module": "TripKitDomain",
+          "version": {
+            "requires": "2.1.43"
+          }
+        },
+        {
+          "group": "com.skedgo.tripkit",
+          "module": "ValidBookingCountDomain",
+          "version": {
+            "requires": "2.1.43"
+          }
+        },
         {
           "group": "io.reactivex.rxjava2",
           "module": "rxjava",
@@ -53,7 +89,7 @@
           "group": "com.google.code.gson",
           "module": "gson",
           "version": {
-            "requires": "2.8.6"
+            "requires": "2.8.8"
           }
         },
         {
@@ -67,28 +103,21 @@
           "group": "org.immutables",
           "module": "gson",
           "version": {
-            "requires": "2.8.2"
+            "requires": "2.8.8"
           }
         },
         {
           "group": "org.jetbrains.kotlin",
           "module": "kotlin-stdlib",
           "version": {
-            "requires": "1.4.10"
+            "requires": "1.6.20"
           }
         },
         {
-          "group": "com.skedgo.tripkit",
-          "module": "TripKitDomain",
+          "group": "javax.annotation",
+          "module": "javax.annotation-api",
           "version": {
-            "requires": "2.1.43"
-          }
-        },
-        {
-          "group": "com.skedgo.tripkit",
-          "module": "ValidBookingCountDomain",
-          "version": {
-            "requires": "2.1.43"
+            "requires": "1.3.2"
           }
         }
       ],
@@ -96,64 +125,51 @@
         {
           "name": "ValidBookingCountData-2.1.43.aar",
           "url": "ValidBookingCountData-2.1.43.aar",
-          "size": 17662,
-          "sha512": "6254c0c644e5ec887f8f5a933410eb0d4a17dcd9370efbd44b197ed76d5ce8192df73132c04821e924354e6740b003646bfdfed2435407fd351d374ffedbcbe8",
-          "sha256": "6670c5d97838d00ae340d5254be1755d707f7fa097441aa2227fe868a4b96c5c",
-          "sha1": "d84401ded23fc7c2d50b8f932a9a277b110b2aed",
-          "md5": "4e3dfe433511adb390fc2b50327edd69"
-        },
-        {
-          "name": "ValidBookingCountData-2.1.43-sources.jar",
-          "url": "ValidBookingCountData-2.1.43-sources.jar",
-          "size": 3124,
-          "sha512": "bf8f1f69c1c0da5257def4ed9a0c3abd0b3f26346053a4629d98c67740277c8bc8d16b871a95a9ac586353baeb3f6df7a280ba8bc887a79baa2592ae947542be",
-          "sha256": "9088e8d1ff543a0c210581ca1fa8c289af7817e9d7ea1fa2ea414431df6dbba4",
-          "sha1": "96d102092b66e08fd46df476dcbecef1cef0b28f",
-          "md5": "d7b8486eb4c80eb9aa59d21feeb1033e"
-        },
-        {
-          "name": "ValidBookingCountData-2.1.43-javadoc.jar",
-          "url": "ValidBookingCountData-2.1.43-javadoc.jar",
-          "size": 261,
-          "sha512": "07b6437d3e546013b5fb0e06ac02d139d26665d2e4862b7567b9d9e8cf2496ab02fe5ed0b056c83d439f1014f01c8ecaa7fedd830394d5f370ffaa923e61f567",
-          "sha256": "b653f715f95b97f2ca2708aaf494c37d9cc3c2f876951b27b1361b726235fe2c",
-          "sha1": "8d87efb8c2096069118a8ab3a1a4115675260be6",
-          "md5": "5cbc370e006c3b94891ce2b791b52f57"
+          "size": 13975,
+          "sha512": "7186643a9c76c14fa82739a6b34b049aba22ce695a54b394d926538b3ca8dcc799fd71c1abaf823ca4780aa6f986ebcab56686c115e3d61b48578127a1037e76",
+          "sha256": "ab02286143d64be3b56d671be0ebac631583c156607e1ac9ff9ff60178df51f1",
+          "sha1": "acb3fc48dffcb5bee19e7d96c323d336da1de2a7",
+          "md5": "29527a76faa42ab127e2f98421ccc3e9"
         }
       ]
     },
     {
-      "name": "api",
+      "name": "releaseVariantReleaseSourcePublication",
       "attributes": {
-        "org.gradle.usage": "java-api"
+        "org.gradle.category": "documentation",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.docstype": "sources",
+        "org.gradle.usage": "java-runtime"
       },
       "files": [
         {
-          "name": "ValidBookingCountData-2.1.43.aar",
-          "url": "ValidBookingCountData-2.1.43.aar",
-          "size": 17662,
-          "sha512": "6254c0c644e5ec887f8f5a933410eb0d4a17dcd9370efbd44b197ed76d5ce8192df73132c04821e924354e6740b003646bfdfed2435407fd351d374ffedbcbe8",
-          "sha256": "6670c5d97838d00ae340d5254be1755d707f7fa097441aa2227fe868a4b96c5c",
-          "sha1": "d84401ded23fc7c2d50b8f932a9a277b110b2aed",
-          "md5": "4e3dfe433511adb390fc2b50327edd69"
-        },
-        {
           "name": "ValidBookingCountData-2.1.43-sources.jar",
           "url": "ValidBookingCountData-2.1.43-sources.jar",
-          "size": 3124,
-          "sha512": "bf8f1f69c1c0da5257def4ed9a0c3abd0b3f26346053a4629d98c67740277c8bc8d16b871a95a9ac586353baeb3f6df7a280ba8bc887a79baa2592ae947542be",
-          "sha256": "9088e8d1ff543a0c210581ca1fa8c289af7817e9d7ea1fa2ea414431df6dbba4",
-          "sha1": "96d102092b66e08fd46df476dcbecef1cef0b28f",
-          "md5": "d7b8486eb4c80eb9aa59d21feeb1033e"
-        },
+          "size": 7641,
+          "sha512": "7a0ae033ef996a6a8b4a6729303699d534e8eb9e9b484909d68207473e3d58975da205a95a74a258f8783a3521689c4ad1a831b06982b0074c794e2ea87365bd",
+          "sha256": "c5afddf5ea898d27b946d2fd97bbbf8514088823750704eda869e847038bdf17",
+          "sha1": "690a22881bf612a4b6d6fd125d8c8da713be3882",
+          "md5": "e71998cde43d83a92caf3555bab606e6"
+        }
+      ]
+    },
+    {
+      "name": "releaseVariantReleaseJavaDocPublication",
+      "attributes": {
+        "org.gradle.category": "documentation",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.docstype": "javadoc",
+        "org.gradle.usage": "java-runtime"
+      },
+      "files": [
         {
           "name": "ValidBookingCountData-2.1.43-javadoc.jar",
           "url": "ValidBookingCountData-2.1.43-javadoc.jar",
-          "size": 261,
-          "sha512": "07b6437d3e546013b5fb0e06ac02d139d26665d2e4862b7567b9d9e8cf2496ab02fe5ed0b056c83d439f1014f01c8ecaa7fedd830394d5f370ffaa923e61f567",
-          "sha256": "b653f715f95b97f2ca2708aaf494c37d9cc3c2f876951b27b1361b726235fe2c",
-          "sha1": "8d87efb8c2096069118a8ab3a1a4115675260be6",
-          "md5": "5cbc370e006c3b94891ce2b791b52f57"
+          "size": 275217,
+          "sha512": "9aaace9ea7318fe8ca1a04cbfd760c7123965f7efe3c45d6c27009c00ecfc6384a5fb2bf14bcc622cfce80c9c91d13a414c3c7dfb89c19724467c5558b571ff6",
+          "sha256": "733147fd3d7120100f46a70a237932d905b36e7efb7cf2820868cd4ab2a30e74",
+          "sha1": "698bfdbf075c607b255451a3733b3d9019ecf2ef",
+          "md5": "5bc6f2fb6da9b45a75d55d28e8f1581c"
         }
       ]
     }

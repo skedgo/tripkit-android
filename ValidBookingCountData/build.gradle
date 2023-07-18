@@ -15,6 +15,14 @@ android {
     // Changing to warning because of https://github.com/square/okio/issues/58.
     warning 'InvalidPackage'
   }
+
+  publishing {
+    singleVariant("release") {
+      // if you don't want sources/javadoc, remove these lines
+      withSourcesJar()
+      withJavadocJar()
+    }
+  }
 }
 
 dependencies {
@@ -40,8 +48,10 @@ dependencies {
   implementation libs.immutablesGson
 
   implementation libs.kotlin
-  implementation project(':TripKitDomain')
-  implementation project(':ValidBookingCountDomain')
+  debugImplementation project(':TripKitDomain')
+  releaseImplementation project(':TripKitDomain')
+  debugImplementation project(':ValidBookingCountDomain')
+  releaseImplementation project(':ValidBookingCountDomain')
 
   implementation libs.javaxAnnotation
   compileOnly 'com.github.pengrad:jdk9-deps:1.0'
@@ -56,8 +66,11 @@ task sourcesJar(type: Jar) {
 task javadoc(type: Javadoc) {
   failOnError false
   source = android.sourceSets.main.java.sourceFiles
+  configurations.implementation.canBeResolved = true
+  configurations.api.canBeResolved = true
   classpath += project.files(android.getBootClasspath().join(File.pathSeparator))
   classpath += configurations.implementation
+  classpath += configurations.api
 }
 
 // build a jar with javadoc
@@ -87,10 +100,13 @@ publishing {
   }
 
   publications {
-    mavenAar(MavenPublication) {
+    release(MavenPublication) {
       groupId = group
       version = version
-      from components.android
+      artifactId = 'ValidBookingCountData'
+      afterEvaluate {
+        from components.release
+      }
       pom {
         licenses {
           license {

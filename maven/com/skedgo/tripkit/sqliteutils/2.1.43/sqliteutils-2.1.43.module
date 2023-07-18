@@ -10,14 +10,36 @@
   },
   "createdBy": {
     "gradle": {
-      "version": "6.5",
-      "buildId": "ljagbo6a3ncaras5y2x5pz4mj4"
+      "version": "7.6"
     }
   },
   "variants": [
     {
-      "name": "runtime",
+      "name": "releaseVariantReleaseApiPublication",
       "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.libraryelements": "aar",
+        "org.gradle.usage": "java-api"
+      },
+      "files": [
+        {
+          "name": "sqliteutils-2.1.43.aar",
+          "url": "sqliteutils-2.1.43.aar",
+          "size": 6794,
+          "sha512": "4fb307b1cb97e10289ed49c9216e27d7dbad5289e4eba83638825951aaec46bc7f5a609e25b8f358e97e2e022e150b4b4d99f5438aeb4c16f2ef11c1dc4d8921",
+          "sha256": "3a50fecf373adf2ad052213ef30175af429a030f97972309b31d18209e089509",
+          "sha1": "37d85c05d0fead6a0a11ca72439234209098d1ec",
+          "md5": "fc9f4d19e51bc0d803044c6886a7d88a"
+        }
+      ]
+    },
+    {
+      "name": "releaseVariantReleaseRuntimePublication",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.libraryelements": "aar",
         "org.gradle.usage": "java-runtime"
       },
       "dependencies": [
@@ -40,28 +62,51 @@
         {
           "name": "sqliteutils-2.1.43.aar",
           "url": "sqliteutils-2.1.43.aar",
-          "size": 6509,
-          "sha512": "857c22d71f1e0236e16d9a4c07c5c66acf6f7af9e55a3f8cfff3067028ac68c4516cd765fa90c542f1ecec6b518fc1b05a10227c6d63e117b9e1effc2b35977a",
-          "sha256": "c428c3da55202f6058164dc3aa00769ed3b56c5fc9d5a9148ac1224203617f5e",
-          "sha1": "991dcb7767d58eecf3959743b37b49cfe5b8454c",
-          "md5": "58c8e6530ff1806379be082ec773ee07"
+          "size": 6794,
+          "sha512": "4fb307b1cb97e10289ed49c9216e27d7dbad5289e4eba83638825951aaec46bc7f5a609e25b8f358e97e2e022e150b4b4d99f5438aeb4c16f2ef11c1dc4d8921",
+          "sha256": "3a50fecf373adf2ad052213ef30175af429a030f97972309b31d18209e089509",
+          "sha1": "37d85c05d0fead6a0a11ca72439234209098d1ec",
+          "md5": "fc9f4d19e51bc0d803044c6886a7d88a"
         }
       ]
     },
     {
-      "name": "api",
+      "name": "releaseVariantReleaseSourcePublication",
       "attributes": {
-        "org.gradle.usage": "java-api"
+        "org.gradle.category": "documentation",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.docstype": "sources",
+        "org.gradle.usage": "java-runtime"
       },
       "files": [
         {
-          "name": "sqliteutils-2.1.43.aar",
-          "url": "sqliteutils-2.1.43.aar",
-          "size": 6509,
-          "sha512": "857c22d71f1e0236e16d9a4c07c5c66acf6f7af9e55a3f8cfff3067028ac68c4516cd765fa90c542f1ecec6b518fc1b05a10227c6d63e117b9e1effc2b35977a",
-          "sha256": "c428c3da55202f6058164dc3aa00769ed3b56c5fc9d5a9148ac1224203617f5e",
-          "sha1": "991dcb7767d58eecf3959743b37b49cfe5b8454c",
-          "md5": "58c8e6530ff1806379be082ec773ee07"
+          "name": "sqliteutils-2.1.43-sources.jar",
+          "url": "sqliteutils-2.1.43-sources.jar",
+          "size": 3764,
+          "sha512": "aec0e01a7f35753fe745089c038b1fc8d2c7534aaa4ac99fd2f2303024a82f9e6301c0bd04c91777c3244db8bedad7d106ba434e4cb4c3001346a3c6810c1bc1",
+          "sha256": "cd3b1f67384061d82817e0c90646311831aeab1e38d45e964585e751c41d2131",
+          "sha1": "27f59c19bdf73bba7ee273ba70738e8106f0e4e9",
+          "md5": "1006a08f7539a41279e90f12ee5e0eec"
+        }
+      ]
+    },
+    {
+      "name": "releaseVariantReleaseJavaDocPublication",
+      "attributes": {
+        "org.gradle.category": "documentation",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.docstype": "javadoc",
+        "org.gradle.usage": "java-runtime"
+      },
+      "files": [
+        {
+          "name": "sqliteutils-2.1.43-javadoc.jar",
+          "url": "sqliteutils-2.1.43-javadoc.jar",
+          "size": 293395,
+          "sha512": "08122d74e1196c07a777f5aaaff9e47f1757b60f98b3d8dd65207e8c22eda85aaf341441e7b0354f2e24e13b5ecd5e003282d254b9a71ce64f2ba2d2b5c39cd7",
+          "sha256": "600915c36602328677a1f9a0b3a97e5fde44f8b9d221586d534125115ab97184",
+          "sha1": "e9c94f08ad096ad73dfe4f15620f96fc1ef4a436",
+          "md5": "12a20dc55929e02f25ff371575874598"
         }
       ]
     }

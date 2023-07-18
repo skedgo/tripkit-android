@@ -10,8 +10,7 @@
   },
   "createdBy": {
     "gradle": {
-      "version": "6.5",
-      "buildId": "k3bsv4y3hvempa7ug3wue5ae2m"
+      "version": "7.6"
     }
   },
   "variants": [
@@ -20,21 +19,21 @@
       "attributes": {
         "org.gradle.category": "library",
         "org.gradle.dependency.bundling": "external",
+        "org.gradle.jvm.environment": "standard-jvm",
         "org.gradle.jvm.version": 7,
         "org.gradle.libraryelements": "jar",
         "org.gradle.usage": "java-api",
-        "org.jetbrains.kotlin.localToProject": "public",
         "org.jetbrains.kotlin.platform.type": "jvm"
       },
       "files": [
         {
           "name": "ValidBookingCountDomain-2.1.43.jar",
           "url": "ValidBookingCountDomain-2.1.43.jar",
-          "size": 6971,
-          "sha512": "4c03a84d8e51c9bd9ed16f69616f877e97af6ecf8d09303119592ee0e1fc3044afb09b1af8e4b30ed0fe5b3c906671d2a27bb82b7bad59c33c4c6ed4587e3cc2",
-          "sha256": "7aee82883ca2a33acc461f0878204d4c66e3ff011bde813f10134bb7da6981cc",
-          "sha1": "3453c553a5c0161fce8947d11495bb5df1e6ee0b",
-          "md5": "27b743471f07f29f0b7fed3c07cb83bb"
+          "size": 5954,
+          "sha512": "94cdf136c5f14c65708c2650f9060f621e78a81d9dcb17c350ccc2ea02de3cd2c52a0426ca2e1260fa699b738f9bcc3ad79a6b0f6dd7e83763494af42486f472",
+          "sha256": "7cb73698f792e0e8cb399976d3a49a19e1e7cfa4ce9a6121f459a558d135d0ca",
+          "sha1": "bad5a3fd91a9bd8582dbad9a457b399c94176dc1",
+          "md5": "363ee962aa0b9ee82a6e606bfe3fe18e"
         }
       ]
     },
@@ -43,10 +42,10 @@
       "attributes": {
         "org.gradle.category": "library",
         "org.gradle.dependency.bundling": "external",
+        "org.gradle.jvm.environment": "standard-jvm",
         "org.gradle.jvm.version": 7,
         "org.gradle.libraryelements": "jar",
         "org.gradle.usage": "java-runtime",
-        "org.jetbrains.kotlin.localToProject": "public",
         "org.jetbrains.kotlin.platform.type": "jvm"
       },
       "dependencies": [
@@ -54,7 +53,7 @@
           "group": "org.jetbrains.kotlin",
           "module": "kotlin-stdlib",
           "version": {
-            "requires": "1.4.10"
+            "requires": "1.6.20"
           }
         },
         {
@@ -76,11 +75,11 @@
         {
           "name": "ValidBookingCountDomain-2.1.43.jar",
           "url": "ValidBookingCountDomain-2.1.43.jar",
-          "size": 6971,
-          "sha512": "4c03a84d8e51c9bd9ed16f69616f877e97af6ecf8d09303119592ee0e1fc3044afb09b1af8e4b30ed0fe5b3c906671d2a27bb82b7bad59c33c4c6ed4587e3cc2",
-          "sha256": "7aee82883ca2a33acc461f0878204d4c66e3ff011bde813f10134bb7da6981cc",
-          "sha1": "3453c553a5c0161fce8947d11495bb5df1e6ee0b",
-          "md5": "27b743471f07f29f0b7fed3c07cb83bb"
+          "size": 5954,
+          "sha512": "94cdf136c5f14c65708c2650f9060f621e78a81d9dcb17c350ccc2ea02de3cd2c52a0426ca2e1260fa699b738f9bcc3ad79a6b0f6dd7e83763494af42486f472",
+          "sha256": "7cb73698f792e0e8cb399976d3a49a19e1e7cfa4ce9a6121f459a558d135d0ca",
+          "sha1": "bad5a3fd91a9bd8582dbad9a457b399c94176dc1",
+          "md5": "363ee962aa0b9ee82a6e606bfe3fe18e"
         }
       ]
     }

@@ -58,9 +58,10 @@ publishing {
   }
 
   publications {
-    mavenAar(MavenPublication) {
+    release(MavenPublication) {
       groupId = group
       version = version
+      artifactId = 'TripKitDomain'
       from components.java
       pom {
         licenses {
