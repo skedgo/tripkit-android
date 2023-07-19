@@ -62,7 +62,6 @@ dependencies {
     testImplementation 'commons-io:commons-io:2.5'
     testImplementation libs.mockitoKotlin
     testImplementation libs.mockitoCore
-    testImplementation libs.jodaTimeTzdb, { exclude module: 'joda-time' }
     testImplementation libs.kluent
     testImplementation libs.androidxTesting
 

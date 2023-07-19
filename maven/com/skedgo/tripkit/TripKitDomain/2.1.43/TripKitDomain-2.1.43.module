@@ -30,10 +30,10 @@
           "name": "TripKitDomain-2.1.43.jar",
           "url": "TripKitDomain-2.1.43.jar",
           "size": 91381,
-          "sha512": "8417b161c9caeff4cf6c3be39c911972219f54588c423872fb16a348f3c1ede2584deef1056cfddff4b82d3d708da2ce43ca517c894954403547df42a1194a48",
-          "sha256": "23fbae181165c8c212f25bdd817d439025da4a88328cd15bbbcb2b7dc9200ff3",
-          "sha1": "b94dacf45da70eb0575110e3c141ab8c2cb75014",
-          "md5": "5fb0a1911db2614a045076d8e15f2ab3"
+          "sha512": "46641c94c741b4da0f1e7bd6b981d8ba29dc4f2b55fe03b29ea015f70a0cf435856e8f0a751ab2da8de9653bef4ef13b343a0b7c7e57a567a1912aeedb95b922",
+          "sha256": "56d49f7a471691571b2deca250fcaf63a42f7cce505db8511cd3014a5077f002",
+          "sha1": "1199f1f73a8f8b42e80c27f911148324d034499f",
+          "md5": "085623e64664e95cd2ba0c32bed9948b"
         }
       ]
     },
@@ -112,10 +112,10 @@
           "name": "TripKitDomain-2.1.43.jar",
           "url": "TripKitDomain-2.1.43.jar",
           "size": 91381,
-          "sha512": "8417b161c9caeff4cf6c3be39c911972219f54588c423872fb16a348f3c1ede2584deef1056cfddff4b82d3d708da2ce43ca517c894954403547df42a1194a48",
-          "sha256": "23fbae181165c8c212f25bdd817d439025da4a88328cd15bbbcb2b7dc9200ff3",
-          "sha1": "b94dacf45da70eb0575110e3c141ab8c2cb75014",
-          "md5": "5fb0a1911db2614a045076d8e15f2ab3"
+          "sha512": "46641c94c741b4da0f1e7bd6b981d8ba29dc4f2b55fe03b29ea015f70a0cf435856e8f0a751ab2da8de9653bef4ef13b343a0b7c7e57a567a1912aeedb95b922",
+          "sha256": "56d49f7a471691571b2deca250fcaf63a42f7cce505db8511cd3014a5077f002",
+          "sha1": "1199f1f73a8f8b42e80c27f911148324d034499f",
+          "md5": "085623e64664e95cd2ba0c32bed9948b"
         }
       ]
     }
