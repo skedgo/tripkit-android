@@ -17,6 +17,12 @@
   </licenses>
   <dependencies>
     <dependency>
+      <groupId>com.skedgo.tripkit</groupId>
+      <artifactId>TripKitAndroid</artifactId>
+      <version>2.1.43</version>
+      <scope>runtime</scope>
+    </dependency>
+    <dependency>
       <groupId>org.jetbrains.kotlin</groupId>
       <artifactId>kotlin-android-extensions-runtime</artifactId>
       <version>1.6.20</version>
@@ -69,13 +75,6 @@
       <groupId>com.gojuno.koptional</groupId>
       <artifactId>koptional</artifactId>
       <version>1.2.0</version>
-      <scope>compile</scope>
-      <type>aar</type>
-    </dependency>
-    <dependency>
-      <groupId>com.skedgo.tripkit</groupId>
-      <artifactId>TripKitAndroid</artifactId>
-      <version>2.1.43</version>
       <scope>compile</scope>
       <type>aar</type>
     </dependency>

@@ -636,11 +636,11 @@
         {
           "name": "TripKitAndroidUI-2.1.43-javadoc.jar",
           "url": "TripKitAndroidUI-2.1.43-javadoc.jar",
-          "size": 4614693,
-          "sha512": "d3e3bcbbdb751f1763153a1dee1206f94a7e37ac4f137f76a46d3ab5e48a864f1c31cab7dc3b3b34c7295f02d0759d076946c892428ffa5175d962f3a55ba759",
-          "sha256": "7548a2eff448d1b4e379e08d5f622af183ad86d786463ad7c639b8f5c44ae2c3",
-          "sha1": "3063e5de3b5ea69f250dd5dac73418a3ea628b60",
-          "md5": "32918476f1f38ed5d81073dbca46a355"
+          "size": 4614696,
+          "sha512": "264a56bb91963ff01a9cfaa988c22d09487b589bcf79bd51a66b85dcec71fb330e030cca6a5802204b28c5b30c7c9075d9e97e27c4cd696d354a70ded416cbac",
+          "sha256": "dafa3d0b5747341b8e198f90143b46af6c17176e4547462c849fa35574fd72f2",
+          "sha1": "dc474976d8009f4162ea605672936e0235302c38",
+          "md5": "52e82c4dd8885b00ceb4203be7d299c5"
         }
       ]
     }
