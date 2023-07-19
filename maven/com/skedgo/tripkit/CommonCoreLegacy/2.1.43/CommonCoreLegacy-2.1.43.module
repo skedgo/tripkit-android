@@ -165,11 +165,11 @@
         {
           "name": "CommonCoreLegacy-2.1.43-javadoc.jar",
           "url": "CommonCoreLegacy-2.1.43-javadoc.jar",
-          "size": 1144563,
-          "sha512": "919b283e91555d15e5b7ded6f3c29f83004e23f4872d08d30aa0554cb4b22ae5c9230d3861a9669c0165f1c68e9155a776308b083cdf0783f429368761c29778",
-          "sha256": "2c073a5c50e37b1a443d4a1d09102c28c053f9472d1e92fe5001ff8f0efe127a",
-          "sha1": "d56b1f131df0a1574d83527d33e9750d9831a8b2",
-          "md5": "109bdd2a0f443ea727ba987bb10aa660"
+          "size": 1144580,
+          "sha512": "e3f5c19e9e19408f561da7ec0def3abe6d278d623fef09f9ae7262ecbe917964e3a76e71b3bb2bae79a3524b447f28bea73632a0a14547810e3bd1fd6b7b591a",
+          "sha256": "190d7b0fae01abacfd44acd24ee87b05667bb28a49def38feefef7bd413647b8",
+          "sha1": "88fbe8feaacd707d4a78a943a9c823418fcfae5c",
+          "md5": "8f78864871f5007918436e9dc2fea9b6"
         }
       ]
     }
