@@ -26,11 +26,11 @@
         {
           "name": "sqliteutils-2.1.43.aar",
           "url": "sqliteutils-2.1.43.aar",
-          "size": 6794,
-          "sha512": "4fb307b1cb97e10289ed49c9216e27d7dbad5289e4eba83638825951aaec46bc7f5a609e25b8f358e97e2e022e150b4b4d99f5438aeb4c16f2ef11c1dc4d8921",
-          "sha256": "3a50fecf373adf2ad052213ef30175af429a030f97972309b31d18209e089509",
-          "sha1": "37d85c05d0fead6a0a11ca72439234209098d1ec",
-          "md5": "fc9f4d19e51bc0d803044c6886a7d88a"
+          "size": 6770,
+          "sha512": "3d2f272b92dabac71520c07b6585306b21aaa015c845b47fce2d7cf344a8478b6eaed5e0669e3af157f3d00c2147342732909b8c46af8f2794888380c7a8823d",
+          "sha256": "055e3459fd5bfbca1f5c42412b5c6e40fb6f24b66680ee39987571cc7772e275",
+          "sha1": "ce211424861f3c4a4f4aa2f9d6d3b2e48708466d",
+          "md5": "e15ea35bc942ee859703007fe4058f29"
         }
       ]
     },
@@ -62,11 +62,11 @@
         {
           "name": "sqliteutils-2.1.43.aar",
           "url": "sqliteutils-2.1.43.aar",
-          "size": 6794,
-          "sha512": "4fb307b1cb97e10289ed49c9216e27d7dbad5289e4eba83638825951aaec46bc7f5a609e25b8f358e97e2e022e150b4b4d99f5438aeb4c16f2ef11c1dc4d8921",
-          "sha256": "3a50fecf373adf2ad052213ef30175af429a030f97972309b31d18209e089509",
-          "sha1": "37d85c05d0fead6a0a11ca72439234209098d1ec",
-          "md5": "fc9f4d19e51bc0d803044c6886a7d88a"
+          "size": 6770,
+          "sha512": "3d2f272b92dabac71520c07b6585306b21aaa015c845b47fce2d7cf344a8478b6eaed5e0669e3af157f3d00c2147342732909b8c46af8f2794888380c7a8823d",
+          "sha256": "055e3459fd5bfbca1f5c42412b5c6e40fb6f24b66680ee39987571cc7772e275",
+          "sha1": "ce211424861f3c4a4f4aa2f9d6d3b2e48708466d",
+          "md5": "e15ea35bc942ee859703007fe4058f29"
         }
       ]
     },

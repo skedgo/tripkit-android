@@ -26,11 +26,11 @@
         {
           "name": "route-persistence-2.1.43.aar",
           "url": "route-persistence-2.1.43.aar",
-          "size": 42160,
-          "sha512": "7a32481cc463746b4ee5c99f3fd47a93443a25b82a218a96c672fc63914191be477505a1c3870373199656940ef91189e8e6337a468c2e7a238d4f17d59d5d00",
-          "sha256": "5d439c9cfcff9aa8b803c244541f205bfd00dcd5fcb27163bd6a060b1bd4683b",
-          "sha1": "8260a2c0d2e3642cda526bfc0b98cdb832dd974f",
-          "md5": "dae386043035636a05b4b74a688749f2"
+          "size": 42071,
+          "sha512": "07dcfd8f4088cb4d047765aaf37b11be1d771e084fdbdf90c1832aa847f4b409ef575e014e8c4e6c3b4fbc5b208f0ab69a7b47115acf7dd69aedb223c45825c6",
+          "sha256": "9cb081e41a4946e300b500fa34612401128d59c18ecc9a62d7a48c1de8d95286",
+          "sha1": "95ee84a007655f26c487e1772ee9fb66913e934a",
+          "md5": "6ba98a2a20364c5a4d297c02362d58b2"
         }
       ]
     },
@@ -104,11 +104,11 @@
         {
           "name": "route-persistence-2.1.43.aar",
           "url": "route-persistence-2.1.43.aar",
-          "size": 42160,
-          "sha512": "7a32481cc463746b4ee5c99f3fd47a93443a25b82a218a96c672fc63914191be477505a1c3870373199656940ef91189e8e6337a468c2e7a238d4f17d59d5d00",
-          "sha256": "5d439c9cfcff9aa8b803c244541f205bfd00dcd5fcb27163bd6a060b1bd4683b",
-          "sha1": "8260a2c0d2e3642cda526bfc0b98cdb832dd974f",
-          "md5": "dae386043035636a05b4b74a688749f2"
+          "size": 42071,
+          "sha512": "07dcfd8f4088cb4d047765aaf37b11be1d771e084fdbdf90c1832aa847f4b409ef575e014e8c4e6c3b4fbc5b208f0ab69a7b47115acf7dd69aedb223c45825c6",
+          "sha256": "9cb081e41a4946e300b500fa34612401128d59c18ecc9a62d7a48c1de8d95286",
+          "sha1": "95ee84a007655f26c487e1772ee9fb66913e934a",
+          "md5": "6ba98a2a20364c5a4d297c02362d58b2"
         }
       ]
     },

@@ -26,11 +26,11 @@
         {
           "name": "CommonCoreLegacy-2.1.43.aar",
           "url": "CommonCoreLegacy-2.1.43.aar",
-          "size": 667130,
-          "sha512": "edd6b828ed27ccca964a6ce7f99ab4f382b0e7cf2058a40b45e464103c4e4e2a0f3b2402377b200027e9b3eefa5ba16fa4aab0cb3b8439ad0d8470af0c789dec",
-          "sha256": "fd925bb2d05b09b5dc29083d384f6f17ba1eb2560a497d3bfa2981427d844ca4",
-          "sha1": "6e8cd6237ba8a7a8b0a9c2a3b8b69023a29c5321",
-          "md5": "51066d21b669cfa76abce05b1c3b044f"
+          "size": 663330,
+          "sha512": "ded7b3b671075b9e7c39608302153774d29dcdc2eea48b6009cba4c80dc86a18b793c356dd316fae80a4365f4f5e4ae2916fd2c350403478572a2cab4f9a863a",
+          "sha256": "a6499597a982e1d4c8a007584650296959250dab9d539d8660b3425eac261042",
+          "sha1": "c9b917f0f5c80e526c37186a2b1a3def208f1f36",
+          "md5": "f29f91b685fa42703ecc9bdce4439622"
         }
       ]
     },
@@ -125,11 +125,11 @@
         {
           "name": "CommonCoreLegacy-2.1.43.aar",
           "url": "CommonCoreLegacy-2.1.43.aar",
-          "size": 667130,
-          "sha512": "edd6b828ed27ccca964a6ce7f99ab4f382b0e7cf2058a40b45e464103c4e4e2a0f3b2402377b200027e9b3eefa5ba16fa4aab0cb3b8439ad0d8470af0c789dec",
-          "sha256": "fd925bb2d05b09b5dc29083d384f6f17ba1eb2560a497d3bfa2981427d844ca4",
-          "sha1": "6e8cd6237ba8a7a8b0a9c2a3b8b69023a29c5321",
-          "md5": "51066d21b669cfa76abce05b1c3b044f"
+          "size": 663330,
+          "sha512": "ded7b3b671075b9e7c39608302153774d29dcdc2eea48b6009cba4c80dc86a18b793c356dd316fae80a4365f4f5e4ae2916fd2c350403478572a2cab4f9a863a",
+          "sha256": "a6499597a982e1d4c8a007584650296959250dab9d539d8660b3425eac261042",
+          "sha1": "c9b917f0f5c80e526c37186a2b1a3def208f1f36",
+          "md5": "f29f91b685fa42703ecc9bdce4439622"
         }
       ]
     },
@@ -165,11 +165,11 @@
         {
           "name": "CommonCoreLegacy-2.1.43-javadoc.jar",
           "url": "CommonCoreLegacy-2.1.43-javadoc.jar",
-          "size": 1144580,
-          "sha512": "e3f5c19e9e19408f561da7ec0def3abe6d278d623fef09f9ae7262ecbe917964e3a76e71b3bb2bae79a3524b447f28bea73632a0a14547810e3bd1fd6b7b591a",
-          "sha256": "190d7b0fae01abacfd44acd24ee87b05667bb28a49def38feefef7bd413647b8",
-          "sha1": "88fbe8feaacd707d4a78a943a9c823418fcfae5c",
-          "md5": "8f78864871f5007918436e9dc2fea9b6"
+          "size": 1144563,
+          "sha512": "919b283e91555d15e5b7ded6f3c29f83004e23f4872d08d30aa0554cb4b22ae5c9230d3861a9669c0165f1c68e9155a776308b083cdf0783f429368761c29778",
+          "sha256": "2c073a5c50e37b1a443d4a1d09102c28c053f9472d1e92fe5001ff8f0efe127a",
+          "sha1": "d56b1f131df0a1574d83527d33e9750d9831a8b2",
+          "md5": "109bdd2a0f443ea727ba987bb10aa660"
         }
       ]
     }

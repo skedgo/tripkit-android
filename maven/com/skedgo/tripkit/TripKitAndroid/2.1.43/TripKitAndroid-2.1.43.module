@@ -63,11 +63,11 @@
         {
           "name": "TripKitAndroid-2.1.43.aar",
           "url": "TripKitAndroid-2.1.43.aar",
-          "size": 427313,
-          "sha512": "975985c8b4458d97511b46605c0fdf61d98be57a7f99550eaefedb98c3f17d707d4d93864de16575ab6dcd3de63e61dade4483bb846db9646146e6321525e07b",
-          "sha256": "a6a5f01a4f1f72d863c3851b01486110e6d3c4e248a0c2f07eb6fb99d36f0dab",
-          "sha1": "ab0d289f4588af26d11075002a8fce1bcf3b0d63",
-          "md5": "108beda31fd23a2e6c03eb09c0d82abd"
+          "size": 425087,
+          "sha512": "00cb58deb29bdac3241658ea545b370786c8367d7c814caa9e567571b8fdbb97eb907063237e4632472e8bf5a25d1466165201b87017c991dc2e300a538fb171",
+          "sha256": "1870ed7010a243b4d589df6917c8112721ae1ce3b1163db2ad1dbe4a64ab457d",
+          "sha1": "99204b7d17a47f95f074cf7ceac903346a64dc82",
+          "md5": "9f160dd76474c0ea653da1d32c27423e"
         }
       ]
     },
@@ -288,11 +288,11 @@
         {
           "name": "TripKitAndroid-2.1.43.aar",
           "url": "TripKitAndroid-2.1.43.aar",
-          "size": 427313,
-          "sha512": "975985c8b4458d97511b46605c0fdf61d98be57a7f99550eaefedb98c3f17d707d4d93864de16575ab6dcd3de63e61dade4483bb846db9646146e6321525e07b",
-          "sha256": "a6a5f01a4f1f72d863c3851b01486110e6d3c4e248a0c2f07eb6fb99d36f0dab",
-          "sha1": "ab0d289f4588af26d11075002a8fce1bcf3b0d63",
-          "md5": "108beda31fd23a2e6c03eb09c0d82abd"
+          "size": 425087,
+          "sha512": "00cb58deb29bdac3241658ea545b370786c8367d7c814caa9e567571b8fdbb97eb907063237e4632472e8bf5a25d1466165201b87017c991dc2e300a538fb171",
+          "sha256": "1870ed7010a243b4d589df6917c8112721ae1ce3b1163db2ad1dbe4a64ab457d",
+          "sha1": "99204b7d17a47f95f074cf7ceac903346a64dc82",
+          "md5": "9f160dd76474c0ea653da1d32c27423e"
         }
       ]
     },

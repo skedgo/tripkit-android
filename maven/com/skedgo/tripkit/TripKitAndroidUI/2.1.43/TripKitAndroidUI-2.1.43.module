@@ -98,11 +98,11 @@
         {
           "name": "TripKitAndroidUI-2.1.43.aar",
           "url": "TripKitAndroidUI-2.1.43.aar",
-          "size": 2814609,
-          "sha512": "153dbf817dcc75861acb8ff4c821f84300f381973320d5f4f4758e938dee34258b023892d78e96cb96126af2069c6edf0604c8df1d03539c68ecb2c9eb2ff7ae",
-          "sha256": "379811d45cae0b72c65d03b4da7c3fa35db575894e8c9b66eb71f75ee6873860",
-          "sha1": "8b4e5d36021c04b474aaf935b1b119ac3f24786c",
-          "md5": "f9a5d6de68e48f162d83400ec9735b81"
+          "size": 2804095,
+          "sha512": "0657257d196f2ee130c25033ee0e94c9bc129d55d23894f8e1e5194c42cd5c4f851e1938d0bd9fedb96769217085bece89e736d2cb3091e08e87e530b37ac275",
+          "sha256": "e4d40a2d3292b8df65e623a11337d69e67cd6a372185f6111036f8d2c69d6cea",
+          "sha1": "262f112773892d655a3c4eb7c131b4baeaa150fd",
+          "md5": "a3760c66d539ba16ebe2c1a0c6079779"
         }
       ]
     },
@@ -596,11 +596,11 @@
         {
           "name": "TripKitAndroidUI-2.1.43.aar",
           "url": "TripKitAndroidUI-2.1.43.aar",
-          "size": 2814609,
-          "sha512": "153dbf817dcc75861acb8ff4c821f84300f381973320d5f4f4758e938dee34258b023892d78e96cb96126af2069c6edf0604c8df1d03539c68ecb2c9eb2ff7ae",
-          "sha256": "379811d45cae0b72c65d03b4da7c3fa35db575894e8c9b66eb71f75ee6873860",
-          "sha1": "8b4e5d36021c04b474aaf935b1b119ac3f24786c",
-          "md5": "f9a5d6de68e48f162d83400ec9735b81"
+          "size": 2804095,
+          "sha512": "0657257d196f2ee130c25033ee0e94c9bc129d55d23894f8e1e5194c42cd5c4f851e1938d0bd9fedb96769217085bece89e736d2cb3091e08e87e530b37ac275",
+          "sha256": "e4d40a2d3292b8df65e623a11337d69e67cd6a372185f6111036f8d2c69d6cea",
+          "sha1": "262f112773892d655a3c4eb7c131b4baeaa150fd",
+          "md5": "a3760c66d539ba16ebe2c1a0c6079779"
         }
       ]
     },
@@ -636,11 +636,11 @@
         {
           "name": "TripKitAndroidUI-2.1.43-javadoc.jar",
           "url": "TripKitAndroidUI-2.1.43-javadoc.jar",
-          "size": 4614730,
-          "sha512": "1940323f5adcfd18db66539d032cb9a00be1900d1e7983e9fa85e0c8af6d720deb62fe09e0281f311f44aff2144ee115c75fd1920aa489e66af1a7c4d6e96345",
-          "sha256": "747e4d3c044c015a2bb66730fd08ff3300e74ca0f606cc892b77252e4662d83b",
-          "sha1": "74ef882ea5d469c5b63ab651709393b38da97699",
-          "md5": "b93b8ba0264d2742ed7de4abbe7df003"
+          "size": 4614654,
+          "sha512": "0fb47650f50ac75293ce1397e2a1272d923882b6cb79513c9d00d23f0d15ad24e579924de9ed6b7454a2ff70c520d2452fd47d0b773286dcece1d78eaee64486",
+          "sha256": "65c0f83ceb7ba24c52d575ec0c92f61f7d5e550b9424c20aa1201a5e24c7a42d",
+          "sha1": "d866aa19367c1ef7bb113d4b9d16c0b3de19e948",
+          "md5": "e9406543fcc4d6f727a6046c6cfc6738"
         }
       ]
     }

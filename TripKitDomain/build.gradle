@@ -13,7 +13,7 @@ dependencies {
   testImplementation libs.mockitoCore
   testImplementation libs.mockitoKotlin
 
-  implementation libs.jodaTime
+  implementation libs.jodaTimeAndroid
   implementation libs.rxjava2
   implementation libs.dagger
   kapt libs.daggerCompiler

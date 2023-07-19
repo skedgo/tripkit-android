@@ -20,7 +20,7 @@
         "org.gradle.category": "library",
         "org.gradle.dependency.bundling": "external",
         "org.gradle.jvm.environment": "standard-jvm",
-        "org.gradle.jvm.version": 17,
+        "org.gradle.jvm.version": 11,
         "org.gradle.libraryelements": "jar",
         "org.gradle.usage": "java-api",
         "org.jetbrains.kotlin.platform.type": "jvm"
@@ -29,11 +29,11 @@
         {
           "name": "TripKitDomain-2.1.43.jar",
           "url": "TripKitDomain-2.1.43.jar",
-          "size": 91381,
-          "sha512": "5059cbfbe72ee442415df00b8488d7a75dcd8b5c07ae98f574974a1d11b4bdef104ba9bb75cfa36268b47d1ea187e7cc5841253dcc72dae00e8d2cd1c944732a",
-          "sha256": "6c35018a7383f8115f9bcafcc5ff1350b3f20c44fd6fed6c48d00ef655489729",
-          "sha1": "f9ad05f7e084bd9d48013ac6ee196be0cc204363",
-          "md5": "9976a0c36499f8bbf464d2a43c00bc15"
+          "size": 91237,
+          "sha512": "550304bdaf8619d1a9b68c0d7ac06b04cd7fb9408c85ae3bfe536b9fd3cc9e4f790be4af817370e32c6adc8e684fd98a55ad9ab9c8e86baef250b2850233439c",
+          "sha256": "89af388ba9b027ba452efc49f83d6d03282b1aa3698848654f89dbea67d2440b",
+          "sha1": "28be07c7afe8e29de616c636a9f05f9898709c9c",
+          "md5": "e6ef85d0d2ea115e98372bb953d44884"
         }
       ]
     },
@@ -43,25 +43,17 @@
         "org.gradle.category": "library",
         "org.gradle.dependency.bundling": "external",
         "org.gradle.jvm.environment": "standard-jvm",
-        "org.gradle.jvm.version": 17,
+        "org.gradle.jvm.version": 11,
         "org.gradle.libraryelements": "jar",
         "org.gradle.usage": "java-runtime",
         "org.jetbrains.kotlin.platform.type": "jvm"
       },
       "dependencies": [
         {
-          "group": "joda-time",
-          "module": "joda-time",
+          "group": "net.danlew",
+          "module": "android.joda",
           "version": {
-            "requires": "2.9.9"
-          },
-          "thirdPartyCompatibility": {
-            "artifactSelector": {
-              "name": "joda-time",
-              "type": "jar",
-              "extension": "jar",
-              "classifier": "no-tzdb"
-            }
+            "requires": "2.10.3"
           }
         },
         {
@@ -111,11 +103,11 @@
         {
           "name": "TripKitDomain-2.1.43.jar",
           "url": "TripKitDomain-2.1.43.jar",
-          "size": 91381,
-          "sha512": "5059cbfbe72ee442415df00b8488d7a75dcd8b5c07ae98f574974a1d11b4bdef104ba9bb75cfa36268b47d1ea187e7cc5841253dcc72dae00e8d2cd1c944732a",
-          "sha256": "6c35018a7383f8115f9bcafcc5ff1350b3f20c44fd6fed6c48d00ef655489729",
-          "sha1": "f9ad05f7e084bd9d48013ac6ee196be0cc204363",
-          "md5": "9976a0c36499f8bbf464d2a43c00bc15"
+          "size": 91237,
+          "sha512": "550304bdaf8619d1a9b68c0d7ac06b04cd7fb9408c85ae3bfe536b9fd3cc9e4f790be4af817370e32c6adc8e684fd98a55ad9ab9c8e86baef250b2850233439c",
+          "sha256": "89af388ba9b027ba452efc49f83d6d03282b1aa3698848654f89dbea67d2440b",
+          "sha1": "28be07c7afe8e29de616c636a9f05f9898709c9c",
+          "md5": "e6ef85d0d2ea115e98372bb953d44884"
         }
       ]
     }
