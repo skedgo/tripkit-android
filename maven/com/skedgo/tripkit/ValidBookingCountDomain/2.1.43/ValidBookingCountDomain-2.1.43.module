@@ -30,10 +30,10 @@
           "name": "ValidBookingCountDomain-2.1.43.jar",
           "url": "ValidBookingCountDomain-2.1.43.jar",
           "size": 5954,
-          "sha512": "663fde07c8143d8f7eb84cc09009ff787545564ad72f73833cebb76fa15ce12b4d009c1f287c28c8027d29fb48e3fb2434137452a1cbca0bf5e51ca174fdf4cb",
-          "sha256": "361fd832980c0040728bc1e209b87ef52b7b7103e76e282620a9e86535a74ece",
-          "sha1": "61831da6d60c81634e6b7f161236ac6e3bd567c1",
-          "md5": "f15beb4d9a5995424637c33e32c48657"
+          "sha512": "fc696226dc6763f140927137aab252d503e3bd99c09ece1c29618f903bde4a0e118597c618def5f3a876b5caede1631da9b47615c221a4c2debbc2b72f89b654",
+          "sha256": "39de1168c9f3c2350ae53b0557292d8313f3f22368dc3419fe6918570160530d",
+          "sha1": "07fce8b52e9c772926ce7f414e306640ce3903c6",
+          "md5": "4b1facfec32cb31bedf408776b16d6d3"
         }
       ]
     },
@@ -76,10 +76,10 @@
           "name": "ValidBookingCountDomain-2.1.43.jar",
           "url": "ValidBookingCountDomain-2.1.43.jar",
           "size": 5954,
-          "sha512": "663fde07c8143d8f7eb84cc09009ff787545564ad72f73833cebb76fa15ce12b4d009c1f287c28c8027d29fb48e3fb2434137452a1cbca0bf5e51ca174fdf4cb",
-          "sha256": "361fd832980c0040728bc1e209b87ef52b7b7103e76e282620a9e86535a74ece",
-          "sha1": "61831da6d60c81634e6b7f161236ac6e3bd567c1",
-          "md5": "f15beb4d9a5995424637c33e32c48657"
+          "sha512": "fc696226dc6763f140927137aab252d503e3bd99c09ece1c29618f903bde4a0e118597c618def5f3a876b5caede1631da9b47615c221a4c2debbc2b72f89b654",
+          "sha256": "39de1168c9f3c2350ae53b0557292d8313f3f22368dc3419fe6918570160530d",
+          "sha1": "07fce8b52e9c772926ce7f414e306640ce3903c6",
+          "md5": "4b1facfec32cb31bedf408776b16d6d3"
         }
       ]
     }

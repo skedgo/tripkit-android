@@ -44,6 +44,27 @@
       },
       "dependencies": [
         {
+          "group": "com.skedgo.tripkit",
+          "module": "TripKitAndroid",
+          "version": {
+            "requires": "2.1.43"
+          }
+        },
+        {
+          "group": "com.skedgo.tripkit",
+          "module": "TripKitAndroidUIDomain",
+          "version": {
+            "requires": "2.1.43"
+          }
+        },
+        {
+          "group": "com.skedgo.tripkit",
+          "module": "sqliteutils",
+          "version": {
+            "requires": "2.1.43"
+          }
+        },
+        {
           "group": "org.jetbrains.kotlin",
           "module": "kotlin-android-extensions-runtime",
           "version": {
@@ -153,27 +174,6 @@
           "module": "places",
           "version": {
             "requires": "2.2.0"
-          }
-        },
-        {
-          "group": "com.skedgo.tripkit",
-          "module": "TripKitAndroid",
-          "version": {
-            "requires": "2.1.43"
-          }
-        },
-        {
-          "group": "com.skedgo.tripkit",
-          "module": "TripKitAndroidUIDomain",
-          "version": {
-            "requires": "2.1.43"
-          }
-        },
-        {
-          "group": "com.skedgo.tripkit",
-          "module": "sqliteutils",
-          "version": {
-            "requires": "2.1.43"
           }
         },
         {
