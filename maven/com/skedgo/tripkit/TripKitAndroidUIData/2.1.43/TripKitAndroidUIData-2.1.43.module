@@ -10,14 +10,36 @@
   },
   "createdBy": {
     "gradle": {
-      "version": "6.5",
-      "buildId": "fw44k4r2z5fjdhdo27kkmcopgi"
+      "version": "7.6"
     }
   },
   "variants": [
     {
-      "name": "runtime",
+      "name": "releaseVariantReleaseApiPublication",
       "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.libraryelements": "aar",
+        "org.gradle.usage": "java-api"
+      },
+      "files": [
+        {
+          "name": "TripKitAndroidUIData-2.1.43.aar",
+          "url": "TripKitAndroidUIData-2.1.43.aar",
+          "size": 142692,
+          "sha512": "84ac0cc5f1619c6be56af19266911ed8c6b33c1fb15fd601728f47bbadba69d7d23f7f169cb6d6d881b2c52a9c315fcee35f405090ab8f3f837f357497f5374d",
+          "sha256": "ce1d032188f5c670722d1d180ef6222da35344e72ca918fda26eb739d55c190c",
+          "sha1": "62f4ec3bffbd26a7d87cc1ba9ec81930ca55a298",
+          "md5": "b5df53a29add28fde708a7c320b07847"
+        }
+      ]
+    },
+    {
+      "name": "releaseVariantReleaseRuntimePublication",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.libraryelements": "aar",
         "org.gradle.usage": "java-runtime"
       },
       "dependencies": [
@@ -25,14 +47,14 @@
           "group": "org.jetbrains.kotlin",
           "module": "kotlin-android-extensions-runtime",
           "version": {
-            "requires": "1.4.10"
+            "requires": "1.6.20"
           }
         },
         {
           "group": "org.jetbrains.kotlin",
           "module": "kotlin-stdlib",
           "version": {
-            "requires": "1.4.10"
+            "requires": "1.6.20"
           }
         },
         {
@@ -95,7 +117,7 @@
           "group": "com.google.code.gson",
           "module": "gson",
           "version": {
-            "requires": "2.8.6"
+            "requires": "2.8.8"
           }
         },
         {
@@ -109,22 +131,14 @@
           "group": "org.immutables",
           "module": "gson",
           "version": {
-            "requires": "2.8.2"
+            "requires": "2.8.8"
           }
         },
         {
-          "group": "joda-time",
-          "module": "joda-time",
+          "group": "net.danlew",
+          "module": "android.joda",
           "version": {
-            "requires": "2.9.9"
-          },
-          "thirdPartyCompatibility": {
-            "artifactSelector": {
-              "name": "joda-time",
-              "type": "jar",
-              "extension": "jar",
-              "classifier": "no-tzdb"
-            }
+            "requires": "2.10.3"
           }
         },
         {
@@ -161,34 +175,64 @@
           "version": {
             "requires": "2.1.43"
           }
+        },
+        {
+          "group": "javax.annotation",
+          "module": "javax.annotation-api",
+          "version": {
+            "requires": "1.3.2"
+          }
         }
       ],
       "files": [
         {
           "name": "TripKitAndroidUIData-2.1.43.aar",
           "url": "TripKitAndroidUIData-2.1.43.aar",
-          "size": 193677,
-          "sha512": "f1630c9b2a918917470a25e497a9d30301575405f5e936354a4d78e1770071870d3ecc28a390c7fe8be8015117b6fff67e4df38221be3fe57a9efe0a4f7718fc",
-          "sha256": "ef47c33fc83cf3a3ee9a60fc52f6d13fe2a89bd2953482663867ef78c98e63ae",
-          "sha1": "4f5240b1e942a04d000a1ddc2ac92363bc436a73",
-          "md5": "010c15ea111c6988af8d727e141870ef"
+          "size": 142692,
+          "sha512": "84ac0cc5f1619c6be56af19266911ed8c6b33c1fb15fd601728f47bbadba69d7d23f7f169cb6d6d881b2c52a9c315fcee35f405090ab8f3f837f357497f5374d",
+          "sha256": "ce1d032188f5c670722d1d180ef6222da35344e72ca918fda26eb739d55c190c",
+          "sha1": "62f4ec3bffbd26a7d87cc1ba9ec81930ca55a298",
+          "md5": "b5df53a29add28fde708a7c320b07847"
         }
       ]
     },
     {
-      "name": "api",
+      "name": "releaseVariantReleaseSourcePublication",
       "attributes": {
-        "org.gradle.usage": "java-api"
+        "org.gradle.category": "documentation",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.docstype": "sources",
+        "org.gradle.usage": "java-runtime"
       },
       "files": [
         {
-          "name": "TripKitAndroidUIData-2.1.43.aar",
-          "url": "TripKitAndroidUIData-2.1.43.aar",
-          "size": 193677,
-          "sha512": "f1630c9b2a918917470a25e497a9d30301575405f5e936354a4d78e1770071870d3ecc28a390c7fe8be8015117b6fff67e4df38221be3fe57a9efe0a4f7718fc",
-          "sha256": "ef47c33fc83cf3a3ee9a60fc52f6d13fe2a89bd2953482663867ef78c98e63ae",
-          "sha1": "4f5240b1e942a04d000a1ddc2ac92363bc436a73",
-          "md5": "010c15ea111c6988af8d727e141870ef"
+          "name": "TripKitAndroidUIData-2.1.43-sources.jar",
+          "url": "TripKitAndroidUIData-2.1.43-sources.jar",
+          "size": 49963,
+          "sha512": "15957c7905a90fb233df67917d9757f23fd2c151cc24130159cce57bfb72b607debeec14ceaae76f69c5da15fac4f902874cb4a02dbfe18cb8869ba877f8d416",
+          "sha256": "729b5267b6fae9f3b6786bd830b1474d2fa213f4768f03cc15815d5f9b0d5904",
+          "sha1": "a320620ab77a54bd161550d4747bcfaf7c96f8f5",
+          "md5": "b06e86be5ceb6d9225253afda140d8b6"
+        }
+      ]
+    },
+    {
+      "name": "releaseVariantReleaseJavaDocPublication",
+      "attributes": {
+        "org.gradle.category": "documentation",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.docstype": "javadoc",
+        "org.gradle.usage": "java-runtime"
+      },
+      "files": [
+        {
+          "name": "TripKitAndroidUIData-2.1.43-javadoc.jar",
+          "url": "TripKitAndroidUIData-2.1.43-javadoc.jar",
+          "size": 518701,
+          "sha512": "05bcc6d9d0638fca646c4c22487d5a796a358e14af980f9e04dc66c7ba83b4a306334e095503bba88f3b078ab9bb233616cf4b8428b8cc24a941a7f0f710749f",
+          "sha256": "af85f01d2ef8c978059fb436d06716227396b19b3abc91811b93c4814cd17dc4",
+          "sha1": "a4ff9035a10b1fbc903b417f8f97a81780a7d268",
+          "md5": "9f5288d19e1387f491f2d01a0f5b0164"
         }
       ]
     }

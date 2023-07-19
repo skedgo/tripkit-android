@@ -272,11 +272,11 @@
         {
           "name": "TripKitData-2.1.43-javadoc.jar",
           "url": "TripKitData-2.1.43-javadoc.jar",
-          "size": 1137466,
-          "sha512": "c9d30d6a4f280f4cc7bd2a5321a50cc7f46451d7b1a2f169ee4b5655f7d9a5fac486d6a0ebf97fab36c881bf3b98f9ccfa1dfe44d985eb6c9082a1110c9a3fb8",
-          "sha256": "3a8dd2d475f9a33d211abe19dfe7200b7bf4c778555c348e1b7536636683dba6",
-          "sha1": "b0c387b939f3712cce731a3cdf2fbf95bda2ec25",
-          "md5": "ec470e6177b93d646beebb813f25ddef"
+          "size": 1137442,
+          "sha512": "1c9af7843a37d24cbbd74229447f07f18575b78c594287d64cf56c98e5b8474dbc50a0cf9d022fc1e70701750fe507cf9ba7ddc5bb01f97b4745ca07416c8ba2",
+          "sha256": "f23fc138653642d4a5746a8a4ba31147e9c6661f169b15f757120e8224ba8d5b",
+          "sha1": "f2d261369d315c7684ddf2c2ce6975f6e7e8ba75",
+          "md5": "f83dc1919b2294b2829fc8555900fbd5"
         }
       ]
     }
