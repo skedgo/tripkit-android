@@ -186,11 +186,11 @@
         {
           "name": "trip-kit-booking-2.1.43-javadoc.jar",
           "url": "trip-kit-booking-2.1.43-javadoc.jar",
-          "size": 721079,
-          "sha512": "782535d4be3196761e378821c6febd2fe273a91cb73660fe0c2abae24997a10f11044ffee5d5128b3ccf4f96e5976e927d1d78fc3560d9ad38ee41d083a8c565",
-          "sha256": "cb91225b367e1792d30514f55f0abb9c56dbf5ec6c91087f3a058f0547ab3b2c",
-          "sha1": "da65d98c0043403ef5e37d82b877cb2717f87f6b",
-          "md5": "89cf1a9cb01498ef644aedbb5c597473"
+          "size": 721078,
+          "sha512": "96ae797acf297e4e412625c64e0e46840b680435947cf1791604447aa9525a41a054fa4144b9a0ed9aeb672cde3cf545221a77c48ca61fafa06bd6d8f729d8b9",
+          "sha256": "bbf88032e7c1fcb32677c35fe5b917e3a4a48715ddb2681d2915120bf789b9ea",
+          "sha1": "5e5ca27e736638b09f010823af8ab3fdc18eda83",
+          "md5": "a34c36449ff61629754f84f0fb304d6e"
         }
       ]
     }
