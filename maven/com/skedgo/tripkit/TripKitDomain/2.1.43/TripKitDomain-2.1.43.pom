@@ -16,10 +16,9 @@
   </licenses>
   <dependencies>
     <dependency>
-      <groupId>joda-time</groupId>
-      <artifactId>joda-time</artifactId>
-      <version>2.9.9</version>
-      <classifier>no-tzdb</classifier>
+      <groupId>net.danlew</groupId>
+      <artifactId>android.joda</artifactId>
+      <version>2.10.3</version>
       <scope>runtime</scope>
       <type>aar</type>
     </dependency>

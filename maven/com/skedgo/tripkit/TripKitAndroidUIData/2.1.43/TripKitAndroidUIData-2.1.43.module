@@ -26,11 +26,11 @@
         {
           "name": "TripKitAndroidUIData-2.1.43.aar",
           "url": "TripKitAndroidUIData-2.1.43.aar",
-          "size": 142692,
-          "sha512": "84ac0cc5f1619c6be56af19266911ed8c6b33c1fb15fd601728f47bbadba69d7d23f7f169cb6d6d881b2c52a9c315fcee35f405090ab8f3f837f357497f5374d",
-          "sha256": "ce1d032188f5c670722d1d180ef6222da35344e72ca918fda26eb739d55c190c",
-          "sha1": "62f4ec3bffbd26a7d87cc1ba9ec81930ca55a298",
-          "md5": "b5df53a29add28fde708a7c320b07847"
+          "size": 142139,
+          "sha512": "4b88ffc18fd0f2c51824fa6befc4d586db6041d4270dc62d9d5f1824d9a90ec29db62e49087ff81f63a471a930a224e21b72df4bea39d52ef4a90db799d2bcf2",
+          "sha256": "bb0892b3f34f1ccfbfa91e6d101f4687d00b2cde7332daf1142218a8d9ec19ee",
+          "sha1": "d1c847c1cdb7f0ced60918650c62559169938490",
+          "md5": "8e5c76ecac9c5c1e554436e82bfddfc1"
         }
       ]
     },
@@ -188,11 +188,11 @@
         {
           "name": "TripKitAndroidUIData-2.1.43.aar",
           "url": "TripKitAndroidUIData-2.1.43.aar",
-          "size": 142692,
-          "sha512": "84ac0cc5f1619c6be56af19266911ed8c6b33c1fb15fd601728f47bbadba69d7d23f7f169cb6d6d881b2c52a9c315fcee35f405090ab8f3f837f357497f5374d",
-          "sha256": "ce1d032188f5c670722d1d180ef6222da35344e72ca918fda26eb739d55c190c",
-          "sha1": "62f4ec3bffbd26a7d87cc1ba9ec81930ca55a298",
-          "md5": "b5df53a29add28fde708a7c320b07847"
+          "size": 142139,
+          "sha512": "4b88ffc18fd0f2c51824fa6befc4d586db6041d4270dc62d9d5f1824d9a90ec29db62e49087ff81f63a471a930a224e21b72df4bea39d52ef4a90db799d2bcf2",
+          "sha256": "bb0892b3f34f1ccfbfa91e6d101f4687d00b2cde7332daf1142218a8d9ec19ee",
+          "sha1": "d1c847c1cdb7f0ced60918650c62559169938490",
+          "md5": "8e5c76ecac9c5c1e554436e82bfddfc1"
         }
       ]
     },

@@ -42,11 +42,11 @@
         {
           "name": "TripKitData-2.1.43.aar",
           "url": "TripKitData-2.1.43.aar",
-          "size": 535027,
-          "sha512": "02afacff8568bf31f584ecfd7fba50ac7fc10ba9ec768f10c6330f7664dab3bb636e05bebc3b7ef9fe151d34cde493be18d9701b8aad143a58161eff17eec4d7",
-          "sha256": "91eb78ee38b409cf2c88991cdd04cd91d16d74950daee78533787a24fcb39e6c",
-          "sha1": "c9e189086d07e6bd7977074962a09c0f27119a75",
-          "md5": "270200d19b0c5b8fc0fca401e38fcffd"
+          "size": 531761,
+          "sha512": "b33e1cf130095882fdc6371b74e5f482d34895081cc1114d30005fef28d86a8c1faaae7670eee67de5097b8cae53b97b7b2288450e2509d9a514934dc97f4a88",
+          "sha256": "3d983e9f4eeab6aeed76f1475869c1b1df8e10b694905c4ac6970ec32668aac0",
+          "sha1": "7fbf3c3bb33198293ca735a79b6a7d9fb2a84463",
+          "md5": "0a01d5662bcd3731a5d986ddbad911f4"
         }
       ]
     },
@@ -232,11 +232,11 @@
         {
           "name": "TripKitData-2.1.43.aar",
           "url": "TripKitData-2.1.43.aar",
-          "size": 535027,
-          "sha512": "02afacff8568bf31f584ecfd7fba50ac7fc10ba9ec768f10c6330f7664dab3bb636e05bebc3b7ef9fe151d34cde493be18d9701b8aad143a58161eff17eec4d7",
-          "sha256": "91eb78ee38b409cf2c88991cdd04cd91d16d74950daee78533787a24fcb39e6c",
-          "sha1": "c9e189086d07e6bd7977074962a09c0f27119a75",
-          "md5": "270200d19b0c5b8fc0fca401e38fcffd"
+          "size": 531761,
+          "sha512": "b33e1cf130095882fdc6371b74e5f482d34895081cc1114d30005fef28d86a8c1faaae7670eee67de5097b8cae53b97b7b2288450e2509d9a514934dc97f4a88",
+          "sha256": "3d983e9f4eeab6aeed76f1475869c1b1df8e10b694905c4ac6970ec32668aac0",
+          "sha1": "7fbf3c3bb33198293ca735a79b6a7d9fb2a84463",
+          "md5": "0a01d5662bcd3731a5d986ddbad911f4"
         }
       ]
     },
