@@ -46,7 +46,6 @@ dependencies {
   testImplementation libs.assertjCore
   testImplementation libs.mockitoCore
   testImplementation libs.mockitoKotlin, { exclude group: "org.jetbrains.kotlin" }
-  testImplementation libs.jodaTimeTzdb, { exclude module: 'joda-time' }
   testImplementation libs.mockWebServer
   testImplementation libs.kluent
   testImplementation libs.robolectric
