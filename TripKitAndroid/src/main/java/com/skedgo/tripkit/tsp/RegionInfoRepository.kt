@@ -16,7 +16,7 @@ open class RegionInfoRepository @Inject constructor(
       if (regionInfoMap.containsKey(region.name)) {
           Observable.just(regionInfoMap[region.name])
       } else {
-          regionInfoService.fetchRegionInfoAsync(region.getURLs(HttpClientCustomDataStore.getCustomBaseUrl())!!, region.name)
+          regionInfoService.fetchRegionInfoAsync(region.urLs!!, region.name)
                   .doOnNext { regionInfoMap[region.name!!] = it }
       }
 }

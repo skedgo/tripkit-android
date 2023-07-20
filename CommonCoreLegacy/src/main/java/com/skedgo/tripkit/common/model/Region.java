@@ -53,11 +53,8 @@ public class Region implements Parcelable {
   }
 
   @Nullable
-  public ArrayList<String> getURLs(@Nullable String customUrl) {
-    if(customUrl != null)
-      return new ArrayList<String>(Collections.singletonList(customUrl));
-    else
-      return urls;
+  public ArrayList<String> getURLs() {
+    return urls;
   }
 
   public void setURLs(final ArrayList<String> urls) {

@@ -33,7 +33,7 @@ public class QueryTest {
 
     assertThat(actual.getRegion()).isNotNull();
     assertThat(actual.getRegion().getName()).isEqualTo(expectedRegionName);
-    assertThat(actual.getRegion().getURLs(null)).containsExactlyElementsOf(expectedRegion.getURLs(null));
+    assertThat(actual.getRegion().getURLs()).containsExactlyElementsOf(expectedRegion.getURLs());
 
     assertThat(actual.getTransportModeIds())
         .isNotNull()

@@ -34,11 +34,11 @@ class App : Application() {
                 init(this@App)
                 setCustomBaseUrl("https://www.samplecustombaseurl.com")
                 setCustomHeaders(
-                        mapOf(
-                                "CustomHeader1" to "CustomHeader1Value",
-                                "CustomHeader2" to "CustomHeader2Value",
-                                "CustomHeader3" to "CustomHeader3Value"
-                        )
+                    mapOf(
+                        "CustomHeader1" to "CustomHeader1Value",
+                        "CustomHeader2" to "CustomHeader2Value",
+                        "CustomHeader3" to "CustomHeader3Value"
+                    )
                 )
             }
 
