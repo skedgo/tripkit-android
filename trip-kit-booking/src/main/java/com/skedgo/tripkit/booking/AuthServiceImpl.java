@@ -24,8 +24,7 @@ class AuthServiceImpl implements AuthService {
   public Observable<List<AuthProvider>> fetchProvidersByRegionAsync(@NonNull final Region region,
                                                                     @Nullable final String mode,
                                                                     final boolean bsb) {
-    String customBaseUrl = HttpClientCustomDataStore.INSTANCE.getCustomBaseUrl();
-    return Observable.fromIterable(region.getURLs(customBaseUrl))
+    return Observable.fromIterable(region.getURLs())
         .concatMapDelayError(new Function<String, Observable<? extends List<AuthProvider>>>() {
           @Override public Observable<? extends List<AuthProvider>> apply(String url) {
 

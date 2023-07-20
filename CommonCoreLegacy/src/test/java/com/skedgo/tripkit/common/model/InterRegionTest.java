@@ -71,7 +71,7 @@ public class InterRegionTest {
     )));
 
     final Regions.InterRegion interRegion = new Regions.InterRegion(departureRegion, arrivalRegion);
-    assertThat(interRegion.getURLs(null))
+    assertThat(interRegion.getURLs())
         .containsExactlyElementsOf(departureServerUrls);
   }
 

@@ -109,7 +109,7 @@ open class StopsFetcher(private val api: LocationsApi,
                                 level: Int): Observable<List<LocationsResponse.Group>> {
         return createRequestBodiesAsync(cellIds, region, level)
                 .flatMap { body ->
-                    val baseUrl = region.getURLs(null)!![0]
+                    val baseUrl = region.urLs!![0]
                     val url = baseUrl.toHttpUrlOrNull()!!
                             .newBuilder()
                             .addPathSegment("locations.json")

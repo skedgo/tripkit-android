@@ -43,7 +43,7 @@ internal class RouteServiceImpl(
 
                     val region = subQuery.region
 
-                    val baseUrls = region!!.getURLs(HttpClientCustomDataStore.getCustomBaseUrl())
+                    val baseUrls = region!!.urLs
                     val modes = transportModeFilter.getFilteredMode(subQuery.transportModeIds)
 
                     val excludeStops = subQuery.excludedStopCodes
