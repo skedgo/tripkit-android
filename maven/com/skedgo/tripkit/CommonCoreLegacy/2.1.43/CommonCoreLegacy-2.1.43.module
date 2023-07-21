@@ -26,11 +26,11 @@
         {
           "name": "CommonCoreLegacy-2.1.43.aar",
           "url": "CommonCoreLegacy-2.1.43.aar",
-          "size": 663330,
-          "sha512": "ded7b3b671075b9e7c39608302153774d29dcdc2eea48b6009cba4c80dc86a18b793c356dd316fae80a4365f4f5e4ae2916fd2c350403478572a2cab4f9a863a",
-          "sha256": "a6499597a982e1d4c8a007584650296959250dab9d539d8660b3425eac261042",
-          "sha1": "c9b917f0f5c80e526c37186a2b1a3def208f1f36",
-          "md5": "f29f91b685fa42703ecc9bdce4439622"
+          "size": 666965,
+          "sha512": "06f376f2a085517fd271202e616c5bc6cc985bc319aec3e56d5e3bd3675d51a8e5c13a69bcb8e538a0b53b1eda4345acfa049dedb5be4539474bf9103df9adc5",
+          "sha256": "4a5506632b4288dafe8198c598a66adb8d2672a9730d26f1140551b1a86b71e1",
+          "sha1": "143f4f991337e5d54bb4de6b19be15426a66456b",
+          "md5": "3ea5351d1050975df9708f25421fe06b"
         }
       ]
     },
@@ -125,11 +125,11 @@
         {
           "name": "CommonCoreLegacy-2.1.43.aar",
           "url": "CommonCoreLegacy-2.1.43.aar",
-          "size": 663330,
-          "sha512": "ded7b3b671075b9e7c39608302153774d29dcdc2eea48b6009cba4c80dc86a18b793c356dd316fae80a4365f4f5e4ae2916fd2c350403478572a2cab4f9a863a",
-          "sha256": "a6499597a982e1d4c8a007584650296959250dab9d539d8660b3425eac261042",
-          "sha1": "c9b917f0f5c80e526c37186a2b1a3def208f1f36",
-          "md5": "f29f91b685fa42703ecc9bdce4439622"
+          "size": 666965,
+          "sha512": "06f376f2a085517fd271202e616c5bc6cc985bc319aec3e56d5e3bd3675d51a8e5c13a69bcb8e538a0b53b1eda4345acfa049dedb5be4539474bf9103df9adc5",
+          "sha256": "4a5506632b4288dafe8198c598a66adb8d2672a9730d26f1140551b1a86b71e1",
+          "sha1": "143f4f991337e5d54bb4de6b19be15426a66456b",
+          "md5": "3ea5351d1050975df9708f25421fe06b"
         }
       ]
     },
@@ -145,11 +145,11 @@
         {
           "name": "CommonCoreLegacy-2.1.43-sources.jar",
           "url": "CommonCoreLegacy-2.1.43-sources.jar",
-          "size": 227810,
-          "sha512": "6a84c37682e1c2417753c55672c275975c9a8715e33b44aa9436630b9f9a773181c55041481526290ff63decf02c3ee9080cd07d181fb12cd336a73ee8a17742",
-          "sha256": "76a48985342c0d036994971518593546304483f82beec1a3d374c51125fc7e47",
-          "sha1": "c1b7a189a76baa4a952c8a0eddf21a1faa4e90af",
-          "md5": "ebb97e8d37539a09bcd06e60c72edc44"
+          "size": 227760,
+          "sha512": "691446053f10517fdcc6674f0b541e6432190c3508cf43566a397ef7d290aae50db634fcba940ddd169a8261c6e514272559393f07d665f0751abc3f568b9c5a",
+          "sha256": "46f67dcbeacc945345820f8a1360291f06d32ba466e9871a2a466897d894eb4f",
+          "sha1": "c4eaa2d903b66b9f31a2b87718ff4968912a657f",
+          "md5": "9d2dd1dc505094c954f07023655a1228"
         }
       ]
     },
@@ -165,11 +165,11 @@
         {
           "name": "CommonCoreLegacy-2.1.43-javadoc.jar",
           "url": "CommonCoreLegacy-2.1.43-javadoc.jar",
-          "size": 1144563,
-          "sha512": "919b283e91555d15e5b7ded6f3c29f83004e23f4872d08d30aa0554cb4b22ae5c9230d3861a9669c0165f1c68e9155a776308b083cdf0783f429368761c29778",
-          "sha256": "2c073a5c50e37b1a443d4a1d09102c28c053f9472d1e92fe5001ff8f0efe127a",
-          "sha1": "d56b1f131df0a1574d83527d33e9750d9831a8b2",
-          "md5": "109bdd2a0f443ea727ba987bb10aa660"
+          "size": 1144536,
+          "sha512": "0112707bcf5df6a546f78f0b9649c5c86f34a2495e88d60a3644012204fca43fa43ee68ab8f8a1e8907d837b7c3fe1242509fa5d5fd64247722d629bc046221a",
+          "sha256": "422a3f38ffe5214f4db90e9d7094262677c848a0a2108ebf685ac826eddc6d9f",
+          "sha1": "b08215f13d0311099fc15841ae20019630237237",
+          "md5": "e6c3badeb58b127091f32237e86dab74"
         }
       ]
     }

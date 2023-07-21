@@ -56,11 +56,11 @@
         {
           "name": "trip-kit-booking-ui-2.1.43.aar",
           "url": "trip-kit-booking-ui-2.1.43.aar",
-          "size": 171815,
-          "sha512": "f9a37f52dbc30ef5783136a159e72f5fbe7a67e2b77b43e55c1611d4334d2db2917053ba7cd60ef2f93198daceda111b31bed08b495d19143bd2d55ee8138f97",
-          "sha256": "75420957f048506406a1fa8e3419aef862ce118f21b619e488e7711ec0b11ef9",
-          "sha1": "70a9f0d615a45a72140d3152b75c9142e18d7a20",
-          "md5": "82b8c58738b9b6574180036070178be0"
+          "size": 172528,
+          "sha512": "181aa39b0c1b895a6ac55162d35618730957e36b49299621624623c95ed9e4c69b2780c6272391fc952defc7a93cbc5630a4175853c7d3c27debb8cc270b1384",
+          "sha256": "f3cee1e4c42ff2f530bf4fb40333a58999373cedaae69d190271ccc88898e4a4",
+          "sha1": "36d0c6f4032e83488f2550c001d191927b2b4f6e",
+          "md5": "2b7cd3881098e02d39adeb2c1669c5ed"
         }
       ]
     },
@@ -211,11 +211,11 @@
         {
           "name": "trip-kit-booking-ui-2.1.43.aar",
           "url": "trip-kit-booking-ui-2.1.43.aar",
-          "size": 171815,
-          "sha512": "f9a37f52dbc30ef5783136a159e72f5fbe7a67e2b77b43e55c1611d4334d2db2917053ba7cd60ef2f93198daceda111b31bed08b495d19143bd2d55ee8138f97",
-          "sha256": "75420957f048506406a1fa8e3419aef862ce118f21b619e488e7711ec0b11ef9",
-          "sha1": "70a9f0d615a45a72140d3152b75c9142e18d7a20",
-          "md5": "82b8c58738b9b6574180036070178be0"
+          "size": 172528,
+          "sha512": "181aa39b0c1b895a6ac55162d35618730957e36b49299621624623c95ed9e4c69b2780c6272391fc952defc7a93cbc5630a4175853c7d3c27debb8cc270b1384",
+          "sha256": "f3cee1e4c42ff2f530bf4fb40333a58999373cedaae69d190271ccc88898e4a4",
+          "sha1": "36d0c6f4032e83488f2550c001d191927b2b4f6e",
+          "md5": "2b7cd3881098e02d39adeb2c1669c5ed"
         }
       ]
     },

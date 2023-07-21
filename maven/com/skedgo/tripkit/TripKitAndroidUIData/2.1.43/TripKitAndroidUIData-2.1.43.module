@@ -26,11 +26,11 @@
         {
           "name": "TripKitAndroidUIData-2.1.43.aar",
           "url": "TripKitAndroidUIData-2.1.43.aar",
-          "size": 142139,
-          "sha512": "4b88ffc18fd0f2c51824fa6befc4d586db6041d4270dc62d9d5f1824d9a90ec29db62e49087ff81f63a471a930a224e21b72df4bea39d52ef4a90db799d2bcf2",
-          "sha256": "bb0892b3f34f1ccfbfa91e6d101f4687d00b2cde7332daf1142218a8d9ec19ee",
-          "sha1": "d1c847c1cdb7f0ced60918650c62559169938490",
-          "md5": "8e5c76ecac9c5c1e554436e82bfddfc1"
+          "size": 142693,
+          "sha512": "7e1c48fb1b00518461edee8bfe8552ab3ee72c5c02e877b5d8346ea2ee2cde2812dd16926ceaba8b74bb445d31c0717881e6b9b35a6cfbca7e046062437b8de9",
+          "sha256": "95d52293b06e6ac0af48ef41052bed487fe4ee40c37aedede7a8e3a5c226cc9a",
+          "sha1": "ebff00bd50e1efe1e0523e64b988f70b4b08a60d",
+          "md5": "c2621a6045d6b48d1111f117f83d66aa"
         }
       ]
     },
@@ -166,7 +166,7 @@
           "group": "org.jetbrains.kotlin",
           "module": "kotlin-stdlib-jdk7",
           "version": {
-            "requires": "1.3.50"
+            "requires": "1.6.20"
           }
         },
         {
@@ -188,11 +188,11 @@
         {
           "name": "TripKitAndroidUIData-2.1.43.aar",
           "url": "TripKitAndroidUIData-2.1.43.aar",
-          "size": 142139,
-          "sha512": "4b88ffc18fd0f2c51824fa6befc4d586db6041d4270dc62d9d5f1824d9a90ec29db62e49087ff81f63a471a930a224e21b72df4bea39d52ef4a90db799d2bcf2",
-          "sha256": "bb0892b3f34f1ccfbfa91e6d101f4687d00b2cde7332daf1142218a8d9ec19ee",
-          "sha1": "d1c847c1cdb7f0ced60918650c62559169938490",
-          "md5": "8e5c76ecac9c5c1e554436e82bfddfc1"
+          "size": 142693,
+          "sha512": "7e1c48fb1b00518461edee8bfe8552ab3ee72c5c02e877b5d8346ea2ee2cde2812dd16926ceaba8b74bb445d31c0717881e6b9b35a6cfbca7e046062437b8de9",
+          "sha256": "95d52293b06e6ac0af48ef41052bed487fe4ee40c37aedede7a8e3a5c226cc9a",
+          "sha1": "ebff00bd50e1efe1e0523e64b988f70b4b08a60d",
+          "md5": "c2621a6045d6b48d1111f117f83d66aa"
         }
       ]
     },
@@ -208,11 +208,11 @@
         {
           "name": "TripKitAndroidUIData-2.1.43-sources.jar",
           "url": "TripKitAndroidUIData-2.1.43-sources.jar",
-          "size": 49963,
-          "sha512": "15957c7905a90fb233df67917d9757f23fd2c151cc24130159cce57bfb72b607debeec14ceaae76f69c5da15fac4f902874cb4a02dbfe18cb8869ba877f8d416",
-          "sha256": "729b5267b6fae9f3b6786bd830b1474d2fa213f4768f03cc15815d5f9b0d5904",
-          "sha1": "a320620ab77a54bd161550d4747bcfaf7c96f8f5",
-          "md5": "b06e86be5ceb6d9225253afda140d8b6"
+          "size": 49956,
+          "sha512": "e87d2d36ed18974fe8d4dce67114d267fcec74199ea84ffa6ba2aac01f4cb44c4fda30e43e798f9818da06a3e22d1030c78a617293a53c726e6a28d34c28c449",
+          "sha256": "1bc18bb544a2ef6b48e5e0237e0d03c486c7ad97a248a496137326992dfe14c7",
+          "sha1": "44aa96e948bc31895ac56f028760925cc7ca0379",
+          "md5": "be65dfa2393741ab500d065a7fdd72a1"
         }
       ]
     },

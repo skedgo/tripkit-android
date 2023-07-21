@@ -27,10 +27,10 @@
           "name": "TripKitDomainLegacy-2.1.43.aar",
           "url": "TripKitDomainLegacy-2.1.43.aar",
           "size": 6549,
-          "sha512": "ce1563618a58b7ba4f16604a9b0dd064d055685e98b3348f7911e006af7edb9990386741536348b6f9f1c6df350fca2cd6b9bea259675814d5f8ed3a9e3bb3a5",
-          "sha256": "ee20168772ab9ee8ff659fc4268f8015ca748ce2376f78e06152ed66ba019ed7",
-          "sha1": "bd0d582ec0be778583d84e6918f2ded050f6cb76",
-          "md5": "7a200ec2f377320cc7c50488dc019ef8"
+          "sha512": "83b203f91214c0c1791fdc77eba46306c7ab0863b558651874e15fbf0d48e5f23cacceca8fd48cf9c9c9e983fa38b4f06232a8487949a3f1531512a97fe34485",
+          "sha256": "a77892650655c6c2a71fd783f737f5dd2961f9194d636616f4333ab4a3cf6455",
+          "sha1": "6346c440b1a8e3ae242540402105f61bdbfd319e",
+          "md5": "7a50b608dc7b0cc2cda71ecc79b05851"
         }
       ]
     },
@@ -91,10 +91,10 @@
           "name": "TripKitDomainLegacy-2.1.43.aar",
           "url": "TripKitDomainLegacy-2.1.43.aar",
           "size": 6549,
-          "sha512": "ce1563618a58b7ba4f16604a9b0dd064d055685e98b3348f7911e006af7edb9990386741536348b6f9f1c6df350fca2cd6b9bea259675814d5f8ed3a9e3bb3a5",
-          "sha256": "ee20168772ab9ee8ff659fc4268f8015ca748ce2376f78e06152ed66ba019ed7",
-          "sha1": "bd0d582ec0be778583d84e6918f2ded050f6cb76",
-          "md5": "7a200ec2f377320cc7c50488dc019ef8"
+          "sha512": "83b203f91214c0c1791fdc77eba46306c7ab0863b558651874e15fbf0d48e5f23cacceca8fd48cf9c9c9e983fa38b4f06232a8487949a3f1531512a97fe34485",
+          "sha256": "a77892650655c6c2a71fd783f737f5dd2961f9194d636616f4333ab4a3cf6455",
+          "sha1": "6346c440b1a8e3ae242540402105f61bdbfd319e",
+          "md5": "7a50b608dc7b0cc2cda71ecc79b05851"
         }
       ]
     },
