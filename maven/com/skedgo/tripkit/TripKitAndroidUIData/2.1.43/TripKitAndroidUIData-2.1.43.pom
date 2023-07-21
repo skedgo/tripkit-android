@@ -135,7 +135,7 @@
     <dependency>
       <groupId>org.jetbrains.kotlin</groupId>
       <artifactId>kotlin-stdlib-jdk7</artifactId>
-      <version>1.3.50</version>
+      <version>1.6.20</version>
       <scope>compile</scope>
       <type>aar</type>
     </dependency>

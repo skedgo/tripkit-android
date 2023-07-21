@@ -26,11 +26,11 @@
         {
           "name": "route-persistence-2.1.43.aar",
           "url": "route-persistence-2.1.43.aar",
-          "size": 42071,
-          "sha512": "07dcfd8f4088cb4d047765aaf37b11be1d771e084fdbdf90c1832aa847f4b409ef575e014e8c4e6c3b4fbc5b208f0ab69a7b47115acf7dd69aedb223c45825c6",
-          "sha256": "9cb081e41a4946e300b500fa34612401128d59c18ecc9a62d7a48c1de8d95286",
-          "sha1": "95ee84a007655f26c487e1772ee9fb66913e934a",
-          "md5": "6ba98a2a20364c5a4d297c02362d58b2"
+          "size": 42160,
+          "sha512": "7a32481cc463746b4ee5c99f3fd47a93443a25b82a218a96c672fc63914191be477505a1c3870373199656940ef91189e8e6337a468c2e7a238d4f17d59d5d00",
+          "sha256": "5d439c9cfcff9aa8b803c244541f205bfd00dcd5fcb27163bd6a060b1bd4683b",
+          "sha1": "8260a2c0d2e3642cda526bfc0b98cdb832dd974f",
+          "md5": "dae386043035636a05b4b74a688749f2"
         }
       ]
     },
@@ -104,11 +104,11 @@
         {
           "name": "route-persistence-2.1.43.aar",
           "url": "route-persistence-2.1.43.aar",
-          "size": 42071,
-          "sha512": "07dcfd8f4088cb4d047765aaf37b11be1d771e084fdbdf90c1832aa847f4b409ef575e014e8c4e6c3b4fbc5b208f0ab69a7b47115acf7dd69aedb223c45825c6",
-          "sha256": "9cb081e41a4946e300b500fa34612401128d59c18ecc9a62d7a48c1de8d95286",
-          "sha1": "95ee84a007655f26c487e1772ee9fb66913e934a",
-          "md5": "6ba98a2a20364c5a4d297c02362d58b2"
+          "size": 42160,
+          "sha512": "7a32481cc463746b4ee5c99f3fd47a93443a25b82a218a96c672fc63914191be477505a1c3870373199656940ef91189e8e6337a468c2e7a238d4f17d59d5d00",
+          "sha256": "5d439c9cfcff9aa8b803c244541f205bfd00dcd5fcb27163bd6a060b1bd4683b",
+          "sha1": "8260a2c0d2e3642cda526bfc0b98cdb832dd974f",
+          "md5": "dae386043035636a05b4b74a688749f2"
         }
       ]
     },
@@ -144,11 +144,11 @@
         {
           "name": "route-persistence-2.1.43-javadoc.jar",
           "url": "route-persistence-2.1.43-javadoc.jar",
-          "size": 308603,
-          "sha512": "d8a52f5b942a472ebb0729e5b3773c538ba8bc318cae21657dffe014f4121601b2e678583f44a01885208987fa6cb14958c7d001f13fef2045cdc2a444b05251",
-          "sha256": "118aebda2fe13037759d218aa4738b11edafd97fc20037ffc7612942f5223919",
-          "sha1": "f8f9dffb76e5837203f63db77e026c859ea79af8",
-          "md5": "ca2c438b21cd94a583b78545c56a4517"
+          "size": 308599,
+          "sha512": "5412ebbec5bb338ddc931e65531117f53ae779cd73885808e427dbc1efa2ad11203561cb1e58a3d78c5c17c1d5bf99fad3497dc4c545f2aa1ee9771da2da2c34",
+          "sha256": "500cd69e3b88ccbc8491f9f57d1795c19aee3189b0434e74d1650107ccd0aa73",
+          "sha1": "0285ca6eb1f27d94dfd0fc65c53be646ba1729a9",
+          "md5": "386bb94ee97a0ffdae27dbc8db7c7445"
         }
       ]
     }

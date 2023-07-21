@@ -26,11 +26,11 @@
         {
           "name": "trip-kit-booking-2.1.43.aar",
           "url": "trip-kit-booking-2.1.43.aar",
-          "size": 214456,
-          "sha512": "45d4e9865eecdbd3b115e26b78657d83478a0516a7bdd8bdb7c683a7c8e089a48d207d03713df87f108b6c8f7f7affe3072e9d4092c3afc06323f85490696cb4",
-          "sha256": "ac8da60300e28627fa164d2cdd63ce01f3ea30a5a4f59a85cf6f695e79591343",
-          "sha1": "b821c2333bb3ae668dcafc98dde1cfe3cac7d971",
-          "md5": "e62f0874b17188c632b9e87d5096c58b"
+          "size": 215793,
+          "sha512": "4c6a03a35d1f71814afcace70bd21558dcbf632099a4329738b5f8ef898f60bec1bca4cd5d14ed0cfc1c9688fe0d147c9c1aa197556b5cc20cc2379a6fc028d6",
+          "sha256": "e24b2fa17196f8a57b48233b6b4a2a88b44d6e2d4494e695df01d6aa3b999aa0",
+          "sha1": "1a52669ca7e3127a1b0d01b0c89eed2a7c555afd",
+          "md5": "82e7f24796e07275492da6603f9f90d2"
         }
       ]
     },
@@ -146,11 +146,11 @@
         {
           "name": "trip-kit-booking-2.1.43.aar",
           "url": "trip-kit-booking-2.1.43.aar",
-          "size": 214456,
-          "sha512": "45d4e9865eecdbd3b115e26b78657d83478a0516a7bdd8bdb7c683a7c8e089a48d207d03713df87f108b6c8f7f7affe3072e9d4092c3afc06323f85490696cb4",
-          "sha256": "ac8da60300e28627fa164d2cdd63ce01f3ea30a5a4f59a85cf6f695e79591343",
-          "sha1": "b821c2333bb3ae668dcafc98dde1cfe3cac7d971",
-          "md5": "e62f0874b17188c632b9e87d5096c58b"
+          "size": 215793,
+          "sha512": "4c6a03a35d1f71814afcace70bd21558dcbf632099a4329738b5f8ef898f60bec1bca4cd5d14ed0cfc1c9688fe0d147c9c1aa197556b5cc20cc2379a6fc028d6",
+          "sha256": "e24b2fa17196f8a57b48233b6b4a2a88b44d6e2d4494e695df01d6aa3b999aa0",
+          "sha1": "1a52669ca7e3127a1b0d01b0c89eed2a7c555afd",
+          "md5": "82e7f24796e07275492da6603f9f90d2"
         }
       ]
     },
@@ -166,11 +166,11 @@
         {
           "name": "trip-kit-booking-2.1.43-sources.jar",
           "url": "trip-kit-booking-2.1.43-sources.jar",
-          "size": 83125,
-          "sha512": "eb74bcbb4983ea98efc2ad3830b20c097aa7d79ed41abab4267d5e3c71d5a60056ee10fc8e648d9a6c8d934827aed6eab09cd4eadc716d77236f83fd76a2cccf",
-          "sha256": "01f2d0a5c8846947f795382935b79561c5596203a72423c7922d6b9d6bf718f0",
-          "sha1": "8ad0271592d9d1834876c0179e9a0e4db53960e4",
-          "md5": "7632178f75f59d26c6d01f7d45a9af01"
+          "size": 83088,
+          "sha512": "08d658efbacf553a091b95c7c0cf5f632ff28ca2117925dcf336bfd537b0b078280932765d76574624d3b919513e54925fe3517d930d95571aca17b67aa161c6",
+          "sha256": "f2c96d810426865e6da258e67c6621a02c6dc46cf63fc7678f261835fed29aa4",
+          "sha1": "bcb9f214e3a46b405ef3c34e3c1ac0f0fba1c270",
+          "md5": "7f8d5ad6d4122f2b3626181472549a50"
         }
       ]
     },
@@ -186,11 +186,11 @@
         {
           "name": "trip-kit-booking-2.1.43-javadoc.jar",
           "url": "trip-kit-booking-2.1.43-javadoc.jar",
-          "size": 721079,
-          "sha512": "782535d4be3196761e378821c6febd2fe273a91cb73660fe0c2abae24997a10f11044ffee5d5128b3ccf4f96e5976e927d1d78fc3560d9ad38ee41d083a8c565",
-          "sha256": "cb91225b367e1792d30514f55f0abb9c56dbf5ec6c91087f3a058f0547ab3b2c",
-          "sha1": "da65d98c0043403ef5e37d82b877cb2717f87f6b",
-          "md5": "89cf1a9cb01498ef644aedbb5c597473"
+          "size": 721078,
+          "sha512": "96ae797acf297e4e412625c64e0e46840b680435947cf1791604447aa9525a41a054fa4144b9a0ed9aeb672cde3cf545221a77c48ca61fafa06bd6d8f729d8b9",
+          "sha256": "bbf88032e7c1fcb32677c35fe5b917e3a4a48715ddb2681d2915120bf789b9ea",
+          "sha1": "5e5ca27e736638b09f010823af8ab3fdc18eda83",
+          "md5": "a34c36449ff61629754f84f0fb304d6e"
         }
       ]
     }

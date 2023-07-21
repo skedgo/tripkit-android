@@ -26,11 +26,11 @@
         {
           "name": "ValidBookingCountData-2.1.43.aar",
           "url": "ValidBookingCountData-2.1.43.aar",
-          "size": 13940,
-          "sha512": "cdd2af1126685d3c59f575e057291bcd987b7bce4661dc65db2e42465423ffe8a7e9a4da0b5f8d36634fdb4aad48cc0307b3e9a2d5c436c769c9de2d440719f8",
-          "sha256": "e55001fd9fb5befa05d9330e4a621bf089f16f6956bd73f21e80488d12f2a7b4",
-          "sha1": "3d01f4427ae47ffb61667b1ee6581927cd91113b",
-          "md5": "32b66ad393a25ce214331f2e312aa577"
+          "size": 13975,
+          "sha512": "7186643a9c76c14fa82739a6b34b049aba22ce695a54b394d926538b3ca8dcc799fd71c1abaf823ca4780aa6f986ebcab56686c115e3d61b48578127a1037e76",
+          "sha256": "ab02286143d64be3b56d671be0ebac631583c156607e1ac9ff9ff60178df51f1",
+          "sha1": "acb3fc48dffcb5bee19e7d96c323d336da1de2a7",
+          "md5": "29527a76faa42ab127e2f98421ccc3e9"
         }
       ]
     },
@@ -125,11 +125,11 @@
         {
           "name": "ValidBookingCountData-2.1.43.aar",
           "url": "ValidBookingCountData-2.1.43.aar",
-          "size": 13940,
-          "sha512": "cdd2af1126685d3c59f575e057291bcd987b7bce4661dc65db2e42465423ffe8a7e9a4da0b5f8d36634fdb4aad48cc0307b3e9a2d5c436c769c9de2d440719f8",
-          "sha256": "e55001fd9fb5befa05d9330e4a621bf089f16f6956bd73f21e80488d12f2a7b4",
-          "sha1": "3d01f4427ae47ffb61667b1ee6581927cd91113b",
-          "md5": "32b66ad393a25ce214331f2e312aa577"
+          "size": 13975,
+          "sha512": "7186643a9c76c14fa82739a6b34b049aba22ce695a54b394d926538b3ca8dcc799fd71c1abaf823ca4780aa6f986ebcab56686c115e3d61b48578127a1037e76",
+          "sha256": "ab02286143d64be3b56d671be0ebac631583c156607e1ac9ff9ff60178df51f1",
+          "sha1": "acb3fc48dffcb5bee19e7d96c323d336da1de2a7",
+          "md5": "29527a76faa42ab127e2f98421ccc3e9"
         }
       ]
     },
