@@ -20,7 +20,7 @@ Then, in app's build file, add `TripKitAndroid` dependency into dependencies sec
 
 ```groovy
 dependencies {
-  implementation 'com.github.skedgo.tripkit-android:TripKitAndroid:<insert-newest-version-here>'
+  implementation 'com.github.skedgo:tripkit-android:<insert-newest-version-here>'
 }
 ```
 [![Release](https://jitpack.io/v/skedgo/tripkit-android.svg)](https://jitpack.io/#skedgo/tripkit-android)
@@ -41,6 +41,14 @@ android {
 }
 ```
 
+Add `android.enableJetifier=true` on your `gradle.properties` file
+
+```groovy
+android.useAndroidX=true
+....
+android.enableJetifier=true
+```
+
 ##### Get an API key
 
 An API key is necessary to use TripKit's services, such as A-2-B routing, and all-day routing. In order to obtain an API key, you can sign up at [https://tripgo.3scale.net](https://tripgo.3scale.net/).
@@ -54,7 +62,6 @@ for `>= v2.1.43`
 class App : Application() {
   override fun onCreate() {
     super.onCreate()
-    JodaTimeAndroid.init(this)
     
     TripKitConfigs.builder().context(this)
             .debuggable(true)          
