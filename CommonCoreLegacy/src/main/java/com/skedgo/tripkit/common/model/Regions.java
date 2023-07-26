@@ -59,7 +59,7 @@ public final class Regions {
                 setTransportModeIds(new ArrayList<>(unionModeIds));
             }
 
-            final ArrayList<String> departureUrls = departureRegion.getURLs(null);
+            final ArrayList<String> departureUrls = departureRegion.getURLs();
             if (departureUrls != null) {
                 setURLs(new ArrayList<>(departureUrls));
             }

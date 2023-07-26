@@ -26,7 +26,7 @@ final class LocationInfoServiceImpl implements LocationInfoService {
     @Override
     public Observable<LocationInfo> getLocationInfoAsync(final Location location) {
         return regionService.getRegionByLocationAsync(location)
-                .flatMap((Function<Region, Observable<String>>) region -> Observable.fromIterable(region.getURLs(HttpClientCustomDataStore.INSTANCE.getCustomBaseUrl())))
+                .flatMap((Function<Region, Observable<String>>) region -> Observable.fromIterable(region.getURLs()))
                 .concatMap((Function<String, Observable<LocationInfo>>) baseUrl -> {
                     final String url = HttpUrl.parse(baseUrl).newBuilder()
                             .addPathSegment("locationInfo.json")

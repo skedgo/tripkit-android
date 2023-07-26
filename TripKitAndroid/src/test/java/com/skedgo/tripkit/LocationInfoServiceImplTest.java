@@ -41,7 +41,7 @@ public class LocationInfoServiceImplTest {
 
   @Test public void fetchLocationInfoByRegionUrl() {
     final Region region = mock(Region.class);
-    when(region.getURLs(null))
+    when(region.getURLs())
         .thenReturn(new ArrayList<>(singletonList("https://sydney-au-nsw-sydney.tripgo.skedgo.com/satapp")));
     when(regionService.getRegionByLocationAsync(any(Location.class)))
         .thenReturn(Observable.just(region));
@@ -63,7 +63,7 @@ public class LocationInfoServiceImplTest {
 
   @Test public void fetchLocationInfoByRegionUrls() {
     final Region region = mock(Region.class);
-    when(region.getURLs(null)).thenReturn(new ArrayList<>(Arrays.asList(
+    when(region.getURLs()).thenReturn(new ArrayList<>(Arrays.asList(
         "https://sydney-au-nsw-sydney.tripgo.skedgo.com/satapp",
         "https://inflationary-au-nsw-sydney.tripgo.skedgo.com/satapp",
         "https://hadron-fr-b-bordeaux.tripgo.skedgo.com/satapp"

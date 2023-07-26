@@ -10,14 +10,36 @@
   },
   "createdBy": {
     "gradle": {
-      "version": "6.5",
-      "buildId": "nuokvjxkwfd4rhiktdasixy4we"
+      "version": "7.6"
     }
   },
   "variants": [
     {
-      "name": "runtime",
+      "name": "releaseVariantReleaseApiPublication",
       "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.libraryelements": "aar",
+        "org.gradle.usage": "java-api"
+      },
+      "files": [
+        {
+          "name": "route-persistence-2.1.43.aar",
+          "url": "route-persistence-2.1.43.aar",
+          "size": 42160,
+          "sha512": "7a32481cc463746b4ee5c99f3fd47a93443a25b82a218a96c672fc63914191be477505a1c3870373199656940ef91189e8e6337a468c2e7a238d4f17d59d5d00",
+          "sha256": "5d439c9cfcff9aa8b803c244541f205bfd00dcd5fcb27163bd6a060b1bd4683b",
+          "sha1": "8260a2c0d2e3642cda526bfc0b98cdb832dd974f",
+          "md5": "dae386043035636a05b4b74a688749f2"
+        }
+      ]
+    },
+    {
+      "name": "releaseVariantReleaseRuntimePublication",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.libraryelements": "aar",
         "org.gradle.usage": "java-runtime"
       },
       "dependencies": [
@@ -36,6 +58,13 @@
           }
         },
         {
+          "group": "com.skedgo.tripkit",
+          "module": "TripKitDomain",
+          "version": {
+            "requires": "2.1.43"
+          }
+        },
+        {
           "group": "androidx.appcompat",
           "module": "appcompat",
           "version": {
@@ -46,7 +75,7 @@
           "group": "com.google.code.gson",
           "module": "gson",
           "version": {
-            "requires": "2.8.6"
+            "requires": "2.8.8"
           }
         },
         {
@@ -57,17 +86,10 @@
           }
         },
         {
-          "group": "com.skedgo.tripkit",
-          "module": "TripKitDomain",
-          "version": {
-            "requires": "2.1.43"
-          }
-        },
-        {
           "group": "org.jetbrains.kotlin",
           "module": "kotlin-stdlib",
           "version": {
-            "requires": "1.4.10"
+            "requires": "1.6.20"
           }
         },
         {
@@ -82,28 +104,51 @@
         {
           "name": "route-persistence-2.1.43.aar",
           "url": "route-persistence-2.1.43.aar",
-          "size": 62909,
-          "sha512": "d0593518810c9d4fc76c04439002f0314edbbe579d07bf77ad034d489ecb5639f9e214ed7fdabd5f05fb7fe413c225ac70c3a1533a4aa5b587191a42c5278755",
-          "sha256": "89a104568a0a9a70b0777179403342d1e6294cf8f1b6d21d81b06d0ef6fcfec2",
-          "sha1": "c7267f66f05faf768e32fe4a66413e6e65b19ba7",
-          "md5": "bd5b07b0dceb5c7023574744639bf4cd"
+          "size": 42160,
+          "sha512": "7a32481cc463746b4ee5c99f3fd47a93443a25b82a218a96c672fc63914191be477505a1c3870373199656940ef91189e8e6337a468c2e7a238d4f17d59d5d00",
+          "sha256": "5d439c9cfcff9aa8b803c244541f205bfd00dcd5fcb27163bd6a060b1bd4683b",
+          "sha1": "8260a2c0d2e3642cda526bfc0b98cdb832dd974f",
+          "md5": "dae386043035636a05b4b74a688749f2"
         }
       ]
     },
     {
-      "name": "api",
+      "name": "releaseVariantReleaseSourcePublication",
       "attributes": {
-        "org.gradle.usage": "java-api"
+        "org.gradle.category": "documentation",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.docstype": "sources",
+        "org.gradle.usage": "java-runtime"
       },
       "files": [
         {
-          "name": "route-persistence-2.1.43.aar",
-          "url": "route-persistence-2.1.43.aar",
-          "size": 62909,
-          "sha512": "d0593518810c9d4fc76c04439002f0314edbbe579d07bf77ad034d489ecb5639f9e214ed7fdabd5f05fb7fe413c225ac70c3a1533a4aa5b587191a42c5278755",
-          "sha256": "89a104568a0a9a70b0777179403342d1e6294cf8f1b6d21d81b06d0ef6fcfec2",
-          "sha1": "c7267f66f05faf768e32fe4a66413e6e65b19ba7",
-          "md5": "bd5b07b0dceb5c7023574744639bf4cd"
+          "name": "route-persistence-2.1.43-sources.jar",
+          "url": "route-persistence-2.1.43-sources.jar",
+          "size": 11494,
+          "sha512": "cdfb7857b3f50bdfb43111b4cb646cc58e809b88565a9091eeab3b6132dfa1979430afd583be88446826274d300e7d9bbf03517daaf002397473ddc90228bd4a",
+          "sha256": "e0fc0cc63f14e68378835def6b310f01894dcd5c997bf8093b088b9ada6d8551",
+          "sha1": "5e20974180ac23cce1630061391c3715858bed64",
+          "md5": "c392b6ae0657a891db01f546d7b6cd68"
+        }
+      ]
+    },
+    {
+      "name": "releaseVariantReleaseJavaDocPublication",
+      "attributes": {
+        "org.gradle.category": "documentation",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.docstype": "javadoc",
+        "org.gradle.usage": "java-runtime"
+      },
+      "files": [
+        {
+          "name": "route-persistence-2.1.43-javadoc.jar",
+          "url": "route-persistence-2.1.43-javadoc.jar",
+          "size": 308599,
+          "sha512": "5412ebbec5bb338ddc931e65531117f53ae779cd73885808e427dbc1efa2ad11203561cb1e58a3d78c5c17c1d5bf99fad3497dc4c545f2aa1ee9771da2da2c34",
+          "sha256": "500cd69e3b88ccbc8491f9f57d1795c19aee3189b0434e74d1650107ccd0aa73",
+          "sha1": "0285ca6eb1f27d94dfd0fc65c53be646ba1729a9",
+          "md5": "386bb94ee97a0ffdae27dbc8db7c7445"
         }
       ]
     }

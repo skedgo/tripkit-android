@@ -10,38 +10,69 @@
   },
   "createdBy": {
     "gradle": {
-      "version": "6.5",
-      "buildId": "yp6ijz5u7ncvnftrmwq5p3tuf4"
+      "version": "7.6"
     }
   },
   "variants": [
     {
-      "name": "runtime",
+      "name": "releaseVariantReleaseApiPublication",
       "attributes": {
-        "org.gradle.usage": "java-runtime"
+        "org.gradle.category": "library",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.libraryelements": "aar",
+        "org.gradle.usage": "java-api"
       },
       "dependencies": [
         {
           "group": "androidx.databinding",
           "module": "databinding-common",
           "version": {
-            "requires": "4.0.1"
+            "requires": "7.3.0"
           }
         },
         {
           "group": "androidx.databinding",
           "module": "databinding-runtime",
           "version": {
-            "requires": "4.0.1"
+            "requires": "7.3.0"
           }
         },
         {
           "group": "androidx.databinding",
           "module": "databinding-adapters",
           "version": {
-            "requires": "4.0.1"
+            "requires": "7.3.0"
           }
         },
+        {
+          "group": "androidx.databinding",
+          "module": "databinding-ktx",
+          "version": {
+            "requires": "7.3.0"
+          }
+        }
+      ],
+      "files": [
+        {
+          "name": "trip-kit-booking-ui-2.1.43.aar",
+          "url": "trip-kit-booking-ui-2.1.43.aar",
+          "size": 172528,
+          "sha512": "181aa39b0c1b895a6ac55162d35618730957e36b49299621624623c95ed9e4c69b2780c6272391fc952defc7a93cbc5630a4175853c7d3c27debb8cc270b1384",
+          "sha256": "f3cee1e4c42ff2f530bf4fb40333a58999373cedaae69d190271ccc88898e4a4",
+          "sha1": "36d0c6f4032e83488f2550c001d191927b2b4f6e",
+          "md5": "2b7cd3881098e02d39adeb2c1669c5ed"
+        }
+      ]
+    },
+    {
+      "name": "releaseVariantReleaseRuntimePublication",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.libraryelements": "aar",
+        "org.gradle.usage": "java-runtime"
+      },
+      "dependencies": [
         {
           "group": "com.skedgo.tripkit",
           "module": "TripKitAndroid",
@@ -61,6 +92,41 @@
           "module": "trip-kit-booking",
           "version": {
             "requires": "2.1.43"
+          }
+        },
+        {
+          "group": "com.skedgo.tripkit",
+          "module": "rxlifecyclecomponents",
+          "version": {
+            "requires": "2.1.43"
+          }
+        },
+        {
+          "group": "androidx.databinding",
+          "module": "databinding-common",
+          "version": {
+            "requires": "7.3.0"
+          }
+        },
+        {
+          "group": "androidx.databinding",
+          "module": "databinding-runtime",
+          "version": {
+            "requires": "7.3.0"
+          }
+        },
+        {
+          "group": "androidx.databinding",
+          "module": "databinding-adapters",
+          "version": {
+            "requires": "7.3.0"
+          }
+        },
+        {
+          "group": "androidx.databinding",
+          "module": "databinding-ktx",
+          "version": {
+            "requires": "7.3.0"
           }
         },
         {
@@ -113,24 +179,17 @@
           }
         },
         {
-          "group": "com.skedgo.tripkit",
-          "module": "rxlifecyclecomponents",
-          "version": {
-            "requires": "2.1.43"
-          }
-        },
-        {
           "group": "org.jetbrains.kotlin",
           "module": "kotlin-stdlib",
           "version": {
-            "requires": "1.4.10"
+            "requires": "1.6.20"
           }
         },
         {
           "group": "com.google.code.gson",
           "module": "gson",
           "version": {
-            "requires": "2.8.6"
+            "requires": "2.8.8"
           }
         },
         {
@@ -150,89 +209,53 @@
       ],
       "files": [
         {
-          "name": "trip-kit-booking-ui-2.1.43-sources.jar",
-          "url": "trip-kit-booking-ui-2.1.43-sources.jar",
-          "size": 17132,
-          "sha512": "a5cef7be340e1a897f6a0358c5276ffcb2777e8c8de5d9fa768e191778143190d7aca2257b6749cf57372b80f603b4356388b1e723bd7daf6791fe2def3d70bf",
-          "sha256": "5a8f65bebc5bf907de617e0ed46660fd4616e445c8d4303d14f3d4a9552d570c",
-          "sha1": "8937cf06e68b29b07533e6aed33ae63468f206d2",
-          "md5": "a261aaa38c45e88216330497e55329c3"
-        },
-        {
-          "name": "trip-kit-booking-ui-2.1.43-javadoc.jar",
-          "url": "trip-kit-booking-ui-2.1.43-javadoc.jar",
-          "size": 23330,
-          "sha512": "4c7a9aa7cb0f15a8bdfbf0f5bb1af60280d44a341a01043118a1edce3e249d8a885a237c7e6017d7903ce5f6b1792ced315dcfa886de188c73a7efafa7a40877",
-          "sha256": "484dd088076589a431cfda38792e51e16a4ad8282b88fdd4beb71264b6644113",
-          "sha1": "77ef3b74a05aadf64bd80f00a7ab52e97ceeb529",
-          "md5": "f482fbfe4ce7fea46f88144a22b93baf"
-        },
-        {
           "name": "trip-kit-booking-ui-2.1.43.aar",
           "url": "trip-kit-booking-ui-2.1.43.aar",
-          "size": 193796,
-          "sha512": "fc2129587ba559a60a3e61eb680fbbdce581c51489244a8f146b5dc05991560ea3fcd312c6fab35308f10f19e10c9eceda483345955b659e39a37085b98efec0",
-          "sha256": "3233ace941e1dc2573ab4a9fb79014f79a6067248e111bcd3a2e7ff8f8404002",
-          "sha1": "646c50c7751bda785a433c16f580b11c9227deeb",
-          "md5": "0b4f872f939bc2d0bcfebfb33d10fd3c"
+          "size": 172528,
+          "sha512": "181aa39b0c1b895a6ac55162d35618730957e36b49299621624623c95ed9e4c69b2780c6272391fc952defc7a93cbc5630a4175853c7d3c27debb8cc270b1384",
+          "sha256": "f3cee1e4c42ff2f530bf4fb40333a58999373cedaae69d190271ccc88898e4a4",
+          "sha1": "36d0c6f4032e83488f2550c001d191927b2b4f6e",
+          "md5": "2b7cd3881098e02d39adeb2c1669c5ed"
         }
       ]
     },
     {
-      "name": "api",
+      "name": "releaseVariantReleaseSourcePublication",
       "attributes": {
-        "org.gradle.usage": "java-api"
+        "org.gradle.category": "documentation",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.docstype": "sources",
+        "org.gradle.usage": "java-runtime"
       },
-      "dependencies": [
-        {
-          "group": "androidx.databinding",
-          "module": "databinding-common",
-          "version": {
-            "requires": "4.0.1"
-          }
-        },
-        {
-          "group": "androidx.databinding",
-          "module": "databinding-runtime",
-          "version": {
-            "requires": "4.0.1"
-          }
-        },
-        {
-          "group": "androidx.databinding",
-          "module": "databinding-adapters",
-          "version": {
-            "requires": "4.0.1"
-          }
-        }
-      ],
       "files": [
         {
           "name": "trip-kit-booking-ui-2.1.43-sources.jar",
           "url": "trip-kit-booking-ui-2.1.43-sources.jar",
-          "size": 17132,
-          "sha512": "a5cef7be340e1a897f6a0358c5276ffcb2777e8c8de5d9fa768e191778143190d7aca2257b6749cf57372b80f603b4356388b1e723bd7daf6791fe2def3d70bf",
-          "sha256": "5a8f65bebc5bf907de617e0ed46660fd4616e445c8d4303d14f3d4a9552d570c",
-          "sha1": "8937cf06e68b29b07533e6aed33ae63468f206d2",
-          "md5": "a261aaa38c45e88216330497e55329c3"
-        },
+          "size": 56678,
+          "sha512": "8547a2fab6c06113f6c055bfc8956ad8c502fe75b3a505e3731524c07fda572e2df87aa932d00ccf65c623e70714a11eb77c4005c15424b2a03c512afba9a25a",
+          "sha256": "fd0fd1f4fa420c087d1b8fb7d547884149e21021433daaace86558113c468122",
+          "sha1": "72689d9b2e58eed819984b0dbaa4205dd3e9cdb6",
+          "md5": "35254180dde32e6b3adc62c12989409e"
+        }
+      ]
+    },
+    {
+      "name": "releaseVariantReleaseJavaDocPublication",
+      "attributes": {
+        "org.gradle.category": "documentation",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.docstype": "javadoc",
+        "org.gradle.usage": "java-runtime"
+      },
+      "files": [
         {
           "name": "trip-kit-booking-ui-2.1.43-javadoc.jar",
           "url": "trip-kit-booking-ui-2.1.43-javadoc.jar",
-          "size": 23330,
-          "sha512": "4c7a9aa7cb0f15a8bdfbf0f5bb1af60280d44a341a01043118a1edce3e249d8a885a237c7e6017d7903ce5f6b1792ced315dcfa886de188c73a7efafa7a40877",
-          "sha256": "484dd088076589a431cfda38792e51e16a4ad8282b88fdd4beb71264b6644113",
-          "sha1": "77ef3b74a05aadf64bd80f00a7ab52e97ceeb529",
-          "md5": "f482fbfe4ce7fea46f88144a22b93baf"
-        },
-        {
-          "name": "trip-kit-booking-ui-2.1.43.aar",
-          "url": "trip-kit-booking-ui-2.1.43.aar",
-          "size": 193796,
-          "sha512": "fc2129587ba559a60a3e61eb680fbbdce581c51489244a8f146b5dc05991560ea3fcd312c6fab35308f10f19e10c9eceda483345955b659e39a37085b98efec0",
-          "sha256": "3233ace941e1dc2573ab4a9fb79014f79a6067248e111bcd3a2e7ff8f8404002",
-          "sha1": "646c50c7751bda785a433c16f580b11c9227deeb",
-          "md5": "0b4f872f939bc2d0bcfebfb33d10fd3c"
+          "size": 596439,
+          "sha512": "e14fd6dca03f1f5b67c1da8c470b9904b3fe6e8e4d356a27a9d7586631cd6d64ced86be1545ee4fad2de3d6b940e8f231f2f1bec6cd57067fea9f0d6290b2c62",
+          "sha256": "2bb02e80ccbb5f21c45cd96e2d92dd9203898b900af7d8e5487e047b63f2bb62",
+          "sha1": "737b438232eed5e35f542b99954d1b3e4c6facb1",
+          "md5": "c64ea1c9a4e7b456adf12026d3331416"
         }
       ]
     }

@@ -56,9 +56,9 @@ public class RegionTest {
     assertThat(actual.getEncodedPolyline()).isEqualTo(expected.getEncodedPolyline());
     assertEquals(expected.getName(), actual.getName());
     assertEquals(expected.getTimezone(), actual.getTimezone());
-    assertThat(actual.getURLs(null))
+    assertThat(actual.getURLs())
         .describedAs("Parcel urls properly yet?")
-        .containsExactlyElementsOf(expected.getURLs(null));
+        .containsExactlyElementsOf(expected.getURLs());
     assertThat(actual.getTransportModeIds())
         .describedAs("Parcel modes properly yet?")
         .containsExactlyElementsOf(expected.getTransportModeIds());

@@ -10,31 +10,19 @@
   },
   "createdBy": {
     "gradle": {
-      "version": "6.5",
-      "buildId": "ih6bukwueraohizdpl4pelcqhe"
+      "version": "7.6"
     }
   },
   "variants": [
     {
-      "name": "runtime",
+      "name": "releaseVariantReleaseApiPublication",
       "attributes": {
-        "org.gradle.usage": "java-runtime"
+        "org.gradle.category": "library",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.libraryelements": "aar",
+        "org.gradle.usage": "java-api"
       },
       "dependencies": [
-        {
-          "group": "com.uber.rxdogtag",
-          "module": "rxdogtag",
-          "version": {
-            "requires": "0.3.0"
-          }
-        },
-        {
-          "group": "androidx.cardview",
-          "module": "cardview",
-          "version": {
-            "requires": "1.0.0"
-          }
-        },
         {
           "group": "com.skedgo.tripkit",
           "module": "trip-kit-booking",
@@ -64,38 +52,151 @@
           }
         },
         {
+          "group": "com.uber.rxdogtag",
+          "module": "rxdogtag",
+          "version": {
+            "requires": "0.3.0"
+          }
+        },
+        {
+          "group": "androidx.cardview",
+          "module": "cardview",
+          "version": {
+            "requires": "1.0.0"
+          }
+        },
+        {
           "group": "androidx.databinding",
           "module": "databinding-common",
           "version": {
-            "requires": "4.0.1"
+            "requires": "7.3.0"
           }
         },
         {
           "group": "androidx.databinding",
           "module": "databinding-runtime",
           "version": {
-            "requires": "4.0.1"
+            "requires": "7.3.0"
           }
         },
         {
           "group": "androidx.databinding",
           "module": "databinding-adapters",
           "version": {
-            "requires": "4.0.1"
+            "requires": "7.3.0"
+          }
+        },
+        {
+          "group": "androidx.databinding",
+          "module": "databinding-ktx",
+          "version": {
+            "requires": "7.3.0"
+          }
+        }
+      ],
+      "files": [
+        {
+          "name": "TripKitAndroidUI-2.1.43.aar",
+          "url": "TripKitAndroidUI-2.1.43.aar",
+          "size": 2814604,
+          "sha512": "af9b7f87e1e0b66e7a019c7a08cd604dea1c9e9638efe0fecacba249db80fa3e584a083354975d62acf1fa0eeccdd93c68933d49599288d2dfd9f737f40e9bf8",
+          "sha256": "7e2ea03135765c5b96a407af3b9591fc7fcd7b9638e21bac16d27254edc236f2",
+          "sha1": "5775e6bff9d75f6e850a190454f5320fdb899b0f",
+          "md5": "470e953b43c6d0549a6e584de430566a"
+        }
+      ]
+    },
+    {
+      "name": "releaseVariantReleaseRuntimePublication",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.libraryelements": "aar",
+        "org.gradle.usage": "java-runtime"
+      },
+      "dependencies": [
+        {
+          "group": "com.skedgo.tripkit",
+          "module": "trip-kit-booking",
+          "version": {
+            "requires": "2.1.43"
+          }
+        },
+        {
+          "group": "com.skedgo.tripkit",
+          "module": "TripKitAndroid",
+          "version": {
+            "requires": "2.1.43"
+          }
+        },
+        {
+          "group": "com.skedgo.tripkit",
+          "module": "TripKitAndroidUIData",
+          "version": {
+            "requires": "2.1.43"
+          }
+        },
+        {
+          "group": "com.skedgo.tripkit",
+          "module": "TripKitAndroidUIDomain",
+          "version": {
+            "requires": "2.1.43"
+          }
+        },
+        {
+          "group": "com.uber.rxdogtag",
+          "module": "rxdogtag",
+          "version": {
+            "requires": "0.3.0"
+          }
+        },
+        {
+          "group": "androidx.cardview",
+          "module": "cardview",
+          "version": {
+            "requires": "1.0.0"
+          }
+        },
+        {
+          "group": "androidx.databinding",
+          "module": "databinding-common",
+          "version": {
+            "requires": "7.3.0"
+          }
+        },
+        {
+          "group": "androidx.databinding",
+          "module": "databinding-runtime",
+          "version": {
+            "requires": "7.3.0"
+          }
+        },
+        {
+          "group": "androidx.databinding",
+          "module": "databinding-adapters",
+          "version": {
+            "requires": "7.3.0"
+          }
+        },
+        {
+          "group": "androidx.databinding",
+          "module": "databinding-ktx",
+          "version": {
+            "requires": "7.3.0"
           }
         },
         {
           "group": "org.jetbrains.kotlin",
           "module": "kotlin-android-extensions-runtime",
           "version": {
-            "requires": "1.4.10"
+            "requires": "1.6.20"
           }
         },
         {
           "group": "org.jetbrains.kotlin",
           "module": "kotlin-stdlib",
           "version": {
-            "requires": "1.3.50"
+            "requires": "1.6.20"
           }
         },
         {
@@ -110,13 +211,6 @@
           "module": "koptional",
           "version": {
             "requires": "1.2.0"
-          }
-        },
-        {
-          "group": "org.jetbrains.kotlin",
-          "module": "kotlin-stdlib",
-          "version": {
-            "requires": "1.4.10"
           }
         },
         {
@@ -179,21 +273,42 @@
           "group": "androidx.room",
           "module": "room-runtime",
           "version": {
-            "requires": "2.2.5"
+            "requires": "2.4.1"
           }
         },
         {
           "group": "androidx.room",
           "module": "room-rxjava2",
           "version": {
-            "requires": "2.2.5"
+            "requires": "2.4.1"
           }
         },
         {
           "group": "androidx.room",
           "module": "room-ktx",
           "version": {
-            "requires": "2.2.5"
+            "requires": "2.4.1"
+          }
+        },
+        {
+          "group": "org.immutables",
+          "module": "value",
+          "version": {
+            "requires": "2.8.8"
+          }
+        },
+        {
+          "group": "com.google.code.gson",
+          "module": "gson",
+          "version": {
+            "requires": "2.8.8"
+          }
+        },
+        {
+          "group": "org.immutables",
+          "module": "gson",
+          "version": {
+            "requires": "2.8.8"
           }
         },
         {
@@ -333,14 +448,21 @@
           "group": "androidx.lifecycle",
           "module": "lifecycle-viewmodel-ktx",
           "version": {
-            "requires": "2.2.0"
+            "requires": "2.4.0"
+          }
+        },
+        {
+          "group": "androidx.lifecycle",
+          "module": "lifecycle-viewmodel",
+          "version": {
+            "requires": "2.4.0"
           }
         },
         {
           "group": "androidx.lifecycle",
           "module": "lifecycle-runtime-ktx",
           "version": {
-            "requires": "2.2.0"
+            "requires": "2.4.0"
           }
         },
         {
@@ -376,13 +498,6 @@
           "module": "NetworkResponseAdapter",
           "version": {
             "requires": "4.0.1"
-          }
-        },
-        {
-          "group": "org.immutables",
-          "module": "gson",
-          "version": {
-            "requires": "2.8.2"
           }
         },
         {
@@ -428,13 +543,6 @@
           }
         },
         {
-          "group": "com.google.code.gson",
-          "module": "gson",
-          "version": {
-            "requires": "2.8.6"
-          }
-        },
-        {
           "group": "com.github.AraujoJordan",
           "module": "ExcuseMe",
           "version": {
@@ -468,99 +576,64 @@
           "version": {
             "requires": "3.2.1"
           }
+        },
+        {
+          "group": "javax.annotation",
+          "module": "javax.annotation-api",
+          "version": {
+            "requires": "1.3.2"
+          }
         }
       ],
       "files": [
         {
           "name": "TripKitAndroidUI-2.1.43.aar",
           "url": "TripKitAndroidUI-2.1.43.aar",
-          "size": 3262459,
-          "sha512": "7a9bb9168abdc7c58dc9d09077dab93e26cfd26c599b17d986d55b270e87f560a3d56af1d40722adfd53b7b4a2254cd1ce856752fad271e89aeda6da931b8148",
-          "sha256": "d1eb30ce5ec1942fafa6e5374d28b4385b114edebac0d5338f25dd2b8a26e707",
-          "sha1": "c3ee9c26aef346fc01937cdb90a300a251ff3a8a",
-          "md5": "4d6c6959b520ab1e4f219e0ad1325968"
+          "size": 2814604,
+          "sha512": "af9b7f87e1e0b66e7a019c7a08cd604dea1c9e9638efe0fecacba249db80fa3e584a083354975d62acf1fa0eeccdd93c68933d49599288d2dfd9f737f40e9bf8",
+          "sha256": "7e2ea03135765c5b96a407af3b9591fc7fcd7b9638e21bac16d27254edc236f2",
+          "sha1": "5775e6bff9d75f6e850a190454f5320fdb899b0f",
+          "md5": "470e953b43c6d0549a6e584de430566a"
         }
       ]
     },
     {
-      "name": "api",
+      "name": "releaseVariantReleaseSourcePublication",
       "attributes": {
-        "org.gradle.usage": "java-api"
+        "org.gradle.category": "documentation",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.docstype": "sources",
+        "org.gradle.usage": "java-runtime"
       },
-      "dependencies": [
-        {
-          "group": "com.uber.rxdogtag",
-          "module": "rxdogtag",
-          "version": {
-            "requires": "0.3.0"
-          }
-        },
-        {
-          "group": "androidx.cardview",
-          "module": "cardview",
-          "version": {
-            "requires": "1.0.0"
-          }
-        },
-        {
-          "group": "com.skedgo.tripkit",
-          "module": "trip-kit-booking",
-          "version": {
-            "requires": "2.1.43"
-          }
-        },
-        {
-          "group": "com.skedgo.tripkit",
-          "module": "TripKitAndroid",
-          "version": {
-            "requires": "2.1.43"
-          }
-        },
-        {
-          "group": "com.skedgo.tripkit",
-          "module": "TripKitAndroidUIData",
-          "version": {
-            "requires": "2.1.43"
-          }
-        },
-        {
-          "group": "com.skedgo.tripkit",
-          "module": "TripKitAndroidUIDomain",
-          "version": {
-            "requires": "2.1.43"
-          }
-        },
-        {
-          "group": "androidx.databinding",
-          "module": "databinding-common",
-          "version": {
-            "requires": "4.0.1"
-          }
-        },
-        {
-          "group": "androidx.databinding",
-          "module": "databinding-runtime",
-          "version": {
-            "requires": "4.0.1"
-          }
-        },
-        {
-          "group": "androidx.databinding",
-          "module": "databinding-adapters",
-          "version": {
-            "requires": "4.0.1"
-          }
-        }
-      ],
       "files": [
         {
-          "name": "TripKitAndroidUI-2.1.43.aar",
-          "url": "TripKitAndroidUI-2.1.43.aar",
-          "size": 3262459,
-          "sha512": "7a9bb9168abdc7c58dc9d09077dab93e26cfd26c599b17d986d55b270e87f560a3d56af1d40722adfd53b7b4a2254cd1ce856752fad271e89aeda6da931b8148",
-          "sha256": "d1eb30ce5ec1942fafa6e5374d28b4385b114edebac0d5338f25dd2b8a26e707",
-          "sha1": "c3ee9c26aef346fc01937cdb90a300a251ff3a8a",
-          "md5": "4d6c6959b520ab1e4f219e0ad1325968"
+          "name": "TripKitAndroidUI-2.1.43-sources.jar",
+          "url": "TripKitAndroidUI-2.1.43-sources.jar",
+          "size": 882834,
+          "sha512": "6fede0c299dd02ee4076b9c658d44541c2b1835baf95f469354e0f6c3ed22d6d8a6e4bc564b460504e0378af3835ef9445a1fac5be06ad89b003c8824bb24ea6",
+          "sha256": "c22c456ab6080ce6516996c227a6aa29689328c7dc3278e861f81f9860bfdc7c",
+          "sha1": "b2e4113f310e943c7b2c4786efae6cab7194cf75",
+          "md5": "bc46264f8eba2a46dbc1dd15f531f2c9"
+        }
+      ]
+    },
+    {
+      "name": "releaseVariantReleaseJavaDocPublication",
+      "attributes": {
+        "org.gradle.category": "documentation",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.docstype": "javadoc",
+        "org.gradle.usage": "java-runtime"
+      },
+      "files": [
+        {
+          "name": "TripKitAndroidUI-2.1.43-javadoc.jar",
+          "url": "TripKitAndroidUI-2.1.43-javadoc.jar",
+          "size": 4614721,
+          "sha512": "2292c77987032cd0ca8fcd4fb48bf4474599002527ad2e342d6c60ce3f04a9a539a6e4ca749630e2653026de4ee077c5f4121c6e0489e9907489de0a4a984a82",
+          "sha256": "927f173c978ba233e47ac384beec5e4d86310b791af08d3b3757a70dd82bb113",
+          "sha1": "24b7ae179d7691bacb91b8de4ebd3bb414bcdd80",
+          "md5": "db11117f192a37b14a6dfd5a1d81a1cd"
         }
       ]
     }

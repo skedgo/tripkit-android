@@ -1,5 +1,5 @@
 apply plugin: 'com.android.library'
-apply plugin: 'digital.wup.android-maven-publish'
+apply plugin: 'maven-publish'
 
 android {
     compileSdkVersion 29
@@ -23,6 +23,13 @@ android {
         }
     }
 
+    publishing {
+        singleVariant("release") {
+            // if you don't want sources/javadoc, remove these lines
+            withSourcesJar()
+            withJavadocJar()
+        }
+    }
 }
 
 dependencies {
@@ -49,10 +56,13 @@ publishing {
     }
 
     publications {
-        mavenAar(MavenPublication) {
+        release(MavenPublication) {
             groupId = group
             version = version
-            from components.android
+            artifactId = 'sqliteutils'
+            afterEvaluate {
+                from components.release
+            }
             pom {
                 licenses {
                     license {

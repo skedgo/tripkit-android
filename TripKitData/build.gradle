@@ -1,7 +1,7 @@
 apply plugin: "com.android.library"
 // To publish via JitPack.
 // See https://jitpack.io/docs/ANDROID/.
-apply plugin: 'digital.wup.android-maven-publish'
+apply plugin: 'maven-publish'
 apply plugin: "kotlin-android"
 apply plugin: "kotlin-kapt"
 
@@ -31,6 +31,14 @@ android {
   kotlinOptions {
     jvmTarget = JavaVersion.VERSION_1_8.toString()
   }
+
+  publishing {
+    singleVariant("release") {
+      // if you don't want sources/javadoc, remove these lines
+      withSourcesJar()
+      withJavadocJar()
+    }
+  }
 }
 
 dependencies {
@@ -38,7 +46,6 @@ dependencies {
   testImplementation libs.assertjCore
   testImplementation libs.mockitoCore
   testImplementation libs.mockitoKotlin, { exclude group: "org.jetbrains.kotlin" }
-  testImplementation libs.jodaTimeTzdb
   testImplementation libs.mockWebServer
   testImplementation libs.kluent
   testImplementation libs.robolectric
@@ -47,10 +54,15 @@ dependencies {
 
   implementation 'com.github.skedgo:commons-collections:v1.0'
 
-  implementation project(":CommonCoreLegacy")
-  implementation project(":TripKitDomain")
-  implementation project(":TripKitDomainLegacy")
-  api project(":route-persistence")
+  debugImplementation project(":CommonCoreLegacy")
+  releaseImplementation project(":CommonCoreLegacy")
+  debugImplementation project(":TripKitDomain")
+  releaseImplementation project(":TripKitDomain")
+  debugImplementation project(":TripKitDomainLegacy")
+  releaseImplementation project(":TripKitDomainLegacy")
+  debugApi project(":route-persistence")
+  releaseApi project(":route-persistence")
+
   implementation libs.dagger
   implementation libs.rxjava2
   implementation libs.rxAndroid2
@@ -98,7 +110,8 @@ dependencies {
   implementation libs.javaxAnnotation
   compileOnly 'com.github.pengrad:jdk9-deps:1.0'
 
-  api project(':sqliteutils')
+  debugApi project(':sqliteutils')
+  releaseApi project(':sqliteutils')
 }
 
 kapt {
@@ -112,10 +125,13 @@ task sourcesJar(type: Jar) {
 }
 
 task javadoc(type: Javadoc) {
-  failOnError  false
-  source = android.sourceSets.main.java.sourceFiles
-  classpath += project.files(android.getBootClasspath().join(File.pathSeparator))
-  classpath += configurations.implementation
+    failOnError false
+    source = android.sourceSets.main.java.sourceFiles
+    configurations.implementation.canBeResolved = true
+    configurations.api.canBeResolved = true
+    classpath += project.files(android.getBootClasspath().join(File.pathSeparator))
+    classpath += configurations.implementation
+    classpath += configurations.api
 }
 
 // build a jar with javadoc
@@ -135,8 +151,8 @@ version = tripkitVersion
 publishing {
   repositories {
     maven {
-//      url = "file://${localMaven}"
-      url = publishMavenUrl
+      url = "file://${localMaven}"
+//      url = publishMavenUrl
       credentials {
         username = publishMavenUsername
         password = publishMavenToken
@@ -145,10 +161,13 @@ publishing {
   }
 
   publications {
-    mavenAar(MavenPublication) {
+    release(MavenPublication) {
       groupId = group
       version = version
-      from components.android
+      artifactId = 'TripKitData'
+      afterEvaluate {
+        from components.release
+      }
       pom {
         licenses {
           license {

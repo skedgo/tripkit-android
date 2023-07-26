@@ -10,29 +10,72 @@
   },
   "createdBy": {
     "gradle": {
-      "version": "6.5",
-      "buildId": "fw44k4r2z5fjdhdo27kkmcopgi"
+      "version": "7.6"
     }
   },
   "variants": [
     {
-      "name": "runtime",
+      "name": "releaseVariantReleaseApiPublication",
       "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.libraryelements": "aar",
+        "org.gradle.usage": "java-api"
+      },
+      "files": [
+        {
+          "name": "TripKitAndroidUIData-2.1.43.aar",
+          "url": "TripKitAndroidUIData-2.1.43.aar",
+          "size": 142693,
+          "sha512": "7e1c48fb1b00518461edee8bfe8552ab3ee72c5c02e877b5d8346ea2ee2cde2812dd16926ceaba8b74bb445d31c0717881e6b9b35a6cfbca7e046062437b8de9",
+          "sha256": "95d52293b06e6ac0af48ef41052bed487fe4ee40c37aedede7a8e3a5c226cc9a",
+          "sha1": "ebff00bd50e1efe1e0523e64b988f70b4b08a60d",
+          "md5": "c2621a6045d6b48d1111f117f83d66aa"
+        }
+      ]
+    },
+    {
+      "name": "releaseVariantReleaseRuntimePublication",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.libraryelements": "aar",
         "org.gradle.usage": "java-runtime"
       },
       "dependencies": [
         {
+          "group": "com.skedgo.tripkit",
+          "module": "TripKitAndroid",
+          "version": {
+            "requires": "2.1.43"
+          }
+        },
+        {
+          "group": "com.skedgo.tripkit",
+          "module": "TripKitAndroidUIDomain",
+          "version": {
+            "requires": "2.1.43"
+          }
+        },
+        {
+          "group": "com.skedgo.tripkit",
+          "module": "sqliteutils",
+          "version": {
+            "requires": "2.1.43"
+          }
+        },
+        {
           "group": "org.jetbrains.kotlin",
           "module": "kotlin-android-extensions-runtime",
           "version": {
-            "requires": "1.4.10"
+            "requires": "1.6.20"
           }
         },
         {
           "group": "org.jetbrains.kotlin",
           "module": "kotlin-stdlib",
           "version": {
-            "requires": "1.4.10"
+            "requires": "1.6.20"
           }
         },
         {
@@ -95,7 +138,7 @@
           "group": "com.google.code.gson",
           "module": "gson",
           "version": {
-            "requires": "2.8.6"
+            "requires": "2.8.8"
           }
         },
         {
@@ -109,29 +152,21 @@
           "group": "org.immutables",
           "module": "gson",
           "version": {
-            "requires": "2.8.2"
+            "requires": "2.8.8"
           }
         },
         {
-          "group": "joda-time",
-          "module": "joda-time",
+          "group": "net.danlew",
+          "module": "android.joda",
           "version": {
-            "requires": "2.9.9"
-          },
-          "thirdPartyCompatibility": {
-            "artifactSelector": {
-              "name": "joda-time",
-              "type": "jar",
-              "extension": "jar",
-              "classifier": "no-tzdb"
-            }
+            "requires": "2.10.3"
           }
         },
         {
           "group": "org.jetbrains.kotlin",
           "module": "kotlin-stdlib-jdk7",
           "version": {
-            "requires": "1.3.50"
+            "requires": "1.6.20"
           }
         },
         {
@@ -142,24 +177,10 @@
           }
         },
         {
-          "group": "com.skedgo.tripkit",
-          "module": "TripKitAndroid",
+          "group": "javax.annotation",
+          "module": "javax.annotation-api",
           "version": {
-            "requires": "2.1.43"
-          }
-        },
-        {
-          "group": "com.skedgo.tripkit",
-          "module": "TripKitAndroidUIDomain",
-          "version": {
-            "requires": "2.1.43"
-          }
-        },
-        {
-          "group": "com.skedgo.tripkit",
-          "module": "sqliteutils",
-          "version": {
-            "requires": "2.1.43"
+            "requires": "1.3.2"
           }
         }
       ],
@@ -167,28 +188,51 @@
         {
           "name": "TripKitAndroidUIData-2.1.43.aar",
           "url": "TripKitAndroidUIData-2.1.43.aar",
-          "size": 193677,
-          "sha512": "f1630c9b2a918917470a25e497a9d30301575405f5e936354a4d78e1770071870d3ecc28a390c7fe8be8015117b6fff67e4df38221be3fe57a9efe0a4f7718fc",
-          "sha256": "ef47c33fc83cf3a3ee9a60fc52f6d13fe2a89bd2953482663867ef78c98e63ae",
-          "sha1": "4f5240b1e942a04d000a1ddc2ac92363bc436a73",
-          "md5": "010c15ea111c6988af8d727e141870ef"
+          "size": 142693,
+          "sha512": "7e1c48fb1b00518461edee8bfe8552ab3ee72c5c02e877b5d8346ea2ee2cde2812dd16926ceaba8b74bb445d31c0717881e6b9b35a6cfbca7e046062437b8de9",
+          "sha256": "95d52293b06e6ac0af48ef41052bed487fe4ee40c37aedede7a8e3a5c226cc9a",
+          "sha1": "ebff00bd50e1efe1e0523e64b988f70b4b08a60d",
+          "md5": "c2621a6045d6b48d1111f117f83d66aa"
         }
       ]
     },
     {
-      "name": "api",
+      "name": "releaseVariantReleaseSourcePublication",
       "attributes": {
-        "org.gradle.usage": "java-api"
+        "org.gradle.category": "documentation",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.docstype": "sources",
+        "org.gradle.usage": "java-runtime"
       },
       "files": [
         {
-          "name": "TripKitAndroidUIData-2.1.43.aar",
-          "url": "TripKitAndroidUIData-2.1.43.aar",
-          "size": 193677,
-          "sha512": "f1630c9b2a918917470a25e497a9d30301575405f5e936354a4d78e1770071870d3ecc28a390c7fe8be8015117b6fff67e4df38221be3fe57a9efe0a4f7718fc",
-          "sha256": "ef47c33fc83cf3a3ee9a60fc52f6d13fe2a89bd2953482663867ef78c98e63ae",
-          "sha1": "4f5240b1e942a04d000a1ddc2ac92363bc436a73",
-          "md5": "010c15ea111c6988af8d727e141870ef"
+          "name": "TripKitAndroidUIData-2.1.43-sources.jar",
+          "url": "TripKitAndroidUIData-2.1.43-sources.jar",
+          "size": 49956,
+          "sha512": "e87d2d36ed18974fe8d4dce67114d267fcec74199ea84ffa6ba2aac01f4cb44c4fda30e43e798f9818da06a3e22d1030c78a617293a53c726e6a28d34c28c449",
+          "sha256": "1bc18bb544a2ef6b48e5e0237e0d03c486c7ad97a248a496137326992dfe14c7",
+          "sha1": "44aa96e948bc31895ac56f028760925cc7ca0379",
+          "md5": "be65dfa2393741ab500d065a7fdd72a1"
+        }
+      ]
+    },
+    {
+      "name": "releaseVariantReleaseJavaDocPublication",
+      "attributes": {
+        "org.gradle.category": "documentation",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.docstype": "javadoc",
+        "org.gradle.usage": "java-runtime"
+      },
+      "files": [
+        {
+          "name": "TripKitAndroidUIData-2.1.43-javadoc.jar",
+          "url": "TripKitAndroidUIData-2.1.43-javadoc.jar",
+          "size": 518701,
+          "sha512": "05bcc6d9d0638fca646c4c22487d5a796a358e14af980f9e04dc66c7ba83b4a306334e095503bba88f3b078ab9bb233616cf4b8428b8cc24a941a7f0f710749f",
+          "sha256": "af85f01d2ef8c978059fb436d06716227396b19b3abc91811b93c4814cd17dc4",
+          "sha1": "a4ff9035a10b1fbc903b417f8f97a81780a7d268",
+          "md5": "9f5288d19e1387f491f2d01a0f5b0164"
         }
       ]
     }
