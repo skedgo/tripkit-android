@@ -1,5 +1,6 @@
 package com.skedgo.tripkit.booking.quickbooking
 
+import androidx.annotation.StringDef
 import com.google.gson.annotations.SerializedName
 import com.skedgo.tripkit.common.util.decimalFormatWithCurrencySymbol
 import com.skedgo.tripkit.common.util.factor100
@@ -43,10 +44,45 @@ data class PaymentOption(
     val currency: String,
     val description: String,
     val fullPrice: Int,
+    val discountedPrice: Int,
+    val newBalance: Int,
     val url: String,
     val method: String,
     val paymentMode: String
-)
+){
+
+    fun getDiscountedPriceString(): String {
+        val price = discountedPrice.toDouble()
+        return if(price == 0.0) {
+            ""
+        } else if (price.factor100()) {
+            price.toInt().nonDecimalFormatWithCurrencySymbol(currency.getCurrencySymbol())
+        } else {
+            price.decimalFormatWithCurrencySymbol(currency.getCurrencySymbol())
+        }
+
+    }
+
+    private fun String.getCurrencySymbol(): String {
+        return if (this == "USD") "US$"
+        else if (this == "AUD") "AU$"
+        else this
+    }
+
+    @Retention(AnnotationRetention.RUNTIME)
+    @StringDef(
+        PaymentMode.FREE,
+        PaymentMode.WALLET,
+        PaymentMode.INTERNAL
+    )
+    annotation class PaymentMode {
+        companion object {
+            const val FREE = "FREE"
+            const val WALLET = "WALLET"
+            const val INTERNAL = "INTERNAL"
+        }
+    }
+}
 
 data class Review(
     val arrive: String,
