@@ -46,25 +46,49 @@ data class PaymentOption(
     val fullPrice: Int,
     val discountedPrice: Int,
     val newBalance: Int,
+    val currentBalance: Int,
     val url: String,
     val method: String,
     val paymentMode: String
-){
+) {
+
+    fun getCurrentBalanceString(): String {
+        val price = currentBalance.toDouble() / 100.0
+        return getFormattedPrice(price)
+    }
+
+    fun getNewBalanceString(): String {
+        val price = newBalance.toDouble() / 100.0
+        return getFormattedPrice(price)
+    }
 
     fun getDiscountedPriceString(): String {
-        val price = discountedPrice.toDouble()
-        return if(price == 0.0) {
+        val price = discountedPrice.toDouble() / 100.0
+        return getFormattedPrice(price)
+    }
+
+    fun getFullPriceString(): String {
+        val price = fullPrice.toDouble() / 100.0
+        return getFormattedPrice(price)
+    }
+
+    fun getDiscountString(): String {
+        val discount = (fullPrice.toDouble() - discountedPrice.toDouble()) / 100.0
+        return getFormattedPrice(discount)
+    }
+
+    private fun getFormattedPrice(price: Double): String {
+        return if (price == 0.0) {
             ""
         } else if (price.factor100()) {
             price.toInt().nonDecimalFormatWithCurrencySymbol(currency.getCurrencySymbol())
         } else {
             price.decimalFormatWithCurrencySymbol(currency.getCurrencySymbol())
         }
-
     }
 
     private fun String.getCurrencySymbol(): String {
-        return if (this == "USD") "US$"
+        return if (this == "USD") "$"
         else if (this == "AUD") "AU$"
         else this
     }
@@ -100,7 +124,7 @@ data class Review(
 
         val price = price / 100.0
 
-        return if(price.factor100()){
+        return if (price.factor100()) {
             price.toInt().nonDecimalFormatWithCurrencySymbol(symbol)
         } else {
             price.decimalFormatWithCurrencySymbol(symbol)
