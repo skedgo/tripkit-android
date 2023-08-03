@@ -51,7 +51,6 @@ data class PaymentOption(
     val method: String,
     val paymentMode: String
 ) {
-
     fun getCurrentBalanceString(): String {
         val price = currentBalance.toDouble() / 100.0
         return getFormattedPrice(price)
@@ -76,6 +75,8 @@ data class PaymentOption(
         val discount = (fullPrice.toDouble() - discountedPrice.toDouble()) / 100.0
         return getFormattedPrice(discount)
     }
+
+    fun hasDiscount(): Boolean = discountedPrice > 0
 
     private fun getFormattedPrice(price: Double): String {
         return if (price == 0.0) {
