@@ -67,4 +67,6 @@ public interface Configs {
 
     public boolean showOperatorNames();
 
+    @Value.Default public default boolean hasGetOffAlerts() { return true; }
+
 }
