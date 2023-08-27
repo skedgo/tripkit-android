@@ -7,6 +7,8 @@ import okhttp3.ResponseBody
 import retrofit2.http.Body
 import retrofit2.http.GET
 import retrofit2.http.POST
+import retrofit2.http.Path
+import retrofit2.http.Query
 import retrofit2.http.Url
 
 interface QuickBookingApi {
@@ -33,4 +35,10 @@ interface QuickBookingApi {
 
     @GET
     fun getTicketHTML(@Url url: String): Single<ResponseBody>
+
+    @GET("ticket")
+    fun getTickets(@Query("valid") valid: Boolean = true): Single<List<PurchasedTicket>>
+
+    @POST
+    fun activateTicket(@Url url: String): Single<ResponseBody>
 }

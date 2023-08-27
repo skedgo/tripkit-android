@@ -121,3 +121,15 @@ data class Rider(
     val id: String,
     val name: String
 )
+
+data class PurchasedTicket(
+    val id : String,
+    val validFromTimestamp: String?,
+    val validUntilTimestamp: String?,
+    val ticketURL: String,
+    val activateURL: String,
+    val ticketExpirationTimestamp : String,
+    val purchasedTimestamp: String,
+    val fare: Ticket,
+    val status: String
+)
