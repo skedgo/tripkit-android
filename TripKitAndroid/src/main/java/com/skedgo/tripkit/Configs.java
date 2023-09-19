@@ -69,4 +69,6 @@ public interface Configs {
 
     @Value.Default public default boolean hasGetOffAlerts() { return true; }
 
+    @Value.Default public default boolean hideFavorites() { return false;}
+
 }
