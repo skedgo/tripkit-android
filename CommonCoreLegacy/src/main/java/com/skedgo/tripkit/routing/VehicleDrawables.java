@@ -1,5 +1,6 @@
 package com.skedgo.tripkit.routing;
 
+import android.content.Context;
 import android.content.res.Resources;
 import android.graphics.Color;
 import android.graphics.LightingColorFilter;
@@ -11,9 +12,9 @@ public final class VehicleDrawables {
     private VehicleDrawables() {
     }
 
-    public static @Nullable Drawable createLightDrawable(@NonNull Resources resources, int iconRes) {
+    public static @Nullable Drawable createLightDrawable(@NonNull Context context, int iconRes) {
         try {
-            Drawable drawable = resources.getDrawable(iconRes);
+            Drawable drawable = context.getDrawable(iconRes);
             if (drawable != null) {
                 drawable = drawable.mutate();
                 drawable.setColorFilter(new LightingColorFilter(Color.parseColor("#FF000000"), 0xffffffff));

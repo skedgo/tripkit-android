@@ -773,13 +773,13 @@ public class TripSegment implements IRealTimeElement, ITimeRange {
         }
     }
 
-    public Drawable getLightTransportIcon(@NonNull Resources resources) {
+    public Drawable getLightTransportIcon(@NonNull Context context) {
         if (modeInfo != null && modeInfo.getModeCompat() != null) {
             return isRealTime
-                    ? modeInfo.getModeCompat().getRealtimeMapIconRes(resources)
-                    : modeInfo.getModeCompat().getMapIconRes(resources);
+                    ? modeInfo.getModeCompat().getRealtimeMapIconRes(context)
+                    : modeInfo.getModeCompat().getMapIconRes(context);
         } else {
-            return createLightDrawable(resources, R.drawable.v4_ic_map_location);
+            return createLightDrawable(context, R.drawable.v4_ic_map_location);
         }
     }
 

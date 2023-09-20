@@ -1,5 +1,6 @@
 package com.skedgo.tripkit.routing;
 
+import android.content.Context;
 import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
 import androidx.annotation.DrawableRes;
@@ -128,11 +129,11 @@ public enum VehicleMode {
     return realtimeIconRes;
   }
 
-  public Drawable getMapIconRes(@NonNull Resources resources) {
-    return resources.getDrawable(iconRes);
+  public Drawable getMapIconRes(@NonNull Context context) {
+    return context.getDrawable(iconRes);
   }
 
-  public Drawable getRealtimeMapIconRes(@NonNull Resources resources) {
-    return resources.getDrawable(realtimeIconRes);
+  public Drawable getRealtimeMapIconRes(@NonNull Context context) {
+    return context.getDrawable(realtimeIconRes);
   }
 }

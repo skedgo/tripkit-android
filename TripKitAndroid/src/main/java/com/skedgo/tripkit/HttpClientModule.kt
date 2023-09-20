@@ -104,15 +104,8 @@ open class HttpClientModule(
 
     @Provides
     open fun retrofitBuilder(gson: Gson): Retrofit.Builder {
-        val customUrl = HttpClientCustomDataStore.getCustomBaseUrl()
-        val baseUrl = if (customUrl != null && URLUtil.isValidUrl(customUrl)) {
-            customUrl
-        } else {
-            Server.ApiTripGo.value
-        }
-
         return Retrofit.Builder()
-                .baseUrl(baseUrl)
+                .baseUrl(Server.ApiTripGo.value)
                 .addCallAdapterFactory(NetworkResponseAdapterFactory())
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                 .addConverterFactory(GsonConverterFactory.create(gson))
