@@ -3,6 +3,7 @@ package com.skedgo.tripkit.routing;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import android.net.Uri;
 import android.text.TextUtils;
 
 import com.google.gson.JsonObject;
@@ -568,5 +569,15 @@ public class Trip implements ITimeRange {
 
     public void setQueryTime(long queryTime) {
         this.queryTime = queryTime;
+    }
+
+    public String getTripUuid() {
+        if (saveURL != null) {
+            Uri uri = Uri.parse(saveURL);
+            String uUid = uri.getLastPathSegment();
+            return uUid == null ? saveURL : uUid;
+        } else {
+            return uuid();
+        }
     }
 }
