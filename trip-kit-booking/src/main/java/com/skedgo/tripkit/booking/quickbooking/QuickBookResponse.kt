@@ -41,6 +41,7 @@ data class Action(
 )
 
 data class PaymentOption(
+    val id: String,
     val currency: String,
     val description: String,
     val fullPrice: Int,
@@ -98,13 +99,15 @@ data class PaymentOption(
     @StringDef(
         PaymentMode.FREE,
         PaymentMode.WALLET,
-        PaymentMode.INTERNAL
+        PaymentMode.INTERNAL,
+        PaymentMode.EXTERNAL
     )
     annotation class PaymentMode {
         companion object {
             const val FREE = "FREE"
             const val WALLET = "WALLET"
             const val INTERNAL = "INTERNAL"
+            const val EXTERNAL = "EXTERNAL"
         }
     }
 }

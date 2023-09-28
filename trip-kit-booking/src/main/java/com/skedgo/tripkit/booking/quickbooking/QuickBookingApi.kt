@@ -30,8 +30,8 @@ interface QuickBookingApi {
     @POST
     fun postPaymentMethod(@Url url: String, @Body request: PaymentRequest): Single<ConfirmPaymentUpdateResponse>
 
-    @GET
-    fun confirmPaymentUpdate(@Url url: String): Single<ConfirmPaymentUpdateResponse>
+    @POST
+    fun confirmPaymentUpdate(@Url url: String, @Body request: ConfirmPaymentUpdateRequest): Single<ConfirmPaymentUpdateResponse>
 
     @GET
     fun getTicketHTML(@Url url: String): Single<ResponseBody>
