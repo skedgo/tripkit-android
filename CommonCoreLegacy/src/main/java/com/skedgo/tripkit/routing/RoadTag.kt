@@ -60,6 +60,22 @@ fun RoadTag.getRoadSafetyColor(): Int {
     }
 }
 
+fun RoadTag.getTextColor(): Int {
+    return when (this) {
+        RoadTag.CYCLE_LANE,
+        RoadTag.CYCLE_TRACK,
+        RoadTag.CYCLE_NETWORK,
+        RoadTag.BICYCLE_DESIGNATED,
+        RoadTag.BICYCLE_BOULEVARD,
+        RoadTag.CCTV_CAMERA,
+        RoadTag.SIDE_ROAD,
+        RoadTag.SEGREGATED,
+        RoadTag.UNKNOWN, -> Color.WHITE
+
+        else -> Color.BLACK
+    }
+}
+
 fun RoadTag.getRoadTagLabel(): String {
     return when(this) {
         RoadTag.CYCLE_LANE -> "Cycle Lane"
