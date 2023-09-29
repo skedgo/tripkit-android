@@ -40,7 +40,7 @@ class GetNonTravelledLineForTrip @Inject constructor() {
                 PolyUtil.decode(it.encodedWaypoints)
                     .zipWithNext()
                     .map { (start, end) ->
-                        com.skedgo.tripkit.LineSegment(start, end, color)
+                        com.skedgo.tripkit.LineSegment(start, end, color, "")
                     }
               }
         }
