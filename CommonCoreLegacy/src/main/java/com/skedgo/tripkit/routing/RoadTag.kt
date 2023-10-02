@@ -4,26 +4,51 @@ import android.graphics.Color
 import com.google.gson.annotations.SerializedName
 
 enum class RoadTag {
-    @SerializedName("CYCLE-LANE") CYCLE_LANE,
-    @SerializedName("CYCLE-TRACK") CYCLE_TRACK,
-    @SerializedName("CYCLE-NETWORK") CYCLE_NETWORK,
-    @SerializedName("BICYCLE-DESIGNATED") BICYCLE_DESIGNATED,
-    @SerializedName("BICYCLE-BOULEVARD") BICYCLE_BOULEVARD,
-    @SerializedName("SIDE-WALK") SIDE_WALK,
-    @SerializedName("MAIN-ROAD") MAIN_ROAD,
-    @SerializedName("SIDE-ROAD") SIDE_ROAD,
-    @SerializedName("SHARED-ROAD") SHARED_ROAD,
-    @SerializedName("SERVICE_ROAD") SERVICE_ROAD,
-    @SerializedName("STREET-LIGHT") STREET_LIGHT,
-    @SerializedName("CCTV-CAMERA") CCTV_CAMERA,
-    @SerializedName("SEGREGATED") SEGREGATED,
-    @SerializedName("UNKNOWN") UNKNOWN,
+    @SerializedName("CYCLE-LANE")
+    CYCLE_LANE,
+    @SerializedName("CYCLE-TRACK")
+    CYCLE_TRACK,
+    @SerializedName("CYCLE-NETWORK")
+    CYCLE_NETWORK,
+    @SerializedName("BICYCLE-DESIGNATED")
+    BICYCLE_DESIGNATED,
+    @SerializedName("BICYCLE-BOULEVARD")
+    BICYCLE_BOULEVARD,
+    @SerializedName("SIDE-WALK")
+    SIDE_WALK,
+    @SerializedName("MAIN-ROAD")
+    MAIN_ROAD,
+    @SerializedName("SIDE-ROAD")
+    SIDE_ROAD,
+    @SerializedName("SHARED-ROAD")
+    SHARED_ROAD,
+    /* Ignored
+    @SerializedName("SERVICE_ROAD")
+    SERVICE_ROAD,
+    */
+    @SerializedName("STREET-LIGHT")
+    STREET_LIGHT,
+    @SerializedName("CCTV-CAMERA")
+    CCTV_CAMERA,
+    /* Ignored
+    @SerializedName("SEGREGATED")
+    SEGREGATED,
+    */
+    @SerializedName("UNKNOWN")
+    UNKNOWN,
 }
+
+fun String.parseRoadTag(): RoadTag =
+    try {
+        RoadTag.valueOf(this.replace("-","_"))
+    } catch (e: Exception) {
+        RoadTag.UNKNOWN
+    }
 
 fun RoadTag.getRoadSafetyColorPair(): Pair<Int, Boolean> {
     return when (this) {
-        RoadTag.CYCLE_LANE -> android.R.color.holo_green_dark to true
-        RoadTag.CYCLE_TRACK,
+        RoadTag.CYCLE_TRACK -> android.R.color.holo_green_dark to true
+        RoadTag.CYCLE_LANE,
         RoadTag.CYCLE_NETWORK,
         RoadTag.BICYCLE_DESIGNATED,
         RoadTag.BICYCLE_BOULEVARD,
@@ -34,8 +59,8 @@ fun RoadTag.getRoadSafetyColorPair(): Pair<Int, Boolean> {
         RoadTag.SHARED_ROAD,
         RoadTag.STREET_LIGHT -> android.R.color.holo_blue_light to true
 
-        RoadTag.MAIN_ROAD,
-        RoadTag.SERVICE_ROAD -> Color.parseColor("#FFFF00") to false
+        RoadTag.MAIN_ROAD-> Color.parseColor("#ffa500") to false
+
         else -> android.R.color.darker_gray to true
     }
 }
@@ -54,9 +79,29 @@ fun RoadTag.getRoadSafetyColor(): Int {
         RoadTag.SHARED_ROAD,
         RoadTag.STREET_LIGHT -> Color.parseColor("#8080ff")
 
-        RoadTag.MAIN_ROAD,
-        RoadTag.SERVICE_ROAD -> Color.parseColor("#e6e600")
+        RoadTag.MAIN_ROAD, -> Color.parseColor("#ffa500")
+
         else -> Color.DKGRAY
+    }
+}
+
+fun RoadTag.getRoadSafetyIndex(): Int {
+    return when (this) {
+        RoadTag.CYCLE_LANE -> 0
+        RoadTag.CYCLE_TRACK,
+        RoadTag.CYCLE_NETWORK,
+        RoadTag.BICYCLE_DESIGNATED,
+        RoadTag.BICYCLE_BOULEVARD,
+        RoadTag.CCTV_CAMERA -> 1
+
+        RoadTag.SIDE_WALK,
+        RoadTag.SIDE_ROAD,
+        RoadTag.SHARED_ROAD,
+        RoadTag.STREET_LIGHT -> 2
+
+        RoadTag.MAIN_ROAD, -> 3
+
+        else -> 4
     }
 }
 
@@ -69,15 +114,16 @@ fun RoadTag.getTextColor(): Int {
         RoadTag.BICYCLE_BOULEVARD,
         RoadTag.CCTV_CAMERA,
         RoadTag.SIDE_ROAD,
-        RoadTag.SEGREGATED,
-        RoadTag.UNKNOWN, -> Color.WHITE
+        /*RoadTag.SEGREGATED,*/
+        RoadTag.UNKNOWN,
+        -> Color.WHITE
 
         else -> Color.BLACK
     }
 }
 
 fun RoadTag.getRoadTagLabel(): String {
-    return when(this) {
+    return when (this) {
         RoadTag.CYCLE_LANE -> "Cycle Lane"
         RoadTag.CYCLE_TRACK -> "Cycle Track"
         RoadTag.CYCLE_NETWORK -> "Cycle Network"
@@ -87,10 +133,10 @@ fun RoadTag.getRoadTagLabel(): String {
         RoadTag.MAIN_ROAD -> "Main Road"
         RoadTag.SIDE_ROAD -> "Side Road"
         RoadTag.SHARED_ROAD -> "Shared Road"
-        RoadTag.SERVICE_ROAD -> "Service Road"
+        /*RoadTag.SERVICE_ROAD -> "Service Road"*/ //Ignored
         RoadTag.STREET_LIGHT -> "Street Light"
         RoadTag.CCTV_CAMERA -> "CCTV Camera"
-        RoadTag.SEGREGATED -> "Segregated"
+        /*RoadTag.SEGREGATED -> "Segregated"*/ //Ignored
         else -> "Other"
     }
 }
