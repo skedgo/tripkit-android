@@ -201,15 +201,12 @@ public class MainModule {
     @Provides
     Consumer<Throwable> getErrorHandler() {
         final Consumer<Throwable> errorHandler = configs.errorHandler();
-        return new Consumer<Throwable>() {
-            @Override
-            public void accept(Throwable error) throws Exception {
-                if (configs.debuggable()) {
-                    Log.e(TripKit.class.getSimpleName(), error.getMessage(), error);
-                }
-                if (errorHandler != null) {
-                    errorHandler.accept(error);
-                }
+        return error -> {
+            if (configs.debuggable()) {
+                Log.e(TripKit.class.getSimpleName(), error.getMessage(), error);
+            }
+            if (errorHandler != null) {
+                errorHandler.accept(error);
             }
         };
     }
