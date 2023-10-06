@@ -119,17 +119,32 @@ data class Ticket(
 
 data class Rider(
     val id: String,
-    val name: String
+    val name: String,
+    val description: String
 )
 
 data class PurchasedTicket(
-    val id : String,
+    val id: String,
     val validFromTimestamp: String?,
     val validUntilTimestamp: String?,
-    val ticketURL: String,
-    val activateURL: String,
-    val ticketExpirationTimestamp : String,
+    val ticketURL: String?,
+    val activateURL: String?,
+    val ticketExpirationTimestamp: String,
     val purchasedTimestamp: String,
     val fare: Ticket,
-    val status: String
+    val status: String,
+    val actions: List<PurchasedTicketAction>
+)
+
+data class PurchasedTicketAction(
+    val title: String,
+    val type: String,
+    val confirmation: PurchasedTicketConfirmation,
+    val internalURL: String
+)
+
+data class PurchasedTicketConfirmation(
+    val message: String,
+    val confirmActionTitle: String,
+    val abortActionTitle: String
 )
