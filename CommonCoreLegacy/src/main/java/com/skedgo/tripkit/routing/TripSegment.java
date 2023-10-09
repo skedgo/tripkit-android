@@ -199,6 +199,8 @@ public class TripSegment implements IRealTimeElement, ITimeRange {
     @SerializedName("tickets")
     private List<Ticket> tickets;
 
+    private TripKitMapTiles mapTiles;
+
     /**
      * FIXME: Should replace this with Quantity Strings.
      * See http://developer.android.com/intl/vi/guide/topics/resources/string-resource.html#Plurals.
@@ -894,5 +896,13 @@ public class TripSegment implements IRealTimeElement, ITimeRange {
 
     public String getTicketURL() {
         return ticketURL;
+    }
+
+    public TripKitMapTiles getMapTiles() {
+        return mapTiles;
+    }
+
+    public void setMapTiles(TripKitMapTiles mapTiles) {
+        this.mapTiles = mapTiles;
     }
 }

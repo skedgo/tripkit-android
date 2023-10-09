@@ -1,5 +1,6 @@
 package com.skedgo.tripkit.booking.quickbooking
 
+import com.google.gson.annotations.SerializedName
 import com.skedgo.tripkit.common.model.BookingConfirmationInputNew
 import com.skedgo.tripkit.common.model.BookingConfirmationInputOptions
 import com.skedgo.tripkit.common.model.BookingConfirmationNotes
@@ -13,8 +14,9 @@ data class QuickBooking(
     val input: List<Input>,
     val title: String,
     val tripUpdateURL: String,
-    val tickets: List<Ticket>,
-    val billingEnabled: Boolean
+    @SerializedName("fares") val tickets: List<Ticket>,
+    val billingEnabled: Boolean,
+    val riders: List<Rider>
 )
 
 data class Option(
@@ -79,9 +81,11 @@ data class Input(
                     data
                 }
             }
+
             value == type.getDefaultValueByType(title) -> {
                 value = ""
             }
+
             values == listOf(type.getDefaultValueByType(title)) -> {
                 values = emptyList()
             }
@@ -107,5 +111,40 @@ data class Ticket(
     val name: String,
     val price: Double,
     var value: Long?,
-    val max: Int? = null
+    val max: Int? = null,
+    val riders: List<Rider>,
+    val status: String,
+    val type: String
+)
+
+data class Rider(
+    val id: String,
+    val name: String,
+    val description: String
+)
+
+data class PurchasedTicket(
+    val id: String,
+    val validFromTimestamp: String?,
+    val validUntilTimestamp: String?,
+    val ticketURL: String?,
+    val activateURL: String?,
+    val ticketExpirationTimestamp: String,
+    val purchasedTimestamp: String,
+    val fare: Ticket,
+    val status: String,
+    val actions: List<PurchasedTicketAction>
+)
+
+data class PurchasedTicketAction(
+    val title: String,
+    val type: String,
+    val confirmation: PurchasedTicketConfirmation,
+    val internalURL: String
+)
+
+data class PurchasedTicketConfirmation(
+    val message: String,
+    val confirmActionTitle: String,
+    val abortActionTitle: String
 )
