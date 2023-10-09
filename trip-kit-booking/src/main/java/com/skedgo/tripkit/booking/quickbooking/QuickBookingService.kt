@@ -12,9 +12,15 @@ interface QuickBookingService {
     fun getBookingUpdate(url: String): Single<RoutingResponse>
     fun executeBookingAction(url: String): Single<QuickBookResponse>
     fun getPaymentIntent(url: String): Single<QuickBookingPaymentIntent>
-    fun postPaymentMethod(url: String, request: PaymentRequest): Single<ConfirmPaymentUpdateResponse>
-    fun confirmPaymentUpdate(url: String): Single<ConfirmPaymentUpdateResponse>
+    fun postPaymentMethod(
+        url: String,
+        request: PaymentRequest
+    ): Single<ConfirmPaymentUpdateResponse>
+
+    fun confirmPaymentUpdate(url: String, request: ConfirmPaymentUpdateRequest): Single<ConfirmPaymentUpdateResponse>
     fun getTicketHTML(url: String): Single<ResponseBody>
+    fun getTickets(valid: Boolean): Single<List<PurchasedTicket>>
+    fun activateTicket(url: String): Single<ResponseBody>
 
     class QuickBookingServiceImpl(private val api: QuickBookingApi) : QuickBookingService {
         override fun getQuickBooking(url: String): Single<List<QuickBooking>> =
@@ -38,10 +44,17 @@ interface QuickBookingService {
         ): Single<ConfirmPaymentUpdateResponse> =
             api.postPaymentMethod(url, request)
 
-        override fun confirmPaymentUpdate(url: String): Single<ConfirmPaymentUpdateResponse> =
-            api.confirmPaymentUpdate(url)
+        override fun confirmPaymentUpdate(url: String, paymentMethod: ConfirmPaymentUpdateRequest): Single<ConfirmPaymentUpdateResponse> =
+            api.confirmPaymentUpdate(url, paymentMethod)
 
         override fun getTicketHTML(url: String): Single<ResponseBody> =
             api.getTicketHTML(url)
+
+        override fun getTickets(valid: Boolean): Single<List<PurchasedTicket>> =
+            api.getTickets(valid)
+
+        override fun activateTicket(url: String): Single<ResponseBody> =
+            api.activateTicket(url)
+
     }
 }
