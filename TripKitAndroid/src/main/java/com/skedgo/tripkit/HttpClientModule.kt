@@ -35,7 +35,8 @@ open class HttpClientModule(
         private val buildFlavor: String?,
         private val version: String?,
         private val configs: Configs,
-        private val sharedPreferences: SharedPreferences? = null
+        private val sharedPreferences: SharedPreferences? = null,
+        private val appDeactivatedListener: (() -> Unit)? = null
 ) {
 
     @Singleton
@@ -55,6 +56,7 @@ open class HttpClientModule(
                 e.printStackTrace()
             }
         }
+        builder.addInterceptor(ErrorHandlingInterceptor(appDeactivatedListener))
         return builder.build()
     }
 
