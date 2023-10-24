@@ -14,9 +14,7 @@ class ErrorHandlingInterceptor(
             val response = chain.proceed(request)
 
             if (!response.isSuccessful) {
-                Log.e("Test", "received error")
                 if(response.code == 401) {
-                    Log.e("Test", "received 401 error")
                     appDeactivatedListener?.invoke()
                 }
             }
