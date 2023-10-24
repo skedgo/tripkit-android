@@ -41,7 +41,7 @@ data class Action(
 )
 
 data class PaymentOption(
-    val id: String,
+    val id: String?,
     val currency: String,
     val description: String,
     val fullPrice: Int,
