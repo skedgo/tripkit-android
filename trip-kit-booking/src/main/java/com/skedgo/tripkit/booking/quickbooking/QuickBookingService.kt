@@ -17,7 +17,11 @@ interface QuickBookingService {
         request: PaymentRequest
     ): Single<ConfirmPaymentUpdateResponse>
 
-    fun confirmPaymentUpdate(url: String, request: ConfirmPaymentUpdateRequest): Single<ConfirmPaymentUpdateResponse>
+    fun confirmPaymentUpdate(
+        method: String,
+        url: String,
+        request: ConfirmPaymentUpdateRequest
+    ): Single<ConfirmPaymentUpdateResponse>
     fun getTicketHTML(url: String): Single<ResponseBody>
     fun getTickets(valid: Boolean): Single<List<PurchasedTicket>>
     fun activateTicket(url: String): Single<ResponseBody>
@@ -44,8 +48,12 @@ interface QuickBookingService {
         ): Single<ConfirmPaymentUpdateResponse> =
             api.postPaymentMethod(url, request)
 
-        override fun confirmPaymentUpdate(url: String, paymentMethod: ConfirmPaymentUpdateRequest): Single<ConfirmPaymentUpdateResponse> =
-            api.confirmPaymentUpdate(url, paymentMethod)
+        override fun confirmPaymentUpdate(method: String, url: String, paymentMethod: ConfirmPaymentUpdateRequest): Single<ConfirmPaymentUpdateResponse> =
+            if(method == "GET") {
+                api.confirmPaymentUpdate(url)
+            } else {
+                api.confirmPaymentUpdate(url, paymentMethod)
+            }
 
         override fun getTicketHTML(url: String): Single<ResponseBody> =
             api.getTicketHTML(url)
