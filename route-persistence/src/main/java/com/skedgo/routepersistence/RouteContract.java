@@ -42,6 +42,8 @@ final class RouteContract {
     static final String COL_QUERY_TIME = "queryTime";
     static final String COL_SOURCES = "sources";
 
+    static final String COL_SUBSCRIBE_URL = "subscribeURL";
+
     private RouteContract() {
     }
 

@@ -69,6 +69,9 @@ public class Trip implements ITimeRange {
     @SerializedName("shareURL")
     private String shareURL;
 
+    @SerializedName("subscribeURL")
+    private String subscribeURL;
+
     private long mStartTimeInSecs;
     private long mEndTimeInSecs;
 
@@ -553,6 +556,14 @@ public class Trip implements ITimeRange {
 
     public void setShareURL(String shareURL) {
         this.shareURL = shareURL;
+    }
+
+    public String getSubscribeURL() {
+        return subscribeURL;
+    }
+
+    public void setSubscribeURL(String subscribeURL) {
+        this.subscribeURL = subscribeURL;
     }
 
     public boolean isHideExactTimes() {
