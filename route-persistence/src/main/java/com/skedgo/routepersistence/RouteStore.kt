@@ -127,6 +127,7 @@ open class RouteStore(private val databaseHelper: SQLiteOpenHelper, private val 
                     values.put(COL_IS_HIDE_EXACT_TIMES, if (trip.isHideExactTimes) 1 else 0)
                     values.put(COL_QUERY_TIME, trip.queryTime)
                     values.put(COL_QUERY_IS_LEAVE_AFTER, if (trip.queryIsLeaveAfter()) 1 else 0)
+                    values.put(COL_SUBSCRIBE_URL, trip.subscribeURL)
                     database.beginTransaction()
                     try {
                         database.update(TABLE_TRIPS, values, "$COL_UUID = ?", arrayOf(oldTripUuid))
@@ -253,6 +254,7 @@ open class RouteStore(private val databaseHelper: SQLiteOpenHelper, private val 
         val queryTime = tripCursor.getLong(tripCursor.getColumnIndex(COL_QUERY_TIME))
 
         val isNotifable = groupCursor.getInt(groupCursor.getColumnIndex(COL_IS_NOTIFIABLE)) == 1
+        val subscribeUrl = tripCursor.getString(tripCursor.getColumnIndex(COL_SUBSCRIBE_URL))
 
         val trip = Trip()
         trip.id = id
@@ -277,6 +279,7 @@ open class RouteStore(private val databaseHelper: SQLiteOpenHelper, private val 
         trip.queryTime = queryTime
         trip.setQueryIsLeaveAfter(queryIsLeaveAfter == 1)
         trip.isFavourite(isNotifable)
+        trip.subscribeURL = subscribeUrl
         return trip
     }
 
@@ -393,6 +396,7 @@ open class RouteStore(private val databaseHelper: SQLiteOpenHelper, private val 
         values.put(COL_SHARE_URL, trip.shareURL)
         values.put(COL_IS_HIDE_EXACT_TIMES, trip.isHideExactTimes)
         values.put(COL_QUERY_TIME, trip.queryTime)
+        values.put(COL_SUBSCRIBE_URL, trip.subscribeURL)
         database.insertWithOnConflict(TABLE_TRIPS, null, values, SQLiteDatabase.CONFLICT_REPLACE)
     }
 
