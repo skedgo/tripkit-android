@@ -78,6 +78,7 @@ public class RouteDatabaseHelper extends SQLiteOpenHelper {
             if(newVersion > 10) {
                 try {
                     db.execSQL("ALTER TABLE trips ADD COLUMN subscribeURL TEXT");
+                    db.execSQL("ALTER TABLE trips ADD COLUMN unsubscribeURL TEXT");
                 } catch (SQLiteException ex) {
                     // ignored if the column exists
                 }
