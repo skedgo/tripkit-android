@@ -7,6 +7,7 @@ data class RegionRoute(
         val id: String,
         val operatorID: String,
         val shortName: String,
+        val routeName: String,
         val mode: String,
         val numberOfServices: Int,
         val operatorId: String,
