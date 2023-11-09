@@ -7,7 +7,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 import android.widget.Toast;
 
 public class RouteDatabaseHelper extends SQLiteOpenHelper {
-    private static final int DATABASE_VERSION = 10;
+    private static final int DATABASE_VERSION = 11;
 
     public RouteDatabaseHelper(Context context, String name) {
         super(context, name, null, DATABASE_VERSION);
@@ -21,36 +21,7 @@ public class RouteDatabaseHelper extends SQLiteOpenHelper {
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-        /*
-        switch (oldVersion) {
-            case 1:
-                RoutingStatusContract.INSTANCE.create(db);
-            case 2:
-                db.execSQL("ALTER TABLE tripGroups ADD COLUMN sources TEXT");
-            case 3:
-                try {
-                    db.execSQL("ALTER TABLE routingStatus ADD COLUMN statusMessage TEXT");
-                } catch (SQLiteException ex) {
-                    // ignored if the column exists
-                }
-            case 4:
-                try {
-                    db.execSQL("ALTER TABLE trips ADD COLUMN mainSegmentHashCode INTEGER");
-                } catch (SQLiteException ex) {
-                }
-            case 5:
-                db.execSQL("ALTER TABLE trips ADD COLUMN logURL TEXT");
-            case 6:
-                try {
-                    db.execSQL("ALTER TABLE trips ADD COLUMN shareURL TEXT");
-                } catch (SQLiteException ex) {
-                    // ignored if the column exists
-                }
-        }
-        */
-
         if (oldVersion != 1) {
-
             if (newVersion > 2) {
                 try {
                     db.execSQL("ALTER TABLE tripGroups ADD COLUMN sources TEXT");
@@ -100,6 +71,14 @@ public class RouteDatabaseHelper extends SQLiteOpenHelper {
             if (newVersion > 8) {
                 try {
                     db.execSQL("ALTER TABLE trips ADD COLUMN queryTime LONG");
+                } catch (SQLiteException ex) {
+                    // ignored if the column exists
+                }
+            }
+            if(newVersion > 10) {
+                try {
+                    db.execSQL("ALTER TABLE trips ADD COLUMN subscribeURL TEXT");
+                    db.execSQL("ALTER TABLE trips ADD COLUMN unsubscribeURL TEXT");
                 } catch (SQLiteException ex) {
                     // ignored if the column exists
                 }
