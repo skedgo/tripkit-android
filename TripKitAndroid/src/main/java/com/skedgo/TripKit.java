@@ -100,6 +100,7 @@ public abstract class TripKit {
                                 null,
                                 null,
                                 configs,
+                                null,
                                 null
                         ))
                         .build();
