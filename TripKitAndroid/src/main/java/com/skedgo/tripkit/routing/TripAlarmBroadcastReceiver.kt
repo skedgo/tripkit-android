@@ -21,7 +21,7 @@ class TripAlarmBroadcastReceiver : BroadcastReceiver() {
                 trip.segments.minByOrNull { it.startTimeInSecs }?.let { startSegment ->
                     context.createNotification(
                             channelId = NOTIFICATION_CHANNEL_START_TRIP_ID,
-                            smallIcon = R.drawable.v4_ic_map_location,
+                            smallIcon = R.drawable.ic_launcher,
                             contentTitle = "Trip about to start",
                             contentText = "${startSegment.startDateTime.toString(DateTimeFormat.forPattern("HH:mm a"))} ${startSegment.serviceName ?: startSegment.serviceDirection ?: startSegment.action}",
                             bigText = "${startSegment.startDateTime.toString(DateTimeFormat.forPattern("HH:mm a"))} ${startSegment.serviceName ?: startSegment.serviceDirection ?: startSegment.action}"

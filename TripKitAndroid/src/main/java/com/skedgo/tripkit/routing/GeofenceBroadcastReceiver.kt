@@ -51,7 +51,7 @@ class GeofenceBroadcastReceiver : BroadcastReceiver() {
                 val geofence = geofences.first { it.id == geofenceId }
                 context.createNotification(
                         channelId = TripAlarmBroadcastReceiver.NOTIFICATION_CHANNEL_START_TRIP_ID,
-                        smallIcon = R.drawable.v4_ic_map_location,
+                        smallIcon = R.drawable.ic_launcher,
                         contentTitle = geofence.messageTitle,
                         contentText = geofence.messageBody,
                         bigText = geofence.messageBody
