@@ -9,4 +9,5 @@ interface TripUpdater {
     fun getUpdateAsync(tripUrl: String): Observable<Trip>
     fun getUpdateAsyncFlow(tripUrl: String): Flow<Trip>
     fun getUpdateAsyncFlow(trip: Trip): Flow<Trip>
+    fun tripSubscription(url: String): Observable<Any>
 }
