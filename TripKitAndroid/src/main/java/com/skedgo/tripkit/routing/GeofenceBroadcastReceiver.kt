@@ -25,6 +25,8 @@ class GeofenceBroadcastReceiver : BroadcastReceiver() {
             Toast.makeText(context, "Geofence update received", Toast.LENGTH_SHORT).show()
         Log.e("GFBroadcastReceiver", "geofence update receive")
 
+        val tripString = intent.getStringExtra(TripAlarmBroadcastReceiver.EXTRA_START_TRIP_EVENT_TRIP)
+        val tripGroupUuid = intent.getStringExtra(TripAlarmBroadcastReceiver.EXTRA_START_TRIP_EVENT_TRIP_GROUP_UUID)
 
         if (intent.action == ACTION_GEOFENCE_EVENT) {
             val geofences: List<com.skedgo.tripkit.routing.Geofence> =
@@ -50,11 +52,19 @@ class GeofenceBroadcastReceiver : BroadcastReceiver() {
 
                 val geofence = geofences.first { it.id == geofenceId }
                 context.createNotification(
-                        channelId = TripAlarmBroadcastReceiver.NOTIFICATION_CHANNEL_START_TRIP_ID,
-                        smallIcon = R.drawable.ic_launcher,
-                        contentTitle = geofence.messageTitle,
-                        contentText = geofence.messageBody,
-                        bigText = geofence.messageBody
+                    channelId = TripAlarmBroadcastReceiver.NOTIFICATION_CHANNEL_START_TRIP_ID,
+                    smallIcon = R.drawable.ic_launcher,
+                    contentTitle = geofence.messageTitle,
+                    contentText = geofence.messageBody,
+                    bigText = geofence.messageBody,
+                    intent = Intent("com.skedgo.tripgo.APP_NOTIFICATION").apply {
+                        flags = Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_SINGLE_TOP
+                        putExtra(TripAlarmBroadcastReceiver.EXTRA_START_TRIP_EVENT_TRIP, tripString)
+                        putExtra(
+                            TripAlarmBroadcastReceiver.EXTRA_START_TRIP_EVENT_TRIP_GROUP_UUID,
+                            tripGroupUuid
+                        )
+                    }
                 ).fire(context)
             }
         }
@@ -80,6 +90,8 @@ class GeofenceBroadcastReceiver : BroadcastReceiver() {
         const val TAG = "GeofenceReceiver"
         const val ACTION_GEOFENCE_EVENT = "ACTION_GEOFENCE_EVENT"
         const val EXTRA_GEOFENCES = "EXTRA_GEOFENCES"
+        const val EXTRA_TRIP = "EXTRA_TRIP"
+        const val EXTRA_TRIP_GROUP_UUID = "EXTRA_TRIP_GROUP_UUID"
 
         fun getPendingIntent(context: Context, bundle: Bundle? = null): PendingIntent {
             val intent = Intent(context, GeofenceBroadcastReceiver::class.java)
