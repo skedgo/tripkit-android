@@ -26,7 +26,8 @@ fun Context.createNotification(
         sound: Uri? = null,
         autoCancel: Boolean = true,
         bigText: String? = null,
-        intent: Intent? = null
+        intent: Intent? = null,
+        priority: Int = NotificationCompat.PRIORITY_DEFAULT
 ): Notification {
     val builder = NotificationCompat.Builder(this, channelId)
 
@@ -40,6 +41,7 @@ fun Context.createNotification(
     bigText?.let { builder.setStyle(NotificationCompat.BigTextStyle().bigText(it)) }
     builder.setGroupSummary(groupSummary)
     builder.setAutoCancel(autoCancel)
+    builder.priority = priority
 
     intent?.let {
         builder.setContentIntent(
@@ -60,9 +62,15 @@ fun Context.createNotificationChannels(channels: List<NotificationChannel>) {
 
 @RequiresApi(Build.VERSION_CODES.O)
 fun createChannel(id: String, name: String): NotificationChannel {
-    return NotificationChannel(id, name, NotificationManager.IMPORTANCE_MIN)
+    return NotificationChannel(id, name, NotificationManager.IMPORTANCE_HIGH)
 }
 
 fun Notification.fire(context: Context, id: Int? = null) {
     NotificationManagerCompat.from(context).notify(id ?: this.hashCode(), this)
+}
+
+fun Context.cancelChannelNotifications(id: Int) {
+    val notificationManager: NotificationManager =
+        getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+    notificationManager.cancel(id)
 }

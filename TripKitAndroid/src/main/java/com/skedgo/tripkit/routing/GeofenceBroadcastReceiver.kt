@@ -7,6 +7,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
+import androidx.core.app.NotificationCompat
 import com.google.android.gms.location.Geofence
 import com.google.android.gms.location.GeofenceStatusCodes
 import com.google.android.gms.location.GeofencingEvent
@@ -18,6 +19,28 @@ import com.skedgo.tripkit.notification.createNotification
 import com.skedgo.tripkit.notification.fire
 
 class GeofenceBroadcastReceiver : BroadcastReceiver() {
+
+    companion object {
+        const val TAG = "GeofenceReceiver"
+        const val ACTION_GEOFENCE_EVENT = "ACTION_GEOFENCE_EVENT"
+        const val EXTRA_GEOFENCES = "EXTRA_GEOFENCES"
+        const val EXTRA_TRIP = "EXTRA_TRIP"
+        const val EXTRA_TRIP_GROUP_UUID = "EXTRA_TRIP_GROUP_UUID"
+        const val NOTIFICATION_VEHICLE_APPROACHING_NOTIFICATION_ID = 9002
+
+        fun getPendingIntent(context: Context, bundle: Bundle? = null): PendingIntent {
+            val intent = Intent(context, GeofenceBroadcastReceiver::class.java)
+            bundle?.let { intent.putExtras(bundle) }
+            intent.action = ACTION_GEOFENCE_EVENT
+            return PendingIntent.getBroadcast(
+                context,
+                0,
+                intent,
+                PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE
+            )
+
+        }
+    }
 
     override fun onReceive(context: Context, intent: Intent) {
 
@@ -64,8 +87,9 @@ class GeofenceBroadcastReceiver : BroadcastReceiver() {
                             TripAlarmBroadcastReceiver.EXTRA_START_TRIP_EVENT_TRIP_GROUP_UUID,
                             tripGroupUuid
                         )
-                    }
-                ).fire(context)
+                    },
+                    priority = NotificationCompat.PRIORITY_HIGH
+                ).fire(context, NOTIFICATION_VEHICLE_APPROACHING_NOTIFICATION_ID)
             }
         }
     }
@@ -83,27 +107,6 @@ class GeofenceBroadcastReceiver : BroadcastReceiver() {
                     R.string.geofence_too_many_pending_intents
             )
             else -> resources.getString(R.string.unknown_geofence_error)
-        }
-    }
-
-    companion object {
-        const val TAG = "GeofenceReceiver"
-        const val ACTION_GEOFENCE_EVENT = "ACTION_GEOFENCE_EVENT"
-        const val EXTRA_GEOFENCES = "EXTRA_GEOFENCES"
-        const val EXTRA_TRIP = "EXTRA_TRIP"
-        const val EXTRA_TRIP_GROUP_UUID = "EXTRA_TRIP_GROUP_UUID"
-
-        fun getPendingIntent(context: Context, bundle: Bundle? = null): PendingIntent {
-            val intent = Intent(context, GeofenceBroadcastReceiver::class.java)
-            bundle?.let { intent.putExtras(bundle) }
-            intent.action = ACTION_GEOFENCE_EVENT
-            return PendingIntent.getBroadcast(
-                    context,
-                    0,
-                    intent,
-                    PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE
-            )
-
         }
     }
 }

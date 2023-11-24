@@ -3,6 +3,7 @@ package com.skedgo.tripkit.routing
 import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
+import androidx.core.app.NotificationCompat
 import com.google.gson.Gson
 import com.skedgo.tripkit.R
 import com.skedgo.tripkit.extensions.fromJson
@@ -12,6 +13,15 @@ import org.joda.time.format.DateTimeFormat
 
 private const val DATE_TIME_FORMAT = "HH:mm a"
 class TripAlarmBroadcastReceiver : BroadcastReceiver() {
+
+    companion object {
+        const val ACTION_START_TRIP_EVENT = "ACTION_START_TRIP_EVENT"
+        const val EXTRA_START_TRIP_EVENT_TRIP = "EXTRA_START_TRIP_EVENT_TRIP"
+        const val EXTRA_START_TRIP_EVENT_TRIP_GROUP_UUID = "EXTRA_START_TRIP_EVENT_TRIP_GROUP_UUID"
+        const val NOTIFICATION_CHANNEL_START_TRIP_ID = "NOTIFICATION_CHANNEL_START_TRIP_ID"
+        const val NOTIFICATION_CHANNEL_START_TRIP = "NOTIFICATION_CHANNEL_START_TRIP"
+        const val NOTIFICATION_TRIP_START_NOTIFICATION_ID = 9001
+    }
     
     private val gson = Gson()
 
@@ -46,18 +56,11 @@ class TripAlarmBroadcastReceiver : BroadcastReceiver() {
                                 Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_SINGLE_TOP
                             putExtra(EXTRA_START_TRIP_EVENT_TRIP, tripString)
                             putExtra(EXTRA_START_TRIP_EVENT_TRIP_GROUP_UUID, tripGroupUuid)
-                        }
-                    ).fire(context)
+                        },
+                        priority = NotificationCompat.PRIORITY_HIGH
+                    ).fire(context, NOTIFICATION_TRIP_START_NOTIFICATION_ID)
                 }
             }
         }
-    }
-
-    companion object {
-        const val ACTION_START_TRIP_EVENT = "ACTION_START_TRIP_EVENT"
-        const val EXTRA_START_TRIP_EVENT_TRIP = "EXTRA_START_TRIP_EVENT_TRIP"
-        const val EXTRA_START_TRIP_EVENT_TRIP_GROUP_UUID = "EXTRA_START_TRIP_EVENT_TRIP_GROUP_UUID"
-        const val NOTIFICATION_CHANNEL_START_TRIP_ID = "NOTIFICATION_CHANNEL_START_TRIP_ID"
-        const val NOTIFICATION_CHANNEL_START_TRIP = "NOTIFICATION_CHANNEL_START_TRIP"
     }
 }
