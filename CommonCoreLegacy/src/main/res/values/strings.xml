@@ -46,4 +46,5 @@
   <string name="geofence_too_many_geofences">Your app has registered too many geofences</string>
   <string name="geofence_too_many_pending_intents">You have provided too many PendingIntents to the addGeofences() call</string>
   <string name="unknown_geofence_error">Unknown error: the Geofence service is not available now</string>
+  <string name="trip_about_to_start">Trip is about to start</string>
 </resources>

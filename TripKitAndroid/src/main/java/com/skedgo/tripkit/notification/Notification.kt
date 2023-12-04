@@ -3,7 +3,9 @@ package com.skedgo.tripkit.notification
 import android.app.Notification
 import android.app.NotificationChannel
 import android.app.NotificationManager
+import android.app.PendingIntent
 import android.content.Context
+import android.content.Intent
 import android.graphics.Bitmap
 import android.media.AudioManager
 import android.net.Uri
@@ -23,7 +25,9 @@ fun Context.createNotification(
         groupSummary: Boolean = false,
         sound: Uri? = null,
         autoCancel: Boolean = true,
-        bigText: String? = null
+        bigText: String? = null,
+        intent: Intent? = null,
+        priority: Int = NotificationCompat.PRIORITY_DEFAULT
 ): Notification {
     val builder = NotificationCompat.Builder(this, channelId)
 
@@ -37,6 +41,15 @@ fun Context.createNotification(
     bigText?.let { builder.setStyle(NotificationCompat.BigTextStyle().bigText(it)) }
     builder.setGroupSummary(groupSummary)
     builder.setAutoCancel(autoCancel)
+    builder.priority = priority
+
+    intent?.let {
+        builder.setContentIntent(
+            PendingIntent.getActivity(
+                this, 0, it, PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE
+            )
+        )
+    }
 
     return builder.build()
 }
@@ -49,9 +62,15 @@ fun Context.createNotificationChannels(channels: List<NotificationChannel>) {
 
 @RequiresApi(Build.VERSION_CODES.O)
 fun createChannel(id: String, name: String): NotificationChannel {
-    return NotificationChannel(id, name, NotificationManager.IMPORTANCE_MIN)
+    return NotificationChannel(id, name, NotificationManager.IMPORTANCE_HIGH)
 }
 
 fun Notification.fire(context: Context, id: Int? = null) {
     NotificationManagerCompat.from(context).notify(id ?: this.hashCode(), this)
+}
+
+fun Context.cancelChannelNotifications(id: Int) {
+    val notificationManager: NotificationManager =
+        getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+    notificationManager.cancel(id)
 }

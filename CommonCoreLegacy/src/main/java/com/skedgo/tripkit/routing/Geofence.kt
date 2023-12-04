@@ -28,5 +28,9 @@ enum class Trigger(val value: String) {
 }
 
 enum class MessageType {
-    TRIP_END, ARRIVING_AT_YOUR_STOP, NEXT_STOP_IS_YOURS
+    TRIP_START,
+    VEHICLE_IS_APPROACHING,
+    ARRIVING_AT_YOUR_STOP,
+    NEXT_STOP_IS_YOURS,
+    TRIP_END,
 }

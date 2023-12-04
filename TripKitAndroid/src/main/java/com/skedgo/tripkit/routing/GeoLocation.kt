@@ -28,7 +28,7 @@ object GeoLocation {
     }
 
     @SuppressLint("MissingPermission")
-    fun createGeoFences(geofences: List<Geofence>) {
+    fun createGeoFences(trip: Trip, geofences: List<Geofence>) {
         val gsmGeofences = mutableListOf<com.google.android.gms.location.Geofence>()
         gsmGeofences.addAll(
                 geofences.map { it.toGsmGeofence() }
@@ -39,6 +39,10 @@ object GeoLocation {
 
         val bundle = Bundle()
         bundle.putString(GeofenceBroadcastReceiver.EXTRA_GEOFENCES, Gson().toJson(geofences))
+        bundle.putString(GeofenceBroadcastReceiver.EXTRA_TRIP, Gson().toJson(trip))
+        trip.group?.let {
+            bundle.putString(GeofenceBroadcastReceiver.EXTRA_TRIP_GROUP_UUID, it.uuid())
+        }
         geofencePendingIntent = GeofenceBroadcastReceiver.getPendingIntent(context, bundle)
 
         createGeoFencingRequest()?.let { request ->
