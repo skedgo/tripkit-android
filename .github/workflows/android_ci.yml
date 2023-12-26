@@ -34,8 +34,5 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-gradle-
 
-      - name: Build Release APK
-        run: ./gradlew clean assembleRelease
-
-      - name: List All Directories and Subdirectories of Root
-        run: find . -type d
+      - name: Run tests
+        run: ./gradlew test
