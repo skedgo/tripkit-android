@@ -111,6 +111,8 @@ dependencies {
   implementation libs.map_extension
   implementation libs.location
 
+  testImplementation libs.mockk
+
   debugApi project(':CommonCoreLegacy')
   releaseApi project(':CommonCoreLegacy')
   debugApi project(':TripKitDomain')

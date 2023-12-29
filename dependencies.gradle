@@ -33,6 +33,8 @@ versions.javaxAnnotation = "1.3.2"
 versions.instabug = '11.11.0'
 versions.paging = "3.0.0"
 versions.viewPager2 = "1.0.0"
+versions.mockk = "1.13.8"
+versions.archCore = "2.1.0"
 
 ext.versions = versions
 
@@ -49,6 +51,7 @@ libs.jodaTimeAndroid = "net.danlew:android.joda:2.10.6"
 libs.androidJob = "com.evernote:android-job:1.2.6"
 libs.javaxAnnotation = "javax.annotation:javax.annotation-api:$versions.javaxAnnotation"
 libs.instabug = "com.instabug.library:instabug:$versions.instabug"
+libs.mockk = "io.mockk:mockk:$versions.mockk"
 
 // Support Library package
 libs.supportAnnotations = "androidx.annotation:annotation:$versions.androidxVersion"
@@ -153,5 +156,7 @@ libs.viewPager2 = "androidx.viewpager2:viewpager2:$versions.viewPager2"
 
 libs.volley = "com.android.volley:volley:$versions.volley"
 libs.jetBrainsAnnotation = "org.jetbrains:annotations-java5:$versions.jetBrainsJava5"
+
+libs.archCoreTesting = "androidx.arch.core:core-testing:$versions.archCore"
 
 ext.libs = libs
