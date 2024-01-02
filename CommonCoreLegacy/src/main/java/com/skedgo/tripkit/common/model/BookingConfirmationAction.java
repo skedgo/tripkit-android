@@ -25,6 +25,8 @@ public abstract class BookingConfirmationAction implements Parcelable {
     public static final String TYPE_UNLOCK = "UNLOCK";
     public static final String TYPE_REQUEST_ANOTHER = "REQUESTANOTHER";
     public static final String TYPE_SHOW_TICKETS = "SHOW_TICKETS";
+    public static final String TYPE_ACTIVATE_TICKETS = "ACTIVATE_TICKETS";
+    public static final String TYPE_SHOW_RELATED_TRIP = "SHOW_RELATED_TRIP";
 
     public static final Creator<BookingConfirmationAction> CREATOR = new Creator<BookingConfirmationAction>() {
         @Override

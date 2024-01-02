@@ -9,8 +9,8 @@ versions.desugaring = "1.1.5"
 versions.immutablesVersion = "2.8.8"
 versions.devMinSdkVersion = 21
 versions.proMinSdkVersion = 21
-versions.compileSdkVersion = 31
-versions.targetSdkVersion = 29
+versions.compileSdkVersion = 33
+versions.targetSdkVersion = 33
 // See change-log at https://github.com/JetBrains/kotlin/blob/master/ChangeLog.md.
 versions.kotlinVersion = "1.6.20"
 versions.kotlinCoroutinesVersion = "1.4.0"
@@ -31,6 +31,8 @@ versions.tripGoLibrary = "1.0"
 versions.tripGoGroup = "com.skedgo"
 versions.javaxAnnotation = "1.3.2"
 versions.instabug = '11.11.0'
+versions.paging = "3.0.0"
+versions.viewPager2 = "1.0.0"
 
 ext.versions = versions
 
@@ -143,10 +145,11 @@ libs.ktxActivity = "androidx.activity:activity-ktx:1.1.0"
 libs.picasso = "com.squareup.picasso:picasso:2.71828"
 libs.flowPreferences = "com.github.tfcporciuncula.flow-preferences:flow-preferences:1.3.3"
 libs.uservoice = "com.uservoice:uservoice-android-sdk:1.2.10"
-libs.paging = "androidx.paging:paging-runtime:3.0.0-alpha12"
+libs.paging = "androidx.paging:paging-runtime:$versions.paging"
 libs.pdfViewer = "com.github.barteksc:android-pdf-viewer:2.8.2"
 libs.fragmentKtx = "androidx.fragment:fragment-ktx:1.3.2"
 libs.glide = "com.github.bumptech.glide:glide:$versions.glide"
+libs.viewPager2 = "androidx.viewpager2:viewpager2:$versions.viewPager2"
 
 libs.volley = "com.android.volley:volley:$versions.volley"
 libs.jetBrainsAnnotation = "org.jetbrains:annotations-java5:$versions.jetBrainsJava5"

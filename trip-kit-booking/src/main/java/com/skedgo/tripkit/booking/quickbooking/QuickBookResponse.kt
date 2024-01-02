@@ -5,6 +5,7 @@ import com.google.gson.annotations.SerializedName
 import com.skedgo.tripkit.common.util.decimalFormatWithCurrencySymbol
 import com.skedgo.tripkit.common.util.factor100
 import com.skedgo.tripkit.common.util.nonDecimalFormatWithCurrencySymbol
+import com.skedgo.tripkit.routing.ModeInfo
 
 data class QuickBookResponse(
     val action: Action?,
@@ -118,6 +119,7 @@ data class Review(
     val depart: String,
     val destination: Destination,
     val mode: String,
+    val modeInfo: ModeInfo,
     val origin: Origin,
     val price: Double,
     val provider: Provider,

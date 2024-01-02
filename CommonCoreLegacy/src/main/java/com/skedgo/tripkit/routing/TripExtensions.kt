@@ -5,6 +5,9 @@ import com.skedgo.tripkit.common.util.TripSegmentUtils
 import org.joda.time.DateTime
 import java.util.concurrent.TimeUnit
 import com.skedgo.tripkit.common.model.TransportMode
+import org.joda.time.format.DateTimeFormat
+
+val TIME_FORMATTER = DateTimeFormat.forPattern("hh:mm a")
 
 /**
  * Gets a start date-time with time-zone.
@@ -15,6 +18,9 @@ val Trip.startDateTime: DateTime
       from.dateTimeZone
   )
 
+val Trip.startTimeString: String
+    get() = startDateTime.toString(TIME_FORMATTER)
+
 /**
  * Get an end date-time with time-zone.
  */
@@ -23,6 +29,9 @@ val Trip.endDateTime: DateTime
       TimeUnit.SECONDS.toMillis(endTimeInSecs),
       to?.dateTimeZone
   )
+
+val Trip.endTimeString: String
+    get() = endDateTime.toString(TIME_FORMATTER)
 
 /**
  * Gets a query date-time with time-zone based on from location

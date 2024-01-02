@@ -18,7 +18,7 @@ internal class OnSubscribeReverseGeocode(
         }
         val geocoder = Geocoder(context)
         try {
-            emitter.onNext(geocoder.getFromLocation(latitude, longitude, maxResults))
+            emitter.onNext(geocoder.getFromLocation(latitude, longitude, maxResults) ?: emptyList())
             emitter.onComplete()
         } catch (e: Exception) {
             if (!emitter.isDisposed) {

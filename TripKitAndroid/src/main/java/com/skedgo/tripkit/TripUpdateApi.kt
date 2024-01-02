@@ -11,18 +11,23 @@ import kotlinx.coroutines.flow.Flow
 
 interface TripUpdateApi {
 
-  @GET
-  fun fetchUpdateAsync(
-      @Url url: String,
-      @Query("includeStops") includeStops: Boolean = true,
-      @Query("v") v: Int = 12
-  ): Observable<RoutingResponse>
+    @GET
+    fun fetchUpdateAsync(
+        @Url url: String,
+        @Query("includeStops") includeStops: Boolean = true,
+        @Query("v") v: Int = 12
+    ): Observable<RoutingResponse>
 
-  @GET
-  suspend fun fetchUpdateAsyncKt(
-          @Url url: String,
-          @Query("includeStops") includeStops: Boolean = true,
-          @Query("v") v: Int = 12
-  ): NetworkResponse<RoutingResponse, Any>
+    @GET
+    suspend fun fetchUpdateAsyncKt(
+        @Url url: String,
+        @Query("includeStops") includeStops: Boolean = true,
+        @Query("v") v: Int = 12
+    ): NetworkResponse<RoutingResponse, Any>
+
+    @GET
+    fun tripSubscription(
+        @Url url: String
+    ): Observable<Any>
 
 }
