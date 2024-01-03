@@ -6,7 +6,7 @@ import com.skedgo.tripkit.common.util.KParcelable
 import com.skedgo.tripkit.common.util.parcelableCreator
 import com.skedgo.tripkit.routing.ModeInfo
 import com.skedgo.tripkit.routing.ServiceColor
-import kotlinx.android.parcel.Parcelize
+import kotlinx.parcelize.Parcelize
 
 data class Direction(
         val encodedShape: String?,

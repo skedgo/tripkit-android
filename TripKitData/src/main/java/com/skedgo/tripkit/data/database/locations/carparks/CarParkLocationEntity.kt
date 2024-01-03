@@ -7,7 +7,7 @@ import androidx.room.*
 class CarParkLocationEntity {
 
   @PrimaryKey
-  lateinit var identifier: String
+  var identifier: String = ""
   lateinit var cellId: String
   lateinit var name: String
   var lat: Double = 0.0
@@ -30,7 +30,7 @@ class CarParkLocationEntity {
 )])
 class OpeningDayEntity {
   @PrimaryKey
-  lateinit var id: String
+  var id: String = ""
 
   @ColumnInfo(index = true)
   lateinit var carParkId: String
@@ -69,7 +69,7 @@ class ParkingOperatorEntity {
 )])
 class PricingTableEntity {
   @PrimaryKey
-  lateinit var id: String
+  var id: String = ""
   lateinit var title: String
   var subtitle: String? = null
   lateinit var currencySymbol: String

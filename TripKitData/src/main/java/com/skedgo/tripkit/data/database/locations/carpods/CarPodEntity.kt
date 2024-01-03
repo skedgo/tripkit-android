@@ -6,7 +6,7 @@ import androidx.room.ForeignKey.CASCADE
 @Entity(tableName = "carPods")
 class CarPodEntity {
     @PrimaryKey
-    lateinit var id: String
+    var id: String = ""
     var address: String? = null
     lateinit var cellId: String
     var lat: Double = 0.0
