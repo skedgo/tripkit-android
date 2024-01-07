@@ -1,7 +1,7 @@
 package com.skedgo.tripkit.data.database.locations.carpods
 
 import androidx.room.*
-import androidx.room.ForeignKey.CASCADE
+import androidx.room.ForeignKey.Companion.CASCADE
 
 @Entity(tableName = "carPods")
 class CarPodEntity {
