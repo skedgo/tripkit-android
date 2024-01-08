@@ -12,16 +12,16 @@ versions.proMinSdkVersion = 21
 versions.compileSdkVersion = 33
 versions.targetSdkVersion = 33
 // See change-log at https://github.com/JetBrains/kotlin/blob/master/ChangeLog.md.
-versions.kotlinVersion = "1.6.20"
+versions.kotlinVersion = "1.8.20"
 versions.kotlinCoroutinesVersion = "1.4.0"
 versions.supportLibraryVersion = "28.0.0"
-versions.androidGradlePlugin = "7.3.0"
+versions.androidGradlePlugin = "8.0.2"
 versions.okHttpVersion = "4.9.0"
 versions.retrofitVersion = "2.8.1"
 versions.androidxVersion = "1.1.0"
-versions.room = "2.4.1"
+versions.room = "2.5.1"
 versions.architectureComponents = "1.0.0"
-versions.testcore = "1.1.0"
+versions.testcore = "1.4.0"
 versions.dagger = "2.24"
 versions.lifecycle = "2.4.0"
 versions.volley = "1.2.0"
@@ -33,6 +33,8 @@ versions.javaxAnnotation = "1.3.2"
 versions.instabug = '11.11.0'
 versions.paging = "3.0.0"
 versions.viewPager2 = "1.0.0"
+versions.mockk = "1.13.8"
+versions.archCore = "2.1.0"
 
 ext.versions = versions
 
@@ -49,6 +51,7 @@ libs.jodaTimeAndroid = "net.danlew:android.joda:2.10.6"
 libs.androidJob = "com.evernote:android-job:1.2.6"
 libs.javaxAnnotation = "javax.annotation:javax.annotation-api:$versions.javaxAnnotation"
 libs.instabug = "com.instabug.library:instabug:$versions.instabug"
+libs.mockk = "io.mockk:mockk:$versions.mockk"
 
 // Support Library package
 libs.supportAnnotations = "androidx.annotation:annotation:$versions.androidxVersion"
@@ -153,5 +156,7 @@ libs.viewPager2 = "androidx.viewpager2:viewpager2:$versions.viewPager2"
 
 libs.volley = "com.android.volley:volley:$versions.volley"
 libs.jetBrainsAnnotation = "org.jetbrains:annotations-java5:$versions.jetBrainsJava5"
+
+libs.archCoreTesting = "androidx.arch.core:core-testing:$versions.archCore"
 
 ext.libs = libs

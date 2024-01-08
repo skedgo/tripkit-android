@@ -6,6 +6,9 @@ apply plugin: "kotlin-kapt"
 apply plugin: "maven-publish"
 
 android {
+
+  namespace 'skedgo.tripkit.domain.legacy'
+
   compileSdkVersion versions.compileSdkVersion
 
   defaultConfig {
@@ -16,6 +19,14 @@ android {
   lintOptions {
     // Changing to warning because of https://github.com/square/okio/issues/58.
     warning 'InvalidPackage'
+  }
+
+  compileOptions {
+    sourceCompatibility JavaVersion.VERSION_17
+    targetCompatibility JavaVersion.VERSION_17
+  }
+  kotlinOptions {
+    jvmTarget = JavaVersion.VERSION_17.toString()
   }
 
   publishing {
@@ -46,7 +57,7 @@ dependencies {
 // build a jar with source files
 task sourcesJar(type: Jar) {
   from android.sourceSets.main.java.srcDirs
-  classifier = 'sources'
+  archiveClassifier.set('sources')
 }
 
 task javadoc(type: Javadoc) {
@@ -61,7 +72,7 @@ task javadoc(type: Javadoc) {
 
 // build a jar with javadoc
 task javadocJar(type: Jar, dependsOn: javadoc) {
-  classifier = 'javadoc'
+  archiveClassifier.set('javadoc')
   from javadoc.destinationDir
 }
 

@@ -1,6 +1,6 @@
 package com.skedgo.rxtry
 
-sealed class Try<T>
+open class Try<T>
 
 data class Success<T>(private val value: T) : Try<T>() {
   operator fun invoke() = value

@@ -1,9 +1,13 @@
 apply plugin: 'com.android.library'
 apply plugin: 'maven-publish'
+apply plugin: 'kotlin-parcelize'
 
 android {
-    compileSdkVersion 29
-    buildToolsVersion "29.0.1"
+
+    namespace 'com.skedgo.sqlite'
+
+    compileSdkVersion versions.compileSdkVersion
+    buildToolsVersion "33.0.0"
 
 
     defaultConfig {

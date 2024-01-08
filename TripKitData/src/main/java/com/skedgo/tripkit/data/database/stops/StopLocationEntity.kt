@@ -15,7 +15,7 @@ class StopLocationEntity {
 
   var address: String? = null
   @PrimaryKey
-  lateinit var code: String
+  var code: String = ""
   lateinit var name: String
   var popularify: Int = 0
   lateinit var services: String

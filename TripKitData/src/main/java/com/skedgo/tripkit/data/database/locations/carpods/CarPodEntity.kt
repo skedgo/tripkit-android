@@ -1,12 +1,12 @@
 package com.skedgo.tripkit.data.database.locations.carpods
 
 import androidx.room.*
-import androidx.room.ForeignKey.CASCADE
+import androidx.room.ForeignKey.Companion.CASCADE
 
 @Entity(tableName = "carPods")
 class CarPodEntity {
     @PrimaryKey
-    lateinit var id: String
+    var id: String = ""
     var address: String? = null
     lateinit var cellId: String
     var lat: Double = 0.0

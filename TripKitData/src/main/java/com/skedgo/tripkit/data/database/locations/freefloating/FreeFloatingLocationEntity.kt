@@ -10,7 +10,7 @@ import com.skedgo.tripkit.parkingspots.models.Parking
 @Keep
 class FreeFloatingLocationEntity {
     @PrimaryKey
-    lateinit var identifier: String
+    var identifier: String = ""
     var cellId: String? = null
     var lat: Double = 0.0
     var lng: Double = 0.0
