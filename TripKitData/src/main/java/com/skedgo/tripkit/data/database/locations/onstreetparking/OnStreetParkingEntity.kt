@@ -8,7 +8,7 @@ import com.skedgo.tripkit.parkingspots.models.Parking
 @TypeConverters(VacancyConverters::class)
 class OnStreetParkingEntity {
   @PrimaryKey
-  lateinit var identifier: String
+  var identifier: String = ""
   lateinit var cellId: String
   lateinit var name: String
   lateinit var encodedPolyline: String

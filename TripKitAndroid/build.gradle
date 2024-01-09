@@ -5,14 +5,13 @@ apply plugin: 'maven-publish'
 apply plugin: "kotlin-android"
 apply plugin: "kotlin-kapt"
 apply plugin: 'org.jetbrains.dokka'
-apply plugin: 'org.jetbrains.kotlin.android.extensions'
+apply plugin: 'kotlin-parcelize'
 
 android {
-  compileSdkVersion versions.compileSdkVersion
 
-  androidExtensions {
-    experimental = true
-  }
+  namespace 'com.skedgo.tripkit'
+
+  compileSdkVersion versions.compileSdkVersion
 
   defaultConfig {
       minSdkVersion versions.proMinSdkVersion
@@ -28,11 +27,11 @@ android {
 
   compileOptions {
     coreLibraryDesugaringEnabled true
-    sourceCompatibility JavaVersion.VERSION_1_8
-    targetCompatibility JavaVersion.VERSION_1_8
+    sourceCompatibility JavaVersion.VERSION_17
+    targetCompatibility JavaVersion.VERSION_17
   }
   kotlinOptions {
-    jvmTarget = JavaVersion.VERSION_1_8.toString()
+    jvmTarget = JavaVersion.VERSION_17.toString()
   }
   testOptions {
     unitTests {
@@ -111,6 +110,8 @@ dependencies {
   implementation libs.map_extension
   implementation libs.location
 
+  testImplementation libs.mockk
+
   debugApi project(':CommonCoreLegacy')
   releaseApi project(':CommonCoreLegacy')
   debugApi project(':TripKitDomain')
@@ -130,7 +131,7 @@ dependencies {
 // build a jar with source files
 task sourcesJar(type: Jar) {
   from android.sourceSets.main.java.srcDirs
-  classifier = 'sources'
+  archiveClassifier.set('sources')
 }
 
 task javadoc(type: Javadoc) {
@@ -145,7 +146,7 @@ task javadoc(type: Javadoc) {
 
 // build a jar with javadoc
 task javadocJar(type: Jar, dependsOn: javadoc) {
-  classifier = 'javadoc'
+  archiveClassifier.set('javadoc')
   from javadoc.destinationDir
 }
 

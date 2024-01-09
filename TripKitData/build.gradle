@@ -4,8 +4,12 @@ apply plugin: "com.android.library"
 apply plugin: 'maven-publish'
 apply plugin: "kotlin-android"
 apply plugin: "kotlin-kapt"
+apply plugin: 'kotlin-parcelize'
 
 android {
+
+  namespace 'skedgo.tripkit.data'
+
   compileSdkVersion versions.compileSdkVersion
 
   defaultConfig {
@@ -24,12 +28,12 @@ android {
     warning "InvalidPackage"
   }
   compileOptions {
-    sourceCompatibility JavaVersion.VERSION_1_8
-    targetCompatibility JavaVersion.VERSION_1_8
+    sourceCompatibility JavaVersion.VERSION_17
+    targetCompatibility JavaVersion.VERSION_17
   }
 
   kotlinOptions {
-    jvmTarget = JavaVersion.VERSION_1_8.toString()
+    jvmTarget = JavaVersion.VERSION_17.toString()
   }
 
   publishing {
@@ -121,7 +125,7 @@ kapt {
 // build a jar with source files
 task sourcesJar(type: Jar) {
   from android.sourceSets.main.java.srcDirs
-  classifier = 'sources'
+  archiveClassifier.set('sources')
 }
 
 task javadoc(type: Javadoc) {
@@ -136,7 +140,7 @@ task javadoc(type: Javadoc) {
 
 // build a jar with javadoc
 task javadocJar(type: Jar, dependsOn: javadoc) {
-  classifier = 'javadoc'
+  archiveClassifier.set('javadoc')
   from javadoc.destinationDir
 }
 
