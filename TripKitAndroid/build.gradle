@@ -126,6 +126,14 @@ dependencies {
 
   implementation libs.javaxAnnotation
   compileOnly 'com.github.pengrad:jdk9-deps:1.0'
+
+  testImplementation libs.mockk
+  testImplementation libs.junit
+  testImplementation libs.androidxJUnitExtTesting
+  testImplementation libs.archCoreTesting
+  testImplementation libs.kluent
+  testImplementation libs.androidxTesting
+  testImplementation libs.assertjCore
 }
 
 // build a jar with source files
