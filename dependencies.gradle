@@ -143,6 +143,7 @@ libs.coroutinesCore = "org.jetbrains.kotlinx:kotlinx-coroutines-core:$versions.k
 libs.coroutinesAndroid = "org.jetbrains.kotlinx:kotlinx-coroutines-android:$versions.kotlinCoroutinesVersion"
 libs.coroutinesRx = "org.jetbrains.kotlinx:kotlinx-coroutines-rx2:$versions.kotlinCoroutinesVersion"
 libs.coroutinesPlayServices = "org.jetbrains.kotlinx:kotlinx-coroutines-play-services:$versions.kotlinCoroutinesVersion"
+libs.coroutinesTest = "org.jetbrains.kotlinx:kotlinx-coroutines-test:$versions.kotlinCoroutinesVersion"
 libs.networkResponse = "com.github.haroldadmin:NetworkResponseAdapter:4.0.1"
 libs.ktxActivity = "androidx.activity:activity-ktx:1.1.0"
 libs.picasso = "com.squareup.picasso:picasso:2.71828"
