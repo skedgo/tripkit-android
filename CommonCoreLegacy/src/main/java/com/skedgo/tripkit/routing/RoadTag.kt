@@ -36,6 +36,8 @@ enum class RoadTag {
     */
     @SerializedName("UNKNOWN")
     UNKNOWN,
+    @SerializedName("LIT-ROUTE")
+    LIT_ROUTE
 }
 
 fun String.parseRoadTag(): RoadTag =
@@ -52,7 +54,8 @@ fun RoadTag.getRoadSafetyColorPair(): Pair<Int, Boolean> {
         RoadTag.CYCLE_NETWORK,
         RoadTag.BICYCLE_DESIGNATED,
         RoadTag.BICYCLE_BOULEVARD,
-        RoadTag.CCTV_CAMERA -> android.R.color.holo_blue_dark to true
+        RoadTag.CCTV_CAMERA,
+        RoadTag.LIT_ROUTE -> android.R.color.holo_blue_dark to true
 
         RoadTag.SIDE_WALK,
         RoadTag.SIDE_ROAD,
@@ -72,7 +75,8 @@ fun RoadTag.getRoadSafetyColor(): Int {
         RoadTag.CYCLE_NETWORK,
         RoadTag.BICYCLE_DESIGNATED,
         RoadTag.BICYCLE_BOULEVARD,
-        RoadTag.CCTV_CAMERA -> Color.parseColor("#0000b3")
+        RoadTag.CCTV_CAMERA,
+        RoadTag.LIT_ROUTE -> Color.parseColor("#0000b3")
 
         RoadTag.SIDE_WALK,
         RoadTag.SIDE_ROAD,
@@ -92,7 +96,8 @@ fun RoadTag.getRoadSafetyIndex(): Int {
         RoadTag.CYCLE_NETWORK,
         RoadTag.BICYCLE_DESIGNATED,
         RoadTag.BICYCLE_BOULEVARD,
-        RoadTag.CCTV_CAMERA -> 1
+        RoadTag.CCTV_CAMERA,
+        RoadTag.LIT_ROUTE -> 1
 
         RoadTag.SIDE_WALK,
         RoadTag.SIDE_ROAD,
@@ -113,6 +118,7 @@ fun RoadTag.getTextColor(): Int {
         RoadTag.BICYCLE_DESIGNATED,
         RoadTag.BICYCLE_BOULEVARD,
         RoadTag.CCTV_CAMERA,
+        RoadTag.LIT_ROUTE,
         RoadTag.SIDE_ROAD,
         /*RoadTag.SEGREGATED,*/
         RoadTag.UNKNOWN,
@@ -136,6 +142,7 @@ fun RoadTag.getRoadTagLabel(): String {
         /*RoadTag.SERVICE_ROAD -> "Service Road"*/ //Ignored
         RoadTag.STREET_LIGHT -> "Street Light"
         RoadTag.CCTV_CAMERA -> "CCTV Camera"
+        RoadTag.LIT_ROUTE -> "Lit Route"
         /*RoadTag.SEGREGATED -> "Segregated"*/ //Ignored
         else -> "Other"
     }
