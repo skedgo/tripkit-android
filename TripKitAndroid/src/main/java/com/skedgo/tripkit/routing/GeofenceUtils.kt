@@ -2,6 +2,7 @@ package com.skedgo.tripkit.routing
 
 import com.google.android.gms.location.Geofence.GEOFENCE_TRANSITION_ENTER
 import com.google.android.gms.location.Geofence.GEOFENCE_TRANSITION_EXIT
+import com.google.android.gms.location.Geofence.NEVER_EXPIRE
 
 fun Geofence.toGsmGeofence(): com.google.android.gms.location.Geofence {
 
@@ -15,13 +16,10 @@ fun Geofence.toGsmGeofence(): com.google.android.gms.location.Geofence {
         null
     }
 
-    val geofenceBuilder = com.google.android.gms.location.Geofence.Builder()
-            .setRequestId(this.id)
-            .setCircularRegion(this.center.lat, this.center.lng, this.radius.toFloat())
-            .setExpirationDuration(timeline)
-    if (transitionType != null) {
-        geofenceBuilder.setTransitionTypes(transitionType)
-    }
-
-    return geofenceBuilder.build()
+    return com.google.android.gms.location.Geofence.Builder()
+        .setRequestId(this.id)
+        .setCircularRegion(this.center.lat, this.center.lng, this.radius.toFloat())
+        .setExpirationDuration(if (this.timeline <= 0) NEVER_EXPIRE else this.timeline)
+        .setTransitionTypes(transitionType ?: GEOFENCE_TRANSITION_ENTER)
+        .build()
 }

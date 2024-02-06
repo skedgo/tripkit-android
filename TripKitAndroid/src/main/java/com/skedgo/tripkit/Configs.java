@@ -71,4 +71,6 @@ public interface Configs {
 
     @Value.Default public default boolean hideFavorites() { return false;}
 
+    @Value.Default public default boolean showGeofences() { return false;}
+
 }
