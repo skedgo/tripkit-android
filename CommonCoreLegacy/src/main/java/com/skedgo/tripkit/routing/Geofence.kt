@@ -12,9 +12,9 @@ data class Geofence(
 ) {
     var timeline: Long = -1L
 
-    fun computeAndSetTimeline(tripEndDateTimeInMillis: Long): Long {
+    fun computeAndSetTimeline(tripEndDateTimeInMillis: Long) {
         val currentTimeInMillis = System.currentTimeMillis()
-        return tripEndDateTimeInMillis - currentTimeInMillis
+        timeline = tripEndDateTimeInMillis - currentTimeInMillis
     }
 }
 
