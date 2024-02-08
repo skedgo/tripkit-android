@@ -1,0 +1,1395 @@
+{
+  "formatVersion": 1,
+  "database": {
+    "version": 5,
+    "identityHash": "49661b1d3f26137a509189769563f103",
+    "entities": [
+      {
+        "tableName": "carParks",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`identifier` TEXT NOT NULL, `cellId` TEXT NOT NULL, `name` TEXT NOT NULL, `lat` REAL NOT NULL, `lng` REAL NOT NULL, `address` TEXT, `info` TEXT, `modeIdentifier` TEXT, `localIconName` TEXT NOT NULL, `remoteIconName` TEXT, `operator_name` TEXT NOT NULL, `phone` TEXT, `website` TEXT, PRIMARY KEY(`identifier`))",
+        "fields": [
+          {
+            "fieldPath": "identifier",
+            "columnName": "identifier",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "cellId",
+            "columnName": "cellId",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "name",
+            "columnName": "name",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "lat",
+            "columnName": "lat",
+            "affinity": "REAL",
+            "notNull": true
+          },
+          {
+            "fieldPath": "lng",
+            "columnName": "lng",
+            "affinity": "REAL",
+            "notNull": true
+          },
+          {
+            "fieldPath": "address",
+            "columnName": "address",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "info",
+            "columnName": "info",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "modeIdentifier",
+            "columnName": "modeIdentifier",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "localIconName",
+            "columnName": "localIconName",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "remoteIconName",
+            "columnName": "remoteIconName",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "operator.name",
+            "columnName": "operator_name",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "operator.phone",
+            "columnName": "phone",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "operator.website",
+            "columnName": "website",
+            "affinity": "TEXT",
+            "notNull": false
+          }
+        ],
+        "primaryKey": {
+          "autoGenerate": false,
+          "columnNames": [
+            "identifier"
+          ]
+        },
+        "indices": [],
+        "foreignKeys": []
+      },
+      {
+        "tableName": "onStreetParkings",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`identifier` TEXT NOT NULL, `cellId` TEXT NOT NULL, `name` TEXT NOT NULL, `encodedPolyline` TEXT NOT NULL, `lat` REAL NOT NULL, `lng` REAL NOT NULL, `address` TEXT, `info` TEXT NOT NULL, `parkingVacancy` TEXT, `availableContent` TEXT NOT NULL, `modeIdentifier` TEXT, `localIconName` TEXT NOT NULL, `remoteIconName` TEXT, `operator_name` TEXT NOT NULL, `phone` TEXT, `website` TEXT, PRIMARY KEY(`identifier`))",
+        "fields": [
+          {
+            "fieldPath": "identifier",
+            "columnName": "identifier",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "cellId",
+            "columnName": "cellId",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "name",
+            "columnName": "name",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "encodedPolyline",
+            "columnName": "encodedPolyline",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "lat",
+            "columnName": "lat",
+            "affinity": "REAL",
+            "notNull": true
+          },
+          {
+            "fieldPath": "lng",
+            "columnName": "lng",
+            "affinity": "REAL",
+            "notNull": true
+          },
+          {
+            "fieldPath": "address",
+            "columnName": "address",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "info",
+            "columnName": "info",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "parkingVacancy",
+            "columnName": "parkingVacancy",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "availableContent",
+            "columnName": "availableContent",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "modeIdentifier",
+            "columnName": "modeIdentifier",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "localIconName",
+            "columnName": "localIconName",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "remoteIconName",
+            "columnName": "remoteIconName",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "operator.name",
+            "columnName": "operator_name",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "operator.phone",
+            "columnName": "phone",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "operator.website",
+            "columnName": "website",
+            "affinity": "TEXT",
+            "notNull": false
+          }
+        ],
+        "primaryKey": {
+          "autoGenerate": false,
+          "columnNames": [
+            "identifier"
+          ]
+        },
+        "indices": [],
+        "foreignKeys": []
+      },
+      {
+        "tableName": "bikepods",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`identifier` TEXT NOT NULL, `cellId` TEXT, `lat` REAL NOT NULL, `lng` REAL NOT NULL, `address` TEXT, `timezone` TEXT, `inService` INTEGER, `totalSpaces` INTEGER, `availableBikes` INTEGER, `lastUpdate` INTEGER, `deepLink` TEXT, `operator_name` TEXT NOT NULL, `operator_website` TEXT, `operator_phone` TEXT, `operator_appURLAndroid` TEXT, `datasource_disclaimer` TEXT, `datasource_name` TEXT, `datasource_phone` TEXT, `datasource_website` TEXT, `modeinfo_identifier` TEXT, `modeinfo_alt` TEXT, `modeinfo_localIcon` TEXT, `modeinfo_remoteIcon` TEXT, `modeinfo_remoteDarkIcon` TEXT, `modeinfo_description` TEXT, `modeinfo_remoteIconIsTemplate` INTEGER, `modeinfo_remoteIconIsBranding` INTEGER, `modeinfo_serviceColor_red` INTEGER, `modeinfo_serviceColor_blue` INTEGER, `modeinfo_serviceColor_green` INTEGER, PRIMARY KEY(`identifier`))",
+        "fields": [
+          {
+            "fieldPath": "identifier",
+            "columnName": "identifier",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "cellId",
+            "columnName": "cellId",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "lat",
+            "columnName": "lat",
+            "affinity": "REAL",
+            "notNull": true
+          },
+          {
+            "fieldPath": "lng",
+            "columnName": "lng",
+            "affinity": "REAL",
+            "notNull": true
+          },
+          {
+            "fieldPath": "address",
+            "columnName": "address",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "timezone",
+            "columnName": "timezone",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "bikePod.inService",
+            "columnName": "inService",
+            "affinity": "INTEGER",
+            "notNull": false
+          },
+          {
+            "fieldPath": "bikePod.totalSpaces",
+            "columnName": "totalSpaces",
+            "affinity": "INTEGER",
+            "notNull": false
+          },
+          {
+            "fieldPath": "bikePod.availableBikes",
+            "columnName": "availableBikes",
+            "affinity": "INTEGER",
+            "notNull": false
+          },
+          {
+            "fieldPath": "bikePod.lastUpdate",
+            "columnName": "lastUpdate",
+            "affinity": "INTEGER",
+            "notNull": false
+          },
+          {
+            "fieldPath": "bikePod.deepLink",
+            "columnName": "deepLink",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "bikePod.operator.name",
+            "columnName": "operator_name",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "bikePod.operator.website",
+            "columnName": "operator_website",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "bikePod.operator.phone",
+            "columnName": "operator_phone",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "bikePod.operator.appInfo.appURLAndroid",
+            "columnName": "operator_appURLAndroid",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "bikePod.dataSource.disclaimer",
+            "columnName": "datasource_disclaimer",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "bikePod.dataSource.provider.name",
+            "columnName": "datasource_name",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "bikePod.dataSource.provider.phone",
+            "columnName": "datasource_phone",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "bikePod.dataSource.provider.website",
+            "columnName": "datasource_website",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "modeInfo.identifier",
+            "columnName": "modeinfo_identifier",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "modeInfo.alt",
+            "columnName": "modeinfo_alt",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "modeInfo.localIcon",
+            "columnName": "modeinfo_localIcon",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "modeInfo.remoteIcon",
+            "columnName": "modeinfo_remoteIcon",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "modeInfo.remoteDarkIcon",
+            "columnName": "modeinfo_remoteDarkIcon",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "modeInfo.description",
+            "columnName": "modeinfo_description",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "modeInfo.remoteIconIsTemplate",
+            "columnName": "modeinfo_remoteIconIsTemplate",
+            "affinity": "INTEGER",
+            "notNull": false
+          },
+          {
+            "fieldPath": "modeInfo.remoteIconIsBranding",
+            "columnName": "modeinfo_remoteIconIsBranding",
+            "affinity": "INTEGER",
+            "notNull": false
+          },
+          {
+            "fieldPath": "modeInfo.color.red",
+            "columnName": "modeinfo_serviceColor_red",
+            "affinity": "INTEGER",
+            "notNull": false
+          },
+          {
+            "fieldPath": "modeInfo.color.blue",
+            "columnName": "modeinfo_serviceColor_blue",
+            "affinity": "INTEGER",
+            "notNull": false
+          },
+          {
+            "fieldPath": "modeInfo.color.green",
+            "columnName": "modeinfo_serviceColor_green",
+            "affinity": "INTEGER",
+            "notNull": false
+          }
+        ],
+        "primaryKey": {
+          "autoGenerate": false,
+          "columnNames": [
+            "identifier"
+          ]
+        },
+        "indices": [],
+        "foreignKeys": []
+      },
+      {
+        "tableName": "freeFloatingLocations",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`identifier` TEXT NOT NULL, `cellId` TEXT, `lat` REAL NOT NULL, `lng` REAL NOT NULL, `name` TEXT, `address` TEXT, `freefloating_vehicle_available` INTEGER NOT NULL, `freefloating_vehicle_batteryLevel` INTEGER NOT NULL, `freefloating_vehicle_lastUpdate` INTEGER NOT NULL, `freefloating_vehicle_qrCode` TEXT, `freefloating_vehicle_name` TEXT NOT NULL, `freefloating_vehicle_vehicleType` TEXT NOT NULL, `freefloating_vehicle_freefloating_vehicletypeinfo_formFactor` TEXT, `freefloating_vehicle_freefloating_vehicletypeinfo_maxRangeMeters` INTEGER, `freefloating_vehicle_freefloating_vehicletypeinfo_propulsionType` TEXT, `freefloating_vehicle_freefloating_operator_name` TEXT NOT NULL, `freefloating_vehicle_freefloating_operator_website` TEXT, `freefloating_vehicle_freefloating_operator_phone` TEXT, `freefloating_vehicle_freefloating_operator_freefloating_appinfo_name` TEXT, `freefloating_vehicle_freefloating_operator_freefloating_appinfo_appURLAndroid` TEXT, `freefloating_modeinfo_identifier` TEXT, `freefloating_modeinfo_alt` TEXT, `freefloating_modeinfo_localIcon` TEXT, `freefloating_modeinfo_remoteIcon` TEXT, `freefloating_modeinfo_remoteDarkIcon` TEXT, `freefloating_modeinfo_description` TEXT, `freefloating_modeinfo_remoteIconIsTemplate` INTEGER, `freefloating_modeinfo_remoteIconIsBranding` INTEGER, `freefloating_modeinfo_serviceColor_red` INTEGER, `freefloating_modeinfo_serviceColor_blue` INTEGER, `freefloating_modeinfo_serviceColor_green` INTEGER, PRIMARY KEY(`identifier`))",
+        "fields": [
+          {
+            "fieldPath": "identifier",
+            "columnName": "identifier",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "cellId",
+            "columnName": "cellId",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "lat",
+            "columnName": "lat",
+            "affinity": "REAL",
+            "notNull": true
+          },
+          {
+            "fieldPath": "lng",
+            "columnName": "lng",
+            "affinity": "REAL",
+            "notNull": true
+          },
+          {
+            "fieldPath": "name",
+            "columnName": "name",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "address",
+            "columnName": "address",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "vehicle.available",
+            "columnName": "freefloating_vehicle_available",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "vehicle.batteryLevel",
+            "columnName": "freefloating_vehicle_batteryLevel",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "vehicle.lastUpdate",
+            "columnName": "freefloating_vehicle_lastUpdate",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "vehicle.qrCode",
+            "columnName": "freefloating_vehicle_qrCode",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "vehicle.name",
+            "columnName": "freefloating_vehicle_name",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "vehicle.vehicleType",
+            "columnName": "freefloating_vehicle_vehicleType",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "vehicle.vehicleTypeInfo.formFactor",
+            "columnName": "freefloating_vehicle_freefloating_vehicletypeinfo_formFactor",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "vehicle.vehicleTypeInfo.maxRangeMeters",
+            "columnName": "freefloating_vehicle_freefloating_vehicletypeinfo_maxRangeMeters",
+            "affinity": "INTEGER",
+            "notNull": false
+          },
+          {
+            "fieldPath": "vehicle.vehicleTypeInfo.propulsionType",
+            "columnName": "freefloating_vehicle_freefloating_vehicletypeinfo_propulsionType",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "vehicle.operator.name",
+            "columnName": "freefloating_vehicle_freefloating_operator_name",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "vehicle.operator.website",
+            "columnName": "freefloating_vehicle_freefloating_operator_website",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "vehicle.operator.phone",
+            "columnName": "freefloating_vehicle_freefloating_operator_phone",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "vehicle.operator.appInfo.name",
+            "columnName": "freefloating_vehicle_freefloating_operator_freefloating_appinfo_name",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "vehicle.operator.appInfo.appURLAndroid",
+            "columnName": "freefloating_vehicle_freefloating_operator_freefloating_appinfo_appURLAndroid",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "modeInfo.identifier",
+            "columnName": "freefloating_modeinfo_identifier",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "modeInfo.alt",
+            "columnName": "freefloating_modeinfo_alt",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "modeInfo.localIcon",
+            "columnName": "freefloating_modeinfo_localIcon",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "modeInfo.remoteIcon",
+            "columnName": "freefloating_modeinfo_remoteIcon",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "modeInfo.remoteDarkIcon",
+            "columnName": "freefloating_modeinfo_remoteDarkIcon",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "modeInfo.description",
+            "columnName": "freefloating_modeinfo_description",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "modeInfo.remoteIconIsTemplate",
+            "columnName": "freefloating_modeinfo_remoteIconIsTemplate",
+            "affinity": "INTEGER",
+            "notNull": false
+          },
+          {
+            "fieldPath": "modeInfo.remoteIconIsBranding",
+            "columnName": "freefloating_modeinfo_remoteIconIsBranding",
+            "affinity": "INTEGER",
+            "notNull": false
+          },
+          {
+            "fieldPath": "modeInfo.color.red",
+            "columnName": "freefloating_modeinfo_serviceColor_red",
+            "affinity": "INTEGER",
+            "notNull": false
+          },
+          {
+            "fieldPath": "modeInfo.color.blue",
+            "columnName": "freefloating_modeinfo_serviceColor_blue",
+            "affinity": "INTEGER",
+            "notNull": false
+          },
+          {
+            "fieldPath": "modeInfo.color.green",
+            "columnName": "freefloating_modeinfo_serviceColor_green",
+            "affinity": "INTEGER",
+            "notNull": false
+          }
+        ],
+        "primaryKey": {
+          "autoGenerate": false,
+          "columnNames": [
+            "identifier"
+          ]
+        },
+        "indices": [],
+        "foreignKeys": []
+      },
+      {
+        "tableName": "OpeningDayEntity",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` TEXT NOT NULL, `carParkId` TEXT NOT NULL, `name` TEXT NOT NULL, PRIMARY KEY(`id`), FOREIGN KEY(`carParkId`) REFERENCES `carParks`(`identifier`) ON UPDATE CASCADE ON DELETE CASCADE )",
+        "fields": [
+          {
+            "fieldPath": "id",
+            "columnName": "id",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "carParkId",
+            "columnName": "carParkId",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "name",
+            "columnName": "name",
+            "affinity": "TEXT",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "autoGenerate": false,
+          "columnNames": [
+            "id"
+          ]
+        },
+        "indices": [
+          {
+            "name": "index_OpeningDayEntity_carParkId",
+            "unique": false,
+            "columnNames": [
+              "carParkId"
+            ],
+            "orders": [],
+            "createSql": "CREATE INDEX IF NOT EXISTS `index_OpeningDayEntity_carParkId` ON `${TABLE_NAME}` (`carParkId`)"
+          }
+        ],
+        "foreignKeys": [
+          {
+            "table": "carParks",
+            "onDelete": "CASCADE",
+            "onUpdate": "CASCADE",
+            "columns": [
+              "carParkId"
+            ],
+            "referencedColumns": [
+              "identifier"
+            ]
+          }
+        ]
+      },
+      {
+        "tableName": "OpeningTimeEntity",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `openingDayId` TEXT NOT NULL, `opens` TEXT NOT NULL, `closes` TEXT NOT NULL, FOREIGN KEY(`openingDayId`) REFERENCES `OpeningDayEntity`(`id`) ON UPDATE CASCADE ON DELETE CASCADE )",
+        "fields": [
+          {
+            "fieldPath": "id",
+            "columnName": "id",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "openingDayId",
+            "columnName": "openingDayId",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "opens",
+            "columnName": "opens",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "closes",
+            "columnName": "closes",
+            "affinity": "TEXT",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "autoGenerate": true,
+          "columnNames": [
+            "id"
+          ]
+        },
+        "indices": [
+          {
+            "name": "index_OpeningTimeEntity_openingDayId",
+            "unique": false,
+            "columnNames": [
+              "openingDayId"
+            ],
+            "orders": [],
+            "createSql": "CREATE INDEX IF NOT EXISTS `index_OpeningTimeEntity_openingDayId` ON `${TABLE_NAME}` (`openingDayId`)"
+          }
+        ],
+        "foreignKeys": [
+          {
+            "table": "OpeningDayEntity",
+            "onDelete": "CASCADE",
+            "onUpdate": "CASCADE",
+            "columns": [
+              "openingDayId"
+            ],
+            "referencedColumns": [
+              "id"
+            ]
+          }
+        ]
+      },
+      {
+        "tableName": "carPods",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` TEXT NOT NULL, `address` TEXT, `cellId` TEXT NOT NULL, `lat` REAL NOT NULL, `lng` REAL NOT NULL, `name` TEXT NOT NULL, `localIcon` TEXT NOT NULL, `remoteIcon` TEXT, `operatorName` TEXT NOT NULL, `operatorPhone` TEXT, `operatorWebsite` TEXT, `garageAddress` TEXT, `availableChargingSpaces` INTEGER, `availableVehicles` INTEGER, `totalSpaces` INTEGER, `lastUpdate` INTEGER, `inService` INTEGER, `deepLink` TEXT, `appURLAndroid` TEXT, `bookingURL` TEXT, `red` INTEGER NOT NULL, `green` INTEGER NOT NULL, `blue` INTEGER NOT NULL, PRIMARY KEY(`id`))",
+        "fields": [
+          {
+            "fieldPath": "id",
+            "columnName": "id",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "address",
+            "columnName": "address",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "cellId",
+            "columnName": "cellId",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "lat",
+            "columnName": "lat",
+            "affinity": "REAL",
+            "notNull": true
+          },
+          {
+            "fieldPath": "lng",
+            "columnName": "lng",
+            "affinity": "REAL",
+            "notNull": true
+          },
+          {
+            "fieldPath": "name",
+            "columnName": "name",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "localIcon",
+            "columnName": "localIcon",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "remoteIcon",
+            "columnName": "remoteIcon",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "operatorName",
+            "columnName": "operatorName",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "operatorPhone",
+            "columnName": "operatorPhone",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "operatorWebsite",
+            "columnName": "operatorWebsite",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "garageAddress",
+            "columnName": "garageAddress",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "availableChargingSpaces",
+            "columnName": "availableChargingSpaces",
+            "affinity": "INTEGER",
+            "notNull": false
+          },
+          {
+            "fieldPath": "availableVehicles",
+            "columnName": "availableVehicles",
+            "affinity": "INTEGER",
+            "notNull": false
+          },
+          {
+            "fieldPath": "totalSpaces",
+            "columnName": "totalSpaces",
+            "affinity": "INTEGER",
+            "notNull": false
+          },
+          {
+            "fieldPath": "lastUpdate",
+            "columnName": "lastUpdate",
+            "affinity": "INTEGER",
+            "notNull": false
+          },
+          {
+            "fieldPath": "inService",
+            "columnName": "inService",
+            "affinity": "INTEGER",
+            "notNull": false
+          },
+          {
+            "fieldPath": "deepLink",
+            "columnName": "deepLink",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "appURLAndroid",
+            "columnName": "appURLAndroid",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "bookingURL",
+            "columnName": "bookingURL",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "red",
+            "columnName": "red",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "green",
+            "columnName": "green",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "blue",
+            "columnName": "blue",
+            "affinity": "INTEGER",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "autoGenerate": false,
+          "columnNames": [
+            "id"
+          ]
+        },
+        "indices": [],
+        "foreignKeys": []
+      },
+      {
+        "tableName": "PricingEntryEntity",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `price` REAL NOT NULL, `label` TEXT, `maxDurationInMinutes` INTEGER, `pricingTableId` TEXT NOT NULL, FOREIGN KEY(`pricingTableId`) REFERENCES `PricingTableEntity`(`id`) ON UPDATE CASCADE ON DELETE CASCADE )",
+        "fields": [
+          {
+            "fieldPath": "id",
+            "columnName": "id",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "price",
+            "columnName": "price",
+            "affinity": "REAL",
+            "notNull": true
+          },
+          {
+            "fieldPath": "label",
+            "columnName": "label",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "maxDurationInMinutes",
+            "columnName": "maxDurationInMinutes",
+            "affinity": "INTEGER",
+            "notNull": false
+          },
+          {
+            "fieldPath": "pricingTableId",
+            "columnName": "pricingTableId",
+            "affinity": "TEXT",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "autoGenerate": true,
+          "columnNames": [
+            "id"
+          ]
+        },
+        "indices": [
+          {
+            "name": "index_PricingEntryEntity_pricingTableId",
+            "unique": false,
+            "columnNames": [
+              "pricingTableId"
+            ],
+            "orders": [],
+            "createSql": "CREATE INDEX IF NOT EXISTS `index_PricingEntryEntity_pricingTableId` ON `${TABLE_NAME}` (`pricingTableId`)"
+          }
+        ],
+        "foreignKeys": [
+          {
+            "table": "PricingTableEntity",
+            "onDelete": "CASCADE",
+            "onUpdate": "CASCADE",
+            "columns": [
+              "pricingTableId"
+            ],
+            "referencedColumns": [
+              "id"
+            ]
+          }
+        ]
+      },
+      {
+        "tableName": "carPodVehicles",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `carPodId` TEXT NOT NULL, `name` TEXT NOT NULL, `fuelType` TEXT, `licensePlate` TEXT, FOREIGN KEY(`carPodId`) REFERENCES `carPods`(`id`) ON UPDATE NO ACTION ON DELETE CASCADE )",
+        "fields": [
+          {
+            "fieldPath": "id",
+            "columnName": "id",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "carPodId",
+            "columnName": "carPodId",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "name",
+            "columnName": "name",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "fuelType",
+            "columnName": "fuelType",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "licensePlate",
+            "columnName": "licensePlate",
+            "affinity": "TEXT",
+            "notNull": false
+          }
+        ],
+        "primaryKey": {
+          "autoGenerate": true,
+          "columnNames": [
+            "id"
+          ]
+        },
+        "indices": [
+          {
+            "name": "index_carPodVehicles_carPodId",
+            "unique": false,
+            "columnNames": [
+              "carPodId"
+            ],
+            "orders": [],
+            "createSql": "CREATE INDEX IF NOT EXISTS `index_carPodVehicles_carPodId` ON `${TABLE_NAME}` (`carPodId`)"
+          }
+        ],
+        "foreignKeys": [
+          {
+            "table": "carPods",
+            "onDelete": "CASCADE",
+            "onUpdate": "NO ACTION",
+            "columns": [
+              "carPodId"
+            ],
+            "referencedColumns": [
+              "id"
+            ]
+          }
+        ]
+      },
+      {
+        "tableName": "PricingTableEntity",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` TEXT NOT NULL, `title` TEXT NOT NULL, `subtitle` TEXT, `currencySymbol` TEXT NOT NULL, `currency` TEXT NOT NULL, `carParkId` TEXT NOT NULL, PRIMARY KEY(`id`), FOREIGN KEY(`carParkId`) REFERENCES `carParks`(`identifier`) ON UPDATE CASCADE ON DELETE CASCADE )",
+        "fields": [
+          {
+            "fieldPath": "id",
+            "columnName": "id",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "title",
+            "columnName": "title",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "subtitle",
+            "columnName": "subtitle",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "currencySymbol",
+            "columnName": "currencySymbol",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "currency",
+            "columnName": "currency",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "carParkId",
+            "columnName": "carParkId",
+            "affinity": "TEXT",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "autoGenerate": false,
+          "columnNames": [
+            "id"
+          ]
+        },
+        "indices": [
+          {
+            "name": "index_PricingTableEntity_carParkId",
+            "unique": false,
+            "columnNames": [
+              "carParkId"
+            ],
+            "orders": [],
+            "createSql": "CREATE INDEX IF NOT EXISTS `index_PricingTableEntity_carParkId` ON `${TABLE_NAME}` (`carParkId`)"
+          }
+        ],
+        "foreignKeys": [
+          {
+            "table": "carParks",
+            "onDelete": "CASCADE",
+            "onUpdate": "CASCADE",
+            "columns": [
+              "carParkId"
+            ],
+            "referencedColumns": [
+              "identifier"
+            ]
+          }
+        ]
+      },
+      {
+        "tableName": "stopLocations",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`address` TEXT, `code` TEXT NOT NULL, `name` TEXT NOT NULL, `popularify` INTEGER NOT NULL, `services` TEXT NOT NULL, `stopType` TEXT NOT NULL, `timeZone` TEXT, `wheelchairAccessible` INTEGER NOT NULL, `lat` REAL NOT NULL, `lng` REAL NOT NULL, `modeinfo_identifier` TEXT, `modeinfo_alt` TEXT, `modeinfo_localIcon` TEXT, `modeinfo_remoteIcon` TEXT, `modeinfo_remoteDarkIcon` TEXT, `modeinfo_description` TEXT, `modeinfo_remoteIconIsTemplate` INTEGER NOT NULL, `modeinfo_remoteIconIsBranding` INTEGER NOT NULL, `modeinfo_serviceColor_red` INTEGER, `modeinfo_serviceColor_blue` INTEGER, `modeinfo_serviceColor_green` INTEGER, PRIMARY KEY(`code`))",
+        "fields": [
+          {
+            "fieldPath": "address",
+            "columnName": "address",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "code",
+            "columnName": "code",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "name",
+            "columnName": "name",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "popularify",
+            "columnName": "popularify",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "services",
+            "columnName": "services",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "stopType",
+            "columnName": "stopType",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "timeZone",
+            "columnName": "timeZone",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "wheelchairAccessible",
+            "columnName": "wheelchairAccessible",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "lat",
+            "columnName": "lat",
+            "affinity": "REAL",
+            "notNull": true
+          },
+          {
+            "fieldPath": "lng",
+            "columnName": "lng",
+            "affinity": "REAL",
+            "notNull": true
+          },
+          {
+            "fieldPath": "modeInfo.identifier",
+            "columnName": "modeinfo_identifier",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "modeInfo.alt",
+            "columnName": "modeinfo_alt",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "modeInfo.localIcon",
+            "columnName": "modeinfo_localIcon",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "modeInfo.remoteIcon",
+            "columnName": "modeinfo_remoteIcon",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "modeInfo.remoteDarkIcon",
+            "columnName": "modeinfo_remoteDarkIcon",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "modeInfo.description",
+            "columnName": "modeinfo_description",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "modeInfo.remoteIconIsTemplate",
+            "columnName": "modeinfo_remoteIconIsTemplate",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "modeInfo.remoteIconIsBranding",
+            "columnName": "modeinfo_remoteIconIsBranding",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "modeInfo.color.red",
+            "columnName": "modeinfo_serviceColor_red",
+            "affinity": "INTEGER",
+            "notNull": false
+          },
+          {
+            "fieldPath": "modeInfo.color.blue",
+            "columnName": "modeinfo_serviceColor_blue",
+            "affinity": "INTEGER",
+            "notNull": false
+          },
+          {
+            "fieldPath": "modeInfo.color.green",
+            "columnName": "modeinfo_serviceColor_green",
+            "affinity": "INTEGER",
+            "notNull": false
+          }
+        ],
+        "primaryKey": {
+          "autoGenerate": false,
+          "columnNames": [
+            "code"
+          ]
+        },
+        "indices": [],
+        "foreignKeys": []
+      },
+      {
+        "tableName": "scheduledServiceRealtimeInfo",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER NOT NULL, `realTimeDeparture` INTEGER NOT NULL, `realTimeArrival` INTEGER NOT NULL, PRIMARY KEY(`id`))",
+        "fields": [
+          {
+            "fieldPath": "id",
+            "columnName": "id",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "realTimeDeparture",
+            "columnName": "realTimeDeparture",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "realTimeArrival",
+            "columnName": "realTimeArrival",
+            "affinity": "INTEGER",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "autoGenerate": false,
+          "columnNames": [
+            "id"
+          ]
+        },
+        "indices": [],
+        "foreignKeys": []
+      },
+      {
+        "tableName": "parent_stops_to_children_stops",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`parentStopCode` TEXT NOT NULL, `childrenStopCode` TEXT NOT NULL, PRIMARY KEY(`parentStopCode`, `childrenStopCode`))",
+        "fields": [
+          {
+            "fieldPath": "parentStopCode",
+            "columnName": "parentStopCode",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "childrenStopCode",
+            "columnName": "childrenStopCode",
+            "affinity": "TEXT",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "autoGenerate": false,
+          "columnNames": [
+            "parentStopCode",
+            "childrenStopCode"
+          ]
+        },
+        "indices": [],
+        "foreignKeys": []
+      },
+      {
+        "tableName": "serviceAlerts",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` TEXT NOT NULL, `serviceTripId` TEXT NOT NULL, `title` TEXT NOT NULL, `remoteHashCode` INTEGER NOT NULL, `severity` TEXT NOT NULL, `text` TEXT, `url` TEXT, `remoteIcon` TEXT, `lastUpdated` INTEGER NOT NULL, `fromDate` INTEGER NOT NULL, `location_lat` REAL, `location_lng` REAL, `location_timezone` TEXT, `location_address` TEXT, `action_text` TEXT, `action_type` TEXT, `action_excludedStopCodes` TEXT, PRIMARY KEY(`id`))",
+        "fields": [
+          {
+            "fieldPath": "id",
+            "columnName": "id",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "serviceTripId",
+            "columnName": "serviceTripId",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "title",
+            "columnName": "title",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "remoteHashCode",
+            "columnName": "remoteHashCode",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "severity",
+            "columnName": "severity",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "text",
+            "columnName": "text",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "url",
+            "columnName": "url",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "remoteIcon",
+            "columnName": "remoteIcon",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "lastUpdated",
+            "columnName": "lastUpdated",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "fromDate",
+            "columnName": "fromDate",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "location.lat",
+            "columnName": "location_lat",
+            "affinity": "REAL",
+            "notNull": false
+          },
+          {
+            "fieldPath": "location.lng",
+            "columnName": "location_lng",
+            "affinity": "REAL",
+            "notNull": false
+          },
+          {
+            "fieldPath": "location.timezone",
+            "columnName": "location_timezone",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "location.address",
+            "columnName": "location_address",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "action.text",
+            "columnName": "action_text",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "action.type",
+            "columnName": "action_type",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "action.excludedStopCodes",
+            "columnName": "action_excludedStopCodes",
+            "affinity": "TEXT",
+            "notNull": false
+          }
+        ],
+        "primaryKey": {
+          "autoGenerate": false,
+          "columnNames": [
+            "id"
+          ]
+        },
+        "indices": [],
+        "foreignKeys": []
+      }
+    ],
+    "views": [],
+    "setupQueries": [
+      "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '49661b1d3f26137a509189769563f103')"
+    ]
+  }
+}
