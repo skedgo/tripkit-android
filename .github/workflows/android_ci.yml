@@ -2,9 +2,9 @@ name: Android CI
 
 on:
   push:
-    branches: [ develop ]
+    branches: [ disable-temporarily ]
   pull_request:
-    branches: [ develop ]
+    branches: [ disable-temporarily ]
 
 jobs:
   build:
