@@ -7,7 +7,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 import android.widget.Toast;
 
 public class RouteDatabaseHelper extends SQLiteOpenHelper {
-    private static final int DATABASE_VERSION = 11;
+    private static final int DATABASE_VERSION = 12;
 
     public RouteDatabaseHelper(Context context, String name) {
         super(context, name, null, DATABASE_VERSION);
@@ -79,6 +79,15 @@ public class RouteDatabaseHelper extends SQLiteOpenHelper {
                 try {
                     db.execSQL("ALTER TABLE trips ADD COLUMN subscribeURL TEXT");
                     db.execSQL("ALTER TABLE trips ADD COLUMN unsubscribeURL TEXT");
+                } catch (SQLiteException ex) {
+                    // ignored if the column exists
+                }
+            }
+            if(newVersion > 11) {
+                try {
+                    db.execSQL("ALTER TABLE trips ADD COLUMN availability TEXT");
+                    db.execSQL("ALTER TABLE trips ADD COLUMN availabilityInfo TEXT");
+                    db.execSQL("ALTER TABLE trips ADD COLUMN moneyUSDCost REAL");
                 } catch (SQLiteException ex) {
                     // ignored if the column exists
                 }

@@ -129,6 +129,9 @@ open class RouteStore(private val databaseHelper: SQLiteOpenHelper, private val 
                     values.put(COL_QUERY_IS_LEAVE_AFTER, if (trip.queryIsLeaveAfter()) 1 else 0)
                     values.put(COL_SUBSCRIBE_URL, trip.subscribeURL)
                     values.put(COL_UNSUBSCRIBE_URL, trip.unsubscribeURL)
+                    values.put(COL_AVAILABILITY, trip.availabilityString)
+                    values.put(COL_AVAILABILITY_INFO, trip.availabilityInfo)
+                    values.put(COL_MONEY_USD_COST, trip.moneyUsdCost)
                     database.beginTransaction()
                     try {
                         database.update(TABLE_TRIPS, values, "$COL_UUID = ?", arrayOf(oldTripUuid))
@@ -257,6 +260,9 @@ open class RouteStore(private val databaseHelper: SQLiteOpenHelper, private val 
         val isNotifable = groupCursor.getInt(groupCursor.getColumnIndex(COL_IS_NOTIFIABLE)) == 1
         val subscribeUrl = tripCursor.getString(tripCursor.getColumnIndex(COL_SUBSCRIBE_URL))
         val unSubscribeUrl = tripCursor.getString(tripCursor.getColumnIndex(COL_UNSUBSCRIBE_URL))
+        val availability = tripCursor.getString(tripCursor.getColumnIndex(COL_AVAILABILITY))
+        val availabilityInfo = tripCursor.getString(tripCursor.getColumnIndex(COL_AVAILABILITY_INFO))
+        val moneyUSDCost = tripCursor.getFloat(tripCursor.getColumnIndex(COL_MONEY_USD_COST))
 
         val trip = Trip()
         trip.id = id
@@ -283,6 +289,9 @@ open class RouteStore(private val databaseHelper: SQLiteOpenHelper, private val 
         trip.isFavourite(isNotifable)
         trip.subscribeURL = subscribeUrl
         trip.unsubscribeURL = unSubscribeUrl
+        trip.setAvailability(availability)
+        trip.availabilityInfo = availabilityInfo
+        trip.moneyUsdCost = moneyUSDCost
         return trip
     }
 
@@ -401,6 +410,9 @@ open class RouteStore(private val databaseHelper: SQLiteOpenHelper, private val 
         values.put(COL_QUERY_TIME, trip.queryTime)
         values.put(COL_SUBSCRIBE_URL, trip.subscribeURL)
         values.put(COL_UNSUBSCRIBE_URL, trip.unsubscribeURL)
+        values.put(COL_AVAILABILITY, trip.availabilityString)
+        values.put(COL_AVAILABILITY_INFO, trip.availabilityInfo)
+        values.put(COL_MONEY_USD_COST, trip.moneyUsdCost)
         database.insertWithOnConflict(TABLE_TRIPS, null, values, SQLiteDatabase.CONFLICT_REPLACE)
     }
 
