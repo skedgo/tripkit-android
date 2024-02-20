@@ -28,6 +28,9 @@ android {
         release {
             consumerProguardFile 'proguard-rules.pro'
         }
+        staging {
+            debuggable true
+        }
     }
 
     lintOptions {
@@ -71,6 +74,7 @@ dependencies {
     implementation 'com.github.skedgo:commons-collections:v1.0'
 
     debugImplementation project(':TripKitDomain')
+    stagingImplementation project(':TripKitDomain')
     releaseImplementation project(':TripKitDomain')
 
     implementation libs.kotlin

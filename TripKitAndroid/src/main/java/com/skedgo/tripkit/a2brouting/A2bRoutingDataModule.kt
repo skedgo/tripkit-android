@@ -8,7 +8,7 @@ import retrofit2.Retrofit
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
 import io.reactivex.schedulers.Schedulers
-import com.skedgo.tripkit.configuration.Server
+import com.skedgo.tripkit.configuration.ServerManager
 import java.util.concurrent.TimeUnit
 
 @Module
@@ -22,7 +22,7 @@ class A2bRoutingDataModule {
     return Retrofit.Builder()
         .addCallAdapterFactory(RxJava2CallAdapterFactory.createWithScheduler(Schedulers.io()))
         .addConverterFactory(GsonConverterFactory.create(gson))
-        .baseUrl(Server.ApiTripGo.value)
+        .baseUrl(ServerManager.configuration.apiTripGoUrl)
         .client(client)
         .build()
         .create(A2bRoutingApi::class.java)

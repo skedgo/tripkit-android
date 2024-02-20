@@ -53,7 +53,10 @@ dependencies {
 
     implementation libs.bindingCollectionAdapterRecyclerView
     debugImplementation project(':TripKitAndroid')
+    stagingImplementation project(':TripKitAndroid')
     releaseImplementation project(':TripKitAndroid')
+
     debugImplementation project(':rxlifecyclecomponents')
+    stagingImplementation project(':rxlifecyclecomponents')
     releaseImplementation project(':rxlifecyclecomponents')
 }

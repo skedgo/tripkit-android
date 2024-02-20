@@ -9,7 +9,7 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import io.reactivex.schedulers.Schedulers
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
-import com.skedgo.tripkit.configuration.Server
+import com.skedgo.tripkit.configuration.ServerManager
 
 /**
  * @suppress
@@ -27,7 +27,7 @@ class AnalyticsDataModule {
   private fun reportingApi(gson: Gson, httpClient: OkHttpClient): MarkTripAsPlannedApi
       = Retrofit.Builder()
       /* This base url is ignored as the api relies on @Url. */
-      .baseUrl(Server.ApiTripGo.value)
+      .baseUrl(ServerManager.configuration.apiTripGoUrl)
       .addCallAdapterFactory(RxJava2CallAdapterFactory.createWithScheduler(Schedulers.io()))
       .addConverterFactory(GsonConverterFactory.create(gson))
       .client(httpClient)
