@@ -140,7 +140,7 @@ data class Ticket(
     val purchasedTimestamp: String,
     val fare: Fare,
     val status: String?,
-    val actions: List<TicketAction>,
+    val actions: List<TicketAction>? = emptyList(),
     val qrCode: String? = null
 ) {
 
@@ -157,7 +157,7 @@ data class Ticket(
                 purchasedTimestamp = purchasedTimestamp,
                 fare = gson.fromJson(fareJson),
                 status = status,
-                actions = gson.fromJson(ticketActionsJson),
+                actions = ticketActionsJson?.let { gson.fromJson(it) } ?: emptyList() ,
                 qrCode = qrCode
             )
         }
@@ -174,7 +174,7 @@ data class Ticket(
                 purchasedTimestamp = purchasedTimestamp,
                 fareJson = gson.toJson(fare),
                 status = status,
-                ticketActionsJson = gson.toJson(actions),
+                ticketActionsJson = if(actions.isNullOrEmpty()) "" else gson.toJson(actions),
                 qrCode = qrCode
             )
         }

@@ -39,7 +39,7 @@ import com.skedgo.tripkit.data.database.timetables.ServiceAlertsEntity
         ScheduledServiceRealtimeInfoEntity::class,
         ParentStopEntity::class,
         ServiceAlertsEntity::class,
-        TicketEntity::class], version = 8) //6
+        TicketEntity::class], version = 6)
 abstract class TripKitDatabase : RoomDatabase() {
         abstract fun carParkDao(): CarParkDao
         abstract fun carPodDao(): CarPodDao

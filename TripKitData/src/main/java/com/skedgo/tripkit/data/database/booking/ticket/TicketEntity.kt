@@ -15,5 +15,5 @@ data class TicketEntity(
     val fareJson: String, // Serialized Fare
     val status: String?,
     val qrCode: String? = null,
-    val ticketActionsJson: String, // Serialized TicketAction
+    val ticketActionsJson: String?, // Serialized TicketAction
 )

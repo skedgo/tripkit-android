@@ -3,8 +3,8 @@ package com.skedgo.tripkit.booking.quickbooking
 import com.skedgo.tripkit.booking.quickbooking.Ticket.Companion.toEntity
 import com.skedgo.tripkit.booking.quickbooking.Ticket.Companion.toTicket
 import com.skedgo.tripkit.data.database.TripKitDatabase
-import com.skedgo.tripkit.data.database.booking.ticket.TicketDao
 import com.skedgo.tripkit.utils.async.Result
+import io.reactivex.Single
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.catch
@@ -46,4 +46,21 @@ class QuickBookingRepository @Inject constructor(
         emit(Result.error(e.message ?: "Unknown error"))
     }.flowOn(Dispatchers.IO)
 
+    fun getTicketsRx(): Single<List<Ticket>> {
+        return quickBookingService.getTickets(true)
+            .flatMap { tickets ->
+                if (tickets.isNotEmpty()) {
+                    // insertTicketsRx() saves all tickets and returns Completable
+                    ticketDao.insertTicketsRx(tickets.map { it.toEntity() })
+                        .andThen(Single.just(tickets))
+                } else {
+                    Single.just(tickets)
+                }
+            }.onErrorResumeNext {
+                // In case of an error, fetch the tickets from the database
+                ticketDao.getAllTicketsRx().map { tickets ->
+                    tickets.map { it.toTicket() }
+                }.onErrorResumeNext { Single.just(emptyList()) }
+            }
+    }
 }
