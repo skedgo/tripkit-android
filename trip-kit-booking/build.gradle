@@ -15,6 +15,12 @@ android {
     minSdkVersion versions.proMinSdkVersion
     targetSdkVersion versions.targetSdkVersion
     testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+
+    javaCompileOptions {
+      annotationProcessorOptions {
+        arguments += ["room.schemaLocation": "$projectDir/schemas".toString()]
+      }
+    }
   }
 
   packagingOptions {
@@ -71,7 +77,16 @@ dependencies {
   implementation libs.retrofitConverterGson
   implementation libs.retrofitAdapterRxJava
   implementation libs.kotlin
+  implementation libs.coroutinesCore
+  implementation libs.coroutinesAndroid
+  implementation libs.coroutinesRx
   kapt libs.daggerCompiler
+
+  implementation libs.roomRuntime
+  annotationProcessor libs.roomCompiler
+  kapt libs.roomCompiler
+  implementation libs.roomRxjava2
+  implementation libs.roomKtx
 
   kapt libs.value
   compileOnly libs.valueAnnotations

@@ -1,9 +1,12 @@
 package com.skedgo.tripkit.booking.quickbooking
 
+import com.google.gson.Gson
 import com.google.gson.annotations.SerializedName
 import com.skedgo.tripkit.common.model.BookingConfirmationInputNew
 import com.skedgo.tripkit.common.model.BookingConfirmationInputOptions
 import com.skedgo.tripkit.common.model.BookingConfirmationNotes
+import com.skedgo.tripkit.data.database.booking.ticket.TicketEntity
+import com.skedgo.tripkit.extensions.fromJson
 
 data class QuickBooking(
     val bookingTitle: String,
@@ -14,7 +17,7 @@ data class QuickBooking(
     val input: List<Input>,
     val title: String,
     val tripUpdateURL: String,
-    @SerializedName("fares") val tickets: List<Ticket>,
+    @SerializedName("fares") val fares: List<Fare>,
     val billingEnabled: Boolean,
     val riders: List<Rider>
 )
@@ -104,12 +107,14 @@ data class Input(
     }
 }
 
-data class Ticket(
+// Renamed from "Ticket" to "Fare" since as per checking in the response, it's
+// identified as fare for the ticket.
+data class Fare(
     val id: String,
-    val currency: String,
+    val currency: String = "",
     val description: String,
     val name: String,
-    val price: Double,
+    val price: Double = 0.0,
     var value: Long?,
     val max: Int? = null,
     val riders: List<Rider>,
@@ -123,27 +128,84 @@ data class Rider(
     val description: String
 )
 
-data class PurchasedTicket(
+// Renamed from "PurchasedTicket" to "Ticket" since as per checking in the response, it's
+// identified as a ticket.
+data class Ticket(
     val id: String,
     val validFromTimestamp: String?,
     val validUntilTimestamp: String?,
     val ticketURL: String?,
     val activateURL: String?,
-    val ticketExpirationTimestamp: String,
+    val ticketExpirationTimestamp: String?,
     val purchasedTimestamp: String,
-    val fare: Ticket,
-    val status: String,
-    val actions: List<PurchasedTicketAction>
-)
+    val fare: Fare,
+    val status: String?,
+    val actions: List<TicketAction>,
+    val qrCode: String? = null
+) {
 
-data class PurchasedTicketAction(
+    companion object {
+        fun TicketEntity.toTicket(): Ticket {
+            val gson = Gson()
+            return Ticket(
+                id = id,
+                validFromTimestamp = validFromTimestamp,
+                validUntilTimestamp = validUntilTimestamp,
+                ticketURL = ticketURL,
+                activateURL = activateURL,
+                ticketExpirationTimestamp = ticketExpirationTimestamp,
+                purchasedTimestamp = purchasedTimestamp,
+                fare = gson.fromJson(fareJson),
+                status = status,
+                actions = gson.fromJson(ticketActionsJson),
+                qrCode = qrCode
+            )
+        }
+
+        fun Ticket.toEntity(): TicketEntity {
+            val gson = Gson()
+            return TicketEntity(
+                id = id,
+                validFromTimestamp = validFromTimestamp,
+                validUntilTimestamp = validUntilTimestamp,
+                ticketURL = ticketURL,
+                activateURL = activateURL,
+                ticketExpirationTimestamp = ticketExpirationTimestamp,
+                purchasedTimestamp = purchasedTimestamp,
+                fareJson = gson.toJson(fare),
+                status = status,
+                ticketActionsJson = gson.toJson(actions),
+                qrCode = qrCode
+            )
+        }
+    }
+
+    fun getTicketStatus(): String {
+        return qrCode?.let { "Show QR Code" } ?: status.orEmpty()
+    }
+
+    fun isTypeQRCode() = !qrCode.isNullOrBlank()
+
+    enum class Status(val type: String) {
+        INACTIVE("inactive"),
+        UNACTIVATED("unactivated");
+
+        companion object {
+            fun getStatus(type: String): Status? {
+                return values().firstOrNull { it.type.equals(type, ignoreCase = true) }
+            }
+        }
+    }
+}
+
+data class TicketAction(
     val title: String,
     val type: String,
-    val confirmation: PurchasedTicketConfirmation,
+    val confirmation: TicketConfirmation,
     val internalURL: String
 )
 
-data class PurchasedTicketConfirmation(
+data class TicketConfirmation(
     val message: String,
     val confirmActionTitle: String,
     val abortActionTitle: String
