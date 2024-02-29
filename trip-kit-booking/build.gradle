@@ -17,6 +17,12 @@ android {
     testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
   }
 
+  buildTypes {
+    staging {
+      debuggable true
+    }
+  }
+
   packagingOptions {
     // To avoid conflicts with ASL.
     // We don't utilize ServiceLoader, so this is unneeded.
@@ -54,12 +60,16 @@ dependencies {
   testImplementation 'com.github.thuytrinh:MockWebServerRule:v1.0'
 
   debugImplementation project(':TripKitAndroid')
+  stagingImplementation project(':TripKitAndroid')
   releaseImplementation project(':TripKitAndroid')
-  debugImplementation project(':TripKitDomain')
-  releaseImplementation project(':TripKitDomain')
-  debugImplementation project(':CommonCoreLegacy')
-  releaseImplementation project(':CommonCoreLegacy')
 
+  debugImplementation project(':TripKitDomain')
+  stagingImplementation project(':TripKitDomain')
+  releaseImplementation project(':TripKitDomain')
+
+  debugImplementation project(':CommonCoreLegacy')
+  stagingImplementation project(':CommonCoreLegacy')
+  releaseImplementation project(':CommonCoreLegacy')
 
   implementation libs.dagger
   implementation libs.rxjava2

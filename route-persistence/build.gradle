@@ -30,6 +30,9 @@ android {
       minifyEnabled false
       proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
     }
+    staging {
+      debuggable true
+    }
   }
 
   compileOptions {
@@ -51,8 +54,11 @@ android {
 
 dependencies {
   debugImplementation project(':CommonCoreLegacy')
+  stagingImplementation project(':CommonCoreLegacy')
   releaseImplementation project(':CommonCoreLegacy')
+
   debugImplementation project(':sqliteutils')
+  stagingImplementation project(':sqliteutils')
   releaseImplementation project(':sqliteutils')
 
   implementation libs.appCompat
@@ -60,6 +66,7 @@ dependencies {
   implementation libs.supportAnnotations
 
   debugImplementation project(":TripKitDomain")
+  stagingImplementation project(":TripKitDomain")
   releaseImplementation project(":TripKitDomain")
 
   implementation libs.kotlin
