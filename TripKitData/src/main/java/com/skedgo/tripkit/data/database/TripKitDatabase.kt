@@ -4,6 +4,8 @@ import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
+import com.skedgo.tripkit.data.database.booking.ticket.TicketDao
+import com.skedgo.tripkit.data.database.booking.ticket.TicketEntity
 import com.skedgo.tripkit.data.database.locations.bikepods.BikePodDao
 import com.skedgo.tripkit.data.database.locations.bikepods.BikePodLocationEntity
 import com.skedgo.tripkit.data.database.locations.carparks.*
@@ -36,7 +38,8 @@ import com.skedgo.tripkit.data.database.timetables.ServiceAlertsEntity
         StopLocationEntity::class,
         ScheduledServiceRealtimeInfoEntity::class,
         ParentStopEntity::class,
-        ServiceAlertsEntity::class], version = 5)
+        ServiceAlertsEntity::class,
+        TicketEntity::class], version = 6)
 abstract class TripKitDatabase : RoomDatabase() {
         abstract fun carParkDao(): CarParkDao
         abstract fun carPodDao(): CarPodDao
@@ -47,6 +50,7 @@ abstract class TripKitDatabase : RoomDatabase() {
         abstract fun parentStopDao(): ParentStopDao
         abstract fun onStreetParkingDao(): OnStreetParkingDao
         abstract fun serviceAlertsDao(): ServiceAlertsDao
+        abstract fun ticketDao(): TicketDao
         companion object {
                 fun getInstance(context: Context): TripKitDatabase {
                         return Room.databaseBuilder(context.applicationContext,

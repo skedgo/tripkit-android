@@ -95,6 +95,7 @@ dependencies {
   annotationProcessor libs.roomCompiler
   kapt libs.roomCompiler
   implementation libs.roomRxjava2
+  implementation libs.roomKtx
 
   kapt libs.daggerCompiler
   implementation libs.daggerAndroidSupport

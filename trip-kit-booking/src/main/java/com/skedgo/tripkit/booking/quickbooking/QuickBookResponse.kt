@@ -123,7 +123,7 @@ data class Review(
     val origin: Origin,
     val price: Double,
     val provider: Provider,
-    val tickets: List<Ticket>?
+    val fares: List<Fare>?
 ) {
     fun getPriceWithCurrency(): String {
         val symbol = if (currency == "USD") "$" else currency
