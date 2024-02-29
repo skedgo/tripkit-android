@@ -7,6 +7,7 @@ import com.skedgo.tripkit.booking.viewmodel.AuthenticationViewModel;
 import com.skedgo.tripkit.booking.viewmodel.AuthenticationViewModelImpl;
 import com.skedgo.tripkit.booking.viewmodel.BookingViewModel;
 import com.skedgo.tripkit.booking.viewmodel.BookingViewModelImpl;
+import com.skedgo.tripkit.configuration.ServerManager;
 
 import dagger.Module;
 import dagger.Provides;
@@ -15,7 +16,6 @@ import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
 import io.reactivex.schedulers.Schedulers;
-import com.skedgo.tripkit.configuration.Server;
 
 @Module
 public class BookingModule {
@@ -25,7 +25,7 @@ public class BookingModule {
         .create();
     return new Retrofit.Builder()
         /* This base url is ignored as the api relies on @Url. */
-        .baseUrl(Server.ApiTripGo.getValue())
+        .baseUrl(ServerManager.INSTANCE.getConfiguration().getApiTripGoUrl())
         .addCallAdapterFactory(RxJava2CallAdapterFactory.createWithScheduler(Schedulers.io()))
         .addConverterFactory(GsonConverterFactory.create(gson))
         .client(httpClient)
@@ -39,7 +39,7 @@ public class BookingModule {
         .create();
     return new Retrofit.Builder()
         /* This base url is ignored as the api relies on @Url. */
-        .baseUrl(Server.ApiTripGo.getValue())
+        .baseUrl(ServerManager.INSTANCE.getConfiguration().getApiTripGoUrl())
         .addCallAdapterFactory(RxJava2CallAdapterFactory.createWithScheduler(Schedulers.io()))
         .addConverterFactory(GsonConverterFactory.create(gson))
         .client(httpClient)
@@ -55,7 +55,7 @@ public class BookingModule {
         .create();
     return new Retrofit.Builder()
         /* This base url is ignored as the api relies on @Url. */
-        .baseUrl(Server.ApiTripGo.getValue())
+        .baseUrl(ServerManager.INSTANCE.getConfiguration().getApiTripGoUrl())
         .addCallAdapterFactory(RxJava2CallAdapterFactory.createWithScheduler(Schedulers.io()))
         .addConverterFactory(GsonConverterFactory.create(gson))
         .client(httpClient)

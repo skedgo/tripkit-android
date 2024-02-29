@@ -23,6 +23,12 @@ android {
     }
   }
 
+  buildTypes {
+    staging {
+      debuggable true
+    }
+  }
+
   lintOptions {
     // Changing to warning because of https://github.com/square/okio/issues/58.
     warning "InvalidPackage"
@@ -59,12 +65,19 @@ dependencies {
   implementation 'com.github.skedgo:commons-collections:v1.0'
 
   debugImplementation project(":CommonCoreLegacy")
+  stagingImplementation project(":CommonCoreLegacy")
   releaseImplementation project(":CommonCoreLegacy")
+
   debugImplementation project(":TripKitDomain")
+  stagingImplementation project(":TripKitDomain")
   releaseImplementation project(":TripKitDomain")
+
   debugImplementation project(":TripKitDomainLegacy")
+  stagingImplementation project(":TripKitDomainLegacy")
   releaseImplementation project(":TripKitDomainLegacy")
+
   debugApi project(":route-persistence")
+  stagingApi project(":route-persistence")
   releaseApi project(":route-persistence")
 
   implementation libs.dagger
@@ -116,6 +129,7 @@ dependencies {
   compileOnly 'com.github.pengrad:jdk9-deps:1.0'
 
   debugApi project(':sqliteutils')
+  stagingApi project(':sqliteutils')
   releaseApi project(':sqliteutils')
 }
 
