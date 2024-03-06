@@ -45,8 +45,10 @@ class AddCustomHeaders constructor(
             is Key.RegionEligibility -> builder.addHeader(regionEligibilityHeader, key.value)
         }
 
-        if (getUserToken?.call() != null) {
-            builder.addHeader(userTokenHeader, getUserToken.call())
+        getUserToken?.call()?.let { token ->
+            if (token.isNotEmpty()) {
+                builder.addHeader(userTokenHeader, token)
+            }
         }
 
         val hasTripSelection = preferences?.getBoolean("tripSelection", false) ?: false
