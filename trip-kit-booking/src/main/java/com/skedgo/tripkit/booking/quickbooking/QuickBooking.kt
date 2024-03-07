@@ -17,7 +17,7 @@ data class QuickBooking(
     val input: List<Input>,
     val title: String,
     val tripUpdateURL: String,
-    @SerializedName("fares") val fares: List<Fare>,
+    @SerializedName("fares") val fares: List<Fare>? = emptyList(),
     val billingEnabled: Boolean,
     val riders: List<Rider>
 )
