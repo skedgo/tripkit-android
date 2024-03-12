@@ -3,6 +3,8 @@ package com.skedgo.tripkit.data
 import android.annotation.SuppressLint
 import android.content.Context
 import android.content.SharedPreferences
+import com.google.gson.Gson
+import com.skedgo.tripkit.TripKitConstants.Companion.PREF_KEY_CLIENT_FEATURES
 import com.skedgo.tripkit.TripKitConstants.Companion.PREF_KEY_CLIENT_ID
 import com.skedgo.tripkit.TripKitConstants.Companion.PREF_KEY_POLYGON
 import com.skedgo.tripkit.TripKitConstants.Companion.PREF_KEY_TRIP_KIT_LAT_LNG
@@ -30,6 +32,15 @@ class TripKitSharedPreference @Inject constructor(context: Context) : BaseShared
 
     fun getClientId(): String? =
         sharedPreferences.getString(PREF_KEY_CLIENT_ID, null)
+
+    fun saveClientFeatures(features: List<String>) {
+        sharedPreferences.edit()
+            .putString(PREF_KEY_CLIENT_FEATURES, Gson().toJson(features))
+            .apply()
+    }
+
+    fun getClientFeatures(): List<String> =
+        Gson().fromJson(sharedPreferences.getString(PREF_KEY_CLIENT_FEATURES, null) ?: "")
 
     fun savePolygon(polygon: Polygon?) {
         sharedPreferences.edit()
