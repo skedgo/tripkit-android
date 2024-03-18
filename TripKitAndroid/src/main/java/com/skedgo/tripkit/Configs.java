@@ -73,4 +73,6 @@ public interface Configs {
 
     @Value.Default public default boolean showGeofences() { return false;}
 
+    @Value.Default public default boolean hasInductionCards() { return false;}
+
 }
