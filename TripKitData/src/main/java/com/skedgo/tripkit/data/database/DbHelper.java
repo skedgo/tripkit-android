@@ -11,7 +11,7 @@ import androidx.annotation.NonNull;
 import io.reactivex.functions.Consumer;
 
 public final class DbHelper extends SQLiteOpenHelper {
-    private static final int DATABASE_VERSION = 3;
+    private static final int DATABASE_VERSION = 4;
     private final DatabaseMigrator databaseMigrator;
 
     public DbHelper(
@@ -33,6 +33,13 @@ public final class DbHelper extends SQLiteOpenHelper {
             if (newVersion > 2) {
                 try {
                     database.execSQL("ALTER TABLE services ADD COLUMN start_platform TEXT");
+                } catch (SQLiteException ex) {
+                    // ignored if the column exists
+                }
+            } else if (newVersion > 3) {
+                try {
+                    database.execSQL("ALTER TABLE services ADD COLUMN bicycle_accessible INTEGER");
+                    database.execSQL("ALTER TABLE service_stops ADD COLUMN bicycle_accessible INTEGER");
                 } catch (SQLiteException ex) {
                     // ignored if the column exists
                 }

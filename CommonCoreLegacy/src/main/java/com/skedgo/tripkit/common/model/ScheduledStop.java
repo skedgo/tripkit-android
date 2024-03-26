@@ -35,6 +35,7 @@ public class ScheduledStop extends Location {
             stop.mType = StopType.from(in.readString());
             stop.modeInfo = in.readParcelable(ModeInfo.class.getClassLoader());
             stop.wheelchairAccessible = (Boolean) in.readValue(Boolean.class.getClassLoader());
+            stop.bicycleAccessible = (Boolean) in.readValue(Boolean.class.getClassLoader());
             stop.alertHashCodes = in.readArrayList(Long.class.getClassLoader());
             return stop;
         }
@@ -63,6 +64,9 @@ public class ScheduledStop extends Location {
     @SerializedName("wheelchairAccessible")
     private @Nullable
     Boolean wheelchairAccessible;
+    @SerializedName("bicycleAccessible")
+    private @Nullable
+    Boolean bicycleAccessible;
     @SerializedName("alertHashCodes")
     private @Nullable
     ArrayList<Long> alertHashCodes;
@@ -146,6 +150,7 @@ public class ScheduledStop extends Location {
             mParentId = other.mParentId;
             mCurrentFilter = other.mCurrentFilter;
             wheelchairAccessible = other.wheelchairAccessible;
+            bicycleAccessible = other.bicycleAccessible;
             alertHashCodes = other.alertHashCodes;
         }
     }
@@ -266,6 +271,15 @@ public class ScheduledStop extends Location {
         this.wheelchairAccessible = wheelchairAccessible;
     }
 
+    @Nullable
+    public Boolean getBicycleAccessible() {
+        return bicycleAccessible;
+    }
+
+    public void setBicycleAccessible(@Nullable Boolean bicycleAccessible) {
+        this.bicycleAccessible = bicycleAccessible;
+    }
+
     public String getEndStopCode() {
         return mEndStopCode;
     }
@@ -323,6 +337,7 @@ public class ScheduledStop extends Location {
         out.writeString(mType == null ? null : mType.toString());
         out.writeParcelable(modeInfo, 0);
         out.writeValue(wheelchairAccessible);
+        out.writeValue(bicycleAccessible);
         out.writeList(alertHashCodes);
     }
 }

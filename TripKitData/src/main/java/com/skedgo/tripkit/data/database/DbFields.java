@@ -98,6 +98,7 @@ public final class DbFields {
   public static final DatabaseField W3W_INFO_URL = new DatabaseField("w3w_info_url", "text");
   public static final DatabaseField SERVICE_DIRECTION = new DatabaseField("service_direction", "text");
   public static final DatabaseField WHEELCHAIR_ACCESSIBLE = new DatabaseField("wheelchair_accessible", "integer");
+  public static final DatabaseField BICYCLE_ACCESSIBLE = new DatabaseField("bicycle_accessible", "integer");
   public static final DatabaseField OCCUPANCY = new DatabaseField("occupancy", "text");
   public static final DatabaseField START_STOP_SHORT_NAME = new DatabaseField("start_stop_short_name", "text");
   public static final DatabaseField START_PLATFORM = new DatabaseField("start_platform", "text");

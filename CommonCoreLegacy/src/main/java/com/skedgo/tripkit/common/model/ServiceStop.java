@@ -10,7 +10,7 @@ import androidx.annotation.Nullable;
 /**
  * Represents a future stop of a service in a trip.
  */
-public class ServiceStop extends Location implements WheelchairAccessible {
+public class ServiceStop extends Location implements WheelchairAccessible, BicycleAccessible {
   public static final Creator<ServiceStop> CREATOR = new Creator<ServiceStop>() {
     public ServiceStop createFromParcel(Parcel in) {
       Location location = Location.CREATOR.createFromParcel(in);
@@ -23,6 +23,7 @@ public class ServiceStop extends Location implements WheelchairAccessible {
       stop.code = in.readString();
       stop.shortName = in.readString();
       stop.wheelchairAccessible = (Boolean) in.readValue(Boolean.class.getClassLoader());
+      stop.bicycleAccessible = (Boolean) in.readValue(Boolean.class.getClassLoader());
       stop.type = StopType.from(in.readString());
 
       return stop;
@@ -46,6 +47,7 @@ public class ServiceStop extends Location implements WheelchairAccessible {
   @SerializedName("code") private String code;
   @SerializedName("shortName") private @Nullable String shortName;
   @SerializedName("wheelchairAccessible") private @Nullable Boolean wheelchairAccessible;
+  @SerializedName("bicycleAccessible") private @Nullable Boolean bicycleAccessible;
 
   public ServiceStop() {}
 
@@ -101,6 +103,14 @@ public class ServiceStop extends Location implements WheelchairAccessible {
     this.wheelchairAccessible = wheelchairAccessible;
   }
 
+  @Nullable public Boolean getBicycleAccessible() {
+    return bicycleAccessible;
+  }
+
+  public void setBicycleAccessibleAccessible(@Nullable Boolean bicycleAccessible) {
+    this.bicycleAccessible = bicycleAccessible;
+  }
+
   public StopType getType() {
     return type;
   }
@@ -148,6 +158,7 @@ public class ServiceStop extends Location implements WheelchairAccessible {
     out.writeString(code);
     out.writeString(shortName);
     out.writeValue(wheelchairAccessible);
+    out.writeValue(bicycleAccessible);
     out.writeString(type == null ? null : type.toString());
   }
 
