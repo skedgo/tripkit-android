@@ -113,6 +113,8 @@ public class TripSegment implements IRealTimeElement, ITimeRange {
     private RealTimeVehicle mRealTimeVehicle;
     @SerializedName("wheelchairAccessible")
     private boolean wheelchairAccessible;
+    @SerializedName("bicycleAccessible")
+    private boolean bicycleAccessible;
     @SerializedName("localCost")
     @Nullable
     private LocalCost localCost;
@@ -514,6 +516,14 @@ public class TripSegment implements IRealTimeElement, ITimeRange {
 
     public void setWheelchairAccessible(boolean wheelchairAccessible) {
         this.wheelchairAccessible = wheelchairAccessible;
+    }
+
+    public boolean getBicycleAccessible() {
+        return bicycleAccessible;
+    }
+
+    public void setBicycleAccessible(boolean bicycleAccessible) {
+        this.bicycleAccessible = bicycleAccessible;
     }
 
     public int getWheelchairFriendliness() {
