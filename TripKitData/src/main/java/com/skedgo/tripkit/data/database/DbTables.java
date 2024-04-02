@@ -125,6 +125,7 @@ public final class DbTables {
                     DbFields.MODE_INFO,
                     DbFields.SERVICE_DIRECTION,
                     DbFields.WHEELCHAIR_ACCESSIBLE,
+                    DbFields.BICYCLE_ACCESSIBLE,
                     DbFields.START_STOP_SHORT_NAME,
                     DbFields.START_PLATFORM
             },
@@ -159,7 +160,8 @@ public final class DbTables {
                     DbFields.DEPARTURE_TIME,
                     DbFields.ARRIVAL_TIME,
                     DbFields.JULIAN_DAY,
-                    DbFields.WHEELCHAIR_ACCESSIBLE
+                    DbFields.WHEELCHAIR_ACCESSIBLE,
+                    DbFields.BICYCLE_ACCESSIBLE,
             },
             "CREATE UNIQUE INDEX 'unique_stop_per_service_per_day' ON service_stops (" +
                     DbFields.STOP_CODE + ", " +
