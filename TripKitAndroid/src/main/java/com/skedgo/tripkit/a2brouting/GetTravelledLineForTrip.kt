@@ -2,9 +2,10 @@ package com.skedgo.tripkit.a2brouting
 
 import android.graphics.Color
 import androidx.annotation.ColorInt
+import com.google.maps.android.PolyUtil
+import com.google.maps.android.ktx.utils.simplify
 import com.skedgo.tripkit.common.model.Street
 import com.skedgo.tripkit.common.model.TransportMode
-import com.skedgo.tripkit.common.util.PolyUtil
 import com.skedgo.tripkit.common.util.TripKitLatLng
 import com.skedgo.tripkit.routing.RoadTag
 import io.reactivex.Observable
@@ -14,6 +15,10 @@ import java.lang.Exception
 import javax.inject.Inject
 
 class GetTravelledLineForTrip @Inject constructor() {
+
+    companion object {
+        const val LAT_LNG_SIMPLIFY_TOLERANCE = 25.0
+    }
 
     fun execute(segments: List<TripSegment>?): Observable<List<com.skedgo.tripkit.LineSegment>> {
         return Observable
@@ -42,10 +47,12 @@ class GetTravelledLineForTrip @Inject constructor() {
                         else
                             it.serviceColor.color
                         PolyUtil.decode(it.encodedWaypoints)
-                            .orEmpty().zipWithNext()
+                            .simplify(LAT_LNG_SIMPLIFY_TOLERANCE).zipWithNext()
                             .map { (start, end) ->
                                 com.skedgo.tripkit.LineSegment(
-                                    start, end, color,
+                                    TripKitLatLng(start.latitude, start.longitude),
+                                    TripKitLatLng(end.latitude, end.longitude),
+                                    color,
                                     com.skedgo.tripkit.LineSegment.Tag.SHAPE.toString()
                                 )
                             }
@@ -53,15 +60,20 @@ class GetTravelledLineForTrip @Inject constructor() {
                 val lineSegmentsFromStreets = segment.streets.orEmpty()
                     .filter { it.encodedWaypoints() != null }
                     .flatMap { street ->
-                        PolyUtil.decode(street.encodedWaypoints())
+                        PolyUtil.decode(street.encodedWaypoints()).simplify(
+                            LAT_LNG_SIMPLIFY_TOLERANCE
+                        )
                             .zipWithNext()
                             .map { (start, end) ->
-                                var lineColor = (getColorForWheelchairAndBicycle(street, modeId) ?: color)
-                                if(!street.roadTags().isNullOrEmpty()) {
+                                var lineColor =
+                                    (getColorForWheelchairAndBicycle(street, modeId) ?: color)
+                                if (!street.roadTags().isNullOrEmpty()) {
                                     lineColor = Color.BLUE
                                 }
                                 com.skedgo.tripkit.LineSegment(
-                                    start, end, lineColor,
+                                    TripKitLatLng(start.latitude, start.longitude),
+                                    TripKitLatLng(end.latitude, end.longitude),
+                                    lineColor,
                                     com.skedgo.tripkit.LineSegment.Tag.STREET.toString()
                                 )
                             }
