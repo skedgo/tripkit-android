@@ -12,6 +12,8 @@ import com.skedgo.tripkit.data.database.locations.carparks.*
 import com.skedgo.tripkit.data.database.locations.carpods.CarPodDao
 import com.skedgo.tripkit.data.database.locations.carpods.CarPodEntity
 import com.skedgo.tripkit.data.database.locations.carpods.CarPodVehicle
+import com.skedgo.tripkit.data.database.locations.facility.FacilityDao
+import com.skedgo.tripkit.data.database.locations.facility.FacilityLocationEntity
 import com.skedgo.tripkit.data.database.locations.freefloating.FreeFloatingLocationDao
 import com.skedgo.tripkit.data.database.locations.freefloating.FreeFloatingLocationEntity
 import com.skedgo.tripkit.data.database.locations.onstreetparking.OnStreetParkingDao
@@ -39,11 +41,13 @@ import com.skedgo.tripkit.data.database.timetables.ServiceAlertsEntity
         ScheduledServiceRealtimeInfoEntity::class,
         ParentStopEntity::class,
         ServiceAlertsEntity::class,
-        TicketEntity::class], version = 6)
+        TicketEntity::class,
+        FacilityLocationEntity::class,], version = 7)
 abstract class TripKitDatabase : RoomDatabase() {
         abstract fun carParkDao(): CarParkDao
         abstract fun carPodDao(): CarPodDao
         abstract fun bikePodDao(): BikePodDao
+        abstract fun facilityDao(): FacilityDao
         abstract fun freeFloatingLocationDao(): FreeFloatingLocationDao
         abstract fun stopLocationDao(): StopLocationDao
         abstract fun scheduledServiceRealtimeInfoDao(): ScheduledServiceRealtimeInfoDao
