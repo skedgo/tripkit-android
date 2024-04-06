@@ -22,6 +22,7 @@ class StopLocationEntity {
   lateinit var stopType: String
   var timeZone: String? = null
   var wheelchairAccessible: Boolean = false
+  var bicycleAccessible: Boolean = false
 
   var lat: Double = 0.0
   var lng: Double = 0.0
@@ -39,6 +40,7 @@ fun StopLocationEntity.toScheduledStop(): ScheduledStop {
     it.type = this.stopType.let { StopType.from(it) }
     it.timeZone = this.timeZone
     it.wheelchairAccessible = this.wheelchairAccessible
+    it.bicycleAccessible = this.bicycleAccessible
     it.lat = this.lat
     it.lon = this.lng
     it.modeInfo = this.modeInfo.toModeInfo()
