@@ -68,6 +68,8 @@ public class Location implements Parcelable {
      */
     public static final int TYPE_W3W = 9;
 
+    public static final int TYPE_SCHOOL = 11;
+
     public static final int NO_BEARING = Integer.MAX_VALUE;
     public static final double ZERO_LAT = 0.0;
     public static final double ZERO_LON = 0.0;
@@ -113,6 +115,10 @@ public class Location implements Parcelable {
 
             List<RouteDetails> routes = new ArrayList<>();
             in.readTypedList(routes, RouteDetails.CREATOR);
+
+            List<String> modeIdentifiers = new ArrayList<>();
+            in.readList(modeIdentifiers, String.class.getClassLoader());
+            location.modeIdentifiers = modeIdentifiers;
 
             return location;
         }
@@ -175,6 +181,8 @@ public class Location implements Parcelable {
     private boolean withExternalApp;
     private List<Operator> operators;
     private List<RouteDetails> routes;
+
+    private List<String> modeIdentifiers;
 
     public Location() {
         lat = ZERO_LAT;
@@ -483,6 +491,14 @@ public class Location implements Parcelable {
         this.operators = operators;
     }
 
+    public List<String> getModeIdentifiers() {
+        return modeIdentifiers;
+    }
+
+    public void setModeIdentifiers(List<String> modeIdentifiers) {
+        this.modeIdentifiers = modeIdentifiers;
+    }
+
     /**
      * Get the distance between this and another point
      * <p/>
@@ -568,6 +584,7 @@ public class Location implements Parcelable {
         out.writeString(region);
         out.writeTypedList(operators);
         out.writeTypedList(routes);
+        out.writeList(modeIdentifiers);
     }
 
     /**

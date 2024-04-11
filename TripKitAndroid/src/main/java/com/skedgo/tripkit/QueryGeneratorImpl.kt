@@ -1,5 +1,6 @@
 package com.skedgo.tripkit
 
+import com.skedgo.tripkit.common.model.LOCATION_CLASS_SCHOOL
 import com.skedgo.tripkit.common.model.Query
 import com.skedgo.tripkit.common.model.TransportMode
 import com.skedgo.tripkit.data.regions.RegionService
@@ -40,7 +41,18 @@ internal class QueryGeneratorImpl(private val regionService: RegionService) : Qu
                         allTransportModes.add(TransportMode.ID_WHEEL_CHAIR)
                     }
 
-                    val filteredTransportModes = allTransportModes.filter { transportModeFilter.useTransportMode(it) }
+                    val filteredTransportModes = allTransportModes
+                        .filter { transportModeFilter.useTransportMode(it) }.toMutableList()
+
+                    if(departure.locationClass == LOCATION_CLASS_SCHOOL ||
+                        arrival.locationClass == LOCATION_CLASS_SCHOOL) {
+                        val modeIdentifiers = (departure.modeIdentifiers.orEmpty() + arrival.modeIdentifiers.orEmpty())
+                            .toSet().toList()
+
+                        filteredTransportModes.remove(TransportMode.ID_SCHOOL_BUS)
+                        filteredTransportModes.addAll(modeIdentifiers)
+                    }
+
                     query.transportModeIds = filteredTransportModes
                     regionService.getTransportModesAsync()
                 }
