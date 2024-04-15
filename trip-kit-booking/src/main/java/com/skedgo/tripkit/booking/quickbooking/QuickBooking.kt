@@ -49,7 +49,8 @@ data class Input(
     var value: String?,
     var values: List<String>?,
     val minValue: Int,
-    val maxValue: Int
+    val maxValue: Int,
+    var urlValue: String?
 ) {
     companion object {
         fun parse(bookingConfirmationInput: BookingConfirmationInputNew): Input =
@@ -65,7 +66,8 @@ data class Input(
                 bookingConfirmationInput.value(),
                 bookingConfirmationInput.values(),
                 0,
-                0
+                0,
+                null
             )
 
     }
