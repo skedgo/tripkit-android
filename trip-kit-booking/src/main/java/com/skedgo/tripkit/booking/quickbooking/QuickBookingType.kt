@@ -4,11 +4,12 @@ import androidx.annotation.StringDef
 
 @Retention(AnnotationRetention.RUNTIME)
 @StringDef(
-        QuickBookingType.MULTIPLE_CHOICE,
-        QuickBookingType.SINGLE_CHOICE,
-        QuickBookingType.LONG_TEXT,
-        QuickBookingType.RETURN_TRIP,
-        QuickBookingType.NUMBER
+    QuickBookingType.MULTIPLE_CHOICE,
+    QuickBookingType.SINGLE_CHOICE,
+    QuickBookingType.LONG_TEXT,
+    QuickBookingType.RETURN_TRIP,
+    QuickBookingType.NUMBER,
+    QuickBookingType.TERMS
 )
 annotation class QuickBookingType {
     companion object {
@@ -17,6 +18,7 @@ annotation class QuickBookingType {
         const val LONG_TEXT = "LONG_TEXT"
         const val RETURN_TRIP = "RETURN_TRIP"
         const val NUMBER = "NUMBER"
+        const val TERMS = "TERMS"
     }
 }
 
@@ -28,8 +30,12 @@ fun String.getDefaultValueByType(
         QuickBookingType.LONG_TEXT -> {
             String.format("Tap to %s", title)
         }
+
         QuickBookingType.NUMBER -> {
             values?.firstOrNull() ?: "0"
+        }
+        QuickBookingType.TERMS -> {
+            values?.firstOrNull() ?: "Tap to view terms and conditions"
         }
         else -> {
             "Tap to make selections"
