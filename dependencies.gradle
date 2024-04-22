@@ -36,6 +36,9 @@ versions.viewPager2 = "1.0.0"
 versions.mockk = "1.13.8"
 versions.archCore = "2.1.0"
 versions.qrCodeGenerator = "1.2.0"
+versions.amplifyCore = "2.14.11"
+versions.amplifyAuth = "1.1.0"
+versions.desugar = "2.0.4"
 
 ext.versions = versions
 
@@ -161,5 +164,11 @@ libs.volley = "com.android.volley:volley:$versions.volley"
 libs.jetBrainsAnnotation = "org.jetbrains:annotations-java5:$versions.jetBrainsJava5"
 
 libs.archCoreTesting = "androidx.arch.core:core-testing:$versions.archCore"
+
+libs.amplifyCore = "com.amplifyframework:core:$versions.ampifyCore"
+libs.amplifyAuth = "com.amplifyframework.ui:authenticator:$versions.amplifyAuth"
+
+versions.amplifyCore = "2.14.11"
+versions.amplifyAuth = "1.1.0"
 
 ext.libs = libs
