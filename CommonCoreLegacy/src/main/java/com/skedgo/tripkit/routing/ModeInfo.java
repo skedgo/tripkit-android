@@ -140,6 +140,7 @@ public class ModeInfo implements Parcelable {
         this.description = description;
     }
 
+    @Nullable
     public VehicleMode getModeCompat() {
         return VehicleMode.from(localIconName);
     }
