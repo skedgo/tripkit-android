@@ -17,7 +17,7 @@ import javax.inject.Inject
 class GetTravelledLineForTrip @Inject constructor() {
 
     companion object {
-        const val LAT_LNG_SIMPLIFY_TOLERANCE = 25.0
+        const val LAT_LNG_SIMPLIFY_TOLERANCE = 5.0
     }
 
     fun execute(segments: List<TripSegment>?): Observable<List<com.skedgo.tripkit.LineSegment>> {
@@ -46,8 +46,11 @@ class GetTravelledLineForTrip @Inject constructor() {
                             color
                         else
                             it.serviceColor.color
-                        PolyUtil.decode(it.encodedWaypoints)
-                            .simplify(LAT_LNG_SIMPLIFY_TOLERANCE).zipWithNext()
+                        val decodedWayPoints = PolyUtil.decode(it.encodedWaypoints)
+                        println("tag123, a: ${decodedWayPoints.size}")
+                        val simplified = decodedWayPoints.simplify(LAT_LNG_SIMPLIFY_TOLERANCE)
+                        println("tag123, b: ${simplified.size}")
+                        simplified.zipWithNext()
                             .map { (start, end) ->
                                 com.skedgo.tripkit.LineSegment(
                                     TripKitLatLng(start.latitude, start.longitude),

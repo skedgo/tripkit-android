@@ -11,7 +11,7 @@ import javax.inject.Inject
 class GetNonTravelledLineForTrip @Inject constructor() {
 
     companion object {
-        const val LAT_LNG_SIMPLIFY_TOLERANCE = 25.0
+        const val LAT_LNG_SIMPLIFY_TOLERANCE = 5.0
     }
 
     fun execute(segments: List<TripSegment>): Observable<List<com.skedgo.tripkit.LineSegment>> {
