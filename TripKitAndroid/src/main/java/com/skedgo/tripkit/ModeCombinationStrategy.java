@@ -15,7 +15,9 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.regex.Pattern;
 
+// TODO convert to kotlin and add coroutine version.
 final class ModeCombinationStrategy implements
         BiFunction<Map<String, TransportMode>, List<String>, List<Set<String>>> {
     @Override
@@ -33,7 +35,13 @@ final class ModeCombinationStrategy implements
             final Set<String> newSet = new HashSet<>();
             newSet.add(modeId);
 
-            final TransportMode foundMode = modeMap.get(modeId);
+            TransportMode foundMode;
+            // For modes from modeIdentifiers, e.g. `pt_ltd_SCHOOLBUS_2029`, `pt_ltd_SCHOOLBUS_2031`, etc.
+            // to remove numeric suffix to get base modeId for checking if exist on modeMap
+            String baseModeId = Pattern.compile("_\\d+$").matcher(modeId).replaceAll("");
+
+            // Check if the baseModeId is present in the modeMap
+            foundMode = modeMap.get(baseModeId);
             if (foundMode != null) {
                 boolean shouldMerge = false;
                 final List<String> implies = foundMode.getImplies();
@@ -69,15 +77,6 @@ final class ModeCombinationStrategy implements
             }
 
             seenModeIds.addAll(newSet);
-        }
-
-        // Create a union set which combines all given modeIds.
-        // There is one exception: wa_wal is implied in multi-modal, so we don't need to specify it. We also don't want
-        // to duplicate a query if there aren't enough modes to justify multi-modal, so do some final checking.
-        if (modeIds.size() == 2 && modeIds.contains(TransportMode.ID_WHEEL_CHAIR) && modeIds.contains(TransportMode.ID_PS_DRT)) {
-
-        } else {
-
         }
 
         HashSet<String> multiModal = new HashSet<>(modeIds);
