@@ -1,8 +1,12 @@
 package com.skedgo.geocoding;
 
 
+import androidx.annotation.Nullable;
+
 import com.skedgo.geocoding.agregator.GCSkedGoResultInterface;
 import org.jetbrains.annotations.NotNull;
+
+import java.util.List;
 
 public class GCSkedgoResult extends GCResult implements GCSkedGoResultInterface {
 
@@ -12,10 +16,21 @@ public class GCSkedgoResult extends GCResult implements GCSkedGoResultInterface 
 //  popularity json field from skedgo's json
     private int popularity;
 
-    public GCSkedgoResult(String name, double lat, double lng, @NotNull String resultClass, Integer popularity ){
+    @Nullable
+    private List<String> modeIdentifiers;
+
+    public GCSkedgoResult(
+            String name,
+            double lat,
+            double lng,
+            @NotNull String resultClass,
+            Integer popularity,
+            @Nullable List<String> modeIdentifiers
+    ){
         super(name, lat, lng);
         this.popularity = popularity;
         this.resultClass = resultClass;
+        this.modeIdentifiers = modeIdentifiers;
     }
 
     @NotNull
@@ -39,5 +54,11 @@ public class GCSkedgoResult extends GCResult implements GCSkedGoResultInterface 
 
     public boolean isStopLocation(){
         return this.resultClass.equalsIgnoreCase("StopLocation");
+    }
+
+    @Nullable
+    @Override
+    public List<String> getModeIdentifiers() {
+        return modeIdentifiers;
     }
 }
