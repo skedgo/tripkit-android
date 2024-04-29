@@ -34,9 +34,7 @@ fun String.getDefaultValueByType(
         QuickBookingType.NUMBER -> {
             values?.firstOrNull() ?: "0"
         }
-        QuickBookingType.TERMS -> {
-            values?.firstOrNull() ?: "Tap to view terms and conditions"
-        }
+
         else -> {
             "Tap to make selections"
         }
