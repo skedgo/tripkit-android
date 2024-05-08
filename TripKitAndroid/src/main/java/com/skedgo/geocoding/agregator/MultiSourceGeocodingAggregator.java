@@ -194,7 +194,10 @@ public class MultiSourceGeocodingAggregator<T extends GCResultInterface> {
 //            int popularityScore = (Math.min(popularity, GOOD_SCORE)) / (GOOD_SCORE / 100)
             int popularityScore = ((Math.min(popularity, GOOD_SCORE)) / (GOOD_SCORE / 100)) * 2;
 
-            popularityScore = GeocodeUtilities.rangedScoreForScore(popularityScore, 30, 80);
+            popularityScore = (candidate.getModeIdentifiers() != null && !candidate.getModeIdentifiers().isEmpty()) ?
+                    GeocodeUtilities.rangedScoreForScore(popularityScore, 50, 90) :
+                    GeocodeUtilities.rangedScoreForScore(popularityScore, 30, 80);
+
             if (popularity > GOOD_SCORE) {
                 int moreThanGood = popularityScore / GOOD_SCORE;
                 int bonus = GeocodeUtilities.rangedScoreForScore(moreThanGood, 0, 10);
@@ -208,7 +211,9 @@ public class MultiSourceGeocodingAggregator<T extends GCResultInterface> {
             if (!query.getQueryText().isEmpty()){
                 int nameScore = GeocodeUtilities.scoreBasedOnNameMatchBetweenSearchTerm(query.getQueryText(), candidate.getName());
 
-                int totalScore = GeocodeUtilities.rangedScoreForScore(nameScore,0,50);
+                int totalScore = (candidate.getModeIdentifiers() != null && !candidate.getModeIdentifiers().isEmpty()) ?
+                        GeocodeUtilities.rangedScoreForScore(nameScore,50,90):
+                        GeocodeUtilities.rangedScoreForScore(nameScore,0,50);
                 scoringResult.setScore(totalScore);
                 scoringResult.setNameScore(nameScore);
                 return scoringResult;
@@ -284,71 +289,4 @@ public class MultiSourceGeocodingAggregator<T extends GCResultInterface> {
 
         return scoringResult;
     }
-
-//    private List<MGAResultInterface<T>> removeDuplicates(List<MGAResultInterface<T>> list) {
-//        int count = list.size();
-//        List<MGAResultInterface<T>> withoutDuplicates = new ArrayList<>();
-//        for (int i = 0; i < count; i++) {
-//            GroupScoringResult groupScoringResult;
-//            ScoringResult scoringResult;
-//            if (list.get(i) instanceof ScoringResult) {
-//                groupScoringResult = new GroupScoringResult();
-//                groupScoringResult.addDuplicate((ScoringResult) list.get(i));
-//                scoringResult = (ScoringResult) list.get(i);
-//            }
-//            else{
-//                groupScoringResult = (GroupScoringResult) list.get(i);
-//                scoringResult = (ScoringResult) groupScoringResult.getDuplicates().get(0);
-//            }
-//
-//            for (int j = i + 1; j < count; j++) {
-//                if (scoringResult.equals(list.get(j))) {
-//                    if (list.get(j) instanceof ScoringResult)
-//                        groupScoringResult.addDuplicate((ScoringResult) list.get(j));
-//                    else
-//                        groupScoringResult.addDuplicates(list.get(j).getDuplicates());
-//                    list.remove(j--);
-//                    count--;
-//                }
-//            }
-//            withoutDuplicates.add(i, groupScoringResult);
-//        }
-//        return GeocodeUtilities.sortByScore(withoutDuplicates);
-//    }
-
-
-//    private List<MGAResultInterface<T>> removeDuplicates(List<MGAResultInterface<T>> list) {
-//
-//        Set<MGAResultInterface<T>> treeSet = new TreeSet<>(new Comparator<MGAResultInterface<T>>() {
-//            @Override
-//            public int compare(MGAResultInterface<T> o1, MGAResultInterface<T> o2) {
-//                ScoringResult<T> scoringResult = (ScoringResult<T>) o1.getClassRepresentative();
-//                if (scoringResult.equals(o2)){
-//                    GroupScoringResult<T> o1Group = (GroupScoringResult<T>) o1;
-//                    if (!o1.equals(o2)) {
-//                        GroupScoringResult<T> o2Group = (GroupScoringResult<T>) o2;
-//                        List<MGAResultInterface<T>> o1Duplicates = new ArrayList<>(o1Group.getDuplicates());
-//                        o1Group.addDuplicates(new ArrayList<>(o2Group.getDuplicates()));
-//                        o2Group.addDuplicates(o1Duplicates);
-//
-//                    }
-//                }
-//                return scoringResult.equals(o2)  ? 0 : 1;
-//            }
-//        });
-//
-//        for (MGAResultInterface<T> o : list){
-//            GroupScoringResult<T> groupScoringResult;
-//            if (o instanceof ScoringResult) {
-//                groupScoringResult = new GroupScoringResult();
-//                groupScoringResult.addDuplicate((ScoringResult<T>) o);
-//            }
-//            else{
-//                groupScoringResult = (GroupScoringResult<T>) o;
-//            }
-//            treeSet.add(groupScoringResult);
-//        }
-//
-//        return new ArrayList<MGAResultInterface<T>>(treeSet);
-//    }
 }
