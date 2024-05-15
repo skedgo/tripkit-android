@@ -9,4 +9,8 @@ import javax.inject.Inject
  */
 open class GetNow @Inject internal constructor() {
   open fun execute(): DateTime = DateTime.now()
+
+  open fun endOfDay(): DateTime {
+    return DateTime().withTime(23, 59, 0, 0)
+  }
 }
