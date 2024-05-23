@@ -1,5 +1,6 @@
 package com.skedgo.tripkit.routing
 
+// TODO double check if it's something we can remove and re-use the Ticket model from QuickBooking.kt
 data class Ticket(
     val cost: Double = 0.0,
     val exchange: Double = 0.0,

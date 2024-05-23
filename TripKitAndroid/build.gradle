@@ -19,6 +19,12 @@ android {
     testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
   }
 
+  buildTypes {
+    staging {
+      debuggable true
+    }
+  }
+
   packagingOptions {
     // To avoid conflicts with ASL.
     // We don't utilize ServiceLoader, so this is unneeded.
@@ -113,19 +119,36 @@ dependencies {
   testImplementation libs.mockk
 
   debugApi project(':CommonCoreLegacy')
+  stagingApi project(':CommonCoreLegacy')
   releaseApi project(':CommonCoreLegacy')
+
   debugApi project(':TripKitDomain')
+  stagingApi project(':TripKitDomain')
   releaseApi project(':TripKitDomain')
+
   debugApi project(':TripKitDomainLegacy')
+  stagingApi project(':TripKitDomainLegacy')
   releaseApi project(':TripKitDomainLegacy')
+
   debugApi project(':TripKitData')
+  stagingApi project(':TripKitData')
   releaseApi project(':TripKitData')
+
   debugApi project(':sqliteutils')
+  stagingApi project(':sqliteutils')
   releaseApi project(':sqliteutils')
   //api project(':SnapshotTaker') Uncomment when using in TripGo-v5
 
   implementation libs.javaxAnnotation
   compileOnly 'com.github.pengrad:jdk9-deps:1.0'
+
+  testImplementation libs.mockk
+  testImplementation libs.junit
+  testImplementation libs.androidxJUnitExtTesting
+  testImplementation libs.archCoreTesting
+  testImplementation libs.kluent
+  testImplementation libs.androidxTesting
+  testImplementation libs.assertjCore
 }
 
 // build a jar with source files

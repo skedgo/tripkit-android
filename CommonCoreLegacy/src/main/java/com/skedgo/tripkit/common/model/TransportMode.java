@@ -22,7 +22,7 @@ public class TransportMode {
   public static final String ID_SHUFFLE = "ps_shu";
   public static final String ID_TNC = "ps_tnc";
   public static final String ID_BICYCLE = "cy_bic";
-  public static final String ID_SCHOOL_BUS = "pt_sch";
+  public static final String ID_SCHOOL_BUS = "pt_ltd_SCHOOLBUS";
   public static final String ID_PUBLIC_TRANSPORT = "pt_pub";
   public static final String ID_MOTORBIKE = "me_mot";
   public static final String ID_CAR = "me_car";
@@ -62,7 +62,7 @@ public class TransportMode {
       return R.drawable.ic_public_transport;
     } else if (ID_TAXI.equals(identifier)) {
       return R.drawable.ic_taxi;
-    } else if (ID_SHUTTLE_BUS.equals(identifier)) {
+    } else if (ID_SHUTTLE_BUS.equals(identifier) || ID_SCHOOL_BUS.equals(identifier)) {
       return R.drawable.ic_shuttlebus;
     } else if (ID_MOTORBIKE.equals(identifier)) {
       return R.drawable.ic_motorbike;

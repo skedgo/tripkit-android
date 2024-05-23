@@ -7,8 +7,11 @@ data class Client(
     var clientName: String,
     val polygon: Polygon? = null,
     val appColors: AppColors? = null,
-    var isBeta: Boolean = false
-)
+    var isBeta: Boolean = false,
+    val features: List<String>? = emptyList()
+) {
+    fun hasWalletFeature(): Boolean = features?.any { it == ClientFeature.WALLET.feature } ?: false
+}
 
 data class AppColors(
     val barBackground: BarBackground,
@@ -46,3 +49,7 @@ data class TintColor(
     val green: Int,
     val red: Int
 )
+
+enum class ClientFeature(val feature: String) {
+    WALLET("WALLET")
+}

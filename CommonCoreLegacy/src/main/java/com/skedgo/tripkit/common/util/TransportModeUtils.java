@@ -7,12 +7,12 @@ import androidx.annotation.Nullable;
 
 import android.util.DisplayMetrics;
 
-import com.skedgo.tripkit.configuration.Server;
+import com.skedgo.tripkit.configuration.ServerManager;
 import com.skedgo.tripkit.routing.ModeInfo;
 import com.skedgo.tripkit.common.model.TransportMode;
 
 public final class TransportModeUtils {
-    public static final String ICON_URL_TEMPLATE = Server.ApiTripGo.getValue() + "modeicons/android/%s/ic_transport_%s.png";
+    public static final String ICON_URL_TEMPLATE = ServerManager.INSTANCE.getConfiguration().getApiTripGoUrl() + "modeicons/android/%s/ic_transport_%s.png";
 
     private TransportModeUtils() {
     }

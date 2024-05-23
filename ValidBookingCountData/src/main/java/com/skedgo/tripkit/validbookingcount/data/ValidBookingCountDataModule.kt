@@ -8,7 +8,7 @@ import retrofit2.Retrofit
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
 import io.reactivex.schedulers.Schedulers
-import com.skedgo.tripkit.configuration.Server
+import com.skedgo.tripkit.configuration.ServerManager
 import com.skedgo.tripkit.validbookingcount.domain.ValidBookingCountRepository
 
 @Module
@@ -19,7 +19,7 @@ class ValidBookingCountDataModule {
   ): ValidBookingCountRepository {
     val api = Retrofit.Builder()
         .client(httpClient)
-        .baseUrl(Server.ApiTripGo.value)
+        .baseUrl(ServerManager.configuration.apiTripGoUrl)
         .addCallAdapterFactory(RxJava2CallAdapterFactory.createWithScheduler(Schedulers.io()))
         .addConverterFactory(GsonConverterFactory.create())
         .build()

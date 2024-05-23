@@ -43,6 +43,9 @@ final class RouteContract {
     static final String COL_SOURCES = "sources";
     static final String COL_SUBSCRIBE_URL = "subscribeURL";
     static final String COL_UNSUBSCRIBE_URL = "unsubscribeURL";
+    static final String COL_AVAILABILITY = "availability";
+    static final String COL_AVAILABILITY_INFO = "availabilityInfo";
+    static final String COL_MONEY_USD_COST = "moneyUSDCost";
 
     private RouteContract() {
     }
@@ -80,6 +83,9 @@ final class RouteContract {
         final DatabaseField sources = new DatabaseField(COL_SOURCES, "text");
         final DatabaseField subscribeUrl = new DatabaseField(COL_SUBSCRIBE_URL, "text");
         final DatabaseField unSubscribeUrl = new DatabaseField(COL_UNSUBSCRIBE_URL, "text");
+        final DatabaseField availability = new DatabaseField(COL_AVAILABILITY, "text");
+        final DatabaseField availabilityInfo = new DatabaseField(COL_AVAILABILITY_INFO, "text");
+        final DatabaseField moneyUsdCost = new DatabaseField(COL_MONEY_USD_COST, "real");
         final DatabaseTable tripGroups = new DatabaseTable(
                 TABLE_TRIP_GROUPS,
                 new DatabaseField[]{
@@ -100,7 +106,7 @@ final class RouteContract {
             caloriesCost, moneyCost, carbonCost, hassleCost, weightedScore,
             updateUrl, progressUrl, plannedUrl, tempUrl,
             queryIsLeaveAfter, logUrl, shareUrl, mainSegmentHashCode, isHideExactTimes,
-            queryTime, subscribeUrl, unSubscribeUrl
+            queryTime, subscribeUrl, unSubscribeUrl, availability, availabilityInfo, moneyUsdCost
         },
         UniqueIndices.of(TABLE_TRIPS, id, groupId, uuid),
         "CREATE TRIGGER deleteSegments AFTER DELETE ON " + TABLE_TRIPS + " BEGIN " +

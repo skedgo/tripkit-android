@@ -2,13 +2,11 @@ package com.skedgo.tripkit
 
 import android.content.Context
 import android.content.SharedPreferences
-import android.webkit.URLUtil
 import com.google.gson.Gson
 import com.haroldadmin.cnradapter.NetworkResponseAdapterFactory
 import com.skedgo.tripkit.configuration.AppVersionNameRepository
 import com.skedgo.tripkit.configuration.GetAppVersion
-import com.skedgo.tripkit.configuration.Server
-import com.skedgo.tripkit.data.HttpClientCustomDataStore
+import com.skedgo.tripkit.configuration.ServerManager
 import com.skedgo.tripkit.data.regions.RegionService
 import com.skedgo.tripkit.regionrouting.RegionRoutingRepository
 import com.skedgo.tripkit.regionrouting.RegionRoutingApi
@@ -107,7 +105,7 @@ open class HttpClientModule(
     @Provides
     open fun retrofitBuilder(gson: Gson): Retrofit.Builder {
         return Retrofit.Builder()
-                .baseUrl(Server.ApiTripGo.value)
+                .baseUrl(ServerManager.configuration.apiTripGoUrl)
                 .addCallAdapterFactory(NetworkResponseAdapterFactory())
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                 .addConverterFactory(GsonConverterFactory.create(gson))

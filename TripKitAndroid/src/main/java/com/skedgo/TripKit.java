@@ -10,6 +10,7 @@ import com.skedgo.tripkit.Configs;
 import com.skedgo.tripkit.HttpClientModule;
 import com.skedgo.tripkit.LocationInfoService;
 import com.skedgo.tripkit.MainModule;
+import com.skedgo.tripkit.data.TripKitPreferencesModule;
 import com.skedgo.tripkit.data.regions.RegionService;
 import com.skedgo.tripkit.TripUpdater;
 import com.skedgo.tripkit.bookingproviders.BookingResolver;
@@ -45,7 +46,8 @@ import static com.skedgo.tripkit.routing.TripAlarmBroadcastReceiver.NOTIFICATION
         HttpClientModule.class,
         A2bRoutingDataModule.class,
         TspModule.class,
-        MainModule.class
+        MainModule.class,
+        TripKitPreferencesModule.class
 })
 public abstract class TripKit {
     private static TripKit instance;

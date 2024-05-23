@@ -16,6 +16,12 @@ android {
     testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
   }
 
+  buildTypes {
+    staging {
+      debuggable true
+    }
+  }
+
   buildFeatures {
     viewBinding true
     dataBinding true
@@ -62,10 +68,15 @@ dependencies {
   }
 
   debugImplementation project(':TripKitAndroid')
+  stagingImplementation project(':TripKitAndroid')
   releaseImplementation project(':TripKitAndroid')
+
   debugImplementation project(':CommonCoreLegacy')
+  stagingImplementation project(':CommonCoreLegacy')
   releaseImplementation project(':CommonCoreLegacy')
+
   debugImplementation project(':trip-kit-booking')
+  stagingImplementation project(':trip-kit-booking')
   releaseImplementation project(':trip-kit-booking')
 
   implementation 'uk.co.chrisjenx:calligraphy:2.3.0'
@@ -80,7 +91,9 @@ dependencies {
   implementation libs.bindingCollectionAdapterRecyclerView
 
   debugImplementation project(':rxlifecyclecomponents')
+  stagingImplementation project(':rxlifecyclecomponents')
   releaseImplementation project(':rxlifecyclecomponents')
+
   implementation libs.kotlin
   implementation libs.gson
   implementation libs.rxjava2

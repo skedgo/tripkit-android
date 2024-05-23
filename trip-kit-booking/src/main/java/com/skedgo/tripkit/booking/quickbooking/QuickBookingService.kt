@@ -4,7 +4,6 @@ import com.skedgo.tripkit.booking.mybookings.PaymentRequest
 import com.skedgo.tripkit.routing.RoutingResponse
 import io.reactivex.Single
 import okhttp3.ResponseBody
-import retrofit2.http.Body
 
 interface QuickBookingService {
     fun getQuickBooking(url: String): Single<List<QuickBooking>>
@@ -23,7 +22,8 @@ interface QuickBookingService {
         request: ConfirmPaymentUpdateRequest
     ): Single<ConfirmPaymentUpdateResponse>
     fun getTicketHTML(url: String): Single<ResponseBody>
-    fun getTickets(valid: Boolean): Single<List<PurchasedTicket>>
+    fun getTickets(valid: Boolean): Single<List<Ticket>>
+    suspend fun getTicketsAsync(valid: Boolean): List<Ticket>
     fun activateTicket(url: String): Single<ResponseBody>
 
     class QuickBookingServiceImpl(private val api: QuickBookingApi) : QuickBookingService {
@@ -58,8 +58,11 @@ interface QuickBookingService {
         override fun getTicketHTML(url: String): Single<ResponseBody> =
             api.getTicketHTML(url)
 
-        override fun getTickets(valid: Boolean): Single<List<PurchasedTicket>> =
+        override fun getTickets(valid: Boolean): Single<List<Ticket>> =
             api.getTickets(valid)
+
+        override suspend fun getTicketsAsync(valid: Boolean): List<Ticket> =
+            api.getTicketsAsync(valid)
 
         override fun activateTicket(url: String): Single<ResponseBody> =
             api.activateTicket(url)

@@ -41,3 +41,6 @@ val TripSegment.noActionAlerts
 val TripSegment.actionAlert
   get() =
     alerts?.firstOrNull { it.alertAction() != null }
+
+val TripSegment?.bookingHasConfirmation
+    get() = this?.booking?.confirmation?.status() != null

@@ -4,7 +4,7 @@ import android.content.Context
 import android.content.SharedPreferences
 import com.skedgo.tripkit.account.domain.UserKeyRepository
 import com.skedgo.tripkit.account.domain.UserTokenRepository
-import com.skedgo.tripkit.configuration.Server
+import com.skedgo.tripkit.configuration.ServerManager
 import dagger.Module
 import dagger.Provides
 import io.reactivex.schedulers.Schedulers
@@ -26,7 +26,7 @@ class AccountDataModule {
       httpClient: OkHttpClient, @Named(UserTokenPreferences) prefs: SharedPreferences
   ): UserTokenRepository {
     val silentLoginApi = Retrofit.Builder()
-        .baseUrl(Server.ApiTripGo.value)
+        .baseUrl(ServerManager.configuration.apiTripGoUrl)
         .addCallAdapterFactory(RxJava2CallAdapterFactory.createWithScheduler(Schedulers.io()))
         .addConverterFactory(GsonConverterFactory.create())
         .client(httpClient)
@@ -34,7 +34,7 @@ class AccountDataModule {
         .create(SilentLoginApi::class.java)
 
     val accountApi = Retrofit.Builder()
-        .baseUrl(Server.ApiTripGo.value)
+        .baseUrl(ServerManager.configuration.apiTripGoUrl)
         .addCallAdapterFactory(RxJava2CallAdapterFactory.createWithScheduler(Schedulers.io()))
         .addConverterFactory(GsonConverterFactory.create())
         .client(httpClient)

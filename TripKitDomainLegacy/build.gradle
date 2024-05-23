@@ -16,6 +16,12 @@ android {
     targetSdkVersion versions.targetSdkVersion
   }
 
+  buildTypes {
+    staging {
+      debuggable true
+    }
+  }
+
   lintOptions {
     // Changing to warning because of https://github.com/square/okio/issues/58.
     warning 'InvalidPackage'
@@ -39,9 +45,13 @@ android {
 }
 
 dependencies {
+
   debugImplementation project(":TripKitDomain")
+  stagingImplementation project(":TripKitDomain")
   releaseImplementation project(":TripKitDomain")
+
   debugImplementation project(':CommonCoreLegacy')
+  stagingImplementation project(':CommonCoreLegacy')
   releaseImplementation project(':CommonCoreLegacy')
 
   implementation libs.dagger

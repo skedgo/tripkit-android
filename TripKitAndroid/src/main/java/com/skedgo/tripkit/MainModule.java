@@ -16,6 +16,7 @@ import com.skedgo.tripkit.common.util.Gsons;
 import com.skedgo.tripkit.common.util.LowercaseEnumTypeAdapterFactory;
 import com.skedgo.tripkit.bookingproviders.BookingResolver;
 import com.skedgo.tripkit.bookingproviders.BookingResolverImpl;
+import com.skedgo.tripkit.configuration.ServerManager;
 import com.skedgo.tripkit.data.regions.RegionService;
 import com.skedgo.tripkit.data.tsp.GsonAdaptersRegionInfo;
 import com.skedgo.tripkit.tsp.GsonAdaptersRegionInfoBody;
@@ -43,7 +44,6 @@ import com.skedgo.tripkit.a2brouting.FailoverA2bRoutingApi;
 import com.skedgo.tripkit.a2brouting.RouteService;
 import com.skedgo.TripKit;
 import com.skedgo.tripkit.configuration.AppVersionNameRepository;
-import com.skedgo.tripkit.configuration.Server;
 
 @Module
 public class MainModule {
@@ -63,7 +63,7 @@ public class MainModule {
     @Provides
     RegionsApi getRegionsApi(OkHttpClient httpClient) {
         return new Retrofit.Builder()
-                .baseUrl(Server.ApiTripGo.getValue())
+                .baseUrl(ServerManager.INSTANCE.getConfiguration().getApiTripGoUrl())
                 .addConverterFactory(GsonConverterFactory.create(Gsons.createForRegion()))
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.createWithScheduler(Schedulers.io()))
                 .client(httpClient)
@@ -167,7 +167,7 @@ public class MainModule {
     LocationInfoApi getLocationInfoApi(Gson gson, OkHttpClient httpClient) {
         return new Retrofit.Builder()
                 /* This base url is ignored as the api relies on @Url. */
-                .baseUrl(Server.ApiTripGo.getValue())
+                .baseUrl(ServerManager.INSTANCE.getConfiguration().getApiTripGoUrl())
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.createWithScheduler(Schedulers.io()))
                 .addConverterFactory(GsonConverterFactory.create(gson))
                 .client(httpClient)

@@ -4,7 +4,6 @@ import android.app.PendingIntent
 import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
-import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
 import androidx.core.app.NotificationCompat
@@ -28,17 +27,18 @@ class GeofenceBroadcastReceiver : BroadcastReceiver() {
         const val EXTRA_TRIP_GROUP_UUID = "EXTRA_TRIP_GROUP_UUID"
         const val NOTIFICATION_VEHICLE_APPROACHING_NOTIFICATION_ID = 9002
 
-        fun getPendingIntent(context: Context, bundle: Bundle? = null): PendingIntent {
+        fun getPendingIntent(context: Context, dataMap: Map<String, String>? = null): PendingIntent {
             val intent = Intent(context, GeofenceBroadcastReceiver::class.java)
-            bundle?.let { intent.putExtras(bundle) }
+            dataMap?.forEach {
+                intent.putExtra(it.key, it.value)
+            }
             intent.action = ACTION_GEOFENCE_EVENT
             return PendingIntent.getBroadcast(
                 context,
                 0,
                 intent,
-                PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE
+                PendingIntent.FLAG_MUTABLE or PendingIntent.FLAG_UPDATE_CURRENT
             )
-
         }
     }
 
@@ -48,8 +48,8 @@ class GeofenceBroadcastReceiver : BroadcastReceiver() {
             Toast.makeText(context, "Geofence update received", Toast.LENGTH_SHORT).show()
         Log.e("GFBroadcastReceiver", "geofence update receive")
 
-        val tripString = intent.getStringExtra(TripAlarmBroadcastReceiver.EXTRA_START_TRIP_EVENT_TRIP)
-        val tripGroupUuid = intent.getStringExtra(TripAlarmBroadcastReceiver.EXTRA_START_TRIP_EVENT_TRIP_GROUP_UUID)
+        val tripString = intent.getStringExtra(EXTRA_TRIP)
+        val tripGroupUuid = intent.getStringExtra(EXTRA_TRIP_GROUP_UUID)
 
         if (intent.action == ACTION_GEOFENCE_EVENT) {
             val geofences: List<com.skedgo.tripkit.routing.Geofence> =

@@ -14,6 +14,7 @@ import io.reactivex.schedulers.Schedulers
 import okhttp3.HttpUrl.Companion.toHttpUrlOrNull
 import org.apache.commons.collections4.CollectionUtils
 import com.skedgo.tripkit.agenda.ConfigRepository
+import com.skedgo.tripkit.data.database.locations.facility.FacilityRepository
 import com.skedgo.tripkit.data.database.locations.freefloating.FreeFloatingRepository
 import java.util.*
 
@@ -29,7 +30,9 @@ open class StopsFetcher(private val api: LocationsApi,
                         private val carParkMapper: CarParkMapper,
                         private val carPodMapper: CarPodMapper,
                         private val onStreetParkingMapper: OnStreetParkingMapper,
-                        private val carPodRepository: CarPodRepository) {
+                        private val carPodRepository: CarPodRepository,
+                        private val facilityRepository: FacilityRepository,
+    ) {
 
     open fun fetchAsync(cellIds: List<String>,
                         region: Region,
@@ -162,6 +165,9 @@ open class StopsFetcher(private val api: LocationsApi,
                 ).plus(
                         cells.filter { it.carPods != null && it.carPods.isNotEmpty() }
                                 .map { carPodRepository.saveCarPods(carPodMapper.toEntity(it.key, it.carPods)) }
+                ).plus(
+                    cells.filter { it.facilities != null && it.facilities.isNotEmpty() }
+                        .map { facilityRepository.saveFacilities(it.key, it.facilities) }
                 )
                 .toList()
                 .let {

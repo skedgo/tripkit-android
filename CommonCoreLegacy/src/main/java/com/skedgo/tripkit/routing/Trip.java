@@ -50,6 +50,8 @@ public class Trip implements ITimeRange {
     private float caloriesCost;
     @SerializedName("moneyCost")
     private float mMoneyCost;
+    @SerializedName("moneyUSDCost")
+    private float moneyUsdCost;
     @SerializedName("carbonCost")
     private float mCarbonCost;
     @SerializedName("hassleCost")
@@ -81,6 +83,8 @@ public class Trip implements ITimeRange {
     @Nullable
     @SerializedName("availability")
     private String availability;
+    @Nullable
+    private String availabilityInfo;
     @SerializedName("mainSegmentHashCode")
     private long mainSegmentHashCode;
     @SerializedName("hideExactTimes")
@@ -100,6 +104,7 @@ public class Trip implements ITimeRange {
         mStartTimeInSecs = 0;
         mEndTimeInSecs = 0;
         mMoneyCost = UNKNOWN_COST;
+        moneyUsdCost = UNKNOWN_COST;
         mCarbonCost = 0;
         mHassleCost = 0;
     }
@@ -206,6 +211,14 @@ public class Trip implements ITimeRange {
 
     public void setMoneyCost(final float moneyCost) {
         this.mMoneyCost = moneyCost;
+    }
+
+    public float getMoneyUsdCost() {
+        return moneyUsdCost;
+    }
+
+    public void setMoneyUsdCost(float moneyUsdCost) {
+        this.moneyUsdCost = moneyUsdCost;
     }
 
     public float getCarbonCost() {
@@ -337,12 +350,21 @@ public class Trip implements ITimeRange {
         return com.skedgo.tripkit.routing.AvailabilityKt.toAvailability(availability);
     }
 
+    @Nullable
+    public String getAvailabilityString() {
+        return availability;
+    }
+
     /**
      * Mutability is subject to deletion after we finish migrating to an immutable {@link Trip}.
      */
     @Deprecated
     public void setAvailability(@NonNull Availability availability) {
         this.availability = availability.getValue();
+    }
+
+    public void setAvailability(String availability) {
+        this.availability = availability;
     }
 
     public boolean queryIsLeaveAfter() {
@@ -509,6 +531,22 @@ public class Trip implements ITimeRange {
     }
 
     @Nullable
+    public String getDisplayCostUsd() {
+        if (moneyUsdCost == 0) {
+            return null;
+        } else if (moneyUsdCost == Trip.UNKNOWN_COST) {
+            return null;
+        } else {
+            // Use locale.
+            NumberFormat numberFormat = NumberFormat.getNumberInstance(Locale.getDefault());
+            numberFormat.setRoundingMode(RoundingMode.CEILING);
+            numberFormat.setMaximumFractionDigits(0);
+            String value = numberFormat.format(moneyUsdCost);
+            return (currencySymbol != null ? currencySymbol : "$") + value;
+        }
+    }
+
+    @Nullable
     public String getDisplayCarbonCost() {
         if (mCarbonCost > 0) {
             return mCarbonCost + "kg";
@@ -593,6 +631,15 @@ public class Trip implements ITimeRange {
 
     public void setQueryTime(long queryTime) {
         this.queryTime = queryTime;
+    }
+
+    @Nullable
+    public String getAvailabilityInfo() {
+        return availabilityInfo;
+    }
+
+    public void setAvailabilityInfo(@Nullable String availabilityInfo) {
+        this.availabilityInfo = availabilityInfo;
     }
 
     public String getTripUuid() {

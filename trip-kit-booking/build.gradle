@@ -15,6 +15,18 @@ android {
     minSdkVersion versions.proMinSdkVersion
     targetSdkVersion versions.targetSdkVersion
     testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+
+    javaCompileOptions {
+      annotationProcessorOptions {
+        arguments += ["room.schemaLocation": "$projectDir/schemas".toString()]
+      }
+    }
+  }
+
+  buildTypes {
+    staging {
+      debuggable true
+    }
   }
 
   packagingOptions {
@@ -54,12 +66,16 @@ dependencies {
   testImplementation 'com.github.thuytrinh:MockWebServerRule:v1.0'
 
   debugImplementation project(':TripKitAndroid')
+  stagingImplementation project(':TripKitAndroid')
   releaseImplementation project(':TripKitAndroid')
-  debugImplementation project(':TripKitDomain')
-  releaseImplementation project(':TripKitDomain')
-  debugImplementation project(':CommonCoreLegacy')
-  releaseImplementation project(':CommonCoreLegacy')
 
+  debugImplementation project(':TripKitDomain')
+  stagingImplementation project(':TripKitDomain')
+  releaseImplementation project(':TripKitDomain')
+
+  debugImplementation project(':CommonCoreLegacy')
+  stagingImplementation project(':CommonCoreLegacy')
+  releaseImplementation project(':CommonCoreLegacy')
 
   implementation libs.dagger
   implementation libs.rxjava2
@@ -71,7 +87,16 @@ dependencies {
   implementation libs.retrofitConverterGson
   implementation libs.retrofitAdapterRxJava
   implementation libs.kotlin
+  implementation libs.coroutinesCore
+  implementation libs.coroutinesAndroid
+  implementation libs.coroutinesRx
   kapt libs.daggerCompiler
+
+  implementation libs.roomRuntime
+  annotationProcessor libs.roomCompiler
+  kapt libs.roomCompiler
+  implementation libs.roomRxjava2
+  implementation libs.roomKtx
 
   kapt libs.value
   compileOnly libs.valueAnnotations
