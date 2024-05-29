@@ -20,12 +20,36 @@ import io.reactivex.schedulers.Schedulers
 import java.util.*
 import kotlin.collections.ArrayList
 
+// TODO refactor and use Room
 open class RouteStore(private val databaseHelper: SQLiteOpenHelper, private val gson: Gson) {
+
+
+    fun clearRoutesDataAsync(): Observable<Unit> = Observable.fromCallable {
+        clearRoutesData()
+    }.subscribeOn(Schedulers.io())
+
+    private fun clearRoutesData() {
+        val database = databaseHelper.writableDatabase
+        database.execSQL("DELETE FROM $TABLE_TRIPS")
+        database.execSQL("DELETE FROM $TABLE_SEGMENTS")
+        database.execSQL("DELETE FROM $TABLE_TRIP_GROUPS")
+        database.close()
+    }
 
     open fun deleteAsync(whereClause: Pair<String, Array<String>>): Observable<Int> {
         return Observable
                 .fromCallable { delete(whereClause) }
                 .subscribeOn(Schedulers.io())
+    }
+
+    open fun deleteByTableAsync(tables: List<String>, whereClauses: List<Pair<String, Array<String>>>): Observable<Int> {
+        if (tables.size != whereClauses.size) {
+            throw IllegalArgumentException("Tables and whereClauses must have the same size")
+        }
+
+        return Observable.fromCallable {
+            deleteByTablesInTransaction(tables, whereClauses)
+        }.subscribeOn(Schedulers.io())
     }
 
     open fun updateAlternativeTrips(groups: List<TripGroup>): Observable<List<TripGroup>> {
@@ -170,6 +194,33 @@ open class RouteStore(private val databaseHelper: SQLiteOpenHelper, private val 
     private fun delete(whereClause: Pair<String, Array<String>>): Int {
         val database = databaseHelper.writableDatabase
         return database.delete(TABLE_TRIP_GROUPS, whereClause.first, whereClause.second)
+    }
+
+    private fun deleteByTablesInTransaction(tables: List<String>, whereClauses: List<Pair<String, Array<String>>>): Int {
+        val database = databaseHelper.writableDatabase
+        var totalRowsDeleted = 0
+
+        database.beginTransaction()
+        try {
+            for (i in tables.indices) {
+                val table = tables[i]
+                val whereClause = whereClauses[i]
+                println("tag123, table: $table")
+                println("tag123, where: ${whereClause.first}")
+                println("tag123, args: ${whereClause.second.contentToString()}")
+                totalRowsDeleted += database.delete(table, whereClause.first, whereClause.second)
+            }
+            database.setTransactionSuccessful()
+        } catch (e: Exception) {
+            println("tag123, exception: ${e.message}")
+            e.printStackTrace()
+        } finally {
+            database.endTransaction()
+        }
+
+        println("tag123, totalRowsDeleted: $totalRowsDeleted")
+
+        return totalRowsDeleted
     }
 
     private fun queryAsync(
