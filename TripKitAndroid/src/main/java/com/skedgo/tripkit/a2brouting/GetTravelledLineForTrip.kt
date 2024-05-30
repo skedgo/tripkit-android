@@ -47,9 +47,7 @@ class GetTravelledLineForTrip @Inject constructor() {
                         else
                             it.serviceColor.color
                         val decodedWayPoints = PolyUtil.decode(it.encodedWaypoints)
-                        println("tag123, a: ${decodedWayPoints.size}")
                         val simplified = decodedWayPoints.simplify(LAT_LNG_SIMPLIFY_TOLERANCE)
-                        println("tag123, b: ${simplified.size}")
                         simplified.zipWithNext()
                             .map { (start, end) ->
                                 com.skedgo.tripkit.LineSegment(
@@ -70,8 +68,10 @@ class GetTravelledLineForTrip @Inject constructor() {
                             .map { (start, end) ->
                                 var lineColor =
                                     (getColorForWheelchairAndBicycle(street, modeId) ?: color)
-                                if (!street.roadTags().isNullOrEmpty()) {
-                                    lineColor = Color.BLUE
+                                street.roadTags()?.let {
+                                    it.firstOrNull()?.let {
+                                        lineColor = it.getRoadTagColor()
+                                    }
                                 }
                                 com.skedgo.tripkit.LineSegment(
                                     TripKitLatLng(start.latitude, start.longitude),
