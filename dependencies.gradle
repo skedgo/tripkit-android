@@ -168,7 +168,4 @@ libs.archCoreTesting = "androidx.arch.core:core-testing:$versions.archCore"
 libs.amplifyCore = "com.amplifyframework:core:$versions.ampifyCore"
 libs.amplifyAuth = "com.amplifyframework.ui:authenticator:$versions.amplifyAuth"
 
-versions.amplifyCore = "2.14.11"
-versions.amplifyAuth = "1.1.0"
-
 ext.libs = libs
