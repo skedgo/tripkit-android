@@ -37,13 +37,13 @@ versions.mockk = "1.13.8"
 versions.archCore = "2.1.0"
 versions.qrCodeGenerator = "1.2.0"
 versions.amplifyCore = "2.14.11"
-versions.amplifyAuth = "1.1.0"
+versions.amplifyAuth = "1.2.0"
 versions.desugar = "2.0.4"
 
 ext.versions = versions
 
 Expando libs = new Expando()
-libs.desugar = "com.android.tools:desugar_jdk_libs:$versions.desugaring"
+libs.desugar = "com.android.tools:desugar_jdk_libs:$versions.desugar"
 libs.mockitoKotlin = "com.nhaarman.mockitokotlin2:mockito-kotlin:2.0.0-RC3"
 libs.mockitoCore = "org.mockito:mockito-core:2.8.9"
 libs.mockitoAndroid = "org.mockito:mockito-android:2.8.9"
