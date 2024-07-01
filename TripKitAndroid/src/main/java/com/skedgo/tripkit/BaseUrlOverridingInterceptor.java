@@ -15,10 +15,10 @@ import okhttp3.Interceptor;
 import okhttp3.Request;
 import okhttp3.Response;
 
-final class BaseUrlOverridingInterceptor implements Interceptor {
+public final class BaseUrlOverridingInterceptor implements Interceptor {
     private final Callable<String> baseUrlAdapter;
 
-    BaseUrlOverridingInterceptor(@NonNull Callable<String> baseUrlAdapter) {
+    public BaseUrlOverridingInterceptor(@NonNull Callable<String> baseUrlAdapter) {
         this.baseUrlAdapter = baseUrlAdapter;
     }
 

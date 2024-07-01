@@ -205,20 +205,14 @@ open class RouteStore(private val databaseHelper: SQLiteOpenHelper, private val 
             for (i in tables.indices) {
                 val table = tables[i]
                 val whereClause = whereClauses[i]
-                println("tag123, table: $table")
-                println("tag123, where: ${whereClause.first}")
-                println("tag123, args: ${whereClause.second.contentToString()}")
                 totalRowsDeleted += database.delete(table, whereClause.first, whereClause.second)
             }
             database.setTransactionSuccessful()
         } catch (e: Exception) {
-            println("tag123, exception: ${e.message}")
             e.printStackTrace()
         } finally {
             database.endTransaction()
         }
-
-        println("tag123, totalRowsDeleted: $totalRowsDeleted")
 
         return totalRowsDeleted
     }
