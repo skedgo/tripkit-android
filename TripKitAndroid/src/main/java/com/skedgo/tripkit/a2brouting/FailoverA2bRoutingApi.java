@@ -22,6 +22,7 @@ import okhttp3.HttpUrl;
 import com.skedgo.tripkit.routing.RoutingResponse;
 import com.skedgo.tripkit.routing.TripGroup;
 
+import static com.skedgo.tripkit.extensions.StringKt.buildUrlWithQueryParams;
 import static com.skedgo.tripkit.routing.RoutingResponse.ERROR_CODE_NO_FROM_LOCATION;
 
 /**
@@ -58,30 +59,36 @@ public class FailoverA2bRoutingApi {
             final List<String> excludeStops,
             final Map<String, Object> options
     ) {
-        // Regarding url failover, see more
-        // https://www.flowdock.com/app/skedgo/tripgo-v4/threads/ZSuBe4bGCfR8ltaEosihtCklBZy.
         return Observable.fromIterable(baseUrls)
-                .map(baseUrl -> HttpUrl.parse(baseUrl).newBuilder()
-                        .addPathSegment("routing.json")
-                        .build()
-                        .toString())
-                .concatMap((Function<String, Observable<RoutingResponse>>) url -> fetchRoutesPerUrlAsync(url, modes, excludedTransitModes, excludeStops, options))
-                .first(new RoutingResponse())
-                .map((Function<RoutingResponse, List<TripGroup>>) response -> {
-                    response.processRawData(resources, gson);
-                    return response.getTripGroupList();
-                })
-                .filter(CollectionUtils::isNotEmpty)
-                .map(fillIdentifiers)
-                .map(groups -> {
-                    for (TripGroup group : groups) {
-                        selectBestDisplayTrip.apply(group);
+            .map(baseUrl -> buildUrlWithQueryParams(baseUrl, modes, excludedTransitModes, excludeStops, options))
+            .concatMap(url -> fetchRoutesPerUrlAsync(url, modes, excludedTransitModes, excludeStops, options)
+                .map(response -> {
+                    List<TripGroup> tripGroups = response.getTripGroupList();
+                    if (CollectionUtils.isNotEmpty(tripGroups)) {
+                        for (TripGroup group : tripGroups) {
+                            group.setFullUrl(url);
+                            selectBestDisplayTrip.apply(group);
+                        }
                     }
-                    return groups;
-                })
-                .onErrorResumeNext((Function<Throwable, Maybe<? extends List<TripGroup>>>) error -> error instanceof RoutingUserError
-                        ? Maybe.error(error)
-                        : Maybe.empty()).toObservable();
+                    return response;
+                }))
+            .first(new RoutingResponse())
+            .map(response -> {
+                response.processRawData(resources, gson);
+                return response.getTripGroupList();
+            })
+            .filter(CollectionUtils::isNotEmpty)
+            .map(fillIdentifiers)
+            .map(groups -> {
+                for (TripGroup group : groups) {
+                    selectBestDisplayTrip.apply(group);
+                }
+                return groups;
+            })
+            .onErrorResumeNext(error -> error instanceof RoutingUserError
+                ? Maybe.error(error)
+                : Maybe.empty())
+            .toObservable();
     }
 
     Observable<RoutingResponse> fetchRoutesPerUrlAsync(
