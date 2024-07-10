@@ -1,162 +1,173 @@
 package com.skedgo.tripkit.common.model;
 
-import androidx.annotation.DrawableRes;
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import android.text.TextUtils;
 
 import com.google.gson.annotations.SerializedName;
 import com.skedgo.tripkit.common.R;
+import com.skedgo.tripkit.routing.ServiceColor;
 
 import java.util.ArrayList;
 
-import com.skedgo.tripkit.routing.ServiceColor;
+import androidx.annotation.DrawableRes;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
 public class TransportMode {
-  public static final String MIDDLE_FIX_CAR = "car-s";
-  public static final String MIDDLE_FIX_BIC = "bic-s";
+    public static final String MIDDLE_FIX_CAR = "car-s";
+    public static final String MIDDLE_FIX_BIC = "bic-s";
 
-  public static final String ID_WALK = "wa_wal";
-  public static final String ID_TAXI = "ps_tax";
-  public static final String ID_AIR = "in_air";
-  public static final String ID_SHUFFLE = "ps_shu";
-  public static final String ID_TNC = "ps_tnc";
-  public static final String ID_BICYCLE = "cy_bic";
-  public static final String ID_SCHOOL_BUS = "pt_ltd_SCHOOLBUS";
-  public static final String ID_PUBLIC_TRANSPORT = "pt_pub";
-  public static final String ID_MOTORBIKE = "me_mot";
-  public static final String ID_CAR = "me_car";
-  public static final String ID_WHEEL_CHAIR = "wa_whe";
-  public static final String ID_PS_DRT = "ps_drt";
+    public static final String ID_WALK = "wa_wal";
+    public static final String ID_TAXI = "ps_tax";
+    public static final String ID_AIR = "in_air";
+    public static final String ID_SHUFFLE = "ps_shu";
+    public static final String ID_TNC = "ps_tnc";
+    public static final String ID_BICYCLE = "cy_bic";
+    public static final String ID_SCHOOL_BUS = "pt_ltd_SCHOOLBUS";
+    public static final String ID_PUBLIC_TRANSPORT = "pt_pub";
+    public static final String ID_MOTORBIKE = "me_mot";
+    public static final String ID_CAR = "me_car";
+    public static final String ID_WHEEL_CHAIR = "wa_whe";
+    public static final String ID_PS_DRT = "ps_drt";
 
-  /**
-   * FIXME: It seems we no longer need this id.
-   * Replacement seems to be 'pt_ltd_SCHOOLBUS'.
-   */
-  public static final String ID_SHUTTLE_BUS = "ps_shu";
+    /**
+     * FIXME: It seems we no longer need this id.
+     * Replacement seems to be 'pt_ltd_SCHOOLBUS'.
+     */
+    public static final String ID_SHUTTLE_BUS = "ps_shu";
 
-  @SerializedName("id") private String id;
-  @SerializedName("URL") private String url;
-  @SerializedName("title") private String title;
-  @SerializedName("icon") private String iconId;
-  @SerializedName("darkIcon") private String darkIcon;
-  @SerializedName("implies") private ArrayList<String> implies;
-  @SerializedName("required") private boolean isRequired;
-  @SerializedName("color") private ServiceColor color;
+    @SerializedName("id")
+    private String id;
+    @SerializedName("URL")
+    private String url;
+    @SerializedName("title")
+    private String title;
+    @SerializedName("icon")
+    private String iconId;
+    @SerializedName("darkIcon")
+    private String darkIcon;
+    @SerializedName("implies")
+    private ArrayList<String> implies;
+    @SerializedName("required")
+    private boolean isRequired;
+    @SerializedName("color")
+    private ServiceColor color;
 
-  public TransportMode() {}
-
-  public static TransportMode fromId(@NonNull String id) {
-    final TransportMode mode = new TransportMode();
-    mode.setId(id);
-    return mode;
-  }
-
-  @DrawableRes
-  public static int getLocalIconResId(@Nullable String identifier) {
-    if (ID_BICYCLE.equals(identifier)) {
-      return R.drawable.ic_bicycle;
-    } else if (ID_WALK.equals(identifier)) {
-      return R.drawable.ic_walk;
-    } else if (ID_PUBLIC_TRANSPORT.equals(identifier)) {
-      return R.drawable.ic_public_transport;
-    } else if (ID_TAXI.equals(identifier)) {
-      return R.drawable.ic_taxi;
-    } else if (ID_SHUTTLE_BUS.equals(identifier) || ID_SCHOOL_BUS.equals(identifier)) {
-      return R.drawable.ic_shuttlebus;
-    } else if (ID_MOTORBIKE.equals(identifier)) {
-      return R.drawable.ic_motorbike;
-    } else if (ID_CAR.equals(identifier)) {
-      return R.drawable.ic_car;
-    } else if (ID_AIR.equals(identifier)) {
-      return R.drawable.ic_aeroplane;
-    } else if (identifier != null && identifier.startsWith("cy_bic-s")) {
-      return R.drawable.ic_bicycle_share;
-    } else if (ID_WHEEL_CHAIR.equals(identifier)) {
-      return R.drawable.ic_wheelchair;
-    } else {
-      return 0;
+    public TransportMode() {
     }
-  }
 
-  @Override
-  public boolean equals(Object o) {
-    if (o instanceof TransportMode) {
-      final TransportMode that = (TransportMode) o;
-      return TextUtils.equals(id, that.id);
-    } else {
-      return false;
+    public static TransportMode fromId(@NonNull String id) {
+        final TransportMode mode = new TransportMode();
+        mode.setId(id);
+        return mode;
     }
-  }
 
-  @Nullable
-  public String getURL() {
-    return url;
-  }
+    @DrawableRes
+    public static int getLocalIconResId(@Nullable String identifier) {
+        if (ID_BICYCLE.equals(identifier)) {
+            return R.drawable.ic_bicycle;
+        } else if (ID_WALK.equals(identifier)) {
+            return R.drawable.ic_walk;
+        } else if (ID_PUBLIC_TRANSPORT.equals(identifier)) {
+            return R.drawable.ic_public_transport;
+        } else if (ID_TAXI.equals(identifier)) {
+            return R.drawable.ic_taxi;
+        } else if (ID_SHUTTLE_BUS.equals(identifier) || ID_SCHOOL_BUS.equals(identifier)) {
+            return R.drawable.ic_shuttlebus;
+        } else if (ID_MOTORBIKE.equals(identifier)) {
+            return R.drawable.ic_motorbike;
+        } else if (ID_CAR.equals(identifier)) {
+            return R.drawable.ic_car;
+        } else if (ID_AIR.equals(identifier)) {
+            return R.drawable.ic_aeroplane;
+        } else if (identifier != null && identifier.startsWith("cy_bic-s")) {
+            return R.drawable.ic_bicycle_share;
+        } else if (ID_WHEEL_CHAIR.equals(identifier)) {
+            return R.drawable.ic_wheelchair;
+        } else {
+            return 0;
+        }
+    }
 
-  public void setURL(String URL) {
-    url = URL;
-  }
+    @Override
+    public boolean equals(Object o) {
+        if (o instanceof TransportMode) {
+            final TransportMode that = (TransportMode) o;
+            return TextUtils.equals(id, that.id);
+        } else {
+            return false;
+        }
+    }
 
-  public String getTitle() {
-    return title;
-  }
+    @Nullable
+    public String getURL() {
+        return url;
+    }
 
-  public void setTitle(String title) {
-    this.title = title;
-  }
+    public void setURL(String URL) {
+        url = URL;
+    }
 
-  @Nullable
-  public ArrayList<String> getImplies() {
-    return implies;
-  }
+    public String getTitle() {
+        return title;
+    }
 
-  public void setImplies(ArrayList<String> implies) {
-    this.implies = implies;
-  }
+    public void setTitle(String title) {
+        this.title = title;
+    }
 
-  public boolean isRequired() {
-    return isRequired;
-  }
+    @Nullable
+    public ArrayList<String> getImplies() {
+        return implies;
+    }
 
-  public void setRequired(boolean isRequired) {
-    this.isRequired = isRequired;
-  }
+    public void setImplies(ArrayList<String> implies) {
+        this.implies = implies;
+    }
 
-  public String getId() {
-    return id;
-  }
+    public boolean isRequired() {
+        return isRequired;
+    }
 
-  public void setId(String id) {
-    this.id = id;
-  }
+    public void setRequired(boolean isRequired) {
+        this.isRequired = isRequired;
+    }
 
-  @Override
-  public String toString() {
-    return id;
-  }
+    public String getId() {
+        return id;
+    }
 
-  public String getIconId() {
-    return iconId;
-  }
+    public void setId(String id) {
+        this.id = id;
+    }
 
-  public void setIconId(String iconId) {
-    this.iconId = iconId;
-  }
+    @Override
+    public String toString() {
+        return id;
+    }
 
-  @Nullable public ServiceColor getColor() {
-    return color;
-  }
+    public String getIconId() {
+        return iconId;
+    }
 
-  void setColor(ServiceColor color) {
-    this.color = color;
-  }
+    public void setIconId(String iconId) {
+        this.iconId = iconId;
+    }
 
-  @Nullable public String getDarkIcon() {
-    return darkIcon;
-  }
+    @Nullable
+    public ServiceColor getColor() {
+        return color;
+    }
 
-  public void setDarkIcon(String darkIcon) {
-    this.darkIcon = darkIcon;
-  }
+    void setColor(ServiceColor color) {
+        this.color = color;
+    }
+
+    @Nullable
+    public String getDarkIcon() {
+        return darkIcon;
+    }
+
+    public void setDarkIcon(String darkIcon) {
+        this.darkIcon = darkIcon;
+    }
 }

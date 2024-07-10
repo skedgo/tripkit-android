@@ -21,11 +21,11 @@ public abstract class BookingConfirmationStatus implements Parcelable {
         @Override
         public BookingConfirmationStatus createFromParcel(Parcel in) {
             return ImmutableBookingConfirmationStatus.builder()
-                    .title(in.readString())
-                    .subtitle(in.readString())
-                    .value(in.readString())
-                    .imageURL(in.readString())
-                    .build();
+                .title(in.readString())
+                .subtitle(in.readString())
+                .value(in.readString())
+                .imageURL(in.readString())
+                .build();
         }
 
         @Override

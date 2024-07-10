@@ -31,30 +31,30 @@ import static com.skedgo.tripkit.routing.VehicleMode.from;
 
 @RunWith(RobolectricTestRunner.class)
 public class VehicleModeTest {
-  @Test
-  public void defineLocalTransportIcons() {
-    assertThat(from("aeroplane")).isEqualTo(AEROPLANE);
-    assertThat(from("bicycle-share")).isEqualTo(BICYCLE_SHARE);
-    assertThat(from("bicycle")).isEqualTo(BICYCLE);
-    assertThat(from("bus")).isEqualTo(BUS);
-    assertThat(from("cablecar")).isEqualTo(CABLECAR);
-    assertThat(from("car-pool")).isEqualTo(CAR_POOL);
-    assertThat(from("car-ride-share")).isEqualTo(CAR_RIDE_SHARE);
-    assertThat(from("car-share")).isEqualTo(CAR_SHARE);
-    assertThat(from("car")).isEqualTo(CAR);
-    assertThat(from("coach")).isEqualTo(COACH);
-    assertThat(from("ferry")).isEqualTo(FERRY);
-    assertThat(from("monorail")).isEqualTo(MONORAIL);
-    assertThat(from("motorbike")).isEqualTo(MOTORBIKE);
-    assertThat(from("parking")).isEqualTo(PARKING);
-    assertThat(from("public-transport")).isEqualTo(PUBLIC_TRANSPORT);
-    assertThat(from("shuttlebus")).isEqualTo(SHUTTLE_BUS);
-    assertThat(from("subway")).isEqualTo(SUBWAY);
-    assertThat(from("taxi")).isEqualTo(TAXI);
-    assertThat(from("train-intercity")).isEqualTo(TRAIN_INTERCITY);
-    assertThat(from("train")).isEqualTo(TRAIN);
-    assertThat(from("tram")).isEqualTo(TRAM);
-    assertThat(from("walk")).isEqualTo(WALK);
-    assertThat(from("I'm not an enum")).isNull();
-  }
+    @Test
+    public void defineLocalTransportIcons() {
+        assertThat(from("aeroplane")).isEqualTo(AEROPLANE);
+        assertThat(from("bicycle-share")).isEqualTo(BICYCLE_SHARE);
+        assertThat(from("bicycle")).isEqualTo(BICYCLE);
+        assertThat(from("bus")).isEqualTo(BUS);
+        assertThat(from("cablecar")).isEqualTo(CABLECAR);
+        assertThat(from("car-pool")).isEqualTo(CAR_POOL);
+        assertThat(from("car-ride-share")).isEqualTo(CAR_RIDE_SHARE);
+        assertThat(from("car-share")).isEqualTo(CAR_SHARE);
+        assertThat(from("car")).isEqualTo(CAR);
+        assertThat(from("coach")).isEqualTo(COACH);
+        assertThat(from("ferry")).isEqualTo(FERRY);
+        assertThat(from("monorail")).isEqualTo(MONORAIL);
+        assertThat(from("motorbike")).isEqualTo(MOTORBIKE);
+        assertThat(from("parking")).isEqualTo(PARKING);
+        assertThat(from("public-transport")).isEqualTo(PUBLIC_TRANSPORT);
+        assertThat(from("shuttlebus")).isEqualTo(SHUTTLE_BUS);
+        assertThat(from("subway")).isEqualTo(SUBWAY);
+        assertThat(from("taxi")).isEqualTo(TAXI);
+        assertThat(from("train-intercity")).isEqualTo(TRAIN_INTERCITY);
+        assertThat(from("train")).isEqualTo(TRAIN);
+        assertThat(from("tram")).isEqualTo(TRAM);
+        assertThat(from("walk")).isEqualTo(WALK);
+        assertThat(from("I'm not an enum")).isNull();
+    }
 }

@@ -3,12 +3,12 @@ package com.skedgo.tripkit.common.model;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-import androidx.annotation.Nullable;
-
 import com.google.gson.annotations.JsonAdapter;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import androidx.annotation.Nullable;
 
 import static org.immutables.gson.Gson.TypeAdapters;
 import static org.immutables.value.Value.Immutable;
@@ -38,16 +38,16 @@ public abstract class BookingConfirmation implements Parcelable {
             in.readTypedList(purchasedTickets, BookingConfirmationPurchasedTicket.CREATOR);
 
             return ImmutableBookingConfirmation.builder()
-                    .actions(actions)
-                    .provider((BookingConfirmationImage) in.readParcelable(BookingConfirmationImage.class.getClassLoader()))
-                    .purchase((BookingConfirmationPurchase) in.readParcelable(BookingConfirmationPurchase.class.getClassLoader()))
-                    .status((BookingConfirmationStatus) in.readParcelable(BookingConfirmationStatus.class.getClassLoader()))
-                    .vehicle((BookingConfirmationImage) in.readParcelable(BookingConfirmationImage.class.getClassLoader()))
-                    .input(inputs)
-                    .notes(notes)
-                    .tickets(tickets)
-                    .purchasedTickets(purchasedTickets)
-                    .build();
+                .actions(actions)
+                .provider((BookingConfirmationImage) in.readParcelable(BookingConfirmationImage.class.getClassLoader()))
+                .purchase((BookingConfirmationPurchase) in.readParcelable(BookingConfirmationPurchase.class.getClassLoader()))
+                .status((BookingConfirmationStatus) in.readParcelable(BookingConfirmationStatus.class.getClassLoader()))
+                .vehicle((BookingConfirmationImage) in.readParcelable(BookingConfirmationImage.class.getClassLoader()))
+                .input(inputs)
+                .notes(notes)
+                .tickets(tickets)
+                .purchasedTickets(purchasedTickets)
+                .build();
         }
 
         @Override
@@ -93,5 +93,6 @@ public abstract class BookingConfirmation implements Parcelable {
 
     public abstract List<BookingConfirmationTickets> tickets();
 
-    @Nullable public abstract List<BookingConfirmationPurchasedTicket> purchasedTickets();
+    @Nullable
+    public abstract List<BookingConfirmationPurchasedTicket> purchasedTickets();
 }

@@ -4,12 +4,12 @@ import android.os.Parcel;
 import android.os.Parcelable;
 import android.text.TextUtils;
 
-import androidx.annotation.Nullable;
-
 import com.google.gson.annotations.JsonAdapter;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import androidx.annotation.Nullable;
 
 import static org.immutables.gson.Gson.TypeAdapters;
 import static org.immutables.value.Value.Immutable;
@@ -32,14 +32,14 @@ public abstract class BookingConfirmationInputNew implements Parcelable {
             in.readStringList(values);
 
             return ImmutableBookingConfirmationInputNew.builder()
-                    .id(in.readString())
-                    .required(in.readBoolean())
-                    .title(in.readString())
-                    .type(in.readString())
-                    .options(options)
-                    .value(in.readString())
-                    .values(values)
-                    .build();
+                .id(in.readString())
+                .required(in.readBoolean())
+                .title(in.readString())
+                .type(in.readString())
+                .options(options)
+                .value(in.readString())
+                .values(values)
+                .build();
         }
 
         @Override

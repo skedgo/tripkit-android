@@ -30,9 +30,9 @@ fun getSharedVehicleType(type: String): SharedVehicleType? {
 }
 
 class VehicleTypeInfo(
-        var formFactor: String = "",
-        var maxRangeMeters: Long = 0,
-        var propulsionType: String = ""
+    var formFactor: String = "",
+    var maxRangeMeters: Long = 0,
+    var propulsionType: String = ""
 )
 
 @Gson.TypeAdapters

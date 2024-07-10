@@ -2,13 +2,12 @@ package com.skedgo.tripkit.common.util;
 
 import android.content.Context;
 
-import androidx.annotation.Nullable;
-
 import com.skedgo.tripkit.common.R;
 import com.skedgo.tripkit.common.model.Location;
-
 import com.skedgo.tripkit.routing.SegmentActionTemplates;
 import com.skedgo.tripkit.routing.TripSegment;
+
+import androidx.annotation.Nullable;
 
 public final class TripSegmentUtils {
     private TripSegmentUtils() {
@@ -20,20 +19,20 @@ public final class TripSegmentUtils {
         if (action != null && action.contains(SegmentActionTemplates.TEMPLATE_DURATION)) {
             // Prepend a space due to https://redmine.buzzhives.com/issues/8971.
             action = processDurationTemplate(context,
-                    action,
-                    " " + context.getResources().getString(R.string.for__pattern),
-                    segment.getStartTimeInSecs(),
-                    segment.getEndTimeInSecs()
+                action,
+                " " + context.getResources().getString(R.string.for__pattern),
+                segment.getStartTimeInSecs(),
+                segment.getEndTimeInSecs()
             );
         }
 
         String timezone = segment.getTimeZone();
         if (action != null && action.contains(SegmentActionTemplates.TEMPLATE_TIME)) {
             action = processTimeTemplate(
-                    context,
-                    action,
-                    timezone,
-                    segment.getStartTimeInSecs() * 1000
+                context,
+                action,
+                timezone,
+                segment.getStartTimeInSecs() * 1000
             );
         }
 
@@ -42,11 +41,11 @@ public final class TripSegmentUtils {
 
     @Nullable
     public static String processDurationTemplate(
-            Context context,
-            @Nullable String templateText,
-            @Nullable String pattern,
-            long startTimeInSecs,
-            long endTimeInSecs) {
+        Context context,
+        @Nullable String templateText,
+        @Nullable String pattern,
+        long startTimeInSecs,
+        long endTimeInSecs) {
         if (templateText == null || !templateText.contains(SegmentActionTemplates.TEMPLATE_DURATION)) {
             return templateText;
         }
@@ -56,10 +55,10 @@ public final class TripSegmentUtils {
             templateText = templateText.replace(SegmentActionTemplates.TEMPLATE_DURATION, "");
         } else {
             templateText = templateText.replace(
-                    SegmentActionTemplates.TEMPLATE_DURATION,
-                    pattern != null
-                            ? String.format(pattern, getDurationFromMinutes(context, minutes))
-                            : getDurationFromMinutes(context, minutes)
+                SegmentActionTemplates.TEMPLATE_DURATION,
+                pattern != null
+                    ? String.format(pattern, getDurationFromMinutes(context, minutes))
+                    : getDurationFromMinutes(context, minutes)
             );
         }
 
@@ -67,10 +66,10 @@ public final class TripSegmentUtils {
     }
 
     public static String processTimeTemplate(
-            Context context,
-            String templateText,
-            String timezone,
-            long timeInMillis) {
+        Context context,
+        String templateText,
+        String timezone,
+        long timeInMillis) {
         if (templateText.contains(SegmentActionTemplates.TEMPLATE_TIME)) {
             String timeText = DateTimeFormats.printTime(context, timeInMillis, timezone);
             templateText = templateText.replace(SegmentActionTemplates.TEMPLATE_TIME, timeText);
@@ -101,7 +100,7 @@ public final class TripSegmentUtils {
                 // Only get the first decimal place
                 builder.append(withFirstDecimal(minutes / 60.0f)).append("h");
             } else if ((minutes % 60) == 1) {
-                builder.append(minutes / 60).append("h 1"+ context.getString(R.string.str_mins));
+                builder.append(minutes / 60).append("h 1" + context.getString(R.string.str_mins));
             } else {
                 builder.append(minutes / 60).append("h ").append(minutes % 60).append(context.getString(R.string.str_mins));
             }
@@ -138,7 +137,7 @@ public final class TripSegmentUtils {
      */
     public static String getLocationName(Location location) {
         return (location == null)
-                ? null
-                : StringUtils.firstNonEmpty(location.getAddress(), location.getName());
+            ? null
+            : StringUtils.firstNonEmpty(location.getAddress(), location.getName());
     }
 }

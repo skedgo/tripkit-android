@@ -1,20 +1,18 @@
 package com.skedgo.tripkit.common.model;
 
 import android.os.Parcel;
-
-import androidx.annotation.DrawableRes;
-import androidx.annotation.Nullable;
-
 import android.text.TextUtils;
 
 import com.google.gson.annotations.SerializedName;
 import com.skedgo.tripkit.common.R;
+import com.skedgo.tripkit.routing.ModeInfo;
+import com.skedgo.tripkit.routing.VehicleMode;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import com.skedgo.tripkit.routing.ModeInfo;
-import com.skedgo.tripkit.routing.VehicleMode;
+import androidx.annotation.DrawableRes;
+import androidx.annotation.Nullable;
 
 public class ScheduledStop extends Location {
 

@@ -1,7 +1,5 @@
 package com.skedgo.tripkit.common.util;
 
-import androidx.annotation.NonNull;
-
 import com.google.gson.Gson;
 import com.google.gson.TypeAdapter;
 import com.google.gson.TypeAdapterFactory;
@@ -15,43 +13,45 @@ import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
 
+import androidx.annotation.NonNull;
+
 /**
  * @see <a href="http://stackoverflow.com/q/9064433/2563009">StackOverflow</a>
  */
 public final class LowercaseEnumTypeAdapterFactory implements TypeAdapterFactory {
-  public <T> TypeAdapter<T> create(Gson gson, TypeToken<T> type) {
-    Class<T> rawType = (Class<T>) type.getRawType();
-    if (!rawType.isEnum()) {
-      return null;
+    public <T> TypeAdapter<T> create(Gson gson, TypeToken<T> type) {
+        Class<T> rawType = (Class<T>) type.getRawType();
+        if (!rawType.isEnum()) {
+            return null;
+        }
+
+        final Map<String, T> lowercaseToConstant = new HashMap<>();
+        for (T constant : rawType.getEnumConstants()) {
+            lowercaseToConstant.put(toLowercase(constant), constant);
+        }
+
+        return new TypeAdapter<T>() {
+            public void write(JsonWriter out, T value) throws IOException {
+                if (value == null) {
+                    out.nullValue();
+                } else {
+                    out.value(toLowercase(value));
+                }
+            }
+
+            public T read(JsonReader reader) throws IOException {
+                if (reader.peek() == JsonToken.NULL) {
+                    reader.nextNull();
+                    return null;
+                } else {
+                    String nextStr = reader.nextString();
+                    return lowercaseToConstant.get(nextStr == null ? null : nextStr.toLowerCase(Locale.US));
+                }
+            }
+        };
     }
 
-    final Map<String, T> lowercaseToConstant = new HashMap<>();
-    for (T constant : rawType.getEnumConstants()) {
-      lowercaseToConstant.put(toLowercase(constant), constant);
+    private String toLowercase(@NonNull Object o) {
+        return o.toString().toLowerCase(Locale.US);
     }
-
-    return new TypeAdapter<T>() {
-      public void write(JsonWriter out, T value) throws IOException {
-        if (value == null) {
-          out.nullValue();
-        } else {
-          out.value(toLowercase(value));
-        }
-      }
-
-      public T read(JsonReader reader) throws IOException {
-        if (reader.peek() == JsonToken.NULL) {
-          reader.nextNull();
-          return null;
-        } else {
-          String nextStr = reader.nextString();
-          return lowercaseToConstant.get(nextStr == null ? null : nextStr.toLowerCase(Locale.US));
-        }
-      }
-    };
-  }
-
-  private String toLowercase(@NonNull Object o) {
-    return o.toString().toLowerCase(Locale.US);
-  }
 }

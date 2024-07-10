@@ -10,31 +10,31 @@ import org.immutables.value.Value
 @Gson.TypeAdapters
 @JsonAdapter(GsonAdaptersLocalCost::class)
 abstract class LocalCost : Parcelable {
-  /**
-   * @return Minimum value for when the price is within a range
-   */
-  abstract fun minCost(): Float?
+    /**
+     * @return Minimum value for when the price is within a range
+     */
+    abstract fun minCost(): Float?
 
-  /**
-   * @return Maximum value for when the price is within a range
-   */
-  abstract fun maxCost(): Float?
+    /**
+     * @return Maximum value for when the price is within a range
+     */
+    abstract fun maxCost(): Float?
 
-  /**
-   * @return Cost of this segment in local currency (it's an average for ranges, considering quartile info)
-   */
-  abstract fun cost(): Float?
+    /**
+     * @return Cost of this segment in local currency (it's an average for ranges, considering quartile info)
+     */
+    abstract fun cost(): Float?
 
-  abstract fun accuracy(): LocalCostAccuracy?
+    abstract fun accuracy(): LocalCostAccuracy?
 
-  /**
-   * @return The ISO 4217 currency code
-   */
-  abstract fun currency(): String?
+    /**
+     * @return The ISO 4217 currency code
+     */
+    abstract fun currency(): String?
 }
 
 enum class LocalCostAccuracy {
-  Internal_Estimate,
-  External_Estimate,
-  Confirmed
+    Internal_Estimate,
+    External_Estimate,
+    Confirmed
 }

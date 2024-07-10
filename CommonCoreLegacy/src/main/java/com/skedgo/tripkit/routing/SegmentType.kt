@@ -1,11 +1,11 @@
 package com.skedgo.tripkit.routing
 
-import java.util.*
+import java.util.Locale
 
 enum class SegmentType {
-  DEPARTURE, SCHEDULED, UNSCHEDULED, STATIONARY, ARRIVAL
+    DEPARTURE, SCHEDULED, UNSCHEDULED, STATIONARY, ARRIVAL
 }
 
 fun String?.from(): SegmentType? = SegmentType.values().firstOrNull {
-  it.name.toLowerCase(Locale.US) == this?.toLowerCase(Locale.US)
+    it.name.toLowerCase(Locale.US) == this?.toLowerCase(Locale.US)
 }

@@ -1,50 +1,50 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-  <string name="api_skedgoify" translatable="false">/skedgoify.json</string>
-  <string name="api_routing" translatable="false">/routing.json</string>
-  <string name="api_geocode" translatable="false">/geocode.json</string>
-  <string name="api_regions" translatable="false">/regions.json</string>
-  <string name="api_stops" translatable="false">/stops.json</string>
-  <string name="api_departures" translatable="false">/departures.json</string>
-  <string name="api_latest" translatable="false">/latest.json</string>
-  <string name="api_report_problem" translatable="false">/routingFeedback.json</string>
-  <string name="api_service" translatable="false">/service.json</string>
-  <string name="api_persist_trip" translatable="false">/persist_trip.json</string>
-  <string name="api_trip" translatable="false">/trip.json</string>
-  <string name="api_waypoint" translatable="false">/waypoint.json</string>
+    <string name="api_skedgoify" translatable="false">/skedgoify.json</string>
+    <string name="api_routing" translatable="false">/routing.json</string>
+    <string name="api_geocode" translatable="false">/geocode.json</string>
+    <string name="api_regions" translatable="false">/regions.json</string>
+    <string name="api_stops" translatable="false">/stops.json</string>
+    <string name="api_departures" translatable="false">/departures.json</string>
+    <string name="api_latest" translatable="false">/latest.json</string>
+    <string name="api_report_problem" translatable="false">/routingFeedback.json</string>
+    <string name="api_service" translatable="false">/service.json</string>
+    <string name="api_persist_trip" translatable="false">/persist_trip.json</string>
+    <string name="api_trip" translatable="false">/trip.json</string>
+    <string name="api_waypoint" translatable="false">/waypoint.json</string>
 
-  <string name="tripgo_api_version_number" translatable="false">@string/tripgo_api_version_dev</string>
-  <string name="tripgo_api_version_stable" translatable="false">10</string>
-  <string name="tripgo_api_version_dev" translatable="false">11</string>
+    <string name="tripgo_api_version_number" translatable="false">@string/tripgo_api_version_dev</string>
+    <string name="tripgo_api_version_stable" translatable="false">10</string>
+    <string name="tripgo_api_version_dev" translatable="false">11</string>
 
-  <string name="cancel">Cancel</string>
-  <string name="loading_dot_dot_dot">Loading...</string>
-  <string name="arrive_at__pattern">Arrive at %1$s</string>
-  <string name="arrive_at__pattern_at__pattern">Arrive at %1$s at %2$s</string>
-  <string name="leave__pattern">Leave %1$s</string>
-  <string name="leave__pattern_at__pattern">Leave %1$s at %2$s</string>
-  <string name="real_minustime">Real-time</string>
-  <string name="_pattern_w_slasho_traffic">%1$s w/o traffic</string>
-  <string name="for__pattern">for %1$s</string>
-  <string name="live_traffic">Live traffic</string>
-  <string name="show_website">Show website</string>
-  <string name="gocatch_a_taxi">goCatch a Taxi</string>
-  <string name="ingogo_a_taxi">ingogo a Taxi</string>
-  <string name="get_lyft">Get Lyft</string>
-  <string name="open_lyft">Open Lyft</string>
-  <string name="call">Call</string>
-  <string name="call__pattern">Call %1$s</string>
-  <string name="retry">Retry</string>
-  <string name="origin">origin</string>
-  <string name="destination">destination</string>
-  <string name="str_mins">mins</string>
-  <string name="str_hr">hrs</string>
-  <string name="str_hrs">hrs</string>
-  <string name="direction">Direction</string>
+    <string name="cancel">Cancel</string>
+    <string name="loading_dot_dot_dot">Loading...</string>
+    <string name="arrive_at__pattern">Arrive at %1$s</string>
+    <string name="arrive_at__pattern_at__pattern">Arrive at %1$s at %2$s</string>
+    <string name="leave__pattern">Leave %1$s</string>
+    <string name="leave__pattern_at__pattern">Leave %1$s at %2$s</string>
+    <string name="real_minustime">Real-time</string>
+    <string name="_pattern_w_slasho_traffic">%1$s w/o traffic</string>
+    <string name="for__pattern">for %1$s</string>
+    <string name="live_traffic">Live traffic</string>
+    <string name="show_website">Show website</string>
+    <string name="gocatch_a_taxi">goCatch a Taxi</string>
+    <string name="ingogo_a_taxi">ingogo a Taxi</string>
+    <string name="get_lyft">Get Lyft</string>
+    <string name="open_lyft">Open Lyft</string>
+    <string name="call">Call</string>
+    <string name="call__pattern">Call %1$s</string>
+    <string name="retry">Retry</string>
+    <string name="origin">origin</string>
+    <string name="destination">destination</string>
+    <string name="str_mins">mins</string>
+    <string name="str_hr">hrs</string>
+    <string name="str_hrs">hrs</string>
+    <string name="direction">Direction</string>
 
-  <string name="geofence_not_available">Geofence service is not available now</string>
-  <string name="geofence_too_many_geofences">Your app has registered too many geofences</string>
-  <string name="geofence_too_many_pending_intents">You have provided too many PendingIntents to the addGeofences() call</string>
-  <string name="unknown_geofence_error">Unknown error: the Geofence service is not available now</string>
-  <string name="trip_about_to_start">Trip is about to start</string>
+    <string name="geofence_not_available">Geofence service is not available now</string>
+    <string name="geofence_too_many_geofences">Your app has registered too many geofences</string>
+    <string name="geofence_too_many_pending_intents">You have provided too many PendingIntents to the addGeofences() call</string>
+    <string name="unknown_geofence_error">Unknown error: the Geofence service is not available now</string>
+    <string name="trip_about_to_start">Trip is about to start</string>
 </resources>

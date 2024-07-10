@@ -11,19 +11,22 @@ import java.util.List;
  * @see <a href="https://redmine.buzzhives.com/projects/buzzhives/wiki/Big_Algorithm_API">Big Algorithm API</a>
  */
 public class BigAlgorithmResult {
-  @SerializedName("track") private ArrayList<JsonObject> track;
-  @SerializedName("segmentTemplates") private ArrayList<JsonObject> segmentTemplates;
-  @SerializedName("alerts") private List<RealtimeAlert> alerts;
+    @SerializedName("track")
+    private ArrayList<JsonObject> track;
+    @SerializedName("segmentTemplates")
+    private ArrayList<JsonObject> segmentTemplates;
+    @SerializedName("alerts")
+    private List<RealtimeAlert> alerts;
 
-  public ArrayList<JsonObject> track() {
-    return track;
-  }
+    public ArrayList<JsonObject> track() {
+        return track;
+    }
 
-  public ArrayList<JsonObject> segmentTemplates() {
-    return segmentTemplates;
-  }
+    public ArrayList<JsonObject> segmentTemplates() {
+        return segmentTemplates;
+    }
 
-  public List<RealtimeAlert> alerts() {
-    return alerts;
-  }
+    public List<RealtimeAlert> alerts() {
+        return alerts;
+    }
 }
