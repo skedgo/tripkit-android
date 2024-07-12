@@ -9,6 +9,8 @@ import android.text.TextUtils;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public final class StringUtils {
   private StringUtils() {}
@@ -66,5 +68,19 @@ public final class StringUtils {
     }
 
     return s;
+  }
+
+  public static String extractMajorMinorVersion(String version) {
+    try {
+      Pattern pattern = Pattern.compile("(\\d+\\.\\d+)");
+      Matcher matcher = pattern.matcher(version);
+      if (matcher.find()) {
+        return matcher.group(1);
+      } else {
+        return version; // Return the original string if no match is found
+      }
+    } catch (Exception e) {
+      return version; // Return the original string if there's an error
+    }
   }
 }
