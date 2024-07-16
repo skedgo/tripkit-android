@@ -99,7 +99,9 @@ internal class UserTokenRepositoryImpl constructor(
   private fun SharedPreferences.onChange(observedKey: String) = Flowable
       .create<String>({
         val listener = SharedPreferences.OnSharedPreferenceChangeListener { _, key ->
-          it.onNext(key)
+            if (key != null) {
+                it.onNext(key)
+            }
         }
         registerOnSharedPreferenceChangeListener(listener)
         it.setCancellable { unregisterOnSharedPreferenceChangeListener(listener) }
