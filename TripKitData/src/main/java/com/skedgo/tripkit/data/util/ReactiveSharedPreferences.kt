@@ -6,12 +6,10 @@ import io.reactivex.Observable
 typealias PreferenceKey = String
 
 fun SharedPreferences.onChanged(): Observable<PreferenceKey> = Observable
-    .create {
+    .create { emitter ->
         val listener = SharedPreferences.OnSharedPreferenceChangeListener { _, preferenceKey ->
-            if (preferenceKey != null) {
-                it.onNext(preferenceKey)
-            }
+            preferenceKey?.let { emitter.onNext(it) }
         }
         registerOnSharedPreferenceChangeListener(listener)
-        it.setCancellable { unregisterOnSharedPreferenceChangeListener(listener) }
+        emitter.setCancellable { unregisterOnSharedPreferenceChangeListener(listener) }
     }
