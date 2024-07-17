@@ -2,6 +2,7 @@ package com.skedgo.tripkit.routing
 
 import org.joda.time.DateTime
 import org.joda.time.DateTimeZone
+import java.util.Calendar
 import java.util.concurrent.TimeUnit
 
 /**
@@ -12,6 +13,9 @@ val TripSegment.startDateTime
         TimeUnit.SECONDS.toMillis(startTimeInSecs),
         from?.dateTimeZone ?: DateTimeZone.getDefault()
     )
+
+val TripSegment.startDateTimeCalendar
+    get(): Calendar = this.startDateTime.toGregorianCalendar()
 
 val TripSegment.timetableStartDateTime
     get(): DateTime = DateTime(
@@ -27,6 +31,9 @@ val TripSegment.endDateTime
         TimeUnit.SECONDS.toMillis(endTimeInSecs),
         to?.dateTimeZone ?: DateTimeZone.getDefault()
     )
+
+val TripSegment.endDateTimeCalendar
+    get(): Calendar = this.endDateTime.toGregorianCalendar()
 
 val TripSegment.timetableEndDateTime
     get(): DateTime = DateTime(
