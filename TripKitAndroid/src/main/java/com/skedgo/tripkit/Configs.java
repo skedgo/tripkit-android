@@ -93,4 +93,6 @@ public interface Configs {
         return false;
     }
 
+    @Nullable
+    public abstract Callable<String> userIdentifier();
 }
