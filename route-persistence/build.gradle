@@ -4,129 +4,129 @@ apply plugin: 'kotlin-android'
 
 android {
 
-  namespace 'com.skedgo.routepersistence'
+    namespace 'com.skedgo.routepersistence'
 
-  compileSdkVersion versions.compileSdkVersion
+    compileSdkVersion versions.compileSdkVersion
 
-  // defaultPublishConfig 'debug'
+    // defaultPublishConfig 'debug'
 
-  lintOptions {
-    // Continue to check for errors in release builds,
-    // but continue the build even when errors are found.
-    checkReleaseBuilds true
-    abortOnError false
-  }
-
-  defaultConfig {
-    minSdkVersion versions.proMinSdkVersion
-    targetSdkVersion versions.targetSdkVersion
-    versionCode 1
-    versionName '1.0'
-    testInstrumentationRunner 'androidx.test.runner.AndroidJUnitRunner'
-  }
-
-  buildTypes {
-    release {
-      minifyEnabled false
-      proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+    lintOptions {
+        // Continue to check for errors in release builds,
+        // but continue the build even when errors are found.
+        checkReleaseBuilds true
+        abortOnError false
     }
-    staging {
-      debuggable true
-    }
-  }
 
-  compileOptions {
-    sourceCompatibility JavaVersion.VERSION_17
-    targetCompatibility JavaVersion.VERSION_17
-  }
-  kotlinOptions {
-    jvmTarget = JavaVersion.VERSION_17.toString()
-  }
-
-  publishing {
-    singleVariant("release") {
-      // if you don't want sources/javadoc, remove these lines
-      withSourcesJar()
-      withJavadocJar()
+    defaultConfig {
+        minSdkVersion versions.proMinSdkVersion
+        targetSdkVersion versions.targetSdkVersion
+        versionCode 1
+        versionName '1.0'
+        testInstrumentationRunner 'androidx.test.runner.AndroidJUnitRunner'
     }
-  }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+        staging {
+            debuggable true
+        }
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_17
+        targetCompatibility JavaVersion.VERSION_17
+    }
+    kotlinOptions {
+        jvmTarget = JavaVersion.VERSION_17.toString()
+    }
+
+    publishing {
+        singleVariant("release") {
+            // if you don't want sources/javadoc, remove these lines
+            withSourcesJar()
+            withJavadocJar()
+        }
+    }
 }
 
 dependencies {
-  debugImplementation project(':CommonCoreLegacy')
-  stagingImplementation project(':CommonCoreLegacy')
-  releaseImplementation project(':CommonCoreLegacy')
+    debugImplementation project(':CommonCoreLegacy')
+    stagingImplementation project(':CommonCoreLegacy')
+    releaseImplementation project(':CommonCoreLegacy')
 
-  debugImplementation project(':sqliteutils')
-  stagingImplementation project(':sqliteutils')
-  releaseImplementation project(':sqliteutils')
+    debugImplementation project(':sqliteutils')
+    stagingImplementation project(':sqliteutils')
+    releaseImplementation project(':sqliteutils')
 
-  implementation libs.appCompat
-  implementation libs.gson
-  implementation libs.supportAnnotations
+    implementation libs.appCompat
+    implementation libs.gson
+    implementation libs.supportAnnotations
 
-  debugImplementation project(":TripKitDomain")
-  stagingImplementation project(":TripKitDomain")
-  releaseImplementation project(":TripKitDomain")
+    debugImplementation project(":TripKitDomain")
+    stagingImplementation project(":TripKitDomain")
+    releaseImplementation project(":TripKitDomain")
 
-  implementation libs.kotlin
-  implementation libs.rxjava2
+    implementation libs.kotlin
+    implementation libs.rxjava2
 
-  testImplementation libs.junit
-  testImplementation libs.assertjCore
-  testImplementation libs.mockitoCore
-  testImplementation libs.robolectric
-  testImplementation libs.androidxTesting
-  testImplementation libs.androidxJUnitExtTesting
-  testImplementation libs.mockitoKotlin, { exclude group: 'org.jetbrains.kotlin' }
-  testImplementation libs.kluent
-  androidTestImplementation 'androidx.test.espresso:espresso-core:3.1.0', {
-    exclude group: 'com.android.support', module: 'support-annotations'
-  }
+    testImplementation libs.junit
+    testImplementation libs.assertjCore
+    testImplementation libs.mockitoCore
+    testImplementation libs.robolectric
+    testImplementation libs.androidxTesting
+    testImplementation libs.androidxJUnitExtTesting
+    testImplementation libs.mockitoKotlin, {exclude group: 'org.jetbrains.kotlin'}
+    testImplementation libs.kluent
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.1.0', {
+        exclude group: 'com.android.support', module: 'support-annotations'
+    }
 }
 
 group = tripkitGroup
 version = tripkitVersion
 
 publishing {
-  repositories {
-    maven {
-      url = "file://${localMaven}"
-      //url = publishMavenUrl
-      credentials {
-        username = publishMavenUsername
-        password = publishMavenToken
-      }
+    repositories {
+        maven {
+            url = "file://${localMaven}"
+            //url = publishMavenUrl
+            credentials {
+                username = publishMavenUsername
+                password = publishMavenToken
+            }
+        }
     }
-  }
 
-  publications {
-    release(MavenPublication) {
-      groupId = group
-      version = version
-      artifactId = 'route-persistence'
-      afterEvaluate {
-        from components.release
-      }
-      pom {
-        licenses {
-          license {
-            name = 'Commercial'
-          }
+    publications {
+        release(MavenPublication) {
+            groupId = group
+            version = version
+            artifactId = 'route-persistence'
+            afterEvaluate {
+                from components.release
+            }
+            pom {
+                licenses {
+                    license {
+                        name = 'Commercial'
+                    }
+                }
+            }
+            pom.withXml {
+                asNode().dependencies.'*'
+                    .findAll() {
+                        (it.scope.text() == 'runtime' || it.scope.text() == 'compile') &&
+                            project.configurations.implementation.allDependencies.find {
+                                dep -> dep.name == it.artifactId.text()
+                            }
+                    }.each {
+                    it.appendNode("type", "aar")
+                }
+            }
         }
-      }
-      pom.withXml {
-        asNode().dependencies.'*'
-                .findAll() {
-                  (it.scope.text() == 'runtime' || it.scope.text() == 'compile') &&
-                          project.configurations.implementation.allDependencies.find {
-                            dep -> dep.name == it.artifactId.text()
-                          }
-                }.each {
-          it.appendNode("type", "aar")
-        }
-      }
     }
-  }
 }
 
