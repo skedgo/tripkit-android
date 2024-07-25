@@ -93,12 +93,12 @@ publishing {
             }
             pom.withXml {
                 asNode().dependencies.'*'
-                        .findAll() {
-                            (it.scope.text() == 'runtime' || it.scope.text() == 'compile') &&
-                                    project.configurations.implementation.allDependencies.find {
-                                        dep -> dep.name == it.artifactId.text()
-                                    }
-                        }.each {
+                    .findAll() {
+                        (it.scope.text() == 'runtime' || it.scope.text() == 'compile') &&
+                            project.configurations.implementation.allDependencies.find {
+                                dep -> dep.name == it.artifactId.text()
+                            }
+                    }.each {
                     it.appendNode("type", "aar")
                 }
             }

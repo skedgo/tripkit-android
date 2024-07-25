@@ -1,7 +1,6 @@
 package com.skedgo.rxlifecyclecomponents
 
 
-
 import androidx.annotation.CheckResult
 import androidx.annotation.NonNull
 import com.trello.rxlifecycle3.LifecycleTransformer
