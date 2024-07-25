@@ -4,11 +4,10 @@ import android.os.Parcel;
 import android.os.Parcelable;
 
 import com.google.gson.annotations.JsonAdapter;
-import com.google.gson.annotations.SerializedName;
-
-import androidx.annotation.Nullable;
 
 import org.immutables.value.Value;
+
+import androidx.annotation.Nullable;
 
 import static org.immutables.gson.Gson.TypeAdapters;
 import static org.immutables.value.Value.Immutable;
@@ -23,10 +22,10 @@ public abstract class BookingConfirmationImage implements Parcelable {
         @Override
         public BookingConfirmationImage createFromParcel(Parcel in) {
             return ImmutableBookingConfirmationImage.builder()
-                    .imageURL(in.readString())
-                    .subtitle(in.readString())
-                    .title(in.readString())
-                    .build();
+                .imageURL(in.readString())
+                .subtitle(in.readString())
+                .title(in.readString())
+                .build();
         }
 
         @Override
@@ -50,7 +49,8 @@ public abstract class BookingConfirmationImage implements Parcelable {
     @Nullable
     public abstract String imageURL();
 
-    @Value.Default public String subtitle() {
+    @Value.Default
+    public String subtitle() {
         return "";
     }
 

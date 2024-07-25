@@ -9,23 +9,23 @@ import com.skedgo.tripkit.routing.ServiceColor
 import kotlinx.parcelize.Parcelize
 
 data class Direction(
-        val encodedShape: String?,
-        val id: String?,
-        val name: String?,
-        val shapeIsDetailed: Boolean,
-        val stops: List<Stop>?
+    val encodedShape: String?,
+    val id: String?,
+    val name: String?,
+    val shapeIsDetailed: Boolean,
+    val stops: List<Stop>?
 ) : KParcelable {
 
     private constructor(p: Parcel) : this(
-            encodedShape = p.readString(),
-            id = p.readString(),
-            name = p.readString(),
-            shapeIsDetailed = p.readBoolean(),
-            stops = kotlin.run {
-                val stops = listOf<Stop>()
-                p.readTypedList(stops, Stop.CREATOR)
-                stops
-            }
+        encodedShape = p.readString(),
+        id = p.readString(),
+        name = p.readString(),
+        shapeIsDetailed = p.readBoolean(),
+        stops = kotlin.run {
+            val stops = listOf<Stop>()
+            p.readTypedList(stops, Stop.CREATOR)
+            stops
+        }
     )
 
     override fun writeToParcel(dest: Parcel, flags: Int) {

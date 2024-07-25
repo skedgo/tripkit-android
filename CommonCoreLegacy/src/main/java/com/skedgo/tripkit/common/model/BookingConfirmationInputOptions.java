@@ -19,9 +19,9 @@ public abstract class BookingConfirmationInputOptions implements Parcelable {
         @Override
         public BookingConfirmationInputOptions createFromParcel(Parcel in) {
             return ImmutableBookingConfirmationInputOptions.builder()
-                    .id(in.readString())
-                    .title(in.readString())
-                    .build();
+                .id(in.readString())
+                .title(in.readString())
+                .build();
         }
 
         @Override

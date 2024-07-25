@@ -3,8 +3,6 @@ package com.skedgo.tripkit.common.model;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-import androidx.annotation.Nullable;
-
 import com.google.gson.annotations.JsonAdapter;
 
 import org.immutables.gson.Gson;
@@ -12,6 +10,8 @@ import org.immutables.value.Value;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import androidx.annotation.Nullable;
 
 @Gson.TypeAdapters
 @Value.Immutable
@@ -26,14 +26,14 @@ public abstract class BookingConfirmationTickets implements Parcelable {
             in.readTypedList(tickets, BookingConfirmationPurchasedTicket.CREATOR);
 
             return ImmutableBookingConfirmationTickets.builder()
-                    .currency(in.readString())
-                    .description(in.readString())
-                    .id(in.readString())
-                    .name(in.readString())
-                    .price(in.readDouble())
-                    .value(in.readLong())
-                    .purchasedTickets(tickets)
-                    .build();
+                .currency(in.readString())
+                .description(in.readString())
+                .id(in.readString())
+                .name(in.readString())
+                .price(in.readDouble())
+                .value(in.readLong())
+                .purchasedTickets(tickets)
+                .build();
         }
 
         @Override

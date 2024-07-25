@@ -1,15 +1,14 @@
 package com.skedgo.tripkit.common.util;
 
 import android.content.res.Resources;
+import android.util.DisplayMetrics;
+
+import com.skedgo.tripkit.common.model.TransportMode;
+import com.skedgo.tripkit.configuration.ServerManager;
+import com.skedgo.tripkit.routing.ModeInfo;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-
-import android.util.DisplayMetrics;
-
-import com.skedgo.tripkit.configuration.ServerManager;
-import com.skedgo.tripkit.routing.ModeInfo;
-import com.skedgo.tripkit.common.model.TransportMode;
 
 public final class TransportModeUtils {
     public static final String ICON_URL_TEMPLATE = ServerManager.INSTANCE.getConfiguration().getApiTripGoUrl() + "modeicons/android/%s/ic_transport_%s.png";
@@ -19,8 +18,8 @@ public final class TransportModeUtils {
 
     @Nullable
     public static String getIconUrlForId(
-            @NonNull Resources resources,
-            @Nullable String iconId) {
+        @NonNull Resources resources,
+        @Nullable String iconId) {
         if (iconId == null || iconId.length() == 0) {
             return null;
         }
@@ -31,8 +30,8 @@ public final class TransportModeUtils {
 
     @Nullable
     public static String getIconUrlForModeInfo(
-            @NonNull Resources resources,
-            @Nullable ModeInfo modeInfo) {
+        @NonNull Resources resources,
+        @Nullable ModeInfo modeInfo) {
         if (modeInfo == null) {
             return null;
         }
@@ -42,8 +41,8 @@ public final class TransportModeUtils {
 
     @Nullable
     public static String getDarkIconUrlForModeInfo(
-            @NonNull Resources resources,
-            @Nullable ModeInfo modeInfo) {
+        @NonNull Resources resources,
+        @Nullable ModeInfo modeInfo) {
         if (modeInfo == null) {
             return null;
         }
@@ -53,8 +52,8 @@ public final class TransportModeUtils {
 
     @Nullable
     public static String getIconUrlForTransportMode(
-            @NonNull Resources resources,
-            @Nullable TransportMode mode) {
+        @NonNull Resources resources,
+        @Nullable TransportMode mode) {
         if (mode == null) {
             return null;
         }
@@ -64,8 +63,8 @@ public final class TransportModeUtils {
 
     @Nullable
     public static String getDarkIconUrlForTransportMode(
-            @NonNull Resources resources,
-            @Nullable TransportMode mode) {
+        @NonNull Resources resources,
+        @Nullable TransportMode mode) {
         if (mode == null) {
             return null;
         }

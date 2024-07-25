@@ -4,17 +4,17 @@ import androidx.annotation.StringDef
 
 @Retention(AnnotationRetention.RUNTIME)
 @StringDef(
-        BookingConfirmationStatusValue.PROCESSING,
-        BookingConfirmationStatusValue.PROVIDER_ACCEPTED,
-        BookingConfirmationStatusValue.USER_ACCEPTED,
-        BookingConfirmationStatusValue.ACCEPTED,
-        BookingConfirmationStatusValue.ARRIVING,
-        BookingConfirmationStatusValue.IN_PROGRESS,
-        BookingConfirmationStatusValue.PROVIDER_CANCELED,
-        BookingConfirmationStatusValue.USER_CANCELED,
-        BookingConfirmationStatusValue.COMPLETED,
-        BookingConfirmationStatusValue.SCHEDULED,
-        BookingConfirmationStatusValue.STANDBY,
+    BookingConfirmationStatusValue.PROCESSING,
+    BookingConfirmationStatusValue.PROVIDER_ACCEPTED,
+    BookingConfirmationStatusValue.USER_ACCEPTED,
+    BookingConfirmationStatusValue.ACCEPTED,
+    BookingConfirmationStatusValue.ARRIVING,
+    BookingConfirmationStatusValue.IN_PROGRESS,
+    BookingConfirmationStatusValue.PROVIDER_CANCELED,
+    BookingConfirmationStatusValue.USER_CANCELED,
+    BookingConfirmationStatusValue.COMPLETED,
+    BookingConfirmationStatusValue.SCHEDULED,
+    BookingConfirmationStatusValue.STANDBY,
 )
 annotation class BookingConfirmationStatusValue {
     companion object {
@@ -33,9 +33,10 @@ annotation class BookingConfirmationStatusValue {
 
         fun String.isStatus(@BookingConfirmationStatusValue status: String): Boolean =
             this.equals(status, ignoreCase = true)
+
         fun String.isStatusAccepted(): Boolean =
             this.equals(PROVIDER_ACCEPTED, ignoreCase = true) ||
-            this.equals(USER_ACCEPTED, ignoreCase = true) ||
-            this.equals(ACCEPTED, ignoreCase = true)
+                this.equals(USER_ACCEPTED, ignoreCase = true) ||
+                this.equals(ACCEPTED, ignoreCase = true)
     }
 }

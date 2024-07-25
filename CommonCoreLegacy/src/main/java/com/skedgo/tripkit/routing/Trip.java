@@ -1,8 +1,5 @@
 package com.skedgo.tripkit.routing;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-
 import android.net.Uri;
 import android.text.TextUtils;
 
@@ -19,6 +16,9 @@ import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.Locale;
 import java.util.UUID;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
 /**
  * A {@link Trip} will mainly hold a list of {@link TripSegment}s which denotes
@@ -190,15 +190,15 @@ public class Trip implements ITimeRange {
         return millis;
     }
 
-    public long durationInSeconds() {
-        return mEndTimeInSecs - mStartTimeInSecs;
-    }
-
     /**
      * NOTE: You should only use this setter for testing purpose.
      */
     public void setEndTimeInSecs(final long endTimeInSecs) {
         this.mEndTimeInSecs = endTimeInSecs;
+    }
+
+    public long durationInSeconds() {
+        return mEndTimeInSecs - mStartTimeInSecs;
     }
 
     public float getTimeCost() {
@@ -350,11 +350,6 @@ public class Trip implements ITimeRange {
         return com.skedgo.tripkit.routing.AvailabilityKt.toAvailability(availability);
     }
 
-    @Nullable
-    public String getAvailabilityString() {
-        return availability;
-    }
-
     /**
      * Mutability is subject to deletion after we finish migrating to an immutable {@link Trip}.
      */
@@ -365,6 +360,11 @@ public class Trip implements ITimeRange {
 
     public void setAvailability(String availability) {
         this.availability = availability;
+    }
+
+    @Nullable
+    public String getAvailabilityString() {
+        return availability;
     }
 
     public boolean queryIsLeaveAfter() {
@@ -492,7 +492,7 @@ public class Trip implements ITimeRange {
 
                 // Check shared car or shared bicycle.
                 if (segment.getTransportModeId().contains(TransportMode.MIDDLE_FIX_CAR)
-                        || segment.getTransportModeId().contains(TransportMode.MIDDLE_FIX_BIC)) {
+                    || segment.getTransportModeId().contains(TransportMode.MIDDLE_FIX_BIC)) {
                     return true;
                 }
             }

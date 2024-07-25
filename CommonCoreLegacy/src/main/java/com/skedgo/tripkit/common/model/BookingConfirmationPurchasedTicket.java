@@ -3,14 +3,12 @@ package com.skedgo.tripkit.common.model;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-import androidx.annotation.Nullable;
-
 import com.google.gson.annotations.JsonAdapter;
 
 import org.immutables.gson.Gson;
 import org.immutables.value.Value;
 
-import java.util.List;
+import androidx.annotation.Nullable;
 
 @Gson.TypeAdapters
 @Value.Immutable
@@ -22,12 +20,12 @@ public abstract class BookingConfirmationPurchasedTicket implements Parcelable {
         @Override
         public BookingConfirmationPurchasedTicket createFromParcel(Parcel in) {
             return ImmutableBookingConfirmationPurchasedTicket.builder()
-                    .id(in.readString())
-                    .status(in.readString())
-                    .ticketURL(in.readString())
-                    .activateURL(in.readString())
-                    .fare((BookingConfirmationPurchasedTicketFare) in.readParcelable(BookingConfirmationPurchasedTicketFare.class.getClassLoader()))
-                    .build();
+                .id(in.readString())
+                .status(in.readString())
+                .ticketURL(in.readString())
+                .activateURL(in.readString())
+                .fare((BookingConfirmationPurchasedTicketFare) in.readParcelable(BookingConfirmationPurchasedTicketFare.class.getClassLoader()))
+                .build();
         }
 
         @Override
@@ -50,11 +48,14 @@ public abstract class BookingConfirmationPurchasedTicket implements Parcelable {
         return 0;
     }
 
-    @Nullable public abstract String status();
+    @Nullable
+    public abstract String status();
 
-    @Nullable public abstract String ticketURL();
+    @Nullable
+    public abstract String ticketURL();
 
-    @Nullable public abstract String activateURL();
+    @Nullable
+    public abstract String activateURL();
 
     @Nullable
     public abstract BookingConfirmationPurchasedTicketFare fare();

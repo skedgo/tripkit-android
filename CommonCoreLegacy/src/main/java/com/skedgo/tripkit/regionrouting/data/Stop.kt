@@ -5,19 +5,19 @@ import com.skedgo.tripkit.common.util.KParcelable
 import com.skedgo.tripkit.common.util.parcelableCreator
 
 data class Stop(
-        val common: Boolean,
-        val lat: Int,
-        val lng: Int,
-        val name: String?,
-        val stopCode: String?
+    val common: Boolean,
+    val lat: Int,
+    val lng: Int,
+    val name: String?,
+    val stopCode: String?
 ) : KParcelable {
 
     private constructor(p: Parcel) : this(
-            common = p.readBoolean(),
-            lat = p.readInt(),
-            lng = p.readInt(),
-            name = p.readString(),
-            stopCode = p.readString()
+        common = p.readBoolean(),
+        lat = p.readInt(),
+        lng = p.readInt(),
+        name = p.readString(),
+        stopCode = p.readString()
     )
 
     override fun writeToParcel(dest: Parcel, flags: Int) {

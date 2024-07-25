@@ -20,9 +20,9 @@ public abstract class Operator implements Parcelable {
     public static final Creator<Operator> CREATOR = new Creator<Operator>() {
         public Operator createFromParcel(Parcel in) {
             return ImmutableOperator.builder()
-                    .id(in.readString())
-                    .name(in.readString())
-                    .build();
+                .id(in.readString())
+                .name(in.readString())
+                .build();
         }
 
         public Operator[] newArray(int size) {

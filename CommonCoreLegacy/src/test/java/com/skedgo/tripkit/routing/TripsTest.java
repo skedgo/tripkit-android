@@ -12,21 +12,24 @@ import static org.mockito.Mockito.when;
 
 @RunWith(RobolectricTestRunner.class)
 public class TripsTest {
-  private final Trip trip = mock(Trip.class);
+    private final Trip trip = mock(Trip.class);
 
-  @Test public void departureTimezoneIsNullIfNoDeparture() {
-    when(trip.getFrom()).thenReturn(null);
-    assertThat(Trips.getDepartureTimezone(trip)).isNull();
-  }
+    @Test
+    public void departureTimezoneIsNullIfNoDeparture() {
+        when(trip.getFrom()).thenReturn(null);
+        assertThat(Trips.getDepartureTimezone(trip)).isNull();
+    }
 
-  @Test public void departureTimezoneIsNullForNullTrip() {
-    assertThat(Trips.getDepartureTimezone(null)).isNull();
-  }
+    @Test
+    public void departureTimezoneIsNullForNullTrip() {
+        assertThat(Trips.getDepartureTimezone(null)).isNull();
+    }
 
-  @Test public void shouldReturnDepartureTimezone() {
-    final Location departure = mock(Location.class);
-    when(departure.getTimeZone()).thenReturn("Mars");
-    when(trip.getFrom()).thenReturn(departure);
-    assertThat(Trips.getDepartureTimezone(trip)).isEqualTo("Mars");
-  }
+    @Test
+    public void shouldReturnDepartureTimezone() {
+        final Location departure = mock(Location.class);
+        when(departure.getTimeZone()).thenReturn("Mars");
+        when(trip.getFrom()).thenReturn(departure);
+        assertThat(Trips.getDepartureTimezone(trip)).isEqualTo("Mars");
+    }
 }

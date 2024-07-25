@@ -14,52 +14,59 @@ import io.reactivex.subjects.BehaviorSubject;
  */
 @Deprecated
 public abstract class Var<T> implements Consumer<T> {
-  public static <T> Var<T> create() {
-    return new Impl<T>();
-  }
-
-  public static <T> Var<T> create(T defaultValue) {
-    return new Impl<T>(defaultValue);
-  }
-
-  public abstract T value();
-  public abstract void put(T value);
-  public abstract boolean hasValue();
-  public abstract Flowable<T> observe();
-
-  private static class Impl<T> extends Var<T> {
-    private final BehaviorSubject<T> subject;
-    private T value;
-
-    Impl() {
-      subject = BehaviorSubject.create();
+    public static <T> Var<T> create() {
+        return new Impl<T>();
     }
 
-    Impl(T defaultValue) {
-      this.value = defaultValue;
-      subject = BehaviorSubject.createDefault(defaultValue);
+    public static <T> Var<T> create(T defaultValue) {
+        return new Impl<T>(defaultValue);
     }
 
-    @Override public T value() {
-      return value;
-    }
+    public abstract T value();
 
-    @Override public void put(T value) {
-      this.value = value;
-      subject.onNext(value);
-    }
+    public abstract void put(T value);
 
-    @Override public boolean hasValue() {
-      return value != null;
-    }
+    public abstract boolean hasValue();
 
-    @Override public Flowable<T> observe() {
-      return subject.toFlowable(BackpressureStrategy.BUFFER);
-    }
+    public abstract Flowable<T> observe();
 
-    @Override
-    public void accept(T t) throws Exception {
-      put(value);
+    private static class Impl<T> extends Var<T> {
+        private final BehaviorSubject<T> subject;
+        private T value;
+
+        Impl() {
+            subject = BehaviorSubject.create();
+        }
+
+        Impl(T defaultValue) {
+            this.value = defaultValue;
+            subject = BehaviorSubject.createDefault(defaultValue);
+        }
+
+        @Override
+        public T value() {
+            return value;
+        }
+
+        @Override
+        public void put(T value) {
+            this.value = value;
+            subject.onNext(value);
+        }
+
+        @Override
+        public boolean hasValue() {
+            return value != null;
+        }
+
+        @Override
+        public Flowable<T> observe() {
+            return subject.toFlowable(BackpressureStrategy.BUFFER);
+        }
+
+        @Override
+        public void accept(T t) throws Exception {
+            put(value);
+        }
     }
-  }
 }
