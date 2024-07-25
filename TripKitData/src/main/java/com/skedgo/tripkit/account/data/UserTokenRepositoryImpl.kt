@@ -97,12 +97,12 @@ internal class UserTokenRepositoryImpl constructor(
   override fun hasUserToken(): Boolean = preferences.getString(KEY_USER_TOKEN, "") != ""
 
   private fun SharedPreferences.onChange(observedKey: String) = Flowable
-      .create<String>({
+      .create<String>({ emitter ->
         val listener = SharedPreferences.OnSharedPreferenceChangeListener { _, key ->
-          it.onNext(key)
+            key?.let { emitter.onNext(key) }
         }
         registerOnSharedPreferenceChangeListener(listener)
-        it.setCancellable { unregisterOnSharedPreferenceChangeListener(listener) }
+        emitter.setCancellable { unregisterOnSharedPreferenceChangeListener(listener) }
       }, BackpressureStrategy.BUFFER)
       .filter { it == observedKey }.toObservable()
 }

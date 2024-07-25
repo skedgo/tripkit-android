@@ -9,8 +9,8 @@ versions.desugaring = "1.1.5"
 versions.immutablesVersion = "2.8.8"
 versions.devMinSdkVersion = 21
 versions.proMinSdkVersion = 21
-versions.compileSdkVersion = 33
-versions.targetSdkVersion = 33
+versions.compileSdkVersion = 34
+versions.targetSdkVersion = 34
 // See change-log at https://github.com/JetBrains/kotlin/blob/master/ChangeLog.md.
 versions.kotlinVersion = "1.8.20"
 versions.kotlinCoroutinesVersion = "1.4.0"
