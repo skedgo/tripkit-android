@@ -8,23 +8,28 @@ import java.util.List;
  */
 public interface MGAResultInterface<T extends GCResultInterface> extends Serializable {
 
-//  returns query result
+    //  returns query result
     T getResult();
-//  total score for the result
+
+    //  total score for the result
     int getScore();
-//  returns all duplicates for the result
+
+    //  returns all duplicates for the result
     List<MGAResultInterface<T>> getDuplicates();
 
-//  returns the scored result which is the class representative for the duplicate list
+    //  returns the scored result which is the class representative for the duplicate list
     MGAResultInterface<T> getClassRepresentative();
 
-//next was added to test
+    //next was added to test
 //    name score value
     int getNameScore();
-//    address score value
+
+    //    address score value
     int getAddressScore();
-//    distance score value
+
+    //    distance score value
     int getDistanceScore();
-//    populariry score value
+
+    //    populariry score value
     int getPopularityScore();
 }

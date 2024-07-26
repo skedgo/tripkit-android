@@ -1,4 +1,5 @@
 package com.skedgo.tripkit.time
+
 import org.joda.time.DateTime
 import javax.inject.Inject
 
@@ -8,9 +9,9 @@ import javax.inject.Inject
  * to make the code more testable.
  */
 open class GetNow @Inject internal constructor() {
-  open fun execute(): DateTime = DateTime.now()
+    open fun execute(): DateTime = DateTime.now()
 
-  open fun endOfDay(): DateTime {
-    return DateTime().withTime(23, 59, 0, 0)
-  }
+    open fun endOfDay(): DateTime {
+        return DateTime().withTime(23, 59, 0, 0)
+    }
 }

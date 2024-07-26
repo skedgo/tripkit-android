@@ -5,5 +5,6 @@ import io.reactivex.Observable
 import io.reactivex.functions.BiFunction
 
 
-interface QueryGenerator : BiFunction<Query, TransportModeFilter, Observable<@JvmSuppressWildcards List<Query>>> {
+interface QueryGenerator :
+    BiFunction<Query, TransportModeFilter, Observable<@JvmSuppressWildcards List<Query>>> {
 }

@@ -11,7 +11,6 @@ open class RefreshUserToken @Inject constructor(
     private val userTokenRepository: UserTokenRepository,
     private val silentlyLogIn: SilentlyLogIn
 ) {
-  open fun execute(): Observable<UserToken>
-      = userTokenRepository.clearUserToken()
-      .flatMap { silentlyLogIn.execute() }
+    open fun execute(): Observable<UserToken> = userTokenRepository.clearUserToken()
+        .flatMap { silentlyLogIn.execute() }
 }

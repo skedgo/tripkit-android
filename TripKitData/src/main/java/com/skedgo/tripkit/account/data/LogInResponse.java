@@ -1,7 +1,8 @@
 package com.skedgo.tripkit.account.data;
 
-import androidx.annotation.Nullable;
 import com.google.gson.annotations.JsonAdapter;
+
+import androidx.annotation.Nullable;
 
 import static org.immutables.gson.Gson.TypeAdapters;
 import static org.immutables.value.Value.Immutable;
@@ -12,8 +13,15 @@ import static org.immutables.value.Value.Style;
 @Style(passAnnotations = JsonAdapter.class)
 @JsonAdapter(GsonAdaptersLogInResponse.class)
 public abstract class LogInResponse {
-  @Nullable public abstract String userToken();
-  @Nullable public abstract String userID();
-  @Nullable public abstract Boolean changed();
-  @Nullable public abstract Boolean newUser();
+    @Nullable
+    public abstract String userToken();
+
+    @Nullable
+    public abstract String userID();
+
+    @Nullable
+    public abstract Boolean changed();
+
+    @Nullable
+    public abstract Boolean newUser();
 }

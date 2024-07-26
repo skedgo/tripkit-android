@@ -10,4 +10,5 @@ import static org.immutables.value.Value.Style;
 @Immutable
 @Style(passAnnotations = JsonAdapter.class)
 @JsonAdapter(GsonAdaptersLogOutResponse.class)
-abstract class LogOutResponse {}
+abstract class LogOutResponse {
+}

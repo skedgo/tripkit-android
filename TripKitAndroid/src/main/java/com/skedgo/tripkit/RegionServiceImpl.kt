@@ -6,12 +6,12 @@ import com.skedgo.tripkit.common.model.TransportMode
 import com.skedgo.tripkit.data.regions.RegionService
 import com.skedgo.tripkit.data.tsp.Paratransit
 import com.skedgo.tripkit.data.tsp.RegionInfo
+import com.skedgo.tripkit.routing.ModeInfo
 import com.skedgo.tripkit.tsp.RegionInfoRepository
+import com.skedgo.tripkit.tsp.hasWheelChairInformation
 import io.reactivex.Completable
 import io.reactivex.Observable
 import io.reactivex.Single
-import com.skedgo.tripkit.routing.ModeInfo
-import com.skedgo.tripkit.tsp.hasWheelChairInformation
 import io.reactivex.functions.BiFunction
 
 internal class RegionServiceImpl(
@@ -19,7 +19,8 @@ internal class RegionServiceImpl(
     private val modeCache: Cache<Map<String, TransportMode>>,
     private val regionsFetcher: RegionsFetcher,
     private val regionInfoRepository: RegionInfoRepository,
-    private val regionFinder: RegionFinder) : RegionService {
+    private val regionFinder: RegionFinder
+) : RegionService {
     override fun getRegionsAsync(): Observable<List<Region>> =
         regionCache.async.toObservable()
 
@@ -90,20 +91,31 @@ internal class RegionServiceImpl(
     }
 
 
-    override fun getTransportModesByLocationsAsync(location1: Location, location2: Location): Observable<List<TransportMode>> {
-        return Observable.zip(getRegionByLocationAsync(location1), getRegionByLocationAsync(location2),
+    override fun getTransportModesByLocationsAsync(
+        location1: Location,
+        location2: Location
+    ): Observable<List<TransportMode>> {
+        return Observable.zip(getRegionByLocationAsync(location1),
+            getRegionByLocationAsync(location2),
             BiFunction { first: Region, second: Region -> first to second })
             .flatMap { regionPair ->
-                Observable.zip(getRegionInfoByRegionAsync(regionPair.first), getRegionInfoByRegionAsync(regionPair.second),
+                Observable.zip(getRegionInfoByRegionAsync(regionPair.first),
+                    getRegionInfoByRegionAsync(regionPair.second),
                     BiFunction { regionInfoOne: RegionInfo, regionInfoTwo: RegionInfo ->
                         var transportModesOne = regionPair.first.transportModeIds
                         var transportModesTwo = regionPair.second.transportModeIds
 
-                        if (regionInfoOne.hasWheelChairInformation() && transportModesOne?.contains(TransportMode.ID_WHEEL_CHAIR) != true) {
+                        if (regionInfoOne.hasWheelChairInformation() && transportModesOne?.contains(
+                                TransportMode.ID_WHEEL_CHAIR
+                            ) != true
+                        ) {
                             transportModesOne?.add(TransportMode.ID_WHEEL_CHAIR)
                         }
 
-                        if (regionInfoTwo.hasWheelChairInformation() && transportModesTwo?.contains(TransportMode.ID_WHEEL_CHAIR) != true) {
+                        if (regionInfoTwo.hasWheelChairInformation() && transportModesTwo?.contains(
+                                TransportMode.ID_WHEEL_CHAIR
+                            ) != true
+                        ) {
                             transportModesTwo?.add(TransportMode.ID_WHEEL_CHAIR)
                         }
                         transportModesOne to transportModesTwo

@@ -9,6 +9,6 @@ import org.immutables.value.Value
 @Value.Style(passAnnotations = [JsonAdapter::class])
 @JsonAdapter(GsonAdaptersRestrictionTimeDto::class)
 interface RestrictionTimeDto {
-  fun closes(): String
-  fun opens(): String
+    fun closes(): String
+    fun opens(): String
 }

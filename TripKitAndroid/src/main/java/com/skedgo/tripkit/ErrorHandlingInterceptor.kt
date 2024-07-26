@@ -1,6 +1,5 @@
 package com.skedgo.tripkit
 
-import android.util.Log
 import okhttp3.Interceptor
 import okhttp3.Response
 import java.io.IOException
@@ -14,7 +13,7 @@ class ErrorHandlingInterceptor(
             val response = chain.proceed(request)
 
             if (!response.isSuccessful) {
-                if(response.code == 401) {
+                if (response.code == 401) {
                     appDeactivatedListener?.invoke()
                 }
             }

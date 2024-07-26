@@ -1,23 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android">
 
-  <data>
+    <TextView
+        fontPath="@string/font_medium"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/v4_booking_form_field_single_line_height"
+        android:gravity="center_vertical"
+        android:paddingLeft="@dimen/spacing_normal"
+        android:paddingRight="@dimen/spacing_normal"
+        android:text="@{title}"
+        android:textColor="@color/v4_description_text"
+        android:textSize="14sp" />
 
-    <variable
-      name="title"
-      type="String" />
-  </data>
+    <data>
 
-  <TextView
-    fontPath="@string/font_medium"
-    android:layout_width="match_parent"
-    android:layout_height="@dimen/v4_booking_form_field_single_line_height"
-    android:gravity="center_vertical"
-    android:paddingLeft="@dimen/spacing_normal"
-    android:paddingRight="@dimen/spacing_normal"
-    android:text="@{title}"
-    android:textColor="@color/v4_description_text"
-    android:textSize="14sp" />
+        <variable
+            name="title"
+            type="String" />
+    </data>
 
 
 </layout>

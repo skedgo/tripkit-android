@@ -12,6 +12,7 @@ import com.skedgo.tripkit.notification.fire
 import org.joda.time.format.DateTimeFormat
 
 private const val DATE_TIME_FORMAT = "HH:mm a"
+
 class TripAlarmBroadcastReceiver : BroadcastReceiver() {
 
     companion object {
@@ -22,7 +23,7 @@ class TripAlarmBroadcastReceiver : BroadcastReceiver() {
         const val NOTIFICATION_CHANNEL_START_TRIP = "NOTIFICATION_CHANNEL_START_TRIP"
         const val NOTIFICATION_TRIP_START_NOTIFICATION_ID = 9001
     }
-    
+
     private val gson = Gson()
 
     override fun onReceive(context: Context, intent: Intent) {

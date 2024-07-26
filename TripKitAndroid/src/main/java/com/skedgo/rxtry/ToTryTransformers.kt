@@ -5,9 +5,7 @@
 
 package com.skedgo.rxtry
 
-import io.reactivex.Observable
 import io.reactivex.ObservableTransformer
-import io.reactivex.Single
 import io.reactivex.SingleTransformer
 
 /**

@@ -15,9 +15,10 @@ import static org.immutables.value.Value.Style;
 @Style(passAnnotations = JsonAdapter.class)
 @JsonAdapter(GsonAdaptersMyBookingsResponse.class)
 public abstract class MyBookingsResponse {
-  public abstract List<MyBookingsConfirmationResponse> bookings();
+    public abstract List<MyBookingsConfirmationResponse> bookings();
 
-  @Value.Default public int count() {
-    return 0;
-  }
+    @Value.Default
+    public int count() {
+        return 0;
+    }
 }

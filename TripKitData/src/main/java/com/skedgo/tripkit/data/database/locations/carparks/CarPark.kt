@@ -12,8 +12,8 @@ import org.immutables.value.Value.Style
 @JsonAdapter(GsonAdaptersCarPark::class)
 interface CarPark {
 
-  fun openingHours(): OpeningHours?
-  fun pricingTables(): List<PricingTable>?
-  fun operator(): ParkingOperator
-  fun info(): String?
+    fun openingHours(): OpeningHours?
+    fun pricingTables(): List<PricingTable>?
+    fun operator(): ParkingOperator
+    fun info(): String?
 }

@@ -11,7 +11,7 @@ import org.immutables.value.Value
 @JsonAdapter(GsonAdaptersOpeningDay::class)
 interface OpeningDay {
 
-  fun name(): String
-  fun times(): List<OpeningTime>
+    fun name(): String
+    fun times(): List<OpeningTime>
 
 }

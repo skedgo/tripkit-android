@@ -15,19 +15,19 @@ import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
 
 fun Context.createNotification(
-        channelId: String,
-        smallIcon: Int? = null,
-        largeIcon: Bitmap? = null,
-        contentTitle: String? = null,
-        contentText: String? = null,
-        groupAlertBehavior: Int? = null,
-        groupKey: String? = null,
-        groupSummary: Boolean = false,
-        sound: Uri? = null,
-        autoCancel: Boolean = true,
-        bigText: String? = null,
-        intent: Intent? = null,
-        priority: Int = NotificationCompat.PRIORITY_DEFAULT
+    channelId: String,
+    smallIcon: Int? = null,
+    largeIcon: Bitmap? = null,
+    contentTitle: String? = null,
+    contentText: String? = null,
+    groupAlertBehavior: Int? = null,
+    groupKey: String? = null,
+    groupSummary: Boolean = false,
+    sound: Uri? = null,
+    autoCancel: Boolean = true,
+    bigText: String? = null,
+    intent: Intent? = null,
+    priority: Int = NotificationCompat.PRIORITY_DEFAULT
 ): Notification {
     val builder = NotificationCompat.Builder(this, channelId)
 

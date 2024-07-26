@@ -6,8 +6,16 @@ import io.reactivex.Observable
 import io.reactivex.Single
 
 interface FreeFloatingRepository {
-  fun saveFreeFloatingLocations(key: String, freeFloatingLocations: List<FreeFloatingLocationEntity>): Completable
-  fun getFreeFloatingLocations(cellIds: List<String>): Observable<List<FreeFloatingLocationEntity>>
-  fun getFreeFloatingLocation(id: String): Single<FreeFloatingLocationEntity>
-  fun getFreeFloatingLocationsWithinBounds(cellIds: List<String>, southwest: GeoPoint, northEast: GeoPoint): Observable<List<FreeFloatingLocationEntity>>
+    fun saveFreeFloatingLocations(
+        key: String,
+        freeFloatingLocations: List<FreeFloatingLocationEntity>
+    ): Completable
+
+    fun getFreeFloatingLocations(cellIds: List<String>): Observable<List<FreeFloatingLocationEntity>>
+    fun getFreeFloatingLocation(id: String): Single<FreeFloatingLocationEntity>
+    fun getFreeFloatingLocationsWithinBounds(
+        cellIds: List<String>,
+        southwest: GeoPoint,
+        northEast: GeoPoint
+    ): Observable<List<FreeFloatingLocationEntity>>
 }

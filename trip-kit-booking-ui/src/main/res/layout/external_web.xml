@@ -1,38 +1,38 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-  xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
-  <data>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
-    <variable
-      name="viewModel"
-      type="com.skedgo.tripkit.booking.ui.viewmodel.ExternalViewModel" />
-  </data>
+        <EditText
+            android:id="@+id/edit"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:focusable="true"
+            android:visibility="invisible" />
 
-  <RelativeLayout
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical">
+        <ProgressBar
+            android:id="@+id/progressBar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:layout_gravity="center_horizontal"
+            android:padding="@dimen/spacing_normal" />
 
-    <EditText
-      android:id="@+id/edit"
-      android:layout_width="wrap_content"
-      android:layout_height="wrap_content"
-      android:focusable="true"
-      android:visibility="invisible" />
+        <WebView
+            android:id="@+id/webView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:visibility="@{viewModel.showWebView}"
+            app:url="@{viewModel.url}" />
+    </RelativeLayout>
 
-    <ProgressBar
-      android:id="@+id/progressBar"
-      android:layout_width="wrap_content"
-      android:layout_height="wrap_content"
-      android:layout_centerInParent="true"
-      android:layout_gravity="center_horizontal"
-      android:padding="@dimen/spacing_normal" />
+    <data>
 
-    <WebView
-      android:id="@+id/webView"
-      android:layout_width="match_parent"
-      android:layout_height="match_parent"
-      android:visibility="@{viewModel.showWebView}"
-      app:url="@{viewModel.url}" />
-  </RelativeLayout>
+        <variable
+            name="viewModel"
+            type="com.skedgo.tripkit.booking.ui.viewmodel.ExternalViewModel" />
+    </data>
 </layout>

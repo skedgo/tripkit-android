@@ -4,10 +4,11 @@ import org.jetbrains.annotations.NotNull;
 
 public interface GCQueryInterface {
 
-//    user query
+    //    user query
     @NotNull
     String getQueryText();
-//    user bounding box
+
+    //    user bounding box
     @NotNull
     GCBoundingBoxInterface getBounds();
 

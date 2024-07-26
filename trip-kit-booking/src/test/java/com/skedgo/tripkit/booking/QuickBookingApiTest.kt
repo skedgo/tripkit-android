@@ -16,63 +16,65 @@ import java.util.*
 @Suppress("IllegalIdentifier")
 class QuickBookingApiTest {
 
-  private var server = MockWebServer()
-  private var baseUrl = server.url("/")
-  private val api: QuickBookingApi by lazy {
-    val gson = GsonBuilder()
-        .registerTypeAdapterFactory(GsonAdaptersQuickBooking())
-        .create()
-    Retrofit.Builder()
-        .baseUrl(baseUrl)
-        .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
-        .addConverterFactory(GsonConverterFactory.create(gson))
-        .build()
-        .create<QuickBookingApi>(QuickBookingApi::class.java)
-  }
+    private var server = MockWebServer()
+    private var baseUrl = server.url("/")
+    private val api: QuickBookingApi by lazy {
+        val gson = GsonBuilder()
+            .registerTypeAdapterFactory(GsonAdaptersQuickBooking())
+            .create()
+        Retrofit.Builder()
+            .baseUrl(baseUrl)
+            .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
+            .addConverterFactory(GsonConverterFactory.create(gson))
+            .build()
+            .create<QuickBookingApi>(QuickBookingApi::class.java)
+    }
 
-  @After
-  @Throws(IOException::class)
-  fun after() {
-    server.shutdown()
-  }
+    @After
+    @Throws(IOException::class)
+    fun after() {
+        server.shutdown()
+    }
 
-  @Test
-  fun `should get quick booking list`() {
+    @Test
+    fun `should get quick booking list`() {
 
-    val mockResponse = MockResponse()
-    mockResponse.setResponseCode(200)
-    mockResponse.setBody(IOUtils.toString(
-        javaClass.getResourceAsStream("/quick-booking-response.json"),
-        Charset.defaultCharset()
-    ))
-    server.enqueue(mockResponse)
+        val mockResponse = MockResponse()
+        mockResponse.setResponseCode(200)
+        mockResponse.setBody(
+            IOUtils.toString(
+                javaClass.getResourceAsStream("/quick-booking-response.json"),
+                Charset.defaultCharset()
+            )
+        )
+        server.enqueue(mockResponse)
 
-    val url = baseUrl.newBuilder()
-        .addPathSegment("quick")
-        .addPathSegment("booking")
-        .addPathSegment("response")
-        .build()
-        .toString()
+        val url = baseUrl.newBuilder()
+            .addPathSegment("quick")
+            .addPathSegment("booking")
+            .addPathSegment("response")
+            .build()
+            .toString()
 
-    val subscriber = api.fetchQuickBookingsAsync(url).test()
+        val subscriber = api.fetchQuickBookingsAsync(url).test()
 
-    val quickBooking = ImmutableQuickBooking
-        .builder()
-        .bookingURL("https://<satapp_server>/booking/v1/c21199c6-0165-40ec-9de4-fee43a0eb521/-15730924761/quick/0eec2f54-8cab-45ba-852a-8ddeb7a65a1e")
-        .tripUpdateURL("https://<satapp_server>/booking/v1/c21199c6-0165-40ec-9de4-fee43a0eb521/-15730924761/update/0eec2f54-8cab-45ba-852a-8ddeb7a65a1e")
-        .priceInUSD(23.512814f)
-        .imageURL("http://d1a3f4spazzrp4.cloudfront.net/car-types/mono/mono-black.png")
-        .title("UberBLACK")
-        .subtitle("Sandbox: Always surge pricing")
-        .bookingTitle("Request")
-        .priceString("\$27-30")
-        .price(30f)
-        .eta(360f)
-        .build()
+        val quickBooking = ImmutableQuickBooking
+            .builder()
+            .bookingURL("https://<satapp_server>/booking/v1/c21199c6-0165-40ec-9de4-fee43a0eb521/-15730924761/quick/0eec2f54-8cab-45ba-852a-8ddeb7a65a1e")
+            .tripUpdateURL("https://<satapp_server>/booking/v1/c21199c6-0165-40ec-9de4-fee43a0eb521/-15730924761/update/0eec2f54-8cab-45ba-852a-8ddeb7a65a1e")
+            .priceInUSD(23.512814f)
+            .imageURL("http://d1a3f4spazzrp4.cloudfront.net/car-types/mono/mono-black.png")
+            .title("UberBLACK")
+            .subtitle("Sandbox: Always surge pricing")
+            .bookingTitle("Request")
+            .priceString("\$27-30")
+            .price(30f)
+            .eta(360f)
+            .build()
 
-    subscriber.awaitTerminalEvent()
-    subscriber.assertNoErrors()
-    subscriber.assertValue(Arrays.asList<QuickBooking>(quickBooking))
-  }
+        subscriber.awaitTerminalEvent()
+        subscriber.assertNoErrors()
+        subscriber.assertValue(Arrays.asList<QuickBooking>(quickBooking))
+    }
 
 }

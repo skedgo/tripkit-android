@@ -6,8 +6,8 @@ import retrofit2.http.Query
 
 interface OnStreetParkingApi {
 
-  @GET("locationInfo.json?app=beta")
-  fun fetchLocationInfoAsync(
-      @Query("identifier") identifier: String
-  ): Single<OnStreetParkingLocationDto>
+    @GET("locationInfo.json?app=beta")
+    fun fetchLocationInfoAsync(
+        @Query("identifier") identifier: String
+    ): Single<OnStreetParkingLocationDto>
 }

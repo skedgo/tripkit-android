@@ -11,7 +11,7 @@ import org.immutables.value.Value.Style
 @Style(passAnnotations = [JsonAdapter::class])
 @JsonAdapter(GsonAdaptersPricingEntry::class)
 interface PricingEntry {
-  fun maxDurationInMinutes(): Int?
-  fun label(): String?
-  fun price(): Float
+    fun maxDurationInMinutes(): Int?
+    fun label(): String?
+    fun price(): Float
 }

@@ -1,64 +1,63 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-  xmlns:tools="http://schemas.android.com/tools"
-  xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
-  <data>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="?attr/selectableItemBackground"
+        android:clickable="true"
+        android:onClick="@{() -> viewModel.onBookingFormAction()}"
+        android:paddingLeft="@dimen/spacing_normal"
+        android:paddingRight="@dimen/spacing_normal"
+        android:paddingTop="14dp">
 
-    <variable
-      name="viewModel"
-      type="com.skedgo.tripkit.booking.ui.viewmodel.FieldBookingFormViewModel" />
-  </data>
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginRight="@dimen/spacing_normal"
+            android:visibility="@{viewModel.hasImageUrl}"
+            app:bookingImageUrl="@{viewModel.imageUrl}" />
 
-  <RelativeLayout
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:background="?attr/selectableItemBackground"
-    android:paddingLeft="@dimen/spacing_normal"
-    android:paddingRight="@dimen/spacing_normal"
-    android:paddingTop="14dp"
-    android:clickable="true"
-    android:onClick="@{() -> viewModel.onBookingFormAction()}">
+        <TextView
+            android:id="@+id/titleView"
+            style="@style/TextStyleTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@id/imageView"
+            android:text="@{viewModel.title}"
+            tools:text="Title" />
 
-    <ImageView
-      android:id="@+id/imageView"
-      android:layout_width="40dp"
-      android:layout_height="40dp"
-      android:layout_marginRight="@dimen/spacing_normal"
-      android:visibility="@{viewModel.hasImageUrl}"
-      app:bookingImageUrl = "@{viewModel.imageUrl}"/>
+        <TextView
+            android:id="@+id/valueView"
+            style="@style/TextStyleValue"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/titleView"
+            android:layout_toRightOf="@id/imageView"
+            android:text="@{viewModel.subTitle}"
+            tools:text="Value" />
 
-    <TextView
-      android:id="@+id/titleView"
-      style="@style/TextStyleTitle"
-      android:layout_width="wrap_content"
-      android:layout_height="wrap_content"
-      android:layout_toRightOf="@id/imageView"
-      android:text="@{viewModel.title}"
-      tools:text="Title" />
-
-    <TextView
-      android:id="@+id/valueView"
-      style="@style/TextStyleValue"
-      android:layout_width="match_parent"
-      android:layout_height="wrap_content"
-      android:layout_below="@id/titleView"
-      android:layout_toRightOf="@id/imageView"
-      android:text="@{viewModel.subTitle}"
-      tools:text="Value" />
-
-    <View
-      android:id="@+id/dividerView"
-      android:layout_width="match_parent"
-      android:layout_height="1dp"
-      android:layout_below="@id/valueView"
-      android:layout_gravity="bottom"
-      android:layout_marginTop="14dp"
-      android:background="@color/v4_booking_divider"
-      />
+        <View
+            android:id="@+id/dividerView"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_below="@id/valueView"
+            android:layout_gravity="bottom"
+            android:layout_marginTop="14dp"
+            android:background="@color/v4_booking_divider" />
 
 
-  </RelativeLayout>
+    </RelativeLayout>
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.skedgo.tripkit.booking.ui.viewmodel.FieldBookingFormViewModel" />
+    </data>
 
 
 </layout>

@@ -1,14 +1,9 @@
 package com.skedgo.tripkit;
 
-import androidx.annotation.NonNull;
-
 import com.skedgo.tripkit.common.model.TransportMode;
-
-import io.reactivex.functions.BiFunction;
 
 import org.apache.commons.collections4.CollectionUtils;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.LinkedList;
@@ -17,13 +12,16 @@ import java.util.Map;
 import java.util.Set;
 import java.util.regex.Pattern;
 
+import androidx.annotation.NonNull;
+import io.reactivex.functions.BiFunction;
+
 // TODO convert to kotlin and add coroutine version.
 final class ModeCombinationStrategy implements
-        BiFunction<Map<String, TransportMode>, List<String>, List<Set<String>>> {
+    BiFunction<Map<String, TransportMode>, List<String>, List<Set<String>>> {
     @Override
     public List<Set<String>> apply(
-            @NonNull Map<String, TransportMode> modeMap,
-            @NonNull List<String> modeIds) {
+        @NonNull Map<String, TransportMode> modeMap,
+        @NonNull List<String> modeIds) {
         final Set<String> seenModeIds = new HashSet<>();
         final List<Set<String>> modeIdSets = new LinkedList<>();
 
@@ -87,9 +85,9 @@ final class ModeCombinationStrategy implements
 
         //Will remove ps_drt and wa_whe hash set since result is just the same with ps_drt mode
         modeIdSets.remove(
-                new HashSet<>(
-                        Arrays.asList(TransportMode.ID_PS_DRT, TransportMode.ID_WHEEL_CHAIR)
-                )
+            new HashSet<>(
+                Arrays.asList(TransportMode.ID_PS_DRT, TransportMode.ID_WHEEL_CHAIR)
+            )
         );
 
         return modeIdSets;

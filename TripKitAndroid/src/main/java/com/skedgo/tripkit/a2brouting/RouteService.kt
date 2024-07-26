@@ -1,9 +1,9 @@
 package com.skedgo.tripkit.a2brouting
 
-import com.skedgo.tripkit.common.model.Query
 import com.skedgo.tripkit.TransportModeFilter
-import io.reactivex.Observable
+import com.skedgo.tripkit.common.model.Query
 import com.skedgo.tripkit.routing.TripGroup
+import io.reactivex.Observable
 
 interface RouteService {
     /**
@@ -23,5 +23,5 @@ interface RouteService {
         query: Query,
         transportModeFilter: TransportModeFilter
     ):
-            Observable<List<TripGroup>>
+        Observable<List<TripGroup>>
 }

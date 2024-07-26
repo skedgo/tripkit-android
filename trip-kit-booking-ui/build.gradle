@@ -6,107 +6,106 @@ apply plugin: 'kotlin-parcelize'
 
 android {
 
-  namespace 'com.skedgo.tripkit.booking.ui'
+    namespace 'com.skedgo.tripkit.booking.ui'
 
-  compileSdkVersion versions.compileSdkVersion
+    compileSdkVersion versions.compileSdkVersion
 
-  defaultConfig {
-    minSdkVersion versions.proMinSdkVersion
-    targetSdkVersion versions.targetSdkVersion
-    testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
-  }
-
-  buildTypes {
-    staging {
-      debuggable true
+    defaultConfig {
+        minSdkVersion versions.proMinSdkVersion
+        targetSdkVersion versions.targetSdkVersion
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
-  }
 
-  buildFeatures {
-    viewBinding true
-    dataBinding true
-  }
-
-  lintOptions {
-    checkReleaseBuilds true
-    abortOnError false
-  }
-
-  testOptions {
-    unitTests {
-      includeAndroidResources = true
+    buildTypes {
+        staging {
+            debuggable true
+        }
     }
-  }
 
-  compileOptions {
-    sourceCompatibility JavaVersion.VERSION_17
-    targetCompatibility JavaVersion.VERSION_17
-  }
-  kotlinOptions {
-    jvmTarget = JavaVersion.VERSION_17.toString()
-  }
-
-  publishing {
-    singleVariant("release") {
-      // if you don't want sources/javadoc, remove these lines
-      withSourcesJar()
-      withJavadocJar()
+    buildFeatures {
+        viewBinding true
+        dataBinding true
     }
-  }
+
+    lintOptions {
+        checkReleaseBuilds true
+        abortOnError false
+    }
+
+    testOptions {
+        unitTests {
+            includeAndroidResources = true
+        }
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_17
+        targetCompatibility JavaVersion.VERSION_17
+    }
+    kotlinOptions {
+        jvmTarget = JavaVersion.VERSION_17.toString()
+    }
+
+    publishing {
+        singleVariant("release") {
+            // if you don't want sources/javadoc, remove these lines
+            withSourcesJar()
+            withJavadocJar()
+        }
+    }
 }
 
 dependencies {
-  testImplementation libs.junit
-  testImplementation libs.assertjCore
-  testImplementation libs.mockitoCore
-  testImplementation libs.robolectric
-  testImplementation libs.mockitoKotlin, { exclude group: 'org.jetbrains.kotlin' }
-  testImplementation libs.androidxTesting
+    testImplementation libs.junit
+    testImplementation libs.assertjCore
+    testImplementation libs.mockitoCore
+    testImplementation libs.robolectric
+    testImplementation libs.mockitoKotlin, {exclude group: 'org.jetbrains.kotlin'}
+    testImplementation libs.androidxTesting
 
-  androidTestImplementation 'androidx.test.espresso:espresso-core:3.1.0', {
-    exclude group: 'com.android.support', module: 'support-annotations'
-  }
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.1.0', {
+        exclude group: 'com.android.support', module: 'support-annotations'
+    }
 
-  debugImplementation project(':TripKitAndroid')
-  stagingImplementation project(':TripKitAndroid')
-  releaseImplementation project(':TripKitAndroid')
+    debugImplementation project(':TripKitAndroid')
+    stagingImplementation project(':TripKitAndroid')
+    releaseImplementation project(':TripKitAndroid')
 
-  debugImplementation project(':CommonCoreLegacy')
-  stagingImplementation project(':CommonCoreLegacy')
-  releaseImplementation project(':CommonCoreLegacy')
+    debugImplementation project(':CommonCoreLegacy')
+    stagingImplementation project(':CommonCoreLegacy')
+    releaseImplementation project(':CommonCoreLegacy')
 
-  debugImplementation project(':trip-kit-booking')
-  stagingImplementation project(':trip-kit-booking')
-  releaseImplementation project(':trip-kit-booking')
+    debugImplementation project(':trip-kit-booking')
+    stagingImplementation project(':trip-kit-booking')
+    releaseImplementation project(':trip-kit-booking')
 
-  implementation 'uk.co.chrisjenx:calligraphy:2.3.0'
-  implementation 'com.github.skedgo:robotos:v1.1'
+    implementation 'uk.co.chrisjenx:calligraphy:2.3.0'
+    implementation 'com.github.skedgo:robotos:v1.1'
 
-  implementation libs.dagger
-  kapt libs.daggerCompiler
+    implementation libs.dagger
+    kapt libs.daggerCompiler
 
-  implementation 'com.squareup.picasso:picasso:2.5.2'
-  implementation 'com.jakewharton.picasso:picasso2-okhttp3-downloader:1.0.2'
-  implementation libs.bindingCollectionAdapter
-  implementation libs.bindingCollectionAdapterRecyclerView
+    implementation 'com.squareup.picasso:picasso:2.5.2'
+    implementation 'com.jakewharton.picasso:picasso2-okhttp3-downloader:1.0.2'
+    implementation libs.bindingCollectionAdapter
+    implementation libs.bindingCollectionAdapterRecyclerView
 
-  debugImplementation project(':rxlifecyclecomponents')
-  stagingImplementation project(':rxlifecyclecomponents')
-  releaseImplementation project(':rxlifecyclecomponents')
+    debugImplementation project(':rxlifecyclecomponents')
+    stagingImplementation project(':rxlifecyclecomponents')
+    releaseImplementation project(':rxlifecyclecomponents')
 
-  implementation libs.kotlin
-  implementation libs.gson
-  implementation libs.rxjava2
-  implementation libs.rxAndroid2
+    implementation libs.kotlin
+    implementation libs.gson
+    implementation libs.rxjava2
+    implementation libs.rxAndroid2
 
 }
-
 
 
 // build a jar with source files
 task sourcesJar(type: Jar) {
-  from android.sourceSets.main.java.srcDirs
-  archiveClassifier.set('sources')
+    from android.sourceSets.main.java.srcDirs
+    archiveClassifier.set('sources')
 }
 
 task javadoc(type: Javadoc) {
@@ -121,57 +120,57 @@ task javadoc(type: Javadoc) {
 
 // build a jar with javadoc
 task javadocJar(type: Jar, dependsOn: javadoc) {
-  archiveClassifier.set('javadoc')
-  from javadoc.destinationDir
+    archiveClassifier.set('javadoc')
+    from javadoc.destinationDir
 }
 
 artifacts {
-  archives sourcesJar
-  archives javadocJar
+    archives sourcesJar
+    archives javadocJar
 }
 
 group = tripkitGroup
 version = tripkitVersion
 
 publishing {
-  repositories {
-    maven {
-      url = "file://${localMaven}"
-      //url = publishMavenUrl
-      credentials {
-        username = publishMavenUsername
-        password = publishMavenToken
-      }
+    repositories {
+        maven {
+            url = "file://${localMaven}"
+            //url = publishMavenUrl
+            credentials {
+                username = publishMavenUsername
+                password = publishMavenToken
+            }
+        }
     }
-  }
 
-  publications {
-    release(MavenPublication) {
-      groupId = group
-      version = version
-      artifactId = 'trip-kit-booking-ui'
-      afterEvaluate {
-        from components.release
-      }
-      pom {
-        licenses {
-          license {
-            name = 'Commercial'
-          }
+    publications {
+        release(MavenPublication) {
+            groupId = group
+            version = version
+            artifactId = 'trip-kit-booking-ui'
+            afterEvaluate {
+                from components.release
+            }
+            pom {
+                licenses {
+                    license {
+                        name = 'Commercial'
+                    }
+                }
+            }
+            pom.withXml {
+                asNode().dependencies.'*'
+                    .findAll() {
+                        ((it.scope.text() == 'runtime' || it.scope.text() == 'compile') || it.scope.text() == 'compile') &&
+                            project.configurations.implementation.allDependencies.find {
+                                dep -> dep.name == it.artifactId.text()
+                            }
+                    }.each {
+                    it.appendNode("type", "aar")
+                }
+            }
         }
-      }
-      pom.withXml {
-        asNode().dependencies.'*'
-                .findAll() {
-                  ((it.scope.text() == 'runtime' || it.scope.text() == 'compile') || it.scope.text() == 'compile') &&
-                          project.configurations.implementation.allDependencies.find {
-                            dep -> dep.name == it.artifactId.text()
-                          }
-                }.each {
-          it.appendNode("type", "aar")
-        }
-      }
     }
-  }
 }
 

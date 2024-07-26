@@ -11,6 +11,7 @@ import static org.immutables.value.Value.Style;
 @Style(passAnnotations = JsonAdapter.class)
 @JsonAdapter(GsonAdaptersLogInBody.class)
 abstract class LogInBody {
-  public abstract String password();
-  public abstract String username();
+    public abstract String password();
+
+    public abstract String username();
 }

@@ -7,11 +7,11 @@ package com.skedgo.tripkit.a2brouting
  * @return Corresponding value between 0.1 - 2.0.
  */
 fun Int.toProfileWeight(): Float {
-  require(this in 0..100) {
-    "Value must be in range of 0 to 100. Found: $this."
-  }
-  return when (this) {
-    0 -> 0.1f
-    else -> this / 50f
-  }
+    require(this in 0..100) {
+        "Value must be in range of 0 to 100. Found: $this."
+    }
+    return when (this) {
+        0 -> 0.1f
+        else -> this / 50f
+    }
 }

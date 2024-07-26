@@ -49,7 +49,7 @@ class CarPodLocation {
 
     @Keep
     class Garage(
-            val address: String?
+        val address: String?
     )
 }
 

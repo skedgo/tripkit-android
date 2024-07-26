@@ -1,30 +1,30 @@
 {
-  "alerts": [
-    {
-      "alert": {
-        "hashCode": 707713596,
-        "severity": "warning",
-        "text": "Monday 29 August to Friday 2 September \n\n- Buses replace trains between Mount Victoria and Lithgow.\n- Trains to and from Bathurst run to a changed timetable.",
-        "title": "Trackwork - Blue Mountains Line",
-        "url": "http://www.sydneytrains.info/service_updates/service_interruptions/"
-      },
-      "routeIDs": [
-        "BML_2",
-        "BML_1"
-      ]
-    },
-    {
-      "alert": {
-        "hashCode": 697250695,
-        "severity": "warning",
-        "text": "McMahons Point Wharf Closed. Wharf closed for planned upgrade.",
-        "title": "Wharf Closed",
-        "url": ""
-      },
-      "routeIDs": [
-        "RV",
-        "DH"
-      ]
-    }
-  ]
+    "alerts": [
+        {
+            "alert": {
+                "hashCode": 707713596,
+                "severity": "warning",
+                "text": "Monday 29 August to Friday 2 September \n\n- Buses replace trains between Mount Victoria and Lithgow.\n- Trains to and from Bathurst run to a changed timetable.",
+                "title": "Trackwork - Blue Mountains Line",
+                "url": "http://www.sydneytrains.info/service_updates/service_interruptions/"
+            },
+            "routeIDs": [
+                "BML_2",
+                "BML_1"
+            ]
+        },
+        {
+            "alert": {
+                "hashCode": 697250695,
+                "severity": "warning",
+                "text": "McMahons Point Wharf Closed. Wharf closed for planned upgrade.",
+                "title": "Wharf Closed",
+                "url": ""
+            },
+            "routeIDs": [
+                "RV",
+                "DH"
+            ]
+        }
+    ]
 }

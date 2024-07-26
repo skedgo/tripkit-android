@@ -2,30 +2,26 @@ package com.skedgo.tripkit
 
 import android.content.Context
 import android.text.TextUtils
-
-import com.skedgo.tripkit.common.model.Location
-import com.skedgo.tripkit.common.model.Query
-import com.skedgo.tripkit.tsp.RegionInfoRepository
-
-import java.util.HashMap
-import java.util.concurrent.TimeUnit
-
 import androidx.collection.ArrayMap
-import io.reactivex.Observable
 import com.skedgo.tripkit.a2brouting.FailoverA2bRoutingApi
 import com.skedgo.tripkit.a2brouting.RouteService
 import com.skedgo.tripkit.a2brouting.ToWeightingProfileString
-import com.skedgo.tripkit.data.HttpClientCustomDataStore
+import com.skedgo.tripkit.common.model.Location
+import com.skedgo.tripkit.common.model.Query
 import com.skedgo.tripkit.routing.TripGroup
+import com.skedgo.tripkit.tsp.RegionInfoRepository
+import io.reactivex.Observable
+import java.util.concurrent.TimeUnit
 
 internal class RouteServiceImpl(
-        private val context: Context,
-        private val queryGenerator: QueryGenerator,
-        private val co2Preferences: com.skedgo.tripkit.Co2Preferences?,
-        private val tripPreferences: com.skedgo.tripkit.TripPreferences?,
-        private val extraQueryMapProvider: com.skedgo.tripkit.routing.ExtraQueryMapProvider?,
-        private val routingApi: FailoverA2bRoutingApi,
-        private val regionInfoRepository: RegionInfoRepository) : RouteService {
+    private val context: Context,
+    private val queryGenerator: QueryGenerator,
+    private val co2Preferences: com.skedgo.tripkit.Co2Preferences?,
+    private val tripPreferences: com.skedgo.tripkit.TripPreferences?,
+    private val extraQueryMapProvider: com.skedgo.tripkit.routing.ExtraQueryMapProvider?,
+    private val routingApi: FailoverA2bRoutingApi,
+    private val regionInfoRepository: RegionInfoRepository
+) : RouteService {
 
     private fun toCoordinatesText(location: Location): String {
         val coordinatesText = StringBuilder("(" + location.lat + "," + location.lon + ")")
@@ -36,22 +32,24 @@ internal class RouteServiceImpl(
     }
 
     override fun routeAsync(
-            query: Query,
-            transportModeFilter: TransportModeFilter): Observable<List<TripGroup>> {
+        query: Query,
+        transportModeFilter: TransportModeFilter
+    ): Observable<List<TripGroup>> {
         return flatSubQueries(query, transportModeFilter)
-                .flatMap { subQuery ->
+            .flatMap { subQuery ->
 
-                    val region = subQuery.region
+                val region = subQuery.region
 
-                    val baseUrls = region!!.urLs
-                    val modes = transportModeFilter.getFilteredMode(subQuery.transportModeIds)
+                val baseUrls = region!!.urLs
+                val modes = transportModeFilter.getFilteredMode(subQuery.transportModeIds)
 
-                    val excludeStops = subQuery.excludedStopCodes
-                    val avoidModes = region.transportModeIds.orEmpty().map { it }.filter { transportModeFilter.avoidTransportMode(it) }
+                val excludeStops = subQuery.excludedStopCodes
+                val avoidModes = region.transportModeIds.orEmpty().map { it }
+                    .filter { transportModeFilter.avoidTransportMode(it) }
 
-                    val options = toOptions(subQuery)
-                    routingApi.fetchRoutesAsync(baseUrls, modes, avoidModes, excludeStops, options)
-                }
+                val options = toOptions(subQuery)
+                routingApi.fetchRoutesAsync(baseUrls, modes, avoidModes, excludeStops, options)
+            }
     }
 
     /* TODO: Consider making this public for Xerox team. */
@@ -108,8 +106,11 @@ internal class RouteServiceImpl(
         return options
     }
 
-    private fun flatSubQueries(query: Query, transportModeFilter: TransportModeFilter): Observable<Query> {
+    private fun flatSubQueries(
+        query: Query,
+        transportModeFilter: TransportModeFilter
+    ): Observable<Query> {
         return queryGenerator.apply(query, transportModeFilter)
-                .flatMap { Observable.fromIterable(it) }
+            .flatMap { Observable.fromIterable(it) }
     }
 }

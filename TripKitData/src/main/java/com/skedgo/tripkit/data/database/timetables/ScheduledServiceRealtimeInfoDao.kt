@@ -8,9 +8,9 @@ import androidx.room.Query
 @Dao
 interface ScheduledServiceRealtimeInfoDao {
 
-  @Insert
-  fun insert(entities: List<ScheduledServiceRealtimeInfoEntity>)
+    @Insert
+    fun insert(entities: List<ScheduledServiceRealtimeInfoEntity>)
 
-  @Query("SELECT * FROM scheduledServiceRealtimeInfo WHERE id IN (:serviceIds)")
-  fun getRealtimeInfoByService(serviceIds: List<Long>): Cursor
+    @Query("SELECT * FROM scheduledServiceRealtimeInfo WHERE id IN (:serviceIds)")
+    fun getRealtimeInfoByService(serviceIds: List<Long>): Cursor
 }

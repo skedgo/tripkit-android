@@ -4,50 +4,46 @@ import android.app.NotificationChannel;
 import android.content.Context;
 import android.os.Build;
 
-import androidx.annotation.NonNull;
-
 import com.skedgo.tripkit.Configs;
 import com.skedgo.tripkit.HttpClientModule;
 import com.skedgo.tripkit.LocationInfoService;
 import com.skedgo.tripkit.MainModule;
-import com.skedgo.tripkit.data.TripKitPreferencesModule;
-import com.skedgo.tripkit.data.regions.RegionService;
 import com.skedgo.tripkit.TripUpdater;
-import com.skedgo.tripkit.bookingproviders.BookingResolver;
-
-import io.reactivex.functions.Consumer;
-
 import com.skedgo.tripkit.a2brouting.A2bRoutingDataModule;
-import com.skedgo.tripkit.notification.NotificationKt;
-import com.skedgo.tripkit.routing.GeoLocation;
-import com.skedgo.tripkit.routing.GetOffAlertCache;
-import com.skedgo.tripkit.tsp.TspModule;
-
-import javax.inject.Singleton;
-
-import dagger.Component;
-
 import com.skedgo.tripkit.a2brouting.RouteService;
 import com.skedgo.tripkit.android.A2bRoutingComponent;
 import com.skedgo.tripkit.android.AnalyticsComponent;
 import com.skedgo.tripkit.android.DateTimeComponent;
 import com.skedgo.tripkit.android.FetchRegionsService;
+import com.skedgo.tripkit.bookingproviders.BookingResolver;
+import com.skedgo.tripkit.data.TripKitPreferencesModule;
+import com.skedgo.tripkit.data.regions.RegionService;
+import com.skedgo.tripkit.notification.NotificationKt;
+import com.skedgo.tripkit.routing.GeoLocation;
+import com.skedgo.tripkit.routing.GetOffAlertCache;
+import com.skedgo.tripkit.tsp.TspModule;
 
 import net.danlew.android.joda.JodaTimeAndroid;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.inject.Singleton;
+
+import androidx.annotation.NonNull;
+import dagger.Component;
+import io.reactivex.functions.Consumer;
+
 import static com.skedgo.tripkit.routing.TripAlarmBroadcastReceiver.NOTIFICATION_CHANNEL_START_TRIP;
 import static com.skedgo.tripkit.routing.TripAlarmBroadcastReceiver.NOTIFICATION_CHANNEL_START_TRIP_ID;
 
 @Singleton
 @Component(modules = {
-        HttpClientModule.class,
-        A2bRoutingDataModule.class,
-        TspModule.class,
-        MainModule.class,
-        TripKitPreferencesModule.class
+    HttpClientModule.class,
+    A2bRoutingDataModule.class,
+    TspModule.class,
+    MainModule.class,
+    TripKitPreferencesModule.class
 })
 public abstract class TripKit {
     private static TripKit instance;
@@ -80,8 +76,8 @@ public abstract class TripKit {
                 instance = tripKit;
             }
             FetchRegionsService.Companion.scheduleAsync(context)
-                    .subscribe(unused -> {
-                    }, instance.getErrorHandler());
+                .subscribe(unused -> {
+                }, instance.getErrorHandler());
         }
     }
 
@@ -97,34 +93,34 @@ public abstract class TripKit {
 
             if (instance == null) {
                 instance = DaggerTripKit.builder()
-                        .mainModule(new MainModule(configs))
-                        .httpClientModule(new HttpClientModule(
-                                null,
-                                null,
-                                configs,
-                                null,
-                                null
-                        ))
-                        .build();
+                    .mainModule(new MainModule(configs))
+                    .httpClientModule(new HttpClientModule(
+                        null,
+                        null,
+                        configs,
+                        null,
+                        null
+                    ))
+                    .build();
                 JodaTimeAndroid.init(configs.context());
                 GetOffAlertCache.INSTANCE.init(configs.context());
                 GeoLocation.INSTANCE.init(configs.context());
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
                     List<NotificationChannel> channels = new ArrayList<>();
                     channels.add(NotificationKt.createChannel(
-                            NOTIFICATION_CHANNEL_START_TRIP_ID,
-                            NOTIFICATION_CHANNEL_START_TRIP)
+                        NOTIFICATION_CHANNEL_START_TRIP_ID,
+                        NOTIFICATION_CHANNEL_START_TRIP)
                     );
                     NotificationKt.createNotificationChannels(
-                            configs.context(),
-                            channels
+                        configs.context(),
+                        channels
                     );
                 }
             }
 
             FetchRegionsService.Companion.scheduleAsync(configs.context())
-                    .subscribe(unused -> {
-                    }, instance.getErrorHandler());
+                .subscribe(unused -> {
+                }, instance.getErrorHandler());
         }
     }
 

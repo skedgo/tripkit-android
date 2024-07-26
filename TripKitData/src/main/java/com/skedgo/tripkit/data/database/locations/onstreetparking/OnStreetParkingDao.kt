@@ -9,14 +9,16 @@ import io.reactivex.Flowable
 @Dao
 interface OnStreetParkingDao {
 
-  @Insert(onConflict = OnConflictStrategy.REPLACE)
-  fun saveAll(onStreetParkings: List<OnStreetParkingEntity>)
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    fun saveAll(onStreetParkings: List<OnStreetParkingEntity>)
 
-  @Query("SELECT * from onStreetParkings WHERE cellId IN (:ids) AND :southWestLat < lat  AND lat < :northEastLat AND :southWestLng < lng AND lng < :northEastLng ")
-  fun getByCellIds(ids: List<String>,
-                   southWestLat: Double,
-                   southWestLng: Double,
-                   northEastLat: Double,
-                   northEastLng: Double): Flowable<List<OnStreetParkingEntity>>
+    @Query("SELECT * from onStreetParkings WHERE cellId IN (:ids) AND :southWestLat < lat  AND lat < :northEastLat AND :southWestLng < lng AND lng < :northEastLng ")
+    fun getByCellIds(
+        ids: List<String>,
+        southWestLat: Double,
+        southWestLng: Double,
+        northEastLat: Double,
+        northEastLng: Double
+    ): Flowable<List<OnStreetParkingEntity>>
 
 }

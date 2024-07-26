@@ -1,7 +1,6 @@
 package com.skedgo.tripkit;
 
 import com.google.gson.annotations.JsonAdapter;
-
 import com.skedgo.tripkit.routing.RealTimeVehicle;
 import com.skedgo.tripkit.routing.Shape;
 
@@ -16,9 +15,12 @@ import java.util.List;
 @Value.Style(passAnnotations = JsonAdapter.class)
 public interface TransitService {
 
-  List<Shape> shapes();
-  String realTimeStatus();
-  RealTimeVehicle realtimeVehicle();
-  List<RealTimeVehicle> realtimeAlternativeVehicle();
+    List<Shape> shapes();
+
+    String realTimeStatus();
+
+    RealTimeVehicle realtimeVehicle();
+
+    List<RealTimeVehicle> realtimeAlternativeVehicle();
 
 }

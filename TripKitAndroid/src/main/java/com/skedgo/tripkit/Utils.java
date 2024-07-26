@@ -1,26 +1,24 @@
 package com.skedgo.tripkit;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-
 import android.text.TextUtils;
 
 import com.skedgo.tripkit.common.model.Location;
 import com.skedgo.tripkit.common.model.Region;
 import com.skedgo.tripkit.common.model.TransportMode;
 
-import io.reactivex.ObservableTransformer;
-import io.reactivex.functions.Function;
-import io.reactivex.functions.Predicate;
-
 import org.apache.commons.collections4.CollectionUtils;
-
-import io.reactivex.Observable;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import io.reactivex.Observable;
+import io.reactivex.ObservableTransformer;
+import io.reactivex.functions.Function;
+import io.reactivex.functions.Predicate;
 
 final class Utils {
     private Utils() {
@@ -32,15 +30,15 @@ final class Utils {
             @Override
             public Observable<Location> apply(Observable<Region> observable) {
                 return observable
-                        .flatMap((Function<Region, Observable<Region.City>>) region -> {
-                            final ArrayList<Region.City> cities = region.getCities();
-                            if (cities != null) {
-                                return Observable.fromIterable(cities);
-                            } else {
-                                return Observable.empty();
-                            }
-                        })
-                        .map(city -> city);
+                    .flatMap((Function<Region, Observable<Region.City>>) region -> {
+                        final ArrayList<Region.City> cities = region.getCities();
+                        if (cities != null) {
+                            return Observable.fromIterable(cities);
+                        } else {
+                            return Observable.empty();
+                        }
+                    })
+                    .map(city -> city);
             }
         };
     }
@@ -55,7 +53,7 @@ final class Utils {
         return city -> {
             final String name1 = city.getName();
             return isNullOrEmpty(lowerCaseName) ||
-                    (name1 != null && name1.toLowerCase().contains(lowerCaseName));
+                (name1 != null && name1.toLowerCase().contains(lowerCaseName));
         };
     }
 

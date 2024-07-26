@@ -1,6 +1,7 @@
 package com.skedgo.geocoding;
 
 import com.skedgo.geocoding.agregator.GCAppResultInterface;
+
 import org.jetbrains.annotations.NotNull;
 
 /**
@@ -12,13 +13,13 @@ public class GCAppResult extends GCResult implements GCAppResultInterface {
     @NotNull
 //     address value
     private String subtitle;
-//    is true if the result was set as favourite by the user false otherwise.
+    //    is true if the result was set as favourite by the user false otherwise.
     private boolean isFavourite;
     @NotNull
 //    source that provides the result
     private Source source;
 
-    public GCAppResult(String name, double lat, double lng, @NotNull String address, boolean isFavourite, @NotNull Source source){
+    public GCAppResult(String name, double lat, double lng, @NotNull String address, boolean isFavourite, @NotNull Source source) {
         super(name, lat, lng);
         this.subtitle = address;
         this.isFavourite = isFavourite;
@@ -31,22 +32,22 @@ public class GCAppResult extends GCResult implements GCAppResultInterface {
         return subtitle;
     }
 
-    @Override
-    public Source getAppResultSource() {
-        return source;
+    public void setSubtitle(@NotNull String subtitle) {
+        this.subtitle = subtitle;
     }
 
     @Override
-    public boolean isFavourite() {
-        return isFavourite;
+    public Source getAppResultSource() {
+        return source;
     }
 
     public void setAppResultSource(Source source) {
         this.source = source;
     }
 
-    public void setSubtitle(@NotNull String subtitle) {
-        this.subtitle = subtitle;
+    @Override
+    public boolean isFavourite() {
+        return isFavourite;
     }
 
     public void setIsFavourite(boolean favourite) {
