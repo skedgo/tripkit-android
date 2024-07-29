@@ -5,17 +5,17 @@ package com.skedgo.tripkit.common.agenda;
  */
 public interface IRealTimeElement {
 
-  String getStartStopCode();
+    String getStartStopCode();
 
-  void setStartStopCode(String startStopCode);
+    void setStartStopCode(String startStopCode);
 
-  String getEndStopCode();
+    String getEndStopCode();
 
-  void setEndStopCode(String endStopCode);
+    void setEndStopCode(String endStopCode);
 
-  String getServiceTripId();
+    String getServiceTripId();
 
-  String getOperator();
+    String getOperator();
 
-  long getStartTimeInSecs();
+    long getStartTimeInSecs();
 }

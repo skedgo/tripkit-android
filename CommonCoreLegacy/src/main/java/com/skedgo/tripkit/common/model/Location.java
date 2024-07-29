@@ -2,20 +2,18 @@ package com.skedgo.tripkit.common.model;
 
 import android.os.Parcel;
 import android.os.Parcelable;
-
-import androidx.annotation.Nullable;
-
 import android.text.TextUtils;
 
 import com.google.gson.annotations.SerializedName;
-import com.skedgo.tripkit.regionrouting.data.Operator;
 import com.skedgo.tripkit.common.util.StringUtils;
-
+import com.skedgo.tripkit.regionrouting.data.Operator;
 import com.skedgo.tripkit.regionrouting.data.RouteDetails;
 import com.skedgo.tripkit.routing.LocationExtensionsKt;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import androidx.annotation.Nullable;
 
 public class Location implements Parcelable {
     /**
@@ -485,9 +483,11 @@ public class Location implements Parcelable {
         this.region = region;
     }
 
-    public List<Operator> getOperators() { return operators; }
+    public List<Operator> getOperators() {
+        return operators;
+    }
 
-    public void setOperators( List<Operator> operators) {
+    public void setOperators(List<Operator> operators) {
         this.operators = operators;
     }
 
@@ -515,8 +515,8 @@ public class Location implements Parcelable {
         double dLon = Math.toRadians(lon - this.lon);
 
         double a = Math.sin(dLat / 2) * Math.sin(dLat / 2) +
-                Math.cos(Math.toRadians(this.lat)) * Math.cos(Math.toRadians(lat)) *
-                        Math.sin(dLon / 2) * Math.sin(dLon / 2);
+            Math.cos(Math.toRadians(this.lat)) * Math.cos(Math.toRadians(lat)) *
+                Math.sin(dLon / 2) * Math.sin(dLon / 2);
 
         double c = 2 * Math.asin(Math.sqrt(a));
         return (int) (EARTH_RADIUS_IN_METERS * c);
@@ -594,17 +594,17 @@ public class Location implements Parcelable {
      */
     public String getDisplayName() {
         return StringUtils.firstNonEmpty(
-                name != null ? name.trim() : null,
-                address != null ? address.trim() : null,
-                getCoordinateString()
+            name != null ? name.trim() : null,
+            address != null ? address.trim() : null,
+            getCoordinateString()
         );
     }
 
     public String getDisplayAddress() {
         return StringUtils.firstNonEmpty(
-                address != null ? address.trim() : null,
-                name != null ? name.trim() : null,
-                getCoordinateString()
+            address != null ? address.trim() : null,
+            name != null ? name.trim() : null,
+            getCoordinateString()
         );
     }
 
@@ -633,20 +633,20 @@ public class Location implements Parcelable {
 
     private boolean equalTo(Location another) {
         return equals(name, another.name)
-                && equals(address, another.address)
-                && lat == another.lat
-                && lon == another.lon
-                && exact == another.exact
-                && bearing == another.bearing
-                && equals(phoneNumber, another.phoneNumber)
-                && equals(url, another.url)
-                && equals(timeZone, another.timeZone)
-                && equals(popularity, another.popularity)
-                && equals(locationClass, another.locationClass)
-                && equals(w3w, another.w3w)
-                && equals(w3wInfoURL, another.w3wInfoURL)
-                && equals(region, another.region)
-                && equals(operators, another.operators)
-                && equals(routes, another.routes);
+            && equals(address, another.address)
+            && lat == another.lat
+            && lon == another.lon
+            && exact == another.exact
+            && bearing == another.bearing
+            && equals(phoneNumber, another.phoneNumber)
+            && equals(url, another.url)
+            && equals(timeZone, another.timeZone)
+            && equals(popularity, another.popularity)
+            && equals(locationClass, another.locationClass)
+            && equals(w3w, another.w3w)
+            && equals(w3wInfoURL, another.w3wInfoURL)
+            && equals(region, another.region)
+            && equals(operators, another.operators)
+            && equals(routes, another.routes);
     }
 }

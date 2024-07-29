@@ -23,19 +23,19 @@ public abstract class BookingConfirmationPurchase implements Parcelable {
         @Override
         public BookingConfirmationPurchase createFromParcel(Parcel in) {
             return ImmutableBookingConfirmationPurchase.builder()
-                    .currency(in.readString())
-                    .id(in.readString())
-                    .price(in.readFloat())
-                    .productName(in.readString())
-                    .productType(in.readString())
-                    .timezone(in.readString())
-                    .brand((PurchaseBrand) in.readParcelable(PurchaseBrand.class.getClassLoader()))
-                    .source((BookingSource) in.readParcelable(BookingSource.class.getClassLoader()))
-                    .validFor(in.readLong())
-                    .validFrom(in.readLong())
-                    .valid(in.readByte() == 1)
-                    .pickupWindowDuration(in.readString())
-                    .build();
+                .currency(in.readString())
+                .id(in.readString())
+                .price(in.readFloat())
+                .productName(in.readString())
+                .productType(in.readString())
+                .timezone(in.readString())
+                .brand((PurchaseBrand) in.readParcelable(PurchaseBrand.class.getClassLoader()))
+                .source((BookingSource) in.readParcelable(BookingSource.class.getClassLoader()))
+                .validFor(in.readLong())
+                .validFrom(in.readLong())
+                .valid(in.readByte() == 1)
+                .pickupWindowDuration(in.readString())
+                .build();
         }
 
         @Override

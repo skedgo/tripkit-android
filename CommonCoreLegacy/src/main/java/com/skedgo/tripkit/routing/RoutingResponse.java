@@ -16,7 +16,12 @@ import com.skedgo.tripkit.common.util.TripSegmentListResolver;
 
 import org.apache.commons.collections4.CollectionUtils;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 public class RoutingResponse {
     public static final String FORMAT_DIRECTION = "Direction: %s";
@@ -142,10 +147,10 @@ public class RoutingResponse {
                 }
 
                 ArrayList<TripSegment> segments = createSegmentsFromTemplate(
-                        gson,
-                        segmentTemplateMap,
-                        rawSegments,
-                        resources
+                    gson,
+                    segmentTemplateMap,
+                    rawSegments,
+                    resources
                 );
                 trip.setSegments(segments);
                 processTripSegmentRealTimeVehicle(segments);
@@ -191,10 +196,10 @@ public class RoutingResponse {
                 for (Trip trip : tripGroup.getTrips()) {
                     if (trip != null) {
                         mTripSegmentListResolver
-                                .setOrigin(trip.getFrom())
-                                .setDestination(trip.getTo())
-                                .setTripSegmentList(trip.getSegments())
-                                .resolve();
+                            .setOrigin(trip.getFrom())
+                            .setDestination(trip.getTo())
+                            .setTripSegmentList(trip.getSegments())
+                            .resolve();
                     }
                 }
             }

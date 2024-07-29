@@ -18,10 +18,10 @@ public abstract class BookingConfirmationNotes implements Parcelable {
         @Override
         public BookingConfirmationNotes createFromParcel(Parcel in) {
             return ImmutableBookingConfirmationNotes.builder()
-                    .provider(in.readString())
-                    .text(in.readString())
-                    .timestamp(in.readString())
-                    .build();
+                .provider(in.readString())
+                .text(in.readString())
+                .timestamp(in.readString())
+                .build();
         }
 
         @Override

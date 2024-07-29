@@ -13,20 +13,27 @@ import com.google.gson.annotations.SerializedName;
 import com.skedgo.tripkit.common.R;
 import com.skedgo.tripkit.common.StyleManager;
 import com.skedgo.tripkit.common.agenda.IRealTimeElement;
-import com.skedgo.tripkit.common.model.*;
+import com.skedgo.tripkit.common.model.Booking;
+import com.skedgo.tripkit.common.model.ITimeRange;
+import com.skedgo.tripkit.common.model.Location;
+import com.skedgo.tripkit.common.model.MiniInstruction;
+import com.skedgo.tripkit.common.model.Query;
+import com.skedgo.tripkit.common.model.RealtimeAlert;
+import com.skedgo.tripkit.common.model.SharedVehicle;
+import com.skedgo.tripkit.common.model.Street;
+import com.skedgo.tripkit.common.model.TransportMode;
 import com.skedgo.tripkit.common.util.TimeUtils;
 import com.skedgo.tripkit.common.util.TripSegmentUtils;
 
+import org.joda.time.format.ISODateTimeFormat;
+
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
 import androidx.annotation.DrawableRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-
-import org.joda.time.format.ISODateTimeFormat;
 
 import static com.skedgo.tripkit.routing.VehicleDrawables.createLightDrawable;
 
@@ -582,9 +589,9 @@ public class TripSegment implements IRealTimeElement, ITimeRange {
 
     public String getPairIdentifier() {
         return String.format(
-                StyleManager.FORMAT_PAIR_IDENTIFIER,
-                mStartStopCode,
-                mEndStopCode
+            StyleManager.FORMAT_PAIR_IDENTIFIER,
+            mStartStopCode,
+            mEndStopCode
         );
     }
 
@@ -632,8 +639,8 @@ public class TripSegment implements IRealTimeElement, ITimeRange {
     @Nullable
     public String getTimeZone() {
         final Location location = TripSegmentUtils.getFirstNonNullLocation(
-                this.getFrom(),
-                this.getSingleLocation()
+            this.getFrom(),
+            this.getSingleLocation()
         );
         if (location != null) {
             return location.getTimeZone();
@@ -691,9 +698,9 @@ public class TripSegment implements IRealTimeElement, ITimeRange {
 
     public boolean isVisibleInContext(String contextVisibility) {
         if (mVisibility == null || mVisibility.isEmpty() ||
-                contextVisibility == null || contextVisibility.isEmpty() ||
-                mVisibility.equals(Visibilities.VISIBILITY_HIDDEN) ||
-                contextVisibility.equals(Visibilities.VISIBILITY_HIDDEN)) {
+            contextVisibility == null || contextVisibility.isEmpty() ||
+            mVisibility.equals(Visibilities.VISIBILITY_HIDDEN) ||
+            contextVisibility.equals(Visibilities.VISIBILITY_HIDDEN)) {
             return false;
         }
 
@@ -717,11 +724,11 @@ public class TripSegment implements IRealTimeElement, ITimeRange {
     @Nullable
     public String getDisplayNotes(Context context, boolean withPlatform) {
         String notes = TripSegmentUtils.processDurationTemplate(
-                context,
-                mNotes,
-                null,
-                mStartTimeInSecs == 0 && Long.parseLong(startTime) > 0 ? Long.parseLong(startTime) : mStartTimeInSecs,
-                mEndTimeInSecs == 0 && Long.parseLong(endTime) > 0 ? Long.parseLong(endTime) : mEndTimeInSecs
+            context,
+            mNotes,
+            null,
+            mStartTimeInSecs == 0 && Long.parseLong(startTime) > 0 ? Long.parseLong(startTime) : mStartTimeInSecs,
+            mEndTimeInSecs == 0 && Long.parseLong(endTime) > 0 ? Long.parseLong(endTime) : mEndTimeInSecs
         );
 
         if (notes == null) {
@@ -769,8 +776,8 @@ public class TripSegment implements IRealTimeElement, ITimeRange {
     public int getDarkVehicleIcon() {
         if (modeInfo != null && modeInfo.getModeCompat() != null) {
             return isRealTime
-                    ? modeInfo.getModeCompat().getRealTimeIconRes()
-                    : modeInfo.getModeCompat().getIconRes();
+                ? modeInfo.getModeCompat().getRealTimeIconRes()
+                : modeInfo.getModeCompat().getIconRes();
         } else {
             return 0;
         }
@@ -788,8 +795,8 @@ public class TripSegment implements IRealTimeElement, ITimeRange {
     public Drawable getLightTransportIcon(@NonNull Context context) {
         if (modeInfo != null && modeInfo.getModeCompat() != null) {
             return isRealTime
-                    ? modeInfo.getModeCompat().getRealtimeMapIconRes(context)
-                    : modeInfo.getModeCompat().getMapIconRes(context);
+                ? modeInfo.getModeCompat().getRealtimeMapIconRes(context)
+                : modeInfo.getModeCompat().getMapIconRes(context);
         } else {
             return createLightDrawable(context, R.drawable.v4_ic_map_location);
         }
@@ -797,14 +804,14 @@ public class TripSegment implements IRealTimeElement, ITimeRange {
 
     public boolean isPlane() {
         return getType() == SegmentType.SCHEDULED
-                && transportModeId != null
-                && transportModeId.startsWith(TransportMode.ID_AIR);
+            && transportModeId != null
+            && transportModeId.startsWith(TransportMode.ID_AIR);
     }
 
     public boolean hasTimeTable() {
         return getType() == SegmentType.SCHEDULED
-                && mServiceTripId != null
-                && !(mIsContinuation || isPlane());
+            && mServiceTripId != null
+            && !(mIsContinuation || isPlane());
     }
 
 
@@ -894,7 +901,9 @@ public class TripSegment implements IRealTimeElement, ITimeRange {
     }
 
     @Nullable
-    public List<Geofence> getGeofences() { return geofences; }
+    public List<Geofence> getGeofences() {
+        return geofences;
+    }
 
     public void setGeofences(List<Geofence> geofences) {
         this.geofences = geofences;

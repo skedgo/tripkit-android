@@ -3,12 +3,12 @@ package com.skedgo.tripkit.common.model;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-import androidx.annotation.Nullable;
-
 import com.google.gson.annotations.JsonAdapter;
 
 import org.immutables.gson.Gson;
 import org.immutables.value.Value;
+
+import androidx.annotation.Nullable;
 
 @Gson.TypeAdapters
 @Value.Immutable
@@ -20,12 +20,12 @@ public abstract class BookingConfirmationPurchasedTicketFare implements Parcelab
         @Override
         public BookingConfirmationPurchasedTicketFare createFromParcel(Parcel in) {
             return ImmutableBookingConfirmationPurchasedTicketFare.builder()
-                    .id(in.readString())
-                    .currency(in.readString())
-                    .description(in.readString())
-                    .name(in.readString())
-                    .price(in.readDouble())
-                    .build();
+                .id(in.readString())
+                .currency(in.readString())
+                .description(in.readString())
+                .name(in.readString())
+                .price(in.readDouble())
+                .build();
         }
 
         @Override
@@ -51,9 +51,11 @@ public abstract class BookingConfirmationPurchasedTicketFare implements Parcelab
     @Nullable
     public abstract String currency();
 
-    @Nullable public abstract String description();
+    @Nullable
+    public abstract String description();
 
-    @Nullable public abstract String name();
+    @Nullable
+    public abstract String name();
 
     public abstract Double price();
 

@@ -15,10 +15,11 @@
         <receiver
             android:name=".routing.TripAlarmBroadcastReceiver"
             android:enabled="true"
-            android:exported="true"></receiver>
+            android:exported="true" />
 
         <service
             android:name=".android.FetchRegionsService"
+            android:foregroundServiceType="location"
             android:exported="false">
             <intent-filter>
                 <action android:name="com.firebase.jobdispatcher.ACTION_EXECUTE" />

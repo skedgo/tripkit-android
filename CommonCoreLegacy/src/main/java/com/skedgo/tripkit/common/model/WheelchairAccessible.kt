@@ -1,9 +1,9 @@
 package com.skedgo.tripkit.common.model
 
 interface WheelchairAccessible {
-  val wheelchairAccessible: Boolean?
+    val wheelchairAccessible: Boolean?
 }
 
 interface BicycleAccessible {
-  val bicycleAccessible: Boolean?
+    val bicycleAccessible: Boolean?
 }

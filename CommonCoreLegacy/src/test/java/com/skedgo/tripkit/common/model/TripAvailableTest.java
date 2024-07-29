@@ -17,15 +17,16 @@ import static org.assertj.core.api.Java6Assertions.assertThat;
 
 @RunWith(RobolectricTestRunner.class)
 public class TripAvailableTest {
-  private Gson gson = new Gson();
+    private Gson gson = new Gson();
 
-  @Test public void shouldHaveNotAvailableTrip() throws IOException {
-    String tripJson = IOUtils.toString(getClass().
-        getResourceAsStream("/mydriver-london-example.json"), Charset.defaultCharset());
+    @Test
+    public void shouldHaveNotAvailableTrip() throws IOException {
+        String tripJson = IOUtils.toString(getClass().
+            getResourceAsStream("/mydriver-london-example.json"), Charset.defaultCharset());
 
-    Trip myDriverTrip = gson.fromJson(tripJson, Trip.class);
+        Trip myDriverTrip = gson.fromJson(tripJson, Trip.class);
 
-    assertThat(myDriverTrip).isNotNull();
-    assertThat(myDriverTrip.getAvailability()).isNotEqualTo(Availability.Available);
-  }
+        assertThat(myDriverTrip).isNotNull();
+        assertThat(myDriverTrip.getAvailability()).isNotEqualTo(Availability.Available);
+    }
 }

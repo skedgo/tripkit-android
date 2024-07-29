@@ -1,17 +1,15 @@
 package com.skedgo.tripkit.data.util
 
 import android.content.SharedPreferences
-import io.reactivex.BackpressureStrategy
-import io.reactivex.Flowable
 import io.reactivex.Observable
 
 typealias PreferenceKey = String
 
 fun SharedPreferences.onChanged(): Observable<PreferenceKey> = Observable
-    .create<PreferenceKey> {
+    .create { emitter ->
         val listener = SharedPreferences.OnSharedPreferenceChangeListener { _, preferenceKey ->
-            it.onNext(preferenceKey)
+            preferenceKey?.let { emitter.onNext(it) }
         }
         registerOnSharedPreferenceChangeListener(listener)
-        it.setCancellable { unregisterOnSharedPreferenceChangeListener(listener) }
+        emitter.setCancellable { unregisterOnSharedPreferenceChangeListener(listener) }
     }

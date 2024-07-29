@@ -6,43 +6,55 @@ import com.google.gson.annotations.SerializedName
 enum class RoadTag {
     @SerializedName("CYCLE-LANE")
     CYCLE_LANE,
+
     @SerializedName("CYCLE-TRACK")
     CYCLE_TRACK,
+
     @SerializedName("CYCLE-NETWORK")
     CYCLE_NETWORK,
+
     @SerializedName("BICYCLE-DESIGNATED")
     BICYCLE_DESIGNATED,
+
     @SerializedName("BICYCLE-BOULEVARD")
     BICYCLE_BOULEVARD,
+
     @SerializedName("SIDE-WALK")
     SIDE_WALK,
+
     @SerializedName("MAIN-ROAD")
     MAIN_ROAD,
+
     @SerializedName("SIDE-ROAD")
     SIDE_ROAD,
+
     @SerializedName("SHARED-ROAD")
     SHARED_ROAD,
+
     /* Ignored
     @SerializedName("SERVICE_ROAD")
     SERVICE_ROAD,
     */
     @SerializedName("STREET-LIGHT")
     STREET_LIGHT,
+
     @SerializedName("CCTV-CAMERA")
     CCTV_CAMERA,
+
     /* Ignored
     @SerializedName("SEGREGATED")
     SEGREGATED,
     */
     @SerializedName("UNKNOWN")
     UNKNOWN,
+
     @SerializedName("LIT-ROUTE")
     LIT_ROUTE
 }
 
 fun String.parseRoadTag(): RoadTag =
     try {
-        RoadTag.valueOf(this.replace("-","_"))
+        RoadTag.valueOf(this.replace("-", "_"))
     } catch (e: Exception) {
         RoadTag.UNKNOWN
     }
@@ -62,7 +74,7 @@ fun RoadTag.getRoadSafetyColorPair(): Pair<Int, Boolean> {
         RoadTag.SHARED_ROAD,
         RoadTag.STREET_LIGHT -> android.R.color.holo_blue_light to true
 
-        RoadTag.MAIN_ROAD-> Color.parseColor("#ffa500") to false
+        RoadTag.MAIN_ROAD -> Color.parseColor("#ffa500") to false
 
         else -> android.R.color.darker_gray to true
     }
@@ -83,7 +95,7 @@ fun RoadTag.getRoadSafetyColor(): Int {
         RoadTag.SHARED_ROAD,
         RoadTag.STREET_LIGHT -> Color.parseColor("#8080ff")
 
-        RoadTag.MAIN_ROAD, -> Color.parseColor("#ffa500")
+        RoadTag.MAIN_ROAD -> Color.parseColor("#ffa500")
 
         else -> Color.DKGRAY
     }
@@ -104,7 +116,7 @@ fun RoadTag.getRoadSafetyIndex(): Int {
         RoadTag.SHARED_ROAD,
         RoadTag.STREET_LIGHT -> 2
 
-        RoadTag.MAIN_ROAD, -> 3
+        RoadTag.MAIN_ROAD -> 3
 
         else -> 4
     }
@@ -120,7 +132,7 @@ fun RoadTag.getTextColor(): Int {
         RoadTag.CCTV_CAMERA,
         RoadTag.LIT_ROUTE,
         RoadTag.SIDE_ROAD,
-        /*RoadTag.SEGREGATED,*/
+            /*RoadTag.SEGREGATED,*/
         RoadTag.UNKNOWN,
         -> Color.WHITE
 

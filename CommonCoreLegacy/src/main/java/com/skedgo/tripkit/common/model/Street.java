@@ -3,19 +3,18 @@ package com.skedgo.tripkit.common.model;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-import androidx.annotation.Nullable;
-
 import com.google.gson.annotations.JsonAdapter;
-
 import com.google.gson.annotations.SerializedName;
 
 import org.immutables.value.Value;
 
+import java.util.List;
+
+import androidx.annotation.Nullable;
+
 import static org.immutables.gson.Gson.TypeAdapters;
 import static org.immutables.value.Value.Immutable;
 import static org.immutables.value.Value.Style;
-
-import java.util.List;
 
 @Immutable
 @TypeAdapters
@@ -26,13 +25,13 @@ public abstract class Street implements Parcelable {
         @Override
         public Street createFromParcel(Parcel in) {
             return ImmutableStreet.builder()
-                    .name(in.readString())
-                    .metres(in.readFloat())
-                    .encodedWaypoints(in.readString())
-                    .safe(in.readByte() == 1)
-                    .dismount(in.readByte() == 1)
-                    .roadTags(in.createStringArrayList())
-                    .build();
+                .name(in.readString())
+                .metres(in.readFloat())
+                .encodedWaypoints(in.readString())
+                .safe(in.readByte() == 1)
+                .dismount(in.readByte() == 1)
+                .roadTags(in.createStringArrayList())
+                .build();
         }
 
         @Override
@@ -62,17 +61,6 @@ public abstract class Street implements Parcelable {
 
     public abstract @Nullable List<String> roadTags();
 
-    public enum Instruction {
-        @SerializedName("HEAD_TOWARDS") HEAD_TOWARDS,
-        @SerializedName("CONTINUE_STRAIGHT") CONTINUE_STRAIGHT,
-        @SerializedName("TURN_SLIGHTLY_LEFT") TURN_SLIGHTLY_LEFT,
-        @SerializedName("TURN_LEFT") TURN_LEFT,
-        @SerializedName("TURN_SHARPLY_LEFT") TURN_SHARPLY_LEFT,
-        @SerializedName("TURN_SLIGHTLY_RIGHT") TURN_SLIGHTLY_RIGHT,
-        @SerializedName("TURN_RIGHT") TURN_RIGHT,
-        @SerializedName("TURN_SHARPLY_RIGHT") TURN_SHARPLY_RIGHT
-    }
-
     public abstract @Nullable Instruction instruction();
 
     @Override
@@ -88,5 +76,16 @@ public abstract class Street implements Parcelable {
         dest.writeByte((byte) (safe() ? 1 : 0));
         dest.writeByte((byte) (dismount() ? 1 : 0));
         dest.writeStringList(roadTags());
+    }
+
+    public enum Instruction {
+        @SerializedName("HEAD_TOWARDS") HEAD_TOWARDS,
+        @SerializedName("CONTINUE_STRAIGHT") CONTINUE_STRAIGHT,
+        @SerializedName("TURN_SLIGHTLY_LEFT") TURN_SLIGHTLY_LEFT,
+        @SerializedName("TURN_LEFT") TURN_LEFT,
+        @SerializedName("TURN_SHARPLY_LEFT") TURN_SHARPLY_LEFT,
+        @SerializedName("TURN_SLIGHTLY_RIGHT") TURN_SLIGHTLY_RIGHT,
+        @SerializedName("TURN_RIGHT") TURN_RIGHT,
+        @SerializedName("TURN_SHARPLY_RIGHT") TURN_SHARPLY_RIGHT
     }
 }

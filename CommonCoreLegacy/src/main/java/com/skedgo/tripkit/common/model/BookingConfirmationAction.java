@@ -3,11 +3,11 @@ package com.skedgo.tripkit.common.model;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-import androidx.annotation.Nullable;
-
 import com.google.gson.annotations.JsonAdapter;
 
 import java.util.ArrayList;
+
+import androidx.annotation.Nullable;
 
 import static org.immutables.gson.Gson.TypeAdapters;
 import static org.immutables.value.Value.Immutable;
@@ -32,14 +32,14 @@ public abstract class BookingConfirmationAction implements Parcelable {
         @Override
         public BookingConfirmationAction createFromParcel(Parcel in) {
             return ImmutableBookingConfirmationAction.builder()
-                    .internalURL(in.readString())
-                    .externalURL(in.readString())
-                    .isDestructive(in.readByte() != 0)
-                    .title(in.readString())
-                    .type(in.readString())
-                    .confirmationMessage(in.readString())
-                    .confirmation((BookingConfirmationActionConfirmation) in.readParcelable(BookingConfirmationActionConfirmation.class.getClassLoader()))
-                    .build();
+                .internalURL(in.readString())
+                .externalURL(in.readString())
+                .isDestructive(in.readByte() != 0)
+                .title(in.readString())
+                .type(in.readString())
+                .confirmationMessage(in.readString())
+                .confirmation((BookingConfirmationActionConfirmation) in.readParcelable(BookingConfirmationActionConfirmation.class.getClassLoader()))
+                .build();
         }
 
         @Override

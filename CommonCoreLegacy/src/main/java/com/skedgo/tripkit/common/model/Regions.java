@@ -2,13 +2,13 @@ package com.skedgo.tripkit.common.model;
 
 import android.os.Build;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-
 import java.util.ArrayList;
 import java.util.LinkedHashSet;
 import java.util.Objects;
 import java.util.Set;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
 public final class Regions {
     private Regions() {
@@ -24,8 +24,8 @@ public final class Regions {
 
     @NonNull
     public static Region createInterRegion(
-            @NonNull Region departureRegion,
-            @NonNull Region arrivalRegion) {
+        @NonNull Region departureRegion,
+        @NonNull Region arrivalRegion) {
         return new InterRegion(departureRegion, arrivalRegion);
     }
 
@@ -37,7 +37,7 @@ public final class Regions {
             final ArrayList<String> arrivalModeIds = arrivalRegion.getTransportModeIds();
             if (departureModeIds != null && arrivalModeIds != null) {
                 final Set<String> unionModeIds = new LinkedHashSet<>(
-                        departureModeIds.size() + arrivalModeIds.size() + 1
+                    departureModeIds.size() + arrivalModeIds.size() + 1
                 );
                 unionModeIds.add(TransportMode.ID_AIR);
                 unionModeIds.addAll(departureModeIds);
@@ -45,14 +45,14 @@ public final class Regions {
                 setTransportModeIds(new ArrayList<>(unionModeIds));
             } else if (departureModeIds != null) {
                 final Set<String> unionModeIds = new LinkedHashSet<>(
-                        departureModeIds.size() + 1
+                    departureModeIds.size() + 1
                 );
                 unionModeIds.add(TransportMode.ID_AIR);
                 unionModeIds.addAll(departureModeIds);
                 setTransportModeIds(new ArrayList<>(unionModeIds));
             } else if (arrivalModeIds != null) {
                 final Set<String> unionModeIds = new LinkedHashSet<>(
-                        arrivalModeIds.size() + 1
+                    arrivalModeIds.size() + 1
                 );
                 unionModeIds.add(TransportMode.ID_AIR);
                 unionModeIds.addAll(arrivalModeIds);
