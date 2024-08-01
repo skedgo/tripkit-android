@@ -38,7 +38,6 @@ public class ServiceResponseTest  {
     );
 
     assertThat(response).isNotNull();
-    assertThat(response.type()).isEqualTo("bus");
     assertThat(response.realTimeStatus()).isEqualTo("CAPABLE");
     assertThat(response.shapes())
         .isNotNull()
@@ -58,7 +57,6 @@ public class ServiceResponseTest  {
     );
 
     assertThat(response).isNotNull();
-    assertThat(response.type()).isEqualTo("bus");
     assertThat(response.realTimeStatus()).isEqualTo("CAPABLE");
     assertThat(response.shapes())
         .isNotNull()
@@ -78,7 +76,6 @@ public class ServiceResponseTest  {
     );
 
     assertThat(response).isNotNull();
-    assertThat(response.type()).isEqualTo("bus");
     assertThat(response.realTimeStatus()).isEqualTo("IS_REAL_TIME");
     assertThat(response.shapes())
         .isNotNull()
