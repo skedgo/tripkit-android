@@ -10,10 +10,12 @@ class ErrorHandlingInterceptor(
 ) : Interceptor {
     override fun intercept(chain: Interceptor.Chain): Response {
         val request = chain.request()
+        val url = request.url
         try {
+            val isRegionsEndpoint = url.encodedPath.contains("regions.json")
             val response = chain.proceed(request)
 
-            if (!response.isSuccessful) {
+            if (!response.isSuccessful && isRegionsEndpoint) {
                 if(response.code == 401) {
                     appDeactivatedListener?.invoke()
                 }

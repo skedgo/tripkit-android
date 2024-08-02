@@ -2,17 +2,15 @@ package com.skedgo.tripkit;
 
 import android.content.Context;
 
-import androidx.annotation.Nullable;
-
 import com.skedgo.tripkit.configuration.Key;
 import com.skedgo.tripkit.routing.ExtraQueryMapProvider;
 
-import io.reactivex.functions.Consumer;
-
 import org.immutables.value.Value;
-import org.joda.time.DateTime;
 
 import java.util.concurrent.Callable;
+
+import androidx.annotation.Nullable;
+import io.reactivex.functions.Consumer;
 
 public interface Configs {
     Context context();
@@ -63,16 +61,38 @@ public interface Configs {
 
     public boolean showReportProblemOnTripAction();
 
-    @Value.Default public default boolean hasTripLabels() { return false; }
+    @Value.Default
+    public default boolean hasTripLabels() {
+        return false;
+    }
 
     public boolean showOperatorNames();
 
-    @Value.Default public default boolean hasGetOffAlerts() { return true; }
+    @Value.Default
+    public default boolean hasGetOffAlerts() {
+        return true;
+    }
 
-    @Value.Default public default boolean hideFavorites() { return false;}
+    @Value.Default
+    public default boolean hideFavorites() {
+        return false;
+    }
 
-    @Value.Default public default boolean showGeofences() { return false;}
+    @Value.Default
+    public default boolean showGeofences() {
+        return false;
+    }
 
-    @Value.Default public default boolean hasInductionCards() { return false;}
+    @Value.Default
+    public default boolean hasInductionCards() {
+        return false;
+    }
 
+    @Value.Default
+    public default boolean favoritesServerSyncEnabled() {
+        return false;
+    }
+
+    @Nullable
+    public abstract Callable<String> userIdentifier();
 }
