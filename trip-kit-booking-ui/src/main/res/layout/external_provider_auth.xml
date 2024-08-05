@@ -1,6 +1,13 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.skedgo.tripkit.booking.ui.viewmodel.ExternalProviderAuthViewModel" />
+    </data>
+
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -28,11 +35,4 @@
             android:visibility="@{viewModel.showWebView}"
             app:url="@{viewModel.url}" />
     </RelativeLayout>
-
-    <data>
-
-        <variable
-            name="viewModel"
-            type="com.skedgo.tripkit.booking.ui.viewmodel.ExternalProviderAuthViewModel" />
-    </data>
 </layout>

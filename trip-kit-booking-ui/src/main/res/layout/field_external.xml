@@ -2,12 +2,19 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.skedgo.tripkit.booking.ui.viewmodel.FieldExternalViewModel" />
+    </data>
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="?attr/selectableItemBackground"
-        android:onClick="@{() -> viewModel.onExternalFormAction()}"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:onClick="@{() -> viewModel.onExternalFormAction()}">
 
         <TextView
             android:id="@+id/linkView"
@@ -27,12 +34,5 @@
             android:layout_height="1dp"
             android:background="@color/v4_divider" />
     </LinearLayout>
-
-    <data>
-
-        <variable
-            name="viewModel"
-            type="com.skedgo.tripkit.booking.ui.viewmodel.FieldExternalViewModel" />
-    </data>
 
 </layout>

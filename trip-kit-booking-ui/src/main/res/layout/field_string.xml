@@ -2,6 +2,13 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.skedgo.tripkit.booking.ui.viewmodel.FieldStringViewModel" />
+    </data>
+
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -11,18 +18,22 @@
         android:paddingTop="14dp"
         android:visibility="@{!viewModel.isHidden}">
 
-        <EditText
-            android:id="@+id/editText"
-            style="@style/Widget.AppCompat.EditText"
+        <TextView
+            android:id="@+id/sideTitleView"
+            fontPath="@string/font_regular"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_alignBottom="@+id/titleL"
             android:layout_alignParentRight="true"
+            android:layout_alignTop="@id/titleL"
             android:layout_toRightOf="@id/titleL"
-            android:hint="@{viewModel.title}"
-            android:inputType="@{viewModel.inputType()}"
-            android:onTextChanged="@{viewModel.onTextChanged}"
-            android:text="@{viewModel.editText}"
-            android:visibility="@{!viewModel.isReadOnly}" />
+            android:ellipsize="marquee"
+            android:gravity="center_vertical|right"
+            android:singleLine="false"
+            android:textColor="@color/v4_description_text"
+            android:textSize="14sp"
+            android:text="@{viewModel.sideTitle}"
+            tools:text="SideTitle" />
 
         <LinearLayout
             android:id="@id/titleL"
@@ -52,31 +63,20 @@
                 tools:text="Value" />
         </LinearLayout>
 
-        <TextView
-            android:id="@+id/sideTitleView"
-            fontPath="@string/font_regular"
+        <EditText
+            android:id="@+id/editText"
+            style="@style/Widget.AppCompat.EditText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_alignBottom="@+id/titleL"
             android:layout_alignParentRight="true"
-            android:layout_alignTop="@id/titleL"
             android:layout_toRightOf="@id/titleL"
-            android:ellipsize="marquee"
-            android:gravity="center_vertical|right"
-            android:singleLine="false"
-            android:text="@{viewModel.sideTitle}"
-            android:textColor="@color/v4_description_text"
-            android:textSize="14sp"
-            tools:text="SideTitle" />
+            android:inputType="@{viewModel.inputType()}"
+            android:hint="@{viewModel.title}"
+            android:text="@{viewModel.editText}"
+            android:visibility="@{!viewModel.isReadOnly}"
+            android:onTextChanged="@{viewModel.onTextChanged}" />
 
     </RelativeLayout>
-
-    <data>
-
-        <variable
-            name="viewModel"
-            type="com.skedgo.tripkit.booking.ui.viewmodel.FieldStringViewModel" />
-    </data>
 
 
 </layout>

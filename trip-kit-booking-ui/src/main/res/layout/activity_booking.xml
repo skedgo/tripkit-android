@@ -3,6 +3,15 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <data>
+
+        <import type="com.skedgo.tripkit.booking.ui.activity.BookingActivity" />
+
+        <variable
+            name="viewModel"
+            type="com.skedgo.tripkit.booking.ui.viewmodel.BookingFormViewModel" />
+    </data>
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -11,6 +20,16 @@
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent">
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_above="@+id/actionButton"
+                android:clipToPadding="false"
+                android:visibility="@{!viewModel.hasError}"
+                app:itemBinding="@{BookingActivity.bookingFormsView()}"
+                app:items="@{viewModel.items}"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
 
             <Button
                 android:id="@id/actionButton"
@@ -41,6 +60,24 @@
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="16dp"
                     android:src="@drawable/ic_tripboy_cry_dark" />
+
+                <TextView
+                    android:id="@+id/errorTitleView"
+                    style="@style/TextStyleTitle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="8dp"
+                    android:gravity="center_horizontal"
+                    android:text="@{viewModel.errorTitle}" />
+
+                <TextView
+                    android:id="@+id/errorMessageView"
+                    style="@style/TextStyleValue"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="8dp"
+                    android:gravity="center_horizontal"
+                    android:text="@{viewModel.errorMessage}" />
 
                 <LinearLayout
                     android:layout_width="wrap_content"
@@ -74,24 +111,6 @@
 
                 </LinearLayout>
 
-                <TextView
-                    android:id="@+id/errorMessageView"
-                    style="@style/TextStyleValue"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="8dp"
-                    android:gravity="center_horizontal"
-                    android:text="@{viewModel.errorMessage}" />
-
-                <TextView
-                    android:id="@+id/errorTitleView"
-                    style="@style/TextStyleTitle"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="8dp"
-                    android:gravity="center_horizontal"
-                    android:text="@{viewModel.errorTitle}" />
-
             </LinearLayout>
 
             <ProgressBar
@@ -99,26 +118,7 @@
                 android:layout_height="wrap_content"
                 android:layout_centerInParent="true"
                 android:visibility="@{viewModel.isLoading}" />
-
-            <androidx.recyclerview.widget.RecyclerView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_above="@+id/actionButton"
-                android:clipToPadding="false"
-                android:visibility="@{!viewModel.hasError}"
-                app:itemBinding="@{BookingActivity.bookingFormsView()}"
-                app:items="@{viewModel.items}"
-                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
         </RelativeLayout>
     </LinearLayout>
-
-    <data>
-
-        <import type="com.skedgo.tripkit.booking.ui.activity.BookingActivity" />
-
-        <variable
-            name="viewModel"
-            type="com.skedgo.tripkit.booking.ui.viewmodel.BookingFormViewModel" />
-    </data>
 </layout>
 
