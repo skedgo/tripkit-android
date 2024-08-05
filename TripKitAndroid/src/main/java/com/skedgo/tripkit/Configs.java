@@ -88,4 +88,11 @@ public interface Configs {
         return false;
     }
 
+    @Value.Default
+    public default boolean favoritesServerSyncEnabled() {
+        return false;
+    }
+
+    @Nullable
+    public abstract Callable<String> userIdentifier();
 }

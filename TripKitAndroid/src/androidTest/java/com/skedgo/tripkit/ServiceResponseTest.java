@@ -39,18 +39,17 @@ public class ServiceResponseTest {
             ServiceResponse.class
         );
 
-        assertThat(response).isNotNull();
-//    assertThat(response.type()).isEqualTo("bus");
-        assertThat(response.realTimeStatus()).isEqualTo("CAPABLE");
-        assertThat(response.shapes())
-            .isNotNull()
-            .hasSize(1)
-            .doesNotContainNull();
-        final Shape firstShape = response.shapes().get(0);
-        assertThat(firstShape.getStops())
-            .isNotNull()
-            .hasSize(26);
-    }
+    assertThat(response).isNotNull();
+    assertThat(response.realTimeStatus()).isEqualTo("CAPABLE");
+    assertThat(response.shapes())
+        .isNotNull()
+        .hasSize(1)
+        .doesNotContainNull();
+    final Shape firstShape = response.shapes().get(0);
+    assertThat(firstShape.getStops())
+        .isNotNull()
+        .hasSize(26);
+  }
 
     public void testUpdatedExample() throws IOException {
         final InputStream stream = context.getAssets().open("ServiceResponseTestStops.json");
@@ -59,18 +58,17 @@ public class ServiceResponseTest {
             ServiceResponse.class
         );
 
-        assertThat(response).isNotNull();
-//    assertThat(response.type()).isEqualTo("bus");
-        assertThat(response.realTimeStatus()).isEqualTo("CAPABLE");
-        assertThat(response.shapes())
-            .isNotNull()
-            .hasSize(1)
-            .doesNotContainNull();
-        final Shape firstShape = response.shapes().get(0);
-        assertThat(firstShape.getStops())
-            .isNotNull()
-            .hasSize(58);
-    }
+    assertThat(response).isNotNull();
+    assertThat(response.realTimeStatus()).isEqualTo("CAPABLE");
+    assertThat(response.shapes())
+        .isNotNull()
+        .hasSize(1)
+        .doesNotContainNull();
+    final Shape firstShape = response.shapes().get(0);
+    assertThat(firstShape.getStops())
+        .isNotNull()
+        .hasSize(58);
+  }
 
     public void testRealTimeVehicle() throws IOException {
         final InputStream stream = context.getAssets().open("ServiceResponseTestRealTime.json");
@@ -79,17 +77,16 @@ public class ServiceResponseTest {
             ServiceResponse.class
         );
 
-        assertThat(response).isNotNull();
-//    assertThat(response.type()).isEqualTo("bus");
-        assertThat(response.realTimeStatus()).isEqualTo("IS_REAL_TIME");
-        assertThat(response.shapes())
-            .isNotNull()
-            .hasSize(1)
-            .doesNotContainNull();
-        final Shape firstShape = response.shapes().get(0);
-        assertThat(firstShape.getStops())
-            .isNotNull()
-            .hasSize(41);
+    assertThat(response).isNotNull();
+    assertThat(response.realTimeStatus()).isEqualTo("IS_REAL_TIME");
+    assertThat(response.shapes())
+        .isNotNull()
+        .hasSize(1)
+        .doesNotContainNull();
+    final Shape firstShape = response.shapes().get(0);
+    assertThat(firstShape.getStops())
+        .isNotNull()
+        .hasSize(41);
 
         RealTimeVehicle vehicle = response.realtimeVehicle();
 
