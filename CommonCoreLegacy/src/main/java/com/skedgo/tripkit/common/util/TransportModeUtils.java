@@ -11,7 +11,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 public final class TransportModeUtils {
-    public static final String ICON_URL_TEMPLATE = ServerManager.INSTANCE.getConfiguration().getApiTripGoUrl() + "modeicons/android/%s/ic_transport_%s.png";
+    public static final String ICON_URL_TEMPLATE = ServerManager.INSTANCE.getConfiguration().getStaticTripGoUrl() + "icons/android/%s/ic_transport_%s.png";
 
     private TransportModeUtils() {
     }
