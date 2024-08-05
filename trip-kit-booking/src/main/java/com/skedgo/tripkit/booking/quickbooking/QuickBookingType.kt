@@ -24,7 +24,8 @@ annotation class QuickBookingType {
 
 fun String.getDefaultValueByType(
     title: String,
-    values: List<String>? = null
+    values: List<String>? = null,
+    defaultActionTitle: String? = null
 ): String {
     return when (this) {
         QuickBookingType.LONG_TEXT -> {
