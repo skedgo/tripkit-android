@@ -1,7 +1,6 @@
 package com.skedgo.rxlifecyclecomponents
 
 
-
 /**
  * Lifecycle events that can be emitted by Fragments.
  */

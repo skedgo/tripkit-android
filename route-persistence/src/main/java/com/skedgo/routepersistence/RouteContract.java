@@ -87,37 +87,37 @@ final class RouteContract {
         final DatabaseField availabilityInfo = new DatabaseField(COL_AVAILABILITY_INFO, "text");
         final DatabaseField moneyUsdCost = new DatabaseField(COL_MONEY_USD_COST, "real");
         final DatabaseTable tripGroups = new DatabaseTable(
-                TABLE_TRIP_GROUPS,
-                new DatabaseField[]{
-                        _id, requestId, uuid, frequency, displayTripId, isNotifiable, sources
-                },
-                UniqueIndices.of(TABLE_TRIP_GROUPS, requestId, uuid),
-                "CREATE TRIGGER deleteTrips AFTER DELETE ON " + TABLE_TRIP_GROUPS + " BEGIN " +
-                        "DELETE FROM " + TABLE_TRIPS + " WHERE " + groupId + " = old.uuid;" +
-                        "END;"
+            TABLE_TRIP_GROUPS,
+            new DatabaseField[]{
+                _id, requestId, uuid, frequency, displayTripId, isNotifiable, sources
+            },
+            UniqueIndices.of(TABLE_TRIP_GROUPS, requestId, uuid),
+            "CREATE TRIGGER deleteTrips AFTER DELETE ON " + TABLE_TRIP_GROUPS + " BEGIN " +
+                "DELETE FROM " + TABLE_TRIPS + " WHERE " + groupId + " = old.uuid;" +
+                "END;"
         );
         tripGroups.create(database);
 
-    final DatabaseTable trips = new DatabaseTable(
-        TABLE_TRIPS,
-        new DatabaseField[] {
-            _id, id, groupId, uuid,
-            currencySymbol, saveUrl, depart, arrive,
-            caloriesCost, moneyCost, carbonCost, hassleCost, weightedScore,
-            updateUrl, progressUrl, plannedUrl, tempUrl,
-            queryIsLeaveAfter, logUrl, shareUrl, mainSegmentHashCode, isHideExactTimes,
-            queryTime, subscribeUrl, unSubscribeUrl, availability, availabilityInfo, moneyUsdCost
-        },
-        UniqueIndices.of(TABLE_TRIPS, id, groupId, uuid),
-        "CREATE TRIGGER deleteSegments AFTER DELETE ON " + TABLE_TRIPS + " BEGIN " +
-            "DELETE FROM " + TABLE_SEGMENTS + " WHERE " + tripId + " = old.uuid;" +
-            "END;"
-    );
-    trips.create(database);
+        final DatabaseTable trips = new DatabaseTable(
+            TABLE_TRIPS,
+            new DatabaseField[]{
+                _id, id, groupId, uuid,
+                currencySymbol, saveUrl, depart, arrive,
+                caloriesCost, moneyCost, carbonCost, hassleCost, weightedScore,
+                updateUrl, progressUrl, plannedUrl, tempUrl,
+                queryIsLeaveAfter, logUrl, shareUrl, mainSegmentHashCode, isHideExactTimes,
+                queryTime, subscribeUrl, unSubscribeUrl, availability, availabilityInfo, moneyUsdCost
+            },
+            UniqueIndices.of(TABLE_TRIPS, id, groupId, uuid),
+            "CREATE TRIGGER deleteSegments AFTER DELETE ON " + TABLE_TRIPS + " BEGIN " +
+                "DELETE FROM " + TABLE_SEGMENTS + " WHERE " + tripId + " = old.uuid;" +
+                "END;"
+        );
+        trips.create(database);
 
         final DatabaseTable segments = new DatabaseTable(
-                TABLE_SEGMENTS,
-                new DatabaseField[]{_id, tripId, json}
+            TABLE_SEGMENTS,
+            new DatabaseField[]{_id, tripId, json}
         );
         segments.create(database);
     }

@@ -1,12 +1,12 @@
 package com.skedgo.routepersistence;
 
-import androidx.annotation.NonNull;
-
 import android.util.Pair;
 
 import com.skedgo.tripkit.routing.TripGroup;
 
 import java.util.concurrent.TimeUnit;
+
+import androidx.annotation.NonNull;
 
 import static com.skedgo.routepersistence.RouteContract.COL_ARRIVE;
 import static com.skedgo.routepersistence.RouteContract.COL_DISPLAY_TRIP_ID;
@@ -29,11 +29,11 @@ public final class WhereClauses {
      */
     public static Pair<String, String[]> happenedBefore(long hours, long currentMillis) {
         final String where = "EXISTS ("
-                + "SELECT * FROM " + TABLE_TRIPS
-                + " WHERE " + TABLE_TRIP_GROUPS + "." + COL_UUID + " = " + TABLE_TRIPS + "." + COL_GROUP_ID
-                + " AND " + TABLE_TRIP_GROUPS + "." + COL_DISPLAY_TRIP_ID + " = " + TABLE_TRIPS + "." + COL_ID
-                + " AND " + TABLE_TRIPS + "." + COL_ARRIVE + " < ?"
-                + ")";
+            + "SELECT * FROM " + TABLE_TRIPS
+            + " WHERE " + TABLE_TRIP_GROUPS + "." + COL_UUID + " = " + TABLE_TRIPS + "." + COL_GROUP_ID
+            + " AND " + TABLE_TRIP_GROUPS + "." + COL_DISPLAY_TRIP_ID + " = " + TABLE_TRIPS + "." + COL_ID
+            + " AND " + TABLE_TRIPS + "." + COL_ARRIVE + " < ?"
+            + ")";
         final long secs = TimeUnit.HOURS.toSeconds(hours);
         final long currentSecs = TimeUnit.MILLISECONDS.toSeconds(currentMillis);
         final String[] args = {String.valueOf(currentSecs - secs)};
@@ -44,25 +44,25 @@ public final class WhereClauses {
     public static Pair<String, String[]> removeTripGroupsHappenedBefore(long hours, long currentMillis) {
         long secs = TimeUnit.HOURS.toSeconds(hours);
         long currentSecs = TimeUnit.MILLISECONDS.toSeconds(currentMillis);
-        String[] args = new String[] { String.valueOf(currentSecs - secs) };
+        String[] args = new String[]{String.valueOf(currentSecs - secs)};
         String where = "EXISTS ("
-                + "SELECT * FROM " + TABLE_TRIPS
-                + " WHERE " + TABLE_TRIP_GROUPS + "." + COL_UUID + " = " + TABLE_TRIPS + "." + COL_GROUP_ID
-                + " AND " + TABLE_TRIPS + "." + COL_ARRIVE + " < ?"
-                + ")";
+            + "SELECT * FROM " + TABLE_TRIPS
+            + " WHERE " + TABLE_TRIP_GROUPS + "." + COL_UUID + " = " + TABLE_TRIPS + "." + COL_GROUP_ID
+            + " AND " + TABLE_TRIPS + "." + COL_ARRIVE + " < ?"
+            + ")";
         return new Pair<>(where, args);
     }
 
     // Remove all trips that doesn't have a group in tripGroups table
     public static Pair<String, String[]> removeTripsWithNoTripGroup() {
         String where = COL_GROUP_ID + " NOT IN (SELECT " + COL_UUID + " FROM " + TABLE_TRIP_GROUPS + ")";
-        return new Pair<>(where, new String[] {});
+        return new Pair<>(where, new String[]{});
     }
 
     // Remove all segments that doesn't have a trip in trips table
     public static Pair<String, String[]> removeSegmentsWithNoTrip() {
         String where = COL_TRIP_ID + " NOT IN (SELECT " + COL_UUID + " FROM " + TABLE_TRIPS + ")";
-        return new Pair<>(where, new String[] {});
+        return new Pair<>(where, new String[]{});
     }
 
     public static String getTripGroupsTable() {
