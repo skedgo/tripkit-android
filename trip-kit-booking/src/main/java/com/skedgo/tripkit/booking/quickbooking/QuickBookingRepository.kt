@@ -57,10 +57,7 @@ class QuickBookingRepository @Inject constructor(
                     Single.just(tickets)
                 }
             }.onErrorResumeNext {
-                // In case of an error, fetch the tickets from the database
-                ticketDao.getAllTicketsRx().map { tickets ->
-                    tickets.map { it.toTicket() }
-                }.onErrorResumeNext { Single.just(emptyList()) }
+                Single.just(emptyList())
             }
     }
 }
