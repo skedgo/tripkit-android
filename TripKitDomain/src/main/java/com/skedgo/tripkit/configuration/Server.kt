@@ -3,7 +3,7 @@ package com.skedgo.tripkit.configuration
 enum class DefaultServer(val value: String) {
     ApiTripGo("https://api.tripgo.com/v1/"),
     BigBang("https://galaxies.skedgo.com/lab/beta/satapp/"),
-    StaticTripGO("https://api.tripgo.com/v1/")
+    StaticTripGO("https://static.skedgo.com/")
 }
 
 open class ServerConfiguration(
