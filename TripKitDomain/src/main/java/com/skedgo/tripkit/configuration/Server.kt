@@ -2,12 +2,14 @@ package com.skedgo.tripkit.configuration
 
 enum class DefaultServer(val value: String) {
     ApiTripGo("https://api.tripgo.com/v1/"),
-    BigBang("https://galaxies.skedgo.com/lab/beta/satapp/")
+    BigBang("https://galaxies.skedgo.com/lab/beta/satapp/"),
+    StaticTripGO("https://static.skedgo.com/")
 }
 
 open class ServerConfiguration(
     var apiTripGoUrl: String = DefaultServer.ApiTripGo.value,
-    var bigBangUrl: String = DefaultServer.BigBang.value
+    var bigBangUrl: String = DefaultServer.BigBang.value,
+    var staticTripGoUrl: String = DefaultServer.StaticTripGO.value
 )
 
 /**
