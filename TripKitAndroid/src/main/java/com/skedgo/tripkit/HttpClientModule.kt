@@ -4,6 +4,7 @@ import android.content.Context
 import android.content.SharedPreferences
 import com.google.gson.Gson
 import com.haroldadmin.cnradapter.NetworkResponseAdapterFactory
+import com.instabug.library.okhttplogger.InstabugOkhttpInterceptor
 import com.skedgo.tripkit.configuration.AppVersionNameRepository
 import com.skedgo.tripkit.configuration.GetAppVersion
 import com.skedgo.tripkit.configuration.ServerManager
@@ -47,6 +48,7 @@ open class HttpClientModule(
             interceptor.level = HttpLoggingInterceptor.Level.BODY
             builder.addInterceptor(interceptor)
         }
+        builder.addInterceptor(InstabugOkhttpInterceptor())
         if (configs.baseUrlAdapterFactory() != null) {
             try {
                 builder.addInterceptor(BaseUrlOverridingInterceptor(configs.baseUrlAdapterFactory()!!))
