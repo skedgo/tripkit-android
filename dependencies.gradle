@@ -30,7 +30,7 @@ versions.glide = "4.11.0"
 versions.tripGoLibrary = "1.0"
 versions.tripGoGroup = "com.skedgo"
 versions.javaxAnnotation = "1.3.2"
-versions.instabug = '11.11.0'
+versions.instabug = '13.0.1'
 versions.paging = "3.0.0"
 versions.viewPager2 = "1.0.0"
 versions.mockk = "1.13.8"
@@ -55,6 +55,7 @@ libs.jodaTimeAndroid = "net.danlew:android.joda:2.10.6"
 libs.androidJob = "com.evernote:android-job:1.2.6"
 libs.javaxAnnotation = "javax.annotation:javax.annotation-api:$versions.javaxAnnotation"
 libs.instabug = "com.instabug.library:instabug:$versions.instabug"
+libs.instabugInterceptor = "com.instabug.library:instabug-with-okhttp-interceptor:$versions.instabug"
 libs.mockk = "io.mockk:mockk:$versions.mockk"
 
 // Support Library package

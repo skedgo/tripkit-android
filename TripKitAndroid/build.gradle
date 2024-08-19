@@ -115,6 +115,7 @@ dependencies {
   implementation libs.map_utils_ktx
   implementation libs.map_extension
   implementation libs.location
+  implementation libs.instabugInterceptor
 
   testImplementation libs.mockk
 
