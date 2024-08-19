@@ -1,5 +1,7 @@
 package com.skedgo.tripkit.common.model;
 
+import android.os.Build.VERSION;
+import android.os.Build.VERSION_CODES;
 import android.os.Parcel;
 import android.os.Parcelable;
 import android.text.TextUtils;
@@ -33,7 +35,7 @@ public abstract class BookingConfirmationInputNew implements Parcelable {
 
             return ImmutableBookingConfirmationInputNew.builder()
                 .id(in.readString())
-                .required(in.readBoolean())
+                .required( VERSION.SDK_INT >= VERSION_CODES.Q ? in.readBoolean() : in.readByte() != 0)
                 .title(in.readString())
                 .type(in.readString())
                 .options(options)
@@ -50,13 +52,13 @@ public abstract class BookingConfirmationInputNew implements Parcelable {
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
+        dest.writeTypedList(options());
+        dest.writeStringList(values());
         dest.writeString(id());
         dest.writeByte((byte) (required() ? 1 : 0));
         dest.writeString(title());
         dest.writeString(type());
-        dest.writeTypedList(options());
         dest.writeString(value());
-        dest.writeStringList(values());
     }
 
     @Override

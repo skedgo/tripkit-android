@@ -1,15 +1,18 @@
 package com.skedgo.tripkit.common.model
 
+import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.google.gson.Gson
 import com.skedgo.tripkit.common.BaseUnitTest
 import com.skedgo.tripkit.common.R
+import com.skedgo.tripkit.routing.ServiceColor
 import org.amshove.kluent.shouldEqualTo
 import org.assertj.core.api.Java6Assertions.assertThat
 import org.junit.Test
-import com.skedgo.tripkit.routing.ServiceColor
-import java.util.*
+import org.junit.runner.RunWith
+import java.util.Arrays
 
 @Suppress("IllegalIdentifier")
+@RunWith(AndroidJUnit4::class)
 class TransportModeTest : BaseUnitTest() {
     @Test
     fun `should associate bike-share icon with id starting with "cy_bic-s"`() {

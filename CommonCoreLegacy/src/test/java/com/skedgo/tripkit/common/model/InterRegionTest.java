@@ -2,17 +2,18 @@ package com.skedgo.tripkit.common.model;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.robolectric.RobolectricTestRunner;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+
+import androidx.test.ext.junit.runners.AndroidJUnit4;
 
 import static org.assertj.core.api.Java6Assertions.assertThat;
 
 /**
  * @see <a href="https://redmine.buzzhives.com/projects/buzzhives/wiki/Inter-city_routing">Inter-city routing</a>
  */
-@RunWith(RobolectricTestRunner.class)
+@RunWith(AndroidJUnit4.class)
 public class InterRegionTest {
     @Test
     public void shouldUnionModesFromDepartureRegionAndArrivalRegion() {

@@ -1,9 +1,12 @@
 package com.skedgo.tripkit.routing
 
+import androidx.test.ext.junit.runners.AndroidJUnit4
 import org.amshove.kluent.`should be false`
 import org.amshove.kluent.`should be true`
 import org.junit.Test
+import org.junit.runner.RunWith
 
+@RunWith(AndroidJUnit4::class)
 class TripGroupExtensionsKtTest {
 
     @Test

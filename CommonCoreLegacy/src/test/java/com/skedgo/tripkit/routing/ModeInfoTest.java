@@ -12,9 +12,11 @@ import org.robolectric.RobolectricTestRunner;
 
 import java.util.Comparator;
 
+import androidx.test.ext.junit.runners.AndroidJUnit4;
+
 import static org.assertj.core.api.Java6Assertions.assertThat;
 
-@RunWith(RobolectricTestRunner.class)
+@RunWith(AndroidJUnit4.class)
 public class ModeInfoTest {
     @Test
     public void parcel() {
