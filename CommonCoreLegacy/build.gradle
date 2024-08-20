@@ -16,6 +16,12 @@ android {
         minSdkVersion versions.proMinSdkVersion
         targetSdkVersion versions.targetSdkVersion
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+
+        javaCompileOptions {
+            annotationProcessorOptions {
+                arguments += ["room.schemaLocation": "$projectDir/schemas".toString()]
+            }
+        }
     }
 
     testOptions {
@@ -65,6 +71,13 @@ dependencies {
     testImplementation libs.mockitoCore
     testImplementation libs.kluent
     testImplementation libs.androidxTesting
+
+    testImplementation libs.mockk
+    testImplementation libs.androidxJUnitExtTesting
+    testImplementation libs.archCoreTesting
+    testImplementation libs.coroutinesTest
+    testImplementation libs.bindingCollectionAdapter
+    testImplementation libs.jodaTimeTzdb
 
     implementation libs.supportAnnotations
     implementation libs.jodaTimeAndroid
