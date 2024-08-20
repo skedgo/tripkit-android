@@ -6,13 +6,14 @@ import com.skedgo.tripkit.common.util.Gsons;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.robolectric.RobolectricTestRunner;
 
 import com.skedgo.tripkit.routing.ModeInfo;
 
+import androidx.test.ext.junit.runners.AndroidJUnit4;
+
 import static org.assertj.core.api.Java6Assertions.*;
 
-@RunWith(RobolectricTestRunner.class)
+@RunWith(AndroidJUnit4.class)
 public class ScheduledStopTest {
     @Test
     public void parseFromJson() {

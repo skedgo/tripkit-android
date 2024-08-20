@@ -1,5 +1,6 @@
 package com.skedgo.tripkit.common.rx;
 
+import androidx.test.ext.junit.runners.AndroidJUnit4;
 import io.reactivex.subjects.Subject;
 import io.reactivex.subscribers.TestSubscriber;
 
@@ -12,7 +13,7 @@ import java.util.Arrays;
 import static java.util.Collections.singletonList;
 import static org.assertj.core.api.Java6Assertions.assertThat;
 
-@RunWith(RobolectricTestRunner.class)
+@RunWith(AndroidJUnit4.class)
 public class VarTest {
     @Test
     public void shouldNotEmitValueIfNoDefaultValue() {

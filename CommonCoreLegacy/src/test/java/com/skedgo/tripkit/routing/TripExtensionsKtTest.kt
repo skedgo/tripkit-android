@@ -1,19 +1,17 @@
 package com.skedgo.tripkit.routing
 
 import android.content.Context
-import android.content.res.Resources
+import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.nhaarman.mockitokotlin2.mock
-import com.skedgo.tripkit.common.R
 import com.skedgo.tripkit.common.model.Location
-import org.amshove.kluent.When
 import org.amshove.kluent.`should be equal to`
-import org.amshove.kluent.calling
-import org.amshove.kluent.itReturns
 import org.assertj.core.api.Java6Assertions.assertThat
 import org.joda.time.DateTime
 import org.joda.time.DateTimeZone
 import org.junit.Test
+import org.junit.runner.RunWith
 
+@RunWith(AndroidJUnit4::class)
 class TripExtensionsKtTest {
     @Test
     fun shouldReturnZonedStartDateTimeWithDepartureLocationTimeZone() {

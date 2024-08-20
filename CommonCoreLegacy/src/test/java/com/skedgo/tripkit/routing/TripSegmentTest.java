@@ -11,15 +11,16 @@ import com.skedgo.tripkit.common.util.LowercaseEnumTypeAdapterFactory;
 import org.apache.commons.io.IOUtils;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.robolectric.RobolectricTestRunner;
 
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Random;
 
+import androidx.test.ext.junit.runners.AndroidJUnit4;
+
 import static org.assertj.core.api.Java6Assertions.assertThat;
 
-@RunWith(RobolectricTestRunner.class)
+@RunWith(AndroidJUnit4.class)
 public class TripSegmentTest {
     @Test
     public void shouldDefineCorrectSerializedNames() {

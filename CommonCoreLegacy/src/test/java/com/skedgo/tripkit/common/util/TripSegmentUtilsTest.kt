@@ -1,16 +1,15 @@
 package com.skedgo.tripkit.common.util
 
 import androidx.test.core.app.ApplicationProvider
+import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.nhaarman.mockitokotlin2.mock
 import com.nhaarman.mockitokotlin2.whenever
+import com.skedgo.tripkit.routing.TripSegment
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.Test
 import org.junit.runner.RunWith
-import org.robolectric.RobolectricTestRunner
-import com.skedgo.tripkit.routing.TripSegment
 
-/*
-@RunWith(RobolectricTestRunner::class)
+@RunWith(AndroidJUnit4::class)
 class TripSegmentUtilsTest {
 
   @Test
@@ -22,8 +21,8 @@ class TripSegmentUtilsTest {
     whenever(segment.endTimeInSecs).thenReturn(1060)
     val action = TripSegmentUtils.getTripSegmentAction(ApplicationProvider.getApplicationContext(), segment)
 
-    assertThat(action).isEqualTo("Ride Taxi for 1min")
+    assertThat(action).isEqualTo("Ride Taxi for 1mins")
 
   }
 
-}*/
+}

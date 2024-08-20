@@ -4,6 +4,8 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.robolectric.RobolectricTestRunner;
 
+import androidx.test.ext.junit.runners.AndroidJUnit4;
+
 import static org.assertj.core.api.Java6Assertions.assertThat;
 import static com.skedgo.tripkit.routing.VehicleMode.AEROPLANE;
 import static com.skedgo.tripkit.routing.VehicleMode.BICYCLE;
@@ -29,7 +31,7 @@ import static com.skedgo.tripkit.routing.VehicleMode.TRAM;
 import static com.skedgo.tripkit.routing.VehicleMode.WALK;
 import static com.skedgo.tripkit.routing.VehicleMode.from;
 
-@RunWith(RobolectricTestRunner.class)
+@RunWith(AndroidJUnit4.class)
 public class VehicleModeTest {
     @Test
     public void defineLocalTransportIcons() {

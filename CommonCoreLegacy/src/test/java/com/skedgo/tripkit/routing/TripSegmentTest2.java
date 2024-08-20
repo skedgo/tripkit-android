@@ -13,6 +13,7 @@ import org.robolectric.RobolectricTestRunner;
 import java.util.concurrent.TimeUnit;
 
 import androidx.test.core.app.ApplicationProvider;
+import androidx.test.ext.junit.runners.AndroidJUnit4;
 
 import static junit.framework.Assert.assertFalse;
 import static junit.framework.Assert.assertTrue;
@@ -22,7 +23,7 @@ import static com.skedgo.tripkit.routing.Visibilities.VISIBILITY_IN_DETAILS;
 import static com.skedgo.tripkit.routing.Visibilities.VISIBILITY_IN_SUMMARY;
 import static com.skedgo.tripkit.routing.Visibilities.VISIBILITY_ON_MAP;
 
-@RunWith(RobolectricTestRunner.class)
+@RunWith(AndroidJUnit4.class)
 public class TripSegmentTest2 {
     private Context context;
 

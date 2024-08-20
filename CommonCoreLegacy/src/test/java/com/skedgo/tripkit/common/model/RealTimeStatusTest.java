@@ -2,7 +2,8 @@ package com.skedgo.tripkit.common.model;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.robolectric.RobolectricTestRunner;
+
+import androidx.test.ext.junit.runners.AndroidJUnit4;
 
 import static com.skedgo.tripkit.common.model.RealTimeStatus.CAPABLE;
 import static com.skedgo.tripkit.common.model.RealTimeStatus.INCAPABLE;
@@ -10,7 +11,7 @@ import static com.skedgo.tripkit.common.model.RealTimeStatus.IS_REAL_TIME;
 import static com.skedgo.tripkit.common.model.RealTimeStatus.from;
 import static org.assertj.core.api.Java6Assertions.assertThat;
 
-@RunWith(RobolectricTestRunner.class)
+@RunWith(AndroidJUnit4.class)
 public class RealTimeStatusTest {
     @Test
     public void shouldConvertIntoCapable() {

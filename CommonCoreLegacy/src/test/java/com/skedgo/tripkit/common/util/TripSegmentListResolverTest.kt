@@ -2,18 +2,18 @@ package com.skedgo.tripkit.common.util
 
 import android.content.Context
 import androidx.test.core.app.ApplicationProvider
-import org.assertj.core.api.Java6Assertions.assertThat
-import org.joda.time.DateTime
-import org.junit.Test
-import org.junit.runner.RunWith
-import org.robolectric.RobolectricTestRunner
+import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.skedgo.tripkit.routing.SegmentType
 import com.skedgo.tripkit.routing.TripSegment
 import com.skedgo.tripkit.routing.Visibilities.VISIBILITY_IN_DETAILS
 import com.skedgo.tripkit.routing.Visibilities.VISIBILITY_ON_MAP
 import com.skedgo.tripkit.routing.toSeconds
+import org.assertj.core.api.Java6Assertions.assertThat
+import org.joda.time.DateTime
+import org.junit.Test
+import org.junit.runner.RunWith
 
-@RunWith(RobolectricTestRunner::class)
+@RunWith(AndroidJUnit4::class)
 class TripSegmentListResolverTest {
     private val resolver by lazy {
         TripSegmentListResolver(ApplicationProvider.getApplicationContext<Context>().resources)
