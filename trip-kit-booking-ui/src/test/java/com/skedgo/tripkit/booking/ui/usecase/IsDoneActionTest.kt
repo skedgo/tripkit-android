@@ -11,61 +11,65 @@ import org.junit.Test
 import org.mockito.BDDMockito.given
 
 class IsDoneActionTest {
-  val isCancelAction: IsCancelAction = mock()
-  val isDoneAction: IsDoneAction by lazy {
-    IsDoneAction(isCancelAction)
-  }
+    val isCancelAction: IsCancelAction = mock()
+    val isDoneAction: IsDoneAction by lazy {
+        IsDoneAction(isCancelAction)
+    }
 
-  @Test fun shouldBeDoneActionNull() {
+    @Test
+    fun shouldBeDoneActionNull() {
 
-    val actualIsDoneAction = isDoneAction.execute(null)
-    assertThat(actualIsDoneAction).isTrue()
-  }
+        val actualIsDoneAction = isDoneAction.execute(null)
+        assertThat(actualIsDoneAction).isTrue()
+    }
 
-  @Test fun shouldBeDoneUrlNull() {
+    @Test
+    fun shouldBeDoneUrlNull() {
 
-    val bookingForm = mock<BookingForm>()
-    val action = mock<BookingAction>()
-    whenever(action.url).thenReturn(null)
-    whenever(bookingForm.action).thenReturn(action)
+        val bookingForm = mock<BookingForm>()
+        val action = mock<BookingAction>()
+        whenever(action.url).thenReturn(null)
+        whenever(bookingForm.action).thenReturn(action)
 
-    val actualIsDoneAction = isDoneAction.execute(bookingForm)
-    assertThat(actualIsDoneAction).isTrue()
-  }
+        val actualIsDoneAction = isDoneAction.execute(bookingForm)
+        assertThat(actualIsDoneAction).isTrue()
+    }
 
-  @Test fun shouldNotBeDoneCancel() {
+    @Test
+    fun shouldNotBeDoneCancel() {
 
-    val bookingForm = mock<BookingForm>()
-    val action = mock<BookingAction>()
-    whenever(action.url).thenReturn("url")
-    whenever(bookingForm.action).thenReturn(action)
-    val formGroup = mock<FormGroup>()
-    val formField = mock<FormField>()
-    whenever(formField.value).thenReturn("Cancelled")
-    whenever(bookingForm.form).thenReturn(listOf(formGroup))
-    whenever(formGroup.fields).thenReturn(listOf(formField))
+        val bookingForm = mock<BookingForm>()
+        val action = mock<BookingAction>()
+        whenever(action.url).thenReturn("url")
+        whenever(bookingForm.action).thenReturn(action)
+        val formGroup = mock<FormGroup>()
+        val formField = mock<FormField>()
+        whenever(formField.value).thenReturn("Cancelled")
+        whenever(bookingForm.form).thenReturn(listOf(formGroup))
+        whenever(formGroup.fields).thenReturn(listOf(formField))
 
-    given(isCancelAction.execute(bookingForm)).willReturn(true)
+        given(isCancelAction.execute(bookingForm)).willReturn(true)
 
-    val actualIsDoneAction = isDoneAction.execute(bookingForm)
-    assertThat(actualIsDoneAction).isFalse()
-  }
+        val actualIsDoneAction = isDoneAction.execute(bookingForm)
+        assertThat(actualIsDoneAction).isFalse()
+    }
 
-  @Test fun shouldBeDoneAction() {
+    @Test
+    fun shouldBeDoneAction() {
 
-    val bookingForm = mock<BookingForm>()
-    val action = mock<BookingAction>()
-    whenever(action.url).thenReturn(null)
-    whenever(bookingForm.action).thenReturn(action)
-    val formGroup = mock<FormGroup>()
-    val formField = mock<FormField>()
-    whenever(formField.value).thenReturn("any action")
-    whenever(bookingForm.form).thenReturn(listOf(formGroup))
-    whenever(formGroup.fields).thenReturn(listOf(formField))
+        val bookingForm = mock<BookingForm>()
+        val action = mock<BookingAction>()
+        whenever(action.url).thenReturn(null)
+        whenever(bookingForm.action).thenReturn(action)
+        val formGroup = mock<FormGroup>()
+        val formField = mock<FormField>()
+        whenever(formField.value).thenReturn("any action")
+        whenever(bookingForm.form).thenReturn(listOf(formGroup))
+        whenever(formGroup.fields).thenReturn(listOf(formField))
 
-    given(isCancelAction.execute(bookingForm)).willReturn(false)
+        given(isCancelAction.execute(bookingForm)).willReturn(false)
 
-    val actualIsDoneAction = isDoneAction.execute(bookingForm)
-    assertThat(actualIsDoneAction).isTrue()
-  }
+        val actualIsDoneAction = isDoneAction.execute(bookingForm)
+        assertThat(actualIsDoneAction).isTrue()
+    }
 }

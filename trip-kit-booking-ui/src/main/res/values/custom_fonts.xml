@@ -1,7 +1,7 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="MissingTranslation">
-  <string name="font_medium">@string/robotoMedium</string>
-  <string name="font_regular">@string/robotoRegular</string>
-  <string name="font_light">@string/robotoLight</string>
-  <string name="font_bold">@string/robotoBold</string>
+    <string name="font_medium">@string/robotoMedium</string>
+    <string name="font_regular">@string/robotoRegular</string>
+    <string name="font_light">@string/robotoLight</string>
+    <string name="font_bold">@string/robotoBold</string>
 </resources>

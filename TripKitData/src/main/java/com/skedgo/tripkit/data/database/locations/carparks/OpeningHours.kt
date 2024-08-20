@@ -10,5 +10,5 @@ import org.immutables.value.Value
 @Value.Style(passAnnotations = [JsonAdapter::class])
 @JsonAdapter(GsonAdaptersOpeningHours::class)
 interface OpeningHours {
-  fun days(): List<OpeningDay>
+    fun days(): List<OpeningDay>
 }

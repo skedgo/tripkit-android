@@ -8,139 +8,139 @@ apply plugin: 'kotlin-parcelize'
 
 android {
 
-  namespace 'skedgo.tripkit.data'
+    namespace 'skedgo.tripkit.data'
 
-  compileSdkVersion versions.compileSdkVersion
+    compileSdkVersion versions.compileSdkVersion
 
-  defaultConfig {
-    minSdkVersion versions.proMinSdkVersion
-    targetSdkVersion versions.targetSdkVersion
+    defaultConfig {
+        minSdkVersion versions.proMinSdkVersion
+        targetSdkVersion versions.targetSdkVersion
 
-    javaCompileOptions {
-      annotationProcessorOptions {
-        arguments += ["room.schemaLocation": "$projectDir/schemas".toString()]
-      }
+        javaCompileOptions {
+            annotationProcessorOptions {
+                arguments += ["room.schemaLocation": "$projectDir/schemas".toString()]
+            }
+        }
     }
-  }
 
-  buildTypes {
-    staging {
-      debuggable true
+    buildTypes {
+        staging {
+            debuggable true
+        }
     }
-  }
 
-  lintOptions {
-    // Changing to warning because of https://github.com/square/okio/issues/58.
-    warning "InvalidPackage"
-  }
-  compileOptions {
-    sourceCompatibility JavaVersion.VERSION_17
-    targetCompatibility JavaVersion.VERSION_17
-  }
-
-  kotlinOptions {
-    jvmTarget = JavaVersion.VERSION_17.toString()
-  }
-
-  publishing {
-    singleVariant("release") {
-      // if you don't want sources/javadoc, remove these lines
-      withSourcesJar()
-      withJavadocJar()
+    lintOptions {
+        // Changing to warning because of https://github.com/square/okio/issues/58.
+        warning "InvalidPackage"
     }
-  }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_17
+        targetCompatibility JavaVersion.VERSION_17
+    }
+
+    kotlinOptions {
+        jvmTarget = JavaVersion.VERSION_17.toString()
+    }
+
+    publishing {
+        singleVariant("release") {
+            // if you don't want sources/javadoc, remove these lines
+            withSourcesJar()
+            withJavadocJar()
+        }
+    }
 }
 
 dependencies {
-  testImplementation libs.junit
-  testImplementation libs.assertjCore
-  testImplementation libs.mockitoCore
-  testImplementation libs.mockitoKotlin, { exclude group: "org.jetbrains.kotlin" }
-  testImplementation libs.mockWebServer
-  testImplementation libs.kluent
-  testImplementation libs.robolectric
-  testImplementation libs.androidxTesting
-  testImplementation libs.androidxJUnitExtTesting
+    testImplementation libs.junit
+    testImplementation libs.assertjCore
+    testImplementation libs.mockitoCore
+    testImplementation libs.mockitoKotlin, {exclude group: "org.jetbrains.kotlin"}
+    testImplementation libs.mockWebServer
+    testImplementation libs.kluent
+    testImplementation libs.robolectric
+    testImplementation libs.androidxTesting
+    testImplementation libs.androidxJUnitExtTesting
 
-  implementation 'com.github.skedgo:commons-collections:v1.0'
+    implementation 'com.github.skedgo:commons-collections:v1.0'
 
-  debugImplementation project(":CommonCoreLegacy")
-  stagingImplementation project(":CommonCoreLegacy")
-  releaseImplementation project(":CommonCoreLegacy")
+    debugImplementation project(":CommonCoreLegacy")
+    stagingImplementation project(":CommonCoreLegacy")
+    releaseImplementation project(":CommonCoreLegacy")
 
-  debugImplementation project(":TripKitDomain")
-  stagingImplementation project(":TripKitDomain")
-  releaseImplementation project(":TripKitDomain")
+    debugImplementation project(":TripKitDomain")
+    stagingImplementation project(":TripKitDomain")
+    releaseImplementation project(":TripKitDomain")
 
-  debugImplementation project(":TripKitDomainLegacy")
-  stagingImplementation project(":TripKitDomainLegacy")
-  releaseImplementation project(":TripKitDomainLegacy")
+    debugImplementation project(":TripKitDomainLegacy")
+    stagingImplementation project(":TripKitDomainLegacy")
+    releaseImplementation project(":TripKitDomainLegacy")
 
-  debugApi project(":route-persistence")
-  stagingApi project(":route-persistence")
-  releaseApi project(":route-persistence")
+    debugApi project(":route-persistence")
+    stagingApi project(":route-persistence")
+    releaseApi project(":route-persistence")
 
-  implementation libs.dagger
-  implementation libs.rxjava2
-  implementation libs.rxAndroid2
-  implementation libs.rxrelay2
-  implementation libs.jodaTimeAndroid
-  implementation libs.retrofitConverterGson
-  implementation libs.retrofitAdapterRxJava
-  implementation libs.retrofit
-  implementation libs.supportAnnotations
-  implementation libs.koptional
+    implementation libs.dagger
+    implementation libs.rxjava2
+    implementation libs.rxAndroid2
+    implementation libs.rxrelay2
+    implementation libs.jodaTimeAndroid
+    implementation libs.retrofitConverterGson
+    implementation libs.retrofitAdapterRxJava
+    implementation libs.retrofit
+    implementation libs.supportAnnotations
+    implementation libs.koptional
 
-  implementation libs.roomRuntime
-  annotationProcessor libs.roomCompiler
-  kapt libs.roomCompiler
-  implementation libs.roomRxjava2
-  implementation libs.roomKtx
+    implementation libs.roomRuntime
+    annotationProcessor libs.roomCompiler
+    kapt libs.roomCompiler
+    implementation libs.roomRxjava2
+    implementation libs.roomKtx
 
-  kapt libs.daggerCompiler
-  implementation libs.daggerAndroidSupport
-  annotationProcessor libs.daggerCompiler
-  annotationProcessor libs.daggerAndroidProcessor
+    kapt libs.daggerCompiler
+    implementation libs.daggerAndroidSupport
+    annotationProcessor libs.daggerCompiler
+    annotationProcessor libs.daggerAndroidProcessor
 
-  implementation libs.value
-  implementation libs.kotlin
-  implementation libs.gson
-  implementation libs.immutablesGson
+    implementation libs.value
+    implementation libs.kotlin
+    implementation libs.gson
+    implementation libs.immutablesGson
 
-  kapt libs.value
-  annotationProcessor libs.value
+    kapt libs.value
+    annotationProcessor libs.value
 
-  kapt libs.gson
-  annotationProcessor libs.gson
+    kapt libs.gson
+    annotationProcessor libs.gson
 
-  kapt libs.valueAnnotations
-  compileOnly libs.valueAnnotations
+    kapt libs.valueAnnotations
+    compileOnly libs.valueAnnotations
 
-  kapt libs.builderAnnotations
-  compileOnly libs.builderAnnotations
+    kapt libs.builderAnnotations
+    compileOnly libs.builderAnnotations
 
-  kapt libs.immutablesGson
-  annotationProcessor libs.immutablesGson
+    kapt libs.immutablesGson
+    annotationProcessor libs.immutablesGson
 
-  //compileOnly libs.valueAnnotations
-  //compileOnly libs.builderAnnotations
+    //compileOnly libs.valueAnnotations
+    //compileOnly libs.builderAnnotations
 
-  implementation libs.javaxAnnotation
-  compileOnly 'com.github.pengrad:jdk9-deps:1.0'
+    implementation libs.javaxAnnotation
+    compileOnly 'com.github.pengrad:jdk9-deps:1.0'
 
-  debugApi project(':sqliteutils')
-  stagingApi project(':sqliteutils')
-  releaseApi project(':sqliteutils')
+    debugApi project(':sqliteutils')
+    stagingApi project(':sqliteutils')
+    releaseApi project(':sqliteutils')
 }
 
 kapt {
-  correctErrorTypes = true
+    correctErrorTypes = true
 }
 
 // build a jar with source files
 task sourcesJar(type: Jar) {
-  from android.sourceSets.main.java.srcDirs
-  archiveClassifier.set('sources')
+    from android.sourceSets.main.java.srcDirs
+    archiveClassifier.set('sources')
 }
 
 task javadoc(type: Javadoc) {
@@ -155,57 +155,57 @@ task javadoc(type: Javadoc) {
 
 // build a jar with javadoc
 task javadocJar(type: Jar, dependsOn: javadoc) {
-  archiveClassifier.set('javadoc')
-  from javadoc.destinationDir
+    archiveClassifier.set('javadoc')
+    from javadoc.destinationDir
 }
 
 artifacts {
-  archives sourcesJar
-  archives javadocJar
+    archives sourcesJar
+    archives javadocJar
 }
 
 group = tripkitGroup
 version = tripkitVersion
 
 publishing {
-  repositories {
-    maven {
-      url = "file://${localMaven}"
+    repositories {
+        maven {
+            url = "file://${localMaven}"
 //      url = publishMavenUrl
-      credentials {
-        username = publishMavenUsername
-        password = publishMavenToken
-      }
+            credentials {
+                username = publishMavenUsername
+                password = publishMavenToken
+            }
+        }
     }
-  }
 
-  publications {
-    release(MavenPublication) {
-      groupId = group
-      version = version
-      artifactId = 'TripKitData'
-      afterEvaluate {
-        from components.release
-      }
-      pom {
-        licenses {
-          license {
-            name = 'Commercial'
-          }
+    publications {
+        release(MavenPublication) {
+            groupId = group
+            version = version
+            artifactId = 'TripKitData'
+            afterEvaluate {
+                from components.release
+            }
+            pom {
+                licenses {
+                    license {
+                        name = 'Commercial'
+                    }
+                }
+            }
+            pom.withXml {
+                asNode().dependencies.'*'
+                    .findAll() {
+                        (it.scope.text() == 'runtime' || it.scope.text() == 'compile') &&
+                            project.configurations.implementation.allDependencies.find {
+                                dep -> dep.name == it.artifactId.text()
+                            }
+                    }.each {
+                    it.appendNode("type", "aar")
+                }
+            }
         }
-      }
-      pom.withXml {
-        asNode().dependencies.'*'
-                .findAll() {
-                  (it.scope.text() == 'runtime' || it.scope.text() == 'compile') &&
-                          project.configurations.implementation.allDependencies.find {
-                            dep -> dep.name == it.artifactId.text()
-                          }
-                }.each {
-          it.appendNode("type", "aar")
-        }
-      }
     }
-  }
 }
 

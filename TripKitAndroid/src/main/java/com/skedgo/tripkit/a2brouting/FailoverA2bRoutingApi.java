@@ -2,25 +2,20 @@ package com.skedgo.tripkit.a2brouting;
 
 import android.content.res.Resources;
 
-import android.util.Log;
-
 import com.google.gson.Gson;
-import com.skedgo.tripkit.common.model.Region;
 import com.skedgo.tripkit.RoutingUserError;
-
-import io.reactivex.Maybe;
-import io.reactivex.Observable;
-import io.reactivex.functions.Function;
+import com.skedgo.tripkit.common.model.Region;
+import com.skedgo.tripkit.routing.RoutingResponse;
+import com.skedgo.tripkit.routing.TripGroup;
 
 import org.apache.commons.collections4.CollectionUtils;
 
 import java.util.List;
 import java.util.Map;
 
-import okhttp3.HttpUrl;
-
-import com.skedgo.tripkit.routing.RoutingResponse;
-import com.skedgo.tripkit.routing.TripGroup;
+import io.reactivex.Maybe;
+import io.reactivex.Observable;
+import io.reactivex.functions.Function;
 
 import static com.skedgo.tripkit.extensions.StringKt.buildUrlWithQueryParams;
 import static com.skedgo.tripkit.routing.RoutingResponse.ERROR_CODE_NO_FROM_LOCATION;
@@ -37,9 +32,9 @@ public class FailoverA2bRoutingApi {
     private final A2bRoutingApi a2bRoutingApi;
 
     public FailoverA2bRoutingApi(
-            Resources resources,
-            Gson gson,
-            A2bRoutingApi a2bRoutingApi
+        Resources resources,
+        Gson gson,
+        A2bRoutingApi a2bRoutingApi
     ) {
         this.resources = resources;
         this.gson = gson;
@@ -53,11 +48,11 @@ public class FailoverA2bRoutingApi {
      * @param baseUrls Can be obtained by {@link Region#getURLs()}.
      */
     public Observable<List<TripGroup>> fetchRoutesAsync(
-            List<String> baseUrls,
-            final List<String> modes,
-            final List<String> excludedTransitModes,
-            final List<String> excludeStops,
-            final Map<String, Object> options
+        List<String> baseUrls,
+        final List<String> modes,
+        final List<String> excludedTransitModes,
+        final List<String> excludeStops,
+        final Map<String, Object> options
     ) {
         return Observable.fromIterable(baseUrls)
             .map(baseUrl -> buildUrlWithQueryParams(baseUrl, modes, excludedTransitModes, excludeStops, options))
@@ -92,29 +87,29 @@ public class FailoverA2bRoutingApi {
     }
 
     Observable<RoutingResponse> fetchRoutesPerUrlAsync(
-            final String url,
-            final List<String> modes,
-            final List<String> excludedTransitModes,
-            final List<String> excludeStops,
-            final Map<String, Object> options
+        final String url,
+        final List<String> modes,
+        final List<String> excludedTransitModes,
+        final List<String> excludeStops,
+        final Map<String, Object> options
     ) {
         return a2bRoutingApi
-                .execute(url, modes, excludedTransitModes, excludeStops, options)
-                .filter(response -> !(response.getErrorMessage() != null && !response.hasError()))
-                /* Let it fail silently. */
-                .onErrorResumeNext(Observable.empty())
-                .flatMap((Function<RoutingResponse, Observable<RoutingResponse>>) response -> {
-                    if (response.getErrorMessage() != null) {
-                        //Only add handling for error 1102 or "No ''from'' location set. Please try again." error for now
-                        //to allow it to fail silently
-                        if (response.getErrorCode().equals(ERROR_CODE_NO_FROM_LOCATION)) {
-                            return Observable.empty();
-                        } else {
-                            return Observable.error(new RoutingUserError(response.getErrorMessage()));
-                        }
+            .execute(url, modes, excludedTransitModes, excludeStops, options)
+            .filter(response -> !(response.getErrorMessage() != null && !response.hasError()))
+            /* Let it fail silently. */
+            .onErrorResumeNext(Observable.empty())
+            .flatMap((Function<RoutingResponse, Observable<RoutingResponse>>) response -> {
+                if (response.getErrorMessage() != null) {
+                    //Only add handling for error 1102 or "No ''from'' location set. Please try again." error for now
+                    //to allow it to fail silently
+                    if (response.getErrorCode().equals(ERROR_CODE_NO_FROM_LOCATION)) {
+                        return Observable.empty();
                     } else {
-                        return Observable.just(response);
+                        return Observable.error(new RoutingUserError(response.getErrorMessage()));
                     }
-                });
+                } else {
+                    return Observable.just(response);
+                }
+            });
     }
 }

@@ -7,9 +7,9 @@ import androidx.room.Query
 
 @Dao
 abstract class StopLocationDao {
-  @Query("SELECT * FROM stopLocations WHERE code IN (:stopCodes)")
-  abstract fun getStopsByStopCodes(stopCodes: List<String>): List<StopLocationEntity>
+    @Query("SELECT * FROM stopLocations WHERE code IN (:stopCodes)")
+    abstract fun getStopsByStopCodes(stopCodes: List<String>): List<StopLocationEntity>
 
-  @Insert(onConflict = OnConflictStrategy.REPLACE)
-  abstract fun saveAll(stopLocations: List<StopLocationEntity>)
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    abstract fun saveAll(stopLocations: List<StopLocationEntity>)
 }

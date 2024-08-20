@@ -1,82 +1,82 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-  xmlns:tools="http://schemas.android.com/tools">
+    xmlns:tools="http://schemas.android.com/tools">
 
-  <data>
-    <variable
-      name="viewModel"
-      type="com.skedgo.tripkit.booking.ui.viewmodel.FieldStringViewModel" />
-  </data>
+    <data>
 
-  <RelativeLayout
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:paddingBottom="14dp"
-    android:paddingLeft="@dimen/spacing_normal"
-    android:paddingRight="@dimen/spacing_normal"
-    android:paddingTop="14dp"
-    android:visibility="@{!viewModel.isHidden}">
+        <variable
+            name="viewModel"
+            type="com.skedgo.tripkit.booking.ui.viewmodel.FieldStringViewModel" />
+    </data>
 
-    <TextView
-      android:id="@+id/sideTitleView"
-      fontPath="@string/font_regular"
-      android:layout_width="match_parent"
-      android:layout_height="wrap_content"
-      android:layout_alignBottom="@+id/titleL"
-      android:layout_alignParentRight="true"
-      android:layout_alignTop="@id/titleL"
-      android:layout_toRightOf="@id/titleL"
-      android:ellipsize="marquee"
-      android:gravity="center_vertical|right"
-      android:singleLine="false"
-      android:textColor="@color/v4_description_text"
-      android:textSize="14sp"
-      android:text="@{viewModel.sideTitle}"
-      tools:text="SideTitle" />
-
-    <LinearLayout
-      android:id="@id/titleL"
-      android:layout_width="wrap_content"
-      android:layout_height="wrap_content"
-      android:layout_alignBottom="@+id/editText"
-      android:layout_alignTop="@id/editText"
-      android:orientation="vertical">
-
-      <TextView
-        android:id="@+id/titleView"
-        style="@style/TextStyleTitle"
-        android:layout_width="wrap_content"
+    <RelativeLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:gravity="center_vertical"
-        android:text="@{viewModel.title}"
-        android:visibility="@{viewModel.isReadOnly}"
-        tools:text="Title" />
+        android:paddingBottom="14dp"
+        android:paddingLeft="@dimen/spacing_normal"
+        android:paddingRight="@dimen/spacing_normal"
+        android:paddingTop="14dp"
+        android:visibility="@{!viewModel.isHidden}">
 
-      <TextView
-        android:id="@+id/valueView"
-        style="@style/TextStyleValue"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@{viewModel.value}"
-        android:visibility="@{viewModel.showValue}"
-        tools:text="Value" />
-    </LinearLayout>
+        <TextView
+            android:id="@+id/sideTitleView"
+            fontPath="@string/font_regular"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@+id/titleL"
+            android:layout_alignParentRight="true"
+            android:layout_alignTop="@id/titleL"
+            android:layout_toRightOf="@id/titleL"
+            android:ellipsize="marquee"
+            android:gravity="center_vertical|right"
+            android:singleLine="false"
+            android:textColor="@color/v4_description_text"
+            android:textSize="14sp"
+            android:text="@{viewModel.sideTitle}"
+            tools:text="SideTitle" />
 
-    <EditText
-      android:id="@+id/editText"
-      style="@style/Widget.AppCompat.EditText"
-      android:layout_width="match_parent"
-      android:layout_height="wrap_content"
-      android:layout_alignParentRight="true"
-      android:layout_toRightOf="@id/titleL"
-      android:inputType="@{viewModel.inputType()}"
-      android:hint="@{viewModel.title}"
-      android:text="@{viewModel.editText}"
-      android:visibility="@{!viewModel.isReadOnly}"
-      android:onTextChanged="@{viewModel.onTextChanged}"
-      />
+        <LinearLayout
+            android:id="@id/titleL"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@+id/editText"
+            android:layout_alignTop="@id/editText"
+            android:orientation="vertical">
 
-  </RelativeLayout>
+            <TextView
+                android:id="@+id/titleView"
+                style="@style/TextStyleTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:text="@{viewModel.title}"
+                android:visibility="@{viewModel.isReadOnly}"
+                tools:text="Title" />
+
+            <TextView
+                android:id="@+id/valueView"
+                style="@style/TextStyleValue"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@{viewModel.value}"
+                android:visibility="@{viewModel.showValue}"
+                tools:text="Value" />
+        </LinearLayout>
+
+        <EditText
+            android:id="@+id/editText"
+            style="@style/Widget.AppCompat.EditText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_toRightOf="@id/titleL"
+            android:inputType="@{viewModel.inputType()}"
+            android:hint="@{viewModel.title}"
+            android:text="@{viewModel.editText}"
+            android:visibility="@{!viewModel.isReadOnly}"
+            android:onTextChanged="@{viewModel.onTextChanged}" />
+
+    </RelativeLayout>
 
 
 </layout>

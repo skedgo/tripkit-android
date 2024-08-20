@@ -1,15 +1,12 @@
 package com.skedgo.tripkit;
 
-import android.util.Log;
-
-import androidx.annotation.NonNull;
-
 import android.text.TextUtils;
 
 import java.io.IOException;
 import java.util.List;
 import java.util.concurrent.Callable;
 
+import androidx.annotation.NonNull;
 import okhttp3.HttpUrl;
 import okhttp3.Interceptor;
 import okhttp3.Request;
@@ -35,7 +32,7 @@ public final class BaseUrlOverridingInterceptor implements Interceptor {
         final HttpUrl requestUrl = request.url();
         final List<String> pathSegments = requestUrl.pathSegments();
         boolean isFromSkedGo = pathSegments.get(0).equals("satapp") || requestUrl.host().contains("skedgo.com") || requestUrl.host().contains("buzzhives.com")
-                || requestUrl.host().contains("tripgo.com");
+            || requestUrl.host().contains("tripgo.com");
         if (!TextUtils.isEmpty(newBaseUrl) && isFromSkedGo && !requestUrl.host().contains("payments.tripgo.com")) {
             HttpUrl tempUrl = requestUrl.newBuilder().removePathSegment(0).build();
             if (requestUrl.host().equals("galaxies.skedgo.com")) {
@@ -44,10 +41,10 @@ public final class BaseUrlOverridingInterceptor implements Interceptor {
             final String query = tempUrl.query();
             final String encodedPath = TextUtils.join("/", tempUrl.encodedPathSegments());
             final HttpUrl newUrl = HttpUrl.parse(newBaseUrl)
-                    .newBuilder()
-                    .addEncodedPathSegments(encodedPath)
-                    .query(query)
-                    .build();
+                .newBuilder()
+                .addEncodedPathSegments(encodedPath)
+                .query(query)
+                .build();
             final Request newRequest = request.newBuilder().url(newUrl).build();
             return chain.proceed(newRequest);
         } else {

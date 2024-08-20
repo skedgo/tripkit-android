@@ -3,7 +3,8 @@ package com.skedgo.tripkit
 import android.content.Context
 import android.location.Address
 import android.location.Geocoder
-import io.reactivex.*
+import io.reactivex.ObservableEmitter
+import io.reactivex.ObservableOnSubscribe
 
 internal class OnSubscribeReverseGeocode(
     private val context: Context,

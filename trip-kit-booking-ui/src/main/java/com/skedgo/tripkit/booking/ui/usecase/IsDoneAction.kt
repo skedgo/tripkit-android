@@ -7,8 +7,8 @@ open class IsDoneAction @Inject constructor(
     private val isCancelAction: IsCancelAction
 ) {
 
-  open fun execute(bookingForm: BookingForm?): Boolean {
-    return bookingForm?.action?.url == null && !isCancelAction.execute(bookingForm)
-  }
+    open fun execute(bookingForm: BookingForm?): Boolean {
+        return bookingForm?.action?.url == null && !isCancelAction.execute(bookingForm)
+    }
 
 }

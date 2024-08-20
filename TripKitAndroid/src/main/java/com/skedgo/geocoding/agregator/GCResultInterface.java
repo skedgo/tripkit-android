@@ -4,12 +4,14 @@ import org.jetbrains.annotations.NotNull;
 
 public interface GCResultInterface {
 
-//    result name
+    //    result name
     @NotNull
     String getName();
-//    result latitude
+
+    //    result latitude
     Double getLat();
-//    result longitude
+
+    //    result longitude
     Double getLng();
 
 

@@ -14,7 +14,10 @@ interface RegionRoutingApi {
     fun getRegionRoutes(@Body request: GetRegionRouteRequest): Single<List<RegionRoute>>
 
     @POST
-    fun getRegionRoutes(@Url customUrl: String, @Body request: GetRegionRouteRequest): Single<List<RegionRoute>>
+    fun getRegionRoutes(
+        @Url customUrl: String,
+        @Body request: GetRegionRouteRequest
+    ): Single<List<RegionRoute>>
 
     @POST("info/routeInfo.json")
     fun getRegionRouteInfo(@Body request: GetRouteDetailsRequest): Single<RouteDetails>

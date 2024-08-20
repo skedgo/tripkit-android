@@ -1,12 +1,12 @@
 package com.skedgo.tripkit.booking;
 
-import androidx.annotation.Nullable;
-
 import com.google.gson.annotations.JsonAdapter;
 import com.google.gson.annotations.SerializedName;
 
 import org.immutables.gson.Gson;
 import org.immutables.value.Value;
+
+import androidx.annotation.Nullable;
 
 @Value.Immutable
 @Gson.TypeAdapters
@@ -14,9 +14,17 @@ import org.immutables.value.Value;
 @JsonAdapter(AccessTokenResponse.class)
 public interface AccessTokenResponse {
 
-  @SerializedName("access_token") String accessToken();
-  @SerializedName("token_type") String tokenType();
-  @SerializedName("expires_in") long expiresIn();
-  @Nullable @SerializedName("refresh_token") String refreshToken();
+    @SerializedName("access_token")
+    String accessToken();
+
+    @SerializedName("token_type")
+    String tokenType();
+
+    @SerializedName("expires_in")
+    long expiresIn();
+
+    @Nullable
+    @SerializedName("refresh_token")
+    String refreshToken();
 
 }

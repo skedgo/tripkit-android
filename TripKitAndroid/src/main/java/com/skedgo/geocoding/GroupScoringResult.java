@@ -13,7 +13,8 @@ public class GroupScoringResult<T extends GCResultInterface> implements MGAResul
 
     private List<MGAResultInterface<T>> duplicates = null;
 
-    public GroupScoringResult(){}
+    public GroupScoringResult() {
+    }
 
     @Override
     public T getResult() {
@@ -56,21 +57,21 @@ public class GroupScoringResult<T extends GCResultInterface> implements MGAResul
     }
 
 
-    public void addDuplicate(ScoringResult<T> scoringResult){
+    public void addDuplicate(ScoringResult<T> scoringResult) {
         if (duplicates == null)
             duplicates = new ArrayList<>();
         duplicates.add(scoringResult);
         duplicates = GeocodeUtilities.sortByImportance(duplicates);
     }
 
-    public void addDuplicates(List<MGAResultInterface<T>> scoringResults){
+    public void addDuplicates(List<MGAResultInterface<T>> scoringResults) {
         if (duplicates == null)
             duplicates = new ArrayList<>();
         duplicates.addAll(scoringResults);
         duplicates = GeocodeUtilities.sortByImportance(duplicates);
     }
 
-    public ScoringResult<T> getScoringResult(){
+    public ScoringResult<T> getScoringResult() {
         return (ScoringResult<T>) duplicates.get(0);
     }
 }

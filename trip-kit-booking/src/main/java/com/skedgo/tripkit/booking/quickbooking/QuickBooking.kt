@@ -159,7 +159,7 @@ data class Ticket(
                 purchasedTimestamp = purchasedTimestamp,
                 fare = gson.fromJson(fareJson),
                 status = status,
-                actions = ticketActionsJson?.let { gson.fromJson(it) } ?: emptyList() ,
+                actions = ticketActionsJson?.let { gson.fromJson(it) } ?: emptyList(),
                 qrCode = qrCode
             )
         }
@@ -176,7 +176,7 @@ data class Ticket(
                 purchasedTimestamp = purchasedTimestamp,
                 fareJson = gson.toJson(fare),
                 status = status,
-                ticketActionsJson = if(actions.isNullOrEmpty()) "" else gson.toJson(actions),
+                ticketActionsJson = if (actions.isNullOrEmpty()) "" else gson.toJson(actions),
                 qrCode = qrCode
             )
         }

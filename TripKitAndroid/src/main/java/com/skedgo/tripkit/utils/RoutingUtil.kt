@@ -3,7 +3,6 @@ package com.skedgo.tripkit.utils
 import android.os.Build
 import android.util.Base64
 import android.util.Log
-import android.util.Pair
 import com.google.gson.Gson
 import com.skedgo.tripkit.data.RoutingInfo
 import com.skedgo.tripkit.data.RoutingJsonResult

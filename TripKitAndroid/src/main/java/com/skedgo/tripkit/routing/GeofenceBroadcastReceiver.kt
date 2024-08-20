@@ -27,7 +27,10 @@ class GeofenceBroadcastReceiver : BroadcastReceiver() {
         const val EXTRA_TRIP_GROUP_UUID = "EXTRA_TRIP_GROUP_UUID"
         const val NOTIFICATION_VEHICLE_APPROACHING_NOTIFICATION_ID = 9002
 
-        fun getPendingIntent(context: Context, dataMap: Map<String, String>? = null): PendingIntent {
+        fun getPendingIntent(
+            context: Context,
+            dataMap: Map<String, String>? = null
+        ): PendingIntent {
             val intent = Intent(context, GeofenceBroadcastReceiver::class.java)
             dataMap?.forEach {
                 intent.putExtra(it.key, it.value)
@@ -53,7 +56,7 @@ class GeofenceBroadcastReceiver : BroadcastReceiver() {
 
         if (intent.action == ACTION_GEOFENCE_EVENT) {
             val geofences: List<com.skedgo.tripkit.routing.Geofence> =
-                    Gson().fromJson(intent.getStringExtra(EXTRA_GEOFENCES) ?: "")
+                Gson().fromJson(intent.getStringExtra(EXTRA_GEOFENCES) ?: "")
             val geofencingEvent = GeofencingEvent.fromIntent(intent)
 
             if (geofencingEvent.hasError()) {
@@ -63,7 +66,8 @@ class GeofenceBroadcastReceiver : BroadcastReceiver() {
             }
 
             if (geofencingEvent.geofenceTransition == Geofence.GEOFENCE_TRANSITION_ENTER ||
-                    geofencingEvent.geofenceTransition == Geofence.GEOFENCE_TRANSITION_EXIT) {
+                geofencingEvent.geofenceTransition == Geofence.GEOFENCE_TRANSITION_EXIT
+            ) {
                 val geofenceId = when {
                     geofencingEvent.triggeringGeofences.isNotEmpty() ->
                         geofencingEvent.triggeringGeofences[0].requestId
@@ -98,13 +102,13 @@ class GeofenceBroadcastReceiver : BroadcastReceiver() {
         val resources = context.resources
         return when (errorCode) {
             GeofenceStatusCodes.GEOFENCE_NOT_AVAILABLE -> resources.getString(
-                    R.string.geofence_not_available
+                R.string.geofence_not_available
             )
             GeofenceStatusCodes.GEOFENCE_TOO_MANY_GEOFENCES -> resources.getString(
-                    R.string.geofence_too_many_geofences
+                R.string.geofence_too_many_geofences
             )
             GeofenceStatusCodes.GEOFENCE_TOO_MANY_PENDING_INTENTS -> resources.getString(
-                    R.string.geofence_too_many_pending_intents
+                R.string.geofence_too_many_pending_intents
             )
             else -> resources.getString(R.string.unknown_geofence_error)
         }

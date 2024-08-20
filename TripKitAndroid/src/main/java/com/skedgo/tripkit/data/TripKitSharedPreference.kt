@@ -7,10 +7,8 @@ import com.google.gson.Gson
 import com.skedgo.tripkit.TripKitConstants.Companion.PREF_KEY_CLIENT_FEATURES
 import com.skedgo.tripkit.TripKitConstants.Companion.PREF_KEY_CLIENT_ID
 import com.skedgo.tripkit.TripKitConstants.Companion.PREF_KEY_POLYGON
-import com.skedgo.tripkit.TripKitConstants.Companion.PREF_KEY_TRIP_KIT_LAT_LNG
 import com.skedgo.tripkit.TripKitConstants.Companion.PREF_NAME_TRIP_KIT
 import com.skedgo.tripkit.account.data.Polygon
-import com.skedgo.tripkit.common.util.TripKitLatLng
 import com.skedgo.tripkit.extensions.fromJson
 import javax.inject.Inject
 
@@ -19,7 +17,8 @@ import javax.inject.Inject
  * Singleton class to centralize handling of TripKit local data using [SharedPreferences]
  */
 @SuppressLint("StaticFieldLeak")
-class TripKitSharedPreference @Inject constructor(context: Context) : BaseSharedPreference(context) {
+class TripKitSharedPreference @Inject constructor(context: Context) :
+    BaseSharedPreference(context) {
 
     override val prefenceKey: String
         get() = PREF_NAME_TRIP_KIT

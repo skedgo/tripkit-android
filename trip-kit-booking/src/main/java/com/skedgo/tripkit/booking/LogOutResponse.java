@@ -13,10 +13,11 @@ import static org.immutables.value.Value.Style;
 @Style(passAnnotations = JsonAdapter.class)
 @JsonAdapter(GsonAdaptersLogOutResponse.class)
 public abstract class LogOutResponse {
-  /**
-   * Indicates whether user data was removed or not.
-   */
-  @Value.Default public boolean changed() {
-    return false;
-  }
+    /**
+     * Indicates whether user data was removed or not.
+     */
+    @Value.Default
+    public boolean changed() {
+        return false;
+    }
 }

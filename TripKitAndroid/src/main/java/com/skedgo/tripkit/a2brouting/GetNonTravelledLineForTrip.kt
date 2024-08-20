@@ -4,8 +4,8 @@ import android.graphics.Color
 import com.google.maps.android.PolyUtil
 import com.google.maps.android.ktx.utils.simplify
 import com.skedgo.tripkit.common.util.TripKitLatLng
-import io.reactivex.Observable
 import com.skedgo.tripkit.routing.TripSegment
+import io.reactivex.Observable
 import javax.inject.Inject
 
 class GetNonTravelledLineForTrip @Inject constructor() {

@@ -1,9 +1,9 @@
 package com.skedgo.tripkit.bookingproviders;
 
-import androidx.annotation.IntDef;
-
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
+
+import androidx.annotation.IntDef;
 
 @IntDef({
     BookingResolver.UBER,
@@ -16,4 +16,5 @@ import java.lang.annotation.RetentionPolicy;
     BookingResolver.OTHERS
 })
 @Retention(RetentionPolicy.SOURCE)
-public @interface BookingProvider {}
+public @interface BookingProvider {
+}

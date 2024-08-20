@@ -1,7 +1,13 @@
 package com.skedgo.geocoding;
 
 
-import com.skedgo.geocoding.agregator.*;
+import com.skedgo.geocoding.agregator.GCAppResultInterface;
+import com.skedgo.geocoding.agregator.GCFoursquareResultInterface;
+import com.skedgo.geocoding.agregator.GCGoogleResultInterface;
+import com.skedgo.geocoding.agregator.GCResultInterface;
+import com.skedgo.geocoding.agregator.GCSkedGoResultInterface;
+import com.skedgo.geocoding.agregator.MGAResultInterface;
+
 import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
@@ -35,6 +41,10 @@ public class ScoringResult<T extends GCResultInterface> implements MGAResultInte
         return score;
     }
 
+    public void setScore(int score) {
+        this.score = score;
+    }
+
     @Override
     public List<MGAResultInterface<T>> getDuplicates() {
         return null;
@@ -50,15 +60,26 @@ public class ScoringResult<T extends GCResultInterface> implements MGAResultInte
         return nameScore;
     }
 
+    public void setNameScore(int nameScore) {
+        this.nameScore = nameScore;
+    }
+
     @Override
     public int getAddressScore() {
         return addressScore;
     }
 
+    public void setAddressScore(int addressScore) {
+        this.addressScore = addressScore;
+    }
 
     @Override
     public int getDistanceScore() {
         return distanceScore;
+    }
+
+    public void setDistanceScore(int distanceScore) {
+        this.distanceScore = distanceScore;
     }
 
     @Override
@@ -66,27 +87,11 @@ public class ScoringResult<T extends GCResultInterface> implements MGAResultInte
         return popularityScore;
     }
 
-    public void setNameScore(int nameScore) {
-        this.nameScore = nameScore;
-    }
-
-    public void setAddressScore(int addressScore) {
-        this.addressScore = addressScore;
-    }
-
-    public void setDistanceScore(int distanceScore) {
-        this.distanceScore = distanceScore;
-    }
-
     public void setPopularityScore(int popularityScore) {
         this.popularityScore = popularityScore;
     }
 
-    public void setScore(int score){
-        this.score = score;
-    }
-
-    public boolean equals(MGAResultInterface<T> element){
+    public boolean equals(MGAResultInterface<T> element) {
         return isDuplicate(this, element);
     }
 
@@ -96,7 +101,7 @@ public class ScoringResult<T extends GCResultInterface> implements MGAResultInte
 
         if (isRegion(result) || isRegion(result1))
             return false;
-        else{
+        else {
             String mgaResultName = mgaResult.getResult().getName();
             String mgaResult1Name = mgaResult1.getResult().getName();
             LatLng mgaResultLL = new LatLng(mgaResult.getResult().getLat(), mgaResult.getResult().getLng());
@@ -111,7 +116,7 @@ public class ScoringResult<T extends GCResultInterface> implements MGAResultInte
         if (result instanceof GCAppResultInterface) {
             GCAppResultInterface apiResultCandidate = (GCAppResultInterface) result;
             return apiResultCandidate.getAppResultSource().equals(GCAppResultInterface.Source.Regions);
-        }else
+        } else
             return false;
     }
 

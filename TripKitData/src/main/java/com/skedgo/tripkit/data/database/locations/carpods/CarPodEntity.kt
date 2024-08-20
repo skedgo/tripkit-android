@@ -1,7 +1,10 @@
 package com.skedgo.tripkit.data.database.locations.carpods
 
-import androidx.room.*
+import androidx.room.ColumnInfo
+import androidx.room.Entity
+import androidx.room.ForeignKey
 import androidx.room.ForeignKey.Companion.CASCADE
+import androidx.room.PrimaryKey
 
 @Entity(tableName = "carPods")
 class CarPodEntity {
@@ -33,10 +36,14 @@ class CarPodEntity {
     var blue: Int = 0
 }
 
-@Entity(foreignKeys = [ForeignKey(entity = CarPodEntity::class,
+@Entity(
+    foreignKeys = [ForeignKey(
+        entity = CarPodEntity::class,
         parentColumns = ["id"],
         childColumns = ["carPodId"],
-        onDelete = CASCADE)], tableName = "carPodVehicles")
+        onDelete = CASCADE
+    )], tableName = "carPodVehicles"
+)
 class CarPodVehicle {
 
     @PrimaryKey(autoGenerate = true)

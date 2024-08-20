@@ -1,8 +1,10 @@
 package com.skedgo.tripkit.booking;
 
 import android.os.Parcel;
-import androidx.annotation.Nullable;
+
 import com.google.gson.annotations.SerializedName;
+
+import androidx.annotation.Nullable;
 
 public class QrFormField extends FormField {
     public static final Creator<QrFormField> CREATOR = new Creator<QrFormField>() {

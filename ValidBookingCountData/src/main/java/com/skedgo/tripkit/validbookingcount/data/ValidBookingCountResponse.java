@@ -11,5 +11,5 @@ import static org.immutables.value.Value.Style;
 @Style(passAnnotations = JsonAdapter.class)
 @JsonAdapter(GsonAdaptersValidBookingCountResponse.class)
 interface ValidBookingCountResponse {
-  int count();
+    int count();
 }

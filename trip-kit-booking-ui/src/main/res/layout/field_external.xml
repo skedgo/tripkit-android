@@ -1,38 +1,38 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-  xmlns:tools="http://schemas.android.com/tools">
+    xmlns:tools="http://schemas.android.com/tools">
 
-  <data>
+    <data>
 
-    <variable
-      name="viewModel"
-      type="com.skedgo.tripkit.booking.ui.viewmodel.FieldExternalViewModel" />
-  </data>
+        <variable
+            name="viewModel"
+            type="com.skedgo.tripkit.booking.ui.viewmodel.FieldExternalViewModel" />
+    </data>
 
-  <LinearLayout
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:background="?attr/selectableItemBackground"
-    android:orientation="vertical"
-    android:onClick="@{() -> viewModel.onExternalFormAction()}">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="?attr/selectableItemBackground"
+        android:orientation="vertical"
+        android:onClick="@{() -> viewModel.onExternalFormAction()}">
 
-    <TextView
-      android:id="@+id/linkView"
-      fontPath="@string/font_medium"
-      android:layout_width="match_parent"
-      android:layout_height="@dimen/v4_booking_form_field_single_line_height"
-      android:gravity="center_vertical"
-      android:paddingLeft="@dimen/spacing_normal"
-      android:paddingRight="@dimen/spacing_normal"
-      android:text="@{viewModel.title}"
-      android:textColor="@color/v4_title_text"
-      android:textSize="16sp"
-      tools:text="Next" />
+        <TextView
+            android:id="@+id/linkView"
+            fontPath="@string/font_medium"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/v4_booking_form_field_single_line_height"
+            android:gravity="center_vertical"
+            android:paddingLeft="@dimen/spacing_normal"
+            android:paddingRight="@dimen/spacing_normal"
+            android:text="@{viewModel.title}"
+            android:textColor="@color/v4_title_text"
+            android:textSize="16sp"
+            tools:text="Next" />
 
-    <View
-      android:layout_width="match_parent"
-      android:layout_height="1dp"
-      android:background="@color/v4_divider" />
-  </LinearLayout>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/v4_divider" />
+    </LinearLayout>
 
 </layout>

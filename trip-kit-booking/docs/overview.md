@@ -1,17 +1,26 @@
 # Overview
+
 ## BookingComponent
-`BookingComponent` is a factory to provide `AuthService`, `QuickBookingApi` and `BookingService`. The snippet below shows how to initialize a `BookingComponent`.
+
+`BookingComponent` is a factory to provide `AuthService`, `QuickBookingApi` and `BookingService`.
+The snippet below shows how to initialize a `BookingComponent`.
+
 ```java
 final BookingComponent component = DaggerBookingComponent.builder()
     .tripKit(TripKit.singleton())
     .build();
 ```
+
 ## AuthService
+
 ### Instantiate
+
 ```java
 final AuthService authService = component.authService();
 ```
+
 ### Fetch a list of available providers for a region
+
 ```java
 // Assume we would like to retrieve providers for Denver, US.
 final Location somewhereInDenverUS = new Location(39.740774, -104.993161);
@@ -32,7 +41,9 @@ TripKit.singleton().getRegionService()
       }
     });
 ```
+
 `List<AuthProvider>` returned represents following JSON structure:
+
 ```json
 [
   {
@@ -51,12 +62,18 @@ TripKit.singleton().getRegionService()
 ```
 
 ## BookingService
+
 ### Instantiate
+
 ```java
 final BookingService bookingService = component.bookingService();
 ```
+
 ### OAuth
-Setup/Disconnect user external providers accounts are done via `BookingForms`. First, get the external provider booking form, then call `ExternalProviderAuthActivity` if it's an authentication form, or just fetch the `AuthProvider` to refresh (after disconnect action):
+
+Setup/Disconnect user external providers accounts are done via `BookingForms`. First, get the
+external provider booking form, then call `ExternalProviderAuthActivity` if it's an authentication
+form, or just fetch the `AuthProvider` to refresh (after disconnect action):
 
 ```
 bookingService.getFormAsync(authProvider.url()))
@@ -72,11 +89,15 @@ bookingService.getFormAsync(authProvider.url()))
 ```
 
 ## QuickBookingApi
+
 ### Instantiate
+
 ```java
 final QuickBookingApi quickBookingApi = component.quickBookingApi();
 ```
+
 ### Fetch quick bookings
+
 ```java
 final String quickBookingsUrl = segment.getBooking().getQuickBookingsUrl();
 if (quickBookingsUrl != null) {

@@ -14,8 +14,9 @@ import static org.immutables.value.Value.Style;
 @Style(passAnnotations = JsonAdapter.class)
 @JsonAdapter(GsonAdaptersRegionInfoBody.class)
 public interface RegionInfoBody {
-  /**
-   * @return {@link Region#getName()}.
-   */
-  @Value.Parameter String region();
+    /**
+     * @return {@link Region#getName()}.
+     */
+    @Value.Parameter
+    String region();
 }

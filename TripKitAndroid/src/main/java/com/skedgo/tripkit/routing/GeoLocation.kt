@@ -3,7 +3,6 @@ package com.skedgo.tripkit.routing
 import android.annotation.SuppressLint
 import android.app.PendingIntent
 import android.content.Context
-import android.os.Bundle
 import android.util.Log
 import com.google.android.gms.location.GeofencingClient
 import com.google.android.gms.location.GeofencingRequest

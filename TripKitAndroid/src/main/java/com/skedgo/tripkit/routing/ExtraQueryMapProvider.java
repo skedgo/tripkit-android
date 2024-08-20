@@ -1,10 +1,10 @@
 package com.skedgo.tripkit.routing;
 
-import androidx.annotation.NonNull;
+import com.skedgo.tripkit.a2brouting.A2bRoutingApi;
 
 import java.util.Map;
 
-import com.skedgo.tripkit.a2brouting.A2bRoutingApi;
+import androidx.annotation.NonNull;
 
 /**
  * A decorator that puts additional query params
@@ -13,10 +13,11 @@ import com.skedgo.tripkit.a2brouting.A2bRoutingApi;
  * you really do know what you intend to do.
  */
 public interface ExtraQueryMapProvider {
-  /**
-   * Be careful that some entries of this map
-   * may override some default entries of
-   * the query map of {@link A2bRoutingApi}.
-   */
-  @NonNull Map<String, Object> call();
+    /**
+     * Be careful that some entries of this map
+     * may override some default entries of
+     * the query map of {@link A2bRoutingApi}.
+     */
+    @NonNull
+    Map<String, Object> call();
 }

@@ -14,7 +14,9 @@ import dagger.Component;
     dependencies = TripKit.class
 )
 public interface BookingComponent {
-  QuickBookingApi quickBookingApi();
-  AuthService authService();
-  BookingService bookingService();
+    QuickBookingApi quickBookingApi();
+
+    AuthService authService();
+
+    BookingService bookingService();
 }

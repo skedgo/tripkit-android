@@ -9,15 +9,13 @@ import org.immutables.value.Value
 @Value.Style(passAnnotations = [JsonAdapter::class])
 @JsonAdapter(GsonAdaptersOnStreetParkingDetailsDto::class)
 interface OnStreetParkingDetailsDto {
-  fun actualRate(): String?
-  fun availableSpaces(): Int?
-  fun totalSpaces(): Int?
-  fun lastUpdate(): Long?
-  fun restrictions(): List<RestrictionDto>?
-  fun paymentTypes(): List<String>?
+    fun actualRate(): String?
+    fun availableSpaces(): Int?
+    fun totalSpaces(): Int?
+    fun lastUpdate(): Long?
+    fun restrictions(): List<RestrictionDto>?
+    fun paymentTypes(): List<String>?
 }
-
-
 
 
 @Value.Immutable
@@ -25,7 +23,7 @@ interface OnStreetParkingDetailsDto {
 @Value.Style(passAnnotations = [JsonAdapter::class])
 @JsonAdapter(GsonAdaptersOnStreetParkingLocationDto::class)
 interface OnStreetParkingLocationDto {
-  fun onStreetParking() : OnStreetParkingDetailsDto
+    fun onStreetParking(): OnStreetParkingDetailsDto
 }
 
 

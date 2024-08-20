@@ -1,6 +1,10 @@
 package com.skedgo.geocoding;
 
-import com.skedgo.geocoding.agregator.*;
+import com.skedgo.geocoding.agregator.GCAppResultInterface;
+import com.skedgo.geocoding.agregator.GCFoursquareResultInterface;
+import com.skedgo.geocoding.agregator.GCResultInterface;
+import com.skedgo.geocoding.agregator.GCSkedGoResultInterface;
+import com.skedgo.geocoding.agregator.MGAResultInterface;
 
 import java.util.Collections;
 import java.util.Comparator;
@@ -16,21 +20,21 @@ public class GeocodeUtilities {
         return scoreBetweenSearchTerm(searchTerm, candidate);
     }
 
-    public static String stringForScoringOfString(String term){
+    public static String stringForScoringOfString(String term) {
         String updatedTerm = "";
         if (term != null)
             updatedTerm = term.trim();
 
         updatedTerm = updatedTerm.replaceAll("\\s+", " ");
         String result = "";
-        for(Character character : updatedTerm.toCharArray()){
+        for (Character character : updatedTerm.toCharArray()) {
             if (isAlphanumeric(character))
                 result += character.toString().toLowerCase();
         }
         return result;
     }
 
-    public static int scoreBetweenSearchTerm(String target, String candidate){
+    public static int scoreBetweenSearchTerm(String target, String candidate) {
 
         if (target.length() == 0)
             return candidate.length() == 0 ? 100 : 0;
@@ -45,7 +49,7 @@ public class GeocodeUtilities {
         if (isAbbreviationFor(target, candidate))
             return 95;
 
-        if (isAbbreviationFor(candidate, target) ) {
+        if (isAbbreviationFor(candidate, target)) {
             return 90;
         }
 
@@ -55,7 +59,7 @@ public class GeocodeUtilities {
             // matches right at start
             return calculateScoring(100, excess, 75);
         } else if (fullMatchRangeLocation != -1) {
-            String before = candidate.substring(fullMatchRangeLocation -1, fullMatchRangeLocation);
+            String before = candidate.substring(fullMatchRangeLocation - 1, fullMatchRangeLocation);
             if (before.matches("\\S")) {
                 // matches beginning of word
                 return calculateScoring(75, fullMatchRangeLocation * 2 + excess, 33);
@@ -69,13 +73,13 @@ public class GeocodeUtilities {
         String[] targetWords = target.split(" ");
         int lastIndex = 0;
         for (String targetWord : targetWords) {
-            int location =  candidate.indexOf(targetWord);
+            int location = candidate.indexOf(targetWord);
             if (location == -1) {
                 return 0; // missing a word!
-            } else if(location >= lastIndex){
+            } else if (location >= lastIndex) {
                 // still in order, keep going
-               lastIndex = location;
-            }  else {
+                lastIndex = location;
+            } else {
                 // wrong order, abort with penalty
                 return calculateScoring(10, excess, 0);
             }
@@ -83,22 +87,22 @@ public class GeocodeUtilities {
 
         // contains all target words in order
         // do we have all the finished words
-        for (int i = 0; i < targetWords.length -1; i++ ){
+        for (int i = 0; i < targetWords.length - 1; i++) {
             String targetWord = targetWords[i];
             int after = candidate.indexOf(targetWord) + targetWord.length() + 1;
-            if(String.valueOf(candidate.charAt(after)).matches("\\S")){
+            if (String.valueOf(candidate.charAt(after)).matches("\\S")) {
                 // full word match, continue with next
-            }else{
+            } else {
                 //  candidate doesn't have a completed word
-                return calculateScoring(33, excess,10);
+                return calculateScoring(33, excess, 10);
             }
         }
 
-        return calculateScoring(66,excess,40);
+        return calculateScoring(66, excess, 40);
     }
 
-//    It resolves abbreviations such as ("MOMA", "museum of modern art")
-    public static boolean isAbbreviationFor(String abbreviation, String text){
+    //    It resolves abbreviations such as ("MOMA", "museum of modern art")
+    public static boolean isAbbreviationFor(String abbreviation, String text) {
 
         abbreviation = abbreviation.toLowerCase();
         text = text.toLowerCase();
@@ -106,25 +110,25 @@ public class GeocodeUtilities {
             return false;
         }
 
-        String letter = abbreviation.substring(0,1);
+        String letter = abbreviation.substring(0, 1);
         if (!text.startsWith(letter))
             return false;
 
-        String [] parts = text.split(" ");
+        String[] parts = text.split(" ");
         if (parts.length != abbreviation.length())
             return false;
 
-        for (int i=1; i<abbreviation.length(); i++){
-            letter = abbreviation.substring(i,i+1);
+        for (int i = 1; i < abbreviation.length(); i++) {
+            letter = abbreviation.substring(i, i + 1);
             String word = parts[i];
-            if (! word.startsWith(letter))
+            if (!word.startsWith(letter))
                 return false;
         }
 
         return true;
     }
 
-    private static  int calculateScoring(int maximum, int penalty, int minimum){
+    private static int calculateScoring(int maximum, int penalty, int minimum) {
         if (penalty > maximum - minimum) {
             return minimum;
         } else {
@@ -132,7 +136,7 @@ public class GeocodeUtilities {
         }
     }
 
-    public static int rangedScoreForScore(int score, int minimum, int maximum){
+    public static int rangedScoreForScore(int score, int minimum, int maximum) {
         if (score > 100)
             score = 100;
         int range = maximum - minimum;
@@ -140,12 +144,12 @@ public class GeocodeUtilities {
         return (int) Math.ceil(percentage * range) + minimum;
     }
 
-    public static int scoreBasedOnDistanceFromCoordinate(LatLng coordinate, GCBoundingBox region, LatLng regionCenter, boolean longDistance){
+    public static int scoreBasedOnDistanceFromCoordinate(LatLng coordinate, GCBoundingBox region, LatLng regionCenter, boolean longDistance) {
 
 //        That's covering the special case of passing in the whole world. In that case everything scores 100%.
         GCBoundingBox worldRegion = GCBoundingBox.World;
         if (region != null && (Math.abs(worldRegion.getLatitudeDelta() - region.getLatitudeDelta()) < 1 &&
-                Math.abs(worldRegion.getLongitudeDelta() - region.getLongitudeDelta()) < 1))
+            Math.abs(worldRegion.getLongitudeDelta() - region.getLongitudeDelta()) < 1))
             return 100;
 
         double meters = coordinate.distanceInMetres(regionCenter);
@@ -162,11 +166,11 @@ public class GeocodeUtilities {
     }
 
 
-    private static boolean isAlphanumeric(char character){
+    private static boolean isAlphanumeric(char character) {
         return (Character.isLetter(character) || Character.isDigit(character) || String.valueOf(character).matches("\\S"));
     }
 
-    public static boolean isSuburb(GCFoursquareResultInterface foursquareResult){
+    public static boolean isSuburb(GCFoursquareResultInterface foursquareResult) {
         boolean isSuburb = false;
 
         for (String categoryName : foursquareResult.getCategories()) {
@@ -178,7 +182,7 @@ public class GeocodeUtilities {
         return isSuburb;
     }
 
-    public static  <T extends GCResultInterface>  List<MGAResultInterface<T>> sortByImportance(List<MGAResultInterface<T>> scoreResults) {
+    public static <T extends GCResultInterface> List<MGAResultInterface<T>> sortByImportance(List<MGAResultInterface<T>> scoreResults) {
         Collections.sort(scoreResults, new Comparator<MGAResultInterface>() {
             @Override
             public int compare(MGAResultInterface o1, MGAResultInterface o2) {
@@ -203,11 +207,11 @@ public class GeocodeUtilities {
         return (x < y) ? -1 : ((x == y) ? 0 : 1);
     }
 
-    private static int getRanking2Group(MGAResultInterface element){
+    private static int getRanking2Group(MGAResultInterface element) {
         if (element.getResult() instanceof GCSkedGoResultInterface)
             return 10;
 
-        if (element.getResult() instanceof GCAppResultInterface){
+        if (element.getResult() instanceof GCAppResultInterface) {
             GCAppResultInterface appResult = (GCAppResultInterface) element.getResult();
             if (appResult.isFavourite())
                 return 11;
@@ -215,7 +219,7 @@ public class GeocodeUtilities {
                 return 9;
         }
 
-        if (element.getResult() instanceof GCFoursquareResultInterface){
+        if (element.getResult() instanceof GCFoursquareResultInterface) {
             GCFoursquareResultInterface foursquareResult = (GCFoursquareResultInterface) element.getResult();
             if (foursquareResult.isVerified())
                 return 8;
@@ -225,7 +229,6 @@ public class GeocodeUtilities {
 
         return 7;
     }
-
 
 
 }

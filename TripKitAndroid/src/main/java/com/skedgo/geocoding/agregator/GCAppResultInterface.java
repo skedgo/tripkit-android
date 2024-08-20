@@ -5,19 +5,21 @@ package com.skedgo.geocoding.agregator;
  */
 public interface GCAppResultInterface extends GCResultInterface {
 
-//   source that provides the result
-     enum Source{
+    //  address value
+    String getSubtitle();
+
+    //  source that provides the result
+    Source getAppResultSource();
+
+    //    is true if the result was set as favourite by the user false otherwise.
+    boolean isFavourite();
+
+    //   source that provides the result
+    enum Source {
         AddressBook,
         Regions,
         Calendar,
         History
     }
-
-//  address value
-    String getSubtitle();
-//  source that provides the result
-    Source getAppResultSource();
-//    is true if the result was set as favourite by the user false otherwise.
-    boolean isFavourite();
 
 }

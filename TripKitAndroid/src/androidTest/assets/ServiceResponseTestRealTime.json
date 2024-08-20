@@ -1,406 +1,408 @@
 {
-  "realTimeStatus": "IS_REAL_TIME",
-  "realtimeVehicle": {
-    "id": "125571819",
-    "lastUpdate": 1468594846,
-    "location": {
-      "bearing": 6,
-      "lat": -33.86224,
-      "lng": 151.21207
-    }
-  },
-  "realtimeAlternativeVehicle": [
-    {
-      "id": "125571819",
-      "lastUpdate": 1468594846,
-      "location": {
-        "bearing": 6,
-        "lat": -33.86224,
-        "lng": 151.21207
-      }
-    }
-  ],
-  "shapes": [{
-    "encodedWaypoints": "nrtmE}n|y[Sr@v@BbIb@]aDhBAXB??|Er@dDzA~@hAR@nFH??F@f@HxGXnHr@|Lf@??GCfA`@tGb@vLf@hFR??E?rAHEcBh@}DbFa@b@_B??@@hAcB^yF??@@VgBt@cFr@G??@@~Fn@tD^??@@j@FzHz@fAJ??@BpI~@????jI`AbCZjCZ??nF~@ZRb@XjCJ??@?fIv@??xO`A??a@r@f@?Eo@h@sE\\[fDjChDpC??@@j@h@|ItInFdF????vEfGp@uBEiA??@DvAeHrC|@??@?nIzD??@B~TfK????vBnAlA[l@mI~A{D|C\\bDtA????nPlEN}B????f@iB`JdB??@@rLbDlGU??@@lHJ^eI???@tA{NhCJ??@BdABa@fC~@TF|B????uAzO??@DWd@tNzA??@@t@Pv@Rh@uJ??@BhAyM???@P[xAf@d@qJ???@TiAjJjF???@`F~C??@@Xd@]bJ??@DgAtM??BDcBfU??@@{@zL???@G|@o@~H???@sArQ",
-    "operator": "Sydney Buses",
-    "serviceName": "Mascot",
-    "serviceNumber": "301",
-    "serviceTripID": "125571819_20151006_11954",
-    "stops": [
-      {
-        "arrival": 1468591199,
-        "bearing": 171,
-        "code": "2000147",
-        "departure": 1468595700,
-        "lat": -33.86168,
-        "lng": 151.21152,
-        "name": "Circular Quay, Alfred St, Stand A",
-        "shortName": "Stand A"
-      },
-      {
-        "arrival": 1468682160,
-        "bearing": 197,
-        "code": "200068",
-        "departure": 1468595760,
-        "lat": -33.86398,
-        "lng": 151.21185,
-        "name": "Phillip St opp Museum of Sydney"
-      },
-      {
-        "arrival": 1468682280,
-        "bearing": 186,
-        "code": "200081",
-        "departure": 1468595880,
-        "lat": -33.86755,
-        "lng": 151.21071,
-        "name": "Martin Place Station, Elizabeth St, Stand F",
-        "shortName": "Stand F"
-      },
-      {
-        "arrival": 1468682460,
-        "bearing": 187,
-        "code": "2000167",
-        "departure": 1468596060,
-        "lat": -33.87294,
-        "lng": 151.21005,
-        "name": "Hyde Park, Elizabeth St, Stand A",
-        "shortName": "Stand A"
-      },
-      {
-        "arrival": 1468682640,
-        "bearing": 132,
-        "code": "200074",
-        "departure": 1468596240,
-        "lat": -33.87803,
-        "lng": 151.20943,
-        "name": "Museum Station, Downing Centre, Stand B",
-        "shortName": "Stand B"
-      },
-      {
-        "arrival": 1468682760,
-        "bearing": 107,
-        "code": "201026",
-        "departure": 1468596360,
-        "lat": -33.87992,
-        "lng": 151.21147,
-        "name": "Hunt St near Campbell St"
-      },
-      {
-        "arrival": 1468682820,
-        "bearing": 111,
-        "code": "201027",
-        "departure": 1468596420,
-        "lat": -33.88046,
-        "lng": 151.21321,
-        "name": "Campbell St near Riley St"
-      },
-      {
-        "arrival": 1468682880,
-        "bearing": 190,
-        "code": "201095",
-        "departure": 1468596480,
-        "lat": -33.88111,
-        "lng": 151.2149,
-        "name": "Crown St near Campbell St"
-      },
-      {
-        "arrival": 1468682940,
-        "bearing": 190,
-        "code": "201094",
-        "departure": 1468596540,
-        "lat": -33.88332,
-        "lng": 151.21449,
-        "name": "Crown St near Albion St"
-      },
-      {
-        "arrival": 1468683000,
-        "bearing": 191,
-        "code": "201093",
-        "departure": 1468596600,
-        "lat": -33.88549,
-        "lng": 151.21408,
-        "name": "Crown St near Foveaux St"
-      },
-      {
-        "arrival": 1468683015,
-        "bearing": 191,
-        "code": "201092",
-        "departure": 1468596615,
-        "lat": -33.88718,
-        "lng": 151.21375,
-        "name": "Crown St near Rainford St"
-      },
-      {
-        "arrival": 1468683120,
-        "bearing": 195,
-        "code": "201098",
-        "departure": 1468596720,
-        "lat": -33.89021,
-        "lng": 151.21313,
-        "name": "Crown St before Cleveland St"
-      },
-      {
-        "arrival": 1468683180,
-        "bearing": 189,
-        "code": "201642",
-        "departure": 1468596780,
-        "lat": -33.89243,
-        "lng": 151.21252,
-        "name": "Baptist St near Cleveland St"
-      },
-      {
-        "arrival": 1468683195,
-        "bearing": 187,
-        "code": "201645",
-        "departure": 1468596795,
-        "lat": -33.89408,
-        "lng": 151.21225,
-        "name": "Baptist St at Telopea La"
-      },
-      {
-        "arrival": 1468683240,
-        "bearing": 186,
-        "code": "201641",
-        "departure": 1468596840,
-        "lat": -33.89677,
-        "lng": 151.21191,
-        "name": "Phillip St near Baptist St"
-      },
-      {
-        "arrival": 1468683360,
-        "bearing": 224,
-        "code": "201742",
-        "departure": 1468596960,
-        "lat": -33.89882,
-        "lng": 151.21167,
-        "name": "Bourke St near Danks St"
-      },
-      {
-        "arrival": 1468683420,
-        "bearing": 195,
-        "code": "201775",
-        "departure": 1468597020,
-        "lat": -33.90199,
-        "lng": 151.20859,
-        "name": "Bourke St opp Powell St"
-      },
-      {
-        "arrival": 1468683480,
-        "bearing": 136,
-        "code": "201734",
-        "departure": 1468597080,
-        "lat": -33.9033,
-        "lng": 151.20822,
-        "name": "O'Dea Av near Bourke St"
-      },
-      {
-        "arrival": 1468683495,
-        "bearing": 208,
-        "code": "201744",
-        "departure": 1468597095,
-        "lat": -33.90449,
-        "lng": 151.20935,
-        "name": "Joynton Av near Wolseley Gr"
-      },
-      {
-        "arrival": 1468683540,
-        "bearing": 209,
-        "code": "201745",
-        "departure": 1468597140,
-        "lat": -33.90618,
-        "lng": 151.20842,
-        "name": "Joynton Av near Gadigal Av"
-      },
-      {
-        "arrival": 1468683600,
-        "bearing": 151,
-        "code": "201731",
-        "departure": 1468597200,
-        "lat": -33.9097,
-        "lng": 151.20644,
-        "name": "Joynton Av opp Old South Sydney Hospital"
-      },
-      {
-        "arrival": 1468683660,
-        "bearing": 187,
-        "code": "201887",
-        "departure": 1468597260,
-        "lat": -33.91301,
-        "lng": 151.20821,
-        "name": "Rosebery Av near Crewe Pl"
-      },
-      {
-        "arrival": 1468683720,
-        "bearing": 179,
-        "code": "201850",
-        "departure": 1468597320,
-        "lat": -33.91589,
-        "lng": 151.20781,
-        "name": "Kimberley Gr near Dalmeny Av"
-      },
-      {
-        "arrival": 1468683735,
-        "bearing": 191,
-        "code": "201890",
-        "departure": 1468597335,
-        "lat": -33.91786,
-        "lng": 151.20782,
-        "name": "Dalmeny Av near Rippon Way"
-      },
-      {
-        "arrival": 1468683780,
-        "bearing": 137,
-        "code": "201854",
-        "departure": 1468597380,
-        "lat": -33.92141,
-        "lng": 151.20711,
-        "name": "Dalmeny Av near Harcourt Pde"
-      },
-      {
-        "arrival": 1468683840,
-        "bearing": 114,
-        "code": "201845",
-        "departure": 1468597440,
-        "lat": -33.92308,
-        "lng": 151.20866,
-        "name": "Gardeners Rd 150m E of Maloney St"
-      },
-      {
-        "arrival": 1468683900,
-        "bearing": 249,
-        "code": "201847",
-        "departure": 1468597500,
-        "lat": -33.92421,
-        "lng": 151.21114,
-        "name": "Racecourse Pl near Gardeners Rd"
-      },
-      {
-        "arrival": 1468683960,
-        "bearing": 280,
-        "code": "201848",
-        "departure": 1468597560,
-        "lat": -33.92476,
-        "lng": 151.20967,
-        "name": "Evans Av near Longworth Av"
-      },
-      {
-        "arrival": 1468683975,
-        "bearing": 195,
-        "code": "201849",
-        "departure": 1468597575,
-        "lat": -33.92433,
-        "lng": 151.20697,
-        "name": "Evans Av near Maloney St"
-      },
-      {
-        "arrival": 1468684020,
-        "bearing": 114,
-        "code": "201856",
-        "departure": 1468597620,
-        "lat": -33.92672,
-        "lng": 151.2063,
-        "name": "Maloney St near George St"
-      },
-      {
-        "arrival": 1468684080,
-        "bearing": 99,
-        "code": "201859",
-        "departure": 1468597680,
-        "lat": -33.92749,
-        "lng": 151.20796,
-        "name": "George St near Maloney St"
-      },
-      {
-        "arrival": 1468684095,
-        "bearing": 112,
-        "code": "201860",
-        "departure": 1468597695,
-        "lat": -33.92787,
-        "lng": 151.21031,
-        "name": "George St near St Helena Pde"
-      },
-      {
-        "arrival": 1468684140,
-        "bearing": 203,
-        "code": "201861",
-        "departure": 1468597740,
-        "lat": -33.92861,
-        "lng": 151.2121,
-        "name": "Florence Av near Lismore St"
-      },
-      {
-        "arrival": 1468684200,
-        "bearing": 215,
-        "code": "201864",
-        "departure": 1468597800,
-        "lat": -33.93053,
-        "lng": 151.21127,
-        "name": "Florence Av near O'Connor St"
-      },
-      {
-        "arrival": 1468684210,
-        "bearing": 271,
-        "code": "201865",
-        "departure": 1468597810,
-        "lat": -33.93166,
-        "lng": 151.21046,
-        "name": "Florence St near King St"
-      },
-      {
-        "arrival": 1468684220,
-        "bearing": 279,
-        "code": "201866",
-        "departure": 1468597820,
-        "lat": -33.93165,
-        "lng": 151.20848,
-        "name": "King St near St Helena Pde"
-      },
-      {
-        "arrival": 1468684260,
-        "bearing": 278,
-        "code": "201867",
-        "departure": 1468597860,
-        "lat": -33.93131,
-        "lng": 151.2061,
-        "name": "King St after Meridian St"
-      },
-      {
-        "arrival": 1468684320,
-        "bearing": 278,
-        "code": "202039",
-        "departure": 1468597920,
-        "lat": -33.93083,
-        "lng": 151.20251,
-        "name": "King St near Hicks Av"
-      },
-      {
-        "arrival": 1468684335,
-        "bearing": 279,
-        "code": "202040",
-        "departure": 1468597935,
-        "lat": -33.93053,
-        "lng": 151.20029,
-        "name": "King St near Sutherland St"
-      },
-      {
-        "arrival": 1468684380,
-        "bearing": 278,
-        "code": "202041",
-        "departure": 1468597980,
-        "lat": -33.93026,
-        "lng": 151.19836,
-        "name": "King St near Frogmore St"
-      },
-      {
-        "arrival": 1468684440,
-        "code": "202042",
-        "lat": -33.92984,
-        "lng": 151.19537,
-        "name": "King St before Botany Rd"
-      }
+    "realTimeStatus": "IS_REAL_TIME",
+    "realtimeVehicle": {
+        "id": "125571819",
+        "lastUpdate": 1468594846,
+        "location": {
+            "bearing": 6,
+            "lat": -33.86224,
+            "lng": 151.21207
+        }
+    },
+    "realtimeAlternativeVehicle": [
+        {
+            "id": "125571819",
+            "lastUpdate": 1468594846,
+            "location": {
+                "bearing": 6,
+                "lat": -33.86224,
+                "lng": 151.21207
+            }
+        }
     ],
-    "travelled": true,
-    "wheelchairAccessible": true
-  }],
-  "type": "bus"
+    "shapes": [
+        {
+            "encodedWaypoints": "nrtmE}n|y[Sr@v@BbIb@]aDhBAXB??|Er@dDzA~@hAR@nFH??F@f@HxGXnHr@|Lf@??GCfA`@tGb@vLf@hFR??E?rAHEcBh@}DbFa@b@_B??@@hAcB^yF??@@VgBt@cFr@G??@@~Fn@tD^??@@j@FzHz@fAJ??@BpI~@????jI`AbCZjCZ??nF~@ZRb@XjCJ??@?fIv@??xO`A??a@r@f@?Eo@h@sE\\[fDjChDpC??@@j@h@|ItInFdF????vEfGp@uBEiA??@DvAeHrC|@??@?nIzD??@B~TfK????vBnAlA[l@mI~A{D|C\\bDtA????nPlEN}B????f@iB`JdB??@@rLbDlGU??@@lHJ^eI???@tA{NhCJ??@BdABa@fC~@TF|B????uAzO??@DWd@tNzA??@@t@Pv@Rh@uJ??@BhAyM???@P[xAf@d@qJ???@TiAjJjF???@`F~C??@@Xd@]bJ??@DgAtM??BDcBfU??@@{@zL???@G|@o@~H???@sArQ",
+            "operator": "Sydney Buses",
+            "serviceName": "Mascot",
+            "serviceNumber": "301",
+            "serviceTripID": "125571819_20151006_11954",
+            "stops": [
+                {
+                    "arrival": 1468591199,
+                    "bearing": 171,
+                    "code": "2000147",
+                    "departure": 1468595700,
+                    "lat": -33.86168,
+                    "lng": 151.21152,
+                    "name": "Circular Quay, Alfred St, Stand A",
+                    "shortName": "Stand A"
+                },
+                {
+                    "arrival": 1468682160,
+                    "bearing": 197,
+                    "code": "200068",
+                    "departure": 1468595760,
+                    "lat": -33.86398,
+                    "lng": 151.21185,
+                    "name": "Phillip St opp Museum of Sydney"
+                },
+                {
+                    "arrival": 1468682280,
+                    "bearing": 186,
+                    "code": "200081",
+                    "departure": 1468595880,
+                    "lat": -33.86755,
+                    "lng": 151.21071,
+                    "name": "Martin Place Station, Elizabeth St, Stand F",
+                    "shortName": "Stand F"
+                },
+                {
+                    "arrival": 1468682460,
+                    "bearing": 187,
+                    "code": "2000167",
+                    "departure": 1468596060,
+                    "lat": -33.87294,
+                    "lng": 151.21005,
+                    "name": "Hyde Park, Elizabeth St, Stand A",
+                    "shortName": "Stand A"
+                },
+                {
+                    "arrival": 1468682640,
+                    "bearing": 132,
+                    "code": "200074",
+                    "departure": 1468596240,
+                    "lat": -33.87803,
+                    "lng": 151.20943,
+                    "name": "Museum Station, Downing Centre, Stand B",
+                    "shortName": "Stand B"
+                },
+                {
+                    "arrival": 1468682760,
+                    "bearing": 107,
+                    "code": "201026",
+                    "departure": 1468596360,
+                    "lat": -33.87992,
+                    "lng": 151.21147,
+                    "name": "Hunt St near Campbell St"
+                },
+                {
+                    "arrival": 1468682820,
+                    "bearing": 111,
+                    "code": "201027",
+                    "departure": 1468596420,
+                    "lat": -33.88046,
+                    "lng": 151.21321,
+                    "name": "Campbell St near Riley St"
+                },
+                {
+                    "arrival": 1468682880,
+                    "bearing": 190,
+                    "code": "201095",
+                    "departure": 1468596480,
+                    "lat": -33.88111,
+                    "lng": 151.2149,
+                    "name": "Crown St near Campbell St"
+                },
+                {
+                    "arrival": 1468682940,
+                    "bearing": 190,
+                    "code": "201094",
+                    "departure": 1468596540,
+                    "lat": -33.88332,
+                    "lng": 151.21449,
+                    "name": "Crown St near Albion St"
+                },
+                {
+                    "arrival": 1468683000,
+                    "bearing": 191,
+                    "code": "201093",
+                    "departure": 1468596600,
+                    "lat": -33.88549,
+                    "lng": 151.21408,
+                    "name": "Crown St near Foveaux St"
+                },
+                {
+                    "arrival": 1468683015,
+                    "bearing": 191,
+                    "code": "201092",
+                    "departure": 1468596615,
+                    "lat": -33.88718,
+                    "lng": 151.21375,
+                    "name": "Crown St near Rainford St"
+                },
+                {
+                    "arrival": 1468683120,
+                    "bearing": 195,
+                    "code": "201098",
+                    "departure": 1468596720,
+                    "lat": -33.89021,
+                    "lng": 151.21313,
+                    "name": "Crown St before Cleveland St"
+                },
+                {
+                    "arrival": 1468683180,
+                    "bearing": 189,
+                    "code": "201642",
+                    "departure": 1468596780,
+                    "lat": -33.89243,
+                    "lng": 151.21252,
+                    "name": "Baptist St near Cleveland St"
+                },
+                {
+                    "arrival": 1468683195,
+                    "bearing": 187,
+                    "code": "201645",
+                    "departure": 1468596795,
+                    "lat": -33.89408,
+                    "lng": 151.21225,
+                    "name": "Baptist St at Telopea La"
+                },
+                {
+                    "arrival": 1468683240,
+                    "bearing": 186,
+                    "code": "201641",
+                    "departure": 1468596840,
+                    "lat": -33.89677,
+                    "lng": 151.21191,
+                    "name": "Phillip St near Baptist St"
+                },
+                {
+                    "arrival": 1468683360,
+                    "bearing": 224,
+                    "code": "201742",
+                    "departure": 1468596960,
+                    "lat": -33.89882,
+                    "lng": 151.21167,
+                    "name": "Bourke St near Danks St"
+                },
+                {
+                    "arrival": 1468683420,
+                    "bearing": 195,
+                    "code": "201775",
+                    "departure": 1468597020,
+                    "lat": -33.90199,
+                    "lng": 151.20859,
+                    "name": "Bourke St opp Powell St"
+                },
+                {
+                    "arrival": 1468683480,
+                    "bearing": 136,
+                    "code": "201734",
+                    "departure": 1468597080,
+                    "lat": -33.9033,
+                    "lng": 151.20822,
+                    "name": "O'Dea Av near Bourke St"
+                },
+                {
+                    "arrival": 1468683495,
+                    "bearing": 208,
+                    "code": "201744",
+                    "departure": 1468597095,
+                    "lat": -33.90449,
+                    "lng": 151.20935,
+                    "name": "Joynton Av near Wolseley Gr"
+                },
+                {
+                    "arrival": 1468683540,
+                    "bearing": 209,
+                    "code": "201745",
+                    "departure": 1468597140,
+                    "lat": -33.90618,
+                    "lng": 151.20842,
+                    "name": "Joynton Av near Gadigal Av"
+                },
+                {
+                    "arrival": 1468683600,
+                    "bearing": 151,
+                    "code": "201731",
+                    "departure": 1468597200,
+                    "lat": -33.9097,
+                    "lng": 151.20644,
+                    "name": "Joynton Av opp Old South Sydney Hospital"
+                },
+                {
+                    "arrival": 1468683660,
+                    "bearing": 187,
+                    "code": "201887",
+                    "departure": 1468597260,
+                    "lat": -33.91301,
+                    "lng": 151.20821,
+                    "name": "Rosebery Av near Crewe Pl"
+                },
+                {
+                    "arrival": 1468683720,
+                    "bearing": 179,
+                    "code": "201850",
+                    "departure": 1468597320,
+                    "lat": -33.91589,
+                    "lng": 151.20781,
+                    "name": "Kimberley Gr near Dalmeny Av"
+                },
+                {
+                    "arrival": 1468683735,
+                    "bearing": 191,
+                    "code": "201890",
+                    "departure": 1468597335,
+                    "lat": -33.91786,
+                    "lng": 151.20782,
+                    "name": "Dalmeny Av near Rippon Way"
+                },
+                {
+                    "arrival": 1468683780,
+                    "bearing": 137,
+                    "code": "201854",
+                    "departure": 1468597380,
+                    "lat": -33.92141,
+                    "lng": 151.20711,
+                    "name": "Dalmeny Av near Harcourt Pde"
+                },
+                {
+                    "arrival": 1468683840,
+                    "bearing": 114,
+                    "code": "201845",
+                    "departure": 1468597440,
+                    "lat": -33.92308,
+                    "lng": 151.20866,
+                    "name": "Gardeners Rd 150m E of Maloney St"
+                },
+                {
+                    "arrival": 1468683900,
+                    "bearing": 249,
+                    "code": "201847",
+                    "departure": 1468597500,
+                    "lat": -33.92421,
+                    "lng": 151.21114,
+                    "name": "Racecourse Pl near Gardeners Rd"
+                },
+                {
+                    "arrival": 1468683960,
+                    "bearing": 280,
+                    "code": "201848",
+                    "departure": 1468597560,
+                    "lat": -33.92476,
+                    "lng": 151.20967,
+                    "name": "Evans Av near Longworth Av"
+                },
+                {
+                    "arrival": 1468683975,
+                    "bearing": 195,
+                    "code": "201849",
+                    "departure": 1468597575,
+                    "lat": -33.92433,
+                    "lng": 151.20697,
+                    "name": "Evans Av near Maloney St"
+                },
+                {
+                    "arrival": 1468684020,
+                    "bearing": 114,
+                    "code": "201856",
+                    "departure": 1468597620,
+                    "lat": -33.92672,
+                    "lng": 151.2063,
+                    "name": "Maloney St near George St"
+                },
+                {
+                    "arrival": 1468684080,
+                    "bearing": 99,
+                    "code": "201859",
+                    "departure": 1468597680,
+                    "lat": -33.92749,
+                    "lng": 151.20796,
+                    "name": "George St near Maloney St"
+                },
+                {
+                    "arrival": 1468684095,
+                    "bearing": 112,
+                    "code": "201860",
+                    "departure": 1468597695,
+                    "lat": -33.92787,
+                    "lng": 151.21031,
+                    "name": "George St near St Helena Pde"
+                },
+                {
+                    "arrival": 1468684140,
+                    "bearing": 203,
+                    "code": "201861",
+                    "departure": 1468597740,
+                    "lat": -33.92861,
+                    "lng": 151.2121,
+                    "name": "Florence Av near Lismore St"
+                },
+                {
+                    "arrival": 1468684200,
+                    "bearing": 215,
+                    "code": "201864",
+                    "departure": 1468597800,
+                    "lat": -33.93053,
+                    "lng": 151.21127,
+                    "name": "Florence Av near O'Connor St"
+                },
+                {
+                    "arrival": 1468684210,
+                    "bearing": 271,
+                    "code": "201865",
+                    "departure": 1468597810,
+                    "lat": -33.93166,
+                    "lng": 151.21046,
+                    "name": "Florence St near King St"
+                },
+                {
+                    "arrival": 1468684220,
+                    "bearing": 279,
+                    "code": "201866",
+                    "departure": 1468597820,
+                    "lat": -33.93165,
+                    "lng": 151.20848,
+                    "name": "King St near St Helena Pde"
+                },
+                {
+                    "arrival": 1468684260,
+                    "bearing": 278,
+                    "code": "201867",
+                    "departure": 1468597860,
+                    "lat": -33.93131,
+                    "lng": 151.2061,
+                    "name": "King St after Meridian St"
+                },
+                {
+                    "arrival": 1468684320,
+                    "bearing": 278,
+                    "code": "202039",
+                    "departure": 1468597920,
+                    "lat": -33.93083,
+                    "lng": 151.20251,
+                    "name": "King St near Hicks Av"
+                },
+                {
+                    "arrival": 1468684335,
+                    "bearing": 279,
+                    "code": "202040",
+                    "departure": 1468597935,
+                    "lat": -33.93053,
+                    "lng": 151.20029,
+                    "name": "King St near Sutherland St"
+                },
+                {
+                    "arrival": 1468684380,
+                    "bearing": 278,
+                    "code": "202041",
+                    "departure": 1468597980,
+                    "lat": -33.93026,
+                    "lng": 151.19836,
+                    "name": "King St near Frogmore St"
+                },
+                {
+                    "arrival": 1468684440,
+                    "code": "202042",
+                    "lat": -33.92984,
+                    "lng": 151.19537,
+                    "name": "King St before Botany Rd"
+                }
+            ],
+            "travelled": true,
+            "wheelchairAccessible": true
+        }
+    ],
+    "type": "bus"
 }

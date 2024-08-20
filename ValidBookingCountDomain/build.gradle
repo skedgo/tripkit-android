@@ -8,74 +8,74 @@ targetCompatibility = JavaVersion.VERSION_17
 sourceCompatibility = JavaVersion.VERSION_17
 
 dependencies {
-  testImplementation libs.junit
-  testImplementation libs.assertjCore
-  testImplementation libs.mockitoCore
-  testImplementation libs.mockitoKotlin
+    testImplementation libs.junit
+    testImplementation libs.assertjCore
+    testImplementation libs.mockitoCore
+    testImplementation libs.mockitoKotlin
 
-  implementation libs.kotlin
-  implementation libs.rxjava2
-  implementation libs.dagger
-  kapt libs.daggerCompiler
+    implementation libs.kotlin
+    implementation libs.rxjava2
+    implementation libs.dagger
+    kapt libs.daggerCompiler
 
 }
 
 
 task sourcesJar(type: Jar, dependsOn: classes) {
-  archiveClassifier.set('sources')
-  from sourceSets.main.allSource
+    archiveClassifier.set('sources')
+    from sourceSets.main.allSource
 }
 
 task javadocJar(type: Jar, dependsOn: javadoc) {
-  archiveClassifier.set('javadoc')
-  from javadoc.destinationDir
+    archiveClassifier.set('javadoc')
+    from javadoc.destinationDir
 }
 
 artifacts {
-  archives sourcesJar
-  archives javadocJar
+    archives sourcesJar
+    archives javadocJar
 }
 
 group = tripkitGroup
 version = tripkitVersion
 
 publishing {
-  repositories {
-    maven {
-      url = "file://${localMaven}"
-      //url = publishMavenUrl
-      credentials {
-        username = publishMavenUsername
-        password = publishMavenToken
-      }
+    repositories {
+        maven {
+            url = "file://${localMaven}"
+            //url = publishMavenUrl
+            credentials {
+                username = publishMavenUsername
+                password = publishMavenToken
+            }
+        }
     }
-  }
 
-  publications {
-    release(MavenPublication) {
-      groupId = group
-      version = version
-      artifactId = 'ValidBookingCountDomain'
-      from components.java
-      pom {
-        licenses {
-          license {
-            name = 'Commercial'
-          }
+    publications {
+        release(MavenPublication) {
+            groupId = group
+            version = version
+            artifactId = 'ValidBookingCountDomain'
+            from components.java
+            pom {
+                licenses {
+                    license {
+                        name = 'Commercial'
+                    }
+                }
+            }
+            pom.withXml {
+                asNode().dependencies.'*'
+                    .findAll() {
+                        (it.scope.text() == 'runtime' || it.scope.text() == 'compile') &&
+                            project.configurations.implementation.allDependencies.find {
+                                dep -> dep.name == it.artifactId.text()
+                            }
+                    }.each {
+                    it.appendNode("type", "aar")
+                }
+            }
         }
-      }
-      pom.withXml {
-        asNode().dependencies.'*'
-                .findAll() {
-                  (it.scope.text() == 'runtime' || it.scope.text() == 'compile') &&
-                          project.configurations.implementation.allDependencies.find {
-                            dep -> dep.name == it.artifactId.text()
-                          }
-                }.each {
-          it.appendNode("type", "aar")
-        }
-      }
     }
-  }
 }
 

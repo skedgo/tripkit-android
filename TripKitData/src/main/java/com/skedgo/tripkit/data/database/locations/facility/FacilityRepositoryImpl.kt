@@ -1,11 +1,11 @@
 package com.skedgo.tripkit.data.database.locations.facility
 
 import com.skedgo.tripkit.data.database.TripKitDatabase
+import com.skedgo.tripkit.location.GeoPoint
 import io.reactivex.Completable
 import io.reactivex.Observable
 import io.reactivex.Single
 import io.reactivex.schedulers.Schedulers
-import com.skedgo.tripkit.location.GeoPoint
 
 class FacilityRepositoryImpl(val tripGoDatabase2: TripKitDatabase) : FacilityRepository {
     override fun saveFacilities(

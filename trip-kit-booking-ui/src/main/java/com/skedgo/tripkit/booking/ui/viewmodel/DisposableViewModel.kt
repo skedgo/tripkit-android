@@ -5,17 +5,18 @@ import io.reactivex.Observable
 import io.reactivex.subjects.PublishSubject
 
 enum class Nothing {
-  INSTANCE
+    INSTANCE
 }
 
 abstract class DisposableViewModel {
-  private val _onDispose = PublishSubject.create<Nothing>()
+    private val _onDispose = PublishSubject.create<Nothing>()
 
-  fun onDispose(): Observable<Nothing> {
-    return _onDispose.hide()
-  }
+    fun onDispose(): Observable<Nothing> {
+        return _onDispose.hide()
+    }
 
-  @CallSuper fun dispose() {
-    _onDispose.onNext(Nothing.INSTANCE)
-  }
+    @CallSuper
+    fun dispose() {
+        _onDispose.onNext(Nothing.INSTANCE)
+    }
 }

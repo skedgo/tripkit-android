@@ -1,96 +1,96 @@
 {
-  "region": "AU_NSW_Sydney",
-  "realTimeStamp": 0,
-  "alerts": [
-    {
-      "text": "Unusually high traffic on the route.",
-      "title": "Traffic delay",
-      "hashCode": -805769856,
-      "severity": "warning"
-    }
-  ],
-  "segmentTemplates": [
-    {
-      "to": {
-        "address": "Illawarra Rd near Warburton St",
-        "class": "Location",
-        "lng": 151.15446,
-        "lat": -33.91235
-      },
-      "visibility": "in summary",
-      "hashCode": -462110734,
-      "from": {
-        "class": "Location",
-        "lng": 151.2839,
-        "lat": -33.8005
-      },
-      "type": "unscheduled",
-      "metres": 25063,
-      "travelDirection": 346,
-      "cost": 7.47,
-      "mode": "motorbike",
-      "durationWithoutTraffic": 2115,
-      "action": "Ride Motorbike<DURATION>",
-      "streets": [
+    "region": "AU_NSW_Sydney",
+    "realTimeStamp": 0,
+    "alerts": [
         {
-          "encodedWaypoints": "a|gfH|uw_P?s@aDA??AiGA}G?yG??cIA???qE??eIAgIC??}G???CaFAwE??aCA??AgF@{E??gEI??BwLR}@??sCaC}CyBcDaBuCwBwCaCuC}BgCsCyCyBaDyAqCsDBC??MaE?{CAcC@_B@wC",
-          "safe": true
-        },
-        {
-          "encodedWaypoints": "gbkfHzhs_P??@cB",
-          "safe": false
-        },
-        {
-          "encodedWaypoints": "ebkfHves_P??bF{C??uAoFkAaF_AmF",
-          "safe": true
-        },
-        {
-          "encodedWaypoints": "cbkfHzjr_P???kH?mO[?",
-          "safe": false
+            "text": "Unusually high traffic on the route.",
+            "title": "Traffic delay",
+            "hashCode": -805769856,
+            "severity": "warning"
         }
-      ],
-      "modeIdentifier": "me_mot",
-      "notes": "<TRAFFIC> ⋅ 25km ⋅ Includes toll ($4.00)"
-    }
-  ],
-  "groups": [
-    {
-      "trips": [
+    ],
+    "segmentTemplates": [
         {
-          "caloriesCost": 52,
-          "progressURL": "http://granduni.buzzhives.com/satapp/postTripProgress?ID=044a20bd-a708-4395-98c8-7be6e39916d3",
-          "hassleCost": 9.7,
-          "carbonCost": 2.2,
-          "segments": [
-            {
-              "realTime": false,
-              "startTime": 1422849991,
-              "vehicle": {
-                "garage": {
-                  "class": "Location",
-                  "lng": 151.2839,
-                  "lat": -33.8005
+            "to": {
+                "address": "Illawarra Rd near Warburton St",
+                "class": "Location",
+                "lng": 151.15446,
+                "lat": -33.91235
+            },
+            "visibility": "in summary",
+            "hashCode": -462110734,
+            "from": {
+                "class": "Location",
+                "lng": 151.2839,
+                "lat": -33.8005
+            },
+            "type": "unscheduled",
+            "metres": 25063,
+            "travelDirection": 346,
+            "cost": 7.47,
+            "mode": "motorbike",
+            "durationWithoutTraffic": 2115,
+            "action": "Ride Motorbike<DURATION>",
+            "streets": [
+                {
+                    "encodedWaypoints": "a|gfH|uw_P?s@aDA??AiGA}G?yG??cIA???qE??eIAgIC??}G???CaFAwE??aCA??AgF@{E??gEI??BwLR}@??sCaC}CyBcDaBuCwBwCaCuC}BgCsCyCyBaDyAqCsDBC??MaE?{CAcC@_B@wC",
+                    "safe": true
                 },
-                "type": "MOTORBIKE"
-              },
-              "segmentTemplateHashCode": -462110734,
-              "alertHashCodes": [
-                -805769856
-              ],
-              "endTime": 1422852824
-            }
-          ],
-          "depart": 1422849991,
-          "moneyCost": 7.47,
-          "saveURL": "http://granduni.buzzhives.com/satapp/persistTrip?ID=044a20bd-a708-4395-98c8-7be6e39916d3",
-          "queryScore": 34.4,
-          "arrive": 1422852824,
-          "moneyUSDCost": 6.63,
-          "weightedScore": 34.4,
-          "mainSegmentHashCode": -462110734,
-          "updateURL": "http://granduni.buzzhives.com/satapp/updateTrip?ID=044a20bd-a708-4395-98c8-7be6e39916d3"
+                {
+                    "encodedWaypoints": "gbkfHzhs_P??@cB",
+                    "safe": false
+                },
+                {
+                    "encodedWaypoints": "ebkfHves_P??bF{C??uAoFkAaF_AmF",
+                    "safe": true
+                },
+                {
+                    "encodedWaypoints": "cbkfHzjr_P???kH?mO[?",
+                    "safe": false
+                }
+            ],
+            "modeIdentifier": "me_mot",
+            "notes": "<TRAFFIC> ⋅ 25km ⋅ Includes toll ($4.00)"
         }
-      ]
-    }
-  ]
+    ],
+    "groups": [
+        {
+            "trips": [
+                {
+                    "caloriesCost": 52,
+                    "progressURL": "http://granduni.buzzhives.com/satapp/postTripProgress?ID=044a20bd-a708-4395-98c8-7be6e39916d3",
+                    "hassleCost": 9.7,
+                    "carbonCost": 2.2,
+                    "segments": [
+                        {
+                            "realTime": false,
+                            "startTime": 1422849991,
+                            "vehicle": {
+                                "garage": {
+                                    "class": "Location",
+                                    "lng": 151.2839,
+                                    "lat": -33.8005
+                                },
+                                "type": "MOTORBIKE"
+                            },
+                            "segmentTemplateHashCode": -462110734,
+                            "alertHashCodes": [
+                                -805769856
+                            ],
+                            "endTime": 1422852824
+                        }
+                    ],
+                    "depart": 1422849991,
+                    "moneyCost": 7.47,
+                    "saveURL": "http://granduni.buzzhives.com/satapp/persistTrip?ID=044a20bd-a708-4395-98c8-7be6e39916d3",
+                    "queryScore": 34.4,
+                    "arrive": 1422852824,
+                    "moneyUSDCost": 6.63,
+                    "weightedScore": 34.4,
+                    "mainSegmentHashCode": -462110734,
+                    "updateURL": "http://granduni.buzzhives.com/satapp/updateTrip?ID=044a20bd-a708-4395-98c8-7be6e39916d3"
+                }
+            ]
+        }
+    ]
 }

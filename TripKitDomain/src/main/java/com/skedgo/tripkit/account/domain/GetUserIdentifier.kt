@@ -10,5 +10,5 @@ import javax.inject.Inject
 open class GetUserIdentifier @Inject constructor(
     private val userKeyRepository: UserKeyRepository
 ) {
-  open fun execute(): Observable<String> = userKeyRepository.getUserKey().toObservable()
+    open fun execute(): Observable<String> = userKeyRepository.getUserKey().toObservable()
 }
