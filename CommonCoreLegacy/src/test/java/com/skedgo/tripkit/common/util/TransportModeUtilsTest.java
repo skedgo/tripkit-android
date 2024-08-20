@@ -13,6 +13,7 @@ import org.junit.runner.RunWith;
 import org.robolectric.RobolectricTestRunner;
 
 import androidx.annotation.NonNull;
+import androidx.test.ext.junit.runners.AndroidJUnit4;
 
 import com.skedgo.tripkit.routing.ModeInfo;
 
@@ -31,7 +32,7 @@ import static org.assertj.core.api.Java6Assertions.assertThat;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
-@RunWith(RobolectricTestRunner.class)
+@RunWith(AndroidJUnit4.class)
 public class TransportModeUtilsTest {
     private Resources resources;
 
@@ -45,7 +46,7 @@ public class TransportModeUtilsTest {
         when(resources.getDisplayMetrics()).thenReturn(createDisplayMetricsByDpi(DENSITY_XHIGH));
         final String iconId = "pt-opal";
         assertThat(getIconUrlForId(resources, iconId))
-            .isEqualTo("https://api.tripgo.com/v1/modeicons/android/xhdpi/ic_transport_pt-opal.png");
+            .isEqualTo("https://static.skedgo.com/icons/android/xhdpi/ic_transport_pt-opal.png");
     }
 
     @Test
@@ -66,7 +67,7 @@ public class TransportModeUtilsTest {
         final ModeInfo modeInfo = new ModeInfo();
         modeInfo.setRemoteIconName("pt-opal");
         assertThat(getIconUrlForModeInfo(resources, modeInfo))
-            .isEqualTo("https://api.tripgo.com/v1/modeicons/android/xhdpi/ic_transport_pt-opal.png");
+            .isEqualTo("https://static.skedgo.com/icons/android/xhdpi/ic_transport_pt-opal.png");
     }
 
     @Test
@@ -89,7 +90,7 @@ public class TransportModeUtilsTest {
         final ModeInfo modeInfo = new ModeInfo();
         modeInfo.setRemoteDarkIconName("lyft-dark");
         assertThat(getDarkIconUrlForModeInfo(resources, modeInfo))
-            .isEqualTo("https://api.tripgo.com/v1/modeicons/android/xhdpi/ic_transport_lyft-dark.png");
+            .isEqualTo("https://static.skedgo.com/icons/android/xhdpi/ic_transport_lyft-dark.png");
     }
 
     @Test
@@ -112,7 +113,7 @@ public class TransportModeUtilsTest {
         final TransportMode mode = new TransportMode();
         mode.setIconId("pt-opal");
         assertThat(getIconUrlForTransportMode(resources, mode))
-            .isEqualTo("https://api.tripgo.com/v1/modeicons/android/xhdpi/ic_transport_pt-opal.png");
+            .isEqualTo("https://static.skedgo.com/icons/android/xhdpi/ic_transport_pt-opal.png");
     }
 
     @Test
@@ -135,7 +136,7 @@ public class TransportModeUtilsTest {
         final TransportMode mode = new TransportMode();
         mode.setDarkIcon("some-dark-icon");
         assertThat(getDarkIconUrlForTransportMode(resources, mode))
-            .isEqualTo("https://api.tripgo.com/v1/modeicons/android/xhdpi/ic_transport_some-dark-icon.png");
+            .isEqualTo("https://static.skedgo.com/icons/android/xhdpi/ic_transport_some-dark-icon.png");
     }
 
     @Test

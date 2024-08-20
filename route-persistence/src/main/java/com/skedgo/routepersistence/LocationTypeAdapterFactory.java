@@ -52,7 +52,7 @@ public final class LocationTypeAdapterFactory implements TypeAdapterFactory {
         }
 
         private void writeLocation(JsonWriter out, Location instance)
-                throws IOException {
+            throws IOException {
             out.beginObject();
             String nameValue = instance.getName();
             if (nameValue != null) {
@@ -96,7 +96,7 @@ public final class LocationTypeAdapterFactory implements TypeAdapterFactory {
         }
 
         private Location readLocation(JsonReader in)
-                throws IOException {
+            throws IOException {
             final Location location = new Location();
             in.beginObject();
             while (in.hasNext()) {
@@ -107,7 +107,7 @@ public final class LocationTypeAdapterFactory implements TypeAdapterFactory {
         }
 
         private void eachAttribute(JsonReader in, Location location)
-                throws IOException {
+            throws IOException {
             String attributeName = in.nextName();
             switch (attributeName.charAt(0)) {
                 case 'n':
@@ -156,7 +156,7 @@ public final class LocationTypeAdapterFactory implements TypeAdapterFactory {
         }
 
         private void readInName(JsonReader in, Location instance)
-                throws IOException {
+            throws IOException {
             if (in.peek() == JsonToken.NULL) {
                 in.nextNull();
             } else {
@@ -165,7 +165,7 @@ public final class LocationTypeAdapterFactory implements TypeAdapterFactory {
         }
 
         private void readInAddress(JsonReader in, Location instance)
-                throws IOException {
+            throws IOException {
             if (in.peek() == JsonToken.NULL) {
                 in.nextNull();
             } else {
@@ -174,7 +174,7 @@ public final class LocationTypeAdapterFactory implements TypeAdapterFactory {
         }
 
         private void readInTimezone(JsonReader in, Location instance)
-                throws IOException {
+            throws IOException {
             if (in.peek() == JsonToken.NULL) {
                 in.nextNull();
             } else {
@@ -183,22 +183,22 @@ public final class LocationTypeAdapterFactory implements TypeAdapterFactory {
         }
 
         private void readInLat(JsonReader in, Location instance)
-                throws IOException {
+            throws IOException {
             instance.setLat(in.nextDouble());
         }
 
         private void readInLng(JsonReader in, Location instance)
-                throws IOException {
+            throws IOException {
             instance.setLon(in.nextDouble());
         }
 
         private void readInBearing(JsonReader in, Location instance)
-                throws IOException {
+            throws IOException {
             instance.setBearing(in.nextInt());
         }
 
         private void readInRegion(JsonReader in, Location instance)
-                throws IOException {
+            throws IOException {
             instance.setRegion(in.nextString());
         }
     }

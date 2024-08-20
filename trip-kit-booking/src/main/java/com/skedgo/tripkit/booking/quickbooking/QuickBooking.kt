@@ -72,7 +72,7 @@ data class Input(
 
     }
 
-    fun setValuesFromId() {
+    fun setValuesFromId(defaultActionTitle: String) {
         when {
             options != null -> {
                 value = value?.run { options.firstOrNull { it.title == this }?.id ?: "" }
@@ -87,11 +87,11 @@ data class Input(
                 }
             }
 
-            value == type.getDefaultValueByType(title) -> {
+            value == type.getDefaultValueByType(title, defaultActionTitle = defaultActionTitle) -> {
                 value = ""
             }
 
-            values == listOf(type.getDefaultValueByType(title)) -> {
+            values == listOf(type.getDefaultValueByType(title, defaultActionTitle = defaultActionTitle)) -> {
                 values = emptyList()
             }
         }

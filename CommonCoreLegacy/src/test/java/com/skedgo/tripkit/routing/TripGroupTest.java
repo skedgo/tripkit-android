@@ -2,12 +2,13 @@ package com.skedgo.tripkit.routing;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.robolectric.RobolectricTestRunner;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
+
+import androidx.test.ext.junit.runners.AndroidJUnit4;
 
 import static org.assertj.core.api.Java6Assertions.assertThat;
 import static org.mockito.Mockito.mock;
@@ -15,7 +16,7 @@ import static org.mockito.Mockito.when;
 import static com.skedgo.tripkit.routing.GroupVisibility.COMPACT;
 import static com.skedgo.tripkit.routing.GroupVisibility.FULL;
 
-@RunWith(RobolectricTestRunner.class)
+@RunWith(AndroidJUnit4.class)
 public class TripGroupTest {
     @Test
     public void addAsDisplayTrip() {

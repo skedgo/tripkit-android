@@ -59,14 +59,14 @@ public abstract class BookingConfirmation implements Parcelable {
     @Override
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeTypedList(actions());
-        dest.writeParcelable(provider(), flags);
-        dest.writeParcelable(purchase(), flags);
-        dest.writeParcelable(status(), flags);
-        dest.writeParcelable(vehicle(), flags);
         dest.writeTypedList(input());
         dest.writeTypedList(notes());
         dest.writeTypedList(tickets());
         dest.writeTypedList(purchasedTickets());
+        dest.writeParcelable(provider(), flags);
+        dest.writeParcelable(purchase(), flags);
+        dest.writeParcelable(status(), flags);
+        dest.writeParcelable(vehicle(), flags);
     }
 
     @Override

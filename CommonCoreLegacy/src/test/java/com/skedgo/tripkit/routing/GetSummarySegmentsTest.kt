@@ -1,11 +1,14 @@
 package com.skedgo.tripkit.routing
 
+import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.nhaarman.mockitokotlin2.eq
 import com.nhaarman.mockitokotlin2.mock
 import com.nhaarman.mockitokotlin2.whenever
 import org.assertj.core.api.Java6Assertions.assertThat
 import org.junit.Test
+import org.junit.runner.RunWith
 
+@RunWith(AndroidJUnit4::class)
 class GetSummarySegmentsTest {
     @Test
     fun arrivalSegmentShouldNotBeInSummaryArea() {

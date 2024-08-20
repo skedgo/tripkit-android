@@ -8,9 +8,11 @@ import java.util.Calendar;
 import java.util.Locale;
 import java.util.TimeZone;
 
+import androidx.test.ext.junit.runners.AndroidJUnit4;
+
 import static org.assertj.core.api.Java6Assertions.assertThat;
 
-@RunWith(RobolectricTestRunner.class)
+@RunWith(AndroidJUnit4.class)
 public class TimeUtilsTest {
     // Most used languages
     private final Locale locale_en_AU = new Locale("en", "AU");
@@ -256,7 +258,7 @@ public class TimeUtilsTest {
             "America/Los_Angeles",
             summerTime.getTimeInMillis() / 1000,
             locale_en_AU
-        )).isEqualTo("PDT");
+        )).isEqualTo("GMT-07:00");
 
         assertThat(TimeUtils.getTimeZoneDisplayName(
             "America/Los_Angeles",
@@ -268,7 +270,7 @@ public class TimeUtilsTest {
             "America/Los_Angeles",
             summerTime.getTimeInMillis() / 1000,
             locale_en_GB
-        )).isEqualTo("PDT");
+        )).isEqualTo("GMT-07:00");
 
         assertThat(TimeUtils.getTimeZoneDisplayName(
             "America/Los_Angeles",
@@ -290,7 +292,7 @@ public class TimeUtilsTest {
             "America/Los_Angeles",
             winterTime.getTimeInMillis() / 1000,
             locale_en_AU
-        )).isEqualTo("PST");
+        )).isEqualTo("GMT-08:00");
 
         assertThat(TimeUtils.getTimeZoneDisplayName(
             "America/Los_Angeles",
@@ -302,7 +304,7 @@ public class TimeUtilsTest {
             "America/Los_Angeles",
             winterTime.getTimeInMillis() / 1000,
             locale_en_GB
-        )).isEqualTo("PST");
+        )).isEqualTo("GMT-08:00");
 
         assertThat(TimeUtils.getTimeZoneDisplayName(
             "America/Los_Angeles",
@@ -327,7 +329,7 @@ public class TimeUtilsTest {
             "America/New_York",
             summerTime.getTimeInMillis() / 1000,
             locale_en_AU
-        )).isEqualTo("EDT");
+        )).isEqualTo("GMT-04:00");
 
         assertThat(TimeUtils.getTimeZoneDisplayName(
             "America/New_York",
@@ -339,7 +341,7 @@ public class TimeUtilsTest {
             "America/New_York",
             summerTime.getTimeInMillis() / 1000,
             locale_en_GB
-        )).isEqualTo("EDT");
+        )).isEqualTo("GMT-04:00");
 
         assertThat(TimeUtils.getTimeZoneDisplayName(
             "America/New_York",
@@ -361,7 +363,7 @@ public class TimeUtilsTest {
             "America/New_York",
             winterTime.getTimeInMillis() / 1000,
             locale_en_AU
-        )).isEqualTo("EST");
+        )).isEqualTo("GMT-05:00");
 
         assertThat(TimeUtils.getTimeZoneDisplayName(
             "America/New_York",
@@ -373,7 +375,7 @@ public class TimeUtilsTest {
             "America/New_York",
             winterTime.getTimeInMillis() / 1000,
             locale_en_GB
-        )).isEqualTo("EST");
+        )).isEqualTo("GMT-05:00");
 
         assertThat(TimeUtils.getTimeZoneDisplayName(
             "America/New_York",
