@@ -2,321 +2,374 @@ package com.skedgo.tripkit.booking.ui.viewmodel
 
 import android.content.res.Resources
 import android.os.Bundle
+import androidx.arch.core.executor.testing.InstantTaskExecutorRule
+import androidx.test.core.app.ApplicationProvider
+import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.nhaarman.mockitokotlin2.mock
 import com.nhaarman.mockitokotlin2.whenever
-import com.skedgo.tripkit.booking.*
-import com.skedgo.tripkit.booking.ui.activity.*
+import com.skedgo.tripkit.booking.BookingAction
+import com.skedgo.tripkit.booking.BookingError
+import com.skedgo.tripkit.booking.BookingForm
+import com.skedgo.tripkit.booking.ExternalFormField
+import com.skedgo.tripkit.booking.FormGroup
+import com.skedgo.tripkit.booking.NullBookingForm
+import com.skedgo.tripkit.booking.PasswordFormField
+import com.skedgo.tripkit.booking.R
+import com.skedgo.tripkit.booking.StringFormField
+import com.skedgo.tripkit.booking.ui.activity.BOOKING_TYPE_ACTION
+import com.skedgo.tripkit.booking.ui.activity.BOOKING_TYPE_FORM
+import com.skedgo.tripkit.booking.ui.activity.BOOKING_TYPE_URL
+import com.skedgo.tripkit.booking.ui.activity.KEY_FORM
+import com.skedgo.tripkit.booking.ui.activity.KEY_TYPE
+import com.skedgo.tripkit.booking.ui.activity.KEY_URL
+import com.skedgo.tripkit.booking.ui.base.MockKTest
 import com.skedgo.tripkit.booking.ui.usecase.GetBookingFormFromAction
 import com.skedgo.tripkit.booking.ui.usecase.GetBookingFormFromUrl
 import com.skedgo.tripkit.booking.ui.usecase.IsCancelAction
 import com.skedgo.tripkit.booking.ui.usecase.IsDoneAction
+import io.reactivex.Observable
 import org.assertj.core.api.Java6Assertions.assertThat
+import org.junit.After
+import org.junit.Before
+import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
-import androidx.test.core.app.ApplicationProvider
-import org.robolectric.RobolectricTestRunner
-import io.reactivex.Observable
 import java.net.SocketTimeoutException
 
 
-@RunWith(RobolectricTestRunner::class)
-class BookingFormViewModelTest {
+@RunWith(AndroidJUnit4::class)
+class BookingFormViewModelTest: MockKTest() {
 
-  private val resources: Resources = (ApplicationProvider.getApplicationContext() as android.content.Context).resources
-  private val getBookingFormFromUrl: GetBookingFormFromUrl = mock()
-  private val getBookingFormFromAction: GetBookingFormFromAction = mock()
-  private val isCancelAction: IsCancelAction = mock()
-  private val isDoneAction: IsDoneAction = mock()
+    @get:Rule
+    val rule = InstantTaskExecutorRule()
 
-  private val viewModel: BookingFormViewModel by lazy {
-    BookingFormViewModel(resources, getBookingFormFromUrl,
-        getBookingFormFromAction, isCancelAction, isDoneAction)
-  }
+    @Before
+    fun setup() {
+        initRx()
+    }
 
-  @Test
-  fun shouldActionEmitCancel() {
-    val bookingForm = mock<BookingForm>()
+    @After
+    fun tearDown() {
+        tearDownRx()
+    }
 
-    whenever(isCancelAction.execute(bookingForm)).thenReturn(true)
-    whenever(isDoneAction.execute(bookingForm)).thenReturn(true)
+    private val resources: Resources =
+        (ApplicationProvider.getApplicationContext() as android.content.Context).resources
+    private val getBookingFormFromUrl: GetBookingFormFromUrl = mock()
+    private val getBookingFormFromAction: GetBookingFormFromAction = mock()
+    private val isCancelAction: IsCancelAction = mock()
+    private val isDoneAction: IsDoneAction = mock()
 
-    val subscriber = viewModel.onCancel.test()
+    private val viewModel: BookingFormViewModel by lazy {
+        BookingFormViewModel(
+            resources, getBookingFormFromUrl,
+            getBookingFormFromAction, isCancelAction, isDoneAction
+        )
+    }
 
-    viewModel.bookingForm = bookingForm
+    @Test
+    fun shouldActionEmitCancel() {
+        val bookingForm = mock<BookingForm>()
 
-    viewModel.onAction()
+        whenever(isCancelAction.execute(bookingForm)).thenReturn(true)
+        whenever(isDoneAction.execute(bookingForm)).thenReturn(true)
 
-    subscriber.assertValue(true)
+        val subscriber = viewModel.onCancel.test()
 
-  }
+        viewModel.bookingForm = bookingForm
 
-  @Test
-  fun shouldActionEmitDone() {
-    val bookingForm = mock<BookingForm>()
+        viewModel.onAction()
 
-    whenever(isCancelAction.execute(bookingForm)).thenReturn(false)
-    whenever(isDoneAction.execute(bookingForm)).thenReturn(true)
+        subscriber.assertValue(true)
 
-    val subscriber = viewModel.onDone.test()
+    }
 
-    viewModel.bookingForm = bookingForm
+    @Test
+    fun shouldActionEmitDone() {
+        val bookingForm = mock<BookingForm>()
 
-    viewModel.onAction()
+        whenever(isCancelAction.execute(bookingForm)).thenReturn(false)
+        whenever(isDoneAction.execute(bookingForm)).thenReturn(true)
 
-    subscriber.assertValue(bookingForm)
+        val subscriber = viewModel.onDone.test()
 
-  }
+        viewModel.bookingForm = bookingForm
 
-  @Test
-  fun shouldActionEmitNextBookingForm() {
-    val bookingForm = mock<BookingForm>()
+        viewModel.onAction()
 
-    whenever(isCancelAction.execute(bookingForm)).thenReturn(false)
-    whenever(isDoneAction.execute(bookingForm)).thenReturn(false)
+        subscriber.assertValue(bookingForm)
 
-    val subscriber = viewModel.onNextBookingFormAction.test()
+    }
 
-    viewModel.bookingForm = bookingForm
+    @Test
+    fun shouldActionEmitNextBookingForm() {
+        val bookingForm = mock<BookingForm>()
 
-    viewModel.onAction()
+        whenever(isCancelAction.execute(bookingForm)).thenReturn(false)
+        whenever(isDoneAction.execute(bookingForm)).thenReturn(false)
 
-    subscriber.assertValue(bookingForm)
+        val subscriber = viewModel.onNextBookingFormAction.test()
 
-  }
+        viewModel.bookingForm = bookingForm
 
-  @Test
-  fun shouldEmitRetry() {
-    val bookingError = mock<BookingError>()
-    whenever(bookingError.url).thenReturn("retry url")
+        viewModel.onAction()
 
-    val subscriber = viewModel.onErrorRetry.test()
+        subscriber.assertValue(bookingForm)
 
-    viewModel.bookingError = bookingError
+    }
 
-    viewModel.onRetry()
+    @Test
+    fun shouldEmitRetry() {
+        val bookingError = mock<BookingError>()
+        whenever(bookingError.url).thenReturn("retry url")
 
-    subscriber.assertValue("retry url")
+        val subscriber = viewModel.onErrorRetry.test()
 
-  }
+        viewModel.bookingError = bookingError
 
-  @Test
-  fun shouldEmitCancel() {
-    val subscriber = viewModel.onCancel.test()
+        viewModel.onRetry()
 
-    viewModel.onCancel()
+        subscriber.assertValue("retry url")
 
-    subscriber.assertValue(true)
+    }
 
-  }
+    @Test
+    fun shouldEmitCancel() {
+        val subscriber = viewModel.onCancel.test()
 
-  @Test
-  fun shouldShowRecoveryError() {
-    val bookingError = mock<BookingError>()
-    whenever(bookingError.title).thenReturn("error title")
-    whenever(bookingError.error).thenReturn("error message")
-    whenever(bookingError.recoveryTitle).thenReturn("recovery title")
-    whenever(bookingError.url).thenReturn("retry url")
+        viewModel.onCancel()
 
-    viewModel.showError(bookingError)
+        subscriber.assertValue(true)
 
-    assertThat(viewModel.hasError.get()).isTrue()
-    assertThat(viewModel.errorTitle.get()).isEqualTo("error title")
-    assertThat(viewModel.errorMessage.get()).isEqualTo("error message")
-    assertThat(viewModel.retryText.get()).isEqualTo("recovery title")
-    assertThat(viewModel.showRetry.get()).isTrue()
+    }
 
-  }
+    @Test
+    fun shouldShowRecoveryError() {
+        val bookingError = mock<BookingError>()
+        whenever(bookingError.title).thenReturn("error title")
+        whenever(bookingError.error).thenReturn("error message")
+        whenever(bookingError.recoveryTitle).thenReturn("recovery title")
+        whenever(bookingError.url).thenReturn("retry url")
 
-  @Test
-  fun shouldShowRetryError() {
-    val bookingError = mock<BookingError>()
-    whenever(bookingError.title).thenReturn("error title")
-    whenever(bookingError.error).thenReturn("error message")
-    whenever(bookingError.recoveryTitle).thenReturn(null)
-    whenever(bookingError.url).thenReturn(null)
+        viewModel.showError(bookingError)
 
-    viewModel.showError(bookingError)
+        assertThat(viewModel.hasError.get()).isTrue()
+        assertThat(viewModel.errorTitle.get()).isEqualTo("error title")
+        assertThat(viewModel.errorMessage.get()).isEqualTo("error message")
+        assertThat(viewModel.retryText.get()).isEqualTo("recovery title")
+        assertThat(viewModel.showRetry.get()).isTrue()
 
-    assertThat(viewModel.hasError.get()).isTrue()
-    assertThat(viewModel.errorTitle.get()).isEqualTo("error title")
-    assertThat(viewModel.errorMessage.get()).isEqualTo("error message")
-    assertThat(viewModel.retryText.get()).isEqualTo(resources.getString(R.string.retry))
-    assertThat(viewModel.showRetry.get()).isFalse()
+    }
 
-  }
+    @Test
+    fun shouldShowRetryError() {
+        val bookingError = mock<BookingError>()
+        whenever(bookingError.title).thenReturn("error title")
+        whenever(bookingError.error).thenReturn("error message")
+        whenever(bookingError.recoveryTitle).thenReturn(null)
+        whenever(bookingError.url).thenReturn(null)
 
-  @Test
-  fun shouldUpdateBookingFormInfoWithAction() {
-    val bookingForm = mock<BookingForm>()
-    val action = mock<BookingAction>()
-    whenever(bookingForm.action).thenReturn(action)
-    whenever(action.title).thenReturn("action title")
-    whenever(bookingForm.title).thenReturn("booking title")
+        viewModel.showError(bookingError)
 
-    viewModel.bookingForm = bookingForm
+        assertThat(viewModel.hasError.get()).isTrue()
+        assertThat(viewModel.errorTitle.get()).isEqualTo("error title")
+        assertThat(viewModel.errorMessage.get()).isEqualTo("error message")
+        assertThat(viewModel.retryText.get()).isEqualTo(resources.getString(R.string.retry))
+        assertThat(viewModel.showRetry.get()).isFalse()
 
-    val subscriber = viewModel.onUpdateFormTitle.test()
+    }
 
-    viewModel.updateBookingFormInfo()
+    @Test
+    fun shouldUpdateBookingFormInfoWithAction() {
+        val bookingForm = mock<BookingForm>()
+        val action = mock<BookingAction>()
+        whenever(bookingForm.action).thenReturn(action)
+        whenever(action.title).thenReturn("action title")
+        whenever(bookingForm.title).thenReturn("booking title")
 
-    subscriber.assertValue("booking title")
+        viewModel.bookingForm = bookingForm
 
-    assertThat(viewModel.showAction.get()).isTrue()
-    assertThat(viewModel.actionTitle.get()).isEqualTo("action title")
+        val subscriber = viewModel.onUpdateFormTitle.test()
 
-  }
+        viewModel.updateBookingFormInfo()
 
-  @Test
-  fun shouldUpdateBookingFormInfoWithNoAction() {
-    val bookingForm = mock<BookingForm>()
-    whenever(bookingForm.action).thenReturn(null)
-    whenever(bookingForm.title).thenReturn("booking title")
+        subscriber.assertValue("booking title")
 
-    viewModel.bookingForm = bookingForm
+        assertThat(viewModel.showAction.get()).isTrue()
+        assertThat(viewModel.actionTitle.get()).isEqualTo("action title")
 
-    val subscriber = viewModel.onUpdateFormTitle.test()
+    }
 
-    viewModel.updateBookingFormInfo()
+    @Test
+    fun shouldUpdateBookingFormInfoWithNoAction() {
+        val bookingForm = mock<BookingForm>()
+        whenever(bookingForm.action).thenReturn(null)
+        whenever(bookingForm.title).thenReturn("booking title")
 
-    subscriber.assertValue("booking title")
+        viewModel.bookingForm = bookingForm
 
-    assertThat(viewModel.showAction.get()).isFalse()
-    assertThat(viewModel.actionTitle.get()).isNull()
+        val subscriber = viewModel.onUpdateFormTitle.test()
 
-  }
+        viewModel.updateBookingFormInfo()
 
-  @Test
-  fun shouldUpdateFieldList() {
-    val bookingForm = mock<BookingForm>()
-    val formGroup = mock<FormGroup>()
-    val stringField = mock<StringFormField>()
-    val passwordField = mock<PasswordFormField>()
-    val externalField = mock<ExternalFormField>()
-    val bookingFormField = mock<BookingForm>()
+        subscriber.assertValue("booking title")
 
-    whenever(bookingForm.form).thenReturn(listOf(formGroup))
-    whenever(formGroup.title).thenReturn("group title")
-    whenever(formGroup.footer).thenReturn("group footer")
-    whenever(formGroup.fields).thenReturn(listOf(stringField, passwordField, externalField, bookingFormField))
+        assertThat(viewModel.showAction.get()).isFalse()
+        assertThat(viewModel.actionTitle.get()).isNull()
 
-    viewModel.bookingForm = bookingForm
+    }
 
-    viewModel.updateFieldList()
+    @Test
+    fun shouldUpdateFieldList() {
+        val bookingForm = mock<BookingForm>()
+        val formGroup = mock<FormGroup>()
+        val stringField = mock<StringFormField>()
+        val passwordField = mock<PasswordFormField>()
+        val externalField = mock<ExternalFormField>()
+        val bookingFormField = mock<BookingForm>()
 
-    assertThat(viewModel.items).hasSize(6)
-    assertThat(viewModel.items).contains("group title")
-    assertThat(viewModel.items).contains("group footer")
-    assertThat(viewModel.items).hasAtLeastOneElementOfType(FieldStringViewModel::class.java)
-    assertThat(viewModel.items).hasAtLeastOneElementOfType(FieldPasswordViewModel::class.java)
-    assertThat(viewModel.items).hasAtLeastOneElementOfType(FieldExternalViewModel::class.java)
-    assertThat(viewModel.items).hasAtLeastOneElementOfType(FieldBookingFormViewModel::class.java)
+        whenever(bookingForm.form).thenReturn(listOf(formGroup))
+        whenever(formGroup.title).thenReturn("group title")
+        whenever(formGroup.footer).thenReturn("group footer")
+        whenever(formGroup.fields).thenReturn(
+            listOf(
+                stringField,
+                passwordField,
+                externalField,
+                bookingFormField
+            )
+        )
 
-  }
+        viewModel.bookingForm = bookingForm
 
-  @Test
-  fun shouldEmitErrorOnFetchBookingForm() {
-    val bundle = Bundle()
-    val subscriber = viewModel.fetchBookingFormAsync(bundle).test()
+        viewModel.updateFieldList()
 
-    subscriber.assertError(Error::class.java)
-  }
+        assertThat(viewModel.items).hasSize(6)
+        assertThat(viewModel.items).contains("group title")
+        assertThat(viewModel.items).contains("group footer")
+        assertThat(viewModel.items).hasAtLeastOneElementOfType(FieldStringViewModel::class.java)
+        assertThat(viewModel.items).hasAtLeastOneElementOfType(FieldPasswordViewModel::class.java)
+        assertThat(viewModel.items).hasAtLeastOneElementOfType(FieldExternalViewModel::class.java)
+        assertThat(viewModel.items).hasAtLeastOneElementOfType(FieldBookingFormViewModel::class.java)
 
-  @Test
-  fun shouldEmitBundleFormOnFetchBookingForm() {
-    val bookingForm = mock<BookingForm>()
+    }
 
-    val bundle = Bundle()
-    bundle.putInt(KEY_TYPE, BOOKING_TYPE_FORM)
-    bundle.putParcelable(KEY_FORM, bookingForm)
+    @Test
+    fun shouldEmitErrorOnFetchBookingForm() {
+        val bundle = Bundle()
+        val subscriber = viewModel.fetchBookingFormAsync(bundle).test()
 
-    val subscriber = viewModel.fetchBookingFormAsync(bundle).test()
+        subscriber.assertError(Error::class.java)
+    }
 
-    subscriber.assertValue(bookingForm)
-    assertThat(viewModel.bookingForm).isEqualTo(bookingForm)
-  }
+    @Test
+    fun shouldEmitBundleFormOnFetchBookingForm() {
+        val bookingForm = mock<BookingForm>()
 
-  @Test
-  fun shouldEmitBookingFormFromUrlOnFetchBookingForm() {
-    val bookingForm = mock<BookingForm>()
+        val bundle = Bundle()
+        bundle.putInt(KEY_TYPE, BOOKING_TYPE_FORM)
+        bundle.putParcelable(KEY_FORM, bookingForm)
 
-    val bundle = Bundle()
-    bundle.putInt(KEY_TYPE, BOOKING_TYPE_URL)
-    bundle.putString(KEY_URL, "url")
+        val subscriber = viewModel.fetchBookingFormAsync(bundle).test()
 
-    whenever(getBookingFormFromUrl.execute("url")).thenReturn(Observable.just(bookingForm))
+        subscriber.assertValue(bookingForm)
+        assertThat(viewModel.bookingForm).isEqualTo(bookingForm)
+    }
 
-    val subscriber = viewModel.fetchBookingFormAsync(bundle).test()
+    @Test
+    fun shouldEmitBookingFormFromUrlOnFetchBookingForm() {
+        val bookingForm = mock<BookingForm>()
 
-    subscriber.assertValue(bookingForm)
-    assertThat(viewModel.bookingForm).isEqualTo(bookingForm)
-  }
+        val bundle = Bundle()
+        bundle.putInt(KEY_TYPE, BOOKING_TYPE_URL)
+        bundle.putString(KEY_URL, "url")
 
-  @Test
-  fun shouldEmitBookingFormFromActionOnFetchBookingForm() {
-    val bookingForm = mock<BookingForm>()
-    val bookingFormAction = mock<BookingForm>()
+        whenever(getBookingFormFromUrl.execute("url")).thenReturn(Observable.just(bookingForm))
 
-    val bundle = Bundle()
-    bundle.putInt(KEY_TYPE, BOOKING_TYPE_ACTION)
-    bundle.putParcelable(KEY_FORM, bookingFormAction)
+        val subscriber = viewModel.fetchBookingFormAsync(bundle).test()
 
-    whenever(getBookingFormFromAction.execute(bookingFormAction)).thenReturn(Observable.just(bookingForm))
+        subscriber.assertValue(bookingForm)
+        assertThat(viewModel.bookingForm).isEqualTo(bookingForm)
+    }
 
-    val subscriber = viewModel.fetchBookingFormAsync(bundle).test()
+    @Test
+    fun shouldEmitBookingFormFromActionOnFetchBookingForm() {
+        val bookingForm = mock<BookingForm>()
+        val bookingFormAction = mock<BookingForm>()
 
-    subscriber.assertValue(bookingForm)
-    assertThat(viewModel.bookingForm).isEqualTo(bookingForm)
-  }
+        val bundle = Bundle()
+        bundle.putInt(KEY_TYPE, BOOKING_TYPE_ACTION)
+        bundle.putParcelable(KEY_FORM, bookingFormAction)
 
-  @Test
-  fun shouldEmitDoneOnFetchBookingForm() {
-    val bookingFormAction = mock<BookingForm>()
+        whenever(getBookingFormFromAction.execute(bookingFormAction)).thenReturn(
+            Observable.just(
+                bookingForm
+            )
+        )
 
-    val bundle = Bundle()
-    bundle.putInt(KEY_TYPE, BOOKING_TYPE_ACTION)
-    bundle.putParcelable(KEY_FORM, bookingFormAction)
+        val subscriber = viewModel.fetchBookingFormAsync(bundle).test()
 
-    whenever(getBookingFormFromAction.execute(bookingFormAction)).thenReturn(Observable.empty())
+        subscriber.assertValue(bookingForm)
+        assertThat(viewModel.bookingForm).isEqualTo(bookingForm)
+    }
 
-    val subscriberDone = viewModel.onDone.test()
-    val subscriber = viewModel.fetchBookingFormAsync(bundle).test()
+    @Test
+    fun shouldEmitDoneOnFetchBookingForm() {
+        val bookingFormAction = mock<BookingForm>()
 
-    subscriber.assertComplete()
-    subscriberDone.assertEmpty()
-  }
+        val bundle = Bundle()
+        bundle.putInt(KEY_TYPE, BOOKING_TYPE_ACTION)
+        bundle.putParcelable(KEY_FORM, bookingFormAction)
 
-  @Test
-  fun shouldEmitDoneOnFetchNullBookingForm() {
-    val bookingFormAction = mock<BookingForm>()
+        whenever(getBookingFormFromAction.execute(bookingFormAction)).thenReturn(Observable.empty())
 
-    val bundle = Bundle()
-    bundle.putInt(KEY_TYPE, BOOKING_TYPE_ACTION)
-    bundle.putParcelable(KEY_FORM, bookingFormAction)
+        val subscriberDone = viewModel.onDone.test()
+        val subscriber = viewModel.fetchBookingFormAsync(bundle).test()
 
-    whenever(getBookingFormFromAction.execute(bookingFormAction)).thenReturn(Observable.just(NullBookingForm))
+        subscriber.assertComplete()
+        subscriberDone.assertEmpty()
+    }
 
-    val subscriberDone = viewModel.onDone.test()
-    val subscriber = viewModel.fetchBookingFormAsync(bundle).test()
+    @Test
+    fun shouldEmitDoneOnFetchNullBookingForm() {
+        val bookingFormAction = mock<BookingForm>()
 
-    subscriber.assertValue(NullBookingForm)
-    subscriberDone.assertValue(NullBookingForm)
-  }
+        val bundle = Bundle()
+        bundle.putInt(KEY_TYPE, BOOKING_TYPE_ACTION)
+        bundle.putParcelable(KEY_FORM, bookingFormAction)
 
-  @Test
-  fun `should show error for network error`() {
-    val bundle = Bundle()
-    bundle.putInt(KEY_TYPE, BOOKING_TYPE_URL)
-    bundle.putString(KEY_URL, "abc")
+        whenever(getBookingFormFromAction.execute(bookingFormAction)).thenReturn(
+            Observable.just(
+                NullBookingForm
+            )
+        )
 
-    whenever(getBookingFormFromUrl.execute("abc")).thenReturn(Observable.error(SocketTimeoutException()))
-    viewModel.fetchBookingFormAsync(bundle)
-        .test()
-        .assertNoErrors()
+        val subscriberDone = viewModel.onDone.test()
+        val subscriber = viewModel.fetchBookingFormAsync(bundle).test()
 
-    assertThat(viewModel.hasError.get()).isTrue()
-    assertThat(viewModel.bookingError).isNull()
-    assertThat(viewModel.errorTitle.get()).isEqualTo("An unexpected network error has occurred.")
-    assertThat(viewModel.errorMessage.get()).isNull()
-    assertThat(viewModel.showRetry.get()).isTrue()
-  }
+        subscriber.assertValue(NullBookingForm)
+        subscriberDone.assertValue(NullBookingForm)
+    }
+
+    @Test
+    fun `should show error for network error`() {
+        val bundle = Bundle()
+        bundle.putInt(KEY_TYPE, BOOKING_TYPE_URL)
+        bundle.putString(KEY_URL, "abc")
+
+        whenever(getBookingFormFromUrl.execute("abc")).thenReturn(
+            Observable.error(
+                SocketTimeoutException()
+            )
+        )
+        viewModel.fetchBookingFormAsync(bundle)
+            .test()
+            .assertNoErrors()
+
+        assertThat(viewModel.hasError.get()).isTrue()
+        assertThat(viewModel.bookingError).isNull()
+        assertThat(viewModel.errorTitle.get()).isEqualTo("An unexpected network error has occurred.")
+        assertThat(viewModel.errorMessage.get()).isNull()
+        assertThat(viewModel.showRetry.get()).isTrue()
+    }
 }

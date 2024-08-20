@@ -1,119 +1,137 @@
 package com.skedgo.tripkit.booking.ui.viewmodel
 
+import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.nhaarman.mockitokotlin2.mock
 import com.nhaarman.mockitokotlin2.whenever
 import com.skedgo.tripkit.booking.BookingForm
+import io.reactivex.subjects.PublishSubject
 import org.assertj.core.api.Java6Assertions.assertThat
 import org.junit.Test
 import org.junit.runner.RunWith
-import org.robolectric.RobolectricTestRunner
-import io.reactivex.subjects.PublishSubject
 
-@RunWith(RobolectricTestRunner::class)
+@RunWith(AndroidJUnit4::class)
 class FieldBookingFormViewModelTest {
 
-  @Test fun shouldSetTitle() {
+    @Test
+    fun shouldSetTitle() {
 
-    val bookingFormFormField: BookingForm = mock()
-    whenever(bookingFormFormField.title).thenReturn("title")
+        val bookingFormFormField: BookingForm = mock()
+        whenever(bookingFormFormField.title).thenReturn("title")
 
-    val viewModel: FieldBookingFormViewModel = FieldBookingFormViewModel(bookingFormFormField, PublishSubject.create())
+        val viewModel: FieldBookingFormViewModel =
+            FieldBookingFormViewModel(bookingFormFormField, PublishSubject.create())
 
-    assertThat(viewModel.title).isEqualTo("title")
+        assertThat(viewModel.title).isEqualTo("title")
 
-  }
+    }
 
-  @Test fun shouldSetEmptyTitle() {
+    @Test
+    fun shouldSetEmptyTitle() {
 
-    val bookingFormFormField: BookingForm = mock()
-    whenever(bookingFormFormField.title).thenReturn(null)
+        val bookingFormFormField: BookingForm = mock()
+        whenever(bookingFormFormField.title).thenReturn(null)
 
-    val viewModel: FieldBookingFormViewModel = FieldBookingFormViewModel(bookingFormFormField, PublishSubject.create())
+        val viewModel: FieldBookingFormViewModel =
+            FieldBookingFormViewModel(bookingFormFormField, PublishSubject.create())
 
-    assertThat(viewModel.title).isEqualTo("")
+        assertThat(viewModel.title).isEqualTo("")
 
-  }
+    }
 
-  @Test fun shouldSetSubTitle() {
+    @Test
+    fun shouldSetSubTitle() {
 
-    val bookingFormFormField: BookingForm = mock()
-    whenever(bookingFormFormField.subtitle).thenReturn("subtitle")
+        val bookingFormFormField: BookingForm = mock()
+        whenever(bookingFormFormField.subtitle).thenReturn("subtitle")
 
-    val viewModel: FieldBookingFormViewModel = FieldBookingFormViewModel(bookingFormFormField, PublishSubject.create())
+        val viewModel: FieldBookingFormViewModel =
+            FieldBookingFormViewModel(bookingFormFormField, PublishSubject.create())
 
-    assertThat(viewModel.subTitle).isEqualTo("subtitle")
+        assertThat(viewModel.subTitle).isEqualTo("subtitle")
 
-  }
+    }
 
-  @Test fun shouldSetEmptySubTitle() {
+    @Test
+    fun shouldSetEmptySubTitle() {
 
-    val bookingFormFormField: BookingForm = mock()
-    whenever(bookingFormFormField.subtitle).thenReturn(null)
+        val bookingFormFormField: BookingForm = mock()
+        whenever(bookingFormFormField.subtitle).thenReturn(null)
 
-    val viewModel: FieldBookingFormViewModel = FieldBookingFormViewModel(bookingFormFormField, PublishSubject.create())
+        val viewModel: FieldBookingFormViewModel =
+            FieldBookingFormViewModel(bookingFormFormField, PublishSubject.create())
 
-    assertThat(viewModel.subTitle).isEqualTo("")
+        assertThat(viewModel.subTitle).isEqualTo("")
 
-  }
+    }
 
-  @Test fun shouldHaveImageUrl() {
+    @Test
+    fun shouldHaveImageUrl() {
 
-    val bookingFormFormField: BookingForm = mock()
-    whenever(bookingFormFormField.imageUrl).thenReturn("url")
+        val bookingFormFormField: BookingForm = mock()
+        whenever(bookingFormFormField.imageUrl).thenReturn("url")
 
-    val viewModel: FieldBookingFormViewModel = FieldBookingFormViewModel(bookingFormFormField, PublishSubject.create())
+        val viewModel: FieldBookingFormViewModel =
+            FieldBookingFormViewModel(bookingFormFormField, PublishSubject.create())
 
-    assertThat(viewModel.hasImageUrl).isTrue()
+        assertThat(viewModel.hasImageUrl).isTrue()
 
-  }
+    }
 
-  @Test fun shouldNotHaveImageUrl() {
+    @Test
+    fun shouldNotHaveImageUrl() {
 
-    val bookingFormFormField: BookingForm = mock()
-    whenever(bookingFormFormField.imageUrl).thenReturn(null)
+        val bookingFormFormField: BookingForm = mock()
+        whenever(bookingFormFormField.imageUrl).thenReturn(null)
 
-    val viewModel: FieldBookingFormViewModel = FieldBookingFormViewModel(bookingFormFormField, PublishSubject.create())
+        val viewModel: FieldBookingFormViewModel =
+            FieldBookingFormViewModel(bookingFormFormField, PublishSubject.create())
 
-    assertThat(viewModel.hasImageUrl).isFalse()
+        assertThat(viewModel.hasImageUrl).isFalse()
 
-  }
+    }
 
-  @Test fun shouldSetImageUrl() {
+    @Test
+    fun shouldSetImageUrl() {
 
-    val bookingFormFormField: BookingForm = mock()
-    whenever(bookingFormFormField.imageUrl).thenReturn("url")
+        val bookingFormFormField: BookingForm = mock()
+        whenever(bookingFormFormField.imageUrl).thenReturn("url")
 
-    val viewModel: FieldBookingFormViewModel = FieldBookingFormViewModel(bookingFormFormField, PublishSubject.create())
+        val viewModel: FieldBookingFormViewModel =
+            FieldBookingFormViewModel(bookingFormFormField, PublishSubject.create())
 
-    assertThat(viewModel.imageUrl).isEqualTo("url")
+        assertThat(viewModel.imageUrl).isEqualTo("url")
 
-  }
+    }
 
-  @Test fun shouldSetNullImageUrl() {
+    @Test
+    fun shouldSetNullImageUrl() {
 
-    val bookingFormFormField: BookingForm = mock()
-    whenever(bookingFormFormField.imageUrl).thenReturn(null)
+        val bookingFormFormField: BookingForm = mock()
+        whenever(bookingFormFormField.imageUrl).thenReturn(null)
 
-    val viewModel: FieldBookingFormViewModel = FieldBookingFormViewModel(bookingFormFormField, PublishSubject.create())
+        val viewModel: FieldBookingFormViewModel =
+            FieldBookingFormViewModel(bookingFormFormField, PublishSubject.create())
 
-    assertThat(viewModel.imageUrl).isEqualTo(null)
+        assertThat(viewModel.imageUrl).isEqualTo(null)
 
-  }
+    }
 
-  @Test fun shouldEmitBookingForm() {
+    @Test
+    fun shouldEmitBookingForm() {
 
-    val bookingForm: BookingForm = mock()
+        val bookingForm: BookingForm = mock()
 
-    val onBookingForm: PublishSubject<BookingForm> = PublishSubject.create()
+        val onBookingForm: PublishSubject<BookingForm> = PublishSubject.create()
 
-    val subscriber = onBookingForm.test()
+        val subscriber = onBookingForm.test()
 
-    val viewModel: FieldBookingFormViewModel = FieldBookingFormViewModel(bookingForm, onBookingForm)
+        val viewModel: FieldBookingFormViewModel =
+            FieldBookingFormViewModel(bookingForm, onBookingForm)
 
-    viewModel.onBookingFormAction()
+        viewModel.onBookingFormAction()
 
-    subscriber.assertValue(bookingForm)
+        subscriber.assertValue(bookingForm)
 
-  }
+    }
 
 }

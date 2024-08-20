@@ -1,218 +1,236 @@
 package com.skedgo.tripkit.booking.ui.viewmodel
 
 import android.text.InputType
+import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.nhaarman.mockitokotlin2.mock
 import com.nhaarman.mockitokotlin2.whenever
 import com.skedgo.tripkit.booking.StringFormField
 import org.assertj.core.api.Java6Assertions.assertThat
 import org.junit.Test
 import org.junit.runner.RunWith
-import org.robolectric.RobolectricTestRunner
 
-@RunWith(RobolectricTestRunner::class)
+@RunWith(AndroidJUnit4::class)
 class FieldStringViewModelTest {
 
-  @Test fun shouldBeHidden() {
+    @Test
+    fun shouldBeHidden() {
 
-    val stringFormField: StringFormField = mock()
-    whenever(stringFormField.isHidden).thenReturn(true)
+        val stringFormField: StringFormField = mock()
+        whenever(stringFormField.isHidden).thenReturn(true)
 
-    val viewModel: FieldStringViewModel = FieldStringViewModel(stringFormField)
+        val viewModel: FieldStringViewModel = FieldStringViewModel(stringFormField)
 
-    assertThat(viewModel.isHidden).isTrue()
+        assertThat(viewModel.isHidden).isTrue()
 
-  }
+    }
 
-  @Test fun shouldNotBeHidden() {
+    @Test
+    fun shouldNotBeHidden() {
 
-    val stringFormField: StringFormField = mock()
-    whenever(stringFormField.isHidden).thenReturn(false)
+        val stringFormField: StringFormField = mock()
+        whenever(stringFormField.isHidden).thenReturn(false)
 
-    val viewModel: FieldStringViewModel = FieldStringViewModel(stringFormField)
+        val viewModel: FieldStringViewModel = FieldStringViewModel(stringFormField)
 
-    assertThat(viewModel.isHidden).isFalse()
+        assertThat(viewModel.isHidden).isFalse()
 
-  }
+    }
 
-  @Test fun shouldBeReadOnly() {
+    @Test
+    fun shouldBeReadOnly() {
 
-    val stringFormField: StringFormField = mock()
-    whenever(stringFormField.isReadOnly).thenReturn(true)
+        val stringFormField: StringFormField = mock()
+        whenever(stringFormField.isReadOnly).thenReturn(true)
 
-    val viewModel: FieldStringViewModel = FieldStringViewModel(stringFormField)
+        val viewModel: FieldStringViewModel = FieldStringViewModel(stringFormField)
 
-    assertThat(viewModel.isReadOnly).isTrue()
+        assertThat(viewModel.isReadOnly).isTrue()
 
-  }
+    }
 
-  @Test fun shouldNotBeReadOnly() {
+    @Test
+    fun shouldNotBeReadOnly() {
 
-    val stringFormField: StringFormField = mock()
-    whenever(stringFormField.isReadOnly).thenReturn(false)
+        val stringFormField: StringFormField = mock()
+        whenever(stringFormField.isReadOnly).thenReturn(false)
 
-    val viewModel: FieldStringViewModel = FieldStringViewModel(stringFormField)
+        val viewModel: FieldStringViewModel = FieldStringViewModel(stringFormField)
 
-    assertThat(viewModel.isReadOnly).isFalse()
+        assertThat(viewModel.isReadOnly).isFalse()
 
-  }
+    }
 
-  @Test fun shouldShowValue() {
+    @Test
+    fun shouldShowValue() {
 
-    val stringFormField: StringFormField = mock()
-    whenever(stringFormField.title).thenReturn("title")
-    whenever(stringFormField.value).thenReturn("value")
-    whenever(stringFormField.isReadOnly).thenReturn(true)
+        val stringFormField: StringFormField = mock()
+        whenever(stringFormField.title).thenReturn("title")
+        whenever(stringFormField.value).thenReturn("value")
+        whenever(stringFormField.isReadOnly).thenReturn(true)
 
-    val viewModel: FieldStringViewModel = FieldStringViewModel(stringFormField)
+        val viewModel: FieldStringViewModel = FieldStringViewModel(stringFormField)
 
-    assertThat(viewModel.showValue).isTrue()
+        assertThat(viewModel.showValue).isTrue()
 
-  }
+    }
 
-  @Test fun shouldNotShowValueSameTitle() {
+    @Test
+    fun shouldNotShowValueSameTitle() {
 
-    val stringFormField: StringFormField = mock()
-    whenever(stringFormField.title).thenReturn("title")
-    whenever(stringFormField.value).thenReturn("title")
-    whenever(stringFormField.isReadOnly).thenReturn(true)
+        val stringFormField: StringFormField = mock()
+        whenever(stringFormField.title).thenReturn("title")
+        whenever(stringFormField.value).thenReturn("title")
+        whenever(stringFormField.isReadOnly).thenReturn(true)
 
-    val viewModel: FieldStringViewModel = FieldStringViewModel(stringFormField)
+        val viewModel: FieldStringViewModel = FieldStringViewModel(stringFormField)
 
-    assertThat(viewModel.showValue).isFalse()
+        assertThat(viewModel.showValue).isFalse()
 
-  }
+    }
 
-  @Test fun shouldNotShowValueSameNotReadOnly() {
+    @Test
+    fun shouldNotShowValueSameNotReadOnly() {
 
-    val stringFormField: StringFormField = mock()
-    whenever(stringFormField.title).thenReturn("title")
-    whenever(stringFormField.value).thenReturn("value")
-    whenever(stringFormField.isReadOnly).thenReturn(false)
+        val stringFormField: StringFormField = mock()
+        whenever(stringFormField.title).thenReturn("title")
+        whenever(stringFormField.value).thenReturn("value")
+        whenever(stringFormField.isReadOnly).thenReturn(false)
 
-    val viewModel: FieldStringViewModel = FieldStringViewModel(stringFormField)
+        val viewModel: FieldStringViewModel = FieldStringViewModel(stringFormField)
 
-    assertThat(viewModel.showValue).isFalse()
+        assertThat(viewModel.showValue).isFalse()
 
-  }
+    }
 
-  @Test fun shouldSetTitle() {
+    @Test
+    fun shouldSetTitle() {
 
-    val stringFormField: StringFormField = mock()
-    whenever(stringFormField.title).thenReturn("title")
+        val stringFormField: StringFormField = mock()
+        whenever(stringFormField.title).thenReturn("title")
 
-    val viewModel: FieldStringViewModel = FieldStringViewModel(stringFormField)
+        val viewModel: FieldStringViewModel = FieldStringViewModel(stringFormField)
 
-    assertThat(viewModel.title).isEqualTo("title")
+        assertThat(viewModel.title).isEqualTo("title")
 
-  }
+    }
 
-  @Test fun shouldSetEmptyTitle() {
+    @Test
+    fun shouldSetEmptyTitle() {
 
-    val stringFormField: StringFormField = mock()
-    whenever(stringFormField.title).thenReturn(null)
+        val stringFormField: StringFormField = mock()
+        whenever(stringFormField.title).thenReturn(null)
 
-    val viewModel: FieldStringViewModel = FieldStringViewModel(stringFormField)
+        val viewModel: FieldStringViewModel = FieldStringViewModel(stringFormField)
 
-    assertThat(viewModel.title).isEqualTo("")
+        assertThat(viewModel.title).isEqualTo("")
 
-  }
+    }
 
-  @Test fun shouldSetSideTitle() {
+    @Test
+    fun shouldSetSideTitle() {
 
-    val stringFormField: StringFormField = mock()
-    whenever(stringFormField.sidetitle).thenReturn("sideTitle")
+        val stringFormField: StringFormField = mock()
+        whenever(stringFormField.sidetitle).thenReturn("sideTitle")
 
-    val viewModel: FieldStringViewModel = FieldStringViewModel(stringFormField)
+        val viewModel: FieldStringViewModel = FieldStringViewModel(stringFormField)
 
-    assertThat(viewModel.sideTitle).isEqualTo("sideTitle")
+        assertThat(viewModel.sideTitle).isEqualTo("sideTitle")
 
-  }
+    }
 
-  @Test fun shouldSetEmptySubTitle() {
+    @Test
+    fun shouldSetEmptySubTitle() {
 
-    val stringFormField: StringFormField = mock()
-    whenever(stringFormField.sidetitle).thenReturn(null)
+        val stringFormField: StringFormField = mock()
+        whenever(stringFormField.sidetitle).thenReturn(null)
 
-    val viewModel: FieldStringViewModel = FieldStringViewModel(stringFormField)
+        val viewModel: FieldStringViewModel = FieldStringViewModel(stringFormField)
 
-    assertThat(viewModel.sideTitle).isEqualTo("")
+        assertThat(viewModel.sideTitle).isEqualTo("")
 
-  }
+    }
 
-  @Test fun shouldSetValue() {
+    @Test
+    fun shouldSetValue() {
 
-    val stringFormField: StringFormField = mock()
-    whenever(stringFormField.value).thenReturn("value")
+        val stringFormField: StringFormField = mock()
+        whenever(stringFormField.value).thenReturn("value")
 
-    val viewModel: FieldStringViewModel = FieldStringViewModel(stringFormField)
+        val viewModel: FieldStringViewModel = FieldStringViewModel(stringFormField)
 
-    assertThat(viewModel.value).isEqualTo("value")
+        assertThat(viewModel.value).isEqualTo("value")
 
-  }
+    }
 
-  @Test fun shouldSetEmptyValue() {
+    @Test
+    fun shouldSetEmptyValue() {
 
-    val stringFormField: StringFormField = mock()
-    whenever(stringFormField.value).thenReturn(null)
+        val stringFormField: StringFormField = mock()
+        whenever(stringFormField.value).thenReturn(null)
 
-    val viewModel: FieldStringViewModel = FieldStringViewModel(stringFormField)
+        val viewModel: FieldStringViewModel = FieldStringViewModel(stringFormField)
 
-    assertThat(viewModel.value).isEqualTo("")
+        assertThat(viewModel.value).isEqualTo("")
 
-  }
+    }
 
-  @Test fun shouldSetEditTextValue() {
+    @Test
+    fun shouldSetEditTextValue() {
 
-    val stringFormField: StringFormField = mock()
-    whenever(stringFormField.value).thenReturn("value")
+        val stringFormField: StringFormField = mock()
+        whenever(stringFormField.value).thenReturn("value")
 
-    val viewModel: FieldStringViewModel = FieldStringViewModel(stringFormField)
+        val viewModel: FieldStringViewModel = FieldStringViewModel(stringFormField)
 
-    assertThat(viewModel.editText).isEqualTo("value")
+        assertThat(viewModel.editText).isEqualTo("value")
 
-  }
+    }
 
-  @Test fun shouldSetEmptyEditTextValue() {
+    @Test
+    fun shouldSetEmptyEditTextValue() {
 
-    val stringFormField: StringFormField = mock()
-    whenever(stringFormField.value).thenReturn(null)
+        val stringFormField: StringFormField = mock()
+        whenever(stringFormField.value).thenReturn(null)
 
-    val viewModel: FieldStringViewModel = FieldStringViewModel(stringFormField)
+        val viewModel: FieldStringViewModel = FieldStringViewModel(stringFormField)
 
-    assertThat(viewModel.editText).isEqualTo("")
+        assertThat(viewModel.editText).isEqualTo("")
 
-  }
+    }
 
-  @Test fun shouldBeKeyboardPhone() {
+    @Test
+    fun shouldBeKeyboardPhone() {
 
-    val stringFormField: StringFormField = mock()
-    whenever(stringFormField.keyboardType).thenReturn("PHONE")
+        val stringFormField: StringFormField = mock()
+        whenever(stringFormField.keyboardType).thenReturn("PHONE")
 
-    val viewModel: FieldStringViewModel = FieldStringViewModel(stringFormField)
+        val viewModel: FieldStringViewModel = FieldStringViewModel(stringFormField)
 
-    assertThat(viewModel.inputType()).isEqualTo(InputType.TYPE_CLASS_PHONE)
+        assertThat(viewModel.inputType()).isEqualTo(InputType.TYPE_CLASS_PHONE)
 
-  }
+    }
 
-  @Test fun shouldBeKeyboardEmail() {
+    @Test
+    fun shouldBeKeyboardEmail() {
 
-    val stringFormField: StringFormField = mock()
-    whenever(stringFormField.keyboardType).thenReturn("EMAIL")
+        val stringFormField: StringFormField = mock()
+        whenever(stringFormField.keyboardType).thenReturn("EMAIL")
 
-    val viewModel: FieldStringViewModel = FieldStringViewModel(stringFormField)
+        val viewModel: FieldStringViewModel = FieldStringViewModel(stringFormField)
 
-    assertThat(viewModel.inputType()).isEqualTo(InputType.TYPE_CLASS_TEXT or InputType.TYPE_TEXT_VARIATION_EMAIL_ADDRESS)
+        assertThat(viewModel.inputType()).isEqualTo(InputType.TYPE_CLASS_TEXT or InputType.TYPE_TEXT_VARIATION_EMAIL_ADDRESS)
 
-  }
+    }
 
-  @Test fun shouldBeKeyboardText() {
+    @Test
+    fun shouldBeKeyboardText() {
 
-    val stringFormField: StringFormField = mock()
-    whenever(stringFormField.keyboardType).thenReturn("other")
+        val stringFormField: StringFormField = mock()
+        whenever(stringFormField.keyboardType).thenReturn("other")
 
-    val viewModel: FieldStringViewModel = FieldStringViewModel(stringFormField)
+        val viewModel: FieldStringViewModel = FieldStringViewModel(stringFormField)
 
-    assertThat(viewModel.inputType()).isEqualTo(InputType.TYPE_CLASS_TEXT)
+        assertThat(viewModel.inputType()).isEqualTo(InputType.TYPE_CLASS_TEXT)
 
-  }
+    }
 }
