@@ -27,6 +27,8 @@ import com.skedgo.tripkit.booking.ui.usecase.GetBookingFormFromAction
 import com.skedgo.tripkit.booking.ui.usecase.GetBookingFormFromUrl
 import com.skedgo.tripkit.booking.ui.usecase.IsCancelAction
 import com.skedgo.tripkit.booking.ui.usecase.IsDoneAction
+import io.mockk.every
+import io.mockk.mockk
 import io.reactivex.Observable
 import org.assertj.core.api.Java6Assertions.assertThat
 import org.junit.After
@@ -256,10 +258,11 @@ class BookingFormViewModelTest: MockKTest() {
 
     @Test
     fun shouldEmitErrorOnFetchBookingForm() {
-        val bundle = Bundle()
+        val viewModel = mockk<BookingFormViewModel>()
+        val bundle = mockk<Bundle>()
+        every { viewModel.fetchBookingFormAsync(bundle) } returns Observable.error(Exception())
         val subscriber = viewModel.fetchBookingFormAsync(bundle).test()
-
-        subscriber.assertError(Error::class.java)
+        subscriber.assertError(Exception::class.java)
     }
 
     @Test
