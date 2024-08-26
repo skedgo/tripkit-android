@@ -56,7 +56,9 @@ class QuickBookingRepository @Inject constructor(
                 } else {
                     Single.just(tickets)
                 }
-            }.onErrorResumeNext {
+            }
+            .retry(3)
+            .onErrorResumeNext {
                 Single.just(emptyList())
             }
     }
