@@ -19,6 +19,12 @@ android {
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
 
+    buildTypes {
+        staging {
+            debuggable = true
+        }
+    }
+
     signingConfigs {
         debug {
             storeFile file("keystores/debug.keystore")
