@@ -515,6 +515,20 @@ public class Trip implements ITimeRange {
     }
 
     @Nullable
+    public TripSegment getQuickBookingSegment() {
+        if (mSegments == null) {
+            return null;
+        }
+
+        for (TripSegment segment : mSegments) {
+            if (segment.isQuickBooking()) {
+                return segment;
+            }
+        }
+        return null;
+    }
+
+    @Nullable
     public String getDisplayCost(String localizedFreeText) {
         if (mMoneyCost == 0) {
             return localizedFreeText;

@@ -926,6 +926,7 @@ public class TripSegment implements IRealTimeElement, ITimeRange {
     }
 
     public boolean isQuickBooking() {
-        return getBooking() != null && getBooking().getQuickBookingsUrl() != null;
+        return getBooking() != null &&
+            (getBooking().getQuickBookingsUrl() != null || getBooking().getConfirmation() != null);
     }
 }
