@@ -1,19 +1,19 @@
 [
-  {
-    "bookingURL": "https://<satapp_server>/booking/v1/c21199c6-0165-40ec-9de4-fee43a0eb521/-15730924761/quick/0eec2f54-8cab-45ba-852a-8ddeb7a65a1e",
-    "tripUpdateURL": "https://<satapp_server>/booking/v1/c21199c6-0165-40ec-9de4-fee43a0eb521/-15730924761/update/0eec2f54-8cab-45ba-852a-8ddeb7a65a1e",
-    "detailsURL": "https://<satapp_server>/booking/v1/c21199c6-0165-40ec-9de4-fee43a0eb521/-15730924761/details/0eec2f54-8cab-45ba-852a-8ddeb7a65a1e",
-    "allQuotesURL": "https://<satapp_server>/booking/v1/c21199c6-0165-40ec-9de4-fee43a0eb521/-15730924761/book/1",
-    "USDPrice": 23.512814,
-    "imageURL": "http://d1a3f4spazzrp4.cloudfront.net/car-types/mono/mono-black.png",
-    "productID": "0eec2f54-8cab-45ba-852a-8ddeb7a65a1e",
-    "index": 1,
-    "count": 8,
-    "title": "UberBLACK",
-    "subtitle": "Sandbox: Always surge pricing",
-    "bookingTitle": "Request",
-    "priceString": "$27-30",
-    "price": 30,
-    "ETA": 360
-  }
+    {
+        "bookingURL": "https://<satapp_server>/booking/v1/c21199c6-0165-40ec-9de4-fee43a0eb521/-15730924761/quick/0eec2f54-8cab-45ba-852a-8ddeb7a65a1e",
+        "tripUpdateURL": "https://<satapp_server>/booking/v1/c21199c6-0165-40ec-9de4-fee43a0eb521/-15730924761/update/0eec2f54-8cab-45ba-852a-8ddeb7a65a1e",
+        "detailsURL": "https://<satapp_server>/booking/v1/c21199c6-0165-40ec-9de4-fee43a0eb521/-15730924761/details/0eec2f54-8cab-45ba-852a-8ddeb7a65a1e",
+        "allQuotesURL": "https://<satapp_server>/booking/v1/c21199c6-0165-40ec-9de4-fee43a0eb521/-15730924761/book/1",
+        "USDPrice": 23.512814,
+        "imageURL": "http://d1a3f4spazzrp4.cloudfront.net/car-types/mono/mono-black.png",
+        "productID": "0eec2f54-8cab-45ba-852a-8ddeb7a65a1e",
+        "index": 1,
+        "count": 8,
+        "title": "UberBLACK",
+        "subtitle": "Sandbox: Always surge pricing",
+        "bookingTitle": "Request",
+        "priceString": "$27-30",
+        "price": 30,
+        "ETA": 360
+    }
 ]

@@ -8,14 +8,17 @@ class OnStreetParkingDetails(
     val totalSpaces: Int?,
     val lastUpdate: Long?,
     val restrictions: List<Restriction>?,
-    val paymentTypes: List<PaymentType>?)
+    val paymentTypes: List<PaymentType>?
+)
 
-class Restriction(val color: String,
-                  val maximumParkingMinutes: Int?,
-                  val parkingSymbol: String,
-                  val type: String,
-                  val timezone: String,
-                  val daysAndTimes: List<RestrictionDayAndTime>)
+class Restriction(
+    val color: String,
+    val maximumParkingMinutes: Int?,
+    val parkingSymbol: String,
+    val type: String,
+    val timezone: String,
+    val daysAndTimes: List<RestrictionDayAndTime>
+)
 
 class RestrictionDayAndTime(val name: String, val times: List<RestrictionTime>)
 

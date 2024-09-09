@@ -1,7 +1,6 @@
 package com.skedgo.tripkit;
 
 import com.skedgo.tripkit.common.util.TripKitLatLng;
-
 import com.skedgo.tripkit.routing.Trip;
 
 /**

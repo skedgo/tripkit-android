@@ -9,8 +9,8 @@ import org.immutables.value.Value
 @Value.Style(passAnnotations = [JsonAdapter::class])
 @JsonAdapter(GsonAdaptersRestrictionDayAndTimeDto::class)
 interface RestrictionDayAndTimeDto {
-  fun days(): List<RestrictionDayDto>
-  fun timeZone(): String
+    fun days(): List<RestrictionDayDto>
+    fun timeZone(): String
 }
 
 
@@ -19,7 +19,7 @@ interface RestrictionDayAndTimeDto {
 @Value.Style(passAnnotations = [JsonAdapter::class])
 @JsonAdapter(GsonAdaptersRestrictionDayDto::class)
 interface RestrictionDayDto {
-  fun name(): String
-  fun times(): List<RestrictionTimeDto>
+    fun name(): String
+    fun times(): List<RestrictionTimeDto>
 }
 

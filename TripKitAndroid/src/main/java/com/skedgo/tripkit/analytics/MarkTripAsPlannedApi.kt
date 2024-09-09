@@ -13,7 +13,7 @@ import retrofit2.http.Url
 internal interface MarkTripAsPlannedApi {
     @POST
     fun execute(
-            @Url url: String,
-            @Body userInfo: MutableMap<String, Any>
+        @Url url: String,
+        @Body userInfo: MutableMap<String, Any>
     ): Observable<Unit>
 }

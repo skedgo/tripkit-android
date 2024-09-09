@@ -11,9 +11,9 @@ import org.immutables.value.Value.Style
 @Style(passAnnotations = [JsonAdapter::class])
 @JsonAdapter(GsonAdaptersPricingTable::class)
 interface PricingTable {
-  fun title(): String
-  fun subtitle(): String?
-  fun currency(): String
-  fun currencySymbol(): String
-  fun entries(): List<PricingEntry>
+    fun title(): String
+    fun subtitle(): String?
+    fun currency(): String
+    fun currencySymbol(): String
+    fun entries(): List<PricingEntry>
 }

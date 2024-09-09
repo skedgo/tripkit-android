@@ -12,15 +12,16 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 @Module
 public class TspModule {
-  @Provides RegionInfoApi regionInfoApi(
-      Gson gson,
-      okhttp3.OkHttpClient httpClient) {
-    return new Retrofit.Builder()
-        .baseUrl(ServerManager.INSTANCE.getConfiguration().getApiTripGoUrl())
-        .client(httpClient)
-        .addConverterFactory(GsonConverterFactory.create(gson))
-        .addCallAdapterFactory(RxJava2CallAdapterFactory.createWithScheduler(Schedulers.io()))
-        .build()
-        .create(RegionInfoApi.class);
-  }
+    @Provides
+    RegionInfoApi regionInfoApi(
+        Gson gson,
+        okhttp3.OkHttpClient httpClient) {
+        return new Retrofit.Builder()
+            .baseUrl(ServerManager.INSTANCE.getConfiguration().getApiTripGoUrl())
+            .client(httpClient)
+            .addConverterFactory(GsonConverterFactory.create(gson))
+            .addCallAdapterFactory(RxJava2CallAdapterFactory.createWithScheduler(Schedulers.io()))
+            .build()
+            .create(RegionInfoApi.class);
+    }
 }

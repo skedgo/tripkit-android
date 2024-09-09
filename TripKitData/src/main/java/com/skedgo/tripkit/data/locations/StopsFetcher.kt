@@ -1,11 +1,14 @@
 package com.skedgo.tripkit.data.locations
 
+import com.skedgo.tripkit.agenda.ConfigRepository
 import com.skedgo.tripkit.common.model.Region
 import com.skedgo.tripkit.data.database.locations.bikepods.BikePodRepository
 import com.skedgo.tripkit.data.database.locations.carparks.CarParkMapper
 import com.skedgo.tripkit.data.database.locations.carparks.CarParkPersistor
 import com.skedgo.tripkit.data.database.locations.carpods.CarPodMapper
 import com.skedgo.tripkit.data.database.locations.carpods.CarPodRepository
+import com.skedgo.tripkit.data.database.locations.facility.FacilityRepository
+import com.skedgo.tripkit.data.database.locations.freefloating.FreeFloatingRepository
 import com.skedgo.tripkit.data.database.locations.onstreetparking.OnStreetParkingMapper
 import com.skedgo.tripkit.data.database.locations.onstreetparking.OnStreetParkingPersistor
 import io.reactivex.Completable
@@ -13,67 +16,72 @@ import io.reactivex.Observable
 import io.reactivex.schedulers.Schedulers
 import okhttp3.HttpUrl.Companion.toHttpUrlOrNull
 import org.apache.commons.collections4.CollectionUtils
-import com.skedgo.tripkit.agenda.ConfigRepository
-import com.skedgo.tripkit.data.database.locations.facility.FacilityRepository
-import com.skedgo.tripkit.data.database.locations.freefloating.FreeFloatingRepository
-import java.util.*
 
-open class StopsFetcher(private val api: LocationsApi,
-                        private val cellsLoader: ICellsLoader,
-                        private val cellsPersistor: ICellsPersistor,
-                        private val stopsPersistor: IStopsPersistor,
-                        private val configCreator: ConfigRepository,
-                        private val bikePodRepository: BikePodRepository,
-                        private val freeFloatingRepository: FreeFloatingRepository,
-                        private val carParkPersistor: CarParkPersistor,
-                        private val onStreetParkingPersistor: OnStreetParkingPersistor,
-                        private val carParkMapper: CarParkMapper,
-                        private val carPodMapper: CarPodMapper,
-                        private val onStreetParkingMapper: OnStreetParkingMapper,
-                        private val carPodRepository: CarPodRepository,
-                        private val facilityRepository: FacilityRepository,
-    ) {
+open class StopsFetcher(
+    private val api: LocationsApi,
+    private val cellsLoader: ICellsLoader,
+    private val cellsPersistor: ICellsPersistor,
+    private val stopsPersistor: IStopsPersistor,
+    private val configCreator: ConfigRepository,
+    private val bikePodRepository: BikePodRepository,
+    private val freeFloatingRepository: FreeFloatingRepository,
+    private val carParkPersistor: CarParkPersistor,
+    private val onStreetParkingPersistor: OnStreetParkingPersistor,
+    private val carParkMapper: CarParkMapper,
+    private val carPodMapper: CarPodMapper,
+    private val onStreetParkingMapper: OnStreetParkingMapper,
+    private val carPodRepository: CarPodRepository,
+    private val facilityRepository: FacilityRepository,
+) {
 
-    open fun fetchAsync(cellIds: List<String>,
-                        region: Region,
-                        level: Int): Observable<List<LocationsResponse.Group>> {
+    open fun fetchAsync(
+        cellIds: List<String>,
+        region: Region,
+        level: Int
+    ): Observable<List<LocationsResponse.Group>> {
         return fetchCellsAsync(cellIds, region, level)
-                .filter { CollectionUtils.isNotEmpty(it) }
-                .flatMap { this.saveCellsAsync(it) }
+            .filter { CollectionUtils.isNotEmpty(it) }
+            .flatMap { this.saveCellsAsync(it) }
     }
 
-    private fun createRequestBodiesAsync(cellIds: List<String>,
-                                         region: Region,
-                                         level: Int): Observable<LocationsRequestBody> {
+    private fun createRequestBodiesAsync(
+        cellIds: List<String>,
+        region: Region,
+        level: Int
+    ): Observable<LocationsRequestBody> {
         return cellsLoader.loadSavedCellsAsync(cellIds)
-                .defaultIfEmpty(emptyList())
-                .flatMap { existingCells ->
-                    splitIntoBodiesForNewFetchOrUpdate(
-                            cellIds,
-                            existingCells,
-                            region,
-                            level
-                    )
-                }
-                .subscribeOn(Schedulers.newThread())
+            .defaultIfEmpty(emptyList())
+            .flatMap { existingCells ->
+                splitIntoBodiesForNewFetchOrUpdate(
+                    cellIds,
+                    existingCells,
+                    region,
+                    level
+                )
+            }
+            .subscribeOn(Schedulers.newThread())
     }
 
     /**
      * @param existingCells Cells found in database
      */
-    internal fun splitIntoBodiesForNewFetchOrUpdate(cellIds: List<String>,
-                                                    existingCells: List<LocationsResponse.Group>,
-                                                    region: Region,
-                                                    level: Int): Observable<LocationsRequestBody> {
+    internal fun splitIntoBodiesForNewFetchOrUpdate(
+        cellIds: List<String>,
+        existingCells: List<LocationsResponse.Group>,
+        region: Region,
+        level: Int
+    ): Observable<LocationsRequestBody> {
         return Observable.create { subscriber ->
             if (CollectionUtils.isEmpty(existingCells)) {
                 // Given cells are completely new. No cells saved yet.
-                subscriber.onNext(LocationsRequestBody.createForNewlyFetching(
+                subscriber.onNext(
+                    LocationsRequestBody.createForNewlyFetching(
                         region,
                         ArrayList(cellIds),
                         level,
                         configCreator.call()
-                ))
+                    )
+                )
             } else {
                 // Exclude saved cells out of given cells.
                 val newCellIds = ArrayList(cellIds)
@@ -82,12 +90,14 @@ open class StopsFetcher(private val api: LocationsApi,
                 }
                 if (CollectionUtils.isNotEmpty(newCellIds)) {
                     // No point in emitting empty cell list.
-                    subscriber.onNext(LocationsRequestBody.createForNewlyFetching(
+                    subscriber.onNext(
+                        LocationsRequestBody.createForNewlyFetching(
                             region,
                             newCellIds,
                             level,
                             configCreator.call()
-                    ))
+                        )
+                    )
                 }
 
                 // For cells that were already requested before.
@@ -95,43 +105,50 @@ open class StopsFetcher(private val api: LocationsApi,
                 for (existingCell in existingCells) {
                     cellIdsAndHashCodes[existingCell.key] = existingCell.hashCode
                 }
-                subscriber.onNext(LocationsRequestBody.createForUpdating(
+                subscriber.onNext(
+                    LocationsRequestBody.createForUpdating(
                         region,
                         cellIdsAndHashCodes,
                         level,
                         configCreator.call()
-                ))
+                    )
+                )
             }
 
             subscriber.onComplete()
         }
     }
 
-    private fun fetchCellsAsync(cellIds: List<String>,
-                                region: Region,
-                                level: Int): Observable<List<LocationsResponse.Group>> {
+    private fun fetchCellsAsync(
+        cellIds: List<String>,
+        region: Region,
+        level: Int
+    ): Observable<List<LocationsResponse.Group>> {
         return createRequestBodiesAsync(cellIds, region, level)
-                .flatMap { body ->
-                    val baseUrl = region.urLs!![0]
-                    val url = baseUrl.toHttpUrlOrNull()!!
-                            .newBuilder()
-                            .addPathSegment("locations.json")
-                            .build()
-                    fetchCellsAsync(url.toString(), body)
-                }
+            .flatMap { body ->
+                val baseUrl = region.urLs!![0]
+                val url = baseUrl.toHttpUrlOrNull()!!
+                    .newBuilder()
+                    .addPathSegment("locations.json")
+                    .build()
+                fetchCellsAsync(url.toString(), body)
+            }
     }
 
-    private fun fetchCellsAsync(url: String, requestBody: LocationsRequestBody): Observable<List<LocationsResponse.Group>> {
+    private fun fetchCellsAsync(
+        url: String,
+        requestBody: LocationsRequestBody
+    ): Observable<List<LocationsResponse.Group>> {
         return api.fetchLocationsAsync(url, requestBody)
-                .filter { response -> response != null && CollectionUtils.isNotEmpty(response.groups) }
-                .map { it.groups }
+            .filter { response -> response != null && CollectionUtils.isNotEmpty(response.groups) }
+            .map { it.groups }
     }
 
     private fun saveCellsAsync(cells: List<LocationsResponse.Group>): Observable<List<LocationsResponse.Group>> {
         // Saving cell ids, hash codes and saving stops will be performed in parallel.
         return Observable.merge(
-                saveCellIdsAndHashCodesAsync(cells).subscribeOn(Schedulers.newThread()),
-                saveStopsAsync(cells).subscribeOn(Schedulers.newThread())
+            saveCellIdsAndHashCodesAsync(cells).subscribeOn(Schedulers.newThread()),
+            saveStopsAsync(cells).subscribeOn(Schedulers.newThread())
         )
     }
 
@@ -144,36 +161,49 @@ open class StopsFetcher(private val api: LocationsApi,
 
     private fun saveStopsAsync(cells: List<LocationsResponse.Group>): Observable<List<LocationsResponse.Group>> {
         return Completable
-                .fromAction { stopsPersistor.saveStopsSync(cells) }
-                .let { listOf(it) }
-                .asSequence()
-                .plus(
-                        cells.filter { it.bikePods != null && it.bikePods.isNotEmpty() }
-                                .map { bikePodRepository.saveBikePods(it.key, it.bikePods) }
-                ).plus(
-                        cells.filter { it.carParks != null && it.carParks.isNotEmpty() }
-                                .map { carParkPersistor.saveCarParks(carParkMapper.toEntity(it.key, it.carParks)) }
-                ).plus(
-                        cells.filter { it.freeFloating != null && it.freeFloating.isNotEmpty() }
-                                .map { freeFloatingRepository.saveFreeFloatingLocations(it.key, it.freeFloating) }
-                ).plus(
-                        cells.filter { it.onStreetParkings != null && it.onStreetParkings.isNotEmpty() }
-                                .map {
-                                    onStreetParkingPersistor.saveOnStreetParkings(
-                                            onStreetParkingMapper.toEntity(it.key, it.onStreetParkings))
-                                }
-                ).plus(
-                        cells.filter { it.carPods != null && it.carPods.isNotEmpty() }
-                                .map { carPodRepository.saveCarPods(carPodMapper.toEntity(it.key, it.carPods)) }
-                ).plus(
-                    cells.filter { it.facilities != null && it.facilities.isNotEmpty() }
-                        .map { facilityRepository.saveFacilities(it.key, it.facilities) }
-                )
-                .toList()
-                .let {
-                    Completable.merge(it)
-                }
-                .toObservable()
+            .fromAction { stopsPersistor.saveStopsSync(cells) }
+            .let { listOf(it) }
+            .asSequence()
+            .plus(
+                cells.filter { it.bikePods != null && it.bikePods.isNotEmpty() }
+                    .map { bikePodRepository.saveBikePods(it.key, it.bikePods) }
+            ).plus(
+                cells.filter { it.carParks != null && it.carParks.isNotEmpty() }
+                    .map {
+                        carParkPersistor.saveCarParks(
+                            carParkMapper.toEntity(
+                                it.key,
+                                it.carParks
+                            )
+                        )
+                    }
+            ).plus(
+                cells.filter { it.freeFloating != null && it.freeFloating.isNotEmpty() }
+                    .map {
+                        freeFloatingRepository.saveFreeFloatingLocations(
+                            it.key,
+                            it.freeFloating
+                        )
+                    }
+            ).plus(
+                cells.filter { it.onStreetParkings != null && it.onStreetParkings.isNotEmpty() }
+                    .map {
+                        onStreetParkingPersistor.saveOnStreetParkings(
+                            onStreetParkingMapper.toEntity(it.key, it.onStreetParkings)
+                        )
+                    }
+            ).plus(
+                cells.filter { it.carPods != null && it.carPods.isNotEmpty() }
+                    .map { carPodRepository.saveCarPods(carPodMapper.toEntity(it.key, it.carPods)) }
+            ).plus(
+                cells.filter { it.facilities != null && it.facilities.isNotEmpty() }
+                    .map { facilityRepository.saveFacilities(it.key, it.facilities) }
+            )
+            .toList()
+            .let {
+                Completable.merge(it)
+            }
+            .toObservable()
     }
 
     fun clearCarPods(): Completable {

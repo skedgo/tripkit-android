@@ -7,11 +7,11 @@ import javax.inject.Inject
 
 open class OnStreetParkingPersistor @Inject constructor(val tripKitDatabase: TripKitDatabase) {
 
-  fun saveOnStreetParkings(onStreetParkings: List<OnStreetParkingEntity>): Completable {
-    return Completable
-        .fromAction {
-            tripKitDatabase.onStreetParkingDao().saveAll(onStreetParkings)
-        }
-        .subscribeOn(Schedulers.io())
-  }
+    fun saveOnStreetParkings(onStreetParkings: List<OnStreetParkingEntity>): Completable {
+        return Completable
+            .fromAction {
+                tripKitDatabase.onStreetParkingDao().saveAll(onStreetParkings)
+            }
+            .subscribeOn(Schedulers.io())
+    }
 }

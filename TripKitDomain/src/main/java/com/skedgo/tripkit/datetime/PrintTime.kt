@@ -9,7 +9,7 @@ import org.joda.time.LocalTime
  * (or 12-hour) setting on users' device.
  */
 interface PrintTime {
-  fun execute(dateTime: DateTime): Flowable<String>
-  fun printLocalTime(localTime: LocalTime): String
-  fun print(dateTime: DateTime): String
+    fun execute(dateTime: DateTime): Flowable<String>
+    fun printLocalTime(localTime: LocalTime): String
+    fun print(dateTime: DateTime): String
 }

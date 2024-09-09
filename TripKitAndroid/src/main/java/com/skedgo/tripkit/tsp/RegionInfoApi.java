@@ -2,10 +2,10 @@ package com.skedgo.tripkit.tsp;
 
 import com.skedgo.tripkit.common.model.Region;
 
+import io.reactivex.Observable;
 import retrofit2.http.Body;
 import retrofit2.http.POST;
 import retrofit2.http.Url;
-import io.reactivex.Observable;
 
 /**
  * Retrieves detailed information about covered
@@ -15,16 +15,18 @@ import io.reactivex.Observable;
  * See {@link RegionInfoService} for easier usage.
  */
 public interface RegionInfoApi {
-  @POST("regionInfo.json") RegionInfoResponse fetchRegionInfo(
-      @Body RegionInfoBody body
-  );
+    @POST("regionInfo.json")
+    RegionInfoResponse fetchRegionInfo(
+        @Body RegionInfoBody body
+    );
 
-  /**
-   * @param url The url is a composition of an URL
-   *            from {@link Region#getURLs()} and 'regionInfo.json'.
-   */
-  @POST Observable<RegionInfoResponse> fetchRegionInfoAsync(
-      @Url String url,
-      @Body RegionInfoBody body
-  );
+    /**
+     * @param url The url is a composition of an URL
+     *            from {@link Region#getURLs()} and 'regionInfo.json'.
+     */
+    @POST
+    Observable<RegionInfoResponse> fetchRegionInfoAsync(
+        @Url String url,
+        @Body RegionInfoBody body
+    );
 }

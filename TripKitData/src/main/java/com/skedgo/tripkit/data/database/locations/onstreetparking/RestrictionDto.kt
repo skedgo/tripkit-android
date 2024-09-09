@@ -10,10 +10,10 @@ import org.immutables.value.Value
 @JsonAdapter(GsonAdaptersRestrictionDto::class)
 interface RestrictionDto {
 
-  fun color(): String
-  fun maximumParkingMinutes(): Int?
-  fun parkingSymbol(): String
-  fun type(): String
-  fun daysAndTimes(): RestrictionDayAndTimeDto
+    fun color(): String
+    fun maximumParkingMinutes(): Int?
+    fun parkingSymbol(): String
+    fun type(): String
+    fun daysAndTimes(): RestrictionDayAndTimeDto
 
 }

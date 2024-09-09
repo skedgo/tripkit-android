@@ -4,20 +4,17 @@ import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteException;
 import android.database.sqlite.SQLiteOpenHelper;
-import android.util.Log;
 
 import androidx.annotation.NonNull;
-
-import io.reactivex.functions.Consumer;
 
 public final class DbHelper extends SQLiteOpenHelper {
     private static final int DATABASE_VERSION = 4;
     private final DatabaseMigrator databaseMigrator;
 
     public DbHelper(
-            @NonNull Context context,
-            @NonNull String databaseName,
-            @NonNull DatabaseMigrator databaseMigrator) {
+        @NonNull Context context,
+        @NonNull String databaseName,
+        @NonNull DatabaseMigrator databaseMigrator) {
         super(context, databaseName, null, DATABASE_VERSION);
         this.databaseMigrator = databaseMigrator;
     }

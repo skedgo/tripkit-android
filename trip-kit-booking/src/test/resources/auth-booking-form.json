@@ -1,108 +1,108 @@
 {
-  "action": {
-    "enabled": true,
-    "hudText": "Validating user",
-    "title": "Authenticate",
-    "url": "https://baryogenesis.buzzhives.com/satapp-beta/auth/signin/09b8fe7f-e688-4136-931e-4cd9d038e808"
-  },
-  "form": [
-    {
-      "fields": [
+    "action": {
+        "enabled": true,
+        "hudText": "Validating user",
+        "title": "Authenticate",
+        "url": "https://baryogenesis.buzzhives.com/satapp-beta/auth/signin/09b8fe7f-e688-4136-931e-4cd9d038e808"
+    },
+    "form": [
         {
-          "keyboardType": "TEXT",
-          "hidden": true,
-          "id": "access_token",
-          "readOnly": false,
-          "required": false,
-          "type": "string"
-        },
-        {
-          "keyboardType": "TEXT",
-          "hidden": true,
-          "id": "refresh_token",
-          "readOnly": false,
-          "required": false,
-          "type": "string"
-        },
-        {
-          "keyboardType": "NUMBER",
-          "hidden": true,
-          "id": "expires_in",
-          "readOnly": false,
-          "required": false,
-          "type": "string"
-        },
-        {
-          "keyboardType": "TEXT",
-          "value": "ps_tnc_LYFT",
-          "hidden": true,
-          "id": "provider",
-          "readOnly": true,
-          "required": false,
-          "type": "string"
-        },
-        {
-          "keyboardType": "TEXT",
-          "value": "UeevgDUyMPh7",
-          "hidden": true,
-          "id": "clientID",
-          "readOnly": true,
-          "required": false,
-          "type": "string"
-        },
-        {
-          "keyboardType": "TEXT",
-          "value": "https://public-api.lyft.com/oauth/authorize",
-          "hidden": true,
-          "id": "authURL",
-          "readOnly": true,
-          "required": false,
-          "type": "string"
-        },
-        {
-          "keyboardType": "TEXT",
-          "value": "https://public-api.lyft.com/oauth/token",
-          "hidden": true,
-          "id": "tokenURL",
-          "readOnly": true,
-          "required": false,
-          "type": "string"
-        },
-        {
-          "keyboardType": "TEXT",
-          "value": "public rides.read rides.request",
-          "hidden": true,
-          "id": "scope",
-          "readOnly": true,
-          "required": false,
-          "type": "string"
-        },
-        {
-          "keyboardType": "TEXT",
-          "value": "true",
-          "hidden": true,
-          "id": "accessTokenBasicAuth",
-          "readOnly": true,
-          "required": false,
-          "type": "string"
-        },
-        {
-          "keyboardType": "TEXT",
-          "value": "SANDBOX-gXIgnflcNOKBo8UXXa39fim3VUHc1LDu",
-          "hidden": true,
-          "id": "clientSecret",
-          "readOnly": true,
-          "required": false,
-          "type": "string"
+            "fields": [
+                {
+                    "keyboardType": "TEXT",
+                    "hidden": true,
+                    "id": "access_token",
+                    "readOnly": false,
+                    "required": false,
+                    "type": "string"
+                },
+                {
+                    "keyboardType": "TEXT",
+                    "hidden": true,
+                    "id": "refresh_token",
+                    "readOnly": false,
+                    "required": false,
+                    "type": "string"
+                },
+                {
+                    "keyboardType": "NUMBER",
+                    "hidden": true,
+                    "id": "expires_in",
+                    "readOnly": false,
+                    "required": false,
+                    "type": "string"
+                },
+                {
+                    "keyboardType": "TEXT",
+                    "value": "ps_tnc_LYFT",
+                    "hidden": true,
+                    "id": "provider",
+                    "readOnly": true,
+                    "required": false,
+                    "type": "string"
+                },
+                {
+                    "keyboardType": "TEXT",
+                    "value": "UeevgDUyMPh7",
+                    "hidden": true,
+                    "id": "clientID",
+                    "readOnly": true,
+                    "required": false,
+                    "type": "string"
+                },
+                {
+                    "keyboardType": "TEXT",
+                    "value": "https://public-api.lyft.com/oauth/authorize",
+                    "hidden": true,
+                    "id": "authURL",
+                    "readOnly": true,
+                    "required": false,
+                    "type": "string"
+                },
+                {
+                    "keyboardType": "TEXT",
+                    "value": "https://public-api.lyft.com/oauth/token",
+                    "hidden": true,
+                    "id": "tokenURL",
+                    "readOnly": true,
+                    "required": false,
+                    "type": "string"
+                },
+                {
+                    "keyboardType": "TEXT",
+                    "value": "public rides.read rides.request",
+                    "hidden": true,
+                    "id": "scope",
+                    "readOnly": true,
+                    "required": false,
+                    "type": "string"
+                },
+                {
+                    "keyboardType": "TEXT",
+                    "value": "true",
+                    "hidden": true,
+                    "id": "accessTokenBasicAuth",
+                    "readOnly": true,
+                    "required": false,
+                    "type": "string"
+                },
+                {
+                    "keyboardType": "TEXT",
+                    "value": "SANDBOX-gXIgnflcNOKBo8UXXa39fim3VUHc1LDu",
+                    "hidden": true,
+                    "id": "clientSecret",
+                    "readOnly": true,
+                    "required": false,
+                    "type": "string"
+                }
+            ]
         }
-      ]
-    }
-  ],
-  "usererror": false,
-  "value": "lyft",
-  "hidden": false,
-  "readOnly": false,
-  "required": false,
-  "title": "Authorization",
-  "type": "authForm"
+    ],
+    "usererror": false,
+    "value": "lyft",
+    "hidden": false,
+    "readOnly": false,
+    "required": false,
+    "title": "Authorization",
+    "type": "authForm"
 }

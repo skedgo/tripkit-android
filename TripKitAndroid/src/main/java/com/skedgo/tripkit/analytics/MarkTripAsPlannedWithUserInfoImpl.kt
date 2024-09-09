@@ -6,6 +6,6 @@ import io.reactivex.Observable
 internal class MarkTripAsPlannedWithUserInfoImpl internal constructor(
     private val markTripAsPlannedApi: MarkTripAsPlannedApi
 ) : MarkTripAsPlannedWithUserInfo {
-  override fun execute(plannedUrl: String, userInfo: MutableMap<String, Any>): Observable<Unit>
-      = markTripAsPlannedApi.execute("$plannedUrl/", userInfo)
+    override fun execute(plannedUrl: String, userInfo: MutableMap<String, Any>): Observable<Unit> =
+        markTripAsPlannedApi.execute("$plannedUrl/", userInfo)
 }

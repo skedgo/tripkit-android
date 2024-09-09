@@ -1,9 +1,11 @@
 # Overview
+
 ## `BookingActivity` declaration
 
 ### Extend `BookingActivity`
 
-`BookingActivity` is the base application component for booking UI. 
+`BookingActivity` is the base application component for booking UI.
+
 ```
 import com.skedgo.android.bookingclient.activity.BookingActivity;
 
@@ -14,8 +16,11 @@ public class MyBookingActivity extends BookingActivity{
   }
 }
 ```
+
 ### Manifest
+
 You need to extend from it and add some intent filters in your manifest.
+
 ```
      <activity
       android:name=“.MyBookingActivity"
@@ -32,7 +37,10 @@ You need to extend from it and add some intent filters in your manifest.
 ```
 
 ## Open `BookingActivity`
-If a trip segment has a booking action, and you are NOT using `Quick Booking`, you can call then your booking activity.
+
+If a trip segment has a booking action, and you are NOT using `Quick Booking`, you can call then
+your booking activity.
+
 ```
     final Booking booking = segment.getBooking();
     if (!TextUtils.isEmpty(booking.getUrl())) {
@@ -50,5 +58,8 @@ If a trip segment has a booking action, and you are NOT using `Quick Booking`, y
       // handle external actions
     }
 ```
+
 ## OAuth
-Oauth2 logic has been moved to Tripkit-account: https://github.com/skedgo/tripkit-android/blob/master/trip-kit-booking/docs/overview.md#oauth
+
+Oauth2 logic has been moved to
+Tripkit-account: https://github.com/skedgo/tripkit-android/blob/master/trip-kit-booking/docs/overview.md#oauth

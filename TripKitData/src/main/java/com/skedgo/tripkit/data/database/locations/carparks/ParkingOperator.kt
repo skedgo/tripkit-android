@@ -11,7 +11,7 @@ import org.immutables.value.Value.Style
 @Style(passAnnotations = [JsonAdapter::class])
 @JsonAdapter(GsonAdaptersParkingOperator::class)
 interface ParkingOperator {
-  fun name(): String
-  fun phone(): String?
-  fun website(): String?
+    fun name(): String
+    fun phone(): String?
+    fun website(): String?
 }

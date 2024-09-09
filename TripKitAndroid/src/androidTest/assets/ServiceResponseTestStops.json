@@ -1,541 +1,541 @@
 {
-  "realTimeStatus": "CAPABLE",
-  "shapes": [
-    {
-      "encodedWaypoints": "jztmEuviz[hAwJxAB???@jIhA???@bF`AIx@lCF???BzDt@GkA???@h@{F????Ry@nO|B????hGt@???@lI`A???@zKd@??@@tH~@???@lIjAX_H??@@d@gAlBLnC_E????bBs@hHE????hBH|FeE???@tBgBhDmA???@vBAbDfD??@?Tr@z@NlDkAlCz@??@@pAlDcAhC`@lDLfA??@Bs@xD??@@{AhDMjC??@?Y|@JfDV|@HZ`BrA??^p@nCrCvAzA??@@~@nA|BzCp@Ax@~@tCHrCm@|@S??@BxB@bBfAPU???@w@zH??@@c@d@[vA{@dMQpC???@k@bH??cA~L??@?OhB[jD??Ch@m@hHUlC???@c@rG??Gp@w@pLMfB??@@MxCkFbG??wBxBl@`Dr@vAj@lAhAtH??KZoEp@O`G??IxA??@ACj@Y\\jEXMrB??wAjH??aCjLg@jC???@c@xB_@bC?????rCtChN???@?rGwDnO_A`Ce@dBm@dA??{B~BsDfE???ByAvBwEhH??k@f@uAlBu@nBQbE??@?Ip@k@dGGVc@jC??kC~Je@jB??@?}@bCwC`CmApA??y@b@y@~Bo@fB??w@fBwBrEeBxD??@@c@h@wBtCoBdC??@Bi@t@_D|Dg@l@??@@uBvB?p@CjGA`DStAaKI??PDeAc@oGa@cGI??_Gw@s@C_@PkBc@uBEmFM??WYoHc@SA_AmAeDyAuEU??i@AyAQRvCcHU",
-      "operator": "Sydney Buses",
-      "serviceName": "CITY Circular Quay",
-      "serviceNumber": "380",
-      "serviceTripID": "76467191_20151006_11954",
-      "stops": [
+    "realTimeStatus": "CAPABLE",
+    "shapes": [
         {
-          "arrival": 1468677599,
-          "bearing": 113,
-          "code": "203026",
-          "departure": 1468763040,
-          "lat": -33.86293,
-          "lng": 151.27931,
-          "name": "Military Rd near Old South Head Rd"
-        },
-        {
-          "arrival": 1468763100,
-          "bearing": 192,
-          "code": "203027",
-          "departure": 1468763100,
-          "lat": -33.86375,
-          "lng": 151.28117,
-          "name": "Military Rd near Kimberley St"
-        },
-        {
-          "arrival": 1468763110,
-          "bearing": 200,
-          "code": "203028",
-          "departure": 1468763110,
-          "lat": -33.86542,
-          "lng": 151.28079,
-          "name": "Military Rd near Eastern Av"
-        },
-        {
-          "arrival": 1468763120,
-          "bearing": 174,
-          "code": "203029",
-          "departure": 1468763120,
-          "lat": -33.86721,
-          "lng": 151.28012,
-          "name": "Peel St near George St"
-        },
-        {
-          "arrival": 1468763160,
-          "bearing": 99,
-          "code": "203030",
-          "departure": 1468763160,
-          "lat": -33.86811,
-          "lng": 151.28021,
-          "name": "Lancaster Rd near Peel St"
-        },
-        {
-          "arrival": 1468763175,
-          "bearing": 186,
-          "code": "203037",
-          "departure": 1468763175,
-          "lat": -33.86832,
-          "lng": 151.28146,
-          "name": "Lancaster Rd near Military Rd"
-        },
-        {
-          "arrival": 1468763220,
-          "bearing": 191,
-          "code": "203038",
-          "departure": 1468763220,
-          "lat": -33.87107,
-          "lng": 151.28113,
-          "name": "Military Rd near Weonga Rd"
-        },
-        {
-          "arrival": 1468763230,
-          "bearing": 191,
-          "code": "203039",
-          "departure": 1468763230,
-          "lat": -33.87239,
-          "lng": 151.28085,
-          "name": "Military Rd near Blake St"
-        },
-        {
-          "arrival": 1468763240,
-          "bearing": 185,
-          "code": "203040",
-          "departure": 1468763240,
-          "lat": -33.87406,
-          "lng": 151.28052,
-          "name": "Military Rd near Dover Rd"
-        },
-        {
-          "arrival": 1468763280,
-          "bearing": 192,
-          "code": "203041",
-          "departure": 1468763280,
-          "lat": -33.87612,
-          "lng": 151.28032,
-          "name": "Military Rd near Liverpool St"
-        },
-        {
-          "arrival": 1468763295,
-          "bearing": 149,
-          "code": "203042",
-          "departure": 1468763295,
-          "lat": -33.87768,
-          "lng": 151.27998,
-          "name": "Military Rd near Raleigh St"
-        },
-        {
-          "arrival": 1468763340,
-          "bearing": 139,
-          "code": "203049",
-          "departure": 1468763340,
-          "lat": -33.87948,
-          "lng": 151.28104,
-          "name": "Military Rd near Arthur St"
-        },
-        {
-          "arrival": 1468763400,
-          "bearing": 171,
-          "code": "203050",
-          "departure": 1468763400,
-          "lat": -33.88095,
-          "lng": 151.28227,
-          "name": "Military Rd near Wentworth St"
-        },
-        {
-          "arrival": 1468763415,
-          "bearing": 152,
-          "code": "203051",
-          "departure": 1468763415,
-          "lat": -33.88295,
-          "lng": 151.28256,
-          "name": "Military Rd near Hugh Bamford Reserve"
-        },
-        {
-          "arrival": 1468763460,
-          "bearing": 147,
-          "code": "202631",
-          "departure": 1468763460,
-          "lat": -33.88475,
-          "lng": 151.28351,
-          "name": "Military Rd opp O'Donnell St"
-        },
-        {
-          "arrival": 1468763470,
-          "bearing": 210,
-          "code": "202632",
-          "departure": 1468763470,
-          "lat": -33.88618,
-          "lng": 151.28441,
-          "name": "Military Rd opp Blair St"
-        },
-        {
-          "arrival": 1468763480,
-          "bearing": 187,
-          "code": "202633",
-          "departure": 1468763480,
-          "lat": -33.88761,
-          "lng": 151.28357,
-          "name": "Military Rd opp Wallis Pde"
-        },
-        {
-          "arrival": 1468763520,
-          "bearing": 263,
-          "code": "202634",
-          "departure": 1468763520,
-          "lat": -33.88961,
-          "lng": 151.28331,
-          "name": "Campbell Pde Terminus"
-        },
-        {
-          "arrival": 1468763580,
-          "bearing": 286,
-          "code": "202635",
-          "departure": 1468763580,
-          "lat": -33.88993,
-          "lng": 151.2805,
-          "name": "Campbell Pde near Ramsgate Av"
-        },
-        {
-          "arrival": 1468763595,
-          "bearing": 289,
-          "code": "202636",
-          "departure": 1468763595,
-          "lat": -33.88967,
-          "lng": 151.27956,
-          "name": "Campbell Pde near Queen Elizabeth Dr"
-        },
-        {
-          "arrival": 1468763640,
-          "bearing": 253,
-          "code": "202637",
-          "departure": 1468763640,
-          "lat": -33.88916,
-          "lng": 151.278,
-          "name": "Campbell Pde opp Wairoa Av"
-        },
-        {
-          "arrival": 1468763700,
-          "bearing": 227,
-          "code": "202638",
-          "departure": 1468763700,
-          "lat": -33.88975,
-          "lng": 151.27597,
-          "name": "Campbell Pde opp Curlewis St"
-        },
-        {
-          "arrival": 1468763760,
-          "bearing": 200,
-          "code": "202652",
-          "departure": 1468763760,
-          "lat": -33.89107,
-          "lng": 151.27452,
-          "name": "Campbell Pde opp Hall St"
-        },
-        {
-          "arrival": 1468763820,
-          "bearing": 192,
-          "code": "202654",
-          "departure": 1468763820,
-          "lat": -33.89437,
-          "lng": 151.2733,
-          "name": "Campbell Pde near Notts Av"
-        },
-        {
-          "arrival": 1468763835,
-          "bearing": 280,
-          "code": "202655",
-          "departure": 1468763835,
-          "lat": -33.89558,
-          "lng": 151.27303,
-          "name": "Bondi Rd near Sandridge St"
-        },
-        {
-          "arrival": 1468763880,
-          "bearing": 281,
-          "code": "202656",
-          "departure": 1468763880,
-          "lat": -33.89531,
-          "lng": 151.27144,
-          "name": "Bondi Rd near Dudley St"
-        },
-        {
-          "arrival": 1468763940,
-          "bearing": 279,
-          "code": "202659",
-          "departure": 1468763940,
-          "lat": -33.89461,
-          "lng": 151.26779,
-          "name": "Bondi Rd near Denham St"
-        },
-        {
-          "arrival": 1468763955,
-          "bearing": 279,
-          "code": "202660",
-          "departure": 1468763955,
-          "lat": -33.89439,
-          "lng": 151.26633,
-          "name": "Bondi Rd near Imperial Av"
-        },
-        {
-          "arrival": 1468764000,
-          "bearing": 279,
-          "code": "202661",
-          "departure": 1468677600,
-          "lat": -33.89404,
-          "lng": 151.26408,
-          "name": "Bondi Rd near Watson St"
-        },
-        {
-          "arrival": 1468764015,
-          "bearing": 279,
-          "code": "202662",
-          "departure": 1468677615,
-          "lat": -33.89383,
-          "lng": 151.2627,
-          "name": "Bondi Rd near Ocean St"
-        },
-        {
-          "arrival": 1468764060,
-          "bearing": 278,
-          "code": "202663",
-          "departure": 1468677660,
-          "lat": -33.89347,
-          "lng": 151.26028,
-          "name": "Bondi Rd near Park Pde"
-        },
-        {
-          "arrival": 1468764075,
-          "bearing": 278,
-          "code": "202254",
-          "departure": 1468677675,
-          "lat": -33.8933,
-          "lng": 151.2589,
-          "name": "Bondi Rd opp Flood St"
-        },
-        {
-          "arrival": 1468764120,
-          "bearing": 301,
-          "code": "202255",
-          "departure": 1468677720,
-          "lat": -33.8929,
-          "lng": 151.25595,
-          "name": "Bondi Rd near Council St"
-        },
-        {
-          "arrival": 1468764135,
-          "bearing": 262,
-          "code": "202256",
-          "departure": 1468677735,
-          "lat": -33.89167,
-          "lng": 151.25388,
-          "name": "Bondi Rd near Waverley Cr"
-        },
-        {
-          "arrival": 1468764180,
-          "bearing": 305,
-          "code": "202257",
-          "departure": 1468677780,
-          "lat": -33.89214,
-          "lng": 151.25008,
-          "name": "Oxford St near Bronte Rd"
-        },
-        {
-          "arrival": 1468764240,
-          "bearing": 278,
-          "code": "202268",
-          "departure": 1468677840,
-          "lat": -33.89097,
-          "lng": 151.2484,
-          "name": "Bondi Junction Interchange (Set Down)"
-        },
-        {
-          "arrival": 1468764360,
-          "bearing": 232,
-          "code": "202281",
-          "departure": 1468677960,
-          "lat": -33.89091,
-          "lng": 151.24794,
-          "name": "Bondi Junction Interchange - Stand N",
-          "shortName": "Stand N"
-        },
-        {
-          "arrival": 1468764420,
-          "bearing": 287,
-          "code": "202258",
-          "departure": 1468678020,
-          "lat": -33.89172,
-          "lng": 151.24687,
-          "name": "Oxford St near Newland St"
-        },
-        {
-          "arrival": 1468764480,
-          "bearing": 287,
-          "code": "202259",
-          "departure": 1468678080,
-          "lat": -33.89129,
-          "lng": 151.24538,
-          "name": "Oxford St near Denison St"
-        },
-        {
-          "arrival": 1468764540,
-          "bearing": 285,
-          "code": "202260",
-          "departure": 1468678140,
-          "lat": -33.89043,
-          "lng": 151.24254,
-          "name": "Oxford St near Waverley Bus Depot"
-        },
-        {
-          "arrival": 1468764555,
-          "bearing": 256,
-          "code": "202147",
-          "departure": 1468678155,
-          "lat": -33.89009,
-          "lng": 151.24126,
-          "name": "Oxford St near Loch Av"
-        },
-        {
-          "arrival": 1468764600,
-          "bearing": 287,
-          "code": "202148",
-          "departure": 1468678200,
-          "lat": -33.89084,
-          "lng": 151.23807,
-          "name": "Oxford St near Moncur St"
-        },
-        {
-          "arrival": 1468764660,
-          "bearing": 313,
-          "code": "202150",
-          "departure": 1468678260,
-          "lat": -33.88918,
-          "lng": 151.23253,
-          "name": "Oxford St near Queen St"
-        },
-        {
-          "arrival": 1468764720,
-          "bearing": 307,
-          "code": "202151",
-          "departure": 1468678320,
-          "lat": -33.88767,
-          "lng": 151.23088,
-          "name": "Oxford St near Paddington Primary"
-        },
-        {
-          "arrival": 1468764735,
-          "bearing": 294,
-          "code": "202152",
-          "departure": 1468678335,
-          "lat": -33.88614,
-          "lng": 151.22878,
-          "name": "Oxford St opp William St"
-        },
-        {
-          "arrival": 1468764780,
-          "bearing": 282,
-          "code": "202153",
-          "departure": 1468678380,
-          "lat": -33.88512,
-          "lng": 151.22649,
-          "name": "Oxford St near Oatley Rd"
-        },
-        {
-          "arrival": 1468764840,
-          "bearing": 290,
-          "code": "202154",
-          "departure": 1468678440,
-          "lat": -33.88465,
-          "lng": 151.22411,
-          "name": "Oxford St opp Brodie St"
-        },
-        {
-          "arrival": 1468764855,
-          "bearing": 310,
-          "code": "202155",
-          "departure": 1468678455,
-          "lat": -33.88375,
-          "lng": 151.22165,
-          "name": "Oxford St opp Hopewell St"
-        },
-        {
-          "arrival": 1468764900,
-          "bearing": 302,
-          "code": "202196",
-          "departure": 1468678500,
-          "lat": -33.88231,
-          "lng": 151.21992,
-          "name": "Oxford St near Verona St"
-        },
-        {
-          "arrival": 1468764915,
-          "bearing": 300,
-          "code": "201060",
-          "departure": 1468678515,
-          "lat": -33.88148,
-          "lng": 151.21858,
-          "name": "Oxford St near Victoria St"
-        },
-        {
-          "arrival": 1468764960,
-          "bearing": 309,
-          "code": "201051",
-          "departure": 1468678560,
-          "lat": -33.88009,
-          "lng": 151.21608,
-          "name": "Oxford St opp Palmer St"
-        },
-        {
-          "arrival": 1468765020,
-          "bearing": 310,
-          "code": "201053",
-          "departure": 1468678620,
-          "lat": -33.87877,
-          "lng": 151.21443,
-          "name": "Oxford St near Riley St"
-        },
-        {
-          "arrival": 1468765080,
-          "bearing": 308,
-          "code": "201056",
-          "departure": 1468678680,
-          "lat": -33.87757,
-          "lng": 151.21297,
-          "name": "Oxford St near Brisbane St"
-        },
-        {
-          "arrival": 1468765200,
-          "bearing": 8,
-          "code": "200055",
-          "departure": 1468678800,
-          "lat": -33.87493,
-          "lng": 151.20958,
-          "name": "Museum Station, Elizabeth St, Stand D",
-          "shortName": "Stand D"
-        },
-        {
-          "arrival": 1468765320,
-          "bearing": 7,
-          "code": "200057",
-          "departure": 1468678920,
-          "lat": -33.872,
-          "lng": 151.20995,
-          "name": "Sheraton on the Park, Elizabeth St"
-        },
-        {
-          "arrival": 1468765380,
-          "bearing": 18,
-          "code": "200082",
-          "departure": 1468678980,
-          "lat": -33.86798,
-          "lng": 151.21043,
-          "name": "Martin Place Station, Elizabeth St, Stand D",
-          "shortName": "Stand D"
-        },
-        {
-          "arrival": 1468765500,
-          "bearing": 345,
-          "code": "200059",
-          "departure": 1468679100,
-          "lat": -33.86403,
-          "lng": 151.2117,
-          "name": "Museum of Sydney, Phillip St"
-        },
-        {
-          "arrival": 1468765560,
-          "code": "200065",
-          "lat": -33.862,
-          "lng": 151.21115,
-          "name": "Circular Quay, Young St, Stand D",
-          "shortName": "Stand D"
+            "encodedWaypoints": "jztmEuviz[hAwJxAB???@jIhA???@bF`AIx@lCF???BzDt@GkA???@h@{F????Ry@nO|B????hGt@???@lI`A???@zKd@??@@tH~@???@lIjAX_H??@@d@gAlBLnC_E????bBs@hHE????hBH|FeE???@tBgBhDmA???@vBAbDfD??@?Tr@z@NlDkAlCz@??@@pAlDcAhC`@lDLfA??@Bs@xD??@@{AhDMjC??@?Y|@JfDV|@HZ`BrA??^p@nCrCvAzA??@@~@nA|BzCp@Ax@~@tCHrCm@|@S??@BxB@bBfAPU???@w@zH??@@c@d@[vA{@dMQpC???@k@bH??cA~L??@?OhB[jD??Ch@m@hHUlC???@c@rG??Gp@w@pLMfB??@@MxCkFbG??wBxBl@`Dr@vAj@lAhAtH??KZoEp@O`G??IxA??@ACj@Y\\jEXMrB??wAjH??aCjLg@jC???@c@xB_@bC?????rCtChN???@?rGwDnO_A`Ce@dBm@dA??{B~BsDfE???ByAvBwEhH??k@f@uAlBu@nBQbE??@?Ip@k@dGGVc@jC??kC~Je@jB??@?}@bCwC`CmApA??y@b@y@~Bo@fB??w@fBwBrEeBxD??@@c@h@wBtCoBdC??@Bi@t@_D|Dg@l@??@@uBvB?p@CjGA`DStAaKI??PDeAc@oGa@cGI??_Gw@s@C_@PkBc@uBEmFM??WYoHc@SA_AmAeDyAuEU??i@AyAQRvCcHU",
+            "operator": "Sydney Buses",
+            "serviceName": "CITY Circular Quay",
+            "serviceNumber": "380",
+            "serviceTripID": "76467191_20151006_11954",
+            "stops": [
+                {
+                    "arrival": 1468677599,
+                    "bearing": 113,
+                    "code": "203026",
+                    "departure": 1468763040,
+                    "lat": -33.86293,
+                    "lng": 151.27931,
+                    "name": "Military Rd near Old South Head Rd"
+                },
+                {
+                    "arrival": 1468763100,
+                    "bearing": 192,
+                    "code": "203027",
+                    "departure": 1468763100,
+                    "lat": -33.86375,
+                    "lng": 151.28117,
+                    "name": "Military Rd near Kimberley St"
+                },
+                {
+                    "arrival": 1468763110,
+                    "bearing": 200,
+                    "code": "203028",
+                    "departure": 1468763110,
+                    "lat": -33.86542,
+                    "lng": 151.28079,
+                    "name": "Military Rd near Eastern Av"
+                },
+                {
+                    "arrival": 1468763120,
+                    "bearing": 174,
+                    "code": "203029",
+                    "departure": 1468763120,
+                    "lat": -33.86721,
+                    "lng": 151.28012,
+                    "name": "Peel St near George St"
+                },
+                {
+                    "arrival": 1468763160,
+                    "bearing": 99,
+                    "code": "203030",
+                    "departure": 1468763160,
+                    "lat": -33.86811,
+                    "lng": 151.28021,
+                    "name": "Lancaster Rd near Peel St"
+                },
+                {
+                    "arrival": 1468763175,
+                    "bearing": 186,
+                    "code": "203037",
+                    "departure": 1468763175,
+                    "lat": -33.86832,
+                    "lng": 151.28146,
+                    "name": "Lancaster Rd near Military Rd"
+                },
+                {
+                    "arrival": 1468763220,
+                    "bearing": 191,
+                    "code": "203038",
+                    "departure": 1468763220,
+                    "lat": -33.87107,
+                    "lng": 151.28113,
+                    "name": "Military Rd near Weonga Rd"
+                },
+                {
+                    "arrival": 1468763230,
+                    "bearing": 191,
+                    "code": "203039",
+                    "departure": 1468763230,
+                    "lat": -33.87239,
+                    "lng": 151.28085,
+                    "name": "Military Rd near Blake St"
+                },
+                {
+                    "arrival": 1468763240,
+                    "bearing": 185,
+                    "code": "203040",
+                    "departure": 1468763240,
+                    "lat": -33.87406,
+                    "lng": 151.28052,
+                    "name": "Military Rd near Dover Rd"
+                },
+                {
+                    "arrival": 1468763280,
+                    "bearing": 192,
+                    "code": "203041",
+                    "departure": 1468763280,
+                    "lat": -33.87612,
+                    "lng": 151.28032,
+                    "name": "Military Rd near Liverpool St"
+                },
+                {
+                    "arrival": 1468763295,
+                    "bearing": 149,
+                    "code": "203042",
+                    "departure": 1468763295,
+                    "lat": -33.87768,
+                    "lng": 151.27998,
+                    "name": "Military Rd near Raleigh St"
+                },
+                {
+                    "arrival": 1468763340,
+                    "bearing": 139,
+                    "code": "203049",
+                    "departure": 1468763340,
+                    "lat": -33.87948,
+                    "lng": 151.28104,
+                    "name": "Military Rd near Arthur St"
+                },
+                {
+                    "arrival": 1468763400,
+                    "bearing": 171,
+                    "code": "203050",
+                    "departure": 1468763400,
+                    "lat": -33.88095,
+                    "lng": 151.28227,
+                    "name": "Military Rd near Wentworth St"
+                },
+                {
+                    "arrival": 1468763415,
+                    "bearing": 152,
+                    "code": "203051",
+                    "departure": 1468763415,
+                    "lat": -33.88295,
+                    "lng": 151.28256,
+                    "name": "Military Rd near Hugh Bamford Reserve"
+                },
+                {
+                    "arrival": 1468763460,
+                    "bearing": 147,
+                    "code": "202631",
+                    "departure": 1468763460,
+                    "lat": -33.88475,
+                    "lng": 151.28351,
+                    "name": "Military Rd opp O'Donnell St"
+                },
+                {
+                    "arrival": 1468763470,
+                    "bearing": 210,
+                    "code": "202632",
+                    "departure": 1468763470,
+                    "lat": -33.88618,
+                    "lng": 151.28441,
+                    "name": "Military Rd opp Blair St"
+                },
+                {
+                    "arrival": 1468763480,
+                    "bearing": 187,
+                    "code": "202633",
+                    "departure": 1468763480,
+                    "lat": -33.88761,
+                    "lng": 151.28357,
+                    "name": "Military Rd opp Wallis Pde"
+                },
+                {
+                    "arrival": 1468763520,
+                    "bearing": 263,
+                    "code": "202634",
+                    "departure": 1468763520,
+                    "lat": -33.88961,
+                    "lng": 151.28331,
+                    "name": "Campbell Pde Terminus"
+                },
+                {
+                    "arrival": 1468763580,
+                    "bearing": 286,
+                    "code": "202635",
+                    "departure": 1468763580,
+                    "lat": -33.88993,
+                    "lng": 151.2805,
+                    "name": "Campbell Pde near Ramsgate Av"
+                },
+                {
+                    "arrival": 1468763595,
+                    "bearing": 289,
+                    "code": "202636",
+                    "departure": 1468763595,
+                    "lat": -33.88967,
+                    "lng": 151.27956,
+                    "name": "Campbell Pde near Queen Elizabeth Dr"
+                },
+                {
+                    "arrival": 1468763640,
+                    "bearing": 253,
+                    "code": "202637",
+                    "departure": 1468763640,
+                    "lat": -33.88916,
+                    "lng": 151.278,
+                    "name": "Campbell Pde opp Wairoa Av"
+                },
+                {
+                    "arrival": 1468763700,
+                    "bearing": 227,
+                    "code": "202638",
+                    "departure": 1468763700,
+                    "lat": -33.88975,
+                    "lng": 151.27597,
+                    "name": "Campbell Pde opp Curlewis St"
+                },
+                {
+                    "arrival": 1468763760,
+                    "bearing": 200,
+                    "code": "202652",
+                    "departure": 1468763760,
+                    "lat": -33.89107,
+                    "lng": 151.27452,
+                    "name": "Campbell Pde opp Hall St"
+                },
+                {
+                    "arrival": 1468763820,
+                    "bearing": 192,
+                    "code": "202654",
+                    "departure": 1468763820,
+                    "lat": -33.89437,
+                    "lng": 151.2733,
+                    "name": "Campbell Pde near Notts Av"
+                },
+                {
+                    "arrival": 1468763835,
+                    "bearing": 280,
+                    "code": "202655",
+                    "departure": 1468763835,
+                    "lat": -33.89558,
+                    "lng": 151.27303,
+                    "name": "Bondi Rd near Sandridge St"
+                },
+                {
+                    "arrival": 1468763880,
+                    "bearing": 281,
+                    "code": "202656",
+                    "departure": 1468763880,
+                    "lat": -33.89531,
+                    "lng": 151.27144,
+                    "name": "Bondi Rd near Dudley St"
+                },
+                {
+                    "arrival": 1468763940,
+                    "bearing": 279,
+                    "code": "202659",
+                    "departure": 1468763940,
+                    "lat": -33.89461,
+                    "lng": 151.26779,
+                    "name": "Bondi Rd near Denham St"
+                },
+                {
+                    "arrival": 1468763955,
+                    "bearing": 279,
+                    "code": "202660",
+                    "departure": 1468763955,
+                    "lat": -33.89439,
+                    "lng": 151.26633,
+                    "name": "Bondi Rd near Imperial Av"
+                },
+                {
+                    "arrival": 1468764000,
+                    "bearing": 279,
+                    "code": "202661",
+                    "departure": 1468677600,
+                    "lat": -33.89404,
+                    "lng": 151.26408,
+                    "name": "Bondi Rd near Watson St"
+                },
+                {
+                    "arrival": 1468764015,
+                    "bearing": 279,
+                    "code": "202662",
+                    "departure": 1468677615,
+                    "lat": -33.89383,
+                    "lng": 151.2627,
+                    "name": "Bondi Rd near Ocean St"
+                },
+                {
+                    "arrival": 1468764060,
+                    "bearing": 278,
+                    "code": "202663",
+                    "departure": 1468677660,
+                    "lat": -33.89347,
+                    "lng": 151.26028,
+                    "name": "Bondi Rd near Park Pde"
+                },
+                {
+                    "arrival": 1468764075,
+                    "bearing": 278,
+                    "code": "202254",
+                    "departure": 1468677675,
+                    "lat": -33.8933,
+                    "lng": 151.2589,
+                    "name": "Bondi Rd opp Flood St"
+                },
+                {
+                    "arrival": 1468764120,
+                    "bearing": 301,
+                    "code": "202255",
+                    "departure": 1468677720,
+                    "lat": -33.8929,
+                    "lng": 151.25595,
+                    "name": "Bondi Rd near Council St"
+                },
+                {
+                    "arrival": 1468764135,
+                    "bearing": 262,
+                    "code": "202256",
+                    "departure": 1468677735,
+                    "lat": -33.89167,
+                    "lng": 151.25388,
+                    "name": "Bondi Rd near Waverley Cr"
+                },
+                {
+                    "arrival": 1468764180,
+                    "bearing": 305,
+                    "code": "202257",
+                    "departure": 1468677780,
+                    "lat": -33.89214,
+                    "lng": 151.25008,
+                    "name": "Oxford St near Bronte Rd"
+                },
+                {
+                    "arrival": 1468764240,
+                    "bearing": 278,
+                    "code": "202268",
+                    "departure": 1468677840,
+                    "lat": -33.89097,
+                    "lng": 151.2484,
+                    "name": "Bondi Junction Interchange (Set Down)"
+                },
+                {
+                    "arrival": 1468764360,
+                    "bearing": 232,
+                    "code": "202281",
+                    "departure": 1468677960,
+                    "lat": -33.89091,
+                    "lng": 151.24794,
+                    "name": "Bondi Junction Interchange - Stand N",
+                    "shortName": "Stand N"
+                },
+                {
+                    "arrival": 1468764420,
+                    "bearing": 287,
+                    "code": "202258",
+                    "departure": 1468678020,
+                    "lat": -33.89172,
+                    "lng": 151.24687,
+                    "name": "Oxford St near Newland St"
+                },
+                {
+                    "arrival": 1468764480,
+                    "bearing": 287,
+                    "code": "202259",
+                    "departure": 1468678080,
+                    "lat": -33.89129,
+                    "lng": 151.24538,
+                    "name": "Oxford St near Denison St"
+                },
+                {
+                    "arrival": 1468764540,
+                    "bearing": 285,
+                    "code": "202260",
+                    "departure": 1468678140,
+                    "lat": -33.89043,
+                    "lng": 151.24254,
+                    "name": "Oxford St near Waverley Bus Depot"
+                },
+                {
+                    "arrival": 1468764555,
+                    "bearing": 256,
+                    "code": "202147",
+                    "departure": 1468678155,
+                    "lat": -33.89009,
+                    "lng": 151.24126,
+                    "name": "Oxford St near Loch Av"
+                },
+                {
+                    "arrival": 1468764600,
+                    "bearing": 287,
+                    "code": "202148",
+                    "departure": 1468678200,
+                    "lat": -33.89084,
+                    "lng": 151.23807,
+                    "name": "Oxford St near Moncur St"
+                },
+                {
+                    "arrival": 1468764660,
+                    "bearing": 313,
+                    "code": "202150",
+                    "departure": 1468678260,
+                    "lat": -33.88918,
+                    "lng": 151.23253,
+                    "name": "Oxford St near Queen St"
+                },
+                {
+                    "arrival": 1468764720,
+                    "bearing": 307,
+                    "code": "202151",
+                    "departure": 1468678320,
+                    "lat": -33.88767,
+                    "lng": 151.23088,
+                    "name": "Oxford St near Paddington Primary"
+                },
+                {
+                    "arrival": 1468764735,
+                    "bearing": 294,
+                    "code": "202152",
+                    "departure": 1468678335,
+                    "lat": -33.88614,
+                    "lng": 151.22878,
+                    "name": "Oxford St opp William St"
+                },
+                {
+                    "arrival": 1468764780,
+                    "bearing": 282,
+                    "code": "202153",
+                    "departure": 1468678380,
+                    "lat": -33.88512,
+                    "lng": 151.22649,
+                    "name": "Oxford St near Oatley Rd"
+                },
+                {
+                    "arrival": 1468764840,
+                    "bearing": 290,
+                    "code": "202154",
+                    "departure": 1468678440,
+                    "lat": -33.88465,
+                    "lng": 151.22411,
+                    "name": "Oxford St opp Brodie St"
+                },
+                {
+                    "arrival": 1468764855,
+                    "bearing": 310,
+                    "code": "202155",
+                    "departure": 1468678455,
+                    "lat": -33.88375,
+                    "lng": 151.22165,
+                    "name": "Oxford St opp Hopewell St"
+                },
+                {
+                    "arrival": 1468764900,
+                    "bearing": 302,
+                    "code": "202196",
+                    "departure": 1468678500,
+                    "lat": -33.88231,
+                    "lng": 151.21992,
+                    "name": "Oxford St near Verona St"
+                },
+                {
+                    "arrival": 1468764915,
+                    "bearing": 300,
+                    "code": "201060",
+                    "departure": 1468678515,
+                    "lat": -33.88148,
+                    "lng": 151.21858,
+                    "name": "Oxford St near Victoria St"
+                },
+                {
+                    "arrival": 1468764960,
+                    "bearing": 309,
+                    "code": "201051",
+                    "departure": 1468678560,
+                    "lat": -33.88009,
+                    "lng": 151.21608,
+                    "name": "Oxford St opp Palmer St"
+                },
+                {
+                    "arrival": 1468765020,
+                    "bearing": 310,
+                    "code": "201053",
+                    "departure": 1468678620,
+                    "lat": -33.87877,
+                    "lng": 151.21443,
+                    "name": "Oxford St near Riley St"
+                },
+                {
+                    "arrival": 1468765080,
+                    "bearing": 308,
+                    "code": "201056",
+                    "departure": 1468678680,
+                    "lat": -33.87757,
+                    "lng": 151.21297,
+                    "name": "Oxford St near Brisbane St"
+                },
+                {
+                    "arrival": 1468765200,
+                    "bearing": 8,
+                    "code": "200055",
+                    "departure": 1468678800,
+                    "lat": -33.87493,
+                    "lng": 151.20958,
+                    "name": "Museum Station, Elizabeth St, Stand D",
+                    "shortName": "Stand D"
+                },
+                {
+                    "arrival": 1468765320,
+                    "bearing": 7,
+                    "code": "200057",
+                    "departure": 1468678920,
+                    "lat": -33.872,
+                    "lng": 151.20995,
+                    "name": "Sheraton on the Park, Elizabeth St"
+                },
+                {
+                    "arrival": 1468765380,
+                    "bearing": 18,
+                    "code": "200082",
+                    "departure": 1468678980,
+                    "lat": -33.86798,
+                    "lng": 151.21043,
+                    "name": "Martin Place Station, Elizabeth St, Stand D",
+                    "shortName": "Stand D"
+                },
+                {
+                    "arrival": 1468765500,
+                    "bearing": 345,
+                    "code": "200059",
+                    "departure": 1468679100,
+                    "lat": -33.86403,
+                    "lng": 151.2117,
+                    "name": "Museum of Sydney, Phillip St"
+                },
+                {
+                    "arrival": 1468765560,
+                    "code": "200065",
+                    "lat": -33.862,
+                    "lng": 151.21115,
+                    "name": "Circular Quay, Young St, Stand D",
+                    "shortName": "Stand D"
+                }
+            ],
+            "travelled": true,
+            "wheelchairAccessible": true
         }
-      ],
-      "travelled": true,
-      "wheelchairAccessible": true
-    }
-  ],
-  "type": "bus"
+    ],
+    "type": "bus"
 }

@@ -9,153 +9,153 @@ apply plugin: 'kotlin-parcelize'
 
 android {
 
-  namespace 'com.skedgo.tripkit'
+    namespace 'com.skedgo.tripkit'
 
-  compileSdkVersion versions.compileSdkVersion
+    compileSdkVersion versions.compileSdkVersion
 
-  defaultConfig {
-      minSdkVersion versions.proMinSdkVersion
-    targetSdkVersion versions.targetSdkVersion
-    testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
-  }
-
-  buildTypes {
-    staging {
-      debuggable true
+    defaultConfig {
+        minSdkVersion versions.proMinSdkVersion
+        targetSdkVersion versions.targetSdkVersion
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
-  }
 
-  packagingOptions {
-    // To avoid conflicts with ASL.
-    // We don't utilize ServiceLoader, so this is unneeded.
-    exclude 'META-INF/services/com.google.gson.TypeAdapterFactory'
-  }
-
-  compileOptions {
-    coreLibraryDesugaringEnabled true
-    sourceCompatibility JavaVersion.VERSION_17
-    targetCompatibility JavaVersion.VERSION_17
-  }
-  kotlinOptions {
-    jvmTarget = JavaVersion.VERSION_17.toString()
-  }
-  testOptions {
-    unitTests {
-      includeAndroidResources = true
+    buildTypes {
+        staging {
+            debuggable true
+        }
     }
-  }
 
-  lintOptions {
-    checkReleaseBuilds true
-    abortOnError false
-  }
-
-  publishing {
-    singleVariant("release") {
-      // if you don't want sources/javadoc, remove these lines
-      withSourcesJar()
-      withJavadocJar()
+    packagingOptions {
+        // To avoid conflicts with ASL.
+        // We don't utilize ServiceLoader, so this is unneeded.
+        exclude 'META-INF/services/com.google.gson.TypeAdapterFactory'
     }
-  }
+
+    compileOptions {
+        coreLibraryDesugaringEnabled true
+        sourceCompatibility JavaVersion.VERSION_17
+        targetCompatibility JavaVersion.VERSION_17
+    }
+    kotlinOptions {
+        jvmTarget = JavaVersion.VERSION_17.toString()
+    }
+    testOptions {
+        unitTests {
+            includeAndroidResources = true
+        }
+    }
+
+    lintOptions {
+        checkReleaseBuilds true
+        abortOnError false
+    }
+
+    publishing {
+        singleVariant("release") {
+            // if you don't want sources/javadoc, remove these lines
+            withSourcesJar()
+            withJavadocJar()
+        }
+    }
 }
 
 // Generation relative to tripgo! Add translations repo to tripkit?
 task(generateTripkitStrings, type: org.gradle.api.tasks.JavaExec) {
-  classpath(files('IOStoAndroidStringsConverter.jar'))
-  main('com.skedgo.tripgo.tools.android.Main')
-  args(['./src/main/res', '../../libraries/translations', 'void',
-        'en#es#de#fi#pt#zh-Hant#zh-Hans', 'Tripkit.strings'])
+    classpath(files('IOStoAndroidStringsConverter.jar'))
+    main('com.skedgo.tripgo.tools.android.Main')
+    args(['./src/main/res', '../../libraries/translations', 'void',
+          'en#es#de#fi#pt#zh-Hant#zh-Hans', 'Tripkit.strings'])
 }
 
 dependencies {
-  coreLibraryDesugaring libs.desugar
+    coreLibraryDesugaring libs.desugar
 
-  testImplementation libs.junit
-  testImplementation libs.assertjCore
-  testImplementation libs.robolectric
-  testImplementation libs.mockitoCore
-  testImplementation libs.mockitoKotlin, { exclude group: 'org.jetbrains.kotlin' }
-  testImplementation libs.kluent
-  testImplementation 'com.github.thuytrinh:MockWebServerRule:v1.0'
-  testImplementation libs.kluent
-  testImplementation libs.androidxTesting
+    testImplementation libs.junit
+    testImplementation libs.assertjCore
+    testImplementation libs.robolectric
+    testImplementation libs.mockitoCore
+    testImplementation libs.mockitoKotlin, {exclude group: 'org.jetbrains.kotlin'}
+    testImplementation libs.kluent
+    testImplementation 'com.github.thuytrinh:MockWebServerRule:v1.0'
+    testImplementation libs.kluent
+    testImplementation libs.androidxTesting
 
-  androidTestImplementation "androidx.test:runner:1.1.0"
-  androidTestImplementation "androidx.test:rules:1.1.0"
-  androidTestImplementation libs.assertjCore
+    androidTestImplementation "androidx.test:runner:1.1.0"
+    androidTestImplementation "androidx.test:rules:1.1.0"
+    androidTestImplementation libs.assertjCore
 
-  implementation libs.kotlin
-  implementation libs.coroutinesCore
-  implementation libs.coroutinesAndroid
-  implementation libs.coroutinesRx
+    implementation libs.kotlin
+    implementation libs.coroutinesCore
+    implementation libs.coroutinesAndroid
+    implementation libs.coroutinesRx
 
-  implementation libs.jodaTimeAndroid
-  implementation 'com.github.skedgo:commons-collections:v1.0'
+    implementation libs.jodaTimeAndroid
+    implementation 'com.github.skedgo:commons-collections:v1.0'
 
-  implementation libs.okHttp
-  implementation libs.okHttpLogging
-  implementation libs.retrofit
-  implementation libs.retrofitAdapterRxJava
-  implementation libs.retrofitConverterGson
+    implementation libs.okHttp
+    implementation libs.okHttpLogging
+    implementation libs.retrofit
+    implementation libs.retrofitAdapterRxJava
+    implementation libs.retrofitConverterGson
 
-  implementation libs.rxjava2
-  implementation libs.rxAndroid2
-  implementation 'com.firebase:firebase-jobdispatcher:0.8.5'
+    implementation libs.rxjava2
+    implementation libs.rxAndroid2
+    implementation 'com.firebase:firebase-jobdispatcher:0.8.5'
 
-  implementation libs.dagger
-  kapt libs.daggerCompiler
-  kapt libs.value
-  compileOnly libs.valueAnnotations
-  compileOnly libs.builderAnnotations
-  implementation libs.immutablesGson
-  implementation libs.networkResponse
+    implementation libs.dagger
+    kapt libs.daggerCompiler
+    kapt libs.value
+    compileOnly libs.valueAnnotations
+    compileOnly libs.builderAnnotations
+    implementation libs.immutablesGson
+    implementation libs.networkResponse
 
-  implementation libs.playServicesMaps
-  implementation libs.map_utils
-  implementation libs.map_utils_ktx
-  implementation libs.map_extension
-  implementation libs.location
-  implementation libs.instabugInterceptor
+    implementation libs.playServicesMaps
+    implementation libs.map_utils
+    implementation libs.map_utils_ktx
+    implementation libs.map_extension
+    implementation libs.location
+    implementation libs.instabugInterceptor
 
-  testImplementation libs.mockk
+    testImplementation libs.mockk
 
-  debugApi project(':CommonCoreLegacy')
-  stagingApi project(':CommonCoreLegacy')
-  releaseApi project(':CommonCoreLegacy')
+    debugApi project(':CommonCoreLegacy')
+    stagingApi project(':CommonCoreLegacy')
+    releaseApi project(':CommonCoreLegacy')
 
-  debugApi project(':TripKitDomain')
-  stagingApi project(':TripKitDomain')
-  releaseApi project(':TripKitDomain')
+    debugApi project(':TripKitDomain')
+    stagingApi project(':TripKitDomain')
+    releaseApi project(':TripKitDomain')
 
-  debugApi project(':TripKitDomainLegacy')
-  stagingApi project(':TripKitDomainLegacy')
-  releaseApi project(':TripKitDomainLegacy')
+    debugApi project(':TripKitDomainLegacy')
+    stagingApi project(':TripKitDomainLegacy')
+    releaseApi project(':TripKitDomainLegacy')
 
-  debugApi project(':TripKitData')
-  stagingApi project(':TripKitData')
-  releaseApi project(':TripKitData')
+    debugApi project(':TripKitData')
+    stagingApi project(':TripKitData')
+    releaseApi project(':TripKitData')
 
-  debugApi project(':sqliteutils')
-  stagingApi project(':sqliteutils')
-  releaseApi project(':sqliteutils')
-  //api project(':SnapshotTaker') Uncomment when using in TripGo-v5
+    debugApi project(':sqliteutils')
+    stagingApi project(':sqliteutils')
+    releaseApi project(':sqliteutils')
+    //api project(':SnapshotTaker') Uncomment when using in TripGo-v5
 
-  implementation libs.javaxAnnotation
-  compileOnly 'com.github.pengrad:jdk9-deps:1.0'
+    implementation libs.javaxAnnotation
+    compileOnly 'com.github.pengrad:jdk9-deps:1.0'
 
-  testImplementation libs.mockk
-  testImplementation libs.junit
-  testImplementation libs.androidxJUnitExtTesting
-  testImplementation libs.archCoreTesting
-  testImplementation libs.kluent
-  testImplementation libs.androidxTesting
-  testImplementation libs.assertjCore
+    testImplementation libs.mockk
+    testImplementation libs.junit
+    testImplementation libs.androidxJUnitExtTesting
+    testImplementation libs.archCoreTesting
+    testImplementation libs.kluent
+    testImplementation libs.androidxTesting
+    testImplementation libs.assertjCore
 }
 
 // build a jar with source files
 task sourcesJar(type: Jar) {
-  from android.sourceSets.main.java.srcDirs
-  archiveClassifier.set('sources')
+    from android.sourceSets.main.java.srcDirs
+    archiveClassifier.set('sources')
 }
 
 task javadoc(type: Javadoc) {
@@ -170,57 +170,57 @@ task javadoc(type: Javadoc) {
 
 // build a jar with javadoc
 task javadocJar(type: Jar, dependsOn: javadoc) {
-  archiveClassifier.set('javadoc')
-  from javadoc.destinationDir
+    archiveClassifier.set('javadoc')
+    from javadoc.destinationDir
 }
 
 artifacts {
-  archives sourcesJar
-  archives javadocJar
+    archives sourcesJar
+    archives javadocJar
 }
 
 group = tripkitGroup
 version = tripkitVersion
 
 publishing {
-  repositories {
-    maven {
-      url = "file://${localMaven}"
-      //url = publishMavenUrl
-      credentials {
-          username = publishMavenUsername
-          password = publishMavenToken
+    repositories {
+        maven {
+            url = "file://${localMaven}"
+            //url = publishMavenUrl
+            credentials {
+                username = publishMavenUsername
+                password = publishMavenToken
+            }
         }
     }
-  }
 
-  publications {
-    release(MavenPublication) {
-      groupId = group
-      version = version
-      artifactId = 'TripKitAndroid'
-      afterEvaluate {
-        from components.release
-      }
-      pom {
-        licenses {
-          license {
-            name = 'Commercial'
-          }
+    publications {
+        release(MavenPublication) {
+            groupId = group
+            version = version
+            artifactId = 'TripKitAndroid'
+            afterEvaluate {
+                from components.release
+            }
+            pom {
+                licenses {
+                    license {
+                        name = 'Commercial'
+                    }
+                }
+            }
+            pom.withXml {
+                asNode().dependencies.'*'
+                    .findAll() {
+                        (it.scope.text() == 'runtime' || it.scope.text() == 'compile') &&
+                            project.configurations.implementation.allDependencies.find {
+                                dep -> dep.name == it.artifactId.text()
+                            }
+                    }.each {
+                    it.appendNode("type", "aar")
+                }
+            }
         }
-      }
-      pom.withXml {
-        asNode().dependencies.'*'
-                .findAll() {
-                  (it.scope.text() == 'runtime' || it.scope.text() == 'compile') &&
-                          project.configurations.implementation.allDependencies.find {
-                            dep -> dep.name == it.artifactId.text()
-                          }
-                }.each {
-          it.appendNode("type", "aar")
-        }
-      }
     }
-  }
 }
 

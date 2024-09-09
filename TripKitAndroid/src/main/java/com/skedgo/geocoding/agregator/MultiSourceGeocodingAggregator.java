@@ -1,12 +1,15 @@
 package com.skedgo.geocoding.agregator;
 
-import com.skedgo.geocoding.*;
+import com.skedgo.geocoding.GCBoundingBox;
+import com.skedgo.geocoding.GCQuery;
+import com.skedgo.geocoding.GeocodeUtilities;
+import com.skedgo.geocoding.LatLng;
+import com.skedgo.geocoding.ScoringResult;
 
 import java.util.ArrayList;
 import java.util.List;
 
 /**
- *
  * Scoring formulas
  * Favourites: max(title, address)
  * Search history: max(title, address)
@@ -27,7 +30,10 @@ import java.util.List;
 
 public class MultiSourceGeocodingAggregator<T extends GCResultInterface> {
 
-    private static MultiSourceGeocodingAggregator instance  = null;
+    private static MultiSourceGeocodingAggregator instance = null;
+
+    private MultiSourceGeocodingAggregator() {
+    }
 
     public static MultiSourceGeocodingAggregator getInstance() {
         if (instance == null)
@@ -35,26 +41,23 @@ public class MultiSourceGeocodingAggregator<T extends GCResultInterface> {
         return instance;
     }
 
-    private MultiSourceGeocodingAggregator(){}
-
-    public List<MGAResultInterface<T>> aggregate(GCQueryInterface userQuery, List<List<T>>  providersResults){
+    public List<MGAResultInterface<T>> aggregate(GCQueryInterface userQuery, List<List<T>> providersResults) {
         GCQuery query;
         List<MGAResultInterface<T>> scoredResults = new ArrayList<>();
-        if (userQuery instanceof GCQuery){
+        if (userQuery instanceof GCQuery) {
             query = (GCQuery) userQuery;
-        }
-        else{
-            if (userQuery.getBounds() instanceof GCBoundingBox){
+        } else {
+            if (userQuery.getBounds() instanceof GCBoundingBox) {
                 query = new GCQuery(userQuery.getQueryText(), (GCBoundingBox) userQuery.getBounds());
-            }else{
+            } else {
                 query = new GCQuery(userQuery.getQueryText(), new GCBoundingBox(userQuery.getBounds()));
             }
         }
 
         for (List<T> providerResults : providersResults) {
-            if (providerResults != null){
+            if (providerResults != null) {
                 for (T candidate : providerResults) {
-                    ScoringResult<T> scoringResult = calculateScore(query,candidate);
+                    ScoringResult<T> scoringResult = calculateScore(query, candidate);
                     if (scoringResult != null && scoringResult.getScore() != 0) {
                         scoredResults.add(scoringResult);
                     }
@@ -66,17 +69,17 @@ public class MultiSourceGeocodingAggregator<T extends GCResultInterface> {
         return scoredResults;
     }
 
-    public List<GCResultInterface> flattenAggregate(GCQueryInterface userQuery, List<List<T>> providersResults){
-        List<MGAResultInterface<T>> aggregates =  aggregate(userQuery, providersResults);
+    public List<GCResultInterface> flattenAggregate(GCQueryInterface userQuery, List<List<T>> providersResults) {
+        List<MGAResultInterface<T>> aggregates = aggregate(userQuery, providersResults);
         List<GCResultInterface> results = new ArrayList<>();
-        for (MGAResultInterface<T> result : aggregates){
+        for (MGAResultInterface<T> result : aggregates) {
             results.add(result.getResult());
         }
         return results;
     }
 
 
-    private ScoringResult<T> calculateScore(GCQuery query, T candidate){
+    private ScoringResult<T> calculateScore(GCQuery query, T candidate) {
 
         if (candidate instanceof GCGoogleResultInterface)
             return selectGoogleScore(query, (GCGoogleResultInterface) candidate);
@@ -84,7 +87,7 @@ public class MultiSourceGeocodingAggregator<T extends GCResultInterface> {
             return calculateFoursquareScoring(query, (GCFoursquareResultInterface) candidate);
         if (candidate instanceof GCSkedGoResultInterface)
             return calculateSkedGoScoring(query, (GCSkedGoResultInterface) candidate);
-        if (candidate instanceof GCAppResultInterface){
+        if (candidate instanceof GCAppResultInterface) {
             GCAppResultInterface apiResultCandidate = (GCAppResultInterface) candidate;
             switch (apiResultCandidate.getAppResultSource()) {
                 case History:
@@ -100,16 +103,16 @@ public class MultiSourceGeocodingAggregator<T extends GCResultInterface> {
         return null;
     }
 
-    private ScoringResult<T> selectGoogleScore(GCQuery query, GCGoogleResultInterface candidate){
-        if(candidate.getLat() != null && candidate.getLng() != null && candidate.getAddress() != null){
+    private ScoringResult<T> selectGoogleScore(GCQuery query, GCGoogleResultInterface candidate) {
+        if (candidate.getLat() != null && candidate.getLng() != null && candidate.getAddress() != null) {
             return calculateGoogleScoring(query, candidate);
-        }else{
+        } else {
             return calculateAutocompleteScore(query, candidate);
         }
     }
 
 
-    private ScoringResult<T> calculateGoogleScoring(GCQuery query, GCGoogleResultInterface candidate){
+    private ScoringResult<T> calculateGoogleScoring(GCQuery query, GCGoogleResultInterface candidate) {
         ScoringResult<T> scoringResult = new ScoringResult(candidate);
         int nameScore = GeocodeUtilities.scoreBasedOnNameMatchBetweenSearchTerm(query.getQueryText(), candidate.getName());
         int addressScore = GeocodeUtilities.scoreBasedOnNameMatchBetweenSearchTerm(query.getQueryText(), candidate.getAddress());
@@ -135,7 +138,7 @@ public class MultiSourceGeocodingAggregator<T extends GCResultInterface> {
     private ScoringResult<T> calculateAutocompleteScore(GCQuery query, GCGoogleResultInterface candidate) {
         ScoringResult<T> scoringResult = new ScoringResult(candidate);
         int nameScore = GeocodeUtilities.scoreBasedOnNameMatchBetweenSearchTerm(query.getQueryText(), candidate.getName());
-        int rawScore = (nameScore * 3) /4;
+        int rawScore = (nameScore * 3) / 4;
         int min = 15;
         int max = 75;
         int totalScore = GeocodeUtilities.rangedScoreForScore(rawScore, min, max);
@@ -143,7 +146,7 @@ public class MultiSourceGeocodingAggregator<T extends GCResultInterface> {
         return scoringResult;
     }
 
-    private ScoringResult<T> calculateFoursquareScoring(GCQuery query, GCFoursquareResultInterface candidate){
+    private ScoringResult<T> calculateFoursquareScoring(GCQuery query, GCFoursquareResultInterface candidate) {
         ScoringResult<T> scoringResult = new ScoringResult(candidate);
 
         //discard uncategorized and not verified foursquare results
@@ -155,14 +158,14 @@ public class MultiSourceGeocodingAggregator<T extends GCResultInterface> {
         if (titleScore == 0) {
             scoringResult.setScore(0);
             scoringResult.setNameScore(0);
-            return  scoringResult;
+            return scoringResult;
         }
 
         LatLng coordinate = new LatLng(candidate.getLat(), candidate.getLng());
         int distanceScore = GeocodeUtilities.scoreBasedOnDistanceFromCoordinate(coordinate, query.getBounds(), query.getBounds().center(), false);
 
         int rawScore = (titleScore * 3 + distanceScore) / 4;
-        if (GeocodeUtilities.isSuburb(candidate)){
+        if (GeocodeUtilities.isSuburb(candidate)) {
             rawScore *= 2;
         }
         scoringResult.setNameScore(titleScore);
@@ -195,8 +198,8 @@ public class MultiSourceGeocodingAggregator<T extends GCResultInterface> {
             int popularityScore = ((Math.min(popularity, GOOD_SCORE)) / (GOOD_SCORE / 100)) * 2;
 
             popularityScore = (candidate.getModeIdentifiers() != null && !candidate.getModeIdentifiers().isEmpty()) ?
-                    GeocodeUtilities.rangedScoreForScore(popularityScore, 50, 90) :
-                    GeocodeUtilities.rangedScoreForScore(popularityScore, 30, 80);
+                GeocodeUtilities.rangedScoreForScore(popularityScore, 50, 90) :
+                GeocodeUtilities.rangedScoreForScore(popularityScore, 30, 80);
 
             if (popularity > GOOD_SCORE) {
                 int moreThanGood = popularityScore / GOOD_SCORE;
@@ -207,18 +210,18 @@ public class MultiSourceGeocodingAggregator<T extends GCResultInterface> {
             scoringResult.setPopularityScore(candidate.getPopularity());
             scoringResult.setScore(popularityScore);
             return scoringResult;
-        }else{
-            if (!query.getQueryText().isEmpty()){
+        } else {
+            if (!query.getQueryText().isEmpty()) {
                 int nameScore = GeocodeUtilities.scoreBasedOnNameMatchBetweenSearchTerm(query.getQueryText(), candidate.getName());
 
                 int totalScore = (candidate.getModeIdentifiers() != null && !candidate.getModeIdentifiers().isEmpty()) ?
-                        GeocodeUtilities.rangedScoreForScore(nameScore,50,90):
-                        GeocodeUtilities.rangedScoreForScore(nameScore,0,50);
+                    GeocodeUtilities.rangedScoreForScore(nameScore, 50, 90) :
+                    GeocodeUtilities.rangedScoreForScore(nameScore, 0, 50);
                 scoringResult.setScore(totalScore);
                 scoringResult.setNameScore(nameScore);
                 return scoringResult;
-            }else{
-                int totalScore = GeocodeUtilities.rangedScoreForScore(candidate.getPopularity(),0,50);
+            } else {
+                int totalScore = GeocodeUtilities.rangedScoreForScore(candidate.getPopularity(), 0, 50);
                 scoringResult.setPopularityScore(candidate.getPopularity());
                 scoringResult.setScore(totalScore);
                 return scoringResult;
@@ -235,7 +238,7 @@ public class MultiSourceGeocodingAggregator<T extends GCResultInterface> {
 
         if (matchAgainstString) {
             int nameScore = GeocodeUtilities.scoreBasedOnNameMatchBetweenSearchTerm(query.getQueryText(), candidate.getName());
-            int addressScore =  GeocodeUtilities.scoreBasedOnNameMatchBetweenSearchTerm(query.getQueryText(), candidate.getSubtitle());
+            int addressScore = GeocodeUtilities.scoreBasedOnNameMatchBetweenSearchTerm(query.getQueryText(), candidate.getSubtitle());
             scoringResult.setNameScore(nameScore);
             scoringResult.setAddressScore(addressScore);
             rawScore = Math.max(nameScore, addressScore);
@@ -245,9 +248,9 @@ public class MultiSourceGeocodingAggregator<T extends GCResultInterface> {
         }
 
 
-        int min = candidate.isFavourite() ? 90  : 50;
+        int min = candidate.isFavourite() ? 90 : 50;
         int max = candidate.isFavourite() ? 100 : 90;
-        int totalScore  = GeocodeUtilities.rangedScoreForScore(rawScore, min, max);
+        int totalScore = GeocodeUtilities.rangedScoreForScore(rawScore, min, max);
         scoringResult.setScore(totalScore);
 
         return scoringResult;
@@ -256,7 +259,7 @@ public class MultiSourceGeocodingAggregator<T extends GCResultInterface> {
     private ScoringResult<T> calculateCalendarScoring(GCQueryInterface query, GCAppResultInterface candidate) {
         ScoringResult<T> scoringResult = new ScoringResult(candidate);
         String searchTerm = query.getQueryText();
-        int nameScore =  GeocodeUtilities.scoreBasedOnNameMatchBetweenSearchTerm(searchTerm, candidate.getName());
+        int nameScore = GeocodeUtilities.scoreBasedOnNameMatchBetweenSearchTerm(searchTerm, candidate.getName());
         int locationScore = GeocodeUtilities.scoreBasedOnNameMatchBetweenSearchTerm(searchTerm, candidate.getSubtitle());
         scoringResult.setNameScore(nameScore);
         scoringResult.setAddressScore(locationScore);
@@ -265,7 +268,7 @@ public class MultiSourceGeocodingAggregator<T extends GCResultInterface> {
 
         int min = 50;
         int max = 90;
-        int totalScore =  GeocodeUtilities.rangedScoreForScore(rawScore, min, max);
+        int totalScore = GeocodeUtilities.rangedScoreForScore(rawScore, min, max);
         scoringResult.setScore(totalScore);
 
         return scoringResult;
@@ -284,7 +287,7 @@ public class MultiSourceGeocodingAggregator<T extends GCResultInterface> {
 
         int min = 50;
         int max = 90;
-        int totalScore =  GeocodeUtilities.rangedScoreForScore(rawScore, min, max);
+        int totalScore = GeocodeUtilities.rangedScoreForScore(rawScore, min, max);
         scoringResult.setScore(totalScore);
 
         return scoringResult;

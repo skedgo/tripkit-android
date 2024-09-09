@@ -22,36 +22,36 @@ import static org.assertj.core.api.Java6Assertions.assertThat;
 
 @RunWith(RobolectricTestRunner.class)
 public class ModeCombinationStrategyTest {
-  @Test
-  public void shouldDealWithModesNotFound() {
-    final List<Set<String>> modeIdSets = new ModeCombinationStrategy().apply(
-        new HashMap<String, TransportMode>(),
-        Arrays.asList("a", "b")
-    );
-    assertThat(modeIdSets).hasSize(3).contains(
-        Sets.newLinkedHashSet("a"),
-        Sets.newLinkedHashSet("b"),
-        Sets.newLinkedHashSet("a", "b")
-    );
-  }
+    @Test
+    public void shouldDealWithModesNotFound() {
+        final List<Set<String>> modeIdSets = new ModeCombinationStrategy().apply(
+            new HashMap<String, TransportMode>(),
+            Arrays.asList("a", "b")
+        );
+        assertThat(modeIdSets).hasSize(3).contains(
+            Sets.newLinkedHashSet("a"),
+            Sets.newLinkedHashSet("b"),
+            Sets.newLinkedHashSet("a", "b")
+        );
+    }
 
-  @Test
-  public void shouldCombineModesCorrectly() {
-    final List<Set<String>> modeIdSets = new ModeCombinationStrategy().apply(
-        createSampleModeMap(),
-        asList(
-            "pt_pub",
-            "pt_sch",
-            "ps_tax",
-            "ps_shu",
-            "me_car",
-            "me_car-s_CND",
-            "me_car-s_GOG",
-            "me_mot",
-            "cy_bic",
-            "wa_wal"
-        )
-    );
+    @Test
+    public void shouldCombineModesCorrectly() {
+        final List<Set<String>> modeIdSets = new ModeCombinationStrategy().apply(
+            createSampleModeMap(),
+            asList(
+                "pt_pub",
+                "pt_sch",
+                "ps_tax",
+                "ps_shu",
+                "me_car",
+                "me_car-s_CND",
+                "me_car-s_GOG",
+                "me_mot",
+                "cy_bic",
+                "wa_wal"
+            )
+        );
     /*
     assertThat(modeIdSets)
             .describedAs("Should combine modes correctly")
@@ -68,28 +68,28 @@ public class ModeCombinationStrategyTest {
                     Sets.newLinkedHashSet("pt_pub", "me_mot", "ps_tax", "cy_bic", "me_car-s_CND", "wa_wal", "me_car-s_GOG", "ps_shu", "me_car", "pt_sch")
             );
     */
-    assertThat(true).isEqualTo(true);
-  }
+        assertThat(true).isEqualTo(true);
+    }
 
-  @NonNull
-  private Map<String, TransportMode> createSampleModeMap() {
-    final Map<String, TransportMode> modeMap = new HashMap<>();
-    modeMap.put("pt_pub", new TransportMode());
-    modeMap.put("ps_tax", new TransportMode());
-    modeMap.put("me_car", new TransportMode());
-    modeMap.put("me_car-s_CND", new TransportMode());
-    modeMap.put("me_car-s_GOG", new TransportMode());
-    modeMap.put("me_mot", new TransportMode());
-    modeMap.put("cy_bic", new TransportMode());
-    modeMap.put("wa_wal", new TransportMode());
+    @NonNull
+    private Map<String, TransportMode> createSampleModeMap() {
+        final Map<String, TransportMode> modeMap = new HashMap<>();
+        modeMap.put("pt_pub", new TransportMode());
+        modeMap.put("ps_tax", new TransportMode());
+        modeMap.put("me_car", new TransportMode());
+        modeMap.put("me_car-s_CND", new TransportMode());
+        modeMap.put("me_car-s_GOG", new TransportMode());
+        modeMap.put("me_mot", new TransportMode());
+        modeMap.put("cy_bic", new TransportMode());
+        modeMap.put("wa_wal", new TransportMode());
 
-    final TransportMode schoolBusMode = new TransportMode();
-    schoolBusMode.setImplies(new ArrayList<>(singletonList("pt_pub")));
-    modeMap.put("pt_sch", schoolBusMode);
+        final TransportMode schoolBusMode = new TransportMode();
+        schoolBusMode.setImplies(new ArrayList<>(singletonList("pt_pub")));
+        modeMap.put("pt_sch", schoolBusMode);
 
-    final TransportMode shuttleMode = new TransportMode();
-    shuttleMode.setImplies(new ArrayList<>(asList("ps_tax", "cy_bic-s_AUSTIN")));
-    modeMap.put("ps_shu", shuttleMode);
-    return modeMap;
-  }
+        final TransportMode shuttleMode = new TransportMode();
+        shuttleMode.setImplies(new ArrayList<>(asList("ps_tax", "cy_bic-s_AUSTIN")));
+        modeMap.put("ps_shu", shuttleMode);
+        return modeMap;
+    }
 }

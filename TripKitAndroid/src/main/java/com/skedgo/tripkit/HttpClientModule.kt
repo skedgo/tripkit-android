@@ -9,9 +9,9 @@ import com.skedgo.tripkit.configuration.AppVersionNameRepository
 import com.skedgo.tripkit.configuration.GetAppVersion
 import com.skedgo.tripkit.configuration.ServerManager
 import com.skedgo.tripkit.data.regions.RegionService
-import com.skedgo.tripkit.regionrouting.RegionRoutingRepository
 import com.skedgo.tripkit.regionrouting.RegionRoutingApi
 import com.skedgo.tripkit.regionrouting.RegionRoutingAutoCompleter
+import com.skedgo.tripkit.regionrouting.RegionRoutingRepository
 import dagger.Lazy
 import dagger.Module
 import dagger.Provides
@@ -21,7 +21,7 @@ import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
-import java.util.*
+import java.util.Locale
 import java.util.concurrent.TimeUnit
 import javax.inject.Named
 import javax.inject.Singleton
@@ -31,18 +31,18 @@ import javax.inject.Singleton
  */
 @Module
 open class HttpClientModule(
-        private val buildFlavor: String?,
-        private val version: String?,
-        private val configs: Configs,
-        private val sharedPreferences: SharedPreferences? = null,
-        private val appDeactivatedListener: (() -> Unit)? = null
+    private val buildFlavor: String?,
+    private val version: String?,
+    private val configs: Configs,
+    private val sharedPreferences: SharedPreferences? = null,
+    private val appDeactivatedListener: (() -> Unit)? = null
 ) {
 
     @Singleton
     @Provides
     open fun httpClient(addCustomHeaders: AddCustomHeaders): OkHttpClient {
         val builder = httpClientBuilder()
-                .addInterceptor(addCustomHeaders)
+            .addInterceptor(addCustomHeaders)
         if (configs.debuggable()) {
             val interceptor = HttpLoggingInterceptor()
             interceptor.level = HttpLoggingInterceptor.Level.BODY
@@ -85,7 +85,10 @@ open class HttpClientModule(
     @Provides
     @Named("TripKitPrefs")
     open fun preferences(context: Context): SharedPreferences {
-        return context.getSharedPreferences(TripKitConstants.PREF_NAME_TRIP_KIT, Context.MODE_PRIVATE)
+        return context.getSharedPreferences(
+            TripKitConstants.PREF_NAME_TRIP_KIT,
+            Context.MODE_PRIVATE
+        )
     }
 
     @Provides
@@ -95,30 +98,30 @@ open class HttpClientModule(
         @Named("TripKitPrefs") sharedPreferences: SharedPreferences
     ): AddCustomHeaders {
         return AddCustomHeaders(
-                getAppVersion,
-                { Locale.getDefault() },
-                uuidProviderLazy.get(),
-                configs.userTokenProvider(),
-                { configs.key().call() },
-                sharedPreferences
+            getAppVersion,
+            { Locale.getDefault() },
+            uuidProviderLazy.get(),
+            configs.userTokenProvider(),
+            { configs.key().call() },
+            sharedPreferences
         )
     }
 
     @Provides
     open fun retrofitBuilder(gson: Gson): Retrofit.Builder {
         return Retrofit.Builder()
-                .baseUrl(ServerManager.configuration.apiTripGoUrl)
-                .addCallAdapterFactory(NetworkResponseAdapterFactory())
-                .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
-                .addConverterFactory(GsonConverterFactory.create(gson))
+            .baseUrl(ServerManager.configuration.apiTripGoUrl)
+            .addCallAdapterFactory(NetworkResponseAdapterFactory())
+            .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
+            .addConverterFactory(GsonConverterFactory.create(gson))
     }
 
     @Provides
     open fun getTripUpdateApi(builder: Retrofit.Builder, httpClient: OkHttpClient): TripUpdateApi {
         return builder
-                .client(httpClient)
-                .build()
-                .create(TripUpdateApi::class.java)
+            .client(httpClient)
+            .build()
+            .create(TripUpdateApi::class.java)
     }
 
     @Singleton
@@ -128,22 +131,31 @@ open class HttpClientModule(
     }
 
     @Provides
-    open fun getRegionRoutingApi(builder: Retrofit.Builder, httpClient: OkHttpClient): RegionRoutingApi {
+    open fun getRegionRoutingApi(
+        builder: Retrofit.Builder,
+        httpClient: OkHttpClient
+    ): RegionRoutingApi {
         return builder
-                .client(httpClient)
-                .build()
-                .create(RegionRoutingApi::class.java)
+            .client(httpClient)
+            .build()
+            .create(RegionRoutingApi::class.java)
     }
 
     @Singleton
     @Provides
-    open fun getRegionRoutingService(api: RegionRoutingApi, regionService: RegionService): RegionRoutingRepository {
+    open fun getRegionRoutingService(
+        api: RegionRoutingApi,
+        regionService: RegionService
+    ): RegionRoutingRepository {
         return RegionRoutingRepository.RegionRoutingRepositoryImpl(api, regionService)
     }
 
     @Singleton
     @Provides
-    open fun getRegionRoutingAutoCompleter(api: RegionRoutingApi, regionService: RegionService): RegionRoutingAutoCompleter {
+    open fun getRegionRoutingAutoCompleter(
+        api: RegionRoutingApi,
+        regionService: RegionService
+    ): RegionRoutingAutoCompleter {
         return RegionRoutingAutoCompleter.RegionRoutingAutoCompleterImpl(api, regionService)
     }
 }

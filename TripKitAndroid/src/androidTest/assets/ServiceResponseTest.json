@@ -1,249 +1,249 @@
 {
-  "realTimeStatus": "CAPABLE",
-  "type": "bus",
-  "shapes": [
-    {
-      "stops": [
+    "realTimeStatus": "CAPABLE",
+    "type": "bus",
+    "shapes": [
         {
-          "name": "Argyle St near Kent St",
-          "bearing": 80,
-          "departure": 1436773980,
-          "arrival": 1436709599,
-          "lng": 151.2039,
-          "code": "200099",
-          "lat": -33.85847
-        },
-        {
-          "name": "Argyle St near Lower Fort St",
-          "bearing": 51,
-          "departure": 1436774040,
-          "arrival": 1436774040,
-          "lng": 151.20526,
-          "code": "2000100",
-          "lat": -33.85823
-        },
-        {
-          "name": "Lower Fort St near Windmill St",
-          "bearing": 47,
-          "departure": 1436774055,
-          "arrival": 1436774055,
-          "lng": 151.20618,
-          "code": "2000101",
-          "lat": -33.85746
-        },
-        {
-          "name": "Lower Fort St opp Cumberland St",
-          "bearing": 63,
-          "departure": 1436774100,
-          "arrival": 1436774100,
-          "lng": 151.207,
-          "code": "2000102",
-          "lat": -33.85669
-        },
-        {
-          "name": "George St near Lower Fort St",
-          "bearing": 143,
-          "departure": 1436774115,
-          "arrival": 1436774115,
-          "lng": 151.20775,
-          "code": "2000103",
-          "lat": -33.8563
-        },
-        {
-          "name": "George St near Hickson Rd",
-          "bearing": 193,
-          "departure": 1436774160,
-          "arrival": 1436774160,
-          "lng": 151.2092,
-          "code": "2000104",
-          "lat": -33.85828
-        },
-        {
-          "name": "George St opp Globe St",
-          "bearing": 208,
-          "departure": 1436774220,
-          "arrival": 1436774220,
-          "lng": 151.20856,
-          "code": "2000106",
-          "lat": -33.86091
-        },
-        {
-          "name": "George St opp Essex St",
-          "bearing": 185,
-          "departure": 1436774280,
-          "arrival": 1436774280,
-          "lng": 151.20769,
-          "code": "2000107",
-          "lat": -33.86251
-        },
-        {
-          "name": "George St opp Wynyard",
-          "bearing": 184,
-          "departure": 1436774400,
-          "arrival": 1436774400,
-          "lng": 151.20731,
-          "code": "2000175",
-          "lat": -33.86619
-        },
-        {
-          "name": "George St near Strand Arcade",
-          "bearing": 180,
-          "departure": 1436774580,
-          "arrival": 1436774580,
-          "lng": 151.20703,
-          "code": "2000218",
-          "lat": -33.86954
-        },
-        {
-          "name": "George St before Bathurst St",
-          "bearing": 197,
-          "departure": 1436774880,
-          "arrival": 1436774880,
-          "lng": 151.20699,
-          "code": "2000222",
-          "lat": -33.87404
-        },
-        {
-          "name": "George St near Liverpool St",
-          "bearing": 193,
-          "departure": 1436775000,
-          "arrival": 1436775000,
-          "lng": 151.20609,
-          "code": "2000113",
-          "lat": -33.87688
-        },
-        {
-          "name": "George St before Campbell St",
-          "bearing": 197,
-          "departure": 1436775060,
-          "arrival": 1436775060,
-          "lng": 151.20564,
-          "code": "2000174",
-          "lat": -33.87876
-        },
-        {
-          "name": "George St near Barlow St",
-          "bearing": 208,
-          "departure": 1436775180,
-          "arrival": 1436775180,
-          "lng": 151.20502,
-          "code": "2000114",
-          "lat": -33.88071
-        },
-        {
-          "name": "Railway Square, George St - Stand D",
-          "bearing": 261,
-          "departure": 1436775300,
-          "arrival": 1436775300,
-          "lng": 151.20341,
-          "code": "200064",
-          "shortName": "Stand D",
-          "lat": -33.88363
-        },
-        {
-          "name": "Broadway at Buckland St",
-          "bearing": 275,
-          "departure": 1436775540,
-          "arrival": 1436775540,
-          "lng": 151.19763,
-          "code": "200815",
-          "lat": -33.88449
-        },
-        {
-          "name": "Glebe Point Rd near Parramatta Rd",
-          "bearing": 305,
-          "departure": 1436775720,
-          "arrival": 1436775720,
-          "lng": 151.1924,
-          "code": "203729",
-          "lat": -33.8841
-        },
-        {
-          "name": "Glebe Point near Derby Pl",
-          "bearing": 305,
-          "departure": 1436775780,
-          "arrival": 1436775780,
-          "lng": 151.19133,
-          "code": "203730",
-          "lat": -33.88336
-        },
-        {
-          "name": "Glebe Point Rd near Mitchell St",
-          "bearing": 306,
-          "departure": 1436775840,
-          "arrival": 1436775840,
-          "lng": 151.18983,
-          "code": "203731",
-          "lat": -33.88231
-        },
-        {
-          "name": "Glebe Point Rd near St Johns Rd",
-          "bearing": 316,
-          "departure": 1436775960,
-          "arrival": 1436775960,
-          "lng": 151.18805,
-          "code": "203732",
-          "lat": -33.88106
-        },
-        {
-          "name": "Glebe Point Rd near Bridge Rd",
-          "bearing": 321,
-          "departure": 1436776020,
-          "arrival": 1436776020,
-          "lng": 151.18727,
-          "code": "203733",
-          "lat": -33.88027
-        },
-        {
-          "name": "Glebe Point Rd near Hereford St",
-          "bearing": 323,
-          "departure": 1436776080,
-          "arrival": 1436776080,
-          "lng": 151.1859,
-          "code": "203734",
-          "lat": -33.87858
-        },
-        {
-          "name": "Glebe Point Rd near Wigram Rd",
-          "bearing": 323,
-          "departure": 1436776140,
-          "arrival": 1436776140,
-          "lng": 151.18518,
-          "code": "203735",
-          "lat": -33.87764
-        },
-        {
-          "name": "Glebe Point Rd near Toxteth Rd",
-          "bearing": 322,
-          "departure": 1436776200,
-          "arrival": 1436776200,
-          "lng": 151.18373,
-          "code": "203715",
-          "lat": -33.87578
-        },
-        {
-          "name": "Glebe Point Rd near Pendrill St",
-          "bearing": 305,
-          "departure": 1436776260,
-          "arrival": 1436776260,
-          "lng": 151.1821,
-          "code": "203716",
-          "lat": -33.87376
-        },
-        {
-          "name": "Federal Rd Terminus",
-          "arrival": 1436776320,
-          "lng": 151.18001,
-          "code": "203717",
-          "lat": -33.87234
+            "stops": [
+                {
+                    "name": "Argyle St near Kent St",
+                    "bearing": 80,
+                    "departure": 1436773980,
+                    "arrival": 1436709599,
+                    "lng": 151.2039,
+                    "code": "200099",
+                    "lat": -33.85847
+                },
+                {
+                    "name": "Argyle St near Lower Fort St",
+                    "bearing": 51,
+                    "departure": 1436774040,
+                    "arrival": 1436774040,
+                    "lng": 151.20526,
+                    "code": "2000100",
+                    "lat": -33.85823
+                },
+                {
+                    "name": "Lower Fort St near Windmill St",
+                    "bearing": 47,
+                    "departure": 1436774055,
+                    "arrival": 1436774055,
+                    "lng": 151.20618,
+                    "code": "2000101",
+                    "lat": -33.85746
+                },
+                {
+                    "name": "Lower Fort St opp Cumberland St",
+                    "bearing": 63,
+                    "departure": 1436774100,
+                    "arrival": 1436774100,
+                    "lng": 151.207,
+                    "code": "2000102",
+                    "lat": -33.85669
+                },
+                {
+                    "name": "George St near Lower Fort St",
+                    "bearing": 143,
+                    "departure": 1436774115,
+                    "arrival": 1436774115,
+                    "lng": 151.20775,
+                    "code": "2000103",
+                    "lat": -33.8563
+                },
+                {
+                    "name": "George St near Hickson Rd",
+                    "bearing": 193,
+                    "departure": 1436774160,
+                    "arrival": 1436774160,
+                    "lng": 151.2092,
+                    "code": "2000104",
+                    "lat": -33.85828
+                },
+                {
+                    "name": "George St opp Globe St",
+                    "bearing": 208,
+                    "departure": 1436774220,
+                    "arrival": 1436774220,
+                    "lng": 151.20856,
+                    "code": "2000106",
+                    "lat": -33.86091
+                },
+                {
+                    "name": "George St opp Essex St",
+                    "bearing": 185,
+                    "departure": 1436774280,
+                    "arrival": 1436774280,
+                    "lng": 151.20769,
+                    "code": "2000107",
+                    "lat": -33.86251
+                },
+                {
+                    "name": "George St opp Wynyard",
+                    "bearing": 184,
+                    "departure": 1436774400,
+                    "arrival": 1436774400,
+                    "lng": 151.20731,
+                    "code": "2000175",
+                    "lat": -33.86619
+                },
+                {
+                    "name": "George St near Strand Arcade",
+                    "bearing": 180,
+                    "departure": 1436774580,
+                    "arrival": 1436774580,
+                    "lng": 151.20703,
+                    "code": "2000218",
+                    "lat": -33.86954
+                },
+                {
+                    "name": "George St before Bathurst St",
+                    "bearing": 197,
+                    "departure": 1436774880,
+                    "arrival": 1436774880,
+                    "lng": 151.20699,
+                    "code": "2000222",
+                    "lat": -33.87404
+                },
+                {
+                    "name": "George St near Liverpool St",
+                    "bearing": 193,
+                    "departure": 1436775000,
+                    "arrival": 1436775000,
+                    "lng": 151.20609,
+                    "code": "2000113",
+                    "lat": -33.87688
+                },
+                {
+                    "name": "George St before Campbell St",
+                    "bearing": 197,
+                    "departure": 1436775060,
+                    "arrival": 1436775060,
+                    "lng": 151.20564,
+                    "code": "2000174",
+                    "lat": -33.87876
+                },
+                {
+                    "name": "George St near Barlow St",
+                    "bearing": 208,
+                    "departure": 1436775180,
+                    "arrival": 1436775180,
+                    "lng": 151.20502,
+                    "code": "2000114",
+                    "lat": -33.88071
+                },
+                {
+                    "name": "Railway Square, George St - Stand D",
+                    "bearing": 261,
+                    "departure": 1436775300,
+                    "arrival": 1436775300,
+                    "lng": 151.20341,
+                    "code": "200064",
+                    "shortName": "Stand D",
+                    "lat": -33.88363
+                },
+                {
+                    "name": "Broadway at Buckland St",
+                    "bearing": 275,
+                    "departure": 1436775540,
+                    "arrival": 1436775540,
+                    "lng": 151.19763,
+                    "code": "200815",
+                    "lat": -33.88449
+                },
+                {
+                    "name": "Glebe Point Rd near Parramatta Rd",
+                    "bearing": 305,
+                    "departure": 1436775720,
+                    "arrival": 1436775720,
+                    "lng": 151.1924,
+                    "code": "203729",
+                    "lat": -33.8841
+                },
+                {
+                    "name": "Glebe Point near Derby Pl",
+                    "bearing": 305,
+                    "departure": 1436775780,
+                    "arrival": 1436775780,
+                    "lng": 151.19133,
+                    "code": "203730",
+                    "lat": -33.88336
+                },
+                {
+                    "name": "Glebe Point Rd near Mitchell St",
+                    "bearing": 306,
+                    "departure": 1436775840,
+                    "arrival": 1436775840,
+                    "lng": 151.18983,
+                    "code": "203731",
+                    "lat": -33.88231
+                },
+                {
+                    "name": "Glebe Point Rd near St Johns Rd",
+                    "bearing": 316,
+                    "departure": 1436775960,
+                    "arrival": 1436775960,
+                    "lng": 151.18805,
+                    "code": "203732",
+                    "lat": -33.88106
+                },
+                {
+                    "name": "Glebe Point Rd near Bridge Rd",
+                    "bearing": 321,
+                    "departure": 1436776020,
+                    "arrival": 1436776020,
+                    "lng": 151.18727,
+                    "code": "203733",
+                    "lat": -33.88027
+                },
+                {
+                    "name": "Glebe Point Rd near Hereford St",
+                    "bearing": 323,
+                    "departure": 1436776080,
+                    "arrival": 1436776080,
+                    "lng": 151.1859,
+                    "code": "203734",
+                    "lat": -33.87858
+                },
+                {
+                    "name": "Glebe Point Rd near Wigram Rd",
+                    "bearing": 323,
+                    "departure": 1436776140,
+                    "arrival": 1436776140,
+                    "lng": 151.18518,
+                    "code": "203735",
+                    "lat": -33.87764
+                },
+                {
+                    "name": "Glebe Point Rd near Toxteth Rd",
+                    "bearing": 322,
+                    "departure": 1436776200,
+                    "arrival": 1436776200,
+                    "lng": 151.18373,
+                    "code": "203715",
+                    "lat": -33.87578
+                },
+                {
+                    "name": "Glebe Point Rd near Pendrill St",
+                    "bearing": 305,
+                    "departure": 1436776260,
+                    "arrival": 1436776260,
+                    "lng": 151.1821,
+                    "code": "203716",
+                    "lat": -33.87376
+                },
+                {
+                    "name": "Federal Rd Terminus",
+                    "arrival": 1436776320,
+                    "lng": 151.18001,
+                    "code": "203717",
+                    "lat": -33.87234
+                }
+            ],
+            "serviceNumber": "431",
+            "travelled": true,
+            "encodedWaypoints": "n~smEk_{y[[jAU{I??Ja@cDsC????{CeD???BmAgB@o@??@@z@yAlIiE???@~DnAjIl@???@tAl@~DfBj@T???@bFVbENnDRfCL??r@DT@lDXbGd@`DQ??@@TBbFEnCCl@@|FFjEB???@bARvFlA|Cn@|A^??x@PzBz@`EH??@@bATlBb@xCp@t@N??@@rAZhCp@|D~@RPdClCNN??@?dApFjAdGDtEDnD@lAHvD??CbB@~BDlI@lBb@nEBp@s@HeAjB??@@wCrE??@@qEfH????{FdJ??@@q@n@mBfB??@?wAfA{FjE??@@a@C{CnC????sJ`H??@?sKfI???@wKnHd@jB`AXRU",
+            "serviceTripID": "75113881_20150609_11954",
+            "operator": "Sydney Buses",
+            "serviceName": "Glebe Point"
         }
-      ],
-      "serviceNumber": "431",
-      "travelled": true,
-      "encodedWaypoints": "n~smEk_{y[[jAU{I??Ja@cDsC????{CeD???BmAgB@o@??@@z@yAlIiE???@~DnAjIl@???@tAl@~DfBj@T???@bFVbENnDRfCL??r@DT@lDXbGd@`DQ??@@TBbFEnCCl@@|FFjEB???@bARvFlA|Cn@|A^??x@PzBz@`EH??@@bATlBb@xCp@t@N??@@rAZhCp@|D~@RPdClCNN??@?dApFjAdGDtEDnD@lAHvD??CbB@~BDlI@lBb@nEBp@s@HeAjB??@@wCrE??@@qEfH????{FdJ??@@q@n@mBfB??@?wAfA{FjE??@@a@C{CnC????sJ`H??@?sKfI???@wKnHd@jB`AXRU",
-      "serviceTripID": "75113881_20150609_11954",
-      "operator": "Sydney Buses",
-      "serviceName": "Glebe Point"
-    }
-  ]
+    ]
 }

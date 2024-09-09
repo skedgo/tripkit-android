@@ -9,8 +9,8 @@ open class GetBookingFormFromUrl @Inject constructor(
     private val bookingService: BookingService
 ) {
 
-  open fun execute(url: String): Observable<BookingForm> {
-    return bookingService.getFormAsync(url).toObservable()
-  }
+    open fun execute(url: String): Observable<BookingForm> {
+        return bookingService.getFormAsync(url).toObservable()
+    }
 
 }

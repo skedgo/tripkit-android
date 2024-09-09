@@ -1,18 +1,16 @@
 package com.skedgo.tripkit
 
 import android.content.res.Resources
-
 import com.google.gson.Gson
 import com.haroldadmin.cnradapter.NetworkResponse
-import io.reactivex.Observable
-import io.reactivex.schedulers.Schedulers
 import com.skedgo.tripkit.routing.Trip
 import com.skedgo.tripkit.routing.TripGroup
+import io.reactivex.Observable
+import io.reactivex.schedulers.Schedulers
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.filter
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.map
-import java.lang.RuntimeException
 
 internal class TripUpdaterImpl(
     private val resources: Resources,

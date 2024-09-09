@@ -17,39 +17,39 @@ import javax.inject.Named
 @Module
 class AccountDataModule {
 
-  companion object {
-    const val UserTokenPreferences = "UserTokenPreferences"
-  }
+    companion object {
+        const val UserTokenPreferences = "UserTokenPreferences"
+    }
 
-  @Provides
-  fun userTokenRepository(
-      httpClient: OkHttpClient, @Named(UserTokenPreferences) prefs: SharedPreferences
-  ): UserTokenRepository {
-    val silentLoginApi = Retrofit.Builder()
-        .baseUrl(ServerManager.configuration.apiTripGoUrl)
-        .addCallAdapterFactory(RxJava2CallAdapterFactory.createWithScheduler(Schedulers.io()))
-        .addConverterFactory(GsonConverterFactory.create())
-        .client(httpClient)
-        .build()
-        .create(SilentLoginApi::class.java)
+    @Provides
+    fun userTokenRepository(
+        httpClient: OkHttpClient, @Named(UserTokenPreferences) prefs: SharedPreferences
+    ): UserTokenRepository {
+        val silentLoginApi = Retrofit.Builder()
+            .baseUrl(ServerManager.configuration.apiTripGoUrl)
+            .addCallAdapterFactory(RxJava2CallAdapterFactory.createWithScheduler(Schedulers.io()))
+            .addConverterFactory(GsonConverterFactory.create())
+            .client(httpClient)
+            .build()
+            .create(SilentLoginApi::class.java)
 
-    val accountApi = Retrofit.Builder()
-        .baseUrl(ServerManager.configuration.apiTripGoUrl)
-        .addCallAdapterFactory(RxJava2CallAdapterFactory.createWithScheduler(Schedulers.io()))
-        .addConverterFactory(GsonConverterFactory.create())
-        .client(httpClient)
-        .build()
-        .create(AccountApi::class.java)
-    return UserTokenRepositoryImpl(prefs, silentLoginApi, accountApi)
-  }
+        val accountApi = Retrofit.Builder()
+            .baseUrl(ServerManager.configuration.apiTripGoUrl)
+            .addCallAdapterFactory(RxJava2CallAdapterFactory.createWithScheduler(Schedulers.io()))
+            .addConverterFactory(GsonConverterFactory.create())
+            .client(httpClient)
+            .build()
+            .create(AccountApi::class.java)
+        return UserTokenRepositoryImpl(prefs, silentLoginApi, accountApi)
+    }
 
-  @Provides
-  fun userRepository(@Named(UserTokenPreferences) prefs: SharedPreferences): UserKeyRepository =
-      UserKeyRepositoryImpl(prefs)
+    @Provides
+    fun userRepository(@Named(UserTokenPreferences) prefs: SharedPreferences): UserKeyRepository =
+        UserKeyRepositoryImpl(prefs)
 
 
-  @Provides
-  @Named(UserTokenPreferences)
-  fun userTokenPreferences(context: Context): SharedPreferences =
-      context.getSharedPreferences(UserTokenPreferences, Context.MODE_PRIVATE)
+    @Provides
+    @Named(UserTokenPreferences)
+    fun userTokenPreferences(context: Context): SharedPreferences =
+        context.getSharedPreferences(UserTokenPreferences, Context.MODE_PRIVATE)
 }

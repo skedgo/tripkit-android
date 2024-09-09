@@ -2,15 +2,12 @@ package com.skedgo.tripkit.data.database;
 
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteException;
-import android.util.Log;
-
-import io.reactivex.functions.Consumer;
 
 public class DatabaseMigrator {
     private TripKitDatabase database;
 
     public DatabaseMigrator(
-            TripKitDatabase database
+        TripKitDatabase database
     ) {
         this.database = database;
     }

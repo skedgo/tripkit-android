@@ -6,177 +6,177 @@ apply plugin: 'kotlin-parcelize'
 
 android {
 
-  namespace 'com.skedgo.tripkit.booking'
+    namespace 'com.skedgo.tripkit.booking'
 
-  compileSdkVersion versions.compileSdkVersion
-  testOptions.unitTests.includeAndroidResources = true
+    compileSdkVersion versions.compileSdkVersion
+    testOptions.unitTests.includeAndroidResources = true
 
-  defaultConfig {
-    minSdkVersion versions.proMinSdkVersion
-    targetSdkVersion versions.targetSdkVersion
-    testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    defaultConfig {
+        minSdkVersion versions.proMinSdkVersion
+        targetSdkVersion versions.targetSdkVersion
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
 
-    javaCompileOptions {
-      annotationProcessorOptions {
-        arguments += ["room.schemaLocation": "$projectDir/schemas".toString()]
-      }
+        javaCompileOptions {
+            annotationProcessorOptions {
+                arguments += ["room.schemaLocation": "$projectDir/schemas".toString()]
+            }
+        }
     }
-  }
 
-  buildTypes {
-    staging {
-      debuggable true
+    buildTypes {
+        staging {
+            debuggable true
+        }
     }
-  }
 
-  packagingOptions {
-    // To avoid conflicts with ASL.
-    // We don't utilize ServiceLoader, so this is unneeded.
-    exclude 'META-INF/services/com.google.gson.TypeAdapterFactory'
-  }
-
-  lintOptions {
-    checkReleaseBuilds true
-    abortOnError false
-  }
-  compileOptions {
-    sourceCompatibility JavaVersion.VERSION_17
-    targetCompatibility JavaVersion.VERSION_17
-  }
-  kotlinOptions {
-    jvmTarget = JavaVersion.VERSION_17.toString()
-  }
-
-  publishing {
-    singleVariant("release") {
-      // if you don't want sources/javadoc, remove these lines
-      withSourcesJar()
-      withJavadocJar()
+    packagingOptions {
+        // To avoid conflicts with ASL.
+        // We don't utilize ServiceLoader, so this is unneeded.
+        exclude 'META-INF/services/com.google.gson.TypeAdapterFactory'
     }
-  }
+
+    lintOptions {
+        checkReleaseBuilds true
+        abortOnError false
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_17
+        targetCompatibility JavaVersion.VERSION_17
+    }
+    kotlinOptions {
+        jvmTarget = JavaVersion.VERSION_17.toString()
+    }
+
+    publishing {
+        singleVariant("release") {
+            // if you don't want sources/javadoc, remove these lines
+            withSourcesJar()
+            withJavadocJar()
+        }
+    }
 }
 
 dependencies {
-  testImplementation libs.junit
-  testImplementation libs.assertjCore
-  testImplementation libs.mockitoCore
-  testImplementation libs.robolectric
-  testImplementation libs.mockitoKotlin
-  testImplementation libs.kluent
-  testImplementation 'com.github.thuytrinh:MockWebServerRule:v1.0'
+    testImplementation libs.junit
+    testImplementation libs.assertjCore
+    testImplementation libs.mockitoCore
+    testImplementation libs.robolectric
+    testImplementation libs.mockitoKotlin
+    testImplementation libs.kluent
+    testImplementation 'com.github.thuytrinh:MockWebServerRule:v1.0'
 
-  debugImplementation project(':TripKitAndroid')
-  stagingImplementation project(':TripKitAndroid')
-  releaseImplementation project(':TripKitAndroid')
+    debugImplementation project(':TripKitAndroid')
+    stagingImplementation project(':TripKitAndroid')
+    releaseImplementation project(':TripKitAndroid')
 
-  debugImplementation project(':TripKitDomain')
-  stagingImplementation project(':TripKitDomain')
-  releaseImplementation project(':TripKitDomain')
+    debugImplementation project(':TripKitDomain')
+    stagingImplementation project(':TripKitDomain')
+    releaseImplementation project(':TripKitDomain')
 
-  debugImplementation project(':CommonCoreLegacy')
-  stagingImplementation project(':CommonCoreLegacy')
-  releaseImplementation project(':CommonCoreLegacy')
+    debugImplementation project(':CommonCoreLegacy')
+    stagingImplementation project(':CommonCoreLegacy')
+    releaseImplementation project(':CommonCoreLegacy')
 
-  implementation libs.dagger
-  implementation libs.rxjava2
-  implementation libs.rxAndroid2
-  implementation 'androidx.annotation:annotation:1.0.0'
-  implementation 'com.github.skedgo:commons-collections:v1.0'
+    implementation libs.dagger
+    implementation libs.rxjava2
+    implementation libs.rxAndroid2
+    implementation 'androidx.annotation:annotation:1.0.0'
+    implementation 'com.github.skedgo:commons-collections:v1.0'
 
-  implementation libs.retrofit
-  implementation libs.retrofitConverterGson
-  implementation libs.retrofitAdapterRxJava
-  implementation libs.kotlin
-  implementation libs.coroutinesCore
-  implementation libs.coroutinesAndroid
-  implementation libs.coroutinesRx
-  kapt libs.daggerCompiler
+    implementation libs.retrofit
+    implementation libs.retrofitConverterGson
+    implementation libs.retrofitAdapterRxJava
+    implementation libs.kotlin
+    implementation libs.coroutinesCore
+    implementation libs.coroutinesAndroid
+    implementation libs.coroutinesRx
+    kapt libs.daggerCompiler
 
-  implementation libs.roomRuntime
-  annotationProcessor libs.roomCompiler
-  kapt libs.roomCompiler
-  implementation libs.roomRxjava2
-  implementation libs.roomKtx
+    implementation libs.roomRuntime
+    annotationProcessor libs.roomCompiler
+    kapt libs.roomCompiler
+    implementation libs.roomRxjava2
+    implementation libs.roomKtx
 
-  kapt libs.value
-  compileOnly libs.valueAnnotations
-  compileOnly libs.builderAnnotations
-  implementation libs.immutablesGson
+    kapt libs.value
+    compileOnly libs.valueAnnotations
+    compileOnly libs.builderAnnotations
+    implementation libs.immutablesGson
 
-  implementation libs.javaxAnnotation
-  compileOnly 'com.github.pengrad:jdk9-deps:1.0'
+    implementation libs.javaxAnnotation
+    compileOnly 'com.github.pengrad:jdk9-deps:1.0'
 }
 
 
 // build a jar with source files
 task sourcesJar(type: Jar) {
-  from android.sourceSets.main.java.srcDirs
-  archiveClassifier.set('sources')
+    from android.sourceSets.main.java.srcDirs
+    archiveClassifier.set('sources')
 }
 
 task javadoc(type: Javadoc) {
-  failOnError  false
-  source = android.sourceSets.main.java.sourceFiles
-  configurations.implementation.canBeResolved = true
-  configurations.api.canBeResolved = true
-  classpath += project.files(android.getBootClasspath().join(File.pathSeparator))
-  classpath += configurations.implementation
-  classpath += configurations.api
+    failOnError false
+    source = android.sourceSets.main.java.sourceFiles
+    configurations.implementation.canBeResolved = true
+    configurations.api.canBeResolved = true
+    classpath += project.files(android.getBootClasspath().join(File.pathSeparator))
+    classpath += configurations.implementation
+    classpath += configurations.api
 }
 
 // build a jar with javadoc
 task javadocJar(type: Jar, dependsOn: javadoc) {
-  archiveClassifier.set('javadoc')
-  from javadoc.destinationDir
+    archiveClassifier.set('javadoc')
+    from javadoc.destinationDir
 }
 
 artifacts {
-  archives sourcesJar
-  archives javadocJar
+    archives sourcesJar
+    archives javadocJar
 }
 
 group = tripkitGroup
 version = tripkitVersion
 
 publishing {
-  repositories {
-    maven {
-      url = "file://${localMaven}"
-      //url = publishMavenUrl
-      credentials {
-        username = publishMavenUsername
-        password = publishMavenToken
-      }
+    repositories {
+        maven {
+            url = "file://${localMaven}"
+            //url = publishMavenUrl
+            credentials {
+                username = publishMavenUsername
+                password = publishMavenToken
+            }
+        }
     }
-  }
 
-  publications {
-    release(MavenPublication) {
-      groupId = group
-      version = version
-      artifactId = 'trip-kit-booking'
-      afterEvaluate {
-        from components.release
-      }
-      pom {
-        licenses {
-          license {
-            name = 'Commercial'
-          }
+    publications {
+        release(MavenPublication) {
+            groupId = group
+            version = version
+            artifactId = 'trip-kit-booking'
+            afterEvaluate {
+                from components.release
+            }
+            pom {
+                licenses {
+                    license {
+                        name = 'Commercial'
+                    }
+                }
+            }
+            pom.withXml {
+                asNode().dependencies.'*'
+                    .findAll() {
+                        (it.scope.text() == 'runtime' || it.scope.text() == 'compile') &&
+                            project.configurations.implementation.allDependencies.find {
+                                dep -> dep.name == it.artifactId.text()
+                            }
+                    }.each {
+                    it.appendNode("type", "aar")
+                }
+            }
         }
-      }
-      pom.withXml {
-        asNode().dependencies.'*'
-                .findAll() {
-                  (it.scope.text() == 'runtime' || it.scope.text() == 'compile') &&
-                          project.configurations.implementation.allDependencies.find {
-                            dep -> dep.name == it.artifactId.text()
-                          }
-                }.each {
-          it.appendNode("type", "aar")
-        }
-      }
     }
-  }
 }
 

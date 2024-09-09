@@ -8,10 +8,9 @@ import com.skedgo.tripkit.common.model.Street
 import com.skedgo.tripkit.common.model.TransportMode
 import com.skedgo.tripkit.common.util.TripKitLatLng
 import com.skedgo.tripkit.routing.RoadTag
-import io.reactivex.Observable
 import com.skedgo.tripkit.routing.TripSegment
 import com.skedgo.tripkit.routing.getRoadSafetyColor
-import java.lang.Exception
+import io.reactivex.Observable
 import javax.inject.Inject
 
 class GetTravelledLineForTrip @Inject constructor() {
@@ -100,7 +99,7 @@ class GetTravelledLineForTrip @Inject constructor() {
 
     private fun String.getRoadTagColor(): Int {
         val roadTag = try {
-            RoadTag.valueOf(this.replace("-","_"))
+            RoadTag.valueOf(this.replace("-", "_"))
         } catch (e: Exception) {
             RoadTag.UNKNOWN
         }

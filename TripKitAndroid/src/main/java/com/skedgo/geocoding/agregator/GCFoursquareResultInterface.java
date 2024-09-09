@@ -4,9 +4,10 @@ import java.util.List;
 
 public interface GCFoursquareResultInterface extends GCResultInterface {
 
-//    foursquare json verified field
+    //    foursquare json verified field
     boolean isVerified();
-//    foursquare json categories names
+
+    //    foursquare json categories names
     List<String> getCategories();
 
 }
