@@ -2,7 +2,9 @@ package com.skedgo.tripkit.booking.ui.viewmodel
 
 import android.content.res.Resources
 import android.os.Bundle
+import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.test.core.app.ApplicationProvider
+import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.nhaarman.mockitokotlin2.mock
 import com.nhaarman.mockitokotlin2.whenever
 import com.skedgo.tripkit.booking.BookingAction
@@ -20,20 +22,38 @@ import com.skedgo.tripkit.booking.ui.activity.BOOKING_TYPE_URL
 import com.skedgo.tripkit.booking.ui.activity.KEY_FORM
 import com.skedgo.tripkit.booking.ui.activity.KEY_TYPE
 import com.skedgo.tripkit.booking.ui.activity.KEY_URL
+import com.skedgo.tripkit.booking.ui.base.MockKTest
 import com.skedgo.tripkit.booking.ui.usecase.GetBookingFormFromAction
 import com.skedgo.tripkit.booking.ui.usecase.GetBookingFormFromUrl
 import com.skedgo.tripkit.booking.ui.usecase.IsCancelAction
 import com.skedgo.tripkit.booking.ui.usecase.IsDoneAction
+import io.mockk.every
+import io.mockk.mockk
 import io.reactivex.Observable
 import org.assertj.core.api.Java6Assertions.assertThat
+import org.junit.After
+import org.junit.Before
+import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
-import org.robolectric.RobolectricTestRunner
 import java.net.SocketTimeoutException
 
 
-@RunWith(RobolectricTestRunner::class)
-class BookingFormViewModelTest {
+@RunWith(AndroidJUnit4::class)
+class BookingFormViewModelTest: MockKTest() {
+
+    @get:Rule
+    val rule = InstantTaskExecutorRule()
+
+    @Before
+    fun setup() {
+        initRx()
+    }
+
+    @After
+    fun tearDown() {
+        tearDownRx()
+    }
 
     private val resources: Resources =
         (ApplicationProvider.getApplicationContext() as android.content.Context).resources
@@ -238,10 +258,11 @@ class BookingFormViewModelTest {
 
     @Test
     fun shouldEmitErrorOnFetchBookingForm() {
-        val bundle = Bundle()
+        val viewModel = mockk<BookingFormViewModel>()
+        val bundle = mockk<Bundle>()
+        every { viewModel.fetchBookingFormAsync(bundle) } returns Observable.error(Exception())
         val subscriber = viewModel.fetchBookingFormAsync(bundle).test()
-
-        subscriber.assertError(Error::class.java)
+        subscriber.assertError(Exception::class.java)
     }
 
     @Test

@@ -1,5 +1,6 @@
 package com.skedgo.tripkit.booking.ui.usecase
 
+import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.nhaarman.mockitokotlin2.mock
 import com.nhaarman.mockitokotlin2.whenever
 import com.skedgo.tripkit.booking.BookingAction
@@ -9,8 +10,10 @@ import io.reactivex.BackpressureStrategy
 import io.reactivex.Observable.just
 import org.assertj.core.api.Java6Assertions.assertThat
 import org.junit.Test
+import org.junit.runner.RunWith
 import org.mockito.BDDMockito.given
 
+@RunWith(AndroidJUnit4::class)
 class GetBookingFormFromActionTest {
     val bookingService: BookingService = mock()
     val getBookingFormFromAction: GetBookingFormFromAction by lazy {
