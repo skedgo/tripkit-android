@@ -10,6 +10,7 @@ import org.robolectric.RobolectricTestRunner;
 
 import java.util.concurrent.Callable;
 
+import androidx.test.ext.junit.runners.AndroidJUnit4;
 import okhttp3.HttpUrl;
 import okhttp3.Interceptor;
 import okhttp3.Request;
@@ -20,7 +21,7 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
-@RunWith(RobolectricTestRunner.class)
+@RunWith(AndroidJUnit4.class)
 public class BaseUrlOverridingInterceptorTest {
     @Mock
     Callable<String> baseUrlAdapter;

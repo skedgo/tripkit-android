@@ -1,5 +1,6 @@
 package com.skedgo.tripkit.android
 
+import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.nhaarman.mockitokotlin2.mock
 import com.skedgo.TripKit
 import com.skedgo.tripkit.TripKitAndroidRobolectricTest
@@ -10,8 +11,10 @@ import org.amshove.kluent.When
 import org.amshove.kluent.calling
 import org.amshove.kluent.itReturns
 import org.junit.Test
+import org.junit.runner.RunWith
 
 @Suppress("IllegalIdentifier")
+@RunWith(AndroidJUnit4::class)
 class FetchRegionsServiceTest : TripKitAndroidRobolectricTest() {
     val regionService = mock<RegionService> {
         on { refreshAsync() }.thenReturn(Completable.complete())

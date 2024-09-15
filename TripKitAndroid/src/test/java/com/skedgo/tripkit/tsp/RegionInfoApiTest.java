@@ -6,9 +6,11 @@ import com.skedgo.tripkit.data.tsp.RegionInfo;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
+import org.junit.runner.RunWith;
 
 import java.io.IOException;
 
+import androidx.test.ext.junit.runners.AndroidJUnit4;
 import io.reactivex.observers.TestObserver;
 import okhttp3.mockwebserver.MockResponse;
 import retrofit2.Retrofit;
@@ -19,6 +21,7 @@ import thuytrinh.mockwebserverrule.MockWebServerRule;
 import static io.reactivex.schedulers.Schedulers.trampoline;
 import static org.assertj.core.api.Java6Assertions.assertThat;
 
+@RunWith(AndroidJUnit4.class)
 public class RegionInfoApiTest extends TripKitAndroidRobolectricTest {
     @Rule
     public final MockWebServerRule serverRule = new MockWebServerRule();

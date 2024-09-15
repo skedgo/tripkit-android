@@ -18,12 +18,13 @@ import org.robolectric.RobolectricTestRunner;
 import java.io.IOException;
 
 import androidx.test.core.app.ApplicationProvider;
+import androidx.test.ext.junit.runners.AndroidJUnit4;
 import okhttp3.mockwebserver.MockResponse;
 
 import static org.assertj.core.api.Java6Assertions.assertThat;
 import static thuytrinh.mockwebserverrule.MockWebServerRule.createMockResponse;
 
-@RunWith(RobolectricTestRunner.class)
+@RunWith(AndroidJUnit4.class)
 public class RoutingResponseTest {
     @Test
     public void processDirectionTemplate() {

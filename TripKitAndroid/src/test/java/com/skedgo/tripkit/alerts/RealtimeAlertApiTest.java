@@ -6,10 +6,12 @@ import com.skedgo.tripkit.common.model.ImmutableRealtimeAlert;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
+import org.junit.runner.RunWith;
 
 import java.io.IOException;
 import java.util.Arrays;
 
+import androidx.test.ext.junit.runners.AndroidJUnit4;
 import io.reactivex.observers.TestObserver;
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
@@ -19,6 +21,7 @@ import thuytrinh.mockwebserverrule.MockWebServerRule;
 import static io.reactivex.schedulers.Schedulers.trampoline;
 import static thuytrinh.mockwebserverrule.MockWebServerRule.createMockResponse;
 
+@RunWith(AndroidJUnit4.class)
 public class RealtimeAlertApiTest extends TripKitAndroidRobolectricTest {
     @Rule
     public final MockWebServerRule serverRule = new MockWebServerRule();

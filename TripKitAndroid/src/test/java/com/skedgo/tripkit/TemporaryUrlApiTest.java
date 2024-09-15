@@ -7,11 +7,13 @@ import org.apache.commons.io.IOUtils;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.runner.RunWith;
 
 import java.io.IOException;
 import java.nio.charset.Charset;
 import java.util.Collections;
 
+import androidx.test.ext.junit.runners.AndroidJUnit4;
 import io.reactivex.observers.TestObserver;
 import okhttp3.HttpUrl;
 import okhttp3.mockwebserver.MockResponse;
@@ -22,6 +24,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 import static org.assertj.core.api.Java6Assertions.assertThat;
 
+@RunWith(AndroidJUnit4.class)
 public class TemporaryUrlApiTest extends TripKitAndroidRobolectricTest {
     private MockWebServer server;
     private TemporaryUrlApi api;

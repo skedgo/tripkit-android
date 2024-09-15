@@ -1,6 +1,7 @@
 package com.skedgo.tripkit
 
 import android.os.Parcel
+import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.skedgo.tripkit.common.model.Location
 import com.skedgo.tripkit.common.model.Query
 import com.skedgo.tripkit.common.model.Region
@@ -17,10 +18,9 @@ import org.mockito.ArgumentMatchers
 import org.mockito.Mock
 import org.mockito.Mockito.`when`
 import org.mockito.MockitoAnnotations
-import org.robolectric.RobolectricTestRunner
 import java.util.Arrays.asList
 
-@RunWith(RobolectricTestRunner::class)
+@RunWith(AndroidJUnit4::class)
 class QueryGeneratorImplTest {
     @Mock
     internal var regionService: RegionService? = null
@@ -28,13 +28,15 @@ class QueryGeneratorImplTest {
         null
 
     internal var transportModeFilter = object : TransportModeFilter {
-        override fun writeToParcel(dest: Parcel?, flags: Int) {
+        override fun writeToParcel(dest: Parcel, flags: Int) {
 
         }
 
         override fun describeContents(): Int {
             return 0
         }
+
+        override fun getFilteredMode(originalModes: List<String>): List<String> = emptyList()
     }
 
     @Before

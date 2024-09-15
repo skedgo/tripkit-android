@@ -7,7 +7,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import androidx.test.InstrumentationRegistry;
-import androidx.test.runner.AndroidJUnit4;
+import androidx.test.ext.junit.runners.AndroidJUnit4;
 import io.reactivex.observers.TestObserver;
 
 @RunWith(AndroidJUnit4.class)
@@ -25,6 +25,6 @@ public class AndroidGeocoderTest {
         final TestObserver<String> subscriber = factory.getAddress(33.956252, -118.217896).test();
         subscriber.awaitTerminalEvent();
         subscriber.assertNoErrors();
-        subscriber.assertValue("8677-8681 Evergreen Avenue South Gate, CA 90280");
+        subscriber.assertValue("8677 Evergreen Ave, South Gate, CA 90280, USA");
     }
 }
