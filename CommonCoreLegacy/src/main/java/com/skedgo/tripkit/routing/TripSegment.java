@@ -924,4 +924,9 @@ public class TripSegment implements IRealTimeElement, ITimeRange {
     public void setMapTiles(TripKitMapTiles mapTiles) {
         this.mapTiles = mapTiles;
     }
+
+    public boolean isQuickBooking() {
+        return getBooking() != null &&
+            (getBooking().getQuickBookingsUrl() != null || getBooking().getConfirmation() != null);
+    }
 }
