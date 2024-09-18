@@ -28,6 +28,7 @@ import java.util.TimeZone;
 import java.util.concurrent.TimeUnit;
 
 import androidx.test.core.app.ApplicationProvider;
+import androidx.test.ext.junit.runners.AndroidJUnit4;
 import io.reactivex.Observable;
 import io.reactivex.observers.TestObserver;
 
@@ -44,7 +45,7 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 @SuppressWarnings("WrongConstant")
-@RunWith(RobolectricTestRunner.class)
+@RunWith(AndroidJUnit4.class)
 public class BookingResolverImplTest {
     private static final Comparator<BookingAction> BOOKING_ACTION_COMPARATOR =
         new Comparator<BookingAction>() {

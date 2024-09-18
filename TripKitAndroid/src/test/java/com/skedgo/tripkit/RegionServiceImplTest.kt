@@ -1,5 +1,6 @@
 package com.skedgo.tripkit
 
+import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.nhaarman.mockitokotlin2.mock
 import com.nhaarman.mockitokotlin2.whenever
 import com.skedgo.tripkit.common.model.Location
@@ -16,12 +17,14 @@ import io.reactivex.Single
 import io.reactivex.observers.TestObserver
 import org.assertj.core.api.Java6Assertions.assertThat
 import org.junit.Test
+import org.junit.runner.RunWith
 import org.mockito.Mockito.eq
 import org.mockito.Mockito.same
 import org.mockito.Mockito.times
 import org.mockito.Mockito.verify
 import java.util.Arrays
 
+@RunWith(AndroidJUnit4::class)
 class RegionServiceImplTest : TripKitAndroidRobolectricTest() {
     internal val regionCache: com.skedgo.tripkit.Cache<List<Region>> = mock()
     internal val modeCache: com.skedgo.tripkit.Cache<Map<String, TransportMode>> = mock()

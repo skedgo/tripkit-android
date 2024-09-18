@@ -12,6 +12,7 @@ import org.robolectric.RobolectricTestRunner;
 
 import java.util.concurrent.TimeUnit;
 
+import androidx.test.ext.junit.runners.AndroidJUnit4;
 import io.reactivex.Observable;
 import io.reactivex.subscribers.TestSubscriber;
 import kotlin.Pair;
@@ -19,7 +20,7 @@ import kotlin.Pair;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
-@RunWith(RobolectricTestRunner.class)
+@RunWith(AndroidJUnit4.class)
 public class PeriodicRealTimeTripUpdateReceiverTest {
     @Mock
     TripUpdater tripUpdater;

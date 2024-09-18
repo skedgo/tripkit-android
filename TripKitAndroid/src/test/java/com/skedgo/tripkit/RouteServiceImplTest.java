@@ -21,13 +21,14 @@ import java.util.HashMap;
 import java.util.Map;
 
 import androidx.test.core.app.ApplicationProvider;
+import androidx.test.ext.junit.runners.AndroidJUnit4;
 import io.reactivex.Observable;
 
 import static org.assertj.core.api.Java6Assertions.assertThat;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
 
-@RunWith(RobolectricTestRunner.class)
+@RunWith(AndroidJUnit4.class)
 public class RouteServiceImplTest {
     @Mock
     QueryGenerator queryGenerator;

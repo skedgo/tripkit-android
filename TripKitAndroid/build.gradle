@@ -17,6 +17,13 @@ android {
         minSdkVersion versions.proMinSdkVersion
         targetSdkVersion versions.targetSdkVersion
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        vectorDrawables.useSupportLibrary = true
+
+        javaCompileOptions {
+            annotationProcessorOptions {
+                arguments += ["room.schemaLocation": "$projectDir/schemas".toString()]
+            }
+        }
     }
 
     buildTypes {
@@ -77,12 +84,15 @@ dependencies {
     testImplementation libs.mockitoKotlin, {exclude group: 'org.jetbrains.kotlin'}
     testImplementation libs.kluent
     testImplementation 'com.github.thuytrinh:MockWebServerRule:v1.0'
-    testImplementation libs.kluent
     testImplementation libs.androidxTesting
+    testImplementation libs.mockk
+    testImplementation libs.androidxJUnitExtTesting
+    testImplementation libs.archCoreTesting
 
     androidTestImplementation "androidx.test:runner:1.1.0"
     androidTestImplementation "androidx.test:rules:1.1.0"
     androidTestImplementation libs.assertjCore
+    androidTestImplementation libs.androidxJUnitExtTesting
 
     implementation libs.kotlin
     implementation libs.coroutinesCore
@@ -117,8 +127,6 @@ dependencies {
     implementation libs.location
     implementation libs.instabugInterceptor
 
-    testImplementation libs.mockk
-
     debugApi project(':CommonCoreLegacy')
     stagingApi project(':CommonCoreLegacy')
     releaseApi project(':CommonCoreLegacy')
@@ -142,14 +150,6 @@ dependencies {
 
     implementation libs.javaxAnnotation
     compileOnly 'com.github.pengrad:jdk9-deps:1.0'
-
-    testImplementation libs.mockk
-    testImplementation libs.junit
-    testImplementation libs.androidxJUnitExtTesting
-    testImplementation libs.archCoreTesting
-    testImplementation libs.kluent
-    testImplementation libs.androidxTesting
-    testImplementation libs.assertjCore
 }
 
 // build a jar with source files

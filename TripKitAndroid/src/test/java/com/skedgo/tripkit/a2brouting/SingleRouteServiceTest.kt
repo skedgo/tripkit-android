@@ -1,6 +1,7 @@
 package com.skedgo.tripkit.a2brouting
 
 import android.os.Parcel
+import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.nhaarman.mockitokotlin2.any
 import com.nhaarman.mockitokotlin2.eq
 import com.nhaarman.mockitokotlin2.whenever
@@ -12,10 +13,12 @@ import org.assertj.core.api.Java6Assertions.assertThat
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
+import org.junit.runner.RunWith
 import org.mockito.Mock
 import org.mockito.Mockito.mock
 import org.mockito.junit.MockitoJUnit
 
+@RunWith(AndroidJUnit4::class)
 class SingleRouteServiceTest {
     @Rule
     @JvmField
@@ -25,13 +28,15 @@ class SingleRouteServiceTest {
     internal lateinit var routeService: RouteService
 
     internal var transportModeFilter = object : TransportModeFilter {
-        override fun writeToParcel(dest: Parcel?, flags: Int) {
+        override fun writeToParcel(dest: Parcel, flags: Int) {
 
         }
 
         override fun describeContents(): Int {
             return 0
         }
+
+        override fun getFilteredMode(originalModes: List<String>): List<String> = emptyList()
     }
     private lateinit var singleRouteService: SingleRouteService
 
