@@ -3,6 +3,7 @@ package com.skedgo.tripkit.routing
 import org.joda.time.DateTime
 import org.joda.time.DateTimeZone
 import java.util.Calendar
+import java.util.GregorianCalendar
 import java.util.concurrent.TimeUnit
 
 /**
@@ -15,7 +16,7 @@ val TripSegment.startDateTime
     )
 
 val TripSegment.startDateTimeCalendar
-    get(): Calendar = this.startDateTime.toGregorianCalendar()
+    get(): GregorianCalendar = this.startDateTime.toGregorianCalendar()
 
 val TripSegment.timetableStartDateTime
     get(): DateTime = DateTime(
