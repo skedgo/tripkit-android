@@ -6,6 +6,7 @@ apply plugin: "kotlin-android"
 apply plugin: "kotlin-kapt"
 apply plugin: 'org.jetbrains.dokka'
 apply plugin: 'kotlin-parcelize'
+apply plugin: 'io.gitlab.arturbosch.detekt'
 
 android {
 
@@ -177,6 +178,22 @@ task javadocJar(type: Jar, dependsOn: javadoc) {
 artifacts {
     archives sourcesJar
     archives javadocJar
+}
+
+detekt {
+    toolVersion = "1.23.1"
+    input = files("src/main/java", "src/main/kotlin")
+    config = files("$rootDir/config/detekt/detekt.yml")  // Shared configuration
+    reports {
+        html {
+            enabled = true
+            destination = file("$buildDir/reports/detekt/tripkitandroid/detekt.html")
+        }
+        xml {
+            enabled = true
+            destination = file("$buildDir/reports/detekt/tripkitandroid/detekt.xml")
+        }
+    }
 }
 
 group = tripkitGroup
