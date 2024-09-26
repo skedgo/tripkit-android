@@ -1,668 +1,321 @@
-package com.skedgo.tripkit.routing;
+package com.skedgo.tripkit.routing
 
-import android.net.Uri;
-import android.text.TextUtils;
-
-import com.google.gson.JsonObject;
-import com.google.gson.annotations.SerializedName;
-import com.skedgo.tripkit.common.model.time.ITimeRange;
-import com.skedgo.tripkit.common.model.location.Location;
-import com.skedgo.tripkit.common.model.TransportMode;
-
-import org.joda.time.format.ISODateTimeFormat;
-
-import java.math.RoundingMode;
-import java.text.NumberFormat;
-import java.util.ArrayList;
-import java.util.Locale;
-import java.util.UUID;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
+import android.net.Uri
+import com.google.gson.JsonObject
+import com.google.gson.annotations.SerializedName
+import com.skedgo.tripkit.common.model.TransportMode
+import com.skedgo.tripkit.common.model.location.Location
+import com.skedgo.tripkit.common.model.time.ITimeRange
+import org.joda.time.format.ISODateTimeFormat
+import java.math.RoundingMode
+import java.text.NumberFormat
+import java.util.Locale
+import java.util.UUID
 
 /**
- * A {@link Trip} will mainly hold a list of {@link TripSegment}s which denotes
- * how to go from {@link Trip#getFrom()} to {@link Trip#getTo()}.
- * <p>
+ * A [Trip] will mainly hold a list of [TripSegment]s which denotes
+ * how to go from [Trip.getFrom] to [Trip.getTo].
+ *
+ *
  * Main use-cases:
- * - Trip's segments: {@link Trip#getSegments()}.
- * - Trip's start time: {@link TripExtensionsKt#getStartDateTime(Trip)}.
- * - Trip's end time: {@link TripExtensionsKt#getEndDateTime(Trip)}}.
- * - Trip's costs: {@link #getCaloriesCost()}, {@link #getMoneyCost()}, {@link #getCarbonCost()}.
+ * - Trip's segments: [Trip.getSegments].
+ * - Trip's start time: [TripExtensionsKt.getStartDateTime].
+ * - Trip's end time: [TripExtensionsKt.getEndDateTime]}.
+ * - Trip's costs: [.getCaloriesCost], [.getMoneyCost], [.getCarbonCost].
  */
-public class Trip implements ITimeRange {
-    public static final float UNKNOWN_COST = -9999.9999F;
+class Trip : ITimeRange {
+    companion object {
+        const val UNKNOWN_COST = -9999.9999F
+    }
 
-    /**
-     * This will be transformed into a list of {@link TripSegment}.
-     */
     @SerializedName("segments")
-    public ArrayList<JsonObject> rawSegmentList;
+    var rawSegmentList: ArrayList<JsonObject>? = null
+
     @SerializedName("currencySymbol")
-    private String currencySymbol;
+    var currencySymbol: String? = null
+
     @SerializedName("saveURL")
-    private String saveURL;
+    var saveURL: String? = null
+
     @SerializedName("depart")
-    private String depart;
+    var depart: String? = null
+
     @SerializedName("arrive")
-    private String arrive;
+    var arrive: String? = null
+
     @SerializedName("caloriesCost")
-    private float caloriesCost;
+    var caloriesCost: Float = 0f
+
     @SerializedName("moneyCost")
-    private float mMoneyCost;
+    var moneyCost: Float = UNKNOWN_COST
+
     @SerializedName("moneyUSDCost")
-    private float moneyUsdCost;
+    var moneyUsdCost: Float = UNKNOWN_COST
+
     @SerializedName("carbonCost")
-    private float mCarbonCost;
+    var carbonCost: Float = 0f
+
     @SerializedName("hassleCost")
-    private float mHassleCost;
+    var hassleCost: Float = 0f
+
     @SerializedName("weightedScore")
-    private float weightedScore;
+    var weightedScore: Float = 0f
+
     @SerializedName("updateURL")
-    private String updateURL;
+    var updateURL: String? = null
+
     @SerializedName("progressURL")
-    private String progressURL;
+    var progressURL: String? = null
+
     @SerializedName("plannedURL")
-    private String plannedURL;
+    var plannedURL: String? = null
+
     @SerializedName("temporaryURL")
-    private String temporaryURL;
+    var temporaryURL: String? = null
+
     @SerializedName("logURL")
-    private String logURL;
+    var logURL: String? = null
+
     @SerializedName("shareURL")
-    private String shareURL;
+    var shareURL: String? = null
 
     @SerializedName("subscribeURL")
-    private String subscribeURL;
+    var subscribeURL: String? = null
 
     @SerializedName("unsubscribeURL")
-    private String unsubscribeURL;
+    var unsubscribeURL: String? = null
 
-    private long mStartTimeInSecs;
-    private long mEndTimeInSecs;
-
-    @Nullable
-    @SerializedName("availability")
-    private String availability;
-    @Nullable
-    private String availabilityInfo;
     @SerializedName("mainSegmentHashCode")
-    private long mainSegmentHashCode;
+    var mainSegmentHashCode: Long = 0
+
     @SerializedName("hideExactTimes")
-    private boolean hideExactTimes;
+    var hideExactTimes: Boolean = false
+
     @SerializedName("queryIsLeaveAfter")
-    private boolean queryIsLeaveAfter;
+    var queryIsLeaveAfter: Boolean = false
+
     @SerializedName("queryTime")
-    private long queryTime;
+    var queryTime: Long = 0
 
-    private String uuid = UUID.randomUUID().toString();
-    private long mId;
-    private transient TripGroup mGroup;
-    private boolean mIsFavourite;
-    private ArrayList<TripSegment> mSegments;
+    @SerializedName("availability")
+    var mAvailability: String? = null
 
-    public Trip() {
-        mStartTimeInSecs = 0;
-        mEndTimeInSecs = 0;
-        mMoneyCost = UNKNOWN_COST;
-        moneyUsdCost = UNKNOWN_COST;
-        mCarbonCost = 0;
-        mHassleCost = 0;
-    }
+    var availabilityInfo: String? = null
+    override var startTimeInSecs: Long = 0
+        get() {
+            if (field > 0) {
+                return field
+            }
 
-    public void uuid(String uuid) {
-        this.uuid = uuid;
-    }
+            var millis: Long = -1
+            try {
+                millis = depart?.toLong() ?: -1
+            } catch (e: Exception) {
+                e.printStackTrace()
+            }
 
-    public String uuid() {
-        return uuid;
-    }
+            if (millis < 0 && depart != null) {
+                millis = ISODateTimeFormat.dateTimeNoMillis().parseDateTime(depart).millis
+            }
 
-    public long getId() {
-        return mId;
-    }
+            if (depart == null) {
+                millis = 0
+            }
+            return millis
+        }
+    override var endTimeInSecs: Long = 0
+        get() {
+            if (field > 0) {
+                return field
+            }
 
-    public void setId(final long id) {
-        this.mId = id;
-    }
+            var millis: Long = -1
+            try {
+                millis = arrive?.toLong() ?: -1
+            } catch (e: Exception) {
+                e.printStackTrace()
+            }
 
-    public TripGroup getGroup() {
-        return mGroup;
-    }
+            if (millis < 0 && arrive != null) {
+                millis = ISODateTimeFormat.dateTimeNoMillis().parseDateTime(arrive).millis
+            }
 
-    public void setGroup(TripGroup group) {
-        this.mGroup = group;
-    }
-
-    /**
-     * Use {@link TripExtensionsKt#getStartDateTime(Trip)} instead.
-     */
-    public long getStartTimeInSecs() {
-        if (mStartTimeInSecs > 0) {
-            return mStartTimeInSecs;
+            if (arrive == null) {
+                millis = 0
+            }
+            return millis
+        }
+    var uuid: String = UUID.randomUUID().toString()
+    var id: String = ""
+    var tripId: Long = 0
+    @Transient var group: TripGroup? = null
+    var isFavourite: Boolean = false
+    var segmentList: ArrayList<TripSegment> = arrayListOf()
+        set(segments) {
+            field = segments
+            field.forEach { it.setTrip(this) }
         }
 
-        long millis = -1L;
-        try {
-            millis = Long.parseLong(depart);
-        } catch (Exception e) {
-            e.printStackTrace();
+    val from: Location?
+        get() {
+            return if (segmentList.isEmpty()) {
+                null
+            } else {
+                val firstSeg = segmentList.first()
+                firstSeg.from ?: firstSeg.singleLocation
+            }
         }
 
-        if (millis < 0 && depart != null) {
-            millis = ISODateTimeFormat.dateTimeNoMillis().parseDateTime(depart).getMillis();
+    val quickBookingSegment: TripSegment?
+        get() {
+            return segmentList.firstOrNull { it.isQuickBooking }
         }
 
-        if (depart == null) {
-            millis = 0;
-        }
-        return millis;
-    }
-
-    /**
-     * NOTE: You should only use this setter for testing purpose.
-     */
-    public void setStartTimeInSecs(long startTimeInSecs) {
-        mStartTimeInSecs = startTimeInSecs;
-    }
-
-    /**
-     * Use {@link TripExtensionsKt#getEndDateTime(Trip)} instead.
-     */
-    public long getEndTimeInSecs() {
-        if (mEndTimeInSecs > 0) {
-            return mEndTimeInSecs;
+    val to: Location?
+        get() {
+            return if (segmentList.isEmpty()) {
+                null
+            } else {
+                val lastSeg = segmentList.last()
+                lastSeg.getTo() ?: lastSeg.getSingleLocation()
+            }
         }
 
-        long millis = -1L;
-        try {
-            millis = Long.parseLong(arrive);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-        if (millis < 0 && arrive != null) {
-            millis = ISODateTimeFormat.dateTimeNoMillis().parseDateTime(arrive).getMillis();
-        }
-
-        if (arrive == null) {
-            millis = 0;
-        }
-        return millis;
+    constructor() {
+        startTimeInSecs = 0
+        endTimeInSecs = 0
+        moneyCost = UNKNOWN_COST
+        moneyUsdCost = UNKNOWN_COST
+        carbonCost = 0f
+        hassleCost = 0f
     }
 
-    /**
-     * NOTE: You should only use this setter for testing purpose.
-     */
-    public void setEndTimeInSecs(final long endTimeInSecs) {
-        this.mEndTimeInSecs = endTimeInSecs;
+    fun durationInSeconds(): Long {
+        return endTimeInSecs - startTimeInSecs
     }
 
-    public long durationInSeconds() {
-        return mEndTimeInSecs - mStartTimeInSecs;
+    fun getTimeCost(): Float {
+        return (endTimeInSecs - startTimeInSecs).toFloat()
     }
 
-    public float getTimeCost() {
-        return getEndTimeInSecs() - getStartTimeInSecs();
+    fun getAvailability(): Availability? {
+        return mAvailability?.toAvailability()
     }
 
-    public float getMoneyCost() {
-        return mMoneyCost;
+    fun setAvailability(availability: Availability) {
+        this.mAvailability = availability.value
     }
 
-    public void setMoneyCost(final float moneyCost) {
-        this.mMoneyCost = moneyCost;
+    fun setAvailability(availability: String) {
+        this.mAvailability = availability
     }
 
-    public float getMoneyUsdCost() {
-        return moneyUsdCost;
+    fun getAvailabilityString(): String? {
+        return mAvailability
     }
 
-    public void setMoneyUsdCost(float moneyUsdCost) {
-        this.moneyUsdCost = moneyUsdCost;
-    }
-
-    public float getCarbonCost() {
-        return mCarbonCost;
-    }
-
-    public void setCarbonCost(final float carbonCost) {
-        this.mCarbonCost = carbonCost;
-    }
-
-    public float getHassleCost() {
-        return mHassleCost;
-    }
-
-    public void setHassleCost(final float hassleCost) {
-        this.mHassleCost = hassleCost;
-    }
-
-    @Nullable
-    public Location getTo() {
-        if (mSegments == null || mSegments.isEmpty()) {
-            return null;
-        }
-
-        TripSegment lastSeg = mSegments.get(mSegments.size() - 1);
-        if (lastSeg == null) {
-            return null;
-        } else if (lastSeg.getTo() != null) {
-            return lastSeg.getTo();
-        } else {
-            return lastSeg.getSingleLocation();
-        }
-    }
-
-    public Location getFrom() {
-        if (mSegments == null || mSegments.isEmpty()) {
-            return null;
-        }
-
-        TripSegment firstSeg = mSegments.get(0);
-
-        if (firstSeg == null) {
-            return null;
-        } else if (firstSeg.getFrom() != null) {
-            return firstSeg.getFrom();
-        } else {
-            return firstSeg.getSingleLocation();
-        }
-    }
-
-    public ArrayList<TripSegment> getSegments() {
-        return mSegments;
-    }
-
-    public void setSegments(final ArrayList<TripSegment> segments) {
-        this.mSegments = segments;
-        if (mSegments != null) {
-            for (TripSegment seg : mSegments) {
-                seg.setTrip(this);
+    fun getDisplayCost(localizedFreeText: String): String? {
+        return when {
+            moneyCost == 0f -> localizedFreeText
+            moneyCost == UNKNOWN_COST -> null
+            else -> {
+                val numberFormat = NumberFormat.getNumberInstance(Locale.getDefault()).apply {
+                    roundingMode = RoundingMode.CEILING
+                    maximumFractionDigits = 0
+                }
+                val value = numberFormat.format(moneyCost)
+                "${currencySymbol ?: "$"}$value"
             }
         }
     }
 
-    public boolean isFavourite() {
-        return mIsFavourite;
-    }
-
-    public void isFavourite(final boolean isFavourite) {
-        mIsFavourite = isFavourite;
-    }
-
-    public String getSaveURL() {
-        return saveURL;
-    }
-
-    public void setSaveURL(String saveURL) {
-        this.saveURL = saveURL;
-    }
-
-    @Nullable
-    public String getUpdateURL() {
-        return updateURL;
-    }
-
-    public void setUpdateURL(String updateURL) {
-        this.updateURL = updateURL;
-    }
-
-    @Nullable
-    public String getLogURL() {
-        return logURL;
-    }
-
-    public void setLogURL(String logURL) {
-        this.logURL = logURL;
-    }
-
-    public float getWeightedScore() {
-        return weightedScore;
-    }
-
-    public void setWeightedScore(float weightedScore) {
-        this.weightedScore = weightedScore;
-    }
-
-    public float getCaloriesCost() {
-        return caloriesCost;
-    }
-
-    public void setCaloriesCost(float caloriesCost) {
-        this.caloriesCost = caloriesCost;
-    }
-
-    @Nullable
-    public String getTemporaryURL() {
-        return temporaryURL;
-    }
-
-    public void setTemporaryURL(String temporaryURL) {
-        this.temporaryURL = temporaryURL;
-    }
-
-    /**
-     * Indicates availability of the trip, e.g., if it's too late to book a trip for the requested
-     * departure time, or if a scheduled service has been cancelled.
-     */
-    @Nullable
-    public Availability getAvailability() {
-        return com.skedgo.tripkit.routing.AvailabilityKt.toAvailability(availability);
-    }
-
-    /**
-     * Mutability is subject to deletion after we finish migrating to an immutable {@link Trip}.
-     */
-    @Deprecated
-    public void setAvailability(@NonNull Availability availability) {
-        this.availability = availability.getValue();
-    }
-
-    public void setAvailability(String availability) {
-        this.availability = availability;
-    }
-
-    @Nullable
-    public String getAvailabilityString() {
-        return availability;
-    }
-
-    public boolean queryIsLeaveAfter() {
-        return queryIsLeaveAfter;
-    }
-
-    /**
-     * Mutability is subject to deletion after we finish migrating to an immutable {@link Trip}.
-     */
-    public void setQueryIsLeaveAfter(boolean queryIsLeaveAfter) {
-        this.queryIsLeaveAfter = queryIsLeaveAfter;
-    }
-
-    @Nullable
-    public String getPlannedURL() {
-        return plannedURL;
-    }
-
-    /**
-     * Mutability is subject to deletion after we finish migrating to an immutable {@link Trip}.
-     */
-    @Deprecated
-    public void setPlannedURL(String plannedURL) {
-        this.plannedURL = plannedURL;
-    }
-
-    public String getCurrencySymbol() {
-        return currencySymbol;
-    }
-
-    /**
-     * Mutability is subject to deletion after we finish migrating to an immutable {@link Trip}.
-     */
-    @Deprecated
-    public void setCurrencySymbol(String currencySymbol) {
-        this.currencySymbol = currencySymbol;
-    }
-
-    public String getProgressURL() {
-        return progressURL;
-    }
-
-    /**
-     * Mutability is subject to deletion after we finish migrating to an immutable {@link Trip}.
-     */
-    @Deprecated
-    public void setProgressURL(String progressURL) {
-        this.progressURL = progressURL;
-    }
-
-    public boolean hasTransportMode(VehicleMode... modes) {
-        if (mSegments == null || mSegments.isEmpty() || modes == null) {
-            return false;
+    fun getDisplayCostUsd(): String? {
+        return if (moneyUsdCost == 0f || moneyUsdCost == UNKNOWN_COST) {
+            null
+        } else {
+            val numberFormat = NumberFormat.getNumberInstance(Locale.getDefault()).apply {
+                roundingMode = RoundingMode.CEILING
+                maximumFractionDigits = 0
+            }
+            val value = numberFormat.format(moneyUsdCost)
+            "${currencySymbol ?: "$"}$value"
         }
+    }
 
-        for (TripSegment seg : mSegments) {
-            for (VehicleMode mode : modes) {
-                if (seg.getMode() == mode) {
-                    return true;
+    fun getDisplayCarbonCost(): String? {
+        return if (carbonCost > 0) {
+            "$carbonCost kg"
+        } else {
+            null
+        }
+    }
+
+    fun getDisplayCalories(): String {
+        return "$caloriesCost kcal"
+    }
+
+    fun getTripUuid(): String {
+        return saveURL?.let {
+            Uri.parse(it).lastPathSegment ?: it
+        } ?: uuid
+    }
+
+    fun isMixedModal(ignoreWalking: Boolean): Boolean {
+        var previousMode = ""
+        segmentList.forEach { segment ->
+            val currentMode = segment.getModeInfo()?.id ?: return@forEach
+            if (segment.getType() != SegmentType.STATIONARY && !currentMode.isEmpty()) {
+                if ((!segment.isWalking() || !ignoreWalking) && segment.getVisibility() == Visibilities.VISIBILITY_IN_SUMMARY) {
+                    if (previousMode.isNotEmpty() && currentMode != previousMode) return true
+                    previousMode = currentMode
+                }
+            }
+        }
+        return false
+    }
+
+    fun hasQuickBooking(): Boolean {
+        return segmentList.any { it.getBooking()?.getQuickBookingsUrl() != null }
+    }
+
+    fun hasTransportMode(vararg modes: VehicleMode): Boolean {
+        return segmentList.any { segment ->
+            modes.any { mode -> segment.getMode() == mode }
+        }
+    }
+
+    fun isDepartureTimeFixed(): Boolean {
+        var hasPublicTransportSegment = false
+        var hasNonFrequencyBasedSegment = false
+
+        segmentList.forEach { segment ->
+            if (!segment.serviceTripId.isNullOrEmpty()) {
+                hasPublicTransportSegment = true
+                if (segment.frequency == 0) {
+                    hasNonFrequencyBasedSegment = true
                 }
             }
         }
 
-        return false;
+        return hasPublicTransportSegment && hasNonFrequencyBasedSegment
     }
 
-    /**
-     * Adrian: "duration (arrive)" should be used for transport where
-     * the departure time isn't fixed, such as driving trips not involving public transport,
-     * or public transport trips that use only frequency-based trips.
-     */
-    public boolean isDepartureTimeFixed() {
-        boolean isDepartureTimeFixed = false;
-        if (mSegments != null) {
-            boolean hasPublicTransportSegment = false;
-            boolean hasNonFrequencyBasedSegment = false;
+    fun hasAnyPublicTransport(): Boolean {
+        return segmentList.any { segment ->
+            !segment.serviceTripId.isNullOrEmpty()
+        }
+    }
 
-            for (TripSegment segment : mSegments) {
-                // Check if there is any Public Transport segment.
-                if (!TextUtils.isEmpty(segment.getServiceTripId())) {
-                    hasPublicTransportSegment = true;
-
-                    if (segment.getFrequency() == 0) {
-                        hasNonFrequencyBasedSegment = true;
-                    }
-                }
+    fun hasAnyExpensiveTransport(): Boolean {
+        return segmentList.any { segment ->
+            when (segment.getTransportModeId()) {
+                TransportMode.ID_AIR,
+                TransportMode.ID_SHUFFLE,
+                TransportMode.ID_TAXI,
+                TransportMode.ID_TNC -> true
+                else -> segment.transportModeId?.contains(TransportMode.MIDDLE_FIX_CAR) == true ||
+                    segment.transportModeId?.contains(TransportMode.MIDDLE_FIX_BIC) == true
             }
-
-            isDepartureTimeFixed = hasPublicTransportSegment && hasNonFrequencyBasedSegment;
-        }
-
-        return isDepartureTimeFixed;
-    }
-
-    public boolean hasAnyPublicTransport() {
-        if (mSegments != null) {
-            for (TripSegment segment : mSegments) {
-                // Check if there is any Public Transport segment.
-                if (!TextUtils.isEmpty(segment.getServiceTripId())) {
-                    return true;
-                }
-            }
-        }
-
-        return false;
-    }
-
-    /**
-     * Check if this trip has shuffle, taxi or shared vehicle.
-     */
-    public boolean hasAnyExpensiveTransport() {
-        if (mSegments == null) {
-            return false;
-        }
-
-        for (TripSegment segment : mSegments) {
-            if (segment.getTransportModeId() != null) {
-                switch (segment.getTransportModeId()) {
-                    case TransportMode.ID_AIR:
-                    case TransportMode.ID_SHUFFLE:
-                    case TransportMode.ID_TAXI:
-                    case TransportMode.ID_TNC:
-                        return true;
-                }
-
-                // Check shared car or shared bicycle.
-                if (segment.getTransportModeId().contains(TransportMode.MIDDLE_FIX_CAR)
-                    || segment.getTransportModeId().contains(TransportMode.MIDDLE_FIX_BIC)) {
-                    return true;
-                }
-            }
-        }
-
-        return false;
-    }
-
-    public boolean hasQuickBooking() {
-        if (mSegments == null) {
-            return false;
-        }
-
-        for (TripSegment segment : mSegments) {
-            if (segment.getBooking() != null && segment.getBooking().getQuickBookingsUrl() != null) {
-                return true;
-            }
-        }
-        return false;
-    }
-
-    @Nullable
-    public TripSegment getQuickBookingSegment() {
-        if (mSegments == null) {
-            return null;
-        }
-
-        for (TripSegment segment : mSegments) {
-            if (segment.isQuickBooking()) {
-                return segment;
-            }
-        }
-        return null;
-    }
-
-    @Nullable
-    public String getDisplayCost(String localizedFreeText) {
-        if (mMoneyCost == 0) {
-            return localizedFreeText;
-        } else if (mMoneyCost == Trip.UNKNOWN_COST) {
-            return null;
-        } else {
-            // Use locale.
-            NumberFormat numberFormat = NumberFormat.getNumberInstance(Locale.getDefault());
-            numberFormat.setRoundingMode(RoundingMode.CEILING);
-            numberFormat.setMaximumFractionDigits(0);
-            String value = numberFormat.format(mMoneyCost);
-            return (currencySymbol != null ? currencySymbol : "$") + value;
-        }
-    }
-
-    @Nullable
-    public String getDisplayCostUsd() {
-        if (moneyUsdCost == 0) {
-            return null;
-        } else if (moneyUsdCost == Trip.UNKNOWN_COST) {
-            return null;
-        } else {
-            // Use locale.
-            NumberFormat numberFormat = NumberFormat.getNumberInstance(Locale.getDefault());
-            numberFormat.setRoundingMode(RoundingMode.CEILING);
-            numberFormat.setMaximumFractionDigits(0);
-            String value = numberFormat.format(moneyUsdCost);
-            return (currencySymbol != null ? currencySymbol : "$") + value;
-        }
-    }
-
-    @Nullable
-    public String getDisplayCarbonCost() {
-        if (mCarbonCost > 0) {
-            return mCarbonCost + "kg";
-        } else {
-            return null;
-        }
-    }
-
-    public String getDisplayCalories() {
-        return caloriesCost + " kcal";
-    }
-
-    public boolean isMixedModal(boolean ignoreWalking) {
-        String previousMode = "";
-        for (TripSegment segment : mSegments) {
-            if (segment.getModeInfo() == null || segment.getModeInfo().getId() == null) {
-                continue;
-            }
-
-            String currentMode = segment.getModeInfo().getId();
-            if (segment.getType() == SegmentType.STATIONARY || currentMode.isEmpty()) {
-                continue;
-            }
-
-            if ((segment.isWalking() && ignoreWalking) || !segment.getVisibility().equals(Visibilities.VISIBILITY_IN_SUMMARY)) {
-                continue;
-            }
-            if (!previousMode.isEmpty() && !currentMode.equals(previousMode)) {
-                return true;
-            }
-            previousMode = currentMode;
-        }
-
-        return false;
-    }
-
-    public Long getMainSegmentHashCode() {
-        return mainSegmentHashCode;
-    }
-
-    public void setMainSegmentHashCode(long mainSegmentHashCode) {
-        this.mainSegmentHashCode = mainSegmentHashCode;
-    }
-
-    public String getShareURL() {
-        return shareURL;
-    }
-
-    public void setShareURL(String shareURL) {
-        this.shareURL = shareURL;
-    }
-
-    @Nullable
-    public String getSubscribeURL() {
-        return subscribeURL;
-    }
-
-    public void setSubscribeURL(String subscribeURL) {
-        this.subscribeURL = subscribeURL;
-    }
-
-    @Nullable
-    public String getUnsubscribeURL() {
-        return unsubscribeURL;
-    }
-
-    public void setUnsubscribeURL(String unsubscribeURL) {
-        this.unsubscribeURL = unsubscribeURL;
-    }
-
-    public boolean isHideExactTimes() {
-        return hideExactTimes;
-    }
-
-    public void setHideExactTimes(boolean hideExactTimes) {
-        this.hideExactTimes = hideExactTimes;
-    }
-
-    public long getQueryTime() {
-        return queryTime;
-    }
-
-    public void setQueryTime(long queryTime) {
-        this.queryTime = queryTime;
-    }
-
-    @Nullable
-    public String getAvailabilityInfo() {
-        return availabilityInfo;
-    }
-
-    public void setAvailabilityInfo(@Nullable String availabilityInfo) {
-        this.availabilityInfo = availabilityInfo;
-    }
-
-    public String getTripUuid() {
-        if (saveURL != null) {
-            Uri uri = Uri.parse(saveURL);
-            String uUid = uri.getLastPathSegment();
-            return uUid == null ? saveURL : uUid;
-        } else {
-            return uuid();
         }
     }
 }

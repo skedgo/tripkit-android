@@ -62,7 +62,7 @@ public class TripGroup {
         }
 
         for (Trip trip : trips) {
-            if (displayTripId == trip.getId()) {
+            if (displayTripId == trip.getTripId()) {
                 return trip;
             }
         }
@@ -128,10 +128,10 @@ public class TripGroup {
         final Trip maxIdTrip = Collections.max(trips, new Comparator<Trip>() {
             @Override
             public int compare(Trip lhs, Trip rhs) {
-                return TripComparators.compareLongs(lhs.getId(), rhs.getId());
+                return TripComparators.compareLongs(lhs.getTripId(), rhs.getTripId());
             }
         });
-        trip.setId(maxIdTrip.getId() + 1);
+        trip.setTripId(maxIdTrip.getTripId() + 1);
 
         // Don't call List<Trip>.add() but this.
         // We need to reference the group for each trip added.
@@ -150,7 +150,7 @@ public class TripGroup {
             throw new IllegalStateException("Trip does not belong to group");
         }
 
-        displayTripId = trip.getId();
+        displayTripId = trip.getTripId();
         return this;
     }
 

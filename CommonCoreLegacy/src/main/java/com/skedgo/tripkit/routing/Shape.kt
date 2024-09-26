@@ -1,94 +1,44 @@
-package com.skedgo.tripkit.routing;
+package com.skedgo.tripkit.routing
 
-import android.os.Parcel;
-import android.os.Parcelable;
+import android.os.Parcel
+import android.os.Parcelable
+import com.google.gson.annotations.SerializedName
+import com.skedgo.tripkit.common.model.stop.ServiceStop
 
-import com.google.gson.annotations.SerializedName;
-import com.skedgo.tripkit.common.model.stop.ServiceStop;
+data class Shape(
+    var id: Long = 0,
+    @SerializedName("travelled") var isTravelled: Boolean = false,
+    @SerializedName("stops") var stops: List<ServiceStop>? = null,
+    @SerializedName("serviceColor") var serviceColor: ServiceColor,
+    @SerializedName("encodedWaypoints") var encodedWaypoints: String
+) : Parcelable {
 
-import java.util.List;
+    constructor(parcel: Parcel) : this(
+        id = parcel.readLong(),
+        isTravelled = parcel.readInt() == 1,
+        stops = parcel.readArrayList(ServiceStop::class.java.classLoader) as? List<ServiceStop>,
+        encodedWaypoints = parcel.readString() ?: "",  // Non-null default value for encodedWaypoints
+        serviceColor = parcel.readParcelable(ServiceColor::class.java.classLoader)
+            ?: throw IllegalStateException("ServiceColor must not be null")  // Ensure non-nullable
+    )
 
-import androidx.annotation.Nullable;
+    override fun writeToParcel(parcel: Parcel, flags: Int) {
+        parcel.writeLong(id)
+        parcel.writeInt(if (isTravelled) 1 else 0)
+        parcel.writeList(stops)
+        parcel.writeString(encodedWaypoints)
+        parcel.writeParcelable(serviceColor, flags)
+    }
 
-public class Shape implements Parcelable {
-    public static final Creator<Shape> CREATOR = new Creator<Shape>() {
-        public Shape createFromParcel(Parcel in) {
-            Shape shape = new Shape();
+    override fun describeContents(): Int = 0
 
-            shape.id = in.readLong();
-            shape.isTravelled = in.readInt() == 1;
-            shape.stops = in.readArrayList(ServiceStop.class.getClassLoader());
-            shape.encodedWaypoints = in.readString();
-            shape.serviceColor = in.readParcelable(ServiceColor.class.getClassLoader());
-
-            return shape;
+    companion object CREATOR : Parcelable.Creator<Shape> {
+        override fun createFromParcel(parcel: Parcel): Shape {
+            return Shape(parcel)
         }
 
-        public Shape[] newArray(int size) {
-            return new Shape[size];
+        override fun newArray(size: Int): Array<Shape?> {
+            return arrayOfNulls(size)
         }
-    };
-    private long id;
-    @SerializedName("travelled")
-    private boolean isTravelled;
-    @SerializedName("stops")
-    private @Nullable List<ServiceStop> stops;
-    @SerializedName("serviceColor")
-    private ServiceColor serviceColor;
-    @SerializedName("encodedWaypoints")
-    private String encodedWaypoints;
-
-    public long getId() {
-        return id;
-    }
-
-    public void setId(long id) {
-        this.id = id;
-    }
-
-    public boolean isTravelled() {
-        return isTravelled;
-    }
-
-    public void isTravelled(boolean isTravelled) {
-        this.isTravelled = isTravelled;
-    }
-
-    public @Nullable List<ServiceStop> getStops() {
-        return stops;
-    }
-
-    public void setStops(@Nullable List<ServiceStop> stops) {
-        this.stops = stops;
-    }
-
-    public String getEncodedWaypoints() {
-        return encodedWaypoints;
-    }
-
-    public void setEncodedWaypoints(String encodedWaypoints) {
-        this.encodedWaypoints = encodedWaypoints;
-    }
-
-    public ServiceColor getServiceColor() {
-        return serviceColor;
-    }
-
-    public void setServiceColor(ServiceColor serviceColor) {
-        this.serviceColor = serviceColor;
-    }
-
-    @Override
-    public int describeContents() {
-        return 0;
-    }
-
-    @Override
-    public void writeToParcel(Parcel out, int flags) {
-        out.writeLong(id);
-        out.writeInt(isTravelled ? 1 : 0);
-        out.writeList(stops);
-        out.writeString(encodedWaypoints);
-        out.writeParcelable(serviceColor, 0);
     }
 }

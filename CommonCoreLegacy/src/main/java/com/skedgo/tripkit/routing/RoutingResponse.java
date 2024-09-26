@@ -140,8 +140,8 @@ public class RoutingResponse {
             for (Trip trip : trips) {
                 trip.setGroup(tripGroup);
 
-                ArrayList<JsonObject> rawSegments = trip.rawSegmentList;
-                trip.rawSegmentList = null;
+                ArrayList<JsonObject> rawSegments = trip.getRawSegmentList();
+                trip.setRawSegmentList(null);
                 if (CollectionUtils.isEmpty(rawSegments)) {
                     continue;
                 }
@@ -152,7 +152,7 @@ public class RoutingResponse {
                     rawSegments,
                     resources
                 );
-                trip.setSegments(segments);
+                trip.setSegmentList(segments);
                 processTripSegmentRealTimeVehicle(segments);
             }
 
@@ -198,7 +198,7 @@ public class RoutingResponse {
                         mTripSegmentListResolver
                             .setOrigin(trip.getFrom())
                             .setDestination(trip.getTo())
-                            .setTripSegmentList(trip.getSegments())
+                            .setTripSegmentList(trip.getSegmentList())
                             .resolve();
                     }
                 }

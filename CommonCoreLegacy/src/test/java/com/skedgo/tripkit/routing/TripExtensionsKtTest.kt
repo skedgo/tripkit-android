@@ -23,7 +23,7 @@ class TripExtensionsKtTest {
         segment.from = departureLocation
 
         val trip = Trip()
-        trip.segments = arrayListOf(segment)
+        trip.segmentList = arrayListOf(segment)
         trip.startTimeInSecs = DateTime.parse("2012-06-30T00:00").toSeconds()
 
         assertThat(trip.startDateTime).isEqualTo(
@@ -41,7 +41,7 @@ class TripExtensionsKtTest {
         segment.to = arrival
 
         val trip = Trip()
-        trip.segments = arrayListOf(segment)
+        trip.segmentList = arrayListOf(segment)
         trip.endTimeInSecs = DateTime.parse("2012-06-30T00:00").toSeconds()
 
         assertThat(trip.endDateTime).isEqualTo(
@@ -64,7 +64,7 @@ class TripExtensionsKtTest {
         segment.action = "ACTION"
 
         val trip = Trip()
-        trip.segments = arrayListOf(segment)
+        trip.segmentList = arrayListOf(segment)
 
         // Act.
         val text = trip.constructPlainText(context)
@@ -93,7 +93,7 @@ class TripExtensionsKtTest {
         segment.action = "ACTION"
 
         val trip = Trip()
-        trip.segments = arrayListOf(segment)
+        trip.segmentList = arrayListOf(segment)
 
         // Act.
         val text = trip.constructPlainText(context)
@@ -141,7 +141,7 @@ class TripExtensionsKtTest {
         segment.action = "ACTION"
 
         val trip = Trip()
-        trip.segments = arrayListOf(segment)
+        trip.segmentList = arrayListOf(segment)
 
         // Act.
         val text = trip.constructPlainText(context)

@@ -1,148 +1,196 @@
-package com.skedgo.tripkit.routing;
+package com.skedgo.tripkit.routing
 
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import androidx.arch.core.executor.testing.InstantTaskExecutorRule
+import androidx.test.ext.junit.runners.AndroidJUnit4
+import com.skedgo.tripkit.routing.GroupVisibility.COMPACT
+import com.skedgo.tripkit.routing.GroupVisibility.FULL
+import io.mockk.Runs
+import io.mockk.every
+import io.mockk.just
+import io.mockk.mockk
+import org.assertj.core.api.Assertions.assertThat
+import org.junit.Rule
+import org.junit.Test
+import org.junit.runner.RunWith
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
+@RunWith(AndroidJUnit4::class)
+class TripGroupTest {
 
-import androidx.test.ext.junit.runners.AndroidJUnit4;
-
-import static org.assertj.core.api.Java6Assertions.assertThat;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
-import static com.skedgo.tripkit.routing.GroupVisibility.COMPACT;
-import static com.skedgo.tripkit.routing.GroupVisibility.FULL;
-
-@RunWith(AndroidJUnit4.class)
-public class TripGroupTest {
-    @Test
-    public void addAsDisplayTrip() {
-        final Trip a = mock(Trip.class);
-        when(a.getId()).thenReturn(1L);
-        final Trip b = mock(Trip.class);
-        when(b.getId()).thenReturn(3L);
-        final Trip c = mock(Trip.class);
-        when(c.getId()).thenReturn(6L);
-
-        final Trip d = new Trip();
-        final TripGroup group = new TripGroup();
-        group.setTrips(new ArrayList<>(Arrays.asList(a, b, c)));
-        group.addAsDisplayTrip(d);
-
-        assertThat(group.getTrips()).contains(d);
-        assertThat(group.getDisplayTrip()).isSameAs(d);
-        assertThat(d.getId()).isEqualTo(7L);
-    }
-
-    @Test(expected = IllegalStateException.class)
-    public void addAsDisplayTrip_throwException() {
-        final Trip a = mock(Trip.class);
-        when(a.getId()).thenReturn(1L);
-        final Trip b = mock(Trip.class);
-        when(b.getId()).thenReturn(3L);
-        final Trip c = mock(Trip.class);
-        when(c.getId()).thenReturn(6L);
-
-        final TripGroup group = new TripGroup();
-        group.setTrips(new ArrayList<>(Arrays.asList(a, b, c)));
-        group.addAsDisplayTrip(c);
-    }
+    @get:Rule
+    val rule = InstantTaskExecutorRule()
 
     @Test
-    public void fullIsGreaterThanCompact() {
-        assertThat(FULL.value).isGreaterThan(COMPACT.value);
+    fun addAsDisplayTrip() {
+        val tripGroup = TripGroup()
+        val tripA = mockk<Trip>()
+        tripA.apply {
+            every { tripId } returns 1L
+            every { group } returns tripGroup
+            every { group = any() } just Runs
+        }
+
+        val tripB = mockk<Trip>()
+        tripB.apply {
+            every { tripId } returns 3L
+            every { group } returns tripGroup
+            every { group = any() } just Runs
+        }
+
+        val tripC = mockk<Trip>()
+        tripC.apply {
+            every { tripId } returns 6L
+            every { group } returns tripGroup
+            every { group = any() } just Runs
+        }
+
+        val tripD = Trip()
+
+        tripGroup.setTrips(arrayListOf(tripA, tripB, tripC))
+        tripGroup.addAsDisplayTrip(tripD)
+
+        assertThat(tripGroup.getTrips()).contains(tripD)
+        assertThat(tripGroup.getDisplayTrip()).isSameAs(tripD)
+        assertThat(tripD.tripId).isEqualTo(7L)
     }
 
-    @Test
-    public void arrangedByFullCompact() {
-        TripGroup fullGroup = new TripGroup();
-        fullGroup.setVisibility(FULL);
+    @Test(expected = IllegalStateException::class)
+    fun addAsDisplayTrip_throwException() {
+        val tripGroup = TripGroup()
+        val tripA = mockk<Trip>()
+        tripA.apply {
+            every { tripId } returns 1L
+            every { group } returns tripGroup
+            every { group = any() } just Runs
+        }
 
-        TripGroup compactGroup = new TripGroup();
-        compactGroup.setVisibility(COMPACT);
+        val tripB = mockk<Trip>()
+        tripB.apply {
+            every { tripId } returns 3L
+            every { group } returns tripGroup
+            every { group = any() } just Runs
+        }
 
-        List<TripGroup> groups = new ArrayList<>(Arrays.asList(
-            compactGroup,
-            fullGroup
-        ));
+        val tripC = mockk<Trip>()
+        tripC.apply {
+            every { tripId } returns 6L
+            every { group } returns tripGroup
+            every { group = any() } just Runs
+        }
 
-        Collections.sort(groups, TripGroupComparators.DESC_VISIBILITY_COMPARATOR);
-
-        assertThat(groups).containsExactly(
-            fullGroup,
-            compactGroup
-        );
-    }
-
-    @Test
-    public void arrivalComparatorChain() {
-        TripGroup group0 = new TripGroup();
-        Trip trip0 = new Trip();
-        trip0.setStartTimeInSecs(2);
-        trip0.setEndTimeInSecs(3);
-        group0.addTrip(trip0);
-
-        TripGroup group1 = new TripGroup();
-        Trip trip1 = new Trip();
-        trip1.setStartTimeInSecs(2);
-        trip1.setEndTimeInSecs(4);
-        group1.addTrip(trip1);
-        group1.setVisibility(COMPACT);
-
-        TripGroup group2 = new TripGroup();
-        Trip trip2 = new Trip();
-        trip2.setStartTimeInSecs(2);
-        trip2.setEndTimeInSecs(6);
-        group2.addTrip(trip2);
-
-        TripGroup group3 = new TripGroup();
-        Trip trip3 = new Trip();
-        trip3.setStartTimeInSecs(2);
-        trip3.setEndTimeInSecs(4);
-        group3.addTrip(trip3);
-        group3.setVisibility(FULL);
-
-        List<TripGroup> groups = new ArrayList<>(Arrays.asList(
-            group1, group0, group2, group3
-        ));
-        Collections.sort(groups, TripGroupComparators.ARRIVAL_COMPARATOR_CHAIN);
-        assertThat(groups).containsExactly(
-            group0, group3, group1, group2
-        );
+        tripGroup.setTrips(arrayListOf(tripA, tripB, tripC))
+        tripGroup.addAsDisplayTrip(tripC)
     }
 
     @Test
-    public void changeDisplayTrip() {
-        final Trip a = mock(Trip.class);
-        when(a.getId()).thenReturn(1L);
-        final Trip b = mock(Trip.class);
-        when(b.getId()).thenReturn(2L);
-        final Trip c = mock(Trip.class);
-        when(c.getId()).thenReturn(3L);
-        final TripGroup group = new TripGroup();
-        group.setTrips(new ArrayList<>(Arrays.asList(a, b, c)));
-        group.changeDisplayTrip(b);
-        assertThat(group.getDisplayTrip()).isSameAs(b);
-        group.changeDisplayTrip(a);
-        assertThat(group.getDisplayTrip()).isSameAs(a);
-        group.changeDisplayTrip(c);
-        assertThat(group.getDisplayTrip()).isSameAs(c);
+    fun fullIsGreaterThanCompact() {
+        assertThat(FULL.value).isGreaterThan(COMPACT.value)
     }
 
-    @Test(expected = IllegalStateException.class)
-    public void changeDisplayTrip_throwException() {
-        final Trip a = mock(Trip.class);
-        when(a.getId()).thenReturn(1L);
-        final Trip b = mock(Trip.class);
-        when(b.getId()).thenReturn(2L);
-        final TripGroup group = new TripGroup();
-        group.setTrips(new ArrayList<>(Arrays.asList(a, b)));
+    @Test
+    fun arrangedByFullCompact() {
+        val fullGroup = TripGroup().apply { setVisibility(FULL) }
+        val compactGroup = TripGroup().apply { setVisibility(COMPACT) }
 
-        final Trip c = mock(Trip.class);
-        when(c.getId()).thenReturn(3L);
-        group.changeDisplayTrip(c);
+        val groups = listOf(compactGroup, fullGroup).sortedWith(TripGroupComparators.DESC_VISIBILITY_COMPARATOR)
+
+        assertThat(groups).containsExactly(fullGroup, compactGroup)
+    }
+
+    @Test
+    fun arrivalComparatorChain() {
+        val group0 = TripGroup().apply {
+            addTrip(Trip().apply {
+                startTimeInSecs = 2
+                endTimeInSecs = 3
+            })
+        }
+
+        val group1 = TripGroup().apply {
+            addTrip(Trip().apply {
+                startTimeInSecs = 2
+                endTimeInSecs = 4
+            })
+            setVisibility(COMPACT)
+        }
+
+        val group2 = TripGroup().apply {
+            addTrip(Trip().apply {
+                startTimeInSecs = 2
+                endTimeInSecs = 6
+            })
+        }
+
+        val group3 = TripGroup().apply {
+            addTrip(Trip().apply {
+                startTimeInSecs = 2
+                endTimeInSecs = 4
+            })
+            setVisibility(FULL)
+        }
+
+        val groups = listOf(group1, group0, group2, group3).sortedWith(TripGroupComparators.ARRIVAL_COMPARATOR_CHAIN)
+
+        assertThat(groups).containsExactly(group0, group3, group1, group2)
+    }
+
+    @Test
+    fun changeDisplayTrip() {
+        val tripGroup = TripGroup()
+        val tripA = mockk<Trip>()
+        tripA.apply {
+            every { tripId } returns 1L
+            every { group } returns tripGroup
+            every { group = any() } just Runs
+        }
+
+        val tripB = mockk<Trip>()
+        tripB.apply {
+            every { tripId } returns 2L
+            every { group } returns tripGroup
+            every { group = any() } just Runs
+        }
+
+        val tripC = mockk<Trip>()
+        tripC.apply {
+            every { tripId } returns 3L
+            every { group } returns tripGroup
+            every { group = any() } just Runs
+        }
+
+        tripGroup.setTrips(arrayListOf(tripA, tripB, tripC))
+
+        tripGroup.changeDisplayTrip(tripB)
+        assertThat(tripGroup.getDisplayTrip()).isSameAs(tripB)
+
+        tripGroup.changeDisplayTrip(tripA)
+        assertThat(tripGroup.getDisplayTrip()).isSameAs(tripA)
+
+        tripGroup.changeDisplayTrip(tripC)
+        assertThat(tripGroup.getDisplayTrip()).isSameAs(tripC)
+    }
+
+    @Test(expected = IllegalStateException::class)
+    fun changeDisplayTrip_throwException() {
+        val tripGroup = TripGroup()
+        val tripA = mockk<Trip>()
+        tripA.apply {
+            every { tripId } returns 1L
+            every { group } returns tripGroup
+            every { group = any() } just Runs
+        }
+
+        val tripB = mockk<Trip>()
+        tripB.apply {
+            every { tripId } returns 2L
+            every { group } returns tripGroup
+            every { group = any() } just Runs
+        }
+
+        tripGroup.setTrips(arrayListOf(tripA, tripB))
+
+        val c = mockk<Trip>()
+        every { c.tripId } returns 3L
+
+        tripGroup.changeDisplayTrip(c)
     }
 }

@@ -1,96 +1,76 @@
-package com.skedgo.tripkit.routing;
+package com.skedgo.tripkit.routing
 
-import android.graphics.Color;
-import android.os.Parcel;
-import android.os.Parcelable;
+import android.graphics.Color
+import android.os.Parcel
+import android.os.Parcelable
+import android.os.Parcelable.Creator
+import com.google.gson.annotations.SerializedName
 
-import com.google.gson.annotations.SerializedName;
-
-public final class ServiceColor implements Parcelable {
-    public static final Creator<ServiceColor> CREATOR = new Creator<ServiceColor>() {
-        public ServiceColor createFromParcel(Parcel in) {
-            return new ServiceColor(in);
-        }
-
-        public ServiceColor[] newArray(int size) {
-            return new ServiceColor[size];
-        }
-    };
+class ServiceColor : Parcelable {
 
     @SerializedName("red")
-    private int red;
+    var red: Int
+
     @SerializedName("blue")
-    private int blue;
+    var blue: Int
+
     @SerializedName("green")
-    private int green;
+    var green: Int
 
-    public ServiceColor() {
-        this(0, 0, 0);
+    // Default constructor
+    constructor() : this(0, 0, 0)
+
+    // Constructor with red, green, blue values
+    constructor(red: Int, green: Int, blue: Int) {
+        this.red = red
+        this.green = green
+        this.blue = blue
     }
 
-    public ServiceColor(int color) {
-        this(Color.red(color), Color.green(color), Color.blue(color));
-    }
-
-    public ServiceColor(int red, int green, int blue) {
-        this.red = red;
-        this.green = green;
-        this.blue = blue;
-    }
-
-    private ServiceColor(Parcel parcel) {
-        red = parcel.readInt();
-        blue = parcel.readInt();
-        green = parcel.readInt();
-    }
-
-    public int getRed() {
-        return red;
-    }
-
-    public void setRed(final int red) {
-        this.red = red;
-    }
-
-    public int getBlue() {
-        return blue;
-    }
-
-    public void setBlue(final int blue) {
-        this.blue = blue;
-    }
-
-    public int getGreen() {
-        return green;
-    }
-
-    public void setGreen(final int green) {
-        this.green = green;
-    }
-
-    public int getColor() {
-        return Color.rgb(red, green, blue);
-    }
-
-    @Override
-    public int describeContents() {
-        return hashCode();
-    }
-
-    @Override
-    public void writeToParcel(final Parcel dest, final int flags) {
-        dest.writeInt(red);
-        dest.writeInt(blue);
-        dest.writeInt(green);
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (o instanceof ServiceColor) {
-            final ServiceColor that = (ServiceColor) o;
-            return red == that.red && blue == that.blue && green == that.green;
-        } else {
-            return false;
+    // Factory method to create from a color Int
+    companion object {
+        fun fromColor(color: Int): ServiceColor {
+            return ServiceColor(Color.red(color), Color.green(color), Color.blue(color))
         }
+
+        @JvmField
+        val CREATOR: Parcelable.Creator<ServiceColor> = object : Parcelable.Creator<ServiceColor> {
+            override fun createFromParcel(parcel: Parcel): ServiceColor {
+                return ServiceColor(parcel)
+            }
+
+            override fun newArray(size: Int): Array<ServiceColor?> {
+                return arrayOfNulls(size)
+            }
+        }
+    }
+
+    // Constructor for parcelable implementation
+    private constructor(parcel: Parcel) {
+        red = parcel.readInt()
+        blue = parcel.readInt()
+        green = parcel.readInt()
+    }
+
+    // Method to get the RGB color
+    val color: Int
+        get() = Color.rgb(red, green, blue)
+
+    // Parcelable methods
+    override fun describeContents(): Int {
+        return hashCode()
+    }
+
+    override fun writeToParcel(dest: Parcel, flags: Int) {
+        dest.writeInt(red)
+        dest.writeInt(blue)
+        dest.writeInt(green)
+    }
+
+    override fun equals(other: Any?): Boolean {
+        if (other is ServiceColor) {
+            return red == other.red && blue == other.blue && green == other.green
+        }
+        return false
     }
 }

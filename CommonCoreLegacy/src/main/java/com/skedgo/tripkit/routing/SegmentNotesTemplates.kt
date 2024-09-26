@@ -1,9 +1,6 @@
-package com.skedgo.tripkit.routing;
+package com.skedgo.tripkit.routing
 
-public final class SegmentNotesTemplates {
-    public static final String TEMPLATE_DIRECTION = "<DIRECTION>";
-    public static final String TEMPLATE_LINE_NAME = "<LINE_NAME>";
-
-    private SegmentNotesTemplates() {
-    }
+object SegmentNotesTemplates {
+    const val TEMPLATE_DIRECTION: String = "<DIRECTION>"
+    const val TEMPLATE_LINE_NAME: String = "<LINE_NAME>"
 }

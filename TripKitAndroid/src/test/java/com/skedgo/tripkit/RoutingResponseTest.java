@@ -89,9 +89,9 @@ public class RoutingResponseTest {
         assertThat(group.getTrips()).hasSize(1).doesNotContainNull();
 
         Trip trip = group.getTrips().get(0);
-        assertThat(trip.getSegments()).hasSize(3).doesNotContainNull();
+        assertThat(trip.getSegmentList()).hasSize(3).doesNotContainNull();
 
-        TripSegment motorbikeSegment = trip.getSegments().get(1);
+        TripSegment motorbikeSegment = trip.getSegmentList().get(1);
         assertThat(motorbikeSegment.getAlerts()).hasSize(1).doesNotContainNull();
 
         RealtimeAlert alert = motorbikeSegment.getAlerts().get(0);
@@ -116,9 +116,9 @@ public class RoutingResponseTest {
         assertThat(group.getTrips()).hasSize(1).doesNotContainNull();
 
         Trip trip = group.getTrips().get(0);
-        assertThat(trip.getSegments()).hasSize(3).doesNotContainNull();
+        assertThat(trip.getSegmentList()).hasSize(3).doesNotContainNull();
 
-        TripSegment motorbikeSegment = trip.getSegments().get(1);
+        TripSegment motorbikeSegment = trip.getSegmentList().get(1);
         assertThat(motorbikeSegment.getStreets()).hasSize(4).doesNotContainNull();
     }
 }

@@ -17,7 +17,7 @@ class GetSummarySegmentsTest {
         arrivalSegment.type = SegmentType.ARRIVAL
         arrivalSegment.visibility = Visibilities.VISIBILITY_ON_MAP
         val trip = Trip()
-        trip.segments = arrayListOf(arrivalSegment)
+        trip.segmentList = arrayListOf(arrivalSegment)
 
         // We expect that arrival segment shouldn't be in the summary area.
         assertThat(trip.getSummarySegments()).isEmpty()
@@ -26,7 +26,7 @@ class GetSummarySegmentsTest {
     @Test
     fun summaryAreaShouldBeEmptyIfNoSegments() {
         val trip = Trip()
-        trip.segments = arrayListOf()
+        trip.segmentList = arrayListOf()
         assertThat(trip.getSummarySegments()).isEmpty()
     }
 
@@ -41,7 +41,7 @@ class GetSummarySegmentsTest {
             .thenReturn(false)
 
         val trip = Trip()
-        trip.segments = arrayListOf(a, b)
+        trip.segmentList = arrayListOf(a, b)
 
         // We expect that the summary area should only include
         // segments which are visible on the summary.

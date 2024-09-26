@@ -1,17 +1,14 @@
-package com.skedgo.tripkit.routing;
+package com.skedgo.tripkit.routing
 
-public final class SegmentJsonKeys {
-    public static final String NODE_SERVICE_DIRECTION = "serviceDirection";
-    public static final String NODE_SERVICE_NUMBER = "serviceNumber";
-    public static final String NODE_ACTION = "action";
-    public static final String NODE_NOTES = "notes";
-    public static final String NODE_SERVICE_NAME = "serviceName";
-    public static final String NODE_HASH_CODE = "hashCode";
-    public static final String NODE_SEGMENT_TEMPLATE_HASH_CODE = "segmentTemplateHashCode";
-    public static final String NODE_MINI = "mini";
-    public static final String NODE_REGION = "region";
-    public static final String NODE_TYPE = "type";
-
-    private SegmentJsonKeys() {
-    }
+object SegmentJsonKeys {
+    const val NODE_SERVICE_DIRECTION: String = "serviceDirection"
+    const val NODE_SERVICE_NUMBER: String = "serviceNumber"
+    const val NODE_ACTION: String = "action"
+    const val NODE_NOTES: String = "notes"
+    const val NODE_SERVICE_NAME: String = "serviceName"
+    const val NODE_HASH_CODE: String = "hashCode"
+    const val NODE_SEGMENT_TEMPLATE_HASH_CODE: String = "segmentTemplateHashCode"
+    const val NODE_MINI: String = "mini"
+    const val NODE_REGION: String = "region"
+    const val NODE_TYPE: String = "type"
 }

@@ -158,20 +158,20 @@ open class RouteStore(private val databaseHelper: SQLiteOpenHelper, private val 
                 values.put(COL_CARBON_COST, trip.carbonCost)
                 values.put(COL_MONEY_COST, trip.moneyCost)
                 values.put(COL_HASSLE_COST, trip.hassleCost)
-                values.put(COL_UUID, trip.uuid())
-                values.put(COL_IS_HIDE_EXACT_TIMES, if (trip.isHideExactTimes) 1 else 0)
+                values.put(COL_UUID, trip.uuid)
+                values.put(COL_IS_HIDE_EXACT_TIMES, if (trip.hideExactTimes) 1 else 0)
                 values.put(COL_QUERY_TIME, trip.queryTime)
-                values.put(COL_QUERY_IS_LEAVE_AFTER, if (trip.queryIsLeaveAfter()) 1 else 0)
+                values.put(COL_QUERY_IS_LEAVE_AFTER, if (trip.queryIsLeaveAfter) 1 else 0)
                 values.put(COL_SUBSCRIBE_URL, trip.subscribeURL)
                 values.put(COL_UNSUBSCRIBE_URL, trip.unsubscribeURL)
-                values.put(COL_AVAILABILITY, trip.availabilityString)
+                values.put(COL_AVAILABILITY, trip.getAvailabilityString())
                 values.put(COL_AVAILABILITY_INFO, trip.availabilityInfo)
                 values.put(COL_MONEY_USD_COST, trip.moneyUsdCost)
                 database.beginTransaction()
                 try {
                     database.update(TABLE_TRIPS, values, "$COL_UUID = ?", arrayOf(oldTripUuid))
                     database.delete(TABLE_SEGMENTS, "$COL_TRIP_ID = ?", arrayOf(oldTripUuid))
-                    saveSegments(database, trip.uuid(), trip.segments)
+                    saveSegments(database, trip.uuid, trip.segmentList)
                     database.setTransactionSuccessful()
                 } finally {
                     database.endTransaction()
@@ -192,7 +192,7 @@ open class RouteStore(private val databaseHelper: SQLiteOpenHelper, private val 
                     cursor.moveToFirst()
                     val newTripId = cursor.getLong(cursor.getColumnIndex("MAX($COL_ID)")) + 1
                     cursor.close()
-                    displayTrip.id = newTripId
+                    displayTrip.tripId = newTripId
                     saveTripAndSegments(database, tripGroupId, displayTrip)
                     val values = ContentValues()
                     values.put(COL_DISPLAY_TRIP_ID, newTripId)
@@ -277,11 +277,11 @@ open class RouteStore(private val databaseHelper: SQLiteOpenHelper, private val 
         return Observable
             .fromCallable {
                 val database = databaseHelper.readableDatabase
-                val segmentsCursor = database.rawQuery(SELECT_SEGMENTS, arrayOf(trip.uuid()))
+                val segmentsCursor = database.rawQuery(SELECT_SEGMENTS, arrayOf(trip.uuid))
                 asSegments(segmentsCursor)
             }
             .map { tripSegments ->
-                trip.segments = tripSegments
+                trip.segmentList = tripSegments
                 trip
             }
     }
@@ -343,8 +343,8 @@ open class RouteStore(private val databaseHelper: SQLiteOpenHelper, private val 
         val moneyUSDCost = tripCursor.getFloat(tripCursor.getColumnIndex(COL_MONEY_USD_COST))
 
         val trip = Trip()
-        trip.id = id
-        trip.uuid(uuid)
+        trip.tripId = id
+        trip.uuid = uuid
         trip.currencySymbol = currencySymbol
         trip.saveURL = saveUrl
         trip.startTimeInSecs = depart
@@ -361,10 +361,10 @@ open class RouteStore(private val databaseHelper: SQLiteOpenHelper, private val 
         trip.plannedURL = plannedUrl
         trip.temporaryURL = tempUrl
         trip.mainSegmentHashCode = mainSegmentHashCode
-        trip.isHideExactTimes = isHideExactTimes
+        trip.hideExactTimes = isHideExactTimes
         trip.queryTime = queryTime
-        trip.setQueryIsLeaveAfter(queryIsLeaveAfter == 1)
-        trip.isFavourite(isNotifable)
+        trip.queryIsLeaveAfter = queryIsLeaveAfter == 1
+        trip.isFavourite = isNotifable
         trip.subscribeURL = subscribeUrl
         trip.unsubscribeURL = unSubscribeUrl
         trip.setAvailability(availability)
@@ -471,7 +471,7 @@ open class RouteStore(private val databaseHelper: SQLiteOpenHelper, private val 
 
     private fun saveTripAndSegments(database: SQLiteDatabase, groupId: String, trip: Trip) {
         saveTrip(database, groupId, trip)
-        saveSegments(database, trip.uuid(), trip.segments)
+        saveSegments(database, trip.uuid, trip.segmentList)
     }
 
     private fun saveTrip(
@@ -480,8 +480,8 @@ open class RouteStore(private val databaseHelper: SQLiteOpenHelper, private val 
         trip: Trip
     ) {
         val values = ContentValues()
-        values.put(COL_ID, trip.id)
-        values.put(COL_UUID, trip.uuid())
+        values.put(COL_ID, trip.tripId)
+        values.put(COL_UUID, trip.uuid)
         values.put(COL_GROUP_ID, groupId)
         values.put(COL_CURRENCY_SYMBOL, trip.currencySymbol)
         values.put(COL_SAVE_URL, trip.saveURL)
@@ -497,14 +497,14 @@ open class RouteStore(private val databaseHelper: SQLiteOpenHelper, private val 
         values.put(COL_PROGRESS_URL, trip.progressURL)
         values.put(COL_PLANNED_URL, trip.plannedURL)
         values.put(COL_TEMP_URL, trip.temporaryURL)
-        values.put(COL_QUERY_IS_LEAVE_AFTER, if (trip.queryIsLeaveAfter()) 1 else 0)
+        values.put(COL_QUERY_IS_LEAVE_AFTER, if (trip.queryIsLeaveAfter) 1 else 0)
         values.put(COL_MAIN_SEGMENT_HASH_CODE, trip.mainSegmentHashCode)
         values.put(COL_SHARE_URL, trip.shareURL)
-        values.put(COL_IS_HIDE_EXACT_TIMES, trip.isHideExactTimes)
+        values.put(COL_IS_HIDE_EXACT_TIMES, trip.hideExactTimes)
         values.put(COL_QUERY_TIME, trip.queryTime)
         values.put(COL_SUBSCRIBE_URL, trip.subscribeURL)
         values.put(COL_UNSUBSCRIBE_URL, trip.unsubscribeURL)
-        values.put(COL_AVAILABILITY, trip.availabilityString)
+        values.put(COL_AVAILABILITY, trip.getAvailabilityString())
         values.put(COL_AVAILABILITY_INFO, trip.availabilityInfo)
         values.put(COL_MONEY_USD_COST, trip.moneyUsdCost)
         database.insertWithOnConflict(TABLE_TRIPS, null, values, SQLiteDatabase.CONFLICT_REPLACE)

@@ -1,57 +1,52 @@
-package com.skedgo.tripkit;
+package com.skedgo.tripkit
 
-import com.skedgo.tripkit.routing.Trip;
-import com.skedgo.tripkit.routing.TripGroup;
+import androidx.test.ext.junit.runners.AndroidJUnit4
+import com.skedgo.tripkit.routing.Trip
+import com.skedgo.tripkit.routing.TripGroup
+import io.mockk.every
+import io.mockk.mockk
+import io.reactivex.Observable
+import org.junit.Before
+import org.junit.Test
+import org.junit.runner.RunWith
+import java.util.concurrent.TimeUnit
 
-import org.junit.Before;
-import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.mockito.Mock;
-import org.mockito.MockitoAnnotations;
-import org.robolectric.RobolectricTestRunner;
+@RunWith(AndroidJUnit4::class)
+class PeriodicRealTimeTripUpdateReceiverTest {
 
-import java.util.concurrent.TimeUnit;
-
-import androidx.test.ext.junit.runners.AndroidJUnit4;
-import io.reactivex.Observable;
-import io.reactivex.subscribers.TestSubscriber;
-import kotlin.Pair;
-
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
-
-@RunWith(AndroidJUnit4.class)
-public class PeriodicRealTimeTripUpdateReceiverTest {
-    @Mock
-    TripUpdater tripUpdater;
-    @Mock
-    TripGroup group;
-    private RealTimeTripUpdateReceiver receiver;
+    private lateinit var tripUpdater: TripUpdater
+    private lateinit var group: TripGroup
+    private lateinit var receiver: RealTimeTripUpdateReceiver
 
     @Before
-    public void before() {
-        MockitoAnnotations.initMocks(this);
-        receiver = new PeriodicRealTimeTripUpdateReceiverBuilder()
+    fun before() {
+        tripUpdater = mockk()
+        group = mockk()
+
+        receiver = PeriodicRealTimeTripUpdateReceiverBuilder()
             .tripUpdater(tripUpdater)
             .group(group)
             .initialDelay(1)
             .period(1)
             .timeUnit(TimeUnit.SECONDS)
-            .build();
+            .build()
     }
 
     @Test
-    public void ignoreErrorByTripUpdater() {
-        final Trip displayTrip = mock(Trip.class);
-        when(displayTrip.getUpdateURL()).thenReturn("AUG 2016");
-        when(group.getDisplayTrip()).thenReturn(displayTrip);
-        when(tripUpdater.getUpdateAsync("AUG 2016"))
-            .thenReturn(Observable.<Trip>error(new RuntimeException()));
+    fun ignoreErrorByTripUpdater() {
+        val displayTrip = mockk<Trip>()
 
-        final TestSubscriber<Pair<Trip, TripGroup>> subscriber = receiver.startAsync().test();
-        subscriber.awaitTerminalEvent(3, TimeUnit.SECONDS);
-        receiver.stop();
-        subscriber.assertTerminated();
-        subscriber.assertNoErrors();
+        // Mocking the displayTrip's updateURL and group's displayTrip
+        every { displayTrip.updateURL } returns "AUG 2016"
+        every { group.displayTrip } returns displayTrip
+
+        // Mocking the behavior of tripUpdater's getUpdateAsync to return an error
+        every { tripUpdater.getUpdateAsync("AUG 2016") } returns Observable.error(RuntimeException())
+
+        val subscriber = receiver.startAsync().test()
+        subscriber.awaitTerminalEvent(3, TimeUnit.SECONDS)
+        receiver.stop()
+        subscriber.assertTerminated()
+        subscriber.assertNoErrors()
     }
 }

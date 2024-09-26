@@ -1,36 +1,34 @@
-package com.skedgo.tripkit.routing;
+package com.skedgo.tripkit.routing
 
-import com.skedgo.tripkit.common.model.location.Location;
+import androidx.test.ext.junit.runners.AndroidJUnit4
+import com.skedgo.tripkit.common.model.location.Location
+import io.mockk.every
+import io.mockk.mockk
+import org.assertj.core.api.Assertions.assertThat
+import org.junit.Test
+import org.junit.runner.RunWith
 
-import org.junit.Test;
-import org.junit.runner.RunWith;
+@RunWith(AndroidJUnit4::class)
+class TripsTest {
 
-import androidx.test.ext.junit.runners.AndroidJUnit4;
-
-import static org.assertj.core.api.Java6Assertions.assertThat;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
-
-@RunWith(AndroidJUnit4.class)
-public class TripsTest {
-    private final Trip trip = mock(Trip.class);
+    private val trip = mockk<Trip>()
 
     @Test
-    public void departureTimezoneIsNullIfNoDeparture() {
-        when(trip.getFrom()).thenReturn(null);
-        assertThat(Trips.getDepartureTimezone(trip)).isNull();
+    fun departureTimezoneIsNullIfNoDeparture() {
+        every { trip.from } returns null
+        assertThat(Trips.getDepartureTimezone(trip)).isNull()
     }
 
     @Test
-    public void departureTimezoneIsNullForNullTrip() {
-        assertThat(Trips.getDepartureTimezone(null)).isNull();
+    fun departureTimezoneIsNullForNullTrip() {
+        assertThat(Trips.getDepartureTimezone(null)).isNull()
     }
 
     @Test
-    public void shouldReturnDepartureTimezone() {
-        final Location departure = mock(Location.class);
-        when(departure.getTimeZone()).thenReturn("Mars");
-        when(trip.getFrom()).thenReturn(departure);
-        assertThat(Trips.getDepartureTimezone(trip)).isEqualTo("Mars");
+    fun shouldReturnDepartureTimezone() {
+        val departure = mockk<Location>()
+        every { departure.timeZone } returns "Mars"
+        every { trip.from } returns departure
+        assertThat(Trips.getDepartureTimezone(trip)).isEqualTo("Mars")
     }
 }
