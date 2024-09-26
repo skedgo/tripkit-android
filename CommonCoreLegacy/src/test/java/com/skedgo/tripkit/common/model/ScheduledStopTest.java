@@ -2,6 +2,8 @@ package com.skedgo.tripkit.common.model;
 
 import android.os.Parcel;
 
+import com.skedgo.tripkit.common.model.stop.ScheduledStop;
+import com.skedgo.tripkit.common.model.stop.StopType;
 import com.skedgo.tripkit.common.util.Gsons;
 
 import org.junit.Test;
@@ -45,6 +47,7 @@ public class ScheduledStopTest {
         expected.setName("Blackheath Station");
         expected.setLat(-33.6336);
         expected.setLon(150.2844);
+        expected.setType(StopType.BUS);
 
         ModeInfo modeInfo = new ModeInfo();
         modeInfo.setAlternativeText("train");

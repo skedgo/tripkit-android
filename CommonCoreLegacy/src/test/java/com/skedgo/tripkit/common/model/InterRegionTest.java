@@ -1,5 +1,8 @@
 package com.skedgo.tripkit.common.model;
 
+import com.skedgo.tripkit.common.model.region.Region;
+import com.skedgo.tripkit.common.model.region.Regions;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
@@ -18,46 +21,52 @@ public class InterRegionTest {
     @Test
     public void shouldUnionModesFromDepartureRegionAndArrivalRegion() {
         final Region departureRegion = new Region();
+        departureRegion.setName("DepartureRegion");
         departureRegion.setTransportModeIds(new ArrayList<>(Arrays.asList("a", "b", "c")));
 
         final Region arrivalRegion = new Region();
+        arrivalRegion.setName("ArrivalRegion");
         arrivalRegion.setTransportModeIds(new ArrayList<>(Arrays.asList("a", "f", "b", "c")));
 
         final Regions.InterRegion interRegion = new Regions.InterRegion(departureRegion, arrivalRegion);
         assertThat(interRegion.getTransportModeIds())
             .containsExactly(TransportMode.ID_AIR, "a", "b", "c", "f");
         assertThat(interRegion.getName())
-            .isEqualTo(departureRegion + "_" + arrivalRegion);
+            .isEqualTo(departureRegion.getName() + "_" + arrivalRegion.getName());
     }
 
     @Test
     public void shouldUnionModesFromArrivalRegion() {
         final Region departureRegion = new Region();
+        departureRegion.setName("DepartureRegion");
         departureRegion.setTransportModeIds(null);
 
         final Region arrivalRegion = new Region();
+        arrivalRegion.setName("ArrivalRegion");
         arrivalRegion.setTransportModeIds(new ArrayList<>(Arrays.asList("d", "f", "e")));
 
         final Regions.InterRegion interRegion = new Regions.InterRegion(departureRegion, arrivalRegion);
         assertThat(interRegion.getTransportModeIds())
             .containsExactly(TransportMode.ID_AIR, "d", "f", "e");
         assertThat(interRegion.getName())
-            .isEqualTo(departureRegion + "_" + arrivalRegion);
+            .isEqualTo(departureRegion.getName() + "_" + arrivalRegion.getName());
     }
 
     @Test
     public void shouldUnionModesFromDepartureRegion() {
         final Region departureRegion = new Region();
+        departureRegion.setName("DepartureRegion");
         departureRegion.setTransportModeIds(new ArrayList<>(Arrays.asList("a", "c", "b")));
 
         final Region arrivalRegion = new Region();
+        arrivalRegion.setName("ArrivalRegion");
         arrivalRegion.setTransportModeIds(null);
 
         final Regions.InterRegion interRegion = new Regions.InterRegion(departureRegion, arrivalRegion);
         assertThat(interRegion.getTransportModeIds())
             .containsExactly(TransportMode.ID_AIR, "a", "c", "b");
         assertThat(interRegion.getName())
-            .isEqualTo(departureRegion + "_" + arrivalRegion);
+            .isEqualTo(departureRegion.getName() + "_" + arrivalRegion.getName());
     }
 
     @Test

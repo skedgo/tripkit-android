@@ -2,8 +2,8 @@ package com.skedgo.tripkit;
 
 import android.text.TextUtils;
 
-import com.skedgo.tripkit.common.model.Location;
-import com.skedgo.tripkit.common.model.Region;
+import com.skedgo.tripkit.common.model.location.Location;
+import com.skedgo.tripkit.common.model.region.Region;
 import com.skedgo.tripkit.common.model.TransportMode;
 
 import org.apache.commons.collections4.CollectionUtils;

@@ -7,7 +7,7 @@ import android.net.Uri;
 
 import com.skedgo.tripkit.BookingAction;
 import com.skedgo.tripkit.ExternalActionParams;
-import com.skedgo.tripkit.common.model.Location;
+import com.skedgo.tripkit.common.model.location.Location;
 import com.skedgo.tripkit.geocoding.ReverseGeocodable;
 import com.skedgo.tripkit.routing.TripSegment;
 
@@ -18,7 +18,6 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.mockito.invocation.InvocationOnMock;
 import org.mockito.stubbing.Answer;
-import org.robolectric.RobolectricTestRunner;
 
 import java.util.Calendar;
 import java.util.Comparator;

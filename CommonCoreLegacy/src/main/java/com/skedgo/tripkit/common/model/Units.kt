@@ -1,10 +1,7 @@
-package com.skedgo.tripkit.common.model;
+package com.skedgo.tripkit.common.model
 
-public final class Units {
-    public static final String UNIT_AUTO = "auto";
-    public static final String UNIT_IMPERIAL = "imperial";
-    public static final String UNIT_METRIC = "metric";
-
-    private Units() {
-    }
+object Units {
+    const val UNIT_AUTO = "auto"
+    const val UNIT_IMPERIAL = "imperial"
+    const val UNIT_METRIC = "metric"
 }

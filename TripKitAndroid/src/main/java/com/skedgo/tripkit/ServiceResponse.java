@@ -2,7 +2,7 @@ package com.skedgo.tripkit;
 
 import com.google.gson.annotations.JsonAdapter;
 import com.skedgo.tripkit.alerts.ModeInfo;
-import com.skedgo.tripkit.common.model.RealtimeAlert;
+import com.skedgo.tripkit.common.model.realtimealert.RealtimeAlert;
 import com.skedgo.tripkit.routing.RealTimeVehicle;
 import com.skedgo.tripkit.routing.Shape;
 

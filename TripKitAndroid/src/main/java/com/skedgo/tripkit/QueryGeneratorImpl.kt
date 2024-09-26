@@ -1,6 +1,6 @@
 package com.skedgo.tripkit
 
-import com.skedgo.tripkit.common.model.LOCATION_CLASS_SCHOOL
+import com.skedgo.tripkit.common.model.location.LOCATION_CLASS_SCHOOL
 import com.skedgo.tripkit.common.model.Query
 import com.skedgo.tripkit.common.model.TransportMode
 import com.skedgo.tripkit.data.regions.RegionService

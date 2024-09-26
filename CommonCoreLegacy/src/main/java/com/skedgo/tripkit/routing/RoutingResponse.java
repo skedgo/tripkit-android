@@ -11,7 +11,7 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonPrimitive;
 import com.google.gson.annotations.SerializedName;
 import com.skedgo.tripkit.common.R;
-import com.skedgo.tripkit.common.model.RealtimeAlert;
+import com.skedgo.tripkit.common.model.realtimealert.RealtimeAlert;
 import com.skedgo.tripkit.common.util.TripSegmentListResolver;
 
 import org.apache.commons.collections4.CollectionUtils;

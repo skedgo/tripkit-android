@@ -2,9 +2,9 @@ package com.skedgo.tripkit.booking.quickbooking
 
 import com.google.gson.Gson
 import com.google.gson.annotations.SerializedName
-import com.skedgo.tripkit.common.model.BookingConfirmationInputNew
-import com.skedgo.tripkit.common.model.BookingConfirmationInputOptions
-import com.skedgo.tripkit.common.model.BookingConfirmationNotes
+import com.skedgo.tripkit.common.model.booking.confirmation.BookingConfirmationInputNew
+import com.skedgo.tripkit.common.model.booking.confirmation.BookingConfirmationInputOptions
+import com.skedgo.tripkit.common.model.booking.confirmation.BookingConfirmationNotes
 import com.skedgo.tripkit.data.database.booking.ticket.TicketEntity
 import com.skedgo.tripkit.extensions.fromJson
 

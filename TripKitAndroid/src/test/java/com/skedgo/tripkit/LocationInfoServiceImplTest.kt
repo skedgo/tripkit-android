@@ -1,105 +1,104 @@
-package com.skedgo.tripkit;
+package com.skedgo.tripkit
 
-import com.skedgo.tripkit.common.model.Location;
-import com.skedgo.tripkit.common.model.Region;
-import com.skedgo.tripkit.data.regions.RegionService;
+import androidx.arch.core.executor.testing.InstantTaskExecutorRule
+import androidx.test.ext.junit.runners.AndroidJUnit4
+import com.skedgo.tripkit.booking.ui.base.MockKTest
+import com.skedgo.tripkit.common.model.location.Location
+import com.skedgo.tripkit.common.model.region.Region
+import com.skedgo.tripkit.data.regions.RegionService
+import io.mockk.every
+import io.mockk.mockk
+import io.reactivex.Observable
+import io.reactivex.observers.TestObserver
+import org.junit.After
+import org.junit.Before
+import org.junit.Rule
+import org.junit.Test
+import org.junit.runner.RunWith
 
-import org.junit.Before;
-import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.mockito.Mock;
-import org.mockito.MockitoAnnotations;
-import org.mockito.invocation.InvocationOnMock;
-import org.mockito.stubbing.Answer;
-import org.robolectric.RobolectricTestRunner;
+@RunWith(AndroidJUnit4::class)
+class LocationInfoServiceImplTest: MockKTest() {
 
-import java.util.ArrayList;
-import java.util.Arrays;
+    @get:Rule
+    val rule = InstantTaskExecutorRule()
 
-import androidx.test.ext.junit.runners.AndroidJUnit4;
-import io.reactivex.Observable;
-import io.reactivex.observers.TestObserver;
-
-import static java.util.Collections.singletonList;
-import static org.mockito.Matchers.any;
-import static org.mockito.Matchers.anyString;
-import static org.mockito.Matchers.eq;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
-
-@RunWith(AndroidJUnit4.class)
-public class LocationInfoServiceImplTest {
-    @Mock
-    LocationInfoApi api;
-    @Mock
-    RegionService regionService;
-    private LocationInfoServiceImpl service;
+    private lateinit var api: LocationInfoApi
+    private lateinit var regionService: RegionService
+    private lateinit var service: LocationInfoServiceImpl
 
     @Before
-    public void setUp() {
-        MockitoAnnotations.initMocks(this);
-        service = new LocationInfoServiceImpl(api, regionService);
+    fun setUp() {
+        initRx()
+        api = mockk()
+        regionService = mockk()
+        service = LocationInfoServiceImpl(api, regionService)
+    }
+
+    @After
+    fun after() {
+        tearDownRx()
     }
 
     @Test
-    public void fetchLocationInfoByRegionUrl() {
-        final Region region = mock(Region.class);
-        when(region.getURLs())
-            .thenReturn(new ArrayList<>(singletonList("https://sydney-au-nsw-sydney.tripgo.skedgo.com/satapp")));
-        when(regionService.getRegionByLocationAsync(any(Location.class)))
-            .thenReturn(Observable.just(region));
+    fun fetchLocationInfoByRegionUrl() {
+        // Create mock objects
+        val region = mockk<Region>()
+        val location = Location(1.0, 2.0)
+        val locationInfo = mockk<LocationInfo>()
 
-        final Location location = new Location(1.0, 2.0);
-        final LocationInfo locationInfo = mock(LocationInfo.class);
-        when(api.fetchLocationInfoAsync(
-            eq("https://sydney-au-nsw-sydney.tripgo.skedgo.com/satapp/locationInfo.json"),
-            eq(location.getLat()),
-            eq(location.getLon())
-        )).thenReturn(Observable.just(locationInfo));
+        // Stubbing the region mock
+        every { region.getURLs() } returns arrayListOf("https://sydney-au-nsw-sydney.tripgo.skedgo.com/satapp")
 
-        final TestObserver<LocationInfo> subscriber = service.getLocationInfoAsync(location).test();
+        // Stubbing the regionService mock
+        every { regionService.getRegionByLocationAsync(any()) } returns Observable.just(region)
 
-        subscriber.awaitTerminalEvent();
-        subscriber.assertNoErrors();
-        subscriber.assertValue(locationInfo);
+        // Stubbing the api mock
+        every {
+            api.fetchLocationInfoAsync(
+                "https://sydney-au-nsw-sydney.tripgo.skedgo.com/satapp/locationInfo.json",
+                location.lat,
+                location.lon
+            )
+        } returns Observable.just(locationInfo)
+
+        // Act: Call the service method and subscribe to it
+        val subscriber: TestObserver<LocationInfo> = service.getLocationInfoAsync(location).test()
+
+        // Assert: Validate the test observer's response
+        subscriber.awaitTerminalEvent()
+        subscriber.assertNoErrors()
+        subscriber.assertValue(locationInfo)
     }
 
     @Test
-    public void fetchLocationInfoByRegionUrls() {
-        final Region region = mock(Region.class);
-        when(region.getURLs()).thenReturn(new ArrayList<>(Arrays.asList(
+    fun fetchLocationInfoByRegionUrls() {
+        val region = mockk<Region>()
+        every { region.getURLs() } returns arrayListOf(
             "https://sydney-au-nsw-sydney.tripgo.skedgo.com/satapp",
             "https://inflationary-au-nsw-sydney.tripgo.skedgo.com/satapp",
             "https://hadron-fr-b-bordeaux.tripgo.skedgo.com/satapp"
-        )));
-        when(regionService.getRegionByLocationAsync(any(Location.class)))
-            .thenReturn(Observable.just(region));
+        )
 
-        final Location location = new Location(1.0, 2.0);
-        final LocationInfo locationInfo = mock(LocationInfo.class);
-        when(api.fetchLocationInfoAsync(
-            anyString(),
-            eq(location.getLat()),
-            eq(location.getLon())
-        )).thenAnswer(new Answer<Observable<LocationInfo>>() {
-            @Override
-            public Observable<LocationInfo> answer(InvocationOnMock invocation) throws Throwable {
-                final String url = invocation.getArgument(0);
-                switch (url) {
-                    case "https://inflationary-au-nsw-sydney.tripgo.skedgo.com/satapp/locationInfo.json":
-                        return Observable.just(locationInfo);
-                    case "https://sydney-au-nsw-sydney.tripgo.skedgo.com/satapp/locationInfo.json":
-                        return Observable.empty();
-                    default:
-                        return Observable.error(new RuntimeException());
-                }
+        every { regionService.getRegionByLocationAsync(any()) } returns Observable.just(region)
+
+        val location = Location(1.0, 2.0)
+        val locationInfo = mockk<LocationInfo>()
+
+        every {
+            api.fetchLocationInfoAsync(any(), location.lat, location.lon)
+        } answers {
+            val url = firstArg<String>()
+            when (url) {
+                "https://inflationary-au-nsw-sydney.tripgo.skedgo.com/satapp/locationInfo.json" -> Observable.just(locationInfo)
+                "https://sydney-au-nsw-sydney.tripgo.skedgo.com/satapp/locationInfo.json" -> Observable.empty()
+                else -> Observable.error(RuntimeException())
             }
-        });
+        }
 
-        final TestObserver<LocationInfo> subscriber = service.getLocationInfoAsync(location).test();
+        val subscriber: TestObserver<LocationInfo> = service.getLocationInfoAsync(location).test()
 
-        subscriber.awaitTerminalEvent();
-        subscriber.assertNoErrors();
-        subscriber.assertValue(locationInfo);
+        subscriber.awaitTerminalEvent()
+        subscriber.assertNoErrors()
+        subscriber.assertValue(locationInfo)
     }
 }

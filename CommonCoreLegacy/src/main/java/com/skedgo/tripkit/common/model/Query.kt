@@ -1,393 +1,287 @@
-package com.skedgo.tripkit.common.model;
+package com.skedgo.tripkit.common.model
 
-import android.os.Parcel;
-import android.os.Parcelable;
-import android.text.TextUtils;
-
-import java.util.ArrayList;
-import java.util.List;
-import java.util.UUID;
-import java.util.concurrent.TimeUnit;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
+import android.os.Parcel
+import android.os.Parcelable
+import android.os.Parcelable.Creator
+import android.text.TextUtils
+import com.skedgo.tripkit.common.model.location.Location
+import com.skedgo.tripkit.common.model.region.Region
+import com.skedgo.tripkit.common.model.time.TimeTag
+import java.util.UUID
+import java.util.concurrent.TimeUnit.SECONDS
 
 /**
  * Represents a query to find routes from A to B.
- * <p>
+ *
+ *
  * Note that, to avoid `TransactionTooLargeException`, it's discouraged to
  * pass any instance of `Query` to an `Intent` or a `Bundle`.
  * The `Parcelable` is subject to deletion at anytime.
  */
-public class Query implements Parcelable {
-    public static final Creator<Query> CREATOR = new Creator<Query>() {
-        public Query createFromParcel(Parcel in) {
-            Query query = new Query();
-            query.uuid = in.readString();
-            query.mUnit = in.readString();
-            query.mFromLocation = in.readParcelable(Location.class.getClassLoader());
-            query.mToLocation = in.readParcelable(Location.class.getClassLoader());
-            query.timeTag = in.readParcelable(TimeTag.class.getClassLoader());
-
-            query.mTimeWeight = in.readInt();
-            query.mBudgetWeight = in.readInt();
-            query.mHassleWeight = in.readInt();
-            query.mEnvironmentWeight = in.readInt();
-            query.mRegion = in.readParcelable(Region.class.getClassLoader());
-            query.mTransferTime = in.readInt();
-            query.mCyclingSpeed = in.readInt();
-            query.mWalkingSpeed = in.readInt();
-            query.transportModeIds = query.readTransportModeIds(in);
-            query.maxWalkingTime = in.readInt();
-
-            List<String> stops = new ArrayList<>();
-            in.readStringList(stops);
-            query.excludedStopCodes = stops;
-
-            query.mUseWheelchair = in.readInt() != 0;
-            return query;
-        }
-
-        public Query[] newArray(int size) {
-            return new Query[size];
-        }
-    };
-
-    private String uuid = UUID.randomUUID().toString();
-    private List<String> transportModeIds = new ArrayList<>();
-    private String mUnit;
-    private Location mFromLocation;
-    private Location mToLocation;
-    private Region mRegion;
-    private TimeTag timeTag;
-    private int mTimeWeight;
-    private int mBudgetWeight;
-    private int mHassleWeight;
-    private int mEnvironmentWeight;
-    private int mCyclingSpeed;
-    private int mWalkingSpeed;
-    private int mTransferTime;
-    private List<String> excludedStopCodes = new ArrayList<>();
-
-
-    private boolean mUseWheelchair = false;
-    /**
-     * This is only used for XUM project. TripGo may not need it.
-     * See more: https://www.flowdock.com/app/skedgo/androiddev/threads/nZJbtLU0jgsgziQpuoqhcaB-U9A.
-     */
-    private int maxWalkingTime;
-
-    public Query() {
-    }
-
-    public Query clone() {
-        return clone(false);
-    }
-
-    public Query clone(boolean cloneTransportMode) {
-        Query query = new Query();
-        query.mFromLocation = mFromLocation;
-        query.mToLocation = mToLocation;
-        query.timeTag = timeTag;
-        query.mTimeWeight = mTimeWeight;
-        query.mBudgetWeight = mBudgetWeight;
-        query.mHassleWeight = mHassleWeight;
-        query.mEnvironmentWeight = mEnvironmentWeight;
-        query.mUnit = mUnit;
-        query.mTransferTime = mTransferTime;
-        query.mCyclingSpeed = mCyclingSpeed;
-        query.mWalkingSpeed = mWalkingSpeed;
-        query.mRegion = mRegion;
-        query.maxWalkingTime = maxWalkingTime;
-        query.mUseWheelchair = mUseWheelchair;
-
-        // Perform deep copy of modes, so that removing member of one list doesn't affect the other.
-        if (cloneTransportMode) {
-            List<String> cloneTransportModeIds = new ArrayList<>(transportModeIds.size());
-            cloneTransportModeIds.addAll(transportModeIds);
-            query.setTransportModeIds(cloneTransportModeIds);
-        }
-
-        // clone excludedStopCodes
-        List<String> cloneExcludedStopCodes = new ArrayList<>(excludedStopCodes.size());
-        cloneExcludedStopCodes.addAll(excludedStopCodes);
-        query.setExcludedStopCodes(cloneExcludedStopCodes);
-
-        return query;
-    }
-
-    /**
-     * @return values of [Units](/tripkit-android/com.skedgo.android.common.model/-units/).
-     */
-    public String getUnit() {
-        if (TextUtils.isEmpty(mUnit)) {
-            mUnit = Units.UNIT_AUTO;
-        }
-        return mUnit;
-    }
-
-    /**
-     * @param unit Must be values of [Units](/tripkit-android/com.skedgo.android.common.model/-units/).
-     */
-    public void setUnit(final String unit) {
-        this.mUnit = unit;
-        if (TextUtils.isEmpty(this.mUnit)) {
-            this.mUnit = Units.UNIT_AUTO;
-        }
-    }
-
-    public boolean originIsCurrentLocation() {
-        return mFromLocation == null;
-    }
-
-    public boolean destinationIsCurrentLocation() {
-        return mToLocation == null;
-    }
-
-    @Nullable
-    public Location getFromLocation() {
-        return mFromLocation;
-    }
-
-    public void setFromLocation(final Location location) {
-        this.mFromLocation = location;
-    }
-
-    @Nullable
-    public Location getToLocation() {
-        return mToLocation;
-    }
-
-    public void setToLocation(final Location location) {
-        this.mToLocation = location;
-    }
-
-    @Nullable
-    @Deprecated
-    public Region getRegion() {
-        return mRegion;
-    }
+class Query : Parcelable {
+    private var uuid: String = UUID.randomUUID().toString()
+    var transportModeIds: MutableList<String> = ArrayList()
+    private var mUnit: String? = null
+    var fromLocation: Location? = null
+    var toLocation: Location? = null
 
     /**
      * This method is deprecated. Region will be chosen using the from and to location.
      *
      * @param region
      */
-    @Deprecated
-    public void setRegion(Region region) {
-        mRegion = region;
-    }
+    @get:Deprecated("")
+    @set:Deprecated("")
+    var region: Region? = null
+    var timeTag: TimeTag? = null
+    private var mTimeWeight = 0
+    private var mBudgetWeight = 0
+    private var mHassleWeight = 0
+    private var mEnvironmentWeight = 0
+    var cyclingSpeed: Int = 0
+    var walkingSpeed: Int = 0
+    var transferTime: Int = 0
+    var excludedStopCodes: List<String> = ArrayList()
 
-    @Nullable
-    public TimeTag getTimeTag() {
-        return timeTag;
-    }
 
-    public void setTimeTag(@NonNull TimeTag timeTag) {
-        this.timeTag = timeTag;
-    }
+    private var mUseWheelchair = false
 
     /**
-     * @return Time in secs.
+     * This is only used for XUM project. TripGo may not need it.
+     * See more: https://www.flowdock.com/app/skedgo/androiddev/threads/nZJbtLU0jgsgziQpuoqhcaB-U9A.
      */
-    public long getDepartAfter() {
-        if (timeTag != null && timeTag.getType() == TimeTag.TIME_TYPE_LEAVE_AFTER) {
-            return TimeUnit.SECONDS.toMillis(timeTag.getTimeInSecs());
+    var maxWalkingTime = 0
+
+    fun clone(cloneTransportMode: Boolean = false): Query {
+        val query = Query()
+        query.fromLocation = fromLocation
+        query.toLocation = toLocation
+        query.timeTag = timeTag
+        query.mTimeWeight = mTimeWeight
+        query.mBudgetWeight = mBudgetWeight
+        query.mHassleWeight = mHassleWeight
+        query.mEnvironmentWeight = mEnvironmentWeight
+        query.mUnit = mUnit
+        query.transferTime = transferTime
+        query.cyclingSpeed = cyclingSpeed
+        query.walkingSpeed = walkingSpeed
+        query.region = region
+        query.maxWalkingTime = maxWalkingTime
+        query.mUseWheelchair = mUseWheelchair
+
+        // Perform deep copy of modes, so that removing member of one list doesn't affect the other.
+        if (cloneTransportMode) {
+            val cloneTransportModeIds: MutableList<String> = ArrayList(transportModeIds.size)
+            cloneTransportModeIds.addAll(transportModeIds)
+            query.transportModeIds = cloneTransportModeIds
+        }
+
+        // clone excludedStopCodes
+        val cloneExcludedStopCodes: MutableList<String> = ArrayList(excludedStopCodes.size)
+        cloneExcludedStopCodes.addAll(excludedStopCodes)
+        query.excludedStopCodes = cloneExcludedStopCodes
+
+        return query
+    }
+
+    var unit: String?
+        /**
+         * @return values of [Units](/tripkit-android/com.skedgo.android.common.model/-units/).
+         */
+        get() {
+            if (TextUtils.isEmpty(mUnit)) {
+                mUnit = Units.UNIT_AUTO
+            }
+            return mUnit
+        }
+        /**
+         * @param unit Must be values of [Units](/tripkit-android/com.skedgo.android.common.model/-units/).
+         */
+        set(unit) {
+            this.mUnit = unit
+            if (TextUtils.isEmpty(this.mUnit)) {
+                this.mUnit = Units.UNIT_AUTO
+            }
+        }
+
+    fun originIsCurrentLocation(): Boolean {
+        return fromLocation == null
+    }
+
+    fun destinationIsCurrentLocation(): Boolean {
+        return toLocation == null
+    }
+
+    val departAfter: Long
+        /**
+         * @return Time in secs.
+         */
+        get() = if (timeTag != null && timeTag!!.type == TimeTag.TIME_TYPE_LEAVE_AFTER) {
+            SECONDS.toMillis(timeTag!!.timeInSecs)
         } else {
-            return -1;
+            -1
         }
-    }
 
-    /**
-     * @return Time in secs.
-     */
-    public long getArriveBy() {
-        if (timeTag != null && timeTag.getType() == TimeTag.TIME_TYPE_ARRIVE_BY) {
-            return TimeUnit.SECONDS.toMillis(timeTag.getTimeInSecs());
+    val arriveBy: Long
+        /**
+         * @return Time in secs.
+         */
+        get() = if (timeTag != null && timeTag!!.type == TimeTag.TIME_TYPE_ARRIVE_BY) {
+            SECONDS.toMillis(timeTag!!.timeInSecs)
         } else {
-            return -1;
-        }
-    }
-
-    @Deprecated
-    public List<String> getTransportModeIds() {
-        return transportModeIds;
-    }
-
-    /**
-     * Use TransportModeFilter instead to exclude certain modes from routing results
-     *
-     * @param transportModeIds
-     */
-    @Deprecated
-    public void setTransportModeIds(List<String> transportModeIds) {
-        this.transportModeIds = transportModeIds;
-    }
-
-    public List<String> getExcludedStopCodes() {
-        return excludedStopCodes;
-    }
-
-    public void setExcludedStopCodes(List<String> excludedStopCodes) {
-        this.excludedStopCodes = excludedStopCodes;
-    }
-
-    public int getTimeWeight() {
-        return mTimeWeight;
-    }
-
-    public void setTimeWeight(int weight) {
-        if (weight < 0) {
-            weight = 0;
-        } else if (weight > 100) {
-            weight = 100;
+            -1
         }
 
-        this.mTimeWeight = weight;
-    }
+    var timeWeight: Int
+        get() = mTimeWeight
+        set(weight) {
+            var weight = weight
+            if (weight < 0) {
+                weight = 0
+            } else if (weight > 100) {
+                weight = 100
+            }
 
-    public int getBudgetWeight() {
-        return mBudgetWeight;
-    }
-
-    public void setBudgetWeight(int weight) {
-        if (weight < 0) {
-            weight = 0;
-        } else if (weight > 100) {
-            weight = 100;
+            this.mTimeWeight = weight
         }
 
-        this.mBudgetWeight = weight;
-    }
+    var budgetWeight: Int
+        get() = mBudgetWeight
+        set(weight) {
+            var weight = weight
+            if (weight < 0) {
+                weight = 0
+            } else if (weight > 100) {
+                weight = 100
+            }
 
-    public int getHassleWeight() {
-        return mHassleWeight;
-    }
-
-    public void setHassleWeight(int weight) {
-        if (weight < 0) {
-            weight = 0;
-        } else if (weight > 100) {
-            weight = 100;
+            this.mBudgetWeight = weight
         }
 
-        this.mHassleWeight = weight;
-    }
+    var hassleWeight: Int
+        get() = mHassleWeight
+        set(weight) {
+            var weight = weight
+            if (weight < 0) {
+                weight = 0
+            } else if (weight > 100) {
+                weight = 100
+            }
 
-    public int getEnvironmentWeight() {
-        return mEnvironmentWeight;
-    }
-
-    public void setEnvironmentWeight(int weight) {
-        if (weight < 0) {
-            weight = 0;
-        } else if (weight > 100) {
-            weight = 100;
+            this.mHassleWeight = weight
         }
 
-        this.mEnvironmentWeight = weight;
-    }
+    var environmentWeight: Int
+        get() = mEnvironmentWeight
+        set(weight) {
+            var weight = weight
+            if (weight < 0) {
+                weight = 0
+            } else if (weight > 100) {
+                weight = 100
+            }
 
-    public int getTransferTime() {
-        return mTransferTime;
-    }
-
-    public void setTransferTime(int transferTime) {
-        mTransferTime = transferTime;
-    }
-
-    public int getCyclingSpeed() {
-        return mCyclingSpeed;
-    }
-
-    public void setCyclingSpeed(int cyclingSpeed) {
-        mCyclingSpeed = cyclingSpeed;
-    }
-
-    public int getWalkingSpeed() {
-        return mWalkingSpeed;
-    }
-
-    public void setWalkingSpeed(int walkingSpeed) {
-        mWalkingSpeed = walkingSpeed;
-    }
-
-    @Override
-    public boolean equals(final Object o) {
-        if (this == o) {
-            return true;
+            this.mEnvironmentWeight = weight
         }
 
-        if (o == null || getClass() != o.getClass()) {
-            return false;
+    override fun equals(o: Any?): Boolean {
+        if (this === o) {
+            return true
         }
 
-        Query query = (Query) o;
-        return TextUtils.equals(uuid, query.uuid);
+        if (o == null || javaClass != o.javaClass) {
+            return false
+        }
+
+        val query = o as Query
+        return TextUtils.equals(uuid, query.uuid)
     }
 
-    @Override
-    public int hashCode() {
-        return uuid.hashCode();
+    override fun hashCode(): Int {
+        return uuid.hashCode()
     }
 
-    @Override
-    public int describeContents() {
-        return 0;
+    override fun describeContents(): Int {
+        return 0
     }
 
-    @Override
-    public void writeToParcel(final Parcel dest, final int flags) {
-        dest.writeString(uuid);
-        dest.writeString(mUnit);
-        dest.writeParcelable(mFromLocation, 0);
-        dest.writeParcelable(mToLocation, 0);
-        dest.writeParcelable(timeTag, 0);
-        dest.writeInt(mTimeWeight);
-        dest.writeInt(mBudgetWeight);
-        dest.writeInt(mHassleWeight);
-        dest.writeInt(mEnvironmentWeight);
-        dest.writeParcelable(mRegion, 0);
-        dest.writeInt(mTransferTime);
-        dest.writeInt(mCyclingSpeed);
-        dest.writeInt(mWalkingSpeed);
-        dest.writeStringList(transportModeIds);
-        dest.writeInt(maxWalkingTime);
-        dest.writeStringList(excludedStopCodes);
-        dest.writeInt(mUseWheelchair ? 1 : 0);
+    override fun writeToParcel(dest: Parcel, flags: Int) {
+        dest.writeString(uuid)
+        dest.writeString(mUnit)
+        dest.writeParcelable(fromLocation, 0)
+        dest.writeParcelable(toLocation, 0)
+        dest.writeParcelable(timeTag, 0)
+        dest.writeInt(mTimeWeight)
+        dest.writeInt(mBudgetWeight)
+        dest.writeInt(mHassleWeight)
+        dest.writeInt(mEnvironmentWeight)
+        dest.writeParcelable(region, 0)
+        dest.writeInt(transferTime)
+        dest.writeInt(cyclingSpeed)
+        dest.writeInt(walkingSpeed)
+        dest.writeStringList(transportModeIds)
+        dest.writeInt(maxWalkingTime)
+        dest.writeStringList(excludedStopCodes)
+        dest.writeInt(if (mUseWheelchair) 1 else 0)
     }
 
-    /**
-     * In minutes.
-     * Note that this is only used for XUM project.
-     */
-    public int getMaxWalkingTime() {
-        return maxWalkingTime;
+    fun uuid(): String {
+        return uuid
     }
 
-    /**
-     * In minutes.
-     * Note that this is only used for XUM project.
-     */
-    public void setMaxWalkingTime(int minutes) {
-        this.maxWalkingTime = minutes;
+    fun useWheelchair(): Boolean {
+        return mUseWheelchair
     }
 
-    public String uuid() {
-        return uuid;
+    fun setUseWheelchair(useWheelchair: Boolean) {
+        mUseWheelchair = useWheelchair
     }
 
-    public boolean useWheelchair() {
-        return mUseWheelchair;
+    private fun readTransportModeIds(`in`: Parcel): List<String> {
+        val ids: List<String> = ArrayList()
+        `in`.readStringList(ids)
+        return ids
     }
 
-    public void setUseWheelchair(boolean useWheelchair) {
-        mUseWheelchair = useWheelchair;
-    }
+    companion object {
+        @JvmField
+        val CREATOR: Creator<Query> = object : Creator<Query> {
+            override fun createFromParcel(`in`: Parcel): Query {
+                val query = Query()
+                query.uuid = `in`.readString().orEmpty()
+                query.mUnit = `in`.readString()
+                query.fromLocation = `in`.readParcelable(
+                    Location::class.java.classLoader
+                )
+                query.toLocation = `in`.readParcelable(
+                    Location::class.java.classLoader
+                )
+                query.timeTag = `in`.readParcelable(TimeTag::class.java.classLoader)
 
-    private List<String> readTransportModeIds(Parcel in) {
-        List<String> ids = new ArrayList<>();
-        in.readStringList(ids);
-        return ids;
+                query.mTimeWeight = `in`.readInt()
+                query.mBudgetWeight = `in`.readInt()
+                query.mHassleWeight = `in`.readInt()
+                query.mEnvironmentWeight = `in`.readInt()
+                query.region = `in`.readParcelable(
+                    Region::class.java.classLoader
+                )
+                query.transferTime = `in`.readInt()
+                query.cyclingSpeed = `in`.readInt()
+                query.walkingSpeed = `in`.readInt()
+                query.transportModeIds = query.readTransportModeIds(`in`).toMutableList()
+                query.maxWalkingTime = `in`.readInt()
+
+                val stops: List<String> = ArrayList()
+                `in`.readStringList(stops)
+                query.excludedStopCodes = stops
+
+                query.mUseWheelchair = `in`.readInt() != 0
+                return query
+            }
+
+            override fun newArray(size: Int): Array<Query?> {
+                return arrayOfNulls(size)
+            }
+        }
     }
 }

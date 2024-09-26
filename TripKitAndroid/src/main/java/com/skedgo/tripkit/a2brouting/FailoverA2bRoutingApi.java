@@ -4,7 +4,7 @@ import android.content.res.Resources;
 
 import com.google.gson.Gson;
 import com.skedgo.tripkit.RoutingUserError;
-import com.skedgo.tripkit.common.model.Region;
+import com.skedgo.tripkit.common.model.region.Region;
 import com.skedgo.tripkit.routing.RoutingResponse;
 import com.skedgo.tripkit.routing.TripGroup;
 

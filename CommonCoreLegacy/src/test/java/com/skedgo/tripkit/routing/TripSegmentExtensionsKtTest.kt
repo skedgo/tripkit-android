@@ -1,7 +1,7 @@
 package com.skedgo.tripkit.routing
 
 import androidx.test.ext.junit.runners.AndroidJUnit4
-import com.skedgo.tripkit.common.model.Location
+import com.skedgo.tripkit.common.model.location.Location
 import org.assertj.core.api.Java6Assertions.assertThat
 import org.joda.time.DateTime
 import org.joda.time.DateTimeZone
@@ -12,7 +12,8 @@ import org.junit.runner.RunWith
 class TripSegmentExtensionsKtTest {
     @Test
     fun shouldReturnZonedStartDateTimeWithDepartureLocationTimeZone() {
-        val departureLocation = Location()
+        val departureLocation =
+            Location()
         departureLocation.timeZone = "Asia/Bangkok"
 
         val segment = TripSegment()

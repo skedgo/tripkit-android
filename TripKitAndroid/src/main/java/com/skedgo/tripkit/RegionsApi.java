@@ -1,7 +1,7 @@
 package com.skedgo.tripkit;
 
 import com.google.gson.annotations.SerializedName;
-import com.skedgo.tripkit.common.model.RegionsResponse;
+import com.skedgo.tripkit.common.model.region.RegionsResponse;
 
 import io.reactivex.Observable;
 import io.reactivex.Single;

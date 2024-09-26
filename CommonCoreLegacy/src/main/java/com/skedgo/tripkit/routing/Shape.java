@@ -4,7 +4,7 @@ import android.os.Parcel;
 import android.os.Parcelable;
 
 import com.google.gson.annotations.SerializedName;
-import com.skedgo.tripkit.common.model.ServiceStop;
+import com.skedgo.tripkit.common.model.stop.ServiceStop;
 
 import java.util.List;
 

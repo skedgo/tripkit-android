@@ -6,7 +6,7 @@ import androidx.collection.ArrayMap
 import com.skedgo.tripkit.a2brouting.FailoverA2bRoutingApi
 import com.skedgo.tripkit.a2brouting.RouteService
 import com.skedgo.tripkit.a2brouting.ToWeightingProfileString
-import com.skedgo.tripkit.common.model.Location
+import com.skedgo.tripkit.common.model.location.Location
 import com.skedgo.tripkit.common.model.Query
 import com.skedgo.tripkit.routing.TripGroup
 import com.skedgo.tripkit.tsp.RegionInfoRepository
@@ -40,11 +40,11 @@ internal class RouteServiceImpl(
 
                 val region = subQuery.region
 
-                val baseUrls = region!!.urLs
+                val baseUrls = region?.getURLs()
                 val modes = transportModeFilter.getFilteredMode(subQuery.transportModeIds)
 
                 val excludeStops = subQuery.excludedStopCodes
-                val avoidModes = region.transportModeIds.orEmpty().map { it }
+                val avoidModes = region?.transportModeIds.orEmpty().map { it }
                     .filter { transportModeFilter.avoidTransportMode(it) }
 
                 val options = toOptions(subQuery)
@@ -87,7 +87,7 @@ internal class RouteServiceImpl(
         options["to"] = arrivalCoordinates
         options["arriveBefore"] = arriveBefore.toString()
         options["departAfter"] = departAfter.toString()
-        options["unit"] = unit
+        options["unit"] = unit ?: ""
         options["v"] = "12"
         options["tt"] = transferTime.toString()
         options["ws"] = walkingSpeed.toString()

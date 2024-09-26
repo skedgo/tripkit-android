@@ -1,6 +1,6 @@
 package com.skedgo.tripkit.tsp;
 
-import com.skedgo.tripkit.common.model.Region;
+import com.skedgo.tripkit.common.model.region.Region;
 import com.skedgo.tripkit.data.tsp.RegionInfo;
 
 import java.util.List;

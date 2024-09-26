@@ -5,8 +5,8 @@ import android.text.TextUtils;
 
 import com.google.gson.JsonObject;
 import com.google.gson.annotations.SerializedName;
-import com.skedgo.tripkit.common.model.ITimeRange;
-import com.skedgo.tripkit.common.model.Location;
+import com.skedgo.tripkit.common.model.time.ITimeRange;
+import com.skedgo.tripkit.common.model.location.Location;
 import com.skedgo.tripkit.common.model.TransportMode;
 
 import org.joda.time.format.ISODateTimeFormat;

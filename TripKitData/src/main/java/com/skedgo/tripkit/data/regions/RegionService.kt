@@ -1,7 +1,7 @@
 package com.skedgo.tripkit.data.regions
 
-import com.skedgo.tripkit.common.model.Location
-import com.skedgo.tripkit.common.model.Region
+import com.skedgo.tripkit.common.model.location.Location
+import com.skedgo.tripkit.common.model.region.Region
 import com.skedgo.tripkit.common.model.TransportMode
 import com.skedgo.tripkit.data.tsp.Paratransit
 import com.skedgo.tripkit.data.tsp.RegionInfo

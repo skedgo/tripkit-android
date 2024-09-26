@@ -1,6 +1,6 @@
 package com.skedgo.tripkit.booking;
 
-import com.skedgo.tripkit.common.model.Region;
+import com.skedgo.tripkit.common.model.region.Region;
 
 import org.junit.Before;
 import org.junit.Test;

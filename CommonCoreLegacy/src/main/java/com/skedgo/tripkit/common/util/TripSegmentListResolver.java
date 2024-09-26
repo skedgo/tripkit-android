@@ -4,7 +4,7 @@ import android.content.res.Resources;
 import android.text.TextUtils;
 
 import com.skedgo.tripkit.common.R;
-import com.skedgo.tripkit.common.model.Location;
+import com.skedgo.tripkit.common.model.location.Location;
 import com.skedgo.tripkit.routing.SegmentType;
 import com.skedgo.tripkit.routing.TripSegment;
 import com.skedgo.tripkit.routing.Visibilities;

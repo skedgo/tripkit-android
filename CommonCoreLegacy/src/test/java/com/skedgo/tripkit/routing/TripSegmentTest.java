@@ -3,9 +3,9 @@ package com.skedgo.tripkit.routing;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonObject;
-import com.skedgo.tripkit.common.model.GsonAdaptersBooking;
-import com.skedgo.tripkit.common.model.ImmutableBooking;
-import com.skedgo.tripkit.common.model.Location;
+import com.skedgo.tripkit.common.model.booking.GsonAdaptersBooking;
+import com.skedgo.tripkit.common.model.booking.ImmutableBooking;
+import com.skedgo.tripkit.common.model.location.Location;
 import com.skedgo.tripkit.common.util.LowercaseEnumTypeAdapterFactory;
 
 import org.apache.commons.io.IOUtils;

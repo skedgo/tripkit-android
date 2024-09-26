@@ -4,8 +4,8 @@ import android.content.ContentValues;
 import android.database.sqlite.SQLiteDatabase;
 
 import com.google.gson.Gson;
-import com.skedgo.tripkit.common.model.Region;
-import com.skedgo.tripkit.common.model.RegionsResponse;
+import com.skedgo.tripkit.common.model.region.Region;
+import com.skedgo.tripkit.common.model.region.RegionsResponse;
 import com.skedgo.tripkit.common.model.TransportMode;
 
 import java.util.ArrayList;
@@ -36,7 +36,7 @@ final class OnSubscribeSaveRegionsResponse implements ObservableOnSubscribe<Void
             database.delete(Tables.REGIONS.getName(), null, null);
             database.delete(Tables.TRANSPORT_MODES.getName(), null, null);
 
-            final ArrayList<Region> regions = response.getRegions();
+            final ArrayList<Region> regions = response.regions;
             if (regions != null) {
                 for (Region region : regions) {
                     database.insert(

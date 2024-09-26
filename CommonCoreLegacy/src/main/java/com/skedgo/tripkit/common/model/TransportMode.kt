@@ -1,173 +1,78 @@
-package com.skedgo.tripkit.common.model;
+package com.skedgo.tripkit.common.model
 
-import android.text.TextUtils;
+import androidx.annotation.DrawableRes
+import com.google.gson.annotations.SerializedName
+import com.skedgo.tripkit.common.R
+import com.skedgo.tripkit.routing.ServiceColor
 
-import com.google.gson.annotations.SerializedName;
-import com.skedgo.tripkit.common.R;
-import com.skedgo.tripkit.routing.ServiceColor;
+data class TransportMode(
+    @SerializedName("id") var id: String = "",
+    @SerializedName("URL") var url: String? = null,
+    @SerializedName("title") var title: String? = null,
+    @SerializedName("icon") var iconId: String? = null,
+    @SerializedName("darkIcon") var darkIcon: String? = null,
+    @SerializedName("implies") var implies: ArrayList<String>? = null,
+    @SerializedName("required") var isRequired: Boolean = false,
+    @SerializedName("color") var color: ServiceColor? = null
+) {
 
-import java.util.ArrayList;
-
-import androidx.annotation.DrawableRes;
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-
-public class TransportMode {
-    public static final String MIDDLE_FIX_CAR = "car-s";
-    public static final String MIDDLE_FIX_BIC = "bic-s";
-
-    public static final String ID_WALK = "wa_wal";
-    public static final String ID_TAXI = "ps_tax";
-    public static final String ID_AIR = "in_air";
-    public static final String ID_SHUFFLE = "ps_shu";
-    public static final String ID_TNC = "ps_tnc";
-    public static final String ID_BICYCLE = "cy_bic";
-    public static final String ID_SCHOOL_BUS = "pt_ltd_SCHOOLBUS";
-    public static final String ID_PUBLIC_TRANSPORT = "pt_pub";
-    public static final String ID_MOTORBIKE = "me_mot";
-    public static final String ID_CAR = "me_car";
-    public static final String ID_WHEEL_CHAIR = "wa_whe";
-    public static final String ID_PS_DRT = "ps_drt";
-
-    /**
-     * FIXME: It seems we no longer need this id.
-     * Replacement seems to be 'pt_ltd_SCHOOLBUS'.
-     */
-    public static final String ID_SHUTTLE_BUS = "ps_shu";
-
-    @SerializedName("id")
-    private String id;
-    @SerializedName("URL")
-    private String url;
-    @SerializedName("title")
-    private String title;
-    @SerializedName("icon")
-    private String iconId;
-    @SerializedName("darkIcon")
-    private String darkIcon;
-    @SerializedName("implies")
-    private ArrayList<String> implies;
-    @SerializedName("required")
-    private boolean isRequired;
-    @SerializedName("color")
-    private ServiceColor color;
-
-    public TransportMode() {
-    }
-
-    public static TransportMode fromId(@NonNull String id) {
-        final TransportMode mode = new TransportMode();
-        mode.setId(id);
-        return mode;
-    }
-
-    @DrawableRes
-    public static int getLocalIconResId(@Nullable String identifier) {
-        if (ID_BICYCLE.equals(identifier)) {
-            return R.drawable.ic_bicycle;
-        } else if (ID_WALK.equals(identifier)) {
-            return R.drawable.ic_walk;
-        } else if (ID_PUBLIC_TRANSPORT.equals(identifier)) {
-            return R.drawable.ic_public_transport;
-        } else if (ID_TAXI.equals(identifier)) {
-            return R.drawable.ic_taxi;
-        } else if (ID_SHUTTLE_BUS.equals(identifier) || ID_SCHOOL_BUS.equals(identifier)) {
-            return R.drawable.ic_shuttlebus;
-        } else if (ID_MOTORBIKE.equals(identifier)) {
-            return R.drawable.ic_motorbike;
-        } else if (ID_CAR.equals(identifier)) {
-            return R.drawable.ic_car;
-        } else if (ID_AIR.equals(identifier)) {
-            return R.drawable.ic_aeroplane;
-        } else if (identifier != null && identifier.startsWith("cy_bic-s")) {
-            return R.drawable.ic_bicycle_share;
-        } else if (ID_WHEEL_CHAIR.equals(identifier)) {
-            return R.drawable.ic_wheelchair;
+    override fun equals(other: Any?): Boolean {
+        return if (other is TransportMode) {
+            this.id == other.id
         } else {
-            return 0;
+            false
         }
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (o instanceof TransportMode) {
-            final TransportMode that = (TransportMode) o;
-            return TextUtils.equals(id, that.id);
-        } else {
-            return false;
+    override fun toString(): String {
+        return id
+    }
+
+    companion object {
+        const val MIDDLE_FIX_CAR: String = "car-s"
+        const val MIDDLE_FIX_BIC: String = "bic-s"
+
+        const val ID_WALK: String = "wa_wal"
+        const val ID_TAXI: String = "ps_tax"
+        const val ID_AIR: String = "in_air"
+        const val ID_SHUFFLE: String = "ps_shu"
+        const val ID_TNC: String = "ps_tnc"
+        const val ID_BICYCLE: String = "cy_bic"
+        const val ID_SCHOOL_BUS: String = "pt_ltd_SCHOOLBUS"
+        const val ID_PUBLIC_TRANSPORT: String = "pt_pub"
+        const val ID_MOTORBIKE: String = "me_mot"
+        const val ID_CAR: String = "me_car"
+        const val ID_WHEEL_CHAIR: String = "wa_whe"
+        const val ID_PS_DRT: String = "ps_drt"
+
+        /**
+         * FIXME: It seems we no longer need this id.
+         * Replacement seems to be 'pt_ltd_SCHOOLBUS'.
+         */
+        const val ID_SHUTTLE_BUS: String = "ps_shu"
+
+        @JvmStatic
+        fun fromId(id: String): TransportMode {
+            return TransportMode(id = id)
         }
-    }
 
-    @Nullable
-    public String getURL() {
-        return url;
-    }
+        @JvmStatic
+        @DrawableRes
+        fun getLocalIconResId(identifier: String?): Int {
+            return when {
+                ID_BICYCLE == identifier -> R.drawable.ic_bicycle
+                ID_WALK == identifier -> R.drawable.ic_walk
+                ID_PUBLIC_TRANSPORT == identifier -> R.drawable.ic_public_transport
+                ID_TAXI == identifier -> R.drawable.ic_taxi
+                ID_SHUTTLE_BUS == identifier || ID_SCHOOL_BUS == identifier -> R.drawable.ic_shuttlebus
+                ID_MOTORBIKE == identifier -> R.drawable.ic_motorbike
+                ID_CAR == identifier -> R.drawable.ic_car
+                ID_AIR == identifier -> R.drawable.ic_aeroplane
+                identifier != null && identifier.startsWith("cy_bic-s") -> R.drawable.ic_bicycle_share
+                ID_WHEEL_CHAIR == identifier -> R.drawable.ic_wheelchair
+                else -> 0
 
-    public void setURL(String URL) {
-        url = URL;
-    }
-
-    public String getTitle() {
-        return title;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
-    @Nullable
-    public ArrayList<String> getImplies() {
-        return implies;
-    }
-
-    public void setImplies(ArrayList<String> implies) {
-        this.implies = implies;
-    }
-
-    public boolean isRequired() {
-        return isRequired;
-    }
-
-    public void setRequired(boolean isRequired) {
-        this.isRequired = isRequired;
-    }
-
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
-    }
-
-    @Override
-    public String toString() {
-        return id;
-    }
-
-    public String getIconId() {
-        return iconId;
-    }
-
-    public void setIconId(String iconId) {
-        this.iconId = iconId;
-    }
-
-    @Nullable
-    public ServiceColor getColor() {
-        return color;
-    }
-
-    void setColor(ServiceColor color) {
-        this.color = color;
-    }
-
-    @Nullable
-    public String getDarkIcon() {
-        return darkIcon;
-    }
-
-    public void setDarkIcon(String darkIcon) {
-        this.darkIcon = darkIcon;
+            }
+        }
     }
 }

@@ -2,7 +2,7 @@ package com.skedgo.tripkit.data.locations;
 
 import com.google.gson.Gson;
 import com.google.gson.annotations.SerializedName;
-import com.skedgo.tripkit.common.model.ScheduledStop;
+import com.skedgo.tripkit.common.model.stop.ScheduledStop;
 import com.skedgo.tripkit.data.database.locations.bikepods.BikePodLocationEntity;
 import com.skedgo.tripkit.data.database.locations.carparks.CarParkLocation;
 import com.skedgo.tripkit.data.database.locations.carpods.CarPodLocation;

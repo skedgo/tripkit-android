@@ -3,7 +3,7 @@ package com.skedgo.tripkit.common.util;
 import android.content.Context;
 
 import com.skedgo.tripkit.common.R;
-import com.skedgo.tripkit.common.model.Location;
+import com.skedgo.tripkit.common.model.location.Location;
 import com.skedgo.tripkit.routing.SegmentActionTemplates;
 import com.skedgo.tripkit.routing.TripSegment;
 

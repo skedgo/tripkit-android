@@ -1,7 +1,7 @@
 package com.skedgo.tripkit.alerts;
 
 import com.google.gson.annotations.JsonAdapter;
-import com.skedgo.tripkit.common.model.RealtimeAlert;
+import com.skedgo.tripkit.common.model.realtimealert.RealtimeAlert;
 
 import androidx.annotation.Nullable;
 
