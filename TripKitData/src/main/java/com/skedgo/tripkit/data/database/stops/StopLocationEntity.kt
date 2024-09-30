@@ -65,17 +65,17 @@ fun ModeInfoEntity.toModeInfo(): ModeInfo {
     }
 }
 
-fun ModeInfo.toEntity(): ModeInfoEntity {
+fun ModeInfo?.toEntity(): ModeInfoEntity {
     return ModeInfoEntity().let {
-        it.alt = this.alternativeText
-        it.description = this.description
-        it.identifier = this.id
-        it.localIcon = this.localIconName
-        it.remoteDarkIcon = this.remoteDarkIconName
-        it.remoteIcon = this.remoteIconName
-        it.remoteIconIsTemplate = this.remoteIconIsTemplate
-        it.remoteIconIsBranding = this.remoteIconIsBranding
-        it.color = this.color?.let {
+        it.alt = this?.alternativeText
+        it.description = this?.description
+        it.identifier = this?.id
+        it.localIcon = this?.localIconName
+        it.remoteDarkIcon = this?.remoteDarkIconName
+        it.remoteIcon = this?.remoteIconName
+        it.remoteIconIsTemplate = this?.remoteIconIsTemplate ?: false
+        it.remoteIconIsBranding = this?.remoteIconIsBranding ?: false
+        it.color = this?.color?.let {
             ServiceColorEntity().apply {
                 this.red = it.red
                 this.green = it.green
@@ -89,11 +89,11 @@ fun ModeInfo.toEntity(): ModeInfoEntity {
 fun ScheduledStop.toEntity(): StopLocationEntity {
     return StopLocationEntity().let {
         it.address = this.address
-        it.code = this.code
+        it.code = this.code.orEmpty()
         it.popularify = this.popularity
-        it.name = this.name
-        it.services = this.services
-        it.stopType = this.type.name
+        it.name = this.name.orEmpty()
+        it.services = this.services.orEmpty()
+        it.stopType = this.type?.name.orEmpty()
         it.timeZone = this.timeZone
         it.wheelchairAccessible = this.wheelchairAccessible ?: false
         it.lat = this.lat

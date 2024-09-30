@@ -1,342 +1,223 @@
-package com.skedgo.tripkit.common.model.stop;
+package com.skedgo.tripkit.common.model.stop
 
-import android.os.Parcel;
-import android.text.TextUtils;
+import android.os.Parcel
+import android.os.Parcelable.Creator
+import android.text.TextUtils
+import androidx.annotation.DrawableRes
+import com.google.gson.annotations.SerializedName
+import com.skedgo.tripkit.common.R
+import com.skedgo.tripkit.common.model.location.Location
+import com.skedgo.tripkit.common.model.stop.StopType.BUS
+import com.skedgo.tripkit.common.model.stop.StopType.CABLECAR
+import com.skedgo.tripkit.common.model.stop.StopType.Companion.from
+import com.skedgo.tripkit.common.model.stop.StopType.FERRY
+import com.skedgo.tripkit.common.model.stop.StopType.MONORAIL
+import com.skedgo.tripkit.common.model.stop.StopType.PARKING
+import com.skedgo.tripkit.common.model.stop.StopType.SUBWAY
+import com.skedgo.tripkit.common.model.stop.StopType.TRAIN
+import com.skedgo.tripkit.common.model.stop.StopType.TRAM
+import com.skedgo.tripkit.routing.ModeInfo
+import com.skedgo.tripkit.routing.VehicleMode
 
-import com.google.gson.annotations.SerializedName;
-import com.skedgo.tripkit.common.R;
-import com.skedgo.tripkit.common.model.location.Location;
-import com.skedgo.tripkit.routing.ModeInfo;
-import com.skedgo.tripkit.routing.VehicleMode;
+class ScheduledStop : Location {
+    var stopId: Long = 0
 
-import java.util.ArrayList;
-import java.util.List;
-
-import androidx.annotation.DrawableRes;
-import androidx.annotation.Nullable;
-
-public class ScheduledStop extends Location {
-
-    public static final Creator<ScheduledStop> CREATOR = new Creator<ScheduledStop>() {
-
-        public ScheduledStop createFromParcel(Parcel in) {
-            Location location = Location.CREATOR.createFromParcel(in);
-
-            ScheduledStop stop = new ScheduledStop(location);
-            stop.mStopId = in.readLong();
-            stop.mCode = in.readString();
-            stop.mEndStopCode = in.readString();
-            stop.mChildren = in.readArrayList(ScheduledStop.class.getClassLoader());
-            stop.mParentId = in.readLong();
-            stop.mShortName = in.readString();
-            stop.mServices = in.readString();
-            stop.mCurrentFilter = in.readString();
-            stop.mType = StopType.from(in.readString());
-            stop.modeInfo = in.readParcelable(ModeInfo.class.getClassLoader());
-            stop.wheelchairAccessible = (Boolean) in.readValue(Boolean.class.getClassLoader());
-            stop.bicycleAccessible = (Boolean) in.readValue(Boolean.class.getClassLoader());
-            stop.alertHashCodes = in.readArrayList(Long.class.getClassLoader());
-            return stop;
-        }
-
-        public ScheduledStop[] newArray(int size) {
-            return new ScheduledStop[size];
-        }
-    };
-    private long mStopId;
     @SerializedName("code")
-    private String mCode;
+    var code: String? = null
+
     @SerializedName("stop_code")
-    private String mEndStopCode;
+    var endStopCode: String? = null
+
     @SerializedName("services")
-    private String mServices;
+    var services: String? = null
+
     @SerializedName("children")
-    private ArrayList<ScheduledStop> mChildren;
+    var children: ArrayList<ScheduledStop>? = null
+
     @SerializedName("shortName")
-    private String mShortName;
+    var shortName: String? = null
+
     @SerializedName("stopType")
-    private StopType mType;
+    var type: StopType? = null
+
     @SerializedName("modeInfo")
-    private ModeInfo modeInfo;
-    private transient long mParentId;
-    private transient String mCurrentFilter;
+    var modeInfo: ModeInfo? = null
+
+    @Transient
+    var parentId: Long = 0
+        private set
+
+    @Transient
+    var currentFilter: String? = null
+
     @SerializedName("wheelchairAccessible")
-    private @Nullable
-    Boolean wheelchairAccessible;
+    var wheelchairAccessible: Boolean? = null
+
     @SerializedName("bicycleAccessible")
-    private @Nullable
-    Boolean bicycleAccessible;
+    var bicycleAccessible: Boolean? = null
+
     @SerializedName("alertHashCodes")
-    private @Nullable
-    ArrayList<Long> alertHashCodes;
+    var alertHashCodes: ArrayList<Long>? = null
 
-    public ScheduledStop() {
-        super();
-    }
+    constructor() : super()
 
-    public ScheduledStop(Location location) {
-        super(location);
-    }
+    constructor(location: Location?) : super(location)
 
-    public static VehicleMode convertStopTypeToVehicleMode(StopType type) {
-        if (type == null) {
-            return null;
-        }
-
-        switch (type) {
-            case TRAIN:
-                return VehicleMode.TRAIN;
-            case BUS:
-                return VehicleMode.BUS;
-            case FERRY:
-                return VehicleMode.FERRY;
-            case MONORAIL:
-                return VehicleMode.MONORAIL;
-            case TRAM:
-                return VehicleMode.TRAM;
-            case SUBWAY:
-                return VehicleMode.SUBWAY;
-            case CABLECAR:
-                return VehicleMode.CABLECAR;
-        }
-
-        return null;
-    }
-
-    @DrawableRes
-    public static int convertStopTypeToTransportModeIcon(StopType type) {
-        if (type == null) {
-            return 0;
-        }
-
-        switch (type) {
-            case TRAIN:
-                return R.drawable.ic_train;
-            case BUS:
-                return R.drawable.ic_bus;
-            case FERRY:
-                return R.drawable.ic_ferry;
-            case MONORAIL:
-                return R.drawable.ic_monorail;
-            case TRAM:
-                return R.drawable.ic_tram;
-            case SUBWAY:
-                return R.drawable.ic_subway;
-            case CABLECAR:
-                return R.drawable.ic_cablecar;
-            default:
-                return 0;
-        }
-    }
-
-    @Override
-    public void fillFrom(Location location) {
+    override fun fillFrom(location: Location?) {
         if (location == null) {
-            return;
+            return
         }
 
-        super.fillFrom(location);
-        if (location instanceof ScheduledStop) {
-            ScheduledStop other = (ScheduledStop) location;
-            mStopId = other.mStopId;
-            mCode = other.mCode;
-            mEndStopCode = other.mEndStopCode;
-            mServices = other.mServices;
-            mChildren = other.mChildren;
-            mShortName = other.mShortName;
-            mType = other.mType;
-            modeInfo = other.modeInfo;
-            mParentId = other.mParentId;
-            mCurrentFilter = other.mCurrentFilter;
-            wheelchairAccessible = other.wheelchairAccessible;
-            bicycleAccessible = other.bicycleAccessible;
-            alertHashCodes = other.alertHashCodes;
+        super.fillFrom(location)
+        if (location is ScheduledStop) {
+            val other = location
+            stopId = other.stopId
+            this.code = other.code
+            endStopCode = other.endStopCode
+            services = other.services
+            children = other.children
+            shortName = other.shortName
+            type = other.type
+            modeInfo = other.modeInfo
+            parentId = other.parentId
+            currentFilter = other.currentFilter
+            wheelchairAccessible = other.wheelchairAccessible
+            bicycleAccessible = other.bicycleAccessible
+            alertHashCodes = other.alertHashCodes
         }
     }
 
-    public long getStopId() {
-        return mStopId;
+    fun hasChildren(): Boolean {
+        return children != null && !children!!.isEmpty()
     }
 
-    public void setStopId(long stopId) {
-        mStopId = stopId;
-    }
+    val isParent: Boolean
+        /**
+         * Alias of [.hasChildren]. If a stop has children, it's a parent stop.
+         */
+        get() = hasChildren()
 
-    public String getCode() {
-        return mCode;
-    }
-
-    public void setCode(String code) {
-        mCode = code;
-    }
-
-    public ArrayList<ScheduledStop> getChildren() {
-        return mChildren;
-    }
-
-    public void setChildren(ArrayList<ScheduledStop> children) {
-        mChildren = children;
-    }
-
-    public String getServices() {
-        return mServices;
-    }
-
-    public void setServices(String services) {
-        mServices = services;
-    }
-
-    public long getParentId() {
-        return mParentId;
-    }
-
-    public String getShortName() {
-        return mShortName;
-    }
-
-    public void setShortName(String shortName) {
-        mShortName = shortName;
-    }
-
-    public ModeInfo getModeInfo() {
-        return modeInfo;
-    }
-
-    public void setModeInfo(ModeInfo modeInfo) {
-        this.modeInfo = modeInfo;
-    }
-
-    public StopType getType() {
-        return mType;
-    }
-
-    public void setType(StopType type) {
-        mType = type;
-    }
-
-    public boolean hasChildren() {
-        return mChildren != null && !mChildren.isEmpty();
-    }
-
-    /**
-     * Alias of {@link #hasChildren()}. If a stop has children, it's a parent stop.
-     */
-    public boolean isParent() {
-        return hasChildren();
-    }
-
-    public void setParent(long parent) {
-        mParentId = parent;
-    }
-
-    @Nullable
-    public ArrayList<Long> getAlertHashCodes() {
-        return alertHashCodes;
-    }
-
-    public void setAlertHashCodes(@Nullable ArrayList<Long> alertHashCodes) {
-        this.alertHashCodes = alertHashCodes;
-    }
-
-    /**
-     * This was deprecated. {@link #isParent()} is now a deriving property of {@link #getChildren()}.
-     * If a stop has children, it's a parent stop.
-     * <p/>
-     * TODO: Remove it.
-     */
-    @Deprecated
-    public void setIsParent(boolean isParent) {
-    }
-
-    public String getCurrentFilter() {
-        return mCurrentFilter;
-    }
-
-    public void setCurrentFilter(String filter) {
-        mCurrentFilter = filter;
-    }
-
-    @Override
-    public int getLocationType() {
-        return Location.TYPE_SCHEDULED_STOP;
-    }
-
-    @Nullable
-    public Boolean getWheelchairAccessible() {
-        return wheelchairAccessible;
-    }
-
-    public void setWheelchairAccessible(@Nullable Boolean wheelchairAccessible) {
-        this.wheelchairAccessible = wheelchairAccessible;
-    }
-
-    @Nullable
-    public Boolean getBicycleAccessible() {
-        return bicycleAccessible;
-    }
-
-    public void setBicycleAccessible(@Nullable Boolean bicycleAccessible) {
-        this.bicycleAccessible = bicycleAccessible;
-    }
-
-    public String getEndStopCode() {
-        return mEndStopCode;
-    }
-
-    public void setEndStopCode(String endStopCode) {
-        mEndStopCode = endStopCode;
-    }
-
-    public List<String> getEmbarkationStopCode() {
-        ArrayList<String> list = new ArrayList<>();
-        list.add(getCode());
-        return list;
-    }
-
-    public List<String> getDisembarkationStopCode() {
-        if (getEndStopCode() != null) {
-            ArrayList<String> list = new ArrayList<>();
-            list.add(getEndStopCode());
-            return list;
-        }
-        return null;
-    }
-
-    @Override
-    public boolean equals(Object obj) {
-        if (this == obj) {
-            return true;
+    override var locationType: Int
+        get() = TYPE_SCHEDULED_STOP
+        set(locationType) {
+            super.locationType = locationType
         }
 
-        if (obj != null && (obj instanceof ScheduledStop)) {
-            ScheduledStop stop = (ScheduledStop) obj;
-            return TextUtils.equals(mCode, stop.mCode);
+    val embarkationStopCode: List<String>
+        get() {
+            val list = ArrayList<String?>()
+            list.add(this.code)
+            return list.filterNotNull()
+        }
+
+    val disembarkationStopCode: List<String>?
+        get() {
+            if (endStopCode != null) {
+                val list = ArrayList<String?>()
+                list.add(endStopCode)
+                return list.filterNotNull()
+            }
+            return null
+        }
+
+    override fun equals(obj: Any?): Boolean {
+        if (this === obj) {
+            return true
+        }
+
+        if (obj != null && (obj is ScheduledStop)) {
+            return TextUtils.equals(this.code, obj.code)
         } else {
-            return false;
+            return false
         }
     }
 
-    @Override
-    public int hashCode() {
-        return mCode != null ? mCode.hashCode() : 0;
+    override fun hashCode(): Int {
+        return if (this.code != null) code.hashCode() else 0
     }
 
-    @Override
-    public void writeToParcel(Parcel out, int flags) {
-        super.writeToParcel(out, flags);
+    override fun writeToParcel(out: Parcel, flags: Int) {
+        super.writeToParcel(out, flags)
 
-        out.writeLong(mStopId);
-        out.writeString(mCode);
-        out.writeString(mEndStopCode);
-        out.writeList(mChildren);
-        out.writeLong(mParentId);
-        out.writeString(mShortName);
-        out.writeString(mServices);
-        out.writeString(mCurrentFilter);
-        out.writeString(mType == null ? null : mType.toString());
-        out.writeParcelable(modeInfo, 0);
-        out.writeValue(wheelchairAccessible);
-        out.writeValue(bicycleAccessible);
-        out.writeList(alertHashCodes);
+        out.writeLong(stopId)
+        out.writeString(this.code)
+        out.writeString(endStopCode)
+        out.writeList(children)
+        out.writeLong(parentId)
+        out.writeString(shortName)
+        out.writeString(services)
+        out.writeString(currentFilter)
+        out.writeString(if (type == null) null else type.toString())
+        out.writeParcelable(modeInfo, 0)
+        out.writeValue(wheelchairAccessible)
+        out.writeValue(bicycleAccessible)
+        out.writeList(alertHashCodes)
+    }
+
+    companion object {
+        @JvmField
+        val CREATOR: Creator<ScheduledStop> = object : Creator<ScheduledStop> {
+            override fun createFromParcel(`in`: Parcel): ScheduledStop {
+                val location = Location.CREATOR.createFromParcel(`in`)
+
+                val stop = ScheduledStop(location)
+                stop.stopId = `in`.readLong()
+                stop.code = `in`.readString()
+                stop.endStopCode = `in`.readString()
+                stop.children = `in`.readArrayList(ScheduledStop::class.java.classLoader) as? ArrayList<ScheduledStop>
+                stop.parentId = `in`.readLong()
+                stop.shortName = `in`.readString()
+                stop.services = `in`.readString()
+                stop.currentFilter = `in`.readString()
+                stop.type = from(`in`.readString()!!)
+                stop.modeInfo = `in`.readParcelable(ModeInfo::class.java.classLoader)
+                stop.wheelchairAccessible =
+                    `in`.readValue(Boolean::class.java.classLoader) as Boolean?
+                stop.bicycleAccessible = `in`.readValue(Boolean::class.java.classLoader) as Boolean?
+                stop.alertHashCodes = `in`.readArrayList(Long::class.java.classLoader) as? ArrayList<Long>
+                return stop
+            }
+
+            override fun newArray(size: Int): Array<ScheduledStop?> {
+                return arrayOfNulls(size)
+            }
+        }
+
+        @JvmStatic
+        fun convertStopTypeToVehicleMode(type: StopType?): VehicleMode? {
+            if (type == null) {
+                return null
+            }
+
+            when (type) {
+                TRAIN -> return VehicleMode.TRAIN
+                BUS -> return VehicleMode.BUS
+                FERRY -> return VehicleMode.FERRY
+                MONORAIL -> return VehicleMode.MONORAIL
+                TRAM -> return VehicleMode.TRAM
+                SUBWAY -> return VehicleMode.SUBWAY
+                CABLECAR -> return VehicleMode.CABLECAR
+                else -> return null
+            }
+            return null
+        }
+
+        @DrawableRes
+        fun convertStopTypeToTransportModeIcon(type: StopType?): Int {
+            if (type == null) {
+                return 0
+            }
+
+            return when (type) {
+                TRAIN -> R.drawable.ic_train
+                BUS -> R.drawable.ic_bus
+                FERRY -> R.drawable.ic_ferry
+                MONORAIL -> R.drawable.ic_monorail
+                TRAM -> R.drawable.ic_tram
+                SUBWAY -> R.drawable.ic_subway
+                CABLECAR -> R.drawable.ic_cablecar
+                else -> 0
+            }
+        }
     }
 }

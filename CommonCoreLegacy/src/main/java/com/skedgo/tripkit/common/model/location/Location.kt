@@ -1,644 +1,315 @@
-package com.skedgo.tripkit.common.model.location;
+package com.skedgo.tripkit.common.model.location
 
-import android.os.Parcel;
-import android.os.Parcelable;
-import android.text.TextUtils;
+import android.os.Parcel
+import android.os.Parcelable
+import android.os.Parcelable.Creator
+import android.text.TextUtils
+import com.google.gson.annotations.SerializedName
+import com.skedgo.tripkit.common.util.StringUtils
+import com.skedgo.tripkit.regionrouting.data.Operator
+import com.skedgo.tripkit.regionrouting.data.RouteDetails
+import kotlin.math.asin
+import kotlin.math.atan2
+import kotlin.math.cos
+import kotlin.math.sin
+import kotlin.math.sqrt
 
-import com.google.gson.annotations.SerializedName;
-import com.skedgo.tripkit.common.util.StringUtils;
-import com.skedgo.tripkit.regionrouting.data.Operator;
-import com.skedgo.tripkit.regionrouting.data.RouteDetails;
-import com.skedgo.tripkit.routing.LocationExtensionsKt;
-
-import java.util.ArrayList;
-import java.util.List;
-
-import androidx.annotation.Nullable;
-
-public class Location implements Parcelable {
-    /**
-     * No known location type
-     */
-    public static final int TYPE_UNKNOWN = -1;
-
-    /**
-     * The location is a scheduled stop
-     */
-    public static final int TYPE_SCHEDULED_STOP = 1;
-
-    /**
-     * Location is a stop on a user's trip
-     */
-    public static final int TYPE_SERVICE_STOP = 2;
-
-    /**
-     * Location comes from previous search/geocoding history or long-pressed
-     */
-    public static final int TYPE_HISTORY = 3;
-
-    /**
-     * Location comes from users calendar
-     */
-    public static final int TYPE_CALENDAR = 4;
-
-    /**
-     * Location comes from a contact in the users address book
-     */
-    public static final int TYPE_CONTACT = 5;
-
-    /**
-     * Location is info from the users personal contact card (home/work address etc)
-     */
-    public static final int TYPE_PERSONAL = 6;
-
-    /**
-     * Location is info from the users personal contact card (home/work address etc)
-     */
-    public static final int TYPE_HOME = 7; //so we never delete this location
-    public static final int TYPE_WORK = 8;
-
-    public static final int TYPE_CURRENT_LOCATION = 9; // Doesn't actually resolve to anything, but makes life easier for keeping track
-
-    public static final int TYPE_E_BIKE = 10; //Neuron or Lime
-
-    /**
-     * What3Words type
-     */
-    public static final int TYPE_W3W = 9;
-
-    public static final int TYPE_SCHOOL = 11;
-
-    public static final int NO_BEARING = Integer.MAX_VALUE;
-    public static final double ZERO_LAT = 0.0;
-    public static final double ZERO_LON = 0.0;
-    /**
-     * Source
-     */
-    public static final String TRIPGO = "tripgo";
-    public static final String LOCAL = "local";
-    public static final String GOOGLE = "google";
-    public static final String FOURSQUARE = "foursquare";
-    public static final Creator<Location> CREATOR = new Creator<Location>() {
-        public Location createFromParcel(Parcel in) {
-            Location location = new Location();
-
-            location.mId = in.readLong();
-            location.name = in.readString();
-            location.address = in.readString();
-            location.lat = in.readDouble();
-            location.lon = in.readDouble();
-            location.exact = in.readInt() == 1;
-            location.bearing = in.readInt();
-            location.mLocationType = in.readInt();
-            location.mIsFavourite = in.readInt() == 1;
-            location.phoneNumber = in.readString();
-            location.url = in.readString();
-            location.mRatingCount = in.readInt();
-            location.mAverageRating = in.readFloat();
-            location.mRatingImageUrl = in.readString();
-            location.mSource = in.readString();
-            location.mFavouriteSortOrderIndex = in.readInt();
-            location.timeZone = in.readString();
-            location.popularity = in.readInt();
-            location.locationClass = in.readString();
-            location.w3w = in.readString();
-            location.w3wInfoURL = in.readString();
-            location.appUrl = in.readString();
-            location.withExternalApp = in.readInt() == 1;
-            location.region = in.readString();
-
-            List<Operator> operators = new ArrayList<>();
-            in.readTypedList(operators, Operator.CREATOR);
-            location.operators = operators;
-
-            List<RouteDetails> routes = new ArrayList<>();
-            in.readTypedList(routes, RouteDetails.CREATOR);
-
-            List<String> modeIdentifiers = new ArrayList<>();
-            in.readList(modeIdentifiers, String.class.getClassLoader());
-            location.modeIdentifiers = modeIdentifiers;
-
-            return location;
-        }
-
-        public Location[] newArray(int size) {
-            return new Location[size];
-        }
-    };
-    private static final int EARTH_RADIUS_IN_METERS = 6371 * 1000;
-    /**
-     * Locations this close to each other will be considered equal
-     * for the sake of comparing 2 locations
-     */
-    private static final int APPROXIMATE_EQUALITY_METERS = 30;
-    /**
-     * relax the diameter
-     */
-    private static final int APPROXIMATE_EQUALITY_METERS_LOOSE = 60;
-
-    protected long mId;
-    protected boolean mIsFavourite;
-    protected int mLocationType;
-    protected int mFavouriteSortOrderIndex;
-    protected int mRatingCount;
-    protected float mAverageRating;
-    protected String mRatingImageUrl;
-    protected String mSource;
+open class Location() : Parcelable {
+    var mId: Long = 0
+    var id: String = ""
+    var isFavourite: Boolean = false
+        protected set
+    open var locationType: Int = TYPE_UNKNOWN
+    var favouriteSortOrderIndex: Int = 0
+    var ratingCount: Int
+    var averageRating: Float
+    var ratingImageUrl: String? = null
+    var source: String? = null
 
     @SerializedName("name")
-    private String name;
+    var name: String? = null
+
     @SerializedName("address")
-    private String address;
+    var address: String? = null
+
     @SerializedName("lat")
-    private double lat;
+    var lat: Double
+
     @SerializedName("lng")
-    private double lon;
+    var lon: Double
+
     @SerializedName("exact")
-    private boolean exact;
+    var exact = false
+
     @SerializedName("bearing")
-    private int bearing;
+    var bearing: Int
+
     @SerializedName("region")
-    private String region;
+    var region: String? = null
+
     @SerializedName("phone")
-    private String phoneNumber;
+    var phoneNumber: String? = null
+
     @SerializedName("URL")
-    private String url;
+    var url: String? = null
+
     @SerializedName("timezone")
-    private String timeZone;
+    var timeZone: String? = null
+
     @SerializedName("popularity")
-    private int popularity;
+    var popularity = 0
+
     @SerializedName("class")
-    private String locationClass;
+    var locationClass: String? = null
+
     @SerializedName("w3w")
-    private String w3w;
+    var w3w: String? = null
+
     @SerializedName("w3wInfoURL")
-    private String w3wInfoURL;
+    var w3wInfoURL: String? = null
+
     @SerializedName("appUrl")
-    private String appUrl;
+    var appUrl: String? = null
+
     @SerializedName("withExternalApp")
-    private boolean withExternalApp;
-    private List<Operator> operators;
-    private List<RouteDetails> routes;
+    var withExternalApp = false
+    var operators: List<Operator>? = null
+    val routes: List<RouteDetails>? = null
 
-    private List<String> modeIdentifiers;
+    var modeIdentifiers: List<String>? = null
 
-    public Location() {
-        lat = ZERO_LAT;
-        lon = ZERO_LON;
-        mId = 0;
-        mAverageRating = -1;
-        mRatingCount = -1;
-        mLocationType = TYPE_UNKNOWN;
-        bearing = NO_BEARING;
+    init {
+        lat = ZERO_LAT
+        lon = ZERO_LON
+        averageRating = -1f
+        ratingCount = -1
+        bearing = NO_BEARING
     }
 
-    public Location(Location other) {
-        this();
-        fillFrom(other);
+    constructor(other: Location?) : this() {
+        fillFrom(other)
     }
 
-    public Location(double lat, double lon) {
-        this();
-        this.lat = lat;
-        this.lon = lon;
+    constructor(lat: Double, lon: Double) : this() {
+        this.lat = lat
+        this.lon = lon
     }
 
-    public static boolean isValidLocation(Location loc) {
-        return (loc != null) && loc.isNonZeroLocation();
+    override fun equals(o: Any?): Boolean {
+        return this === o || o is Location && equalTo(o)
     }
 
-    private static boolean equals(Object left, Object right) {
-        return left == right || (left != null && left.equals(right));
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        return this == o || o instanceof Location && equalTo((Location) o);
-    }
-
-    public void fillFrom(Location other) {
+    open fun fillFrom(other: Location?) {
         if (other == null) {
-            return;
+            return
         }
 
-        mId = other.mId;
-        name = other.name;
-        address = other.address;
-        lat = other.lat;
-        lon = other.lon;
-        exact = other.exact;
-        bearing = other.bearing;
-        mLocationType = other.mLocationType;
-        mIsFavourite = other.mIsFavourite;
-        phoneNumber = other.phoneNumber;
-        url = other.url;
-        mRatingCount = other.mRatingCount;
-        mAverageRating = other.mAverageRating;
-        mRatingImageUrl = other.mRatingImageUrl;
-        mSource = other.mSource;
-        mFavouriteSortOrderIndex = other.mFavouriteSortOrderIndex;
-        popularity = other.popularity;
-        locationClass = other.locationClass;
-        w3w = other.w3w;
-        w3wInfoURL = other.w3wInfoURL;
-        appUrl = other.appUrl;
-        withExternalApp = other.withExternalApp;
-        region = other.region;
+        mId = other.mId
+        name = other.name
+        address = other.address
+        lat = other.lat
+        lon = other.lon
+        exact = other.exact
+        bearing = other.bearing
+        locationType = other.locationType
+        isFavourite = other.isFavourite
+        phoneNumber = other.phoneNumber
+        url = other.url
+        ratingCount = other.ratingCount
+        averageRating = other.averageRating
+        ratingImageUrl = other.ratingImageUrl
+        source = other.source
+        favouriteSortOrderIndex = other.favouriteSortOrderIndex
+        popularity = other.popularity
+        locationClass = other.locationClass
+        w3w = other.w3w
+        w3wInfoURL = other.w3wInfoURL
+        appUrl = other.appUrl
+        withExternalApp = other.withExternalApp
+        region = other.region
     }
 
-    public long getId() {
-        return mId;
+    fun isFavourite(favourite: Boolean) {
+        isFavourite = favourite
     }
 
-    public void setId(long id) {
-        mId = id;
+    fun hasValidCoordinates(): Boolean {
+        return !(lat == 0.0 && lon == 0.0)
     }
 
-    public boolean isFavourite() {
-        return mIsFavourite;
-    }
+    val coordinateString: String
+        get() = "(" + round(lat) + ", " + round(lon) + ")"
 
-    public void isFavourite(boolean favourite) {
-        mIsFavourite = favourite;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getAddress() {
-        return address;
-    }
-
-    public void setAddress(String address) {
-        this.address = address;
-    }
-
-    public double getLat() {
-        return lat;
-    }
-
-    public void setLat(double lat) {
-        this.lat = lat;
-    }
-
-    public double getLon() {
-        return lon;
-    }
-
-    public void setLon(double lon) {
-        this.lon = lon;
-    }
-
-    public boolean isExact() {
-        return exact;
-    }
-
-    public void setExact(boolean exact) {
-        this.exact = exact;
-    }
-
-    public int getBearing() {
-        return bearing;
-    }
-
-    public void setBearing(int bearing) {
-        this.bearing = bearing;
-    }
-
-    public boolean hasValidCoordinates() {
-        return !(lat == 0 && lon == 0);
-    }
-
-    public int getLocationType() {
-        return mLocationType;
-    }
-
-    public void setLocationType(int type) {
-        mLocationType = type;
-    }
-
-    public String getPhoneNumber() {
-        return phoneNumber;
-    }
-
-    public void setPhoneNumber(String phoneNumber) {
-        this.phoneNumber = phoneNumber;
-    }
-
-    public String getUrl() {
-        return url;
-    }
-
-    public void setUrl(String url) {
-        this.url = url;
-    }
-
-    public int getRatingCount() {
-        return mRatingCount;
-    }
-
-    public void setRatingCount(int ratingCount) {
-        mRatingCount = ratingCount;
-    }
-
-    public float getAverageRating() {
-        return mAverageRating;
-    }
-
-    public void setAverageRating(float averageRating) {
-        mAverageRating = averageRating;
-    }
-
-    public String getRatingImageUrl() {
-        return mRatingImageUrl;
-    }
-
-    public void setRatingImageUrl(String ratingImageUrl) {
-        mRatingImageUrl = ratingImageUrl;
-    }
-
-    public String getSource() {
-        return mSource;
-    }
-
-    public void setSource(String source) {
-        mSource = source;
-    }
-
-    public int getFavouriteSortOrderIndex() {
-        return mFavouriteSortOrderIndex;
-    }
-
-    public void setFavouriteSortOrderIndex(int favouriteSortOrderIndex) {
-        mFavouriteSortOrderIndex = favouriteSortOrderIndex;
-    }
-
-    public String getCoordinateString() {
-        return "(" + round(lat) + ", " + round(lon) + ")";
-    }
-
-    public int distanceTo(Location location) {
-        if (location == null || !location.hasValidCoordinates()) {
-            return -1;
+    fun distanceTo(location: Location?): Int {
+        return if (location == null || !location.hasValidCoordinates()) {
+            -1
         } else {
-            return distanceTo(location.lat, location.lon);
+            distanceTo(location.lat, location.lon)
         }
     }
 
-    public boolean isApproximatelyAt(Location other) {
-        return distanceTo(other) < APPROXIMATE_EQUALITY_METERS;
+    fun isApproximatelyAt(other: Location?): Boolean {
+        return distanceTo(other) < APPROXIMATE_EQUALITY_METERS
     }
 
-    public boolean isLooselyApproximatelyAt(Location other) {
-        return distanceTo(other) < APPROXIMATE_EQUALITY_METERS_LOOSE;
+    fun isLooselyApproximatelyAt(other: Location?): Boolean {
+        return distanceTo(other) < APPROXIMATE_EQUALITY_METERS_LOOSE
     }
 
-    public boolean isApproximatelyAt(double lat, double lon) {
-        return distanceTo(lat, lon) < APPROXIMATE_EQUALITY_METERS;
+    fun isApproximatelyAt(lat: Double, lon: Double): Boolean {
+        return distanceTo(lat, lon) < APPROXIMATE_EQUALITY_METERS
     }
 
-    public boolean equalsByLatLon(Location _loc) {
-        return _loc != null && _loc.lat == lat && _loc.lon == lon;
+    fun equalsByLatLon(_loc: Location?): Boolean {
+        return _loc != null && _loc.lat == lat && _loc.lon == lon
     }
 
-    public boolean isNonZeroLocation() {
-        return !(lat == ZERO_LAT && lon == ZERO_LON);
-    }
-
-    /**
-     * Use {@link LocationExtensionsKt#getDateTimeZone(Location)} instead.
-     */
-    @Deprecated
-    @Nullable
-    public String getTimeZone() {
-        return timeZone;
-    }
-
-    /**
-     * NOTE: You should only use this setter for testing purpose.
-     */
-    public void setTimeZone(@Nullable String timeZone) {
-        this.timeZone = timeZone;
-    }
-
-    @Nullable
-    public String getLocationClass() {
-        return locationClass;
-    }
-
-    public void setLocationClass(String locationClass) {
-        this.locationClass = locationClass;
-    }
-
-    public int getPopularity() {
-        return popularity;
-    }
-
-    public void setPopularity(int popularity) {
-        this.popularity = popularity;
-    }
-
-    public String getW3w() {
-        return w3w;
-    }
-
-    public void setW3w(String w3w) {
-        this.w3w = w3w;
-    }
-
-    public String getW3wInfoURL() {
-        return w3wInfoURL;
-    }
-
-    public void setW3wInfoURL(String w3wInfoURL) {
-        this.w3wInfoURL = w3wInfoURL;
-    }
-
-    public String getAppUrl() {
-        return appUrl;
-    }
-
-    public void setAppUrl(String appUrl) {
-        this.appUrl = appUrl;
-    }
-
-    public boolean isWithExternalApp() {
-        return withExternalApp;
-    }
-
-    public void setWithExternalApp(boolean withExternalApp) {
-        this.withExternalApp = withExternalApp;
-    }
-
-    public String getRegion() {
-        return region;
-    }
-
-    public void setRegion(String region) {
-        this.region = region;
-    }
-
-    public List<Operator> getOperators() {
-        return operators;
-    }
-
-    public void setOperators(List<Operator> operators) {
-        this.operators = operators;
-    }
-
-    public List<String> getModeIdentifiers() {
-        return modeIdentifiers;
-    }
-
-    public void setModeIdentifiers(List<String> modeIdentifiers) {
-        this.modeIdentifiers = modeIdentifiers;
-    }
+    val isNonZeroLocation: Boolean
+        get() = !(lat == ZERO_LAT && lon == ZERO_LON)
 
     /**
      * Get the distance between this and another point
-     * <p/>
+     *
+     *
      * This implementation was pulled from:
-     * <a href="http://www.codecodex.com/wiki/Calculate_Distance_Between_Two_Points_on_a_Globe#Java">CodeCodex</a>
+     * [CodeCodex](http://www.codecodex.com/wiki/Calculate_Distance_Between_Two_Points_on_a_Globe#Java)
      *
      * @param lat
      * @param lon
-     * @return The distance in meters between <code>this</code> and <code>that</code>
-     * @see <a href="http://en.wikipedia.org/wiki/Haversine_formula">Haversine Formula</a>
+     * @return The distance in meters between `this` and `that`
+     * @see [Haversine Formula](http://en.wikipedia.org/wiki/Haversine_formula)
      */
-    public int distanceTo(double lat, double lon) {
-        double dLat = Math.toRadians(lat - this.lat);
-        double dLon = Math.toRadians(lon - this.lon);
+    fun distanceTo(lat: Double, lon: Double): Int {
+        val dLat = Math.toRadians(lat - this.lat)
+        val dLon = Math.toRadians(lon - this.lon)
 
-        double a = Math.sin(dLat / 2) * Math.sin(dLat / 2) +
-            Math.cos(Math.toRadians(this.lat)) * Math.cos(Math.toRadians(lat)) *
-                Math.sin(dLon / 2) * Math.sin(dLon / 2);
+        val a = sin(dLat / 2) * sin(dLat / 2) + cos(
+            Math.toRadians(this.lat)
+        ) * cos(Math.toRadians(lat)) * sin(dLon / 2) * sin(
+            dLon / 2
+        )
 
-        double c = 2 * Math.asin(Math.sqrt(a));
-        return (int) (EARTH_RADIUS_IN_METERS * c);
+        val c = 2 * asin(sqrt(a))
+        return (EARTH_RADIUS_IN_METERS * c).toInt()
     }
 
     /**
      * @param other
      * @return The bearing from this location to another other
      */
-    public double getBearingTo(Location other) {
-        return getBearingTo(other.getLat(), other.getLon());
+    fun getBearingTo(other: Location): Double {
+        return getBearingTo(other.lat, other.lon)
     }
 
     /**
      * @param lat
      * @param lon
      * @return The bearing from this location to another other
-     * <p/>
+     *
+     *
      * Kudos: http://stackoverflow.com/a/9462757/755332
      */
-    public double getBearingTo(double lat, double lon) {
-        double longitude1 = this.lon;
-        double longitude2 = lon;
+    fun getBearingTo(lat: Double, lon: Double): Double {
+        val longitude1 = this.lon
+        val longitude2 = lon
 
-        double latitude1 = Math.toRadians(this.lat);
-        double latitude2 = Math.toRadians(lat);
+        val latitude1 = Math.toRadians(this.lat)
+        val latitude2 = Math.toRadians(lat)
 
-        double longDiff = Math.toRadians(longitude2 - longitude1);
-        double y = Math.sin(longDiff) * Math.cos(latitude2);
-        double x = Math.cos(latitude1) * Math.sin(latitude2) - Math.sin(latitude1) * Math.cos(latitude2) * Math.cos(longDiff);
+        val longDiff = Math.toRadians(longitude2 - longitude1)
+        val y = sin(longDiff) * cos(latitude2)
+        val x = cos(latitude1) * sin(latitude2) - sin(latitude1) * cos(latitude2) * cos(longDiff)
 
-        return (Math.toDegrees(Math.atan2(y, x)) + 360) % 360;
+        return (Math.toDegrees(atan2(y, x)) + 360) % 360
     }
 
-    @Override
-    public int describeContents() {
-        return 0;
+    override fun describeContents(): Int {
+        return 0
     }
 
-    @Override
-    public void writeToParcel(Parcel out, int flags) {
-        out.writeLong(mId);
-        out.writeString(name);
-        out.writeString(address);
-        out.writeDouble(lat);
-        out.writeDouble(lon);
-        out.writeInt(exact ? 1 : 0);
-        out.writeInt(bearing);
-        out.writeInt(mLocationType);
-        out.writeInt(mIsFavourite ? 1 : 0);
-        out.writeString(phoneNumber);
-        out.writeString(url);
-        out.writeInt(mRatingCount);
-        out.writeFloat(mAverageRating);
-        out.writeString(mRatingImageUrl);
-        out.writeString(mSource);
-        out.writeInt(mFavouriteSortOrderIndex);
-        out.writeString(timeZone);
-        out.writeInt(popularity);
-        out.writeString(locationClass);
-        out.writeString(w3w);
-        out.writeString(w3wInfoURL);
-        out.writeString(appUrl);
-        out.writeInt(withExternalApp ? 1 : 0);
-        out.writeString(region);
-        out.writeTypedList(operators);
-        out.writeTypedList(routes);
-        out.writeList(modeIdentifiers);
+    override fun writeToParcel(out: Parcel, flags: Int) {
+        out.writeLong(mId)
+        out.writeString(name)
+        out.writeString(address)
+        out.writeDouble(lat)
+        out.writeDouble(lon)
+        out.writeInt(if (exact) 1 else 0)
+        out.writeInt(bearing)
+        out.writeInt(locationType)
+        out.writeInt(if (isFavourite) 1 else 0)
+        out.writeString(phoneNumber)
+        out.writeString(url)
+        out.writeInt(ratingCount)
+        out.writeFloat(averageRating)
+        out.writeString(ratingImageUrl)
+        out.writeString(source)
+        out.writeInt(favouriteSortOrderIndex)
+        out.writeString(timeZone)
+        out.writeInt(popularity)
+        out.writeString(locationClass)
+        out.writeString(w3w)
+        out.writeString(w3wInfoURL)
+        out.writeString(appUrl)
+        out.writeInt(if (withExternalApp) 1 else 0)
+        out.writeString(region)
+        out.writeTypedList(operators)
+        out.writeTypedList(routes)
+        out.writeList(modeIdentifiers)
     }
 
-    /**
-     * To present a human-readable name of a location.
-     * Invoke this if we want to present a location to users
-     * (e.g, a pin on a map, location of an event).
-     */
-    public String getDisplayName() {
-        return StringUtils.firstNonEmpty(
-            name != null ? name.trim() : null,
-            address != null ? address.trim() : null,
-            getCoordinateString()
-        );
-    }
+    val displayName: String
+        /**
+         * To present a human-readable name of a location.
+         * Invoke this if we want to present a location to users
+         * (e.g, a pin on a map, location of an event).
+         */
+        get() = StringUtils.firstNonEmpty(
+            if (name != null) name!!.trim { it <= ' ' } else null,
+            if (address != null) address!!.trim { it <= ' ' } else null,
+            coordinateString
+        )
 
-    public String getDisplayAddress() {
-        return StringUtils.firstNonEmpty(
-            address != null ? address.trim() : null,
-            name != null ? name.trim() : null,
-            getCoordinateString()
-        );
-    }
+    val displayAddress: String
+        get() = StringUtils.firstNonEmpty(
+            if (address != null) address!!.trim { it <= ' ' } else null,
+            if (name != null) name!!.trim { it <= ' ' } else null,
+            coordinateString
+        )
 
-    /**
-     * @return name (if a place got a name: station, uni, .etc) or suburb's name (if that's an address)
-     */
-    public String getNameOrApproximateAddress() {
-        if (!TextUtils.isEmpty(name)) {
-            return name.trim();
-        }
-
-        if (!TextUtils.isEmpty(address)) {
-            String[] parts = address.split(",");
-            if (parts.length > 1) {
-                return parts[1].trim();
-            } else {
-                return address.trim();
+    val nameOrApproximateAddress: String?
+        /**
+         * @return name (if a place got a name: station, uni, .etc) or suburb's name (if that's an address)
+         */
+        get() {
+            if (!TextUtils.isEmpty(name)) {
+                return name!!.trim { it <= ' ' }
             }
+
+            if (!TextUtils.isEmpty(address)) {
+                val parts =
+                    address!!.split(",".toRegex()).dropLastWhile { it.isEmpty() }.toTypedArray()
+                return if (parts.size > 1) {
+                    parts[1].trim { it <= ' ' }
+                } else {
+                    address!!.trim { it <= ' ' }
+                }
+            }
+            return null
         }
-        return null;
+
+    protected fun round(d: Double): Double {
+        return Math.round(d * 10000) / 10000.0
     }
 
-    protected double round(double d) {
-        return Math.round(d * 10000) / 10000.0;
-    }
-
-    private boolean equalTo(Location another) {
-        return equals(name, another.name)
-            && equals(address, another.address)
-            && lat == another.lat
-            && lon == another.lon
-            && exact == another.exact
-            && bearing == another.bearing
-            && equals(phoneNumber, another.phoneNumber)
+    private fun equalTo(another: Location): Boolean {
+        return ((equals(name, another.name)
+            && equals(
+            address,
+            another.address
+        )) && lat == another.lat && lon == another.lon && exact == another.exact && bearing == another.bearing && equals(
+            phoneNumber,
+            another.phoneNumber
+        )
             && equals(url, another.url)
             && equals(timeZone, another.timeZone)
             && equals(popularity, another.popularity)
@@ -647,6 +318,148 @@ public class Location implements Parcelable {
             && equals(w3wInfoURL, another.w3wInfoURL)
             && equals(region, another.region)
             && equals(operators, another.operators)
-            && equals(routes, another.routes);
+            && equals(routes, another.routes))
+    }
+
+    override fun hashCode(): Int {
+        var result = mId.hashCode()
+        result = 31 * result + lat.hashCode()
+        result = 31 * result + lon.hashCode()
+        return result
+    }
+
+    companion object {
+        /**
+         * No known location type
+         */
+        const val TYPE_UNKNOWN: Int = -1
+
+        /**
+         * The location is a scheduled stop
+         */
+        const val TYPE_SCHEDULED_STOP: Int = 1
+
+        /**
+         * Location is a stop on a user's trip
+         */
+        const val TYPE_SERVICE_STOP: Int = 2
+
+        /**
+         * Location comes from previous search/geocoding history or long-pressed
+         */
+        const val TYPE_HISTORY: Int = 3
+
+        /**
+         * Location comes from users calendar
+         */
+        const val TYPE_CALENDAR: Int = 4
+
+        /**
+         * Location comes from a contact in the users address book
+         */
+        const val TYPE_CONTACT: Int = 5
+
+        /**
+         * Location is info from the users personal contact card (home/work address etc)
+         */
+        const val TYPE_PERSONAL: Int = 6
+
+        /**
+         * Location is info from the users personal contact card (home/work address etc)
+         */
+        const val TYPE_HOME: Int = 7 //so we never delete this location
+        const val TYPE_WORK: Int = 8
+
+        const val TYPE_CURRENT_LOCATION: Int =
+            9 // Doesn't actually resolve to anything, but makes life easier for keeping track
+
+        const val TYPE_E_BIKE: Int = 10 //Neuron or Lime
+
+        /**
+         * What3Words type
+         */
+        const val TYPE_W3W: Int = 9
+
+        const val TYPE_SCHOOL: Int = 11
+
+        const val NO_BEARING: Int = Int.MAX_VALUE
+        const val ZERO_LAT: Double = 0.0
+        const val ZERO_LON: Double = 0.0
+
+        /**
+         * Source
+         */
+        const val TRIPGO: String = "tripgo"
+        const val LOCAL: String = "local"
+        const val GOOGLE: String = "google"
+        const val FOURSQUARE: String = "foursquare"
+        @JvmField
+        val CREATOR: Creator<Location> = object : Creator<Location> {
+            override fun createFromParcel(`in`: Parcel): Location {
+                val location = Location()
+
+                location.mId = `in`.readLong()
+                location.name = `in`.readString()
+                location.address = `in`.readString()
+                location.lat = `in`.readDouble()
+                location.lon = `in`.readDouble()
+                location.exact = `in`.readInt() == 1
+                location.bearing = `in`.readInt()
+                location.locationType = `in`.readInt()
+                location.isFavourite = `in`.readInt() == 1
+                location.phoneNumber = `in`.readString()
+                location.url = `in`.readString()
+                location.ratingCount = `in`.readInt()
+                location.averageRating = `in`.readFloat()
+                location.ratingImageUrl = `in`.readString()
+                location.source = `in`.readString()
+                location.favouriteSortOrderIndex = `in`.readInt()
+                location.timeZone = `in`.readString()
+                location.popularity = `in`.readInt()
+                location.locationClass = `in`.readString()
+                location.w3w = `in`.readString()
+                location.w3wInfoURL = `in`.readString()
+                location.appUrl = `in`.readString()
+                location.withExternalApp = `in`.readInt() == 1
+                location.region = `in`.readString()
+
+                val operators: List<Operator> = ArrayList()
+                `in`.readTypedList(operators, Operator.CREATOR)
+                location.operators = operators
+
+                val routes: List<RouteDetails> = ArrayList()
+                `in`.readTypedList(routes, RouteDetails.CREATOR)
+
+                val modeIdentifiers: List<String> = ArrayList()
+                `in`.readList(modeIdentifiers, String::class.java.classLoader)
+                location.modeIdentifiers = modeIdentifiers
+
+                return location
+            }
+
+            override fun newArray(size: Int): Array<Location?> {
+                return arrayOfNulls(size)
+            }
+        }
+        private const val EARTH_RADIUS_IN_METERS = 6371 * 1000
+
+        /**
+         * Locations this close to each other will be considered equal
+         * for the sake of comparing 2 locations
+         */
+        private const val APPROXIMATE_EQUALITY_METERS = 30
+
+        /**
+         * relax the diameter
+         */
+        private const val APPROXIMATE_EQUALITY_METERS_LOOSE = 60
+
+        fun isValidLocation(loc: Location?): Boolean {
+            return (loc != null) && loc.isNonZeroLocation
+        }
+
+        private fun equals(left: Any?, right: Any?): Boolean {
+            return left === right || (left != null && left == right)
+        }
     }
 }
