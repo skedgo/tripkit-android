@@ -48,8 +48,8 @@ class TripGroupTest {
         tripGroup.setTrips(arrayListOf(tripA, tripB, tripC))
         tripGroup.addAsDisplayTrip(tripD)
 
-        assertThat(tripGroup.getTrips()).contains(tripD)
-        assertThat(tripGroup.getDisplayTrip()).isSameAs(tripD)
+        assertThat(tripGroup.trips).contains(tripD)
+        assertThat(tripGroup.displayTrip).isSameAs(tripD)
         assertThat(tripD.tripId).isEqualTo(7L)
     }
 
@@ -88,8 +88,8 @@ class TripGroupTest {
 
     @Test
     fun arrangedByFullCompact() {
-        val fullGroup = TripGroup().apply { setVisibility(FULL) }
-        val compactGroup = TripGroup().apply { setVisibility(COMPACT) }
+        val fullGroup = TripGroup().apply { visibility = FULL }
+        val compactGroup = TripGroup().apply { visibility = COMPACT }
 
         val groups = listOf(compactGroup, fullGroup).sortedWith(TripGroupComparators.DESC_VISIBILITY_COMPARATOR)
 
@@ -110,7 +110,7 @@ class TripGroupTest {
                 startTimeInSecs = 2
                 endTimeInSecs = 4
             })
-            setVisibility(COMPACT)
+            visibility = COMPACT
         }
 
         val group2 = TripGroup().apply {
@@ -125,7 +125,7 @@ class TripGroupTest {
                 startTimeInSecs = 2
                 endTimeInSecs = 4
             })
-            setVisibility(FULL)
+            visibility = FULL
         }
 
         val groups = listOf(group1, group0, group2, group3).sortedWith(TripGroupComparators.ARRIVAL_COMPARATOR_CHAIN)
@@ -160,13 +160,13 @@ class TripGroupTest {
         tripGroup.setTrips(arrayListOf(tripA, tripB, tripC))
 
         tripGroup.changeDisplayTrip(tripB)
-        assertThat(tripGroup.getDisplayTrip()).isSameAs(tripB)
+        assertThat(tripGroup.displayTrip).isSameAs(tripB)
 
         tripGroup.changeDisplayTrip(tripA)
-        assertThat(tripGroup.getDisplayTrip()).isSameAs(tripA)
+        assertThat(tripGroup.displayTrip).isSameAs(tripA)
 
         tripGroup.changeDisplayTrip(tripC)
-        assertThat(tripGroup.getDisplayTrip()).isSameAs(tripC)
+        assertThat(tripGroup.displayTrip).isSameAs(tripC)
     }
 
     @Test(expected = IllegalStateException::class)

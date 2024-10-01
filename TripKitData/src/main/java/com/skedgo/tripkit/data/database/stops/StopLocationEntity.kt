@@ -53,11 +53,11 @@ fun StopLocationEntity.toScheduledStop(): ScheduledStop {
 fun ModeInfoEntity.toModeInfo(): ModeInfo {
     return ModeInfo().let {
         it.alternativeText = this.alt.orEmpty()
-        it.description = this.description
-        it.id = this.identifier
-        it.localIconName = this.localIcon
+        it.description = this.description.orEmpty()
+        it.id = this.identifier.orEmpty()
+        it.localIconName = this.localIcon.orEmpty()
         it.remoteDarkIconName = this.remoteDarkIcon
-        it.remoteIconName = this.remoteIcon
+        it.remoteIconName = this.remoteIcon.orEmpty()
         it.remoteIconIsTemplate = this.remoteIconIsTemplate
         it.remoteIconIsBranding = this.remoteIconIsBranding
         it.color = this.color?.let { ServiceColor(it.red, it.green, it.blue) }

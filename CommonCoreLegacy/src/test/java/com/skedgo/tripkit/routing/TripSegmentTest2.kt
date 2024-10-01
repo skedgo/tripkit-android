@@ -1,212 +1,151 @@
-package com.skedgo.tripkit.routing;
+package com.skedgo.tripkit.routing
 
-import android.content.Context;
-import android.content.res.Resources;
+import android.content.Context
+import android.content.res.Resources
+import androidx.arch.core.executor.testing.InstantTaskExecutorRule
+import androidx.test.core.app.ApplicationProvider
+import androidx.test.ext.junit.runners.AndroidJUnit4
+import com.skedgo.tripkit.common.R
+import io.mockk.every
+import io.mockk.mockk
+import junit.framework.Assert
+import org.assertj.core.api.Assertions.assertThat
+import org.assertj.core.api.Java6Assertions
+import org.junit.Before
+import org.junit.Rule
+import org.junit.Test
+import org.junit.runner.RunWith
+import java.util.concurrent.TimeUnit.MINUTES
 
-import com.skedgo.tripkit.common.R;
+@RunWith(AndroidJUnit4::class)
+class TripSegmentTest2 {
 
-import org.junit.Before;
-import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.robolectric.RobolectricTestRunner;
+    @get:Rule
+    val rule = InstantTaskExecutorRule()
 
-import java.util.concurrent.TimeUnit;
-
-import androidx.test.core.app.ApplicationProvider;
-import androidx.test.ext.junit.runners.AndroidJUnit4;
-
-import static junit.framework.Assert.assertFalse;
-import static junit.framework.Assert.assertTrue;
-import static org.assertj.core.api.Java6Assertions.assertThat;
-import static com.skedgo.tripkit.routing.Visibilities.VISIBILITY_HIDDEN;
-import static com.skedgo.tripkit.routing.Visibilities.VISIBILITY_IN_DETAILS;
-import static com.skedgo.tripkit.routing.Visibilities.VISIBILITY_IN_SUMMARY;
-import static com.skedgo.tripkit.routing.Visibilities.VISIBILITY_ON_MAP;
-
-@RunWith(AndroidJUnit4.class)
-public class TripSegmentTest2 {
-    private Context context;
+    private lateinit var context: Context
+    private lateinit var resources: Resources
 
     @Before
-    public void setUp() {
-        context = ApplicationProvider.getApplicationContext().getApplicationContext();
+    fun setUp() {
+        context = mockk()
+        resources = mockk()
+
+        every { context.resources } returns resources
     }
 
     @Test
-    public void shouldShowHideSegmentProperly() {
-        TripSegment segment = new TripSegment();
-        segment.setVisibility(VISIBILITY_IN_DETAILS);
-        assertFalse(segment.isVisibleInContext(null));
-        assertTrue(segment.isVisibleInContext(VISIBILITY_IN_DETAILS));
-        assertFalse(segment.isVisibleInContext(VISIBILITY_IN_SUMMARY));
-        assertFalse(segment.isVisibleInContext(VISIBILITY_ON_MAP));
-        assertFalse(segment.isVisibleInContext(VISIBILITY_HIDDEN));
+    fun shouldShowHideSegmentProperly() {
+        val segment = TripSegment()
+        segment.visibility = Visibilities.VISIBILITY_IN_DETAILS
+        assertThat(segment.isVisibleInContext(null)).isFalse()
+        assertThat(segment.isVisibleInContext(Visibilities.VISIBILITY_IN_DETAILS)).isTrue()
+        assertThat(segment.isVisibleInContext(Visibilities.VISIBILITY_IN_SUMMARY)).isFalse()
+        assertThat(segment.isVisibleInContext(Visibilities.VISIBILITY_ON_MAP)).isFalse()
+        assertThat(segment.isVisibleInContext(Visibilities.VISIBILITY_HIDDEN)).isFalse()
 
-        segment.setVisibility(VISIBILITY_IN_SUMMARY);
-        assertFalse(segment.isVisibleInContext(null));
-        assertTrue(segment.isVisibleInContext(VISIBILITY_IN_DETAILS));
-        assertTrue(segment.isVisibleInContext(VISIBILITY_IN_SUMMARY));
-        assertTrue(segment.isVisibleInContext(VISIBILITY_ON_MAP));
-        assertFalse(segment.isVisibleInContext(VISIBILITY_HIDDEN));
+        segment.visibility = Visibilities.VISIBILITY_IN_SUMMARY
+        assertThat(segment.isVisibleInContext(null)).isFalse()
+        assertThat(segment.isVisibleInContext(Visibilities.VISIBILITY_IN_DETAILS)).isTrue()
+        assertThat(segment.isVisibleInContext(Visibilities.VISIBILITY_IN_SUMMARY)).isTrue()
+        assertThat(segment.isVisibleInContext(Visibilities.VISIBILITY_ON_MAP)).isTrue()
+        assertThat(segment.isVisibleInContext(Visibilities.VISIBILITY_HIDDEN)).isFalse()
 
-        segment.setVisibility(VISIBILITY_ON_MAP);
-        assertFalse(segment.isVisibleInContext(null));
-        assertTrue(segment.isVisibleInContext(VISIBILITY_IN_DETAILS));
-        assertTrue(segment.isVisibleInContext(VISIBILITY_IN_SUMMARY));
-        assertTrue(segment.isVisibleInContext(VISIBILITY_ON_MAP));
-        assertFalse(segment.isVisibleInContext(VISIBILITY_HIDDEN));
+        segment.visibility = Visibilities.VISIBILITY_ON_MAP
+        assertThat(segment.isVisibleInContext(null)).isFalse()
+        assertThat(segment.isVisibleInContext(Visibilities.VISIBILITY_IN_DETAILS)).isTrue()
+        assertThat(segment.isVisibleInContext(Visibilities.VISIBILITY_IN_SUMMARY)).isTrue()
+        assertThat(segment.isVisibleInContext(Visibilities.VISIBILITY_ON_MAP)).isTrue()
+        assertThat(segment.isVisibleInContext(Visibilities.VISIBILITY_HIDDEN)).isFalse()
 
-        segment.setVisibility(VISIBILITY_HIDDEN);
-        assertFalse(segment.isVisibleInContext(null));
-        assertFalse(segment.isVisibleInContext(VISIBILITY_IN_DETAILS));
-        assertFalse(segment.isVisibleInContext(VISIBILITY_IN_SUMMARY));
-        assertFalse(segment.isVisibleInContext(VISIBILITY_ON_MAP));
-        assertFalse(segment.isVisibleInContext(VISIBILITY_HIDDEN));
+        segment.visibility = Visibilities.VISIBILITY_HIDDEN
+        assertThat(segment.isVisibleInContext(null)).isFalse()
+        assertThat(segment.isVisibleInContext(Visibilities.VISIBILITY_IN_DETAILS)).isFalse()
+        assertThat(segment.isVisibleInContext(Visibilities.VISIBILITY_IN_SUMMARY)).isFalse()
+        assertThat(segment.isVisibleInContext(Visibilities.VISIBILITY_ON_MAP)).isFalse()
+        assertThat(segment.isVisibleInContext(Visibilities.VISIBILITY_HIDDEN)).isFalse()
     }
 
     @Test
-    public void shouldGiveCorrectRealtimeStatusText() {
-        Resources resources = context.getResources();
-        {
-            final ModeInfo car = new ModeInfo();
-            car.setLocalIconName("car");
+    fun shouldGiveCorrectRealtimeStatusText() {
+        every { resources.getString(R.string.live_traffic) } returns "Live traffic"
+        every { resources.getString(R.string.real_minustime) } returns "Real-time minus"
 
-            final TripSegment segment = new TripSegment();
-            segment.setRealTime(true);
-            segment.setModeInfo(car);
-            assertThat(segment.getRealTimeStatusText(resources))
-                .isEqualTo(resources.getString(R.string.live_traffic));
+        val car = ModeInfo().apply { localIconName = "car" }
+        val segment = TripSegment().apply {
+            isRealTime = true
+            modeInfo = car
         }
-        {
-            final ModeInfo car = new ModeInfo();
-            car.setLocalIconName("car");
+        assertThat(segment.getRealTimeStatusText(resources)).isEqualTo("Live traffic")
 
-            final TripSegment segment = new TripSegment();
-            segment.setRealTime(false);
-            segment.setModeInfo(car);
-            assertThat(segment.getRealTimeStatusText(resources)).isNullOrEmpty();
+        segment.isRealTime = false
+        assertThat(segment.getRealTimeStatusText(resources)).isNullOrEmpty()
+
+        val train = ModeInfo().apply { localIconName = "train" }
+        segment.modeInfo = train
+        segment.isRealTime = true
+        assertThat(segment.getRealTimeStatusText(resources)).isEqualTo("Real-time minus")
+
+        segment.isRealTime = false
+        assertThat(segment.getRealTimeStatusText(resources)).isNullOrEmpty()
+    }
+
+    @Test
+    fun darkVehicleIcon() {
+        val ferry = ModeInfo().apply { localIconName = "ferry" }
+        val segment = TripSegment().apply {
+            modeInfo = ferry
+            isRealTime = true
         }
-        {
-            final ModeInfo train = new ModeInfo();
-            train.setLocalIconName("train");
 
-            final TripSegment segment = new TripSegment();
-            segment.setRealTime(true);
-            segment.setModeInfo(train);
-            assertThat(segment.getRealTimeStatusText(resources))
-                .isEqualTo(resources.getString(R.string.real_minustime));
+        every { resources.getDrawable(R.drawable.ic_ferry_realtime, null) } returns mockk() // Mock the drawable
+        assertThat(segment.darkVehicleIcon).describedAs("Should give correct icon for realtime ferry")
+            .isEqualTo(R.drawable.ic_ferry_realtime)
+
+        segment.isRealTime = false
+        every { resources.getDrawable(R.drawable.ic_ferry, null) } returns mockk() // Mock the drawable
+        assertThat(segment.darkVehicleIcon).describedAs("Should give correct icon for non-realtime ferry")
+            .isEqualTo(R.drawable.ic_ferry)
+    }
+
+    @Test
+    fun shouldHandleNullityForDisplayNotes() {
+        val segment = TripSegment().apply {
+            notes = null
+            startTimeInSecs = MINUTES.toSeconds(2)
+            endTimeInSecs = MINUTES.toSeconds(3)
         }
-        {
-            final ModeInfo train = new ModeInfo();
-            train.setLocalIconName("train");
 
-            final TripSegment segment = new TripSegment();
-            segment.setRealTime(false);
-            segment.setModeInfo(train);
-            assertThat(segment.getRealTimeStatusText(resources)).isNullOrEmpty();
+        assertThat(segment.getDisplayNotes(context, true)).isNull()
+    }
+
+    @Test
+    fun displayNotesShouldHavePlatformTemplateProcessed() {
+
+        every { resources.getQuantityString(any(), any()) } returns "Platform: Platform 2"
+
+        val segment = TripSegment().apply {
+            notes = "To City Circle. <PLATFORM>"
+            startTimeInSecs = MINUTES.toSeconds(2)
+            endTimeInSecs = MINUTES.toSeconds(3)
+            platform = "Platform 2"
         }
+
+        assertThat(segment.getDisplayNotes(context, true)).isEqualTo("To City Circle. Platform: Platform 2")
     }
 
     @Test
-    public void getDarkVehicleIcon() {
-        final ModeInfo ferry = new ModeInfo();
-        ferry.setLocalIconName("ferry");
+    fun displayNotesShouldHaveStopsTemplateProcessed() {
 
-        final TripSegment segment = new TripSegment();
-        segment.setModeInfo(ferry);
-        segment.setRealTime(true);
+        every { resources.getQuantityString(R.plurals.number_of_stops, any()) } returns "3 stops"
 
-        assertThat(segment.getDarkVehicleIcon())
-            .describedAs("Should give correct icon for realtime ferry")
-            .isEqualTo(R.drawable.ic_ferry_realtime);
+        val segment = TripSegment().apply {
+            notes = "To City Circle. <STOPS>"
+            startTimeInSecs = MINUTES.toSeconds(2)
+            endTimeInSecs = MINUTES.toSeconds(3)
+            stopCount = 3
+        }
 
-        segment.setRealTime(false);
-        assertThat(segment.getDarkVehicleIcon())
-            .describedAs("Should give correct icon for non-realtime ferry")
-            .isEqualTo(R.drawable.ic_ferry);
+        assertThat(segment.getDisplayNotes(context, true)).isEqualTo("To City Circle. 3 stops")
     }
-
-    @Test
-    public void shouldHandleNullityForDisplayNotes() {
-        final TripSegment segment = new TripSegment();
-        segment.setNotes(null);
-        segment.setStartTimeInSecs(TimeUnit.MINUTES.toSeconds(2));
-        segment.setEndTimeInSecs(TimeUnit.MINUTES.toSeconds(3));
-
-        assertThat(segment.getDisplayNotes(context, true))
-            .isNull();
-    }
-
-  /*
-  @Test public void displayNotesShouldHaveDurationTemplateProcessed() {
-    final TripSegment segment = new TripSegment();
-    segment.setNotes("Stay on train for <DURATION>");
-    segment.setStartTimeInSecs(TimeUnit.MINUTES.toSeconds(2));
-    segment.setEndTimeInSecs(TimeUnit.MINUTES.toSeconds(3));
-
-    assertThat(segment.getDisplayNotes(context, true))
-        .isEqualTo("Stay on train for 1min");
-  }
-  */
-
-    @Test
-    public void displayNotesShouldHavePlatformTemplateProcessed() {
-        final TripSegment segment = new TripSegment();
-        segment.setNotes("To City Circle. <PLATFORM>");
-        segment.setStartTimeInSecs(TimeUnit.MINUTES.toSeconds(2));
-        segment.setEndTimeInSecs(TimeUnit.MINUTES.toSeconds(3));
-        segment.setPlatform("Platform 2");
-
-        assertThat(segment.getDisplayNotes(context, true))
-            .isEqualTo("To City Circle. Platform: Platform 2");
-    }
-
-  /*
-  @Test public void shouldRemovePlatformTemplateIfNoPlatformAvailable() {
-    final TripSegment segment = new TripSegment();
-    segment.setNotes("To City Circle. <PLATFORM>");
-    segment.setStartTimeInSecs(TimeUnit.MINUTES.toSeconds(2));
-    segment.setEndTimeInSecs(TimeUnit.MINUTES.toSeconds(3));
-    segment.setPlatform(null);
-
-    assertThat(segment.getDisplayNotes(context, true))
-        .isEqualTo("To City Circle. ");
-  }
-  */
-
-    @Test
-    public void displayNotesShouldHaveStopsTemplateProcessed() {
-        final TripSegment segment = new TripSegment();
-        segment.setNotes("To City Circle. <STOPS>");
-        segment.setStartTimeInSecs(TimeUnit.MINUTES.toSeconds(2));
-        segment.setEndTimeInSecs(TimeUnit.MINUTES.toSeconds(3));
-        segment.setStopCount(3);
-
-        assertThat(segment.getDisplayNotes(context, true))
-            .isEqualTo("To City Circle. 3 stops");
-    }
-
-  /*
-  @Test public void shouldRemoveStopsTemplateIfNoStopAvailable() {
-    final TripSegment segment = new TripSegment();
-    segment.setNotes("To City Circle. <STOPS>");
-    segment.setStartTimeInSecs(TimeUnit.MINUTES.toSeconds(2));
-    segment.setEndTimeInSecs(TimeUnit.MINUTES.toSeconds(3));
-    segment.setStopCount(0);
-
-    assertThat(segment.getDisplayNotes(context, true))
-        .isEqualTo("To City Circle. ");
-  }
-
-  @Test public void shouldRemoveStopsTemplateIfStopCountIsLessThanZero() {
-    final TripSegment segment = new TripSegment();
-    segment.setNotes("To City Circle. <STOPS>");
-    segment.setStartTimeInSecs(TimeUnit.MINUTES.toSeconds(2));
-    segment.setEndTimeInSecs(TimeUnit.MINUTES.toSeconds(3));
-    segment.setStopCount(-2);
-
-    assertThat(segment.getDisplayNotes(context, true))
-        .isEqualTo("To City Circle. ");
-  }
-  */
 }

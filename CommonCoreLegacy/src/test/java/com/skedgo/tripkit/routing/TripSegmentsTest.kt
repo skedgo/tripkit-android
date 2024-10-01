@@ -1,48 +1,46 @@
-package com.skedgo.tripkit.routing;
+package com.skedgo.tripkit.routing
 
-import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.robolectric.RobolectricTestRunner;
+import androidx.test.ext.junit.runners.AndroidJUnit4
+import org.assertj.core.api.Java6Assertions
+import org.junit.Test
+import org.junit.runner.RunWith
 
-import androidx.test.ext.junit.runners.AndroidJUnit4;
-
-import static org.assertj.core.api.Java6Assertions.assertThat;
-
-@RunWith(AndroidJUnit4.class)
-public class TripSegmentsTest {
+@RunWith(AndroidJUnit4::class)
+class TripSegmentsTest {
     @Test
-    public void shouldReturnColorForPublicTransport() {
-        final ServiceColor color = new ServiceColor(1, 2, 3);
-        final TripSegment segment = new TripSegment();
-        segment.setServiceColor(color);
-        assertThat(TripSegments.getTransportColor(segment)).isSameAs(color);
+    fun shouldReturnColorForPublicTransport() {
+        val color = ServiceColor(1, 2, 3)
+        val segment = TripSegment()
+        segment.serviceColor = color
+        Java6Assertions.assertThat(TripSegments.getTransportColor(segment)).isSameAs(color)
     }
 
     @Test
-    public void shouldReturnColorForPrivateTransport() {
-        final ServiceColor color = new ServiceColor(1, 2, 3);
-        final ModeInfo modeInfo = new ModeInfo();
-        modeInfo.setColor(color);
-        final TripSegment segment = new TripSegment();
-        segment.setModeInfo(modeInfo);
-        assertThat(TripSegments.getTransportColor(segment)).isSameAs(color);
+    fun shouldReturnColorForPrivateTransport() {
+        val color = ServiceColor(1, 2, 3)
+        val modeInfo = ModeInfo()
+        modeInfo.color = color
+        val segment = TripSegment()
+        segment.modeInfo = modeInfo
+        Java6Assertions.assertThat(TripSegments.getTransportColor(segment)).isSameAs(color)
     }
 
     @Test
-    public void shouldReturnNullTransportColor() {
-        assertThat(TripSegments.getTransportColor(null)).isNull();
-        assertThat(TripSegments.getTransportColor(new TripSegment())).isNull();
+    fun shouldReturnNullTransportColor() {
+        Java6Assertions.assertThat(TripSegments.getTransportColor(null)).isNull()
+        Java6Assertions.assertThat(TripSegments.getTransportColor(TripSegment())).isNull()
     }
 
     @Test
-    public void shouldPickColorForPublicTransportFirst() {
-        final ServiceColor privateTransportColor = new ServiceColor(1, 2, 3);
-        final ModeInfo modeInfo = new ModeInfo();
-        modeInfo.setColor(privateTransportColor);
-        final TripSegment segment = new TripSegment();
-        segment.setModeInfo(modeInfo);
-        final ServiceColor publicTransportColor = new ServiceColor(4, 5, 6);
-        segment.setServiceColor(publicTransportColor);
-        assertThat(TripSegments.getTransportColor(segment)).isSameAs(publicTransportColor);
+    fun shouldPickColorForPublicTransportFirst() {
+        val privateTransportColor = ServiceColor(1, 2, 3)
+        val modeInfo = ModeInfo()
+        modeInfo.color = privateTransportColor
+        val segment = TripSegment()
+        segment.modeInfo = modeInfo
+        val publicTransportColor = ServiceColor(4, 5, 6)
+        segment.serviceColor = publicTransportColor
+        Java6Assertions.assertThat(TripSegments.getTransportColor(segment))
+            .isSameAs(publicTransportColor)
     }
 }

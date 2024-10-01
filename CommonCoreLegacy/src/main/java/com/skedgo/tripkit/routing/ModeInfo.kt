@@ -1,168 +1,92 @@
-package com.skedgo.tripkit.routing;
+package com.skedgo.tripkit.routing
 
-import android.os.Parcel;
-import android.os.Parcelable;
-
-import com.google.gson.annotations.SerializedName;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
+import android.os.Parcel
+import android.os.Parcelable
+import android.os.Parcelable.Creator
+import com.google.gson.annotations.SerializedName
+import com.skedgo.tripkit.routing.ServiceColor
 
 /**
- * @see <a href="http://skedgo.github.io/tripgo-api/site/faq/#mode-identifiers">Mode Identifiers</a>
+ * @see [Mode Identifiers](http://skedgo.github.io/tripgo-api/site/faq/.mode-identifiers)
  */
 // FIXME let's remove Parcelable and maybe migrate to a data class
-public class ModeInfo implements Parcelable {
-    public static final Creator<ModeInfo> CREATOR = new Creator<ModeInfo>() {
-        @Override
-        public ModeInfo createFromParcel(Parcel source) {
-            return new ModeInfo(source);
-        }
-
-        @Override
-        public ModeInfo[] newArray(int size) {
-            return new ModeInfo[0];
-        }
-    };
-
-    public static final float MAP_LIST_SIZE_RATIO = 1f;
-
+class ModeInfo : Parcelable {
     @SerializedName("alt")
-    private String alternativeText;
+    var alternativeText: String = ""
+
     @SerializedName("localIcon")
-    private String localIconName;
+    var localIconName: String = ""
+
     @SerializedName("remoteIcon")
-    private String remoteIconName;
+    var remoteIconName: String = ""
+
     @SerializedName("remoteDarkIcon")
-    private String remoteDarkIconName;
+    var remoteDarkIconName: String? = null
+
     @SerializedName("description")
-    private String description;
+    var description: String = ""
+
+    /**
+     * @see [Mode Identifiers](http://skedgo.github.io/tripgo-api/site/faq/.mode-identifiers)
+     */
     @SerializedName("identifier")
-    private String id;
+    var id: String = ""
+
     @SerializedName("color")
-    private ServiceColor color;
+    var color: ServiceColor? = null
+
     @SerializedName("remoteIconIsTemplate")
-    private boolean remoteIconIsTemplate;
+    var remoteIconIsTemplate: Boolean = false
+
     @SerializedName("remoteIconIsBranding")
-    private boolean remoteIconIsBranding;
+    var remoteIconIsBranding: Boolean = false
 
 
-    public ModeInfo() {
+    constructor()
+
+    private constructor(source: Parcel) {
+        alternativeText = source.readString().orEmpty()
+        localIconName = source.readString().orEmpty()
+        remoteIconName = source.readString().orEmpty()
+        remoteDarkIconName = source.readString()
+        description = source.readString().orEmpty()
+        id = source.readString().orEmpty()
+        color = source.readParcelable(ServiceColor::class.java.classLoader)
+        remoteIconIsTemplate = source.readInt() == 1
+        remoteIconIsBranding = source.readInt() == 0
     }
 
-    private ModeInfo(@NonNull Parcel source) {
-        alternativeText = source.readString();
-        localIconName = source.readString();
-        remoteIconName = source.readString();
-        remoteDarkIconName = source.readString();
-        description = source.readString();
-        id = source.readString();
-        color = source.readParcelable(ServiceColor.class.getClassLoader());
-        remoteIconIsTemplate = source.readInt() == 1;
-        remoteIconIsBranding = source.readInt() == 0;
+    override fun describeContents(): Int {
+        return 0
     }
 
-    /**
-     * Indicates a human-readable name of the transport (e.g, "Train").
-     */
-    @NonNull
-    public String getAlternativeText() {
-        return alternativeText;
+    override fun writeToParcel(dest: Parcel, flags: Int) {
+        dest.writeString(alternativeText)
+        dest.writeString(localIconName)
+        dest.writeString(remoteIconName)
+        dest.writeString(remoteDarkIconName)
+        dest.writeString(description)
+        dest.writeString(id)
+        dest.writeParcelable(color, 0)
+        dest.writeInt(if (remoteIconIsTemplate) 1 else 0)
+        dest.writeInt(if (remoteIconIsBranding) 1 else 0)
     }
 
-    public void setAlternativeText(String alternativeText) {
-        this.alternativeText = alternativeText;
-    }
+    val modeCompat: VehicleMode?
+        get() = VehicleMode.from(localIconName)
 
-    @Override
-    public int describeContents() {
-        return 0;
-    }
+    companion object {
+        @JvmField
+        val CREATOR: Creator<ModeInfo> = object : Creator<ModeInfo> {
+            override fun createFromParcel(source: Parcel): ModeInfo {
+                return ModeInfo(source)
+            }
 
-    @Override
-    public void writeToParcel(Parcel dest, int flags) {
-        dest.writeString(alternativeText);
-        dest.writeString(localIconName);
-        dest.writeString(remoteIconName);
-        dest.writeString(remoteDarkIconName);
-        dest.writeString(description);
-        dest.writeString(id);
-        dest.writeParcelable(color, 0);
-        dest.writeInt(remoteIconIsTemplate ? 1 : 0);
-        dest.writeInt(remoteIconIsBranding ? 1 : 0);
-    }
+            override fun newArray(size: Int): Array<ModeInfo?> {
+                return arrayOfNulls(0)
+            }
+        }
 
-    public boolean getRemoteIconIsTemplate() {
-        return remoteIconIsTemplate;
-    }
-
-    public void setRemoteIconIsTemplate(boolean remoteIconIsTemplate) {
-        this.remoteIconIsTemplate = remoteIconIsTemplate;
-    }
-
-    public boolean getRemoteIconIsBranding() {
-        return remoteIconIsBranding;
-    }
-
-    public void setRemoteIconIsBranding(boolean remoteIconIsBranding) {
-        this.remoteIconIsBranding = remoteIconIsBranding;
-    }
-
-    public String getLocalIconName() {
-        return localIconName;
-    }
-
-    public void setLocalIconName(String localIconName) {
-        this.localIconName = localIconName;
-    }
-
-    public String getRemoteIconName() {
-        return remoteIconName;
-    }
-
-    public void setRemoteIconName(String remoteIconName) {
-        this.remoteIconName = remoteIconName;
-    }
-
-    @Nullable
-    public String getRemoteDarkIconName() {
-        return remoteDarkIconName;
-    }
-
-    public void setRemoteDarkIconName(String remoteDarkIconName) {
-        this.remoteDarkIconName = remoteDarkIconName;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    public VehicleMode getModeCompat() {
-        return VehicleMode.from(localIconName);
-    }
-
-    /**
-     * @see <a href="http://skedgo.github.io/tripgo-api/site/faq/#mode-identifiers">Mode Identifiers</a>
-     */
-    @Nullable
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
-    }
-
-    @Nullable
-    public ServiceColor getColor() {
-        return color;
-    }
-
-    public void setColor(ServiceColor color) {
-        this.color = color;
+        const val MAP_LIST_SIZE_RATIO: Float = 1f
     }
 }

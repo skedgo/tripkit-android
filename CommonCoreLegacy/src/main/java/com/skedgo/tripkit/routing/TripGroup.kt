@@ -1,181 +1,129 @@
-package com.skedgo.tripkit.routing;
+package com.skedgo.tripkit.routing
 
-import com.google.gson.annotations.SerializedName;
-
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.List;
-import java.util.UUID;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
+import com.google.gson.annotations.SerializedName
+import com.skedgo.tripkit.routing.GroupVisibility.FULL
+import java.util.Collections
+import java.util.UUID
 
 /**
- * Represents a list of {@link Trip}s. A list of {@link Trip}s comprises
+ * Represents a list of [Trip]s. A list of [Trip]s comprises
  * of a display trip (aka representative trip) and alternative trips.
- * A display trip can be accessed via {@link #getDisplayTrip()} while
- * alternative trips can be retrieved via {@link #getTrips()} minus
- * {@link #getDisplayTrip()}. That's because {@link #getTrips()} returns
- * a list of {@link Trip}s including alternative trips and display trip.
- * <p>
- * Besides, a {@link TripGroup} also hold info related to {@link Source}
- * via {@link #getSources()}.
+ * A display trip can be accessed via [.getDisplayTrip] while
+ * alternative trips can be retrieved via [.getTrips] minus
+ * [.getDisplayTrip]. That's because [.getTrips] returns
+ * a list of [Trip]s including alternative trips and display trip.
+ *
+ *
+ * Besides, a [TripGroup] also hold info related to [Source]
+ * via [.getSources].
  */
-public class TripGroup {
+class TripGroup {
 
-    private String uuid = UUID.randomUUID().toString();
-    private long displayTripId;
+    private var uuid = UUID.randomUUID().toString()
+    var displayTripId: Long = 0
 
-    private String fullUrl;
+    var fullUrl: String = ""
 
     @SerializedName("sources")
-    @Nullable
-    private List<Source> sources;
+    var sources: List<Source>? = null
+
     @SerializedName("trips")
-    private ArrayList<Trip> trips;
+    var trips: ArrayList<Trip>? = null
+        private set
+
     @SerializedName("frequency")
-    private int frequency;
-    private transient GroupVisibility visibility = GroupVisibility.FULL;
+    var frequency: Int = 0
 
-    // Getters and setters for the new property
-    public String getFullUrl() {
-        return fullUrl;
-    }
+    @Transient
+    var visibility: GroupVisibility = FULL
 
-    public void setFullUrl(String fullUrl) {
-        this.fullUrl = fullUrl;
-    }
-
-    public long getDisplayTripId() {
-        return displayTripId;
-    }
-
-    public void setDisplayTripId(long displayTripId) {
-        this.displayTripId = displayTripId;
-    }
-
-    @Nullable
-    public Trip getDisplayTrip() {
-        if (trips == null || trips.isEmpty()) {
-            return null;
-        }
-
-        for (Trip trip : trips) {
-            if (displayTripId == trip.getTripId()) {
-                return trip;
+    val displayTrip: Trip?
+        get() {
+            if (trips == null || trips!!.isEmpty()) {
+                return null
             }
+
+            for (trip in trips!!) {
+                if (displayTripId == trip.tripId) {
+                    return trip
+                }
+            }
+
+            return trips!![0]
         }
 
-        return trips.get(0);
-    }
-
-    @Nullable
-    public ArrayList<Trip> getTrips() {
-        return trips;
-    }
-
-    public void setTrips(ArrayList<Trip> trips) {
+    fun setTrips(trips: ArrayList<Trip?>?) {
         if (this.trips != null) {
-            this.trips.clear();
+            this.trips!!.clear()
         }
 
         if (trips == null) {
-            this.trips = null;
+            this.trips = null
         } else {
-            for (Trip trip : trips) {
-                addTrip(trip);
+            for (trip in trips) {
+                addTrip(trip)
             }
         }
     }
 
-    public int getFrequency() {
-        return frequency;
-    }
-
-    public void setFrequency(int frequency) {
-        this.frequency = frequency;
-    }
-
-    public void addTrip(Trip trip) {
+    fun addTrip(trip: Trip?) {
         if (trip == null) {
-            return;
+            return
         }
 
-        trip.setGroup(this);
+        trip.group = this
 
         if (trips == null) {
-            trips = new ArrayList<Trip>();
+            trips = ArrayList()
         }
 
-        trips.add(trip);
+        trips!!.add(trip)
     }
 
     /**
      * A sample use case: Add a trip computed by waypoint API into trip list.
      *
      * @param trip This trip must not belong to group's trips.
-     *             Otherwise, {@link IllegalStateException} will be thrown.
+     * Otherwise, [IllegalStateException] will be thrown.
      * @throws IllegalStateException if the trip already belongs to the group.
-     *                               To change display trip, should invoke {@link TripGroup#changeDisplayTrip(Trip)} instead.
+     * To change display trip, should invoke [TripGroup.changeDisplayTrip] instead.
      */
-    public void addAsDisplayTrip(@NonNull Trip trip) {
-        if (trips != null && trips.contains(trip)) {
-            throw new IllegalStateException("Trip already belongs to group");
-        }
+    fun addAsDisplayTrip(trip: Trip) {
+        check(!(trips != null && trips!!.contains(trip))) { "Trip already belongs to group" }
 
         // To avoid id conflict with the existing trips in trip list.
-        final Trip maxIdTrip = Collections.max(trips, new Comparator<Trip>() {
-            @Override
-            public int compare(Trip lhs, Trip rhs) {
-                return TripComparators.compareLongs(lhs.getTripId(), rhs.getTripId());
-            }
-        });
-        trip.setTripId(maxIdTrip.getTripId() + 1);
+        val maxIdTrip = Collections.max(trips) { lhs, rhs ->
+            TripComparators.compareLongs(
+                lhs.tripId,
+                rhs.tripId
+            )
+        }
+        trip.tripId = maxIdTrip.tripId + 1
 
         // Don't call List<Trip>.add() but this.
         // We need to reference the group for each trip added.
-        addTrip(trip);
-        changeDisplayTrip(trip);
+        addTrip(trip)
+        changeDisplayTrip(trip)
     }
 
     /**
      * @param trip This trip must belong to group's trips.
-     *             Otherwise, {@link IllegalStateException} will be thrown.
+     * Otherwise, [IllegalStateException] will be thrown.
      * @return A TripGroup having new display trip.
      * @throws IllegalStateException if the trip doesn't belong to the group.
      */
-    public TripGroup changeDisplayTrip(@NonNull Trip trip) {
-        if (trips != null && !trips.contains(trip)) {
-            throw new IllegalStateException("Trip does not belong to group");
-        }
+    fun changeDisplayTrip(trip: Trip): TripGroup {
+        check(!(trips != null && !trips!!.contains(trip))) { "Trip does not belong to group" }
 
-        displayTripId = trip.getTripId();
-        return this;
+        displayTripId = trip.tripId
+        return this
     }
 
-    public GroupVisibility getVisibility() {
-        return visibility;
+    fun uuid(uuid: String) {
+        this.uuid = uuid
     }
 
-    public void setVisibility(@NonNull GroupVisibility visibility) {
-        this.visibility = visibility;
-    }
-
-    public void uuid(String uuid) {
-        this.uuid = uuid;
-    }
-
-    public String uuid() {
-        return uuid;
-    }
-
-    @Nullable
-    public List<Source> getSources() {
-        return sources;
-    }
-
-    public void setSources(@Nullable List<Source> sources) {
-        this.sources = sources;
+    fun uuid(): String {
+        return uuid
     }
 }

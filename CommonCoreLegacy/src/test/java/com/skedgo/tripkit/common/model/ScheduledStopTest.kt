@@ -1,73 +1,68 @@
-package com.skedgo.tripkit.common.model;
+package com.skedgo.tripkit.common.model
 
-import android.os.Parcel;
+import android.os.Parcel
+import androidx.test.ext.junit.runners.AndroidJUnit4
+import com.skedgo.tripkit.common.model.stop.ScheduledStop
+import com.skedgo.tripkit.common.model.stop.StopType.BUS
+import com.skedgo.tripkit.common.util.Gsons.createForLowercaseEnum
+import com.skedgo.tripkit.routing.ModeInfo
+import org.assertj.core.api.Java6Assertions
+import org.junit.Test
+import org.junit.runner.RunWith
 
-import com.skedgo.tripkit.common.model.stop.ScheduledStop;
-import com.skedgo.tripkit.common.model.stop.StopType;
-import com.skedgo.tripkit.common.util.Gsons;
-
-import org.junit.Test;
-import org.junit.runner.RunWith;
-
-import com.skedgo.tripkit.routing.ModeInfo;
-
-import androidx.test.ext.junit.runners.AndroidJUnit4;
-
-import static org.assertj.core.api.Java6Assertions.*;
-
-@RunWith(AndroidJUnit4.class)
-public class ScheduledStopTest {
+@RunWith(AndroidJUnit4::class)
+class ScheduledStopTest {
     @Test
-    public void parseFromJson() {
-        final String json = "{\n" +
-            "  \"stopType\": \"train\",\n" +
-            "  \"name\": \"Blackheath Station\",\n" +
-            "  \"class\": \"StopLocation\",\n" +
-            "  \"lng\": 150.2844,\n" +
-            "  \"stopCode\": \"AU_NSW_Sydney-278510\",\n" +
-            "  \"code\": \"AU_NSW_Sydney-278510\",\n" +
-            "  \"modeInfo\": {\n" +
-            "    \"alt\": \"train\",\n" +
-            "    \"localIcon\": \"train\"\n" +
-            "  },\n" +
-            "  \"lat\": -33.6336,\n" +
-            "  \"popularity\": 3465\n" +
-            "}";
-        final ScheduledStop stop = Gsons.createForLowercaseEnum().fromJson(json, ScheduledStop.class);
-        assertThat(stop).isNotNull();
-        assertThat(stop.getModeInfo()).isNotNull();
-        assertThat(stop.getModeInfo().getAlternativeText()).isEqualTo("train");
-        assertThat(stop.getModeInfo().getLocalIconName()).isEqualTo("train");
+    fun parseFromJson() {
+        val json = """{
+          "stopType": "train",
+          "name": "Blackheath Station",
+          "class": "StopLocation",
+          "lng": 150.2844,
+          "stopCode": "AU_NSW_Sydney-278510",
+          "code": "AU_NSW_Sydney-278510",
+          "modeInfo": {
+            "alt": "train",
+            "localIcon": "train"
+          },
+          "lat": -33.6336,
+          "popularity": 3465
+        }"""
+        val stop = createForLowercaseEnum().fromJson(json, ScheduledStop::class.java)
+        Java6Assertions.assertThat(stop).isNotNull()
+        Java6Assertions.assertThat(stop.modeInfo).isNotNull()
+        Java6Assertions.assertThat(stop.modeInfo!!.alternativeText).isEqualTo("train")
+        Java6Assertions.assertThat(stop.modeInfo!!.localIconName).isEqualTo("train")
     }
 
     @Test
-    public void parcel() {
-        ScheduledStop expected = new ScheduledStop();
-        expected.setCode("AU_NSW_Sydney-278510");
-        expected.setName("Blackheath Station");
-        expected.setLat(-33.6336);
-        expected.setLon(150.2844);
-        expected.setType(StopType.BUS);
+    fun parcel() {
+        val expected = ScheduledStop()
+        expected.code = "AU_NSW_Sydney-278510"
+        expected.name = "Blackheath Station"
+        expected.lat = -33.6336
+        expected.lon = 150.2844
+        expected.type = BUS
 
-        ModeInfo modeInfo = new ModeInfo();
-        modeInfo.setAlternativeText("train");
-        modeInfo.setLocalIconName("train");
-        expected.setModeInfo(modeInfo);
+        val modeInfo = ModeInfo()
+        modeInfo.alternativeText = "train"
+        modeInfo.localIconName = "train"
+        expected.modeInfo = modeInfo
 
-        Parcel parcel = Parcel.obtain();
-        expected.writeToParcel(parcel, 0);
-        parcel.setDataPosition(0);
+        val parcel = Parcel.obtain()
+        expected.writeToParcel(parcel, 0)
+        parcel.setDataPosition(0)
 
-        ScheduledStop actual = ScheduledStop.CREATOR.createFromParcel(parcel);
+        val actual = ScheduledStop.CREATOR.createFromParcel(parcel)
 
-        assertThat(actual.getCode()).isEqualTo(expected.getCode());
-        assertThat(actual.getName()).isEqualTo(expected.getName());
-        assertThat(actual.getLat()).isEqualTo(expected.getLat());
-        assertThat(actual.getLon()).isEqualTo(expected.getLon());
-        assertThat(actual.getModeInfo()).isNotNull();
-        assertThat(actual.getModeInfo().getAlternativeText())
-            .isEqualTo(expected.getModeInfo().getAlternativeText());
-        assertThat(actual.getModeInfo().getLocalIconName())
-            .isEqualTo(expected.getModeInfo().getLocalIconName());
+        Java6Assertions.assertThat(actual.code).isEqualTo(expected.code)
+        Java6Assertions.assertThat(actual.name).isEqualTo(expected.name)
+        Java6Assertions.assertThat(actual.lat).isEqualTo(expected.lat)
+        Java6Assertions.assertThat(actual.lon).isEqualTo(expected.lon)
+        Java6Assertions.assertThat(actual.modeInfo).isNotNull()
+        Java6Assertions.assertThat(actual.modeInfo!!.alternativeText)
+            .isEqualTo(expected.modeInfo!!.alternativeText)
+        Java6Assertions.assertThat(actual.modeInfo!!.localIconName)
+            .isEqualTo(expected.modeInfo!!.localIconName)
     }
 }

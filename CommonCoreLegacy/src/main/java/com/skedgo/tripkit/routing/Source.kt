@@ -1,48 +1,45 @@
-package com.skedgo.tripkit.routing;
+package com.skedgo.tripkit.routing
 
-import android.os.Parcel;
-import android.os.Parcelable;
-
-import com.google.gson.annotations.JsonAdapter;
-
-import androidx.annotation.Nullable;
-
-import static org.immutables.gson.Gson.TypeAdapters;
-import static org.immutables.value.Value.Immutable;
-import static org.immutables.value.Value.Style;
+import android.os.Parcel
+import android.os.Parcelable
+import android.os.Parcelable.Creator
+import com.google.gson.annotations.JsonAdapter
+import org.immutables.gson.Gson.TypeAdapters
+import org.immutables.value.Value.Immutable
+import org.immutables.value.Value.Style
 
 @TypeAdapters
 @Immutable
-@Style(passAnnotations = JsonAdapter.class)
-@JsonAdapter(GsonAdaptersSource.class)
-public abstract class Source implements Parcelable {
-    public static final Creator<Source> CREATOR = new Creator<Source>() {
-        @Override
-        public Source createFromParcel(Parcel in) {
-            return ImmutableSource.builder()
-                .disclaimer(in.readString())
-                .provider((Provider) in.readParcelable(Provider.class.getClassLoader()))
-                .build();
-        }
+@Style(passAnnotations = [JsonAdapter::class])
+@JsonAdapter(
+    GsonAdaptersSource::class
+)
+abstract class Source : Parcelable {
+    abstract fun disclaimer(): String?
 
-        @Override
-        public Source[] newArray(int size) {
-            return new Source[size];
-        }
-    };
+    abstract fun provider(): Provider?
 
-    public abstract @Nullable String disclaimer();
-
-    public abstract @Nullable Provider provider();
-
-    @Override
-    public int describeContents() {
-        return 0;
+    override fun describeContents(): Int {
+        return 0
     }
 
-    @Override
-    public void writeToParcel(Parcel dest, int flags) {
-        dest.writeString(disclaimer());
-        dest.writeParcelable(provider(), flags);
+    override fun writeToParcel(dest: Parcel, flags: Int) {
+        dest.writeString(disclaimer())
+        dest.writeParcelable(provider(), flags)
+    }
+
+    companion object {
+        val CREATOR: Creator<Source> = object : Creator<Source> {
+            override fun createFromParcel(`in`: Parcel): Source {
+                return ImmutableSource.builder()
+                    .disclaimer(`in`.readString())
+                    .provider(`in`.readParcelable<Parcelable>(Provider::class.java.classLoader) as Provider?)
+                    .build()
+            }
+
+            override fun newArray(size: Int): Array<Source?> {
+                return arrayOfNulls(size)
+            }
+        }
     }
 }

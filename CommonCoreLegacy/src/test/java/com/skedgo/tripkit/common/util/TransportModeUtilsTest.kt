@@ -1,172 +1,166 @@
-package com.skedgo.tripkit.common.util;
+package com.skedgo.tripkit.common.util
 
-import android.annotation.TargetApi;
-import android.content.res.Resources;
-import android.os.Build;
-import android.util.DisplayMetrics;
+import android.annotation.TargetApi
+import android.content.res.Resources
+import android.os.Build.VERSION_CODES
+import android.util.DisplayMetrics
+import androidx.arch.core.executor.testing.InstantTaskExecutorRule
+import androidx.test.ext.junit.runners.AndroidJUnit4
+import com.skedgo.tripkit.common.model.TransportMode
+import com.skedgo.tripkit.routing.ModeInfo
+import io.mockk.every
+import io.mockk.mockk
+import org.assertj.core.api.Assertions.assertThat
+import org.assertj.core.api.Java6Assertions
+import org.junit.Before
+import org.junit.Rule
+import org.junit.Test
+import org.junit.runner.RunWith
+import org.mockito.Mockito
 
-import com.skedgo.tripkit.common.model.TransportMode;
+@RunWith(AndroidJUnit4::class)
+class TransportModeUtilsTest {
 
-import org.junit.Before;
-import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.robolectric.RobolectricTestRunner;
+    @get:Rule
+    val rule = InstantTaskExecutorRule()
 
-import androidx.annotation.NonNull;
-import androidx.test.ext.junit.runners.AndroidJUnit4;
-
-import com.skedgo.tripkit.routing.ModeInfo;
-
-import static android.util.DisplayMetrics.DENSITY_HIGH;
-import static android.util.DisplayMetrics.DENSITY_MEDIUM;
-import static android.util.DisplayMetrics.DENSITY_XHIGH;
-import static android.util.DisplayMetrics.DENSITY_XXHIGH;
-import static android.util.DisplayMetrics.DENSITY_XXXHIGH;
-import static com.skedgo.tripkit.common.util.TransportModeUtils.getDarkIconUrlForModeInfo;
-import static com.skedgo.tripkit.common.util.TransportModeUtils.getDarkIconUrlForTransportMode;
-import static com.skedgo.tripkit.common.util.TransportModeUtils.getDensityDpiName;
-import static com.skedgo.tripkit.common.util.TransportModeUtils.getIconUrlForId;
-import static com.skedgo.tripkit.common.util.TransportModeUtils.getIconUrlForModeInfo;
-import static com.skedgo.tripkit.common.util.TransportModeUtils.getIconUrlForTransportMode;
-import static org.assertj.core.api.Java6Assertions.assertThat;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
-
-@RunWith(AndroidJUnit4.class)
-public class TransportModeUtilsTest {
-    private Resources resources;
+    private lateinit var resources: Resources
 
     @Before
-    public void before() {
-        resources = mock(Resources.class);
+    fun before() {
+        resources = mockk()
     }
 
     @Test
-    public void getIconUrlForId_nonEmptyId() {
-        when(resources.getDisplayMetrics()).thenReturn(createDisplayMetricsByDpi(DENSITY_XHIGH));
-        final String iconId = "pt-opal";
-        assertThat(getIconUrlForId(resources, iconId))
-            .isEqualTo("https://static.skedgo.com/icons/android/xhdpi/ic_transport_pt-opal.png");
+    fun iconUrlForId_nonEmptyId() {
+        every { resources.displayMetrics } returns createDisplayMetricsByDpi(DisplayMetrics.DENSITY_XHIGH)
+        val iconId = "pt-opal"
+        assertThat(TransportModeUtils.getIconUrlForId(resources, iconId))
+            .isEqualTo("https://static.skedgo.com/icons/android/xhdpi/ic_transport_pt-opal.png")
     }
 
     @Test
-    public void getIconUrlForId_nullId() {
-        when(resources.getDisplayMetrics()).thenReturn(createDisplayMetricsByDpi(DENSITY_XHIGH));
-        assertThat(getIconUrlForId(resources, null)).isNull();
+    fun iconUrlForId_nullId() {
+        every { resources.displayMetrics } returns createDisplayMetricsByDpi(DisplayMetrics.DENSITY_XHIGH)
+        assertThat(TransportModeUtils.getIconUrlForId(resources, null)).isNull()
     }
 
     @Test
-    public void getIconUrlForId_emptyId() {
-        when(resources.getDisplayMetrics()).thenReturn(createDisplayMetricsByDpi(DENSITY_XHIGH));
-        assertThat(getIconUrlForId(resources, "")).isNull();
+    fun iconUrlForId_emptyId() {
+        every { resources.displayMetrics } returns createDisplayMetricsByDpi(DisplayMetrics.DENSITY_XHIGH)
+        assertThat(TransportModeUtils.getIconUrlForId(resources, "")).isNull()
     }
 
     @Test
-    public void getIconUrlForModeInfo_nonNull() {
-        when(resources.getDisplayMetrics()).thenReturn(createDisplayMetricsByDpi(DENSITY_XHIGH));
-        final ModeInfo modeInfo = new ModeInfo();
-        modeInfo.setRemoteIconName("pt-opal");
-        assertThat(getIconUrlForModeInfo(resources, modeInfo))
-            .isEqualTo("https://static.skedgo.com/icons/android/xhdpi/ic_transport_pt-opal.png");
+    fun iconUrlForModeInfo_nonNull() {
+        every { resources.displayMetrics } returns createDisplayMetricsByDpi(DisplayMetrics.DENSITY_XHIGH)
+        val modeInfo = ModeInfo().apply {
+            remoteIconName = "pt-opal"
+        }
+        assertThat(TransportModeUtils.getIconUrlForModeInfo(resources, modeInfo))
+            .isEqualTo("https://static.skedgo.com/icons/android/xhdpi/ic_transport_pt-opal.png")
     }
 
     @Test
-    public void getIconUrlForModeInfo_null() {
-        when(resources.getDisplayMetrics()).thenReturn(createDisplayMetricsByDpi(DENSITY_XHIGH));
-        assertThat(getIconUrlForModeInfo(resources, null)).isNull();
+    fun iconUrlForModeInfo_null() {
+        every { resources.displayMetrics } returns createDisplayMetricsByDpi(DisplayMetrics.DENSITY_XHIGH)
+        assertThat(TransportModeUtils.getIconUrlForModeInfo(resources, null)).isNull()
     }
 
     @Test
-    public void getIconUrlForModeInfo_nonNullModeInfoButNullIconName() {
-        when(resources.getDisplayMetrics()).thenReturn(createDisplayMetricsByDpi(DENSITY_XHIGH));
-        final ModeInfo modeInfo = new ModeInfo();
-        modeInfo.setRemoteIconName(null);
-        assertThat(getIconUrlForModeInfo(resources, modeInfo)).isNull();
+    fun iconUrlForModeInfo_nonNullModeInfoButNullIconName() {
+        every { resources.displayMetrics } returns createDisplayMetricsByDpi(DisplayMetrics.DENSITY_XHIGH)
+        val modeInfo = ModeInfo().apply {
+            remoteIconName = ""
+        }
+        assertThat(TransportModeUtils.getIconUrlForModeInfo(resources, modeInfo)).isNull()
     }
 
     @Test
-    public void getDarkIconUrlForModeInfo_nonNull() {
-        when(resources.getDisplayMetrics()).thenReturn(createDisplayMetricsByDpi(DENSITY_XHIGH));
-        final ModeInfo modeInfo = new ModeInfo();
-        modeInfo.setRemoteDarkIconName("lyft-dark");
-        assertThat(getDarkIconUrlForModeInfo(resources, modeInfo))
-            .isEqualTo("https://static.skedgo.com/icons/android/xhdpi/ic_transport_lyft-dark.png");
+    fun darkIconUrlForModeInfo_nonNull() {
+        every { resources.displayMetrics } returns createDisplayMetricsByDpi(DisplayMetrics.DENSITY_XHIGH)
+        val modeInfo = ModeInfo().apply {
+            remoteDarkIconName = "lyft-dark"
+        }
+        assertThat(TransportModeUtils.getDarkIconUrlForModeInfo(resources, modeInfo))
+            .isEqualTo("https://static.skedgo.com/icons/android/xhdpi/ic_transport_lyft-dark.png")
     }
 
     @Test
-    public void getDarkIconUrlForModeInfo_null() {
-        when(resources.getDisplayMetrics()).thenReturn(createDisplayMetricsByDpi(DENSITY_XHIGH));
-        assertThat(getDarkIconUrlForModeInfo(resources, null)).isNull();
+    fun darkIconUrlForModeInfo_null() {
+        every { resources.displayMetrics } returns createDisplayMetricsByDpi(DisplayMetrics.DENSITY_XHIGH)
+        assertThat(TransportModeUtils.getDarkIconUrlForModeInfo(resources, null)).isNull()
     }
 
     @Test
-    public void getDarkIconUrlForModeInfo_nonNullModeInfoButNullIconName() {
-        when(resources.getDisplayMetrics()).thenReturn(createDisplayMetricsByDpi(DENSITY_XHIGH));
-        final ModeInfo modeInfo = new ModeInfo();
-        modeInfo.setRemoteDarkIconName(null);
-        assertThat(getDarkIconUrlForModeInfo(resources, modeInfo)).isNull();
+    fun darkIconUrlForModeInfo_nonNullModeInfoButNullIconName() {
+        every { resources.displayMetrics } returns createDisplayMetricsByDpi(DisplayMetrics.DENSITY_XHIGH)
+        val modeInfo = ModeInfo().apply {
+            remoteDarkIconName = null
+        }
+        assertThat(TransportModeUtils.getDarkIconUrlForModeInfo(resources, modeInfo)).isNull()
     }
 
     @Test
-    public void getIconUrlForTransportMode_nonNull() {
-        when(resources.getDisplayMetrics()).thenReturn(createDisplayMetricsByDpi(DENSITY_XHIGH));
-        final TransportMode mode = new TransportMode();
-        mode.setIconId("pt-opal");
-        assertThat(getIconUrlForTransportMode(resources, mode))
-            .isEqualTo("https://static.skedgo.com/icons/android/xhdpi/ic_transport_pt-opal.png");
+    fun iconUrlForTransportMode_nonNull() {
+        every { resources.displayMetrics } returns createDisplayMetricsByDpi(DisplayMetrics.DENSITY_XHIGH)
+        val mode = TransportMode().apply {
+            iconId = "pt-opal"
+        }
+        assertThat(TransportModeUtils.getIconUrlForTransportMode(resources, mode))
+            .isEqualTo("https://static.skedgo.com/icons/android/xhdpi/ic_transport_pt-opal.png")
     }
 
     @Test
-    public void getIconUrlForTransportMode_nonNullTransportModeButNullIconId() {
-        when(resources.getDisplayMetrics()).thenReturn(createDisplayMetricsByDpi(DENSITY_XHIGH));
-        final TransportMode mode = new TransportMode();
-        mode.setIconId(null);
-        assertThat(getIconUrlForTransportMode(resources, mode)).isNull();
+    fun iconUrlForTransportMode_nonNullTransportModeButNullIconId() {
+        every { resources.displayMetrics } returns createDisplayMetricsByDpi(DisplayMetrics.DENSITY_XHIGH)
+        val mode = TransportMode().apply {
+            iconId = null
+        }
+        assertThat(TransportModeUtils.getIconUrlForTransportMode(resources, mode)).isNull()
     }
 
     @Test
-    public void getIconUrlForTransportMode_null() {
-        when(resources.getDisplayMetrics()).thenReturn(createDisplayMetricsByDpi(DENSITY_XHIGH));
-        assertThat(getIconUrlForTransportMode(resources, null)).isNull();
+    fun iconUrlForTransportMode_null() {
+        every { resources.displayMetrics } returns createDisplayMetricsByDpi(DisplayMetrics.DENSITY_XHIGH)
+        assertThat(TransportModeUtils.getIconUrlForTransportMode(resources, null)).isNull()
     }
 
     @Test
-    public void getDarkIconUrlForTransportMode_nonNull() {
-        when(resources.getDisplayMetrics()).thenReturn(createDisplayMetricsByDpi(DENSITY_XHIGH));
-        final TransportMode mode = new TransportMode();
-        mode.setDarkIcon("some-dark-icon");
-        assertThat(getDarkIconUrlForTransportMode(resources, mode))
-            .isEqualTo("https://static.skedgo.com/icons/android/xhdpi/ic_transport_some-dark-icon.png");
+    fun darkIconUrlForTransportMode_nonNull() {
+        every { resources.displayMetrics } returns createDisplayMetricsByDpi(DisplayMetrics.DENSITY_XHIGH)
+        val mode = TransportMode().apply {
+            darkIcon = "some-dark-icon"
+        }
+        assertThat(TransportModeUtils.getDarkIconUrlForTransportMode(resources, mode))
+            .isEqualTo("https://static.skedgo.com/icons/android/xhdpi/ic_transport_some-dark-icon.png")
     }
 
     @Test
-    public void getDarkIconUrlForTransportMode_nonNullTransportModeButNullIconId() {
-        when(resources.getDisplayMetrics()).thenReturn(createDisplayMetricsByDpi(DENSITY_XHIGH));
-        final TransportMode mode = new TransportMode();
-        mode.setIconId(null);
-        assertThat(getDarkIconUrlForTransportMode(resources, mode)).isNull();
+    fun darkIconUrlForTransportMode_nonNullTransportModeButNullIconId() {
+        every { resources.displayMetrics } returns createDisplayMetricsByDpi(DisplayMetrics.DENSITY_XHIGH)
+        val mode = TransportMode().apply {
+            darkIcon = null
+        }
+        assertThat(TransportModeUtils.getDarkIconUrlForTransportMode(resources, mode)).isNull()
     }
 
     @Test
-    public void getDarkIconUrlForTransportMode_null() {
-        when(resources.getDisplayMetrics()).thenReturn(createDisplayMetricsByDpi(DENSITY_XHIGH));
-        assertThat(getDarkIconUrlForTransportMode(resources, null)).isNull();
+    fun darkIconUrlForTransportMode_null() {
+        every { resources.displayMetrics } returns createDisplayMetricsByDpi(DisplayMetrics.DENSITY_XHIGH)
+        assertThat(TransportModeUtils.getDarkIconUrlForTransportMode(resources, null)).isNull()
     }
 
-    @TargetApi(Build.VERSION_CODES.JELLY_BEAN_MR2)
     @Test
-    public void shouldReturnDensityDpiNameCorrectly() {
-        assertThat(getDensityDpiName(DENSITY_MEDIUM)).isEqualTo("mdpi");
-        assertThat(getDensityDpiName(DENSITY_HIGH)).isEqualTo("hdpi");
-        assertThat(getDensityDpiName(DENSITY_XHIGH)).isEqualTo("xhdpi");
-        assertThat(getDensityDpiName(DENSITY_XXHIGH)).isEqualTo("xxhdpi");
-        assertThat(getDensityDpiName(DENSITY_XXXHIGH)).isEqualTo("xxhdpi");
+    fun shouldReturnDensityDpiNameCorrectly() {
+        assertThat(TransportModeUtils.getDensityDpiName(DisplayMetrics.DENSITY_MEDIUM)).isEqualTo("mdpi")
+        assertThat(TransportModeUtils.getDensityDpiName(DisplayMetrics.DENSITY_HIGH)).isEqualTo("hdpi")
+        assertThat(TransportModeUtils.getDensityDpiName(DisplayMetrics.DENSITY_XHIGH)).isEqualTo("xhdpi")
+        assertThat(TransportModeUtils.getDensityDpiName(DisplayMetrics.DENSITY_XXHIGH)).isEqualTo("xxhdpi")
+        assertThat(TransportModeUtils.getDensityDpiName(DisplayMetrics.DENSITY_XXXHIGH)).isEqualTo("xxhdpi")
     }
 
-    @NonNull
-    private DisplayMetrics createDisplayMetricsByDpi(int dpi) {
-        final DisplayMetrics displayMetrics = new DisplayMetrics();
-        displayMetrics.densityDpi = dpi;
-        return displayMetrics;
+    private fun createDisplayMetricsByDpi(dpi: Int): DisplayMetrics {
+        return DisplayMetrics().apply { densityDpi = dpi }
     }
 }

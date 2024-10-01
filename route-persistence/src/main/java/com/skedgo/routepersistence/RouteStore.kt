@@ -267,7 +267,7 @@ open class RouteStore(private val databaseHelper: SQLiteOpenHelper, private val 
             }
             .toList()
             .map { trips ->
-                group.trips = ArrayList(trips)
+                group.setTrips(ArrayList(trips))
                 group
             }.toObservable()
     }
