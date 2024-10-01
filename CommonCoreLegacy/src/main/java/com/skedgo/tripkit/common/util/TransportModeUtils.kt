@@ -1,89 +1,80 @@
-package com.skedgo.tripkit.common.util;
+package com.skedgo.tripkit.common.util
 
-import android.content.res.Resources;
-import android.util.DisplayMetrics;
+import android.content.res.Resources
+import android.util.DisplayMetrics
+import com.skedgo.tripkit.common.model.TransportMode
+import com.skedgo.tripkit.configuration.ServerManager.configuration
+import com.skedgo.tripkit.routing.ModeInfo
 
-import com.skedgo.tripkit.common.model.TransportMode;
-import com.skedgo.tripkit.configuration.ServerManager;
-import com.skedgo.tripkit.routing.ModeInfo;
+object TransportModeUtils {
+    val ICON_URL_TEMPLATE: String =
+        configuration.staticTripGoUrl + "icons/android/%s/ic_transport_%s.png"
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-
-public final class TransportModeUtils {
-    public static final String ICON_URL_TEMPLATE = ServerManager.INSTANCE.getConfiguration().getStaticTripGoUrl() + "icons/android/%s/ic_transport_%s.png";
-
-    private TransportModeUtils() {
-    }
-
-    @Nullable
-    public static String getIconUrlForId(
-        @NonNull Resources resources,
-        @Nullable String iconId) {
-        if (iconId == null || iconId.length() == 0) {
-            return null;
+    @JvmStatic
+    fun getIconUrlForId(
+        resources: Resources,
+        iconId: String?
+    ): String? {
+        if (iconId == null || iconId.length == 0) {
+            return null
         }
 
-        final String densityDpiName = getDensityDpiName(resources.getDisplayMetrics().densityDpi);
-        return String.format(TransportModeUtils.ICON_URL_TEMPLATE, densityDpiName, iconId);
+        val densityDpiName = getDensityDpiName(resources.displayMetrics.densityDpi)
+        return String.format(ICON_URL_TEMPLATE, densityDpiName, iconId)
     }
 
-    @Nullable
-    public static String getIconUrlForModeInfo(
-        @NonNull Resources resources,
-        @Nullable ModeInfo modeInfo) {
+    @JvmStatic
+    fun getIconUrlForModeInfo(
+        resources: Resources,
+        modeInfo: ModeInfo?
+    ): String? {
         if (modeInfo == null) {
-            return null;
+            return null
         }
 
-        return getIconUrlForId(resources, modeInfo.getRemoteIconName());
+        return getIconUrlForId(resources, modeInfo.remoteIconName)
     }
 
-    @Nullable
-    public static String getDarkIconUrlForModeInfo(
-        @NonNull Resources resources,
-        @Nullable ModeInfo modeInfo) {
+    fun getDarkIconUrlForModeInfo(
+        resources: Resources,
+        modeInfo: ModeInfo?
+    ): String? {
         if (modeInfo == null) {
-            return null;
+            return null
         }
 
-        return getIconUrlForId(resources, modeInfo.getRemoteDarkIconName());
+        return getIconUrlForId(resources, modeInfo.remoteDarkIconName)
     }
 
-    @Nullable
-    public static String getIconUrlForTransportMode(
-        @NonNull Resources resources,
-        @Nullable TransportMode mode) {
+    fun getIconUrlForTransportMode(
+        resources: Resources,
+        mode: TransportMode?
+    ): String? {
         if (mode == null) {
-            return null;
+            return null
         }
 
-        return getIconUrlForId(resources, mode.getIconId());
+        return getIconUrlForId(resources, mode.iconId)
     }
 
-    @Nullable
-    public static String getDarkIconUrlForTransportMode(
-        @NonNull Resources resources,
-        @Nullable TransportMode mode) {
+    fun getDarkIconUrlForTransportMode(
+        resources: Resources,
+        mode: TransportMode?
+    ): String? {
         if (mode == null) {
-            return null;
+            return null
         }
 
-        return getIconUrlForId(resources, mode.getDarkIcon());
+        return getIconUrlForId(resources, mode.darkIcon)
     }
 
-    @NonNull
-    public static String getDensityDpiName(int densityDpi) {
-        switch (densityDpi) {
-            case DisplayMetrics.DENSITY_MEDIUM:
-                return "mdpi";
-            case DisplayMetrics.DENSITY_HIGH:
-                return "hdpi";
-            case DisplayMetrics.DENSITY_XHIGH:
-                return "xhdpi";
-            case DisplayMetrics.DENSITY_XXHIGH:
-            default:
-                return "xxhdpi";
+    fun getDensityDpiName(densityDpi: Int): String {
+        return when (densityDpi) {
+            DisplayMetrics.DENSITY_MEDIUM -> "mdpi"
+            DisplayMetrics.DENSITY_HIGH -> "hdpi"
+            DisplayMetrics.DENSITY_XHIGH -> "xhdpi"
+            DisplayMetrics.DENSITY_XXHIGH -> "xxhdpi"
+            else -> "xxhdpi"
         }
     }
 }

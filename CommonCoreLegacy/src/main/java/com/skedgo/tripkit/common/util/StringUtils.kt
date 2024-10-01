@@ -1,53 +1,44 @@
 /*
  * Copyright (c) SkedGo 2013
  */
+package com.skedgo.tripkit.common.util
 
-package com.skedgo.tripkit.common.util;
+import android.text.TextUtils
+import java.util.Arrays
+import java.util.regex.Pattern
 
-import android.text.TextUtils;
-
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-
-public final class StringUtils {
-    private StringUtils() {
-    }
-
-    public static String firstNonEmpty(String... values) {
-        if (values == null) {
-            return null;
-        }
-
-        for (String v : values) {
+object StringUtils {
+    @JvmStatic
+    fun firstNonEmpty(vararg values: String?): String? {
+        for (v in values) {
             if (!TextUtils.isEmpty(v)) {
-                return v;
+                return v
             }
         }
 
-        return null;
+        return null
     }
 
-    public static String capitalizeFirst(String str) {
+    @JvmStatic
+    fun capitalizeFirst(str: String): String {
         if (TextUtils.isEmpty(str)) {
-            return str;
+            return str
         }
 
-        return Character.toUpperCase(str.charAt(0)) + str.substring(1);
+        return str[0].uppercaseChar().toString() + str.substring(1)
     }
 
-    public static String makeArgsString(int argc) {
-        String[] args = new String[argc];
-        Arrays.fill(args, "?");
-        String result = TextUtils.join(",", args);
-        return result;
+    @JvmStatic
+    fun makeArgsString(argc: Int): String {
+        val args = arrayOfNulls<String>(argc)
+        Arrays.fill(args, "?")
+        val result = TextUtils.join(",", args)
+        return result
     }
 
     /*Join an array of strings by default dilimeter, which is comma*/
-    public static String join(ArrayList<String> strings) {
-        return join(strings, ",");
+    fun join(strings: ArrayList<String>?): String {
+        return join(strings, ",")
     }
 
     /**
@@ -57,32 +48,31 @@ public final class StringUtils {
      * @param separator The separator character to use
      * @return The joined String, empty if null List input
      */
-    public static String join(List<String> strings, String separator) {
-        String s = "";
+    fun join(strings: List<String>?, separator: String): String {
+        var s = ""
         if (strings != null) {
-            for (String item : strings) {
-                s += item + separator;
+            for (item in strings) {
+                s += item + separator
             }
 
-            int pos = s.lastIndexOf(separator);
-            s = s.substring(0, pos).trim();
+            val pos = s.lastIndexOf(separator)
+            s = s.substring(0, pos).trim { it <= ' ' }
         }
 
-        return s;
+        return s
     }
 
-  public static String extractMajorMinorVersion(String version) {
-    try {
-      Pattern pattern = Pattern.compile("(\\d+\\.\\d+)");
-      Matcher matcher = pattern.matcher(version);
-      if (matcher.find()) {
-        return matcher.group(1);
-      } else {
-        return version; // Return the original string if no match is found
-      }
-    } catch (Exception e) {
-      return version; // Return the original string if there's an error
+    fun extractMajorMinorVersion(version: String): String {
+        try {
+            val pattern = Pattern.compile("(\\d+\\.\\d+)")
+            val matcher = pattern.matcher(version)
+            return if (matcher.find()) {
+                matcher.group(1).toString()
+            } else {
+                version // Return the original string if no match is found
+            }
+        } catch (e: Exception) {
+            return version // Return the original string if there's an error
+        }
     }
-  }
-
 }

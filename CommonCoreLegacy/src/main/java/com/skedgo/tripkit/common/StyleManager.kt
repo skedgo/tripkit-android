@@ -1,10 +1,10 @@
-package com.skedgo.tripkit.common;
+package com.skedgo.tripkit.common
 
-public class StyleManager {
-    public static final String FORMAT_PAIR_IDENTIFIER = "%s#%s";
+object StyleManager {
+    const val FORMAT_PAIR_IDENTIFIER: String = "%s#%s"
 
-    public static final String FORMAT_TIME_SPAN_MIN = "min";
-    public static final String FORMAT_TIME_SPAN_NOW = "Now";
-    public static final String FORMAT_TIME_SPAN_DAY = "day";
-    public static final String FORMAT_TIME_SPAN_HOUR = "h";
+    const val FORMAT_TIME_SPAN_MIN: String = "min"
+    const val FORMAT_TIME_SPAN_NOW: String = "Now"
+    const val FORMAT_TIME_SPAN_DAY: String = "day"
+    const val FORMAT_TIME_SPAN_HOUR: String = "h"
 }

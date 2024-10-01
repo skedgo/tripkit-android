@@ -1,78 +1,75 @@
 /*
  * Copyright (c) SkedGo 2013
  */
+package com.skedgo.tripkit.common.util
 
-package com.skedgo.tripkit.common.util;
+import android.content.Context
+import android.text.format.Time
+import com.skedgo.tripkit.common.R
+import java.util.Calendar
+import java.util.Date
+import java.util.Locale
+import java.util.TimeZone
+import java.util.concurrent.TimeUnit.SECONDS
 
-import android.content.Context;
-import android.text.format.Time;
+object TimeUtils {
+    private val TIME_LOCK = Any()
 
-import com.skedgo.tripkit.common.R;
-
-import java.util.Calendar;
-import java.util.Date;
-import java.util.Locale;
-import java.util.TimeZone;
-
-import androidx.annotation.Nullable;
-
-import static java.util.concurrent.TimeUnit.SECONDS;
-
-public class TimeUtils {
-
-    private static final Object TIME_LOCK = new Object();
     //a very far future, in millis :) remember to check there are 13 digits (millis, not secs), last
     //character is letter L, not number '1'
-    public static long WHEN_TELEPORTER_EXISTS = 1777888999000l;
-    private static Time mTime = new Time();
+    var WHEN_TELEPORTER_EXISTS: Long = 1777888999000L
+    private val mTime = Time()
 
-    public static Time getLastSecondOfPreviousDayAsTime(long startsSecs, String timeZoneString) {
-        long startsMillis = startsSecs * 1000;
-        long offsetInSecs = (TimeZone.getTimeZone(timeZoneString).getOffset(startsMillis)) / 1000;
-        int julianDayOfInputTime = Time.getJulianDay(startsMillis, offsetInSecs);
-        int prevDay = julianDayOfInputTime - 1;
-        Time time = new Time();
-        time.timezone = timeZoneString;
-        time.normalize(false);
-        time.setJulianDay(prevDay);
-        time.normalize(false);
-        time.hour = 23;
-        time.minute = 59;
-        time.second = 59;
-        time.normalize(false);
-        return time;
+    fun getLastSecondOfPreviousDayAsTime(startsSecs: Long, timeZoneString: String?): Time {
+        val startsMillis = startsSecs * 1000
+        val offsetInSecs =
+            ((TimeZone.getTimeZone(timeZoneString).getOffset(startsMillis)) / 1000).toLong()
+        val julianDayOfInputTime = Time.getJulianDay(startsMillis, offsetInSecs)
+        val prevDay = julianDayOfInputTime - 1
+        val time = Time()
+        time.timezone = timeZoneString
+        time.normalize(false)
+        time.setJulianDay(prevDay)
+        time.normalize(false)
+        time.hour = 23
+        time.minute = 59
+        time.second = 59
+        time.normalize(false)
+        return time
     }
 
-    public static long getMillisFrom(String am_pm, int hour, int minute, int sec) {
-        int amPmInt = Calendar.AM;
-        if ("PM".equalsIgnoreCase(am_pm)) {
-            amPmInt = Calendar.PM;
+    fun getMillisFrom(am_pm: String?, hour: Int, minute: Int, sec: Int): Long {
+        var amPmInt = Calendar.AM
+        if ("PM".equals(am_pm, ignoreCase = true)) {
+            amPmInt = Calendar.PM
         }
-        Calendar calendar = Calendar.getInstance();
-        calendar.set(Calendar.AM_PM, amPmInt);
-        calendar.set(Calendar.HOUR, hour);
-        calendar.set(Calendar.MINUTE, minute);
-        return calendar.getTimeInMillis();
+        val calendar = Calendar.getInstance()
+        calendar[Calendar.AM_PM] = amPmInt
+        calendar[Calendar.HOUR] = hour
+        calendar[Calendar.MINUTE] = minute
+        return calendar.timeInMillis
     }
 
-    public static int getCurrentJulianDay() {
-        synchronized (TIME_LOCK) {
-            mTime.setToNow();
-            return Time.getJulianDay(mTime.toMillis(true), mTime.gmtoff);
+    val currentJulianDay: Int
+        get() {
+            synchronized(TIME_LOCK) {
+                mTime.setToNow()
+                return Time.getJulianDay(mTime.toMillis(true), mTime.gmtoff)
+            }
         }
-    }
 
-    public static int getJulianDay(Time t) {
-        if (t == null) {
-            return 0;
+    fun getJulianDay(t: Time?): Int {
+        return if (t == null) {
+            0
         } else {
-            return Time.getJulianDay(t.toMillis(true), t.gmtoff);
+            Time.getJulianDay(t.toMillis(true), t.gmtoff)
         }
     }
 
-    public static int getJulianDay(long millis) {
-        synchronized (TIME_LOCK) {
-            return Time.getJulianDay(millis, mTime.gmtoff);
+    @JvmStatic
+    fun getJulianDay(millis: Long): Int {
+        synchronized(TIME_LOCK) {
+            return Time.getJulianDay(millis, mTime.gmtoff)
         }
     }
 
@@ -80,13 +77,11 @@ public class TimeUtils {
      * @param millis
      * @return time in normal format, e.g, 3:05pm
      */
-    public static String getTimeInDay(long millis) {
-
-        synchronized (TIME_LOCK) {
-            mTime.set(millis);
-            return mTime.format("%l:%M%p");
+    fun getTimeInDay(millis: Long): String {
+        synchronized(TIME_LOCK) {
+            mTime.set(millis)
+            return mTime.format("%l:%M%p")
         }
-
     }
 
     /**
@@ -94,105 +89,112 @@ public class TimeUtils {
      *
      * @return e.g, 1 day 2 hrs 30 mins
      */
-    public static String getDurationInDaysHoursMins(Context context, int seconds) {
-        if (seconds > InSeconds.DAY) {
-            return getDurationWithDaysInIt(context, seconds);
+    @JvmStatic
+    fun getDurationInDaysHoursMins(context: Context, seconds: Int): String {
+        return if (seconds > InSeconds.DAY) {
+            getDurationWithDaysInIt(context, seconds)
         } else {
-            return getDurationInHoursMins(context, seconds);
+            getDurationInHoursMins(context, seconds)
         }
     }
 
-    private static String getHrsAndMinsString(Context context, int hour, int minutes, String time) {
+    private fun getHrsAndMinsString(
+        context: Context,
+        hour: Int,
+        minutes: Int,
+        time: String
+    ): String {
+        var time = time
         if (hour == 1) {
-            time += hour + " " + context.getString(R.string.str_hr);
+            time += hour.toString() + " " + context.getString(R.string.str_hr)
         } else if (hour > 1) {
-            time += hour + " " + context.getString(R.string.str_hrs);
+            time += hour.toString() + " " + context.getString(R.string.str_hrs)
         }
 
         if (minutes == 1) {
             if (hour >= 1) {
-                time += " ";
+                time += " "
             }
-            time += minutes + " " + context.getString(R.string.str_mins);
+            time += minutes.toString() + " " + context.getString(R.string.str_mins)
         } else if (minutes > 1) {
             if (hour >= 1) {
-                time += " ";
+                time += " "
             }
-            time += minutes + " " + context.getString(R.string.str_mins);
+            time += minutes.toString() + " " + context.getString(R.string.str_mins)
         }
 
-        return time;
+        return time
     }
 
-    public static String getDurationInHoursMins(Context context, int seconds) {
-        int hour = seconds / InSeconds.HOUR;
-        int minutes = (seconds % InSeconds.HOUR) / InSeconds.MINUTE;
-        String time = "";
-        return getHrsAndMinsString(context, hour, minutes, time);
+    fun getDurationInHoursMins(context: Context, seconds: Int): String {
+        val hour = seconds / InSeconds.HOUR
+        val minutes = (seconds % InSeconds.HOUR) / InSeconds.MINUTE
+        val time = ""
+        return getHrsAndMinsString(context, hour, minutes, time)
     }
 
-    public static String getDurationWithDaysInIt(Context context, int seconds) {
-        int days = seconds / InSeconds.DAY;
-        int hour = (seconds % InSeconds.DAY) / InSeconds.HOUR;
-        int minutes = (seconds % InSeconds.HOUR) / InSeconds.MINUTE;
-        String time = "";
+    fun getDurationWithDaysInIt(context: Context, seconds: Int): String {
+        val days = seconds / InSeconds.DAY
+        val hour = (seconds % InSeconds.DAY) / InSeconds.HOUR
+        val minutes = (seconds % InSeconds.HOUR) / InSeconds.MINUTE
+        var time = ""
         if (days == 1) {
-            time += days + " day";
+            time += "$days day"
         } else if (days > 1) {
-            time += days + " days";
+            time += "$days days"
         }
-        return getHrsAndMinsString(context, hour, minutes, time);
+        return getHrsAndMinsString(context, hour, minutes, time)
     }
 
-    public static long getCurrentMillis() {
-        synchronized (TIME_LOCK) {
-            mTime.setToNow();
-            return mTime.toMillis(true);
+    val currentMillis: Long
+        get() {
+            synchronized(TIME_LOCK) {
+                mTime.setToNow()
+                return mTime.toMillis(true)
+            }
         }
-    }
 
-    @Nullable
-    public static String getTimeZoneDisplayName(String timezoneId, long timeInSecs, Locale locale) {
+    @JvmStatic
+    fun getTimeZoneDisplayName(timezoneId: String?, timeInSecs: Long, locale: Locale?): String? {
         if (timezoneId == null) {
-            return null;
+            return null
         }
 
-        TimeZone timeZone = TimeZone.getTimeZone(timezoneId);
+        val timeZone = TimeZone.getTimeZone(timezoneId)
 
         // Unknown id.
-        if (timeZone.getID().equals("GMT")) {
-            return null;
+        if (timeZone.id == "GMT") {
+            return null
         }
 
         return timeZone.getDisplayName(
-            timeZone.inDaylightTime(new Date(SECONDS.toMillis(timeInSecs))),
+            timeZone.inDaylightTime(Date(SECONDS.toMillis(timeInSecs))),
             TimeZone.SHORT,
             locale
-        );
+        )
     }
 
-    public static final class InMillis {
-        public static final long SECOND = 1000;
-        public static final long MINUTE = SECOND * 60;
-        public static final long HOUR = MINUTE * 60;
-        public static final long DAY = HOUR * 24;
-        public static final long WEEK = DAY * 7;
-        public static final long MONTH = WEEK * 4;
-        public static final long YEAR = MONTH * 12;
+    object InMillis {
+        const val SECOND: Long = 1000
+        const val MINUTE: Long = SECOND * 60
+        const val HOUR: Long = MINUTE * 60
+        const val DAY: Long = HOUR * 24
+        const val WEEK: Long = DAY * 7
+        const val MONTH: Long = WEEK * 4
+        const val YEAR: Long = MONTH * 12
     }
 
-    public static final class InSeconds {
-        public static final int MINUTE = 60;
-        public static final int HOUR = MINUTE * 60;
-        public static final int DAY = HOUR * 24;
-        public static final int WEEK = DAY * 7;
-        public static final int MONTH = WEEK * 4;
-        public static final int YEAR = DAY * 365; // 31,536,000 < 2^32 (4.2 billion), an int is enough
+    object InSeconds {
+        const val MINUTE: Int = 60
+        const val HOUR: Int = MINUTE * 60
+        const val DAY: Int = HOUR * 24
+        const val WEEK: Int = DAY * 7
+        const val MONTH: Int = WEEK * 4
+        const val YEAR: Int = DAY * 365 // 31,536,000 < 2^32 (4.2 billion), an int is enough
     }
 
     /*below class is copied out from android sdk source, weird that
      * I can't call the native Duration class in package package com.android.calendarcommon2;*/
-
     /**
      * According to RFC2445, durations are like this:
      * WEEKS
@@ -201,100 +203,100 @@ public class TimeUtils {
      * it doesn't specifically, say, but this sort of implies that you can't have
      * 70 seconds.
      */
-    public static class Duration {
-        public int sign; // 1 or -1
-        public int weeks;
-        public int days;
-        public int hours;
-        public int minutes;
-        public int seconds;
-
-        public Duration() {
-            sign = 1;
-        }
+    class Duration {
+        var sign: Int = 1 // 1 or -1
+        var weeks: Int = 0
+        var days: Int = 0
+        var hours: Int = 0
+        var minutes: Int = 0
+        var seconds: Int = 0
 
         /**
          * Parse according to RFC2445 ss4.3.6.  (It's actually a little loose with
          * its parsing, for better or for worse)
          */
-        public void parse(String str) throws Exception {
-            sign = 1;
-            weeks = 0;
-            days = 0;
-            hours = 0;
-            minutes = 0;
-            seconds = 0;
+        @Throws(Exception::class)
+        fun parse(str: String) {
+            sign = 1
+            weeks = 0
+            days = 0
+            hours = 0
+            minutes = 0
+            seconds = 0
 
-            int len = str.length();
-            int index = 0;
-            char c;
+            val len = str.length
+            var index = 0
+            var c: Char
 
             if (len < 1) {
-                return;
+                return
             }
 
-            c = str.charAt(0);
+            c = str[0]
             if (c == '-') {
-                sign = -1;
-                index++;
+                sign = -1
+                index++
             } else if (c == '+') {
-                index++;
+                index++
             }
 
             if (len < index) {
-                return;
+                return
             }
 
-            c = str.charAt(index);
+            c = str[index]
             if (c != 'P') {
-                throw new Exception(
+                throw Exception(
                     "Duration.parse(str='" + str + "') expected 'P' at index="
-                        + index);
+                        + index
+                )
             }
-            index++;
-            c = str.charAt(index);
+            index++
+            c = str[index]
             if (c == 'T') {
-                index++;
+                index++
             }
 
-            int n = 0;
-            for (; index < len; index++) {
-                c = str.charAt(index);
+            var n = 0
+            while (index < len) {
+                c = str[index]
                 if (c >= '0' && c <= '9') {
-                    n *= 10;
-                    n += c - '0';
+                    n *= 10
+                    n += c.code - '0'.code
                 } else if (c == 'W') {
-                    weeks = n;
-                    n = 0;
+                    weeks = n
+                    n = 0
                 } else if (c == 'H') {
-                    hours = n;
-                    n = 0;
+                    hours = n
+                    n = 0
                 } else if (c == 'M') {
-                    minutes = n;
-                    n = 0;
+                    minutes = n
+                    n = 0
                 } else if (c == 'S') {
-                    seconds = n;
-                    n = 0;
+                    seconds = n
+                    n = 0
                 } else if (c == 'D') {
-                    days = n;
-                    n = 0;
+                    days = n
+                    n = 0
                 } else if (c == 'T') {
                 } else {
-                    throw new Exception(
+                    throw Exception(
                         "Duration.parse(str='" + str + "') unexpected char '"
-                            + c + "' at index=" + index);
+                            + c + "' at index=" + index
+                    )
                 }
+                index++
             }
         }
 
-        public long getMillis() {
-            long factor = 1000 * sign;
-            return factor * ((7 * 24 * 60 * 60 * weeks)
-                + (24 * 60 * 60 * days)
-                + (60 * 60 * hours)
-                + (60 * minutes)
-                + seconds);
-        }
+        val millis: Long
+            get() {
+                val factor = (1000 * sign).toLong()
+                return factor * ((7 * 24 * 60 * 60 * weeks)
+                    + (24 * 60 * 60 * days)
+                    + (60 * 60 * hours)
+                    + (60 * minutes)
+                    + seconds)
+            }
     }
-
 }
