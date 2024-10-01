@@ -1,64 +1,56 @@
-package com.skedgo.tripkit.common.util;
+package com.skedgo.tripkit.common.util
 
-import android.content.res.Resources;
-import android.text.TextUtils;
-
-import com.skedgo.tripkit.common.R;
-import com.skedgo.tripkit.common.model.location.Location;
-import com.skedgo.tripkit.routing.SegmentType;
-import com.skedgo.tripkit.routing.TripSegment;
-import com.skedgo.tripkit.routing.Visibilities;
-
-import org.apache.commons.collections4.CollectionUtils;
-
-import java.util.List;
-import java.util.concurrent.atomic.AtomicLong;
+import android.content.res.Resources
+import android.text.TextUtils
+import com.skedgo.tripkit.common.R
+import com.skedgo.tripkit.common.model.location.Location
+import com.skedgo.tripkit.routing.SegmentType.ARRIVAL
+import com.skedgo.tripkit.routing.SegmentType.DEPARTURE
+import com.skedgo.tripkit.routing.TripSegment
+import com.skedgo.tripkit.routing.Visibilities
+import org.apache.commons.collections4.CollectionUtils
+import java.util.concurrent.atomic.AtomicLong
 
 /**
  * Puts a Departure segment before head of,
  * and puts an Arrival segment after tail of a segment list.
- * <p/>
+ *
+ *
  * Also, fills identifiers for segments.
  */
-public class TripSegmentListResolver {
-    private Location origin;
-    private Location destination;
-    private List<TripSegment> tripSegmentList;
-    private AtomicLong segmentIdGenerator;
-    private Resources resources;
-
-    public TripSegmentListResolver(Resources resources) {
-        segmentIdGenerator = new AtomicLong();
-        this.resources = resources;
-    }
+class TripSegmentListResolver(private val resources: Resources) {
+    private var origin: Location? = null
+    private var destination: Location? = null
+    private var tripSegmentList: MutableList<TripSegment>? = null
+    private val segmentIdGenerator = AtomicLong()
 
     /**
      * @param origin The location that we depart
      */
-    public TripSegmentListResolver setOrigin(Location origin) {
-        this.origin = origin;
-        return this;
+    fun setOrigin(origin: Location?): TripSegmentListResolver {
+        this.origin = origin
+        return this
     }
 
     /**
      * @param destination The location that we finally arrive
      */
-    public TripSegmentListResolver setDestination(Location destination) {
-        this.destination = destination;
-        return this;
+    fun setDestination(destination: Location?): TripSegmentListResolver {
+        this.destination = destination
+        return this
     }
 
-    public TripSegmentListResolver setTripSegmentList(List<TripSegment> tripSegmentList) {
-        this.tripSegmentList = tripSegmentList;
-        return this;
+    fun setTripSegmentList(tripSegmentList: MutableList<TripSegment>?): TripSegmentListResolver {
+        this.tripSegmentList = tripSegmentList
+        return this
     }
 
-    public void resolve() {
+    fun resolve() {
         if (!CollectionUtils.isEmpty(tripSegmentList)) {
-            putDepartureSegment();
-            putArrivalSegment();
+            putDepartureSegment()
+            putArrivalSegment()
 
-            fillSegmentIdentifiers();
+            fillSegmentIdentifiers()
         }
     }
 
@@ -68,31 +60,31 @@ public class TripSegmentListResolver {
      * @param lastSegment The last segment (or tail) of the segment list
      * @return The Arrival segment
      */
-    public TripSegment createArrivalSegment(TripSegment lastSegment) {
-        String destinationName = TripSegmentUtils.getLocationName(destination);
-        String arrivalAction;
+    fun createArrivalSegment(lastSegment: TripSegment): TripSegment {
+        val destinationName = TripSegmentUtils.getLocationName(destination)
 
-        if (TextUtils.isEmpty(destinationName)) {
-            arrivalAction = String.format(
+        val arrivalAction = if (TextUtils.isEmpty(destinationName)) {
+            String.format(
                 resources.getString(R.string.arrive_at__pattern),
                 resources.getString(R.string.destination)
-            );
+            )
         } else {
-            arrivalAction = String.format(
+            String.format(
                 resources.getString(R.string.arrive_at__pattern),
-                destinationName);
+                destinationName
+            )
         }
 
-        final TripSegment arrivalSegment = new TripSegment();
-        arrivalSegment.setType(SegmentType.ARRIVAL);
-        arrivalSegment.setFrom(destination);
-        arrivalSegment.setTo(destination);
-        arrivalSegment.setAction(arrivalAction);
-        arrivalSegment.setVisibility(Visibilities.VISIBILITY_ON_MAP);
-        arrivalSegment.setStartTimeInSecs(lastSegment.getEndTimeInSecs());
-        arrivalSegment.setEndTimeInSecs(lastSegment.getEndTimeInSecs());
-        arrivalSegment.setAvailability(lastSegment.getAvailability());
-        return arrivalSegment;
+        val arrivalSegment = TripSegment()
+        arrivalSegment.type = ARRIVAL
+        arrivalSegment.from = destination
+        arrivalSegment.to = destination
+        arrivalSegment.action = arrivalAction
+        arrivalSegment.visibility = Visibilities.VISIBILITY_ON_MAP
+        arrivalSegment.startTimeInSecs = lastSegment.endTimeInSecs
+        arrivalSegment.endTimeInSecs = lastSegment.endTimeInSecs
+        arrivalSegment.availability = lastSegment.availability
+        return arrivalSegment
     }
 
     /**
@@ -101,61 +93,60 @@ public class TripSegmentListResolver {
      * @param firstSegment The first segment (or head) of the segment list
      * @return The Departure segment
      */
-    public TripSegment createDepartureSegment(final TripSegment firstSegment) {
-        String originName = TripSegmentUtils.getLocationName(origin);
-
-        String departureAction;
-        if (TextUtils.isEmpty(originName)) {
-            departureAction = String.format(
+    fun createDepartureSegment(firstSegment: TripSegment): TripSegment {
+        val originName = TripSegmentUtils.getLocationName(origin)
+        val departureAction = if (TextUtils.isEmpty(originName)) {
+            String.format(
                 resources.getString(R.string.leave__pattern),
                 resources.getString(R.string.origin)
-            );
+            )
         } else {
-            departureAction = String.format(
+            String.format(
                 resources.getString(R.string.leave__pattern),
-                originName);
+                originName
+            )
         }
 
-        final TripSegment departureSegment = new TripSegment();
-        departureSegment.setType(SegmentType.DEPARTURE);
-        departureSegment.setFrom(origin);
-        departureSegment.setTo(origin);
-        departureSegment.setAction(departureAction);
-        departureSegment.setVisibility(Visibilities.VISIBILITY_IN_DETAILS);
-        departureSegment.setStartTimeInSecs(firstSegment.getStartTimeInSecs());
-        departureSegment.setEndTimeInSecs(firstSegment.getStartTimeInSecs());
-        departureSegment.setAvailability(firstSegment.getAvailability());
-        return departureSegment;
+        val departureSegment = TripSegment()
+        departureSegment.type = DEPARTURE
+        departureSegment.from = origin
+        departureSegment.to = origin
+        departureSegment.action = departureAction
+        departureSegment.visibility = Visibilities.VISIBILITY_IN_DETAILS
+        departureSegment.startTimeInSecs = firstSegment.getStartTimeInSecs()
+        departureSegment.endTimeInSecs = firstSegment.getStartTimeInSecs()
+        departureSegment.availability = firstSegment.availability
+        return departureSegment
     }
 
-    private void fillSegmentIdentifiers() {
-        segmentIdGenerator.set(0L);
-        long newSegmentId;
-        for (TripSegment segment : tripSegmentList) {
-            newSegmentId = segmentIdGenerator.incrementAndGet();
-            segment.setId(newSegmentId);
+    private fun fillSegmentIdentifiers() {
+        segmentIdGenerator.set(0L)
+        var newSegmentId: Long
+        for (segment in tripSegmentList!!) {
+            newSegmentId = segmentIdGenerator.incrementAndGet()
+            segment!!.id = newSegmentId
         }
     }
 
     /**
      * Puts a Departure segment before head
      */
-    private void putArrivalSegment() {
-        TripSegment lastSegment = tripSegmentList.get(tripSegmentList.size() - 1);
+    private fun putArrivalSegment() {
+        val lastSegment = tripSegmentList!![tripSegmentList!!.size - 1]
         if (lastSegment != null) {
-            TripSegment arrivalSegment = createArrivalSegment(lastSegment);
-            tripSegmentList.add(arrivalSegment);
+            val arrivalSegment = createArrivalSegment(lastSegment)
+            tripSegmentList!!.add(arrivalSegment)
         }
     }
 
     /**
      * Puts an Arrival segment after tail
      */
-    private void putDepartureSegment() {
-        TripSegment firstSegment = tripSegmentList.get(0);
+    private fun putDepartureSegment() {
+        val firstSegment = tripSegmentList!![0]
         if (firstSegment != null) {
-            TripSegment departureSegment = createDepartureSegment(firstSegment);
-            tripSegmentList.add(0, departureSegment);
+            val departureSegment = createDepartureSegment(firstSegment)
+            tripSegmentList!!.add(0, departureSegment)
         }
     }
 }

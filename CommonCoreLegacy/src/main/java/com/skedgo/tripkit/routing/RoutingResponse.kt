@@ -1,348 +1,294 @@
-package com.skedgo.tripkit.routing;
+package com.skedgo.tripkit.routing
 
-import android.content.res.Resources;
-import android.text.TextUtils;
-import android.util.Log;
-import android.util.SparseArray;
+import android.content.res.Resources
+import android.text.TextUtils
+import android.util.Log
+import android.util.SparseArray
+import com.google.gson.Gson
+import com.google.gson.JsonElement
+import com.google.gson.JsonObject
+import com.google.gson.JsonPrimitive
+import com.google.gson.annotations.SerializedName
+import com.skedgo.tripkit.common.R
+import com.skedgo.tripkit.common.model.realtimealert.RealtimeAlert
+import com.skedgo.tripkit.common.util.TripSegmentListResolver
+import org.apache.commons.collections4.CollectionUtils
+import java.util.Collections
 
-import com.google.gson.Gson;
-import com.google.gson.JsonElement;
-import com.google.gson.JsonObject;
-import com.google.gson.JsonPrimitive;
-import com.google.gson.annotations.SerializedName;
-import com.skedgo.tripkit.common.R;
-import com.skedgo.tripkit.common.model.realtimealert.RealtimeAlert;
-import com.skedgo.tripkit.common.util.TripSegmentListResolver;
-
-import org.apache.commons.collections4.CollectionUtils;
-
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
-
-public class RoutingResponse {
-    public static final String FORMAT_DIRECTION = "Direction: %s";
-    public static final Integer ERROR_CODE_NO_FROM_LOCATION = 1102;
-
+class RoutingResponse {
     /**
      * This is used for parsing saved trip from shared url.
      */
     @SerializedName("region")
-    private String mRegionName;
+    val regionName: String? = null
 
     @SerializedName("usererror")
-    private boolean mHasUserError;
+    private val mHasUserError = false
 
     @SerializedName("error")
-    private String mErrorMessage;
+    val errorMessage: String? = null
 
     @SerializedName("errorCode")
-    private Integer mErrorCode;
+    val errorCode: Int? = null
 
     @SerializedName("segmentTemplates")
-    private ArrayList<JsonObject> segmentTemplates;
+    private val segmentTemplates: ArrayList<JsonObject>? = null
 
     @SerializedName("groups")
-    private ArrayList<TripGroup> mTripGroupList;
+    var tripGroupList: ArrayList<TripGroup>? = null
+        private set
 
+    @JvmField
     @SerializedName("alerts")
-    private ArrayList<RealtimeAlert> alerts;
+    val alerts: ArrayList<RealtimeAlert>? = null
 
-    private transient TripSegmentListResolver mTripSegmentListResolver;
-    private transient Map<Long, RealtimeAlert> alertCache;
+    @Transient
+    private var mTripSegmentListResolver: TripSegmentListResolver? = null
 
-    /**
-     * Replaces '<DIRECTION>' with segment's 'serviceDirection'
-     *
-     * @param serviceDirectionNode The Json node that contains value for 'serviceDirection'
-     * @param notes                The 'notes' text that contains the '<DIRECTION>' template
-     * @return The 'notes' text that has been processed
-     */
-    public static String processDirectionTemplate(JsonPrimitive serviceDirectionNode, String notes, Resources resources) {
-        // Ignore processing if the 'notes' text is empty
-        if (TextUtils.isEmpty(notes)) {
-            return notes;
-        }
+    @Transient
+    private var alertCache: HashMap<Long, RealtimeAlert>? = null
 
-        if (!isElementMissing(serviceDirectionNode)) {
-            String serviceDirection = serviceDirectionNode.getAsString();
-            if (!TextUtils.isEmpty(serviceDirection)) {
-                notes = notes.replace(SegmentNotesTemplates.TEMPLATE_DIRECTION, String.format(getFormatDirection(resources), serviceDirection));
-            } else {
-                // The 'serviceDirection' node is empty, clear the template.
-                notes = notes.replace(SegmentNotesTemplates.TEMPLATE_DIRECTION, "");
-            }
-        } else {
-            // The 'serviceDirection' node doesn't exist, clear the template.
-            notes = notes.replace(SegmentNotesTemplates.TEMPLATE_DIRECTION, "");
-        }
-
-        return notes;
+    fun hasError(): Boolean {
+        return mHasUserError
     }
 
-    private static String getFormatDirection(Resources resources) {
-        if (resources == null) {
-            return FORMAT_DIRECTION;
-        }
-        return resources.getString(R.string.direction) + ": %s";
+    fun processRawData(resources: Resources?, gson: Gson) {
+        val segmentTemplateMap = createSegmentTemplateMap(segmentTemplates)
+        tripGroupList = processRawData(resources, gson, tripGroupList, segmentTemplateMap)
     }
 
-    private static boolean isElementMissing(JsonElement element) {
-        return (element == null) || element.isJsonNull();
-    }
-
-    public String getRegionName() {
-        return mRegionName;
-    }
-
-    public boolean hasError() {
-        return mHasUserError;
-    }
-
-    public String getErrorMessage() {
-        return mErrorMessage;
-    }
-
-    public Integer getErrorCode() {
-        return mErrorCode;
-    }
-
-    public ArrayList<TripGroup> getTripGroupList() {
-        return mTripGroupList;
-    }
-
-    public void processRawData(Resources resources, Gson gson) {
-        SparseArray<JsonObject> segmentTemplateMap = createSegmentTemplateMap(segmentTemplates);
-        mTripGroupList = processRawData(resources, gson, mTripGroupList, segmentTemplateMap);
-    }
-
-    public ArrayList<TripGroup> processRawData(Resources resources, Gson gson,
-                                               ArrayList<TripGroup> tripGroups,
-                                               SparseArray<JsonObject> segmentTemplateMap) {
+    fun processRawData(
+        resources: Resources?, gson: Gson,
+        tripGroups: ArrayList<TripGroup>?,
+        segmentTemplateMap: SparseArray<JsonObject>
+    ): ArrayList<TripGroup>? {
         if (CollectionUtils.isEmpty(tripGroups)) {
-            return tripGroups;
+            return tripGroups
         }
 
         if (CollectionUtils.isNotEmpty(alerts)) {
-            alertCache = new HashMap<>(alerts.size());
-            for (RealtimeAlert alert : alerts) {
-                alertCache.put(alert.remoteHashCode(), alert);
+            alertCache = HashMap(alerts!!.size)
+            for (alert in alerts) {
+                alertCache!![alert!!.remoteHashCode()] = alert
             }
         }
-        for (TripGroup tripGroup : tripGroups) {
-            ArrayList<Trip> trips = tripGroup.getTrips();
+        for (tripGroup in tripGroups!!) {
+            val trips: ArrayList<Trip>? = tripGroup!!.trips
             if (CollectionUtils.isEmpty(trips)) {
-                continue;
+                continue
             }
-            for (Trip trip : trips) {
-                trip.setGroup(tripGroup);
+            for (trip in trips!!) {
+                trip!!.group = tripGroup
 
-                ArrayList<JsonObject> rawSegments = trip.getRawSegmentList();
-                trip.setRawSegmentList(null);
+                val rawSegments: ArrayList<JsonObject>? = trip.rawSegmentList
+                trip.rawSegmentList = null
                 if (CollectionUtils.isEmpty(rawSegments)) {
-                    continue;
+                    continue
                 }
 
-                ArrayList<TripSegment> segments = createSegmentsFromTemplate(
+                val segments = createSegmentsFromTemplate(
                     gson,
                     segmentTemplateMap,
                     rawSegments,
                     resources
-                );
-                trip.setSegmentList(segments);
-                processTripSegmentRealTimeVehicle(segments);
+                )
+                trip.segmentList = segments
+                processTripSegmentRealTimeVehicle(segments)
             }
 
-            Collections.sort(trips, TripComparators.TIME_COMPARATOR_CHAIN);
+            Collections.sort(trips, TripComparators.TIME_COMPARATOR_CHAIN)
         }
 
         if (mTripSegmentListResolver == null) {
-            mTripSegmentListResolver = new TripSegmentListResolver(resources);
+            mTripSegmentListResolver = TripSegmentListResolver(resources!!)
         }
 
-        resolveTripGroupList(tripGroups);
-        return tripGroups;
+        resolveTripGroupList(tripGroups)
+        return tripGroups
     }
 
-    public SparseArray<JsonObject> createSegmentTemplateMap(List<JsonObject> segmentTemplates) {
-        SparseArray<JsonObject> segmentTemplateMap = new SparseArray<JsonObject>();
+    fun createSegmentTemplateMap(segmentTemplates: List<JsonObject>?): SparseArray<JsonObject> {
+        val segmentTemplateMap = SparseArray<JsonObject>()
         if (CollectionUtils.isNotEmpty(segmentTemplates)) {
-            for (JsonObject segmentTemplate : segmentTemplates) {
+            for (segmentTemplate in segmentTemplates!!) {
                 if (segmentTemplate != null) {
-                    JsonPrimitive hashCodeNode = segmentTemplate.getAsJsonPrimitive(SegmentJsonKeys.NODE_HASH_CODE);
+                    val hashCodeNode =
+                        segmentTemplate.getAsJsonPrimitive(SegmentJsonKeys.NODE_HASH_CODE)
                     if (isElementMissing(hashCodeNode)) {
-                        continue;
+                        continue
                     }
 
-                    int hashCode = hashCodeNode.getAsInt();
-                    segmentTemplateMap.put(hashCode, segmentTemplate);
+                    val hashCode = hashCodeNode.asInt
+                    segmentTemplateMap.put(hashCode, segmentTemplate)
                 }
             }
         }
 
-        return segmentTemplateMap;
+        return segmentTemplateMap
     }
 
-    public ArrayList<RealtimeAlert> getAlerts() {
-        return alerts;
-    }
-
-    private void resolveTripGroupList(ArrayList<TripGroup> tripGroupList) {
-        for (TripGroup tripGroup : tripGroupList) {
-            if (CollectionUtils.isNotEmpty(tripGroup.getTrips())) {
-                for (Trip trip : tripGroup.getTrips()) {
-                    if (trip != null) {
-                        mTripSegmentListResolver
-                            .setOrigin(trip.getFrom())
-                            .setDestination(trip.getTo())
-                            .setTripSegmentList(trip.getSegmentList())
-                            .resolve();
-                    }
+    private fun resolveTripGroupList(tripGroupList: ArrayList<TripGroup>?) {
+        for (tripGroup in tripGroupList.orEmpty()) {
+            if (CollectionUtils.isNotEmpty(tripGroup.trips)) {
+                for (trip in tripGroup.trips.orEmpty()) {
+                    mTripSegmentListResolver
+                        ?.setOrigin(trip.from)
+                        ?.setDestination(trip.to)
+                        ?.setTripSegmentList(trip.segmentList)
+                        ?.resolve()
                 }
             }
         }
     }
 
-    private void processTripSegmentRealTimeVehicle(ArrayList<TripSegment> tripSegmentList) {
-        for (TripSegment tripSegment : tripSegmentList) {
-            RealTimeVehicle vehicle = tripSegment.getRealTimeVehicle();
-            if (vehicle == null) {
-                continue;
-            }
+    private fun processTripSegmentRealTimeVehicle(tripSegmentList: ArrayList<TripSegment>) {
+        for (tripSegment in tripSegmentList) {
+            val vehicle = tripSegment.realTimeVehicle ?: continue
 
-            vehicle.setServiceTripId(tripSegment.getServiceTripId());
-            vehicle.setStartStopCode(tripSegment.getStartStopCode());
-            vehicle.setEndStopCode(tripSegment.getEndStopCode());
+            vehicle.serviceTripId = tripSegment.serviceTripId
+            vehicle.startStopCode = tripSegment.startStopCode
+            vehicle.endStopCode = tripSegment.endStopCode
 
-            tripSegment.setRealTimeVehicle(vehicle);
+            tripSegment.realTimeVehicle = vehicle
         }
     }
 
-    private ArrayList<TripSegment> createSegmentsFromTemplate(Gson gson,
-                                                              SparseArray<JsonObject> segmentTemplateMap,
-                                                              ArrayList<JsonObject> rawSegments,
-                                                              Resources resources) {
-        ArrayList<TripSegment> segments = new ArrayList<TripSegment>(rawSegments.size());
-        for (JsonObject rawSegment : rawSegments) {
-
+    private fun createSegmentsFromTemplate(
+        gson: Gson,
+        segmentTemplateMap: SparseArray<JsonObject>,
+        rawSegments: ArrayList<JsonObject>?,
+        resources: Resources?
+    ): ArrayList<TripSegment> {
+        val segments = ArrayList<TripSegment>(
+            rawSegments!!.size
+        )
+        for (rawSegment in rawSegments) {
             if (rawSegment == null) {
-                continue;
+                continue
             }
 
-            JsonPrimitive hashCodeNode = rawSegment.getAsJsonPrimitive(SegmentJsonKeys.NODE_SEGMENT_TEMPLATE_HASH_CODE);
+            val hashCodeNode =
+                rawSegment.getAsJsonPrimitive(SegmentJsonKeys.NODE_SEGMENT_TEMPLATE_HASH_CODE)
             if (isElementMissing(hashCodeNode)) {
-                continue;
+                continue
             }
 
-            int hashCode = hashCodeNode.getAsInt();
-            JsonObject segmentTemplate = segmentTemplateMap.get(hashCode);
-            TripSegment segment = createSegmentFromTemplate(gson, rawSegment, segmentTemplate, resources);
-            segments.add(segment);
+            val hashCode = hashCodeNode.asInt
+            val segmentTemplate = segmentTemplateMap[hashCode]
+            val segment = createSegmentFromTemplate(gson, rawSegment, segmentTemplate, resources)
+            segments.add(segment)
         }
 
-        return segments;
+        return segments
     }
 
-    private TripSegment createSegmentFromTemplate(Gson gson,
-                                                  JsonObject rawSegment,
-                                                  JsonObject segmentTemplate,
-                                                  Resources resources) {
+    private fun createSegmentFromTemplate(
+        gson: Gson,
+        rawSegment: JsonObject,
+        segmentTemplate: JsonObject?,
+        resources: Resources?
+    ): TripSegment {
         if (segmentTemplate != null) {
-            Set<Map.Entry<String, JsonElement>> entrySet = segmentTemplate.entrySet();
-            for (Map.Entry<String, JsonElement> entry : entrySet) {
-                String key = entry.getKey();
-                JsonElement value = entry.getValue();
-
-                if (SegmentJsonKeys.NODE_ACTION.equals(key)) {
-                    processSegmentTemplateAction(rawSegment, value);
-                } else if (SegmentJsonKeys.NODE_NOTES.equals(key)) {
-                    processSegmentTemplateNotes(rawSegment, value, resources);
+            val entrySet = segmentTemplate.entrySet()
+            for ((key, value) in entrySet) {
+                if (SegmentJsonKeys.NODE_ACTION == key) {
+                    processSegmentTemplateAction(rawSegment, value)
+                } else if (SegmentJsonKeys.NODE_NOTES == key) {
+                    processSegmentTemplateNotes(rawSegment, value, resources)
                 } else {
-                    rawSegment.add(key, value);
+                    rawSegment.add(key, value)
                 }
             }
         }
-        TripSegment segment = new TripSegment();
+        var segment = TripSegment()
         try {
-            segment = gson.fromJson(rawSegment, TripSegment.class);
-        } catch (Exception e) {
-            Log.e("TripKit", "GSON ERROR", e);
-            Log.e("TripKit", rawSegment.toString());
+            segment = gson.fromJson(rawSegment, TripSegment::class.java)
+        } catch (e: Exception) {
+            Log.e("TripKit", "GSON ERROR", e)
+            Log.e("TripKit", rawSegment.toString())
         }
-        if (segment.getAlertHashCodes() != null && alertCache != null) {
-            ArrayList<RealtimeAlert> segmentAlerts = null;
-            for (long alertHashCode : segment.getAlertHashCodes()) {
-                RealtimeAlert alert = alertCache.get(alertHashCode);
+        if (segment.alertHashCodes != null && alertCache != null) {
+            var segmentAlerts: ArrayList<RealtimeAlert>? = null
+            for (alertHashCode in segment.alertHashCodes) {
+                val alert = alertCache!![alertHashCode]
                 if (alert != null) {
                     // Lazily initialize.
                     if (segmentAlerts == null) {
-                        segmentAlerts = new ArrayList<>();
+                        segmentAlerts = ArrayList()
                     }
 
-                    segmentAlerts.add(alert);
+                    segmentAlerts.add(alert)
                 }
             }
 
             if (segmentAlerts != null) {
-                segment.setAlerts(segmentAlerts);
+                segment.alerts = segmentAlerts
             }
         }
-        return segment;
+        return segment
     }
 
-    private void processSegmentTemplateNotes(JsonObject rawSegment, JsonElement notesNode, Resources resources) {
+    private fun processSegmentTemplateNotes(
+        rawSegment: JsonObject,
+        notesNode: JsonElement,
+        resources: Resources?
+    ) {
         if (isElementMissing(notesNode)) {
-            return;
+            return
         }
 
-        String notes = notesNode.getAsString();
+        var notes = notesNode.asString
         if (!TextUtils.isEmpty(notes)) {
-            JsonPrimitive serviceNameNode = rawSegment.getAsJsonPrimitive(SegmentJsonKeys.NODE_SERVICE_NAME);
+            val serviceNameNode = rawSegment.getAsJsonPrimitive(SegmentJsonKeys.NODE_SERVICE_NAME)
             if (!isElementMissing(serviceNameNode)) {
-                final String serviceName = serviceNameNode.getAsString();
+                val serviceName = serviceNameNode.asString
                 if (serviceName != null) {
                     // No need to check empty. Reason: https://redmine.buzzhives.com/issues/5803.
-                    notes = notes.replace(SegmentNotesTemplates.TEMPLATE_LINE_NAME, serviceName);
+                    notes = notes.replace(SegmentNotesTemplates.TEMPLATE_LINE_NAME, serviceName)
                 }
             }
 
-            // Replaces '<DIRECTION>' with segment's 'serviceDirection'
-            notes = processDirectionTemplate(rawSegment.getAsJsonPrimitive(SegmentJsonKeys.NODE_SERVICE_DIRECTION), notes, resources);
+            if(rawSegment.has(SegmentJsonKeys.NODE_SERVICE_DIRECTION)) {
+                // Replaces '<DIRECTION>' with segment's 'serviceDirection'
+                notes = processDirectionTemplate(
+                    rawSegment.getAsJsonPrimitive(SegmentJsonKeys.NODE_SERVICE_DIRECTION),
+                    notes,
+                    resources
+                )
 
-            rawSegment.addProperty(SegmentJsonKeys.NODE_NOTES, notes);
+                rawSegment.addProperty(SegmentJsonKeys.NODE_NOTES, notes)
+            }
         }
     }
 
-    private void processSegmentTemplateAction(JsonObject rawSegment, JsonElement actionNode) {
+    private fun processSegmentTemplateAction(rawSegment: JsonObject, actionNode: JsonElement) {
         if (isElementMissing(actionNode)) {
-            return;
+            return
         }
 
-        String action = actionNode.getAsString();
+        var action = actionNode.asString
         if (!TextUtils.isEmpty(action)) {
-            action = processActionNumber(rawSegment, action);
-            rawSegment.addProperty(SegmentJsonKeys.NODE_ACTION, action);
+            action = processActionNumber(rawSegment, action)
+            rawSegment.addProperty(SegmentJsonKeys.NODE_ACTION, action)
         }
     }
 
-    private String processActionNumber(JsonObject rawSegment, String action) {
-        JsonPrimitive serviceNumberNode = rawSegment.getAsJsonPrimitive(SegmentJsonKeys.NODE_SERVICE_NUMBER);
+    private fun processActionNumber(rawSegment: JsonObject, action: String): String {
+        var action = action
+        val serviceNumberNode = rawSegment.getAsJsonPrimitive(SegmentJsonKeys.NODE_SERVICE_NUMBER)
         if (!isElementMissing(serviceNumberNode)) {
-            String serviceNumber = serviceNumberNode.getAsString();
+            val serviceNumber = serviceNumberNode.asString
             if (!TextUtils.isEmpty(serviceNumber)) {
-                action = action.replace(SegmentActionTemplates.TEMPLATE_NUMBER, serviceNumber);
+                action = action.replace(SegmentActionTemplates.TEMPLATE_NUMBER, serviceNumber)
             } else if (action.contains(SegmentActionTemplates.TEMPLATE_NUMBER)) {
                 // Doesn't have service number but the template still exists.
                 // We'll replace it with mode value instead.
                 // 'Take <NUMBER>' will then become 'Take the bus' if the mode is 'bus'.
-                JsonPrimitive modeNode = rawSegment.getAsJsonPrimitive("mode");
+                val modeNode = rawSegment.getAsJsonPrimitive("mode")
                 if (!isElementMissing(modeNode)) {
-                    String mode = modeNode.getAsString();
+                    val mode = modeNode.asString
                     if (!TextUtils.isEmpty(mode)) {
-                        action = action.replace(SegmentActionTemplates.TEMPLATE_NUMBER, "the " + mode);
+                        action = action.replace(SegmentActionTemplates.TEMPLATE_NUMBER, "the $mode")
                     }
 
                     // Else? if it takes place, call backend guys right away.
@@ -350,6 +296,63 @@ public class RoutingResponse {
             }
         }
 
-        return action;
+        return action
+    }
+
+    companion object {
+        const val FORMAT_DIRECTION: String = "Direction: %s"
+        const val ERROR_CODE_NO_FROM_LOCATION: Int = 1102
+
+        /**
+         * Replaces '<DIRECTION>' with segment's 'serviceDirection'
+         *
+         * @param serviceDirectionNode The Json node that contains value for 'serviceDirection'
+         * @param notes                The 'notes' text that contains the '<DIRECTION>' template
+         * @return The 'notes' text that has been processed
+        </DIRECTION></DIRECTION> */
+        @JvmStatic
+        fun processDirectionTemplate(
+            serviceDirectionNode: JsonPrimitive,
+            notes: String,
+            resources: Resources?
+        ): String {
+            // Ignore processing if the 'notes' text is empty
+            var notes = notes
+            if (TextUtils.isEmpty(notes)) {
+                return notes
+            }
+
+            if (!isElementMissing(serviceDirectionNode)) {
+                val serviceDirection = serviceDirectionNode.asString
+                notes = if (!TextUtils.isEmpty(serviceDirection)) {
+                    notes.replace(
+                        SegmentNotesTemplates.TEMPLATE_DIRECTION,
+                        String.format(
+                            getFormatDirection(resources),
+                            serviceDirection
+                        )
+                    )
+                } else {
+                    // The 'serviceDirection' node is empty, clear the template.
+                    notes.replace(SegmentNotesTemplates.TEMPLATE_DIRECTION, "")
+                }
+            } else {
+                // The 'serviceDirection' node doesn't exist, clear the template.
+                notes = notes.replace(SegmentNotesTemplates.TEMPLATE_DIRECTION, "")
+            }
+
+            return notes
+        }
+
+        private fun getFormatDirection(resources: Resources?): String {
+            if (resources == null) {
+                return FORMAT_DIRECTION
+            }
+            return resources.getString(R.string.direction) + ": %s"
+        }
+
+        private fun isElementMissing(element: JsonElement?): Boolean {
+            return (element == null) || element.isJsonNull
+        }
     }
 }
