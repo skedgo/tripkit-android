@@ -119,7 +119,7 @@ open class RouteStore(private val databaseHelper: SQLiteOpenHelper, private val 
                 )
                 val tripSegments = asSegments(cursor)
                 cursor.close()
-                tripSegments.first { it.id == segmentId }
+                tripSegments.first { it.segmentId == segmentId }
             }
             .subscribeOn(Schedulers.io())
     }

@@ -153,7 +153,7 @@ class Trip : ITimeRange {
     var segmentList: ArrayList<TripSegment> = arrayListOf()
         set(segments) {
             field = segments
-            field.forEach { it.setTrip(this) }
+            field.forEach { it.trip = this }
         }
 
     val from: Location?
@@ -177,7 +177,7 @@ class Trip : ITimeRange {
                 null
             } else {
                 val lastSeg = segmentList.last()
-                lastSeg.getTo() ?: lastSeg.getSingleLocation()
+                lastSeg.to ?: lastSeg.singleLocation
             }
         }
 
@@ -263,9 +263,9 @@ class Trip : ITimeRange {
     fun isMixedModal(ignoreWalking: Boolean): Boolean {
         var previousMode = ""
         segmentList.forEach { segment ->
-            val currentMode = segment.getModeInfo()?.id ?: return@forEach
+            val currentMode = segment.modeInfo?.id ?: return@forEach
             if (segment.getType() != SegmentType.STATIONARY && !currentMode.isEmpty()) {
-                if ((!segment.isWalking() || !ignoreWalking) && segment.getVisibility() == Visibilities.VISIBILITY_IN_SUMMARY) {
+                if ((!segment.isWalking || !ignoreWalking) && segment.visibility == Visibilities.VISIBILITY_IN_SUMMARY) {
                     if (previousMode.isNotEmpty() && currentMode != previousMode) return true
                     previousMode = currentMode
                 }
@@ -275,12 +275,12 @@ class Trip : ITimeRange {
     }
 
     fun hasQuickBooking(): Boolean {
-        return segmentList.any { it.getBooking()?.getQuickBookingsUrl() != null }
+        return segmentList.any { it.booking?.getQuickBookingsUrl() != null }
     }
 
     fun hasTransportMode(vararg modes: VehicleMode): Boolean {
         return segmentList.any { segment ->
-            modes.any { mode -> segment.getMode() == mode }
+            modes.any { mode -> segment.mode == mode }
         }
     }
 
@@ -308,7 +308,7 @@ class Trip : ITimeRange {
 
     fun hasAnyExpensiveTransport(): Boolean {
         return segmentList.any { segment ->
-            when (segment.getTransportModeId()) {
+            when (segment.transportModeId) {
                 TransportMode.ID_AIR,
                 TransportMode.ID_SHUFFLE,
                 TransportMode.ID_TAXI,

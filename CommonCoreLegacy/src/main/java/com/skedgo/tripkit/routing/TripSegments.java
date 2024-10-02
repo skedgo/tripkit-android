@@ -15,7 +15,7 @@ public final class TripSegments {
             if (color != null) {
                 return color;
             } else {
-                final ModeInfo modeInfo = segment.getModeInfo();
+                final ModeInfo modeInfo = segment.modeInfo;
                 if (modeInfo != null) {
                     return modeInfo.getColor();
                 } else {

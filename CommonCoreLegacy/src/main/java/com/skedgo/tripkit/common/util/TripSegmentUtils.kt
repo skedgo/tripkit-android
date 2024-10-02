@@ -17,7 +17,7 @@ object TripSegmentUtils {
                 context,
                 action,
                 " " + context.resources.getString(R.string.for__pattern),
-                segment.getStartTimeInSecs(),
+                segment.startTimeInSecs,
                 segment.endTimeInSecs
             )
         }
@@ -28,7 +28,7 @@ object TripSegmentUtils {
                 context,
                 action,
                 timezone,
-                segment.getStartTimeInSecs() * 1000
+                segment.startTimeInSecs * 1000
             )
         }
 

@@ -263,10 +263,22 @@ open class Location() : Parcelable {
          * Invoke this if we want to present a location to users
          * (e.g, a pin on a map, location of an event).
          */
-        get() = name?.trim { it <= ' ' } ?: address?.trim { it <= ' ' } ?: coordinateString
+        get() = if (!name.isNullOrBlank()) {
+            name!!.trim { it <= ' ' }
+        } else if (!address.isNullOrBlank()) {
+            address!!.trim { it <= ' ' }
+        } else {
+            coordinateString
+        }
 
     val displayAddress: String
-        get() = address?.trim { it <= ' ' } ?: name?.trim { it <= ' ' } ?: coordinateString
+        get() = if (!address.isNullOrBlank()) {
+            address!!.trim { it <= ' ' }
+        } else if (!name.isNullOrBlank()) {
+            name!!.trim { it <= ' ' }
+        } else {
+            coordinateString
+        }
 
     val nameOrApproximateAddress: String?
         /**

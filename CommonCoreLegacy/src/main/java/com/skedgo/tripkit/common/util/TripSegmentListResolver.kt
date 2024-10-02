@@ -76,7 +76,7 @@ class TripSegmentListResolver(private val resources: Resources) {
         }
 
         val arrivalSegment = TripSegment()
-        arrivalSegment.type = ARRIVAL
+        arrivalSegment.setType(ARRIVAL)
         arrivalSegment.from = destination
         arrivalSegment.to = destination
         arrivalSegment.action = arrivalAction
@@ -108,13 +108,13 @@ class TripSegmentListResolver(private val resources: Resources) {
         }
 
         val departureSegment = TripSegment()
-        departureSegment.type = DEPARTURE
+        departureSegment.setType(DEPARTURE)
         departureSegment.from = origin
         departureSegment.to = origin
         departureSegment.action = departureAction
         departureSegment.visibility = Visibilities.VISIBILITY_IN_DETAILS
-        departureSegment.startTimeInSecs = firstSegment.getStartTimeInSecs()
-        departureSegment.endTimeInSecs = firstSegment.getStartTimeInSecs()
+        departureSegment.startTimeInSecs = firstSegment.startTimeInSecs
+        departureSegment.endTimeInSecs = firstSegment.startTimeInSecs
         departureSegment.availability = firstSegment.availability
         return departureSegment
     }
@@ -124,7 +124,7 @@ class TripSegmentListResolver(private val resources: Resources) {
         var newSegmentId: Long
         for (segment in tripSegmentList!!) {
             newSegmentId = segmentIdGenerator.incrementAndGet()
-            segment!!.id = newSegmentId
+            segment!!.segmentId = newSegmentId
         }
     }
 
