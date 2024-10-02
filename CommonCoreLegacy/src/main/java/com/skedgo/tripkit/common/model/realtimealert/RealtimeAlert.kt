@@ -1,119 +1,108 @@
-package com.skedgo.tripkit.common.model.realtimealert;
+package com.skedgo.tripkit.common.model.realtimealert
 
-import android.os.Parcel;
-import android.os.Parcelable;
-
-import com.google.gson.annotations.JsonAdapter;
-import com.google.gson.annotations.SerializedName;
-import com.skedgo.tripkit.common.model.realtimealert.GsonAdaptersRealtimeAlert;
-import com.skedgo.tripkit.common.model.realtimealert.ImmutableRealtimeAlert;
-import com.skedgo.tripkit.common.model.alert.AlertAction;
-import com.skedgo.tripkit.common.model.alert.AlertSeverity;
-import com.skedgo.tripkit.common.model.location.Location;
-
-import org.immutables.value.Value;
-
-import androidx.annotation.Nullable;
-
-import static org.immutables.gson.Gson.TypeAdapters;
-import static org.immutables.value.Value.Immutable;
-import static org.immutables.value.Value.Style;
+import android.os.Parcel
+import android.os.Parcelable
+import android.os.Parcelable.Creator
+import com.google.gson.annotations.JsonAdapter
+import com.google.gson.annotations.SerializedName
+import com.skedgo.tripkit.common.model.alert.AlertAction
+import com.skedgo.tripkit.common.model.alert.AlertSeverity
+import com.skedgo.tripkit.common.model.location.Location
+import org.immutables.gson.Gson.TypeAdapters
+import org.immutables.value.Value.Default
+import org.immutables.value.Value.Immutable
+import org.immutables.value.Value.Style
 
 /**
- * @see <a href="https://github.com/skedgo/skedgo-java/blob/production/RealTime/src/main/java/com/buzzhives/Realtime/RealtimeAlert.java">RealtimeAlert</a>
+ * @see [RealtimeAlert](https://github.com/skedgo/skedgo-java/blob/production/RealTime/src/main/java/com/buzzhives/Realtime/RealtimeAlert.java)
  */
 @Immutable
 @TypeAdapters
-@Style(passAnnotations = JsonAdapter.class)
-@JsonAdapter(GsonAdaptersRealtimeAlert.class)
-public abstract class RealtimeAlert implements Parcelable {
-    public static final String SEVERITY_ALERT = "alert";
-    public static final String SEVERITY_WARNING = "warning";
-    public static final Creator<RealtimeAlert> CREATOR = new Creator<RealtimeAlert>() {
-        public RealtimeAlert createFromParcel(Parcel in) {
-            return ImmutableRealtimeAlert.builder()
-                .title(in.readString())
-                .text(in.readString())
-                .serviceTripID(in.readString())
-                .stopCode(in.readString())
-                .remoteHashCode(in.readLong())
-                .severity(in.readString())
-                .location((Location) in.readParcelable(Location.class.getClassLoader()))
-                .url(in.readString())
-                .remoteIcon(in.readString())
-                .alertAction((AlertAction) in.readParcelable(AlertAction.class.getClassLoader()))
-                .lastUpdated(in.readLong())
-                .fromDate(in.readLong())
-                .build();
-        }
-
-        public RealtimeAlert[] newArray(int size) {
-            return new RealtimeAlert[size];
-        }
-    };
-
-    @Nullable
-    public abstract String title();
+@Style(passAnnotations = [JsonAdapter::class])
+@JsonAdapter(
+    GsonAdaptersRealtimeAlert::class
+)
+abstract class RealtimeAlert : Parcelable {
+    abstract fun title(): String?
 
     @SerializedName("hashCode")
-    public abstract long remoteHashCode();
+    abstract fun remoteHashCode(): Long
 
     @AlertSeverity
-    @Nullable
-    public abstract String severity();
+    abstract fun severity(): String?
 
-    @Nullable
-    public abstract String text();
+    abstract fun text(): String?
 
-    @Nullable
-    public abstract String url();
+    abstract fun url(): String?
 
-    @Nullable
-    public abstract String remoteIcon();
+    abstract fun remoteIcon(): String?
 
-    @Nullable
-    public abstract Location location();
+    abstract fun location(): Location?
 
-    @Value.Default
-    public long lastUpdated() {
-        return -1L;
+    @Default
+    open fun lastUpdated(): Long {
+        return -1L
     }
 
-    @Value.Default
-    public long fromDate() {
-        return -1L;
+    @Default
+    open fun fromDate(): Long {
+        return -1L
     }
 
-    @Deprecated
-    @Nullable
-    public abstract String serviceTripID();
+    @Deprecated("")
+    abstract fun serviceTripID(): String?
 
-    @Deprecated
-    @Nullable
-    public abstract String stopCode();
+    @Deprecated("")
+    abstract fun stopCode(): String?
 
     @SerializedName("action")
-    @Nullable
-    public abstract AlertAction alertAction();
+    abstract fun alertAction(): AlertAction?
 
-    @Override
-    public int describeContents() {
-        return 0;
+    override fun describeContents(): Int {
+        return 0
     }
 
-    @Override
-    public void writeToParcel(Parcel out, int flags) {
-        out.writeString(title());
-        out.writeString(text());
-        out.writeString(serviceTripID());
-        out.writeString(stopCode());
-        out.writeLong(remoteHashCode());
-        out.writeString(severity());
-        out.writeParcelable(location(), 0);
-        out.writeString(url());
-        out.writeString(remoteIcon());
-        out.writeParcelable(alertAction(), 0);
-        out.writeLong(lastUpdated());
-        out.writeLong(fromDate());
+    override fun writeToParcel(out: Parcel, flags: Int) {
+        out.writeString(title())
+        out.writeString(text())
+        out.writeString(serviceTripID())
+        out.writeString(stopCode())
+        out.writeLong(remoteHashCode())
+        out.writeString(severity())
+        out.writeParcelable(location(), 0)
+        out.writeString(url())
+        out.writeString(remoteIcon())
+        out.writeParcelable(alertAction(), 0)
+        out.writeLong(lastUpdated())
+        out.writeLong(fromDate())
+    }
+
+    companion object {
+        const val SEVERITY_ALERT: String = "alert"
+        const val SEVERITY_WARNING: String = "warning"
+
+        @JvmField
+        val CREATOR: Creator<RealtimeAlert> = object : Creator<RealtimeAlert> {
+            override fun createFromParcel(`in`: Parcel): RealtimeAlert {
+                return ImmutableRealtimeAlert.builder()
+                    .title(`in`.readString())
+                    .text(`in`.readString())
+                    .serviceTripID(`in`.readString())
+                    .stopCode(`in`.readString())
+                    .remoteHashCode(`in`.readLong())
+                    .severity(`in`.readString())
+                    .location(`in`.readParcelable<Parcelable>(Location::class.java.classLoader) as Location?)
+                    .url(`in`.readString())
+                    .remoteIcon(`in`.readString())
+                    .alertAction(`in`.readParcelable<Parcelable>(AlertAction::class.java.classLoader) as AlertAction?)
+                    .lastUpdated(`in`.readLong())
+                    .fromDate(`in`.readLong())
+                    .build()
+            }
+
+            override fun newArray(size: Int): Array<RealtimeAlert?> {
+                return arrayOfNulls(size)
+            }
+        }
     }
 }

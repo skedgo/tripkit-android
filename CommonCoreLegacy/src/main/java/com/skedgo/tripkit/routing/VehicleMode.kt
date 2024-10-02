@@ -1,26 +1,28 @@
-package com.skedgo.tripkit.routing;
+package com.skedgo.tripkit.routing
 
-import android.content.Context;
-import android.graphics.drawable.Drawable;
-import android.text.TextUtils;
-
-import com.skedgo.tripkit.common.R;
-
-import java.util.Locale;
-
-import androidx.annotation.DrawableRes;
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
+import android.content.Context
+import android.graphics.drawable.Drawable
+import android.text.TextUtils
+import androidx.annotation.DrawableRes
+import com.skedgo.tripkit.common.R
 
 /**
  * As of v11, this denotes local transport icons.
  *
  * @see {@link ModeInfo}
  */
-public enum VehicleMode {
+enum class VehicleMode(
+    private val key: String,
+    @JvmField @get:DrawableRes @param:DrawableRes val iconRes: Int,
+    @DrawableRes realtimeIconRes: Int
+) {
     AEROPLANE("aeroplane", R.drawable.ic_aeroplane, R.drawable.ic_aeroplane),
     BICYCLE_SHARE("bicycle-share", R.drawable.ic_bicycle_share, R.drawable.ic_bicycle_share),
-    BICYCLE_ELECTRIC_SHARE("bicycle-electric-share", R.drawable.ic_bicycle_share, R.drawable.ic_bicycle_share),
+    BICYCLE_ELECTRIC_SHARE(
+        "bicycle-electric-share",
+        R.drawable.ic_bicycle_share,
+        R.drawable.ic_bicycle_share
+    ),
     BICYCLE("bicycle", R.drawable.ic_bicycle, R.drawable.ic_bicycle),
     BUS("bus", R.drawable.ic_bus, R.drawable.ic_bus_realtime),
     CABLECAR("cablecar", R.drawable.ic_cablecar, R.drawable.ic_cablecar_realtime),
@@ -30,7 +32,11 @@ public enum VehicleMode {
     CAR("car", R.drawable.ic_car, R.drawable.ic_car),
     COACH("coach", R.drawable.ic_coach, R.drawable.ic_coach),
     FERRY("ferry", R.drawable.ic_ferry, R.drawable.ic_ferry_realtime),
-    KICK_SCOOTER("kickscooter-share", R.drawable.ic_kickscooter_sharing, R.drawable.ic_kickscooter_sharing),
+    KICK_SCOOTER(
+        "kickscooter-share",
+        R.drawable.ic_kickscooter_sharing,
+        R.drawable.ic_kickscooter_sharing
+    ),
     MONORAIL("monorail", R.drawable.ic_monorail, R.drawable.ic_monorail_realtime),
     MOTORBIKE("motorbike", R.drawable.ic_motorbike, R.drawable.ic_motorbike),
     MOTO_SCOOTER("moto_scooter", R.drawable.ic_motorbike, R.drawable.ic_motorbike),
@@ -60,80 +66,68 @@ public enum VehicleMode {
     // FIXME: Is this still being used?
     TOLL("toll", R.drawable.ic_toll, R.drawable.ic_toll);
 
-    private String key;
-    private int iconRes;
-    private int realtimeIconRes = -1;
+    @get:DrawableRes
+    var realTimeIconRes: Int = -1
 
-    VehicleMode(String key, @DrawableRes int iconRes, @DrawableRes int realtimeIconRes) {
-        this.key = key;
-        this.iconRes = iconRes;
-        this.realtimeIconRes = realtimeIconRes;
+    init {
+        this.realTimeIconRes = realtimeIconRes
     }
 
-    @Nullable
-    public static VehicleMode from(String key) {
-        if (TextUtils.isEmpty(key)) {
-            return null;
-        }
-
-        final String lowerCase = key.toLowerCase(Locale.US);
-        for (VehicleMode value : values()) {
-            if (TextUtils.equals(value.key.toLowerCase(Locale.US), lowerCase)) {
-                return value;
+    val isPublicTransport: Boolean
+        get() {
+            val publicTransportModes = publicTransportModes
+            for (vehicleMode in publicTransportModes) {
+                if (this == vehicleMode) {
+                    return true
+                }
             }
-        }
 
-        return null;
-    }
+            return false
+        }
 
     /**
-     * Instead of typing: (obj.getEnumVar() != null) ? obj.getEnumVar().toString() : null,
-     * now we can simply use: EnumVar.toString(obj.getEnumVar())
+     * Replacement: [ModeInfo.getAlternativeText]
      */
-    @Deprecated
-    public static String toString(VehicleMode vehicleMode) {
-        return (vehicleMode != null) ? vehicleMode.toString() : null;
+    @Deprecated("")
+    override fun toString(): String {
+        return key
     }
 
-    public static VehicleMode[] getPublicTransportModes() {
-        return new VehicleMode[]{FERRY, TRAIN, MONORAIL, SUBWAY, BUS, TRAM, CABLECAR, FUNICULAR};
+    fun getMapIconRes(context: Context): Drawable? {
+        return context.getDrawable(iconRes)
     }
 
-    public boolean isPublicTransport() {
-        VehicleMode[] publicTransportModes = getPublicTransportModes();
-        for (VehicleMode vehicleMode : publicTransportModes) {
-            if (this == vehicleMode) {
-                return true;
+    fun getRealtimeMapIconRes(context: Context): Drawable? {
+        return context.getDrawable(realTimeIconRes)
+    }
+
+    companion object {
+        @JvmStatic
+        fun from(key: String?): VehicleMode? {
+            if (key.isNullOrBlank()) {
+                return null
             }
+
+            val lowerCase = key.lowercase()
+            for (value in values()) {
+                if (TextUtils.equals(value.key.lowercase(), lowerCase)) {
+                    return value
+                }
+            }
+
+            return null
         }
 
-        return false;
-    }
+        /**
+         * Instead of typing: (obj.getEnumVar() != null) ? obj.getEnumVar().toString() : null,
+         * now we can simply use: EnumVar.toString(obj.getEnumVar())
+         */
+        @Deprecated("")
+        fun toString(vehicleMode: VehicleMode?): String? {
+            return if ((vehicleMode != null)) vehicleMode.toString() else null
+        }
 
-    /**
-     * Replacement: {@link ModeInfo#getAlternativeText()}
-     */
-    @Deprecated
-    @Override
-    public String toString() {
-        return key;
-    }
-
-    @DrawableRes
-    public int getIconRes() {
-        return iconRes;
-    }
-
-    @DrawableRes
-    public int getRealTimeIconRes() {
-        return realtimeIconRes;
-    }
-
-    public Drawable getMapIconRes(@NonNull Context context) {
-        return context.getDrawable(iconRes);
-    }
-
-    public Drawable getRealtimeMapIconRes(@NonNull Context context) {
-        return context.getDrawable(realtimeIconRes);
+        val publicTransportModes: Array<VehicleMode>
+            get() = arrayOf(FERRY, TRAIN, MONORAIL, SUBWAY, BUS, TRAM, CABLECAR, FUNICULAR)
     }
 }

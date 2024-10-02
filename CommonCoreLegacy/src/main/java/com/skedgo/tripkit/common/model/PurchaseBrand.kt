@@ -1,56 +1,50 @@
-package com.skedgo.tripkit.common.model;
+package com.skedgo.tripkit.common.model
 
-import android.os.Parcel;
-import android.os.Parcelable;
-
-import com.google.gson.annotations.JsonAdapter;
-import com.skedgo.tripkit.routing.ServiceColor;
-
-import androidx.annotation.Nullable;
-
-import static org.immutables.gson.Gson.TypeAdapters;
-import static org.immutables.value.Value.Immutable;
-import static org.immutables.value.Value.Style;
+import android.os.Parcel
+import android.os.Parcelable
+import android.os.Parcelable.Creator
+import com.google.gson.annotations.JsonAdapter
+import com.skedgo.tripkit.routing.ServiceColor
+import org.immutables.gson.Gson.TypeAdapters
+import org.immutables.value.Value.Immutable
+import org.immutables.value.Value.Style
 
 @TypeAdapters
 @Immutable
-@Style(passAnnotations = JsonAdapter.class)
-@JsonAdapter(GsonAdaptersPurchaseBrand.class)
-public abstract class PurchaseBrand implements Parcelable {
-
-    public static final Creator<PurchaseBrand> CREATOR = new Creator<PurchaseBrand>() {
-        @Override
-        public PurchaseBrand createFromParcel(Parcel in) {
-            return ImmutablePurchaseBrand.builder()
-                .color((ServiceColor) in.readParcelable(ServiceColor.class.getClassLoader()))
-                .name(in.readString())
-                .remoteIcon(in.readString())
-                .build();
-        }
-
-        @Override
-        public PurchaseBrand[] newArray(int size) {
-            return new PurchaseBrand[size];
-        }
-    };
-
-    @Override
-    public void writeToParcel(Parcel dest, int flags) {
-        dest.writeParcelable(color(), flags);
-        dest.writeString(name());
-        dest.writeString(remoteIcon());
+@Style(passAnnotations = [JsonAdapter::class])
+@JsonAdapter(
+    GsonAdaptersPurchaseBrand::class
+)
+abstract class PurchaseBrand : Parcelable {
+    override fun writeToParcel(dest: Parcel, flags: Int) {
+        dest.writeParcelable(color(), flags)
+        dest.writeString(name())
+        dest.writeString(remoteIcon())
     }
 
-    @Override
-    public int describeContents() {
-        return 0;
+    override fun describeContents(): Int {
+        return 0
     }
 
-    public abstract ServiceColor color();
+    abstract fun color(): ServiceColor?
 
-    public abstract String name();
+    abstract fun name(): String?
 
-    @Nullable
-    public abstract String remoteIcon();
+    abstract fun remoteIcon(): String?
 
+    companion object {
+        val CREATOR: Creator<PurchaseBrand> = object : Creator<PurchaseBrand> {
+            override fun createFromParcel(`in`: Parcel): PurchaseBrand? {
+                return ImmutablePurchaseBrand.builder()
+                    .color(`in`.readParcelable<Parcelable>(ServiceColor::class.java.classLoader) as ServiceColor?)
+                    .name(`in`.readString())
+                    .remoteIcon(`in`.readString())
+                    .build()
+            }
+
+            override fun newArray(size: Int): Array<PurchaseBrand?> {
+                return arrayOfNulls(size)
+            }
+        }
+    }
 }

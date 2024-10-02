@@ -1,30 +1,23 @@
-package com.skedgo.tripkit.routing;
-
-import com.skedgo.tripkit.common.model.location.Location;
-
-import androidx.annotation.Nullable;
+package com.skedgo.tripkit.routing
 
 /**
- * Use extension functions in {@link TripExtensionsKt} instead.
+ * Use extension functions in [TripExtensionsKt] instead.
  */
-@Deprecated
-public final class Trips {
-    private Trips() {
-    }
-
+@Deprecated("")
+object Trips {
     /**
      * Get departure time of a trip null-safely.
-     * <p>
-     * Use {@link TripExtensionsKt#startDateTime(Trip)} instead.
+     *
+     *
+     * Use [TripExtensionsKt.startDateTime] instead.
      */
-    @Deprecated
-    @Nullable
-    public static String getDepartureTimezone(@Nullable Trip trip) {
+    @Deprecated("")
+    fun getDepartureTimezone(trip: Trip?): String? {
         if (trip == null) {
-            return null;
+            return null
         }
 
-        final Location departure = trip.getFrom();
-        return departure == null ? null : departure.getTimeZone();
+        val departure = trip.from
+        return departure?.timeZone
     }
 }

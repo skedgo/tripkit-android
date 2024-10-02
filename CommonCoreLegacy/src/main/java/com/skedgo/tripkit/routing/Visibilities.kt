@@ -1,11 +1,8 @@
-package com.skedgo.tripkit.routing;
+package com.skedgo.tripkit.routing
 
-public final class Visibilities {
-    public static final String VISIBILITY_IN_SUMMARY = "in summary";
-    public static final String VISIBILITY_ON_MAP = "on map";
-    public static final String VISIBILITY_IN_DETAILS = "in details";
-    public static final String VISIBILITY_HIDDEN = "hidden";
-
-    private Visibilities() {
-    }
+object Visibilities {
+    const val VISIBILITY_IN_SUMMARY: String = "in summary"
+    const val VISIBILITY_ON_MAP: String = "on map"
+    const val VISIBILITY_IN_DETAILS: String = "in details"
+    const val VISIBILITY_HIDDEN: String = "hidden"
 }

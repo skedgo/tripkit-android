@@ -1,26 +1,16 @@
-package com.skedgo.tripkit.routing;
+package com.skedgo.tripkit.routing
 
-import androidx.annotation.Nullable;
-
-public final class TripSegments {
-    private TripSegments() {
-    }
-
-    @Nullable
-    public static ServiceColor getTransportColor(@Nullable TripSegment segment) {
+object TripSegments {
+    fun getTransportColor(segment: TripSegment?): ServiceColor? {
         if (segment == null) {
-            return null;
+            return null
         } else {
-            final ServiceColor color = segment.getServiceColor();
+            val color = segment.serviceColor
             if (color != null) {
-                return color;
+                return color
             } else {
-                final ModeInfo modeInfo = segment.modeInfo;
-                if (modeInfo != null) {
-                    return modeInfo.getColor();
-                } else {
-                    return null;
-                }
+                val modeInfo = segment.modeInfo
+                return modeInfo?.color
             }
         }
     }

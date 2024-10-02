@@ -1,76 +1,62 @@
-package com.skedgo.tripkit.routing;
+package com.skedgo.tripkit.routing
 
-import org.apache.commons.collections4.ComparatorUtils;
-import org.apache.commons.collections4.comparators.ComparatorChain;
+import org.apache.commons.collections4.ComparatorUtils
+import org.apache.commons.collections4.comparators.ComparatorChain
+import java.util.Arrays
 
-import java.util.Arrays;
-import java.util.Comparator;
-
-public final class TripComparators {
-    public static final Comparator<Trip> START_TIME_COMPARATOR =
-        ComparatorUtils.nullLowComparator(new Comparator<Trip>() {
-            @Override
-            public int compare(Trip lhs, Trip rhs) {
-                return compareLongs(
-                    lhs.getStartTimeInSecs(),
-                    rhs.getStartTimeInSecs()
-                );
-            }
-        });
-
-    public static final Comparator<Trip> END_TIME_COMPARATOR =
-        ComparatorUtils.nullLowComparator(new Comparator<Trip>() {
-            @Override
-            public int compare(Trip lhs, Trip rhs) {
-                return compareLongs(
-                    lhs.getEndTimeInSecs(),
-                    rhs.getEndTimeInSecs()
-                );
-            }
-        });
-
-    public static final Comparator<Trip> TIME_COMPARATOR_CHAIN =
-        new ComparatorChain<>(Arrays.asList(
-            START_TIME_COMPARATOR,
-            END_TIME_COMPARATOR
-        ));
-
-    public static final Comparator<Trip> WEIGHTED_SCORE_COMPARATOR =
-        ComparatorUtils.nullLowComparator(new Comparator<Trip>() {
-            @Override
-            public int compare(Trip lhs, Trip rhs) {
-                return Float.compare(lhs.getWeightedScore(), rhs.getWeightedScore());
-            }
-        });
-
-    public static final Comparator<Trip> DURATION_COMPARATOR =
-        ComparatorUtils.nullLowComparator(new Comparator<Trip>() {
-            @Override
-            public int compare(Trip lhs, Trip rhs) {
-                return Float.compare(lhs.getTimeCost(), rhs.getTimeCost());
-            }
-        });
-
-    public static final Comparator<Trip> MONEY_COST_COMPARATOR =
-        ComparatorUtils.nullLowComparator(new Comparator<Trip>() {
-            @Override
-            public int compare(Trip lhs, Trip rhs) {
-                return Float.compare(lhs.getMoneyCost(), rhs.getMoneyCost());
-            }
-        });
-
-    public static final Comparator<Trip> CARBON_COST_COMPARATOR =
-        ComparatorUtils.nullLowComparator(new Comparator<Trip>() {
-            @Override
-            public int compare(Trip lhs, Trip rhs) {
-                return Float.compare(lhs.getCarbonCost(), rhs.getCarbonCost());
-            }
-        });
-
-    private TripComparators() {
+object TripComparators {
+    val START_TIME_COMPARATOR: Comparator<Trip> = ComparatorUtils.nullLowComparator { lhs, rhs ->
+        compareLongs(
+            lhs.startTimeInSecs,
+            rhs.startTimeInSecs
+        )
     }
 
-    public static int compareLongs(long lhs, long rhs) {
-        return lhs < rhs ? -1 : (lhs == rhs ? 0 : 1);
+    val END_TIME_COMPARATOR: Comparator<Trip> = ComparatorUtils.nullLowComparator { lhs, rhs ->
+        compareLongs(
+            lhs.endTimeInSecs,
+            rhs.endTimeInSecs
+        )
+    }
+
+    val TIME_COMPARATOR_CHAIN: Comparator<Trip> = ComparatorChain(
+        Arrays.asList(
+            START_TIME_COMPARATOR,
+            END_TIME_COMPARATOR
+        )
+    )
+
+    @JvmField
+    val WEIGHTED_SCORE_COMPARATOR: Comparator<Trip> =
+        ComparatorUtils.nullLowComparator { lhs, rhs ->
+            java.lang.Float.compare(
+                lhs.weightedScore,
+                rhs.weightedScore
+            )
+        }
+
+    val DURATION_COMPARATOR: Comparator<Trip> = ComparatorUtils.nullLowComparator { lhs, rhs ->
+        java.lang.Float.compare(
+            lhs.getTimeCost(),
+            rhs.getTimeCost()
+        )
+    }
+
+    val MONEY_COST_COMPARATOR: Comparator<Trip> = ComparatorUtils.nullLowComparator { lhs, rhs ->
+        java.lang.Float.compare(
+            lhs.moneyCost,
+            rhs.moneyCost
+        )
+    }
+
+    val CARBON_COST_COMPARATOR: Comparator<Trip> = ComparatorUtils.nullLowComparator { lhs, rhs ->
+        java.lang.Float.compare(
+            lhs.carbonCost,
+            rhs.carbonCost
+        )
+    }
+
+    fun compareLongs(lhs: Long, rhs: Long): Int {
+        return if (lhs < rhs) -1 else (if (lhs == rhs) 0 else 1)
     }
 }

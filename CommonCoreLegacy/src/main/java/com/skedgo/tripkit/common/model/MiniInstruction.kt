@@ -1,28 +1,24 @@
-package com.skedgo.tripkit.common.model;
+package com.skedgo.tripkit.common.model
 
-import com.google.gson.annotations.JsonAdapter;
-import com.google.gson.annotations.SerializedName;
+import com.google.gson.annotations.JsonAdapter
+import com.google.gson.annotations.SerializedName
+import org.immutables.gson.Gson.TypeAdapters
+import org.immutables.value.Value.Immutable
+import org.immutables.value.Value.Style
 
-import org.immutables.gson.Gson;
-import org.immutables.value.Value;
+@TypeAdapters
+@Immutable
+@Style(passAnnotations = [JsonAdapter::class])
+@JsonAdapter(
+    GsonAdaptersMiniInstruction::class
+)
+abstract class MiniInstruction {
+    @get:SerializedName("description")
+    abstract val description: String?
 
-import androidx.annotation.Nullable;
+    @get:SerializedName("instruction")
+    abstract val instruction: String?
 
-
-@Gson.TypeAdapters
-@Value.Immutable
-@Value.Style(passAnnotations = JsonAdapter.class)
-@JsonAdapter(GsonAdaptersMiniInstruction.class)
-public abstract class MiniInstruction {
-    @SerializedName("description")
-    @Nullable
-    public abstract String getDescription();
-
-    @SerializedName("instruction")
-    @Nullable
-    public abstract String getInstruction();
-
-    @SerializedName("mainValue")
-    @Nullable
-    public abstract String getMainValue();
+    @get:SerializedName("mainValue")
+    abstract val mainValue: String?
 }
