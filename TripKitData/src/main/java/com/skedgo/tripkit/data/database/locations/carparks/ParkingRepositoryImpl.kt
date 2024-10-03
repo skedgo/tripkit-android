@@ -1,6 +1,5 @@
 package com.skedgo.tripkit.data.database.locations.carparks
 
-import com.gojuno.koptional.toOptional
 import com.skedgo.tripkit.data.database.TripKitDatabase
 import com.skedgo.tripkit.data.locations.LocationsApi
 import com.skedgo.tripkit.data.locations.StopsFetcher
@@ -12,6 +11,7 @@ import com.skedgo.tripkit.parkingspots.models.OpeningHour
 import com.skedgo.tripkit.parkingspots.models.ParkingOperator
 import com.skedgo.tripkit.parkingspots.models.PricingEntry
 import com.skedgo.tripkit.parkingspots.models.PricingTable
+import com.skedgo.tripkit.utils.OptionalCompat
 import io.reactivex.Observable
 import io.reactivex.schedulers.Schedulers
 import org.joda.time.LocalTime
@@ -75,28 +75,30 @@ internal class ParkingRepositoryImpl(
             it.address,
             ParkingOperator(
                 it.operator.name,
-                it.operator.phone.toOptional(),
-                it.operator.website.toOptional()
+                OptionalCompat.ofNullable(it.operator.phone),
+                OptionalCompat.ofNullable(it.operator.website)
             ),
             it.info.orEmpty(),
             openingHours,
-            getPricingTablesByCarParkId(it.identifier)
-                .map {
-                    PricingTable(
-                        it.currency,
-                        it.currencySymbol,
-                        this.getPricingEntriesByPricingTableId(it.id)
-                            .map {
-                                PricingEntry(
-                                    it.maxDurationInMinutes.toOptional(),
-                                    it.label.orEmpty(),
-                                    it.price
-                                )
-                            },
-                        it.title,
-                        it.subtitle.toOptional()
-                    )
-                }.toOptional()
+            OptionalCompat.ofNullable(
+                getPricingTablesByCarParkId(it.identifier)
+                    .map {
+                        PricingTable(
+                            it.currency,
+                            it.currencySymbol,
+                            this.getPricingEntriesByPricingTableId(it.id)
+                                .map {
+                                    PricingEntry(
+                                        OptionalCompat.ofNullable(it.maxDurationInMinutes),
+                                        it.label.orEmpty(),
+                                        it.price
+                                    )
+                                },
+                            it.title,
+                            OptionalCompat.ofNullable(it.subtitle)
+                        )
+                    }
+            )
         )
     }
 }
