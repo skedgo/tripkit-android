@@ -12,7 +12,7 @@ final class CursorToRegionConverter implements Function<Cursor, Region> {
 
     @Override
     public Region apply(Cursor cursor) {
-        final String json = cursor.getString(cursor.getColumnIndex(Tables.FIELD_JSON.getName()));
+        final String json = cursor.getString(cursor.getColumnIndex(Tables.FIELD_JSON.name));
         return gson.fromJson(json, Region.class);
     }
 }

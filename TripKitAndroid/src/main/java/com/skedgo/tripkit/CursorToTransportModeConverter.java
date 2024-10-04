@@ -12,7 +12,7 @@ final class CursorToTransportModeConverter implements Function<Cursor, Transport
 
     @Override
     public TransportMode apply(Cursor cursor) {
-        final String json = cursor.getString(cursor.getColumnIndex(Tables.FIELD_JSON.getName()));
+        final String json = cursor.getString(cursor.getColumnIndex(Tables.FIELD_JSON.name));
         return gson.fromJson(json, TransportMode.class);
     }
 }

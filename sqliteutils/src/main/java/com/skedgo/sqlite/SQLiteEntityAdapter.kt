@@ -1,14 +1,10 @@
-package com.skedgo.sqlite;
+package com.skedgo.sqlite
 
-import android.content.ContentValues;
-import android.database.Cursor;
+import android.content.ContentValues
+import android.database.Cursor
 
-import androidx.annotation.NonNull;
+interface SQLiteEntityAdapter<E> {
+    fun toEntity(cursor: Cursor): E
 
-public interface SQLiteEntityAdapter<E> {
-    @NonNull
-    E toEntity(@NonNull Cursor cursor);
-
-    @NonNull
-    ContentValues toContentValues(@NonNull E entity);
+    fun toContentValues(entity: E): ContentValues
 }

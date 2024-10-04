@@ -1,85 +1,57 @@
-package com.skedgo.sqlite;
+package com.skedgo.sqlite
 
-import android.database.sqlite.SQLiteDatabase;
+import android.database.sqlite.SQLiteDatabase
 
-import androidx.annotation.NonNull;
+class DatabaseTable(
+    val name: String,
+    val fields: Array<DatabaseField>,
+    private vararg val customScripts: String
+) {
+    private var fieldNames: Array<String>? = null
 
-public final class DatabaseTable {
-    private String name;
-    private DatabaseField[] fields;
-    private String[] customScripts;
-    private String[] fieldNames;
-
-    public DatabaseTable(String name, DatabaseField[] fields, String... customScripts) {
-        this.name = name;
-        this.fields = fields;
-        this.customScripts = customScripts;
+    override fun toString(): String {
+        return name
     }
 
-    public String getName() {
-        return name;
-    }
-
-    public DatabaseField[] getFields() {
-        return fields;
-    }
-
-    @Override
-    public String toString() {
-        return name;
-    }
-
-    public String[] getFieldNames() {
+    fun getFieldNames(): Array<String> {
         if (fieldNames == null) {
-            fieldNames = new String[fields.length];
+            fieldNames = Array(fields.size) { i ->
+                fields[i].name
+            }
+        }
+        return fieldNames!!
+    }
 
-            for (int i = 0, size = fields.length; i < size; i++) {
-                fieldNames[i] = fields[i].getName();
+    fun getDropSql(): String {
+        return "DROP TABLE IF EXISTS $name"
+    }
+
+    fun getPostCreateSql(): Array<out String> {
+        return customScripts
+    }
+
+    fun getCreateSql(): String {
+        val sqlTextBuilder = StringBuilder()
+            .append("CREATE TABLE ").append(name).append(" (")
+
+        fields.forEachIndexed { index, field ->
+            if (index > 0) sqlTextBuilder.append(", ")
+            sqlTextBuilder.append(field.name)
+                .append(" ")
+                .append(field.type)
+            field.constraint?.let {
+                sqlTextBuilder.append(" ").append(it)
             }
         }
 
-        return fieldNames;
+        sqlTextBuilder.append(")")
+        return sqlTextBuilder.toString()
     }
 
-    public String getDropSql() {
-        return "DROP TABLE IF EXISTS " + name;
-    }
-
-    public String[] getPostCreateSql() {
-        return customScripts;
-    }
-
-    public String getCreateSql() {
-        StringBuilder sqlTextBuilder = new StringBuilder()
-            .append("CREATE TABLE ").append(name).append(" ").append("(");
-
-        // Ensure that a comma does not appear on the last iteration
-        String comma = "";
-        DatabaseField[] fields = getFields();
-        for (DatabaseField field : fields) {
-            sqlTextBuilder.append(comma);
-            comma = ", ";
-
-            sqlTextBuilder.append(field.getName());
-            sqlTextBuilder.append(" ");
-            sqlTextBuilder.append(field.getType());
-
-            if (field.getConstraint() != null) {
-                sqlTextBuilder.append(" ");
-                sqlTextBuilder.append(field.getConstraint());
-            }
-        }
-
-        sqlTextBuilder.append(")");
-        return sqlTextBuilder.toString();
-    }
-
-    public void create(@NonNull SQLiteDatabase database) {
-        database.execSQL(getCreateSql());
-        if (customScripts != null) {
-            for (String customScript : customScripts) {
-                database.execSQL(customScript);
-            }
+    fun create(database: SQLiteDatabase) {
+        database.execSQL(getCreateSql())
+        customScripts.forEach { script ->
+            database.execSQL(script)
         }
     }
 }

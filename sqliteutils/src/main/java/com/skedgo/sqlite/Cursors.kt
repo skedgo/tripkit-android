@@ -1,27 +1,19 @@
-package com.skedgo.sqlite;
+package com.skedgo.sqlite
 
-import android.database.Cursor;
-
-import io.reactivex.Observable;
-import io.reactivex.functions.Function;
+import android.database.Cursor
+import io.reactivex.Observable
+import io.reactivex.functions.Function
 
 /**
- * Provides some util methods related to {@link Cursor}.
+ * Provides some util methods related to [Cursor].
  */
-public final class Cursors {
-    private Cursors() {
-    }
-
+object Cursors {
     /**
-     * Emits all the available rows of a {@link Cursor}.
-     * This should be composed with {@link Observable#flatMap(Function)}.
+     * Emits all the available rows of a [Cursor].
+     * This should be composed with [Observable.flatMap].
      */
-    public static Function<Cursor, Observable<Cursor>> flattenCursor() {
-        return new Function<Cursor, Observable<Cursor>>() {
-            @Override
-            public Observable<Cursor> apply(Cursor cursor) {
-                return Observable.fromIterable(RxCursorIterable.from(cursor));
-            }
-        };
+    @JvmStatic
+    fun flattenCursor(): Function<Cursor, Observable<Cursor>> {
+        return Function<Cursor, Observable<Cursor>> { cursor -> Observable.fromIterable(RxCursorIterable.from(cursor)) }
     }
 }
