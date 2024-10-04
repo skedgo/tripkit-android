@@ -1,24 +1,22 @@
-package com.skedgo.tripkit.booking.mybookings;
+package com.skedgo.tripkit.booking.mybookings
 
-import com.google.gson.annotations.JsonAdapter;
-
-import org.immutables.value.Value;
-
-import java.util.List;
-
-import static org.immutables.gson.Gson.TypeAdapters;
-import static org.immutables.value.Value.Immutable;
-import static org.immutables.value.Value.Style;
+import com.google.gson.annotations.JsonAdapter
+import org.immutables.gson.Gson.TypeAdapters
+import org.immutables.value.Value.Default
+import org.immutables.value.Value.Immutable
+import org.immutables.value.Value.Style
 
 @Immutable
 @TypeAdapters
-@Style(passAnnotations = JsonAdapter.class)
-@JsonAdapter(GsonAdaptersMyBookingsResponse.class)
-public abstract class MyBookingsResponse {
-    public abstract List<MyBookingsConfirmationResponse> bookings();
+@Style(passAnnotations = [JsonAdapter::class])
+@JsonAdapter(
+    GsonAdaptersMyBookingsResponse::class
+)
+abstract class MyBookingsResponse {
+    abstract fun bookings(): List<MyBookingsConfirmationResponse?>?
 
-    @Value.Default
-    public int count() {
-        return 0;
+    @Default
+    open fun count(): Int {
+        return 0
     }
 }
