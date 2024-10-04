@@ -17,5 +17,5 @@ public interface IRealTimeElement {
 
     String getOperator();
 
-    long getStartTimeInSecs();
+    long getStartTimeInSeconds();
 }

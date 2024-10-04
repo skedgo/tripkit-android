@@ -6,6 +6,7 @@ import com.google.maps.android.PolyUtil
 import com.google.maps.android.ktx.utils.simplify
 import com.skedgo.tripkit.common.model.Street
 import com.skedgo.tripkit.common.model.TransportMode
+import com.skedgo.tripkit.common.model.location.Location
 import com.skedgo.tripkit.common.util.TripKitLatLng
 import com.skedgo.tripkit.routing.RoadTag
 import com.skedgo.tripkit.routing.TripSegment
@@ -80,17 +81,22 @@ class GetTravelledLineForTrip @Inject constructor() {
                                 )
                             }
                     }
-                listOf(
-                    lineSegmentsFromShapes, lineSegmentsFromStreets,
-                    listOf(
-                        com.skedgo.tripkit.LineSegment(
-                            TripKitLatLng(from.lat, from.lon),
-                            TripKitLatLng(to.lat, to.lon),
-                            color,
-                            ""
+                val lineSegment = mutableListOf(
+                    lineSegmentsFromShapes, lineSegmentsFromStreets
+                )
+                if(from != null && to != null) {
+                    lineSegment.add(
+                        listOf(
+                            com.skedgo.tripkit.LineSegment(
+                                TripKitLatLng(from.lat, from.lon),
+                                TripKitLatLng(to.lat, to.lon),
+                                color,
+                                ""
+                            )
                         )
                     )
-                )
+                }
+                lineSegment
                     .first {
                         it.isNotEmpty()
                     }

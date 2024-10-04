@@ -21,10 +21,10 @@ class UberBookingResolver(
 
             intent.data = Uri.parse(
                 "uber://?action=setPickup" +
-                    "&pickup[latitude]=${segment.from.lat}" +
-                    "&pickup[longitude]=${segment.from.lon}" +
-                    "&dropoff[latitude]=${segment.to.lat}" +
-                    "&dropoff[longitude]=${segment.to.lon}"
+                    "&pickup[latitude]=${segment.from?.lat}" +
+                    "&pickup[longitude]=${segment.from?.lon}" +
+                    "&dropoff[latitude]=${segment.to?.lat}" +
+                    "&dropoff[longitude]=${segment.to?.lon}"
             )
 
             val action = actionBuilder.hasApp(true).data(intent).build()

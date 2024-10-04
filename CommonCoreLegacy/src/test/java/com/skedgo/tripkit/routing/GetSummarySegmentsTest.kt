@@ -4,6 +4,10 @@ import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.nhaarman.mockitokotlin2.eq
 import com.nhaarman.mockitokotlin2.mock
 import com.nhaarman.mockitokotlin2.whenever
+import io.mockk.Runs
+import io.mockk.every
+import io.mockk.just
+import io.mockk.mockk
 import org.assertj.core.api.Java6Assertions.assertThat
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -12,14 +16,14 @@ import org.junit.runner.RunWith
 class GetSummarySegmentsTest {
     @Test
     fun arrivalSegmentShouldNotBeInSummaryArea() {
-        // Given a trip having arrival segment that is visible on the map.
+        // Given a trip having an arrival segment that is visible on the map.
         val arrivalSegment = TripSegment()
-        arrivalSegment.type = SegmentType.ARRIVAL
+        arrivalSegment.setType(SegmentType.ARRIVAL)
         arrivalSegment.visibility = Visibilities.VISIBILITY_ON_MAP
         val trip = Trip()
         trip.segmentList = arrayListOf(arrivalSegment)
 
-        // We expect that arrival segment shouldn't be in the summary area.
+        // We expect that the arrival segment shouldn't be in the summary area.
         assertThat(trip.getSummarySegments()).isEmpty()
     }
 
@@ -32,13 +36,17 @@ class GetSummarySegmentsTest {
 
     @Test
     fun summaryAreaShouldOnlyIncludeSegmentsVisibleOnSummary() {
-        val a = mock<TripSegment>()
-        whenever(a.isVisibleInContext(eq(Visibilities.VISIBILITY_IN_SUMMARY)))
-            .thenReturn(true)
+        // Mocking segments with MockK
+        val a = mockk<TripSegment>(relaxed = true)
+        a.setType(SegmentType.ARRIVAL)
+        every { a.isVisibleInContext(eq(Visibilities.VISIBILITY_IN_SUMMARY)) } returns true
 
-        val b = mock<TripSegment>()
-        whenever(b.isVisibleInContext(eq(Visibilities.VISIBILITY_IN_SUMMARY)))
-            .thenReturn(false)
+        val b = mockk<TripSegment>(relaxed = true)
+        b.setType(SegmentType.ARRIVAL)
+        every { b.isVisibleInContext(eq(Visibilities.VISIBILITY_IN_SUMMARY)) } returns false
+
+        every { a.trip } returns mockk<Trip>()
+        every { b.trip } returns mockk<Trip>()
 
         val trip = Trip()
         trip.segmentList = arrayListOf(a, b)

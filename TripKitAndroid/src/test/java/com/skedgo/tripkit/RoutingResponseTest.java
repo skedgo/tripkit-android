@@ -82,7 +82,7 @@ public class RoutingResponseTest {
         response.processRawData(ApplicationProvider.getApplicationContext().getResources(), gson);
 
         assertThat(response).isNotNull();
-        assertThat(response.getAlerts()).hasSize(1);
+        assertThat(response.alerts).hasSize(1);
         assertThat(response.getTripGroupList()).hasSize(1).doesNotContainNull();
 
         TripGroup group = response.getTripGroupList().get(0);

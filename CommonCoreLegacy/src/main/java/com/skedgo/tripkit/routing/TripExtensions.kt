@@ -46,19 +46,18 @@ val Trip.queryDateTime: DateTime
  * Gets a list of [TripSegment]s visible on the summary area of a [Trip].
  */
 fun Trip.getSummarySegments(): List<TripSegment> = segmentList
-    ?.filter { it.type != SegmentType.ARRIVAL }
-    ?.filter { it.isVisibleInContext(Visibilities.VISIBILITY_IN_SUMMARY) }
-    ?: emptyList()
+    .filter { it.getType() != SegmentType.ARRIVAL }
+    .filter { it.isVisibleInContext(Visibilities.VISIBILITY_IN_SUMMARY) }
 
 fun Trip.getModeIds(): List<String> =
-    segmentList?.mapNotNull { it.transportModeId }.orEmpty()
+    segmentList.mapNotNull { it.transportModeId }.orEmpty()
 
 fun Trip.hasWalkOnly(): Boolean {
     val modeIds = getModeIds()
     return modeIds.size == 1 && modeIds.contains(TransportMode.ID_WALK)
 }
 
-fun Trip.getTripSegment(segmentId: Long): TripSegment? = segmentList?.find { it.id == segmentId }
+fun Trip.getTripSegment(segmentId: Long): TripSegment? = segmentList?.find { it.segmentId == segmentId }
 
 fun Trip.getMainTripSegment(): TripSegment? {
     return this.segmentList?.find { segment -> mainSegmentHashCode == segment.templateHashCode }
@@ -94,8 +93,8 @@ private fun StringBuilder.addAddress(segment: TripSegment) {
 
 private fun shouldAdAddress(segment: TripSegment) =
     !segment.from?.address.isNullOrEmpty() &&
-        segment.type != SegmentType.STATIONARY &&
-        !(segment.from?.isNear(segment.to) ?: false)
+        segment.getType() != SegmentType.STATIONARY &&
+        !(segment.to?.run { segment.from?.isNear(this) ?: false } ?: false)
 
 private fun StringBuilder.addSegmentAction(context: Context, segment: TripSegment) {
     append("${TripSegmentUtils.getTripSegmentAction(context, segment)}\n")

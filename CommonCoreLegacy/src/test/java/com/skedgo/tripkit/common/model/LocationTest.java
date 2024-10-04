@@ -19,7 +19,7 @@ public class LocationTest {
     @Test
     public void defaultIdIsZero() {
         Location location = new Location();
-        assertThat(location.getId()).isEqualTo(0L);
+        assertThat(location.getMId()).isEqualTo(0L);
     }
 
     @Test

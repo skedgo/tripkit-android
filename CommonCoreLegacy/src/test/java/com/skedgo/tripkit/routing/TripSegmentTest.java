@@ -26,13 +26,13 @@ public class TripSegmentTest {
     public void shouldDefineCorrectSerializedNames() {
         final TripSegment segment = new TripSegment();
         segment.setServiceDirection("Foo SD");
-        segment.setTransportModeId("LOL MI");
+        segment.transportModeId = "LOL MI";
         segment.setServiceOperator("Fake SO LOL");
-        segment.setTemplateHashCode(12L);
-        segment.setModeInfo(new ModeInfo());
-        segment.setBooking(ImmutableBooking.builder().build());
-        segment.setPlatform("Platform 2");
-        segment.setStopCount(7);
+        segment.templateHashCode = 12L;
+        segment.modeInfo = new ModeInfo();
+        segment.booking = ImmutableBooking.builder().build();
+        segment.platform = "Platform 2";
+        segment.stopCount = 7;
 
         final JsonObject jsonSegment = new Gson().toJsonTree(segment).getAsJsonObject();
         assertThat(jsonSegment.has("serviceDirection")).isTrue();
@@ -110,7 +110,7 @@ public class TripSegmentTest {
     public void shouldBePlaneWithModeNotHavingProviderSpecified() {
         final TripSegment segment = new TripSegment();
         segment.setType(SegmentType.SCHEDULED);
-        segment.setTransportModeId("in_air");
+        segment.transportModeId = "in_air";
         assertThat(segment.isPlane()).isTrue();
     }
 
@@ -171,14 +171,14 @@ public class TripSegmentTest {
     public void shouldWheelchairAccessibleBeTrue() {
         JsonObject tripSegmentJson = new JsonObject();
         tripSegmentJson.addProperty("wheelchairAccessible", true);
-        assertThat(new Gson().fromJson(tripSegmentJson, TripSegment.class).getWheelchairAccessible()).isTrue();
+        assertThat(new Gson().fromJson(tripSegmentJson, TripSegment.class).wheelchairAccessible).isTrue();
     }
 
     @Test
     public void shouldWheelchairAccessibleBeFalse() {
         JsonObject tripSegmentJson = new JsonObject();
         tripSegmentJson.addProperty("wheelchairAccessible", false);
-        assertThat(new Gson().fromJson(tripSegmentJson, TripSegment.class).getWheelchairAccessible()).isFalse();
+        assertThat(new Gson().fromJson(tripSegmentJson, TripSegment.class).wheelchairAccessible).isFalse();
     }
 
     @Test
@@ -188,8 +188,8 @@ public class TripSegmentTest {
 
         TripSegment segment = bookingGson().fromJson(routingResponse, TripSegment.class);
 
-        assertThat(segment.getBooking()).isNotNull();
-        assertThat(segment.getBooking().getConfirmation()).isNotNull();
+        assertThat(segment.booking).isNotNull();
+        assertThat(segment.booking.getConfirmation()).isNotNull();
 
     }
 
@@ -200,8 +200,8 @@ public class TripSegmentTest {
 
         TripSegment segment = bookingGson().fromJson(routingResponse, TripSegment.class);
 
-        assertThat(segment.getBooking()).isNotNull();
-        assertThat(segment.getBooking().getConfirmation()).isNotNull();
+        assertThat(segment.booking).isNotNull();
+        assertThat(segment.booking.getConfirmation()).isNotNull();
 
     }
 
@@ -210,25 +210,25 @@ public class TripSegmentTest {
         jsonObject.addProperty("metres", 18);
         jsonObject.addProperty("metresSafe", 3);
         TripSegment tripSegment = new Gson().fromJson(jsonObject, TripSegment.class);
-        assertThat(tripSegment.getMetres()).isEqualTo(18);
-        assertThat(tripSegment.getMetresSafe()).isEqualTo(3);
+        assertThat(tripSegment.metres).isEqualTo(18);
+        assertThat(tripSegment.metresSafe).isEqualTo(3);
     }
 
     @Test
     public void shouldCalculatePercentageAndRoundUp() throws Exception {
         TripSegment tripSegment = new TripSegment();
-        tripSegment.setMetresSafe(10);
-        tripSegment.setMetres(20);
+        tripSegment.metresSafe = 10;
+        tripSegment.metres = 20;
         assertThat(tripSegment.getWheelchairFriendliness()).isEqualTo(50);
         assertThat(tripSegment.getCycleFriendliness()).isEqualTo(50);
 
-        tripSegment.setMetresSafe(1);
-        tripSegment.setMetres(3);
+        tripSegment.metresSafe = 1;
+        tripSegment.metres = 3;
         assertThat(tripSegment.getWheelchairFriendliness()).isEqualTo(33);
         assertThat(tripSegment.getCycleFriendliness()).isEqualTo(33); // 1 / 3 is 33 percent
 
-        tripSegment.setMetresSafe(2);
-        tripSegment.setMetres(3);
+        tripSegment.metresSafe = 2;
+        tripSegment.metres = 3;
         assertThat(tripSegment.getWheelchairFriendliness()).isEqualTo(67);
         assertThat(tripSegment.getCycleFriendliness()).isEqualTo(67); // 2 / 3 is rounded up to 67 percent
     }
@@ -250,7 +250,7 @@ public class TripSegmentTest {
 
         TripSegment tripSegment = gson.fromJson(jsonObject, TripSegment.class);
 
-        assertThat(tripSegment.getLocalCost()).isEqualTo(mockLocalCost);
+        assertThat(tripSegment.localCost).isEqualTo(mockLocalCost);
     }
 
     private ArrayList<TripSegment> createSamplePlaneSegments() {
@@ -261,7 +261,7 @@ public class TripSegmentTest {
             final TripSegment segment = new TripSegment();
             segment.setType(SegmentType.SCHEDULED);
             segment.setServiceTripId("id_" + provider);
-            segment.setTransportModeId("in_air_" + provider);
+            segment.transportModeId = "in_air_" + provider;
             planeSegments.add(segment);
         }
         return planeSegments;
