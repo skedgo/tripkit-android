@@ -1,118 +1,102 @@
-package com.skedgo.tripkit.booking.viewmodel;
+package com.skedgo.tripkit.booking.viewmodel
 
-import android.os.Parcel;
-import android.os.Parcelable;
+import android.os.Parcel
+import android.os.Parcelable
+import com.skedgo.tripkit.booking.DateTimeFormField
+import io.reactivex.subjects.BehaviorSubject
+import java.text.SimpleDateFormat
+import java.util.Calendar
+import java.util.Date
+import java.util.Locale
+import java.util.concurrent.TimeUnit.MILLISECONDS
+import java.util.concurrent.TimeUnit.SECONDS
 
-import com.skedgo.tripkit.booking.DateTimeFormField;
-import com.skedgo.tripkit.common.rx.Var;
+class DateTimeFieldViewModelImpl(
+    private val field: DateTimeFormField
+) : DateTimeViewModel, Parcelable {
 
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.Locale;
-import java.util.concurrent.TimeUnit;
+    private val self: BehaviorSubject<DateTimeFieldViewModelImpl> = BehaviorSubject.create()
+    private var calendar: Calendar = Calendar.getInstance().apply {
+        timeInMillis = SECONDS.toMillis(field.value ?: 0L)
+    }
 
-import androidx.annotation.NonNull;
+    constructor(parcel: Parcel) : this(
+        parcel.readParcelable(DateTimeFormField::class.java.classLoader)!!
+    ) {
+        calendar = parcel.readSerializable() as Calendar
+    }
 
-public final class DateTimeFieldViewModelImpl implements DateTimeViewModel, Parcelable {
-    public static final Creator<DateTimeFieldViewModelImpl> CREATOR = new Creator<DateTimeFieldViewModelImpl>() {
-        @Override
-        public DateTimeFieldViewModelImpl createFromParcel(Parcel in) {
-            return new DateTimeFieldViewModelImpl(in);
+    fun getSelf(): BehaviorSubject<DateTimeFieldViewModelImpl> {
+        return self
+    }
+
+    fun setTime(hour: Int, minute: Int) {
+        calendar.set(Calendar.HOUR_OF_DAY, hour)
+        calendar.set(Calendar.MINUTE, minute)
+        field.setValue(MILLISECONDS.toSeconds(calendar.timeInMillis))
+        self.onNext(this)
+    }
+
+    fun setDate(year: Int, month: Int, day: Int) {
+        calendar.set(year, month, day)
+        field.setValue(MILLISECONDS.toSeconds(calendar.timeInMillis))
+        self.onNext(this)
+    }
+
+    override fun describeContents(): Int {
+        return 0
+    }
+
+    override fun writeToParcel(dest: Parcel, flags: Int) {
+        dest.writeParcelable(field, flags)
+        dest.writeSerializable(calendar)
+    }
+
+    override fun getYear(): Int {
+        return calendar.get(Calendar.YEAR)
+    }
+
+    override fun getMonth(): Int {
+        return calendar.get(Calendar.MONTH)
+    }
+
+    override fun getDay(): Int {
+        return calendar.get(Calendar.DAY_OF_MONTH)
+    }
+
+    override fun getHour(): Int {
+        return calendar.get(Calendar.HOUR_OF_DAY)
+    }
+
+    override fun getMinute(): Int {
+        return calendar.get(Calendar.MINUTE)
+    }
+
+    override fun getTitle(): String {
+        return field.title.orEmpty()
+    }
+
+    override fun getDate(): String {
+        val dateFormat = SimpleDateFormat("EEE, dd MMM yyyy", Locale.US)
+        return dateFormat.format(Date(SECONDS.toMillis(field.value ?: 0)))
+    }
+
+    override fun getTime(): String {
+        val timeFormat = SimpleDateFormat("HH:mm", Locale.US)
+        return timeFormat.format(Date(SECONDS.toMillis(field.value ?: 0)))
+    }
+
+    companion object CREATOR : Parcelable.Creator<DateTimeFieldViewModelImpl> {
+        override fun createFromParcel(parcel: Parcel): DateTimeFieldViewModelImpl {
+            return DateTimeFieldViewModelImpl(parcel)
         }
 
-        @Override
-        public DateTimeFieldViewModelImpl[] newArray(int size) {
-            return new DateTimeFieldViewModelImpl[size];
+        override fun newArray(size: Int): Array<DateTimeFieldViewModelImpl?> {
+            return arrayOfNulls(size)
         }
-    };
 
-    private final Var<DateTimeFieldViewModelImpl> self = Var.create();
-    private DateTimeFormField field;
-    private Calendar calendar;
-
-    private DateTimeFieldViewModelImpl(@NonNull DateTimeFormField field) {
-        this.field = field;
-        this.calendar = Calendar.getInstance();
-        this.calendar.setTimeInMillis(TimeUnit.SECONDS.toMillis(field.getValue()));
-    }
-
-    protected DateTimeFieldViewModelImpl(Parcel in) {
-        field = in.readParcelable(DateTimeFormField.class.getClassLoader());
-        calendar = (Calendar) in.readSerializable();
-    }
-
-    public static DateTimeFieldViewModelImpl create(DateTimeFormField dateTimeFormField) {
-        return new DateTimeFieldViewModelImpl(dateTimeFormField);
-    }
-
-    public Var<DateTimeFieldViewModelImpl> getSelf() {
-        return self;
-    }
-
-    public void setTime(int hour, int minute) {
-        calendar.set(Calendar.HOUR_OF_DAY, hour);
-        calendar.set(Calendar.MINUTE, minute);
-        field.setValue(TimeUnit.MILLISECONDS.toSeconds(calendar.getTimeInMillis()));
-        self.put(this);
-    }
-
-    public void setDate(int year, int month, int day) {
-        calendar.set(year, month, day);
-        field.setValue(TimeUnit.MILLISECONDS.toSeconds(calendar.getTimeInMillis()));
-        self.put(this);
-    }
-
-    @Override
-    public int describeContents() {
-        return 0;
-    }
-
-    @Override
-    public void writeToParcel(Parcel dest, int flags) {
-        dest.writeParcelable(field, flags);
-        dest.writeSerializable(calendar);
-    }
-
-    @Override
-    public int getYear() {
-        return calendar.get(Calendar.YEAR);
-    }
-
-    @Override
-    public int getMonth() {
-        return calendar.get(Calendar.MONTH);
-    }
-
-    @Override
-    public int getDay() {
-        return calendar.get(Calendar.DAY_OF_MONTH);
-    }
-
-    @Override
-    public int getHour() {
-        return calendar.get(Calendar.HOUR_OF_DAY);
-    }
-
-    @Override
-    public int getMinute() {
-        return calendar.get(Calendar.MINUTE);
-    }
-
-    @Override
-    public String getTitle() {
-        return field.getTitle();
-    }
-
-    @Override
-    public String getDate() {
-        final SimpleDateFormat dateFormat = new SimpleDateFormat("EEE, dd MMM yyyy", Locale.US);
-        return dateFormat.format(new Date(TimeUnit.SECONDS.toMillis(field.getValue())));
-    }
-
-    @Override
-    public String getTime() {
-        final SimpleDateFormat dateFormat = new SimpleDateFormat("HH:mm", Locale.US);
-        return dateFormat.format(new Date(TimeUnit.SECONDS.toMillis(field.getValue())));
+        fun create(dateTimeFormField: DateTimeFormField): DateTimeFieldViewModelImpl {
+            return DateTimeFieldViewModelImpl(dateTimeFormField)
+        }
     }
 }

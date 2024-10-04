@@ -1,13 +1,12 @@
-package com.skedgo.tripkit.booking.viewmodel;
+package com.skedgo.tripkit.booking.viewmodel
 
-import com.skedgo.tripkit.common.rx.Var;
+import io.reactivex.Observable
+import io.reactivex.subjects.BehaviorSubject
 
-import io.reactivex.Observable;
+interface AuthenticationViewModel {
+    fun url(): BehaviorSubject<String>
 
-public interface AuthenticationViewModel {
-    Var<String> url();
+    fun isSuccessful(): Observable<Boolean>
 
-    Observable<Boolean> isSuccessful();
-
-    Observable<Boolean> verify(Object param);
+    fun verify(param: Any): Observable<Boolean>
 }

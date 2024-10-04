@@ -1,19 +1,19 @@
-package com.skedgo.tripkit.booking.viewmodel;
+package com.skedgo.tripkit.booking.viewmodel
 
-public interface DateTimeViewModel {
-    int getYear();
+interface DateTimeViewModel {
+    fun getYear(): Int
 
-    int getMonth();
+    fun getMonth(): Int
 
-    int getDay();
+    fun getDay(): Int
 
-    int getHour();
+    fun getHour(): Int
 
-    int getMinute();
+    fun getMinute(): Int
 
-    String getTitle();
+    fun getTitle(): String
 
-    String getDate();
+    fun getDate(): String
 
-    String getTime();
+    fun getTime(): String
 }

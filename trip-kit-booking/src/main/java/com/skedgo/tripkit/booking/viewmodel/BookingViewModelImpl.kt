@@ -1,183 +1,133 @@
-package com.skedgo.tripkit.booking.viewmodel;
+package com.skedgo.tripkit.booking.viewmodel
 
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-import com.skedgo.tripkit.booking.BookingForm;
-import com.skedgo.tripkit.booking.BookingService;
-import com.skedgo.tripkit.booking.FormField;
-import com.skedgo.tripkit.booking.FormFieldJsonAdapter;
-import com.skedgo.tripkit.booking.FormGroup;
-import com.skedgo.tripkit.booking.InputForm;
-import com.skedgo.tripkit.booking.LinkFormField;
-import com.skedgo.tripkit.common.rx.Var;
+import android.annotation.SuppressLint
+import com.google.gson.Gson
+import com.google.gson.GsonBuilder
+import com.skedgo.tripkit.booking.BookingForm
+import com.skedgo.tripkit.booking.BookingService
+import com.skedgo.tripkit.booking.FormField
+import com.skedgo.tripkit.booking.FormFieldJsonAdapter
+import com.skedgo.tripkit.booking.InputForm
+import com.skedgo.tripkit.booking.LinkFormField
+import io.reactivex.BackpressureStrategy
+import io.reactivex.Flowable
+import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.android.schedulers.AndroidSchedulers.mainThread
+import io.reactivex.subjects.BehaviorSubject
+import org.apache.commons.collections4.CollectionUtils
 
-import org.apache.commons.collections4.CollectionUtils;
+class BookingViewModelImpl(private val bookingService: BookingService) : BookingViewModel {
 
-import java.util.List;
+    // Replace Var with BehaviorSubject
+    private val nextBookingForm: BehaviorSubject<Param> = BehaviorSubject.create()
+    private val bookingForm: BehaviorSubject<BookingForm> = BehaviorSubject.create()
+    private val isDone: BehaviorSubject<Boolean> = BehaviorSubject.create()
+    private val mIsFetching: BehaviorSubject<Boolean> = BehaviorSubject.createDefault(false)
+    private var param: Param? = null
 
-import io.reactivex.Flowable;
-import io.reactivex.functions.Action;
-import io.reactivex.functions.Consumer;
-import io.reactivex.functions.LongConsumer;
-
-import static io.reactivex.android.schedulers.AndroidSchedulers.mainThread;
-
-public class BookingViewModelImpl implements BookingViewModel {
-    private final BookingService bookingService;
-    private Var<Param> nextBookingForm = Var.create();
-    private Var<BookingForm> bookingForm = Var.create();
-    private Var<Boolean> isDone = Var.create();
-    private Var<Boolean> isFetching = Var.create(false);
-    private Param param;
-
-    public BookingViewModelImpl(BookingService bookingService) {
-        this.bookingService = bookingService;
-    }
-
-    public static Gson createGson() {
-        return new GsonBuilder().registerTypeAdapter(
-            FormField.class,
-            new FormFieldJsonAdapter()
-        ).create();
-    }
-
-    @Override
-    public Flowable<BookingForm> bookingForm() {
-        return bookingForm.observe();
-    }
-
-    @Override
-    public Flowable<Param> nextBookingForm() {
-        return nextBookingForm.observe();
-    }
-
-    /**
-     * Two cases here
-     * if postBody == null --> getBooking for the first time
-     * else reload the page with the last data
-     */
-    @Override
-    public Flowable<BookingForm> loadForm(Param param) {
-        if (param == null) {
-            return null;
+    companion object {
+        fun createGson(): Gson {
+            return GsonBuilder().registerTypeAdapter(
+                FormField::class.java,
+                FormFieldJsonAdapter()
+            ).create()
         }
-        if (param.getMethod().equals(LinkFormField.METHOD_POST)) {
-            this.param = param;
-            return bookingService.postFormAsync(param.getUrl(), param.postBody())
-                .observeOn(mainThread())
-                .doOnNext(new Consumer<BookingForm>() {
-                    @Override
-                    public void accept(BookingForm bookingFormItem) {
-                        // Server can return an empty form
-                        if (bookingFormItem != null) {
-                            bookingForm.put(bookingFormItem);
-                        }
-                    }
-                })
-                .doOnRequest(new LongConsumer() {
-                    @Override
-                    public void accept(long t) throws Exception {
-                        isFetching.put(true);
+    }
 
-                    }
-                })
-                .doOnComplete(new Action() {
-                    @Override
-                    public void run() {
-                        isFetching.put(false);
-                    }
-                });
+    override fun bookingForm(): Flowable<BookingForm> {
+        return bookingForm.hide().toFlowable(BackpressureStrategy.BUFFER)
+    }
+
+    override fun nextBookingForm(): Flowable<Param> {
+        return nextBookingForm.hide().toFlowable(BackpressureStrategy.BUFFER)
+    }
+
+    override fun loadForm(param: Param): Flowable<BookingForm>? {
+        if (param == null) return null
+        this.param = param
+        return if (param.method == LinkFormField.METHOD_POST) {
+            bookingService.postFormAsync(param.url, param.postBody())
+                .observeOn(mainThread())
+                .doOnNext { form ->
+                    form?.let { bookingForm.onNext(it) }
+                }
+                .doOnSubscribe {
+                    mIsFetching.onNext(true)
+                }
+                .doOnComplete {
+                    mIsFetching.onNext(false)
+                }
         } else {
-            return bookingService.getFormAsync(param.getUrl())
+            bookingService.getFormAsync(param.url)
                 .observeOn(mainThread())
-                .doOnNext(new Consumer<BookingForm>() {
-                    @Override
-                    public void accept(BookingForm bookingFormItem) throws Exception {
-                        if (bookingForm != null) {
-                            bookingForm.put(bookingFormItem);
-                        }
-                    }
-                })
-                .doOnRequest(new LongConsumer() {
-                    @Override
-                    public void accept(long value) {
-                        isFetching.put(true);
-                    }
-                })
-                .doOnComplete(new Action() {
-                    @Override
-                    public void run() {
-                        isFetching.put(false);
-                    }
-                });
+                .doOnNext { form ->
+                    form?.let { bookingForm.onNext(it) }
+                }
+                .doOnSubscribe {
+                    mIsFetching.onNext(true)
+                }
+                .doOnComplete {
+                    mIsFetching.onNext(false)
+                }
         }
     }
 
-    @Override
-    public Flowable<Boolean> isFetching() {
-        return isFetching.observe();
+    override fun isFetching(): Flowable<Boolean>? {
+        return mIsFetching.hide().toFlowable(BackpressureStrategy.BUFFER)
     }
 
-    @Override
-    public Param paramFrom(BookingForm form) {
-        return Param.create(form);
+    override fun paramFrom(form: BookingForm): Param {
+        return Param.create(form)
     }
 
-    @Override
-    public Flowable<Boolean> isDone() {
-        return isDone.observe();
+    override fun isDone(): Flowable<Boolean> {
+        return isDone.hide().toFlowable(BackpressureStrategy.BUFFER)
     }
 
-    @Override
-    public void observeAuthentication(AuthenticationViewModel authenticationViewModel) {
-        authenticationViewModel.isSuccessful().subscribe(new Consumer<Boolean>() {
-            @Override
-            public void accept(Boolean isSuccessful) {
-                if (isSuccessful) {
-                    loadForm(param).subscribe(
-                        unused -> {
-                        },
-                        new Consumer<Throwable>() {
-                            @Override
-                            public void accept(Throwable error) {
-                            }
-                        }
-                    );
+    @SuppressLint("CheckResult")
+    override fun observeAuthentication(authenticationViewModel: AuthenticationViewModel) {
+        authenticationViewModel.isSuccessful().subscribe { isSuccessful ->
+            if (isSuccessful) {
+                param?.let {
+                    loadForm(it)?.subscribe(
+                        { /* onSuccess */ },
+                        { /* onError */ }
+                    )
                 }
             }
-        });
+        }
     }
 
-    @Override
-    public Flowable<Boolean> performAction(BookingForm bookingForm) {
-        String url = bookingForm.getAction().getUrl();
-        InputForm postPody = InputForm.from(bookingForm.getForm());
-        if (url == null) {
+    override fun performAction(bookingForm: BookingForm): Flowable<Boolean> {
+        val url = bookingForm.action?.url
+        val postBody = InputForm.from(bookingForm.form)
+
+        return if (url == null) {
             if (!canceled(bookingForm)) {
-                isDone.put(true);
+                isDone.onNext(true)
             } else {
-                isDone.put(false);
+                isDone.onNext(false)
             }
-            return Flowable.just(true);
+            Flowable.just(true)
+        } else {
+            nextBookingForm.onNext(Param.create(bookingForm.action, postBody))
+            Flowable.just(false)
         }
-        nextBookingForm.put(Param.create(bookingForm.getAction(), postPody));
-        return Flowable.just(false);
     }
 
-    @Override
-    public Flowable<Boolean> performAction(LinkFormField linkFormField) {
-        nextBookingForm.put(Param.create(linkFormField));
-        return Flowable.just(false);
+    override fun performAction(linkFormField: LinkFormField): Flowable<Boolean> {
+        nextBookingForm.onNext(Param.create(linkFormField))
+        return Flowable.just(false)
     }
 
-    private boolean canceled(BookingForm bookingForm) {
-        List<FormGroup> formGroups = bookingForm.getForm();
-        if (!CollectionUtils.isEmpty(formGroups)) {
-            FormField bookingStatusField = formGroups.get(0).getFields().get(0);
-            if ("Cancelled".equals(bookingStatusField.getValue())) {
-                return true;
+    private fun canceled(bookingForm: BookingForm): Boolean {
+        val formGroups = bookingForm.form
+        if (!formGroups.isNullOrEmpty()) {
+            val bookingStatusField = formGroups[0].fields[0]
+            if ("Cancelled" == bookingStatusField.value) {
+                return true
             }
         }
-        return false;
+        return false
     }
 }

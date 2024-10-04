@@ -1,27 +1,25 @@
-package com.skedgo.tripkit.booking.viewmodel;
+package com.skedgo.tripkit.booking.viewmodel
 
-import com.skedgo.tripkit.booking.BookingForm;
-import com.skedgo.tripkit.booking.LinkFormField;
+import com.skedgo.tripkit.booking.BookingForm
+import com.skedgo.tripkit.booking.LinkFormField
+import io.reactivex.Flowable
 
-import io.reactivex.Flowable;
+interface BookingViewModel {
+    fun bookingForm(): Flowable<BookingForm>?
 
-public interface BookingViewModel {
-    Flowable<BookingForm> bookingForm();
+    fun nextBookingForm(): Flowable<Param>?
 
-    Flowable<Param> nextBookingForm();
+    fun loadForm(param: Param): Flowable<BookingForm>?
 
-    Flowable<BookingForm> loadForm(Param param);
+    fun isDone(): Flowable<Boolean>?
 
-    Flowable<Boolean> isDone();
+    fun observeAuthentication(authenticationViewModel: AuthenticationViewModel)
 
-    void observeAuthentication(AuthenticationViewModel authenticationViewModel);
+    fun performAction(bookingForm: BookingForm): Flowable<Boolean>?
 
-    Flowable<Boolean> performAction(BookingForm bookingForm);
+    fun performAction(linkFormField: LinkFormField): Flowable<Boolean>?
 
-    Flowable<Boolean> performAction(LinkFormField linkFormField);
+    fun isFetching(): Flowable<Boolean>?
 
-    Flowable<Boolean> isFetching();
-
-    Param paramFrom(BookingForm form);
-
+    fun paramFrom(form: BookingForm): Param?
 }
