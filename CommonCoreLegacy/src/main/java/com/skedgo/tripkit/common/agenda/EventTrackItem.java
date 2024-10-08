@@ -1,7 +1,7 @@
 package com.skedgo.tripkit.common.agenda;
 
 import com.google.gson.annotations.SerializedName;
-import com.skedgo.tripkit.common.model.ITimeRange;
+import com.skedgo.tripkit.common.model.time.ITimeRange;
 
 public class EventTrackItem extends TrackItem implements ITimeRange {
     @SerializedName("effectiveStart")

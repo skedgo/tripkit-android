@@ -1,7 +1,7 @@
 package com.skedgo.tripkit;
 
 import com.google.gson.annotations.JsonAdapter;
-import com.skedgo.tripkit.common.model.ScheduledStop;
+import com.skedgo.tripkit.common.model.stop.ScheduledStop;
 
 import org.immutables.gson.Gson;
 import org.immutables.value.Value;

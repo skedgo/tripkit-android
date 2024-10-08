@@ -2,9 +2,9 @@ package com.skedgo.tripkit
 
 import android.os.Parcel
 import androidx.test.ext.junit.runners.AndroidJUnit4
-import com.skedgo.tripkit.common.model.Location
+import com.skedgo.tripkit.common.model.location.Location
 import com.skedgo.tripkit.common.model.Query
-import com.skedgo.tripkit.common.model.Region
+import com.skedgo.tripkit.common.model.region.Region
 import com.skedgo.tripkit.common.model.TransportMode
 import com.skedgo.tripkit.data.regions.RegionService
 import io.reactivex.Observable
@@ -60,7 +60,7 @@ class QueryGeneratorImplTest {
     @Test
     fun shouldPropagateNullPointerExceptionIfArrivalIsNull() {
         val query = Query()
-        query.setFromLocation(Location())
+        query.fromLocation = Location()
 
         val subscriber = TestObserver<List<Query>>()
         queryGenerator!!.apply(query, transportModeFilter).subscribe(subscriber)
@@ -75,10 +75,11 @@ class QueryGeneratorImplTest {
     @Test
     fun shouldPropagateOutOfRegionsExceptionIfDepartureIsUnsupported() {
         val query = Query()
-        val departure = Location(1.0, 2.0)
-        query.setFromLocation(departure)
+        val departure =
+            Location(1.0, 2.0)
+        query.fromLocation = departure
         val arrival = Location(3.0, 4.0)
-        query.setToLocation(arrival)
+        query.toLocation = arrival
 
         val error = com.skedgo.tripkit.OutOfRegionsException(null, departure.lat, departure.lon)
         `when`(regionService!!.getRegionByLocationAsync(ArgumentMatchers.any(Location::class.java)))
@@ -104,10 +105,11 @@ class QueryGeneratorImplTest {
     @Test
     fun shouldPropagateOutOfRegionsExceptionIfArrivalIsUnsupported() {
         val query = Query()
-        val departure = Location(1.0, 2.0)
-        query.setFromLocation(departure)
+        val departure =
+            Location(1.0, 2.0)
+        query.fromLocation = departure
         val arrival = Location(3.0, 4.0)
-        query.setToLocation(arrival)
+        query.toLocation = arrival
 
         val error = com.skedgo.tripkit.OutOfRegionsException(null, arrival.lat, arrival.lon)
         `when`(regionService!!.getRegionByLocationAsync(ArgumentMatchers.any(Location::class.java)))
@@ -134,9 +136,13 @@ class QueryGeneratorImplTest {
     @Test
     fun shouldGenerateQueriesProperly() {
         val query = Query()
-        val departure = Location(12.972, 77.596)
-        query.setFromLocation(departure)
-        query.setToLocation(Location(12.993684, 77.613473))
+        val departure =
+            Location(12.972, 77.596)
+        query.fromLocation = departure
+        query.toLocation = Location(
+            12.993684,
+            77.613473
+        )
 
         val modeMap = createSampleModeMap()
         `when`(regionService!!.getTransportModesAsync())
@@ -165,33 +171,31 @@ class QueryGeneratorImplTest {
         modeMap["wa_wal"] = TransportMode()
 
         val schoolBusMode = TransportMode()
-        schoolBusMode.setImplies(ArrayList(listOf("pt_pub")))
+        schoolBusMode.implies = ArrayList(listOf("pt_pub"))
         modeMap["pt_sch"] = schoolBusMode
 
         val shuttleMode = TransportMode()
-        shuttleMode.setImplies(ArrayList(asList("ps_tax", "cy_bic-s_AUSTIN")))
+        shuttleMode.implies = ArrayList(asList("ps_tax", "cy_bic-s_AUSTIN"))
         modeMap["ps_shu"] = shuttleMode
         return modeMap
     }
 
     private fun createBangaloreRegion(): Region {
         val region = Region()
-        region.setEncodedPolyline("_}{kA_a~tM_g{C??_ibE~f{C?")
-        region.setName("IN_Bangalore")
-        region.setTransportModeIds(
-            ArrayList(
-                asList(
-                    "pt_pub",
-                    "pt_sch",
-                    "ps_tax",
-                    "ps_shu",
-                    "me_car",
-                    "me_car-s_CND",
-                    "me_car-s_GOG",
-                    "me_mot",
-                    "cy_bic",
-                    "wa_wal"
-                )
+        region.encodedPolyline = "_}{kA_a~tM_g{C??_ibE~f{C?"
+        region.name = "IN_Bangalore"
+        region.transportModeIds = ArrayList(
+            asList(
+                "pt_pub",
+                "pt_sch",
+                "ps_tax",
+                "ps_shu",
+                "me_car",
+                "me_car-s_CND",
+                "me_car-s_GOG",
+                "me_mot",
+                "cy_bic",
+                "wa_wal"
             )
         )
         region.setURLs(ArrayList(listOf("https://inflationary-in-bangalore.tripgo.skedgo.com/satapp")))

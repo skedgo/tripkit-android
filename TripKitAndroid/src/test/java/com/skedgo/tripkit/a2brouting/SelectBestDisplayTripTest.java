@@ -18,16 +18,16 @@ public class SelectBestDisplayTripTest {
     @Test
     public void selectDisplayTripHavingLowestWeightedScore() {
         final Trip a = new Trip();
-        a.setId(0);
+        a.setTripId(0);
         a.setWeightedScore(3f);
 
         // This is the best display trip.
         final Trip b = new Trip();
-        b.setId(1);
+        b.setTripId(1);
         b.setWeightedScore(1f);
 
         final Trip c = new Trip();
-        c.setId(2);
+        c.setTripId(2);
         c.setWeightedScore(2f);
 
         final TripGroup group = new TripGroup();
@@ -40,7 +40,7 @@ public class SelectBestDisplayTripTest {
             .containsExactly(b, c, a);
         assertThat(actual.getDisplayTripId())
             .describedAs("Select display trip having lowest weighted score")
-            .isEqualTo(b.getId());
+            .isEqualTo(b.getTripId());
         assertThat(actual.getDisplayTrip())
             .describedAs("Select display trip having lowest weighted score")
             .isSameAs(b);

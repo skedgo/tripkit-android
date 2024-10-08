@@ -1,6 +1,6 @@
 package com.skedgo.tripkit.alerts;
 
-import com.skedgo.tripkit.common.model.Region;
+import com.skedgo.tripkit.common.model.region.Region;
 
 import io.reactivex.Observable;
 import retrofit2.http.GET;

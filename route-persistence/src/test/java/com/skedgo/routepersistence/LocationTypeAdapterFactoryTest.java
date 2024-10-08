@@ -3,7 +3,7 @@ package com.skedgo.routepersistence;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonObject;
-import com.skedgo.tripkit.common.model.Location;
+import com.skedgo.tripkit.common.model.location.Location;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;

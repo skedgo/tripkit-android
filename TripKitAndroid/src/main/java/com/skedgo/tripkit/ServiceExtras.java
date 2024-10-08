@@ -1,6 +1,6 @@
 package com.skedgo.tripkit;
 
-import com.skedgo.tripkit.common.model.ServiceStop;
+import com.skedgo.tripkit.common.model.stop.ServiceStop;
 
 import java.util.List;
 

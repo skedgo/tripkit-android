@@ -24,12 +24,12 @@ class TransportModeTest : BaseUnitTest() {
     fun serializedNames() {
         val mode = TransportMode()
         mode.id = "Some id"
-        mode.setURL("skedgo.com")
+        mode.url = "skedgo.com"
         mode.title = "Some title"
         mode.iconId = "Some icon id"
-        mode.setDarkIcon("Some dark icon")
-        mode.setImplies(ArrayList(Arrays.asList("Aha", "Uhu", "Huh?")))
-        mode.setColor(ServiceColor(1, 2, 3))
+        mode.darkIcon = "Some dark icon"
+        mode.implies = ArrayList(Arrays.asList("Aha", "Uhu", "Huh?"))
+        mode.color = ServiceColor(1, 2, 3)
 
         val json = Gson().toJsonTree(mode).asJsonObject
         assertThat(json).isNotNull()

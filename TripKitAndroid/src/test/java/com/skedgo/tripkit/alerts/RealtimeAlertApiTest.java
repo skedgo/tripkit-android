@@ -1,7 +1,7 @@
 package com.skedgo.tripkit.alerts;
 
 import com.skedgo.tripkit.TripKitAndroidRobolectricTest;
-import com.skedgo.tripkit.common.model.ImmutableRealtimeAlert;
+import com.skedgo.tripkit.common.model.realtimealert.ImmutableRealtimeAlert;
 
 import org.junit.Before;
 import org.junit.Rule;

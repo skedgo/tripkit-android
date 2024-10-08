@@ -3,7 +3,7 @@ package com.skedgo.tripkit.bookingproviders
 import android.content.Intent
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.skedgo.tripkit.TripKitAndroidRobolectricTest
-import com.skedgo.tripkit.common.model.Location
+import com.skedgo.tripkit.common.model.location.Location
 import com.skedgo.tripkit.routing.TripSegment
 import io.reactivex.functions.Function
 import org.amshove.kluent.When

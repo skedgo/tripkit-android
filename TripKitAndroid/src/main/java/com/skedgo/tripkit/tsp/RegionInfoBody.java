@@ -1,7 +1,7 @@
 package com.skedgo.tripkit.tsp;
 
 import com.google.gson.annotations.JsonAdapter;
-import com.skedgo.tripkit.common.model.Region;
+import com.skedgo.tripkit.common.model.region.Region;
 
 import org.immutables.value.Value;
 

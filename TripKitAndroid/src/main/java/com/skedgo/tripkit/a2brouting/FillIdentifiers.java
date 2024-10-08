@@ -20,7 +20,7 @@ public final class FillIdentifiers implements Function<List<TripGroup>, List<Tri
             final List<Trip> trips = group.getTrips();
             if (trips != null) {
                 for (Trip trip : trips) {
-                    trip.setId(idGenerator.incrementAndGet());
+                    trip.setTripId(idGenerator.incrementAndGet());
                 }
             }
         }

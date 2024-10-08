@@ -2,8 +2,8 @@ package com.skedgo.tripkit;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonPrimitive;
-import com.skedgo.tripkit.common.model.RealtimeAlert;
-import com.skedgo.tripkit.common.model.RealtimeAlerts;
+import com.skedgo.tripkit.common.model.realtimealert.RealtimeAlert;
+import com.skedgo.tripkit.common.model.realtimealert.RealtimeAlerts;
 import com.skedgo.tripkit.common.util.Gsons;
 import com.skedgo.tripkit.routing.RoutingResponse;
 import com.skedgo.tripkit.routing.Trip;
@@ -13,7 +13,6 @@ import com.skedgo.tripkit.routing.TripSegment;
 import org.assertj.core.api.Condition;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.robolectric.RobolectricTestRunner;
 
 import java.io.IOException;
 
@@ -83,16 +82,16 @@ public class RoutingResponseTest {
         response.processRawData(ApplicationProvider.getApplicationContext().getResources(), gson);
 
         assertThat(response).isNotNull();
-        assertThat(response.getAlerts()).hasSize(1);
+        assertThat(response.alerts).hasSize(1);
         assertThat(response.getTripGroupList()).hasSize(1).doesNotContainNull();
 
         TripGroup group = response.getTripGroupList().get(0);
         assertThat(group.getTrips()).hasSize(1).doesNotContainNull();
 
         Trip trip = group.getTrips().get(0);
-        assertThat(trip.getSegments()).hasSize(3).doesNotContainNull();
+        assertThat(trip.getSegmentList()).hasSize(3).doesNotContainNull();
 
-        TripSegment motorbikeSegment = trip.getSegments().get(1);
+        TripSegment motorbikeSegment = trip.getSegmentList().get(1);
         assertThat(motorbikeSegment.getAlerts()).hasSize(1).doesNotContainNull();
 
         RealtimeAlert alert = motorbikeSegment.getAlerts().get(0);
@@ -117,9 +116,9 @@ public class RoutingResponseTest {
         assertThat(group.getTrips()).hasSize(1).doesNotContainNull();
 
         Trip trip = group.getTrips().get(0);
-        assertThat(trip.getSegments()).hasSize(3).doesNotContainNull();
+        assertThat(trip.getSegmentList()).hasSize(3).doesNotContainNull();
 
-        TripSegment motorbikeSegment = trip.getSegments().get(1);
+        TripSegment motorbikeSegment = trip.getSegmentList().get(1);
         assertThat(motorbikeSegment.getStreets()).hasSize(4).doesNotContainNull();
     }
 }

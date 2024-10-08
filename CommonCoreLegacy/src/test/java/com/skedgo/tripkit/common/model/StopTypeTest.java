@@ -5,16 +5,16 @@ import org.junit.runner.RunWith;
 
 import androidx.test.ext.junit.runners.AndroidJUnit4;
 
-import static com.skedgo.tripkit.common.model.StopType.BUS;
-import static com.skedgo.tripkit.common.model.StopType.CABLECAR;
-import static com.skedgo.tripkit.common.model.StopType.FERRY;
-import static com.skedgo.tripkit.common.model.StopType.MONORAIL;
-import static com.skedgo.tripkit.common.model.StopType.PARKING;
-import static com.skedgo.tripkit.common.model.StopType.SUBWAY;
-import static com.skedgo.tripkit.common.model.StopType.TAXI;
-import static com.skedgo.tripkit.common.model.StopType.TRAIN;
-import static com.skedgo.tripkit.common.model.StopType.TRAM;
-import static com.skedgo.tripkit.common.model.StopType.from;
+import static com.skedgo.tripkit.common.model.stop.StopType.BUS;
+import static com.skedgo.tripkit.common.model.stop.StopType.CABLECAR;
+import static com.skedgo.tripkit.common.model.stop.StopType.FERRY;
+import static com.skedgo.tripkit.common.model.stop.StopType.MONORAIL;
+import static com.skedgo.tripkit.common.model.stop.StopType.PARKING;
+import static com.skedgo.tripkit.common.model.stop.StopType.SUBWAY;
+import static com.skedgo.tripkit.common.model.stop.StopType.TAXI;
+import static com.skedgo.tripkit.common.model.stop.StopType.TRAIN;
+import static com.skedgo.tripkit.common.model.stop.StopType.TRAM;
+import static com.skedgo.tripkit.common.model.stop.StopType.from;
 import static org.assertj.core.api.Java6Assertions.assertThat;
 
 @RunWith(AndroidJUnit4.class)

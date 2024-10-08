@@ -6,6 +6,10 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonObject;
 import com.skedgo.tripkit.common.Parcels;
+import com.skedgo.tripkit.common.model.location.Location;
+import com.skedgo.tripkit.common.model.realtimealert.GsonAdaptersRealtimeAlert;
+import com.skedgo.tripkit.common.model.realtimealert.ImmutableRealtimeAlert;
+import com.skedgo.tripkit.common.model.realtimealert.RealtimeAlert;
 import com.skedgo.tripkit.regionrouting.data.Operator;
 
 import org.junit.Test;
@@ -15,7 +19,7 @@ import java.util.ArrayList;
 
 import androidx.test.ext.junit.runners.AndroidJUnit4;
 
-import static com.skedgo.tripkit.common.model.RealtimeAlert.SEVERITY_WARNING;
+import static com.skedgo.tripkit.common.model.realtimealert.RealtimeAlert.SEVERITY_WARNING;
 import static org.assertj.core.api.Java6Assertions.assertThat;
 
 @RunWith(AndroidJUnit4.class)

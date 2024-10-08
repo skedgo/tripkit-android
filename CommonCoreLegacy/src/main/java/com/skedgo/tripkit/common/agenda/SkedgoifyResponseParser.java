@@ -13,6 +13,7 @@ import org.json.JSONException;
 
 import java.util.ArrayList;
 
+// REVIEW: Check if this class is still needed, consider removal if not used.
 public class SkedgoifyResponseParser {
     private Gson gson;
     private Resources resources;

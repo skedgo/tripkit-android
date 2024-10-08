@@ -2,6 +2,7 @@ package com.skedgo.tripkit.common.model;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
+import com.skedgo.tripkit.common.model.region.Region;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;

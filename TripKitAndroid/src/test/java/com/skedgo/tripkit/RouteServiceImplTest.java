@@ -1,9 +1,9 @@
 package com.skedgo.tripkit;
 
 import com.skedgo.tripkit.a2brouting.FailoverA2bRoutingApi;
-import com.skedgo.tripkit.common.model.Location;
+import com.skedgo.tripkit.common.model.location.Location;
 import com.skedgo.tripkit.common.model.Query;
-import com.skedgo.tripkit.common.model.TimeTag;
+import com.skedgo.tripkit.common.model.time.TimeTag;
 import com.skedgo.tripkit.data.tsp.RegionInfo;
 import com.skedgo.tripkit.routing.ExtraQueryMapProvider;
 import com.skedgo.tripkit.tsp.RegionInfoRepository;
@@ -14,7 +14,6 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
-import org.robolectric.RobolectricTestRunner;
 
 import java.util.Collections;
 import java.util.HashMap;

@@ -1,12 +1,11 @@
 package com.skedgo.tripkit;
 
-import com.skedgo.tripkit.common.model.Location;
-import com.skedgo.tripkit.common.model.Region;
+import com.skedgo.tripkit.common.model.location.Location;
+import com.skedgo.tripkit.common.model.region.Region;
 import com.skedgo.tripkit.common.model.TransportMode;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.robolectric.RobolectricTestRunner;
 
 import java.util.ArrayList;
 import java.util.Arrays;
