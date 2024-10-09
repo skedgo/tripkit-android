@@ -42,7 +42,7 @@ class BookingViewModelImpl(private val bookingService: BookingService) : Booking
         return nextBookingForm.hide().toFlowable(BackpressureStrategy.BUFFER)
     }
 
-    override fun loadForm(param: Param): Flowable<BookingForm>? {
+    override fun loadForm(param: Param?): Flowable<BookingForm>? {
         if (param == null) return null
         this.param = param
         return if (param.method == LinkFormField.METHOD_POST) {

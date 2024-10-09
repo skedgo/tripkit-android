@@ -1,139 +1,135 @@
-package com.skedgo.tripkit.booking;
+package com.skedgo.tripkit.booking
 
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
+import com.google.gson.GsonBuilder
+import io.reactivex.observers.TestObserver
+import okhttp3.HttpUrl
+import okhttp3.mockwebserver.MockResponse
+import okhttp3.mockwebserver.MockWebServer
+import org.apache.commons.io.IOUtils
+import org.assertj.core.api.Java6Assertions
+import org.junit.After
+import org.junit.Assert.assertEquals
+import org.junit.Before
+import org.junit.Test
+import org.junit.runner.RunWith
+import org.robolectric.RobolectricTestRunner
+import retrofit2.Retrofit
+import retrofit2.Retrofit.Builder
+import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
+import retrofit2.converter.gson.GsonConverterFactory
+import java.io.IOException
+import java.nio.charset.Charset
+import java.util.Arrays
 
-import org.apache.commons.io.IOUtils;
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.robolectric.RobolectricTestRunner;
-
-import java.io.IOException;
-import java.nio.charset.Charset;
-import java.util.Arrays;
-import java.util.List;
-
-import io.reactivex.observers.TestObserver;
-import okhttp3.HttpUrl;
-import okhttp3.mockwebserver.MockResponse;
-import okhttp3.mockwebserver.MockWebServer;
-import retrofit2.Retrofit;
-import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
-import retrofit2.converter.gson.GsonConverterFactory;
-
-import static org.assertj.core.api.Java6Assertions.assertThat;
-
-@RunWith(RobolectricTestRunner.class)
-public class AuthApiTest {
-    private MockWebServer server;
-    private AuthApi api;
-    private HttpUrl baseUrl;
+@RunWith(RobolectricTestRunner::class)
+class AuthApiTest {
+    private lateinit var server: MockWebServer
+    private lateinit var api: AuthApi
+    private lateinit var baseUrl: HttpUrl
 
     @Before
-    public void before() {
-        final Gson gson = new GsonBuilder()
-            .registerTypeAdapter(FormField.class, new FormFieldJsonAdapter())
-            .create();
-        server = new MockWebServer();
-        baseUrl = server.url("/");
-        api = new Retrofit.Builder()
+    fun before() {
+        val gson = GsonBuilder()
+            .registerTypeAdapter(FormField::class.java, FormFieldJsonAdapter())
+            .create()
+        server = MockWebServer()
+        baseUrl = server.url("/")
+        api = Retrofit.Builder()
             .baseUrl(baseUrl)
             .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
             .addConverterFactory(GsonConverterFactory.create(gson))
             .build()
-            .create(AuthApi.class);
+            .create(AuthApi::class.java)
     }
 
     @After
-    public void after() throws IOException {
-        server.shutdown();
+    fun after() {
+        server.shutdown()
     }
 
     @Test
-    public void fetchProvidersSuccessfully() throws IOException {
-        final MockResponse mockResponse = new MockResponse();
-        mockResponse.setResponseCode(200);
-        mockResponse.setBody(IOUtils.toString(
-            getClass().getResourceAsStream("/auth-US_CO_Denver.json"),
-            Charset.defaultCharset()
-        ));
-        server.enqueue(mockResponse);
+    fun fetchProvidersSuccessfully() {
+        val mockResponse = MockResponse()
+            .setResponseCode(200)
+            .setBody(
+                this::class.java.getResourceAsStream("/auth-US_CO_Denver.json")
+                    ?.bufferedReader(Charset.defaultCharset())?.readText() ?: ""
+            )
+        server.enqueue(mockResponse)
 
-        final HttpUrl url = baseUrl.newBuilder()
+        val url = baseUrl.newBuilder()
             .addPathSegment("auth")
             .addPathSegment("US_CO_Denver")
-            .build();
-        final TestObserver<List<AuthProvider>> subscriber = api.fetchProvidersAsync(url).test();
+            .build()
+        val subscriber: TestObserver<List<AuthProvider>> = api.fetchProvidersAsync(url).test()
 
-        subscriber.awaitTerminalEvent();
-        subscriber.assertNoErrors();
-        subscriber.assertValue(Arrays.<AuthProvider>asList(
-            ImmutableAuthProvider.builder()
-                .modeIdentifier("ps_tnc_LYFT")
-                .provider("lyft")
-                .action("signin")
-                .url("https://granduni.buzzhives.com/satapp-beta/auth/lyft/signin")
-                .actionTitle("Connect")
-                .status("Account not yet connected")
-                .build(),
-            ImmutableAuthProvider.builder()
-                .modeIdentifier("ps_tnc_UBER")
-                .provider("uber")
-                .action("signin")
-                .url("https://granduni.buzzhives.com/satapp-beta/auth/uber/signin")
-                .actionTitle("Connect")
-                .status("Account not yet connected")
-                .build()
-        ));
+        subscriber.awaitTerminalEvent()
+        subscriber.assertNoErrors()
+        subscriber.assertValue(
+            listOf(
+                ImmutableAuthProvider.builder()
+                    .modeIdentifier("ps_tnc_LYFT")
+                    .provider("lyft")
+                    .action("signin")
+                    .url("https://granduni.buzzhives.com/satapp-beta/auth/lyft/signin")
+                    .actionTitle("Connect")
+                    .status("Account not yet connected")
+                    .build(),
+                ImmutableAuthProvider.builder()
+                    .modeIdentifier("ps_tnc_UBER")
+                    .provider("uber")
+                    .action("signin")
+                    .url("https://granduni.buzzhives.com/satapp-beta/auth/uber/signin")
+                    .actionTitle("Connect")
+                    .status("Account not yet connected")
+                    .build()
+            )
+        )
     }
 
     @Test
-    public void signInSuccessfully() throws IOException {
-        final MockResponse mockResponse = new MockResponse()
+    fun signInSuccessfully() {
+        val mockResponse = MockResponse()
             .setResponseCode(200)
-            .setBody(IOUtils.toString(
-                getClass().getResourceAsStream("/auth-uber-signin.json"),
-                Charset.defaultCharset()
-            ));
-        server.enqueue(mockResponse);
+            .setBody(
+                this::class.java.getResourceAsStream("/auth-uber-signin.json")
+                    ?.bufferedReader(Charset.defaultCharset())?.readText() ?: ""
+            )
+        server.enqueue(mockResponse)
 
-        final String url = baseUrl.newBuilder()
+        val url = baseUrl.newBuilder()
             .addPathSegment("auth")
             .addPathSegment("uber")
             .addPathSegment("signin")
-            .build()
-            .toString();
-        final TestObserver<BookingForm> subscriber = api.signInAsync(url).test();
+            .build().toString()
+        val subscriber: TestObserver<BookingForm> = api.signInAsync(url).test()
 
-        subscriber.awaitTerminalEvent();
-        subscriber.assertNoErrors();
-        final BookingForm form = subscriber.values().get(0);
-        assertThat(form.getTitle()).isEqualTo("Authorization");
-        assertThat(form.getAction()).isNotNull();
-        assertThat(form.getForm()).hasSize(1);
+        subscriber.awaitTerminalEvent()
+        subscriber.assertNoErrors()
+        val form = subscriber.values()[0]
+        assertEquals("Authorization", form.title)
+        assert(form.action != null)
+        assertEquals(1, form.form.size)
     }
 
     @Test
-    public void logOutSuccessfully() {
-        final MockResponse mockResponse = new MockResponse()
+    fun logOutSuccessfully() {
+        val mockResponse = MockResponse()
             .setResponseCode(200)
-            .setBody("{\"changed\":true}");
-        server.enqueue(mockResponse);
+            .setBody("{\"changed\":true}")
+        server.enqueue(mockResponse)
 
-        final String url = baseUrl.newBuilder()
+        val url = baseUrl.newBuilder()
             .addPathSegments("auth/uber/logout")
-            .build()
-            .toString();
-        final TestObserver<LogOutResponse> subscriber = api.logOutAsync(url).test();
+            .build().toString()
+        val subscriber: TestObserver<LogOutResponse> = api.logOutAsync(url).test()
 
-        subscriber.awaitTerminalEvent();
-        subscriber.assertNoErrors();
+        subscriber.awaitTerminalEvent()
+        subscriber.assertNoErrors()
         subscriber.assertValue(
             ImmutableLogOutResponse.builder()
                 .changed(true)
                 .build()
-        );
+        )
     }
 }

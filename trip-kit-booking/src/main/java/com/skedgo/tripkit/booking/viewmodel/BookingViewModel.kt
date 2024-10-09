@@ -9,7 +9,7 @@ interface BookingViewModel {
 
     fun nextBookingForm(): Flowable<Param>?
 
-    fun loadForm(param: Param): Flowable<BookingForm>?
+    fun loadForm(param: Param?): Flowable<BookingForm>?
 
     fun isDone(): Flowable<Boolean>?
 

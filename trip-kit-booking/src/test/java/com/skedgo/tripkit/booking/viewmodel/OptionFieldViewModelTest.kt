@@ -1,62 +1,49 @@
-package com.skedgo.tripkit.booking.viewmodel;
+package com.skedgo.tripkit.booking.viewmodel
 
-import com.skedgo.tripkit.booking.OptionFormField;
+import com.skedgo.tripkit.booking.OptionFormField
+import com.skedgo.tripkit.booking.OptionFormField.OptionValue
+import junit.framework.TestCase.assertEquals
+import org.assertj.core.api.Java6Assertions
+import org.junit.Test
+import org.junit.runner.RunWith
+import org.robolectric.RobolectricTestRunner
 
-import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.robolectric.RobolectricTestRunner;
+@RunWith(RobolectricTestRunner::class)
+class OptionFieldViewModelTest {
 
-import java.util.ArrayList;
-import java.util.List;
-
-import static org.assertj.core.api.Java6Assertions.assertThat;
-
-@RunWith(RobolectricTestRunner.class)
-public class OptionFieldViewModelTest {
     @Test
-    public void ShouldShowInitValueProperly() {
-        OptionFieldViewModel viewModel = OptionFieldViewModel.create(generateOptionFormField());
+    fun shouldShowInitValueProperly() {
+        val viewModel = OptionFieldViewModel.create(generateOptionFormField())
 
-        assertThat(viewModel.getPrimaryText())
-            .describedAs("Should show the Title in optionValue")
-            .isEqualTo("Title");
-        assertThat(viewModel.getSecondaryText())
-            .describedAs("Should show the Value in optionValue")
-            .isEqualTo("Value");
+        assertEquals("Should show the Title in optionValue", "Title", viewModel.getPrimaryText())
+        assertEquals("Should show the Value in optionValue", "Value", viewModel.getSecondaryText())
     }
 
     @Test
-    public void ShouldShowSelectedValueProperly() {
-        OptionFieldViewModel viewModel = OptionFieldViewModel.create(generateOptionFormField());
+    fun shouldShowSelectedValueProperly() {
+        val viewModel = OptionFieldViewModel.create(generateOptionFormField())
 
-        viewModel.select(1);
-        assertThat(viewModel.getPrimaryText())
-            .describedAs("Should show the Title of optionValue at index 1")
-            .isEqualTo("Title 1");
-        assertThat(viewModel.getSecondaryText())
-            .describedAs("Should show the Value of optionValue at index 1")
-            .isEqualTo("Value 1");
+        viewModel.select(1)
+        assertEquals("Should show the Title of optionValue at index 1", "Title 1", viewModel.getPrimaryText())
+        assertEquals("Should show the Value of optionValue at index 1", "Value 1", viewModel.getSecondaryText())
 
-        viewModel.select(2);
-        assertThat(viewModel.getPrimaryText())
-            .describedAs("Should show the Title of optionValue at index 2")
-            .isEqualTo("Title 2");
-        assertThat(viewModel.getSecondaryText())
-            .describedAs("Should show the Value of optionValue at index 2")
-            .isEqualTo("Value 2");
+        viewModel.select(2)
+        assertEquals("Should show the Title of optionValue at index 2", "Title 2", viewModel.getPrimaryText())
+        assertEquals("Should show the Value of optionValue at index 2", "Value 2", viewModel.getSecondaryText())
     }
 
-    private OptionFormField generateOptionFormField() {
-        OptionFormField.OptionValue optionValue = new OptionFormField.OptionValue("Title", "Value");
-        List<OptionFormField.OptionValue> allValues = new ArrayList<OptionFormField.OptionValue>();
-        allValues.add(optionValue);
-        allValues.add(new OptionFormField.OptionValue("Title 1", "Value 1"));
-        allValues.add(new OptionFormField.OptionValue("Title 2", "Value 2"));
-        allValues.add(new OptionFormField.OptionValue("Title 3", "Value 3"));
+    private fun generateOptionFormField(): OptionFormField {
+        val optionValue = OptionFormField.OptionValue("Title", "Value")
+        val allValues = mutableListOf(
+            optionValue,
+            OptionFormField.OptionValue("Title 1", "Value 1"),
+            OptionFormField.OptionValue("Title 2", "Value 2"),
+            OptionFormField.OptionValue("Title 3", "Value 3")
+        )
 
-        OptionFormField optionFormField = new OptionFormField();
-        optionFormField.setValue(optionValue);
-        optionFormField.setAllValues(allValues);
-        return optionFormField;
+        return OptionFormField().apply {
+            value = optionValue
+            setAllValues(allValues)
+        }
     }
 }
