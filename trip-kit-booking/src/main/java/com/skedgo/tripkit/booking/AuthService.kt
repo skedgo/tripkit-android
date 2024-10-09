@@ -1,20 +1,15 @@
-package com.skedgo.tripkit.booking;
+package com.skedgo.tripkit.booking
 
-import com.skedgo.tripkit.common.model.region.Region;
-
-import java.util.List;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import io.reactivex.Observable;
+import com.skedgo.tripkit.common.model.region.Region
+import io.reactivex.Observable
 
 /**
- * Extension of {@link AuthApi} that facilitates fetching providers for a region.
+ * Extension of [AuthApi] that facilitates fetching providers for a region.
  */
-public interface AuthService extends AuthApi {
-    Observable<List<AuthProvider>> fetchProvidersByRegionAsync(
-        @NonNull Region region,
-        @Nullable String mode,
-        boolean bsb
-    );
+interface AuthService : AuthApi {
+    fun fetchProvidersByRegionAsync(
+        region: Region,
+        mode: String?,
+        bsb: Boolean
+    ): Observable<List<AuthProvider>>
 }

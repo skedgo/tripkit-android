@@ -1,7 +1,6 @@
-package com.skedgo.tripkit.booking.viewmodel;
+package com.skedgo.tripkit.booking.viewmodel
 
-public interface TwoLineViewModel {
-    String getPrimaryText();
-
-    String getSecondaryText();
+interface TwoLineViewModel {
+    fun getPrimaryText(): String?
+    fun getSecondaryText(): String?
 }

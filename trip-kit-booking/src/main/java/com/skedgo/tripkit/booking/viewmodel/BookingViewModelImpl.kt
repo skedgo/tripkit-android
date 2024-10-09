@@ -46,7 +46,7 @@ class BookingViewModelImpl(private val bookingService: BookingService) : Booking
         if (param == null) return null
         this.param = param
         return if (param.method == LinkFormField.METHOD_POST) {
-            bookingService.postFormAsync(param.url, param.postBody())
+            bookingService.postFormAsync(param.url.orEmpty(), param.postBody)
                 .observeOn(mainThread())
                 .doOnNext { form ->
                     form?.let { bookingForm.onNext(it) }
@@ -58,7 +58,7 @@ class BookingViewModelImpl(private val bookingService: BookingService) : Booking
                     mIsFetching.onNext(false)
                 }
         } else {
-            bookingService.getFormAsync(param.url)
+            bookingService.getFormAsync(param.url.orEmpty())
                 .observeOn(mainThread())
                 .doOnNext { form ->
                     form?.let { bookingForm.onNext(it) }
@@ -110,7 +110,9 @@ class BookingViewModelImpl(private val bookingService: BookingService) : Booking
             }
             Flowable.just(true)
         } else {
-            nextBookingForm.onNext(Param.create(bookingForm.action, postBody))
+            bookingForm.action?.let { action ->
+                nextBookingForm.onNext(Param.create(action, postBody))
+            }
             Flowable.just(false)
         }
     }

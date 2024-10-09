@@ -1,62 +1,46 @@
-package com.skedgo.tripkit.booking;
+package com.skedgo.tripkit.booking
 
-import com.skedgo.tripkit.common.model.region.Region;
+import com.skedgo.tripkit.common.model.region.Region
+import io.reactivex.Observable
+import okhttp3.HttpUrl
+import okhttp3.HttpUrl.Companion.toHttpUrlOrNull
 
-import java.util.List;
+class AuthServiceImpl(private val api: AuthApi) : AuthService {
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import io.reactivex.Observable;
-import io.reactivex.functions.Function;
-import okhttp3.HttpUrl;
-import retrofit2.http.Url;
-
-class AuthServiceImpl implements AuthService {
-    private final AuthApi api;
-
-    public AuthServiceImpl(@NonNull AuthApi api) {
-        this.api = api;
-    }
-
-    @Override
-    public Observable<List<AuthProvider>> fetchProvidersByRegionAsync(@NonNull final Region region,
-                                                                      @Nullable final String mode,
-                                                                      final boolean bsb) {
+    override fun fetchProvidersByRegionAsync(
+        region: Region,
+        mode: String?,
+        bsb: Boolean
+    ): Observable<List<AuthProvider>> {
         return Observable.fromIterable(region.getURLs())
-            .concatMapDelayError(new Function<String, Observable<? extends List<AuthProvider>>>() {
-                @Override
-                public Observable<? extends List<AuthProvider>> apply(String url) {
+            .concatMapDelayError { url ->
+                val builder = url.toHttpUrlOrNull()!!.newBuilder()
+                    .addPathSegment("auth")
+                    .addPathSegment(region.name.orEmpty())
 
-                    HttpUrl.Builder builder = HttpUrl.parse(url).newBuilder()
-                        .addPathSegment("auth")
-                        .addPathSegment(region.getName());
-
-                    if (mode != null) {
-                        builder.addQueryParameter("mode", mode);
-                    }
-
-                    if (bsb) {
-                        builder.addQueryParameter("bsb", "1");
-                    }
-
-                    return fetchProvidersAsync(builder.build());
+                mode?.let {
+                    builder.addQueryParameter("mode", it)
                 }
-            })
-            .firstElement().toObservable();
+
+                if (bsb) {
+                    builder.addQueryParameter("bsb", "1")
+                }
+
+                fetchProvidersAsync(builder.build())
+            }
+            .firstElement()
+            .toObservable()
     }
 
-    @Override
-    public Observable<List<AuthProvider>> fetchProvidersAsync(@Url HttpUrl url) {
-        return api.fetchProvidersAsync(url);
+    override fun fetchProvidersAsync(url: HttpUrl): Observable<List<AuthProvider>> {
+        return api.fetchProvidersAsync(url)
     }
 
-    @Override
-    public Observable<BookingForm> signInAsync(@Url String url) {
-        return api.signInAsync(url);
+    override fun signInAsync(url: String): Observable<BookingForm> {
+        return api.signInAsync(url)
     }
 
-    @Override
-    public Observable<LogOutResponse> logOutAsync(@Url String url) {
-        return api.logOutAsync(url);
+    override fun logOutAsync(url: String): Observable<LogOutResponse> {
+        return api.logOutAsync(url)
     }
 }

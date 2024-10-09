@@ -1,134 +1,64 @@
-package com.skedgo.tripkit.booking;
+package com.skedgo.tripkit.booking
 
-import android.os.Parcel;
-import android.os.Parcelable;
+import android.os.Parcel
+import android.os.Parcelable
+import android.os.Parcelable.Creator
+import com.google.gson.annotations.SerializedName
 
-import com.google.gson.annotations.SerializedName;
+class BookingError() : Throwable(), Parcelable {
 
-import androidx.annotation.Nullable;
-
-public class BookingError extends Throwable implements Parcelable {
-    public static final Creator<BookingError> CREATOR = new Creator<BookingError>() {
-        @Override
-        public BookingError createFromParcel(Parcel source) {
-            BookingError bookingError = new BookingError();
-            bookingError.setTitle(source.readString());
-            bookingError.setErrorCode(source.readInt());
-            bookingError.setError(source.readString());
-            bookingError.setHasUserError(source.readInt() == 1);
-            bookingError.setRecovery(source.readString());
-            bookingError.setRecoveryTitle(source.readString());
-            bookingError.setUrl(source.readString());
-            return bookingError;
-        }
-
-        @Override
-        public BookingError[] newArray(int size) {
-            return new BookingError[size];
-        }
-    };
-
-    @Nullable
     @SerializedName("title")
-    private String title;
+    var title: String? = null
+
     @SerializedName("errorCode")
-    private int errorCode;
+    var errorCode: Int = 0
+
     @SerializedName("error")
-    private String error;
+    var error: String? = null
+
     @SerializedName("usererror")
-    private boolean hasUserError;
-    @Nullable
+    var hasUserError: Boolean = false
+
     @SerializedName("recovery")
-    private String recovery;
-    @Nullable
+    var recovery: String? = null
+
     @SerializedName("recoveryTitle")
-    private String recoveryTitle;
-    @Nullable
+    var recoveryTitle: String? = null
+
     @SerializedName("url")
-    private String url;
+    var url: String? = null
 
-    @Nullable
-    public String getTitle() {
-        return title;
+    constructor(parcel: Parcel) : this() {
+        title = parcel.readString()
+        errorCode = parcel.readInt()
+        error = parcel.readString()
+        hasUserError = parcel.readInt() == 1
+        recovery = parcel.readString()
+        recoveryTitle = parcel.readString()
+        url = parcel.readString()
     }
 
-    public void setTitle(String title) {
-        this.title = title;
+    override fun writeToParcel(parcel: Parcel, flags: Int) {
+        parcel.writeString(title)
+        parcel.writeInt(errorCode)
+        parcel.writeString(error)
+        parcel.writeInt(if (hasUserError) 1 else 0)
+        parcel.writeString(recovery)
+        parcel.writeString(recoveryTitle)
+        parcel.writeString(url)
     }
 
-    public int getErrorCode() {
-        return errorCode;
+    override fun describeContents(): Int {
+        return 0
     }
 
-    public void setErrorCode(int errorCode) {
-        this.errorCode = errorCode;
-    }
-
-    public String getError() {
-        return error;
-    }
-
-    public void setError(String error) {
-        this.error = error;
-    }
-
-    @Nullable
-    public String getRecovery() {
-        return recovery;
-    }
-
-    public void setRecovery(@Nullable String recovery) {
-        this.recovery = recovery;
-    }
-
-    @Nullable
-    public String getRecoveryTitle() {
-        return recoveryTitle;
-    }
-
-    public void setRecoveryTitle(@Nullable String recoveryTitle) {
-        this.recoveryTitle = recoveryTitle;
-    }
-
-    @Nullable
-    public String getUrl() {
-        return url;
-    }
-
-    public void setUrl(@Nullable String url) {
-        this.url = url;
-    }
-
-    public boolean hasUserError() {
-        return hasUserError;
-    }
-
-    public void setHasUserError(boolean hasUserError) {
-        this.hasUserError = hasUserError;
-    }
-
-    @Override
-    public String getMessage() {
-        if (error != null) {
-            return error;
-        } else {
-            return super.getMessage();
+    companion object CREATOR : Parcelable.Creator<BookingError> {
+        override fun createFromParcel(parcel: Parcel): BookingError {
+            return BookingError(parcel)
         }
-    }
 
-    @Override
-    public int describeContents() {
-        return 0;
-    }
-
-    @Override
-    public void writeToParcel(Parcel dest, int flags) {
-        dest.writeString(title);
-        dest.writeInt(errorCode);
-        dest.writeString(error);
-        dest.writeInt(hasUserError ? 1 : 0);
-        dest.writeString(recovery);
-        dest.writeString(recoveryTitle);
-        dest.writeString(url);
+        override fun newArray(size: Int): Array<BookingError?> {
+            return arrayOfNulls(size)
+        }
     }
 }

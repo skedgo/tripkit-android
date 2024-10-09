@@ -1,22 +1,18 @@
-package com.skedgo.tripkit.booking;
+package com.skedgo.tripkit.booking
 
-import com.skedgo.TripKit;
-import com.skedgo.tripkit.scope.ExtensionScope;
-
-import dagger.Component;
+import com.skedgo.TripKit
+import com.skedgo.tripkit.scope.ExtensionScope
+import dagger.Component
 
 /**
- * To initialize this, refer to {@link DaggerBookingComponent#builder()}.
+ * To initialize this, refer to [DaggerBookingComponent.builder].
  */
 @ExtensionScope
-@Component(
-    modules = BookingModule.class,
-    dependencies = TripKit.class
-)
-public interface BookingComponent {
-    QuickBookingApi quickBookingApi();
+@Component(modules = [BookingModule::class], dependencies = [TripKit::class])
+interface BookingComponent {
+    fun quickBookingApi(): QuickBookingApi?
 
-    AuthService authService();
+    fun authService(): AuthService?
 
-    BookingService bookingService();
+    fun bookingService(): BookingService?
 }

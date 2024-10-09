@@ -1,251 +1,160 @@
-package com.skedgo.tripkit.booking;
+package com.skedgo.tripkit.booking
 
-import android.net.Uri;
-import android.os.Parcel;
-import android.text.TextUtils;
+import android.net.Uri
+import android.os.Parcel
+import android.os.Parcelable.Creator
+import com.google.gson.annotations.SerializedName
+import java.util.UUID
 
-import com.google.gson.annotations.SerializedName;
+open class BookingForm() : FormField() {
 
-import org.apache.commons.collections4.CollectionUtils;
-
-import java.util.ArrayList;
-import java.util.List;
-import java.util.UUID;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-
-public class BookingForm extends FormField {
-
-    public static final Creator<BookingForm> CREATOR = new Creator<BookingForm>() {
-        @Override
-        public BookingForm createFromParcel(Parcel in) {
-            in.readInt();
-            return new BookingForm(in);
-        }
-
-        @Override
-        public BookingForm[] newArray(int size) {
-            return new BookingForm[size];
-        }
-    };
     @SerializedName("action")
-    private BookingAction action;
+    var action: BookingAction? = null
+
     @SerializedName("form")
-    private List<FormGroup> form;
+    var form: List<FormGroup> = listOf()
+
     @SerializedName("value")
-    private String value;
+    var mValue: String? = null
+
     @SerializedName("refreshURLForSourceObject")
-    private String refreshURLForSourceObject;
+    var refreshURLForSourceObject: String? = null
+
     @SerializedName("image")
-    private String imageUrl;
+    var imageUrl: String? = null
 
-    public BookingForm(Parcel in) {
-        super(in);
-        this.action = in.readParcelable(BookingAction.class.getClassLoader());
-        this.form = new ArrayList<>();
-        in.readTypedList(this.form, FormGroup.CREATOR);
-        this.value = in.readString();
-        this.refreshURLForSourceObject = in.readString();
-        this.imageUrl = in.readString();
+    constructor(parcel: Parcel) : this() {
+        action = parcel.readParcelable(BookingAction::class.java.classLoader)
+        form = mutableListOf<FormGroup>().apply {
+            parcel.readTypedList(this, FormGroup.CREATOR)
+        }
+        mValue = parcel.readString()
+        refreshURLForSourceObject = parcel.readString()
+        imageUrl = parcel.readString()
     }
 
-    public BookingForm() {
-        super();
+    override fun writeToParcel(dest: Parcel, flags: Int) {
+        dest.writeInt(BOOKINGFORM)
+        super.writeToParcel(dest, flags)
+        dest.writeParcelable(action, flags)
+        dest.writeTypedList(form)
+        dest.writeString(mValue)
+        dest.writeString(refreshURLForSourceObject)
+        dest.writeString(imageUrl)
     }
 
-    @Override
-    public void writeToParcel(Parcel dest, int flags) {
-        dest.writeInt(BOOKINGFORM);
-        super.writeToParcel(dest, flags);
-        dest.writeParcelable(action, flags);
-        dest.writeTypedList(form);
-        dest.writeString(value);
-        dest.writeString(refreshURLForSourceObject);
-        dest.writeString(imageUrl);
+    override fun describeContents(): Int = 0
+
+    companion object CREATOR : Creator<BookingForm> {
+        override fun createFromParcel(parcel: Parcel): BookingForm {
+            parcel.readInt()
+            return BookingForm(parcel)
+        }
+
+        override fun newArray(size: Int): Array<BookingForm?> = arrayOfNulls(size)
     }
 
-    @Nullable
-    public BookingAction getAction() {
-        return action;
+    override fun getValue(): Any? {
+        return mValue
     }
 
-    public void setAction(BookingAction action) {
-        this.action = action;
-    }
+    fun isOAuthForm(): Boolean = "authForm" == getType()
 
-    public String getRefreshURLForSourceObject() {
-        return refreshURLForSourceObject;
-    }
+    fun isSpecificAuthForm(): Boolean = mValue == "payiq" || mValue == "myki"
 
-    public void setRefreshURLForSourceObject(String refreshURLForSourceObject) {
-        this.refreshURLForSourceObject = refreshURLForSourceObject;
-    }
+    fun isUberAuthForm(): Boolean = mValue == "uber"
 
-    public List<FormGroup> getForm() {
-        return form;
-    }
+    fun getClientID(): String? = getValueFromField(FormField.CLIENT_ID)
 
-    public void setForm(List<FormGroup> form) {
-        this.form = form;
-    }
+    fun getClientSecret(): String? = getValueFromField(FormField.CLIENT_SECRET)
 
-    @Nullable
-    public String getImageUrl() {
-        return imageUrl;
-    }
+    fun getAuthURL(): String? = getValueFromField(FormField.AUTH_URL)
 
-    @Override
-    public Object getValue() {
-        return value;
-    }
+    fun getToken(): String? = getValueFromField(FormField.ACCESS_TOKEN)
 
-    public boolean isOAuthForm() {
-        return "authForm".equals(getType());
-    }
+    fun getExpiresIn(): Int = getValueFromField(FormField.EXPIRES_IN)?.toIntOrNull() ?: 0
 
-    public boolean isSpecificAuthForm() {
-        return "payiq".equals(value) || "myki".equals(value);
-    }
+    fun getRefreshToken(): String? = getValueFromField(FormField.REFRESH_TOKEN)
 
-    public boolean isUberAuthForm() {
-        return "uber".equals(value);
-    }
-
-    @Nullable
-    public String getClientID() {
-        return getValueFromField(FormField.CLIENT_ID);
-    }
-
-    @Nullable
-    public String getClientSecret() {
-        return getValueFromField(FormField.CLIENT_SECRET);
-    }
-
-    @Nullable
-    public String getAuthURL() {
-        return getValueFromField(FormField.AUTH_URL);
-    }
-
-    @Nullable
-    public String getToken() {
-        return getValueFromField(FormField.ACCESS_TOKEN);
-    }
-
-    @Nullable
-    public int getExpiresIn() {
-        return Integer.valueOf(getValueFromField(FormField.EXPIRES_IN));
-    }
-
-    @Nullable
-    public String getRefreshToken() {
-        return getValueFromField(FormField.REFRESH_TOKEN);
-    }
-
-    @Nullable
-    public String getTokenURL() {
-
-        for (FormGroup formGroup : form) {
-            for (FormField formField : formGroup.getFields()) {
-                String fieldId = formField.getId();
-                Object value = formField.getValue();
-                if (FormField.TOKEN_URL.equals(fieldId) && value != null && value.toString().endsWith("/token")) {
-                    return value.toString().substring(0, value.toString().length() - "/token".length());
+    fun getTokenURL(): String? {
+        form.forEach { formGroup ->
+            formGroup.fields.forEach { formField ->
+                if (FormField.TOKEN_URL == formField.id && formField.value != null && formField.value.toString().endsWith("/token")) {
+                    return formField.value.toString().substring(0, formField.value.toString().length - "/token".length)
                 }
             }
         }
-        return null;
+        return null
     }
 
-    @Nullable
-    public String getScope() {
-
-        for (FormGroup formGroup : form) {
-            for (FormField formField : formGroup.getFields()) {
-                if (formField.getId() != null && formField.getValue() != null && formField.getId().equals(FormField.SCOPE)) {
-                    return formField.getValue().toString();
+    fun getScope(): String? {
+        form.forEach { formGroup ->
+            formGroup.fields.forEach { formField ->
+                if (FormField.SCOPE == formField.id && formField.value != null) {
+                    return formField.value.toString()
                 }
             }
         }
-        return null;
+        return null
     }
 
-    /**
-     * getOAuthLink: get first (unique?) oauth link
-     * TODO: is it possible to have multiple authentication links?
-     */
-    @Nullable
-    public Uri getOAuthLink() {
+    fun getOAuthLink(): Uri? {
         if (isOAuthForm()) {
-
-            String authURL = getAuthURL();
-            String clientID = getClientID();
-            String scope = getScope();
+            val authURL = getAuthURL()
+            val clientID = getClientID()
+            val scope = getScope()
 
             if (authURL != null && clientID != null && scope != null) {
-
-                Uri.Builder builder = Uri.parse(authURL)
-                    .buildUpon()
+                val builder = Uri.parse(authURL).buildUpon()
                     .appendQueryParameter("client_id", clientID)
                     .appendQueryParameter("response_type", "code")
                     .appendQueryParameter("state", UUID.randomUUID().toString())
-                    .appendQueryParameter("redirect_uri", getValueFromField(FormField.REDIRECT_URI));
+                    .appendQueryParameter("redirect_uri", getValueFromField(FormField.REDIRECT_URI))
 
-                if (!TextUtils.isEmpty(scope)) {
-                    builder = builder.appendQueryParameter("scope", scope);
+                if (!scope.isNullOrEmpty()) {
+                    builder.appendQueryParameter("scope", scope)
                 }
 
-                return builder.build();
-
+                return builder.build()
             }
         }
-        return null;
+        return null
     }
 
-    public BookingForm setAuthData(ExternalOAuth externalOAuth) {
-        for (FormGroup formGroup : form) {
-            for (FormField formField : formGroup.getFields()) {
-                if (formField.getId() != null && formField.getId().equals(FormField.ACCESS_TOKEN)) {
-                    // TODO: refactor FormFields using a design pattern
-                    ((StringFormField) formField).setValue(externalOAuth.token());
-                }
-                if (formField.getId().equals(FormField.EXPIRES_IN)) {
-                    ((StringFormField) formField).setValue("" + externalOAuth.expiresIn());
-                }
-                if (formField.getId().equals(FormField.REFRESH_TOKEN) && externalOAuth.refreshToken() != null) {
-                    ((StringFormField) formField).setValue("" + externalOAuth.refreshToken());
-                }
-            }
-        }
-        return this;
-    }
-
-    public String externalAction() {
-
-        if (form != null && !CollectionUtils.isEmpty(form)) {
-            for (FormGroup group : form) {
-                for (FormField field : group.getFields()) {
-                    if (field instanceof LinkFormField &&
-                        (LinkFormField.METHOD_EXTERNAL.equals(((LinkFormField) field).getMethod()))) {
-                        return ((LinkFormField) field).getValue();
+    fun setAuthData(externalOAuth: ExternalOAuth): BookingForm {
+        form.forEach { formGroup ->
+            formGroup.fields.forEach { formField ->
+                when (formField.id) {
+                    FormField.ACCESS_TOKEN -> (formField as? StringFormField)?.setValue(externalOAuth.token())
+                    FormField.EXPIRES_IN -> (formField as? StringFormField)?.setValue(externalOAuth.expiresIn().toString())
+                    FormField.REFRESH_TOKEN -> externalOAuth.refreshToken()?.let {
+                        (formField as? StringFormField)?.setValue(it)
                     }
                 }
             }
         }
-
-        return null;
+        return this
     }
 
-    @Nullable
-    private String getValueFromField(@NonNull String fieldName) {
-        for (FormGroup formGroup : form) {
-            for (FormField formField : formGroup.getFields()) {
-                if (fieldName.equals(formField.getId()) && formField.getValue() != null) {
-                    return formField.getValue().toString();
+    fun externalAction(): String? {
+        form.forEach { group ->
+            group.fields.forEach { field ->
+                if (field is LinkFormField && LinkFormField.METHOD_EXTERNAL == field.method) {
+                    return field.value
                 }
             }
         }
-        return null;
+        return null
     }
 
+    private fun getValueFromField(fieldName: String): String? {
+        form.forEach { formGroup ->
+            formGroup.fields.forEach { formField ->
+                if (fieldName == formField.id && formField.value != null) {
+                    return formField.value.toString()
+                }
+            }
+        }
+        return null
+    }
 }

@@ -1,30 +1,27 @@
-package com.skedgo.tripkit.booking;
+package com.skedgo.tripkit.booking
 
-import com.google.gson.annotations.JsonAdapter;
-import com.google.gson.annotations.SerializedName;
+import com.google.gson.annotations.JsonAdapter
+import com.google.gson.annotations.SerializedName
+import org.immutables.gson.Gson.TypeAdapters
+import org.immutables.value.Value.Immutable
+import org.immutables.value.Value.Style
 
-import org.immutables.gson.Gson;
-import org.immutables.value.Value;
-
-import androidx.annotation.Nullable;
-
-@Value.Immutable
-@Gson.TypeAdapters
-@Value.Style(passAnnotations = JsonAdapter.class)
-@JsonAdapter(AccessTokenResponse.class)
-public interface AccessTokenResponse {
-
+@Immutable
+@TypeAdapters
+@Style(passAnnotations = [JsonAdapter::class])
+@JsonAdapter(
+    AccessTokenResponse::class
+)
+interface AccessTokenResponse {
     @SerializedName("access_token")
-    String accessToken();
+    fun accessToken(): String?
 
     @SerializedName("token_type")
-    String tokenType();
+    fun tokenType(): String?
 
     @SerializedName("expires_in")
-    long expiresIn();
+    fun expiresIn(): Long
 
-    @Nullable
     @SerializedName("refresh_token")
-    String refreshToken();
-
+    fun refreshToken(): String?
 }

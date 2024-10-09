@@ -1,103 +1,103 @@
-package com.skedgo.tripkit.booking;
+package com.skedgo.tripkit.booking
 
+import com.google.gson.Gson
+import com.google.gson.GsonBuilder
+import com.skedgo.tripkit.booking.viewmodel.AuthenticationViewModel
+import com.skedgo.tripkit.booking.viewmodel.AuthenticationViewModelImpl
+import com.skedgo.tripkit.booking.viewmodel.BookingViewModel
+import com.skedgo.tripkit.booking.viewmodel.BookingViewModelImpl
+import com.skedgo.tripkit.configuration.ServerManager
+import dagger.Module
+import dagger.Provides
+import io.reactivex.schedulers.Schedulers
+import okhttp3.OkHttpClient
+import retrofit2.Retrofit.Builder
+import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
+import retrofit2.converter.gson.GsonConverterFactory
 
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-import com.skedgo.tripkit.booking.viewmodel.AuthenticationViewModel;
-import com.skedgo.tripkit.booking.viewmodel.AuthenticationViewModelImpl;
-import com.skedgo.tripkit.booking.viewmodel.BookingViewModel;
-import com.skedgo.tripkit.booking.viewmodel.BookingViewModelImpl;
-import com.skedgo.tripkit.configuration.ServerManager;
-
-import dagger.Module;
-import dagger.Provides;
-import io.reactivex.schedulers.Schedulers;
-import okhttp3.OkHttpClient;
-import retrofit2.Retrofit;
-import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
-import retrofit2.converter.gson.GsonConverterFactory;
 
 @Module
-public class BookingModule {
+class BookingModule {
+
     @Provides
-    BookingApi bookingApi(OkHttpClient httpClient) {
-        final Gson gson = new GsonBuilder()
-            .registerTypeAdapter(FormField.class, new FormFieldJsonAdapter())
-            .create();
-        return new Retrofit.Builder()
+    fun bookingApi(httpClient: OkHttpClient): BookingApi {
+        val gson = GsonBuilder()
+            .registerTypeAdapter(FormField::class.java, FormFieldJsonAdapter())
+            .create()
+        return Builder()
             /* This base url is ignored as the api relies on @Url. */
-            .baseUrl(ServerManager.INSTANCE.getConfiguration().getApiTripGoUrl())
+            .baseUrl(ServerManager.configuration.apiTripGoUrl)
             .addCallAdapterFactory(RxJava2CallAdapterFactory.createWithScheduler(Schedulers.io()))
             .addConverterFactory(GsonConverterFactory.create(gson))
             .client(httpClient)
             .build()
-            .create(BookingApi.class);
+            .create(BookingApi::class.java)
     }
 
     @Provides
-    QuickBookingApi quickBookingApi(OkHttpClient httpClient) {
-        final Gson gson = new GsonBuilder()
-            .registerTypeAdapterFactory(new GsonAdaptersQuickBooking())
-            .create();
-        return new Retrofit.Builder()
+    fun quickBookingApi(httpClient: OkHttpClient): QuickBookingApi {
+        val gson = GsonBuilder()
+            .registerTypeAdapterFactory(GsonAdaptersQuickBooking())
+            .create()
+        return Builder()
             /* This base url is ignored as the api relies on @Url. */
-            .baseUrl(ServerManager.INSTANCE.getConfiguration().getApiTripGoUrl())
+            .baseUrl(ServerManager.configuration.apiTripGoUrl)
             .addCallAdapterFactory(RxJava2CallAdapterFactory.createWithScheduler(Schedulers.io()))
             .addConverterFactory(GsonConverterFactory.create(gson))
             .client(httpClient)
             .build()
-            .create(QuickBookingApi.class);
+            .create(QuickBookingApi::class.java)
     }
 
     @Provides
-    AuthApi authApi(OkHttpClient httpClient) {
-        final Gson gson = new GsonBuilder()
-            .registerTypeAdapter(FormField.class, new FormFieldJsonAdapter())
-            .registerTypeAdapterFactory(new GsonAdaptersAuthProvider())
-            .registerTypeAdapterFactory(new GsonAdaptersLogOutResponse())
-            .create();
-        return new Retrofit.Builder()
+    fun authApi(httpClient: OkHttpClient): AuthApi {
+        val gson = GsonBuilder()
+            .registerTypeAdapter(FormField::class.java, FormFieldJsonAdapter())
+            .registerTypeAdapterFactory(GsonAdaptersAuthProvider())
+            .registerTypeAdapterFactory(GsonAdaptersLogOutResponse())
+            .create()
+        return Builder()
             /* This base url is ignored as the api relies on @Url. */
-            .baseUrl(ServerManager.INSTANCE.getConfiguration().getApiTripGoUrl())
+            .baseUrl(ServerManager.configuration.apiTripGoUrl)
             .addCallAdapterFactory(RxJava2CallAdapterFactory.createWithScheduler(Schedulers.io()))
             .addConverterFactory(GsonConverterFactory.create(gson))
             .client(httpClient)
             .build()
-            .create(AuthApi.class);
+            .create(AuthApi::class.java)
     }
 
     @Provides
-    AuthService authService(AuthApi authApi) {
-        return new AuthServiceImpl(authApi);
+    fun authService(authApi: AuthApi): AuthService {
+        return AuthServiceImpl(authApi)
     }
 
     @Provides
-    BookingViewModel bookingViewModel(BookingService bookingService) {
-        return new BookingViewModelImpl(bookingService);
+    fun bookingViewModel(bookingService: BookingService): BookingViewModel {
+        return BookingViewModelImpl(bookingService)
     }
 
     @Provides
-    AuthenticationViewModel authenticationViewModel() {
-        return new AuthenticationViewModelImpl();
+    fun authenticationViewModel(): AuthenticationViewModel {
+        return AuthenticationViewModelImpl()
     }
 
     @Provides
-    ExternalOAuthServiceGenerator provideExternalOAuthServiceGenerator() {
-        return new ExternalOAuthServiceGenerator(new OkHttpClient.Builder());
+    fun provideExternalOAuthServiceGenerator(): ExternalOAuthServiceGenerator {
+        return ExternalOAuthServiceGenerator(OkHttpClient.Builder())
     }
 
     @Provides
-    ExternalOAuthService getExternalOAuthService(ExternalOAuthServiceGenerator externalOAuthServiceGenerator) {
-        return new ExternalOAuthServiceImpl(externalOAuthServiceGenerator);
+    fun getExternalOAuthService(externalOAuthServiceGenerator: ExternalOAuthServiceGenerator): ExternalOAuthService {
+        return ExternalOAuthServiceImpl(externalOAuthServiceGenerator)
     }
 
     @Provides
-    BookingService getBookingService(BookingApi bookingApi) {
-        return new BookingServiceImpl(bookingApi, new Gson());
+    fun getBookingService(bookingApi: BookingApi): BookingService {
+        return BookingServiceImpl(bookingApi, Gson())
     }
 
     @Provides
-    QuickBookingService getQuickBookingService(QuickBookingApi quickBookingApi) {
-        return new QuickBookingServiceImpl(quickBookingApi);
+    fun getQuickBookingService(quickBookingApi: QuickBookingApi): QuickBookingService {
+        return QuickBookingServiceImpl(quickBookingApi)
     }
 }

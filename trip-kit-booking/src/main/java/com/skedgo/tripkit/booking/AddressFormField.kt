@@ -1,128 +1,80 @@
-package com.skedgo.tripkit.booking;
+package com.skedgo.tripkit.booking
 
-import android.os.Parcel;
-import android.os.Parcelable;
+import android.os.Parcel
+import android.os.Parcelable
+import com.google.gson.annotations.SerializedName
 
-import com.google.gson.annotations.SerializedName;
+class AddressFormField() : FormField() {
 
-public class AddressFormField extends FormField {
-
-    public static final Creator<AddressFormField> CREATOR = new Creator<AddressFormField>() {
-        @Override
-        public AddressFormField createFromParcel(Parcel in) {
-            in.readInt();
-            return new AddressFormField(in);
-        }
-
-        @Override
-        public AddressFormField[] newArray(int size) {
-            return new AddressFormField[size];
-        }
-    };
     @SerializedName("value")
-    private Address value;
+    var mValue: Address? = null
 
-    public AddressFormField() {
-        super();
+    constructor(parcel: Parcel) : this() {
+        parcel.readInt() // ADDRESS (or any other constant value you might be using)
+        mValue = parcel.readParcelable(Address::class.java.classLoader)
     }
 
-    public AddressFormField(Parcel in) {
-        super(in);
-        this.value = in.readParcelable(Address.class.getClassLoader());
+    override fun writeToParcel(parcel: Parcel, flags: Int) {
+        parcel.writeInt(ADDRESS) // ADDRESS constant as in the original code
+        super.writeToParcel(parcel, flags)
+        parcel.writeParcelable(mValue, flags)
     }
 
-    @Override
-    public void writeToParcel(Parcel dest, int flags) {
-        dest.writeInt(ADDRESS);
-        super.writeToParcel(dest, flags);
-        dest.writeParcelable(value, flags);
+    override fun getValue(): Address? {
+        return mValue
     }
 
-    @Override
-    public Address getValue() {
-        return value;
+    fun setValue(value: Address) {
+        this.mValue = value
     }
 
-    public void setValue(Address value) {
-        this.value = value;
+    companion object CREATOR : Parcelable.Creator<AddressFormField> {
+        override fun createFromParcel(parcel: Parcel): AddressFormField {
+            parcel.readInt()
+            return AddressFormField(parcel)
+        }
+
+        override fun newArray(size: Int): Array<AddressFormField?> {
+            return arrayOfNulls(size)
+        }
     }
 
-    public static class Address implements Parcelable {
-
-        public static final Creator<Address> CREATOR = new Creator<Address>() {
-            @Override
-            public Address createFromParcel(Parcel in) {
-                return new Address(in);
-            }
-
-            @Override
-            public Address[] newArray(int size) {
-                return new Address[size];
-            }
-        };
+    class Address() : Parcelable {
         @SerializedName("lat")
-        private double latitude;
+        var latitude: Double = 0.0
         @SerializedName("lng")
-        private double longitude;
+        var longitude: Double = 0.0
         @SerializedName("address")
-        private String address;
+        var address: String? = null
         @SerializedName("name")
-        private String name;
+        var name: String? = null
 
-        public Address() {
-
+        constructor(parcel: Parcel) : this() {
+            latitude = parcel.readDouble()
+            longitude = parcel.readDouble()
+            address = parcel.readString()
+            name = parcel.readString()
         }
 
-        public Address(Parcel in) {
-            this.latitude = in.readDouble();
-            this.longitude = in.readDouble();
-            this.address = in.readString();
-            this.name = in.readString();
+        override fun writeToParcel(parcel: Parcel, flags: Int) {
+            parcel.writeDouble(latitude)
+            parcel.writeDouble(longitude)
+            parcel.writeString(address)
+            parcel.writeString(name)
         }
 
-        @Override
-        public int describeContents() {
-            return 0;
+        override fun describeContents(): Int {
+            return 0
         }
 
-        @Override
-        public void writeToParcel(Parcel dest, int flags) {
-            dest.writeDouble(latitude);
-            dest.writeDouble(longitude);
-            dest.writeString(address);
-            dest.writeString(name);
-        }
+        companion object CREATOR : Parcelable.Creator<Address> {
+            override fun createFromParcel(parcel: Parcel): Address {
+                return Address(parcel)
+            }
 
-        public double getLatitude() {
-            return latitude;
-        }
-
-        public void setLatitude(double latitude) {
-            this.latitude = latitude;
-        }
-
-        public double getLongitude() {
-            return longitude;
-        }
-
-        public void setLongitude(double longitude) {
-            this.longitude = longitude;
-        }
-
-        public String getAddress() {
-            return address;
-        }
-
-        public void setAddress(String address) {
-            this.address = address;
-        }
-
-        public String getName() {
-            return name;
-        }
-
-        public void setName(String name) {
-            this.name = name;
+            override fun newArray(size: Int): Array<Address?> {
+                return arrayOfNulls(size)
+            }
         }
     }
 }

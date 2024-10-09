@@ -1,13 +1,11 @@
-package com.skedgo.tripkit.booking;
+package com.skedgo.tripkit.booking
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import io.reactivex.Flowable;
+import io.reactivex.Flowable
 
-public interface BookingService {
-    Flowable<BookingForm> getFormAsync(@NonNull String url);
+interface BookingService {
+    fun getFormAsync(url: String): Flowable<BookingForm>
 
-    Flowable<BookingForm> postFormAsync(@NonNull String url, @Nullable InputForm inputForm);
+    fun postFormAsync(url: String, inputForm: InputForm?): Flowable<BookingForm>
 
-    Flowable<BookingForm> postActionInputAsync(@NonNull String url, @NonNull String field, @NonNull String value);
+    fun postActionInputAsync(url: String, field: String, value: String): Flowable<BookingForm>
 }

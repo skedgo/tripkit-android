@@ -1,87 +1,62 @@
-package com.skedgo.tripkit.booking.viewmodel;
+package com.skedgo.tripkit.booking.viewmodel
 
-import android.os.Parcel;
-import android.os.Parcelable;
+import android.os.Parcel
+import android.os.Parcelable
+import com.skedgo.tripkit.booking.BookingAction
+import com.skedgo.tripkit.booking.BookingForm
+import com.skedgo.tripkit.booking.InputForm
+import com.skedgo.tripkit.booking.LinkFormField
 
-import com.skedgo.tripkit.booking.BookingAction;
-import com.skedgo.tripkit.booking.BookingForm;
-import com.skedgo.tripkit.booking.InputForm;
-import com.skedgo.tripkit.booking.LinkFormField;
+data class Param(
+    val url: String?,
+    val method: String?,
+    val hudText: String?,
+    val postBody: InputForm?
+) : Parcelable {
 
-public class Param implements Parcelable {
-    public static final Parcelable.Creator<Param> CREATOR = new Parcelable.Creator<Param>() {
-        public Param createFromParcel(Parcel in) {
-            return new Param(in);
+    constructor(parcel: Parcel) : this(
+        parcel.readString(),
+        parcel.readString(),
+        parcel.readString(),
+        parcel.readParcelable(InputForm::class.java.classLoader)
+    )
+
+    override fun writeToParcel(parcel: Parcel, flags: Int) {
+        parcel.writeString(url)
+        parcel.writeString(hudText)
+        parcel.writeString(method)
+        parcel.writeParcelable(postBody, flags)
+    }
+
+    override fun describeContents(): Int {
+        return 0
+    }
+
+    companion object CREATOR : Parcelable.Creator<Param> {
+        override fun createFromParcel(parcel: Parcel): Param {
+            return Param(parcel)
         }
 
-        public Param[] newArray(int size) {
-            return new Param[size];
+        override fun newArray(size: Int): Array<Param?> {
+            return arrayOfNulls(size)
         }
-    };
 
-    private final String url;
-    private final String hudText;
-    private final InputForm postBody;
-    private final String method;
+        fun create(url: String): Param {
+            return Param(url, LinkFormField.METHOD_GET, null, null)
+        }
 
-    private Param(String url, String method, String hudText, InputForm postBody) {
-        this.url = url;
-        this.hudText = hudText;
-        this.postBody = postBody;
-        this.method = method;
-    }
+        fun create(bookingAction: BookingAction, postBody: InputForm): Param {
+            return Param(bookingAction.url, LinkFormField.METHOD_POST, bookingAction.hudText, postBody)
+        }
 
-    public Param(Parcel in) {
-        url = in.readString();
-        hudText = in.readString();
-        method = in.readString();
-        postBody = in.readParcelable(InputForm.class.getClassLoader());
-    }
+        fun create(linkFormField: LinkFormField): Param {
+            val postBody = if (linkFormField.method == LinkFormField.METHOD_POST) InputForm() else null
+            return Param(linkFormField.value, linkFormField.method, null, postBody)
+        }
 
-    public static Param create(String url) {
-        return new Param(url, LinkFormField.METHOD_GET, null, null);
-    }
-
-    public static Param create(BookingAction bookingAction, InputForm postBody) {
-        return new Param(bookingAction.getUrl(), LinkFormField.METHOD_POST, bookingAction.getHudText(), postBody);
-    }
-
-    public static Param create(LinkFormField linkFormField) {
-        final InputForm postBody = linkFormField.getMethod().equals(LinkFormField.METHOD_POST) ? new InputForm() : null;
-        return new Param(linkFormField.getValue(), linkFormField.getMethod(), null, postBody);
-    }
-
-    public static Param create(BookingForm form) {
-        final InputForm postBody = InputForm.from(form.getForm());
-        return new Param(form.getAction().getUrl(), LinkFormField.METHOD_POST, null, postBody);
-    }
-
-    public String getMethod() {
-        return method;
-    }
-
-    public String getUrl() {
-        return url;
-    }
-
-    public String getHudText() {
-        return hudText;
-    }
-
-    public InputForm postBody() {
-        return postBody;
-    }
-
-    @Override
-    public int describeContents() {
-        return 0;
-    }
-
-    @Override
-    public void writeToParcel(Parcel dest, int i) {
-        dest.writeString(url);
-        dest.writeString(hudText);
-        dest.writeString(method);
-        dest.writeParcelable(postBody, i);
+        fun create(form: BookingForm): Param {
+            val postBody = InputForm.from(form.form)
+            return Param(form.action?.url, LinkFormField.METHOD_POST, null, postBody)
+        }
     }
 }

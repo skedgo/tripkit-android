@@ -1,95 +1,45 @@
-package com.skedgo.tripkit.booking;
+package com.skedgo.tripkit.booking
 
-import android.os.Parcel;
-import android.os.Parcelable;
+import android.os.Parcel
+import android.os.Parcelable
+import android.os.Parcelable.Creator
+import com.google.gson.annotations.SerializedName
 
-import com.google.gson.annotations.SerializedName;
+data class BookingAction(
+    @SerializedName("title") var title: String? = null,
+    @SerializedName("enabled") var enable: Boolean = true,
+    @SerializedName("url") var url: String? = null,
+    @SerializedName("hudText") var hudText: String? = null,
+    @SerializedName("done") var done: Boolean = false
+) : Parcelable {
 
-import androidx.annotation.Nullable;
+    private constructor(parcel: Parcel) : this() {
+        title = parcel.readString()
+        enable = parcel.readString()?.toBoolean() ?: true
+        url = parcel.readString()
+        hudText = parcel.readString()
+        done = parcel.readString()?.toBoolean() ?: false
+    }
 
-public class BookingAction implements Parcelable {
-    public static final Creator<BookingAction> CREATOR = new Creator<BookingAction>() {
-        @Override
-        public BookingAction createFromParcel(Parcel in) {
-            return new BookingAction(in);
+    override fun writeToParcel(parcel: Parcel, flags: Int) {
+        parcel.writeString(title)
+        parcel.writeString(enable.toString())
+        parcel.writeString(url)
+        parcel.writeString(hudText)
+        parcel.writeString(done.toString())
+    }
+
+    override fun describeContents(): Int {
+        return 0
+    }
+
+    companion object CREATOR : Parcelable.Creator<BookingAction> {
+        override fun createFromParcel(parcel: Parcel): BookingAction {
+            return BookingAction(parcel)
         }
 
-        @Override
-        public BookingAction[] newArray(int size) {
-            return new BookingAction[size];
+        override fun newArray(size: Int): Array<BookingAction?> {
+            return arrayOfNulls(size)
         }
-    };
-    @SerializedName("title")
-    private String title;
-    @SerializedName("enabled")
-    private boolean enable = true;
-    @SerializedName("url")
-    private String url;
-    @SerializedName("hudText")
-    private String hudText;
-    @SerializedName("done")
-    private boolean done = false;
-
-    public BookingAction() {
-
-    }
-
-    private BookingAction(Parcel in) {
-        title = in.readString();
-        enable = Boolean.valueOf(in.readString());
-        url = in.readString();
-        hudText = in.readString();
-        done = Boolean.valueOf(in.readString());
-    }
-
-    public String getTitle() {
-        return title;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
-    public boolean isEnable() {
-        return enable;
-    }
-
-    public void setEnable(boolean enable) {
-        this.enable = enable;
-    }
-
-    public String getUrl() {
-        return url;
-    }
-
-    public void setUrl(String url) {
-        this.url = url;
-    }
-
-    @Nullable
-    public String getHudText() {
-        return hudText;
-    }
-
-    public boolean isDone() {
-        return done;
-    }
-
-    public void setDone(boolean done) {
-        this.done = done;
-    }
-
-    @Override
-    public int describeContents() {
-        return 0;
-    }
-
-    @Override
-    public void writeToParcel(Parcel dest, int flags) {
-        dest.writeString(title);
-        dest.writeString(String.valueOf(enable));
-        dest.writeString(url);
-        dest.writeString(hudText);
-        dest.writeString(String.valueOf(done));
     }
 }

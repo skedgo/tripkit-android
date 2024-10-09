@@ -1,21 +1,18 @@
-package com.skedgo.tripkit.booking;
+package com.skedgo.tripkit.booking
 
-import com.google.gson.annotations.JsonAdapter;
-
-import androidx.annotation.Nullable;
-
-import static org.immutables.gson.Gson.TypeAdapters;
-import static org.immutables.value.Value.Immutable;
-import static org.immutables.value.Value.Style;
+import com.google.gson.annotations.JsonAdapter
+import org.immutables.gson.Gson.TypeAdapters
+import org.immutables.value.Value.Immutable
+import org.immutables.value.Value.Style
 
 @TypeAdapters
 @Immutable
-@Style(passAnnotations = JsonAdapter.class)
-@JsonAdapter(GsonAdaptersCompanyInfo.class)
-public interface CompanyInfo {
-    @Nullable
-    String name();
+@Style(passAnnotations = [JsonAdapter::class])
+@JsonAdapter(
+    GsonAdaptersCompanyInfo::class
+)
+interface CompanyInfo {
+    fun name(): String?
 
-    @Nullable
-    String website();
+    fun website(): String?
 }

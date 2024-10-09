@@ -1,29 +1,28 @@
-package com.skedgo.tripkit.booking;
+package com.skedgo.tripkit.booking
 
-import io.reactivex.Observable;
-import retrofit2.Response;
-import retrofit2.http.Body;
-import retrofit2.http.GET;
-import retrofit2.http.POST;
-import retrofit2.http.Url;
+import io.reactivex.Observable
+import retrofit2.Response
+import retrofit2.http.Body
+import retrofit2.http.GET
+import retrofit2.http.POST
+import retrofit2.http.Url
 
-public interface BookingApi {
+interface BookingApi {
     @GET
-    Observable<Response<BookingForm>> getFormAsync(@Url String url);
+    fun getFormAsync(@Url url: String): Observable<Response<BookingForm>>
 
     @POST
-    Observable<Response<BookingForm>> postFormAsync(
-        @Url String url,
-        @Body InputForm inputForm
-    );
+    fun postFormAsync(
+        @Url url: String,
+        @Body inputForm: InputForm
+    ): Observable<Response<BookingForm>>
 
     @POST
-    Observable<Response<BookingForm>> postFormAsync(@Url String url);
+    fun postFormAsync(@Url url: String): Observable<Response<BookingForm>>
 
     @POST
-    Observable<Response<BookingForm>> postFormAsync(
-        @Url String url,
-        @Body ActionInputForm inputForm
-    );
-
+    fun postFormAsync(
+        @Url url: String,
+        @Body inputForm: ActionInputForm
+    ): Observable<Response<BookingForm>>
 }

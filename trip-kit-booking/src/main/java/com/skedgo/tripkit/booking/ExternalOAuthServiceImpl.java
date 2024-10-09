@@ -24,7 +24,7 @@ public class ExternalOAuthServiceImpl implements ExternalOAuthService {
         final String clientSecret = form.getClientSecret();
         final String baseUrl = form.getTokenURL();
         final String scope = TextUtils.isEmpty(form.getScope()) ? null : form.getScope();
-        final Object serviceId = form.getValue();
+        final Object serviceId = form.getMValue();
 
         // TODO: how to avoid this constant?
         boolean credentialsInHeader = serviceId == null || !("uber".equals(serviceId.toString()));
