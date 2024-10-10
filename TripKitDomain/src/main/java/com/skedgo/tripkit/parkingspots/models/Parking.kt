@@ -1,7 +1,7 @@
 package com.skedgo.tripkit.parkingspots.models
 
-import com.gojuno.koptional.Optional
 import com.skedgo.tripkit.location.GeoPoint
+import com.skedgo.tripkit.utils.OptionalCompat
 
 sealed class Parking(
     val id: String,
@@ -35,7 +35,7 @@ open class OffStreetParking constructor(
     parkingOperator: ParkingOperator,
     info: String,
     val openingHours: List<OpeningHour>,
-    val pricingTables: Optional<List<PricingTable>>
+    val pricingTables: OptionalCompat<List<PricingTable>>
 ) : Parking(id, name, location, address, info, parkingOperator)
 
 

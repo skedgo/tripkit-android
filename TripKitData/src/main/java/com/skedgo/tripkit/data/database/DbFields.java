@@ -1,7 +1,7 @@
 package com.skedgo.tripkit.data.database;
 
 import com.skedgo.sqlite.DatabaseField;
-import com.skedgo.tripkit.common.model.Location;
+import com.skedgo.tripkit.common.model.location.Location;
 
 public final class DbFields {
     public static final DatabaseField ID = new DatabaseField("_id", "integer", "primary key");

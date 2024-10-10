@@ -1,13 +1,16 @@
 package com.skedgo.tripkit
 
+import androidx.test.ext.junit.runners.AndroidJUnit4
 import io.reactivex.Completable
 import io.reactivex.Observable
 import io.reactivex.ObservableEmitter
 import io.reactivex.ObservableOnSubscribe
 import org.assertj.core.api.Java6Assertions.assertThat
 import org.junit.Test
+import org.junit.runner.RunWith
 import java.util.concurrent.atomic.AtomicInteger
 
+@RunWith(AndroidJUnit4::class)
 class CacheImplTest : TripKitAndroidRobolectricTest() {
     @Test
     fun someInitialBehaviors() {

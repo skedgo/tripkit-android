@@ -3,11 +3,11 @@ package com.skedgo.tripkit.booking.mybookings;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.stream.JsonReader;
-import com.skedgo.tripkit.common.model.BookingConfirmation;
-import com.skedgo.tripkit.common.model.BookingConfirmationAction;
-import com.skedgo.tripkit.common.model.BookingConfirmationPurchase;
-import com.skedgo.tripkit.common.model.BookingProvider;
-import com.skedgo.tripkit.common.model.BookingSource;
+import com.skedgo.tripkit.common.model.booking.confirmation.BookingConfirmation;
+import com.skedgo.tripkit.common.model.booking.confirmation.BookingConfirmationAction;
+import com.skedgo.tripkit.common.model.booking.confirmation.BookingConfirmationPurchase;
+import com.skedgo.tripkit.common.model.booking.BookingProvider;
+import com.skedgo.tripkit.common.model.booking.BookingSource;
 import com.skedgo.tripkit.common.model.PurchaseBrand;
 
 import org.apache.commons.io.IOUtils;

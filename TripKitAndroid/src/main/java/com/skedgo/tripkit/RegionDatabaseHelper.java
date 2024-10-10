@@ -5,7 +5,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
 import com.skedgo.sqlite.Cursors;
-import com.skedgo.tripkit.common.model.Region;
+import com.skedgo.tripkit.common.model.region.Region;
 import com.skedgo.tripkit.common.model.TransportMode;
 
 import java.util.List;

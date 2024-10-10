@@ -2,6 +2,7 @@ package com.skedgo.tripkit.booking.ui.viewmodel
 
 import android.net.Uri
 import android.os.Bundle
+import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.nhaarman.mockitokotlin2.mock
 import com.nhaarman.mockitokotlin2.verify
 import com.nhaarman.mockitokotlin2.whenever
@@ -12,9 +13,8 @@ import io.reactivex.Observable
 import org.assertj.core.api.Java6Assertions.assertThat
 import org.junit.Test
 import org.junit.runner.RunWith
-import org.robolectric.RobolectricTestRunner
 
-@RunWith(RobolectricTestRunner::class)
+@RunWith(AndroidJUnit4::class)
 class ExternalProviderAuthViewModelTest {
 
     private val viewModel: ExternalProviderAuthViewModel by lazy {

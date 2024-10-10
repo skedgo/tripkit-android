@@ -1,10 +1,10 @@
 package com.skedgo.tripkit.data.database.timetables
 
-import com.skedgo.tripkit.common.model.AlertAction
-import com.skedgo.tripkit.common.model.ImmutableAlertAction
-import com.skedgo.tripkit.common.model.ImmutableRealtimeAlert
-import com.skedgo.tripkit.common.model.Location
-import com.skedgo.tripkit.common.model.RealtimeAlert
+import com.skedgo.tripkit.common.model.alert.AlertAction
+import com.skedgo.tripkit.common.model.alert.ImmutableAlertAction
+import com.skedgo.tripkit.common.model.realtimealert.ImmutableRealtimeAlert
+import com.skedgo.tripkit.common.model.location.Location
+import com.skedgo.tripkit.common.model.realtimealert.RealtimeAlert
 import java.util.UUID
 import javax.inject.Inject
 
@@ -46,7 +46,8 @@ class ServiceAlertMapper @Inject constructor() {
     fun toModel(serviceAlertsEntity: ServiceAlertsEntity): RealtimeAlert {
         return with(serviceAlertsEntity) {
             val location: Location? = this.location?.let {
-                Location(it.lat, it.lng).apply {
+                Location(it.lat, it.lng)
+                    .apply {
                     this.address = it.address
                     this.timeZone = it.timezone
                 }

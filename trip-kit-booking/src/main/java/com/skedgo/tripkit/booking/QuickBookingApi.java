@@ -1,6 +1,6 @@
 package com.skedgo.tripkit.booking;
 
-import com.skedgo.tripkit.common.model.Booking;
+import com.skedgo.tripkit.common.model.booking.Booking;
 
 import java.util.List;
 

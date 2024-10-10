@@ -1,5 +1,8 @@
 package com.skedgo.tripkit.common.model;
 
+import com.skedgo.tripkit.common.model.region.Region;
+import com.skedgo.tripkit.common.model.region.Regions;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 

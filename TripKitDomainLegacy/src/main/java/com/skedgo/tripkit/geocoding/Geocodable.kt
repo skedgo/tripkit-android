@@ -1,6 +1,6 @@
 package com.skedgo.tripkit.geocoding
 
-import com.skedgo.tripkit.common.model.Region
+import com.skedgo.tripkit.common.model.region.Region
 import io.reactivex.Observable
 
 interface Geocodable {

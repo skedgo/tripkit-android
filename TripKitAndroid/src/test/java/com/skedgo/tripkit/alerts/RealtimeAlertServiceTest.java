@@ -12,6 +12,7 @@ import org.robolectric.RobolectricTestRunner;
 import java.util.Arrays;
 import java.util.List;
 
+import androidx.test.ext.junit.runners.AndroidJUnit4;
 import io.reactivex.Observable;
 import io.reactivex.exceptions.CompositeException;
 import io.reactivex.observers.TestObserver;
@@ -22,7 +23,7 @@ import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
-@RunWith(RobolectricTestRunner.class)
+@RunWith(AndroidJUnit4.class)
 public class RealtimeAlertServiceTest {
     @Rule
     public final MockitoRule rule = MockitoJUnit.rule();

@@ -1,8 +1,9 @@
 package com.skedgo.tripkit.bookingproviders
 
 import android.content.Intent
+import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.skedgo.tripkit.TripKitAndroidRobolectricTest
-import com.skedgo.tripkit.common.model.Location
+import com.skedgo.tripkit.common.model.location.Location
 import com.skedgo.tripkit.routing.TripSegment
 import io.reactivex.functions.Function
 import org.amshove.kluent.When
@@ -13,8 +14,10 @@ import org.amshove.kluent.`should be`
 import org.amshove.kluent.`should equal`
 import org.amshove.kluent.`should not be`
 import org.junit.Test
+import org.junit.runner.RunWith
 
 @Suppress("IllegalIdentifier")
+@RunWith(AndroidJUnit4::class)
 class UberBookingResolverTest : TripKitAndroidRobolectricTest() {
     val isPackageInstalled: Function<String, Boolean> = mock()
     val getAppIntent: Function<String, Intent> = mock()

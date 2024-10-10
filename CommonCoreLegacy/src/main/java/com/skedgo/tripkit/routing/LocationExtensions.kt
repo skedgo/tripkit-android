@@ -1,6 +1,6 @@
 package com.skedgo.tripkit.routing
 
-import com.skedgo.tripkit.common.model.Location
+import com.skedgo.tripkit.common.model.location.Location
 import org.joda.time.DateTimeZone
 import java.lang.Math.abs
 

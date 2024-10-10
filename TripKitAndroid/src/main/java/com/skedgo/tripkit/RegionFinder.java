@@ -1,6 +1,6 @@
 package com.skedgo.tripkit;
 
-import com.skedgo.tripkit.common.model.Region;
+import com.skedgo.tripkit.common.model.region.Region;
 import com.skedgo.tripkit.common.util.PolyUtil;
 import com.skedgo.tripkit.common.util.TripKitLatLng;
 

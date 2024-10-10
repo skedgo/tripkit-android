@@ -2,7 +2,7 @@ package com.skedgo.tripkit.data.locations;
 
 import com.google.gson.JsonObject;
 import com.google.gson.annotations.SerializedName;
-import com.skedgo.tripkit.common.model.Region;
+import com.skedgo.tripkit.common.model.region.Region;
 
 import java.util.ArrayList;
 import java.util.List;

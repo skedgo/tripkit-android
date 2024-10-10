@@ -2,6 +2,8 @@ package com.skedgo.tripkit.common.model;
 
 import android.os.Parcel;
 
+import com.skedgo.tripkit.common.model.time.TimeTag;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 

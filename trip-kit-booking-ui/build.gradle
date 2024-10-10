@@ -10,11 +10,18 @@ android {
 
     compileSdkVersion versions.compileSdkVersion
 
-    defaultConfig {
-        minSdkVersion versions.proMinSdkVersion
-        targetSdkVersion versions.targetSdkVersion
-        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+  defaultConfig {
+    minSdkVersion versions.proMinSdkVersion
+    targetSdkVersion versions.targetSdkVersion
+    testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    vectorDrawables.useSupportLibrary = true
+
+    javaCompileOptions {
+      annotationProcessorOptions {
+        arguments += ["room.schemaLocation": "$projectDir/schemas".toString()]
+      }
     }
+  }
 
     buildTypes {
         staging {
@@ -56,12 +63,18 @@ android {
 }
 
 dependencies {
-    testImplementation libs.junit
-    testImplementation libs.assertjCore
-    testImplementation libs.mockitoCore
-    testImplementation libs.robolectric
-    testImplementation libs.mockitoKotlin, {exclude group: 'org.jetbrains.kotlin'}
-    testImplementation libs.androidxTesting
+  testImplementation libs.junit
+  testImplementation libs.androidxJUnitExtTesting
+  testImplementation libs.assertjCore
+  testImplementation libs.mockitoCore
+  testImplementation libs.robolectric
+  testImplementation libs.mockitoKotlin, { exclude group: 'org.jetbrains.kotlin' }
+  testImplementation libs.androidxTesting
+  testImplementation libs.mockk
+  testImplementation libs.archCoreTesting
+  testImplementation libs.kluent
+  testImplementation libs.coroutinesTest
+  testImplementation libs.bindingCollectionAdapter
 
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.1.0', {
         exclude group: 'com.android.support', module: 'support-annotations'

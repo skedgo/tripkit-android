@@ -32,7 +32,7 @@ class TripAlarmBroadcastReceiver : BroadcastReceiver() {
                 val tripString = extras.getString(EXTRA_START_TRIP_EVENT_TRIP, "")
                 val tripGroupUuid = extras.getString(EXTRA_START_TRIP_EVENT_TRIP_GROUP_UUID, "")
                 val trip: Trip = gson.fromJson(tripString)
-                trip.segments.minByOrNull { it.startTimeInSecs }?.let { startSegment ->
+                trip.segmentList.minByOrNull { it.startTimeInSecs }?.let { startSegment ->
 
                     context.createNotification(
                         channelId = NOTIFICATION_CHANNEL_START_TRIP_ID,

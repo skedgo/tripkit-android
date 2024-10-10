@@ -53,7 +53,8 @@ data class PaymentOption(
     val method: String,
     val paymentMode: String,
     val sponsorImageURL: String? = null,
-    val sponsorTitle: String? = null
+    val sponsorTitle: String? = null,
+    val sponsorDescription: String? = null,
 ) {
     fun getCurrentBalanceString(): String {
         val price = currentBalance.toDouble() / 100.0

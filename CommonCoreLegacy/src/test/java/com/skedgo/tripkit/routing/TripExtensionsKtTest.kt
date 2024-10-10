@@ -3,7 +3,7 @@ package com.skedgo.tripkit.routing
 import android.content.Context
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.nhaarman.mockitokotlin2.mock
-import com.skedgo.tripkit.common.model.Location
+import com.skedgo.tripkit.common.model.location.Location
 import org.amshove.kluent.`should be equal to`
 import org.assertj.core.api.Java6Assertions.assertThat
 import org.joda.time.DateTime
@@ -15,14 +15,15 @@ import org.junit.runner.RunWith
 class TripExtensionsKtTest {
     @Test
     fun shouldReturnZonedStartDateTimeWithDepartureLocationTimeZone() {
-        val departureLocation = Location()
+        val departureLocation =
+            Location()
         departureLocation.timeZone = "Asia/Bangkok"
 
         val segment = TripSegment()
         segment.from = departureLocation
 
         val trip = Trip()
-        trip.segments = arrayListOf(segment)
+        trip.segmentList = arrayListOf(segment)
         trip.startTimeInSecs = DateTime.parse("2012-06-30T00:00").toSeconds()
 
         assertThat(trip.startDateTime).isEqualTo(
@@ -40,7 +41,7 @@ class TripExtensionsKtTest {
         segment.to = arrival
 
         val trip = Trip()
-        trip.segments = arrayListOf(segment)
+        trip.segmentList = arrayListOf(segment)
         trip.endTimeInSecs = DateTime.parse("2012-06-30T00:00").toSeconds()
 
         assertThat(trip.endDateTime).isEqualTo(
@@ -63,7 +64,7 @@ class TripExtensionsKtTest {
         segment.action = "ACTION"
 
         val trip = Trip()
-        trip.segments = arrayListOf(segment)
+        trip.segmentList = arrayListOf(segment)
 
         // Act.
         val text = trip.constructPlainText(context)
@@ -92,7 +93,7 @@ class TripExtensionsKtTest {
         segment.action = "ACTION"
 
         val trip = Trip()
-        trip.segments = arrayListOf(segment)
+        trip.segmentList = arrayListOf(segment)
 
         // Act.
         val text = trip.constructPlainText(context)
@@ -140,7 +141,7 @@ class TripExtensionsKtTest {
         segment.action = "ACTION"
 
         val trip = Trip()
-        trip.segments = arrayListOf(segment)
+        trip.segmentList = arrayListOf(segment)
 
         // Act.
         val text = trip.constructPlainText(context)

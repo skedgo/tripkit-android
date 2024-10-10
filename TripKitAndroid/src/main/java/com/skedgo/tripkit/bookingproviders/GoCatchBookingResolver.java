@@ -7,7 +7,7 @@ import android.net.Uri;
 import com.skedgo.tripkit.BookingAction;
 import com.skedgo.tripkit.ExternalActionParams;
 import com.skedgo.tripkit.R;
-import com.skedgo.tripkit.common.model.Location;
+import com.skedgo.tripkit.common.model.location.Location;
 import com.skedgo.tripkit.geocoding.ReverseGeocodable;
 import com.skedgo.tripkit.routing.TripSegment;
 

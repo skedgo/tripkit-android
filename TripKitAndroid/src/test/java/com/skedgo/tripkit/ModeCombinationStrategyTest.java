@@ -15,12 +15,13 @@ import java.util.Map;
 import java.util.Set;
 
 import androidx.annotation.NonNull;
+import androidx.test.ext.junit.runners.AndroidJUnit4;
 
 import static java.util.Arrays.asList;
 import static java.util.Collections.singletonList;
 import static org.assertj.core.api.Java6Assertions.assertThat;
 
-@RunWith(RobolectricTestRunner.class)
+@RunWith(AndroidJUnit4.class)
 public class ModeCombinationStrategyTest {
     @Test
     public void shouldDealWithModesNotFound() {

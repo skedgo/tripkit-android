@@ -2,7 +2,7 @@ package com.skedgo.tripkit.common.agenda;
 
 import com.google.gson.JsonObject;
 import com.google.gson.annotations.SerializedName;
-import com.skedgo.tripkit.common.model.RealtimeAlert;
+import com.skedgo.tripkit.common.model.realtimealert.RealtimeAlert;
 
 import java.util.ArrayList;
 import java.util.List;

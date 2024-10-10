@@ -1,5 +1,5 @@
 package com.skedgo.tripkit.parkingspots.models
 
-import com.gojuno.koptional.Optional
+import com.skedgo.tripkit.utils.OptionalCompat
 
-class PricingEntry(val duration: Optional<Int>, val label: String, val price: Float)
+class PricingEntry(val duration: OptionalCompat<Int>, val label: String, val price: Float)

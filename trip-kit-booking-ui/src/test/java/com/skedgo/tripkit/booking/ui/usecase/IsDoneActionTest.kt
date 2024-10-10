@@ -1,5 +1,6 @@
 package com.skedgo.tripkit.booking.ui.usecase
 
+import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.nhaarman.mockitokotlin2.mock
 import com.nhaarman.mockitokotlin2.whenever
 import com.skedgo.tripkit.booking.BookingAction
@@ -8,8 +9,10 @@ import com.skedgo.tripkit.booking.FormField
 import com.skedgo.tripkit.booking.FormGroup
 import org.assertj.core.api.Java6Assertions.assertThat
 import org.junit.Test
+import org.junit.runner.RunWith
 import org.mockito.BDDMockito.given
 
+@RunWith(AndroidJUnit4::class)
 class IsDoneActionTest {
     val isCancelAction: IsCancelAction = mock()
     val isDoneAction: IsDoneAction by lazy {

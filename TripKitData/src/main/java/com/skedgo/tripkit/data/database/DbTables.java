@@ -3,7 +3,7 @@ package com.skedgo.tripkit.data.database;
 
 import com.skedgo.sqlite.DatabaseField;
 import com.skedgo.sqlite.DatabaseTable;
-import com.skedgo.tripkit.common.model.Location;
+import com.skedgo.tripkit.common.model.location.Location;
 
 public final class DbTables {
     public static final String TABLE_LOCATIONS = "locations";

@@ -89,7 +89,6 @@ dependencies {
     implementation libs.retrofitAdapterRxJava
     implementation libs.retrofit
     implementation libs.supportAnnotations
-    implementation libs.koptional
 
     implementation libs.roomRuntime
     annotationProcessor libs.roomCompiler

@@ -1,9 +1,10 @@
 package com.skedgo.tripkit
 
+import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.nhaarman.mockitokotlin2.mock
 import com.nhaarman.mockitokotlin2.whenever
-import com.skedgo.tripkit.common.model.Location
-import com.skedgo.tripkit.common.model.Region
+import com.skedgo.tripkit.common.model.location.Location
+import com.skedgo.tripkit.common.model.region.Region
 import com.skedgo.tripkit.common.model.TransportMode
 import com.skedgo.tripkit.data.regions.RegionService
 import com.skedgo.tripkit.data.tsp.ImmutableRegionInfo
@@ -16,12 +17,14 @@ import io.reactivex.Single
 import io.reactivex.observers.TestObserver
 import org.assertj.core.api.Java6Assertions.assertThat
 import org.junit.Test
+import org.junit.runner.RunWith
 import org.mockito.Mockito.eq
 import org.mockito.Mockito.same
 import org.mockito.Mockito.times
 import org.mockito.Mockito.verify
 import java.util.Arrays
 
+@RunWith(AndroidJUnit4::class)
 class RegionServiceImplTest : TripKitAndroidRobolectricTest() {
     internal val regionCache: com.skedgo.tripkit.Cache<List<Region>> = mock()
     internal val modeCache: com.skedgo.tripkit.Cache<Map<String, TransportMode>> = mock()
@@ -52,12 +55,12 @@ class RegionServiceImplTest : TripKitAndroidRobolectricTest() {
     @Test
     fun shouldTakeFirstFoundRegion() {
         val Sydney = Region()
-        Sydney.setName("AU_NSW_Sydney")
-        Sydney.setEncodedPolyline("nwcvE_fno[owyR??mcjRnwyR?")
+        Sydney.name = "AU_NSW_Sydney"
+        Sydney.encodedPolyline = "nwcvE_fno[owyR??mcjRnwyR?"
 
         val NewYork = Region()
-        NewYork.setName("US_NY_NewYorkCity")
-        NewYork.setEncodedPolyline("oecvFnzhdM_}tA??o~oE~|tA?")
+        NewYork.name = "US_NY_NewYorkCity"
+        NewYork.encodedPolyline = "oecvFnzhdM_}tA??o~oE~|tA?"
 
         whenever(regionCache.async)
             .thenReturn(Single.just(Arrays.asList(Sydney, NewYork)))
@@ -70,7 +73,12 @@ class RegionServiceImplTest : TripKitAndroidRobolectricTest() {
         ).thenReturn(true)
 
         val subscriber = TestObserver<Region>()
-        regionService.getRegionByLocationAsync(Location(-33.86749, 151.20699)).subscribe(subscriber)
+        regionService.getRegionByLocationAsync(
+            Location(
+                -33.86749,
+                151.20699
+            )
+        ).subscribe(subscriber)
         subscriber.awaitTerminalEvent()
         subscriber.assertNoErrors()
 
@@ -92,7 +100,8 @@ class RegionServiceImplTest : TripKitAndroidRobolectricTest() {
             .thenReturn(Single.just(Arrays.asList(Sydney, NewYork)))
 
         val subscriber = TestObserver<Region>()
-        val location = Location(1.0, 2.0)
+        val location =
+            Location(1.0, 2.0)
         regionService.getRegionByLocationAsync(location).subscribe(subscriber)
         subscriber.awaitTerminalEvent()
         val errors = subscriber.events[1]
@@ -114,14 +123,14 @@ class RegionServiceImplTest : TripKitAndroidRobolectricTest() {
         Sydney.name = "Sydney"
         val Newcastle = Region.City()
         Newcastle.name = "Newcastle"
-        AU.setCities(ArrayList<Region.City>(Arrays.asList(Sydney, Newcastle)))
+        AU.cities = ArrayList<Region.City>(Arrays.asList(Sydney, Newcastle))
 
         val US = Region()
         val NewYork = Region.City()
         NewYork.name = "New York"
         val SanJose = Region.City()
         SanJose.name = "San Jose"
-        US.setCities(ArrayList<Region.City>(Arrays.asList(NewYork, SanJose)))
+        US.cities = ArrayList<Region.City>(Arrays.asList(NewYork, SanJose))
 
         whenever(regionCache.async)
             .thenReturn(Single.just(Arrays.asList(AU, US)))
@@ -151,7 +160,10 @@ class RegionServiceImplTest : TripKitAndroidRobolectricTest() {
 
     @Test
     fun shouldTakeRegionsFromRegionsLoader() {
-        val regions = Arrays.asList(Region(), Region())
+        val regions = Arrays.asList(
+            Region(),
+            Region()
+        )
         whenever(regionCache.async).thenReturn(Single.just(regions))
 
         val subscriber = regionService.getRegionsAsync().test()
@@ -174,7 +186,7 @@ class RegionServiceImplTest : TripKitAndroidRobolectricTest() {
 
         val region = Region()
         region.setURLs(ArrayList(listOf("https://lepton-us-ca-losangeles.tripgo.skedgo.com/satapp")))
-        region.setName("US_CA_LosAngeles")
+        region.name = "US_CA_LosAngeles"
 
         whenever(regionInfoRepository.getRegionInfoByRegion(region)).thenReturn(
             Observable.just<RegionInfo>(

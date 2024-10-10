@@ -1,6 +1,6 @@
 package com.skedgo.tripkit;
 
-import com.skedgo.tripkit.common.model.Location;
+import com.skedgo.tripkit.common.model.location.Location;
 
 import io.reactivex.Observable;
 

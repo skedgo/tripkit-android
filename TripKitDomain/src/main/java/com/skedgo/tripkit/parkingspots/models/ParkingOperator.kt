@@ -1,10 +1,10 @@
 package com.skedgo.tripkit.parkingspots.models
 
-import com.gojuno.koptional.Optional
+import com.skedgo.tripkit.utils.OptionalCompat
 
 open class ParkingOperator(
     val name: String,
-    val phone: Optional<String>,
-    val website: Optional<String>
+    val phone: OptionalCompat<String>,
+    val website: OptionalCompat<String>
 ) {
 }

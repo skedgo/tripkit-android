@@ -3,7 +3,7 @@ package com.skedgo.tripkit;
 import android.database.Cursor;
 
 import com.google.gson.Gson;
-import com.skedgo.tripkit.common.model.Region;
+import com.skedgo.tripkit.common.model.region.Region;
 
 import io.reactivex.functions.Function;
 

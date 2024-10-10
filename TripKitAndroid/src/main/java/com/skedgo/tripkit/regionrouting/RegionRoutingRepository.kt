@@ -1,6 +1,6 @@
 package com.skedgo.tripkit.regionrouting
 
-import com.skedgo.tripkit.common.model.Location
+import com.skedgo.tripkit.common.model.location.Location
 import com.skedgo.tripkit.data.regions.RegionService
 import com.skedgo.tripkit.regionrouting.data.GetRegionRouteRequest
 import com.skedgo.tripkit.regionrouting.data.GetRouteDetailsRequest

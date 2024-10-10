@@ -1,12 +1,11 @@
 package com.skedgo.tripkit;
 
-import com.skedgo.tripkit.common.model.Location;
-import com.skedgo.tripkit.common.model.Region;
+import com.skedgo.tripkit.common.model.location.Location;
+import com.skedgo.tripkit.common.model.region.Region;
 import com.skedgo.tripkit.common.model.TransportMode;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.robolectric.RobolectricTestRunner;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -15,12 +14,13 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import androidx.test.ext.junit.runners.AndroidJUnit4;
 import io.reactivex.Observable;
 import io.reactivex.observers.TestObserver;
 
 import static org.assertj.core.api.Java6Assertions.assertThat;
 
-@RunWith(RobolectricTestRunner.class)
+@RunWith(AndroidJUnit4.class)
 public class UtilsTest {
     @Test
     public void getCities_shouldReceiveCitiesFromRegion() {

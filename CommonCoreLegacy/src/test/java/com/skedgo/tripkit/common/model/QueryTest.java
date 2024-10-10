@@ -2,6 +2,9 @@ package com.skedgo.tripkit.common.model;
 
 import android.os.Parcel;
 
+import com.skedgo.tripkit.common.model.location.Location;
+import com.skedgo.tripkit.common.model.region.Region;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
@@ -50,7 +53,7 @@ public class QueryTest {
     public void shouldClone() {
         final Query query = new Query();
         query.setMaxWalkingTime(10);
-        final Query clone = query.clone();
+        final Query clone = query.clone(false);
 
         assertThat(clone.getMaxWalkingTime())
             .isEqualTo(query.getMaxWalkingTime());

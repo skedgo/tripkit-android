@@ -1,16 +1,19 @@
 package com.skedgo.tripkit.account.data
 
+import androidx.test.ext.junit.runners.AndroidJUnit4
 import okhttp3.mockwebserver.MockResponse
 import okhttp3.mockwebserver.MockWebServer
 import org.assertj.core.api.Java6Assertions.assertThat
 import org.junit.After
 import org.junit.Test
+import org.junit.runner.RunWith
 import retrofit2.Retrofit
 import retrofit2.adapter.rxjava2.HttpException
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
 import java.io.IOException
 
+@RunWith(AndroidJUnit4::class)
 class AccountApiTest {
     private val server: MockWebServer = MockWebServer()
     private val api: AccountApi by lazy {

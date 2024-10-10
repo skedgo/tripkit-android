@@ -15,7 +15,7 @@ val TIME_FORMATTER = DateTimeFormat.forPattern("hh:mm a")
 val Trip.startDateTime: DateTime
     get() = DateTime(
         TimeUnit.SECONDS.toMillis(startTimeInSecs),
-        from.dateTimeZone
+        from?.dateTimeZone
     )
 
 val Trip.startTimeString: String
@@ -39,33 +39,32 @@ val Trip.endTimeString: String
 val Trip.queryDateTime: DateTime
     get() = DateTime(
         TimeUnit.SECONDS.toMillis(queryTime),
-        from.dateTimeZone
+        from?.dateTimeZone
     )
 
 /**
  * Gets a list of [TripSegment]s visible on the summary area of a [Trip].
  */
-fun Trip.getSummarySegments(): List<TripSegment> = segments
-    ?.filter { it.type != SegmentType.ARRIVAL }
-    ?.filter { it.isVisibleInContext(Visibilities.VISIBILITY_IN_SUMMARY) }
-    ?: emptyList()
+fun Trip.getSummarySegments(): List<TripSegment> = segmentList
+    .filter { it.getType() != SegmentType.ARRIVAL }
+    .filter { it.isVisibleInContext(Visibilities.VISIBILITY_IN_SUMMARY) }
 
 fun Trip.getModeIds(): List<String> =
-    segments.mapNotNull { it.transportModeId }
+    segmentList.mapNotNull { it.transportModeId }.orEmpty()
 
 fun Trip.hasWalkOnly(): Boolean {
     val modeIds = getModeIds()
     return modeIds.size == 1 && modeIds.contains(TransportMode.ID_WALK)
 }
 
-fun Trip.getTripSegment(segmentId: Long): TripSegment? = segments?.find { it.id == segmentId }
+fun Trip.getTripSegment(segmentId: Long): TripSegment? = segmentList?.find { it.segmentId == segmentId }
 
 fun Trip.getMainTripSegment(): TripSegment? {
-    return this.segments.find { segment -> mainSegmentHashCode == segment.templateHashCode }
+    return this.segmentList?.find { segment -> mainSegmentHashCode == segment.templateHashCode }
 }
 
 fun Trip.getBookingSegment(): TripSegment? {
-    var bookingSegment = segments.find { segment -> segment.booking?.quickBookingsUrl != null }
+    var bookingSegment = segmentList?.find { segment -> segment.booking?.quickBookingsUrl != null }
     if (bookingSegment == null) {
         val mainSegment = getMainTripSegment()
         if (mainSegment != null && mainSegment.miniInstruction != null && mainSegment.miniInstruction.instruction != null) {
@@ -78,7 +77,7 @@ fun Trip.getBookingSegment(): TripSegment? {
 
 fun Trip.constructPlainText(context: Context): String =
     StringBuilder().apply {
-        segments?.forEach {
+        segmentList?.forEach {
             addAddress(it)
             addSegmentAction(context, it)
             addNotes(context, it)
@@ -94,8 +93,8 @@ private fun StringBuilder.addAddress(segment: TripSegment) {
 
 private fun shouldAdAddress(segment: TripSegment) =
     !segment.from?.address.isNullOrEmpty() &&
-        segment.type != SegmentType.STATIONARY &&
-        !(segment.from?.isNear(segment.to) ?: false)
+        segment.getType() != SegmentType.STATIONARY &&
+        !(segment.to?.run { segment.from?.isNear(this) ?: false } ?: false)
 
 private fun StringBuilder.addSegmentAction(context: Context, segment: TripSegment) {
     append("${TripSegmentUtils.getTripSegmentAction(context, segment)}\n")

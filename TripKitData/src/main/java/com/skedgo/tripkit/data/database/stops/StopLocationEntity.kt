@@ -3,8 +3,8 @@ package com.skedgo.tripkit.data.database.stops
 import androidx.room.Embedded
 import androidx.room.Entity
 import androidx.room.PrimaryKey
-import com.skedgo.tripkit.common.model.ScheduledStop
-import com.skedgo.tripkit.common.model.StopType
+import com.skedgo.tripkit.common.model.stop.ScheduledStop
+import com.skedgo.tripkit.common.model.stop.StopType
 import com.skedgo.tripkit.data.database.locations.bikepods.ModeInfoEntity
 import com.skedgo.tripkit.data.database.locations.bikepods.ServiceColorEntity
 import com.skedgo.tripkit.routing.ModeInfo
@@ -53,11 +53,11 @@ fun StopLocationEntity.toScheduledStop(): ScheduledStop {
 fun ModeInfoEntity.toModeInfo(): ModeInfo {
     return ModeInfo().let {
         it.alternativeText = this.alt.orEmpty()
-        it.description = this.description
-        it.id = this.identifier
-        it.localIconName = this.localIcon
+        it.description = this.description.orEmpty()
+        it.id = this.identifier.orEmpty()
+        it.localIconName = this.localIcon.orEmpty()
         it.remoteDarkIconName = this.remoteDarkIcon
-        it.remoteIconName = this.remoteIcon
+        it.remoteIconName = this.remoteIcon.orEmpty()
         it.remoteIconIsTemplate = this.remoteIconIsTemplate
         it.remoteIconIsBranding = this.remoteIconIsBranding
         it.color = this.color?.let { ServiceColor(it.red, it.green, it.blue) }
@@ -65,17 +65,17 @@ fun ModeInfoEntity.toModeInfo(): ModeInfo {
     }
 }
 
-fun ModeInfo.toEntity(): ModeInfoEntity {
+fun ModeInfo?.toEntity(): ModeInfoEntity {
     return ModeInfoEntity().let {
-        it.alt = this.alternativeText
-        it.description = this.description
-        it.identifier = this.id
-        it.localIcon = this.localIconName
-        it.remoteDarkIcon = this.remoteDarkIconName
-        it.remoteIcon = this.remoteIconName
-        it.remoteIconIsTemplate = this.remoteIconIsTemplate
-        it.remoteIconIsBranding = this.remoteIconIsBranding
-        it.color = this.color?.let {
+        it.alt = this?.alternativeText
+        it.description = this?.description
+        it.identifier = this?.id
+        it.localIcon = this?.localIconName
+        it.remoteDarkIcon = this?.remoteDarkIconName
+        it.remoteIcon = this?.remoteIconName
+        it.remoteIconIsTemplate = this?.remoteIconIsTemplate ?: false
+        it.remoteIconIsBranding = this?.remoteIconIsBranding ?: false
+        it.color = this?.color?.let {
             ServiceColorEntity().apply {
                 this.red = it.red
                 this.green = it.green
@@ -89,11 +89,11 @@ fun ModeInfo.toEntity(): ModeInfoEntity {
 fun ScheduledStop.toEntity(): StopLocationEntity {
     return StopLocationEntity().let {
         it.address = this.address
-        it.code = this.code
+        it.code = this.code.orEmpty()
         it.popularify = this.popularity
-        it.name = this.name
-        it.services = this.services
-        it.stopType = this.type.name
+        it.name = this.name.orEmpty()
+        it.services = this.services.orEmpty()
+        it.stopType = this.type?.name.orEmpty()
         it.timeZone = this.timeZone
         it.wheelchairAccessible = this.wheelchairAccessible ?: false
         it.lat = this.lat

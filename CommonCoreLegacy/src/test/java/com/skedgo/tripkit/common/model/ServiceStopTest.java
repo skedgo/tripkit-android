@@ -1,6 +1,8 @@
 package com.skedgo.tripkit.common.model;
 
 import com.google.gson.Gson;
+import com.skedgo.tripkit.common.model.stop.ServiceStop;
+import com.skedgo.tripkit.common.model.stop.StopType;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;

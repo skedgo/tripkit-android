@@ -1,13 +1,16 @@
 package com.skedgo.tripkit.a2brouting
 
 import android.graphics.Color
+import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.nhaarman.mockitokotlin2.whenever
 import com.skedgo.tripkit.common.model.Street
 import com.skedgo.tripkit.common.model.TransportMode
 import org.amshove.kluent.mock
 import org.amshove.kluent.`should equal`
 import org.junit.Test
+import org.junit.runner.RunWith
 
+@RunWith(AndroidJUnit4::class)
 class GetTravelledLineForTripTest {
 
     val getTravelledLineForTrip = GetTravelledLineForTrip()

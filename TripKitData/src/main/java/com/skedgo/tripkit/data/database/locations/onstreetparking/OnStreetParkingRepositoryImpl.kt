@@ -1,6 +1,5 @@
 package com.skedgo.tripkit.data.database.locations.onstreetparking
 
-import com.gojuno.koptional.toOptional
 import com.skedgo.tripkit.common.util.PolyUtil
 import com.skedgo.tripkit.data.database.TripKitDatabase
 import com.skedgo.tripkit.location.GeoPoint
@@ -9,6 +8,7 @@ import com.skedgo.tripkit.parkingspots.models.OnStreetParking
 import com.skedgo.tripkit.parkingspots.models.Parking
 import com.skedgo.tripkit.parkingspots.models.ParkingOperator
 import com.skedgo.tripkit.parkingspots.models.PaymentType
+import com.skedgo.tripkit.utils.OptionalCompat
 import io.reactivex.Observable
 import io.reactivex.Single
 import io.reactivex.schedulers.Schedulers
@@ -47,8 +47,8 @@ class OnStreetParkingRepositoryImpl @Inject constructor(
                         hasRestrictions = it.availableContent.split(",").contains("restrictions"),
                         parkingOperator = ParkingOperator(
                             it.operator.name,
-                            it.operator.phone.toOptional(),
-                            it.operator.website.toOptional()
+                            OptionalCompat.ofNullable(it.operator.phone),
+                            OptionalCompat.ofNullable(it.operator.website)
                         ),
                         encodedPolygon = PolyUtil.decode(it.encodedPolyline)
                             .map { GeoPoint(it.latitude, it.longitude) },

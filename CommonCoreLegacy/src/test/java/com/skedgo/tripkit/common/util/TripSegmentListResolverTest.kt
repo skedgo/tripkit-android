@@ -37,14 +37,14 @@ class TripSegmentListResolverTest {
     fun arrivalSegmentShouldHaveCorrectType() {
         val segment = TripSegment()
         val arrivalSegment = resolver.createArrivalSegment(segment)
-        assertThat(arrivalSegment.type).isEqualTo(SegmentType.ARRIVAL)
+        assertThat(arrivalSegment.getType()).isEqualTo(SegmentType.ARRIVAL)
     }
 
     @Test
     fun departureSegmentShouldHaveCorrectType() {
         val segment = TripSegment()
         val departureSegment = resolver.createDepartureSegment(segment)
-        assertThat(departureSegment.type).isEqualTo(SegmentType.DEPARTURE)
+        assertThat(departureSegment.getType()).isEqualTo(SegmentType.DEPARTURE)
     }
 
     @Test

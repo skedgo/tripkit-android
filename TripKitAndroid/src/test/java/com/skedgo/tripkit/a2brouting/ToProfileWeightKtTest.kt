@@ -1,10 +1,13 @@
 package com.skedgo.tripkit.a2brouting
 
+import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.skedgo.tripkit.a2brouting.toProfileWeight
 import org.amshove.kluent.shouldEqualTo
 import org.junit.Test
+import org.junit.runner.RunWith
 
 @Suppress("IllegalIdentifier")
+@RunWith(AndroidJUnit4::class)
 class ToProfileWeightKtTest {
     @Test
     fun `should return 0 dot 1`() {

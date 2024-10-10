@@ -1,7 +1,7 @@
 package com.skedgo.tripkit.data.locations
 
 import com.skedgo.tripkit.agenda.ConfigRepository
-import com.skedgo.tripkit.common.model.Region
+import com.skedgo.tripkit.common.model.region.Region
 import com.skedgo.tripkit.data.database.locations.bikepods.BikePodRepository
 import com.skedgo.tripkit.data.database.locations.carparks.CarParkMapper
 import com.skedgo.tripkit.data.database.locations.carparks.CarParkPersistor
@@ -126,7 +126,7 @@ open class StopsFetcher(
     ): Observable<List<LocationsResponse.Group>> {
         return createRequestBodiesAsync(cellIds, region, level)
             .flatMap { body ->
-                val baseUrl = region.urLs!![0]
+                val baseUrl = region.getURLs()!![0]
                 val url = baseUrl.toHttpUrlOrNull()!!
                     .newBuilder()
                     .addPathSegment("locations.json")

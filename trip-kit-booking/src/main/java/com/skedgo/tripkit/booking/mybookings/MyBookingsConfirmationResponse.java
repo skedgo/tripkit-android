@@ -1,7 +1,7 @@
 package com.skedgo.tripkit.booking.mybookings;
 
 import com.google.gson.annotations.JsonAdapter;
-import com.skedgo.tripkit.common.model.BookingConfirmation;
+import com.skedgo.tripkit.common.model.booking.confirmation.BookingConfirmation;
 
 import org.immutables.value.Value;
 

@@ -4,8 +4,8 @@ import android.os.Parcel;
 import android.os.Parcelable;
 
 import com.google.gson.annotations.SerializedName;
-import com.skedgo.tripkit.common.model.Location;
-import com.skedgo.tripkit.common.model.RealtimeAlert;
+import com.skedgo.tripkit.common.model.location.Location;
+import com.skedgo.tripkit.common.model.realtimealert.RealtimeAlert;
 
 import java.util.ArrayList;
 import java.util.List;
