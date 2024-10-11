@@ -1,42 +1,55 @@
-package com.skedgo.tripkit.booking;
+package com.skedgo.tripkit.booking
 
-import android.os.Parcel;
+import android.os.Parcel
+import com.skedgo.tripkit.booking.OptionFormField.CREATOR.createFromParcel
+import com.skedgo.tripkit.booking.OptionFormField.OptionValue
+import io.mockk.every
+import io.mockk.mockk
+import io.mockk.verify
+import org.assertj.core.api.Java6Assertions
+import org.junit.Assert.assertEquals
+import org.junit.Test
+import org.junit.runner.RunWith
+import org.robolectric.RobolectricTestRunner
+import java.util.ArrayList
 
-import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.robolectric.RobolectricTestRunner;
-
-import java.util.ArrayList;
-import java.util.List;
-
-import static org.assertj.core.api.Java6Assertions.assertThat;
-
-@RunWith(RobolectricTestRunner.class)
-public class OptionFormFieldTest {
+@RunWith(RobolectricTestRunner::class)
+class OptionFormFieldTest {
 
     @Test
-    public void Parcelable() {
-        OptionFormField.OptionValue optionValue1 = new OptionFormField.OptionValue("A", "a");
-        OptionFormField.OptionValue optionValue2 = new OptionFormField.OptionValue("B", "b");
-        List<OptionFormField.OptionValue> list = new ArrayList<>();
-        list.add(optionValue1);
-        list.add(optionValue2);
+    fun parcelableTest() {
+        val optionValue1 = OptionFormField.OptionValue("A", "a")
+        val optionValue2 = OptionFormField.OptionValue("B", "b")
+        val list = mutableListOf(optionValue1, optionValue2)
 
-        OptionFormField expected = new OptionFormField();
-        expected.setValue(optionValue1);
-        expected.setAllValues(list);
-        Parcel parcel = Parcel.obtain();
-        expected.writeToParcel(parcel, 0);
-        parcel.setDataPosition(0);
-        OptionFormField actual = OptionFormField.CREATOR.createFromParcel(parcel);
+        val expected = OptionFormField().apply {
+            setValue(optionValue1)
+            allValues = list
+        }
 
-        assertThat(actual.getValue().getTitle()).isEqualTo("A");
-        assertThat(actual.getValue().getValue()).isEqualTo("a");
-        List<OptionFormField.OptionValue> all = actual.getAllValues();
-        assertThat(all).hasSize(2);
-        assertThat(all.get(0).getTitle()).isEqualTo("A");
-        assertThat(all.get(0).getValue()).isEqualTo("a");
-        assertThat(all.get(1).getTitle()).isEqualTo("B");
-        assertThat(all.get(1).getValue()).isEqualTo("b");
+        val parcel = mockk<Parcel>(relaxed = true)
+
+        // Writing to parcel
+        expected.writeToParcel(parcel, 0)
+
+        verify { parcel.writeParcelable(optionValue1, 0) }
+        verify { parcel.writeTypedList(list) }
+
+        // Simulating reading from parcel
+        every { parcel.readParcelable<OptionFormField.OptionValue>(any()) } returns optionValue1
+        every { parcel.createTypedArrayList(OptionFormField.OptionValue.CREATOR) } returns ArrayList(list)
+
+        val actual = OptionFormField.CREATOR.createFromParcel(parcel)
+
+        // Assertions
+        assertEquals("A", actual.getValue()?.title)
+        assertEquals("a", actual.getValue()?.value)
+
+        val all = actual.allValues
+        assertEquals(2, all.size)
+        assertEquals("A", all[0].title)
+        assertEquals("a", all[0].value)
+        assertEquals("B", all[1].title)
+        assertEquals("b", all[1].value)
     }
 }

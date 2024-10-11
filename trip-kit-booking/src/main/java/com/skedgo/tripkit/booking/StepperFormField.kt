@@ -1,71 +1,55 @@
-package com.skedgo.tripkit.booking;
+package com.skedgo.tripkit.booking
 
-import android.os.Parcel;
+import android.os.Parcel
+import android.os.Parcelable.Creator
+import com.google.gson.annotations.SerializedName
 
-import com.google.gson.annotations.SerializedName;
+class StepperFormField : FormField {
 
-public class StepperFormField extends FormField {
-    public static final Creator<StepperFormField> CREATOR = new Creator<StepperFormField>() {
-        @Override
-        public StepperFormField createFromParcel(Parcel in) {
-            in.readInt();
-            return new StepperFormField(in);
-        }
-
-        @Override
-        public StepperFormField[] newArray(int size) {
-            return new StepperFormField[size];
-        }
-    };
     @SerializedName("value")
-    private int value;
+    var mValue: Int = 0
+
     @SerializedName("minValue")
-    private int minValue;
+    var minValue: Int = 0
+
     @SerializedName("maxValue")
-    private int maxValue;
+    var maxValue: Int = 0
 
-    public StepperFormField() {
-        super();
+    constructor(parcel: Parcel) : super( parcel) {  // Call the parent class constructor
+        mValue = parcel.readInt()
+        minValue = parcel.readInt()
+        maxValue = parcel.readInt()
     }
 
-    public StepperFormField(Parcel in) {
-        super(in);
-        this.value = in.readInt();
-        this.minValue = in.readInt();
-        this.maxValue = in.readInt();
+    // Secondary empty constructor (the default constructor)
+    constructor() : super() {
+        // Initialize any default values or leave it empty
     }
 
-    @Override
-    public void writeToParcel(Parcel dest, int flags) {
-        dest.writeInt(STEPPER);
-        super.writeToParcel(dest, flags);
-        dest.writeInt(value);
-        dest.writeInt(minValue);
-        dest.writeInt(maxValue);
+    override fun writeToParcel(dest: Parcel, flags: Int) {
+        dest.writeInt(STEPPER)
+        super.writeToParcel(dest, flags)
+        dest.writeInt(mValue)
+        dest.writeInt(minValue)
+        dest.writeInt(maxValue)
     }
 
-    @Override
-    public Integer getValue() {
-        return value;
+    override fun getValue(): Int {
+        return mValue
     }
 
-    public void setValue(int value) {
-        this.value = value;
+    fun setValue(value: Int) {
+        this.mValue = value
     }
 
-    public int getMinValue() {
-        return minValue;
-    }
+    companion object CREATOR : Creator<StepperFormField> {
+        override fun createFromParcel(parcel: Parcel): StepperFormField {
+            parcel.readInt() // Read STEPPER type
+            return StepperFormField(parcel)
+        }
 
-    public void setMinValue(int minValue) {
-        this.minValue = minValue;
-    }
-
-    public int getMaxValue() {
-        return maxValue;
-    }
-
-    public void setMaxValue(int maxValue) {
-        this.maxValue = maxValue;
+        override fun newArray(size: Int): Array<StepperFormField?> {
+            return arrayOfNulls(size)
+        }
     }
 }

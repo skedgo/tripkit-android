@@ -1,21 +1,10 @@
-package com.skedgo.tripkit.booking;
+package com.skedgo.tripkit.booking
 
-import java.util.List;
+import io.reactivex.Observable
 
-import androidx.annotation.NonNull;
-import io.reactivex.Observable;
-
-@Deprecated
-public class QuickBookingServiceImpl implements QuickBookingService {
-
-    private final QuickBookingApi api;
-
-    public QuickBookingServiceImpl(@NonNull QuickBookingApi api) {
-        this.api = api;
-    }
-
-    @Override
-    public Observable<List<QuickBooking>> fetchQuickBookingsAsync(@NonNull String url) {
-        return api.fetchQuickBookingsAsync(url);
+@Deprecated("")
+class QuickBookingServiceImpl(private val api: QuickBookingApi) : QuickBookingService {
+    override fun fetchQuickBookingsAsync(url: String): Observable<List<QuickBooking>> {
+        return api.fetchQuickBookingsAsync(url)
     }
 }

@@ -6,15 +6,15 @@ import com.skedgo.tripkit.booking.PasswordFormField
 
 class FieldPasswordViewModel(val passwordFormField: PasswordFormField) : DisposableViewModel() {
 
-    val isHidden: Boolean get() = passwordFormField.isHidden
+    val isHidden: Boolean get() = passwordFormField.hidden
 
-    val editText: String get() = passwordFormField.value ?: ""
+    val editText: String get() = passwordFormField.mValue ?: ""
     val hint: String = passwordFormField.title.orEmpty()
 
     var onEditorActionListener: TextView.OnEditorActionListener? = null
     var imeOptions: Int = IME_ACTION_NEXT
 
     fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {
-        passwordFormField.value = s.toString()
+        passwordFormField.mValue = s.toString()
     }
 }

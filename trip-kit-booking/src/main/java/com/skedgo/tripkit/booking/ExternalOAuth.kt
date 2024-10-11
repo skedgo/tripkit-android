@@ -1,26 +1,21 @@
-package com.skedgo.tripkit.booking;
+package com.skedgo.tripkit.booking
 
-import org.immutables.value.Value;
+import org.immutables.value.Value.Default
+import org.immutables.value.Value.Immutable
+import java.util.UUID
 
-import java.util.UUID;
+@Immutable
+abstract class ExternalOAuth {
+    abstract fun authServiceId(): String
 
-import androidx.annotation.Nullable;
+    abstract fun token(): String
 
-@Value.Immutable
-public abstract class ExternalOAuth {
+    abstract fun refreshToken(): String?
 
-    public abstract String authServiceId();
+    abstract fun expiresIn(): Long
 
-    public abstract String token();
-
-    @Nullable
-    public abstract String refreshToken();
-
-    public abstract long expiresIn();
-
-    @Value.Default
-    public String id() {
-        return UUID.randomUUID().toString();
+    @Default
+    open fun id(): String {
+        return UUID.randomUUID().toString()
     }
-
 }

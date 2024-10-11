@@ -22,7 +22,7 @@ class ExternalViewModelTest {
         val args = Bundle()
 
         val externalFormField: ExternalFormField = mock()
-        whenever(externalFormField.value).thenReturn("url")
+        whenever(externalFormField.mValue).thenReturn("url")
 
         args.putParcelable(KEY_EXTERNAL_FORM, externalFormField)
 

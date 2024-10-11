@@ -1,18 +1,19 @@
-package com.skedgo.tripkit.booking;
+package com.skedgo.tripkit.booking
 
-import io.reactivex.Observable;
-import retrofit2.http.Field;
-import retrofit2.http.FormUrlEncoded;
-import retrofit2.http.POST;
+import io.reactivex.Observable
+import retrofit2.http.Field
+import retrofit2.http.FormUrlEncoded
+import retrofit2.http.POST
 
-public interface ExternalOAuthApi {
+interface ExternalOAuthApi {
     @FormUrlEncoded
     @POST("token")
-    Observable<AccessTokenResponse> getAccessToken(
-        @Field("client_secret") String client_secret,
-        @Field("client_id") String client_id,
-        @Field("code") String code,
-        @Field("grant_type") String grantType,
-        @Field("redirect_uri") String redirectUri,
-        @Field("scope") String scope);
+    fun getAccessToken(
+        @Field("client_secret") client_secret: String?,
+        @Field("client_id") client_id: String?,
+        @Field("code") code: String?,
+        @Field("grant_type") grantType: String?,
+        @Field("redirect_uri") redirectUri: String?,
+        @Field("scope") scope: String?
+    ): Observable<AccessTokenResponse>
 }

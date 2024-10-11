@@ -1,62 +1,49 @@
-package com.skedgo.tripkit.booking;
+package com.skedgo.tripkit.booking
 
-import android.os.Parcel;
+import android.os.Parcel
+import android.os.Parcelable.Creator
+import com.google.gson.annotations.SerializedName
 
-import com.google.gson.annotations.SerializedName;
+class StringFormField : FormField {
 
-import androidx.annotation.Nullable;
-
-public class StringFormField extends FormField {
-
-    public static final Creator<StringFormField> CREATOR = new Creator<StringFormField>() {
-        @Override
-        public StringFormField createFromParcel(Parcel in) {
-            in.readInt();
-            return new StringFormField(in);
-        }
-
-        @Override
-        public StringFormField[] newArray(int size) {
-            return new StringFormField[size];
-        }
-    };
     @SerializedName("keyboardType")
-    private String keyboardType;
+    var keyboardType: String? = null
+
     @SerializedName("value")
-    private String value;
-
-    public StringFormField(Parcel in) {
-        super(in);
-        this.keyboardType = in.readString();
-        this.value = in.readString();
+    var mValue: String? = null
+    constructor(parcel: Parcel) : super( parcel) {  // Call the parent class constructor
+        keyboardType = parcel.readString()  // Read String for keyboardType
+        mValue = parcel.readString()  // Read String for value
     }
 
-    public StringFormField() {
-        super();
+    // Secondary empty constructor (the default constructor)
+    constructor() : super() {
+        // Initialize any default values or leave it empty
     }
 
-    @Override
-    public void writeToParcel(Parcel dest, int flags) {
-        dest.writeInt(STRING);
-        super.writeToParcel(dest, flags);
-        dest.writeString(keyboardType);
-        dest.writeString(value);
+    override fun writeToParcel(dest: Parcel, flags: Int) {
+        dest.writeInt(STRING)
+        super.writeToParcel(dest, flags)
+        dest.writeString(keyboardType)
+        dest.writeString(mValue)
     }
 
-    public String getKeyboardType() {
-        return keyboardType;
+    override fun getValue(): String? {
+        return mValue
     }
 
-    public void setKeyboardType(String keyboardType) {
-        this.keyboardType = keyboardType;
+    fun setValue(value: String) {
+        this.mValue = value
     }
 
-    @Nullable
-    public String getValue() {
-        return value;
-    }
+    companion object CREATOR : Creator<StringFormField> {
+        override fun createFromParcel(parcel: Parcel): StringFormField {
+            parcel.readInt() // Read STRING type
+            return StringFormField(parcel)
+        }
 
-    public void setValue(String value) {
-        this.value = value;
+        override fun newArray(size: Int): Array<StringFormField?> {
+            return arrayOfNulls(size)
+        }
     }
 }

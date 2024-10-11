@@ -65,7 +65,7 @@ class FieldStringViewModelTest {
 
         val stringFormField: StringFormField = mock()
         whenever(stringFormField.title).thenReturn("title")
-        whenever(stringFormField.value).thenReturn("value")
+        whenever(stringFormField.mValue).thenReturn("value")
         whenever(stringFormField.isReadOnly).thenReturn(true)
 
         val viewModel: FieldStringViewModel = FieldStringViewModel(stringFormField)
@@ -79,7 +79,7 @@ class FieldStringViewModelTest {
 
         val stringFormField: StringFormField = mock()
         whenever(stringFormField.title).thenReturn("title")
-        whenever(stringFormField.value).thenReturn("title")
+        whenever(stringFormField.mValue).thenReturn("title")
         whenever(stringFormField.isReadOnly).thenReturn(true)
 
         val viewModel: FieldStringViewModel = FieldStringViewModel(stringFormField)
@@ -93,7 +93,7 @@ class FieldStringViewModelTest {
 
         val stringFormField: StringFormField = mock()
         whenever(stringFormField.title).thenReturn("title")
-        whenever(stringFormField.value).thenReturn("value")
+        whenever(stringFormField.mValue).thenReturn("value")
         whenever(stringFormField.isReadOnly).thenReturn(false)
 
         val viewModel: FieldStringViewModel = FieldStringViewModel(stringFormField)
@@ -154,7 +154,7 @@ class FieldStringViewModelTest {
     fun shouldSetValue() {
 
         val stringFormField: StringFormField = mock()
-        whenever(stringFormField.value).thenReturn("value")
+        whenever(stringFormField.mValue).thenReturn("value")
 
         val viewModel: FieldStringViewModel = FieldStringViewModel(stringFormField)
 
@@ -166,7 +166,7 @@ class FieldStringViewModelTest {
     fun shouldSetEmptyValue() {
 
         val stringFormField: StringFormField = mock()
-        whenever(stringFormField.value).thenReturn(null)
+        whenever(stringFormField.mValue).thenReturn(null)
 
         val viewModel: FieldStringViewModel = FieldStringViewModel(stringFormField)
 
@@ -178,7 +178,7 @@ class FieldStringViewModelTest {
     fun shouldSetEditTextValue() {
 
         val stringFormField: StringFormField = mock()
-        whenever(stringFormField.value).thenReturn("value")
+        whenever(stringFormField.mValue).thenReturn("value")
 
         val viewModel: FieldStringViewModel = FieldStringViewModel(stringFormField)
 
@@ -190,7 +190,7 @@ class FieldStringViewModelTest {
     fun shouldSetEmptyEditTextValue() {
 
         val stringFormField: StringFormField = mock()
-        whenever(stringFormField.value).thenReturn(null)
+        whenever(stringFormField.mValue).thenReturn(null)
 
         val viewModel: FieldStringViewModel = FieldStringViewModel(stringFormField)
 

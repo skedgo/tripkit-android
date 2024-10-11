@@ -1,9 +1,12 @@
-package com.skedgo.tripkit.booking;
+package com.skedgo.tripkit.booking
 
-import io.reactivex.Observable;
+import io.reactivex.Observable
 
-public interface ExternalOAuthService {
-
-    Observable<ExternalOAuth> getAccessToken(BookingForm form, String code, String grantType, String callback);
-
+interface ExternalOAuthService {
+    fun getAccessToken(
+        form: BookingForm,
+        code: String,
+        grantType: String,
+        callback: String
+    ): Observable<ExternalOAuth>
 }

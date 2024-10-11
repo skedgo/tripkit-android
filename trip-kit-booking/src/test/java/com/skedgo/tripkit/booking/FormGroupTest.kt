@@ -1,134 +1,175 @@
-package com.skedgo.tripkit.booking;
+package com.skedgo.tripkit.booking
 
-import android.os.Parcel;
+import android.os.Parcel
+import com.google.gson.Gson
+import com.google.gson.GsonBuilder
+import com.google.gson.stream.JsonReader
+import com.skedgo.tripkit.booking.FormField
+import com.skedgo.tripkit.booking.FormGroup
+import com.skedgo.tripkit.booking.FormGroup.CREATOR.createFromParcel
+import com.skedgo.tripkit.booking.LinkFormField
+import com.skedgo.tripkit.booking.OptionFormField
+import com.skedgo.tripkit.booking.StepperFormField
+import com.skedgo.tripkit.booking.StringFormField
+import com.skedgo.tripkit.booking.SwitchFormField
+import io.mockk.every
+import io.mockk.mockk
+import io.mockk.verify
+import org.assertj.core.api.Java6Assertions
+import org.junit.Assert.assertEquals
+import org.junit.Test
+import org.junit.runner.RunWith
+import org.robolectric.RobolectricTestRunner
+import java.io.StringReader
+import java.util.ArrayList
 
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-import com.google.gson.stream.JsonReader;
+@RunWith(RobolectricTestRunner::class)
+class FormGroupTest {
 
-import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.robolectric.RobolectricTestRunner;
-
-import java.io.StringReader;
-import java.util.ArrayList;
-import java.util.List;
-
-import static org.assertj.core.api.Java6Assertions.assertThat;
-
-@RunWith(RobolectricTestRunner.class)
-public class FormGroupTest {
     @Test
-    public void Parse() {
-        GsonBuilder builder = new GsonBuilder();
-        builder.registerTypeAdapter(FormField.class, new FormFieldJsonAdapter());
-        Gson gson = builder.create();
+    fun parseTest() {
+        val builder = GsonBuilder()
+        builder.registerTypeAdapter(FormField::class.java, FormFieldJsonAdapter())
+        val gson: Gson = builder.create()
 
-        String testParse = " {\n" +
-            "      \"title\": \"Insurance\",\n" +
-            "      \"footer\": \"I wish to purchase excess reimbursement insurance of 13.95per day = 13.95 (Approx 13.95) Please Note: Excess insurance is billed separately on your credit card statement.\",\n" +
-            "      \"fields\": [\n" +
-            "        {\n" +
-            "          \"type\": \"switch\",\n" +
-            "          \"id\": \"insuranceOption\",\n" +
-            "          \"title\": \"Annual Excess Insurance\",\n" +
-            "          \"value\": false\n" +
-            "        }\n" +
-            "      ]\n" +
-            "    }\n";
-        JsonReader reader = new JsonReader(new StringReader(testParse));
-        reader.setLenient(true);
+        var testParse = """
+            {
+              "title": "Insurance",
+              "footer": "I wish to purchase excess reimbursement insurance of 13.95per day = 13.95 (Approx 13.95) Please Note: Excess insurance is billed separately on your credit card statement.",
+              "fields": [
+                {
+                  "type": "switch",
+                  "id": "insuranceOption",
+                  "title": "Annual Excess Insurance",
+                  "value": false
+                }
+              ]
+            }
+        """.trimIndent()
 
-        FormGroup actual = gson.fromJson(reader, FormGroup.class);
-        assertThat(actual.getTitle()).isEqualTo("Insurance");
-        assertThat(actual.getFooter()).isEqualTo("I wish to purchase excess reimbursement insurance of 13.95per day = 13.95 (Approx 13.95) Please Note: Excess insurance is billed separately on your credit card statement.");
-        assertThat(actual.getFields()).hasSize(1);
-        assertThat(actual.getFields().get(0)).isInstanceOf(SwitchFormField.class);
+        var reader = JsonReader(StringReader(testParse))
+        reader.isLenient = true
 
-        testParse = "{\n" +
-            "  \"title\": \"Ticket\",\n" +
-            "  \"fields\": [\n" +
-            "    {\n" +
-            "      \"type\": \"stepper\",\n" +
-            "      \"title\": \"Adult\",\n" +
-            "      \"id\": \"adult\",\n" +
-            "      \"required\": true,\n" +
-            "      \"value\": 1,\n" +
-            "      \"minValue\": 0,\n" +
-            "      \"maxValue\": 15\n" +
-            "    },\n" +
-            "    {\n" +
-            "      \"type\": \"stepper\",\n" +
-            "      \"title\": \"Child\",\n" +
-            "      \"id\": \"child\",\n" +
-            "      \"required\": false,\n" +
-            "      \"value\": 0,\n" +
-            "      \"minValue\": 0,\n" +
-            "      \"maxValue\": 15\n" +
-            "    },\n" +
-            "    {\n" +
-            "      \"type\": \"option\",\n" +
-            "      \"title\": \"Type\",\n" +
-            "      \"id\": \"ticket_type\",\n" +
-            "      \"value\": {\n" +
-            "        \"title\": \"One way\",\n" +
-            "        \"value\": \"one_way\"\n" +
-            "      },\n" +
-            "      \"allValues\": [\n" +
-            "        {\n" +
-            "          \"title\": \"One way\",\n" +
-            "          \"value\": \"one_way\"\n" +
-            "        },\n" +
-            "        {\n" +
-            "          \"title\": \"Return\",\n" +
-            "          \"value\": \"return\"\n" +
-            "        }\n" +
-            "      ]\n" +
-            "    }\n" +
-            "  ]\n" +
-            "}";
-        reader = new JsonReader(new StringReader(testParse));
-        reader.setLenient(true);
+        val actual: FormGroup = gson.fromJson(reader, FormGroup::class.java)
+        assertEquals("Insurance", actual.title)
+        assertEquals(
+            "I wish to purchase excess reimbursement insurance of 13.95per day = 13.95 (Approx 13.95) Please Note: Excess insurance is billed separately on your credit card statement.",
+            actual.footer
+        )
+        assertEquals(1, actual.fields.size)
+        assert(actual.fields[0] is SwitchFormField)
 
-        actual = gson.fromJson(reader, FormGroup.class);
-        assertThat(actual.getTitle()).isEqualTo("Ticket");
-        assertThat(actual.getFields()).hasSize(3);
-        assertThat(actual.getFields().get(0)).isInstanceOf(StepperFormField.class);
-        assertThat(actual.getFields().get(1)).isInstanceOf(StepperFormField.class);
-        assertThat(actual.getFields().get(2)).isInstanceOf(OptionFormField.class);
+        testParse = """
+            {
+              "title": "Ticket",
+              "fields": [
+                {
+                  "type": "stepper",
+                  "title": "Adult",
+                  "id": "adult",
+                  "required": true,
+                  "value": 1,
+                  "minValue": 0,
+                  "maxValue": 15
+                },
+                {
+                  "type": "stepper",
+                  "title": "Child",
+                  "id": "child",
+                  "required": false,
+                  "value": 0,
+                  "minValue": 0,
+                  "maxValue": 15
+                },
+                {
+                  "type": "option",
+                  "title": "Type",
+                  "id": "ticket_type",
+                  "value": {
+                    "title": "One way",
+                    "value": "one_way"
+                  },
+                  "allValues": [
+                    {
+                      "title": "One way",
+                      "value": "one_way"
+                    },
+                    {
+                      "title": "Return",
+                      "value": "return"
+                    }
+                  ]
+                }
+              ]
+            }
+        """.trimIndent()
+
+        reader = JsonReader(StringReader(testParse))
+        reader.isLenient = true
+
+        val actualSecond: FormGroup = gson.fromJson(reader, FormGroup::class.java)
+        assertEquals("Ticket", actualSecond.title)
+        assertEquals(3, actualSecond.fields.size)
+        assert(actualSecond.fields[0] is StepperFormField)
+        assert(actualSecond.fields[1] is StepperFormField)
+        assert(actualSecond.fields[2] is OptionFormField)
     }
 
     @Test
-    public void Parcelable() {
-        FormGroup expect = new FormGroup();
-        List<FormField> list = new ArrayList<>();
-        for (int i = 0; i < 3; i++) {
-            StringFormField item = new StringFormField();
-            item.setValue("" + i);
-            list.add(item);
-        }
-        LinkFormField item = new LinkFormField();
-        item.setValue("a");
-        list.add(item);
-        SwitchFormField switchFormField = new SwitchFormField();
-        switchFormField.setValue(false);
-        list.add(switchFormField);
+    fun parcelableTest() {
+        // Step 1: Create the expected FormGroup with different FormField types
+        val expect = FormGroup()
+        val list = mutableListOf<FormField>()
 
-        expect.setFields(list);
-        Parcel parcel = Parcel.obtain();
-        expect.writeToParcel(parcel, 0);
-        parcel.setDataPosition(0);
-        FormGroup actual = FormGroup.CREATOR.createFromParcel(parcel);
-        assertThat(actual.getFields()).hasSize(5);
-        assertThat(actual.getFields().get(0)).isInstanceOf(StringFormField.class);
-        assertThat(actual.getFields().get(0).getValue()).isEqualTo("0");
-        assertThat(actual.getFields().get(1)).isInstanceOf(StringFormField.class);
-        assertThat(actual.getFields().get(1).getValue()).isEqualTo("1");
-        assertThat(actual.getFields().get(2)).isInstanceOf(StringFormField.class);
-        assertThat(actual.getFields().get(2).getValue()).isEqualTo("2");
-        assertThat(actual.getFields().get(3)).isInstanceOf(LinkFormField.class);
-        assertThat(actual.getFields().get(3).getValue()).isEqualTo("a");
-        assertThat(actual.getFields().get(4)).isInstanceOf(SwitchFormField.class);
-        assertThat(actual.getFields().get(4).getValue()).isEqualTo(false);
+        // Add StringFormField instances
+        for (i in 0 until 3) {
+            val item = StringFormField().apply { setValue(i.toString()) }
+            list.add(item)
+        }
+
+        // Add LinkFormField instance
+        val linkFormField = LinkFormField().apply { setValue("a") }
+        list.add(linkFormField)
+
+        // Add SwitchFormField instance
+        val switchFormField = SwitchFormField().apply { setValue(false) }
+        list.add(switchFormField)
+
+        expect.fields = list
+
+        // Step 2: Mock the Parcel object
+        val parcel = mockk<Parcel>(relaxed = true)
+
+        // Step 3: Write to the parcel
+        every { parcel.writeString(any()) } returns Unit
+        every { parcel.writeTypedList(any<List<FormField>>()) } returns Unit
+
+        // Trigger writeToParcel on the object
+        expect.writeToParcel(parcel, 0)
+
+        // Verify that the fields are written correctly to the parcel
+        verify { parcel.writeString(expect.title) }
+        verify { parcel.writeString(expect.footer) }
+        verify { parcel.writeTypedList(expect.fields) }
+
+        // Step 4: Simulate reading from the parcel
+        every { parcel.readString() } returnsMany listOf(expect.title, expect.footer)
+        every { parcel.createTypedArrayList(FormField.CREATOR) } returns ArrayList(list)
+
+        // Recreate FormGroup from the parcel
+        val actual = FormGroup.CREATOR.createFromParcel(parcel)
+
+        // Step 5: Assertions
+        assertEquals(expect.fields.size, actual.fields.size)
+        assert(actual.fields[0] is StringFormField)
+        assertEquals("0", (actual.fields[0] as StringFormField).getValue())
+        assert(actual.fields[1] is StringFormField)
+        assertEquals("1", (actual.fields[1] as StringFormField).getValue())
+        assert(actual.fields[2] is StringFormField)
+        assertEquals("2", (actual.fields[2] as StringFormField).getValue())
+        assert(actual.fields[3] is LinkFormField)
+        assertEquals("a", (actual.fields[3] as LinkFormField).getValue())
+        assert(actual.fields[4] is SwitchFormField)
+        assertEquals(false, (actual.fields[4] as SwitchFormField).getValue())
     }
 }

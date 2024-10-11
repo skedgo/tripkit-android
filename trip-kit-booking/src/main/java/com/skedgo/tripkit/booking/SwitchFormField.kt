@@ -1,60 +1,50 @@
-package com.skedgo.tripkit.booking;
+package com.skedgo.tripkit.booking
 
-import android.os.Parcel;
+import android.os.Parcel
+import android.os.Parcelable.Creator
+import com.google.gson.annotations.SerializedName
 
-import com.google.gson.annotations.SerializedName;
+class SwitchFormField : FormField {
 
-public class SwitchFormField extends FormField {
-
-    public static final Creator<SwitchFormField> CREATOR = new Creator<SwitchFormField>() {
-        @Override
-        public SwitchFormField createFromParcel(Parcel in) {
-            in.readInt();
-            return new SwitchFormField(in);
-        }
-
-        @Override
-        public SwitchFormField[] newArray(int size) {
-            return new SwitchFormField[size];
-        }
-    };
     @SerializedName("keyboardType")
-    private String keyboardType;
+    var keyboardType: String? = null
+
     @SerializedName("value")
-    private Boolean value;
+    var mValue: Boolean? = null
 
-    public SwitchFormField(Parcel in) {
-        super(in);
-        this.keyboardType = in.readString();
-        this.value = Boolean.valueOf(in.readString());
+    constructor(parcel: Parcel) : super( parcel) {  // Call the parent class constructor
+        keyboardType = parcel.readString()  // Read String for keyboardType
+        mValue = parcel.readString()?.toBoolean()
     }
 
-    public SwitchFormField() {
-        super();
+    // Secondary empty constructor (the default constructor)
+    constructor() : super() {
+        // Initialize any default values or leave it empty
     }
 
-    @Override
-    public void writeToParcel(Parcel dest, int flags) {
-        dest.writeInt(SWITCH);
-        super.writeToParcel(dest, flags);
-        dest.writeString(keyboardType);
-        dest.writeString(value.toString());
+    override fun writeToParcel(dest: Parcel, flags: Int) {
+        dest.writeInt(SWITCH)
+        super.writeToParcel(dest, flags)
+        dest.writeString(keyboardType)
+        dest.writeString(mValue.toString())
     }
 
-    public String getKeyboardType() {
-        return keyboardType;
+    override fun getValue(): Boolean? {
+        return mValue
     }
 
-    public void setKeyboardType(String keyboardType) {
-        this.keyboardType = keyboardType;
+    fun setValue(value: Boolean) {
+        this.mValue = value
     }
 
-    @Override
-    public Object getValue() {
-        return value;
-    }
+    companion object CREATOR : Creator<SwitchFormField> {
+        override fun createFromParcel(parcel: Parcel): SwitchFormField {
+            parcel.readInt() // Read SWITCH type
+            return SwitchFormField(parcel)
+        }
 
-    public void setValue(Boolean value) {
-        this.value = value;
+        override fun newArray(size: Int): Array<SwitchFormField?> {
+            return arrayOfNulls(size)
+        }
     }
 }

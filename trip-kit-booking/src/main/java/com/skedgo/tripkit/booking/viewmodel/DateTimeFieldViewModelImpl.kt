@@ -17,7 +17,7 @@ class DateTimeFieldViewModelImpl(
 
     private val self: BehaviorSubject<DateTimeFieldViewModelImpl> = BehaviorSubject.create()
     private var calendar: Calendar = Calendar.getInstance().apply {
-        timeInMillis = SECONDS.toMillis(field.value ?: 0L)
+        timeInMillis = SECONDS.toMillis(field.mValue ?: 0L)
     }
 
     constructor(parcel: Parcel) : this(
@@ -78,12 +78,12 @@ class DateTimeFieldViewModelImpl(
 
     override fun getDate(): String {
         val dateFormat = SimpleDateFormat("EEE, dd MMM yyyy", Locale.US)
-        return dateFormat.format(Date(SECONDS.toMillis(field.value ?: 0)))
+        return dateFormat.format(Date(SECONDS.toMillis(field.mValue ?: 0)))
     }
 
     override fun getTime(): String {
         val timeFormat = SimpleDateFormat("HH:mm", Locale.US)
-        return timeFormat.format(Date(SECONDS.toMillis(field.value ?: 0)))
+        return timeFormat.format(Date(SECONDS.toMillis(field.mValue ?: 0)))
     }
 
     companion object CREATOR : Parcelable.Creator<DateTimeFieldViewModelImpl> {

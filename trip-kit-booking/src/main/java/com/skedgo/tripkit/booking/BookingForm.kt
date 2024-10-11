@@ -58,7 +58,7 @@ open class BookingForm() : FormField() {
         return mValue
     }
 
-    fun isOAuthForm(): Boolean = "authForm" == getType()
+    fun isOAuthForm(): Boolean = "authForm" == type
 
     fun isSpecificAuthForm(): Boolean = mValue == "payiq" || mValue == "myki"
 
@@ -79,8 +79,8 @@ open class BookingForm() : FormField() {
     fun getTokenURL(): String? {
         form.forEach { formGroup ->
             formGroup.fields.forEach { formField ->
-                if (FormField.TOKEN_URL == formField.id && formField.value != null && formField.value.toString().endsWith("/token")) {
-                    return formField.value.toString().substring(0, formField.value.toString().length - "/token".length)
+                if (FormField.TOKEN_URL == formField.id && formField.getValue() != null && formField.getValue().toString().endsWith("/token")) {
+                    return formField.getValue().toString().substring(0, formField.getValue().toString().length - "/token".length)
                 }
             }
         }
@@ -90,8 +90,8 @@ open class BookingForm() : FormField() {
     fun getScope(): String? {
         form.forEach { formGroup ->
             formGroup.fields.forEach { formField ->
-                if (FormField.SCOPE == formField.id && formField.value != null) {
-                    return formField.value.toString()
+                if (FormField.SCOPE == formField.id && formField.getValue() != null) {
+                    return formField.getValue().toString()
                 }
             }
         }
@@ -140,7 +140,7 @@ open class BookingForm() : FormField() {
         form.forEach { group ->
             group.fields.forEach { field ->
                 if (field is LinkFormField && LinkFormField.METHOD_EXTERNAL == field.method) {
-                    return field.value
+                    return field.getValue()
                 }
             }
         }
@@ -150,8 +150,8 @@ open class BookingForm() : FormField() {
     private fun getValueFromField(fieldName: String): String? {
         form.forEach { formGroup ->
             formGroup.fields.forEach { formField ->
-                if (fieldName == formField.id && formField.value != null) {
-                    return formField.value.toString()
+                if (fieldName == formField.id && formField.getValue() != null) {
+                    return formField.getValue().toString()
                 }
             }
         }

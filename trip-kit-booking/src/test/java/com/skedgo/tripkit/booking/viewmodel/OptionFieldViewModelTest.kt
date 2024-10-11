@@ -1,9 +1,7 @@
 package com.skedgo.tripkit.booking.viewmodel
 
 import com.skedgo.tripkit.booking.OptionFormField
-import com.skedgo.tripkit.booking.OptionFormField.OptionValue
 import junit.framework.TestCase.assertEquals
-import org.assertj.core.api.Java6Assertions
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.robolectric.RobolectricTestRunner
@@ -42,8 +40,8 @@ class OptionFieldViewModelTest {
         )
 
         return OptionFormField().apply {
-            value = optionValue
-            setAllValues(allValues)
+            mValue = optionValue
+            this.allValues = allValues
         }
     }
 }

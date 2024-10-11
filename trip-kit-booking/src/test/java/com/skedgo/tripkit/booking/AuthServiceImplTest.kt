@@ -1,76 +1,88 @@
-package com.skedgo.tripkit.booking;
+package com.skedgo.tripkit.booking
 
-import com.skedgo.tripkit.common.model.region.Region;
+import androidx.arch.core.executor.testing.InstantTaskExecutorRule
+import com.skedgo.tripkit.common.model.region.Region
+import io.mockk.MockKAnnotations
+import io.mockk.every
+import io.mockk.mockk
+import io.mockk.verify
+import io.reactivex.Observable
+import okhttp3.HttpUrl
+import okhttp3.HttpUrl.Companion.toHttpUrlOrNull
+import org.junit.After
+import org.junit.Before
+import org.junit.Rule
+import org.junit.Test
+import org.junit.runner.RunWith
+import org.mockito.ArgumentMatchers
+import org.mockito.Mock
+import org.mockito.Mockito
+import org.mockito.MockitoAnnotations
+import org.robolectric.RobolectricTestRunner
 
-import org.junit.Before;
-import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.mockito.Mock;
-import org.mockito.MockitoAnnotations;
-import org.robolectric.RobolectricTestRunner;
+@RunWith(RobolectricTestRunner::class)
+class AuthServiceImplTest: MockKTest() {
 
-import java.util.ArrayList;
-import java.util.Collections;
+    @get:Rule
+    val rule = InstantTaskExecutorRule()
 
-import io.reactivex.Observable;
-import okhttp3.HttpUrl;
-
-import static org.mockito.Matchers.eq;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
-
-@RunWith(RobolectricTestRunner.class)
-public class AuthServiceImplTest {
-    @Mock
-    AuthApi api;
-    private AuthServiceImpl service;
+    var api: AuthApi = mockk()
+    private lateinit var service: AuthServiceImpl
 
     @Before
-    public void before() {
-        MockitoAnnotations.initMocks(this);
-        service = new AuthServiceImpl(api);
+    fun before() {
+        MockKAnnotations.init(this)
+        initRx()
+        service = AuthServiceImpl(api)
+    }
+
+    @After
+    fun tearDown() {
+        tearDownRx()
     }
 
     @Test
-    public void delegateFetchingProviders() {
-        final Region region = mock(Region.class);
-        when(region.getURLs()).thenReturn(new ArrayList<>(
-            Collections.singletonList("https://tripgo.skedgo.com/satapp/")
-        ));
-        when(region.getName()).thenReturn("The_Ark");
-        final HttpUrl url = HttpUrl.parse("https://tripgo.skedgo.com/satapp/auth/The_Ark");
-        when(api.fetchProvidersAsync(
-            url
-        )).thenReturn(Observable.just(Collections.<AuthProvider>emptyList()));
-        service.fetchProvidersByRegionAsync(region, null, false).subscribe();
-        verify(api).fetchProvidersAsync(eq(url));
+    fun delegateFetchingProviders() {
+        val region = mockk<Region>(relaxed = true)
+
+        every { region.getURLs() } returns arrayListOf("https://tripgo.skedgo.com/satapp/")
+        every { region.name } returns "The_Ark"
+        val url = "https://tripgo.skedgo.com/satapp/auth/The_Ark".toHttpUrlOrNull()
+
+        every { api.fetchProvidersAsync(url!!) } returns Observable.just(emptyList<AuthProvider>())
+
+        service.fetchProvidersByRegionAsync(region, null, false).subscribe()
+
+        verify { api.fetchProvidersAsync(url!!) }
     }
 
     @Test
-    public void fetchingProvidersByModeTest() {
-        final Region region = mock(Region.class);
-        when(region.getURLs()).thenReturn(new ArrayList<>(
-            Collections.singletonList("https://tripgo.skedgo.com/satapp/")
-        ));
-        when(region.getName()).thenReturn("The_Ark");
-        final HttpUrl url = HttpUrl.parse("https://tripgo.skedgo.com/satapp/auth/The_Ark?mode=uber");
-        when(api.fetchProvidersAsync(
-            url
-        )).thenReturn(Observable.just(Collections.<AuthProvider>emptyList()));
-        service.fetchProvidersByRegionAsync(region, "uber", false).subscribe();
-        verify(api).fetchProvidersAsync(eq(url));
+    fun fetchingProvidersByModeTest() {
+        val region = mockk<Region>(relaxed = true)
+
+        every { region.getURLs() } returns arrayListOf("https://tripgo.skedgo.com/satapp/")
+        every { region.name } returns "The_Ark"
+        val url = "https://tripgo.skedgo.com/satapp/auth/The_Ark?mode=uber".toHttpUrlOrNull()
+
+        every { api.fetchProvidersAsync(url!!) } returns Observable.just(emptyList<AuthProvider>())
+
+        service.fetchProvidersByRegionAsync(region, "uber", false).subscribe()
+
+        verify { api.fetchProvidersAsync(url!!) }
     }
 
     @Test
-    public void delegateSigningIn() {
-        service.signInAsync("Some url");
-        verify(api).signInAsync(eq("Some url"));
+    fun delegateSigningIn() {
+        every { api.signInAsync(any()) } returns Observable.just(BookingForm())
+        service.signInAsync("Some url")
+        verify { api.signInAsync("Some url") }
     }
 
     @Test
-    public void delegateLoggingOut() {
-        service.logOutAsync("Some url");
-        verify(api).logOutAsync(eq("Some url"));
+    fun delegateLoggingOut() {
+        val mockLogOutResponse = mockk<LogOutResponse>(relaxed = true)
+        every { api.logOutAsync(any()) } returns Observable.just(mockLogOutResponse)
+        service.logOutAsync("Some url")
+        verify { api.logOutAsync("Some url") }
     }
 }

@@ -10,26 +10,18 @@ import com.skedgo.tripkit.booking.InputForm
 import com.skedgo.tripkit.booking.MockKTest
 import com.skedgo.tripkit.booking.OptionFormField
 import com.skedgo.tripkit.booking.StringFormField
-import io.mockk.MockKAnnotations
 import io.mockk.every
-import io.mockk.impl.annotations.MockK
 import io.mockk.mockk
 import io.mockk.verify
 import io.reactivex.Flowable
 import io.reactivex.Observable
-import io.reactivex.functions.Consumer
-import io.reactivex.subscribers.TestSubscriber
-import org.assertj.core.api.Assertions
-import org.assertj.core.api.Java6Assertions
 import org.junit.After
 import org.junit.Assert.assertEquals
 import org.junit.Assert.fail
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
-import org.mockito.Mockito
 import org.robolectric.RobolectricTestRunner
-import java.util.Arrays
 
 @RunWith(RobolectricTestRunner::class)
 class BookingViewModelImplTest: MockKTest() {
@@ -157,7 +149,7 @@ class BookingViewModelImplTest: MockKTest() {
     fun handleCanceledBooking() {
         val bookingForm = BookingForm()
         val formGroup = FormGroup().apply {
-            fields = mutableListOf(StringFormField().apply { value = "Cancelled" }) as List<FormField>?
+            fields = mutableListOf(StringFormField().apply { mValue = "Cancelled" }) as List<FormField>
         }
         bookingForm.form = listOf(formGroup)
         bookingForm.action = BookingAction()
@@ -174,7 +166,7 @@ class BookingViewModelImplTest: MockKTest() {
     fun handleSucceedBooking() {
         val bookingForm = BookingForm()
         val formGroup = FormGroup().apply {
-            fields = mutableListOf(StringFormField().apply { value = "Confirmed" }) as List<FormField>?
+            fields = mutableListOf(StringFormField().apply { mValue = "Confirmed" }) as List<FormField>
         }
         bookingForm.form = listOf(formGroup)
         bookingForm.action = BookingAction()

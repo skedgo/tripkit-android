@@ -1,129 +1,101 @@
-package com.skedgo.tripkit.booking;
+package com.skedgo.tripkit.booking
 
-import android.os.Parcel;
-import android.os.Parcelable;
-import android.text.TextUtils;
+import android.os.Parcel
+import android.os.Parcelable
+import com.google.gson.annotations.SerializedName
 
-import com.google.gson.annotations.SerializedName;
+class OptionFormField : FormField {
 
-import org.apache.commons.collections4.CollectionUtils;
-
-import java.util.ArrayList;
-import java.util.List;
-
-public class OptionFormField extends FormField {
-    public static final Creator<OptionFormField> CREATOR = new Creator<OptionFormField>() {
-        @Override
-        public OptionFormField createFromParcel(Parcel in) {
-            in.readInt();
-            return new OptionFormField(in);
-        }
-
-        @Override
-        public OptionFormField[] newArray(int size) {
-            return new OptionFormField[size];
-        }
-    };
     @SerializedName("value")
-    private OptionValue value;
+    var mValue: OptionValue? = null
+
     @SerializedName("allValues")
-    private List<OptionValue> allValues;
-
-    public OptionFormField() {
-        super();
+    var allValues: List<OptionValue> = ArrayList()
+    constructor(parcel: Parcel) : super( parcel) {  // Call the parent class constructor
+        mValue = parcel.readParcelable(OptionValue::class.java.classLoader)
+        allValues = parcel.createTypedArrayList(OptionValue.CREATOR) ?: ArrayList()
     }
 
-    public OptionFormField(Parcel in) {
-        super(in);
-        this.value = in.readParcelable(OptionValue.class.getClassLoader());
-        allValues = new ArrayList<>();
-        in.readTypedList(allValues, OptionValue.CREATOR);
+    // Secondary empty constructor (the default constructor)
+    constructor() : super() {
+        // Initialize any default values or leave it empty
     }
 
-    @Override
-    public OptionValue getValue() {
-        return value;
+    override fun getValue(): OptionValue? {
+        return mValue
     }
 
-    public void setValue(OptionValue value) {
-        this.value = value;
+    fun setValue(value: OptionValue) {
+        this.mValue = value
     }
 
-    public List<OptionValue> getAllValues() {
-        return allValues;
-    }
-
-    public void setAllValues(List<OptionValue> allValues) {
-        this.allValues = allValues;
-    }
-
-    public int getSelectedIndex() {
-        if (value != null && CollectionUtils.isNotEmpty(allValues)) {
-            for (int i = 0; i < allValues.size(); i++) {
-                if (TextUtils.equals(allValues.get(i).getValue(), value.getValue())) {
-                    return i;
+    fun getSelectedIndex(): Int {
+        mValue?.let { currentValue ->
+            if (allValues.isNotEmpty()) {
+                for (i in allValues.indices) {
+                    if (allValues[i].value == currentValue.value) {
+                        return i
+                    }
                 }
             }
         }
-
-        return 0;
+        return 0
     }
 
-    @Override
-    public void writeToParcel(Parcel dest, int flags) {
-        dest.writeInt(OPTION);
-        super.writeToParcel(dest, flags);
-        dest.writeParcelable(value, flags);
-        dest.writeTypedList(allValues);
+    override fun writeToParcel(dest: Parcel, flags: Int) {
+        dest.writeInt(OPTION)
+        super.writeToParcel(dest, flags)
+        dest.writeParcelable(mValue, flags)
+        dest.writeTypedList(allValues)
     }
 
-    public static class OptionValue implements Parcelable {
-        public static final Creator<OptionValue> CREATOR = new Creator<OptionValue>() {
-            @Override
-            public OptionValue createFromParcel(Parcel in) {
-                return new OptionValue(in);
-            }
+    companion object CREATOR : Parcelable.Creator<OptionFormField> {
+        override fun createFromParcel(parcel: Parcel): OptionFormField {
+            parcel.readInt() // Read OPTION type
+            return OptionFormField(parcel)
+        }
 
-            @Override
-            public OptionValue[] newArray(int size) {
-                return new OptionValue[size];
-            }
-        };
+        override fun newArray(size: Int): Array<OptionFormField?> {
+            return arrayOfNulls(size)
+        }
+    }
+
+    // Nested OptionValue class
+    class OptionValue() : Parcelable {
+
         @SerializedName("title")
-        private String title;
+        var title: String? = null
+
         @SerializedName("value")
-        private String value;
+        var value: String? = null
 
-        public OptionValue() {
+        constructor(parcel: Parcel) : this() {
+            title = parcel.readString()
+            value = parcel.readString()
         }
 
-        public OptionValue(Parcel in) {
-            this.title = in.readString();
-            this.value = in.readString();
+        constructor(title: String, value: String) : this() {
+            this.title = title
+            this.value = value
         }
 
-        public OptionValue(String title, String value) {
-            this.title = title;
-            this.value = value;
+        override fun describeContents(): Int {
+            return 0
         }
 
-        @Override
-        public int describeContents() {
-            return 0;
+        override fun writeToParcel(dest: Parcel, flags: Int) {
+            dest.writeString(title)
+            dest.writeString(value)
         }
 
-        @Override
-        public void writeToParcel(Parcel dest, int flags) {
-            dest.writeString(title);
-            dest.writeString(value);
-        }
+        companion object CREATOR : Parcelable.Creator<OptionValue> {
+            override fun createFromParcel(parcel: Parcel): OptionValue {
+                return OptionValue(parcel)
+            }
 
-        public String getValue() {
-            return value;
-        }
-
-        public String getTitle() {
-            return title;
+            override fun newArray(size: Int): Array<OptionValue?> {
+                return arrayOfNulls(size)
+            }
         }
     }
 }

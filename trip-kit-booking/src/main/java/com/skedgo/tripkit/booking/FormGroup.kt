@@ -1,76 +1,44 @@
-package com.skedgo.tripkit.booking;
+package com.skedgo.tripkit.booking
 
-import android.os.Parcel;
-import android.os.Parcelable;
+import android.os.Parcel
+import android.os.Parcelable
+import android.os.Parcelable.Creator
+import com.google.gson.annotations.SerializedName
 
-import com.google.gson.annotations.SerializedName;
+class FormGroup() : Parcelable {
 
-import java.util.ArrayList;
-import java.util.List;
-
-import androidx.annotation.Nullable;
-
-public class FormGroup implements Parcelable {
-
-    public static final Creator<FormGroup> CREATOR = new Creator<FormGroup>() {
-        @Override
-        public FormGroup createFromParcel(Parcel in) {
-            return new FormGroup(in);
-        }
-
-        @Override
-        public FormGroup[] newArray(int size) {
-            return new FormGroup[size];
-        }
-    };
     @SerializedName("title")
-    private String title;
+    var title: String? = null
+
     @SerializedName("footer")
-    private String footer;
+    var footer: String? = null
+
     @SerializedName("fields")
-    private List<FormField> fields;
+    var fields: List<FormField> = ArrayList()
 
-    private FormGroup(Parcel in) {
-        title = in.readString();
-        footer = in.readString();
-        fields = new ArrayList<>();
-        in.readTypedList(fields, FormField.CREATOR);
+    private constructor(parcel: Parcel) : this() {
+        title = parcel.readString()
+        footer = parcel.readString()
+        fields = parcel.createTypedArrayList(FormField.CREATOR) ?: ArrayList()
     }
 
-    public FormGroup() {
-
+    override fun describeContents(): Int {
+        return 0
     }
 
-    public String getTitle() {
-        return title;
+    override fun writeToParcel(dest: Parcel, flags: Int) {
+        dest.writeString(title)
+        dest.writeString(footer)
+        dest.writeTypedList(fields)
     }
 
-    public void setTitle(String title) {
-        this.title = title;
-    }
+    companion object CREATOR : Parcelable.Creator<FormGroup> {
+        override fun createFromParcel(parcel: Parcel): FormGroup {
+            return FormGroup(parcel)
+        }
 
-    @Nullable
-    public String getFooter() {
-        return footer;
-    }
-
-    public List<FormField> getFields() {
-        return fields;
-    }
-
-    public void setFields(List<FormField> fields) {
-        this.fields = fields;
-    }
-
-    @Override
-    public int describeContents() {
-        return 0;
-    }
-
-    @Override
-    public void writeToParcel(Parcel dest, int flags) {
-        dest.writeString(title);
-        dest.writeString(footer);
-        dest.writeTypedList(fields);
+        override fun newArray(size: Int): Array<FormGroup?> {
+            return arrayOfNulls(size)
+        }
     }
 }

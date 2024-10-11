@@ -39,7 +39,7 @@ class FieldPasswordViewModelTest {
     fun shouldSetEditTextValue() {
 
         val passwordFormField: PasswordFormField = mock()
-        whenever(passwordFormField.value).thenReturn("value")
+        whenever(passwordFormField.mValue).thenReturn("value")
 
         val viewModel: FieldPasswordViewModel = FieldPasswordViewModel(passwordFormField)
 
@@ -51,7 +51,7 @@ class FieldPasswordViewModelTest {
     fun shouldSetEmptyEditTextValue() {
 
         val passwordFormField: PasswordFormField = mock()
-        whenever(passwordFormField.value).thenReturn(null)
+        whenever(passwordFormField.mValue).thenReturn(null)
 
         val viewModel: FieldPasswordViewModel = FieldPasswordViewModel(passwordFormField)
 

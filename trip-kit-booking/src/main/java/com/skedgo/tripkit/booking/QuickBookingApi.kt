@@ -1,20 +1,16 @@
-package com.skedgo.tripkit.booking;
+package com.skedgo.tripkit.booking
 
-import com.skedgo.tripkit.common.model.booking.Booking;
+import io.reactivex.Observable
+import retrofit2.http.GET
+import retrofit2.http.Url
 
-import java.util.List;
-
-import io.reactivex.Observable;
-import retrofit2.http.GET;
-import retrofit2.http.Url;
-
-@Deprecated
-public interface QuickBookingApi {
+@Deprecated("")
+interface QuickBookingApi {
     /**
-     * @param quickBookingsUrl This should be obtained by {@link Booking#getQuickBookingsUrl()}.
+     * @param quickBookingsUrl This should be obtained by [Booking.getQuickBookingsUrl].
      */
     @GET
-    Observable<List<QuickBooking>> fetchQuickBookingsAsync(
-        @Url String quickBookingsUrl
-    );
+    fun fetchQuickBookingsAsync(
+        @Url quickBookingsUrl: String
+    ): Observable<List<QuickBooking>>
 }

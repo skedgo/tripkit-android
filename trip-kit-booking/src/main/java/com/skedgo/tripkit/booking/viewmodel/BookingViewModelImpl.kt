@@ -126,7 +126,7 @@ class BookingViewModelImpl(private val bookingService: BookingService) : Booking
         val formGroups = bookingForm.form
         if (!formGroups.isNullOrEmpty()) {
             val bookingStatusField = formGroups[0].fields[0]
-            if ("Cancelled" == bookingStatusField.value) {
+            if ("Cancelled" == bookingStatusField.getValue()) {
                 return true
             }
         }

@@ -1,69 +1,56 @@
-package com.skedgo.tripkit.booking;
+package com.skedgo.tripkit.booking
 
-import android.os.Parcel;
+import android.os.Parcel
+import android.os.Parcelable.Creator
+import com.google.gson.annotations.SerializedName
+import java.io.Serializable
 
-import com.google.gson.annotations.SerializedName;
+class ExternalFormField : FormField, Serializable {
 
-import java.io.Serializable;
-
-public class ExternalFormField extends FormField implements Serializable {
-    public static final Creator<ExternalFormField> CREATOR = new Creator<ExternalFormField>() {
-        @Override
-        public ExternalFormField createFromParcel(Parcel in) {
-            in.readInt();
-            return new ExternalFormField(in);
-        }
-
-        @Override
-        public ExternalFormField[] newArray(int size) {
-            return new ExternalFormField[size];
-        }
-    };
     @SerializedName("disregardURL")
-    private String disregardURL;
+    var disregardURL: String? = null
+
     @SerializedName("nextHudText")
-    private String nextHudText;
+    var nextHudText: String? = null
+
     @SerializedName("nextURL")
-    private String nextURL;
+    var nextURL: String? = null
+
     @SerializedName("value")
-    private String value;
-
-    public ExternalFormField() {
-        super();
+    var mValue: String? = null
+    constructor(parcel: Parcel) : super( parcel) {  // Call the parent class constructor
+        disregardURL = parcel.readString()
+        nextHudText = parcel.readString()
+        nextURL = parcel.readString()
+        mValue = parcel.readString()
     }
 
-    public ExternalFormField(Parcel in) {
-        super(in);
-        this.disregardURL = in.readString();
-        this.nextHudText = in.readString();
-        this.nextURL = in.readString();
-        this.value = in.readString();
+    // Secondary empty constructor (the default constructor)
+    constructor() : super() {
+        // Initialize any default values or leave it empty
     }
 
-    @Override
-    public String getValue() {
-        return value;
+    override fun getValue(): String? {
+        return mValue
     }
 
-    public String getDisregardURL() {
-        return disregardURL;
+    override fun writeToParcel(dest: Parcel, flags: Int) {
+        dest.writeInt(EXTERNAL)
+        super.writeToParcel(dest, flags)
+        dest.writeString(disregardURL)
+        dest.writeString(nextHudText)
+        dest.writeString(nextURL)
+        dest.writeString(mValue)
     }
 
-    public String getNextHudText() {
-        return nextHudText;
-    }
+    companion object CREATOR : Creator<ExternalFormField> {
+        override fun createFromParcel(parcel: Parcel): ExternalFormField {
+            parcel.readInt() // Read EXTERNAL
+            return ExternalFormField(parcel)
+        }
 
-    public String getNextURL() {
-        return nextURL;
-    }
-
-    @Override
-    public void writeToParcel(Parcel dest, int flags) {
-        dest.writeInt(EXTERNAL);
-        super.writeToParcel(dest, flags);
-        dest.writeString(disregardURL);
-        dest.writeString(nextHudText);
-        dest.writeString(nextURL);
-        dest.writeString(value);
+        override fun newArray(size: Int): Array<ExternalFormField?> {
+            return arrayOfNulls(size)
+        }
     }
 }

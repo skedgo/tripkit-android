@@ -43,9 +43,9 @@ class AddressFormFieldTest {
         assertEquals("address", actual.type)
         assertEquals("location", actual.id)
         assertEquals("Location", actual.title)
-        assertEquals(true, actual.isReadOnly)
+        assertEquals(true, actual.readOnly)
 
-        val address = actual.value
+        val address = actual.getValue()
         assertEquals("Meade St 3225, 80211 Denver", address?.address)
         assertEquals("Meade St 3225, 80211 Denver", address?.name)
         assertEquals(39.76256, address?.latitude)
@@ -75,7 +75,7 @@ class AddressFormFieldTest {
         // Verify writeParcelable and writeInt calls
         verify {
             parcel.writeInt(any())
-            parcel.writeParcelable(expected.value, 0)
+            parcel.writeParcelable(expected.getValue(), 0)
         }
 
         // Mock reading from Parcel
@@ -87,7 +87,7 @@ class AddressFormFieldTest {
 
         // Create the actual object from parcel
         val actual: AddressFormField = AddressFormField.CREATOR.createFromParcel(parcel)
-        val actualAddress: AddressFormField.Address? = actual.value
+        val actualAddress: AddressFormField.Address? = actual.getValue()
 
         // Perform assertions
         assertEquals("Latitude should be parcelled properly", 10.0, actualAddress?.latitude)

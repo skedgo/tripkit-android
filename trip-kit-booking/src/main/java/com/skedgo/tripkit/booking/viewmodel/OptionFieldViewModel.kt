@@ -25,7 +25,7 @@ class OptionFieldViewModel(private val optionField: OptionFormField) : TwoLineVi
     }
 
     fun getAllValues(): List<OptionFormField.OptionValue> {
-        return optionField.getAllValues()
+        return optionField.allValues
     }
 
     fun getSelectedIndex(): Int {
@@ -36,7 +36,7 @@ class OptionFieldViewModel(private val optionField: OptionFormField) : TwoLineVi
     }
 
     fun select(valueIndex: Int) {
-        val allValues = optionField.getAllValues()
+        val allValues = optionField.allValues
         if (allValues.isNullOrEmpty() || valueIndex < 0 || valueIndex >= allValues.size) {
             return
         }
@@ -49,20 +49,20 @@ class OptionFieldViewModel(private val optionField: OptionFormField) : TwoLineVi
 
     override fun getPrimaryText(): String? {
         val selectedValue = optionField.getValue()
-        return selectedValue?.getTitle()
+        return selectedValue?.title
     }
 
     override fun getSecondaryText(): String? {
         val selectedValue = optionField.getValue()
-        return selectedValue?.getValue()
+        return selectedValue?.value
     }
 
     private fun findSelectedIndex(): Int {
         val selectedValue = optionField.getValue()
-        val allValues = optionField.getAllValues()
+        val allValues = optionField.allValues
         if (selectedValue != null && allValues.isNotEmpty()) {
             for (i in allValues.indices) {
-                if (allValues[i].getValue() == selectedValue.getValue()) {
+                if (allValues[i].value == selectedValue.value) {
                     return i
                 }
             }

@@ -51,7 +51,7 @@ data class Param(
 
         fun create(linkFormField: LinkFormField): Param {
             val postBody = if (linkFormField.method == LinkFormField.METHOD_POST) InputForm() else null
-            return Param(linkFormField.value, linkFormField.method, null, postBody)
+            return Param(linkFormField.getValue(), linkFormField.method, null, postBody)
         }
 
         fun create(form: BookingForm): Param {

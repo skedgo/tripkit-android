@@ -1,189 +1,109 @@
-package com.skedgo.tripkit.booking;
+package com.skedgo.tripkit.booking
 
-import android.os.Parcel;
-import android.os.Parcelable;
+import android.os.Parcel
+import android.os.Parcelable
+import android.os.Parcelable.Creator
+import com.google.gson.annotations.SerializedName
+import java.io.Serializable
 
-import com.google.gson.annotations.SerializedName;
+abstract class FormField() : Parcelable, Serializable {
 
-import java.io.Serializable;
+    companion object {
+        const val STRING = 1
+        const val OPTION = 2
+        const val DATETIME = 3
+        const val STEPPER = 4
+        const val ADDRESS = 5
+        const val LINK = 6
+        const val BOOKINGFORM = 7
+        const val SWITCH = 8
+        const val PASSWORD = 9
+        const val EXTERNAL = 10
+        const val QRCODE = 11
 
-import androidx.annotation.Nullable;
+        const val ACCESS_TOKEN = "access_token"
+        const val EXPIRES_IN = "expires_in"
+        const val REFRESH_TOKEN = "refresh_token"
+        const val REDIRECT_URI = "redirectUri"
+        const val CLIENT_ID = "clientID"
+        const val CLIENT_SECRET = "clientSecret"
+        const val AUTH_URL = "authURL"
+        const val TOKEN_URL = "tokenURL"
+        const val SCOPE = "scope"
 
-public abstract class FormField implements Parcelable, Serializable {
-    public static final int STRING = 1;
-    public static final int OPTION = 2;
-    public static final int DATETIME = 3;
-    public static final int STEPPER = 4;
-    public static final int ADDRESS = 5;
-    public static final int LINK = 6;
-    public static final int BOOKINGFORM = 7;
-    public static final int SWITCH = 8;
-    public static final int PASSWORD = 9;
-    public static final int EXTERNAL = 10;
-    public static final int QRCODE = 11;
+        @JvmField
+        val CREATOR: Parcelable.Creator<FormField> = object : Parcelable.Creator<FormField> {
+            override fun createFromParcel(parcel: Parcel): FormField? {
+                return when (parcel.readInt()) {
+                    PASSWORD -> PasswordFormField(parcel)
+                    STRING -> StringFormField(parcel)
+                    OPTION -> OptionFormField(parcel)
+                    DATETIME -> DateTimeFormField(parcel)
+                    STEPPER -> StepperFormField(parcel)
+                    LINK -> LinkFormField(parcel)
+                    ADDRESS -> AddressFormField(parcel)
+                    BOOKINGFORM -> BookingForm(parcel)
+                    SWITCH -> SwitchFormField(parcel)
+                    QRCODE -> QrFormField(parcel)
+                    else -> null
+                }
+            }
 
-    public static final String ACCESS_TOKEN = "access_token";
-    public static final String EXPIRES_IN = "expires_in";
-    public static final String REFRESH_TOKEN = "refresh_token";
-    public static final String REDIRECT_URI = "redirectUri";
-    public static final String CLIENT_ID = "clientID";
-    public static final String CLIENT_SECRET = "clientSecret";
-    public static final String AUTH_URL = "authURL";
-    public static final String TOKEN_URL = "tokenURL";
-    public static final String SCOPE = "scope";
-
-    public static final Creator<FormField> CREATOR = new Creator<FormField>() {
-        @Override
-        public FormField createFromParcel(Parcel in) {
-            switch (in.readInt()) {
-                case PASSWORD:
-                    return new PasswordFormField(in);
-                case STRING:
-                    return new StringFormField(in);
-                case OPTION:
-                    return new OptionFormField(in);
-                case DATETIME:
-                    return new DateTimeFormField(in);
-                case STEPPER:
-                    return new StepperFormField(in);
-                case LINK:
-                    return new LinkFormField(in);
-                case ADDRESS:
-                    return new AddressFormField(in);
-                case BOOKINGFORM:
-                    return new BookingForm(in);
-                case SWITCH:
-                    return new SwitchFormField(in);
-                case QRCODE:
-                    return new QrFormField(in);
-                default:
-                    return null;
+            override fun newArray(size: Int): Array<FormField?> {
+                return arrayOfNulls(size)
             }
         }
-
-        @Override
-        public FormField[] newArray(int size) {
-            return new FormField[size];
-        }
-    };
+    }
 
     @SerializedName("id")
-    private String id;
+    var id: String? = null
+
     @SerializedName("title")
-    private String title;
+    var title: String? = null
+
     @SerializedName("subtitle")
-    private String subtitle;
+    var subtitle: String? = null
+
     @SerializedName("sidetitle")
-    private String sidetitle;
+    var sidetitle: String? = null
+
     @SerializedName("required")
-    private boolean required;
+    var required: Boolean = false
+
     @SerializedName("readOnly")
-    private boolean readOnly;
+    var readOnly: Boolean = false
+
     @SerializedName("hidden")
-    private boolean hidden;
+    var hidden: Boolean = false
+
     @SerializedName("type")
-    private String type;
+    var type: String? = null
 
-    protected FormField(Parcel in) {
-        this.id = in.readString();
-        this.title = in.readString();
-        this.subtitle = in.readString();
-        this.sidetitle = in.readString();
-        this.required = in.readInt() == 1;
-        this.readOnly = in.readInt() == 1;
-        this.hidden = in.readInt() == 1;
-        this.type = in.readString();
+    constructor(parcel: Parcel) : this() {
+        id = parcel.readString()
+        title = parcel.readString()
+        subtitle = parcel.readString()
+        sidetitle = parcel.readString()
+        required = parcel.readInt() == 1
+        readOnly = parcel.readInt() == 1
+        hidden = parcel.readInt() == 1
+        type = parcel.readString()
     }
 
-    protected FormField() {
-
+    override fun describeContents(): Int {
+        return 0
     }
 
-    @Override
-    public int describeContents() {
-        return 0;
+    override fun writeToParcel(dest: Parcel, flags: Int) {
+        dest.writeString(id)
+        dest.writeString(title)
+        dest.writeString(subtitle)
+        dest.writeString(sidetitle)
+        dest.writeInt(if (required) 1 else 0)
+        dest.writeInt(if (readOnly) 1 else 0)
+        dest.writeInt(if (hidden) 1 else 0)
+        dest.writeString(type)
     }
 
-    @Override
-    public void writeToParcel(Parcel dest, int flags) {
-        dest.writeString(id);
-        dest.writeString(title);
-        dest.writeString(subtitle);
-        dest.writeString(sidetitle);
-        dest.writeInt(required ? 1 : 0);
-        dest.writeInt(readOnly ? 1 : 0);
-        dest.writeInt(hidden ? 1 : 0);
-        dest.writeString(type);
-    }
-
-    @Nullable
-    public abstract Object getValue();
-
-    @Nullable
-    public String getTitle() {
-        return title;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
-    @Nullable
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
-    }
-
-    public String getType() {
-        return type;
-    }
-
-    public void setType(String type) {
-        this.type = type;
-    }
-
-    @Nullable
-    public String getSubtitle() {
-        return subtitle;
-    }
-
-    public void setSubtitle(String subtitle) {
-        this.subtitle = subtitle;
-    }
-
-    @Nullable
-    public String getSidetitle() {
-        return sidetitle;
-    }
-
-    public void setSidetitle(String sidetitle) {
-        this.sidetitle = sidetitle;
-    }
-
-    public boolean isRequired() {
-        return required;
-    }
-
-    public void setRequired(boolean required) {
-        this.required = required;
-    }
-
-    public boolean isReadOnly() {
-        return readOnly;
-    }
-
-    public void setReadOnly(boolean readOnly) {
-        this.readOnly = readOnly;
-    }
-
-    public boolean isHidden() {
-        return hidden;
-    }
-
-    public void setHidden(boolean hidden) {
-        this.hidden = hidden;
-    }
+    abstract fun getValue(): Any?
 }

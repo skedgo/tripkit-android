@@ -1,53 +1,47 @@
-package com.skedgo.tripkit.booking;
+package com.skedgo.tripkit.booking
 
-import android.os.Parcel;
+import android.os.Parcel
+import android.os.Parcelable.Creator
+import com.google.gson.annotations.SerializedName
+import com.skedgo.tripkit.booking.OptionFormField.OptionValue
 
-import com.google.gson.annotations.SerializedName;
-
-import androidx.annotation.Nullable;
-
-public class PasswordFormField extends FormField {
-
-    public static final Creator<PasswordFormField> CREATOR = new Creator<PasswordFormField>() {
-        @Override
-        public PasswordFormField createFromParcel(Parcel in) {
-            in.readInt();
-            return new PasswordFormField(in);
-        }
-
-        @Override
-        public PasswordFormField[] newArray(int size) {
-            return new PasswordFormField[size];
-        }
-    };
+class PasswordFormField : FormField {
 
     @SerializedName("value")
-    private String value;
+    var mValue: String? = null
 
-    public PasswordFormField(Parcel in) {
-        super(in);
-        this.value = in.readString();
+    constructor(parcel: Parcel) : super( parcel) {  // Call the parent class constructor
+        mValue = parcel.readString()
     }
 
-    public PasswordFormField() {
-        super();
+    // Secondary empty constructor (the default constructor)
+    constructor() : super() {
+        // Initialize any default values or leave it empty
     }
 
-    @Override
-    public void writeToParcel(Parcel dest, int flags) {
-        dest.writeInt(PASSWORD);
-        super.writeToParcel(dest, flags);
-        dest.writeString(value);
+    override fun writeToParcel(dest: Parcel, flags: Int) {
+        dest.writeInt(PASSWORD)
+        super.writeToParcel(dest, flags)
+        dest.writeString(mValue)
     }
 
-    @Nullable
-    public String getValue() {
-        return value;
+    override fun getValue(): String? {
+        return mValue
     }
 
-    public void setValue(String value) {
-        this.value = value;
+    fun setValue(value: String) {
+        this.mValue = value
     }
 
+    companion object CREATOR : Creator<PasswordFormField> {
+        override fun createFromParcel(parcel: Parcel): PasswordFormField {
+            parcel.readInt() // Read PASSWORD type
+            return PasswordFormField(parcel)
+        }
+
+        override fun newArray(size: Int): Array<PasswordFormField?> {
+            return arrayOfNulls(size)
+        }
+    }
 }
 

@@ -1,64 +1,59 @@
-package com.skedgo.tripkit.booking;
+package com.skedgo.tripkit.booking
 
-import android.os.Parcel;
+import android.os.Parcel
+import android.os.Parcelable
+import android.os.Parcelable.Creator
+import com.google.gson.annotations.SerializedName
 
-import com.google.gson.annotations.SerializedName;
+class LinkFormField : FormField {
 
-public class LinkFormField extends FormField {
-    public static final String METHOD_GET = "get";
-    public static final String METHOD_POST = "post";
-    public static final String METHOD_REFRESH = "refresh";
-    public static final String METHOD_EXTERNAL = "external";
+    companion object {
+        const val METHOD_GET = "get"
+        const val METHOD_POST = "post"
+        const val METHOD_REFRESH = "refresh"
+        const val METHOD_EXTERNAL = "external"
 
-    public static final Creator<LinkFormField> CREATOR = new Creator<LinkFormField>() {
-        @Override
-        public LinkFormField createFromParcel(Parcel in) {
-            in.readInt();
-            return new LinkFormField(in);
+        @JvmField
+        val CREATOR: Parcelable.Creator<LinkFormField> = object : Parcelable.Creator<LinkFormField> {
+            override fun createFromParcel(parcel: Parcel): LinkFormField {
+                parcel.readInt() // Read LINK type
+                return LinkFormField(parcel)
+            }
+
+            override fun newArray(size: Int): Array<LinkFormField?> {
+                return arrayOfNulls(size)
+            }
         }
+    }
 
-        @Override
-        public LinkFormField[] newArray(int size) {
-            return new LinkFormField[size];
-        }
-    };
     @SerializedName("value")
-    private String link;
+    var link: String? = null
+
     @SerializedName("method")
-    private String method;
+    var method: String? = null
 
-    public LinkFormField() {
-        super();
+    constructor(parcel: Parcel) : super( parcel) {  // Call the parent class constructor
+        link = parcel.readString()
+        method = parcel.readString()
     }
 
-    public LinkFormField(Parcel in) {
-        super(in);
-        this.link = in.readString();
-        this.method = in.readString();
+    // Secondary empty constructor (the default constructor)
+    constructor() : super() {
+        // Initialize any default values or leave it empty
     }
 
-    @Override
-    public String getValue() {
-        return link;
+    override fun getValue(): String? {
+        return link
     }
 
-    public void setValue(String link) {
-        this.link = link;
+    fun setValue(link: String) {
+        this.link = link
     }
 
-    public String getMethod() {
-        return method;
-    }
-
-    public void setMethod(String method) {
-        this.method = method;
-    }
-
-    @Override
-    public void writeToParcel(Parcel dest, int flags) {
-        dest.writeInt(LINK);
-        super.writeToParcel(dest, flags);
-        dest.writeString(link);
-        dest.writeString(method);
+    override fun writeToParcel(dest: Parcel, flags: Int) {
+        dest.writeInt(LINK)
+        super.writeToParcel(dest, flags)
+        dest.writeString(link)
+        dest.writeString(method)
     }
 }

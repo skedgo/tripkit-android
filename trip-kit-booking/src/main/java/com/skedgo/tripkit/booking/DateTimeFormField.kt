@@ -1,48 +1,45 @@
-package com.skedgo.tripkit.booking;
+package com.skedgo.tripkit.booking
 
-import android.os.Parcel;
+import android.os.Parcel
+import android.os.Parcelable
+import com.google.gson.annotations.SerializedName
 
-import com.google.gson.annotations.SerializedName;
+class DateTimeFormField : FormField {
 
-public class DateTimeFormField extends FormField {
-
-    public static final Creator<DateTimeFormField> CREATOR = new Creator<DateTimeFormField>() {
-        @Override
-        public DateTimeFormField createFromParcel(Parcel in) {
-            in.readInt();
-            return new DateTimeFormField(in);
-        }
-
-        @Override
-        public DateTimeFormField[] newArray(int size) {
-            return new DateTimeFormField[size];
-        }
-    };
     @SerializedName("value")
-    private long value;
+    var mValue: Long = 0
 
-    public DateTimeFormField() {
-        super();
+    constructor(parcel: Parcel) : super( parcel) {  // Call the parent class constructor
+        mValue = parcel.readLong()
     }
 
-    public DateTimeFormField(Parcel in) {
-        super(in);
-        value = in.readLong();
+    // Secondary empty constructor (the default constructor)
+    constructor() : super() {
+        // Initialize any default values or leave it empty
     }
 
-    @Override
-    public Long getValue() {
-        return value;
+    override fun getValue(): Long {
+        return mValue
     }
 
-    public void setValue(long value) {
-        this.value = value;
+    fun setValue(value: Long) {
+        this.mValue = value
     }
 
-    @Override
-    public void writeToParcel(Parcel dest, int flags) {
-        dest.writeInt(DATETIME);
-        super.writeToParcel(dest, flags);
-        dest.writeLong(value);
+    override fun writeToParcel(dest: Parcel, flags: Int) {
+        dest.writeInt(DATETIME)
+        super.writeToParcel(dest, flags)
+        dest.writeLong(mValue)
+    }
+
+    companion object CREATOR : Parcelable.Creator<DateTimeFormField> {
+        override fun createFromParcel(parcel: Parcel): DateTimeFormField {
+            parcel.readInt()  // Read DATETIME
+            return DateTimeFormField(parcel)
+        }
+
+        override fun newArray(size: Int): Array<DateTimeFormField?> {
+            return arrayOfNulls(size)
+        }
     }
 }

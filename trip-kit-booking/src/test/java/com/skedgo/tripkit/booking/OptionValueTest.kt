@@ -1,52 +1,57 @@
-package com.skedgo.tripkit.booking;
+package com.skedgo.tripkit.booking
 
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
+import com.google.gson.Gson
+import com.google.gson.GsonBuilder
+import com.skedgo.tripkit.booking.OptionFormField
+import org.assertj.core.api.Java6Assertions
+import org.junit.Assert.assertEquals
+import org.junit.Test
+import org.junit.runner.RunWith
+import org.robolectric.RobolectricTestRunner
 
-import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.robolectric.RobolectricTestRunner;
+@RunWith(RobolectricTestRunner::class)
+class OptionValueTest {
 
-import java.util.List;
-
-import static org.assertj.core.api.Java6Assertions.assertThat;
-
-@RunWith(RobolectricTestRunner.class)
-public class OptionValueTest {
     @Test
-    public void Parse() {
-        Gson gson = new GsonBuilder().serializeNulls().create();
-        String testParse = "{\n" +
-            "          \"type\": \"OPTION\",\n" +
-            "          \"title\": \"Account\",\n" +
-            "          \"id\": \"account\",\n" +
-            "          \"value\": {\n" +
-            "             \"title\": \"100 - Test Account 1\",\n" +
-            "             \"value\": \"100 - Test Account 1\" \n" +
-            "           },\n" +
-            "          \"allValues\": [\n" +
-            "            {\n" +
-            "             \"title\": \"100 - Test Account 1\",\n" +
-            "             \"value\": \"100 - Test Account 1\" \n" +
-            "             },\n" +
-            "            {\n" +
-            "             \"title\": \"200 - Test Account 1\",\n" +
-            "             \"value\": \"200 - Test Account 2\" \n" +
-            "           }\n" +
-            "          ]\n" +
-            "        }";
-        OptionFormField actual = gson.fromJson(testParse, OptionFormField.class);
-        assertThat(actual.getType()).isEqualTo("OPTION");
-        assertThat(actual.getTitle()).isEqualTo("Account");
-        assertThat(actual.getId()).isEqualTo("account");
-        assertThat(actual.getValue().getTitle()).isEqualTo("100 - Test Account 1");
-        assertThat(actual.getValue().getValue()).isEqualTo("100 - Test Account 1");
+    fun parseTest() {
+        val gson: Gson = GsonBuilder().serializeNulls().create()
 
-        List<OptionFormField.OptionValue> allValues = actual.getAllValues();
-        assertThat(allValues).hasSize(2);
-        assertThat(allValues.get(0).getTitle()).isEqualTo("100 - Test Account 1");
-        assertThat(allValues.get(0).getValue()).isEqualTo("100 - Test Account 1");
-        assertThat(allValues.get(1).getTitle()).isEqualTo("200 - Test Account 1");
-        assertThat(allValues.get(1).getValue()).isEqualTo("200 - Test Account 2");
+        val testParse = """
+            {
+              "type": "OPTION",
+              "title": "Account",
+              "id": "account",
+              "value": {
+                "title": "100 - Test Account 1",
+                "value": "100 - Test Account 1"
+              },
+              "allValues": [
+                {
+                  "title": "100 - Test Account 1",
+                  "value": "100 - Test Account 1"
+                },
+                {
+                  "title": "200 - Test Account 1",
+                  "value": "200 - Test Account 2"
+                }
+              ]
+            }
+        """.trimIndent()
+
+        val actual: OptionFormField = gson.fromJson(testParse, OptionFormField::class.java)
+
+        // Assertions
+        assertEquals("OPTION", actual.type)
+        assertEquals("Account", actual.title)
+        assertEquals("account", actual.id)
+        assertEquals("100 - Test Account 1", actual.getValue()?.title)
+        assertEquals("100 - Test Account 1", actual.getValue()?.value)
+
+        val allValues = actual.allValues
+        assertEquals(2, allValues.size)
+        assertEquals("100 - Test Account 1", allValues[0].title)
+        assertEquals("100 - Test Account 1", allValues[0].value)
+        assertEquals("200 - Test Account 1", allValues[1].title)
+        assertEquals("200 - Test Account 2", allValues[1].value)
     }
 }

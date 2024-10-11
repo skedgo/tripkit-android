@@ -1,13 +1,8 @@
-package com.skedgo.tripkit.booking;
+package com.skedgo.tripkit.booking
 
-import java.util.List;
+import io.reactivex.Observable
 
-import androidx.annotation.NonNull;
-import io.reactivex.Observable;
-
-@Deprecated
-public interface QuickBookingService {
-
-    Observable<List<QuickBooking>> fetchQuickBookingsAsync(@NonNull String url);
-
+@Deprecated("")
+interface QuickBookingService {
+    fun fetchQuickBookingsAsync(url: String): Observable<List<QuickBooking>>
 }
