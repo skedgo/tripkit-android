@@ -1,37 +1,87 @@
-name: Android CI
+name: CI
 
 on:
-  push:
-    branches: [ disable-temporarily ]
   pull_request:
-    branches: [ disable-temporarily ]
+    branches:
+      - develop
+      - feature/**
 
 jobs:
   build:
-    name: Build and Test
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-latest
+
     steps:
-      - name: Checkout Repository
-        uses: actions/checkout@v4
+      - name: Checkout code
+        uses: actions/checkout@v3
+        with:
+          submodules: true  # This ensures submodules are also checked out
+
+      - name: Update submodules
+        run: git submodule update --init --recursive
 
       - name: Set up JDK 17
         uses: actions/setup-java@v3
         with:
-          distribution: 'zulu'
           java-version: '17'
+          distribution: "temurin"
 
-      - name: Grant execute permission for Gradle wrapper
-        run: chmod +x gradlew
-
-      - name: Cache Gradle dependencies
+      - name: Cache Gradle packages
         uses: actions/cache@v3
         with:
-          path: |
-            ~/.gradle/caches
-            ~/.gradle/wrapper
-            ~/.android/build-cache
-          key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle*') }}
+          path: ~/.gradle/caches
+          key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle*', '**/gradle-wrapper.properties') }}
           restore-keys: |
             ${{ runner.os }}-gradle-
-      - name: Run tests
-        run: ./gradlew test
+
+      - name: Grant execute permission for gradlew
+        run: chmod +x gradlew
+
+      - name: Run Unit Tests
+        id: unit_tests
+        run: ./gradlew test --continue --no-rebuild
+
+      - name: Archive test results
+        if: always()
+        uses: actions/upload-artifact@v3
+        with:
+          name: test-results
+          path: build/test-results/test
+
+      - name: Comment on Pull Request for Unit Test Failures
+        if: failure() && github.event_name == 'pull_request' && steps.unit_tests.outcome == 'failure'
+        uses: thollander/actions-comment-pull-request@v2.5.0
+        with:
+          message: |
+            :x: Unit tests failed!
+            
+            @${{ github.event.pull_request.assignee.login || github.event.pull_request.user.login }}, please review and fix the issues in the unit tests. Let us know if you need any help.
+
+      - name: Comment on Pull Request for General Workflow Failures
+        if: failure() && github.event_name == 'pull_request' && steps.unit_tests.outcome != 'failure'
+        uses: thollander/actions-comment-pull-request@v2.5.0
+        with:
+          message: |
+            :x: Workflow execution failed!
+            
+            @${{ github.event.pull_request.assignee.login || github.event.pull_request.user.login }}, there was an issue with the workflow execution. Please check the logs and resolve the issue.
+
+      - name: Comment on Pull Request (With Reviewers)
+        if: success() && github.event_name == 'pull_request'
+        uses: thollander/actions-comment-pull-request@v2.5.0
+        with:
+          message: |
+            :white_check_mark: Unit tests passed successfully!
+            
+            Please ensure the code is reviewed before proceeding with the merge.
+
+#      - name: Comment on Pull Request
+#        run: |
+#          if [[ "${{ github.event.pull_request.requested_reviewers[2].login }}" != "" ]]; then
+#            REVIEWERS="@${{ github.event.pull_request.requested_reviewers[0].login }}, @${{ github.event.pull_request.requested_reviewers[1].login }}, @${{ github.event.pull_request.requested_reviewers[2].login }}"
+#          elif [[ "${{ github.event.pull_request.requested_reviewers[1].login }}" != "" ]]; then
+#            REVIEWERS="@${{ github.event.pull_request.requested_reviewers[0].login }}, @${{ github.event.pull_request.requested_reviewers[1].login }}"
+#          else
+#            REVIEWERS="@${{ github.event.pull_request.requested_reviewers[0].login || github.event.pull_request.user.login }}"
+#          fi
+#
+#          echo "The code is ready for review." | gh pr comment ${{ github.event.pull_request.number }} --body "${REVIEWERS}, the tests have passed. The code is ready for review."
