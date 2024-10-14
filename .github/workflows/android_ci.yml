@@ -36,12 +36,9 @@ jobs:
       - name: Grant execute permission for gradlew
         run: chmod +x gradlew
 
-      - name: Build with Gradle
-        run: ./gradlew build
-
-      - name: Run unit tests
+      - name: Run Unit Tests
         id: unit_tests
-        run: ./gradlew test
+        run: ./gradlew test --continue --no-rebuild
 
       - name: Archive test results
         if: always()
