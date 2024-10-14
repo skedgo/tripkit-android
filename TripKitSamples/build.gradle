@@ -29,6 +29,12 @@ android {
         }
     }
 
+    buildTypes {
+        staging {
+            debuggable true
+        }
+    }
+
     lintOptions { abortOnError false }
     compileOptions {
         coreLibraryDesugaringEnabled true
