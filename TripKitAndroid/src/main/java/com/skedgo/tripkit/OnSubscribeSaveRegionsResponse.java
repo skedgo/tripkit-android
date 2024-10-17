@@ -69,13 +69,13 @@ final class OnSubscribeSaveRegionsResponse implements ObservableOnSubscribe<Void
 
     ContentValues toRegionValues(Region region) {
         final ContentValues values = new ContentValues(1);
-        values.put(Tables.FIELD_JSON.getName(), gson.toJson(region));
+        values.put(Tables.FIELD_JSON.name, gson.toJson(region));
         return values;
     }
 
     ContentValues toTransportModeValues(TransportMode mode) {
         final ContentValues values = new ContentValues(1);
-        values.put(Tables.FIELD_JSON.getName(), gson.toJson(mode));
+        values.put(Tables.FIELD_JSON.name, gson.toJson(mode));
         return values;
     }
 

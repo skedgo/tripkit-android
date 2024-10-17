@@ -25,7 +25,7 @@ class ExternalViewModel @Inject internal constructor() : DisposableViewModel() {
 
     fun handleArgs(args: Bundle) {
         externalFormField = args.getParcelable<ExternalFormField>(KEY_EXTERNAL_FORM)
-        externalFormField?.let { url.set(it.value) }
+        externalFormField?.let { url.set(it.mValue) }
     }
 
     fun webViewClient(): WebViewClient {
@@ -36,8 +36,8 @@ class ExternalViewModel @Inject internal constructor() : DisposableViewModel() {
 
             override fun onPageFinished(view: WebView, url: String) {
                 with(externalFormField!!) {
-                    if (url.startsWith(disregardURL) && value!!.startsWith(disregardURL)) {
-                        publishSubjectNextUrl.onNext(nextURL)
+                    if (url.startsWith(disregardURL.orEmpty()) && mValue!!.startsWith(disregardURL.orEmpty())) {
+                        publishSubjectNextUrl.onNext(nextURL.orEmpty())
                     } else {
                         showWebView.set(true)
                     }
@@ -49,8 +49,8 @@ class ExternalViewModel @Inject internal constructor() : DisposableViewModel() {
     @VisibleForTesting
     fun handleCallback(webUrl: String): Boolean {
         return when {
-            webUrl.startsWith(externalFormField!!.disregardURL) -> {
-                publishSubjectNextUrl.onNext(externalFormField!!.nextURL)
+            webUrl.startsWith(externalFormField!!.disregardURL.orEmpty()) -> {
+                publishSubjectNextUrl.onNext(externalFormField!!.nextURL.orEmpty())
                 false
             }
             else -> {

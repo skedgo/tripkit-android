@@ -5,17 +5,17 @@ import com.skedgo.tripkit.booking.StringFormField
 
 class FieldStringViewModel(val stringFormField: StringFormField) : DisposableViewModel() {
 
-    val isHidden get() = stringFormField.isHidden
-    val isReadOnly get() = stringFormField.isReadOnly
-    val showValue get() = stringFormField.title != stringFormField.value && stringFormField.isReadOnly
+    val isHidden get() = stringFormField.hidden
+    val isReadOnly get() = stringFormField.readOnly
+    val showValue get() = stringFormField.title != stringFormField.mValue && stringFormField.readOnly
 
     val title get() = stringFormField.title ?: ""
     val sideTitle get() = stringFormField.sidetitle ?: ""
-    val value get() = stringFormField.value ?: ""
-    val editText get() = stringFormField.value ?: ""
+    val value get() = stringFormField.mValue ?: ""
+    val editText get() = stringFormField.mValue ?: ""
 
     fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {
-        stringFormField.value = s.toString()
+        stringFormField.mValue = s.toString()
     }
 
     fun inputType(): Int {
