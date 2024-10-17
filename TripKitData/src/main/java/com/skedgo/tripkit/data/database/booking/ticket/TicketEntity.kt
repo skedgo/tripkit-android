@@ -16,4 +16,5 @@ data class TicketEntity(
     val status: String?,
     val qrCode: String? = null,
     val ticketActionsJson: String?, // Serialized TicketAction
+    val userId: String? = null
 )

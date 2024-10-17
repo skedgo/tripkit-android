@@ -46,15 +46,17 @@ class QuickBookingRepository @Inject constructor(
         emit(Result.error(e.message ?: "Unknown error"))
     }.flowOn(Dispatchers.IO)
 
-    fun getTicketsRx(): Single<List<Ticket>> {
+    fun getTicketsRx(userId: String?): Single<List<Ticket>> {
         return quickBookingService.getTickets(true)
             .flatMap { tickets ->
                 if (tickets.isNotEmpty()) {
                     // insertTicketsRx() saves all tickets and returns Completable
-                    ticketDao.insertTicketsRx(tickets.map { it.toEntity() })
+                    ticketDao.insertTicketsRx(tickets.map { it.toEntity(userId) })
                         .andThen(Single.just(tickets))
                 } else {
-                    Single.just(tickets)
+                    ticketDao.getTicketsByUserIdRx(userId).toSingle().flatMap {
+                        Single.just(it.map { it.toTicket() })
+                    }
                 }
             }
     }

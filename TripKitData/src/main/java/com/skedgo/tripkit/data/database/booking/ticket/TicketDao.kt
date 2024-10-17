@@ -34,4 +34,7 @@ interface TicketDao {
 
     @Query("SELECT * FROM tickets")
     fun getAllTicketsRx(): Single<List<TicketEntity>>
+
+    @Query("SELECT * FROM tickets WHERE userId = :userId")
+    fun getTicketsByUserIdRx(userId: String?): Maybe<List<TicketEntity>>
 }
