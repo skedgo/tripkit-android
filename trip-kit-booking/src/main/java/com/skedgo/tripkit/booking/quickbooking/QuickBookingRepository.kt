@@ -54,10 +54,15 @@ class QuickBookingRepository @Inject constructor(
                     ticketDao.insertTicketsRx(tickets.map { it.toEntity(userId) })
                         .andThen(Single.just(tickets))
                 } else {
-                    ticketDao.getTicketsByUserIdRx(userId).toSingle().flatMap {
-                        Single.just(it.map { it.toTicket() })
-                    }
+                    ticketDao.getTicketsByUserIdRx(userId)
+                        .toSingle()
+                        .flatMap { Single.just(it.map { it.toTicket() }) }
                 }
+            }.onErrorResumeNext { _: Throwable ->
+                // Fallback to local data when network call fails
+                ticketDao.getTicketsByUserIdRx(userId)
+                    .toSingle()
+                    .flatMap { storedTickets -> Single.just(storedTickets.map { it.toTicket() }) }
             }
     }
 }
