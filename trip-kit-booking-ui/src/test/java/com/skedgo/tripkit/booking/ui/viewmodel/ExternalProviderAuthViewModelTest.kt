@@ -26,8 +26,8 @@ class ExternalProviderAuthViewModelTest {
         val args = Bundle()
 
         val bookingForm = mock<BookingForm>()
-        whenever(bookingForm.isOAuthForm).thenReturn(true)
-        whenever(bookingForm.oAuthLink).thenReturn(Uri.parse("http://url"))
+        whenever(bookingForm.isOAuthForm()).thenReturn(true)
+        whenever(bookingForm.getOAuthLink()).thenReturn(Uri.parse("http://url"))
 
         args.putParcelable(KEY_FORM, bookingForm)
 
@@ -42,7 +42,7 @@ class ExternalProviderAuthViewModelTest {
         val args = Bundle()
 
         val bookingForm = mock<BookingForm>()
-        whenever(bookingForm.isOAuthForm).thenReturn(false)
+        whenever(bookingForm.isOAuthForm()).thenReturn(false)
         whenever(bookingForm.externalAction()).thenReturn("http://external_url")
 
         args.putParcelable(KEY_FORM, bookingForm)
@@ -118,8 +118,8 @@ class ExternalProviderAuthViewModelTest {
     @Test
     fun shouldHandleBookingFormAuth() {
         val bookingForm = mock<BookingForm>()
-        whenever(bookingForm.isOAuthForm).thenReturn(true)
-        whenever(bookingForm.oAuthLink).thenReturn(Uri.parse("http://url"))
+        whenever(bookingForm.isOAuthForm()).thenReturn(true)
+        whenever(bookingForm.getOAuthLink()).thenReturn(Uri.parse("http://url"))
 
         val subscriber = viewModel.handledForm(bookingForm).test()
 
@@ -148,8 +148,8 @@ class ExternalProviderAuthViewModelTest {
     @Test
     fun shouldHandleBookingFormAuthNoLink() {
         val bookingForm = mock<BookingForm>()
-        whenever(bookingForm.isOAuthForm).thenReturn(false)
-        whenever(bookingForm.oAuthLink).thenReturn(null)
+        whenever(bookingForm.isOAuthForm()).thenReturn(false)
+        whenever(bookingForm.getOAuthLink()).thenReturn(null)
 
         val subscriber = viewModel.handledForm(bookingForm).test()
 
@@ -165,8 +165,8 @@ class ExternalProviderAuthViewModelTest {
     @Test
     fun shouldHandleBookingFormAuthLink() {
         val bookingForm = mock<BookingForm>()
-        whenever(bookingForm.isOAuthForm).thenReturn(true)
-        whenever(bookingForm.oAuthLink).thenReturn(Uri.parse("http://url"))
+        whenever(bookingForm.isOAuthForm()).thenReturn(true)
+        whenever(bookingForm.getOAuthLink()).thenReturn(Uri.parse("http://url"))
 
         val subscriber = viewModel.handledForm(bookingForm).test()
 
