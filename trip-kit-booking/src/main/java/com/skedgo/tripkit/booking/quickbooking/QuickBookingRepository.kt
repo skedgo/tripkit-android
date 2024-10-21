@@ -11,6 +11,9 @@ import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.flowOn
 import kotlinx.coroutines.flow.onStart
+import java.io.IOException
+import java.net.SocketTimeoutException
+import java.net.UnknownHostException
 import javax.inject.Inject
 
 class QuickBookingRepository @Inject constructor(
@@ -58,11 +61,15 @@ class QuickBookingRepository @Inject constructor(
                         .toSingle()
                         .flatMap { Single.just(it.map { it.toTicket() }) }
                 }
-            }.onErrorResumeNext { _: Throwable ->
-                // Fallback to local data when network call fails
-                ticketDao.getTicketsByUserIdRx(userId)
-                    .toSingle()
-                    .flatMap { storedTickets -> Single.just(storedTickets.map { it.toTicket() }) }
+            }.onErrorResumeNext { e : Throwable ->
+                if(e is UnknownHostException || e is IOException || e is SocketTimeoutException) {
+                    // Fallback to local data when network call fails
+                    ticketDao.getTicketsByUserIdRx(userId)
+                        .toSingle()
+                        .flatMap { storedTickets -> Single.just(storedTickets.map { it.toTicket() }) }
+                } else {
+                    Single.error(e)
+                }
             }
     }
 }
