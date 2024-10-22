@@ -53,9 +53,12 @@ class QuickBookingRepository @Inject constructor(
         return quickBookingService.getTickets(true)
             .flatMap { tickets ->
                 if (tickets.isNotEmpty()) {
-                    // insertTicketsRx() saves all tickets and returns Completable
-                    ticketDao.insertTicketsRx(tickets.map { it.toEntity(userId) })
-                        .andThen(Single.just(tickets))
+                    // delete first existing tickets
+                    ticketDao.deleteUserTicketsRx(userId).andThen(
+                        // insertTicketsRx() saves all tickets and returns Completable
+                        ticketDao.insertTicketsRx(tickets.map { it.toEntity(userId) })
+                            .andThen(Single.just(tickets))
+                    )
                 } else {
                     ticketDao.getTicketsByUserIdRx(userId)
                         .toSingle()
