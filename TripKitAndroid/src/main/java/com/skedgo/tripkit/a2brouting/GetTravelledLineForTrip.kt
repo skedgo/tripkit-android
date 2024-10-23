@@ -54,7 +54,8 @@ class GetTravelledLineForTrip @Inject constructor() {
                                     TripKitLatLng(start.latitude, start.longitude),
                                     TripKitLatLng(end.latitude, end.longitude),
                                     color,
-                                    com.skedgo.tripkit.LineSegment.Tag.SHAPE.toString()
+                                    com.skedgo.tripkit.LineSegment.Tag.SHAPE.toString(),
+                                    segment.trip?.uuid
                                 )
                             }
                     }
@@ -77,7 +78,8 @@ class GetTravelledLineForTrip @Inject constructor() {
                                     TripKitLatLng(start.latitude, start.longitude),
                                     TripKitLatLng(end.latitude, end.longitude),
                                     lineColor,
-                                    com.skedgo.tripkit.LineSegment.Tag.STREET.toString()
+                                    com.skedgo.tripkit.LineSegment.Tag.STREET.toString(),
+                                    segment.trip?.uuid
                                 )
                             }
                     }
@@ -91,7 +93,8 @@ class GetTravelledLineForTrip @Inject constructor() {
                                 TripKitLatLng(from.lat, from.lon),
                                 TripKitLatLng(to.lat, to.lon),
                                 color,
-                                ""
+                                "",
+                                segment.trip?.uuid
                             )
                         )
                     )
