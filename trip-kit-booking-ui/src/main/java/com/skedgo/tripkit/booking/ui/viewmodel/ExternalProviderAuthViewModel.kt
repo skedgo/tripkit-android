@@ -90,7 +90,7 @@ class ExternalProviderAuthViewModel @Inject internal constructor() : DisposableV
         return Observable.create { subscriber ->
             when {
                 // if it's external action, keep loading the web view
-                form?.isOAuthForm ?: false || form?.externalAction() != null -> handleArgs(form!!)
+                form?.isOAuthForm() ?: false || form?.externalAction() != null -> handleArgs(form!!)
                 else -> {
                     val data = Intent()
                     // Form can be null, indicating booking end (auth case).
@@ -106,7 +106,7 @@ class ExternalProviderAuthViewModel @Inject internal constructor() : DisposableV
         this.bookingForm = form
         bookingForm?.let {
             when {
-                it.isOAuthForm && it.oAuthLink != null -> url.set(it.oAuthLink.toString())
+                it.isOAuthForm() && it.getOAuthLink() != null -> url.set(it.getOAuthLink().toString())
                 it.externalAction() != null -> url.set(it.externalAction())
             }
         }
