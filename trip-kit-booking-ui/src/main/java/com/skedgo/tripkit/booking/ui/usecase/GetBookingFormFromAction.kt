@@ -12,7 +12,7 @@ open class GetBookingFormFromAction @Inject constructor(
 
     open fun execute(bookingForm: BookingForm): Observable<BookingForm> {
         return bookingService.postFormAsync(
-            bookingForm.action!!.url,
+            bookingForm.action?.url.orEmpty(),
             InputForm.from(bookingForm.form)
         ).toObservable()
     }
