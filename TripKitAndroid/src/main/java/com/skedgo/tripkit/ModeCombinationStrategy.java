@@ -21,7 +21,8 @@ final class ModeCombinationStrategy implements
     @Override
     public List<Set<String>> apply(
         @NonNull Map<String, TransportMode> modeMap,
-        @NonNull List<String> modeIds) {
+        @NonNull List<String> modeIds
+    ) {
         final Set<String> seenModeIds = new HashSet<>();
         final List<Set<String>> modeIdSets = new LinkedList<>();
 
