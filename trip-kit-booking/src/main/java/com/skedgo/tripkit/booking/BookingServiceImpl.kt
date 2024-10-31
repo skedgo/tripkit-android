@@ -53,6 +53,6 @@ class BookingServiceImpl(private val bookingApi: BookingApi, private val gson: G
     }
 
     fun asBookingError(bookingErrorJson: String): BookingError {
-        return gson.fromJson(bookingErrorJson, BookingError::class.java)
+        return BookingError.fromJson(bookingErrorJson)
     }
 }

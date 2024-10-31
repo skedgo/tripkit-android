@@ -63,6 +63,12 @@ dependencies {
     testImplementation libs.robolectric
     testImplementation libs.mockitoKotlin
     testImplementation libs.kluent
+    testImplementation libs.mockk
+    testImplementation libs.androidxJUnitExtTesting
+    testImplementation libs.archCoreTesting
+    testImplementation libs.androidxTesting
+    testImplementation libs.coroutinesTest
+    testImplementation libs.bindingCollectionAdapter
     testImplementation 'com.github.thuytrinh:MockWebServerRule:v1.0'
 
     debugImplementation project(':TripKitAndroid')

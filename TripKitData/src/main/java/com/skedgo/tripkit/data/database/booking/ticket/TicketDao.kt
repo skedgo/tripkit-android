@@ -29,9 +29,15 @@ interface TicketDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertTicketsRx(tickets: List<TicketEntity>): Completable
 
+    @Query("DELETE FROM tickets WHERE userId = :userId")
+    fun deleteUserTicketsRx(userId: String?): Completable
+
     @Query("SELECT * FROM tickets WHERE id = :id")
     fun getTicketByIdRx(id: String): Maybe<TicketEntity>
 
     @Query("SELECT * FROM tickets")
     fun getAllTicketsRx(): Single<List<TicketEntity>>
+
+    @Query("SELECT * FROM tickets WHERE userId = :userId")
+    fun getTicketsByUserIdRx(userId: String?): Maybe<List<TicketEntity>>
 }

@@ -11,6 +11,9 @@ import io.reactivex.subjects.BehaviorSubject;
  * Represents a mutable property that can be observed via {@link Observable}.
  * <p>
  * Use {@link BehaviorSubject} instead.
+ *
+ * Update 10-04-24 - Updated the classes that uses this to use BehaviorSubject instead.
+ * This can now be removed on the future updates
  */
 @Deprecated
 public abstract class Var<T> implements Consumer<T> {

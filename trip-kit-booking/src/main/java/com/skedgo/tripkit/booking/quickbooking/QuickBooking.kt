@@ -164,7 +164,7 @@ data class Ticket(
             )
         }
 
-        fun Ticket.toEntity(): TicketEntity {
+        fun Ticket.toEntity(userId: String? = null): TicketEntity {
             val gson = Gson()
             return TicketEntity(
                 id = id,
@@ -177,7 +177,8 @@ data class Ticket(
                 fareJson = gson.toJson(fare),
                 status = status,
                 ticketActionsJson = if (actions.isNullOrEmpty()) "" else gson.toJson(actions),
-                qrCode = qrCode
+                qrCode = qrCode,
+                userId = userId
             )
         }
     }
