@@ -45,7 +45,7 @@ jobs:
         uses: actions/upload-artifact@v3
         with:
           name: test-results
-          path: build/test-results/test
+          path: ./*/build/test-results/**/test*UnitTest
 
       - name: Comment on Pull Request for Unit Test Failures
         if: failure() && github.event_name == 'pull_request' && steps.unit_tests.outcome == 'failure'
