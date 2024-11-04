@@ -4,6 +4,8 @@ import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
+import androidx.room.migration.Migration
+import androidx.sqlite.db.SupportSQLiteDatabase
 import com.skedgo.tripkit.data.database.booking.ticket.TicketDao
 import com.skedgo.tripkit.data.database.booking.ticket.TicketEntity
 import com.skedgo.tripkit.data.database.locations.bikepods.BikePodDao
@@ -50,7 +52,7 @@ import skedgo.tripgo.data.timetables.ParentStopEntity
         ServiceAlertsEntity::class,
         TicketEntity::class,
         FacilityLocationEntity::class,
-    ], version = 7
+    ], version = 8
 )
 abstract class TripKitDatabase : RoomDatabase() {
     abstract fun carParkDao(): CarParkDao
@@ -70,9 +72,16 @@ abstract class TripKitDatabase : RoomDatabase() {
             return Room.databaseBuilder(
                 context.applicationContext,
                 TripKitDatabase::class.java, "tripkit.db"
-            )
+            ).addMigrations(MIGRATION_7_8)
                 .fallbackToDestructiveMigration()
                 .build()
+        }
+
+        val MIGRATION_7_8 = object : Migration(7, 8) {
+            override fun migrate(database: SupportSQLiteDatabase) {
+                // Add the new column with a default value
+                database.execSQL("ALTER TABLE tickets ADD COLUMN userId TEXT DEFAULT NULL")
+            }
         }
     }
 

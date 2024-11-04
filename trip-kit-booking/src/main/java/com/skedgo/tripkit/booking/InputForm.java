@@ -38,7 +38,7 @@ public class InputForm implements Parcelable {
         List<FormField> bookingItems = new ArrayList<>();
         for (FormGroup formGroup : formGroups) {
             for (FormField item : formGroup.getFields()) {
-                if (!item.isReadOnly()) {
+                if (!item.getReadOnly()) {
                     bookingItems.add(item);
                 }
             }

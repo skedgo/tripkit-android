@@ -362,7 +362,7 @@ class TripSegment : IRealTimeElement, ITimeRange {
     override fun getServiceTripId(): String? = mServiceTripId
 
     override fun getOperator(): String {
-        return serviceOperator!!
+        return serviceOperator.orEmpty()
     }
 
     val wheelchairFriendliness: Int

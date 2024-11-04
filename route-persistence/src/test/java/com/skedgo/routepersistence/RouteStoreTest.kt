@@ -4,8 +4,6 @@ import android.content.Context
 import androidx.test.core.app.ApplicationProvider
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.google.gson.GsonBuilder
-import com.skedgo.tripkit.common.model.GsonAdaptersBooking
-import com.skedgo.tripkit.common.model.GsonAdaptersRealtimeAlert
 import com.skedgo.tripkit.common.util.LowercaseEnumTypeAdapterFactory
 import org.junit.Assert.assertEquals
 import org.junit.Before
@@ -17,6 +15,11 @@ class RouteStoreTest {
     private var databaseHelper: RouteDatabaseHelper? = null
     private lateinit var store: RouteStore
 
+    // TODO: Unit test - refactor
+    /*
+        Disabled the following function adapter factory
+        due to class non existent / class not found exception
+     */
     @Before
     fun before() {
         val context = ApplicationProvider.getApplicationContext<Context>()
@@ -24,8 +27,6 @@ class RouteStoreTest {
         val gson = GsonBuilder()
             .registerTypeAdapterFactory(LocationTypeAdapterFactory())
             .registerTypeAdapterFactory(LowercaseEnumTypeAdapterFactory())
-            .registerTypeAdapterFactory(GsonAdaptersBooking())
-            .registerTypeAdapterFactory(GsonAdaptersRealtimeAlert())
             .create()
         store = RouteStore(databaseHelper!!, gson)
     }

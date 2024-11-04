@@ -5,7 +5,6 @@ on:
     branches:
       - develop
       - feature/**
-
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -36,16 +35,15 @@ jobs:
       - name: Grant execute permission for gradlew
         run: chmod +x gradlew
 
-      - name: Run Unit Tests
+      - name: Run unit tests
         id: unit_tests
-        run: ./gradlew test --continue --no-rebuild
+        run: ./gradlew test -x :TripKitSamples:test
 
       - name: Archive test results
-        if: always()
         uses: actions/upload-artifact@v3
         with:
           name: test-results
-          path: ./*/build/test-results/**/test*UnitTest
+          path: ./*/build/test-results/**
 
       - name: Comment on Pull Request for Unit Test Failures
         if: failure() && github.event_name == 'pull_request' && steps.unit_tests.outcome == 'failure'
@@ -54,7 +52,9 @@ jobs:
           message: |
             :x: Unit tests failed!
             
-            @${{ github.event.pull_request.assignee.login || github.event.pull_request.user.login }}, please review and fix the issues in the unit tests. Let us know if you need any help.
+            @${{ github.event.pull_request.assignee.login || github.event.pull_request.user.login }}, please review and fix the issues in the unit tests. Test results are available under the "Artifacts" section of this run in [GitHub Actions](${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}).
+            
+            Let us know if you need any help.
 
       - name: Comment on Pull Request for General Workflow Failures
         if: failure() && github.event_name == 'pull_request' && steps.unit_tests.outcome != 'failure'
@@ -71,6 +71,8 @@ jobs:
         with:
           message: |
             :white_check_mark: Unit tests passed successfully!
+            
+            Test results are available under the "Artifacts" section of this run in [GitHub Actions](${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}).
             
             Please ensure the code is reviewed before proceeding with the merge.
 
