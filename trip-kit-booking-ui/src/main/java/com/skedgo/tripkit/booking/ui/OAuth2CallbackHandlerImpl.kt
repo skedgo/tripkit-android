@@ -32,7 +32,7 @@ class OAuth2CallbackHandlerImpl(
                 .flatMap { externalOAuth -> Observable.just(bookingForm.setAuthData(externalOAuth)) }
                 .flatMap { bookingForm ->
                     bookingService.postFormAsync(
-                        bookingForm.action!!.url,
+                        bookingForm.action?.url.orEmpty(),
                         InputForm.from(bookingForm.form)
                     ).toObservable()
                 }
@@ -46,7 +46,7 @@ class OAuth2CallbackHandlerImpl(
 
     override fun handleRetryURL(bookingForm: BookingForm, uri: Uri): Observable<BookingForm> {
         return bookingService.postFormAsync(
-            bookingForm.action!!.url,
+            bookingForm.action?.url.orEmpty(),
             InputForm.from(bookingForm.form)
         ).toObservable()
     }

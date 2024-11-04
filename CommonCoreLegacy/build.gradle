@@ -49,6 +49,10 @@ android {
         targetCompatibility = JavaVersion.VERSION_17
     }
 
+    kotlinOptions {
+        jvmTarget = "17"
+    }
+
     publishing {
         singleVariant("release") {
             // if you don't want sources/javadoc, remove these lines
