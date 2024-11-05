@@ -12,7 +12,7 @@ import kotlin.math.ceil
 import kotlin.math.sqrt
 
 object GeocodeUtilities {
-    fun scoreBasedOnNameMatchBetweenSearchTerm(searchTerm: String, candidate: String): Int {
+    fun scoreBasedOnNameMatchBetweenSearchTerm(searchTerm: String, candidate: String?): Int {
         var searchTerm = searchTerm
         var candidate = candidate
         searchTerm = stringForScoringOfString(searchTerm)
