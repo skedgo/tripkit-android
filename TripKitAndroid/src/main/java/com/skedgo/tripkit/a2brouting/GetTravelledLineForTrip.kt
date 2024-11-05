@@ -20,7 +20,13 @@ class GetTravelledLineForTrip @Inject constructor() {
         const val LAT_LNG_SIMPLIFY_TOLERANCE = 5.0
     }
 
-    fun execute(segments: List<TripSegment>?): Observable<List<com.skedgo.tripkit.LineSegment>> {
+    private var customLatLngTolerance: Double? = null
+
+    fun execute(
+        segments: List<TripSegment>?,
+        customLatLngTolerance: Double? = null
+    ): Observable<List<com.skedgo.tripkit.LineSegment>> {
+        this.customLatLngTolerance = customLatLngTolerance
         return Observable
             .fromCallable {
                 createTravelledLinesToDraw(segments)
@@ -47,7 +53,7 @@ class GetTravelledLineForTrip @Inject constructor() {
                         else
                             it.serviceColor.color
                         val decodedWayPoints = PolyUtil.decode(it.encodedWaypoints)
-                        val simplified = decodedWayPoints.simplify(LAT_LNG_SIMPLIFY_TOLERANCE)
+                        val simplified = decodedWayPoints.simplify(customLatLngTolerance ?: LAT_LNG_SIMPLIFY_TOLERANCE)
                         simplified.zipWithNext()
                             .map { (start, end) ->
                                 com.skedgo.tripkit.LineSegment(
@@ -63,7 +69,7 @@ class GetTravelledLineForTrip @Inject constructor() {
                     .filter { it.encodedWaypoints() != null }
                     .flatMap { street ->
                         PolyUtil.decode(street.encodedWaypoints()).simplify(
-                            LAT_LNG_SIMPLIFY_TOLERANCE
+                            customLatLngTolerance ?: LAT_LNG_SIMPLIFY_TOLERANCE
                         )
                             .zipWithNext()
                             .map { (start, end) ->
