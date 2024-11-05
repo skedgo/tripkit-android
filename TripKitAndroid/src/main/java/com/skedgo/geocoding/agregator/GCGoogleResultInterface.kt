@@ -1,8 +1,7 @@
-package com.skedgo.geocoding.agregator;
+package com.skedgo.geocoding.agregator
 
-public interface GCGoogleResultInterface extends GCResultInterface {
+interface GCGoogleResultInterface : GCResultInterface {
 
-    //  result address
-    String getAddress();
-
+    // Result address
+    val address: String
 }

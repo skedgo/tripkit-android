@@ -1,115 +1,99 @@
-package com.skedgo.geocoding;
+package com.skedgo.geocoding
+
+import com.skedgo.geocoding.agregator.GCBoundingBoxInterface
+import kotlin.math.cos
 
 
-import com.skedgo.geocoding.agregator.GCBoundingBoxInterface;
+class GCBoundingBox : GCBoundingBoxInterface {
+    override var latN: Double = 0.0
+    override var latS: Double = 0.0
+    override var lngW: Double = 0.0
+    override var lngE: Double = 0.0
+    var latitudeDelta: Double = -1.0
+        get() {
+            if (field == -1.0) {
+                val latitudeSpan = latS - latN
+                field = latitudeSpan * Math.PI / 180
+            }
+            return field
+        }
+        private set
+    var longitudeDelta: Double = -1.0
+        get() {
+            if (field == -1.0) {
+                field = cos(latitudeDelta) * Math.PI / 180
+            }
+            return field
+        }
+        private set
 
-import java.util.ArrayList;
-import java.util.List;
-
-public class GCBoundingBox implements GCBoundingBoxInterface {
-
-    public static final GCBoundingBox World = new GCBoundingBox(85, -85, -180, 180);
-    public double lat1, lat2, lng1, lng2;
-    private double latitudeDelta = -1;
-    private double longitudeDelta = -1;
-
-    public GCBoundingBox(double lat1, double lat2, double lng1, double lng2) {
+    constructor(lat1: Double, lat2: Double, lng1: Double, lng2: Double) {
         if (lat1 < lat2) {
-            this.lat1 = lat1;
-            this.lat2 = lat2;
+            this.latN = lat1
+            this.latS = lat2
         } else {
-            this.lat1 = lat2;
-            this.lat2 = lat1;
+            this.latN = lat2
+            this.latS = lat1
         }
         if (lng1 < lng2) {
-            this.lng1 = lng1;
-            this.lng2 = lng2;
+            this.lngW = lng1
+            this.lngE = lng2
         } else {
-            this.lng1 = lng2;
-            this.lng2 = lng1;
+            this.lngW = lng2
+            this.lngE = lng1
         }
     }
 
 
-    public GCBoundingBox(GCBoundingBoxInterface bb) {
-        if (bb.getLatN() < bb.getLatS()) {
-            this.lat1 = bb.getLatN();
-            this.lat2 = bb.getLatS();
+    constructor(bb: GCBoundingBoxInterface) {
+        if (bb.latN < bb.latS) {
+            this.latN = bb.latN
+            this.latS = bb.latS
         } else {
-            this.lat1 = bb.getLatS();
-            this.lat2 = bb.getLatN();
+            this.latN = bb.latS
+            this.latS = bb.latN
         }
-        if (bb.getLngW() < bb.getLngE()) {
-            this.lng1 = bb.getLngW();
-            this.lng2 = bb.getLngE();
+        if (bb.lngW < bb.lngE) {
+            this.lngW = bb.lngW
+            this.lngE = bb.lngE
         } else {
-            this.lng1 = bb.getLngE();
-            this.lng2 = bb.getLngW();
+            this.lngW = bb.lngE
+            this.lngE = bb.lngW
         }
     }
 
-    public GCBoundingBox(//@NotNull
-                         GCBoundingBox other) {
-        lat1 = other.lat1;
-        lat2 = other.lat2;
-        lng1 = other.lng1;
-        lng2 = other.lng2;
+    constructor( //@NotNull
+        other: GCBoundingBox
+    ) {
+        latN = other.latN
+        latS = other.latS
+        lngW = other.lngW
+        lngE = other.lngE
     }
 
-    public int height() {
+    fun height(): Int {
         // This constant is valid for all locations on Earth, since lines of latitude are equally spaced.
-        return (int) ((lat2 - lat1) * 110852);
+        return ((latS - latN) * 110852).toInt()
     }
 
-    public LatLng center() {
-        return new LatLng(((lat2 - lat1) / 2) + lat1, ((lng2 - lng1) / 2) + lng1);
+    fun center(): LatLng {
+        return LatLng(((latS - latN) / 2) + this.latN, ((lngE - lngW) / 2) + this.lngW)
     }
 
-    public GCBoundingBox getBoundingBox() {
-        return this;
-    }
+    val boundingBox: GCBoundingBox
+        get() = this
 
-    public List<LatLng> getLatLngs() {
-        List<LatLng> result = new ArrayList<>();
-        result.add(new LatLng(lat1, lng1));
-        result.add(new LatLng(lat1, lng2));
-        result.add(new LatLng(lat2, lng2));
-        result.add(new LatLng(lat2, lng1));
-        return result;
-    }
-
-    public double getLatitudeDelta() {
-        if (latitudeDelta == -1) {
-            double latitudeSpan = lat2 - lat1;
-            latitudeDelta = latitudeSpan * Math.PI / 180;
+    val latLngs: List<LatLng>
+        get() {
+            val result: MutableList<LatLng> = ArrayList()
+            result.add(LatLng(latN, lngW))
+            result.add(LatLng(latN, lngE))
+            result.add(LatLng(latS, lngE))
+            result.add(LatLng(latS, lngW))
+            return result
         }
-        return latitudeDelta;
-    }
 
-    public double getLongitudeDelta() {
-        if (longitudeDelta == -1) {
-            longitudeDelta = Math.cos(getLatitudeDelta()) * Math.PI / 180;
-        }
-        return longitudeDelta;
-    }
-
-    @Override
-    public double getLatN() {
-        return lat1;
-    }
-
-    @Override
-    public double getLatS() {
-        return lat2;
-    }
-
-    @Override
-    public double getLngW() {
-        return lng1;
-    }
-
-    @Override
-    public double getLngE() {
-        return lng2;
+    companion object {
+        val World: GCBoundingBox = GCBoundingBox(85.0, -85.0, -180.0, 180.0)
     }
 }

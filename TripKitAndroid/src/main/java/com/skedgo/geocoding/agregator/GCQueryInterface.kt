@@ -1,15 +1,10 @@
-package com.skedgo.geocoding.agregator;
+package com.skedgo.geocoding.agregator
 
-import org.jetbrains.annotations.NotNull;
+interface GCQueryInterface {
 
-public interface GCQueryInterface {
+    // User query
+    val queryText: String
 
-    //    user query
-    @NotNull
-    String getQueryText();
-
-    //    user bounding box
-    @NotNull
-    GCBoundingBoxInterface getBounds();
-
+    // User bounding box
+    val bounds: GCBoundingBoxInterface
 }

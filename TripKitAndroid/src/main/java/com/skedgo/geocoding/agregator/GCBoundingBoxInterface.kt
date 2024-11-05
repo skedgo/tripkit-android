@@ -1,20 +1,19 @@
-package com.skedgo.geocoding.agregator;
+package com.skedgo.geocoding.agregator
 
 /**
  *
  */
-public interface GCBoundingBoxInterface {
+interface GCBoundingBoxInterface {
 
-    //    north Latitude
-    double getLatN();
+    // North Latitude
+    val latN: Double
 
-    //    south Latitude
-    double getLatS();
+    // South Latitude
+    val latS: Double
 
-    //    west Longitude
-    double getLngW();
+    // West Longitude
+    val lngW: Double
 
-    //    east Longitude
-    double getLngE();
-
+    // East Longitude
+    val lngE: Double
 }

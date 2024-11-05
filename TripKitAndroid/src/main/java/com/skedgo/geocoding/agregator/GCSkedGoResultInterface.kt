@@ -1,17 +1,13 @@
-package com.skedgo.geocoding.agregator;
+package com.skedgo.geocoding.agregator
 
-import java.util.List;
+interface GCSkedGoResultInterface : GCResultInterface {
 
-import androidx.annotation.Nullable;
+    // Skedgo result class (class JSON field)
+    val resultClass: String
 
-public interface GCSkedGoResultInterface extends GCResultInterface {
+    // Skedgo result popularity (popularity JSON field)
+    val popularity: Int
 
-    //    skedgo result class (class json field)
-    String getResultClass();
-
-    //    skedgo result popularity (popularity json field)
-    int getPopularity();
-
-    @Nullable
-    List<String> getModeIdentifiers();
+    // Nullable list of mode identifiers
+    val modeIdentifiers: List<String>?
 }

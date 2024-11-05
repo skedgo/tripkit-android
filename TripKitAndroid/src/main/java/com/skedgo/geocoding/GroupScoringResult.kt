@@ -1,77 +1,50 @@
-package com.skedgo.geocoding;
+package com.skedgo.geocoding
 
-import com.skedgo.geocoding.agregator.GCResultInterface;
-import com.skedgo.geocoding.agregator.MGAResultInterface;
-
-import java.util.ArrayList;
-import java.util.List;
+import com.skedgo.geocoding.GeocodeUtilities.sortByImportance
+import com.skedgo.geocoding.agregator.GCResultInterface
+import com.skedgo.geocoding.agregator.MGAResultInterface
 
 /**
  * scored result with duplicates
  */
-public class GroupScoringResult<T extends GCResultInterface> implements MGAResultInterface<T> {
+class GroupScoringResult<T : GCResultInterface> : MGAResultInterface<T> {
+    override var duplicates: MutableList<MGAResultInterface<T>>? = null
+        private set
 
-    private List<MGAResultInterface<T>> duplicates = null;
+    override val result: T
+        get() = duplicates!![0].result
 
-    public GroupScoringResult() {
+    override val score: Int
+        get() = duplicates!![0].score
+
+    override val classRepresentative: MGAResultInterface<T>
+        get() = duplicates!![0]
+
+    override val nameScore: Int
+        get() = duplicates!![0].nameScore
+
+    override val addressScore: Int
+        get() = duplicates!![0].addressScore
+
+    override val distanceScore: Int
+        get() = duplicates!![0].distanceScore
+
+    override val popularityScore: Int
+        get() = duplicates!![0].popularityScore
+
+
+    fun addDuplicate(scoringResult: ScoringResult<T>) {
+        if (duplicates == null) duplicates = mutableListOf()
+        duplicates?.add(scoringResult)
+        duplicates = sortByImportance(duplicates!!).toMutableList()
     }
 
-    @Override
-    public T getResult() {
-        return duplicates.get(0).getResult();
+    fun addDuplicates(scoringResults: List<MGAResultInterface<T>>) {
+        if (duplicates == null) duplicates = mutableListOf()
+        duplicates?.addAll(scoringResults)
+        duplicates = sortByImportance(duplicates!!).toMutableList()
     }
 
-    @Override
-    public int getScore() {
-        return duplicates.get(0).getScore();
-    }
-
-    @Override
-    public List<MGAResultInterface<T>> getDuplicates() {
-        return duplicates;
-    }
-
-    @Override
-    public MGAResultInterface<T> getClassRepresentative() {
-        return duplicates.get(0);
-    }
-
-    @Override
-    public int getNameScore() {
-        return duplicates.get(0).getNameScore();
-    }
-
-    @Override
-    public int getAddressScore() {
-        return duplicates.get(0).getAddressScore();
-    }
-
-    @Override
-    public int getDistanceScore() {
-        return duplicates.get(0).getDistanceScore();
-    }
-
-    @Override
-    public int getPopularityScore() {
-        return duplicates.get(0).getPopularityScore();
-    }
-
-
-    public void addDuplicate(ScoringResult<T> scoringResult) {
-        if (duplicates == null)
-            duplicates = new ArrayList<>();
-        duplicates.add(scoringResult);
-        duplicates = GeocodeUtilities.sortByImportance(duplicates);
-    }
-
-    public void addDuplicates(List<MGAResultInterface<T>> scoringResults) {
-        if (duplicates == null)
-            duplicates = new ArrayList<>();
-        duplicates.addAll(scoringResults);
-        duplicates = GeocodeUtilities.sortByImportance(duplicates);
-    }
-
-    public ScoringResult<T> getScoringResult() {
-        return (ScoringResult<T>) duplicates.get(0);
-    }
+    val scoringResult: ScoringResult<T>
+        get() = duplicates!![0] as ScoringResult<T>
 }

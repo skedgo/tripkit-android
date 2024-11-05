@@ -1,35 +1,33 @@
-package com.skedgo.geocoding.agregator;
+package com.skedgo.geocoding.agregator
 
-import java.io.Serializable;
-import java.util.List;
+import java.io.Serializable
 
 /**
  * this class represents a scored result, it could be single or have duplicates
  */
-public interface MGAResultInterface<T extends GCResultInterface> extends Serializable {
+interface MGAResultInterface<T : GCResultInterface> : Serializable {
 
-    //  returns query result
-    T getResult();
+    // Returns query result
+    val result: T
 
-    //  total score for the result
-    int getScore();
+    // Total score for the result
+    val score: Int
 
-    //  returns all duplicates for the result
-    List<MGAResultInterface<T>> getDuplicates();
+    // Returns all duplicates for the result
+    val duplicates: List<MGAResultInterface<T>>?
 
-    //  returns the scored result which is the class representative for the duplicate list
-    MGAResultInterface<T> getClassRepresentative();
+    // Returns the scored result which is the class representative for the duplicate list
+    val classRepresentative: MGAResultInterface<T>?
 
-    //next was added to test
-//    name score value
-    int getNameScore();
+    // Name score value
+    val nameScore: Int
 
-    //    address score value
-    int getAddressScore();
+    // Address score value
+    val addressScore: Int
 
-    //    distance score value
-    int getDistanceScore();
+    // Distance score value
+    val distanceScore: Int
 
-    //    populariry score value
-    int getPopularityScore();
+    // Popularity score value
+    val popularityScore: Int
 }

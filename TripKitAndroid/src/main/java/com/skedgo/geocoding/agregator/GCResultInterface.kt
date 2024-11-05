@@ -1,18 +1,13 @@
-package com.skedgo.geocoding.agregator;
+package com.skedgo.geocoding.agregator
 
-import org.jetbrains.annotations.NotNull;
+interface GCResultInterface {
 
-public interface GCResultInterface {
+    // Result name
+    val name: String
 
-    //    result name
-    @NotNull
-    String getName();
+    // Result latitude
+    val lat: Double?
 
-    //    result latitude
-    Double getLat();
-
-    //    result longitude
-    Double getLng();
-
-
+    // Result longitude
+    val lng: Double?
 }

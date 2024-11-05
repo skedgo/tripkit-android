@@ -1,138 +1,62 @@
-package com.skedgo.geocoding;
+package com.skedgo.geocoding
 
+import com.skedgo.geocoding.agregator.GCAppResultInterface
+import com.skedgo.geocoding.agregator.GCAppResultInterface.Source.Regions
+import com.skedgo.geocoding.agregator.GCFoursquareResultInterface
+import com.skedgo.geocoding.agregator.GCGoogleResultInterface
+import com.skedgo.geocoding.agregator.GCResultInterface
+import com.skedgo.geocoding.agregator.GCSkedGoResultInterface
+import com.skedgo.geocoding.agregator.MGAResultInterface
 
-import com.skedgo.geocoding.agregator.GCAppResultInterface;
-import com.skedgo.geocoding.agregator.GCFoursquareResultInterface;
-import com.skedgo.geocoding.agregator.GCGoogleResultInterface;
-import com.skedgo.geocoding.agregator.GCResultInterface;
-import com.skedgo.geocoding.agregator.GCSkedGoResultInterface;
-import com.skedgo.geocoding.agregator.MGAResultInterface;
-
-import org.jetbrains.annotations.NotNull;
-
-import java.util.List;
 
 /**
  * scored single result - without duplicates
  */
-public class ScoringResult<T extends GCResultInterface> implements MGAResultInterface<T> {
+class ScoringResult<T : GCResultInterface>(
+    private val providerResult: T
+) : MGAResultInterface<T> {
 
-    private T providerResult;
-    private int score;
+    override var score: Int = 0
+    override var distanceScore: Int = -1
+    override var nameScore: Int = -1
+    override var addressScore: Int = -1
+    override var popularityScore: Int = -1
+    override var duplicates: List<MGAResultInterface<T>>? = null
+    override var classRepresentative: MGAResultInterface<T>?= null
+    override val result: T
+        get() = providerResult
 
-    //-1 if the source not calculate the score
-    private int distanceScore = -1;
-    private int nameScore = -1;
-    private int addressScore = -1;
-    private int popularityScore = -1;
-
-    public ScoringResult(T providerResult) {
-        this.providerResult = providerResult;
+    fun equals(element: MGAResultInterface<T>): Boolean {
+        return isDuplicate(this, element)
     }
 
-    @NotNull
-    @Override
-    public T getResult() {
-        return providerResult;
+    private fun isDuplicate(mgaResult: MGAResultInterface<T>, mgaResult1: MGAResultInterface<T>): Boolean {
+        val result = mgaResult.result
+        val result1 = mgaResult1.result
+
+        if (isRegion(result) || isRegion(result1)) return false
+
+        val mgaResultName = mgaResult.result.name
+        val mgaResult1Name = mgaResult1.result.name
+        val mgaResultLL = LatLng(mgaResult.result.lat ?: 0.0, mgaResult.result.lng ?: 0.0)
+        val mgaResult1LL = LatLng(mgaResult1.result.lat ?: 0.0, mgaResult.result.lng ?: 0.0)
+
+        return (mgaResultName.contains(mgaResult1Name) || mgaResult1Name.contains(mgaResultName)) &&
+            (mgaResultLL.distanceInMetres(mgaResult1LL) < 10)
     }
 
-    @Override
-    public int getScore() {
-        return score;
+    private fun isRegion(result: T): Boolean {
+        return result is GCAppResultInterface && result.appResultSource == GCAppResultInterface.Source.Regions
     }
 
-    public void setScore(int score) {
-        this.score = score;
+    private fun isBHresult(result: T): Boolean {
+        return result is GCAppResultInterface || result is GCSkedGoResultInterface
     }
 
-    @Override
-    public List<MGAResultInterface<T>> getDuplicates() {
-        return null;
+    private fun isFromDifferentSource(result1: T, result2: T): Boolean {
+        return !((result1 is GCAppResultInterface && result2 is GCAppResultInterface) ||
+            (result1 is GCSkedGoResultInterface && result2 is GCSkedGoResultInterface) ||
+            (result1 is GCGoogleResultInterface && result2 is GCGoogleResultInterface) ||
+            (result1 is GCFoursquareResultInterface && result2 is GCFoursquareResultInterface))
     }
-
-    @Override
-    public MGAResultInterface<T> getClassRepresentative() {
-        return null;
-    }
-
-    @Override
-    public int getNameScore() {
-        return nameScore;
-    }
-
-    public void setNameScore(int nameScore) {
-        this.nameScore = nameScore;
-    }
-
-    @Override
-    public int getAddressScore() {
-        return addressScore;
-    }
-
-    public void setAddressScore(int addressScore) {
-        this.addressScore = addressScore;
-    }
-
-    @Override
-    public int getDistanceScore() {
-        return distanceScore;
-    }
-
-    public void setDistanceScore(int distanceScore) {
-        this.distanceScore = distanceScore;
-    }
-
-    @Override
-    public int getPopularityScore() {
-        return popularityScore;
-    }
-
-    public void setPopularityScore(int popularityScore) {
-        this.popularityScore = popularityScore;
-    }
-
-    public boolean equals(MGAResultInterface<T> element) {
-        return isDuplicate(this, element);
-    }
-
-    private boolean isDuplicate(MGAResultInterface<T> mgaResult, MGAResultInterface<T> mgaResult1) {
-        T result = mgaResult.getResult();
-        T result1 = mgaResult1.getResult();
-
-        if (isRegion(result) || isRegion(result1))
-            return false;
-        else {
-            String mgaResultName = mgaResult.getResult().getName();
-            String mgaResult1Name = mgaResult1.getResult().getName();
-            LatLng mgaResultLL = new LatLng(mgaResult.getResult().getLat(), mgaResult.getResult().getLng());
-            LatLng mgaResult1LL = new LatLng(mgaResult1.getResult().getLat(), mgaResult.getResult().getLng());
-
-            return (mgaResultName.contains(mgaResult1Name) || mgaResult1Name.contains(mgaResultName)) && (mgaResultLL.distanceInMetres(mgaResult1LL) < 10);
-        }
-    }
-
-
-    private boolean isRegion(T result) {
-        if (result instanceof GCAppResultInterface) {
-            GCAppResultInterface apiResultCandidate = (GCAppResultInterface) result;
-            return apiResultCandidate.getAppResultSource().equals(GCAppResultInterface.Source.Regions);
-        } else
-            return false;
-    }
-
-    private boolean isBHresult(T result) {
-        return (result instanceof GCAppResultInterface || result instanceof GCSkedGoResultInterface);
-    }
-
-    private boolean isFromDifferentSource(T result1, T result2) {
-        if ((result1 instanceof GCAppResultInterface && result2 instanceof GCAppResultInterface) ||
-            (result1 instanceof GCSkedGoResultInterface && result2 instanceof GCSkedGoResultInterface) ||
-            (result1 instanceof GCGoogleResultInterface && result2 instanceof GCGoogleResultInterface) ||
-            (result1 instanceof GCFoursquareResultInterface && result2 instanceof GCFoursquareResultInterface))
-            return false;
-        else
-            return true;
-    }
-
-
 }

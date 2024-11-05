@@ -1,25 +1,24 @@
-package com.skedgo.geocoding.agregator;
+package com.skedgo.geocoding.agregator
 
 /**
  * Information that the user saves in the app
  */
-public interface GCAppResultInterface extends GCResultInterface {
+interface GCAppResultInterface : GCResultInterface {
 
-    //  address value
-    String getSubtitle();
+    // Address value
+    val subtitle: String
 
-    //  source that provides the result
-    Source getAppResultSource();
+    // Source that provides the result
+    val appResultSource: Source
 
-    //    is true if the result was set as favourite by the user false otherwise.
-    boolean isFavourite();
+    // True if the result was set as favorite by the user, false otherwise
+    val isFavourite: Boolean
 
-    //   source that provides the result
-    enum Source {
+    // Source that provides the result
+    enum class Source {
         AddressBook,
         Regions,
         Calendar,
         History
     }
-
 }

@@ -1,13 +1,10 @@
-package com.skedgo.geocoding.agregator;
+package com.skedgo.geocoding.agregator
 
-import java.util.List;
+interface GCFoursquareResultInterface : GCResultInterface {
 
-public interface GCFoursquareResultInterface extends GCResultInterface {
+    // Foursquare JSON verified field
+    val isVerified: Boolean
 
-    //    foursquare json verified field
-    boolean isVerified();
-
-    //    foursquare json categories names
-    List<String> getCategories();
-
+    // Foursquare JSON categories names
+    val categories: List<String>
 }
