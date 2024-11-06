@@ -8,7 +8,6 @@ buildscript {
         mavenCentral()
         google()
         jcenter()
-        maven { url 'https://repository.liferay.com/nexus/content/repositories/public/' }
     }
 
     dependencies {
@@ -51,7 +50,6 @@ allprojects {
         jcenter()
         maven { url 'https://repository.liferay.com/nexus/content/repositories/public/' }
         maven { url "https://jitpack.io" }
-        maven { url 'https://repository.liferay.com/nexus/content/repositories/public/' }
     }
 }
 
