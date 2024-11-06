@@ -1,88 +1,77 @@
-package com.skedgo.tripkit.bookingproviders;
+package com.skedgo.tripkit.bookingproviders
 
-import android.content.Intent;
-import android.net.Uri;
+import android.content.Intent
+import android.net.Uri
+import com.skedgo.tripkit.BookingAction
+import com.skedgo.tripkit.ExternalActionParams
+import com.skedgo.tripkit.geocoding.ReverseGeocodable
+import io.reactivex.Observable
+import io.reactivex.functions.BiFunction
+import io.reactivex.functions.Function
+import io.reactivex.schedulers.Schedulers
+import okhttp3.HttpUrl
+import okhttp3.HttpUrl.Companion.toHttpUrl
+import java.text.SimpleDateFormat
+import java.util.Date
+import java.util.Locale
+import java.util.TimeZone
 
-import com.skedgo.tripkit.BookingAction;
-import com.skedgo.tripkit.ExternalActionParams;
-import com.skedgo.tripkit.common.model.location.Location;
-import com.skedgo.tripkit.geocoding.ReverseGeocodable;
-import com.skedgo.tripkit.routing.TripSegment;
+internal class FlitWaysBookingResolver(private val geocoderFactory: ReverseGeocodable) :
+    BookingResolver {
 
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.Locale;
-import java.util.TimeZone;
-
-import androidx.annotation.Nullable;
-import io.reactivex.Observable;
-import io.reactivex.functions.BiFunction;
-import io.reactivex.functions.Function;
-import io.reactivex.schedulers.Schedulers;
-import okhttp3.HttpUrl;
-
-final class FlitWaysBookingResolver implements BookingResolver {
-    private final ReverseGeocodable geocoderFactory;
-
-    FlitWaysBookingResolver(ReverseGeocodable geocoderFactory) {
-        this.geocoderFactory = geocoderFactory;
-    }
-
-    @Override
-    public Observable<BookingAction> performExternalActionAsync(ExternalActionParams params) {
-        final BookingAction.Builder actionBuilder = BookingAction.builder()
-            .bookingProvider(FLITWAYS);
-        final String flitWaysPartnerKey = params.flitWaysPartnerKey();
+    override fun performExternalActionAsync(params: ExternalActionParams): Observable<BookingAction> {
+        val actionBuilder = BookingAction.builder()
+            .bookingProvider(BookingResolver.FLITWAYS)
+        val flitWaysPartnerKey = params.flitWaysPartnerKey()
         if (flitWaysPartnerKey == null) {
-            final Intent data = new Intent(Intent.ACTION_VIEW)
-                .setData(Uri.parse("https://flitways.com"));
-            final BookingAction action = actionBuilder
+            val data = Intent(Intent.ACTION_VIEW)
+                .setData(Uri.parse("https://flitways.com"))
+            val action = actionBuilder
                 .hasApp(false)
                 .data(data)
-                .build();
-            return Observable.just(action);
+                .build()
+            return Observable.just(action)
         } else {
             // See https://flitways.com/deeplink.
-            final TripSegment segment = params.segment();
-            final Location departure = segment.getFrom();
-            final Location arrival = segment.getTo();
-            final long startTimeInSecs = segment.getStartTimeInSecs();
-            final String timeZone = segment.getTimeZone();
+            val segment = params.segment()
+            val departure = segment.from
+            val arrival = segment.to
+            val startTimeInSecs = segment.startTimeInSecs
+            val timeZone = segment.timeZone
             return Observable
-                .fromCallable(() -> {
-                    final SimpleDateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy hh:mm a", Locale.US);
+                .fromCallable {
+                    val dateFormat = SimpleDateFormat("MM/dd/yyyy hh:mm a", Locale.US)
                     if (timeZone != null) {
-                        dateFormat.setTimeZone(TimeZone.getTimeZone(timeZone));
+                        dateFormat.timeZone = TimeZone.getTimeZone(timeZone)
                     }
 
-                    final String tripDate = dateFormat.format(new Date(startTimeInSecs * 1000));
-                    return HttpUrl.parse("https://flitways.com/api/link")
-                        .newBuilder()
+                    val tripDate = dateFormat.format(Date(startTimeInSecs * 1000))
+                    "https://flitways.com/api/link".toHttpUrl().newBuilder()
                         .addQueryParameter("trip_date", tripDate)
-                        .addQueryParameter("key", flitWaysPartnerKey);
-                })
-                .flatMap((Function<HttpUrl.Builder, Observable<BookingAction>>) builder -> Observable.combineLatest(
-                    geocoderFactory.getAddress(departure.getLat(), departure.getLon()),
-                    geocoderFactory.getAddress(arrival.getLat(), arrival.getLon()),
-                    (BiFunction<String, String, BookingAction>) (departureAddress, arrivalAddress) -> {
-                        final String url = builder
-                            .addQueryParameter("pickup", departureAddress)
-                            .addQueryParameter("destination", arrivalAddress)
-                            .build()
-                            .toString();
-                        return actionBuilder
-                            .hasApp(false)
-                            .data(new Intent(Intent.ACTION_VIEW, Uri.parse(url)))
-                            .build();
-                    }
-                ))
-                .subscribeOn(Schedulers.io());
+                        .addQueryParameter("key", flitWaysPartnerKey)
+                }
+                .flatMap<BookingAction>(Function<HttpUrl.Builder, Observable<BookingAction>> { builder: HttpUrl.Builder ->
+                    Observable.combineLatest<String?, String?, BookingAction>(
+                        geocoderFactory.getAddress(departure!!.lat, departure.lon),
+                        geocoderFactory.getAddress(arrival!!.lat, arrival.lon),
+                        BiFunction<String?, String?, BookingAction> { departureAddress: String?, arrivalAddress: String? ->
+                            val url: String = builder
+                                .addQueryParameter("pickup", departureAddress)
+                                .addQueryParameter("destination", arrivalAddress)
+                                .build()
+                                .toString()
+                            actionBuilder
+                                .hasApp(false)
+                                .data(Intent(Intent.ACTION_VIEW, Uri.parse(url)))
+                                .build()
+                        }
+                    )
+                } as Function<HttpUrl.Builder, Observable<BookingAction>>?)
+                .subscribeOn(Schedulers.io())
         }
     }
 
-    @Nullable
-    @Override
-    public String getTitleForExternalAction(String externalAction) {
-        return "Book with FlitWays"; // TODO: i18n.
+    override fun getTitleForExternalAction(externalAction: String): String {
+        return "Book with FlitWays" // TODO: i18n.
     }
 }

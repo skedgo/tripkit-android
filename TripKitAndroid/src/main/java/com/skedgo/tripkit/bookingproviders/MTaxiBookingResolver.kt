@@ -10,7 +10,7 @@ private val MTAXI_PACKAGE = "au.com.mtaxi"
 internal class MTaxiBookingResolver(
     private val isPackageInstalled: Function<String, Boolean>,
     private val getAppIntent: Function<String, Intent>
-) : com.skedgo.tripkit.bookingproviders.BookingResolver {
+) : BookingResolver {
 
     override fun performExternalActionAsync(params: com.skedgo.tripkit.ExternalActionParams): Observable<com.skedgo.tripkit.BookingAction> {
         val actionBuilder = com.skedgo.tripkit.BookingAction.builder()
