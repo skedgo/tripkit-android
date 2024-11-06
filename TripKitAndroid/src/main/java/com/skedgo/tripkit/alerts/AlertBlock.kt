@@ -1,37 +1,29 @@
-package com.skedgo.tripkit.alerts;
+package com.skedgo.tripkit.alerts
 
-import com.google.gson.annotations.JsonAdapter;
-import com.skedgo.tripkit.common.model.realtimealert.RealtimeAlert;
-
-import androidx.annotation.Nullable;
-
-import static org.immutables.gson.Gson.TypeAdapters;
-import static org.immutables.value.Value.Immutable;
-import static org.immutables.value.Value.Style;
+import com.google.gson.annotations.JsonAdapter
+import com.skedgo.tripkit.common.model.realtimealert.RealtimeAlert
+import org.immutables.gson.Gson.TypeAdapters
+import org.immutables.value.Value.Immutable
+import org.immutables.value.Value.Style
 
 @Immutable
 @TypeAdapters
-@Style(passAnnotations = JsonAdapter.class)
-@JsonAdapter(GsonAdaptersAlertBlock.class)
-public interface AlertBlock {
-    @Nullable
-    RealtimeAlert alert();
+@Style(passAnnotations = [JsonAdapter::class])
+@JsonAdapter(
+    GsonAdaptersAlertBlock::class
+)
+interface AlertBlock {
+    fun alert(): RealtimeAlert?
 
-    @Nullable
-    String disruptionType();
+    fun disruptionType(): String?
 
-    @Nullable
-    String[] operators();
+    fun operators(): Array<String>
 
-    @Nullable
-    Route[] routes();
+    fun routes(): Array<Route>
 
-    @Nullable
-    ModeInfo modeInfo();
+    fun modeInfo(): ModeInfo?
 
-    @Nullable
-    String[] stopCodes();
+    fun stopCodes(): Array<String>
 
-    @Nullable
-    String[] serviceTripIDs();
+    fun serviceTripIDs(): Array<String>
 }

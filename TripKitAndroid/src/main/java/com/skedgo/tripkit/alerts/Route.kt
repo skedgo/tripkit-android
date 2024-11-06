@@ -1,34 +1,29 @@
-package com.skedgo.tripkit.alerts;
+package com.skedgo.tripkit.alerts
 
-import com.google.gson.annotations.JsonAdapter;
-import com.skedgo.tripkit.routing.ModeInfo;
-
-import org.immutables.value.Value;
-
-import androidx.annotation.Nullable;
-
-import static org.immutables.gson.Gson.TypeAdapters;
-import static org.immutables.value.Value.Immutable;
-import static org.immutables.value.Value.Style;
+import com.google.gson.annotations.JsonAdapter
+import com.skedgo.tripkit.routing.ModeInfo
+import org.immutables.gson.Gson.TypeAdapters
+import org.immutables.value.Value.Default
+import org.immutables.value.Value.Immutable
+import org.immutables.value.Value.Style
 
 @Immutable
 @TypeAdapters
-@Style(passAnnotations = JsonAdapter.class)
-@JsonAdapter(GsonAdaptersRoute.class)
-public abstract class Route {
-    public abstract String id();
+@Style(passAnnotations = [JsonAdapter::class])
+@JsonAdapter(
+    GsonAdaptersRoute::class
+)
+abstract class Route {
+    abstract fun id(): String
 
-    @Nullable
-    public abstract String name();
+    abstract fun name(): String?
 
-    @Nullable
-    public abstract String number();
+    abstract fun number(): String?
 
-    @Nullable
-    public abstract ModeInfo modeInfo();
+    abstract fun modeInfo(): ModeInfo?
 
-    @Value.Default
-    int type() {
-        return -1;
+    @Default
+    open fun type(): Int {
+        return -1
     }
 }

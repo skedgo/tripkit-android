@@ -1,25 +1,21 @@
-package com.skedgo.tripkit.alerts;
+package com.skedgo.tripkit.alerts
 
-import com.google.gson.annotations.JsonAdapter;
-import com.skedgo.tripkit.routing.ServiceColor;
-
-import androidx.annotation.Nullable;
-
-import static org.immutables.gson.Gson.TypeAdapters;
-import static org.immutables.value.Value.Immutable;
-import static org.immutables.value.Value.Style;
+import com.google.gson.annotations.JsonAdapter
+import com.skedgo.tripkit.routing.ServiceColor
+import org.immutables.gson.Gson.TypeAdapters
+import org.immutables.value.Value.Immutable
+import org.immutables.value.Value.Style
 
 @Immutable
 @TypeAdapters
-@Style(passAnnotations = JsonAdapter.class)
-@JsonAdapter(GsonAdaptersModeInfo.class)
-public interface ModeInfo {
-    @Nullable
-    ServiceColor color();
+@Style(passAnnotations = [JsonAdapter::class])
+@JsonAdapter(
+    GsonAdaptersModeInfo::class
+)
+interface ModeInfo {
+    fun color(): ServiceColor?
 
-    @Nullable
-    String identifier();
+    fun identifier(): String?
 
-    @Nullable
-    String alt();
+    fun alt(): String?
 }
