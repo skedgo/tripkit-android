@@ -1,11 +1,8 @@
-package com.skedgo.tripkit.scope;
+package com.skedgo.tripkit.scope
 
-import java.lang.annotation.Retention;
-import java.lang.annotation.RetentionPolicy;
-
-import javax.inject.Scope;
+import javax.inject.Scope
+import kotlin.annotation.AnnotationRetention.RUNTIME
 
 @Scope
-@Retention(RetentionPolicy.RUNTIME)
-public @interface ExtensionScope {
-}
+@Retention(RUNTIME)
+annotation class ExtensionScope 

@@ -1,32 +1,31 @@
-package com.skedgo.tripkit.tsp;
+package com.skedgo.tripkit.tsp
 
-import com.skedgo.tripkit.common.model.region.Region;
-
-import io.reactivex.Observable;
-import retrofit2.http.Body;
-import retrofit2.http.POST;
-import retrofit2.http.Url;
+import io.reactivex.Observable
+import retrofit2.http.Body
+import retrofit2.http.POST
+import retrofit2.http.Url
 
 /**
  * Retrieves detailed information about covered
  * transport service providers for the specified regions.
- * <p>
+ *
+ *
  * See http://skedgo.github.io/tripgo-api/swagger/#!/Configuration/post_regionInfo_json.
- * See {@link RegionInfoService} for easier usage.
+ * See [RegionInfoService] for easier usage.
  */
-public interface RegionInfoApi {
+interface RegionInfoApi {
     @POST("regionInfo.json")
-    RegionInfoResponse fetchRegionInfo(
-        @Body RegionInfoBody body
-    );
+    fun fetchRegionInfo(
+        @Body body: RegionInfoBody
+    ): RegionInfoResponse
 
     /**
      * @param url The url is a composition of an URL
-     *            from {@link Region#getURLs()} and 'regionInfo.json'.
+     * from [Region.getURLs] and 'regionInfo.json'.
      */
     @POST
-    Observable<RegionInfoResponse> fetchRegionInfoAsync(
-        @Url String url,
-        @Body RegionInfoBody body
-    );
+    fun fetchRegionInfoAsync(
+        @Url url: String,
+        @Body body: RegionInfoBody
+    ): Observable<RegionInfoResponse>
 }

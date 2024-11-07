@@ -1,22 +1,21 @@
-package com.skedgo.tripkit.tsp;
+package com.skedgo.tripkit.tsp
 
-import com.google.gson.annotations.JsonAdapter;
-import com.skedgo.tripkit.common.model.region.Region;
-
-import org.immutables.value.Value;
-
-import static org.immutables.gson.Gson.TypeAdapters;
-import static org.immutables.value.Value.Immutable;
-import static org.immutables.value.Value.Style;
+import com.google.gson.annotations.JsonAdapter
+import org.immutables.gson.Gson.TypeAdapters
+import org.immutables.value.Value.Immutable
+import org.immutables.value.Value.Parameter
+import org.immutables.value.Value.Style
 
 @Immutable
 @TypeAdapters
-@Style(passAnnotations = JsonAdapter.class)
-@JsonAdapter(GsonAdaptersRegionInfoBody.class)
-public interface RegionInfoBody {
+@Style(passAnnotations = [JsonAdapter::class])
+@JsonAdapter(
+    GsonAdaptersRegionInfoBody::class
+)
+interface RegionInfoBody {
     /**
-     * @return {@link Region#getName()}.
+     * @return [Region.getName].
      */
-    @Value.Parameter
-    String region();
+    @Parameter
+    fun region(): String
 }
