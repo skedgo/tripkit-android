@@ -22,7 +22,7 @@ internal class RegionServiceImpl(
     private val regionFinder: RegionFinder
 ) : RegionService {
     override fun getRegionsAsync(): Observable<List<Region>> =
-        regionCache.async.toObservable()
+        regionCache.getAsync().toObservable()
 
     override fun getRegionByNameAsync(regionName: String): Observable<Region> =
         getRegionsAsync()
@@ -31,7 +31,7 @@ internal class RegionServiceImpl(
             .first(Region()).toObservable()
 
     override fun getTransportModesAsync(): Observable<Map<String, TransportMode>> =
-        modeCache.async.toObservable()
+        modeCache.getAsync().toObservable()
 
     override fun getRegionByLocationAsync(latitude: Double, longitude: Double): Observable<Region> =
         getRegionsAsync()

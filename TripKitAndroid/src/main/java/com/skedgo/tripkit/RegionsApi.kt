@@ -1,29 +1,21 @@
-package com.skedgo.tripkit;
+package com.skedgo.tripkit
 
-import com.google.gson.annotations.SerializedName;
-import com.skedgo.tripkit.common.model.region.RegionsResponse;
-
-import io.reactivex.Observable;
-import io.reactivex.Single;
-import retrofit2.http.Body;
-import retrofit2.http.POST;
+import com.google.gson.annotations.SerializedName
+import com.skedgo.tripkit.common.model.region.RegionsResponse
+import io.reactivex.Observable
+import io.reactivex.Single
+import retrofit2.http.Body
+import retrofit2.http.POST
 
 interface RegionsApi {
     @POST("regions.json")
-    Single<RegionsResponse> fetchRegionsAsyncAsSingle(@Body RequestBodyContent bodyContent);
+    fun fetchRegionsAsyncAsSingle(@Body bodyContent: RequestBodyContent): Single<RegionsResponse>
 
     @POST("regions.json")
-    Observable<RegionsResponse> fetchRegionsAsync(@Body RequestBodyContent bodyContent);
+    fun fetchRegionsAsync(@Body bodyContent: RequestBodyContent): Observable<RegionsResponse>
 
-    final class RequestBodyContent {
-        @SerializedName("v")
-        private int apiVersion;
-        @SerializedName("app")
-        private String appFlavor;
-
-        public RequestBodyContent(int apiVersion, String appFlavor) {
-            this.apiVersion = apiVersion;
-            this.appFlavor = appFlavor;
-        }
-    }
+    class RequestBodyContent(
+        @SerializedName("v") private val apiVersion: Int,
+        @SerializedName("app") private val appFlavr: String?
+    )
 }

@@ -1,136 +1,109 @@
-package com.skedgo.tripkit;
+package com.skedgo.tripkit
 
-import android.content.Context;
-import android.util.Log;
-
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-import com.skedgo.TripKit;
-import com.skedgo.tripkit.a2brouting.FailoverA2bRoutingApi;
-import com.skedgo.tripkit.a2brouting.RouteService;
-import com.skedgo.tripkit.bookingproviders.BookingResolver;
-import com.skedgo.tripkit.bookingproviders.BookingResolverImpl;
-import com.skedgo.tripkit.common.model.booking.GsonAdaptersBooking;
-import com.skedgo.tripkit.common.model.region.Region;
-import com.skedgo.tripkit.common.model.TransportMode;
-import com.skedgo.tripkit.common.util.Gsons;
-import com.skedgo.tripkit.common.util.LowercaseEnumTypeAdapterFactory;
-import com.skedgo.tripkit.configuration.ServerManager;
-import com.skedgo.tripkit.data.regions.RegionService;
-import com.skedgo.tripkit.data.tsp.GsonAdaptersRegionInfo;
-import com.skedgo.tripkit.tsp.GsonAdaptersRegionInfoBody;
-import com.skedgo.tripkit.tsp.GsonAdaptersRegionInfoResponse;
-import com.skedgo.tripkit.tsp.RegionInfoRepository;
-
-import java.util.List;
-import java.util.Map;
-import java.util.concurrent.Callable;
-
-import javax.inject.Singleton;
-
-import androidx.annotation.NonNull;
-import dagger.Module;
-import dagger.Provides;
-import io.reactivex.functions.Consumer;
-import io.reactivex.schedulers.Schedulers;
-import okhttp3.OkHttpClient;
-import retrofit2.Retrofit;
-import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
-import retrofit2.converter.gson.GsonConverterFactory;
+import android.content.Context
+import android.util.Log
+import com.google.gson.Gson
+import com.google.gson.GsonBuilder
+import com.skedgo.TripKit
+import com.skedgo.tripkit.a2brouting.FailoverA2bRoutingApi
+import com.skedgo.tripkit.a2brouting.RouteService
+import com.skedgo.tripkit.bookingproviders.BookingResolver
+import com.skedgo.tripkit.bookingproviders.BookingResolverImpl
+import com.skedgo.tripkit.common.model.TransportMode
+import com.skedgo.tripkit.common.model.booking.GsonAdaptersBooking
+import com.skedgo.tripkit.common.model.region.Region
+import com.skedgo.tripkit.common.util.Gsons
+import com.skedgo.tripkit.common.util.LowercaseEnumTypeAdapterFactory
+import com.skedgo.tripkit.configuration.ServerManager
+import com.skedgo.tripkit.data.regions.RegionService
+import com.skedgo.tripkit.data.tsp.GsonAdaptersRegionInfo
+import com.skedgo.tripkit.tsp.GsonAdaptersRegionInfoBody
+import com.skedgo.tripkit.tsp.GsonAdaptersRegionInfoResponse
+import com.skedgo.tripkit.tsp.RegionInfoRepository
+import dagger.Module
+import dagger.Provides
+import io.reactivex.functions.Consumer
+import io.reactivex.schedulers.Schedulers
+import okhttp3.OkHttpClient
+import retrofit2.Retrofit
+import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
+import retrofit2.converter.gson.GsonConverterFactory
+import javax.inject.Singleton
 
 @Module
-public class MainModule {
-    private final Configs configs;
-    private final Context context;
+class MainModule(private val configs: Configs) {
 
-    public MainModule(@NonNull Configs configs) {
-        this.configs = configs;
-        context = configs.context().getApplicationContext();
-    }
+    private val context: Context = configs.context().applicationContext
 
     @Provides
-    Configs configs() {
-        return configs;
-    }
+    fun configs(): Configs = configs
 
     @Provides
-    RegionsApi getRegionsApi(OkHttpClient httpClient) {
-        return new Retrofit.Builder()
-            .baseUrl(ServerManager.INSTANCE.getConfiguration().getApiTripGoUrl())
+    fun getRegionsApi(httpClient: OkHttpClient): RegionsApi {
+        return Retrofit.Builder()
+            .baseUrl(ServerManager.configuration.apiTripGoUrl)
             .addConverterFactory(GsonConverterFactory.create(Gsons.createForRegion()))
             .addCallAdapterFactory(RxJava2CallAdapterFactory.createWithScheduler(Schedulers.io()))
             .client(httpClient)
             .build()
-            .create(RegionsApi.class);
+            .create(RegionsApi::class.java)
     }
 
     @Singleton
     @Provides
-    RegionDatabaseHelper getRegionDatabaseHelper() {
-        return new RegionDatabaseHelper(
-            context,
-            "regions.db"
-        );
+    fun getRegionDatabaseHelper(): RegionDatabaseHelper {
+        return RegionDatabaseHelper(context, "regions.db")
     }
 
     @Singleton
     @Provides
-    RegionService getRegionService(
-        RegionDatabaseHelper databaseHelper,
-        RegionsApi regionsApi,
-        RegionInfoRepository regionInfoRepository) {
-
-        final RegionsFetcher regionsFetcher = new RegionsFetcherImpl(
-            regionsApi,
-            databaseHelper
-        );
-        final Cache<List<Region>> regionCache = new CacheImpl<>(
+    fun getRegionService(
+        databaseHelper: RegionDatabaseHelper,
+        regionsApi: RegionsApi,
+        regionInfoRepository: RegionInfoRepository
+    ): RegionService {
+        val regionsFetcher = RegionsFetcherImpl(regionsApi, databaseHelper)
+        val regionCache: Cache<List<Region>> = CacheImpl(
             regionsFetcher.fetchAsync(),
             databaseHelper.loadRegionsAsync()
-        );
-        final Cache<Map<String, TransportMode>> modeCache = new CacheImpl<>(
+        )
+        val modeCache: Cache<Map<String, TransportMode>> = CacheImpl(
             regionsFetcher.fetchAsync(),
             databaseHelper.loadModesAsync()
-        );
-        return new RegionServiceImpl(
+        )
+        return RegionServiceImpl(
             regionCache,
             modeCache,
             regionsFetcher,
             regionInfoRepository,
-            new RegionFinder()
-        );
+            RegionFinder()
+        )
     }
 
     @Singleton
     @Provides
-    RouteService routeService(
-        FailoverA2bRoutingApi routingApi,
-        RegionService regionService,
-        Configs configs,
-        RegionInfoRepository regionInfoRepository
-    ) {
-        Co2Preferences co2Preferences = null;
-        final Callable<Co2Preferences> co2PreferencesFactory = configs.co2PreferencesFactory();
-        if (co2PreferencesFactory != null) {
-            try {
-                co2Preferences = co2PreferencesFactory.call();
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
+    fun routeService(
+        routingApi: FailoverA2bRoutingApi,
+        regionService: RegionService,
+        configs: Configs,
+        regionInfoRepository: RegionInfoRepository
+    ): RouteService {
+        val co2Preferences: Co2Preferences? = try {
+            configs.co2PreferencesFactory()?.call()
+        } catch (e: Exception) {
+            e.printStackTrace()
+            null
         }
 
-        TripPreferences tripPreferences = null;
-        final Callable<TripPreferences> tripPreferencesFactory = configs.tripPreferencesFactory();
-        if (tripPreferencesFactory != null) {
-            try {
-                tripPreferences = tripPreferencesFactory.call();
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
+        val tripPreferences: TripPreferences? = try {
+            configs.tripPreferencesFactory()?.call()
+        } catch (e: Exception) {
+            e.printStackTrace()
+            null
         }
 
-        final QueryGeneratorImpl queryGenerator = new QueryGeneratorImpl(regionService);
-        return new RouteServiceImpl(
+        val queryGenerator = QueryGeneratorImpl(regionService)
+        return RouteServiceImpl(
             context,
             queryGenerator,
             co2Preferences,
@@ -138,69 +111,64 @@ public class MainModule {
             configs.extraQueryMapProvider(),
             routingApi,
             regionInfoRepository
-        );
+        )
     }
 
     @Provides
-    Context context() {
-        return configs.context();
+    fun context(): Context = configs.context()
+
+    @Provides
+    fun getBookingResolver(): BookingResolver {
+        return BookingResolverImpl(
+            context.resources,
+            context.packageManager,
+            AndroidGeocoder(context)
+        )
     }
 
     @Provides
-    BookingResolver getBookingResolver() {
-        return new BookingResolverImpl(
-            context.getResources(),
-            context.getPackageManager(),
-            new AndroidGeocoder(context)
-        );
-    }
-
-
-    @Provides
-    LocationInfoApi getLocationInfoApi(Gson gson, OkHttpClient httpClient) {
-        return new Retrofit.Builder()
-            /* This base url is ignored as the api relies on @Url. */
-            .baseUrl(ServerManager.INSTANCE.getConfiguration().getApiTripGoUrl())
+    fun getLocationInfoApi(gson: Gson, httpClient: OkHttpClient): LocationInfoApi {
+        return Retrofit.Builder()
+            .baseUrl(ServerManager.configuration.apiTripGoUrl) // Ignored base URL
             .addCallAdapterFactory(RxJava2CallAdapterFactory.createWithScheduler(Schedulers.io()))
             .addConverterFactory(GsonConverterFactory.create(gson))
             .client(httpClient)
             .build()
-            .create(LocationInfoApi.class);
+            .create(LocationInfoApi::class.java)
     }
 
     @Provides
-    LocationInfoService getLocationInfoService(
-        LocationInfoApi locationInfoApi,
-        RegionService regionService) {
-        return new LocationInfoServiceImpl(locationInfoApi, regionService);
-    }
-
-    @Singleton
-    @Provides
-    Gson getGson() {
-        return new GsonBuilder()
-            .registerTypeAdapterFactory(new LowercaseEnumTypeAdapterFactory())
-            .registerTypeAdapterFactory(new GsonAdaptersRegionInfoBody())
-            .registerTypeAdapterFactory(new GsonAdaptersRegionInfo())
-            .registerTypeAdapterFactory(new GsonAdaptersRegionInfoResponse())
-            .registerTypeAdapterFactory(new GsonAdaptersLocationInfo())
-            .registerTypeAdapterFactory(new GsonAdaptersLocationInfoDetails())
-            .registerTypeAdapterFactory(new GsonAdaptersCarPark())
-            .registerTypeAdapterFactory(new GsonAdaptersBooking())
-            .create();
+    fun getLocationInfoService(
+        locationInfoApi: LocationInfoApi,
+        regionService: RegionService
+    ): LocationInfoService {
+        return LocationInfoServiceImpl(locationInfoApi, regionService)
     }
 
     @Singleton
     @Provides
-    Consumer<Throwable> getErrorHandler() {
-        final Consumer<Throwable> errorHandler = configs.errorHandler();
-        return error -> {
+    fun getGson(): Gson {
+        return GsonBuilder()
+            .registerTypeAdapterFactory(LowercaseEnumTypeAdapterFactory())
+            .registerTypeAdapterFactory(GsonAdaptersRegionInfoBody())
+            .registerTypeAdapterFactory(GsonAdaptersRegionInfo())
+            .registerTypeAdapterFactory(GsonAdaptersRegionInfoResponse())
+            .registerTypeAdapterFactory(GsonAdaptersLocationInfo())
+            .registerTypeAdapterFactory(GsonAdaptersLocationInfoDetails())
+            .registerTypeAdapterFactory(GsonAdaptersCarPark())
+            .registerTypeAdapterFactory(GsonAdaptersBooking())
+            .create()
+    }
+
+    @Singleton
+    @Provides
+    fun getErrorHandler(): Consumer<Throwable> {
+        val errorHandler = configs.errorHandler()
+        return Consumer { error ->
             if (configs.debuggable()) {
-                Log.e(TripKit.class.getSimpleName(), error.getMessage(), error);
+                Log.e(TripKit::class.java.simpleName, error.message, error)
             }
-            if (errorHandler != null) {
-                errorHandler.accept(error);
-            }
-        };
+            errorHandler?.accept(error)
+        }
     }
 }

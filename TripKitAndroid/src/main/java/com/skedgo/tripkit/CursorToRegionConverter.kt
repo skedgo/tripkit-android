@@ -1,18 +1,15 @@
-package com.skedgo.tripkit;
+package com.skedgo.tripkit
 
-import android.database.Cursor;
+import android.database.Cursor
+import com.google.gson.Gson
+import com.skedgo.tripkit.common.model.region.Region
+import io.reactivex.functions.Function
 
-import com.google.gson.Gson;
-import com.skedgo.tripkit.common.model.region.Region;
+internal class CursorToRegionConverter : Function<Cursor, Region> {
+    private val gson = Gson()
 
-import io.reactivex.functions.Function;
-
-final class CursorToRegionConverter implements Function<Cursor, Region> {
-    private final Gson gson = new Gson();
-
-    @Override
-    public Region apply(Cursor cursor) {
-        final String json = cursor.getString(cursor.getColumnIndex(Tables.FIELD_JSON.name));
-        return gson.fromJson(json, Region.class);
+    override fun apply(cursor: Cursor): Region {
+        val json = cursor.getString(cursor.getColumnIndex(Tables.FIELD_JSON.name))
+        return gson.fromJson(json, Region::class.java)
     }
 }

@@ -1,9 +1,8 @@
-package com.skedgo.tripkit;
+package com.skedgo.tripkit
 
-import com.skedgo.tripkit.common.model.location.Location;
+import com.skedgo.tripkit.common.model.location.Location
+import io.reactivex.Observable
 
-import io.reactivex.Observable;
-
-public interface LocationInfoService {
-    Observable<LocationInfo> getLocationInfoAsync(Location location);
+interface LocationInfoService {
+    fun getLocationInfoAsync(location: Location?): Observable<LocationInfo>
 }

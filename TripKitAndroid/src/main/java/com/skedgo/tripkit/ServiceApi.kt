@@ -1,18 +1,18 @@
-package com.skedgo.tripkit;
+package com.skedgo.tripkit
 
-import io.reactivex.Observable;
-import retrofit2.http.GET;
-import retrofit2.http.Query;
+import io.reactivex.Observable
+import retrofit2.http.GET
+import retrofit2.http.Query
 
-public interface ServiceApi {
+interface ServiceApi {
     @GET("service.json")
-    Observable<ServiceResponse> getServiceAsync(
-        @Query("region") String region,
-        @Query("serviceTripID") String serviceTripId,
-        @Query("operator") String operator,
-        @Query("startStopCode") String startStopCode,
-        @Query("endStopCode") String endStopCode,
-        @Query("embarkationDate") long timeInSecs,
-        @Query("encode") boolean encode
-    );
+    fun getServiceAsync(
+        @Query("region") region: String,
+        @Query("serviceTripID") serviceTripId: String,
+        @Query("operator") operator: String?,
+        @Query("startStopCode") startStopCode: String,
+        @Query("endStopCode") endStopCode: String?,
+        @Query("embarkationDate") timeInSecs: Long,
+        @Query("encode") encode: Boolean
+    ): Observable<ServiceResponse>
 }

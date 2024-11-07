@@ -1,18 +1,15 @@
-package com.skedgo.tripkit;
+package com.skedgo.tripkit
 
-import android.database.Cursor;
+import android.database.Cursor
+import com.google.gson.Gson
+import com.skedgo.tripkit.common.model.TransportMode
+import io.reactivex.functions.Function
 
-import com.google.gson.Gson;
-import com.skedgo.tripkit.common.model.TransportMode;
+internal class CursorToTransportModeConverter : Function<Cursor, TransportMode> {
+    private val gson = Gson()
 
-import io.reactivex.functions.Function;
-
-final class CursorToTransportModeConverter implements Function<Cursor, TransportMode> {
-    private final Gson gson = new Gson();
-
-    @Override
-    public TransportMode apply(Cursor cursor) {
-        final String json = cursor.getString(cursor.getColumnIndex(Tables.FIELD_JSON.name));
-        return gson.fromJson(json, TransportMode.class);
+    override fun apply(cursor: Cursor): TransportMode {
+        val json = cursor.getString(cursor.getColumnIndex(Tables.FIELD_JSON.name))
+        return gson.fromJson(json, TransportMode::class.java)
     }
 }

@@ -1,55 +1,46 @@
-package com.skedgo.tripkit;
+package com.skedgo.tripkit
 
-import android.text.TextUtils;
+import okhttp3.HttpUrl.Companion.toHttpUrlOrNull
+import okhttp3.Interceptor
+import okhttp3.Response
+import java.util.concurrent.Callable
 
-import java.io.IOException;
-import java.util.List;
-import java.util.concurrent.Callable;
+class BaseUrlOverridingInterceptor(
+    private val baseUrlAdapter: Callable<String>
+) : Interceptor {
 
-import androidx.annotation.NonNull;
-import okhttp3.HttpUrl;
-import okhttp3.Interceptor;
-import okhttp3.Request;
-import okhttp3.Response;
-
-public final class BaseUrlOverridingInterceptor implements Interceptor {
-    private final Callable<String> baseUrlAdapter;
-
-    public BaseUrlOverridingInterceptor(@NonNull Callable<String> baseUrlAdapter) {
-        this.baseUrlAdapter = baseUrlAdapter;
-    }
-
-    @Override
-    public Response intercept(Chain chain) throws IOException {
-
-        String newBaseUrl = "";
+    override fun intercept(chain: Interceptor.Chain): Response {
+        var newBaseUrl = ""
         try {
-            newBaseUrl = baseUrlAdapter.call();
-        } catch (Exception e) {
-            e.printStackTrace();
+            newBaseUrl = baseUrlAdapter.call()
+        } catch (e: Exception) {
+            e.printStackTrace()
         }
-        final Request request = chain.request();
-        final HttpUrl requestUrl = request.url();
-        final List<String> pathSegments = requestUrl.pathSegments();
-        boolean isFromSkedGo = pathSegments.get(0).equals("satapp") || requestUrl.host().contains("skedgo.com") || requestUrl.host().contains("buzzhives.com")
-            || requestUrl.host().contains("tripgo.com");
-        if (!TextUtils.isEmpty(newBaseUrl) && isFromSkedGo && !requestUrl.host().contains("payments.tripgo.com")) {
-            HttpUrl tempUrl = requestUrl.newBuilder().removePathSegment(0).build();
-            if (requestUrl.host().equals("galaxies.skedgo.com")) {
-                tempUrl = tempUrl.newBuilder().removePathSegment(0).removePathSegment(0).build();
+
+        val request = chain.request()
+        val requestUrl = request.url
+        val pathSegments = requestUrl.pathSegments
+        val isFromSkedGo = pathSegments[0] == "satapp" ||
+            requestUrl.host.contains("skedgo.com") ||
+            requestUrl.host.contains("buzzhives.com") ||
+            requestUrl.host.contains("tripgo.com")
+
+        return if (newBaseUrl.isNotEmpty() && isFromSkedGo && !requestUrl.host.contains("payments.tripgo.com")) {
+            var tempUrl = requestUrl.newBuilder().removePathSegment(0).build()
+            if (requestUrl.host == "galaxies.skedgo.com") {
+                tempUrl = tempUrl.newBuilder().removePathSegment(0).removePathSegment(0).build()
             }
-            final String query = tempUrl.query();
-            final String encodedPath = TextUtils.join("/", tempUrl.encodedPathSegments());
-            final HttpUrl newUrl = HttpUrl.parse(newBaseUrl)
+            val query = tempUrl.query
+            val encodedPath = tempUrl.encodedPathSegments.joinToString("/")
+            val newUrl = newBaseUrl.toHttpUrlOrNull()!!
                 .newBuilder()
                 .addEncodedPathSegments(encodedPath)
                 .query(query)
-                .build();
-            final Request newRequest = request.newBuilder().url(newUrl).build();
-            return chain.proceed(newRequest);
+                .build()
+            val newRequest = request.newBuilder().url(newUrl).build()
+            chain.proceed(newRequest)
         } else {
-            return chain.proceed(request);
-
+            chain.proceed(request)
         }
     }
 }

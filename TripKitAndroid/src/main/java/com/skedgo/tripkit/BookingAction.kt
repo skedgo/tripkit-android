@@ -1,35 +1,35 @@
-package com.skedgo.tripkit;
+package com.skedgo.tripkit
 
-import android.content.Intent;
+import android.content.Intent
+import com.skedgo.tripkit.bookingproviders.BookingProvider
+import org.immutables.value.Value.Immutable
+import org.immutables.value.Value.Style
+import org.immutables.value.Value.Style.BuilderVisibility.PACKAGE
+import org.immutables.value.Value.Style.ImplementationVisibility.PRIVATE
 
-import com.skedgo.tripkit.bookingproviders.BookingProvider;
+@Immutable
+@Style(visibility = PRIVATE, builderVisibility = PACKAGE)
+abstract class BookingAction {
+    @BookingProvider
+    abstract fun bookingProvider(): Int
 
-import org.immutables.value.Value;
+    abstract fun hasApp(): Boolean
 
-import static org.immutables.value.Value.Style.BuilderVisibility.PACKAGE;
-import static org.immutables.value.Value.Style.ImplementationVisibility.PRIVATE;
+    abstract fun data(): Intent
 
-@Value.Immutable
-@Value.Style(visibility = PRIVATE, builderVisibility = PACKAGE)
-public abstract class BookingAction {
-    public static Builder builder() {
-        return new BookingActionBuilder();
+    interface Builder {
+        fun bookingProvider(@BookingProvider bookingProvider: Int): Builder
+
+        fun hasApp(hasApp: Boolean): Builder
+
+        fun data(data: Intent?): Builder
+
+        fun build(): BookingAction
     }
 
-    @BookingProvider
-    public abstract int bookingProvider();
-
-    public abstract boolean hasApp();
-
-    public abstract Intent data();
-
-    public interface Builder {
-        Builder bookingProvider(@BookingProvider int bookingProvider);
-
-        Builder hasApp(boolean hasApp);
-
-        Builder data(Intent data);
-
-        BookingAction build();
+    companion object {
+        fun builder(): Builder {
+            return BookingActionBuilder()
+        }
     }
 }

@@ -1,23 +1,24 @@
-package com.skedgo.tripkit;
+package com.skedgo.tripkit
 
-import com.google.gson.annotations.JsonAdapter;
-
-import static org.immutables.gson.Gson.TypeAdapters;
-import static org.immutables.value.Value.Immutable;
-import static org.immutables.value.Value.Style;
+import com.google.gson.annotations.JsonAdapter
+import org.immutables.gson.Gson.TypeAdapters
+import org.immutables.value.Value.Immutable
+import org.immutables.value.Value.Style
 
 @TypeAdapters
 @Immutable
-@Style(passAnnotations = JsonAdapter.class)
-@JsonAdapter(GsonAdaptersCarPark.class)
-public abstract class CarPark {
-    public abstract String identifier();
+@Style(passAnnotations = [JsonAdapter::class])
+@JsonAdapter(
+    GsonAdaptersCarPark::class
+)
+abstract class CarPark {
+    abstract fun identifier(): String
 
-    public abstract String name();
+    abstract fun name(): String
 
-    public abstract int totalSpaces();
+    abstract fun totalSpaces(): Int
 
-    public abstract int availableSpaces();
+    abstract fun availableSpaces(): Int
 
-    public abstract long lastUpdate();
+    abstract fun lastUpdate(): Long
 }

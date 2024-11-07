@@ -1,15 +1,15 @@
-package com.skedgo.tripkit;
+package com.skedgo.tripkit
 
-import io.reactivex.Observable;
-import retrofit2.http.GET;
-import retrofit2.http.Query;
-import retrofit2.http.Url;
+import io.reactivex.Observable
+import retrofit2.http.GET
+import retrofit2.http.Query
+import retrofit2.http.Url
 
 interface LocationInfoApi {
     @GET
-    Observable<LocationInfo> fetchLocationInfoAsync(
-        @Url String url,
-        @Query("lat") double lat,
-        @Query("lng") double lng
-    );
+    fun fetchLocationInfoAsync(
+        @Url url: String,
+        @Query("lat") lat: Double?,
+        @Query("lng") lng: Double?
+    ): Observable<LocationInfo>
 }

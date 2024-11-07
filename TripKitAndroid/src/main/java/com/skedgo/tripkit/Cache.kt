@@ -1,9 +1,9 @@
-package com.skedgo.tripkit;
+package com.skedgo.tripkit
 
-import io.reactivex.Single;
+import io.reactivex.Single
 
-interface Cache<TData> {
-    Single<TData> getAsync();
+internal interface Cache<TData> {
+    fun getAsync(): Single<TData>
 
-    void invalidate();
+    fun invalidate()
 }

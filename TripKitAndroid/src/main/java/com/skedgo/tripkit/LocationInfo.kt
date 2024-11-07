@@ -1,28 +1,25 @@
-package com.skedgo.tripkit;
+package com.skedgo.tripkit
 
-import com.google.gson.annotations.JsonAdapter;
-import com.skedgo.tripkit.common.model.stop.ScheduledStop;
+import com.google.gson.annotations.JsonAdapter
+import com.skedgo.tripkit.common.model.stop.ScheduledStop
+import org.immutables.gson.Gson.TypeAdapters
+import org.immutables.value.Value.Immutable
+import org.immutables.value.Value.Style
 
-import org.immutables.gson.Gson;
-import org.immutables.value.Value;
+@TypeAdapters
+@Immutable
+@Style(passAnnotations = [JsonAdapter::class])
+@JsonAdapter(
+    GsonAdaptersLocationInfo::class
+)
+interface LocationInfo {
+    fun details(): LocationInfoDetails?
 
-import androidx.annotation.Nullable;
+    fun stop(): ScheduledStop?
 
-@Gson.TypeAdapters
-@Value.Immutable
-@Value.Style(passAnnotations = JsonAdapter.class)
-@JsonAdapter(GsonAdaptersLocationInfo.class)
-public interface LocationInfo {
-    @Nullable
-    LocationInfoDetails details();
+    fun carPark(): CarPark?
 
-    @Nullable
-    ScheduledStop stop();
+    fun lat(): Double
 
-    @Nullable
-    CarPark carPark();
-
-    double lat();
-
-    double lng();
+    fun lng(): Double
 }

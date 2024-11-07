@@ -1,35 +1,33 @@
-package com.skedgo.tripkit;
+package com.skedgo.tripkit
 
-import com.skedgo.tripkit.routing.TripSegment;
+import com.skedgo.tripkit.routing.TripSegment
+import org.immutables.value.Value.Immutable
+import org.immutables.value.Value.Style
+import org.immutables.value.Value.Style.BuilderVisibility.PACKAGE
+import org.immutables.value.Value.Style.ImplementationVisibility.PRIVATE
 
-import org.immutables.value.Value;
+@Immutable
+@Style(visibility = PRIVATE, builderVisibility = PACKAGE)
+abstract class ExternalActionParams {
+    abstract fun action(): String
 
-import androidx.annotation.Nullable;
+    abstract fun segment(): TripSegment
 
-import static org.immutables.value.Value.Style.BuilderVisibility.PACKAGE;
-import static org.immutables.value.Value.Style.ImplementationVisibility.PRIVATE;
+    abstract fun flitWaysPartnerKey(): String?
 
-@Value.Immutable
-@Value.Style(visibility = PRIVATE, builderVisibility = PACKAGE)
-public abstract class ExternalActionParams {
-    public static Builder builder() {
-        return new ExternalActionParamsBuilder();
+    interface Builder {
+        fun action(action: String): Builder
+
+        fun segment(segment: TripSegment?): Builder
+
+        fun flitWaysPartnerKey(flitWaysPartnerKey: String): Builder
+
+        fun build(): ExternalActionParams
     }
 
-    public abstract String action();
-
-    public abstract TripSegment segment();
-
-    @Nullable
-    public abstract String flitWaysPartnerKey();
-
-    public interface Builder {
-        Builder action(String action);
-
-        Builder segment(TripSegment segment);
-
-        Builder flitWaysPartnerKey(String flitWaysPartnerKey);
-
-        ExternalActionParams build();
+    companion object {
+        fun builder(): Builder {
+            return ExternalActionParamsBuilder()
+        }
     }
 }

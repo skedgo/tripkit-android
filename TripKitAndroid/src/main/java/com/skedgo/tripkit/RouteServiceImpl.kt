@@ -69,7 +69,7 @@ internal class RouteServiceImpl(
 
 
         if (co2Preferences != null) {
-            val co2Profile = co2Preferences.co2Profile
+            val co2Profile = co2Preferences.getCo2Profile()
             for ((key, value) in co2Profile) {
                 map["co2[$key]"] = value
             }

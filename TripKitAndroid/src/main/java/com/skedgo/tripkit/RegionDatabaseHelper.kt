@@ -1,54 +1,44 @@
-package com.skedgo.tripkit;
+package com.skedgo.tripkit
 
-import android.content.Context;
-import android.database.sqlite.SQLiteDatabase;
-import android.database.sqlite.SQLiteOpenHelper;
+import android.content.Context
+import android.database.sqlite.SQLiteDatabase
+import android.database.sqlite.SQLiteOpenHelper
+import com.skedgo.sqlite.Cursors.flattenCursor
+import com.skedgo.tripkit.common.model.TransportMode
+import com.skedgo.tripkit.common.model.region.Region
+import io.reactivex.Observable
+import io.reactivex.schedulers.Schedulers
 
-import com.skedgo.sqlite.Cursors;
-import com.skedgo.tripkit.common.model.region.Region;
-import com.skedgo.tripkit.common.model.TransportMode;
-
-import java.util.List;
-import java.util.Map;
-
-import io.reactivex.Observable;
-import io.reactivex.schedulers.Schedulers;
-
-final class RegionDatabaseHelper extends SQLiteOpenHelper {
-    RegionDatabaseHelper(Context context, String name) {
-        super(context, name, null, 2);
+class RegionDatabaseHelper(context: Context?, name: String?) :
+    SQLiteOpenHelper(context, name, null, 2) {
+    override fun onCreate(db: SQLiteDatabase) {
+        db.execSQL(Tables.REGIONS.getCreateSql())
+        db.execSQL(Tables.TRANSPORT_MODES.getCreateSql())
     }
 
-    @Override
-    public void onCreate(SQLiteDatabase db) {
-        db.execSQL(Tables.REGIONS.getCreateSql());
-        db.execSQL(Tables.TRANSPORT_MODES.getCreateSql());
+    override fun onUpgrade(db: SQLiteDatabase, oldVersion: Int, newVersion: Int) {
+        db.delete(Tables.REGIONS.name, null, null)
+        db.delete(Tables.TRANSPORT_MODES.name, null, null)
     }
 
-    @Override
-    public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-        db.delete(Tables.REGIONS.getName(), null, null);
-        db.delete(Tables.TRANSPORT_MODES.getName(), null, null);
-    }
-
-    public Observable<List<Region>> loadRegionsAsync() {
+    fun loadRegionsAsync(): Observable<List<Region>> {
         return Observable
-            .create(new OnSubscribeLoadRegions(this))
-            .flatMap(Cursors.flattenCursor())
-            .map(new CursorToRegionConverter())
+            .create(OnSubscribeLoadRegions(this))
+            .flatMap(flattenCursor())
+            .map(CursorToRegionConverter())
             .toList()
-            .filter(Utils.<Region>isNotEmpty()).toObservable().firstOrError().toObservable()
-            .subscribeOn(Schedulers.io());
+            .filter(Utils.isNotEmpty()).toObservable().firstOrError().toObservable()
+            .subscribeOn(Schedulers.io())
     }
 
-    public Observable<Map<String, TransportMode>> loadModesAsync() {
+    fun loadModesAsync(): Observable<Map<String, TransportMode>> {
         return Observable
-            .create(new OnSubscribeLoadTransportModes(this))
-            .flatMap(Cursors.flattenCursor())
-            .map(new CursorToTransportModeConverter())
+            .create(OnSubscribeLoadTransportModes(this))
+            .flatMap(flattenCursor())
+            .map(CursorToTransportModeConverter())
             .toList()
-            .filter(Utils.<TransportMode>isNotEmpty()).toObservable()
+            .filter(Utils.isNotEmpty()).toObservable()
             .map(Utils.toModeMap())
-            .subscribeOn(Schedulers.io());
+            .subscribeOn(Schedulers.io())
     }
 }
