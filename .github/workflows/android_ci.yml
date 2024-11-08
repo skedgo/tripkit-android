@@ -54,8 +54,10 @@ jobs:
           message: |
             :x: Unit tests failed!
             
-            @${{ github.event.pull_request.assignee.login || github.event.pull_request.user.login }}, please review and fix the issues in the unit tests. Test results are available under the "Artifacts" section of this run in [GitHub Actions](${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}).
+            @${{ github.event.pull_request.assignee.login || github.event.pull_request.user.login }}, please review and fix the issues in the unit tests.
             
+            Test results are available under the "Artifacts" section of this run in [GitHub Actions](${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}).
+             
             Let us know if you need any help.
 
       - name: Comment on Pull Request for General Workflow Failures
