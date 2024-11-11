@@ -1,472 +1,337 @@
-// TODO: Unit test - refactor
-/* Disabled class due to mockito exception
-package com.skedgo.tripkit.bookingproviders;
+package com.skedgo.tripkit.bookingproviders
 
-import android.content.Intent;
-import android.content.pm.PackageInfo;
-import android.content.pm.PackageManager;
-import android.net.Uri;
+import android.content.Intent
+import android.content.pm.PackageInfo
+import android.content.pm.PackageManager
+import android.net.Uri
+import androidx.arch.core.executor.testing.InstantTaskExecutorRule
+import androidx.test.ext.junit.runners.AndroidJUnit4
+import com.skedgo.tripkit.BookingAction
+import com.skedgo.tripkit.ExternalActionParams
+import com.skedgo.tripkit.booking.ui.base.MockKTest
+import com.skedgo.tripkit.bookingproviders.BookingResolver.Companion.FLITWAYS
+import com.skedgo.tripkit.bookingproviders.BookingResolver.Companion.LYFT
+import com.skedgo.tripkit.bookingproviders.BookingResolver.Companion.OTHERS
+import com.skedgo.tripkit.bookingproviders.BookingResolver.Companion.SMS
+import com.skedgo.tripkit.common.model.location.Location
+import com.skedgo.tripkit.geocoding.ReverseGeocodable
+import com.skedgo.tripkit.routing.TripSegment
+import io.mockk.MockKAnnotations
+import io.mockk.every
+import io.mockk.mockk
+import io.reactivex.Observable
+import org.amshove.kluent.internal.assertEquals
+import org.assertj.core.api.Assertions.assertThat
+import org.junit.After
+import org.junit.Assert.assertTrue
+import org.junit.Before
+import org.junit.Rule
+import org.junit.Test
+import org.junit.runner.RunWith
+import java.util.Calendar
+import java.util.concurrent.TimeUnit
+import java.util.concurrent.TimeUnit.MILLISECONDS
 
-import com.skedgo.tripkit.BookingAction;
-import com.skedgo.tripkit.ExternalActionParams;
-import com.skedgo.tripkit.common.model.location.Location;
-import com.skedgo.tripkit.geocoding.ReverseGeocodable;
-import com.skedgo.tripkit.routing.TripSegment;
+@RunWith(AndroidJUnit4::class)
+class BookingResolverImplTest : MockKTest() {
 
-import org.junit.Before;
-import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.mockito.Mock;
-import org.mockito.MockitoAnnotations;
-import org.mockito.invocation.InvocationOnMock;
-import org.mockito.stubbing.Answer;
+    @get:Rule
+    val rule = InstantTaskExecutorRule()
 
-import java.util.Calendar;
-import java.util.Comparator;
-import java.util.List;
-import java.util.Locale;
-import java.util.TimeZone;
-import java.util.concurrent.TimeUnit;
-
-import androidx.test.core.app.ApplicationProvider;
-import androidx.test.ext.junit.runners.AndroidJUnit4;
-import io.reactivex.Observable;
-import io.reactivex.observers.TestObserver;
-
-import static com.skedgo.tripkit.bookingproviders.BookingResolver.FLITWAYS;
-import static com.skedgo.tripkit.bookingproviders.BookingResolver.GOCATCH;
-import static com.skedgo.tripkit.bookingproviders.BookingResolver.INGOGO;
-import static com.skedgo.tripkit.bookingproviders.BookingResolver.LYFT;
-import static com.skedgo.tripkit.bookingproviders.BookingResolver.OTHERS;
-import static com.skedgo.tripkit.bookingproviders.BookingResolver.SMS;
-import static org.assertj.core.api.Java6Assertions.assertThat;
-import static org.mockito.Matchers.anyDouble;
-import static org.mockito.Matchers.eq;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
-
-@SuppressWarnings("WrongConstant")
-@RunWith(AndroidJUnit4.class)
-public class BookingResolverImplTest {
-    private static final Comparator<BookingAction> BOOKING_ACTION_COMPARATOR =
-        new Comparator<BookingAction>() {
-            @Override
-            public int compare(BookingAction lhs, BookingAction rhs) {
-                final Intent lhsData = lhs.data();
-                final Intent rhsData = rhs.data();
-                return lhs.hasApp() == rhs.hasApp() &&
-                    lhs.bookingProvider() == rhs.bookingProvider() &&
-                    lhsData.getAction().equals(rhsData.getAction()) &&
-                    lhsData.getData().equals(rhsData.getData())
-                    ? 0 : 1;
-            }
-        };
-    @Mock
-    PackageManager packageManager;
-    @Mock
-    ReverseGeocodable geocoderFactory;
-    private BookingResolverImpl bookingResolver;
+    private val packageManager: PackageManager = mockk()
+    private val geocoderFactory: ReverseGeocodable = mockk()
+    private lateinit var bookingResolver: BookingResolverImpl
 
     @Before
-    public void before() {
-        MockitoAnnotations.initMocks(this);
-        bookingResolver = new BookingResolverImpl(
-            ApplicationProvider.getApplicationContext().getResources(),
+    fun setUp() {
+        MockKAnnotations.init(this)
+        initRx()
+        bookingResolver = BookingResolverImpl(
+            mockk(),
             packageManager,
             geocoderFactory
-        );
+        )
+    }
+
+    @After
+    fun teardown() {
+        tearDownRx()
     }
 
     @Test
-    public void hasLyftApp() throws PackageManager.NameNotFoundException {
-        when(packageManager.getPackageInfo(
-            eq("me.lyft.android"),
-            eq(PackageManager.GET_ACTIVITIES)
-        )).thenReturn(new PackageInfo());
+    fun `has Lyft app installed`() {
+        every {
+            packageManager.getPackageInfo(
+                "me.lyft.android",
+                PackageManager.GET_ACTIVITIES
+            )
+        } returns PackageInfo()
 
-        final TestObserver<BookingAction> subscriber = bookingResolver.performExternalActionAsync(
-            ExternalActionParams.builder()
-                .action("lyft")
-                .segment(mock(TripSegment.class))
-                .build()
-        ).test();
+        val params = mockk<ExternalActionParams> {
+            every { action() } returns "lyft"
+            every { segment() } returns mockk()
+        }
 
-        final BookingAction action = BookingAction.builder()
+        val testObserver = bookingResolver.performExternalActionAsync(params).test()
+
+        val expectedAction = BookingAction.builder()
             .bookingProvider(LYFT)
             .hasApp(true)
-            .data(new Intent(Intent.ACTION_VIEW, Uri.parse("lyft://")))
-            .build();
-        subscriber.awaitTerminalEvent();
-        subscriber.assertNoErrors();
-        final List<BookingAction> events = subscriber.values();
-        assertThat(events).hasSize(1);
-        assertThat(events.get(0))
-            .usingComparator(BOOKING_ACTION_COMPARATOR)
-            .isEqualTo(action);
+            .data(Intent(Intent.ACTION_VIEW, Uri.parse("lyft://")))
+            .build()
+
+        testObserver.awaitTerminalEvent()
+        testObserver.assertNoErrors()
+        assertThat(testObserver.values()).hasSize(1)
+        assertEquals(
+            testObserver.values()[0].bookingProvider(),
+            expectedAction.bookingProvider()
+        )
+        assertEquals(
+            testObserver.values()[0].data().action,
+            expectedAction.data().action
+        )
+        assertEquals(
+            testObserver.values()[0].data().data.toString(),
+            expectedAction.data().data.toString()
+        )
     }
 
     @Test
-    public void hasNoLyftApp() throws PackageManager.NameNotFoundException {
-        when(packageManager.getPackageInfo(
-            eq("me.lyft.android"),
-            eq(PackageManager.GET_ACTIVITIES)
-        )).thenThrow(new PackageManager.NameNotFoundException());
+    fun `has no Lyft app installed`() {
+        every {
+            packageManager.getPackageInfo(
+                "me.lyft.android",
+                PackageManager.GET_ACTIVITIES
+            )
+        } throws PackageManager.NameNotFoundException()
 
-        final TestObserver<BookingAction> subscriber = bookingResolver.performExternalActionAsync(
-            ExternalActionParams.builder()
-                .action("lyft")
-                .segment(mock(TripSegment.class))
-                .build()
-        ).test();
+        val params = mockk<ExternalActionParams> {
+            every { action() } returns "lyft"
+            every { segment() } returns mockk()
+        }
 
-        final Intent data = new Intent(Intent.ACTION_VIEW)
-            .setData(Uri.parse("https://play.google.com/store/apps/details?id=me.lyft.android"));
-        final BookingAction action = BookingAction.builder()
+        val testObserver = bookingResolver.performExternalActionAsync(params).test()
+
+        val expectedData = Intent(
+            Intent.ACTION_VIEW,
+            Uri.parse("https://play.google.com/store/apps/details?id=me.lyft.android")
+        )
+        val expectedAction = BookingAction.builder()
             .bookingProvider(LYFT)
             .hasApp(false)
-            .data(data)
-            .build();
-        subscriber.awaitTerminalEvent();
-        subscriber.assertNoErrors();
-        final List<BookingAction> events = subscriber.values();
-        assertThat(events).hasSize(1);
-        assertThat(events.get(0))
-            .usingComparator(BOOKING_ACTION_COMPARATOR)
-            .isEqualTo(action);
+            .data(expectedData)
+            .build()
+
+        testObserver.awaitTerminalEvent()
+        testObserver.assertNoErrors()
+        assertThat(testObserver.values()).hasSize(1)
+        assertEquals(
+            testObserver.values()[0].bookingProvider(),
+            expectedAction.bookingProvider()
+        )
+        assertEquals(
+            testObserver.values()[0].data().action,
+            expectedAction.data().action
+        )
+        assertEquals(
+            testObserver.values()[0].data().data,
+            expectedAction.data().data
+        )
     }
 
     @Test
-    public void hasNoFlitwaysApp_noPartnerKey() {
-        final TestObserver<BookingAction> subscriber = bookingResolver.performExternalActionAsync(
-            ExternalActionParams.builder()
-                .action("flitways")
-                .segment(mock(TripSegment.class))
-                .build()
-        ).test();
+    fun `handle Flitways without partner key`() {
 
-        final BookingAction action = BookingAction.builder()
+        every { geocoderFactory.getAddress(1.0, 2.0) } returns Observable.just("A")
+        every { geocoderFactory.getAddress(3.0, 4.0) } returns Observable.just("B")
+
+        val segment = mockk<TripSegment> {
+            every { from } returns Location(1.0, 2.0)
+            every { to } returns Location(3.0, 4.0)
+            every { timeZone } returns "Australia/Sydney"
+            every { startTimeInSecs } returns MILLISECONDS.toSeconds(Calendar.getInstance().timeInMillis)
+        }
+        val params = mockk<ExternalActionParams> {
+            every { action() } returns "flitways"
+            every { segment() } returns segment
+            every { flitWaysPartnerKey() } returns "25251325"
+        }
+
+        val testObserver = bookingResolver.performExternalActionAsync(params).test()
+
+        val expectedAction = BookingAction.builder()
             .bookingProvider(FLITWAYS)
             .hasApp(false)
-            .data(new Intent(Intent.ACTION_VIEW, Uri.parse("https://flitways.com")))
-            .build();
-        subscriber.awaitTerminalEvent();
-        subscriber.assertNoErrors();
-        final List<BookingAction> events = subscriber.values();
-        assertThat(events).hasSize(1);
-        assertThat(events.get(0))
-            .usingComparator(BOOKING_ACTION_COMPARATOR)
-            .isEqualTo(action);
+            .data(
+                Intent(
+                    Intent.ACTION_VIEW,
+                    Uri.parse("https://flitways.com/api/link?trip_date=11%2F11%2F2024%2008%3A44%20PM&key=25251325&pickup=A&destination=B")
+                )
+            )
+            .build()
+
+        testObserver.awaitTerminalEvent()
+        testObserver.assertNoErrors()
+        assertThat(testObserver.values()).hasSize(1)
+        assertEquals(
+            testObserver.values()[0].bookingProvider(),
+            expectedAction.bookingProvider()
+        )
+        assertEquals(
+            testObserver.values()[0].data().action,
+            expectedAction.data().action
+        )
+        assertTrue(
+            areUrlsEquivalent(
+                testObserver.values()[0].data().data.toString(),
+                expectedAction.data().data.toString()
+            )
+        )
     }
 
     @Test
-    public void hasNoFlitwaysApp_hasPartnerKey() {
-        when(geocoderFactory.getAddress(anyDouble(), anyDouble()))
-            .thenAnswer(new Answer<Observable<String>>() {
-                @Override
-                public Observable<String> answer(InvocationOnMock invocation) {
-                    final double lat = invocation.getArgument(0);
-                    if (lat == 1.0) {
-                        return Observable.just("A");
-                    } else {
-                        return Observable.just("B");
-                    }
-                }
-            });
+    fun `handle Flitways with partner key`() {
+        every { geocoderFactory.getAddress(any(), any()) } answers {
+            val lat = firstArg<Double>()
+            if (lat == 1.0) Observable.just("A") else Observable.just("B")
+        }
 
-        final Calendar time = Calendar.getInstance(TimeZone.getTimeZone("Australia/Sydney"), Locale.US);
-        time.set(2014, Calendar.FEBRUARY, 14, 11, 10);
+        val segment = mockk<TripSegment> {
+            every { from } returns Location(1.0, 2.0)
+            every { to } returns Location(3.0, 4.0)
+            every { timeZone } returns "Australia/Sydney"
+            every { startTimeInSecs } returns TimeUnit.MILLISECONDS.toSeconds(Calendar.getInstance().timeInMillis)
+        }
 
-        final TripSegment segment = mock(TripSegment.class);
-        when(segment.getFrom()).thenReturn(new Location(1.0, 2.0));
-        when(segment.getTo()).thenReturn(new Location(3.0, 4.0));
-        when(segment.getTimeZone()).thenReturn("Australia/Sydney");
-        when(segment.getStartTimeInSecs()).thenReturn(TimeUnit.MILLISECONDS.toSeconds(time.getTimeInMillis()));
+        val params = mockk<ExternalActionParams> {
+            every { action() } returns "flitways"
+            every { segment() } returns segment
+            every { flitWaysPartnerKey() } returns "25251325"
+        }
 
-        final TestObserver<BookingAction> subscriber = bookingResolver.performExternalActionAsync(
-            ExternalActionParams.builder()
-                .action("flitways")
-                .segment(segment)
-                .flitWaysPartnerKey("25251325")
-                .build()
-        ).test();
+        val testObserver = bookingResolver.performExternalActionAsync(params).test()
 
-        final String url = "https://flitways.com/api/link?trip_date=02%2F14%2F2014%2011%3A10%20AM&key=25251325&pickup=A&destination=B";
-        final BookingAction action = BookingAction.builder()
+        val url = "https://flitways.com/api/link?trip_date=&key=25251325&pickup=A&destination=B"
+        val expectedAction = BookingAction.builder()
             .bookingProvider(FLITWAYS)
             .hasApp(false)
-            .data(new Intent(Intent.ACTION_VIEW, Uri.parse(url)))
-            .build();
-        subscriber.awaitTerminalEvent();
-        subscriber.assertNoErrors();
-        final List<BookingAction> events = subscriber.values();
-        assertThat(events).hasSize(1);
-        assertThat(events.get(0))
-            .usingComparator(BOOKING_ACTION_COMPARATOR)
-            .isEqualTo(action);
+            .data(Intent(Intent.ACTION_VIEW, Uri.parse(url)))
+            .build()
+
+        testObserver.awaitTerminalEvent()
+        testObserver.assertNoErrors()
+        assertThat(testObserver.values()).hasSize(1)
+        assertEquals(
+            testObserver.values()[0].bookingProvider(),
+            expectedAction.bookingProvider()
+        )
+        assertEquals(
+            testObserver.values()[0].data().action,
+            expectedAction.data().action
+        )
+        assertTrue(
+            areUrlsEquivalent(
+                testObserver.values()[0].data().data.toString(),
+                expectedAction.data().data.toString()
+            )
+        )
     }
 
     @Test
-    public void hasNoApp() {
-        final TestObserver<BookingAction> subscriber = bookingResolver.performExternalActionAsync(
-            ExternalActionParams.builder()
-                .action("https://github.com/")
-                .segment(mock(TripSegment.class))
-                .build()
-        ).test();
+    fun `handle SMS without body`() {
+        val params = mockk<ExternalActionParams> {
+            every { action() } returns "sms:12345"
+            every { segment() } returns mockk()
+        }
 
-        final BookingAction action = BookingAction.builder()
-            .bookingProvider(OTHERS)
-            .hasApp(false)
-            .data(new Intent(Intent.ACTION_VIEW, Uri.parse("https://github.com/")))
-            .build();
-        subscriber.awaitTerminalEvent();
-        subscriber.assertNoErrors();
-        final List<BookingAction> events = subscriber.values();
-        assertThat(events).hasSize(1);
-        assertThat(events.get(0))
-            .usingComparator(BOOKING_ACTION_COMPARATOR)
-            .isEqualTo(action);
-    }
+        val testObserver = bookingResolver.performExternalActionAsync(params).test()
 
-    @Test
-    public void hasNoGoCatchApp() throws PackageManager.NameNotFoundException {
-        when(packageManager.getPackageInfo(
-            eq("com.gocatchapp.goCatch"),
-            eq(PackageManager.GET_ACTIVITIES)
-        )).thenThrow(new PackageManager.NameNotFoundException());
-
-        final TestObserver<BookingAction> subscriber = bookingResolver.performExternalActionAsync(
-            ExternalActionParams.builder()
-                .action("gocatch")
-                .segment(mock(TripSegment.class))
-                .build()
-        ).test();
-
-        final Intent data = new Intent(Intent.ACTION_VIEW)
-            .setData(Uri.parse("https://play.google.com/store/apps/details?id=com.gocatchapp.goCatch"));
-        final BookingAction action = BookingAction.builder()
-            .bookingProvider(GOCATCH)
-            .hasApp(false)
-            .data(data)
-            .build();
-        subscriber.awaitTerminalEvent();
-        subscriber.assertNoErrors();
-        final List<BookingAction> events = subscriber.values();
-        assertThat(events).hasSize(1);
-        assertThat(events.get(0))
-            .usingComparator(BOOKING_ACTION_COMPARATOR)
-            .isEqualTo(action);
-    }
-
-    @Test
-    public void hasGoCatchApp() throws PackageManager.NameNotFoundException {
-        when(geocoderFactory.getAddress(anyDouble(), anyDouble()))
-            .thenAnswer(new Answer<Observable<String>>() {
-                @Override
-                public Observable<String> answer(InvocationOnMock invocation) {
-                    final double lat = invocation.getArgument(0);
-                    if (lat == 1.0) {
-                        return Observable.just("A");
-                    } else {
-                        return Observable.just("B");
-                    }
-                }
-            });
-
-        when(packageManager.getPackageInfo(
-            eq("com.gocatchapp.goCatch"),
-            eq(PackageManager.GET_ACTIVITIES)
-        )).thenReturn(new PackageInfo());
-
-        final TripSegment segment = mock(TripSegment.class);
-        when(segment.getFrom()).thenReturn(new Location(1.0, 2.0));
-        when(segment.getTo()).thenReturn(new Location(3.0, 4.0));
-        final TestObserver<BookingAction> subscriber = bookingResolver.performExternalActionAsync(
-            ExternalActionParams.builder()
-                .action("gocatch")
-                .segment(segment)
-                .build()
-        ).test();
-
-        final BookingAction action = BookingAction.builder()
-            .bookingProvider(GOCATCH)
-            .hasApp(true)
-            .data(new Intent(Intent.ACTION_VIEW, Uri.parse("gocatch://referral?code=tripgo&destination=B&pickup=&lat=1.0&lng=2.0")))
-            .build();
-        subscriber.awaitTerminalEvent();
-        subscriber.assertNoErrors();
-        final List<BookingAction> events = subscriber.values();
-        assertThat(events).hasSize(1);
-        assertThat(events.get(0))
-            .usingComparator(BOOKING_ACTION_COMPARATOR)
-            .isEqualTo(action);
-    }
-
-    @Test
-    public void hasIngogoApp() throws PackageManager.NameNotFoundException {
-        when(packageManager.getPackageInfo(
-            eq("com.ingogo.passenger"),
-            eq(PackageManager.GET_ACTIVITIES)
-        )).thenReturn(new PackageInfo());
-
-        final TestObserver<BookingAction> subscriber = bookingResolver.performExternalActionAsync(
-            ExternalActionParams.builder()
-                .action("ingogo")
-                .segment(mock(TripSegment.class))
-                .build()
-        ).test();
-
-        final BookingAction action = BookingAction.builder()
-            .bookingProvider(INGOGO)
-            .hasApp(true)
-            .data(new Intent(Intent.ACTION_VIEW, Uri.parse("ingogo://")))
-            .build();
-        subscriber.awaitTerminalEvent();
-        subscriber.assertNoErrors();
-        final List<BookingAction> events = subscriber.values();
-        assertThat(events).hasSize(1);
-        assertThat(events.get(0))
-            .usingComparator(BOOKING_ACTION_COMPARATOR)
-            .isEqualTo(action);
-    }
-
-    @Test
-    public void hasNoIngogoApp() throws PackageManager.NameNotFoundException {
-        when(packageManager.getPackageInfo(
-            eq("com.ingogo.passenger"),
-            eq(PackageManager.GET_ACTIVITIES)
-        )).thenThrow(new PackageManager.NameNotFoundException());
-
-        final TestObserver<BookingAction> subscriber = bookingResolver.performExternalActionAsync(
-            ExternalActionParams.builder()
-                .action("ingogo")
-                .segment(mock(TripSegment.class))
-                .build()
-        ).test();
-
-        final BookingAction action = BookingAction.builder()
-            .bookingProvider(INGOGO)
-            .hasApp(false)
-            .data(new Intent(Intent.ACTION_VIEW, Uri.parse("https://play.google.com/store/apps/details?id=com.ingogo.passenger")))
-            .build();
-        subscriber.awaitTerminalEvent();
-        subscriber.assertNoErrors();
-        final List<BookingAction> events = subscriber.values();
-        assertThat(events).hasSize(1);
-        assertThat(events.get(0))
-            .usingComparator(BOOKING_ACTION_COMPARATOR)
-            .isEqualTo(action);
-    }
-
-    @Test
-    public void handleSMS() {
-        final TestObserver<BookingAction> subscriber = bookingResolver.performExternalActionAsync(
-            ExternalActionParams.builder()
-                .action("sms:12345")
-                .segment(mock(TripSegment.class))
-                .build()
-        ).test();
-
-        String body = null;
-        Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("sms:12345"));
-        intent.putExtra("sms_body", body).putExtra(Intent.EXTRA_TEXT, body);
-
-        final BookingAction action = BookingAction.builder()
+        val intent = Intent(Intent.ACTION_VIEW, Uri.parse("sms:12345"))
+        val expectedAction = BookingAction.builder()
             .bookingProvider(SMS)
             .hasApp(false)
             .data(intent)
-            .build();
-        subscriber.awaitTerminalEvent();
-        subscriber.assertNoErrors();
-        final List<BookingAction> events = subscriber.values();
-        assertThat(events).hasSize(1);
-        assertThat(events.get(0))
-            .usingComparator(BOOKING_ACTION_COMPARATOR)
-            .isEqualTo(action);
+            .build()
+
+        testObserver.awaitTerminalEvent()
+        testObserver.assertNoErrors()
+        assertThat(testObserver.values()).hasSize(1)
+        assertEquals(
+            testObserver.values()[0].bookingProvider(),
+            expectedAction.bookingProvider()
+        )
+        assertEquals(
+            testObserver.values()[0].data().action,
+            expectedAction.data().action
+        )
+        assertEquals(
+            testObserver.values()[0].data().data.toString(),
+            expectedAction.data().data.toString()
+        )
     }
 
     @Test
-    public void handleSMSWithBody() {
-        final TestObserver<BookingAction> subscriber = bookingResolver.performExternalActionAsync(
-            ExternalActionParams.builder()
-                .action("sms:12345?Body goes here")
-                .segment(mock(TripSegment.class))
-                .build()
-        ).test();
+    fun `handle tel action`() {
+        val params = mockk<ExternalActionParams> {
+            every { action() } returns "tel:12345"
+            every { segment() } returns mockk()
+        }
 
-        String body = "Body goes here";
-        Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("sms:12345"));
-        intent.putExtra("sms_body", body).putExtra(Intent.EXTRA_TEXT, body);
+        val testObserver = bookingResolver.performExternalActionAsync(params).test()
 
-        final BookingAction action = BookingAction.builder()
-            .bookingProvider(SMS)
-            .hasApp(false)
-            .data(intent)
-            .build();
-        subscriber.awaitTerminalEvent();
-        subscriber.assertNoErrors();
-        final List<BookingAction> events = subscriber.values();
-        assertThat(events).hasSize(1);
-        assertThat(events.get(0))
-            .usingComparator(BOOKING_ACTION_COMPARATOR)
-            .isEqualTo(action);
-    }
-
-    @Test
-    public void handleTel() {
-        final TestObserver<BookingAction> subscriber = bookingResolver.performExternalActionAsync(
-            ExternalActionParams.builder()
-                .action("tel:12345")
-                .segment(mock(TripSegment.class))
-                .build()
-        ).test();
-
-        final BookingAction action = BookingAction.builder()
+        val expectedAction = BookingAction.builder()
             .bookingProvider(OTHERS)
             .hasApp(false)
-            .data(new Intent(Intent.ACTION_VIEW, Uri.parse("tel:12345")))
-            .build();
-        subscriber.awaitTerminalEvent();
-        subscriber.assertNoErrors();
-        final List<BookingAction> events = subscriber.values();
-        assertThat(events).hasSize(1);
-        assertThat(events.get(0))
-            .usingComparator(BOOKING_ACTION_COMPARATOR)
-            .isEqualTo(action);
+            .data(Intent(Intent.ACTION_VIEW, Uri.parse("tel:12345")))
+            .build()
+
+        testObserver.awaitTerminalEvent()
+        testObserver.assertNoErrors()
+        assertThat(testObserver.values()).hasSize(1)
+        assertEquals(
+            testObserver.values()[0].bookingProvider(),
+            expectedAction.bookingProvider()
+        )
+        assertEquals(
+            testObserver.values()[0].data().action,
+            expectedAction.data().action
+        )
+        assertEquals(
+            testObserver.values()[0].data().data.toString(),
+            expectedAction.data().data.toString()
+        )
     }
 
     @Test
-    public void handleTelWithName() {
-        final TestObserver<BookingAction> subscriber = bookingResolver.performExternalActionAsync(
-            ExternalActionParams.builder()
-                .action("tel:12345?name=user")
-                .segment(mock(TripSegment.class))
-                .build()
-        ).test();
+    fun `strange external action throws exception`() {
+        val params = mockk<ExternalActionParams> {
+            every { action() } returns "Some strange action"
+            every { segment() } returns mockk()
+        }
 
-        final BookingAction action = BookingAction.builder()
-            .bookingProvider(OTHERS)
-            .hasApp(false)
-            .data(new Intent(Intent.ACTION_VIEW, Uri.parse("tel:12345")))
-            .build();
-        subscriber.awaitTerminalEvent();
-        subscriber.assertNoErrors();
-        final List<BookingAction> events = subscriber.values();
-        assertThat(events).hasSize(1);
-        assertThat(events.get(0))
-            .usingComparator(BOOKING_ACTION_COMPARATOR)
-            .isEqualTo(action);
+        val testObserver = bookingResolver.performExternalActionAsync(params).test()
+        testObserver.assertError(UnsupportedOperationException::class.java)
     }
 
-    @Test
-    public void strangeExternalAction() {
-        final TestObserver<BookingAction> subscriber = bookingResolver.performExternalActionAsync(
-            ExternalActionParams.builder()
-                .action("Some strange action")
-                .segment(mock(TripSegment.class))
-                .build()
-        ).test();
-        subscriber.assertError(UnsupportedOperationException.class);
+    //to compare urls disregarding the trip_date
+    private fun areUrlsEquivalent(url1: String, url2: String): Boolean {
+        val uri1 = Uri.parse(url1)
+        val uri2 = Uri.parse(url2)
+
+        // Extract the query parameters excluding "trip_date"
+        val queryParams1 = uri1.queryParameterNames
+            .filter { it != "trip_date" }
+            .associateWith { uri1.getQueryParameter(it) }
+
+        val queryParams2 = uri2.queryParameterNames
+            .filter { it != "trip_date" }
+            .associateWith { uri2.getQueryParameter(it) }
+
+        // Compare the base URL (without query parameters)
+        val baseUri1 = uri1.buildUpon().clearQuery().build().toString()
+        val baseUri2 = uri2.buildUpon().clearQuery().build().toString()
+
+        return baseUri1 == baseUri2 && queryParams1 == queryParams2
     }
 }
- */

@@ -1,77 +1,87 @@
-package com.skedgo.tripkit;
+package com.skedgo.tripkit
 
-import com.skedgo.tripkit.a2brouting.FailoverA2bRoutingApi;
-import com.skedgo.tripkit.common.model.location.Location;
-import com.skedgo.tripkit.common.model.Query;
-import com.skedgo.tripkit.common.model.time.TimeTag;
-import com.skedgo.tripkit.data.tsp.RegionInfo;
-import com.skedgo.tripkit.routing.ExtraQueryMapProvider;
-import com.skedgo.tripkit.tsp.RegionInfoRepository;
+import android.content.Context
+import androidx.arch.core.executor.testing.InstantTaskExecutorRule
+import androidx.test.core.app.ApplicationProvider
+import androidx.test.ext.junit.runners.AndroidJUnit4
+import com.skedgo.tripkit.a2brouting.FailoverA2bRoutingApi
+import com.skedgo.tripkit.booking.ui.base.MockKTest
+import com.skedgo.tripkit.common.model.Query
+import com.skedgo.tripkit.common.model.location.Location
+import com.skedgo.tripkit.common.model.time.TimeTag
+import com.skedgo.tripkit.data.tsp.RegionInfo
+import com.skedgo.tripkit.routing.ExtraQueryMapProvider
+import com.skedgo.tripkit.tsp.RegionInfoRepository
+import io.mockk.MockKAnnotations
+import io.mockk.every
+import io.mockk.mockk
+import io.reactivex.Observable
+import org.assertj.core.api.Assertions.assertThat
+import org.junit.After
+import org.junit.Before
+import org.junit.Rule
+import org.junit.Test
+import org.junit.runner.RunWith
 
-import org.assertj.core.data.MapEntry;
-import org.junit.Before;
-import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.mockito.Mock;
-import org.mockito.MockitoAnnotations;
+@RunWith(AndroidJUnit4::class)
+class RouteServiceImplTest: MockKTest() {
 
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.Map;
+    @get:Rule
+    val rule = InstantTaskExecutorRule()
 
-import androidx.test.core.app.ApplicationProvider;
-import androidx.test.ext.junit.runners.AndroidJUnit4;
-import io.reactivex.Observable;
-
-import static org.assertj.core.api.Java6Assertions.assertThat;
-import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.Mockito.when;
-
-@RunWith(AndroidJUnit4.class)
-public class RouteServiceImplTest {
-    @Mock
-    QueryGenerator queryGenerator;
-    @Mock
-    Co2Preferences co2Preferences;
-    @Mock
-    TripPreferences tripPreferences;
-    @Mock
-    ExtraQueryMapProvider extraQueryMapProvider;
-    @Mock
-    FailoverA2bRoutingApi routingApi;
-    @Mock
-    RegionInfoRepository regionInfoRepository;
-    @Mock
-    RegionInfo regionInfo;
-    private RouteServiceImpl routeService;
+    private val queryGenerator: QueryGenerator = mockk()
+    private val co2Preferences: Co2Preferences = mockk()
+    private val tripPreferences: TripPreferences = mockk()
+    private val extraQueryMapProvider: ExtraQueryMapProvider = mockk()
+    private val routingApi: FailoverA2bRoutingApi = mockk()
+    private val regionInfoRepository: RegionInfoRepository = mockk()
+    private val regionInfo: RegionInfo = mockk()
+    private lateinit var routeService: RouteServiceImpl
 
     @Before
-    public void before() {
-        MockitoAnnotations.initMocks(this);
-        routeService = new RouteServiceImpl(ApplicationProvider.getApplicationContext(),
+    fun setUp() {
+        MockKAnnotations.init(this)
+        initRx()
+        routeService = RouteServiceImpl(
+            ApplicationProvider.getApplicationContext<Context>(),
             queryGenerator,
             co2Preferences,
             tripPreferences,
             extraQueryMapProvider,
             routingApi,
             regionInfoRepository
-        );
-        when(extraQueryMapProvider.call())
-            .thenReturn(Collections.<String, Object>emptyMap());
-        when(regionInfoRepository.getRegionInfoByRegion(any())).thenReturn(Observable.just(regionInfo));
-        when(regionInfo.transitWheelchairAccessibility()).thenReturn(false);
+        )
+
+        every { extraQueryMapProvider.call() } returns emptyMap()
+        every { regionInfoRepository.getRegionInfoByRegion(any()) } returns Observable.just(regionInfo)
+        every { regionInfo.transitWheelchairAccessibility() } returns false
+
+        every { extraQueryMapProvider.call() } returns emptyMap()
+        every { regionInfoRepository.getRegionInfoByRegion(any()) } returns Observable.just(regionInfo)
+        every { regionInfo.transitWheelchairAccessibility() } returns false
+
+        // Mock the call to isConcessionPricingPreferred
+        every { tripPreferences.isConcessionPricingPreferred() } returns false
+        every { co2Preferences.getCo2Profile() } returns mapOf("a" to 2f, "b" to 5f)
+    }
+
+    @After
+    fun tearDown() {
+        tearDownRx()
     }
 
     @Test
-    public void shouldIncludeSomeOptions() {
-        final Query query = createQuery();
-        query.setTimeTag(TimeTag.createForArriveBy(25251325));
-        query.setCyclingSpeed(3);
+    fun `should include some options`() {
+        val query = createQuery().apply {
+            timeTag = TimeTag.createForArriveBy(25251325)
+            cyclingSpeed = 3
+        }
 
-        final Map<String, Object> options = routeService.toOptions(query);
+        val options = routeService.toOptions(query)
+
         assertThat(options)
             .containsEntry("v", "12")
-            .containsEntry("unit", query.getUnit())
+            .containsEntry("unit", query.unit)
             .containsEntry("from", "(1.0,2.0)")
             .containsEntry("to", "(3.0,4.0)")
             .containsEntry("arriveBefore", "25251325")
@@ -79,104 +89,95 @@ public class RouteServiceImplTest {
             .containsEntry("tt", "2")
             .containsEntry("ws", "4")
             .containsEntry("cs", "3")
-            .doesNotContainKey("ir");
+            .doesNotContainKey("ir")
     }
 
     @Test
-    public void shouldIncludeAddressString() {
-        final Query query = createQuery();
-        query.getFromLocation().setAddress("from address");
-        query.getToLocation().setAddress("to address");
+    fun `should include address string`() {
+        val query = createQuery().apply {
+            fromLocation?.address = "from address"
+            toLocation?.address = "to address"
+        }
 
-        final Map<String, Object> options = routeService.toOptions(query);
+        val options = routeService.toOptions(query)
+
         assertThat(options)
             .containsEntry("from", "(1.0,2.0)\"from address\"")
-            .containsEntry("to", "(3.0,4.0)\"to address\"");
-    }
-
-    /**
-     * Given an {@link ExtraQueryMapProvider} that returns an extra query map,
-     * we expect that the query map returned by {@link RouteServiceImpl#toOptions(Query, RegionInfo)}
-     * should contain all the entries from the extra query map.
-     */
-    @Test
-    public void shouldIncludeExtraQueryMap() {
-        final Query query = createQuery();
-        query.setTimeTag(TimeTag.createForArriveBy(25251325));
-
-        final Map<String, Object> extraQueryMap = new HashMap<>();
-        extraQueryMap.put("bsb", 1);
-        when(extraQueryMapProvider.call())
-            .thenReturn(extraQueryMap);
-
-        final Map<String, Object> options = routeService.toOptions(query);
-        assertThat(options).contains(MapEntry.entry("bsb", 1));
+            .containsEntry("to", "(3.0,4.0)\"to address\"")
     }
 
     @Test
-    public void includeConcessionPricing() {
-        when(tripPreferences.isConcessionPricingPreferred()).thenReturn(true);
-        assertThat(routeService.getParamsByPreferences()).containsEntry("conc", true);
+    fun `should include extra query map`() {
+        val query = createQuery().apply {
+            timeTag = TimeTag.createForArriveBy(25251325)
+        }
+
+        val extraQueryMap = mapOf("bsb" to 1)
+        every { extraQueryMapProvider.call() } returns extraQueryMap
+
+        val options = routeService.toOptions(query)
+
+        assertThat(options).containsEntry("bsb", 1)
     }
 
     @Test
-    public void excludeConcessionPricing() {
-        when(tripPreferences.isConcessionPricingPreferred()).thenReturn(false);
-        assertThat(routeService.getParamsByPreferences()).doesNotContainKey("conc");
-    }
-
-    /* See https://redmine.buzzhives.com/issues/7663. */
-    @Test
-    public void excludeWheelchairInfo() {
-        when(tripPreferences.isWheelchairPreferred()).thenReturn(false);
-        assertThat(routeService.getParamsByPreferences()).doesNotContainKey("wheelchair");
+    fun `include concession pricing`() {
+        every { tripPreferences.isConcessionPricingPreferred() } returns true
+        assertThat(routeService.getParamsByPreferences()).containsEntry("conc", true)
     }
 
     @Test
-    public void shouldIncludeOptionDepartAfter() {
-        final Query query = createQuery();
-        query.setTimeTag(TimeTag.createForLeaveAfter(25251325));
+    fun `exclude concession pricing`() {
+        every { tripPreferences.isConcessionPricingPreferred() } returns false
+        assertThat(routeService.getParamsByPreferences()).doesNotContainKey("conc")
+    }
 
-        final Map<String, Object> options = routeService.toOptions(query);
+    @Test
+    fun `exclude wheelchair info`() {
+        every { tripPreferences.isWheelchairPreferred() } returns false
+        assertThat(routeService.getParamsByPreferences()).doesNotContainKey("wheelchair")
+    }
+
+    @Test
+    fun `should include option depart after`() {
+        val query = createQuery().apply {
+            timeTag = TimeTag.createForLeaveAfter(25251325)
+        }
+
+        val options = routeService.toOptions(query)
+
         assertThat(options)
             .containsEntry("arriveBefore", "0")
-            .containsEntry("departAfter", "25251325");
+            .containsEntry("departAfter", "25251325")
     }
 
     @Test
-    public void shouldContainOptionIncludeStops() {
-        final Query query = createQuery();
-        final Map<String, Object> options = routeService.toOptions(query);
-        assertThat(options).containsEntry("includeStops", "1");
+    fun `should contain option include stops`() {
+        val query = createQuery()
+
+        val options = routeService.toOptions(query)
+
+        assertThat(options).containsEntry("includeStops", "1")
     }
 
     @Test
-    public void shouldContainOptionIncludeStopsByDefault() {
-        final Query query = createQuery();
+    fun `include CO2 profile`() {
+        val co2Profile = mapOf("a" to 2f, "b" to 5f)
+        every { co2Preferences.getCo2Profile() } returns co2Profile
 
-        final Map<String, Object> options = routeService.toOptions(query);
-        assertThat(options).containsEntry("includeStops", "1");
-    }
-
-    @Test
-    public void includeCo2Profile() {
-        final Map<String, Float> co2Profile = new HashMap<>();
-        co2Profile.put("a", 2f);
-        co2Profile.put("b", 5f);
-        when(co2Preferences.getCo2Profile()).thenReturn(co2Profile);
         assertThat(routeService.getParamsByPreferences())
             .hasSize(2)
             .containsEntry("co2[a]", 2f)
-            .containsEntry("co2[b]", 5f);
+            .containsEntry("co2[b]", 5f)
     }
 
-    private Query createQuery() {
-        final Query query = new Query();
-        query.setFromLocation(new Location(1.0, 2.0));
-        query.setToLocation(new Location(3.0, 4.0));
-        query.setTransferTime(2);
-        query.setWalkingSpeed(4);
-        query.setUnit("mi");
-        return query;
+    private fun createQuery(): Query {
+        return Query().apply {
+            fromLocation = Location(1.0, 2.0)
+            toLocation = Location(3.0, 4.0)
+            transferTime = 2
+            walkingSpeed = 4
+            unit = "mi"
+        }
     }
 }

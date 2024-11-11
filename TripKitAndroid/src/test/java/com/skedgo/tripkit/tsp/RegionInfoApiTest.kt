@@ -1,58 +1,71 @@
-package com.skedgo.tripkit.tsp;
+package com.skedgo.tripkit.tsp
 
-import com.skedgo.tripkit.TripKitAndroidRobolectricTest;
-import com.skedgo.tripkit.data.tsp.RegionInfo;
+import androidx.test.ext.junit.runners.AndroidJUnit4
+import com.skedgo.tripkit.TripKitAndroidRobolectricTest
+import io.mockk.every
+import io.mockk.junit4.MockKRule
+import io.mockk.mockk
+import io.reactivex.observers.TestObserver
+import io.reactivex.schedulers.Schedulers
+import okhttp3.mockwebserver.MockResponse
+import okhttp3.mockwebserver.MockWebServer
+import org.assertj.core.api.Java6Assertions
+import org.junit.After
+import org.junit.Before
+import org.junit.Rule
+import org.junit.Test
+import org.junit.runner.RunWith
+import retrofit2.Retrofit
+import retrofit2.Retrofit.Builder
+import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
+import retrofit2.converter.gson.GsonConverterFactory
+import thuytrinh.mockwebserverrule.MockWebServerRule
+import java.io.IOException
 
-import org.junit.Before;
-import org.junit.Rule;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+@RunWith(AndroidJUnit4::class)
+class RegionInfoApiTest {
 
-import java.io.IOException;
+    @get:Rule
+    val mockkRule = MockKRule(this)
 
-import androidx.test.ext.junit.runners.AndroidJUnit4;
-import io.reactivex.observers.TestObserver;
-import okhttp3.mockwebserver.MockResponse;
-import retrofit2.Retrofit;
-import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
-import retrofit2.converter.gson.GsonConverterFactory;
-import thuytrinh.mockwebserverrule.MockWebServerRule;
-
-import static io.reactivex.schedulers.Schedulers.trampoline;
-import static org.assertj.core.api.Java6Assertions.assertThat;
-
-@RunWith(AndroidJUnit4.class)
-public class RegionInfoApiTest extends TripKitAndroidRobolectricTest {
-    @Rule
-    public final MockWebServerRule serverRule = new MockWebServerRule();
-    private RegionInfoApi api;
+    private lateinit var api: RegionInfoApi
+    private val mockWebServer = MockWebServer()
 
     @Before
-    public void before() {
-        api = new Retrofit.Builder()
-            .baseUrl(serverRule.server.url("/"))
+    fun setUp() {
+        mockWebServer.start()
+        api = Retrofit.Builder()
+            .baseUrl(mockWebServer.url("/"))
             .addConverterFactory(GsonConverterFactory.create())
-            .addCallAdapterFactory(RxJava2CallAdapterFactory.createWithScheduler(trampoline()))
+            .addCallAdapterFactory(RxJava2CallAdapterFactory.createWithScheduler(Schedulers.trampoline()))
             .build()
-            .create(RegionInfoApi.class);
+            .create(RegionInfoApi::class.java)
+    }
+
+    @After
+    fun tearDown() {
+        mockWebServer.shutdown()
     }
 
     @Test
-    public void successfullyFetchRegionInfo() throws IOException {
-        final MockResponse mockResponse = MockWebServerRule.createMockResponse("/regionInfo.json");
-        serverRule.server.enqueue(mockResponse);
+    @Throws(IOException::class)
+    fun `successfully fetch region info`() {
+        val mockResponse = MockResponse()
+            .setBody("{ \"regions\": [{ \"transitWheelchairAccessibility\": true }] }")
+        mockWebServer.enqueue(mockResponse)
 
-        final TestObserver<RegionInfoResponse> subscriber = api.fetchRegionInfoAsync(
-            "/regionInfo.json",
-            ImmutableRegionInfoBody.of("AU_NSW_Sydney")
-        ).test();
+        val testObserver = TestObserver<RegionInfoResponse>()
+        val regionInfoBody = ImmutableRegionInfoBody.of("AU_NSW_Sydney")
 
-        subscriber.awaitTerminalEvent();
-        subscriber.assertNoErrors();
+        api.fetchRegionInfoAsync("/regionInfo.json", regionInfoBody)
+            .subscribe(testObserver)
 
-        final RegionInfoResponse response = subscriber.values().get(0);
-        assertThat(response.regions()).hasSize(1);
-        final RegionInfo regionInfo = response.regions().get(0);
-        assertThat(regionInfo.transitWheelchairAccessibility()).isTrue();
+        testObserver.awaitTerminalEvent()
+        testObserver.assertNoErrors()
+
+        val response = testObserver.values()[0]
+        assert(response.regions().size == 1)
+        val regionInfo = response.regions()[0]
+        assert(regionInfo.transitWheelchairAccessibility())
     }
 }

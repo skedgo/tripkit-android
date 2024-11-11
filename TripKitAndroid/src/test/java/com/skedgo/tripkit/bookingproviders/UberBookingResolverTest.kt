@@ -1,83 +1,108 @@
-// TODO: Unit test - refactor
-/* Disabled class due to unresolved references
 package com.skedgo.tripkit.bookingproviders
 
 import android.content.Intent
+import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.test.ext.junit.runners.AndroidJUnit4
-import com.skedgo.tripkit.TripKitAndroidRobolectricTest
+import com.skedgo.tripkit.booking.ui.base.MockKTest
 import com.skedgo.tripkit.common.model.location.Location
 import com.skedgo.tripkit.routing.TripSegment
-import io.reactivex.functions.Function
-import org.amshove.kluent.When
-import org.amshove.kluent.calling
-import org.amshove.kluent.itReturns
-import org.amshove.kluent.mock
-import org.amshove.kluent.`should be`
-import org.amshove.kluent.`should equal`
-import org.amshove.kluent.`should not be`
+import io.mockk.MockKAnnotations
+import io.mockk.every
+import io.mockk.mockk
+import io.reactivex.observers.TestObserver
+import org.assertj.core.api.Java6Assertions.assertThat
+import org.junit.After
+import org.junit.Before
+import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
 
-@Suppress("IllegalIdentifier")
 @RunWith(AndroidJUnit4::class)
-class UberBookingResolverTest : TripKitAndroidRobolectricTest() {
-    val isPackageInstalled: Function<String, Boolean> = mock()
-    val getAppIntent: Function<String, Intent> = mock()
-    val resolver by lazy { UberBookingResolver(isPackageInstalled, getAppIntent) }
+class UberBookingResolverTest : MockKTest() {
+
+    @get:Rule
+    val rule = InstantTaskExecutorRule()
+
+    private val isPackageInstalled: (String) -> Boolean = mockk()
+    private val getAppIntent: (String) -> Intent = mockk()
+    private val resolver by lazy { UberBookingResolver(isPackageInstalled, getAppIntent) }
+
+    @Before
+    fun setup() {
+        MockKAnnotations.init(this, relaxUnitFun = true)
+        initRx()
+    }
+
+    @After
+    fun tearDown() {
+        tearDownRx()
+    }
 
     @Test
     fun `title should be null`() {
-        resolver.getTitleForExternalAction("any action") `should be` null
+        assertThat(resolver.getTitleForExternalAction("any action")).isNull()
     }
 
     @Test
     fun `should return Intent to launch Uber app directly`() {
-        val params: com.skedgo.tripkit.ExternalActionParams = mock()
+        // Arrange
+        val params: com.skedgo.tripkit.ExternalActionParams = mockk()
 
-        val origin: Location = mock()
-        When calling origin.lat itReturns 1.0
-        When calling origin.lon itReturns 2.0
+        val origin: Location = mockk {
+            every { lat } returns 1.0
+            every { lon } returns 2.0
+        }
 
-        val destination: Location = mock()
-        When calling destination.lat itReturns 3.0
-        When calling destination.lon itReturns 4.0
+        val destination: Location = mockk {
+            every { lat } returns 3.0
+            every { lon } returns 4.0
+        }
 
-        val segment: TripSegment = mock()
-        When calling segment.from itReturns origin
-        When calling segment.to itReturns destination
-        When calling params.segment() itReturns segment
-        When calling isPackageInstalled.apply(UBER_PACKAGE) itReturns true
-        When calling getAppIntent.apply(UBER_PACKAGE) itReturns Intent()
+        val segment: TripSegment = mockk {
+            every { from } returns origin
+            every { to } returns destination
+        }
 
-        val subscriber = resolver
+        every { params.segment() } returns segment
+        every { isPackageInstalled(UBER_PACKAGE) } returns true
+        every { getAppIntent(UBER_PACKAGE) } returns Intent()
+
+        // Act
+        val testObserver: TestObserver<com.skedgo.tripkit.BookingAction> = resolver
             .performExternalActionAsync(params)
             .test()
-        subscriber.awaitTerminalEvent()
-        subscriber.assertNoErrors()
 
-        val bookingAction = subscriber.events[0].first() as com.skedgo.tripkit.BookingAction
-        bookingAction.data() `should not be` null
-        bookingAction.data().data.toString() `should equal` "uber://?action=setPickup&pickup[latitude]=1.0&pickup[longitude]=2.0&dropoff[latitude]=3.0&dropoff[longitude]=4.0"
-        bookingAction.hasApp() `should be` true
+        // Assert
+        testObserver.awaitTerminalEvent()
+        testObserver.assertNoErrors()
+
+        val bookingAction = testObserver.events[0].first() as com.skedgo.tripkit.BookingAction
+        assertThat(bookingAction.data()).isNotNull
+        assertThat(bookingAction.data().data.toString())
+            .isEqualTo("uber://?action=setPickup&pickup[latitude]=1.0&pickup[longitude]=2.0&dropoff[latitude]=3.0&dropoff[longitude]=4.0")
+        assertThat(bookingAction.hasApp()).isTrue
     }
 
     @Test
     fun `should return Intent to get Uber app from Play store`() {
-        val params: com.skedgo.tripkit.ExternalActionParams = mock()
+        // Arrange
+        val params: com.skedgo.tripkit.ExternalActionParams = mockk()
 
-        When calling isPackageInstalled.apply(UBER_PACKAGE) itReturns false
+        every { isPackageInstalled(UBER_PACKAGE) } returns false
 
-        val subscriber = resolver
+        // Act
+        val testObserver: TestObserver<com.skedgo.tripkit.BookingAction> = resolver
             .performExternalActionAsync(params)
             .test()
 
-        subscriber.awaitTerminalEvent()
-        subscriber.assertNoErrors()
+        // Assert
+        testObserver.awaitTerminalEvent()
+        testObserver.assertNoErrors()
 
-        val bookingAction = subscriber.events[0].first() as com.skedgo.tripkit.BookingAction
-        bookingAction.data() `should not be` null
-        bookingAction.data().data.toString() `should equal` "https://play.google.com/store/apps/details?id=com.ubercab"
-        bookingAction.hasApp() `should be` false
+        val bookingAction = testObserver.events[0].first() as com.skedgo.tripkit.BookingAction
+        assertThat(bookingAction.data()).isNotNull
+        assertThat(bookingAction.data().data.toString())
+            .isEqualTo("https://play.google.com/store/apps/details?id=com.ubercab")
+        assertThat(bookingAction.hasApp()).isFalse
     }
 }
- */

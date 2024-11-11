@@ -1,115 +1,121 @@
-package com.skedgo.tripkit.alerts;
+package com.skedgo.tripkit.alerts
 
-import org.junit.Before;
-import org.junit.Rule;
-import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.mockito.Mock;
-import org.mockito.junit.MockitoJUnit;
-import org.mockito.junit.MockitoRule;
-import org.robolectric.RobolectricTestRunner;
+import androidx.test.ext.junit.runners.AndroidJUnit4
+import io.mockk.every
+import io.mockk.mockk
+import io.mockk.verify
+import io.reactivex.Observable
+import io.reactivex.exceptions.CompositeException
+import io.reactivex.observers.TestObserver
+import org.junit.Before
+import org.junit.Rule
+import org.junit.Test
+import org.junit.runner.RunWith
+import org.mockito.ArgumentMatchers
+import org.mockito.Mock
+import org.mockito.Mockito
+import org.mockito.junit.MockitoJUnit
+import org.mockito.junit.MockitoRule
 
-import java.util.Arrays;
-import java.util.List;
+@RunWith(AndroidJUnit4::class)
+class RealtimeAlertServiceTest {
 
-import androidx.test.ext.junit.runners.AndroidJUnit4;
-import io.reactivex.Observable;
-import io.reactivex.exceptions.CompositeException;
-import io.reactivex.observers.TestObserver;
-
-import static org.mockito.Matchers.anyString;
-import static org.mockito.Mockito.eq;
-import static org.mockito.Mockito.times;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
-
-@RunWith(AndroidJUnit4.class)
-public class RealtimeAlertServiceTest {
-    @Rule
-    public final MockitoRule rule = MockitoJUnit.rule();
-    @Mock
-    RealtimeAlertApi api;
-    private RealtimeAlertService service;
+    private val api: RealtimeAlertApi = mockk()
+    private lateinit var service: RealtimeAlertService
 
     @Before
-    public void before() {
-        service = new RealtimeAlertService(api);
+    fun setUp() {
+        service = RealtimeAlertService(api)
     }
 
     /**
-     * We manage to fetch via first server, then we ignore second server.
+     * We manage to fetch via the first server, then we ignore the second server.
      */
     @Test
-    public void fetchRealtimeAlertsSuccessfully() {
-        final List<String> baseUrls = Arrays.asList(
-            "http://tripgo.com/",
-            "http://riogo.com/"
-        );
-        final RealtimeAlertResponse response = ImmutableRealtimeAlertResponse.builder().build();
-        when(api.fetchRealtimeAlertsAsync(
-            eq("http://tripgo.com/alerts/transit.json"),
-            eq("sydney")
-        )).thenReturn(Observable.just(response));
+    fun `fetch realtime alerts successfully`() {
+        // Arrange
+        val baseUrls = listOf("http://tripgo.com/", "http://riogo.com/")
+        val response = ImmutableRealtimeAlertResponse.builder().build()
 
-        final TestObserver<RealtimeAlertResponse> subscriber = service.fetchRealtimeAlertsAsync(baseUrls, "sydney").test();
-        subscriber.awaitTerminalEvent();
-        subscriber.assertNoErrors();
-        subscriber.assertValue(response);
+        every {
+            api.fetchRealtimeAlertsAsync(
+                "http://tripgo.com/alerts/transit.json",
+                "sydney"
+            )
+        } returns Observable.just(response)
 
-        verify(api).fetchRealtimeAlertsAsync(
-            eq("http://tripgo.com/alerts/transit.json"),
-            eq("sydney")
-        );
+        // Act
+        val testObserver: TestObserver<RealtimeAlertResponse> = service
+            .fetchRealtimeAlertsAsync(baseUrls, "sydney")
+            .test()
+
+        // Assert
+        testObserver.awaitTerminalEvent()
+        testObserver.assertNoErrors()
+        testObserver.assertValue(response)
+
+        verify(exactly = 1) {
+            api.fetchRealtimeAlertsAsync(
+                "http://tripgo.com/alerts/transit.json",
+                "sydney"
+            )
+        }
     }
 
     /**
-     * When we fail to fetch via first server but manage via second server.
+     * When we fail to fetch via the first server but manage via the second server.
      */
     @Test
-    public void fetchRealtimeAlertsSuccessfullyVia2ndServer() {
-        final List<String> baseUrls = Arrays.asList(
-            "http://tripgo.com/",
-            "http://riogo.com/"
-        );
-        final RealtimeAlertResponse response = ImmutableRealtimeAlertResponse.builder().build();
-        final RuntimeException error = new RuntimeException("1st server is down");
-        when(api.fetchRealtimeAlertsAsync(anyString(), eq("sydney")))
-            .thenReturn(Observable.<RealtimeAlertResponse>error(error))
-            .thenReturn(Observable.just(response));
+    fun `fetch realtime alerts successfully via 2nd server`() {
+        // Arrange
+        val baseUrls = listOf("http://tripgo.com/", "http://riogo.com/")
+        val response = ImmutableRealtimeAlertResponse.builder().build()
+        val error = RuntimeException("1st server is down")
 
-        final TestObserver<RealtimeAlertResponse> subscriber = service.fetchRealtimeAlertsAsync(baseUrls, "sydney").test();
-        subscriber.awaitTerminalEvent();
-        subscriber.assertNoErrors();
-        subscriber.assertValue(response);
+        every { api.fetchRealtimeAlertsAsync(any(), "sydney") }
+            .returnsMany(
+                Observable.error(error),
+                Observable.just(response)
+            )
 
-        verify(api, times(2)).fetchRealtimeAlertsAsync(
-            anyString(),
-            eq("sydney")
-        );
+        // Act
+        val testObserver: TestObserver<RealtimeAlertResponse> = service
+            .fetchRealtimeAlertsAsync(baseUrls, "sydney")
+            .test()
+
+        // Assert
+        testObserver.awaitTerminalEvent()
+        testObserver.assertNoErrors()
+        testObserver.assertValue(response)
+
+        verify(exactly = 2) { api.fetchRealtimeAlertsAsync(any(), "sydney") }
     }
 
     /**
      * When we fail to fetch via both servers.
      */
     @Test
-    public void failToFetchRealtimeAlerts() {
-        final List<String> baseUrls = Arrays.asList(
-            "http://tripgo.com/",
-            "http://riogo.com/"
-        );
-        final RuntimeException firstError = new RuntimeException("1st server is down");
-        final RuntimeException secondError = new RuntimeException("2nd server is down");
-        when(api.fetchRealtimeAlertsAsync(anyString(), eq("sydney")))
-            .thenReturn(Observable.<RealtimeAlertResponse>error(firstError))
-            .thenReturn(Observable.<RealtimeAlertResponse>error(secondError));
+    fun `fail to fetch realtime alerts`() {
+        // Arrange
+        val baseUrls = listOf("http://tripgo.com/", "http://riogo.com/")
+        val firstError = RuntimeException("1st server is down")
+        val secondError = RuntimeException("2nd server is down")
 
-        final TestObserver<RealtimeAlertResponse> subscriber = service.fetchRealtimeAlertsAsync(baseUrls, "sydney").test();
-        subscriber.awaitTerminalEvent();
-        subscriber.assertError(CompositeException.class);
+        every { api.fetchRealtimeAlertsAsync(any(), "sydney") }
+            .returnsMany(
+                Observable.error(firstError),
+                Observable.error(secondError)
+            )
 
-        verify(api, times(2)).fetchRealtimeAlertsAsync(
-            anyString(),
-            eq("sydney")
-        );
+        // Act
+        val testObserver: TestObserver<RealtimeAlertResponse> = service
+            .fetchRealtimeAlertsAsync(baseUrls, "sydney")
+            .test()
+
+        // Assert
+        testObserver.awaitTerminalEvent()
+        testObserver.assertError(CompositeException::class.java)
+
+        verify(exactly = 2) { api.fetchRealtimeAlertsAsync(any(), "sydney") }
     }
 }

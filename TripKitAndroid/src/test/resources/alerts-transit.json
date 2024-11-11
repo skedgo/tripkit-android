@@ -8,6 +8,23 @@
                 "title": "Trackwork - Blue Mountains Line",
                 "url": "http://www.sydneytrains.info/service_updates/service_interruptions/"
             },
+            "operators": [
+                "operator1",
+                "operator2"
+            ],
+            "stopCodes": [
+                "stopCode1",
+                "stopCode2"
+            ],
+            "serviceTripIDs": [
+                "test1",
+                "test2"
+            ],
+            "routes": [
+                {
+                    "id": "test"
+                }
+            ],
             "routeIDs": [
                 "BML_2",
                 "BML_1"
@@ -21,6 +38,23 @@
                 "title": "Wharf Closed",
                 "url": ""
             },
+            "operators": [
+                "operator1",
+                "operator2"
+            ],
+            "stopCodes": [
+                "stopCode1",
+                "stopCode2"
+            ],
+            "serviceTripIDs": [
+                "test1",
+                "test2"
+            ],
+            "routes": [
+                {
+                    "id": "test"
+                }
+            ],
             "routeIDs": [
                 "RV",
                 "DH"

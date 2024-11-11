@@ -62,7 +62,7 @@ class RegionServiceImplTest : TripKitAndroidRobolectricTest() {
         NewYork.name = "US_NY_NewYorkCity"
         NewYork.encodedPolyline = "oecvFnzhdM_}tA??o~oE~|tA?"
 
-        whenever(regionCache.async)
+        whenever(regionCache.getAsync())
             .thenReturn(Single.just(Arrays.asList(Sydney, NewYork)))
         whenever(
             regionFinder.contains(
@@ -96,7 +96,7 @@ class RegionServiceImplTest : TripKitAndroidRobolectricTest() {
         NewYork.name = "US_NY_NewYorkCity"
         NewYork.encodedPolyline = "oecvFnzhdM_}tA??o~oE~|tA?"
 
-        whenever(regionCache.async)
+        whenever(regionCache.getAsync())
             .thenReturn(Single.just(Arrays.asList(Sydney, NewYork)))
 
         val subscriber = TestObserver<Region>()
@@ -132,7 +132,7 @@ class RegionServiceImplTest : TripKitAndroidRobolectricTest() {
         SanJose.name = "San Jose"
         US.cities = ArrayList<Region.City>(Arrays.asList(NewYork, SanJose))
 
-        whenever(regionCache.async)
+        whenever(regionCache.getAsync())
             .thenReturn(Single.just(Arrays.asList(AU, US)))
 
         val subscriber = TestObserver<Location>()
@@ -148,7 +148,7 @@ class RegionServiceImplTest : TripKitAndroidRobolectricTest() {
         val modeMap = HashMap<String, TransportMode>()
         modeMap.put("car", TransportMode())
         modeMap.put("walk", TransportMode())
-        whenever(modeCache.async).thenReturn(Single.just<Map<String, TransportMode>>(modeMap))
+        whenever(modeCache.getAsync()).thenReturn(Single.just<Map<String, TransportMode>>(modeMap))
 
         val subscriber = TestObserver<Map<String, TransportMode>>()
         regionService.getTransportModesAsync().subscribe(subscriber)
@@ -164,7 +164,7 @@ class RegionServiceImplTest : TripKitAndroidRobolectricTest() {
             Region(),
             Region()
         )
-        whenever(regionCache.async).thenReturn(Single.just(regions))
+        whenever(regionCache.getAsync()).thenReturn(Single.just(regions))
 
         val subscriber = regionService.getRegionsAsync().test()
         subscriber.awaitTerminalEvent()
