@@ -1,99 +1,86 @@
-package com.skedgo.tripkit;
+package com.skedgo.tripkit
 
-import com.skedgo.TripKit;
-import com.skedgo.tripkit.routing.Trip;
-import com.skedgo.tripkit.routing.TripGroup;
+import com.skedgo.TripKit
+import com.skedgo.tripkit.routing.Trip
+import com.skedgo.tripkit.routing.TripGroup
+import io.reactivex.BackpressureStrategy.BUFFER
+import io.reactivex.Flowable
+import io.reactivex.Observable
+import io.reactivex.functions.Consumer
+import io.reactivex.functions.Function
+import io.reactivex.schedulers.Schedulers
+import io.reactivex.subjects.PublishSubject
+import org.immutables.value.Value.Immutable
+import org.immutables.value.Value.Style
+import org.immutables.value.Value.Style.BuilderVisibility.PACKAGE
+import org.immutables.value.Value.Style.ImplementationVisibility.PRIVATE
+import java.util.concurrent.TimeUnit
+import java.util.concurrent.atomic.AtomicReference
 
-import org.immutables.value.Value;
-import org.reactivestreams.Publisher;
+@Immutable
+@Style(visibility = PRIVATE, builderVisibility = PACKAGE)
+abstract class PeriodicRealTimeTripUpdateReceiver : RealTimeTripUpdateReceiver {
+    private val stop = PublishSubject.create<Any>()
 
-import java.util.concurrent.TimeUnit;
-import java.util.concurrent.atomic.AtomicReference;
-
-import io.reactivex.BackpressureStrategy;
-import io.reactivex.Flowable;
-import io.reactivex.FlowableTransformer;
-import io.reactivex.Observable;
-import io.reactivex.functions.Consumer;
-import io.reactivex.functions.Function;
-import io.reactivex.schedulers.Schedulers;
-import io.reactivex.subjects.PublishSubject;
-import kotlin.Pair;
-
-import static org.immutables.value.Value.Style.BuilderVisibility.PACKAGE;
-import static org.immutables.value.Value.Style.ImplementationVisibility.PRIVATE;
-
-@Value.Immutable
-@Value.Style(visibility = PRIVATE, builderVisibility = PACKAGE)
-public abstract class PeriodicRealTimeTripUpdateReceiver implements RealTimeTripUpdateReceiver {
-    private final PublishSubject<Object> stop = PublishSubject.create();
-
-    public static Builder builder() {
-        return new PeriodicRealTimeTripUpdateReceiverBuilder()
-            .tripUpdater(TripKit.getInstance().getTripUpdater());
-    }
-
-    @Override
-    public Flowable<Pair<Trip, TripGroup>> startAsync() {
-        return Flowable.interval(initialDelay(), period(), timeUnit(), Schedulers.trampoline())
-            .map(new Function<Long, String>() {
-                @Override
-                public String apply(Long aLong) {
-                    return group().getDisplayTrip().getUpdateURL();
-                }
-            })
+    override fun startAsync(): Flowable<Pair<Trip, TripGroup>> {
+        return Flowable.interval(
+            initialDelay().toLong(),
+            period().toLong(),
+            timeUnit(),
+            Schedulers.trampoline()
+        )
+            .map { group().displayTrip!!.updateURL!! }
             .onBackpressureDrop()
-            .compose(new FlowableTransformer<String, Trip>() {
-                public Publisher<Trip> apply(Flowable<String> updateUrl) {
-                    final AtomicReference<String> url = new AtomicReference<String>();
-                    return updateUrl
-                        .flatMap((Function<String, Flowable<Trip>>) s -> {
-                            final String lastUrl = url.get();
-                            return tripUpdater().getUpdateAsync(lastUrl != null ? lastUrl : s)
-                                .onErrorResumeNext(Observable.empty()).toFlowable(BackpressureStrategy.BUFFER);
-                        })
-                        .doOnNext(new Consumer<Trip>() {
-                            @Override
-                            public void accept(Trip trip) {
-                                url.set(trip.getUpdateURL());
-                            }
-                        });
-                }
+            .compose { updateUrl ->
+                val url = AtomicReference<String>()
+                updateUrl
+                    .flatMap { s: String ->
+                        val lastUrl = url.get()
+                        tripUpdater().getUpdateAsync(lastUrl ?: s)
+                            .onErrorResumeNext(Observable.empty()).toFlowable(BUFFER)
+                    }
+                    .doOnNext { trip -> url.set(trip.updateURL) }
+            }
+            .map<Pair<Trip, TripGroup>>(Function<Trip, Pair<Trip, TripGroup>> { trip ->
+                Pair(
+                    trip,
+                    group()
+                )
             })
-            .map(new Function<Trip, Pair<Trip, TripGroup>>() {
-                @Override
-                public Pair<Trip, TripGroup> apply(Trip trip) {
-                    return new Pair<>(trip, group());
-                }
-            })
-            .takeUntil(stop.toFlowable(BackpressureStrategy.BUFFER))
-            .subscribeOn(Schedulers.io());
+            .takeUntil(stop.toFlowable(BUFFER))
+            .subscribeOn(Schedulers.io())
     }
 
-    @Override
-    public void stop() {
-        stop.onNext(new Object());
+    override fun stop() {
+        stop.onNext(Any())
     }
 
-    abstract TripUpdater tripUpdater();
+    abstract fun tripUpdater(): TripUpdater
 
-    abstract TripGroup group();
+    abstract fun group(): TripGroup
 
-    abstract int initialDelay();
+    abstract fun initialDelay(): Int
 
-    abstract int period();
+    abstract fun period(): Int
 
-    abstract TimeUnit timeUnit();
+    abstract fun timeUnit(): TimeUnit
 
-    public interface Builder {
-        Builder group(TripGroup group);
+    interface Builder {
+        fun group(group: TripGroup?): Builder
 
-        Builder initialDelay(int initialDelay);
+        fun initialDelay(initialDelay: Int): Builder
 
-        Builder period(int period);
+        fun period(period: Int): Builder
 
-        Builder timeUnit(TimeUnit timeUnit);
+        fun timeUnit(timeUnit: TimeUnit): Builder
 
-        RealTimeTripUpdateReceiver build();
+        fun build(): RealTimeTripUpdateReceiver
+    }
+
+    companion object {
+        fun builder(): Builder {
+            return PeriodicRealTimeTripUpdateReceiverBuilder()
+                .tripUpdater(TripKit.getInstance().tripUpdater)
+        }
     }
 }

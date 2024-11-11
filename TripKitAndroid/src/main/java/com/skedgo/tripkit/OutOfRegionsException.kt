@@ -1,25 +1,15 @@
-package com.skedgo.tripkit;
+package com.skedgo.tripkit
 
-import androidx.annotation.Nullable;
-
-public final class OutOfRegionsException extends RuntimeException {
-    private final double latitude;
-    private final double longitude;
-
-    public OutOfRegionsException(
-        @Nullable String detailMessage,
-        double latitude,
-        double longitude) {
-        super(detailMessage);
-        this.latitude = latitude;
-        this.longitude = longitude;
+class OutOfRegionsException(
+    detailMessage: String?,
+    private val latitude: Double,
+    private val longitude: Double
+) : RuntimeException(detailMessage) {
+    fun latitude(): Double {
+        return latitude
     }
 
-    public double latitude() {
-        return latitude;
-    }
-
-    public double longitude() {
-        return longitude;
+    fun longitude(): Double {
+        return longitude
     }
 }

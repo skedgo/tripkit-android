@@ -64,7 +64,7 @@ internal class RegionServiceImpl(
     override fun getCitiesAsync(): Observable<Location> =
         getRegionsAsync()
             .flatMap { regions -> Observable.fromIterable(regions) }
-            .compose(com.skedgo.tripkit.Utils.getCities())
+            .compose(Utils.cities)
 
     override fun getCitiesByNameAsync(name: String?): Observable<Location> =
         getCitiesAsync().filter(com.skedgo.tripkit.Utils.matchCityName(name))

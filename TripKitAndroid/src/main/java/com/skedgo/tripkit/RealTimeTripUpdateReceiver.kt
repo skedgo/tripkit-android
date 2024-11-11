@@ -1,14 +1,12 @@
-package com.skedgo.tripkit;
+package com.skedgo.tripkit
+
+import com.skedgo.tripkit.routing.Trip
+import com.skedgo.tripkit.routing.TripGroup
+import io.reactivex.Flowable
 
 
-import com.skedgo.tripkit.routing.Trip;
-import com.skedgo.tripkit.routing.TripGroup;
+interface RealTimeTripUpdateReceiver {
+    fun startAsync(): Flowable<Pair<Trip, TripGroup>>
 
-import io.reactivex.Flowable;
-import kotlin.Pair;
-
-public interface RealTimeTripUpdateReceiver {
-    Flowable<Pair<Trip, TripGroup>> startAsync();
-
-    void stop();
+    fun stop()
 }

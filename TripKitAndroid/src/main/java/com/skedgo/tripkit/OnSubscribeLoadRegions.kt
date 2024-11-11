@@ -1,36 +1,28 @@
-package com.skedgo.tripkit;
+package com.skedgo.tripkit
 
-import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
-import android.database.sqlite.SQLiteOpenHelper;
+import android.database.Cursor
+import android.database.sqlite.SQLiteOpenHelper
+import io.reactivex.ObservableEmitter
+import io.reactivex.ObservableOnSubscribe
 
-import io.reactivex.ObservableEmitter;
-import io.reactivex.ObservableOnSubscribe;
-
-final class OnSubscribeLoadRegions implements ObservableOnSubscribe<Cursor> {
-    private final SQLiteOpenHelper databaseHelper;
-
-    OnSubscribeLoadRegions(SQLiteOpenHelper databaseHelper) {
-        this.databaseHelper = databaseHelper;
-    }
-
-    @Override
-    public void subscribe(ObservableEmitter<Cursor> emitter) throws Exception {
-        Cursor cursor = null;
+class OnSubscribeLoadRegions(private val databaseHelper: SQLiteOpenHelper) :
+    ObservableOnSubscribe<Cursor> {
+    @Throws(Exception::class)
+    override fun subscribe(emitter: ObservableEmitter<Cursor>) {
+        var cursor: Cursor? = null
         try {
-            final SQLiteDatabase database = databaseHelper.getReadableDatabase();
-            cursor = database.rawQuery("select * from " + Tables.REGIONS.getName(), null);
-            emitter.onNext(cursor);
-            if (!emitter.isDisposed()) {
-                emitter.onComplete();
+            val database = databaseHelper.readableDatabase
+            cursor = database.rawQuery("select * from " + Tables.REGIONS.name, null)
+            emitter.onNext(cursor)
+            if (!emitter.isDisposed) {
+                emitter.onComplete()
             }
-        } catch (Exception e) {
-            emitter.onError(e);
+        } catch (e: Exception) {
+            emitter.onError(e)
         } finally {
-            if (cursor != null && !cursor.isClosed()) {
-                cursor.close();
+            if (cursor != null && !cursor.isClosed) {
+                cursor.close()
             }
         }
-
     }
 }

@@ -1,26 +1,22 @@
-package com.skedgo.tripkit;
+package com.skedgo.tripkit
 
-import com.skedgo.tripkit.routing.RoutingResponse;
-import com.skedgo.tripkit.routing.Trip;
-
-import java.util.Map;
-
-import io.reactivex.Observable;
-import retrofit2.http.GET;
-import retrofit2.http.QueryMap;
-import retrofit2.http.Url;
+import com.skedgo.tripkit.routing.RoutingResponse
+import io.reactivex.Observable
+import retrofit2.http.GET
+import retrofit2.http.QueryMap
+import retrofit2.http.Url
 
 /**
- * Handles downloading trip via {@link Trip#getTemporaryURL()}.
+ * Handles downloading trip via [Trip.getTemporaryURL].
  */
-public interface TemporaryUrlApi {
+interface TemporaryUrlApi {
     /**
-     * @param url    Should be {@link Trip#getTemporaryURL()}.
-     * @param config Described in <a href="https://redmine.buzzhives.com/projects/buzzhives/wiki/Main_API_formats#Default-configuration-parameters">Default configuration parameters</a>.
+     * @param url    Should be [Trip.getTemporaryURL].
+     * @param config Described in [Default configuration parameters](https://redmine.buzzhives.com/projects/buzzhives/wiki/Main_API_formats#Default-configuration-parameters).
      */
     @GET
-    Observable<RoutingResponse> requestTemporaryUrlAsync(
-        @Url String url,
-        @QueryMap Map<String, Object> config
-    );
+    fun requestTemporaryUrlAsync(
+        @Url url: String?,
+        @QueryMap config: Map<String, Any>
+    ): Observable<RoutingResponse>
 }

@@ -1,26 +1,24 @@
-package com.skedgo.tripkit;
+package com.skedgo.tripkit
 
-import com.google.gson.annotations.JsonAdapter;
-import com.skedgo.tripkit.routing.RealTimeVehicle;
-import com.skedgo.tripkit.routing.Shape;
+import com.google.gson.annotations.JsonAdapter
+import com.skedgo.tripkit.routing.RealTimeVehicle
+import com.skedgo.tripkit.routing.Shape
+import org.immutables.gson.Gson.TypeAdapters
+import org.immutables.value.Value.Immutable
+import org.immutables.value.Value.Style
 
-import org.immutables.gson.Gson;
-import org.immutables.value.Value;
+@Immutable
+@TypeAdapters
+@JsonAdapter(
+    GsonAdaptersTransitService::class
+)
+@Style(passAnnotations = [JsonAdapter::class])
+interface TransitService {
+    fun shapes(): List<Shape>
 
-import java.util.List;
+    fun realTimeStatus(): String
 
-@Value.Immutable
-@Gson.TypeAdapters
-@JsonAdapter(GsonAdaptersTransitService.class)
-@Value.Style(passAnnotations = JsonAdapter.class)
-public interface TransitService {
+    fun realtimeVehicle(): RealTimeVehicle
 
-    List<Shape> shapes();
-
-    String realTimeStatus();
-
-    RealTimeVehicle realtimeVehicle();
-
-    List<RealTimeVehicle> realtimeAlternativeVehicle();
-
+    fun realtimeAlternativeVehicle(): List<RealTimeVehicle>
 }

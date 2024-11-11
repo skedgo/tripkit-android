@@ -1,148 +1,143 @@
-package com.skedgo;
+package com.skedgo
 
-import android.app.NotificationChannel;
-import android.content.Context;
-import android.os.Build;
-
-import com.skedgo.tripkit.Configs;
-import com.skedgo.tripkit.HttpClientModule;
-import com.skedgo.tripkit.LocationInfoService;
-import com.skedgo.tripkit.MainModule;
-import com.skedgo.tripkit.TripUpdater;
-import com.skedgo.tripkit.a2brouting.A2bRoutingDataModule;
-import com.skedgo.tripkit.a2brouting.RouteService;
-import com.skedgo.tripkit.android.A2bRoutingComponent;
-import com.skedgo.tripkit.android.AnalyticsComponent;
-import com.skedgo.tripkit.android.DateTimeComponent;
-import com.skedgo.tripkit.android.FetchRegionsService;
-import com.skedgo.tripkit.bookingproviders.BookingResolver;
-import com.skedgo.tripkit.data.TripKitPreferencesModule;
-import com.skedgo.tripkit.data.regions.RegionService;
-import com.skedgo.tripkit.notification.NotificationKt;
-import com.skedgo.tripkit.routing.GeoLocation;
-import com.skedgo.tripkit.routing.GetOffAlertCache;
-import com.skedgo.tripkit.tsp.TspModule;
-
-import net.danlew.android.joda.JodaTimeAndroid;
-
-import java.util.ArrayList;
-import java.util.List;
-
-import javax.inject.Singleton;
-
-import androidx.annotation.NonNull;
-import dagger.Component;
-import io.reactivex.functions.Consumer;
-
-import static com.skedgo.tripkit.routing.TripAlarmBroadcastReceiver.NOTIFICATION_CHANNEL_START_TRIP;
-import static com.skedgo.tripkit.routing.TripAlarmBroadcastReceiver.NOTIFICATION_CHANNEL_START_TRIP_ID;
+import android.app.NotificationChannel
+import android.content.Context
+import android.os.Build.VERSION
+import android.os.Build.VERSION_CODES
+import com.skedgo.tripkit.Configs
+import com.skedgo.tripkit.HttpClientModule
+import com.skedgo.tripkit.LocationInfoService
+import com.skedgo.tripkit.MainModule
+import com.skedgo.tripkit.TripUpdater
+import com.skedgo.tripkit.a2brouting.A2bRoutingDataModule
+import com.skedgo.tripkit.a2brouting.RouteService
+import com.skedgo.tripkit.android.A2bRoutingComponent
+import com.skedgo.tripkit.android.AnalyticsComponent
+import com.skedgo.tripkit.android.DateTimeComponent
+import com.skedgo.tripkit.android.FetchRegionsService
+import com.skedgo.tripkit.android.FetchRegionsService.Companion.scheduleAsync
+import com.skedgo.tripkit.bookingproviders.BookingResolver
+import com.skedgo.tripkit.data.TripKitPreferencesModule
+import com.skedgo.tripkit.data.regions.RegionService
+import com.skedgo.tripkit.notification.createChannel
+import com.skedgo.tripkit.notification.createNotificationChannels
+import com.skedgo.tripkit.routing.GeoLocation
+import com.skedgo.tripkit.routing.GetOffAlertCache
+import com.skedgo.tripkit.routing.TripAlarmBroadcastReceiver
+import com.skedgo.tripkit.tsp.TspModule
+import dagger.Component
+import io.reactivex.functions.Consumer
+import net.danlew.android.joda.JodaTimeAndroid
+import okhttp3.OkHttpClient
+import javax.inject.Singleton
 
 @Singleton
-@Component(modules = {
-    HttpClientModule.class,
-    A2bRoutingDataModule.class,
-    TspModule.class,
-    MainModule.class,
-    TripKitPreferencesModule.class
-})
-public abstract class TripKit {
-    private static TripKit instance;
+@Component(
+    modules = [
+        HttpClientModule::class,
+        A2bRoutingDataModule::class,
+        TspModule::class,
+        MainModule::class,
+        TripKitPreferencesModule::class
+    ]
+)
+abstract class TripKit {
+    abstract fun configs(): Configs
 
-    public static TripKit getInstance() {
-        synchronized (TripKit.class) {
-            if (instance == null) {
-                throw new IllegalStateException("Must initialize TripKit before using getInstance()");
+    abstract val regionService: RegionService
+
+    abstract val routeService: RouteService
+
+    abstract val okHttpClient3: OkHttpClient
+
+    abstract val bookingResolver: BookingResolver
+
+    abstract val locationInfoService: LocationInfoService
+
+    abstract val tripUpdater: TripUpdater
+
+    abstract fun a2bRoutingComponent(): A2bRoutingComponent
+
+    abstract fun analyticsComponent(): AnalyticsComponent
+
+    abstract fun dateTimeComponent(): DateTimeComponent
+
+    abstract val errorHandler: Consumer<Throwable>
+
+    companion object {
+        private var instance: TripKit? = null
+
+        fun getInstance(): TripKit {
+            synchronized(TripKit::class.java) {
+                checkNotNull(instance) { "Must initialize TripKit before using getInstance()" }
+                return instance!!
             }
-
-            return instance;
         }
-    }
 
-    /**
-     * This gives a chance to provide a custom {@link TripKit}.
-     * One idea is that we can create {@link DaggerTripKit}
-     * w/ some customized modules.
-     * <p>
-     * Note that you should only use this
-     * when you totally understand what you're doing.
-     * Otherwise, just go with {@link #initialize(Configs)} instead.
-     *
-     * @param context A {@link Context} to launch {@link FetchRegionsService}.
-     * @param tripKit Can be created via {@link DaggerTripKit}.
-     */
-    public static void initialize(@NonNull Context context, @NonNull TripKit tripKit) {
-        synchronized (TripKit.class) {
-            if (instance == null) {
-                instance = tripKit;
-            }
-            FetchRegionsService.Companion.scheduleAsync(context)
-                .subscribe(unused -> {
-                }, instance.getErrorHandler());
-        }
-    }
-
-    public static boolean isInitialized() {
-        return (instance != null);
-    }
-
-    public static void initialize(Configs configs) {
-        synchronized (TripKit.class) {
-            if (configs == null) {
-                throw new IllegalStateException("Must initialize Configs before using initialize()");
-            }
-
-            if (instance == null) {
-                instance = DaggerTripKit.builder()
-                    .mainModule(new MainModule(configs))
-                    .httpClientModule(new HttpClientModule(
-                        null,
-                        null,
-                        configs,
-                        null,
-                        null
-                    ))
-                    .build();
-                JodaTimeAndroid.init(configs.context());
-                GetOffAlertCache.INSTANCE.init(configs.context());
-                GeoLocation.INSTANCE.init(configs.context());
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-                    List<NotificationChannel> channels = new ArrayList<>();
-                    channels.add(NotificationKt.createChannel(
-                        NOTIFICATION_CHANNEL_START_TRIP_ID,
-                        NOTIFICATION_CHANNEL_START_TRIP)
-                    );
-                    NotificationKt.createNotificationChannels(
-                        configs.context(),
-                        channels
-                    );
+        /**
+         * This gives a chance to provide a custom [TripKit].
+         * One idea is that we can create [DaggerTripKit]
+         * w/ some customized modules.
+         *
+         *
+         * Note that you should only use this
+         * when you totally understand what you're doing.
+         * Otherwise, just go with [.initialize] instead.
+         *
+         * @param context A [Context] to launch [FetchRegionsService].
+         * @param tripKit Can be created via [DaggerTripKit].
+         */
+        @JvmStatic
+        fun initialize(context: Context, tripKit: TripKit) {
+            synchronized(TripKit::class.java) {
+                if (instance == null) {
+                    instance = tripKit
                 }
+                scheduleAsync(context)
+                    .subscribe({ unused: Void? -> }, instance!!.errorHandler)
             }
+        }
 
-            FetchRegionsService.Companion.scheduleAsync(configs.context())
-                .subscribe(unused -> {
-                }, instance.getErrorHandler());
+        @JvmStatic
+        val isInitialized: Boolean
+            get() = (instance != null)
+
+        @JvmStatic
+        fun initialize(configs: Configs) {
+            synchronized(TripKit::class.java) {
+                if (instance == null) {
+                    instance = DaggerTripKit.builder()
+                        .mainModule(MainModule(configs))
+                        .httpClientModule(
+                            HttpClientModule(
+                                null,
+                                null,
+                                configs,
+                                null,
+                                null
+                            )
+                        )
+                        .build()
+                    JodaTimeAndroid.init(configs.context())
+                    GetOffAlertCache.init(configs.context())
+                    GeoLocation.init(configs.context())
+                    if (VERSION.SDK_INT >= VERSION_CODES.O) {
+                        val channels: MutableList<NotificationChannel> = ArrayList()
+                        channels.add(
+                            createChannel(
+                                TripAlarmBroadcastReceiver.NOTIFICATION_CHANNEL_START_TRIP_ID,
+                                TripAlarmBroadcastReceiver.NOTIFICATION_CHANNEL_START_TRIP
+                            )
+                        )
+                        configs.context()
+                            .createNotificationChannels(
+                                channels
+                            )
+                    }
+                }
+                scheduleAsync(configs.context())
+                    .subscribe({ unused: Void -> }, instance?.errorHandler)
+            }
         }
     }
-
-    public abstract Configs configs();
-
-    public abstract RegionService getRegionService();
-
-    public abstract RouteService getRouteService();
-
-    public abstract okhttp3.OkHttpClient getOkHttpClient3();
-
-    public abstract BookingResolver getBookingResolver();
-
-    public abstract LocationInfoService getLocationInfoService();
-
-    public abstract TripUpdater getTripUpdater();
-
-    public abstract A2bRoutingComponent a2bRoutingComponent();
-
-    public abstract AnalyticsComponent analyticsComponent();
-
-    public abstract DateTimeComponent dateTimeComponent();
-
-    public abstract Consumer<Throwable> getErrorHandler();
 }

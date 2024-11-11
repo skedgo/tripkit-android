@@ -1,82 +1,68 @@
-package com.skedgo.tripkit;
+package com.skedgo.tripkit
 
-import android.content.ContentValues;
-import android.database.sqlite.SQLiteDatabase;
+import android.content.ContentValues
+import android.database.sqlite.SQLiteDatabase
+import com.google.gson.Gson
+import com.skedgo.tripkit.common.model.TransportMode
+import com.skedgo.tripkit.common.model.region.Region
+import com.skedgo.tripkit.common.model.region.RegionsResponse
+import io.reactivex.ObservableEmitter
+import io.reactivex.ObservableOnSubscribe
 
-import com.google.gson.Gson;
-import com.skedgo.tripkit.common.model.region.Region;
-import com.skedgo.tripkit.common.model.region.RegionsResponse;
-import com.skedgo.tripkit.common.model.TransportMode;
+class OnSubscribeSaveRegionsResponse(
+    private val database: SQLiteDatabase,
+    private val response: RegionsResponse
+) : ObservableOnSubscribe<Void> {
+    private val gson = Gson()
 
-import java.util.ArrayList;
-import java.util.Collection;
-
-import androidx.annotation.NonNull;
-import io.reactivex.ObservableEmitter;
-import io.reactivex.ObservableOnSubscribe;
-
-
-final class OnSubscribeSaveRegionsResponse implements ObservableOnSubscribe<Void> {
-    private final Gson gson = new Gson();
-    private final SQLiteDatabase database;
-    private final RegionsResponse response;
-
-    OnSubscribeSaveRegionsResponse(
-        @NonNull SQLiteDatabase database,
-        @NonNull RegionsResponse response) {
-        this.database = database;
-        this.response = response;
-    }
-
-    @Override
-    public void subscribe(ObservableEmitter<Void> emitter) throws Exception {
+    @Throws(Exception::class)
+    override fun subscribe(emitter: ObservableEmitter<Void>) {
         try {
-            database.beginTransaction();
+            database.beginTransaction()
 
-            database.delete(Tables.REGIONS.getName(), null, null);
-            database.delete(Tables.TRANSPORT_MODES.getName(), null, null);
+            database.delete(Tables.REGIONS.name, null, null)
+            database.delete(Tables.TRANSPORT_MODES.name, null, null)
 
-            final ArrayList<Region> regions = response.regions;
+            val regions = response.regions
             if (regions != null) {
-                for (Region region : regions) {
+                for (region in regions) {
                     database.insert(
-                        Tables.REGIONS.getName(),
+                        Tables.REGIONS.name,
                         null,
                         toRegionValues(region)
-                    );
+                    )
                 }
             }
 
-            final Collection<TransportMode> modes = response.getTransportModes();
+            val modes = response.transportModes
             if (modes != null) {
-                for (TransportMode mode : modes) {
+                for (mode in modes) {
                     database.insert(
-                        Tables.TRANSPORT_MODES.getName(),
+                        Tables.TRANSPORT_MODES.name,
                         null,
                         toTransportModeValues(mode)
-                    );
+                    )
                 }
             }
 
-            database.setTransactionSuccessful();
-            emitter.onComplete();
-        } catch (Exception e) {
-            emitter.onError(e);
+            database.setTransactionSuccessful()
+            emitter.onComplete()
+        } catch (e: Exception) {
+            emitter.onError(e)
         } finally {
-            database.endTransaction();
+            database.endTransaction()
         }
     }
 
-    ContentValues toRegionValues(Region region) {
-        final ContentValues values = new ContentValues(1);
-        values.put(Tables.FIELD_JSON.name, gson.toJson(region));
-        return values;
+    fun toRegionValues(region: Region): ContentValues {
+        val values = ContentValues(1)
+        values.put(Tables.FIELD_JSON.name, gson.toJson(region))
+        return values
     }
 
-    ContentValues toTransportModeValues(TransportMode mode) {
-        final ContentValues values = new ContentValues(1);
-        values.put(Tables.FIELD_JSON.name, gson.toJson(mode));
-        return values;
+    fun toTransportModeValues(mode: TransportMode): ContentValues {
+        val values = ContentValues(1)
+        values.put(Tables.FIELD_JSON.name, gson.toJson(mode))
+        return values
     }
-
 }

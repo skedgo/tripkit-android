@@ -1,33 +1,30 @@
-package com.skedgo.tripkit;
+package com.skedgo.tripkit
 
-import com.skedgo.tripkit.data.tsp.RegionInfo;
+import io.reactivex.Observable
 
-import io.reactivex.Observable;
-
-public interface TripPreferences {
-    /**
-     * This option should be used when {@link RegionInfo#supportsConcessionPricing()} is true.
-     */
-    boolean isConcessionPricingPreferred();
-
-    void setConcessionPricingPreferred(boolean isConcessionPricingPreferred);
+interface TripPreferences {
 
     /**
-     * @return An {@link Observable} which emits value of {@link #isConcessionPricingPreferred()}
-     * when it has changed.
+     * This option should be used when [RegionInfo.supportsConcessionPricing] is true.
      */
-    Observable<Boolean> whenConcessionPricingPreferenceChanges();
+    fun isConcessionPricingPreferred(): Boolean
+
+    fun setConcessionPricingPreferred(isConcessionPricingPreferred: Boolean)
 
     /**
-     * This option should be used when {@link RegionInfo#transitWheelchairAccessibility()} is true.
+     * An [Observable] which emits the value of [isConcessionPricingPreferred] when it changes.
      */
-    boolean isWheelchairPreferred();
-
-    void setWheelchairPreferred(boolean isWheelchairPreferred);
+    fun whenConcessionPricingPreferenceChanges(): Observable<Boolean>
 
     /**
-     * @return An {@link Observable} which emits value of {@link #isWheelchairPreferred()}
-     * when it has changed.
+     * This option should be used when [RegionInfo.transitWheelchairAccessibility] is true.
      */
-    Observable<Boolean> whenWheelchairPreferenceChanges();
+    fun isWheelchairPreferred(): Boolean
+
+    fun setWheelchairPreferred(isWheelchairPreferred: Boolean)
+
+    /**
+     * An [Observable] which emits the value of [isWheelchairPreferred] when it changes.
+     */
+    fun whenWheelchairPreferenceChanges(): Observable<Boolean>
 }

@@ -1,56 +1,47 @@
-package com.skedgo.tripkit;
+package com.skedgo.tripkit
 
-import com.skedgo.tripkit.common.model.TransportMode;
-
-import org.apache.commons.collections4.CollectionUtils;
-
-import java.util.Arrays;
-import java.util.HashSet;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
-import java.util.regex.Pattern;
-
-import androidx.annotation.NonNull;
-import io.reactivex.functions.BiFunction;
+import com.skedgo.tripkit.common.model.TransportMode
+import io.reactivex.functions.BiFunction
+import org.apache.commons.collections4.CollectionUtils
+import java.util.Arrays
+import java.util.LinkedList
+import java.util.regex.Pattern
 
 // TODO convert to kotlin and add coroutine version.
-final class ModeCombinationStrategy implements
+class ModeCombinationStrategy :
     BiFunction<Map<String, TransportMode>, List<String>, List<Set<String>>> {
-    @Override
-    public List<Set<String>> apply(
-        @NonNull Map<String, TransportMode> modeMap,
-        @NonNull List<String> modeIds
-    ) {
-        final Set<String> seenModeIds = new HashSet<>();
-        final List<Set<String>> modeIdSets = new LinkedList<>();
+    override fun apply(
+        modeMap: Map<String, TransportMode>,
+        modeIds: List<String>
+    ): List<MutableSet<String>> {
+        val seenModeIds: MutableSet<String> = HashSet()
+        val modeIdSets: MutableList<MutableSet<String>> = LinkedList()
 
-        for (String modeId : modeIds) {
+        for (modeId in modeIds) {
             if (seenModeIds.contains(modeId)) {
-                continue;
+                continue
             }
 
-            final Set<String> newSet = new HashSet<>();
-            newSet.add(modeId);
+            val newSet: MutableSet<String> = HashSet()
+            newSet.add(modeId)
 
-            TransportMode foundMode;
+            var foundMode: TransportMode?
             // For modes from modeIdentifiers, e.g. `pt_ltd_SCHOOLBUS_2029`, `pt_ltd_SCHOOLBUS_2031`, etc.
             // to remove numeric suffix to get base modeId for checking if exist on modeMap
-            String baseModeId = Pattern.compile("_\\d+$").matcher(modeId).replaceAll("");
+            val baseModeId = Pattern.compile("_\\d+$").matcher(modeId).replaceAll("")
 
             // Check if the baseModeId is present in the modeMap
-            foundMode = modeMap.get(baseModeId);
+            foundMode = modeMap[baseModeId]
             if (foundMode != null) {
-                boolean shouldMerge = false;
-                final List<String> implies = foundMode.getImplies();
+                var shouldMerge = false
+                val implies = foundMode.implies?.toList()
                 if (CollectionUtils.isNotEmpty(implies)) {
-                    newSet.addAll(implies);
+                    newSet.addAll(implies!!)
 
-                    for (String imply : implies) {
+                    for (imply in implies) {
                         if (seenModeIds.contains(imply)) {
-                            shouldMerge = true;
-                            break;
+                            shouldMerge = true
+                            break
                         }
                     }
                 }
@@ -60,37 +51,37 @@ final class ModeCombinationStrategy implements
                     // Then we have to find [A, C] to merge with [B, C].
                     // [A, C] then will become [A, B, C].
                     // If we don't do so, we may end up duplicate routes.
-                    for (Set<String> existingSet : modeIdSets) {
-                        for (String imply : implies) {
+                    for (existingSet in modeIdSets) {
+                        for (imply in implies!!) {
                             if (existingSet.contains(imply)) {
-                                existingSet.addAll(newSet);
-                                break;
+                                existingSet.addAll(newSet)
+                                break
                             }
                         }
                     }
                 } else {
-                    modeIdSets.add(newSet);
+                    modeIdSets.add(newSet)
                 }
             } else {
-                modeIdSets.add(newSet);
+                modeIdSets.add(newSet)
             }
 
-            seenModeIds.addAll(newSet);
+            seenModeIds.addAll(newSet)
         }
 
-        HashSet<String> multiModal = new HashSet<>(modeIds);
-        multiModal.remove(TransportMode.ID_WALK);
-        if (multiModal.size() > 1) {
-            modeIdSets.add(multiModal);
+        val multiModal = HashSet(modeIds)
+        multiModal.remove(TransportMode.ID_WALK)
+        if (multiModal.size > 1) {
+            modeIdSets.add(multiModal)
         }
 
         //Will remove ps_drt and wa_whe hash set since result is just the same with ps_drt mode
         modeIdSets.remove(
-            new HashSet<>(
+            HashSet(
                 Arrays.asList(TransportMode.ID_PS_DRT, TransportMode.ID_WHEEL_CHAIR)
             )
-        );
+        )
 
-        return modeIdSets;
+        return modeIdSets
     }
 }

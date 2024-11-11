@@ -62,7 +62,7 @@ internal class RouteServiceImpl(
     fun getParamsByPreferences(): Map<String, Any> {
         val map = ArrayMap<String, Any>()
         if (tripPreferences != null) {
-            if (tripPreferences.isConcessionPricingPreferred) {
+            if (tripPreferences.isConcessionPricingPreferred()) {
                 map["conc"] = true
             }
         }

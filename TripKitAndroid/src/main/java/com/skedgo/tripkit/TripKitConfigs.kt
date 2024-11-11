@@ -1,36 +1,37 @@
-package com.skedgo.tripkit;
+package com.skedgo.tripkit
 
-import org.immutables.value.Value;
+import org.immutables.value.Value.Default
+import org.immutables.value.Value.Immutable
 
-@Value.Immutable
-public abstract class TripKitConfigs implements Configs {
-    public static ImmutableTripKitConfigs.Builder builder() {
-        return ImmutableTripKitConfigs.builder();
+@Immutable
+abstract class TripKitConfigs : Configs {
+    companion object {
+        fun builder(): ImmutableTripKitConfigs.Builder {
+            return ImmutableTripKitConfigs.builder()
+        }
+    }
+    @Default
+    override fun debuggable(): Boolean {
+        return false
     }
 
-    @Value.Default
-    public boolean debuggable() {
-        return false;
+    @Default
+    override fun isUuidOptedOut(): Boolean {
+        return false
     }
 
-    @Value.Default
-    public boolean isUuidOptedOut() {
-        return false;
+    @Default
+    override fun hideTripMetrics(): Boolean {
+        return false
     }
 
-    @Value.Default
-    public boolean hideTripMetrics() {
-        return false;
+    @Default
+    override fun showReportProblemOnTripAction(): Boolean {
+        return false
     }
 
-    @Value.Default
-    public boolean showReportProblemOnTripAction() {
-        return false;
+    @Default
+    override fun showOperatorNames(): Boolean {
+        return false
     }
-
-    @Value.Default
-    public boolean showOperatorNames() {
-        return false;
-    }
-
 }
