@@ -6,7 +6,7 @@ import com.skedgo.tripkit.BookingAction
 import com.skedgo.tripkit.ExternalActionParams
 import io.reactivex.Observable
 
-internal class SmsBookingResolver : BookingResolver {
+class SmsBookingResolver : BookingResolver {
     override fun performExternalActionAsync(params: ExternalActionParams): Observable<BookingAction> {
         val action = BookingAction.builder()
             .bookingProvider(BookingResolver.SMS)
