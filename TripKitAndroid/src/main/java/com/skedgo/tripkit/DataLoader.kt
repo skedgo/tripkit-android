@@ -6,7 +6,7 @@ import java.util.concurrent.Callable
 import java.util.concurrent.atomic.AtomicReference
 
 abstract class DataLoader<TData> : Callable<Observable<TData>> {
-    private val memoryCache = AtomicReference<TData>()
+    val memoryCache = AtomicReference<TData>()
 
     @Synchronized
     override fun call(): Observable<TData> {

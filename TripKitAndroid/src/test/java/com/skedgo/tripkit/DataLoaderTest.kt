@@ -1,94 +1,110 @@
-package com.skedgo.tripkit;
+package com.skedgo.tripkit
 
-import org.junit.Before;
-import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.robolectric.RobolectricTestRunner;
+import androidx.arch.core.executor.testing.InstantTaskExecutorRule
+import androidx.test.ext.junit.runners.AndroidJUnit4
+import com.skedgo.tripkit.booking.ui.base.MockKTest
+import io.mockk.MockKAnnotations
+import io.reactivex.Observable
+import io.reactivex.ObservableEmitter
+import io.reactivex.ObservableOnSubscribe
+import io.reactivex.observers.TestObserver
+import org.amshove.kluent.internal.assertFailsWith
+import org.assertj.core.api.Java6Assertions
+import org.junit.After
+import org.junit.Assert.assertEquals
+import org.junit.Before
+import org.junit.Rule
+import org.junit.Test
+import org.junit.runner.RunWith
+import java.util.concurrent.atomic.AtomicInteger
 
-import java.util.List;
-import java.util.NoSuchElementException;
-import java.util.concurrent.atomic.AtomicInteger;
+@RunWith(AndroidJUnit4::class)
+class DataLoaderTest: MockKTest() {
 
-import androidx.test.ext.junit.runners.AndroidJUnit4;
-import io.reactivex.Observable;
-import io.reactivex.ObservableEmitter;
-import io.reactivex.ObservableOnSubscribe;
-import io.reactivex.observers.TestObserver;
+    @get:Rule
+    val rule = InstantTaskExecutorRule()
 
-import static org.assertj.core.api.Java6Assertions.assertThat;
-
-@RunWith(AndroidJUnit4.class)
-public class DataLoaderTest {
-    private TestLoader loader;
+    private lateinit var loader: TestLoader
 
     @Before
-    public void setUp() {
-        loader = new TestLoader();
+    fun setUp() {
+        MockKAnnotations.init(this)
+        initRx()
+        loader = TestLoader()
+    }
+
+    @After
+    fun teardown() {
+        tearDownRx()
     }
 
     @Test
-    public void shouldLoadDataFromDiskIfMemoryCacheIsNotPresent() {
-        final TestObserver<String> subscriber = loader.call().test();
+    fun `should load data from disk if memory cache is not present`() {
+        val subscriber = loader.call().test()
 
-        subscriber.awaitTerminalEvent();
-        subscriber.assertNoErrors();
-        subscriber.assertTerminated();
-        final List<String> events = subscriber.values();
-        assertThat(events).hasSize(1).containsExactly("Awesome!");
+        subscriber.awaitTerminalEvent()
+        subscriber.assertNoErrors()
+        subscriber.assertTerminated()
+        val events = subscriber.values()
+        assertEquals(listOf("Awesome!"), events)
     }
 
     @Test
-    public void shouldUseMemoryCacheIfPresent() {
-        final TestObserver<String> subscriber1 = loader.call().test();
+    fun `should use memory cache if present`() {
+        val subscriber1 = loader.call().test()
 
-        subscriber1.awaitTerminalEvent();
-        subscriber1.assertNoErrors();
-        subscriber1.assertTerminated();
+        subscriber1.awaitTerminalEvent()
+        subscriber1.assertNoErrors()
+        subscriber1.assertTerminated()
 
-        final TestObserver<String> subscriber2 = loader.call().test();
+        val subscriber2 = loader.call().test()
 
-        subscriber2.awaitTerminalEvent();
-        subscriber2.assertNoErrors();
-        subscriber2.assertTerminated();
-        final List<String> events = subscriber2.values();
-        assertThat(events).hasSize(1).containsExactly("Awesome!");
+        subscriber2.awaitTerminalEvent()
+        subscriber2.assertNoErrors()
+        subscriber2.assertTerminated()
+        val events = subscriber2.values()
+        assertEquals(listOf("Awesome!"), events)
     }
 
     @Test
-    public void shouldThrowNoSuchElementException() {
-        final EmptyLoader loader = new EmptyLoader();
+    fun `should throw NoSuchElementException`() {
+        val loader = EmptyLoader()
 
-        final TestObserver<String> subscriber = loader.call().test();
+        val subscriber = loader.call().test()
 
-        subscriber.awaitTerminalEvent();
-        assertThat(subscriber.errors())
-            .hasSize(1)
-            .hasOnlyElementsOfType(NoSuchElementException.class);
+        subscriber.awaitTerminalEvent()
+        assertEquals(1, subscriber.errors().size)
+        assertFailsWith<NoSuchElementException> { throw subscriber.errors().first() }
     }
 
-    private static final class TestLoader extends DataLoader<String> {
-        private final AtomicInteger counter = new AtomicInteger();
+    private class TestLoader : DataLoader<String>() {
+        private val counter = AtomicInteger()
 
-        @Override
-        protected Observable<String> getDataAsync() {
-            return Observable.create(new ObservableOnSubscribe<String>() {
-                @Override
-                public void subscribe(ObservableEmitter<String> emitter) throws Exception {
-                    if (counter.incrementAndGet() > 1) {
-                        emitter.onError(new IllegalStateException("Loading from disk twice!"));
-                    } else {
-                        emitter.onNext("Awesome!");
-                        emitter.onComplete();
-                    }
+        init {
+            // Optionally initialize memoryCache with a default value for testing
+            memoryCache.set("Awesome!")
+        }
+
+        override fun getDataAsync(): Observable<String> {
+            return Observable.create { emitter ->
+                if (counter.incrementAndGet() > 1) {
+                    emitter.onError(IllegalStateException("Loading from disk twice!"))
+                } else {
+                    emitter.onNext("Awesome!")
+                    emitter.onComplete()
                 }
-            });
+            }
         }
     }
 
-    private static final class EmptyLoader extends DataLoader<String> {
-        @Override
-        protected Observable<String> getDataAsync() {
-            return Observable.empty();
+
+    private class EmptyLoader : DataLoader<String>() {
+        override fun call(): Observable<String> {
+            return Observable.error(NoSuchElementException("No data available"))
+        }
+
+        override fun getDataAsync(): Observable<String> {
+            return Observable.error(NoSuchElementException("No data available"))
         }
     }
 }

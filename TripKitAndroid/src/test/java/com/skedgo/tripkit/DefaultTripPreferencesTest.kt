@@ -1,40 +1,38 @@
-package com.skedgo.tripkit;
+package com.skedgo.tripkit
 
-import android.content.Context;
+import android.content.Context
+import androidx.test.core.app.ApplicationProvider
+import androidx.test.ext.junit.runners.AndroidJUnit4
+import org.assertj.core.api.Java6Assertions
+import org.junit.Before
+import org.junit.Test
+import org.junit.runner.RunWith
 
-import org.junit.Before;
-import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.robolectric.RobolectricTestRunner;
-
-import androidx.test.core.app.ApplicationProvider;
-import androidx.test.ext.junit.runners.AndroidJUnit4;
-
-import static org.assertj.core.api.Java6Assertions.assertThat;
-
-@RunWith(AndroidJUnit4.class)
-public class DefaultTripPreferencesTest {
-    private DefaultTripPreferences preferences;
+@RunWith(AndroidJUnit4::class)
+class DefaultTripPreferencesTest {
+    private var preferences: DefaultTripPreferences? = null
 
     @Before
-    public void before() {
-        preferences = new DefaultTripPreferences(ApplicationProvider.getApplicationContext().getSharedPreferences(
-            "SomePreferences",
-            Context.MODE_PRIVATE
-        ));
+    fun before() {
+        preferences = DefaultTripPreferences(
+            ApplicationProvider.getApplicationContext<Context>().getSharedPreferences(
+                "SomePreferences",
+                Context.MODE_PRIVATE
+            )
+        )
     }
 
     @Test
-    public void storeAndQueryConcessionPricingPreference() {
-        assertThat(preferences.isConcessionPricingPreferred()).isFalse();
-        preferences.setConcessionPricingPreferred(true);
-        assertThat(preferences.isConcessionPricingPreferred()).isTrue();
+    fun storeAndQueryConcessionPricingPreference() {
+        Java6Assertions.assertThat(preferences!!.isConcessionPricingPreferred()).isFalse()
+        preferences!!.setConcessionPricingPreferred(true)
+        Java6Assertions.assertThat(preferences!!.isConcessionPricingPreferred()).isTrue()
     }
 
     @Test
-    public void storeAndQueryWheelchairPreference() {
-        assertThat(preferences.isWheelchairPreferred()).isFalse();
-        preferences.setWheelchairPreferred(true);
-        assertThat(preferences.isWheelchairPreferred()).isTrue();
+    fun storeAndQueryWheelchairPreference() {
+        Java6Assertions.assertThat(preferences!!.isWheelchairPreferred()).isFalse()
+        preferences!!.setWheelchairPreferred(true)
+        Java6Assertions.assertThat(preferences!!.isWheelchairPreferred()).isTrue()
     }
 }

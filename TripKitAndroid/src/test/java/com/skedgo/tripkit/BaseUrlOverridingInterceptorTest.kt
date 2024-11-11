@@ -1,111 +1,102 @@
-package com.skedgo.tripkit;
+package com.skedgo.tripkit
 
-import org.junit.Before;
-import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.mockito.ArgumentMatcher;
-import org.mockito.Mock;
-import org.mockito.MockitoAnnotations;
-import org.robolectric.RobolectricTestRunner;
+import androidx.test.ext.junit.runners.AndroidJUnit4
+import io.mockk.MockKAnnotations
+import io.mockk.every
+import io.mockk.mockk
+import io.mockk.verify
+import okhttp3.HttpUrl.Companion.toHttpUrl
+import okhttp3.Interceptor
+import okhttp3.Request
+import org.junit.Before
+import org.junit.Test
+import org.junit.runner.RunWith
+import java.util.concurrent.Callable
 
-import java.util.concurrent.Callable;
+@RunWith(AndroidJUnit4::class)
+class BaseUrlOverridingInterceptorTest {
 
-import androidx.test.ext.junit.runners.AndroidJUnit4;
-import okhttp3.HttpUrl;
-import okhttp3.Interceptor;
-import okhttp3.Request;
-
-import static org.mockito.Matchers.argThat;
-import static org.mockito.Matchers.same;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
-
-@RunWith(AndroidJUnit4.class)
-public class BaseUrlOverridingInterceptorTest {
-    @Mock
-    Callable<String> baseUrlAdapter;
-    private BaseUrlOverridingInterceptor interceptor;
+    private lateinit var baseUrlAdapter: Callable<String>
+    private lateinit var interceptor: BaseUrlOverridingInterceptor
 
     @Before
-    public void before() {
-        MockitoAnnotations.initMocks(this);
-        interceptor = new BaseUrlOverridingInterceptor(baseUrlAdapter);
+    fun setUp() {
+        MockKAnnotations.init(this)
+        baseUrlAdapter = mockk()
+        interceptor = BaseUrlOverridingInterceptor(baseUrlAdapter)
     }
 
     @Test
-    public void overrideSatappRequestWithoutQueryParams() throws Exception {
-        when(baseUrlAdapter.call()).thenReturn("https://granduni.buzzhives.com/satapp-beta/");
+    fun `override Satapp request without query params`() {
+        every { baseUrlAdapter.call() } returns "https://granduni.buzzhives.com/satapp-beta/"
 
-        final Interceptor.Chain chain = mock(Interceptor.Chain.class);
-        final Request chainRequest = new Request.Builder()
+        val chain = mockk<Interceptor.Chain>(relaxed = true)
+        val chainRequest = Request.Builder()
             .url("https://sydney-au-nsw-sydney.tripgo.skedgo.com/satapp/regions.json")
-            .build();
-        when(chain.request()).thenReturn(chainRequest);
+            .build()
+        every { chain.request() } returns chainRequest
 
-        final Request expectedRequest = chainRequest.newBuilder()
+        val expectedRequest = chainRequest.newBuilder()
             .url("https://granduni.buzzhives.com/satapp-beta/regions.json")
-            .build();
-        interceptor.intercept(chain);
+            .build()
 
-        verify(chain).proceed(argThat(new ArgumentMatcher<Request>() {
-            @Override
-            public boolean matches(Request actualRequest) {
-                return actualRequest.url().equals(expectedRequest.url())
-                    && actualRequest.method().equals(expectedRequest.method());
-            }
-        }));
+        interceptor.intercept(chain)
+
+        verify { chain.proceed(withArg { request ->
+            assert(request.url == expectedRequest.url)
+            assert(request.method == expectedRequest.method)
+        })}
     }
 
     @Test
-    public void overrideSatappRequestWithQueryParams() throws Exception {
-        when(baseUrlAdapter.call()).thenReturn("https://granduni.buzzhives.com/satapp-beta/");
+    fun `override Satapp request with query params`() {
+        every { baseUrlAdapter.call() } returns "https://granduni.buzzhives.com/satapp-beta/"
 
-        final Interceptor.Chain chain = mock(Interceptor.Chain.class);
-        final Request chainRequest = new Request.Builder()
-            .url(HttpUrl.parse("https://lepton-us-co-denver.tripgo.skedgo.com/satapp/routing.json?modes=ps_tax&v=11&arriveBefore=0&tt=0&departAfter=1459485056&version=a-beta4.5.1-debug"))
-            .build();
-        when(chain.request()).thenReturn(chainRequest);
+        val chain = mockk<Interceptor.Chain>(relaxed = true)
+        val chainRequest = Request.Builder()
+            .url("https://lepton-us-co-denver.tripgo.skedgo.com/satapp/routing.json?modes=ps_tax&v=11&arriveBefore=0&tt=0&departAfter=1459485056&version=a-beta4.5.1-debug".toHttpUrl())
+            .build()
+        every { chain.request() } returns chainRequest
 
-        final Request expectedRequest = chainRequest.newBuilder()
-            .url(HttpUrl.parse("https://granduni.buzzhives.com/satapp-beta/routing.json?modes=ps_tax&v=11&arriveBefore=0&tt=0&departAfter=1459485056&version=a-beta4.5.1-debug"))
-            .build();
-        interceptor.intercept(chain);
+        val expectedRequest = chainRequest.newBuilder()
+            .url("https://granduni.buzzhives.com/satapp-beta/routing.json?modes=ps_tax&v=11&arriveBefore=0&tt=0&departAfter=1459485056&version=a-beta4.5.1-debug".toHttpUrl())
+            .build()
 
-        verify(chain).proceed(argThat(new ArgumentMatcher<Request>() {
-            @Override
-            public boolean matches(Request request) {
-                return request.url().equals(expectedRequest.url())
-                    && request.method().equals(expectedRequest.method());
-            }
-        }));
+        interceptor.intercept(chain)
+
+        verify { chain.proceed(withArg { request ->
+            assert(request.url == expectedRequest.url)
+            assert(request.method == expectedRequest.method)
+        })}
     }
 
     @Test
-    public void ignoreNonTripgoRequest() throws Exception {
-        when(baseUrlAdapter.call()).thenReturn("https://granduni.buzzhives.com/satapp-beta/");
+    fun `ignore non Tripgo request`() {
+        every { baseUrlAdapter.call() } returns "https://granduni.buzzhives.com/satapp-beta/"
 
-        final Interceptor.Chain chain = mock(Interceptor.Chain.class);
-        final Request chainRequest = new Request.Builder()
-            .url(HttpUrl.parse("https://google.com/haha"))
-            .build();
-        when(chain.request()).thenReturn(chainRequest);
+        val chain = mockk<Interceptor.Chain>(relaxed = true)
+        val chainRequest = Request.Builder()
+            .url("https://google.com/haha".toHttpUrl())
+            .build()
+        every { chain.request() } returns chainRequest
 
-        interceptor.intercept(chain);
-        verify(chain).proceed(same(chainRequest));
+        interceptor.intercept(chain)
+
+        verify { chain.proceed(chainRequest) }
     }
 
     @Test
-    public void ignoreIfNoNewBaseUrlAvailable() throws Exception {
-        when(baseUrlAdapter.call()).thenReturn(null);
+    fun `ignore if no new base URL available`() {
+        every { baseUrlAdapter.call() } returns null
 
-        final Interceptor.Chain chain = mock(Interceptor.Chain.class);
-        final Request chainRequest = new Request.Builder()
-            .url(HttpUrl.parse("https://skedgo.com/tripgo"))
-            .build();
-        when(chain.request()).thenReturn(chainRequest);
+        val chain = mockk<Interceptor.Chain>(relaxed = true)
+        val chainRequest = Request.Builder()
+            .url("https://skedgo.com/tripgo".toHttpUrl())
+            .build()
+        every { chain.request() } returns chainRequest
 
-        interceptor.intercept(chain);
-        verify(chain).proceed(same(chainRequest));
+        interceptor.intercept(chain)
+
+        verify { chain.proceed(chainRequest) }
     }
 }
