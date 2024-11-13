@@ -9,6 +9,7 @@ import retrofit2.http.Url
 /**
  * Handles downloading trip via [Trip.getTemporaryURL].
  */
+@JvmSuppressWildcards
 interface TemporaryUrlApi {
     /**
      * @param url    Should be [Trip.getTemporaryURL].
