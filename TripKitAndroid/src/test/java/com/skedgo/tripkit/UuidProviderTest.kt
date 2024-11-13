@@ -1,46 +1,61 @@
-package com.skedgo.tripkit;
+package com.skedgo.tripkit
 
-import android.content.Context;
-import android.content.SharedPreferences;
+import android.content.Context
+import android.content.SharedPreferences
+import androidx.arch.core.executor.testing.InstantTaskExecutorRule
+import androidx.test.core.app.ApplicationProvider
+import androidx.test.ext.junit.runners.AndroidJUnit4
+import com.skedgo.tripkit.booking.ui.base.MockKTest
+import io.mockk.MockKAnnotations
+import org.junit.After
+import org.junit.Assert.assertEquals
+import org.junit.Assert.assertNotNull
+import org.junit.Assert.assertTrue
+import org.junit.Before
+import org.junit.Rule
+import org.junit.Test
+import org.junit.runner.RunWith
 
-import org.junit.Before;
-import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.robolectric.RobolectricTestRunner;
+@RunWith(AndroidJUnit4::class)
+class UuidProviderTest: MockKTest() {
 
-import androidx.test.core.app.ApplicationProvider;
-import androidx.test.ext.junit.runners.AndroidJUnit4;
+    @get:Rule
+    val rule = InstantTaskExecutorRule()
 
-import static org.assertj.core.api.Java6Assertions.assertThat;
-
-@RunWith(AndroidJUnit4.class)
-public class UuidProviderTest {
-    private UuidProvider provider;
-    private SharedPreferences preferences;
+    private lateinit var provider: UuidProvider
+    private lateinit var preferences: SharedPreferences
 
     @Before
-    public void before() {
-        preferences = ApplicationProvider.getApplicationContext().getSharedPreferences(
+    fun setUp() {
+        MockKAnnotations.init(this)
+        initRx()
+        preferences = ApplicationProvider.getApplicationContext<Context>().getSharedPreferences(
             "TripKit",
             Context.MODE_PRIVATE
-        );
-        provider = new UuidProvider(preferences);
+        )
+        provider = UuidProvider(preferences)
+    }
+
+    @After
+    fun tearDown() {
+        tearDownRx()
     }
 
     @Test
-    public void generateUuid() {
-        final String uuid = provider.call();
-        assertThat(uuid).isNotNull().isNotEmpty();
+    fun `generate uuid`() {
+        val uuid = provider.call()
+        assertNotNull(uuid)
+        assertTrue(uuid.isNotEmpty())
 
-        provider = new UuidProvider(preferences);
-        assertThat(provider.call()).isEqualTo(uuid);
+        provider = UuidProvider(preferences)
+        assertEquals(uuid, provider.call())
     }
 
     @Test
-    public void usePersistentUuid() {
+    fun `use persistent uuid`() {
         preferences.edit()
             .putString("UUID", "Some UUID")
-            .apply();
-        assertThat(provider.call()).isEqualTo("Some UUID");
+            .apply()
+        assertEquals("Some UUID", provider.call())
     }
 }

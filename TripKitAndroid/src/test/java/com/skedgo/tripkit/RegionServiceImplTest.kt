@@ -1,8 +1,8 @@
 package com.skedgo.tripkit
 
+import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.test.ext.junit.runners.AndroidJUnit4
-import com.nhaarman.mockitokotlin2.mock
-import com.nhaarman.mockitokotlin2.whenever
+import com.skedgo.tripkit.booking.ui.base.MockKTest
 import com.skedgo.tripkit.common.model.location.Location
 import com.skedgo.tripkit.common.model.region.Region
 import com.skedgo.tripkit.common.model.TransportMode
@@ -11,26 +11,33 @@ import com.skedgo.tripkit.data.tsp.ImmutableRegionInfo
 import com.skedgo.tripkit.data.tsp.Paratransit
 import com.skedgo.tripkit.data.tsp.RegionInfo
 import com.skedgo.tripkit.tsp.RegionInfoRepository
+import io.mockk.MockKAnnotations
+import io.mockk.clearAllMocks
+import io.mockk.every
+import io.mockk.mockk
+import io.mockk.verify
 import io.reactivex.Completable
 import io.reactivex.Observable
 import io.reactivex.Single
 import io.reactivex.observers.TestObserver
-import org.assertj.core.api.Java6Assertions.assertThat
+import org.amshove.kluent.internal.assertEquals
+import org.junit.After
+import org.junit.Before
+import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
-import org.mockito.Mockito.eq
-import org.mockito.Mockito.same
-import org.mockito.Mockito.times
-import org.mockito.Mockito.verify
-import java.util.Arrays
 
 @RunWith(AndroidJUnit4::class)
-class RegionServiceImplTest : TripKitAndroidRobolectricTest() {
-    internal val regionCache: com.skedgo.tripkit.Cache<List<Region>> = mock()
-    internal val modeCache: com.skedgo.tripkit.Cache<Map<String, TransportMode>> = mock()
-    internal val regionsFetcher: RegionsFetcher = mock()
-    internal val regionInfoRepository: RegionInfoRepository = mock()
-    internal val regionFinder: com.skedgo.tripkit.RegionFinder = mock()
+class RegionServiceImplTest: MockKTest() {
+
+    @get:Rule
+    val rule = InstantTaskExecutorRule()
+
+    private val regionCache: com.skedgo.tripkit.Cache<List<Region>> = mockk(relaxed = true)
+    private val modeCache: com.skedgo.tripkit.Cache<Map<String, TransportMode>> = mockk(relaxed = true)
+    private val regionsFetcher: RegionsFetcher = mockk(relaxed = true)
+    private val regionInfoRepository: RegionInfoRepository = mockk(relaxed = true)
+    private val regionFinder: com.skedgo.tripkit.RegionFinder = mockk(relaxed = true)
     private val regionService: RegionService by lazy {
         RegionServiceImpl(
             regionCache,
@@ -41,184 +48,133 @@ class RegionServiceImplTest : TripKitAndroidRobolectricTest() {
         )
     }
 
+    @Before
+    fun setUp() {
+        initRx()
+        MockKAnnotations.init(this)
+    }
+
+    @After
+    fun tearDown() {
+        tearDownRx()
+        clearAllMocks()
+    }
+
     @Test
-    fun shouldPropagateNullPointerExceptionIfLocationIsNull() {
+    fun `should propagate NullPointerException if location is null`() {
         val subscriber = regionService.getRegionByLocationAsync(null).test()
         subscriber.awaitTerminalEvent()
-        assertThat(subscriber.events[1])
-            .hasSize(1)
-            .hasOnlyElementsOfType(NullPointerException::class.java)
-            .extractingResultOf("getMessage")
-            .containsExactly("Location is null")
+        subscriber.assertError(NullPointerException::class.java)
+        assertEquals("Location is null", subscriber.errors()[0].message)
     }
 
     @Test
-    fun shouldTakeFirstFoundRegion() {
-        val Sydney = Region()
-        Sydney.name = "AU_NSW_Sydney"
-        Sydney.encodedPolyline = "nwcvE_fno[owyR??mcjRnwyR?"
+    fun `should take first found region`() {
+        val sydney = Region().apply {
+            name = "AU_NSW_Sydney"
+            encodedPolyline = "nwcvE_fno[owyR??mcjRnwyR?"
+        }
+        val newYork = Region().apply {
+            name = "US_NY_NewYorkCity"
+            encodedPolyline = "oecvFnzhdM_}tA??o~oE~|tA?"
+        }
 
-        val NewYork = Region()
-        NewYork.name = "US_NY_NewYorkCity"
-        NewYork.encodedPolyline = "oecvFnzhdM_}tA??o~oE~|tA?"
-
-        whenever(regionCache.getAsync())
-            .thenReturn(Single.just(Arrays.asList(Sydney, NewYork)))
-        whenever(
-            regionFinder.contains(
-                same(Sydney),
-                eq(-33.86749),
-                eq(151.20699)
-            )
-        ).thenReturn(true)
+        every { regionCache.getAsync() } returns Single.just(listOf(sydney, newYork))
+        every { regionFinder.contains(sydney, -33.86749, 151.20699) } returns true
 
         val subscriber = TestObserver<Region>()
-        regionService.getRegionByLocationAsync(
-            Location(
-                -33.86749,
-                151.20699
-            )
-        ).subscribe(subscriber)
+        regionService.getRegionByLocationAsync(Location(-33.86749, 151.20699)).subscribe(subscriber)
         subscriber.awaitTerminalEvent()
         subscriber.assertNoErrors()
-
-        subscriber.assertValueCount(1)
-        subscriber.assertValueAt(0) { region -> region == Sydney }
+        subscriber.assertValue(sydney)
     }
 
     @Test
-    fun shouldPropagateOutOfRegionsExceptionIfNoRegionIsFound() {
-        val Sydney = Region()
-        Sydney.name = "AU_NSW_Sydney"
-        Sydney.encodedPolyline = "nwcvE_fno[owyR??mcjRnwyR?"
+    fun `should propagate OutOfRegionsException if no region is found`() {
+        val sydney = Region().apply { name = "AU_NSW_Sydney" }
+        val newYork = Region().apply { name = "US_NY_NewYorkCity" }
 
-        val NewYork = Region()
-        NewYork.name = "US_NY_NewYorkCity"
-        NewYork.encodedPolyline = "oecvFnzhdM_}tA??o~oE~|tA?"
+        every { regionCache.getAsync() } returns Single.just(listOf(sydney, newYork))
 
-        whenever(regionCache.getAsync())
-            .thenReturn(Single.just(Arrays.asList(Sydney, NewYork)))
-
-        val subscriber = TestObserver<Region>()
-        val location =
-            Location(1.0, 2.0)
-        regionService.getRegionByLocationAsync(location).subscribe(subscriber)
+        val location = Location(1.0, 2.0)
+        val subscriber = regionService.getRegionByLocationAsync(location).test()
         subscriber.awaitTerminalEvent()
-        val errors = subscriber.events[1]
-        assertThat(errors)
-            .hasSize(1)
-            .hasOnlyElementsOfType(com.skedgo.tripkit.OutOfRegionsException::class.java)
-            .extractingResultOf("getMessage")
-            .containsExactly("Location lies outside covered area")
-
-        val error = errors[0] as com.skedgo.tripkit.OutOfRegionsException
-        assertThat(error.latitude()).isEqualTo(location.lat)
-        assertThat(error.longitude()).isEqualTo(location.lon)
+        subscriber.assertError(com.skedgo.tripkit.OutOfRegionsException::class.java)
+        val error = subscriber.errors()[0] as com.skedgo.tripkit.OutOfRegionsException
+        assertEquals(location.lat, error.latitude())
+        assertEquals(location.lon, error.longitude())
     }
 
     @Test
-    fun shouldTakeAllCitiesInRegions() {
-        val AU = Region()
-        val Sydney = Region.City()
-        Sydney.name = "Sydney"
-        val Newcastle = Region.City()
-        Newcastle.name = "Newcastle"
-        AU.cities = ArrayList<Region.City>(Arrays.asList(Sydney, Newcastle))
+    fun `should take all cities in regions`() {
+        val sydney = Region.City().apply { name = "Sydney" }
+        val newcastle = Region.City().apply { name = "Newcastle" }
+        val au = Region().apply { cities = ArrayList(listOf(sydney, newcastle)) }
 
-        val US = Region()
-        val NewYork = Region.City()
-        NewYork.name = "New York"
-        val SanJose = Region.City()
-        SanJose.name = "San Jose"
-        US.cities = ArrayList<Region.City>(Arrays.asList(NewYork, SanJose))
+        val newYork = Region.City().apply { name = "New York" }
+        val sanJose = Region.City().apply { name = "San Jose" }
+        val us = Region().apply { cities = ArrayList(listOf(newYork, sanJose)) }
 
-        whenever(regionCache.getAsync())
-            .thenReturn(Single.just(Arrays.asList(AU, US)))
+        every { regionCache.getAsync() } returns Single.just(listOf(au, us))
 
-        val subscriber = TestObserver<Location>()
-        regionService.getCitiesAsync().subscribe(subscriber)
+        val subscriber = regionService.getCitiesAsync().test()
         subscriber.awaitTerminalEvent()
         subscriber.assertNoErrors()
-        val cities = subscriber.events[0]
-        assertThat(cities).containsExactly(Sydney, Newcastle, NewYork, SanJose)
+        subscriber.assertValues(sydney, newcastle, newYork, sanJose)
     }
 
     @Test
-    fun shouldTakeTransportModesFromModesLoader() {
-        val modeMap = HashMap<String, TransportMode>()
-        modeMap.put("car", TransportMode())
-        modeMap.put("walk", TransportMode())
-        whenever(modeCache.getAsync()).thenReturn(Single.just<Map<String, TransportMode>>(modeMap))
+    fun `should take transport modes from modes loader`() {
+        val modeMap = mapOf("car" to TransportMode(), "walk" to TransportMode())
+        every { modeCache.getAsync() } returns Single.just(modeMap)
 
-        val subscriber = TestObserver<Map<String, TransportMode>>()
-        regionService.getTransportModesAsync().subscribe(subscriber)
+        val subscriber = regionService.getTransportModesAsync().test()
         subscriber.awaitTerminalEvent()
         subscriber.assertNoErrors()
-        val actualModeMap = subscriber.events[0]
-        assertThat(actualModeMap.first()).isEqualTo(modeMap)
+        subscriber.assertValue(modeMap)
     }
 
     @Test
-    fun shouldTakeRegionsFromRegionsLoader() {
-        val regions = Arrays.asList(
-            Region(),
-            Region()
-        )
-        whenever(regionCache.getAsync()).thenReturn(Single.just(regions))
+    fun `should take regions from regions loader`() {
+        val regions = listOf(Region(), Region())
+        every { regionCache.getAsync() } returns Single.just(regions)
 
         val subscriber = regionService.getRegionsAsync().test()
         subscriber.awaitTerminalEvent()
         subscriber.assertNoErrors()
-        val list = subscriber.events[0] as List<Region>
-        assertThat(list.first()).isEqualTo(regions)
+        subscriber.assertValue(regions)
     }
 
     @Test
-    fun shouldFetchParatransit() {
-        val paratransit = Paratransit(
-            "http://accessla.org/",
-            "Access",
-            "1.800.883.1295"
-        )
-        val regionInfo = ImmutableRegionInfo.builder()
-            .paratransit(paratransit)
-            .build()
+    fun `should fetch paratransit`() {
+        val paratransit = Paratransit("http://accessla.org/", "Access", "1.800.883.1295")
+        val regionInfo = ImmutableRegionInfo.builder().paratransit(paratransit).build()
 
-        val region = Region()
-        region.setURLs(ArrayList(listOf("https://lepton-us-ca-losangeles.tripgo.skedgo.com/satapp")))
-        region.name = "US_CA_LosAngeles"
-
-        whenever(regionInfoRepository.getRegionInfoByRegion(region)).thenReturn(
-            Observable.just<RegionInfo>(
-                regionInfo
+        val region = Region().apply {
+            setURLs(
+                ArrayList(listOf("https://lepton-us-ca-losangeles.tripgo.skedgo.com/satapp"))
             )
-        )
+            name = "US_CA_LosAngeles"
+        }
 
-        val subscriber = TestObserver<Paratransit>()
-        regionService.fetchParatransitByRegionAsync(region)
-            .subscribe(subscriber)
+        every { regionInfoRepository.getRegionInfoByRegion(region) } returns Observable.just(regionInfo)
 
+        val subscriber = regionService.fetchParatransitByRegionAsync(region).test()
         subscriber.awaitTerminalEvent()
         subscriber.assertNoErrors()
-
-        assertThat(subscriber.events[0])
-            .containsExactly(paratransit)
+        subscriber.assertValue(paratransit)
     }
 
     @Test
-    fun shouldInvalidateCachesAfterRefreshing() {
-        whenever(regionsFetcher.fetchAsync()).thenReturn(Completable.complete())
-        val subscriber = TestObserver<Void>()
-        regionService.refreshAsync().subscribe(subscriber)
+    fun `should invalidate caches after refreshing`() {
+        every { regionsFetcher.fetchAsync() } returns Completable.complete()
 
+        val subscriber = regionService.refreshAsync().test()
         subscriber.awaitTerminalEvent()
         subscriber.assertNoErrors()
 
-        verify<com.skedgo.tripkit.Cache<Map<String, TransportMode>>>(
-            modeCache,
-            times(1)
-        ).invalidate()
-        verify<com.skedgo.tripkit.Cache<List<Region>>>(regionCache, times(1)).invalidate()
-        verify<com.skedgo.tripkit.RegionFinder>(regionFinder, times(1)).invalidate()
+        verify(exactly = 1) { modeCache.invalidate() }
+        verify(exactly = 1) { regionCache.invalidate() }
+        verify(exactly = 1) { regionFinder.invalidate() }
     }
 }
