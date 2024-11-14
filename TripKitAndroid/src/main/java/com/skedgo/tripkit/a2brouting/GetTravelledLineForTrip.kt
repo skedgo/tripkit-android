@@ -20,7 +20,13 @@ class GetTravelledLineForTrip @Inject constructor() {
         const val LAT_LNG_SIMPLIFY_TOLERANCE = 5.0
     }
 
-    fun execute(segments: List<TripSegment>?): Observable<List<com.skedgo.tripkit.LineSegment>> {
+    private var customLatLngTolerance: Double? = null
+
+    fun execute(
+        segments: List<TripSegment>?,
+        customLatLngTolerance: Double? = null
+    ): Observable<List<com.skedgo.tripkit.LineSegment>> {
+        this.customLatLngTolerance = customLatLngTolerance
         return Observable
             .fromCallable {
                 createTravelledLinesToDraw(segments)
@@ -47,14 +53,15 @@ class GetTravelledLineForTrip @Inject constructor() {
                         else
                             it.serviceColor.color
                         val decodedWayPoints = PolyUtil.decode(it.encodedWaypoints)
-                        val simplified = decodedWayPoints.simplify(LAT_LNG_SIMPLIFY_TOLERANCE)
+                        val simplified = decodedWayPoints.simplify(customLatLngTolerance ?: LAT_LNG_SIMPLIFY_TOLERANCE)
                         simplified.zipWithNext()
                             .map { (start, end) ->
                                 com.skedgo.tripkit.LineSegment(
                                     TripKitLatLng(start.latitude, start.longitude),
                                     TripKitLatLng(end.latitude, end.longitude),
                                     color,
-                                    com.skedgo.tripkit.LineSegment.Tag.SHAPE.toString()
+                                    com.skedgo.tripkit.LineSegment.Tag.SHAPE.toString(),
+                                    segment.trip?.uuid
                                 )
                             }
                     }
@@ -62,7 +69,7 @@ class GetTravelledLineForTrip @Inject constructor() {
                     .filter { it.encodedWaypoints() != null }
                     .flatMap { street ->
                         PolyUtil.decode(street.encodedWaypoints()).simplify(
-                            LAT_LNG_SIMPLIFY_TOLERANCE
+                            customLatLngTolerance ?: LAT_LNG_SIMPLIFY_TOLERANCE
                         )
                             .zipWithNext()
                             .map { (start, end) ->
@@ -77,7 +84,8 @@ class GetTravelledLineForTrip @Inject constructor() {
                                     TripKitLatLng(start.latitude, start.longitude),
                                     TripKitLatLng(end.latitude, end.longitude),
                                     lineColor,
-                                    com.skedgo.tripkit.LineSegment.Tag.STREET.toString()
+                                    com.skedgo.tripkit.LineSegment.Tag.STREET.toString(),
+                                    segment.trip?.uuid
                                 )
                             }
                     }
@@ -91,7 +99,8 @@ class GetTravelledLineForTrip @Inject constructor() {
                                 TripKitLatLng(from.lat, from.lon),
                                 TripKitLatLng(to.lat, to.lon),
                                 color,
-                                ""
+                                "",
+                                segment.trip?.uuid
                             )
                         )
                     )
