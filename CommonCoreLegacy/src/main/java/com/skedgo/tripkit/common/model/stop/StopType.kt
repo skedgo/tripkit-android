@@ -19,12 +19,12 @@ enum class StopType(private val key: String) {
 
     companion object {
         @JvmStatic
-        fun from(key: String): StopType? {
-            if (TextUtils.isEmpty(key)) {
+        fun from(key: String?): StopType? {
+            if (key == null && TextUtils.isEmpty(key)) {
                 return null
             }
 
-            val lowerCase = key.lowercase()
+            val lowerCase = key!!.lowercase()
             for (value in values()) {
                 if (TextUtils.equals(value.key, lowerCase)) {
                     return value

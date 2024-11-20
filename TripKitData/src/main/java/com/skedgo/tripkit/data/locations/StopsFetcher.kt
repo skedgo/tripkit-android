@@ -54,7 +54,7 @@ open class StopsFetcher(
             .flatMap { existingCells ->
                 splitIntoBodiesForNewFetchOrUpdate(
                     cellIds,
-                    existingCells,
+                    emptyList(), //existingCells
                     region,
                     level
                 )
