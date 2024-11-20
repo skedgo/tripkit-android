@@ -20,7 +20,7 @@ enum class StopType(private val key: String) {
     companion object {
         @JvmStatic
         fun from(key: String?): StopType? {
-            if (key == null && TextUtils.isEmpty(key)) {
+            if (key == null || TextUtils.isEmpty(key)) {
                 return null
             }
 
