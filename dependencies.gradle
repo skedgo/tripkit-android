@@ -39,6 +39,7 @@ versions.qrCodeGenerator = "1.2.0"
 versions.amplifyCore = "2.14.11"
 versions.amplifyAuth = "1.2.0"
 versions.desugar = "2.0.4"
+versions.preference = "1.2.0"
 
 ext.versions = versions
 
@@ -58,6 +59,7 @@ libs.javaxAnnotation = "javax.annotation:javax.annotation-api:$versions.javaxAnn
 libs.instabug = "com.instabug.library:instabug:$versions.instabug"
 libs.instabugInterceptor = "com.instabug.library:instabug-with-okhttp-interceptor:$versions.instabug"
 libs.mockk = "io.mockk:mockk:$versions.mockk"
+libs.preference = "androidx.preference:preference:$versions.preference"
 
 // Support Library package
 libs.supportAnnotations = "androidx.annotation:annotation:$versions.androidxVersion"
