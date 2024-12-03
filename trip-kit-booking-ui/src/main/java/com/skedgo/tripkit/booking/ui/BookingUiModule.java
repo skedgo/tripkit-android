@@ -37,7 +37,7 @@ public class BookingUiModule {
 
     @Provides
     OkHttpClient httpClient() {
-        return TripKit.getInstance().getOkHttpClient3();
+        return TripKit.Companion.getInstance().getOkHttpClient3();
     }
 
     @Provides

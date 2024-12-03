@@ -6,8 +6,8 @@ import androidx.collection.ArrayMap
 import com.skedgo.tripkit.a2brouting.FailoverA2bRoutingApi
 import com.skedgo.tripkit.a2brouting.RouteService
 import com.skedgo.tripkit.a2brouting.ToWeightingProfileString
-import com.skedgo.tripkit.common.model.location.Location
 import com.skedgo.tripkit.common.model.Query
+import com.skedgo.tripkit.common.model.location.Location
 import com.skedgo.tripkit.routing.TripGroup
 import com.skedgo.tripkit.tsp.RegionInfoRepository
 import io.reactivex.Observable
@@ -40,7 +40,7 @@ internal class RouteServiceImpl(
 
                 val region = subQuery.region
 
-                val baseUrls = region?.getURLs()
+                val baseUrls = region?.getURLs()?.toList()
                 val modes = transportModeFilter.getFilteredMode(subQuery.transportModeIds)
 
                 val excludeStops = subQuery.excludedStopCodes
@@ -48,7 +48,13 @@ internal class RouteServiceImpl(
                     .filter { transportModeFilter.avoidTransportMode(it) }
 
                 val options = toOptions(subQuery)
-                routingApi.fetchRoutesAsync(baseUrls, modes, avoidModes, excludeStops, options)
+                routingApi.fetchRoutesAsync(
+                    baseUrls.orEmpty(),
+                    modes,
+                    avoidModes,
+                    excludeStops,
+                    options
+                )
             }
     }
 
@@ -56,14 +62,14 @@ internal class RouteServiceImpl(
     fun getParamsByPreferences(): Map<String, Any> {
         val map = ArrayMap<String, Any>()
         if (tripPreferences != null) {
-            if (tripPreferences.isConcessionPricingPreferred) {
+            if (tripPreferences.isConcessionPricingPreferred()) {
                 map["conc"] = true
             }
         }
 
 
         if (co2Preferences != null) {
-            val co2Profile = co2Preferences.co2Profile
+            val co2Profile = co2Preferences.getCo2Profile()
             for ((key, value) in co2Profile) {
                 map["co2[$key]"] = value
             }

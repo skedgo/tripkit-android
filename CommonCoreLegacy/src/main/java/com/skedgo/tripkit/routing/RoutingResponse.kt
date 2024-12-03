@@ -312,7 +312,7 @@ class RoutingResponse {
         </DIRECTION></DIRECTION> */
         @JvmStatic
         fun processDirectionTemplate(
-            serviceDirectionNode: JsonPrimitive,
+            serviceDirectionNode: JsonPrimitive?,
             notes: String,
             resources: Resources?
         ): String {
@@ -323,7 +323,7 @@ class RoutingResponse {
             }
 
             if (!isElementMissing(serviceDirectionNode)) {
-                val serviceDirection = serviceDirectionNode.asString
+                val serviceDirection = serviceDirectionNode?.asString
                 notes = if (!TextUtils.isEmpty(serviceDirection)) {
                     notes.replace(
                         SegmentNotesTemplates.TEMPLATE_DIRECTION,

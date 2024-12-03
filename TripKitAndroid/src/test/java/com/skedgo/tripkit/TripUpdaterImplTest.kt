@@ -3,7 +3,6 @@ package com.skedgo.tripkit
 import android.content.res.Resources
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.google.gson.Gson
-import com.nhaarman.mockitokotlin2.whenever
 import com.skedgo.tripkit.routing.RoutingResponse
 import com.skedgo.tripkit.routing.Trip
 import com.skedgo.tripkit.routing.TripGroup
@@ -17,9 +16,6 @@ import org.assertj.core.api.Java6Assertions.assertThat
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
-import org.mockito.Mock
-import org.mockito.Mockito.mock
-import org.mockito.MockitoAnnotations
 
 @RunWith(AndroidJUnit4::class)
 class TripUpdaterImplTest {
