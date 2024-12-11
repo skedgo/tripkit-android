@@ -38,7 +38,7 @@ object WhereClauses {
     fun removeTripGroupsHappenedBefore(
         hours: Long,
         currentMillis: Long
-    ): Pair<String, Array<String>> {
+    ): Pair<String?, Array<String>?> {
         val secs = HOURS.toSeconds(hours)
         val currentSecs = MILLISECONDS.toSeconds(currentMillis)
         val args = arrayOf((currentSecs - secs).toString())
@@ -51,14 +51,14 @@ object WhereClauses {
     }
 
     // Remove all trips that doesn't have a group in tripGroups table
-    fun removeTripsWithNoTripGroup(): Pair<String, Array<String>> {
+    fun removeTripsWithNoTripGroup(): Pair<String?, Array<String>?> {
         val where: String =
             "$COL_GROUP_ID NOT IN (SELECT $COL_UUID FROM $TABLE_TRIP_GROUPS)"
         return Pair(where, arrayOf())
     }
 
     // Remove all segments that doesn't have a trip in trips table
-    fun removeSegmentsWithNoTrip(): Pair<String, Array<String>> {
+    fun removeSegmentsWithNoTrip(): Pair<String?, Array<String>?> {
         val where: String =
             "$COL_TRIP_ID NOT IN (SELECT $COL_UUID FROM $TABLE_TRIPS)"
         return Pair(where, arrayOf())
