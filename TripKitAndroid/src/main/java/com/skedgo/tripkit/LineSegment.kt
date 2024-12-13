@@ -9,7 +9,8 @@ class LineSegment(
     val start: TripKitLatLng,
     val end: TripKitLatLng,
     val color: Int,
-    val tag: String
+    val tag: String,
+    val tripUuid: String? = null
 ) {
     enum class Tag {
         SHAPE,

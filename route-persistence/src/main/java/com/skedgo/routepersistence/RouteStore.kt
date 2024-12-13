@@ -81,7 +81,7 @@ open class RouteStore(private val databaseHelper: SQLiteOpenHelper, private val 
 
     open fun deleteByTableAsync(
         tables: List<String>,
-        whereClauses: List<Pair<String, Array<String>>>
+        whereClauses: List<Pair<String?, Array<String>?>>
     ): Observable<Int> {
         if (tables.size != whereClauses.size) {
             throw IllegalArgumentException("Tables and whereClauses must have the same size")
@@ -248,9 +248,28 @@ open class RouteStore(private val databaseHelper: SQLiteOpenHelper, private val 
         return database.delete(TABLE_TRIP_GROUPS, whereClause.first, whereClause.second)
     }
 
+    fun countRecords(tableName: String): Int {
+        val database = databaseHelper.writableDatabase
+        database.beginTransaction()
+        var recordCount = 0
+        val cursor = database.rawQuery("SELECT COUNT(*) FROM $tableName", null)
+        try {
+            if (cursor.moveToFirst()) {
+                recordCount = cursor.getInt(0)
+            }
+        } catch (e: Exception) {
+            e.printStackTrace()
+        } finally {
+            cursor.close()
+            database.setTransactionSuccessful()
+            database.endTransaction()
+        }
+        return recordCount
+    }
+
     private fun deleteByTablesInTransaction(
         tables: List<String>,
-        whereClauses: List<Pair<String, Array<String>>>
+        whereClauses: List<Pair<String?, Array<String>?>>
     ): Int {
         val database = databaseHelper.writableDatabase
         var totalRowsDeleted = 0

@@ -62,7 +62,7 @@ class MultiSourceGeocodingAggregator<T : GCResultInterface> private constructor(
             }
         }
 
-        return GeocodeUtilities.sortByScore(scoredResults)
+        return scoredResults.sortedByDescending { it.score }
     }
 
     fun flattenAggregate(userQuery: GCQueryInterface, providersResults: List<List<T>>): List<GCResultInterface> {
