@@ -5,8 +5,10 @@ import com.google.gson.annotations.SerializedName
 import com.skedgo.tripkit.common.model.booking.confirmation.BookingConfirmationInputNew
 import com.skedgo.tripkit.common.model.booking.confirmation.BookingConfirmationInputOptions
 import com.skedgo.tripkit.common.model.booking.confirmation.BookingConfirmationNotes
+import com.skedgo.tripkit.common.util.getCurrencySymbol
 import com.skedgo.tripkit.data.database.booking.ticket.TicketEntity
 import com.skedgo.tripkit.extensions.fromJson
+import java.util.Locale
 
 data class QuickBooking(
     val bookingTitle: String,
@@ -19,8 +21,27 @@ data class QuickBooking(
     val tripUpdateURL: String,
     @SerializedName("fares") val fares: List<Fare>? = emptyList(),
     val billingEnabled: Boolean,
-    val riders: List<Rider>
-)
+    val riders: List<Rider>,
+    val minPrice: Double,
+    val maxPrice: Double
+) {
+    fun getPriceRange(): String {
+        val currencySymbol = fares?.firstOrNull()?.currency?.getCurrencySymbol().orEmpty()
+        return if (minPrice == maxPrice) {
+            String.format("%s%.2f", currencySymbol, getConvertedPrice(maxPrice))
+        } else {
+            "${
+                String.format(
+                    "%s%.2f",
+                    currencySymbol,
+                    getConvertedPrice(minPrice)
+                )
+            } - ${String.format("%s%.2f", currencySymbol, getConvertedPrice(maxPrice))}"
+        }
+    }
+
+    fun getConvertedPrice(price: Double) = price / 100.0
+}
 
 data class Option(
     val id: String,
@@ -91,7 +112,12 @@ data class Input(
                 value = ""
             }
 
-            values == listOf(type.getDefaultValueByType(title, defaultActionTitle = defaultActionTitle)) -> {
+            values == listOf(
+                type.getDefaultValueByType(
+                    title,
+                    defaultActionTitle = defaultActionTitle
+                )
+            ) -> {
                 values = emptyList()
             }
         }

@@ -16,7 +16,9 @@ data class QuickBookResponse(
     val paymentOptions: List<PaymentOption>?,
     val review: List<Review>?,
     val publishableApiKey: String?,
-    val ephemeralKey: EphemeralKey?
+    val ephemeralKey: EphemeralKey?,
+    val availableList: List<QuickBooking>? = null,
+    val unavailableList: List<QuickBooking>? = null,
 )
 
 data class Form(
