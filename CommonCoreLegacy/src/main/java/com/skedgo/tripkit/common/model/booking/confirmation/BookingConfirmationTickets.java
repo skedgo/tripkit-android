@@ -62,6 +62,7 @@ public abstract class BookingConfirmationTickets implements Parcelable {
 
     public abstract String currency();
 
+    @Nullable
     public abstract String description();
 
     public abstract String id();
