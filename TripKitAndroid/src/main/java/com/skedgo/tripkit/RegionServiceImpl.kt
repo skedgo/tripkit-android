@@ -14,6 +14,8 @@ import io.reactivex.Observable
 import io.reactivex.Single
 import io.reactivex.functions.BiFunction
 
+const val LOCATION_NOT_SUPPORTED_ERROR = "Location lies outside covered area"
+
 internal class RegionServiceImpl(
     private val regionCache: Cache<List<Region>>,
     private val modeCache: Cache<Map<String, TransportMode>>,
@@ -46,7 +48,7 @@ internal class RegionServiceImpl(
                 if (error is NoSuchElementException)
                     Single.error(
                         OutOfRegionsException(
-                            "Location lies outside covered area",
+                            LOCATION_NOT_SUPPORTED_ERROR,
                             latitude,
                             longitude
                         )
