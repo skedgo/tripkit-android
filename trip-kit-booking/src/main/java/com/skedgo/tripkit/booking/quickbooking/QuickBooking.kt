@@ -22,7 +22,8 @@ data class QuickBooking(
     val billingEnabled: Boolean,
     val riders: List<Rider>,
     val minPrice: Double,
-    val maxPrice: Double
+    val maxPrice: Double,
+    val warningMessage: String? = null
 ) {
     fun getPriceRange(): String {
         val currencySymbol = fares?.firstOrNull()?.currency?.getCurrencySymbol().orEmpty()
