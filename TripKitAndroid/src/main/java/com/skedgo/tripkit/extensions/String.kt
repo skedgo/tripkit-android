@@ -6,7 +6,8 @@ fun String.buildUrlWithQueryParams(
     modes: List<String>,
     excludedTransitModes: List<String>,
     excludeStops: List<String>,
-    options: Map<String, Any>
+    options: Map<String, Any>,
+    isGroupedDrt: Boolean
 ): String {
     val urlBuilder = this.toHttpUrlOrNull()?.newBuilder()
         ?.addPathSegment("routing.json")
@@ -25,6 +26,10 @@ fun String.buildUrlWithQueryParams(
 
     options.forEach { (key, value) ->
         urlBuilder?.addQueryParameter(key, value.toString())
+    }
+
+    if(isGroupedDrt) {
+        urlBuilder?.addQueryParameter("groupDRT", "true")
     }
 
     return urlBuilder?.build().toString()

@@ -5,6 +5,7 @@ import com.google.gson.annotations.SerializedName
 import com.skedgo.tripkit.common.model.booking.confirmation.BookingConfirmationInputNew
 import com.skedgo.tripkit.common.model.booking.confirmation.BookingConfirmationInputOptions
 import com.skedgo.tripkit.common.model.booking.confirmation.BookingConfirmationNotes
+import com.skedgo.tripkit.common.util.getCurrencySymbol
 import com.skedgo.tripkit.data.database.booking.ticket.TicketEntity
 import com.skedgo.tripkit.extensions.fromJson
 
@@ -19,8 +20,28 @@ data class QuickBooking(
     val tripUpdateURL: String,
     @SerializedName("fares") val fares: List<Fare>? = emptyList(),
     val billingEnabled: Boolean,
-    val riders: List<Rider>
-)
+    val riders: List<Rider>,
+    val minPrice: Double,
+    val maxPrice: Double,
+    val warningMessage: String? = null
+) {
+    fun getPriceRange(): String {
+        val currencySymbol = fares?.firstOrNull()?.currency?.getCurrencySymbol().orEmpty()
+        return if (minPrice == maxPrice) {
+            String.format("%s%.2f", currencySymbol, getConvertedPrice(maxPrice))
+        } else {
+            "${
+                String.format(
+                    "%s%.2f",
+                    currencySymbol,
+                    getConvertedPrice(minPrice)
+                )
+            } - ${String.format("%s%.2f", currencySymbol, getConvertedPrice(maxPrice))}"
+        }
+    }
+
+    fun getConvertedPrice(price: Double) = price / 100.0
+}
 
 data class Option(
     val id: String,
@@ -91,7 +112,12 @@ data class Input(
                 value = ""
             }
 
-            values == listOf(type.getDefaultValueByType(title, defaultActionTitle = defaultActionTitle)) -> {
+            values == listOf(
+                type.getDefaultValueByType(
+                    title,
+                    defaultActionTitle = defaultActionTitle
+                )
+            ) -> {
                 values = emptyList()
             }
         }
@@ -117,12 +143,18 @@ data class Fare(
     val description: String,
     val name: String,
     val price: Double = 0.0,
-    var value: Long?,
+    var value: Long? = 0,
     val max: Int? = null,
     val riders: List<Rider>,
     val status: String,
-    val type: String
-)
+    val type: String,
+    var icon: Int,
+) {
+    fun getCurrencySymbol(): String = currency.getCurrencySymbol()
+    fun getPriceString(): String = String.format("%s%.2f", getCurrencySymbol(), getConvertedPrice())
+
+    fun getConvertedPrice(): Double = price / 100.0
+}
 
 data class Rider(
     val id: String,

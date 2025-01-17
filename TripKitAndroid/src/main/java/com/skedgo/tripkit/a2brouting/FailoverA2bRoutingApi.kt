@@ -2,6 +2,7 @@ package com.skedgo.tripkit.a2brouting
 
 import android.content.res.Resources
 import com.google.gson.Gson
+import com.skedgo.TripKit
 import com.skedgo.tripkit.RoutingUserError
 import com.skedgo.tripkit.extensions.buildUrlWithQueryParams
 import com.skedgo.tripkit.routing.RoutingResponse
@@ -41,7 +42,8 @@ class FailoverA2bRoutingApi(
                     modes,
                     excludedTransitModes,
                     excludeStops,
-                    options
+                    options,
+                    TripKit.getInstance().configs().isGroupedDrt
                 )
             }
             .concatMap { url ->

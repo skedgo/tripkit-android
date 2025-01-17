@@ -126,4 +126,8 @@ class TripGroup {
     fun uuid(): String {
         return uuid
     }
+
+    fun setUuid(id: String?) {
+        id?.let { uuid = it }
+    }
 }

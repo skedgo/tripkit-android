@@ -100,4 +100,9 @@ public interface Configs {
 
     @Nullable
     public abstract Callable<String> userIdentifier();
+
+    @Value.Default
+    public default boolean isGroupedDrt() {
+        return false;
+    }
 }
