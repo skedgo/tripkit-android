@@ -3,6 +3,7 @@ package com.skedgo.tripkit.booking.viewmodel
 import android.annotation.SuppressLint
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
+import com.skedgo.rxtry.subscribeWithErrorHandling
 import com.skedgo.tripkit.booking.BookingForm
 import com.skedgo.tripkit.booking.BookingService
 import com.skedgo.tripkit.booking.FormField
@@ -86,7 +87,7 @@ class BookingViewModelImpl(private val bookingService: BookingService) : Booking
 
     @SuppressLint("CheckResult")
     override fun observeAuthentication(authenticationViewModel: AuthenticationViewModel) {
-        authenticationViewModel.isSuccessful().subscribe { isSuccessful ->
+        authenticationViewModel.isSuccessful().subscribeWithErrorHandling { isSuccessful ->
             if (isSuccessful) {
                 param?.let {
                     loadForm(it)?.subscribe(
