@@ -1,5 +1,6 @@
 package com.skedgo.tripkit.regionrouting
 
+import com.skedgo.rxtry.subscribeWithErrorHandling
 import com.skedgo.tripkit.common.model.location.Location
 import com.skedgo.tripkit.data.regions.RegionService
 import com.skedgo.tripkit.regionrouting.data.GetRegionRouteRequest
@@ -43,7 +44,7 @@ interface RegionRoutingAutoCompleter {
                 queryAutoCompletePublishSubject.debounce(500, TimeUnit.MILLISECONDS)
                     .subscribeOn(Schedulers.io())
                     .observeOn(AndroidSchedulers.mainThread())
-                    .subscribe {
+                    .subscribeWithErrorHandling {
                         handleSearch(it)
                     }
             )

@@ -169,7 +169,7 @@ class ScheduledStop : Location {
                 stop.shortName = `in`.readString()
                 stop.services = `in`.readString()
                 stop.currentFilter = `in`.readString()
-                stop.type = from(`in`.readString()!!)
+                stop.type = from(`in`.readString())
                 stop.modeInfo = `in`.readParcelable(ModeInfo::class.java.classLoader)
                 stop.wheelchairAccessible =
                     `in`.readValue(Boolean::class.java.classLoader) as Boolean?
