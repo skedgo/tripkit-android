@@ -40,6 +40,17 @@
     <string name="str_mins">mins</string>
     <string name="str_hr">hrs</string>
     <string name="str_hrs">hrs</string>
+
+    <plurals name="str_hours">
+        <item quantity="one">%d hr</item>
+        <item quantity="other">%d hrs</item>
+    </plurals>
+
+    <plurals name="str_minutes">
+        <item quantity="one">%d min</item>
+        <item quantity="other">%d mins</item>
+    </plurals>
+    <string name="str_less_than_min">1 min</string>
     <string name="direction">Direction</string>
 
     <string name="geofence_not_available">Geofence service is not available now</string>

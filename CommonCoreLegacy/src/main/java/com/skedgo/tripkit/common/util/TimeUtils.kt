@@ -105,22 +105,26 @@ object TimeUtils {
         time: String
     ): String {
         var time = time
-        if (hour == 1) {
-            time += hour.toString() + " " + context.getString(R.string.str_hr)
-        } else if (hour > 1) {
-            time += hour.toString() + " " + context.getString(R.string.str_hrs)
+
+        // Add hours if present
+        if (hour > 0) {
+            time += context.resources.getQuantityString(
+                R.plurals.str_hours,
+                hour,
+                hour
+            )
         }
 
-        if (minutes == 1) {
-            if (hour >= 1) {
-                time += " "
+        // Add minutes if present
+        if (minutes > 0) {
+            if (hour > 0) {
+                time += " " // Add space between hours and minutes
             }
-            time += minutes.toString() + " " + context.getString(R.string.str_mins)
-        } else if (minutes > 1) {
-            if (hour >= 1) {
-                time += " "
-            }
-            time += minutes.toString() + " " + context.getString(R.string.str_mins)
+            time += context.resources.getQuantityString(
+                R.plurals.str_minutes,
+                minutes,
+                minutes
+            )
         }
 
         return time
@@ -129,6 +133,10 @@ object TimeUtils {
     fun getDurationInHoursMins(context: Context, seconds: Int): String {
         val hour = seconds / InSeconds.HOUR
         val minutes = (seconds % InSeconds.HOUR) / InSeconds.MINUTE
+        // Explicitly handle durations less than 1 minute
+        if (hour == 0 && minutes == 0) {
+            return context.getString(R.string.str_less_than_min) // New string resource
+        }
         val time = ""
         return getHrsAndMinsString(context, hour, minutes, time)
     }
