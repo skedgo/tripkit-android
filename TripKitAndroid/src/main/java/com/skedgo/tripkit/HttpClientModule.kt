@@ -48,7 +48,9 @@ open class HttpClientModule(
             interceptor.level = HttpLoggingInterceptor.Level.BODY
             builder.addInterceptor(interceptor)
         }
-        builder.addInterceptor(InstabugOkhttpInterceptor())
+        if(BuildConfig.DEBUG) {
+            builder.addInterceptor(InstabugOkhttpInterceptor())
+        }
         if (configs.baseUrlAdapterFactory() != null) {
             try {
                 builder.addInterceptor(BaseUrlOverridingInterceptor(configs.baseUrlAdapterFactory()!!))
