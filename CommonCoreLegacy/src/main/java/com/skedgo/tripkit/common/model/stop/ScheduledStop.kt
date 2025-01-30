@@ -32,7 +32,7 @@ class ScheduledStop : Location {
     var services: String? = null
 
     @SerializedName("children")
-    var children: ArrayList<ScheduledStop>? = null
+    var children: List<ScheduledStop>? = null
 
     @SerializedName("shortName")
     var shortName: String? = null
