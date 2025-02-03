@@ -134,7 +134,7 @@ class RoutingResponse {
                     mTripSegmentListResolver
                         ?.setOrigin(trip.from)
                         ?.setDestination(trip.to)
-                        ?.setTripSegmentList(trip.segmentList)
+                        ?.setTripSegmentList(trip.segmentList.toMutableList())
                         ?.resolve()
                 }
             }
