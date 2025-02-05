@@ -105,7 +105,7 @@ class ScheduledStop : Location {
 
     val embarkationStopCode: List<String>
         get() {
-            val list = ArrayList<String?>()
+            val list = mutableListOf<String?>()
             list.add(this.code)
             return list.filterNotNull()
         }

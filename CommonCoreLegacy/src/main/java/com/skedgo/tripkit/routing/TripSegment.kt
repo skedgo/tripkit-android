@@ -119,7 +119,7 @@ class TripSegment : IRealTimeElement, ITimeRange {
     var frequency: Int = 0
 
     @SerializedName("serviceTripID")
-    private var mServiceTripId: String? = null
+    override val serviceTripId: String? = null
 
     @SerializedName("serviceName")
     var serviceName: String? = null
@@ -132,12 +132,14 @@ class TripSegment : IRealTimeElement, ITimeRange {
 
     @SerializedName("serviceOperator")
     var serviceOperator: String? = null
+    override val operator: String?
+        get() = serviceOperator
 
     @SerializedName("stopCode")
-    private var mStartStopCode: String? = null
+    override var startStopCode: String? = null
 
     @SerializedName("endStopCode")
-    private var mEndStopCode: String? = null
+    override var endStopCode: String? = null
 
     @SerializedName("streets")
     private var mStreets: ArrayList<Street>? = null
@@ -191,9 +193,8 @@ class TripSegment : IRealTimeElement, ITimeRange {
             return millis
         }
 
-    override fun getStartTimeInSeconds(): Long {
-        return startTimeInSecs
-    }
+    override val startTimeInSeconds: Long
+        get() = startTimeInSecs
 
     override var endTimeInSecs: Long = 0
         get() {
@@ -344,27 +345,6 @@ class TripSegment : IRealTimeElement, ITimeRange {
         this.isFrequencyBased = isFrequencyBased
     }
 
-    override fun getStartStopCode(): String? = mStartStopCode
-
-    override fun setStartStopCode(startStopCode: String?) {
-        mStartStopCode = startStopCode
-    }
-
-    override fun getEndStopCode(): String? = mEndStopCode
-
-    override fun setEndStopCode(endStopCode: String?) {
-        mEndStopCode = endStopCode
-    }
-
-    fun setServiceTripId(id: String?) {
-        mServiceTripId = id
-    }
-    override fun getServiceTripId(): String? = mServiceTripId
-
-    override fun getOperator(): String {
-        return serviceOperator.orEmpty()
-    }
-
     val wheelchairFriendliness: Int
         get() = Math.round(metresSafe / metres.toFloat() * 100)
 
@@ -374,8 +354,8 @@ class TripSegment : IRealTimeElement, ITimeRange {
     val pairIdentifier: String
         get() = String.format(
             StyleManager.FORMAT_PAIR_IDENTIFIER,
-            mStartStopCode,
-            mEndStopCode
+            startStopCode,
+            endStopCode
         )
 
     val isStationary: Boolean
@@ -502,7 +482,7 @@ class TripSegment : IRealTimeElement, ITimeRange {
         )
 
     fun hasTimeTable(): Boolean {
-        return getType() == SCHEDULED && mServiceTripId != null && !(isContinuation || isPlane)
+        return getType() == SCHEDULED && serviceTripId != null && !(isContinuation || isPlane)
     }
 
 
