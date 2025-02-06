@@ -119,7 +119,7 @@ class TripSegment : IRealTimeElement, ITimeRange {
     var frequency: Int = 0
 
     @SerializedName("serviceTripID")
-    override val serviceTripId: String? = null
+    override var serviceTripId: String? = null
 
     @SerializedName("serviceName")
     var serviceName: String? = null

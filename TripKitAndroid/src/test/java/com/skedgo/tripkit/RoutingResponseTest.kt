@@ -91,9 +91,9 @@ class RoutingResponseTest {
         assertThat(group.trips).hasSize(1).doesNotContainNull()
 
         val trip = group.trips!![0]
-        assertThat(trip.segmentList).hasSize(3).doesNotContainNull()
+        assertThat(trip.segmentList).hasSize(1).doesNotContainNull()
 
-        val motorbikeSegment = trip.segmentList[1]
+        val motorbikeSegment = trip.segmentList[0]
         assertThat(motorbikeSegment.alerts).hasSize(1).doesNotContainNull()
 
         val alert = motorbikeSegment.alerts!![0]
@@ -123,9 +123,9 @@ class RoutingResponseTest {
         assertThat(group.trips).hasSize(1).doesNotContainNull()
 
         val trip = group.trips!![0]
-        assertThat(trip.segmentList).hasSize(3).doesNotContainNull()
+        assertThat(trip.segmentList).hasSize(1).doesNotContainNull()
 
-        val motorbikeSegment = trip.segmentList[1]
+        val motorbikeSegment = trip.segmentList[0]
         assertThat(motorbikeSegment.streets).hasSize(4).doesNotContainNull()
     }
 }
