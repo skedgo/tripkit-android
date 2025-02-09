@@ -128,15 +128,13 @@ class RoutingResponse {
     }
 
     private fun resolveTripGroupList(tripGroupList: ArrayList<TripGroup>?) {
-        for (tripGroup in tripGroupList.orEmpty()) {
-            if (CollectionUtils.isNotEmpty(tripGroup.trips)) {
-                for (trip in tripGroup.trips.orEmpty()) {
-                    mTripSegmentListResolver
-                        ?.setOrigin(trip.from)
-                        ?.setDestination(trip.to)
-                        ?.setTripSegmentList(trip.segmentList.toMutableList())
-                        ?.resolve()
-                }
+        tripGroupList?.forEach { tripGroup ->
+            tripGroup.trips?.forEach { trip ->
+                mTripSegmentListResolver
+                    ?.setOrigin(trip.from)
+                    ?.setDestination(trip.to)
+                    ?.setTripSegmentList(trip.segmentList)
+                    ?.resolve()
             }
         }
     }

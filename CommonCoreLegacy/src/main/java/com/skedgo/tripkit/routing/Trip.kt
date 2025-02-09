@@ -150,7 +150,7 @@ class Trip : ITimeRange {
     var tripId: Long = 0
     @Transient var group: TripGroup? = null
     var isFavourite: Boolean = false
-    var segmentList: List<TripSegment> = arrayListOf()
+    var segmentList: MutableList<TripSegment> = mutableListOf()
         set(segments) {
             field = segments
             field.forEach { it.trip = this }

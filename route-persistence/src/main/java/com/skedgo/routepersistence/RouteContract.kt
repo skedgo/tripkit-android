@@ -32,8 +32,10 @@ internal object RouteContract {
     const val COL_TRIP_ID: String = "tripId"
     const val COL_JSON: String = "json"
     const val TABLE_SEGMENTS: String = "segments"
+    const val SELECT_SEGMENTS_ALL: String = "select * from " + TABLE_SEGMENTS
     const val SELECT_SEGMENTS: String = "select * from " + TABLE_SEGMENTS + " where tripId = ?"
     const val TABLE_TRIPS: String = "trips"
+    const val SELECT_TRIPS_ALL: String = "select * from " + TABLE_TRIPS
     const val SELECT_TRIPS: String =
         "select * from " + TABLE_TRIPS + " where " + COL_GROUP_ID + " = ?"
     const val TABLE_TRIP_GROUPS: String = "tripGroups"

@@ -46,7 +46,7 @@ class TripSegmentListResolver(private val resources: Resources) {
     }
 
     fun resolve() {
-        if (!CollectionUtils.isEmpty(tripSegmentList)) {
+        if (tripSegmentList?.isNotEmpty() == true) {
             putDepartureSegment()
             putArrivalSegment()
 
@@ -122,9 +122,9 @@ class TripSegmentListResolver(private val resources: Resources) {
     private fun fillSegmentIdentifiers() {
         segmentIdGenerator.set(0L)
         var newSegmentId: Long
-        for (segment in tripSegmentList!!) {
+        tripSegmentList?.forEach { segment ->
             newSegmentId = segmentIdGenerator.incrementAndGet()
-            segment!!.segmentId = newSegmentId
+            segment.segmentId = newSegmentId
         }
     }
 
@@ -132,10 +132,10 @@ class TripSegmentListResolver(private val resources: Resources) {
      * Puts a Departure segment before head
      */
     private fun putArrivalSegment() {
-        val lastSegment = tripSegmentList!![tripSegmentList!!.size - 1]
+        val lastSegment = tripSegmentList?.last()
         if (lastSegment != null) {
             val arrivalSegment = createArrivalSegment(lastSegment)
-            tripSegmentList!!.add(arrivalSegment)
+            tripSegmentList?.add(arrivalSegment)
         }
     }
 
@@ -143,10 +143,10 @@ class TripSegmentListResolver(private val resources: Resources) {
      * Puts an Arrival segment after tail
      */
     private fun putDepartureSegment() {
-        val firstSegment = tripSegmentList!![0]
+        val firstSegment = tripSegmentList?.first()
         if (firstSegment != null) {
             val departureSegment = createDepartureSegment(firstSegment)
-            tripSegmentList!!.add(0, departureSegment)
+            tripSegmentList?.add(0, departureSegment)
         }
     }
 }
