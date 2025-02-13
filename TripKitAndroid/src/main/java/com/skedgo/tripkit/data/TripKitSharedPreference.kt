@@ -4,10 +4,12 @@ import android.annotation.SuppressLint
 import android.content.Context
 import android.content.SharedPreferences
 import com.google.gson.Gson
+import com.skedgo.tripkit.TripKitConstants.Companion.PREF_KEY_CLIENT
 import com.skedgo.tripkit.TripKitConstants.Companion.PREF_KEY_CLIENT_FEATURES
 import com.skedgo.tripkit.TripKitConstants.Companion.PREF_KEY_CLIENT_ID
 import com.skedgo.tripkit.TripKitConstants.Companion.PREF_KEY_POLYGON
 import com.skedgo.tripkit.TripKitConstants.Companion.PREF_NAME_TRIP_KIT
+import com.skedgo.tripkit.account.data.Client
 import com.skedgo.tripkit.account.data.Polygon
 import com.skedgo.tripkit.extensions.fromJson
 import javax.inject.Inject
@@ -31,6 +33,15 @@ class TripKitSharedPreference @Inject constructor(context: Context) :
 
     fun getClientId(): String? =
         sharedPreferences.getString(PREF_KEY_CLIENT_ID, null)
+
+    fun saveClient(client: Client) {
+        sharedPreferences.edit()
+            .putString(PREF_KEY_CLIENT, Gson().toJson(client))
+            .apply()
+    }
+
+    fun getClient(): Client? =
+        Gson().fromJson(sharedPreferences.getString(PREF_KEY_CLIENT, null).orEmpty())
 
     fun saveClientFeatures(features: List<String>) {
         sharedPreferences.edit()
