@@ -14,21 +14,9 @@ data class Client(
 }
 
 data class AppColors(
-    val barBackground: BarBackground,
-    val barForeground: BarForeground,
-    val tintColor: TintColor
-)
-
-data class BarBackground(
-    val blue: Int,
-    val green: Int,
-    val red: Int
-)
-
-data class BarForeground(
-    val blue: Int,
-    val green: Int,
-    val red: Int
+    val barBackground: AppColor,
+    val barForeground: AppColor,
+    val tintColor: AppColor
 )
 
 data class Polygon(
@@ -44,10 +32,11 @@ data class Polygon(
     }
 }
 
-data class TintColor(
+data class AppColor(
     val blue: Int,
     val green: Int,
-    val red: Int
+    val red: Int,
+    val alpha: Int = 1
 )
 
 enum class ClientFeature(val feature: String) {
