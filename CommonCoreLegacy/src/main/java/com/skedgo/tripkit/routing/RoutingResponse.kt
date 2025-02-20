@@ -69,16 +69,16 @@ class RoutingResponse {
         if (CollectionUtils.isNotEmpty(alerts)) {
             alertCache = HashMap(alerts!!.size)
             for (alert in alerts) {
-                alertCache!![alert!!.remoteHashCode()] = alert
+                alertCache?.put(alert.remoteHashCode(), alert)
             }
         }
         for (tripGroup in tripGroups!!) {
-            val trips: ArrayList<Trip>? = tripGroup!!.trips
+            val trips: ArrayList<Trip>? = tripGroup.trips
             if (CollectionUtils.isEmpty(trips)) {
                 continue
             }
             for (trip in trips!!) {
-                trip!!.group = tripGroup
+                trip.group = tripGroup
 
                 val rawSegments: ArrayList<JsonObject>? = trip.rawSegmentList
                 trip.rawSegmentList = null
