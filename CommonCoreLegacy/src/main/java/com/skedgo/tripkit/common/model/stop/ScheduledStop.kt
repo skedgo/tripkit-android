@@ -32,7 +32,7 @@ class ScheduledStop : Location {
     var services: String? = null
 
     @SerializedName("children")
-    var children: ArrayList<ScheduledStop>? = null
+    var children: List<ScheduledStop>? = null
 
     @SerializedName("shortName")
     var shortName: String? = null
@@ -105,7 +105,7 @@ class ScheduledStop : Location {
 
     val embarkationStopCode: List<String>
         get() {
-            val list = ArrayList<String?>()
+            val list = mutableListOf<String?>()
             list.add(this.code)
             return list.filterNotNull()
         }

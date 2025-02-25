@@ -69,16 +69,16 @@ class RoutingResponse {
         if (CollectionUtils.isNotEmpty(alerts)) {
             alertCache = HashMap(alerts!!.size)
             for (alert in alerts) {
-                alertCache!![alert!!.remoteHashCode()] = alert
+                alertCache?.put(alert.remoteHashCode(), alert)
             }
         }
         for (tripGroup in tripGroups!!) {
-            val trips: ArrayList<Trip>? = tripGroup!!.trips
+            val trips: ArrayList<Trip>? = tripGroup.trips
             if (CollectionUtils.isEmpty(trips)) {
                 continue
             }
             for (trip in trips!!) {
-                trip!!.group = tripGroup
+                trip.group = tripGroup
 
                 val rawSegments: ArrayList<JsonObject>? = trip.rawSegmentList
                 trip.rawSegmentList = null
@@ -128,15 +128,13 @@ class RoutingResponse {
     }
 
     private fun resolveTripGroupList(tripGroupList: ArrayList<TripGroup>?) {
-        for (tripGroup in tripGroupList.orEmpty()) {
-            if (CollectionUtils.isNotEmpty(tripGroup.trips)) {
-                for (trip in tripGroup.trips.orEmpty()) {
-                    mTripSegmentListResolver
-                        ?.setOrigin(trip.from)
-                        ?.setDestination(trip.to)
-                        ?.setTripSegmentList(trip.segmentList)
-                        ?.resolve()
-                }
+        tripGroupList?.forEach { tripGroup ->
+            tripGroup.trips?.forEach { trip ->
+                mTripSegmentListResolver
+                    ?.setOrigin(trip.from)
+                    ?.setDestination(trip.to)
+                    ?.setTripSegmentList(trip.segmentList)
+                    ?.resolve()
             }
         }
     }
