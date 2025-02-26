@@ -1,5 +1,6 @@
 package com.skedgo.tripkit
 
+import org.immutables.value.Value
 import org.immutables.value.Value.Default
 import org.immutables.value.Value.Immutable
 
@@ -10,6 +11,7 @@ abstract class TripKitConfigs : Configs {
             return ImmutableTripKitConfigs.builder()
         }
     }
+
     @Default
     override fun debuggable(): Boolean {
         return false

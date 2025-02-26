@@ -105,4 +105,9 @@ public interface Configs {
     public default boolean isGroupedDrt() {
         return false;
     }
+
+    @Value.Default
+    public default boolean hasSchoolRestrictions() {
+        return false;
+    }
 }
