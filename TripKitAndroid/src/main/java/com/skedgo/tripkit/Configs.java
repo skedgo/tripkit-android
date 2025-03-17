@@ -1,13 +1,16 @@
 package com.skedgo.tripkit;
 
 import android.content.Context;
+import android.util.Pair;
 
 import com.skedgo.tripkit.configuration.Key;
 import com.skedgo.tripkit.routing.ExtraQueryMapProvider;
 
 import org.immutables.value.Value;
 
+import java.util.List;
 import java.util.concurrent.Callable;
+import java.util.function.Function;
 
 import androidx.annotation.Nullable;
 import io.reactivex.functions.Consumer;
@@ -105,4 +108,11 @@ public interface Configs {
     public default boolean isGroupedDrt() {
         return false;
     }
+
+    @Nullable
+    Callable<List<String>> getPlaceTypeFilter();
+
+    @Nullable
+    Function<List<Pair<String, String>>, List<Pair<String, String>>> getLocationFilter();
+
 }
