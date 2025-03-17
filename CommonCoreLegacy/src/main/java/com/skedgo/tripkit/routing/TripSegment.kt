@@ -303,7 +303,8 @@ class TripSegment : IRealTimeElement, ITimeRange {
     var metresUnsafe: Int = 0
 
     @SerializedName("turn-by-turn")
-    val turnByTurn: String? = null
+    var turnByTurn: String? = null
+    private set
 
     @SerializedName("hasCarParks")
     private var hasCarParks = false
@@ -524,6 +525,10 @@ class TripSegment : IRealTimeElement, ITimeRange {
     val isQuickBooking: Boolean
         get() = booking != null &&
             (booking!!.quickBookingsUrl != null || booking!!.confirmation != null)
+
+    fun setTurnByTurn(value: String) {
+        turnByTurn = value
+    }
 
     fun getTurnByTurn(): TurnByTurn? = turnByTurn?.run { TurnByTurn.valueOf(this) }
 
