@@ -1,21 +1,22 @@
 package com.skedgo.tripkit
 
+import android.util.Log
 import okhttp3.Interceptor
 import okhttp3.Response
 import java.io.IOException
-import java.util.logging.Level
-import java.util.logging.Logger
 
 open class ErrorHandlingInterceptor(
     private val appDeactivatedListener: (() -> Unit)? = null
 ) : Interceptor {
 
-    private val logger = Logger.getLogger(ErrorHandlingInterceptor::class.java.name)
+    private val tag = ErrorHandlingInterceptor::class.java.name // Use class name as log tag
 
     override fun intercept(chain: Interceptor.Chain): Response {
         val request = chain.request()
         val url = request.url
         try {
+            Log.i(tag, "Executing API request: $url")
+
             val isRegionsEndpoint = url.encodedPath.contains("regions.json")
             val response = chain.proceed(request)
 
@@ -27,7 +28,7 @@ open class ErrorHandlingInterceptor(
 
             // Handle 502 Bad Gateway with structured logging and propagation
             if (response.code == 502) {
-                logger.log(Level.WARNING, "HTTP 502 Bad Gateway for URL: $url")
+                Log.w(tag, "HTTP 502 Bad Gateway: $url")
 
                 // TODO: Add a retry mechanism if needed
                 /*
@@ -46,14 +47,14 @@ open class ErrorHandlingInterceptor(
                  * throw IOException("Server is temporarily unavailable after retries (HTTP 502)")
                  */
 
-                throw IOException("Server is temporarily unavailable (HTTP 502)")
+                throw IOException("Server temporarily unavailable (HTTP 502) at $url")
             }
 
             return response
         } catch (e: IOException) {
             // Handle network or other exceptions
             // Log the exception before rethrowing for proper debugging
-            logger.log(Level.SEVERE, "Network error occurred: ${e.message}", e)
+            Log.e(tag, "Network error for URL: $url - ${e.message}", e)
             throw e
         }
     }
