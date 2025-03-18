@@ -28,6 +28,24 @@ open class ErrorHandlingInterceptor(
             // Handle 502 Bad Gateway with structured logging and propagation
             if (response.code == 502) {
                 logger.log(Level.WARNING, "HTTP 502 Bad Gateway for URL: $url")
+
+                // TODO: Add a retry mechanism if needed
+                /*
+                 * If the 502 error is temporary, consider retrying the request a few times
+                 * before failing. Here’s a simple retry logic:
+                 *
+                 * val maxRetries = 3
+                 * val retryDelayMillis = 3000L // Wait 3 seconds before retrying
+                 *
+                 * repeat(maxRetries) { attempt ->
+                 *     Thread.sleep(retryDelayMillis) // Delay before retrying
+                 *     val retryResponse = chain.proceed(request)
+                 *     if (retryResponse.isSuccessful) return retryResponse
+                 * }
+                 *
+                 * throw IOException("Server is temporarily unavailable after retries (HTTP 502)")
+                 */
+
                 throw IOException("Server is temporarily unavailable (HTTP 502)")
             }
 
