@@ -1,12 +1,10 @@
 package com.skedgo.tripkit
 
-import android.util.Log
 import okhttp3.Interceptor
 import okhttp3.Response
+import timber.log.Timber
 import java.io.IOException
 import java.net.UnknownHostException
-import java.util.logging.Level
-import java.util.logging.Logger
 
 open class ErrorHandlingInterceptor(
     private val appDeactivatedListener: (() -> Unit)? = null
@@ -18,7 +16,7 @@ open class ErrorHandlingInterceptor(
         val request = chain.request()
         val url = request.url
         try {
-            Log.i(tag, "Executing API request: $url")
+            Timber.i(tag, "Executing API request: $url")
 
             val isRegionsEndpoint = url.encodedPath.contains("regions.json")
             val response = chain.proceed(request)
@@ -43,7 +41,7 @@ open class ErrorHandlingInterceptor(
     private fun handleUnknownHostException(e: UnknownHostException, url: String): Nothing {
         val formattedMessage = "API Request Failed: $url - ${e.message}"
 
-        Log.e(tag, formattedMessage, e)
+        Timber.e(tag, formattedMessage, e)
 
         System.err.println(formattedMessage)
         e.printStackTrace()
