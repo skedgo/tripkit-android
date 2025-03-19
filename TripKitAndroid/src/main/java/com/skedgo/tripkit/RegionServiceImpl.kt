@@ -104,8 +104,8 @@ internal class RegionServiceImpl(
                 Observable.zip(getRegionInfoByRegionAsync(regionPair.first),
                     getRegionInfoByRegionAsync(regionPair.second),
                     BiFunction { regionInfoOne: RegionInfo, regionInfoTwo: RegionInfo ->
-                        var transportModesOne = regionPair.first.transportModeIds
-                        var transportModesTwo = regionPair.second.transportModeIds
+                        val transportModesOne = regionPair.first.transportModeIds
+                        val transportModesTwo = regionPair.second.transportModeIds
 
                         if (regionInfoOne.hasWheelChairInformation() && transportModesOne?.contains(
                                 TransportMode.ID_WHEEL_CHAIR
