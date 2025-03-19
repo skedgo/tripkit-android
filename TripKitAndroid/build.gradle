@@ -126,6 +126,7 @@ dependencies {
     implementation libs.map_extension
     implementation libs.location
     implementation libs.instabugInterceptor
+    implementation libs.timber
 
     debugApi project(':CommonCoreLegacy')
     stagingApi project(':CommonCoreLegacy')

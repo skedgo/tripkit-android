@@ -1,8 +1,8 @@
 package com.skedgo.tripkit
 
-import android.util.Log
 import okhttp3.Interceptor
 import okhttp3.Response
+import timber.log.Timber
 import java.io.IOException
 
 open class ErrorHandlingInterceptor(
@@ -15,7 +15,7 @@ open class ErrorHandlingInterceptor(
         val request = chain.request()
         val url = request.url
         try {
-            Log.i(tag, "Executing API request: $url")
+            Timber.i(tag, "Executing API request: $url")
 
             val isRegionsEndpoint = url.encodedPath.contains("regions.json")
             val response = chain.proceed(request)
@@ -28,7 +28,7 @@ open class ErrorHandlingInterceptor(
 
             // Handle 502 Bad Gateway with structured logging and propagation
             if (response.code == 502) {
-                Log.w(tag, "HTTP 502 Bad Gateway: $url")
+                Timber.w(tag, "HTTP 502 Bad Gateway: $url")
 
                 // TODO: Add a retry mechanism if needed
                 /*
@@ -54,7 +54,7 @@ open class ErrorHandlingInterceptor(
         } catch (e: IOException) {
             // Handle network or other exceptions
             // Log the exception before rethrowing for proper debugging
-            Log.e(tag, "Network error for URL: $url - ${e.message}", e)
+            Timber.e(tag, "Network error for URL: $url - ${e.message}", e)
             throw e
         }
     }
