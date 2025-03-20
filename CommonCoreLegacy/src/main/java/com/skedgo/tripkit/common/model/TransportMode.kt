@@ -70,6 +70,7 @@ data class TransportMode(
                 ID_AIR == identifier -> R.drawable.ic_aeroplane
                 identifier != null && identifier.startsWith("cy_bic-s") -> R.drawable.ic_bicycle_share
                 ID_WHEEL_CHAIR == identifier -> R.drawable.ic_wheelchair
+                ID_PS_DRT == identifier -> R.drawable.ic_car_ride_share
                 else -> 0
 
             }
