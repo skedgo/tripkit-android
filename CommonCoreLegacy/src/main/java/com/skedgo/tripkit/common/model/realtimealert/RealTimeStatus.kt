@@ -3,7 +3,7 @@ package com.skedgo.tripkit.common.model.realtimealert
 import android.text.TextUtils
 
 enum class RealTimeStatus {
-    CAPABLE, IS_REAL_TIME, INCAPABLE;
+    CAPABLE, IS_REAL_TIME, INCAPABLE, CANCELLED;
 
     companion object {
         @JvmStatic
