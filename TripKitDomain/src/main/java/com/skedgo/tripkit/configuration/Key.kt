@@ -10,4 +10,6 @@ sealed class Key {
 
     @Deprecated(message = "Should use ApiKey instead")
     data class RegionEligibility(val value: String) : Key()
+
+    data class FourSquareKey(val clientId: String, val clientSecret: String)
 }

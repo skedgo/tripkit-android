@@ -4,6 +4,7 @@ import android.content.Context;
 import android.util.Pair;
 
 import com.skedgo.tripkit.configuration.Key;
+import com.skedgo.tripkit.configuration.Key.FourSquareKey;
 import com.skedgo.tripkit.routing.ExtraQueryMapProvider;
 
 import org.immutables.value.Value;
@@ -43,6 +44,9 @@ public interface Configs {
 
     @Nullable
     public abstract RoutesScreenConfig routeScreenConfig();
+
+    @Nullable
+    public abstract Callable<FourSquareKey> fourSquareKeyProvider();
 
     /**
      * @return A factory to create a sort of adapter that specifies a base url
