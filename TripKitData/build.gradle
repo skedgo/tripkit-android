@@ -103,6 +103,10 @@ dependencies {
 
     implementation libs.value
     implementation libs.kotlin
+    implementation libs.coroutinesCore
+    implementation libs.coroutinesAndroid
+    implementation libs.coroutinesRx
+    implementation libs.coroutinesPlayServices
     implementation libs.gson
     implementation libs.immutablesGson
 
