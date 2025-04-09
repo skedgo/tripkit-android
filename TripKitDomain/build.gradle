@@ -84,3 +84,8 @@ publishing {
     }
 }
 
+afterEvaluate {
+    tasks.named("dokkaGfmPartial").configure {
+        dependsOn(tasks.getByName("kaptKotlin"))
+    }
+}
