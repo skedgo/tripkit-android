@@ -9,10 +9,16 @@ import com.skedgo.tripkit.common.util.getCurrencySymbol
 import com.skedgo.tripkit.data.database.booking.ticket.TicketEntity
 import com.skedgo.tripkit.extensions.fromJson
 
+enum class BookingResponseType(val value: String) {
+    REVIEW("REVIEW"),
+    OPTIONS("OPTIONS")
+}
+
 data class QuickBooking(
     val bookingTitle: String,
     val bookingURL: String,
     val bookingURLIsDeepLink: Boolean,
+    val bookingResponseType: String,
     val count: Int,
     val index: Int,
     val input: List<Input>,
@@ -23,7 +29,10 @@ data class QuickBooking(
     val riders: List<Rider>,
     val minPrice: Double,
     val maxPrice: Double,
-    val warningMessage: String? = null
+    val max: Int,
+    val singleFareOnly: Boolean,
+    val fareGroups: List<FareGroup>? = emptyList(),
+    val warningMessage: String? = null,
 ) {
     fun getPriceRange(): String {
         val currencySymbol = fares?.firstOrNull()?.currency?.getCurrencySymbol().orEmpty()
@@ -149,12 +158,19 @@ data class Fare(
     val status: String,
     val type: String,
     var icon: Int,
+    @SerializedName("groupIDs") val groupIds: List<String>? = emptyList(),
 ) {
     fun getCurrencySymbol(): String = currency.getCurrencySymbol()
     fun getPriceString(): String = String.format("%s%.2f", getCurrencySymbol(), getConvertedPrice())
 
     fun getConvertedPrice(): Double = price / 100.0
 }
+
+data class FareGroup(
+    val id: String,
+    val name: String,
+    var selected: Boolean
+)
 
 data class Rider(
     val id: String,
