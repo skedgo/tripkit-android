@@ -4,7 +4,6 @@ apply plugin: "com.android.library"
 apply plugin: 'maven-publish'
 apply plugin: "kotlin-android"
 apply plugin: "kotlin-kapt"
-apply plugin: 'org.jetbrains.dokka'
 apply plugin: 'kotlin-parcelize'
 
 android {
@@ -221,6 +220,18 @@ publishing {
                     it.appendNode("type", "aar")
                 }
             }
+        }
+    }
+}
+
+afterEvaluate {
+    if (tasks.findByName("dokkaGfmPartial")) {
+        tasks.named("dokkaGfmPartial").configure {
+            dependsOn(
+                    tasks.getByName("kaptReleaseKotlin"),
+                    tasks.getByName("kaptStagingKotlin"),
+                    tasks.getByName("kaptDebugKotlin")
+            )
         }
     }
 }
