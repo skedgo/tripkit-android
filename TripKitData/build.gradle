@@ -229,4 +229,18 @@ afterEvaluate {
             gradle.startParameter.taskNames.any { it.toLowerCase().contains("dokka") }
         }
     }
+
+    [
+            "publishReleasePublicationToMavenLocal",
+            "publishToMavenLocal",
+            "publish"
+    ].each { taskName ->
+        tasks.findByName(taskName)?.configure {
+            dependsOn(
+                    tasks.getByName("kaptReleaseKotlin"),
+                    tasks.getByName("kaptStagingKotlin"),
+                    tasks.getByName("kaptDebugKotlin")
+            )
+        }
+    }
 }
