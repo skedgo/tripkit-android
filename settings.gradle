@@ -3,7 +3,9 @@ include ':TripKitDomain'
 include ':TripKitDomainLegacy'
 include ':TripKitData'
 include ':TripKitAndroid'
-include ':TripKitSamples'
+if (!System.getenv("JITPACK")) {
+    include(":TripKitSamples")
+}
 include ':ValidBookingCountData', ':ValidBookingCountDomain'
 include ':trip-kit-booking'
 include ':trip-kit-booking-ui'
