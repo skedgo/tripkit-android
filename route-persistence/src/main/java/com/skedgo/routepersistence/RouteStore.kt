@@ -362,7 +362,12 @@ open class RouteStore(private val databaseHelper: SQLiteOpenHelper, private val 
 
     private fun asSegment(cursor: Cursor): TripSegment {
         val json = cursor.getString(cursor.getColumnIndex(COL_JSON))
-        return gson.fromJson(json, TripSegment::class.java)
+        return try {
+            gson.fromJson(json, TripSegment::class.java)
+        } catch (e: Exception) {
+            e.printStackTrace()
+            TripSegment() // or return null and filter later
+        }
     }
 
     private fun asTrip(tripCursor: Cursor, groupCursor: Cursor): Trip {
