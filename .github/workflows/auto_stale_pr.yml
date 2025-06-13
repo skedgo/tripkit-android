@@ -1,4 +1,5 @@
-name: 'Close stale issues and PRs'
+name: 'Mark stale issues and PRs'
+
 on:
   schedule:
     - cron: '30 1 * * *'
@@ -9,6 +10,8 @@ jobs:
     steps:
       - uses: actions/stale@v9
         with:
-          stale-issue-message: 'This issue is stale because it has been open 5 days with no activity. Remove stale label or comment or this will be closed in 2 days.'
+          stale-issue-message: 'This issue is stale because it has been open 5 days with no activity.'
+          stale-pr-message: 'This pull request is stale because it has been open 5 days with no activity.'
           days-before-stale: 5
-          days-before-close: 2
+          days-before-close: -1
+          remove-stale-when-updated: true
