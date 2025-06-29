@@ -2,7 +2,6 @@ buildscript {
     ext.kotlin_version = '1.8.20'
     apply from: "dependencies.gradle"
     ext.kotlinVersion = versions.kotlinVersion
-    ext.dokkaVersion = '0.10.0'
 
     repositories {
         mavenCentral()
@@ -11,10 +10,8 @@ buildscript {
     }
 
     dependencies {
-        classpath "com.android.tools.build:gradle:7.3.0"
+        classpath "com.android.tools.build:gradle:7.4.2"
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlinVersion"
-        classpath "org.jetbrains.dokka:dokka-gradle-plugin:$dokkaVersion"
-
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
     }
 }
@@ -50,38 +47,5 @@ allprojects {
         jcenter()
         maven { url 'https://repository.liferay.com/nexus/content/repositories/public/' }
         maven { url "https://jitpack.io" }
-    }
-}
-
-apply plugin: 'org.jetbrains.dokka'
-
-dokka {
-    outputFormat = 'gfm' // This will be displayed properly by mkdocs, whereas "markdown" will not
-    outputDirectory = "$buildDir/javadoc"
-    subProjects = ["CommonCoreLegacy",
-                   "TripKitAndroid",
-                   "TripKitData",
-                    "TripKitDomain",
-                    "TripKitDomainLegacy"]
-
-    // TODO - We can take advantage of the @sample tag and add module documentation
-    configuration {
-        moduleName = "tripkit-android"
-        includeNonPublic = false
-        skipDeprecated = true
-        reportUndocumented = false
-        platform = "JVM"
-        jdkVersion = 7
-        noStdlibLink = false
-        noJdkLink = false
-
-        // Do not create index pages for empty packages
-        skipEmptyPackages = true
-
-        // Don't document the internal DI
-        perPackageOption {
-            prefix = "com.skedgo.tripkit.ui.core.module"
-            suppress = true
-        }
     }
 }

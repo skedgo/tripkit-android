@@ -130,3 +130,12 @@ publishing {
     }
 }
 
+afterEvaluate {
+    tasks.matching { it.name == "javaDocReleaseGeneration" }.configureEach {
+        // Disable AGP's Dokka-backed javadoc task unless you're running a Dokka task directly
+        onlyIf {
+            gradle.startParameter.taskNames.any { it.toLowerCase().contains("dokka") }
+        }
+    }
+}
+

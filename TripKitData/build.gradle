@@ -212,3 +212,35 @@ publishing {
     }
 }
 
+afterEvaluate {
+    if (tasks.findByName("dokkaGfmPartial")) {
+        tasks.named("dokkaGfmPartial").configure {
+            dependsOn(
+                    tasks.getByName("kaptReleaseKotlin"),
+                    tasks.getByName("kaptStagingKotlin"),
+                    tasks.getByName("kaptDebugKotlin")
+            )
+        }
+    }
+
+    tasks.matching { it.name == "javaDocReleaseGeneration" }.configureEach {
+        // Disable AGP's Dokka-backed javadoc task unless you're running a Dokka task directly
+        onlyIf {
+            gradle.startParameter.taskNames.any { it.toLowerCase().contains("dokka") }
+        }
+    }
+
+    [
+            "publishReleasePublicationToMavenLocal",
+            "publishToMavenLocal",
+            "publish"
+    ].each { taskName ->
+        tasks.findByName(taskName)?.configure {
+            dependsOn(
+                    tasks.getByName("kaptReleaseKotlin"),
+                    tasks.getByName("kaptStagingKotlin"),
+                    tasks.getByName("kaptDebugKotlin")
+            )
+        }
+    }
+}
