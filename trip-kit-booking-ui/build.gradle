@@ -10,18 +10,18 @@ android {
 
     compileSdkVersion versions.compileSdkVersion
 
-  defaultConfig {
-    minSdkVersion versions.proMinSdkVersion
-    targetSdkVersion versions.targetSdkVersion
-    testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
-    vectorDrawables.useSupportLibrary = true
+    defaultConfig {
+        minSdkVersion versions.proMinSdkVersion
+        targetSdkVersion versions.targetSdkVersion
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        vectorDrawables.useSupportLibrary = true
 
-    javaCompileOptions {
-      annotationProcessorOptions {
-        arguments += ["room.schemaLocation": "$projectDir/schemas".toString()]
-      }
+        javaCompileOptions {
+            annotationProcessorOptions {
+                arguments += ["room.schemaLocation": "$projectDir/schemas".toString()]
+            }
+        }
     }
-  }
 
     buildTypes {
         staging {
@@ -46,6 +46,7 @@ android {
     }
 
     compileOptions {
+        coreLibraryDesugaringEnabled true
         sourceCompatibility JavaVersion.VERSION_17
         targetCompatibility JavaVersion.VERSION_17
     }
@@ -63,18 +64,20 @@ android {
 }
 
 dependencies {
-  testImplementation libs.junit
-  testImplementation libs.androidxJUnitExtTesting
-  testImplementation libs.assertjCore
-  testImplementation libs.mockitoCore
-  testImplementation libs.robolectric
-  testImplementation libs.mockitoKotlin, { exclude group: 'org.jetbrains.kotlin' }
-  testImplementation libs.androidxTesting
-  testImplementation libs.mockk
-  testImplementation libs.archCoreTesting
-  testImplementation libs.kluent
-  testImplementation libs.coroutinesTest
-  testImplementation libs.bindingCollectionAdapter
+    coreLibraryDesugaring libs.desugar
+
+    testImplementation libs.junit
+    testImplementation libs.androidxJUnitExtTesting
+    testImplementation libs.assertjCore
+    testImplementation libs.mockitoCore
+    testImplementation libs.robolectric
+    testImplementation libs.mockitoKotlin, {exclude group: 'org.jetbrains.kotlin'}
+    testImplementation libs.androidxTesting
+    testImplementation libs.mockk
+    testImplementation libs.archCoreTesting
+    testImplementation libs.kluent
+    testImplementation libs.coroutinesTest
+    testImplementation libs.bindingCollectionAdapter
 
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.1.0', {
         exclude group: 'com.android.support', module: 'support-annotations'
