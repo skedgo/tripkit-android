@@ -75,6 +75,16 @@ class ModeInfo : Parcelable {
     val modeCompat: VehicleMode?
         get() = VehicleMode.from(localIconName)
 
+    fun getServiceColor(): ServiceColor? = color ?: if (id == "pt_pub_bus") {
+        ServiceColor().apply {
+            red = 35
+            green = 177
+            blue = 94
+        }
+    } else {
+        null
+    }
+
     companion object {
         @JvmField
         val CREATOR: Creator<ModeInfo> = object : Creator<ModeInfo> {
