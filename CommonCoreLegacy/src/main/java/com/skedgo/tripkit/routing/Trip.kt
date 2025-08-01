@@ -219,9 +219,11 @@ class Trip : ITimeRange {
             moneyCost == 0f -> localizedFreeText
             moneyCost == UNKNOWN_COST -> null
             else -> {
+                val hasCents = moneyCost % 1 != 0f
                 val numberFormat = NumberFormat.getNumberInstance(Locale.getDefault()).apply {
-                    roundingMode = RoundingMode.CEILING
-                    maximumFractionDigits = 0
+                    minimumFractionDigits = if (hasCents) 2 else 0
+                    maximumFractionDigits = if (hasCents) 2 else 0
+                    isGroupingUsed = true
                 }
                 val value = numberFormat.format(moneyCost)
                 "${currencySymbol ?: "$"}$value"
