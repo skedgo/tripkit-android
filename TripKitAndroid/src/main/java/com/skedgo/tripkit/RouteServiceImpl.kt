@@ -87,6 +87,7 @@ internal class RouteServiceImpl(
         val transferTime = query.transferTime
         val walkingSpeed = query.walkingSpeed
         val cyclingSpeed = query.cyclingSpeed
+        val rollingSpeed = query.rollingSpeed
 
         val options = HashMap<String, Any>()
         options["from"] = departureCoordinates
@@ -96,12 +97,14 @@ internal class RouteServiceImpl(
         options["unit"] = unit ?: ""
         options["v"] = "12"
         options["tt"] = transferTime.toString()
-        options["ws"] = walkingSpeed.toString()
         options["cs"] = cyclingSpeed.toString()
         options["includeStops"] = "1"
         options["wp"] = ToWeightingProfileString.toWeightingProfileString(query)
         if (query.useWheelchair()) {
             options["wheelchair"] = "1"
+            options["ws"] = rollingSpeed.toString()
+        } else {
+            options["ws"] = walkingSpeed.toString()
         }
 
         options.putAll(getParamsByPreferences())
