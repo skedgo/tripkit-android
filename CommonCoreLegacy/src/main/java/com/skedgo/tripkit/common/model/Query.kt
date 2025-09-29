@@ -39,6 +39,7 @@ class Query : Parcelable {
     private var mHassleWeight = 0
     private var mEnvironmentWeight = 0
     var cyclingSpeed: Int = 0
+    var rollingSpeed: Int = 0
     var walkingSpeed: Int = 0
     var transferTime: Int = 0
     var excludedStopCodes: List<String> = ArrayList()
@@ -64,6 +65,7 @@ class Query : Parcelable {
         query.mUnit = mUnit
         query.transferTime = transferTime
         query.cyclingSpeed = cyclingSpeed
+        query.rollingSpeed = rollingSpeed
         query.walkingSpeed = walkingSpeed
         query.region = region
         query.maxWalkingTime = maxWalkingTime
@@ -218,6 +220,7 @@ class Query : Parcelable {
         dest.writeParcelable(region, 0)
         dest.writeInt(transferTime)
         dest.writeInt(cyclingSpeed)
+        dest.writeInt(rollingSpeed)
         dest.writeInt(walkingSpeed)
         dest.writeStringList(transportModeIds)
         dest.writeInt(maxWalkingTime)
@@ -267,6 +270,7 @@ class Query : Parcelable {
                 )
                 query.transferTime = `in`.readInt()
                 query.cyclingSpeed = `in`.readInt()
+                query.rollingSpeed = `in`.readInt()
                 query.walkingSpeed = `in`.readInt()
                 query.transportModeIds = query.readTransportModeIds(`in`).toMutableList()
                 query.maxWalkingTime = `in`.readInt()
