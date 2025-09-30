@@ -61,6 +61,9 @@ open class HttpClientModule(
         builder.addInterceptor(
             errorInterceptor ?: ErrorHandlingInterceptor(appDeactivatedListener)
         )
+        builder.connectTimeout(60, TimeUnit.SECONDS)
+        builder.readTimeout(60, TimeUnit.SECONDS)
+        builder.writeTimeout(60, TimeUnit.SECONDS)
         return builder.build()
     }
 
@@ -71,8 +74,6 @@ open class HttpClientModule(
         if (buildFlavor != null && version != null) {
             builder.addInterceptor(AddCustomUserAgent(buildFlavor, version))
         }
-        builder.connectTimeout(30, TimeUnit.SECONDS)
-        builder.readTimeout(30, TimeUnit.SECONDS)
         return builder
     }
 

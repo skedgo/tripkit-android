@@ -17,8 +17,9 @@ class A2bRoutingDataModule {
     internal fun a2bRoutingApi(gson: Gson, httpClient: OkHttpClient): A2bRoutingApi {
         val client = httpClient
             .newBuilder()
-            .readTimeout(30, TimeUnit.SECONDS)
-            .connectTimeout(1, TimeUnit.SECONDS)
+            .readTimeout(60, TimeUnit.SECONDS)
+            .connectTimeout(60, TimeUnit.SECONDS)
+            .writeTimeout(60, TimeUnit.SECONDS)
             .build()
         return Retrofit.Builder()
             .addCallAdapterFactory(RxJava2CallAdapterFactory.createWithScheduler(Schedulers.io()))
