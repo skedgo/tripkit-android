@@ -54,7 +54,7 @@ open class StopsFetcher(
             .flatMap { existingCells ->
                 splitIntoBodiesForNewFetchOrUpdate(
                     cellIds,
-                    emptyList(), //existingCells
+                    existingCells, // Fix: Use existing cells to enable hash code validation for performance
                     region,
                     level
                 )
