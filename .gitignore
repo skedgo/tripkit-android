@@ -19,3 +19,4 @@ build/
 
 # Crashlytics files
 com_crashlytics_export_strings.xml
+bin/
