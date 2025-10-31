@@ -8,6 +8,7 @@ import okhttp3.ResponseBody
 interface QuickBookingService {
     fun getQuickBooking(url: String): Single<List<QuickBooking>>
     fun quickBook(url: String, request: QuickBookRequest): Single<QuickBookResponse>
+    fun quickBook(url: String): Single<QuickBookResponse>
     fun getBookingUpdate(url: String): Single<RoutingResponse>
     fun executeBookingAction(url: String): Single<QuickBookResponse>
     fun getPaymentIntent(url: String): Single<QuickBookingPaymentIntent>
@@ -33,6 +34,9 @@ interface QuickBookingService {
 
         override fun quickBook(url: String, request: QuickBookRequest): Single<QuickBookResponse> =
             api.book(url, request)
+
+        override fun quickBook(url: String): Single<QuickBookResponse> =
+            api.book(url)
 
         override fun getBookingUpdate(url: String): Single<RoutingResponse> =
             api.getBookingUpdate(url)
