@@ -126,12 +126,20 @@ open class StopsFetcher(
     ): Observable<List<LocationsResponse.Group>> {
         return createRequestBodiesAsync(cellIds, region, level)
             .flatMap { body ->
-                val baseUrl = region.getURLs()!![0]
-                val url = baseUrl.toHttpUrlOrNull()!!
-                    .newBuilder()
-                    .addPathSegment("locations.json")
-                    .build()
-                fetchCellsAsync(url.toString(), body)
+                val urls = region.getURLs().orEmpty()
+                    .mapNotNull { baseUrl ->
+                        baseUrl.toHttpUrlOrNull()
+                            ?.newBuilder()
+                            ?.addPathSegment("locations.json")
+                            ?.build()
+                            ?.toString()
+                    }
+
+                if (urls.isEmpty()) {
+                    Observable.error<List<LocationsResponse.Group>>(IllegalStateException("Region ${region.name ?: ""} does not provide valid location endpoints."))
+                } else {
+                    fetchCellsFromAny(urls, body)
+                }
             }
     }
 
@@ -142,6 +150,22 @@ open class StopsFetcher(
         return api.fetchLocationsAsync(url, requestBody)
             .filter { response -> response != null && CollectionUtils.isNotEmpty(response.groups) }
             .map { it.groups }
+    }
+
+    private fun fetchCellsFromAny(
+        urls: List<String>,
+        requestBody: LocationsRequestBody
+    ): Observable<List<LocationsResponse.Group>> {
+        val requests = urls.map { url ->
+            fetchCellsAsync(url, requestBody)
+                .onErrorResumeNext(Observable.empty())
+        }
+
+        return Observable.merge(requests)
+            .take(1)
+            .switchIfEmpty(
+                Observable.error(IllegalStateException("Failed to fetch locations from all region endpoints."))
+            )
     }
 
     private fun saveCellsAsync(cells: List<LocationsResponse.Group>): Observable<List<LocationsResponse.Group>> {
