@@ -1,5 +1,6 @@
 package com.skedgo.tripkit.data.locations
 
+import com.google.gson.Gson
 import com.skedgo.tripkit.agenda.ConfigRepository
 import com.skedgo.tripkit.common.model.region.Region
 import com.skedgo.tripkit.data.database.locations.bikepods.BikePodRepository
@@ -148,7 +149,9 @@ open class StopsFetcher(
         requestBody: LocationsRequestBody
     ): Observable<List<LocationsResponse.Group>> {
         return api.fetchLocationsAsync(url, requestBody)
-            .filter { response -> response != null && CollectionUtils.isNotEmpty(response.groups) }
+            .filter { response ->
+                response != null && CollectionUtils.isNotEmpty(response.groups)
+            }
             .map { it.groups }
     }
 
@@ -221,7 +224,9 @@ open class StopsFetcher(
                     .map { carPodRepository.saveCarPods(carPodMapper.toEntity(it.key, it.carPods)) }
             ).plus(
                 cells.filter { it.facilities != null && it.facilities.isNotEmpty() }
-                    .map { facilityRepository.saveFacilities(it.key, it.facilities) }
+                    .map {
+                        facilityRepository.saveFacilities(it.key, it.facilities.map { it.toEntity() })
+                    }
             )
             .toList()
             .let {
