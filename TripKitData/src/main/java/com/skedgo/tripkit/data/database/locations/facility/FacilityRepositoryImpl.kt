@@ -19,6 +19,8 @@ class FacilityRepositoryImpl(val tripGoDatabase2: TripKitDatabase) : FacilityRep
                     it.identifier = it.identifier
                 }
                 tripGoDatabase2.facilityDao().saveAll(facilities)
+            }.doOnError {
+                it.printStackTrace()
             }
             .subscribeOn(Schedulers.io())
     }
