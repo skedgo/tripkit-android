@@ -4,12 +4,13 @@
 
 We release patches for security vulnerabilities in the following versions:
 
-| Version | Supported          |
-| ------- | ------------------ |
-| 1.x.x   | :white_check_mark: |
-| < 1.0   | :x:                |
+| Version | Supported |
+| ------- | ---------- |
+| 2.x (current TripKit Android releases from `main`) | :white_check_mark: |
+| 1.x (legacy) | :warning: Best-effort fixes only |
+| < 1.0 | :x: |
 
-> **Note:** Please update this table to reflect the actual versions you support.
+> **Note:** TripKit Android is distributed through JitPack. Update this matrix whenever the supported major version changes.
 
 ---
 
@@ -61,21 +62,31 @@ If you're contributing to this project, please follow these security guidelines:
 - No direct commits to `main` or protected branches
 
 ### Dependencies
-- Keep dependencies up to date
-- Review dependency changes for known vulnerabilities
-- Use automated tools like Dependabot to monitor security issues
+- Keep Gradle dependencies up to date (Android Gradle Plugin, Kotlin, RxJava, OkHttp, protobuf, Play Services, etc.)
+- Review dependency bumps for known CVEs (Dependabot alerts are enabled)
+- Align `compileSdk`/`targetSdk` with the latest Android API level used by TripGo/partners
+- Verify third-party transit data feeds and serialization libraries before upgrading
 
 ### Secrets Management
-- **Never** commit credentials, API keys, tokens, or other secrets
-- Use environment variables or secure secret management systems
-- Review commits for accidentally included secrets before pushing
+- **Never** commit TripKit API keys, partner tokens, keystores, or signing passwords
+- Sample modules (`TripKitSamples`, `TripKitAndroidSample`) must use placeholder keys stored in local `gradle.properties`
+- Use secure secret storage (AWS SSM, GitHub Secrets, CI variables) for publishing credentials and release automation
+- Review commits for accidentally included secrets before pushing; GitHub secret scanning is enabled
 
 ### Secure Coding
-- Follow [OWASP Top 10](https://owasp.org/www-project-top-ten/) best practices
-- Validate and sanitize all user inputs
-- Use parameterized queries to prevent SQL injection
-- Implement proper authentication and authorization
-- Use HTTPS/TLS for all network communications
+- Follow [OWASP Top 10](https://owasp.org/www-project-top-ten/) and Android security best practices
+- Validate and sanitize all inputs from TripGo APIs, GTFS feeds, and client apps
+- Use parameterized queries for SQLite/Room accessors inside TripKit persistence modules
+- Implement proper authentication and authorization flows for TripKit backend calls (OAuth tokens, HMAC, etc.)
+- Use HTTPS/TLS ≥ 1.2 and enforce `networkSecurityConfig` for all outbound requests, including WebSocket upgrades
+- Dispose of RxJava subscriptions, timers, and coroutines to avoid resource leaks and potential denial-of-service conditions
+
+### Android SDK Considerations
+- Respect Android permission scopes; TripKit SDK must surface permission requirements to host apps rather than requesting silently
+- Ensure cached trip data, schedules, and location history are encrypted when stored locally
+- Harden background services and notifications (foreground service declarations, battery optimizations)
+- Obfuscate release artifacts (R8/ProGuard) and keep consumer ProGuard files up to date
+- Prevent debug tooling, logging endpoints, and feature flags from leaking into production builds
 
 ---
 
@@ -85,8 +96,9 @@ This project includes the following security measures:
 
 - **Dependabot alerts** enabled for vulnerable dependencies
 - **Secret scanning** enabled to prevent credential leaks
+- **GitHub Actions `CI` workflow** runs unit tests (`./gradlew test -x :TripKitSamples:test`) on pull requests
 - **Code review** required for all changes
-- **Branch protection** rules enforced on main branches
+- **Branch protection** rules enforced on `main/develop`
 
 ---
 
@@ -128,7 +140,7 @@ For general security questions or concerns, please contact:
 
 ---
 
-> **Last Updated:** {{ DATE }}  
-> **Version:** 1.0  
+> **Last Updated:** 2025-11-14  
+> **Version:** 1.1  
 > 
 > This security policy is maintained by the repository maintainers and reviewed regularly.
