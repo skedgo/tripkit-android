@@ -137,7 +137,7 @@ open class StopsFetcher(
                     }
 
                 if (urls.isEmpty()) {
-                    Observable.error<List<LocationsResponse.Group>>(IllegalStateException("Region ${region.name ?: ""} does not provide valid location endpoints."))
+                    Observable.just(emptyList())
                 } else {
                     fetchCellsFromAny(urls, body)
                 }
@@ -166,9 +166,7 @@ open class StopsFetcher(
 
         return Observable.merge(requests)
             .take(1)
-            .switchIfEmpty(
-                Observable.error(IllegalStateException("Failed to fetch locations from all region endpoints."))
-            )
+            .switchIfEmpty(Observable.just(emptyList()))
     }
 
     private fun saveCellsAsync(cells: List<LocationsResponse.Group>): Observable<List<LocationsResponse.Group>> {
