@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
+    <!-- Semantic colors (DayNight). Use @android:color/white for literal white. -->
+    <color name="white">#2A2F35</color>
+
     <!-- Text colors: Light → Dark -->
     <color name="v4_title_text">#FFFFFF</color> <!-- #212121 → #FFFFFF (dark text → white text) -->
     <color name="v4_description_text">#CAC4D0</color> <!-- #8A8A8A → #CAC4D0 (medium grey → light grey) -->
