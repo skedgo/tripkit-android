@@ -12,6 +12,10 @@ android {
 
     compileSdkVersion versions.compileSdkVersion
 
+    buildFeatures {
+        buildConfig = true
+    }
+
     defaultConfig {
         minSdkVersion versions.proMinSdkVersion
         targetSdkVersion versions.targetSdkVersion
