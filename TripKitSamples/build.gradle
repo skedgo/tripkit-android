@@ -3,6 +3,7 @@ apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-kapt'
 
 android {
+    namespace 'skedgo.tripkit.samples'
     compileSdkVersion versions.compileSdkVersion
 
     buildFeatures {
