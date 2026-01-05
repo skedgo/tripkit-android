@@ -20,7 +20,7 @@ android {
         }
     }
 
-    lintOptions {
+    lint {
         // Changing to warning because of https://github.com/square/okio/issues/58.
         warning 'InvalidPackage'
     }

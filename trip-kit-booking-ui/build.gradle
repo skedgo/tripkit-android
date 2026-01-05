@@ -34,7 +34,7 @@ android {
         dataBinding true
     }
 
-    lintOptions {
+    lint {
         checkReleaseBuilds true
         abortOnError false
     }
