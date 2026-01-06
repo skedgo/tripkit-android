@@ -64,4 +64,15 @@ class TripKitSharedPreference @Inject constructor(context: Context) :
         val dataString = sharedPreferences.getString(PREF_KEY_POLYGON, "") ?: ""
         return gson.fromJson(dataString)
     }
+
+    fun saveClientData(client: Client) {
+        editWithBlock { editor ->
+            editor.putString(PREF_KEY_CLIENT_ID, client.clientID)
+            editor.putString(PREF_KEY_CLIENT, gson.toJson(client))
+            client.features?.let {
+                editor.putString(PREF_KEY_CLIENT_FEATURES, gson.toJson(it))
+            }
+            editor.putString(PREF_KEY_POLYGON, client.polygon?.let { gson.toJson(it) } ?: "")
+        }
+    }
 }
