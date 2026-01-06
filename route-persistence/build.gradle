@@ -10,7 +10,7 @@ android {
 
     // defaultPublishConfig 'debug'
 
-    lintOptions {
+    lint {
         // Continue to check for errors in release builds,
         // but continue the build even when errors are found.
         checkReleaseBuilds true

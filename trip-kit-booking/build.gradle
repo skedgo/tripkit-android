@@ -35,7 +35,7 @@ android {
         exclude 'META-INF/services/com.google.gson.TypeAdapterFactory'
     }
 
-    lintOptions {
+    lint {
         checkReleaseBuilds true
         abortOnError false
     }

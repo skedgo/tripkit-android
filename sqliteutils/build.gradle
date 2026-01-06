@@ -8,8 +8,6 @@ android {
     namespace 'com.skedgo.sqlite'
 
     compileSdkVersion versions.compileSdkVersion
-    buildToolsVersion "33.0.0"
-
 
     defaultConfig {
         minSdkVersion versions.proMinSdkVersion

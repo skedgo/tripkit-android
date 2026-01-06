@@ -3,6 +3,7 @@ apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-kapt'
 
 android {
+    namespace 'skedgo.tripkit.samples'
     compileSdkVersion versions.compileSdkVersion
 
     buildFeatures {
@@ -41,7 +42,7 @@ android {
         }
     }
 
-    lintOptions { abortOnError false }
+    lint { abortOnError false }
     compileOptions {
         coreLibraryDesugaringEnabled true
         sourceCompatibility JavaVersion.VERSION_17
