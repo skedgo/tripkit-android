@@ -35,7 +35,8 @@ open class HttpClientModule(
     private val version: String?,
     private val configs: Configs,
     private val appDeactivatedListener: (() -> Unit)? = null,
-    private val errorInterceptor: ErrorHandlingInterceptor? = null
+    private val errorInterceptor: ErrorHandlingInterceptor? = null,
+    private val useInstabugNetworkInterceptor: Boolean = false
 ) {
 
     @Singleton
@@ -48,7 +49,7 @@ open class HttpClientModule(
             interceptor.level = HttpLoggingInterceptor.Level.BODY
             builder.addInterceptor(interceptor)
         }
-        if(BuildConfig.DEBUG) {
+        if(BuildConfig.DEBUG || useInstabugNetworkInterceptor) {
             builder.addInterceptor(InstabugOkhttpInterceptor())
         }
         if (configs.baseUrlAdapterFactory() != null) {
