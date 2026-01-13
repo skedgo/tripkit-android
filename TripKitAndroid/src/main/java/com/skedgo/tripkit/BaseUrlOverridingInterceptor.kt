@@ -10,7 +10,7 @@ class BaseUrlOverridingInterceptor(
 ) : Interceptor {
 
     override fun intercept(chain: Interceptor.Chain): Response {
-        var newBaseUrl = ""
+        var newBaseUrl: String? = null
         try {
             newBaseUrl = baseUrlAdapter.call()
         } catch (e: Exception) {
@@ -25,7 +25,7 @@ class BaseUrlOverridingInterceptor(
             requestUrl.host.contains("buzzhives.com") ||
             requestUrl.host.contains("tripgo.com")
 
-        return if (newBaseUrl.isNotEmpty() && isFromSkedGo && !requestUrl.host.contains("payments.tripgo.com")) {
+        return if (newBaseUrl != null && newBaseUrl.isNotEmpty() && isFromSkedGo && !requestUrl.host.contains("payments.tripgo.com")) {
             var tempUrl = requestUrl.newBuilder().removePathSegment(0).build()
             if (requestUrl.host == "galaxies.skedgo.com") {
                 tempUrl = tempUrl.newBuilder().removePathSegment(0).removePathSegment(0).build()
