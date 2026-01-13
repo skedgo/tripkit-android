@@ -95,7 +95,7 @@ class TripKitSharedPreferenceTest {
     fun `getPolygon - should return expected polygon data`() {
         val polygon: Polygon = gson.fromJson(MOCK_POLYGON_DATE)
         val polygonJson = gson.toJson(polygon)
-        every { sharedPreferences.getString(PREF_KEY_POLYGON, "") } returns polygonJson
+        every { sharedPreferences.getString(PREF_KEY_POLYGON, null) } returns polygonJson
 
         val result = tripKitSharedPreference.getPolygon()
 

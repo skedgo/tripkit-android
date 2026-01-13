@@ -41,7 +41,9 @@ class TripKitSharedPreference @Inject constructor(context: Context) :
     }
 
     fun getClient(): Client? =
-        Gson().fromJson(sharedPreferences.getString(PREF_KEY_CLIENT, null).orEmpty())
+        sharedPreferences.getString(PREF_KEY_CLIENT, null)
+            ?.takeIf { it.isNotBlank() }
+            ?.let { Gson().fromJson<Client>(it) }
 
     fun saveClientFeatures(features: List<String>) {
         sharedPreferences.edit()
@@ -50,7 +52,10 @@ class TripKitSharedPreference @Inject constructor(context: Context) :
     }
 
     fun getClientFeatures(): List<String> =
-        Gson().fromJson(sharedPreferences.getString(PREF_KEY_CLIENT_FEATURES, null) ?: "")
+        sharedPreferences.getString(PREF_KEY_CLIENT_FEATURES, null)
+            ?.takeIf { it.isNotBlank() }
+            ?.let { Gson().fromJson<List<String>>(it) }
+            ?: emptyList()
 
     fun savePolygon(polygon: Polygon?) {
         sharedPreferences.edit()
@@ -61,7 +66,7 @@ class TripKitSharedPreference @Inject constructor(context: Context) :
     }
 
     fun getPolygon(): Polygon? {
-        val dataString = sharedPreferences.getString(PREF_KEY_POLYGON, "") ?: ""
-        return gson.fromJson(dataString)
+        val dataString = sharedPreferences.getString(PREF_KEY_POLYGON, null)
+        return dataString?.takeIf { it.isNotBlank() }?.let { gson.fromJson<Polygon>(it) }
     }
 }
