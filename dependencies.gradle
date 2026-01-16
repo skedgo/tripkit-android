@@ -41,6 +41,10 @@ versions.amplifyAuth = "1.2.0"
 versions.desugar = "2.0.4"
 versions.preference = "1.2.0"
 versions.timber = "5.0.1"
+// Jetpack Compose (compatible with Kotlin 1.8.20 / AGP 8.x)
+versions.composeCompiler = "1.4.6"
+versions.composeBom = "2023.06.01"
+versions.activityCompose = "1.7.2"
 
 ext.versions = versions
 
@@ -164,6 +168,15 @@ libs.glide = "com.github.bumptech.glide:glide:$versions.glide"
 libs.glideCompiler = "com.github.bumptech.glide:compiler:$versions.glide"
 libs.viewPager2 = "androidx.viewpager2:viewpager2:$versions.viewPager2"
 libs.qrCodeGenerator = "com.github.SumiMakito:AwesomeQRCode:$versions.qrCodeGenerator"
+
+// Jetpack Compose
+libs.composeBom = "androidx.compose:compose-bom:$versions.composeBom"
+libs.activityCompose = "androidx.activity:activity-compose:$versions.activityCompose"
+libs.composeUi = "androidx.compose.ui:ui"
+libs.composeUiTooling = "androidx.compose.ui:ui-tooling"
+libs.composeUiToolingPreview = "androidx.compose.ui:ui-tooling-preview"
+libs.composeFoundation = "androidx.compose.foundation:foundation"
+libs.composeMaterial = "androidx.compose.material:material"
 
 libs.volley = "com.android.volley:volley:$versions.volley"
 libs.jetBrainsAnnotation = "org.jetbrains:annotations-java5:$versions.jetBrainsJava5"
