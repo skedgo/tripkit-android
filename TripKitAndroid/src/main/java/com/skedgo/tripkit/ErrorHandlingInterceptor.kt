@@ -10,13 +10,13 @@ open class ErrorHandlingInterceptor(
     private val appDeactivatedListener: (() -> Unit)? = null
 ) : Interceptor {
 
-    private val tag = ErrorHandlingInterceptor::class.java.name // Use class name as log tag
+    private val tag = ErrorHandlingInterceptor::class.java.name
 
     override fun intercept(chain: Interceptor.Chain): Response {
         val request = chain.request()
         val url = request.url
-        try {
-            Timber.i(tag, "Executing API request: $url")
+        return try {
+            Timber.tag(tag).i("Executing API request: %s", url)
 
             val isRegionsEndpoint = url.encodedPath.contains("regions.json")
             val response = chain.proceed(request)
@@ -29,7 +29,7 @@ open class ErrorHandlingInterceptor(
 
             // Handle 502 Bad Gateway with structured logging and propagation
             if (response.code == 502) {
-                Timber.w(tag, "HTTP 502 Bad Gateway: $url")
+                Timber.tag(tag).w("HTTP 502 Bad Gateway: %s", url)
 
                 // TODO: Add a retry mechanism if needed
                 /*
@@ -51,25 +51,18 @@ open class ErrorHandlingInterceptor(
                 throw IOException("Server temporarily unavailable (HTTP 502) at $url")
             }
 
-            return response
+            response
         } catch (e: UnknownHostException) {
-            handleUnknownHostException(e, url.toString())
+            // DNS/network issues are expected in the wild (e.g. captive portals, bad connectivity).
+            // Log for diagnostics, but do NOT replace the exception (we want to preserve the cause/stack).
+            val formattedMessage = "API Request Failed: $url - ${e.message}"
+            Timber.tag(tag).w(e, formattedMessage)
+            throw e
         } catch (e: IOException) {
             // Handle network or other exceptions
             // Log the exception before rethrowing for proper debugging
-            Timber.e(tag, "Network error for URL: $url - ${e.message}", e)
+            Timber.tag(tag).e(e, "Network error for URL: %s - %s", url, e.message)
             throw e
         }
-    }
-
-    private fun handleUnknownHostException(e: UnknownHostException, url: String): Nothing {
-        val formattedMessage = "API Request Failed: $url - ${e.message}"
-
-        Timber.e(tag, formattedMessage, e)
-
-        System.err.println(formattedMessage)
-        e.printStackTrace()
-
-        throw UnknownHostException(formattedMessage).apply { stackTrace = e.stackTrace }
     }
 }
