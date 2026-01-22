@@ -9,7 +9,7 @@ versions.desugaring = "1.1.5"
 versions.immutablesVersion = "2.8.8"
 versions.devMinSdkVersion = 21
 versions.proMinSdkVersion = 21
-versions.compileSdkVersion = 34
+versions.compileSdkVersion = 35  // Updated for androidx.core:core-ktx:1.16.0 requirement
 versions.targetSdkVersion = 35
 // See change-log at https://github.com/JetBrains/kotlin/blob/master/ChangeLog.md.
 versions.kotlinVersion = "1.8.20"
@@ -30,7 +30,7 @@ versions.glide = "4.11.0"
 versions.tripGoLibrary = "1.0"
 versions.tripGoGroup = "com.skedgo"
 versions.javaxAnnotation = "1.3.2"
-versions.instabug = '13.0.1'
+versions.instabug = '13.4.0'  // 13.4.0+ required for 16KB page size support
 versions.paging = "3.0.0"
 versions.viewPager2 = "1.0.0"
 versions.mockk = "1.13.8"
@@ -141,7 +141,7 @@ libs.lifecycleLiveData = "androidx.lifecycle:lifecycle-livedata-ktx:$versions.li
 
 libs.constraintLayout = "androidx.constraintlayout:constraintlayout:2.0.0-beta4"
 libs.preferences = "androidx.preference:preference:1.1.0"
-libs.mlkit = "com.google.mlkit:barcode-scanning:16.0.0"
+libs.mlkit = "com.google.mlkit:barcode-scanning:17.3.0"  // Updated for 16KB page size support
 libs.camerax = "androidx.camera:camera-camera2:1.0.0-beta06"
 libs.cameraxView = "androidx.camera:camera-view:1.0.0-alpha13"
 libs.cameraxLifecycle = "androidx.camera:camera-lifecycle:1.0.0-beta06"
