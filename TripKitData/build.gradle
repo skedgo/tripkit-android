@@ -138,6 +138,9 @@ dependencies {
 
 kapt {
     correctErrorTypes = true
+    // Configure kapt to use Kotlin 1.9 API for annotation processing (kapt doesn't fully support 2.0 yet)
+    useBuildCache = true
+    mapDiagnosticLocations = true
 }
 
 // build a jar with source files
