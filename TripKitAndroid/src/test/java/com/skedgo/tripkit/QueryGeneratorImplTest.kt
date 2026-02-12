@@ -86,9 +86,9 @@ class QueryGeneratorImplTest {
             .thenAnswer { invocation ->
                 val argument = invocation.getArgument<Location>(0)
                 if (argument === departure) {
-                    Observable.error(error)
+                    Observable.error<Region>(error)
                 } else if (argument === arrival) {
-                    Observable.just(Region())
+                    Observable.just<Region>(Region())
                 } else {
                     throw IllegalArgumentException()
                 }
@@ -116,9 +116,9 @@ class QueryGeneratorImplTest {
             .thenAnswer { invocation ->
                 val argument = invocation.getArgument<Location>(0)
                 if (argument === arrival) {
-                    Observable.error(error)
+                    Observable.error<Region>(error)
                 } else if (argument === departure) {
-                    Observable.just(Region())
+                    Observable.just<Region>(Region())
                 } else {
                     throw IllegalArgumentException()
                 }
