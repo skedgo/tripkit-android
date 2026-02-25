@@ -177,6 +177,7 @@ libs.composeUiTooling = "androidx.compose.ui:ui-tooling"
 libs.composeUiToolingPreview = "androidx.compose.ui:ui-tooling-preview"
 libs.composeFoundation = "androidx.compose.foundation:foundation"
 libs.composeMaterial = "androidx.compose.material:material"
+libs.composeLiveData = "androidx.compose.runtime:runtime-livedata"
 
 libs.volley = "com.android.volley:volley:$versions.volley"
 libs.jetBrainsAnnotation = "org.jetbrains:annotations-java5:$versions.jetBrainsJava5"
