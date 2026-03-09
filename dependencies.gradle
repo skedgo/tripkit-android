@@ -7,8 +7,8 @@
 def versions = new Expando()
 versions.desugaring = "1.1.5"
 versions.immutablesVersion = "2.8.8"
-versions.devMinSdkVersion = 21
-versions.proMinSdkVersion = 21
+versions.devMinSdkVersion = 23
+versions.proMinSdkVersion = 23
 versions.compileSdkVersion = 35  // Updated for androidx.core:core-ktx:1.16.0 requirement
 versions.targetSdkVersion = 35
 // See change-log at https://github.com/JetBrains/kotlin/blob/master/ChangeLog.md.
