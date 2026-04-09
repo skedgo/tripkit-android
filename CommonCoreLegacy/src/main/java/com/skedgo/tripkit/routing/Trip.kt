@@ -3,9 +3,12 @@ package com.skedgo.tripkit.routing
 import android.net.Uri
 import com.google.gson.JsonDeserializationContext
 import com.google.gson.JsonDeserializer
+import com.google.gson.JsonSerializationContext
+import com.google.gson.JsonSerializer
 import com.google.gson.JsonObject
 import com.google.gson.JsonParseException
 import com.google.gson.JsonElement
+import com.google.gson.JsonPrimitive
 import com.google.gson.annotations.JsonAdapter
 import com.google.gson.annotations.SerializedName
 import com.skedgo.tripkit.common.model.TransportMode
@@ -329,7 +332,7 @@ class Trip : ITimeRange {
     }
 }
 
-private class QueryTimeAdapter : JsonDeserializer<Long> {
+private class QueryTimeAdapter : JsonDeserializer<Long>, JsonSerializer<Long> {
     override fun deserialize(
         json: JsonElement?,
         typeOfT: Type?,
@@ -350,5 +353,13 @@ private class QueryTimeAdapter : JsonDeserializer<Long> {
             }
             else -> 0L
         }
+    }
+
+    override fun serialize(
+        src: Long?,
+        typeOfSrc: Type?,
+        context: JsonSerializationContext?
+    ): JsonElement {
+        return JsonPrimitive(src ?: 0L)
     }
 }
