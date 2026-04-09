@@ -63,7 +63,7 @@ class FailoverA2bRoutingApi(
             .first(RoutingResponse())
             .map { response ->
                 response.processRawData(resources, gson)
-                response.tripGroupList
+                response.tripGroupList.orEmpty()
             }
             .filter { it.isNotEmpty() }
             .map(fillIdentifiers)
@@ -85,9 +85,13 @@ class FailoverA2bRoutingApi(
         excludeStops: List<String>,
         options: Map<String, Any>
     ): Observable<RoutingResponse> {
-        return a2bRoutingApi.execute(url, modes, excludedTransitModes, excludeStops, options)
+        // URL is already fully built with query params; avoid appending them again via Retrofit @Query.
+        return a2bRoutingApi.execute(url, emptyList(), emptyList(), emptyList(), emptyMap())
             .filter { response -> !(response.errorMessage != null && !response.hasError()) }
-            .onErrorResumeNext(Observable.empty())
+            .onErrorResumeNext { e : Throwable ->
+                e.printThrowableStackTrace()
+                Observable.empty()
+            }
             .flatMap { response ->
                 if (response.errorMessage != null) {
                     if (response.errorCode == ERROR_CODE_NO_FROM_LOCATION) {

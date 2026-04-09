@@ -1,7 +1,12 @@
 package com.skedgo.tripkit.routing
 
 import android.net.Uri
+import com.google.gson.JsonDeserializationContext
+import com.google.gson.JsonDeserializer
 import com.google.gson.JsonObject
+import com.google.gson.JsonParseException
+import com.google.gson.JsonElement
+import com.google.gson.annotations.JsonAdapter
 import com.google.gson.annotations.SerializedName
 import com.skedgo.tripkit.common.model.TransportMode
 import com.skedgo.tripkit.common.model.location.Location
@@ -11,6 +16,7 @@ import java.math.RoundingMode
 import java.text.NumberFormat
 import java.util.Locale
 import java.util.UUID
+import java.lang.reflect.Type
 
 /**
  * A [Trip] will mainly hold a list of [TripSegment]s which denotes
@@ -95,6 +101,7 @@ class Trip : ITimeRange {
     var queryIsLeaveAfter: Boolean = false
 
     @SerializedName("queryTime")
+    @JsonAdapter(QueryTimeAdapter::class)
     var queryTime: Long = 0
 
     @SerializedName("availability")
@@ -318,6 +325,30 @@ class Trip : ITimeRange {
                 else -> segment.transportModeId?.contains(TransportMode.MIDDLE_FIX_CAR) == true ||
                     segment.transportModeId?.contains(TransportMode.MIDDLE_FIX_BIC) == true
             }
+        }
+    }
+}
+
+private class QueryTimeAdapter : JsonDeserializer<Long> {
+    override fun deserialize(
+        json: JsonElement?,
+        typeOfT: Type?,
+        context: JsonDeserializationContext?
+    ): Long {
+        val element = json ?: return 0L
+        if (!element.isJsonPrimitive) return 0L
+
+        val primitive = element.asJsonPrimitive
+        return when {
+            primitive.isNumber -> primitive.asLong
+            primitive.isString -> {
+                val value = primitive.asString
+                value.toLongOrNull()
+                    ?: runCatching {
+                        ISODateTimeFormat.dateTimeParser().parseDateTime(value).millis / 1000
+                    }.getOrElse { throw JsonParseException("Invalid queryTime: $value", it) }
+            }
+            else -> 0L
         }
     }
 }
