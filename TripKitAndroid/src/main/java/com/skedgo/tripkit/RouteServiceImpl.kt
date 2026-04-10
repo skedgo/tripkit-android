@@ -35,6 +35,7 @@ internal class RouteServiceImpl(
         query: Query,
         transportModeFilter: TransportModeFilter
     ): Observable<List<TripGroup>> {
+        val seenModeSignatures = hashSetOf<String>()
         return flatSubQueries(query, transportModeFilter)
             .flatMap { subQuery ->
 
@@ -42,6 +43,10 @@ internal class RouteServiceImpl(
 
                 val baseUrls = region?.getURLs()?.toList()
                 val modes = transportModeFilter.getFilteredMode(subQuery.transportModeIds)
+                val modeSignature = modes.sorted().joinToString("|")
+                if (modeSignature.isBlank() || !seenModeSignatures.add(modeSignature)) {
+                    return@flatMap Observable.empty<List<TripGroup>>()
+                }
 
                 val excludeStops = subQuery.excludedStopCodes
                 val avoidModes = region?.transportModeIds.orEmpty().map { it }
