@@ -36,8 +36,8 @@ versions.viewPager2 = "1.0.0"
 versions.mockk = "1.13.8"
 versions.archCore = "2.1.0"
 versions.qrCodeGenerator = "1.2.0"
-versions.amplifyCore = "2.14.11"
-versions.amplifyAuth = "1.2.0"
+versions.amplifyCore = "2.25.0"
+versions.amplifyAuth = "2.25.0"
 versions.desugar = "2.0.4"
 versions.preference = "1.2.0"
 versions.timber = "5.0.1"
@@ -170,7 +170,7 @@ libs.jetBrainsAnnotation = "org.jetbrains:annotations-java5:$versions.jetBrainsJ
 
 libs.archCoreTesting = "androidx.arch.core:core-testing:$versions.archCore"
 
-libs.amplifyCore = "com.amplifyframework:core:$versions.ampifyCore"
-libs.amplifyAuth = "com.amplifyframework.ui:authenticator:$versions.amplifyAuth"
+libs.amplifyCore = "com.amplifyframework:core:$versions.amplifyCore"
+libs.amplifyAuth = "com.amplifyframework:aws-auth-cognito:$versions.amplifyAuth"
 
 ext.libs = libs
