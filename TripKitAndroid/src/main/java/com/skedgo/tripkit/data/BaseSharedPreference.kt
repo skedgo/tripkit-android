@@ -27,4 +27,10 @@ abstract class BaseSharedPreference(context: Context) {
             }
         }.apply()
     }
+
+    fun editWithBlock(block: (SharedPreferences.Editor) -> Unit) {
+        val editor = sharedPreferences.edit()
+        block(editor)
+        editor.commit() // <— single commit, only here
+    }
 }
