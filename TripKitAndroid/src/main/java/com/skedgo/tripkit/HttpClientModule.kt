@@ -44,14 +44,7 @@ open class HttpClientModule(
     open fun httpClient(addCustomHeaders: AddCustomHeaders): OkHttpClient {
         val builder = httpClientBuilder()
             .addInterceptor(addCustomHeaders)
-        if (configs.debuggable()) {
-            val interceptor = HttpLoggingInterceptor()
-            interceptor.level = HttpLoggingInterceptor.Level.BODY
-            builder.addInterceptor(interceptor)
-        }
-        if(BuildConfig.DEBUG || useInstabugNetworkInterceptor) {
-            builder.addInterceptor(InstabugOkhttpInterceptor())
-        }
+
         if (configs.baseUrlAdapterFactory() != null) {
             try {
                 builder.addInterceptor(BaseUrlOverridingInterceptor(configs.baseUrlAdapterFactory()!!))
@@ -62,6 +55,20 @@ open class HttpClientModule(
         builder.addInterceptor(
             errorInterceptor ?: ErrorHandlingInterceptor(appDeactivatedListener)
         )
+
+        // Instabug and HttpLoggingInterceptor must be added after all business-logic
+        // interceptors so they observe the final response. Instabug is added first so
+        // that the logging interceptor — which buffers the response body — runs last in
+        // the response path and never encounters a source that was already consumed.
+        if (BuildConfig.DEBUG || useInstabugNetworkInterceptor) {
+            builder.addInterceptor(InstabugOkhttpInterceptor())
+        }
+        if (configs.debuggable()) {
+            val loggingInterceptor = HttpLoggingInterceptor()
+            loggingInterceptor.level = HttpLoggingInterceptor.Level.BODY
+            builder.addInterceptor(loggingInterceptor)
+        }
+
         builder.connectTimeout(60, TimeUnit.SECONDS)
         builder.readTimeout(60, TimeUnit.SECONDS)
         builder.writeTimeout(60, TimeUnit.SECONDS)
