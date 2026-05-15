@@ -14,13 +14,24 @@ import kotlinx.coroutines.flow.onStart
 import java.io.IOException
 import java.net.SocketTimeoutException
 import java.net.UnknownHostException
+import java.util.concurrent.atomic.AtomicLong
+import java.util.logging.Logger
 import javax.inject.Inject
 
 class QuickBookingRepository @Inject constructor(
     val quickBookingService: QuickBookingService,
     tripKitDatabase: TripKitDatabase
 ) {
+    companion object {
+        private val logger = Logger.getLogger(QuickBookingRepository::class.java.simpleName)
+    }
+
     private val ticketDao = tripKitDatabase.ticketDao()
+    private val inFlightTicketsLock = Any()
+    @Volatile
+    private var inFlightTicketsRequest: Single<List<Ticket>>? = null
+    private val ticketRequestCounter = AtomicLong(0)
+
     suspend fun getTickets(): Flow<Result<List<Ticket>>> = flow {
         emit(Result.loading())
 
@@ -50,7 +61,20 @@ class QuickBookingRepository @Inject constructor(
     }.flowOn(Dispatchers.IO)
 
     fun getTicketsRx(userId: String?): Single<List<Ticket>> {
-        return quickBookingService.getTickets(true)
+        val caller = resolveTicketsCaller()
+        synchronized(inFlightTicketsLock) {
+            inFlightTicketsRequest?.let { inFlight ->
+                logger.info("getTicketsRx reuse in-flight caller=$caller userId=$userId")
+                return inFlight
+            }
+        }
+
+        val requestId = ticketRequestCounter.incrementAndGet()
+        lateinit var sharedRequest: Single<List<Ticket>>
+        sharedRequest = quickBookingService.getTickets(true)
+            .doOnSubscribe {
+                logger.info("getTicketsRx start requestId=$requestId caller=$caller userId=$userId")
+            }
             .flatMap { tickets ->
                 if (tickets.isNotEmpty()) {
                     // delete first existing tickets
@@ -64,8 +88,9 @@ class QuickBookingRepository @Inject constructor(
                         .toSingle()
                         .flatMap { Single.just(it.map { it.toTicket() }) }
                 }
-            }.onErrorResumeNext { e : Throwable ->
-                if(e is UnknownHostException || e is IOException || e is SocketTimeoutException) {
+            }
+            .onErrorResumeNext { e: Throwable ->
+                if (e is UnknownHostException || e is IOException || e is SocketTimeoutException) {
                     // Fallback to local data when network call fails
                     ticketDao.getTicketsByUserIdRx(userId)
                         .toSingle()
@@ -74,5 +99,34 @@ class QuickBookingRepository @Inject constructor(
                     Single.error(e)
                 }
             }
+            .doOnSuccess { tickets ->
+                logger.info("getTicketsRx success requestId=$requestId tickets=${tickets.size}")
+            }
+            .doOnError { e ->
+                logger.warning(
+                    "getTicketsRx error requestId=$requestId caller=$caller error=${e.message}"
+                )
+            }
+            .doFinally {
+                synchronized(inFlightTicketsLock) {
+                    if (inFlightTicketsRequest === sharedRequest) {
+                        inFlightTicketsRequest = null
+                        logger.info("getTicketsRx clear in-flight requestId=$requestId")
+                    }
+                }
+            }
+            .cache()
+
+        synchronized(inFlightTicketsLock) {
+            inFlightTicketsRequest = sharedRequest
+        }
+        return sharedRequest
+    }
+
+    private fun resolveTicketsCaller(): String {
+        val repositoryClassName = QuickBookingRepository::class.java.name
+        return Throwable().stackTrace.firstOrNull { element ->
+            element.className != repositoryClassName && !element.className.startsWith("io.reactivex")
+        }?.let { "${it.className}.${it.methodName}" } ?: "unknown"
     }
 }
