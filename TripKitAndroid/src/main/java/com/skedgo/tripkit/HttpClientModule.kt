@@ -36,8 +36,16 @@ open class HttpClientModule(
     private val configs: Configs,
     private val appDeactivatedListener: (() -> Unit)? = null,
     private val errorInterceptor: ErrorHandlingInterceptor? = null,
-    private val useInstabugNetworkInterceptor: Boolean = false
+    private val useInstabugNetworkInterceptor: Boolean = false,
 ) {
+    private val okHttpLogEndpointAllowlist: List<String> = if (configs.debuggable()) {
+        listOf(
+            "/ticket",
+            "/data/user/auth/cognito/",
+        )
+    } else {
+        emptyList()
+    }
 
     @Singleton
     @Provides
@@ -45,7 +53,9 @@ open class HttpClientModule(
         val builder = httpClientBuilder()
             .addInterceptor(addCustomHeaders)
         if (configs.debuggable()) {
-            val interceptor = HttpLoggingInterceptor()
+            val interceptor = HttpLoggingInterceptor(
+                EndpointFilteredHttpLogger(okHttpLogEndpointAllowlist)
+            )
             interceptor.level = HttpLoggingInterceptor.Level.BODY
             builder.addInterceptor(interceptor)
         }
