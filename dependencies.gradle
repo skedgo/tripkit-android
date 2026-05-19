@@ -36,11 +36,15 @@ versions.viewPager2 = "1.0.0"
 versions.mockk = "1.13.8"
 versions.archCore = "2.1.0"
 versions.qrCodeGenerator = "1.2.0"
-versions.amplifyCore = "2.14.11"
-versions.amplifyAuth = "1.2.0"
+versions.amplifyCore = "2.25.0"
+versions.amplifyAuth = "2.25.0"
 versions.desugar = "2.0.4"
 versions.preference = "1.2.0"
 versions.timber = "5.0.1"
+// Jetpack Compose (compatible with Kotlin 1.8.20 / AGP 8.x)
+versions.composeCompiler = "1.4.6"
+versions.composeBom = "2023.06.01"
+versions.activityCompose = "1.7.2"
 
 ext.versions = versions
 
@@ -165,12 +169,22 @@ libs.glideCompiler = "com.github.bumptech.glide:compiler:$versions.glide"
 libs.viewPager2 = "androidx.viewpager2:viewpager2:$versions.viewPager2"
 libs.qrCodeGenerator = "com.github.SumiMakito:AwesomeQRCode:$versions.qrCodeGenerator"
 
+// Jetpack Compose
+libs.composeBom = "androidx.compose:compose-bom:$versions.composeBom"
+libs.activityCompose = "androidx.activity:activity-compose:$versions.activityCompose"
+libs.composeUi = "androidx.compose.ui:ui"
+libs.composeUiTooling = "androidx.compose.ui:ui-tooling"
+libs.composeUiToolingPreview = "androidx.compose.ui:ui-tooling-preview"
+libs.composeFoundation = "androidx.compose.foundation:foundation"
+libs.composeMaterial = "androidx.compose.material:material"
+libs.composeLiveData = "androidx.compose.runtime:runtime-livedata"
+
 libs.volley = "com.android.volley:volley:$versions.volley"
 libs.jetBrainsAnnotation = "org.jetbrains:annotations-java5:$versions.jetBrainsJava5"
 
 libs.archCoreTesting = "androidx.arch.core:core-testing:$versions.archCore"
 
-libs.amplifyCore = "com.amplifyframework:core:$versions.ampifyCore"
-libs.amplifyAuth = "com.amplifyframework.ui:authenticator:$versions.amplifyAuth"
+libs.amplifyCore = "com.amplifyframework:core:$versions.amplifyCore"
+libs.amplifyAuth = "com.amplifyframework:aws-auth-cognito:$versions.amplifyAuth"
 
 ext.libs = libs
