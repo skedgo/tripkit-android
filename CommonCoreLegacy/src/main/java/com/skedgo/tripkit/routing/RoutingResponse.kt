@@ -253,9 +253,8 @@ class RoutingResponse {
                     notes,
                     resources
                 )
-
-                rawSegment.addProperty(SegmentJsonKeys.NODE_NOTES, notes)
             }
+            rawSegment.addProperty(SegmentJsonKeys.NODE_NOTES, notes)
         }
     }
 
