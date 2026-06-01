@@ -95,12 +95,60 @@ class RoutingResponseTest {
 
         val motorbikeSegment = trip.segmentList[1]
         assertThat(motorbikeSegment.alerts).hasSize(1).doesNotContainNull()
+        assertThat(motorbikeSegment.notes)
+            .describedAs("Template notes should be copied even without serviceDirection")
+            .contains("25km")
 
         val alert = motorbikeSegment.alerts!![0]
         assertThat(alert.severity()).isEqualTo(RealtimeAlert.SEVERITY_WARNING)
         assertThat(alert.title()).isEqualTo("Traffic delay")
         assertThat(getDisplayText(alert))
             .isEqualTo("Unusually high traffic on the route.")
+    }
+
+    @Test
+    fun notesShouldRemainNullWhenTemplateNotesIsNull() {
+        val routingJson = """
+            {
+              "segmentTemplates": [
+                {
+                  "hashCode": 1001,
+                  "type": "unscheduled",
+                  "visibility": "in summary",
+                  "from": {"lat": -33.8, "lng": 151.2, "class": "Location"},
+                  "to": {"lat": -33.9, "lng": 151.3, "class": "Location"},
+                  "action": "Walk",
+                  "notes": null
+                }
+              ],
+              "groups": [
+                {
+                  "trips": [
+                    {
+                      "segments": [
+                        {
+                          "segmentTemplateHashCode": 1001,
+                          "startTime": 1422849991,
+                          "endTime": 1422852824
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+        """.trimIndent()
+
+        val gson = createForLowercaseEnum()
+        val response = gson.fromJson(routingJson, RoutingResponse::class.java)
+        response.processRawData(
+            ApplicationProvider.getApplicationContext<Context>().resources,
+            gson
+        )
+
+        val trip = response.tripGroupList!![0].trips!![0]
+        assertThat(trip.segmentList).hasSize(3)
+        assertNull(trip.segmentList[1].notes)
     }
 
     @Test
