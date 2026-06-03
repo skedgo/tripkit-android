@@ -16,6 +16,7 @@ import io.reactivex.Observable
 import io.reactivex.schedulers.Schedulers
 import okhttp3.HttpUrl.Companion.toHttpUrlOrNull
 import org.apache.commons.collections4.CollectionUtils
+import java.util.concurrent.TimeUnit
 
 open class StopsFetcher(
     private val api: LocationsApi,
@@ -34,6 +35,7 @@ open class StopsFetcher(
     private val facilityRepository: FacilityRepository,
     private val fetchCoordinator: LocationsFetchCoordinator = LocationsFetchCoordinator(),
 ) {
+    private val urlFallbackStaggerMs = 400L
 
     open fun fetchAsync(
         cellIds: List<String>,
@@ -181,11 +183,12 @@ open class StopsFetcher(
         urls: List<String>,
         requestBody: LocationsRequestBody
     ): Observable<List<LocationsResponse.Group>> {
-        val requests = urls.map { url ->
+        val requests = urls.mapIndexed { index, url ->
             fetchCellsAsync(
                 url = url,
                 requestBody = requestBody
             )
+                .delaySubscription(index * urlFallbackStaggerMs, TimeUnit.MILLISECONDS)
                 .onErrorResumeNext(Observable.empty())
         }
 
