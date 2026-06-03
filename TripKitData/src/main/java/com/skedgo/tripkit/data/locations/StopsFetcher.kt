@@ -1,5 +1,4 @@
 package com.skedgo.tripkit.data.locations
-
 import com.google.gson.Gson
 import com.skedgo.tripkit.agenda.ConfigRepository
 import com.skedgo.tripkit.common.model.region.Region
@@ -33,6 +32,7 @@ open class StopsFetcher(
     private val onStreetParkingMapper: OnStreetParkingMapper,
     private val carPodRepository: CarPodRepository,
     private val facilityRepository: FacilityRepository,
+    private val fetchCoordinator: LocationsFetchCoordinator = LocationsFetchCoordinator(),
 ) {
 
     open fun fetchAsync(
@@ -40,9 +40,31 @@ open class StopsFetcher(
         region: Region,
         level: Int
     ): Observable<List<LocationsResponse.Group>> {
-        return fetchCellsAsync(cellIds, region, level)
-            .filter { CollectionUtils.isNotEmpty(it) }
-            .flatMap { this.saveCellsAsync(it) }
+        if (cellIds.isEmpty()) return Observable.empty()
+        val regionName = region.name ?: return Observable.empty()
+
+        // Skip cells already fetched within the TTL window. This is the main defence against
+        // repeated /satapp/locations.json calls for the same area (#25753).
+        val staleCellIds = fetchCoordinator.filterStaleCellIds(cellIds, regionName, level)
+        if (staleCellIds.isEmpty()) return Observable.empty()
+
+        // Share concurrent requests for the same key (viewport pipeline + buffered prefetch
+        // routinely fire within milliseconds of each other from MapViewModel).
+        val inFlightKey = buildInFlightKey(regionName, level, staleCellIds)
+        return fetchCoordinator.shareInFlight(inFlightKey) {
+            fetchCellsAsync(staleCellIds, region, level)
+                // Record every requested cell as fetched, regardless of whether the response
+                // actually contained data for it. Empty responses MUST be cached too — that
+                // was the root cause of the API explosion for sparse regions.
+                .doOnNext { fetchCoordinator.recordFetched(staleCellIds, regionName, level) }
+                .filter { CollectionUtils.isNotEmpty(it) }
+                .flatMap { this.saveCellsAsync(it) }
+        }
+    }
+
+    private fun buildInFlightKey(regionName: String, level: Int, cellIds: List<String>): String {
+        // Sorted for stability so call order does not affect dedup.
+        return "$regionName|$level|" + cellIds.sorted().joinToString(",")
     }
 
     private fun createRequestBodiesAsync(
@@ -160,7 +182,10 @@ open class StopsFetcher(
         requestBody: LocationsRequestBody
     ): Observable<List<LocationsResponse.Group>> {
         val requests = urls.map { url ->
-            fetchCellsAsync(url, requestBody)
+            fetchCellsAsync(
+                url = url,
+                requestBody = requestBody
+            )
                 .onErrorResumeNext(Observable.empty())
         }
 
@@ -257,4 +282,5 @@ open class StopsFetcher(
     interface ICellsPersistor {
         fun saveCellsSync(cells: List<@JvmSuppressWildcards LocationsResponse.Group>)
     }
+
 }
