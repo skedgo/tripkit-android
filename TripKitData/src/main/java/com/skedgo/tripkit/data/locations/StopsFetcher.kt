@@ -60,7 +60,7 @@ open class StopsFetcher(
                 // was the root cause of the API explosion for sparse regions.
                 .doOnNext { fetchCoordinator.recordFetched(staleCellIds, regionName, level) }
                 .filter { CollectionUtils.isNotEmpty(it) }
-                .flatMap { this.saveCellsAsync(it) }
+                .flatMap { this.saveCellsAsync(it, level) }
         }
     }
 
@@ -197,11 +197,14 @@ open class StopsFetcher(
             .switchIfEmpty(Observable.just(emptyList()))
     }
 
-    private fun saveCellsAsync(cells: List<LocationsResponse.Group>): Observable<List<LocationsResponse.Group>> {
+    private fun saveCellsAsync(
+        cells: List<LocationsResponse.Group>,
+        level: Int
+    ): Observable<List<LocationsResponse.Group>> {
         // Saving cell ids, hash codes and saving stops will be performed in parallel.
         return Observable.merge(
             saveCellIdsAndHashCodesAsync(cells).subscribeOn(Schedulers.newThread()),
-            saveStopsAsync(cells).subscribeOn(Schedulers.newThread())
+            saveStopsAsync(cells, level).subscribeOn(Schedulers.newThread())
         )
     }
 
@@ -212,9 +215,12 @@ open class StopsFetcher(
         }
     }
 
-    private fun saveStopsAsync(cells: List<LocationsResponse.Group>): Observable<List<LocationsResponse.Group>> {
+    private fun saveStopsAsync(
+        cells: List<LocationsResponse.Group>,
+        level: Int
+    ): Observable<List<LocationsResponse.Group>> {
         return Completable
-            .fromAction { stopsPersistor.saveStopsSync(cells) }
+            .fromAction { stopsPersistor.saveStopsSync(cells, level) }
             .let { listOf(it) }
             .asSequence()
             .plus(
@@ -276,7 +282,10 @@ open class StopsFetcher(
      * @see [The Dependency Inversion Principle](http://www.codeproject.com/Articles/93369/How-I-explained-OOD-to-my-wife)
      */
     interface IStopsPersistor {
-        fun saveStopsSync(cells: List<@JvmSuppressWildcards LocationsResponse.Group>)
+        fun saveStopsSync(
+            cells: List<@JvmSuppressWildcards LocationsResponse.Group>,
+            level: Int
+        )
     }
 
     /**
