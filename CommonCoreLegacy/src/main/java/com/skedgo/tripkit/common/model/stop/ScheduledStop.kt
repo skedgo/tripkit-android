@@ -47,21 +47,6 @@ class ScheduledStop : Location {
     var parentId: Long = 0
         private set
 
-    /**
-     * Backend parent-level classification for marker display (region vs local).
-     * Sourced from the persisted `isParent` flag (see ScheduledStopMapper). Transient/in-memory
-     * only; not serialized or parceled. Defaults to false.
-     */
-    @Transient
-    var isRegionalStop: Boolean = false
-
-    /**
-     * API zoom level used when this stop was fetched from locations.json.
-     * 1 = REGION, 2 = LOCAL, 0 = unknown/legacy rows.
-     */
-    @Transient
-    var apiZoomLevel: Int = 0
-
     @Transient
     var currentFilter: String? = null
 
