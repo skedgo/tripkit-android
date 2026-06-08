@@ -16,6 +16,7 @@ import io.reactivex.Observable
 import io.reactivex.schedulers.Schedulers
 import okhttp3.HttpUrl.Companion.toHttpUrlOrNull
 import org.apache.commons.collections4.CollectionUtils
+import java.util.regex.Pattern
 import java.util.concurrent.TimeUnit
 
 open class StopsFetcher(
@@ -36,6 +37,7 @@ open class StopsFetcher(
     private val fetchCoordinator: LocationsFetchCoordinator = LocationsFetchCoordinator(),
 ) {
     private val urlFallbackStaggerMs = 400L
+    private val gridCellIdPattern = Pattern.compile("^-?\\d+#-?\\d+$")
 
     open fun fetchAsync(
         cellIds: List<String>,
@@ -130,18 +132,35 @@ open class StopsFetcher(
                 for (existingCell in existingCells) {
                     cellIdsAndHashCodes[existingCell.key] = existingCell.hashCode
                 }
-                subscriber.onNext(
-                    LocationsRequestBody.createForUpdating(
-                        region,
-                        cellIdsAndHashCodes,
-                        level,
-                        configCreator.call()
+                if (cellIds.all(::isGridCellId)) {
+                    subscriber.onNext(
+                        LocationsRequestBody.createForUpdating(
+                            region,
+                            cellIdsAndHashCodes,
+                            level,
+                            configCreator.call()
+                        )
                     )
-                )
+                } else if (CollectionUtils.isEmpty(newCellIds)) {
+                    // Non-grid ids (e.g. region keys like AU_NT_Darwin) can be rejected by
+                    // some backends when sent as cellIDHashCodes-only update payloads.
+                    subscriber.onNext(
+                        LocationsRequestBody.createForNewlyFetching(
+                            region,
+                            ArrayList(cellIds),
+                            level,
+                            configCreator.call()
+                        )
+                    )
+                }
             }
 
             subscriber.onComplete()
         }
+    }
+
+    private fun isGridCellId(cellId: String): Boolean {
+        return gridCellIdPattern.matcher(cellId).matches()
     }
 
     private fun fetchCellsAsync(
@@ -164,8 +183,33 @@ open class StopsFetcher(
                     Observable.just(emptyList())
                 } else {
                     fetchCellsFromAny(urls, body)
+                        .flatMap { groups ->
+                            if (shouldForceFullFetchAfterEmptyUpdate(body, groups, cellIds)) {
+                                val fullFetchBody = LocationsRequestBody.createForNewlyFetching(
+                                    region,
+                                    ArrayList(cellIds),
+                                    level,
+                                    configCreator.call()
+                                )
+                                fetchCellsFromAny(urls, fullFetchBody)
+                            } else {
+                                Observable.just(groups)
+                            }
+                        }
                 }
             }
+    }
+
+    private fun shouldForceFullFetchAfterEmptyUpdate(
+        requestBody: LocationsRequestBody,
+        groups: List<LocationsResponse.Group>,
+        requestedCellIds: List<String>
+    ): Boolean {
+        val existingCells = requestBody.existingCells ?: return false
+        if (requestBody.cellIds != null) return false
+        if (groups.isNotEmpty()) return false
+        // Only fallback when this was an update-only request for the entire requested set.
+        return existingCells.size == requestedCellIds.size && requestedCellIds.isNotEmpty()
     }
 
     private fun fetchCellsAsync(
