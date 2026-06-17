@@ -50,6 +50,12 @@ class ScheduledStop : Location {
     @Transient
     var currentFilter: String? = null
 
+    @Transient
+    var cellCode: String? = null
+
+    @Transient
+    var cellHashCode: Long? = null
+
     @SerializedName("wheelchairAccessible")
     var wheelchairAccessible: Boolean? = null
 
@@ -81,6 +87,8 @@ class ScheduledStop : Location {
             modeInfo = other.modeInfo
             parentId = other.parentId
             currentFilter = other.currentFilter
+            cellCode = other.cellCode
+            cellHashCode = other.cellHashCode
             wheelchairAccessible = other.wheelchairAccessible
             bicycleAccessible = other.bicycleAccessible
             alertHashCodes = other.alertHashCodes

@@ -1,5 +1,4 @@
 package com.skedgo.tripkit.data.locations
-
 import com.google.gson.Gson
 import com.skedgo.tripkit.agenda.ConfigRepository
 import com.skedgo.tripkit.common.model.region.Region
@@ -17,6 +16,8 @@ import io.reactivex.Observable
 import io.reactivex.schedulers.Schedulers
 import okhttp3.HttpUrl.Companion.toHttpUrlOrNull
 import org.apache.commons.collections4.CollectionUtils
+import java.util.regex.Pattern
+import java.util.concurrent.TimeUnit
 
 open class StopsFetcher(
     private val api: LocationsApi,
@@ -33,16 +34,41 @@ open class StopsFetcher(
     private val onStreetParkingMapper: OnStreetParkingMapper,
     private val carPodRepository: CarPodRepository,
     private val facilityRepository: FacilityRepository,
+    private val fetchCoordinator: LocationsFetchCoordinator = LocationsFetchCoordinator(),
 ) {
+    private val urlFallbackStaggerMs = 400L
+    private val gridCellIdPattern = Pattern.compile("^-?\\d+#-?\\d+$")
 
     open fun fetchAsync(
         cellIds: List<String>,
         region: Region,
         level: Int
     ): Observable<List<LocationsResponse.Group>> {
-        return fetchCellsAsync(cellIds, region, level)
-            .filter { CollectionUtils.isNotEmpty(it) }
-            .flatMap { this.saveCellsAsync(it) }
+        if (cellIds.isEmpty()) return Observable.empty()
+        val regionName = region.name ?: return Observable.empty()
+
+        // Skip cells already fetched within the TTL window. This is the main defence against
+        // repeated /satapp/locations.json calls for the same area (#25753).
+        val staleCellIds = fetchCoordinator.filterStaleCellIds(cellIds, regionName, level)
+        if (staleCellIds.isEmpty()) return Observable.empty()
+
+        // Share concurrent requests for the same key (viewport pipeline + buffered prefetch
+        // routinely fire within milliseconds of each other from MapViewModel).
+        val inFlightKey = buildInFlightKey(regionName, level, staleCellIds)
+        return fetchCoordinator.shareInFlight(inFlightKey) {
+            fetchCellsAsync(staleCellIds, region, level)
+                // Record every requested cell as fetched, regardless of whether the response
+                // actually contained data for it. Empty responses MUST be cached too — that
+                // was the root cause of the API explosion for sparse regions.
+                .doOnNext { fetchCoordinator.recordFetched(staleCellIds, regionName, level) }
+                .filter { CollectionUtils.isNotEmpty(it) }
+                .flatMap { this.saveCellsAsync(it) }
+        }
+    }
+
+    private fun buildInFlightKey(regionName: String, level: Int, cellIds: List<String>): String {
+        // Sorted for stability so call order does not affect dedup.
+        return "$regionName|$level|" + cellIds.sorted().joinToString(",")
     }
 
     private fun createRequestBodiesAsync(
@@ -106,18 +132,35 @@ open class StopsFetcher(
                 for (existingCell in existingCells) {
                     cellIdsAndHashCodes[existingCell.key] = existingCell.hashCode
                 }
-                subscriber.onNext(
-                    LocationsRequestBody.createForUpdating(
-                        region,
-                        cellIdsAndHashCodes,
-                        level,
-                        configCreator.call()
+                if (cellIds.all(::isGridCellId)) {
+                    subscriber.onNext(
+                        LocationsRequestBody.createForUpdating(
+                            region,
+                            cellIdsAndHashCodes,
+                            level,
+                            configCreator.call()
+                        )
                     )
-                )
+                } else if (CollectionUtils.isEmpty(newCellIds)) {
+                    // Non-grid ids (e.g. region keys like AU_NT_Darwin) can be rejected by
+                    // some backends when sent as cellIDHashCodes-only update payloads.
+                    subscriber.onNext(
+                        LocationsRequestBody.createForNewlyFetching(
+                            region,
+                            ArrayList(cellIds),
+                            level,
+                            configCreator.call()
+                        )
+                    )
+                }
             }
 
             subscriber.onComplete()
         }
+    }
+
+    private fun isGridCellId(cellId: String): Boolean {
+        return gridCellIdPattern.matcher(cellId).matches()
     }
 
     private fun fetchCellsAsync(
@@ -140,8 +183,33 @@ open class StopsFetcher(
                     Observable.just(emptyList())
                 } else {
                     fetchCellsFromAny(urls, body)
+                        .flatMap { groups ->
+                            if (shouldForceFullFetchAfterEmptyUpdate(body, groups, cellIds)) {
+                                val fullFetchBody = LocationsRequestBody.createForNewlyFetching(
+                                    region,
+                                    ArrayList(cellIds),
+                                    level,
+                                    configCreator.call()
+                                )
+                                fetchCellsFromAny(urls, fullFetchBody)
+                            } else {
+                                Observable.just(groups)
+                            }
+                        }
                 }
             }
+    }
+
+    private fun shouldForceFullFetchAfterEmptyUpdate(
+        requestBody: LocationsRequestBody,
+        groups: List<LocationsResponse.Group>,
+        requestedCellIds: List<String>
+    ): Boolean {
+        val existingCells = requestBody.existingCells ?: return false
+        if (requestBody.cellIds != null) return false
+        if (groups.isNotEmpty()) return false
+        // Only fallback when this was an update-only request for the entire requested set.
+        return existingCells.size == requestedCellIds.size && requestedCellIds.isNotEmpty()
     }
 
     private fun fetchCellsAsync(
@@ -159,8 +227,12 @@ open class StopsFetcher(
         urls: List<String>,
         requestBody: LocationsRequestBody
     ): Observable<List<LocationsResponse.Group>> {
-        val requests = urls.map { url ->
-            fetchCellsAsync(url, requestBody)
+        val requests = urls.mapIndexed { index, url ->
+            fetchCellsAsync(
+                url = url,
+                requestBody = requestBody
+            )
+                .delaySubscription(index * urlFallbackStaggerMs, TimeUnit.MILLISECONDS)
                 .onErrorResumeNext(Observable.empty())
         }
 
@@ -257,4 +329,5 @@ open class StopsFetcher(
     interface ICellsPersistor {
         fun saveCellsSync(cells: List<@JvmSuppressWildcards LocationsResponse.Group>)
     }
+
 }
