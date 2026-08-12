@@ -14,7 +14,7 @@ interface ServiceDetailRepository {
         region: String,
         serviceTripId: String,
         operator: String?,
-        startStopCode: String,
+        startStopCode: String?,
         endStopCode: String?,
         embarkationTimeInSecs: Long,
         encode: Boolean = true
@@ -24,10 +24,9 @@ interface ServiceDetailRepository {
         region: String,
         serviceTripId: String,
         operator: String?,
-        startStopCode: String,
+        startStopCode: String?,
         endStopCode: String?,
         embarkationTimeInSecs: Long,
         encode: Boolean = true
     ): Observable<ServiceResponse>
 }
-
