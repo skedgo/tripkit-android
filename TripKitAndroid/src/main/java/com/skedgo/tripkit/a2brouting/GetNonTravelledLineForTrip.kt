@@ -24,34 +24,33 @@ class GetNonTravelledLineForTrip @Inject constructor() {
             .filterNot {
                 it.from == null || it.to == null
             }
-            .map {
-                val color = if (it.serviceColor == null)
+            .flatMap { segment ->
+                val defaultColor = if (segment.serviceColor == null)
                     Color.BLACK
                 else
-                    it.serviceColor?.color ?: Color.BLACK
+                    segment.serviceColor?.color ?: Color.BLACK
 
-                val shapes = it.shapes ?: emptyList()
-                shapes to color
-            }
-            .flatMap { (shapes, defaultColor) ->
-                shapes.filterNot { it.isTravelled }
+                segment.shapes.orEmpty()
+                    .filterNot { it.isTravelled }
                     .filter {
                         it.encodedWaypoints.isNotEmpty()
                     }
-                    .map {
-                        val color =
-                            if (it.serviceColor == null || it.serviceColor.color == Color.BLACK)
+                    .map { shape ->
+                        val lineColor =
+                            if (shape.serviceColor == null || shape.serviceColor.color == Color.BLACK)
                                 defaultColor
                             else
-                                it.serviceColor.color
-                        PolyUtil.decode(it.encodedWaypoints).simplify(LAT_LNG_SIMPLIFY_TOLERANCE)
+                                shape.serviceColor.color
+                        PolyUtil.decode(shape.encodedWaypoints).simplify(LAT_LNG_SIMPLIFY_TOLERANCE)
                             .zipWithNext()
                             .map { (start, end) ->
                                 com.skedgo.tripkit.LineSegment(
                                     TripKitLatLng(start.latitude, start.longitude),
                                     TripKitLatLng(end.latitude, end.longitude),
-                                    color,
-                                    ""
+                                    lineColor,
+                                    "",
+                                    segment.trip?.uuid,
+                                    segment.segmentId
                                 )
                             }
                     }

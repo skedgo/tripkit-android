@@ -27,5 +27,15 @@ interface TransportModeFilter : Parcelable {
         return false
     }
 
+    /**
+     * Explicit backend mode groups requested in addition to the normally selected modes.
+     *
+     * This is intended for logical/custom UI modes whose backend request must contain multiple
+     * modes without making those modes globally selected.
+     */
+    fun getModeRequestGroups(): List<List<String>> {
+        return emptyList()
+    }
+
     fun getFilteredMode(originalModes: List<String>): List<String>
 }

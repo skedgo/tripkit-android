@@ -159,6 +159,104 @@ class QueryGeneratorImplTest {
         assertThat(queries.first()).isNotNull.hasSize(10).doesNotContainNull()
     }
 
+    @Test
+    fun `should keep explicit mode request group separate from normal selected modes`() {
+        val region = Region().apply {
+            transportModeIds = arrayListOf(
+                TransportMode.ID_CAR,
+                TransportMode.ID_PUBLIC_TRANSPORT
+            )
+        }
+        val query = Query().apply {
+            fromLocation = Location(1.0, 2.0)
+            toLocation = Location(3.0, 4.0)
+            this.region = region
+        }
+        val modeMap = mapOf(
+            TransportMode.ID_CAR to TransportMode(),
+            TransportMode.ID_PUBLIC_TRANSPORT to TransportMode()
+        )
+        `when`(regionService!!.getTransportModesAsync())
+            .thenReturn(Observable.just(modeMap))
+
+        val groupedFilter = object : TransportModeFilter {
+            override fun useTransportMode(mode: String): Boolean =
+                mode == TransportMode.ID_PUBLIC_TRANSPORT
+
+            override fun getModeRequestGroups(): List<List<String>> =
+                listOf(
+                    listOf(TransportMode.ID_CAR, TransportMode.ID_PUBLIC_TRANSPORT)
+                )
+
+            override fun getFilteredMode(originalModes: List<String>): List<String> =
+                originalModes
+
+            override fun writeToParcel(dest: Parcel, flags: Int) = Unit
+
+            override fun describeContents(): Int = 0
+        }
+
+        val queries = queryGenerator!!.apply(query, groupedFilter).blockingFirst()
+        val requestedModeSets = queries.map { it.transportModeIds.toSet() }
+
+        assertThat(requestedModeSets).containsExactlyInAnyOrder(
+            setOf(TransportMode.ID_PUBLIC_TRANSPORT),
+            setOf(TransportMode.ID_CAR, TransportMode.ID_PUBLIC_TRANSPORT)
+        )
+        assertThat(requestedModeSets).doesNotContain(setOf(TransportMode.ID_CAR))
+    }
+
+    @Test
+    fun `should not duplicate explicit group already produced by normal selected modes`() {
+        val region = Region().apply {
+            transportModeIds = arrayListOf(
+                TransportMode.ID_CAR,
+                TransportMode.ID_PUBLIC_TRANSPORT
+            )
+        }
+        val query = Query().apply {
+            fromLocation = Location(1.0, 2.0)
+            toLocation = Location(3.0, 4.0)
+            this.region = region
+        }
+        `when`(regionService!!.getTransportModesAsync())
+            .thenReturn(
+                Observable.just(
+                    mapOf(
+                        TransportMode.ID_CAR to TransportMode(),
+                        TransportMode.ID_PUBLIC_TRANSPORT to TransportMode()
+                    )
+                )
+            )
+
+        val groupedFilter = object : TransportModeFilter {
+            override fun useTransportMode(mode: String): Boolean = true
+
+            override fun getModeRequestGroups(): List<List<String>> =
+                listOf(
+                    listOf(TransportMode.ID_CAR, TransportMode.ID_PUBLIC_TRANSPORT)
+                )
+
+            override fun getFilteredMode(originalModes: List<String>): List<String> =
+                originalModes
+
+            override fun writeToParcel(dest: Parcel, flags: Int) = Unit
+
+            override fun describeContents(): Int = 0
+        }
+
+        val requestedModeSets = queryGenerator!!
+            .apply(query, groupedFilter)
+            .blockingFirst()
+            .map { it.transportModeIds.toSet() }
+
+        assertThat(requestedModeSets).containsExactlyInAnyOrder(
+            setOf(TransportMode.ID_CAR),
+            setOf(TransportMode.ID_PUBLIC_TRANSPORT),
+            setOf(TransportMode.ID_CAR, TransportMode.ID_PUBLIC_TRANSPORT)
+        )
+    }
+
     private fun createSampleModeMap(): Map<String, TransportMode> {
         val modeMap = HashMap<String, TransportMode>()
         modeMap["pt_pub"] = TransportMode()

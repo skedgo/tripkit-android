@@ -68,7 +68,19 @@ internal class QueryGeneratorImpl(private val regionService: RegionService) : Qu
                 val modeSets = modeCombinationStrategy.apply(
                     modeMap,
                     query.transportModeIds
-                )
+                ).toMutableList()
+
+                val seenModeSets = modeSets.mapTo(mutableSetOf()) { it.toSet() }
+                val availableModeIds = query.region?.transportModeIds.orEmpty()
+                transportModeFilter.getModeRequestGroups().forEach { requestedGroup ->
+                    val group = requestedGroup.toMutableSet()
+                    if (group.isNotEmpty() &&
+                        group.all(availableModeIds::contains) &&
+                        seenModeSets.add(group)
+                    ) {
+                        modeSets.add(group)
+                    }
+                }
 
                 val queries = ArrayList<Query>(modeSets.size)
                 for (modeSet in modeSets) {
