@@ -71,7 +71,7 @@ class ServiceDetailRepositoryImpl @Inject constructor(
         region: String,
         serviceTripId: String,
         operator: String?,
-        startStopCode: String,
+        startStopCode: String?,
         endStopCode: String?,
         embarkationTimeInSecs: Long,
         encode: Boolean
@@ -130,7 +130,7 @@ class ServiceDetailRepositoryImpl @Inject constructor(
         region: String,
         serviceTripId: String,
         operator: String?,
-        startStopCode: String,
+        startStopCode: String?,
         endStopCode: String?,
         embarkationTimeInSecs: Long,
         encode: Boolean
@@ -150,4 +150,3 @@ class ServiceDetailRepositoryImpl @Inject constructor(
             }
     }
 }
-
