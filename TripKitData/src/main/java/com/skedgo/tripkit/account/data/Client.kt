@@ -8,10 +8,45 @@ data class Client(
     val polygon: Polygon? = null,
     val appColors: AppColors? = null,
     var isBeta: Boolean = false,
-    val features: List<String>? = emptyList()
+    val features: List<String>? = emptyList(),
+    val profile: ClientProfile? = null,
+    val uiConfig: ClientUiConfig? = null
 ) {
     fun hasWalletFeature(): Boolean = features?.any { it == ClientFeature.WALLET.feature } ?: false
+
+    val riderCategories: List<RiderCategory>
+        get() = profile?.riderCategories.orEmpty()
+
+    val categoryDescription: TranslatableMessage?
+        get() = uiConfig?.categoryDescription
+
+    val smsDisclaimer: TranslatableMessage?
+        get() = uiConfig?.messages?.smsDisclaimer
 }
+
+data class ClientProfile(
+    val riderCategories: List<RiderCategory>? = emptyList()
+)
+
+data class RiderCategory(
+    val id: String = "",
+    val displayName: String = "",
+    val translations: Map<String, String>? = emptyMap()
+)
+
+data class ClientUiConfig(
+    val messages: ClientMessages? = null,
+    val categoryDescription: TranslatableMessage? = null
+)
+
+data class ClientMessages(
+    val smsDisclaimer: TranslatableMessage? = null
+)
+
+data class TranslatableMessage(
+    val text: String = "",
+    val translations: Map<String, String>? = emptyMap()
+)
 
 data class AppColors(
     val barBackground: AppColor,
