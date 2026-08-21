@@ -90,9 +90,8 @@ internal class UserTokenRepositoryImpl constructor(
 
     override fun clearUserToken(): Observable<Boolean> = Observable.fromCallable {
         preferences.edit()
-            .putString(KEY_USER_TOKEN, null)
-            .apply()
-        true
+            .remove(KEY_USER_TOKEN)
+            .commit()
     }
 
     override fun hasUserToken(): Boolean = preferences.getString(KEY_USER_TOKEN, "") != ""
