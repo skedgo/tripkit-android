@@ -101,6 +101,12 @@ dependencies {
     implementation libs.coroutinesRx
     kapt libs.daggerCompiler
 
+    // Hilt (#25834): BookingModule is @InstallIn-ready. BookingComponent stays on plain
+    // Dagger because it declares dependencies = [TripKit::class], which Hilt cannot express
+    // until the root graph migrates.
+    implementation libs.hiltAndroid
+    kapt libs.hiltCompiler
+
     implementation libs.roomRuntime
     annotationProcessor libs.roomCompiler
     kapt libs.roomCompiler

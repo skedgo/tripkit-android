@@ -59,6 +59,11 @@ dependencies {
     implementation libs.dagger
     kapt libs.daggerCompiler
 
+    // Hilt (#25834): ValidBookingCountDataModule is @InstallIn-ready. Dagger stays because
+    // the app's root graph has not migrated yet.
+    implementation libs.hiltAndroid
+    kapt libs.hiltCompiler
+
     kapt libs.value
     compileOnly libs.valueAnnotations
     compileOnly libs.builderAnnotations
