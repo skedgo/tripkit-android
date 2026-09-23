@@ -98,6 +98,11 @@ dependencies {
 
     kapt libs.daggerCompiler
     implementation libs.daggerAndroidSupport
+
+    // Hilt (#25835): AccountDataModule and OnStreetParkingModule are @InstallIn-ready.
+    // Dagger stays because the app/TripKit root graphs have not migrated yet.
+    implementation libs.hiltAndroid
+    kapt libs.hiltCompiler
     annotationProcessor libs.daggerCompiler
     annotationProcessor libs.daggerAndroidProcessor
 
@@ -138,6 +143,9 @@ dependencies {
 
 kapt {
     correctErrorTypes = true
+    // ServiceAlertDataModule, ParkingModule and DateTimeDataModule deliberately stay
+    // non-@InstallIn (see #25835), so Hilt's "every module needs @InstallIn" check is off.
+    arguments { arg("dagger.hilt.disableModulesHaveInstallInCheck", "true") }
     // Configure kapt to use Kotlin 1.9 API for annotation processing (kapt doesn't fully support 2.0 yet)
     useBuildCache = true
     mapDiagnosticLocations = true

@@ -4,6 +4,8 @@ import com.google.gson.Gson
 import com.skedgo.tripkit.configuration.ServerManager.configuration
 import dagger.Module
 import dagger.Provides
+import dagger.hilt.InstallIn
+import dagger.hilt.components.SingletonComponent
 import io.reactivex.schedulers.Schedulers
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit.Builder
@@ -11,6 +13,7 @@ import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
 
 @Module
+@InstallIn(SingletonComponent::class)
 class TspModule {
     @Provides
     fun regionInfoApi(

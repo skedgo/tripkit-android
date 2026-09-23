@@ -117,6 +117,13 @@ dependencies {
 
     implementation libs.dagger
     kapt libs.daggerCompiler
+
+    // Hilt (#25835): TspModule, A2bRoutingDataModule and TripKitPreferencesModule are
+    // @InstallIn-ready. MainModule and HttpClientModule cannot be - they take runtime
+    // Configs through their constructors - and the @FeatureScope modules have no Hilt
+    // equivalent yet, so the DaggerTripKit graph stays as the bridge.
+    implementation libs.hiltAndroid
+    kapt libs.hiltCompiler
     kapt libs.value
     compileOnly libs.valueAnnotations
     compileOnly libs.builderAnnotations
@@ -244,4 +251,11 @@ afterEvaluate {
             gradle.startParameter.taskNames.any { it.toLowerCase().contains("dokka") }
         }
     }
+}
+
+kapt {
+    // MainModule and HttpClientModule take runtime Configs through their constructors, and
+    // AnalyticsDataModule belongs to the @FeatureScope AnalyticsComponent, so all three stay
+    // non-@InstallIn (see #25835) and Hilt's "every module needs @InstallIn" check is off.
+    arguments { arg("dagger.hilt.disableModulesHaveInstallInCheck", "true") }
 }
