@@ -452,9 +452,12 @@ class TripSegment : IRealTimeElement, ITimeRange {
     @get:DrawableRes
     val darkVehicleIcon: Int
         get() = if (modeInfo != null && modeInfo!!.modeCompat != null) {
-            if (isRealTime
-            ) modeInfo!!.modeCompat!!.realTimeIconRes
-            else modeInfo!!.modeCompat!!.iconRes
+            if (isRealTime) {
+                modeInfo!!.modeCompat!!.realTimeIconRes
+            }
+            else {
+                modeInfo!!.modeCompat!!.iconRes
+            }
         } else {
             0
         }
