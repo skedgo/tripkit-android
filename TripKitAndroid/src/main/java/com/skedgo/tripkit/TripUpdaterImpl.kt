@@ -74,12 +74,16 @@ internal class TripUpdaterImpl(
     }
 
     override fun tripSubscription(url: String): Observable<Any> =
-        api.tripSubscription(url)
+        Observable.defer {
+            val endpoint = validatedSubscriptionUrl(url)
+                ?: return@defer Observable.error<Any>(IllegalArgumentException("Invalid subscription URL"))
+            api.tripSubscription(endpoint)
             .map<Any> { response ->
                 // Subscription endpoints can acknowledge success with HTTP 204 and no body.
                 // Emit a non-null acknowledgement; body adapters otherwise send null into Rx.
                 if (!response.isSuccessful) throw HttpException(response)
                 Unit
             }
+        }
             .subscribeOn(Schedulers.io())
 }
