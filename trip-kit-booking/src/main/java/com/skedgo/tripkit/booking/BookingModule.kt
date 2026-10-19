@@ -9,6 +9,8 @@ import com.skedgo.tripkit.booking.viewmodel.BookingViewModelImpl
 import com.skedgo.tripkit.configuration.ServerManager
 import dagger.Module
 import dagger.Provides
+import dagger.hilt.InstallIn
+import dagger.hilt.components.SingletonComponent
 import io.reactivex.schedulers.Schedulers
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit.Builder
@@ -17,6 +19,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 
 
 @Module
+@InstallIn(SingletonComponent::class)
 class BookingModule {
 
     @Provides

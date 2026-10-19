@@ -7,6 +7,8 @@ import com.skedgo.tripkit.account.domain.UserTokenRepository
 import com.skedgo.tripkit.configuration.ServerManager
 import dagger.Module
 import dagger.Provides
+import dagger.hilt.InstallIn
+import dagger.hilt.components.SingletonComponent
 import io.reactivex.schedulers.Schedulers
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
@@ -15,6 +17,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 import javax.inject.Named
 
 @Module
+@InstallIn(SingletonComponent::class)
 class AccountDataModule {
 
     companion object {

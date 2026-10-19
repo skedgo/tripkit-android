@@ -3,9 +3,12 @@ package com.skedgo.tripkit.data.database.locations.onstreetparking
 import com.skedgo.tripkit.parkingspots.OnStreetParkingRepository
 import dagger.Module
 import dagger.Provides
+import dagger.hilt.InstallIn
+import dagger.hilt.components.SingletonComponent
 import retrofit2.Retrofit
 
 @Module
+@InstallIn(SingletonComponent::class)
 class OnStreetParkingModule {
 
     @Provides

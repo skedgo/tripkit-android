@@ -4,6 +4,8 @@ import com.google.gson.Gson
 import com.skedgo.tripkit.configuration.ServerManager
 import dagger.Module
 import dagger.Provides
+import dagger.hilt.InstallIn
+import dagger.hilt.components.SingletonComponent
 import io.reactivex.schedulers.Schedulers
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
@@ -12,6 +14,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 import java.util.concurrent.TimeUnit
 
 @Module
+@InstallIn(SingletonComponent::class)
 class A2bRoutingDataModule {
     @Provides
     internal fun a2bRoutingApi(gson: Gson, httpClient: OkHttpClient): A2bRoutingApi {

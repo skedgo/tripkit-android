@@ -118,6 +118,18 @@ dependencies {
 }
 
 
+kapt {
+    arguments {
+        // BookingUiComponent extends androidx.databinding.DataBindingComponent, which the
+        // DataBinding processor only emits in a later kapt round. Dagger's superficial
+        // validation (strict since 2.43) fails the build on that still-unresolved supertype
+        // instead of deferring the component, which is how Dagger 2.24 behaved. Disabling it
+        // here restores the previous behaviour for this one module; the generated component
+        // and its bindings are unchanged.
+        arg("dagger.strictSuperficialValidation", "DISABLED")
+    }
+}
+
 // build a jar with source files
 task sourcesJar(type: Jar) {
     from android.sourceSets.main.java.srcDirs
