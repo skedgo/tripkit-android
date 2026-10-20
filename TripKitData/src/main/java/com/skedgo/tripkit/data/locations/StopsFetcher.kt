@@ -18,6 +18,7 @@ import okhttp3.HttpUrl.Companion.toHttpUrlOrNull
 import org.apache.commons.collections4.CollectionUtils
 import java.util.regex.Pattern
 import java.util.concurrent.TimeUnit
+import java.util.concurrent.atomic.AtomicBoolean
 
 open class StopsFetcher(
     private val api: LocationsApi,
@@ -56,11 +57,23 @@ open class StopsFetcher(
         // routinely fire within milliseconds of each other from MapViewModel).
         val inFlightKey = buildInFlightKey(regionName, level, staleCellIds)
         return fetchCoordinator.shareInFlight(inFlightKey) {
-            fetchCellsAsync(staleCellIds, region, level)
+            // Set as soon as any base URL returns a real response. See fetchCellsFromAny: a
+            // failed request is swallowed there, so the pipeline emits an empty list both when
+            // the server genuinely has nothing for these cells AND when every URL errored.
+            val anyUrlResponded = AtomicBoolean(false)
+            fetchCellsAsync(staleCellIds, region, level, anyUrlResponded)
                 // Record every requested cell as fetched, regardless of whether the response
                 // actually contained data for it. Empty responses MUST be cached too — that
                 // was the root cause of the API explosion for sparse regions.
-                .doOnNext { fetchCoordinator.recordFetched(staleCellIds, regionName, level) }
+                //
+                // Only a successful response counts, though. Marking cells fresh after a
+                // network failure would suppress their next fetch for the whole TTL window and
+                // leave the map without those markers even once connectivity returns (#25936).
+                .doOnNext {
+                    if (anyUrlResponded.get()) {
+                        fetchCoordinator.recordFetched(staleCellIds, regionName, level)
+                    }
+                }
                 .filter { CollectionUtils.isNotEmpty(it) }
                 .flatMap { this.saveCellsAsync(it) }
         }
@@ -166,7 +179,8 @@ open class StopsFetcher(
     private fun fetchCellsAsync(
         cellIds: List<String>,
         region: Region,
-        level: Int
+        level: Int,
+        anyUrlResponded: AtomicBoolean
     ): Observable<List<LocationsResponse.Group>> {
         return createRequestBodiesAsync(cellIds, region, level)
             .flatMap { body ->
@@ -182,7 +196,7 @@ open class StopsFetcher(
                 if (urls.isEmpty()) {
                     Observable.just(emptyList())
                 } else {
-                    fetchCellsFromAny(urls, body)
+                    fetchCellsFromAny(urls, body, anyUrlResponded)
                         .flatMap { groups ->
                             if (shouldForceFullFetchAfterEmptyUpdate(body, groups, cellIds)) {
                                 val fullFetchBody = LocationsRequestBody.createForNewlyFetching(
@@ -191,7 +205,7 @@ open class StopsFetcher(
                                     level,
                                     configCreator.call()
                                 )
-                                fetchCellsFromAny(urls, fullFetchBody)
+                                fetchCellsFromAny(urls, fullFetchBody, anyUrlResponded)
                             } else {
                                 Observable.just(groups)
                             }
@@ -214,9 +228,13 @@ open class StopsFetcher(
 
     private fun fetchCellsAsync(
         url: String,
-        requestBody: LocationsRequestBody
+        requestBody: LocationsRequestBody,
+        anyUrlResponded: AtomicBoolean
     ): Observable<List<LocationsResponse.Group>> {
         return api.fetchLocationsAsync(url, requestBody)
+            // Before the filter: an empty-but-successful response still proves the cells were
+            // checked. Only an error leaves the flag unset.
+            .doOnNext { anyUrlResponded.set(true) }
             .filter { response ->
                 response != null && CollectionUtils.isNotEmpty(response.groups)
             }
@@ -225,12 +243,14 @@ open class StopsFetcher(
 
     private fun fetchCellsFromAny(
         urls: List<String>,
-        requestBody: LocationsRequestBody
+        requestBody: LocationsRequestBody,
+        anyUrlResponded: AtomicBoolean
     ): Observable<List<LocationsResponse.Group>> {
         val requests = urls.mapIndexed { index, url ->
             fetchCellsAsync(
                 url = url,
-                requestBody = requestBody
+                requestBody = requestBody,
+                anyUrlResponded = anyUrlResponded
             )
                 .delaySubscription(index * urlFallbackStaggerMs, TimeUnit.MILLISECONDS)
                 .onErrorResumeNext(Observable.empty())
