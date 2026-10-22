@@ -12,6 +12,7 @@ import com.google.gson.annotations.SerializedName
 import com.skedgo.tripkit.common.R
 import com.skedgo.tripkit.common.model.realtimealert.RealtimeAlert
 import com.skedgo.tripkit.common.util.TripSegmentListResolver
+import com.skedgo.tripkit.routing.SegmentNotesTemplates.TEMPLATE_DIRECTION
 import org.apache.commons.collections4.CollectionUtils
 import java.util.Collections
 
@@ -246,7 +247,7 @@ class RoutingResponse {
                 }
             }
 
-            if(rawSegment.has(SegmentJsonKeys.NODE_SERVICE_DIRECTION)) {
+            if(rawSegment.has(SegmentJsonKeys.NODE_SERVICE_DIRECTION) || notes.contains(TEMPLATE_DIRECTION)) {
                 // Replaces '<DIRECTION>' with segment's 'serviceDirection'
                 notes = processDirectionTemplate(
                     rawSegment.getAsJsonPrimitive(SegmentJsonKeys.NODE_SERVICE_DIRECTION),
