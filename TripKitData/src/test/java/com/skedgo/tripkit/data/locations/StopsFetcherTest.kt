@@ -7,6 +7,8 @@ import com.nhaarman.mockitokotlin2.whenever
 import com.skedgo.tripkit.agenda.ConfigRepository
 import com.skedgo.tripkit.common.model.region.Region
 import io.reactivex.Observable
+import io.reactivex.plugins.RxJavaPlugins
+import io.reactivex.schedulers.TestScheduler
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.Test
 
@@ -75,14 +77,6 @@ class StopsFetcherTest {
 
     private val regionName = "AU_NT_Darwin"
     private val cellIds = listOf("-2531#11145")
-
-    /** Bounded spin so tests never race StopsFetcher's background request assembly. */
-    private fun awaitUntil(timeoutMs: Long = 2_000, condition: () -> Boolean) {
-        val deadline = System.currentTimeMillis() + timeoutMs
-        while (!condition() && System.currentTimeMillis() < deadline) {
-            Thread.sleep(5)
-        }
-    }
 
     private fun regionWithOneUrl() = Region().apply {
         name = regionName
@@ -221,31 +215,45 @@ class StopsFetcherTest {
         // arrives. Now that prefetch subscribes to FetchStopsByViewport on its own instead of
         // pushing a buffered viewport through the same relay, an in-flight request for the same
         // cells keeps a second subscriber - and the work (and its freshness) is not thrown away.
-        val coordinator = LocationsFetchCoordinator()
-        val upstream = io.reactivex.subjects.PublishSubject.create<LocationsResponse>()
-        var apiCalls = 0
-        val fetcher = fetcherFor(coordinator) {
-            apiCalls++
-            upstream
+        val scheduler = TestScheduler()
+        val previousSchedulerHandler = RxJavaPlugins.getNewThreadSchedulerHandler()
+        val previousComputationHandler = RxJavaPlugins.getComputationSchedulerHandler()
+        RxJavaPlugins.setNewThreadSchedulerHandler { scheduler }
+        RxJavaPlugins.setComputationSchedulerHandler { scheduler }
+        try {
+            val coordinator = LocationsFetchCoordinator()
+            val upstream = io.reactivex.subjects.PublishSubject.create<LocationsResponse>()
+            var apiCalls = 0
+            val fetcher = fetcherFor(coordinator) {
+                apiCalls++
+                upstream
+            }
+            val region = regionWithOneUrl()
+
+            val visible = fetcher.fetchAsync(cellIds, region, 2).test()
+            val prefetch = fetcher.fetchAsync(cellIds, region, 2).test()
+            // Finish request assembly and the fallback subscription timer (even at zero delay)
+            // before emitting a hot response.
+            // Entering the API mock alone does not mean its observer is attached yet.
+            scheduler.triggerActions()
+            assertThat(apiCalls).isEqualTo(1)
+            assertThat(upstream.hasObservers()).isTrue()
+
+            // The visible viewport is superseded; prefetch must keep the request alive.
+            visible.dispose()
+            assertThat(upstream.hasObservers()).isTrue()
+
+            upstream.onNext(LocationsResponse().apply { groups = arrayListOf() })
+            upstream.onComplete()
+            scheduler.triggerActions()
+
+            prefetch.assertComplete().assertNoErrors()
+            assertThat(apiCalls).isEqualTo(1)
+            assertThat(coordinator.filterStaleCellIds(cellIds, regionName, 2)).isEmpty()
+        } finally {
+            RxJavaPlugins.setComputationSchedulerHandler(previousComputationHandler)
+            RxJavaPlugins.setNewThreadSchedulerHandler(previousSchedulerHandler)
         }
-        val region = regionWithOneUrl()
-
-        val visible = fetcher.fetchAsync(cellIds, region, 2).test()
-        val prefetch = fetcher.fetchAsync(cellIds, region, 2).test()
-        // StopsFetcher builds its request bodies on Schedulers.newThread(), so wait (briefly,
-        // bounded) for the call to actually reach the api rather than racing it.
-        awaitUntil { apiCalls > 0 }
-        assertThat(apiCalls).isEqualTo(1)
-
-        // The visible viewport is superseded and its subscription disposed.
-        visible.dispose()
-
-        upstream.onNext(LocationsResponse().apply { groups = arrayListOf() })
-        upstream.onComplete()
-
-        prefetch.awaitTerminalEvent()
-        assertThat(apiCalls).isEqualTo(1)
-        assertThat(coordinator.filterStaleCellIds(cellIds, regionName, 2)).isEmpty()
     }
 
     @Test
