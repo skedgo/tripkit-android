@@ -168,6 +168,23 @@ public class TripSegmentTest {
     }
 
     @Test
+    public void shouldPreserveUnknownWheelchairAccessibilityThroughPersistence() {
+        Gson gson = new Gson();
+        for (String json : new String[]{"{}", "{\"wheelchairAccessible\":null}"}) {
+            TripSegment segment = gson.fromJson(json, TripSegment.class);
+            assertThat((Object) segment.wheelchairAccessible).isNull();
+            TripSegment restored = gson.fromJson(gson.toJson(segment), TripSegment.class);
+            assertThat((Object) restored.wheelchairAccessible).isNull();
+        }
+        for (boolean status : new boolean[]{true, false}) {
+            TripSegment segment = new TripSegment();
+            segment.wheelchairAccessible = status;
+            TripSegment restored = gson.fromJson(gson.toJson(segment), TripSegment.class);
+            assertThat(restored.wheelchairAccessible).isEqualTo(status);
+        }
+    }
+
+    @Test
     public void shouldWheelchairAccessibleBeTrue() {
         JsonObject tripSegmentJson = new JsonObject();
         tripSegmentJson.addProperty("wheelchairAccessible", true);

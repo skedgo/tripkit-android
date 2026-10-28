@@ -152,7 +152,7 @@ class TripSegment : IRealTimeElement, ITimeRange {
 
     @JvmField
     @SerializedName("wheelchairAccessible")
-    var wheelchairAccessible: Boolean = false
+    var wheelchairAccessible: Boolean? = null
 
     @SerializedName("bicycleAccessible")
     var bicycleAccessible: Boolean = false
