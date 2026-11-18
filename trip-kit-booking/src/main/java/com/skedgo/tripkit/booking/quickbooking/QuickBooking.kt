@@ -146,6 +146,7 @@ data class Input(
 
 // Renamed from "Ticket" to "Fare" since as per checking in the response, it's
 // identified as fare for the ticket.
+/** A booking fare; [min] and [max] bound its quantity only when selected. */
 data class Fare(
     val id: String,
     val currency: String = "",
@@ -159,7 +160,35 @@ data class Fare(
     val type: String,
     var icon: Int,
     @SerializedName("groupIDs") val groupIds: List<String>? = emptyList(),
+    val min: Int? = null,
 ) {
+    /** Minimum quantity when selected; zero and null values remain unselected. */
+    val minimumSelectedQuantity: Long get() = maxOf(1L, min?.toLong() ?: 1L)
+
+    /** Whether the server supplied a usable selected quantity range. */
+    fun hasValidQuantityBounds(): Boolean =
+        (min == null || min >= 0) && (max == null || max >= minimumSelectedQuantity)
+
+    /** Whether increasing [quantity] can produce a valid selected quantity. */
+    fun canIncreaseQuantity(quantity: Long): Boolean = hasValidQuantityBounds() &&
+        quantity < (max?.toLong() ?: Long.MAX_VALUE)
+
+    /** Starts an optional fare at its minimum, with no invented upper limit. */
+    fun increasedQuantity(quantity: Long): Long = when {
+        !canIncreaseQuantity(quantity) -> quantity
+        quantity < minimumSelectedQuantity -> minimumSelectedQuantity
+        else -> quantity + 1
+    }
+
+    /** Decreasing from the selected minimum deselects this optional fare. */
+    fun decreasedQuantity(quantity: Long): Long =
+        if (quantity <= minimumSelectedQuantity) 0 else quantity - 1
+
+    /** Accepts an unselected fare or a positive quantity inside the offered range. */
+    fun isValidQuantity(quantity: Long): Boolean = quantity == 0L ||
+        (hasValidQuantityBounds() && quantity >= minimumSelectedQuantity &&
+            (max == null || quantity <= max))
+
     fun getCurrencySymbol(): String = currency.getCurrencySymbol()
     fun getPriceString(): String = String.format("%s%.2f", getCurrencySymbol(), getConvertedPrice())
 
