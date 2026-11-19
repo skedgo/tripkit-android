@@ -1,4 +1,9 @@
 # TripKit for Android
+
+The latest verified GitHub release is `v2.2.0` (21 July 2023). `develop`
+contains newer, unreleased source; its legacy Maven version is not a new release.
+Current source requires minSdk 23, Java 17, Kotlin 2.0.21 and compileSdk 36.
+
 [![Build Status](https://travis-ci.org/skedgo/tripkit-android.svg?branch=master)](https://travis-ci.org/skedgo/tripkit-android)
 
 ## Set up TripKit
@@ -10,7 +15,8 @@ First, add [JitPack maven](https://jitpack.io/):
 ```groovy
 allprojects {
   repositories {
-    jcenter()
+    google()
+    mavenCentral()
     maven { url "https://jitpack.io" }
   }
 }
@@ -20,7 +26,7 @@ Then, in app's build file, add `TripKitAndroid` dependency into dependencies sec
 
 ```groovy
 dependencies {
-  implementation 'com.github.skedgo:tripkit-android:<insert-newest-version-here>'
+  implementation 'com.github.skedgo.tripkit-android:TripKitAndroid:v2.2.0'
 }
 ```
 [![Release](https://jitpack.io/v/skedgo/tripkit-android.svg)](https://jitpack.io/#skedgo/tripkit-android)
@@ -31,13 +37,22 @@ For a full setup, you can have a look at TripKitSamples' build file [here](https
 
 ##### Supported Android versions
 
-TripKit supports for Android apps running [Android 4.0.3](https://developer.android.com/about/versions/android-4.0.3.html) and above. To make sure that it works in your Android app, please specify `minSdkVersion` in your `build.gradle` file to `15`:
+For the current source checkout, set `minSdkVersion 23` and compile with Java 17.
+The 2023 release has different requirements; do not treat current source as
+already published. Use core library desugaring in Android consumers:
 
 ```groovy
 android {
-  defaultConfig {
-    minSdkVersion 16
+  compileSdk 36
+  defaultConfig { minSdkVersion 23 }
+  compileOptions {
+    coreLibraryDesugaringEnabled true
+    sourceCompatibility JavaVersion.VERSION_17
+    targetCompatibility JavaVersion.VERSION_17
   }
+}
+dependencies {
+  coreLibraryDesugaring 'com.android.tools:desugar_jdk_libs:2.0.4'
 }
 ```
 
@@ -45,8 +60,8 @@ Add `android.enableJetifier=true` on your `gradle.properties` file
 
 ```groovy
 android.useAndroidX=true
-....
 android.enableJetifier=true
+android.nonTransitiveRClass=false
 ```
 
 ##### Get an API key
@@ -57,14 +72,15 @@ An API key is necessary to use TripKit's services, such as A-2-B routing, and al
 
 We recommend to have an `Application` subclass. Next, in the `onCreate()` method, you can initiate following setup:
 
-for `>= v2.1.43`
+For the current source checkout:
 ```kotlin
 class App : Application() {
   override fun onCreate() {
     super.onCreate()
     
-    TripKitConfigs.builder().context(this)
-            .debuggable(true)          
+    val key = Key.ApiKey(yourTripGoApiKey)
+    val configs = TripKitConfigs.builder().context(this)
+            .debuggable(BuildConfig.DEBUG)
             .key { key }
             .build()
 
@@ -81,4 +97,10 @@ class App : Application() {
 
 ```
 
-With `"YOUR_API_KEY"` is the key that you obtained from [https://tripgo.3scale.net](https://tripgo.3scale.net) in the previous step.
+Read `yourTripGoApiKey` from your own local configuration. Do not commit credentials.
+
+When using TripKitUI, let its matching core dependency resolve transitively instead
+of combining it with a different core release. Current `Location` lives in
+`com.skedgo.tripkit.common.model.location` and its `id` is a `String`.
+A future release requires consumer, R8 and runtime validation; a build alone is
+not a compatibility signoff.

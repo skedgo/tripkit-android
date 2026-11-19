@@ -2,6 +2,10 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
 
     <application>
+        <service
+            android:name=".android.FetchRegionsJobService"
+            android:permission="android.permission.BIND_JOB_SERVICE"
+            android:exported="true" />
         <receiver
             android:name=".routing.TripAlarmBroadcastReceiver"
             android:enabled="true"
