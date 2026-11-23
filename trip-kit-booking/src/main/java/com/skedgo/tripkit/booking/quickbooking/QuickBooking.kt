@@ -162,7 +162,7 @@ data class Fare(
     @SerializedName("groupIDs") val groupIds: List<String>? = emptyList(),
     val min: Int? = null,
 ) {
-    /** Minimum quantity when selected; zero and null values remain unselected. */
+    /** Minimum positive selection quantity; an explicit positive [min] requires selection. */
     val minimumSelectedQuantity: Long get() = maxOf(1L, min?.toLong() ?: 1L)
 
     /** Whether the server supplied a usable selected quantity range. */
@@ -173,19 +173,24 @@ data class Fare(
     fun canIncreaseQuantity(quantity: Long): Boolean = hasValidQuantityBounds() &&
         quantity < (max?.toLong() ?: Long.MAX_VALUE)
 
-    /** Starts an optional fare at its minimum, with no invented upper limit. */
+    /** Starts a fare at its minimum, with no invented upper limit. */
     fun increasedQuantity(quantity: Long): Long = when {
         !canIncreaseQuantity(quantity) -> quantity
         quantity < minimumSelectedQuantity -> minimumSelectedQuantity
         else -> quantity + 1
     }
 
-    /** Decreasing from the selected minimum deselects this optional fare. */
-    fun decreasedQuantity(quantity: Long): Long =
-        if (quantity <= minimumSelectedQuantity) 0 else quantity - 1
+    /** Applies an explicit mandatory minimum to initial quantities and UI updates. */
+    fun quantityAtLeastMinimum(quantity: Long): Long =
+        if (hasValidQuantityBounds() && (min ?: 0) > 0) maxOf(quantity, min!!.toLong()) else quantity
 
-    /** Accepts an unselected fare or a positive quantity inside the offered range. */
-    fun isValidQuantity(quantity: Long): Boolean = quantity == 0L ||
+    /** Decreases to the explicit minimum; zero remains available for min=0 or legacy fares. */
+    fun decreasedQuantity(quantity: Long): Long =
+        if (!hasValidQuantityBounds()) quantity
+        else quantityAtLeastMinimum(if (quantity > 0L) quantity - 1L else 0L)
+
+    /** Validates mandatory minima as well as optional/legacy zero and selected upper bounds. */
+    fun isValidQuantity(quantity: Long): Boolean = (quantity == 0L && (min ?: 0) <= 0) ||
         (hasValidQuantityBounds() && quantity >= minimumSelectedQuantity &&
             (max == null || quantity <= max))
 
