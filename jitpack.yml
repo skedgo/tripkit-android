@@ -1,0 +1,3 @@
+# The Android Gradle plugin and SDK sources require Java 17.
+jdk:
+  - openjdk17

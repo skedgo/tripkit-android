@@ -146,6 +146,7 @@ data class Input(
 
 // Renamed from "Ticket" to "Fare" since as per checking in the response, it's
 // identified as fare for the ticket.
+/** A booking fare; [min] and [max] bound its quantity only when selected. */
 data class Fare(
     val id: String,
     val currency: String = "",
@@ -159,7 +160,40 @@ data class Fare(
     val type: String,
     var icon: Int,
     @SerializedName("groupIDs") val groupIds: List<String>? = emptyList(),
+    val min: Int? = null,
 ) {
+    /** Minimum positive selection quantity; an explicit positive [min] requires selection. */
+    val minimumSelectedQuantity: Long get() = maxOf(1L, min?.toLong() ?: 1L)
+
+    /** Whether the server supplied a usable selected quantity range. */
+    fun hasValidQuantityBounds(): Boolean =
+        (min == null || min >= 0) && (max == null || max >= minimumSelectedQuantity)
+
+    /** Whether increasing [quantity] can produce a valid selected quantity. */
+    fun canIncreaseQuantity(quantity: Long): Boolean = hasValidQuantityBounds() &&
+        quantity < (max?.toLong() ?: Long.MAX_VALUE)
+
+    /** Starts a fare at its minimum, with no invented upper limit. */
+    fun increasedQuantity(quantity: Long): Long = when {
+        !canIncreaseQuantity(quantity) -> quantity
+        quantity < minimumSelectedQuantity -> minimumSelectedQuantity
+        else -> quantity + 1
+    }
+
+    /** Applies an explicit mandatory minimum to initial quantities and UI updates. */
+    fun quantityAtLeastMinimum(quantity: Long): Long =
+        if (hasValidQuantityBounds() && (min ?: 0) > 0) maxOf(quantity, min!!.toLong()) else quantity
+
+    /** Decreases to the explicit minimum; zero remains available for min=0 or legacy fares. */
+    fun decreasedQuantity(quantity: Long): Long =
+        if (!hasValidQuantityBounds()) quantity
+        else quantityAtLeastMinimum(if (quantity > 0L) quantity - 1L else 0L)
+
+    /** Validates mandatory minima as well as optional/legacy zero and selected upper bounds. */
+    fun isValidQuantity(quantity: Long): Boolean = (quantity == 0L && (min ?: 0) <= 0) ||
+        (hasValidQuantityBounds() && quantity >= minimumSelectedQuantity &&
+            (max == null || quantity <= max))
+
     fun getCurrencySymbol(): String = currency.getCurrencySymbol()
     fun getPriceString(): String = String.format("%s%.2f", getCurrencySymbol(), getConvertedPrice())
 
