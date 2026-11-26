@@ -1,14 +1,11 @@
 package com.skedgo.tripkit.android
 
+import android.app.job.JobInfo
+import android.app.job.JobScheduler
+import android.content.ComponentName
 import android.content.Context
-import com.firebase.jobdispatcher.Constraint
-import com.firebase.jobdispatcher.FirebaseJobDispatcher
-import com.firebase.jobdispatcher.GooglePlayDriver
 import com.firebase.jobdispatcher.JobParameters
 import com.firebase.jobdispatcher.JobService
-import com.firebase.jobdispatcher.Lifetime
-import com.firebase.jobdispatcher.RetryStrategy
-import com.firebase.jobdispatcher.Trigger
 import com.skedgo.TripKit
 import io.reactivex.Completable
 import io.reactivex.Observable
@@ -52,18 +49,19 @@ class FetchRegionsService : JobService() {
         fun scheduleAsync(context: Context): Observable<Void> {
             return Completable
                 .fromAction {
-                    val dispatcher = FirebaseJobDispatcher(GooglePlayDriver(context))
-                    val myJob = dispatcher.newJobBuilder()
-                        .setService(FetchRegionsService::class.java)
-                        .setTag("FetchRegions")
-                        .setRecurring(false)
-                        .setLifetime(Lifetime.UNTIL_NEXT_BOOT)
-                        .setTrigger(Trigger.NOW)
-                        .setReplaceCurrent(true)
-                        .setRetryStrategy(RetryStrategy.DEFAULT_EXPONENTIAL)
-                        .setConstraints(Constraint.ON_ANY_NETWORK)
+                    // Firebase's GooglePlayDriver creates an unflagged PendingIntent on
+                    // Android 12+. Keep this API, but schedule via the platform instead.
+                    val scheduler = context.getSystemService(JobScheduler::class.java)
+                    val job = JobInfo.Builder(
+                        0x54524B,
+                        ComponentName(context, FetchRegionsJobService::class.java)
+                    )
+                        .setRequiredNetworkType(JobInfo.NETWORK_TYPE_ANY)
+                        .setBackoffCriteria(30_000L, JobInfo.BACKOFF_POLICY_EXPONENTIAL)
                         .build()
-                    dispatcher.mustSchedule(myJob)
+                    check(scheduler.schedule(job) == JobScheduler.RESULT_SUCCESS) {
+                        "Unable to schedule TripKit region refresh"
+                    }
                 }
                 .toObservable<Void>()
         }
